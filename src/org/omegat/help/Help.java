@@ -8,6 +8,7 @@
                2007 Didier Briel
                2009 Alex Buloichik
                2015 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -111,16 +112,20 @@ public final class Help {
         if (lang == null) {
             return null;
         }
-        File zipFile = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, OConsts.HELP_MANUALS,  lang + ".zip").toFile();
+        File zipFile = Paths
+                .get(StaticUtils.installDir(), OConsts.HELP_DIR, OConsts.HELP_MANUALS, lang + ".zip")
+                .toFile();
         if (!zipFile.isFile()) {
-            // Check manual when OmegaT launched in development environment using "gradle run"
-            zipFile = Paths.get(StaticUtils.installDir(), "build", OConsts.HELP_DIR, OConsts.HELP_MANUALS,  lang + ".zip").toFile();
+            // Check manual when OmegaT launched in development environment
+            // using "gradle run"
+            zipFile = Paths.get(StaticUtils.installDir(), OConsts.BUILD_DIR, OConsts.HELP_DIR,
+                    OConsts.HELP_MANUALS, lang + ".zip").toFile();
         }
         if (!zipFile.isFile()) {
             return null;
         }
         try {
-            Path destinationDir = Files.createTempDirectory("omegat-" + OStrings.VERSION +  "-help-" + lang);
+            Path destinationDir = Files.createTempDirectory("omegat-" + OStrings.VERSION + "-help-" + lang);
             return extractZip(zipFile, destinationDir).toURI();
         } catch (IOException ignored) {
         }
@@ -145,8 +150,7 @@ public final class Help {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        ));
+        }));
         return destinationDir.resolve(OConsts.HELP_HOME).toFile();
     }
 
@@ -172,13 +176,23 @@ public final class Help {
     }
 
     public static URI getHelpFileURI(String prefix, String lang, String filename) {
-        // find in install dir
+        // find in installation dir
         String path = lang == null ? filename : lang + File.separator + filename;
         File file;
         if (prefix != null) {
-            file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, prefix,  path).toFile();
+            file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, prefix, path).toFile();
         } else {
             file = Paths.get(StaticUtils.installDir(), OConsts.HELP_DIR, path).toFile();
+        }
+        if (file.isFile()) {
+            return file.toURI();
+        }
+        // find in build directory when starting from IDE or build tool
+        if (prefix != null) {
+            file = Paths.get(StaticUtils.installDir(), OConsts.BUILD_DIR, OConsts.HELP_DIR, prefix, path)
+                    .toFile();
+        } else {
+            file = Paths.get(StaticUtils.installDir(), OConsts.BUILD_DIR, OConsts.HELP_DIR, path).toFile();
         }
         if (file.isFile()) {
             return file.toURI();

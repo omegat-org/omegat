@@ -10,6 +10,7 @@
                2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel, Alex Buloichik
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -141,8 +142,8 @@ public final class StaticUtils {
 
     /**
      * Returns OmegaT installation directory. When running from an IDE or build
-     * tool; use CWD. Sometimes running from build/libs/OmegaT.jar on IDE.
-     * When running from Java WebStart; use CWD. If running from a JAR, get the
+     * tool; use CWD. Sometimes running from build/libs/OmegaT.jar on IDE. When
+     * running from Java WebStart; use CWD. If running from a JAR, get the
      * enclosing folder (the JAR is assumed to be at the installation root, and
      * there is also "modules" folder). When running from linux installation
      * from package built with jpackage, the JAR is assumed to be at the
@@ -155,15 +156,56 @@ public final class StaticUtils {
                 URI sourceUri = StaticUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI();
                 if (sourceUri.getScheme().equals("file")) {
                     File uriFile = Paths.get(sourceUri).toFile();
-                    // If running from a JAR, get the enclosing folder
-                    // (the JAR is assumed to be at the installation root,
-                    //  and there is also "modules" directory).
-                    if (uriFile.getName().endsWith(".jar")
-                            && new File(uriFile.getParentFile(), "modules").exists()) {
-                        file = uriFile.getParentFile();
-                    } else if (uriFile.getName().endsWith(".jar")
-                            && new File(uriFile.getParentFile().getParentFile(), "modules").exists()) {
-                        file = uriFile.getParentFile().getParentFile();
+                    // If running from a JAR, there are two cases.
+                    // a. When starting from IDE or Gradle build tool, folder
+                    // hierarchy becomes
+                    //
+                    // root/build/libs/OmegaT.jar
+                    // ........../modules
+                    // ........../docs
+                    // ...../gradle
+                    // ...../scripts
+                    // ...../src
+                    //
+                    // b. When starting from a standard installation folder,
+                    //
+                    // root/OmegaT.jar
+                    // ..../modules
+                    // ..../docs
+                    // ..../scripts
+                    //
+                    // c. When starting from jpackage installation folder.
+                    //
+                    // root/bin/Launcher
+                    // ..../lib/app/OmegaT.jar
+                    // ......../modules
+                    // ......../docs
+                    // ......../scripts
+                    //
+                    // We detect the environment with the following procedure
+                    // 1. Get the enclosing folder
+                    // 2. Is enclosing folder 'libs'?
+                    // If so, also check the existence of "modules" in an
+                    // enclosing folder; case a.
+                    // 3. Check the existence of "modules" folder
+                    // the JAR is assumed to be at the installation root,
+                    // and there is also "modules" directory; it is case b
+                    // 4. Get the parent folder of the enclosing folder.
+                    // 5. Check the existence of "modules" folder on it.
+                    // If it exists, it is case c.
+                    // 6. When failed above attempts, return CWD;
+                    if (uriFile.getName().endsWith(".jar")) {
+                        if ("libs".equals(uriFile.getParentFile().getName())
+                                && new File(uriFile.getParentFile().getParentFile(), "modules").exists()) {
+                            // a. assumes developer launch
+                            file = uriFile.getParentFile().getParentFile();
+                        } else if (new File(uriFile.getParentFile(), "modules").exists()) {
+                            // b. assumes standard installation
+                            file = uriFile.getParentFile();
+                        } else if (new File(uriFile.getParentFile().getParentFile(), "modules").exists()) {
+                            // c. assumes jpackage installation
+                            file = uriFile.getParentFile().getParentFile();
+                        }
                     }
                 }
             } catch (URISyntaxException ignored) {

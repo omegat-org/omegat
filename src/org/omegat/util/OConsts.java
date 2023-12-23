@@ -65,6 +65,7 @@ public final class OConsts {
     public static final String HELP_DIR = "docs";
     public static final String HELP_FIRST_STEPS_PREFIX = "greetings";
     public static final String HELP_MANUALS = "manuals";
+    public static final String BUILD_DIR = "build"; // for development
 
     // licenses
     public static final String LICENSE_FILE = "OmegaT-license.txt";

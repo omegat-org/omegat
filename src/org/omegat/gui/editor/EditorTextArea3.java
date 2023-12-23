@@ -331,19 +331,20 @@ public class EditorTextArea3 extends JEditorPane {
      * Using this method ensures that isLocked is set here and only here
      **/
     protected final class LockListener implements IEntryEventListener {
-        private boolean isLocked = false;
+        private String isLocked = null;
         
         public void onEntryActivated(SourceTextEntry newEntry) {
-            isLocked = false;
+            isLocked = null;
             SourceTextEntry entry = controller.getCurrentEntry();
-            for (String prop: entry.getRawProperties()) {
-                if (prop.equals("LOCKED")) {
-                    isLocked = true;
+            String[] props = entry.getRawProperties();
+            for (int i = 0; i < props.length; i++) {
+                if (props[i].equals("LOCKED")) {
+                    isLocked = props[i + 1];
                 }
             }
-            if (! isLocked) {
+            if (isLocked == null) {
                 TMXEntry tmx = Core.getProject().getTranslationInfo(entry);
-                isLocked =  (tmx.linked == TMXEntry.ExternalLinked.xENFORCED);
+                isLocked =  (tmx.linked == TMXEntry.ExternalLinked.xENFORCED) ? "tm/enforce" : null;
             }
         }
         
@@ -367,7 +368,8 @@ public class EditorTextArea3 extends JEditorPane {
         } else if (keyEvent == KeyEvent.KEY_TYPED) {
             //key typed
             // Treat the case of enforced translations which should be locked            
-            if (lockListener.isLocked) {
+            if (lockListener.isLocked != null) {
+                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
                 return;
             }
             super.processKeyEvent(e);
@@ -398,7 +400,7 @@ public class EditorTextArea3 extends JEditorPane {
             if (controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
-            } else if (lockListener.isLocked) {
+            } else if (lockListener.isLocked != null) {
                 // We should not accept any character, including TAB
                 processed = true;
             }

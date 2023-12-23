@@ -794,11 +794,19 @@ public class EditorController implements IEditor {
 
         previousTranslations = Core.getProject().getAllTranslations(ste);
         TMXEntry currentTranslation = previousTranslations.getCurrentTranslation();
+
+        if (ste.isFinalState()) {
+            builder.createSegmentElement(false, currentTranslation);
+            Core.getNotes().setNoteText(currentTranslation.note);
+            scrollForDisplayNearestSegments(pos);
+            editor.autoCompleter.setVisible(false);
+            editor.repaint();
+            return;
+        }
+
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
-
         Core.getNotes().setNoteText(currentTranslation.note);
-
         // then add new marks
         markerController.reprocessImmediately(builder);
 

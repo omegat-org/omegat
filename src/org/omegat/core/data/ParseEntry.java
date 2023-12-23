@@ -134,7 +134,7 @@ public abstract class ParseEntry implements IParseCallback {
      */
     @Override
     public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
-            String path, IFilter filter, List<ProtectedPart> protectedParts) {
+            String path, IFilter filter, List<ProtectedPart> protectedParts, boolean isFinal) {
         if (StringUtil.isEmpty(source)) {
             // empty string - not need to save
             return;
@@ -175,18 +175,24 @@ public abstract class ParseEntry implements IParseCallback {
             List<String> segments = Core.getSegmenter().segment(sourceLang, source, spaces, brules);
             if (segments.size() == 1) {
                 internalAddSegment(id, (short) 0, segments.get(0), translation, isFuzzy, props, path,
-                        protectedParts);
+                        protectedParts, isFinal);
             } else {
                 for (short i = 0; i < segments.size(); i++) {
                     String onesrc = segments.get(i);
                     List<ProtectedPart> segmentProtectedParts = ProtectedPart.extractFor(protectedParts,
                             onesrc);
-                    internalAddSegment(id, i, onesrc, null, false, props, path, segmentProtectedParts);
+                    internalAddSegment(id, i, onesrc, null, false, props, path, segmentProtectedParts, isFinal);
                 }
             }
         } else {
-            internalAddSegment(id, (short) 0, source, translation, isFuzzy, props, path, protectedParts);
+            internalAddSegment(id, (short) 0, source, translation, isFuzzy, props, path, protectedParts, isFinal);
         }
+    }
+
+    @Override
+    public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
+                                       String path, IFilter filter, List<ProtectedPart> protectedParts) {
+        addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts, false);
     }
 
     /**
@@ -231,7 +237,8 @@ public abstract class ParseEntry implements IParseCallback {
      * Add segment to queue because we possible need to link prev/next segments.
      */
     private void internalAddSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
-            boolean segmentTranslationFuzzy, String[] props, String path, List<ProtectedPart> protectedParts) {
+            boolean segmentTranslationFuzzy, String[] props, String path, List<ProtectedPart> protectedParts,
+                                    boolean isFinal) {
         if (segmentSource.trim().isEmpty()) {
             // skip empty segments
             return;
@@ -245,11 +252,48 @@ public abstract class ParseEntry implements IParseCallback {
         item.segmentTranslationFuzzy = segmentTranslationFuzzy;
         item.props = props;
         item.path = path;
+        item.isFinal = isFinal;
         parseQueue.add(item);
     }
 
     /**
-     * Adds a segment to the project. If a translation is given, it it added to
+     * Adds a segment to the project. If a translation is given, it is added to
+     * the projects TMX.
+     *
+     * @param id
+     *            ID of entry, if format supports it
+     * @param segmentIndex
+     *            Number of the segment-part of the original source string.
+     * @param segmentSource
+     *            Translatable source string
+     * @param protectedParts
+     *            protected parts
+     * @param segmentTranslation
+     *            translation of the source string, if format supports it
+     * @param segmentTranslationFuzzy
+     *            fuzzy flag of translation of the source string, if format
+     *            supports it
+     * @param props
+     *            entry's properties, like comments, if format supports it
+     * @param prevSegment
+     *            previous segment's text
+     * @param nextSegment
+     *            next segment's text
+     * @param path
+     *            path of segment
+     * @param isFinal
+     *           (since 6.1.0) translation is final state.
+     */
+    protected void addSegment(String id, short segmentIndex, String segmentSource,
+                              List<ProtectedPart> protectedParts, String segmentTranslation, boolean segmentTranslationFuzzy,
+                              String[] props, String prevSegment, String nextSegment, String path,
+                              boolean isFinal) {
+        addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation, segmentTranslationFuzzy,
+                props, prevSegment, nextSegment, path);
+    }
+
+    /**
+     * Adds a segment to the project. If a translation is given, it is added to
      * the projects TMX.
      *
      * @param id
@@ -371,5 +415,6 @@ public abstract class ParseEntry implements IParseCallback {
         String prevSegment;
         String nextSegment;
         String path;
+        boolean isFinal;
     }
 }

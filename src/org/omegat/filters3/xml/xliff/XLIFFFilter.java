@@ -248,7 +248,7 @@ public class XLIFFFilter extends XMLFilter {
 
                 for (int i = 0; i < entryText.size(); i++) {
                     entryParseCallback.addEntryWithProperties(getSegID(), entryText.get(i), null, false,
-                            finalizeProperties(), null, this, protectedParts.get(i));
+                            finalizeProperties(), null, this, protectedParts.get(i), false);
                 }
             }
 

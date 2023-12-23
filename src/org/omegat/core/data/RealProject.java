@@ -1869,9 +1869,20 @@ public class RealProject implements IProject {
          * {@inheritDoc}
          */
         protected void addSegment(String id, short segmentIndex, String segmentSource,
+                                  List<ProtectedPart> protectedParts, String segmentTranslation,
+                                  boolean segmentTranslationFuzzy, String[] props, String prevSegment, String nextSegment,
+                                  String path) {
+            addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation, segmentTranslationFuzzy,
+                    props, prevSegment, nextSegment, path, false);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        protected void addSegment(String id, short segmentIndex, String segmentSource,
                 List<ProtectedPart> protectedParts, String segmentTranslation,
                 boolean segmentTranslationFuzzy, String[] props, String prevSegment, String nextSegment,
-                String path) {
+                String path, boolean isFinal) {
             // if the source string is empty, don't add it to TM
             if (segmentSource.trim().isEmpty()) {
                 throw new RuntimeException("Segment must not be empty");
@@ -1888,7 +1899,7 @@ public class RealProject implements IProject {
                 segmentTranslation = null;
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, props,
-                    segmentTranslation, protectedParts, segmentIndex == 0);
+                    segmentTranslation, protectedParts, segmentIndex == 0, isFinal);
             srcTextEntry.setSourceTranslationFuzzy(segmentTranslationFuzzy);
 
             if (SegmentProperties.isReferenceEntry(props)) {

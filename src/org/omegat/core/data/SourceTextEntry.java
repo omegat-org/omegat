@@ -61,7 +61,7 @@ public class SourceTextEntry {
     private boolean sourceTranslationFuzzy;
 
     /** Flag indicating if the segment is located at the start of a paragraph. */
-    private boolean paragraphStart;
+    private final boolean paragraphStart;
 
     public enum DUPLICATE {
         /** There is no entries with the same source. */
@@ -93,6 +93,8 @@ public class SourceTextEntry {
      */
     private final ProtectedPart[] protectedParts;
 
+    private boolean finalState;
+
     /**
      * Creates a new source text entry.
      *
@@ -104,8 +106,15 @@ public class SourceTextEntry {
      *            optional entry metadata
      * @param sourceTranslation
      *            translation from source file
+     * @param protectedParts
+     *             protected parts
+     * @param paragraphStart
+     *             indicate it is a start of paragraph.
+     * @param finalState
+     *             indicate it is a final state (as in XLIFF).
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts, boolean paragraphStart) {
+    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation,
+                           List<ProtectedPart> protectedParts, boolean paragraphStart, boolean finalState) {
         this.key = key;
         m_entryNum = entryNum;
         this.props = props;
@@ -121,10 +130,16 @@ public class SourceTextEntry {
                     i--;
                 }
             }
-            this.protectedParts = protectedParts.toArray(new ProtectedPart[protectedParts.size()]);
+            this.protectedParts = protectedParts.toArray(new ProtectedPart[0]);
         }
         this.duplicates = null;
         this.firstInstance = null;
+        this.finalState = finalState;
+    }
+
+    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation,
+                           List<ProtectedPart> protectedParts, boolean paragraphStart) {
+        this(key,  entryNum, props, sourceTranslation, protectedParts, paragraphStart, false);
     }
 
     public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts) {
@@ -162,7 +177,7 @@ public class SourceTextEntry {
         return m_entryNum;
     }
 
-    /** If entry with the same source already exist in project. */
+    /** If entry with the same source already exists in a project. */
     public DUPLICATE getDuplicate() {
         if (firstInstance != null) {
             return DUPLICATE.NEXT;
@@ -170,6 +185,10 @@ public class SourceTextEntry {
         return duplicates == null ? DUPLICATE.NONE : DUPLICATE.FIRST;
     }
 
+    /**
+     * Tell a number of duplications.
+     * @return a number of duplications.
+     */
     public int getNumberOfDuplicates() {
         if (firstInstance != null) {
             return firstInstance.getNumberOfDuplicates();
@@ -177,6 +196,10 @@ public class SourceTextEntry {
         return duplicates == null ? 0 : duplicates.size();
     }
 
+    /**
+     * Give STEs which are duplicated.
+     * @return list of STEs which are duplicated.
+     */
     public List<SourceTextEntry> getDuplicates() {
         if (firstInstance != null) {
             List<SourceTextEntry> result = new ArrayList<SourceTextEntry>(firstInstance.getDuplicates());
@@ -191,23 +214,51 @@ public class SourceTextEntry {
         }
     }
 
+    /**
+     * Give source translation.
+     * @return source translation.
+     */
     public String getSourceTranslation() {
         return sourceTranslation;
     }
 
+    /**
+     * Is source transaltion flagged fuzzy.
+     * @return true when fuzzy, otherwise, false.
+     */
     public boolean isSourceTranslationFuzzy() {
         return sourceTranslationFuzzy;
     }
 
+    /**
+     * Set translation as fuzzy.
+     * @param sourceTranslationFuzzy false when reset a status, true indicate fuzzy.
+     */
     public void setSourceTranslationFuzzy(boolean sourceTranslationFuzzy) {
         this.sourceTranslationFuzzy = sourceTranslationFuzzy;
     }
 
+    /**
+     * Return protected parts.
+     * @return an array of protected parts.
+     */
     public ProtectedPart[] getProtectedParts() {
         return protectedParts;
     }
 
+    /**
+     * Indicate the STE is the start of paragraph.
+     * @return true when start of paragraph, otherwise, false.
+     */
     public boolean isParagraphStart() {
         return paragraphStart;
+    }
+
+    /**
+     * Indicate the STE is the final state.
+     * @return true when final, otherwise, false.
+     */
+    public boolean isFinalState() {
+        return finalState;
     }
 }

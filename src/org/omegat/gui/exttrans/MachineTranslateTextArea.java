@@ -264,16 +264,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         private String getTranslation(Language source, Language target) {
             if (!force) {
-                if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {
-                    return translator.getCachedTranslation(source, target, src);
-                }
-                if (Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
-                    TMXEntry entry = Core.getProject().getTranslationInfo(currentlyProcessedEntry);
-                    if (entry.isTranslated()) {
-                        return translator.getCachedTranslation(source, target, src);
-                    }
+                String cached = translator.getCachedTranslation(source, target, src);
+                if (cached != null || !Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, false)
+                        || Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)
+                        && Core.getProject().getTranslationInfo(currentlyProcessedEntry).isTranslated()) {
+                    return cached;
                 }
             }
+            // Ask engine when forced or visit untranslated entry.
             try {
                 return translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {

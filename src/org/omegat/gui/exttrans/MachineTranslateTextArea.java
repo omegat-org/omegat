@@ -50,7 +50,6 @@ import javax.swing.text.html.StyleSheet;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;

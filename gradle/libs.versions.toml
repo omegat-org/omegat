@@ -7,7 +7,7 @@ commons_lang3 = "3.11"
 commons_io = "2.15.1"
 commons_text = "1.9"
 commons_validator = "1.8.0"
-jsoup = "1.15.3"
+jsoup = "1.17.1"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }
 stax2api = "4.2.1"
 woodstox = "6.5.0"

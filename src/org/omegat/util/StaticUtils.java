@@ -161,8 +161,7 @@ public final class StaticUtils {
                     // hierarchy becomes
                     //
                     // root/build/libs/OmegaT.jar
-                    // ........../modules
-                    // ........../docs
+                    // ........../classes
                     // ...../gradle
                     // ...../scripts
                     // ...../src
@@ -196,9 +195,9 @@ public final class StaticUtils {
                     // 6. When failed above attempts, return CWD;
                     if (uriFile.getName().endsWith(".jar")) {
                         if ("libs".equals(uriFile.getParentFile().getName())
-                                && new File(uriFile.getParentFile().getParentFile(), "modules").exists()) {
+                                && new File(uriFile.getParentFile().getParentFile(), "classes").exists()) {
                             // a. assumes developer launch
-                            file = uriFile.getParentFile().getParentFile();
+                            file = uriFile.getParentFile().getParentFile().getParentFile();
                         } else if (new File(uriFile.getParentFile(), "modules").exists()) {
                             // b. assumes standard installation
                             file = uriFile.getParentFile();

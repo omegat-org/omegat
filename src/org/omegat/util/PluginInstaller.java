@@ -98,8 +98,13 @@ public final class PluginInstaller {
         PluginInformation currentInfo = getInstalledPlugins().getOrDefault(info.getClassName(), null);
         String message;
         if (currentInfo != null) {
-            message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
-                    currentInfo.getVersion(), version);
+            if (currentInfo.getVersion().equals(version)) {
+                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_OVERRIDE"), pluginName,
+                        currentInfo.getVersion(), version);
+            } else {
+                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
+                        currentInfo.getVersion(), version);
+            }
         } else {
             message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_INSTALL"), pluginName,
                     version);
@@ -109,8 +114,10 @@ public final class PluginInstaller {
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
                 Core.getMainWindow().getApplicationFrame(), message,
                 OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"), JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.WARNING_MESSAGE)) {
+                JOptionPane.INFORMATION_MESSAGE)) {
             if (doInstall(currentInfo, pluginJarFile.toFile())) {
+                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), OStrings.getString(
+                        "PREFS_PLUGINS_INSTALLATION_SUCCEED"));
                 return true;
             }
             JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),

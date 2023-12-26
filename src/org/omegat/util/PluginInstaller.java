@@ -30,7 +30,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -49,10 +48,10 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 
+import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.preferences.view.PluginsPreferencesController;
 
 /**
  * Plugin installer utility class.
@@ -208,10 +207,8 @@ public final class PluginInstaller {
      */
     static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) throws IOException {
         Set<PluginInformation> pluginInfo = new HashSet<>();
-        URL[] urls = new URL[1];
-        urls[0] = pluginJarFile.toURI().toURL();
-        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls,
-                PluginsPreferencesController.class.getClassLoader())) {
+        try (MainClassLoader pluginsClassLoader = new MainClassLoader()) {
+            pluginsClassLoader.addJarToClasspath(pluginJarFile);
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();

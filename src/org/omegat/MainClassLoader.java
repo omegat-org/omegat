@@ -42,20 +42,9 @@ public final class MainClassLoader extends URLClassLoader {
         registerAsParallelCapable();
     }
 
-    private String name;
-
-    /**
-     * Java9 compatible class loader constructor.
-     * @param name name of class loader
-     * @param parent
-     */
-    public MainClassLoader(String name, ClassLoader parent) {
-        this(parent);
-        this.name = name;
-    }
-
     /*
-     * Required when this classloader is used as the system classloader
+     * Java9 compatible class loader constructor.
+     * @param parent system class loader.
      */
     public MainClassLoader(ClassLoader parent) {
         this(new URL[0], parent);
@@ -73,13 +62,12 @@ public final class MainClassLoader extends URLClassLoader {
      * Main class can add jar classpath for plugins in dynamic manner.
      * @param url
      */
-    synchronized void add(URL url) {
+    public synchronized void add(URL url) {
         addURL(url);
     }
 
-    synchronized void addJarToClasspath(String jarName)
-            throws MalformedURLException {
-        URL url = new File(jarName).toURI().toURL();
+    public synchronized void addJarToClasspath(File jarFile) throws MalformedURLException {
+        URL url = jarFile.toURI().toURL();
         addURL(url);
     }
 

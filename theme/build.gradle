@@ -8,7 +8,7 @@ dependencies {
         compileOnly fileTree(dir: providedLibsDir, include: '**/flatlaf*.jar')
     } else {
         // platform independent dark theme
-        implementation 'com.formdev:flatlaf:2.6'
+        implementation 'com.formdev:flatlaf:3.2.5'
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)

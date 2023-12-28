@@ -2,8 +2,8 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   35 Enhancement
-  55 Bug fixes
-   1 Localisation updates
+  57 Bug fixes
+   5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -117,6 +117,9 @@
 
   Bug fixes:
 
+  - Match statistics are affected by fuzzy match threshold
+    https://sourceforge.net/p/omegat/bugs/1236/
+
   - Issue window cause exception
   https://sourceforge.net/p/omegat/bugs/1234/
 
@@ -137,6 +140,9 @@
 
   - CI: weekly release failed with permission error inside docker image
   https://sourceforge.net/p/omegat/bugs/1228/
+
+  - List of issues stays hidden in the background
+  https://sourceforge.net/p/omegat/bugs/1225/
 
   - OmegaT failed to start in specific case
   https://sourceforge.net/p/omegat/bugs/1224/
@@ -286,7 +292,11 @@
 
   Localization Updates:
 
-  - Japanese localization updated to 6.1 (UI, documentation)
+  - Catalan localization updated to 6.1 (UI, readme, documentation)
+  - Dutch localization updated to 6.1 (UI, readme, documentation)
+  - French localization updated to 6.1 (UI, documentation)
+  - Italian localization updated to 6.1 (UI, readme, documentation)
+  - Japanese localization updated to 6.1 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)

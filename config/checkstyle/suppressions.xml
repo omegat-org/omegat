@@ -51,7 +51,7 @@
 
     <!-- interfaces -->
     <!-- Keep names for compatibility -->
-    <suppress files="IParseCallback\.java" checks="ParameterNumber"/>
+    <suppress files="(IParseCallback|CalcMatchStatisticsTest)\.java" checks="ParameterNumber"/>
     <suppress checks="TypeName" files="IProjectEventListener\.java" lines="35"/>
 
     <!-- ignore Auto generated source files -->
@@ -79,7 +79,7 @@
     <!-- util/Preferences -->
     <suppress files="Preferences\.java" checks="LineLength" lines="197"/>
     <!-- core/stat -->
-    <suppress checks="(ParameterNumber|MethodLength)" files="FindMatches\.java" lines="153,337,444"/>
+    <suppress checks="(ParameterNumber|MethodLength)" files="FindMatches\.java" lines="164,350,459"/>
     <!-- util/xml -->
     <suppress checks="(EmptyBlock|MethodLength)" files="XMLStreamReader\.java"/>
     <!-- util -->

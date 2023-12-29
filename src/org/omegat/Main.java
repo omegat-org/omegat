@@ -192,10 +192,19 @@ public final class Main {
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
+        // Create application class loader.
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        MainClassLoader mainClassLoader = MainClassLoader.findAncestor(cl);
+        if (mainClassLoader == null) {
+            mainClassLoader = new MainClassLoader(cl);
+            Thread.currentThread().setContextClassLoader(mainClassLoader);
+            UIManager.put("ClassLoader", mainClassLoader);
+        }
+
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
-        PluginUtils.loadPlugins(PARAMS);
+        PluginUtils.loadPlugins(PARAMS, mainClassLoader);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
@@ -308,12 +317,6 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader) ? (MainClassLoader) cl
-                : new MainClassLoader(cl);
-        PluginUtils.getThemePluginJars().forEach(mainClassLoader::add);
-        UIManager.put("ClassLoader", mainClassLoader);
-
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
@@ -337,7 +340,7 @@ public final class Main {
 
         System.setProperty("swing.aatext", "true");
         try {
-            Core.initializeGUI(mainClassLoader, PARAMS);
+            Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

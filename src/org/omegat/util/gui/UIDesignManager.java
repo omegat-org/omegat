@@ -98,8 +98,9 @@ public final class UIDesignManager {
         return menuPreferences;
     }
 
-    private static void setMenuUI(String menuUIPrefClassName, ClassLoader classLoader) {
+    private static void setMenuUI(String menuUIPrefClassName) {
         try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             Class<?> prefClazz = classLoader.loadClass(menuUIPrefClassName);
             if (prefClazz != null) {
                 Object o = prefClazz.getDeclaredConstructor().newInstance();
@@ -122,6 +123,11 @@ public final class UIDesignManager {
         }
     }
 
+    /**
+     * Load and set theme.
+     * @param lafClassName LookAndFeel full qualified class name.
+     * @param classLoader class loader to use.
+     */
     public static void setTheme(String lafClassName, ClassLoader classLoader) {
         try {
             Class<?> clazz = classLoader.loadClass(lafClassName);
@@ -129,15 +135,29 @@ public final class UIDesignManager {
         } catch (Exception e) {
             Log.log(e);
             if (!lafClassName.equals(LIGHT_CLASS_NAME_DEFAULT)) {
-                setTheme(LIGHT_CLASS_NAME_DEFAULT, classLoader);
+                setTheme(LIGHT_CLASS_NAME_DEFAULT);
             }
         }
     }
 
     /**
-     * Initialize docking subsystem.
+     * Load and set theme.
+     * @param lafClassName LookAndFeel full qualified class name.
      */
+    public static void setTheme(String lafClassName) {
+        setTheme(lafClassName, Thread.currentThread().getContextClassLoader());
+    }
+
+    @Deprecated
+    @SuppressWarnings("unused")
     public static void initialize(ClassLoader mainClassLoader) throws IOException {
+        initialize();
+    }
+
+    /**
+     * Initialize a docking subsystem.
+     */
+    public static void initialize() throws IOException {
         // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
         DockableContainerFactory.setFactory(new CustomContainerFactory());
@@ -161,11 +181,11 @@ public final class UIDesignManager {
         } else {
             theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, LIGHT_CLASS_NAME_DEFAULT);
         }
-        setTheme(theme, mainClassLoader);
+        setTheme(theme);
 
         String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
         if (menuUI != null) {
-            setMenuUI(menuUI, mainClassLoader);
+            setMenuUI(menuUI);
         }
 
         if (UIManager.getColor("OmegaT.source") == null) {

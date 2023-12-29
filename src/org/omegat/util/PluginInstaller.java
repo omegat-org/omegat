@@ -33,6 +33,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -51,7 +52,7 @@ import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.preferences.view.PluginsPreferencesController;
+import org.omegat.util.module.PluginLifecycleManager;
 
 
 /**
@@ -126,24 +127,30 @@ public final class PluginInstaller {
 
     private static boolean doInstall(PluginInformation currentInfo, File file) {
         try {
+            PluginLifecycleManager plm = PluginLifecycleManager.getInstance();
+            boolean unloadSucceeded = false;
             if (currentInfo != null) {
                 URL url = currentInfo.getUrl();
-                File jarFile = new File(url.getPath().substring(5, url.getPath().indexOf("!")));
-                if (jarFile.getName().equals(file.getName())) {
-                    // try to override?
-                    File bakFile = new File(jarFile.getPath() + ".bak");
-                    FileUtils.moveFile(jarFile, bakFile);
-                    FileUtils.forceDeleteOnExit(bakFile);
-                } else {
-                    FileUtils.forceDeleteOnExit(jarFile);
+                URL jarURL = PluginUtils.getJarFileUrlFromResourceUrl(url);
+                File jarFile = new File(jarURL.getFile());
+                File bakFile = new File(jarFile.getPath() + ".bak");
+                try {
+                    unloadSucceeded = plm.unloadPlugin(currentInfo.getClassName());
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PREFS_PLUGINS_INSTALLATION_FAILED");
                 }
+                FileUtils.moveFile(jarFile, bakFile);
+                FileUtils.forceDeleteOnExit(bakFile);
             }
             File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
             FileUtils.copyFileToDirectory(file, homePluginsDir, true);
+            if (unloadSucceeded) {
+                URL pluginURL = homePluginsDir.toPath().resolve(file.getName()).toUri().toURL();
+                plm.loadPlugin(pluginURL, PluginLifecycleManager.PLUGIN_LAYER);
+            }
             return true;
         } catch (IOException ex) {
-            Log.logErrorRB("PREFS_PLUGINS_INSTALLATION_FAILED");
-            Log.log(ex);
+            Log.logErrorRB(ex, "PREFS_PLUGINS_INSTALLATION_FAILED");
         }
         return false;
     }
@@ -165,7 +172,7 @@ public final class PluginInstaller {
             try (InputStream inputStream = Files.newInputStream(sourceFile.toPath())) {
                 Predicate<String> expected = f -> f.endsWith(OConsts.JAR_EXTENSION);
                 List<String> extracted = StaticUtils.extractFromZip(inputStream, targetPath.toFile(), expected);
-                if (extracted.size() == 0) {
+                if (extracted.isEmpty()) {
                     throw new FileNotFoundException("Could not extract a jar file from zip");
                 }
                 target = targetPath.resolve(extracted.get(0));
@@ -180,19 +187,24 @@ public final class PluginInstaller {
 
     /**
      * Parse Manifest from plugin jar file.
-     * @param pluginJarFile plugin jar file
+     *
+     * @param pluginJarFile
+     *            plugin jar file
      * @return PluginInformation
      */
     static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) throws IOException {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         URL[] urls = new URL[1];
         urls[0] = pluginJarFile.toURI().toURL();
-        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls,
-                PluginsPreferencesController.class.getClassLoader())) {
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls, cl)) {
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();
-                pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                if (Files.isSameFile(pluginJarFile.toPath(),
+                        Paths.get(PluginUtils.getJarFileUrlFromResourceUrl(mu).getFile()))) {
+                    pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                }
             }
         }
         return pluginInfo;
@@ -238,11 +250,12 @@ public final class PluginInstaller {
 
     /**
      * Return installed plugins.
-     * @return Set of PluginInformation
+     *
+     * @return Map of PluginInformation
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {
         Map<String, PluginInformation> installedPlugins = new TreeMap<>();
-        PluginUtils.getPluginInformations().stream()
+        PluginUtils.getPluginsInformation().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .filter(info -> !installedPlugins.containsKey(info.getClassName()))
                 .forEach(info -> installedPlugins.put(info.getClassName(), info));

@@ -50,6 +50,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
+import org.omegat.util.module.PluginLifecycleManager;
 
 /**
  * A utility class implementing useful tools related to team projects. Intended
@@ -103,16 +104,17 @@ public final class TeamTool {
         ProjectFileStorage.writeProjectFile(props);
 
         // Create empty project TM
-        new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null,
-                null).save(props, new File(props.getProjectInternal(), OConsts.STATUS_EXTENSION).getPath(), false);
+        new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), null, null)
+                .save(props, new File(props.getProjectInternal(), OConsts.STATUS_EXTENSION).getPath(), false);
 
         // If the supplied dir is under version control, add everything we made
         // and set EOL handling correctly for cross-platform work
         if (new File(dir, ".svn").isDirectory()) {
             SVNClientManager mgr = SVNClientManager.newInstance();
             mgr.getWCClient().doSetProperty(dir, "svn:auto-props",
-                    SVNPropertyValue.create("*.txt = svn:eol-style=native\n*.tmx = svn:eol-style=native\n"), false,
-                    SVNDepth.EMPTY, null, null);
+                    SVNPropertyValue.create("*.txt = svn:eol-style=native\n*.tmx = svn:eol-style=native\n"),
+                    false, SVNDepth.EMPTY, null, null);
             mgr.getWCClient().doAdd(dir.listFiles(f -> !f.getName().startsWith(".")), false, false, true,
                     SVNDepth.fromRecurse(true), false, false, false, true);
         } else if (new File(dir, ".git").isDirectory()) {
@@ -126,11 +128,13 @@ public final class TeamTool {
             }
         }
 
-        System.out.println(StringUtil.format(OStrings.getString("TEAM_TOOL_INIT_COMPLETE"), srcLang, trgLang));
+        System.out
+                .println(StringUtil.format(OStrings.getString("TEAM_TOOL_INIT_COMPLETE"), srcLang, trgLang));
     }
 
     public static void showHelp() {
-        System.out.println(StringUtil.format(OStrings.getString("TEAM_TOOL_HELP"), OStrings.getNameAndVersion()));
+        System.out.println(
+                StringUtil.format(OStrings.getString("TEAM_TOOL_HELP"), OStrings.getNameAndVersion()));
     }
 
     public static void main(String[] args) {
@@ -147,7 +151,8 @@ public final class TeamTool {
 
         try {
             Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
+            PluginLifecycleManager plm = PluginLifecycleManager.getInstance();
+            plm.loadPlugins(Collections.emptyMap());
             if (COMMAND_INIT.equals(args[0]) && args.length == 3) {
                 initTeamProject(new File("").getAbsoluteFile(), args[1], args[2]);
                 System.exit(0);

@@ -50,7 +50,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
     private final List<PluginInformation> listPlugins = new ArrayList<>();
 
     public PluginInfoTableModel() {
-        PluginUtils.getPluginInformations().stream()
+        PluginUtils.getPluginsInformation().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .forEach(listPlugins::add);
     }

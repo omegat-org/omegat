@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -57,12 +58,12 @@ import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.module.PluginLifecycleManager;
 
 /**
  * Controller for align file picker UI
@@ -86,7 +87,7 @@ public class AlignFilePickerController {
 
     /**
      * Set the source file for alignment.
-     * 
+     *
      * @param sourceFile
      *            source file path.
      */
@@ -96,7 +97,7 @@ public class AlignFilePickerController {
 
     /**
      * Set target file for alignment.
-     * 
+     *
      * @param targetFile
      *            target file path.
      */
@@ -106,7 +107,7 @@ public class AlignFilePickerController {
 
     /**
      * Set source language.
-     * 
+     *
      * @param sourceLanguage
      *            source language.
      */
@@ -116,7 +117,7 @@ public class AlignFilePickerController {
 
     /**
      * Target source language.
-     * 
+     *
      * @param targetLanguage
      *            target langauge.
      */
@@ -125,8 +126,8 @@ public class AlignFilePickerController {
     }
 
     /**
-     * Set source defualt directory.
-     * 
+     * Set source default directory.
+     *
      * @param sourceDefaultDir
      *            source default directory.
      */
@@ -136,7 +137,7 @@ public class AlignFilePickerController {
 
     /**
      * Set target default directory.
-     * 
+     *
      * @param targetDefaultDir
      *            target default directory.
      */
@@ -146,7 +147,7 @@ public class AlignFilePickerController {
 
     /**
      * Set default save directory.
-     * 
+     *
      * @param defaultSaveDir
      *            default save directory to set.
      */
@@ -494,7 +495,8 @@ public class AlignFilePickerController {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
         Preferences.init();
-        PluginUtils.loadPlugins(Collections.emptyMap());
+        PluginLifecycleManager plm = PluginLifecycleManager.getInstance();
+        plm.loadPlugins(Collections.emptyMap());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
 
@@ -506,5 +508,6 @@ public class AlignFilePickerController {
             picker.targetFile = args[3];
         }
         picker.show(null);
+        plm.unloadPlugins();
     }
 }

@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.logging.Level;
 
 import org.eclipse.jgit.api.Git;
@@ -147,7 +146,7 @@ public final class TeamTool {
 
         try {
             Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
+            PluginUtils.loadPlugins();
             if (COMMAND_INIT.equals(args[0]) && args.length == 3) {
                 initTeamProject(new File("").getAbsoluteFile(), args[1], args[2]);
                 System.exit(0);

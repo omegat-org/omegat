@@ -83,12 +83,11 @@ import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.core.PluginLifecycleManager;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -132,6 +131,7 @@ public final class Main {
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
+
     public static void main(String[] args) {
         if (args.length > 0
                 && (CLIParameters.HELP_SHORT.equals(args[0]) || CLIParameters.HELP.equals(args[0]))) {
@@ -139,6 +139,11 @@ public final class Main {
                     StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"), OStrings.getNameAndVersion()));
             System.exit(0);
         }
+
+        // Set context classloader ad MainClassLoader.
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        MainClassLoader mainClassLoader = new MainClassLoader(cl);
+        Thread.currentThread().setContextClassLoader(mainClassLoader);
 
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
@@ -192,20 +197,12 @@ public final class Main {
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
-        // Create application class loader.
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = MainClassLoader.findAncestor(cl);
-        if (mainClassLoader == null) {
-            mainClassLoader = new MainClassLoader(cl);
-            Thread.currentThread().setContextClassLoader(mainClassLoader);
-            UIManager.put("ClassLoader", mainClassLoader);
-        }
+        PluginLifecycleManager plm = PluginLifecycleManager.getInstance();
 
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
-        PluginUtils.loadPlugins(PARAMS, mainClassLoader);
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        plm.loadPlugins(PARAMS);
         Preferences.initFilters();
         Preferences.initSegmentation();
 
@@ -213,24 +210,25 @@ public final class Main {
         try {
             switch (runMode) {
             case GUI:
+                UIManager.put("ClassLoader", plm.getPluginClassLoader("ui"));
                 result = runGUI();
                 // GUI has own shutdown code
                 break;
             case CONSOLE_TRANSLATE:
                 result = runConsoleTranslate();
-                PluginUtils.unloadPlugins();
+                plm.unloadPlugins();
                 break;
             case CONSOLE_CREATEPSEUDOTRANSLATETMX:
                 result = runCreatePseudoTranslateTMX();
-                PluginUtils.unloadPlugins();
+                plm.unloadPlugins();
                 break;
             case CONSOLE_ALIGN:
                 result = runConsoleAlign();
-                PluginUtils.unloadPlugins();
+                plm.unloadPlugins();
                 break;
             case CONSOLE_STATS:
                 result = runConsoleStats();
-                PluginUtils.unloadPlugins();
+                plm.unloadPlugins();
                 break;
             default:
                 result = 1;

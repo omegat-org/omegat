@@ -168,16 +168,7 @@ public final class PluginUtils {
 
     /**
      * Loads all plugins from main classloader and from /plugins/ dir.
-     * <p>
-     * We should load all jars from /plugins/ dir first, because some plugins
-     * can use more than one jar. There are three different "plugins"
-     * directory, and one development treatment.
-     * <ul>
-     * <li>(configdir)/plugins/ User level 3rd party plugins</li>
-     * <li>(installdir/plugins/ System level 3rd party plugins</li>
-     * <li>(installdir)/modules/ OmegaT genuine sub-component</li>
-     * </ul>
-     */
+    */
     public static void loadPlugins(Map<String, String> params, MainClassLoader mainClassLoader) {
         final List<File> pluginsDirs = new ArrayList<>();
         pluginsDirs.add(new File(StaticUtils.getConfigDir(), "plugins"));
@@ -196,11 +187,65 @@ public final class PluginUtils {
             pluginsClassLoader = MainClassLoader.findAncestor(cl);
         }
         if (pluginsClassLoader != null) {
-            urlList.forEach(pluginsClassLoader::appendToClassPath);
+            urlList.forEach(pluginsClassLoader::addJarToClassPath);
         } else {
-            pluginsClassLoader = new MainClassLoader(urlList.toArray(new URL[0]), cl);
+            pluginsClassLoader = MainClassLoader.newInstance(urlList.toArray(new URL[0]), cl);
         }
 
+        if (!checkMainClass(pluginsClassLoader)) {
+            loadPlugins(pluginsClassLoader);
+            loadSystemPluginsForDev(params, pluginsClassLoader);
+        } else {
+            loadPlugins(pluginsClassLoader);
+        }
+        activateBasePlugins();
+    }
+
+    public static void activateBasePlugins() {
+        // run base plugins
+        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
+            try {
+                pl.getDeclaredConstructor().newInstance();
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
+    }
+
+    public static void loadPlugins(ClassLoader pluginsClassLoader) {
+        List<URL> urlList;
+        if (pluginsClassLoader instanceof MainClassLoader) {
+            urlList = ((MainClassLoader) pluginsClassLoader).getUrlList();
+        } else {
+            urlList = Collections.emptyList();
+        }
+        try {
+            Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF");
+            while (mlist.hasMoreElements()) {
+                URL mu = mlist.nextElement();
+                try (InputStream in = mu.openStream()) {
+                    Manifest m = new Manifest(in);
+                    loadFromManifest(m, pluginsClassLoader, mu);
+                    if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
+                        String target = mu.toString();
+                        for (URL url : urlList) {
+                            if (target.contains(url.toString())) {
+                                THEME_PLUGIN_JARS.add(url);
+                            }
+                        }
+                    }
+                } catch (ClassNotFoundException e) {
+                    Log.log(e);
+                } catch (UnsupportedClassVersionError e) {
+                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
+                }
+            }
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
+    }
+
+    public static boolean checkMainClass(ClassLoader pluginsClassLoader) {
         boolean foundMain = false;
         // look on all manifests
         try {
@@ -212,12 +257,8 @@ public final class PluginUtils {
                     if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
                         // found main manifest - not in development mode
                         foundMain = true;
-                        loadFromManifest(m, pluginsClassLoader, null);
-                    } else {
-                        loadFromManifest(m, pluginsClassLoader, mu);
+                        break;
                     }
-                } catch (ClassNotFoundException e) {
-                    Log.log(e);
                 } catch (UnsupportedClassVersionError e) {
                     Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
                 }
@@ -225,36 +266,29 @@ public final class PluginUtils {
         } catch (IOException ex) {
             Log.log(ex);
         }
+        return foundMain;
+    }
+
+    public static void loadSystemPluginsForDev(Map<String, String> params, ClassLoader pluginsClassLoader) {
         try {
-            if (!foundMain) {
-                // development mode - load from dev-manifests CLI arg
-                String manifests = params.get(CLIParameters.DEV_MANIFESTS);
-                if (manifests != null) {
-                    for (String mf : manifests.split(File.pathSeparator)) {
-                        try (InputStream in = Files.newInputStream(Paths.get(mf))) {
-                            loadFromManifest(new Manifest(in), pluginsClassLoader, null);
-                        }
+            // development mode - load from dev-manifests CLI arg
+            String manifests = params.get(CLIParameters.DEV_MANIFESTS);
+            if (manifests != null) {
+                for (String mf : manifests.split(File.pathSeparator)) {
+                    try (InputStream in = Files.newInputStream(Paths.get(mf))) {
+                        loadFromManifest(new Manifest(in), pluginsClassLoader, null);
                     }
-                } else {
-                    // load from `Plugins.properties` file
-                    Properties props = new Properties();
-                    try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
-                        props.load(fis);
-                        loadFromProperties(props, pluginsClassLoader);
-                    }
+                }
+            } else {
+                // load from `Plugins.properties` file
+                Properties props = new Properties();
+                try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
+                    props.load(fis);
+                    loadFromProperties(props, pluginsClassLoader);
                 }
             }
         } catch (ClassNotFoundException | IOException ex) {
             Log.log(ex);
-        }
-
-        // run base plugins
-        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
-            try {
-                pl.getDeclaredConstructor().newInstance();
-            } catch (Exception ex) {
-                Log.log(ex);
-            }
         }
     }
 
@@ -284,7 +318,7 @@ public final class PluginUtils {
      * @param pluginsDirs
      *            List of directories where plugins can be loaded
      */
-    static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
+    public static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
         // list all jars in /plugins/
         FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
         List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
@@ -466,6 +500,10 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
+    public static List<URL> getThemePluginJars() {
+        return THEME_PLUGIN_JARS;
+    }
+
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
@@ -479,6 +517,8 @@ public final class PluginUtils {
     private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
+
+    private static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
 
     /**
      * Parse one manifest file.
@@ -634,7 +674,7 @@ public final class PluginUtils {
         return Collections.unmodifiableSet(PLUGIN_INFORMATIONS);
     }
 
-    private static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {
+    public static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {
         JarURLConnection connection = (JarURLConnection) url.openConnection();
         return connection.getJarFileURL();
     }

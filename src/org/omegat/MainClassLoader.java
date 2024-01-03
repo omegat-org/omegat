@@ -32,11 +32,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Hiroshi Miura
  */
-public final class MainClassLoader extends URLClassLoader {
+public class MainClassLoader extends URLClassLoader {
 
     static {
         registerAsParallelCapable();
@@ -45,49 +47,57 @@ public final class MainClassLoader extends URLClassLoader {
     private String name;
 
     /**
-     * Java9 compatible class loader constructor.
-     * @param name name of class loader
-     * @param parent
+     * {@inheritDoc}
      */
     public MainClassLoader(String name, ClassLoader parent) {
-        this(parent);
-        this.name = name;
+        super(name, new URL[0], parent);
     }
 
-    /*
-     * Required when this classloader is used as the system classloader
+    /**
+     * {@inheritDoc}
      */
-    public MainClassLoader(ClassLoader parent) {
-        this(new URL[0], parent);
-    }
-
     public MainClassLoader(URL[] urls, ClassLoader parent) {
         super(urls, parent);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public MainClassLoader(ClassLoader parent) {
+        super(new URL[0], parent);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public MainClassLoader(URL[] urls) {
+        super(urls, Thread.currentThread().getContextClassLoader());
+    }
+
+    /**
+     * Creates a new class loader using the ClassLoader returned by the method
+     * Thread.currentThread().getContextClassLoader() as the parent class
+     * loader.
+     */
     public MainClassLoader() {
         this(Thread.currentThread().getContextClassLoader());
     }
 
     /**
      * Add a jar classpath.
-     * @param url Jar file URL to add.
+     * @param url jar file classpath.
      */
-    synchronized void add(URL url) {
+    public void addJarToClassPath(URL url) {
         addURL(url);
     }
 
-    /**
-     * Add a jar classpath.
-     * @param url
-     */
-    public void appendToClassPath(URL url) {
-        add(url);
+    void addJarToClassPath(String jarName) throws MalformedURLException {
+        URL url = new File(jarName).toURI().toURL();
+        addURL(url);
     }
 
-    void addJarToClasspath(String jarName) throws MalformedURLException {
-        URL url = new File(jarName).toURI().toURL();
-        add(url);
+    public List<URL> getUrlList() {
+        return Arrays.asList(super.getURLs());
     }
 
     public static MainClassLoader findAncestor(ClassLoader cl) {
@@ -100,11 +110,23 @@ public final class MainClassLoader extends URLClassLoader {
         return null;
     }
 
-    /*
-     *  Required for Java Agents when this classloader is used as the system classloader
+    /**
+     * Creates a new instance of URLClassLoader for the specified
+     * URLs and parent class loader.
+     */
+    public static MainClassLoader newInstance(URL[] urls, ClassLoader parent) {
+        return new MainClassLoader(urls, parent);
+    }
+
+    /**
+     * Required for Java Agents when this classloader is used as the system classloader.
+     * <p>
+     * It is not required to be public.
+     * @see
+     *  java.lang.instrument.Instrumentation#appendToSystemClassLoaderSearch
      */
     @SuppressWarnings("unused")
     private void appendToClassPathForInstrumentation(String jarfile) throws IOException {
-        add(Paths.get(jarfile).toRealPath().toUri().toURL());
+        addURL(Paths.get(jarfile).toRealPath().toUri().toURL());
     }
 }

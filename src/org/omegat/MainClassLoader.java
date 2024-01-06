@@ -91,6 +91,6 @@ public final class MainClassLoader extends URLClassLoader {
      */
     @SuppressWarnings("unused")
     private void appendToClassPathForInstrumentation(String jarfile) throws IOException {
-        addJarToClasspath(Paths.get(jarfile).toRealPath().toUri().toURL());
+        addJarToClasspath(Paths.get(jarfile).toRealPath().toFile());
     }
 }

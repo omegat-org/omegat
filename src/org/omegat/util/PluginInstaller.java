@@ -33,6 +33,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -51,7 +52,7 @@ import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.preferences.view.PluginsPreferencesController;
+
 
 
 /**
@@ -180,19 +181,24 @@ public final class PluginInstaller {
 
     /**
      * Parse Manifest from plugin jar file.
-     * @param pluginJarFile plugin jar file
+     *
+     * @param pluginJarFile
+     *            plugin jar file
      * @return PluginInformation
      */
     static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) throws IOException {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         URL[] urls = new URL[1];
         urls[0] = pluginJarFile.toURI().toURL();
-        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls,
-                PluginsPreferencesController.class.getClassLoader())) {
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls, cl)) {
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();
-                pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                if (Files.isSameFile(pluginJarFile.toPath(),
+                        Paths.get(PluginUtils.getJarFileUrlFromResourceUrl(mu).getFile()))) {
+                    pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                }
             }
         }
         return pluginInfo;
@@ -238,7 +244,8 @@ public final class PluginInstaller {
 
     /**
      * Return installed plugins.
-     * @return Set of PluginInformation
+     *
+     * @return Map of PluginInformation
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {
         Map<String, PluginInformation> installedPlugins = new TreeMap<>();

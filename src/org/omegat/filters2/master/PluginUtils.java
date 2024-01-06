@@ -653,7 +653,7 @@ public final class PluginUtils {
         return Collections.unmodifiableSet(PLUGIN_INFORMATION);
     }
 
-    private static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {
+    public static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {
         JarURLConnection connection = (JarURLConnection) url.openConnection();
         return connection.getJarFileURL();
     }

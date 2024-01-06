@@ -26,9 +26,7 @@
 
 package org.omegat;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Paths;
@@ -87,13 +85,12 @@ public class MainClassLoader extends URLClassLoader {
      * Add a jar classpath.
      * @param url jar file classpath.
      */
-    public void addJarToClassPath(URL url) {
+    public void addJarToClasspath(URL url) {
         addURL(url);
     }
 
-    void addJarToClassPath(String jarName) throws MalformedURLException {
-        URL url = new File(jarName).toURI().toURL();
-        addURL(url);
+    public void addJarToClasspath(String jarName) throws IOException {
+        addURL(Paths.get(jarName).toRealPath().toUri().toURL());
     }
 
     public List<URL> getUrlList() {
@@ -127,6 +124,6 @@ public class MainClassLoader extends URLClassLoader {
      */
     @SuppressWarnings("unused")
     private void appendToClassPathForInstrumentation(String jarfile) throws IOException {
-        addURL(Paths.get(jarfile).toRealPath().toUri().toURL());
+        addJarToClasspath(jarfile);
     }
 }

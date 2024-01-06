@@ -106,27 +106,27 @@ public final class PluginLifecycleManager {
         List<URL> moduleUrlList = PluginUtils.populatePluginUrlList(
                 Collections.singletonList(pluginDirectories.get("module").toFile()));
         MainClassLoader moduleClassLoader = pluginLayers.get("module");
-        moduleUrlList.forEach(moduleClassLoader::addJarToClassPath);
+        moduleUrlList.forEach(moduleClassLoader::addJarToClasspath);
         PluginUtils.loadPlugins(moduleClassLoader);
 
         // 3. loads from system plugins (deprecated).
         List<URL> systemUrlList = PluginUtils.populatePluginUrlList(
                 Collections.singletonList(pluginDirectories.get("system").toFile()));
         MainClassLoader systemClassLoader = pluginLayers.get("system");
-        systemUrlList.forEach(systemClassLoader::addJarToClassPath);
+        systemUrlList.forEach(systemClassLoader::addJarToClasspath);
         PluginUtils.loadPlugins(systemClassLoader);
 
         // 4. loads from user plugins.
         List<URL> userUrlList = PluginUtils.populatePluginUrlList(
                 Collections.singletonList(pluginDirectories.get("user").toFile()));
         MainClassLoader userClassLoader = pluginLayers.get("user");
-        userUrlList.forEach(userClassLoader::addJarToClassPath);
+        userUrlList.forEach(userClassLoader::addJarToClasspath);
         PluginUtils.loadPlugins(userClassLoader);
 
         // 5. set theme classes
         MainClassLoader uiClassLoader = pluginLayers.get("ui");
         List<URL> themeUrlList = PluginUtils.getThemePluginJars();
-        themeUrlList.forEach(uiClassLoader::addJarToClassPath);
+        themeUrlList.forEach(uiClassLoader::addJarToClasspath);
 
         // 6. set filter classes
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());

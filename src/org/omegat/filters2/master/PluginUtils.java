@@ -187,7 +187,7 @@ public final class PluginUtils {
             pluginsClassLoader = MainClassLoader.findAncestor(cl);
         }
         if (pluginsClassLoader != null) {
-            urlList.forEach(pluginsClassLoader::addJarToClassPath);
+            urlList.forEach(pluginsClassLoader::addJarToClasspath);
         } else {
             pluginsClassLoader = MainClassLoader.newInstance(urlList.toArray(new URL[0]), cl);
         }

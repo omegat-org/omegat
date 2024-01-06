@@ -30,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,10 +49,10 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 
-import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
+
 
 /**
  * Plugin installer utility class.
@@ -159,7 +160,7 @@ public final class PluginInstaller {
 
     /**
      * Check if jarFile is placed in OmegaT installed system directory.
-     * 
+     *
      * @param jarFile
      *            a file determine.
      * @return true when a file is under installed directory, otherwise return
@@ -207,19 +208,24 @@ public final class PluginInstaller {
 
     /**
      * Parse Manifest from plugin jar file.
-     * 
+     *
      * @param pluginJarFile
      *            plugin jar file
      * @return PluginInformation
      */
     static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) throws IOException {
         Set<PluginInformation> pluginInfo = new HashSet<>();
-        try (MainClassLoader pluginsClassLoader = new MainClassLoader()) {
-            pluginsClassLoader.addJarToClasspath(pluginJarFile);
+        URL[] urls = new URL[1];
+        urls[0] = pluginJarFile.toURI().toURL();
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls, cl)) {
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();
-                pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                if (Files.isSameFile(pluginJarFile.toPath(),
+                        Paths.get(PluginUtils.getJarFileUrlFromResourceUrl(mu).getFile()))) {
+                    pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                }
             }
         }
         return pluginInfo;
@@ -265,7 +271,7 @@ public final class PluginInstaller {
 
     /**
      * Return installed plugins.
-     * 
+     *
      * @return Map of PluginInformation
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {

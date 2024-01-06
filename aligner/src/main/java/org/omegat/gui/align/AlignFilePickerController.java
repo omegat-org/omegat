@@ -32,6 +32,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -53,10 +54,10 @@ import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.Core;
+import org.omegat.core.PluginLifecycleManager;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -461,7 +462,8 @@ public class AlignFilePickerController {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
         Preferences.init();
-        PluginUtils.loadPlugins();
+        PluginLifecycleManager plm = PluginLifecycleManager.getInstance();
+        plm.loadPlugins(Collections.emptyMap());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
 
@@ -473,5 +475,6 @@ public class AlignFilePickerController {
             picker.targetFile = args[3];
         }
         picker.show(null);
+        plm.unloadPlugins();
     }
 }

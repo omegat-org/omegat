@@ -162,13 +162,7 @@ public final class PluginUtils {
     /**
      * Loads all plugins from main classloader and from /plugins/ dir.
      */
-    public static void loadPlugins() {
-        loadPlugins(Collections.emptyMap(), null);
-    }
-
-    /**
-     * Loads all plugins from main classloader and from /plugins/ dir.
-    */
+    @Deprecated
     public static void loadPlugins(Map<String, String> params, MainClassLoader mainClassLoader) {
         final List<File> pluginsDirs = new ArrayList<>();
         pluginsDirs.add(new File(StaticUtils.getConfigDir(), "plugins"));

@@ -59,14 +59,19 @@ public final class MainClassLoader extends URLClassLoader {
     }
 
     /**
-     * Main class can add jar classpath for plugins in dynamic manner.
-     * @param url
+     * Add URL to classpath.
+     * @param url to added.
      */
-    public synchronized void add(URL url) {
+    public void addJarToClasspath(URL url) {
         addURL(url);
     }
 
-    public synchronized void addJarToClasspath(File jarFile) throws MalformedURLException {
+    /**
+     * Add Jar file into classpath.
+     * @param jarFile JAR file to add to classpath.
+     * @throws MalformedURLException when a malformed File object is passed.
+     */
+    public void addJarToClasspath(File jarFile) throws MalformedURLException {
         URL url = jarFile.toURI().toURL();
         addURL(url);
     }
@@ -86,6 +91,6 @@ public final class MainClassLoader extends URLClassLoader {
      */
     @SuppressWarnings("unused")
     private void appendToClassPathForInstrumentation(String jarfile) throws IOException {
-        add(Paths.get(jarfile).toRealPath().toUri().toURL());
+        addJarToClasspath(Paths.get(jarfile).toRealPath().toUri().toURL());
     }
 }

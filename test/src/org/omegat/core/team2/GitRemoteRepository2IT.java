@@ -39,6 +39,7 @@ public final class GitRemoteRepository2IT extends AbstractRemoteRepository2IT {
 
     @Override
     void prepareLocalRepo() throws IOException, GitAPIException {
+        GITRemoteRepository2.loadPlugins();
         Git git = Git.init().setDirectory(tempRepoDir.toFile()).call();
         String originalFile = createFile(tempRepoDir.toFile());
         git.add().addFilepattern(originalFile).call();

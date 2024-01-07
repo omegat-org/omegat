@@ -236,6 +236,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
     }
 
+    @Override
+    public boolean isSupported(final String url) {
+        return GITRemoteRepository2.isGitRepository(url);
+    }
+
     private void configRepo() throws IOException {
         StoredConfig config = repository.getConfig();
 

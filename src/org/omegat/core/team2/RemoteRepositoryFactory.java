@@ -29,8 +29,6 @@ package org.omegat.core.team2;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.omegat.core.team2.impl.GITRemoteRepository2;
-import org.omegat.core.team2.impl.SVNRemoteRepository2;
 import org.omegat.util.Log;
 
 /**
@@ -71,14 +69,14 @@ public final class RemoteRepositoryFactory {
      * Tries to detect a repository type. Used for migrate old projects only.
      */
     public static String detectRepositoryType(String url) {
-        if (url.startsWith("svn")) {
+        if (url.startsWith("svn") && repositoryConnectors.containsKey("svn")) {
             return "svn";
-        } else if (url.startsWith("git")) {
+        } else if (url.startsWith("git") && repositoryConnectors.containsKey("git")) {
             return "git";
         } else {
-            if (GITRemoteRepository2.isGitRepository(url)) {
+            if (repositoryConnectors.containsKey("git") && create("git").isSupported(url)) {
                 return "git";
-            } else if (SVNRemoteRepository2.isSVNRepository(url)) {
+            } else if (repositoryConnectors.containsKey("svn") && create("svn").isSupported(url)) {
                 return "svn";
             }
             // unknown

@@ -49,6 +49,13 @@ public interface IRemoteRepository2 {
     void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception;
 
     /**
+     * Check url is supported.
+     * @param url repository url.
+     * @return true when supported, otherwise false;
+     */
+    boolean isSupported(String url);
+
+    /**
      * Get file version.
      */
     String getFileVersion(String file) throws Exception;

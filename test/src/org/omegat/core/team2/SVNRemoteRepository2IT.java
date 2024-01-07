@@ -61,6 +61,7 @@ public class SVNRemoteRepository2IT extends AbstractRemoteRepository2IT {
 
     @Override
     void prepareLocalRepo() throws Exception {
+        SVNRemoteRepository2.loadPlugins();
         SVNRepositoryFactoryImpl.setup();
         tgtURL = SVNRepositoryFactory.createLocalRepository(tempRepoDir.toFile(), true, false);
         prepareFilesInLocalRepository(tgtURL.toString());

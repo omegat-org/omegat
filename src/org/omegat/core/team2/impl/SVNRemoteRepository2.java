@@ -135,6 +135,11 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     }
 
     @Override
+    public boolean isSupported(final String url) {
+        return SVNRemoteRepository2.isSVNRepository(url);
+    }
+
+    @Override
     public String getFileVersion(String file) throws Exception {
         File f = new File(baseDirectory, file);
         if (!f.exists()) {

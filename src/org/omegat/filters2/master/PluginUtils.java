@@ -153,7 +153,7 @@ public final class PluginUtils {
     }
 
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
-    private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
+    private static final Set<PluginInformation> PLUGIN_INFORMATION = new HashSet<>();
 
     /** Private constructor to disallow creation */
     private PluginUtils() {
@@ -534,10 +534,10 @@ public final class PluginUtils {
                 }
                 if (loadClass(clazz, classLoader)) {
                     if (mu == null) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, null,
+                        PLUGIN_INFORMATION.add(PluginInformation.Builder.fromManifest(clazz, m, null,
                                 PluginInformation.Status.BUNDLED));
                     } else {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, mu,
+                        PLUGIN_INFORMATION.add(PluginInformation.Builder.fromManifest(clazz, m, mu,
                                 PluginInformation.Status.INSTALLED));
                     }
                 }
@@ -557,14 +557,14 @@ public final class PluginUtils {
             if (key.equals("plugin")) {
                 for (String clazz : classes) {
                     if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                        PLUGIN_INFORMATION.add(PluginInformation.Builder.fromProperties(clazz, props, key,
                                 null, PluginInformation.Status.BUNDLED));
                     }
                 }
             } else {
                 for (String clazz : classes) {
                     if (loadClassOld(key, clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                        PLUGIN_INFORMATION.add(PluginInformation.Builder.fromProperties(clazz, props, key,
                                 null, PluginInformation.Status.BUNDLED));
                     }
                 }
@@ -622,7 +622,7 @@ public final class PluginUtils {
                 continue;
             }
             if (loadClassOld(sType, key, classLoader)) {
-                PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(key, m, null,
+                PLUGIN_INFORMATION.add(PluginInformation.Builder.fromManifest(key, m, null,
                         PluginInformation.Status.BUNDLED));
             }
         }
@@ -664,8 +664,8 @@ public final class PluginUtils {
         return loadOk;
     }
 
-    public static Collection<PluginInformation> getPluginInformations() {
-        return Collections.unmodifiableSet(PLUGIN_INFORMATIONS);
+    public static Collection<PluginInformation> getPluginsInformation() {
+        return Collections.unmodifiableSet(PLUGIN_INFORMATION);
     }
 
     public static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {

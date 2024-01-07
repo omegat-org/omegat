@@ -242,7 +242,7 @@ public final class PluginInstaller {
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {
         Map<String, PluginInformation> installedPlugins = new TreeMap<>();
-        PluginUtils.getPluginInformations().stream()
+        PluginUtils.getPluginsInformation().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .filter(info -> !installedPlugins.containsKey(info.getClassName()))
                 .forEach(info -> installedPlugins.put(info.getClassName(), info));

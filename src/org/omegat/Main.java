@@ -9,7 +9,7 @@
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
                2018 Enrique Estevez Fernandez
-               2022 Hiroshi Miura
+               2022-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -87,7 +87,6 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
-import org.omegat.core.PluginLifecycleManager;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -99,6 +98,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
+import org.omegat.util.module.PluginLifecycleManager;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -131,6 +131,7 @@ public final class Main {
     /** Execution mode. */
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
+    private static final String UI_CLASS_LOADER_KEY = "ClassLoader";
 
     public static void main(String[] args) {
         if (args.length > 0
@@ -139,11 +140,6 @@ public final class Main {
                     StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"), OStrings.getNameAndVersion()));
             System.exit(0);
         }
-
-        // Set context classloader ad MainClassLoader.
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = new MainClassLoader(cl);
-        Thread.currentThread().setContextClassLoader(mainClassLoader);
 
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
@@ -210,7 +206,6 @@ public final class Main {
         try {
             switch (runMode) {
             case GUI:
-                UIManager.put("ClassLoader", plm.getPluginClassLoader("ui"));
                 result = runGUI();
                 // GUI has own shutdown code
                 break;
@@ -315,6 +310,13 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
+        // {@See javax.swing.UIDefaults} get `UIDefaults#get("ClassLoader")`
+        // to retrieve LaF class objects, when the LaF uses `ProxyLazyValue`.
+        // We consult to store ClassLoader object in UIManager, because we
+        // use "UI_LAYER" class loader for all the LaF components.
+        PluginLifecycleManager plm = PluginLifecycleManager.getInstance();
+        UIManager.put(UI_CLASS_LOADER_KEY, plm.getPluginClassLoader(PluginLifecycleManager.UI_LAYER));
+
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();

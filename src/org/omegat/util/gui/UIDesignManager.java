@@ -54,6 +54,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.laf.SystemDarkThemeDetector;
+import org.omegat.util.module.PluginLifecycleManager;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
@@ -100,7 +101,7 @@ public final class UIDesignManager {
 
     private static void setMenuUI(String menuUIPrefClassName) {
         try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            ClassLoader classLoader = getClassLoader();
             Class<?> prefClazz = classLoader.loadClass(menuUIPrefClassName);
             if (prefClazz != null) {
                 Object o = prefClazz.getDeclaredConstructor().newInstance();
@@ -125,8 +126,11 @@ public final class UIDesignManager {
 
     /**
      * Load and set theme.
-     * @param lafClassName LookAndFeel full qualified class name.
-     * @param classLoader class loader to use.
+     * 
+     * @param lafClassName
+     *            LookAndFeel full qualified class name.
+     * @param classLoader
+     *            class loader to use.
      */
     public static void setTheme(String lafClassName, ClassLoader classLoader) {
         try {
@@ -142,16 +146,30 @@ public final class UIDesignManager {
 
     /**
      * Load and set theme.
-     * @param lafClassName LookAndFeel full qualified class name.
+     * 
+     * @param lafClassName
+     *            LookAndFeel full qualified class name.
      */
     public static void setTheme(String lafClassName) {
-        setTheme(lafClassName, Thread.currentThread().getContextClassLoader());
+        setTheme(lafClassName, getClassLoader());
     }
 
-    @Deprecated
-    @SuppressWarnings("unused")
-    public static void initialize(ClassLoader mainClassLoader) throws IOException {
-        initialize();
+    private static ClassLoader getClassLoader() {
+        ClassLoader classLoader = null;
+        Object o = UIManager.get("ClassLoader");
+        if (o instanceof ClassLoader) {
+            classLoader = (ClassLoader) o;
+        }
+        if (classLoader == null) {
+            classLoader = PluginLifecycleManager.getInstance().getPluginClassLoader(PluginLifecycleManager.UI_LAYER);
+        }
+        if (classLoader == null) {
+            classLoader = Thread.currentThread().getContextClassLoader();
+        }
+        if (classLoader == null) {
+            classLoader = ClassLoader.getSystemClassLoader();
+        }
+        return classLoader;
     }
 
     /**
@@ -163,7 +181,7 @@ public final class UIDesignManager {
         DockableContainerFactory.setFactory(new CustomContainerFactory());
 
         // Set Look And Feel
-       String themeMode = Preferences.getPreferenceDefault(Preferences.THEME_COLOR_MODE,
+        String themeMode = Preferences.getPreferenceDefault(Preferences.THEME_COLOR_MODE,
                 THEME_FOLLOW_OS_COLOR_DEFAULT);
         String theme;
         if (themeMode.equals("sync")) {
@@ -265,6 +283,7 @@ public final class UIDesignManager {
 
     /**
      * Load icon from classpath.
+     * 
      * @param iconName
      *            icon file name
      * @return icon instance
@@ -328,6 +347,7 @@ public final class UIDesignManager {
      * Heuristic detection of dark theme.
      * <p>
      * isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * 
      * @return true when dark theme, otherwise false.
      */
     public static boolean isDarkTheme(UIDefaults uiDefaults) {

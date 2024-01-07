@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura
+ Copyright (C) 2021-2024 Hiroshi Miura
                2018 Mordechai Meisels (Original licensed Apache-2.0)
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
@@ -83,7 +83,9 @@ public class MainClassLoader extends URLClassLoader {
 
     /**
      * Add a jar classpath.
-     * @param url jar file classpath.
+     * 
+     * @param url
+     *            jar file classpath.
      */
     public void addJarToClasspath(URL url) {
         addURL(url);
@@ -108,19 +110,20 @@ public class MainClassLoader extends URLClassLoader {
     }
 
     /**
-     * Creates a new instance of URLClassLoader for the specified
-     * URLs and parent class loader.
+     * Creates a new instance of URLClassLoader for the specified URLs and
+     * parent class loader.
      */
     public static MainClassLoader newInstance(URL[] urls, ClassLoader parent) {
         return new MainClassLoader(urls, parent);
     }
 
     /**
-     * Required for Java Agents when this classloader is used as the system classloader.
+     * Required for Java Agents when this classloader is used as the system
+     * classloader.
      * <p>
      * It is not required to be public.
-     * @see
-     *  java.lang.instrument.Instrumentation#appendToSystemClassLoaderSearch
+     * 
+     * @see java.lang.instrument.Instrumentation#appendToSystemClassLoaderSearch
      */
     @SuppressWarnings("unused")
     private void appendToClassPathForInstrumentation(String jarfile) throws IOException {

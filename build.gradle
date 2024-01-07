@@ -263,7 +263,7 @@ dependencies {
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
 
-        // Team project server support
+        // team project server support
         implementation(libs.bundles.jgit)
 
         // For ed25519 and ecdsa support of ssh, java16+ or BC

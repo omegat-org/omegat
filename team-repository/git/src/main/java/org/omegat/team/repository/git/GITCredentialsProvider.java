@@ -1,33 +1,29 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*******************************************************************************
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2012-2024 Hiroshi Miura
+ *                Home page: https://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ ******************************************************************************/
 
- Copyright (C) 2012 Alex Buloichik
-               2014 Alex Buloichik, Aaron Madlon-Kay
-               2015 Hiroshi Miura, Aaron Madlon-Kay
-               2022 Thomas Cordonnier
-               2021-2023 Hiroshi Miura
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.core.team2.impl;
+package org.omegat.team.repository.git;
 
 import java.io.Console;
 import java.util.Arrays;
@@ -43,14 +39,16 @@ import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.URIish;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.gui.PassphraseDialog;
 import org.omegat.core.team2.gui.UserPassDialog;
+import org.omegat.core.team2.impl.TeamUtils;
 import org.omegat.core.team2.impl.TeamUtils.Credentials;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 /**
@@ -80,6 +78,7 @@ import org.omegat.util.OStrings;
  */
 
 public class GITCredentialsProvider extends CredentialsProvider {
+    private static final ILogger LOGGER = LoggerFactory.getLogger(GITCredentialsProvider.class);
 
     private static final Pattern[] fingerPrintRegex = new Pattern[] {
             Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
@@ -199,7 +198,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
             } else if (item instanceof CredentialItem.StringType) {
                 if (!item.getPromptText().equals(PASSWORD_PROMPT)
                         || !isPassphraseQuery(item.getPromptText())) {
-                    Log.logInfoRB("TEAM_GIT_IGNORE_CREDENTIAL_QUERY", item.getPromptText());
+                    LOGGER.atInfo().setMessageRB("TEAM_GIT_IGNORE_CREDENTIAL_QUERY").addArgument(item.getPromptText())
+                            .log();
                     continue;
                 }
                 if (predefinedUser != null && predefinedPass != null) {
@@ -245,7 +245,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
             throw new UnsupportedCredentialItem(uri, item.getClass().getName() + ":" + item.getPromptText());
         }
         if (sb.length() > 0) {
-            Log.logInfoRB("GIT_CREDENTIAL_MESSAGE", sb.toString());
+            LOGGER.atInfo().setMessageRB("GIT_CREDENTIAL_MESSAGE").addArgument(sb.toString()).log();
         }
         return true;
     }
@@ -396,7 +396,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     uri.getHost()), false);
             return credentials;
         }
-        Log.log("No console found.");
+        LOGGER.atInfo().setMessage("No console found.").log();
         return null;
     }
 

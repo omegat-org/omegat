@@ -13,4 +13,6 @@ include("machinetranslators:apertium",
         "aligner",
         "theme",
         "spellchecker:hunspell-jmyspell",
+        "team-repository:git",
+        "team-repository:svn",
         "tipoftheday")

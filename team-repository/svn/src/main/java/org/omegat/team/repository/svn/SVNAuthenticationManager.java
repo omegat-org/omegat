@@ -1,29 +1,29 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*******************************************************************************
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2015-2024 Hiroshi Miura
+ *                Home page: https://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ ******************************************************************************/
 
- Copyright (C) 2015 Alex Buloichik
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.core.team2.impl;
+package org.omegat.team.repository.svn;
 
 import java.io.Console;
 
@@ -48,6 +48,7 @@ import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.gui.UserPassDialog;
+import org.omegat.core.team2.impl.TeamUtils;
 import org.omegat.core.team2.impl.TeamUtils.Credentials;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Log;
@@ -163,24 +164,24 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             throws SVNException {
         // Check supported kind and return when there are predefined credentials
         switch (kind) {
-        case USERNAME:
+        case ISVNAuthenticationManager.USERNAME:
             if (predefinedUser != null) {
                 return SVNUserNameAuthentication.newInstance(predefinedUser, false, url, false);
             }
             break;
-        case PASSWORD:
+        case ISVNAuthenticationManager.PASSWORD:
             if (predefinedUser != null && predefinedPass != null) {
                 return SVNPasswordAuthentication.newInstance(predefinedUser, predefinedPass.toCharArray(),
                         false, url, false);
             }
             break;
-        case SSH:
+        case ISVNAuthenticationManager.SSH:
             if (predefinedUser != null && predefinedPass != null) {
                 return SVNSSHAuthentication.newInstance(predefinedUser, predefinedPass.toCharArray(), -1,
                         false, url, false);
             }
             break;
-        case SSL:
+        case ISVNAuthenticationManager.SSL:
             // raise exception because of unsupported.
             // when support SSL authentication, we will return
             // SVNSSLAuthentication.newInstance(kind, null, false, url, false);

@@ -27,6 +27,7 @@ package org.omegat.util.module;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
@@ -56,7 +57,7 @@ public final class PluginLifecycleManager {
     private final Map<String, MainClassLoader> pluginClassLoaders = new HashMap<>();
 
     private static final String MODULE_LAYER = "modules";
-    private static final String PLUGIN_LAYER = "plugins";
+    public static final String PLUGIN_LAYER = "plugins";
     public static final String UI_LAYER = "ui";
 
     private static final String SYSTEM_PLUGIN_KEY = "system";
@@ -140,7 +141,7 @@ public final class PluginLifecycleManager {
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
     }
 
-    private void loadPlugin(URL url, String layer) {
+    public void loadPlugin(URL url, String layer) {
         MainClassLoader pluginsClassLoader = new MainClassLoader(pluginClassLoaders.get(layer));
         pluginsClassLoader.addJarToClasspath(url);
         if (loadPlugin(pluginsClassLoader, url)) {
@@ -185,6 +186,24 @@ public final class PluginLifecycleManager {
 
     public void unloadPlugins() {
         PluginUtils.unloadPlugins();
+    }
+
+    public boolean unloadPlugin(String className) {
+        ClassLoader classLoader = pluginClassLoaders.get(className);
+        if (classLoader == null) {
+            Log.logErrorRB("PLUGIN_UNLOAD_ERROR", className, "ClassLoader not found.");
+            return false;
+        }
+        try {
+            Class<?> p = Class.forName(className, false, classLoader);
+            Method load = p.getMethod("unloadPlugins");
+            load.invoke(p);
+            pluginClassLoaders.remove(className);
+        } catch (Throwable ex) {
+            Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", className, ex.getMessage());
+            return false;
+        }
+        return true;
     }
 
     public ClassLoader getPluginClassLoader(String name) {

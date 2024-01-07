@@ -150,7 +150,7 @@ public final class PluginInstaller {
             }
             return true;
         } catch (IOException ex) {
-            Log.logErrorRB(ex,"PREFS_PLUGINS_INSTALLATION_FAILED");
+            Log.logErrorRB(ex, "PREFS_PLUGINS_INSTALLATION_FAILED");
         }
         return false;
     }

@@ -142,7 +142,7 @@ jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 
 [plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.0.4"}
+spotbugs = {id = "com.github.spotbugs", version = "6.0.6"}
 spotless = {id = "com.diffplug.spotless", version = "6.23.3"}
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.5"}
 versions = {id = "com.github.ben-manes.versions", version = "0.50.0"}

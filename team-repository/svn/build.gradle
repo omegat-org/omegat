@@ -17,7 +17,11 @@ dependencies {
 jar {
     archiveAppendix.set("repository")
     destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    from configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+    from(configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}) {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
     def pluginProp = loadProperties(file('plugin.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',

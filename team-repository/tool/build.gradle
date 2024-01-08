@@ -20,7 +20,11 @@ dependencies {
 jar {
     archiveFileName.set("teamtool.jar")
     destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    from configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+    from(configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}) {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                 'Implementation-Version': '6.1.0',

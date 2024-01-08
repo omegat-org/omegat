@@ -57,10 +57,12 @@ public abstract class AbstractRemoteRepository2IT {
     public void setUp() throws Exception {
 
         tempRepoDir = Files.createTempDirectory("omegat-team-repo");
+        tempDir = Files.createTempDirectory("omegat-team-it");
+
+        // Should create instance before preparing local repository.
+        rr2 = getRr2();
         prepareLocalRepo();
 
-        tempDir = Files.createTempDirectory("omegat-team-it");
-        rr2 = getRr2();
         repositoryDefinition = new RepositoryDefinition();
         configureRepositoryDefinition();
 

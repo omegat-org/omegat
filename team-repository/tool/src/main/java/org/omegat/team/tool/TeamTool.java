@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.team2;
+package org.omegat.team.tool;
 
 import java.io.BufferedWriter;
 import java.io.File;

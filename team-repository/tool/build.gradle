@@ -12,28 +12,19 @@ dependencies {
     } else {
         compileOnly(libs.slf4j.format.jdk14)
         implementation(libs.bundles.jgit)
-        // For ed25519 and ecdsa support of ssh, java16+ or BC
-        implementation(libs.bundles.ecdsa)
-        // For gpg signing
-        implementation(libs.jgit.bc)
+        implementation(libs.svnkit)
     }
     testImplementation(testFixtures(project.rootProject))
 }
 
 jar {
-    archiveAppendix.set("repository")
+    archiveFileName.set("teamtool.jar")
     destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
     from configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
-    def pluginProp = loadProperties(file('plugin.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
+                'Implementation-Version': '6.1.0',
+                'Main-Class': 'org.omegat.team.tool.TeamTool'
         )
     }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE

@@ -85,6 +85,11 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         baseDirectory = dir;
     }
 
+    @Override
+    public boolean isSupported(final String url) {
+        return url.startsWith("http://") || url.startsWith("https://");
+    }
+
     /**
      * Use SHA-1 as file version.
      */

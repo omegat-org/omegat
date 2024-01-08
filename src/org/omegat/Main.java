@@ -44,6 +44,10 @@ import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -82,7 +86,6 @@ import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
-import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
@@ -97,6 +100,7 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
@@ -141,7 +145,7 @@ public final class Main {
         }
 
         if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
-            TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
+            startTeamTool(args);
         }
 
         // Workaround for Java 17 or later support of JAXB.
@@ -233,6 +237,23 @@ public final class Main {
         }
         if (result != 0) {
             System.exit(result);
+        }
+    }
+
+    private static void startTeamTool(String[] args) {
+        String mainClasspath = "org.omegat.team.tool.TeamTool";
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        URL[] urls = new URL[1];
+        try {
+            urls[0] = Paths.get(StaticUtils.installDir(), "modules", "teamtool.jar").toUri().toURL();
+            MainClassLoader mainClassLoader = new MainClassLoader(urls, cl);
+            Class<?> mainClass = mainClassLoader.loadClass(mainClasspath);
+            Method mainMethod = mainClass.getDeclaredMethod("main",  String[].class);
+            Object[] arguments = Arrays.copyOfRange(args, 1, args.length);
+            mainMethod.invoke(null, arguments);
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
+                 InvocationTargetException | MalformedURLException e) {
+            throw new RuntimeException(e);
         }
     }
 

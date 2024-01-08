@@ -73,6 +73,11 @@ public class FileRepository implements IRemoteRepository2 {
     }
 
     @Override
+    public boolean isSupported(final String url) {
+        return url.startsWith("file://");
+    }
+
+    @Override
     public String getFileVersion(String file) throws Exception {
         return null;
     }

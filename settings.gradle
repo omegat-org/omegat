@@ -15,4 +15,5 @@ include("machinetranslators:apertium",
         "spellchecker:hunspell-jmyspell",
         "team-repository:git",
         "team-repository:svn",
+        "team-repository:tool",
         "tipoftheday")

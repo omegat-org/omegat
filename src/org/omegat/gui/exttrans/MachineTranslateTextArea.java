@@ -270,7 +270,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
                     return cached;
                 }
             }
-            // Ask engine when forced or visit untranslated entry.
+            // Ask MT engine when forced, or visiting an untranslated entry.
             try {
                 return translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {

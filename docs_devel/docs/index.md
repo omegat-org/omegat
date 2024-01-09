@@ -34,6 +34,7 @@
 
 * [Test and coverage](33.TestAndCoverage.md)
 * [Integration test](34.IntegrationTest.md)
+* [Test a spcific features](35.SpecificFeatureTests.md)
 
 ## Documentation
 

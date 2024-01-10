@@ -649,7 +649,8 @@ public final class ProjectUICommands {
                             backup.getName());
                     Core.getProject().saveProjectProperties();
                 } else if (FileUtil.getRecentBackup(projectFile) == null) {
-                    FileUtil.backupFile(projectFile);
+                    File backup = new File(projectRootFolder, FileUtil.getBackupFilename(projectFile));
+                    ProjectFileStorage.writeProjectFile(backup, propsP);
                 } else if (finalNewProjectFile != null) {
                     FileUtils.deleteQuietly(finalNewProjectFile);
                 }

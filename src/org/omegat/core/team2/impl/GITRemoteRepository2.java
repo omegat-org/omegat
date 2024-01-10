@@ -122,14 +122,17 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     public static void loadPlugins() {
         RemoteRepositoryFactory.addRepositoryConnector("git", GITRemoteRepository2.class);
-        installSshSessionFactory();
-        GITCredentialsProvider.install();
     }
 
     /**
      * Plugin unloader.
      */
     public static void unloadPlugins() {
+    }
+
+    public GITRemoteRepository2() {
+        installSshSessionFactory();
+        GITCredentialsProvider.install();
     }
 
     private static void installSshSessionFactory() {

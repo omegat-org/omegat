@@ -202,8 +202,8 @@ public final class ProjectFileStorage {
     }
 
     /**
-￼     * Saves project file to disk.
-￼     */
+     * Saves project file to disk.
+     */
     public static void writeProjectFile(File outFile, ProjectProperties props) throws Exception {
         String root = outFile.getAbsoluteFile().getParent();
 

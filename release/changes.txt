@@ -2,10 +2,25 @@
  OmegaT 6.0.1
 ----------------------------------------------------------------------
   0 Enhancement
-  3 Bug fixes
+  8 Bug fixes
 ----------------------------------------------------------------------
 
   Bug fixes:
+
+  - Match statistics are affected by fuzzy match threshold
+  https://sourceforge.net/p/omegat/bugs/1236/
+
+  - Repository mapping with SVN cause error
+  https://sourceforge.net/p/omegat/bugs/1232/
+
+  - List of issues stays hidden in the background
+  https://sourceforge.net/p/omegat/bugs/1225/
+
+  - Selection of match for pre-translation varies through different OS's
+  https://sourceforge.net/p/omegat/bugs/1213/
+
+  - Critical errors are logged, but no longer shown to the user
+  https://sourceforge.net/p/omegat/bugs/1207/
 
   - Google2 MT connector failed to parse response
   https://sourceforge.net/p/omegat/bugs/1206/

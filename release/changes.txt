@@ -2,7 +2,7 @@
  OmegaT 6.0.1
 ----------------------------------------------------------------------
   0 Enhancement
-  8 Bug fixes
+  9 Bug fixes
 ----------------------------------------------------------------------
 
   Bug fixes:
@@ -24,6 +24,9 @@
 
   - Google2 MT connector failed to parse response
   https://sourceforge.net/p/omegat/bugs/1206/
+
+  - Regular expression for custom tags
+  https://sourceforge.net/p/omegat/bugs/1193/
 
   - Dictionary displays apostrophe as html entity code
   https://sourceforge.net/p/omegat/bugs/1181/

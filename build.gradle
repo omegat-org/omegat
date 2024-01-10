@@ -420,7 +420,8 @@ launch4j {
     jreMinVersion = '11'
     jreMaxVersion = '21'
     copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
-    bundledJrePath = 'jre' // assume bundled JRE is located in jre/
+    // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
+    bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
     requires64Bit = false  // support 32bit distribution
     restartOnCrash = false
     stayAlive = false

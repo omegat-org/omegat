@@ -417,8 +417,8 @@ launch4j {
     icon = "${projectDir}/images/OmegaT.ico"
     errTitle = 'OmegaT'
     headerType = 'gui'
-    jreMinVersion = '11'
-    jreMaxVersion = '21'
+    jreMinVersion = '11.0'
+    jreMaxVersion = '21.1'
     copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
     // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
     bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'

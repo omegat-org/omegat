@@ -304,8 +304,8 @@ launch4j {
     copyright = "The GNU General Public License, Version 3.0"
     version = omtVersion.version
     textVersion = omtVersion.version
-    companyName = distAppVendor
-    fileDescription = shortDescription
+    companyName = 'The OmegaT project'
+    fileDescription = 'The free translation memory tool'
     restartOnCrash = false
     stayAlive = false
     priority = 'normal'

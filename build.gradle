@@ -417,11 +417,17 @@ launch4j {
     icon = "${projectDir}/images/OmegaT.ico"
     errTitle = 'OmegaT'
     headerType = 'gui'
-    jreMinVersion = '11'
-    jreMaxVersion = '21'
+    jreMinVersion = '11.0'
+    jreMaxVersion = '21.1'
     copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
-    bundledJrePath = 'jre' // assume bundled JRE is located in jre/
+    // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
+    bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
     requires64Bit = false  // support 32bit distribution
+    copyright = "The GNU General Public License, Version 3.0"
+    version = omtVersion.version
+    textVersion = omtVersion.version
+    companyName = distAppVendor
+    fileDescription = shortDescription
     restartOnCrash = false
     stayAlive = false
     priority = 'normal'

@@ -424,8 +424,8 @@ launch4j {
     bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
     requires64Bit = false  // support 32bit distribution
     copyright = "The GNU General Public License, Version 3.0"
-    version = omtVersion
-    textVersion = omtVersoin.version
+    version = omtVersion.version
+    textVersion = omtVersion.version
     companyName = distAppVendor
     fileDescription = shortDescription
     restartOnCrash = false

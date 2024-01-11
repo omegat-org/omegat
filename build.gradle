@@ -425,7 +425,7 @@ launch4j {
     requires64Bit = false  // support 32bit distribution
     copyright = "The GNU General Public License, Version 3.0"
     version = omtVersion
-    textVersion = omtVersion
+    textVersion = omtVersoin.version
     companyName = distAppVendor
     fileDescription = shortDescription
     restartOnCrash = false

@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.JarURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -180,6 +181,8 @@ public final class PluginLifecycleManager {
         } catch (IOException ex) {
             Log.log(ex);
             return false;
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
         return result;
     }
@@ -213,8 +216,8 @@ public final class PluginLifecycleManager {
         return pluginClassLoaders.get(name);
     }
 
-    private Path getJarFilePathFromResourceUrl(URL url) throws IOException {
+    private Path getJarFilePathFromResourceUrl(URL url) throws IOException, URISyntaxException {
         JarURLConnection connection = (JarURLConnection) url.openConnection();
-        return Path.of(connection.getJarFileURL().getFile());
+        return Paths.get(connection.getJarFileURL().toURI());
     }
 }

@@ -79,9 +79,10 @@ public class GlossarySearcher {
         // After the matched entries have been tokenized and listed,
         // we reorder entries as
         // 1) by priority
-        // 2) by alphabet of source term
-        // 3) by length of localized term (optional)
-        // 4) by alphabet of localized term
+        // 2) by length of source text if one contains another (optional)
+        // 3) by alphabet of source term
+        // 4) by length of localized term (optional)
+        // 5) by alphabet of localized term
         // Then remove the duplicates and combine the synonyms.
         sortGlossaryEntries(result);
         return filterGlossary(result, mergeAltDefinitions);
@@ -240,14 +241,19 @@ public class GlossarySearcher {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
+            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false)
+                    && (o2.getSrcText().contains(o1.getSrcText()) || o1.getSrcText().contains(o2.getSrcText()))) {
+                // longer is better if one contains another
+                c = o2.getSrcText().length() - o1.getSrcText().length();
+            }
+            // sort source text alphabetically, first ignore a case, then consider a case
             if (c == 0) {
                 c = o1.getSrcText().compareToIgnoreCase(o2.getSrcText());
             }
             if (c == 0) {
                 c = o1.getSrcText().compareTo(o2.getSrcText());
             }
-            if (c == 0 && Preferences.isPreferenceDefault(
-                    Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
+            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
                 c = o2.getLocText().length() - o1.getLocText().length();
             }
             if (c == 0) {

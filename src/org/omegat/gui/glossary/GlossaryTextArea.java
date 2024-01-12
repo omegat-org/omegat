@@ -433,6 +433,13 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         });
         menu.add(notify);
         menu.addSeparator();
+        final JMenuItem sortOrderSrcLength = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_SORT_BY_SRC_LENGTH"));
+        sortOrderSrcLength
+                .setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false));
+        sortOrderSrcLength.addActionListener(actionEvent -> Preferences
+                .setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, sortOrderSrcLength.isSelected()));
+        menu.add(sortOrderSrcLength);
         final JMenuItem sortOrderLocLength = new JCheckBoxMenuItem(
                 OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_SORT_BY_LENGTH"));
         sortOrderLocLength

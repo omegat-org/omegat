@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -37,6 +38,7 @@ import org.omegat.util.gui.DelegatingComboBoxRenderer;
 
 /**
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public class GlossaryPreferencesController extends BasePreferencesController {
 
@@ -76,11 +78,16 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.useStemmingCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
                 Preferences.GLOSSARY_STEMMING_DEFAULT));
         panel.replaceHitsCheckBox.setSelected(Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT));
-        panel.requireSimilarCaseCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
-                Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT));
+        panel.requireSimilarCaseCheckBox.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT));
         panel.cbGlossaryLayout.setSelectedItem(GlossaryRenderers.getPreferredGlossaryRenderer());
-        panel.mergeAlternateDefinitionsCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS, 
+        panel.mergeAlternateDefinitionsCheckBox.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS,
                 Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT));
+        panel.sortBySrcTextLengthCheckBox.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false));
+        panel.sortByTextLengthCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH,
+                false));
     }
 
     @Override
@@ -92,6 +99,8 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         panel.requireSimilarCaseCheckBox.setSelected(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT);
         panel.cbGlossaryLayout.setSelectedItem(GlossaryRenderers.DEFAULT_RENDERER);
         panel.mergeAlternateDefinitionsCheckBox.setSelected(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT);
+        panel.sortBySrcTextLengthCheckBox.setSelected(false);
+        panel.sortByTextLengthCheckBox.setSelected(false);
     }
 
     @Override
@@ -100,8 +109,13 @@ public class GlossaryPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.GLOSSARY_NOT_EXACT_MATCH, panel.useSeparateTermsCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_STEMMING, panel.useStemmingCheckBox.isSelected());
         Preferences.setPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT, panel.replaceHitsCheckBox.isSelected());
-        Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, panel.requireSimilarCaseCheckBox.isSelected());
+        Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
+                panel.requireSimilarCaseCheckBox.isSelected());
         GlossaryRenderers.setPreferredGlossaryRenderer((IGlossaryRenderer) panel.cbGlossaryLayout.getSelectedItem());
-        Preferences.setPreference(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS, panel.mergeAlternateDefinitionsCheckBox.isSelected());
+        Preferences.setPreference(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS,
+                panel.mergeAlternateDefinitionsCheckBox.isSelected());
+        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, panel.sortByTextLengthCheckBox.isSelected());
+        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH,
+                panel.sortBySrcTextLengthCheckBox.isSelected());
     }
 }

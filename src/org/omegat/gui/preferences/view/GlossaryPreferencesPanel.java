@@ -60,6 +60,8 @@ public class GlossaryPreferencesPanel extends JPanel {
         cbGlossaryLayout = new javax.swing.JComboBox<>();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         mergeAlternateDefinitionsCheckBox = new javax.swing.JCheckBox();
+        sortBySrcTextLengthCheckBox = new javax.swing.JCheckBox();
+        sortByTextLengthCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -94,6 +96,12 @@ public class GlossaryPreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(mergeAlternateDefinitionsCheckBox, OStrings.getString("PREFS_GLOSSARY_MERGE_ALTERNATE_DEFINITIONS")); // NOI18N
         add(mergeAlternateDefinitionsCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(sortBySrcTextLengthCheckBox, OStrings.getString("PREFS_GLOSSARY_SORT_BY_SRC_LENGTH"));
+        add(sortBySrcTextLengthCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(sortByTextLengthCheckBox, OStrings.getString("PREFS_GLOSSARY_SORT_BY_LENGTH"));
+        add(sortByTextLengthCheckBox);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -106,6 +114,8 @@ public class GlossaryPreferencesPanel extends JPanel {
     javax.swing.JCheckBox mergeAlternateDefinitionsCheckBox;
     javax.swing.JCheckBox replaceHitsCheckBox;
     javax.swing.JCheckBox requireSimilarCaseCheckBox;
+    javax.swing.JCheckBox sortBySrcTextLengthCheckBox;
+    javax.swing.JCheckBox sortByTextLengthCheckBox;
     javax.swing.JCheckBox useSeparateTermsCheckBox;
     javax.swing.JCheckBox useStemmingCheckBox;
     // End of variables declaration//GEN-END:variables

@@ -12,6 +12,7 @@ icu4j = { require = "[70,73.2[", prefer = "72.1" }
 stax2api = "4.2.2"
 woodstox = "6.5.0"
 languagetool = "6.1"
+languagedetector = "0.6-1"
 lucene = "5.5.5"
 checkstyle = "8.45.1"
 guava = "31.0.1-jre"
@@ -129,6 +130,7 @@ jaxb-xjc = {group = "org.grassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"
 tipoftheday = {group = "tokyo.northside", name = "tipoftheday", version.ref = "tipoftheday"}
 jna = {group = "net.java.dev.jna", name = "jna-platform", version.ref = "jna"}
 jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
+language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
@@ -136,7 +138,8 @@ jackson = ["jackson-core", "jackson-databind", "jackson-jaxb", "jackson-xml", "j
 ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]
-languagetool-tests = ["languagetool-be", "languagetool-fr", "languagetool-en", "languagetool-ja", "languagetool-pl"]
+languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr", "languagetool-en",
+    "languagetool-ja", "languagetool-pl"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]

@@ -181,8 +181,7 @@ public class GlossarySearcher {
 
     protected static boolean isCjkMatch(String fullText, String term) {
         // This is a CJK word and our source language is not space-delimited, so
-        // include if
-        // word appears anywhere in source string.
+        // include if word appears anywhere in source string.
         IProject project = Core.getProject();
         return project.isProjectLoaded()
                 && !project.getProjectProperties().getSourceLanguage().isSpaceDelimited()
@@ -191,8 +190,7 @@ public class GlossarySearcher {
 
     private static List<Token[]> getCjkMatchingTokens(String fullText, String term) {
         // This is a CJK word and our source language is not space-delimited, so
-        // include if
-        // word appears anywhere in source string.
+        // include if word appears anywhere in source string.
         IProject project = Core.getProject();
         if (!project.isProjectLoaded()
                 || project.getProjectProperties().getSourceLanguage().isSpaceDelimited()) {

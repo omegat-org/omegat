@@ -46,8 +46,8 @@ public enum PluginType {
      */
     MARKER("marker"),
     /**
-     * Machine Translator service connectors, that provide
-     * IMachineTranslation API.
+     * Machine Translator service connectors, that provide IMachineTranslation
+     * API.
      */
     MACHINETRANSLATOR("machinetranslator"),
     /**

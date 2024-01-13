@@ -44,7 +44,8 @@ import org.omegat.util.TestPreferencesInitializer;
 
 public class PluginsTest {
 
-    private static final Path PLUGINS_FILE = Paths.get(StaticUtils.installDir(), PluginLifecycleManager.PLUGINS_LIST_FILE);
+    private static final Path PLUGINS_FILE = Paths.get(StaticUtils.installDir(),
+            PluginLifecycleManager.PLUGINS_LIST_FILE);
 
     @Test
     public void testPluginsListWhitespace() throws Exception {
@@ -60,7 +61,8 @@ public class PluginsTest {
             plugins.load(fr);
         }
 
-        TestPreferencesInitializer.init(); // Some plugins depend on inited prefs
+        TestPreferencesInitializer.init(); // Some plugins depend on inited
+                                           // prefs
         for (Object o : plugins.keySet()) {
             if (o.toString().startsWith("plugin.desc")) {
                 continue;

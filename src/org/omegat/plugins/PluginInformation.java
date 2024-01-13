@@ -55,7 +55,8 @@ public final class PluginInformation {
     private final URL url;
     private final Status status;
 
-    /* The class is recommend to build from builder. */
+    /* The class is recommended to build from builder. */
+    @SuppressWarnings("ParameterNumber")
     private PluginInformation(String className, String name, String version, String author,
                               String description, PluginType category, String link, URL url, Status status) {
         this.className = className;
@@ -138,11 +139,10 @@ public final class PluginInformation {
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PluginInformation [className=").append(className).append(", name=").append(name)
-                .append(", version=").append(version).append(", author=").append(author)
-                .append(", description=").append(description).append("]");
-        return builder.toString();
+        String builder = "PluginInformation [className=" + className + ", name=" + name
+                + ", version=" + version + ", author=" + author + ", description=" + description
+                + "]";
+        return builder;
     }
 
     /**
@@ -163,34 +163,42 @@ public final class PluginInformation {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PluginInformation other = (PluginInformation) obj;
         if (author == null) {
-            if (other.author != null)
+            if (other.author != null) {
                 return false;
-        } else if (!author.equals(other.author))
+            }
+        } else if (!author.equals(other.author)) {
             return false;
+        }
         if (className == null) {
-            if (other.className != null)
+            if (other.className != null) {
                 return false;
-        } else if (!className.equals(other.className))
+            }
+        } else if (!className.equals(other.className)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (version == null) {
-            if (other.version != null)
-                return false;
-        } else if (!version.equals(other.version))
-            return false;
-        return true;
+            return other.version == null;
+        } else {
+            return version.equals(other.version);
+        }
     }
 
     /**

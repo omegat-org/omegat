@@ -79,10 +79,10 @@ public final class PluginLifecycleManager {
     /**
      * Plugin lifecycle manager.
      * <p>
-     * This is a class to manage plugin life cycles.
-     * We manage plugins with several plugin layers; user plugins, system plugins and system modules.
-     * We also handle theme plugins as special for treatment, we also have ui plugin layer.
-     * We look the following directories.
+     * This is a class to manage plugin life cycles. We manage plugins with
+     * several plugin layers; user plugins, system plugins and system modules.
+     * We also handle theme plugins as special for treatment, we also have ui
+     * plugin layer. We look the following directories.
      * <ul>
      * <li>(configdir)/plugins/ User level 3rd party plugins</li>
      * <li>(installdir/plugins/ System level 3rd party plugins</li>
@@ -151,8 +151,8 @@ public final class PluginLifecycleManager {
         }
 
         // 2. loads from modules.
-        List<URL> moduleUrlList = PluginUtils.populatePluginUrlList(
-                Collections.singletonList(pluginDirectories.get(MODULE_KEY).toFile()));
+        List<URL> moduleUrlList = PluginUtils
+                .populatePluginUrlList(Collections.singletonList(pluginDirectories.get(MODULE_KEY).toFile()));
         moduleUrlList.forEach(url -> loadPlugin(url, MODULE_LAYER));
 
         // 3. loads from system plugins.
@@ -270,7 +270,8 @@ public final class PluginLifecycleManager {
                         return PluginUtils.getJarFileUrlFromResourceUrl(mu);
                     }
                 } catch (UnsupportedClassVersionError e) {
-                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", PluginUtils.getJarFileUrlFromResourceUrl(mu));
+                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR",
+                            PluginUtils.getJarFileUrlFromResourceUrl(mu));
                 }
             }
         } catch (IOException ex) {

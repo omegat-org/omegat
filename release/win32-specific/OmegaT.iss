@@ -205,7 +205,7 @@ function PrepareToInstall(var NeedsRestart: Boolean): String;
 begin
   if not DelTreeIfPresent(ExpandConstant('{app}/lib')) then
     Result := 'Failed to remove existing ' + ExpandConstant('{app}/lib') + ' directory'
-  else if not  DelTreeIfPresent(ExpandConstant('{app}/jre')) then
+  else if not DelTreeIfPresent(ExpandConstant('{app}/jre')) then
     Result := 'Failed to remove existing ' + ExpandConstant('{app}/jre') + ' directory'
   else
     Result := '';

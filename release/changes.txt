@@ -2,10 +2,14 @@
  OmegaT 6.0.1
 ----------------------------------------------------------------------
   0 Enhancement
-  9 Bug fixes
+ 12 Bug fixes
+  1 Localisation updates
 ----------------------------------------------------------------------
 
   Bug fixes:
+
+  - Windows launcher does not launch when without_JRE installer used
+  https://sourceforge.net/p/omegat/bugs/1240/
 
   - Match statistics are affected by fuzzy match threshold
   https://sourceforge.net/p/omegat/bugs/1236/
@@ -25,21 +29,31 @@
   - Google2 MT connector failed to parse response
   https://sourceforge.net/p/omegat/bugs/1206/
 
+  - Old icons still visible in Windows build
+  https://sourceforge.net/p/omegat/bugs/1195/
+
   - Regular expression for custom tags
   https://sourceforge.net/p/omegat/bugs/1193/
+
+  - Content of notes elements are not displayed correctly with Xliff filter
+  https://sourceforge.net/p/omegat/bugs/1192/
 
   - Dictionary displays apostrophe as html entity code
   https://sourceforge.net/p/omegat/bugs/1181/
 
-  - Content of notes elements are not displayed correctly with Xliff filter
-  https://sourceforge.net/p/omegat/bugs/1192/
+  - Backup file does not created in no-team project
+  https://sourceforge.net/p/omegat/bugs/1159/
+
+  Localization Updates:
+
+  - French localization updated (UI, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-22)
 ----------------------------------------------------------------------
   1 Enhancement
   1 Bug fixes
-  11 Localisation updates
+ 11 Localisation updates
 ----------------------------------------------------------------------
 6.0.0 vs 5.8.0
 

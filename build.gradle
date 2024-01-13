@@ -14,6 +14,7 @@ plugins {
     id 'com.diffplug.spotless' version '6.0.0'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'ru.vyarus.mkdocs' version '3.0.0'
+    id 'edu.sc.seis.launch4j' version '3.0.5'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -280,6 +281,34 @@ ext {
 
     windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x86-32_windows_*.zip')
     windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK11U-jre_x64_windows_*.zip')
+}
+
+/*
+ * Configuration of launch4j java launcher.
+ * OmegaT uses it as launcher for windows.
+ */
+launch4j {
+    libraryDir = "." // assume OmegaT.jar is located as same folder as OmegaT.exe
+    dontWrapJar = true
+    downloadUrl = 'https://adoptium.net/'
+    supportUrl = 'https://omegat.org/support'
+    icon = "${projectDir}/images/OmegaT.ico"
+    errTitle = 'OmegaT'
+    headerType = 'gui'
+    jreMinVersion = '11.0'
+    jreMaxVersion = '21.1'
+    copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
+    // assume bundled JRE in jre/, fallback to JAVA_HOME and PATH
+    bundledJrePath = 'jre;%JAVA_HOME%;%PATH%' 
+    requires64Bit = false  // support 32bit distribution
+    copyright = "The GNU General Public License, Version 3.0"
+    version = omtVersion.version
+    textVersion = omtVersion.version
+    companyName = 'The OmegaT project'
+    fileDescription = 'The free translation memory tool'
+    restartOnCrash = false
+    stayAlive = false
+    priority = 'normal'
 }
 
 task genDocIndex(type: Copy) {
@@ -635,11 +664,15 @@ ext.makeWinTask = { args ->
         description = "Create a Windows installer for ${args.name} distro. " +
             'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         with distributions.main.contents
-        from ('release/win32-specific') {
-            include 'OmegaT.exe', 'OmegaT.l4J.ini'
+        dependsOn createAllExecutables
+        from('release/win32-specific') {
+            include 'OmegaT.l4J.ini'
+        }
+        from('build/launch4j') {
+            include '*.exe'
         }
         if (args.jrePath && !args.jrePath.empty) {
-            from (zipTree(args.jrePath.singleFile)) {
+            from(zipTree(args.jrePath.singleFile)) {
                 includeEmptyDirs = false
                 eachFile {
                     replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
@@ -656,9 +689,12 @@ ext.makeWinTask = { args ->
         doFirst {
             delete "$destinationDir/jre"
             delete installerExe
-            exec {
-                commandLine 'chmod', '-R', 'a+w', 'build'
-                ignoreExitValue true
+            project.copy {
+                from 'build'
+                into 'build'
+                include 'innosetup/**/*'
+                dirMode 0777
+                fileMode 0666
             }
         }
         doLast {
@@ -673,13 +709,13 @@ ext.makeWinTask = { args ->
                     CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
                     ARCHITECTURE_SUBST: args.arch ?: ''
                 ])
-                filter(FixCrLfFilter,  eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
                 filteringCharset = 'UTF-8'
             }
             exec {
                 // You'd think we could just set the PATH, but there be dragons here
                 // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('iscc') ?  'iscc' : file('ci/iscc')
+                def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
                 commandLine exe, "${destinationDir}/OmegaT.iss"
             }
             ant.move file: "${destinationDir}/${installerBasename}.exe",

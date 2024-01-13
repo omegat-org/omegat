@@ -44,7 +44,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.glossaries.IGlossary;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugins.PluginUtils;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.Language;

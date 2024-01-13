@@ -41,7 +41,7 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.omegat.CLIParameters;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugins.PluginUtils;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -50,7 +50,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StringUtil;
-import org.omegat.util.module.PluginLifecycleManager;
+import org.omegat.plugins.PluginLifecycleManager;
 
 /**
  * A utility class implementing useful tools related to team projects. Intended

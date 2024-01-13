@@ -41,7 +41,7 @@ import org.omegat.core.Core;
 import org.omegat.gui.dialogs.ChoosePluginFile;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
-import org.omegat.util.PluginInstaller;
+import org.omegat.plugins.PluginInstaller;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
 

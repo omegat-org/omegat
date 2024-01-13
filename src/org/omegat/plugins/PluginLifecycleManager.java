@@ -23,8 +23,10 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package org.omegat.util.module;
+package org.omegat.plugins;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -39,11 +41,12 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.jar.Manifest;
 
-import org.omegat.MainClassLoader;
+import org.omegat.CLIParameters;
+import org.omegat.plugins.cl.MainClassLoader;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 
@@ -52,6 +55,7 @@ import org.omegat.util.StaticUtils;
  */
 public final class PluginLifecycleManager {
 
+    public static final String PLUGINS_LIST_FILE = "Plugins.properties";
     private static PluginLifecycleManager pluginLifecycleManager;
 
     private final Map<String, Path> pluginDirectories = new HashMap<>();
@@ -90,6 +94,29 @@ public final class PluginLifecycleManager {
         initPluginLayers();
     }
 
+    public static void loadSystemPluginsForDev(Map<String, String> params, ClassLoader pluginsClassLoader) {
+        try {
+            // development mode - load from dev-manifests CLI arg
+            String manifests = params.get(CLIParameters.DEV_MANIFESTS);
+            if (manifests != null) {
+                for (String mf : manifests.split(File.pathSeparator)) {
+                    try (InputStream in = Files.newInputStream(Paths.get(mf))) {
+                        PluginUtils.loadFromManifest(new Manifest(in), pluginsClassLoader, null);
+                    }
+                }
+            } else {
+                // load from `Plugins.properties` file
+                Properties props = new Properties();
+                try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
+                    props.load(fis);
+                    PluginUtils.loadFromProperties(props, pluginsClassLoader);
+                }
+            }
+        } catch (ClassNotFoundException | IOException ex) {
+            Log.log(ex);
+        }
+    }
+
     private void initPluginLayers() {
         // UI_LAYER class loader should have hierarchy SYSTEM->UI
         // Because UIManager shall find VLDocking library is in
@@ -114,10 +141,10 @@ public final class PluginLifecycleManager {
     public void loadPlugins(Map<String, String> params) {
         // 1. load from application context class loader.
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
-        URL mainClassJar = PluginUtils.getMainClassJarFile(cl);
+        URL mainClassJar = getMainClassJarFile(cl);
         if (mainClassJar == null) {
             // run from development environment.
-            PluginUtils.loadSystemPluginsForDev(params, cl);
+            loadSystemPluginsForDev(params, cl);
         } else {
             // run from OmegaT.jar
             loadPlugin(cl, mainClassJar);
@@ -140,6 +167,9 @@ public final class PluginLifecycleManager {
 
         // 5. set filter classes
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+
+        // 6. enable base plugin
+        activateBasePlugins();
     }
 
     public void loadPlugin(URL url, String layer) {
@@ -191,6 +221,17 @@ public final class PluginLifecycleManager {
         PluginUtils.unloadPlugins();
     }
 
+    public static void activateBasePlugins() {
+        // run base plugins
+        for (Class<?> pl : PluginUtils.BASE_PLUGIN_CLASSES) {
+            try {
+                pl.getDeclaredConstructor().newInstance();
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
+    }
+
     public boolean unloadPlugin(String className) {
         ClassLoader classLoader = pluginClassLoaders.get(className);
         if (classLoader == null) {
@@ -214,6 +255,28 @@ public final class PluginLifecycleManager {
             pluginClassLoaders.put(name, new MainClassLoader());
         }
         return pluginClassLoaders.get(name);
+    }
+
+    private static URL getMainClassJarFile(ClassLoader pluginsClassLoader) {
+        // look on all manifests
+        try {
+            Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF");
+            while (mlist.hasMoreElements()) {
+                URL mu = mlist.nextElement();
+                try (InputStream in = mu.openStream()) {
+                    Manifest m = new Manifest(in);
+                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
+                        // found main manifest - not in development mode
+                        return PluginUtils.getJarFileUrlFromResourceUrl(mu);
+                    }
+                } catch (UnsupportedClassVersionError e) {
+                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", PluginUtils.getJarFileUrlFromResourceUrl(mu));
+                }
+            }
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
+        return null;
     }
 
     private boolean isSameJarFile(URL url1, URL url2) {

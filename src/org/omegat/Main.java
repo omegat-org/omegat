@@ -98,7 +98,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
-import org.omegat.util.module.PluginLifecycleManager;
+import org.omegat.plugins.PluginLifecycleManager;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 

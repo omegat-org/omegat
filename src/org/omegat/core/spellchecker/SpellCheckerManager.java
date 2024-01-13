@@ -28,7 +28,7 @@ package org.omegat.core.spellchecker;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugins.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;

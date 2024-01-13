@@ -1,10 +1,9 @@
-/*
- **************************************************************************
+/*******************************************************************************
  *  OmegaT - Computer Assisted Translation (CAT) tool
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2022 Hiroshi Miura.
+ *  Copyright (C) 2022-2024 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -22,9 +21,9 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ ******************************************************************************/
 
-package org.omegat.util;
+package org.omegat.plugins;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -42,9 +41,6 @@ import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import org.omegat.core.data.PluginInformation;
-import org.omegat.filters2.master.PluginUtils;
 
 public class PluginInstallerTest {
         private File tmpDir;
@@ -94,7 +90,7 @@ public class PluginInstallerTest {
             String pluginName = pluginInformation.getName();
             assertTrue(expectedSet.contains(pluginName));
             assertEquals("", pluginInformation.getVersion());
-            assertEquals(PluginUtils.PluginType.FILTER, pluginInformation.getCategory());
+            assertEquals(PluginType.FILTER, pluginInformation.getCategory());
             if (pluginName.equals("MsOfficeFileFilter")) {
                 assertEquals("org.omegat.filters4.xml.openxml.MsOfficeFileFilter",
                         pluginInformation.getClassName());
@@ -115,7 +111,7 @@ public class PluginInstallerTest {
             String pluginName = pluginInformation.getName();
             assertEquals("Stax plugin", pluginName);
             assertEquals("2.1.3", pluginInformation.getVersion());
-            assertEquals(PluginUtils.PluginType.FILTER, pluginInformation.getCategory());
+            assertEquals(PluginType.FILTER, pluginInformation.getCategory());
             assertTrue(pluginInformation.getClassName().startsWith("org.omegat.filters4.xml"));
         }
     }

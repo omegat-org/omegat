@@ -1,37 +1,36 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*******************************************************************************
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2020 Briac Pilpre
+ *                2021-2024 Hiroshi Miura
+ *                Home page: https://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ ******************************************************************************/
 
- Copyright (C) 2020 Briac Pilpre
-               2021,2022 Hiroshi Miura
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.core.data;
+package org.omegat.plugins;
 
 import java.net.URL;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.OStrings;
 
 /**
@@ -51,14 +50,14 @@ public final class PluginInformation {
     private final String version;
     private final String author;
     private final String description;
-    private final PluginUtils.PluginType category;
+    private final PluginType category;
     private final String link;
     private final URL url;
     private final Status status;
 
     /* The class is recommend to build from builder. */
     private PluginInformation(String className, String name, String version, String author,
-            String description, PluginUtils.PluginType category, String link, URL url, Status status) {
+                              String description, PluginType category, String link, URL url, Status status) {
         this.className = className;
         this.name = name;
         this.version = version;
@@ -108,7 +107,7 @@ public final class PluginInformation {
     /**
      * @return category type of plugin as PluginType enum
      */
-    public PluginUtils.PluginType getCategory() {
+    public PluginType getCategory() {
         return category;
     }
 
@@ -281,16 +280,16 @@ public final class PluginInformation {
                 final URL mu, final Status status) {
             return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
                     props.getProperty(String.format("plugin.desc.%s", key)),
-                    PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status);
+                    PluginType.getTypeByValue(key), LINK, mu, status);
         }
 
-        private static PluginUtils.PluginType findCategory(Attributes attrs) {
+        private static PluginType findCategory(Attributes attrs) {
             String categoryKey;
             categoryKey = lookupAttribute(attrs, PLUGIN_CATEGORY, PLUGIN_TYPE);
             if (categoryKey != null) {
-                return PluginUtils.PluginType.getTypeByValue(categoryKey);
+                return PluginType.getTypeByValue(categoryKey);
             }
-            return PluginUtils.PluginType.MISCELLANEOUS;
+            return PluginType.MISCELLANEOUS;
         }
 
         private static String findName(String className, Attributes attrs) {

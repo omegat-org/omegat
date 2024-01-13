@@ -54,7 +54,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.laf.SystemDarkThemeDetector;
-import org.omegat.util.module.PluginLifecycleManager;
+import org.omegat.plugins.PluginLifecycleManager;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;

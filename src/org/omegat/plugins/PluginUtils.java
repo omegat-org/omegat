@@ -1,46 +1,41 @@
-/**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+/*******************************************************************************
+ *  OmegaT - Computer Assisted Translation (CAT) tool
+ *           with fuzzy matching, translation memory, keyword search,
+ *           glossaries, and translation leveraging into updated projects.
+ *
+ *  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+￼*                2010 Alex Buloichik
+￼*                2021-2024 Hiroshi Miura
+ *                Home page: https://www.omegat.org/
+ *                Support center: https://omegat.org/support
+ *
+ *  This file is part of OmegaT.
+ *
+ *  OmegaT is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  OmegaT is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ ******************************************************************************/
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2010 Alex Buloichik
-               2021-2022 Hiroshi Miura
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
-
- This file is part of OmegaT.
-
- OmegaT is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- OmegaT is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
-
-package org.omegat.filters2.master;
+package org.omegat.plugins;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -54,10 +49,7 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
-import org.omegat.CLIParameters;
-import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
-import org.omegat.core.data.PluginInformation;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.Tokenizer;
@@ -65,7 +57,6 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.VersionChecker;
 
@@ -77,198 +68,11 @@ import org.omegat.util.VersionChecker;
  */
 public final class PluginUtils {
 
-    public static final String PLUGINS_LIST_FILE = "Plugins.properties";
-
-    /**
-     * Plugin type definitions.
-     */
-    public enum PluginType {
-        /** File filters that provide IFilter API. */
-        FILTER("filter"),
-        /**
-         * Tokenizers, currently bundled and it is for backward compatibility.
-         */
-        TOKENIZER("tokenizer"),
-        /** Markers, that provide IMaker, mostly bundled. */
-        MARKER("marker"),
-        /**
-         * Machine Translator service connectors, that provide
-         * IMachineTranslation API.
-         */
-        MACHINETRANSLATOR("machinetranslator"),
-        /** A plugin that change base of OmegaT system, not recommended. */
-        BASE("base"),
-        /**
-         * Glosary, that provide IGlossary API.
-         */
-        GLOSSARY("glossary"),
-        /**
-         * Dictionary files/services connectors, that provide IDictionary and/or
-         * IDictionaryFactory API.
-         */
-        DICTIONARY("dictionary"),
-        /**
-         * theme, that register Swing-Look-and-Feel with OmegaT properties into
-         * UIManager.
-         */
-        THEME("theme"),
-        /**
-         * team repository version control system connector plugins.
-         */
-        REPOSITORY("repository"),
-        /**
-         * Misc plugins, such as a GUI extension like web browser support.
-         */
-        MISCELLANEOUS("miscellaneous"),
-        /**
-         * Spellchecker plugins.
-         */
-        SPELLCHECK("spellcheck"),
-        /**
-         * When plugin does not define any of the above.
-         */
-        UNKNOWN("Undefined");
-
-        private final String typeValue;
-
-        PluginType(String type) {
-            typeValue = type;
-        }
-
-        public String getTypeValue() {
-            return typeValue;
-        }
-
-        public static PluginType getTypeByValue(String str) {
-            if (!StringUtil.isEmpty(str)) {
-                String sType = str.toLowerCase(Locale.ENGLISH);
-                for (PluginType v : values()) {
-                    if (v.getTypeValue().equals(sType)) {
-                        return v;
-                    }
-                }
-            }
-            return UNKNOWN;
-        }
-    }
-
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATION = new HashSet<>();
 
     /** Private constructor to disallow creation */
     private PluginUtils() {
-    }
-
-    /**
-     * Loads all plugins from main classloader and from /plugins/ dir.
-     */
-    @Deprecated
-    public static void loadPlugins(Map<String, String> params, MainClassLoader mainClassLoader) {
-        final List<File> pluginsDirs = new ArrayList<>();
-        pluginsDirs.add(new File(StaticUtils.getConfigDir(), "plugins"));
-        pluginsDirs.add(new File(StaticUtils.installDir(), "plugins"));
-        pluginsDirs.add(new File(StaticUtils.installDir(), "modules"));
-        if (Paths.get(StaticUtils.installDir(), "build").toFile().exists()) {
-            // when developers run on source code tree, add system plugins
-            pluginsDirs
-                    .add(Paths.get(StaticUtils.installDir(), "build", "modules").toAbsolutePath().toFile());
-        }
-        List<URL> urlList = populatePluginUrlList(pluginsDirs);
-        MainClassLoader pluginsClassLoader;
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-        if (mainClassLoader != null) {
-            pluginsClassLoader = mainClassLoader;
-        } else {
-            pluginsClassLoader = MainClassLoader.findAncestor(cl);
-        }
-        if (pluginsClassLoader != null) {
-            urlList.forEach(pluginsClassLoader::addJarToClasspath);
-        } else {
-            pluginsClassLoader = MainClassLoader.newInstance(urlList.toArray(new URL[0]), cl);
-        }
-        URL mainClassJarURL = getMainClassJarFile(pluginsClassLoader);
-        if (mainClassJarURL == null) {
-            loadPlugins(pluginsClassLoader);
-            loadSystemPluginsForDev(params, pluginsClassLoader);
-        } else {
-            loadPlugins(pluginsClassLoader);
-        }
-        activateBasePlugins();
-    }
-
-    public static void activateBasePlugins() {
-        // run base plugins
-        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
-            try {
-                pl.getDeclaredConstructor().newInstance();
-            } catch (Exception ex) {
-                Log.log(ex);
-            }
-        }
-    }
-
-    private static void loadPlugins(ClassLoader pluginsClassLoader) {
-        try {
-            Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF");
-            while (mlist.hasMoreElements()) {
-                URL mu = mlist.nextElement();
-                try (InputStream in = mu.openStream()) {
-                    Manifest m = new Manifest(in);
-                    loadFromManifest(m, pluginsClassLoader, mu);
-                } catch (ClassNotFoundException e) {
-                    Log.log(e);
-                } catch (UnsupportedClassVersionError e) {
-                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
-                }
-            }
-        } catch (IOException ex) {
-            Log.log(ex);
-        }
-    }
-
-    public static URL getMainClassJarFile(ClassLoader pluginsClassLoader) {
-        // look on all manifests
-        try {
-            Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF");
-            while (mlist.hasMoreElements()) {
-                URL mu = mlist.nextElement();
-                try (InputStream in = mu.openStream()) {
-                    Manifest m = new Manifest(in);
-                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
-                        // found main manifest - not in development mode
-                        return getJarFileUrlFromResourceUrl(mu);
-                    }
-                } catch (UnsupportedClassVersionError e) {
-                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
-                }
-            }
-        } catch (IOException ex) {
-            Log.log(ex);
-        }
-        return null;
-    }
-
-    public static void loadSystemPluginsForDev(Map<String, String> params, ClassLoader pluginsClassLoader) {
-        try {
-            // development mode - load from dev-manifests CLI arg
-            String manifests = params.get(CLIParameters.DEV_MANIFESTS);
-            if (manifests != null) {
-                for (String mf : manifests.split(File.pathSeparator)) {
-                    try (InputStream in = Files.newInputStream(Paths.get(mf))) {
-                        loadFromManifest(new Manifest(in), pluginsClassLoader, null);
-                    }
-                }
-            } else {
-                // load from `Plugins.properties` file
-                Properties props = new Properties();
-                try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
-                    props.load(fis);
-                    loadFromProperties(props, pluginsClassLoader);
-                }
-            }
-        } catch (ClassNotFoundException | IOException ex) {
-            Log.log(ex);
-        }
     }
 
     /**
@@ -479,25 +283,19 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
-    public static List<URL> getThemePluginJars() {
-        return THEME_PLUGIN_JARS;
-    }
+    static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
-    private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
+    static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
 
-    private static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
+    static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
 
-    private static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
+    static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
 
-    private static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
+    static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
 
-    private static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
+    static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
-    private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
-
-    private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
-
-    private static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
+    static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
 
     /**
      * Parse one manifest file.
@@ -509,7 +307,7 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             when plugin class is not found.
      */
-    public static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
+    static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
             throws ClassNotFoundException {
         String classes = m.getMainAttributes().getValue("OmegaT-Plugins");
         if (classes != null) {
@@ -531,7 +329,7 @@ public final class PluginUtils {
         loadFromManifestOld(m, classLoader);
     }
 
-    private static void loadFromProperties(Properties props, ClassLoader classLoader)
+    static void loadFromProperties(Properties props, ClassLoader classLoader)
             throws ClassNotFoundException {
         for (Object o : props.keySet()) {
             String key = o.toString();
@@ -591,7 +389,7 @@ public final class PluginUtils {
     /**
      * Old-style plugin loading.
      */
-    private static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
+    static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
             throws ClassNotFoundException {
         if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
             return;
@@ -613,7 +411,7 @@ public final class PluginUtils {
         }
     }
 
-    private static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
+    static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
             throws ClassNotFoundException {
         boolean loadOk = true;
         switch (PluginType.getTypeByValue(sType)) {

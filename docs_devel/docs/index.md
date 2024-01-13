@@ -56,6 +56,7 @@
 * [Editor pane Key assigns](80.EditorKeys.md)
 * [External Finder](81.ExternalFinder.md)
 * [How OmegaT create Backup files](82.BackupFiles.md)
+* [Team project](83.TeamProject.md)
 
 ## Other information
 

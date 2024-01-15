@@ -2,7 +2,7 @@
  OmegaT 6.0.1
 ----------------------------------------------------------------------
   0 Enhancement
- 12 Bug fixes
+ 13 Bug fixes
   1 Localisation updates
 ----------------------------------------------------------------------
 
@@ -40,6 +40,9 @@
 
   - Dictionary displays apostrophe as html entity code
   https://sourceforge.net/p/omegat/bugs/1181/
+
+  - Error when trying to backup the project file on Windows
+  https://sourceforge.net/p/omegat/bugs/1166/
 
   - Backup file does not created in no-team project
   https://sourceforge.net/p/omegat/bugs/1159/

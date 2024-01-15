@@ -139,8 +139,8 @@ public class AlignPanelController {
     private int ppRow = -1;
     private int ppCol = -1;
 
-    private AlignPanel panel;
-    private AlignMenuFrame frame;
+    private AlignPanel alignPanel;
+    private AlignMenuFrame alignMenuFrame;
 
     /**
      * The alignment workflow is separated into two phases:
@@ -175,93 +175,93 @@ public class AlignPanelController {
      *            Parent window of the align tool
      */
     public void show(Component parent) {
-        frame = new AlignMenuFrame();
-        frame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        alignMenuFrame = new AlignMenuFrame();
+        alignMenuFrame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
+        alignMenuFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        frame.addWindowListener(new WindowAdapter() {
+        alignMenuFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                closeFrame(frame);
+                closeFrame(alignMenuFrame);
             }
         });
 
-        panel = new AlignPanel();
+        alignPanel = new AlignPanel();
 
         ActionListener comparisonListener = e -> {
             ComparisonMode newValue = (ComparisonMode) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.comparisonMode && confirmReset(frame)) {
+            if (newValue != aligner.comparisonMode && confirmReset(alignMenuFrame)) {
                 aligner.comparisonMode = newValue;
                 reloadBeads();
             } else {
-                panel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
+                alignPanel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
             }
         };
-        panel.comparisonComboBox.addActionListener(comparisonListener);
-        panel.comparisonComboBox
+        alignPanel.comparisonComboBox.addActionListener(comparisonListener);
+        alignPanel.comparisonComboBox
                 .setRenderer(new EnumRenderer<ComparisonMode>("ALIGNER_ENUM_COMPARISON_MODE_"));
 
         ActionListener algorithmListener = e -> {
             AlgorithmClass newValue = (AlgorithmClass) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.algorithmClass && confirmReset(frame)) {
+            if (newValue != aligner.algorithmClass && confirmReset(alignMenuFrame)) {
                 aligner.algorithmClass = newValue;
                 reloadBeads();
             } else {
-                panel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
+                alignPanel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
             }
         };
-        panel.algorithmComboBox.addActionListener(algorithmListener);
-        panel.algorithmComboBox
+        alignPanel.algorithmComboBox.addActionListener(algorithmListener);
+        alignPanel.algorithmComboBox
                 .setRenderer(new EnumRenderer<AlgorithmClass>("ALIGNER_ENUM_ALGORITHM_CLASS_"));
 
         ActionListener calculatorListener = e -> {
             CalculatorType newValue = (CalculatorType) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.calculatorType && confirmReset(frame)) {
+            if (newValue != aligner.calculatorType && confirmReset(alignMenuFrame)) {
                 aligner.calculatorType = newValue;
                 reloadBeads();
             } else {
-                panel.calculatorComboBox.setSelectedItem(aligner.calculatorType);
+                alignPanel.calculatorComboBox.setSelectedItem(aligner.calculatorType);
             }
         };
-        panel.calculatorComboBox.addActionListener(calculatorListener);
-        panel.calculatorComboBox
+        alignPanel.calculatorComboBox.addActionListener(calculatorListener);
+        alignPanel.calculatorComboBox
                 .setRenderer(new EnumRenderer<CalculatorType>("ALIGNER_ENUM_CALCULATOR_TYPE_"));
 
         ActionListener counterListener = e -> {
             CounterType newValue = (CounterType) ((JComboBox<?>) e.getSource()).getSelectedItem();
-            if (newValue != aligner.counterType && confirmReset(frame)) {
+            if (newValue != aligner.counterType && confirmReset(alignMenuFrame)) {
                 aligner.counterType = newValue;
                 reloadBeads();
             } else {
-                panel.counterComboBox.setSelectedItem(aligner.counterType);
+                alignPanel.counterComboBox.setSelectedItem(aligner.counterType);
             }
         };
-        panel.counterComboBox.addActionListener(counterListener);
-        panel.counterComboBox.setRenderer(new EnumRenderer<CounterType>("ALIGNER_ENUM_COUNTER_TYPE_"));
+        alignPanel.counterComboBox.addActionListener(counterListener);
+        alignPanel.counterComboBox.setRenderer(new EnumRenderer<CounterType>("ALIGNER_ENUM_COUNTER_TYPE_"));
 
         ActionListener segmentingListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean newValue = ((AbstractButton) e.getSource()).isSelected();
-                if (newValue != aligner.segment && confirmReset(frame)) {
+                if (newValue != aligner.segment && confirmReset(alignMenuFrame)) {
                     aligner.segment = newValue;
                     reloadBeads();
                 } else {
-                    panel.segmentingCheckBox.setSelected(aligner.segment);
-                    frame.segmentingItem.setSelected(aligner.segment);
+                    alignPanel.segmentingCheckBox.setSelected(aligner.segment);
+                    alignMenuFrame.segmentingItem.setSelected(aligner.segment);
                 }
             }
         };
-        panel.segmentingCheckBox.addActionListener(segmentingListener);
-        frame.segmentingItem.addActionListener(segmentingListener);
+        alignPanel.segmentingCheckBox.addActionListener(segmentingListener);
+        alignMenuFrame.segmentingItem.addActionListener(segmentingListener);
 
         ActionListener segmentingRulesListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (confirmReset(frame)) {
+                if (confirmReset(alignMenuFrame)) {
                     SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
                             Core.getSegmenter().getSRX(), null);
-                    if (customizer.show(frame)) {
+                    if (customizer.show(alignMenuFrame)) {
                         customizedSRX = customizer.getResult();
                         Core.setSegmenter(new Segmenter(customizedSRX));
                         reloadBeads();
@@ -269,17 +269,17 @@ public class AlignPanelController {
                 }
             }
         };
-        panel.segmentingRulesButton.addActionListener(segmentingRulesListener);
-        frame.segmentingRulesItem.addActionListener(segmentingRulesListener);
+        alignPanel.segmentingRulesButton.addActionListener(segmentingRulesListener);
+        alignMenuFrame.segmentingRulesItem.addActionListener(segmentingRulesListener);
 
         ActionListener filterSettingsListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (confirmReset(frame)) {
+                if (confirmReset(alignMenuFrame)) {
                     FiltersCustomizer customizer = new FiltersCustomizer(false,
                             FilterMaster.createDefaultFiltersConfig(), Core.getFilterMaster().getConfig(),
                             null);
-                    if (customizer.show(frame)) {
+                    if (customizer.show(alignMenuFrame)) {
                         customizedFilters = customizer.getResult();
                         Core.setFilterMaster(new FilterMaster(customizedFilters));
                         aligner.clearLoaded();
@@ -288,27 +288,27 @@ public class AlignPanelController {
                 }
             }
         };
-        panel.fileFilterSettingsButton.addActionListener(filterSettingsListener);
-        frame.fileFilterSettingsItem.addActionListener(filterSettingsListener);
+        alignPanel.fileFilterSettingsButton.addActionListener(filterSettingsListener);
+        alignMenuFrame.fileFilterSettingsItem.addActionListener(filterSettingsListener);
 
         TableCellRenderer renderer = new MultilineCellRenderer();
-        panel.table.setDefaultRenderer(Object.class, renderer);
-        panel.table.setDefaultRenderer(Boolean.class, renderer);
-        panel.addComponentListener(new ComponentAdapter() {
+        alignPanel.table.setDefaultRenderer(Object.class, renderer);
+        alignPanel.table.setDefaultRenderer(Boolean.class, renderer);
+        alignPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                resizeRows(panel.table);
+                resizeRows(alignPanel.table);
             }
         });
 
         ActionListener oneAdjustListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] rows = panel.table.getSelectedRows();
-                int col = panel.table.getSelectedColumn();
-                boolean up = e.getSource().equals(panel.moveUpButton)
-                        || e.getSource().equals(frame.moveUpItem);
-                BeadTableModel model = (BeadTableModel) panel.table.getModel();
+                int[] rows = alignPanel.table.getSelectedRows();
+                int col = alignPanel.table.getSelectedColumn();
+                boolean up = e.getSource().equals(alignPanel.moveUpButton)
+                        || e.getSource().equals(alignMenuFrame.moveUpItem);
+                BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
                 if ((e.getModifiers() & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
                     int trgRow = up ? model.prevBeadFromRow(rows[0])
                             : model.nextBeadFromRow(rows[rows.length - 1]);
@@ -319,17 +319,17 @@ public class AlignPanelController {
                 }
             }
         };
-        panel.moveUpButton.addActionListener(oneAdjustListener);
-        frame.moveUpItem.addActionListener(oneAdjustListener);
-        panel.moveDownButton.addActionListener(oneAdjustListener);
-        frame.moveDownItem.addActionListener(oneAdjustListener);
+        alignPanel.moveUpButton.addActionListener(oneAdjustListener);
+        alignMenuFrame.moveUpItem.addActionListener(oneAdjustListener);
+        alignPanel.moveDownButton.addActionListener(oneAdjustListener);
+        alignMenuFrame.moveDownItem.addActionListener(oneAdjustListener);
 
         ActionListener mergeListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] rows = panel.table.getSelectedRows();
-                int col = panel.table.getSelectedColumn();
-                BeadTableModel model = (BeadTableModel) panel.table.getModel();
+                int[] rows = alignPanel.table.getSelectedRows();
+                int col = alignPanel.table.getSelectedColumn();
+                BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
                 if (rows.length == 1) {
                     rows = new int[] { rows[0], model.nextNonEmptyCell(rows[0], col) };
                 }
@@ -343,15 +343,15 @@ public class AlignPanelController {
                 }
             }
         };
-        panel.mergeButton.addActionListener(mergeListener);
-        frame.mergeItem.addActionListener(mergeListener);
+        alignPanel.mergeButton.addActionListener(mergeListener);
+        alignMenuFrame.mergeItem.addActionListener(mergeListener);
 
         ActionListener splitListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int[] rows = panel.table.getSelectedRows();
-                int col = panel.table.getSelectedColumn();
-                BeadTableModel model = (BeadTableModel) panel.table.getModel();
+                int[] rows = alignPanel.table.getSelectedRows();
+                int col = alignPanel.table.getSelectedColumn();
+                BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
                 int beads = model.beadsInRowSpan(rows);
                 if (beads == 1) {
                     if (rows.length == 1) {
@@ -362,43 +362,43 @@ public class AlignPanelController {
                 }
             }
         };
-        panel.splitButton.addActionListener(splitListener);
-        frame.splitItem.addActionListener(splitListener);
+        alignPanel.splitButton.addActionListener(splitListener);
+        alignMenuFrame.splitItem.addActionListener(splitListener);
 
         ActionListener editListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                int row = panel.table.getSelectedRow();
-                int col = panel.table.getSelectedColumn();
+                int row = alignPanel.table.getSelectedRow();
+                int col = alignPanel.table.getSelectedColumn();
                 editRow(row, col);
             }
         };
-        panel.editButton.addActionListener(editListener);
-        frame.editItem.addActionListener(editListener);
+        alignPanel.editButton.addActionListener(editListener);
+        alignMenuFrame.editItem.addActionListener(editListener);
 
         ListSelectionListener selectionListener = new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                updateCommandAvailability(panel, frame);
+                updateCommandAvailability(alignPanel, alignMenuFrame);
             }
         };
-        panel.table.getColumnModel().getSelectionModel().addListSelectionListener(selectionListener);
-        panel.table.getSelectionModel().addListSelectionListener(selectionListener);
+        alignPanel.table.getColumnModel().getSelectionModel().addListSelectionListener(selectionListener);
+        alignPanel.table.getSelectionModel().addListSelectionListener(selectionListener);
 
         ActionListener saveListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!confirmSaveTMX(panel)) {
+                if (!confirmSaveTMX(alignPanel)) {
                     return;
                 }
                 while (true) {
                     JFileChooser chooser = new JFileChooser();
                     chooser.setSelectedFile(new File(defaultSaveDir, getOutFileName()));
                     chooser.setDialogTitle(BUNDLE.getString("ALIGNER_PANEL_DIALOG_SAVE"));
-                    if (JFileChooser.APPROVE_OPTION == chooser.showSaveDialog(frame)) {
+                    if (JFileChooser.APPROVE_OPTION == chooser.showSaveDialog(alignMenuFrame)) {
                         File file = chooser.getSelectedFile();
                         if (file.isFile()) {
-                            if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(frame,
+                            if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(alignMenuFrame,
                                     StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_DIALOG_OVERWRITE"),
                                             file.getName()),
                                     BUNDLE.getString("ALIGNER_DIALOG_WARNING_TITLE"),
@@ -406,14 +406,14 @@ public class AlignPanelController {
                                 continue;
                             }
                         }
-                        List<MutableBead> beads = ((BeadTableModel) panel.table.getModel()).getData();
+                        List<MutableBead> beads = ((BeadTableModel) alignPanel.table.getModel()).getData();
                         try {
                             aligner.writePairsToTMX(file,
                                     MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
                             modified = false;
                         } catch (Exception ex) {
                             LOGGER.atInfo().setCause(ex).log();
-                            JOptionPane.showMessageDialog(frame, BUNDLE.getString("ALIGNER_PANEL_SAVE_ERROR"),
+                            JOptionPane.showMessageDialog(alignMenuFrame, BUNDLE.getString("ALIGNER_PANEL_SAVE_ERROR"),
                                     BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                         }
                     }
@@ -421,13 +421,13 @@ public class AlignPanelController {
                 }
             }
         };
-        panel.saveButton.addActionListener(saveListener);
-        frame.saveItem.addActionListener(saveListener);
+        alignPanel.saveButton.addActionListener(saveListener);
+        alignMenuFrame.saveItem.addActionListener(saveListener);
 
         ActionListener resetListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (confirmReset(frame)) {
+                if (confirmReset(alignMenuFrame)) {
                     if (phase == Phase.ALIGN) {
                         aligner.restoreDefaults();
                     }
@@ -435,35 +435,35 @@ public class AlignPanelController {
                 }
             }
         };
-        panel.resetButton.addActionListener(resetListener);
-        frame.resetItem.addActionListener(resetListener);
+        alignPanel.resetButton.addActionListener(resetListener);
+        alignMenuFrame.resetItem.addActionListener(resetListener);
 
         ActionListener reloadListener = e -> {
-            if (confirmReset(frame)) {
+            if (confirmReset(alignMenuFrame)) {
                 aligner.clearLoaded();
                 reloadBeads();
             }
         };
-        frame.reloadItem.addActionListener(reloadListener);
+        alignMenuFrame.reloadItem.addActionListener(reloadListener);
 
         ActionListener removeTagsListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean newValue = ((AbstractButton) e.getSource()).isSelected();
-                if (newValue != aligner.removeTags && confirmReset(frame)) {
+                if (newValue != aligner.removeTags && confirmReset(alignMenuFrame)) {
                     aligner.removeTags = newValue;
                     aligner.clearLoaded();
                     reloadBeads();
                 } else {
-                    panel.removeTagsCheckBox.setSelected(aligner.removeTags);
-                    frame.removeTagsItem.setSelected(aligner.removeTags);
+                    alignPanel.removeTagsCheckBox.setSelected(aligner.removeTags);
+                    alignMenuFrame.removeTagsItem.setSelected(aligner.removeTags);
                 }
             }
         };
-        panel.removeTagsCheckBox.addActionListener(removeTagsListener);
-        frame.removeTagsItem.addActionListener(removeTagsListener);
+        alignPanel.removeTagsCheckBox.addActionListener(removeTagsListener);
+        alignMenuFrame.removeTagsItem.addActionListener(removeTagsListener);
 
-        panel.continueButton.addActionListener(new ActionListener() {
+        alignPanel.continueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 phase = Phase.EDIT;
@@ -478,95 +478,95 @@ public class AlignPanelController {
                 updateHighlight();
             }
         };
-        panel.highlightCheckBox.addActionListener(highlightListener);
-        frame.highlightItem.addActionListener(highlightListener);
+        alignPanel.highlightCheckBox.addActionListener(highlightListener);
+        alignMenuFrame.highlightItem.addActionListener(highlightListener);
 
         ActionListener highlightPatternListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PatternPanelController patternEditor = new PatternPanelController(highlightPattern);
-                highlightPattern = patternEditor.show(frame);
+                highlightPattern = patternEditor.show(alignMenuFrame);
                 Preferences.setPreference(Preferences.ALIGNER_HIGHLIGHT_PATTERN, highlightPattern.pattern());
                 updateHighlight();
             }
         };
-        panel.highlightPatternButton.addActionListener(highlightPatternListener);
-        frame.highlightPatternItem.addActionListener(highlightPatternListener);
+        alignPanel.highlightPatternButton.addActionListener(highlightPatternListener);
+        alignMenuFrame.highlightPatternItem.addActionListener(highlightPatternListener);
 
-        frame.markAcceptedItem.addActionListener(new ActionListener() {
+        alignMenuFrame.markAcceptedItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setStatus(MutableBead.Status.ACCEPTED, panel.table.getSelectedRows());
+                setStatus(MutableBead.Status.ACCEPTED, alignPanel.table.getSelectedRows());
             }
         });
 
-        frame.markNeedsReviewItem.addActionListener(new ActionListener() {
+        alignMenuFrame.markNeedsReviewItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setStatus(MutableBead.Status.NEEDS_REVIEW, panel.table.getSelectedRows());
+                setStatus(MutableBead.Status.NEEDS_REVIEW, alignPanel.table.getSelectedRows());
             }
         });
 
-        frame.clearMarkItem.addActionListener(new ActionListener() {
+        alignMenuFrame.clearMarkItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setStatus(MutableBead.Status.DEFAULT, panel.table.getSelectedRows());
+                setStatus(MutableBead.Status.DEFAULT, alignPanel.table.getSelectedRows());
             }
         });
 
-        frame.toggleSelectedItem.addActionListener(new ActionListener() {
+        alignMenuFrame.toggleSelectedItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleEnabled(panel.table.getSelectedRows());
+                toggleEnabled(alignPanel.table.getSelectedRows());
             }
         });
 
-        frame.closeItem.addActionListener(new ActionListener() {
+        alignMenuFrame.closeItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                closeFrame(frame);
+                closeFrame(alignMenuFrame);
             }
         });
 
-        frame.keepAllItem.addActionListener(new ActionListener() {
+        alignMenuFrame.keepAllItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 toggleAllEnabled(true);
             }
         });
 
-        frame.keepNoneItem.addActionListener(new ActionListener() {
+        alignMenuFrame.keepNoneItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 toggleAllEnabled(false);
             }
         });
 
-        frame.realignPendingItem.addActionListener(e -> {
+        alignMenuFrame.realignPendingItem.addActionListener(e -> {
             realignPending();
         });
 
-        frame.pinpointAlignStartItem.addActionListener(e -> {
+        alignMenuFrame.pinpointAlignStartItem.addActionListener(e -> {
             phase = Phase.PINPOINT;
-            ppRow = panel.table.getSelectedRow();
-            ppCol = panel.table.getSelectedColumn();
-            panel.table.clearSelection();
+            ppRow = alignPanel.table.getSelectedRow();
+            ppCol = alignPanel.table.getSelectedColumn();
+            alignPanel.table.clearSelection();
             updatePanel();
         });
 
-        frame.pinpointAlignEndItem.addActionListener(e -> {
-            pinpointAlign(panel.table.getSelectedRow(), panel.table.getSelectedColumn());
+        alignMenuFrame.pinpointAlignEndItem.addActionListener(e -> {
+            pinpointAlign(alignPanel.table.getSelectedRow(), alignPanel.table.getSelectedColumn());
         });
 
-        frame.pinpointAlignCancelItem.addActionListener(e -> {
+        alignMenuFrame.pinpointAlignCancelItem.addActionListener(e -> {
             phase = Phase.EDIT;
             ppRow = -1;
             ppCol = -1;
-            panel.table.repaint();
+            alignPanel.table.repaint();
             updatePanel();
         });
 
-        panel.table.addMouseListener(new MouseAdapter() {
+        alignPanel.table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (phase == Phase.PINPOINT) {
@@ -578,41 +578,41 @@ public class AlignPanelController {
             }
         });
 
-        frame.resetItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
+        alignMenuFrame.resetItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
                 Java8Compat.getMenuShortcutKeyMaskEx() | KeyEvent.SHIFT_DOWN_MASK));
-        frame.realignPendingItem.setAccelerator(
+        alignMenuFrame.realignPendingItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_R, Java8Compat.getMenuShortcutKeyMaskEx()));
-        frame.saveItem.setAccelerator(
+        alignMenuFrame.saveItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_S, Java8Compat.getMenuShortcutKeyMaskEx()));
-        frame.closeItem.setAccelerator(
+        alignMenuFrame.closeItem.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_W, Java8Compat.getMenuShortcutKeyMaskEx()));
 
         // emacs-like keys for table navigation
         // See javax.swing.plaf.BasicTableUI.Actions for supported action names.
-        setKeyboardShortcut(panel.table, "selectNextRow", 'n');
-        setKeyboardShortcut(panel.table, "selectNextRowExtendSelection", 'N');
-        setKeyboardShortcut(panel.table, "selectPreviousRow", 'p');
-        setKeyboardShortcut(panel.table, "selectPreviousRowExtendSelection", 'P');
-        setKeyboardShortcut(panel.table, "selectNextColumn", 'f');
-        setKeyboardShortcut(panel.table, "selectNextColumnExtendSelection", 'F');
-        setKeyboardShortcut(panel.table, "selectPreviousColumn", 'b');
-        setKeyboardShortcut(panel.table, "selectPreviousColumnExtendSelection", 'B');
+        setKeyboardShortcut(alignPanel.table, "selectNextRow", 'n');
+        setKeyboardShortcut(alignPanel.table, "selectNextRowExtendSelection", 'N');
+        setKeyboardShortcut(alignPanel.table, "selectPreviousRow", 'p');
+        setKeyboardShortcut(alignPanel.table, "selectPreviousRowExtendSelection", 'P');
+        setKeyboardShortcut(alignPanel.table, "selectNextColumn", 'f');
+        setKeyboardShortcut(alignPanel.table, "selectNextColumnExtendSelection", 'F');
+        setKeyboardShortcut(alignPanel.table, "selectPreviousColumn", 'b');
+        setKeyboardShortcut(alignPanel.table, "selectPreviousColumnExtendSelection", 'B');
 
-        panel.table.setTransferHandler(new AlignTransferHandler());
-        panel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
-        panel.table.setFont(Core.getMainWindow().getApplicationFont());
-        CoreEvents.registerFontChangedEventListener(panel.table::setFont);
+        alignPanel.table.setTransferHandler(new AlignTransferHandler());
+        alignPanel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
+        alignPanel.table.setFont(Core.getMainWindow().getApplicationFont());
+        CoreEvents.registerFontChangedEventListener(alignPanel.table::setFont);
 
         // Set initial state
         updateHighlight();
         updatePanel();
         reloadBeads();
 
-        frame.add(panel);
-        frame.pack();
-        frame.setMinimumSize(frame.getSize());
-        frame.setLocationRelativeTo(parent);
-        frame.setVisible(true);
+        alignMenuFrame.add(alignPanel);
+        alignMenuFrame.pack();
+        alignMenuFrame.setMinimumSize(alignMenuFrame.getSize());
+        alignMenuFrame.setLocationRelativeTo(parent);
+        alignMenuFrame.setVisible(true);
     }
 
     private static void setKeyboardShortcut(JComponent comp, Object actionName, char stroke) {
@@ -636,9 +636,9 @@ public class AlignPanelController {
 
     private void slideRows(int[] rows, int col, int offset) {
         modified = true;
-        Rectangle initialRect = panel.table.getVisibleRect();
-        panel.table.clearSelection();
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        Rectangle initialRect = alignPanel.table.getVisibleRect();
+        alignPanel.table.clearSelection();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         List<Integer> realRows = model.realCellsInRowSpan(col, rows);
         int[] resultRows = model.slide(realRows, col, offset);
         int selStart = resultRows[0];
@@ -653,85 +653,85 @@ public class AlignPanelController {
                 selEnd--;
             }
         }
-        panel.table.changeSelection(selStart, col, false, false);
-        panel.table.changeSelection(selEnd, col, false, true);
+        alignPanel.table.changeSelection(selStart, col, false, false);
+        alignPanel.table.changeSelection(selEnd, col, false, true);
         ensureSelectionVisible(initialRect);
     }
 
     private void moveRows(int[] rows, int col, int trgRow) {
         modified = true;
-        Rectangle initialRect = panel.table.getVisibleRect();
-        panel.table.clearSelection();
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        Rectangle initialRect = alignPanel.table.getVisibleRect();
+        alignPanel.table.clearSelection();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         List<Integer> realRows = model.realCellsInRowSpan(col, rows);
         int[] resultRows = model.move(realRows, col, trgRow);
-        panel.table.changeSelection(resultRows[0], col, false, false);
-        panel.table.changeSelection(resultRows[1], col, false, true);
+        alignPanel.table.changeSelection(resultRows[0], col, false, false);
+        alignPanel.table.changeSelection(resultRows[1], col, false, true);
         ensureSelectionVisible(initialRect);
     }
 
     private void mergeRows(int[] rows, int col) {
         modified = true;
-        Rectangle initialRect = panel.table.getVisibleRect();
-        panel.table.clearSelection();
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        Rectangle initialRect = alignPanel.table.getVisibleRect();
+        alignPanel.table.clearSelection();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         List<Integer> realRows = model.realCellsInRowSpan(col, rows);
         int resultRow = model.mergeRows(realRows, col);
-        panel.table.changeSelection(resultRow, col, false, false);
+        alignPanel.table.changeSelection(resultRow, col, false, false);
         ensureSelectionVisible(initialRect);
     }
 
     private void splitRow(int row, int col) {
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         if (!model.isEditableColumn(col)) {
             throw new IllegalArgumentException();
         }
-        String text = panel.table.getValueAt(row, col).toString();
-        String reference = (String) panel.table.getValueAt(row,
+        String text = alignPanel.table.getValueAt(row, col).toString();
+        String reference = (String) alignPanel.table.getValueAt(row,
                 col == BeadTableModel.COL_SRC ? BeadTableModel.COL_TRG : BeadTableModel.COL_SRC);
         SplittingPanelController splitter = new SplittingPanelController(text, reference);
-        String[] split = splitter.show(SwingUtilities.getWindowAncestor(panel.table));
+        String[] split = splitter.show(SwingUtilities.getWindowAncestor(alignPanel.table));
         if (split.length == 1) {
             return;
         }
         modified = true;
-        Rectangle initialRect = panel.table.getVisibleRect();
-        panel.table.clearSelection();
+        Rectangle initialRect = alignPanel.table.getVisibleRect();
+        alignPanel.table.clearSelection();
         int[] resultRows = model.splitRow(row, col, split);
-        panel.table.changeSelection(resultRows[0], col, false, false);
-        panel.table.changeSelection(resultRows[resultRows.length - 1], col, false, true);
+        alignPanel.table.changeSelection(resultRows[0], col, false, false);
+        alignPanel.table.changeSelection(resultRows[resultRows.length - 1], col, false, true);
         ensureSelectionVisible(initialRect);
     }
 
     private void splitBead(int[] rows, int col) {
         modified = true;
-        panel.table.clearSelection();
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
-        Rectangle initialRect = panel.table.getVisibleRect();
+        alignPanel.table.clearSelection();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
+        Rectangle initialRect = alignPanel.table.getVisibleRect();
         model.splitBead(rows);
-        panel.table.changeSelection(rows[0], col, false, false);
-        panel.table.changeSelection(rows[rows.length - 1], col, false, true);
+        alignPanel.table.changeSelection(rows[0], col, false, false);
+        alignPanel.table.changeSelection(rows[rows.length - 1], col, false, true);
         ensureSelectionVisible(initialRect);
     }
 
     private void editRow(int row, int col) {
-        String text = panel.table.getValueAt(row, col).toString();
+        String text = alignPanel.table.getValueAt(row, col).toString();
         EditingPanelController splitter = new EditingPanelController(text);
-        String newText = splitter.show(SwingUtilities.getWindowAncestor(panel.table));
+        String newText = splitter.show(SwingUtilities.getWindowAncestor(alignPanel.table));
         if (newText == null || text.equals(newText)) {
             return;
         }
         modified = true;
-        Rectangle initialRect = panel.table.getVisibleRect();
-        panel.table.clearSelection();
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        Rectangle initialRect = alignPanel.table.getVisibleRect();
+        alignPanel.table.clearSelection();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         model.editRow(row, col, newText);
-        panel.table.changeSelection(row, col, false, false);
+        alignPanel.table.changeSelection(row, col, false, false);
         ensureSelectionVisible(initialRect);
     }
 
     private void realignPending() {
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         List<MutableBead> data = model.getData();
         List<MutableBead> toAlign = new ArrayList<>();
         List<MutableBead> result = new ArrayList<>(data.size());
@@ -751,8 +751,8 @@ public class AlignPanelController {
         }
         modified = true;
         model.replaceData(result);
-        panel.table.repaint();
-        resizeRows(panel.table);
+        alignPanel.table.repaint();
+        resizeRows(alignPanel.table);
     }
 
     private void pinpointAlign(int row, int col) {
@@ -760,8 +760,8 @@ public class AlignPanelController {
             return;
         }
         modified = true;
-        Rectangle initialRect = panel.table.getVisibleRect();
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        Rectangle initialRect = alignPanel.table.getVisibleRect();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         IntStream.of(ppRow, row).forEach(i -> {
             List<Integer> rowspan = model.getRowExtentsForBeadAtRow(i);
             if (rowspan.size() > 1) {
@@ -778,8 +778,8 @@ public class AlignPanelController {
         }
         int resultRow = model.insertLines(toRelocate, Math.max(ppRow, row), relocateCol);
         model.setStatusAtRow(resultRow, Status.ACCEPTED);
-        panel.table.changeSelection(resultRow, ppCol, false, false);
-        panel.table.changeSelection(resultRow, col, false, true);
+        alignPanel.table.changeSelection(resultRow, ppCol, false, false);
+        alignPanel.table.changeSelection(resultRow, col, false, true);
         ppRow = -1;
         ppCol = -1;
         phase = Phase.EDIT;
@@ -792,16 +792,16 @@ public class AlignPanelController {
             return;
         }
         modified = true;
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         model.toggleBeadsAtRows(rows);
-        panel.table.repaint();
+        alignPanel.table.repaint();
     }
 
     private void toggleAllEnabled(boolean value) {
         modified = true;
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         model.toggleAllBeads(value);
-        panel.table.repaint();
+        alignPanel.table.repaint();
     }
 
     private void setStatus(MutableBead.Status status, int... rows) {
@@ -809,28 +809,28 @@ public class AlignPanelController {
             return;
         }
         modified = true;
-        BeadTableModel model = (BeadTableModel) panel.table.getModel();
+        BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         for (int row : rows) {
             model.setStatusAtRow(row, status);
         }
         int nextBeadRow = model.nextBeadFromRow(rows[rows.length - 1]);
         if (nextBeadRow != -1) {
-            int[] cols = panel.table.getSelectedColumns();
-            panel.table.changeSelection(nextBeadRow, cols[0], false, false);
-            panel.table.changeSelection(nextBeadRow, cols[cols.length - 1], false, true);
-            ensureSelectionVisible(panel.table.getVisibleRect());
+            int[] cols = alignPanel.table.getSelectedColumns();
+            alignPanel.table.changeSelection(nextBeadRow, cols[0], false, false);
+            alignPanel.table.changeSelection(nextBeadRow, cols[cols.length - 1], false, true);
+            ensureSelectionVisible(alignPanel.table.getVisibleRect());
         }
     }
 
     private void ensureSelectionVisible(Rectangle initialView) {
-        panel.table.repaint();
-        resizeRows(panel.table);
-        int[] rows = panel.table.getSelectedRows();
-        int[] cols = panel.table.getSelectedColumns();
-        Rectangle selectionRect = panel.table.getCellRect(rows[0], cols[0], true)
-                .union(panel.table.getCellRect(rows[rows.length - 1], cols[cols.length - 1], true));
-        panel.table.scrollRectToVisible(initialView);
-        panel.table.scrollRectToVisible(selectionRect);
+        alignPanel.table.repaint();
+        resizeRows(alignPanel.table);
+        int[] rows = alignPanel.table.getSelectedRows();
+        int[] cols = alignPanel.table.getSelectedColumns();
+        Rectangle selectionRect = alignPanel.table.getCellRect(rows[0], cols[0], true)
+                .union(alignPanel.table.getCellRect(rows[rows.length - 1], cols[cols.length - 1], true));
+        alignPanel.table.scrollRectToVisible(initialView);
+        alignPanel.table.scrollRectToVisible(selectionRect);
     }
 
     private boolean confirmReset(Component comp) {
@@ -851,9 +851,9 @@ public class AlignPanelController {
             loader.cancel(true);
         }
         phase = Phase.ALIGN;
-        panel.progressBar.setVisible(true);
-        panel.continueButton.setEnabled(false);
-        panel.controlsPanel.setVisible(false);
+        alignPanel.progressBar.setVisible(true);
+        alignPanel.continueButton.setEnabled(false);
+        alignPanel.controlsPanel.setVisible(false);
         loader = new SwingWorker<List<MutableBead>, Object>() {
             @Override
             protected List<MutableBead> doInBackground() throws Exception {
@@ -870,12 +870,12 @@ public class AlignPanelController {
                     // Ignore
                 } catch (Exception e) {
                     LOGGER.atInfo().setCause(e).log();
-                    JOptionPane.showMessageDialog(panel, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
+                    JOptionPane.showMessageDialog(alignPanel, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
                             BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
-                panel.continueButton.setEnabled(true);
-                panel.progressBar.setVisible(false);
-                panel.comparisonComboBox.setModel(
+                alignPanel.continueButton.setEnabled(true);
+                alignPanel.progressBar.setVisible(false);
+                alignPanel.comparisonComboBox.setModel(
                         new DefaultComboBoxModel<>(aligner.allowedModes.toArray(new ComparisonMode[0])));
 
                 String distanceValue = null;
@@ -883,14 +883,14 @@ public class AlignPanelController {
                     double avgDist = MutableBead.calculateAvgDist(beads);
                     distanceValue = StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE"),
                             avgDist == Long.MAX_VALUE ? "-" : String.format("%.3f", avgDist));
-                    panel.table.setModel(new BeadTableModel(beads));
+                    alignPanel.table.setModel(new BeadTableModel(beads));
                     for (int i = 0; i < BeadTableModel.COL_SRC; i++) {
-                        TableColumn col = panel.table.getColumnModel().getColumn(i);
+                        TableColumn col = alignPanel.table.getColumnModel().getColumn(i);
                         col.setMaxWidth(col.getWidth());
                     }
                     modified = false;
                 }
-                panel.averageDistanceLabel.setText(distanceValue);
+                alignPanel.averageDistanceLabel.setText(distanceValue);
 
                 updatePanel();
             }
@@ -903,65 +903,65 @@ public class AlignPanelController {
      * the settings of the underlying aligner.
      */
     private void updatePanel() {
-        panel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
-        panel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
-        panel.calculatorComboBox.setSelectedItem(aligner.calculatorType);
-        panel.counterComboBox.setSelectedItem(aligner.counterType);
-        panel.segmentingCheckBox.setSelected(aligner.segment);
-        frame.segmentingItem.setSelected(aligner.segment);
-        panel.segmentingRulesButton.setEnabled(aligner.segment);
-        frame.segmentingRulesItem.setEnabled(aligner.segment);
-        panel.removeTagsCheckBox.setSelected(aligner.removeTags);
-        frame.removeTagsItem.setSelected(aligner.removeTags);
+        alignPanel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
+        alignPanel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
+        alignPanel.calculatorComboBox.setSelectedItem(aligner.calculatorType);
+        alignPanel.counterComboBox.setSelectedItem(aligner.counterType);
+        alignPanel.segmentingCheckBox.setSelected(aligner.segment);
+        alignMenuFrame.segmentingItem.setSelected(aligner.segment);
+        alignPanel.segmentingRulesButton.setEnabled(aligner.segment);
+        alignMenuFrame.segmentingRulesItem.setEnabled(aligner.segment);
+        alignPanel.removeTagsCheckBox.setSelected(aligner.removeTags);
+        alignMenuFrame.removeTagsItem.setSelected(aligner.removeTags);
 
-        panel.advancedPanel.setVisible(phase == Phase.ALIGN);
-        panel.segmentationControlsPanel.setVisible(phase == Phase.ALIGN);
-        panel.filteringControlsPanel.setVisible(phase == Phase.ALIGN);
-        panel.continueButton.setVisible(phase == Phase.ALIGN);
-        panel.controlsPanel.setVisible(phase != Phase.ALIGN);
-        panel.controlsPanel.setEnabled(phase == Phase.EDIT);
-        panel.saveButton.setVisible(phase != Phase.ALIGN);
-        panel.saveButton.setEnabled(phase == Phase.EDIT);
+        alignPanel.advancedPanel.setVisible(phase == Phase.ALIGN);
+        alignPanel.segmentationControlsPanel.setVisible(phase == Phase.ALIGN);
+        alignPanel.filteringControlsPanel.setVisible(phase == Phase.ALIGN);
+        alignPanel.continueButton.setVisible(phase == Phase.ALIGN);
+        alignPanel.controlsPanel.setVisible(phase != Phase.ALIGN);
+        alignPanel.controlsPanel.setEnabled(phase == Phase.EDIT);
+        alignPanel.saveButton.setVisible(phase != Phase.ALIGN);
+        alignPanel.saveButton.setEnabled(phase == Phase.EDIT);
         String instructions = BUNDLE.getString("ALIGNER_PANEL_" + phase.key + "_PHASE_HELP");
-        panel.instructionsLabel.setText(instructions);
-        frame.editMenu.setEnabled(phase != Phase.ALIGN);
-        for (Component c : frame.editMenu.getComponents()) {
+        alignPanel.instructionsLabel.setText(instructions);
+        alignMenuFrame.editMenu.setEnabled(phase != Phase.ALIGN);
+        for (Component c : alignMenuFrame.editMenu.getComponents()) {
             // Batch-enable/disable Edit menu items here, then override later if
             // necessary
             c.setEnabled(phase == Phase.EDIT);
         }
-        frame.optionsMenu.setEnabled(phase == Phase.ALIGN);
-        frame.saveItem.setEnabled(phase == Phase.EDIT);
+        alignMenuFrame.optionsMenu.setEnabled(phase == Phase.ALIGN);
+        alignMenuFrame.saveItem.setEnabled(phase == Phase.EDIT);
 
-        panel.table.setCursor(Cursor.getPredefinedCursor(
+        alignPanel.table.setCursor(Cursor.getPredefinedCursor(
                 phase == Phase.PINPOINT ? Cursor.CROSSHAIR_CURSOR : Cursor.DEFAULT_CURSOR));
-        frame.pinpointAlignStartItem.setVisible(phase != Phase.PINPOINT);
-        frame.pinpointAlignEndItem.setVisible(phase == Phase.PINPOINT);
+        alignMenuFrame.pinpointAlignStartItem.setVisible(phase != Phase.PINPOINT);
+        alignMenuFrame.pinpointAlignEndItem.setVisible(phase == Phase.PINPOINT);
         // frame.pinpointAlign[Start|End]Item enabledness depends on table
         // selection
-        frame.pinpointAlignCancelItem.setVisible(phase == Phase.PINPOINT);
-        frame.pinpointAlignCancelItem.setEnabled(phase == Phase.PINPOINT);
+        alignMenuFrame.pinpointAlignCancelItem.setVisible(phase == Phase.PINPOINT);
+        alignMenuFrame.pinpointAlignCancelItem.setEnabled(phase == Phase.PINPOINT);
 
-        JButton defaultButton = phase == Phase.ALIGN ? panel.continueButton
-                : phase == Phase.EDIT ? panel.saveButton : null;
-        frame.getRootPane().setDefaultButton(defaultButton);
+        JButton defaultButton = phase == Phase.ALIGN ? alignPanel.continueButton
+                : phase == Phase.EDIT ? alignPanel.saveButton : null;
+        alignMenuFrame.getRootPane().setDefaultButton(defaultButton);
 
-        updateCommandAvailability(panel, frame);
+        updateCommandAvailability(alignPanel, alignMenuFrame);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                resizeRows(panel.table);
+                resizeRows(alignPanel.table);
             }
         });
     }
 
     private void updateHighlight() {
-        panel.highlightCheckBox.setSelected(doHighlight);
-        frame.highlightItem.setSelected(doHighlight);
-        panel.highlightPatternButton.setEnabled(doHighlight);
-        frame.highlightPatternItem.setEnabled(doHighlight);
-        panel.table.repaint();
+        alignPanel.highlightCheckBox.setSelected(doHighlight);
+        alignMenuFrame.highlightItem.setSelected(doHighlight);
+        alignPanel.highlightPatternButton.setEnabled(doHighlight);
+        alignMenuFrame.highlightPatternItem.setEnabled(doHighlight);
+        alignPanel.table.repaint();
     }
 
     private void updateCommandAvailability(AlignPanel panel, AlignMenuFrame frame) {
@@ -1234,23 +1234,23 @@ public class AlignPanelController {
                     data.add(++i, bead);
                 }
             }
-            List<Float> rowToDistance = new ArrayList<>();
-            List<MutableBead> rowToBead = new ArrayList<>();
-            List<String> rowToSourceLine = new ArrayList<>();
-            List<String> rowToTargetLine = new ArrayList<>();
+            List<Float> aRowToDistance = new ArrayList<>();
+            List<MutableBead> aRowToBead = new ArrayList<>();
+            List<String> aRowToSourceLine = new ArrayList<>();
+            List<String> aRowToTargetLine = new ArrayList<>();
             for (MutableBead bead : data) {
                 int beadRows = Math.max(bead.sourceLines.size(), bead.targetLines.size());
                 for (int i = 0; i < beadRows; i++) {
-                    rowToDistance.add(bead.score);
-                    rowToBead.add(bead);
-                    rowToSourceLine.add(i < bead.sourceLines.size() ? bead.sourceLines.get(i) : null);
-                    rowToTargetLine.add(i < bead.targetLines.size() ? bead.targetLines.get(i) : null);
+                    aRowToDistance.add(bead.score);
+                    aRowToBead.add(bead);
+                    aRowToSourceLine.add(i < bead.sourceLines.size() ? bead.sourceLines.get(i) : null);
+                    aRowToTargetLine.add(i < bead.targetLines.size() ? bead.targetLines.get(i) : null);
                 }
             }
-            this.rowToDistance = rowToDistance;
-            this.rowToBead = rowToBead;
-            this.rowToSourceLine = rowToSourceLine;
-            this.rowToTargetLine = rowToTargetLine;
+            this.rowToDistance = aRowToDistance;
+            this.rowToBead = aRowToBead;
+            this.rowToSourceLine = aRowToSourceLine;
+            this.rowToTargetLine = aRowToTargetLine;
         }
 
         @Override

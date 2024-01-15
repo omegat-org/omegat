@@ -683,7 +683,10 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>Maschinelle Übersetzungen</guilabel></title>
 
-    <para>Dieser Fensterbereich zeigt, sofern vorhanden, Vorschläge für das aktive Segment an, die von jedem aktivierten Übersetzungsdienst erstellt wurden. Wenn Vorschläge von mehr als einem Dienst verfügbar sind,</para>
+    <para>If you have enabled and configured at least one machine translation
+      engine this pane shows the suggestions for the current segment produced
+      by the available engines. When suggestions from more than one translation
+      engine are available,</para>
 	
     <itemizedlist>
       <listitem>

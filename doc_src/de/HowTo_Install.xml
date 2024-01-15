@@ -2,7 +2,6 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
 [
 <!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
 ]>
 <section id="how.to.installing.omegat">
   <title id="how.to.installing.omegat.title">OmegaT installieren</title>
@@ -11,7 +10,7 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>Standard: OmegaT &vernb;</term>
+	  <term>Standard: OmegaT </term>
 	  <listitem>
 		<para>Diese Variante wird für den täglichen Gebrauch empfohlen.</para>
 	  </listitem>
@@ -27,13 +26,13 @@
   <para>Die Dateien können direkt von <ulink url="https://omegat.org/download">https://omegat.org</ulink> heruntergeladen werden.</para>
 
   <note>
-	<para>Für die Ausführung von OmegaT 6.1.0 ist eine Java 11 Runtime Environment (JRE) erforderlich.</para>
+	<para>OmegaT  requires a  (JRE) to run.</para>
 
-	<para>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Pakete ohne Java setzen eine systemweit installierte Java 11 Runtime Environment voraus.</para>
+	<para>OmegaT-Pakete gibt es sowohl in Versionen, die mit Java gebündelt sind, als auch in Versionen ohne Java. Packages without Java rely on a installed systemwide.</para>
 
 	<para>OmegaT 5.8.0 und höher können auch mit Java 11 Runtime Environment auf beliebigen Plattformen ausgeführt werden.</para>
 
-	<para>Aus lizenzrechtlichen Gründen empfiehlt das OmegaT-Team die Java-Laufzeitumgebung Eclipse Temurin, die vom Adoptium-Projekt der Eclipse Foundation bereitgestellt wird, allerdings sollten auch andere Laufzeitumgebungen funktionieren, die mit Java 8 kompatibel sind. Siehe <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">Eclipse Temurin™</ulink>.</para>
+	<para>Due to licensing considerations, the OmegaT team recommends the Eclipse Temurin Java runtime provided by the , but any Java 8 compatible runtime environment should work. Siehe <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">Eclipse Temurin™</ulink>.</para>
 
 	<para>IBM stellt JREs für Linux PowerPC unter <ulink url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/> zur Verfügung.</para>
   </note>
@@ -59,7 +58,7 @@
 
       <para>Die Ausführung des Skripts erfordert die Eingabe Ihres <filename>sudo</filename>-Passworts.</para>
 
-      <para>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <filename>/opt/omegat/</filename>. Wenn es keine gibt, wird das Programm in <filename>/opt/omegat/OmegaT_6.1.0</filename> installiert und als Standardversion (in <filename>/opt/omegat/OmegaT-default</filename>) festgelegt.</para>
+      <para>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <filename>/opt/omegat/</filename>. If there isn’t one, it installs the program in <filename>/opt/omegat/OmegaT_</filename> and sets it as the default version (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
     <para>Nach dem Entpacken oder Installieren können Sie die nicht mehr benötigte heruntergeladene Datei löschen.</para>
@@ -78,7 +77,7 @@
   <section id="installing.omegat.other.systems">
     <title id="installing.omegat.other.systems.title">In anderen Plattformen</title>
 
-    <para>Diese Information gilt für jedes System, für das eine Java-Version verfügbar ist, die mit der Java 11 Runtime Environment kompatibel ist. Dazu gehören die oben beschriebenen Plattformen sowie Plattformen, für die kein eigenes OmegaT-Paket bereitgestellt wird.</para>
+    <para>This information applies to any system for a Java version compatible with is available. Dazu gehören die oben beschriebenen Plattformen sowie Plattformen, für die kein eigenes OmegaT-Paket bereitgestellt wird.</para>
 
     <para>Laden Sie die Version <emphasis>Plattformübergreifend ohne JRE</emphasis> herunter.</para>
 

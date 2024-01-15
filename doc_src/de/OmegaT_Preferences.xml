@@ -2,7 +2,6 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
 [
 <!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-%manualvariables;
 ]>
 <chapter id="chapter.dialogs.preferences">
   <title id="chapter.dialogs.preferences.title"><guilabel>Einstellungen</guilabel></title>
@@ -60,9 +59,14 @@
       <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
         <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Übersetzungen automatisch abrufen</option></term>
 
-        <listitem>
-          <para>Deaktivieren Sie diese Option, werden maschinelle Übersetzungen nur abgerufen, wenn Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> im aktuellen Segment verwenden. Sie müssen dann dieses Tastenkürzel erneut drücken, um den Vorschlag einzufügen.</para>
-        </listitem>
+				<listitem>
+					<para>Enable this option to automatically fetch machine translations from
+						the providers you have enabled and configured. If you leave this option
+						disabled, machine translations are only fetched when you use <link linkend="menus.edit" endterm="menus.edit.title"/>
+						<link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> in the current
+						segment. You then have to press that combination again to insert
+						the suggestion.</para>
+				</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">

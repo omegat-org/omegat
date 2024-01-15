@@ -117,7 +117,7 @@ import org.omegat.util.gui.Styles;
 import gen.core.filters.Filters;
 
 /**
- * Controller for the alignment UI
+ * Controller for the alignment UI.
  *
  * @author Aaron Madlon-Kay
  */
@@ -151,10 +151,10 @@ public class AlignPanelController {
      * </ol>
      */
     private enum Phase {
-        ALIGN("ALIGN"),
-        EDIT("EDIT"),
-        PINPOINT("PINPOINT");
+        ALIGN("ALIGN"), EDIT("EDIT"), PINPOINT("PINPOINT");
+
         final String key;
+
         Phase(String key) {
             this.key = key;
         }
@@ -413,8 +413,7 @@ public class AlignPanelController {
                             modified = false;
                         } catch (Exception ex) {
                             LOGGER.atInfo().setCause(ex).log();
-                            JOptionPane.showMessageDialog(frame,
-                                    BUNDLE.getString("ALIGNER_PANEL_SAVE_ERROR"),
+                            JOptionPane.showMessageDialog(frame, BUNDLE.getString("ALIGNER_PANEL_SAVE_ERROR"),
                                     BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                         }
                     }

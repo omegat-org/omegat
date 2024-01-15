@@ -48,6 +48,9 @@
 
   - French localization updated (UI, documentation)
 
+  - Error when trying to backup the project file on Windows
+  https://sourceforge.net/p/omegat/bugs/1166/
+
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-22)
 ----------------------------------------------------------------------

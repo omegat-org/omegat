@@ -49,6 +49,7 @@ xjc = "2.3.4"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.4.3"
+flatlaf="3.3"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -130,6 +131,7 @@ jaxb-xjc = {group = "org.grassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"
 tipoftheday = {group = "tokyo.northside", name = "tipoftheday", version.ref = "tipoftheday"}
 jna = {group = "net.java.dev.jna", name = "jna-platform", version.ref = "jna"}
 jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
+flatlaf = {group = "com.formdev", name = "flatlaf", version.ref = "flatlaf"}
 language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
 
 [bundles]

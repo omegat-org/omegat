@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Updates\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Projektordner","chapter.project.folder.html",[
-["Standardstruktur","chapter.project.folder.html#d0e10504",null],
-["Mindestinhalt","chapter.project.folder.html#d0e10582",null],
+["Standardstruktur","chapter.project.folder.html#d0e10467",null],
+["Mindestinhalt","chapter.project.folder.html#d0e10545",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -607,7 +607,6 @@ var toc_entries = [
 [".repositories","chapter.project.folder.html#project.folder.repositories",null]
 ]],
 ["Anhänge","chapter.appendices.html",[
-["Dateifilter","chapter.appendices.html#file.filters",null],
 ["Segmentierung","chapter.appendices.html#app.segmentation",null],
 ["Reguläre Ausdrücke","chapter.appendices.html#app.regex",null],
 ["Glossare","chapter.appendices.html#app.glossaries",null],
@@ -890,7 +889,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-e7mij6lnlz8p-1lz0kxu9ycdfk";
+var storageId = "u1bhc5sw8bwg-1cxwihu9ctesb";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

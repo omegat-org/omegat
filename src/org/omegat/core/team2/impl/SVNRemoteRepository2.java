@@ -90,14 +90,14 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
      * Constructor of SVN remote repository.
      */
     public SVNRemoteRepository2() {
+        // Specify MINA-SSHD for transport.
+        System.setProperty(SVNKIT_SSH_CLIENT, APACHE);
     }
 
     /*
      * Plugin loader.
      */
     public static void loadPlugins() {
-        // Specify MINA-SSHD for transport.
-        System.setProperty(SVNKIT_SSH_CLIENT, APACHE);
         RemoteRepositoryFactory.addRepositoryConnector("svn", SVNRemoteRepository2.class);
     }
 

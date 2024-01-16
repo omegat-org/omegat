@@ -1092,7 +1092,7 @@
 
     <para>Die technische Java-Referenz ist nützlich als kanonische Referenz.<variablelist>
         <varlistentry id="app.regex.java">
-          <term id="app.regex.java.title"><ulink url="">Java-Regex-Dokumentation</ulink></term>
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Java-Regex-Dokumentation</ulink></term>
           <listitem>
             <para>Die offizielle Referenz für in Java verwendete reguläre Ausdrücke.</para>
           </listitem>

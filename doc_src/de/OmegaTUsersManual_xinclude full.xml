@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-]>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <book lang="de" id="book.user.manual">
   <bookinfo>
-    <title id="book.user.manual.title">OmegaT  - User Manual</title>
+    <title id="book.user.manual.title">OmegaT 6.0.0 - Bedienungsanleitung</title>
 
 	<!-- Copyright 2002-2023
 		 - Vincent Bidaux

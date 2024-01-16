@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-]>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.running.omegat">
   <title id="how.to.running.omegat.title">OmegaT ausführen</title>
 
@@ -91,8 +88,7 @@
 
 	<para>Die Methoden variieren je nach System, aber in der Regel können Sie OmegaT, sobald es installiert ist, direkt über die Befehlszeile starten. Einzelheiten finden Sie im Abschnitt <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>.</para>
 
-	<para>Sie können ein Skript erstellen, das die gewünschten Startparameter für die Befehlszeile enthält. If <filename>.jar</filename> files are properly associated with the and your PATH settings are correct, you can also simply click (or double-click) on <filename>OmegaT.jar</filename> to launch it directly.</para>
-
+	<para>Sie können ein Skript erstellen, das die gewünschten Startparameter für die Befehlszeile enthält. Wenn <filename>.jar</filename>-Dateien ordnungsgemäß mit der Java 11 Runtime Environment verknüpft sind und Ihre PATH-Einstellungen korrekt sind, können Sie auch einfach auf <filename>OmegaT.jar</filename> klicken (oder doppelklicken), um es direkt zu starten.</para>
 	<para>Weitere Informationen finden Sie in der Dokumentation zu Ihrem System.</para>
   </section>
   

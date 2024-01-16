@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
-[
-<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
-]>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.installing.omegat">
   <title id="how.to.installing.omegat.title">OmegaT installieren</title>
 
@@ -10,13 +7,13 @@
 
   <variablelist>
 	<varlistentry>
-	  <term>Standard: OmegaT </term>
+	  <term>Standard: OmegaT 6.0.0</term>
 	  <listitem>
 		<para>Diese Variante wird für den täglichen Gebrauch empfohlen.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Developer: OmegaT Nightly</term>
+	  <term>Developer: OmegaT Weekly</term>
 	  <listitem>
 		<para>Diese Variante wird jedes Mal automatisch erstellt, wenn OmegaT geändert wird. Sie dient zu Testzwecken.</para>
 	  </listitem>
@@ -58,7 +55,9 @@
 
       <para>Die Ausführung des Skripts erfordert die Eingabe Ihres <filename>sudo</filename>-Passworts.</para>
 
-      <para>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <filename>/opt/omegat/</filename>. If there isn’t one, it installs the program in <filename>/opt/omegat/OmegaT_</filename> and sets it as the default version (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
+      <para>Das Skript sucht nach einer bestehenden Installation der gleichen OmegaT-Version in <filename>/opt/omegat
+		  /</filename>. If there isn’t one, it installs the program in <filename>/opt/omegat/OmegaT_6.0.0</filename> and
+		  sets it as the default version (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
     <para>Nach dem Entpacken oder Installieren können Sie die nicht mehr benötigte heruntergeladene Datei löschen.</para>

@@ -25,9 +25,7 @@
 			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
 		  </listitem>
 		</itemizedlist>
-
-        <para>Allows you to activate or deactivate enabled and properly configured
-          machine translation engines.</para>
+        <para>Ermöglicht es Ihnen, die verfügbaren maschinellen Übersetzungsdienste zu aktivieren oder deaktivieren.</para>
 
         <para>Wenn mehrere Übersetzungsdienste ausgewählt sind, können Sie auch <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> verwenden, um zwischen ihnen umzuschalten und den zuletzt ausgewählten einfügen. Siehe die <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>-Einstellungen für weitere Informationen.</para>
       </listitem>
@@ -41,10 +39,7 @@
 			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
 		  </listitem>
 		</itemizedlist>
-
-        <para>Allows you to activate or deactivate fuzzy matching for glossary
-        matches.</para>
-
+        <para>Ermöglicht es Ihnen, Fuzzy-Matching für Glossar-Matches zu aktivieren oder deaktivieren.</para>
 		<para>Siehe die <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>-Einstellungen für weitere Informationen.</para>
       </listitem>
     </varlistentry>
@@ -57,10 +52,7 @@
 			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
 		  </listitem>
 		</itemizedlist>
-
-        <para>Allows you to activate or deactivate fuzzy matching for dictionary
-        matches.</para>
-
+        <para>Ermöglicht es Ihnen, Fuzzy-Matching für Wörterbuch-Matches zu aktivieren oder deaktivieren.</para>
 		<para>Siehe die <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>-Einstellungen für weitere Informationen.</para>
       </listitem>
     </varlistentry>

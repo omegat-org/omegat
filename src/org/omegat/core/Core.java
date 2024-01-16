@@ -218,14 +218,14 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(ClassLoader classLoader, final Map<String, String> params) throws Exception {
+    public static void initializeGUI(final Map<String, String> params) throws Exception {
         cmdLineParams = params;
 
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
         // 2. Initialize theme
-        UIDesignManager.initialize(classLoader);
+        UIDesignManager.initialize();
 
         // 3. Initialize application frame
         MainWindow me = new MainWindow();

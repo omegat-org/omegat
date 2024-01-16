@@ -337,7 +337,7 @@ public final class Main {
 
         System.setProperty("swing.aatext", "true");
         try {
-            Core.initializeGUI(mainClassLoader, PARAMS);
+            Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

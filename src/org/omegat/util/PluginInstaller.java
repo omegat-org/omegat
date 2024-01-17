@@ -100,7 +100,7 @@ public final class PluginInstaller {
         String message;
         if (currentInfo != null) {
             if (currentInfo.getVersion().equals(version)) {
-                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_OVERRIDE"), pluginName,
+                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_OVERWRITE"), pluginName,
                         currentInfo.getVersion(), version);
             } else {
                 message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,

@@ -216,6 +216,21 @@ public final class Core {
     }
 
     /**
+     * initialize GUI.
+     * <p>
+     * An interface that was introduced in v5.6.0 when supporting theme plugin.
+     *
+     * @param cl class loader.
+     * @param params CLI parameters.
+     * @throws Exception when error occurred.
+     */
+    @Deprecated(since = "6.1.0")
+    @SuppressWarnings("unused")
+    public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
+        initializeGUI(params);
+    }
+
+    /**
      * Initialize application components.
      */
     public static void initializeGUI(final Map<String, String> params) throws Exception {

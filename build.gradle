@@ -253,6 +253,7 @@ dependencies {
         implementation(libs.languagetool.core) {
             exclude module: 'guava'
             exclude module: 'language-detector'
+            exclude module: 'annotations'
         }
         implementation(libs.language.detector)
 
@@ -260,6 +261,7 @@ dependencies {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen'
             exclude module: 'language-detector'
+            exclude module: 'annotations'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
 
@@ -335,6 +337,7 @@ dependencies {
         exclude group: 'org.slf4j'
         exclude module: 'guava'
         exclude module: 'language-detector'
+        exclude module: 'annotations'
         exclude group: 'ch.qos.logback'
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
         exclude module: 'lucene-gosen'

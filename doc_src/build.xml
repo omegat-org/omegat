@@ -63,7 +63,7 @@
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="${language}/pdf/OmegaT_documentation.fo" />
+            <arg value="${target}/OmegaT_documentation.fo" />
             <arg value="${language}/index.xml" />
             <arg value="${dbk}/fo/docbook.xsl" />
             <arg value="paper.type=A4" />
@@ -98,16 +98,15 @@
                 <include name="*.jar"/>
             </fileset>
             <fileset dir="${fop.home.build}">
-                <include name="fop.jar"/>
-                <include name="fop-hyph.jar" />
+                <include name="fop*.jar"/>
              </fileset>
         </classpath>
     </taskdef>
 
     <target name="pdf" depends="fo">
         <fop format="application/pdf"
-             fofile="${language}/pdf/OmegaT_documentation.fo"
-             outfile="${language}/pdf/OmegaT_documentation_${language}.PDF"
+             fofile="${target}/OmegaT_documentation.fo"
+             outfile="${target}/OmegaT_documentation_${language}.PDF"
              basedir="${language}/"
              userconfig="fop.xconf"
              force="true" />

@@ -97,24 +97,27 @@ public final class PluginInstaller {
         String version = info.getVersion();
         // detect current installation
         PluginInformation currentInfo = getInstalledPlugins().getOrDefault(info.getClassName(), null);
+        String title = "";
         String message;
         if (currentInfo != null) {
             if (currentInfo.getVersion().equals(version)) {
+                title = OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION");
                 message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_OVERWRITE"), pluginName,
                         currentInfo.getVersion(), version);
             } else {
+                title = OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_UPGRADE");
                 message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
                         currentInfo.getVersion(), version);
             }
         } else {
+            title = OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION");
             message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_INSTALL"), pluginName,
                     version);
         }
 
         // confirm installation
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
-                Core.getMainWindow().getApplicationFrame(), message,
-                OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"), JOptionPane.OK_CANCEL_OPTION,
+                Core.getMainWindow().getApplicationFrame(), message, title, JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE)) {
             if (doInstall(currentInfo, pluginJarFile.toFile())) {
                 JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), OStrings.getString(

@@ -87,13 +87,17 @@ public class SaveOptionsPanel extends JPanel {
         intervalDescriptionPanel.setLayout(new java.awt.BorderLayout());
 
         intervalDescriptionTextArea.setEditable(false);
-        intervalDescriptionTextArea.setColumns(20);
-        intervalDescriptionTextArea.setRows(5);
+        intervalDescriptionTextArea.setColumns(40);
+        intervalDescriptionTextArea.setFont(minutesLabel.getFont()
+        );
+        intervalDescriptionTextArea.setLineWrap(true);
+        intervalDescriptionTextArea.setRows(1);
+        intervalDescriptionTextArea.setTabSize(4);
         intervalDescriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION"));
         intervalDescriptionTextArea.setWrapStyleWord(true);
         intervalDescriptionTextArea.setAutoscrolls(false);
         intervalDescriptionTextArea.setFocusable(false);
-        intervalDescriptionTextArea.setPreferredSize(new java.awt.Dimension(232, 30));
+        intervalDescriptionTextArea.setOpaque(false);
         intervalDescriptionTextArea.setRequestFocusEnabled(false);
         intervalDescriptionPanel.add(intervalDescriptionTextArea, java.awt.BorderLayout.NORTH);
 

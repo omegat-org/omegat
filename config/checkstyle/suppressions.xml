@@ -70,10 +70,10 @@
     <suppress files="PluginInformation\.java" checks="NeedBraces" lines="167-192"/>
     <!-- core/data/* -->
     <suppress checks="ParameterNumber" files="PluginInformation\.java" lines="60"/>
-    <suppress checks="ParameterNumber" files="ParseEntry\.java" lines="136,198,233,277"/>
+    <suppress checks="ParameterNumber" files="ParseEntry\.java" lines="143,203,216,254,302,335"/>
     <suppress checks="ParameterNumber" files="ExternalTMFactory\.java" lines="256,263"/>
     <suppress checks="FileLength" files="RealProject\.java"/>
-    <suppress checks="ParameterNumber" files="RealProject\.java" lines="1871"/>
+    <suppress checks="ParameterNumber" files="RealProject\.java" lines="1871,1882"/>
     <!-- util/Platform -->
     <suppress files="Platform\.java" checks="ConstantName" lines="61-80"/>
     <!-- util/Preferences -->

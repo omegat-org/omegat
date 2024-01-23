@@ -683,7 +683,7 @@ ext.makeWinTask = { args ->
         outputs.file installerExe
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                       [exePresent('iscc') || exePresent('docker'),
+                       [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
                         'InnoSetup or Docker not installed'])
         }
         doFirst {
@@ -990,10 +990,14 @@ manualIndexXmls.each { xml ->
     task(pdfTaskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
         outputs.file "${distsDir}/OmegaT_documentation_${lang}.PDF"
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
+                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
+        }
         doLast {
             exec {
                 workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'pdf'
+                commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs",  'pdf'
             }
             copy {
                 from fileTree(dir: "doc_src/${lang}/pdf", include: '*.PDF')
@@ -1007,10 +1011,14 @@ manualIndexXmls.each { xml ->
     def htmlTaskName = "manualHtml${lang.capitalize()}"
     task(htmlTaskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
+                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
+        }
         doLast {
             exec {
                 workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'html5'
+                commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/${lang}", 'html5'
             }
             delete fileTree(dir: "doc_src/${lang}", includes: ['xhtml5/**/*', 'index.xml'])
         }
@@ -1041,10 +1049,14 @@ firstStepsXmls.each { xml ->
     def taskName = "firstSteps${lang.capitalize()}"
     task(taskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
+                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
+        }
         doLast {
             exec {
                 workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'first-steps'
+                commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/${lang}", 'first-steps'
             }
         }
     }
@@ -1057,16 +1069,19 @@ instantStartXmls.each { xml ->
     def taskName = "instantStartGuide${lang.capitalize()}"
     task(taskName) {
         inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
+        onlyIf {
+            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
+                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
+        }
         doLast {
             exec {
                 workingDir = 'doc_src'
-                commandLine './docgen', "-Dlanguage=${lang}", 'instant-start'
+                commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../docs/${lang}", 'instant-start'
             }
         }
     }
     instantStartGuides.dependsOn taskName
 }
-
 
 
 task debug(type: JavaExec) {

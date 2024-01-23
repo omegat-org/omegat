@@ -150,5 +150,5 @@ dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 spotbugs = {id = "com.github.spotbugs", version = "6.0.6"}
 spotless = {id = "com.diffplug.spotless", version = "6.24.0"}
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.5"}
-versions = {id = "com.github.ben-manes.versions", version = "0.50.0"}
+versions = {id = "com.github.ben-manes.versions", version = "0.51.0"}
 ssh = {id = "org.hidetake.ssh", version = "2.11.2"}

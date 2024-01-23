@@ -8,8 +8,8 @@
 
 	<para>OmegaTを初めて開始するとき、メインウィンドウには次の標準レイアウトが表示されます。</para>
 
-		<figure id="default.omegat.layout2">
-      <title id="default.omegat.layout2.title">Mac OSでのデフォルトOmeaTレイアウト</title>
+		<figure id="default.omegat.layout.macos">
+      <title id="default.omegat.layout.macos.title">Mac OSでのデフォルトOmeaTレイアウト</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>

@@ -492,7 +492,7 @@ manualIndexXmls.each { xml ->
     tasks.register(pdfTaskName, Exec) {
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
                 excludes: ['xhtml5/*', 'index.xml'])
-        outputs.file layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
+        outputs.files layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
         onlyIf {
             conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
                     [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])

@@ -63,7 +63,7 @@
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="${target}/OmegaT_documentation.fo" />
+            <arg value="${target}/OmegaT_documentation_${language}.fo" />
             <arg value="${language}/index.xml" />
             <arg value="${dbk}/fo/docbook.xsl" />
             <arg value="paper.type=A4" />
@@ -105,7 +105,7 @@
 
     <target name="pdf" depends="fo">
         <fop format="application/pdf"
-             fofile="${target}/OmegaT_documentation.fo"
+             fofile="${target}/OmegaT_documentation_${language}.fo"
              outfile="${target}/OmegaT_documentation_${language}.PDF"
              basedir="${language}/"
              userconfig="fop.xconf"

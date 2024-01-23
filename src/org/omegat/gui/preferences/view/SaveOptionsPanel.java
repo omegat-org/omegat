@@ -28,7 +28,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

@@ -41,16 +41,16 @@
     </target>
 
     <!-- The fonts must be available in the system -->
-    <condition property="font.family" value="IPAPGothic">
+    <condition property="font.family" value="Noto Sans CJK JP">
         <equals arg1="${language}" arg2="ja"/>
     </condition>
-    <condition property="monospace.font.family" value="IPAGothic">
+    <condition property="monospace.font.family" value="Noto Sans CJK JP">
         <equals arg1="${language}" arg2="ja"/>
     </condition>
-    <condition property="font.family" value="WenQuanYi Micro Hei">
+    <condition property="font.family" value="Noto Sans CJK SC">
         <equals arg1="${language}" arg2="zh_CN"/>
     </condition>
-    <condition property="monospace.font.family" value="WenQuanYi Micro Hei">
+    <condition property="monospace.font.family" value="Noto Sans CJK SC">
         <equals arg1="${language}" arg2="zh_CN"/>
     </condition>
     <property name="font.family" value="DejaVu Sans"/>

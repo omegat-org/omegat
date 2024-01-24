@@ -28,7 +28,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -56,16 +55,20 @@ public class SaveOptionsPanel extends JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        intervalDescriptionPanel = new javax.swing.JPanel();
         intervalDescriptionTextArea = new javax.swing.JTextArea();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
+        intervalConfigurationPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         minutesLabel = new javax.swing.JLabel();
         minutesSpinner = new javax.swing.JSpinner();
         secondsLabel = new javax.swing.JLabel();
         secondsSpinner = new javax.swing.JSpinner();
-        jPanel2 = new javax.swing.JPanel();
-        externalCommandLabel = new javax.swing.JLabel();
+        statsDescriptionPanel = new javax.swing.JPanel();
+        statsPanel = new javax.swing.JPanel();
+        jsonOutputCheckBox = new javax.swing.JCheckBox();
+        xmlOutputCheckBox = new javax.swing.JCheckBox();
+        textOutputCheckBox = new javax.swing.JCheckBox();
+        externalCommandPanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         externalCmdDescriptionTextArea = new javax.swing.JTextArea();
         externalCommandScrollPane = new javax.swing.JScrollPane();
@@ -75,75 +78,100 @@ public class SaveOptionsPanel extends JPanel {
         variablesList = new javax.swing.JComboBox<>();
         insertButton = new javax.swing.JButton();
         allowProjectCmdCheckBox = new javax.swing.JCheckBox();
-        jPanelStats = new javax.swing.JPanel();
-        textOutputCheckBox = new javax.swing.JCheckBox();
-        jsonOutputCheckBox = new javax.swing.JCheckBox();
-        xmlOutputCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
-        add(jPanel1);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        intervalDescriptionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SAVE_DIALOG_INTERVAL_LABEL")));
+        intervalDescriptionPanel.setLayout(new java.awt.BorderLayout());
 
         intervalDescriptionTextArea.setEditable(false);
-        intervalDescriptionTextArea.setFont(minutesLabel.getFont());
+        intervalDescriptionTextArea.setColumns(40);
+        intervalDescriptionTextArea.setFont(minutesLabel.getFont()
+        );
         intervalDescriptionTextArea.setLineWrap(true);
-        intervalDescriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION")); // NOI18N
+        intervalDescriptionTextArea.setRows(1);
+        intervalDescriptionTextArea.setTabSize(4);
+        intervalDescriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION"));
         intervalDescriptionTextArea.setWrapStyleWord(true);
-        intervalDescriptionTextArea.setDragEnabled(false);
+        intervalDescriptionTextArea.setAutoscrolls(false);
         intervalDescriptionTextArea.setFocusable(false);
         intervalDescriptionTextArea.setOpaque(false);
-        jPanel1.add(intervalDescriptionTextArea, java.awt.BorderLayout.NORTH);
+        intervalDescriptionTextArea.setRequestFocusEnabled(false);
+        intervalDescriptionPanel.add(intervalDescriptionTextArea, java.awt.BorderLayout.NORTH);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 20, 0, 0));
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        intervalConfigurationPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jPanel10.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         minutesLabel.setLabelFor(minutesSpinner);
         org.openide.awt.Mnemonics.setLocalizedText(minutesLabel, OStrings.getString("SAVE_DIALOG_MINUTES")); // NOI18N
+        minutesLabel.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel10.add(minutesLabel, gridBagConstraints);
+        jPanel1.add(minutesLabel, gridBagConstraints);
 
         minutesSpinner.setValue(90);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
-        jPanel10.add(minutesSpinner, gridBagConstraints);
+        jPanel1.add(minutesSpinner, gridBagConstraints);
 
         secondsLabel.setLabelFor(secondsSpinner);
         org.openide.awt.Mnemonics.setLocalizedText(secondsLabel, OStrings.getString("SAVE_DIALOG_SECONDS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        jPanel10.add(secondsLabel, gridBagConstraints);
+        jPanel1.add(secondsLabel, gridBagConstraints);
 
         secondsSpinner.setValue(90);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
-        jPanel10.add(secondsSpinner, gridBagConstraints);
+        jPanel1.add(secondsSpinner, gridBagConstraints);
 
-        jPanel5.add(jPanel10, java.awt.BorderLayout.WEST);
+        intervalConfigurationPanel.add(jPanel1);
 
-        jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
+        intervalDescriptionPanel.add(intervalConfigurationPanel, java.awt.BorderLayout.CENTER);
 
-        add(jPanel1, java.awt.BorderLayout.NORTH);
+        add(intervalDescriptionPanel);
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        statsDescriptionPanel.setLayout(new java.awt.BorderLayout());
 
-        externalCommandLabel.setLabelFor(externalCommandTextArea);
-        org.openide.awt.Mnemonics.setLocalizedText(externalCommandLabel,
-                OStrings.getString("EXTERNAL_COMMAND_LABEL")); // NOI18N
-        jPanel2.add(externalCommandLabel, java.awt.BorderLayout.NORTH);
+        statsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SAVE_DIALOG_STATS_OUTPUT_FORMAT")));
+        statsPanel.setAlignmentX(0.0F);
+        statsPanel.setAlignmentY(0.0F);
+        statsPanel.setMaximumSize(new java.awt.Dimension(1010, 87));
+        statsPanel.setMinimumSize(new java.awt.Dimension(800, 87));
+        statsPanel.setPreferredSize(new java.awt.Dimension(800, 100));
+        statsPanel.setLayout(new javax.swing.BoxLayout(statsPanel, javax.swing.BoxLayout.PAGE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(jsonOutputCheckBox, OStrings.getString("STATS_FORMAT_TEXT"));
+        statsPanel.add(jsonOutputCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(xmlOutputCheckBox, OStrings.getString("STATS_FORMAT_JSON"));
+        statsPanel.add(xmlOutputCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(textOutputCheckBox,  OStrings.getString("STATS_FORMAT_XML"));
+        statsPanel.add(textOutputCheckBox);
+
+        statsDescriptionPanel.add(statsPanel, java.awt.BorderLayout.PAGE_END);
+
+        add(statsDescriptionPanel);
+
+        externalCommandPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("EXTERNAL_COMMAND_LABEL")));
+        externalCommandPanel.setLayout(new java.awt.BorderLayout());
 
         jPanel8.setLayout(new java.awt.BorderLayout());
 
@@ -153,7 +181,6 @@ public class SaveOptionsPanel extends JPanel {
         externalCmdDescriptionTextArea.setText(OStrings.getString("EXTERNAL_COMMAND_DESCRIPTION")); // NOI18N
         externalCmdDescriptionTextArea.setWrapStyleWord(true);
         externalCmdDescriptionTextArea.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1));
-        externalCmdDescriptionTextArea.setDragEnabled(false);
         externalCmdDescriptionTextArea.setOpaque(false);
         jPanel8.add(externalCmdDescriptionTextArea, java.awt.BorderLayout.NORTH);
 
@@ -166,8 +193,7 @@ public class SaveOptionsPanel extends JPanel {
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(variablesLabel,
-                OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
         jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
@@ -181,30 +207,13 @@ public class SaveOptionsPanel extends JPanel {
 
         jPanel8.add(jPanel4, java.awt.BorderLayout.SOUTH);
 
-        jPanel2.add(jPanel8, java.awt.BorderLayout.CENTER);
+        externalCommandPanel.add(jPanel8, java.awt.BorderLayout.CENTER);
 
         allowProjectCmdCheckBox.setFont(new JLabel().getFont());
-        org.openide.awt.Mnemonics.setLocalizedText(allowProjectCmdCheckBox,
-                OStrings.getString("ALLOW_PROJECT_EXTERN_CMD")); // NOI18N
-        jPanel2.add(allowProjectCmdCheckBox, java.awt.BorderLayout.SOUTH);
+        org.openide.awt.Mnemonics.setLocalizedText(allowProjectCmdCheckBox, OStrings.getString("ALLOW_PROJECT_EXTERN_CMD")); // NOI18N
+        externalCommandPanel.add(allowProjectCmdCheckBox, java.awt.BorderLayout.SOUTH);
 
-        add(jPanel2, java.awt.BorderLayout.CENTER);
-
-        jPanelStats.setBorder(javax.swing.BorderFactory
-                .createTitledBorder(OStrings.getString("SAVE_DIALOG_STATS_OUTPUT_FORMAT"))); // NOI18N
-        jPanelStats.setAlignmentY(0.0F);
-        jPanelStats.setLayout(new javax.swing.BoxLayout(jPanelStats, javax.swing.BoxLayout.PAGE_AXIS));
-
-        org.openide.awt.Mnemonics.setLocalizedText(textOutputCheckBox,
-                OStrings.getString("STATS_FORMAT_TEXT")); // NOI18N
-        jPanelStats.add(textOutputCheckBox);
-        org.openide.awt.Mnemonics.setLocalizedText(jsonOutputCheckBox,
-                OStrings.getString("STATS_FORMAT_JSON")); // NOI18N
-        jPanelStats.add(jsonOutputCheckBox);
-        org.openide.awt.Mnemonics.setLocalizedText(xmlOutputCheckBox, OStrings.getString("STATS_FORMAT_XML")); // NOI18N
-        jPanelStats.add(xmlOutputCheckBox);
-        add(jPanelStats);
-
+        add(externalCommandPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_insertButtonActionPerformed
@@ -214,26 +223,26 @@ public class SaveOptionsPanel extends JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox allowProjectCmdCheckBox;
     private javax.swing.JTextArea externalCmdDescriptionTextArea;
-    private javax.swing.JLabel externalCommandLabel;
+    private javax.swing.JPanel externalCommandPanel;
     private javax.swing.JScrollPane externalCommandScrollPane;
     javax.swing.JTextArea externalCommandTextArea;
     javax.swing.JButton insertButton;
+    private javax.swing.JPanel intervalConfigurationPanel;
+    private javax.swing.JPanel intervalDescriptionPanel;
     private javax.swing.JTextArea intervalDescriptionTextArea;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
+    javax.swing.JCheckBox jsonOutputCheckBox;
     private javax.swing.JLabel minutesLabel;
     javax.swing.JSpinner minutesSpinner;
     private javax.swing.JLabel secondsLabel;
     javax.swing.JSpinner secondsSpinner;
+    private javax.swing.JPanel statsDescriptionPanel;
+    private javax.swing.JPanel statsPanel;
+    javax.swing.JCheckBox textOutputCheckBox;
     private javax.swing.JLabel variablesLabel;
     javax.swing.JComboBox<String> variablesList;
-    private JPanel jPanelStats;
-    JCheckBox jsonOutputCheckBox;
-    JCheckBox xmlOutputCheckBox;
-    JCheckBox textOutputCheckBox;
+    javax.swing.JCheckBox xmlOutputCheckBox;
     // End of variables declaration//GEN-END:variables
 }

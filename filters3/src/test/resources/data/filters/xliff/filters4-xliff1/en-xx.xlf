@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="interface.po" source-language="en" target-language="xx" datatype="plaintext" xml:space="preserve">
+    <body>    
+      <trans-unit xml:space="preserve" id="example_01" approved="yes">
+        <source xml:lang="en">This is the source text.</source>
+      </trans-unit>
+      <trans-unit xml:space="preserve" id="example_02" approved="yes">
+        <source xml:lang="en">foo</source>
+        <target xml:lang="xx">bar</target>
+      </trans-unit>
+      
+      <trans-unit xml:space="preserve" id="example_03" approved="yes">
+        <source xml:lang="en">Should translate in result.</source>
+      </trans-unit>
+
+      <trans-unit xml:space="preserve" id="satisfaction_00_masc" approved="yes">
+        <source xml:lang="en">Are you satisfied?</source>
+        <target xml:lang="xx"></target>
+        <note>Adressed to ALL respondents.</note>
+      </trans-unit>
+
+      <trans-unit xml:space="preserve" id="satisfaction_01_masc" approved="yes">
+        <source xml:lang="en">Are you satisfied?</source>
+        <target xml:lang="xx">Satisfait?</target>
+        <note>Adressed to male respondents.</note>
+      </trans-unit>
+
+      <trans-unit xml:space="preserve" id="satisfaction_01_fem" approved="yes">
+        <source xml:lang="en">Are you satisfied?</source>
+        <target xml:lang="xx">Satisfaite?</target>
+        <note>Adressed to female respondents.</note>
+      </trans-unit>
+
+    <group id="Group 3">
+      
+      <trans-unit xml:space="preserve" id="Added_1" translate="yes">
+        <source xml:lang="en">Added and translated</source>
+        <target xml:lang="xx"></target>
+      </trans-unit>
+      <trans-unit xml:space="preserve" id="Added_2" translate="no">
+        <source xml:lang="en">Added and NOT translated</source>
+        <target xml:lang="xx"></target>
+      </trans-unit>
+    </group>
+    
+    </body>
+  </file>
+</xliff>

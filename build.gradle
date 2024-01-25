@@ -233,9 +233,6 @@ dependencies {
         // Data: inline data URL handler
         implementation(libs.url.protocol.handler)
 
-        // PDF Filter
-        implementation(libs.apache.pdfbox)
-
         // Dictionary
         implementation(libs.bundles.dictionary)
 
@@ -301,7 +298,6 @@ dependencies {
         }
 
         implementation(libs.guava)
-        implementation(libs.jetbrains.annotations)
 
         // JSON parser
         implementation(libs.bundles.jackson)

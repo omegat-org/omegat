@@ -23,7 +23,6 @@ ivy = "2.5.2"
 jackson = "2.16.1"
 bc = "1.77"
 nashorn = "15.4"
-fifesoft = "3.2.0"
 caffeine = "3.1.8"
 wiremock = "3.0.1"
 vldocking = "3.0.5-2"
@@ -101,10 +100,10 @@ bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
-fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version.ref = "fifesoft"}
-fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version.ref = "fifesoft"}
-fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.1.4"}
-fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version.ref = "fifesoft"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.3.4"}
+fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.1"}
+fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
+fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.1"}
 caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.ref = "caffeine"}
 caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}
 wiremock-jre8 = {group = "com.github.tomakehurst", name = "wiremock-jre8", version.ref = "wiremock"}

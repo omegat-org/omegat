@@ -26,8 +26,10 @@ CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>1 || CMD="$(t
 echo select container CLI: $CMD
 $CMD info || false
 
+[[ "$@" =~ (^|[[:space:]])pdf($|[[:space:]]) ]] && TAG=pdfgen || TAG=alpine
+
 EXIT_CODE=0
-$CMD run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen "$@"
+$CMD run -i --rm -u  `id -u`:`id -g` -v "$(dirname "$PWD")":/work/root omegatorg/docgen:$TAG "$@"
 EXIT_CODE=$?
 sleep 5
 if [[ -e $SHELL_PATH/$LANGUAGE/xhtml5 ]]; then

@@ -61,8 +61,9 @@ public class PluginsTest {
             plugins.load(fr);
         }
 
-        TestPreferencesInitializer.init(); // Some plugins depend on inited
-                                           // prefs
+        // Some plugins depend on inited prefs
+        TestPreferencesInitializer.init();
+
         for (Object o : plugins.keySet()) {
             if (o.toString().startsWith("plugin.desc")) {
                 continue;

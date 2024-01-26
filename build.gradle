@@ -226,10 +226,6 @@ dependencies {
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
 
-        // stax
-        implementation(libs.stax2.api)
-        runtimeOnly(libs.woodstox.core)
-
         // Data: inline data URL handler
         implementation(libs.url.protocol.handler)
 

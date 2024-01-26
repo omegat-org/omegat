@@ -36,7 +36,7 @@ public class Scribus extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new ScribusFilter(),
-                "test/data/filters/Scribus/Scribus.sla", null);
+                "src/test/resources/data/filters/Scribus/Scribus.sla", null);
         assertEquals(1, lines.size());
         assertEquals("Translatable text", lines.get(0));
     }

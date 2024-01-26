@@ -44,26 +44,26 @@ import org.omegat.filters3.xml.docbook.DocBookFilter;
 public class DocBookFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
+        List<String> lines = parse(new DocBookFilter(), "src/test/resources/data/filters/docBook/file-DocBookFilter.xml");
         boolean c = lines.contains("My String");
         assertTrue("'My String' not defined'", c);
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
+        translateText(new DocBookFilter(), "src/test/resources/data/filters/docBook/file-DocBookFilter.xml");
     }
 
     @Test
     public void testTranslateExtWriter() throws Exception {
-        translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter-extWriter.xml");
+        translateText(new DocBookFilter(), "src/test/resources/data/filters/docBook/file-DocBookFilter-extWriter.xml");
     }
 
     @Test
     public void testLoadInvalidXml() throws Exception {
         try {
             List<String> lines = parse(new DocBookFilter(),
-                    "test/data/filters/docBook/file-DocBookFilter-invalid2.xml");
+                    "src/test/resources/data/filters/docBook/file-DocBookFilter-invalid2.xml");
         } catch (TranslationException e) {
             // should contain invalid tag
             assertTrue(e.getMessage().contains("para"));
@@ -78,14 +78,14 @@ public class DocBookFilterTest extends TestFilterBase {
 
     @Test
     public void testParseIntroLinux() throws Exception {
-        List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/Intro-Linux/abook.xml");
+        List<String> lines = parse(new DocBookFilter(), "src/test/resources/data/filters/docBook/Intro-Linux/abook.xml");
         assertTrue("Message not exist, i.e. entities not loaded",
                 lines.contains("Why should I use an editor?"));
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/docBook/Intro-Linux/abook.xml";
+        String f = "src/test/resources/data/filters/docBook/Intro-Linux/abook.xml";
         IProject.FileInfo fi = loadSourceFiles(new DocBookFilter(), f);
 
         checkMultiStart(fi, f);
@@ -97,11 +97,11 @@ public class DocBookFilterTest extends TestFilterBase {
     @Test
     public void testIsSupported() throws Exception {
         DocBookFilter filter = new DocBookFilter();
-        Path goodFile = Paths.get("test/data/filters/docBook/file-DocBookFilter.xml");
+        Path goodFile = Paths.get("src/test/resources/data/filters/docBook/file-DocBookFilter.xml");
         try (BufferedReader reader = Files.newBufferedReader(goodFile)) {
             assertTrue(filter.isFileSupported(reader));
         }
-        Path badFile = Paths.get("test/data/filters/docBook/file-DocBookFilter-invalid.xml");
+        Path badFile = Paths.get("src/test/resources/data/filters/docBook/file-DocBookFilter-invalid.xml");
         try (BufferedReader reader = Files.newBufferedReader(badFile)) {
             assertFalse(filter.isFileSupported(reader));
         }

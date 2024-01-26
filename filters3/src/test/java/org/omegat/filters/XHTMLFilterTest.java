@@ -58,7 +58,7 @@ public class XHTMLFilterTest extends TestFilterBase {
             public InputSource resolveEntity(String publicId, String systemId)
                     throws SAXException, IOException {
                 String filename = new File(systemId).getName();
-                File localFile = new File("test/data/dtd", filename);
+                File localFile = new File("src/test/resources/data/dtd", filename);
                 if (localFile.exists()) {
                     return new InputSource(new FileInputStream(localFile));
                 }
@@ -77,7 +77,7 @@ public class XHTMLFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-        String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
+        String f = "src/test/resources/data/filters/xhtml/file-XHTMLFilter.html";
         XHTMLFilter filter = new XHTMLFilter();
         filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
@@ -87,7 +87,7 @@ public class XHTMLFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
+        String f = "src/test/resources/data/filters/xhtml/file-XHTMLFilter.html";
         XHTMLFilter filter = new XHTMLFilter();
         filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
@@ -96,7 +96,7 @@ public class XHTMLFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
+        String f = "src/test/resources/data/filters/xhtml/file-XHTMLFilter.html";
         XHTMLFilter filter = new XHTMLFilter();
         filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
                 new Language("be"), false));
@@ -112,7 +112,7 @@ public class XHTMLFilterTest extends TestFilterBase {
 
     @Test
     public void testTagsOptimization() throws Exception {
-        String f = "test/data/filters/xhtml/file-XHTMLFilter-tags-optimization.html";
+        String f = "src/test/resources/data/filters/xhtml/file-XHTMLFilter-tags-optimization.html";
         XHTMLFilter filter = new XHTMLFilter();
 
         Core.getFilterMaster().getConfig().setRemoveTags(false);

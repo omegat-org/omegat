@@ -36,7 +36,7 @@ public class AndroidFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
         List<ParsedEntry> lines = parse3(new AndroidFilter(),
-                "test/data/filters/Android/file-AndroidFilter.xml", null);
+                "src/test/resources/data/filters/Android/file-AndroidFilter.xml", null);
         assertTrue("MyApp".equals(lines.get(0).source));
         // assertTrue("Some comment".equals(lines.get(0).comment));
         // assertTrue("app_label".equals(lines.get(0).id));
@@ -46,12 +46,12 @@ public class AndroidFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translateXML(new AndroidFilter(), "test/data/filters/Android/file-AndroidFilter.xml");
+        translateXML(new AndroidFilter(), "src/test/resources/data/filters/Android/file-AndroidFilter.xml");
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/Android/file-AndroidFilter.xml";
+        String f = "src/test/resources/data/filters/Android/file-AndroidFilter.xml";
         IProject.FileInfo fi = loadSourceFiles(new AndroidFilter(), f);
 
         checkMultiStart(fi, f);

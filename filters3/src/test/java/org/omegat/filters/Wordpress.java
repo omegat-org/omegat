@@ -36,7 +36,7 @@ public class Wordpress extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new WordpressFilter(),
-                "test/data/filters/wordpress/Wordpress.xml", null);
+                "src/test/resources/data/filters/wordpress/Wordpress.xml", null);
         assertEquals(3, lines.size());
         assertEquals("This is a description", lines.get(0));
     }

@@ -42,26 +42,26 @@ import org.omegat.filters3.xml.relaxng.RelaxNGFilter;
 public class RelaxNGFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        List<String> lines = parse(new RelaxNGFilter(), "test/data/filters/relaxng/relaxng.rng");
+        List<String> lines = parse(new RelaxNGFilter(), "src/test/resources/data/filters/relaxng/relaxng.rng");
         boolean c = lines.contains("RELAX NG is a schema language for XML.");
         assertTrue("'RELAX NG is a schema language for XML.' not defined'", c);
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new RelaxNGFilter(), "test/data/filters/relaxng/relaxng.rng");
+        translateText(new RelaxNGFilter(), "src/test/resources/data/filters/relaxng/relaxng.rng");
     }
 
     @Test
     public void testParseIntroLinux() throws Exception {
-        List<String> lines = parse(new RelaxNGFilter(), "test/data/filters/relaxng/relaxng.rng");
+        List<String> lines = parse(new RelaxNGFilter(), "src/test/resources/data/filters/relaxng/relaxng.rng");
         assertTrue("Message not exist, i.e. entities not loaded",
                 lines.contains("RELAX NG is a schema language for XML."));
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/relaxng/relaxng.rng";
+        String f = "src/test/resources/data/filters/relaxng/relaxng.rng";
         IProject.FileInfo fi = loadSourceFiles(new RelaxNGFilter(), f);
 
         checkMultiStart(fi, f);
@@ -71,15 +71,15 @@ public class RelaxNGFilterTest extends TestFilterBase {
     @Test
     public void testIsSupported() throws Exception {
         RelaxNGFilter filter = new RelaxNGFilter();
-        Path goodFile = Paths.get("test/data/filters/relaxng/relaxng.rng");
+        Path goodFile = Paths.get("src/test/resources/data/filters/relaxng/relaxng.rng");
         try (BufferedReader reader = Files.newBufferedReader(goodFile)) {
             assertTrue(filter.isFileSupported(reader));
         }
-        Path badFile = Paths.get("test/data/filters/relaxng/relaxng-invalid.rng");
+        Path badFile = Paths.get("src/test/resources/data/filters/relaxng/relaxng-invalid.rng");
         try (BufferedReader reader = Files.newBufferedReader(badFile)) {
             assertFalse(filter.isFileSupported(reader));
         }
-        badFile = Paths.get("test/data/filters/relaxng/relaxng-invalid-ns.rng");
+        badFile = Paths.get("src/test/resources/data/filters/relaxng/relaxng-invalid-ns.rng");
         try (BufferedReader reader = Files.newBufferedReader(badFile)) {
             assertFalse(filter.isFileSupported(reader));
         }

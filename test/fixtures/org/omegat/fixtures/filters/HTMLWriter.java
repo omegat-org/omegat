@@ -35,8 +35,6 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.Charset;
 
-import org.omegat.convert.v20to21.data.HTMLOptions;
-
 /**
  * This class acts as an interceptor of output: First it collects all the output
  * inside itself in a string. Then it adds a META with a given charset (or

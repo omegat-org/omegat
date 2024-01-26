@@ -26,13 +26,11 @@
 
 package org.omegat.fixtures.filters;
 
-import java.awt.Window;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.omegat.convert.v20to21.data.XHTMLOptions;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;

@@ -35,19 +35,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
 
-import org.omegat.convert.v20to21.data.HTMLOptions;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 
 /**
  * A filter to translate HTML and XHTML files (for test stub).

@@ -36,9 +36,9 @@ import org.omegat.filters2.html2.HTMLOptions;
 public class HHCFilter2Test extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        parse(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2.hhc");
-        parse(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Contents file.hhc");
-        parse(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Index file.hhk");
+        parse(new HHCFilter2(), "src/test/resources/data/filters/hhc/file-HHCFilter2.hhc");
+        parse(new HHCFilter2(), "src/test/resources/data/filters/hhc/file-HHCFilter2-Contents file.hhc");
+        parse(new HHCFilter2(), "src/test/resources/data/filters/hhc/file-HHCFilter2-Index file.hhk");
     }
 
     @Test
@@ -47,14 +47,14 @@ public class HHCFilter2Test extends TestFilterBase {
         // Rewriting the header will cause the first test to fail.
         // The other files don't have a header.
         config.put(HTMLOptions.OPTION_REWRITE_ENCODING, "NEVER");
-        translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2.hhc", config);
-        translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Contents file.hhc");
-        translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Index file.hhk");
+        translateText(new HHCFilter2(), "src/test/resources/data/filters/hhc/file-HHCFilter2.hhc", config);
+        translateText(new HHCFilter2(), "src/test/resources/data/filters/hhc/file-HHCFilter2-Contents file.hhc");
+        translateText(new HHCFilter2(), "src/test/resources/data/filters/hhc/file-HHCFilter2-Index file.hhk");
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/hhc/file-HHCFilter2.hhc";
+        String f = "src/test/resources/data/filters/hhc/file-HHCFilter2.hhc";
         IProject.FileInfo fi = loadSourceFiles(new HHCFilter2(), f);
 
         checkMultiStart(fi, f);

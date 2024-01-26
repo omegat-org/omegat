@@ -36,7 +36,7 @@ import org.omegat.filters2.subtitles.SrtFilter;
 public class SrtFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        List<String> lines = parse(new SrtFilter(), "test/data/filters/srt/file-SrtFilter.srt");
+        List<String> lines = parse(new SrtFilter(), "src/test/resources/data/filters/srt/file-SrtFilter.srt");
         assertEquals(lines.size(), 3);
         assertEquals("First title", lines.get(0));
         assertEquals("Second title", lines.get(1));
@@ -45,12 +45,12 @@ public class SrtFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new SrtFilter(), "test/data/filters/srt/file-SrtFilter.srt");
+        translateText(new SrtFilter(), "src/test/resources/data/filters/srt/file-SrtFilter.srt");
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/srt/file-SrtFilter.srt";
+        String f = "src/test/resources/data/filters/srt/file-SrtFilter.srt";
         IProject.FileInfo fi = loadSourceFiles(new SrtFilter(), f);
 
         checkMultiStart(fi, f);
@@ -62,7 +62,7 @@ public class SrtFilterTest extends TestFilterBase {
 
     @Test
     public void testLoadMixedEol() throws Exception {
-        String f = "test/data/filters/srt/file-SrtFilter-mixedEol.srt";
+        String f = "src/test/resources/data/filters/srt/file-SrtFilter-mixedEol.srt";
         IProject.FileInfo fi = loadSourceFiles(new SrtFilter(), f);
 
         checkMultiStart(fi, f);

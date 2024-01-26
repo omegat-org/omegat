@@ -48,7 +48,7 @@ public class POFilterTest extends TestFilterBase {
         Map<String, String> data = new TreeMap<>();
         Map<String, String> tmx = new TreeMap<>();
 
-        parse2(new PoFilter(), "test/data/filters/po/file-POFilter-be.po", data, tmx);
+        parse2(new PoFilter(), "src/test/resources/data/filters/po/file-POFilter-be.po", data, tmx);
 
         assertEquals(data.get("non-fuzzy"), "non-fuzzy translation");
         assertEquals(tmx.get("[PO-fuzzy] fuzzy"), "fuzzy translation");
@@ -58,7 +58,7 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/po/file-POFilter-multiple.po";
+        String f = "src/test/resources/data/filters/po/file-POFilter-multiple.po";
         Map<String, String> options = new TreeMap<String, String>();
         options.put("skipHeader", "true");
         TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
@@ -99,7 +99,7 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testLoadMonolingual() throws Exception {
-        String f = "test/data/filters/po/file-POFilter-Monolingual.po";
+        String f = "src/test/resources/data/filters/po/file-POFilter-Monolingual.po";
         PoFilter filter = new PoFilter();
         Map<String, String> options = new TreeMap<String, String>();
         options.put(PoFilter.OPTION_FORMAT_MONOLINGUAL, "true");
@@ -115,19 +115,19 @@ public class POFilterTest extends TestFilterBase {
     public void testTranslateMonolingual() throws Exception {
         Map<String, String> options = new HashMap<>();
         options.put(PoFilter.OPTION_FORMAT_MONOLINGUAL, "true");
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-Monolingual.po", options);
-        compareBinary(new File("test/data/filters/po/file-POFilter-Monolingual.po"), outFile);
+        translate(new PoFilter(), "src/test/resources/data/filters/po/file-POFilter-Monolingual.po", options);
+        compareBinary(new File("src/test/resources/data/filters/po/file-POFilter-Monolingual.po"), outFile);
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-be.po");
-        compareBinary(new File("test/data/filters/po/file-POFilter-be-expected.po"), outFile);
+        translate(new PoFilter(), "src/test/resources/data/filters/po/file-POFilter-be.po");
+        compareBinary(new File("src/test/resources/data/filters/po/file-POFilter-be-expected.po"), outFile);
     }
 
     @Test
     public void testLoad2() throws Exception {
-        String f = "test/data/filters/po/file-POFilter-multiple2.po";
+        String f = "src/test/resources/data/filters/po/file-POFilter-multiple2.po";
         Map<String, String> options = new HashMap<>();
         options.put(PoFilter.OPTION_SKIP_HEADER, "true");
         options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT, "true");
@@ -148,7 +148,7 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testLoad3() throws Exception {
-        String f = "test/data/filters/po/file-POFilter-multiple2.po";
+        String f = "src/test/resources/data/filters/po/file-POFilter-multiple2.po";
         Map<String, String> options = new HashMap<>();
         options.put(PoFilter.OPTION_SKIP_HEADER, "true");
         options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT, "false");
@@ -167,16 +167,16 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testParseFuzzyCtx() throws Exception {
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po");
-        compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-expected.po"), outFile);
+        translate(new PoFilter(), "src/test/resources/data/filters/po/file-POFilter-fuzzyCtx.po");
+        compareBinary(new File("src/test/resources/data/filters/po/file-POFilter-fuzzyCtx-expected.po"), outFile);
     }
 
     @Test
     public void testAutoFillInPluralStatement() throws Exception {
         Map<String, String> options = new HashMap<>();
         options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT, "true");
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po", options);
-        compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-plural.po"), outFile);
+        translate(new PoFilter(), "src/test/resources/data/filters/po/file-POFilter-fuzzyCtx.po", options);
+        compareBinary(new File("src/test/resources/data/filters/po/file-POFilter-fuzzyCtx-plural.po"), outFile);
     }
 
 }

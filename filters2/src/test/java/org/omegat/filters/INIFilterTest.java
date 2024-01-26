@@ -32,17 +32,17 @@ import org.omegat.filters2.text.ini.INIFilter;
 public class INIFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        parse(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
+        parse(new INIFilter(), "src/test/resources/data/filters/ini/file-INIFilter.ini");
     }
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
+        translateText(new INIFilter(), "src/test/resources/data/filters/ini/file-INIFilter.ini");
     }
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/ini/file-INIFilter.ini";
+        String f = "src/test/resources/data/filters/ini/file-INIFilter.ini";
         IProject.FileInfo fi = loadSourceFiles(new INIFilter(), f);
 
         checkMultiStart(fi, f);

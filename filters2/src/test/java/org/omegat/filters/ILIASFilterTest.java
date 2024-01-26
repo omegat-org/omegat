@@ -44,7 +44,7 @@ public class ILIASFilterTest extends TestFilterBase {
 
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new ILIASFilter(), "test/data/filters/ilias/ILIASFilter.lang");
+        List<String> entries = parse(new ILIASFilter(), "src/test/resources/data/filters/ilias/ILIASFilter.lang");
         assertEquals(7, entries.size());
         int i = 0;
         assertEquals("Good line", entries.get(i++));
@@ -58,7 +58,7 @@ public class ILIASFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new ILIASFilter(), "test/data/filters/ilias/ILIASFilter.lang");
+        translateText(new ILIASFilter(), "src/test/resources/data/filters/ilias/ILIASFilter.lang");
     }
 
     @Test

@@ -32,7 +32,7 @@ import org.omegat.filters2.rc.RcFilter;
 public class RcFilterTest extends TestFilterBase {
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/Rc/prog.rc";
+        String f = "src/test/resources/data/filters/Rc/prog.rc";
         IProject.FileInfo fi = loadSourceFiles(new RcFilter(), f);
 
         checkMultiStart(fi, f);

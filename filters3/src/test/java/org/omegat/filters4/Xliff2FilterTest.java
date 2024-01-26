@@ -41,7 +41,7 @@ import org.omegat.filters4.xml.xliff.Xliff2Filter;
 public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf");
+        List<String> entries = parse(new Xliff2Filter(), "src/test/resources/data/filters/xliff/filters4-xliff2/ex.9.5.xlf");
         assertEquals(7, entries.size()); // the file contains 8 entries but the one with "translate=no" is ignored
         assertEquals("Birds in Oregon", entries.get(0));
         assertEquals("Oregon is a mostly temperate state. There are\n"
@@ -53,13 +53,13 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         Map<String, String> result = new HashMap<>();
         Map<String, String> legacy = new HashMap<>();
 
-        parse2(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf", result, legacy);
+        parse2(new Xliff2Filter(), "src/test/resources/data/filters/xliff/filters4-xliff2/ex.9.5.xlf", result, legacy);
         assertEquals("<t0>Oiseaux de haute altitude", result.get("<t0>High Altitude Birds"));
     }
     
     @Test
     public void testKey() throws Exception {
-        List<ParsedEntry> entries = parse3(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf",
+        List<ParsedEntry> entries = parse3(new Xliff2Filter(), "src/test/resources/data/filters/xliff/filters4-xliff2/ex.9.5.xlf",
             java.util.Collections.emptyMap());
         ParsedEntry firstEntry = entries.get(0);
         Assert.assertEquals("1", firstEntry.id); // <segment> has no id, not mandatory
@@ -72,7 +72,7 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testTranslation() throws Exception {
         Xliff2Filter filter = new Xliff2Filter();
-        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf"), 
+        filter.translateFile(new File("src/test/resources/data/filters/xliff/filters4-xliff2/ex.9.5.xlf"),
             outFile, java.util.Collections.emptyMap(), context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {

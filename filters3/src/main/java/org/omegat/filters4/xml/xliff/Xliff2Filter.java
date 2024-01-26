@@ -38,6 +38,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
 /**
@@ -47,6 +48,16 @@ import org.omegat.util.OStrings;
  */
 public class Xliff2Filter extends AbstractXliffFilter {
     private Pattern intPattern = Pattern.compile("-?\\d+");
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(Xliff2Filter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     // --------------------------- IFilter API ----------------------------
 

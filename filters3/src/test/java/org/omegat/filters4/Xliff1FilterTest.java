@@ -44,7 +44,7 @@ import org.omegat.filters4.xml.xliff.Xliff1Filter;
 public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testParse() throws Exception {
-        List<String> entries = parse(new Xliff1Filter(), "test/data/filters/xliff/filters4-xliff1/en-xx.xlf");
+        List<String> entries = parse(new Xliff1Filter(), "src/test/resources/data/filters/xliff/filters4-xliff1/en-xx.xlf");
         assertEquals(7, entries.size()); // the file contains 8 entries but the one with "translate=no" is ignored
         assertEquals("This is the source text.", entries.get(0));
         assertEquals("foo", entries.get(1));
@@ -54,7 +54,7 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     public void testParseMissingId() throws Exception {
         Exception exception = assertThrows(TranslationException.class, () -> {
             // Try with a file from filters3 : they are not conform to specification so it should fail
-            parse(new Xliff1Filter(), "test/data/filters/xliff/filters3/file-XLIFFFilter.xlf");        
+            parse(new Xliff1Filter(), "src/test/resources/data/filters/xliff/filters3/file-XLIFFFilter.xlf");
         });
         System.err.println("Parsing file where trans-unit/@id is missing returns: "
             + exception.getClass() + ": " + exception.getMessage());
@@ -71,13 +71,13 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         Map<String, String> legacy = new HashMap<>();
 
         // Test that we correctly read translation
-        parse2(new Xliff1Filter(), "test/data/filters/xliff/filters4-xliff1/en-xx.xlf", result, legacy);
+        parse2(new Xliff1Filter(), "src/test/resources/data/filters/xliff/filters4-xliff1/en-xx.xlf", result, legacy);
         assertEquals("bar", result.get("foo"));
     }
 
     @Test
     public void testKey() throws Exception {
-        List<ParsedEntry> entries = parse3(new Xliff1Filter(), "test/data/filters/xliff/filters4-xliff1/en-xx.xlf",
+        List<ParsedEntry> entries = parse3(new Xliff1Filter(), "src/test/resources/data/filters/xliff/filters4-xliff1/en-xx.xlf",
             java.util.Collections.emptyMap());
         ParsedEntry firstEntry = entries.get(0);
         Assert.assertEquals(firstEntry.id, "example_01");
@@ -93,7 +93,7 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testTranslation() throws Exception {
         Xliff1Filter filter = new Xliff1Filter();
-        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff1/en-xx.xlf"), 
+        filter.translateFile(new File("src/test/resources/data/filters/xliff/filters4-xliff1/en-xx.xlf"),
             outFile, java.util.Collections.emptyMap(), context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {

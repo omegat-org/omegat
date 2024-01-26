@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -61,6 +62,16 @@ public class ILIASFilter extends AbstractFilter {
 
     private final Pattern patternMark = Pattern.compile("<!-- language file start -->");
     private final Pattern patternText = Pattern.compile("^(\\S+)#:#(\\S+)#:#(.+)$");
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(ILIASFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     public String getFileFormatName() {

@@ -59,6 +59,16 @@ import org.omegat.util.Preferences;
  */
 public class SdlXliff extends Xliff1Filter {
 
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(SdlXliff.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     private final SimpleDateFormat TRADOS_DATE_FORMAT = new SimpleDateFormat("M/d/y H:m:s");
 
     // ---------------------------- IFilter API ----------------------------

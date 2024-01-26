@@ -247,7 +247,7 @@ public class CalcMatchStatisticsTest {
         public List<SourceTextEntry> getAllEntries() {
             List<SourceTextEntry> ste = new ArrayList<>();
             IFilter filter = new PoFilter();
-            Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
+            Path testSource = Paths.get("test/data/stats/file-POFilter-match-stat-en-ca.po");
             IParseCallback testCallback = new TestCallback(ste);
             FilterContext context = new FilterContext(new Language("en"), new Language("ca"), true);
             try {

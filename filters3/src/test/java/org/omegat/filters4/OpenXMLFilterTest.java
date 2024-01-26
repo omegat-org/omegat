@@ -40,8 +40,8 @@ import org.omegat.util.Language;
 
 public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
 
-    private static final String TEST_DATA1 = "test/data/filters/openXML/file-OpenXMLFilter.docx";
-    private static final String TEST_DATA2 = "test/data/filters/openXML/file-OpenXMLFilter-tables.docx";
+    private static final String TEST_DATA1 = "src/test/resources/data/filters/openXML/file-OpenXMLFilter.docx";
+    private static final String TEST_DATA2 = "src/test/resources/data/filters/openXML/file-OpenXMLFilter-tables.docx";
 
     @Test
     public void testParse() throws Exception {
@@ -70,7 +70,7 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
         Core.getProject().getProjectProperties().setSourceLanguage(new Language("en-US"));
         Core.getProject().getProjectProperties().setTargetLanguage(new Language("fr-FR"));
 
-        File in = new File("test/data/filters/openXML/file-OpenXMLFilter.docx");
+        File in = new File("src/test/resources/data/filters/openXML/file-OpenXMLFilter.docx");
         translate(new MsOfficeFileFilter(), in.getPath());
 
         // XML comparison should not work, 
@@ -89,7 +89,7 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testLoad() throws Exception {
-        String f = "test/data/filters/openXML/file-OpenXMLFilter.docx";
+        String f = "src/test/resources/data/filters/openXML/file-OpenXMLFilter.docx";
         IProject.FileInfo fi = loadSourceFiles(new MsOfficeFileFilter(), f);
 
         checkMultiStart(fi, f);

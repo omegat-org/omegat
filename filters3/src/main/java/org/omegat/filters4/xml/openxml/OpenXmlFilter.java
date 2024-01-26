@@ -60,6 +60,16 @@ import org.omegat.util.OStrings;
 class OpenXmlFilter extends AbstractXmlFilter {
     private boolean removeComments;
 
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(OpenXmlFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     OpenXmlFilter(boolean withComments) {
         this.removeComments = !withComments;
     }

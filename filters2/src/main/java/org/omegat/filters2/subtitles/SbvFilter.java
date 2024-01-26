@@ -27,6 +27,7 @@ package org.omegat.filters2.subtitles;
 
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.util.OStrings;
 
@@ -40,6 +41,16 @@ import org.omegat.util.OStrings;
 public class SbvFilter extends SrtFilter {
     protected static final Pattern PATTERN_TIME_INTERVAL = Pattern
             .compile("([0-9]{1,}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}),([0-9]{1,}:[0-9]{2}:[0-9]{2}\\.[0-9]{3})");
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(SbvFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     protected Pattern getPattern() {

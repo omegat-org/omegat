@@ -63,7 +63,7 @@ public class DokuWikiFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translateText(new DokuWikiFilter(), "src/src/test/resources/data/filters/dokuwiki/dokuwiki-translate.txt");
+        translateText(new DokuWikiFilter(), "src/test/resources/data/filters/dokuwiki/dokuwiki-translate.txt");
     }
 
     @Test

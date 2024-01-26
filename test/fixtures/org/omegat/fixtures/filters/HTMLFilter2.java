@@ -27,6 +27,16 @@
 
 package org.omegat.fixtures.filters;
 
+import org.htmlparser.Parser;
+import org.htmlparser.util.ParserException;
+import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.Instance;
+import org.omegat.filters2.TranslationException;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -35,19 +45,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import org.htmlparser.Parser;
-import org.htmlparser.util.ParserException;
-
-import org.omegat.filters2.AbstractFilter;
-import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.Instance;
-import org.omegat.filters2.TranslationException;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
+import java.util.regex.PatternSyntaxException;
 
 /**
- * A filter to translate HTML and XHTML files (for test stub).
+ * A filter to translate HTML and XHTML files.
  * <p>
  * Some useful discussion why HTML filter should behave like it does, happened
  * on a <a href="https://sourceforge.net/p/omegat/bugs/108/">bug report</a>
@@ -151,11 +152,35 @@ public class HTMLFilter2 extends AbstractFilter {
             throw new IOException(OStrings.getString("HTML__FILE_TOO_BIG"));
         }
 
+        HTMLOptions options = new HTMLOptions(processOptions);
+
+        // Prepare matcher
+        String skipRegExp = options.getSkipRegExp();
+        if (!StringUtil.isEmpty(skipRegExp)) {
+            try {
+                this.skipRegExpPattern = Pattern.compile(skipRegExp, Pattern.CASE_INSENSITIVE);
+            } catch (PatternSyntaxException e) {
+                Log.log(e);
+            }
+        }
+
         // prepare set of attributes that indicate not to translate a meta-tag
+        String skipMetaString = options.getSkipMeta();
         skipMetaAttributes = new HashMap<String, String>();
+        String[] skipMetaAttributesStringarray = skipMetaString.split(",");
+        for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
+            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
+            skipMetaAttributes.put(keyvalue, "");
+        }
 
         // Prepare set of attributes that indicate not to translate a tag
+        String ignoreTagString = options.getIgnoreTags();
         ignoreTagsAttributes = new HashMap<String, String>();
+        String[] ignoreTagsAttributesStringarray = ignoreTagString.split(",");
+        for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
+            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
+            ignoreTagsAttributes.put(keyvalue, "");
+        }
 
         Parser parser = new Parser();
         try {
@@ -215,6 +240,10 @@ public class HTMLFilter2 extends AbstractFilter {
         return OStrings.getString("HTML_NOTE");
     }
 
+    @Override
+    public boolean hasOptions() {
+        return false;
+    }
 
     /**
      * Returns the encoding of the html writer (if already set)

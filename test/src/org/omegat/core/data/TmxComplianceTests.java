@@ -37,6 +37,7 @@ import org.junit.Test;
 
 import org.omegat.filters2.FilterContext;
 import org.omegat.fixtures.filters.HTMLFilter2;
+import org.omegat.fixtures.filters.HTMLOptions;
 import org.omegat.fixtures.filters.RcFilter;
 import org.omegat.fixtures.filters.ResourceBundleFilter;
 
@@ -201,6 +202,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         fc.setInEncoding("windows-1252");
 
         Map<String, String> config = new TreeMap<String, String>();
+        new HTMLOptions(config).setSkipMeta("content=en-us,content=fr-ca");
 
         List<String> sources = loadTexts(new HTMLFilter2(), sourceFile, null, fc, config);
         List<String> translations = loadTexts(new HTMLFilter2(), translatedFile, null, fc, config);

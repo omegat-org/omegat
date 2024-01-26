@@ -40,6 +40,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
 /**
@@ -48,6 +49,16 @@ import org.omegat.util.OStrings;
  * @author Thomas Cordonnier
  */
 public class Xliff1Filter extends AbstractXliffFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(Xliff1Filter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     // ---------------------------- IFilter API---------------------------
 

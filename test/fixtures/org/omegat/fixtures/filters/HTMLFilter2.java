@@ -127,13 +127,12 @@ public class HTMLFilter2 extends AbstractFilter {
     @Override
     public BufferedWriter createWriter(File outfile, String encoding) throws IOException {
         HTMLWriter hwriter;
-        HTMLOptions options = new HTMLOptions(processOptions);
         if (encoding == null) {
             this.targetEncoding = sourceEncoding;
         } else {
             this.targetEncoding = encoding;
         }
-        hwriter = new HTMLWriter(outfile.getAbsolutePath(), this.targetEncoding, options);
+        hwriter = new HTMLWriter(outfile.getAbsolutePath(), this.targetEncoding);
         return new BufferedWriter(hwriter);
     }
 
@@ -155,40 +154,16 @@ public class HTMLFilter2 extends AbstractFilter {
             throw new IOException(OStrings.getString("HTML__FILE_TOO_BIG"));
         }
 
-        HTMLOptions options = new HTMLOptions(processOptions);
-
-        // Prepare matcher
-        String skipRegExp = options.getSkipRegExp();
-        if (!StringUtil.isEmpty(skipRegExp)) {
-            try {
-                this.skipRegExpPattern = Pattern.compile(skipRegExp, Pattern.CASE_INSENSITIVE);
-            } catch (PatternSyntaxException e) {
-                Log.log(e);
-            }
-        }
-
         // prepare set of attributes that indicate not to translate a meta-tag
-        String skipMetaString = options.getSkipMeta();
         skipMetaAttributes = new HashMap<String, String>();
-        String[] skipMetaAttributesStringarray = skipMetaString.split(",");
-        for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
-            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
-            skipMetaAttributes.put(keyvalue, "");
-        }
 
         // Prepare set of attributes that indicate not to translate a tag
-        String ignoreTagString = options.getIgnoreTags();
         ignoreTagsAttributes = new HashMap<String, String>();
-        String[] ignoreTagsAttributesStringarray = ignoreTagString.split(",");
-        for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
-            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
-            ignoreTagsAttributes.put(keyvalue, "");
-        }
 
         Parser parser = new Parser();
         try {
             parser.setInputHTML(all.toString());
-            parser.visitAllNodesWith(new FilterVisitor(this, outfile, options));
+            parser.visitAllNodesWith(new FilterVisitor(this, outfile));
         } catch (ParserException pe) {
             Log.logErrorRB(pe, "HTML_EXCEPTION_PARSER");
         } catch (StringIndexOutOfBoundsException se) {

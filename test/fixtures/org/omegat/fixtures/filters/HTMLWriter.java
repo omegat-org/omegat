@@ -34,12 +34,8 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.Charset;
-import java.util.regex.Matcher;
-
-import org.jetbrains.annotations.NotNull;
 
 import org.omegat.convert.v20to21.data.HTMLOptions;
-import org.omegat.util.PatternConsts;
 
 /**
  * This class acts as an interceptor of output: First it collects all the output
@@ -48,8 +44,6 @@ import org.omegat.util.PatternConsts;
  * has XML header) adds encoding declaration (or replaces the encoding in the
  * XML header). Next it writes out to the file.
  * <p>
- * Note that if <code>encoding</code> parameter of the
- * {@link #HTMLWriter(String, String, HTMLOptions) constructor} is null, no
  * encoding declaration is added, and the file is written in OS-default
  * encoding. This is done to fix a bug
  * <a href="https://sourceforge.net/p/omegat/bugs/101/">[1.6 RC2] Bug with
@@ -75,7 +69,6 @@ public class HTMLWriter extends Writer {
     private String encoding;
 
     /** HTML filter options. */
-    private HTMLOptions options;
 
     /**
      * Creates new HTMLWriter.
@@ -86,11 +79,9 @@ public class HTMLWriter extends Writer {
      *            - the encoding to write HTML file in (null means OS-default
      *            encoding)
      */
-    public HTMLWriter(String fileName, String encoding, HTMLOptions options)
+    public HTMLWriter(String fileName, String encoding)
             throws FileNotFoundException, UnsupportedEncodingException {
         this.encoding = encoding;
-
-        this.options = options;
 
         writer = new StringWriter();
         FileOutputStream fos = new FileOutputStream(fileName);
@@ -153,52 +144,6 @@ public class HTMLWriter extends Writer {
             signalAlreadyFlushed = true;
 
             String contents = buffer.toString();
-
-            if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.NEVER) {
-                String eol = "";
-                Matcher matcherLineending = PatternConsts.LINE_ENDING.matcher(contents);
-                if (matcherLineending.find()) {
-                    eol = matcherLineending.group();
-                }
-
-                Matcher matcherHeader = PatternConsts.XML_HEADER.matcher(contents);
-                boolean xhtml = false;
-                if (matcherHeader.find()) {
-                    xmlHeader = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
-                    contents = matcherHeader.replaceFirst(xmlHeader);
-                    xhtml = true;
-                }
-
-                htmlMeta = "<meta http-equiv=\"content-type\" content=\"text/html; charset=" + encoding
-                        + "\"";
-                if (xhtml) {
-                    htmlMeta += " />";
-                } else {
-                    htmlMeta += ">";
-                }
-                Matcher matcherEnc = PatternConsts.HTML_ENCODING.matcher(contents);
-                Matcher matcherEncHtml5 = PatternConsts.HTML5_ENCODING.matcher(contents);
-                if (matcherEnc.find()) {
-                    contents = matcherEnc.replaceFirst(htmlMeta);
-                } else if (matcherEncHtml5.find()) {
-                    contents = matcherEncHtml5.replaceFirst("<meta charset=\"" + encoding + "\">");
-                } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFMETA) {
-                    Matcher matcherHead = PatternConsts.HTML_HEAD.matcher(contents);
-                    if (matcherHead.find()) {
-                        contents = matcherHead.replaceFirst("$0" + eol + "    " + htmlMeta);
-                    } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFHEADER) {
-                        Matcher matcherHtml = PatternConsts.HTML_HTML.matcher(contents);
-                        if (matcherHtml.find()) {
-                            contents = matcherHtml.replaceFirst(
-                                    "$0" + eol + "<head>" + eol + "    " + htmlMeta + "" + eol + "</head>");
-                        } else {
-                            contents = "<html>" + eol + "<head>" + eol + "    " + htmlMeta + eol + "</head>"
-                                    + eol + contents;
-                        }
-                    }
-                }
-            }
-
             realWriter.write(contents);
             buffer.setLength(0);
         }
@@ -218,7 +163,7 @@ public class HTMLWriter extends Writer {
      * @throws IOException
      *             - If an I/O error occurs
      */
-    public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
+    public void write(char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {
             flush();

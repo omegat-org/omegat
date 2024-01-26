@@ -46,6 +46,7 @@ import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -54,7 +55,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.text.TextFilter;
+import org.omegat.fixtures.filters.TextFilter;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**

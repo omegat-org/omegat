@@ -36,9 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.Vector;
-import java.util.regex.Matcher;
 
 import org.htmlparser.Attribute;
 import org.htmlparser.Node;
@@ -48,7 +46,6 @@ import org.htmlparser.Text;
 import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
 
-import org.omegat.convert.v20to21.data.HTMLOptions;
 import org.omegat.core.Core;
 import org.omegat.util.HTMLUtils;
 import org.omegat.util.Log;
@@ -68,18 +65,9 @@ import org.omegat.util.StringUtil;
 public class FilterVisitor extends NodeVisitor {
     protected HTMLFilter2 filter;
     private BufferedWriter writer;
-    private HTMLOptions options;
 
-    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts) {
+    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter) {
         this.filter = htmlfilter;
-        // HHC filter has no options
-        if (opts != null) {
-            this.options = opts;
-        } else {
-            // To prevent a null pointer exception later, see
-            // https://sourceforge.net/p/omegat/bugs/651/
-            this.options = new HTMLOptions(new TreeMap<>());
-        }
         this.writer = bufwriter;
     }
 
@@ -187,34 +175,11 @@ public class FilterVisitor extends NodeVisitor {
             maybeTranslateAttribute(tag, "abbr");
             maybeTranslateAttribute(tag, "alt");
             maybeTranslateAttribute(tag, "dir");
-            if (options.getTranslateHref()) {
-                maybeTranslateAttribute(tag, "href");
-            }
-            if (options.getTranslateHreflang()) {
-                maybeTranslateAttribute(tag, "hreflang");
-            }
-            if (options.getTranslateLang()) {
-                maybeTranslateAttribute(tag, "lang");
-                maybeTranslateAttribute(tag, "xml:lang");
-            }
             maybeTranslateAttribute(tag, "label");
-            if ("IMG".equals(tag.getTagName()) && options.getTranslateSrc()) {
-                maybeTranslateAttribute(tag, "src");
-            }
             maybeTranslateAttribute(tag, "summary");
             maybeTranslateAttribute(tag, "title");
             if ("INPUT".equals(tag.getTagName())) { //an input element
-                if (options.getTranslateValue() //and we translate all input elements
-                        || options.getTranslateButtonValue() // or we translate submit/button/reset elements ...
-                                && ("submit".equalsIgnoreCase(tag.getAttribute("type"))
-                                        || "button".equalsIgnoreCase(tag.getAttribute("type"))
-                                        || "reset".equalsIgnoreCase(tag.getAttribute("type"))
-                           ) //and it is a submit/button/reset element.
-                   ) {
-                    //then translate the value
-                    maybeTranslateAttribute(tag, "value");
-                }
-                maybeTranslateAttribute(tag, "placeholder");
+               maybeTranslateAttribute(tag, "placeholder");
             }
             // Special handling of meta-tag: depending on the other attributes
             // the contents-attribute should or should not be translated.
@@ -319,23 +284,6 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void visitRemarkNode(Remark remark) {
-        if (shouldKeepComments()) {
-            recurseSelf = true;
-            recurseChildren = true;
-            if (betweenPreformattingTags) {
-                isTextUpForCollection = true;
-            }
-
-            if (isTextUpForCollection) {
-                queueTranslatable(remark);
-            } else {
-                queuePrefix(remark);
-            }
-        }
-    }
-
-    private boolean shouldKeepComments() {
-        return !options.getRemoveComments();
     }
 
     /**
@@ -395,7 +343,7 @@ public class FilterVisitor extends NodeVisitor {
                 "TITLE", "TR", "UL", "VIDEO" };
         String[] parentElementTags = { "HEAD", "HTML" };
 
-        return (tagname.equals("BR") && options.getParagraphOnBr())
+        return (tagname.equals("BR"))
                 || Arrays.stream(parentElementTags).anyMatch(tagname::equals)
                 || Arrays.stream(blockElementTags).anyMatch(tagname::equals);
     }
@@ -627,8 +575,8 @@ public class FilterVisitor extends NodeVisitor {
         // not checked.)
         if (!betweenPreformattingTags) {
 
-            spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, options.getCompressWhitespace());
-            spacePostfix = HTMLUtils.getSpacePostfix(uncompressed, options.getCompressWhitespace());
+            spacePrefix = HTMLUtils.getSpacePrefix(uncompressed, false);
+            spacePostfix = HTMLUtils.getSpacePostfix(uncompressed, false);
 
             if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
                 compressed = StringUtil.compressSpaces(uncompressed);
@@ -641,7 +589,7 @@ public class FilterVisitor extends NodeVisitor {
         String translation = filter.privateProcessEntry(compressed, null);
 
         // writing out uncompressed
-        if (compressed.equals(translation) && !options.getCompressWhitespace()) {
+        if (compressed.equals(translation)) {
             translation = uncompressed;
             //uncompressed contains pre/postfix whitespace, so do not add that extra!
             spacePrefix = "";
@@ -910,12 +858,6 @@ public class FilterVisitor extends NodeVisitor {
      * @return the compressed input.
      */
     private String compressWhitespace(String input) {
-        if (options.getCompressWhitespace()) {
-            Matcher whitespaceMatch = PatternConsts.SPACE_TAB.matcher(input);
-            // keep at least 1 space, as not to change the meaning of the document.
-            return whitespaceMatch.replaceAll(" ");
-        } else {
-            return input;
-        }
+        return input;
     }
 }

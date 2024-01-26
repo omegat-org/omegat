@@ -324,6 +324,7 @@ dependencies {
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
     testFixturesImplementation(libs.omegat.htmlparser)
+    testFixturesImplementation(libs.bundles.jackson)
 
     testImplementation(libs.xmlunit.legacy)
     // LanguageTool unit tests exercise these languages

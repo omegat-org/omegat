@@ -35,7 +35,6 @@ import java.util.TreeMap;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import org.omegat.convert.v20to21.data.HTMLOptions;
 import org.omegat.filters2.FilterContext;
 import org.omegat.fixtures.filters.HTMLFilter2;
 import org.omegat.fixtures.filters.RcFilter;
@@ -202,7 +201,6 @@ public class TmxComplianceTests extends TmxComplianceBase {
         fc.setInEncoding("windows-1252");
 
         Map<String, String> config = new TreeMap<String, String>();
-        new HTMLOptions(config).setSkipMeta("content=en-us,content=fr-ca");
 
         List<String> sources = loadTexts(new HTMLFilter2(), sourceFile, null, fc, config);
         List<String> translations = loadTexts(new HTMLFilter2(), translatedFile, null, fc, config);
@@ -281,8 +279,6 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
         props.setSentenceSegmentingEnabled(true);
         Map<String, String> config = new TreeMap<String, String>();
-        config.put(HTMLOptions.OPTION_TRANSLATE_SRC, "false");
-        config.put(HTMLOptions.OPTION_SKIP_META, "true");
 
         Map<String, TMXEntry> fix = new TreeMap<String, TMXEntry>();
         fix.put("Picture:", createTMXEntry("Picture:", "Image:", true));
@@ -310,8 +306,6 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
         props.setSentenceSegmentingEnabled(true);
         Map<String, String> config = new TreeMap<String, String>();
-        config.put(HTMLOptions.OPTION_TRANSLATE_SRC, "false");
-        config.put(HTMLOptions.OPTION_SKIP_META, "true");
 
         Map<String, TMXEntry> fix = new TreeMap<String, TMXEntry>();
         fix.put("Picture:", createTMXEntry("Picture:", "Image:", true));
@@ -371,7 +365,6 @@ public class TmxComplianceTests extends TmxComplianceBase {
         fc.setInEncoding("windows-1252");
 
         Map<String, String> config = new TreeMap<String, String>();
-        new HTMLOptions(config).setSkipMeta("content=en-us,content=fr-ca");
 
         List<String> sources = loadTexts(new HTMLFilter2(), sourceFile, null, fc, config);
         List<String> translations = loadTexts(new HTMLFilter2(), translatedFile, null, fc, config);

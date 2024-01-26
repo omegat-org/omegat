@@ -24,15 +24,13 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters2.text;
+package org.omegat.fixtures.filters;
 
-import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
@@ -40,11 +38,10 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LineLengthLimitWriter;
 import org.omegat.util.LinebreakPreservingReader;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 /**
- * Filter to support plain text files (in various encodings).
+ * Filter to support plain text files (in various encodings) (for test stub).
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -224,23 +221,6 @@ public class TextFilter extends AbstractFilter {
         }
     }
 
-    @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
-        try {
-            TextOptionsDialog dialog = new TextOptionsDialog(parent, config);
-            dialog.setVisible(true);
-            if (TextOptionsDialog.RET_OK == dialog.getReturnStatus()) {
-                return dialog.getOptions();
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            Log.log("Text filter threw an exception:");
-            Log.log(e);
-            return null;
-        }
-    }
-
     /**
      * Returns true to indicate that Text filter has options.
      *
@@ -248,6 +228,6 @@ public class TextFilter extends AbstractFilter {
      */
     @Override
     public boolean hasOptions() {
-        return true;
+        return false;
     }
 }

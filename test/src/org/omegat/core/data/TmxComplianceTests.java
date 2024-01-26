@@ -34,11 +34,12 @@ import java.util.TreeMap;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
+import org.omegat.convert.v20to21.data.HTMLOptions;
 import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.html2.HTMLFilter2;
-import org.omegat.filters2.html2.HTMLOptions;
-import org.omegat.filters2.rc.RcFilter;
-import org.omegat.filters2.text.bundles.ResourceBundleFilter;
+import org.omegat.fixtures.filters.HTMLFilter2;
+import org.omegat.fixtures.filters.RcFilter;
+import org.omegat.fixtures.filters.ResourceBundleFilter;
 
 /**
  * TMX Compliance tests as described on

@@ -54,7 +54,7 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.po.PoFilter;
+import org.omegat.fixtures.filters.PoFilter;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;

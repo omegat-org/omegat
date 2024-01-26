@@ -55,6 +55,7 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
+import org.omegat.fixtures.filters.XHTMLFilter;
 
 import gen.core.filters.Filter.Option;
 import gen.core.filters.Filters;
@@ -71,7 +72,7 @@ public class FilterMasterTest {
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
 
         FilterMaster.setFilterClasses(
-                Arrays.asList(new Class<?>[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
+                Arrays.asList(new Class<?>[] { XHTMLFilter.class }));
     }
 
     @After

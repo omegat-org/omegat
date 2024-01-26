@@ -37,12 +37,13 @@ import java.util.Map.Entry;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.text.TextFilter;
-import org.omegat.filters2.text.bundles.ResourceBundleFilter;
+import org.omegat.fixtures.filters.ResourceBundleFilter;
+import org.omegat.fixtures.filters.TextFilter;
 import org.omegat.gui.align.Aligner.ComparisonMode;
 import org.omegat.util.Language;
 

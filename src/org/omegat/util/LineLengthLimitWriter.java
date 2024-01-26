@@ -30,8 +30,6 @@ import java.io.IOException;
 import java.io.Writer;
 
 import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.StringUtil;
-import org.omegat.util.Token;
 
 /**
  * Output filter for limit line length.

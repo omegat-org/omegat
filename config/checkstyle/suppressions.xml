@@ -160,7 +160,7 @@
     <suppress checks="MethodLength" files="FilterVisitor\.java" lines="450"/>
     <suppress checks="MethodLength" files="PoFilter\.java" lines="381"/>
     <suppress checks="(TypeName|MissingSwitchDefault)" files="srtFilter\.java" lines="55,102"/>
-    <suppress files="ResourceBundleFilter\.java" checks="(InnerAssignment|EmptyBlock)" lines="168,308"/>
+    <suppress files="ResourceBundleFilter\.java" checks="(InnerAssignment|EmptyBlock)" lines="162,302"/>
     <suppress checks="TypeName" files="XLIFFOptions\.java" lines="67"/>
     <suppress files="XHTMLDialect\.java" checks="InnerAssignment" lines="131,132"/>
     <suppress files="CamtasiaWindowsDialect\.java" checks="MethodLength" lines="45"/>

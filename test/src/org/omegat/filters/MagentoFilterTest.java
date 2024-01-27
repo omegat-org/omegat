@@ -66,7 +66,7 @@ public class MagentoFilterTest extends TestFilterBase {
 
         align(new MagentoFilter(),
                 Paths.get("test/data/filters/magento/MagentoFilterAlign.csv").toAbsolutePath().toFile(),
-                Paths.get("magento/MagentoFilterAlign-tr.csv").toAbsolutePath().toFile(),
+                Paths.get("test/data/filters/magento/MagentoFilterAlign-tr.csv").toAbsolutePath().toFile(),
                 (id, source, translation, isFuzzy, comment, filter)
                         -> alignResult.aligned = id.equals("code") && source.equals("original")
                         && translation.equals("translated"));

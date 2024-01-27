@@ -61,7 +61,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         final AlignResult ar = new AlignResult();
         align(new ResourceBundleFilter(),
                 Paths.get("test/data/filters/resourceBundle/file-ResourceBundleFilter.properties").toAbsolutePath().toFile(),
-                Paths.get("resourceBundle/file-ResourceBundleFilter_be.properties").toAbsolutePath().toFile(),
+                Paths.get("test/data/filters/resourceBundle/file-ResourceBundleFilter_be.properties").toAbsolutePath().toFile(),
                 (id, source, translation, isFuzzy, path, filter)
                         -> ar.found = id.equals("ID") && source.equals("Value") && translation.equals("test"));
         assertTrue(ar.found);

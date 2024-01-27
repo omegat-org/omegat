@@ -47,7 +47,6 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
-import org.omegat.filters3.xml.openxml.OpenXMLOptions;
 import org.omegat.filters4.xml.AbstractXmlFilter;
 import org.omegat.util.OStrings;
 

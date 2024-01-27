@@ -33,12 +33,14 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Comparator;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+
+import org.apache.commons.io.IOUtils;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -139,7 +141,7 @@ public abstract class AbstractZipFilter extends AbstractFilter {
                 if (zipout != null) {
                     ZipEntry outEntry = new ZipEntry(ze.getName());
                     zipout.putNextEntry(outEntry);
-                    org.apache.commons.io.IOUtils.copy(zf.getInputStream(ze), zipout);
+                    IOUtils.copy(zf.getInputStream(ze), zipout);
                     zipout.closeEntry();
                 }
             }

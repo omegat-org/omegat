@@ -5,17 +5,20 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
-                                                              '**/slf4j*'])
+        compileOnly fileTree(dir: providedLibsDir,
+                includes: ['**/*commons-io*.jar', '**/lib-mnemonics*.jar', '**/stax*.jar', '**/woodstox-core*.jar',
+                        '**/slf4j*'])
     } else {
+        // stax
+        implementation(libs.stax2.api)
+        runtimeOnly(libs.woodstox.core)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.commons.io)
         compileOnly(libs.slf4j.format.jdk14)
     }
     testImplementation(testFixtures(project.rootProject))
-    testImplementation(libs.xmlunit.legacy)
-    testImplementation(libs.bundles.jackson)
-    testImplementation(libs.commons.io)
+    testImplementation(libs.stax2.api)
+    testRuntimeOnly(libs.woodstox.core)
 }
 
 jar {

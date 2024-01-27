@@ -58,7 +58,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
 
     private static final Pattern PUBLIC_XHTML = Pattern.compile("-//W3C//DTD\\s+XHTML.+");
 
-    private static final String DTD = "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd";
+    private static final String DTD = "/org/omegat/filters3/xml/xhtml/xhtml2-flat.dtd";
 
     private Boolean translateValue = false;
     private Boolean translateButtonValue = false;

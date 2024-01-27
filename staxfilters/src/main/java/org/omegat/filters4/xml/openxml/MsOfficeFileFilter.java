@@ -34,8 +34,6 @@ import java.util.zip.ZipEntry;
 
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
-import org.omegat.filters3.xml.openxml.EditOpenXMLOptionsDialog;
-import org.omegat.filters3.xml.openxml.OpenXMLOptions;
 import org.omegat.filters4.AbstractZipFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;

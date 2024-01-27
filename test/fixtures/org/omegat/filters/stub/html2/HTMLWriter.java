@@ -36,8 +36,6 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
-import org.jetbrains.annotations.NotNull;
-
 import org.omegat.util.PatternConsts;
 
 /**
@@ -217,7 +215,7 @@ public class HTMLWriter extends Writer {
      * @throws IOException
      *             - If an I/O error occurs
      */
-    public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
+    public void write(char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {
             flush();

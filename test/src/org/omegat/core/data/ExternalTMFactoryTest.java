@@ -98,7 +98,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadPO() throws Exception {
-        File tmxFile = new File("test/data/filters/po/file-POFilter-be-utf8.po");
+        File tmxFile = new File("test/data/externaltm/file-POFilter-be-utf8.po");
         sourceLang = new Language("en");
         targetLang = new Language("be");
 
@@ -120,7 +120,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadMozillaLang() throws Exception {
-        File tmxFile = new File("test/data/filters/MozillaLang/file-MozillaLangFilter-de.lang");
+        File tmxFile = new File("test/data/externaltm/file-MozillaLangFilter-de.lang");
         sourceLang = new Language("en");
         targetLang = new Language("de");
 

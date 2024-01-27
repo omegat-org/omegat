@@ -30,15 +30,27 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
 import org.junit.Test;
 
+import org.omegat.core.Core;
+import org.omegat.core.data.ExternalTMFactory;
+import org.omegat.core.data.ExternalTMX;
+import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.mozlang.MozillaLangFilter;
+import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
+import org.omegat.util.Language;
 
 public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
@@ -131,5 +143,42 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, false);
         // Actually option "NeedsTranslate" is not yet implemented
         //org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, true);
-    }    
+    }
+
+    @Test
+    public void testLoadXliff() throws Exception {
+        File tmxFile = new File("test/data/filters/xliff/filters4-xliff1/en-ca.xlf");
+
+        Language sourceLang = new Language("en");
+        Language targetLang = new Language("ca");
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        FilterMaster.setFilterClasses(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        ProjectProperties props = new ProjectProperties() {
+            public Language getSourceLanguage() {
+                return sourceLang;
+            }
+
+            public Language getTargetLanguage() {
+                return targetLang;
+            }
+
+            @Override
+            public boolean isSentenceSegmentingEnabled() {
+                return true;
+            }
+        };
+        Core.setProject(new NotLoadedProject() {
+            @Override
+            public ProjectProperties getProjectProperties() {
+                return props;
+            }
+        });
+        assertTrue(ExternalTMFactory.isSupported(tmxFile));
+
+        ExternalTMX tmx = ExternalTMFactory.load(tmxFile);
+        assertEquals(3, tmx.getEntries().size());
+        assertEquals("This is a test", tmx.getEntries().get(0).getSourceText());
+        assertEquals("Això és una prova", tmx.getEntries().get(0).getTranslationText());
+    }
 }

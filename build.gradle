@@ -331,7 +331,7 @@ dependencies {
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
-
+    testFixturesImplementation(libs.omegat.htmlparser)
     testImplementation(libs.xmlunit.legacy)
     // LanguageTool unit tests exercise these languages
     testImplementation(libs.bundles.languagetool.tests) {

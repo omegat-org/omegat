@@ -27,6 +27,8 @@ package org.omegat.filters;
 
 import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Paths;
+
 import org.junit.Test;
 
 import org.omegat.core.data.IProject;
@@ -59,8 +61,9 @@ public class MozillaDTDFilterTest extends TestFilterBase {
     @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
-        align(new MozillaDTDFilter(), "MozillaDTD/file.dtd",
-                "MozillaDTD/file-be.dtd",
+        align(new MozillaDTDFilter(),
+                Paths.get("src/test/resources/data/filters/MozillaDTD/file.dtd").toAbsolutePath().toFile(),
+                Paths.get("src/test/resources/data/filters/MozillaDTD/file-be.dtd").toAbsolutePath().toFile(),
                 new IAlignCallback() {
                     @Override
                     public void addTranslation(final String id, final String source, final String translation, final boolean isFuzzy, final String path, final IFilter filter) {

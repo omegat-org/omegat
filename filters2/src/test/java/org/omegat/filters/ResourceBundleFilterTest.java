@@ -29,6 +29,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -37,8 +38,6 @@ import org.junit.Test;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
-import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
@@ -60,13 +59,13 @@ public class ResourceBundleFilterTest extends TestFilterBase {
     @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
-        align(new ResourceBundleFilter(), "resourceBundle/file-ResourceBundleFilter.properties",
-                "resourceBundle/file-ResourceBundleFilter_be.properties", new IAlignCallback() {
-                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                            String path, IFilter filter) {
-                        ar.found = id.equals("ID") && source.equals("Value") && translation.equals("test");
-                    }
-                });
+        align(new ResourceBundleFilter(),
+                Paths.get("src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter.properties")
+                        .toAbsolutePath().toFile(),
+                Paths.get("src/test/resources/data/filters/resourceBundle/file-ResourceBundleFilter_be.properties")
+                        .toAbsolutePath().toFile(),
+                (id, source, translation, isFuzzy, path, filter) -> ar.found = id.equals("ID")
+                        && source.equals("Value") && translation.equals("test"));
         assertTrue(ar.found);
     }
 

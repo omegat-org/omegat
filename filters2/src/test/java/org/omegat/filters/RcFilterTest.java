@@ -25,7 +25,10 @@
 
 package org.omegat.filters;
 
+import java.nio.file.Paths;
+
 import org.junit.Test;
+
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.rc.RcFilter;
 
@@ -45,7 +48,8 @@ public class RcFilterTest extends TestFilterBase {
         TestAlignCallback callback = new TestAlignCallback();
         context.setInEncoding("UTF-8");
         context.setOutEncoding("UTF-8");
-        align(new RcFilter(), "Rc/prog.rc", "Rc/prog_be.rc", callback);
+        align(new RcFilter(), Paths.get("src/test/resources/data/filters/Rc/prog.rc").toAbsolutePath().toFile(),
+                Paths.get("src/test/resources/data/filters/Rc/prog_be.rc").toAbsolutePath().toFile(), callback);
         checkAlignStart(callback);
         // Translation strings are Russian(?); originally they were actual UTF-8,
         // but that causes the test to fail when environment encodings aren't set

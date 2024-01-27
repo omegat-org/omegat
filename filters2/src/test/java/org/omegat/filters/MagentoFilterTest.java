@@ -29,11 +29,11 @@ package org.omegat.filters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.Test;
-import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
+
 import org.omegat.filters2.text.magento.MagentoFilter;
 
 /**
@@ -64,14 +64,11 @@ public class MagentoFilterTest extends TestFilterBase {
     public void testAlign() throws Exception {
         final AlignResultHolder alignResult = new AlignResultHolder();
 
-        align(new MagentoFilter(), "magento/MagentoFilterAlign.csv", "magento/MagentoFilterAlign-tr.csv",
-                new IAlignCallback() {
-                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                            String comment, IFilter filter) {
-                        alignResult.aligned = id.equals("code") && source.equals("original")
-                                && translation.equals("translated");
-                    }
-                });
+        align(new MagentoFilter(),
+                Paths.get("src/test/resources/data/filters/magento/MagentoFilterAlign.csv").toAbsolutePath().toFile(),
+                Paths.get("src/test/resources/data/filters/magento/MagentoFilterAlign-tr.csv").toAbsolutePath().toFile(),
+                (id, source, translation, isFuzzy, comment, filter) -> alignResult.aligned = id.equals("code")
+                        && source.equals("original") && translation.equals("translated"));
 
         assertTrue(alignResult.aligned);
     }

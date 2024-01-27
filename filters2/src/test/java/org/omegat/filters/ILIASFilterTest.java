@@ -29,11 +29,11 @@ package org.omegat.filters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.Test;
-import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
+
 import org.omegat.filters2.text.ilias.ILIASFilter;
 
 /**
@@ -65,15 +65,12 @@ public class ILIASFilterTest extends TestFilterBase {
     public void testAlign() throws Exception {
         final AlignResultHolder alignResult = new AlignResultHolder();
 
-        align(new ILIASFilter(), "ilias/ILIASFilterAlign.lang",
-                "ilias/ILIASFilterAlign-tr.lang", new IAlignCallback() {
-                    @Override
-                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                            String comment, IFilter filter) {
+        align(new ILIASFilter(),
+                Paths.get("src/test/resources/data/filters/ilias/ILIASFilterAlign.lang").toAbsolutePath().toFile(),
+                Paths.get("src/test/resources/data/filters/ilias/ILIASFilterAlign-tr.lang").toAbsolutePath().toFile(),
+                (id, source, translation, isFuzzy, comment, filter) ->
                         alignResult.aligned = id.equals("module_name#:#variable_name") && source.equals("original")
-                                && translation.equals("translated");
-                    }
-                });
+                        && translation.equals("translated"));
 
         assertTrue(alignResult.aligned);
     }

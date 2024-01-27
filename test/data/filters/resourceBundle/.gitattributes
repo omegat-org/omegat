@@ -1,1 +1,3 @@
 file-ResourceBundleFilter-NonASCIIComments.properties text working-tree-encoding=UTF-8
+file-ResourceBundleFilter.properties text eol=crlf
+file-ResourceBundleFilter_be.properties text eol=crlf

@@ -7,5 +7,7 @@
 *.bat           text eol=crlf
 # Test data
 test/data/filters/pdf/file-PdfFilter-gold.txt text eol=lf
+*.srt -text
+
 # archive version
 .git-archival.properties  export-subst

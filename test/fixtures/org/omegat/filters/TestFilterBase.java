@@ -543,7 +543,7 @@ public abstract class TestFilterBase extends TestCore {
         }
     }
 
-    protected List<AlignedEntry> al;
+    protected List<TestAlignCallback.AlignedEntry> al;
     protected int alCount;
 
     protected void checkAlignStart(TestAlignCallback calback) {
@@ -556,7 +556,7 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void checkAlign(String id, String source, String translation, String path) {
-        AlignedEntry en = al.get(alCount);
+        TestAlignCallback.AlignedEntry en = al.get(alCount);
         assertEquals(id, en.id);
         assertEquals(source, en.source);
         assertEquals(translation, en.translation);
@@ -565,7 +565,7 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void checkAlignById(String id, String source, String translation, String path) {
-        for (AlignedEntry en : al) {
+        for (TestAlignCallback.AlignedEntry en : al) {
             if (id.equals(en.id)) {
                 assertEquals(source, en.source);
                 assertEquals(translation, en.translation);
@@ -575,27 +575,6 @@ public abstract class TestFilterBase extends TestCore {
             }
         }
         fail();
-    }
-
-    protected static class TestAlignCallback implements IAlignCallback {
-        public List<AlignedEntry> entries = new ArrayList<AlignedEntry>();
-
-        public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                String path, IFilter filter) {
-            AlignedEntry en = new AlignedEntry();
-            en.id = id;
-            en.source = source;
-            en.translation = translation;
-            en.path = path;
-            entries.add(en);
-        }
-    }
-
-    protected static class AlignedEntry {
-        public String id;
-        public String source;
-        public String translation;
-        public String path;
     }
 
     public static class TestFileInfo extends FileInfo {

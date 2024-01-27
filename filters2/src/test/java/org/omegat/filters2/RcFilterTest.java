@@ -30,6 +30,7 @@ import java.nio.file.Paths;
 import org.junit.Test;
 
 import org.omegat.core.data.IProject;
+import org.omegat.filters.TestAlignCallback;
 import org.omegat.filters.TestFilterBase;
 import org.omegat.filters2.rc.RcFilter;
 

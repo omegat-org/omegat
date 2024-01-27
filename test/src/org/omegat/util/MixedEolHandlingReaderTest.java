@@ -135,7 +135,7 @@ public class MixedEolHandlingReaderTest {
     @Test
     public void testFile() throws Exception {
         try (MixedEolHandlingReader reader = new MixedEolHandlingReader(
-                Files.newBufferedReader(Paths.get("test/data/utils/file-TextFilter.txt"),
+                Files.newBufferedReader(Paths.get("test/data/util/file-TextFilter.txt"),
                         StandardCharsets.UTF_8))) {
             assertEquals("This test file for test TextFilter.", reader.readLine());
             assertEquals("", reader.readLine());

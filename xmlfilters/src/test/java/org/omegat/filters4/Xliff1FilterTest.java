@@ -39,6 +39,7 @@ import org.junit.Test;
 
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters3.xml.XLIFFFilterTest;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
 
 public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
@@ -129,7 +130,7 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testTranslationRFE1506() throws Exception {
         Xliff1Filter filter = new Xliff1Filter();
-        org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, false);
+        XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, false);
         // Actually option "NeedsTranslate" is not yet implemented
         //org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, true);
     }    

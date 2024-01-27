@@ -27,10 +27,11 @@ package org.omegat.filters;
 
 import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Paths;
+
 import org.junit.Test;
+
 import org.omegat.core.data.IProject;
-import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.moodlephp.MoodlePHPFilter;
 
 public class MoodlePHPFilterTest extends TestFilterBase {
@@ -64,13 +65,12 @@ public class MoodlePHPFilterTest extends TestFilterBase {
     @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
-        align(new MoodlePHPFilter(), "MoodlePHP/filesAlign.php",
-                "MoodlePHP/filesAlign_gl.php", new IAlignCallback() {
-            public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                    String path, IFilter filter) {
-                ar.found = id.equals("access") && source.equals("Accessibility") && translation.equals("Accesibilidade");
-            }
-        });
+        align(new MoodlePHPFilter(),
+                Paths.get("test/data/filters/MoodlePHP/filesAlign.php").toAbsolutePath().toFile(),
+                Paths.get("test/data/filters/MoodlePHP/filesAlign_gl.php").toAbsolutePath().toFile(),
+                (id, source, translation, isFuzzy, path, filter)
+                        -> ar.found = id.equals("access") && source.equals("Accessibility")
+                        && translation.equals("Accesibilidade"));
         assertTrue(ar.found);
     }
 

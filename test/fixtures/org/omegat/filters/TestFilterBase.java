@@ -325,10 +325,15 @@ public abstract class TestFilterBase extends TestCore {
                 });
     }
 
+    @Deprecated
     protected void align(IFilter filter, String in, String out, IAlignCallback callback) throws Exception {
         File inFile = new File("test/data/filters/" + in);
         File outFile = new File("test/data/filters/" + out);
         filter.alignFile(inFile, outFile, Collections.emptyMap(), context, callback);
+    }
+
+    protected void align(IFilter filter, File in, File out, IAlignCallback callback) throws Exception {
+        filter.alignFile(in, out, Collections.emptyMap(), context, callback);
     }
 
     /**

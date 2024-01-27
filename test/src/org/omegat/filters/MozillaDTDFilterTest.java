@@ -27,11 +27,11 @@ package org.omegat.filters;
 
 import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Paths;
+
 import org.junit.Test;
 
 import org.omegat.core.data.IProject;
-import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.mozdtd.MozillaDTDFilter;
 
 public class MozillaDTDFilterTest extends TestFilterBase {
@@ -59,14 +59,12 @@ public class MozillaDTDFilterTest extends TestFilterBase {
     @Test
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
-        align(new MozillaDTDFilter(), "MozillaDTD/file.dtd",
-                "MozillaDTD/file-be.dtd",
-                new IAlignCallback() {
-                    @Override
-                    public void addTranslation(final String id, final String source, final String translation, final boolean isFuzzy, final String path, final IFilter filter) {
-                        ar.found |= id.equals("mainWindow.title") && source.equals("Title") && translation.equals("Title-be");
-                    }
-                });
+        align(new MozillaDTDFilter(),
+                Paths.get("test/data/filters/MozillaDTD/file.dtd").toAbsolutePath().toFile(),
+                Paths.get("test/data/filters/MozillaDTD/file-be.dtd").toAbsolutePath().toFile(),
+                (id, source, translation, isFuzzy, path, filter)
+                        -> ar.found |= id.equals("mainWindow.title") && source.equals("Title")
+                        && translation.equals("Title-be"));
         assertTrue(ar.found);
     }
 }

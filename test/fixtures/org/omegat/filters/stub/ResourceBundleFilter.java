@@ -163,8 +163,11 @@ public class ResourceBundleFilter extends AbstractFilter {
         StringBuilder result = new StringBuilder(line.length());
         for (int cp, len = line.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = line.codePointAt(i);
-            if (strippingWhitespace && (strippingWhitespace = Character.isWhitespace(cp))) {
-                continue;
+            if (strippingWhitespace) {
+                strippingWhitespace = Character.isWhitespace(cp);
+                if (strippingWhitespace) {
+                    continue;
+                }
             }
             if (cp == '\\' && line.codePointCount(i, len) > 1) {
                 i += Character.charCount(cp);

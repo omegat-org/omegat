@@ -129,9 +129,13 @@ public class XHTMLDialect extends DefaultXMLDialect {
         if (options.getTranslateHreflang()) {
             defineTranslatableAttribute("hreflang");
         }
-        if ((this.translateValue = options.getTranslateValue())
-                || (this.translateButtonValue = options.getTranslateButtonValue())) {
+        if (this.translateValue = options.getTranslateValue()) {
             defineTranslatableTagAttribute("input", "value");
+        } else {
+            this.translateButtonValue = options.getTranslateButtonValue();
+            if (this.translateButtonValue) {
+                defineTranslatableTagAttribute("input", "value");
+            }
         }
 
         // Prepare matcher

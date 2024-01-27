@@ -36,10 +36,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import org.omegat.filters2.FilterContext;
-import org.omegat.fixtures.filters.HTMLFilter2;
-import org.omegat.fixtures.filters.HTMLOptions;
-import org.omegat.fixtures.filters.RcFilter;
-import org.omegat.fixtures.filters.ResourceBundleFilter;
+import org.omegat.filters.stub.html2.HTMLFilter2;
+import org.omegat.filters.stub.html2.HTMLOptions;
+import org.omegat.filters.stub.RcFilter;
+import org.omegat.filters.stub.ResourceBundleFilter;
 
 /**
  * TMX Compliance tests as described on

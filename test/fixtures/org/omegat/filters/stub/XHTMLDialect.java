@@ -25,7 +25,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.fixtures.filters;
+package org.omegat.filters.stub;
 
 import java.net.URL;
 import java.util.HashMap;

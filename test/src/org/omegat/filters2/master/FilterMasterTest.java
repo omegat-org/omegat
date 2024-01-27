@@ -55,7 +55,7 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
-import org.omegat.fixtures.filters.XHTMLFilter;
+import org.omegat.filters.stub.XHTMLFilter;
 
 import gen.core.filters.Filter.Option;
 import gen.core.filters.Filters;

@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.fixtures.filters;
+package org.omegat.filters.stub.html2;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;

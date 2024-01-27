@@ -38,6 +38,7 @@ import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
+import org.omegat.util.LineLengthLimitWriter;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;

@@ -24,7 +24,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters2.text;
+package org.omegat.util;
 
 import java.io.IOException;
 import java.io.Writer;

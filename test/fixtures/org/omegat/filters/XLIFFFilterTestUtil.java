@@ -40,7 +40,10 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.ITranslateCallback;
 
-public class XLIFFFilterTestUtil {
+public final class XLIFFFilterTestUtil {
+
+    private XLIFFFilterTestUtil() {
+    }
 
     /**
      * Test function to check translation of RFE1506 case.

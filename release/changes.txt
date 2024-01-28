@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   35 Enhancement
-  60 Bug fixes
+  62 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -132,6 +132,9 @@
   - Issue window cause exception
   https://sourceforge.net/p/omegat/bugs/1234/
 
+  - java.nio.charset.UnmappableCharacterException: Input length = 1
+  https://sourceforge.net/p/omegat/bugs/1233/
+
   - Repository mapping with SVN cause error
   https://sourceforge.net/p/omegat/bugs/1232/
 
@@ -200,6 +203,7 @@
   https://sourceforge.net/p/omegat/bugs/1197/
 
   - Regular expression for custom tags
+  https://sourceforge.net/p/omegat/bugs/1194/
   https://sourceforge.net/p/omegat/bugs/1193/
 
   - Content of notes elements are not displayed correctly with Xliff filter
@@ -289,6 +293,9 @@
 
   - JNA encoding issue on non-UTF-8 platforms
   https://sourceforge.net/p/omegat/bugs/812/
+
+  - The LaTeX filter should use \item as a delimiter
+  https://sourceforge.net/p/omegat/bugs/743/
 
   - Incorrect display of RTL segments in the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/bugs/558/

@@ -33,8 +33,6 @@ import org.junit.Test;
 
 import org.omegat.core.data.IProject;
 import org.omegat.filters.TestFilterBase;
-import org.omegat.filters2.IAlignCallback;
-import org.omegat.filters2.IFilter;
 import org.omegat.filters2.mozdtd.MozillaDTDFilter;
 
 public class MozillaDTDFilterTest extends TestFilterBase {

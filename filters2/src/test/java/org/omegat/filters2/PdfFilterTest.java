@@ -34,7 +34,6 @@ import java.util.List;
 import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters.TestFilterBase;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.pdf.PdfFilter;
 
 public class PdfFilterTest extends TestFilterBase {

@@ -39,7 +39,6 @@ import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters.TestFilterBase;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 public class ResourceBundleFilterTest extends TestFilterBase {

@@ -38,7 +38,6 @@ import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters.TestFilterBase;
-import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.html2.HTMLOptions;
 import org.omegat.util.HTMLUtils;

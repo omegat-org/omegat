@@ -226,15 +226,8 @@ dependencies {
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
 
-        // stax
-        implementation(libs.stax2.api)
-        runtimeOnly(libs.woodstox.core)
-
         // Data: inline data URL handler
         implementation(libs.url.protocol.handler)
-
-        // PDF Filter
-        implementation(libs.apache.pdfbox)
 
         // Dictionary
         implementation(libs.bundles.dictionary)
@@ -301,7 +294,6 @@ dependencies {
         }
 
         implementation(libs.guava)
-        implementation(libs.jetbrains.annotations)
 
         // JSON parser
         implementation(libs.bundles.jackson)
@@ -331,6 +323,8 @@ dependencies {
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
+    testFixturesImplementation(libs.omegat.htmlparser)
+    testFixturesImplementation(libs.bundles.jackson)
 
     testImplementation(libs.xmlunit.legacy)
     // LanguageTool unit tests exercise these languages

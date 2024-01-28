@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.1">
+    <file target-language="be" source-language="en" original="text3.txt">
+        <body>
+            <trans-unit>
+                <source>This is test2</source>
+            </trans-unit>
+            <trans-unit>
+                <source>test21</source>
+            </trans-unit>
+        </body>
+    </file>
+    <file target-language="be" source-language="en" original="text2.txt">
+        <body>
+            <trans-unit>
+                <source>This is test2</source>
+            </trans-unit>
+            <trans-unit>
+                <source>test21</source>
+            </trans-unit>
+        </body>
+    </file>
+    <file target-language="be" source-language="en" original="text.txt">
+        <body>
+            <trans-unit>
+                <source>This is test</source>
+                <target>tr1=This is test</target>
+            </trans-unit>
+            <trans-unit>
+                <source>test2</source>
+                <target>tr2=test2</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

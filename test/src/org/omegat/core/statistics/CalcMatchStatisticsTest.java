@@ -54,7 +54,7 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.po.PoFilter;
+import org.omegat.filters.stub.PoFilter;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
@@ -247,7 +247,7 @@ public class CalcMatchStatisticsTest {
         public List<SourceTextEntry> getAllEntries() {
             List<SourceTextEntry> ste = new ArrayList<>();
             IFilter filter = new PoFilter();
-            Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
+            Path testSource = Paths.get("test/data/stats/file-POFilter-match-stat-en-ca.po");
             IParseCallback testCallback = new TestCallback(ste);
             FilterContext context = new FilterContext(new Language("en"), new Language("ca"), true);
             try {

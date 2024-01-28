@@ -1,0 +1,3 @@
+This test file for test TextFilter.
+It should be second entry for empty-line separator or third line for line-break separator.
+It should be third entry for empty-line separator or fifth line for line-break separator.

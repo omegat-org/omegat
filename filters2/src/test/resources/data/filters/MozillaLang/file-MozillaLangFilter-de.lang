@@ -1,0 +1,121 @@
+## active ##
+## NOTE: The page is at https://www-dev.allizom.org/firefox/all/
+
+
+# %s is replaced with Firefox.
+;Download %s for Android in your language
+Laden Sie %s für Android in Ihrer Sprache herunter
+
+
+# %s is replaced with Firefox.
+;Download %s in your language
+Laden Sie %s in Ihrer Sprache herunter
+
+
+;Language
+Sprache
+
+
+;Download
+Herunterladen
+
+
+# This is displayed on firefox/beta/all/.
+;Download Firefox Beta in your language and experience cutting edge features before they make it to final release. Provide feedback to help us refine and polish the next version of Firefox.
+Laden Sie Firefox Beta in Ihrer Sprache herunter und erleben Sie neue Funktionen, bevor sie in der endgültigen Firefox-Version erscheinen. Sagen Sie uns Ihre Meinung und helfen Sie dabei, die nächste Firefox-Version zu verbessern.
+
+
+# %s is replaced with Firefox.
+# This is displayed on firefox/aurora/all/.
+;Download %s in your language to experience the newest features and innovations in an unstable environment even before they go to Beta. Give us feedback that will determine what makes it to Final Release and help shape the future of Firefox.
+Laden Sie %s in Ihrer Sprache herunter und erleben Sie die neuesten Funktionen und Innovationen in einer instabilen Umgebung noch vor der Beta-Version. Gestalten Sie die Zukunft von Firefox: Sagen Sie uns Ihre Meinung und entscheiden Sie mit, was in der endgültigen Version erscheint.
+
+
+# This is displayed on firefox/nightly/all/.
+;Are you a power-user comfortable installing pre-alpha software? Install Nightly and help us improve Firefox quality, hunt crashes and regressions and test new features as they get coded!
+Sind Sie ein Power-User, der auch Pre-Alpha-Software installiert? Installieren Sie Nightly und helfen Sie uns bei der Verbesserung der Qualität von Firefox, finden Sie Absturzursachen und Regressionen und testen Sie neue Funktionen während der Entwicklung!
+
+
+# This is displayed on firefox/organizations/all/.
+;Firefox ESR is intended for groups who deploy and maintain the desktop environment in large organizations. <a href="%s">Learn more.</a>
+Firefox ESR richtet sich an Gruppen, die die Desktop-Umgebung in großen Organisationen verteilen und warten. <a href="%s">Erfahren Sie mehr.</a>
+
+
+;Firefox is made in large part by volunteers around the world. That’s why we offer it in 90 languages (and why there’s heart and soul in every piece of code).
+Ein wesentlicher Teil von Firefox wird von Freiwilligen auf der ganzen Welt entwickelt. Deswegen bieten wir ihn in 90 Sprachen an (und deswegen Steckt in jeder Zeile Quelltext echtes Herzblut).
+
+
+# Product name is hard coded inside the product, thus not localizable.
+;Firefox Developer Edition
+Firefox Developer Edition {ok}
+
+
+# Product name is hard coded inside the product, thus not localizable.
+;Firefox Nightly
+Firefox Nightly {ok}
+
+
+# Used as a tweet, make sure to keep it under 116 characters
+;Thanks to contributions of Mozilla community members around the world, Firefox is available in 90 languages:
+Dank der Hilfe von Mitgliedern der Mozilla-Gemeinschaft auf der ganzen Welt gibt es Firefox in 90 Sprachen:
+
+
+# This is displayed on firefox/nightly/all/.
+;<strong>Warning</strong>: Nightly is updated daily. It is most appropriate for core Mozilla contributors and early adopters, not regular users.
+<strong>Warnung</strong>: Nightly wird täglich aktualisiert. Diese Version richtet sich vor allem an Mozillas Kern-Mitwirkende und frühzeitige Anwender, keine regulären Nutzer.
+
+
+;Check the system requirements
+Lesen Sie die Systemvoraussetzungen
+
+
+;Release notes
+Versionshinweise
+
+
+;Source code
+Quelltext
+
+
+# This is displayed on firefox/organizations/all/.
+;Show:
+Anzeigen:
+
+
+;Fully localized versions
+Vollständig übersetzte Versionen
+
+
+;Localized versions in testing
+Übersetzte Versionen im Test
+
+
+;These localizations aren’t final. We’re waiting for more feedback from the community to perfect them.
+Diese Übersetzungen sind noch nicht fertig. Wir warten noch auf Rückmeldung der Gemeinschaft, um sie zu verbessern.
+
+
+# Used in Android pages like /firefox/android/beta/all/
+;Multi-locale
+Mehrsprachig
+
+
+;Search languages
+Sprachen suchen
+
+
+;Search
+Suchen
+
+
+;No matching languages found.
+Keine passenden Sprachen gefunden.
+
+
+;Download for %(platform)s in %(locale)s
+Für %(platform)s auf %(locale)s herunterladen
+
+
+;Not Yet Available
+Noch nicht verfügbar
+
+

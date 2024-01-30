@@ -51,6 +51,7 @@ import org.junit.Test;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.filters.stub.html2.HTMLFilter2;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
@@ -71,7 +72,7 @@ public class FilterMasterTest {
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
 
         FilterMaster.setFilterClasses(
-                Arrays.asList(new Class<?>[] { org.omegat.filters3.xml.xhtml.XHTMLFilter.class }));
+                Arrays.asList(new Class<?>[] { HTMLFilter2.class }));
     }
 
     @After
@@ -83,14 +84,11 @@ public class FilterMasterTest {
     public void deserializeEmptyOption() throws JsonProcessingException, JAXBException {
         String filters = "<?xml version='1.0' encoding='UTF-8'?>" + //
                 "<filters removeTags='true' removeSpacesNonseg='true' preserveSpaces='false' ignoreFileContext='false'>"
-                + //
-                "  <filter className='org.omegat.filters3.xml.xhtml.XHTMLFilter' enabled='true'>" + //
-                "    <files sourceFilenameMask='*.html' targetFilenamePattern='${filename}'/>" + //
-                "    <files sourceFilenameMask='*.xhtml' targetFilenamePattern='${filename}'/>" + //
-                "    <files sourceFilenameMask='*.xht' targetFilenamePattern='${filename}'/>" + //
-                "    <option/>" + //
-                "  </filter>" + //
-                "</filters>";
+                + "  <filter className='org.omegat.filters3.xml.html2.HTMLFilter2' enabled='true'>"
+                + "    <files sourceFilenameMask='*.html' targetFilenamePattern='${filename}'/>"
+                + "    <option/>"
+                + "  </filter>"
+                + "</filters>";
 
         // Check equality between jaxb unmarshaller and xml mapper
         Unmarshaller unm;

@@ -352,7 +352,7 @@ public class SdlXliff extends Xliff1Filter {
     @Override
     protected boolean processCharacters(Characters event, XMLStreamWriter writer) throws XMLStreamException {
         if (commentBuf != null) {
-            commentBuf.append(event.toString());
+            commentBuf.append(event.getData());
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
                 if ("last_modified_by".equals(currentProp)) {
                     writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,

@@ -35,10 +35,10 @@ import java.util.TreeMap;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.html2.HTMLFilter2;
-import org.omegat.filters2.html2.HTMLOptions;
-import org.omegat.filters2.rc.RcFilter;
-import org.omegat.filters2.text.bundles.ResourceBundleFilter;
+import org.omegat.filters.stub.html2.HTMLFilter2;
+import org.omegat.filters.stub.html2.HTMLOptions;
+import org.omegat.filters.stub.RcFilter;
+import org.omegat.filters.stub.ResourceBundleFilter;
 
 /**
  * TMX Compliance tests as described on

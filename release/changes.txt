@@ -2000,7 +2000,7 @@ encountering certain malformed header lines
  OmegaT 4.0.1 (2016-10-03)
 ----------------------------------------------------------------------
   7 Enhancements
-  2 Bug fixes
+  3 Bug fixes
   1 Localization update
 ----------------------------------------------------------------------
 4.0.1 vs 4.0.0 update 1
@@ -2030,6 +2030,9 @@ encountering certain malformed header lines
   - Update LanguageTool to 3.5
 
   Bug fixes:
+
+  - Check on valid path for dictionary missing
+  https://sourceforge.net/p/omegat/bugs/506/
 
   - Relative project paths not normalized
   https://sourceforge.net/p/omegat/bugs/837/

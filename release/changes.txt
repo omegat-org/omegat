@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   35 Enhancement
-  62 Bug fixes
+  63 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -116,6 +116,9 @@
 
 
   Bug fixes:
+
+  - sdlxliff filter does not display (some) comments
+  https://sourceforge.net/p/omegat/bugs/1244/
 
   - When restart GUI on deb/rpm packaged OmegaT, it failed with java not found
   https://sourceforge.net/p/omegat/bugs/1243/
@@ -909,7 +912,7 @@ OmegaT 5.7.1 (2022-03-19)
  OmegaT 5.4.0 (2020-12-12)
 ----------------------------------------------------------------------
   7 Enhancements
-  8 Bug fixes
+  9 Bug fixes
   10 Localization updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -957,6 +960,9 @@ OmegaT 5.7.1 (2022-03-19)
 
   - Wrong background colour in dark mode on Linux Mint
   https://sourceforge.net/p/omegat/bugs/1013/
+
+  - Matches ignored if the two locales have the same language subtag
+  https://sourceforge.net/p/omegat/bugs/1015/
 
   - Project Files table does not respect LAF colours
   https://sourceforge.net/p/omegat/bugs/1016/

@@ -119,4 +119,10 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         translate(filter, filename, Collections.emptyMap(),
                 Collections.singletonMap("Should translate in result.", "Devrait traduire dans le r\u00E9sultat."));
     }
+
+    @Test
+    public void testBugs418() throws Exception {
+        Xliff1Filter filter = new Xliff1Filter();
+        translateXML(filter, "test/data/filters/xliff/filters3/file-XLIFFFilter-cdata-bugs418.xlf");
+    }
 }

@@ -121,7 +121,9 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-be.po");
+        Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_ALLOW_BLANK, "false");
+        translate(new PoFilter(), "test/data/filters/po/file-POFilter-be.po", options);
         compareBinary(new File("test/data/filters/po/file-POFilter-be-expected.po"), outFile);
     }
 
@@ -167,13 +169,16 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testParseFuzzyCtx() throws Exception {
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po");
+        Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_ALLOW_BLANK, "false");
+        translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po", options);
         compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-expected.po"), outFile);
     }
 
     @Test
     public void testAutoFillInPluralStatement() throws Exception {
         Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_ALLOW_BLANK, "false");
         options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT, "true");
         translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po", options);
         compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-plural.po"), outFile);

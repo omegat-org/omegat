@@ -299,7 +299,8 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     /**
-     * Helper function for testing the translateFile method of a filter. Translation equals the source.
+     * Helper function for testing the translateFile method of a filter.
+     * Translation equals the source when monolingual filter or monolingual option.
      * Translation is written to {@link #outFile}.
      * @param filter the filter to test
      * @param filename the file to use as input for the filter
@@ -307,14 +308,20 @@ public abstract class TestFilterBase extends TestCore {
      * @throws Exception when the filter throws an exception
      */
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
+        boolean allowBlank;
+        if (filter.isBilingual()) {
+            allowBlank = !"true".equalsIgnoreCase(config.get("monolingualFormat"));
+        } else {
+            allowBlank = false;
+        }
         filter.translateFile(new File(filename), outFile, config, context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
-                        return source;
+                        return allowBlank? null : source;
                     }
 
                     public String getTranslation(String id, String source) {
-                        return source;
+                        return allowBlank? null : source;
                     }
 
                     public void linkPrevNextSegments() {

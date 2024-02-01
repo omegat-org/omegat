@@ -535,4 +535,9 @@ public class XLIFFFilterTest extends TestFilterBase {
     public void testBugs1221() throws Exception {
         translateXML(filter, "test/data/filters/xliff/filters3/file-xliff-BUGS1221.xlf");
     }
+
+    @Test
+    public void testBugs418() throws Exception {
+        translateXML(filter, "test/data/filters/xliff/filters3/file-XLIFFFilter-cdata-bugs418.xlf");
+    }
 }

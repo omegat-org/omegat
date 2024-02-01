@@ -300,7 +300,7 @@ public abstract class TestFilterBase extends TestCore {
 
     /**
      * Helper function for testing the translateFile method of a filter.
-     * Translation equals the source when monolingual filter or monolingual option.
+     * Translation equals the source when monolingual filter.
      * Translation is written to {@link #outFile}.
      * @param filter the filter to test
      * @param filename the file to use as input for the filter

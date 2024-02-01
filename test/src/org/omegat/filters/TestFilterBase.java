@@ -308,12 +308,11 @@ public abstract class TestFilterBase extends TestCore {
      * @throws Exception when the filter throws an exception
      */
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
-        boolean allowBlank;
-        if (filter.isBilingual()) {
-            allowBlank = !"true".equalsIgnoreCase(config.get("monolingualFormat"));
-        } else {
-            allowBlank = false;
-        }
+        translate(filter, filename, config, filter.isBilingual());
+    }
+
+    protected void translate(AbstractFilter filter, String filename, Map<String, String> config,
+                           boolean allowBlank) throws Exception {
         filter.translateFile(new File(filename), outFile, config, context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {

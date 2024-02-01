@@ -37,6 +37,7 @@ import org.junit.Test;
 
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.ITMXEntry;
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -184,4 +185,8 @@ public class POFilterTest extends TestFilterBase {
         compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-plural.po"), outFile);
     }
 
+    @Override
+    protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
+        translate(filter, filename, config, !"true".equalsIgnoreCase(config.get(PoFilter.OPTION_FORMAT_MONOLINGUAL)));
+    }
 }

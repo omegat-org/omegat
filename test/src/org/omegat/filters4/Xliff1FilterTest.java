@@ -29,15 +29,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.junit.Test;
 
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
 
 public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
@@ -77,7 +77,7 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testKey() throws Exception {
         List<ParsedEntry> entries = parse3(new Xliff1Filter(), "test/data/filters/xliff/filters4-xliff1/en-xx.xlf",
-            java.util.Collections.emptyMap());
+            Collections.emptyMap());
         ParsedEntry firstEntry = entries.get(0);
         assertEquals(firstEntry.id, "example_01");
         assertEquals(firstEntry.path, "//interface.po");  // path is built with file name
@@ -92,29 +92,10 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testTranslation() throws Exception {
         Xliff1Filter filter = new Xliff1Filter();
-        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff1/en-xx.xlf"), 
-            outFile, java.util.Collections.emptyMap(), context,
-                new ITranslateCallback() {
-                    public String getTranslation(String id, String source, String path) {
-                        if ("Should translate in result.".equals(source)) {
-                            return "Devrait traduire dans le r\u00E9sultat.";
-                        }
-                        return null; // not translated
-                    }
-
-                    public String getTranslation(String id, String source) {
-                        return getTranslation(id, source, "");
-                    }
-
-                    public void linkPrevNextSegments() {
-                    }
-
-                    public void setPass(int pass) {
-                    }
-                });
+        translate(filter, "test/data/filters/xliff/filters4-xliff1/en-xx.xlf");
         // Check that it correctly translates
         List<ParsedEntry> entries = parse3(filter, outFile.getCanonicalPath(),
-            java.util.Collections.emptyMap());
+            Collections.emptyMap());
         // entry translated in the source file, not in the Callback
         assertEquals("bar", entries.get(1).translation);
         // entry translated in the callback, not in the source file
@@ -131,5 +112,11 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, false);
         // Actually option "NeedsTranslate" is not yet implemented
         //org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, true);
-    }    
+    }
+
+    @Override
+    protected void translate(AbstractFilter filter, String filename) throws Exception {
+        translate(filter, filename, Collections.emptyMap(),
+                Collections.singletonMap("Should translate in result.", "Devrait traduire dans le r\u00E9sultat."));
+    }
 }

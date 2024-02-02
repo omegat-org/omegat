@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  35 Enhancement
+  44 Enhancement
   63 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
@@ -33,8 +33,8 @@
   - ResourceBundle Filter: default not to escape Unicode character
   https://sourceforge.net/p/omegat/feature-requests/1716/
 
-  - ResourceBundle Filter: default not to escape Unicode character
-  https://sourceforge.net/p/omegat/feature-requests/1716/
+  -	Make repository connectors as plugin
+  https://sourceforge.net/p/omegat/feature-requests/1715/
 
   - ResourceBundle filter: "Don't translate NOI18N comment" feature optional
   https://sourceforge.net/p/omegat/feature-requests/1713/
@@ -66,11 +66,14 @@
   - Generate JSON format stastics file when save
   https://sourceforge.net/p/omegat/feature-requests/1695/
 
+  - Build System: update gradle version to 7.5.1
+  https://sourceforge.net/p/omegat/feature-requests/1691/
+
   - Generate and compile TXT and JSON file when committing target files
   https://sourceforge.net/p/omegat/feature-requests/1690/
 
-  - Build System: update gradle version to 7.5.1
-  https://sourceforge.net/p/omegat/feature-requests/1691/
+  -	Ensure that OmegaT functions properly under Java 17
+  https://sourceforge.net/p/omegat/feature-requests/1682/
 
   - MT: IBM watson accept 50KB text
   https://sourceforge.net/p/omegat/feature-requests/1676/
@@ -80,6 +83,18 @@
 
   - Update LanguageTool to latest version (6.1)
   https://sourceforge.net/p/omegat/feature-requests/1637/
+
+  - Visual confirmation that dictionary was searched
+  https://sourceforge.net/p/omegat/feature-requests/1633/
+
+  - Remove TaaS terminology lookup
+  https://sourceforge.net/p/omegat/feature-requests/1627/
+
+  -	Update to Gradle 7.3.3 or later
+  https://sourceforge.net/p/omegat/feature-requests/1625/
+
+  -	Clarify requirements for DeepL API key
+  https://sourceforge.net/p/omegat/feature-requests/1612/
 
   - Team feature: SSH support id_ecdsa and id_ed25519 for default key
   https://sourceforge.net/p/omegat/feature-requests/1598/
@@ -96,6 +111,9 @@
   - Add Spell checker as a type of plugin
   https://sourceforge.net/p/omegat/feature-requests/1490/
 
+  -	[fuzzy] option in "Check issues"
+  https://sourceforge.net/p/omegat/feature-requests/1451/
+
   - Use repository mappings in a local project
   https://sourceforge.net/p/omegat/feature-requests/1448/
 
@@ -109,6 +127,7 @@
   https://sourceforge.net/p/omegat/feature-requests/1268/
 
   - Support SRX format
+  https://sourceforge.net/p/omegat/feature-requests/98/
 
   - Support M1/M2 Mac natively and distribute with Arm64 JRE.
 
@@ -353,7 +372,7 @@
  OmegaT 5.8.0 (2023-06-19)
 ----------------------------------------------------------------------
    4 Removed features
-  41 Enhancements
+  42 Enhancements
   45 Bug fixes
   12 Localization updates
 ----------------------------------------------------------------------
@@ -483,6 +502,9 @@
 
   - Machine translation results sorting
   https://sourceforge.net/p/omegat/feature-requests/1467/
+
+  - Change label for Comments and Notes
+  https://sourceforge.net/p/omegat/feature-requests/1442/
 
   - In mode=console-align, generate tmx with mutiples translations
   https://sourceforge.net/p/omegat/feature-requests/1408/

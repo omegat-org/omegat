@@ -28,6 +28,7 @@ package org.omegat.filters;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -187,6 +188,7 @@ public class POFilterTest extends TestFilterBase {
 
     @Override
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
-        translate(filter, filename, config, !"true".equalsIgnoreCase(config.get(PoFilter.OPTION_FORMAT_MONOLINGUAL)));
+        translate(filter, filename, config, Collections.emptyMap(),
+                !"true".equalsIgnoreCase(config.get(PoFilter.OPTION_FORMAT_MONOLINGUAL)));
     }
 }

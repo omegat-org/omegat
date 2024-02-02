@@ -308,19 +308,47 @@ public abstract class TestFilterBase extends TestCore {
      * @throws Exception when the filter throws an exception
      */
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
-        translate(filter, filename, config, filter.isBilingual());
+        translate(filter, filename, config, Collections.emptyMap());
     }
 
+    /**
+     * Helper function for testing the translateFile method of a filter.
+     * Translation equals the source when monolingual filter when no translation is found.
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @param config the filter options/config to use
+     * @param translations expected translations.
+     * @throws Exception when the filter throws an exception
+     */
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config,
-                           boolean allowBlank) throws Exception {
+                             Map<String, String> translations) throws Exception {
+        translate(filter, filename, config, translations, filter.isBilingual());
+    }
+
+    /**
+     * Helper function for testing the translateFile method of a filter.
+     * Translation equals the source when allowBlank is false and translation is not found.
+     * @param filter the filter to test
+     * @param filename the file to use as input for the filter
+     * @param config the filter options/config to use
+     * @param translations expected translations.
+     * @param allowBlank return null as translation when translation is not found.
+     * @throws Exception when the filter throws an exception
+     */
+    protected void translate(AbstractFilter filter, String filename, Map<String, String> config,
+                           Map<String, String> translations, boolean allowBlank) throws Exception {
         filter.translateFile(new File(filename), outFile, config, context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
-                        return allowBlank? null : source;
+                        String translation = translations.get(source);
+                        if (translation == null && !allowBlank) {
+                            return source;
+                        }
+                        return translation;
                     }
 
                     public String getTranslation(String id, String source) {
-                        return allowBlank? null : source;
+                        return getTranslation(id, source, null);
                     }
 
                     public void linkPrevNextSegments() {

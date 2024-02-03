@@ -1,0 +1,4 @@
+#. The action requested is not allowed.  Variable will be reason or detail on the restriction
+#: /home/greg/git/guard/com.openexchange.guard.backend/src/com/openexchange/guard/exceptions/GuardExceptionMessages.java:75
+msgid "The action is not allowed: '%1$s'"
+msgstr ""

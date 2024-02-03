@@ -38,10 +38,14 @@ import org.junit.Test;
 
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.ITMXEntry;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
+import org.omegat.util.TestPreferencesInitializer;
 
 public class POFilterTest extends TestFilterBase {
 
@@ -190,5 +194,23 @@ public class POFilterTest extends TestFilterBase {
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
         translate(filter, filename, config, Collections.emptyMap(),
                 !"true".equalsIgnoreCase(config.get(PoFilter.OPTION_FORMAT_MONOLINGUAL)));
+    }
+
+    /**
+     * POFilter has always handle print-format placeholder as protected,
+     * Even when user gives custom tags that is part of print format syntax.
+     * {@see https://sourceforge.net/p/omegat/bugs/906/}
+     */
+    @Test
+    public void testTranslateCustomTag() throws Exception {
+        TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, "$s");
+        String f = "test/data/filters/po/file-POFilter-custom-tag.po";
+        Map<String, String> options = new HashMap<>();
+        TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
+        SourceTextEntry ste = fi.entries.get(0);
+        ProtectedPart[] protectedParts = ste.getProtectedParts();
+        assertEquals(1, protectedParts.length);
+        assertEquals("Protected part is wrong", "%1$s", protectedParts[0].getTextInSourceSegment());
     }
 }

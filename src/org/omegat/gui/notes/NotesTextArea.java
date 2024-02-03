@@ -107,6 +107,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
             }
         }
         setText(text);
+        undoManager.discardAllEdits();
         setEditable(true);
     }
 

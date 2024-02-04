@@ -121,8 +121,9 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     }
 
     @Test
-    public void testBugs418() throws Exception {
+    public void testBugs1247() throws Exception {
         Xliff1Filter filter = new Xliff1Filter();
-        translateXML(filter, "test/data/filters/xliff/filters3/file-XLIFFFilter-cdata-bugs418.xlf");
+        translateXML(filter,
+                "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf");
     }
 }

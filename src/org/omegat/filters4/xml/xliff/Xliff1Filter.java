@@ -99,7 +99,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 try {
                     processStartElement(
                             eFactory.createStartElement(reader.getName(), attributes.iterator(), null), null);
-                } catch (Exception ex) {
+                } catch (Exception ignored) {
+                    // XXX: Can we really skip?
                 }
             }
         }
@@ -239,8 +240,17 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
             }
             break;
-        case "group":
         case "file":
+            path = "/";
+            cleanBuffers();
+            if (endElement.getName().getLocalPart().equals(ignoreScope)) {
+                ignoreScope = null;
+            } else if (ignoreScope != null
+                    && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
+                ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
+            }
+            break;
+        case "group":
             path = path.substring(0, path.lastIndexOf('/'));
             cleanBuffers();
             if (endElement.getName().getLocalPart().equals(ignoreScope)) {

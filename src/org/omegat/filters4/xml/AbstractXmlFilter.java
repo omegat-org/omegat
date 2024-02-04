@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Thomas Cordonnier
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -189,16 +190,17 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             try {
                 strReader = iFactory.createXMLStreamReader(inReader);
                 eventReader = iFactory.createXMLEventReader(strReader);
-                isEventMode = false; // always start like this, even with new
-                                     // file
+                // always start like this, even with new file
+                isEventMode = false;
                 if (writer == null) {
                     while (strReader.hasNext()) {
+                        // First check if not event mode.
                         if (!isEventMode) {
                             checkCurrentCursorPosition(strReader, false);
                         }
-                        if (isEventMode) { // calculated after
-                                           // checkCurrentCursorPosition, may
-                                           // have changed!
+                        // calculated after checkCurrentCursorPosition may
+                        // have changed!
+                        if (isEventMode) {
                             XMLEvent event = eventReader.nextEvent();
                             if (event.isStartElement()) {
                                 processStartElement(event.asStartElement(), null);
@@ -237,17 +239,17 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                             strReader.next();
                             continue;
                         }
+
+                        // First check if not event mode.
                         if (!isEventMode) {
                             checkCurrentCursorPosition(strReader, true);
-                            // in non-event mode, we always write exactly what
-                            // was in the source
-                            fromReaderToWriter(strReader, strWriter);
                         }
-                        if (isEventMode) { // calculated after
-                                           // checkCurrentCursorPosition, may
-                                           // have changed!
-                            XMLEvent event = eventReader.nextEvent();
+
+                        // calculated after checkCurrentCursorPosition may
+                        // have changed!
+                        if (isEventMode) {
                             boolean keep;
+                            XMLEvent event = eventReader.nextEvent();
                             if (event.isStartElement()) {
                                 keep = processStartElement(event.asStartElement(), strWriter);
                             } else if (event.isEndElement()) {
@@ -262,6 +264,9 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                                 fromEventToWriter(event, strWriter);
                             }
                         } else {
+                            // still in non-event mode, we always write
+                            // exactly what was in the source
+                            fromReaderToWriter(strReader, strWriter);
                             strReader.next();
                         }
                     }
@@ -331,9 +336,9 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             break;
         case XMLEvent.START_ELEMENT:
             final String localName = xmlr.getLocalName(), namespaceURI = xmlr.getNamespaceURI();
-            if (namespaceURI != null && namespaceURI.length() > 0) {
+            if (namespaceURI != null && !namespaceURI.isEmpty()) {
                 final String prefix = xmlr.getPrefix();
-                if (prefix != null && prefix.length() > 0) {
+                if (prefix != null && !prefix.isEmpty()) {
                     writer.writeStartElement(prefix, localName, namespaceURI);
                 } else {
                     writer.writeStartElement(namespaceURI, localName);
@@ -346,7 +351,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             }
             for (int i = 0, len = xmlr.getAttributeCount(); i < len; i++) {
                 String attUri = xmlr.getAttributeNamespace(i);
-                if (attUri != null && attUri.length() > 0) {
+                if (attUri != null && !attUri.isEmpty()) {
                     writer.writeAttribute(attUri, xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));
                 } else {
                     writer.writeAttribute(xmlr.getAttributeLocalName(i), xmlr.getAttributeValue(i));
@@ -413,7 +418,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
                     ((ProcessingInstruction) ev).getData());
             break;
         case XMLEvent.CDATA:
-            writer.writeCData(((Characters) ev).getData());
+            writer.writeCData(ev.asCharacters().getData());
             break;
         case XMLEvent.COMMENT:
             writer.writeComment(((Comment) ev).getText());
@@ -455,12 +460,12 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     }
 
     // Memorize association between tags and list of events
-    // This map is used by restoreTags
-    // but it is the responsability of child class to fill it during segment
+    // This map is used by restoreTags,
+    // but it is the responsibility of child class to fill it during segment
     // processing and to clean it after
     protected Map<String, List<XMLEvent>> tagsMap = new TreeMap<>();
 
-    protected static final Pattern OMEGAT_TAG = Pattern.compile("<(\\/?)([a-z]\\d+)\\/?>");
+    protected static final Pattern OMEGAT_TAG = Pattern.compile("<(/?)([a-z]\\d+)/?>");
     protected final XMLEventFactory eFactory = XMLEventFactory.newInstance();
 
     /**
@@ -469,7 +474,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
      **/
     protected List<XMLEvent> restoreTags(String tra) {
         List<XMLEvent> res = new LinkedList<XMLEvent>();
-        while (tra.length() > 0) {
+        while (!tra.isEmpty()) {
             Matcher m = OMEGAT_TAG.matcher(tra);
             if (m.find()) {
                 res.add(eFactory.createCharacters(tra.substring(0, m.start())));
@@ -508,7 +513,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
 
     protected List<ProtectedPart> buildProtectedParts(String src) {
         List<ProtectedPart> protectedParts = new LinkedList<ProtectedPart>();
-        while (src.length() > 0) {
+        while (!src.isEmpty()) {
             Matcher m = OMEGAT_TAG.matcher(src);
             if (!m.find()) {
                 break;

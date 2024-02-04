@@ -10,7 +10,7 @@
             </trans-unit>
         </body>
     </file>
-    <file target-language="be" source-language="en" original="text.txt">
+    <file target-language="be" source-language="en" original="text.txt" datatype="plaintext">
         <body>
             <trans-unit id="id3">
                 <source><![CDATA[This is <test]]></source>

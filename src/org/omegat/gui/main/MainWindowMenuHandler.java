@@ -38,6 +38,7 @@ package org.omegat.gui.main;
 
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -324,7 +325,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) == 0 && (modifier & KeyEvent.ALT_DOWN_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -340,7 +341,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) == 0 && (modifier & KeyEvent.ALT_DOWN_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -355,7 +356,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) == 0 && (modifier & KeyEvent.ALT_DOWN_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);

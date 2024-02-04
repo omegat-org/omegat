@@ -1165,22 +1165,24 @@ public class EditorController implements IEditor {
                 Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste), defaultTranslation);
 
         // find all identical sources and redraw them
-        for (int i = 0; i < m_docSegList.length; i++) {
-            if (i == displayedEntryIndex) {
-                // current entry, skip
-                continue;
-            }
-            SegmentBuilder builder = m_docSegList[i];
-            if (!builder.hasBeenCreated()) {
-                // Skip because segment has not been drawn yet
-                continue;
-            }
-            if (builder.ste.getSrcText().equals(entry.getSrcText())) {
-                // the same source text - need to update
-                builder.createSegmentElement(false,
-                        Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
-                // then add new marks
-                markerController.reprocessImmediately(builder);
+        if (translationChanged || noteChanged) {
+            for (int i = 0; i < m_docSegList.length; i++) {
+                if (i == displayedEntryIndex) {
+                    // current entry, skip
+                    continue;
+                }
+                SegmentBuilder builder = m_docSegList[i];
+                if (!builder.hasBeenCreated()) {
+                    // Skip because segment has not been drawn yet
+                    continue;
+                }
+                if (builder.ste.getSrcText().equals(entry.getSrcText())) {
+                    // the same source text - need to update
+                    builder.createSegmentElement(false,
+                            Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
+                    // then add new marks
+                    markerController.reprocessImmediately(builder);
+                }
             }
         }
 

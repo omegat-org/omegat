@@ -189,14 +189,15 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
             XMLEventReader eventReader = null;
             try {
                 strReader = iFactory.createXMLStreamReader(inReader);
-                eventReader = iFactory.createXMLEventReader(strReader);
                 // always start like this, even with new file
                 isEventMode = false;
                 if (writer == null) {
                     while (strReader.hasNext()) {
                         // First check if not event mode.
                         if (!isEventMode) {
-                            checkCurrentCursorPosition(strReader, false);
+                            if (checkCurrentCursorPosition(strReader, false)) {
+                                eventReader = iFactory.createXMLEventReader(strReader);
+                            }
                         }
                         // calculated after checkCurrentCursorPosition may
                         // have changed!
@@ -242,7 +243,9 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
 
                         // First check if not event mode.
                         if (!isEventMode) {
-                            checkCurrentCursorPosition(strReader, true);
+                            if (checkCurrentCursorPosition(strReader, false)) {
+                                eventReader = iFactory.createXMLEventReader(strReader);
+                            }
                         }
 
                         // calculated after checkCurrentCursorPosition may
@@ -297,7 +300,7 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
     protected boolean isEventMode = false;
 
     /** Called for each cursor step when we are NOT in event mode **/
-    protected abstract void checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite);
+    protected abstract boolean checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite);
 
     /**
      * Called for each start element (including empty ones) when we are in event

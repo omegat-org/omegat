@@ -81,7 +81,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     @Override // start events on body
-    protected void checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             if (reader.getLocalName().equals("body")) {
                 this.isEventMode = true;
@@ -104,6 +104,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 }
             }
         }
+        return isEventMode;
     }
     
     @Override

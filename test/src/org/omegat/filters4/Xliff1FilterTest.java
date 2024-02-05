@@ -151,6 +151,4 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         checkMultiNoPrevNext("test2", "id2", "//text.txt", null);
         checkMultiEnd();
     }
-
-
 }

@@ -111,7 +111,7 @@ public class SdlXliff extends Xliff1Filter {
      * Also starts on cmt-defs or tag-defs, else like in standard XLIFF.
      */
     @Override
-    protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             String name = reader.getLocalName();
             if (name.equals("cmt-defs")) {
@@ -122,6 +122,7 @@ public class SdlXliff extends Xliff1Filter {
             }
         }
         super.checkCurrentCursorPosition(reader, doWrite);
+        return isEventMode;
     }
 
     @Override

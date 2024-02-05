@@ -137,8 +137,10 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
     public void testBugs1247() throws Exception {
         Xliff1Filter filter = new Xliff1Filter();
-        translateXML(filter,
-                "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf");
+        translate(filter, "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf");
+        compareXML(new File(
+                "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag-expect.xlf"),
+                outFile);
     }
 
     @Test
@@ -151,6 +153,4 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         checkMultiNoPrevNext("test2", "id2", "//text.txt", null);
         checkMultiEnd();
     }
-
-
 }

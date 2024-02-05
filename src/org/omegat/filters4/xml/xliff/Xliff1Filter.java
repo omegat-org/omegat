@@ -25,21 +25,22 @@
 
 package org.omegat.filters4.xml.xliff;
 
-import java.util.List;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Collections;
 
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
 /**
@@ -48,6 +49,16 @@ import org.omegat.util.OStrings;
  * @author Thomas Cordonnier
  */
 public class Xliff1Filter extends AbstractXliffFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(Xliff1Filter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     // ---------------------------- IFilter API---------------------------
 

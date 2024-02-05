@@ -109,6 +109,8 @@ import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.gui.notes.INotes;
+import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.help.Help;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
@@ -797,7 +799,12 @@ public class EditorController implements IEditor {
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
 
-        Core.getNotes().setNoteText(currentTranslation.note);
+        INotes notes = Core.getNotes();
+        notes.setNoteText(currentTranslation.note);
+        if (notes instanceof NotesTextArea) {
+            // clear undo history.
+            ((NotesTextArea) notes).clearHistory();
+        }
 
         // then add new marks
         markerController.reprocessImmediately(builder);

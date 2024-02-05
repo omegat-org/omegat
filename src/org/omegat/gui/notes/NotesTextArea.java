@@ -7,6 +7,7 @@
                2007 Zoltan Bartko
                2011 John Moran
                2015 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -57,8 +58,8 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
 
     private static final String EXPLANATION = OStrings.getString("GUI_NOTESWINDOW_explanation");
 
-    UndoManager undoManager;
-    private DockableScrollPane scrollPane;
+    private final UndoManager undoManager;
+    private final DockableScrollPane scrollPane;
 
     /** Creates new Notes Text Area Pane */
     public NotesTextArea(IMainWindow mw) {
@@ -96,6 +97,12 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
         undoManager.discardAllEdits();
     }
 
+    /**
+     * set note text.
+     * @param text
+     *            note's text, or null if note doesn't exist
+     */
+    @Override
     public void setNoteText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -107,16 +114,27 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
             }
         }
         setText(text);
-        undoManager.discardAllEdits();
         setEditable(true);
     }
 
+    /**
+     * get notes text.
+     * @return notes content.
+     */
+    @Override
     public String getNoteText() {
         UIThreadsUtil.mustBeSwingThread();
 
         String text = getText();
         // Disallow empty note. Use null to indicate lack of note.
         return text.isEmpty() ? null : text;
+    }
+
+    /**
+     * clear undo history (used when set active segment entry).
+     */
+    public void clearHistory() {
+        undoManager.discardAllEdits();
     }
 
     @Override

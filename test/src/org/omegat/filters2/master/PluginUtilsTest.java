@@ -24,7 +24,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 **************************************************************************/
 
-package org.omegat.plugins;
+package org.omegat.filters2.master;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -45,7 +45,6 @@ import javax.xml.bind.JAXBException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 
 public class PluginUtilsTest {

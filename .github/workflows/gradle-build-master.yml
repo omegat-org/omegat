@@ -16,7 +16,7 @@ jobs:
       with:
         java-version: 17
         distribution: 'temurin'
-    - uses: gradle/wrapper-validation-action@v1
+    - uses: gradle/wrapper-validation-action@v2
       name: validate gradle wrapper
     - name: Agree gradle-scan terms
       run: cat ci/gradle/gradle-scan.init.gradle >> settings.gradle

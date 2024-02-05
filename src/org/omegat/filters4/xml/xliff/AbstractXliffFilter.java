@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Stack;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -94,10 +95,13 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     // --------------------- AbstractXmlFilter part -----------------------
 
     /* -- Data about current unit */
-    protected String path = "/", ignoreScope = null;
+    protected String path = "/";
+    protected String ignoreScope = null;
     protected List<XMLEvent> currentBuffer = null;
     protected boolean inTarget = false;
-    protected List<XMLEvent> source = new LinkedList<>(), target = null, note = new LinkedList<>();
+    protected List<XMLEvent> source = new LinkedList<>();
+    protected List<XMLEvent> target = null;
+    protected List<XMLEvent> note = new LinkedList<>();
 
     protected void cleanBuffers() {
         source.clear();
@@ -200,7 +204,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
                         break;
                     }
                 }
-                pairedHolders.put(pairId.getValue(), "" + prefix + count);
+                pairedHolders.put(Objects.requireNonNull(pairId).getValue(), "" + prefix + count);
             }
             return "<" + prefix + count + (isEmpty ? "/" : "") + ">";
         }
@@ -242,7 +246,4 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
             tagStack.push("" + prefix + count);
         }
     }
-
-    protected static final javax.xml.stream.XMLEventFactory eFactory = javax.xml.stream.XMLEventFactory
-            .newInstance();
 }

@@ -30,19 +30,16 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.junit.Test;
 
-import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
-import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
-import org.omegat.util.Language;
 
 public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
     @Test
@@ -90,13 +87,13 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         assertEquals("bar", secondEntry.translation);
         ParsedEntry lastEntry = entries.get(entries.size() - 1);
         assertEquals("Added_1", lastEntry.id);  // next entry Added_2 is ignored as translate=no
-        assertEquals("//interface.po/Group 3", lastEntry.path);  // path is built with file name and groups              
+        assertEquals("//interface.po/Group 3", lastEntry.path);  // path is built with file name and groups
     }
 
     @Test
     public void testTranslation() throws Exception {
         Xliff1Filter filter = new Xliff1Filter();
-        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff1/en-xx.xlf"), 
+        filter.translateFile(new File("test/data/filters/xliff/filters4-xliff1/en-xx.xlf"),
             outFile, java.util.Collections.emptyMap(), context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
@@ -135,5 +132,25 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, false);
         // Actually option "NeedsTranslate" is not yet implemented
         //org.omegat.filters.XLIFFFilterTest.checkXLiffTranslationRFE1506(filter, context, outFile, true);
-    }    
+    }
+
+    @Test
+    public void testBugs1247() throws Exception {
+        Xliff1Filter filter = new Xliff1Filter();
+        translateXML(filter,
+                "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf");
+    }
+
+    @Test
+    public void testBugs1247_2() throws Exception {
+        String f = "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf";
+        Xliff1Filter filter = new Xliff1Filter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+        checkMultiStart(fi, f);
+        checkMultiNoPrevNext("This is text3", "id1", "//text3.txt", null);
+        checkMultiNoPrevNext("test2", "id2", "//text.txt", null);
+        checkMultiEnd();
+    }
+
+
 }

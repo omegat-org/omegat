@@ -38,7 +38,7 @@ import javax.swing.text.Position;
 
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
-import org.omegat.plugins.PluginUtils;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;

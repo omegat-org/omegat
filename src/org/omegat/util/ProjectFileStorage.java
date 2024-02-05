@@ -59,7 +59,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
-import org.omegat.plugins.PluginUtils;
+import org.omegat.filters2.master.PluginUtils;
 
 import gen.core.project.Masks;
 import gen.core.project.Omegat;

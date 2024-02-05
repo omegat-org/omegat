@@ -45,6 +45,7 @@ import java.util.Properties;
 import java.util.jar.Manifest;
 
 import org.omegat.CLIParameters;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.plugins.cl.MainClassLoader;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.Log;

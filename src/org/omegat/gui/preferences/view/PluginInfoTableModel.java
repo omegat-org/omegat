@@ -32,7 +32,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import org.omegat.plugins.PluginInformation;
-import org.omegat.plugins.PluginUtils;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.OStrings;
 
 public class PluginInfoTableModel extends DefaultTableModel {

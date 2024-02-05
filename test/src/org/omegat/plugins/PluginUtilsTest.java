@@ -45,6 +45,7 @@ import javax.xml.bind.JAXBException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
 
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 
 public class PluginUtilsTest {

@@ -25,7 +25,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ******************************************************************************/
 
-package org.omegat.plugins;
+package org.omegat.filters2.master;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -50,6 +50,8 @@ import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
+import org.omegat.plugins.PluginInformation;
+import org.omegat.plugins.PluginType;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.Tokenizer;

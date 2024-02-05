@@ -42,7 +42,7 @@ import java.util.List;
 
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.plugins.PluginUtils;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;

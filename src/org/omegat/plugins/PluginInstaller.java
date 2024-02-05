@@ -50,6 +50,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 
 import org.omegat.core.Core;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;

@@ -856,6 +856,13 @@ public final class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
     }
 
+    public void viewMarkAlternativeTranslationsCheckBoxMenuItemActionPerformed() {
+        Core.getEditor()
+                .getSettings()
+                .setMarkAltTranslations(
+                        mainWindow.menu.viewMarkAlternativeTranslationsCheckBoxMenuItem.isSelected());
+    }
+
     public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());

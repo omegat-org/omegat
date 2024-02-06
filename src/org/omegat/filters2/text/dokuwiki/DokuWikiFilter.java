@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -46,6 +47,16 @@ import org.omegat.util.OStrings;
  */
 public class DokuWikiFilter extends AbstractFilter {
     private Pattern codeTag = Pattern.compile("\\<code|\\<file|\\<html|\\<php|\\/\\*");
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(DokuWikiFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     public String getFileFormatName() {

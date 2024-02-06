@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -66,6 +67,16 @@ public class MozillaFTLFilter extends AbstractFilter {
      * If true, will remove non-translated segments in the target files
      */
     private boolean removeStringsUntranslated = false;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(MozillaFTLFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public String getFileFormatName() {
         return OStrings.getString("MOZFTL_FILTER_NAME");

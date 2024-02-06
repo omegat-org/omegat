@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -62,9 +63,20 @@ public class RcFilter extends AbstractFilter {
     };
 
     protected String blockId;
-    protected int b, e;
+    protected int b;
+    protected int e;
 
     protected Map<String, String> align;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(RcFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public String getFileFormatName() {
         return OStrings.getString("RCFILTER_FILTER_NAME");

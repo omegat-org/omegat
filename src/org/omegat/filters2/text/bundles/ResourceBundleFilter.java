@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -106,6 +107,16 @@ public class ResourceBundleFilter extends AbstractFilter {
      * If true, will not convert characters into \\uXXXX notation
      */
     private boolean dontUnescapeULiterals = false;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(ResourceBundleFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     public String getFileFormatName() {

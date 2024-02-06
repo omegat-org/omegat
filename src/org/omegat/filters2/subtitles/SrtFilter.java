@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -61,6 +62,16 @@ public class SrtFilter extends AbstractFilter {
     protected String key;
     protected StringBuilder text = new StringBuilder();
     protected BufferedWriter out;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(SrtFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     protected Pattern getPattern() {
         return PATTERN_TIME_INTERVAL;

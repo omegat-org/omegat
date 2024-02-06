@@ -40,6 +40,7 @@ import javax.swing.text.Position;
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.editor.mark.AltTranslationsMarker;
 import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
@@ -87,6 +88,7 @@ public class MarkerController {
         Core.registerMarker(new ComesFromMTMarker());
         Core.registerMarker(new FontFallbackMarker());
         Core.registerMarker(new SpellCheckerMarker());
+        Core.registerMarker(new AltTranslationsMarker());
     }
 
 

@@ -334,6 +334,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 "MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES");
         viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
                 "MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS");
+        viewMarkAlternativeTranslationsCheckBoxMenuItem = createCheckboxMenuItem(
+                "MW_VIEW_MENU_MARK_ALT_TRANSLATIONS");
         viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NOTED_SEGMENTS");
         viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP");
         viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE");
@@ -362,6 +364,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 .setIcon(MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
         viewMarkNotedSegmentsCheckBoxMenuItem
                 .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
+        viewMarkAlternativeTranslationsCheckBoxMenuItem
+                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_ALT_TRANSLATION.getColor()));
         viewMarkNBSPCheckBoxMenuItem
                 .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
         viewMarkWhitespaceCheckBoxMenuItem
@@ -551,6 +555,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMenu.add(viewMarkParagraphStartCheckBoxMenuItem);
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem);
         viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem);
+        viewMenu.add(viewMarkAlternativeTranslationsCheckBoxMenuItem);
         viewMenu.add(viewMarkNotedSegmentsCheckBoxMenuItem);
         viewMenu.add(viewMarkNBSPCheckBoxMenuItem);
         viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem);
@@ -892,6 +897,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 .setSelected(Core.getEditor().getSettings().isMarkNonUniqueSegments());
         viewMarkNotedSegmentsCheckBoxMenuItem
                 .setSelected(Core.getEditor().getSettings().isMarkNotedSegments());
+        viewMarkAlternativeTranslationsCheckBoxMenuItem
+                .setSelected(Core.getEditor().getSettings().isMarkAltTranslations());
         viewMarkNBSPCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkNBSP());
         viewMarkWhitespaceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkWhitespace());
         viewMarkBidiCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkBidi());
@@ -1112,6 +1119,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem upperCaseMenuItem;
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkAlternativeTranslationsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNotedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNBSPCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;

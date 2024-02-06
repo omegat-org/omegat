@@ -126,7 +126,7 @@ public class MozillaFTLFilter extends AbstractFilter {
         int identation = 1;
         String key = null;
         StringBuilder k = null;
-        String key_attr = "";
+        String keyAttr = "";
         String value = null;
         boolean multiline = false;
 
@@ -208,7 +208,7 @@ public class MozillaFTLFilter extends AbstractFilter {
                 value = aux;
             }
             if (!multiline) {
-                key = (Objects.equals(key, key_attr) ? key : key_attr + key);
+                key = (Objects.equals(key, keyAttr) ? key : keyAttr + key);
             }
             str = lbpr.readLine();
             if (str != null && !str.isEmpty()) {
@@ -218,17 +218,17 @@ public class MozillaFTLFilter extends AbstractFilter {
                     continue;
                 }
                 if (cp == ' ') {
-                    key_attr = (Objects.equals(key_attr, "") ? key : key_attr);
+                    keyAttr = (Objects.equals(keyAttr, "") ? key : keyAttr);
                     if (value.isEmpty()) {
                         value = null;
                         // outfile.write(lbpr.getLinebreak());
                         continue;
                     }
                 } else {
-                    key_attr = "";
+                    keyAttr = "";
                 }
             } else {
-                key_attr = "";
+                keyAttr = "";
             }
             if (entryAlignCallback != null) {
                 align.put(key, value);
@@ -246,7 +246,9 @@ public class MozillaFTLFilter extends AbstractFilter {
                 // Non-translated segments are written based on the
                 // filter options
                 if (translatedSegment || !removeStringsUntranslated) {
-                    outfile.write(k.toString());
+                    if (k != null) {
+                        outfile.write(k.toString());
+                    }
                     outfile.write(trans);
                     outfile.write(lbpr.getLinebreak());
                 }

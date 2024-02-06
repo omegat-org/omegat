@@ -185,19 +185,23 @@ public class RcFilter extends AbstractFilter {
 
     private PART parseFirstLineInBlock(String line) {
         Matcher m;
-        if ((m = RE_DIALOG.matcher(line)).matches()) {
+        m = RE_DIALOG.matcher(line);
+        if (m.matches()) {
             blockId = m.group(1);
             return PART.DIALOG;
         }
-        if ((m = RE_MENU.matcher(line)).matches()) {
+        m = RE_MENU.matcher(line);
+        if (m.matches()) {
             blockId = m.group(1);
             return PART.MENU;
         }
-        if ((m = RE_MESSAGETABLE.matcher(line)).matches()) {
+        m = RE_MESSAGETABLE.matcher(line);
+        if (m.matches()) {
             blockId = m.group(1);
             return PART.MESSAGETABLE;
         }
-        if (RE_STRINGTABLE.matcher(line).matches()) {
+        m = RE_STRINGTABLE.matcher(line);
+        if (m.matches()) {
             blockId = "";
             return PART.STRINGTABLE;
         }

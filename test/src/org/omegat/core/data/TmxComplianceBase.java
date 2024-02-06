@@ -55,7 +55,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters.stub.TextFilter;
+import org.omegat.filters2.text.TextFilter;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**

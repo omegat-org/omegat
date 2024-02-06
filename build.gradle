@@ -339,6 +339,9 @@ dependencies {
     testImplementation "org.omegat.lucene:lucene-gosen:5.5.1:ipadic"
     testRuntimeOnly(libs.slf4j.jdk14)
 
+    testImplementation(project(":filters2"))
+    testImplementation(project(":xmlfilters"))
+
     // JAXB codegen only
     jaxb(libs.jaxb.xjc)
 

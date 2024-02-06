@@ -17,6 +17,7 @@ dependencies {
         compileOnly(libs.slf4j.format.jdk14)
     }
     testImplementation(testFixtures(project.rootProject))
+    testImplementation(project(":filters2"))
     testImplementation(libs.commons.io)
 }
 

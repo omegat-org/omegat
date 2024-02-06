@@ -380,6 +380,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         case XMLEvent.END_DOCUMENT:
             writer.writeEndDocument();
             break;
+        default:
+            // do not come here
         }
     }
 
@@ -429,6 +431,8 @@ public abstract class AbstractXmlFilter extends AbstractFilter {
         case XMLEvent.END_DOCUMENT:
             writer.writeEndDocument();
             break;
+        default:
+            // do not come here
         }
     }
 

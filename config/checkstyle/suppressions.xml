@@ -171,9 +171,7 @@
     <!-- There are tons of errors in filters4 that are contributed from stax-filter -->
     <!-- Suppress it specifically the error lines. When someone, hopefully by original author  -->
     <!-- changes, it should be resolved. -->
-    <suppress files="OpenXmlFilter\.java"
-              checks="(InnerAssignment|LocalVariableName|ParameterName|MemberName|MissingSwitchDefault|MethodLength)"
-              lines="95,292,302,456,520,578,609,767"/>
+    <suppress files="OpenXmlFilter\.java" checks="MethodLength" lines="300-310"/>
     <suppress files="MsOfficeFileFilter\.java" checks="(MemberName|OperatorWrap)" lines="49,50,190"/>
     <suppress files="SdlXliff\.java" checks="MemberName" lines="62,105,106,107"/>
 

@@ -63,7 +63,7 @@ public abstract class AbstractMarker implements IMarker {
      * @return true when enabled (markers are painted). false when disabled (no
      *         markers painted)
      */
-    protected abstract boolean isEnabled();
+    public abstract boolean isEnabled();
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)

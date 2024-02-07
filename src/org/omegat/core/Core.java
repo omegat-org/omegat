@@ -122,8 +122,6 @@ public final class Core {
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections
             .synchronizedList(new ArrayList<String>());
 
-    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
-
     /** Get project instance. */
     public static IProject getProject() {
         return currentProject;
@@ -246,7 +244,6 @@ public final class Core {
         MainWindow me = new MainWindow();
         mainWindow = me;
 
-        MarkerController.init();
         LanguageToolWrapper.init();
 
         segmenter = new Segmenter(Preferences.getSRX());
@@ -309,11 +306,12 @@ public final class Core {
      *            marker implementation
      */
     public static void registerMarker(IMarker marker) {
-        MARKERS.add(marker);
+        MarkerController.registerMarker(marker);
     }
 
+    @Deprecated
     public static List<IMarker> getMarkers() {
-        return MARKERS;
+        return MarkerController.getMarkers();
     }
 
     public static Map<String, String> getParams() {

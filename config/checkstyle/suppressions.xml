@@ -101,7 +101,6 @@
     <suppress files="(BidiUtils|Java8Compat|MagicComment|JnaLoader)\.java" checks="HideUtilityClassConstructor"/>
     <suppress files="JTextPaneLinkifier\.java" checks="EmptyBlock"/>
     <suppress files="RepositoriesMappingController\.java:" checks="MethodLength"/>
-    <suppress files="EditorSettings\.java" checks="ParameterNumber" lines="497"/>
     <suppress files="(IssuesPanel|PreferencesWindow)Controller\.java" checks="MethodLength"/>
     <suppress files="MatchesVarExpansion\.java" checks="InnerAssignment"/>
     <suppress files="EditorTextArea3\.java" checks="MethodLength"/>

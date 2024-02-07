@@ -30,9 +30,13 @@ package org.omegat.gui.editor.mark;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -148,7 +152,29 @@ public final class WhitespaceMarker implements IMarker {
         return marks;
     }
 
-   public boolean isEnabled() {
+    @Override
+    public String getMarkerName() {
+        return OStrings.getString("MW_VIEW_MENU_MARK_WHITESPACE");
+    }
+
+    @Override
+    public Icon getIcon() {
+        return MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor());
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return Preferences.MARK_WHITESPACE;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+        Core.getEditor().getSettings().setMarkWhitespace(val);
+    }
+
+    @Override
+    public boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkWhitespace();
     }
+
 }

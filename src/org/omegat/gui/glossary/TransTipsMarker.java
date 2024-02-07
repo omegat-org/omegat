@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
@@ -38,6 +39,9 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.main.MainMenuIcons;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 
@@ -54,13 +58,23 @@ public class TransTipsMarker implements IMarker {
                 Styles.EditorColor.COLOR_TRANSTIPS.getColor());
     }
 
+    /**
+     * register marker class.
+     */
+    public static void loadPlugins() {
+        Core.registerMarkerClass(TransTipsMarker.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) {
         if (!isActive || sourceText == null) {
             return null;
         }
-        if (!Core.getEditor().getSettings().isMarkGlossaryMatches()) {
+        if (!isEnabled()) {
             return null;
         }
         List<GlossaryEntry> glossaryEntries = Core.getGlossary().getDisplayedEntries();
@@ -77,6 +91,31 @@ public class TransTipsMarker implements IMarker {
             marks.addAll(getMarksForTokens(tokens, ste.getSrcText(), tooltip));
         }
         return marks;
+    }
+
+    @Override
+    public String getMarkerName() {
+        return OStrings.getString("MW_VIEW_GLOSSARY_MARK");
+    }
+
+    @Override
+    public Icon getIcon() {
+        return MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSTIPS.getColor());
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return Preferences.MARK_GLOSSARY_MATCHES;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+        Core.getEditor().getSettings().setMarkGlossaryMatches(val);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return Core.getEditor().getSettings().isMarkGlossaryMatches();
     }
 
     private List<Mark> getMarksForTokens(List<Token[]> tokens, String srcText, String tooltip) {

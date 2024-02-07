@@ -29,11 +29,15 @@ package org.omegat.gui.editor.mark;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.gui.main.MainMenuIcons;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -58,10 +62,20 @@ public class ComesFromAutoTMMarker implements IMarker {
                 Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
     }
 
+    /**
+     * register marker class.
+     */
+    public static void loadPlugins() {
+        Core.registerMarkerClass(ComesFromAutoTMMarker.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
             String translationText, boolean isActive) {
-        if (!Core.getEditor().getSettings().isMarkAutoPopulated()) {
+        if (!enabled) {
             return null;
         }
         TMXEntry e = Core.getProject().getTranslationInfo(ste);
@@ -83,5 +97,32 @@ public class ComesFromAutoTMMarker implements IMarker {
             m.painter = painterXenforced;
         }
         return Collections.singletonList(m);
+    }
+
+    private boolean enabled = true;
+
+    @Override
+    public String getMarkerName() {
+        return OStrings.getString("MW_VIEW_MENU_MARK_AUTOPOPULATED");
+    }
+
+    @Override
+    public Icon getIcon() {
+        return MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor());
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return Preferences.MARK_AUTOPOPULATED;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+        enabled = val;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }

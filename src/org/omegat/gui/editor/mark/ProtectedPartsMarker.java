@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import javax.swing.Icon;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
@@ -139,5 +140,28 @@ public class ProtectedPartsMarker implements IMarker {
         }
         // standalone tag
         return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+    }
+
+    @Override
+    public String getMarkerName() {
+        return null;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return null;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return null;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+    }
+
+    public boolean isEnabled() {
+        return true;
     }
 }

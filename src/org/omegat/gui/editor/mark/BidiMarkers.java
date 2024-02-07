@@ -29,10 +29,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 
@@ -40,7 +42,6 @@ import org.omegat.util.gui.Styles;
  * Collection of Markers for Bidirectional control characters.
  */
 public class BidiMarkers extends AbstractMarker {
-
     static final int LRM = 0x200e;
     static final int RLM = 0x200f;
     static final int LRE = 0x202a;
@@ -55,6 +56,16 @@ public class BidiMarkers extends AbstractMarker {
     private final HighlightPainter rlmBidiPainter;
     private final HighlightPainter rloBidiPainter;
     private final HighlightPainter lroBidiPainter;
+
+    /**
+     * register marker class.
+     */
+    public static void loadPlugins() {
+        Core.registerMarkerClass(BidiMarkers.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public BidiMarkers() throws Exception {
         super();
@@ -147,7 +158,28 @@ public class BidiMarkers extends AbstractMarker {
     }
 
     @Override
-    protected boolean isEnabled() {
+    public String getMarkerName() {
+        return null;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+    }
+
+
+    @Override
+    public String getPreferenceKey() {
+        return null;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+        Core.getEditor().getSettings().setMarkBidi(val);
+    }
+
+    @Override
+    public boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkBidi();
     }
 

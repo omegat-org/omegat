@@ -28,6 +28,7 @@ package org.omegat.gui.editor.mark;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.CoreEvents;
@@ -80,5 +81,32 @@ public class ComesFromMTMarker implements IMarker {
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
         m.painter = highlightPainter;
         return Collections.singletonList(m);
+    }
+
+    private boolean enabled = true;
+
+    @Override
+    public String getMarkerName() {
+        return null;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return null;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return null;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+        enabled = val;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 }

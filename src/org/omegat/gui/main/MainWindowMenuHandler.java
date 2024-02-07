@@ -835,47 +835,6 @@ public final class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
     }
 
-    public void viewMarkNBSPCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkNBSP(
-                        mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
-    }
-
-    public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkWhitespace(
-                        mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
-    }
-
-    public void viewMarkBidiCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkBidi(
-                        mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
-    }
-
-    public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
-    }
-
-    public void viewMarkGlossaryMatchesCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkGlossaryMatches(mainWindow.menu.viewMarkGlossaryMatchesCheckBoxMenuItem.isSelected());
-    }
-
-    public void viewMarkLanguageCheckerCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkLanguageChecker(mainWindow.menu.viewMarkLanguageCheckerCheckBoxMenuItem.isSelected());
-    }
-
-    public void viewMarkFontFallbackCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setDoFontFallback(mainWindow.menu.viewMarkFontFallbackCheckBoxMenuItem.isSelected());
-    }
-
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);

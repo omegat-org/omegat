@@ -200,7 +200,7 @@ public class EditorController implements IEditor {
     protected int displayedEntryIndex;
 
     /** Object which store history of moving by segments. */
-    private SegmentHistory history = new SegmentHistory();
+    private final SegmentHistory history = new SegmentHistory();
 
     protected final EditorSettings settings;
 
@@ -217,7 +217,7 @@ public class EditorController implements IEditor {
     volatile IEditorFilter entriesFilter;
     private Component entriesFilterControlComponent;
 
-    private SegmentExportImport segmentExportImport;
+    private final SegmentExportImport segmentExportImport;
 
     protected String currentEntryOrigin;
     protected String translationFromOrigin;
@@ -237,7 +237,6 @@ public class EditorController implements IEditor {
         setFont(mainWindow.getApplicationFont());
 
         markerController = new MarkerController(this);
-
         createUI();
 
         settings = new EditorSettings(this);
@@ -2213,4 +2212,5 @@ public class EditorController implements IEditor {
     public IAutoCompleter getAutoCompleter() {
         return editor.autoCompleter;
     }
+
 }

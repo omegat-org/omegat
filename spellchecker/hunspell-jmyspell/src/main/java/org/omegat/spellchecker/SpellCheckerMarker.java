@@ -23,11 +23,12 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.spellchecker;
+package org.omegat.spellchecker;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.Icon;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
@@ -50,6 +51,15 @@ public class SpellCheckerMarker implements IMarker {
         highlightPainter = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_SPELLCHECK.getColor());
     }
 
+    /**
+     *
+     * @param ste
+     * @param sourceText might be null!
+     * @param translationText might be null!
+     * @param isActive is this an active segment in the document?
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
@@ -57,7 +67,7 @@ public class SpellCheckerMarker implements IMarker {
             // translation is not displayed
             return null;
         }
-        if (!Core.getEditor().getSettings().isAutoSpellChecking()) {
+        if (!isEnabled()) {
             // spell checker disabled
             return null;
         }
@@ -68,5 +78,33 @@ public class SpellCheckerMarker implements IMarker {
             m.painter = highlightPainter;
             return m;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getMarkerName() {
+        return null;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return null;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return null;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+        Core.getEditor().getSettings().setAutoSpellChecking(val);
+        if (Core.getProject().isProjectLoaded()) {
+            Core.getEditor().remarkOneMarker(SpellCheckerMarker.class.getName());
+        }
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return Core.getEditor().getSettings().isAutoSpellChecking();
     }
 }

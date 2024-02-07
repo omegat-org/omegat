@@ -30,6 +30,7 @@ package org.omegat.languagetools;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.Icon;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
@@ -40,8 +41,11 @@ import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.issues.IssueProviders;
+import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 
@@ -108,7 +112,7 @@ public final class LanguageToolWrapper {
     }
 
     static class LanguageToolMarker implements IMarker {
-        static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
+        static final HighlightPainter painter = new UnderlineFactory.WaveUnderline(
                 Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
         @Override
@@ -143,13 +147,35 @@ public final class LanguageToolWrapper {
             return bridge.getCheckResults(sourceText, translationText).stream().map(match -> {
                 Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start, match.end);
                 m.toolTipText = match.message;
-                m.painter = PAINTER;
+                m.painter = painter;
                 return m;
             }).collect(Collectors.toList());
         }
 
-        protected boolean isEnabled() {
-            return Core.getEditor().getSettings().isMarkLanguageChecker();
+        @Override
+        public String getMarkerName() {
+            return OStrings.getString("LT_OPTIONS_MENU_ENABLED");
+        }
+
+        @Override
+        public Icon getIcon() {
+            return  MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
+        }
+
+        @Override
+        public String getPreferenceKey() {
+            return Preferences.LT_DISABLED;
+        }
+
+        private boolean enabled = true;
+
+        @Override
+        public void setEnabled(boolean val) {
+            enabled = val;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
         }
     }
 

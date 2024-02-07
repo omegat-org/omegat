@@ -37,7 +37,6 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -59,7 +58,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
-import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
@@ -331,13 +329,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
                 "MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS");
         viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NOTED_SEGMENTS");
-        viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP");
-        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE");
-        viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI");
-        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_AUTOPOPULATED");
-        viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_GLOSSARY_MARK");
-        viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED");
-        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK");
         viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO");
 
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
@@ -358,21 +349,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 .setIcon(MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
         viewMarkNotedSegmentsCheckBoxMenuItem
                 .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
-        viewMarkNBSPCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
-        viewMarkWhitespaceCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
-        viewMarkBidiCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
         viewModificationInfoMenu.setIcon(MainMenuIcons.newBlankIcon());
-        viewMarkAutoPopulatedCheckBoxMenuItem.setIcon(
-                MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
-        viewMarkGlossaryMatchesCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSTIPS.getColor()));
-        viewMarkLanguageCheckerCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor()));
-        viewMarkFontFallbackCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(
-                UIManager.getColor("Label.foreground"), new Font("Serif", Font.ITALIC, 16), 'F'));
 
         viewRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI");
 
@@ -547,13 +524,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem);
         viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem);
         viewMenu.add(viewMarkNotedSegmentsCheckBoxMenuItem);
-        viewMenu.add(viewMarkNBSPCheckBoxMenuItem);
-        viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem);
-        viewMenu.add(viewMarkBidiCheckBoxMenuItem);
-        viewMenu.add(viewMarkAutoPopulatedCheckBoxMenuItem);
-        viewMenu.add(viewMarkGlossaryMatchesCheckBoxMenuItem);
-        viewMenu.add(viewMarkLanguageCheckerCheckBoxMenuItem);
-        viewMenu.add(viewMarkFontFallbackCheckBoxMenuItem);
         viewMenu.add(viewModificationInfoMenu);
 
         viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem);
@@ -887,17 +857,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 .setSelected(Core.getEditor().getSettings().isMarkNonUniqueSegments());
         viewMarkNotedSegmentsCheckBoxMenuItem
                 .setSelected(Core.getEditor().getSettings().isMarkNotedSegments());
-        viewMarkNBSPCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkNBSP());
-        viewMarkWhitespaceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkWhitespace());
-        viewMarkBidiCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkBidi());
-        viewMarkAutoPopulatedCheckBoxMenuItem
-                .setSelected(Core.getEditor().getSettings().isMarkAutoPopulated());
-        viewMarkGlossaryMatchesCheckBoxMenuItem
-                .setSelected(Core.getEditor().getSettings().isMarkGlossaryMatches());
-        viewMarkLanguageCheckerCheckBoxMenuItem
-                .setSelected(Core.getEditor().getSettings().isMarkLanguageChecker());
-        viewMarkFontFallbackCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDoFontFallback());
-
         viewDisplayModificationInfoNoneRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE
                         .equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
@@ -1108,13 +1067,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNotedSegmentsCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkNBSPCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkBidiCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkAutoPopulatedCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkGlossaryMatchesCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkLanguageCheckerCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkFontFallbackCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;

@@ -55,11 +55,13 @@ import tokyo.northside.logging.LoggerFactory;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.ISpellCheckerProvider;
 import org.omegat.core.spellchecker.SpellCheckerDummy;
 import org.omegat.core.spellchecker.SpellCheckerManager;
+import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.preferences.PreferencesControllers;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -112,6 +114,18 @@ public class DefaultSpellChecker implements ISpellChecker {
     public static void loadPlugins() {
         Core.registerSpellCheckClass(DefaultSpellChecker.class);
         PreferencesControllers.addSupplier(SpellcheckerConfigurationController::new);
+        Core.registerMarkerClass(SpellCheckerMarker.class);
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
+            public void onApplicationStartup() {
+                IEditor ec = Core.getEditor();
+                ec.registerPopupMenuConstructors(100, new SpellCheckerPopup(ec));
+            }
+
+            @Override
+            public void onApplicationShutdown() {
+            }
+        });
     }
 
     public static void unloadPlugins() {

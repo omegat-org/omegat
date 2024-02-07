@@ -366,6 +366,7 @@ public abstract class TestCore {
 
             @Override
             public void setMarkNBSP(boolean markNBSP) {
+
             }
 
             @Override

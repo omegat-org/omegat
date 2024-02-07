@@ -25,8 +25,12 @@
 
 package org.omegat.gui.editor.mark;
 
+import javax.swing.Icon;
+
 import org.omegat.core.Core;
+import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -35,12 +39,33 @@ import org.omegat.util.gui.Styles;
  * @author Martin Fleurke
  */
 public class NBSPMarker extends AbstractMarker {
+
     public NBSPMarker() throws Exception {
         painter = new TransparentHighlightPainter(Styles.EditorColor.COLOR_NBSP.getColor(), 0.5F);
         toolTip = OStrings.getString("MARKER_NBSP");
         patternChar = '\u00a0';
     }
-    protected boolean isEnabled() {
+
+    public boolean isEnabled() {
         return Core.getEditor().getSettings().isMarkNBSP();
+    }
+
+    public void setEnabled(boolean val) {
+        Core.getEditor().getSettings().setMarkNBSP(val);
+    }
+
+    @Override
+    public String getMarkerName() {
+        return OStrings.getString("MW_VIEW_MENU_MARK_NBSP");
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return Preferences.MARK_NBSP;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NBSP.getColor());
     }
 }

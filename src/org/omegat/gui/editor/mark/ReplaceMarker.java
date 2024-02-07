@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.Icon;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
@@ -49,6 +50,16 @@ public class ReplaceMarker implements IMarker {
     public ReplaceMarker() {
         highlightPainter = new TransparentHighlightPainter(
                 Styles.EditorColor.COLOR_REPLACE.getColor(), 0.4F);
+    }
+
+    /**
+     * register marker class.
+     */
+    public static void loadPlugins() {
+        Core.registerMarkerClass(ReplaceMarker.class);
+    }
+
+    public static void unloadPlugins() {
     }
 
     @Override
@@ -73,5 +84,29 @@ public class ReplaceMarker implements IMarker {
             r.add(m);
         }
         return r;
+    }
+
+    @Override
+    public String getMarkerName() {
+        return null;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return null;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return null;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

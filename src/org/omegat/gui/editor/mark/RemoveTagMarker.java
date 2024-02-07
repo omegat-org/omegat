@@ -27,6 +27,7 @@
 
 package org.omegat.gui.editor.mark;
 
+import javax.swing.Icon;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
@@ -59,7 +60,26 @@ public class RemoveTagMarker extends AbstractMarker {
     }
 
     @Override
-    protected boolean isEnabled() {
+    public String getMarkerName() {
+        return null;
+    }
+
+    @Override
+    public Icon getIcon() {
+        return null;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return null;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+    }
+
+    @Override
+    public boolean isEnabled() {
         return true;
     }
 

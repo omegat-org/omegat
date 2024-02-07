@@ -118,7 +118,7 @@ public final class MainMenuIcons {
      * @param color background color
      * @return
      */
-    static Icon newColorIcon(final Color color) {
+    public static Icon newColorIcon(final Color color) {
         return new BaseIcon() {
             @Override
             void doPaint(Graphics2D g2, int x, int y) {
@@ -169,7 +169,7 @@ public final class MainMenuIcons {
      * @param font font to use
      * @param text char to draw
      */
-    static Icon newTextIcon(final Color color, final Font font, final char c) {
+    public static Icon newTextIcon(final Color color, final Font font, final char c) {
         final char[] chars = new char[] { c };
         return new BaseIcon() {
             @Override

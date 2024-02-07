@@ -29,6 +29,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
+import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -37,11 +39,24 @@ import javax.swing.text.StyleConstants;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.main.MainMenuIcons;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.FontFallbackManager;
 
 public class FontFallbackMarker implements IMarker {
 
     private Font editorFont;
+
+    /**
+     * register marker class.
+     */
+    public static void loadPlugins() {
+        Core.registerMarkerClass(FontFallbackMarker.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public FontFallbackMarker() {
         editorFont = Core.getMainWindow().getApplicationFont();
@@ -77,8 +92,29 @@ public class FontFallbackMarker implements IMarker {
         return marks;
     }
 
-    private boolean isEnabled() {
-        return Core.getEditor().getSettings().isDoFontFallback();
+    @Override
+    public String getMarkerName() {
+        return OStrings.getString("MW_VIEW_MENU_MARK_FONT_FALLBACK");
+    }
+
+    @Override
+    public Icon getIcon() {
+        return MainMenuIcons.newTextIcon(
+                UIManager.getColor("Label.foreground"), new Font("Serif", Font.ITALIC, 16), 'F');
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return Preferences.FONT_FALLBACK;
+    }
+
+    @Override
+    public void setEnabled(final boolean val) {
+        Core.getEditor().getSettings().setDoFontFallback(!val);
+    }
+
+    public boolean isEnabled() {
+        return !Core.getEditor().getSettings().isDoFontFallback();
     }
 
     private void createMarks(List<Mark> acc, Mark.ENTRY_PART part, String text, int firstMissing) {

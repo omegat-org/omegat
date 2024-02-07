@@ -543,7 +543,7 @@ public class SegmentBuilder {
         int prevOffset = offset;
         boolean rtl = BiDiUtils.isRtl(language.getLanguageCode());
         insertDirectionEmbedding(false);
-        AttributeSet normal = attrs(true, false, false, false);
+        AttributeSet normal = attrs(true, false, false);
         insert(language.getLanguage() + ": ", normal);
         insertDirectionEndEmbedding();
 
@@ -641,7 +641,7 @@ public class SegmentBuilder {
     }
 
     void createInputAttributes(Element element, MutableAttributeSet set) {
-        set.addAttributes(attrs(false, false, false, false));
+        set.addAttributes(attrs(false, false, false));
     }
 
     private void insert(String text, AttributeSet attrs) throws BadLocationException {
@@ -698,13 +698,11 @@ public class SegmentBuilder {
      *            or regular text inside the segment?
      * @param isRemoveText
      *            is it text that should be removed in the translation?
-     * @param isNBSP
-     *            is the text a non-breakable space?
      * @return the attributes to format the text
      */
-    public AttributeSet attrs(boolean isSource, boolean isPlaceholder, boolean isRemoveText, boolean isNBSP) {
+    public AttributeSet attrs(boolean isSource, boolean isPlaceholder, boolean isRemoveText) {
         return settings.getAttributeSet(isSource, isPlaceholder, isRemoveText, ste.getDuplicate(), active,
-                transExist, noteExist, isNBSP);
+                transExist, noteExist);
     }
 
     /**
@@ -720,7 +718,7 @@ public class SegmentBuilder {
         if (!isSource && hasRTL && controller.targetLangIsRTL) {
             text = EditorUtils.addBidiAroundTags(text, ste);
         }
-        AttributeSet normal = attrs(isSource, false, false, false);
+        AttributeSet normal = attrs(isSource, false, false);
         insert(text, normal);
         return text;
     }
@@ -731,19 +729,19 @@ public class SegmentBuilder {
             if (posSourceBeg != null) {
                 int sBeg = posSourceBeg.getOffset();
                 int sLen = posSourceLength;
-                AttributeSet attrs = attrs(true, false, false, false);
+                AttributeSet attrs = attrs(true, false, false);
                 doc.setCharacterAttributes(sBeg, sLen, attrs, true);
             }
             if (active) {
                 int tBeg = doc.getTranslationStart();
                 int tEnd = doc.getTranslationEnd();
-                AttributeSet attrs = attrs(false, false, false, false);
+                AttributeSet attrs = attrs(false, false, false);
                 doc.setCharacterAttributes(tBeg, tEnd - tBeg, attrs, true);
             } else {
                 if (posTranslationBeg != null) {
                     int tBeg = posTranslationBeg.getOffset();
                     int tLen = posTranslationLength;
-                    AttributeSet attrs = attrs(false, false, false, false);
+                    AttributeSet attrs = attrs(false, false, false);
                     doc.setCharacterAttributes(tBeg, tLen, attrs, true);
                 }
             }

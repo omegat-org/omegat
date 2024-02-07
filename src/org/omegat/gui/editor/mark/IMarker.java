@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,12 +28,15 @@ package org.omegat.gui.editor.mark;
 
 import java.util.List;
 
+import javax.swing.Icon;
+
 import org.omegat.core.data.SourceTextEntry;
 
 /**
- * Interface to calculate marks in editor.
+ * Interface to calculate marks in the editor pane.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  */
 public interface IMarker {
     /**
@@ -52,4 +56,32 @@ public interface IMarker {
      */
     List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception;
+
+    /**
+     * Human-readable marker name.
+     * <p>
+     * It is a name used in menu items. Marker plugin may return
+     * localized name.
+     */
+    String getMarkerName();
+
+    Icon getIcon();
+
+    /**
+     * Return preference key.
+     * @return key of preference.
+     */
+    String getPreferenceKey();
+
+    /**
+     * Set marker status as specified value.
+     * @param val true when want to enable, otherwise false.
+     */
+    void setEnabled(boolean val);
+
+    /**
+     * Whether marker is enabled?
+     * @return true when enabled, otherwise return false.
+     */
+    boolean isEnabled();
 }

@@ -32,28 +32,26 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Highlighter;
 import javax.swing.text.Position;
 
-import org.omegat.core.Core;
-import org.omegat.core.spellchecker.SpellCheckerMarker;
+import org.openide.awt.Mnemonics;
+
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
-import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
-import org.omegat.gui.editor.mark.FontFallbackMarker;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.editor.mark.NBSPMarker;
 import org.omegat.gui.editor.mark.ProtectedPartsMarker;
 import org.omegat.gui.editor.mark.RemoveTagMarker;
-import org.omegat.gui.editor.mark.ReplaceMarker;
-import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.util.Log;
+import org.omegat.util.Preferences;
+import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -74,28 +72,48 @@ public class MarkerController {
     /** Threads for each marker. */
     protected final CalcMarkersThread[] markerThreads;
 
-    private final Highlighter highlighter;
+    private static final List<IMarker> MARKERS = new ArrayList<>();
 
-    public static void init() throws Exception {
-        Core.registerMarker(new ProtectedPartsMarker());
-        Core.registerMarker(new RemoveTagMarker());
-        Core.registerMarker(new NBSPMarker());
-        Core.registerMarker(new TransTipsMarker());
-        Core.registerMarker(new BidiMarkers());
-        Core.registerMarker(new ReplaceMarker());
-        Core.registerMarker(new ComesFromAutoTMMarker());
-        Core.registerMarker(new ComesFromMTMarker());
-        Core.registerMarker(new FontFallbackMarker());
-        Core.registerMarker(new SpellCheckerMarker());
+    /**
+     * Register class for calculate marks.
+     *
+     * @param marker
+     *            marker implementation
+     */
+    public static void registerMarker(IMarker marker) {
+        MARKERS.add(marker);
     }
 
+    @Deprecated
+    public static List<IMarker> getMarkers() {
+        return MARKERS;
+    }
 
-    MarkerController(EditorController ec) {
+    /**
+     * Construcotr of marker controller.
+     * @param ec parent EditorController.
+     */
+    public MarkerController(EditorController ec) {
         this.ec = ec;
-        this.highlighter = ec.editor.getHighlighter();
 
-        List<IMarker> ms = new ArrayList<IMarker>();
-        // start all markers threads
+        List<IMarker> ms = new ArrayList<>();
+        // initialize default/mandatory markers.
+        // these markers are referenced in
+        // {@link EditorSettings#getAttributesSet}
+        // or
+        // always enabled.
+        IMarker nbspMarker;
+        try {
+            ms.add(new ProtectedPartsMarker());
+            ms.add(new RemoveTagMarker());
+            ms.add(new NBSPMarker());
+            ms.add(new ComesFromMTMarker());
+        } catch (Exception e) {
+            // should not be happened in design
+            throw new RuntimeException(e);
+        }
+
+        // start all markers' threads
         for (Class<?> mc : PluginUtils.getMarkerClasses()) {
             try {
                 ms.add((IMarker) mc.getDeclaredConstructor().newInstance());
@@ -103,17 +121,30 @@ public class MarkerController {
                 Log.logErrorRB(ex, "PLUGIN_MARKER_INITIALIZE", mc.getName());
             }
         }
-        for (IMarker marker : Core.getMarkers()) {
-            ms.add(marker);
-        }
+        ms.addAll(MARKERS);
 
         markerThreads = new CalcMarkersThread[ms.size()];
         markerNames = new String[ms.size()];
         for (int i = 0; i < ms.size(); i++) {
             IMarker m = ms.get(i);
+            addMenuItemAndAction(m);
             markerNames[i] = m.getClass().getName();
             markerThreads[i] = new CalcMarkersThread(this, m, i);
             markerThreads[i].start();
+        }
+    }
+
+    private void addMenuItemAndAction(IMarker m) {
+        if (m.getMarkerName() != null) {
+            JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem();
+            Mnemonics.setLocalizedText(menuItem, m.getMarkerName());
+            menuItem.setIcon(m.getIcon());
+            menuItem.setSelected(Preferences.isPreference(m.getPreferenceKey()));
+            menuItem.addActionListener(e -> {
+                boolean en = menuItem.isSelected();
+                m.setEnabled(en);
+            });
+            MenuExtender.addMenuItem(MenuExtender.MenuKey.VIEW, menuItem);
         }
     }
 
@@ -147,7 +178,7 @@ public class MarkerController {
             outputQueue.clear();
         }
 
-        highlighter.removeAllHighlights();
+        ec.editor.getHighlighter().removeAllHighlights();
     }
 
     /**
@@ -162,9 +193,10 @@ public class MarkerController {
 
         MarkInfo[] me = sb.marks[makerIndex];
         if (me != null) {
-            for (int j = 0; j < me.length; j++) {
-                if (me[j] != null && me[j].highlight != null) {
-                    highlighter.removeHighlight(me[j].highlight);
+            Highlighter highlighter = ec.editor.getHighlighter();
+            for (final MarkInfo markInfo : me) {
+                if (markInfo != null && markInfo.highlight != null) {
+                    highlighter.removeHighlight(markInfo.highlight);
                 }
             }
             sb.marks[makerIndex] = null;
@@ -316,6 +348,7 @@ public class MarkerController {
                             ev.builder.marks = new MarkInfo[markerNames.length][];
                         }
                         ev.builder.marks[ev.markerIndex] = new MarkInfo[ev.result.size()];
+                        Highlighter highlighter = ec.editor.getHighlighter();
                         for (int j = 0; j < ev.result.size(); j++) {
                             MarkInfo nm = new MarkInfo(ev.result.get(j), ev.builder, doc, highlighter);
                             ev.builder.marks[ev.markerIndex][j] = nm;

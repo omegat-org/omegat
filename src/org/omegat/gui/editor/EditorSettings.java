@@ -35,7 +35,6 @@ import javax.swing.text.AttributeSet;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
-import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -91,9 +90,9 @@ public class EditorSettings implements IEditorSettings {
         markNonUniqueSegments = Preferences.isPreferenceDefault(Preferences.MARK_NON_UNIQUE_SEGMENTS,
                MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
-        markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
         markParagraphDelimitations = Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS,
                 MARK_PARA_DELIMITATIONS_DEFAULT);
+        markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
         markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
         markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
@@ -211,6 +210,7 @@ public class EditorSettings implements IEditorSettings {
     public boolean isMarkNBSP() {
         return markNBSP;
     }
+
     /**
      * mark whitespace?
      * @return true when set, false otherwise
@@ -285,6 +285,7 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
+
     public void setMarkWhitespace(boolean markWhitespace) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -432,7 +433,6 @@ public class EditorSettings implements IEditorSettings {
         if (Core.getProject().isProjectLoaded()) {
             // parent.loadDocument();
             parent.activateEntry();
-            parent.remarkOneMarker(SpellCheckerMarker.class.getName());
         }
     }
 
@@ -490,12 +490,10 @@ public class EditorSettings implements IEditorSettings {
      *            is it an active segment?
      * @param translationExists
      *            does a translation already exist
-     * @param isNBSP
-     *            is the text a non-breakable space
      * @return proper AttributeSet to use on displaying the segment.
      */
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText,
-            DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
+            DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote) {
         // determine foreground color
         Color fg = null;
 
@@ -584,9 +582,6 @@ public class EditorSettings implements IEditorSettings {
                 bg = nonUniqueBg;
                 break;
             }
-        }
-        if (isNBSP && isMarkNBSP()) { //overwrite others, because space is smallest.
-            bg = Styles.EditorColor.COLOR_NBSP.getColor();
         }
 
         //determine bold

@@ -89,7 +89,6 @@ public class MarkerController {
         Core.registerMarker(new ComesFromMTMarker());
         Core.registerMarker(new FontFallbackMarker());
         Core.registerMarker(new SpellCheckerMarker());
-        Core.registerMarker(new AltTranslationsMarker());
     }
 
 

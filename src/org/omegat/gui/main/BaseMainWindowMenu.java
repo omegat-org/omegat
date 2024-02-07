@@ -893,7 +893,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkNotedSegmentsCheckBoxMenuItem
                 .setSelected(Core.getEditor().getSettings().isMarkNotedSegments());
         viewMarkAlternativeTranslationsCheckBoxMenuItem
-                .setSelected(Core.getEditor().getSettings().isMarkAltTranslations());
+                .setSelected(((EditorSettings) Core.getEditor().getSettings()).isMarkAltTranslations());
         viewMarkNBSPCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkNBSP());
         viewMarkWhitespaceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkWhitespace());
         viewMarkBidiCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkBidi());

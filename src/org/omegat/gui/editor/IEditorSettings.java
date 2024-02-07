@@ -75,10 +75,6 @@ public interface IEditorSettings {
 
     void setMarkBidi(boolean markBidi);
 
-    boolean isMarkAltTranslations();
-
-    void setMarkAltTranslations(boolean markAltTranslations);
-
     boolean isAutoSpellChecking();
 
     void setAutoSpellChecking(boolean isNeedToSpell);

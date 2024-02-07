@@ -696,8 +696,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void viewMarkAlternativeTranslationsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
+        ((EditorSettings) Core.getEditor().getSettings())
                 .setMarkAltTranslations(
                         mainWindow.menu.viewMarkAlternativeTranslationsCheckBoxMenuItem.isSelected());
     }

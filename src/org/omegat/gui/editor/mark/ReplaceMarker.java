@@ -44,7 +44,7 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ReplaceMarker implements IMarker {
-    protected static final HighlightPainter PAINTER = new TransparentHighlightPainter(
+    private final HighlightPainter highlightPainter = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_REPLACE.getColor(), 0.4F);
 
     @Override
@@ -52,7 +52,7 @@ public class ReplaceMarker implements IMarker {
             boolean isActive) throws Exception {
 
         IEditorFilter filter = Core.getEditor().getFilter();
-        if (filter == null || !(filter instanceof ReplaceFilter)) {
+        if (!(filter instanceof ReplaceFilter)) {
             return Collections.emptyList();
         }
 
@@ -62,10 +62,10 @@ public class ReplaceMarker implements IMarker {
             return Collections.emptyList();
         }
 
-        List<Mark> r = new ArrayList<Mark>(matches.size());
+        List<Mark> r = new ArrayList<>(matches.size());
         for (SearchMatch s : matches) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, s.getStart(), s.getEnd());
-            m.painter = PAINTER;
+            m.painter = highlightPainter;
             r.add(m);
         }
         return r;

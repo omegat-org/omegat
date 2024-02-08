@@ -42,7 +42,7 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromMTMarker implements IMarker {
-    protected static final HighlightPainter PAINTER = new TransparentHighlightPainter(
+    private final HighlightPainter highlightPainter = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM.getColor(), 0.5F);
 
     private SourceTextEntry markedSte;
@@ -78,7 +78,7 @@ public class ComesFromMTMarker implements IMarker {
             }
         }
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-        m.painter = PAINTER;
+        m.painter = highlightPainter;
         return Collections.singletonList(m);
     }
 }

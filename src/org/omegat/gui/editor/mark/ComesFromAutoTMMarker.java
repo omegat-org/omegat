@@ -42,13 +42,13 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromAutoTMMarker implements IMarker {
-    protected static final HighlightPainter PAINTER_XICE = new TransparentHighlightPainter(
+    private final HighlightPainter painterXice = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getColor(), 0.5F);
-    protected static final HighlightPainter PAINTER_X100PC = new TransparentHighlightPainter(
+    private final HighlightPainter painterX100Pc = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
-    protected static final HighlightPainter PAINTER_XAUTO = new TransparentHighlightPainter(
+    private final HighlightPainter painterXauto = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
-    protected static final HighlightPainter PAINTER_XENFORCED = new TransparentHighlightPainter(
+    private final HighlightPainter painterXenforced = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
 
     @Override
@@ -64,16 +64,16 @@ public class ComesFromAutoTMMarker implements IMarker {
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
         switch (e.linked) {
         case xICE:
-            m.painter = PAINTER_XICE;
+            m.painter = painterXice;
             break;
         case x100PC:
-            m.painter = PAINTER_X100PC;
+            m.painter = painterX100Pc;
             break;
         case xAUTO:
-            m.painter = PAINTER_XAUTO;
+            m.painter = painterXauto;
             break;
         case xENFORCED:
-            m.painter = PAINTER_XENFORCED;
+            m.painter = painterXenforced;
         }
         return Collections.singletonList(m);
     }

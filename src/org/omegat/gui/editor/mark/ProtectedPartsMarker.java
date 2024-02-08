@@ -49,9 +49,9 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  */
 public class ProtectedPartsMarker implements IMarker {
-    protected static final HighlightPainter PAINTER_RTL = new TransparentHighlightPainter(
+    private final HighlightPainter painterRtl = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), 0.2F);
-    protected static final AttributeSet ATTRIBUTES_LTR = Styles
+    private final AttributeSet attributesLtr = Styles
             .createAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), null, null, null);
 
     @Override
@@ -60,11 +60,11 @@ public class ProtectedPartsMarker implements IMarker {
         HighlightPainter painter;
         AttributeSet attrs;
         if (Core.getEditor().isOrientationAllLtr()) {
-            attrs = ATTRIBUTES_LTR;
+            attrs = attributesLtr;
             painter = null;
         } else {
             attrs = null;
-            painter = PAINTER_RTL;
+            painter = painterRtl;
         }
 
         if (ste.getProtectedParts().length == 0) {

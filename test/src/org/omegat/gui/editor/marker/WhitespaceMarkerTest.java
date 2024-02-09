@@ -25,6 +25,7 @@
 package org.omegat.gui.editor.marker;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.util.Collections;
@@ -70,16 +71,31 @@ public class WhitespaceMarkerTest extends MarketTestBase {
         EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
         SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
         List<Mark> result = marker.getMarksForEntry(ste, sourceText, sourceText, true);
-        assertEquals(8, result.size());
+        assertNotNull(result);
+        assertEquals(4, result.size());
+        assertEquals(6, result.get(0).startOffset);
+        assertEquals(7, result.get(0).endOffset);
+        assertEquals(17, result.get(3).startOffset);
+        assertEquals(18, result.get(3).endOffset);
+        assertEquals("Tab", result.get(3).toolTipText);
+        assertEquals("TRANSLATION", result.get(3).entryPart.toString());
+    }
+
+    @Test
+    public void testMarkersSP2() throws Exception {
+        IMarker marker = new WhitespaceMarker();
+        Core.getEditor().getSettings().setMarkWhitespace(true);
+        String sourceText = "source text with \tTAB.";
+        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
+        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
+        List<Mark> result = marker.getMarksForEntry(ste, sourceText, sourceText, false);
+        assertNotNull(result);
+        assertEquals(4, result.size());
         assertEquals(6, result.get(0).startOffset);
         assertEquals(7, result.get(0).endOffset);
         assertEquals(17, result.get(3).startOffset);
         assertEquals(18, result.get(3).endOffset);
         assertEquals("Tab", result.get(3).toolTipText);
         assertEquals("SOURCE", result.get(3).entryPart.toString());
-        assertEquals(17, result.get(7).startOffset);
-        assertEquals(18, result.get(7).endOffset);
-        assertEquals("Tab", result.get(7).toolTipText);
-        assertEquals("TRANSLATION", result.get(7).entryPart.toString());
     }
 }

@@ -79,10 +79,7 @@ public final class WhitespaceMarker implements IMarker {
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
                                        boolean isActive) throws Exception {
-        if (!isEnabled()) {
-            return null;
-        }
-        if (sourceText == null || !Core.getEditor().getSettings().isMarkWhitespace()) {
+        if (sourceText == null || !isEnabled()) {
             return null;
         }
         List<Mark> marks = new ArrayList<>();
@@ -92,7 +89,7 @@ public final class WhitespaceMarker implements IMarker {
         String lfToolTip = "LF";
         char lfPatternChar = '\n';
 
-        if (translationText == null || !isActive) {
+        if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {
             int pos = 0;
             while ((pos = sourceText.indexOf(spacePatternChar, pos)) >= 0) {
                 int next = sourceText.offsetByCodePoints(pos, 1);
@@ -119,7 +116,8 @@ public final class WhitespaceMarker implements IMarker {
                 marks.add(m);
                 pos = next;
             }
-        } else {
+        }
+        if (translationText != null) {
             int pos = 0;
             while ((pos = translationText.indexOf(spacePatternChar, pos)) >= 0) {
                 int next = translationText.offsetByCodePoints(pos, 1);

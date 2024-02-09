@@ -72,19 +72,20 @@ public class WhitespaceMarkerTest extends MarketTestBase {
         SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
         List<Mark> result = marker.getMarksForEntry(ste, sourceText, sourceText, true);
         assertNotNull(result);
-        assertEquals(4, result.size());
+        assertEquals(8, result.size());
         assertEquals(6, result.get(0).startOffset);
         assertEquals(7, result.get(0).endOffset);
         assertEquals(17, result.get(3).startOffset);
         assertEquals(18, result.get(3).endOffset);
         assertEquals("Tab", result.get(3).toolTipText);
-        assertEquals("TRANSLATION", result.get(3).entryPart.toString());
+        assertEquals("SOURCE", result.get(3).entryPart.toString());
     }
 
     @Test
     public void testMarkersSP2() throws Exception {
         IMarker marker = new WhitespaceMarker();
         Core.getEditor().getSettings().setMarkWhitespace(true);
+        Core.getEditor().getSettings().setDisplaySegmentSources(false);
         String sourceText = "source text with \tTAB.";
         EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
         SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
@@ -96,6 +97,6 @@ public class WhitespaceMarkerTest extends MarketTestBase {
         assertEquals(17, result.get(3).startOffset);
         assertEquals(18, result.get(3).endOffset);
         assertEquals("Tab", result.get(3).toolTipText);
-        assertEquals("SOURCE", result.get(3).entryPart.toString());
+        assertEquals("TRANSLATION", result.get(3).entryPart.toString());
     }
 }

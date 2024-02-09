@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.l10nmgr;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -36,6 +37,16 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class L10nmgrFilter extends XMLFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(L10nmgrFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     /**
      * Creates a new instance of L10nmgrFilter

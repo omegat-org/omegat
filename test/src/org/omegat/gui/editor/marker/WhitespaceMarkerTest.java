@@ -60,7 +60,7 @@ public class WhitespaceMarkerTest extends MarketTestBase {
     public void testMarkersNotActive() throws Exception {
         IMarker marker = new WhitespaceMarker();
         Core.getEditor().getSettings().setMarkWhitespace(true);
-        assertEquals(null, marker.getMarksForEntry(null, null, null, false));
+        assertNull(marker.getMarksForEntry(null, null, null, false));
     }
 
     @Test

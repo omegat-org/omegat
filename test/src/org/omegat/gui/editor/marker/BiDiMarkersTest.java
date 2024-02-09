@@ -86,4 +86,20 @@ public class BiDiMarkersTest extends MarketTestBase {
         assertEquals(5, result.get(0).startOffset);
         assertEquals(5, result.get(0).endOffset);
     }
+
+    @Test
+    public void testMarkersBidi2() throws Exception {
+        IMarker marker = new BidiMarkers();
+        Core.getEditor().getSettings().setMarkBidi(true);
+        String sourceText = "The title is \"\u0645\u0641\u062A\u0627\u062D \u0645\u0639\u0627\u064A\u064A\u0631"
+                + " \u0627\u0644\u0648\u064A\u0628!\u200F\" in Arabic.";
+        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
+        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
+        List<Mark> result = marker.getMarksForEntry(ste, sourceText, sourceText, true);
+        assertEquals(1, result.size());
+        assertEquals(33, result.get(0).startOffset);
+        assertEquals(34, result.get(0).endOffset);
+        assertEquals("TRANSLATION", result.get(0).entryPart.toString());
+    }
+
 }

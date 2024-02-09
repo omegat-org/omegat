@@ -91,7 +91,7 @@ public final class WhitespaceMarker implements IMarker {
         String lfToolTip = "LF";
         char lfPatternChar = '\n';
 
-        if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {
+        if (Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {
             int pos = 0;
             while ((pos = sourceText.indexOf(spacePatternChar, pos)) >= 0) {
                 int next = sourceText.offsetByCodePoints(pos, 1);

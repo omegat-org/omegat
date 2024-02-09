@@ -31,6 +31,7 @@ import java.util.List;
 
 import org.xml.sax.Attributes;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
@@ -49,6 +50,16 @@ public class ResXFilter extends XMLFilter {
     private String entryText;
     private String comment;
     private String text;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(ResXFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     /**
      * Creates a new instance of ResXFilter

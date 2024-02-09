@@ -49,6 +49,8 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -67,6 +69,16 @@ public class OpenXMLFilter extends AbstractFilter {
     private String documents;
     private Pattern translatable;
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(OpenXMLFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     /**
      * Defines the documents to read according to options

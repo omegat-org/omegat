@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                2010 Wildrich Fourie
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

@@ -5,6 +5,7 @@
 
  Copyright (C) 2010-2013 Alex Buloichik
                2014 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura.
+ *  Copyright (C) 2024 Hiroshi Miura.
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -22,14 +22,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package org.omegat.gui.editor.marker;
 
-import static java.util.Collections.EMPTY_LIST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,11 +37,11 @@ import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.editor.mark.WhitespaceMarker;
 
-public class BiDiMarkersTest extends MarketTestBase {
+public class WhitespaceMarkerTest extends MarketTestBase {
 
     @Before
     public void preUp() {
@@ -52,38 +49,37 @@ public class BiDiMarkersTest extends MarketTestBase {
     }
 
     @Test
-    public void testBidiMarkersDisabled() throws Exception {
-        IMarker marker = new BidiMarkers();
-        Core.getEditor().getSettings().setMarkBidi(false);
+    public void testMarkersDisabled() throws Exception {
+        IMarker marker = new WhitespaceMarker();
+        Core.getEditor().getSettings().setMarkWhitespace(false);
         assertNull(marker.getMarksForEntry(null, null, null, true));
     }
 
     @Test
-    public void testBidiMarkersNotActive() throws Exception {
-        IMarker marker = new BidiMarkers();
-        Core.getEditor().getSettings().setMarkBidi(true);
-        assertEquals(EMPTY_LIST, marker.getMarksForEntry(null, null, null, false));
+    public void testMarkersNotActive() throws Exception {
+        IMarker marker = new WhitespaceMarker();
+        Core.getEditor().getSettings().setMarkWhitespace(true);
+        assertEquals(null, marker.getMarksForEntry(null, null, null, false));
     }
 
     @Test
-    public void testBidiMarkersNoBidi() throws Exception {
-        IMarker marker = new BidiMarkers();
-        Core.getEditor().getSettings().setMarkBidi(true);
-        EntryKey ek = new EntryKey("file", "edit", "10", null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(ek, 0, null, null, new ArrayList<>());
-        assertEquals(EMPTY_LIST, marker.getMarksForEntry(ste, "edit", "edit", true));
-    }
-
-    @Test
-    public void testMarkersBidi() throws Exception {
-        IMarker marker = new BidiMarkers();
-        Core.getEditor().getSettings().setMarkBidi(true);
-        String sourceText = "\u0645\u0644\u0641\u0627\u062A\u202a XHTML";
+    public void testMarkersSP() throws Exception {
+        IMarker marker = new WhitespaceMarker();
+        Core.getEditor().getSettings().setMarkWhitespace(true);
+        String sourceText = "source text with \tTAB.";
         EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
         SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
         List<Mark> result = marker.getMarksForEntry(ste, sourceText, sourceText, true);
-        assertEquals(1, result.size());
-        assertEquals(5, result.get(0).startOffset);
-        assertEquals(5, result.get(0).endOffset);
+        assertEquals(8, result.size());
+        assertEquals(6, result.get(0).startOffset);
+        assertEquals(7, result.get(0).endOffset);
+        assertEquals(17, result.get(3).startOffset);
+        assertEquals(18, result.get(3).endOffset);
+        assertEquals("Tab", result.get(3).toolTipText);
+        assertEquals("SOURCE", result.get(3).entryPart.toString());
+        assertEquals(17, result.get(7).startOffset);
+        assertEquals(18, result.get(7).endOffset);
+        assertEquals("Tab", result.get(7).toolTipText);
+        assertEquals("TRANSLATION", result.get(7).entryPart.toString());
     }
 }

@@ -24,6 +24,7 @@
  */
 package org.omegat.gui.editor.mark;
 
+import static java.util.Collections.EMPTY_LIST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -50,14 +51,16 @@ public class WhitespaceMarkerTest extends MarkerTestBase {
     public void testMarkersDisabled() throws Exception {
         IMarker marker = new WhitespaceMarker();
         Core.getEditor().getSettings().setMarkWhitespace(false);
-        assertNull(marker.getMarksForEntry(null, null, null, true));
+        String sourceText = "source text";
+        assertNull(marker.getMarksForEntry(null, sourceText, null, true));
     }
 
     @Test
     public void testMarkersNotActive() throws Exception {
         IMarker marker = new WhitespaceMarker();
         Core.getEditor().getSettings().setMarkWhitespace(true);
-        assertNull(marker.getMarksForEntry(null, null, null, false));
+        String sourceText = "source";
+        assertEquals(EMPTY_LIST, marker.getMarksForEntry(null, sourceText, null, false));
     }
 
     @Test

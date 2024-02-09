@@ -1430,7 +1430,8 @@ tasks.jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ["gen/core/**/*", "org/omegat/**/gui/*", "org/omegat/**/data/*"])
+            fileTree(dir: it, include: ["org/omegat/gui/editor/mark/*"],
+                    exclude: ["gen/core/**/*", "org/omegat/**/gui/*", "org/omegat/**/data/*"])
         }))
     }
 }

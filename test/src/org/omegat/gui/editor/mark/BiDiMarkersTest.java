@@ -52,14 +52,16 @@ public class BiDiMarkersTest extends MarkerTestBase {
     public void testBidiMarkersDisabled() throws Exception {
         IMarker marker = new BidiMarkers();
         Core.getEditor().getSettings().setMarkBidi(false);
-        assertNull(marker.getMarksForEntry(null, null, null, true));
+        String sourceText = "source text";
+        assertNull(marker.getMarksForEntry(null, sourceText, null, true));
     }
 
     @Test
     public void testBidiMarkersNotActive() throws Exception {
         IMarker marker = new BidiMarkers();
         Core.getEditor().getSettings().setMarkBidi(true);
-        assertEquals(EMPTY_LIST, marker.getMarksForEntry(null, null, null, false));
+        String sourceText = "source text";
+        assertEquals(EMPTY_LIST, marker.getMarksForEntry(null, sourceText, null, false));
     }
 
     @Test

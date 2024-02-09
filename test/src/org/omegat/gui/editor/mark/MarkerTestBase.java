@@ -22,7 +22,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package org.omegat.gui.editor.marker;
+package org.omegat.gui.editor.mark;
 
 import java.util.List;
 
@@ -34,9 +34,8 @@ import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
-import org.omegat.gui.editor.mark.Mark;
 
-public class MarketTestBase extends TestCore {
+public class MarkerTestBase extends TestCore {
 
     final IEditorSettings editorSettings = new IEditorSettings() {
 

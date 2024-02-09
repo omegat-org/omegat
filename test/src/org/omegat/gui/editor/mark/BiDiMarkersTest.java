@@ -23,7 +23,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.gui.editor.marker;
+package org.omegat.gui.editor.mark;
 
 import static java.util.Collections.EMPTY_LIST;
 import static org.junit.Assert.assertEquals;
@@ -40,11 +40,8 @@ import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.mark.BidiMarkers;
-import org.omegat.gui.editor.mark.IMarker;
-import org.omegat.gui.editor.mark.Mark;
 
-public class BiDiMarkersTest extends MarketTestBase {
+public class BiDiMarkersTest extends MarkerTestBase {
 
     @Before
     public void preUp() {

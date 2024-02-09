@@ -22,7 +22,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package org.omegat.gui.editor.marker;
+package org.omegat.gui.editor.mark;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -38,11 +38,8 @@ import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.mark.IMarker;
-import org.omegat.gui.editor.mark.Mark;
-import org.omegat.gui.editor.mark.WhitespaceMarker;
 
-public class WhitespaceMarkerTest extends MarketTestBase {
+public class WhitespaceMarkerTest extends MarkerTestBase {
 
     @Before
     public void preUp() {

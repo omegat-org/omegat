@@ -45,7 +45,7 @@ public final class WhitespaceMarker implements IMarker {
     public WhitespaceMarker() {
     }
 
-    public static void loadPlusins() {
+    public static void loadPlugins() {
         Core.registerMarkerClass(WhitespaceMarker.class);
     }
 

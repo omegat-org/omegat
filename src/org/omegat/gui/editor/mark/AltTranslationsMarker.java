@@ -36,7 +36,7 @@ import java.util.List;
 
 public class AltTranslationsMarker extends AbstractMarker {
 
-    protected static final Highlighter.HighlightPainter PAINTER = new TransparentHighlightPainter(
+    private final Highlighter.HighlightPainter painter = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_ALT_TRANSLATION.getColor(), 0.5F);
 
     public static void loadPlugins() {
@@ -62,7 +62,7 @@ public class AltTranslationsMarker extends AbstractMarker {
 
         if (!Core.getProject().getTranslationInfo(ste).defaultTranslation) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-            m.painter = PAINTER;
+            m.painter = painter;
             return Collections.singletonList(m);
         }
 

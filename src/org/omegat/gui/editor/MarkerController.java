@@ -51,7 +51,6 @@ import org.omegat.gui.editor.mark.NBSPMarker;
 import org.omegat.gui.editor.mark.ProtectedPartsMarker;
 import org.omegat.gui.editor.mark.RemoveTagMarker;
 import org.omegat.gui.editor.mark.ReplaceMarker;
-import org.omegat.gui.editor.mark.WhitespaceMarkers;
 import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.util.Log;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -77,7 +76,6 @@ public class MarkerController {
     private final Highlighter highlighter;
 
     public static void init() throws Exception {
-        Core.registerMarker(new WhitespaceMarkers());
         Core.registerMarker(new ProtectedPartsMarker());
         Core.registerMarker(new RemoveTagMarker());
         Core.registerMarker(new NBSPMarker());
@@ -136,9 +134,6 @@ public class MarkerController {
 
     /**
      * Remove all marks for all entries.
-     *
-     * @param newEntriesCount
-     *            count of newly displayed entries
      */
     void removeAll() {
         UIThreadsUtil.mustBeSwingThread();

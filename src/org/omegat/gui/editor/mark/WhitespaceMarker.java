@@ -40,13 +40,13 @@ import org.omegat.util.gui.Styles;
  * @author Martin Fleurke
  */
 @SuppressWarnings("unused")
-public final class WhitespaceMarkers implements IMarker {
+public final class WhitespaceMarker implements IMarker {
 
-    public WhitespaceMarkers() {
+    public WhitespaceMarker() {
     }
 
     public static void loadPlusins() {
-        Core.registerMarkerClass(WhitespaceMarkers.class);
+        Core.registerMarkerClass(WhitespaceMarker.class);
     }
 
     public static void unloadPlugins() {
@@ -79,6 +79,9 @@ public final class WhitespaceMarkers implements IMarker {
     @Override
     public List<Mark> getMarksForEntry(final SourceTextEntry ste, final String sourceText, final String translationText, final boolean isActive) throws Exception {
         if (!isEnabled()) {
+            return null;
+        }
+        if (sourceText == null || !isActive) {
             return null;
         }
         List<Mark> marks = new ArrayList<>();

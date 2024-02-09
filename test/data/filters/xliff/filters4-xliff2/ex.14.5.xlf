@@ -1,0 +1,31 @@
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0"
+       srcLang="en" trgLang="pt"
+       xmlns:gls="urn:oasis:names:tc:xliff:glossary:2.0">
+  <file id="f1">
+    <unit id="1">
+      <gls:glossary>
+        <gls:glossEntry id="g1" ref="#m1">
+          <gls:term>bill</gls:term>
+          <gls:translation>Schnabel</gls:translation>
+          <gls:definition source="dictionary.com">The hard usually pointed
+            parts that cover a bird's mouth.</gls:definition>
+        </gls:glossEntry>
+      </gls:glossary>
+      <segment>
+        <source>It was a unique
+          <mrk id="m1" type="term"
+               ref="my_file.xlf/#f=f1/u=1/gls=g1">bill.</mrk>.
+        </source>
+        <!-- note, the ref attribute above shows the absolute fragment
+             identification. In many cases (including this example),
+             a reference to just the term will suffice, such as
+             ref="gls=g1" -->
+      </segment>
+    </unit>
+    <unit id="g1">
+      <segment>
+        <source>Many birds have unique bills.</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

@@ -99,5 +99,11 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         // entry translated in the callback, not in the source file
         assertEquals("Oiseaux en Oregon", entries.get(0).translation); 
     }
-    
+
+    @Test
+    public void testTranslation_glossary_14_5() throws Exception {
+        Xliff2Filter filter = new Xliff2Filter();
+        String source = "test/data/filters/xliff/filters4-xliff2/ex.14.5.xlf";
+        translateXML(filter, source);
+    }
 }

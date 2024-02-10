@@ -43,9 +43,6 @@ import org.omegat.util.gui.Styles;
 @SuppressWarnings("unused")
 public final class WhitespaceMarker implements IMarker {
 
-    public WhitespaceMarker() {
-    }
-
     public static void loadPlugins() {
         Core.registerMarkerClass(WhitespaceMarker.class);
     }
@@ -53,23 +50,25 @@ public final class WhitespaceMarker implements IMarker {
     public static void unloadPlugins() {
     }
 
-    private final SymbolPainter spacePainter =
-            new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(),
-            "·");
+    private final SymbolPainter spacePainter;
     /**
      * Marker for tab
      */
-    private final SymbolPainter tabPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(),
-            "»");
+    private final SymbolPainter tabPainter;
+
     /**
      * Marker for linefeed.
      *
      * There is a linefeed symbol: U+240A. But it is so small / hard to see,
      * that instead we use U+00B6 as the symbol to show, like other applications do.
      */
-    private final SymbolPainter lfPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(),
-            "¶");
-    //no need for CR marker. There are no CR's.
+    private final SymbolPainter lfPainter;
+
+    public WhitespaceMarker() {
+        spacePainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "·");
+        tabPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "»");
+        lfPainter = new SymbolPainter(Styles.EditorColor.COLOR_WHITESPACE.getColor(), "¶");
+    }
 
     /**
      * Marker for whitespaces.

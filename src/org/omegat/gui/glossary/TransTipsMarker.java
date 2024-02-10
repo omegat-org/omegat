@@ -47,8 +47,12 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {
-    protected static final HighlightPainter TRANSTIPS_UNDERLINER = new UnderlineFactory.SolidBoldUnderliner(
-            Styles.EditorColor.COLOR_TRANSTIPS.getColor());
+    private final HighlightPainter transtipsUnderliner;
+
+    public TransTipsMarker() {
+        transtipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
+                Styles.EditorColor.COLOR_TRANSTIPS.getColor());
+    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
@@ -64,7 +68,7 @@ public class TransTipsMarker implements IMarker {
             return null;
         }
 
-        List<Mark> marks = new ArrayList<Mark>();
+        List<Mark> marks = new ArrayList<>();
 
         IGlossaryRenderer renderer = GlossaryRenderers.getPreferredGlossaryRenderer();
         for (GlossaryEntry ent : glossaryEntries) {
@@ -75,7 +79,7 @@ public class TransTipsMarker implements IMarker {
         return marks;
     }
 
-    private static List<Mark> getMarksForTokens(List<Token[]> tokens, String srcText, String tooltip) {
+    private List<Mark> getMarksForTokens(List<Token[]> tokens, String srcText, String tooltip) {
         if (tokens.isEmpty() || srcText.isEmpty()) {
             return Collections.emptyList();
         }
@@ -99,14 +103,14 @@ public class TransTipsMarker implements IMarker {
                     newMark = new Mark(Mark.ENTRY_PART.SOURCE, currStart, currEnd);
                     result.add(newMark);
                 }
-                newMark.painter = TRANSTIPS_UNDERLINER;
+                newMark.painter = transtipsUnderliner;
                 newMark.toolTipText = tooltip;
             }
         }
         return result;
     }
 
-    private static boolean canCloseSpan(String text, int start, int end) {
+    private boolean canCloseSpan(String text, int start, int end) {
         if (start < 0 || end > text.length()) {
             throw new IndexOutOfBoundsException();
         }

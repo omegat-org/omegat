@@ -36,9 +36,7 @@ import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
-import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMatch;
@@ -46,42 +44,24 @@ import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.filter.ReplaceFilter;
-import org.omegat.util.Language;
-import org.omegat.util.TestPreferencesInitializer;
 
+/**
+ * @author Hiroshi Miura
+ */
 public class ReplaceMarkerTest extends MarkerTestBase  {
+    String sourceText = "source text";
+    String replaceText = "text";
+    SourceTextEntry ste;
 
     @Before
-    public void preUp() throws Exception {
+    public void preUp() {
+        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
+        ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
         IEditor editor = new ReplaceMarkerMockEditor();
         TestCoreInitializer.initEditor(editor);
-        TestPreferencesInitializer.init();
         Core.setProject(new NotLoadedProject() {
             @Override
-            public boolean isProjectLoaded() {
-                return true;
-            }
-
-            @Override
-            public ProjectProperties getProjectProperties() {
-                return new ProjectProperties() {
-                    @Override
-                    public Language getSourceLanguage() {
-                        return new Language("en");
-                    }
-
-                    @Override
-                    public Language getTargetLanguage() {
-                        return new Language("fr");
-                    }
-                };
-            }
-
-            @Override
             public List<SourceTextEntry> getAllEntries() {
-                String sourceText = "source text";
-                EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
-                SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
                 return Collections.singletonList(ste);
             }
         });
@@ -90,14 +70,11 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
     @Test
     public void testReplaceMarker() throws Exception {
         IMarker marker = new ReplaceMarker();
-        String sourceText = "source text";
-        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
-        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
         List<Mark> result = marker.getMarksForEntry(ste, sourceText, sourceText, true);
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals(7, result.get(0).startOffset);
-        assertEquals(10, result.get(0).endOffset);
+        assertEquals(11, result.get(0).endOffset);
         assertEquals("TRANSLATION", result.get(0).entryPart.toString());
     }
 
@@ -111,10 +88,6 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
     }
 
     class MockSearcher extends Searcher {
-        public MockSearcher(final IProject project, final SearchExpression searchExpression) {
-            super(project, searchExpression);
-        }
-
         public MockSearcher() {
             super(null, null);
         }
@@ -126,8 +99,8 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
 
         @Override
         public List<SearchMatch> getFoundMatches() {
-            SearchMatch m = new SearchMatch(7, 10);
-            return Collections.singletonList(m);
+            int s = sourceText.indexOf(replaceText);
+            return Collections.singletonList(new SearchMatch(s, s + replaceText.length()));
         }
     }
 

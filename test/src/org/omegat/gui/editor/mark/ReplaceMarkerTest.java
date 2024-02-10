@@ -78,7 +78,7 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
         assertEquals("TRANSLATION", result.get(0).entryPart.toString());
     }
 
-    public class ReplaceMarkerMockEditor extends MockEditor {
+    class ReplaceMarkerMockEditor extends MockEditor {
         @Override
         public IEditorFilter getFilter() {
             SearchExpression s = new SearchExpression();
@@ -88,7 +88,7 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
     }
 
     class MockSearcher extends Searcher {
-        public MockSearcher() {
+        MockSearcher() {
             super(null, null);
         }
 

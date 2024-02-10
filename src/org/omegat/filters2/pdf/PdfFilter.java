@@ -42,6 +42,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.text.PDFTextStripper;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -54,6 +55,16 @@ import org.omegat.util.OStrings;
  * @author Aaron Madlon-Kay
  */
 public class PdfFilter  extends AbstractFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(PdfFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     private static final Pattern LINEBREAK_PATTERN = Pattern.compile("^\\s*?$");
 

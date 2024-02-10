@@ -496,7 +496,7 @@ public interface IEditor {
      * Ask the editor whether all LtR or not.
      * @return true when all characters are LtR, otherwise false.
      */
-    default boolean isOrientationAllLtr(){
+    default boolean isOrientationAllLtr() {
         return true;
     }
 }

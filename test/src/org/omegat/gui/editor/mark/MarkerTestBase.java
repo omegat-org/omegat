@@ -37,7 +37,12 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 
 public class MarkerTestBase extends TestCore {
 
-    final IEditorSettings editorSettings = new IEditorSettings() {
+
+    IEditorSettings editorSettings = new MockEditorSettings();
+
+    IEditor editor = new MockEditor();
+
+    public static class MockEditorSettings implements IEditorSettings {
 
         private boolean useTabForAdvance;
         private boolean markTranslated;
@@ -227,7 +232,7 @@ public class MarkerTestBase extends TestCore {
         }
     };
 
-    final IEditor editor = new IEditor() {
+    public class MockEditor implements IEditor {
 
         @Override
         public void windowDeactivated() {
@@ -461,5 +466,5 @@ public class MarkerTestBase extends TestCore {
             return true;
         }
 
-    };
+    }
 }

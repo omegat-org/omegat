@@ -499,6 +499,11 @@ public final class TestTeamIntegrationChild {
         @Override
         public void insertTextAndMark(String text) {
         }
+
+        @Override
+        public boolean isOrientationAllLtr() {
+            return true;
+        }
     };
 
     static IMainWindow mainWindow = new IMainWindow() {

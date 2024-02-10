@@ -455,5 +455,11 @@ public class MarkerTestBase extends TestCore {
         @Override
         public void activateEntry() {
         }
+
+        @Override
+        public boolean isOrientationAllLtr() {
+            return true;
+        }
+
     };
 }

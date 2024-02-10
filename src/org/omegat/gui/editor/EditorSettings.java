@@ -62,6 +62,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean markWhitespace;
     private boolean markParagraphDelimitations;
     private boolean markBidi;
+    private boolean markAltTranslations;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
@@ -91,6 +92,7 @@ public class EditorSettings implements IEditorSettings {
         markNonUniqueSegments = Preferences.isPreferenceDefault(Preferences.MARK_NON_UNIQUE_SEGMENTS,
                MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
+        markAltTranslations = Preferences.isPreference(Preferences.MARK_ALT_TRANSLATIONS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
         markParagraphDelimitations = Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS,
                 MARK_PARA_DELIMITATIONS_DEFAULT);
@@ -226,6 +228,10 @@ public class EditorSettings implements IEditorSettings {
         return markBidi;
     }
 
+    public boolean isMarkAltTranslations() {
+        return markAltTranslations;
+    }
+
     public boolean isDoFontFallback() {
         return doFontFallback;
     }
@@ -330,6 +336,21 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
+
+    public void setMarkAltTranslations(boolean markAltTranslations) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markAltTranslations = markAltTranslations;
+        Preferences.setPreference(Preferences.MARK_ALT_TRANSLATIONS, markAltTranslations);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
 
     public void setDoFontFallback(boolean doFontFalback) {
         UIThreadsUtil.mustBeSwingThread();

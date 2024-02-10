@@ -120,6 +120,8 @@ public final class Styles {
 
         COLOR_MARK_COMES_FROM_TM_XENFORCED(UIManager.getColor("OmegaT.markComesFromTmXenforced")),
 
+        COLOR_MARK_ALT_TRANSLATION(UIManager.getColor("OmegaT.markAltTranslations")),
+
         COLOR_REPLACE(UIManager.getColor("OmegaT.replace")),
 
         COLOR_LANGUAGE_TOOLS(UIManager.getColor("OmegaT.languageTools")),

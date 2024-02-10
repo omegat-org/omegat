@@ -30,6 +30,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,26 +39,24 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.OStrings;
-import org.omegat.util.PatternConsts;
-import org.omegat.util.Preferences;
-import org.omegat.util.TestPreferencesInitializer;
 
 public class RemoveTagMarkerTest extends MarkerTestBase  {
 
     @Before
     public void preUp() throws IOException {
         TestCoreInitializer.initEditor(editor);
-        TestPreferencesInitializer.init();
     }
 
     @Test
     public void testRemoveTagMarker() throws Exception {
-        Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, "%remove");
         RemoveTagMarker marker = new RemoveTagMarker();
-        // CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-        marker.pattern =  PatternConsts.getRemovePattern();
+        /* The marker updates its remove pattern from preference,
+           when project change event fired.
+           Here replace it with direct update to avoid interference
+           among test cases.
+         */
+        marker.pattern = Pattern.compile("%remove");
         assertNotNull(marker.pattern);
-        //
         String sourceText = "source %remove";
         EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
         SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());

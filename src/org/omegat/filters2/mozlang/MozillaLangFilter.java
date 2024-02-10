@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -67,6 +68,16 @@ public class MozillaLangFilter extends AbstractFilter {
     private StringBuilder source, target, localizationNote;
 
     private BufferedWriter out;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(MozillaLangFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     public String getFileFormatName() {

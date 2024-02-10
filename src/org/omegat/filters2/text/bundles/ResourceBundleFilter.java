@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -107,6 +108,16 @@ public class ResourceBundleFilter extends AbstractFilter {
      */
     private boolean dontUnescapeULiterals = false;
 
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(ResourceBundleFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     @Override
     public String getFileFormatName() {
         return OStrings.getString("RBFILTER_FILTER_NAME");
@@ -165,8 +176,12 @@ public class ResourceBundleFilter extends AbstractFilter {
         StringBuilder result = new StringBuilder(line.length());
         for (int cp, len = line.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = line.codePointAt(i);
-            if (strippingWhitespace && (strippingWhitespace = Character.isWhitespace(cp))) {
-                continue;
+            if (strippingWhitespace) {
+                if (Character.isWhitespace(cp)) {
+                    continue;
+                } else {
+                    strippingWhitespace = false;
+                }
             }
             if (cp == '\\' && line.codePointCount(i, len) > 1) {
                 i += Character.charCount(cp);
@@ -302,22 +317,27 @@ public class ResourceBundleFilter extends AbstractFilter {
      */
     private String removeExtraSlashes(String string) {
         StringBuilder result = new StringBuilder(string.length());
-        for (int cp, len = string.length(), i = 0; i < len; i += Character.charCount(cp)) {
+        int cp;
+        int len = string.length();
+        int i = 0;
+        while (i < len) {
             cp = string.codePointAt(i);
             if (cp == '\\') {
-                if (dontUnescapeULiterals && containsUEscapeAt(string, i)) {
-                    // Don't remove \ before \\uXXXX if we are not unescaping
-                } else if (string.codePointCount(i, len) > 1) {
-                    // Fix for [ 1812183 ] Properties: space before "="
-                    // shouldn't
-                    // be part of the key, contributed by Arno Peters
-                    i += Character.charCount(cp);
-                    cp = string.codePointAt(i);
-                } else {
-                    cp = ' ';
+                // Don't remove \ before \\uXXXX if we are not unescape
+                if (!dontUnescapeULiterals || !containsUEscapeAt(string, i)) {
+                    if (string.codePointCount(i, len) > 1) {
+                        // Fix for [ 1812183 ] Properties: space before "="
+                        // shouldn't
+                        // be part of the key, contributed by Arno Peters
+                        i += Character.charCount(cp);
+                        cp = string.codePointAt(i);
+                    } else {
+                        cp = ' ';
+                    }
                 }
             }
             result.appendCodePoint(cp);
+            i += Character.charCount(cp);
         }
         return result.toString();
     }

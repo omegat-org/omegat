@@ -330,6 +330,10 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
 
     @Override
     public void showCreateGlossaryEntryDialog(Frame parent) {
+    }
 
+    @Override
+    public boolean isOrientationAllLtr() {
+        return true;
     }
 }

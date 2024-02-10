@@ -583,6 +583,7 @@ public class EditorController implements IEditor {
      * The orientation of the document is all LtR.
      * @return true when the orientation is all RtL. otherwise false.
      */
+    @Override
     public boolean isOrientationAllLtr() {
         return currentOrientation.equals(BiDiUtils.ORIENTATION.ALL_LTR);
     }

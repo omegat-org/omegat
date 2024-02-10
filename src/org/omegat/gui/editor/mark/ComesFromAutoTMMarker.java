@@ -58,7 +58,7 @@ public class ComesFromAutoTMMarker implements IMarker {
             return null;
         }
         TMXEntry e = Core.getProject().getTranslationInfo(ste);
-        if (e.linked == null) {
+        if (e == null || e.linked == null) {
             return null;
         }
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());

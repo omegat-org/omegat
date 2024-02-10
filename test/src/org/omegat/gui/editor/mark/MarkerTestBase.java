@@ -22,7 +22,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package org.omegat.gui.editor.marker;
+package org.omegat.gui.editor.mark;
 
 import java.util.List;
 
@@ -34,11 +34,15 @@ import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
-import org.omegat.gui.editor.mark.Mark;
 
-public class MarketTestBase extends TestCore {
+public class MarkerTestBase extends TestCore {
 
-    final IEditorSettings editorSettings = new IEditorSettings() {
+
+    IEditorSettings editorSettings = new MockEditorSettings();
+
+    IEditor editor = new MockEditor();
+
+    public static class MockEditorSettings implements IEditorSettings {
 
         private boolean useTabForAdvance;
         private boolean markTranslated;
@@ -228,7 +232,7 @@ public class MarketTestBase extends TestCore {
         }
     };
 
-    final IEditor editor = new IEditor() {
+    public class MockEditor implements IEditor {
 
         @Override
         public void windowDeactivated() {
@@ -456,5 +460,11 @@ public class MarketTestBase extends TestCore {
         @Override
         public void activateEntry() {
         }
-    };
+
+        @Override
+        public boolean isOrientationAllLtr() {
+            return true;
+        }
+
+    }
 }

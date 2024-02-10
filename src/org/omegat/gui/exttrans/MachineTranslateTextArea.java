@@ -50,7 +50,6 @@ import javax.swing.text.html.StyleSheet;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;
@@ -264,16 +263,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         private String getTranslation(Language source, Language target) {
             if (!force) {
-                if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {
-                    return translator.getCachedTranslation(source, target, src);
-                }
-                if (Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
-                    TMXEntry entry = Core.getProject().getTranslationInfo(currentlyProcessedEntry);
-                    if (entry.isTranslated()) {
-                        return translator.getCachedTranslation(source, target, src);
-                    }
+                String cached = translator.getCachedTranslation(source, target, src);
+                if (cached != null || !Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, false)
+                        || Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)
+                        && Core.getProject().getTranslationInfo(currentlyProcessedEntry).isTranslated()) {
+                    return cached;
                 }
             }
+            // Ask MT engine when forced, or visiting an untranslated entry.
             try {
                 return translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {

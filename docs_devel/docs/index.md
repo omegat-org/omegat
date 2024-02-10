@@ -20,6 +20,7 @@
 * [Setup your plugin project](15.SetupPluginProject.md)
 * [Loading Plugins](17.LoadingPlugins.md)
 * [Plugin manifest](19.PluginManifest.md)
+* [How to make Machine Translation connector plugin](12.HowToMakeMTConnector.md)
 
 ## Understanding OmegaT Internals
 
@@ -33,6 +34,7 @@
 
 * [Test and coverage](33.TestAndCoverage.md)
 * [Integration test](34.IntegrationTest.md)
+* [Test a spcific features](35.SpecificFeatureTests.md)
 
 ## Documentation
 

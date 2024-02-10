@@ -74,7 +74,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
     // ------------------- AbstractXmlFilter part -------------------------
 
     @Override
-    protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             // XLIFF 2 has no "body", so we must start on another
             // markup
@@ -89,6 +89,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 }
             }
         }
+        return isEventMode;
     }
 
     /** Current translation unit **/

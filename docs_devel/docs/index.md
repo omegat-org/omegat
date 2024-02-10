@@ -37,6 +37,8 @@
 ## Documentation
 
 * [Contributing to Documentation](40.ContributingDocument.md)
+* [Use a container to build the documentation](07.ManualBuildUsingContainer.md)
+* [Building the documentation manually](08.ManuallyBuildDocumentation.md)
 
 ## Localization
 

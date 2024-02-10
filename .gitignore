@@ -15,7 +15,7 @@ out
 
 # Docs
 .fop
-docs
+docs/
 doc_src/*/index.xml
 doc_src/*/xhtml5
 

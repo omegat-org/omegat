@@ -49,21 +49,27 @@ public class BidiMarkers extends AbstractMarker {
     static final int LRO = 0x202d;
     static final int RLO = 0x202e;
 
-    private final HighlightPainter lreBidiPainter = new BidiPainter(LRE,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    private final HighlightPainter rleBidiPainter = new BidiPainter(RLE,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    private final HighlightPainter lrmBidiPainter = new BidiPainter(LRM,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    private final HighlightPainter rlmBidiPainter = new BidiPainter(RLM,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    private final HighlightPainter rloBidiPainter = new BidiPainter(RLO,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    private final HighlightPainter lroBidiPainter = new BidiPainter(LRO,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+    private final HighlightPainter lreBidiPainter;
+    private final HighlightPainter rleBidiPainter;
+    private final HighlightPainter lrmBidiPainter;
+    private final HighlightPainter rlmBidiPainter;
+    private final HighlightPainter rloBidiPainter;
+    private final HighlightPainter lroBidiPainter;
 
     public BidiMarkers() throws Exception {
         super();
+        lreBidiPainter = new BidiPainter(LRE,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        rleBidiPainter = new BidiPainter(RLE,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        lrmBidiPainter = new BidiPainter(LRM,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        rlmBidiPainter = new BidiPainter(RLM,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        rloBidiPainter = new BidiPainter(RLO,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        lroBidiPainter = new BidiPainter(LRO,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
     }
 
     @Override

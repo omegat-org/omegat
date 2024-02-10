@@ -42,14 +42,21 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromAutoTMMarker implements IMarker {
-    private final HighlightPainter painterXice = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getColor(), 0.5F);
-    private final HighlightPainter painterX100Pc = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
-    private final HighlightPainter painterXauto = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
-    private final HighlightPainter painterXenforced = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
+    private final HighlightPainter painterXice;
+    private final HighlightPainter painterX100Pc;
+    private final HighlightPainter painterXauto;
+    private final HighlightPainter painterXenforced;
+
+    public ComesFromAutoTMMarker() {
+        painterXice = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getColor(), 0.5F);
+        painterX100Pc = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
+        painterXauto = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
+        painterXenforced = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
+    }
 
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,

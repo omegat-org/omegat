@@ -39,18 +39,22 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Spell checker marker implementation. All words for displayed file will be
- * cached, because check spelling is enough long operation.
+ * cached, because check spelling is enough long operations.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellCheckerMarker implements IMarker {
-    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_SPELLCHECK.getColor());
+    protected final HighlightPainter highlightPainter;
+
+    public SpellCheckerMarker() {
+        highlightPainter = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_SPELLCHECK.getColor());
+    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
         if (translationText == null) {
-            // translation not displayed
+            // translation is not displayed
             return null;
         }
         if (!Core.getEditor().getSettings().isAutoSpellChecking()) {
@@ -61,7 +65,7 @@ public class SpellCheckerMarker implements IMarker {
             int st = tok.getOffset();
             int en = st + tok.getLength();
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, st, en);
-            m.painter = PAINTER;
+            m.painter = highlightPainter;
             return m;
         }).collect(Collectors.toList());
     }

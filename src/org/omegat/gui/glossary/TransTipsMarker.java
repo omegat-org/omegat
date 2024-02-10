@@ -47,8 +47,12 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {
-    private final HighlightPainter transtipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
-            Styles.EditorColor.COLOR_TRANSTIPS.getColor());
+    private final HighlightPainter transtipsUnderliner;
+
+    public TransTipsMarker() {
+        transtipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
+                Styles.EditorColor.COLOR_TRANSTIPS.getColor());
+    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,

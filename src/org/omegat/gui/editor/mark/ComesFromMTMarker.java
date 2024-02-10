@@ -42,9 +42,7 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromMTMarker implements IMarker {
-    private final HighlightPainter highlightPainter = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM.getColor(), 0.5F);
-
+    private final HighlightPainter highlightPainter;
     private SourceTextEntry markedSte;
     private String markedText;
 
@@ -60,6 +58,8 @@ public class ComesFromMTMarker implements IMarker {
                 }
             }
         });
+        highlightPainter = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM.getColor(), 0.5F);
     }
 
     public void setMark(SourceTextEntry ste, String text) {

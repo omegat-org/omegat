@@ -38,7 +38,6 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.EditorController;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
@@ -60,7 +59,7 @@ public class ProtectedPartsMarker implements IMarker {
             throws Exception {
         HighlightPainter painter;
         AttributeSet attrs;
-        if (((EditorController) Core.getEditor()).isOrientationAllLtr()) {
+        if (Core.getEditor().isOrientationAllLtr()) {
             attrs = ATTRIBUTES_LTR;
             painter = null;
         } else {

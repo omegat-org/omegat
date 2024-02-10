@@ -23,7 +23,7 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package org.omegat.gui.editor.marker;
+package org.omegat.gui.editor.mark;
 
 import static java.util.Collections.EMPTY_LIST;
 import static org.junit.Assert.assertEquals;
@@ -40,11 +40,8 @@ import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.mark.BidiMarkers;
-import org.omegat.gui.editor.mark.IMarker;
-import org.omegat.gui.editor.mark.Mark;
 
-public class BiDiMarkersTest extends MarketTestBase {
+public class BiDiMarkersTest extends MarkerTestBase {
 
     @Before
     public void preUp() {
@@ -55,14 +52,16 @@ public class BiDiMarkersTest extends MarketTestBase {
     public void testBidiMarkersDisabled() throws Exception {
         IMarker marker = new BidiMarkers();
         Core.getEditor().getSettings().setMarkBidi(false);
-        assertNull(marker.getMarksForEntry(null, null, null, true));
+        String sourceText = "source text";
+        assertNull(marker.getMarksForEntry(null, sourceText, null, true));
     }
 
     @Test
     public void testBidiMarkersNotActive() throws Exception {
         IMarker marker = new BidiMarkers();
         Core.getEditor().getSettings().setMarkBidi(true);
-        assertEquals(EMPTY_LIST, marker.getMarksForEntry(null, null, null, false));
+        String sourceText = "source text";
+        assertEquals(EMPTY_LIST, marker.getMarksForEntry(null, sourceText, null, false));
     }
 
     @Test

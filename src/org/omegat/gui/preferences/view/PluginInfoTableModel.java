@@ -31,7 +31,7 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import org.omegat.core.data.PluginInformation;
+import org.omegat.plugins.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.OStrings;
 
@@ -50,7 +50,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
     private final List<PluginInformation> listPlugins = new ArrayList<>();
 
     public PluginInfoTableModel() {
-        PluginUtils.getPluginInformations().stream()
+        PluginUtils.getPluginsInformation().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .forEach(listPlugins::add);
     }

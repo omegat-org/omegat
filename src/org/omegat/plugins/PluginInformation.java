@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2020 Briac Pilpre
-               2021,2022 Hiroshi Miura
+               2021-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,16 +22,15 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+ *************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.plugins;
 
 import java.net.URL;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.OStrings;
 
 /**
@@ -51,14 +50,15 @@ public final class PluginInformation {
     private final String version;
     private final String author;
     private final String description;
-    private final PluginUtils.PluginType category;
+    private final PluginType category;
     private final String link;
     private final URL url;
     private final Status status;
 
-    /* The class is recommend to build from builder. */
+    /* The class is recommended to build from builder. */
+    @SuppressWarnings("ParameterNumber")
     private PluginInformation(String className, String name, String version, String author,
-            String description, PluginUtils.PluginType category, String link, URL url, Status status) {
+                              String description, PluginType category, String link, URL url, Status status) {
         this.className = className;
         this.name = name;
         this.version = version;
@@ -108,7 +108,7 @@ public final class PluginInformation {
     /**
      * @return category type of plugin as PluginType enum
      */
-    public PluginUtils.PluginType getCategory() {
+    public PluginType getCategory() {
         return category;
     }
 
@@ -139,11 +139,10 @@ public final class PluginInformation {
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PluginInformation [className=").append(className).append(", name=").append(name)
-                .append(", version=").append(version).append(", author=").append(author)
-                .append(", description=").append(description).append("]");
-        return builder.toString();
+        String builder = "PluginInformation [className=" + className + ", name=" + name
+                + ", version=" + version + ", author=" + author + ", description=" + description
+                + "]";
+        return builder;
     }
 
     /**
@@ -164,34 +163,42 @@ public final class PluginInformation {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PluginInformation other = (PluginInformation) obj;
         if (author == null) {
-            if (other.author != null)
+            if (other.author != null) {
                 return false;
-        } else if (!author.equals(other.author))
+            }
+        } else if (!author.equals(other.author)) {
             return false;
+        }
         if (className == null) {
-            if (other.className != null)
+            if (other.className != null) {
                 return false;
-        } else if (!className.equals(other.className))
+            }
+        } else if (!className.equals(other.className)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (version == null) {
-            if (other.version != null)
-                return false;
-        } else if (!version.equals(other.version))
-            return false;
-        return true;
+            return other.version == null;
+        } else {
+            return version.equals(other.version);
+        }
     }
 
     /**
@@ -281,16 +288,16 @@ public final class PluginInformation {
                 final URL mu, final Status status) {
             return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
                     props.getProperty(String.format("plugin.desc.%s", key)),
-                    PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status);
+                    PluginType.getTypeByValue(key), LINK, mu, status);
         }
 
-        private static PluginUtils.PluginType findCategory(Attributes attrs) {
+        private static PluginType findCategory(Attributes attrs) {
             String categoryKey;
             categoryKey = lookupAttribute(attrs, PLUGIN_CATEGORY, PLUGIN_TYPE);
             if (categoryKey != null) {
-                return PluginUtils.PluginType.getTypeByValue(categoryKey);
+                return PluginType.getTypeByValue(categoryKey);
             }
-            return PluginUtils.PluginType.MISCELLANEOUS;
+            return PluginType.MISCELLANEOUS;
         }
 
         private static String findName(String className, Attributes attrs) {

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2023 Briac Pilpré
+               2023-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -21,7 +22,7 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+**************************************************************************/
 
 package org.omegat.filters2.master;
 
@@ -41,10 +42,10 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.Test;
-import org.omegat.util.FileUtil;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.Test;
+
+import org.omegat.util.FileUtil;
 
 public class PluginUtilsTest {
 

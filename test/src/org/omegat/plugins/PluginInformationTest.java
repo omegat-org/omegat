@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura
+ Copyright (C) 2021-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -21,9 +21,9 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- **************************************************************************/
+**************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.plugins;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -38,8 +38,6 @@ import java.nio.file.Files;
 import java.util.jar.Manifest;
 
 import org.junit.Test;
-
-import org.omegat.filters2.master.PluginUtils;
 
 
 /**
@@ -59,7 +57,7 @@ public class PluginInformationTest {
                  .fromManifest(pluginClass, m, mu, PluginInformation.Status.INSTALLED);
          assertEquals("Filters for OmegaT", pluginInformation.getName());
          assertEquals("Example Author", pluginInformation.getAuthor());
-         assertEquals(PluginUtils.PluginType.FILTER, pluginInformation.getCategory());
+         assertEquals(PluginType.FILTER, pluginInformation.getCategory());
          assertEquals("https://example.com", pluginInformation.getLink());
          assertEquals(mu, pluginInformation.getUrl());
          assertFalse(pluginInformation.isBundled());

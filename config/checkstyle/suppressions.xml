@@ -72,8 +72,8 @@
     <suppress checks="ParameterNumber" files="PluginInformation\.java" lines="60"/>
     <suppress checks="ParameterNumber" files="ParseEntry\.java" lines="136,198,233,277"/>
     <suppress checks="ParameterNumber" files="ExternalTMFactory\.java" lines="256,263"/>
-    <suppress checks="FileLength" files="RealProject\.java"/>
-    <suppress checks="ParameterNumber" files="RealProject\.java" lines="1871"/>
+    <suppress checks="(ParameterNumber|FileLength)" files="RealProject\.java"/>
+
     <!-- util/Platform -->
     <suppress files="Platform\.java" checks="ConstantName" lines="61-80"/>
     <!-- util/Preferences -->

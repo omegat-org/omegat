@@ -376,8 +376,7 @@ public class RealProject implements IProject {
             try {
                 loadTranslations(); // load project_save.tmx
                 loadSourceFiles();
-
-                getGlossaryManager().start();
+                startGlossaryManager();
 
                 // This MUST happen after calling loadTranslations()
                 if (remoteRepositoryProvider != null && isOnlineMode) {
@@ -530,7 +529,7 @@ public class RealProject implements IProject {
         flushProcessCache();
         tmMonitor.fin();
         tmOtherLanguagesMonitor.fin();
-        getGlossaryManager().stop();
+        stopGlossaryManager();
         unlockProject();
         Log.logInfoRB("LOG_DATAENGINE_CLOSE");
     }
@@ -1135,7 +1134,7 @@ public class RealProject implements IProject {
                             @Override
                             public void reload(final File file) {
                                 logger.atDebug().setMessage("Reloading glossary file {0}").addArgument(file).log();
-                                getGlossaryManager().fileChanged(file);
+                                notifyGlossaryManagerFileChanged(file);
                             }
 
                             @Override
@@ -1846,6 +1845,27 @@ public class RealProject implements IProject {
             fn = fn.replaceAll(f, t);
         }
         return StringUtil.removeXMLInvalidChars(fn);
+    }
+
+    private void startGlossaryManager() {
+        GlossaryManager gm = getGlossaryManager();
+        if (gm != null) {
+            gm.start();
+        }
+    }
+
+    private void stopGlossaryManager() {
+        GlossaryManager gm = getGlossaryManager();
+        if (gm != null) {
+            gm.stop();
+        }
+    }
+
+    private void notifyGlossaryManagerFileChanged(File file) {
+        GlossaryManager gm = getGlossaryManager();
+        if (gm != null) {
+            gm.fileChanged(file);
+        }
     }
 
     /**

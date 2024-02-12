@@ -333,6 +333,10 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     }
 
     @Override
+    public void refresh() {
+    }
+
+    @Override
     public boolean isOrientationAllLtr() {
         return true;
     }

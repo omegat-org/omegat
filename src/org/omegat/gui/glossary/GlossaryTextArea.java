@@ -194,6 +194,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     /**
      * Refresh content on glossary file changed.
      */
+    @Override
     public void refresh() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
         if (ste != null) {

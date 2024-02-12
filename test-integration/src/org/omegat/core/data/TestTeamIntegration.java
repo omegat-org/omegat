@@ -69,6 +69,7 @@ import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.impl.GITRemoteRepository2;
 import org.omegat.core.team2.impl.SVNAuthenticationManager;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TMXWriter2;
@@ -298,11 +299,13 @@ public final class TestTeamIntegration {
         File f = new File(origDir, "omegat/project_save.tmx");
         TMXWriter2 wr = new TMXWriter2(f, SRC_LANG, TRG_LANG, true, false, true);
         wr.close();
-
         ProjectFileStorage.writeProjectFile(config);
 
         remote.copyFilesFromProjectToRepos("omegat.project", null);
         remote.commitFiles("omegat.project", "Prepare for team test");
+        GlossaryManager.createNewWritableGlossaryFile(config.getWritableGlossaryFile().getAsFile());
+        remote.copyFilesFromProjectToRepos("glossary/glossary.txt", null);
+        remote.commitFiles("glossary/glossary.txt", "Prepare for team test");
         remote.copyFilesFromProjectToRepos("omegat/project_save.tmx", null);
         remote.commitFiles("omegat/project_save.tmx", "Prepare for team test");
 
@@ -320,6 +323,8 @@ public final class TestTeamIntegration {
             config.getRepositories().add(getDef(repoUrl, predictMainType(repoUrl), "/", "/"));
             config.getRepositories().add(getDef(MAP_REPO, MAP_REPO_TYPE, MAP_FILE, "source/" + MAP_FILE));
         }
+        config.setWriteableGlossary("glossary/glossary.txt");
+        config.setGlossaryRoot("glossary");
         return config;
     }
 

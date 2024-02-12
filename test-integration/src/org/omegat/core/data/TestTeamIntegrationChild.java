@@ -25,8 +25,10 @@
 
 package org.omegat.core.data;
 
+
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.io.InputStream;
@@ -35,9 +37,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JFrame;
@@ -52,7 +56,6 @@ import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
-import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
@@ -63,9 +66,14 @@ import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryManager;
+import org.omegat.gui.glossary.GlossaryReaderTSV;
+import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
@@ -102,13 +110,17 @@ public final class TestTeamIntegrationChild {
     static SourceTextEntry steC;
     static long num = 0;
     static long[] v;
-    static Map<String, Long> values = new HashMap<String, Long>();
+    static Map<String, Long> values = new HashMap<>();
+    static Set<String> glossaries = new HashSet<>();
+    static long glossaryIndex = 0;
+    static GlossaryManager glossaryManager;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 6) {
             System.err.println("Wrong arguments count");
             System.exit(1);
         }
+        Thread.currentThread().setName("Child-" + args[0]);
         try {
             source = args[0];
             long time = Long.parseLong(args[1]);
@@ -136,19 +148,23 @@ public final class TestTeamIntegrationChild {
             TestCoreInitializer.initEditor(editor);
 
             ProjectProperties config = TestTeamIntegration.createConfig(repo, new File(dir));
-            new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories(), config);
+            RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(
+                    config.getProjectRootDir(), config.getRepositories(), config);
+            remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
+            remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT, "", false);
 
-            // load project
+            // Prepare project
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));
-            projectProperties.autocreateDirectories();
             String remoteRepoUrl = getRootGitRepositoryMapping(projectProperties.getRepositories());
             if (!repo.equals(remoteRepoUrl)) {
                 setRootGitRepositoryMapping(projectProperties.getRepositories(), repo);
             }
-
+            projectProperties.autocreateDirectories();
             Core.getAutoSave().disable();
             RealProject p = new TestRealProject(projectProperties);
             Core.setProject(p);
+            glossaryManager = new GlossaryManager(new TestGlossaryTextArea());
+            // load project
             p.loadProject(true);
             if (p.isProjectLoaded()) {
                 Core.getAutoSave().enable();
@@ -178,16 +194,26 @@ public final class TestTeamIntegrationChild {
                     Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(0);
 
+                    updateGlossary();
+
                     // change /1..N segment
                     Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(c);
+
+                    checkGlossaryEntries();
                 }
             }
-            Core.getProject().closeProject();
+            // do closeProject as same way as OmegaT close
+            Core.executeExclusively(true, () -> {
+                Core.getProject().saveProject(true);
+                ProjectFactory.closeProject();
+            });
 
             // load again and check
             ProjectFactory.loadProject(projectProperties, true);
             checkAll();
+
+            checkGlossaryEntries();
 
             // check projectProperties
             checkRepoUrl(projectProperties);
@@ -260,7 +286,7 @@ public final class TestTeamIntegrationChild {
             checkTranslationFromFile(tmx, c);
         }
 
-        Core.getProject().iterateByDefaultTranslations(new DefaultTranslationsIterator() {
+        Core.getProject().iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
             public void iterate(String source, TMXEntry trans) {
                 Long prev = values.get(source);
                 if (prev == null) {
@@ -273,6 +299,35 @@ public final class TestTeamIntegrationChild {
                 }
             }
         });
+    }
+
+    static void checkGlossaryEntries() {
+        List<GlossaryEntry> entries = glossaryManager.getLocalEntries();
+        for (String s: glossaries) {
+            boolean found = false;
+            for (GlossaryEntry entry: entries) {
+                if (entry.getSrcText().equals(s)) {
+                    final long index = getGlossaryIndex(s);
+                    final String loc = getGlossaryLoc(index);
+                    final String com = getGlossaryCom(index);
+                    if (!loc.equals(entry.getLocText()))  {
+                        throw new RuntimeException("Glossary error : " + entry.getSrcText()
+                                + " should have loc: " + loc + " but it is " + entry.getLocText());
+                    }
+                    if (!com.equals(entry.getCommentText())) {
+                        throw new RuntimeException("Glossary error : " + entry.getSrcText()
+                                + " should have comment: " + com + " but it is " + entry.getCommentText());
+                    }
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                throw new RuntimeException("Glossary error : glossary entry missing! \"" + s + "\"");
+            }
+        }
+        Log.log("Checked my added" + glossaries.size() + " entries in total " + entries.size()
+                + " writable glossary entries.");
     }
 
     static void checkTranslation(int index) {
@@ -310,6 +365,30 @@ public final class TestTeamIntegrationChild {
         Core.getProject().setTranslation(ste, prep, true, null);
         Log.log("Wrote: " + prep.source + "=" + prep.translation);
         Core.getProject().saveProject(true);
+    }
+
+    static long getGlossaryIndex(String term) {
+        return Long.parseLong(term.substring(term.lastIndexOf('/') + 1));
+    }
+    static String getGlossaryTerm(long index) {
+        return "term/" + source + "/" + index;
+    }
+    static String getGlossaryLoc(long index) {
+        return "loc/" + source + "/" + index;
+    }
+    static String getGlossaryCom(long index) {
+        return "com/" + source + "/" + index;
+    }
+
+    static void updateGlossary() throws Exception {
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        final File out = new File(props.getWriteableGlossary());
+        final String src = getGlossaryTerm(glossaryIndex);
+        final String loc = getGlossaryLoc(glossaryIndex);
+        final String com = getGlossaryCom(glossaryIndex);
+        GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true, out.getPath()));
+        Log.log("Add glossary entry " + src);
+        glossaryIndex++;
     }
 
     static IAutoSave autoSave = new IAutoSave() {
@@ -796,6 +875,26 @@ public final class TestTeamIntegrationChild {
             } else {
                 return en.translation;
             }
+        }
+
+        @Override
+        protected GlossaryManager getGlossaryManager() {
+            return glossaryManager;
+        }
+    }
+
+    private static class TestGlossaryTextArea implements IGlossaries {
+        @Override
+        public List<GlossaryEntry> getDisplayedEntries() {
+            return null;
+        }
+
+        @Override
+        public void showCreateGlossaryEntryDialog(final Frame parent) {
+        }
+
+        @Override
+        public void refresh() {
         }
     }
 }

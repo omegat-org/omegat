@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   44 Enhancement
-  63 Bug fixes
+  68 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -136,6 +136,12 @@
 
   Bug fixes:
 
+  - Debug log in some classes are broken
+  https://sourceforge.net/p/omegat/bugs/1249/
+
+  - XLIFF1 filter produce broken trasnalated file
+  https://sourceforge.net/p/omegat/bugs/1247/
+
   - sdlxliff filter does not display (some) comments
   https://sourceforge.net/p/omegat/bugs/1244/
 
@@ -147,6 +153,9 @@
 
   - Windows launcher does not launch when witout_JRE installer used
   https://sourceforge.net/p/omegat/bugs/1240/
+
+  - OmegaT does not use cached MT result for translated segments
+  https://sourceforge.net/p/omegat/bugs/1238/
 
   - Match statistics are affected by fuzzy match threshold
   https://sourceforge.net/p/omegat/bugs/1236/
@@ -301,6 +310,9 @@
   - MT engines show JSON parser error as translated text
   https://sourceforge.net/p/omegat/bugs/1141/
 
+  - Very slow segment switching with a lot of duplicates
+  https://sourceforge.net/p/omegat/bugs/1131/
+
   - Duplication of some files in the distributed packages
   https://sourceforge.net/p/omegat/bugs/1123/
 
@@ -309,6 +321,9 @@
 
   - Fails to load TM using tags
   https://sourceforge.net/p/omegat/bugs/1090
+
+  - Ctrl+Z incorrectly erases contents of segment Note
+  https://sourceforge.net/p/omegat/bugs/903/
 
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/

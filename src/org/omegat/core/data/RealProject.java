@@ -1134,6 +1134,8 @@ public class RealProject implements IProject {
 
                             @Override
                             public void reload(final File file) {
+                                logger.atDebug().setMessage("Reloading glossary file {0}").addArgument(file).log();
+                                getGlossaryManager().fileChanged(file);
                             }
 
                             @Override

@@ -95,16 +95,16 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
 
     protected DirectoryMonitor monitor;
 
-    private final GlossaryTextArea pane;
+    private final IGlossaries pane;
     private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<String, List<GlossaryEntry>>();
 
     protected File priorityGlossary;
     protected IGlossary[] externalGlossaries;
 
-    public GlossaryManager(final GlossaryTextArea pane) {
+    public GlossaryManager(final IGlossaries pane) {
         this.pane = pane;
 
-        List<IGlossary> gl = new ArrayList<IGlossary>();
+        List<IGlossary> gl = new ArrayList<>();
         for (Class<?> glc : PluginUtils.getGlossaryClasses()) {
             try {
                 gl.add((IGlossary) glc.getDeclaredConstructor().newInstance());

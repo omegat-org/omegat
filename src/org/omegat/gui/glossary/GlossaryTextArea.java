@@ -176,14 +176,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     @Override
     protected void onProjectOpen() {
         clear();
-        Core.getGlossaryManager().start();
     }
 
     @Override
     protected void onProjectClose() {
         clear();
         setText(EXPLANATION);
-        Core.getGlossaryManager().stop();
     }
 
     @Override

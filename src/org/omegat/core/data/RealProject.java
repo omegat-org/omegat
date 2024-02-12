@@ -377,6 +377,8 @@ public class RealProject implements IProject {
                 loadTranslations(); // load project_save.tmx
                 loadSourceFiles();
 
+                getGlossaryManager().start();
+
                 // This MUST happen after calling loadTranslations()
                 if (remoteRepositoryProvider != null && isOnlineMode) {
                     Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
@@ -528,6 +530,7 @@ public class RealProject implements IProject {
         flushProcessCache();
         tmMonitor.fin();
         tmOtherLanguagesMonitor.fin();
+        getGlossaryManager().stop();
         unlockProject();
         Log.logInfoRB("LOG_DATAENGINE_CLOSE");
     }

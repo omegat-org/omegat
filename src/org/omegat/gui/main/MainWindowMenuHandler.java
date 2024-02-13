@@ -347,7 +347,7 @@ public final class MainWindowMenuHandler {
         openFile(toOpen);
     }
 
-    public void projectAccessWritableGlossaryMenuItemActionPerformed(int modifier) {
+    public void projectAccessWriteableGlossaryMenuItemActionPerformed(int modifier) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }

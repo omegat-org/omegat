@@ -376,7 +376,6 @@ public class RealProject implements IProject {
             try {
                 loadTranslations(); // load project_save.tmx
                 loadSourceFiles();
-                startGlossaryManager();
 
                 // This MUST happen after calling loadTranslations()
                 if (remoteRepositoryProvider != null && isOnlineMode) {
@@ -529,7 +528,6 @@ public class RealProject implements IProject {
         flushProcessCache();
         tmMonitor.fin();
         tmOtherLanguagesMonitor.fin();
-        stopGlossaryManager();
         unlockProject();
         Log.logInfoRB("LOG_DATAENGINE_CLOSE");
     }
@@ -1847,33 +1845,11 @@ public class RealProject implements IProject {
         return StringUtil.removeXMLInvalidChars(fn);
     }
 
-    private void startGlossaryManager() {
-        GlossaryManager gm = getGlossaryManager();
-        if (gm != null) {
-            gm.start();
-        }
-    }
-
-    private void stopGlossaryManager() {
-        GlossaryManager gm = getGlossaryManager();
-        if (gm != null) {
-            gm.stop();
-        }
-    }
-
-    private void notifyGlossaryManagerFileChanged(File file) {
-        GlossaryManager gm = getGlossaryManager();
+    protected void notifyGlossaryManagerFileChanged(File file) {
+        GlossaryManager gm = Core.getGlossaryManager();
         if (gm != null) {
             gm.fileChanged(file);
         }
-    }
-
-    /**
-     * Extension point for tests.
-     * @return
-     */
-    protected GlossaryManager getGlossaryManager() {
-        return Core.getGlossaryManager();
     }
 
     protected class LoadFilesCallback extends ParseEntry {

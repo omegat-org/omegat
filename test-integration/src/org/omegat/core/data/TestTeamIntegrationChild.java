@@ -619,7 +619,7 @@ public final class TestTeamIntegrationChild {
         public void lockUI() {
         }
 
-        IMainMenu menu = new IMainMenu() {
+        final IMainMenu menu = new IMainMenu() {
 
             public JMenu getToolsMenu() {
                 return null;
@@ -708,10 +708,6 @@ public final class TestTeamIntegrationChild {
             super(props);
         }
 
-        ProjectTMX mergedTMX;
-        ProjectTMX baseTMX;
-        ProjectTMX headTMX;
-
         @Override
         protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
             Log.log("Base:   " + baseTMX);
@@ -793,57 +789,6 @@ public final class TestTeamIntegrationChild {
                     && base.alternatives.keySet().stream().allMatch(other.alternatives::containsKey);
         }
 
-        protected void mergeTMXOld(ProjectTMX baseTMX, ProjectTMX headTMX) {
-            mergedTMX = new ProjectTMX();
-            this.baseTMX = baseTMX;
-            this.headTMX = headTMX;
-            String s = "info";
-            for (TMXEntry e : baseTMX.getDefaults()) {
-                use(e);
-            }
-            for (TMXEntry e : headTMX.getDefaults()) {
-                TMXEntry eb = baseTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
-                    if (v(eb) > v(e)) {
-                        throw new RuntimeException("Rebase HEAD: wrong concurrent" + s);
-                    }
-                    use(e);
-                } else if (e.source.startsWith(source + "/")) { // my segments
-                    if (v(eb) != v(e)) {
-                        throw new RuntimeException("Rebase HEAD: not equals for current project" + s);
-                    }
-                } else { // other segments
-                    if (v(eb) > v(e)) {
-                        throw new RuntimeException("Rebase HEAD: less value" + s);
-                    }
-                    use(e);
-                }
-            }
-            for (TMXEntry e : projectTMX.getDefaults()) {
-                TMXEntry em = mergedTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
-                    if (v(e) > v(em)) {
-                        use(e);
-                    }
-                } else if (e.source.startsWith(source + "/")) { // my segments
-                    if (v(e) < v(em)) {
-                        throw new RuntimeException("Rebase me: less value" + s);
-                    }
-                    use(e);
-                } else { // other segments
-                    use(em);
-                }
-            }
-
-            projectTMX.replaceContent(mergedTMX);
-        }
-
-        void use(TMXEntry en) {
-            EntryKey k = new EntryKey("file", en.source, null, null, null, null);
-            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source, Collections.emptyList());
-            mergedTMX.setTranslation(ste, en, true);
-        }
-
         long v(TMXEntry e) {
             if (e == null) {
                 return 0;
@@ -868,18 +813,9 @@ public final class TestTeamIntegrationChild {
             }
         }
 
-        String trans(ProjectTMX tmx, TMXEntry e) {
-            TMXEntry en = tmx.getDefaultTranslation(e.source);
-            if (en == null) {
-                return "null";
-            } else {
-                return en.translation;
-            }
-        }
-
         @Override
-        protected GlossaryManager getGlossaryManager() {
-            return glossaryManager;
+        protected void notifyGlossaryManagerFileChanged(File file) {
+            glossaryManager.fileChanged(file);
         }
     }
 

@@ -120,7 +120,7 @@ public final class TestTeamIntegrationChild {
             System.err.println("Wrong arguments count");
             System.exit(1);
         }
-        Thread.currentThread().setName("Child-" + args[0]);
+        Thread.currentThread().setName(args[0]);
         try {
             source = args[0];
             long time = Long.parseLong(args[1]);

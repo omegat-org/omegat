@@ -40,7 +40,6 @@ import org.omegat.util.gui.Styles;
  * Collection of Markers for Bidirectional control characters.
  */
 public class BidiMarkers extends AbstractMarker {
-    private static final List<Mark> EMPTY_LIST = Collections.emptyList();
 
     static final int LRM = 0x200e;
     static final int RLM = 0x200f;
@@ -50,21 +49,27 @@ public class BidiMarkers extends AbstractMarker {
     static final int LRO = 0x202d;
     static final int RLO = 0x202e;
 
-    static final HighlightPainter LRE_BIDI_PAINTER = new BidiPainter(LRE,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    static final HighlightPainter RLE_BIDI_PAINTER = new BidiPainter(RLE,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    static final HighlightPainter LRM_BIDI_PAINTER = new BidiPainter(LRM,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    static final HighlightPainter RLM_BIDI_PAINTER = new BidiPainter(RLM,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    static final HighlightPainter RLO_BIDI_PAINTER = new BidiPainter(RLO,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
-    static final HighlightPainter LRO_BIDI_PAINTER = new BidiPainter(LRO,
-            Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+    private final HighlightPainter lreBidiPainter;
+    private final HighlightPainter rleBidiPainter;
+    private final HighlightPainter lrmBidiPainter;
+    private final HighlightPainter rlmBidiPainter;
+    private final HighlightPainter rloBidiPainter;
+    private final HighlightPainter lroBidiPainter;
 
     public BidiMarkers() throws Exception {
         super();
+        lreBidiPainter = new BidiPainter(LRE,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        rleBidiPainter = new BidiPainter(RLE,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        lrmBidiPainter = new BidiPainter(LRM,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        rlmBidiPainter = new BidiPainter(RLM,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        rloBidiPainter = new BidiPainter(RLO,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
+        lroBidiPainter = new BidiPainter(LRO,
+                Styles.EditorColor.COLOR_BIDIMARKERS.getColor());
     }
 
     @Override
@@ -74,7 +79,7 @@ public class BidiMarkers extends AbstractMarker {
             return null;
         }
         if (!isActive || text == null || text.trim().isEmpty()) {
-            return EMPTY_LIST;
+            return Collections.emptyList();
         }
 
         text = StringUtil.normalizeUnicode(text);
@@ -93,16 +98,16 @@ public class BidiMarkers extends AbstractMarker {
                 Mark mark = new Mark(Mark.ENTRY_PART.TRANSLATION, startPos, i);
                 switch (markCodePoint) {
                 case LRE:
-                    mark.painter = LRE_BIDI_PAINTER;
+                    mark.painter = lreBidiPainter;
                     break;
                 case RLE:
-                    mark.painter = RLE_BIDI_PAINTER;
+                    mark.painter = rleBidiPainter;
                     break;
                 case LRO:
-                    mark.painter = LRO_BIDI_PAINTER;
+                    mark.painter = lroBidiPainter;
                     break;
                 case RLO:
-                    mark.painter = RLO_BIDI_PAINTER;
+                    mark.painter = rloBidiPainter;
                     break;
                 }
                 marks.add(mark);
@@ -111,7 +116,7 @@ public class BidiMarkers extends AbstractMarker {
                 markCodePoint = -1;
             } else if (cp == LRM || cp == RLM) {
                 Mark mark = new Mark(Mark.ENTRY_PART.TRANSLATION, i, i + 1);
-                mark.painter = cp == LRM ? LRM_BIDI_PAINTER : RLM_BIDI_PAINTER;
+                mark.painter = cp == LRM ? lrmBidiPainter : rlmBidiPainter;
                 marks.add(mark);
             } else {
                 markCodePoint = cp;
@@ -123,16 +128,16 @@ public class BidiMarkers extends AbstractMarker {
             Mark mark = new Mark(Mark.ENTRY_PART.TRANSLATION, startPos, startPos);
             switch (markCodePoint) {
             case LRE:
-                mark.painter = LRE_BIDI_PAINTER;
+                mark.painter = lreBidiPainter;
                 break;
             case RLE:
-                mark.painter = RLE_BIDI_PAINTER;
+                mark.painter = rleBidiPainter;
                 break;
             case LRO:
-                mark.painter = LRO_BIDI_PAINTER;
+                mark.painter = lroBidiPainter;
                 break;
             case RLO:
-                mark.painter = RLO_BIDI_PAINTER;
+                mark.painter = rloBidiPainter;
                 break;
             }
             marks.add(mark);

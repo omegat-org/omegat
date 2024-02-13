@@ -36,6 +36,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
@@ -119,4 +120,31 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         translate(filter, filename, Collections.emptyMap(),
                 Collections.singletonMap("Should translate in result.", "Devrait traduire dans le r\u00E9sultat."));
     }
+
+    @Test
+    public void testBugs418() throws Exception {
+        Xliff1Filter filter = new Xliff1Filter();
+        translateXML(filter,
+                "test/data/filters/xliff/filters3/file-XLIFFFilter-cdata-bugs418.xlf");
+    }
+
+    @Test
+    public void testBugs1247() throws Exception {
+        Xliff1Filter filter = new Xliff1Filter();
+        translateXML(filter,
+                "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf");
+    }
+
+    @Test
+    public void testBugs1247_2() throws Exception {
+        String f = "test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf";
+        Xliff1Filter filter = new Xliff1Filter();
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+        checkMultiStart(fi, f);
+        checkMultiNoPrevNext("This is text3", "id1", "//text3.txt", null);
+        checkMultiNoPrevNext("test2", "id2", "//text.txt", null);
+        checkMultiEnd();
+    }
+
+
 }

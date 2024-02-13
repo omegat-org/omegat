@@ -38,21 +38,11 @@ EXIT_CODE=0
 export DURATION=$2
 export TYPE=$1
 
-# check compose V1 then V2, or containerd/nerdctl
-if type docker-compose &> /dev/null ; then
-  docker-compose -f compose.yml up -d server
-  docker-compose -f compose.yml up client || EXIT_CODE=$?
-  docker-compose -f compose.yml down
-elif type docker &> /dev/null ; then
-  docker compose -f compose.yml up -d server
-  docker compose -f compose.yml up client || EXIT_CODE=$?
-  docker compose -f compose.yml down
-elif type nerdctl &> /dev/null ; then
-  nerdctl compose -f compose.yml up -d server
-  nerdctl compose -f compose.yml up client || EXIT_CODE=$?
-  nerdctl compose -f compose.yml down
-else
-  echo Please install docker or nerdctl!
-  EXIT_CODE=2
-fi
+CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>1 || CMD="$(type -p nerdctl)"
+echo select container CLI: $CMD
+$CMD info || false
+
+$CMD compose -f compose.yml up -d server
+$CMD compose -f compose.yml up client || EXIT_CODE=$?
+$CMD compose -f compose.yml down
 exit $EXIT_CODE

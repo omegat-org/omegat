@@ -32,6 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.openxml.EditOpenXMLOptionsDialog;
@@ -49,6 +50,16 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
     private String DOCUMENTS;
     private Pattern TRANSLATABLE;
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(MsOfficeFileFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     /**
      * Defines the documents to read according to options

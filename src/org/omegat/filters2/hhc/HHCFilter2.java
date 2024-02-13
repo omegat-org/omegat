@@ -32,6 +32,8 @@ import java.io.IOException;
 
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
+
+import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
@@ -46,6 +48,16 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class HHCFilter2 extends HTMLFilter2 {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(HHCFilter2.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     protected boolean requirePrevNextFields() {

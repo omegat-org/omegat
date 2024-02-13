@@ -32,11 +32,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.xml.sax.Attributes;
+
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
-import org.xml.sax.Attributes;
 
 /**
  * Filter for Android resources.
@@ -50,7 +52,20 @@ public class AndroidFilter extends XMLFilter {
     static final Set<String> NAMED_TAGS = new HashSet<>(Arrays.asList("/resources/string",
             "/resources/color", "/resources/array", "/resources/string-array", "/resources/integer-array"));
 
-    private String id, idPlurals = "", comment, idComment;
+    private String id;
+    private String idPlurals = "";
+    private String comment;
+    private String idComment;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(AndroidFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public AndroidFilter() {
         super(new AndroidDialect());

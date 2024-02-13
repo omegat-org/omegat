@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -49,6 +50,16 @@ import org.omegat.util.StringUtil;
  */
 public class MagentoFilter extends AbstractFilter {
     protected Map<String, String> align;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(MagentoFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public String getFileFormatName() {
         return OStrings.getString("MAGENTOFILTER_FILTER_NAME");

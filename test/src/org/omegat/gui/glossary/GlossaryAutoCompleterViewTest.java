@@ -147,6 +147,9 @@ public class GlossaryAutoCompleterViewTest extends TestCore {
             @Override
             public void showCreateGlossaryEntryDialog(Frame parent) {
             }
+            @Override
+            public void refresh() {
+            }
         });
         currentEntries.clear();
     }

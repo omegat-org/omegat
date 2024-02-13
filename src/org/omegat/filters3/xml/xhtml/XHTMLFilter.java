@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -47,6 +48,16 @@ import org.omegat.util.OStrings;
  * @author Martin Fleurke
  */
 public class XHTMLFilter extends XMLFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(XHTMLFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     /**
      * Creates a new instance of XHTMLFilter

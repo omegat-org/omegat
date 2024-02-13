@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura.
+ *  Copyright (C) 2024 Hiroshi Miura.
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -22,22 +22,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+package org.omegat.gui.editor.mark;
 
-package org.omegat.gui.editor.marker;
-
-import static java.util.Collections.EMPTY_LIST;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import org.omegat.core.Core;
 import org.omegat.core.TestCore;
-import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.IEditor;
@@ -45,150 +34,154 @@ import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
-import org.omegat.gui.editor.mark.BidiMarkers;
-import org.omegat.gui.editor.mark.IMarker;
-import org.omegat.gui.editor.mark.Mark;
 
-public class BiDiMarkersTest extends TestCore {
+public class MarkerTestBase extends TestCore {
 
-    @Before
-    public void preUp() {
-        TestCoreInitializer.initEditor(editor);
-    }
 
-    @Test
-    public void testBidiMarkersDisabled() throws Exception {
-        IMarker marker = new BidiMarkers();
-        Core.getEditor().getSettings().setMarkBidi(false);
-        assertNull(marker.getMarksForEntry(null, null, null, true));
-    }
+    IEditorSettings editorSettings = new MockEditorSettings();
 
-    @Test
-    public void testBidiMarkersNotActive() throws Exception {
-        IMarker marker = new BidiMarkers();
-        Core.getEditor().getSettings().setMarkBidi(true);
-        assertEquals(EMPTY_LIST, marker.getMarksForEntry(null, null, null, false));
-    }
+    IEditor editor = new MockEditor();
 
-    @Test
-    public void testBidiMarkersNoBidi() throws Exception {
-        IMarker marker = new BidiMarkers();
-        Core.getEditor().getSettings().setMarkBidi(true);
-        EntryKey ek = new EntryKey("file", "edit", "10", null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(ek, 0, null, null, new ArrayList<>());
-        assertEquals(EMPTY_LIST, marker.getMarksForEntry(ste, "edit", "edit", true));
-    }
+    public static class MockEditorSettings implements IEditorSettings {
 
-    final IEditorSettings editorSettings = new IEditorSettings() {
-        private boolean enabled = false;
+        private boolean useTabForAdvance;
+        private boolean markTranslated;
+        private boolean markUntranslated;
+        private boolean markAutoPopulated;
+        private boolean displaySegmentSources;
+        private boolean markNonUniqueSegments;
+        private boolean markNoted;
+        private boolean markNBSP;
+        private boolean markWhitespace;
+        private boolean markParagraphDelimitations;
+        private boolean markBidi;
+        private String displayModificationInfo;
+        private boolean autoSpellChecking;
+        private boolean viewSourceBold;
+        private boolean viewActiveSourceBold;
+        private boolean markFirstNonUnique;
+        private boolean markGlossaryMatches;
+        private boolean markLanguageChecker;
+        private boolean doFontFallback;
 
         @Override
         public boolean isUseTabForAdvance() {
-            return false;
+            return useTabForAdvance;
         }
 
         @Override
         public void setUseTabForAdvance(boolean useTabForAdvance) {
+            this.useTabForAdvance = useTabForAdvance;
         }
 
         @Override
         public boolean isMarkTranslated() {
-            return false;
+            return markTranslated;
         }
 
         @Override
         public void setMarkTranslated(boolean markTranslated) {
+            this.markTranslated = markTranslated;
         }
 
         @Override
         public boolean isMarkUntranslated() {
-            return false;
+            return markUntranslated;
         }
 
         @Override
         public void setMarkUntranslated(boolean markUntranslated) {
+            this.markUntranslated = markUntranslated;
         }
 
         @Override
         public boolean isMarkAutoPopulated() {
-            return false;
+            return markAutoPopulated;
         }
 
         @Override
         public void setMarkAutoPopulated(boolean markAutoPopulated) {
+            this.markAutoPopulated = markAutoPopulated;
         }
 
         @Override
         public boolean isDisplaySegmentSources() {
-            return false;
+            return displaySegmentSources;
         }
 
         @Override
         public void setDisplaySegmentSources(boolean displaySegmentSources) {
+            this.displaySegmentSources = displaySegmentSources;
         }
 
         @Override
         public boolean isMarkNonUniqueSegments() {
-            return false;
+            return markNonUniqueSegments;
         }
 
         @Override
         public void setMarkNonUniqueSegments(boolean markNonUniqueSegments) {
+            this.markNonUniqueSegments = markNonUniqueSegments;
         }
 
         @Override
         public boolean isMarkNotedSegments() {
-            return false;
+            return markNoted;
         }
 
         @Override
         public void setMarkNotedSegments(boolean markNotedSegments) {
+            markNoted = markNotedSegments;
         }
 
         @Override
         public boolean isMarkNBSP() {
-            return false;
+            return markNBSP;
         }
 
         @Override
         public void setMarkNBSP(boolean markNBSP) {
+            this.markNBSP = markNBSP;
         }
 
         @Override
         public boolean isMarkWhitespace() {
-            return false;
+            return markWhitespace;
         }
 
         @Override
         public void setMarkWhitespace(boolean markWhitespace) {
+            this.markWhitespace = markWhitespace;
         }
 
         @Override
         public boolean isMarkBidi() {
-            return enabled;
+            return markBidi;
         }
 
         @Override
         public void setMarkBidi(boolean markBidi) {
-            enabled = markBidi;
+            this.markBidi = markBidi;
         }
 
         @Override
         public boolean isAutoSpellChecking() {
-            return false;
+            return autoSpellChecking;
         }
 
         @Override
         public void setAutoSpellChecking(boolean isNeedToSpell) {
+            this.autoSpellChecking = isNeedToSpell;
         }
 
         @Override
         public boolean isDoFontFallback() {
-            return false;
+            return doFontFallback;
         }
 
         @Override
         public void setDoFontFallback(boolean doFallback) {
+            this.doFontFallback = doFallback;
         }
 
         @Override
@@ -210,33 +203,36 @@ public class BiDiMarkersTest extends TestCore {
 
         @Override
         public boolean isMarkLanguageChecker() {
-            return false;
+            return markLanguageChecker;
         }
 
         @Override
         public void setMarkLanguageChecker(boolean markLanguageChecker) {
+            this.markLanguageChecker = markLanguageChecker;
         }
 
         @Override
         public boolean isMarkGlossaryMatches() {
-            return false;
+            return markGlossaryMatches;
         }
 
         @Override
         public void setMarkGlossaryMatches(boolean markGlossaryMatches) {
+            this.markGlossaryMatches = markGlossaryMatches;
         }
 
         @Override
         public void setMarkParagraphDelimitations(boolean mark) {
+            markParagraphDelimitations = mark;
         }
 
         @Override
         public boolean isMarkParagraphDelimitations() {
-            return false;
+            return markParagraphDelimitations;
         }
     };
 
-    final IEditor editor = new IEditor() {
+    public class MockEditor implements IEditor {
 
         @Override
         public void windowDeactivated() {
@@ -352,7 +348,7 @@ public class BiDiMarkersTest extends TestCore {
 
         @Override
         public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-                String markerClassName) {
+                                          String markerClassName) {
         }
 
         @Override
@@ -464,5 +460,11 @@ public class BiDiMarkersTest extends TestCore {
         @Override
         public void activateEntry() {
         }
-    };
+
+        @Override
+        public boolean isOrientationAllLtr() {
+            return true;
+        }
+
+    }
 }

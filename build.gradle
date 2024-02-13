@@ -1430,7 +1430,13 @@ tasks.jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ["gen/core/**/*", "org/omegat/**/gui/*", "org/omegat/**/data/*"])
+            fileTree(dir: it,
+                    exclude: ["gen/core/**/*", "org/omegat/util/gui/*", "org/omegat/gui/dialogs/*",
+                              "org/omegat/externalfinder/gui/*", "org/omegat/gui/filters2/*", "org/omegat/core/team2/gui/*",
+                              "org/omegat/gui/properties", "org/omegat/gui/exttrans/*", "org/omegat/gui/theme",
+                              "org/omegat/gui/comments/*", "org/omegat/gui/editor/chartable/*",
+                              "org/omegat/gui/segmentation/*", "org/omegat/util/xml/*", "org/omegat/gui/preferences/*",
+                              "org/omegat/**/data/*", "org/omegat/**/datamodels/*"])
         }))
     }
 }

@@ -49,7 +49,7 @@ public class GlossaryReaderTSVTest extends TestCore {
         assertEquals("https://fr.wikipedia.org/wiki/Science_du_syst%C3%A8me_Terre",
                 g.get(2).getCommentText());
         assertEquals("손가락", g.get(3).getSrcText());
-        assertEquals("Korean term", g.get(3).getLocText());
+        assertEquals("Korean Term", g.get(3).getLocText());
 
         g = GlossaryReaderTSV.read(new File("test/data/glossaries/testUTF16LE.txt"), false);
         assertEquals(2, g.size());

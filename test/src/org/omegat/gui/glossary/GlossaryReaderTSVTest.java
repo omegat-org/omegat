@@ -53,11 +53,11 @@ public class GlossaryReaderTSVTest extends TestCore {
 
         g = GlossaryReaderTSV.read(new File("test/data/glossaries/testUTF16LE.txt"), false);
         assertEquals(2, g.size());
-        assertEquals(g.get(0).getSrcText(), "UTF");
-        assertEquals(g.get(0).getLocText(), "Unicode Transformation Format");
-        assertEquals(g.get(0).getCommentText(), "Comment #1");
-        assertEquals(g.get(1).getSrcText(), "LE");
-        assertEquals(g.get(1).getLocText(), "Little Endian");
-        assertEquals(g.get(1).getCommentText(), "Comment #2");
+        assertEquals("UTF", g.get(0).getSrcText());
+        assertEquals("Unicode Transformation Format", g.get(0).getLocText());
+        assertEquals("Comment #1", g.get(0).getCommentText());
+        assertEquals("LE", g.get(1).getSrcText());
+        assertEquals("Little Endian", g.get(1).getLocText());
+        assertEquals("Comment #2", g.get(1).getCommentText());
     }
 }

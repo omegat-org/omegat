@@ -68,8 +68,8 @@ public class GlossarySearcherTest extends TestCore {
 
     @Test
     public void testIsCjkMatchJapanese() {
-        String sourceText = "場所";
-        String targetText = "塗布";
+        String sourceText = "\u5834\u6240";
+        String targetText = "\u5857\u5E03";
         Language language = new Language("ja");
         setupProject(language);
         assertTrue(GlossarySearcher.isCjkMatch(sourceText, sourceText));
@@ -78,8 +78,8 @@ public class GlossarySearcherTest extends TestCore {
 
     @Test
     public void testGlossarySearcherKorean() {
-        String segmentText = "열 손가락 깨물어 안 아픈 손가락이 없다";
-        String sourceText = "손가락";
+        String segmentText = "\uC5F4 \uC190\uAC00\uB77D \uAE68\uBB3C\uC5B4 \uC548 \uC544\uD508 \uC190\uAC00\uB77D\uC774 \uC5C6\uB2E4";
+        String sourceText = "\uC190\uAC00\uB77D";
         assertTrue(segmentText.contains(sourceText));
         String translationText = "Korean term";
         String commentText = "comment";
@@ -94,7 +94,7 @@ public class GlossarySearcherTest extends TestCore {
 
     @Test
     public void testGlossarySearcherJapanese1() {
-        String sourceText = "場所";
+        String sourceText = "\u5834\u6240";
         String translationText = "translation";
         String commentText = "comment";
         ITokenizer tok = new LuceneJapaneseTokenizer();

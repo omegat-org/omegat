@@ -44,20 +44,20 @@ public class GlossaryReaderTSVTest extends TestCore {
         assertEquals("koo moo", g.get(0).getLocText());
         assertEquals("question", g.get(1).getSrcText());
         assertEquals("qqqqq", g.get(1).getLocText());
-        assertEquals("地球システム", g.get(2).getSrcText());
+        assertEquals("\u5730\u7403\u30B7\u30B9\u30C6\u30E0", g.get(2).getSrcText());
         assertEquals("System Terre", g.get(2).getLocText());
         assertEquals("https://fr.wikipedia.org/wiki/Science_du_syst%C3%A8me_Terre",
                 g.get(2).getCommentText());
-        assertEquals("손가락", g.get(3).getSrcText());
+        assertEquals("\uC190\uAC00\uB77D", g.get(3).getSrcText());
         assertEquals("Korean Term", g.get(3).getLocText());
 
         g = GlossaryReaderTSV.read(new File("test/data/glossaries/testUTF16LE.txt"), false);
         assertEquals(2, g.size());
-        assertEquals(g.get(0).getSrcText(), "UTF");
-        assertEquals(g.get(0).getLocText(), "Unicode Transformation Format");
-        assertEquals(g.get(0).getCommentText(), "Comment #1");
-        assertEquals(g.get(1).getSrcText(), "LE");
-        assertEquals(g.get(1).getLocText(), "Little Endian");
-        assertEquals(g.get(1).getCommentText(), "Comment #2");
+        assertEquals("UTF", g.get(0).getSrcText());
+        assertEquals("Unicode Transformation Format", g.get(0).getLocText());
+        assertEquals("Comment #1", g.get(0).getCommentText());
+        assertEquals("LE", g.get(1).getSrcText());
+        assertEquals("Little Endian", g.get(1).getLocText());
+        assertEquals("Comment #2", g.get(1).getCommentText());
     }
 }

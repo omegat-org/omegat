@@ -7,6 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -34,15 +35,17 @@ import java.util.logging.Logger;
 
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.statistics.FindMatches;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.util.OConsts;
 
 /**
- * Find matches in separate thread then show result in the matches pane.
+ * Find matches in separate thread then show a result in the matches' pane.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  */
 public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private static final Logger LOGGER = Logger.getLogger(FindMatchesThread.class.getName());
@@ -52,9 +55,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
 
     /**
      * Entry which is processed currently.
-     *
-     * If entry in controller was changed, it means user has moved to another entry, and there is no sense to
-     * continue.
+     * <p>
+     * If entry in controller was changed, it means the user has moved to
+     * another entry, and there is no sense to continue.
      */
     private final SourceTextEntry processedEntry;
 
@@ -79,12 +82,23 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         long before = System.currentTimeMillis();
 
         try {
-            FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
-            List<NearString> result = finder.search(processedEntry.getSrcText(), true, true, this::isEntryChanged);
+            List<NearString> result = finderSearch(project, processedEntry.getSrcText(), this::isEntryChanged);
             LOGGER.finer(() -> "Time for find matches: " + (System.currentTimeMillis() - before));
             return result;
         } catch (FindMatches.StoppedException ex) {
             throw new EntryChangedException();
         }
+    }
+
+    /**
+     * Search matches (static for test purpose).
+     * @param project OmegaT project.
+     * @param srcText source text to look for.
+     * @param isEntryChanged stop and raise StopException when it returns true.
+     * @return result as a list of NearString.
+     */
+    protected static List<NearString> finderSearch(IProject project, String srcText, IStopped isEntryChanged) {
+        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+        return finder.search(srcText, true, true, isEntryChanged);
     }
 }

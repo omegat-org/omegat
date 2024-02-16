@@ -122,6 +122,8 @@ public final class OConsts {
     /** Default name for spelling dictionary directory */
     public static final String SPELLING_DICT_DIR = "spelling";
 
+    public static final String SEPARATE_SEGMENT_MATCHER = "from_separate_segment_macher";
+
     /**
      * Glossary files extensions
      */

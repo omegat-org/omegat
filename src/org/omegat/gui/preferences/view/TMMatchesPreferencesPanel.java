@@ -65,6 +65,11 @@ public class TMMatchesPreferencesPanel extends JPanel {
         tagHandlingLabel = new javax.swing.JLabel();
         displayLevel2Tags = new javax.swing.JCheckBox();
         useSlash = new javax.swing.JCheckBox();
+        alwaysSeparateSegmentMatch = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        separateSegmentMatchLabel = new javax.swing.JLabel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        separateSegmentMachSpinner = new javax.swing.JSpinner();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel5 = new javax.swing.JPanel();
         keepForeignMatches = new javax.swing.JCheckBox();
@@ -134,6 +139,29 @@ public class TMMatchesPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); // NOI18N
         jPanel7.add(useSlash);
 
+        org.openide.awt.Mnemonics.setLocalizedText(alwaysSeparateSegmentMatch, OStrings.getString("EXT_TMX_ALWAYS_SEPARATE_SEGMENT_MATCH"));
+        alwaysSeparateSegmentMatch.setMinimumSize(new java.awt.Dimension(100, 23));
+        alwaysSeparateSegmentMatch.setPreferredSize(new java.awt.Dimension(100, 23));
+        jPanel7.add(alwaysSeparateSegmentMatch);
+
+        jPanel2.setAlignmentX(0.0F);
+        jPanel2.setMaximumSize(new java.awt.Dimension(379, 32767));
+        jPanel2.setMinimumSize(new java.awt.Dimension(379, 23));
+        jPanel2.setPreferredSize(new java.awt.Dimension(379, 46));
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(separateSegmentMatchLabel, OStrings.getString("EXT_TMX_PENALTY_FOR_SEPARATE_SEGMENT_MATCH"));
+        separateSegmentMatchLabel.setMaximumSize(new java.awt.Dimension(306, 23));
+        separateSegmentMatchLabel.setMinimumSize(new java.awt.Dimension(77, 23));
+        separateSegmentMatchLabel.setPreferredSize(new java.awt.Dimension(306, 23));
+        jPanel2.add(separateSegmentMatchLabel);
+        jPanel2.add(filler6);
+
+        separateSegmentMachSpinner.setMaximumSize(new java.awt.Dimension(60, 32767));
+        jPanel2.add(separateSegmentMachSpinner);
+
+        jPanel7.add(jPanel2);
+
         add(jPanel7);
         add(filler3);
 
@@ -144,6 +172,7 @@ public class TMMatchesPreferencesPanel extends JPanel {
         jPanel5.add(keepForeignMatches);
 
         foreignPenaltyPanel.setAlignmentX(0.0F);
+        foreignPenaltyPanel.setPreferredSize(new java.awt.Dimension(379, 46));
         foreignPenaltyPanel.setLayout(new javax.swing.BoxLayout(foreignPenaltyPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         org.openide.awt.Mnemonics.setLocalizedText(foreignPenaltyLabel, OStrings.getString("EXT_TMX_PENALTY_FOR_FOREIGN_MATCHES")); // NOI18N
@@ -190,11 +219,13 @@ public class TMMatchesPreferencesPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    javax.swing.JCheckBox alwaysSeparateSegmentMatch;
     javax.swing.JCheckBox displayLevel2Tags;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler6;
     private javax.swing.JLabel foreignPenaltyLabel;
     javax.swing.JPanel foreignPenaltyPanel;
     javax.swing.JSpinner foreignPenaltySpinner;
@@ -202,6 +233,7 @@ public class TMMatchesPreferencesPanel extends JPanel {
     private javax.swing.JLabel fuzzyThresholdLabel;
     javax.swing.JButton insertButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -209,6 +241,8 @@ public class TMMatchesPreferencesPanel extends JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     javax.swing.JCheckBox keepForeignMatches;
     javax.swing.JTextArea matchesTemplate;
+    javax.swing.JSpinner separateSegmentMachSpinner;
+    private javax.swing.JLabel separateSegmentMatchLabel;
     private javax.swing.JLabel sortMatchesLabel;
     javax.swing.JComboBox<SORT_KEY> sortMatchesList;
     private javax.swing.JLabel tagHandlingLabel;

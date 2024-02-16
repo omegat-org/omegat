@@ -278,6 +278,8 @@ public class FindMatches {
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
             Language targetLang = project.getProjectProperties().getTargetLanguage();
             List<String> segments = Core.getSegmenter().segment(sourceLang, srcText, spaces, brules);
+            int penalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_SEPARATE_SEGMENT_MATCHES,
+                    Preferences.PENALTY_FOR_SEPARATE_SEGMENT_MATCHES_DEFAULT);
             if (segments.size() > 1) {
                 List<String> fsrc = new ArrayList<String>(segments.size());
                 List<String> ftrans = new ArrayList<String>(segments.size());
@@ -301,8 +303,8 @@ public class FindMatches {
                 String foundSrc = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 // glue found translations
                 String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
-                        0, null);
+                 processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, penalty,
+                         OConsts.SEPARATE_SEGMENT_MATCHER, "", 0, "", 0, null);
             }
         }
 

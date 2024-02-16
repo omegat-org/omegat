@@ -226,6 +226,8 @@ public final class Preferences {
      */
     public static final String PENALTY_FOR_FOREIGN_MATCHES = "penalty_foreign_matches";
     public static final int PENALTY_FOR_FOREIGN_MATCHES_DEFAULT = 30;
+    public static final String PENALTY_FOR_SEPARATE_SEGMENT_MATCHES = "penalty_separate_segment_maches";
+    public static final int PENALTY_FOR_SEPARATE_SEGMENT_MATCHES_DEFAULT = 30;
 
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
@@ -357,6 +359,8 @@ public final class Preferences {
     public static final String EXT_TMX_KEEP_FOREIGN_MATCH = "keep_foreign_matches";
     /** External TMX options: Fuzzy Threshold **/
     public static final String EXT_TMX_FUZZY_MATCH_THRESHOLD = "ext_tmx_fuzzy_match_threshold";
+
+    public static final String EXT_TMX_ALWAYS_SEPARATE_SEGMENT_MATCH = "ext_tmx_always_separate_segment_match";
 
     /** View options: Show all sources in bold */
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";

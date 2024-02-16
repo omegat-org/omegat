@@ -38,6 +38,7 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.statistics.FindMatches;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.util.OConsts;
+import org.omegat.util.Preferences;
 
 /**
  * Find matches in separate thread then show result in the matches pane.
@@ -79,7 +80,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         long before = System.currentTimeMillis();
 
         try {
-            FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+            FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, Preferences.isPreferenceDefault(
+                    Preferences.EXT_TMX_ALWAYS_SEPARATE_SEGMENT_MATCH, true), false);
             List<NearString> result = finder.search(processedEntry.getSrcText(), true, true, this::isEntryChanged);
             LOGGER.finer(() -> "Time for find matches: " + (System.currentTimeMillis() - before));
             return result;

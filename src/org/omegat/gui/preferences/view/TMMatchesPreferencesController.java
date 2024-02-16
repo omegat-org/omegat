@@ -101,6 +101,12 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.matchesTemplate.setCaretPosition(0);
         panel.fuzzyMatchThreshold.setValue(Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
                 OConsts.FUZZY_MATCH_THRESHOLD));
+        panel.alwaysSeparateSegmentMatch.setSelected(Preferences.isPreferenceDefault(
+                Preferences.EXT_TMX_ALWAYS_SEPARATE_SEGMENT_MATCH, true));
+        panel.separateSegmentMachSpinner.setEnabled(panel.alwaysSeparateSegmentMatch.isSelected());
+        panel.separateSegmentMachSpinner.setValue(Preferences.getPreferenceDefault(
+                Preferences.PENALTY_FOR_SEPARATE_SEGMENT_MATCHES,
+                Preferences.PENALTY_FOR_SEPARATE_SEGMENT_MATCHES_DEFAULT));
     }
 
     @Override
@@ -114,6 +120,8 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.matchesTemplate.setText(MatchesVarExpansion.DEFAULT_TEMPLATE);
         panel.matchesTemplate.setCaretPosition(0);
         panel.fuzzyMatchThreshold.setValue(OConsts.FUZZY_MATCH_THRESHOLD);
+        panel.alwaysSeparateSegmentMatch.setSelected(true);
+        panel.separateSegmentMachSpinner.setValue(Preferences.PENALTY_FOR_SEPARATE_SEGMENT_MATCHES_DEFAULT);
     }
 
     @Override
@@ -129,5 +137,7 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, panel.keepForeignMatches.isSelected());
         Preferences.setPreference(Preferences.PENALTY_FOR_FOREIGN_MATCHES, panel.foreignPenaltySpinner.getValue());
         Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, panel.fuzzyMatchThreshold.getValue());
+        Preferences.setPreference(Preferences.EXT_TMX_ALWAYS_SEPARATE_SEGMENT_MATCH, panel.alwaysSeparateSegmentMatch.isSelected());
+        Preferences.setPreference(Preferences.PENALTY_FOR_SEPARATE_SEGMENT_MATCHES, panel.separateSegmentMachSpinner.getValue());
     }
 }

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura
+ Copyright (C) 2021-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -55,10 +55,13 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Rule;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.LuceneCJKTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
+import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -71,6 +74,7 @@ public class FindMatchesTest {
     private static final File TMX_MATCH_EN_CA = new File("test/data/tmx/test-match-stat-en-ca.tmx");
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
+    private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
     private static Path tmpDir;
 
 
@@ -214,6 +218,35 @@ public class FindMatchesTest {
         assertEquals("ZZZ", result.get(2).translation); // sr
     }
 
+    @Test
+    public void testSearchBUGS1251() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("ja");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        IProject project = new TestProject(prop, null, TMX_SEGMENT, new LuceneCJKTokenizer(),
+                new LuceneFrenchTokenizer(), segmenter);
+        Core.setProject(project);
+        SourceTextEntry ste = project.getAllEntries().get(1);
+        Language sourceLanguage = prop.getSourceLanguage();
+        String srcText = ste.getSrcText();
+        List<StringBuilder> spaces = new ArrayList<>();
+        List<Rule> brules = new ArrayList<>();
+        List<String> segments = segmenter.segment(sourceLanguage, srcText, spaces, brules);
+        assertEquals(2, segments.size());
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
+                true, 30);
+        List<NearString> result = finder.search(srcText, true, true, iStopped);
+        assertEquals(srcText, result.get(0).source);
+        assertEquals(1, result.size());
+        assertEquals("TM", result.get(0).comesFrom.name());
+        assertEquals(90, result.get(0).scores[0].score);
+        assertEquals("weird behavior", result.get(0).translation);
+     }
+
     @BeforeClass
     public static void setUpClass() throws Exception {
         tmpDir = Files.createTempDirectory("omegat");
@@ -308,6 +341,8 @@ public class FindMatchesTest {
         public List<SourceTextEntry> getAllEntries() {
             List<SourceTextEntry> ste = new ArrayList<>();
             ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
+                    1, null, null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", "地力の搾取と浪費が現われる。(1)", null, "", "", null),
                     1, null, null, Collections.emptyList()));
             return ste;
         }

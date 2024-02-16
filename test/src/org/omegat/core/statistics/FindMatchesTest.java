@@ -71,6 +71,7 @@ public class FindMatchesTest {
 
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
+    private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
     private static Path tmpDir;
 
     /**
@@ -146,6 +147,25 @@ public class FindMatchesTest {
         assertEquals(3, result.size());
     }
 
+    @Test
+    public void testSearchBUGS1248() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("ja");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        IProject project = new TestProject(prop, TMX_SEGMENT);
+        Core.setProject(project);
+        Core.setSegmenter(new Segmenter(new SRX()));
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+        List<NearString> result = finder.search("地力の搾取と浪費が現われる。(1)", true, true, iStopped);
+        assertEquals("地力の搾取と浪費が現われる。(1)", result.get(0).source);
+        assertEquals("weird behavior", result.get(0).translation);
+        assertEquals("TM", result.get(0).comesFrom.name());
+        assertEquals(90, result.get(0).scores[0].score);
+    }
+
     @BeforeClass
     public static void setUpClass() throws Exception {
         tmpDir = Files.createTempDirectory("omegat");
@@ -182,6 +202,8 @@ public class FindMatchesTest {
             List<SourceTextEntry> ste = new ArrayList<>();
             ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
                     1, null, null, new ArrayList<>()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", "地力。(1)", null, "", "", null),
+                    1, null, null, Collections.emptyList()));
             return ste;
         }
 

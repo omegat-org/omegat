@@ -99,6 +99,19 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      */
     protected static List<NearString> finderSearch(IProject project, String srcText, IStopped isEntryChanged) {
         FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
-        return finder.search(srcText, true, true, isEntryChanged);
+        List<NearString> result = finder.search(srcText, true, true, isEntryChanged);
+        if (!project.getProjectProperties().isSentenceSegmentingEnabled()) {
+            /* TODO: enable this when refactoring done instead of addAll
+            for (NearString entry: finder.searchSegmented(processedEntry.getSrcText(),
+                    isEntryChanged)){
+                if (result.stream().noneMatch(resultEntry -> entry.translation.equals(resultEntry.translation))) {
+                    result.add(entry);
+                }
+            }
+            */
+            finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, true);
+            result.addAll(finder.searchSegmented(srcText, isEntryChanged));
+        }
+        return result;
     }
 }

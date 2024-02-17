@@ -41,6 +41,7 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.LuceneCJKTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneJapaneseTokenizer;
 import org.omegat.util.Language;
@@ -67,8 +68,8 @@ public class GlossarySearcherTest extends TestCore {
 
     @Test
     public void testIsCjkMatchJapanese() {
-        String sourceText = "\u5834\u6240";
-        String targetText = "\u5857\u5E03";
+        String sourceText = "場所";
+        String targetText = "塗布";
         Language language = new Language("ja");
         setupProject(language);
         assertTrue(GlossarySearcher.isCjkMatch(sourceText, sourceText));
@@ -76,8 +77,24 @@ public class GlossarySearcherTest extends TestCore {
     }
 
     @Test
+    public void testGlossarySearcherKorean() {
+        String segmentText = "열 손가락 깨물어 안 아픈 손가락이 없다";
+        String sourceText = "손가락";
+        assertTrue(segmentText.contains(sourceText));
+        String translationText = "Korean term";
+        String commentText = "comment";
+        ITokenizer tok = new LuceneCJKTokenizer();
+        Language language = new Language("ko");
+        setupProject(language);
+        List<GlossaryEntry> entries = Collections.singletonList(new GlossaryEntry(sourceText,
+                translationText, commentText, true, "origin"));
+        List<GlossaryEntry> result = glossarySearcherCommon(segmentText, tok, language, entries);
+        assertEquals(1, result.size());
+    }
+
+    @Test
     public void testGlossarySearcherJapanese1() {
-        String sourceText = "\u5834\u6240";
+        String sourceText = "場所";
         String translationText = "translation";
         String commentText = "comment";
         ITokenizer tok = new LuceneJapaneseTokenizer();

@@ -90,6 +90,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -1130,6 +1131,8 @@ public class RealProject implements IProject {
 
                             @Override
                             public void reload(final File file) {
+                                logger.atDebug().setMessage("Reloading glossary file {0}").addArgument(file).log();
+                                notifyGlossaryManagerFileChanged(file);
                             }
 
                             @Override
@@ -1840,6 +1843,13 @@ public class RealProject implements IProject {
             fn = fn.replaceAll(f, t);
         }
         return StringUtil.removeXMLInvalidChars(fn);
+    }
+
+    protected void notifyGlossaryManagerFileChanged(File file) {
+        GlossaryManager gm = Core.getGlossaryManager();
+        if (gm != null) {
+            gm.fileChanged(file);
+        }
     }
 
     protected class LoadFilesCallback extends ParseEntry {

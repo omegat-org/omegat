@@ -155,7 +155,8 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         }
         if (file.exists()) {
             try {
-                List<GlossaryEntry> entries = loadGlossaryFile(file);
+                boolean isPriority = priorityGlossary != null && priorityGlossary.equals(file);
+                List<GlossaryEntry> entries = loadGlossaryFile(file, isPriority);
                 if (entries != null) {
                     synchronized (this) {
                         Log.logInfoRB("CT_LOADING_GLOSSARY_DETAILS", entries.size(), file.getName());
@@ -184,10 +185,9 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     /**
-     * Loads one glossary file. It chooses and calls required reader.
+     * Loads one glossary file. It chooses and calls the required reader.
      */
-    private List<GlossaryEntry> loadGlossaryFile(final File file) throws Exception {
-        boolean isPriority = priorityGlossary.equals(file);
+    private List<GlossaryEntry> loadGlossaryFile(File file, boolean isPriority) throws Exception {
         String fnameLower = file.getName().toLowerCase(Locale.ENGLISH);
         if (fnameLower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", file.getName());

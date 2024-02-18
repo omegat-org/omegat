@@ -43,6 +43,7 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.text.JTextComponent;
@@ -105,7 +106,7 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-public final class MainWindowMenuHandler {
+public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     private final MainWindow mainWindow;
@@ -1022,7 +1023,9 @@ public final class MainWindowMenuHandler {
      * Shows About dialog
      */
     public void helpAboutMenuItemActionPerformed() {
-        new AboutDialog(mainWindow).setVisible(true);
+        JDialog aboutDialog = new AboutDialog(mainWindow);
+        aboutDialog.setName(AboutDialog.DIALOG_NAME);
+        aboutDialog.setVisible(true);
     }
 
     /**

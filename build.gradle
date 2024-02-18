@@ -192,6 +192,11 @@ sourceSets {
             srcDir 'test/fixtures'
         }
     }
+    testAcceptance {
+        java {
+            srcDir 'test-acceptance/src'
+        }
+    }
     testIntegration {
         java {
             srcDir 'test-integration/src'
@@ -331,6 +336,7 @@ dependencies {
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
+    testFixturesImplementation(libs.assertj.swing.junit)
 
     testImplementation(libs.xmlunit.legacy)
     // LanguageTool unit tests exercise these languages
@@ -350,6 +356,11 @@ dependencies {
 
     // genMac only
     genMac(libs.omegat.appbundler)
+
+    testAcceptanceImplementation sourceSets.main.output
+    testAcceptanceImplementation(testFixtures(project.rootProject))
+    testAcceptanceImplementation(libs.assertj.swing.junit)
+    testAcceptanceImplementation(libs.bundles.jackson)
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))

@@ -40,13 +40,20 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,16 +76,14 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
-import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.DataUtils;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.matching.NearString;
-import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
+import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -93,6 +98,8 @@ import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.FloatingDialog;
+import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
+import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 
 /**
  * The main window of OmegaT application (unless the application is started in
@@ -111,10 +118,11 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  * @author Piotr Kulik
  * @author Didier Briel
  */
-@SuppressWarnings("serial")
 public class MainWindow implements IMainWindow {
+
+    public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
     private final JFrame applicationFrame;
-    public BaseMainWindowMenu menu;
+    protected BaseMainWindowMenu menu;
 
     /**
      * The font for main window (source and target text) and for match and
@@ -130,7 +138,6 @@ public class MainWindow implements IMainWindow {
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
-    @SuppressWarnings("unchecked")
     public MainWindow() throws IOException {
         applicationFrame = new JFrame();
         applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -150,8 +157,13 @@ public class MainWindow implements IMainWindow {
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
-                MainWindowUI.initializeScreenLayout(MainWindow.this);
-
+                initializeScreenLayout();
+                loadScreenLayoutFromPreferences();
+                // Ensure any "closed" Dockables are visible. These can be newly
+                // added panes not included in an older layout file, or e.g.
+                // panes
+                // installed by plugins.
+                UIDesignManager.ensureDockablesVisible(desktop);
                 UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
 
@@ -163,10 +175,6 @@ public class MainWindow implements IMainWindow {
         CoreEvents.registerFontChangedEventListener(
                 newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
                         : new FontUIResource(newFont));
-
-        MainWindowUI.handlePerProjectLayouts(this);
-
-        updateTitle();
 
         // Set up prompt to reload if segmentation or filters settings change
         Preferences.addPropertyChangeListener(evt -> {
@@ -236,15 +244,63 @@ public class MainWindow implements IMainWindow {
      */
     private void initDockingAndStatusBar() {
         desktop = new DockingDesktop();
-        desktop.addDockableStateWillChangeListener(event -> {
-            if (event.getFutureState().isClosed()) {
-                event.cancel();
+        desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
+            public void dockableStateWillChange(DockableStateWillChangeEvent event) {
+                if (event.getFutureState().isClosed()) {
+                    event.cancel();
+                }
             }
         });
         applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
         mainWindowStatusBar = new MainWindowStatusBar();
         applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
         applicationFrame.pack();
+    }
+
+    /**
+     * Installs a {@link IProjectEventListener} that handles loading, storing,
+     * and restoring the main window layout when a project-specific layout is
+     * present.
+     */
+    private static void handlePerProjectLayouts(final MainWindow mainWindow) {
+        PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
+        CoreEvents.registerProjectChangeListener(handler);
+        CoreEvents.registerApplicationEventListener(handler);
+    }
+
+    /**
+     * Initialize the size of OmegaT window, then load the layout prefs.
+     */
+    public void initializeScreenLayout() {
+        /*
+         * (23dec22) Set a reasonable default window size assuming a
+         * standard"pro" laptop resolution of 1920x1080. Smaller screens do not
+         * need to be considered since OmegaT will just use the whole window
+         * size in such cases.
+         */
+
+        // Check the real available space accounting for macOS DOCK, Windows
+        // Toolbar, etc.
+        Rectangle localAvailableSpace = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getMaximumWindowBounds();
+        int screenWidth = localAvailableSpace.width;
+        int screenHeight = localAvailableSpace.height;
+        int omegatWidth = OConsts.OMEGAT_WINDOW_WIDTH;
+        int omegatHeight = OConsts.OMEGAT_WINDOW_HEIGHT;
+
+        if (omegatWidth > screenWidth) {
+            omegatWidth = screenWidth;
+        }
+
+        if (omegatHeight > screenHeight) {
+            omegatHeight = screenHeight;
+        }
+
+        // Attempt to center the OmegaT main window on the screen
+        int omegatLeftPosition = (screenWidth - omegatWidth) / 2;
+
+        Rectangle defaultWindowSize = new Rectangle(omegatLeftPosition, 0, omegatWidth, omegatHeight);
+        applicationFrame.setBounds(defaultWindowSize);
     }
 
     /**
@@ -296,73 +352,8 @@ public class MainWindow implements IMainWindow {
         applicationFrame.setTitle(s);
     }
 
-    /** insert current fuzzy match or selection at cursor position */
-    public void doInsertTrans() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        String text = getSelectedTextInMatcher();
-        boolean fromMT = false;
-        if (StringUtil.isEmpty(text)) {
-            NearString near = Core.getMatcher().getActiveMatch();
-            if (near != null) {
-                text = near.translation;
-                if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                    text = Core.getMatcher().substituteNumbers(
-                            Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
-                }
-
-                if (DataUtils.isFromMTMemory(near)) {
-                    fromMT = true;
-                }
-            }
-        }
-        if (!StringUtil.isEmpty(text)) {
-            if (fromMT) {
-                Core.getEditor().insertTextAndMark(text);
-            } else {
-                Core.getEditor().insertText(text);
-            }
-            Core.getEditor().requestFocus();
-        }
-    }
-
-    /** replace entire edit area with active fuzzy match or selection */
-    public void doRecycleTrans() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        String selection = getSelectedTextInMatcher();
-        if (!StringUtil.isEmpty(selection)) {
-            Core.getEditor().replaceEditText(selection);
-            Core.getEditor().requestFocus();
-            return;
-        }
-
-        NearString near = Core.getMatcher().getActiveMatch();
-        if (near != null) {
-            String translation = near.translation;
-            if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                translation = Core.getMatcher().substituteNumbers(
-                        Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
-            }
-            if (DataUtils.isFromMTMemory(near)) {
-                Core.getEditor().replaceEditTextAndMark(translation, "TM:[tm/mt]");
-            } else {
-                Core.getEditor().replaceEditText(translation, "TM:[generic]");
-            }
-            Core.getEditor().requestFocus();
-        }
-    }
-
-    private String getSelectedTextInMatcher() {
-        IMatcher matcher = Core.getMatcher();
-        return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
-    }
-
-    protected void addSearchWindow(final SearchWindowController newSearchWindow) {
+    @Override
+    public void addSearchWindow(final SearchWindowController newSearchWindow) {
         newSearchWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -390,7 +381,7 @@ public class MainWindow implements IMainWindow {
         }
     }
 
-    protected List<SearchWindowController> getSearchWindows() {
+    public List<SearchWindowController> getSearchWindows() {
         return Collections.unmodifiableList(searches);
     }
 
@@ -661,5 +652,119 @@ public class MainWindow implements IMainWindow {
      */
     public DockingDesktop getDesktop() {
         return desktop;
+    }
+
+    /**
+     * Load the main window layout from the global preferences file. Will reset
+     * to defaults if global preferences are not present or if an error occurs.
+     */
+    public void loadScreenLayoutFromPreferences() {
+        File uiLayoutFile = new File(StaticUtils.getConfigDir(), UI_LAYOUT_FILE);
+        if (uiLayoutFile.exists()) {
+            loadScreenLayout(uiLayoutFile);
+        } else {
+            resetDesktopLayout();
+        }
+    }
+
+    /**
+     * Load the main window layout from the specified file. Will reset to
+     * defaults if an error occurs.
+     */
+    public void loadScreenLayout(File uiLayoutFile) {
+        try (InputStream in = new FileInputStream(uiLayoutFile)) {
+            desktop.readXML(in);
+        } catch (Exception ex) {
+            Log.log(ex);
+            resetDesktopLayout();
+        }
+    }
+
+    /**
+     * Stores main window docking layout to disk.
+     */
+    public void saveScreenLayout() {
+        File uiLayoutFile = new File(StaticUtils.getConfigDir(), UI_LAYOUT_FILE);
+        saveScreenLayout(uiLayoutFile);
+    }
+
+    /**
+     * Stores main window layout to the specified output file.
+     */
+    public void saveScreenLayout(File uiLayoutFile) {
+        try (OutputStream out = new FileOutputStream(uiLayoutFile)) {
+            desktop.writeXML(out);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+    }
+
+    /**
+     * Restores main window layout to the default values (distinct from global
+     * preferences).
+     */
+    @Override
+    public void resetDesktopLayout() {
+        try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {
+            desktop.readXML(in);
+        } catch (Exception e) {
+            Log.log(e);
+        }
+    }
+
+    static class PerProjectLayoutHandler implements IProjectEventListener, IApplicationEventListener {
+
+        private final MainWindow mainWindow;
+        private boolean didApplyPerProjectLayout = false;
+
+        PerProjectLayoutHandler(MainWindow mainWindow) {
+            this.mainWindow = mainWindow;
+        }
+
+        @Override
+        public void onApplicationStartup() {
+        }
+
+        @Override
+        public void onApplicationShutdown() {
+            // Project is not closed before shutdown, so we need to handle this
+            // separately
+            // from the onProjectChanged events.
+            if (Core.getProject().isProjectLoaded() && didApplyPerProjectLayout) {
+                mainWindow.loadScreenLayoutFromPreferences();
+                didApplyPerProjectLayout = false;
+            }
+        }
+
+        @Override
+        public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+            if (eventType == PROJECT_CHANGE_TYPE.CLOSE && didApplyPerProjectLayout) {
+                mainWindow.loadScreenLayoutFromPreferences();
+                didApplyPerProjectLayout = false;
+                return;
+            }
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            File perProjLayout = getPerProjectLayout();
+            if (!perProjLayout.isFile()) {
+                return;
+            }
+            switch (eventType) {
+            case LOAD:
+                mainWindow.saveScreenLayout();
+                mainWindow.loadScreenLayout(perProjLayout);
+                didApplyPerProjectLayout = true;
+                break;
+            case SAVE:
+                mainWindow.saveScreenLayout(perProjLayout);
+                break;
+            default:
+            }
+        }
+
+        private File getPerProjectLayout() {
+            return new File(Core.getProject().getProjectProperties().getProjectInternal(), UI_LAYOUT_FILE);
+        }
     }
 }

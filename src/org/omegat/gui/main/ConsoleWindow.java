@@ -28,9 +28,12 @@ package org.omegat.gui.main;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JFrame;
 
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
@@ -142,6 +145,19 @@ public class ConsoleWindow implements IMainWindow {
         return null;
     }
 
+    @Override
+    public void resetDesktopLayout() {
+    }
+
+    @Override
+    public void addSearchWindow(final SearchWindowController newSearchWindow) {
+    }
+
+    @Override
+    public List<SearchWindowController> getSearchWindows() {
+        return Collections.emptyList();
+    }
+
     public Cursor getCursor() {
         return Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
     }
@@ -149,13 +165,13 @@ public class ConsoleWindow implements IMainWindow {
     public void setCursor(Cursor cursor) {
     }
 
-    public int showConfirmDialog(Object message, String title, int optionType,
-            int messageType) throws HeadlessException {
+    public int showConfirmDialog(Object message, String title, int optionType, int messageType)
+            throws HeadlessException {
 
         System.out.println(title);
         System.out.println(message);
         System.out.println(OStrings.getString("TF_CHOSEN_YES"));
-        return 0; //JOptionPane.YES_OPTION
+        return 0; // JOptionPane.YES_OPTION
     }
 
     public void showMessageDialog(String message) {

@@ -201,7 +201,10 @@ public final class UIDesignManager {
         }
         setTheme(theme);
 
-        setMenuUI(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME));
+        String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
+        if (menuUI != null && !menuUI.isEmpty()) {
+            setMenuUI(menuUI);
+        }
 
         if (UIManager.getColor("OmegaT.source") == null) {
             // Theme apparently did not load default colors, so we do so now

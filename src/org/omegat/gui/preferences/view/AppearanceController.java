@@ -40,8 +40,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.gui.preferences.IMenuPreferece;
 import org.omegat.gui.preferences.MainMenuUI;
@@ -125,17 +123,14 @@ public class AppearanceController extends BasePreferencesController {
         List<IMenuPreferece> menuStylePrefs = new ArrayList<>();
         menuStylePrefs.add(new MainMenuUI());
         menuStylePrefs.addAll(UIDesignManager.getMenuUIPreferences());
-        String[] menuStyles = menuStylePrefs.stream()
-                .map(clazz -> clazz.getClass().getName())
+        String[] menuStyles = menuStylePrefs.stream().map(clazz -> clazz.getClass().getName())
                 .toArray(String[]::new);
         panel.cbMenustyleSelect.setModel(new DefaultComboBoxModel<>(menuStyles));
         panel.cbMenustyleSelect.setRenderer(new DelegatingComboBoxRenderer<String, String>() {
             @Override
             protected String getDisplayText(final String value) {
-                return menuStylePrefs.stream()
-                        .filter(p -> p.getClass().getName().equals(value))
-                        .map(IMenuPreferece::getMenuUIName)
-                        .findFirst().orElse("");
+                return menuStylePrefs.stream().filter(p -> p.getClass().getName().equals(value))
+                        .map(IMenuPreferece::getMenuUIName).findFirst().orElse("");
             }
         });
         panel.cbMenustyleSelect.addActionListener(e -> {
@@ -149,10 +144,10 @@ public class AppearanceController extends BasePreferencesController {
         String[] darkLafs = darkThemeList.stream().map(LookAndFeelInfo::getClassName).toArray(String[]::new);
         panel.cbDarkThemeSelect.setModel(new DefaultComboBoxModel<>(darkLafs));
         panel.cbDarkThemeSelect.setRenderer(renderer);
-        panel.themePanel.setBorder(BorderFactory.createTitledBorder(
-                OStrings.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")));
-        panel.menustylePanel.setBorder(BorderFactory.createTitledBorder(
-                OStrings.getString("MW_OPTIONMENU_APPEARANCE_MENUSTYLE_LABEL")));
+        panel.themePanel.setBorder(
+                BorderFactory.createTitledBorder(OStrings.getString("MW_OPTIONMENU_APPEARANCE_THEME_LABEL")));
+        panel.menustylePanel.setBorder(BorderFactory
+                .createTitledBorder(OStrings.getString("MW_OPTIONMENU_APPEARANCE_MENUSTYLE_LABEL")));
         Mnemonics.setLocalizedText(panel.useLightDefaultThemeRB,
                 OStrings.getString("MW_OPTIONMENU_APPEARANCE_LIGHT_THEME_LABEL"));
         Mnemonics.setLocalizedText(panel.useDarkThemeRB,
@@ -167,8 +162,8 @@ public class AppearanceController extends BasePreferencesController {
 
     @Override
     protected void initFromPrefs() {
-        panel.cbMenustyleSelect.setSelectedItem(Preferences.getPreferenceDefault(Preferences.MENUUI_CLASS_NAME,
-                MainMenuUI.class.getName()));
+        panel.cbMenustyleSelect.setSelectedItem(
+                Preferences.getPreferenceDefault(Preferences.MENUUI_CLASS_NAME, MainMenuUI.class.getName()));
         preferredLightThemeClass = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
                 UIDesignManager.LIGHT_CLASS_NAME_DEFAULT);
         preferredDarkThemeClass = Preferences.getPreferenceDefault(Preferences.THEME_DARK_CLASS_NAME,
@@ -187,8 +182,7 @@ public class AppearanceController extends BasePreferencesController {
     }
 
     private void initListeners() {
-        panel.restoreWindowButton
-                .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
+        panel.restoreWindowButton.addActionListener(e -> Core.getMainWindow().resetDesktopLayout());
         panel.cbLightThemeSelect.addActionListener(e -> setRestartRequired(isModified()));
         panel.cbDarkThemeSelect.addActionListener(e -> setRestartRequired(isModified()));
         panel.useDarkThemeRB.addActionListener(e -> setRestartRequired(isModified()));
@@ -225,7 +219,8 @@ public class AppearanceController extends BasePreferencesController {
             return true;
         }
         Object selected = panel.cbMenustyleSelect.getSelectedItem();
-        if (selected != null && !selected.toString().equals(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME))) {
+        if (selected != null
+                && !selected.toString().equals(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME))) {
             return true;
         }
         if (themeMode.equals("sync")) {

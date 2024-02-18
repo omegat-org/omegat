@@ -28,8 +28,11 @@ package org.omegat.gui.main;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.util.List;
 
 import javax.swing.JFrame;
+
+import org.omegat.gui.search.SearchWindowController;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -82,7 +85,8 @@ public interface IMainWindow {
     void showTimedStatusMessageRB(String messageKey, Object... params);
 
     /**
-     * Show message in progress bar. Progress bar shows the translation progress: nr. of segments/words etc translated/to do.
+     * Show message in progress bar. Progress bar shows the translation
+     * progress: nr. of segments/words etc translated/to do.
      *
      * @param messageText
      *            message text
@@ -90,7 +94,8 @@ public interface IMainWindow {
     void showProgressMessage(String messageText);
 
     /**
-     * Show message in length label. Length label shows length (in nr of characters) of current segment
+     * Show message in length label. Length label shows length (in nr of
+     * characters) of current segment
      *
      * @param messageText
      *            message text
@@ -98,7 +103,8 @@ public interface IMainWindow {
     void showLengthMessage(String messageText);
 
     /**
-     * Show message indicating the state of the Lock cursor and Insert/overwrite mode
+     * Show message indicating the state of the Lock cursor and Insert/overwrite
+     * mode
      *
      * @param messageText
      *            message text
@@ -116,9 +122,9 @@ public interface IMainWindow {
     void displayWarningRB(String warningKey, Object... params);
 
     /**
-     * Same as {@link #displayWarningRB(String, Object...)} but this will close the previous
-     * dialog if the dialog is still open and the supplied supercedesKey matches the previous
-     * dialog's key.
+     * Same as {@link #displayWarningRB(String, Object...)} but this will close
+     * the previous dialog if the dialog is still open and the supplied
+     * supercedesKey matches the previous dialog's key.
      *
      * @param warningKey
      *            warning message key in resource bundle
@@ -156,21 +162,34 @@ public interface IMainWindow {
     void showErrorDialogRB(String title, String message, Object... args);
 
     /**
-     * shows a confirm dialog. For a GUI main window, this can be implemented as JOptionPane.showConfirmDialog
+     * shows a confirm dialog. For a GUI main window, this can be implemented as
+     * JOptionPane.showConfirmDialog
      *
-     * @param message the Object to display
-     * @param title   the title string for the dialog (can be null)
-     * @param optionType an integer designating the JOptionPane options available on the dialog: YES_NO_OPTION, YES_NO_CANCEL_OPTION, or OK_CANCEL_OPTION
-     * @param messageType an integer designating the kind of message this is; primarily used to determine the icon from the pluggable Look and Feel: (JOptionPane ERROR_MESSAGE, INFORMATION_MESSAGE, WARNING_MESSAGE, QUESTION_MESSAGE, or PLAIN_MESSAGE
+     * @param message
+     *            the Object to display
+     * @param title
+     *            the title string for the dialog (can be null)
+     * @param optionType
+     *            an integer designating the JOptionPane options available on
+     *            the dialog: YES_NO_OPTION, YES_NO_CANCEL_OPTION, or
+     *            OK_CANCEL_OPTION
+     * @param messageType
+     *            an integer designating the kind of message this is; primarily
+     *            used to determine the icon from the pluggable Look and Feel:
+     *            (JOptionPane ERROR_MESSAGE, INFORMATION_MESSAGE,
+     *            WARNING_MESSAGE, QUESTION_MESSAGE, or PLAIN_MESSAGE
      * @return an integer indicating the option selected by the user
-     * @throws HeadlessException if GraphicsEnvironment.isHeadless returns true
+     * @throws HeadlessException
+     *             if GraphicsEnvironment.isHeadless returns true
      */
-    int showConfirmDialog(Object message, String title, int optionType, int messageType) throws HeadlessException;
+    int showConfirmDialog(Object message, String title, int optionType, int messageType)
+            throws HeadlessException;
 
     /**
      * Shows message to user
      *
-     * @param message the message to show
+     * @param message
+     *            the message to show
      */
     void showMessageDialog(String message);
 
@@ -185,12 +204,15 @@ public interface IMainWindow {
 
     /**
      * Sets cursor of window
-     * @param cursor the new cursor
+     *
+     * @param cursor
+     *            the new cursor
      */
     void setCursor(Cursor cursor);
 
     /**
-     * Retrieves current cursor of window
+     * Retrieves current cursor of windo.addSearchWindoww
+     * 
      * @return the current cursor
      */
     Cursor getCursor();
@@ -204,4 +226,10 @@ public interface IMainWindow {
      * Retrieve main docking desktop.
      */
     DockingDesktop getDesktop();
+
+    void resetDesktopLayout();
+
+    void addSearchWindow(SearchWindowController newSearchWindow);
+
+    List<SearchWindowController> getSearchWindows();
 }

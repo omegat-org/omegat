@@ -30,6 +30,7 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -51,6 +52,7 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Platform;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.MenuExtender;
@@ -196,6 +198,11 @@ public abstract class TestCore {
                 }
             }
 
+            @Override
+            public void enableMenuItem(final MenuExtender.MenuKey menu, final String name,
+                                       final boolean enabled) {
+            }
+
             private JMenu getGotoMenu() {
                 if (gotoMenu.getItemCount() == 0) {
                     gotoMenu.add(new JMenuItem("gotoNextUntranslatedMenuItem"));
@@ -272,6 +279,19 @@ public abstract class TestCore {
             @Override
             public DockingDesktop getDesktop() {
                 return null;
+            }
+
+            @Override
+            public void resetDesktopLayout() {
+            }
+
+            @Override
+            public void addSearchWindow(final SearchWindowController newSearchWindow) {
+            }
+
+            @Override
+            public List<SearchWindowController> getSearchWindows() {
+                return Collections.emptyList();
             }
 
             public Cursor getCursor() {

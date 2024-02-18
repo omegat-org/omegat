@@ -227,9 +227,12 @@ public final class Core {
      * <p>
      * An interface that was introduced in v5.6.0 when supporting theme plugin.
      *
-     * @param cl class loader.
-     * @param params CLI parameters.
-     * @throws Exception when error occurred.
+     * @param cl
+     *            class loader.
+     * @param params
+     *            CLI parameters.
+     * @throws Exception
+     *             when error occurred.
      */
     @Deprecated(since = "6.1.0")
     @SuppressWarnings("unused")
@@ -252,14 +255,29 @@ public final class Core {
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
+        initializeGUIimpl(me);
 
+        SaveThread th = new SaveThread();
+        saveThread = th;
+        th.start();
+
+        new VersionCheckThread(10).start();
+    }
+
+    /**
+     * initialize GUI for test.
+     * 
+     * @throws Exception
+     */
+    static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 
         segmenter = new Segmenter(Preferences.getSRX());
         filterMaster = new FilterMaster(Preferences.getFilters());
 
-        // 4. Initialize other components. They add themselves to the main window.
+        // 4. Initialize other components.
+        // They add themselves to the main window.
         editor = new EditorController(me);
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me.getApplicationFrame());
@@ -274,12 +292,6 @@ public final class Core {
         multiple = new MultipleTransPane(me);
         new SegmentPropertiesArea(me);
         projWin = new ProjectFilesListController();
-
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
-
-        new VersionCheckThread(10).start();
     }
 
     /**
@@ -346,7 +358,9 @@ public final class Core {
 
     /**
      * Register spellchecker plugin.
-     * @param clazz spellchecker class.
+     *
+     * @param clazz
+     *            spellchecker class.
      */
     public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
         PluginUtils.getSpellCheckClasses().add(clazz);
@@ -369,9 +383,10 @@ public final class Core {
     /**
      * Use this to perform operations that must not be run concurrently.
      * <p>
-     * For instance project load/save/compile/autosave operations must not be executed in parallel because it will break
-     * project files, especially during team synchronization. For guaranteed non-parallel execution, all such operations
-     * must be executed via this method.
+     * For instance project load/save/compile/autosave operations must not be
+     * executed in parallel because it will break project files, especially
+     * during team synchronization. For guaranteed non-parallel execution, all
+     * such operations must be executed via this method.
      *
      * @param waitForUnlock
      *            should execution wait for unlock 3 minutes
@@ -379,8 +394,7 @@ public final class Core {
      *            code for execute
      * @throws Exception
      */
-    public static void executeExclusively(boolean waitForUnlock, RunnableWithException run)
-            throws Exception {
+    public static void executeExclusively(boolean waitForUnlock, RunnableWithException run) throws Exception {
         if (!EXCLUSIVE_RUN_LOCK.tryLock(waitForUnlock ? 180000 : 1, TimeUnit.MILLISECONDS)) {
             Exception ex = new TimeoutException("Timeout waiting for previous exclusive execution");
             Exception cause = new Exception("Previous exclusive execution");

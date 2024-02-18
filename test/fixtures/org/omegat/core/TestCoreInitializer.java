@@ -25,9 +25,11 @@
 
 package org.omegat.core;
 
+import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
 
 /**
@@ -40,6 +42,10 @@ public final class TestCoreInitializer {
     private TestCoreInitializer() {
     }
 
+    public static void initProject() {
+        Core.setProject(new NotLoadedProject());
+    }
+
     public static void initEditor(IEditor editor) {
         Core.editor = editor;
     }
@@ -48,8 +54,13 @@ public final class TestCoreInitializer {
         Core.saveThread = autoSave;
     }
 
-    public static void initMainWindow(IMainWindow mainWindow) {
+    public static void initMainWindow(IMainWindow mainWindow) throws Exception {
         Core.setMainWindow(mainWindow);
+        if (mainWindow instanceof ConsoleWindow) {
+            return;
+        }
+
+        Core.initializeGUIimpl(mainWindow);
     }
 
     public static void initGlossary(IGlossaries glossaries) {

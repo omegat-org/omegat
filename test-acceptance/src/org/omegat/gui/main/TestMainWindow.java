@@ -31,8 +31,12 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -48,6 +52,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.search.SearchWindowController;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -94,6 +99,8 @@ class TestMainWindow implements IMainWindow {
             }
         });
         applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
+        MainWindowStatusBar mainWindowStatusBar = new MainWindowStatusBar();
+        applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
 
         StaticUIUtils.setWindowIcon(applicationFrame);
 
@@ -109,10 +116,11 @@ class TestMainWindow implements IMainWindow {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
                 initializeScreenLayout();
+                resetDesktopLayout();
                 // Ensure any "closed" Dockables are visible. These can be newly
                 // added panes not included in an older layout file, or e.g.
-                // panes
-                // installed by plugins.
+                // added panes not included in an older layout file, or e.g.
+                // panes installed by plugins.
                 UIDesignManager.ensureDockablesVisible(desktop);
                 UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
@@ -149,6 +157,30 @@ class TestMainWindow implements IMainWindow {
     private void updateTitle() {
         String s = OStrings.getDisplayNameAndVersion();
         applicationFrame.setTitle(s);
+    }
+
+    @Override
+    public void addSearchWindow(final SearchWindowController newSearchWindow) {
+        newSearchWindow.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                removeSearchWindow(newSearchWindow);
+            }
+        });
+        synchronized (searches) {
+            searches.add(newSearchWindow);
+        }
+    }
+
+    @Override
+    public List<SearchWindowController> getSearchWindows() {
+        return Collections.unmodifiableList(searches);
+    }
+
+    private void removeSearchWindow(SearchWindowController searchWindow) {
+        synchronized (searches) {
+            searches.remove(searchWindow);
+        }
     }
 
     private void closeSearchWindows() {
@@ -289,4 +321,12 @@ class TestMainWindow implements IMainWindow {
         return desktop;
     }
 
+    @Override
+    public void resetDesktopLayout() {
+        try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {
+            desktop.readXML(in);
+        } catch (Exception e) {
+            Log.log(e);
+        }
+    }
 }

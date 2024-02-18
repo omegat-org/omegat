@@ -30,11 +30,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
+import org.openide.awt.Mnemonics;
+
 import org.omegat.help.Help;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
-import org.openide.awt.Mnemonics;
 
 /**
  * Dialog showing GNU Public License.

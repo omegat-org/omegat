@@ -25,12 +25,36 @@
 
 package org.omegat.core.data;
 
+import org.omegat.core.Core;
+
 public final class DataUtils {
 
     private DataUtils() {
     }
 
     public static boolean isDuplicate(SourceTextEntry ste, TMXEntry te) {
-        return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
+        //return ste.getDuplicate() == SourceTextEntry.DUPLICATE.NEXT && te.defaultTranslation;
+        if (! te.defaultTranslation) {
+            return false;
+        }
+        if (ste.getDuplicate() != SourceTextEntry.DUPLICATE.NEXT) {
+            return false;
+        }
+        // Must not be first occurence of defaultTranslation
+        SourceTextEntry first = ste.firstInstance;
+        te = Core.getProject().getTranslationInfo(first);
+        boolean foundDefault = te.defaultTranslation;
+        for (SourceTextEntry next: first.duplicates) {
+            if (next == first) {
+                continue;
+            }
+            if (next != ste) {
+                te = Core.getProject().getTranslationInfo(first);
+                foundDefault = foundDefault || te.defaultTranslation;
+            } else {
+                return foundDefault;
+            }
+        }
+        return foundDefault;
     }
 }

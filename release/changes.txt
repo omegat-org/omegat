@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   44 Enhancement
-  68 Bug fixes
+  67 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -183,9 +183,6 @@
 
   - CI: weekly release failed with permission error inside docker image
   https://sourceforge.net/p/omegat/bugs/1228/
-
-  - List of issues stays hidden in the background
-  https://sourceforge.net/p/omegat/bugs/1225/
 
   - OmegaT failed to start in specific case
   https://sourceforge.net/p/omegat/bugs/1224/

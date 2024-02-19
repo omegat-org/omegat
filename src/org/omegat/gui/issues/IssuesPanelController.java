@@ -165,7 +165,6 @@ public class IssuesPanelController implements IIssues {
         }
 
         frame = new JFrame(OStrings.getString("ISSUES_WINDOW_TITLE"));
-        frame.setAutoRequestFocus(false);
         StaticUIUtils.setEscapeClosable(frame);
         StaticUIUtils.setWindowIcon(frame);
         if (Platform.isMacOSX()) {
@@ -595,7 +594,7 @@ public class IssuesPanelController implements IIssues {
             if (isCancelled()) {
                 return;
             }
-            List<IIssue> allIssues;
+            List<IIssue> allIssues = Collections.emptyList();
             try {
                 allIssues = get();
             } catch (InterruptedException | ExecutionException e) {
@@ -606,6 +605,10 @@ public class IssuesPanelController implements IIssues {
                 return;
             } catch (CancellationException e) {
                 return;
+            }
+
+            if (allIssues.isEmpty()) {
+                panel.messageLabel.setText(OStrings.getString("ISSUES_NO_ISSUES_FOUND"));
             }
 
             panel.progressBar.setVisible(false);
@@ -628,10 +631,6 @@ public class IssuesPanelController implements IIssues {
             }
             colSizer.reset();
             colSizer.adjustTableColumns();
-            if (allIssues.isEmpty()) {
-                panel.messageLabel.setText(OStrings.getString("ISSUES_NO_ISSUES_FOUND"));
-                return;
-            }
             if (!jumpToTypes.isEmpty()) {
                 int[] indicies = ((TypeListModel) panel.typeList.getModel()).indiciesOfTypes(jumpToTypes);
                 if (indicies.length > 0) {
@@ -641,11 +640,7 @@ public class IssuesPanelController implements IIssues {
             if (jumpToEntry >= 0) {
                 IntStream.range(0, panel.table.getRowCount())
                         .filter(row -> (int) panel.table.getValueAt(row, IssueColumn.SEG_NUM.index) >= jumpToEntry)
-                        .findFirst()
-                        .ifPresent(jump -> {
-                            panel.table.changeSelection(jump, 0, false, false);
-                            frame.toFront();
-                        });
+                        .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
         }

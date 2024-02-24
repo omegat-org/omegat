@@ -48,7 +48,7 @@ xjc = "2.3.4"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.4.4"
-flatlaf="3.3"
+flatlaf="3.4"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}

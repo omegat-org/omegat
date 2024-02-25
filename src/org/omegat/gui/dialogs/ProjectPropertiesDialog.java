@@ -69,6 +69,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.dialogs.ProjectPropertiesDialogController.Mode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -101,8 +102,8 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
 public class ProjectPropertiesDialog extends JDialog {
     public static final String DIALOG_NAME = "project_properties";
 
-    private ProjectPropertiesDialogController.Mode dialogType;
-    private ProjectPropertiesDialogController controller;
+    private final Mode dialogType;
+    private final ProjectPropertiesDialogController controller;
 
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
@@ -113,18 +114,19 @@ public class ProjectPropertiesDialog extends JDialog {
      *            project file name
      * @param dialogTypeValue
      *            type of the dialog
-     *            ({@link ProjectPropertiesDialogController.Mode#NEW_PROJECT},
-     *            {@link ProjectPropertiesDialogController.Mode#RESOLVE_DIRS} or
-     *            {@link ProjectPropertiesDialogController.Mode#EDIT_PROJECT}).
+     *            ({@link Mode#NEW_PROJECT},
+     *            {@link Mode#RESOLVE_DIRS} or
+     *            {@link Mode#EDIT_PROJECT}).
      */
-    public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties,
-            String projFileName, ProjectPropertiesDialogController.Mode dialogTypeValue) {
+    public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
+                                   Mode dialogTypeValue) {
         super(parent, true);
         this.dialogType = dialogTypeValue;
         initializeComponents();
         controller = new ProjectPropertiesDialogController(parent, this, dialogTypeValue, projectProperties);
-        setDefaults();
-
+        if (dialogType == Mode.RESOLVE_DIRS) {
+            setResolveDirsDefaults();
+        }
         setName(DIALOG_NAME);
         setLocationRelativeTo(parent);
 
@@ -144,7 +146,6 @@ public class ProjectPropertiesDialog extends JDialog {
     }
 
     private void initializeComponents() {
-        Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = new ScrollableBox(BoxLayout.Y_AXIS);
         // Have to set background and opacity on OS X or else the entire dialog
         // is white.
@@ -165,7 +166,7 @@ public class ProjectPropertiesDialog extends JDialog {
         centerBox.add(dirsBox);
 
         JScrollPane scrollPane = new JScrollPane(centerBox);
-        // Prevent ugly white viewport background with GTK LAF
+        // Prevent an ugly white viewport background with GTK LAF
         scrollPane.setBackground(getBackground());
         scrollPane.getViewport().setOpaque(false);
         getContentPane().add(scrollPane, "Center");
@@ -183,7 +184,6 @@ public class ProjectPropertiesDialog extends JDialog {
         getContentPane().add(southBox, "South");
 
         setResizable(false);
-
     }
 
     private Box createLocalesBox() {
@@ -517,58 +517,52 @@ public class ProjectPropertiesDialog extends JDialog {
         return dirsBox;
     }
 
-    private void setDefaults() {
-        switch (dialogType) {
-        case RESOLVE_DIRS:
-            // disabling some of the controls
-            sourceLocaleField.setEnabled(false);
-            targetLocaleField.setEnabled(false);
-            sourceTokenizerField.setEnabled(false);
-            targetTokenizerField.setEnabled(false);
-            sentenceSegmentingCheckBox.setEnabled(false);
-            allowDefaultsCheckBox.setEnabled(false);
-            removeTagsCheckBox.setEnabled(false);
-            externalCommandTextArea.setEnabled(false);
-            insertButton.setEnabled(false);
-            variablesList.setEnabled(false);
-            exportTMOmegaTCheckBox.setEnabled(false);
-            exportTMLevel1CheckBox.setEnabled(false);
-            exportTMLevel2CheckBox.setEnabled(false);
+    private void setResolveDirsDefaults() {
+        // disabling some controls
+        sourceLocaleField.setEnabled(false);
+        targetLocaleField.setEnabled(false);
+        sourceTokenizerField.setEnabled(false);
+        targetTokenizerField.setEnabled(false);
+        sentenceSegmentingCheckBox.setEnabled(false);
+        allowDefaultsCheckBox.setEnabled(false);
+        removeTagsCheckBox.setEnabled(false);
+        externalCommandTextArea.setEnabled(false);
+        insertButton.setEnabled(false);
+        variablesList.setEnabled(false);
+        exportTMOmegaTCheckBox.setEnabled(false);
+        exportTMLevel1CheckBox.setEnabled(false);
+        exportTMLevel2CheckBox.setEnabled(false);
 
-            // marking missing folder RED
-            File f = new File(srcRootField.getText());
-            if (!f.isDirectory()) {
-                srcRootField.setForeground(Color.RED);
-            }
-            f = new File(locRootField.getText());
-            if (!f.isDirectory()) {
-                locRootField.setForeground(Color.RED);
-            }
-            f = new File(glosRootField.getText());
-            if (!f.isDirectory()) {
-                glosRootField.setForeground(Color.RED);
-            }
-            f = new File(writeableGlosField.getText());
-            File wGlos = f.getParentFile(); // Remove the file name
-            // The writeable glossary must be in in the /glossary folder
-            if (!wGlos.isDirectory() || !wGlos.equals(new File(glosRootField.getText()))) {
-                writeableGlosField.setForeground(Color.RED);
-            }
-            f = new File(tmRootField.getText());
-            if (!f.isDirectory()) {
-                tmRootField.setForeground(Color.RED);
-            }
-            f = new File(exportTMRootField.getText());
-            if (!f.isDirectory()) {
-                exportTMRootField.setForeground(Color.RED);
-            }
-            f = new File(dictRootField.getText());
-            if (!f.isDirectory()) {
-                dictRootField.setForeground(Color.RED);
-            }
-            break;
-        default:
-            break;
+        // marking missing folder RED
+        File f = new File(srcRootField.getText());
+        if (!f.isDirectory()) {
+            srcRootField.setForeground(Color.RED);
+        }
+        f = new File(locRootField.getText());
+        if (!f.isDirectory()) {
+            locRootField.setForeground(Color.RED);
+        }
+        f = new File(glosRootField.getText());
+        if (!f.isDirectory()) {
+            glosRootField.setForeground(Color.RED);
+        }
+        f = new File(writeableGlosField.getText());
+        File wGlos = f.getParentFile(); // Remove the file name
+        // The writeable glossary must be in in the /glossary folder
+        if (!wGlos.isDirectory() || !wGlos.equals(new File(glosRootField.getText()))) {
+            writeableGlosField.setForeground(Color.RED);
+        }
+        f = new File(tmRootField.getText());
+        if (!f.isDirectory()) {
+            tmRootField.setForeground(Color.RED);
+        }
+        f = new File(exportTMRootField.getText());
+        if (!f.isDirectory()) {
+            exportTMRootField.setForeground(Color.RED);
+        }
+        f = new File(dictRootField.getText());
+        if (!f.isDirectory()) {
+            dictRootField.setForeground(Color.RED);
         }
     }
 

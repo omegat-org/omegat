@@ -506,7 +506,7 @@ public class ProjectPropertiesDialogController {
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
         }
 
-        if (dialogType != ProjectPropertiesDialogController.Mode.NEW_PROJECT
+        if (dialogType != Mode.NEW_PROJECT
                 && !new File(projectProperties.getSourceRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -518,7 +518,7 @@ public class ProjectPropertiesDialogController {
         if (!projectProperties.getTargetRoot().endsWith(File.separator)) {
             projectProperties.setTargetRoot(projectProperties.getTargetRoot() + File.separator);
         }
-        if (dialogType != ProjectPropertiesDialogController.Mode.NEW_PROJECT
+        if (dialogType != Mode.NEW_PROJECT
                 && !new File(projectProperties.getTargetRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -530,7 +530,7 @@ public class ProjectPropertiesDialogController {
         if (!projectProperties.getGlossaryRoot().endsWith(File.separator)) {
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
         }
-        if (dialogType != ProjectPropertiesDialogController.Mode.NEW_PROJECT
+        if (dialogType != Mode.NEW_PROJECT
                 && !new File(projectProperties.getGlossaryRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -539,7 +539,7 @@ public class ProjectPropertiesDialogController {
         }
 
         projectProperties.setWriteableGlossary(dialog.writeableGlosField.getText());
-        if (dialogType != ProjectPropertiesDialogController.Mode.NEW_PROJECT
+        if (dialogType != Mode.NEW_PROJECT
                 && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_W_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -613,7 +613,7 @@ public class ProjectPropertiesDialogController {
         // to fix bug 1476591 the project root is created before everything else
         // and if the new project is cancelled, the project root still exists,
         // so it must be deleted
-        if (dialogType == ProjectPropertiesDialogController.Mode.NEW_PROJECT) {
+        if (dialogType == Mode.NEW_PROJECT) {
             new File(projectProperties.getProjectRoot()).delete();
         }
         dialogCancelled = true;
@@ -621,7 +621,10 @@ public class ProjectPropertiesDialogController {
     }
 
     public static ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
-            String projFileName, ProjectPropertiesDialogController.Mode dialogTypeValue) {
+            String projFileName, Mode dialogTypeValue) {
+        if (dialogTypeValue == null) {
+            throw new RuntimeException("Unexpected null argument");
+        }
         ProjectPropertiesDialog dialog = new ProjectPropertiesDialog(parent, projectProperties, projFileName,
                 dialogTypeValue);
         dialog.setVisible(true);

@@ -68,7 +68,6 @@ import org.omegat.gui.dialogs.ChooseMedProject;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
-import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;

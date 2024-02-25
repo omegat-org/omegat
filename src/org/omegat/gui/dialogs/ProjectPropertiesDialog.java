@@ -112,10 +112,13 @@ public class ProjectPropertiesDialog extends JDialog {
      * @param projFileName
      *            project file name
      * @param dialogTypeValue
-     *            type of the dialog ({@link ProjectPropertiesDialogController.Mode#NEW_PROJECT}, {@link ProjectPropertiesDialogController.Mode#RESOLVE_DIRS} or {@link ProjectPropertiesDialogController.Mode#EDIT_PROJECT}).
+     *            type of the dialog
+     *            ({@link ProjectPropertiesDialogController.Mode#NEW_PROJECT},
+     *            {@link ProjectPropertiesDialogController.Mode#RESOLVE_DIRS} or
+     *            {@link ProjectPropertiesDialogController.Mode#EDIT_PROJECT}).
      */
-    public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
-            ProjectPropertiesDialogController.Mode dialogTypeValue) {
+    public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties,
+            String projFileName, ProjectPropertiesDialogController.Mode dialogTypeValue) {
         super(parent, true);
         this.dialogType = dialogTypeValue;
         initializeComponents();
@@ -143,7 +146,8 @@ public class ProjectPropertiesDialog extends JDialog {
     private void initializeComponents() {
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = new ScrollableBox(BoxLayout.Y_AXIS);
-        // Have to set background and opacity on OS X or else the entire dialog is white.
+        // Have to set background and opacity on OS X or else the entire dialog
+        // is white.
         centerBox.setBackground(getBackground());
         centerBox.setOpaque(true);
         centerBox.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -232,8 +236,8 @@ public class ProjectPropertiesDialog extends JDialog {
         // Tokenizers box
         Box bT = Box.createVerticalBox();
         localesBox.add(bT);
-        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().stream().sorted(Comparator.comparing(Class::getName))
-                .toArray(Class[]::new);
+        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().stream()
+                .sorted(Comparator.comparing(Class::getName)).toArray(Class[]::new);
 
         // Source tokenizer label
         JLabel sourceTokenizerLabel = new JLabel();
@@ -307,14 +311,14 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.insets = new Insets(3, 3, 3, 3);
 
         // sentence-segmenting
-        Mnemonics
-                .setLocalizedText(sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
+        Mnemonics.setLocalizedText(sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
-        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
+        Mnemonics.setLocalizedText(sentenceSegmentingButton,
+                OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -381,9 +385,9 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         optionsBox.add(externalCommandScrollPane, gbc);
-        variablesList = new JComboBox<>(
-                new Vector<>(CommandVarExpansion.getCommandVariables()));
-        // Add variable insertion controls only if project external commands are enabled.
+        variablesList = new JComboBox<>(new Vector<>(CommandVarExpansion.getCommandVariables()));
+        // Add variable insertion controls only if project external commands are
+        // enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
             Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
             Box bIC = Box.createHorizontalBox();

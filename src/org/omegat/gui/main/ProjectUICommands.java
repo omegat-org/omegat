@@ -69,6 +69,7 @@ import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.HttpConnectionUtils;
@@ -130,18 +131,15 @@ public final class ProjectUICommands {
                 ProjectProperties props = new ProjectProperties(dir);
                 props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
                 props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
-                ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
+                final ProjectProperties newProps = ProjectPropertiesDialogController.showDialog(
                         Core.getMainWindow().getApplicationFrame(), props, dir.getAbsolutePath(),
-                        ProjectPropertiesDialog.Mode.NEW_PROJECT);
-                newProjDialog.setVisible(true);
-                newProjDialog.dispose();
+                        ProjectPropertiesDialogController.Mode.NEW_PROJECT);
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                final ProjectProperties newProps = newProjDialog.getResult();
                 if (newProps == null) {
                     // user clicks on 'Cancel'
                     dir.delete();
@@ -613,12 +611,9 @@ public final class ProjectUICommands {
                 while (!props.isProjectValid()) {
                     // something wrong with the project.
                     // We display open dialog to fix it.
-                    ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
+                    props = ProjectPropertiesDialogController.showDialog(
                             Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
-                            ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
-                    prj.setVisible(true);
-                    props = prj.getResult();
-                    prj.dispose();
+                            ProjectPropertiesDialogController.Mode.RESOLVE_DIRS);
                     if (props == null) {
                         // user clicks on 'Cancel'
                         return;
@@ -981,13 +976,11 @@ public final class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         // displaying the dialog to change paths and other properties
-        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getMainWindow().getApplicationFrame(),
+        final ProjectProperties newProps =
+                ProjectPropertiesDialogController.showDialog(Core.getMainWindow().getApplicationFrame(),
                 Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
-                ProjectPropertiesDialog.Mode.EDIT_PROJECT);
-        prj.setVisible(true);
-        final ProjectProperties newProps = prj.getResult();
-        prj.dispose();
+                ProjectPropertiesDialogController.Mode.EDIT_PROJECT);
         if (newProps == null) {
             return;
         }

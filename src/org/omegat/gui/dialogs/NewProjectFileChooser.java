@@ -44,11 +44,14 @@ import org.omegat.util.gui.OmegaTFileChooser;
  */
 @SuppressWarnings("serial")
 public class NewProjectFileChooser extends OmegaTFileChooser {
+    public static final String DIALOG_NAME = "new_project_file_chooser";
+
     public NewProjectFileChooser() {
         setMultiSelectionEnabled(false);
         setFileHidingEnabled(true);
         setFileSelectionMode(DIRECTORIES_ONLY);
         setDialogTitle(OStrings.getString("PP_SAVE_PROJECT_FILE"));
+        setName(DIALOG_NAME);
 
         String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
         if (curDir != null) {

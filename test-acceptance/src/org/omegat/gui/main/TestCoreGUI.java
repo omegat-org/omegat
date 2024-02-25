@@ -37,6 +37,9 @@ import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
+import org.omegat.core.Core;
+import org.omegat.core.TestCoreInitializer;
+import org.omegat.core.data.NotLoadedProject;
 import org.omegat.util.OStrings;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.FontUtil;
@@ -53,11 +56,17 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     @Override
     protected void onSetUp() throws Exception {
         TestPreferencesInitializer.init();
-        frame = GuiActionRunner.execute(() -> new TestMainWindow(TestMainWindowMenuHandler.class));
+        Core.setProject(new NotLoadedProject());
+        frame = GuiActionRunner.execute(() -> {
+            TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
+            TestCoreInitializer.initMainWindow(mw);
+            return mw;
+        });
         window = new FrameFixture(robot(), frame);
         window.show();
     }
 
+    @SuppressWarnings("serial")
     static class TestMainWindow extends JFrame implements IMainWindow {
         private final FontUIResource font;
         public final BaseMainWindowMenu menu;
@@ -148,7 +157,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         }
 
         @Override
-        public int showConfirmDialog(final Object message, final String title, final int optionType, final int messageType) throws HeadlessException {
+        public int showConfirmDialog(final Object message, final String title, final int optionType,
+                                     final int messageType) throws HeadlessException {
             return 0;
         }
 
@@ -173,8 +183,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     static class TestMainWindowMenu extends BaseMainWindowMenu {
 
-        public TestMainWindowMenu(JFrame mainWindow,
-                                  BaseMainWindowMenuHandler mainWindowMenuHandler) {
+        TestMainWindowMenu(JFrame mainWindow, BaseMainWindowMenuHandler mainWindowMenuHandler) {
             super(mainWindow, mainWindowMenuHandler);
             initComponents();
         }

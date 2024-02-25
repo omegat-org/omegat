@@ -24,22 +24,41 @@
  **************************************************************************/
 package org.omegat.gui.main;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import javax.swing.JFrame;
+import java.io.File;
+import java.nio.file.Files;
 
-import org.assertj.swing.edt.GuiActionRunner;
-import org.assertj.swing.fixture.FrameFixture;
 import org.junit.Test;
 
-import org.omegat.util.TestPreferencesInitializer;
+import org.omegat.core.Core;
+import org.omegat.gui.dialogs.NewProjectFileChooser;
 
 public class ProjectMenuTest extends TestCoreGUI {
 
+    File tempDir;
+
+    @Override
+    protected void onSetUp() throws Exception {
+        super.onSetUp();
+        tempDir = Files.createTempDirectory("omegat").toFile();
+    }
 
     @Test
     public void testMainWindowTitle() {
         window.requireTitle("OmegaT 6.1.0");
+    }
+
+    @Test
+    public void testNewProject() {
+        window.menuItem(BaseMainWindowMenu.PROJECT_MENU).click();
+        window.menuItem(BaseMainWindowMenu.PROJECT_NEW_MENUITEM).click();
+        window.fileChooser(NewProjectFileChooser.DIALOG_NAME).requireEnabled();
+        window.fileChooser().selectFile(tempDir);
+        window.fileChooser().approve();
+        assertTrue(Core.getProject().isProjectLoaded());
+        assertFalse(Core.getProject().isRemoteProject());
     }
 
     @Test

@@ -106,7 +106,7 @@ import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockablePanel;
-import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.notes.INotes;
@@ -123,6 +123,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TMXProp;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.IDropInfo;
+import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -181,7 +182,7 @@ public class EditorController implements IEditor {
     private String emptyProjectPaneTitle;
     private JTextPane introPane;
     private JTextPane emptyProjectPane;
-    protected final MainWindow mw;
+    protected final IMainWindow mw;
 
     /** Currently displayed segments info. */
     protected SegmentBuilder[] m_docSegList;
@@ -227,7 +228,7 @@ public class EditorController implements IEditor {
      */
     private IProject.AllTranslations previousTranslations;
 
-    public EditorController(final MainWindow mainWindow) {
+    public EditorController(final IMainWindow mainWindow) {
         this.mw = mainWindow;
 
         segmentExportImport = new SegmentExportImport(this);
@@ -857,10 +858,14 @@ public class EditorController implements IEditor {
 
     private void setMenuEnabled() {
         // update history menu items
-        mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
-        mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
-        mw.menu.editMultipleDefault.setEnabled(!m_docSegList[displayedEntryIndex].isDefaultTranslation());
-        mw.menu.editMultipleAlternate.setEnabled(m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        mw.getMainMenu().enableMenuItem(MenuExtender.MenuKey.GOTO, "goto_history_back_menuitem",
+                history.hasPrev());
+        mw.getMainMenu().enableMenuItem(MenuExtender.MenuKey.GOTO, "goto_history_forward_menuitem",
+                history.hasNext());
+        mw.getMainMenu().enableMenuItem(MenuExtender.MenuKey.GOTO,
+         "edit_multiple_default", !m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        mw.getMainMenu().enableMenuItem(MenuExtender.MenuKey.GOTO, "edit_multiple_alternate",
+                m_docSegList[displayedEntryIndex].isDefaultTranslation());
     }
 
     /**

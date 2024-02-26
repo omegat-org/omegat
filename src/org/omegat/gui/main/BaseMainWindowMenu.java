@@ -37,6 +37,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -1052,6 +1053,19 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     public JMenu getMenu(MenuExtender.MenuKey marker) {
         return menus.get(marker);
+    }
+
+
+    @Override
+    public void enableMenuItem(MenuExtender.MenuKey menuKey, String name, boolean enabled) {
+        JMenu menu = getMenu(menuKey);
+        for (int i = 0; i < menu.getMenuComponentCount(); i++) {
+            Component c = menu.getMenuComponent(i);
+            if (name.equals(c.getName())) {
+                c.setEnabled(enabled);
+                break;
+            }
+        }
     }
 
     JMenuItem cycleSwitchCaseMenuItem;

@@ -655,6 +655,10 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
+            @Override
+            public void enableMenuItem(final MenuKey menu, final String name, final boolean enabled) {
+            }
+
             public void invokeAction(String action, int modifiers) {
             }
         };

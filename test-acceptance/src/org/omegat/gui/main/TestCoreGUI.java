@@ -40,10 +40,14 @@ import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.gui.editor.EditorController;
+import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.MarkerController;
 import org.omegat.util.OStrings;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.FontUtil;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.UIDesignManager;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -57,11 +61,16 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     protected void onSetUp() throws Exception {
         TestPreferencesInitializer.init();
         Core.setProject(new NotLoadedProject());
+        UIDesignManager.initialize();
         frame = GuiActionRunner.execute(() -> {
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
             TestCoreInitializer.initMainWindow(mw);
+            MarkerController.init();
+            IEditor editor = new EditorController(mw);
+            TestCoreInitializer.initEditor(editor);
             return mw;
         });
+
         window = new FrameFixture(robot(), frame);
         window.show();
     }
@@ -87,7 +96,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
             desktop = new DockingDesktop();
             getContentPane().add(desktop, BorderLayout.CENTER);
-
             StaticUIUtils.setWindowIcon(this);
 
             updateTitle();

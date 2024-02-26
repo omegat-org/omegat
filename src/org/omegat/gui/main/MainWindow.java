@@ -126,11 +126,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Set of all open search windows. */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    protected JLabel lengthLabel;
-    protected JLabel progressLabel;
-    protected JLabel statusLabel;
-    protected JLabel lockInsertLabel;
-
+    protected MainWindowUI.StatusBar statusBar;
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
@@ -188,7 +184,8 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
         pack();
-        getContentPane().add(MainWindowUI.createStatusBar(this), BorderLayout.SOUTH);
+        statusBar = MainWindowUI.createStatusBar();
+        getContentPane().add(statusBar, BorderLayout.SOUTH);
 
         StaticUIUtils.setWindowIcon(this);
 
@@ -379,7 +376,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             @Override
             public void run() {
-                statusLabel.setText(msg);
+                statusBar.setStatusLabel(msg);
             }
         });
     }
@@ -408,9 +405,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         // clear the message after 10 seconds
         String localizedString = getLocalizedString(messageKey, params);
         Timer timer = new Timer(10_000, evt -> {
-            String text = statusLabel.getText();
+            String text = statusBar.getStatusLabel();
             if (localizedString.equals(text)) {
-                statusLabel.setText(null);
+                statusBar.setStatusLabel(null);
             }
         });
         timer.setRepeats(false); // one-time only
@@ -424,7 +421,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      *            message text
      */
     public void showProgressMessage(String messageText) {
-        progressLabel.setText(messageText);
+        statusBar.setProgressLabel(messageText);
     }
 
     /*
@@ -433,7 +430,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @param tooltipText tooltip text
      */
     public void setProgressToolTipText(String toolTipText) {
-        progressLabel.setToolTipText(toolTipText);
+        statusBar.setProgressToolTip(toolTipText);
     }
 
     /**
@@ -443,12 +440,12 @@ public class MainWindow extends JFrame implements IMainWindow {
      *            message text
      */
     public void showLengthMessage(String messageText) {
-        lengthLabel.setText(messageText);
+        statusBar.setLengthLabel(messageText);
     }
 
     public void showLockInsertMessage(String messageText, String toolTip) {
-        lockInsertLabel.setText(messageText);
-        lockInsertLabel.setToolTipText(toolTip);
+        statusBar.setLockInsertLabel(messageText);
+        statusBar.setLockInsertToolTipText(toolTip);
     }
 
     // /////////////////////////////////////////////////////////////
@@ -494,7 +491,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             });
             lastDialogKey = warningKey;
 
-            statusLabel.setText(messages[0]);
+            statusBar.setStatusLabel(messages[0]);
 
             JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
@@ -514,7 +511,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
 
             String[] messages = msg.split("\\n");
-            statusLabel.setText(messages[0]);
+            statusBar.setStatusLabel(messages[0]);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));

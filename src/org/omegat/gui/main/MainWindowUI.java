@@ -50,6 +50,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -62,7 +64,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIDesignManager;
-import org.openide.awt.Mnemonics;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
@@ -96,14 +97,14 @@ public final class MainWindowUI {
     /**
      * Create main UI panels.
      */
-    public static void createMainComponents(final MainWindow mainWindow, final Font font) {
+    static void createMainComponents(final MainWindow mainWindow, final Font font) {
         mainWindow.projWin = new ProjectFilesListController(mainWindow);
     }
 
     /**
      * Create docking desktop panel.
      */
-    public static DockingDesktop initDocking(final MainWindow mainWindow) {
+    static DockingDesktop initDocking(final MainWindow mainWindow) {
         mainWindow.desktop = new DockingDesktop();
         mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
             public void dockableStateWillChange(DockableStateWillChangeEvent event) {
@@ -120,7 +121,7 @@ public final class MainWindowUI {
      * Installs a {@link IProjectEventListener} that handles loading, storing, and restoring the main window layout when
      * a project-specific layout is present.
      */
-    public static void handlePerProjectLayouts(final MainWindow mainWindow) {
+    static void handlePerProjectLayouts(final MainWindow mainWindow) {
         PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
         CoreEvents.registerProjectChangeListener(handler);
         CoreEvents.registerApplicationEventListener(handler);
@@ -183,84 +184,118 @@ public final class MainWindowUI {
     }
 
     /**
-     * Create swing UI components for status panel.
+     * Create swing UI components for a status panel.
      */
-    public static JPanel createStatusBar(final MainWindow mainWindow) {
-        mainWindow.statusLabel = new JLabel();
-        mainWindow.progressLabel = new JLabel();
-        mainWindow.lengthLabel = new JLabel();
-        mainWindow.lockInsertLabel = new JLabel();
+    public static StatusBar createStatusBar() {
+        return new StatusBar();
+    }
 
-        // Derive small label point size relative to default size; don't hard-code a
-        // point size because it will be wrong for e.g. HiDPI cases.
-        // Factor of 0.85 is based on old assumptions of 13pt default and 11pt small.
-        Font defaultFont = mainWindow.statusLabel.getFont();
-        float smallFontSize = defaultFont.getSize() * 0.85f;
-        mainWindow.statusLabel.setFont(defaultFont.deriveFont(smallFontSize));
+    @SuppressWarnings("serial")
+    public static class StatusBar extends JPanel {
+        private final JLabel statusLabel = new JLabel();
+        private final JLabel progressLabel = new JLabel();
+        private final JLabel lengthLabel = new JLabel();
+        private final JLabel lockInsertLabel = new JLabel();
 
-        Border border = UIManager.getBorder("OmegaTStatusArea.border");
+        public StatusBar() {
+            super();
+            setLayout(new BorderLayout());
 
-        final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                StatusBarMode.DEFAULT);
+            // Derive small label point size relative to default size; don't hard-code a
+            // point size because it will be wrong for e.g. HiDPI cases.
+            // Factor of 0.85 is based on old assumptions of 13pt default and 11pt small.
+            Font defaultFont = statusLabel.getFont();
+            float smallFontSize = defaultFont.getSize() * 0.85f;
+            statusLabel.setFont(defaultFont.deriveFont(smallFontSize));
+            Border border = UIManager.getBorder("OmegaTStatusArea.border");
 
-        String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-        String tooltipText = "MW_PROGRESS_TOOLTIP";
-        if (progressMode == StatusBarMode.PERCENTAGE) {
-            statusText = OStrings.getProgressBarDefaultPrecentageText();
-            tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
-        }
-        Mnemonics.setLocalizedText(mainWindow.progressLabel, statusText);
-        mainWindow.progressLabel.setToolTipText(OStrings.getString(tooltipText));
+            final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                    StatusBarMode.DEFAULT);
 
-        mainWindow.progressLabel.setBorder(border);
-        mainWindow.progressLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                StatusBarMode[] modes = StatusBarMode.values();
-                StatusBarMode progressMode = Preferences
-                        .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
-                progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
-
-                Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
-
-                String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-                String tooltipText = "MW_PROGRESS_TOOLTIP";
-                if (progressMode == StatusBarMode.PERCENTAGE) {
-                    statusText = OStrings.getProgressBarDefaultPrecentageText();
-                    tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
-                }
-
-                if (Core.getProject().isProjectLoaded()) {
-                    ((EditorController) Core.getEditor()).showStat();
-                } else {
-                    Core.getMainWindow().showProgressMessage(statusText);
-                }
-                ((MainWindow) Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
+            String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
+            String tooltipText = "MW_PROGRESS_TOOLTIP";
+            if (progressMode == StatusBarMode.PERCENTAGE) {
+                statusText = OStrings.getProgressBarDefaultPrecentageText();
+                tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
             }
-        });
+            Mnemonics.setLocalizedText(progressLabel, statusText);
+            progressLabel.setToolTipText(OStrings.getString(tooltipText));
 
-        Mnemonics.setLocalizedText(mainWindow.lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
-        mainWindow.lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
-        mainWindow.lengthLabel.setBorder(border);
-        mainWindow.lengthLabel.setFocusable(false);
+            progressLabel.setBorder(border);
+            progressLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    StatusBarMode[] modes = StatusBarMode.values();
+                    StatusBarMode progressMode = Preferences
+                            .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
+                    progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
 
-        JPanel statusPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        statusPanel2.add(mainWindow.lockInsertLabel);
-        statusPanel2.add(mainWindow.progressLabel);
-        statusPanel2.add(mainWindow.lengthLabel);
+                    Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
 
-        JPanel statusPanel = new JPanel(new BorderLayout());
-        statusPanel.add(mainWindow.statusLabel, BorderLayout.CENTER);
-        statusPanel.add(statusPanel2, BorderLayout.EAST);
-        statusPanel.setBorder(UIManager.getBorder("OmegaTMainWindowBottomMargin.border"));
+                    String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
+                    String tooltipText = "MW_PROGRESS_TOOLTIP";
+                    if (progressMode == StatusBarMode.PERCENTAGE) {
+                        statusText = OStrings.getProgressBarDefaultPrecentageText();
+                        tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
+                    }
 
-        Color bgColor = UIManager.getColor("AutoHideButtonPanel.background");
-        if (bgColor != null) {
-            statusPanel.setBackground(bgColor);
-            statusPanel2.setBackground(bgColor);
+                    if (Core.getProject().isProjectLoaded()) {
+                        ((EditorController) Core.getEditor()).showStat();
+                    } else {
+                        Core.getMainWindow().showProgressMessage(statusText);
+                    }
+                    ((MainWindow) Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
+                }
+            });
+
+            Mnemonics.setLocalizedText(lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
+            lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
+            lengthLabel.setBorder(border);
+            lengthLabel.setFocusable(false);
+
+            JPanel statusPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            statusPanel2.add(lockInsertLabel);
+            statusPanel2.add(progressLabel);
+            statusPanel2.add(lengthLabel);
+
+            add(statusLabel, BorderLayout.CENTER);
+            add(statusPanel2, BorderLayout.EAST);
+            setBorder(UIManager.getBorder("OmegaTMainWindowBottomMargin.border"));
+
+            Color bgColor = UIManager.getColor("AutoHideButtonPanel.background");
+            if (bgColor != null) {
+                setBackground(bgColor);
+                statusPanel2.setBackground(bgColor);
+            }
         }
 
-        return statusPanel;
+        public String getStatusLabel() {
+            return statusLabel.getText();
+        }
+
+        public void setStatusLabel(String text) {
+            statusLabel.setText(text);
+        }
+
+        public void setProgressLabel(String text) {
+            progressLabel.setText(text);
+        }
+
+        public void setProgressToolTip(String text) {
+            progressLabel.setToolTipText(text);
+        }
+
+        public void setLengthLabel(String text) {
+            lengthLabel.setText(text);
+        }
+
+        public void setLockInsertLabel(String text) {
+            lockInsertLabel.setText(text);
+        }
+
+        public void setLockInsertToolTipText(String text) {
+            lockInsertLabel.setToolTipText(text);
+        }
     }
 
     /**

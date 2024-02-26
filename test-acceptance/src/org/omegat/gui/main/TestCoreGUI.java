@@ -43,6 +43,7 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.MarkerController;
+import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.util.OStrings;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.FontUtil;
@@ -68,6 +69,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             MarkerController.init();
             IEditor editor = new EditorController(mw);
             TestCoreInitializer.initEditor(editor);
+            new MatchesTextArea(mw);
             return mw;
         });
 
@@ -95,7 +97,15 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
             desktop = new DockingDesktop();
+            desktop.addDockableStateWillChangeListener(event -> {
+                if (event.getFutureState().isClosed()) {
+                    event.cancel();
+                }
+            });
             getContentPane().add(desktop, BorderLayout.CENTER);
+            MainWindowUI.StatusBar statusBar = MainWindowUI.createStatusBar();
+            getContentPane().add(statusBar, BorderLayout.SOUTH);
+
             StaticUIUtils.setWindowIcon(this);
 
             updateTitle();
@@ -174,9 +184,13 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         public void showMessageDialog(final String message) {
         }
 
-        @Override
-        public void addDockable(final Dockable pane) {
+        /**
+         * {@inheritDoc}
+         */
+        public void addDockable(Dockable pane) {
+            desktop.addDockable(pane);
         }
+
 
         @Override
         public IMainMenu getMainMenu() {

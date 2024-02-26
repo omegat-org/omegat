@@ -65,7 +65,8 @@ public class ProjectMenuTest extends TestCoreGUI {
     public void testExit() {
         window.menuItem(BaseMainWindowMenu.PROJECT_MENU).click();
         window.menuItem(BaseMainWindowMenu.PROJECT_EXIT_MENUITEM).click();
-        assertTrue(TestMainWindowMenuHandler.quited);
+        window.requireNotVisible();
+        window.requireDisabled();
     }
 
 

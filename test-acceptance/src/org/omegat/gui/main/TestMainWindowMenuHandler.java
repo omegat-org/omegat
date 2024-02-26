@@ -10,8 +10,6 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     JFrame mw;
 
-    public static boolean quited = false;
-
     public TestMainWindowMenuHandler(JFrame mw) {
         this.mw = mw;
     }
@@ -25,7 +23,8 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     @Override
     public void projectExitMenuItemActionPerformed() {
-        quited = true;
+        mw.setVisible(false);
+        mw.setEnabled(false);
     }
 
     /**

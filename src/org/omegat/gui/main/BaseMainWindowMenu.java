@@ -153,8 +153,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
-    public BaseMainWindowMenu(JFrame mainWindow, BaseMainWindowMenuHandler mainWindowMenuHandler) {
-        this.mainWindow = mainWindow;
+    public BaseMainWindowMenu(IMainWindow mainWindow, BaseMainWindowMenuHandler mainWindowMenuHandler) {
+        this.mainWindow = mainWindow.getApplicationFrame();
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
 

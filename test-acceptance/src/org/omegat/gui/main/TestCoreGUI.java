@@ -25,6 +25,7 @@
 package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -70,7 +71,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             IEditor editor = new EditorController(mw);
             TestCoreInitializer.initEditor(editor);
             new MatchesTextArea(mw);
-            return mw;
+            return mw.getApplicationFrame();
         });
 
         window = new FrameFixture(robot(), frame);
@@ -78,23 +79,25 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     @SuppressWarnings("serial")
-    static class TestMainWindow extends JFrame implements IMainWindow {
+    static class TestMainWindow implements IMainWindow {
+        private final JFrame applicationFrame;
         private final FontUIResource font;
         public final BaseMainWindowMenu menu;
         public final DockingDesktop desktop;
 
         TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) {
-            setPreferredSize(new Dimension(1920, 1040));
+            applicationFrame = new JFrame();
+            applicationFrame.setPreferredSize(new Dimension(1920, 1040));
             font = FontUtil.getScaledFont();
             try {
                 BaseMainWindowMenuHandler handler =
-                        mainWindowMenuHandler.getDeclaredConstructor(JFrame.class).newInstance(this);
+                        mainWindowMenuHandler.getDeclaredConstructor(IMainWindow.class).newInstance(this);
                 menu = new TestMainWindowMenu(this, handler);
             } catch (Exception e) {
                 throw new RuntimeException();
             }
-            setJMenuBar(menu.mainMenu);
-            setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+            applicationFrame.setJMenuBar(menu.mainMenu);
+            applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
             desktop = new DockingDesktop();
             desktop.addDockableStateWillChangeListener(event -> {
@@ -102,14 +105,14 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
                     event.cancel();
                 }
             });
-            getContentPane().add(desktop, BorderLayout.CENTER);
-            MainWindowUI.StatusBar statusBar = MainWindowUI.createStatusBar();
-            getContentPane().add(statusBar, BorderLayout.SOUTH);
+            applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
+            MainWindowStatusBar mainWindowStatusBar = new MainWindowStatusBar();
+            applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
 
-            StaticUIUtils.setWindowIcon(this);
+            StaticUIUtils.setWindowIcon(applicationFrame);
 
             updateTitle();
-            pack();
+            applicationFrame.pack();
         }
 
         /**
@@ -117,12 +120,12 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
          */
         private void updateTitle() {
             String s = OStrings.getDisplayNameAndVersion();
-            setTitle(s);
+            applicationFrame.setTitle(s);
         }
 
         @Override
         public JFrame getApplicationFrame() {
-            return this;
+            return applicationFrame;
         }
 
         @Override
@@ -191,6 +194,16 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             desktop.addDockable(pane);
         }
 
+        @Override
+        public void setCursor(final Cursor cursor) {
+
+        }
+
+        @Override
+        public Cursor getCursor() {
+            return null;
+        }
+
 
         @Override
         public IMainMenu getMainMenu() {
@@ -205,7 +218,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     static class TestMainWindowMenu extends BaseMainWindowMenu {
 
-        TestMainWindowMenu(JFrame mainWindow, BaseMainWindowMenuHandler mainWindowMenuHandler) {
+        TestMainWindowMenu(IMainWindow mainWindow, BaseMainWindowMenuHandler mainWindowMenuHandler) {
             super(mainWindow, mainWindowMenuHandler);
             initComponents();
         }

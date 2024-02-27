@@ -44,6 +44,7 @@ import java.awt.Window;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -126,12 +127,13 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Set of all open search windows. */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    protected MainWindowUI.StatusBar statusBar;
+    protected MainWindowStatusBar mainWindowStatusBar;
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
     @SuppressWarnings("unchecked")
     public MainWindow() throws IOException {
+        super();
         MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
 
         // Load Menu extension
@@ -179,15 +181,15 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         // load default font from preferences
         font = FontUtil.getScaledFont();
-
         MainWindowUI.createMainComponents(this, font);
-
+        projWin = new ProjectFilesListController(this);
+        mainWindowStatusBar = new MainWindowStatusBar();
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
+        getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
         pack();
-        statusBar = MainWindowUI.createStatusBar();
-        getContentPane().add(statusBar, BorderLayout.SOUTH);
-
         StaticUIUtils.setWindowIcon(this);
+        MainWindowUI.handlePerProjectLayouts(this);
+        updateTitle();
 
         CoreEvents.registerProjectChangeListener(eventType -> {
             updateTitle();
@@ -211,10 +213,6 @@ public class MainWindow extends JFrame implements IMainWindow {
         CoreEvents.registerFontChangedEventListener(
                 newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
                         : new FontUIResource(newFont));
-
-        MainWindowUI.handlePerProjectLayouts(this);
-
-        updateTitle();
 
         // Set up prompt to reload if segmentation or filters settings change
         Preferences.addPropertyChangeListener(evt -> {
@@ -376,7 +374,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             @Override
             public void run() {
-                statusBar.setStatusLabel(msg);
+                mainWindowStatusBar.setStatusLabel(msg);
             }
         });
     }
@@ -405,9 +403,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         // clear the message after 10 seconds
         String localizedString = getLocalizedString(messageKey, params);
         Timer timer = new Timer(10_000, evt -> {
-            String text = statusBar.getStatusLabel();
+            String text = mainWindowStatusBar.getStatusLabel();
             if (localizedString.equals(text)) {
-                statusBar.setStatusLabel(null);
+                mainWindowStatusBar.setStatusLabel(null);
             }
         });
         timer.setRepeats(false); // one-time only
@@ -421,7 +419,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      *            message text
      */
     public void showProgressMessage(String messageText) {
-        statusBar.setProgressLabel(messageText);
+        mainWindowStatusBar.setProgressLabel(messageText);
     }
 
     /*
@@ -430,7 +428,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @param tooltipText tooltip text
      */
     public void setProgressToolTipText(String toolTipText) {
-        statusBar.setProgressToolTip(toolTipText);
+        mainWindowStatusBar.setProgressToolTip(toolTipText);
     }
 
     /**
@@ -440,12 +438,12 @@ public class MainWindow extends JFrame implements IMainWindow {
      *            message text
      */
     public void showLengthMessage(String messageText) {
-        statusBar.setLengthLabel(messageText);
+        mainWindowStatusBar.setLengthLabel(messageText);
     }
 
     public void showLockInsertMessage(String messageText, String toolTip) {
-        statusBar.setLockInsertLabel(messageText);
-        statusBar.setLockInsertToolTipText(toolTip);
+        mainWindowStatusBar.setLockInsertLabel(messageText);
+        mainWindowStatusBar.setLockInsertToolTipText(toolTip);
     }
 
     // /////////////////////////////////////////////////////////////
@@ -491,7 +489,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             });
             lastDialogKey = warningKey;
 
-            statusBar.setStatusLabel(messages[0]);
+            mainWindowStatusBar.setStatusLabel(messages[0]);
 
             JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
@@ -511,7 +509,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
 
             String[] messages = msg.split("\\n");
-            statusBar.setStatusLabel(messages[0]);
+            mainWindowStatusBar.setStatusLabel(messages[0]);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));
@@ -635,5 +633,61 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     public DockingDesktop getDesktop() {
         return desktop;
+    }
+
+    static class PerProjectLayoutHandler implements IProjectEventListener, IApplicationEventListener {
+
+        private final MainWindow mainWindow;
+        private boolean didApplyPerProjectLayout = false;
+
+        PerProjectLayoutHandler(MainWindow mainWindow) {
+            this.mainWindow = mainWindow;
+        }
+
+        @Override
+        public void onApplicationStartup() {
+        }
+
+        @Override
+        public void onApplicationShutdown() {
+            // Project is not closed before shutdown, so we need to handle this separately
+            // from the onProjectChanged events.
+            if (Core.getProject().isProjectLoaded() && didApplyPerProjectLayout) {
+                MainWindowUI.loadScreenLayoutFromPreferences(mainWindow);
+                didApplyPerProjectLayout = false;
+            }
+        }
+
+        @Override
+        public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+            if (eventType == PROJECT_CHANGE_TYPE.CLOSE && didApplyPerProjectLayout) {
+                MainWindowUI.loadScreenLayoutFromPreferences(mainWindow);
+                didApplyPerProjectLayout = false;
+                return;
+            }
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            File perProjLayout = getPerProjectLayout();
+            if (!perProjLayout.isFile()) {
+                return;
+            }
+            switch (eventType) {
+                case LOAD:
+                    MainWindowUI.saveScreenLayout(mainWindow);
+                    MainWindowUI.loadScreenLayout(mainWindow, perProjLayout);
+                    didApplyPerProjectLayout = true;
+                    break;
+                case SAVE:
+                    MainWindowUI.saveScreenLayout(mainWindow, perProjLayout);
+                    break;
+                default:
+            }
+        }
+
+        private File getPerProjectLayout() {
+            return new File(Core.getProject().getProjectProperties().getProjectInternal(),
+                    MainWindowUI.UI_LAYOUT_FILE);
+        }
     }
 }

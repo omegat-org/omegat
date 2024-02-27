@@ -31,37 +31,20 @@
 
 package org.omegat.gui.main;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-
-import org.openide.awt.Mnemonics;
-
-import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.editor.EditorController;
-import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIDesignManager;
 
@@ -70,7 +53,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 
 /**
- * Class for initialize, load/save, etc. for main window UI components.
+ * Class for initializing, load/save, etc. for main window UIComponents.
  *
  * @author Keith Godfrey
  * @author Benjamin Siband
@@ -98,7 +81,6 @@ public final class MainWindowUI {
      * Create main UI panels.
      */
     static void createMainComponents(final MainWindow mainWindow, final Font font) {
-        mainWindow.projWin = new ProjectFilesListController(mainWindow);
     }
 
     /**
@@ -118,193 +100,29 @@ public final class MainWindowUI {
     }
 
     /**
+     * Create swing UI components for a status panel.
+     */
+    public static MainWindowStatusBar createStatusBar() {
+        return new MainWindowStatusBar();
+    }
+
+    /**
      * Installs a {@link IProjectEventListener} that handles loading, storing, and restoring the main window layout when
      * a project-specific layout is present.
      */
     static void handlePerProjectLayouts(final MainWindow mainWindow) {
-        PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
+        MainWindow.PerProjectLayoutHandler handler = new MainWindow.PerProjectLayoutHandler(mainWindow);
         CoreEvents.registerProjectChangeListener(handler);
         CoreEvents.registerApplicationEventListener(handler);
-    }
-
-    private static class PerProjectLayoutHandler implements IProjectEventListener, IApplicationEventListener {
-
-        private final MainWindow mainWindow;
-        private boolean didApplyPerProjectLayout = false;
-
-        PerProjectLayoutHandler(MainWindow mainWindow) {
-            this.mainWindow = mainWindow;
-        }
-
-        @Override
-        public void onApplicationStartup() {
-        }
-
-        @Override
-        public void onApplicationShutdown() {
-            // Project is not closed before shutdown, so we need to handle this separately
-            // from the onProjectChanged events.
-            if (Core.getProject().isProjectLoaded() && didApplyPerProjectLayout) {
-                loadScreenLayoutFromPreferences(mainWindow);
-                didApplyPerProjectLayout = false;
-            }
-        }
-
-        @Override
-        public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-            if (eventType == PROJECT_CHANGE_TYPE.CLOSE && didApplyPerProjectLayout) {
-                loadScreenLayoutFromPreferences(mainWindow);
-                didApplyPerProjectLayout = false;
-                return;
-            }
-            if (!Core.getProject().isProjectLoaded()) {
-                return;
-            }
-            File perProjLayout = getPerProjectLayout();
-            if (!perProjLayout.isFile()) {
-                return;
-            }
-            switch (eventType) {
-            case LOAD:
-                saveScreenLayout(mainWindow);
-                loadScreenLayout(mainWindow, perProjLayout);
-                didApplyPerProjectLayout = true;
-                break;
-            case SAVE:
-                saveScreenLayout(mainWindow, perProjLayout);
-                break;
-            default:
-            }
-        }
-
-        private File getPerProjectLayout() {
-            return new File(Core.getProject().getProjectProperties().getProjectInternal(),
-                    MainWindowUI.UI_LAYOUT_FILE);
-        }
-    }
-
-    /**
-     * Create swing UI components for a status panel.
-     */
-    public static StatusBar createStatusBar() {
-        return new StatusBar();
-    }
-
-    @SuppressWarnings("serial")
-    public static class StatusBar extends JPanel {
-        private final JLabel statusLabel = new JLabel();
-        private final JLabel progressLabel = new JLabel();
-        private final JLabel lengthLabel = new JLabel();
-        private final JLabel lockInsertLabel = new JLabel();
-
-        public StatusBar() {
-            super();
-            setLayout(new BorderLayout());
-
-            // Derive small label point size relative to default size; don't hard-code a
-            // point size because it will be wrong for e.g. HiDPI cases.
-            // Factor of 0.85 is based on old assumptions of 13pt default and 11pt small.
-            Font defaultFont = statusLabel.getFont();
-            float smallFontSize = defaultFont.getSize() * 0.85f;
-            statusLabel.setFont(defaultFont.deriveFont(smallFontSize));
-            Border border = UIManager.getBorder("OmegaTStatusArea.border");
-
-            final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                    StatusBarMode.DEFAULT);
-
-            String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-            String tooltipText = "MW_PROGRESS_TOOLTIP";
-            if (progressMode == StatusBarMode.PERCENTAGE) {
-                statusText = OStrings.getProgressBarDefaultPrecentageText();
-                tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
-            }
-            Mnemonics.setLocalizedText(progressLabel, statusText);
-            progressLabel.setToolTipText(OStrings.getString(tooltipText));
-
-            progressLabel.setBorder(border);
-            progressLabel.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    StatusBarMode[] modes = StatusBarMode.values();
-                    StatusBarMode progressMode = Preferences
-                            .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
-                    progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
-
-                    Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
-
-                    String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-                    String tooltipText = "MW_PROGRESS_TOOLTIP";
-                    if (progressMode == StatusBarMode.PERCENTAGE) {
-                        statusText = OStrings.getProgressBarDefaultPrecentageText();
-                        tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
-                    }
-
-                    if (Core.getProject().isProjectLoaded()) {
-                        ((EditorController) Core.getEditor()).showStat();
-                    } else {
-                        Core.getMainWindow().showProgressMessage(statusText);
-                    }
-                    ((MainWindow) Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
-                }
-            });
-
-            Mnemonics.setLocalizedText(lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
-            lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
-            lengthLabel.setBorder(border);
-            lengthLabel.setFocusable(false);
-
-            JPanel statusPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            statusPanel2.add(lockInsertLabel);
-            statusPanel2.add(progressLabel);
-            statusPanel2.add(lengthLabel);
-
-            add(statusLabel, BorderLayout.CENTER);
-            add(statusPanel2, BorderLayout.EAST);
-            setBorder(UIManager.getBorder("OmegaTMainWindowBottomMargin.border"));
-
-            Color bgColor = UIManager.getColor("AutoHideButtonPanel.background");
-            if (bgColor != null) {
-                setBackground(bgColor);
-                statusPanel2.setBackground(bgColor);
-            }
-        }
-
-        public String getStatusLabel() {
-            return statusLabel.getText();
-        }
-
-        public void setStatusLabel(String text) {
-            statusLabel.setText(text);
-        }
-
-        public void setProgressLabel(String text) {
-            progressLabel.setText(text);
-        }
-
-        public void setProgressToolTip(String text) {
-            progressLabel.setToolTipText(text);
-        }
-
-        public void setLengthLabel(String text) {
-            lengthLabel.setText(text);
-        }
-
-        public void setLockInsertLabel(String text) {
-            lockInsertLabel.setText(text);
-        }
-
-        public void setLockInsertToolTipText(String text) {
-            lockInsertLabel.setToolTipText(text);
-        }
     }
 
     /**
      * Initialize the size of OmegaT window, then load the layout prefs.
      */
     public static void initializeScreenLayout(MainWindow mainWindow) {
-        /**
-         * (23dec22) Set a reasonable default window size assuming a standard"pro" laptop resolution of 1920x1080.
-         * Smaller screens do not need to be considered since OmegaT will just use the whole window size in such cases.
+        /*
+          (23dec22) Set a reasonable default window size assuming a standard"pro" laptop resolution of 1920x1080.
+          Smaller screens do not need to be considered since OmegaT will just use the whole window size in such cases.
          */
 
         // Check the real available space accounting for macOS DOCK, Windows Toolbar, etc.
@@ -341,7 +159,7 @@ public final class MainWindowUI {
      * Load the main window layout from the global preferences file. Will reset to defaults if global preferences are
      * not present or if an error occurs.
      */
-    private static void loadScreenLayoutFromPreferences(MainWindow mainWindow) {
+    static void loadScreenLayoutFromPreferences(MainWindow mainWindow) {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
         if (uiLayoutFile.exists()) {
             loadScreenLayout(mainWindow, uiLayoutFile);
@@ -353,7 +171,7 @@ public final class MainWindowUI {
     /**
      * Load the main window layout from the specified file. Will reset to defaults if an error occurs.
      */
-    private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
+    static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
             mainWindow.desktop.readXML(in);
         } catch (Exception ex) {
@@ -373,7 +191,7 @@ public final class MainWindowUI {
     /**
      * Stores main window layout to the specified output file.
      */
-    private static void saveScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
+    static void saveScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
         try (OutputStream out = new FileOutputStream(uiLayoutFile)) {
             mainWindow.desktop.writeXML(out);
         } catch (Exception ex) {

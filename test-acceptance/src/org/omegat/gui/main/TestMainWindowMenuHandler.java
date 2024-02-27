@@ -10,8 +10,8 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     JFrame mw;
 
-    public TestMainWindowMenuHandler(JFrame mw) {
-        this.mw = mw;
+    public TestMainWindowMenuHandler(IMainWindow mw) {
+        this.mw = mw.getApplicationFrame();
     }
 
     /**

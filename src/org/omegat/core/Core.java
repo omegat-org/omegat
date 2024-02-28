@@ -255,7 +255,7 @@ public final class Core {
         // 4. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);
         tagValidation = new TagValidationTool();
-        issuesWindow = new IssuesPanelController(me);
+        issuesWindow = new IssuesPanelController(me.getApplicationFrame());
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         glossary = glossaryArea;

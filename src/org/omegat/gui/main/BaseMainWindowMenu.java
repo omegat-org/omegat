@@ -53,7 +53,6 @@ import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -143,7 +142,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     public static final String PROJECT_ACCESS_ROOT_MENU = "project_access_root_menu";
 
     /** MainWindow instance. */
-    protected final JFrame mainWindow;
+    protected final IMainWindow mainWindow;
 
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
@@ -154,7 +153,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
     public BaseMainWindowMenu(IMainWindow mainWindow, BaseMainWindowMenuHandler mainWindowMenuHandler) {
-        this.mainWindow = mainWindow.getApplicationFrame();
+        this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
 
@@ -693,8 +692,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         String key = "findInProjectReuseLastWindow";
         KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
-        mainWindow.getRootPane().getActionMap().put(key, new AbstractAction() {
+        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Log.logInfoRB("LOG_MENU_CLICK", key);

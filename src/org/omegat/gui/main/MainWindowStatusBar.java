@@ -79,12 +79,12 @@ public class MainWindowStatusBar extends JPanel {
         statusLabel.setFont(defaultFont.deriveFont(smallFontSize));
         Border border = UIManager.getBorder("OmegaTStatusArea.border");
 
-        final MainWindowUI.StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                MainWindowUI.StatusBarMode.DEFAULT);
+        final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                StatusBarMode.DEFAULT);
 
         String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
         String tooltipText = "MW_PROGRESS_TOOLTIP";
-        if (progressMode == MainWindowUI.StatusBarMode.PERCENTAGE) {
+        if (progressMode == StatusBarMode.PERCENTAGE) {
             statusText = OStrings.getProgressBarDefaultPrecentageText();
             tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
         }
@@ -95,16 +95,16 @@ public class MainWindowStatusBar extends JPanel {
         progressLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainWindowUI.StatusBarMode[] modes = MainWindowUI.StatusBarMode.values();
-                MainWindowUI.StatusBarMode progressMode = Preferences
-                        .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, MainWindowUI.StatusBarMode.DEFAULT);
+                StatusBarMode[] modes = StatusBarMode.values();
+                StatusBarMode progressMode = Preferences
+                        .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
                 progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
 
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
 
                 String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
                 String tooltipText = "MW_PROGRESS_TOOLTIP";
-                if (progressMode == MainWindowUI.StatusBarMode.PERCENTAGE) {
+                if (progressMode == StatusBarMode.PERCENTAGE) {
                     statusText = OStrings.getProgressBarDefaultPrecentageText();
                     tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
                 }
@@ -165,5 +165,9 @@ public class MainWindowStatusBar extends JPanel {
 
     public void setLockInsertToolTipText(String text) {
         lockInsertLabel.setToolTipText(text);
+    }
+
+    public enum StatusBarMode {
+        DEFAULT, PERCENTAGE,
     }
 }

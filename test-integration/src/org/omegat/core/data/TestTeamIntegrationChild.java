@@ -663,6 +663,7 @@ public final class TestTeamIntegrationChild {
             }
         };
 
+        @Override
         public IMainMenu getMainMenu() {
             return menu;
         }
@@ -670,6 +671,10 @@ public final class TestTeamIntegrationChild {
         @Override
         public DockingDesktop getDesktop() {
             return null;
+        }
+
+        @Override
+        public void resetDesktopLayout() {
         }
 
         public Cursor getCursor() {

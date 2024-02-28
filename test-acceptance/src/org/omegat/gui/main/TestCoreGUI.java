@@ -214,6 +214,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         public DockingDesktop getDesktop() {
             return desktop;
         }
+
+        @Override
+        public void resetDesktopLayout() {
+        }
     }
 
     static class TestMainWindowMenu extends BaseMainWindowMenu {

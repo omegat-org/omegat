@@ -768,6 +768,7 @@ public class MainWindow implements IMainWindow {
     /**
      * Restores main window layout to the default values (distinct from global preferences).
      */
+    @Override
     public void resetDesktopLayout() {
         try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {
             desktop.readXML(in);

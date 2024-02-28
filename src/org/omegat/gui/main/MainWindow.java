@@ -145,7 +145,6 @@ public class MainWindow implements IMainWindow {
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
-    @SuppressWarnings("unchecked")
     public MainWindow() throws IOException {
         applicationFrame = new JFrame();
         applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -200,17 +199,17 @@ public class MainWindow implements IMainWindow {
         });
     }
 
+    @SuppressWarnings("unchecked")
     private void initMainMenu() {
         MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
 
         // Load Menu extension
-        Class<? extends BaseMainWindowMenu> menuClass;
-        menuClass = (Class<? extends BaseMainWindowMenu>) UIManager.get(UIDesignManager.menuClassID);
+        Object menuClass = UIManager.get(UIDesignManager.menuClassID);
         if (menuClass != null) {
             BaseMainWindowMenu menu1;
             try {
-                menu1 = menuClass.getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                        .newInstance(this, mainWindowMenuHandler);
+                menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass).getDeclaredConstructor(MainWindow.class,
+                        MainWindowMenuHandler.class).newInstance(this, mainWindowMenuHandler);
             } catch (Exception e) {
                 // fall back to default when loading failed.
                 menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
@@ -234,16 +233,16 @@ public class MainWindow implements IMainWindow {
         });
 
         // Load toolbar extension
-        Class<? extends JPanel> toolbarClass = (Class<? extends JPanel>) UIManager.get(UIDesignManager.toolbarClassID);
-        if (toolbarClass != null) {
-            try {
-                applicationFrame.getContentPane().add(toolbarClass.getDeclaredConstructor(MainWindow.class,
-                                MainWindowMenuHandler.class)
-                        .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException ignored) {
+            Object toolbarClass =  UIManager.get(UIDesignManager.toolbarClassID);
+            if (toolbarClass != null) {
+                try {
+                    applicationFrame.getContentPane().add((Component) ((Class<?>)toolbarClass).getDeclaredConstructor(MainWindow.class,
+                                    MainWindowMenuHandler.class)
+                            .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                         NoSuchMethodException ignored) {
+                }
             }
-        }
     }
 
     /**

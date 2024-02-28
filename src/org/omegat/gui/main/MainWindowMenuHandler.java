@@ -446,11 +446,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             protected void done() {
                 try {
                     get();
-
-                    MainWindowUI.saveScreenLayout(mainWindow);
-
+                    mainWindow.saveScreenLayout();
                     Preferences.save();
-
                     onCompletion.run();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -999,7 +996,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * defaults.
      */
     public void viewRestoreGUIMenuItemActionPerformed() {
-        MainWindowUI.resetDesktopLayout(mainWindow);
+        mainWindow.resetDesktopLayout();
     }
 
     public void optionsAccessConfigDirMenuItemActionPerformed() {

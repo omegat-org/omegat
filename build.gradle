@@ -1566,6 +1566,10 @@ tasks.register('testOnJava21', Test) {
 tasks.register('testAcceptance', Test) {
     description = 'Run Acceptance GUI test'
     group = 'verification'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
     testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties

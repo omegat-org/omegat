@@ -194,6 +194,8 @@ sourceSets {
     }
     testAcceptance {
         java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
             srcDir 'test-acceptance/src'
         }
     }
@@ -208,6 +210,8 @@ configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     testIntegrationImplementation.extendsFrom implementation
+    testAcceptanceImplementation.extendsFrom testImplementation
+    testAcceptanceRuntime.extendsFrom testRuntime
     jaxb
     genMac
 }
@@ -1557,6 +1561,15 @@ tasks.register('testOnJava21', Test) {
         systemProperty 'java.awt.headless', 'true'
     }
     group = 'verification'
+}
+
+tasks.register('testAcceptance', Test) {
+    description = 'Run Acceptance GUI test'
+    group = 'verification'
+    testClassesDirs = sourceSets.testAcceptance.output.classesDirs
+    classpath = sourceSets.testAcceptance.runtimeClasspath
+    systemProperties = System.properties
+    shouldRunAfter(tasks.test)
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')

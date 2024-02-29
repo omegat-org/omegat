@@ -61,8 +61,8 @@ public final class MainWindowUI {
     }
 
     /**
-     * Load the main window layout from the global preferences file. Will reset to defaults if global preferences are
-     * not present or if an error occurs.
+     * Load the main window layout from the global preferences file. Will reset
+     * to defaults if global preferences are not present or if an error occurs.
      */
     @Deprecated
     public static void loadScreenLayoutFromPreferences(MainWindow mainWindow) {
@@ -70,7 +70,8 @@ public final class MainWindowUI {
     }
 
     /**
-     * Load the main window layout from the specified file. Will reset to defaults if an error occurs.
+     * Load the main window layout from the specified file. Will reset to
+     * defaults if an error occurs.
      */
     @Deprecated
     public static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
@@ -94,7 +95,8 @@ public final class MainWindowUI {
     }
 
     /**
-     * Restores main window layout to the default values (distinct from global preferences).
+     * Restores main window layout to the default values (distinct from global
+     * preferences).
      */
     @Deprecated
     public static void resetDesktopLayout(MainWindow mainWindow) {

@@ -71,9 +71,10 @@ public class MainWindowStatusBar extends JPanel {
         lengthLabel.setName(LENGTH_LABEL_NAME);
         lockInsertLabel.setName(LOCK_INSERT_LABEL_NAME);
 
-        // Derive small label point size relative to default size; don't hard-code a
-        // point size because it will be wrong for e.g. HiDPI cases.
-        // Factor of 0.85 is based on old assumptions of 13pt default and 11pt small.
+        // Derive small label point size relative to default size; don't
+        // hard-code a point size because it will be wrong for e.g. HiDPI
+        // cases. Factor of 0.85 is based on old assumptions of 13pt default
+        // and 11pt small.
         Font defaultFont = statusLabel.getFont();
         float smallFontSize = defaultFont.getSize() * 0.85f;
         statusLabel.setFont(defaultFont.deriveFont(smallFontSize));

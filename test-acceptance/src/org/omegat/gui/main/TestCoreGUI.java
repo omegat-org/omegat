@@ -90,8 +90,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             applicationFrame.setPreferredSize(new Dimension(1920, 1040));
             font = FontUtil.getScaledFont();
             try {
-                BaseMainWindowMenuHandler handler =
-                        mainWindowMenuHandler.getDeclaredConstructor(IMainWindow.class).newInstance(this);
+                BaseMainWindowMenuHandler handler = mainWindowMenuHandler
+                        .getDeclaredConstructor(IMainWindow.class).newInstance(this);
                 menu = new TestMainWindowMenu(this, handler);
             } catch (Exception e) {
                 throw new RuntimeException();
@@ -166,7 +166,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         }
 
         @Override
-        public void displayWarningRB(final String warningKey, final String supercedesKey, final Object... params) {
+        public void displayWarningRB(final String warningKey, final String supercedesKey,
+                final Object... params) {
         }
 
         @Override
@@ -179,7 +180,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         @Override
         public int showConfirmDialog(final Object message, final String title, final int optionType,
-                                     final int messageType) throws HeadlessException {
+                final int messageType) throws HeadlessException {
             return 0;
         }
 
@@ -203,7 +204,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         public Cursor getCursor() {
             return null;
         }
-
 
         @Override
         public IMainMenu getMainMenu() {

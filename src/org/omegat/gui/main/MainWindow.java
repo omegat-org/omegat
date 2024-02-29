@@ -168,9 +168,9 @@ public class MainWindow implements IMainWindow {
             public void onApplicationStartup() {
                 initializeScreenLayout();
                 loadScreenLayoutFromPreferences();
-                // Ensure any "closed" Dockables are visible. These can be newly added
-                // panes not included in an older layout file, or e.g. panes installed by
-                // plugins.
+                // Ensure any "closed" Dockables are visible. These can be newly
+                // added panes not included in an older layout file, or e.g. panes
+                // installed by plugins.
                 UIDesignManager.ensureDockablesVisible(desktop);
                 UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
@@ -208,8 +208,9 @@ public class MainWindow implements IMainWindow {
         if (menuClass != null) {
             BaseMainWindowMenu menu1;
             try {
-                menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass).getDeclaredConstructor(MainWindow.class,
-                        MainWindowMenuHandler.class).newInstance(this, mainWindowMenuHandler);
+                menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
+                        .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
+                        .newInstance(this, mainWindowMenuHandler);
             } catch (Exception e) {
                 // fall back to default when loading failed.
                 menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
@@ -233,16 +234,17 @@ public class MainWindow implements IMainWindow {
         });
 
         // Load toolbar extension
-            Object toolbarClass =  UIManager.get(UIDesignManager.toolbarClassID);
-            if (toolbarClass != null) {
-                try {
-                    applicationFrame.getContentPane().add((Component) ((Class<?>)toolbarClass).getDeclaredConstructor(MainWindow.class,
-                                    MainWindowMenuHandler.class)
-                            .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                         NoSuchMethodException ignored) {
-                }
+        Object toolbarClass = UIManager.get(UIDesignManager.toolbarClassID);
+        if (toolbarClass != null) {
+            try {
+                applicationFrame.getContentPane()
+                        .add((Component) ((Class<?>) toolbarClass)
+                                .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
+                                .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                    | NoSuchMethodException ignored) {
             }
+        }
     }
 
     /**
@@ -264,8 +266,9 @@ public class MainWindow implements IMainWindow {
     }
 
     /**
-     * Installs a {@link IProjectEventListener} that handles loading, storing, and restoring the main window layout when
-     * a project-specific layout is present.
+     * Installs a {@link IProjectEventListener} that handles loading, storing,
+     * and restoring the main window layout when a project-specific layout is
+     * present.
      */
     private static void handlePerProjectLayouts(final MainWindow mainWindow) {
         PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
@@ -278,11 +281,14 @@ public class MainWindow implements IMainWindow {
      */
     public void initializeScreenLayout() {
         /*
-          (23dec22) Set a reasonable default window size assuming a standard"pro" laptop resolution of 1920x1080.
-          Smaller screens do not need to be considered since OmegaT will just use the whole window size in such cases.
+         * (23dec22) Set a reasonable default window size assuming a
+         * standard"pro" laptop resolution of 1920x1080. Smaller screens do not
+         * need to be considered since OmegaT will just use the whole window
+         * size in such cases.
          */
 
-        // Check the real available space accounting for macOS DOCK, Windows Toolbar, etc.
+        // Check the real available space accounting for macOS DOCK, Windows
+        // Toolbar, etc.
         Rectangle localAvailableSpace = GraphicsEnvironment.getLocalGraphicsEnvironment()
                 .getMaximumWindowBounds();
         int screenWidth = localAvailableSpace.width;
@@ -304,6 +310,7 @@ public class MainWindow implements IMainWindow {
         Rectangle defaultWindowSize = new Rectangle(omegatLeftPosition, 0, omegatWidth, omegatHeight);
         applicationFrame.setBounds(defaultWindowSize);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -721,8 +728,8 @@ public class MainWindow implements IMainWindow {
     }
 
     /**
-     * Load the main window layout from the global preferences file. Will reset to defaults if global preferences are
-     * not present or if an error occurs.
+     * Load the main window layout from the global preferences file. Will reset
+     * to defaults if global preferences are not present or if an error occurs.
      */
     public void loadScreenLayoutFromPreferences() {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), UI_LAYOUT_FILE);
@@ -734,7 +741,8 @@ public class MainWindow implements IMainWindow {
     }
 
     /**
-     * Load the main window layout from the specified file. Will reset to defaults if an error occurs.
+     * Load the main window layout from the specified file. Will reset to
+     * defaults if an error occurs.
      */
     public void loadScreenLayout(File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
@@ -765,7 +773,8 @@ public class MainWindow implements IMainWindow {
     }
 
     /**
-     * Restores main window layout to the default values (distinct from global preferences).
+     * Restores main window layout to the default values (distinct from global
+     * preferences).
      */
     @Override
     public void resetDesktopLayout() {
@@ -791,7 +800,8 @@ public class MainWindow implements IMainWindow {
 
         @Override
         public void onApplicationShutdown() {
-            // Project is not closed before shutdown, so we need to handle this separately
+            // Project is not closed before shutdown, so we need to handle this
+            // separately
             // from the onProjectChanged events.
             if (Core.getProject().isProjectLoaded() && didApplyPerProjectLayout) {
                 mainWindow.loadScreenLayoutFromPreferences();
@@ -814,21 +824,20 @@ public class MainWindow implements IMainWindow {
                 return;
             }
             switch (eventType) {
-                case LOAD:
-                    mainWindow.saveScreenLayout();
-                    mainWindow.loadScreenLayout(perProjLayout);
-                    didApplyPerProjectLayout = true;
-                    break;
-                case SAVE:
-                    mainWindow.saveScreenLayout(perProjLayout);
-                    break;
-                default:
+            case LOAD:
+                mainWindow.saveScreenLayout();
+                mainWindow.loadScreenLayout(perProjLayout);
+                didApplyPerProjectLayout = true;
+                break;
+            case SAVE:
+                mainWindow.saveScreenLayout(perProjLayout);
+                break;
+            default:
             }
         }
 
         private File getPerProjectLayout() {
-            return new File(Core.getProject().getProjectProperties().getProjectInternal(),
-                    UI_LAYOUT_FILE);
+            return new File(Core.getProject().getProjectProperties().getProjectInternal(), UI_LAYOUT_FILE);
         }
     }
 }

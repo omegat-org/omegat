@@ -314,7 +314,7 @@ public class ProjectPropertiesDialogController {
             str += OConsts.EXT_TSV_TXT; // Defaults to .txt
         }
 
-        resetThePathAndWarn(browser, field, browseTarget, str);
+        resetThePaths(browser, field, browseTarget, str);
     }
 
     private String getBrowserTitle(int browseTarget) {
@@ -396,13 +396,13 @@ public class ProjectPropertiesDialogController {
         }
     }
 
-    private void resetThePathAndWarn(OmegaTFileChooser browser, JTextField field, int browseTarget,
-            String str) {
+    private void resetThePaths(OmegaTFileChooser browser, JTextField field, int browseTarget,
+                               String pathStr) {
         // reset the appropriate path - store preferred directory
         switch (browseTarget) {
         case 1:
             Preferences.setPreference(Preferences.SOURCE_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setSourceRoot(str);
+            projectProperties.setSourceRoot(pathStr);
             field.setText(projectProperties.getSourceRoot());
             if (new File(projectProperties.getSourceRoot()).exists()
                     && new File(projectProperties.getSourceRoot()).isDirectory()) {
@@ -411,7 +411,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 2:
             Preferences.setPreference(Preferences.TARGET_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setTargetRoot(str);
+            projectProperties.setTargetRoot(pathStr);
             field.setText(projectProperties.getTargetRoot());
             if (new File(projectProperties.getTargetRoot()).exists()
                     && new File(projectProperties.getTargetRoot()).isDirectory()) {
@@ -420,7 +420,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 3:
             Preferences.setPreference(Preferences.GLOSSARY_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setGlossaryRoot(str);
+            projectProperties.setGlossaryRoot(pathStr);
             field.setText(projectProperties.getGlossaryRoot());
             if (new File(projectProperties.getGlossaryRoot()).exists()
                     && new File(projectProperties.getGlossaryRoot()).isDirectory()) {
@@ -429,7 +429,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 4:
             Preferences.setPreference(Preferences.TM_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setTMRoot(str);
+            projectProperties.setTMRoot(pathStr);
             field.setText(projectProperties.getTMRoot());
             if (new File(projectProperties.getTMRoot()).exists()
                     && new File(projectProperties.getTMRoot()).isDirectory()) {
@@ -438,7 +438,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 5:
             Preferences.setPreference(Preferences.DICT_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setDictRoot(str);
+            projectProperties.setDictRoot(pathStr);
             field.setText(projectProperties.getDictRoot());
             if (new File(projectProperties.getDictRoot()).exists()
                     && new File(projectProperties.getDictRoot()).isDirectory()) {
@@ -447,7 +447,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 6:
             Preferences.setPreference(Preferences.GLOSSARY_FILE, browser.getSelectedFile().getPath());
-            projectProperties.setWriteableGlossary(str);
+            projectProperties.setWriteableGlossary(pathStr);
             field.setText(projectProperties.getWriteableGlossary());
             // The writable glosssary file must be inside the glossary dir
             if (new File(projectProperties.getWriteableGlossaryDir()).exists()
@@ -459,7 +459,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 7:
             Preferences.setPreference(Preferences.EXPORT_TM_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setExportTMRoot(str);
+            projectProperties.setExportTMRoot(pathStr);
             field.setText(projectProperties.getExportTMRoot());
             if (new File(projectProperties.getExportTMRoot()).exists()
                     && new File(projectProperties.getExportTMRoot()).isDirectory()) {

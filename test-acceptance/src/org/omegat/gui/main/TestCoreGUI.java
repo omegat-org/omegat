@@ -127,9 +127,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
             CoreEvents.registerProjectChangeListener(eventType -> {
                 updateTitle();
+                /*
                 if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
-                    // closeSearchWindows();
+                    closeSearchWindows();
                 }
+                */
             });
 
             CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {

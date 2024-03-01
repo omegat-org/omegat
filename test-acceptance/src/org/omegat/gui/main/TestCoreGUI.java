@@ -47,7 +47,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;

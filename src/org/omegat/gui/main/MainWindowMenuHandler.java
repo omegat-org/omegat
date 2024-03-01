@@ -408,7 +408,7 @@ public final class MainWindowMenuHandler {
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow,
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow.getApplicationFrame(),
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION)) {
                 return;
@@ -602,7 +602,7 @@ public final class MainWindowMenuHandler {
 
     private String getTrimmedSelectedTextInMainWindow() {
         String selection = null;
-        Component component = mainWindow.getMostRecentFocusOwner();
+        Component component = mainWindow.getApplicationFrame().getMostRecentFocusOwner();
         if (component instanceof JTextComponent) {
             selection = ((JTextComponent) component).getSelectedText();
             if (!StringUtil.isEmpty(selection)) {
@@ -770,7 +770,7 @@ public final class MainWindowMenuHandler {
      */
     public void gotoSegmentMenuItemActionPerformed() {
         // Create a dialog for input
-        GoToSegmentDialog dialog = new GoToSegmentDialog(mainWindow);
+        GoToSegmentDialog dialog = new GoToSegmentDialog(mainWindow.getApplicationFrame());
         dialog.setVisible(true);
 
         int jumpTo = dialog.getResult();
@@ -894,7 +894,7 @@ public final class MainWindowMenuHandler {
     public void toolsCheckIssuesMenuItemActionPerformed() {
         if (!Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK)) {
             IssueProvidersSelectorController dialog = new IssueProvidersSelectorController();
-            if (!dialog.show(mainWindow)) {
+            if (!dialog.show(mainWindow.getApplicationFrame())) {
                 return;
             }
         }
@@ -975,14 +975,14 @@ public final class MainWindowMenuHandler {
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow, FiltersCustomizerController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), FiltersCustomizerController.class);
     }
 
     /**
      * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow, SegmentationCustomizerController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), SegmentationCustomizerController.class);
 
     }
 
@@ -990,7 +990,7 @@ public final class MainWindowMenuHandler {
      * Displays the workflow setup dialog to allow customizing the diverse workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow, EditingBehaviorController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), EditingBehaviorController.class);
     }
 
     /**
@@ -1012,7 +1012,8 @@ public final class MainWindowMenuHandler {
         try {
             Help.showHelp();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(mainWindow, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+            JOptionPane.showMessageDialog(mainWindow.getApplicationFrame(), ex.getLocalizedMessage(), OStrings.getString(
+                    "ERROR_TITLE"),
                     JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
@@ -1029,20 +1030,20 @@ public final class MainWindowMenuHandler {
      * Shows Last changes
      */
     public void helpLastChangesMenuItemActionPerformed() {
-        new LastChangesDialog(mainWindow).setVisible(true);
+        new LastChangesDialog(mainWindow.getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Show log
      */
     public void helpLogMenuItemActionPerformed() {
-        new LogDialog(mainWindow).setVisible(true);
+        new LogDialog(mainWindow.getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Check for updates
      */
     public void helpUpdateCheckMenuItemActionPerformed() {
-        VersionCheckDialog.checkAndShowResultAsync(mainWindow);
+        VersionCheckDialog.checkAndShowResultAsync(mainWindow.getApplicationFrame());
     }
 }

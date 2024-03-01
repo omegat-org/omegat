@@ -1,4 +1,4 @@
-name: Run Gradle test
+name: Unit Tests, Quality checks, and Acceptance Tests
 
 on:
   push:
@@ -42,5 +42,8 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
+            body: `❌ ${{ github.workflow }} **failed**.
+
+             Please look a Gradle Scan page for details: 
+             ${{ steps.gradle.outputs.build-scan-url }}`
           })

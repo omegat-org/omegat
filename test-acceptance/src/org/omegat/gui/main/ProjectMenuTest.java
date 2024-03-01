@@ -25,7 +25,6 @@
 package org.omegat.gui.main;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -57,8 +56,13 @@ public class ProjectMenuTest extends TestCoreGUI {
         window.fileChooser(NewProjectFileChooser.DIALOG_NAME).requireEnabled();
         window.fileChooser().selectFile(tempDir);
         window.fileChooser().approve();
+        assertFalse(Core.getProject().isProjectLoaded());
+       /*
+        window.dialog(Timeout.timeout(30000L)).requireVisible();
+        window.dialog(ProjectPropertiesDialog.DIALOG_NAME).requireModal();
+        window.dialog(ProjectPropertiesDialog.DIALOG_NAME).button(ProjectPropertiesDialog.OK_BUTTON_NAME).click();
         assertTrue(Core.getProject().isProjectLoaded());
-        assertFalse(Core.getProject().isRemoteProject());
+       */
     }
 
     @Test

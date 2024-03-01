@@ -100,7 +100,8 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
-    public static final String DIALOG_NAME = "project_properties";
+    public static final String DIALOG_NAME = "project_properties_dialog";
+    public static final String OK_BUTTON_NAME = "project_properties_ok_button";
 
     private final Mode dialogType;
     private final ProjectPropertiesDialogController controller;

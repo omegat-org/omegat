@@ -28,9 +28,14 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
+import java.awt.Rectangle;
+import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 
@@ -39,17 +44,20 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.gui.editor.EditorController;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.MarkerController;
-import org.omegat.gui.matches.MatchesTextArea;
+import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.threads.IAutoSave;
+import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.FontUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
+import org.omegat.util.gui.UIScale;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -62,15 +70,19 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     @Override
     protected void onSetUp() throws Exception {
         TestPreferencesInitializer.init();
-        Core.setProject(new NotLoadedProject());
-        UIDesignManager.initialize();
+        TestCoreInitializer.initProject();
         frame = GuiActionRunner.execute(() -> {
+            UIDesignManager.initialize();
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
             TestCoreInitializer.initMainWindow(mw);
-            MarkerController.init();
-            IEditor editor = new EditorController(mw);
-            TestCoreInitializer.initEditor(editor);
-            new MatchesTextArea(mw);
+            TestCoreInitializer.initAutoSave(autoSave);
+
+            CoreEvents.fireApplicationStartup();
+            SwingUtilities.invokeLater(() -> {
+                // setVisible can't be executed directly, because we need to
+                // call all application startup listeners for initialize UI
+                Core.getMainWindow().getApplicationFrame().setVisible(true);
+            });
             return mw.getApplicationFrame();
         });
 
@@ -81,11 +93,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     @SuppressWarnings("serial")
     static class TestMainWindow implements IMainWindow {
         private final JFrame applicationFrame;
-        private final FontUIResource font;
+        private FontUIResource font;
         public final BaseMainWindowMenu menu;
         public final DockingDesktop desktop;
 
-        TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) {
+        TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException {
             applicationFrame = new JFrame();
             applicationFrame.setPreferredSize(new Dimension(1920, 1040));
             font = FontUtil.getScaledFont();
@@ -112,6 +124,48 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             StaticUIUtils.setWindowIcon(applicationFrame);
 
             updateTitle();
+
+            CoreEvents.registerProjectChangeListener(eventType -> {
+                updateTitle();
+                if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
+                    // closeSearchWindows();
+                }
+            });
+
+            CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+                public void onApplicationStartup() {
+                    initializeScreenLayout();
+                    resetDesktopLayout();
+                    // Ensure any "closed" Dockables are visible. These can be newly
+                    // added panes not included in an older layout file, or e.g. panes
+                    // installed by plugins.
+                    UIDesignManager.ensureDockablesVisible(desktop);
+                    UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
+                }
+
+                public void onApplicationShutdown() {
+                }
+            });
+
+            UIScale.addPropertyChangeListener(evt -> CoreEvents.fireFontChanged(FontUtil.getScaledFont()));
+            CoreEvents.registerFontChangedEventListener(
+                    newFont -> font = (newFont instanceof FontUIResource) ? (FontUIResource) newFont
+                            : new FontUIResource(newFont));
+
+            // Set up prompt to reload if segmentation or filters settings change
+            Preferences.addPropertyChangeListener(evt -> {
+                if (Core.getProject().isProjectLoaded()) {
+                    String prop = evt.getPropertyName();
+                    if (prop.equals(Preferences.PROPERTY_SRX)
+                            && Core.getProject().getProjectProperties().getProjectSRX() == null) {
+                        SwingUtilities.invokeLater(ProjectUICommands::promptReload);
+                    } else if (prop.equals(Preferences.PROPERTY_FILTERS)
+                            && Core.getProject().getProjectProperties().getProjectFilters() == null) {
+                        SwingUtilities.invokeLater(ProjectUICommands::promptReload);
+                    }
+                }
+            });
+
             applicationFrame.pack();
         }
 
@@ -121,6 +175,41 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         private void updateTitle() {
             String s = OStrings.getDisplayNameAndVersion();
             applicationFrame.setTitle(s);
+        }
+
+        /**
+         * Initialize the size of OmegaT window, then load the layout prefs.
+         */
+        public void initializeScreenLayout() {
+            /*
+             * (23dec22) Set a reasonable default window size assuming a
+             * standard"pro" laptop resolution of 1920x1080. Smaller screens do not
+             * need to be considered since OmegaT will just use the whole window
+             * size in such cases.
+             */
+
+            // Check the real available space accounting for macOS DOCK, Windows
+            // Toolbar, etc.
+            Rectangle localAvailableSpace = GraphicsEnvironment.getLocalGraphicsEnvironment()
+                    .getMaximumWindowBounds();
+            int screenWidth = localAvailableSpace.width;
+            int screenHeight = localAvailableSpace.height;
+            int omegatWidth = OConsts.OMEGAT_WINDOW_WIDTH;
+            int omegatHeight = OConsts.OMEGAT_WINDOW_HEIGHT;
+
+            if (omegatWidth > screenWidth) {
+                omegatWidth = screenWidth;
+            }
+
+            if (omegatHeight > screenHeight) {
+                omegatHeight = screenHeight;
+            }
+
+            // Attempt to center the OmegaT main window on the screen
+            int omegatLeftPosition = (screenWidth - omegatWidth) / 2;
+
+            Rectangle defaultWindowSize = new Rectangle(omegatLeftPosition, 0, omegatWidth, omegatHeight);
+            applicationFrame.setBounds(defaultWindowSize);
         }
 
         @Override
@@ -197,12 +286,12 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         @Override
         public void setCursor(final Cursor cursor) {
-
+            applicationFrame.setCursor(cursor);
         }
 
         @Override
         public Cursor getCursor() {
-            return null;
+            return applicationFrame.getCursor();
         }
 
         @Override
@@ -217,8 +306,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         @Override
         public void resetDesktopLayout() {
+            try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {
+                desktop.readXML(in);
+            } catch (Exception e) {
+                Log.log(e);
+            }
         }
     }
+
+    static IAutoSave autoSave = new IAutoSave() {
+        public void enable() {
+        }
+
+        public void disable() {
+        }
+    };
 
     static class TestMainWindowMenu extends BaseMainWindowMenu {
 

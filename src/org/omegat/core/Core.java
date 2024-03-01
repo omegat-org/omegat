@@ -245,7 +245,20 @@ public final class Core {
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
+        initializeGUIimpl(me);
 
+        SaveThread th = new SaveThread();
+        saveThread = th;
+        th.start();
+
+        new VersionCheckThread(10).start();
+    }
+
+    /**
+     * initialize GUI for test.
+     * @throws Exception
+     */
+    static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 
@@ -266,12 +279,6 @@ public final class Core {
         dictionaries = new DictionariesTextArea(me);
         multiple = new MultipleTransPane(me);
         new SegmentPropertiesArea(me);
-
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
-
-        new VersionCheckThread(10).start();
     }
 
     /**

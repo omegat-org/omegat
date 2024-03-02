@@ -972,7 +972,6 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     public void optionsSentsegMenuItemActionPerformed() {
         new PreferencesWindowController().show(mainWindow.getApplicationFrame(),
                 SegmentationCustomizerController.class);
-
     }
 
     /**

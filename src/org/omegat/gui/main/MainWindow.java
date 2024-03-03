@@ -138,8 +138,6 @@ public class MainWindow implements IMainWindow {
     /** Set of all open search windows. */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    protected ProjectFilesListController projWin;
-
     protected MainWindowStatusBar mainWindowStatusBar;
 
     protected DockingDesktop desktop;
@@ -151,7 +149,6 @@ public class MainWindow implements IMainWindow {
         initMainMenu();
         // load default font from preferences
         font = FontUtil.getScaledFont();
-        projWin = new ProjectFilesListController(this);
         initDockingAndStatusBar();
         StaticUIUtils.setWindowIcon(applicationFrame);
         handlePerProjectLayouts(this);

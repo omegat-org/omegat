@@ -72,6 +72,7 @@ import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.exttrans.MachineTranslationInfo;
+import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
@@ -252,12 +253,13 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void viewFileListMenuItemActionPerformed() {
-        if (mainWindow.projWin == null) {
+        IProjectFilesList projWin = Core.getProjectFilesList();
+        if (projWin == null) {
             mainWindow.menu.viewFileListMenuItem.setSelected(false);
             return;
         }
 
-        mainWindow.projWin.setActive(!mainWindow.projWin.isActive());
+        projWin.setActive(!projWin.isActive());
     }
 
     public void projectAccessRootMenuItemActionPerformed() {

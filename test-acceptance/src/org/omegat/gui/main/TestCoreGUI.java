@@ -33,6 +33,9 @@ import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -43,11 +46,13 @@ import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
+import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -63,12 +68,20 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 
 public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
+    public static final String PLUGINS_LIST_FILE = "test-acceptance/plugins.properties";
+
     protected FrameFixture window;
     protected JFrame frame;
 
     @Override
     protected void onSetUp() throws Exception {
+        Properties props = new Properties();
+        try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+            props.load(fis);
+            PluginUtils.loadPluginFromProperties(props);
+        }
         TestPreferencesInitializer.init();
+        TestMainInitializer.initClassloader();
         TestCoreInitializer.initProject();
         frame = GuiActionRunner.execute(() -> {
             UIDesignManager.initialize();
@@ -87,6 +100,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         window = new FrameFixture(robot(), frame);
         window.show();
+        onStartUp();
+    }
+
+    protected void onStartUp() {
     }
 
     @SuppressWarnings("serial")

@@ -3,6 +3,7 @@ package org.omegat.gui.main;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
+import org.omegat.core.Core;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.LogDialog;
 
@@ -25,6 +26,13 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
     public void projectExitMenuItemActionPerformed() {
         mw.setVisible(false);
         mw.setEnabled(false);
+    }
+
+    public void editCreateGlossaryEntryMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
 
     /**

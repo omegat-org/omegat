@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.gui.dialogs;
 
 import static org.junit.Assert.assertTrue;
 
@@ -31,8 +31,8 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import org.omegat.gui.dialogs.AboutDialog;
-import org.omegat.gui.dialogs.LicenseDialog;
+import org.omegat.gui.main.BaseMainWindowMenu;
+import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.OStrings;
 
 public class AboutDialogTest extends TestCoreGUI {

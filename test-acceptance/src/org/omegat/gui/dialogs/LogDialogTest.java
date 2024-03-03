@@ -23,13 +23,14 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.gui.dialogs;
 
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
-import org.omegat.gui.dialogs.LogDialog;
+import org.omegat.gui.main.BaseMainWindowMenu;
+import org.omegat.gui.main.TestCoreGUI;
 
 public class LogDialogTest extends TestCoreGUI {
 

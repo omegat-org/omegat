@@ -126,11 +126,14 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     public static final String PROJECT_EXIT_MENUITEM = "project_exit_menuitem";
     public static final String SELECT_FUZZY_SUBMENU = "select_fuzzy_submenu";
     public static final String INSERT_CHARS_SUBMENU = "insert_chars_submenu";
+    public static final String EDIT_CREATE_GLOSSARY_MENUITEM = "edit_create_glossary_menuitem";
     public static final String GOTO_X_ENTRY_SUBMENU = "goto_x_entry_submenu";
     public static final String VIEW_MODIFICATION_INFO_SUBMENU = "view_modification_info_submenu";
     public static final String OPTIONS_MACHINE_TRANSLATE = "options_machine_translate_submenu";
     public static final String OPTIONS_DICTIONARY_SUBMENU = "options_dictionary_submenu";
     public static final String OPTIONS_GLOSSARY_SUBMENU = "options_glossary_submenu";
+    public static final String OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM =
+            "options_glossary_fuzzy_matching_checkbox_menuitem";
     public static final String OPTIONS_AUTOCOMPLETE_SUBMENU = "options_autocomplete_submenu";
     public static final String SWITCH_CASE_SUBMENU = "switch_case_submenu";
     public static final String VIEW_DISPLAY_MODIFICATION_INFO_NONE_RADIO_BUTTON =
@@ -300,7 +303,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT");
         editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED");
         editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION");
-        editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY");
+        editCreateGlossaryEntryMenuItem = createMenuItem(EDIT_CREATE_GLOSSARY_MENUITEM,
+                "TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY");
         editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND");
         editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE");
         editSearchDictionaryMenuItem = createMenuItem("TF_MENU_EDIT_SEARCH_DICTIONARY");
@@ -425,8 +429,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItem("MT_AUTO_FETCH");
         optionsGlossaryMenu = createMenu(OPTIONS_GLOSSARY_SUBMENU, "TF_OPTIONSMENU_GLOSSARY");
-        optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem(
-                "TF_OPTIONSMENU_GLOSSARY_FUZZY");
+        optionsGlossaryFuzzyMatchingCheckBoxMenuItem =
+                createCheckboxMenuItem(OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM, "TF_OPTIONSMENU_GLOSSARY_FUZZY");
 
         optionsDictionaryMenu = createMenu(OPTIONS_DICTIONARY_SUBMENU,
                 "TF_OPTIONSMENU_DICTIONARY");

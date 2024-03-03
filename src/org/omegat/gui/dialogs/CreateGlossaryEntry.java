@@ -46,6 +46,7 @@ public class CreateGlossaryEntry extends JDialog {
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
+    public static final String DIALOG_NAME = "create_glossary_entry_dialog";
 
     /** Creates new form CreateGlossaryEntry */
     public CreateGlossaryEntry(Frame parent) {
@@ -54,7 +55,7 @@ public class CreateGlossaryEntry extends JDialog {
         StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
-
+        setName(DIALOG_NAME);
         getRootPane().setDefaultButton(okButton);
 
         // initializing options

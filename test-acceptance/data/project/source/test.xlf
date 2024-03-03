@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" 
+ xmlns:xmrk="urn:xmarker"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="xliff_core_2.0.xsd"
+ version="2.0" srcLang="en" xml:lang="en">
+<file id="myXML">
+ <skeleton>
+  <xmrk:document xmarker_idref="document-0" status="draft" id="d1">
+   <xmrk:section xmarker_idref="section-1" id="s1">
+    <xmrk:title xmarker_idref="title-2"/>
+    <xmrk:paragraph xmarker_idref="paragraph-3"/>
+    <xmrk:section xmarker_idref="section-4" id="s1a">
+     <xmrk:title xmarker_idref="title-5"/>
+     <xmrk:paragraph xmarker_idref="paragraph-6"/>
+    </xmrk:section>  
+    <xmrk:section xmarker_idref="section-7" id="s1b">
+     <xmrk:title xmarker_idref="title-8"/>
+     <xmrk:paragraph xmarker_idref="paragraph-9"/>
+    </xmrk:section>
+    <xmrk:section xmarker_idref="section-10" id="s1c">
+     <xmrk:title xmarker_idref="title-11"/>
+     <xmrk:paragraph xmarker_idref="paragraph-12"/>
+    </xmrk:section>
+   </xmrk:section>
+  </xmrk:document>
+ </skeleton>
+    <unit id="title-2">
+      <segment>
+        <source>Birds in Oregon</source>
+      </segment>				  
+    </unit>
+    <unit id="paragraph-3">
+      <segment>			   
+        <source>Oregon is a mostly temperate state. There are many different 
+                kinds of birds that thrive there.</source>
+      </segment>				  
+    </unit>
+    <unit id="title-5">
+      <segment>				  
+        <source>High Altitude Birds</source>
+      </segment>					 
+    </unit>
+    <unit id="paragraph-6">
+      <segment>				  
+        <source>Birds that thrive in the high altitude include the
+	        White-tailed Ptarmigan, Sharp-tailed Grouse,
+	        Yellow-billed Loon, Cattle Egret, Gyrfalcon,
+                Snowy Owl, Yellow-billed Cuckoo, and Boreal Owl.</source>
+      </segment>					 
+    </unit>
+    <unit id="title-8">
+      <segment>				  
+        <source>Ocean Birds</source>
+      </segment>					 
+    </unit>
+    <unit id="paragraph-9">
+      <segment>				  
+        <source>Common ocean birds are Brandt's Cormorant, Double-crested
+                Cormorant, Pelagic Cormorant, Pigeon Guillemot, and the
+	        Tufted Puffin.</source>
+      </segment>
+    </unit>
+    <unit id="title-11">
+      <segment>				  
+        <source>Desert Birds</source>
+      </segment>					 
+    </unit>
+    <unit id="paragraph-12">
+      <segment>				  
+        <source>Birds you find in the desert include the Sage Grouse,
+	        California Quail, and Prairie Falcon.</source>
+      </segment>					 
+    </unit>
+</file>
+</xliff>

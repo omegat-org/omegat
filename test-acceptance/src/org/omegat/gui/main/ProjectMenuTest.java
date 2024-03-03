@@ -25,6 +25,7 @@
 package org.omegat.gui.main;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -33,6 +34,7 @@ import org.junit.Test;
 
 import org.omegat.core.Core;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
+import org.omegat.util.Preferences;
 
 public class ProjectMenuTest extends TestCoreGUI {
 
@@ -73,5 +75,18 @@ public class ProjectMenuTest extends TestCoreGUI {
         window.requireDisabled();
     }
 
-
+    @Test
+    public void testGlossaryOption() {
+        Preferences.setPreference(Preferences.GLOSSARY_STEMMING, true);
+        window.menuItem(BaseMainWindowMenu.OPTIONS_MENU).click();
+        window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_SUBMENU).click();
+        assertTrue(window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM).target()
+                .getModel().isSelected());
+        window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM).click();
+        //
+        window.menuItem(BaseMainWindowMenu.OPTIONS_MENU).click();
+        window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_SUBMENU).click();
+        assertFalse(window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM).target()
+                .getModel().isSelected());
+    }
 }

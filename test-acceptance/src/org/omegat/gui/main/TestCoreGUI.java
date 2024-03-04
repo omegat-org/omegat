@@ -54,6 +54,7 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -81,15 +82,19 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         FileUtils.forceDeleteOnExit(tmp.toFile());
         RuntimePreferences.setConfigDir(tmp.toString());
         TestMainInitializer.initClassloader();
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        Preferences.initSegmentation();
-        Preferences.initFilters();
+        // same order as Main.main
         Preferences.init();
-        Core.setProject(new NotLoadedProject());
+        PluginUtils.loadPlugins(Collections.emptyMap());
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        Preferences.initFilters();
+        Preferences.initSegmentation();
+        //
         frame = GuiActionRunner.execute(() -> {
+            Core.setProject(new NotLoadedProject());
             UIDesignManager.initialize();
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
             TestCoreInitializer.initMainWindow(mw);
+            var filters = Preferences.getFilters();
             TestCoreInitializer.initAutoSave(autoSave);
 
             CoreEvents.fireApplicationStartup();

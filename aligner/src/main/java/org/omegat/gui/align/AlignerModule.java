@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
 
 import org.openide.awt.Mnemonics;
 
@@ -55,10 +56,11 @@ public final class AlignerModule {
      */
     public static void loadPlugins() {
         alignerListener = new IApplicationEventListener() {
-            private final JMenuItem alignerMenu = new JMenuItem();
+            private JMenuItem alignerMenu;
+
             @Override
             public void onApplicationStartup() {
-                registerMenu();
+                SwingUtilities.invokeLater(this::registerMenu);
             }
 
             @Override
@@ -71,6 +73,7 @@ public final class AlignerModule {
             }
 
             private void registerMenu() {
+                alignerMenu = new JMenuItem();
                 Mnemonics.setLocalizedText(alignerMenu, BUNDLE.getString("TF_MENU_TOOLS_ALIGN_FILES"));
                 alignerMenu.addActionListener(actionEvent -> alignerShow());
                 MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, alignerMenu);

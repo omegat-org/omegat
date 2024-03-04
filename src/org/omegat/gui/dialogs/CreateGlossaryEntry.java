@@ -47,6 +47,10 @@ public class CreateGlossaryEntry extends JDialog {
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
     public static final String DIALOG_NAME = "create_glossary_entry_dialog";
+    public static final String SOURCE_TEXT_FIELD = "create_glossary_entry_dialog_source_text_field";
+    public static final String TARGET_TEXT_FIELD = "create_glossary_entry_dialog_target_text_field";
+    public static final String OK_BUTTON = "create_glossary_entry_dialog_ok_button";
+    public static final String CANCEL_BUTTON = "create_glossary_entry_dialog_cancel_button";
 
     /** Creates new form CreateGlossaryEntry */
     public CreateGlossaryEntry(Frame parent) {
@@ -56,6 +60,10 @@ public class CreateGlossaryEntry extends JDialog {
 
         initComponents();
         setName(DIALOG_NAME);
+        sourceText.setName(SOURCE_TEXT_FIELD);
+        targetText.setName(TARGET_TEXT_FIELD);
+        okButton.setName(OK_BUTTON);
+        cancelButton.setName(CANCEL_BUTTON);
         getRootPane().setDefaultButton(okButton);
 
         // initializing options

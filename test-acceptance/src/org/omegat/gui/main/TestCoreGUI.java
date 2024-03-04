@@ -75,13 +75,13 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     @Override
     protected void onSetUp() throws Exception {
+        TestPreferencesInitializer.init();
+        TestMainInitializer.initClassloader();
         Properties props = new Properties();
         try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
             props.load(fis);
             PluginUtils.loadPluginFromProperties(props);
         }
-        TestPreferencesInitializer.init();
-        TestMainInitializer.initClassloader();
         TestCoreInitializer.initProject();
         frame = GuiActionRunner.execute(() -> {
             UIDesignManager.initialize();
@@ -100,10 +100,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         window = new FrameFixture(robot(), frame);
         window.show();
-        onStartUp();
-    }
-
-    protected void onStartUp() {
     }
 
     @SuppressWarnings("serial")

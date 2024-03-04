@@ -362,6 +362,7 @@ dependencies {
     genMac(libs.omegat.appbundler)
 
     testAcceptanceImplementation sourceSets.main.output
+    testAcceptanceImplementation(libs.commons.io)
     testAcceptanceImplementation(testFixtures(project.rootProject))
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)

@@ -34,14 +34,15 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Properties;
+import java.nio.file.Path;
+import java.util.Collections;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 
+import org.apache.commons.io.FileUtils;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
@@ -50,6 +51,7 @@ import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
+import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.PluginUtils;
@@ -57,7 +59,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.TestPreferencesInitializer;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.gui.FontUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIDesignManager;
@@ -75,14 +77,15 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     @Override
     protected void onSetUp() throws Exception {
-        TestPreferencesInitializer.init();
+        Path tmp = Files.createTempDirectory("omegat");
+        FileUtils.forceDeleteOnExit(tmp.toFile());
+        RuntimePreferences.setConfigDir(tmp.toString());
         TestMainInitializer.initClassloader();
-        Properties props = new Properties();
-        try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
-            props.load(fis);
-            PluginUtils.loadPluginFromProperties(props);
-        }
-        TestCoreInitializer.initProject();
+        PluginUtils.loadPlugins(Collections.emptyMap());
+        Preferences.initSegmentation();
+        Preferences.initFilters();
+        Preferences.init();
+        Core.setProject(new NotLoadedProject());
         frame = GuiActionRunner.execute(() -> {
             UIDesignManager.initialize();
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);

@@ -102,6 +102,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         implements IGlossaries, IPaneMenu {
 
+    public static final String TEXTPANE_NAME = "glossary_text_area";
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
     /**
@@ -131,6 +132,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         StaticUIUtils.makeCaretAlwaysVisible(this);
         setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
+        setName(TEXTPANE_NAME);
 
         addMouseListener(mouseListener);
 

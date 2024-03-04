@@ -33,6 +33,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.commons.io.FilenameUtils;
 
 import org.omegat.core.CoreEvents;
@@ -120,7 +122,9 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         }
 
         Collections.sort(scriptsList);
-        m_scriptingWindow.setScriptItems(scriptsList);
+        SwingUtilities.invokeLater(() -> {
+            m_scriptingWindow.setScriptItems(scriptsList);
+        });
 
         if (SCRIPTING_EVENTS) {
             hookApplicationEvent();

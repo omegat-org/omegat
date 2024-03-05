@@ -363,6 +363,8 @@ dependencies {
 
     testAcceptanceImplementation sourceSets.main.output
     testAcceptanceImplementation(libs.commons.io)
+    testAcceptanceImplementation(libs.slf4j.jdk14)
+    testAcceptanceImplementation(libs.slf4j.format.jdk14)
     testAcceptanceImplementation(testFixtures(project.rootProject))
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)

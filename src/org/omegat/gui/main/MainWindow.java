@@ -422,7 +422,7 @@ public class MainWindow implements IMainWindow {
         return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
     }
 
-    protected void addSearchWindow(final SearchWindowController newSearchWindow) {
+    public void addSearchWindow(final SearchWindowController newSearchWindow) {
         newSearchWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {

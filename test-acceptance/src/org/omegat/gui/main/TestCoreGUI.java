@@ -31,11 +31,15 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -46,6 +50,8 @@ import org.apache.commons.io.FileUtils;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
@@ -53,9 +59,11 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -70,8 +78,6 @@ import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
 
 public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
-
-    public static final String PLUGINS_LIST_FILE = "test-acceptance/plugins.properties";
 
     protected FrameFixture window;
     protected JFrame frame;
@@ -94,7 +100,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             UIDesignManager.initialize();
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
             TestCoreInitializer.initMainWindow(mw);
-            var filters = Preferences.getFilters();
             TestCoreInitializer.initAutoSave(autoSave);
 
             CoreEvents.fireApplicationStartup();
@@ -114,8 +119,12 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     static class TestMainWindow implements IMainWindow {
         private final JFrame applicationFrame;
         private FontUIResource font;
+        private final ILogger logger = LoggerFactory.getLogger(TestMainWindow.class, OStrings.getResourceBundle());
         public final BaseMainWindowMenu menu;
         public final DockingDesktop desktop;
+
+        /** Set of all open search windows. */
+        private final List<SearchWindowController> searches = new ArrayList<>();
 
         TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException {
             applicationFrame = new JFrame();
@@ -147,11 +156,9 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
             CoreEvents.registerProjectChangeListener(eventType -> {
                 updateTitle();
-                /*
                 if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
                     closeSearchWindows();
                 }
-                */
             });
 
             CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
@@ -197,6 +204,34 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         private void updateTitle() {
             String s = OStrings.getDisplayNameAndVersion();
             applicationFrame.setTitle(s);
+        }
+
+        protected void addSearchWindow(final SearchWindowController newSearchWindow) {
+            newSearchWindow.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    removeSearchWindow(newSearchWindow);
+                }
+            });
+            synchronized (searches) {
+                searches.add(newSearchWindow);
+            }
+        }
+
+        private void removeSearchWindow(SearchWindowController searchWindow) {
+            synchronized (searches) {
+                searches.remove(searchWindow);
+            }
+        }
+
+        private void closeSearchWindows() {
+            synchronized (searches) {
+                // dispose other windows
+                for (SearchWindowController sw : searches) {
+                    sw.dispose();
+                }
+                searches.clear();
+            }
         }
 
         /**
@@ -274,6 +309,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         @Override
         public void displayWarningRB(final String warningKey, final Object... params) {
+            logger.atWarn().setMessageRB(warningKey).addArgument(params).log();
         }
 
         @Override

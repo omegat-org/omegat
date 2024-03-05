@@ -190,7 +190,7 @@ public interface IMainWindow {
     void setCursor(Cursor cursor);
 
     /**
-     * Retrieves current cursor of window
+     * Retrieves current cursor of windo.addSearchWindoww
      * @return the current cursor
      */
     Cursor getCursor();

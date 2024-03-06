@@ -76,15 +76,11 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
-import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.DataUtils;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.matching.NearString;
-import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -356,72 +352,7 @@ public class MainWindow implements IMainWindow {
         applicationFrame.setTitle(s);
     }
 
-    /** insert current fuzzy match or selection at cursor position */
-    public void doInsertTrans() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        String text = getSelectedTextInMatcher();
-        boolean fromMT = false;
-        if (StringUtil.isEmpty(text)) {
-            NearString near = Core.getMatcher().getActiveMatch();
-            if (near != null) {
-                text = near.translation;
-                if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                    text = Core.getMatcher().substituteNumbers(
-                            Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
-                }
-
-                if (DataUtils.isFromMTMemory(near)) {
-                    fromMT = true;
-                }
-            }
-        }
-        if (!StringUtil.isEmpty(text)) {
-            if (fromMT) {
-                Core.getEditor().insertTextAndMark(text);
-            } else {
-                Core.getEditor().insertText(text);
-            }
-            Core.getEditor().requestFocus();
-        }
-    }
-
-    /** replace entire edit area with active fuzzy match or selection */
-    public void doRecycleTrans() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        String selection = getSelectedTextInMatcher();
-        if (!StringUtil.isEmpty(selection)) {
-            Core.getEditor().replaceEditText(selection);
-            Core.getEditor().requestFocus();
-            return;
-        }
-
-        NearString near = Core.getMatcher().getActiveMatch();
-        if (near != null) {
-            String translation = near.translation;
-            if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                translation = Core.getMatcher().substituteNumbers(
-                        Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
-            }
-            if (DataUtils.isFromMTMemory(near)) {
-                Core.getEditor().replaceEditTextAndMark(translation, "TM:[tm/mt]");
-            } else {
-                Core.getEditor().replaceEditText(translation, "TM:[generic]");
-            }
-            Core.getEditor().requestFocus();
-        }
-    }
-
-    private String getSelectedTextInMatcher() {
-        IMatcher matcher = Core.getMatcher();
-        return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
-    }
-
+    @Override
     public void addSearchWindow(final SearchWindowController newSearchWindow) {
         newSearchWindow.addWindowListener(new WindowAdapter() {
             @Override
@@ -450,7 +381,7 @@ public class MainWindow implements IMainWindow {
         }
     }
 
-    protected List<SearchWindowController> getSearchWindows() {
+    public List<SearchWindowController> getSearchWindows() {
         return Collections.unmodifiableList(searches);
     }
 

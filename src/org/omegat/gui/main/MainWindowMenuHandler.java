@@ -481,11 +481,11 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void editOverwriteTranslationMenuItemActionPerformed() {
-        mainWindow.doRecycleTrans();
+        ProjectUICommands.doRecycleTrans();
     }
 
     public void editInsertTranslationMenuItemActionPerformed() {
-        mainWindow.doInsertTrans();
+        ProjectUICommands.doInsertTrans();
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {

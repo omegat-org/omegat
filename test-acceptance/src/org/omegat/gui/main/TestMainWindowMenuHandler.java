@@ -55,7 +55,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
-        ((TestCoreGUI.TestMainWindow)mainWindow).addSearchWindow(search);
+        ((TestCoreGUI.TestMainWindow) mainWindow).addSearchWindow(search);
 
         search.makeVisible(getTrimmedSelectedTextInMainWindow());
     }

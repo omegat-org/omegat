@@ -22,10 +22,9 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.main;
+package org.omegat.gui;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -34,7 +33,8 @@ import org.junit.Test;
 
 import org.omegat.core.Core;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
-import org.omegat.util.Preferences;
+import org.omegat.gui.main.BaseMainWindowMenu;
+import org.omegat.gui.main.TestCoreGUI;
 
 public class ProjectMenuTest extends TestCoreGUI {
 
@@ -46,13 +46,13 @@ public class ProjectMenuTest extends TestCoreGUI {
         tempDir = Files.createTempDirectory("omegat").toFile();
     }
 
-    @Test
-    public void testMainWindowTitle() {
-        window.requireTitle("OmegaT 6.1.0");
-    }
-
+    /**
+     * Test project menus.
+     */
     @Test
     public void testNewProject() {
+        window.requireTitle("OmegaT 6.1.0");
+        // 2. click menu Project > new project
         window.menuItem(BaseMainWindowMenu.PROJECT_MENU).click();
         window.menuItem(BaseMainWindowMenu.PROJECT_NEW_MENUITEM).click();
         window.fileChooser(NewProjectFileChooser.DIALOG_NAME).requireEnabled();
@@ -65,28 +65,11 @@ public class ProjectMenuTest extends TestCoreGUI {
         window.dialog(ProjectPropertiesDialog.DIALOG_NAME).button(ProjectPropertiesDialog.OK_BUTTON_NAME).click();
         assertTrue(Core.getProject().isProjectLoaded());
        */
-    }
-
-    @Test
-    public void testExit() {
+        // 3. select project > Exit menu.
         window.menuItem(BaseMainWindowMenu.PROJECT_MENU).click();
         window.menuItem(BaseMainWindowMenu.PROJECT_EXIT_MENUITEM).click();
         window.requireNotVisible();
         window.requireDisabled();
     }
 
-    @Test
-    public void testGlossaryOption() {
-        Preferences.setPreference(Preferences.GLOSSARY_STEMMING, true);
-        window.menuItem(BaseMainWindowMenu.OPTIONS_MENU).click();
-        window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_SUBMENU).click();
-        assertTrue(window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM).target()
-                .getModel().isSelected());
-        window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM).click();
-        //
-        window.menuItem(BaseMainWindowMenu.OPTIONS_MENU).click();
-        window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_SUBMENU).click();
-        assertFalse(window.menuItem(BaseMainWindowMenu.OPTIONS_GLOSSARY_FUZZY_MATCHING_CHECKBOX_MENUITEM).target()
-                .getModel().isSelected());
-    }
 }

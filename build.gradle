@@ -1573,7 +1573,8 @@ tasks.register('testAcceptance', Test) {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
     }
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED java.base/java.util=ALL-UNNAMED"])
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
+             "--add-opens", "java.base/java.util=ALL-UNNAMED"])
     testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties

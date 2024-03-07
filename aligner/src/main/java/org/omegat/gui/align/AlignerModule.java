@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JMenuItem;
+import javax.swing.SwingUtilities;
 
 import org.openide.awt.Mnemonics;
 
@@ -59,7 +60,7 @@ public final class AlignerModule {
             private final List<Component> menus = new ArrayList<>();
             @Override
             public void onApplicationStartup() {
-                registerMenu();
+                SwingUtilities.invokeLater(this::registerMenu);
             }
 
             @Override

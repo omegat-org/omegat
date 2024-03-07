@@ -147,7 +147,7 @@ public class ReplaceFilter implements IEditorFilter {
     }
 
     private void skip() {
-        EditorController ec = (EditorController) Core.getEditor();
+        IEditor ec = Core.getEditor();
 
         // try to find in current entry
         int pos = ec.getCurrentPositionInEntryTranslation();

@@ -499,4 +499,10 @@ public interface IEditor {
     default boolean isOrientationAllLtr() {
         return true;
     }
+
+    int getCurrentPositionInEntryTranslation();
+
+    int getPositionInEntryTranslation(int mousepos);
+
+    void setCaretPosition(CaretPosition pos);
 }

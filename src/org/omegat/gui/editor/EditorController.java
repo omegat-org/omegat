@@ -1761,6 +1761,7 @@ public class EditorController implements IEditor {
      * Returns the relative caret position in the editable translation for a
      * given absolute index into the overall editor document.
      */
+    @Override
     public int getPositionInEntryTranslation(int pos) {
         UIThreadsUtil.mustBeSwingThread();
 

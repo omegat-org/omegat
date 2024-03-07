@@ -340,4 +340,18 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     public boolean isOrientationAllLtr() {
         return true;
     }
+
+    @Override
+    public int getCurrentPositionInEntryTranslation() {
+        return 0;
+    }
+
+    @Override
+    public int getPositionInEntryTranslation(final int mousepos) {
+        return 0;
+    }
+
+    @Override
+    public void setCaretPosition(final CaretPosition pos) {
+    }
 }

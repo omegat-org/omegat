@@ -42,7 +42,6 @@ import javax.swing.text.JTextComponent;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
@@ -80,7 +79,7 @@ public class SpellCheckerPopup implements IPopupMenuConstructor {
         // checking functionality in OmegaT.
         String translation = ec.getCurrentTranslation();
         Token tok = null;
-        int relOffset = ((EditorController) ec).getPositionInEntryTranslation(mousepos);
+        int relOffset = ec.getPositionInEntryTranslation(mousepos);
         for (Token t : Core.getProject().getTargetTokenizer().tokenizeWords(translation, ITokenizer.StemmingMode.NONE)) {
             if (t.getOffset() <= relOffset && relOffset < t.getOffset() + t.getLength()) {
                 tok = t;

@@ -50,11 +50,11 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.io.FileUtils;
@@ -134,15 +134,17 @@ public final class PluginInstaller {
 
         JPanel confirmPanel = new JPanel();
         confirmPanel.setLayout(new BorderLayout());
+        JTextArea msg = new JTextArea(message);
+        msg.setEditable(false);
         if (Math.max(installed.size(), currentSet.size()) > 1) {
             JTable compareTable = new JTable();
             compareTable.setModel(new PluginInstallerTableModel(currentSet, infoSet));
             confirmPanel.setPreferredSize(new Dimension(400, 200));
             confirmPanel.add(compareTable.getTableHeader(), BorderLayout.NORTH);
             confirmPanel.add(new JScrollPane(compareTable), BorderLayout.CENTER);
-            confirmPanel.add(new JLabel(message), BorderLayout.SOUTH);
+            confirmPanel.add(msg, BorderLayout.SOUTH);
         } else {
-            confirmPanel.add(new JLabel(message), BorderLayout.CENTER);
+            confirmPanel.add(msg, BorderLayout.CENTER);
         }
 
         // confirm installation
@@ -322,7 +324,7 @@ public final class PluginInstaller {
         private final List<PluginInformation> current = new ArrayList<>();
         private final List<PluginInformation> installer = new ArrayList<>();
         private final List<String> classes = new ArrayList<>();
-        private final String[] titles = { "Name(Current)", "Version(Current)", "Name", "Version" };
+        private final String[] titles = { "Name", "Installed", "Version" };
 
         PluginInstallerTableModel(Set<PluginInformation> current, Set<PluginInformation> installer) {
             this.current.addAll(current);
@@ -346,7 +348,7 @@ public final class PluginInstaller {
 
         @Override
         public int getColumnCount() {
-            return 4;
+            return 3;
         }
 
         @Override
@@ -356,17 +358,20 @@ public final class PluginInstaller {
             }
             String target = classes.get(rowIndex);
             if (columnIndex == 0) {
-                return current.stream().filter(i -> i.getClassName().equals(target)).findFirst()
-                        .map(PluginInformation::getName).orElse("Unnamed");
-            } else if (columnIndex == 1) {
-                return current.stream().filter(i -> i.getClassName().equals(target)).findFirst()
-                        .map(PluginInformation::getVersion).orElse("Unknown");
-            } else if (columnIndex == 2) {
                 return installer.stream().filter(i -> i.getClassName().equals(target)).findFirst()
-                        .map(PluginInformation::getName).orElse("Unnamed");
-            } else if (columnIndex == 3) {
+                        .map(PluginInformation::getName).orElse("");
+            }
+            if (columnIndex == 1) {
+                var currentPlugin = current.stream().filter(i -> i.getClassName().equals(target)).findFirst();
+                if (currentPlugin.isPresent()) {
+                    return currentPlugin.map(PluginInformation::getVersion).filter(v -> !v.isEmpty()).orElse("N.A.");
+                } else {
+                    return "-";
+                }
+            }
+            if (columnIndex == 2) {
                 return installer.stream().filter(i -> i.getClassName().equals(target)).findFirst()
-                        .map(PluginInformation::getVersion).orElse("Unknown");
+                    .map(PluginInformation::getVersion).filter(v -> !v.isEmpty()).orElse("N.A.");
             }
             return null;
         }

@@ -25,6 +25,8 @@
 
 package org.omegat.util;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,25 +36,32 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+import java.util.stream.Collectors;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 import org.apache.commons.io.FileUtils;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
-
 
 /**
  * Plugin installer utility class.
@@ -68,7 +77,7 @@ public final class PluginInstaller {
 
     public static boolean install(final File pluginFile) {
         Path pluginJarFile;
-        PluginInformation info;
+        Set<PluginInformation> infoSet;
         try {
             // unpack or copy jar to temporary directory
             Path tmporaryDir = Files.createTempDirectory("omegat");
@@ -81,10 +90,14 @@ public final class PluginInstaller {
             return false;
         }
 
-        // check manifest
+        // check a manifest and retrieve a set of plugin information
         try {
-            info = parsePluginJarFileManifest(pluginJarFile.toFile()).stream().findFirst()
-                    .orElseThrow(() -> new IOException(OStrings.getString("PREFS_PLUGINS_UNKNOWN_ARCHIVE")));
+            infoSet = parsePluginJarFileManifest(pluginJarFile.toFile());
+            if (infoSet.isEmpty()) {
+                Log.logWarningRB("PREFS_PLUGINS_UNKNOWN_ARCHIVE");
+                Core.getMainWindow().displayWarningRB("PREFS_PLUGINS_UNKNOWN_ARCHIVE");
+                return false;
+            }
         } catch (IOException e) {
             // it is not a plugin jar file.
             Log.logErrorRB("PREFS_PLUGINS_INSTALLATION_FAILED", e.getLocalizedMessage());
@@ -92,11 +105,15 @@ public final class PluginInstaller {
                     e.getLocalizedMessage());
             return false;
         }
+        Map<String, PluginInformation> installed = getInstalledPlugins();
+        Set<PluginInformation> currentSet = infoSet.stream().map(PluginInformation::getClassName)
+                .map(installed::get).filter(Objects::nonNull).collect(Collectors.toSet());
+        PluginInformation info = infoSet.iterator().next();
         // Get a plugin name and version to be installed.
         String pluginName = info.getName();
         String version = info.getVersion();
         // detect current installation
-        PluginInformation currentInfo = getInstalledPlugins().getOrDefault(info.getClassName(), null);
+        PluginInformation currentInfo = installed.getOrDefault(info.getClassName(), null);
         String title = "";
         String message;
         if (currentInfo != null) {
@@ -115,13 +132,26 @@ public final class PluginInstaller {
                     version);
         }
 
+        JPanel confirmPanel = new JPanel();
+        confirmPanel.setLayout(new BorderLayout());
+        if (Math.max(installed.size(), currentSet.size()) > 1) {
+            JTable compareTable = new JTable();
+            compareTable.setModel(new PluginInstallerTableModel(currentSet, infoSet));
+            confirmPanel.setPreferredSize(new Dimension(400, 200));
+            confirmPanel.add(compareTable.getTableHeader(), BorderLayout.NORTH);
+            confirmPanel.add(new JScrollPane(compareTable), BorderLayout.CENTER);
+            confirmPanel.add(new JLabel(message), BorderLayout.SOUTH);
+        } else {
+            confirmPanel.add(new JLabel(message), BorderLayout.CENTER);
+        }
+
         // confirm installation
         if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
-                Core.getMainWindow().getApplicationFrame(), message, title, JOptionPane.OK_CANCEL_OPTION,
+                Core.getMainWindow().getApplicationFrame(), confirmPanel, title, JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.INFORMATION_MESSAGE)) {
             if (doInstall(currentInfo, pluginJarFile.toFile())) {
-                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), OStrings.getString(
-                        "PREFS_PLUGINS_INSTALLATION_SUCCEED"));
+                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                        OStrings.getString("PREFS_PLUGINS_INSTALLATION_SUCCEED"));
                 return true;
             }
             JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
@@ -284,5 +314,61 @@ public final class PluginInstaller {
                 .filter(info -> !installedPlugins.containsKey(info.getClassName()))
                 .forEach(info -> installedPlugins.put(info.getClassName(), info));
         return installedPlugins;
+    }
+
+    @SuppressWarnings("serial")
+    static class PluginInstallerTableModel extends AbstractTableModel {
+
+        private final List<PluginInformation> current = new ArrayList<>();
+        private final List<PluginInformation> installer = new ArrayList<>();
+        private final List<String> classes = new ArrayList<>();
+        private final String[] titles = { "Name(Current)", "Version(Current)", "Name", "Version" };
+
+        public PluginInstallerTableModel(Set<PluginInformation> current, Set<PluginInformation> installer) {
+            this.current.addAll(current);
+            this.installer.addAll(installer);
+            classes.addAll(
+                    current.stream().map(PluginInformation::getClassName).collect(Collectors.toList()));
+            classes.addAll(installer.stream().map(PluginInformation::getClassName)
+                    .filter(className -> current.stream().noneMatch(j -> j.getClassName().equals(className)))
+                    .collect(Collectors.toList()));
+        }
+
+        @Override
+        public String getColumnName(int index) {
+            return titles[index];
+        }
+
+        @Override
+        public int getRowCount() {
+            return classes.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 4;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            if (rowIndex < 0) {
+                return null;
+            }
+            String target = classes.get(rowIndex);
+            if (columnIndex == 0) {
+                return current.stream().filter(i -> i.getClassName().equals(target)).findFirst()
+                        .map(PluginInformation::getName).orElse("Unnamed");
+            } else if (columnIndex == 1) {
+                return current.stream().filter(i -> i.getClassName().equals(target)).findFirst()
+                        .map(PluginInformation::getVersion).orElse("Unknown");
+            } else if (columnIndex == 2) {
+                return installer.stream().filter(i -> i.getClassName().equals(target)).findFirst()
+                        .map(PluginInformation::getName).orElse("Unnamed");
+            } else if (columnIndex == 3) {
+                return installer.stream().filter(i -> i.getClassName().equals(target)).findFirst()
+                        .map(PluginInformation::getVersion).orElse("Unknown");
+            }
+            return null;
+        }
     }
 }

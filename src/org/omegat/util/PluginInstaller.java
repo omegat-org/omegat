@@ -137,8 +137,13 @@ public final class PluginInstaller {
         JTextArea msg = new JTextArea(message);
         msg.setEditable(false);
         if (Math.max(installed.size(), currentSet.size()) > 1) {
+            String[] titles = {OStrings.getString("PREFS_PLUGINS_TITLE_NAME"),
+                OStrings.getString("PREFS_PLUGINS_TITLE_CURRENT_VERSION"),
+                OStrings.getString("PREFS_PLUGINS_TITLE_TARGET_VERSION")
+            };
             JTable compareTable = new JTable();
-            compareTable.setModel(new PluginInstallerTableModel(currentSet, infoSet));
+            compareTable.setModel(new PluginInstallerTableModel(titles, currentSet,
+                    infoSet));
             confirmPanel.setPreferredSize(new Dimension(400, 200));
             confirmPanel.add(compareTable.getTableHeader(), BorderLayout.NORTH);
             confirmPanel.add(new JScrollPane(compareTable), BorderLayout.CENTER);
@@ -324,9 +329,11 @@ public final class PluginInstaller {
         private final List<PluginInformation> current = new ArrayList<>();
         private final List<PluginInformation> installer = new ArrayList<>();
         private final List<String> classes = new ArrayList<>();
-        private final String[] titles = { "Name", "Installed", "Version" };
+        private final String[] titles;
 
-        PluginInstallerTableModel(Set<PluginInformation> current, Set<PluginInformation> installer) {
+        PluginInstallerTableModel(String[] titles, Set<PluginInformation> current,
+                Set<PluginInformation> installer) {
+            this.titles = titles;
             this.current.addAll(current);
             this.installer.addAll(installer);
             classes.addAll(
@@ -364,14 +371,15 @@ public final class PluginInstaller {
             if (columnIndex == 1) {
                 var currentPlugin = current.stream().filter(i -> i.getClassName().equals(target)).findFirst();
                 if (currentPlugin.isPresent()) {
-                    return currentPlugin.map(PluginInformation::getVersion).filter(v -> !v.isEmpty()).orElse("N.A.");
+                    return currentPlugin.map(PluginInformation::getVersion).filter(v -> !v.isEmpty())
+                            .orElse("N.A.");
                 } else {
                     return "-";
                 }
             }
             if (columnIndex == 2) {
                 return installer.stream().filter(i -> i.getClassName().equals(target)).findFirst()
-                    .map(PluginInformation::getVersion).filter(v -> !v.isEmpty()).orElse("N.A.");
+                        .map(PluginInformation::getVersion).filter(v -> !v.isEmpty()).orElse("N.A.");
             }
             return null;
         }

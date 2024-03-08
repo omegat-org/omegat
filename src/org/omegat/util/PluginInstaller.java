@@ -324,7 +324,7 @@ public final class PluginInstaller {
         private final List<String> classes = new ArrayList<>();
         private final String[] titles = { "Name(Current)", "Version(Current)", "Name", "Version" };
 
-        public PluginInstallerTableModel(Set<PluginInformation> current, Set<PluginInformation> installer) {
+        PluginInstallerTableModel(Set<PluginInformation> current, Set<PluginInformation> installer) {
             this.current.addAll(current);
             this.installer.addAll(installer);
             classes.addAll(

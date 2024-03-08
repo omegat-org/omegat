@@ -504,6 +504,20 @@ public final class TestTeamIntegrationChild {
         public boolean isOrientationAllLtr() {
             return true;
         }
+
+        @Override
+        public int getCurrentPositionInEntryTranslation() {
+            return 0;
+        }
+
+        @Override
+        public int getPositionInEntryTranslation(final int mousepos) {
+            return 0;
+        }
+
+        @Override
+        public void setCaretPosition(final CaretPosition pos) {
+        }
     };
 
     static IMainWindow mainWindow = new IMainWindow() {

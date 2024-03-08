@@ -98,8 +98,9 @@ class OpenXmlFilter extends AbstractXmlFilter {
     private List<XMLEvent> currentBuffer = null;
 
     @Override // start events on body
-    protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         this.isEventMode = true; // for the moment, always work in events mode
+        return true;
     }
 
     @Override

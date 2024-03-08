@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+<file target-language="be" source-language="en" original="text3.txt" datatype="plaintext">
+    <body>
+        <trans-unit id="id1">
+            <source>This is text3</source>
+        <target state="translated">This is text3</target></trans-unit>
+    </body>
+</file>
+<file original="text.txt" datatype="plaintext" target-language="be" source-language="en">
+    <body>
+        <trans-unit id="id2">
+            <source>test2</source>
+        <target state="translated">test2</target></trans-unit>
+    </body>
+</file>
+</xliff>

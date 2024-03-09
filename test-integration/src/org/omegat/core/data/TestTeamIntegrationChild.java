@@ -46,6 +46,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
@@ -652,6 +653,11 @@ public final class TestTeamIntegrationChild {
 
             @Override
             public JMenu getMenu(MenuKey marker) {
+                return null;
+            }
+
+            @Override
+            public JMenuItem getMenuItemForNames(String menuName, String itemName) {
                 return null;
             }
 

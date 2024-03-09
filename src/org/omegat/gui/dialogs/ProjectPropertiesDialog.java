@@ -349,7 +349,7 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.anchor = GridBagConstraints.WEST;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
-        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString( "MW_OPTIONSMENU_LOCAL_SENTSEG"));
+        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
         sentenceSegmentingButton.setName(SENTENCE_SEGMENTING_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 0;

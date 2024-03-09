@@ -219,7 +219,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMedOpenMenuItem = createMenuItem("TF_MENU_FILE_MED_OPEN");
         projectMedCreateMenuItem = createMenuItem("TF_MENU_FILE_MED_CREATE");
         projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT");
-        viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN");
+        viewFileListMenuItem = createMenuItem(PROJECT_VIEW_FILE_LIST_MENUITEM, "TF_MENU_FILE_PROJWIN");
 
         projectAccessProjectFilesMenu = createMenu(PROJECT_ACCESS_PROJECT_FILES_SUBMENU,
                 "TF_MENU_FILE_ACCESS_PROJECT_FILES");
@@ -331,13 +331,19 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 VIEW_MARK_NON_UNIQUE_SEGMENTS_CHECKBOX, "MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS");
         viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
                 VIEW_MARK_NOTED_SEGMENTS_CHECKBOX, "MW_VIEW_MENU_MARK_NOTED_SEGMENTS");
-        viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP");
-        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE");
-        viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI");
-        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_AUTOPOPULATED");
-        viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_GLOSSARY_MARK");
-        viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED");
-        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK");
+        viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem(VIEW_MARK_NBSP_CHECKBOX, "MW_VIEW_MENU_MARK_NBSP");
+        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem(
+                VIEW_MARK_WHITE_SPACE_CHECKBOX, "MW_VIEW_MENU_MARK_WHITESPACE");
+        viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem(
+                VIEW_MARK_BIDI_CHECKBOX, "MW_VIEW_MENU_MARK_BIDI");
+        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem(
+                VIEW_MARK_AUTO_POPULATED_CHECKBOX, "MW_VIEW_MENU_MARK_AUTOPOPULATED");
+        viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem(
+                VIEW_MARK_GLOSSARY_MATCHES_CHECKBOX, "MW_VIEW_GLOSSARY_MARK");
+        viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem(
+                VIEW_MARK_LANGUAGE_CHECKER_CHECKBOX, "LT_OPTIONS_MENU_ENABLED");
+        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem(
+                VIEW_MARK_FONT_FALLBACK_CHECKBOX, "MW_VIEW_MENU_MARK_FONT_FALLBACK");
         viewModificationInfoMenu = createMenu(VIEW_MODIFICATION_INFO_SUBMENU,
                 "MW_VIEW_MENU_MODIFICATION_INFO");
 
@@ -763,6 +769,13 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         return result;
     }
 
+    protected JMenuItem createMenuItem(String name, String titleKey) {
+        JMenuItem result = new JMenuItem();
+        result.setName(name);
+        Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addActionListener(this);
+        return result;
+    }
     /**
      * Create menu item instance and set title.
      *
@@ -1184,6 +1197,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     public static final String PROJECT_EXIT_MENUITEM = "project_exit_menuitem";
     public static final String PROJECT_RELOAD_MENU = "project_reload_menu";
     public static final String PROJECT_ACCESS_ROOT_MENU = "project_access_root_menu";
+    public static final String PROJECT_VIEW_FILE_LIST_MENUITEM = "project_view_file_list_menuitem";
     public static final String SELECT_FUZZY_SUBMENU = "select_fuzzy_submenu";
     public static final String EDIT_CREATE_GLOSSARY_MENUITEM = "edit_create_glossary_menuitem";
     public static final String INSERT_CHARS_SUBMENU = "insert_chars_submenu";
@@ -1197,6 +1211,13 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
             "view_display_modification_info_none_radio_button";
     public static final String VIEW_MARK_NON_UNIQUE_SEGMENTS_CHECKBOX = "view_mark_non_unique_segments_checkbox";
     public static final String VIEW_MARK_NOTED_SEGMENTS_CHECKBOX = "view_mark_noted_segments_checkbox";
+    public static final String VIEW_MARK_WHITE_SPACE_CHECKBOX = "view_mark_white_space_checkbox";
+    public static final String VIEW_MARK_NBSP_CHECKBOX = "view_mark_nbsp_checkbox";
+    public static final String VIEW_MARK_BIDI_CHECKBOX = "view_mark_bidi_checkbox";
+    public static final String VIEW_MARK_AUTO_POPULATED_CHECKBOX = "view_mark_auto_populated_checkbox";
+    public static final String VIEW_MARK_GLOSSARY_MATCHES_CHECKBOX = "view_mark_glossary_matches_checkbox";
+    public static final String VIEW_MARK_LANGUAGE_CHECKER_CHECKBOX = "view_mark_language_checker_checkbox";
+    public static final String VIEW_MARK_FONT_FALLBACK_CHECKBOX = "view_mark_font_fallback_checkbox";
     public static final String OPTIONS_MACHINE_TRANSLATE_SUBMENU = "options_machine_translate_submenu";
     public static final String OPTIONS_DICTIONARY_SUBMENU = "options_dictionary_submenu";
     public static final String OPTIONS_GLOSSARY_SUBMENU = "options_glossary_submenu";

@@ -28,9 +28,11 @@ package org.omegat.gui.main;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.util.List;
 
 import javax.swing.JFrame;
 
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
@@ -140,6 +142,24 @@ public class ConsoleWindow implements IMainWindow {
 
     public DockingDesktop getDesktop() {
         return null;
+    }
+
+    @Override
+    public void resetDesktopLayout() {
+    }
+
+    @Override
+    public void addSearchWindow(final SearchWindowController newSearchWindow) {
+    }
+
+    @Override
+    public List<SearchWindowController> getSearchWindows() {
+        return null;
+    }
+
+    @Override
+    public void saveScreenLayout() {
+
     }
 
     public Cursor getCursor() {

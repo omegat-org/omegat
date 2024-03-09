@@ -70,6 +70,19 @@ public class MainWindowMenuTest extends TestCore {
 
         Map<String, Method> existsMethods = new HashMap<String, Method>();
 
+        for (Method m : BaseMainWindowMenuHandler.class.getDeclaredMethods()) {
+            if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
+                Class<?>[] params = m.getParameterTypes();
+                if (params.length == 0) {
+                    existsMethods.put(m.getName(), m);
+                }
+                // Include menu items that take a modifier key.
+                if (params.length == 1 && params[0] == Integer.TYPE) {
+                    existsMethods.put(m.getName(), m);
+                }
+            }
+        }
+
         for (Method m : MainWindowMenuHandler.class.getDeclaredMethods()) {
             if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
                 Class<?>[] params = m.getParameterTypes();

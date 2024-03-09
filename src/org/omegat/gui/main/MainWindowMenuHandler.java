@@ -252,7 +252,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     public void viewFileListMenuItemActionPerformed() {
         if (mainWindow.projWin == null) {
-            mainWindow.menu.viewFileListMenuItem.setSelected(false);
+            mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.PROJECT_MENU,
+                    BaseMainWindowMenu.PROJECT_VIEW_FILE_LIST_MENUITEM).setSelected(false);
             return;
         }
 
@@ -833,36 +834,45 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void viewMarkNBSPCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkNBSP(mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
+        JMenuItem menuItem = mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.VIEW_NEMU,
+                BaseMainWindowMenu.VIEW_MARK_NBSP_CHECKBOX);
+        Core.getEditor().getSettings().setMarkNBSP(menuItem.isSelected());
     }
 
     public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkWhitespace(mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
+        JMenuItem menuItem = mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.VIEW_NEMU,
+                BaseMainWindowMenu.VIEW_MARK_WHITE_SPACE_CHECKBOX);
+        Core.getEditor().getSettings().setMarkWhitespace(menuItem.isSelected());
     }
 
     public void viewMarkBidiCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkBidi(mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
+        JMenuItem menuItem = mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.VIEW_NEMU,
+                BaseMainWindowMenu.VIEW_MARK_BIDI_CHECKBOX);
+        Core.getEditor().getSettings().setMarkBidi(menuItem.isSelected());
     }
 
     public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
+        JMenuItem menuItem = mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.VIEW_NEMU,
+                BaseMainWindowMenu.VIEW_MARK_AUTO_POPULATED_CHECKBOX);
+        Core.getEditor().getSettings().setMarkAutoPopulated(menuItem.isSelected());
     }
 
     public void viewMarkGlossaryMatchesCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkGlossaryMatches(mainWindow.menu.viewMarkGlossaryMatchesCheckBoxMenuItem.isSelected());
+        JMenuItem menuItem = mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.VIEW_NEMU,
+                BaseMainWindowMenu.VIEW_MARK_GLOSSARY_MATCHES_CHECKBOX);
+        Core.getEditor().getSettings().setMarkGlossaryMatches(menuItem.isSelected());
     }
 
     public void viewMarkLanguageCheckerCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setMarkLanguageChecker(mainWindow.menu.viewMarkLanguageCheckerCheckBoxMenuItem.isSelected());
+        JMenuItem menuItem = mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.VIEW_NEMU,
+                BaseMainWindowMenu.VIEW_MARK_LANGUAGE_CHECKER_CHECKBOX);
+        Core.getEditor().getSettings().setMarkLanguageChecker(menuItem.isSelected());
     }
 
     public void viewMarkFontFallbackCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings()
-                .setDoFontFallback(mainWindow.menu.viewMarkFontFallbackCheckBoxMenuItem.isSelected());
+        JMenuItem menuItem = mainWindow.getMainMenu().getMenuItemForNames(BaseMainWindowMenu.VIEW_NEMU,
+                BaseMainWindowMenu.VIEW_MARK_FONT_FALLBACK_CHECKBOX);
+        Core.getEditor().getSettings().setDoFontFallback(menuItem.isSelected());
     }
 
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {

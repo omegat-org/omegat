@@ -57,6 +57,7 @@ public final class AlignerModule {
     public static void loadPlugins() {
         alignerListener = new IApplicationEventListener() {
             private JMenuItem alignerMenu;
+
             @Override
             public void onApplicationStartup() {
                 SwingUtilities.invokeLater(this::registerMenu);

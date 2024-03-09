@@ -27,8 +27,7 @@
 package org.omegat.gui.align;
 
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 import javax.swing.JMenuItem;
@@ -57,7 +56,7 @@ public final class AlignerModule {
      */
     public static void loadPlugins() {
         alignerListener = new IApplicationEventListener() {
-            private final List<Component> menus = new ArrayList<>();
+            private JMenuItem alignerMenu;
             @Override
             public void onApplicationStartup() {
                 SwingUtilities.invokeLater(this::registerMenu);
@@ -69,15 +68,14 @@ public final class AlignerModule {
             }
 
             private void unregisterMenu() {
-                MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS, menus);
+                MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS, Collections.singletonList(alignerMenu));
             }
 
             private void registerMenu() {
-                JMenuItem alignerMenu = new JMenuItem();
+                alignerMenu = new JMenuItem();
                 Mnemonics.setLocalizedText(alignerMenu, BUNDLE.getString("TF_MENU_TOOLS_ALIGN_FILES"));
                 alignerMenu.addActionListener(actionEvent -> alignerShow());
                 MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, alignerMenu);
-                menus.add(alignerMenu);
             }
 
             public void alignerShow() {

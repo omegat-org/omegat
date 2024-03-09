@@ -64,5 +64,4 @@ public final class MainWindowMenu extends BaseMainWindowMenu
         mainMenu.add(optionsMenu);
         mainMenu.add(helpMenu);
     }
-
 }

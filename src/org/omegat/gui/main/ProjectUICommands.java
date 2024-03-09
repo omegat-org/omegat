@@ -48,17 +48,21 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.IRemoteRepository2;
@@ -69,6 +73,8 @@ import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
+import org.omegat.gui.matches.IMatcher;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.HttpConnectionUtils;
@@ -130,18 +136,15 @@ public final class ProjectUICommands {
                 ProjectProperties props = new ProjectProperties(dir);
                 props.setSourceLanguage(Preferences.getPreferenceDefault(Preferences.SOURCE_LOCALE, "AR-LB"));
                 props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
-                ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
+                final ProjectProperties newProps = ProjectPropertiesDialogController.showDialog(
                         Core.getMainWindow().getApplicationFrame(), props, dir.getAbsolutePath(),
                         ProjectPropertiesDialog.Mode.NEW_PROJECT);
-                newProjDialog.setVisible(true);
-                newProjDialog.dispose();
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
                 Cursor oldCursor = mainWindow.getCursor();
                 mainWindow.setCursor(hourglassCursor);
 
-                final ProjectProperties newProps = newProjDialog.getResult();
                 if (newProps == null) {
                     // user clicks on 'Cancel'
                     dir.delete();
@@ -613,12 +616,9 @@ public final class ProjectUICommands {
                 while (!props.isProjectValid()) {
                     // something wrong with the project.
                     // We display open dialog to fix it.
-                    ProjectPropertiesDialog prj = new ProjectPropertiesDialog(
+                    props = ProjectPropertiesDialogController.showDialog(
                             Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
                             ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
-                    prj.setVisible(true);
-                    props = prj.getResult();
-                    prj.dispose();
                     if (props == null) {
                         // user clicks on 'Cancel'
                         return;
@@ -949,7 +949,7 @@ public final class ProjectUICommands {
                 Core.getMainWindow().showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
                 Core.getMainWindow().showProgressMessage(
                         Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                                MainWindowUI.StatusBarMode.DEFAULT) == MainWindowUI.StatusBarMode.DEFAULT
+                                MainWindowStatusBar.StatusBarMode.DEFAULT) == MainWindowStatusBar.StatusBarMode.DEFAULT
                                         ? OStrings.getString("MW_PROGRESS_DEFAULT")
                                         : OStrings.getProgressBarDefaultPrecentageText());
 
@@ -981,13 +981,11 @@ public final class ProjectUICommands {
         Core.getEditor().commitAndLeave();
 
         // displaying the dialog to change paths and other properties
-        ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getMainWindow().getApplicationFrame(),
+        final ProjectProperties newProps =
+                ProjectPropertiesDialogController.showDialog(Core.getMainWindow().getApplicationFrame(),
                 Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
                 ProjectPropertiesDialog.Mode.EDIT_PROJECT);
-        prj.setVisible(true);
-        final ProjectProperties newProps = prj.getResult();
-        prj.dispose();
         if (newProps == null) {
             return;
         }
@@ -1352,4 +1350,74 @@ public final class ProjectUICommands {
             Core.getMainWindow().displayErrorRB(ex, errorCode);
         }
     }
+
+    /* Edit UI command helpers.
+     */
+
+    /** insert current fuzzy match or selection at cursor position */
+    public static void doInsertTrans() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        String text = getSelectedTextInMatcher();
+        boolean fromMT = false;
+        if (StringUtil.isEmpty(text)) {
+            NearString near = Core.getMatcher().getActiveMatch();
+            if (near != null) {
+                text = near.translation;
+                if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
+                    text = Core.getMatcher().substituteNumbers(
+                            Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
+                }
+
+                if (DataUtils.isFromMTMemory(near)) {
+                    fromMT = true;
+                }
+            }
+        }
+        if (!StringUtil.isEmpty(text)) {
+            if (fromMT) {
+                Core.getEditor().insertTextAndMark(text);
+            } else {
+                Core.getEditor().insertText(text);
+            }
+            Core.getEditor().requestFocus();
+        }
+    }
+
+    /** replace entire edit area with active fuzzy match or selection */
+    public static void doRecycleTrans() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        String selection = getSelectedTextInMatcher();
+        if (!StringUtil.isEmpty(selection)) {
+            Core.getEditor().replaceEditText(selection);
+            Core.getEditor().requestFocus();
+            return;
+        }
+
+        NearString near = Core.getMatcher().getActiveMatch();
+        if (near != null) {
+            String translation = near.translation;
+            if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
+                translation = Core.getMatcher().substituteNumbers(
+                        Core.getEditor().getCurrentEntry().getSrcText(), near.source, near.translation);
+            }
+            if (DataUtils.isFromMTMemory(near)) {
+                Core.getEditor().replaceEditTextAndMark(translation, "TM:[tm/mt]");
+            } else {
+                Core.getEditor().replaceEditText(translation, "TM:[generic]");
+            }
+            Core.getEditor().requestFocus();
+        }
+    }
+
+    private static String getSelectedTextInMatcher() {
+        IMatcher matcher = Core.getMatcher();
+        return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
+    }
+
 }

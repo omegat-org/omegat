@@ -40,8 +40,6 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.gui.preferences.IMenuPreferece;
 import org.omegat.gui.preferences.MainMenuUI;
@@ -188,7 +186,7 @@ public class AppearanceController extends BasePreferencesController {
 
     private void initListeners() {
         panel.restoreWindowButton
-                .addActionListener(e -> MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()));
+                .addActionListener(e -> Core.getMainWindow().resetDesktopLayout());
         panel.cbLightThemeSelect.addActionListener(e -> setRestartRequired(isModified()));
         panel.cbDarkThemeSelect.addActionListener(e -> setRestartRequired(isModified()));
         panel.useDarkThemeRB.addActionListener(e -> setRestartRequired(isModified()));

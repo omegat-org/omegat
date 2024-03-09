@@ -43,6 +43,7 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.text.JTextComponent;
@@ -71,6 +72,7 @@ import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.exttrans.MachineTranslationInfo;
+import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
@@ -105,7 +107,7 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-public final class MainWindowMenuHandler {
+public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     private final MainWindow mainWindow;
@@ -187,7 +189,7 @@ public final class MainWindowMenuHandler {
      */
     public void projectCompileMenuItemActionPerformed() {
         if (!checkTags()) {
-                return;
+            return;
         }
 
         ProjectUICommands.projectCompile();
@@ -195,6 +197,7 @@ public final class MainWindowMenuHandler {
 
     /**
      * Check whether tags are OK
+     * 
      * @return false is there is a tag issue, true otherwise
      */
     private boolean checkTags() {
@@ -210,7 +213,7 @@ public final class MainWindowMenuHandler {
 
     public void projectCommitTargetFilesActionPerformed() {
         if (!checkTags()) {
-                return;
+            return;
         }
 
         ProjectUICommands.projectCompileAndCommit();
@@ -250,12 +253,13 @@ public final class MainWindowMenuHandler {
     }
 
     public void viewFileListMenuItemActionPerformed() {
-        if (mainWindow.projWin == null) {
+        IProjectFilesList projWin = Core.getProjectFilesList();
+        if (projWin == null) {
             mainWindow.menu.viewFileListMenuItem.setSelected(false);
             return;
         }
 
-        mainWindow.projWin.setActive(!mainWindow.projWin.isActive());
+        projWin.setActive(!projWin.isActive());
     }
 
     public void projectAccessRootMenuItemActionPerformed() {
@@ -363,7 +367,8 @@ public final class MainWindowMenuHandler {
 
     private void openFile(File path) {
         try {
-            path = path.getCanonicalFile(); // Normalize file name in case it is displayed
+            // Normalize file name in case it is displayed
+            path = path.getCanonicalFile();
         } catch (Exception ex) {
             // Ignore
         }
@@ -396,7 +401,8 @@ public final class MainWindowMenuHandler {
 
     protected void prepareForExit(Runnable onCompletion) {
         // Bug #902: commit the current entry first
-        // We do it before checking project status, so that it can eventually change it
+        // We do it before checking project status, so that it can eventually
+        // change it
         if (Core.getProject().isProjectLoaded()) {
             Core.getEditor().commitAndLeave();
         }
@@ -445,11 +451,8 @@ public final class MainWindowMenuHandler {
             protected void done() {
                 try {
                     get();
-
-                    MainWindowUI.saveScreenLayout(mainWindow);
-
+                    mainWindow.saveScreenLayout();
                     Preferences.save();
-
                     onCompletion.run();
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -478,11 +481,11 @@ public final class MainWindowMenuHandler {
     }
 
     public void editOverwriteTranslationMenuItemActionPerformed() {
-        mainWindow.doRecycleTrans();
+        ProjectUICommands.doRecycleTrans();
     }
 
     public void editInsertTranslationMenuItemActionPerformed() {
-        mainWindow.doInsertTrans();
+        ProjectUICommands.doInsertTrans();
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
@@ -495,7 +498,8 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * replaces entire edited segment text with a the source text of a segment at cursor position
+     * replaces entire edited segment text with a the source text of a segment
+     * at cursor position
      */
     public void editOverwriteSourceMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
@@ -801,59 +805,41 @@ public final class MainWindowMenuHandler {
     }
 
     public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkUntranslated(
-                        mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkUntranslated(
+                mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkParagraphStartCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkParagraphDelimitations(
-                        mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkParagraphDelimitations(
+                mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
     }
 
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setDisplaySegmentSources(
-                        mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setDisplaySegmentSources(
+                mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkNonUniqueSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkNonUniqueSegments(
-                        mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkNonUniqueSegments(
+                mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkNotedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkNotedSegments(
-                        mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings()
+                .setMarkNotedSegments(mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkNBSPCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkNBSP(
-                        mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkNBSP(mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkWhitespace(
-                        mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings()
+                .setMarkWhitespace(mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkBidiCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkBidi(
-                        mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkBidi(mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
@@ -906,7 +892,8 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * Identify all the placeholders in the source text and automatically inserts them into the target text.
+     * Identify all the placeholders in the source text and automatically
+     * inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
         // insert tags
@@ -935,8 +922,8 @@ public final class MainWindowMenuHandler {
     }
 
     public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed() {
-        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE)
-                .setVisible(true);
+        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
+                StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
     }
 
     public void optionsAutoCompleteShowAutomaticallyItemActionPerformed() {
@@ -972,33 +959,38 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the filters setup dialog to allow customizing file filters in detail.
+     * Displays the filters setup dialog to allow customizing file filters in
+     * detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), FiltersCustomizerController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(),
+                FiltersCustomizerController.class);
     }
 
     /**
-     * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
+     * Displays the segmentation setup dialog to allow customizing the
+     * segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), SegmentationCustomizerController.class);
-
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(),
+                SegmentationCustomizerController.class);
     }
 
     /**
-     * Displays the workflow setup dialog to allow customizing the diverse workflow options.
+     * Displays the workflow setup dialog to allow customizing the diverse
+     * workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), EditingBehaviorController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(),
+                EditingBehaviorController.class);
     }
 
     /**
-     * Restores defaults for all dockable parts. May be expanded in the future to reset the entire GUI to its
-     * defaults.
+     * Restores defaults for all dockable parts. May be expanded in the future
+     * to reset the entire GUI to its defaults.
      */
     public void viewRestoreGUIMenuItemActionPerformed() {
-        MainWindowUI.resetDesktopLayout(mainWindow);
+        mainWindow.resetDesktopLayout();
     }
 
     public void optionsAccessConfigDirMenuItemActionPerformed() {
@@ -1012,9 +1004,8 @@ public final class MainWindowMenuHandler {
         try {
             Help.showHelp();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(mainWindow.getApplicationFrame(), ex.getLocalizedMessage(), OStrings.getString(
-                    "ERROR_TITLE"),
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(mainWindow.getApplicationFrame(), ex.getLocalizedMessage(),
+                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
     }
@@ -1023,7 +1014,9 @@ public final class MainWindowMenuHandler {
      * Shows About dialog
      */
     public void helpAboutMenuItemActionPerformed() {
-        new AboutDialog(mainWindow).setVisible(true);
+        JDialog aboutDialog = new AboutDialog(mainWindow.getApplicationFrame());
+        aboutDialog.setName(AboutDialog.DIALOG_NAME);
+        aboutDialog.setVisible(true);
     }
 
     /**

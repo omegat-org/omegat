@@ -55,5 +55,7 @@ public interface IMainMenu {
 
     JMenu getMenu(MenuExtender.MenuKey marker);
 
+    void enableMenuItem(MenuExtender.MenuKey menu, String name, boolean enabled);
+
     void invokeAction(String action, int modifiers);
 }

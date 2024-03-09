@@ -72,6 +72,7 @@ import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -655,10 +656,15 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
+            @Override
+            public void enableMenuItem(final MenuKey menu, final String name, final boolean enabled) {
+            }
+
             public void invokeAction(String action, int modifiers) {
             }
         };
 
+        @Override
         public IMainMenu getMainMenu() {
             return menu;
         }
@@ -666,6 +672,19 @@ public final class TestTeamIntegrationChild {
         @Override
         public DockingDesktop getDesktop() {
             return null;
+        }
+
+        @Override
+        public void resetDesktopLayout() {
+        }
+
+        @Override
+        public void addSearchWindow(final SearchWindowController newSearchWindow) {
+        }
+
+        @Override
+        public List<SearchWindowController> getSearchWindows() {
+            return Collections.emptyList();
         }
 
         public Cursor getCursor() {

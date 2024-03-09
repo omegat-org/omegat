@@ -58,6 +58,8 @@ import org.omegat.gui.editor.MarkerController;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
+import org.omegat.gui.filelist.IProjectFilesList;
+import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.glossary.IGlossaries;
@@ -103,6 +105,7 @@ public final class Core {
     private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static FilterMaster filterMaster;
+    private static IProjectFilesList projWin;
 
     protected static IAutoSave saveThread;
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
@@ -170,6 +173,10 @@ public final class Core {
     public static void setFilterMaster(FilterMaster newFilterMaster) {
         filterMaster = newFilterMaster;
         EntryKey.setIgnoreFileContext(newFilterMaster.getConfig().isIgnoreFileContext());
+    }
+
+    public static IProjectFilesList getProjectFilesList() {
+        return projWin;
     }
 
     public static MachineTranslateTextArea getMachineTranslatePane() {
@@ -245,7 +252,20 @@ public final class Core {
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
+        initializeGUIimpl(me);
 
+        SaveThread th = new SaveThread();
+        saveThread = th;
+        th.start();
+
+        new VersionCheckThread(10).start();
+    }
+
+    /**
+     * initialize GUI for test.
+     * @throws Exception
+     */
+    static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 
@@ -255,7 +275,7 @@ public final class Core {
         // 4. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);
         tagValidation = new TagValidationTool();
-        issuesWindow = new IssuesPanelController(me);
+        issuesWindow = new IssuesPanelController(me.getApplicationFrame());
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         glossary = glossaryArea;
@@ -266,12 +286,7 @@ public final class Core {
         dictionaries = new DictionariesTextArea(me);
         multiple = new MultipleTransPane(me);
         new SegmentPropertiesArea(me);
-
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
-
-        new VersionCheckThread(10).start();
+        projWin = new ProjectFilesListController();
     }
 
     /**

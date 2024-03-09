@@ -51,6 +51,7 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import org.omegat.CLIParameters;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
@@ -68,6 +69,7 @@ import org.omegat.gui.dialogs.ChooseMedProject;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
+import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
@@ -132,7 +134,7 @@ public final class ProjectUICommands {
                 props.setTargetLanguage(Preferences.getPreferenceDefault(Preferences.TARGET_LOCALE, "UK-UA"));
                 final ProjectProperties newProps = ProjectPropertiesDialogController.showDialog(
                         Core.getMainWindow().getApplicationFrame(), props, dir.getAbsolutePath(),
-                        ProjectPropertiesDialogController.Mode.NEW_PROJECT);
+                        ProjectPropertiesDialog.Mode.NEW_PROJECT);
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -612,7 +614,7 @@ public final class ProjectUICommands {
                     // We display open dialog to fix it.
                     props = ProjectPropertiesDialogController.showDialog(
                             Core.getMainWindow().getApplicationFrame(), props, projectFile.getAbsolutePath(),
-                            ProjectPropertiesDialogController.Mode.RESOLVE_DIRS);
+                            ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
                     if (props == null) {
                         // user clicks on 'Cancel'
                         return;
@@ -979,7 +981,7 @@ public final class ProjectUICommands {
                 ProjectPropertiesDialogController.showDialog(Core.getMainWindow().getApplicationFrame(),
                 Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
-                ProjectPropertiesDialogController.Mode.EDIT_PROJECT);
+                ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         if (newProps == null) {
             return;
         }

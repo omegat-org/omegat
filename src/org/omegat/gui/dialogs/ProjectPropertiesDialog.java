@@ -69,7 +69,6 @@ import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.dialogs.ProjectPropertiesDialogController.Mode;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -100,9 +99,37 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
-    public static final String DIALOG_NAME = "project_properties";
+    public static final String DIALOG_NAME = "project_properties_dialog";
+    public static final String OK_BUTTON_NAME = "project_properties_ok_button";
 
+    public enum Mode {
+        /** This dialog is used to create a new project. */
+        NEW_PROJECT,
+        /**
+         * This dialog is used to resolve missing directories of existing
+         * project (upon opening the project).
+         */
+        RESOLVE_DIRS,
+        /**
+         * This dialog is used to edit project's properties: where directories
+         * reside, languages, etc.
+         */
+        EDIT_PROJECT
+    }
+
+    /**
+     * The type of the dialog:
+     * <ul>
+     * <li>Creating project ==
+     * {@link ProjectPropertiesDialog.Mode#NEW_PROJECT}
+     * <li>Resolving the project's directories (existing project with some dirs
+     * missing) == {@link ProjectPropertiesDialog.Mode#RESOLVE_DIRS}
+     * <li>Editing project properties ==
+     * {@link ProjectPropertiesDialog.Mode#EDIT_PROJECT}
+     * </ul>
+     */
     private final Mode dialogType;
+
     private final ProjectPropertiesDialogController controller;
 
     /**
@@ -619,6 +646,10 @@ public class ProjectPropertiesDialog extends JDialog {
     public ProjectProperties getResult() {
         return controller.getResult();
 
+    }
+
+    Mode getDialogType() {
+        return dialogType;
     }
 
     // multiple translations

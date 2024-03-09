@@ -26,7 +26,7 @@
 package org.omegat.gui.dialogs;
 
 import static org.junit.Assert.assertTrue;
-import static org.omegat.gui.dialogs.ProjectPropertiesDialogController.Mode;
+import static org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode;
 
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;

@@ -64,34 +64,6 @@ import gen.core.project.RepositoryDefinition;
 
 public class ProjectPropertiesDialogController {
 
-    /**
-     * The type of the dialog:
-     * <ul>
-     * <li>Creating project ==
-     * {@link ProjectPropertiesDialogController.Mode#NEW_PROJECT}
-     * <li>Resolving the project's directories (existing project with some dirs
-     * missing) == {@link ProjectPropertiesDialogController.Mode#RESOLVE_DIRS}
-     * <li>Editing project properties ==
-     * {@link ProjectPropertiesDialogController.Mode#EDIT_PROJECT}
-     * </ul>
-     */
-    public enum Mode {
-        /** This dialog is used to create a new project. */
-        NEW_PROJECT,
-        /**
-         * This dialog is used to resolve missing directories of existing
-         * project (upon opening the project).
-         */
-        RESOLVE_DIRS,
-        /**
-         * This dialog is used to edit project's properties: where directories
-         * reside, languages, etc.
-         */
-        EDIT_PROJECT
-    }
-
-    private final Mode dialogType;
-
     private final ProjectProperties projectProperties;
 
     /** Project SRX. */
@@ -113,18 +85,17 @@ public class ProjectPropertiesDialogController {
     private final Frame parent;
     private final ProjectPropertiesDialog dialog;
 
-    public ProjectPropertiesDialogController(Frame parent, ProjectPropertiesDialog dialog, Mode type,
-            ProjectProperties projectProperties) {
+    public ProjectPropertiesDialogController(Frame parent, ProjectPropertiesDialog dialog,
+                                             ProjectPropertiesDialog.Mode type, ProjectProperties projectProperties) {
         this.parent = parent;
         this.dialog = dialog;
-        this.dialogType = type;
         this.projectProperties = projectProperties;
         this.srx = projectProperties.getProjectSRX();
         this.filters = projectProperties.getProjectFilters();
         srcExcludes.addAll(projectProperties.getSourceRootExcludes());
         externalFinderConfig = ExternalFinder.getProjectConfig();
         initFromProperties();
-        initializeActions();
+        initializeActions(type);
     }
 
     /**
@@ -160,7 +131,7 @@ public class ProjectPropertiesDialogController {
         dialog.externalCommandTextArea.setText(projectProperties.getExternalCommand());
     }
 
-    private void initializeActions() {
+    private void initializeActions(ProjectPropertiesDialog.Mode dialogType) {
         dialog.okButton.addActionListener(e -> doOK());
         StaticUIUtils.setEscapeAction(dialog, new AbstractAction() {
             @Override
@@ -194,7 +165,7 @@ public class ProjectPropertiesDialogController {
             dialog.targetTokenizerField.setSelectedItem(newTok);
         };
         dialog.targetLocaleField.addActionListener(targetLocaleListener);
-        if (dialogType == ProjectPropertiesDialogController.Mode.NEW_PROJECT) {
+        if (dialogType == ProjectPropertiesDialog.Mode.NEW_PROJECT) {
             // Infer appropriate tokenizers from source languages
             sourceLocaleListener.actionPerformed(null);
             targetLocaleListener.actionPerformed(null);
@@ -214,7 +185,7 @@ public class ProjectPropertiesDialogController {
             }
         });
         dialog.cancelButton.addActionListener(e -> doCancel());
-        dialog.srcBrowse.addActionListener(e -> doBrowseDirectoy(1, dialog.srcRootField));
+        dialog.srcBrowse.addActionListener(e -> doBrowseDirectory(1, dialog.srcRootField));
         dialog.srcExcludesBtn.addActionListener(e -> {
             List<String> result = FilenamePatternsEditorController.show(srcExcludes);
             if (result != null) {
@@ -222,11 +193,11 @@ public class ProjectPropertiesDialogController {
                 srcExcludes.addAll(result);
             }
         });
-        dialog.locBrowse.addActionListener(e -> doBrowseDirectoy(2, dialog.locRootField));
+        dialog.locBrowse.addActionListener(e -> doBrowseDirectory(2, dialog.locRootField));
         dialog.glosBrowse.addActionListener(e -> {
             // Test now, because a result may change after doBrowseDirectory().
             boolean isDefaultGlossaryFile = projectProperties.isDefaultWriteableGlossaryFile();
-            doBrowseDirectoy(3, dialog.glosRootField);
+            doBrowseDirectory(3, dialog.glosRootField);
             // If a file started as default, automatically use new default.
             if (isDefaultGlossaryFile) {
                 String newDefault = projectProperties.computeDefaultWriteableGlossaryFile();
@@ -234,10 +205,10 @@ public class ProjectPropertiesDialogController {
                 dialog.writeableGlosField.setText(newDefault);
             }
         });
-        dialog.wGlosBrowse.addActionListener(e -> doBrowseDirectoy(6, dialog.writeableGlosField));
-        dialog.tmBrowse.addActionListener(e -> doBrowseDirectoy(4, dialog.tmRootField));
-        dialog.exportTMBrowse.addActionListener(e -> doBrowseDirectoy(7, dialog.exportTMRootField));
-        dialog.dictBrowse.addActionListener(e -> doBrowseDirectoy(5, dialog.dictRootField));
+        dialog.wGlosBrowse.addActionListener(e -> doBrowseDirectory(6, dialog.writeableGlosField));
+        dialog.tmBrowse.addActionListener(e -> doBrowseDirectory(4, dialog.tmRootField));
+        dialog.exportTMBrowse.addActionListener(e -> doBrowseDirectory(7, dialog.exportTMRootField));
+        dialog.dictBrowse.addActionListener(e -> doBrowseDirectory(5, dialog.dictRootField));
         dialog.sentenceSegmentingButton.addActionListener(e -> {
             SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(true, SRX.getDefault(),
                     Preferences.getSRX(), srx);
@@ -262,7 +233,7 @@ public class ProjectPropertiesDialogController {
      * @param field
      *            text field to write browsed folder to
      */
-    private void doBrowseDirectoy(int browseTarget, JTextField field) {
+    private void doBrowseDirectory(int browseTarget, JTextField field) {
         if (field == null) {
             return;
         }
@@ -314,7 +285,7 @@ public class ProjectPropertiesDialogController {
             str += OConsts.EXT_TSV_TXT; // Defaults to .txt
         }
 
-        resetThePaths(browser, field, browseTarget, str);
+        resetThePathAndWarn(browser, field, browseTarget, str);
     }
 
     private String getBrowserTitle(int browseTarget) {
@@ -396,13 +367,13 @@ public class ProjectPropertiesDialogController {
         }
     }
 
-    private void resetThePaths(OmegaTFileChooser browser, JTextField field, int browseTarget,
-                               String pathStr) {
+    private void resetThePathAndWarn(OmegaTFileChooser browser, JTextField field, int browseTarget,
+            String str) {
         // reset the appropriate path - store preferred directory
         switch (browseTarget) {
         case 1:
             Preferences.setPreference(Preferences.SOURCE_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setSourceRoot(pathStr);
+            projectProperties.setSourceRoot(str);
             field.setText(projectProperties.getSourceRoot());
             if (new File(projectProperties.getSourceRoot()).exists()
                     && new File(projectProperties.getSourceRoot()).isDirectory()) {
@@ -411,7 +382,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 2:
             Preferences.setPreference(Preferences.TARGET_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setTargetRoot(pathStr);
+            projectProperties.setTargetRoot(str);
             field.setText(projectProperties.getTargetRoot());
             if (new File(projectProperties.getTargetRoot()).exists()
                     && new File(projectProperties.getTargetRoot()).isDirectory()) {
@@ -420,7 +391,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 3:
             Preferences.setPreference(Preferences.GLOSSARY_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setGlossaryRoot(pathStr);
+            projectProperties.setGlossaryRoot(str);
             field.setText(projectProperties.getGlossaryRoot());
             if (new File(projectProperties.getGlossaryRoot()).exists()
                     && new File(projectProperties.getGlossaryRoot()).isDirectory()) {
@@ -429,7 +400,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 4:
             Preferences.setPreference(Preferences.TM_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setTMRoot(pathStr);
+            projectProperties.setTMRoot(str);
             field.setText(projectProperties.getTMRoot());
             if (new File(projectProperties.getTMRoot()).exists()
                     && new File(projectProperties.getTMRoot()).isDirectory()) {
@@ -438,7 +409,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 5:
             Preferences.setPreference(Preferences.DICT_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setDictRoot(pathStr);
+            projectProperties.setDictRoot(str);
             field.setText(projectProperties.getDictRoot());
             if (new File(projectProperties.getDictRoot()).exists()
                     && new File(projectProperties.getDictRoot()).isDirectory()) {
@@ -447,7 +418,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 6:
             Preferences.setPreference(Preferences.GLOSSARY_FILE, browser.getSelectedFile().getPath());
-            projectProperties.setWriteableGlossary(pathStr);
+            projectProperties.setWriteableGlossary(str);
             field.setText(projectProperties.getWriteableGlossary());
             // The writable glosssary file must be inside the glossary dir
             if (new File(projectProperties.getWriteableGlossaryDir()).exists()
@@ -459,7 +430,7 @@ public class ProjectPropertiesDialogController {
             break;
         case 7:
             Preferences.setPreference(Preferences.EXPORT_TM_FOLDER, browser.getSelectedFile().getParent());
-            projectProperties.setExportTMRoot(pathStr);
+            projectProperties.setExportTMRoot(str);
             field.setText(projectProperties.getExportTMRoot());
             if (new File(projectProperties.getExportTMRoot()).exists()
                     && new File(projectProperties.getExportTMRoot()).isDirectory()) {
@@ -506,8 +477,7 @@ public class ProjectPropertiesDialogController {
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
         }
 
-        if (dialogType != Mode.NEW_PROJECT
-                && !new File(projectProperties.getSourceRoot()).exists()) {
+        if (!isModeNewProject() && !new File(projectProperties.getSourceRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             dialog.srcRootField.requestFocusInWindow();
@@ -518,8 +488,7 @@ public class ProjectPropertiesDialogController {
         if (!projectProperties.getTargetRoot().endsWith(File.separator)) {
             projectProperties.setTargetRoot(projectProperties.getTargetRoot() + File.separator);
         }
-        if (dialogType != Mode.NEW_PROJECT
-                && !new File(projectProperties.getTargetRoot()).exists()) {
+        if (!isModeNewProject() && !new File(projectProperties.getTargetRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             dialog.locRootField.requestFocusInWindow();
@@ -530,7 +499,7 @@ public class ProjectPropertiesDialogController {
         if (!projectProperties.getGlossaryRoot().endsWith(File.separator)) {
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
         }
-        if (dialogType != Mode.NEW_PROJECT
+        if (!isModeNewProject()
                 && !new File(projectProperties.getGlossaryRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
@@ -539,8 +508,7 @@ public class ProjectPropertiesDialogController {
         }
 
         projectProperties.setWriteableGlossary(dialog.writeableGlosField.getText());
-        if (dialogType != Mode.NEW_PROJECT
-                && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
+        if (!isModeNewProject() && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_W_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             dialog.writeableGlosField.requestFocusInWindow();
@@ -562,8 +530,7 @@ public class ProjectPropertiesDialogController {
         if (!projectProperties.getTMRoot().endsWith(File.separator)) {
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
         }
-        if (dialogType != ProjectPropertiesDialogController.Mode.NEW_PROJECT
-                && !new File(projectProperties.getTMRoot()).exists()) {
+        if (!isModeNewProject() && !new File(projectProperties.getTMRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_TMDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             dialog.tmRootField.requestFocusInWindow();
@@ -574,8 +541,7 @@ public class ProjectPropertiesDialogController {
         if (!projectProperties.getExportTMRoot().endsWith(File.separator)) {
             projectProperties.setExportTMRoot(projectProperties.getExportTMRoot() + File.separator);
         }
-        if (dialogType != ProjectPropertiesDialogController.Mode.NEW_PROJECT
-                && !new File(projectProperties.getExportTMRoot()).exists()) {
+        if (!isModeNewProject() && !new File(projectProperties.getExportTMRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_EXPORT_TMDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             dialog.exportTMRootField.requestFocusInWindow();
@@ -586,8 +552,7 @@ public class ProjectPropertiesDialogController {
         if (!projectProperties.getDictRoot().endsWith(File.separator)) {
             projectProperties.setDictRoot(projectProperties.getDictRoot() + File.separator);
         }
-        if (dialogType != ProjectPropertiesDialogController.Mode.NEW_PROJECT
-                && !new File(projectProperties.getDictRoot()).exists()) {
+        if (!isModeNewProject() && !new File(projectProperties.getDictRoot()).exists()) {
             JOptionPane.showMessageDialog(dialog, OStrings.getString("NP_DICTDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             dialog.dictRootField.requestFocusInWindow();
@@ -608,12 +573,16 @@ public class ProjectPropertiesDialogController {
         dialog.setVisible(false);
     }
 
+    private boolean isModeNewProject() {
+        return dialog.getDialogType() == ProjectPropertiesDialog.Mode.NEW_PROJECT;
+    }
+
     private void doCancel() {
         // delete project dir in case of a new project
         // to fix bug 1476591 the project root is created before everything else
         // and if the new project is cancelled, the project root still exists,
         // so it must be deleted
-        if (dialogType == Mode.NEW_PROJECT) {
+        if (isModeNewProject()) {
             new File(projectProperties.getProjectRoot()).delete();
         }
         dialogCancelled = true;
@@ -621,7 +590,7 @@ public class ProjectPropertiesDialogController {
     }
 
     public static ProjectProperties showDialog(Frame parent, ProjectProperties projectProperties,
-            String projFileName, Mode dialogTypeValue) {
+            String projFileName, ProjectPropertiesDialog.Mode dialogTypeValue) {
         if (dialogTypeValue == null) {
             throw new RuntimeException("Unexpected null argument");
         }

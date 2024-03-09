@@ -99,8 +99,6 @@ import org.omegat.util.gui.TokenizerComboBoxRenderer;
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
-    public static final String DIALOG_NAME = "project_properties_dialog";
-    public static final String OK_BUTTON_NAME = "project_properties_ok_button";
 
     public enum Mode {
         /** This dialog is used to create a new project. */
@@ -141,9 +139,9 @@ public class ProjectPropertiesDialog extends JDialog {
      *            project file name
      * @param dialogTypeValue
      *            type of the dialog
-     *            ({@link Mode#NEW_PROJECT},
-     *            {@link Mode#RESOLVE_DIRS} or
-     *            {@link Mode#EDIT_PROJECT}).
+     *            ({@link ProjectPropertiesDialog.Mode#NEW_PROJECT},
+     *            {@link ProjectPropertiesDialog.Mode#RESOLVE_DIRS} or
+     *            {@link ProjectPropertiesDialog.Mode#EDIT_PROJECT}).
      */
     public ProjectPropertiesDialog(Frame parent, final ProjectProperties projectProperties, String projFileName,
                                    Mode dialogTypeValue) {
@@ -199,8 +197,10 @@ public class ProjectPropertiesDialog extends JDialog {
         getContentPane().add(scrollPane, "Center");
 
         Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
+        setName(OK_BUTTON_NAME);
         getRootPane().setDefaultButton(okButton);
         Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
+        setName(CANCEL_BUTTON_NAME);
 
         Box southBox = Box.createHorizontalBox();
         southBox.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -235,6 +235,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Source language field
         sourceLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
+        sourceLocaleField.setName(SOURCE_LOCALE_CB_NAME);
         if (sourceLocaleField.getMaximumRowCount() < 20) {
             sourceLocaleField.setMaximumRowCount(20);
         }
@@ -253,6 +254,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Target language field
         targetLocaleField = new JComboBox<>(new Vector<>(Language.getLanguages()));
+        targetLocaleField.setName(TARGET_LOCALE_CB_NAME);
         if (targetLocaleField.getMaximumRowCount() < 20) {
             targetLocaleField.setMaximumRowCount(20);
         }
@@ -277,6 +279,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Source tokenizer field
         sourceTokenizerField = new JComboBox<>(tokenizers);
+        sourceTokenizerField.setName(SOURCE_TOKENIZER_FIELD_NAME);
         if (sourceTokenizerField.getMaximumRowCount() < 20) {
             sourceTokenizerField.setMaximumRowCount(20);
         }
@@ -307,6 +310,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Target tokenizer field
         targetTokenizerField = new JComboBox<>(tokenizers);
+        targetTokenizerField.setName(TARGET_TOKENIZER_FIELD_NAME);
         if (targetTokenizerField.getMaximumRowCount() < 20) {
             targetTokenizerField.setMaximumRowCount(20);
         }
@@ -339,13 +343,14 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // sentence-segmenting
         Mnemonics.setLocalizedText(sentenceSegmentingCheckBox, OStrings.getString("PP_SENTENCE_SEGMENTING"));
+        sentenceSegmentingCheckBox.setName(SENTENCE_SEGMENTING_CB_NAME);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
-        Mnemonics.setLocalizedText(sentenceSegmentingButton,
-                OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
+        Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString( "MW_OPTIONSMENU_LOCAL_SENTSEG"));
+        sentenceSegmentingButton.setName(SENTENCE_SEGMENTING_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
@@ -353,6 +358,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // File Filters
         Mnemonics.setLocalizedText(fileFiltersButton, OStrings.getString("TF_MENU_DISPLAY_LOCAL_FILTERS"));
+        fileFiltersButton.setName(FILE_FILTER_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.EAST;
@@ -360,6 +366,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Repositories mapping
         Mnemonics.setLocalizedText(repositoriesButton, OStrings.getString("PP_REPOSITORIES"));
+        repositoriesButton.setName(REPOSITORIES_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.EAST;
@@ -367,6 +374,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Repositories mapping
         Mnemonics.setLocalizedText(externalFinderButton, OStrings.getString("PP_EXTERNALFINDER"));
+        externalFinderButton.setName(EXTERNAL_FINDER_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.EAST;
@@ -374,6 +382,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // multiple translations
         Mnemonics.setLocalizedText(allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
+        allowDefaultsCheckBox.setName(ALLOW_DEFAULTS_CB_NAME);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.WEST;
@@ -381,6 +390,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Remove Tags
         Mnemonics.setLocalizedText(removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
+        removeTagsCheckBox.setName(REMOVE_TAGS_CB_NAME);
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.WEST;
@@ -403,6 +413,7 @@ public class ProjectPropertiesDialog extends JDialog {
             externalCommandLabel.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
             externalCommandTextArea.setBackground(getBackground());
         }
+        externalCommandTextArea.setName(EXTERNAL_COMMAND_TEXTAREA_NAME);
         final JScrollPane externalCommandScrollPane = new JScrollPane();
         externalCommandScrollPane.setViewportView(externalCommandTextArea);
         gbc.gridx = 0;
@@ -413,6 +424,7 @@ public class ProjectPropertiesDialog extends JDialog {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         optionsBox.add(externalCommandScrollPane, gbc);
         variablesList = new JComboBox<>(new Vector<>(CommandVarExpansion.getCommandVariables()));
+        variablesList.setName(VARIABLE_LIST_NAME);
         // Add variable insertion controls only if project external commands are
         // enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
@@ -456,6 +468,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bSrc.add(srcRootLabel);
         bSrc.add(Box.createHorizontalGlue());
         Mnemonics.setLocalizedText(srcExcludesBtn, OStrings.getString("PP_BUTTON_BROWSE_SRC_EXCLUDES"));
+        srcExcludesBtn.setName(SRC_EXCLUDES_BUTTON_NAME);
         bSrc.add(srcExcludesBtn);
         Mnemonics.setLocalizedText(srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
         bSrc.add(srcBrowse);
@@ -469,6 +482,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bTM.add(tmRootLabel);
         bTM.add(Box.createHorizontalGlue());
         Mnemonics.setLocalizedText(tmBrowse, OStrings.getString("PP_BUTTON_BROWSE_TM"));
+        tmBrowse.setName(TM_BROWSE_BUTTON_NAME);
         bTM.add(tmBrowse);
         dirsBox.add(bTM);
         dirsBox.add(tmRootField);
@@ -480,6 +494,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bGlos.add(glosRootLabel);
         bGlos.add(Box.createHorizontalGlue());
         Mnemonics.setLocalizedText(glosBrowse, OStrings.getString("PP_BUTTON_BROWSE_GL"));
+        glosBrowse.setName(GLOSSARY_BROWSE_BUTTON_NAME);
         bGlos.add(glosBrowse);
         dirsBox.add(bGlos);
         dirsBox.add(glosRootField);
@@ -491,6 +506,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bwGlos.add(writeableGlosLabel);
         bwGlos.add(Box.createHorizontalGlue());
         Mnemonics.setLocalizedText(wGlosBrowse, OStrings.getString("PP_BUTTON_BROWSE_WG"));
+        wGlosBrowse.setName(WRITABLE_GLOSSARY_BROWSE_BUTTON_NAME);
         bwGlos.add(wGlosBrowse);
         dirsBox.add(bwGlos);
         dirsBox.add(writeableGlosField);
@@ -502,6 +518,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bDict.add(locDictLabel);
         bDict.add(Box.createHorizontalGlue());
         Mnemonics.setLocalizedText(dictBrowse, OStrings.getString("PP_BUTTON_BROWSE_DICT"));
+        dictBrowse.setName(DICTIONARY_BROWSE_BUTTON_NAME);
         bDict.add(dictBrowse);
         dirsBox.add(bDict);
         dirsBox.add(dictRootField);
@@ -513,6 +530,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bLoc.add(locRootLabel);
         bLoc.add(Box.createHorizontalGlue());
         Mnemonics.setLocalizedText(locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
+        locBrowse.setName(LOC_BROWSE_BUTTON_NAME);
         bLoc.add(locBrowse);
         dirsBox.add(bLoc);
         dirsBox.add(locRootField);
@@ -524,16 +542,21 @@ public class ProjectPropertiesDialog extends JDialog {
         bExpTM.add(exportTMRootLabel);
         bExpTM.add(Box.createHorizontalGlue());
         Mnemonics.setLocalizedText(exportTMBrowse, OStrings.getString("PP_BUTTON_BROWSE_EXP_TM"));
+        exportTMBrowse.setName(EXPORT_TM_BROWSE_BUTTON_NAME);
         bExpTM.add(exportTMBrowse);
         // Supply check boxes to choose which TM formats to export
         exportTMOmegaTCheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_OMEGAT"));
         exportTMLevel1CheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_LEVEL1"));
         exportTMLevel2CheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_LEVEL2"));
+        exportTMOmegaTCheckBox.setName(EXPORT_TM_OMEGAT_CB_NAME);
+        exportTMLevel1CheckBox.setName(EXPORT_TM_LEVEL1_CB_NAME);
+        exportTMLevel2CheckBox.setName(EXPORT_TM_LEVEL2_CB_NAME);
 
         JPanel exportTMPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
         JLabel cbExportLabel = new JLabel(OStrings.getString("PP_EXPORT_TM_LEVELS"));
 
         dirsBox.add(bExpTM);
+        exportTMRootField.setName(EXPORT_TM_ROOT_FIELD_NAME);
         dirsBox.add(exportTMRootField);
         exportTMPanel.add(cbExportLabel);
         exportTMPanel.add(exportTMOmegaTCheckBox);
@@ -699,6 +722,37 @@ public class ProjectPropertiesDialog extends JDialog {
     JButton dictBrowse = new JButton();
 
     // extern command
-    private JLabel variablesLabel = new javax.swing.JLabel();
+    JLabel variablesLabel = new javax.swing.JLabel();
     JComboBox<String> variablesList;
+
+    // component name definitions for ui test.
+    public static final String DIALOG_NAME = "project_properties_dialog";
+    public static final String OK_BUTTON_NAME = "project_properties_ok_button";
+    public static final String CANCEL_BUTTON_NAME = "project_properties_cancel_button";
+    public static final String SENTENCE_SEGMENTING_CB_NAME = "project_properties_sentence_segmenting_cb";
+    public static final String SENTENCE_SEGMENTING_BUTTON_NAME = "project_properties_sentence_segmenting_button";
+    public static final String ALLOW_DEFAULTS_CB_NAME = "project_properties_allow_defaults_cb";
+    public static final String REMOVE_TAGS_CB_NAME = "project_properties_remove_tags_cb";
+    public static final String EXPORT_TM_BROWSE_BUTTON_NAME = "project_properties_export_tm_browse_button";
+    public static final String FILE_FILTER_BUTTON_NAME = "project_properties_file_filter_button";
+    public static final String EXPORT_TM_ROOT_FIELD_NAME = "project_properties_export_tm_root_field";
+    public static final String EXPORT_TM_OMEGAT_CB_NAME = "project_properties_export_tm_omegat_cb";
+    public static final String EXPORT_TM_LEVEL1_CB_NAME = "project_properties_export_tm_level1_cb";
+    public static final String EXPORT_TM_LEVEL2_CB_NAME = "project_properties_export_tm_level2_cb";
+    public static final String REPOSITORIES_BUTTON_NAME = "project_properties_repositories_button";
+    public static final String EXTERNAL_FINDER_BUTTON_NAME = "project_properties_external_finder_button";
+    public static final String EXTERNAL_COMMAND_TEXTAREA_NAME =
+            "project_properties_external_command_textarea";
+    public static final String VARIABLE_LIST_NAME = "project_properties_variable_list";
+    public static final String SRC_EXCLUDES_BUTTON_NAME = "project_properties_src_excludes_button";
+    public static final String TM_BROWSE_BUTTON_NAME = "project_properties_tm_browse";
+    public static final String GLOSSARY_BROWSE_BUTTON_NAME = "project_properties_glossary_browse_button";
+    public static final String WRITABLE_GLOSSARY_BROWSE_BUTTON_NAME =
+            "project_properties_writable_glossary_browse_button";
+    public static final String LOC_BROWSE_BUTTON_NAME = "project_properties_loc_browse_button";
+    public static final String DICTIONARY_BROWSE_BUTTON_NAME = "project_properties_dictionary_browse_button";
+    public static final String SOURCE_TOKENIZER_FIELD_NAME = "project_properties_source_tokenizer_field";
+    public static final String TARGET_TOKENIZER_FIELD_NAME = "project_properties_target_tokenizer_field";
+    public static final String SOURCE_LOCALE_CB_NAME = "project_properties_source_locale_cb";
+    public static final String TARGET_LOCALE_CB_NAME = "project_properties_target_locale_cb";
 }

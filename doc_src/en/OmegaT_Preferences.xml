@@ -1690,15 +1690,14 @@ ${filePath}></programlisting></para>
 	url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT wiki
 	site</ulink>.
 	Use the <guibutton>Install</guibutton> button to install or upgrade your
-	plugin. You can install a plugin file which should be JAR file that has
-	a filename with ".jar" file extension.
-	OmegaT can also accept a zip archive file that contents includes plugin
-	JAR file. Typically third party plugins are distributed as a zip archive
-	format, bundled with README.txt, License.txt file and the plugin jar file.
+	plugin. The plugin file should be a JAR file with a <filename>.jar</filename> file extension.
+	OmegaT can also accept a zip archive file that contains one or more JAR file plugins.
+	Third party plugins are typically distributed as zip archives bundled with the plugin as well as
+	README.txt and License.txt files.
 	</para>
 	<warning>
-		<para>The plugin installer feature only accepts an archive with a plugin file,
-		 not a plugin jar that has a filename with ".zip" extension.</para>
+		<para>The plugin installer only accepts archives containing one or more JAR plugin files.
+		 It does not recognize plugin JAR files with a <filename>.zip</filename> extension.</para>
 	</warning>
   </section>
 

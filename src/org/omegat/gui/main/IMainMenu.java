@@ -28,6 +28,7 @@
 package org.omegat.gui.main;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 import org.omegat.util.gui.MenuExtender;
 
@@ -54,6 +55,8 @@ public interface IMainMenu {
     JMenu getHelpMenu();
 
     JMenu getMenu(MenuExtender.MenuKey marker);
+
+    JMenuItem getMenuItemForNames(String menuName, String itemName);
 
     void invokeAction(String action, int modifiers);
 }

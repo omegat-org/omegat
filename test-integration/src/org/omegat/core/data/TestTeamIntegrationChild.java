@@ -46,6 +46,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
@@ -72,6 +73,7 @@ import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -655,6 +657,11 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
+            @Override
+            public JMenuItem getMenuItemForNames(final String menuName, final String itemName) {
+                return null;
+            }
+
             public void invokeAction(String action, int modifiers) {
             }
         };
@@ -666,6 +673,24 @@ public final class TestTeamIntegrationChild {
         @Override
         public DockingDesktop getDesktop() {
             return null;
+        }
+
+        @Override
+        public void resetDesktopLayout() {
+        }
+
+        @Override
+        public void addSearchWindow(final SearchWindowController newSearchWindow) {
+
+        }
+
+        @Override
+        public List<SearchWindowController> getSearchWindows() {
+            return null;
+        }
+
+        @Override
+        public void saveScreenLayout() {
         }
 
         public Cursor getCursor() {

@@ -202,15 +202,16 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         optionsMenu = createMenu(OPTIONS_MENU, "MW_OPTIONSMENU");
         helpMenu = createMenu(HELP_MENU, "TF_MENU_HELP");
 
-        projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE");
-        projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE");
-        projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN");
+        projectNewMenuItem = createMenuItem(PROJECT_NEW_MENUITEM, "TF_MENU_FILE_CREATE");
+        projectTeamNewMenuItem = createMenuItem(PROJECT_NEW_TEAM_MENUITEM, "TF_MENU_FILE_TEAM_CREATE");
+        projectOpenMenuItem = createMenuItem(PROJECT_OPEN_MENUITEM, "TF_MENU_FILE_OPEN");
         projectOpenRecentMenuItem = createMenu(PROJECT_OPEN_RECENT_SUBMENU, "TF_MENU_FILE_OPEN_RECENT");
-        projectClearRecentMenuItem = createMenuItem("TF_MENU_FILE_CLEAR_RECENT");
+        projectClearRecentMenuItem = createMenuItem(PROJECT_CLEAR_RECENT_MENUITEM,
+                "TF_MENU_FILE_CLEAR_RECENT");
 
-        projectReloadMenuItem = createMenuItem("TF_MENU_PROJECT_RELOAD");
-        projectCloseMenuItem = createMenuItem("TF_MENU_FILE_CLOSE");
-        projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE");
+        projectReloadMenuItem = createMenuItem(PROJECT_RELOAD_MENUITEM, "TF_MENU_PROJECT_RELOAD");
+        projectCloseMenuItem = createMenuItem(PROJECT_CLOSE_MENUITEM, "TF_MENU_FILE_CLOSE");
+        projectSaveMenuItem = createMenuItem(PROJECT_SAVE_MENUITEM, "TF_MENU_FILE_SAVE");
         projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT");
         projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT");
         projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT");
@@ -224,7 +225,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         projectAccessProjectFilesMenu = createMenu(PROJECT_ACCESS_PROJECT_FILES_SUBMENU,
                 "TF_MENU_FILE_ACCESS_PROJECT_FILES");
-        projectAccessRootMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_ROOT");
+        projectAccessRootMenuItem = createMenuItem(PROJECT_ACCESS_ROOT_MENUITEM, "TF_MENU_FILE_ACCESS_ROOT");
         projectAccessDictionaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_DICTIONARY");
         projectAccessGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_GLOSSARY");
         projectAccessSourceMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_SOURCE");
@@ -249,8 +250,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectAccessCurrentTargetDocumentMenuItem = createMenuItem(
                 "TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT");
         projectAccessWriteableGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY");
-        projectRestartMenuItem = createMenuItem("TF_MENU_FILE_RESTART");
-        projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
+        projectRestartMenuItem = createMenuItem(PROJECT_RESTART_MENUITEM, "TF_MENU_FILE_RESTART");
+        projectExitMenuItem = createMenuItem(PROJECT_EXIT_MENUITEM, "TF_MENU_FILE_QUIT");
 
         editUndoMenuItem = createMenuItem("TF_MENU_EDIT_UNDO");
         editRedoMenuItem = createMenuItem("TF_MENU_EDIT_REDO");
@@ -264,7 +265,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT");
         editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED");
         editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION");
-        editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY");
+        editCreateGlossaryEntryMenuItem = createMenuItem(EDIT_CREATE_GLOSSARY_ENTRY_MENUITEM,
+                "TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY");
         editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND");
         editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE");
         editSearchDictionaryMenuItem = createMenuItem("TF_MENU_EDIT_SEARCH_DICTIONARY");
@@ -423,9 +425,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR");
 
         helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS");
-        helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT");
+        helpAboutMenuItem = createMenuItem(HELP_ABOUT_MENUITEM, "TF_MENU_HELP_ABOUT");
         helpLastChangesMenuItem = createMenuItem("TF_MENU_HELP_LAST_CHANGES");
-        helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG");
+        helpLogMenuItem = createMenuItem(HELP_LOG_MENUITEM, "TF_MENU_HELP_LOG");
         helpUpdateCheckMenuItem = createMenuItem("TF_MENU_HELP_CHECK_FOR_UPDATES");
 
     }
@@ -1219,12 +1221,15 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     public static final String PROJECT_OPEN_RECENT_SUBMENU = "project_open_recent_submenu";
     public static final String PROJECT_CLEAR_RECENT_MENUITEM = "project_clear_recent_menuitem";
     public static final String PROJECT_ACCESS_PROJECT_FILES_SUBMENU = "project_access_project_files_submenu";
+    public static final String PROJECT_RESTART_MENUITEM = "project_restart_menuitem";
+    public static final String PROJECT_SAVE_MENUITEM = "project_save_menuitem";
+    public static final String PROJECT_CLOSE_MENUITEM = "project_close_menuitem";
     public static final String PROJECT_EXIT_MENUITEM = "project_exit_menuitem";
-    public static final String PROJECT_RELOAD_MENU = "project_reload_menu";
-    public static final String PROJECT_ACCESS_ROOT_MENU = "project_access_root_menu";
+    public static final String PROJECT_RELOAD_MENUITEM = "project_reload_menuitem";
+    public static final String PROJECT_ACCESS_ROOT_MENUITEM = "project_access_root_menu";
     public static final String PROJECT_VIEW_FILE_LIST_MENUITEM = "project_view_file_list_menuitem";
     public static final String SELECT_FUZZY_SUBMENU = "select_fuzzy_submenu";
-    public static final String EDIT_CREATE_GLOSSARY_MENUITEM = "edit_create_glossary_menuitem";
+    public static final String EDIT_CREATE_GLOSSARY_ENTRY_MENUITEM = "edit_create_glossary_entry_menuitem";
     public static final String INSERT_CHARS_SUBMENU = "insert_chars_submenu";
     public static final String GOTO_X_ENTRY_SUBMENU = "goto_x_entry_submenu";
     public static final String VIEW_MODIFICATION_INFO_SUBMENU = "view_modification_info_submenu";
@@ -1232,8 +1237,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     public static final String VIEW_MARK_UNTRANSLATED_SEGMENTS_CHECKBOX = "view_mark_untranslated_segments_checkbox";
     public static final String VIEW_MARK_PARAGRAPH_START_CHECKBOX = "view_mark_paragraph_start_checkbox";
     public static final String VIEW_DISPLAY_SEGMENT_SOURCE_CHECKBOX = "view_display_segment_source_checkbox";
-    public static final String VIEW_DISPLAY_MODIFICATION_INFO_NONE_RADIO_BUTTON =
-            "view_display_modification_info_none_radio_button";
     public static final String VIEW_MARK_NON_UNIQUE_SEGMENTS_CHECKBOX = "view_mark_non_unique_segments_checkbox";
     public static final String VIEW_MARK_NOTED_SEGMENTS_CHECKBOX = "view_mark_noted_segments_checkbox";
     public static final String VIEW_MARK_WHITE_SPACE_CHECKBOX = "view_mark_white_space_checkbox";

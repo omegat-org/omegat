@@ -1048,23 +1048,23 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     public JMenu getMenu(MenuExtender.MenuKey marker) {
-        switch(marker) {
-            case PROJECT:
-                return projectMenu;
-            case EDIT:
-                return editMenu;
-            case VIEW:
-                return viewMenu;
-            case GOTO:
-                return gotoMenu;
-            case TOOLS:
-                return toolsMenu;
-            case OPTIONS:
-                return optionsMenu;
-            case HELP:
-                return helpMenu;
-            default:
-                return null;
+        switch (marker) {
+        case PROJECT:
+            return projectMenu;
+        case EDIT:
+            return editMenu;
+        case VIEW:
+            return viewMenu;
+        case GOTO:
+            return gotoMenu;
+        case TOOLS:
+            return toolsMenu;
+        case OPTIONS:
+            return optionsMenu;
+        case HELP:
+            return helpMenu;
+        default:
+            return null;
         }
     }
 

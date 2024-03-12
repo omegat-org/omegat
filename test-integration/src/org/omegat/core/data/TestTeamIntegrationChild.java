@@ -665,6 +665,8 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
+            @Deprecated
+            @Override
             public void invokeAction(String action, int modifiers) {
             }
         };

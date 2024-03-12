@@ -190,18 +190,18 @@ public class MainWindow implements IMainWindow {
                         .newInstance(this, mainWindowMenuHandler);
             } catch (Exception e) {
                 // fall back to default when loading failed.
-                menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
+                menu1 = new MainWindowMenu(this);
             }
             menu = menu1;
         } else {
             // Default menu.
-            menu = new MainWindowMenu(this, mainWindowMenuHandler);
+            menu = new MainWindowMenu(this);
         }
         applicationFrame.setJMenuBar(menu.mainMenu);
 
         applicationFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                mainWindowMenuHandler.projectExitMenuItemActionPerformed();
+                MainWindowMenuHandler.projectExitAction();
             }
 
             @Override

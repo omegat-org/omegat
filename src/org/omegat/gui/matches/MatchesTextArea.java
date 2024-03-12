@@ -73,6 +73,7 @@ import org.omegat.core.matching.NearString.ScoresComparator;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
@@ -605,28 +606,11 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
-        item.addActionListener(new ActionListener() {
-            // the action: insert this match
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (StringUtil.isEmpty(getSelectedText())) {
-                    setActiveMatch(index);
-                }
-                Core.getMainWindow().getMainMenu().invokeAction("editInsertTranslationMenuItem", 0);
-            }
-        });
+        item.setAction(MainWindowMenuHandler.getAction("EditInsertTranslationMenuItem"));
         item.setEnabled(hasMatches);
 
         item = popup.add(OStrings.getString("MATCHES_REPLACE"));
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (StringUtil.isEmpty(getSelectedText())) {
-                    setActiveMatch(index);
-                }
-                Core.getMainWindow().getMainMenu().invokeAction("editOverwriteTranslationMenuItem", 0);
-            }
-        });
+        item.setAction(MainWindowMenuHandler.getAction("EditOverwriteTranslationMenuItem"));
         item.setEnabled(hasMatches);
 
         popup.addSeparator();

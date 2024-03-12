@@ -69,7 +69,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         frame = GuiActionRunner.execute(() -> {
             Core.setProject(new NotLoadedProject());
             UIDesignManager.initialize();
-            TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
+            TestMainWindow mw = new TestMainWindow();
             TestCoreInitializer.initMainWindow(mw);
             TestCoreInitializer.initAutoSave(autoSave);
 
@@ -96,8 +96,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     static class TestMainWindowMenu extends BaseMainWindowMenu {
 
-        TestMainWindowMenu(IMainWindow mainWindow, BaseMainWindowMenuHandler mainWindowMenuHandler) {
-            super(mainWindow, mainWindowMenuHandler);
+        TestMainWindowMenu(IMainWindow mainWindow) {
+            super(mainWindow);
             initComponents();
         }
 

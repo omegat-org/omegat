@@ -34,9 +34,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -44,18 +45,14 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.main.BaseMainWindowMenuHandler;
-import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.RecentProjects;
-import org.omegat.util.gui.ResourcesUtil;
 
 /**
  * @author Hiroshi Miura
@@ -71,15 +68,15 @@ public class AccessTools extends JPanel {
 
     private ProjectComboBoxModel projectComboBoxModel;
     private SourceComboBoxModel sourceComboBoxModel;
-    private final BaseMainWindowMenuHandler mainWindowMenuHandler;
 
     private URI selectedProject = null;
 
     private static final int MAX_PATH_LENGTH_SHOWN = 25;
     private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
+    private final Map<Object, Action> actions;
 
-    public AccessTools(final BaseMainWindowMenuHandler mainWindowMenuHandler) {
-        this.mainWindowMenuHandler = mainWindowMenuHandler;
+    public AccessTools(Map<Object, Action> actions) {
+        this.actions = actions;
         initComponents();
     }
 
@@ -122,13 +119,13 @@ public class AccessTools extends JPanel {
         sourceFilesCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
         add(sourceFilesCB);
 
-        searchButton = new JButton("",
-                Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
-                        () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
+        searchButton = new JButton();
+        searchButton.setAction(actions.get("EditFindInProjectMenuItem"));
+        searchButton.setText("");
         searchButton.setBorderPainted(false);
-        settingsButton = new JButton("", Objects.requireNonNullElseGet(
-                UIManager.getIcon("OmegaT.newUI.settings.icon"),
-                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
+        settingsButton = new JButton();
+        settingsButton.setAction(actions.get("OptionsPreferencesMenuItem"));
+        settingsButton.setText("");
         settingsButton.setBorderPainted(false);
 
         // -- right side
@@ -136,12 +133,6 @@ public class AccessTools extends JPanel {
         add(searchButton);
         add(settingsButton);
 
-        searchButton.addActionListener(actionEvent -> {
-            mainWindowMenuHandler.editFindInProjectMenuItemActionPerformed();
-        });
-        settingsButton.addActionListener(actionEvent -> {
-            mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed();
-        });
         recentProjectCB.addActionListener(actionEvent -> {
             // when select a project from the list, we open it.
             final Object item = recentProjectCB.getSelectedItem();
@@ -153,13 +144,13 @@ public class AccessTools extends JPanel {
                 if (projectUri.getScheme().equals("omegat")) {
                     switch (projectUri.getSchemeSpecificPart()) {
                     case "new":
-                        mainWindowMenuHandler.projectNewMenuItemActionPerformed();
+                        ProjectUICommands.projectCreate();
                         break;
                     case "open":
-                        mainWindowMenuHandler.projectOpenMenuItemActionPerformed();
+                        ProjectUICommands.projectOpen(null);
                         break;
                     case "team":
-                        mainWindowMenuHandler.projectTeamNewMenuItemActionPerformed();
+                        ProjectUICommands.projectTeamCreate();
                         break;
                     default:
                         break;

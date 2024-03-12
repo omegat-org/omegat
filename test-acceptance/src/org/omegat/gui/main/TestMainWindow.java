@@ -73,17 +73,11 @@ class TestMainWindow implements IMainWindow {
      */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException {
+    TestMainWindow() throws IOException {
         applicationFrame = new JFrame();
         applicationFrame.setPreferredSize(new Dimension(1920, 1040));
         font = FontUtil.getScaledFont();
-        try {
-            BaseMainWindowMenuHandler handler = mainWindowMenuHandler
-                    .getDeclaredConstructor(IMainWindow.class).newInstance(this);
-            menu = new TestCoreGUI.TestMainWindowMenu(this, handler);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        menu = new TestCoreGUI.TestMainWindowMenu(this);
         applicationFrame.setJMenuBar(menu.mainMenu);
         applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 

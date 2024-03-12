@@ -72,6 +72,7 @@ import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
@@ -411,13 +412,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         populateContextMenu(menu);
         menu.addSeparator();
         final JMenuItem openFile = new JMenuItem(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE"));
-        openFile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWritableGlossaryMenuItem",
-                        e.getModifiers());
-            }
-        });
+        openFile.setAction(MainWindowMenuHandler.getAction("ProjectAccessWritableGlossaryMenuItem"));
         openFile.setEnabled(false);
         if (Core.getProject().isProjectLoaded()) {
             String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();

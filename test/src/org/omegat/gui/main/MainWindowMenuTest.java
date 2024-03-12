@@ -29,6 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.Component;
 import java.lang.reflect.Field;
@@ -37,7 +38,11 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -48,9 +53,11 @@ import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
+import org.omegat.util.CommonVerifications;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.MenuExtender.MenuKey;
 import org.omegat.util.gui.MenuItemPager;
@@ -68,7 +75,7 @@ public class MainWindowMenuTest extends TestCore {
     public void testMenuActions() throws Exception {
         int count = 0;
 
-        Map<String, Method> existsMethods = new HashMap<String, Method>();
+        Map<String, Method> existsMethods = new HashMap<>();
 
         for (Method m : MainWindowMenuHandler.class.getDeclaredMethods()) {
             if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
@@ -82,6 +89,7 @@ public class MainWindowMenuTest extends TestCore {
                 }
             }
         }
+        Set<Object> actionTargets = MainWindowMenuHandler.getActions().keySet();
 
         for (Field f : StaticUtils.getAllModelFields(MainWindowMenu.class)) {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
@@ -89,13 +97,20 @@ public class MainWindowMenuTest extends TestCore {
                 String actionMethodName = f.getName() + "ActionPerformed";
                 Method m;
                 try {
-                    m = MainWindowMenuHandler.class.getMethod(actionMethodName);
+                    MainWindowMenuHandler.class.getMethod(actionMethodName);
+                    assertNotNull(existsMethods.remove(actionMethodName));
                 } catch (NoSuchMethodException ignore) {
                     // See if the method accepts a modifier key argument.
-                    m = MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
+                    try {
+                        MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
+                        assertNotNull(existsMethods.remove(actionMethodName));
+                    } catch (NoSuchMethodException ignore2) {
+                        String actionClassName = StringUtil.capitalizeFirst(f.getName(), Locale.ENGLISH);
+                        if (!actionTargets.contains(actionClassName)) {
+                            fail("Action method or class not defined for " + f.getName());
+                        }
+                    }
                 }
-                assertNotNull("Action method not defined for " + f.getName(), m);
-                assertNotNull(existsMethods.remove(actionMethodName));
             }
         }
         assertTrue("menu items not found", count > 30);
@@ -308,5 +323,22 @@ public class MainWindowMenuTest extends TestCore {
         MenuItemPager pager = new MenuItemPager(target);
         newMenuItems.forEach(pager::add);
         return pager.getFirstPage();
+    }
+
+    @Test
+    public void actionMenuCheck() throws Exception {
+        assertMenuKeyMatches(new String[] {"src/org/omegat/gui/main/"});
+    }
+
+    protected void assertMenuKeyMatches(String[] targets) throws Exception {
+        Set<Object> actions =  MainWindowMenuHandler.getActions().keySet();
+        Locale.setDefault(Locale.ENGLISH);
+        Pattern pattern = Pattern.compile("createMenuItemFromAction\\(\\s*\"([^\"]+)\"\\s*[,)]");
+        CommonVerifications.processSourceContent(targets, (path, chars) -> {
+            Matcher m = pattern.matcher(chars);
+            while (m.find()) {
+                assertTrue(actions.contains(m.group(1)));
+            }
+        });
     }
 }

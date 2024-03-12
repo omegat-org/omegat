@@ -55,5 +55,6 @@ public interface IMainMenu {
 
     JMenu getMenu(MenuExtender.MenuKey marker);
 
+    @Deprecated
     void invokeAction(String action, int modifiers);
 }

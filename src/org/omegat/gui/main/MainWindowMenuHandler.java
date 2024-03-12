@@ -15,6 +15,7 @@
                2015 Yu Tang, Aaron Madlon-Kay, Didier Briel
                2017 Didier Briel
                2019 Thomas Cordonnier
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -40,19 +41,25 @@ import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
+import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
+
+import org.openide.awt.AbstractMnemonicsAction;
 
 import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
-import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
@@ -88,6 +95,7 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.DesktopWrapper;
+import org.omegat.util.gui.ResourcesUtil;
 
 /**
  * Handler for main menu items.
@@ -105,8 +113,7 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
-    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
+public final class MainWindowMenuHandler {
 
     private final MainWindow mainWindow;
 
@@ -114,90 +121,312 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         this.mainWindow = mainWindow;
     }
 
-    /**
-     * Create new project.
-     */
-    public void projectNewMenuItemActionPerformed() {
-        ProjectUICommands.projectCreate();
+    private static final Action[] ACTIONS = {
+            new ProjectNewMenuItemAction(),
+            new ProjectTeamNewMenuItemAction(),
+            new ProjectOpenMenuItemAction(),
+            new ProjectCloseMenuItemAction(),
+            new ProjectClearRecentMenuItemAction(),
+            new ProjectImportMenuItemAction(),
+            new ProjectWikiImportMenuItemAction(),
+            new ProjectSaveMenuItemAction(),
+            new ProjectReloadMenuItemAction(),
+            new ProjectCommitSourceFilesAction(),
+            new ProjectCommitTargetFilesAction(),
+            new ProjectCompileMenuItemAction(),
+            new ProjectSingleCompileMenuItemAction(),
+            new ProjectMedOpenMenuItemAction(),
+            new ProjectMedCreateMenuItemAction(),
+            new ProjectEditMenuItemAction(),
+            new ProjectAccessRootMenuItemAction(),
+            new ProjectAccessDictionaryMenuItemAction(),
+            new ProjectAccessGlossaryMenuItemAction(),
+            new ProjectAccessSourceMenuItemAction(),
+            new ProjectAccessTargetMenuItemAction(),
+            new ProjectAccessTMMenuItemAction(),
+            new ProjectAccessExportTMMenuItemAction(),
+            new ProjectRestartMenuItemAction(),
+            new ProjectExitMenuItemAction(),
+            new ProjectAccessCurrentSourceDocumentMenuItemAction(),
+            new ProjectAccessCurrentTargetDocumentMenuItemAction(),
+            new ProjectAccessWriteableGlossaryMenuItemAction(),
+            new EditUndoMenuItemAction(),
+            new EditRedoMenuItemAction(),
+            new EditFindInProjectMenuItemAction(),
+            new EditOverwriteTranslationMenuItemAction(),
+            new EditInsertSourceMenuItemAction(),
+            new EditSelectSourceMenuItemAction(),
+            new EditInsertTranslationMenuItemAction(),
+            new EditOverwriteMachineTranslationMenuItemAction(),
+            new EditReplaceInProjectMenuItemAction(),
+            new EditExportSelectionMenuItemAction(),
+            new EditOverwriteSourceMenuItemAction(),
+            new EditSearchDictionaryMenuItemAction(),
+            new EditCreateGlossaryEntryMenuItemAction(),
+            new EditSelectFuzzy1MenuItemAction(),
+            new EditSelectFuzzy2MenuItemAction(),
+            new EditSelectFuzzy3MenuItemAction(),
+            new EditSelectFuzzy4MenuItemAction(),
+            new EditSelectFuzzy5MenuItemAction(),
+            new EditSelectFuzzyPrevMenuItemAction(),
+            new EditSelectFuzzyNextMenuItemAction(),
+            new InsertCharsLRMAction(),
+            new InsertCharsRLMAction(),
+            new InsertCharsLREAction(),
+            new InsertCharsRLEAction(),
+            new InsertCharsPDFAction(),
+            new EditMultipleDefaultAction(),
+            new EditMultipleAlternateAction(),
+            new EditRegisterUntranslatedMenuItemAction(),
+            new EditRegisterEmptyMenuItemAction(),
+            new EditRegisterIdenticalMenuItemAction(),
+            new TitleCaseMenuItemAction(),
+            new SentenceCaseMenuItemAction(),
+            new CycleSwitchCaseMenuItemAction(),
+            new UpperCaseMenuItemAction(),
+            new LowerCaseMenuItemAction(),
+            new GotoNextUntranslatedMenuItemAction(),
+            new GotoNextUniqueMenuItemAction(),
+            new GotoNextTranslatedMenuItemAction(),
+            new GotoNextSegmentMenuItemAction(),
+            new OptionsPreferencesMenuItemAction(),
+            new HelpAboutMenuItemAction(),
+            new HelpLastChangesMenuItemAction()
+    };
+
+    public static Map<Object, Action> getActions() {
+        Map<Object, Action> result = new HashMap<>();
+        for (Action a: ACTIONS) {
+            result.put(a.getValue(Action.ACTION_COMMAND_KEY), a);
+        }
+        return result;
+    }
+
+    public static Action getAction(String key) {
+        for (Action a: ACTIONS) {
+            if (a.getValue(Action.ACTION_COMMAND_KEY).equals(key)) {
+                return a;
+            }
+        }
+        return null;
     }
 
     /**
-     * Create new team project.
+     * Create a new project.
      */
-    public void projectTeamNewMenuItemActionPerformed() {
-        ProjectUICommands.projectTeamCreate();
+    @SuppressWarnings("serial")
+    public static class ProjectNewMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectNewMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_CREATE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectNewMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectCreate();
+        }
+    }
+    /**
+     * Create a new team project.
+     */
+    @SuppressWarnings("serial")
+    public static class ProjectTeamNewMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectTeamNewMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_TEAM_CREATE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectTeamNewMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectTeamCreate();
+        }
     }
 
     /**
      * Open project.
      */
-    public void projectOpenMenuItemActionPerformed() {
-        ProjectUICommands.projectOpen(null);
+    @SuppressWarnings("serial")
+    public static class ProjectOpenMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectOpenMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_OPEN"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectOpenMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectOpen(null);
+        }
     }
 
-    public void projectClearRecentMenuItemActionPerformed() {
-        RecentProjects.clear();
+    @SuppressWarnings("serial")
+    public static class ProjectClearRecentMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectClearRecentMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_CLEAR_RECENT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectClearRecentMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            RecentProjects.clear();
+        }
     }
 
     /**
      * Open MED project.
      */
-    public void projectMedOpenMenuItemActionPerformed() {
-        ProjectUICommands.projectOpenMED();
+    @SuppressWarnings("serial")
+    public static class ProjectMedOpenMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectMedOpenMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_MED_OPEN"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectMedOpenMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectOpenMED();
+        }
     }
 
     /**
      * Create MED project.
      */
-    public void projectMedCreateMenuItemActionPerformed() {
-        ProjectUICommands.projectCreateMED();
+    @SuppressWarnings("serial")
+    public static class ProjectMedCreateMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectMedCreateMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_MED_CREATE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectMedCreateMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectCreateMED();
+        }
     }
 
     /**
      * Imports the file/files/folder into project's source files.
      */
-    public void projectImportMenuItemActionPerformed() {
-        ProjectUICommands.doPromptImportSourceFiles();
+    @SuppressWarnings("serial")
+    public static class ProjectImportMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectImportMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_IMPORT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectImportMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.doPromptImportSourceFiles();
+        }
     }
 
-    public void projectWikiImportMenuItemActionPerformed() {
-        ProjectUICommands.doWikiImport();
+    @SuppressWarnings("serial")
+    public static class ProjectWikiImportMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectWikiImportMenuItemAction() {
+            super(OStrings.getString("TF_MENU_WIKI_IMPORT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectWikiImportMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.doWikiImport();
+        }
     }
 
-    public void projectReloadMenuItemActionPerformed() {
-        ProjectUICommands.projectReload();
+    @SuppressWarnings("serial")
+    public static class ProjectReloadMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectReloadMenuItemAction() {
+            super(OStrings.getString("TF_MENU_PROJECT_RELOAD"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectReloadMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectReload();
+        }
     }
 
     /**
      * Close project.
      */
-    public void projectCloseMenuItemActionPerformed() {
-        ProjectUICommands.projectClose();
+    @SuppressWarnings("serial")
+    public static class ProjectCloseMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectCloseMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_CLOSE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectCloseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectClose();
+        }
     }
 
     /**
      * Save project.
      */
-    public void projectSaveMenuItemActionPerformed() {
-        ProjectUICommands.projectSave();
+    @SuppressWarnings("serial")
+    public static class ProjectSaveMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectSaveMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_SAVE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectSaveMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectSave();
+        }
     }
 
     /**
      * Create translated documents.
      */
-    public void projectCompileMenuItemActionPerformed() {
-        if (!checkTags()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectCompileMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectCompileMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_COMPILE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectCompileMenuItem");
         }
 
-        ProjectUICommands.projectCompile();
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!checkTags()) {
+                return;
+            }
+
+            ProjectUICommands.projectCompile();
+        }
     }
 
     /**
      * Check whether tags are OK
+     * 
      * @return false is there is a tag issue, true otherwise
      */
-    private boolean checkTags() {
+    private static boolean checkTags() {
         if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
             List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
             if (!stes.isEmpty()) {
@@ -208,46 +437,106 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         return true;
     }
 
-    public void projectCommitTargetFilesActionPerformed() {
-        if (!checkTags()) {
-                return;
+    @SuppressWarnings("serial")
+    public static class ProjectCommitTargetFilesAction extends AbstractMnemonicsAction {
+        public ProjectCommitTargetFilesAction() {
+            super(OStrings.getString("TF_MENU_FILE_TARGET"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectCommitTargetFiles");
         }
 
-        ProjectUICommands.projectCompileAndCommit();
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!checkTags()) {
+                return;
+            }
+
+            ProjectUICommands.projectCompileAndCommit();
+
+        }
     }
 
     /**
      * Commit source files
      */
-    public void projectCommitSourceFilesActionPerformed() {
-        ProjectUICommands.projectCommitSourceFiles();
+    @SuppressWarnings("serial")
+    public static class ProjectCommitSourceFilesAction extends AbstractMnemonicsAction {
+        public ProjectCommitSourceFilesAction() {
+            super(OStrings.getString("TF_MENU_FILE_COMMIT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectCommitSourceFiles");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectCommitSourceFiles();
+        }
     }
 
     /**
      * Create current translated document.
      */
-    public void projectSingleCompileMenuItemActionPerformed() {
-        String midName = Core.getEditor().getCurrentFile();
-        if (StringUtil.isEmpty(midName)) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectSingleCompileMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectSingleCompileMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_SINGLE_COMPILE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectSingleCompileMenuItem");
         }
 
-        String sourcePattern = Pattern.quote(midName);
-        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
-            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags(sourcePattern);
-            if (!stes.isEmpty()) {
-                Core.getIssues().showForFiles(midName, OStrings.getString("TF_MESSAGE_COMPILE"));
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+
+            String midName = Core.getEditor().getCurrentFile();
+            if (StringUtil.isEmpty(midName)) {
                 return;
             }
-        }
 
-        ProjectUICommands.projectSingleCompile(sourcePattern);
+            String sourcePattern = Pattern.quote(midName);
+            if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
+                List<ErrorReport> stes = Core.getTagValidation().listInvalidTags(sourcePattern);
+                if (!stes.isEmpty()) {
+                    Core.getIssues().showForFiles(midName, OStrings.getString("TF_MESSAGE_COMPILE"));
+                    return;
+                }
+            }
+
+            ProjectUICommands.projectSingleCompile(sourcePattern);
+        }
     }
 
     /** Edits project's properties */
-    public void projectEditMenuItemActionPerformed() {
-        ProjectUICommands.projectEditProperties();
+    @SuppressWarnings("serial")
+    public static class ProjectEditMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectEditMenuItemAction() {
+            super(OStrings.getString("MW_PROJECTMENU_EDIT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectEditMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            ProjectUICommands.projectEditProperties();
+        }
     }
+
+    /*
+    @SupressWarnings("serial")
+    public static class ViewFileListMenuItemAction extends AbstractAction {
+        public ViewFileListMenuItemAction() {
+            super("view-file-list");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+
+        }
+    }
+    */
 
     public void viewFileListMenuItemActionPerformed() {
          IProjectFilesList projWin = Core.getProjectFilesList();
@@ -259,112 +548,271 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         projWin.setActive(!projWin.isActive());
     }
 
-    public void projectAccessRootMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessRootMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessRootMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_ROOT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessRootMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getProjectRoot();
-        openFile(new File(path));
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getProjectRoot();
+            openFile(new File(path));
+
+        }
     }
 
-    public void projectAccessDictionaryMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessDictionaryMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessDictionaryMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_DICTIONARY"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessDictionaryMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getDictRoot();
-        openFile(new File(path));
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getDictRoot();
+            openFile(new File(path));
+        }
     }
 
-    public void projectAccessGlossaryMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessGlossaryMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessGlossaryMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_GLOSSARY"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessGlossaryMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getGlossaryRoot();
-        openFile(new File(path));
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getGlossaryRoot();
+            openFile(new File(path));
+        }
     }
 
-    public void projectAccessSourceMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessSourceMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessSourceMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_SOURCE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessSourceMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getSourceRoot();
-        openFile(new File(path));
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getSourceRoot();
+            openFile(new File(path));
+
+        }
     }
 
-    public void projectAccessTargetMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessTargetMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessTargetMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_TARGET"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessTargetMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getTargetRoot();
-        openFile(new File(path));
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getTargetRoot();
+            openFile(new File(path));
+        }
     }
 
-    public void projectAccessTMMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessTMMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessTMMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_TM"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessTMMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getTMRoot();
-        openFile(new File(path));
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getTMRoot();
+            openFile(new File(path));
+        }
     }
 
-    public void projectAccessExportTMMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessExportTMMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessExportTMMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_EXPORT_TM"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessExportTMMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getExportTMRoot();
-        openFile(new File(path));
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getExportTMRoot();
+            openFile(new File(path));
+
+        }
     }
 
-    public void projectAccessCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessCurrentSourceDocumentMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessCurrentSourceDocumentMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessCurrentSourceDocumentMenuItem");
         }
-        String root = Core.getProject().getProjectProperties().getSourceRoot();
-        String path = Core.getEditor().getCurrentFile();
-        if (StringUtil.isEmpty(path)) {
-            return;
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String root = Core.getProject().getProjectProperties().getSourceRoot();
+            String path = Core.getEditor().getCurrentFile();
+            if (StringUtil.isEmpty(path)) {
+                return;
+            }
+            File toOpen = new File(root, path);
+            int modifier = e.getModifiers();
+            if ((modifier & ActionEvent.ALT_MASK) != 0) {
+                toOpen = toOpen.getParentFile();
+            }
+            openFile(toOpen);
         }
-        File toOpen = new File(root, path);
-        if ((modifier & ActionEvent.ALT_MASK) != 0) {
-            toOpen = toOpen.getParentFile();
-        }
-        openFile(toOpen);
     }
 
-    public void projectAccessCurrentTargetDocumentMenuItemActionPerformed(int modifier) {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessCurrentTargetDocumentMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessCurrentTargetDocumentMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessCurrentTargetDocumentMenuItem");
         }
-        String root = Core.getProject().getProjectProperties().getTargetRoot();
-        String path = Core.getEditor().getCurrentTargetFile();
-        if (StringUtil.isEmpty(path)) {
-            return;
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String root = Core.getProject().getProjectProperties().getTargetRoot();
+            String path = Core.getEditor().getCurrentTargetFile();
+            if (StringUtil.isEmpty(path)) {
+                return;
+            }
+            File toOpen = new File(root, path);
+            int modifier = e.getModifiers();
+            if ((modifier & ActionEvent.ALT_MASK) != 0) {
+                toOpen = toOpen.getParentFile();
+            }
+            openFile(toOpen);
         }
-        File toOpen = new File(root, path);
-        if ((modifier & ActionEvent.ALT_MASK) != 0) {
-            toOpen = toOpen.getParentFile();
-        }
-        openFile(toOpen);
     }
 
-    public void projectAccessWriteableGlossaryMenuItemActionPerformed(int modifier) {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class ProjectAccessWriteableGlossaryMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectAccessWriteableGlossaryMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectAccessWriteableGlossaryMenuItem");
         }
-        String path = Core.getProject().getProjectProperties().getWriteableGlossary();
-        if (StringUtil.isEmpty(path)) {
-            return;
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String path = Core.getProject().getProjectProperties().getWriteableGlossary();
+            if (StringUtil.isEmpty(path)) {
+                return;
+            }
+            File toOpen = new File(path);
+            int modifier = e.getModifiers();
+            if ((modifier & ActionEvent.ALT_MASK) != 0) {
+                toOpen = toOpen.getParentFile();
+            }
+            openFile(toOpen);
+
         }
-        File toOpen = new File(path);
-        if ((modifier & ActionEvent.ALT_MASK) != 0) {
-            toOpen = toOpen.getParentFile();
-        }
-        openFile(toOpen);
     }
 
-    private void openFile(File path) {
+    /** Quits OmegaT */
+    @SuppressWarnings("serial")
+    public static class ProjectExitMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectExitMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_QUIT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectExitMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            prepareForExit(() -> System.exit(0));
+        }
+    }
+
+    /** Restart OmegaT */
+    @SuppressWarnings("serial")
+    public static class ProjectRestartMenuItemAction extends AbstractMnemonicsAction {
+        public ProjectRestartMenuItemAction() {
+            super(OStrings.getString("TF_MENU_FILE_RESTART"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ProjectRestartMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            String projectDir = Core.getProject().isProjectLoaded()
+                    ? Core.getProject().getProjectProperties().getProjectRoot()
+                    : null;
+            prepareForExit(() -> {
+                Main.restartGUI(projectDir);
+            });
+        }
+    }
+
+    protected static void projectExitAction() {
+        prepareForExit(() -> System.exit(0));
+    }
+
+    private static void openFile(File path) {
         try {
-            path = path.getCanonicalFile(); // Normalize file name in case it is displayed
+            path = path.getCanonicalFile(); // Normalize file name in case it is
+                                            // displayed
         } catch (Exception ex) {
             // Ignore
         }
@@ -380,24 +828,10 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
     }
 
-    /** Quits OmegaT */
-    public void projectExitMenuItemActionPerformed() {
-        prepareForExit(() -> System.exit(0));
-    }
-
-    /** Restart OmegaT */
-    public void projectRestartMenuItemActionPerformed() {
-        String projectDir = Core.getProject().isProjectLoaded()
-                ? Core.getProject().getProjectProperties().getProjectRoot()
-                : null;
-        prepareForExit(() -> {
-            Main.restartGUI(projectDir);
-        });
-    }
-
-    protected void prepareForExit(Runnable onCompletion) {
+    private static void prepareForExit(Runnable onCompletion) {
         // Bug #902: commit the current entry first
-        // We do it before checking project status, so that it can eventually change it
+        // We do it before checking project status, so that it can eventually
+        // change it
         if (Core.getProject().isProjectLoaded()) {
             Core.getEditor().commitAndLeave();
         }
@@ -409,9 +843,9 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow.getApplicationFrame(),
-                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
-                    JOptionPane.YES_NO_OPTION)) {
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(
+                    Core.getMainWindow().getApplicationFrame(), OStrings.getString("MW_QUIT_CONFIRM"),
+                    OStrings.getString("CONFIRM_DIALOG_TITLE"), JOptionPane.YES_NO_OPTION)) {
                 return;
             }
         }
@@ -447,7 +881,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
                 try {
                     get();
 
-                    MainWindowUI.saveScreenLayout(mainWindow);
+                    MainWindowUI.saveScreenLayout((MainWindow) Core.getMainWindow());
 
                     Preferences.save();
 
@@ -460,119 +894,240 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }.execute();
     }
 
-    public void editUndoMenuItemActionPerformed() {
-        Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focused == Core.getNotes()) {
-            Core.getNotes().undo();
-        } else {
-            Core.getEditor().undo();
+    @SuppressWarnings("serial")
+    public static class EditUndoMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditUndoMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_UNDO"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditUndoMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+            if (focused == Core.getNotes()) {
+                Core.getNotes().undo();
+            } else {
+                Core.getEditor().undo();
+            }
+
         }
     }
 
-    public void editRedoMenuItemActionPerformed() {
-        Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focused == Core.getNotes()) {
-            Core.getNotes().redo();
-        } else {
-            Core.getEditor().redo();
+   /** Quits OmegaT */
+    @SuppressWarnings("serial")
+    public static class EditRedoMenuItemAction extends AbstractMnemonicsAction {
+        public EditRedoMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_REDO"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditRedoMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            String action = e.getActionCommand();
+            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+            if (focused == Core.getNotes()) {
+                Core.getNotes().redo();
+            } else {
+                Core.getEditor().redo();
+            }
         }
     }
 
-    public void editOverwriteTranslationMenuItemActionPerformed() {
-        MainWindow.doRecycleTrans();
+   @SuppressWarnings("serial")
+    public static class EditOverwriteTranslationMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditOverwriteTranslationMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_RECYCLE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditOverwriteTranslationMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            MainWindow.doRecycleTrans();
+        }
     }
 
-    public void editInsertTranslationMenuItemActionPerformed() {
-        MainWindow.doInsertTrans();
-    }
+    @SuppressWarnings("serial")
+    public static class EditInsertTranslationMenuItemAction extends AbstractMnemonicsAction {
+        public EditInsertTranslationMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_INSERT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditInsertTranslationMenuItem");
+        }
 
-    public void editOverwriteMachineTranslationMenuItemActionPerformed() {
-        MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
-        if (tr == null) {
-            Core.getMachineTranslatePane().forceLoad();
-        } else if (!StringUtil.isEmpty(tr.result)) {
-            Core.getEditor().replaceEditText(tr.result, String.format("MT:[%s]", tr.translatorName));
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            MainWindow.doInsertTrans();
+        }
+   }
+
+    @SuppressWarnings("serial")
+    public static class EditOverwriteMachineTranslationMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditOverwriteMachineTranslationMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_OVERWRITE_MACHITE_TRANSLATION"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditOverwriteMachineTranslationMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
+            if (tr == null) {
+                Core.getMachineTranslatePane().forceLoad();
+            } else if (!StringUtil.isEmpty(tr.result)) {
+                Core.getEditor().replaceEditText(tr.result, String.format("MT:[%s]", tr.translatorName));
+            }
         }
     }
 
     /**
      * replaces entire edited segment text with a the source text of a segment at cursor position
      */
-    public void editOverwriteSourceMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditOverwriteSourceMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditOverwriteSourceMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditOverwriteSourceMenuItem");
         }
-        String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
-        if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
-            toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
+            if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
+                toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
+            }
+            Core.getEditor().replaceEditText(toInsert);
         }
-        Core.getEditor().replaceEditText(toInsert);
     }
 
     /** inserts the source text of a segment at cursor position */
-    public void editInsertSourceMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditInsertSourceMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditInsertSourceMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditInsertSourceMenuItem");
         }
-        String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
-        if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
-            toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String toInsert = Core.getEditor().getCurrentEntry().getSrcText();
+            if (Preferences.isPreference(Preferences.GLOSSARY_REPLACE_ON_INSERT)) {
+                toInsert = EditorUtils.replaceGlossaryEntries(toInsert);
+            }
+            Core.getEditor().insertText(toInsert);
         }
-        Core.getEditor().insertText(toInsert);
     }
 
     /** select the source text of the current segment */
-    public void editSelectSourceMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditSelectSourceMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditSelectSourceMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_SOURCE_SELECT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectSourceMenuItem");
         }
-        Core.getEditor().selectSourceText();
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            Core.getEditor().selectSourceText();
+        }
     }
 
-    public void editExportSelectionMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditExportSelectionMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditExportSelectionMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_EXPORT_SELECTION"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditExportSelectionMenuItem");
         }
-        String selection = Core.getEditor().getSelectedText();
-        if (selection == null) {
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            TMXEntry te = Core.getProject().getTranslationInfo(ste);
-            if (te.isTranslated()) {
-                selection = te.translation;
-            } else {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String selection = Core.getEditor().getSelectedText();
+            if (selection == null) {
+                SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+                TMXEntry te = Core.getProject().getTranslationInfo(ste);
+                if (te.isTranslated()) {
+                    selection = te.translation;
+                } else {
+                    selection = ste.getSrcText();
+                }
+            }
+            SegmentExportImport.exportCurrentSelection(selection);
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static class EditSearchDictionaryMenuItemAction extends AbstractMnemonicsAction {
+        public EditSearchDictionaryMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSearchDictionaryMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            String selection = Core.getEditor().getSelectedText();
+            if (selection == null) {
+                SourceTextEntry ste = Core.getEditor().getCurrentEntry();
                 selection = ste.getSrcText();
             }
+            Core.getDictionaries().searchText(selection);
         }
-        SegmentExportImport.exportCurrentSelection(selection);
     }
 
-    public void editSearchDictionaryMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditCreateGlossaryEntryMenuItemAction extends AbstractMnemonicsAction {
+        public EditCreateGlossaryEntryMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditCreateGlossaryEntryMenuItem");
         }
-        String selection = Core.getEditor().getSelectedText();
-        if (selection == null) {
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            selection = ste.getSrcText();
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
         }
-        Core.getDictionaries().searchText(selection);
     }
 
-    public void editCreateGlossaryEntryMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditFindInProjectMenuItemAction extends AbstractMnemonicsAction {
+        public EditFindInProjectMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_FIND"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditFindInProjectMenuItem");
+            putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(
+                    UIManager.getIcon("OmegaT.newUI.search.icon"),
+                    () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
         }
-        Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            MainWindowUI.createSearchWindow(SearchMode.SEARCH, getTrimmedSelectedTextInMainWindow());
+        }
     }
 
-    public void editFindInProjectMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-        MainWindowUI.createSearchWindow(SearchMode.SEARCH, getTrimmedSelectedTextInMainWindow());
-    }
-
-    void findInProjectReuseLastWindow() {
+    public static void findInProjectReuseLastWindow() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -580,19 +1135,28 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if (!MainWindowUI.reuseSearchWindow(text)) {
             MainWindowUI.createSearchWindow(SearchMode.SEARCH, text);
         }
-        editFindInProjectMenuItemActionPerformed();
     }
 
-    public void editReplaceInProjectMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditReplaceInProjectMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditReplaceInProjectMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_REPLACE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditReplaceInProjectMenuItem");
         }
-        MainWindowUI.createSearchWindow(SearchMode.REPLACE, getTrimmedSelectedTextInMainWindow());
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            MainWindowUI.createSearchWindow(SearchMode.REPLACE, getTrimmedSelectedTextInMainWindow());
+        }
     }
 
-    private String getTrimmedSelectedTextInMainWindow() {
+    private static String getTrimmedSelectedTextInMainWindow() {
         String selection = null;
-        Component component = mainWindow.getApplicationFrame().getMostRecentFocusOwner();
+        Component component = Core.getMainWindow().getApplicationFrame().getMostRecentFocusOwner();
         if (component instanceof JTextComponent) {
             selection = ((JTextComponent) component).getSelectedText();
             if (!StringUtil.isEmpty(selection)) {
@@ -604,120 +1168,368 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /** Set active match to #1. */
-    public void editSelectFuzzy1MenuItemActionPerformed() {
-        Core.getMatcher().setActiveMatch(0);
+    @SuppressWarnings("serial")
+    public static class EditSelectFuzzy1MenuItemAction extends AbstractMnemonicsAction {
+        public EditSelectFuzzy1MenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_COMPARE_1"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectFuzzy1MenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Core.getMatcher().setActiveMatch(0);
+        }
     }
 
     /** Set active match to #2. */
-    public void editSelectFuzzy2MenuItemActionPerformed() {
-        Core.getMatcher().setActiveMatch(1);
+    @SuppressWarnings("serial")
+    public static class EditSelectFuzzy2MenuItemAction extends AbstractMnemonicsAction {
+        public EditSelectFuzzy2MenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_COMPARE_2"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectFuzzy2MenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Core.getMatcher().setActiveMatch(1);
+        }
     }
 
     /** Set active match to #3. */
-    public void editSelectFuzzy3MenuItemActionPerformed() {
-        Core.getMatcher().setActiveMatch(2);
+    @SuppressWarnings("serial")
+    public static class EditSelectFuzzy3MenuItemAction extends AbstractMnemonicsAction {
+        public EditSelectFuzzy3MenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_COMPARE_3"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectFuzzy3MenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Core.getMatcher().setActiveMatch(2);
+        }
     }
 
     /** Set active match to #4. */
-    public void editSelectFuzzy4MenuItemActionPerformed() {
-        Core.getMatcher().setActiveMatch(3);
+    @SuppressWarnings("serial")
+    public static class EditSelectFuzzy4MenuItemAction extends AbstractMnemonicsAction {
+        public EditSelectFuzzy4MenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_COMPARE_4"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectFuzzy4MenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Core.getMatcher().setActiveMatch(3);
+        }
     }
 
     /** Set active match to #5. */
-    public void editSelectFuzzy5MenuItemActionPerformed() {
-        Core.getMatcher().setActiveMatch(4);
+    @SuppressWarnings("serial")
+    public static class EditSelectFuzzy5MenuItemAction extends AbstractMnemonicsAction {
+        public EditSelectFuzzy5MenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_COMPARE_5"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectFuzzy5MenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Core.getMatcher().setActiveMatch(4);
+        }
     }
 
     /** Set active match to the next one */
-    public void editSelectFuzzyNextMenuItemActionPerformed() {
-        Core.getMatcher().setNextActiveMatch();
+    @SuppressWarnings("serial")
+    public static class EditSelectFuzzyNextMenuItemAction extends AbstractMnemonicsAction {
+        public EditSelectFuzzyNextMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_COMPARE_NEXT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectFuzzyNextMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getMatcher().setNextActiveMatch();
+        }
     }
 
     /** Set active match to the previous one */
-    public void editSelectFuzzyPrevMenuItemActionPerformed() {
-        Core.getMatcher().setPrevActiveMatch();
+    @SuppressWarnings("serial")
+    public static class EditSelectFuzzyPrevMenuItemAction extends AbstractMnemonicsAction {
+
+        public EditSelectFuzzyPrevMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_COMPARE_PREV"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditSelectFuzzyPrevMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getMatcher().setPrevActiveMatch();
+        }
     }
 
-    public void insertCharsLRMActionPerformed() {
-        Core.getEditor().insertText("\u200E");
+    @SuppressWarnings("serial")
+    public static class InsertCharsLRMAction extends AbstractMnemonicsAction {
+        public InsertCharsLRMAction() {
+            super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_LRM"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "InsertCharsLRM");
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().insertText("\u200E");
+
+        }
     }
 
-    public void insertCharsRLMActionPerformed() {
-        Core.getEditor().insertText("\u200F");
+    @SuppressWarnings("serial")
+    public static class InsertCharsRLMAction extends AbstractMnemonicsAction {
+        public InsertCharsRLMAction() {
+            super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_RLM"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "InsertCharsRLM");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().insertText("\u200F");
+        }
     }
 
-    public void insertCharsLREActionPerformed() {
-        Core.getEditor().insertText("\u202A");
+    @SuppressWarnings("serial")
+    public static class InsertCharsLREAction extends AbstractMnemonicsAction {
+        public InsertCharsLREAction() {
+            super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_LRE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "InsertCharsLRE");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().insertText("\u202A");
+        }
     }
 
-    public void insertCharsRLEActionPerformed() {
-        Core.getEditor().insertText("\u202B");
+    @SuppressWarnings("serial")
+    public static class InsertCharsRLEAction extends AbstractMnemonicsAction {
+        public InsertCharsRLEAction() {
+            super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_RLE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "InsertCharsRLE");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().insertText("\u202B");
+        }
     }
 
-    public void insertCharsPDFActionPerformed() {
-        Core.getEditor().insertText("\u202C");
+    @SuppressWarnings("serial")
+    public static class InsertCharsPDFAction extends AbstractMnemonicsAction {
+
+        public InsertCharsPDFAction() {
+            super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_PDF"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "InsertCharsPDF");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().insertText("\u202C");
+        }
     }
 
-    public void editMultipleDefaultActionPerformed() {
-        Core.getEditor().setAlternateTranslationForCurrentEntry(false);
+    @SuppressWarnings("serial")
+    public static class EditMultipleDefaultAction extends AbstractMnemonicsAction {
+        public EditMultipleDefaultAction() {
+            super(OStrings.getString("MULT_MENU_DEFAULT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditMultipleDefault");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().setAlternateTranslationForCurrentEntry(false);
+        }
     }
 
-    public void editMultipleAlternateActionPerformed() {
-        Core.getEditor().setAlternateTranslationForCurrentEntry(true);
+    @SuppressWarnings("serial")
+    public static class EditMultipleAlternateAction extends AbstractMnemonicsAction {
+        public EditMultipleAlternateAction() {
+            super(OStrings.getString("MULT_MENU_MULTIPLE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditMultipleAlternate");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().setAlternateTranslationForCurrentEntry(true);
+        }
     }
 
-    public void editRegisterUntranslatedMenuItemActionPerformed() {
-        Core.getEditor().registerUntranslated();
+    @SuppressWarnings("serial")
+    public static class EditRegisterUntranslatedMenuItemAction extends AbstractMnemonicsAction {
+        public EditRegisterUntranslatedMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_UNTRANSLATED_TRANSLATION"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditRegisterUntranslatedMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().registerUntranslated();
+        }
     }
 
-    public void editRegisterEmptyMenuItemActionPerformed() {
-        Core.getEditor().registerEmptyTranslation();
+    @SuppressWarnings("serial")
+    public static class EditRegisterEmptyMenuItemAction extends AbstractMnemonicsAction {
+        public EditRegisterEmptyMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_EMPTY_TRANSLATION"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditRegisterEmptyMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().registerEmptyTranslation();
+        }
     }
 
-    public void editRegisterIdenticalMenuItemActionPerformed() {
-        Core.getEditor().registerIdenticalTranslation();
+    @SuppressWarnings("serial")
+    public static class EditRegisterIdenticalMenuItemAction extends AbstractMnemonicsAction {
+        public EditRegisterIdenticalMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_IDENTICAL_TRANSLATION"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditRegisterIdenticalMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().registerIdenticalTranslation();
+        }
     }
 
-    public void optionsPreferencesMenuItemActionPerformed() {
-        PreferencesWindowController pwc = new PreferencesWindowController();
-        pwc.show(Core.getMainWindow().getApplicationFrame());
+    @SuppressWarnings("serial")
+    public static class OptionsPreferencesMenuItemAction extends AbstractMnemonicsAction {
+
+        public OptionsPreferencesMenuItemAction() {
+            super(OStrings.getString("MW_OPTIONSMENU_PREFERENCES"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "OptionsPreferencesMenuItem");
+            putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.settings.icon"),
+                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame());
+        }
     }
 
-    public void cycleSwitchCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
+    @SuppressWarnings("serial")
+    public static class CycleSwitchCaseMenuItemAction extends AbstractMnemonicsAction {
+        public CycleSwitchCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "CycleSwitchCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
+        }
     }
 
-    public void sentenceCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.SENTENCE);
+    @SuppressWarnings("serial")
+    public static class SentenceCaseMenuItemAction extends AbstractMnemonicsAction {
+        public SentenceCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "SentenceCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.SENTENCE);
+        }
     }
 
-    public void titleCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
+    @SuppressWarnings("serial")
+    public static class TitleCaseMenuItemAction extends AbstractMnemonicsAction {
+        public TitleCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "TitleCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
+        }
     }
 
-    public void upperCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
+    @SuppressWarnings("serial")
+    public static class UpperCaseMenuItemAction extends AbstractMnemonicsAction {
+        public UpperCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "UpperCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
+        }
     }
 
-    public void lowerCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
+    @SuppressWarnings("serial")
+    public static class LowerCaseMenuItemAction extends AbstractMnemonicsAction {
+        public LowerCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "LowerCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
+        }
     }
 
-    public void gotoNextUntranslatedMenuItemActionPerformed() {
-        Core.getEditor().nextUntranslatedEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextUntranslatedMenuItemAction extends AbstractMnemonicsAction {
+        public GotoNextUntranslatedMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_UNTRANS"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextUntranslatedMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextUntranslatedEntry();
+        }
     }
 
-    public void gotoNextUniqueMenuItemActionPerformed() {
-        Core.getEditor().nextUniqueEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextUniqueMenuItemAction extends AbstractMnemonicsAction {
+        public GotoNextUniqueMenuItemAction() {
+            super(OStrings.getString("TF_MENU_GOTO_NEXT_UNIQUE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextUniqueMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextUniqueEntry();
+        }
     }
 
-    public void gotoNextTranslatedMenuItemActionPerformed() {
-        Core.getEditor().nextTranslatedEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextTranslatedMenuItemAction extends AbstractMnemonicsAction {
+        public GotoNextTranslatedMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_TRANS"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextTranslatedMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextTranslatedEntry();
+        }
     }
 
-    public void gotoNextSegmentMenuItemActionPerformed() {
-        Core.getEditor().nextEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextSegmentMenuItemAction extends AbstractMnemonicsAction  {
+        public GotoNextSegmentMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_NEXT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextSegmentMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextEntry();
+        }
     }
+
 
     public void gotoPreviousSegmentMenuItemActionPerformed() {
         Core.getEditor().prevEntry();
@@ -1012,15 +1824,34 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     /**
      * Shows About dialog
      */
-    public void helpAboutMenuItemActionPerformed() {
-        new AboutDialog(mainWindow.getApplicationFrame()).setVisible(true);
+    @SuppressWarnings("serial")
+    public static class HelpAboutMenuItemAction extends AbstractMnemonicsAction {
+
+        public HelpAboutMenuItemAction() {
+            super(OStrings.getString("TF_MENU_HELP_ABOUT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "HelpAboutMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            new AboutDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
+        }
     }
 
     /**
      * Shows Last changes
      */
-    public void helpLastChangesMenuItemActionPerformed() {
-        new LastChangesDialog(mainWindow.getApplicationFrame()).setVisible(true);
+    @SuppressWarnings("serial")
+    public static class HelpLastChangesMenuItemAction extends AbstractMnemonicsAction {
+        public HelpLastChangesMenuItemAction() {
+            super(OStrings.getString("TF_MENU_HELP_LAST_CHANGES"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "HelpLastChangesMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            new LastChangesDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
+        }
     }
 
     /**

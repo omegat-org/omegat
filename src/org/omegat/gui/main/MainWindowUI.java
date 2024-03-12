@@ -55,10 +55,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIDesignManager;
 
-import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
-
 /**
  * Class for initialize, load/save, etc. for main window UI components.
  *
@@ -84,22 +80,6 @@ public final class MainWindowUI {
     }
 
     public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
-
-    /**
-     * Create docking desktop panel.
-     */
-    public static DockingDesktop initDocking(final MainWindow mainWindow) {
-        mainWindow.desktop = new DockingDesktop();
-        mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
-            public void dockableStateWillChange(DockableStateWillChangeEvent event) {
-                if (event.getFutureState().isClosed()) {
-                    event.cancel();
-                }
-            }
-        });
-
-        return mainWindow.desktop;
-    }
 
     /**
      * Installs a {@link IProjectEventListener} that handles loading, storing,

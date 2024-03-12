@@ -25,14 +25,12 @@
 
 package org.omegat.gui.main;
 
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.UIManager;
-import javax.swing.event.MenuListener;
 
 import org.omegat.gui.accesstool.AccessTools;
 import org.omegat.util.gui.ResourcesUtil;
@@ -43,13 +41,12 @@ import org.omegat.util.gui.ResourcesUtil;
  * @author Hiroshi Miura
  */
 @SuppressWarnings("unused")
-public final class MainWindowBurgerMenu extends BaseMainWindowMenu
-        implements ActionListener, MenuListener, IMainMenu {
+public final class MainWindowBurgerMenu extends BaseMainWindowMenu implements IMainMenu {
 
     JMenu burgerMenu;
 
-    public MainWindowBurgerMenu(MainWindow mainWindow, MainWindowMenuHandler mainWindowMenuHandler) {
-        super(mainWindow, mainWindowMenuHandler);
+    public MainWindowBurgerMenu(MainWindow mainWindow) {
+        super(mainWindow);
         initComponents();
     }
 
@@ -69,6 +66,6 @@ public final class MainWindowBurgerMenu extends BaseMainWindowMenu
         burgerMenu.add(helpMenu);
         burgerMenu.add(burgerMenu);
         mainMenu.add(burgerMenu);
-        mainMenu.add(new AccessTools(mainWindowMenuHandler));
+        mainMenu.add(new AccessTools(MainWindowMenuHandler.getActions()));
     }
 }

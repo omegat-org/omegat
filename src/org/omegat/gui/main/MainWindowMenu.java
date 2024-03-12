@@ -37,20 +37,15 @@
 
 package org.omegat.gui.main;
 
-import java.awt.event.ActionListener;
-
-import javax.swing.event.MenuListener;
-
 /**
  * Class for classic main menu.
  *
  * @author Hiroshi Miura
  */
-public final class MainWindowMenu extends BaseMainWindowMenu
-        implements ActionListener, MenuListener, IMainMenu {
+public final class MainWindowMenu extends BaseMainWindowMenu implements IMainMenu {
 
-    public MainWindowMenu(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
-        super(mainWindow, mainWindowMenuHandler);
+    public MainWindowMenu(MainWindow mainWindow) {
+        super(mainWindow);
         initComponents();
     }
 

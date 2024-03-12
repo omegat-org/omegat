@@ -160,7 +160,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
+                menu.mainWindowMenuHandler.projectExitAction();
             }
 
             @Override
@@ -339,7 +339,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
     }
 
-    protected void addSearchWindow(final SearchWindowController newSearchWindow) {
+    public void addSearchWindow(final SearchWindowController newSearchWindow) {
         newSearchWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {

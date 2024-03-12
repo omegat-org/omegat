@@ -53,6 +53,7 @@ import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.RecentProjects;
@@ -141,7 +142,7 @@ public class AccessTools extends JPanel {
             mainWindowMenuHandler.editFindInProjectMenuItemActionPerformed();
         });
         settingsButton.addActionListener(actionEvent -> {
-            mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed();
+            new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame());
         });
         recentProjectCB.addActionListener(actionEvent -> {
             // when select a project from the list, we open it.
@@ -154,13 +155,13 @@ public class AccessTools extends JPanel {
                 if (projectUri.getScheme().equals("omegat")) {
                     switch (projectUri.getSchemeSpecificPart()) {
                     case "new":
-                        mainWindowMenuHandler.projectNewMenuItemActionPerformed();
+                        ProjectUICommands.projectCreate();
                         break;
                     case "open":
-                        mainWindowMenuHandler.projectOpenMenuItemActionPerformed();
+                        ProjectUICommands.projectOpen(null);
                         break;
                     case "team":
-                        mainWindowMenuHandler.projectTeamNewMenuItemActionPerformed();
+                        ProjectUICommands.projectTeamCreate();
                         break;
                     default:
                         break;

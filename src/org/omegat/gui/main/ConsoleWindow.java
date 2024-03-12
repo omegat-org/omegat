@@ -31,6 +31,7 @@ import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
@@ -140,6 +141,18 @@ public class ConsoleWindow implements IMainWindow {
 
     public DockingDesktop getDesktop() {
         return null;
+    }
+
+    @Override
+    public void doRecycleTrans() {
+    }
+
+    @Override
+    public void doInsertTrans() {
+    }
+
+    @Override
+    public void addSearchWindow(final SearchWindowController search) {
     }
 
     public Cursor getCursor() {

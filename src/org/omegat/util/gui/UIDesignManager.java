@@ -38,6 +38,7 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -53,6 +54,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.laf.SystemDarkThemeDetector;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
@@ -197,8 +199,11 @@ public final class UIDesignManager {
         }
         setTheme(theme);
 
+        // custom translation for basic UIs if any.
+        loadLocalizeOverrides();
+
         String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
-        if (menuUI != null) {
+        if (!StringUtil.isEmpty(menuUI)) {
             setMenuUI(menuUI);
         }
 
@@ -249,6 +254,16 @@ public final class UIDesignManager {
                 Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
 
         ensureTitlebarReadability();
+    }
+
+    private static void loadLocalizeOverrides() {
+        ResourceBundle basicResource = ResourceBundle.getBundle("org/omegat/gui/basic");
+        for (String key: basicResource.keySet()) {
+            String val = basicResource.getString(key);
+            if (!val.isEmpty()) {
+                UIManager.put(key, val);
+            }
+        }
     }
 
     private static void ensureTitlebarReadability() {

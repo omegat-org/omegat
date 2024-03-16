@@ -44,13 +44,16 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
 
+import org.omegat.util.gui.ResourcesUtil;
 import org.openide.awt.AbstractMnemonicsAction;
 
 import org.omegat.Main;
@@ -149,6 +152,7 @@ public final class MainWindowMenuHandler {
             new ProjectAccessWriteableGlossaryMenuItemAction(),
             new EditUndoMenuItemAction(),
             new EditRedoMenuItemAction(),
+            new EditFindInProjectMenuItemAction(),
             new EditOverwriteTranslationMenuItemAction(),
             new EditInsertSourceMenuItemAction(),
             new EditSelectSourceMenuItemAction(),
@@ -1082,14 +1086,29 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    public void editFindInProjectMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
+    @SuppressWarnings("serial")
+    public static class EditFindInProjectMenuItemAction extends AbstractMnemonicsAction {
+        public EditFindInProjectMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_FIND"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "EditFindInProjectMenuItem");
+            putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
+                        () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
         }
-        SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
-        mainWindow.addSearchWindow(search);
 
-        search.makeVisible(getTrimmedSelectedTextInMainWindow());
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            editFindInProject();
+        }
+    }
+
+    private static void editFindInProject() {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
+            Core.getMainWindow().addSearchWindow(search);
+
+            search.makeVisible(getTrimmedSelectedTextInMainWindow());
     }
 
     void findInProjectReuseLastWindow() {
@@ -1105,7 +1124,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
         }
-        editFindInProjectMenuItemActionPerformed();
+        editFindInProject();
     }
 
     @SuppressWarnings("serial")
@@ -1376,6 +1395,8 @@ public final class MainWindowMenuHandler {
         public OptionsPreferencesMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_PREFERENCES"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "OptionsPreferencesMenuItem");
+            putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.settings.icon"),
+                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
         }
 
         @Override

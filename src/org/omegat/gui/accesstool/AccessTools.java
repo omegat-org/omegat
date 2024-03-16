@@ -34,9 +34,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -79,9 +81,11 @@ public class AccessTools extends JPanel {
 
     private static final int MAX_PATH_LENGTH_SHOWN = 25;
     private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
+    private final Map<Object, Action> actions;
 
     public AccessTools(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindowMenuHandler = mainWindowMenuHandler;
+        actions = MainWindowMenuHandler.getActions();
         initComponents();
     }
 
@@ -124,13 +128,13 @@ public class AccessTools extends JPanel {
         sourceFilesCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
         add(sourceFilesCB);
 
-        searchButton = new JButton("",
-                Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
-                        () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
+        searchButton = new JButton();
+        searchButton.setAction(actions.get("EditFindInProjectMenuItem"));
+        searchButton.setText("");
         searchButton.setBorderPainted(false);
-        settingsButton = new JButton("", Objects.requireNonNullElseGet(
-                UIManager.getIcon("OmegaT.newUI.settings.icon"),
-                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
+        settingsButton = new JButton();
+        settingsButton.setAction(actions.get("OptionsPreferencesMenuItem"));
+        settingsButton.setText("");
         settingsButton.setBorderPainted(false);
 
         // -- right side
@@ -138,12 +142,6 @@ public class AccessTools extends JPanel {
         add(searchButton);
         add(settingsButton);
 
-        searchButton.addActionListener(actionEvent -> {
-            mainWindowMenuHandler.editFindInProjectMenuItemActionPerformed();
-        });
-        settingsButton.addActionListener(actionEvent -> {
-            new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame());
-        });
         recentProjectCB.addActionListener(actionEvent -> {
             // when select a project from the list, we open it.
             final Object item = recentProjectCB.getSelectedItem();

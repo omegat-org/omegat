@@ -271,7 +271,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED");
         editExportSelectionMenuItem = createMenuItemFromAction("EditExportSelectionMenuItem");
         editCreateGlossaryEntryMenuItem = createMenuItemFromAction("EditCreateGlossaryEntryMenuItem");
-        editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND");
+        editFindInProjectMenuItem = createMenuItemFromAction("EditFindInProjectMenuItem");
         editReplaceInProjectMenuItem = createMenuItemFromAction("EditReplaceInProjectMenuItem");
         editSearchDictionaryMenuItem = createMenuItemFromAction( "EditSearchDictionaryMenuItem");
         switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE");
@@ -769,7 +769,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         if (action == null) {
             throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
         }
-        return new JMenuItem(action);
+        JMenuItem item = new JMenuItem();
+        item.setAction(action);
+        item.setIcon(null);
+        return item;
     }
 
     protected JMenuItem createMenuItem(String titleKey, String name) {

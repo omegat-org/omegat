@@ -160,18 +160,9 @@ public final class TestTeamIntegrationChild {
                 setRootGitRepositoryMapping(projectProperties.getRepositories(), repo);
             }
             projectProperties.autocreateDirectories();
-            Core.getAutoSave().disable();
-            RealProject p = new TestRealProject(projectProperties);
-            Core.setProject(p);
+            Core.setProject(new NotLoadedProject());
             glossaryManager = new GlossaryManager(new TestGlossaryTextArea());
-            // load project
-            p.loadProject(true);
-            if (p.isProjectLoaded()) {
-                Core.getAutoSave().enable();
-                CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-            } else {
-                throw new Exception("Project can't be loaded");
-            }
+            loadProject(projectProperties);
 
             key = new EntryKey[segCount];
             ste = new SourceTextEntry[segCount];
@@ -210,7 +201,7 @@ public final class TestTeamIntegrationChild {
             });
 
             // load again and check
-            ProjectFactory.loadProject(projectProperties, true);
+            loadProject(projectProperties);
             checkAll();
 
             checkGlossaryEntries();
@@ -222,6 +213,25 @@ public final class TestTeamIntegrationChild {
         } catch (Throwable ex) {
             ex.printStackTrace();
             System.exit(1);
+        }
+    }
+
+    /**
+     * replacement of ProjectFactory.loadProject for test.
+     * @param projectProperties
+     * @throws Exception
+     */
+    static void loadProject(ProjectProperties projectProperties) throws Exception {
+        Core.getAutoSave().disable();
+        RealProject p = new TestRealProject(projectProperties);
+        Core.setProject(p);
+        // load project
+        p.loadProject(true);
+        if (p.isProjectLoaded()) {
+            Core.getAutoSave().enable();
+            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        } else {
+            throw new Exception("Project can't be loaded");
         }
     }
 

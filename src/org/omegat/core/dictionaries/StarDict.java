@@ -34,13 +34,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import io.github.eb4j.stardict.StarDictDictionary;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.safety.Cleaner;
 import org.jsoup.safety.Safelist;
 import org.jsoup.select.Elements;
+import tokyo.northside.stardict.StarDictDictionary;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -181,7 +181,11 @@ public class StarDict implements IDictionaryFactory {
             } else if (entry.getType().equals(StarDictDictionary.EntryType.PHONETIC)) {
                 sb.append("<span>(").append(entry.getArticle()).append(")</span>");
             } else if (entry.getType().equals(StarDictDictionary.EntryType.HTML)) {
-                sb.append(entry.getArticle());
+                Document document = Jsoup.parse(entry.getArticle());
+                Safelist safelist = Safelist.relaxed();
+                Cleaner cleaner = new Cleaner(safelist);
+                document = cleaner.clean(document);
+                sb.append(document.body().html());
             } else if (entry.getType().equals(StarDictDictionary.EntryType.PANGO)) {
                 Document document = Jsoup.parse(entry.getArticle());
                 Safelist safelist = new Safelist()

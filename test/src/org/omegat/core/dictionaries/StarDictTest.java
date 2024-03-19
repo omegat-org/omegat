@@ -34,9 +34,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Locale;
 
-import io.github.eb4j.stardict.StarDictDictionary;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import tokyo.northside.stardict.StarDictDictionary;
 
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;

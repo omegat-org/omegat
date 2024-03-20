@@ -83,20 +83,23 @@ public class UserPassDialog extends javax.swing.JDialog {
         usernameField.requestFocusInWindow();
     }
 
-    static abstract class CheckDocumentAction implements DocumentListener {
+    abstract static class CheckDocumentAction implements DocumentListener {
 
         @Override
         public void insertUpdate(final DocumentEvent e) {
             update();
         }
+
         @Override
         public void removeUpdate(final DocumentEvent e) {
             update();
         }
+
         @Override
         public void changedUpdate(final DocumentEvent e) {
             update();
         }
+
         abstract void update();
     }
 
@@ -117,13 +120,13 @@ public class UserPassDialog extends javax.swing.JDialog {
         toggleButton.addActionListener(e -> {
             // Toggle between showing/hiding the password
             if (toggleButton.isSelected()) {
-                passwordField.setEchoChar((char) 0); // Show password in plaintext
-                toggleButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                        "/org/omegat/gui/resources/eye.png")))); // NOI18N
+                passwordField.setEchoChar((char) 0);
+                toggleButton.setIcon(new ImageIcon(
+                        Objects.requireNonNull(getClass().getResource("/org/omegat/gui/resources/eye.png")))); // NOI18N
             } else {
                 passwordField.setEchoChar('●');
-                toggleButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                        "/org/omegat/gui/resources/eye-slash.png")))); // NOI18N
+                toggleButton.setIcon(new ImageIcon(Objects
+                        .requireNonNull(getClass().getResource("/org/omegat/gui/resources/eye-slash.png")))); // NOI18N
             }
         });
     }
@@ -196,8 +199,8 @@ public class UserPassDialog extends javax.swing.JDialog {
         messageArea = new JTextArea();
         okButton = new JButton();
         JButton cancelButton = new JButton();
-        Icon eyeSlash = new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                "/org/omegat/gui/resources/eye-slash.png")));
+        Icon eyeSlash = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource("/org/omegat/gui/resources/eye-slash.png")));
         toggleButton.setIcon(eyeSlash);
         toggleButton.setDisabledIcon(eyeSlash);
         toggleButton.setMargin(new java.awt.Insets(1, 1, 1, 1));

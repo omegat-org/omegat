@@ -49,8 +49,6 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;

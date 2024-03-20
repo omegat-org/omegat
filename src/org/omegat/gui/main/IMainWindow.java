@@ -28,8 +28,11 @@ package org.omegat.gui.main;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.util.List;
 
 import javax.swing.JFrame;
+
+import org.omegat.gui.search.SearchWindowController;
 
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -204,4 +207,12 @@ public interface IMainWindow {
      * Retrieve main docking desktop.
      */
     DockingDesktop getDesktop();
+
+    void resetDesktopLayout();
+
+    void addSearchWindow(SearchWindowController newSearchWindow);
+
+    List<SearchWindowController> getSearchWindows();
+
+    void saveScreenLayout();
 }

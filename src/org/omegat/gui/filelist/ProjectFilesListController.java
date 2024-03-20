@@ -130,7 +130,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class ProjectFilesListController {
+public class ProjectFilesListController implements IProjectFilesList {
 
     private ProjectFilesList list;
     private FileInfoModel modelFiles;
@@ -139,9 +139,13 @@ public class ProjectFilesListController {
 
     private TableFilterPanel filterPanel;
 
-    private Font defaultFont;
+    private final Font defaultFont;
 
     public ProjectFilesListController(MainWindow parent) {
+        this();
+    }
+
+    public ProjectFilesListController() {
 
         list = new ProjectFilesList();
 
@@ -678,6 +682,7 @@ public class ProjectFilesListController {
             trgCol.setPreferredWidth(srcCol.getWidth());
         }
     }
+
 
     enum FilesTableColumn {
         FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class,

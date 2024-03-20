@@ -160,7 +160,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                menu.mainWindowMenuHandler.projectExitAction();
+                MainWindowMenuHandler.projectExitAction();
             }
 
             @Override

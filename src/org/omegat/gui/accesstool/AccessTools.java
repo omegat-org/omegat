@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.swing.Action;
@@ -46,20 +45,16 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.main.ProjectUICommands;
-import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.RecentProjects;
-import org.omegat.util.gui.ResourcesUtil;
 
 /**
  * @author Hiroshi Miura
@@ -75,7 +70,6 @@ public class AccessTools extends JPanel {
 
     private ProjectComboBoxModel projectComboBoxModel;
     private SourceComboBoxModel sourceComboBoxModel;
-    private final MainWindowMenuHandler mainWindowMenuHandler;
 
     private URI selectedProject = null;
 
@@ -83,9 +77,8 @@ public class AccessTools extends JPanel {
     private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
     private final Map<Object, Action> actions;
 
-    public AccessTools(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
-        this.mainWindowMenuHandler = mainWindowMenuHandler;
-        actions = MainWindowMenuHandler.getActions();
+    public AccessTools(Map<Object, Action> actions) {
+        this.actions = actions;
         initComponents();
     }
 

@@ -785,7 +785,7 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    protected void projectExitAction() {
+    protected static void projectExitAction() {
         prepareForExit(() -> System.exit(0));
     }
 

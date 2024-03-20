@@ -211,7 +211,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectNewMenuItem = createMenuItemFromAction("ProjectNewMenuItem");
         projectTeamNewMenuItem = createMenuItemFromAction("ProjectTeamNewMenuItem");
         projectOpenMenuItem = createMenuItemFromAction("ProjectOpenMenuItem");
-        projectOpenRecentMenuItem = createMenu( "TF_MENU_FILE_OPEN_RECENT");
+        projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT");
         projectClearRecentMenuItem = createMenuItemFromAction("ProjectClearRecentMenuItem");
 
         projectReloadMenuItem = createMenuItemFromAction("ProjectReloadMenuItem");
@@ -273,7 +273,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editCreateGlossaryEntryMenuItem = createMenuItemFromAction("EditCreateGlossaryEntryMenuItem");
         editFindInProjectMenuItem = createMenuItemFromAction("EditFindInProjectMenuItem");
         editReplaceInProjectMenuItem = createMenuItemFromAction("EditReplaceInProjectMenuItem");
-        editSearchDictionaryMenuItem = createMenuItemFromAction( "EditSearchDictionaryMenuItem");
+        editSearchDictionaryMenuItem = createMenuItemFromAction("EditSearchDictionaryMenuItem");
         switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE");
         selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE");
 

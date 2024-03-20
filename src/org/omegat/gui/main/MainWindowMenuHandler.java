@@ -180,6 +180,15 @@ public final class MainWindowMenuHandler {
             new EditRegisterUntranslatedMenuItemAction(),
             new EditRegisterEmptyMenuItemAction(),
             new EditRegisterIdenticalMenuItemAction(),
+            new TitleCaseMenuItemAction(),
+            new SentenceCaseMenuItemAction(),
+            new CycleSwitchCaseMenuItemAction(),
+            new UpperCaseMenuItemAction(),
+            new LowerCaseMenuItemAction(),
+            new GotoNextUntranslatedMenuItemAction(),
+            new GotoNextUniqueMenuItemAction(),
+            new GotoNextTranslatedMenuItemAction(),
+            new GotoNextSegmentMenuItemAction(),
             new OptionsPreferencesMenuItemAction(),
             new HelpAboutMenuItemAction(),
             new HelpLastChangesMenuItemAction()
@@ -1405,41 +1414,122 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    public void cycleSwitchCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
+    @SuppressWarnings("serial")
+    public static class CycleSwitchCaseMenuItemAction extends AbstractMnemonicsAction {
+        public CycleSwitchCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "CycleSwitchCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
+        }
     }
 
-    public void sentenceCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.SENTENCE);
+    @SuppressWarnings("serial")
+    public static class SentenceCaseMenuItemAction extends AbstractMnemonicsAction {
+        public SentenceCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "SentenceCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.SENTENCE);
+        }
     }
 
-    public void titleCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
+    @SuppressWarnings("serial")
+    public static class TitleCaseMenuItemAction extends AbstractMnemonicsAction {
+        public TitleCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "TitleCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
+        }
     }
 
-    public void upperCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
+    @SuppressWarnings("serial")
+    public static class UpperCaseMenuItemAction extends AbstractMnemonicsAction {
+        public UpperCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "UpperCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
+        }
     }
 
-    public void lowerCaseMenuItemActionPerformed() {
-        Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
+    @SuppressWarnings("serial")
+    public static class LowerCaseMenuItemAction extends AbstractMnemonicsAction {
+        public LowerCaseMenuItemAction() {
+            super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "LowerCaseMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
+        }
     }
 
-    public void gotoNextUntranslatedMenuItemActionPerformed() {
-        Core.getEditor().nextUntranslatedEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextUntranslatedMenuItemAction extends AbstractMnemonicsAction {
+        public GotoNextUntranslatedMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_UNTRANS"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextUntranslatedMenuItem");
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextUntranslatedEntry();
+        }
     }
 
-    public void gotoNextUniqueMenuItemActionPerformed() {
-        Core.getEditor().nextUniqueEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextUniqueMenuItemAction extends AbstractMnemonicsAction {
+        public GotoNextUniqueMenuItemAction() {
+            super(OStrings.getString("TF_MENU_GOTO_NEXT_UNIQUE"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextUniqueMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextUniqueEntry();
+        }
     }
 
-    public void gotoNextTranslatedMenuItemActionPerformed() {
-        Core.getEditor().nextTranslatedEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextTranslatedMenuItemAction extends AbstractMnemonicsAction {
+        public GotoNextTranslatedMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_TRANS"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextTranslatedMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextTranslatedEntry();
+        }
     }
 
-    public void gotoNextSegmentMenuItemActionPerformed() {
-        Core.getEditor().nextEntry();
+    @SuppressWarnings("serial")
+    public static class GotoNextSegmentMenuItemAction extends AbstractMnemonicsAction  {
+        public GotoNextSegmentMenuItemAction() {
+            super(OStrings.getString("TF_MENU_EDIT_NEXT"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "GotoNextSegmentMenuItem");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Core.getEditor().nextEntry();
+        }
     }
+
 
     public void gotoPreviousSegmentMenuItemActionPerformed() {
         Core.getEditor().prevEntry();

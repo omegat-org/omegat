@@ -298,20 +298,20 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editRegisterEmptyMenuItem = createMenuItemFromAction("EditRegisterEmptyMenuItem");
         editRegisterIdenticalMenuItem = createMenuItemFromAction("EditRegisterIdenticalMenuItem");
 
-        lowerCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER");
-        upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER");
-        titleCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE");
-        sentenceCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE");
-        cycleSwitchCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_CYCLE");
+        lowerCaseMenuItem = createMenuItemFromAction("LowerCaseMenuItem");
+        upperCaseMenuItem = createMenuItemFromAction("UpperCaseMenuItem");
+        titleCaseMenuItem = createMenuItemFromAction("TitleCaseMenuItem");
+        sentenceCaseMenuItem = createMenuItemFromAction("SentenceCaseMenuItem");
+        cycleSwitchCaseMenuItem = createMenuItemFromAction("CycleSwitchCaseMenuItem");
 
-        gotoNextUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANS");
-        gotoNextTranslatedMenuItem = createMenuItem("TF_MENU_EDIT_TRANS");
-        gotoNextSegmentMenuItem = createMenuItem("TF_MENU_EDIT_NEXT");
+        gotoNextUntranslatedMenuItem = createMenuItemFromAction("GotoNextUntranslatedMenuItem");
+        gotoNextTranslatedMenuItem = createMenuItemFromAction("GotoNextTranslatedMenuItem");
+        gotoNextSegmentMenuItem = createMenuItemFromAction("GotoNextSegmentMenuItem");
         gotoPreviousSegmentMenuItem = createMenuItem("TF_MENU_EDIT_PREV");
         gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO");
         gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE");
         gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE");
-        gotoNextUniqueMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_UNIQUE");
+        gotoNextUniqueMenuItem = createMenuItemFromAction("GotoNextUniqueMenuItem");
         gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE");
         gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU");
 

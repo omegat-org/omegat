@@ -98,7 +98,7 @@ public class GlossaryTextAreaTest extends TestCore {
         renderer.render(entries.get(1), doc);
         renderer.render(entries.get(2), doc);
         Thread.sleep(300);
-        String expected = doc.getText(0, doc.getLength()).replaceAll("%C3%A8", "è");
+        String expected = doc.getText(0, doc.getLength()).replaceAll("%C3%A8", "\u00E8");
         assertEquals(expected, gta.getText());
     }
 

@@ -43,6 +43,11 @@ public class HttpConnectionUtilsTest {
         String str = "1. https://fr.wikipedia.org/wiki/Science_du_syst%C3%A8me_Terre";
         assertEquals("1. https://fr.wikipedia.org/wiki/Science_du_système_Terre",
                 HttpConnectionUtils.decodeHttpURLs(str));
+        String str2 = "2. https://ja.wikipedia.org/wiki/2024%E5%B9%B4%E3%81%AE%E3%82%AB%E3%82%BF%E3%83%BC%E3"
+                + "%83%AB%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA"
+                + "_%28%E3%83%AD%E3%83%BC%E3%83%89%E3%83%AC%E3%83%BC%E3%82%B9%29 参照";
+        assertEquals("2. https://ja.wikipedia.org/wiki/2024年のカタールグランプリ_(ロードレース) 参照",
+                HttpConnectionUtils.decodeHttpURLs(str2));
     }
 
     @Test
@@ -65,5 +70,14 @@ public class HttpConnectionUtilsTest {
                 HttpConnectionUtils.encodeHttpURLs(base + path));
         assertEquals("https://fr.wikipedia.org/wiki/Science_du_syst%C3%A8me_Terre?query=search&lang=en",
                 HttpConnectionUtils.encodeHttpURLs(base + path + query));
+        String bracket = "https://fr.wikipedia.org/wiki/Doughnut_(modèle_économique)";
+        assertEquals("https://fr.wikipedia.org/wiki/Doughnut_%28mod%C3%A8le_%C3%A9conomique%29",
+                HttpConnectionUtils.encodeHttpURLs(bracket));
+        String multibyte = "2. https://ja.wikipedia.org/wiki/2024年のカタールグランプリ_(ロードレース)";
+        assertEquals(
+                "2. https://ja.wikipedia.org/wiki/2024%E5%B9%B4%E3%81%AE%E3%82%AB%E3%82%BF%E3%83%BC%E3"
+                        + "%83%AB%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%97%E3%83%AA"
+                        + "_%28%E3%83%AD%E3%83%BC%E3%83%89%E3%83%AC%E3%83%BC%E3%82%B9%29",
+                HttpConnectionUtils.encodeHttpURLs(multibyte));
     }
 }

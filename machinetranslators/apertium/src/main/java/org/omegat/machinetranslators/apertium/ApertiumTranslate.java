@@ -120,12 +120,12 @@ public class ApertiumTranslate extends BaseCachedTranslate {
         String locale = language.getLocaleCode();
 
         if (!StringUtil.isEmpty(language.getCountryCode())) {
-            if (locale.equalsIgnoreCase("en_us") || locale.equalsIgnoreCase("pt_br")) {
-                return locale; // We need en_US and pt_BR
-            } else if (locale.equalsIgnoreCase("oc_ar")) {
-                return "oc_aran";
+            if (locale.equalsIgnoreCase("oc_ar")) {
+                return "oci_aran";
             } else if (locale.equalsIgnoreCase("ca_va")) {
-                return "ca_valencia";
+                return "cat_valencia";
+            } else {
+                return locale;
             }
         }
 

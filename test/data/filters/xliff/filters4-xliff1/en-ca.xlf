@@ -6,7 +6,7 @@
 <source xml:lang="en">This is a test</source>
 <target xml:lang="ca">Això és una prova</target>
 </trans-unit>
-<trans-unit id="2" xml:space="preserve">
+<trans-unit id="2" xml:space="preserve" state="final">
 <source xml:lang="en">This is another test</source>
 <target xml:lang="ca">Això és una altra prova</target>
 </trans-unit>
@@ -14,6 +14,9 @@
 <source xml:lang="en">This is a house</source>
 <target xml:lang="ca">Això és una casa</target>
 </trans-unit>
-</body>
+<trans-unit id="3" xml:space="preserve" translate="no">
+<source xml:lang="en">This is not a target</source>
+<target xml:lang="ca">Això és una casa</target>
+</trans-unit></body>
 </file>
 </xliff>

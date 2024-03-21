@@ -194,12 +194,10 @@ public final class PluginUtils {
                 try (InputStream in = mu.openStream()) {
                     Manifest m = new Manifest(in);
                     if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
-                        // found main manifest - not in development mode
+                        // found a main manifest - not in development mode
                         foundMain = true;
-                        loadFromManifest(m, pluginsClassLoader, null);
-                    } else {
-                        loadFromManifest(m, pluginsClassLoader, mu);
                     }
+                    loadFromManifest(m, pluginsClassLoader, mu);
                     if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
                         String target = mu.toString();
                         for (URL url : urlList) {
@@ -211,9 +209,7 @@ public final class PluginUtils {
                 } catch (ClassNotFoundException e) {
                     Log.log(e);
                 } catch (UnsupportedClassVersionError e) {
-                    JarURLConnection connection = (JarURLConnection) mu.openConnection();
-                    URL url = connection.getJarFileURL();
-                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", url);
+                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
                 }
             }
         } catch (IOException ex) {
@@ -632,5 +628,10 @@ public final class PluginUtils {
 
     public static Collection<PluginInformation> getPluginInformations() {
         return Collections.unmodifiableSet(PLUGIN_INFORMATIONS);
+    }
+
+    public static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {
+        JarURLConnection connection = (JarURLConnection) url.openConnection();
+        return connection.getJarFileURL();
     }
 }

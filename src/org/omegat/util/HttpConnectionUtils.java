@@ -101,7 +101,7 @@ public final class HttpConnectionUtils {
      */
     public static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+\\b",
+    private static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+",
             Pattern.CASE_INSENSITIVE);
 
     /**

@@ -1704,8 +1704,18 @@ ${filePath}></programlisting></para>
 	linkend="application.folder">application</link> folder.</para>
 
 	<para>Additional plugins can be found on the <ulink
-	url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development
+	url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT wiki
 	site</ulink>.</para>
+	<para>Use the <guibutton>Install plugin from disk</guibutton> button to install or upgrade your
+	plugin. Plugin files are JAR files with a <filename>.jar</filename> extension.
+	OmegaT also accepts zip archives that contain a JAR plugin file.
+	Third party plugins are typically distributed as zip archives that contain the plugin file
+	itself, as well as README and LICENSE files.
+	</para>
+	<warning>
+		<para>The plugin installer only accepts archives containing a JAR plugin.
+		 It does not recognize plugin files renamed with a <filename>.zip</filename> extension.</para>
+	</warning>
   </section>
 
   <section id="dialogs.preferences.updates">

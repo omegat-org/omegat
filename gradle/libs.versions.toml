@@ -1,7 +1,7 @@
 [versions]
 slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
 slf4j-format = "0.5.1"
-groovy = "4.0.19"
+groovy = "4.0.20"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.15.1"
@@ -35,7 +35,7 @@ htmlparser = "1.6-20230203"
 gnudiff = "1.15"
 desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
-pdfbox = "3.0.1"
+pdfbox = "3.0.2"
 maligna = "3.0.1"
 trie4j = "0.9.10_1"
 dsl4j = "0.7.1"
@@ -48,7 +48,7 @@ xjc = "2.3.4"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.4.4"
-flatlaf="3.3"
+flatlaf="3.4"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}

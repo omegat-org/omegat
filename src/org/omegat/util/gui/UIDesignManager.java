@@ -53,6 +53,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.laf.SystemDarkThemeDetector;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
@@ -99,6 +100,9 @@ public final class UIDesignManager {
     }
 
     private static void setMenuUI(String menuUIPrefClassName) {
+        if (StringUtil.isEmpty(menuUIPrefClassName)) {
+            return;
+        }
         try {
             ClassLoader classLoader = getClassLoader();
             Class<?> prefClazz = classLoader.loadClass(menuUIPrefClassName);
@@ -197,13 +201,10 @@ public final class UIDesignManager {
         }
         setTheme(theme);
 
-        String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
-        if (menuUI != null) {
-            setMenuUI(menuUI);
-        }
+        setMenuUI(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME));
 
         if (UIManager.getColor("OmegaT.source") == null) {
-            // Theme apparently did not load default colors so we do so now
+            // Theme apparently did not load default colors, so we do so now
             loadDefaultColors(UIManager.getDefaults());
         }
 

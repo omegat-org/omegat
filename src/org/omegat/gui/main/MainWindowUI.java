@@ -50,19 +50,19 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.EditorController;
-import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIDesignManager;
-import org.openide.awt.Mnemonics;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
@@ -92,13 +92,6 @@ public final class MainWindowUI {
     public enum StatusBarMode {
         DEFAULT, PERCENTAGE,
     };
-
-    /**
-     * Create main UI panels.
-     */
-    public static void createMainComponents(final MainWindow mainWindow, final Font font) {
-        mainWindow.projWin = new ProjectFilesListController(mainWindow);
-    }
 
     /**
      * Create docking desktop panel.

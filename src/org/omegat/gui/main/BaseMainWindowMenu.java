@@ -51,6 +51,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
@@ -118,6 +119,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     /** MainWindow menu handler instance. */
     protected final MainWindowMenuHandler mainWindowMenuHandler;
+    protected final Map<Object, Action> actions;
 
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
@@ -125,6 +127,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
             final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
+        actions = MainWindowMenuHandler.getActions();
     }
 
     @Override
@@ -205,109 +208,110 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
         helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
 
-        projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE");
-        projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE");
-        projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN");
+        projectNewMenuItem = createMenuItemFromAction("ProjectNewMenuItem");
+        projectTeamNewMenuItem = createMenuItemFromAction("ProjectTeamNewMenuItem");
+        projectOpenMenuItem = createMenuItemFromAction("ProjectOpenMenuItem");
         projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT");
-        projectClearRecentMenuItem = createMenuItem("TF_MENU_FILE_CLEAR_RECENT");
+        projectClearRecentMenuItem = createMenuItemFromAction("ProjectClearRecentMenuItem");
 
-        projectReloadMenuItem = createMenuItem("TF_MENU_PROJECT_RELOAD");
-        projectCloseMenuItem = createMenuItem("TF_MENU_FILE_CLOSE");
-        projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE");
-        projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT");
-        projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT");
-        projectCommitSourceFiles = createMenuItem("TF_MENU_FILE_COMMIT");
-        projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET");
-        projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE");
-        projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE");
-        projectMedOpenMenuItem = createMenuItem("TF_MENU_FILE_MED_OPEN");
-        projectMedCreateMenuItem = createMenuItem("TF_MENU_FILE_MED_CREATE");
-        projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT");
+        projectReloadMenuItem = createMenuItemFromAction("ProjectReloadMenuItem");
+        projectCloseMenuItem = createMenuItemFromAction("ProjectCloseMenuItem");
+        projectSaveMenuItem = createMenuItemFromAction("ProjectSaveMenuItem");
+        projectImportMenuItem = createMenuItemFromAction("ProjectImportMenuItem");
+        projectWikiImportMenuItem = createMenuItemFromAction("ProjectWikiImportMenuItem");
+        projectCommitSourceFiles = createMenuItemFromAction("ProjectCommitSourceFiles");
+        projectCommitTargetFiles = createMenuItemFromAction("ProjectCommitTargetFiles");
+        projectCompileMenuItem = createMenuItemFromAction("ProjectCompileMenuItem");
+        projectSingleCompileMenuItem = createMenuItemFromAction("ProjectSingleCompileMenuItem");
+        projectMedOpenMenuItem = createMenuItemFromAction("ProjectMedOpenMenuItem");
+        projectMedCreateMenuItem = createMenuItemFromAction("ProjectMedCreateMenuItem");
+        projectEditMenuItem = createMenuItemFromAction("ProjectEditMenuItem");
         viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN");
 
         projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES");
-        projectAccessRootMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_ROOT");
-        projectAccessDictionaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_DICTIONARY");
-        projectAccessGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_GLOSSARY");
-        projectAccessSourceMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_SOURCE");
-        projectAccessTargetMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TARGET");
-        projectAccessTMMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TM");
-        projectAccessExportTMMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_EXPORT_TM");
-        projectAccessCurrentSourceDocumentMenuItem = createMenuItem(
-                "TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT");
-        projectAccessCurrentTargetDocumentMenuItem = createMenuItem(
-                "TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT");
-        projectAccessWriteableGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY");
+        projectAccessRootMenuItem = createMenuItemFromAction("ProjectAccessRootMenuItem");
+        projectAccessDictionaryMenuItem = createMenuItemFromAction("ProjectAccessDictionaryMenuItem");
+        projectAccessGlossaryMenuItem = createMenuItemFromAction("ProjectAccessGlossaryMenuItem");
+        projectAccessSourceMenuItem = createMenuItemFromAction("ProjectAccessSourceMenuItem");
+        projectAccessTargetMenuItem = createMenuItemFromAction("ProjectAccessTargetMenuItem");
+        projectAccessTMMenuItem = createMenuItemFromAction("ProjectAccessTMMenuItem");
+        projectAccessExportTMMenuItem = createMenuItemFromAction("ProjectAccessExportTMMenuItem");
+        projectAccessCurrentSourceDocumentMenuItem = createMenuItemFromAction(
+                "ProjectAccessCurrentSourceDocumentMenuItem");
+        projectAccessCurrentTargetDocumentMenuItem = createMenuItemFromAction(
+                "ProjectAccessCurrentTargetDocumentMenuItem");
+        projectAccessWriteableGlossaryMenuItem = createMenuItemFromAction(
+                "ProjectAccessWriteableGlossaryMenuItem");
 
-        projectAccessRootMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_ROOT");
-        projectAccessDictionaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_DICTIONARY");
-        projectAccessGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_GLOSSARY");
-        projectAccessSourceMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_SOURCE");
-        projectAccessTargetMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TARGET");
-        projectAccessTMMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_TM");
-        projectAccessExportTMMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_EXPORT_TM");
-        projectAccessCurrentSourceDocumentMenuItem = createMenuItem(
-                "TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT");
-        projectAccessCurrentTargetDocumentMenuItem = createMenuItem(
-                "TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT");
-        projectAccessWriteableGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY");
-        projectRestartMenuItem = createMenuItem("TF_MENU_FILE_RESTART");
-        projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
+        projectAccessRootMenuItem = createMenuItemFromAction("ProjectAccessRootMenuItem");
+        projectAccessDictionaryMenuItem = createMenuItemFromAction("ProjectAccessDictionaryMenuItem");
+        projectAccessGlossaryMenuItem = createMenuItemFromAction("ProjectAccessGlossaryMenuItem");
+        projectAccessSourceMenuItem = createMenuItemFromAction("ProjectAccessSourceMenuItem");
+        projectAccessTargetMenuItem = createMenuItemFromAction("ProjectAccessTargetMenuItem");
+        projectAccessTMMenuItem = createMenuItemFromAction("ProjectAccessTMMenuItem");
+        projectAccessExportTMMenuItem = createMenuItemFromAction("ProjectAccessExportTMMenuItem");
+        projectAccessCurrentSourceDocumentMenuItem = createMenuItemFromAction(
+                "ProjectAccessCurrentSourceDocumentMenuItem");
+        projectAccessCurrentTargetDocumentMenuItem = createMenuItemFromAction(
+                "ProjectAccessCurrentTargetDocumentMenuItem");
+        projectAccessWriteableGlossaryMenuItem = createMenuItemFromAction(
+                "ProjectAccessWriteableGlossaryMenuItem");
+        projectRestartMenuItem = createMenuItemFromAction("ProjectRestartMenuItem");
+        projectExitMenuItem = createMenuItemFromAction("ProjectExitMenuItem");
 
-        editUndoMenuItem = createMenuItem("TF_MENU_EDIT_UNDO");
-        editRedoMenuItem = createMenuItem("TF_MENU_EDIT_REDO");
-        editOverwriteTranslationMenuItem = createMenuItem("TF_MENU_EDIT_RECYCLE");
-        editInsertTranslationMenuItem = createMenuItem("TF_MENU_EDIT_INSERT");
-        editOverwriteSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_OVERWRITE");
-        editInsertSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_INSERT");
-        editSelectSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_SELECT");
-        editOverwriteMachineTranslationMenuItem = createMenuItem(
-                "TF_MENU_EDIT_OVERWRITE_MACHITE_TRANSLATION");
+        editUndoMenuItem = createMenuItemFromAction("EditUndoMenuItem");
+        editRedoMenuItem = createMenuItemFromAction("EditRedoMenuItem");
+        editOverwriteTranslationMenuItem = createMenuItemFromAction("EditOverwriteTranslationMenuItem");
+        editInsertTranslationMenuItem = createMenuItemFromAction("EditInsertTranslationMenuItem");
+        editOverwriteSourceMenuItem = createMenuItemFromAction("EditOverwriteSourceMenuItem");
+        editInsertSourceMenuItem = createMenuItemFromAction("EditInsertSourceMenuItem");
+        editSelectSourceMenuItem = createMenuItemFromAction("EditSelectSourceMenuItem");
+        editOverwriteMachineTranslationMenuItem = createMenuItemFromAction("EditOverwriteMachineTranslationMenuItem");
         editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT");
         editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED");
-        editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION");
-        editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY");
-        editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND");
-        editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE");
-        editSearchDictionaryMenuItem = createMenuItem("TF_MENU_EDIT_SEARCH_DICTIONARY");
+        editExportSelectionMenuItem = createMenuItemFromAction("EditExportSelectionMenuItem");
+        editCreateGlossaryEntryMenuItem = createMenuItemFromAction("EditCreateGlossaryEntryMenuItem");
+        editFindInProjectMenuItem = createMenuItemFromAction("EditFindInProjectMenuItem");
+        editReplaceInProjectMenuItem = createMenuItemFromAction("EditReplaceInProjectMenuItem");
+        editSearchDictionaryMenuItem = createMenuItemFromAction("EditSearchDictionaryMenuItem");
         switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE");
         selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE");
 
-        editSelectFuzzyPrevMenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_PREV");
-        editSelectFuzzyNextMenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_NEXT");
-        editSelectFuzzy1MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_1");
-        editSelectFuzzy2MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_2");
-        editSelectFuzzy3MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_3");
-        editSelectFuzzy4MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_4");
-        editSelectFuzzy5MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_5");
+        editSelectFuzzyPrevMenuItem = createMenuItemFromAction("EditSelectFuzzyPrevMenuItem");
+        editSelectFuzzyNextMenuItem = createMenuItemFromAction("EditSelectFuzzyNextMenuItem");
+        editSelectFuzzy1MenuItem = createMenuItemFromAction("EditSelectFuzzy1MenuItem");
+        editSelectFuzzy2MenuItem = createMenuItemFromAction("EditSelectFuzzy2MenuItem");
+        editSelectFuzzy3MenuItem = createMenuItemFromAction("EditSelectFuzzy3MenuItem");
+        editSelectFuzzy4MenuItem = createMenuItemFromAction("EditSelectFuzzy4MenuItem");
+        editSelectFuzzy5MenuItem = createMenuItemFromAction("EditSelectFuzzy5MenuItem");
 
         insertCharsSubMenu = createMenu("TF_MENU_EDIT_INSERT_CHARS");
-        insertCharsLRM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRM");
-        insertCharsRLM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_RLM");
-        insertCharsLRE = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRE");
-        insertCharsRLE = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_RLE");
-        insertCharsPDF = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_PDF");
+        insertCharsLRM = createMenuItemFromAction("InsertCharsLRM");
+        insertCharsRLM = createMenuItemFromAction("InsertCharsRLM");
+        insertCharsLRE = createMenuItemFromAction("InsertCharsLRE");
+        insertCharsRLE = createMenuItemFromAction("InsertCharsRLE");
+        insertCharsPDF = createMenuItemFromAction("InsertCharsPDF");
 
-        editMultipleDefault = createMenuItem("MULT_MENU_DEFAULT");
-        editMultipleAlternate = createMenuItem("MULT_MENU_MULTIPLE");
-        editRegisterUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANSLATED_TRANSLATION");
-        editRegisterEmptyMenuItem = createMenuItem("TF_MENU_EDIT_EMPTY_TRANSLATION");
-        editRegisterIdenticalMenuItem = createMenuItem("TF_MENU_EDIT_IDENTICAL_TRANSLATION");
+        editMultipleDefault = createMenuItemFromAction("EditMultipleDefault");
+        editMultipleAlternate = createMenuItemFromAction("EditMultipleAlternate");
+        editRegisterUntranslatedMenuItem = createMenuItemFromAction("EditRegisterUntranslatedMenuItem");
+        editRegisterEmptyMenuItem = createMenuItemFromAction("EditRegisterEmptyMenuItem");
+        editRegisterIdenticalMenuItem = createMenuItemFromAction("EditRegisterIdenticalMenuItem");
 
-        lowerCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER");
-        upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER");
-        titleCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE");
-        sentenceCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE");
-        cycleSwitchCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_CYCLE");
+        lowerCaseMenuItem = createMenuItemFromAction("LowerCaseMenuItem");
+        upperCaseMenuItem = createMenuItemFromAction("UpperCaseMenuItem");
+        titleCaseMenuItem = createMenuItemFromAction("TitleCaseMenuItem");
+        sentenceCaseMenuItem = createMenuItemFromAction("SentenceCaseMenuItem");
+        cycleSwitchCaseMenuItem = createMenuItemFromAction("CycleSwitchCaseMenuItem");
 
-        gotoNextUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANS");
-        gotoNextTranslatedMenuItem = createMenuItem("TF_MENU_EDIT_TRANS");
-        gotoNextSegmentMenuItem = createMenuItem("TF_MENU_EDIT_NEXT");
+        gotoNextUntranslatedMenuItem = createMenuItemFromAction("GotoNextUntranslatedMenuItem");
+        gotoNextTranslatedMenuItem = createMenuItemFromAction("GotoNextTranslatedMenuItem");
+        gotoNextSegmentMenuItem = createMenuItemFromAction("GotoNextSegmentMenuItem");
         gotoPreviousSegmentMenuItem = createMenuItem("TF_MENU_EDIT_PREV");
         gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO");
         gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE");
         gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE");
-        gotoNextUniqueMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_UNIQUE");
+        gotoNextUniqueMenuItem = createMenuItemFromAction("GotoNextUniqueMenuItem");
         gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE");
         gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU");
 
@@ -382,7 +386,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES");
         toolsShowStatisticsMatchesPerFileMenuItem = createMenuItem(
                 "TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE");
-        optionsPreferencesMenuItem = createMenuItem("MW_OPTIONSMENU_PREFERENCES");
+        optionsPreferencesMenuItem = createMenuItemFromAction("OptionsPreferencesMenuItem");
 
         optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE");
 
@@ -409,8 +413,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR");
 
         helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS");
-        helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT");
-        helpLastChangesMenuItem = createMenuItem("TF_MENU_HELP_LAST_CHANGES");
+        helpAboutMenuItem = createMenuItemFromAction("HelpAboutMenuItem");
+        helpLastChangesMenuItem = createMenuItemFromAction("HelpLastChangesMenuItem");
         helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG");
         helpUpdateCheckMenuItem = createMenuItem("TF_MENU_HELP_CHECK_FOR_UPDATES");
 
@@ -760,6 +764,26 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         return result;
     }
 
+    protected JMenuItem createMenuItemFromAction(String commandKey) {
+        Action action = actions.get(commandKey);
+        if (action == null) {
+            throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
+        }
+        JMenuItem item = new JMenuItem();
+        item.setAction(action);
+        item.setIcon(null);
+        return item;
+    }
+
+    protected JMenuItem createMenuItem(String titleKey, String name) {
+        JMenuItem result = new JMenuItem();
+        result.setName(name);
+        Action action = actions.get(name);
+        Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addActionListener(action);
+        return result;
+    }
+
     /**
      * Create menu item instance and set title.
      *
@@ -928,10 +952,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected void initMacSpecific() {
         try {
             // MacOSX-specific
-            OSXIntegration.setQuitHandler(e -> mainWindowMenuHandler.projectExitMenuItemActionPerformed());
-            OSXIntegration.setAboutHandler(e -> mainWindowMenuHandler.helpAboutMenuItemActionPerformed());
-            OSXIntegration.setPreferencesHandler(
-                    e -> mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed());
+            OSXIntegration.setQuitHandler(actions.get("ProjectExitMenuItem"));
+            OSXIntegration.setAboutHandler(actions.get("HelpAboutMenuItem"));
+            OSXIntegration.setPreferencesHandler(actions.get("OptionsPreferencesMenuItem"));
         } catch (NoClassDefFoundError e) {
             Log.log(e);
         }

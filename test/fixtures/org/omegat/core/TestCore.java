@@ -51,6 +51,7 @@ import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Platform;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.MenuExtender;
@@ -272,6 +273,18 @@ public abstract class TestCore {
             @Override
             public DockingDesktop getDesktop() {
                 return null;
+            }
+
+            @Override
+            public void doRecycleTrans() {
+            }
+
+            @Override
+            public void doInsertTrans() {
+            }
+
+            @Override
+            public void addSearchWindow(final SearchWindowController search) {
             }
 
             public Cursor getCursor() {

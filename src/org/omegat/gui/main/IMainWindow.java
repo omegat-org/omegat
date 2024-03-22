@@ -31,6 +31,8 @@ import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
+import org.omegat.gui.search.SearchWindowController;
+
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -204,4 +206,10 @@ public interface IMainWindow {
      * Retrieve main docking desktop.
      */
     DockingDesktop getDesktop();
+
+    void doRecycleTrans();
+
+    void doInsertTrans();
+
+    void addSearchWindow(SearchWindowController search);
 }

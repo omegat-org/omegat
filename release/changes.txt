@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   44 Enhancement
-  68 Bug fixes
+  69 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -135,6 +135,9 @@
 
 
   Bug fixes:
+
+  - OmegaT does not show entreis of stardict-JMDict dictionary
+  https://sourceforge.net/p/omegat/bugs/1255/
 
   - Short glossary items are not recognized with Korean source
   https://sourceforge.net/p/omegat/bugs/1250/

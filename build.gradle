@@ -1167,8 +1167,8 @@ tasks.register("linuxRpmDist", Exec) {
 
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
-installDist {
-}
+// installDist insists on destination executable directory even when disable start script.
+application.executableDir = ""
 
 // Read in all our custom messages and massage them for inclusion in the .iss
 ext.getInnoSetupCustomMessages = {

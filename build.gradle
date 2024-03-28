@@ -401,7 +401,6 @@ def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
 project(":spellchecker") {jar.enabled = false}
 
-def distsDir = file(layout.buildDirectory.file("${distsDirName}"))
 def assetDir = findProperty('assetDir') ?: '../'
 def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
 def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
@@ -1198,10 +1197,36 @@ tasks.register('win') {
 ext.makeWinTask = { args ->
     def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
-    def installerExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}.exe")
-    def signedExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}_Signed.exe")
-
+    def installerWinExe = distsDirectory.file("${installerBasename}.exe")
+    def signedWinExe = distsDirectory.file("${installerBasename}_Signed.exe")
     def signedTaskName = "${args.name}Signed"
+    def signedTaskCommandArgs = { arg2 ->
+        def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode').toString()
+        def commandArgs = [exe, 'sign']
+        if (project.hasProperty('pkcs11module')) {
+            commandArgs.addAll('-pkcs11module', project.property('pkcs11module'))
+        }
+        if (project.hasProperty('winCodesignCert')) {
+            commandArgs.addAll('-certs', project.property('winCodesignCert'))
+        }
+        if (project.hasProperty('pkcs11cert')) {
+            commandArgs.addAll('-pkcs11cert', project.property('pkcs11cert'))
+        }
+        if (project.hasProperty('winCodesignPassword')) {
+            commandArgs.addAll('-pass', project.property('winCodesignPassword'))
+        }
+        if (project.hasProperty('winCodesignDevice')) {
+            envVars['USBDEV'] = project.property('winCodesignDevice')
+        }
+        commandArgs.addAll(
+                '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
+                'http://time.certum.pl/',
+                '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
+                '-in', installerWinExe,
+                '-out', signedWinExe
+        )
+        return commandArgs
+    }
 
     tasks.register(args.name, Sync) {
         description = "Create a Windows installer for ${args.name} distro. " +
@@ -1223,7 +1248,7 @@ ext.makeWinTask = { args ->
             }
         }
         destinationDir file(layout.buildDirectory.file("innosetup/${args.name}"))
-        outputs.file installerExe
+        outputs.file installerWinExe
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
                     [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
@@ -1231,7 +1256,7 @@ ext.makeWinTask = { args ->
         }
         doFirst {
             delete "$destinationDir/jre"
-            delete installerExe
+            delete installerWinExe
             project.copy {
                 from 'build'
                 into 'build'
@@ -1263,15 +1288,16 @@ ext.makeWinTask = { args ->
             }
             project.copy {
                 from("${destinationDir}/${installerBasename}.exe")
-                into distsDir
+                into distsDirectory
             }
             delete file("${destinationDir}/${installerBasename}.exe")
         }
     }
+
     tasks.register(signedTaskName, Exec) {
         group = 'omegat distribution'
-        inputs.file installerExe
-        outputs.file signedExe
+        inputs.file installerWinExe
+        outputs.file signedWinExe
         // Starting from Nov 2022, certification provider force to use HSM to
         // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
         // standards will require private keys for standard code signing
@@ -1289,32 +1315,8 @@ ext.makeWinTask = { args ->
                     // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
                     // 'neither osslsigncode or docker/nerdctl is not installed'])
         }
-        def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode')
         def envVars = [:]
-        def commandArgs = [exe, 'sign']
-        if (project.hasProperty('pkcs11module')) {
-            commandArgs.addAll('-pkcs11module', project.property('pkcs11module'))
-        }
-        if (project.hasProperty('winCodesignCert')) {
-            commandArgs.addAll('-certs', project.property('winCodesignCert'))
-        }
-        if (project.hasProperty('pkcs11cert')) {
-            commandArgs.addAll('-pkcs11cert', project.property('pkcs11cert'))
-        }
-        if (project.hasProperty('winCodesignPassword')) {
-            commandArgs.addAll('-pass', project.property('winCodesignPassword'))
-        }
-        if (project.hasProperty('winCodesignDevice')) {
-            envVars['USBDEV'] = project.property('winCodesignDevice')
-        }
-        commandArgs.addAll(
-                '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
-                'http://time.certum.pl/',
-                '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
-                '-in', installerExe.get().asFile.toString(),
-                '-out', signedExe.get().asFile.toString()
-        )
-        commandLine(commandArgs)
+        commandLine(signedTaskCommandArgs())
         environment(envVars)
         dependsOn args.name
     }
@@ -1350,24 +1352,6 @@ processResources {
     logger.lifecycle("Detected revision " + revision)
     filesMatching('**/Version.properties') {
         filter ReplaceTokens, tokens:["dev": revision]
-    }
-}
-
-tasks.register('checksums') {
-    def algos = ['SHA-512', 'MD5']
-    description = "Generate ${algos.join(', ')} checksums for distribution files"
-    inputs.files fileTree(dir: distsDir, exclude: 'checksums')
-    def checksumsDir = file("${distsDir}/checksums")
-    outputs.dir checksumsDir
-    onlyIf {
-        condition(distsDir.directory, 'Distfiles not found')
-    }
-    doLast {
-        distsDir.listFiles().findAll { it.file }.each { f ->
-            algos.each { algo ->
-                ant.checksum file: f, algorithm: algo, todir: checksumsDir
-            }
-        }
     }
 }
 

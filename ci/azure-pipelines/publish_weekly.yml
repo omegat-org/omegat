@@ -6,6 +6,13 @@ parameters:
 
 steps:
   - task: Bash@3
+    displayName: calculate sha512 checksum
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: for f in *; do sha512sum -b $f > $f.sha512; done
+      workingDirectory: $(Build.SourcesDirectory)/build/distributions/
+  - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
     condition: ${{ parameters.condition }}
     inputs:

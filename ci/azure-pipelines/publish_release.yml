@@ -6,13 +6,6 @@ parameters:
 
 steps:
   - task: Bash@3
-    displayName: calculate sha512 checksum
-    condition: ${{ parameters.condition }}
-    inputs:
-      targetType: 'inline'
-      script: for f in *; do sha512sum -b $f > $f.sha512; done
-      workingDirectory: $(Build.SourcesDirectory)/build/distributions/
-  - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
     condition: ${{ parameters.condition }}
     inputs:
@@ -22,5 +15,5 @@ steps:
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${{ parameters.omegatVersion }}/"
         echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -v $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -v -oStrictHostKeyChecking=no $srcdir/* "$dest:$destdir"
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -r -v -oStrictHostKeyChecking=no $srcdir/* "$dest:$destdir"
 

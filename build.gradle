@@ -762,12 +762,12 @@ tasks.register('mac') {
 }
 
 ext.makeMacTask = { args ->
-    def installTaskName = args.name + "InstallDist"
-    def signedInstallTaskName = args.name + "InstallSignedDist"
+    def installTaskName = 'install' + args.name.capitalize()  + "Dist"
+    def signedInstallTaskName = 'install' + args.name.capitalize() + "SignedDist"
     def distZipTaskName = args.name + "DistZip"
-    def signedZipTaskName = args.name + "SignedDistZip"
+    def signedZipTaskName = args.name + "Signed"
     def notarizeTaskName = args.name + "Notarize"
-    def stapledNotarizedDistZipTaskName = args.name + "StapledNotarizedDistZip"
+    def stapledNotarizedDistZipTaskName = args.name + "StapledNotarized"
 
     tasks.register(distZipTaskName, Zip) {
         description = "Create Mac distribution for ${args.name}"
@@ -802,6 +802,12 @@ ext.makeMacTask = { args ->
                     replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
                 }
             }
+        }
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = base.distsDirectory.file(archiveFileName).get().asFile
+            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
         }
         onlyIf {
             condition(!args.jrePath || !args.jrePath.empty, 'JRE not found')
@@ -845,7 +851,13 @@ ext.makeMacTask = { args ->
             }
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
-        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        destinationDir  file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = file("$destinationDir/OmegaT.app/Contents/Java/OmegaT.jar")
+            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
+        }
         doFirst {
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
         }

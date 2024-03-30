@@ -4,6 +4,7 @@ import java.nio.file.Paths
 import com.github.spotbugs.snom.Confidence
 
 plugins {
+    id 'base'
     id 'application'
     id 'java-library'
     id 'java-test-fixtures'
@@ -1197,8 +1198,11 @@ tasks.register('win') {
 ext.makeWinTask = { args ->
     def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
-    def installerWinExe = distsDirectory.file("${installerBasename}.exe")
-    def signedWinExe = distsDirectory.file("${installerBasename}_Signed.exe")
+    def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
+    def signedWinExe = base.distsDirectory.file("${installerBasename}_Signed.exe")
+    def prepDistsTaskName = "${args.name}Prep"
+    def genDistsTaskName = "${args.name}Gen"
+    def distsTaskName = "${args.name}"
     def signedTaskName = "${args.name}Signed"
     def signedTaskCommandArgs = { arg2 ->
         def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode').toString()
@@ -1222,19 +1226,41 @@ ext.makeWinTask = { args ->
                 '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
                 'http://time.certum.pl/',
                 '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
-                '-in', installerWinExe,
-                '-out', signedWinExe
+                '-in', installerWinExe.get().asFile,
+                '-out', signedWinExe.get().asFile
         )
         return commandArgs
     }
 
-    tasks.register(args.name, Sync) {
-        description = "Create a Windows installer for ${args.name} distro. " +
-                'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
+    tasks.register(prepDistsTaskName, Sync) {
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
+        }
+        doFirst {
+            delete "$destinationDir/jre"
+            delete installerWinExe
+        }
         with distributions.main.contents
-        dependsOn createAllExecutables
+        destinationDir file(layout.buildDirectory.file("innosetup/${args.name}"))
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar").get().asFile
+            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
+        }
         from('release/win32-specific') {
             include 'OmegaT.l4J.ini'
+            include 'OmegaT.iss'
+            filter(ReplaceTokens, tokens: [
+                    VERSION_NUMBER_SUBST : fullVersion,
+                    OUTPUT_BASENAME_SUBST: installerBasename.toString(),
+                    CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
+                    ARCHITECTURE_SUBST   : args.arch ?: ''
+            ])
+            filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+            filteringCharset = 'UTF-8'
         }
         from('build/launch4j') {
             include '*.exe'
@@ -1247,56 +1273,46 @@ ext.makeWinTask = { args ->
                 }
             }
         }
-        destinationDir file(layout.buildDirectory.file("innosetup/${args.name}"))
-        outputs.file installerWinExe
+        dependsOn createAllExecutables
+    }
+
+    tasks.register(genDistsTaskName, Exec) {
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
                     [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
                      'InnoSetup or Docker not installed'])
         }
-        doFirst {
-            delete "$destinationDir/jre"
-            delete installerWinExe
-            project.copy {
-                from 'build'
-                into 'build'
-                include "innosetup/${args.name}/**/*"
-                dirMode 0777
-                fileMode 0666
-            }
+        dependsOn prepDistsTaskName
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe").get().asFile
+            def f2 = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar").get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
         }
-        doLast {
-            project.copy {
-                from('release/win32-specific') {
-                    include 'OmegaT.iss'
-                }
-                into(destinationDir)
-                filter(ReplaceTokens, tokens: [
-                        VERSION_NUMBER_SUBST : fullVersion,
-                        OUTPUT_BASENAME_SUBST: installerBasename.toString(),
-                        CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
-                        ARCHITECTURE_SUBST   : args.arch ?: ''
-                ])
-                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
-                filteringCharset = 'UTF-8'
-            }
-            exec {
-                // You'd think we could just set the PATH, but there be dragons here
-                // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
-                commandLine exe, "${destinationDir}/OmegaT.iss"
-            }
-            project.copy {
-                from("${destinationDir}/${installerBasename}.exe")
-                into distsDirectory
-            }
-            delete file("${destinationDir}/${installerBasename}.exe")
+        // You'd think we could just set the PATH, but there be dragons here
+        // https://github.com/palantir/gradle-docker/issues/162
+        def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
+        def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
+        commandLine exe, '/Qp', iss
+    }
+
+    tasks.register(distsTaskName, Copy) {
+        description = "Create a Windows installer for ${args.name} distro. " +
+                'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
         }
+        from layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
+        into base.distsDirectory
+        outputs.file installerWinExe
+        dependsOn genDistsTaskName
     }
 
     tasks.register(signedTaskName, Exec) {
         group = 'omegat distribution'
-        inputs.file installerWinExe
+        inputs.file installerWinExe skipWhenEmpty()
         outputs.file signedWinExe
         // Starting from Nov 2022, certification provider force to use HSM to
         // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
@@ -1315,10 +1331,13 @@ ext.makeWinTask = { args ->
                     // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
                     // 'neither osslsigncode or docker/nerdctl is not installed'])
         }
+        doFirst {
+            delete signedWinExe
+        }
         def envVars = [:]
         commandLine(signedTaskCommandArgs())
         environment(envVars)
-        dependsOn args.name
+        dependsOn distsTaskName
     }
     assemble.dependsOn args.name, signedTaskName
     win.dependsOn args.name, signedTaskName

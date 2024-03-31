@@ -158,7 +158,7 @@ public class NotesTextArea extends EntryInfoPane<String> implements INotes, IPan
         notify.addActionListener(e -> Preferences.setPreference(Preferences.NOTIFY_NOTES, notify.isSelected()));
         menu.add(notify);
     }
-    
+
     @Override
     public void requestFocus() {
         StaticUIUtils.requestVisible(scrollPane);

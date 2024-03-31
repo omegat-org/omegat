@@ -73,7 +73,6 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
-import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockableState;
 
 /**
@@ -464,12 +463,10 @@ public final class StaticUIUtils {
     /**
      * Request to show the pane when it is hidden as a tab.
      */
-    public static void requestVisible(DockableScrollPane scrollPane) {
-        if (scrollPane.getDockKey().getLocation().equals(DockableState.Location.HIDDEN)) {
+    public static void requestVisible(DockableScrollPane dockable) {
+        if (dockable.getDockKey().getLocation().equals(DockableState.Location.HIDDEN)) {
             MainDockingDesktop desktop = Core.getMainWindow().getDesktop();
-            Dockable dockable = desktop.getContext().getDockableByKey(scrollPane.getDockKey().getKey());
             desktop.requestExpand(dockable);
-            // desktop.setAutoHide(dockable, false);
         }
     }
 }

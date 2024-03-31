@@ -379,6 +379,12 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         return null;
     }
 
+    @Override
+    public void requestFocus() {
+        StaticUIUtils.requestVisible(scrollPane);
+        scrollPane.getViewport().getView().requestFocusInWindow();
+    }
+
     /**
      * Thread for search data in dictionaries.
      */

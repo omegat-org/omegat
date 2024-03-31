@@ -26,15 +26,22 @@
 package org.omegat.gui.main;
 
 import com.vlsolutions.swing.docking.Dockable;
+import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * @author Hiroshi Miura
  */
 public class MainDockingDesktop extends DockingDesktop {
+    private static final long serialVersionUID = 1L;
+
     public void requestExpand(Dockable dockable) {
-        expandPanel.expand();
-        scopeOutOfExpandedPanelTimer.restart();
+        if (dockable != null && dockable.getDockKey().isAutoHideEnabled()) {
+            if (dockable.getDockKey().getLocation() == DockableState.Location.HIDDEN) {
+                expandPanel.expand();
+                scopeOutOfExpandedPanelTimer.restart();
+            }
+        }
     }
 
     // timer used to hide the expanded panel when scope is out too long

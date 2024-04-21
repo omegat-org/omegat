@@ -1586,8 +1586,9 @@ ${filePath}></programlisting></para>
 
 	<variablelist>
 	  <varlistentry id="dialog.preferences.saving.and.output.interval">
-		<term id="dialog.preferences.saving.and.output.interval.title"><option>Project
-		data saving interval</option></term>
+		<term
+		id="dialog.preferences.saving.and.output.interval.title"><option>Project
+		data saving and team synchronization interval</option></term>
 		<listitem>
 		  <para>Allows the user to select the interval between automatic project
 		  data saves.  See the <link

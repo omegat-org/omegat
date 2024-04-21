@@ -27,6 +27,11 @@
   been translated by another member but not synchronized yet. When that happens,
   members have to select the appropriate translation.</para>
 
+  <para>See the <link
+  linkend="how.to.solve.conflicts"
+  endterm="how.to.solve.conflicts.title"/>
+  how-to for details.</para>
+  
   <para>Members can take turns translating and reviewing the files. The Search
   function allows them to filter the Editor pane on contents translated by a
   given person, or on contents translated after or before a given time,

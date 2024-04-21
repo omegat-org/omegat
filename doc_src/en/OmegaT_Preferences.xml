@@ -774,7 +774,7 @@
 	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
 		<term
 		id="dialogs.preferences.external.search.enable.project.specific.commands.title"><option>Allow
-		local external search commands</option></term>
+		locally-defined external search commands</option></term>
 
 		<listitem>
 		  <warning>
@@ -1647,7 +1647,7 @@ ${filePath}></programlisting></para>
 	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
 		<term
 		id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Allow
-		local post-processing commands</option></term>
+		locally-defined post-processing commands</option></term>
 
 		<listitem>
 		  <warning>

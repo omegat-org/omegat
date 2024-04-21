@@ -849,9 +849,10 @@
 
 	  <para>You have enabled the <link
 	  linkend="dialog.preferences.auto.completion">auto-completion</link> to
-	  automatically display not only history predictions, but also glossary
-	  terms, and pre-defined short strings, which can be entered with simple
-	  arrow navigation.</para>
+	  automatically display not only word completions and word sequences
+	  predictions based on your translation history, but also glossary terms,
+	  and pre-defined short strings, which can be entered with simple arrow
+	  navigation.</para>
 		
       <para>You then reach a revised section of the text where the
       <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>

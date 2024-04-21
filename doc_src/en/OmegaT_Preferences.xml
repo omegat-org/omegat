@@ -622,8 +622,9 @@
 	<para>Click on <guilabel>Character Table</guilabel> to set the Character
 	table auto-completer options.</para>
 
-	<para>Click on <guilabel>Enable history completion</guilabel> or
-	<guilabel>Enable history prediction</guilabel> to set history based
+	<para>Click on <guilabel>Enable word completion based on translation
+	history</guilabel> or <guilabel>Enable word sequences prediction based on
+	translation history</guilabel> to enable translation history based
 	completions.</para>
 
 	<note>

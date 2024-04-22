@@ -239,7 +239,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.doc?"), new Instance("*.dotx"), new Instance("*.xls?"),
+        return new Instance[] { new Instance("*.doc?"), new Instance("*.dotx"), //new Instance("*.xls?"),
                 new Instance("*.ppt?"), new Instance("*.vsdx") };
     }
 

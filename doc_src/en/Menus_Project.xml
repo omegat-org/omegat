@@ -325,9 +325,8 @@
 			  endterm="project.folder.source.title"/> folder.</para>
 
               <para>Opens the file in the associated application if the file exists.</para>
-              <note><para>If you hold down the ALT key while selecting the menu
-              item, the folder enclosing the file will be opened
-              instead.</para></note>
+              <note><para>Holding down the <keycap>Alt</keycap> key while selecting this menu
+              item opens the containing folder instead.</para></note>
 			</listitem>
 		  </varlistentry>
 
@@ -339,9 +338,8 @@
 			  endterm="project.folder.target.title"/> folder.</para>
 
               <para>Opens the file in the associated application if the file exists.</para>
-              <note><para>If you hold down the ALT key while selecting the menu
-              item, the folder enclosing the file will be opened
-              instead.</para></note>
+              <note><para>Holding down the <keycap>Alt</keycap> key while selecting this menu
+              item opens the containing folder instead.</para></note>
 			</listitem>
 		  </varlistentry>
 
@@ -353,9 +351,8 @@
 			  endterm="project.folder.glossary.title"/> folder.</para>
 
               <para>Opens the file in the associated application if the file exists.</para>
-              <note><para>If you hold down the ALT key while selecting the menu
-              item, the folder enclosing the file will be opened
-              instead.</para></note>
+              <note><para>Holding down the <keycap>Alt</keycap> key while selecting this menu
+              item opens the containing folder instead.</para></note>
 			</listitem>
 		  </varlistentry>
 		</variablelist>

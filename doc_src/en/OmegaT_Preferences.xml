@@ -623,7 +623,7 @@
 	table auto-completer options.</para>
 
 	<para>Click on <guilabel>Enable word completion based on translation
-	history</guilabel> or <guilabel>Enable word sequences prediction based on
+	history</guilabel> or <guilabel>Enable word sequence prediction based on
 	translation history</guilabel> to enable translation history based
 	completions.</para>
 

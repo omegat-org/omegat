@@ -1171,12 +1171,12 @@
             </row>
 
             <row>
-              <entry>Auto-Completion/Word Completions from History</entry>
+              <entry>Auto-Completion/Word Completion from History</entry>
               <entry>optionsAutoCompleteHistoryCompletionMenuItem</entry>
             </row>
 
             <row>
-              <entry>Auto-Completion/Word Sequences Predictions from History</entry>
+              <entry>Auto-Completion/Word Sequence Prediction from History</entry>
               <entry>optionsAutoCompleteHistoryPredictionMenuItem</entry>
             </row>
 

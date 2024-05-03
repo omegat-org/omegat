@@ -58,6 +58,14 @@ public class AboutDialog extends JDialog {
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
+    public static final String DIALOG_NAME = "about_dialog";
+    public static final String OK_BUTTON_NAME = "about_dialog_ok_button";
+    public static final String ABOUT_TEXT_NAME = "about_dialog_about_text";
+    public static final String VERSION_LABEL_NAME = "about_dialog_version_label";
+    public static final String MEMORY_USAGE_LABEL_NAME = "about_dialog_memory_usage_label";
+    public static final String JAVA_VERSION_LABEL_NAME = "about_dialog_java_version_label";
+    public static final String LICENSE_BUTTON_NAME = "about_dialog_license_button";
+    public static final String COPY_SUPPORT_INFO_BUTTON = "about_dialog_copy_support_info_button";
 
     /** Creates new form AboutDialog */
     public AboutDialog(Frame parent) {
@@ -66,6 +74,15 @@ public class AboutDialog extends JDialog {
         StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
+
+        setName(DIALOG_NAME);
+        licenseButton.setName(LICENSE_BUTTON_NAME);
+        okButton.setName(OK_BUTTON_NAME);
+        abouttext.setName(ABOUT_TEXT_NAME);
+        versionLabel.setName(VERSION_LABEL_NAME);
+        memoryusage.setName(MEMORY_USAGE_LABEL_NAME);
+        javaversion.setName(JAVA_VERSION_LABEL_NAME);
+        copySupportInfoButton.setName(COPY_SUPPORT_INFO_BUTTON);
 
         StaticUIUtils.setCaretUpdateEnabled(abouttext, false);
         abouttext.setText(StringUtil.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"), getContributors(),

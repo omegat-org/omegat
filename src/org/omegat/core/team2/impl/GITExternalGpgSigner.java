@@ -53,11 +53,11 @@ import org.eclipse.jgit.util.FS;
 import org.eclipse.jgit.util.StringUtils;
 import org.eclipse.jgit.util.SystemReader;
 import org.eclipse.jgit.util.TemporaryBuffer;
+import tokyo.northside.logging.ILogger;
 
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
-import tokyo.northside.logging.ILogger;
 
 public class GITExternalGpgSigner extends GpgSigner {
 
@@ -202,8 +202,7 @@ public class GITExternalGpgSigner extends GpgSigner {
             // git config gpg.program
             // Use this custom program instead of "gpg" found on $PATH when making or verifying a PGP signature.
             GpgConfig config = new GpgConfig(new Config());
-            String program = config.getProgram();
-            object.setGpgSignature(new GpgSignature(signWithGpg(object.build(), keySpec, program)));
+            object.setGpgSignature(new GpgSignature(signWithGpg(config, object.build(), keySpec)));
         } catch (IOException e) {
             throw new JGitInternalException(e.getMessage(), e);
         }
@@ -282,12 +281,12 @@ public class GITExternalGpgSigner extends GpgSigner {
         }
     }
 
-    private byte[] signWithGpg(byte[] data, String keySpec, String gpgProgram)
+    private byte[] signWithGpg(GpgConfig config, byte[] data, String keySpec)
             throws IOException, CanceledException {
         // Sign an object with an external GPG executable. GPG handles
         // passphrase entry, including gpg-agent and native keychain
         // integration.
-        String program = gpgProgram;
+        String program = config.getProgram();
         if (StringUtils.isEmptyOrNull(program)) {
             program = FROM_PATH.getGpg();
             if (StringUtils.isEmptyOrNull(program)) {
@@ -330,7 +329,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                     GpgSignatureVerifier verifier = factory.getVerifier();
                     try {
                         GpgSignatureVerifier.SignatureVerification verification = verifier
-                                .verify(data, fromGpg);
+                                .verify(config, data, fromGpg);
                         isValid = verification != null
                                 && verification.getVerified();
                         if (isValid) {
@@ -345,7 +344,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                 if (!isValid) {
                     throw new IOException(MessageFormat.format(
                             OStrings.getString(ExternalGpgSigner_noSignature),
-                            toString(b)));
+                            b.toString(1000)));
                 }
             }, e -> {
                 // Error handling: parse stderr to figure out whether we have a

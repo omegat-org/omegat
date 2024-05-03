@@ -5,7 +5,7 @@ groovy = "4.0.21"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.16.1"
-commons_text = "1.11.0"
+commons_text = "1.12.0"
 commons_validator = "1.8.0"
 jsoup = "1.17.2"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }

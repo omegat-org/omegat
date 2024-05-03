@@ -107,7 +107,7 @@ import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowUI;
+import org.omegat.gui.main.MainWindowStatusBar;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.notes.NotesTextArea;
@@ -962,12 +962,11 @@ public class EditorController implements IEditor {
         }
 
         StatisticsInfo stat = project.getStatistics();
-
-        final MainWindowUI.StatusBarMode progressMode =
+        final MainWindowStatusBar.StatusBarMode progressMode =
                 Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                        MainWindowUI.StatusBarMode.DEFAULT);
+                        MainWindowStatusBar.StatusBarMode.DEFAULT);
 
-        if (progressMode == MainWindowUI.StatusBarMode.DEFAULT) {
+        if (progressMode == MainWindowStatusBar.StatusBarMode.DEFAULT) {
             StringBuilder pMsg = new StringBuilder(1024).append(" ");
             pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")
                     .append(stat.numberOfTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)

@@ -34,7 +34,9 @@
 package org.omegat.gui.main;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -110,9 +112,9 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  * @author Didier Briel
  */
 @SuppressWarnings("serial")
-public class MainWindow extends JFrame implements IMainWindow {
-
-    public final BaseMainWindowMenu menu;
+public class MainWindow implements IMainWindow {
+    private final JFrame applicationFrame;
+    public BaseMainWindowMenu menu;
 
     /**
      * The font for main window (source and target text) and for match and
@@ -123,69 +125,21 @@ public class MainWindow extends JFrame implements IMainWindow {
     /** Set of all open search windows. */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    protected JLabel lengthLabel;
-    protected JLabel progressLabel;
-    protected JLabel statusLabel;
-    protected JLabel lockInsertLabel;
+    protected MainWindowStatusBar mainWindowStatusBar;
 
     protected DockingDesktop desktop;
 
     /** Creates new form MainWindow */
     @SuppressWarnings("unchecked")
     public MainWindow() throws IOException {
-        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
-
-        // Load Menu extension
-        Class<? extends BaseMainWindowMenu> menuClass;
-        menuClass = (Class<? extends BaseMainWindowMenu>) UIManager.get(UIDesignManager.menuClassID);
-        if (menuClass != null) {
-            BaseMainWindowMenu menu1;
-            try {
-                menu1 = menuClass.getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                                .newInstance(this, mainWindowMenuHandler);
-            } catch (Exception e) {
-                // fall back to default when loading failed.
-                menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
-            }
-            menu = menu1;
-        } else {
-            // Default menu.
-            menu = new MainWindowMenu(this, mainWindowMenuHandler);
-        }
-        setJMenuBar(menu.mainMenu);
-        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent we) {
-                Core.getEditor().windowDeactivated();
-            }
-        });
-
-        // Load toolbar extension
-        Class<? extends JPanel> toolbarClass = (Class<? extends JPanel>) UIManager.get(UIDesignManager.toolbarClassID);
-        if (toolbarClass != null) {
-            try {
-                getContentPane().add(toolbarClass.getDeclaredConstructor(MainWindow.class,
-                        MainWindowMenuHandler.class)
-                        .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                NoSuchMethodException ignored) {
-            }
-        }
+        applicationFrame = new JFrame();
+        applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        initMainMenu();
 
         // load default font from preferences
         font = FontUtil.getScaledFont();
-
-        getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
-        pack();
-        getContentPane().add(MainWindowUI.createStatusBar(this), BorderLayout.SOUTH);
-
-        StaticUIUtils.setWindowIcon(this);
+        initDockingAndStatusBar();
+        StaticUIUtils.setWindowIcon(applicationFrame);
 
         CoreEvents.registerProjectChangeListener(eventType -> {
             updateTitle();
@@ -229,11 +183,75 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
     }
 
+    @SuppressWarnings("unchecked")
+    private void initMainMenu() {
+        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
+
+        // Load Menu extension
+        Object menuClass = UIManager.get(UIDesignManager.menuClassID);
+        if (menuClass != null) {
+            BaseMainWindowMenu menu1;
+            try {
+                menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
+                        .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
+                        .newInstance(this, mainWindowMenuHandler);
+            } catch (Exception e) {
+                // fall back to default when loading failed.
+                menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
+            }
+            menu = menu1;
+        } else {
+            // Default menu.
+            menu = new MainWindowMenu(this, mainWindowMenuHandler);
+        }
+        applicationFrame.setJMenuBar(menu.mainMenu);
+
+        applicationFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                mainWindowMenuHandler.projectExitMenuItemActionPerformed();
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+                Core.getEditor().windowDeactivated();
+            }
+        });
+
+        // Load toolbar extension
+        Object toolbarClass = UIManager.get(UIDesignManager.toolbarClassID);
+        if (toolbarClass != null) {
+            try {
+                applicationFrame.getContentPane()
+                        .add((Component) ((Class<?>) toolbarClass)
+                                .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
+                                .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                    | NoSuchMethodException ignored) {
+            }
+        }
+    }
+
+    /**
+     * Create docking desktop panel and status bar.
+     */
+    private void initDockingAndStatusBar() {
+        desktop = new DockingDesktop();
+        desktop.addDockableStateWillChangeListener(event -> {
+            if (event.getFutureState().isClosed()) {
+                event.cancel();
+            }
+        });
+        applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
+        mainWindowStatusBar = new MainWindowStatusBar();
+        applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
+        applicationFrame.pack();
+    }
+
     /**
      * {@inheritDoc}
      */
     public JFrame getApplicationFrame() {
-        return this;
+        return applicationFrame;
     }
 
     /**
@@ -257,6 +275,16 @@ public class MainWindow extends JFrame implements IMainWindow {
         desktop.addDockable(pane);
     }
 
+    @Override
+    public void setCursor(final Cursor cursor) {
+        applicationFrame.setCursor(cursor);
+    }
+
+    @Override
+    public Cursor getCursor() {
+        return applicationFrame.getCursor();
+    }
+
     /**
      * Sets the title of the main window appropriately
      */
@@ -265,7 +293,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         if (Core.getProject().isProjectLoaded()) {
             s += " :: " + Core.getProject().getProjectProperties().getProjectName();
         }
-        setTitle(s);
+        applicationFrame.setTitle(s);
     }
 
     /** insert current fuzzy match or selection at cursor position */
@@ -374,7 +402,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             @Override
             public void run() {
-                statusLabel.setText(msg);
+                mainWindowStatusBar.setStatusLabel(msg);
             }
         });
     }
@@ -403,9 +431,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         // clear the message after 10 seconds
         String localizedString = getLocalizedString(messageKey, params);
         Timer timer = new Timer(10_000, evt -> {
-            String text = statusLabel.getText();
+            String text = mainWindowStatusBar.getStatusLabel();
             if (localizedString.equals(text)) {
-                statusLabel.setText(null);
+                mainWindowStatusBar.setStatusLabel(null);
             }
         });
         timer.setRepeats(false); // one-time only
@@ -419,7 +447,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      *            message text
      */
     public void showProgressMessage(String messageText) {
-        progressLabel.setText(messageText);
+        mainWindowStatusBar.setProgressLabel(messageText);
     }
 
     /*
@@ -428,7 +456,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @param tooltipText tooltip text
      */
     public void setProgressToolTipText(String toolTipText) {
-        progressLabel.setToolTipText(toolTipText);
+        mainWindowStatusBar.setProgressToolTip(toolTipText);
     }
 
     /**
@@ -438,12 +466,12 @@ public class MainWindow extends JFrame implements IMainWindow {
      *            message text
      */
     public void showLengthMessage(String messageText) {
-        lengthLabel.setText(messageText);
+        mainWindowStatusBar.setLengthLabel(messageText);
     }
 
     public void showLockInsertMessage(String messageText, String toolTip) {
-        lockInsertLabel.setText(messageText);
-        lockInsertLabel.setToolTipText(toolTip);
+        mainWindowStatusBar.setLockInsertLabel(messageText);
+        mainWindowStatusBar.setLockInsertToolTipText(toolTip);
     }
 
     // /////////////////////////////////////////////////////////////
@@ -489,9 +517,9 @@ public class MainWindow extends JFrame implements IMainWindow {
             });
             lastDialogKey = warningKey;
 
-            statusLabel.setText(messages[0]);
+            mainWindowStatusBar.setStatusLabel(messages[0]);
 
-            JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
+            JOptionPane.showMessageDialog(applicationFrame, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
         });
     }
@@ -509,13 +537,13 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
 
             String[] messages = msg.split("\\n");
-            statusLabel.setText(messages[0]);
+            mainWindowStatusBar.setStatusLabel(messages[0]);
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));
             Arrays.stream(messages).forEach(m -> {
                 JLabel jlabel = new JLabel(m);
-                jlabel.setAlignmentX(LEFT_ALIGNMENT);
+                jlabel.setAlignmentX(Component.LEFT_ALIGNMENT);
                 pane.add(jlabel);
             });
 
@@ -529,7 +557,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 JScrollPane jScrollPane = new JScrollPane(message,
                         ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                         ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                jScrollPane.setAlignmentX(LEFT_ALIGNMENT);
+                jScrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
                 jScrollPane.setPreferredSize(new Dimension(800, 200));
                 jScrollPane.getVerticalScrollBar().setValue(0);
                 pane.add(jScrollPane);
@@ -542,11 +570,11 @@ public class MainWindow extends JFrame implements IMainWindow {
                     Toolkit.getDefaultToolkit().getSystemClipboard()
                             .setContents(new StringSelection(clipboardMsg), null);
                 });
-                jbutton.setAlignmentX(LEFT_ALIGNMENT);
+                jbutton.setAlignmentX(Component.LEFT_ALIGNMENT);
                 pane.add(jbutton);
             }
 
-            JOptionPane.showMessageDialog(MainWindow.this, pane, OStrings.getString("TF_ERROR"),
+            JOptionPane.showMessageDialog(applicationFrame, pane, OStrings.getString("TF_ERROR"),
                     JOptionPane.ERROR_MESSAGE);
         });
     }
@@ -558,7 +586,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         UIThreadsUtil.mustBeSwingThread();
 
         // lock application frame
-        setEnabled(false);
+        applicationFrame.setEnabled(false);
         for (Frame f : Frame.getFrames()) {
             f.setEnabled(false);
         }
@@ -600,7 +628,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             f.setEnabled(true);
         }
         // unlock application frame
-        setEnabled(true);
+        applicationFrame.setEnabled(true);
     }
 
     /**
@@ -621,11 +649,11 @@ public class MainWindow extends JFrame implements IMainWindow {
      */
     public int showConfirmDialog(Object message, String title, int optionType, int messageType)
             throws HeadlessException {
-        return JOptionPane.showConfirmDialog(this, message, title, optionType, messageType);
+        return JOptionPane.showConfirmDialog(applicationFrame, message, title, optionType, messageType);
     }
 
     public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(this, message);
+        JOptionPane.showMessageDialog(applicationFrame, message);
     }
 
     /**

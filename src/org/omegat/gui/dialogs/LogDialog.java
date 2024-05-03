@@ -57,6 +57,9 @@ public class LogDialog extends javax.swing.JDialog {
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
+    public static final String DIALOG_NAME = "log_dialog";
+    public static final String OK_BUTTON_NAME = "log_dialog_ok_button";
+    public static final String LOG_TEXTPANE_NAME = "log_dialog_log_textpane";
 
     private int returnStatus = RET_CANCEL;
 
@@ -68,6 +71,9 @@ public class LogDialog extends javax.swing.JDialog {
         initComponents();
 
         setTitle(OStrings.getString("LOGDIALOG_TITLE") + " " + Log.getLogFileName());
+        setName(DIALOG_NAME);
+        okButton.setName(OK_BUTTON_NAME);
+        logTextPane.setName(LOG_TEXTPANE_NAME);
 
         StaticUIUtils.setEscapeClosable(this);
 

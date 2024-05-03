@@ -106,7 +106,7 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
-public final class MainWindowMenuHandler {
+public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     private final MainWindow mainWindow;

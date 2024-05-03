@@ -110,19 +110,22 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     private static final Logger LOGGER = Logger.getLogger(BaseMainWindowMenu.class.getName());
 
+    public static final String HELP_MENU = "help_menu";
+    public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
+
     /** MainWindow instance. */
-    protected final MainWindow mainWindow;
+    protected final IMainWindow mainWindow;
 
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
 
     /** MainWindow menu handler instance. */
-    protected final MainWindowMenuHandler mainWindowMenuHandler;
+    protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
 
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
-    public BaseMainWindowMenu(final MainWindow mainWindow,
-            final MainWindowMenuHandler mainWindowMenuHandler) {
+    public BaseMainWindowMenu(final IMainWindow mainWindow,
+                              final BaseMainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
@@ -204,6 +207,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         toolsMenu = createMenu("TF_MENU_TOOLS", MenuExtender.MenuKey.TOOLS);
         optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
         helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
+        helpMenu.setName(HELP_MENU);
 
         projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE");
         projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE");
@@ -410,6 +414,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS");
         helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT");
+        helpAboutMenuItem.setName(HELP_ABOUT_MENUITEM);
         helpLastChangesMenuItem = createMenuItem("TF_MENU_HELP_LAST_CHANGES");
         helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG");
         helpUpdateCheckMenuItem = createMenuItem("TF_MENU_HELP_CHECK_FOR_UPDATES");

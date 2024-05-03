@@ -1025,7 +1025,7 @@ public final class MainWindowMenuHandler {
      * Shows About dialog
      */
     public void helpAboutMenuItemActionPerformed() {
-        new AboutDialog(mainWindow).setVisible(true);
+        new AboutDialog(mainWindow.getApplicationFrame()).setVisible(true);
     }
 
     /**

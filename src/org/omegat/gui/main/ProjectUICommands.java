@@ -945,7 +945,7 @@ public final class ProjectUICommands {
                 Core.getMainWindow().showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
                 Core.getMainWindow().showProgressMessage(
                         Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                                MainWindowUI.StatusBarMode.DEFAULT) == MainWindowUI.StatusBarMode.DEFAULT
+                              MainWindowStatusBar.StatusBarMode.DEFAULT) == MainWindowStatusBar.StatusBarMode.DEFAULT
                                         ? OStrings.getString("MW_PROGRESS_DEFAULT")
                                         : OStrings.getProgressBarDefaultPrecentageText());
 

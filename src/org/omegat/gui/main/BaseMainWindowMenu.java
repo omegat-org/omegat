@@ -653,8 +653,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         String key = "findInProjectReuseLastWindow";
         KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
-        mainWindow.getRootPane().getActionMap().put(key, new AbstractAction() {
+        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Log.logInfoRB("LOG_MENU_CLICK", key);

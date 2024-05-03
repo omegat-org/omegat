@@ -31,36 +31,21 @@
 
 package org.omegat.gui.main;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-
-import org.openide.awt.Mnemonics;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.editor.EditorController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIDesignManager;
 
@@ -89,10 +74,6 @@ public final class MainWindowUI {
 
     public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
 
-    public enum StatusBarMode {
-        DEFAULT, PERCENTAGE,
-    };
-
     /**
      * Create docking desktop panel.
      */
@@ -110,8 +91,9 @@ public final class MainWindowUI {
     }
 
     /**
-     * Installs a {@link IProjectEventListener} that handles loading, storing, and restoring the main window layout when
-     * a project-specific layout is present.
+     * Installs a {@link IProjectEventListener} that handles loading, storing,
+     * and restoring the main window layout when a project-specific layout is
+     * present.
      */
     public static void handlePerProjectLayouts(final MainWindow mainWindow) {
         PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
@@ -134,7 +116,8 @@ public final class MainWindowUI {
 
         @Override
         public void onApplicationShutdown() {
-            // Project is not closed before shutdown, so we need to handle this separately
+            // Project is not closed before shutdown, so we need to handle this
+            // separately
             // from the onProjectChanged events.
             if (Core.getProject().isProjectLoaded() && didApplyPerProjectLayout) {
                 loadScreenLayoutFromPreferences(mainWindow);
@@ -176,96 +159,18 @@ public final class MainWindowUI {
     }
 
     /**
-     * Create swing UI components for status panel.
-     */
-    public static JPanel createStatusBar(final MainWindow mainWindow) {
-        mainWindow.statusLabel = new JLabel();
-        mainWindow.progressLabel = new JLabel();
-        mainWindow.lengthLabel = new JLabel();
-        mainWindow.lockInsertLabel = new JLabel();
-
-        // Derive small label point size relative to default size; don't hard-code a
-        // point size because it will be wrong for e.g. HiDPI cases.
-        // Factor of 0.85 is based on old assumptions of 13pt default and 11pt small.
-        Font defaultFont = mainWindow.statusLabel.getFont();
-        float smallFontSize = defaultFont.getSize() * 0.85f;
-        mainWindow.statusLabel.setFont(defaultFont.deriveFont(smallFontSize));
-
-        Border border = UIManager.getBorder("OmegaTStatusArea.border");
-
-        final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                StatusBarMode.DEFAULT);
-
-        String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-        String tooltipText = "MW_PROGRESS_TOOLTIP";
-        if (progressMode == StatusBarMode.PERCENTAGE) {
-            statusText = OStrings.getProgressBarDefaultPrecentageText();
-            tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
-        }
-        Mnemonics.setLocalizedText(mainWindow.progressLabel, statusText);
-        mainWindow.progressLabel.setToolTipText(OStrings.getString(tooltipText));
-
-        mainWindow.progressLabel.setBorder(border);
-        mainWindow.progressLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                StatusBarMode[] modes = StatusBarMode.values();
-                StatusBarMode progressMode = Preferences
-                        .getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE, StatusBarMode.DEFAULT);
-                progressMode = modes[(progressMode.ordinal() + 1) % modes.length];
-
-                Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
-
-                String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-                String tooltipText = "MW_PROGRESS_TOOLTIP";
-                if (progressMode == StatusBarMode.PERCENTAGE) {
-                    statusText = OStrings.getProgressBarDefaultPrecentageText();
-                    tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
-                }
-
-                if (Core.getProject().isProjectLoaded()) {
-                    ((EditorController) Core.getEditor()).showStat();
-                } else {
-                    Core.getMainWindow().showProgressMessage(statusText);
-                }
-                ((MainWindow) Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
-            }
-        });
-
-        Mnemonics.setLocalizedText(mainWindow.lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
-        mainWindow.lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));
-        mainWindow.lengthLabel.setBorder(border);
-        mainWindow.lengthLabel.setFocusable(false);
-
-        JPanel statusPanel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        statusPanel2.add(mainWindow.lockInsertLabel);
-        statusPanel2.add(mainWindow.progressLabel);
-        statusPanel2.add(mainWindow.lengthLabel);
-
-        JPanel statusPanel = new JPanel(new BorderLayout());
-        statusPanel.add(mainWindow.statusLabel, BorderLayout.CENTER);
-        statusPanel.add(statusPanel2, BorderLayout.EAST);
-        statusPanel.setBorder(UIManager.getBorder("OmegaTMainWindowBottomMargin.border"));
-
-        Color bgColor = UIManager.getColor("AutoHideButtonPanel.background");
-        if (bgColor != null) {
-            statusPanel.setBackground(bgColor);
-            statusPanel2.setBackground(bgColor);
-        }
-
-        return statusPanel;
-    }
-
-    /**
      * Initialize the size of OmegaT window, then load the layout prefs.
      */
     public static void initializeScreenLayout(MainWindow mainWindow) {
         /**
-         * (23dec22) Set a reasonable default window size assuming a standard"pro" laptop resolution of 1920x1080.
-         * Smaller screens do not need to be considered since OmegaT will just use the whole window size in such cases.
+         * (23dec22) Set a reasonable default window size assuming a
+         * standard"pro" laptop resolution of 1920x1080. Smaller screens do not
+         * need to be considered since OmegaT will just use the whole window
+         * size in such cases.
          */
 
-        // Check the real available space accounting for macOS DOCK, Windows Toolbar, etc.
+        // Check the real available space accounting for macOS DOCK, Windows
+        // Toolbar, etc.
         Rectangle localAvailableSpace = GraphicsEnvironment.getLocalGraphicsEnvironment()
                 .getMaximumWindowBounds();
         int screenWidth = localAvailableSpace.width;
@@ -286,18 +191,19 @@ public final class MainWindowUI {
 
         Rectangle defaultWindowSize = new Rectangle(omegatLeftPosition, 0, omegatWidth, omegatHeight);
 
-        mainWindow.setBounds(defaultWindowSize);
+        mainWindow.getApplicationFrame().setBounds(defaultWindowSize);
         loadScreenLayoutFromPreferences(mainWindow);
 
         // Ensure any "closed" Dockables are visible. These can be newly added
-        // panes not included in an older layout file, or e.g. panes installed by
+        // panes not included in an older layout file, or e.g. panes installed
+        // by
         // plugins.
         UIDesignManager.ensureDockablesVisible(mainWindow.desktop);
     }
 
     /**
-     * Load the main window layout from the global preferences file. Will reset to defaults if global preferences are
-     * not present or if an error occurs.
+     * Load the main window layout from the global preferences file. Will reset
+     * to defaults if global preferences are not present or if an error occurs.
      */
     private static void loadScreenLayoutFromPreferences(MainWindow mainWindow) {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
@@ -309,7 +215,8 @@ public final class MainWindowUI {
     }
 
     /**
-     * Load the main window layout from the specified file. Will reset to defaults if an error occurs.
+     * Load the main window layout from the specified file. Will reset to
+     * defaults if an error occurs.
      */
     private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
@@ -340,7 +247,8 @@ public final class MainWindowUI {
     }
 
     /**
-     * Restores main window layout to the default values (distinct from global preferences).
+     * Restores main window layout to the default values (distinct from global
+     * preferences).
      */
     public static void resetDesktopLayout(MainWindow mainWindow) {
         try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {

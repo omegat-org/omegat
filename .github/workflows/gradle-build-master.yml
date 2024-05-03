@@ -23,10 +23,6 @@ jobs:
     - name: Agree gradle-scan terms
       run: cat ci/gradle/gradle-scan.init.gradle >> settings.gradle
     - uses: gradle/actions/setup-gradle@v3
-      with:
-        build-scan-publish: true
-        build-scan-terms-of-service-url: https://gradle.com/terms-of-service
-        build-scan-terms-of-service-agree: yes
       name: Setup Gradle
       id: setup-gradle
     - name: Run gradle build

@@ -163,6 +163,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 throw new XMLStreamException(
                         OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", "id", "trans-unit"));
             }
+            isFinalState = false;
             try {
                 isFinalState = "final".equals(startElement.getAttributeByName(new QName("state")).getValue()); 
             } catch (Exception e) {
@@ -550,7 +551,11 @@ public class Xliff1Filter extends AbstractXliffFilter {
         }
         if (isTranslated) {
             writer.writeStartElement(namespace, "target");
-            writer.writeAttribute("state", "translated");
+            if (isFinalState) { // if segment is final it should be also final in the result
+                writer.writeAttribute("state", "final");            
+            } else { // add status translated, which was not before
+                writer.writeAttribute("state", "translated");
+            }
             if (targetStartEvent != null) {
                 for (java.util.Iterator<Attribute> iter = targetStartEvent.getAttributes(); iter.hasNext();) {
                     Attribute next = iter.next();

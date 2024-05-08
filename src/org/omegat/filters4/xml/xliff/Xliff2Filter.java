@@ -131,6 +131,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 segId = "1";
             }
             flushedSegment = false;
+            isFinalState = false; 
             try {
                 isFinalState = "final".equals(startElement.getAttributeByName(new QName("state")).getValue()); 
             } catch (Exception e) {

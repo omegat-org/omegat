@@ -25,9 +25,10 @@
 
 package org.omegat.filters;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.nio.file.Files;
@@ -45,8 +46,7 @@ public class DocBookFilterTest extends TestFilterBase {
     @Test
     public void testParse() throws Exception {
         List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
-        boolean c = lines.contains("My String");
-        assertTrue("'My String' not defined'", c);
+        assertThat(lines).as("'My String' should defined'").containsAnyOf("My String");
     }
 
     @Test
@@ -61,26 +61,18 @@ public class DocBookFilterTest extends TestFilterBase {
 
     @Test
     public void testLoadInvalidXml() throws Exception {
-        try {
-            List<String> lines = parse(new DocBookFilter(),
-                    "test/data/filters/docBook/file-DocBookFilter-invalid2.xml");
-        } catch (TranslationException e) {
-            // should contain invalid tag
-            assertTrue(e.getMessage().contains("para"));
-            // should contain invalid filename
-            assertTrue(e.getMessage().contains("file-DocBookFilter-invalid2.xml"));
-            // should contain invalid file's line number
-            assertTrue(e.getMessage().contains("85"));
-            return;
-        }
-        fail("Don't catch expected TranslationException when loading invalid docBook XML.");
+        Throwable t = assertThrows("Don't catch expected TranslationException when loading invalid docBook XML.",
+                TranslationException.class, () -> parse(new DocBookFilter(),
+                "test/data/filters/docBook/file-DocBookFilter-invalid2.xml"));
+        // should contain invalid tag, filename, and its line number
+        assertThat(t.getMessage()).contains("para", "file-DocBookFilter-invalid2.xml", "85");
     }
 
     @Test
     public void testParseIntroLinux() throws Exception {
         List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/Intro-Linux/abook.xml");
-        assertTrue("Message not exist, i.e. entities not loaded",
-                lines.contains("Why should I use an editor?"));
+        assertThat(lines).as("Messages should exist when loading entities")
+                .contains("Why should I use an editor?");
     }
 
     @Test

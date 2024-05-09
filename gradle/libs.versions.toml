@@ -27,6 +27,7 @@ caffeine = "3.1.8"
 wiremock = "3.4.2"
 vldocking = "3.0.5-2"
 xmlunit = "2.10.0"
+assertj = "3.18.1"
 appbundler = "1.2.1"
 supertmxmerge = "2.0.3"
 jasypt = "1.9.3"
@@ -108,7 +109,9 @@ caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.r
 caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}
 wiremock = {group = "org.wiremock", name = "wiremock", version.ref = "wiremock"}
 omegat-vldocking = {group = "org.omegat", name = "vldocking", version.ref = "vldocking"}
-xmlunit-legacy = {group = "org.xmlunit", name = "xmlunit-legacy", version.ref = "xmlunit"}
+xmlunit-core = {group = "org.xmlunit", name = "xmlunit-core", version.ref = "xmlunit"}
+xmlunit-assertj = {group = "org.xmlunit", name = "xmlunit-assertj3", version.ref = "xmlunit"}
+assertj = {group = "org.assertj", name = "assertj-core", version.ref= "assertj"}
 omegat-appbundler = {group = "org.omegat", name = "appbundler", version.ref = "appbundler"}
 madlonkay-supertmxmerge = {group = "org.madlonkay", name = "supertmxmerge", version.ref = "supertmxmerge"}
 jasypt = {group = "org.jasypt", name = "jasypt", version.ref = "jasypt"}
@@ -144,6 +147,7 @@ languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
+xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
 
 [plugins]
 spotbugs = {id = "com.github.spotbugs", version = "6.0.14"}

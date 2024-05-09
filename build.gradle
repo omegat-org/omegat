@@ -1542,6 +1542,8 @@ test {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    minHeapSize = "96m"
+    maxHeapSize = "256m"
 }
 
 tasks.register('testIntegration', JavaExec) {

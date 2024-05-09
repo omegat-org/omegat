@@ -333,7 +333,7 @@ dependencies {
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
 
-    testImplementation(libs.xmlunit.legacy)
+    testImplementation(libs.bundles.xmlunit)
     // LanguageTool unit tests exercise these languages
     testImplementation(libs.bundles.languagetool.tests) {
         exclude group: 'org.slf4j'

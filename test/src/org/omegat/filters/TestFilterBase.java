@@ -28,6 +28,7 @@ package org.omegat.filters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -43,18 +44,12 @@ import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.FileUtils;
-import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
 
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
@@ -77,6 +72,8 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.TMXReader2;
+import org.xmlunit.diff.DefaultNodeMatcher;
+import org.xmlunit.diff.ElementSelectors;
 
 /**
  * Base class for testing filter parsing.
@@ -419,13 +416,9 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     /**
-     * Remove version and toolname, then compare.
+     * Remove a version and tool name, then compare.
      */
     protected void compareTMX(File f1, File f2) throws Exception {
-        XPathExpression exprVersion = XPathFactory.newInstance().newXPath()
-                .compile("/tmx/header/@creationtoolversion");
-        XPathExpression exprTool = XPathFactory.newInstance().newXPath().compile("/tmx/header/@creationtool");
-
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -433,22 +426,12 @@ public abstract class TestFilterBase extends TestCore {
 
         Document doc1 = builder.parse(f1);
         Document doc2 = builder.parse(f2);
-
-        Node n;
-
-        n = (Node) exprVersion.evaluate(doc1, XPathConstants.NODE);
-        n.setNodeValue("");
-
-        n = (Node) exprVersion.evaluate(doc2, XPathConstants.NODE);
-        n.setNodeValue("");
-
-        n = (Node) exprTool.evaluate(doc1, XPathConstants.NODE);
-        n.setNodeValue("");
-
-        n = (Node) exprTool.evaluate(doc2, XPathConstants.NODE);
-        n.setNodeValue("");
-
-        XMLAssert.assertXMLEqual(doc1, doc2);
+        assertThat(doc1).and(doc2)
+                .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+                .withAttributeFilter(attr ->
+                        !("creationtoolversion".equals(attr.getName()) || "creationtool".equals(attr.getName())))
+                .ignoreWhitespace()
+                .areIdentical();
     }
 
     protected void compareXML(File f1, File f2) throws Exception {
@@ -456,7 +439,13 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void compareXML(URL f1, URL f2) throws Exception {
-        XMLAssert.assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        var doc1 = builder.parse(f1.toExternalForm());
+        var doc2 = builder.parse(f2.toExternalForm());
+        assertThat(doc1).and(doc2)
+                .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+                .areIdentical();
     }
 
     protected static class ParsedEntry {
@@ -497,8 +486,7 @@ public abstract class TestFilterBase extends TestCore {
 
     protected void checkMulti(String sourceText, String id, String path, String prev, String next,
             String comment) {
-        assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path), fi.entries.get(fiCount)
-                .getKey());
+        assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path), fi.entries.get(fiCount).getKey());
         assertEquals(comment, fi.entries.get(fiCount).getComment());
         fiCount++;
     }

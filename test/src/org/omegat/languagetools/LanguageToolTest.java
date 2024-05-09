@@ -80,7 +80,7 @@ public class LanguageToolTest {
         JLanguageTool lt = new JLanguageTool(new French());
 
         // example from https://github.com/languagetool-org/languagetool/issues/2852
-        List<RuleMatch> matches = lt.check("Il est par cons\u00E9quent perdue.");
+        List<RuleMatch> matches = lt.check("Elle est par cons\u00E9quent perdus.");
         assertEquals(1, matches.size());
         assertTrue(matches.get(0).getRule() instanceof PatternRule);
     }

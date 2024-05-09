@@ -326,7 +326,7 @@ dependencies {
 
     testFixturesApi(libs.junit4)
     // for http connection test
-    testFixturesApi(libs.wiremock.jre8) {
+    testFixturesApi(libs.wiremock) {
         exclude module: 'guava'
     }
     testFixturesApi(libs.slf4j.api)

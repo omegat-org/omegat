@@ -40,6 +40,7 @@ import java.util.Formatter;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.util.OStrings;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -60,10 +61,14 @@ import gen.core.project.RepositoryMapping;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class HTTPRemoteRepository implements IRemoteRepository2 {
-    private static final ILogger LOGGER = LoggerFactory.getLogger(HTTPRemoteRepository.class);
+    private final ILogger logger;
 
     private RepositoryDefinition config;
     private File baseDirectory;
+
+    public HTTPRemoteRepository() {
+        logger = LoggerFactory.getLogger(HTTPRemoteRepository.class, OStrings.getResourceBundle());
+    }
 
     /**
      * Plugin loader.
@@ -80,7 +85,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
-        LOGGER.atDebug().log("Initialize HTTP remote repository");
+        logger.atDebug().log("Initialize HTTP remote repository");
         config = repo;
         baseDirectory = dir;
     }
@@ -109,14 +114,11 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         }
 
         // out as hex
-        Formatter formatter = new Formatter();
-        try {
+        try (Formatter formatter = new Formatter()) {
             for (byte b : sha1.digest()) {
                 formatter.format("%02x", b);
             }
             return formatter.toString();
-        } finally {
-            formatter.close();
         }
     }
 
@@ -126,7 +128,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             throw new RuntimeException("Not supported");
         }
 
-        LOGGER.atDebug().log("Update to latest");
+        logger.atDebug().log("Update to latest");
         // retrieve all mapped files
         Properties etags = loadETags();
         for (RepositoryMapping m : config.getMapping()) {
@@ -139,12 +141,14 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
     @Override
     public void addForCommit(String path) throws Exception {
-        LOGGER.atDebug().log("Cannot add files for commit for HTTP repositories. Skipping \"{}\".", path);
+        logger.atDebug().setMessage("Cannot add files for commit for HTTP repositories. Skipping \"{0}\".")
+                .addArgument(path).log();
     }
 
     @Override
     public void addForDeletion(String path) throws Exception {
-        LOGGER.atDebug().log("Cannot add files for deletion for HTTP repositories. Skipping \"{}\".", path);
+        logger.atDebug().setMessage("Cannot add files for deletion for HTTP repositories. Skipping \"{0}\".")
+                .addArgument(path).log();
     }
 
     @Override
@@ -159,7 +163,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
-        LOGGER.atDebug().log("Commit not supported for HTTP repositories.");
+        logger.atDebug().log("Commit not supported for HTTP repositories.");
 
         return null;
     }
@@ -171,11 +175,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         Properties props = new Properties();
         File f = new File(baseDirectory, ".etags");
         if (f.exists()) {
-            FileInputStream in = new FileInputStream(f);
-            try {
+            try (FileInputStream in = new FileInputStream(f)) {
                 props.load(in);
-            } finally {
-                in.close();
             }
         }
         return props;
@@ -185,11 +186,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
      * Save all ETags.
      */
     protected void saveETags(Properties props) throws Exception {
-        FileOutputStream out = new FileOutputStream(new File(baseDirectory, ".etags"));
-        try {
+        try (FileOutputStream out = new FileOutputStream(new File(baseDirectory, ".etags"))) {
             props.store(out, null);
-        } finally {
-            out.close();
         }
     }
 
@@ -199,7 +197,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
      */
     protected void retrieve(Properties etags, String file, String url, final File out) throws Exception {
         String etag = etags.getProperty(file);
-        LOGGER.atDebug().setMessage("Retrieve {} into {} with ETag={}").addArgument(url)
+        logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}").addArgument(url)
                 .addArgument(out::getAbsolutePath).addArgument(etag).log();
 
         out.getParentFile().mkdirs();
@@ -212,11 +210,11 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             switch (conn.getResponseCode()) {
             case HttpURLConnection.HTTP_OK:
                 etag = conn.getHeaderField("ETag");
-                LOGGER.atDebug().log("Retrieve {}: 200 with ETag={}", url, etag);
+                logger.atDebug().setMessage("Retrieve {0}: 200 with ETag={1}").addArgument(url).addArgument(etag).log();
                 break;
             case HttpURLConnection.HTTP_NOT_MODIFIED:
                 // not modified - just return
-                LOGGER.atDebug().log("Retrieve {}: not modified", url);
+                logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(url).log();
                 return;
             default:
                 throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
@@ -224,11 +222,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
             // load into .tmp file
             File temp = new File(out.getAbsolutePath() + ".tmp");
-            InputStream in = conn.getInputStream();
-            try {
+            try (InputStream in = conn.getInputStream()) {
                 FileUtils.copyInputStreamToFile(in, temp);
-            } finally {
-                in.close();
             }
 
             // rename into file
@@ -250,7 +245,6 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         } finally {
             conn.disconnect();
         }
-
-        LOGGER.atDebug().log("Retrieve {} finished", url);
+        logger.atDebug().setMessage("Retrieve {0} finished").addArgument(url).log();
     }
 }

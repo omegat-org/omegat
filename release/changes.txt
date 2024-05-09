@@ -1,8 +1,9 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  35 Enhancement
-  55 Bug fixes
+  44 Enhancement
+  69 Bug fixes
+   5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
@@ -32,8 +33,8 @@
   - ResourceBundle Filter: default not to escape Unicode character
   https://sourceforge.net/p/omegat/feature-requests/1716/
 
-  - ResourceBundle Filter: default not to escape Unicode character
-  https://sourceforge.net/p/omegat/feature-requests/1716/
+  -	Make repository connectors as plugin
+  https://sourceforge.net/p/omegat/feature-requests/1715/
 
   - ResourceBundle filter: "Don't translate NOI18N comment" feature optional
   https://sourceforge.net/p/omegat/feature-requests/1713/
@@ -65,11 +66,14 @@
   - Generate JSON format stastics file when save
   https://sourceforge.net/p/omegat/feature-requests/1695/
 
+  - Build System: update gradle version to 7.5.1
+  https://sourceforge.net/p/omegat/feature-requests/1691/
+
   - Generate and compile TXT and JSON file when committing target files
   https://sourceforge.net/p/omegat/feature-requests/1690/
 
-  - Build System: update gradle version to 7.5.1
-  https://sourceforge.net/p/omegat/feature-requests/1691/
+  -	Ensure that OmegaT functions properly under Java 17
+  https://sourceforge.net/p/omegat/feature-requests/1682/
 
   - MT: IBM watson accept 50KB text
   https://sourceforge.net/p/omegat/feature-requests/1676/
@@ -79,6 +83,18 @@
 
   - Update LanguageTool to latest version (6.1)
   https://sourceforge.net/p/omegat/feature-requests/1637/
+
+  - Visual confirmation that dictionary was searched
+  https://sourceforge.net/p/omegat/feature-requests/1633/
+
+  - Remove TaaS terminology lookup
+  https://sourceforge.net/p/omegat/feature-requests/1627/
+
+  -	Update to Gradle 7.3.3 or later
+  https://sourceforge.net/p/omegat/feature-requests/1625/
+
+  -	Clarify requirements for DeepL API key
+  https://sourceforge.net/p/omegat/feature-requests/1612/
 
   - Team feature: SSH support id_ecdsa and id_ed25519 for default key
   https://sourceforge.net/p/omegat/feature-requests/1598/
@@ -95,6 +111,9 @@
   - Add Spell checker as a type of plugin
   https://sourceforge.net/p/omegat/feature-requests/1490/
 
+  -	[fuzzy] option in "Check issues"
+  https://sourceforge.net/p/omegat/feature-requests/1451/
+
   - Use repository mappings in a local project
   https://sourceforge.net/p/omegat/feature-requests/1448/
 
@@ -108,6 +127,7 @@
   https://sourceforge.net/p/omegat/feature-requests/1268/
 
   - Support SRX format
+  https://sourceforge.net/p/omegat/feature-requests/98/
 
   - Support M1/M2 Mac natively and distribute with Arm64 JRE.
 
@@ -116,8 +136,41 @@
 
   Bug fixes:
 
+  - OmegaT does not show entreis of stardict-JMDict dictionary
+  https://sourceforge.net/p/omegat/bugs/1255/
+
+  - Short glossary items are not recognized with Korean source
+  https://sourceforge.net/p/omegat/bugs/1250/
+
+  - Debug log in some classes are broken
+  https://sourceforge.net/p/omegat/bugs/1249/
+
+  - XLIFF1 filter produce broken trasnalated file
+  https://sourceforge.net/p/omegat/bugs/1247/
+
+  - sdlxliff filter does not display (some) comments
+  https://sourceforge.net/p/omegat/bugs/1244/
+
+  - When restart GUI on deb/rpm packaged OmegaT, it failed with java not found
+  https://sourceforge.net/p/omegat/bugs/1243/
+
+  - Preference to enable "Project specific External Command" is lost
+  https://sourceforge.net/p/omegat/bugs/1242/
+
+  - Windows launcher does not launch when witout_JRE installer used
+  https://sourceforge.net/p/omegat/bugs/1240/
+
+  - OmegaT does not use cached MT result for translated segments
+  https://sourceforge.net/p/omegat/bugs/1238/
+
+  - Match statistics are affected by fuzzy match threshold
+  https://sourceforge.net/p/omegat/bugs/1236/
+
   - Issue window cause exception
   https://sourceforge.net/p/omegat/bugs/1234/
+
+  - java.nio.charset.UnmappableCharacterException: Input length = 1
+  https://sourceforge.net/p/omegat/bugs/1233/
 
   - Repository mapping with SVN cause error
   https://sourceforge.net/p/omegat/bugs/1232/
@@ -184,6 +237,7 @@
   https://sourceforge.net/p/omegat/bugs/1197/
 
   - Regular expression for custom tags
+  https://sourceforge.net/p/omegat/bugs/1194/
   https://sourceforge.net/p/omegat/bugs/1193/
 
   - Content of notes elements are not displayed correctly with Xliff filter
@@ -259,6 +313,9 @@
   - MT engines show JSON parser error as translated text
   https://sourceforge.net/p/omegat/bugs/1141/
 
+  - Very slow segment switching with a lot of duplicates
+  https://sourceforge.net/p/omegat/bugs/1131/
+
   - Duplication of some files in the distributed packages
   https://sourceforge.net/p/omegat/bugs/1123/
 
@@ -268,11 +325,20 @@
   - Fails to load TM using tags
   https://sourceforge.net/p/omegat/bugs/1090
 
+  - Ctrl+Z incorrectly erases contents of segment Note
+  https://sourceforge.net/p/omegat/bugs/903/
+
+  - Manually assigned shortcuts open parent folders instead of files
+  https://sourceforge.net/p/omegat/bugs/858/
+
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/
 
   - JNA encoding issue on non-UTF-8 platforms
   https://sourceforge.net/p/omegat/bugs/812/
+
+  - The LaTeX filter should use \item as a delimiter
+  https://sourceforge.net/p/omegat/bugs/743/
 
   - Incorrect display of RTL segments in the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/bugs/558/
@@ -282,6 +348,14 @@
 
   - First session message in log not localised
   https://sourceforge.net/p/omegat/bugs/272/
+
+  Localization Updates:
+
+  - Catalan localization updated to 6.1 (UI, readme, documentation)
+  - Dutch localization updated to 6.1 (UI, readme, documentation)
+  - French localization updated to 6.1 (UI, documentation)
+  - Italian localization updated to 6.1 (UI, readme, documentation)
+  - Japanese localization updated to 6.1 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)
@@ -319,7 +393,7 @@
  OmegaT 5.8.0 (2023-06-19)
 ----------------------------------------------------------------------
    4 Removed features
-  41 Enhancements
+  42 Enhancements
   45 Bug fixes
   12 Localization updates
 ----------------------------------------------------------------------
@@ -449,6 +523,9 @@
 
   - Machine translation results sorting
   https://sourceforge.net/p/omegat/feature-requests/1467/
+
+  - Change label for Comments and Notes
+  https://sourceforge.net/p/omegat/feature-requests/1442/
 
   - In mode=console-align, generate tmx with mutiples translations
   https://sourceforge.net/p/omegat/feature-requests/1408/
@@ -878,7 +955,7 @@ OmegaT 5.7.1 (2022-03-19)
  OmegaT 5.4.0 (2020-12-12)
 ----------------------------------------------------------------------
   7 Enhancements
-  8 Bug fixes
+  9 Bug fixes
   10 Localization updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -926,6 +1003,9 @@ OmegaT 5.7.1 (2022-03-19)
 
   - Wrong background colour in dark mode on Linux Mint
   https://sourceforge.net/p/omegat/bugs/1013/
+
+  - Matches ignored if the two locales have the same language subtag
+  https://sourceforge.net/p/omegat/bugs/1015/
 
   - Project Files table does not respect LAF colours
   https://sourceforge.net/p/omegat/bugs/1016/
@@ -1963,7 +2043,7 @@ encountering certain malformed header lines
  OmegaT 4.0.1 (2016-10-03)
 ----------------------------------------------------------------------
   7 Enhancements
-  2 Bug fixes
+  3 Bug fixes
   1 Localization update
 ----------------------------------------------------------------------
 4.0.1 vs 4.0.0 update 1
@@ -1993,6 +2073,9 @@ encountering certain malformed header lines
   - Update LanguageTool to 3.5
 
   Bug fixes:
+
+  - Check on valid path for dictionary missing
+  https://sourceforge.net/p/omegat/bugs/506/
 
   - Relative project paths not normalized
   https://sourceforge.net/p/omegat/bugs/837/

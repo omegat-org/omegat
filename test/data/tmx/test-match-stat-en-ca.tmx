@@ -1,0 +1,2153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+  <header creationtool="Translate Toolkit" creationtoolversion="3.10.1" segtype="sentence" o-tmf="UTF-8" adminlang="en" srclang="en" datatype="PlainText"/>
+  <body>
+    <tu> <!-- match -->
+      <tuv xml:lang="en">
+        <seg>&lt;b&gt;%{target_username}&lt;/b&gt; is now an administrator.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>&lt;b&gt;%{target_username}&lt;/b&gt; és ara administrador.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Are you sure you want &lt;b&gt;%{target_username} (%{target_email})&lt;/b&gt; to be an administrator?</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Esteu segur que voleu que &lt;b&gt;%{target_username}(%{target_email})&lt;/b&gt; sigui administrador?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Grant Admin Access</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Atorga accés d'administrador</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Confirm Admin Account</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Confirma el compte d'administrador</seg>
+      </tuv>
+    </tu>
+    <tu> <!-- partial match -->
+      <tuv xml:lang="en">
+        <seg>Sorry, this account confirmation link is no longer valid. Perhaps your account is
+        already</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquest enllaç ja no és vàlid per a confirmar el compte. Potser el vostre compte ja és actiu?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Continue to</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Continua a %{site_name} </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>We cannot detect if your account was created, please ensure you have cookies enabled.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podem detectar si el vostre compte ha estat creat. Assegureu-vos que teniu les galetes activades.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Your new account is confirmed; you will be redirected to the home page.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>El vostre nou compte està confirmat; us redirigirem a la pàgina principal.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Welcome to %{site_name}!</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Benvingut a %{site_name}!</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>The Google Account ID for this account has changed; staff intervention is required for security reasons. Please contact staff and point them to &lt;br&gt;&lt;a href="https://meta.discourse.org/t/76575"&gt;https://meta.discourse.org/t/76575&lt;/a&gt;</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>L'identificador del compte de Google d'aquest compte ha canviat; es requereix la intervenció de l'equip responsable per motius de seguretat. Poseu-vos en contacte amb l'equip responsable i dirigiu-los a &lt;br&gt; &lt;a href="https://meta.discourse.org/t/76575"&gt;https://meta.discourse.org/t/76575&lt;/a&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>There was an error loading that post.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Hi ha hagut un error en carregar aquesta publicació.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>%{attribute} %{message}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>%{attribute} %{message}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>&lt;b&gt;%{attribute}&lt;/b&gt;: %{message}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>&lt;b&gt;%{attribute}&lt;/b&gt;: %{message}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be accepted</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>s'ha d'acceptar</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't be blank</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot ser buit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>doesn't match %{attribute}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no coincideix amb %{attribute}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>contains the following censored words: %{censored_words}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>conté les següents paraules censurades: %{censored_words}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't have emoji</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot haver-hi emojis</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't be empty</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot ser buit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be equal to %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser igual a %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be even</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser un nombre parell</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is reserved</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és reservat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be greater than %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser més gran que %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be greater than or equal to %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser més gran o igual que %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>has already been used</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ja s'ha fet servir</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is not included in the list</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és inclòs en la llista</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is invalid</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és vàlid</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Invalid boolean.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Booleà no vàlid.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>'%{tz}' is not a valid timezone</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>'%{tz}' no és una zona horària vàlida</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is already included in an existing rule</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ja és inclòs en una regla existent</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>seems unclear, is it a complete sentence?</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no sembla clar. És una frase sencera?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be less than %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser menys de %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be less than or equal to %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser igual o menor que %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't have more than %{max_emojis_count} emoji</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot haver-hi més de %{max_emojis_count} emojis</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is not a number</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és una xifra</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be an integer</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser un nombre enter</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be odd</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser un nombre senar</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be other than %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser diferent de %{count}</seg>
+      </tuv>
+    </tu>
+
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Validation failed: %{errors}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha fallat la validació: %{errors}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Cannot delete record because a dependent %{record} exists</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No es pot suprimir el registre perquè existeix un %{record} que en depèn.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Cannot delete record because dependent %{record} exist</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No es pot suprimir el registre perquè existeix %{record} que en depèn.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>has already been taken</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ja ha estat agafat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too long (maximum is %{count} character)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa llarg (el màxim són %{count} caràcter)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too long (maximum is %{count} characters)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa llarg (el màxim són %{count} caràcters)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is limited to %{max} characters; you entered %{length}.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és limitat a %{max} caràcters; n'heu introduït %{length}.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too short (minimum is %{count} character)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa curt (el mínim és %{count} caràcter)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too short (minimum is %{count} characters)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa curt (el mínim són %{count} caràcters)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the wrong length (should be %{count} character)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>té una mida errònia (hauria de contenir %{count} caràcter)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the wrong length (should be %{count} characters)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>té una longitud errònia (hauria de contenir %{count} caràcters)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot select a category used in another list.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu triar una categoria emprada en una altra llista.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot enable usage of the S3 inventory unless you've enabled S3 uploads.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu habilitar l'inventari a S3 si no heu habilitat la càrrega a S3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You specified a category that does not exist</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Heu especificat una categoria que no existeix</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot use S3 as backup location unless you've provided the '%{setting_name}'.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu fer serivr S3 com a localització de còpia de seguretat si no heu proporcionat el '%{setting_name}'.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot use the same bucket for 's3_upload_bucket' and 's3_backup_bucket'. Choose a different bucket or use a different path for each bucket.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu fer servir el mateix bucket per a 's3_upload_bucket' i 's3_backup_bucket'. Trieu un bucket diferent o feu servir un camí diferent per a cada bucket.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot enable uploads to S3 unless you've provided the 's3_upload_bucket'.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu activar càrregues a S3 si no heu proporcionat el 's3_upload_bucket'.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>There were problems with the following fields:</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Hi ha hagut problemes amb els següents camps:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>%{count} error prohibited this %{model} from being saved</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>%{count} errors ha impedit desar aquest %{model} </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>%{count} errors prohibited this %{model} from being saved</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>%{count} errors han impedit desar aquest %{model} </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Category Name</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Nom de la categoria</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Body</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Cos</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Category</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Categoria</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Featured Link</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Enllaç destacat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Title</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Títol</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>About Me</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Quant a mi</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>The Google Account ID for this account has changed; staff intervention is required for security reasons. Please contact staff and point them to &lt;br&gt;&lt;a href="https://meta.discourse.org/t/76575"&gt;https://meta.discourse.org/t/76575&lt;/a&gt;</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>L'identificador del compte de Google d'aquest compte ha canviat; es requereix la intervenció de l'equip responsable per motius de seguretat. Poseu-vos en contacte amb l'equip responsable i dirigiu-los a &lt;br&gt; &lt;a href="https://meta.discourse.org/t/76575"&gt;https://meta.discourse.org/t/76575&lt;/a&gt;</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>There was an error loading that post.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Hi ha hagut un error en carregar aquesta publicació.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>%{attribute} %{message}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>%{attribute} %{message}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>&lt;b&gt;%{attribute}&lt;/b&gt;: %{message}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>&lt;b&gt;%{attribute}&lt;/b&gt;: %{message}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be accepted</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>s'ha d'acceptar</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't be blank</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot ser buit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>doesn't match %{attribute}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no coincideix amb %{attribute}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>contains the following censored words: %{censored_words}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>conté les següents paraules censurades: %{censored_words}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't have emoji</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot haver-hi emojis</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't be empty</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot ser buit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be equal to %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser igual a %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be even</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser un nombre parell</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is reserved</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és reservat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be greater than %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser més gran que %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be greater than or equal to %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser més gran o igual que %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>has already been used</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ja s'ha fet servir</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is not included in the list</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és inclòs en la llista</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is invalid</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és vàlid</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Invalid boolean.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Booleà no vàlid.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>'%{tz}' is not a valid timezone</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>'%{tz}' no és una zona horària vàlida</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is already included in an existing rule</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ja és inclòs en una regla existent</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>seems unclear, is it a complete sentence?</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no sembla clar. És una frase sencera?</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be less than %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser menys de %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be less than or equal to %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser igual o menor que %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>can't have more than %{max_emojis_count} emoji</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no pot haver-hi més de %{max_emojis_count} emojis</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is not a number</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és una xifra</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be an integer</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser un nombre enter</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be odd</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser un nombre senar</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be other than %{count}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser diferent de %{count}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be blank</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser buit</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Validation failed: %{errors}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha fallat la validació: %{errors}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Cannot delete record because a dependent %{record} exists</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No es pot suprimir el registre perquè existeix un %{record} que en depèn.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Cannot delete record because dependent %{record} exist</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No es pot suprimir el registre perquè existeix %{record} que en depèn.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>has already been taken</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ja ha estat agafat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too long (maximum is %{count} character)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa llarg (el màxim són %{count} caràcter)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too long (maximum is %{count} characters)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa llarg (el màxim són %{count} caràcters)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is limited to %{max} characters; you entered %{length}.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és limitat a %{max} caràcters; n'heu introduït %{length}.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too short (minimum is %{count} character)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa curt (el mínim és %{count} caràcter)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is too short (minimum is %{count} characters)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és massa curt (el mínim són %{count} caràcters)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the wrong length (should be %{count} character)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>té una mida errònia (hauria de contenir %{count} caràcter)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the wrong length (should be %{count} characters)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>té una longitud errònia (hauria de contenir %{count} caràcters)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is not a valid color</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és un color vàlid</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is already in use by another emoji</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ja està en ús per un altre emoji</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Post and reply must belong to the same topic.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Publicació i resposta han de pertànyer al mateix tema.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Sorry, you cannot send a personal message to that user.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu enviar un missatge personal a aquest usuari.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You must select a valid user.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Heu de triar un usuari vàlid.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Reply by email has been disabled.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>La resposta per correu electrònic ha estat deshabilitada.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>One of the users you are sending this message to could not be found.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Un dels usuaris a qui envieu el missatge no s'ha pogut trobar.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You can only send warnings to one user at a time.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Sols podeu enviar avisos a un usuari cada vegada.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You can only attach warnings to personal messages.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Sols podeu adjuntar advertències als missatges personals.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is invalid. URL should include http:// or https://.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és vàlid. L'URL hauria d'incloure http:// o https://.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>must be in the future.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>ha de ser en el futur.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>New registrations are not allowed from your IP address.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No es permeten nous registres des de la vostra adreça IP.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>New registrations are not allowed from your IP address (maximum limit reached). Contact a staff member.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No es permeten registres nous des de la vostra adreça IP (s'ha arribat al límit màxim). Contacteu amb un membre de l'equip responsable.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the same as your password.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és igual que la vostra contrasenya.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is one of the 10000 most common passwords. Please use a more secure password.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és una de les 10000 contrasenyes més freqüents. Feu servir una contrasenya més segura.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the same as your current password.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és igual que la vostra contrasenya actual.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the same as your email. Please use a more secure password.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és igual que el vostre correu electrònic. Feu servir una contrasenya més segura.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the same as your name.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és igual que el vostre nom.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the same as your username. Please use a more secure password.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és igual que la vostra identitat. Feu servir una contrasenya més segura.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>has too many repeated characters. Please use a more secure password.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>té massa caràcters repetits. Trieu una contrasenya més segura.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is the same as your password.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>és igual que la vostra contrasenya.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Reassigning a primary email to another user is not allowed.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No és permès reassignar una adreça de correu primària a un altre usuari.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Too many words for that action</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Massa paraules per a aquesta acció</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>URL is invalid. URL should includes http:// or https://. And no blank is allowed.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>L'URL no és vàlid. L'URL hauria d'incloure http:// o https://. I no es permeten espais en blanc.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot select a category used in another list.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu triar una categoria emprada en una altra llista.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot enable usage of the S3 inventory unless you've enabled S3 uploads.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu habilitar l'inventari a S3 si no heu habilitat la càrrega a S3.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You specified a category that does not exist</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Heu especificat una categoria que no existeix</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot use S3 as backup location unless you've provided the '%{setting_name}'.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu fer serivr S3 com a localització de còpia de seguretat si no heu proporcionat el '%{setting_name}'.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot use the same bucket for 's3_upload_bucket' and 's3_backup_bucket'. Choose a different bucket or use a different path for each bucket.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu fer servir el mateix bucket per a 's3_upload_bucket' i 's3_backup_bucket'. Trieu un bucket diferent o feu servir un camí diferent per a cada bucket.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>You cannot enable uploads to S3 unless you've provided the 's3_upload_bucket'.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podeu activar càrregues a S3 si no heu proporcionat el 's3_upload_bucket'.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>There were problems with the following fields:</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Hi ha hagut problemes amb els següents camps:</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>%{count} error prohibited this %{model} from being saved</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>%{count} errors ha impedit desar aquest %{model} </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>%{count} errors prohibited this %{model} from being saved</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>%{count} errors han impedit desar aquest %{model} </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>sent!</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>enviat!</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>[%{email_prefix}] Confirm new Admin Account</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>[%{email_prefix}] Confirmeu un nou compte d'administració</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Please confirm that you'd like to add **%{target_username} (%{target_email})** as an administrator for your forum.
+
+[Confirm Administrator Account](%{admin_confirm_url})
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Confirmeu que voleu afegir **%{target_username} (%{target_email}) ** com a administrador del fòrum.
+
+[Confirma el compte d’administrador](%{admin_confirm_url})
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Admin Confirmation</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Confirmació d'administració</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Admin Email</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Correu d'administrador</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Invalid token.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Testimoni no vàlid.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Unknown email address.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Adreça de correu electrònic desconeguda.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Send Email</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Envia un correu</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Email Sent</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Correu enviat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Anonymous</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Anònim</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This topic is now a banner. It will appear at the top of every page until it is dismissed by the user.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquest tema és ara un bàner. Apareixerà al començament de cada pàgina fins que l'usuari el descarti.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This topic is no longer a banner. It will no longer appear at the top of every page.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquest tema ja no és un bàner. Ja no apareixerà més al començament de cada pàgina.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Banner Topic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Converteix el tema en bàner</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Regular Topic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Tema habitual</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>(connected)</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>(connectat)</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Failed to revoke your account with %{provider_name}.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No s'ha pogut revocar el vostre compte amb %{provider_name}.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Authentication method does not exist, or has been disabled.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>El mètode d'autenticació no existeix o ha estat deshabilitat. </seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Sorry, we can't find any avatar associated with that email address. Can you try uploading it again?</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No podem trobar cap avatar associat amb aquesta adreça de correu. Proveu de pujar-lo de nou.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>The backup file should be a .tar.gz archive.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>La còpia de seguretat hauria de ser un arxiu .tar.gz.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>The file you are trying to upload already exists.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>El fitxer que intenteu pujar ja existeix.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>The backup filename contains invalid characters. Valid characters are a-z 0-9 . - _.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>El nom de la còpia de seguretat conté caràcters no vàlids. Els caràcters vàlids són a-z 0-9 . - _.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>There is not enough space on disk to upload this backup.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>No hi ha prou espai en el disc per a desar-hi aquesta còpia de seguretat.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>An operation is currently running. Can't start a new job right now.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Hi ha una operació en marxa en aquest moment. Ara no es pot començar una tasca nova.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Received 5 likes on 300 posts</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha rebut 5 'M'agrada' en 300 publicacions</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you receive at least 5 likes on 300 different posts. Wow! The community admires your frequent, high quality contributions to the conversations here.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan rebeu 5 'M'agrada' en 300 publicacions diferents. Molt bé! La comunitat admira les vostres aportacions freqüents i d'alta gran qualitat a les converses!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Admired</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Admirat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Visited 100 consecutive days</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Visitat 100 dies consecutius</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted for visiting 100 consecutive days. That’s more than three months!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix per visitar 100 dies consecutius. Són més de tres mesos!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Aficionado</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aficionat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Active member for a year, posted at least once</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Membre actiu des de fa un any, ha publicat almenys una vegada</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you’ve been a member for a year with at least one post in that year. Thank you for sticking around and contributing to our community. We couldn’t do it without you.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan heu estat membre durant un any amb almenys una publicació durant aquest any. Gràcies per continuar aquí i per contribuir a la comunitat. No podríem fer-ho sense la vostra presència.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Anniversary</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aniversari</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Received 1 like on 20 posts</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha rebut 1 'M'agrada' en 20 publicacions</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you receive at least one like on 20 different posts. The community is enjoying your contributions to the conversations here!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan rebeu 20 'M'agrada' en diferents publicacions. La comunitat gaudeix amb les vostres aportacions a les converses!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Appreciated</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Apreciat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Filled out &lt;a href="%{base_uri}/my/preferences/profile"&gt;profile&lt;/a&gt; information</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Informació del &lt;a href="%{base_uri}/my/preferences/profile"&gt;perfil&lt;/a&gt; emplenada</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted for filling out &lt;a href="%{base_uri}/my/preferences/profile"&gt;your user profile&lt;/a&gt; and selecting a profile picture. Letting the community know a bit more about who you are and what you’re interested in makes for a better, more connected community. Join us!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia és concedida per omplir &lt;a href="%{base_uri}/my/preferences/profile"&gt;el perfil d'usuari&lt;/a&gt; i seleccionar una foto de perfil. Permetre que la comunitat sàpiga una mica més sobre qui sou i el que us interessa contribueix a una comunitat millor i més connectada. Uniu-vos!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Autobiographer</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Autobiògraf</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>%{display_name} badge on %{site_title}</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>%{display_name} insígnia en %{site_title}</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>&lt;a href="https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/"&gt;Granted&lt;/a&gt; all essential community functions</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>&lt;a href="https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/"&gt;Concedides&lt;/a&gt; totes les funcions essencials de la comunitat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you reach trust level 1. Thanks for sticking around and reading a few topics to learn what our community is about. New user restrictions have been lifted; you’ve been granted all essential community abilities, such as personal messaging, flagging, wiki editing, and the ability to post multiple images and links.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan arribeu al nivell de confiança 1. Gràcies per continuar per aquí i per llegir uns quants temes per a conèixer la comunitat. S'han aixecat les restriccions a usuaris nous, i se us han concedit totes les capacitats essencials de la comunitat, com ara la missatgeria personal, el marcatge amb banderes, l'edició de wiki i la possibilitat de publicar diverses imatges i enllaços.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Basic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Bàsic</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Invited 3 basic users</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Heu convidat 3 usuaris bàsics</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you’ve invited 3 people who subsequently spent enough time on the site to become basic users. A vibrant community needs a regular infusion of newcomers who regularly participate and add new voices to the conversations.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan heu convidat 3 persones que posteriorment han passat prou temps al lloc web per a convertir-se en usuaris bàsics. Una comunitat vibrant necessita una entrada regular de nouvinguts que hi participen habitualment i aporten veus noves a les converses.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Campaigner</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Activista</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Invited 5 members</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>S'han convidat 5 membres</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you’ve invited 5 people who subsequently spent enough time on the site to become full members. Wow! Thanks for expanding the diversity of our community with new members!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan heu convidat 5 persones que posteriorment han passat prou temps en el lloc web per a convertir-se en membres plens. Bé! Gràcies per ampliar la diversitat de la comunitat amb nous membres.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Champion</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Campió</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you use all %{max_likes_per_day} of your daily likes for 20 days. Wow! You’re a role model for encouraging your fellow community members!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan utilitzeu tots els vostres %{max_likes_per_day} 'm'agrada' diaris durant vint dies. Oh! Sou un model per a animar els companys de comunitat!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Crazy in Love</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Boig d'amor</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Visited 365 consecutive days</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Heu visitat 365 dies consecutius</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted for visiting 365 consecutive days. Wow, an entire year!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix per visitar 365 dies consecutius. Caram, un any sencer!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Devotee</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Devot</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First post edit</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primera edició de publicació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you edit one of your posts. While you won’t be able to edit your posts forever, editing is encouraged — you can improve the formatting, fix small mistakes, or add anything you missed when you originally posted. Edit to make your posts even better!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que editeu una de les vostres publicacions. Tot i que no podreu editar les vostres publicacions per sempre, es recomana editar-les: podeu millorar el format, corregir petits errors o afegir qualsevol cosa que us vau descuidar de fer quan la vau fer la publicació original. Editeu per a millorar les vostres publicacions!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Editor</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Editor</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Has 500 liked posts and gave 1000 likes</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Té 500 publicacions amb 'm'agrada' i ha donat 1.000 'M'agrada'</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you have 500 liked posts and give 1000 or more likes in return. Wow! You’re a model of generosity and mutual appreciation :two_hearts:.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan teniu 500 publicacions amb 'M'agrada' i heu fet 1000 o més 'M'agrada' a canvi. Molt bé! Sou un model de generositat i apreciació mútua :two_hearts:.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Empathetic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Empàtic</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Visited 10 consecutive days</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha visitat el lloc web 10 dies consecutius</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted for visiting 10 consecutive days. Thanks for sticking with us for over a week!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix per visitar 10 dies consecutius. Gràcies per mantenir-vos amb nosaltres durant més d'una setmana.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Enthusiast</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Entusiasta</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Posted an external link with 1000 clicks</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha publicat un enllaç extern amb 1.000 clics</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when a link you shared gets 1000 clicks. Wow! You posted a link that significantly improved the conversation by adding essential detail, context, and information. Great work!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan l'enllaç que heu compartit obté 1000 clics. Heu publicat un enllaç que ha millorat molt la conversa afegint detalls, context i informació essencials. Bona feina!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Famous Link</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Enllaç famós</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Used an Emoji in a Post</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha fet servir un emoji en una publicació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you add an Emoji to your post :thumbsup:. Emoji let you convey emotion in your posts, from happiness :smiley: to sadness :anguished: to anger :angry: and everything in between :sunglasses:. Just type a : (colon) or press the Emoji toolbar button in the editor to select from hundreds of choices :ok_hand:
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que afegiu un emoji a la vostra publicació :thumbsup:. Els emojis us permeten transmetre emocions en les vostres publicacions, des de  felicitat :smiley: fins a tristesa :anguished: o ira :angry: i qualsevol cosa entremig :sunglasses:.  Només cal que escriviu : (dos punts) o que premeu el botó de la barra d'eines d'emojis en l'editor per a seleccionar entre centenars d'opcions. :ok_hand:
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Emoji</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primer emoji</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Flagged a post</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha marcat amb bandera una publicació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you flag a post. Flagging is how we all help keep this a nice place for everyone. If you notice any posts that require moderator attention for any reason please don’t hesitate to flag. If you see a problem, :flag_black: flag it!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que marqueu amb bandera una publicació. El marcatge és la manera d'ajudar a mantenir aquest lloc web agradable per a tothom. Si observeu qualsevol publicació que requereixi atenció per qualsevol motiu, no dubteu a marcar-la amb bandera. Si veieu un problema, :flag_black: marqueu-lo!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Flag</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primera bandera</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Liked a post</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha fet 'M'agrada' a una publicació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you like a post using the :heart: button. Liking posts is a great way to let your fellow community members know that what they posted was interesting, useful, cool, or fun. Share the love!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan feu 'M'agrada' per primera vegada usant el botó de :heart:. Fer 'M'agrada' a les publicacions és una gran manera de fer saber als membres de la comunitat que el que han publicat us ha resultat interessant o divertit. Compartiu l'amor!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Like</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primer 'M'agrada'</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Added a link to another topic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>S'ha afegit un enllaç a un altre tema</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you add a link to another topic. Linking topics helps fellow readers find interesting related conversations, by showing the connections between topics in both directions. Link freely!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que afegiu un enllaç a un altre tema. Enllaçar temes ajuda la resta de lectors a trobar converses interessants mostrant connexions entre temes en totes dues direccions. Enllaceu a plaer!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Link</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primer enllaç</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Mentioned a user in a post</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>S'ha mencionat un usuari en una publicació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you mention someone’s @username in your post. Each mention generates a notification to that person, so they know about your post. Just begin typing @ (at symbol) to mention any user or, if allowed, group – it’s a convenient way to bring something to their attention.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que mencioneu el nom d'usuari d'algú en la vostra publicació. Cada menció genera una notificació a aquesta persona, de manera que estigui informat de la vostra publicació. Simplement comenceu a escriure @ per a mencionar qualsevol usuari o, si es pot, qualsevol grup. És una manera convenient de cridar l'atenció d'algú.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Mention</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primera menció</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Posted a link that was oneboxed</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Publicat un enllaç en onebox</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you post a link on a line by itself, which automatically expanded into a onebox with a summary, title, and (when available) picture.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que publiqueu un enllaç tot sol en una línia, que s'expandeix automàticament a onebox amb resum, títol i (quan estigui disponible) imatge.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Onebox</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primer onebox</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Quoted a post</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha citat una publicació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you quote a post in your reply. Quoting relevant parts of earlier posts in your reply helps keep discussions connected together and on topic. The easiest way to quote is to highlight a section of a post, and then press any reply button. Quote generously!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que citeu una publicació en la vostra resposta. Citar parts rellevants de les publicacions anteriors en la vostra resposta ajuda a mantenir les discussions connectades i dins del tema. La manera més fàcil de citar és ressaltar una secció d'una publicació i, tot seguit, prémer qualsevol botó de resposta. Citeu amb generositat!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Quote</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primera citació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Replied to a post via email</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>S'ha respost a una publicació per correu</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you reply to a post via email :e-mail:.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix la primera vegada que responeu a una publicació per correu :e-mail:.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Reply By Email</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primera resposta per correu</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Shared a post</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha compartit una publicació</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted the first time you share a link to a reply or topic using the share button. Sharing links is a great way to show off interesting discussions with the rest of the world and grow your community.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan compartiu per primera vegada un enllaç a una resposta o a un tema usant el botó de compartir. Compartir enllaços és una gran manera de mostrar discussions interessants a la resta del món i així fer créixer la nostra comunitat.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First Share</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Primera compartició</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Has 100 liked posts and gave 100 likes</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Té 100 publicacions amb 'm'agrada' i ha donat 100 'm'agrada'</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you have 100 liked posts and give 100 or more likes in return. Thanks for paying it forward!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan teniu 100 publicacions amb 'm'agrada' i heu fet 100 o més 'm'agrada' a canvi. Gràcies per recompensar-ho!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Gives Back</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Retorna a canvi</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Received 25 likes on a reply</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha rebut 25 'M'agrada' en una resposta</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when your reply gets 25 likes. Your reply was exceptional and made the conversation much more interesting.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan la vostra resposta obté 25 'M'agrada'. La vostra resposta ha estat excepcional i ha fet que la conversa fos molt més interessant.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Good Reply</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Bona resposta</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Shared a post with 300 unique visitors</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Publicació compartida amb 300 visitants únics</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted for sharing a link that was clicked by 300 outside visitors. Good work! You’ve shown off a great discussion to a bunch of new people and helped this community grow.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix per haver compartit un enllaç clicat per 300 visitants externs. Bona feina! Heu mostrat una gran discussió a un grup de persones noves i heu ajudat a fer créixer la comunitat.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Good Share</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Bona compartició</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Received 25 likes on a topic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha rebut 25 'M'agrada' en un tema</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when your topic gets 25 likes. You launched a vibrant conversation that the community rallied around.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan el vostre tema obté 25 'M'agrada'. Heu posat en marxa  una conversa vibrant al voltant de la qual s'ha aplegat la comunitat.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Good Topic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Bon tema</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Received 50 likes on a reply</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha rebut 50 'M'agrada' en una resposta</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when your reply gets 50 likes. Wow! Your reply was inspiring, fascinating, hilarious, or insightful and the community loved it!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan la vostra resposta té 50 'M'agrada'. Molt bé! La vostra resposta ha estat inspiradora, fascinant, hilarant o perspicaç, i la comunitat n'està encantada!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Great Reply</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Gran resposta</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Shared a post with 1000 unique visitors</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Publicació compartida amb 1.000 visites úniques</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted for sharing a link that was clicked by 1000 outside visitors. Wow! You’ve promoted an interesting discussion to a huge new audience, and helped us grow our community in a big way!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix per haver compartit un enllaç en el qual han fet clic 1000 visitants externs. Molt bé! Heu promogut un debat interessant a un públic nou i enorme, i ens heu ajudat a fer créixer la comunitat en gran manera!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Great Share</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Gran compartició</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Received 50 likes on a topic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha rebut 50 'M'agrada' en un tema</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when your topic gets 50 likes. You kicked off a fascinating conversation and the community loved the lively discussion that resulted!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan el vostre tema obté 50 'M'agrada'. Heu posat en marxa una conversa fascinant i a la comunitat li ha agradat l'animada discussió que ha sorgit!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Great Topic</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Gran tema</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you use all %{max_likes_per_day} of your daily likes for 5 days. Thanks for taking the time actively encouraging the best conversations every day!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan gasteu tots els %{max_likes_per_day} dels vostres 'M'agrada' diaris durant 5 dies. Gràcies per animar activament les millors converses cada dia.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Higher Love</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Un amor més elevat</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Posted an external link with 300 clicks</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Ha publicat un enllaç extern amb 300 clics</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when a link you shared gets 300 clicks. Thanks for posting a fascinating link that drove the conversation forward and illuminated the discussion!
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan un enllaç que heu compartit obté 300 clics. Gràcies per posar un enllaç tan interessant que ha il·luminat la discussió!
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Hot Link</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Enllaç popular</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>&lt;a href="https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/"&gt;Granted&lt;/a&gt; global edit, pin, close, archive, split and merge, more likes</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>&lt;a href="https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/"&gt;S'ha concedit&lt;/a&gt; permís per a editar globalment, destacar, tancar, arxivar, dividir i combinar, més 'M'agrada'.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>This badge is granted when you reach trust level 4. You’re a leader in this community as selected by staff, and you set a positive example for the rest of the community in your actions and words here. You have the ability to edit all posts, take common topic moderator actions such as pin, close, unlist, archive, split, and merge.
+</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>Aquesta insígnia es concedeix quan arribeu al nivell de confiança 4. Sou un líder d'aquesta comunitat seleccionat per l'equip responsable, i oferiu un exemple positiu per a la resta de la comunitat en les vostres accions i paraules. Teniu la possibilitat d'editar totes les publicacions, prendre accions habituals del moderador de tema com ara destacar temes, tancar-los, fer-los invisibles, arxivar-los, dividir-los i combinar-los.
+</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>is not allowed from that email provider. Please use another email address.</seg>
+      </tuv>
+      <tuv xml:lang="ca">
+        <seg>no és permès d'aquest proveïdor de correu. Feu servir una altra adreça de correu.</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

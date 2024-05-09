@@ -102,6 +102,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         implements IGlossaries, IPaneMenu {
 
+    public static final String TEXTPANE_NAME = "glossary_text_area";
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
     /**
@@ -131,6 +132,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         StaticUIUtils.makeCaretAlwaysVisible(this);
         setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
+        setName(TEXTPANE_NAME);
 
         addMouseListener(mouseListener);
 
@@ -194,6 +196,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     /**
      * Refresh content on glossary file changed.
      */
+    @Override
     public void refresh() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
         if (ste != null) {
@@ -433,6 +436,13 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         });
         menu.add(notify);
         menu.addSeparator();
+        final JMenuItem sortOrderSrcLength = new JCheckBoxMenuItem(
+                OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_SORT_BY_SRC_LENGTH"));
+        sortOrderSrcLength
+                .setSelected(Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false));
+        sortOrderSrcLength.addActionListener(actionEvent -> Preferences
+                .setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, sortOrderSrcLength.isSelected()));
+        menu.add(sortOrderSrcLength);
         final JMenuItem sortOrderLocLength = new JCheckBoxMenuItem(
                 OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_SORT_BY_LENGTH"));
         sortOrderLocLength

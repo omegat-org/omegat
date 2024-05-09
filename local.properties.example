@@ -56,3 +56,10 @@ sourceforgeWebPassword=
 ## equivalent with command line option -PforceSkipDocumentBuild=1 or
 ## an environment variable ORG_GRADLE_PROJECT_forceSkipDocumentBuild=1
 # forceSkipDocumentBuild=1
+
+## Speed-up build process
+## Caution: parallel execution may lead test failures
+org.gradle.configuration-cache=false
+org.gradle.caching=true
+org.gradle.configureondemand=true
+org.gradle.parallel=true

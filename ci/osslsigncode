@@ -15,14 +15,9 @@ bindpaths() {
     done
 }
 
-if type nerdctl &> /dev/null ; then
-    CMD=nerdctl
-elif type docker &> /dev/null ; then
-    CMD=docker
-else
-  echo Please install docker or nerdctl!
-  exit 2
-fi
+CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>1 || CMD="$(type -p nerdctl)"
+echo select container CLI: $CMD
+$CMD info || false
 
 # build container image
 CTX=$(mktemp -d)

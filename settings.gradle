@@ -1,6 +1,13 @@
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.7.0'
-    id 'com.gradle.enterprise' version '3.16.1'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+    id 'com.gradle.develocity' version '3.17.2'
+}
+develocity {
+    buildScan {
+        publishing.onlyIf { "true".equals(System.getProperty("envIsCi")) }
+        termsOfUseUrl = "https://gradle.com/terms-of-service"
+        termsOfUseAgree = "yes"
+    }
 }
 rootProject.name = 'OmegaT'
 include("machinetranslators:apertium",
@@ -10,6 +17,7 @@ include("machinetranslators:apertium",
         "machinetranslators:ibmwatson",
         "machinetranslators:mymemory",
         "machinetranslators:yandex",
+        "machinetranslators:dummy",
         "aligner",
         "theme",
         "spellchecker:hunspell-jmyspell",

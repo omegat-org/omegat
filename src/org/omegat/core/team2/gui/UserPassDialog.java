@@ -46,6 +46,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -82,50 +83,50 @@ public class UserPassDialog extends javax.swing.JDialog {
         usernameField.requestFocusInWindow();
     }
 
+    abstract static class CheckDocumentAction implements DocumentListener {
+
+        @Override
+        public void insertUpdate(final DocumentEvent e) {
+            update();
+        }
+
+        @Override
+        public void removeUpdate(final DocumentEvent e) {
+            update();
+        }
+
+        @Override
+        public void changedUpdate(final DocumentEvent e) {
+            update();
+        }
+
+        abstract void update();
+    }
+
     private void setActions() {
-        usernameField.getDocument().addDocumentListener(new DocumentListener() {
+        usernameField.getDocument().addDocumentListener(new CheckDocumentAction() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                checkCredentials();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                checkCredentials();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                checkCredentials();
+            protected void update() {
+                SwingUtilities.invokeLater(() -> checkCredentials());
             }
         });
-        passwordField.getDocument().addDocumentListener(new DocumentListener() {
+        passwordField.getDocument().addDocumentListener(new CheckDocumentAction() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                checkCredentials();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                checkCredentials();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                checkCredentials();
+            protected void update() {
+                SwingUtilities.invokeLater(() -> checkCredentials());
             }
         });
 
         toggleButton.addActionListener(e -> {
             // Toggle between showing/hiding the password
             if (toggleButton.isSelected()) {
-                passwordField.setEchoChar((char) 0); // Show password in plaintext
-                toggleButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                        "/org/omegat/gui/resources/eye.png")))); // NOI18N
+                passwordField.setEchoChar((char) 0);
+                toggleButton.setIcon(new ImageIcon(
+                        Objects.requireNonNull(getClass().getResource("/org/omegat/gui/resources/eye.png")))); // NOI18N
             } else {
                 passwordField.setEchoChar('●');
-                toggleButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                        "/org/omegat/gui/resources/eye-slash.png")))); // NOI18N
+                toggleButton.setIcon(new ImageIcon(Objects
+                        .requireNonNull(getClass().getResource("/org/omegat/gui/resources/eye-slash.png")))); // NOI18N
             }
         });
     }
@@ -133,20 +134,38 @@ public class UserPassDialog extends javax.swing.JDialog {
     private void checkCredentials() {
         String username = usernameField.getText();
         char[] password = passwordField.getPassword();
-        boolean isValid = !username.trim().isEmpty() && password.length > 0;
-
-        if (isValid) {
-            isValid = username.trim().length() == username.length() && password[0] != ' '
-                    && password[password.length - 1] != ' ';
-            if (!isValid) {
-                setMessage(OStrings.getString("TEAM_USERPASS_EXTRA_SPACE"));
-            }
-        }
-        if (isValid) {
-            resetMessage();
+        boolean isUsernameValid = !username.startsWith(" ") && !username.endsWith(" ");
+        if (!isUsernameValid) {
+            usernamePanel.setBackground(Color.YELLOW);
+            messageArea.setText(OStrings.getString("TEAM_USERPASS_EXTRA_SPACE"));
+            okButton.setEnabled(false);
+            return;
+        } else {
+            usernamePanel.setBackground(mainPanel.getBackground());
         }
 
-        okButton.setEnabled(isValid);
+        // check if the username or password is empty
+        if (username.trim().isEmpty() || password.length == 0) {
+            passwordPanel.setBackground(mainPanel.getBackground());
+            messageArea.setText("");
+            okButton.setEnabled(false);
+            return;
+        }
+
+        // check if the password has a preceding or trailing space character(s)
+        boolean isPasswordValid = password[0] != ' ' && password[password.length - 1] != ' ';
+        if (!isPasswordValid) {
+            passwordPanel.setBackground(Color.YELLOW);
+            messageArea.setText(OStrings.getString("TEAM_USERPASS_EXTRA_SPACE"));
+            okButton.setEnabled(false);
+            return;
+        } else {
+            passwordPanel.setBackground(mainPanel.getBackground());
+        }
+
+        // everything is ok.
+        messageArea.setText("");
+        okButton.setEnabled(true);
     }
 
     /**
@@ -169,15 +188,19 @@ public class UserPassDialog extends javax.swing.JDialog {
         descriptionTextArea = new JTextArea();
         JLabel usernameLabel = new JLabel();
         usernameField = new JTextField();
+        usernameField.setPreferredSize(new Dimension(352, 30));
+        usernamePanel = new JPanel();
         JLabel passwordLabel = new JLabel();
         passwordField = new JPasswordField();
+        passwordField.setPreferredSize(new Dimension(320, 30));
+        passwordPanel = new JPanel();
         toggleButton = new JToggleButton();
         perHostCheckBox = new JCheckBox();
         messageArea = new JTextArea();
         okButton = new JButton();
         JButton cancelButton = new JButton();
-        Icon eyeSlash = new ImageIcon(Objects.requireNonNull(getClass().getResource(
-                "/org/omegat/gui/resources/eye-slash.png")));
+        Icon eyeSlash = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource("/org/omegat/gui/resources/eye-slash.png")));
         toggleButton.setIcon(eyeSlash);
         toggleButton.setDisabledIcon(eyeSlash);
         toggleButton.setMargin(new java.awt.Insets(1, 1, 1, 1));
@@ -225,7 +248,8 @@ public class UserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        mainPanel.add(usernameField, gridBagConstraints);
+        usernamePanel.add(usernameField);
+        mainPanel.add(usernamePanel, gridBagConstraints);
 
         passwordLabel.setLabelFor(passwordField);
         org.openide.awt.Mnemonics.setLocalizedText(passwordLabel, OStrings.getString("LOGIN_PASSWORD")); // NOI18N
@@ -245,12 +269,9 @@ public class UserPassDialog extends javax.swing.JDialog {
         gridBagConstraints.anchor = GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        mainPanel.add(passwordField, gridBagConstraints);
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = GridBagConstraints.WEST;
-        mainPanel.add(toggleButton, gridBagConstraints);
+        passwordPanel.add(passwordField);
+        passwordPanel.add(toggleButton);
+        mainPanel.add(passwordPanel, gridBagConstraints);
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -313,7 +334,9 @@ public class UserPassDialog extends javax.swing.JDialog {
     private JButton okButton;
     private JTextArea descriptionTextArea;
     private JTextField usernameField;
+    private JPanel usernamePanel;
     private JPasswordField passwordField;
+    private JPanel passwordPanel;
     private JCheckBox perHostCheckBox;
     private JTextArea messageArea;
     private JToggleButton toggleButton;
@@ -347,15 +370,5 @@ public class UserPassDialog extends javax.swing.JDialog {
 
     public void setPerHostCheckBoxText(String text) {
         org.openide.awt.Mnemonics.setLocalizedText(perHostCheckBox, text);
-    }
-
-    public void setMessage(String text) {
-        messageArea.setText(text);
-        messageArea.setBackground(Color.red);
-    }
-
-    public void resetMessage() {
-        messageArea.setText("");
-        messageArea.setBackground(mainPanel.getBackground());
     }
 }

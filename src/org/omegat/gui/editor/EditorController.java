@@ -107,8 +107,10 @@ import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowUI;
+import org.omegat.gui.main.MainWindowStatusBar;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.gui.notes.INotes;
+import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.help.Help;
 import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
@@ -581,6 +583,7 @@ public class EditorController implements IEditor {
      * The orientation of the document is all LtR.
      * @return true when the orientation is all RtL. otherwise false.
      */
+    @Override
     public boolean isOrientationAllLtr() {
         return currentOrientation.equals(BiDiUtils.ORIENTATION.ALL_LTR);
     }
@@ -797,7 +800,12 @@ public class EditorController implements IEditor {
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
 
-        Core.getNotes().setNoteText(currentTranslation.note);
+        INotes notes = Core.getNotes();
+        notes.setNoteText(currentTranslation.note);
+        if (notes instanceof NotesTextArea) {
+            // clear undo history.
+            ((NotesTextArea) notes).clearHistory();
+        }
 
         // then add new marks
         markerController.reprocessImmediately(builder);
@@ -954,12 +962,11 @@ public class EditorController implements IEditor {
         }
 
         StatisticsInfo stat = project.getStatistics();
-
-        final MainWindowUI.StatusBarMode progressMode =
+        final MainWindowStatusBar.StatusBarMode progressMode =
                 Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                        MainWindowUI.StatusBarMode.DEFAULT);
+                        MainWindowStatusBar.StatusBarMode.DEFAULT);
 
-        if (progressMode == MainWindowUI.StatusBarMode.DEFAULT) {
+        if (progressMode == MainWindowStatusBar.StatusBarMode.DEFAULT) {
             StringBuilder pMsg = new StringBuilder(1024).append(" ");
             pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")
                     .append(stat.numberOfTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)
@@ -1165,22 +1172,24 @@ public class EditorController implements IEditor {
                 Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste), defaultTranslation);
 
         // find all identical sources and redraw them
-        for (int i = 0; i < m_docSegList.length; i++) {
-            if (i == displayedEntryIndex) {
-                // current entry, skip
-                continue;
-            }
-            SegmentBuilder builder = m_docSegList[i];
-            if (!builder.hasBeenCreated()) {
-                // Skip because segment has not been drawn yet
-                continue;
-            }
-            if (builder.ste.getSrcText().equals(entry.getSrcText())) {
-                // the same source text - need to update
-                builder.createSegmentElement(false,
-                        Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
-                // then add new marks
-                markerController.reprocessImmediately(builder);
+        if (translationChanged || noteChanged) {
+            for (int i = 0; i < m_docSegList.length; i++) {
+                if (i == displayedEntryIndex) {
+                    // current entry, skip
+                    continue;
+                }
+                SegmentBuilder builder = m_docSegList[i];
+                if (!builder.hasBeenCreated()) {
+                    // Skip because segment has not been drawn yet
+                    continue;
+                }
+                if (builder.ste.getSrcText().equals(entry.getSrcText())) {
+                    // the same source text - need to update
+                    builder.createSegmentElement(false,
+                            Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
+                    // then add new marks
+                    markerController.reprocessImmediately(builder);
+                }
             }
         }
 

@@ -27,6 +27,7 @@ package org.omegat.filters4.xml.xliff;
 
 import java.util.zip.ZipEntry;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters4.AbstractZipFilter;
@@ -38,6 +39,16 @@ import org.omegat.util.OStrings;
  * @author Thomas Cordonnier
  */
 public class SdlProject extends AbstractZipFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(SdlProject.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     public String getFileFormatName() {

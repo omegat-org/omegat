@@ -286,7 +286,24 @@
           displayed on the same line.</para>
         </listitem>
       </varlistentry>
-    </variablelist>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>Sort by source
+			  text term length</option></term>
+		  <listitem>
+			  <para>If some glossary items are similar in a source term text,
+				  and one contains another term text, sort by a length of source text.</para>
+		  </listitem>
+	  </varlistentry>
+
+		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>Sort by source
+				text term length</option></term>
+			<listitem>
+				<para>If a glossary item has multiple definitions, sort by a length of definition text.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
   </section>
 
   <section id="dialogs.preferences.dictionary">
@@ -1687,8 +1704,18 @@ ${filePath}></programlisting></para>
 	linkend="application.folder">application</link> folder.</para>
 
 	<para>Additional plugins can be found on the <ulink
-	url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT development
+	url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT wiki
 	site</ulink>.</para>
+	<para>Use the <guibutton>Install plugin from disk</guibutton> button to install or upgrade your
+	plugin. Plugin files are JAR files with a <filename>.jar</filename> extension.
+	OmegaT also accepts zip archives that contain a JAR plugin file.
+	Third party plugins are typically distributed as zip archives that contain the plugin file
+	itself, as well as README and LICENSE files.
+	</para>
+	<warning>
+		<para>The plugin installer only accepts archives containing a JAR plugin.
+		 It does not recognize plugin files renamed with a <filename>.zip</filename> extension.</para>
+	</warning>
   </section>
 
   <section id="dialogs.preferences.updates">

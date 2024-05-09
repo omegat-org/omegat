@@ -1,4 +1,4 @@
-name: Run Gradle test
+name: Unit Tests, Quality checks, and Acceptance Tests
 
 on:
   push:
@@ -12,21 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-java@v3
+    - name: setup xvfb environment
+      run: sudo apt-get install -f -q xvfb libsm-dev libxrender1 libxext-dev libxtst-dev libxcb1-dev fonts-dejavu xfonts-base xfonts-scalable
+    - uses: actions/setup-java@v4
       with:
         java-version: 17
         distribution: 'temurin'
-    - uses: gradle/wrapper-validation-action@v1
+    - uses: gradle/wrapper-validation-action@v3
       name: validate gradle wrapper
     - name: Agree gradle-scan terms
       run: cat ci/gradle/gradle-scan.init.gradle >> settings.gradle
-    - uses: gradle/gradle-build-action@v2
+    - uses: gradle/actions/setup-gradle@v3
       name: Setup Gradle
       id: setup-gradle
     - name: Run gradle build
-      run: ./gradlew -PenvIsCi --scan build
+      run: xvfb-run -a --server-args='-screen 0, 1024x768x24' ./gradlew -PenvIsCi --scan build
+      id: gradle
     - name: "Add Build Scan URL as PR comment"
-      uses: actions/github-script@v5
+      uses: actions/github-script@v7
       if: github.event_name == 'pull_request' && failure()
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
@@ -35,5 +38,8 @@ jobs:
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            body: '❌ ${{ github.workflow }} failed: ${{ steps.gradle.outputs.build-scan-url }}'
+            body: `❌ ${{ github.workflow }} **failed**.
+
+             Please look a Gradle Scan page for details: 
+             ${{ steps.gradle.outputs.build-scan-url }}`
           })

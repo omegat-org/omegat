@@ -193,40 +193,65 @@
 <section id="how.to.tm.bridge.two.languages">
   <title id="how.to.tm.bridge.two.languages.title">2つの言語の橋渡し</title>
 
-  <para>OmegaTは、<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウに参考訳文を表示します。このような検索の一致は、<link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>デフォルトではで定義された原文言語と訳文言語に限定された訳文候補になりますが、プロジェクトの訳文言語以外の言語での検索一致の表示を追加することもできます。詳細は<link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/>の設定を参照してください。</para>
+  <para>OmegaTは、<link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>ウィンドウに参考訳文を表示します。By default, those matches are limited to the source and target languages defined in the <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> dialog.</para>
 
-  <para>OmegaTでは、原文分節の<emphasis>右</emphasis>に第3の言語の内容を表示して、原文文章の代替言語の参照として使用することもできます。</para>
+  <para>You can add matches in languages that are not the target language. 詳細は<link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/>の設定を参照してください。</para>
 
-  <example id="bridge.english.and.french.with.japanese">
-	<title id="replace.with.allemand.title">英語、フランス語と日本語の橋渡し</title>
-	<para>
-	  <programlisting>— ¶ —————————————————————
-<token>A whitespace character: [ \t\n\x0B\f\r]
-fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
-ja-RV: 空白文字：[ \t\n\x0B\f\r]</token>
-Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
-— ¶ —————————————————————</programlisting></para>
-<para>最初の行はオリジナルの英語、2行目は任意の言語コードの古いフランス語、3行目は同じように任意の言語コードの日本語、4行目は現在のフランス語への翻訳です。</para>
-  </example>
-  
-    <para>これを実行するためには:</para>
+  <para>原文文書に対応し、異なる言語への翻訳を含むTMXをお持ちの場合は、原文分節を表示している<emphasis>すぐ下</emphasis>に追加の参照言語として表示することもできます。</para>
+
+  <para>これを実行するためには:</para>
 
 	<orderedlist>
 	  <listitem>
-		<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーに<filename class="directory">tmx2source</filename>という名前のフォルダーを作成します。</para>
+		<para>追加の参照言語を含む翻訳メモリを、<link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーの<filename class="directory">tmx2source</filename>にコピーします。</para>
 	  </listitem>
 
 	  <listitem>
-		<para>そこであなたの「第三外国語」の翻訳メモリをコピーしてください。</para>
-	  </listitem>
-
-	  <listitem>
-		<para>翻訳メモリの名前を<filename>LL_CC.tmx</filename>または<filename>LL-CC.tmx</filename>に変更します。ここで、<emphasis>LL</emphasis>は参照として内容表示する言語コードで、<emphasis>CC</emphasis>は任意の2文字のコードです。</para>
+		<para>翻訳メモリのファイル名を次のように変更します。<itemizedlist>
+		  <listitem>
+			<para>
+			  <filename>LL_CC.tmx</filename>,
+			</para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL-CC.tmx</filename>, or
+			</para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL.tmx</filename>,
+			</para>
+		  </listitem>
+		</itemizedlist>ここで、<emphasis>LL</emphasis>は参照として内容表示する言語コードで、<emphasis>CC</emphasis>は任意の2文字のコードです。</para>
+		<warning>
+		  <itemizedlist>
+			<listitem>
+			  <para>すべての文字は大文字でなければなりません。</para>
+			</listitem>
+			<listitem>
+			  <para>原文<emphasis role="bold">と完全に一致する</emphasis>分節のみが表示されます。</para>
+			</listitem>
+		  </itemizedlist>
+		</warning>
 	  </listitem>
 	</orderedlist>
-	
+
+  <example id="bridge.english.and.french.with.japanese">
+	<title id="replace.with.allemand.title">英語原文の下での日本語の参照訳の使用</title>
+	<para>フランス語に翻訳するときに、英語文書の日本語訳を含むTMXをお持ちの場合は、対象の英語文の下に表示することで、日本語訳を代替の正確な参照として使用できます。</para>
+	<para>英語から日本語のファイルを<filename class="directory">tm/tmx2source</filename>に<filename>JA-JP.tmx</filename>という名前で置いてください。OmegaTは、英語の原文に対応する日本語の分節を表示します。</para>
+	<para>
+	  <programlisting>— ¶ —————————————————————
+<token>A whitespace character: [ \t\n\x0B\f\r]
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</token>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
+— ¶ —————————————————————</programlisting></para>
+<para>最初の行は元の英語、2行目は翻訳を作成するときに役立つと予想されるブリッジ言語、3行目は現在のフランス語への翻訳です。</para>
+  </example>
+  
     <note>
-	  <para>異なる「ブリッジ」言語ペアを含むTMXファイルは、必要な数だけ使用できます。</para>	  
+	  <para>異なるブリッジ言語を含むTMXファイルは、必要な数だけ使用できます。</para>	  
 	</note>
   </section>
 </section>

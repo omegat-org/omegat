@@ -237,7 +237,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 "TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT");
         projectAccessCurrentTargetDocumentMenuItem = createMenuItem(
                 "TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT");
-        projectAccessWritableGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY");
+        projectAccessWriteableGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY");
 
         projectAccessRootMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_ROOT");
         projectAccessDictionaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_DICTIONARY");
@@ -250,7 +250,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 "TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT");
         projectAccessCurrentTargetDocumentMenuItem = createMenuItem(
                 "TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT");
-        projectAccessWritableGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY");
+        projectAccessWriteableGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY");
         projectRestartMenuItem = createMenuItem("TF_MENU_FILE_RESTART");
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
 
@@ -454,7 +454,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectAccessProjectFilesMenu.addSeparator();
         projectAccessProjectFilesMenu.add(projectAccessCurrentSourceDocumentMenuItem);
         projectAccessProjectFilesMenu.add(projectAccessCurrentTargetDocumentMenuItem);
-        projectAccessProjectFilesMenu.add(projectAccessWritableGlossaryMenuItem);
+        projectAccessProjectFilesMenu.add(projectAccessWriteableGlossaryMenuItem);
 
         projectMenu.addSeparator();
         projectMenu.add(projectRestartMenuItem);
@@ -637,7 +637,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                             && new File(Core.getProject().getProjectProperties().getTargetRoot(), targetPath)
                                     .isFile());
                     String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
-                    projectAccessWritableGlossaryMenuItem
+                    projectAccessWriteableGlossaryMenuItem
                             .setEnabled(!StringUtil.isEmpty(glossaryPath) && new File(glossaryPath).isFile());
                 }
             }
@@ -653,8 +653,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         String key = "findInProjectReuseLastWindow";
         KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
-        mainWindow.getRootPane().getActionMap().put(key, new AbstractAction() {
+        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Log.logInfoRB("LOG_MENU_CLICK", key);
@@ -1094,7 +1094,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem projectAccessExportTMMenuItem;
     JMenuItem projectAccessCurrentSourceDocumentMenuItem;
     JMenuItem projectAccessCurrentTargetDocumentMenuItem;
-    JMenuItem projectAccessWritableGlossaryMenuItem;
+    JMenuItem projectAccessWriteableGlossaryMenuItem;
     JMenuItem sentenceCaseMenuItem;
     JMenu switchCaseSubMenu;
     JMenuItem titleCaseMenuItem;

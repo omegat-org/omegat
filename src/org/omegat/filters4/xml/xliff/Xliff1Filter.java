@@ -25,21 +25,22 @@
 
 package org.omegat.filters4.xml.xliff;
 
-import java.util.List;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Collections;
 
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
 /**
@@ -48,6 +49,16 @@ import org.omegat.util.OStrings;
  * @author Thomas Cordonnier
  */
 public class Xliff1Filter extends AbstractXliffFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(Xliff1Filter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     // ---------------------------- IFilter API---------------------------
 
@@ -81,7 +92,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     @Override // start events on body
-    protected void checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             if (reader.getLocalName().equals("body")) {
                 this.isEventMode = true;
@@ -99,10 +110,12 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 try {
                     processStartElement(
                             eFactory.createStartElement(reader.getName(), attributes.iterator(), null), null);
-                } catch (Exception ex) {
+                } catch (Exception ignored) {
+                    // XXX: Can we really skip?
                 }
             }
         }
+        return isEventMode;
     }
 
     @Override
@@ -239,8 +252,17 @@ public class Xliff1Filter extends AbstractXliffFilter {
                 ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
             }
             break;
-        case "group":
         case "file":
+            path = "/";
+            cleanBuffers();
+            if (endElement.getName().getLocalPart().equals(ignoreScope)) {
+                ignoreScope = null;
+            } else if (ignoreScope != null
+                    && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
+                ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
+            }
+            break;
+        case "group":
             path = path.substring(0, path.lastIndexOf('/'));
             cleanBuffers();
             if (endElement.getName().getLocalPart().equals(ignoreScope)) {

@@ -47,6 +47,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.time.ZonedDateTime;
@@ -97,6 +98,7 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
@@ -237,20 +239,34 @@ public final class Main {
     }
 
     public static void restartGUI(String projectDir) {
-        Log.log("===         Restart OmegaT           ===");
-        String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
-        // Build command: java -cp ... org.omegat.Main
+        // Check we have `java` command in java.home
+        Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
         List<String> command = new ArrayList<>();
-        command.add(javaBin);
-        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-        command.addAll(runtimeMxBean.getInputArguments()); // JVM args
-        command.add("-cp");
-        command.add(runtimeMxBean.getClassPath());
-        command.add(Main.class.getName());
-        command.addAll(CLIParameters.unparseArgs(PARAMS));
+        if (javaBin.toFile().exists()) {
+            // Build command: java -cp ... org.omegat.Main
+            command.add(javaBin.toString());
+            RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+            command.addAll(runtimeMxBean.getInputArguments()); // JVM args
+            command.add("-cp");
+            command.add(runtimeMxBean.getClassPath());
+            command.add(Main.class.getName());
+            command.addAll(CLIParameters.unparseArgs(PARAMS));
+        } else {
+            // assumes jpackage
+            javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
+            if (!javaBin.toFile().exists()) {
+                // abort restart
+                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                return;
+            }
+            command.add(javaBin.toString());
+            command.addAll(CLIParameters.unparseArgs(PARAMS));
+        }
         if (projectDir != null) {
             command.add(projectDir);
         }
+        // Now ready to restart.
+        Log.log("===         Restart OmegaT           ===");
         ProcessBuilder builder = new ProcessBuilder(command);
         try {
             builder.start();
@@ -309,9 +325,13 @@ public final class Main {
      */
     protected static int runGUI() {
         ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader) ? (MainClassLoader) cl
-                : new MainClassLoader(cl);
-        PluginUtils.getThemePluginJars().forEach(mainClassLoader::add);
+        MainClassLoader mainClassLoader;
+        if (cl instanceof MainClassLoader) {
+            mainClassLoader = (MainClassLoader) cl;
+        } else {
+            mainClassLoader = new MainClassLoader(cl);
+        }
+        PluginUtils.getThemePluginJars().forEach(mainClassLoader::addJarToClasspath);
         UIManager.put("ClassLoader", mainClassLoader);
 
         // macOS-specific - they must be set BEFORE any GUI calls
@@ -337,7 +357,7 @@ public final class Main {
 
         System.setProperty("swing.aatext", "true");
         try {
-            Core.initializeGUI(mainClassLoader, PARAMS);
+            Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);

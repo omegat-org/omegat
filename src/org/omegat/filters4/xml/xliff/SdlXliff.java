@@ -59,6 +59,16 @@ import org.omegat.util.Preferences;
  */
 public class SdlXliff extends Xliff1Filter {
 
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(SdlXliff.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     private final SimpleDateFormat TRADOS_DATE_FORMAT = new SimpleDateFormat("M/d/y H:m:s");
 
     // ---------------------------- IFilter API ----------------------------
@@ -110,7 +120,7 @@ public class SdlXliff extends Xliff1Filter {
      * Also starts on cmt-defs or tag-defs, else like in standard XLIFF.
      */
     @Override
-    protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             String name = reader.getLocalName();
             if (name.equals("cmt-defs")) {
@@ -121,6 +131,7 @@ public class SdlXliff extends Xliff1Filter {
             }
         }
         super.checkCurrentCursorPosition(reader, doWrite);
+        return isEventMode;
     }
 
     @Override
@@ -351,7 +362,7 @@ public class SdlXliff extends Xliff1Filter {
     @Override
     protected boolean processCharacters(Characters event, XMLStreamWriter writer) throws XMLStreamException {
         if (commentBuf != null) {
-            commentBuf.append(event.toString());
+            commentBuf.append(event.getData());
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
                 if ("last_modified_by".equals(currentProp)) {
                     writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,

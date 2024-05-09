@@ -27,6 +27,7 @@
 
 package org.omegat.filters3.xml.visio;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -38,6 +39,16 @@ import org.omegat.util.OStrings;
  * @author Phillip Hall
  */
 public class VisioFilter extends XMLFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(VisioFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     /**
      * Creates a new instance of VisioFilter

@@ -28,6 +28,7 @@ package org.omegat.filters;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ import org.junit.Test;
 
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.ITMXEntry;
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -121,7 +123,9 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-be.po");
+        Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_ALLOW_BLANK, "false");
+        translate(new PoFilter(), "test/data/filters/po/file-POFilter-be.po", options);
         compareBinary(new File("test/data/filters/po/file-POFilter-be-expected.po"), outFile);
     }
 
@@ -167,16 +171,24 @@ public class POFilterTest extends TestFilterBase {
 
     @Test
     public void testParseFuzzyCtx() throws Exception {
-        translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po");
+        Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_ALLOW_BLANK, "false");
+        translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po", options);
         compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-expected.po"), outFile);
     }
 
     @Test
     public void testAutoFillInPluralStatement() throws Exception {
         Map<String, String> options = new HashMap<>();
+        options.put(PoFilter.OPTION_ALLOW_BLANK, "false");
         options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT, "true");
         translate(new PoFilter(), "test/data/filters/po/file-POFilter-fuzzyCtx.po", options);
         compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-plural.po"), outFile);
     }
 
+    @Override
+    protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
+        translate(filter, filename, config, Collections.emptyMap(),
+                !"true".equalsIgnoreCase(config.get(PoFilter.OPTION_FORMAT_MONOLINGUAL)));
+    }
 }

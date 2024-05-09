@@ -350,11 +350,10 @@ public class Google2Translate extends BaseCachedTranslate {
 
         @Override
         public String toString() {
-            return "Translation{" +
-                    "translatedText='" + translatedText + '\'' +
-                    ", detectedSourceLanguage='" + detectedSourceLanguage + '\'' +
-                    ", model='" + model + '\'' +
-                    '}';
+            return "Translation{"
+                    + "translatedText='" + translatedText + '\''
+                    + ", detectedSourceLanguage='" + detectedSourceLanguage + '\''
+                    + ", model='" + model + '\'' + '}';
         }
     }
 }

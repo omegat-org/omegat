@@ -32,7 +32,10 @@ WORKDIR /work
 ENTRYPOINT ["iscc"]
 __EOF__
 
-CMD="$(type -p docker)" || [[ -e $CMD ]] || CMD="$(type -p nerdctl)"
+CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>1 || CMD="$(type -p nerdctl)"
+echo select container CLI: $CMD
+$CMD info || false
+
 if ! $CMD build -t $IMAGE $CONTEXT ; then
   echo Container build error for ISCC, abort...
   exit 1

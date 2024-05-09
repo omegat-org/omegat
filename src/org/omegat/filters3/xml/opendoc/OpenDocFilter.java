@@ -42,6 +42,8 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -57,6 +59,16 @@ import org.omegat.util.OStrings;
 public class OpenDocFilter extends AbstractFilter {
     private static final Set<String> TRANSLATABLE = new HashSet<String>(Arrays.asList("content.xml",
             "styles.xml", "meta.xml"));
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(OpenDocFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     protected boolean requirePrevNextFields() {
         return true;

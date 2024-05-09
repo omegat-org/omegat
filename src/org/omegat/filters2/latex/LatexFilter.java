@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
@@ -60,6 +61,16 @@ import org.omegat.util.OStrings;
  * @author Hiroshi Miura
  */
 public class LatexFilter extends AbstractFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(LatexFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public String getFileFormatName() {
         return OStrings.getString("LATEXFILTER_FILTER_NAME");

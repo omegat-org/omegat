@@ -38,6 +38,7 @@ package org.omegat.gui.main;
 
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -70,6 +71,7 @@ import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.exttrans.MachineTranslationInfo;
+import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
@@ -78,7 +80,6 @@ import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -187,7 +188,7 @@ public final class MainWindowMenuHandler {
      */
     public void projectCompileMenuItemActionPerformed() {
         if (!checkTags()) {
-                return;
+            return;
         }
 
         ProjectUICommands.projectCompile();
@@ -250,12 +251,13 @@ public final class MainWindowMenuHandler {
     }
 
     public void viewFileListMenuItemActionPerformed() {
-        if (mainWindow.projWin == null) {
+         IProjectFilesList projWin = Core.getProjectFilesList();
+        if (projWin == null) {
             mainWindow.menu.viewFileListMenuItem.setSelected(false);
             return;
         }
 
-        mainWindow.projWin.setActive(!mainWindow.projWin.isActive());
+        projWin.setActive(!projWin.isActive());
     }
 
     public void projectAccessRootMenuItemActionPerformed() {
@@ -324,7 +326,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -340,13 +342,13 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
     }
 
-    public void projectAccessWritableGlossaryMenuItemActionPerformed(int modifier) {
+    public void projectAccessWriteableGlossaryMenuItemActionPerformed(int modifier) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -355,7 +357,7 @@ public final class MainWindowMenuHandler {
             return;
         }
         File toOpen = new File(path);
-        if ((modifier & Java8Compat.getMenuShortcutKeyMaskEx()) != 0) {
+        if ((modifier & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -408,7 +410,7 @@ public final class MainWindowMenuHandler {
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow,
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow.getApplicationFrame(),
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION)) {
                 return;
@@ -602,7 +604,7 @@ public final class MainWindowMenuHandler {
 
     private String getTrimmedSelectedTextInMainWindow() {
         String selection = null;
-        Component component = mainWindow.getMostRecentFocusOwner();
+        Component component = mainWindow.getApplicationFrame().getMostRecentFocusOwner();
         if (component instanceof JTextComponent) {
             selection = ((JTextComponent) component).getSelectedText();
             if (!StringUtil.isEmpty(selection)) {
@@ -770,7 +772,7 @@ public final class MainWindowMenuHandler {
      */
     public void gotoSegmentMenuItemActionPerformed() {
         // Create a dialog for input
-        GoToSegmentDialog dialog = new GoToSegmentDialog(mainWindow);
+        GoToSegmentDialog dialog = new GoToSegmentDialog(mainWindow.getApplicationFrame());
         dialog.setVisible(true);
 
         int jumpTo = dialog.getResult();
@@ -894,7 +896,7 @@ public final class MainWindowMenuHandler {
     public void toolsCheckIssuesMenuItemActionPerformed() {
         if (!Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK)) {
             IssueProvidersSelectorController dialog = new IssueProvidersSelectorController();
-            if (!dialog.show(mainWindow)) {
+            if (!dialog.show(mainWindow.getApplicationFrame())) {
                 return;
             }
         }
@@ -975,14 +977,14 @@ public final class MainWindowMenuHandler {
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow, FiltersCustomizerController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), FiltersCustomizerController.class);
     }
 
     /**
      * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow, SegmentationCustomizerController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), SegmentationCustomizerController.class);
 
     }
 
@@ -990,7 +992,7 @@ public final class MainWindowMenuHandler {
      * Displays the workflow setup dialog to allow customizing the diverse workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow, EditingBehaviorController.class);
+        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), EditingBehaviorController.class);
     }
 
     /**
@@ -1012,7 +1014,8 @@ public final class MainWindowMenuHandler {
         try {
             Help.showHelp();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(mainWindow, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+            JOptionPane.showMessageDialog(mainWindow.getApplicationFrame(), ex.getLocalizedMessage(), OStrings.getString(
+                    "ERROR_TITLE"),
                     JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
@@ -1022,27 +1025,27 @@ public final class MainWindowMenuHandler {
      * Shows About dialog
      */
     public void helpAboutMenuItemActionPerformed() {
-        new AboutDialog(mainWindow).setVisible(true);
+        new AboutDialog(mainWindow.getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Shows Last changes
      */
     public void helpLastChangesMenuItemActionPerformed() {
-        new LastChangesDialog(mainWindow).setVisible(true);
+        new LastChangesDialog(mainWindow.getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Show log
      */
     public void helpLogMenuItemActionPerformed() {
-        new LogDialog(mainWindow).setVisible(true);
+        new LogDialog(mainWindow.getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Check for updates
      */
     public void helpUpdateCheckMenuItemActionPerformed() {
-        VersionCheckDialog.checkAndShowResultAsync(mainWindow);
+        VersionCheckDialog.checkAndShowResultAsync(mainWindow.getApplicationFrame());
     }
 }

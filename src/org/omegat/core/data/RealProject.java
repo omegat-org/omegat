@@ -64,9 +64,9 @@ import javax.xml.stream.XMLStreamException;
 
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXParseException;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
@@ -90,6 +90,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -134,7 +135,7 @@ import gen.core.filters.Filters;
  * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RealProject.class);
+    private final ILogger logger;
 
     protected final ProjectProperties config;
     protected final RemoteRepositoryProvider remoteRepositoryProvider;
@@ -252,6 +253,7 @@ public class RealProject implements IProject {
         targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET),
                 props.getTargetTokenizer());
         Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
+        logger = LoggerFactory.getLogger(RealProject.class, OStrings.getResourceBundle());
     }
 
     public void saveProjectProperties() throws Exception {
@@ -896,7 +898,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
             return;
         }
-        LOGGER.atDebug().log("Prepare team sync");
+        logger.atDebug().log("Prepare team sync");
         tmxPrepared = null;
         glossaryPrepared = null;
         remoteRepositoryProvider.cleanPrepared();
@@ -930,7 +932,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.PREPARED) {
             return;
         }
-        LOGGER.atDebug().log("Rebase team sync");
+        logger.atDebug().log("Rebase team sync");
         try {
             preparedStatus = PreparedStatus.PREPARED2;
             synchronized (RealProject.this) {
@@ -946,7 +948,7 @@ public class RealProject implements IProject {
                         if (preparedStatus != PreparedStatus.REBASED) {
                             return;
                         }
-                        LOGGER.atDebug().log("Commit team sync");
+                        logger.atDebug().log("Commit team sync");
                         try {
                             String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared,
                                     remoteRepositoryProvider, null);
@@ -1075,6 +1077,8 @@ public class RealProject implements IProject {
                 final List<GlossaryEntry> glossaryEntries;
                 if (glossaryFile.exists()) {
                     glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+                    logger.atDebug().setMessage("Read {0} glossaries from {1}").addArgument(glossaryEntries.size())
+                            .addArgument(glossaryFile).log();
                 } else {
                     glossaryEntries = Collections.emptyList();
                 }
@@ -1086,6 +1090,9 @@ public class RealProject implements IProject {
                             public void parseBaseFile(File file) throws Exception {
                                 if (file.exists()) {
                                     baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                                    logger.atDebug().setMessage("read {0} entries from local glossary.txt")
+                                            .addArgument(baseGlossaryEntries.size())
+                                            .log();
                                 } else {
                                     baseGlossaryEntries = new ArrayList<>();
                                 }
@@ -1095,6 +1102,10 @@ public class RealProject implements IProject {
                             public void parseHeadFile(File file) throws Exception {
                                 if (file.exists()) {
                                     headGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                                    logger.atDebug()
+                                            .setMessage("read {0} entries from remote glossaries")
+                                            .addArgument(headGlossaryEntries.size())
+                                            .log();
                                 } else {
                                     headGlossaryEntries = new ArrayList<>();
                                 }
@@ -1111,6 +1122,8 @@ public class RealProject implements IProject {
                                 headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
                                 headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
 
+                                logger.atDebug().setMessage("Update and write glossary.txt with {0} entries.")
+                                        .addArgument(headGlossaryEntries.size()).log();
                                 for (GlossaryEntry ge : headGlossaryEntries) {
                                     GlossaryReaderTSV.append(out, ge);
                                 }
@@ -1118,6 +1131,8 @@ public class RealProject implements IProject {
 
                             @Override
                             public void reload(final File file) {
+                                logger.atDebug().setMessage("Reloading glossary file {0}").addArgument(file).log();
+                                notifyGlossaryManagerFileChanged(file);
                             }
 
                             @Override
@@ -1159,7 +1174,7 @@ public class RealProject implements IProject {
                 new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-        LOGGER.atDebug().setMessage("Merge report: {}").addArgument(props::getReport).log();
+        logger.atDebug().setMessage("Merge report: {0}").addArgument(props::getReport).log();
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
         return mergedTMX;
@@ -1828,6 +1843,13 @@ public class RealProject implements IProject {
             fn = fn.replaceAll(f, t);
         }
         return StringUtil.removeXMLInvalidChars(fn);
+    }
+
+    protected void notifyGlossaryManagerFileChanged(File file) {
+        GlossaryManager gm = Core.getGlossaryManager();
+        if (gm != null) {
+            gm.fileChanged(file);
+        }
     }
 
     protected class LoadFilesCallback extends ParseEntry {

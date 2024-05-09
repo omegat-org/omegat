@@ -43,7 +43,7 @@
 
         <para>用語集検索のファジーマッチングを有効または無効にできます。</para>
 
-		<para>詳細については、設定-<link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>を参照してください。</para>
+		<para>詳細については、<link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>環境設定を参照してください。</para>
       </listitem>
     </varlistentry>
 
@@ -58,14 +58,14 @@
 
         <para>辞書検索のファジーマッチングを有効または無効にできます。</para>
 
-		<para>詳細については、設定-<link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>を参照してください。</para>
+		<para>詳細については、<link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>環境設定を参照してください。</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
       <term id="menus.options.autocompletion.title"><guisubmenu>入力補完</guisubmenu></term>
       <listitem>
-		<para>さまざまな機能の毎に有効または無効にします。詳細については、設定-<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>を参照してください。</para>
+		<para>さまざまな機能の毎に有効または無効にします。詳細については、<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>環境設定を参照してください。</para>
 	  </listitem>
     </varlistentry>
 

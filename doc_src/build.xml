@@ -41,16 +41,16 @@
     </target>
 
     <!-- The fonts must be available in the system -->
-    <condition property="font.family" value="IPAPGothic">
+    <condition property="font.family" value="Noto Sans CJK JP">
         <equals arg1="${language}" arg2="ja"/>
     </condition>
-    <condition property="monospace.font.family" value="IPAGothic">
+    <condition property="monospace.font.family" value="Noto Sans CJK JP">
         <equals arg1="${language}" arg2="ja"/>
     </condition>
-    <condition property="font.family" value="WenQuanYi Micro Hei">
+    <condition property="font.family" value="Noto Sans CJK SC">
         <equals arg1="${language}" arg2="zh_CN"/>
     </condition>
-    <condition property="monospace.font.family" value="WenQuanYi Micro Hei">
+    <condition property="monospace.font.family" value="Noto Sans CJK SC">
         <equals arg1="${language}" arg2="zh_CN"/>
     </condition>
     <property name="font.family" value="DejaVu Sans"/>
@@ -63,7 +63,7 @@
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="${language}/pdf/OmegaT_documentation.fo" />
+            <arg value="${target}/OmegaT_documentation_${language}.fo" />
             <arg value="${language}/index.xml" />
             <arg value="${dbk}/fo/docbook.xsl" />
             <arg value="paper.type=A4" />
@@ -98,16 +98,15 @@
                 <include name="*.jar"/>
             </fileset>
             <fileset dir="${fop.home.build}">
-                <include name="fop.jar"/>
-                <include name="fop-hyph.jar" />
+                <include name="fop*.jar"/>
              </fileset>
         </classpath>
     </taskdef>
 
     <target name="pdf" depends="fo">
         <fop format="application/pdf"
-             fofile="${language}/pdf/OmegaT_documentation.fo"
-             outfile="${language}/pdf/OmegaT_documentation_${language}.PDF"
+             fofile="${target}/OmegaT_documentation_${language}.fo"
+             outfile="${target}/OmegaT_documentation_${language}.PDF"
              basedir="${language}/"
              userconfig="fop.xconf"
              force="true" />

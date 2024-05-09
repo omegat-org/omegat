@@ -148,7 +148,7 @@
 		  <warning>
 			<para>セキュリティ上の理由から、プロジェクト専用の後処理用コマンドはデフォルトで無効になっています。</para>
 
-			<para>詳細については、設定-<link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>を参照してください。</para>
+			<para>詳細については、<link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>環境設定を参照してください。</para>
 		  </warning>
 
 		  <para>OmegaTは、訳文ファイルを生成したあとに自動的にコマンドを実行させることができます。</para>
@@ -211,7 +211,7 @@
 
 		  <para>プロジェクト専用の外部検索を無効にするには、<guibutton>削除</guibutton>をクリックにするか、そのファイルを削除します。</para>
 		  
-		  <para>詳細については、設定-<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>を参照してください。</para>
+		  <para>詳細については、<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>環境設定を参照してください。</para>
 
 		  <note>
 			<para>セキュリティ上の理由から、プロジェクトベースの外部検索はデフォルトで無効になっています。有効にするには、<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> 設定の <link linkend="dialogs.preferences.external.search.enable.project.specific.commands" endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/>でチェックをいれます。</para>

@@ -1,8 +1,10 @@
 import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 import java.nio.file.Paths
+import com.github.spotbugs.snom.Confidence
 
 plugins {
+    id 'base'
     id 'application'
     id 'java-library'
     id 'java-test-fixtures'
@@ -92,7 +94,7 @@ allprojects {
     }
 
     spotbugs {
-        reportLevel = 'high'
+        reportLevel = Confidence.valueOf('HIGH')
     }
 
     tasks.register('spotbugsMainReport') {
@@ -251,11 +253,15 @@ dependencies {
         // LanguageTool
         implementation(libs.languagetool.core) {
             exclude module: 'guava'
+            exclude module: 'language-detector'
+            exclude group: 'com.google.android'
         }
+        implementation(libs.language.detector)
 
         runtimeOnly(libs.languagetool.all) {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen'
+            exclude module: 'language-detector'
         }
         runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
 
@@ -320,23 +326,24 @@ dependencies {
 
     testFixturesApi(libs.junit4)
     // for http connection test
-    testFixturesApi(libs.wiremock.jre8)
+    testFixturesApi(libs.wiremock.jre8) {
+        exclude module: 'guava'
+    }
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
 
     testImplementation(libs.xmlunit.legacy)
-    testImplementation(libs.languagetool.server) {
-        exclude group: 'org.slf4j'
-        exclude module: 'guava'
-        exclude group: 'ch.qos.logback'
-    }
     // LanguageTool unit tests exercise these languages
     testImplementation(libs.bundles.languagetool.tests) {
+        exclude group: 'org.slf4j'
+        exclude module: 'guava'
+        exclude module: 'language-detector'
+        exclude group: 'ch.qos.logback'
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
         exclude module: 'lucene-gosen'
     }
-    testRuntimeOnly "org.omegat.lucene:lucene-gosen:5.5.1:ipadic"
+    testImplementation "org.omegat.lucene:lucene-gosen:5.5.1:ipadic"
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
@@ -395,7 +402,6 @@ def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
 project(":spellchecker") {jar.enabled = false}
 
-def distsDir = file(layout.buildDirectory.file("${distsDirName}"))
 def assetDir = findProperty('assetDir') ?: '../'
 def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
 def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
@@ -416,11 +422,17 @@ launch4j {
     icon = "${projectDir}/images/OmegaT.ico"
     errTitle = 'OmegaT'
     headerType = 'gui'
-    jreMinVersion = '11'
-    jreMaxVersion = '21'
+    jreMinVersion = '11.0'
+    jreMaxVersion = '21.1'
     copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
-    bundledJrePath = 'jre' // assume bundled JRE is located in jre/
+    // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
+    bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
     requires64Bit = false  // support 32bit distribution
+    copyright = "The GNU General Public License, Version 3.0"
+    version = omtVersion.version
+    textVersion = omtVersion.version
+    companyName = distAppVendor
+    fileDescription = shortDescription
     restartOnCrash = false
     stayAlive = false
     priority = 'normal'
@@ -481,19 +493,16 @@ manualIndexXmls.each { xml ->
     def lang = xml.parentFile.name
     def pdfTaskName = "manualPdf${lang.capitalize()}"
     tasks.register(pdfTaskName, Exec) {
-        inputs.files fileTree(dir: "doc_src/${lang}", include: '**/*.xml')
-        outputs.file "${buildDir}/build/docs/pdfs/OmegaT_documentation_${lang}.PDF"
-        workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
+        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
+                excludes: ['xhtml5/*', 'index.xml'])
+        outputs.files layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
         onlyIf {
             conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
                     [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
         }
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
         doLast {
-            copy {
-                from fileTree(dir: "doc_src/${lang}/pdf", include: '*.PDF')
-                into distsDir
-            }
             delete fileTree(dir: "doc_src/${lang}", includes: ['pdf/*', 'index.xml'])
         }
     }
@@ -753,12 +762,12 @@ tasks.register('mac') {
 }
 
 ext.makeMacTask = { args ->
-    def installTaskName = args.name + "InstallDist"
-    def signedInstallTaskName = args.name + "InstallSignedDist"
+    def installTaskName = 'install' + args.name.capitalize()  + "Dist"
+    def signedInstallTaskName = 'install' + args.name.capitalize() + "SignedDist"
     def distZipTaskName = args.name + "DistZip"
-    def signedZipTaskName = args.name + "SignedDistZip"
+    def signedZipTaskName = args.name + "Signed"
     def notarizeTaskName = args.name + "Notarize"
-    def stapledNotarizedDistZipTaskName = args.name + "StapledNotarizedDistZip"
+    def stapledNotarizedDistZipTaskName = args.name + "StapledNotarized"
 
     tasks.register(distZipTaskName, Zip) {
         description = "Create Mac distribution for ${args.name}"
@@ -793,6 +802,12 @@ ext.makeMacTask = { args ->
                     replaceRelativePathSegment(it, /jdk.*-jre/, 'jre.bundle')
                 }
             }
+        }
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = base.distsDirectory.file(archiveFileName).get().asFile
+            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
         }
         onlyIf {
             condition(!args.jrePath || !args.jrePath.empty, 'JRE not found')
@@ -836,7 +851,13 @@ ext.makeMacTask = { args ->
             }
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
-        destinationDir file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        destinationDir  file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = file("$destinationDir/OmegaT.app/Contents/Java/OmegaT.jar")
+            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
+        }
         doFirst {
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
         }
@@ -1158,8 +1179,8 @@ tasks.register("linuxRpmDist", Exec) {
 
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
-installDist {
-}
+// installDist insists on destination executable directory even when disable start script.
+application.executableDir = ""
 
 // Read in all our custom messages and massage them for inclusion in the .iss
 ext.getInnoSetupCustomMessages = {
@@ -1189,99 +1210,14 @@ tasks.register('win') {
 ext.makeWinTask = { args ->
     def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
-    def installerExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}.exe")
-    def signedExe = layout.buildDirectory.file("${distsDirName}/${installerBasename}_Signed.exe")
-
+    def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
+    def signedWinExe = base.distsDirectory.file("${installerBasename}_Signed.exe")
+    def prepDistsTaskName = "${args.name}Prep"
+    def genDistsTaskName = "${args.name}Gen"
+    def distsTaskName = "${args.name}"
     def signedTaskName = "${args.name}Signed"
-
-    tasks.register(args.name, Sync) {
-        description = "Create a Windows installer for ${args.name} distro. " +
-                'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        with distributions.main.contents
-        dependsOn createAllExecutables
-        from('release/win32-specific') {
-            include 'OmegaT.l4J.ini'
-        }
-        from('build/launch4j') {
-            include '*.exe'
-        }
-        if (args.jrePath && !args.jrePath.empty) {
-            from(zipTree(args.jrePath.singleFile)) {
-                includeEmptyDirs = false
-                eachFile {
-                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
-                }
-            }
-        }
-        destinationDir file(layout.buildDirectory.file("innosetup/${args.name}"))
-        outputs.file installerExe
-        onlyIf {
-            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
-                     'InnoSetup or Docker not installed'])
-        }
-        doFirst {
-            delete "$destinationDir/jre"
-            delete installerExe
-            project.copy {
-                from 'build'
-                into 'build'
-                include "innosetup/${args.name}/**/*"
-                dirMode 0777
-                fileMode 0666
-            }
-        }
-        doLast {
-            project.copy {
-                from('release/win32-specific') {
-                    include 'OmegaT.iss'
-                }
-                into(destinationDir)
-                filter(ReplaceTokens, tokens: [
-                        VERSION_NUMBER_SUBST : fullVersion,
-                        OUTPUT_BASENAME_SUBST: installerBasename.toString(),
-                        CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
-                        ARCHITECTURE_SUBST   : args.arch ?: ''
-                ])
-                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
-                filteringCharset = 'UTF-8'
-            }
-            exec {
-                // You'd think we could just set the PATH, but there be dragons here
-                // https://github.com/palantir/gradle-docker/issues/162
-                def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
-                commandLine exe, "${destinationDir}/OmegaT.iss"
-            }
-            project.copy {
-                from("${destinationDir}/${installerBasename}.exe")
-                into distsDir
-            }
-            delete file("${destinationDir}/${installerBasename}.exe")
-        }
-    }
-    tasks.register(signedTaskName, Exec) {
-        group = 'omegat distribution'
-        inputs.file installerExe
-        outputs.file signedExe
-        // Starting from Nov 2022, certification provider force to use HSM to
-        // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
-        // standards will require private keys for standard code signing
-        // certificates to be stored on hardware certified as FIPS 140 Level 2,
-        // Common Criteria EAL 4+, or equivalent.
-        // #1179 build/release: Windows binary signature with PKCS#11 HSM
-        // https://sourceforge.net/p/omegat/bugs/1179/
-        // requires osslsigncode version 2.5 or later.
-        onlyIf {
-            // Set these in e.g. local.properties
-            def props = ['pkcs11module', 'winCodesignPassword']
-            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
-                    [exePresent('osslsigncode'), 'osslsigncode is not installed'])
-                    // note: container image amake/innosetup has osslsigntool 1.7 which don't work.
-                    // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
-                    // 'neither osslsigncode or docker/nerdctl is not installed'])
-        }
-        def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode')
-        def envVars = [:]
+    def signedTaskCommandArgs = { arg2 ->
+        def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode').toString()
         def commandArgs = [exe, 'sign']
         if (project.hasProperty('pkcs11module')) {
             commandArgs.addAll('-pkcs11module', project.property('pkcs11module'))
@@ -1302,12 +1238,118 @@ ext.makeWinTask = { args ->
                 '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
                 'http://time.certum.pl/',
                 '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
-                '-in', installerExe.get().asFile.toString(),
-                '-out', signedExe.get().asFile.toString()
+                '-in', installerWinExe.get().asFile,
+                '-out', signedWinExe.get().asFile
         )
-        commandLine(commandArgs)
+        return commandArgs
+    }
+
+    tasks.register(prepDistsTaskName, Sync) {
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
+        }
+        doFirst {
+            delete "$destinationDir/jre"
+            delete installerWinExe
+        }
+        with distributions.main.contents
+        destinationDir file(layout.buildDirectory.file("innosetup/${args.name}"))
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar").get().asFile
+            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
+        }
+        from('release/win32-specific') {
+            include 'OmegaT.l4J.ini'
+            include 'OmegaT.iss'
+            filter(ReplaceTokens, tokens: [
+                    VERSION_NUMBER_SUBST : fullVersion,
+                    OUTPUT_BASENAME_SUBST: installerBasename.toString(),
+                    CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
+                    ARCHITECTURE_SUBST   : args.arch ?: ''
+            ])
+            filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+            filteringCharset = 'UTF-8'
+        }
+        from('build/launch4j') {
+            include '*.exe'
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(zipTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+        dependsOn createAllExecutables
+    }
+
+    tasks.register(genDistsTaskName, Exec) {
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
+        }
+        dependsOn prepDistsTaskName
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe").get().asFile
+            def f2 = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar").get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
+        }
+        // You'd think we could just set the PATH, but there be dragons here
+        // https://github.com/palantir/gradle-docker/issues/162
+        def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
+        def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
+        commandLine exe, '/Qp', iss
+    }
+
+    tasks.register(distsTaskName, Copy) {
+        description = "Create a Windows installer for ${args.name} distro. " +
+                'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
+        }
+        from layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
+        into base.distsDirectory
+        outputs.file installerWinExe
+        dependsOn genDistsTaskName
+    }
+
+    tasks.register(signedTaskName, Exec) {
+        group = 'omegat distribution'
+        inputs.file installerWinExe skipWhenEmpty()
+        outputs.file signedWinExe
+        // Starting from Nov 2022, certification provider force to use HSM to
+        // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
+        // standards will require private keys for standard code signing
+        // certificates to be stored on hardware certified as FIPS 140 Level 2,
+        // Common Criteria EAL 4+, or equivalent.
+        // #1179 build/release: Windows binary signature with PKCS#11 HSM
+        // https://sourceforge.net/p/omegat/bugs/1179/
+        // requires osslsigncode version 2.5 or later.
+        onlyIf {
+            // Set these in e.g. local.properties
+            def props = ['pkcs11module', 'winCodesignPassword']
+            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
+                    [exePresent('osslsigncode'), 'osslsigncode is not installed'])
+                    // note: container image amake/innosetup has osslsigntool 1.7 which don't work.
+                    // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
+                    // 'neither osslsigncode or docker/nerdctl is not installed'])
+        }
+        doFirst {
+            delete signedWinExe
+        }
+        def envVars = [:]
+        commandLine(signedTaskCommandArgs())
         environment(envVars)
-        dependsOn args.name
+        dependsOn distsTaskName
     }
     assemble.dependsOn args.name, signedTaskName
     win.dependsOn args.name, signedTaskName
@@ -1345,18 +1387,17 @@ processResources {
 }
 
 tasks.register('checksums') {
-    def algos = ['SHA-512', 'MD5']
+    def algos = ['SHA-512']
     description = "Generate ${algos.join(', ')} checksums for distribution files"
-    inputs.files fileTree(dir: distsDir, exclude: 'checksums')
-    def checksumsDir = file("${distsDir}/checksums")
-    outputs.dir checksumsDir
+    inputs.files fileTree(dir: base.distsDirectory, exclude: 'checksums')
+    outputs.dir base.distsDirectory.dir('checksums')
     onlyIf {
-        condition(distsDir.directory, 'Distfiles not found')
+        condition(base.distsDirectory.get().asFile.directory, 'Distfiles not found')
     }
     doLast {
-        distsDir.listFiles().findAll { it.file }.each { f ->
+        base.distsDirectory.get().asFile.listFiles().findAll { it.file }.each { f ->
             algos.each { algo ->
-                ant.checksum file: f, algorithm: algo, todir: checksumsDir
+                ant.checksum file: f, algorithm: algo, todir: distsDirectory.dir('checksums').get().asFile
             }
         }
     }
@@ -1421,7 +1462,13 @@ tasks.jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ["gen/core/**/*", "org/omegat/**/gui/*", "org/omegat/**/data/*"])
+            fileTree(dir: it,
+                    exclude: ["gen/core/**/*", "org/omegat/util/gui/*", "org/omegat/gui/dialogs/*",
+                              "org/omegat/externalfinder/gui/*", "org/omegat/gui/filters2/*", "org/omegat/core/team2/gui/*",
+                              "org/omegat/gui/properties", "org/omegat/gui/exttrans/*", "org/omegat/gui/theme",
+                              "org/omegat/gui/comments/*", "org/omegat/gui/editor/chartable/*",
+                              "org/omegat/gui/segmentation/*", "org/omegat/util/xml/*", "org/omegat/gui/preferences/*",
+                              "org/omegat/**/data/*", "org/omegat/**/datamodels/*"])
         }))
     }
 }

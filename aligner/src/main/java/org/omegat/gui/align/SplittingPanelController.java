@@ -60,7 +60,8 @@ public class SplittingPanelController {
     private int splitOffset = -1;
 
     /**
-     * Create the controller with the text to be split and an optional hint to the user.
+     * Create the controller with the text to be split and an optional hint to
+     * the user.
      *
      * @param text
      *            The text to be split
@@ -73,11 +74,12 @@ public class SplittingPanelController {
     }
 
     /**
-     * Show the dialog. The dialog is modal, so this method will block until complete.
+     * Show the dialog. The dialog is modal, so this method will block until
+     * complete.
      * <p>
-     * If the user cancels, the result array will contain as its sole member the original string provided to
-     * the constructor. Otherwise the array will contain the (trimmed) results of splitting the original
-     * string.
+     * If the user cancels, the result array will contain as its sole member the
+     * original string provided to the constructor. Otherwise, the array will
+     * contain the (trimmed) results of splitting the original string.
      *
      * @param parent
      *            The parent window of the dialog
@@ -120,7 +122,8 @@ public class SplittingPanelController {
         panel.editorPane.addCaretListener(new CaretListener() {
             @Override
             public void caretUpdate(CaretEvent e) {
-                panel.okButton.setEnabled(e.getDot() == e.getMark() && e.getDot() > 0 && e.getDot() < text.length());
+                panel.okButton.setEnabled(
+                        e.getDot() == e.getMark() && e.getDot() > 0 && e.getDot() < text.length());
             }
         });
 

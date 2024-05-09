@@ -216,7 +216,7 @@
 			</varlistentry>
 
 			<varlistentry>
-			  <term>参照TM</term>
+			  <term>外部</term>
 			  <listitem>
 				<para><link linkend="project.folder.tm" endterm="project.folder.tm.title"/>フォルダーにある翻訳メモリを含めます。</para>
 			  </listitem>

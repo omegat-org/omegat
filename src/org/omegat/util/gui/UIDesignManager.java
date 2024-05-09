@@ -53,6 +53,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.laf.SystemDarkThemeDetector;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
@@ -98,8 +99,12 @@ public final class UIDesignManager {
         return menuPreferences;
     }
 
-    private static void setMenuUI(String menuUIPrefClassName, ClassLoader classLoader) {
+    private static void setMenuUI(String menuUIPrefClassName) {
+        if (StringUtil.isEmpty(menuUIPrefClassName)) {
+            return;
+        }
         try {
+            ClassLoader classLoader = getClassLoader();
             Class<?> prefClazz = classLoader.loadClass(menuUIPrefClassName);
             if (prefClazz != null) {
                 Object o = prefClazz.getDeclaredConstructor().newInstance();
@@ -122,6 +127,14 @@ public final class UIDesignManager {
         }
     }
 
+    /**
+     * Load and set theme.
+     * 
+     * @param lafClassName
+     *            LookAndFeel full qualified class name.
+     * @param classLoader
+     *            class loader to use.
+     */
     public static void setTheme(String lafClassName, ClassLoader classLoader) {
         try {
             Class<?> clazz = classLoader.loadClass(lafClassName);
@@ -129,21 +142,46 @@ public final class UIDesignManager {
         } catch (Exception e) {
             Log.log(e);
             if (!lafClassName.equals(LIGHT_CLASS_NAME_DEFAULT)) {
-                setTheme(LIGHT_CLASS_NAME_DEFAULT, classLoader);
+                setTheme(LIGHT_CLASS_NAME_DEFAULT);
             }
         }
     }
 
     /**
-     * Initialize docking subsystem.
+     * Load and set theme.
+     * 
+     * @param lafClassName
+     *            LookAndFeel full qualified class name.
      */
-    public static void initialize(ClassLoader mainClassLoader) throws IOException {
+    public static void setTheme(String lafClassName) {
+        setTheme(lafClassName, getClassLoader());
+    }
+
+    private static ClassLoader getClassLoader() {
+        ClassLoader classLoader = null;
+        Object o = UIManager.get("ClassLoader");
+        if (o instanceof ClassLoader) {
+            classLoader = (ClassLoader) o;
+        }
+        if (classLoader == null) {
+            classLoader = Thread.currentThread().getContextClassLoader();
+        }
+        if (classLoader == null) {
+            classLoader = ClassLoader.getSystemClassLoader();
+        }
+        return classLoader;
+    }
+
+    /**
+     * Initialize a docking subsystem.
+     */
+    public static void initialize() throws IOException {
         // Install VLDocking defaults
         DockingUISettings.getInstance().installUI();
         DockableContainerFactory.setFactory(new CustomContainerFactory());
 
         // Set Look And Feel
-       String themeMode = Preferences.getPreferenceDefault(Preferences.THEME_COLOR_MODE,
+        String themeMode = Preferences.getPreferenceDefault(Preferences.THEME_COLOR_MODE,
                 THEME_FOLLOW_OS_COLOR_DEFAULT);
         String theme;
         if (themeMode.equals("sync")) {
@@ -161,15 +199,12 @@ public final class UIDesignManager {
         } else {
             theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, LIGHT_CLASS_NAME_DEFAULT);
         }
-        setTheme(theme, mainClassLoader);
+        setTheme(theme);
 
-        String menuUI = Preferences.getPreference(Preferences.MENUUI_CLASS_NAME);
-        if (menuUI != null) {
-            setMenuUI(menuUI, mainClassLoader);
-        }
+        setMenuUI(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME));
 
         if (UIManager.getColor("OmegaT.source") == null) {
-            // Theme apparently did not load default colors so we do so now
+            // Theme apparently did not load default colors, so we do so now
             loadDefaultColors(UIManager.getDefaults());
         }
 
@@ -245,6 +280,7 @@ public final class UIDesignManager {
 
     /**
      * Load icon from classpath.
+     * 
      * @param iconName
      *            icon file name
      * @return icon instance
@@ -308,6 +344,7 @@ public final class UIDesignManager {
      * Heuristic detection of dark theme.
      * <p>
      * isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * 
      * @return true when dark theme, otherwise false.
      */
     public static boolean isDarkTheme(UIDefaults uiDefaults) {

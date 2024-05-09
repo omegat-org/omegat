@@ -459,6 +459,11 @@ public class MatchesVarExpansionTest {
         @Override
         public void activateEntry() {
         }
+
+        @Override
+        public boolean isOrientationAllLtr() {
+            return true;
+        }
     };
 
 }

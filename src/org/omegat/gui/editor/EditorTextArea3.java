@@ -426,6 +426,11 @@ public class EditorTextArea3 extends JEditorPane {
                 processed = true;
             }
         } else if (s.equals(KEYSTROKE_INSERT_LF)) {
+            // Treat the case of enforced translations which should be locked            
+            if (lockListener.isLocked != null) {
+                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
+                return;
+            }
             // Insert LF
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
@@ -436,6 +441,11 @@ public class EditorTextArea3 extends JEditorPane {
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
         } else if (s.equals(KEYSTROKE_DELETE_PREV_TOKEN)) {
+            // Treat the case of enforced translations which should be locked            
+            if (lockListener.isLocked != null) {
+                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
+                return;
+            }
             // Delete previous token
             try {
                 processed = wholeTagDelete(false);
@@ -453,6 +463,11 @@ public class EditorTextArea3 extends JEditorPane {
                 // do nothing
             }
         } else if (s.equals(KEYSTROKE_DELETE_NEXT_TOKEN)) {
+            // Treat the case of enforced translations which should be locked            
+            if (lockListener.isLocked != null) {
+                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
+                return;
+            }
             // Delete next token
             try {
                 processed = wholeTagDelete(true);

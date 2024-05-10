@@ -514,6 +514,13 @@ public class EditorTextArea3 extends JEditorPane {
                     checkAndFixCaret(true);
                 }
             }
+            // Treat the case of enforced translations which should be locked            
+            if (lockListener.isLocked != null) {
+                if ((e.getKeyCode() == KeyEvent.VK_BACK_SPACE) || (e.getKeyCode() == KeyEvent.VK_DELETE)) {
+                    Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
+                    return;
+                }
+            }            
             super.processKeyEvent(e);
             // note that the translation start/end position are not updated yet. This has been updated when
             // then keyreleased event occurs.

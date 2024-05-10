@@ -531,7 +531,8 @@ public class EditorTextArea3 extends JEditorPane {
             }
             // Treat the case of enforced translations which should be locked            
             if (lockListener.isLocked != null) {
-                if ((e.getKeyCode() == KeyEvent.VK_BACK_SPACE) || (e.getKeyCode() == KeyEvent.VK_DELETE)) {
+                if ( ((e.getKeyCode() == KeyEvent.VK_BACK_SPACE) || (e.getKeyCode() == KeyEvent.VK_DELETE)) 
+                  || (e.getKeyCode() == KeyEvent.VK_V && ( (e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) > 0) ) ) {
                     Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
                     return;
                 }

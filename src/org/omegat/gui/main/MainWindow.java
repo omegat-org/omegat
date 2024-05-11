@@ -45,6 +45,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -420,7 +421,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     // /////////////////////////////////////////////////////////////
     // display oriented code
 
-    private JLabel lastDialogText;
+    private JPanel lastDialogText;
     private String lastDialogKey;
 
     /**
@@ -450,7 +451,12 @@ public class MainWindow extends JFrame implements IMainWindow {
                 }
             }
 
-            lastDialogText = new JLabel(msg);
+            lastDialogText = new JPanel();
+            lastDialogText.setLayout(new BoxLayout(lastDialogText, BoxLayout.PAGE_AXIS));
+            String[] messages = msg.split("\\n");
+            Arrays.stream(messages).forEach(m -> {
+                lastDialogText.add(new JLabel(m));
+            });
             lastDialogKey = warningKey;
 
             statusLabel.setText(msg);
@@ -478,9 +484,12 @@ public class MainWindow extends JFrame implements IMainWindow {
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             pane.setSize(new Dimension(900, 400));
 
-            JLabel jlabel = new JLabel(msg);
-            jlabel.setAlignmentX(LEFT_ALIGNMENT);
-            pane.add(jlabel);
+            String[] messages = msg.split("\\n");
+            Arrays.stream(messages).forEach(m -> {
+                JLabel jlabel = new JLabel(m);
+                jlabel.setAlignmentX(LEFT_ALIGNMENT);
+                pane.add(jlabel);
+            });
 
             if (ex != null && ex.getLocalizedMessage() != null){
                 pane.add(Box.createRigidArea(new Dimension(0, 5)));

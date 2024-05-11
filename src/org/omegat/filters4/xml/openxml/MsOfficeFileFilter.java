@@ -239,7 +239,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
 
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.doc?"), new Instance("*.dotx"), new Instance("*.xls?"),
+        // disable a link for MS Excel files: https://sourceforge.net/p/omegat/bugs/1260
+        return new Instance[] { new Instance("*.doc?"), new Instance("*.dotx"), //new Instance("*.xls?"),
                 new Instance("*.ppt?"), new Instance("*.vsdx") };
     }
 

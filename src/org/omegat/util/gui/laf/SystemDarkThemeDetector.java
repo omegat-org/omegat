@@ -37,7 +37,7 @@ public abstract class SystemDarkThemeDetector {
     public static SystemDarkThemeDetector createDetector() {
         if (Platform.isMacOSX()) {
             return new MacOSDarkThemeDetector();
-        } else if (Platform.isLinux()) {
+        } else if (Platform.isUnix()) {
             return new EmptyDarkThemeDetector();
         } else {
             return new WindowsDarkThemeDetector();

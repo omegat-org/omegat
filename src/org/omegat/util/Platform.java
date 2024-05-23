@@ -92,7 +92,7 @@ public final class Platform {
         isWindows = osName.startsWith("windows");
         isMacOS = osName.startsWith("mac");
         isLinux = osName.startsWith("linux");
-        isBSD = osName.startsWith("bsd");
+        isBSD = osName.endsWith("bsd");
         isUnix = isLinux || isBSD;
 
         // OS versions

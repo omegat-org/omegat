@@ -312,7 +312,7 @@ public final class StaticUtils {
             }
             // Check for UNIX varieties
             // Solaris is generally detected as SunOS
-        } else if (Platform.isUnix()) {
+        } else if (Platform.isUnixLike()) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
             configDir = home + UNIX_CONFIG_DIR;

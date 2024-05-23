@@ -42,7 +42,7 @@ public final class DesktopWrapper {
 
     static {
         boolean hasXDGOpen = false;
-        if (Platform.isUnix()) {
+        if (Platform.isUnixLike()) {
             try {
                 hasXDGOpen = xdgOpen("--help", true);
             } catch (IOException ex) {

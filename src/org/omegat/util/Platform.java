@@ -65,7 +65,7 @@ public final class Platform {
     public static final boolean isMacOS;
     public static final boolean isLinux;
     public static final boolean isBSD;
-    public static final boolean isUnix;
+    public static final boolean isUnixLike;
     // OS versions
     public static final long osVersion;
     public static final boolean isWindows_10_orLater;
@@ -93,7 +93,7 @@ public final class Platform {
         isMacOS = osName.startsWith("mac");
         isLinux = osName.startsWith("linux");
         isBSD = osName.endsWith("bsd");
-        isUnix = isLinux || isBSD;
+        isUnixLike = isLinux || isBSD;
 
         // OS versions
         osVersion = scanVersion(System.getProperty("os.version"));
@@ -114,7 +114,7 @@ public final class Platform {
         isJava_17_orLater = (javaVersion >= toVersion(17, 0, 0, 0));
 
         // UI toolkits
-        isKDE = (isUnix && System.getenv("KDE_FULL_SESSION") != null);
+        isKDE = (isUnixLike && System.getenv("KDE_FULL_SESSION") != null);
 
         // Windows 11 detection is implemented in Java 8u321, 11.0.14, 17.0.2
         // and 18 (or later).
@@ -163,8 +163,8 @@ public final class Platform {
     /**
      * Returns true if running on Unix variants
      */
-    public static boolean isUnix() {
-        return isUnix;
+    public static boolean isUnixLike() {
+        return isUnixLike;
     }
 
     /**

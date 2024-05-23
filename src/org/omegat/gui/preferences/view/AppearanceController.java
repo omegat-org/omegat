@@ -159,7 +159,7 @@ public class AppearanceController extends BasePreferencesController {
                 OStrings.getString("MW_OPTIONMENU_APPEARANCE_DARK_THEME_LABEL"));
         Mnemonics.setLocalizedText(panel.syncWithOSColorRB,
                 OStrings.getString("MW_OPTIONMENU_APPEARANCE_SYNC_WITH_OS_COLOR"));
-        if (Platform.isUnix()) {
+        if (Platform.isUnixLike()) {
             // we don't support Sync OS color mode in linux
             panel.syncWithOSColorRB.setEnabled(false);
         }
@@ -177,7 +177,7 @@ public class AppearanceController extends BasePreferencesController {
         panel.cbDarkThemeSelect.setSelectedItem(preferredDarkThemeClass);
         if (themeMode.equals("dark")) {
             panel.useDarkThemeRB.setSelected(true);
-        } else if (themeMode.equals("sync") && !Platform.isUnix()) {
+        } else if (themeMode.equals("sync") && !Platform.isUnixLike()) {
             panel.syncWithOSColorRB.setSelected(true);
         } else {
             panel.useLightDefaultThemeRB.setSelected(true);

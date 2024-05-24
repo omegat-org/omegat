@@ -76,7 +76,6 @@ import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
-import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
@@ -480,11 +479,11 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void editOverwriteTranslationMenuItemActionPerformed() {
-        mainWindow.doRecycleTrans();
+        MainWindow.doRecycleTrans();
     }
 
     public void editInsertTranslationMenuItemActionPerformed() {
-        mainWindow.doInsertTrans();
+        MainWindow.doInsertTrans();
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
@@ -570,24 +569,16 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
-        mainWindow.addSearchWindow(search);
-
-        search.makeVisible(getTrimmedSelectedTextInMainWindow());
+        MainWindowUI.createSearchWindow(SearchMode.SEARCH, getTrimmedSelectedTextInMainWindow());
     }
 
     void findInProjectReuseLastWindow() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-
-        List<SearchWindowController> windows = mainWindow.getSearchWindows();
-        for (int i = windows.size() - 1; i >= 0; i--) {
-            SearchWindowController swc = windows.get(i);
-            if (swc.getMode() == SearchMode.SEARCH) {
-                swc.makeVisible(getTrimmedSelectedTextInMainWindow());
-                return;
-            }
+        String text = getTrimmedSelectedTextInMainWindow();
+        if (!MainWindowUI.reuseSearchWindow(text)) {
+            MainWindowUI.createSearchWindow(SearchMode.SEARCH, text);
         }
         editFindInProjectMenuItemActionPerformed();
     }
@@ -596,10 +587,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        SearchWindowController search = new SearchWindowController(SearchMode.REPLACE);
-        mainWindow.addSearchWindow(search);
-
-        search.makeVisible(getTrimmedSelectedTextInMainWindow());
+        MainWindowUI.createSearchWindow(SearchMode.REPLACE, getTrimmedSelectedTextInMainWindow());
     }
 
     private String getTrimmedSelectedTextInMainWindow() {

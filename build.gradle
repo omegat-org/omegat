@@ -343,6 +343,7 @@ dependencies {
     testFixturesImplementation(libs.omegat.vldocking)
     testFixturesImplementation(libs.assertj.swing.junit)
 
+    testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
     // LanguageTool unit tests exercise these languages
     testImplementation(libs.bundles.languagetool.tests) {

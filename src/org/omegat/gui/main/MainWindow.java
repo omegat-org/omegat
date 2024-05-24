@@ -48,10 +48,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -78,7 +75,6 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.matches.IMatcher;
-import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -122,9 +118,6 @@ public class MainWindow implements IMainWindow {
      */
     private FontUIResource font;
 
-    /** Set of all open search windows. */
-    private final List<SearchWindowController> searches = new ArrayList<>();
-
     protected MainWindowStatusBar mainWindowStatusBar;
 
     protected DockingDesktop desktop;
@@ -144,7 +137,7 @@ public class MainWindow implements IMainWindow {
         CoreEvents.registerProjectChangeListener(eventType -> {
             updateTitle();
             if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
-                closeSearchWindows();
+                MainWindowUI.closeSearchWindows();
             }
         });
 
@@ -297,7 +290,7 @@ public class MainWindow implements IMainWindow {
     }
 
     /** insert current fuzzy match or selection at cursor position */
-    public void doInsertTrans() {
+    public static void doInsertTrans() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -329,7 +322,7 @@ public class MainWindow implements IMainWindow {
     }
 
     /** replace entire edit area with active fuzzy match or selection */
-    public void doRecycleTrans() {
+    public static void doRecycleTrans() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -357,41 +350,9 @@ public class MainWindow implements IMainWindow {
         }
     }
 
-    private String getSelectedTextInMatcher() {
+    private static String getSelectedTextInMatcher() {
         IMatcher matcher = Core.getMatcher();
         return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
-    }
-
-    protected void addSearchWindow(final SearchWindowController newSearchWindow) {
-        newSearchWindow.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                removeSearchWindow(newSearchWindow);
-            }
-        });
-        synchronized (searches) {
-            searches.add(newSearchWindow);
-        }
-    }
-
-    private void removeSearchWindow(SearchWindowController searchWindow) {
-        synchronized (searches) {
-            searches.remove(searchWindow);
-        }
-    }
-
-    private void closeSearchWindows() {
-        synchronized (searches) {
-            // dispose other windows
-            for (SearchWindowController sw : searches) {
-                sw.dispose();
-            }
-            searches.clear();
-        }
-    }
-
-    protected List<SearchWindowController> getSearchWindows() {
-        return Collections.unmodifiableList(searches);
     }
 
     /**

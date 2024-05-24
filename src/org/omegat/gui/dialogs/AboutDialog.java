@@ -36,6 +36,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 import org.apache.commons.io.IOUtils;
+
 import org.omegat.help.Help;
 import org.omegat.util.MemoryUtils;
 import org.omegat.util.OConsts;

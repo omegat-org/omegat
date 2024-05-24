@@ -3,9 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
-               2011 Didier Briel
-               2016 Aaron Madlon-Kay
+ Copyright (C) 2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,37 +23,25 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.main;
+package org.omegat.gui.dialogs;
 
-import javax.swing.JMenu;
+import static org.junit.Assert.assertFalse;
 
-import org.omegat.util.gui.MenuExtender;
+import org.junit.Test;
 
-/**
- * Main menu interface.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- * @author Didier Briel
- * @author Aaron Madlon-Kay
- */
-public interface IMainMenu {
-    JMenu getMachineTranslationMenu();
+import org.omegat.gui.main.BaseMainWindowMenu;
+import org.omegat.gui.main.TestCoreGUI;
 
-    JMenu getOptionsMenu();
+public class LogDialogTest extends TestCoreGUI {
 
-    JMenu getToolsMenu();
+    @Test
+    public void testLogDialog() {
+        window.menuItem(BaseMainWindowMenu.HELP_MENU).click();
+        window.menuItem(BaseMainWindowMenu.HELP_LOG_MENUITEM).click();
+        window.dialog(LogDialog.DIALOG_NAME).requireModal();
+        assertFalse(
+                window.dialog(LogDialog.DIALOG_NAME).textBox(LogDialog.LOG_TEXTPANE_NAME).text().isEmpty());
+        window.dialog(LogDialog.DIALOG_NAME).button(LogDialog.OK_BUTTON_NAME).click();
+    }
 
-    JMenu getGlossaryMenu();
-
-    JMenu getProjectMenu();
-
-    JMenu getAutoCompletionMenu();
-
-    JMenu getHelpMenu();
-
-    JMenu getMenu(MenuExtender.MenuKey marker);
-
-    void enableMenuItem(MenuExtender.MenuKey menu, String name, boolean enabled);
-
-    void invokeAction(String action, int modifiers);
 }

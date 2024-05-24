@@ -53,6 +53,11 @@ public class AboutDialogTest extends TestCoreGUI {
         assertTrue(javaVersion.contains(System.getProperty("java.version")));
         // check license dialog
         window.dialog(AboutDialog.DIALOG_NAME).button(AboutDialog.LICENSE_BUTTON_NAME).click();
+        window.dialog(LicenseDialog.DIALOG_NAME).requireVisible();
+        window.dialog(LicenseDialog.DIALOG_NAME).requireModal();
+        assertTrue(window.dialog(LicenseDialog.DIALOG_NAME).textBox(LicenseDialog.LICENSE_TEXT_PANE_NAME)
+                .text().contains("========="));
+        window.dialog(LicenseDialog.DIALOG_NAME).button(LicenseDialog.OK_BUTTON_NAME).click();
         // close about dialog
         window.dialog(AboutDialog.DIALOG_NAME).button(AboutDialog.OK_BUTTON_NAME).click();
     }

@@ -27,6 +27,7 @@ package org.omegat.gui.main;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.io.File;
+import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.text.JTextComponent;
@@ -34,6 +35,7 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.search.SearchMode;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.LogDialog;
 import org.omegat.gui.editor.EditorUtils;
@@ -43,6 +45,7 @@ import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.Log;
@@ -65,6 +68,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
         ProjectUICommands.projectCreate();
     }
 
+    @Override
     public void projectExitMenuItemActionPerformed() {
         mainWindow.getApplicationFrame().setVisible(false);
         mainWindow.getApplicationFrame().setEnabled(false);
@@ -97,9 +101,11 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void editOverwriteTranslationMenuItemActionPerformed() {
+        ProjectUICommands.doRecycleTrans();
     }
 
     public void editInsertTranslationMenuItemActionPerformed() {
+        ProjectUICommands.doInsertTrans();
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
@@ -183,12 +189,39 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void editFindInProjectMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        SearchWindowController search = new SearchWindowController(SearchMode.SEARCH);
+        mainWindow.addSearchWindow(search);
+
+        search.makeVisible(getTrimmedSelectedTextInMainWindow());
     }
 
     void findInProjectReuseLastWindow() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        List<SearchWindowController> windows = mainWindow.getSearchWindows();
+        for (int i = windows.size() - 1; i >= 0; i--) {
+            SearchWindowController swc = windows.get(i);
+            if (swc.getMode() == SearchMode.SEARCH) {
+                swc.makeVisible(getTrimmedSelectedTextInMainWindow());
+                return;
+            }
+        }
+        editFindInProjectMenuItemActionPerformed();
     }
 
     public void editReplaceInProjectMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        SearchWindowController search = new SearchWindowController(SearchMode.REPLACE);
+        mainWindow.addSearchWindow(search);
+
+        search.makeVisible(getTrimmedSelectedTextInMainWindow());
     }
 
     private String getTrimmedSelectedTextInMainWindow() {
@@ -295,47 +328,22 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void optionsAutoCompleteShowAutomaticallyItemActionPerformed() {
-        /*
-         * Preferences.setPreference(Preferences.
-         * AC_SHOW_SUGGESTIONS_AUTOMATICALLY,
-         * mainWindow.menu.optionsAutoCompleteShowAutomaticallyItem.isSelected()
-         * );
-         */ }
+    }
 
     public void optionsAutoCompleteHistoryCompletionMenuItemActionPerformed() {
-        /*
-         * Preferences.setPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED,
-         * mainWindow.menu.optionsAutoCompleteHistoryCompletionMenuItem.
-         * isSelected());
-         */ }
+    }
 
     public void optionsAutoCompleteHistoryPredictionMenuItemActionPerformed() {
-        /*
-         * Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED,
-         * mainWindow.menu.optionsAutoCompleteHistoryPredictionMenuItem.
-         * isSelected());
-         */ }
+    }
 
     public void optionsMTAutoFetchCheckboxMenuItemActionPerformed() {
-        /*
-         * boolean enabled =
-         * mainWindow.menu.optionsMTAutoFetchCheckboxMenuItem.isSelected();
-         * Preferences.setPreference(Preferences.MT_AUTO_FETCH, enabled);
-         */ }
+    }
 
     public void optionsGlossaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
-        /*
-         * Preferences.setPreference(Preferences.GLOSSARY_STEMMING,
-         * mainWindow.menu.optionsGlossaryFuzzyMatchingCheckBoxMenuItem.
-         * isSelected()); Preferences.save();
-         */ }
+    }
 
     public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed() {
-        /*
-         * Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
-         * mainWindow.menu.optionsDictionaryFuzzyMatchingCheckBoxMenuItem.
-         * isSelected()); Preferences.save();
-         */ }
+    }
 
     /**
      * Displays the filters setup dialog to allow customizing file filters in
@@ -369,6 +377,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * to reset the entire GUI to its defaults.
      */
     public void viewRestoreGUIMenuItemActionPerformed() {
+        mainWindow.resetDesktopLayout();
     }
 
     public void optionsAccessConfigDirMenuItemActionPerformed() {
@@ -382,6 +391,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
         new LogDialog(mainWindow.getApplicationFrame()).setVisible(true);
     }
 
+    @Override
     public void helpAboutMenuItemActionPerformed() {
         JDialog aboutDialog = new AboutDialog(mainWindow.getApplicationFrame());
         aboutDialog.setVisible(true);

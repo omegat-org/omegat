@@ -193,6 +193,13 @@ sourceSets {
             srcDir 'test/fixtures'
         }
     }
+    testAcceptance {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir 'test-acceptance/src'
+        }
+    }
     testIntegration {
         java {
             srcDir 'test-integration/src'
@@ -204,6 +211,8 @@ configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
     testIntegrationImplementation.extendsFrom implementation
+    testAcceptanceImplementation.extendsFrom testImplementation
+    testAcceptanceRuntime.extendsFrom testRuntime
     jaxb
     genMac
 }
@@ -332,7 +341,9 @@ dependencies {
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
+    testFixturesImplementation(libs.assertj.swing.junit)
 
+    testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
     // LanguageTool unit tests exercise these languages
     testImplementation(libs.bundles.languagetool.tests) {
@@ -351,6 +362,14 @@ dependencies {
 
     // genMac only
     genMac(libs.omegat.appbundler)
+
+    testAcceptanceImplementation sourceSets.main.output
+    testAcceptanceImplementation(libs.commons.io)
+    testAcceptanceImplementation(libs.slf4j.jdk14)
+    testAcceptanceImplementation(libs.slf4j.format.jdk14)
+    testAcceptanceImplementation(testFixtures(project.rootProject))
+    testAcceptanceImplementation(libs.assertj.swing.junit)
+    testAcceptanceImplementation(libs.bundles.jackson)
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
@@ -1578,6 +1597,21 @@ tasks.register('testOnJava21', Test) {
         systemProperty 'java.awt.headless', 'true'
     }
     group = 'verification'
+}
+
+tasks.register('testAcceptance', Test) {
+    description = 'Run Acceptance GUI test'
+    group = 'verification'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
+             "--add-opens", "java.base/java.util=ALL-UNNAMED"])
+    testClassesDirs = sourceSets.testAcceptance.output.classesDirs
+    classpath = sourceSets.testAcceptance.runtimeClasspath
+    systemProperties = System.properties
+    shouldRunAfter(tasks.test)
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')

@@ -49,9 +49,8 @@ import javax.swing.UIManager;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.main.BaseMainWindowMenuHandler;
 import org.omegat.gui.main.MainMenuIcons;
-import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -72,14 +71,14 @@ public class AccessTools extends JPanel {
 
     private ProjectComboBoxModel projectComboBoxModel;
     private SourceComboBoxModel sourceComboBoxModel;
-    private final MainWindowMenuHandler mainWindowMenuHandler;
+    private final BaseMainWindowMenuHandler mainWindowMenuHandler;
 
     private URI selectedProject = null;
 
     private static final int MAX_PATH_LENGTH_SHOWN = 25;
     private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
 
-    public AccessTools(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
+    public AccessTools(final BaseMainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindowMenuHandler = mainWindowMenuHandler;
         initComponents();
     }

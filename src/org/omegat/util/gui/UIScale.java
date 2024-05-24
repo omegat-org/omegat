@@ -197,7 +197,7 @@ public final class UIScale {
                 }
             }
         }
-        if (Platform.isLinux && !isSystemScaling()) {
+        if ((Platform.isUnixLike()) && !isSystemScaling()) {
             // see class com.sun.java.swing.plaf.gtk.PangoFonts background
             // information
             Object value = Toolkit.getDefaultToolkit().getDesktopProperty("gnome.Xft/DPI");
@@ -228,7 +228,7 @@ public final class UIScale {
         } else if (Platform.isMacOS) {
             // the default font size on macOS is 13
             fontSizeDivider = 13f;
-        } else if (Platform.isLinux) {
+        } else if (Platform.isUnixLike()) {
             // the default font size for Unity and Gnome is 15 and for KDE it is
             // 13
             fontSizeDivider = Platform.isKDE ? 13f : 15f;

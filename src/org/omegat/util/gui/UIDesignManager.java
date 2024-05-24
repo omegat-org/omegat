@@ -419,7 +419,7 @@ public final class UIDesignManager {
         // TextPane.background is always white but should be a
         // text_background of GTK.
         // List.background is as same color as text_background.
-        if (Platform.isLinux() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
+        if (Platform.isUnixLike() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
             uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
         }
         uiDefaults.put("OmegaT.alternatingHilite", hilite);

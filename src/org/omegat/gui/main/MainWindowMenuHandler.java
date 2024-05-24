@@ -52,7 +52,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
-import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;

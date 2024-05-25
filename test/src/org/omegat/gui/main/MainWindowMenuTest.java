@@ -76,7 +76,7 @@ public class MainWindowMenuTest extends TestCore {
                 count++;
                 String actionClassName = StringUtil.capitalizeFirst(f.getName(), Locale.ENGLISH);
                 if (!actionTargets.contains(actionClassName)) {
-                    fail("Action method or class not defined for " + f.getName());
+                    fail("Action method or class not defined for " + actionClassName);
                 } else {
                     assertTrue(actionTargets.remove(actionClassName));
                 }

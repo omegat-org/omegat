@@ -39,10 +39,12 @@ package org.omegat.gui.main;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
@@ -102,7 +104,7 @@ import org.omegat.util.gui.Styles;
  * /src/org/omegat/gui/main/MainMenuShortcuts.mac.properties with the proper
  * shortcuts if set.
  */
-public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
+public abstract class BaseMainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
     public static final String HELP_MENU = "help_menu";
     public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
@@ -266,7 +268,7 @@ public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
         gotoNextUntranslatedMenuItem = createMenuItemFromAction("GotoNextUntranslatedMenuItem");
         gotoNextTranslatedMenuItem = createMenuItemFromAction("GotoNextTranslatedMenuItem");
         gotoNextSegmentMenuItem = createMenuItemFromAction("GotoNextSegmentMenuItem");
-        gotoPreviousSegmentMenuItem = createMenuItem("TF_MENU_EDIT_PREV");
+        gotoPreviousSegmentMenuItem = createMenuItemFromAction("GotoPreviousSegmentMenuItem");
         gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO");
         gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE");
         gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE");
@@ -274,7 +276,7 @@ public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
         gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE");
         gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU");
 
-        gotoNextXAutoMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_XAUTO");
+        gotoNextXAutoMenuItem = createMenuItemFromAction("GotoNextXAutoMenuItem");
         gotoPrevXAutoMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XAUTO");
         gotoNextXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_XENFORCED");
         gotoPrevXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XENFORCED");
@@ -663,8 +665,17 @@ public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
     @Deprecated
     @Override
     public void invokeAction(String action, int modifiers) {
-
-        throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        String actionName;
+        if (modifiers > 0) {
+            actionName = StringUtil.capitalizeFirst(action, Locale.ENGLISH) + "withModifiers";
+        } else {
+            actionName = StringUtil.capitalizeFirst(action, Locale.ENGLISH);
+        }
+        if (actions.containsKey(actionName)) {
+            actions.get(actionName).actionPerformed(null);
+        } else {
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        }
     }
 
     /**
@@ -731,6 +742,7 @@ public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
     protected JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
         JCheckBoxMenuItem result = new JCheckBoxMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addActionListener(this);
         return result;
     }
 
@@ -745,6 +757,7 @@ public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
         JRadioButtonMenuItem result = new JRadioButtonMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         buttonGroup.add(result);
+        result.addActionListener(this);
         return result;
     }
 

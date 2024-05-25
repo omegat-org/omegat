@@ -154,7 +154,7 @@ public class MainWindowMenuTest extends TestCore {
     static class TestMainMenu extends BaseMainWindowMenu {
 
         TestMainMenu() {
-            super(null, null);
+            super(null);
         }
 
         @Override

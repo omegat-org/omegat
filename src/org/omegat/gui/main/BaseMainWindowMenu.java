@@ -203,7 +203,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 "ProjectAccessCurrentTargetDocumentMenuItem");
         projectAccessWriteableGlossaryMenuItem = createMenuItemFromAction(
                 "ProjectAccessWriteableGlossaryMenuItem");
-
         projectAccessRootMenuItem = createMenuItemFromAction("ProjectAccessRootMenuItem");
         projectAccessDictionaryMenuItem = createMenuItemFromAction("ProjectAccessDictionaryMenuItem");
         projectAccessGlossaryMenuItem = createMenuItemFromAction("ProjectAccessGlossaryMenuItem");
@@ -228,13 +227,14 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editInsertSourceMenuItem = createMenuItemFromAction("EditInsertSourceMenuItem");
         editSelectSourceMenuItem = createMenuItemFromAction("EditSelectSourceMenuItem");
         editOverwriteMachineTranslationMenuItem = createMenuItemFromAction("EditOverwriteMachineTranslationMenuItem");
-        editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT");
-        editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED");
+        editTagPainterMenuItem = createMenuItemFromAction("EditTagPainterMenuItem");
+        editTagNextMissedMenuItem = createMenuItemFromAction("EditTagNextMissedMenuItem");
         editExportSelectionMenuItem = createMenuItemFromAction("EditExportSelectionMenuItem");
         editCreateGlossaryEntryMenuItem = createMenuItemFromAction("EditCreateGlossaryEntryMenuItem");
         editFindInProjectMenuItem = createMenuItemFromAction("EditFindInProjectMenuItem");
         editReplaceInProjectMenuItem = createMenuItemFromAction("EditReplaceInProjectMenuItem");
         editSearchDictionaryMenuItem = createMenuItemFromAction("EditSearchDictionaryMenuItem");
+
         switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE");
         selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE");
 
@@ -269,116 +269,95 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoNextTranslatedMenuItem = createMenuItemFromAction("GotoNextTranslatedMenuItem");
         gotoNextSegmentMenuItem = createMenuItemFromAction("GotoNextSegmentMenuItem");
         gotoPreviousSegmentMenuItem = createMenuItemFromAction("GotoPreviousSegmentMenuItem");
-        gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO");
-        gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE");
-        gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE");
+        gotoSegmentMenuItem = createMenuItemFromAction( "GotoSegmentMenuItem");
+        gotoNextNoteMenuItem = createMenuItemFromAction( "GotoNextNoteMenuItem");
+        gotoPreviousNoteMenuItem = createMenuItemFromAction("GotoPreviousNoteMenuItem");
         gotoNextUniqueMenuItem = createMenuItemFromAction("GotoNextUniqueMenuItem");
-        gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE");
+        gotoMatchSourceSegment = createMenuItemFromAction("GotoMatchSourceSegment");
         gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU");
 
         gotoNextXAutoMenuItem = createMenuItemFromAction("GotoNextXAutoMenuItem");
-        gotoPrevXAutoMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XAUTO");
-        gotoNextXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_XENFORCED");
-        gotoPrevXEnforcedMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XENFORCED");
+        gotoPrevXAutoMenuItem = createMenuItemFromAction("GotoPrevXAutoMenuItem");
+        gotoNextXEnforcedMenuItem = createMenuItemFromAction("GotoNextXEnforcedMenuItem");
+        gotoPrevXEnforcedMenuItem = createMenuItemFromAction("GotoPrevXEnforcedMenuItem");
 
-        gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY");
-        gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY");
-        gotoNotesPanelMenuItem = createMenuItem("TF_MENU_GOTO_NOTES_PANEL");
-        gotoEditorPanelMenuItem = createMenuItem("TF_MENU_GOTO_EDITOR_PANEL");
+        gotoHistoryBackMenuItem = createMenuItemFromAction("GotoHistoryBackMenuItem");
+        gotoHistoryForwardMenuItem = createMenuItemFromAction("GotoHistoryForwardMenuItem");
+        gotoNotesPanelMenuItem = createMenuItemFromAction("GotoNotesPanelMenuItem");
+        gotoEditorPanelMenuItem = createMenuItemFromAction("GotoEditorPanelMenuItem");
 
-        viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
-                "TF_MENU_DISPLAY_MARK_TRANSLATED");
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
-                "TF_MENU_DISPLAY_MARK_UNTRANSLATED");
-        viewMarkParagraphStartCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_PARAGRAPH");
-        viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem(
-                "MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES");
-        viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
-                "MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS");
-        viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NOTED_SEGMENTS");
-        viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP");
-        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE");
-        viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI");
-        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_AUTOPOPULATED");
-        viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_GLOSSARY_MARK");
-        viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED");
-        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK");
+        viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkTranslatedSegmentsCheckBoxMenuItem");
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkUntranslatedSegmentsCheckBoxMenuItem");
+        viewMarkParagraphStartCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkParagraphStartCheckBoxMenuItem");
+        viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewDisplaySegmentSourceCheckBoxMenuItem");
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkNonUniqueSegmentsCheckBoxMenuItem");
+        viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkNotedSegmentsCheckBoxMenuItem");
+        viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkNBSPCheckBoxMenuItem");
+        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkWhitespaceCheckBoxMenuItem");
+        viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkBidiCheckBoxMenuItem");
+        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkAutoPopulatedCheckBoxMenuItem");
+        viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkGlossaryMatchesCheckBoxMenuItem");
+        viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkLanguageCheckerCheckBoxMenuItem");
+        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkFontFallbackCheckBoxMenuItem");
+
         viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO");
-
-        ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
-        viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(
-                "MW_VIEW_MENU_MODIFICATION_INFO_NONE", viewModificationInfoMenuBG);
-        viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItem(
-                "MW_VIEW_MENU_MODIFICATION_INFO_SELECTED", viewModificationInfoMenuBG);
-        viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem(
-                "MW_VIEW_MENU_MODIFICATION_INFO_ALL", viewModificationInfoMenuBG);
-
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
-        viewMarkParagraphStartCheckBoxMenuItem.setIcon(
-                MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), '\u00b6'));
-        viewDisplaySegmentSourceCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
-        viewMarkNonUniqueSegmentsCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
-        viewMarkNotedSegmentsCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
-        viewMarkNBSPCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
-        viewMarkWhitespaceCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
-        viewMarkBidiCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
         viewModificationInfoMenu.setIcon(MainMenuIcons.newBlankIcon());
-        viewMarkAutoPopulatedCheckBoxMenuItem.setIcon(
-                MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
-        viewMarkGlossaryMatchesCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSTIPS.getColor()));
-        viewMarkLanguageCheckerCheckBoxMenuItem
-                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor()));
-        viewMarkFontFallbackCheckBoxMenuItem.setIcon(MainMenuIcons.newTextIcon(
-                UIManager.getColor("Label.foreground"), new Font("Serif", Font.ITALIC, 16), 'F'));
+        ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
+        viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
+                 "ViewDisplayModificationInfoNoneRadioButtonMenuItem", viewModificationInfoMenuBG);
+        viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
+                "ViewDisplayModificationInfoSelectedRadioButtonMenuItem", viewModificationInfoMenuBG);
+        viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
+                "ViewDisplayModificationInfoAllRadioButtonMenuItem", viewModificationInfoMenuBG);
+        viewRestoreGUIMenuItem = createMenuItemFromAction("ViewRestoreGUIMenuItem");
 
-        viewRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI");
+        toolsCheckIssuesMenuItem = createMenuItemFromAction("ToolsCheckIssuesMenuItem");
+        toolsCheckIssuesCurrentFileMenuItem = createMenuItemFromAction("ToolsCheckIssuesCurrentFileMenuItem");
+        toolsShowStatisticsStandardMenuItem = createMenuItemFromAction( "ToolsShowStatisticsStandardMenuItem");
+        toolsShowStatisticsMatchesMenuItem = createMenuItemFromAction("ToolsShowStatisticsMatchesMenuItem");
+        toolsShowStatisticsMatchesPerFileMenuItem = createMenuItemFromAction(
+                "ToolsShowStatisticsMatchesPerFileMenuItem");
 
-        toolsCheckIssuesMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES");
-        toolsCheckIssuesCurrentFileMenuItem = createMenuItem("TF_MENU_TOOLS_CHECK_ISSUES_CURRENT_FILE");
-        toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD");
-        toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES");
-        toolsShowStatisticsMatchesPerFileMenuItem = createMenuItem(
-                "TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE");
         optionsPreferencesMenuItem = createMenuItemFromAction("OptionsPreferencesMenuItem");
 
         optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE");
 
-        optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItem("MT_AUTO_FETCH");
+        optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItemFromAction("OptionsMTAutoFetchCheckboxMenuItem");
         optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY");
-        optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem(
-                "TF_OPTIONSMENU_GLOSSARY_FUZZY");
+        optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "OptionsGlossaryFuzzyMatchingCheckBoxMenuItem");
 
         optionsDictionaryMenu = createMenu("TF_OPTIONSMENU_DICTIONARY");
-        optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem(
-                "TF_OPTIONSMENU_DICTIONARY_FUZZY");
+        optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "OptionsDictionaryFuzzyMatchingCheckBoxMenuItem");
 
         optionsAutoCompleteMenu = createMenu("MW_OPTIONSMENU_AUTOCOMPLETE");
         // add any autocomplete view configuration menu items below
-        optionsAutoCompleteShowAutomaticallyItem = createCheckboxMenuItem(
-                "MW_OPTIONSMENU_AUTOCOMPLETE_SHOW_AUTOMATICALLY");
-        optionsAutoCompleteHistoryCompletionMenuItem = createCheckboxMenuItem(
-                "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_COMPLETION");
-        optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItem(
-                "MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_PREDICTION");
-        optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_GLOBAL_FILTERS");
-        optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_GLOBAL_SENTSEG");
-        optionsWorkflowMenuItem = createMenuItem("MW_OPTIONSMENU_WORKFLOW");
-        optionsAccessConfigDirMenuItem = createMenuItem("MW_OPTIONSMENU_ACCESS_CONFIG_DIR");
+        optionsAutoCompleteShowAutomaticallyItem = createCheckboxMenuItemFromAction(
+                "OptionsAutoCompleteShowAutomaticallyItem");
+        optionsAutoCompleteHistoryCompletionMenuItem = createCheckboxMenuItemFromAction(
+                "OptionsAutoCompleteHistoryCompletionMenuItem");
+        optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItemFromAction(
+                "OptionsAutoCompleteHistoryPredictionMenuItem");
 
-        helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS");
+        optionsSetupFileFiltersMenuItem = createMenuItemFromAction("OptionsSetupFileFiltersMenuItem");
+        optionsSentsegMenuItem = createMenuItemFromAction("OptionsSentsegMenuItem");
+        optionsWorkflowMenuItem = createMenuItemFromAction("OptionsWorkflowMenuItem");
+        optionsAccessConfigDirMenuItem = createMenuItemFromAction( "OptionsAccessConfigDirMenuItem");
+
+        helpContentsMenuItem = createMenuItemFromAction( "HelpContentsMenuItem");
         helpAboutMenuItem = createMenuItemFromAction("HelpAboutMenuItem");
         helpLastChangesMenuItem = createMenuItemFromAction("HelpLastChangesMenuItem");
-        helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG");
-        helpUpdateCheckMenuItem = createMenuItem("TF_MENU_HELP_CHECK_FOR_UPDATES");
-
+        helpLogMenuItem = createMenuItemFromAction("HelpLogMenuItem");
+        helpUpdateCheckMenuItem = createMenuItemFromAction("HelpUpdateCheckMenuItem");
     }
 
     protected void constructMenu() {
@@ -654,6 +633,14 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         });
     }
 
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        // Get item name from actionCommand.
+        String action = evt.getActionCommand();
+        Log.logInfoRB("LOG_MENU_CLICK", action);
+        invokeAction(action, evt.getModifiers());
+    }
+
     /**
      * Code for dispatching events from components to event handlers.
      *
@@ -723,12 +710,23 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         return item;
     }
 
+    @Deprecated
     protected JMenuItem createMenuItem(String titleKey, String name) {
         JMenuItem result = new JMenuItem();
         result.setName(name);
         Action action = actions.get(name);
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addActionListener(action);
+        return result;
+    }
+
+    protected JCheckBoxMenuItem createCheckboxMenuItemFromAction(String commandKey) {
+        Action action = actions.get(commandKey);
+        if (action == null) {
+            throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
+        }
+        JCheckBoxMenuItem result = new JCheckBoxMenuItem();
+        result.setAction(action);
         return result;
     }
 
@@ -743,6 +741,18 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         JCheckBoxMenuItem result = new JCheckBoxMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addActionListener(this);
+        return result;
+    }
+
+    protected JRadioButtonMenuItem createRadioButtonMenuItemFromAction(String commandKey, ButtonGroup buttonGroup) {
+        Action action = actions.get(commandKey);
+        if (action == null) {
+            throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
+        }
+        JRadioButtonMenuItem result = new JRadioButtonMenuItem();
+        result.setAction(action);
+        result.setIcon(null);
+        buttonGroup.add(result);
         return result;
     }
 

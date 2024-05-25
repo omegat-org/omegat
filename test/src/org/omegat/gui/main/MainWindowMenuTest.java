@@ -26,20 +26,15 @@
 package org.omegat.gui.main;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.awt.Component;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -69,53 +64,27 @@ public class MainWindowMenuTest extends TestCore {
     /**
      * Check MainWindow for all menu items action handlers exist.
      *
-     * @throws Exception
      */
     @Test
-    public void testMenuActions() throws Exception {
+    public void testMenuActions() {
         int count = 0;
 
-        Map<String, Method> existsMethods = new HashMap<>();
-
-        for (Method m : MainWindowMenuHandler.class.getDeclaredMethods()) {
-            if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
-                Class<?>[] params = m.getParameterTypes();
-                if (params.length == 0) {
-                    existsMethods.put(m.getName(), m);
-                }
-                // Include menu items that take a modifier key.
-                if (params.length == 1 && params[0] == Integer.TYPE) {
-                    existsMethods.put(m.getName(), m);
-                }
-            }
-        }
         Set<Object> actionTargets = MainWindowMenuHandler.getActions().keySet();
 
         for (Field f : StaticUtils.getAllModelFields(MainWindowMenu.class)) {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
                 count++;
-                String actionMethodName = f.getName() + "ActionPerformed";
-                Method m;
-                try {
-                    MainWindowMenuHandler.class.getMethod(actionMethodName);
-                    assertNotNull(existsMethods.remove(actionMethodName));
-                } catch (NoSuchMethodException ignore) {
-                    // See if the method accepts a modifier key argument.
-                    try {
-                        MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
-                        assertNotNull(existsMethods.remove(actionMethodName));
-                    } catch (NoSuchMethodException ignore2) {
-                        String actionClassName = StringUtil.capitalizeFirst(f.getName(), Locale.ENGLISH);
-                        if (!actionTargets.contains(actionClassName)) {
-                            fail("Action method or class not defined for " + f.getName());
-                        }
-                    }
+                String actionClassName = StringUtil.capitalizeFirst(f.getName(), Locale.ENGLISH);
+                if (!actionTargets.contains(actionClassName)) {
+                    fail("Action method or class not defined for " + f.getName());
+                } else {
+                    assertTrue(actionTargets.remove(actionClassName));
                 }
             }
         }
         assertTrue("menu items not found", count > 30);
         assertTrue("There is action handlers in MainWindow which doesn't used in menu: "
-                + existsMethods.keySet(), existsMethods.isEmpty());
+                + actionTargets, actionTargets.isEmpty());
     }
 
     @Test

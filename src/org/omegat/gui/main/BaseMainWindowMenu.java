@@ -102,7 +102,7 @@ import org.omegat.util.gui.Styles;
  * /src/org/omegat/gui/main/MainMenuShortcuts.mac.properties with the proper
  * shortcuts if set.
  */
-public abstract class BaseMainWindowMenu implements IMainMenu {
+public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
 
     public static final String HELP_MENU = "help_menu";
     public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
@@ -137,6 +137,25 @@ public abstract class BaseMainWindowMenu implements IMainMenu {
     }
 
     abstract void createMenuBar();
+
+    /**
+     * Code for dispatching events from components to event handlers.
+     *
+     * @param evt event info
+     */
+    @Override
+    public void menuSelected(MenuEvent evt) {
+        // Item what perform event.
+        JMenu menu = (JMenu) evt.getSource();
+        // Get item name from actionCommand.
+        Log.logInfoRB("LOG_MENU_CLICK", menu.getName());
+    }
+
+    public void menuCanceled(MenuEvent e) {
+    }
+
+    public void menuDeselected(MenuEvent e) {
+    }
 
     protected void createComponents() {
         projectMenu = createMenu("TF_MENU_FILE", MenuExtender.MenuKey.PROJECT);
@@ -644,6 +663,7 @@ public abstract class BaseMainWindowMenu implements IMainMenu {
     @Deprecated
     @Override
     public void invokeAction(String action, int modifiers) {
+
         throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
     }
 
@@ -661,6 +681,7 @@ public abstract class BaseMainWindowMenu implements IMainMenu {
     protected JMenu createMenu(String titleKey, MenuExtender.MenuKey menuKey) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addMenuListener(this);
         if (menuKey != null) {
             menus.put(menuKey, result);
         }

@@ -37,7 +37,6 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -57,7 +56,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
-import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
@@ -78,7 +76,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.OSXIntegration;
-import org.omegat.util.gui.Styles;
 
 /**
  * Base class for create main menu and handle main menu events.
@@ -142,7 +139,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     /**
      * Code for dispatching events from components to event handlers.
      *
-     * @param evt event info
+     * @param evt
+     *            event info
      */
     @Override
     public void menuSelected(MenuEvent evt) {
@@ -225,7 +223,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editOverwriteSourceMenuItem = createMenuItemFromAction("EditOverwriteSourceMenuItem");
         editInsertSourceMenuItem = createMenuItemFromAction("EditInsertSourceMenuItem");
         editSelectSourceMenuItem = createMenuItemFromAction("EditSelectSourceMenuItem");
-        editOverwriteMachineTranslationMenuItem = createMenuItemFromAction("EditOverwriteMachineTranslationMenuItem");
+        editOverwriteMachineTranslationMenuItem = createMenuItemFromAction(
+                "EditOverwriteMachineTranslationMenuItem");
         editTagPainterMenuItem = createMenuItemFromAction("EditTagPainterMenuItem");
         editTagNextMissedMenuItem = createMenuItemFromAction("EditTagNextMissedMenuItem");
         editExportSelectionMenuItem = createMenuItemFromAction("EditExportSelectionMenuItem");
@@ -268,8 +267,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoNextTranslatedMenuItem = createMenuItemFromAction("GotoNextTranslatedMenuItem");
         gotoNextSegmentMenuItem = createMenuItemFromAction("GotoNextSegmentMenuItem");
         gotoPreviousSegmentMenuItem = createMenuItemFromAction("GotoPreviousSegmentMenuItem");
-        gotoSegmentMenuItem = createMenuItemFromAction( "GotoSegmentMenuItem");
-        gotoNextNoteMenuItem = createMenuItemFromAction( "GotoNextNoteMenuItem");
+        gotoSegmentMenuItem = createMenuItemFromAction("GotoSegmentMenuItem");
+        gotoNextNoteMenuItem = createMenuItemFromAction("GotoNextNoteMenuItem");
         gotoPreviousNoteMenuItem = createMenuItemFromAction("GotoPreviousNoteMenuItem");
         gotoNextUniqueMenuItem = createMenuItemFromAction("GotoNextUniqueMenuItem");
         gotoMatchSourceSegment = createMenuItemFromAction("GotoMatchSourceSegment");
@@ -298,20 +297,23 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
                 "ViewMarkNotedSegmentsCheckBoxMenuItem");
         viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkNBSPCheckBoxMenuItem");
-        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkWhitespaceCheckBoxMenuItem");
+        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkWhitespaceCheckBoxMenuItem");
         viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkBidiCheckBoxMenuItem");
-        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkAutoPopulatedCheckBoxMenuItem");
+        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkAutoPopulatedCheckBoxMenuItem");
         viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItemFromAction(
                 "ViewMarkGlossaryMatchesCheckBoxMenuItem");
         viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItemFromAction(
                 "ViewMarkLanguageCheckerCheckBoxMenuItem");
-        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkFontFallbackCheckBoxMenuItem");
+        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItemFromAction(
+                "ViewMarkFontFallbackCheckBoxMenuItem");
 
         viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO");
         viewModificationInfoMenu.setIcon(MainMenuIcons.newBlankIcon());
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
-                 "ViewDisplayModificationInfoNoneRadioButtonMenuItem", viewModificationInfoMenuBG);
+                "ViewDisplayModificationInfoNoneRadioButtonMenuItem", viewModificationInfoMenuBG);
         viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
                 "ViewDisplayModificationInfoSelectedRadioButtonMenuItem", viewModificationInfoMenuBG);
         viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
@@ -320,7 +322,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         toolsCheckIssuesMenuItem = createMenuItemFromAction("ToolsCheckIssuesMenuItem");
         toolsCheckIssuesCurrentFileMenuItem = createMenuItemFromAction("ToolsCheckIssuesCurrentFileMenuItem");
-        toolsShowStatisticsStandardMenuItem = createMenuItemFromAction( "ToolsShowStatisticsStandardMenuItem");
+        toolsShowStatisticsStandardMenuItem = createMenuItemFromAction("ToolsShowStatisticsStandardMenuItem");
         toolsShowStatisticsMatchesMenuItem = createMenuItemFromAction("ToolsShowStatisticsMatchesMenuItem");
         toolsShowStatisticsMatchesPerFileMenuItem = createMenuItemFromAction(
                 "ToolsShowStatisticsMatchesPerFileMenuItem");
@@ -329,7 +331,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE");
 
-        optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItemFromAction("OptionsMTAutoFetchCheckboxMenuItem");
+        optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItemFromAction(
+                "OptionsMTAutoFetchCheckboxMenuItem");
         optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY");
         optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItemFromAction(
                 "OptionsGlossaryFuzzyMatchingCheckBoxMenuItem");
@@ -350,9 +353,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         optionsSetupFileFiltersMenuItem = createMenuItemFromAction("OptionsSetupFileFiltersMenuItem");
         optionsSentsegMenuItem = createMenuItemFromAction("OptionsSentsegMenuItem");
         optionsWorkflowMenuItem = createMenuItemFromAction("OptionsWorkflowMenuItem");
-        optionsAccessConfigDirMenuItem = createMenuItemFromAction( "OptionsAccessConfigDirMenuItem");
+        optionsAccessConfigDirMenuItem = createMenuItemFromAction("OptionsAccessConfigDirMenuItem");
 
-        helpContentsMenuItem = createMenuItemFromAction( "HelpContentsMenuItem");
+        helpContentsMenuItem = createMenuItemFromAction("HelpContentsMenuItem");
         helpAboutMenuItem = createMenuItemFromAction("HelpAboutMenuItem");
         helpLastChangesMenuItem = createMenuItemFromAction("HelpLastChangesMenuItem");
         helpLogMenuItem = createMenuItemFromAction("HelpLogMenuItem");
@@ -596,7 +599,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         String key = "findInProjectReuseLastWindow";
         KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(stroke, key);
         mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -745,7 +749,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         return result;
     }
 
-    protected JRadioButtonMenuItem createRadioButtonMenuItemFromAction(String commandKey, ButtonGroup buttonGroup) {
+    protected JRadioButtonMenuItem createRadioButtonMenuItemFromAction(String commandKey,
+            ButtonGroup buttonGroup) {
         Action action = actions.get(commandKey);
         if (action == null) {
             throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
@@ -774,8 +779,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     /**
-     * Set 'actionCommand' for all menu items.
-     * bundle values
+     * Set 'actionCommand' for all menu items. bundle values
      */
     @Deprecated
     protected void setActionCommands() {

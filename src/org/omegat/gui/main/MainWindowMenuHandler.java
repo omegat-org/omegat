@@ -48,17 +48,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
 
-import org.checkerframework.checker.units.qual.A;
 import org.omegat.util.gui.Styles;
 import org.openide.awt.AbstractMnemonicsAction;
 
@@ -128,141 +124,88 @@ public final class MainWindowMenuHandler {
         this.mainWindow = mainWindow;
     }
 
-    private static final Action[] ACTIONS = {
-            new ProjectNewMenuItemAction(),
-            new ProjectTeamNewMenuItemAction(),
-            new ProjectOpenMenuItemAction(),
-            new ProjectCloseMenuItemAction(),
-            new ProjectClearRecentMenuItemAction(),
-            new ProjectImportMenuItemAction(),
-            new ProjectWikiImportMenuItemAction(),
-            new ProjectSaveMenuItemAction(),
-            new ProjectReloadMenuItemAction(),
-            new ProjectCommitSourceFilesAction(),
-            new ProjectCommitTargetFilesAction(),
-            new ProjectCompileMenuItemAction(),
-            new ProjectSingleCompileMenuItemAction(),
-            new ProjectMedOpenMenuItemAction(),
-            new ProjectMedCreateMenuItemAction(),
-            new ProjectEditMenuItemAction(),
-            new ProjectAccessRootMenuItemAction(),
-            new ProjectAccessDictionaryMenuItemAction(),
-            new ProjectAccessGlossaryMenuItemAction(),
-            new ProjectAccessSourceMenuItemAction(),
-            new ProjectAccessTargetMenuItemAction(),
-            new ProjectAccessTMMenuItemAction(),
-            new ProjectAccessExportTMMenuItemAction(),
-            new ProjectRestartMenuItemAction(),
-            new ProjectExitMenuItemAction(),
+    private static final Action[] ACTIONS = { new ProjectNewMenuItemAction(),
+            new ProjectTeamNewMenuItemAction(), new ProjectOpenMenuItemAction(),
+            new ProjectCloseMenuItemAction(), new ProjectClearRecentMenuItemAction(),
+            new ProjectImportMenuItemAction(), new ProjectWikiImportMenuItemAction(),
+            new ProjectSaveMenuItemAction(), new ProjectReloadMenuItemAction(),
+            new ProjectCommitSourceFilesAction(), new ProjectCommitTargetFilesAction(),
+            new ProjectCompileMenuItemAction(), new ProjectSingleCompileMenuItemAction(),
+            new ProjectMedOpenMenuItemAction(), new ProjectMedCreateMenuItemAction(),
+            new ProjectEditMenuItemAction(), new ProjectAccessRootMenuItemAction(),
+            new ProjectAccessDictionaryMenuItemAction(), new ProjectAccessGlossaryMenuItemAction(),
+            new ProjectAccessSourceMenuItemAction(), new ProjectAccessTargetMenuItemAction(),
+            new ProjectAccessTMMenuItemAction(), new ProjectAccessExportTMMenuItemAction(),
+            new ProjectRestartMenuItemAction(), new ProjectExitMenuItemAction(),
             new ProjectAccessCurrentSourceDocumentMenuItemAction(),
             new ProjectAccessCurrentTargetDocumentMenuItemAction(),
-            new ProjectAccessWriteableGlossaryMenuItemAction(),
-            new EditUndoMenuItemAction(),
-            new EditRedoMenuItemAction(),
-            new EditFindInProjectMenuItemAction(),
-            new EditOverwriteTranslationMenuItemAction(),
-            new EditInsertSourceMenuItemAction(),
-            new EditSelectSourceMenuItemAction(),
-            new EditInsertTranslationMenuItemAction(),
-            new EditOverwriteMachineTranslationMenuItemAction(),
-            new EditReplaceInProjectMenuItemAction(),
-            new EditExportSelectionMenuItemAction(),
-            new EditOverwriteSourceMenuItemAction(),
-            new EditSearchDictionaryMenuItemAction(),
-            new EditCreateGlossaryEntryMenuItemAction(),
-            new EditSelectFuzzy1MenuItemAction(),
-            new EditSelectFuzzy2MenuItemAction(),
-            new EditSelectFuzzy3MenuItemAction(),
-            new EditSelectFuzzy4MenuItemAction(),
-            new EditSelectFuzzy5MenuItemAction(),
-            new EditSelectFuzzyPrevMenuItemAction(),
-            new EditSelectFuzzyNextMenuItemAction(),
-            new EditTagPainterMenuItemAction(),
-            new EditTagNextMissedMenuItemAction(),
-            new InsertCharsLRMAction(),
-            new InsertCharsRLMAction(),
-            new InsertCharsLREAction(),
-            new InsertCharsRLEAction(),
-            new InsertCharsPDFAction(),
-            new EditMultipleDefaultAction(),
-            new EditMultipleAlternateAction(),
-            new EditRegisterUntranslatedMenuItemAction(),
-            new EditRegisterEmptyMenuItemAction(),
-            new EditRegisterIdenticalMenuItemAction(),
-            new TitleCaseMenuItemAction(),
-            new SentenceCaseMenuItemAction(),
-            new CycleSwitchCaseMenuItemAction(),
-            new UpperCaseMenuItemAction(),
-            new LowerCaseMenuItemAction(),
-            new GotoNextUntranslatedMenuItemAction(),
-            new GotoNextUniqueMenuItemAction(),
-            new GotoNextTranslatedMenuItemAction(),
-            new GotoNextSegmentMenuItemAction(),
-            new GotoPreviousSegmentMenuItemAction(),
-            new GotoSegmentMenuItemAction(),
-            new GotoNextUniqueMenuItemAction(),
-            new GotoNextNoteMenuItemAction(),
-            new GotoPreviousNoteMenuItemAction(),
-            new GotoMatchSourceSegmentAction(),
-            new GotoNextXAutoMenuItemAction(),
-            new GotoPrevXAutoMenuItemAction(),
-            new GotoNextXEnforcedMenuItemAction(),
-            new GotoPrevXEnforcedMenuItemAction(),
-            new GotoHistoryBackMenuItemAction(),
-            new GotoHistoryForwardMenuItemAction(),
-            new GotoNotesPanelMenuItemAction(),
-            new GotoEditorPanelMenuItemAction(),
+            new ProjectAccessWriteableGlossaryMenuItemAction(), new EditUndoMenuItemAction(),
+            new EditRedoMenuItemAction(), new EditFindInProjectMenuItemAction(),
+            new EditOverwriteTranslationMenuItemAction(), new EditInsertSourceMenuItemAction(),
+            new EditSelectSourceMenuItemAction(), new EditInsertTranslationMenuItemAction(),
+            new EditOverwriteMachineTranslationMenuItemAction(), new EditReplaceInProjectMenuItemAction(),
+            new EditExportSelectionMenuItemAction(), new EditOverwriteSourceMenuItemAction(),
+            new EditSearchDictionaryMenuItemAction(), new EditCreateGlossaryEntryMenuItemAction(),
+            new EditSelectFuzzy1MenuItemAction(), new EditSelectFuzzy2MenuItemAction(),
+            new EditSelectFuzzy3MenuItemAction(), new EditSelectFuzzy4MenuItemAction(),
+            new EditSelectFuzzy5MenuItemAction(), new EditSelectFuzzyPrevMenuItemAction(),
+            new EditSelectFuzzyNextMenuItemAction(), new EditTagPainterMenuItemAction(),
+            new EditTagNextMissedMenuItemAction(), new InsertCharsLRMAction(), new InsertCharsRLMAction(),
+            new InsertCharsLREAction(), new InsertCharsRLEAction(), new InsertCharsPDFAction(),
+            new EditMultipleDefaultAction(), new EditMultipleAlternateAction(),
+            new EditRegisterUntranslatedMenuItemAction(), new EditRegisterEmptyMenuItemAction(),
+            new EditRegisterIdenticalMenuItemAction(), new TitleCaseMenuItemAction(),
+            new SentenceCaseMenuItemAction(), new CycleSwitchCaseMenuItemAction(),
+            new UpperCaseMenuItemAction(), new LowerCaseMenuItemAction(),
+            new GotoNextUntranslatedMenuItemAction(), new GotoNextUniqueMenuItemAction(),
+            new GotoNextTranslatedMenuItemAction(), new GotoNextSegmentMenuItemAction(),
+            new GotoPreviousSegmentMenuItemAction(), new GotoSegmentMenuItemAction(),
+            new GotoNextUniqueMenuItemAction(), new GotoNextNoteMenuItemAction(),
+            new GotoPreviousNoteMenuItemAction(), new GotoMatchSourceSegmentAction(),
+            new GotoNextXAutoMenuItemAction(), new GotoPrevXAutoMenuItemAction(),
+            new GotoNextXEnforcedMenuItemAction(), new GotoPrevXEnforcedMenuItemAction(),
+            new GotoHistoryBackMenuItemAction(), new GotoHistoryForwardMenuItemAction(),
+            new GotoNotesPanelMenuItemAction(), new GotoEditorPanelMenuItemAction(),
             new ViewMarkTranslatedSegmentsCheckBoxMenuItemAction(),
             new ViewMarkUntranslatedSegmentsCheckBoxMenuItemAction(),
             new ViewMarkParagraphStartCheckBoxMenuItemAction(),
             new ViewDisplaySegmentSourceCheckBoxMenuItemAction(),
             new ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction(),
-            new ViewMarkNotedSegmentsCheckBoxMenuItemAction(),
-            new ViewMarkNBSPCheckBoxMenuItemAction(),
-            new ViewMarkWhitespaceCheckBoxMenuItemAction(),
-            new ViewMarkBidiCheckBoxMenuItemAction(),
+            new ViewMarkNotedSegmentsCheckBoxMenuItemAction(), new ViewMarkNBSPCheckBoxMenuItemAction(),
+            new ViewMarkWhitespaceCheckBoxMenuItemAction(), new ViewMarkBidiCheckBoxMenuItemAction(),
             new ViewMarkAutoPopulatedCheckBoxMenuItemAction(),
             new ViewMarkGlossaryMatchesCheckBoxMenuItemAction(),
             new ViewMarkLanguageCheckerCheckBoxMenuItemAction(),
             new ViewMarkFontFallbackCheckBoxMenuItemAction(),
             new ViewDisplayModificationInfoNoneRadioButtonMenuItemAction(),
             new ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction(),
-            new ViewDisplayModificationInfoAllRadioButtonMenuItemAction(),
-            new ViewRestoreGUIMenuItemAction(),
-            new ViewFileListMenuItemAction(),
-            new ToolsCheckIssuesMenuItemAction(),
-            new ToolsCheckIssuesCurrentFileMenuItemAction(),
-            new ToolsShowStatisticsStandardMenuItemAction(),
+            new ViewDisplayModificationInfoAllRadioButtonMenuItemAction(), new ViewRestoreGUIMenuItemAction(),
+            new ViewFileListMenuItemAction(), new ToolsCheckIssuesMenuItemAction(),
+            new ToolsCheckIssuesCurrentFileMenuItemAction(), new ToolsShowStatisticsStandardMenuItemAction(),
             new ToolsShowStatisticsMatchesMenuItemAction(),
-            new ToolsShowStatisticsMatchesPerFileMenuItemAction(),
-            new OptionsPreferencesMenuItemAction(),
+            new ToolsShowStatisticsMatchesPerFileMenuItemAction(), new OptionsPreferencesMenuItemAction(),
             new OptionsAutoCompleteShowAutomaticallyItemAction(),
             new OptionsAutoCompleteHistoryCompletionMenuItemAction(),
             new OptionsAutoCompleteHistoryPredictionMenuItemAction(),
             new OptionsMTAutoFetchCheckboxMenuItemAction(),
             new OptionsGlossaryFuzzyMatchingCheckBoxMenuItemAction(),
             new OptionsDictionaryFuzzyMatchingCheckBoxMenuItemAction(),
-            new OptionsSetupFileFiltersMenuItemAction(),
-            new OptionsSentsegMenuItemAction(),
-            new OptionsWorkflowMenuItemAction(),
-            new OptionsAccessConfigDirMenuItemAction(),
-            new HelpAboutMenuItemAction(),
-            new HelpLastChangesMenuItemAction(),
-            new HelpContentsMenuItemAction(),
-            new HelpLogMenuItemAction(),
-            new HelpUpdateCheckMenuItemAction()
-    };
+            new OptionsSetupFileFiltersMenuItemAction(), new OptionsSentsegMenuItemAction(),
+            new OptionsWorkflowMenuItemAction(), new OptionsAccessConfigDirMenuItemAction(),
+            new HelpAboutMenuItemAction(), new HelpLastChangesMenuItemAction(),
+            new HelpContentsMenuItemAction(), new HelpLogMenuItemAction(),
+            new HelpUpdateCheckMenuItemAction() };
 
     public static Map<Object, Action> getActions() {
         Map<Object, Action> result = new HashMap<>();
-        for (Action a: ACTIONS) {
+        for (Action a : ACTIONS) {
             result.put(a.getValue(Action.ACTION_COMMAND_KEY), a);
         }
         return result;
     }
 
     public static Action getAction(String key) {
-        for (Action a: ACTIONS) {
+        for (Action a : ACTIONS) {
             if (a.getValue(Action.ACTION_COMMAND_KEY).equals(key)) {
                 return a;
             }
@@ -287,6 +230,7 @@ public final class MainWindowMenuHandler {
             ProjectUICommands.projectCreate();
         }
     }
+
     /**
      * Create a new team project.
      */
@@ -965,7 +909,7 @@ public final class MainWindowMenuHandler {
         }
     }
 
-   /** Quits OmegaT */
+    /** Quits OmegaT */
     @SuppressWarnings("serial")
     public static class EditRedoMenuItemAction extends AbstractMnemonicsAction {
         public EditRedoMenuItemAction() {
@@ -986,7 +930,7 @@ public final class MainWindowMenuHandler {
         }
     }
 
-   @SuppressWarnings("serial")
+    @SuppressWarnings("serial")
     public static class EditOverwriteTranslationMenuItemAction extends AbstractMnemonicsAction {
 
         public EditOverwriteTranslationMenuItemAction() {
@@ -1015,7 +959,7 @@ public final class MainWindowMenuHandler {
             Log.logInfoRB("LOG_MENU_CLICK", action);
             MainWindow.doInsertTrans();
         }
-   }
+    }
 
     @SuppressWarnings("serial")
     public static class EditOverwriteMachineTranslationMenuItemAction extends AbstractMnemonicsAction {
@@ -1039,7 +983,8 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * replaces entire edited segment text with a the source text of a segment at cursor position
+     * replaces entire edited segment text with a the source text of a segment
+     * at cursor position
      */
     @SuppressWarnings("serial")
     public static class EditOverwriteSourceMenuItemAction extends AbstractMnemonicsAction {
@@ -1096,6 +1041,7 @@ public final class MainWindowMenuHandler {
             super(OStrings.getString("TF_MENU_EDIT_SOURCE_SELECT"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "EditSelectSourceMenuItem");
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             String action = e.getActionCommand();
@@ -1359,6 +1305,7 @@ public final class MainWindowMenuHandler {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_LRM"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "InsertCharsLRM");
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             String action = e.getActionCommand();
@@ -1510,8 +1457,9 @@ public final class MainWindowMenuHandler {
         public OptionsPreferencesMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_PREFERENCES"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "OptionsPreferencesMenuItem");
-            putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.settings.icon"),
-                () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
+            putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(
+                    UIManager.getIcon("OmegaT.newUI.settings.icon"),
+                    () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
         }
 
         @Override
@@ -1641,7 +1589,7 @@ public final class MainWindowMenuHandler {
     }
 
     @SuppressWarnings("serial")
-    public static class GotoNextSegmentMenuItemAction extends AbstractMnemonicsAction  {
+    public static class GotoNextSegmentMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_NEXT"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "GotoNextSegmentMenuItem");
@@ -1779,7 +1727,7 @@ public final class MainWindowMenuHandler {
     public static class GotoEditorPanelMenuItemAction extends AbstractMnemonicsAction {
         public GotoEditorPanelMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_EDITOR_PANEL"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY,  "GotoEditorPanelMenuItem");
+            putValue(Action.ACTION_COMMAND_KEY, "GotoEditorPanelMenuItem");
         }
 
         @Override
@@ -1797,7 +1745,7 @@ public final class MainWindowMenuHandler {
     public static class GotoSegmentMenuItemAction extends AbstractMnemonicsAction {
         public GotoSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_GOTO"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY,  "GotoSegmentMenuItem");
+            putValue(Action.ACTION_COMMAND_KEY, "GotoSegmentMenuItem");
         }
 
         @Override
@@ -1821,7 +1769,7 @@ public final class MainWindowMenuHandler {
 
         public GotoHistoryBackMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_BACK_IN_HISTORY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY,  "GotoHistoryBackMenuItem");
+            putValue(Action.ACTION_COMMAND_KEY, "GotoHistoryBackMenuItem");
         }
 
         @Override
@@ -1836,7 +1784,7 @@ public final class MainWindowMenuHandler {
     public static class GotoHistoryForwardMenuItemAction extends AbstractMnemonicsAction {
         public GotoHistoryForwardMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_FORWARD_IN_HISTORY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY,  "GotoHistoryForwardMenuItem");
+            putValue(Action.ACTION_COMMAND_KEY, "GotoHistoryForwardMenuItem");
         }
 
         @Override
@@ -1890,7 +1838,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkUntranslatedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_UNTRANSLATED"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkUntranslatedSegmentsCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
         }
 
         @Override
@@ -1910,7 +1859,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkParagraphStartCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_PARAGRAPH"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkParagraphStartCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), '\u00b6'));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), '\u00b6'));
         }
 
         @Override
@@ -1919,8 +1869,7 @@ public final class MainWindowMenuHandler {
             Log.logInfoRB("LOG_MENU_CLICK", action);
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
-                Core.getEditor()
-                        .getSettings()
+                Core.getEditor().getSettings()
                         .setMarkParagraphDelimitations(((JCheckBoxMenuItem) o).isSelected());
             }
         }
@@ -1931,7 +1880,8 @@ public final class MainWindowMenuHandler {
         public ViewDisplaySegmentSourceCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewDisplaySegmentSourceCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
         }
 
         @Override
@@ -1950,7 +1900,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkNonUniqueSegmentsCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
         }
 
         @Override
@@ -1959,9 +1910,7 @@ public final class MainWindowMenuHandler {
             Log.logInfoRB("LOG_MENU_CLICK", action);
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
-                Core.getEditor()
-                        .getSettings()
-                        .setMarkNonUniqueSegments(((JCheckBoxMenuItem) o).isSelected());
+                Core.getEditor().getSettings().setMarkNonUniqueSegments(((JCheckBoxMenuItem) o).isSelected());
             }
         }
     }
@@ -1971,7 +1920,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkNotedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NOTED_SEGMENTS"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkNotedSegmentsCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
         }
 
         @Override
@@ -1984,7 +1934,6 @@ public final class MainWindowMenuHandler {
             }
         }
     }
-
 
     @SuppressWarnings("serial")
     public static class ViewMarkNBSPCheckBoxMenuItemAction extends AbstractMnemonicsAction {
@@ -2010,7 +1959,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkWhitespaceCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_WHITESPACE"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkWhitespaceCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
         }
 
         @Override
@@ -2030,7 +1980,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkBidiCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_BIDI"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkBidiCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
         }
 
         @Override
@@ -2049,7 +2000,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkAutoPopulatedCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_AUTOPOPULATED"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkAutoPopulatedCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
         }
 
         @Override
@@ -2068,7 +2020,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkGlossaryMatchesCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_GLOSSARY_MARK"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkGlossaryMatchesCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSTIPS.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSTIPS.getColor()));
         }
 
         @Override
@@ -2088,7 +2041,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkLanguageCheckerCheckBoxMenuItemAction() {
             super(OStrings.getString("LT_OPTIONS_MENU_ENABLED"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkLanguageCheckerCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor()));
+            putValue(Action.SMALL_ICON,
+                    MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor()));
         }
 
         @Override
@@ -2107,8 +2061,8 @@ public final class MainWindowMenuHandler {
         public ViewMarkFontFallbackCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_FONT_FALLBACK"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewMarkFontFallbackCheckBoxMenuItem");
-            putValue(Action.SMALL_ICON, MainMenuIcons.newTextIcon(
-                UIManager.getColor("Label.foreground"), new Font("Serif", Font.ITALIC, 16), 'F'));
+            putValue(Action.SMALL_ICON, MainMenuIcons.newTextIcon(UIManager.getColor("Label.foreground"),
+                    new Font("Serif", Font.ITALIC, 16), 'F'));
         }
 
         @Override
@@ -2120,10 +2074,11 @@ public final class MainWindowMenuHandler {
                 Core.getEditor().getSettings().setDoFontFallback(((JCheckBoxMenuItem) o).isSelected());
             }
         }
-     }
+    }
 
     @SuppressWarnings("serial")
-    public static class ViewDisplayModificationInfoNoneRadioButtonMenuItemAction extends AbstractMnemonicsAction {
+    public static class ViewDisplayModificationInfoNoneRadioButtonMenuItemAction
+            extends AbstractMnemonicsAction {
         public ViewDisplayModificationInfoNoneRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_NONE"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewDisplayModificationInfoNoneRadioButtonMenuItem");
@@ -2139,7 +2094,8 @@ public final class MainWindowMenuHandler {
     }
 
     @SuppressWarnings("serial")
-    public static class ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction extends AbstractMnemonicsAction {
+    public static class ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction
+            extends AbstractMnemonicsAction {
         public ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_SELECTED"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewDisplayModificationInfoSelectedRadioButtonMenuItem");
@@ -2155,7 +2111,8 @@ public final class MainWindowMenuHandler {
     }
 
     @SuppressWarnings("serial")
-    public static class ViewDisplayModificationInfoAllRadioButtonMenuItemAction extends AbstractMnemonicsAction {
+    public static class ViewDisplayModificationInfoAllRadioButtonMenuItemAction
+            extends AbstractMnemonicsAction {
         public ViewDisplayModificationInfoAllRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_ALL"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "ViewDisplayModificationInfoAllRadioButtonMenuItem");
@@ -2208,7 +2165,8 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * Identify all the placeholders in the source text and automatically inserts them into the target text.
+     * Identify all the placeholders in the source text and automatically
+     * inserts them into the target text.
      */
     @SuppressWarnings("serial")
     public static class EditTagPainterMenuItemAction extends AbstractMnemonicsAction {
@@ -2259,8 +2217,8 @@ public final class MainWindowMenuHandler {
         public void actionPerformed(ActionEvent e) {
             String action = e.getActionCommand();
             Log.logInfoRB("LOG_MENU_CLICK", action);
-            new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.STANDARD)
-                    .setVisible(true);
+            new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
+                    StatisticsWindow.STAT_TYPE.STANDARD).setVisible(true);
         }
     }
 
@@ -2275,8 +2233,8 @@ public final class MainWindowMenuHandler {
         public void actionPerformed(ActionEvent e) {
             String action = e.getActionCommand();
             Log.logInfoRB("LOG_MENU_CLICK", action);
-            new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES)
-                    .setVisible(true);
+            new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
+                    StatisticsWindow.STAT_TYPE.MATCHES).setVisible(true);
         }
     }
 
@@ -2291,8 +2249,8 @@ public final class MainWindowMenuHandler {
         public void actionPerformed(ActionEvent e) {
             String action = e.getActionCommand();
             Log.logInfoRB("LOG_MENU_CLICK", action);
-            new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE)
-                    .setVisible(true);
+            new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
+                    StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
         }
     }
 
@@ -2348,7 +2306,7 @@ public final class MainWindowMenuHandler {
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED,
-                    ((JCheckBoxMenuItem) o).isSelected());
+                        ((JCheckBoxMenuItem) o).isSelected());
             }
         }
     }
@@ -2384,7 +2342,8 @@ public final class MainWindowMenuHandler {
             Log.logInfoRB("LOG_MENU_CLICK", action);
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
-                Preferences.setPreference(Preferences.GLOSSARY_STEMMING, ((JCheckBoxMenuItem) o).isSelected());
+                Preferences.setPreference(Preferences.GLOSSARY_STEMMING,
+                        ((JCheckBoxMenuItem) o).isSelected());
                 Preferences.save();
             }
         }
@@ -2403,14 +2362,16 @@ public final class MainWindowMenuHandler {
             Log.logInfoRB("LOG_MENU_CLICK", action);
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
-                Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING, ((JCheckBoxMenuItem) o).isSelected());
+                Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
+                        ((JCheckBoxMenuItem) o).isSelected());
                 Preferences.save();
             }
         }
     }
 
     /**
-     * Displays the filters setup dialog to allow customizing file filters in detail.
+     * Displays the filters setup dialog to allow customizing file filters in
+     * detail.
      */
     @SuppressWarnings("serial")
     public static class OptionsSetupFileFiltersMenuItemAction extends AbstractMnemonicsAction {
@@ -2429,7 +2390,8 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
+     * Displays the segmentation setup dialog to allow customizing the
+     * segmentation rules in detail.
      */
     @SuppressWarnings("serial")
     public static class OptionsSentsegMenuItemAction extends AbstractMnemonicsAction {
@@ -2448,7 +2410,8 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the workflow setup dialog to allow customizing the diverse workflow options.
+     * Displays the workflow setup dialog to allow customizing the diverse
+     * workflow options.
      */
     @SuppressWarnings("serial")
     public static class OptionsWorkflowMenuItemAction extends AbstractMnemonicsAction {
@@ -2467,8 +2430,8 @@ public final class MainWindowMenuHandler {
     }
 
     /**
-     * Restores defaults for all dockable parts. May be expanded in the future to reset the entire GUI to its
-     * defaults.
+     * Restores defaults for all dockable parts. May be expanded in the future
+     * to reset the entire GUI to its defaults.
      */
     @SuppressWarnings("serial")
     public static class ViewRestoreGUIMenuItemAction extends AbstractMnemonicsAction {
@@ -2484,7 +2447,6 @@ public final class MainWindowMenuHandler {
             MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()); // FIXME
         }
     }
-
 
     @SuppressWarnings("serial")
     public static class OptionsAccessConfigDirMenuItemAction extends AbstractMnemonicsAction {
@@ -2518,13 +2480,13 @@ public final class MainWindowMenuHandler {
             try {
                 Help.showHelp();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), ex.getLocalizedMessage(),
-                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                        ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
+                        JOptionPane.ERROR_MESSAGE);
                 Log.log(ex);
             }
         }
     }
-
 
     /**
      * Shows About dialog

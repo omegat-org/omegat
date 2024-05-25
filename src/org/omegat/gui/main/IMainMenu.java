@@ -58,8 +58,10 @@ public interface IMainMenu {
     /**
      * Code for dispatching events from components to event handlers.
      *
-     * @param action    ActionCommand of triggering menu item
-     * @param modifiers Modifier key flags (can be zero)
+     * @param action
+     *            ActionCommand of triggering menu item
+     * @param modifiers
+     *            Modifier key flags (can be zero)
      */
     @Deprecated
     default void invokeAction(String action, int modifiers) {

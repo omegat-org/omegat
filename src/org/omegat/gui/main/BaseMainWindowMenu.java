@@ -131,7 +131,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      */
     void initComponents() {
         createComponents();
-        setActionCommands();
+        // setActionCommands();
         constructMenu();
         createMenuBar();
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
@@ -737,6 +737,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      *            title name key in resource bundle
      * @return menu item instance
      */
+    @Deprecated
     protected JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
         JCheckBoxMenuItem result = new JCheckBoxMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
@@ -763,6 +764,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      *            title name key in resource bundle
      * @return menu item instance
      */
+    @Deprecated
     protected JRadioButtonMenuItem createRadioButtonMenuItem(final String titleKey, ButtonGroup buttonGroup) {
         JRadioButtonMenuItem result = new JRadioButtonMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
@@ -775,6 +777,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * Set 'actionCommand' for all menu items. TODO: change to key from resource
      * bundle values
      */
+    @Deprecated
     protected void setActionCommands() {
         try {
             for (Field f : StaticUtils.getAllModelFields(this.getClass())) {

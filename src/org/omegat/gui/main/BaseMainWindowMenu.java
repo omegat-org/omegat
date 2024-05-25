@@ -131,7 +131,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      */
     void initComponents() {
         createComponents();
-        // setActionCommands();
         constructMenu();
         createMenuBar();
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
@@ -150,7 +149,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         // Item what perform event.
         JMenu menu = (JMenu) evt.getSource();
         // Get item name from actionCommand.
-        Log.logInfoRB("LOG_MENU_CLICK", menu.getName());
+        Log.logInfoRB("LOG_MENU_CLICK", menu.getActionCommand());
     }
 
     public void menuCanceled(MenuEvent e) {
@@ -679,6 +678,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected JMenu createMenu(String titleKey, MenuExtender.MenuKey menuKey) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.setActionCommand(Mnemonics.removeMnemonics(OStrings.getString(titleKey)));
         result.addMenuListener(this);
         if (menuKey != null) {
             menus.put(menuKey, result);
@@ -774,7 +774,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     /**
-     * Set 'actionCommand' for all menu items. TODO: change to key from resource
+     * Set 'actionCommand' for all menu items.
      * bundle values
      */
     @Deprecated

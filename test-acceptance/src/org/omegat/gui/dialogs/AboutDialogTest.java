@@ -39,7 +39,7 @@ public class AboutDialogTest extends TestCoreGUI {
 
     @Test
     public void testAboutDialog() throws InterruptedException {
-        window.menuItem(BaseMainWindowMenu.HELP_MENU).click();
+        window.menuItem(OStrings.getString("TF_MENU_HELP")).click();
         window.menuItem(BaseMainWindowMenu.HELP_ABOUT_MENUITEM).click();
         // Check about dialog
         window.dialog(AboutDialog.DIALOG_NAME).requireModal();

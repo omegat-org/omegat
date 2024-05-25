@@ -197,6 +197,7 @@ public final class MainWindowMenuHandler {
             new GotoNextUniqueMenuItemAction(),
             new GotoNextTranslatedMenuItemAction(),
             new GotoNextSegmentMenuItemAction(),
+            new GotoPreviousSegmentMenuItemAction(),
             new GotoSegmentMenuItemAction(),
             new GotoNextUniqueMenuItemAction(),
             new GotoNextNoteMenuItemAction(),
@@ -227,9 +228,11 @@ public final class MainWindowMenuHandler {
             new ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction(),
             new ViewDisplayModificationInfoAllRadioButtonMenuItemAction(),
             new ViewRestoreGUIMenuItemAction(),
+            new ToolsCheckIssuesMenuItemAction(),
             new ToolsCheckIssuesCurrentFileMenuItemAction(),
             new ToolsShowStatisticsStandardMenuItemAction(),
             new ToolsShowStatisticsMatchesMenuItemAction(),
+            new ToolsShowStatisticsMatchesPerFileMenuItemAction(),
             new OptionsPreferencesMenuItemAction(),
             new OptionsAutoCompleteShowAutomaticallyItemAction(),
             new OptionsAutoCompleteHistoryCompletionMenuItemAction(),
@@ -2538,6 +2541,7 @@ public final class MainWindowMenuHandler {
         public HelpAboutMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_ABOUT"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "HelpAboutMenuItem");
+            putValue(Action.NAME, BaseMainWindowMenu.HELP_ABOUT_MENUITEM);
         }
 
         @Override

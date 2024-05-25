@@ -186,7 +186,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMedOpenMenuItem = createMenuItemFromAction("ProjectMedOpenMenuItem");
         projectMedCreateMenuItem = createMenuItemFromAction("ProjectMedCreateMenuItem");
         projectEditMenuItem = createMenuItemFromAction("ProjectEditMenuItem");
-        viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN");
+        viewFileListMenuItem = createMenuItemFromAction("ViewFileListMenuItem");
 
         projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES");
         projectAccessRootMenuItem = createMenuItemFromAction("ProjectAccessRootMenuItem");

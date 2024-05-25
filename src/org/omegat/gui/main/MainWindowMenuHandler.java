@@ -51,6 +51,7 @@ import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingWorker;
@@ -228,6 +229,7 @@ public final class MainWindowMenuHandler {
             new ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction(),
             new ViewDisplayModificationInfoAllRadioButtonMenuItemAction(),
             new ViewRestoreGUIMenuItemAction(),
+            new ViewFileListMenuItemAction(),
             new ToolsCheckIssuesMenuItemAction(),
             new ToolsCheckIssuesCurrentFileMenuItemAction(),
             new ToolsShowStatisticsStandardMenuItemAction(),
@@ -581,28 +583,20 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    /*
-    @SupressWarnings("serial")
-    public static class ViewFileListMenuItemAction extends AbstractAction {
+    @SuppressWarnings("serial")
+    public static class ViewFileListMenuItemAction extends AbstractMnemonicsAction {
         public ViewFileListMenuItemAction() {
-            super("view-file-list");
+            super(OStrings.getString("TF_MENU_FILE_PROJWIN"), OStrings.getLocale());
+            putValue(Action.ACTION_COMMAND_KEY, "ViewFileListMenuItem");
         }
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-
+            IProjectFilesList projWin = Core.getProjectFilesList();
+            if (projWin != null) {
+                projWin.setActive(!projWin.isActive());
+            }
         }
-    }
-    */
-
-    public void viewFileListMenuItemActionPerformed() {
-         IProjectFilesList projWin = Core.getProjectFilesList();
-        if (projWin == null) {
-            mainWindow.menu.viewFileListMenuItem.setSelected(false);
-            return;
-        }
-
-        projWin.setActive(!projWin.isActive());
     }
 
     @SuppressWarnings("serial")

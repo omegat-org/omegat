@@ -34,10 +34,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -49,6 +47,7 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -73,10 +72,8 @@ public class AccessTools extends JPanel {
 
     private static final int MAX_PATH_LENGTH_SHOWN = 25;
     private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
-    private final Map<Object, Action> actions;
 
-    public AccessTools(Map<Object, Action> actions) {
-        this.actions = actions;
+    public AccessTools() {
         initComponents();
     }
 
@@ -120,11 +117,11 @@ public class AccessTools extends JPanel {
         add(sourceFilesCB);
 
         searchButton = new JButton();
-        searchButton.setAction(actions.get("EditFindInProjectMenuItem"));
+        searchButton.setAction(MainWindowMenuHandler.getAction("EditFindInProjectMenuItem"));
         searchButton.setText("");
         searchButton.setBorderPainted(false);
         settingsButton = new JButton();
-        settingsButton.setAction(actions.get("OptionsPreferencesMenuItem"));
+        settingsButton.setAction(MainWindowMenuHandler.getAction("OptionsPreferencesMenuItem"));
         settingsButton.setText("");
         settingsButton.setBorderPainted(false);
 

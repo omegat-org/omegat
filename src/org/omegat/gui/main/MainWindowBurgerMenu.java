@@ -66,6 +66,6 @@ public final class MainWindowBurgerMenu extends BaseMainWindowMenu implements IM
         burgerMenu.add(helpMenu);
         burgerMenu.add(burgerMenu);
         mainMenu.add(burgerMenu);
-        mainMenu.add(new AccessTools(MainWindowMenuHandler.getActions()));
+        mainMenu.add(new AccessTools());
     }
 }

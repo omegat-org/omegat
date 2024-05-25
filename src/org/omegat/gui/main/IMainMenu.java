@@ -55,6 +55,13 @@ public interface IMainMenu {
 
     JMenu getMenu(MenuExtender.MenuKey marker);
 
+    /**
+     * Code for dispatching events from components to event handlers.
+     *
+     * @param action    ActionCommand of triggering menu item
+     * @param modifiers Modifier key flags (can be zero)
+     */
     @Deprecated
-    void invokeAction(String action, int modifiers);
+    default void invokeAction(String action, int modifiers) {
+    }
 }

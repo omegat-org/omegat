@@ -218,11 +218,6 @@ public abstract class TestCore {
                 }
                 return gotoMenu;
             }
-
-            @Deprecated
-            @Override
-            public void invokeAction(String action, int modifiers) {
-            }
         };
 
         Core.setMainWindow(new IMainWindow() {

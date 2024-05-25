@@ -664,11 +664,6 @@ public final class TestTeamIntegrationChild {
             public JMenu getMenu(MenuKey marker) {
                 return null;
             }
-
-            @Deprecated
-            @Override
-            public void invokeAction(String action, int modifiers) {
-            }
         };
 
         public IMainMenu getMainMenu() {

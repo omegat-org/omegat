@@ -235,6 +235,13 @@ public final class Core {
     @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
         initializeGUI(params);
+
+        initializeGUIimpl(mainWindow);
+
+        SaveThread th = new SaveThread();
+        saveThread = th;
+        th.start();
+        new VersionCheckThread(10).start();
     }
 
     /**
@@ -252,7 +259,14 @@ public final class Core {
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
+    }
 
+    /**
+     * initialize GUI body.
+     *
+     * @throws Exception
+     */
+    static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 
@@ -274,12 +288,6 @@ public final class Core {
         multiple = new MultipleTransPane(me);
         new SegmentPropertiesArea(me);
         projWin = new ProjectFilesListController();
-
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
-
-        new VersionCheckThread(10).start();
     }
 
     /**

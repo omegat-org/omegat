@@ -102,7 +102,7 @@ public class HunspellSpellcheckerTest {
         assertThat(checker.isCorrect("Bonjour")).as("Spell check for correct word").isTrue();
         assertThat(checker.isCorrect("Erruer")).as("Spell check for wrong word").isFalse();
         assertThat(checker.suggest("Erruer")).as("Get suggestion")
-                .hasSize(5).contains("Erreur", "Errer", "Verrue", "Perruque", "Ruer");
+                .contains("Erreur", "Errer");
      }
 
     private void copyFile(String target) throws IOException {

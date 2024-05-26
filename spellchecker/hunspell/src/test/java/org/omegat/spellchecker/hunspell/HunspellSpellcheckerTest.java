@@ -59,8 +59,8 @@ public class HunspellSpellcheckerTest {
         configDir = Files.createDirectory(tmpDir.resolve(".omegat"));
         TestPreferencesInitializer.init(configDir.toString());
         Files.createDirectory(configDir.resolve("spelling"));
-        copyFile("de_DE.aff");
-        copyFile("de_DE.dic");
+        copyFile("es_MX.aff");
+        copyFile("es_MX.dic");
     }
 
     @After
@@ -70,6 +70,23 @@ public class HunspellSpellcheckerTest {
 
     @Test
     public void testReadHunspellDictionary() throws Exception {
+        ProjectProperties props = new ProjectProperties(tmpDir.toFile());
+        props.setTargetLanguage(new Language("es_MX"));
+        Core.setProject(new NotLoadedProject() {
+            @Override
+            public ProjectProperties getProjectProperties() {
+                return props;
+            }
+        });
+        ISpellChecker checker = new HunSpellChecker();
+        assertThat(checker.initialize()).as("Success initialize").isTrue();
+        assertThat(checker.isCorrect("Hola")).isTrue();
+        assertThat(checker.isCorrect("incorrecti")).isFalse();
+        assertThat(checker.suggest("incorrecti")).contains("incorrecto");
+    }
+
+    @Test
+    public void testReadHunspellLTDictionary() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("de_DE"));
         Core.setProject(new NotLoadedProject() {

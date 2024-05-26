@@ -51,7 +51,8 @@ import org.omegat.util.Preferences;
 public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpellChecker {
 
     private static final ILogger LOGGER = LoggerFactory.getLogger(MorfologikSpellchecker.class);
-    private static final String SC_MORFOLOGIK_EXTENSION = ".dict";
+    private static final String SC_DICT_EXTENSION = ".dict";
+    private static final String SC_INFO_EXTENSION = ".info";
 
     /**
      * Register plugins into OmegaT.
@@ -72,15 +73,16 @@ public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpe
         // check that the dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 SpellCheckerManager.DEFAULT_DICTIONARY_DIR.getPath());
-        File dictionaryName = new File(dictionaryDir, language + ".dict");
-        if (!dictionaryName.exists()) {
+        File dictionaryFile = new File(dictionaryDir, language + ".dict");
+        File infoFile = new File(dictionaryDir, language + ".info");
+        if (!dictionaryFile.exists()) {
             // Try installing from LanguageTool bundled resources
             installLTBundledDictionary(dictionaryDir, language);
         }
-        if (dictionaryName.exists()) {
+        if (dictionaryFile.exists() && infoFile.exists()) {
             Dictionary dictionary;
             try {
-                dictionary = Dictionary.read(dictionaryName.toPath());
+                dictionary = Dictionary.read(dictionaryFile.toPath());
             } catch (IOException e) {
                 LOGGER.atWarn().setCause(e).log();
                 return Optional.empty();
@@ -96,15 +98,20 @@ public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpe
      * bundled with LanguageTool, install it.
      */
     private void installLTBundledDictionary(String dictionaryDir, String language) {
-        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language
-                + SC_MORFOLOGIK_EXTENSION;
+        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + SC_DICT_EXTENSION;
+        String infoPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + SC_INFO_EXTENSION;
         if (!JLanguageTool.getDataBroker().resourceExists(resPath)) {
             return;
         }
         try {
             try (InputStream dictStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
                  FileOutputStream fos = new FileOutputStream(
-                         new File(dictionaryDir, language + SC_MORFOLOGIK_EXTENSION))) {
+                         new File(dictionaryDir, language + SC_DICT_EXTENSION))) {
+                IOUtils.copy(dictStream, fos);
+            }
+            try (InputStream dictStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(infoPath);
+                 FileOutputStream fos = new FileOutputStream(
+                         new File(dictionaryDir, language + SC_INFO_EXTENSION))) {
                 IOUtils.copy(dictStream, fos);
             }
         } catch (Exception ex) {

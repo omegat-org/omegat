@@ -77,7 +77,7 @@ class TestMainWindow implements IMainWindow {
         applicationFrame = new JFrame();
         applicationFrame.setPreferredSize(new Dimension(1920, 1040));
         font = FontUtil.getScaledFont();
-        menu = new TestCoreGUI.TestMainWindowMenu(this);
+        menu = new TestCoreGUI.TestMainWindowMenu();
         applicationFrame.setJMenuBar(menu.mainMenu);
         applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 

@@ -44,9 +44,13 @@ package org.omegat.gui.main;
  */
 public final class MainWindowMenu extends BaseMainWindowMenu implements IMainMenu {
 
-    public MainWindowMenu(MainWindow mainWindow) {
-        super(mainWindow);
+    public MainWindowMenu() {
         initComponents();
+    }
+
+    @Deprecated
+    public MainWindowMenu(MainWindow mainWindow) {
+        this();
     }
 
     @Override

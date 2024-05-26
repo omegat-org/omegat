@@ -178,24 +178,22 @@ public class MainWindow implements IMainWindow {
 
     @SuppressWarnings("unchecked")
     private void initMainMenu() {
-        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
-
         // Load Menu extension
         Object menuClass = UIManager.get(UIDesignManager.menuClassID);
         if (menuClass != null) {
             BaseMainWindowMenu menu1;
             try {
                 menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
-                        .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                        .newInstance(this, mainWindowMenuHandler);
+                        .getDeclaredConstructor()
+                        .newInstance();
             } catch (Exception e) {
                 // fall back to default when loading failed.
-                menu1 = new MainWindowMenu(this);
+                menu1 = new MainWindowMenu();
             }
             menu = menu1;
         } else {
             // Default menu.
-            menu = new MainWindowMenu(this);
+            menu = new MainWindowMenu();
         }
         applicationFrame.setJMenuBar(menu.mainMenu);
 
@@ -216,8 +214,8 @@ public class MainWindow implements IMainWindow {
             try {
                 applicationFrame.getContentPane()
                         .add((Component) ((Class<?>) toolbarClass)
-                                .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                                .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
+                                .getDeclaredConstructor(IMainWindow.class)
+                                .newInstance(this), BorderLayout.NORTH);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                     | NoSuchMethodException ignored) {
             }

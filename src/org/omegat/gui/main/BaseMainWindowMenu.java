@@ -37,6 +37,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -103,12 +104,6 @@ import org.omegat.util.gui.OSXIntegration;
  */
 public abstract class BaseMainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
-    public static final String HELP_MENU = "help_menu";
-    public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
-
-    /** MainWindow instance. */
-    protected final IMainWindow mainWindow;
-
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
 
@@ -116,8 +111,17 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
+    @Deprecated
+    public BaseMainWindowMenu(IMainWindow mainWindow, MainWindowMenuHandler handler) {
+        this();
+    }
+
+    @Deprecated
     public BaseMainWindowMenu(IMainWindow mainWindow) {
-        this.mainWindow = mainWindow;
+        this();
+    }
+
+    public BaseMainWindowMenu() {
         actions = MainWindowMenuHandler.getActions();
     }
 
@@ -164,7 +168,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         toolsMenu = createMenu("TF_MENU_TOOLS", MenuExtender.MenuKey.TOOLS);
         optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
         helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
-        helpMenu.setName(HELP_MENU);
 
         projectNewMenuItem = createMenuItemFromAction("ProjectNewMenuItem");
         projectTeamNewMenuItem = createMenuItemFromAction("ProjectTeamNewMenuItem");
@@ -599,9 +602,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         String key = "findInProjectReuseLastWindow";
         KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        Core.getMainWindow().getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(stroke, key);
-        mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
+        Core.getMainWindow().getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Log.logInfoRB("LOG_MENU_CLICK", key);
@@ -682,7 +685,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected JMenu createMenu(String titleKey, MenuExtender.MenuKey menuKey) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
-        result.setActionCommand(Mnemonics.removeMnemonics(OStrings.getString(titleKey)));
+        result.setName(titleKey);
         result.addMenuListener(this);
         if (menuKey != null) {
             menus.put(menuKey, result);
@@ -711,6 +714,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         JMenuItem item = new JMenuItem();
         item.setAction(action);
         item.setIcon(null);
+        item.setName(action.getValue(Action.ACTION_COMMAND_KEY).toString());
         return item;
     }
 
@@ -971,6 +975,20 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     public JMenu getMenu(MenuExtender.MenuKey marker) {
         return menus.get(marker);
+    }
+
+    @Override
+    public void enableMenuItem(String name, boolean enabled) {
+        for (var menuEntry : menus.entrySet()) {
+            JMenu menu = menuEntry.getValue();
+            for (int i = 0; i < menu.getMenuComponentCount(); i++) {
+                Component c = menu.getMenuComponent(i);
+                if (name.equals(c.getName())) {
+                    c.setEnabled(enabled);
+                    break;
+                }
+            }
+        }
     }
 
     JMenuItem cycleSwitchCaseMenuItem;

@@ -94,10 +94,9 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         }
     };
 
-    static class TestMainWindowMenu extends BaseMainWindowMenu {
+    public static class TestMainWindowMenu extends BaseMainWindowMenu {
 
-        TestMainWindowMenu(IMainWindow mainWindow) {
-            super(mainWindow);
+        TestMainWindowMenu() {
             initComponents();
         }
 

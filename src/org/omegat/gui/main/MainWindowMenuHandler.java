@@ -55,7 +55,6 @@ import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
 
-import org.omegat.util.gui.Styles;
 import org.openide.awt.AbstractMnemonicsAction;
 
 import org.omegat.Main;
@@ -99,6 +98,7 @@ import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.ResourcesUtil;
+import org.omegat.util.gui.Styles;
 
 /**
  * Handler for main menu items.
@@ -118,10 +118,11 @@ import org.omegat.util.gui.ResourcesUtil;
  */
 public final class MainWindowMenuHandler {
 
-    private final MainWindow mainWindow;
+    private MainWindowMenuHandler() {
+    }
 
+    @Deprecated
     public MainWindowMenuHandler(final MainWindow mainWindow) {
-        this.mainWindow = mainWindow;
     }
 
     private static final Action[] ACTIONS = { new ProjectNewMenuItemAction(),
@@ -2497,7 +2498,6 @@ public final class MainWindowMenuHandler {
         public HelpAboutMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_ABOUT"), OStrings.getLocale());
             putValue(Action.ACTION_COMMAND_KEY, "HelpAboutMenuItem");
-            putValue(Action.NAME, BaseMainWindowMenu.HELP_ABOUT_MENUITEM);
         }
 
         @Override

@@ -48,33 +48,21 @@ public final class SpellCheckerManager {
             return spellChecker;
         }
         // Try to use a custom spell checker if one is available.
-        Class<?> defaultSpellCheckerClass = null;
         for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
-            // Try default spellchecker last.
-            if ("org.omegat.core.spellchecker.DefaultSpellChecker".equals(customSpellChecker.getName())) {
-                defaultSpellCheckerClass = customSpellChecker;
-                continue;
-            }
             try {
-                spellChecker =
-                        (ISpellChecker) customSpellChecker.getDeclaredConstructor().newInstance();
-                return spellChecker;
-            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException |
-                     InstantiationException ignored) {
+                spellChecker = (ISpellChecker) customSpellChecker.getDeclaredConstructor().newInstance();
+                if (spellChecker.initialize()) {
+                    return spellChecker;
+                } else {
+                    spellChecker = null;
+                }
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException
+                     | InstantiationException ex) {
+                Log.log(ex);
             }
         }
-        if (spellChecker == null && defaultSpellCheckerClass != null) {
-            try {
-                spellChecker =
-                        (ISpellChecker) defaultSpellCheckerClass.getDeclaredConstructor().newInstance();
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException e) {
-                spellChecker = new SpellCheckerDummy();
-            }
-        } else {
-            spellChecker = new SpellCheckerDummy();
-            Log.logRB("CORE_SPELLCHECKER_NO_ENGINE");
-        }
+        spellChecker = new SpellCheckerDummy();
+        Log.logRB("CORE_SPELLCHECKER_NO_ENGINE");
         return spellChecker;
     }
 }

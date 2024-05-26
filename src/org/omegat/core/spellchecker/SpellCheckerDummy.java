@@ -41,7 +41,8 @@ import org.omegat.util.Token;
 public class SpellCheckerDummy implements ISpellCheckerProvider, ISpellChecker {
 
     @Override
-    public void initialize() {
+    public boolean initialize() {
+        return true;
     }
 
     @Override

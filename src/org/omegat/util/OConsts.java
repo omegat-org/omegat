@@ -159,6 +159,11 @@ public final class OConsts {
     /** dictionary file extension */
     public static final String SC_DICTIONARY_EXTENSION = ".dic";
 
+    /**
+     * morfologik dictionary file extension
+     */
+    public static final String SC_MORFOLOGIK_EXTENSION = ".dict";
+
     /** jar file extension */
     public static final String JAR_EXTENSION = ".jar";
 

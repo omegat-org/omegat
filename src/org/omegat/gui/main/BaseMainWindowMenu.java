@@ -37,6 +37,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -958,36 +959,94 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectClearRecentMenuItem.setEnabled(!items.isEmpty());
     }
 
+    // Implement IMainMenu APIs
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getMachineTranslationMenu() {
         return optionsMachineTranslateMenu;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getOptionsMenu() {
         return optionsMenu;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getToolsMenu() {
         return toolsMenu;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getGlossaryMenu() {
         return optionsGlossaryMenu;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getProjectMenu() {
         return projectMenu;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getAutoCompletionMenu() {
         return optionsAutoCompleteMenu;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getHelpMenu() {
         return helpMenu;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public JMenu getMenu(MenuExtender.MenuKey marker) {
         return menus.get(marker);
+    }
+
+    protected JMenuItem getMenuItemWithName(String name) {
+        for (var menuEntry : menus.entrySet()) {
+            JMenu menu = menuEntry.getValue();
+            for (int i = 0; i < menu.getMenuComponentCount(); i++) {
+                Component c = menu.getMenuComponent(i);
+                if (name.equals(c.getName()) && c instanceof JMenuItem) {
+                    return (JMenuItem) c;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void enableMenuItem(String name, boolean enabled) {
+        JMenuItem item = getMenuItemWithName(name);
+        if (item != null) {
+            item.setEnabled(enabled);
+        }
     }
 
     JMenuItem cycleSwitchCaseMenuItem;

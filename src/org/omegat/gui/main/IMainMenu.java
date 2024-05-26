@@ -6,6 +6,7 @@
  Copyright (C) 2008 Alex Buloichik
                2011 Didier Briel
                2016 Aaron Madlon-Kay
+ 2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -37,23 +38,70 @@ import org.omegat.util.gui.MenuExtender;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public interface IMainMenu {
+    /**
+     * Get Machine Translation menu object.
+     *
+     * @return machine translation menu.
+     */
     JMenu getMachineTranslationMenu();
 
+    /**
+     * Get Options menu object.
+     *
+     * @return options menu.
+     */
     JMenu getOptionsMenu();
 
+    /**
+     * Get tools menu object.
+     * @return tools menu.
+     */
     JMenu getToolsMenu();
 
+    /**
+     * Get Glossary menu object.
+     * @return glossary menu.
+     */
     JMenu getGlossaryMenu();
 
+    /**
+     * Get Project menu object.
+     * @return project menu.
+     */
     JMenu getProjectMenu();
 
+    /**
+     * Get AutoCompletion JMenu object.
+     * @return auto completion menu.
+     */
     JMenu getAutoCompletionMenu();
 
+    /**
+     * Get Help menu's JMenu object.
+     * @return help menu.
+     */
     JMenu getHelpMenu();
 
+    /**
+     * Get menu item specified in MenuKey marker.
+     *
+     * @param marker a menu item key.
+     * @return JMenu object.
+     */
     JMenu getMenu(MenuExtender.MenuKey marker);
+
+    /**
+     * Enable/Disable menu item.
+     * When it is JCheckBoxMenuItem and JRadioButtonMenuItem, a specified
+     * item will be selected.
+     *
+     * @param name    a component name of menu item.
+     * @param enabled true when make it enabled, otherwise make it disabled.
+     */
+    void enableMenuItem(String name, boolean enabled);
 
     void invokeAction(String action, int modifiers);
 }

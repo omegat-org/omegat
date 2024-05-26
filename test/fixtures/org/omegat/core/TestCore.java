@@ -196,6 +196,10 @@ public abstract class TestCore {
                 }
             }
 
+            @Override
+            public void enableMenuItem(final String name, final boolean enabled) {
+            }
+
             private JMenu getGotoMenu() {
                 if (gotoMenu.getItemCount() == 0) {
                     gotoMenu.add(new JMenuItem("gotoNextUntranslatedMenuItem"));

@@ -106,7 +106,7 @@ import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockablePanel;
-import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindowStatusBar;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.notes.INotes;
@@ -181,7 +181,7 @@ public class EditorController implements IEditor {
     private String emptyProjectPaneTitle;
     private JTextPane introPane;
     private JTextPane emptyProjectPane;
-    protected final MainWindow mw;
+    protected final IMainWindow mw;
 
     /** Currently displayed segments info. */
     protected SegmentBuilder[] m_docSegList;
@@ -227,7 +227,7 @@ public class EditorController implements IEditor {
      */
     private IProject.AllTranslations previousTranslations;
 
-    public EditorController(final MainWindow mainWindow) {
+    public EditorController(final IMainWindow mainWindow) {
         this.mw = mainWindow;
 
         segmentExportImport = new SegmentExportImport(this);
@@ -857,10 +857,12 @@ public class EditorController implements IEditor {
 
     private void setMenuEnabled() {
         // update history menu items
-        mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
-        mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
-        mw.menu.editMultipleDefault.setEnabled(!m_docSegList[displayedEntryIndex].isDefaultTranslation());
-        mw.menu.editMultipleAlternate.setEnabled(m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        mw.getMainMenu().enableMenuItem("goto_history_back_menuitem", history.hasPrev());
+        mw.getMainMenu().enableMenuItem("goto_history_forward_menuitem", history.hasNext());
+        mw.getMainMenu().enableMenuItem("edit_multiple_default",
+                !m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        mw.getMainMenu().enableMenuItem("edit_multiple_alternate",
+                m_docSegList[displayedEntryIndex].isDefaultTranslation());
     }
 
     /**

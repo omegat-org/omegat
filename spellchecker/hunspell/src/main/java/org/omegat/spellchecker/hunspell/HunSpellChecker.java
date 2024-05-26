@@ -106,6 +106,11 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
             installBundledDictionary(dictionaryDir, language);
         }
 
+        if (!affixName.exists()) {
+            // Try installing from LanguageTool bundled resources
+            installLTBundledDictionary(dictionaryDir, language);
+        }
+
         // If we still don't have a dictionary, then return
         if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
             return Optional.empty();

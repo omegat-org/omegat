@@ -29,6 +29,7 @@
 package org.omegat.spellchecker.hunspell;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -37,6 +38,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dumonts.hunspell.Hunspell;
+import org.apache.commons.io.IOUtils;
+import org.languagetool.JLanguageTool;
+import org.omegat.util.Language;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -132,6 +136,32 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
                             language + SC_DICTIONARY_EXTENSION)::contains);
         } catch (IOException e) {
             LOGGER.atWarn().setCause(e).log();
+        }
+    }
+
+    /**
+     * If there is a Hunspell dictionary for the current target language bundled
+     * with LanguageTool, install it. See <code>init()</code> and
+     * <code>getDictionaryPath(String, String)</code> internal methods of
+     * <code>org.languagetool.rules.spelling.hunspell.HunspellRule</code>.
+     */
+    private static void installLTBundledDictionary(String dictionaryDir, String language) {
+        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + ".dic";
+        if (!JLanguageTool.getDataBroker().resourceExists(resPath)) {
+            return;
+        }
+        try {
+            try (InputStream dicStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
+                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".dic"))) {
+                IOUtils.copy(dicStream, fos);
+            }
+            try (InputStream affStream = JLanguageTool.getDataBroker()
+                    .getFromResourceDirAsStream(resPath.replaceFirst(".dic$", ".aff"));
+                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".aff"))) {
+                IOUtils.copy(affStream, fos);
+            }
+        } catch (Exception ex) {
+            LOGGER.atWarn().setCause(ex).log();
         }
     }
 

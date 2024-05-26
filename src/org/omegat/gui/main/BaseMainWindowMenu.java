@@ -113,6 +113,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     public static final String HELP_MENU = "help_menu";
     public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
+    public static final String GOTO_HISTORY_BACK_MENUITEM = "goto_history_back_menuitem";
+    public static final String GOTO_HISTORY_FORWARD_MENUITEM = "goto_history_forward_menuitem";
+    public static final String EDIT_MULTIPLE_DEFAULT = "edit_multiple_default";
+    public static final String EDIT_MULTIPLE_ALTERNATE = "edit_multiple_alternate";
 
     /** MainWindow instance. */
     protected final IMainWindow mainWindow;
@@ -298,6 +302,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editRegisterUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANSLATED_TRANSLATION");
         editRegisterEmptyMenuItem = createMenuItem("TF_MENU_EDIT_EMPTY_TRANSLATION");
         editRegisterIdenticalMenuItem = createMenuItem("TF_MENU_EDIT_IDENTICAL_TRANSLATION");
+        editMultipleDefault.setName(EDIT_MULTIPLE_DEFAULT);
+        editMultipleAlternate.setName(EDIT_MULTIPLE_ALTERNATE);
 
         lowerCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER");
         upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER");
@@ -325,6 +331,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY");
         gotoNotesPanelMenuItem = createMenuItem("TF_MENU_GOTO_NOTES_PANEL");
         gotoEditorPanelMenuItem = createMenuItem("TF_MENU_GOTO_EDITOR_PANEL");
+        gotoHistoryBackMenuItem.setName(GOTO_HISTORY_BACK_MENUITEM);
+        gotoHistoryForwardMenuItem.setName(GOTO_HISTORY_FORWARD_MENUITEM);
 
         viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
                 "TF_MENU_DISPLAY_MARK_TRANSLATED");

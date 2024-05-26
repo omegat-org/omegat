@@ -232,16 +232,8 @@ public final class Core {
      * @throws Exception when error occurred.
      */
     @Deprecated(since = "6.1.0")
-    @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
         initializeGUI(params);
-
-        initializeGUIimpl(mainWindow);
-
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
-        new VersionCheckThread(10).start();
     }
 
     /**
@@ -259,14 +251,21 @@ public final class Core {
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
+
+        initializeGUIimpl(me);
+
+        SaveThread th = new SaveThread();
+        saveThread = th;
+        th.start();
+        new VersionCheckThread(10).start();
     }
 
     /**
      * initialize GUI body.
-     *
+     * TODO: this should accept IMainWindow.
      * @throws Exception
      */
-    static void initializeGUIimpl(IMainWindow me) throws Exception {
+    static void initializeGUIimpl(MainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 

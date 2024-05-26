@@ -977,20 +977,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         return menus.get(marker);
     }
 
-    @Override
-    public void enableMenuItem(String name, boolean enabled) {
-        for (var menuEntry : menus.entrySet()) {
-            JMenu menu = menuEntry.getValue();
-            for (int i = 0; i < menu.getMenuComponentCount(); i++) {
-                Component c = menu.getMenuComponent(i);
-                if (name.equals(c.getName())) {
-                    c.setEnabled(enabled);
-                    break;
-                }
-            }
-        }
-    }
-
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
     JMenuItem editReplaceInProjectMenuItem;

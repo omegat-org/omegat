@@ -20,6 +20,8 @@ dependencies {
         }
         implementation(libs.bundles.morfologik)
     }
+    testImplementation(libs.junit4)
+    testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
 }

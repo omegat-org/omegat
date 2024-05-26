@@ -119,6 +119,7 @@ import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
 import org.omegat.gui.preferences.view.PluginsPreferencesController;
 import org.omegat.gui.preferences.view.SaveOptionsController;
 import org.omegat.gui.preferences.view.SecureStoreController;
+import org.omegat.gui.preferences.view.SpellcheckerConfigurationController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.preferences.view.TagProcessingOptionsController;
 import org.omegat.gui.preferences.view.TeamOptionsController;
@@ -372,6 +373,7 @@ public class PreferencesWindowController implements FurtherActionListener {
         acNode.add(new HideableNode(new CharTableAutoCompleterOptionsController()));
         acNode.add(new HideableNode(new HistoryAutoCompleterOptionsController()));
         root.add(acNode);
+        root.add(new HideableNode(new SpellcheckerConfigurationController()));
         root.add(new HideableNode(new LanguageToolConfigurationController()));
         root.add(new HideableNode(new ExternalFinderPreferencesController()));
         root.add(new HideableNode(new EditingBehaviorController()));

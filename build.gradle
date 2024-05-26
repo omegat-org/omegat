@@ -13,6 +13,7 @@ plugins {
     id 'eclipse'
     id 'checkstyle'
     id 'jacoco'
+    id 'jacoco-report-aggregation'
     alias(libs.plugins.spotbugs)
     alias(libs.plugins.spotless)
     alias(libs.plugins.versions)
@@ -63,6 +64,7 @@ allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'com.github.spotbugs'
     apply plugin: 'com.diffplug.spotless'
+    apply plugin: 'jacoco'
 
     java {
         toolchain {
@@ -374,6 +376,15 @@ dependencies {
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
+
+    jacocoAggregation project(':aligner')
+    jacocoAggregation project(":machinetranslators:apertium")
+    jacocoAggregation project(":machinetranslators:belazar")
+    jacocoAggregation project(":machinetranslators:deepl")
+    jacocoAggregation project(":machinetranslators:google")
+    jacocoAggregation project(":machinetranslators:ibmwatson")
+    jacocoAggregation project(":machinetranslators:mymemory")
+    jacocoAggregation project(":machinetranslators:yandex")
 }
 
 jar {
@@ -1469,7 +1480,7 @@ tasks.register('spotlessChangedApply') {
 }
 
 jacoco {
-    toolVersion="0.8.10"
+    toolVersion = "0.8.12"
 }
 
 tasks.jacocoTestReport {

@@ -33,12 +33,12 @@ import static org.junit.Assert.fail;
 import java.awt.Component;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import javax.swing.Action;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -48,7 +48,6 @@ import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
-import org.omegat.util.CommonVerifications;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.StaticUtils;
@@ -66,25 +65,28 @@ public class MainWindowMenuTest extends TestCore {
      *
      */
     @Test
-    public void testMenuActions() {
+    public void testMenuActionsClassNames() {
         int count = 0;
 
-        Set<Object> actionTargets = MainWindowMenuHandler.getActions().keySet();
+        // List all the inner class implements Action
+        List<String> actions = Arrays.stream(MainWindowMenuHandler.class.getDeclaredClasses())
+                .filter(Action.class::isAssignableFrom)
+                .map(Class::getSimpleName).collect(Collectors.toList());
 
         for (Field f : StaticUtils.getAllModelFields(MainWindowMenu.class)) {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
                 count++;
-                String actionClassName = StringUtil.capitalizeFirst(f.getName(), Locale.ENGLISH);
-                if (!actionTargets.contains(actionClassName)) {
+                String actionClassName = StringUtil.capitalizeFirst(f.getName(), Locale.ENGLISH) + "Action";
+                if (!actions.contains(actionClassName)) {
                     fail("Action method or class not defined for " + actionClassName);
                 } else {
-                    assertTrue(actionTargets.remove(actionClassName));
+                    assertTrue(actions.remove(actionClassName));
                 }
             }
         }
         assertTrue("menu items not found", count > 30);
         assertTrue("There is action handlers in MainWindow which doesn't used in menu: "
-                + actionTargets, actionTargets.isEmpty());
+                + actions, actions.isEmpty());
     }
 
     @Test
@@ -123,7 +125,7 @@ public class MainWindowMenuTest extends TestCore {
     static class TestMainMenu extends BaseMainWindowMenu {
 
         TestMainMenu() {
-            super(null);
+            super();
         }
 
         @Override
@@ -292,22 +294,5 @@ public class MainWindowMenuTest extends TestCore {
         MenuItemPager pager = new MenuItemPager(target);
         newMenuItems.forEach(pager::add);
         return pager.getFirstPage();
-    }
-
-    @Test
-    public void actionMenuCheck() throws Exception {
-        assertMenuKeyMatches(new String[] {"src/org/omegat/gui/main/"});
-    }
-
-    protected void assertMenuKeyMatches(String[] targets) throws Exception {
-        Set<Object> actions =  MainWindowMenuHandler.getActions().keySet();
-        Locale.setDefault(Locale.ENGLISH);
-        Pattern pattern = Pattern.compile("createMenuItemFromAction\\(\\s*\"([^\"]+)\"\\s*[,)]");
-        CommonVerifications.processSourceContent(targets, (path, chars) -> {
-            Matcher m = pattern.matcher(chars);
-            while (m.find()) {
-                assertTrue(actions.contains(m.group(1)));
-            }
-        });
     }
 }

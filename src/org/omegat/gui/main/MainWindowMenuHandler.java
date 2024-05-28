@@ -42,9 +42,7 @@ import java.awt.Font;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -123,95 +121,6 @@ public final class MainWindowMenuHandler {
 
     @Deprecated
     public MainWindowMenuHandler(final MainWindow mainWindow) {
-    }
-
-    private static final Action[] ACTIONS = { new ProjectNewMenuItemAction(),
-            new ProjectTeamNewMenuItemAction(), new ProjectOpenMenuItemAction(),
-            new ProjectCloseMenuItemAction(), new ProjectClearRecentMenuItemAction(),
-            new ProjectImportMenuItemAction(), new ProjectWikiImportMenuItemAction(),
-            new ProjectSaveMenuItemAction(), new ProjectReloadMenuItemAction(),
-            new ProjectCommitSourceFilesAction(), new ProjectCommitTargetFilesAction(),
-            new ProjectCompileMenuItemAction(), new ProjectSingleCompileMenuItemAction(),
-            new ProjectMedOpenMenuItemAction(), new ProjectMedCreateMenuItemAction(),
-            new ProjectEditMenuItemAction(), new ProjectAccessRootMenuItemAction(),
-            new ProjectAccessDictionaryMenuItemAction(), new ProjectAccessGlossaryMenuItemAction(),
-            new ProjectAccessSourceMenuItemAction(), new ProjectAccessTargetMenuItemAction(),
-            new ProjectAccessTMMenuItemAction(), new ProjectAccessExportTMMenuItemAction(),
-            new ProjectRestartMenuItemAction(), new ProjectExitMenuItemAction(),
-            new ProjectAccessCurrentSourceDocumentMenuItemAction(),
-            new ProjectAccessCurrentTargetDocumentMenuItemAction(),
-            new ProjectAccessWriteableGlossaryMenuItemAction(), new EditUndoMenuItemAction(),
-            new EditRedoMenuItemAction(), new EditFindInProjectMenuItemAction(),
-            new EditOverwriteTranslationMenuItemAction(), new EditInsertSourceMenuItemAction(),
-            new EditSelectSourceMenuItemAction(), new EditInsertTranslationMenuItemAction(),
-            new EditOverwriteMachineTranslationMenuItemAction(), new EditReplaceInProjectMenuItemAction(),
-            new EditExportSelectionMenuItemAction(), new EditOverwriteSourceMenuItemAction(),
-            new EditSearchDictionaryMenuItemAction(), new EditCreateGlossaryEntryMenuItemAction(),
-            new EditSelectFuzzy1MenuItemAction(), new EditSelectFuzzy2MenuItemAction(),
-            new EditSelectFuzzy3MenuItemAction(), new EditSelectFuzzy4MenuItemAction(),
-            new EditSelectFuzzy5MenuItemAction(), new EditSelectFuzzyPrevMenuItemAction(),
-            new EditSelectFuzzyNextMenuItemAction(), new EditTagPainterMenuItemAction(),
-            new EditTagNextMissedMenuItemAction(), new InsertCharsLRMAction(), new InsertCharsRLMAction(),
-            new InsertCharsLREAction(), new InsertCharsRLEAction(), new InsertCharsPDFAction(),
-            new EditMultipleDefaultAction(), new EditMultipleAlternateAction(),
-            new EditRegisterUntranslatedMenuItemAction(), new EditRegisterEmptyMenuItemAction(),
-            new EditRegisterIdenticalMenuItemAction(), new TitleCaseMenuItemAction(),
-            new SentenceCaseMenuItemAction(), new CycleSwitchCaseMenuItemAction(),
-            new UpperCaseMenuItemAction(), new LowerCaseMenuItemAction(),
-            new GotoNextUntranslatedMenuItemAction(), new GotoNextUniqueMenuItemAction(),
-            new GotoNextTranslatedMenuItemAction(), new GotoNextSegmentMenuItemAction(),
-            new GotoPreviousSegmentMenuItemAction(), new GotoSegmentMenuItemAction(),
-            new GotoNextUniqueMenuItemAction(), new GotoNextNoteMenuItemAction(),
-            new GotoPreviousNoteMenuItemAction(), new GotoMatchSourceSegmentAction(),
-            new GotoNextXAutoMenuItemAction(), new GotoPrevXAutoMenuItemAction(),
-            new GotoNextXEnforcedMenuItemAction(), new GotoPrevXEnforcedMenuItemAction(),
-            new GotoHistoryBackMenuItemAction(), new GotoHistoryForwardMenuItemAction(),
-            new GotoNotesPanelMenuItemAction(), new GotoEditorPanelMenuItemAction(),
-            new ViewMarkTranslatedSegmentsCheckBoxMenuItemAction(),
-            new ViewMarkUntranslatedSegmentsCheckBoxMenuItemAction(),
-            new ViewMarkParagraphStartCheckBoxMenuItemAction(),
-            new ViewDisplaySegmentSourceCheckBoxMenuItemAction(),
-            new ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction(),
-            new ViewMarkNotedSegmentsCheckBoxMenuItemAction(), new ViewMarkNBSPCheckBoxMenuItemAction(),
-            new ViewMarkWhitespaceCheckBoxMenuItemAction(), new ViewMarkBidiCheckBoxMenuItemAction(),
-            new ViewMarkAutoPopulatedCheckBoxMenuItemAction(),
-            new ViewMarkGlossaryMatchesCheckBoxMenuItemAction(),
-            new ViewMarkLanguageCheckerCheckBoxMenuItemAction(),
-            new ViewMarkFontFallbackCheckBoxMenuItemAction(),
-            new ViewDisplayModificationInfoNoneRadioButtonMenuItemAction(),
-            new ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction(),
-            new ViewDisplayModificationInfoAllRadioButtonMenuItemAction(), new ViewRestoreGUIMenuItemAction(),
-            new ViewFileListMenuItemAction(), new ToolsCheckIssuesMenuItemAction(),
-            new ToolsCheckIssuesCurrentFileMenuItemAction(), new ToolsShowStatisticsStandardMenuItemAction(),
-            new ToolsShowStatisticsMatchesMenuItemAction(),
-            new ToolsShowStatisticsMatchesPerFileMenuItemAction(), new OptionsPreferencesMenuItemAction(),
-            new OptionsAutoCompleteShowAutomaticallyItemAction(),
-            new OptionsAutoCompleteHistoryCompletionMenuItemAction(),
-            new OptionsAutoCompleteHistoryPredictionMenuItemAction(),
-            new OptionsMTAutoFetchCheckboxMenuItemAction(),
-            new OptionsGlossaryFuzzyMatchingCheckBoxMenuItemAction(),
-            new OptionsDictionaryFuzzyMatchingCheckBoxMenuItemAction(),
-            new OptionsSetupFileFiltersMenuItemAction(), new OptionsSentsegMenuItemAction(),
-            new OptionsWorkflowMenuItemAction(), new OptionsAccessConfigDirMenuItemAction(),
-            new HelpAboutMenuItemAction(), new HelpLastChangesMenuItemAction(),
-            new HelpContentsMenuItemAction(), new HelpLogMenuItemAction(),
-            new HelpUpdateCheckMenuItemAction() };
-
-    public static Map<Object, Action> getActions() {
-        Map<Object, Action> result = new HashMap<>();
-        for (Action a : ACTIONS) {
-            result.put(a.getValue(Action.ACTION_COMMAND_KEY), a);
-        }
-        return result;
-    }
-
-    public static Action getAction(String key) {
-        for (Action a : ACTIONS) {
-            if (a.getValue(Action.ACTION_COMMAND_KEY).equals(key)) {
-                return a;
-            }
-        }
-        return null;
     }
 
     /**

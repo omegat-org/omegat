@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.OStrings;
 
@@ -39,8 +38,8 @@ public class AboutDialogTest extends TestCoreGUI {
 
     @Test
     public void testAboutDialog() throws InterruptedException {
-        window.menuItem(OStrings.getString("TF_MENU_HELP")).click();
-        window.menuItem(BaseMainWindowMenu.HELP_ABOUT_MENUITEM).click();
+        window.menuItem("TF_MENU_HELP").click();
+        window.menuItem("HELP_ABOUT_MENUITEM").click();
         // Check about dialog
         window.dialog(AboutDialog.DIALOG_NAME).requireModal();
         Pattern pattern = Pattern.compile(OStrings.getApplicationDisplayName()

@@ -591,7 +591,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 for (int i = 0; i < m.projs.length; i++) {
                     String proj = m.projs[i];
                     StringBuilder b = new StringBuilder();
-                    if (proj.equals("")) {
+                    if (proj.isEmpty()) {
                         b.append(OStrings.getString("MATCHES_THIS_PROJECT"));
                     } else {
                         b.append(proj);
@@ -606,11 +606,11 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
-        item.setAction(MainWindowMenuHandler.getAction("EditInsertTranslationMenuItem"));
+        item.setAction(new MainWindowMenuHandler.EditInsertTranslationMenuItemAction());
         item.setEnabled(hasMatches);
 
         item = popup.add(OStrings.getString("MATCHES_REPLACE"));
-        item.setAction(MainWindowMenuHandler.getAction("EditOverwriteTranslationMenuItem"));
+        item.setAction(new MainWindowMenuHandler.EditOverwriteTranslationMenuItemAction());
         item.setEnabled(hasMatches);
 
         popup.addSeparator();

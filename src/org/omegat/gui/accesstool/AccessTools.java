@@ -117,11 +117,11 @@ public class AccessTools extends JPanel {
         add(sourceFilesCB);
 
         searchButton = new JButton();
-        searchButton.setAction(MainWindowMenuHandler.getAction("EditFindInProjectMenuItem"));
+        searchButton.setAction(new MainWindowMenuHandler.EditFindInProjectMenuItemAction());
         searchButton.setText("");
         searchButton.setBorderPainted(false);
         settingsButton = new JButton();
-        settingsButton.setAction(MainWindowMenuHandler.getAction("OptionsPreferencesMenuItem"));
+        settingsButton.setAction(new MainWindowMenuHandler.OptionsPreferencesMenuItemAction());
         settingsButton.setText("");
         settingsButton.setBorderPainted(false);
 

@@ -46,7 +46,7 @@ public final class MainWindowBurgerMenu extends BaseMainWindowMenu implements IM
     JMenu burgerMenu;
 
     public MainWindowBurgerMenu(MainWindow mainWindow) {
-        super(mainWindow);
+        super();
         initComponents();
     }
 

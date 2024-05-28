@@ -37,14 +37,14 @@
 
 package org.omegat.gui.main;
 
-import java.awt.Component;
+import static org.omegat.gui.main.MainWindowMenuHandler.findInProjectReuseLastWindow;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
@@ -67,6 +67,17 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.editor.EditorSettings;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectCloseMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectCommitSourceFilesAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectCommitTargetFilesAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectCompileMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectImportMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectNewMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectReloadMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectSaveMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectSingleCompileMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectTeamNewMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.ProjectWikiImportMenuItemAction;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -107,8 +118,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
 
-    protected final Map<Object, Action> actions;
-
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
     @Deprecated
@@ -122,7 +131,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     public BaseMainWindowMenu() {
-        actions = MainWindowMenuHandler.getActions();
     }
 
     /**
@@ -169,200 +177,206 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
         helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
 
-        projectNewMenuItem = createMenuItemFromAction("ProjectNewMenuItem");
-        projectTeamNewMenuItem = createMenuItemFromAction("ProjectTeamNewMenuItem");
-        projectOpenMenuItem = createMenuItemFromAction("ProjectOpenMenuItem");
+        projectNewMenuItem = createMenuItem(new ProjectNewMenuItemAction());
+        projectTeamNewMenuItem = createMenuItem(new ProjectTeamNewMenuItemAction());
+        projectOpenMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectOpenMenuItemAction());
         projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT");
-        projectClearRecentMenuItem = createMenuItemFromAction("ProjectClearRecentMenuItem");
+        projectClearRecentMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectClearRecentMenuItemAction());
 
-        projectReloadMenuItem = createMenuItemFromAction("ProjectReloadMenuItem");
-        projectCloseMenuItem = createMenuItemFromAction("ProjectCloseMenuItem");
-        projectSaveMenuItem = createMenuItemFromAction("ProjectSaveMenuItem");
-        projectImportMenuItem = createMenuItemFromAction("ProjectImportMenuItem");
-        projectWikiImportMenuItem = createMenuItemFromAction("ProjectWikiImportMenuItem");
-        projectCommitSourceFiles = createMenuItemFromAction("ProjectCommitSourceFiles");
-        projectCommitTargetFiles = createMenuItemFromAction("ProjectCommitTargetFiles");
-        projectCompileMenuItem = createMenuItemFromAction("ProjectCompileMenuItem");
-        projectSingleCompileMenuItem = createMenuItemFromAction("ProjectSingleCompileMenuItem");
-        projectMedOpenMenuItem = createMenuItemFromAction("ProjectMedOpenMenuItem");
-        projectMedCreateMenuItem = createMenuItemFromAction("ProjectMedCreateMenuItem");
-        projectEditMenuItem = createMenuItemFromAction("ProjectEditMenuItem");
-        viewFileListMenuItem = createMenuItemFromAction("ViewFileListMenuItem");
+        projectReloadMenuItem = createMenuItem(new ProjectReloadMenuItemAction());
+        projectCloseMenuItem = createMenuItem(new ProjectCloseMenuItemAction());
+        projectSaveMenuItem = createMenuItem(new ProjectSaveMenuItemAction());
+        projectImportMenuItem = createMenuItem(new ProjectImportMenuItemAction());
+        projectWikiImportMenuItem = createMenuItem(new ProjectWikiImportMenuItemAction());
+        projectCommitSourceFiles = createMenuItem(new ProjectCommitSourceFilesAction());
+        projectCommitTargetFiles = createMenuItem(new ProjectCommitTargetFilesAction());
+        projectCompileMenuItem = createMenuItem(new ProjectCompileMenuItemAction());
+        projectSingleCompileMenuItem = createMenuItem(new ProjectSingleCompileMenuItemAction());
+        projectMedOpenMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectMedOpenMenuItemAction());
+        projectMedCreateMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectMedCreateMenuItemAction());
+        projectEditMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectEditMenuItemAction());
+        viewFileListMenuItem = createMenuItem(new MainWindowMenuHandler.ViewFileListMenuItemAction());
 
         projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES");
-        projectAccessRootMenuItem = createMenuItemFromAction("ProjectAccessRootMenuItem");
-        projectAccessDictionaryMenuItem = createMenuItemFromAction("ProjectAccessDictionaryMenuItem");
-        projectAccessGlossaryMenuItem = createMenuItemFromAction("ProjectAccessGlossaryMenuItem");
-        projectAccessSourceMenuItem = createMenuItemFromAction("ProjectAccessSourceMenuItem");
-        projectAccessTargetMenuItem = createMenuItemFromAction("ProjectAccessTargetMenuItem");
-        projectAccessTMMenuItem = createMenuItemFromAction("ProjectAccessTMMenuItem");
-        projectAccessExportTMMenuItem = createMenuItemFromAction("ProjectAccessExportTMMenuItem");
-        projectAccessCurrentSourceDocumentMenuItem = createMenuItemFromAction(
-                "ProjectAccessCurrentSourceDocumentMenuItem");
-        projectAccessCurrentTargetDocumentMenuItem = createMenuItemFromAction(
-                "ProjectAccessCurrentTargetDocumentMenuItem");
-        projectAccessWriteableGlossaryMenuItem = createMenuItemFromAction(
-                "ProjectAccessWriteableGlossaryMenuItem");
-        projectAccessRootMenuItem = createMenuItemFromAction("ProjectAccessRootMenuItem");
-        projectAccessDictionaryMenuItem = createMenuItemFromAction("ProjectAccessDictionaryMenuItem");
-        projectAccessGlossaryMenuItem = createMenuItemFromAction("ProjectAccessGlossaryMenuItem");
-        projectAccessSourceMenuItem = createMenuItemFromAction("ProjectAccessSourceMenuItem");
-        projectAccessTargetMenuItem = createMenuItemFromAction("ProjectAccessTargetMenuItem");
-        projectAccessTMMenuItem = createMenuItemFromAction("ProjectAccessTMMenuItem");
-        projectAccessExportTMMenuItem = createMenuItemFromAction("ProjectAccessExportTMMenuItem");
-        projectAccessCurrentSourceDocumentMenuItem = createMenuItemFromAction(
-                "ProjectAccessCurrentSourceDocumentMenuItem");
-        projectAccessCurrentTargetDocumentMenuItem = createMenuItemFromAction(
-                "ProjectAccessCurrentTargetDocumentMenuItem");
-        projectAccessWriteableGlossaryMenuItem = createMenuItemFromAction(
-                "ProjectAccessWriteableGlossaryMenuItem");
-        projectRestartMenuItem = createMenuItemFromAction("ProjectRestartMenuItem");
-        projectExitMenuItem = createMenuItemFromAction("ProjectExitMenuItem");
+        projectAccessRootMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessRootMenuItemAction());
+        projectAccessDictionaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessDictionaryMenuItemAction());
+        projectAccessGlossaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessGlossaryMenuItemAction());
+        projectAccessSourceMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessSourceMenuItemAction());
+        projectAccessTargetMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTargetMenuItemAction());
+        projectAccessTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTMMenuItemAction());
+        projectAccessExportTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessExportTMMenuItemAction());
+        projectAccessCurrentSourceDocumentMenuItem = createMenuItem(
+                new MainWindowMenuHandler.ProjectAccessCurrentSourceDocumentMenuItemAction());
+        projectAccessCurrentTargetDocumentMenuItem = createMenuItem(
+                new MainWindowMenuHandler.ProjectAccessCurrentTargetDocumentMenuItemAction());
+        projectAccessWriteableGlossaryMenuItem = createMenuItem(
+                new MainWindowMenuHandler.ProjectAccessWriteableGlossaryMenuItemAction());
+        projectAccessRootMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessRootMenuItemAction());
+        projectAccessDictionaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessDictionaryMenuItemAction());
+        projectAccessGlossaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessGlossaryMenuItemAction());
+        projectAccessSourceMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessSourceMenuItemAction());
+        projectAccessTargetMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTargetMenuItemAction());
+        projectAccessTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTMMenuItemAction());
+        projectAccessExportTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessExportTMMenuItemAction());
+        projectAccessCurrentSourceDocumentMenuItem = createMenuItem(
+                new MainWindowMenuHandler.ProjectAccessCurrentSourceDocumentMenuItemAction());
+        projectAccessCurrentTargetDocumentMenuItem = createMenuItem(new
+                MainWindowMenuHandler.ProjectAccessCurrentTargetDocumentMenuItemAction());
+        projectAccessWriteableGlossaryMenuItem = createMenuItem(
+                new MainWindowMenuHandler.ProjectAccessWriteableGlossaryMenuItemAction());
+        projectRestartMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectRestartMenuItemAction());
+        projectExitMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectExitMenuItemAction());
 
-        editUndoMenuItem = createMenuItemFromAction("EditUndoMenuItem");
-        editRedoMenuItem = createMenuItemFromAction("EditRedoMenuItem");
-        editOverwriteTranslationMenuItem = createMenuItemFromAction("EditOverwriteTranslationMenuItem");
-        editInsertTranslationMenuItem = createMenuItemFromAction("EditInsertTranslationMenuItem");
-        editOverwriteSourceMenuItem = createMenuItemFromAction("EditOverwriteSourceMenuItem");
-        editInsertSourceMenuItem = createMenuItemFromAction("EditInsertSourceMenuItem");
-        editSelectSourceMenuItem = createMenuItemFromAction("EditSelectSourceMenuItem");
-        editOverwriteMachineTranslationMenuItem = createMenuItemFromAction(
-                "EditOverwriteMachineTranslationMenuItem");
-        editTagPainterMenuItem = createMenuItemFromAction("EditTagPainterMenuItem");
-        editTagNextMissedMenuItem = createMenuItemFromAction("EditTagNextMissedMenuItem");
-        editExportSelectionMenuItem = createMenuItemFromAction("EditExportSelectionMenuItem");
-        editCreateGlossaryEntryMenuItem = createMenuItemFromAction("EditCreateGlossaryEntryMenuItem");
-        editFindInProjectMenuItem = createMenuItemFromAction("EditFindInProjectMenuItem");
-        editReplaceInProjectMenuItem = createMenuItemFromAction("EditReplaceInProjectMenuItem");
-        editSearchDictionaryMenuItem = createMenuItemFromAction("EditSearchDictionaryMenuItem");
+        editUndoMenuItem = createMenuItem(new MainWindowMenuHandler.EditUndoMenuItemAction());
+        editRedoMenuItem = createMenuItem(new MainWindowMenuHandler.EditRedoMenuItemAction());
+        editOverwriteTranslationMenuItem = createMenuItem(new MainWindowMenuHandler.EditOverwriteTranslationMenuItemAction());
+        editInsertTranslationMenuItem = createMenuItem(new MainWindowMenuHandler.EditInsertTranslationMenuItemAction());
+        editOverwriteSourceMenuItem = createMenuItem(new MainWindowMenuHandler.EditOverwriteSourceMenuItemAction());
+        editInsertSourceMenuItem = createMenuItem(new MainWindowMenuHandler.EditInsertSourceMenuItemAction());
+        editSelectSourceMenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectSourceMenuItemAction());
+        editOverwriteMachineTranslationMenuItem = createMenuItem(
+                new MainWindowMenuHandler.EditOverwriteMachineTranslationMenuItemAction());
+        editTagPainterMenuItem = createMenuItem(new MainWindowMenuHandler.EditTagPainterMenuItemAction());
+        editTagNextMissedMenuItem = createMenuItem(new MainWindowMenuHandler.EditTagNextMissedMenuItemAction());
+        editExportSelectionMenuItem = createMenuItem(new MainWindowMenuHandler.EditExportSelectionMenuItemAction());
+        editCreateGlossaryEntryMenuItem = createMenuItem(new MainWindowMenuHandler.EditCreateGlossaryEntryMenuItemAction());
+        editFindInProjectMenuItem = createMenuItem(new MainWindowMenuHandler.EditFindInProjectMenuItemAction());
+        editReplaceInProjectMenuItem = createMenuItem(new MainWindowMenuHandler.EditReplaceInProjectMenuItemAction());
+        editSearchDictionaryMenuItem = createMenuItem(new MainWindowMenuHandler.EditSearchDictionaryMenuItemAction());
 
         switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE");
         selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE");
 
-        editSelectFuzzyPrevMenuItem = createMenuItemFromAction("EditSelectFuzzyPrevMenuItem");
-        editSelectFuzzyNextMenuItem = createMenuItemFromAction("EditSelectFuzzyNextMenuItem");
-        editSelectFuzzy1MenuItem = createMenuItemFromAction("EditSelectFuzzy1MenuItem");
-        editSelectFuzzy2MenuItem = createMenuItemFromAction("EditSelectFuzzy2MenuItem");
-        editSelectFuzzy3MenuItem = createMenuItemFromAction("EditSelectFuzzy3MenuItem");
-        editSelectFuzzy4MenuItem = createMenuItemFromAction("EditSelectFuzzy4MenuItem");
-        editSelectFuzzy5MenuItem = createMenuItemFromAction("EditSelectFuzzy5MenuItem");
+        editSelectFuzzyPrevMenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectFuzzyPrevMenuItemAction());
+        editSelectFuzzyNextMenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectFuzzyNextMenuItemAction());
+        editSelectFuzzy1MenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectFuzzy1MenuItemAction());
+        editSelectFuzzy2MenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectFuzzy2MenuItemAction());
+        editSelectFuzzy3MenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectFuzzy3MenuItemAction());
+        editSelectFuzzy4MenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectFuzzy4MenuItemAction());
+        editSelectFuzzy5MenuItem = createMenuItem(new MainWindowMenuHandler.EditSelectFuzzy5MenuItemAction());
 
         insertCharsSubMenu = createMenu("TF_MENU_EDIT_INSERT_CHARS");
-        insertCharsLRM = createMenuItemFromAction("InsertCharsLRM");
-        insertCharsRLM = createMenuItemFromAction("InsertCharsRLM");
-        insertCharsLRE = createMenuItemFromAction("InsertCharsLRE");
-        insertCharsRLE = createMenuItemFromAction("InsertCharsRLE");
-        insertCharsPDF = createMenuItemFromAction("InsertCharsPDF");
+        insertCharsLRM = createMenuItem(new MainWindowMenuHandler.InsertCharsLRMAction());
+        insertCharsRLM = createMenuItem(new MainWindowMenuHandler.InsertCharsRLMAction());
+        insertCharsLRE = createMenuItem(new MainWindowMenuHandler.InsertCharsLREAction());
+        insertCharsRLE = createMenuItem(new MainWindowMenuHandler.InsertCharsRLEAction());
+        insertCharsPDF = createMenuItem(new MainWindowMenuHandler.InsertCharsPDFAction());
 
-        editMultipleDefault = createMenuItemFromAction("EditMultipleDefault");
-        editMultipleAlternate = createMenuItemFromAction("EditMultipleAlternate");
-        editRegisterUntranslatedMenuItem = createMenuItemFromAction("EditRegisterUntranslatedMenuItem");
-        editRegisterEmptyMenuItem = createMenuItemFromAction("EditRegisterEmptyMenuItem");
-        editRegisterIdenticalMenuItem = createMenuItemFromAction("EditRegisterIdenticalMenuItem");
+        editMultipleDefault = createMenuItem(new MainWindowMenuHandler.EditMultipleDefaultAction());
+        editMultipleAlternate = createMenuItem(new MainWindowMenuHandler.EditMultipleAlternateAction());
+        editRegisterUntranslatedMenuItem = createMenuItem(new MainWindowMenuHandler.EditRegisterUntranslatedMenuItemAction());
+        editRegisterEmptyMenuItem = createMenuItem(new MainWindowMenuHandler.EditRegisterEmptyMenuItemAction());
+        editRegisterIdenticalMenuItem = createMenuItem(new MainWindowMenuHandler.EditRegisterIdenticalMenuItemAction());
 
-        lowerCaseMenuItem = createMenuItemFromAction("LowerCaseMenuItem");
-        upperCaseMenuItem = createMenuItemFromAction("UpperCaseMenuItem");
-        titleCaseMenuItem = createMenuItemFromAction("TitleCaseMenuItem");
-        sentenceCaseMenuItem = createMenuItemFromAction("SentenceCaseMenuItem");
-        cycleSwitchCaseMenuItem = createMenuItemFromAction("CycleSwitchCaseMenuItem");
+        lowerCaseMenuItem = createMenuItem(new MainWindowMenuHandler.LowerCaseMenuItemAction());
+        upperCaseMenuItem = createMenuItem(new MainWindowMenuHandler.UpperCaseMenuItemAction());
+        titleCaseMenuItem = createMenuItem(new MainWindowMenuHandler.TitleCaseMenuItemAction());
+        sentenceCaseMenuItem = createMenuItem(new MainWindowMenuHandler.SentenceCaseMenuItemAction());
+        cycleSwitchCaseMenuItem = createMenuItem(new MainWindowMenuHandler.CycleSwitchCaseMenuItemAction());
 
-        gotoNextUntranslatedMenuItem = createMenuItemFromAction("GotoNextUntranslatedMenuItem");
-        gotoNextTranslatedMenuItem = createMenuItemFromAction("GotoNextTranslatedMenuItem");
-        gotoNextSegmentMenuItem = createMenuItemFromAction("GotoNextSegmentMenuItem");
-        gotoPreviousSegmentMenuItem = createMenuItemFromAction("GotoPreviousSegmentMenuItem");
-        gotoSegmentMenuItem = createMenuItemFromAction("GotoSegmentMenuItem");
-        gotoNextNoteMenuItem = createMenuItemFromAction("GotoNextNoteMenuItem");
-        gotoPreviousNoteMenuItem = createMenuItemFromAction("GotoPreviousNoteMenuItem");
-        gotoNextUniqueMenuItem = createMenuItemFromAction("GotoNextUniqueMenuItem");
-        gotoMatchSourceSegment = createMenuItemFromAction("GotoMatchSourceSegment");
+        gotoNextUntranslatedMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNextUntranslatedMenuItemAction());
+        gotoNextTranslatedMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNextTranslatedMenuItemAction());
+        gotoNextSegmentMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNextSegmentMenuItemAction());
+        gotoPreviousSegmentMenuItem = createMenuItem(new MainWindowMenuHandler.GotoPreviousSegmentMenuItemAction());
+        gotoSegmentMenuItem = createMenuItem(new MainWindowMenuHandler.GotoSegmentMenuItemAction());
+        gotoNextNoteMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNextNoteMenuItemAction());
+        gotoPreviousNoteMenuItem = createMenuItem(new MainWindowMenuHandler.GotoPreviousNoteMenuItemAction());
+        gotoNextUniqueMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNextUniqueMenuItemAction());
+        gotoMatchSourceSegment = createMenuItem(new MainWindowMenuHandler.GotoMatchSourceSegmentAction());
         gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU");
 
-        gotoNextXAutoMenuItem = createMenuItemFromAction("GotoNextXAutoMenuItem");
-        gotoPrevXAutoMenuItem = createMenuItemFromAction("GotoPrevXAutoMenuItem");
-        gotoNextXEnforcedMenuItem = createMenuItemFromAction("GotoNextXEnforcedMenuItem");
-        gotoPrevXEnforcedMenuItem = createMenuItemFromAction("GotoPrevXEnforcedMenuItem");
+        gotoNextXAutoMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNextXAutoMenuItemAction());
+        gotoPrevXAutoMenuItem = createMenuItem(new MainWindowMenuHandler.GotoPrevXAutoMenuItemAction());
+        gotoNextXEnforcedMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNextXEnforcedMenuItemAction());
+        gotoPrevXEnforcedMenuItem = createMenuItem(new MainWindowMenuHandler.GotoPrevXEnforcedMenuItemAction());
 
-        gotoHistoryBackMenuItem = createMenuItemFromAction("GotoHistoryBackMenuItem");
-        gotoHistoryForwardMenuItem = createMenuItemFromAction("GotoHistoryForwardMenuItem");
-        gotoNotesPanelMenuItem = createMenuItemFromAction("GotoNotesPanelMenuItem");
-        gotoEditorPanelMenuItem = createMenuItemFromAction("GotoEditorPanelMenuItem");
+        gotoHistoryBackMenuItem = createMenuItem(new MainWindowMenuHandler.GotoHistoryBackMenuItemAction());
+        gotoHistoryForwardMenuItem = createMenuItem(new MainWindowMenuHandler.GotoHistoryForwardMenuItemAction());
+        gotoNotesPanelMenuItem = createMenuItem(new MainWindowMenuHandler.GotoNotesPanelMenuItemAction());
+        gotoEditorPanelMenuItem = createMenuItem(new MainWindowMenuHandler.GotoEditorPanelMenuItemAction());
 
-        viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkTranslatedSegmentsCheckBoxMenuItem");
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkUntranslatedSegmentsCheckBoxMenuItem");
-        viewMarkParagraphStartCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkParagraphStartCheckBoxMenuItem");
-        viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewDisplaySegmentSourceCheckBoxMenuItem");
-        viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkNonUniqueSegmentsCheckBoxMenuItem");
-        viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkNotedSegmentsCheckBoxMenuItem");
-        viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkNBSPCheckBoxMenuItem");
-        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkWhitespaceCheckBoxMenuItem");
-        viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItemFromAction("ViewMarkBidiCheckBoxMenuItem");
-        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkAutoPopulatedCheckBoxMenuItem");
-        viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkGlossaryMatchesCheckBoxMenuItem");
-        viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkLanguageCheckerCheckBoxMenuItem");
-        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "ViewMarkFontFallbackCheckBoxMenuItem");
+        viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkTranslatedSegmentsCheckBoxMenuItemAction());
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkUntranslatedSegmentsCheckBoxMenuItemAction());
+        viewMarkParagraphStartCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkParagraphStartCheckBoxMenuItemAction());
+        viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewDisplaySegmentSourceCheckBoxMenuItemAction());
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction());
+        viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkNotedSegmentsCheckBoxMenuItemAction());
+        viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkNBSPCheckBoxMenuItemAction());
+        viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkWhitespaceCheckBoxMenuItemAction());
+        viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkBidiCheckBoxMenuItemAction());
+        viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkAutoPopulatedCheckBoxMenuItemAction());
+        viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkGlossaryMatchesCheckBoxMenuItemAction());
+        viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkLanguageCheckerCheckBoxMenuItemAction());
+        viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.ViewMarkFontFallbackCheckBoxMenuItemAction());
 
         viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO");
         viewModificationInfoMenu.setIcon(MainMenuIcons.newBlankIcon());
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
-        viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
-                "ViewDisplayModificationInfoNoneRadioButtonMenuItem", viewModificationInfoMenuBG);
-        viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
-                "ViewDisplayModificationInfoSelectedRadioButtonMenuItem", viewModificationInfoMenuBG);
-        viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItemFromAction(
-                "ViewDisplayModificationInfoAllRadioButtonMenuItem", viewModificationInfoMenuBG);
-        viewRestoreGUIMenuItem = createMenuItemFromAction("ViewRestoreGUIMenuItem");
+        viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(
+                new MainWindowMenuHandler.ViewDisplayModificationInfoNoneRadioButtonMenuItemAction(),
+                viewModificationInfoMenuBG);
+        viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItem(
+                new MainWindowMenuHandler.ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction(),
+                viewModificationInfoMenuBG);
+        viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem(
+                new MainWindowMenuHandler.ViewDisplayModificationInfoAllRadioButtonMenuItemAction(),
+                viewModificationInfoMenuBG);
+        viewRestoreGUIMenuItem = createMenuItem(new MainWindowMenuHandler.ViewRestoreGUIMenuItemAction());
 
-        toolsCheckIssuesMenuItem = createMenuItemFromAction("ToolsCheckIssuesMenuItem");
-        toolsCheckIssuesCurrentFileMenuItem = createMenuItemFromAction("ToolsCheckIssuesCurrentFileMenuItem");
-        toolsShowStatisticsStandardMenuItem = createMenuItemFromAction("ToolsShowStatisticsStandardMenuItem");
-        toolsShowStatisticsMatchesMenuItem = createMenuItemFromAction("ToolsShowStatisticsMatchesMenuItem");
-        toolsShowStatisticsMatchesPerFileMenuItem = createMenuItemFromAction(
-                "ToolsShowStatisticsMatchesPerFileMenuItem");
+        toolsCheckIssuesMenuItem = createMenuItem(new MainWindowMenuHandler.ToolsCheckIssuesMenuItemAction());
+        toolsCheckIssuesCurrentFileMenuItem = createMenuItem(new MainWindowMenuHandler.ToolsCheckIssuesCurrentFileMenuItemAction());
+        toolsShowStatisticsStandardMenuItem =
+                createMenuItem(new MainWindowMenuHandler.ToolsShowStatisticsStandardMenuItemAction());
+        toolsShowStatisticsMatchesMenuItem = createMenuItem(new MainWindowMenuHandler.ToolsShowStatisticsMatchesMenuItemAction());
+        toolsShowStatisticsMatchesPerFileMenuItem = createMenuItem(
+                new MainWindowMenuHandler.ToolsShowStatisticsMatchesPerFileMenuItemAction());
 
-        optionsPreferencesMenuItem = createMenuItemFromAction("OptionsPreferencesMenuItem");
+        optionsPreferencesMenuItem = createMenuItem(new MainWindowMenuHandler.OptionsPreferencesMenuItemAction());
 
         optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE");
 
-        optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItemFromAction(
-                "OptionsMTAutoFetchCheckboxMenuItem");
+        optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.OptionsMTAutoFetchCheckboxMenuItemAction());
         optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY");
-        optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "OptionsGlossaryFuzzyMatchingCheckBoxMenuItem");
+        optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.OptionsGlossaryFuzzyMatchingCheckBoxMenuItemAction());
 
         optionsDictionaryMenu = createMenu("TF_OPTIONSMENU_DICTIONARY");
-        optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItemFromAction(
-                "OptionsDictionaryFuzzyMatchingCheckBoxMenuItem");
+        optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.OptionsDictionaryFuzzyMatchingCheckBoxMenuItemAction());
 
         optionsAutoCompleteMenu = createMenu("MW_OPTIONSMENU_AUTOCOMPLETE");
         // add any autocomplete view configuration menu items below
-        optionsAutoCompleteShowAutomaticallyItem = createCheckboxMenuItemFromAction(
-                "OptionsAutoCompleteShowAutomaticallyItem");
-        optionsAutoCompleteHistoryCompletionMenuItem = createCheckboxMenuItemFromAction(
-                "OptionsAutoCompleteHistoryCompletionMenuItem");
-        optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItemFromAction(
-                "OptionsAutoCompleteHistoryPredictionMenuItem");
+        optionsAutoCompleteShowAutomaticallyItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.OptionsAutoCompleteShowAutomaticallyItemAction());
+        optionsAutoCompleteHistoryCompletionMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.OptionsAutoCompleteHistoryCompletionMenuItemAction());
+        optionsAutoCompleteHistoryPredictionMenuItem = createCheckboxMenuItem(
+                new MainWindowMenuHandler.OptionsAutoCompleteHistoryPredictionMenuItemAction());
 
-        optionsSetupFileFiltersMenuItem = createMenuItemFromAction("OptionsSetupFileFiltersMenuItem");
-        optionsSentsegMenuItem = createMenuItemFromAction("OptionsSentsegMenuItem");
-        optionsWorkflowMenuItem = createMenuItemFromAction("OptionsWorkflowMenuItem");
-        optionsAccessConfigDirMenuItem = createMenuItemFromAction("OptionsAccessConfigDirMenuItem");
+        optionsSetupFileFiltersMenuItem = createMenuItem(new MainWindowMenuHandler.OptionsSetupFileFiltersMenuItemAction());
+        optionsSentsegMenuItem = createMenuItem(new MainWindowMenuHandler.OptionsSentsegMenuItemAction());
+        optionsWorkflowMenuItem = createMenuItem(new MainWindowMenuHandler.OptionsWorkflowMenuItemAction());
+        optionsAccessConfigDirMenuItem = createMenuItem(new MainWindowMenuHandler.OptionsAccessConfigDirMenuItemAction());
 
-        helpContentsMenuItem = createMenuItemFromAction("HelpContentsMenuItem");
-        helpAboutMenuItem = createMenuItemFromAction("HelpAboutMenuItem");
-        helpLastChangesMenuItem = createMenuItemFromAction("HelpLastChangesMenuItem");
-        helpLogMenuItem = createMenuItemFromAction("HelpLogMenuItem");
-        helpUpdateCheckMenuItem = createMenuItemFromAction("HelpUpdateCheckMenuItem");
+        helpContentsMenuItem = createMenuItem(new MainWindowMenuHandler.HelpContentsMenuItemAction());
+        helpAboutMenuItem = createMenuItem(new MainWindowMenuHandler.HelpAboutMenuItemAction());
+        helpLastChangesMenuItem = createMenuItem(new MainWindowMenuHandler.HelpLastChangesMenuItemAction());
+        helpLogMenuItem = createMenuItem(new MainWindowMenuHandler.HelpLogMenuItemAction());
+        helpUpdateCheckMenuItem = createMenuItem(new MainWindowMenuHandler.HelpUpdateCheckMenuItemAction());
     }
 
     protected void constructMenu() {
@@ -608,7 +622,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 Log.logInfoRB("LOG_MENU_CLICK", key);
-                MainWindowMenuHandler.findInProjectReuseLastWindow();
+                findInProjectReuseLastWindow();
             }
         });
 
@@ -658,17 +672,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     @Deprecated
     @Override
     public void invokeAction(String action, int modifiers) {
-        String actionName;
-        if (modifiers > 0) {
-            actionName = StringUtil.capitalizeFirst(action, Locale.ENGLISH) + "withModifiers";
-        } else {
-            actionName = StringUtil.capitalizeFirst(action, Locale.ENGLISH);
-        }
-        if (actions.containsKey(actionName)) {
-            actions.get(actionName).actionPerformed(null);
-        } else {
-            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
-        }
+        throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
     }
 
     /**
@@ -696,21 +700,11 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     /**
      * Create menu item instance and set title.
      *
-     * @param titleKey
-     *            title name key in resource bundle
+     * @param action
+     *            corresponding action
      * @return menu item instance
      */
-    protected JMenuItem createMenuItem(String titleKey) {
-        JMenuItem result = new JMenuItem();
-        Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
-        return result;
-    }
-
-    protected JMenuItem createMenuItemFromAction(String commandKey) {
-        Action action = actions.get(commandKey);
-        if (action == null) {
-            throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
-        }
+    protected JMenuItem createMenuItem(Action action) {
         JMenuItem item = new JMenuItem();
         item.setAction(action);
         item.setIcon(null);
@@ -722,17 +716,11 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected JMenuItem createMenuItem(String titleKey, String name) {
         JMenuItem result = new JMenuItem();
         result.setName(name);
-        Action action = actions.get(name);
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
-        result.addActionListener(action);
         return result;
     }
 
-    protected JCheckBoxMenuItem createCheckboxMenuItemFromAction(String commandKey) {
-        Action action = actions.get(commandKey);
-        if (action == null) {
-            throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
-        }
+    protected JCheckBoxMenuItem createCheckboxMenuItem(Action action) {
         JCheckBoxMenuItem result = new JCheckBoxMenuItem();
         result.setAction(action);
         return result;
@@ -753,12 +741,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         return result;
     }
 
-    protected JRadioButtonMenuItem createRadioButtonMenuItemFromAction(String commandKey,
-            ButtonGroup buttonGroup) {
-        Action action = actions.get(commandKey);
-        if (action == null) {
-            throw new RuntimeException("Unexpected error when creating a menu item." + commandKey);
-        }
+    protected JRadioButtonMenuItem createRadioButtonMenuItem(Action action, ButtonGroup buttonGroup) {
         JRadioButtonMenuItem result = new JRadioButtonMenuItem();
         result.setAction(action);
         result.setIcon(null);
@@ -774,7 +757,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      * @return menu item instance
      */
     @Deprecated
-    protected JRadioButtonMenuItem createRadioButtonMenuItem(final String titleKey, ButtonGroup buttonGroup) {
+    protected JRadioButtonMenuItem createRadioButtonMenuItem(String titleKey, ButtonGroup buttonGroup) {
         JRadioButtonMenuItem result = new JRadioButtonMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         buttonGroup.add(result);
@@ -921,9 +904,9 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected void initMacSpecific() {
         try {
             // MacOSX-specific
-            OSXIntegration.setQuitHandler(actions.get("ProjectExitMenuItem"));
-            OSXIntegration.setAboutHandler(actions.get("HelpAboutMenuItem"));
-            OSXIntegration.setPreferencesHandler(actions.get("OptionsPreferencesMenuItem"));
+            OSXIntegration.setQuitHandler(new MainWindowMenuHandler.ProjectExitMenuItemAction());
+            OSXIntegration.setAboutHandler(new MainWindowMenuHandler.HelpAboutMenuItemAction());
+            OSXIntegration.setPreferencesHandler(new MainWindowMenuHandler.OptionsPreferencesMenuItemAction());
         } catch (NoClassDefFoundError e) {
             Log.log(e);
         }

@@ -116,11 +116,7 @@ import org.omegat.util.gui.Styles;
  */
 public final class MainWindowMenuHandler {
 
-    public MainWindowMenuHandler() {
-    }
-
-    @Deprecated
-    public MainWindowMenuHandler(final MainWindow mainWindow) {
+    private MainWindowMenuHandler() {
     }
 
     /**

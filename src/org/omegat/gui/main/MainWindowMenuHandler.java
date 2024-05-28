@@ -116,7 +116,7 @@ import org.omegat.util.gui.Styles;
  */
 public final class MainWindowMenuHandler {
 
-    private MainWindowMenuHandler() {
+    MainWindowMenuHandler() {
     }
 
     /**
@@ -131,8 +131,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectCreate();
         }
     }
@@ -149,8 +148,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectTeamCreate();
         }
     }
@@ -167,8 +165,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectOpen(null);
         }
     }
@@ -182,8 +179,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             RecentProjects.clear();
         }
     }
@@ -200,8 +196,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectOpenMED();
         }
     }
@@ -218,8 +213,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectCreateMED();
         }
     }
@@ -236,8 +230,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.doPromptImportSourceFiles();
         }
     }
@@ -251,8 +244,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.doWikiImport();
         }
     }
@@ -266,8 +258,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectReload();
         }
     }
@@ -284,8 +275,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectClose();
         }
     }
@@ -302,8 +292,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectSave();
         }
     }
@@ -320,8 +309,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!checkTags()) {
                 return;
             }
@@ -355,8 +343,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!checkTags()) {
                 return;
             }
@@ -378,8 +365,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectCommitSourceFiles();
         }
     }
@@ -396,9 +382,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
-
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             String midName = Core.getEditor().getCurrentFile();
             if (StringUtil.isEmpty(midName)) {
                 return;
@@ -427,8 +411,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             ProjectUICommands.projectEditProperties();
         }
     }
@@ -442,6 +425,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             IProjectFilesList projWin = Core.getProjectFilesList();
             if (projWin != null) {
                 projWin.setActive(!projWin.isActive());
@@ -458,8 +442,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -478,8 +461,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -497,8 +479,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -516,8 +497,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -536,8 +516,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -555,8 +534,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -574,8 +552,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -594,8 +571,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -622,8 +598,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -650,8 +625,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -679,8 +653,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             prepareForExit(() -> System.exit(0));
         }
     }
@@ -695,8 +668,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             String projectDir = Core.getProject().isProjectLoaded()
                     ? Core.getProject().getProjectProperties().getProjectRoot()
                     : null;
@@ -805,6 +777,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
             if (focused == Core.getNotes()) {
                 Core.getNotes().undo();
@@ -825,8 +798,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
             if (focused == Core.getNotes()) {
                 Core.getNotes().redo();
@@ -846,8 +818,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             MainWindow.doRecycleTrans();
         }
     }
@@ -861,8 +832,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             MainWindow.doInsertTrans();
         }
     }
@@ -877,8 +847,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
             if (tr == null) {
                 Core.getMachineTranslatePane().forceLoad();
@@ -902,8 +871,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -926,8 +894,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -950,8 +917,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -969,8 +935,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -997,8 +962,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -1020,8 +984,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -1041,8 +1004,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -1070,8 +1032,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
@@ -1102,8 +1063,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getMatcher().setActiveMatch(0);
         }
     }
@@ -1118,8 +1078,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getMatcher().setActiveMatch(1);
         }
     }
@@ -1134,8 +1093,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getMatcher().setActiveMatch(2);
         }
     }
@@ -1150,8 +1108,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getMatcher().setActiveMatch(3);
         }
     }
@@ -1166,8 +1123,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getMatcher().setActiveMatch(4);
         }
     }
@@ -1182,8 +1138,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getMatcher().setNextActiveMatch();
         }
     }
@@ -1199,8 +1154,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getMatcher().setPrevActiveMatch();
         }
     }
@@ -1214,8 +1168,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().insertText("\u200E");
 
         }
@@ -1230,8 +1183,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().insertText("\u200F");
         }
     }
@@ -1245,8 +1197,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().insertText("\u202A");
         }
     }
@@ -1260,8 +1211,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().insertText("\u202B");
         }
     }
@@ -1276,8 +1226,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().insertText("\u202C");
         }
     }
@@ -1291,8 +1240,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().setAlternateTranslationForCurrentEntry(false);
         }
     }
@@ -1306,8 +1254,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().setAlternateTranslationForCurrentEntry(true);
         }
     }
@@ -1321,8 +1268,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().registerUntranslated();
         }
     }
@@ -1336,8 +1282,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().registerEmptyTranslation();
         }
     }
@@ -1351,8 +1296,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().registerIdenticalTranslation();
         }
     }
@@ -1370,8 +1314,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame());
         }
     }
@@ -1385,8 +1328,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
         }
     }
@@ -1400,8 +1342,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.SENTENCE);
         }
     }
@@ -1415,6 +1356,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
         }
     }
@@ -1428,8 +1370,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
         }
     }
@@ -1443,8 +1384,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
         }
     }
@@ -1458,8 +1398,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().nextUntranslatedEntry();
         }
     }
@@ -1473,8 +1412,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().nextUniqueEntry();
         }
     }
@@ -1488,8 +1426,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().nextTranslatedEntry();
         }
     }
@@ -1503,8 +1440,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().nextEntry();
         }
     }
@@ -1518,8 +1454,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().prevEntry();
         }
     }
@@ -1533,8 +1468,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().nextXAutoEntry();
         }
     }
@@ -1548,8 +1482,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().prevXAutoEntry();
         }
     }
@@ -1563,8 +1496,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().nextXEnforcedEntry();
         }
     }
@@ -1578,8 +1510,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().prevXEnforcedEntry();
         }
     }
@@ -1593,8 +1524,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().nextEntryWithNote();
         }
     }
@@ -1608,8 +1538,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().prevEntryWithNote();
         }
     }
@@ -1623,8 +1552,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getNotes().requestFocus();
         }
     }
@@ -1638,8 +1566,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().requestFocus();
         }
     }
@@ -1656,8 +1583,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             // Create a dialog for input
             GoToSegmentDialog dialog = new GoToSegmentDialog(Core.getMainWindow().getApplicationFrame());
             dialog.setVisible(true);
@@ -1680,8 +1606,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().gotoHistoryBack();
         }
     }
@@ -1695,8 +1620,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().gotoHistoryForward();
         }
     }
@@ -1710,8 +1634,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             NearString ns = Core.getMatcher().getActiveMatch();
             if (ns != null && ns.comesFrom == MATCH_SOURCE.MEMORY) {
                 Core.getEditor().gotoEntry(ns.source, ns.key);
@@ -1729,8 +1652,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkTranslated(((JCheckBoxMenuItem) o).isSelected());
@@ -1750,8 +1672,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkUntranslated(((JCheckBoxMenuItem) o).isSelected());
@@ -1771,8 +1692,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings()
@@ -1792,8 +1712,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setDisplaySegmentSources(((JCheckBoxMenuItem) o).isSelected());
@@ -1812,8 +1731,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkNonUniqueSegments(((JCheckBoxMenuItem) o).isSelected());
@@ -1832,8 +1750,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkNotedSegments(((JCheckBoxMenuItem) o).isSelected());
@@ -1851,8 +1768,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkNBSP(((JCheckBoxMenuItem) o).isSelected());
@@ -1871,8 +1787,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkWhitespace(((JCheckBoxMenuItem) o).isSelected());
@@ -1892,8 +1807,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkBidi(((JCheckBoxMenuItem) o).isSelected());
@@ -1912,8 +1826,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkAutoPopulated(((JCheckBoxMenuItem) o).isSelected());
@@ -1932,8 +1845,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkGlossaryMatches(((JCheckBoxMenuItem) o).isSelected());
@@ -1953,8 +1865,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setMarkLanguageChecker(((JCheckBoxMenuItem) o).isSelected());
@@ -1973,8 +1884,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Core.getEditor().getSettings().setDoFontFallback(((JCheckBoxMenuItem) o).isSelected());
@@ -1992,8 +1902,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().getSettings()
                     .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);
         }
@@ -2009,8 +1918,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().getSettings()
                     .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED);
         }
@@ -2026,8 +1934,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getEditor().getSettings()
                     .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL);
         }
@@ -2042,8 +1949,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             if (!Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK)) {
                 IssueProvidersSelectorController dialog = new IssueProvidersSelectorController();
                 if (!dialog.show(Core.getMainWindow().getApplicationFrame())) {
@@ -2064,8 +1970,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Core.getIssues().showForFiles(Pattern.quote(Core.getEditor().getCurrentFile()));
         }
     }
@@ -2083,8 +1988,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             // insert tags
             for (Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
                 Core.getEditor().insertTag(tag.tag);
@@ -2101,8 +2005,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             // insert next tag
             List<Tag> tags = TagUtil.getAllTagsMissingFromTarget();
             if (tags.isEmpty()) {
@@ -2121,8 +2024,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
                     StatisticsWindow.STAT_TYPE.STANDARD).setVisible(true);
         }
@@ -2137,8 +2039,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
                     StatisticsWindow.STAT_TYPE.MATCHES).setVisible(true);
         }
@@ -2153,8 +2054,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
                     StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
         }
@@ -2169,8 +2069,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Preferences.setPreference(Preferences.AC_SHOW_SUGGESTIONS_AUTOMATICALLY,
@@ -2188,8 +2087,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Preferences.setPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED,
@@ -2207,8 +2105,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED,
@@ -2226,8 +2123,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Preferences.setPreference(Preferences.MT_AUTO_FETCH, ((JCheckBoxMenuItem) o).isSelected());
@@ -2244,8 +2140,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Preferences.setPreference(Preferences.GLOSSARY_STEMMING,
@@ -2264,8 +2159,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             Object o = e.getSource();
             if (o instanceof JCheckBoxMenuItem) {
                 Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
@@ -2288,8 +2182,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
                     FiltersCustomizerController.class);
         }
@@ -2308,8 +2201,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
                     SegmentationCustomizerController.class);
         }
@@ -2328,8 +2220,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
                     EditingBehaviorController.class);
         }
@@ -2348,8 +2239,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             MainWindowUI.resetDesktopLayout((MainWindow) Core.getMainWindow()); // FIXME
         }
     }
@@ -2363,8 +2253,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             openFile(new File(StaticUtils.getConfigDir()));
         }
     }
@@ -2381,8 +2270,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             try {
                 Help.showHelp();
             } catch (Exception ex) {
@@ -2407,8 +2295,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new AboutDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
         }
     }
@@ -2425,8 +2312,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new LastChangesDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
         }
     }
@@ -2443,8 +2329,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             new LogDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
         }
     }
@@ -2461,8 +2346,7 @@ public final class MainWindowMenuHandler {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String action = e.getActionCommand();
-            Log.logInfoRB("LOG_MENU_CLICK", action);
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             VersionCheckDialog.checkAndShowResultAsync(Core.getMainWindow().getApplicationFrame());
         }
     }

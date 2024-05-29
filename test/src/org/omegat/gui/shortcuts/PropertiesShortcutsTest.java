@@ -25,16 +25,20 @@
 
 package org.omegat.gui.shortcuts;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.InputMap;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -47,6 +51,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import org.omegat.util.StaticUtils;
 
 /**
@@ -262,5 +267,25 @@ public class PropertiesShortcutsTest {
     public void testLoadBundled() {
         PropertiesShortcuts props = PropertiesShortcuts.loadBundled(BUNDLED_ROOT, USER_FILE_NAME);
         assertEquals(shortcuts.getData(), props.getData());
+    }
+
+    @Test
+    public void testBindKeyStrokeOverAction() {
+        JMenuItem item = new JMenuItem();
+        item.setAction(new TestSaveAction());
+        assertThat(item.getAccelerator()).as("Configured by Action object").isEqualTo(CTRL_D);
+        shortcuts.bindKeyStrokes(item);
+        assertThat(item.getAccelerator()).as("Override by bindKeyStroke").isEqualTo(CTRL_S);
+    }
+
+    public static class TestSaveAction extends AbstractAction {
+        public TestSaveAction() {
+            putValue(Action.ACTION_COMMAND_KEY, TEST_SAVE);
+            putValue(Action.ACCELERATOR_KEY, CTRL_D);
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+        }
     }
 }

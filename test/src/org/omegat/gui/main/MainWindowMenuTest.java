@@ -25,6 +25,7 @@
 
 package org.omegat.gui.main;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -43,6 +44,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 import org.openide.awt.Mnemonics;
 
@@ -87,6 +89,21 @@ public class MainWindowMenuTest extends TestCore {
         assertTrue("menu items not found", count > 30);
         assertTrue("There is action handlers in MainWindow which doesn't used in menu: "
                 + actions, actions.isEmpty());
+    }
+
+    @Test
+    public void testMenuActionCommandIsEqualsToShortcutKey() throws IllegalAccessException, NoSuchFieldException {
+        // shortcut keys are as same as field name of menu item
+        BaseMainWindowMenu testMenu = new TestMainMenu();
+        testMenu.initComponents();
+        for (Field f : FieldUtils.getAllFields(testMenu.getClass())) {
+            if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
+                JMenuItem item = (JMenuItem) FieldUtils.readField(f, testMenu, true);
+                assertThat(f.getName())
+                        .as("JMenuItem field name should be as same as action command")
+                        .isEqualTo(item.getActionCommand());
+            }
+        }
     }
 
     @Test

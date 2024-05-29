@@ -47,7 +47,8 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.main.MainWindowMenuHandler;
+import org.omegat.gui.main.MainWindowMenuHandler.EditFindInProjectMenuItemAction;
+import org.omegat.gui.main.MainWindowMenuHandler.OptionsPreferencesMenuItemAction;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -116,12 +117,13 @@ public class AccessTools extends JPanel {
         sourceFilesCB.setMaximumSize(new Dimension(cbWidth, cbHeight));
         add(sourceFilesCB);
 
+        // These buttons show only icon
         searchButton = new JButton();
-        searchButton.setAction(new MainWindowMenuHandler.EditFindInProjectMenuItemAction());
+        searchButton.setAction(new EditFindInProjectMenuItemAction());
         searchButton.setText("");
         searchButton.setBorderPainted(false);
         settingsButton = new JButton();
-        settingsButton.setAction(new MainWindowMenuHandler.OptionsPreferencesMenuItemAction());
+        settingsButton.setAction(new OptionsPreferencesMenuItemAction());
         settingsButton.setText("");
         settingsButton.setBorderPainted(false);
 

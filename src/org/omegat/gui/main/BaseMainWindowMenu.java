@@ -37,25 +37,19 @@
 
 package org.omegat.gui.main;
 
-import static org.omegat.gui.main.MainWindowMenuHandler.findInProjectReuseLastWindow;
-
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
@@ -77,7 +71,6 @@ import org.omegat.gui.main.MainWindowMenuHandler.ProjectSaveMenuItemAction;
 import org.omegat.gui.main.MainWindowMenuHandler.ProjectSingleCompileMenuItemAction;
 import org.omegat.gui.main.MainWindowMenuHandler.ProjectTeamNewMenuItemAction;
 import org.omegat.gui.main.MainWindowMenuHandler.ProjectWikiImportMenuItemAction;
-import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -609,18 +602,6 @@ public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
 
             @Override
             public void menuCanceled(MenuEvent e) {
-            }
-        });
-
-        final String key = "findInProjectReuseLastWindow";
-        KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        Core.getMainWindow().getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-                .put(stroke, key);
-        Core.getMainWindow().getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Log.logInfoRB("LOG_MENU_CLICK", key);
-                findInProjectReuseLastWindow();
             }
         });
 

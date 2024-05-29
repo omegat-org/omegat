@@ -34,6 +34,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Component;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +49,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -60,17 +62,22 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.search.SearchMode;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.ChooseMedProject;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
+import org.omegat.gui.editor.EditorUtils;
+import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.HttpConnectionUtils;
@@ -1238,6 +1245,95 @@ public final class ProjectUICommands {
         } catch (IOException ioe) {
             Core.getMainWindow().displayErrorRB(ioe, "MAIN_ERROR_File_Import_Failed");
         }
+    }
+
+    public static void findInProjectReuseLastWindow() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String text = getTrimmedSelectedTextInMainWindow();
+        if (!MainWindowUI.reuseSearchWindow(text)) {
+            MainWindowUI.createSearchWindow(SearchMode.SEARCH, text);
+        }
+    }
+
+    public static String getTrimmedSelectedTextInMainWindow() {
+        String selection = null;
+        Component component = Core.getMainWindow().getApplicationFrame().getMostRecentFocusOwner();
+        if (component instanceof JTextComponent) {
+            selection = ((JTextComponent) component).getSelectedText();
+            if (!StringUtil.isEmpty(selection)) {
+                selection = EditorUtils.removeDirectionChars(selection);
+                selection = selection.trim();
+            }
+        }
+        return selection;
+    }
+
+    public static void prepareForExit(Runnable onCompletion) {
+        // Bug #902: commit the current entry first
+        // We do it before checking project status, so that it can eventually
+        // change it
+        if (Core.getProject().isProjectLoaded()) {
+            Core.getEditor().commitAndLeave();
+        }
+
+        boolean projectModified = false;
+        if (Core.getProject().isProjectLoaded()) {
+            projectModified = Core.getProject().isProjectModified();
+        }
+        // RFE 1302358
+        // Add Yes/No Warning before OmegaT quits
+        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(
+                    Core.getMainWindow().getApplicationFrame(), OStrings.getString("MW_QUIT_CONFIRM"),
+                    OStrings.getString("CONFIRM_DIALOG_TITLE"), JOptionPane.YES_NO_OPTION)) {
+                return;
+            }
+        }
+
+        SegmentExportImport.flushExportedSegments();
+
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                if (Core.getProject().isProjectLoaded()) {
+                    // Save the list of learned and ignore words
+                    ISpellChecker sc = Core.getSpellChecker();
+                    sc.saveWordLists();
+                    try {
+                        Core.executeExclusively(true, () -> {
+                            Core.getProject().saveProject(true);
+                            ProjectFactory.closeProject();
+                        });
+                    } catch (KnownException ex) {
+                        // hide exception on shutdown
+                    }
+                }
+
+                CoreEvents.fireApplicationShutdown();
+
+                PluginUtils.unloadPlugins();
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+
+                    MainWindowUI.saveScreenLayout((MainWindow) Core.getMainWindow());
+
+                    Preferences.save();
+
+                    onCompletion.run();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+            }
+        }.execute();
     }
 
     private static class CollisionCallback implements ICollisionCallback {

@@ -33,6 +33,8 @@
 
 package org.omegat.gui.main;
 
+import static org.omegat.gui.main.ProjectUICommands.prepareForExit;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
@@ -44,22 +46,26 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -75,6 +81,8 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.matches.IMatcher;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -197,9 +205,20 @@ public class MainWindow implements IMainWindow {
         }
         applicationFrame.setJMenuBar(menu.mainMenu);
 
+        final String key = "findInProjectReuseLastWindow";
+        KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
+        applicationFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        applicationFrame.getRootPane().getActionMap().put(key, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Log.logInfoRB("LOG_MENU_CLICK", key);
+                ProjectUICommands.findInProjectReuseLastWindow();
+            }
+        });
+
         applicationFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                MainWindowMenuHandler.projectExitAction();
+                prepareForExit(() -> System.exit(0));
             }
 
             @Override

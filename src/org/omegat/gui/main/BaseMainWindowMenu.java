@@ -189,26 +189,13 @@ public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
         viewFileListMenuItem = createMenuItem(new MainWindowMenuHandler.ViewFileListMenuItemAction());
 
         projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES");
-        projectAccessRootMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessRootMenuItemAction());
-        projectAccessDictionaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessDictionaryMenuItemAction());
-        projectAccessGlossaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessGlossaryMenuItemAction());
-        projectAccessSourceMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessSourceMenuItemAction());
-        projectAccessTargetMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTargetMenuItemAction());
-        projectAccessTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTMMenuItemAction());
-        projectAccessExportTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessExportTMMenuItemAction());
-        projectAccessCurrentSourceDocumentMenuItem = createMenuItem(
-                new MainWindowMenuHandler.ProjectAccessCurrentSourceDocumentMenuItemAction());
-        projectAccessCurrentTargetDocumentMenuItem = createMenuItem(
-                new MainWindowMenuHandler.ProjectAccessCurrentTargetDocumentMenuItemAction());
-        projectAccessWriteableGlossaryMenuItem = createMenuItem(
-                new MainWindowMenuHandler.ProjectAccessWriteableGlossaryMenuItemAction());
-        projectAccessRootMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessRootMenuItemAction());
-        projectAccessDictionaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessDictionaryMenuItemAction());
-        projectAccessGlossaryMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessGlossaryMenuItemAction());
-        projectAccessSourceMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessSourceMenuItemAction());
-        projectAccessTargetMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTargetMenuItemAction());
-        projectAccessTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessTMMenuItemAction());
-        projectAccessExportTMMenuItem = createMenuItem(new MainWindowMenuHandler.ProjectAccessExportTMMenuItemAction());
+        projectAccessRootMenuItem = createMenuItem(new ProjectAccessRootMenuItemAction());
+        projectAccessDictionaryMenuItem = createMenuItem(new ProjectAccessDictionaryMenuItemAction());
+        projectAccessGlossaryMenuItem = createMenuItem(new ProjectAccessGlossaryMenuItemAction());
+        projectAccessSourceMenuItem = createMenuItem(new ProjectAccessSourceMenuItemAction());
+        projectAccessTargetMenuItem = createMenuItem(new ProjectAccessTargetMenuItemAction());
+        projectAccessTMMenuItem = createMenuItem(new ProjectAccessTMMenuItemAction());
+        projectAccessExportTMMenuItem = createMenuItem(new ProjectAccessExportTMMenuItemAction());
         projectAccessCurrentSourceDocumentMenuItem = createMenuItem(
                 new MainWindowMenuHandler.ProjectAccessCurrentSourceDocumentMenuItemAction());
         projectAccessCurrentTargetDocumentMenuItem = createMenuItem(new

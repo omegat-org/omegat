@@ -32,7 +32,10 @@
 
     <!-- Permanently suppress errors/warnings -->
 
+    <!-- All menu actions are defined as inner-class in Handler class.
+         MainWindowMenu class imports a hundred of actions with star-import -->
     <suppress files="MainWindowMenuHandler\.java" checks="FileLength"/>
+    <suppress files="MainWindowMenu\.java" checks="AvoidStarImport"/>
 
     <!-- tests -->
     <suppress files="TestCore\.java" checks="MethodLength"/>

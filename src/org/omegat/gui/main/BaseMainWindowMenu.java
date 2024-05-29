@@ -15,7 +15,7 @@
  *               2014 Aaron Madlon-Kay
  *               2015 Didier Briel, Yu Tang
  *               2017 Didier Briel
- *               2023 Hiroshi Miura
+ *               2023-2024 Hiroshi Miura
  *               Home page: https://www.omegat.org/
  *               Support center: https://omegat.org/support
  *
@@ -40,7 +40,6 @@ package org.omegat.gui.main;
 import static org.omegat.gui.main.MainWindowMenuHandler.findInProjectReuseLastWindow;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.EnumMap;
@@ -113,7 +112,7 @@ import org.omegat.util.gui.OSXIntegration;
  * /src/org/omegat/gui/main/MainMenuShortcuts.mac.properties with the proper
  * shortcuts if set.
  */
-public abstract class BaseMainWindowMenu implements ActionListener, MenuListener, IMainMenu {
+public abstract class BaseMainWindowMenu implements MenuListener, IMainMenu {
 
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
@@ -652,14 +651,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         });
     }
 
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        // Get item name from actionCommand.
-        String action = evt.getActionCommand();
-        Log.logInfoRB("LOG_MENU_CLICK", action);
-        invokeAction(action, evt.getModifiers());
-    }
-
     /**
      * Code for dispatching events from components to event handlers.
      *
@@ -736,7 +727,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
         JCheckBoxMenuItem result = new JCheckBoxMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
-        result.addActionListener(this);
         return result;
     }
 
@@ -760,7 +750,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         JRadioButtonMenuItem result = new JRadioButtonMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         buttonGroup.add(result);
-        result.addActionListener(this);
         return result;
     }
 

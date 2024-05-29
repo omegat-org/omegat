@@ -142,7 +142,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         createComponents();
         constructMenu();
         createMenuBar();
-        PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(mainMenu);
         configureActions();
     }
 
@@ -614,7 +613,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
             }
         });
 
-        String key = "findInProjectReuseLastWindow";
+        final String key = "findInProjectReuseLastWindow";
         KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
         Core.getMainWindow().getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(stroke, key);

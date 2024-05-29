@@ -52,6 +52,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -269,6 +270,9 @@ public class PropertiesShortcutsTest {
         assertEquals(shortcuts.getData(), props.getData());
     }
 
+    /**
+     * Test bind key stroke override a value from action.
+     */
     @Test
     public void testBindKeyStrokeOverAction() {
         JMenuItem item = new JMenuItem();
@@ -278,10 +282,47 @@ public class PropertiesShortcutsTest {
         assertThat(item.getAccelerator()).as("Override by bindKeyStroke").isEqualTo(CTRL_S);
     }
 
+    /**
+     * Test accelarator key is null, when action value not set.
+     */
+    @Test
+    public void testShortcutKeySetActionEmpty() {
+        JMenuItem item = new JMenuItem();
+        Action action = new TestCutAction();
+        item.setAction(action);
+        assertThat(action.getValue(Action.ACCELERATOR_KEY)).isNull();
+        assertThat(item.getAccelerator()).as("Null when there is no accelarator key defined in action").isNull();
+    }
+
+    /**
+     * Test accelarator key configured from action object.
+     */
+    @Test
+    public void testShortcutKeySetActionValue() {
+        Action action = new MainWindowMenuHandler.ProjectNewMenuItemAction();
+        JMenuItem item = new JMenuItem();
+        item.setAction(action);
+        KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke("projectNewMenuItem");
+        assertThat(item.getAccelerator()).as("Configured by Action object").isEqualTo(stroke);
+    }
+
+    @SuppressWarnings("serial")
     public static class TestSaveAction extends AbstractAction {
         public TestSaveAction() {
             putValue(Action.ACTION_COMMAND_KEY, TEST_SAVE);
             putValue(Action.ACCELERATOR_KEY, CTRL_D);
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static class TestCutAction extends AbstractAction {
+        public TestCutAction() {
+            putValue(Action.ACTION_COMMAND_KEY, TEST_CUT);
+            putValue(Action.ACCELERATOR_KEY, null);
         }
 
         @Override

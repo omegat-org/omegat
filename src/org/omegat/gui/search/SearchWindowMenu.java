@@ -32,12 +32,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import org.openide.awt.Mnemonics;
+
 import org.omegat.core.Core;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
-import org.openide.awt.Mnemonics;
 
 @SuppressWarnings("serial")
 public class SearchWindowMenu extends JMenuBar {
@@ -79,6 +80,7 @@ public class SearchWindowMenu extends JMenuBar {
         // members in order to get matching shortcuts.
 
         item = editMenu.add(new JMenuItem());
+
         Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"));
         item.setActionCommand("editInsertSourceMenuItem");
         item.addActionListener(

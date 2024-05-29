@@ -84,6 +84,7 @@ import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
+import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
 import org.omegat.util.Log;
@@ -116,7 +117,7 @@ import org.omegat.util.gui.Styles;
  */
 public final class MainWindowMenuHandler {
 
-    MainWindowMenuHandler() {
+    private MainWindowMenuHandler() {
     }
 
     /**
@@ -126,7 +127,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectNewMenuItemAction extends AbstractMnemonicsAction {
         public ProjectNewMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_CREATE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectNewMenuItem");
+            final String key = "projectNewMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -143,7 +146,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectTeamNewMenuItemAction extends AbstractMnemonicsAction {
         public ProjectTeamNewMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_TEAM_CREATE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectTeamNewMenuItem");
+            final String key = "projectTeamNewMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -160,7 +165,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectOpenMenuItemAction extends AbstractMnemonicsAction {
         public ProjectOpenMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_OPEN"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectOpenMenuItem");
+            final String key = "projectOpenMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -174,7 +181,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectClearRecentMenuItemAction extends AbstractMnemonicsAction {
         public ProjectClearRecentMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_CLEAR_RECENT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectClearRecentMenuItem");
+            final String key = "projectClearRecentMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -191,7 +200,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectMedOpenMenuItemAction extends AbstractMnemonicsAction {
         public ProjectMedOpenMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_MED_OPEN"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectMedOpenMenuItem");
+            final String key = "projectMedOpenMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -208,7 +219,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectMedCreateMenuItemAction extends AbstractMnemonicsAction {
         public ProjectMedCreateMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_MED_CREATE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectMedCreateMenuItem");
+            final String key = "projectMedCreateMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -225,7 +238,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectImportMenuItemAction extends AbstractMnemonicsAction {
         public ProjectImportMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_IMPORT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectImportMenuItem");
+            final String key = "projectImportMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -239,7 +254,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectWikiImportMenuItemAction extends AbstractMnemonicsAction {
         public ProjectWikiImportMenuItemAction() {
             super(OStrings.getString("TF_MENU_WIKI_IMPORT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectWikiImportMenuItem");
+            final String key = "projectWikiImportMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -253,7 +270,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectReloadMenuItemAction extends AbstractMnemonicsAction {
         public ProjectReloadMenuItemAction() {
             super(OStrings.getString("TF_MENU_PROJECT_RELOAD"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectReloadMenuItem");
+            final String key = "projectReloadMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -270,7 +289,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectCloseMenuItemAction extends AbstractMnemonicsAction {
         public ProjectCloseMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_CLOSE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectCloseMenuItem");
+            final String key = "projectCloseMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -287,7 +308,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectSaveMenuItemAction extends AbstractMnemonicsAction {
         public ProjectSaveMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_SAVE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectSaveMenuItem");
+            final String key = "projectSaveMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -304,7 +327,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectCompileMenuItemAction extends AbstractMnemonicsAction {
         public ProjectCompileMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_COMPILE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectCompileMenuItem");
+            final String key = "projectCompileMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -338,7 +363,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectCommitTargetFilesAction extends AbstractMnemonicsAction {
         public ProjectCommitTargetFilesAction() {
             super(OStrings.getString("TF_MENU_FILE_TARGET"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectCommitTargetFiles");
+            final String key = "projectCommitTargetFiles";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -347,9 +374,7 @@ public final class MainWindowMenuHandler {
             if (!checkTags()) {
                 return;
             }
-
             ProjectUICommands.projectCompileAndCommit();
-
         }
     }
 
@@ -360,7 +385,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectCommitSourceFilesAction extends AbstractMnemonicsAction {
         public ProjectCommitSourceFilesAction() {
             super(OStrings.getString("TF_MENU_FILE_COMMIT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectCommitSourceFiles");
+            final String key = "projectCommitSourceFiles";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -377,7 +404,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectSingleCompileMenuItemAction extends AbstractMnemonicsAction {
         public ProjectSingleCompileMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_SINGLE_COMPILE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectSingleCompileMenuItem");
+            final String key = "projectSingleCompileMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -406,7 +435,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectEditMenuItemAction extends AbstractMnemonicsAction {
         public ProjectEditMenuItemAction() {
             super(OStrings.getString("MW_PROJECTMENU_EDIT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectEditMenuItem");
+            final String key = "projectEditMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -420,7 +451,9 @@ public final class MainWindowMenuHandler {
     public static class ViewFileListMenuItemAction extends AbstractMnemonicsAction {
         public ViewFileListMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_PROJWIN"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewFileListMenuItem");
+            final String key = "viewFileListMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -437,7 +470,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessRootMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessRootMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_ROOT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessRootMenuItem");
+            final String key = "projectAccessRootMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -456,7 +491,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessDictionaryMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessDictionaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_DICTIONARY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessDictionaryMenuItem");
+            final String key = "projectAccessDictionaryMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -474,7 +511,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessGlossaryMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessGlossaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_GLOSSARY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessGlossaryMenuItem");
+            final String key = "projectAccessGlossaryMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -492,7 +531,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessSourceMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_SOURCE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessSourceMenuItem");
+            final String key = "projectAccessSourceMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -503,7 +544,6 @@ public final class MainWindowMenuHandler {
             }
             String path = Core.getProject().getProjectProperties().getSourceRoot();
             openFile(new File(path));
-
         }
     }
 
@@ -511,7 +551,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessTargetMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessTargetMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_TARGET"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessTargetMenuItem");
+            final String key = "projectAccessTargetMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -529,7 +571,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessTMMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessTMMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_TM"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessTMMenuItem");
+            final String key = "projectAccessTMMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -547,7 +591,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessExportTMMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessExportTMMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_EXPORT_TM"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessExportTMMenuItem");
+            final String key = "projectAccessExportTMMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -558,7 +604,6 @@ public final class MainWindowMenuHandler {
             }
             String path = Core.getProject().getProjectProperties().getExportTMRoot();
             openFile(new File(path));
-
         }
     }
 
@@ -566,7 +611,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessCurrentSourceDocumentMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessCurrentSourceDocumentMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessCurrentSourceDocumentMenuItem");
+            final String key = "projectAccessCurrentSourceDocumentMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -593,7 +640,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessCurrentTargetDocumentMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessCurrentTargetDocumentMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessCurrentTargetDocumentMenuItem");
+            final String key = "projectAccessCurrentTargetDocumentMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -620,7 +669,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectAccessWriteableGlossaryMenuItemAction extends AbstractMnemonicsAction {
         public ProjectAccessWriteableGlossaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectAccessWriteableGlossaryMenuItem");
+            final String key = "projectAccessWriteableGlossaryMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -639,7 +690,6 @@ public final class MainWindowMenuHandler {
                 toOpen = toOpen.getParentFile();
             }
             openFile(toOpen);
-
         }
     }
 
@@ -648,7 +698,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectExitMenuItemAction extends AbstractMnemonicsAction {
         public ProjectExitMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_QUIT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectExitMenuItem");
+            final String key = "projectExitMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -663,7 +715,9 @@ public final class MainWindowMenuHandler {
     public static class ProjectRestartMenuItemAction extends AbstractMnemonicsAction {
         public ProjectRestartMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_RESTART"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "projectRestartMenuItem");
+            final String key = "projectRestartMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -772,7 +826,9 @@ public final class MainWindowMenuHandler {
 
         public EditUndoMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_UNDO"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editUndoMenuItem");
+            final String key = "editUndoMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -784,7 +840,6 @@ public final class MainWindowMenuHandler {
             } else {
                 Core.getEditor().undo();
             }
-
         }
     }
 
@@ -793,7 +848,9 @@ public final class MainWindowMenuHandler {
     public static class EditRedoMenuItemAction extends AbstractMnemonicsAction {
         public EditRedoMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_REDO"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editRedoMenuItem");
+            final String key = "editRedoMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -813,7 +870,9 @@ public final class MainWindowMenuHandler {
 
         public EditOverwriteTranslationMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_RECYCLE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editOverwriteTranslationMenuItem");
+            final String key = "editOverwriteTranslationMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -827,7 +886,9 @@ public final class MainWindowMenuHandler {
     public static class EditInsertTranslationMenuItemAction extends AbstractMnemonicsAction {
         public EditInsertTranslationMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editInsertTranslationMenuItem");
+            final String key = "editInsertTranslationMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -842,7 +903,9 @@ public final class MainWindowMenuHandler {
 
         public EditOverwriteMachineTranslationMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_OVERWRITE_MACHITE_TRANSLATION"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editOverwriteMachineTranslationMenuItem");
+            final String key = "editOverwriteMachineTranslationMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -866,7 +929,9 @@ public final class MainWindowMenuHandler {
 
         public EditOverwriteSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editOverwriteSourceMenuItem");
+            final String key = "editOverwriteSourceMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -889,7 +954,9 @@ public final class MainWindowMenuHandler {
 
         public EditInsertSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editInsertSourceMenuItem");
+            final String key = "editInsertSourceMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -912,7 +979,9 @@ public final class MainWindowMenuHandler {
 
         public EditSelectSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SOURCE_SELECT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectSourceMenuItem");
+            final String key = "editSelectSourceMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -930,7 +999,9 @@ public final class MainWindowMenuHandler {
 
         public EditExportSelectionMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_EXPORT_SELECTION"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editExportSelectionMenuItem");
+            final String key = "editExportSelectionMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -957,7 +1028,9 @@ public final class MainWindowMenuHandler {
     public static class EditSearchDictionaryMenuItemAction extends AbstractMnemonicsAction {
         public EditSearchDictionaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSearchDictionaryMenuItem");
+            final String key = "editSearchDictionaryMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -979,7 +1052,9 @@ public final class MainWindowMenuHandler {
     public static class EditCreateGlossaryEntryMenuItemAction extends AbstractMnemonicsAction {
         public EditCreateGlossaryEntryMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editCreateGlossaryEntryMenuItem");
+            final String key = "editCreateGlossaryEntryMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -996,10 +1071,12 @@ public final class MainWindowMenuHandler {
     public static class EditFindInProjectMenuItemAction extends AbstractMnemonicsAction {
         public EditFindInProjectMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_FIND"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editFindInProjectMenuItem");
+            final String key = "editFindInProjectMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
             putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(
                     UIManager.getIcon("OmegaT.newUI.search.icon"),
                     () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1027,7 +1104,9 @@ public final class MainWindowMenuHandler {
 
         public EditReplaceInProjectMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_REPLACE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editReplaceInProjectMenuItem");
+            final String key = "editReplaceInProjectMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1058,7 +1137,9 @@ public final class MainWindowMenuHandler {
     public static class EditSelectFuzzy1MenuItemAction extends AbstractMnemonicsAction {
         public EditSelectFuzzy1MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_1"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectFuzzy1MenuItem");
+            final String key = "editSelectFuzzy1MenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1073,7 +1154,9 @@ public final class MainWindowMenuHandler {
     public static class EditSelectFuzzy2MenuItemAction extends AbstractMnemonicsAction {
         public EditSelectFuzzy2MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_2"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectFuzzy2MenuItem");
+            final String key = "editSelectFuzzy2MenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1088,7 +1171,9 @@ public final class MainWindowMenuHandler {
     public static class EditSelectFuzzy3MenuItemAction extends AbstractMnemonicsAction {
         public EditSelectFuzzy3MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_3"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectFuzzy3MenuItem");
+            final String key = "editSelectFuzzy3MenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1103,7 +1188,9 @@ public final class MainWindowMenuHandler {
     public static class EditSelectFuzzy4MenuItemAction extends AbstractMnemonicsAction {
         public EditSelectFuzzy4MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_4"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectFuzzy4MenuItem");
+            final String key = "editSelectFuzzy4MenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1118,7 +1205,9 @@ public final class MainWindowMenuHandler {
     public static class EditSelectFuzzy5MenuItemAction extends AbstractMnemonicsAction {
         public EditSelectFuzzy5MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_5"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectFuzzy5MenuItem");
+            final String key = "editSelectFuzzy5MenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1133,7 +1222,9 @@ public final class MainWindowMenuHandler {
     public static class EditSelectFuzzyNextMenuItemAction extends AbstractMnemonicsAction {
         public EditSelectFuzzyNextMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_NEXT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectFuzzyNextMenuItem");
+            final String key = "editSelectFuzzyNextMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1149,7 +1240,9 @@ public final class MainWindowMenuHandler {
 
         public EditSelectFuzzyPrevMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_PREV"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editSelectFuzzyPrevMenuItem");
+            final String key = "editSelectFuzzyPrevMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1163,7 +1256,9 @@ public final class MainWindowMenuHandler {
     public static class InsertCharsLRMAction extends AbstractMnemonicsAction {
         public InsertCharsLRMAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_LRM"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "insertCharsLRM");
+            final String key = "insertCharsLRM";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1178,7 +1273,9 @@ public final class MainWindowMenuHandler {
     public static class InsertCharsRLMAction extends AbstractMnemonicsAction {
         public InsertCharsRLMAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_RLM"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "insertCharsRLM");
+            final String key = "insertCharsRLM";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1192,7 +1289,9 @@ public final class MainWindowMenuHandler {
     public static class InsertCharsLREAction extends AbstractMnemonicsAction {
         public InsertCharsLREAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_LRE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "insertCharsLRE");
+            final String key = "insertCharsLRE";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1206,7 +1305,9 @@ public final class MainWindowMenuHandler {
     public static class InsertCharsRLEAction extends AbstractMnemonicsAction {
         public InsertCharsRLEAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_RLE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "insertCharsRLE");
+            final String key = "insertCharsRLE";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1221,7 +1322,9 @@ public final class MainWindowMenuHandler {
 
         public InsertCharsPDFAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_PDF"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "insertCharsPDF");
+            final String key = "insertCharsPDF";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1235,7 +1338,9 @@ public final class MainWindowMenuHandler {
     public static class EditMultipleDefaultAction extends AbstractMnemonicsAction {
         public EditMultipleDefaultAction() {
             super(OStrings.getString("MULT_MENU_DEFAULT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editMultipleDefault");
+            final String key = "editMultipleDefault";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1249,7 +1354,9 @@ public final class MainWindowMenuHandler {
     public static class EditMultipleAlternateAction extends AbstractMnemonicsAction {
         public EditMultipleAlternateAction() {
             super(OStrings.getString("MULT_MENU_MULTIPLE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editMultipleAlternate");
+            final String key = "editMultipleAlternate";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1263,7 +1370,9 @@ public final class MainWindowMenuHandler {
     public static class EditRegisterUntranslatedMenuItemAction extends AbstractMnemonicsAction {
         public EditRegisterUntranslatedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_UNTRANSLATED_TRANSLATION"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editRegisterUntranslatedMenuItem");
+            final String key = "editRegisterUntranslatedMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1277,7 +1386,9 @@ public final class MainWindowMenuHandler {
     public static class EditRegisterEmptyMenuItemAction extends AbstractMnemonicsAction {
         public EditRegisterEmptyMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_EMPTY_TRANSLATION"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editRegisterEmptyMenuItem");
+            final String key = "editRegisterEmptyMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1291,7 +1402,9 @@ public final class MainWindowMenuHandler {
     public static class EditRegisterIdenticalMenuItemAction extends AbstractMnemonicsAction {
         public EditRegisterIdenticalMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_IDENTICAL_TRANSLATION"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editRegisterIdenticalMenuItem");
+            final String key = "editRegisterIdenticalMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1306,7 +1419,9 @@ public final class MainWindowMenuHandler {
 
         public OptionsPreferencesMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_PREFERENCES"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsPreferencesMenuItem");
+            final String key = "optionsPreferencesMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON, Objects.requireNonNullElseGet(
                     UIManager.getIcon("OmegaT.newUI.settings.icon"),
                     () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
@@ -1323,7 +1438,9 @@ public final class MainWindowMenuHandler {
     public static class CycleSwitchCaseMenuItemAction extends AbstractMnemonicsAction {
         public CycleSwitchCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "cycleSwitchCaseMenuItem");
+            final String key = "cycleSwitchCaseMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1337,7 +1454,9 @@ public final class MainWindowMenuHandler {
     public static class SentenceCaseMenuItemAction extends AbstractMnemonicsAction {
         public SentenceCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "sentenceCaseMenuItem");
+            final String key = "sentenceCaseMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1351,7 +1470,9 @@ public final class MainWindowMenuHandler {
     public static class TitleCaseMenuItemAction extends AbstractMnemonicsAction {
         public TitleCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "titleCaseMenuItem");
+            final String key = "titleCaseMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1365,7 +1486,9 @@ public final class MainWindowMenuHandler {
     public static class UpperCaseMenuItemAction extends AbstractMnemonicsAction {
         public UpperCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "upperCaseMenuItem");
+            final String key = "upperCaseMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1379,7 +1502,9 @@ public final class MainWindowMenuHandler {
     public static class LowerCaseMenuItemAction extends AbstractMnemonicsAction {
         public LowerCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "lowerCaseMenuItem");
+            final String key = "lowerCaseMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1393,7 +1518,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNextUntranslatedMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextUntranslatedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_UNTRANS"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNextUntranslatedMenuItem");
+            final String key = "gotoNextUntranslatedMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1407,7 +1534,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNextUniqueMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextUniqueMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NEXT_UNIQUE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNextUniqueMenuItem");
+            final String key = "gotoNextUniqueMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1421,7 +1550,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNextTranslatedMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextTranslatedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_TRANS"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNextTranslatedMenuItem");
+            final String key = "gotoNextTranslatedMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1435,7 +1566,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNextSegmentMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_NEXT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNextSegmentMenuItem");
+            final String key = "gotoNextSegmentMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1449,7 +1582,9 @@ public final class MainWindowMenuHandler {
     public static class GotoPreviousSegmentMenuItemAction extends AbstractMnemonicsAction {
         public GotoPreviousSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_PREV"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoPreviousSegmentMenuItem");
+            final String key = "gotoPreviousSegmentMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1463,7 +1598,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNextXAutoMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextXAutoMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NEXT_XAUTO"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNextXAutoMenuItem");
+            final String key = "gotoNextXAutoMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1477,7 +1614,9 @@ public final class MainWindowMenuHandler {
     public static class GotoPrevXAutoMenuItemAction extends AbstractMnemonicsAction {
         public GotoPrevXAutoMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_PREV_XAUTO"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoPrevXAutoMenuItem");
+            final String key = "gotoPrevXAutoMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1491,7 +1630,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNextXEnforcedMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextXEnforcedMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NEXT_XENFORCED", OStrings.getLocale()));
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNextXEnforcedMenuItem");
+            final String key = "gotoNextXEnforcedMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1505,7 +1646,9 @@ public final class MainWindowMenuHandler {
     public static class GotoPrevXEnforcedMenuItemAction extends AbstractMnemonicsAction {
         public GotoPrevXEnforcedMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_PREV_XENFORCED"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoPrevXEnforcedMenuItem");
+            final String key = "gotoPrevXEnforcedMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1519,7 +1662,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNextNoteMenuItemAction extends AbstractMnemonicsAction {
         public GotoNextNoteMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_NEXT_NOTE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNextNoteMenuItem");
+            final String key = "gotoNextNoteMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1533,7 +1678,9 @@ public final class MainWindowMenuHandler {
     public static class GotoPreviousNoteMenuItemAction extends AbstractMnemonicsAction {
         public GotoPreviousNoteMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_PREV_NOTE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoPreviousNoteMenuItem");
+            final String key = "gotoPreviousNoteMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1547,7 +1694,9 @@ public final class MainWindowMenuHandler {
     public static class GotoNotesPanelMenuItemAction extends AbstractMnemonicsAction {
         public GotoNotesPanelMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NOTES_PANEL"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoNotesPanelMenuItem");
+            final String key = "gotoNotesPanelMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1561,7 +1710,9 @@ public final class MainWindowMenuHandler {
     public static class GotoEditorPanelMenuItemAction extends AbstractMnemonicsAction {
         public GotoEditorPanelMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_EDITOR_PANEL"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoEditorPanelMenuItem");
+            final String key = "gotoEditorPanelMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1578,7 +1729,9 @@ public final class MainWindowMenuHandler {
     public static class GotoSegmentMenuItemAction extends AbstractMnemonicsAction {
         public GotoSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_GOTO"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoSegmentMenuItem");
+            final String key = "gotoSegmentMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1601,7 +1754,9 @@ public final class MainWindowMenuHandler {
 
         public GotoHistoryBackMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_BACK_IN_HISTORY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoHistoryBackMenuItem");
+            final String key = "gotoHistoryBackMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1615,7 +1770,9 @@ public final class MainWindowMenuHandler {
     public static class GotoHistoryForwardMenuItemAction extends AbstractMnemonicsAction {
         public GotoHistoryForwardMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_FORWARD_IN_HISTORY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoHistoryForwardMenuItem");
+            final String key = "gotoHistoryForwardMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1629,7 +1786,9 @@ public final class MainWindowMenuHandler {
     public static class GotoMatchSourceSegmentAction extends AbstractMnemonicsAction {
         public GotoMatchSourceSegmentAction() {
             super(OStrings.getString("TF_MENU_GOTO_SELECTED_MATCH_SOURCE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "gotoMatchSourceSegment");
+            final String key = "gotoMatchSourceSegment";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1647,7 +1806,9 @@ public final class MainWindowMenuHandler {
 
         public ViewMarkTranslatedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_TRANSLATED"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkTranslatedSegmentsCheckBoxMenuItem");
+            final String key = "viewMarkTranslatedSegmentsCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1665,7 +1826,9 @@ public final class MainWindowMenuHandler {
 
         public ViewMarkUntranslatedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_UNTRANSLATED"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkUntranslatedSegmentsCheckBoxMenuItem");
+            final String key = "viewMarkUntranslatedSegmentsCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
         }
@@ -1685,7 +1848,9 @@ public final class MainWindowMenuHandler {
 
         public ViewMarkParagraphStartCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_PARAGRAPH"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkParagraphStartCheckBoxMenuItem");
+            final String key = "viewMarkParagraphStartCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), '\u00b6'));
         }
@@ -1705,7 +1870,9 @@ public final class MainWindowMenuHandler {
     public static class ViewDisplaySegmentSourceCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewDisplaySegmentSourceCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewDisplaySegmentSourceCheckBoxMenuItem");
+            final String key = "viewDisplaySegmentSourceCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
         }
@@ -1724,7 +1891,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkNonUniqueSegmentsCheckBoxMenuItem");
+            final String key = "viewMarkNonUniqueSegmentsCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
         }
@@ -1743,7 +1912,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkNotedSegmentsCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkNotedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NOTED_SEGMENTS"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkNotedSegmentsCheckBoxMenuItem");
+            final String key = "viewMarkNotedSegmentsCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
         }
@@ -1762,7 +1933,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkNBSPCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkNBSPCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NBSP"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkNBSPCheckBoxMenuItem");
+            final String key = "viewMarkNBSPCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON, MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
         }
 
@@ -1780,7 +1953,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkWhitespaceCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkWhitespaceCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_WHITESPACE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkWhitespaceCheckBoxMenuItem");
+            final String key = "viewMarkWhitespaceCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
         }
@@ -1800,7 +1975,9 @@ public final class MainWindowMenuHandler {
 
         public ViewMarkBidiCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_BIDI"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkBidiCheckBoxMenuItem");
+            final String key = "viewMarkBidiCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
         }
@@ -1819,7 +1996,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkAutoPopulatedCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkAutoPopulatedCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_AUTOPOPULATED"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkAutoPopulatedCheckBoxMenuItem");
+            final String key = "viewMarkAutoPopulatedCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
         }
@@ -1838,7 +2017,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkGlossaryMatchesCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkGlossaryMatchesCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_GLOSSARY_MARK"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkGlossaryMatchesCheckBoxMenuItem");
+            final String key = "viewMarkGlossaryMatchesCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_TRANSTIPS.getColor()));
         }
@@ -1858,7 +2039,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkLanguageCheckerCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkLanguageCheckerCheckBoxMenuItemAction() {
             super(OStrings.getString("LT_OPTIONS_MENU_ENABLED"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkLanguageCheckerCheckBoxMenuItem");
+            final String key = "viewMarkLanguageCheckerCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON,
                     MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor()));
         }
@@ -1877,7 +2060,9 @@ public final class MainWindowMenuHandler {
     public static class ViewMarkFontFallbackCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public ViewMarkFontFallbackCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_FONT_FALLBACK"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewMarkFontFallbackCheckBoxMenuItem");
+            final String key = "viewMarkFontFallbackCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
             putValue(Action.SMALL_ICON, MainMenuIcons.newTextIcon(UIManager.getColor("Label.foreground"),
                     new Font("Serif", Font.ITALIC, 16), 'F'));
         }
@@ -1897,7 +2082,9 @@ public final class MainWindowMenuHandler {
             extends AbstractMnemonicsAction {
         public ViewDisplayModificationInfoNoneRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_NONE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewDisplayModificationInfoNoneRadioButtonMenuItem");
+            final String key = "viewDisplayModificationInfoNoneRadioButtonMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1913,7 +2100,9 @@ public final class MainWindowMenuHandler {
             extends AbstractMnemonicsAction {
         public ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_SELECTED"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewDisplayModificationInfoSelectedRadioButtonMenuItem");
+            final String key = "viewDisplayModificationInfoSelectedRadioButtonMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1929,7 +2118,9 @@ public final class MainWindowMenuHandler {
             extends AbstractMnemonicsAction {
         public ViewDisplayModificationInfoAllRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_ALL"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewDisplayModificationInfoAllRadioButtonMenuItem");
+            final String key = "viewDisplayModificationInfoAllRadioButtonMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1944,7 +2135,9 @@ public final class MainWindowMenuHandler {
     public static class ToolsCheckIssuesMenuItemAction extends AbstractMnemonicsAction {
         public ToolsCheckIssuesMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_CHECK_ISSUES"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "toolsCheckIssuesMenuItem");
+            final String key = "toolsCheckIssuesMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1965,7 +2158,9 @@ public final class MainWindowMenuHandler {
     public static class ToolsCheckIssuesCurrentFileMenuItemAction extends AbstractMnemonicsAction {
         public ToolsCheckIssuesCurrentFileMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_CHECK_ISSUES_CURRENT_FILE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "toolsCheckIssuesCurrentFileMenuItem");
+            final String key = "toolsCheckIssuesCurrentFileMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -1983,7 +2178,9 @@ public final class MainWindowMenuHandler {
     public static class EditTagPainterMenuItemAction extends AbstractMnemonicsAction {
         public EditTagPainterMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_TAGPAINT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editTagPainterMenuItem");
+            final String key = "editTagPainterMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2000,7 +2197,9 @@ public final class MainWindowMenuHandler {
     public static class EditTagNextMissedMenuItemAction extends AbstractMnemonicsAction {
         public EditTagNextMissedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_TAG_NEXT_MISSED"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "editTagNextMissedMenuItem");
+            final String key = "editTagNextMissedMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2019,7 +2218,9 @@ public final class MainWindowMenuHandler {
     public static class ToolsShowStatisticsStandardMenuItemAction extends AbstractMnemonicsAction {
         public ToolsShowStatisticsStandardMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_STATISTICS_STANDARD"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "toolsShowStatisticsStandardMenuItem");
+            final String key = "toolsShowStatisticsStandardMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2034,7 +2235,9 @@ public final class MainWindowMenuHandler {
     public static class ToolsShowStatisticsMatchesMenuItemAction extends AbstractMnemonicsAction {
         public ToolsShowStatisticsMatchesMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_STATISTICS_MATCHES"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "toolsShowStatisticsMatchesMenuItem");
+            final String key = "toolsShowStatisticsMatchesMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2049,7 +2252,9 @@ public final class MainWindowMenuHandler {
     public static class ToolsShowStatisticsMatchesPerFileMenuItemAction extends AbstractMnemonicsAction {
         public ToolsShowStatisticsMatchesPerFileMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "toolsShowStatisticsMatchesPerFileMenuItem");
+            final String key = "toolsShowStatisticsMatchesPerFileMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2064,7 +2269,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsAutoCompleteShowAutomaticallyItemAction extends AbstractMnemonicsAction {
         public OptionsAutoCompleteShowAutomaticallyItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_AUTOCOMPLETE_SHOW_AUTOMATICALLY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsAutoCompleteShowAutomaticallyItem");
+            final String key = "optionsAutoCompleteShowAutomaticallyItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2082,7 +2289,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsAutoCompleteHistoryCompletionMenuItemAction extends AbstractMnemonicsAction {
         public OptionsAutoCompleteHistoryCompletionMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_COMPLETION"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsAutoCompleteHistoryCompletionMenuItem");
+            final String key = "optionsAutoCompleteHistoryCompletionMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2100,7 +2309,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsAutoCompleteHistoryPredictionMenuItemAction extends AbstractMnemonicsAction {
         public OptionsAutoCompleteHistoryPredictionMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_PREDICTION"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsAutoCompleteHistoryPredictionMenuItem");
+            final String key = "optionsAutoCompleteHistoryPredictionMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2118,7 +2329,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsMTAutoFetchCheckboxMenuItemAction extends AbstractMnemonicsAction {
         public OptionsMTAutoFetchCheckboxMenuItemAction() {
             super(OStrings.getString("MT_AUTO_FETCH"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsMTAutoFetchCheckboxMenuItem");
+            final String key = "optionsMTAutoFetchCheckboxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2135,7 +2348,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsGlossaryFuzzyMatchingCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public OptionsGlossaryFuzzyMatchingCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_OPTIONSMENU_GLOSSARY_FUZZY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsGlossaryFuzzyMatchingCheckBoxMenuItem");
+            final String key = "optionsGlossaryFuzzyMatchingCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2154,7 +2369,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsDictionaryFuzzyMatchingCheckBoxMenuItemAction extends AbstractMnemonicsAction {
         public OptionsDictionaryFuzzyMatchingCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_OPTIONSMENU_DICTIONARY_FUZZY"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsDictionaryFuzzyMatchingCheckBoxMenuItem");
+            final String key = "optionsDictionaryFuzzyMatchingCheckBoxMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2177,7 +2394,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsSetupFileFiltersMenuItemAction extends AbstractMnemonicsAction {
         public OptionsSetupFileFiltersMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_GLOBAL_FILTERS"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsSetupFileFiltersMenuItem");
+            final String key = "optionsSetupFileFiltersMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2196,7 +2415,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsSentsegMenuItemAction extends AbstractMnemonicsAction {
         public OptionsSentsegMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_GLOBAL_SENTSEG"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsSentsegMenuItem");
+            final String key = "optionsSentsegMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2215,7 +2436,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsWorkflowMenuItemAction extends AbstractMnemonicsAction {
         public OptionsWorkflowMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_WORKFLOW"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsWorkflowMenuItem");
+            final String key = "optionsWorkflowMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2234,7 +2457,9 @@ public final class MainWindowMenuHandler {
     public static class ViewRestoreGUIMenuItemAction extends AbstractMnemonicsAction {
         public ViewRestoreGUIMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "viewRestoreGUIMenuItem");
+            final String key = "viewRestoreGUIMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2248,7 +2473,9 @@ public final class MainWindowMenuHandler {
     public static class OptionsAccessConfigDirMenuItemAction extends AbstractMnemonicsAction {
         public OptionsAccessConfigDirMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "optionsAccessConfigDirMenuItem");
+            final String key = "optionsAccessConfigDirMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2265,7 +2492,9 @@ public final class MainWindowMenuHandler {
     public static class HelpContentsMenuItemAction extends AbstractMnemonicsAction {
         public HelpContentsMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_CONTENTS"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "helpContentsMenuItem");
+            final String key = "helpContentsMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2290,7 +2519,9 @@ public final class MainWindowMenuHandler {
 
         public HelpAboutMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_ABOUT"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "helpAboutMenuItem");
+            final String key = "helpAboutMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2307,7 +2538,9 @@ public final class MainWindowMenuHandler {
     public static class HelpLastChangesMenuItemAction extends AbstractMnemonicsAction {
         public HelpLastChangesMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_LAST_CHANGES"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "helpLastChangesMenuItem");
+            final String key = "helpLastChangesMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2324,7 +2557,9 @@ public final class MainWindowMenuHandler {
     public static class HelpLogMenuItemAction extends AbstractMnemonicsAction {
         public HelpLogMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_LOG"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "helpLogMenuItem");
+            final String key = "helpLogMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override
@@ -2341,7 +2576,9 @@ public final class MainWindowMenuHandler {
     public static class HelpUpdateCheckMenuItemAction extends AbstractMnemonicsAction {
         public HelpUpdateCheckMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_CHECK_FOR_UPDATES"), OStrings.getLocale());
-            putValue(Action.ACTION_COMMAND_KEY, "helpUpdateCheckMenuItem");
+            final String key = "helpUpdateCheckMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
         }
 
         @Override

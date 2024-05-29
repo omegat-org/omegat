@@ -175,6 +175,14 @@ public class PropertiesShortcuts {
         return result;
     }
 
+    public KeyStroke getKeyStrokeOrNull(String key) {
+        try {
+            return getKeyStroke(key);
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
     public void bindKeyStrokes(JMenuBar menu) {
         applyTo(menu.getComponents());
     }

@@ -497,7 +497,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         public void actionPerformed(final ActionEvent e) {
             Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
             int modifier = e.getModifiers();
-            ProjectUICommands.openWritableGlossaryFile((modifier & ActionEvent.ALT_MASK) != modifier);
+            ProjectUICommands.openWritableGlossaryFile((modifier & ActionEvent.ALT_MASK) != 0);
         }
     }
 }

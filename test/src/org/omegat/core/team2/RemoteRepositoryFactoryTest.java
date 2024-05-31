@@ -31,28 +31,28 @@ import org.junit.Test;
 
 public final class RemoteRepositoryFactoryTest {
 
-	@Test
-	public void testDetectRepositoryType_svnPrefix() {
-		String url = "svn://example.com/repo";
-		assertEquals("svn", RemoteRepositoryFactory.detectRepositoryType(url));
-	}
+    @Test
+    public void testDetectRepositoryType_svnPrefix() {
+        String url = "svn://example.com/repo";
+        assertEquals("svn", RemoteRepositoryFactory.detectRepositoryType(url));
+    }
 
-	@Test
-	public void testDetectRepositoryType_gitPrefix() {
-		String url = "git://example.com/repo";
-		assertEquals("git", RemoteRepositoryFactory.detectRepositoryType(url));
-	}
+    @Test
+    public void testDetectRepositoryType_gitPrefix() {
+        String url = "git://example.com/repo";
+        assertEquals("git", RemoteRepositoryFactory.detectRepositoryType(url));
+    }
 
-	@Test
-	public void testDetectRepositoryType_httpsGitPrefix() {
-		String url = "https://git.example.com/repo";
-		assertEquals("git", RemoteRepositoryFactory.detectRepositoryType(url));
-	}
+    @Test
+    public void testDetectRepositoryType_httpsGitPrefix() {
+        String url = "https://git.example.com/repo";
+        assertEquals("git", RemoteRepositoryFactory.detectRepositoryType(url));
+    }
 
-	@Test
-	public void testDetectRepositoryType_gitSuffix() {
-		String url = "https://example.com/repo.git";
-		assertEquals("git", RemoteRepositoryFactory.detectRepositoryType(url));
-	}
+    @Test
+    public void testDetectRepositoryType_gitSuffix() {
+        String url = "https://example.com/repo.git";
+        assertEquals("git", RemoteRepositoryFactory.detectRepositoryType(url));
+    }
 
 }

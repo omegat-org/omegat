@@ -35,6 +35,7 @@ import javax.swing.KeyStroke;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
+import org.omegat.gui.main.MainWindowMenuHandler.EditCreateGlossaryEntryMenuItemAction;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
@@ -95,9 +96,7 @@ public class SearchWindowMenu extends JMenuBar {
         editMenu.addSeparator();
 
         item = editMenu.add(new JMenuItem());
-        Mnemonics.setLocalizedText(item, OStrings.getString("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
-        item.setActionCommand("editCreateGlossaryEntryMenuItem");
-        item.addActionListener(e -> Core.getGlossary().showCreateGlossaryEntryDialog(controller.getWindow()));
+        item.setAction(new EditCreateGlossaryEntryMenuItemAction(controller.getWindow()));
 
         editMenu.addSeparator();
 

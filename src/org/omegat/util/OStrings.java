@@ -82,7 +82,7 @@ public final class OStrings {
         return bundle;
     }
 
-    public Locale getLocale() {
+    public static Locale getLocale() {
         return bundle.getLocale();
     }
 

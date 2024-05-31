@@ -37,6 +37,7 @@ import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -50,6 +51,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import javax.swing.Action;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -61,6 +63,8 @@ import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.StyledDocument;
 
+import org.openide.awt.AbstractMnemonicsAction;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
@@ -68,12 +72,9 @@ import org.omegat.core.data.StringEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
-import org.omegat.gui.glossary.actions.AddEntryAction;
-import org.omegat.gui.glossary.actions.InsertSectionAction;
-import org.omegat.gui.glossary.actions.SettingsNotifications;
-import org.omegat.gui.glossary.actions.SettingsOpenFileAction;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
@@ -430,5 +431,68 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         sortOrderLocLength.addActionListener(actionEvent -> Preferences
                 .setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, sortOrderLocLength.isSelected()));
         menu.add(sortOrderLocLength);
+    }
+
+    public static class AddEntryAction extends AbstractMnemonicsAction {
+        GlossaryTextArea glossaryTextArea;
+
+        public AddEntryAction(GlossaryTextArea glossaryTextArea) {
+            super(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"), OStrings.getLocale());
+            this.glossaryTextArea = glossaryTextArea;
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            glossaryTextArea.showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
+        }
+    }
+
+    public static class InsertSectionAction extends AbstractMnemonicsAction {
+        private final String selection;
+
+        public InsertSectionAction(String selection) {
+            super(OStrings.getString("GUI_GLOSSARYWINDOW_insertselection"), OStrings.getLocale());
+            this.selection = selection;
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Core.getEditor().insertText(selection);
+        }
+    }
+
+    public static class SettingsNotifications extends AbstractMnemonicsAction {
+        public SettingsNotifications() {
+            super(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_NOTIFICATIONS"), OStrings.getLocale());
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Object notify = e.getSource();
+            if (notify instanceof JCheckBoxMenuItem) {
+                Preferences.setPreference(Preferences.NOTIFY_GLOSSARY_HITS, ((JCheckBoxMenuItem) notify).isSelected());
+            }
+        }
+    }
+
+    @SuppressWarnings("serial")
+    public static class SettingsOpenFileAction extends AbstractMnemonicsAction {
+        public SettingsOpenFileAction() {
+            super(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE"), OStrings.getLocale());
+            final String key = "projectAccessWriteableGlossaryMenuItem";
+            putValue(Action.ACTION_COMMAND_KEY, key);
+            try {
+                KeyStroke keyStoroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
+                putValue(Action.ACCELERATOR_KEY, keyStoroke);
+            } catch (Exception ignored) {
+            }
+        }
+
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
+            int modifier = e.getModifiers();
+            ProjectUICommands.openWritableGlossaryFile((modifier & ActionEvent.ALT_MASK) != modifier);
+        }
     }
 }

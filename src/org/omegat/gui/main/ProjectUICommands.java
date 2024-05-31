@@ -83,6 +83,7 @@ import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -1312,6 +1313,40 @@ public final class ProjectUICommands {
         } catch (Exception ex) {
             Log.log(ex);
             Core.getMainWindow().displayErrorRB(ex, "TF_WIKI_IMPORT_FAILED");
+        }
+    }
+
+    public static void openWritableGlossaryFile(boolean parent) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String path = Core.getProject().getProjectProperties().getWriteableGlossary();
+        if (StringUtil.isEmpty(path)) {
+            return;
+        }
+        File toOpen = new File(path);
+        if (parent) {
+            toOpen = toOpen.getParentFile();
+        }
+        openFile(toOpen);
+    }
+
+    public static void openFile(File path) {
+        try {
+            path = path.getCanonicalFile(); // Normalize file name in case it is
+            // displayed
+        } catch (Exception ex) {
+            // Ignore
+        }
+        if (!path.exists()) {
+            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", path);
+            return;
+        }
+        try {
+            DesktopWrapper.open(path);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "RPF_ERROR");
+            Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");
         }
     }
 

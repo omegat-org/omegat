@@ -433,10 +433,11 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         menu.add(sortOrderLocLength);
     }
 
-    public static class AddEntryAction extends AbstractMnemonicsAction {
+    private static class AddEntryAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         GlossaryTextArea glossaryTextArea;
 
-        public AddEntryAction(GlossaryTextArea glossaryTextArea) {
+        private AddEntryAction(GlossaryTextArea glossaryTextArea) {
             super(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"), OStrings.getLocale());
             this.glossaryTextArea = glossaryTextArea;
         }
@@ -447,10 +448,11 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
     }
 
-    public static class InsertSectionAction extends AbstractMnemonicsAction {
+    private static class InsertSectionAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         private final String selection;
 
-        public InsertSectionAction(String selection) {
+        private InsertSectionAction(String selection) {
             super(OStrings.getString("GUI_GLOSSARYWINDOW_insertselection"), OStrings.getLocale());
             this.selection = selection;
         }
@@ -461,8 +463,10 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
     }
 
-    public static class SettingsNotifications extends AbstractMnemonicsAction {
-        public SettingsNotifications() {
+    private static class SettingsNotifications extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
+
+        private SettingsNotifications() {
             super(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_NOTIFICATIONS"), OStrings.getLocale());
         }
 
@@ -475,9 +479,10 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
     }
 
-    @SuppressWarnings("serial")
-    public static class SettingsOpenFileAction extends AbstractMnemonicsAction {
-        public SettingsOpenFileAction() {
+    private static class SettingsOpenFileAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
+
+        private SettingsOpenFileAction() {
             super(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE"), OStrings.getLocale());
             final String key = "projectAccessWriteableGlossaryMenuItem";
             putValue(Action.ACTION_COMMAND_KEY, key);

@@ -412,7 +412,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         populateContextMenu(menu);
         menu.addSeparator();
         final JMenuItem openFile = new JMenuItem(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE"));
-        openFile.setAction(new MainWindowMenuHandler.ProjectAccessWriteableGlossaryMenuItemAction());
+        openFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWriteableGlossaryMenuItem", e.getModifiers());
+            }
+        });
         openFile.setEnabled(false);
         if (Core.getProject().isProjectLoaded()) {
             String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();

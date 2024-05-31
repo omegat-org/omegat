@@ -28,6 +28,7 @@ package org.omegat.util;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -79,6 +80,10 @@ public final class OStrings {
      */
     public static ResourceBundle getResourceBundle() {
         return bundle;
+    }
+
+    public Locale getLocale() {
+        return bundle.getLocale();
     }
 
     /**

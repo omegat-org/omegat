@@ -433,7 +433,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         menu.add(sortOrderLocLength);
     }
 
-    private static class AddEntryAction extends AbstractMnemonicsAction {
+    private static final class AddEntryAction extends AbstractMnemonicsAction {
         private static final long serialVersionUID = 1L;
         GlossaryTextArea glossaryTextArea;
 
@@ -448,7 +448,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
     }
 
-    private static class InsertSectionAction extends AbstractMnemonicsAction {
+    private static final class InsertSectionAction extends AbstractMnemonicsAction {
         private static final long serialVersionUID = 1L;
         private final String selection;
 
@@ -463,7 +463,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
     }
 
-    private static class SettingsNotifications extends AbstractMnemonicsAction {
+    private static final class SettingsNotifications extends AbstractMnemonicsAction {
         private static final long serialVersionUID = 1L;
 
         private SettingsNotifications() {
@@ -479,7 +479,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
     }
 
-    private static class SettingsOpenFileAction extends AbstractMnemonicsAction {
+    private static final class SettingsOpenFileAction extends AbstractMnemonicsAction {
         private static final long serialVersionUID = 1L;
 
         private SettingsOpenFileAction() {

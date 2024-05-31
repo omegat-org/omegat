@@ -66,6 +66,7 @@ import org.omegat.core.search.SearchMode;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
@@ -90,6 +91,7 @@ import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -1334,6 +1336,57 @@ public final class ProjectUICommands {
                 }
             }
         }.execute();
+    }
+
+    public static void openWritableGlossaryFile(boolean parent) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String path = Core.getProject().getProjectProperties().getWriteableGlossary();
+        if (StringUtil.isEmpty(path)) {
+            return;
+        }
+        File toOpen = new File(path);
+        if (parent) {
+            toOpen = toOpen.getParentFile();
+        }
+        openFile(toOpen);
+    }
+
+    public static void openFile(File path) {
+        try {
+            path = path.getCanonicalFile(); // Normalize file name in case it is
+            // displayed
+        } catch (Exception ex) {
+            // Ignore
+        }
+        if (!path.exists()) {
+            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", path);
+            return;
+        }
+        try {
+            DesktopWrapper.open(path);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "RPF_ERROR");
+            Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");
+        }
+    }
+
+    /**
+     * Check whether tags are OK
+     *
+     * @return false is there is a tag issue, true otherwise
+     */
+    static boolean IsTagsInvalid() {
+        boolean result = false;
+        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
+            if (!stes.isEmpty()) {
+                Core.getIssues().showAll(OStrings.getString("TF_MESSAGE_COMPILE"));
+                result = true;
+            }
+        }
+        return result;
     }
 
     private static class CollisionCallback implements ICollisionCallback {

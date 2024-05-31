@@ -48,6 +48,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.Action;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -88,7 +89,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
-import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.Styles;
 
@@ -328,28 +328,12 @@ public final class MainWindowMenuHandler {
         @Override
         public void actionPerformed(final ActionEvent e) {
             Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
-            if (!checkTags()) {
+            if (ProjectUICommands.IsTagsInvalid()) {
                 return;
             }
 
             ProjectUICommands.projectCompile();
         }
-    }
-
-    /**
-     * Check whether tags are OK
-     * 
-     * @return false is there is a tag issue, true otherwise
-     */
-    private static boolean checkTags() {
-        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
-            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
-            if (!stes.isEmpty()) {
-                Core.getIssues().showAll(OStrings.getString("TF_MESSAGE_COMPILE"));
-                return false;
-            }
-        }
-        return true;
     }
 
     @SuppressWarnings("serial")
@@ -364,7 +348,7 @@ public final class MainWindowMenuHandler {
         @Override
         public void actionPerformed(final ActionEvent e) {
             Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
-            if (!checkTags()) {
+            if (ProjectUICommands.IsTagsInvalid()) {
                 return;
             }
             ProjectUICommands.projectCompileAndCommit();
@@ -475,7 +459,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
             String path = Core.getProject().getProjectProperties().getProjectRoot();
-            openFile(new File(path));
+            ProjectUICommands.openFile(new File(path));
 
         }
     }
@@ -496,7 +480,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
             String path = Core.getProject().getProjectProperties().getDictRoot();
-            openFile(new File(path));
+            ProjectUICommands.openFile(new File(path));
         }
     }
 
@@ -516,7 +500,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
             String path = Core.getProject().getProjectProperties().getGlossaryRoot();
-            openFile(new File(path));
+            ProjectUICommands.openFile(new File(path));
         }
     }
 
@@ -536,7 +520,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
             String path = Core.getProject().getProjectProperties().getSourceRoot();
-            openFile(new File(path));
+            ProjectUICommands.openFile(new File(path));
         }
     }
 
@@ -556,7 +540,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
             String path = Core.getProject().getProjectProperties().getTargetRoot();
-            openFile(new File(path));
+            ProjectUICommands.openFile(new File(path));
         }
     }
 
@@ -576,7 +560,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
             String path = Core.getProject().getProjectProperties().getTMRoot();
-            openFile(new File(path));
+            ProjectUICommands.openFile(new File(path));
         }
     }
 
@@ -596,7 +580,7 @@ public final class MainWindowMenuHandler {
                 return;
             }
             String path = Core.getProject().getProjectProperties().getExportTMRoot();
-            openFile(new File(path));
+            ProjectUICommands.openFile(new File(path));
         }
     }
 
@@ -625,7 +609,7 @@ public final class MainWindowMenuHandler {
             if ((modifier & ActionEvent.ALT_MASK) != 0) {
                 toOpen = toOpen.getParentFile();
             }
-            openFile(toOpen);
+            ProjectUICommands.openFile(toOpen);
         }
     }
 
@@ -654,7 +638,7 @@ public final class MainWindowMenuHandler {
             if ((modifier & ActionEvent.ALT_MASK) != 0) {
                 toOpen = toOpen.getParentFile();
             }
-            openFile(toOpen);
+            ProjectUICommands.openFile(toOpen);
         }
     }
 
@@ -670,19 +654,8 @@ public final class MainWindowMenuHandler {
         @Override
         public void actionPerformed(final ActionEvent e) {
             Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
-            if (!Core.getProject().isProjectLoaded()) {
-                return;
-            }
-            String path = Core.getProject().getProjectProperties().getWriteableGlossary();
-            if (StringUtil.isEmpty(path)) {
-                return;
-            }
-            File toOpen = new File(path);
             int modifier = e.getModifiers();
-            if ((modifier & ActionEvent.ALT_MASK) != 0) {
-                toOpen = toOpen.getParentFile();
-            }
-            openFile(toOpen);
+            ProjectUICommands.openWritableGlossaryFile((modifier & ActionEvent.ALT_MASK) != modifier);
         }
     }
 
@@ -722,25 +695,6 @@ public final class MainWindowMenuHandler {
             ProjectUICommands.prepareForExit(() -> {
                 Main.restartGUI(projectDir);
             });
-        }
-    }
-
-    private static void openFile(File path) {
-        try {
-            path = path.getCanonicalFile(); // Normalize file name in case it is
-                                            // displayed
-        } catch (Exception ex) {
-            // Ignore
-        }
-        if (!path.exists()) {
-            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", path);
-            return;
-        }
-        try {
-            DesktopWrapper.open(path);
-        } catch (Exception ex) {
-            Log.logErrorRB(ex, "RPF_ERROR");
-            Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");
         }
     }
 
@@ -973,8 +927,14 @@ public final class MainWindowMenuHandler {
 
     @SuppressWarnings("serial")
     public static class EditCreateGlossaryEntryMenuItemAction extends AbstractMnemonicsAction {
+        private JFrame parent;
         public EditCreateGlossaryEntryMenuItemAction() {
+            this(null);
+        }
+
+        public EditCreateGlossaryEntryMenuItemAction(JFrame parent) {
             super(OStrings.getString("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"), OStrings.getLocale());
+            this.parent = parent;
             final String key = "editCreateGlossaryEntryMenuItem";
             putValue(Action.ACTION_COMMAND_KEY, key);
             putValue(Action.ACCELERATOR_KEY, PropertiesShortcuts.getMainMenuShortcuts().getKeyStrokeOrNull(key));
@@ -986,7 +946,11 @@ public final class MainWindowMenuHandler {
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
-            Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
+            if (parent != null) {
+                Core.getGlossary().showCreateGlossaryEntryDialog(parent);
+            } else {
+                Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
+            }
         }
     }
 
@@ -2381,7 +2345,7 @@ public final class MainWindowMenuHandler {
         @Override
         public void actionPerformed(ActionEvent e) {
             Log.logInfoRB("LOG_MENU_CLICK", e.getActionCommand());
-            openFile(new File(StaticUtils.getConfigDir()));
+            ProjectUICommands.openFile(new File(StaticUtils.getConfigDir()));
         }
     }
 

@@ -485,13 +485,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
         private SettingsOpenFileAction() {
             super(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE"), OStrings.getLocale());
-            final String key = "projectAccessWriteableGlossaryMenuItem";
-            putValue(Action.ACTION_COMMAND_KEY, key);
-            try {
-                KeyStroke keyStoroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-                putValue(Action.ACCELERATOR_KEY, keyStoroke);
-            } catch (Exception ignored) {
-            }
+            putValue(Action.ACTION_COMMAND_KEY, "projectAccessWriteableGlossaryMenuItem");
         }
 
         @Override

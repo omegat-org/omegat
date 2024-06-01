@@ -474,7 +474,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         public void actionPerformed(final ActionEvent e) {
             Object notify = e.getSource();
             if (notify instanceof JCheckBoxMenuItem) {
-                Preferences.setPreference(Preferences.NOTIFY_GLOSSARY_HITS, ((JCheckBoxMenuItem) notify).isSelected());
+                Preferences.setPreference(Preferences.NOTIFY_GLOSSARY_HITS,
+                        ((JCheckBoxMenuItem) notify).isSelected());
             }
         }
     }

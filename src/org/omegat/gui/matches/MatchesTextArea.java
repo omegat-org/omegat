@@ -71,8 +71,10 @@ import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.SORT_KEY;
 import org.omegat.core.matching.NearString.ScoresComparator;
 import org.omegat.gui.common.EntryInfoThreadPane;
+import org.omegat.gui.exttrans.MachineTranslationInfo;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
@@ -612,7 +614,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 if (StringUtil.isEmpty(getSelectedText())) {
                     setActiveMatch(index);
                 }
-                Core.getMainWindow().getMainMenu().invokeAction("editInsertTranslationMenuItem", 0);
+                MainWindow.doInsertTrans();
             }
         });
         item.setEnabled(hasMatches);
@@ -624,7 +626,13 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 if (StringUtil.isEmpty(getSelectedText())) {
                     setActiveMatch(index);
                 }
-                Core.getMainWindow().getMainMenu().invokeAction("editOverwriteTranslationMenuItem", 0);
+                // Core.getMainWindow().getMainMenu().invokeAction("editOverwriteTranslationMenuItem", 0);
+                MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
+                if (tr == null) {
+                    Core.getMachineTranslatePane().forceLoad();
+                } else if (!StringUtil.isEmpty(tr.result)) {
+                    Core.getEditor().replaceEditText(tr.result, String.format("MT:[%s]", tr.translatorName));
+                }
             }
         });
         item.setEnabled(hasMatches);

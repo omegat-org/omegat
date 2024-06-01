@@ -116,8 +116,8 @@ public final class MainWindowMenuHandler {
     /**
      * Create a new project.
      */
-    @SuppressWarnings("serial")
     public static class ProjectNewMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectNewMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_CREATE"), OStrings.getLocale());
             final String key = "projectNewMenuItem";
@@ -135,8 +135,8 @@ public final class MainWindowMenuHandler {
     /**
      * Create a new team project.
      */
-    @SuppressWarnings("serial")
     public static class ProjectTeamNewMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectTeamNewMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_TEAM_CREATE"), OStrings.getLocale());
             final String key = "projectTeamNewMenuItem";
@@ -154,8 +154,8 @@ public final class MainWindowMenuHandler {
     /**
      * Open project.
      */
-    @SuppressWarnings("serial")
     public static class ProjectOpenMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectOpenMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_OPEN"), OStrings.getLocale());
             final String key = "projectOpenMenuItem";
@@ -170,8 +170,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectClearRecentMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectClearRecentMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_CLEAR_RECENT"), OStrings.getLocale());
             final String key = "projectClearRecentMenuItem";
@@ -189,8 +189,8 @@ public final class MainWindowMenuHandler {
     /**
      * Open MED project.
      */
-    @SuppressWarnings("serial")
     public static class ProjectMedOpenMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectMedOpenMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_MED_OPEN"), OStrings.getLocale());
             final String key = "projectMedOpenMenuItem";
@@ -208,8 +208,8 @@ public final class MainWindowMenuHandler {
     /**
      * Create MED project.
      */
-    @SuppressWarnings("serial")
     public static class ProjectMedCreateMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectMedCreateMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_MED_CREATE"), OStrings.getLocale());
             final String key = "projectMedCreateMenuItem";
@@ -227,8 +227,8 @@ public final class MainWindowMenuHandler {
     /**
      * Imports the file/files/folder into project's source files.
      */
-    @SuppressWarnings("serial")
     public static class ProjectImportMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectImportMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_IMPORT"), OStrings.getLocale());
             final String key = "projectImportMenuItem";
@@ -243,8 +243,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectWikiImportMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectWikiImportMenuItemAction() {
             super(OStrings.getString("TF_MENU_WIKI_IMPORT"), OStrings.getLocale());
             final String key = "projectWikiImportMenuItem";
@@ -259,8 +259,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectReloadMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectReloadMenuItemAction() {
             super(OStrings.getString("TF_MENU_PROJECT_RELOAD"), OStrings.getLocale());
             final String key = "projectReloadMenuItem";
@@ -278,8 +278,8 @@ public final class MainWindowMenuHandler {
     /**
      * Close project.
      */
-    @SuppressWarnings("serial")
     public static class ProjectCloseMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectCloseMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_CLOSE"), OStrings.getLocale());
             final String key = "projectCloseMenuItem";
@@ -297,8 +297,8 @@ public final class MainWindowMenuHandler {
     /**
      * Save project.
      */
-    @SuppressWarnings("serial")
     public static class ProjectSaveMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectSaveMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_SAVE"), OStrings.getLocale());
             final String key = "projectSaveMenuItem";
@@ -316,8 +316,8 @@ public final class MainWindowMenuHandler {
     /**
      * Create translated documents.
      */
-    @SuppressWarnings("serial")
     public static class ProjectCompileMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectCompileMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_COMPILE"), OStrings.getLocale());
             final String key = "projectCompileMenuItem";
@@ -336,8 +336,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectCommitTargetFilesAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectCommitTargetFilesAction() {
             super(OStrings.getString("TF_MENU_FILE_TARGET"), OStrings.getLocale());
             final String key = "projectCommitTargetFiles";
@@ -358,8 +358,8 @@ public final class MainWindowMenuHandler {
     /**
      * Commit source files
      */
-    @SuppressWarnings("serial")
     public static class ProjectCommitSourceFilesAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectCommitSourceFilesAction() {
             super(OStrings.getString("TF_MENU_FILE_COMMIT"), OStrings.getLocale());
             final String key = "projectCommitSourceFiles";
@@ -377,8 +377,8 @@ public final class MainWindowMenuHandler {
     /**
      * Create current translated document.
      */
-    @SuppressWarnings("serial")
     public static class ProjectSingleCompileMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectSingleCompileMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_SINGLE_COMPILE"), OStrings.getLocale());
             final String key = "projectSingleCompileMenuItem";
@@ -408,8 +408,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Edits project's properties */
-    @SuppressWarnings("serial")
     public static class ProjectEditMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectEditMenuItemAction() {
             super(OStrings.getString("MW_PROJECTMENU_EDIT"), OStrings.getLocale());
             final String key = "projectEditMenuItem";
@@ -424,8 +424,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewFileListMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewFileListMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_PROJWIN"), OStrings.getLocale());
             final String key = "viewFileListMenuItem";
@@ -443,8 +443,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessRootMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessRootMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_ROOT"), OStrings.getLocale());
             final String key = "projectAccessRootMenuItem";
@@ -464,8 +464,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessDictionaryMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessDictionaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_DICTIONARY"), OStrings.getLocale());
             final String key = "projectAccessDictionaryMenuItem";
@@ -484,8 +484,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessGlossaryMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessGlossaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_GLOSSARY"), OStrings.getLocale());
             final String key = "projectAccessGlossaryMenuItem";
@@ -504,8 +504,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessSourceMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_SOURCE"), OStrings.getLocale());
             final String key = "projectAccessSourceMenuItem";
@@ -524,8 +524,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessTargetMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessTargetMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_TARGET"), OStrings.getLocale());
             final String key = "projectAccessTargetMenuItem";
@@ -544,8 +544,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessTMMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessTMMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_TM"), OStrings.getLocale());
             final String key = "projectAccessTMMenuItem";
@@ -564,8 +564,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessExportTMMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessExportTMMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_EXPORT_TM"), OStrings.getLocale());
             final String key = "projectAccessExportTMMenuItem";
@@ -584,8 +584,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessCurrentSourceDocumentMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessCurrentSourceDocumentMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_CURRENT_SOURCE_DOCUMENT"), OStrings.getLocale());
             final String key = "projectAccessCurrentSourceDocumentMenuItem";
@@ -613,8 +613,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessCurrentTargetDocumentMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessCurrentTargetDocumentMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_CURRENT_TARGET_DOCUMENT"), OStrings.getLocale());
             final String key = "projectAccessCurrentTargetDocumentMenuItem";
@@ -642,8 +642,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ProjectAccessWriteableGlossaryMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectAccessWriteableGlossaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_ACCESS_WRITEABLE_GLOSSARY"), OStrings.getLocale());
             final String key = "projectAccessWriteableGlossaryMenuItem";
@@ -660,8 +660,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Quits OmegaT */
-    @SuppressWarnings("serial")
     public static class ProjectExitMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectExitMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_QUIT"), OStrings.getLocale());
             final String key = "projectExitMenuItem";
@@ -677,8 +677,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Restart OmegaT */
-    @SuppressWarnings("serial")
     public static class ProjectRestartMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ProjectRestartMenuItemAction() {
             super(OStrings.getString("TF_MENU_FILE_RESTART"), OStrings.getLocale());
             final String key = "projectRestartMenuItem";
@@ -698,9 +698,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditUndoMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditUndoMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_UNDO"), OStrings.getLocale());
             final String key = "editUndoMenuItem";
@@ -721,8 +720,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Quits OmegaT */
-    @SuppressWarnings("serial")
     public static class EditRedoMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditRedoMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_REDO"), OStrings.getLocale());
             final String key = "editRedoMenuItem";
@@ -742,9 +741,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditOverwriteTranslationMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditOverwriteTranslationMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_RECYCLE"), OStrings.getLocale());
             final String key = "editOverwriteTranslationMenuItem";
@@ -759,8 +757,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditInsertTranslationMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditInsertTranslationMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT"), OStrings.getLocale());
             final String key = "editInsertTranslationMenuItem";
@@ -775,9 +773,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditOverwriteMachineTranslationMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditOverwriteMachineTranslationMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_OVERWRITE_MACHITE_TRANSLATION"), OStrings.getLocale());
             final String key = "editOverwriteMachineTranslationMenuItem";
@@ -801,9 +798,8 @@ public final class MainWindowMenuHandler {
      * replaces entire edited segment text with a the source text of a segment
      * at cursor position
      */
-    @SuppressWarnings("serial")
     public static class EditOverwriteSourceMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditOverwriteSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SOURCE_OVERWRITE"), OStrings.getLocale());
             final String key = "editOverwriteSourceMenuItem";
@@ -826,9 +822,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** inserts the source text of a segment at cursor position */
-    @SuppressWarnings("serial")
     public static class EditInsertSourceMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditInsertSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SOURCE_INSERT"), OStrings.getLocale());
             final String key = "editInsertSourceMenuItem";
@@ -851,9 +846,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** select the source text of the current segment */
-    @SuppressWarnings("serial")
     public static class EditSelectSourceMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditSelectSourceMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SOURCE_SELECT"), OStrings.getLocale());
             final String key = "editSelectSourceMenuItem";
@@ -871,9 +865,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditExportSelectionMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditExportSelectionMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_EXPORT_SELECTION"), OStrings.getLocale());
             final String key = "editExportSelectionMenuItem";
@@ -901,8 +894,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditSearchDictionaryMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditSearchDictionaryMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_SEARCH_DICTIONARY"), OStrings.getLocale());
             final String key = "editSearchDictionaryMenuItem";
@@ -925,9 +918,9 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditCreateGlossaryEntryMenuItemAction extends AbstractMnemonicsAction {
-        private JFrame parent;
+        private static final long serialVersionUID = 1L;
+        private final JFrame parent;
         public EditCreateGlossaryEntryMenuItemAction() {
             this(null);
         }
@@ -954,8 +947,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditFindInProjectMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditFindInProjectMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_FIND"), OStrings.getLocale());
             final String key = "editFindInProjectMenuItem";
@@ -976,9 +969,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditReplaceInProjectMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditReplaceInProjectMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_REPLACE"), OStrings.getLocale());
             final String key = "editReplaceInProjectMenuItem";
@@ -997,8 +989,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Set active match to #1. */
-    @SuppressWarnings("serial")
     public static class EditSelectFuzzy1MenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditSelectFuzzy1MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_1"), OStrings.getLocale());
             final String key = "editSelectFuzzy1MenuItem";
@@ -1014,8 +1006,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Set active match to #2. */
-    @SuppressWarnings("serial")
     public static class EditSelectFuzzy2MenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditSelectFuzzy2MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_2"), OStrings.getLocale());
             final String key = "editSelectFuzzy2MenuItem";
@@ -1031,8 +1023,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Set active match to #3. */
-    @SuppressWarnings("serial")
     public static class EditSelectFuzzy3MenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditSelectFuzzy3MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_3"), OStrings.getLocale());
             final String key = "editSelectFuzzy3MenuItem";
@@ -1048,8 +1040,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Set active match to #4. */
-    @SuppressWarnings("serial")
     public static class EditSelectFuzzy4MenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditSelectFuzzy4MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_4"), OStrings.getLocale());
             final String key = "editSelectFuzzy4MenuItem";
@@ -1065,8 +1057,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Set active match to #5. */
-    @SuppressWarnings("serial")
     public static class EditSelectFuzzy5MenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditSelectFuzzy5MenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_5"), OStrings.getLocale());
             final String key = "editSelectFuzzy5MenuItem";
@@ -1082,8 +1074,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Set active match to the next one */
-    @SuppressWarnings("serial")
     public static class EditSelectFuzzyNextMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditSelectFuzzyNextMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_NEXT"), OStrings.getLocale());
             final String key = "editSelectFuzzyNextMenuItem";
@@ -1099,9 +1091,8 @@ public final class MainWindowMenuHandler {
     }
 
     /** Set active match to the previous one */
-    @SuppressWarnings("serial")
     public static class EditSelectFuzzyPrevMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public EditSelectFuzzyPrevMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_COMPARE_PREV"), OStrings.getLocale());
             final String key = "editSelectFuzzyPrevMenuItem";
@@ -1116,8 +1107,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class InsertCharsLRMAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public InsertCharsLRMAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_LRM"), OStrings.getLocale());
             final String key = "insertCharsLRM";
@@ -1133,8 +1124,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class InsertCharsRLMAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public InsertCharsRLMAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_RLM"), OStrings.getLocale());
             final String key = "insertCharsRLM";
@@ -1149,8 +1140,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class InsertCharsLREAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public InsertCharsLREAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_LRE"), OStrings.getLocale());
             final String key = "insertCharsLRE";
@@ -1165,8 +1156,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class InsertCharsRLEAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public InsertCharsRLEAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_RLE"), OStrings.getLocale());
             final String key = "insertCharsRLE";
@@ -1181,9 +1172,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class InsertCharsPDFAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public InsertCharsPDFAction() {
             super(OStrings.getString("TF_MENU_EDIT_INSERT_CHARS_PDF"), OStrings.getLocale());
             final String key = "insertCharsPDF";
@@ -1198,8 +1188,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditMultipleDefaultAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditMultipleDefaultAction() {
             super(OStrings.getString("MULT_MENU_DEFAULT"), OStrings.getLocale());
             final String key = "editMultipleDefault";
@@ -1214,8 +1204,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditMultipleAlternateAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditMultipleAlternateAction() {
             super(OStrings.getString("MULT_MENU_MULTIPLE"), OStrings.getLocale());
             final String key = "editMultipleAlternate";
@@ -1230,8 +1220,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditRegisterUntranslatedMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditRegisterUntranslatedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_UNTRANSLATED_TRANSLATION"), OStrings.getLocale());
             final String key = "editRegisterUntranslatedMenuItem";
@@ -1246,8 +1236,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditRegisterEmptyMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditRegisterEmptyMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_EMPTY_TRANSLATION"), OStrings.getLocale());
             final String key = "editRegisterEmptyMenuItem";
@@ -1262,8 +1252,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditRegisterIdenticalMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditRegisterIdenticalMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_IDENTICAL_TRANSLATION"), OStrings.getLocale());
             final String key = "editRegisterIdenticalMenuItem";
@@ -1278,9 +1268,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsPreferencesMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public OptionsPreferencesMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_PREFERENCES"), OStrings.getLocale());
             final String key = "optionsPreferencesMenuItem";
@@ -1298,8 +1287,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class CycleSwitchCaseMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public CycleSwitchCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_CYCLE"), OStrings.getLocale());
             final String key = "cycleSwitchCaseMenuItem";
@@ -1314,8 +1303,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class SentenceCaseMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public SentenceCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_SENTENCE"), OStrings.getLocale());
             final String key = "sentenceCaseMenuItem";
@@ -1330,8 +1319,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class TitleCaseMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public TitleCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_TITLE"), OStrings.getLocale());
             final String key = "titleCaseMenuItem";
@@ -1346,8 +1335,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class UpperCaseMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public UpperCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"), OStrings.getLocale());
             final String key = "upperCaseMenuItem";
@@ -1362,8 +1351,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class LowerCaseMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public LowerCaseMenuItemAction() {
             super(OStrings.getString("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"), OStrings.getLocale());
             final String key = "lowerCaseMenuItem";
@@ -1378,8 +1367,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNextUntranslatedMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNextUntranslatedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_UNTRANS"), OStrings.getLocale());
             final String key = "gotoNextUntranslatedMenuItem";
@@ -1394,8 +1383,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNextUniqueMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNextUniqueMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NEXT_UNIQUE"), OStrings.getLocale());
             final String key = "gotoNextUniqueMenuItem";
@@ -1410,8 +1399,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNextTranslatedMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNextTranslatedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_TRANS"), OStrings.getLocale());
             final String key = "gotoNextTranslatedMenuItem";
@@ -1426,8 +1415,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNextSegmentMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNextSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_NEXT"), OStrings.getLocale());
             final String key = "gotoNextSegmentMenuItem";
@@ -1442,8 +1431,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoPreviousSegmentMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoPreviousSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_PREV"), OStrings.getLocale());
             final String key = "gotoPreviousSegmentMenuItem";
@@ -1458,8 +1447,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNextXAutoMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNextXAutoMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NEXT_XAUTO"), OStrings.getLocale());
             final String key = "gotoNextXAutoMenuItem";
@@ -1474,8 +1463,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoPrevXAutoMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoPrevXAutoMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_PREV_XAUTO"), OStrings.getLocale());
             final String key = "gotoPrevXAutoMenuItem";
@@ -1490,8 +1479,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNextXEnforcedMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNextXEnforcedMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NEXT_XENFORCED", OStrings.getLocale()));
             final String key = "gotoNextXEnforcedMenuItem";
@@ -1506,8 +1495,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoPrevXEnforcedMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoPrevXEnforcedMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_PREV_XENFORCED"), OStrings.getLocale());
             final String key = "gotoPrevXEnforcedMenuItem";
@@ -1522,8 +1511,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNextNoteMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNextNoteMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_NEXT_NOTE"), OStrings.getLocale());
             final String key = "gotoNextNoteMenuItem";
@@ -1538,8 +1527,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoPreviousNoteMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoPreviousNoteMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_PREV_NOTE"), OStrings.getLocale());
             final String key = "gotoPreviousNoteMenuItem";
@@ -1554,8 +1543,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoNotesPanelMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoNotesPanelMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_NOTES_PANEL"), OStrings.getLocale());
             final String key = "gotoNotesPanelMenuItem";
@@ -1570,8 +1559,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoEditorPanelMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoEditorPanelMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_EDITOR_PANEL"), OStrings.getLocale());
             final String key = "gotoEditorPanelMenuItem";
@@ -1589,8 +1578,8 @@ public final class MainWindowMenuHandler {
     /**
      * Asks the user for a segment number and then displays the segment.
      */
-    @SuppressWarnings("serial")
     public static class GotoSegmentMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoSegmentMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_GOTO"), OStrings.getLocale());
             final String key = "gotoSegmentMenuItem";
@@ -1613,9 +1602,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoHistoryBackMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public GotoHistoryBackMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_BACK_IN_HISTORY"), OStrings.getLocale());
             final String key = "gotoHistoryBackMenuItem";
@@ -1630,8 +1618,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoHistoryForwardMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoHistoryForwardMenuItemAction() {
             super(OStrings.getString("TF_MENU_GOTO_FORWARD_IN_HISTORY"), OStrings.getLocale());
             final String key = "gotoHistoryForwardMenuItem";
@@ -1646,8 +1634,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class GotoMatchSourceSegmentAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public GotoMatchSourceSegmentAction() {
             super(OStrings.getString("TF_MENU_GOTO_SELECTED_MATCH_SOURCE"), OStrings.getLocale());
             final String key = "gotoMatchSourceSegment";
@@ -1665,9 +1653,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkTranslatedSegmentsCheckBoxMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public ViewMarkTranslatedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_TRANSLATED"), OStrings.getLocale());
             final String key = "viewMarkTranslatedSegmentsCheckBoxMenuItem";
@@ -1685,9 +1672,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkUntranslatedSegmentsCheckBoxMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public ViewMarkUntranslatedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_UNTRANSLATED"), OStrings.getLocale());
             final String key = "viewMarkUntranslatedSegmentsCheckBoxMenuItem";
@@ -1707,9 +1693,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkParagraphStartCheckBoxMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public ViewMarkParagraphStartCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_MARK_PARAGRAPH"), OStrings.getLocale());
             final String key = "viewMarkParagraphStartCheckBoxMenuItem";
@@ -1730,8 +1715,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewDisplaySegmentSourceCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewDisplaySegmentSourceCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"), OStrings.getLocale());
             final String key = "viewDisplaySegmentSourceCheckBoxMenuItem";
@@ -1751,8 +1736,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkNonUniqueSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"), OStrings.getLocale());
             final String key = "viewMarkNonUniqueSegmentsCheckBoxMenuItem";
@@ -1772,8 +1757,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkNotedSegmentsCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkNotedSegmentsCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NOTED_SEGMENTS"), OStrings.getLocale());
             final String key = "viewMarkNotedSegmentsCheckBoxMenuItem";
@@ -1793,8 +1778,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkNBSPCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkNBSPCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_NBSP"), OStrings.getLocale());
             final String key = "viewMarkNBSPCheckBoxMenuItem";
@@ -1813,8 +1798,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkWhitespaceCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkWhitespaceCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_WHITESPACE"), OStrings.getLocale());
             final String key = "viewMarkWhitespaceCheckBoxMenuItem";
@@ -1834,9 +1819,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkBidiCheckBoxMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public ViewMarkBidiCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_BIDI"), OStrings.getLocale());
             final String key = "viewMarkBidiCheckBoxMenuItem";
@@ -1856,8 +1840,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkAutoPopulatedCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkAutoPopulatedCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_AUTOPOPULATED"), OStrings.getLocale());
             final String key = "viewMarkAutoPopulatedCheckBoxMenuItem";
@@ -1877,8 +1861,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkGlossaryMatchesCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkGlossaryMatchesCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_GLOSSARY_MARK"), OStrings.getLocale());
             final String key = "viewMarkGlossaryMatchesCheckBoxMenuItem";
@@ -1899,8 +1883,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkLanguageCheckerCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkLanguageCheckerCheckBoxMenuItemAction() {
             super(OStrings.getString("LT_OPTIONS_MENU_ENABLED"), OStrings.getLocale());
             final String key = "viewMarkLanguageCheckerCheckBoxMenuItem";
@@ -1920,8 +1904,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewMarkFontFallbackCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewMarkFontFallbackCheckBoxMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MARK_FONT_FALLBACK"), OStrings.getLocale());
             final String key = "viewMarkFontFallbackCheckBoxMenuItem";
@@ -1941,9 +1925,9 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewDisplayModificationInfoNoneRadioButtonMenuItemAction
             extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewDisplayModificationInfoNoneRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_NONE"), OStrings.getLocale());
             final String key = "viewDisplayModificationInfoNoneRadioButtonMenuItem";
@@ -1959,9 +1943,9 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction
             extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewDisplayModificationInfoSelectedRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_SELECTED"), OStrings.getLocale());
             final String key = "viewDisplayModificationInfoSelectedRadioButtonMenuItem";
@@ -1977,9 +1961,9 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ViewDisplayModificationInfoAllRadioButtonMenuItemAction
             extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewDisplayModificationInfoAllRadioButtonMenuItemAction() {
             super(OStrings.getString("MW_VIEW_MENU_MODIFICATION_INFO_ALL"), OStrings.getLocale());
             final String key = "viewDisplayModificationInfoAllRadioButtonMenuItem";
@@ -1995,8 +1979,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ToolsCheckIssuesMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ToolsCheckIssuesMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_CHECK_ISSUES"), OStrings.getLocale());
             final String key = "toolsCheckIssuesMenuItem";
@@ -2014,12 +1998,11 @@ public final class MainWindowMenuHandler {
                 }
             }
             Core.getIssues().showAll();
-
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ToolsCheckIssuesCurrentFileMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ToolsCheckIssuesCurrentFileMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_CHECK_ISSUES_CURRENT_FILE"), OStrings.getLocale());
             final String key = "toolsCheckIssuesCurrentFileMenuItem";
@@ -2038,8 +2021,8 @@ public final class MainWindowMenuHandler {
      * Identify all the placeholders in the source text and automatically
      * inserts them into the target text.
      */
-    @SuppressWarnings("serial")
     public static class EditTagPainterMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditTagPainterMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_TAGPAINT"), OStrings.getLocale());
             final String key = "editTagPainterMenuItem";
@@ -2057,8 +2040,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class EditTagNextMissedMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public EditTagNextMissedMenuItemAction() {
             super(OStrings.getString("TF_MENU_EDIT_TAG_NEXT_MISSED"), OStrings.getLocale());
             final String key = "editTagNextMissedMenuItem";
@@ -2078,8 +2061,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ToolsShowStatisticsStandardMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ToolsShowStatisticsStandardMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_STATISTICS_STANDARD"), OStrings.getLocale());
             final String key = "toolsShowStatisticsStandardMenuItem";
@@ -2095,8 +2078,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ToolsShowStatisticsMatchesMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ToolsShowStatisticsMatchesMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_STATISTICS_MATCHES"), OStrings.getLocale());
             final String key = "toolsShowStatisticsMatchesMenuItem";
@@ -2112,8 +2095,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class ToolsShowStatisticsMatchesPerFileMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ToolsShowStatisticsMatchesPerFileMenuItemAction() {
             super(OStrings.getString("TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE"), OStrings.getLocale());
             final String key = "toolsShowStatisticsMatchesPerFileMenuItem";
@@ -2129,8 +2112,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsAutoCompleteShowAutomaticallyItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsAutoCompleteShowAutomaticallyItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_AUTOCOMPLETE_SHOW_AUTOMATICALLY"), OStrings.getLocale());
             final String key = "optionsAutoCompleteShowAutomaticallyItem";
@@ -2149,8 +2132,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsAutoCompleteHistoryCompletionMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsAutoCompleteHistoryCompletionMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_COMPLETION"), OStrings.getLocale());
             final String key = "optionsAutoCompleteHistoryCompletionMenuItem";
@@ -2169,8 +2152,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsAutoCompleteHistoryPredictionMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsAutoCompleteHistoryPredictionMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_AUTOCOMPLETE_HISTORY_PREDICTION"), OStrings.getLocale());
             final String key = "optionsAutoCompleteHistoryPredictionMenuItem";
@@ -2189,8 +2172,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsMTAutoFetchCheckboxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsMTAutoFetchCheckboxMenuItemAction() {
             super(OStrings.getString("MT_AUTO_FETCH"), OStrings.getLocale());
             final String key = "optionsMTAutoFetchCheckboxMenuItem";
@@ -2208,8 +2191,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsGlossaryFuzzyMatchingCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsGlossaryFuzzyMatchingCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_OPTIONSMENU_GLOSSARY_FUZZY"), OStrings.getLocale());
             final String key = "optionsGlossaryFuzzyMatchingCheckBoxMenuItem";
@@ -2229,8 +2212,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsDictionaryFuzzyMatchingCheckBoxMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsDictionaryFuzzyMatchingCheckBoxMenuItemAction() {
             super(OStrings.getString("TF_OPTIONSMENU_DICTIONARY_FUZZY"), OStrings.getLocale());
             final String key = "optionsDictionaryFuzzyMatchingCheckBoxMenuItem";
@@ -2254,8 +2237,8 @@ public final class MainWindowMenuHandler {
      * Displays the filters setup dialog to allow customizing file filters in
      * detail.
      */
-    @SuppressWarnings("serial")
     public static class OptionsSetupFileFiltersMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsSetupFileFiltersMenuItemAction() {
             super(OStrings.getString("TF_MENU_DISPLAY_GLOBAL_FILTERS"), OStrings.getLocale());
             final String key = "optionsSetupFileFiltersMenuItem";
@@ -2275,8 +2258,8 @@ public final class MainWindowMenuHandler {
      * Displays the segmentation setup dialog to allow customizing the
      * segmentation rules in detail.
      */
-    @SuppressWarnings("serial")
     public static class OptionsSentsegMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsSentsegMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_GLOBAL_SENTSEG"), OStrings.getLocale());
             final String key = "optionsSentsegMenuItem";
@@ -2296,8 +2279,8 @@ public final class MainWindowMenuHandler {
      * Displays the workflow setup dialog to allow customizing the diverse
      * workflow options.
      */
-    @SuppressWarnings("serial")
     public static class OptionsWorkflowMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsWorkflowMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_WORKFLOW"), OStrings.getLocale());
             final String key = "optionsWorkflowMenuItem";
@@ -2317,8 +2300,8 @@ public final class MainWindowMenuHandler {
      * Restores defaults for all dockable parts. May be expanded in the future
      * to reset the entire GUI to its defaults.
      */
-    @SuppressWarnings("serial")
     public static class ViewRestoreGUIMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public ViewRestoreGUIMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_RESTORE_GUI"), OStrings.getLocale());
             final String key = "viewRestoreGUIMenuItem";
@@ -2333,8 +2316,8 @@ public final class MainWindowMenuHandler {
         }
     }
 
-    @SuppressWarnings("serial")
     public static class OptionsAccessConfigDirMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public OptionsAccessConfigDirMenuItemAction() {
             super(OStrings.getString("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"), OStrings.getLocale());
             final String key = "optionsAccessConfigDirMenuItem";
@@ -2352,8 +2335,8 @@ public final class MainWindowMenuHandler {
     /**
      * Show help.
      */
-    @SuppressWarnings("serial")
     public static class HelpContentsMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public HelpContentsMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_CONTENTS"), OStrings.getLocale());
             final String key = "helpContentsMenuItem";
@@ -2378,9 +2361,8 @@ public final class MainWindowMenuHandler {
     /**
      * Shows About dialog
      */
-    @SuppressWarnings("serial")
     public static class HelpAboutMenuItemAction extends AbstractMnemonicsAction {
-
+        private static final long serialVersionUID = 1L;
         public HelpAboutMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_ABOUT"), OStrings.getLocale());
             final String key = "helpAboutMenuItem";
@@ -2398,8 +2380,8 @@ public final class MainWindowMenuHandler {
     /**
      * Shows Last changes
      */
-    @SuppressWarnings("serial")
     public static class HelpLastChangesMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public HelpLastChangesMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_LAST_CHANGES"), OStrings.getLocale());
             final String key = "helpLastChangesMenuItem";
@@ -2417,8 +2399,8 @@ public final class MainWindowMenuHandler {
     /**
      * Show log
      */
-    @SuppressWarnings("serial")
     public static class HelpLogMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public HelpLogMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_LOG"), OStrings.getLocale());
             final String key = "helpLogMenuItem";
@@ -2436,8 +2418,8 @@ public final class MainWindowMenuHandler {
     /**
      * Check for updates
      */
-    @SuppressWarnings("serial")
     public static class HelpUpdateCheckMenuItemAction extends AbstractMnemonicsAction {
+        private static final long serialVersionUID = 1L;
         public HelpUpdateCheckMenuItemAction() {
             super(OStrings.getString("TF_MENU_HELP_CHECK_FOR_UPDATES"), OStrings.getLocale());
             final String key = "helpUpdateCheckMenuItem";

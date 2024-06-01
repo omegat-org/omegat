@@ -72,7 +72,6 @@ import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
@@ -415,7 +414,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         openFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWriteableGlossaryMenuItem", e.getModifiers());
+                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWriteableGlossaryMenuItem",
+                        e.getModifiers());
             }
         });
         openFile.setEnabled(false);

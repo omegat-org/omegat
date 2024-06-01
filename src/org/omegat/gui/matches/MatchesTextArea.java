@@ -73,7 +73,6 @@ import org.omegat.core.matching.NearString.ScoresComparator;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.main.MainWindowMenuHandler;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.TMMatchesPreferencesController;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
@@ -591,7 +590,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 for (int i = 0; i < m.projs.length; i++) {
                     String proj = m.projs[i];
                     StringBuilder b = new StringBuilder();
-                    if (proj.isEmpty()) {
+                    if (proj.equals("")) {
                         b.append(OStrings.getString("MATCHES_THIS_PROJECT"));
                     } else {
                         b.append(proj);
@@ -606,11 +605,28 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
-        item.setAction(new MainWindowMenuHandler.EditInsertTranslationMenuItemAction());
+        item.addActionListener(new ActionListener() {
+            // the action: insert this match
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (StringUtil.isEmpty(getSelectedText())) {
+                    setActiveMatch(index);
+                }
+                Core.getMainWindow().getMainMenu().invokeAction("editInsertTranslationMenuItem", 0);
+            }
+        });
         item.setEnabled(hasMatches);
 
         item = popup.add(OStrings.getString("MATCHES_REPLACE"));
-        item.setAction(new MainWindowMenuHandler.EditOverwriteTranslationMenuItemAction());
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (StringUtil.isEmpty(getSelectedText())) {
+                    setActiveMatch(index);
+                }
+                Core.getMainWindow().getMainMenu().invokeAction("editOverwriteTranslationMenuItem", 0);
+            }
+        });
         item.setEnabled(hasMatches);
 
         popup.addSeparator();

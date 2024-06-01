@@ -1316,7 +1316,13 @@ public final class ProjectUICommands {
         }
     }
 
-    public static void openWritableGlossaryFile(boolean parent) {
+    /**
+     * Open file or parent directory of writeable glossary with OS's standard
+     * file manager.
+     *
+     * @param parentDirectory true when opening parent folder, otherwise false.
+     */
+    public static void openWritableGlossaryFile(boolean parentDirectory) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -1325,12 +1331,18 @@ public final class ProjectUICommands {
             return;
         }
         File toOpen = new File(path);
-        if (parent) {
+        if (parentDirectory) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
     }
 
+    /**
+     * Open specified path with OS standard file manager.
+     *
+     * @param path
+     *            to open.
+     */
     public static void openFile(File path) {
         try {
             path = path.getCanonicalFile(); // Normalize file name in case it is

@@ -118,12 +118,10 @@ public class AccessTools extends JPanel {
         add(sourceFilesCB);
 
         // These buttons show only icon
-        searchButton = new JButton();
-        searchButton.setAction(new EditFindInProjectMenuItemAction());
+        searchButton = new JButton(new EditFindInProjectMenuItemAction());
         searchButton.setText("");
         searchButton.setBorderPainted(false);
-        settingsButton = new JButton();
-        settingsButton.setAction(new OptionsPreferencesMenuItemAction());
+        settingsButton = new JButton(new OptionsPreferencesMenuItemAction());
         settingsButton.setText("");
         settingsButton.setBorderPainted(false);
 

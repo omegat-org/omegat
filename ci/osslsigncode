@@ -15,9 +15,8 @@ bindpaths() {
     done
 }
 
-CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>1 || CMD="$(type -p nerdctl)"
-echo select container CLI: $CMD
-$CMD info || false
+CMD="$(type -p docker)" && $CMD info >/dev/null 2>1 || CMD="$(type -p nerdctl)" && $CMD info >/dev/null || false
+echo Select container CLI: $CMD
 
 # build container image
 CTX=$(mktemp -d)

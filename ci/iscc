@@ -37,8 +37,7 @@ WORKDIR /work
 ENTRYPOINT ["iscc"]
 __EOF__
 
-CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>&1 || CMD="$(type -p nerdctl)"
-$CMD info > /dev/null || false
+CMD="$(type -p docker)" && $CMD info >/dev/null 2>&1 || CMD="$(type -p nerdctl)" && $CMD info > /dev/null || false
 echo Select container CLI: $CMD
 
 IMAGEID=$($CMD images -q $IMAGE)

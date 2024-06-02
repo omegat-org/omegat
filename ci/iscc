@@ -12,12 +12,17 @@ bindpaths() {
     done
 }
 
+# set TMPDIR for context creation
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+TMPDIR=$( dirname ${SCRIPT_DIR} )/build/tmp
+
 # workaround for build failure on CI env.
 # see https://sourceforge.net/p/omegat/bugs/1228/
 PUID=`id -u`
 PGID=`id -g`
 IMAGE=omegatorg/innosetup:innosetup6
-CONTEXT=`mktemp -d`
+CONTEXT=${TMPDIR}/iscc
+mkdir -p $CONTEXT
 
 cat << __EOF__  > $CONTEXT/Dockerfile
 FROM docker.io/amake/innosetup:innosetup6-buster

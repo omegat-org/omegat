@@ -27,6 +27,10 @@ application {
     mainClass = 'org.omegat.Main'
 }
 
+tasks.named('updateDaemonJvm') {
+    jvmVersion = JavaVersion.VERSION_17
+}
+
 def shortDescription = 'The free translation memory tool'
 def distDescription = 'OmegaT is a free and open source multiplatform Computer Assisted Translation tool with' +
         ' fuzzy matching, translation memory, keyword search, glossaries, and translation leveraging into updated' +

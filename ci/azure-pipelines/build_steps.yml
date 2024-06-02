@@ -32,7 +32,7 @@ steps:
   - task: Gradle@3
     inputs:
       tasks: 'clean sourceDistZip distZip mac linux win'
-      options: '--build-cache -PenvIsCi -PassetDir=$(System.ArtifactsDirectory)/asset'
+      options: '--build-cache -PenvIsCi --scan -PassetDir=$(System.ArtifactsDirectory)/asset'
       jdkVersionOption: '1.17'
     displayName: 'Build distribution packages and docs'
   - script: echo "##vso[task.setvariable variable=result;]false"

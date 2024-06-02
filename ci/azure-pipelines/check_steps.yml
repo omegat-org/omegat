@@ -11,5 +11,5 @@ steps:
     displayName: Check
     inputs:
       tasks: check
-      options: '-PenvIsCi --no-daemon'
+      options: '-PenvIsCi --no-daemon --scan'
       jdkVersionOption: '1.17'

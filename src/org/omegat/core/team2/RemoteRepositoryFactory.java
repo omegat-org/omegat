@@ -75,6 +75,10 @@ public final class RemoteRepositoryFactory {
             return "svn";
         } else if (url.startsWith("git")) {
             return "git";
+        } else if (url.startsWith("https://git")) {
+            return "git";
+        } else if (url.endsWith(".git")) {
+            return "git";
         } else {
             if (GITRemoteRepository2.isGitRepository(url)) {
                 return "git";

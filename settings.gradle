@@ -20,5 +20,6 @@ include("machinetranslators:apertium",
         "machinetranslators:dummy",
         "aligner",
         "theme",
-        "spellchecker:hunspell-jmyspell",
+        "spellchecker:hunspell",
+        "spellchecker:morfologik",
         "tipoftheday")

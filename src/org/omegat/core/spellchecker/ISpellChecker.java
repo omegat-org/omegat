@@ -42,7 +42,7 @@ import org.omegat.util.Token;
 public interface ISpellChecker {
 
     /** Initialize a spell checker for a current project. */
-    void initialize();
+    boolean initialize();
 
     /** Destroy internal cache and free memory. */
     void destroy();

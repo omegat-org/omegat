@@ -259,7 +259,6 @@ dependencies {
         implementation(libs.omegat.htmlparser)
         implementation(libs.omegat.gnudiff4j)
         implementation(libs.omegat.mnemonics)
-        implementation(libs.omegat.jmyspell.core)
 
         // LanguageTool
         implementation(libs.languagetool.core) {

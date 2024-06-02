@@ -1318,20 +1318,26 @@ ext.makeWinTask = { args ->
                      'InnoSetup or Docker not installed'])
         }
         dependsOn prepDistsTaskName
-        outputs.upToDateWhen {
-            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
-            def f1 = layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe").get().asFile
-            def f2 = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar").get().asFile
-            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
-        }
+        inputs.files(
+                layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar"),
+                layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss"),
+                layout.buildDirectory.file("innosetup/${args.name}/OmegaT.l4j.ini"),
+        )
         // You'd think we could just set the PATH, but there be dragons here
         // https://github.com/palantir/gradle-docker/issues/162
         def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
         def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
+        logging.captureStandardOutput LogLevel.INFO
         commandLine exe, '/Qp', iss
+        outputs.file layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
+        doLast {
+            println ""
+            def f3 = layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe").get().asFile
+            logger.info('Built ' + f3.toString() + "(" + f3.length() + ")")
+        }
     }
 
-    tasks.register(distsTaskName, Copy) {
+    tasks.register(distsTaskName, Sync) {
         description = "Create a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         onlyIf {

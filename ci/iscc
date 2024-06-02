@@ -37,13 +37,17 @@ WORKDIR /work
 ENTRYPOINT ["iscc"]
 __EOF__
 
-CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>1 || CMD="$(type -p nerdctl)"
-echo select container CLI: $CMD
-$CMD info || false
+CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>&1 || CMD="$(type -p nerdctl)"
+$CMD info > /dev/null || false
+echo Select container CLI: $CMD
 
-if ! $CMD build -t $IMAGE $CONTEXT ; then
-  echo Container build error for ISCC, abort...
-  exit 1
+IMAGEID=$($CMD images -q $IMAGE)
+if [[ -z "$IMAGEID" ]]; then
+  echo Now build custom image
+  if ! $CMD build -t $IMAGE $CONTEXT ; then
+    echo Container build error for ISCC, abort...
+    exit 1
+  fi
 fi
 exec $CMD run -i --rm  \
    -u `id -u`:`id -g` \

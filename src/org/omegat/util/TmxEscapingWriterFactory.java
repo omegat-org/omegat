@@ -28,7 +28,6 @@ package org.omegat.util;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -39,27 +38,25 @@ import org.jetbrains.annotations.NotNull;
 public class TmxEscapingWriterFactory implements EscapingWriterFactory {
 
     @Override
-    public Writer createEscapingWriterFor(final Writer writer, final String s)
-            throws UnsupportedEncodingException {
+    public Writer createEscapingWriterFor(@NotNull final Writer writer, final String s) {
         return new EscapeWriter(writer);
     }
 
     @Override
-    public Writer createEscapingWriterFor(final OutputStream outputStream, final String s)
-            throws UnsupportedEncodingException {
+    public Writer createEscapingWriterFor(@NotNull final OutputStream outputStream, final String s) {
         return new EscapeWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
     }
 
     public static class EscapeWriter extends Writer {
 
         // Copy from woodstox:com.ctc.wstx.sw.BufferingXmlWriter
-        private static final int[] QUOTABLE_TEXT_CHARS;
+        private static final byte[] QUOTABLE_TEXT_CHARS;
         private static final int HIGH_ENC = 0xFFFE;
 
         static {
-            int[] q = new int[4096];
-            Arrays.fill(q, 0, 32, 1);
-            Arrays.fill(q, 127, 160, 1);
+            byte[] q = new byte[256];
+            Arrays.fill(q, 0, 32, (byte) 1);
+            Arrays.fill(q, 127, 160, (byte) 1);
             q['\t'] = 0;
             q['\n'] = 0;
             q['<'] = 1;
@@ -75,39 +72,55 @@ public class TmxEscapingWriterFactory implements EscapingWriterFactory {
         }
 
         /**
-         * Wrap Writer and escape characters.
+         * Wrap Writer and escape characters for TEXT output.
+         * <p>
+         * this does not consider it as an attribute value.
          *
-         * @param cbuf Array of characters
-         * @param off  Offset from which to start writing characters
-         * @param len  Number of characters to write
+         * @param cbuf
+         *            Array of characters
+         * @param off
+         *            Offset from which to start writing characters
+         * @param len
+         *            Number of characters to write
          * @throws IOException
+         *             when underlying writer object raises.
          */
         @Override
         public void write(@NotNull final char[] cbuf, final int off, final int len) throws IOException {
-            StringBuilder escaped = new StringBuilder();
-            for (int i = off; i < off + len; i++) {
-                char c = cbuf[i];
-                if (c < 4096 && QUOTABLE_TEXT_CHARS[c] != 0) {
-                    switch (c) {
-                    case '<':
-                        escaped.append("&lt;");
+            final int end = off + len;
+            int offset = off;
+            do {
+                int start = offset;
+                String ent = null;
+                for (; offset < end; offset++) {
+                    int c = cbuf[offset];
+                    if (c < 256 && QUOTABLE_TEXT_CHARS[c] != 0) {
+                        if (c == '<') {
+                            ent = "&lt;";
+                            break;
+                        } else if (c == '>') {
+                            ent = "&gt;";
+                            break;
+                        } else if (c == '&') {
+                            ent = "&amp;";
+                            break;
+                        } else {
+                            ent = String.format("&#x%02x;", c);
+                            break;
+                        }
+                    } else if (c >= HIGH_ENC) {
+                        ent = String.format("&#x%04x;", c);
                         break;
-                        case '>':
-                            escaped.append("&gt;");
-                            break;
-                        case '&':
-                            escaped.append("&amp;");
-                            break;
-                        default:
-                            escaped.append(String.format("&#x%02x;", (int) c));
                     }
-                } else if (c >= HIGH_ENC) {
-                    escaped.append(String.format("&#x%04x;", (int) c));
-                } else {
-                    escaped.append(c);
                 }
-            }
-            delegate.write(escaped.toString());
+                int outLen = offset - start;
+                if (outLen > 0) {
+                    delegate.write(cbuf, start, outLen);
+                }
+                if (ent != null) {
+                    delegate.write(ent);
+                }
+            } while (++offset < end);
         }
 
         @Override

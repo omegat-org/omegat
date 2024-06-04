@@ -62,6 +62,7 @@ public class TmxEscapingWriterFactory implements EscapingWriterFactory {
             q['<'] = 1;
             q['>'] = 1;
             q['&'] = 1;
+            q['\r'] = (byte) (Platform.isWindows ? 0 : 1);
             QUOTABLE_TEXT_CHARS = q;
         }
 

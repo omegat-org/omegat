@@ -48,6 +48,11 @@ public class TmxEscapingWriterTest {
         writer = factory.createEscapingWriterFor(outputStream, null);
     }
 
+    /**
+     * Test basic characters, as-is.
+     *
+     * @throws IOException I/O error happened.
+     */
     @Test
     public void escapeBasic() throws IOException {
         writer.write("Hello world!\n");
@@ -55,24 +60,69 @@ public class TmxEscapingWriterTest {
         assertThat(outputStream.toString()).isEqualTo("Hello world!\n");
     }
 
+    /**
+     * Test signs to be escaped.
+     * @throws IOException I/O error happened.
+     */
     @Test
     public void escapeToEntities() throws IOException {
-        writer.write("\"<escape>\"");
+        writer.write("'<escape>\"");
         writer.flush();
-        assertThat(outputStream.toString()).isEqualTo("\"&lt;escape&gt;\"");
+        assertThat(outputStream.toString())
+                .as("Check escape of < & and > signs and as-is for single/double quote")
+                .isEqualTo("'&lt;escape&gt;\"");
     }
 
+    /**
+     * Test escape of NBSP, no-escape.
+     * @throws IOException I/O error happened.
+     */
+    @Test
+    public void testNBSP() throws IOException {
+        writer.write("\u00a0");
+        writer.flush();
+        assertThat(outputStream.toString())
+                .as("Check NBSP is not escaped.")
+                .isEqualTo("\u00a0");
+    }
+
+    /**
+     * Test Control character No-Break-Here, escape.
+     *
+     * @throws IOException I/O error happened.
+     */
+    @Test
+    public void testNBH() throws IOException {
+        writer.write("\u0083");
+        writer.flush();
+        assertThat(outputStream.toString())
+                .as("Check NO_BREAK_HERE control character to be escaped")
+                .isEqualTo("&#x83;");
+    }
+
+    /**
+     * Test emoji and flag, surrogate pair, escape.
+     * @throws IOException I/O error happened.
+     */
     @Test
     public void testSurrogatePair() throws IOException {
         writer.write("\uD83D\uDE00");
         writer.flush();
-        assertThat(outputStream.toString()).isEqualTo("\uD83D\uDE00");
+        assertThat(outputStream.toString())
+                .as("Check emoji and flag that requires surrogate pair for encode.")
+                .isEqualTo("\uD83D\uDE00");
     }
 
+    /**
+     * Test Invalid character, BOM flag, escape.
+     * @throws IOException I/O error happened.
+     */
     @Test
     public void testInvalidChar() throws IOException {
         writer.write((char) 0xFFFE);
         writer.flush();
-        assertThat(outputStream.toString()).isEqualToIgnoringCase("&#xfffe;");
+        assertThat(outputStream.toString())
+                .as("check BOM mark to be escaped when appeared in TEXT.")
+                .isEqualToIgnoringCase("&#xfffe;");
     }
 }

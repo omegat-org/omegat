@@ -79,11 +79,11 @@ public class TmxEscapingWriterTest {
      */
     @Test
     public void testNBSP() throws IOException {
-        writer.write("\u00a0");
+        writer.write("[\u00A0]");
         writer.flush();
         assertThat(outputStream.toString())
                 .as("Check NBSP is not escaped.")
-                .isEqualTo("\u00a0");
+                .isEqualTo("[\u00A0]");
     }
 
     /**
@@ -106,11 +106,11 @@ public class TmxEscapingWriterTest {
      */
     @Test
     public void testSurrogatePair() throws IOException {
-        writer.write("\uD83D\uDE00");
+        writer.write("[😀]");
         writer.flush();
         assertThat(outputStream.toString())
                 .as("Check emoji and flag that requires surrogate pair for encode.")
-                .isEqualTo("\uD83D\uDE00");
+                .isEqualTo("[😀]");
     }
 
     /**

@@ -1,0 +1,40 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    compileOnly(project.rootProject) {
+        exclude group: 'org.apache.lucene'
+        exclude group: 'org.languagetool'
+    }
+    if (providedLibsDir.directory) {
+        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-io-*.jar'])
+        implementation fileTree(dir: providedLibsDir, includes: ['**/lucene-analyzers-common-8*.jar'])
+    } else {
+        compileOnly(libs.commons.io)
+        implementation 'org.apache.lucene:lucene-analyzers-common:8.11.3'
+    }
+    testImplementation(libs.junit4)
+    testImplementation(libs.assertj)
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
+}
+
+jar {
+    archiveAppendix.set("spellchecker")
+    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
+    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    def pluginProp = loadProperties(file('plugin.properties'))
+    manifest {
+        attributes('License': 'GNU Public License version 3 or later',
+                'Implementation-Version': pluginProp.Version,
+                'OmegaT-Plugins': pluginProp.Class,
+                'Plugin-Author': pluginProp.Author,
+                'Plugin-Version': pluginProp.Version,
+                'Plugin-Name': pluginProp.Name,
+                'Plugin-Category': pluginProp.Category,
+                'Plugin-Description': pluginProp.Description
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

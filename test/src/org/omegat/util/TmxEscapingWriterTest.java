@@ -29,16 +29,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class TmxEscapingWriterTest {
 
-    private OutputStream outputStream;
+    private ByteArrayOutputStream outputStream;
     private Writer writer;
 
     @Before
@@ -46,6 +46,10 @@ public class TmxEscapingWriterTest {
         outputStream = new ByteArrayOutputStream();
         var factory = new TmxEscapingWriterFactory();
         writer = factory.createEscapingWriterFor(outputStream, null);
+    }
+
+    private String result() {
+        return outputStream.toString(StandardCharsets.UTF_8);
     }
 
     /**
@@ -57,7 +61,7 @@ public class TmxEscapingWriterTest {
     public void escapeBasic() throws IOException {
         writer.write("Hello world!\n");
         writer.flush();
-        assertThat(outputStream.toString()).isEqualTo("Hello world!\n");
+        assertThat(result()).isEqualTo("Hello world!\n");
     }
 
     /**
@@ -68,7 +72,7 @@ public class TmxEscapingWriterTest {
     public void escapeToEntities() throws IOException {
         writer.write("'<escape>\"");
         writer.flush();
-        assertThat(outputStream.toString())
+        assertThat(result())
                 .as("Check escape of < & and > signs and as-is for single/double quote")
                 .isEqualTo("'&lt;escape&gt;\"");
     }
@@ -81,7 +85,7 @@ public class TmxEscapingWriterTest {
     public void testNBSP() throws IOException {
         writer.write("[\u00A0]");
         writer.flush();
-        assertThat(outputStream.toString())
+        assertThat(result())
                 .as("Check NBSP is not escaped.")
                 .isEqualTo("[\u00A0]");
     }
@@ -95,7 +99,7 @@ public class TmxEscapingWriterTest {
     public void testNBH() throws IOException {
         writer.write("\u0083");
         writer.flush();
-        assertThat(outputStream.toString())
+        assertThat(result())
                 .as("Check NO_BREAK_HERE control character to be escaped")
                 .isEqualTo("&#x83;");
     }
@@ -108,7 +112,7 @@ public class TmxEscapingWriterTest {
     public void testSurrogatePair() throws IOException {
         writer.write("[😀]");
         writer.flush();
-        assertThat(outputStream.toString())
+        assertThat(result())
                 .as("Check emoji and flag that requires surrogate pair for encode.")
                 .isEqualTo("[😀]");
     }
@@ -121,7 +125,7 @@ public class TmxEscapingWriterTest {
     public void testInvalidChar() throws IOException {
         writer.write((char) 0xFFFE);
         writer.flush();
-        assertThat(outputStream.toString())
+        assertThat(result())
                 .as("check BOM mark to be escaped when appeared in TEXT.")
                 .isEqualToIgnoringCase("&#xfffe;");
     }

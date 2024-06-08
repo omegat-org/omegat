@@ -70,6 +70,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
@@ -369,8 +370,11 @@ public class EditorTextArea3 extends JEditorPane {
             //key typed
             // Treat the case of enforced translations which should be locked            
             if (lockListener.isLocked != null) {
+                // If active, prevent modifying the segment. Else, only display locked status
                 Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                return;
+                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                    return;
+                }
             }
             super.processKeyEvent(e);
             return;
@@ -402,7 +406,7 @@ public class EditorTextArea3 extends JEditorPane {
                 processed = true;
             } else if (lockListener.isLocked != null) {
                 // We should not accept any character, including TAB
-                processed = true;
+                processed = Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true);
             }
         } else if (s.equals(KEYSTROKE_PREV)) {
             // Go back when 'Use TAB to advance'
@@ -429,7 +433,9 @@ public class EditorTextArea3 extends JEditorPane {
             // Treat the case of enforced translations which should be locked            
             if (lockListener.isLocked != null) {
                 Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                return;
+                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                    return;
+                }
             }
             // Insert LF
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
@@ -444,7 +450,9 @@ public class EditorTextArea3 extends JEditorPane {
             // Treat the case of enforced translations which should be locked            
             if (lockListener.isLocked != null) {
                 Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                return;
+                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                    return;
+                }
             }
             // Delete previous token
             try {
@@ -466,7 +474,9 @@ public class EditorTextArea3 extends JEditorPane {
             // Treat the case of enforced translations which should be locked            
             if (lockListener.isLocked != null) {
                 Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                return;
+                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                    return;
+                }
             }
             // Delete next token
             try {
@@ -534,7 +544,9 @@ public class EditorTextArea3 extends JEditorPane {
                 if ( ((e.getKeyCode() == KeyEvent.VK_BACK_SPACE) || (e.getKeyCode() == KeyEvent.VK_DELETE)) 
                   || (e.getKeyCode() == KeyEvent.VK_V && ( (e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) > 0) ) ) {
                     Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                    return;
+                    if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                        return;
+                    }
                 }
             }            
             super.processKeyEvent(e);

@@ -758,6 +758,11 @@ public class EditorController implements IEditor {
      */
     public void activateEntry() {
         activateEntry(CaretPosition.startOfEntry());
+
+    }
+
+    public void activateEntryAndGotoOffset(int offset) {
+        activateEntry(CaretPosition.goToCharacterAtIndex(offset));
     }
 
     /**
@@ -996,7 +1001,7 @@ public class EditorController implements IEditor {
      * Go to segment at specified location.
      *
      * @param location
-     *            location
+     *            location relative to the whole document
      * @return true if segment changed, false if location inside current segment
      */
     protected boolean goToSegmentAtLocation(int location) {
@@ -1014,6 +1019,31 @@ public class EditorController implements IEditor {
         } else {
             return false;
         }
+    }
+
+    protected boolean goToSegmentAtLocationAndJumpToOffset(int location, int offset) {
+        // clicked segment
+
+        int segmentAtLocation = getSegmentIndexAtLocation(location);
+        if (segmentAtLocation < 0) {
+            return false;
+        }
+        if (displayedEntryIndex != segmentAtLocation) {
+            commitAndDeactivate();
+            displayedEntryIndex = segmentAtLocation;
+            activateEntryAndGotoOffset(offset);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected int getStartForSegmentWithIndex(int segmentIndex) {
+        if (m_docSegList == null) {
+            return -1;
+        }
+        SegmentBuilder builder = m_docSegList[segmentIndex];
+        return builder.getStartPosition();
     }
 
     protected int getSegmentIndexAtLocation(int location) {

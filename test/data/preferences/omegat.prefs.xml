@@ -205,6 +205,7 @@ ${targetText}
     <wf_insertBestMatch>false</wf_insertBestMatch>
     <wf_allowTransEqualToSrc>true</wf_allowTransEqualToSrc>
     <wf_exportCurrentSegment>false</wf_exportCurrentSegment>
+    <wf_singleClickSegmentActivation>false</wf_singleClickSegmentActivation>
     <wf_stopOnAlternativeTranslation>false</wf_stopOnAlternativeTranslation>
     <wf_convertNumbers>false</wf_convertNumbers>
     <allowTagEditing>false</allowTagEditing>

@@ -1320,7 +1320,8 @@ public final class ProjectUICommands {
      * Open file or parent directory of writeable glossary with OS's standard
      * file manager.
      *
-     * @param parentDirectory true when opening parent folder, otherwise false.
+     * @param parentDirectory
+     *            true when opening parent folder, otherwise false.
      */
     public static void openWritableGlossaryFile(boolean parentDirectory) {
         if (!Core.getProject().isProjectLoaded()) {

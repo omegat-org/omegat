@@ -45,7 +45,7 @@ public class ComesFromAutoTMMarker implements IMarker {
     private final HighlightPainter painterXice;
     private final HighlightPainter painterX100Pc;
     private final HighlightPainter painterXauto;
-    private final HighlightPainter painterXenforced;
+    private final HighlightPainter painterLocked;
 
     public ComesFromAutoTMMarker() {
         painterXice = new TransparentHighlightPainter(
@@ -54,8 +54,8 @@ public class ComesFromAutoTMMarker implements IMarker {
                 Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
         painterXauto = new TransparentHighlightPainter(
                 Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
-        painterXenforced = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
+        painterLocked = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_LOCKED_SEGMENT.getColor(), 0.5F);
     }
 
     @Override
@@ -64,6 +64,7 @@ public class ComesFromAutoTMMarker implements IMarker {
         if (!Core.getEditor().getSettings().isMarkAutoPopulated()) {
             return null;
         }
+        boolean isLocked = false;
         TMXEntry e = Core.getProject().getTranslationInfo(ste);
         if (e == null || e.linked == null) {
             return null;
@@ -80,7 +81,7 @@ public class ComesFromAutoTMMarker implements IMarker {
             m.painter = painterXauto;
             break;
         case xENFORCED:
-            m.painter = painterXenforced;
+            m.painter = painterLocked;
         }
         return Collections.singletonList(m);
     }

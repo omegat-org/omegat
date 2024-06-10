@@ -341,6 +341,8 @@ public class EditorTextArea3 extends JEditorPane {
             for (int i = 0; i < props.length; i++) {
                 if (props[i].equals("LOCKED")) {
                     isLocked = props[i + 1];
+                    // Entries populated via a filter are always with context, as alternative
+                    controller.setAlternateTranslationForCurrentEntry(true);
                 }
             }
             if (isLocked == null) {

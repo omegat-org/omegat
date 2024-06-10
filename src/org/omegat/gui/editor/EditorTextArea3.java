@@ -354,6 +354,9 @@ public class EditorTextArea3 extends JEditorPane {
     };
     private final transient LockListener lockListener = new LockListener();
     
+    public void unlockSegment() {
+        lockListener.isLocked = null;
+    }    
 
     /**
      * Redefine some keys behavior. We can't use key listeners, because we have

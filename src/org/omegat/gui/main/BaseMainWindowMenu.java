@@ -116,6 +116,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     /** MainWindow instance. */
     protected final IMainWindow mainWindow;
 
+    public JMenuBar getMainMenu() {
+        return mainMenu;
+    }
+
     /** menu bar instance */
     protected final JMenuBar mainMenu = new JMenuBar();
 

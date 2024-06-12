@@ -44,10 +44,7 @@ import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 import javax.swing.BorderFactory;
@@ -63,7 +60,6 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.JTextComponent;
@@ -110,7 +106,6 @@ import com.vlsolutions.swing.docking.FloatingDialog;
 @SuppressWarnings("serial")
 public class MainWindow implements IMainWindow {
     private final JFrame applicationFrame;
-    public BaseMainWindowMenu menu;
 
     /**
      * The font for main window (source and target text) and for match and
@@ -127,7 +122,6 @@ public class MainWindow implements IMainWindow {
     public MainWindow() throws IOException {
         applicationFrame = new JFrame();
         applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        initMainMenu();
 
         // load default font from preferences
         font = FontUtil.getScaledFont();
@@ -145,7 +139,7 @@ public class MainWindow implements IMainWindow {
             public void onApplicationStartup() {
                 MainWindowUI.initializeScreenLayout(MainWindow.this);
 
-                UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
+                UIDesignManager.removeUnusedMenuSeparators(Core.getMainMenu().getOptionsMenu().getPopupMenu());
             }
 
             public void onApplicationShutdown() {
@@ -183,54 +177,6 @@ public class MainWindow implements IMainWindow {
        MainWindowUI.resetDesktopLayout(this);
     }
 
-    @SuppressWarnings("unchecked")
-    private void initMainMenu() {
-        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);
-
-        // Load Menu extension
-        Object menuClass = UIManager.get(UIDesignManager.menuClassID);
-        if (menuClass != null) {
-            BaseMainWindowMenu menu1;
-            try {
-                menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
-                        .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                        .newInstance(this, mainWindowMenuHandler);
-            } catch (Exception e) {
-                // fall back to default when loading failed.
-                menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
-            }
-            menu = menu1;
-        } else {
-            // Default menu.
-            menu = new MainWindowMenu(this, mainWindowMenuHandler);
-        }
-        applicationFrame.setJMenuBar(menu.mainMenu);
-
-        applicationFrame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                mainWindowMenuHandler.projectExitMenuItemActionPerformed();
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent we) {
-                Core.getEditor().windowDeactivated();
-            }
-        });
-
-        // Load toolbar extension
-        Object toolbarClass = UIManager.get(UIDesignManager.toolbarClassID);
-        if (toolbarClass != null) {
-            try {
-                applicationFrame.getContentPane()
-                        .add((Component) ((Class<?>) toolbarClass)
-                                .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                                .newInstance(this, mainWindowMenuHandler), BorderLayout.NORTH);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
-                    | NoSuchMethodException ignored) {
-            }
-        }
-    }
-
     /**
      * Create docking desktop panel and status bar.
      */
@@ -265,7 +211,7 @@ public class MainWindow implements IMainWindow {
      * {@inheritDoc}
      */
     public IMainMenu getMainMenu() {
-        return menu;
+        return Core.getMainMenu();
     }
 
     /**

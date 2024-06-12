@@ -105,7 +105,9 @@ import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.DockablePanel;
+import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.MainWindowStatusBar;
 import org.omegat.gui.main.ProjectUICommands;
@@ -857,10 +859,14 @@ public class EditorController implements IEditor {
 
     private void setMenuEnabled() {
         // update history menu items
-        mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
-        mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
-        mw.menu.editMultipleDefault.setEnabled(!m_docSegList[displayedEntryIndex].isDefaultTranslation());
-        mw.menu.editMultipleAlternate.setEnabled(m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        IMainMenu menu = Core.getMainWindow().getMainMenu();
+        if (menu instanceof BaseMainWindowMenu) {
+            BaseMainWindowMenu mainMenu = (BaseMainWindowMenu) menu;
+            mainMenu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
+            mainMenu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
+            mainMenu.editMultipleDefault.setEnabled(!m_docSegList[displayedEntryIndex].isDefaultTranslation());
+            mainMenu.editMultipleAlternate.setEnabled(m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        }
     }
 
     /**

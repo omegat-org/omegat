@@ -137,7 +137,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         Log.logInfoRB("LOG_MENU_CLICK", action);
 
-        invokeAction(action, evt.getModifiers());
+        invokeAction(action, evt, evt.getModifiers());
     }
 
     /**
@@ -704,22 +704,47 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      */
     @Override
     public void invokeAction(String action, int modifiers) {
+        invokeAction(action, null, modifiers);
+    }
+
+    public void invokeAction(String action, ActionEvent evt, int modifiers) {
         // Find method by item name.
         String methodName = action + "ActionPerformed";
-        Method method = null;
+        Method method;
+        int type = 0;
         try {
             method = mainWindowMenuHandler.getClass().getMethod(methodName);
+            type = 0;
         } catch (NoSuchMethodException ignore) {
             try {
                 method = mainWindowMenuHandler.getClass().getMethod(methodName, Integer.TYPE);
-            } catch (NoSuchMethodException ex) {
-                throw new IncompatibleClassChangeError(
-                        "Error invoke method handler for main menu: there is no method " + methodName);
+                type = 1;
+            } catch (NoSuchMethodException ignored) {
+                try {
+                    method = mainWindowMenuHandler.getClass().getMethod(methodName, ActionEvent.class);
+                    type = 2;
+                } catch (NoSuchMethodException ex) {
+                    throw new IncompatibleClassChangeError(
+                            "Error invoke method handler for main menu: there is no method " + methodName);
+                }
             }
         }
 
         // Call ...MenuItemActionPerformed method.
-        Object[] args = method.getParameterTypes().length == 0 ? null : new Object[] { modifiers };
+        Object[] args;
+        switch (type) {
+            case 0:
+                args = null;
+                break;
+            case 1:
+                args = new Object[] { modifiers };
+                break;
+            case 2:
+                args = new Object[] { evt };
+                break;
+            default:
+                throw new RuntimeException("Unknown status");
+        }
         try {
             method.invoke(mainWindowMenuHandler, args);
         } catch (IllegalAccessException ex) {

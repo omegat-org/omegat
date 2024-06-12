@@ -111,21 +111,18 @@ public final class Core {
 
     private static IProject currentProject;
     private static IMainWindow mainWindow;
-    protected static IEditor editor;
+    private static IEditor editor;
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
-
-    protected static IAutoSave saveThread;
+    private static IAutoSave saveThread;
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
-
-    protected static IGlossaries glossary;
+    private static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
-    @SuppressWarnings("unused")
     private static MultipleTransPane multiple;
     private static INotes notes;
     private static IComments comments;
@@ -135,7 +132,7 @@ public final class Core {
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections
-            .synchronizedList(new ArrayList<String>());
+            .synchronizedList(new ArrayList<>());
 
     private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
 
@@ -367,7 +364,7 @@ public final class Core {
     /**
      * Set main window instance for unit tests.
      *
-     * @param mainWindow
+     * @param mainWindow IMainWindow object.
      */
     protected static void setMainWindow(IMainWindow mainWindow) {
         Core.mainWindow = mainWindow;
@@ -472,6 +469,26 @@ public final class Core {
     }
 
     private static StackTraceElement[] runningStackTrace;
+
+    static MultipleTransPane getMultiple() {
+        return multiple;
+    }
+
+    /**
+     * For test.
+     * @param newEditor editor controller for test.
+     */
+    static void setEditor(IEditor newEditor) {
+        editor = newEditor;
+    }
+
+    static void setSaveThread(final IAutoSave autoSave) {
+        saveThread = autoSave;
+    }
+
+    static void setGlossary(IGlossaries glossary) {
+        Core.glossary = glossary;
+    }
 
     public interface RunnableWithException {
         void run() throws Exception;

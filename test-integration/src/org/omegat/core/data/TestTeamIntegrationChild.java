@@ -678,6 +678,10 @@ public final class TestTeamIntegrationChild {
             return null;
         }
 
+        @Override
+        public void resetDesktopLayout() {
+        }
+
         public Cursor getCursor() {
             return null;
         }

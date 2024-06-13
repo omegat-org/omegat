@@ -988,7 +988,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * defaults.
      */
     public void viewRestoreGUIMenuItemActionPerformed() {
-        MainWindowUI.resetDesktopLayout(mainWindow);
+        Core.getMainWindow().resetDesktopLayout();
     }
 
     public void optionsAccessConfigDirMenuItemActionPerformed() {

@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,6 +73,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.TestPreferencesInitializer;
 
@@ -409,8 +411,10 @@ public final class TestTeamIntegration {
             if (!new File(DIR + "/" + source + "/omegat/").mkdirs()) {
                 throw new Exception("Impossible to create test dir");
             }
+            // Get `java` command path from java.home
+            Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
             List<String> cmd = new ArrayList<>();
-            cmd.add("java");
+            cmd.add(javaBin.toString());
             cmd.add("-Duser.name=" + source);
             if (logConfig != null) {
                 cmd.add("-Djava.util.logging.config.file=" + logConfig);

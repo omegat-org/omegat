@@ -291,4 +291,8 @@ class TestMainWindow implements IMainWindow {
         return desktop;
     }
 
+    @Override
+    public void resetDesktopLayout() {
+    }
+
 }

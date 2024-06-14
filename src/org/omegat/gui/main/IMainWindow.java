@@ -204,4 +204,9 @@ public interface IMainWindow {
      * Retrieve main docking desktop.
      */
     DockingDesktop getDesktop();
+
+    /**
+     * Restores the main window layout to the default values.
+     */
+    default void resetDesktopLayout() {}
 }

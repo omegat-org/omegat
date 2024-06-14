@@ -274,6 +274,10 @@ public abstract class TestCore {
                 return null;
             }
 
+            @Override
+            public void resetDesktopLayout() {
+            }
+
             public Cursor getCursor() {
                 return null;
             }

@@ -142,6 +142,10 @@ public class ConsoleWindow implements IMainWindow {
         return null;
     }
 
+    @Override
+    public void resetDesktopLayout() {
+    }
+
     public Cursor getCursor() {
         return Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
     }

@@ -176,6 +176,13 @@ public class MainWindow implements IMainWindow {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public void resetDesktopLayout() {
+       MainWindowUI.resetDesktopLayout(this);
+    }
+
     @SuppressWarnings("unchecked")
     private void initMainMenu() {
         MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(this);

@@ -26,11 +26,6 @@
 
 package org.omegat.core;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,8 +33,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
-
-import javax.swing.UIManager;
 
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -77,8 +70,7 @@ import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowMenu;
-import org.omegat.gui.main.MainWindowMenuHandler;
+import org.omegat.gui.main.MainWindowUI;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.multtrans.MultipleTransPane;
@@ -265,8 +257,10 @@ public final class Core {
         MainWindow me = new MainWindow();
         mainWindow = me;
 
+        // 4. initialize rests of UI parts.
         initializeGUIimpl(me);
 
+        // 5. start threads.
         SaveThread th = new SaveThread();
         saveThread = th;
         th.start();
@@ -279,10 +273,14 @@ public final class Core {
      * @throws Exception
      */
     static void initializeGUIimpl(MainWindow me) throws Exception {
-        initMainMenu(me);
+        // 1. initialize main menu.
+        menu = MainWindowUI.initMainMenu(me);
+
+        // 2. initialize markers.
         MarkerController.init();
         LanguageToolWrapper.init();
 
+        // 3. initialize segmenter and filters.
         segmenter = new Segmenter(Preferences.getSRX());
         filterMaster = new FilterMaster(Preferences.getFilters());
 
@@ -311,54 +309,6 @@ public final class Core {
         tagValidation = new TagValidationTool();
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
-    }
-
-    @SuppressWarnings("unchecked")
-    private static void initMainMenu(MainWindow mw) {
-        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(mw);
-
-        // Load Menu extension
-        Object menuClass = UIManager.get(UIDesignManager.menuClassID);
-        if (menuClass != null) {
-            BaseMainWindowMenu menu1;
-            try {
-                menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
-                        .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                        .newInstance(mw, mainWindowMenuHandler);
-            } catch (Exception e) {
-                // fall back to default when loading failed.
-                menu1 = new MainWindowMenu(mw, mainWindowMenuHandler);
-            }
-            menu = menu1;
-        } else {
-            // Default menu.
-            menu = new MainWindowMenu(mw, mainWindowMenuHandler);
-        }
-        mw.getApplicationFrame().setJMenuBar(menu.getMainMenu());
-
-        mw.getApplicationFrame().addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                mainWindowMenuHandler.projectExitMenuItemActionPerformed();
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent we) {
-                Core.getEditor().windowDeactivated();
-            }
-        });
-
-        // Load toolbar extension
-        Object toolbarClass = UIManager.get(UIDesignManager.toolbarClassID);
-        if (toolbarClass != null) {
-            try {
-                mw.getApplicationFrame().getContentPane()
-                        .add((Component) ((Class<?>) toolbarClass)
-                                .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
-                                .newInstance(mw, mainWindowMenuHandler), BorderLayout.NORTH);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
-                     | NoSuchMethodException ignored) {
-            }
-        }
     }
 
     /**

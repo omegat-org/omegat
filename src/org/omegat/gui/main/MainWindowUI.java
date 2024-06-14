@@ -31,6 +31,8 @@
 
 package org.omegat.gui.main;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
@@ -40,8 +42,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.UIManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -99,6 +104,56 @@ public final class MainWindowUI {
         });
 
         return mainWindow.desktop;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static BaseMainWindowMenu initMainMenu(MainWindow mw) {
+        BaseMainWindowMenu menu;
+        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(mw);
+
+        // Load Menu extension
+        Object menuClass = UIManager.get(UIDesignManager.menuClassID);
+        if (menuClass != null) {
+            BaseMainWindowMenu menu1;
+            try {
+                menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
+                        .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
+                        .newInstance(mw, mainWindowMenuHandler);
+            } catch (Exception e) {
+                // fall back to default when loading failed.
+                menu1 = new MainWindowMenu(mw, mainWindowMenuHandler);
+            }
+            menu = menu1;
+        } else {
+            // Default menu.
+            menu = new MainWindowMenu(mw, mainWindowMenuHandler);
+        }
+        mw.getApplicationFrame().setJMenuBar(menu.getMainMenu());
+
+        mw.getApplicationFrame().addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                mainWindowMenuHandler.projectExitMenuItemActionPerformed();
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+                Core.getEditor().windowDeactivated();
+            }
+        });
+
+        // Load toolbar extension
+        Object toolbarClass = UIManager.get(UIDesignManager.toolbarClassID);
+        if (toolbarClass != null) {
+            try {
+                mw.getApplicationFrame().getContentPane()
+                        .add((Component) ((Class<?>) toolbarClass)
+                                .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
+                                .newInstance(mw, mainWindowMenuHandler), BorderLayout.NORTH);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException
+                     | NoSuchMethodException ignored) {
+            }
+        }
+        return menu;
     }
 
     /**

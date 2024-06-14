@@ -73,7 +73,6 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.TestPreferencesInitializer;
 

@@ -34,8 +34,6 @@ package org.omegat.gui.matches;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -590,7 +588,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 for (int i = 0; i < m.projs.length; i++) {
                     String proj = m.projs[i];
                     StringBuilder b = new StringBuilder();
-                    if (proj.equals("")) {
+                    if (proj.isEmpty()) {
                         b.append(OStrings.getString("MATCHES_THIS_PROJECT"));
                     } else {
                         b.append(proj);
@@ -605,33 +603,30 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
-        item.addActionListener(new ActionListener() {
-            // the action: insert this match
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (StringUtil.isEmpty(getSelectedText())) {
-                    setActiveMatch(index);
-                }
-                Core.getMainWindow().getMainMenu().invokeAction("editInsertTranslationMenuItem", 0);
+        item.setActionCommand("editInsertTranslationMenuItem");
+        // the action: insert this match
+        item.addActionListener(e -> {
+            if (StringUtil.isEmpty(getSelectedText())) {
+                setActiveMatch(index);
             }
+            Core.getMainWindow().getMainMenu().invokeAction(e);
         });
         item.setEnabled(hasMatches);
 
         item = popup.add(OStrings.getString("MATCHES_REPLACE"));
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (StringUtil.isEmpty(getSelectedText())) {
-                    setActiveMatch(index);
-                }
-                Core.getMainWindow().getMainMenu().invokeAction("editOverwriteTranslationMenuItem", 0);
+        item.setActionCommand("editOverwriteTranslationMenuItem");
+        item.addActionListener(e -> {
+            if (StringUtil.isEmpty(getSelectedText())) {
+                setActiveMatch(index);
             }
+            Core.getMainWindow().getMainMenu().invokeAction(e);
         });
         item.setEnabled(hasMatches);
 
         popup.addSeparator();
 
         item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
+        item.setActionCommand("goToSegmentSourceMenuItem");
         item.setEnabled(hasMatches);
 
         if (hasMatches) {
@@ -639,12 +634,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             String proj = ns.projs[0];
 
             if (StringUtil.isEmpty(proj)) {
-                item.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        Core.getEditor().gotoEntry(ns.source, ns.key);
-                    }
-                });
+                item.addActionListener(e -> Core.getEditor().gotoEntry(ns.source, ns.key));
             } else {
                 item.setEnabled(false);
             }

@@ -15,6 +15,7 @@
                2015 Yu Tang, Aaron Madlon-Kay, Didier Briel
                2017 Didier Briel
                2019 Thomas Cordonnier
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -119,75 +120,75 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     /**
      * Create new project.
      */
-    public void projectNewMenuItemActionPerformed() {
+    public void projectNewMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectCreate();
     }
 
     /**
      * Create new team project.
      */
-    public void projectTeamNewMenuItemActionPerformed() {
+    public void projectTeamNewMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectTeamCreate();
     }
 
     /**
      * Open project.
      */
-    public void projectOpenMenuItemActionPerformed() {
+    public void projectOpenMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectOpen(null);
     }
 
-    public void projectClearRecentMenuItemActionPerformed() {
+    public void projectClearRecentMenuItemActionPerformed(ActionEvent evt) {
         RecentProjects.clear();
     }
 
     /**
      * Open MED project.
      */
-    public void projectMedOpenMenuItemActionPerformed() {
+    public void projectMedOpenMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectOpenMED();
     }
 
     /**
      * Create MED project.
      */
-    public void projectMedCreateMenuItemActionPerformed() {
+    public void projectMedCreateMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectCreateMED();
     }
 
     /**
      * Imports the file/files/folder into project's source files.
      */
-    public void projectImportMenuItemActionPerformed() {
+    public void projectImportMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.doPromptImportSourceFiles();
     }
 
-    public void projectWikiImportMenuItemActionPerformed() {
+    public void projectWikiImportMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.doWikiImport();
     }
 
-    public void projectReloadMenuItemActionPerformed() {
+    public void projectReloadMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectReload();
     }
 
     /**
      * Close project.
      */
-    public void projectCloseMenuItemActionPerformed() {
+    public void projectCloseMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectClose();
     }
 
     /**
      * Save project.
      */
-    public void projectSaveMenuItemActionPerformed() {
+    public void projectSaveMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectSave();
     }
 
     /**
      * Create translated documents.
      */
-    public void projectCompileMenuItemActionPerformed() {
+    public void projectCompileMenuItemActionPerformed(ActionEvent evt) {
         if (!checkTags()) {
             return;
         }
@@ -197,6 +198,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     /**
      * Check whether tags are OK
+     * 
      * @return false is there is a tag issue, true otherwise
      */
     private boolean checkTags() {
@@ -210,9 +212,9 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         return true;
     }
 
-    public void projectCommitTargetFilesActionPerformed() {
+    public void projectCommitTargetFilesActionPerformed(ActionEvent evt) {
         if (!checkTags()) {
-                return;
+            return;
         }
 
         ProjectUICommands.projectCompileAndCommit();
@@ -221,14 +223,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     /**
      * Commit source files
      */
-    public void projectCommitSourceFilesActionPerformed() {
+    public void projectCommitSourceFilesActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectCommitSourceFiles();
     }
 
     /**
      * Create current translated document.
      */
-    public void projectSingleCompileMenuItemActionPerformed() {
+    public void projectSingleCompileMenuItemActionPerformed(ActionEvent evt) {
         String midName = Core.getEditor().getCurrentFile();
         if (StringUtil.isEmpty(midName)) {
             return;
@@ -247,7 +249,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /** Edits project's properties */
-    public void projectEditMenuItemActionPerformed() {
+    public void projectEditMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectEditProperties();
     }
 
@@ -263,7 +265,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         projWin.setActive(!projWin.isActive());
     }
 
-    public void projectAccessRootMenuItemActionPerformed() {
+    public void projectAccessRootMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -271,7 +273,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         openFile(new File(path));
     }
 
-    public void projectAccessDictionaryMenuItemActionPerformed() {
+    public void projectAccessDictionaryMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -279,7 +281,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         openFile(new File(path));
     }
 
-    public void projectAccessGlossaryMenuItemActionPerformed() {
+    public void projectAccessGlossaryMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -287,7 +289,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         openFile(new File(path));
     }
 
-    public void projectAccessSourceMenuItemActionPerformed() {
+    public void projectAccessSourceMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -295,7 +297,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         openFile(new File(path));
     }
 
-    public void projectAccessTargetMenuItemActionPerformed() {
+    public void projectAccessTargetMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -303,7 +305,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         openFile(new File(path));
     }
 
-    public void projectAccessTMMenuItemActionPerformed() {
+    public void projectAccessTMMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -311,7 +313,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         openFile(new File(path));
     }
 
-    public void projectAccessExportTMMenuItemActionPerformed() {
+    public void projectAccessExportTMMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -319,7 +321,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         openFile(new File(path));
     }
 
-    public void projectAccessCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
+    public void projectAccessCurrentSourceDocumentMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -329,13 +331,13 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & ActionEvent.ALT_MASK) != 0) {
+        if ((evt.getModifiers() & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
     }
 
-    public void projectAccessCurrentTargetDocumentMenuItemActionPerformed(int modifier) {
+    public void projectAccessCurrentTargetDocumentMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -345,13 +347,13 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         File toOpen = new File(root, path);
-        if ((modifier & ActionEvent.ALT_MASK) != 0) {
+        if ((evt.getModifiers() & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
     }
 
-    public void projectAccessWriteableGlossaryMenuItemActionPerformed(int modifier) {
+    public void projectAccessWriteableGlossaryMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -360,7 +362,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         File toOpen = new File(path);
-        if ((modifier & ActionEvent.ALT_MASK) != 0) {
+        if ((evt.getModifiers() & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
         openFile(toOpen);
@@ -368,7 +370,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     private void openFile(File path) {
         try {
-            path = path.getCanonicalFile(); // Normalize file name in case it is displayed
+            path = path.getCanonicalFile(); // Normalize file name in case it is
+                                            // displayed
         } catch (Exception ex) {
             // Ignore
         }
@@ -385,12 +388,12 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /** Quits OmegaT */
-    public void projectExitMenuItemActionPerformed() {
+    public void projectExitMenuItemActionPerformed(ActionEvent evt) {
         prepareForExit(() -> System.exit(0));
     }
 
     /** Restart OmegaT */
-    public void projectRestartMenuItemActionPerformed() {
+    public void projectRestartMenuItemActionPerformed(ActionEvent evt) {
         String projectDir = Core.getProject().isProjectLoaded()
                 ? Core.getProject().getProjectProperties().getProjectRoot()
                 : null;
@@ -399,9 +402,10 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         });
     }
 
-    protected void prepareForExit(Runnable onCompletion) {
+    private void prepareForExit(Runnable onCompletion) {
         // Bug #902: commit the current entry first
-        // We do it before checking project status, so that it can eventually change it
+        // We do it before checking project status, so that it can eventually
+        // change it
         if (Core.getProject().isProjectLoaded()) {
             Core.getEditor().commitAndLeave();
         }
@@ -464,7 +468,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }.execute();
     }
 
-    public void editUndoMenuItemActionPerformed() {
+    public void editUndoMenuItemActionPerformed(ActionEvent evt) {
         Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
         if (focused == Core.getNotes()) {
             Core.getNotes().undo();
@@ -473,7 +477,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
     }
 
-    public void editRedoMenuItemActionPerformed() {
+    public void editRedoMenuItemActionPerformed(ActionEvent evt) {
         Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
         if (focused == Core.getNotes()) {
             Core.getNotes().redo();
@@ -482,15 +486,15 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
     }
 
-    public void editOverwriteTranslationMenuItemActionPerformed() {
+    public void editOverwriteTranslationMenuItemActionPerformed(ActionEvent evt) {
         MainWindow.doRecycleTrans();
     }
 
-    public void editInsertTranslationMenuItemActionPerformed() {
+    public void editInsertTranslationMenuItemActionPerformed(ActionEvent evt) {
         MainWindow.doInsertTrans();
     }
 
-    public void editOverwriteMachineTranslationMenuItemActionPerformed() {
+    public void editOverwriteMachineTranslationMenuItemActionPerformed(ActionEvent evt) {
         MachineTranslationInfo tr = Core.getMachineTranslatePane().getDisplayedTranslation();
         if (tr == null) {
             Core.getMachineTranslatePane().forceLoad();
@@ -500,9 +504,10 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * replaces entire edited segment text with a the source text of a segment at cursor position
+     * replaces entire edited segment text with a the source text of a segment
+     * at cursor position
      */
-    public void editOverwriteSourceMenuItemActionPerformed() {
+    public void editOverwriteSourceMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -514,7 +519,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /** inserts the source text of a segment at cursor position */
-    public void editInsertSourceMenuItemActionPerformed() {
+    public void editInsertSourceMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -526,14 +531,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /** select the source text of the current segment */
-    public void editSelectSourceMenuItemActionPerformed() {
+    public void editSelectSourceMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
         Core.getEditor().selectSourceText();
     }
 
-    public void editExportSelectionMenuItemActionPerformed() {
+    public void editExportSelectionMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -550,7 +555,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         SegmentExportImport.exportCurrentSelection(selection);
     }
 
-    public void editSearchDictionaryMenuItemActionPerformed() {
+    public void editSearchDictionaryMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -562,14 +567,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         Core.getDictionaries().searchText(selection);
     }
 
-    public void editCreateGlossaryEntryMenuItemActionPerformed() {
+    public void editCreateGlossaryEntryMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
         Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
 
-    public void editFindInProjectMenuItemActionPerformed() {
+    public void editFindInProjectMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -587,7 +592,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         editFindInProjectMenuItemActionPerformed();
     }
 
-    public void editReplaceInProjectMenuItemActionPerformed() {
+    public void editReplaceInProjectMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
@@ -608,161 +613,161 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /** Set active match to #1. */
-    public void editSelectFuzzy1MenuItemActionPerformed() {
+    public void editSelectFuzzy1MenuItemActionPerformed(ActionEvent evt) {
         Core.getMatcher().setActiveMatch(0);
     }
 
     /** Set active match to #2. */
-    public void editSelectFuzzy2MenuItemActionPerformed() {
+    public void editSelectFuzzy2MenuItemActionPerformed(ActionEvent evt) {
         Core.getMatcher().setActiveMatch(1);
     }
 
     /** Set active match to #3. */
-    public void editSelectFuzzy3MenuItemActionPerformed() {
+    public void editSelectFuzzy3MenuItemActionPerformed(ActionEvent evt) {
         Core.getMatcher().setActiveMatch(2);
     }
 
     /** Set active match to #4. */
-    public void editSelectFuzzy4MenuItemActionPerformed() {
+    public void editSelectFuzzy4MenuItemActionPerformed(ActionEvent evt) {
         Core.getMatcher().setActiveMatch(3);
     }
 
     /** Set active match to #5. */
-    public void editSelectFuzzy5MenuItemActionPerformed() {
+    public void editSelectFuzzy5MenuItemActionPerformed(ActionEvent evt) {
         Core.getMatcher().setActiveMatch(4);
     }
 
     /** Set active match to the next one */
-    public void editSelectFuzzyNextMenuItemActionPerformed() {
+    public void editSelectFuzzyNextMenuItemActionPerformed(ActionEvent evt) {
         Core.getMatcher().setNextActiveMatch();
     }
 
     /** Set active match to the previous one */
-    public void editSelectFuzzyPrevMenuItemActionPerformed() {
+    public void editSelectFuzzyPrevMenuItemActionPerformed(ActionEvent evt) {
         Core.getMatcher().setPrevActiveMatch();
     }
 
-    public void insertCharsLRMActionPerformed() {
+    public void insertCharsLRMActionPerformed(ActionEvent evt) {
         Core.getEditor().insertText("\u200E");
     }
 
-    public void insertCharsRLMActionPerformed() {
+    public void insertCharsRLMActionPerformed(ActionEvent evt) {
         Core.getEditor().insertText("\u200F");
     }
 
-    public void insertCharsLREActionPerformed() {
+    public void insertCharsLREActionPerformed(ActionEvent evt) {
         Core.getEditor().insertText("\u202A");
     }
 
-    public void insertCharsRLEActionPerformed() {
+    public void insertCharsRLEActionPerformed(ActionEvent evt) {
         Core.getEditor().insertText("\u202B");
     }
 
-    public void insertCharsPDFActionPerformed() {
+    public void insertCharsPDFActionPerformed(ActionEvent evt) {
         Core.getEditor().insertText("\u202C");
     }
 
-    public void editMultipleDefaultActionPerformed() {
+    public void editMultipleDefaultActionPerformed(ActionEvent evt) {
         Core.getEditor().setAlternateTranslationForCurrentEntry(false);
     }
 
-    public void editMultipleAlternateActionPerformed() {
+    public void editMultipleAlternateActionPerformed(ActionEvent evt) {
         Core.getEditor().setAlternateTranslationForCurrentEntry(true);
     }
 
-    public void editRegisterUntranslatedMenuItemActionPerformed() {
+    public void editRegisterUntranslatedMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().registerUntranslated();
     }
 
-    public void editRegisterEmptyMenuItemActionPerformed() {
+    public void editRegisterEmptyMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().registerEmptyTranslation();
     }
 
-    public void editRegisterIdenticalMenuItemActionPerformed() {
+    public void editRegisterIdenticalMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().registerIdenticalTranslation();
     }
 
-    public void optionsPreferencesMenuItemActionPerformed() {
+    public void optionsPreferencesMenuItemActionPerformed(ActionEvent evt) {
         PreferencesWindowController pwc = new PreferencesWindowController();
         pwc.show(Core.getMainWindow().getApplicationFrame());
     }
 
-    public void cycleSwitchCaseMenuItemActionPerformed() {
+    public void cycleSwitchCaseMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
     }
 
-    public void sentenceCaseMenuItemActionPerformed() {
+    public void sentenceCaseMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.SENTENCE);
     }
 
-    public void titleCaseMenuItemActionPerformed() {
+    public void titleCaseMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.TITLE);
     }
 
-    public void upperCaseMenuItemActionPerformed() {
+    public void upperCaseMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.UPPER);
     }
 
-    public void lowerCaseMenuItemActionPerformed() {
+    public void lowerCaseMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.LOWER);
     }
 
-    public void gotoNextUntranslatedMenuItemActionPerformed() {
+    public void gotoNextUntranslatedMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().nextUntranslatedEntry();
     }
 
-    public void gotoNextUniqueMenuItemActionPerformed() {
+    public void gotoNextUniqueMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().nextUniqueEntry();
     }
 
-    public void gotoNextTranslatedMenuItemActionPerformed() {
+    public void gotoNextTranslatedMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().nextTranslatedEntry();
     }
 
-    public void gotoNextSegmentMenuItemActionPerformed() {
+    public void gotoNextSegmentMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().nextEntry();
     }
 
-    public void gotoPreviousSegmentMenuItemActionPerformed() {
+    public void gotoPreviousSegmentMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().prevEntry();
     }
 
-    public void gotoNextXAutoMenuItemActionPerformed() {
+    public void gotoNextXAutoMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().nextXAutoEntry();
     }
 
-    public void gotoPrevXAutoMenuItemActionPerformed() {
+    public void gotoPrevXAutoMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().prevXAutoEntry();
     }
 
-    public void gotoNextXEnforcedMenuItemActionPerformed() {
+    public void gotoNextXEnforcedMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().nextXEnforcedEntry();
     }
 
-    public void gotoPrevXEnforcedMenuItemActionPerformed() {
+    public void gotoPrevXEnforcedMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().prevXEnforcedEntry();
     }
 
-    public void gotoNextNoteMenuItemActionPerformed() {
+    public void gotoNextNoteMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().nextEntryWithNote();
     }
 
-    public void gotoPreviousNoteMenuItemActionPerformed() {
+    public void gotoPreviousNoteMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().prevEntryWithNote();
     }
 
-    public void gotoNotesPanelMenuItemActionPerformed() {
+    public void gotoNotesPanelMenuItemActionPerformed(ActionEvent evt) {
         Core.getNotes().requestFocus();
     }
 
-    public void gotoEditorPanelMenuItemActionPerformed() {
+    public void gotoEditorPanelMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().requestFocus();
     }
 
     /**
      * Asks the user for a segment number and then displays the segment.
      */
-    public void gotoSegmentMenuItemActionPerformed() {
+    public void gotoSegmentMenuItemActionPerformed(ActionEvent evt) {
         // Create a dialog for input
         GoToSegmentDialog dialog = new GoToSegmentDialog(Core.getMainWindow().getApplicationFrame());
         dialog.setVisible(true);
@@ -774,15 +779,15 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
     }
 
-    public void gotoHistoryBackMenuItemActionPerformed() {
+    public void gotoHistoryBackMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().gotoHistoryBack();
     }
 
-    public void gotoHistoryForwardMenuItemActionPerformed() {
+    public void gotoHistoryForwardMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().gotoHistoryForward();
     }
 
-    public void gotoMatchSourceSegmentActionPerformed() {
+    public void gotoMatchSourceSegmentActionPerformed(ActionEvent evt) {
         NearString ns = Core.getMatcher().getActiveMatch();
         if (ns != null && ns.comesFrom == MATCH_SOURCE.MEMORY) {
             Core.getEditor().gotoEntry(ns.source, ns.key);
@@ -806,7 +811,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     public void viewMarkParagraphStartCheckBoxMenuItemActionPerformed(ActionEvent evt) {
         Object o = evt.getSource();
         if (o instanceof JCheckBoxMenuItem) {
-            Core.getEditor().getSettings().setMarkParagraphDelimitations(((JCheckBoxMenuItem) o).isSelected());
+            Core.getEditor().getSettings()
+                    .setMarkParagraphDelimitations(((JCheckBoxMenuItem) o).isSelected());
         }
     }
 
@@ -880,22 +886,22 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
     }
 
-    public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
+    public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().getSettings()
                 .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);
     }
 
-    public void viewDisplayModificationInfoSelectedRadioButtonMenuItemActionPerformed() {
+    public void viewDisplayModificationInfoSelectedRadioButtonMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().getSettings()
                 .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED);
     }
 
-    public void viewDisplayModificationInfoAllRadioButtonMenuItemActionPerformed() {
+    public void viewDisplayModificationInfoAllRadioButtonMenuItemActionPerformed(ActionEvent evt) {
         Core.getEditor().getSettings()
                 .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL);
     }
 
-    public void toolsCheckIssuesMenuItemActionPerformed() {
+    public void toolsCheckIssuesMenuItemActionPerformed(ActionEvent evt) {
         if (!Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK)) {
             IssueProvidersSelectorController dialog = new IssueProvidersSelectorController();
             if (!dialog.show(Core.getMainWindow().getApplicationFrame())) {
@@ -905,21 +911,22 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         Core.getIssues().showAll();
     }
 
-    public void toolsCheckIssuesCurrentFileMenuItemActionPerformed() {
+    public void toolsCheckIssuesCurrentFileMenuItemActionPerformed(ActionEvent evt) {
         Core.getIssues().showForFiles(Pattern.quote(Core.getEditor().getCurrentFile()));
     }
 
     /**
-     * Identify all the placeholders in the source text and automatically inserts them into the target text.
+     * Identify all the placeholders in the source text and automatically
+     * inserts them into the target text.
      */
-    public void editTagPainterMenuItemActionPerformed() {
+    public void editTagPainterMenuItemActionPerformed(ActionEvent evt) {
         // insert tags
         for (Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
             Core.getEditor().insertTag(tag.tag);
         }
     }
 
-    public void editTagNextMissedMenuItemActionPerformed() {
+    public void editTagNextMissedMenuItemActionPerformed(ActionEvent evt) {
         // insert next tag
         List<Tag> tags = TagUtil.getAllTagsMissingFromTarget();
         if (tags.isEmpty()) {
@@ -928,19 +935,19 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         Core.getEditor().insertTag(tags.get(0).tag);
     }
 
-    public void toolsShowStatisticsStandardMenuItemActionPerformed() {
+    public void toolsShowStatisticsStandardMenuItemActionPerformed(ActionEvent evt) {
         new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.STANDARD)
                 .setVisible(true);
     }
 
-    public void toolsShowStatisticsMatchesMenuItemActionPerformed() {
+    public void toolsShowStatisticsMatchesMenuItemActionPerformed(ActionEvent evt) {
         new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES)
                 .setVisible(true);
     }
 
-    public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed() {
-        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE)
-                .setVisible(true);
+    public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed(ActionEvent evt) {
+        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
+                StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
     }
 
     public void optionsAutoCompleteShowAutomaticallyItemActionPerformed(ActionEvent evt) {
@@ -954,14 +961,16 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     public void optionsAutoCompleteHistoryCompletionMenuItemActionPerformed(ActionEvent evt) {
         Object o = evt.getSource();
         if (o instanceof JCheckBoxMenuItem) {
-            Preferences.setPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED, ((JCheckBoxMenuItem) o).isSelected());
+            Preferences.setPreference(Preferences.AC_HISTORY_COMPLETION_ENABLED,
+                    ((JCheckBoxMenuItem) o).isSelected());
         }
     }
 
     public void optionsAutoCompleteHistoryPredictionMenuItemActionPerformed(ActionEvent evt) {
         Object o = evt.getSource();
         if (o instanceof JCheckBoxMenuItem) {
-            Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED, ((JCheckBoxMenuItem) o).isSelected());
+            Preferences.setPreference(Preferences.AC_HISTORY_PREDICTION_ENABLED,
+                    ((JCheckBoxMenuItem) o).isSelected());
         }
     }
 
@@ -983,55 +992,61 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     public void optionsDictionaryFuzzyMatchingCheckBoxMenuItemActionPerformed(ActionEvent evt) {
         Object o = evt.getSource();
         if (o instanceof JCheckBoxMenuItem) {
-            Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING, ((JCheckBoxMenuItem) o).isSelected());
+            Preferences.setPreference(Preferences.DICTIONARY_FUZZY_MATCHING,
+                    ((JCheckBoxMenuItem) o).isSelected());
             Preferences.save();
         }
     }
 
     /**
-     * Displays the filters setup dialog to allow customizing file filters in detail.
+     * Displays the filters setup dialog to allow customizing file filters in
+     * detail.
      */
-    public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), FiltersCustomizerController.class);
+    public void optionsSetupFileFiltersMenuItemActionPerformed(ActionEvent evt) {
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
+                FiltersCustomizerController.class);
     }
 
     /**
-     * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
+     * Displays the segmentation setup dialog to allow customizing the
+     * segmentation rules in detail.
      */
-    public void optionsSentsegMenuItemActionPerformed() {
-        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), SegmentationCustomizerController.class);
+    public void optionsSentsegMenuItemActionPerformed(ActionEvent evt) {
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
+                SegmentationCustomizerController.class);
 
     }
 
     /**
-     * Displays the workflow setup dialog to allow customizing the diverse workflow options.
+     * Displays the workflow setup dialog to allow customizing the diverse
+     * workflow options.
      */
-    public void optionsWorkflowMenuItemActionPerformed() {
-        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), EditingBehaviorController.class);
+    public void optionsWorkflowMenuItemActionPerformed(ActionEvent evt) {
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
+                EditingBehaviorController.class);
     }
 
     /**
-     * Restores defaults for all dockable parts. May be expanded in the future to reset the entire GUI to its
-     * defaults.
+     * Restores defaults for all dockable parts. May be expanded in the future
+     * to reset the entire GUI to its defaults.
      */
-    public void viewRestoreGUIMenuItemActionPerformed() {
+    public void viewRestoreGUIMenuItemActionPerformed(ActionEvent evt) {
         Core.getMainWindow().resetDesktopLayout();
     }
 
-    public void optionsAccessConfigDirMenuItemActionPerformed() {
+    public void optionsAccessConfigDirMenuItemActionPerformed(ActionEvent evt) {
         openFile(new File(StaticUtils.getConfigDir()));
     }
 
     /**
      * Show help.
      */
-    public void helpContentsMenuItemActionPerformed() {
+    public void helpContentsMenuItemActionPerformed(ActionEvent evt) {
         try {
             Help.showHelp();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), ex.getLocalizedMessage(), OStrings.getString(
-                    "ERROR_TITLE"),
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                    ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
     }
@@ -1039,28 +1054,28 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     /**
      * Shows About dialog
      */
-    public void helpAboutMenuItemActionPerformed() {
+    public void helpAboutMenuItemActionPerformed(ActionEvent evt) {
         new AboutDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Shows Last changes
      */
-    public void helpLastChangesMenuItemActionPerformed() {
+    public void helpLastChangesMenuItemActionPerformed(ActionEvent evt) {
         new LastChangesDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Show log
      */
-    public void helpLogMenuItemActionPerformed() {
+    public void helpLogMenuItemActionPerformed(ActionEvent evt) {
         new LogDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Check for updates
      */
-    public void helpUpdateCheckMenuItemActionPerformed() {
+    public void helpUpdateCheckMenuItemActionPerformed(ActionEvent evt) {
         VersionCheckDialog.checkAndShowResultAsync(Core.getMainWindow().getApplicationFrame());
     }
 }

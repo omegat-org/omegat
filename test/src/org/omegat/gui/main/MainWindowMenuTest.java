@@ -56,7 +56,6 @@ import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.MenuExtender.MenuKey;
 import org.omegat.util.gui.MenuItemPager;
 
-
 /**
  * @author Alex Buloichik
  */
@@ -64,24 +63,16 @@ public class MainWindowMenuTest extends TestCore {
     /**
      * Check MainWindow for all menu items action handlers exist.
      *
-     * @throws Exception
      */
     @Test
-    public void testMenuActions() throws Exception {
+    public void testMenuActions() {
         int count = 0;
 
-        Map<String, Method> existsMethods = new HashMap<String, Method>();
+        Map<String, Method> existsMethods = new HashMap<>();
 
         for (Method m : MainWindowMenuHandler.class.getDeclaredMethods()) {
             if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
                 Class<?>[] params = m.getParameterTypes();
-                if (params.length == 0) {
-                    existsMethods.put(m.getName(), m);
-                }
-                // Include menu items that take a modifier key.
-                if (params.length == 1 && params[0] == Integer.TYPE) {
-                    existsMethods.put(m.getName(), m);
-                }
                 // Include menu items that take a ActionEvent.
                 if (params.length == 1 && params[0] == ActionEvent.class) {
                     existsMethods.put(m.getName(), m);
@@ -93,21 +84,14 @@ public class MainWindowMenuTest extends TestCore {
             if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
                 count++;
                 String actionMethodName = f.getName() + "ActionPerformed";
-                Method m;
+                Method m = null;
                 try {
-                    m = MainWindowMenuHandler.class.getMethod(actionMethodName);
+                    m = MainWindowMenuHandler.class.getMethod(actionMethodName, ActionEvent.class);
                 } catch (NoSuchMethodException ignore) {
-                    try {
-                        // See if the method accepts a modifier key argument.
-                        m = MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
-                    } catch (NoSuchMethodException ignored) {
-                        m = MainWindowMenuHandler.class.getMethod(actionMethodName, ActionEvent.class);
-                    }
                 }
                 assertThat(m).as("Action method not defined for " + f.getName()).isNotNull();
                 assertThat(existsMethods.remove(actionMethodName))
-                        .as("Action should have corresponding menu item: " + actionMethodName)
-                        .isNotNull();
+                        .as("Action should have corresponding menu item: " + actionMethodName).isNotNull();
             }
         }
         assertTrue("menu items not found", count > 30);
@@ -119,18 +103,18 @@ public class MainWindowMenuTest extends TestCore {
     public void testMenuPositions() {
         TestMainMenu testMenu = new TestMainMenu();
         testMenu.initComponents();
-        assertEquals(getLocalizedText("MW_PROJECTMENU_EDIT"), getExtensionPointItem(testMenu,
-                MenuKey.PROJECT).getText());
-        assertEquals(getLocalizedText("TF_MENU_EDIT_IDENTICAL_TRANSLATION"), getExtensionPointItem(testMenu,
-                MenuKey.EDIT).getText());
-        assertEquals(getLocalizedText("MW_VIEW_MENU_MODIFICATION_INFO"), getExtensionPointItem(testMenu,
-                MenuKey.VIEW).getText());
-        assertEquals(getLocalizedText("TF_MENU_GOTO_EDITOR_PANEL"), getExtensionPointItem(testMenu,
-                MenuKey.GOTO).getText());
-        assertEquals(getLocalizedText("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"), getExtensionPointItem(testMenu,
-                MenuKey.OPTIONS).getText());
-        assertEquals(getLocalizedText("TF_MENU_HELP_LOG"), getExtensionPointItem(testMenu,
-                MenuKey.HELP).getText());
+        assertEquals(getLocalizedText("MW_PROJECTMENU_EDIT"),
+                getExtensionPointItem(testMenu, MenuKey.PROJECT).getText());
+        assertEquals(getLocalizedText("TF_MENU_EDIT_IDENTICAL_TRANSLATION"),
+                getExtensionPointItem(testMenu, MenuKey.EDIT).getText());
+        assertEquals(getLocalizedText("MW_VIEW_MENU_MODIFICATION_INFO"),
+                getExtensionPointItem(testMenu, MenuKey.VIEW).getText());
+        assertEquals(getLocalizedText("TF_MENU_GOTO_EDITOR_PANEL"),
+                getExtensionPointItem(testMenu, MenuKey.GOTO).getText());
+        assertEquals(getLocalizedText("MW_OPTIONSMENU_ACCESS_CONFIG_DIR"),
+                getExtensionPointItem(testMenu, MenuKey.OPTIONS).getText());
+        assertEquals(getLocalizedText("TF_MENU_HELP_LOG"),
+                getExtensionPointItem(testMenu, MenuKey.HELP).getText());
         assertEquals(-1, MenuKey.EDIT.getPosition());
     }
 

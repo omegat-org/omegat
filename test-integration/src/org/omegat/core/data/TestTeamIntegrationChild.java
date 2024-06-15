@@ -30,6 +30,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -665,8 +666,14 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
+            @Override
             public void invokeAction(String action, int modifiers) {
             }
+
+            @Override
+            public void invokeAction(final ActionEvent evt) {
+            }
+
         };
 
         public IMainMenu getMainMenu() {
@@ -676,10 +683,6 @@ public final class TestTeamIntegrationChild {
         @Override
         public DockingDesktop getDesktop() {
             return null;
-        }
-
-        @Override
-        public void resetDesktopLayout() {
         }
 
         public Cursor getCursor() {

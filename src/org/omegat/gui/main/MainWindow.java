@@ -174,7 +174,7 @@ public class MainWindow implements IMainWindow {
      * {@inheritDoc}
      */
     public void resetDesktopLayout() {
-       MainWindowUI.resetDesktopLayout(this);
+        MainWindowUI.resetDesktopLayout(this);
     }
 
     /**

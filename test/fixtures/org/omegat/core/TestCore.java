@@ -28,6 +28,7 @@ package org.omegat.core;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
@@ -220,6 +221,10 @@ public abstract class TestCore {
             }
 
             public void invokeAction(String action, int modifiers) {
+            }
+
+            @Override
+            public void invokeAction(final ActionEvent evt) {
             }
         };
 

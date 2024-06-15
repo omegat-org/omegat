@@ -129,19 +129,15 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
     public BaseMainWindowMenu(final IMainWindow mainWindow,
-                              final BaseMainWindowMenuHandler mainWindowMenuHandler) {
+            final BaseMainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        // Get item name from actionCommand.
-        String action = evt.getActionCommand();
-
-        Log.logInfoRB("LOG_MENU_CLICK", action);
-
-        invokeAction(action, evt, evt.getModifiers());
+        Log.logInfoRB("LOG_MENU_CLICK", evt.getActionCommand());
+        invokeAction(evt);
     }
 
     /**
@@ -662,7 +658,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         String key = "findInProjectReuseLastWindow";
         KeyStroke stroke = PropertiesShortcuts.getMainMenuShortcuts().getKeyStroke(key);
-        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(stroke, key);
+        mainWindow.getApplicationFrame().getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(stroke, key);
         mainWindow.getApplicationFrame().getRootPane().getActionMap().put(key, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -708,47 +705,27 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      */
     @Override
     public void invokeAction(String action, int modifiers) {
-        invokeAction(action, null, modifiers);
+        ActionEvent evt = new ActionEvent("", 0, action, 0L, modifiers);
+        invokeAction(evt);
     }
 
-    public void invokeAction(String action, ActionEvent evt, int modifiers) {
-        // Find method by item name.
-        String methodName = action + "ActionPerformed";
+    @Override
+    public void invokeAction(ActionEvent evt) {
+        /*
+         * Get an item name from actionCommand. And find a method by the item
+         * name.
+         */
+        String methodName = evt.getActionCommand() + "ActionPerformed";
         Method method;
-        int type = 0;
         try {
-            method = mainWindowMenuHandler.getClass().getMethod(methodName);
-            type = 0;
+            method = mainWindowMenuHandler.getClass().getMethod(methodName, ActionEvent.class);
         } catch (NoSuchMethodException ignore) {
-            try {
-                method = mainWindowMenuHandler.getClass().getMethod(methodName, Integer.TYPE);
-                type = 1;
-            } catch (NoSuchMethodException ignored) {
-                try {
-                    method = mainWindowMenuHandler.getClass().getMethod(methodName, ActionEvent.class);
-                    type = 2;
-                } catch (NoSuchMethodException ex) {
-                    throw new IncompatibleClassChangeError(
-                            "Error invoke method handler for main menu: there is no method " + methodName);
-                }
-            }
+            throw new IncompatibleClassChangeError(
+                    "Error invoke method handler for main menu: there is no method " + methodName);
         }
 
         // Call ...MenuItemActionPerformed method.
-        Object[] args;
-        switch (type) {
-            case 0:
-                args = null;
-                break;
-            case 1:
-                args = new Object[] { modifiers };
-                break;
-            case 2:
-                args = new Object[] { evt };
-                break;
-            default:
-                throw new RuntimeException("Unknown status");
-        }
+        Object[] args = new Object[] { evt };
         try {
             method.invoke(mainWindowMenuHandler, args);
         } catch (IllegalAccessException ex) {

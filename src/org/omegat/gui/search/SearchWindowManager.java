@@ -35,6 +35,9 @@ import java.util.List;
 
 public final class SearchWindowManager {
 
+    private SearchWindowManager() {
+    }
+
     /**
      * Set of all open search windows.
      */

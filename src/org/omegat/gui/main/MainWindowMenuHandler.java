@@ -44,23 +44,15 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-import javax.swing.text.JTextComponent;
 
-import org.omegat.Main;
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.KnownException;
-import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.search.SearchMode;
-import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
@@ -87,7 +79,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TagUtil;
 import org.omegat.util.TagUtil.Tag;
-import org.omegat.util.gui.DesktopWrapper;
 
 /**
  * Handler for main menu items.
@@ -186,34 +177,15 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Create translated documents.
      */
     public void projectCompileMenuItemActionPerformed() {
-        if (!checkTags()) {
-            return;
+        if (ProjectUICommands.areTagsValid()) {
+            ProjectUICommands.projectCompile();
         }
-
-        ProjectUICommands.projectCompile();
-    }
-
-    /**
-     * Check whether tags are OK
-     * @return false is there is a tag issue, true otherwise
-     */
-    private boolean checkTags() {
-        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
-            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
-            if (!stes.isEmpty()) {
-                Core.getIssues().showAll(OStrings.getString("TF_MESSAGE_COMPILE"));
-                return false;
-            }
-        }
-        return true;
     }
 
     public void projectCommitTargetFilesActionPerformed() {
-        if (!checkTags()) {
-                return;
+        if (ProjectUICommands.areTagsValid()) {
+            ProjectUICommands.projectCompileAndCommit();
         }
-
-        ProjectUICommands.projectCompileAndCommit();
     }
 
     /**
@@ -264,7 +236,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getProjectRoot();
-        openFile(new File(path));
+        ProjectUICommands.openFile(new File(path));
     }
 
     public void projectAccessDictionaryMenuItemActionPerformed() {
@@ -272,7 +244,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getDictRoot();
-        openFile(new File(path));
+        ProjectUICommands.openFile(new File(path));
     }
 
     public void projectAccessGlossaryMenuItemActionPerformed() {
@@ -280,7 +252,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getGlossaryRoot();
-        openFile(new File(path));
+        ProjectUICommands.openFile(new File(path));
     }
 
     public void projectAccessSourceMenuItemActionPerformed() {
@@ -288,7 +260,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getSourceRoot();
-        openFile(new File(path));
+        ProjectUICommands.openFile(new File(path));
     }
 
     public void projectAccessTargetMenuItemActionPerformed() {
@@ -296,7 +268,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getTargetRoot();
-        openFile(new File(path));
+        ProjectUICommands.openFile(new File(path));
     }
 
     public void projectAccessTMMenuItemActionPerformed() {
@@ -304,7 +276,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getTMRoot();
-        openFile(new File(path));
+        ProjectUICommands.openFile(new File(path));
     }
 
     public void projectAccessExportTMMenuItemActionPerformed() {
@@ -312,7 +284,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String path = Core.getProject().getProjectProperties().getExportTMRoot();
-        openFile(new File(path));
+        ProjectUICommands.openFile(new File(path));
     }
 
     public void projectAccessCurrentSourceDocumentMenuItemActionPerformed(int modifier) {
@@ -328,7 +300,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if ((modifier & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
-        openFile(toOpen);
+        ProjectUICommands.openFile(toOpen);
     }
 
     public void projectAccessCurrentTargetDocumentMenuItemActionPerformed(int modifier) {
@@ -344,45 +316,16 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if ((modifier & ActionEvent.ALT_MASK) != 0) {
             toOpen = toOpen.getParentFile();
         }
-        openFile(toOpen);
+        ProjectUICommands.openFile(toOpen);
     }
 
     public void projectAccessWriteableGlossaryMenuItemActionPerformed(int modifier) {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-        String path = Core.getProject().getProjectProperties().getWriteableGlossary();
-        if (StringUtil.isEmpty(path)) {
-            return;
-        }
-        File toOpen = new File(path);
-        if ((modifier & ActionEvent.ALT_MASK) != 0) {
-            toOpen = toOpen.getParentFile();
-        }
-        openFile(toOpen);
-    }
-
-    private void openFile(File path) {
-        try {
-            path = path.getCanonicalFile(); // Normalize file name in case it is displayed
-        } catch (Exception ex) {
-            // Ignore
-        }
-        if (!path.exists()) {
-            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", path);
-            return;
-        }
-        try {
-            DesktopWrapper.open(path);
-        } catch (Exception ex) {
-            Log.logErrorRB(ex, "RPF_ERROR");
-            Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");
-        }
+        ProjectUICommands.openWriteableGlossaryFile((modifier & ActionEvent.ALT_MASK) != 0);
     }
 
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
-        prepareForExit(() -> System.exit(0));
+        ProjectUICommands.projectExit();
     }
 
     /** Restart OmegaT */
@@ -390,74 +333,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         String projectDir = Core.getProject().isProjectLoaded()
                 ? Core.getProject().getProjectProperties().getProjectRoot()
                 : null;
-        prepareForExit(() -> {
-            Main.restartGUI(projectDir);
-        });
-    }
-
-    protected void prepareForExit(Runnable onCompletion) {
-        // Bug #902: commit the current entry first
-        // We do it before checking project status, so that it can eventually change it
-        if (Core.getProject().isProjectLoaded()) {
-            Core.getEditor().commitAndLeave();
-        }
-
-        boolean projectModified = false;
-        if (Core.getProject().isProjectLoaded()) {
-            projectModified = Core.getProject().isProjectModified();
-        }
-        // RFE 1302358
-        // Add Yes/No Warning before OmegaT quits
-        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
-                    JOptionPane.YES_NO_OPTION)) {
-                return;
-            }
-        }
-
-        SegmentExportImport.flushExportedSegments();
-
-        new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                if (Core.getProject().isProjectLoaded()) {
-                    // Save the list of learned and ignore words
-                    ISpellChecker sc = Core.getSpellChecker();
-                    sc.saveWordLists();
-                    try {
-                        Core.executeExclusively(true, () -> {
-                            Core.getProject().saveProject(true);
-                            ProjectFactory.closeProject();
-                        });
-                    } catch (KnownException ex) {
-                        // hide exception on shutdown
-                    }
-                }
-
-                CoreEvents.fireApplicationShutdown();
-
-                PluginUtils.unloadPlugins();
-
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    get();
-
-                    MainWindowUI.saveScreenLayout(mainWindow);
-
-                    Preferences.save();
-
-                    onCompletion.run();
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                }
-            }
-        }.execute();
+        ProjectUICommands.projectRestart(projectDir);
     }
 
     public void editUndoMenuItemActionPerformed() {
@@ -565,42 +441,28 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
 
-    public void editFindInProjectMenuItemActionPerformed() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-        MainWindowUI.createSearchWindow(SearchMode.SEARCH, getTrimmedSelectedTextInMainWindow());
-    }
-
     void findInProjectReuseLastWindow() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        String text = getTrimmedSelectedTextInMainWindow();
+        String text = MainWindowUI.getTrimmedSelectedTextInMainWindow();
         if (!MainWindowUI.reuseSearchWindow(text)) {
             MainWindowUI.createSearchWindow(SearchMode.SEARCH, text);
         }
-        editFindInProjectMenuItemActionPerformed();
+    }
+
+    public void editFindInProjectMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        MainWindowUI.createSearchWindow(SearchMode.SEARCH);
     }
 
     public void editReplaceInProjectMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        MainWindowUI.createSearchWindow(SearchMode.REPLACE, getTrimmedSelectedTextInMainWindow());
-    }
-
-    private String getTrimmedSelectedTextInMainWindow() {
-        String selection = null;
-        Component component = mainWindow.getApplicationFrame().getMostRecentFocusOwner();
-        if (component instanceof JTextComponent) {
-            selection = ((JTextComponent) component).getSelectedText();
-            if (!StringUtil.isEmpty(selection)) {
-                selection = EditorUtils.removeDirectionChars(selection);
-                selection = selection.trim();
-            }
-        }
-        return selection;
+        MainWindowUI.createSearchWindow(SearchMode.REPLACE);
     }
 
     /** Set active match to #1. */
@@ -992,7 +854,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void optionsAccessConfigDirMenuItemActionPerformed() {
-        openFile(new File(StaticUtils.getConfigDir()));
+        ProjectUICommands.openFile(new File(StaticUtils.getConfigDir()));
     }
 
     /**

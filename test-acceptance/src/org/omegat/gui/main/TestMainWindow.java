@@ -31,7 +31,6 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,14 +72,12 @@ class TestMainWindow implements IMainWindow {
      */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException {
+    TestMainWindow(MainWindowMenuHandler handler) {
         applicationFrame = new JFrame();
         applicationFrame.setPreferredSize(new Dimension(1920, 1040));
         font = FontUtil.getScaledFont();
         try {
-            BaseMainWindowMenuHandler handler = mainWindowMenuHandler
-                    .getDeclaredConstructor(IMainWindow.class).newInstance(this);
-            menu = new TestCoreGUI.TestMainWindowMenu(this, handler);
+            menu = new TestMainWindowMenu(this, handler);
         } catch (Exception e) {
             throw new RuntimeException();
         }

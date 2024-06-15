@@ -68,6 +68,7 @@ import org.omegat.gui.filters2.FiltersCustomizerController;
 import org.omegat.gui.issues.IssueProvidersSelectorController;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
+import org.omegat.gui.search.SearchWindowManager;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.help.Help;
@@ -446,8 +447,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
             return;
         }
         String text = MainWindowUI.getTrimmedSelectedTextInMainWindow();
-        if (!MainWindowUI.reuseSearchWindow(text)) {
-            MainWindowUI.createSearchWindow(SearchMode.SEARCH, text);
+        if (!SearchWindowManager.reuseSearchWindow(text)) {
+            SearchWindowManager.createSearchWindow(SearchMode.SEARCH, text);
         }
     }
 
@@ -455,14 +456,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        MainWindowUI.createSearchWindow(SearchMode.SEARCH);
+        SearchWindowManager.createSearchWindow(SearchMode.SEARCH);
     }
 
     public void editReplaceInProjectMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        MainWindowUI.createSearchWindow(SearchMode.REPLACE);
+        SearchWindowManager.createSearchWindow(SearchMode.REPLACE);
     }
 
     /** Set active match to #1. */

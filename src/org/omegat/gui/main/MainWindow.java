@@ -75,6 +75,7 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.matches.IMatcher;
+import org.omegat.gui.search.SearchWindowManager;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -137,7 +138,7 @@ public class MainWindow implements IMainWindow {
         CoreEvents.registerProjectChangeListener(eventType -> {
             updateTitle();
             if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
-                MainWindowUI.closeSearchWindows();
+                SearchWindowManager.closeSearchWindows();
             }
         });
 

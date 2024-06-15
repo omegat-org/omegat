@@ -34,15 +34,11 @@ package org.omegat.gui.main;
 import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.text.JTextComponent;
 
@@ -50,9 +46,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.search.SearchMode;
 import org.omegat.gui.editor.EditorUtils;
-import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -79,11 +73,6 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Aaron Madlon-Kay
  */
 public final class MainWindowUI {
-
-    /**
-     * Set of all open search windows.
-     */
-    private static final List<SearchWindowController> searches = new ArrayList<>();
 
     private MainWindowUI() {
     }
@@ -115,55 +104,6 @@ public final class MainWindowUI {
         PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
         CoreEvents.registerProjectChangeListener(handler);
         CoreEvents.registerApplicationEventListener(handler);
-    }
-
-    static void createSearchWindow(SearchMode mode) {
-        createSearchWindow(mode, getTrimmedSelectedTextInMainWindow());
-    }
-
-    static void createSearchWindow(SearchMode mode, String query) {
-        SearchWindowController search = new SearchWindowController(mode);
-        addSearchWindow(search);
-        search.makeVisible(query);
-    }
-
-    static void closeSearchWindows() {
-        synchronized (searches) {
-            // dispose other windows
-            for (SearchWindowController sw : searches) {
-                sw.dispose();
-            }
-            searches.clear();
-        }
-    }
-
-    static boolean reuseSearchWindow(String text) {
-        for (int i = searches.size() - 1; i >= 0; i--) {
-            SearchWindowController swc = searches.get(i);
-            if (swc.getMode() == SearchMode.SEARCH) {
-                swc.makeVisible(text);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static void addSearchWindow(final SearchWindowController newSearchWindow) {
-        newSearchWindow.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                removeSearchWindow(newSearchWindow);
-            }
-        });
-        synchronized (searches) {
-            searches.add(newSearchWindow);
-        }
-    }
-
-    private static void removeSearchWindow(SearchWindowController searchWindow) {
-        synchronized (searches) {
-            searches.remove(searchWindow);
-        }
     }
 
     private static class PerProjectLayoutHandler implements IProjectEventListener, IApplicationEventListener {

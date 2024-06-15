@@ -409,7 +409,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow.getApplicationFrame(),
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION)) {
                 return;

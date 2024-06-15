@@ -98,8 +98,9 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Wildrich Fourie
  * @author Yu Tang
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
-public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
+public final class MainWindowMenuHandler {
 
     public MainWindowMenuHandler() {
     }

@@ -69,6 +69,6 @@ public final class MainWindowBurgerMenu extends BaseMainWindowMenu
         burgerMenu.add(helpMenu);
         burgerMenu.add(burgerMenu);
         mainMenu.add(burgerMenu);
-        mainMenu.add(new AccessTools(mainWindowMenuHandler));
+        mainMenu.add(new AccessTools());
     }
 }

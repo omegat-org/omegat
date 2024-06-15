@@ -49,7 +49,6 @@ import javax.swing.UIManager;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.main.BaseMainWindowMenuHandler;
 import org.omegat.gui.main.MainMenuIcons;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.OConsts;
@@ -71,15 +70,13 @@ public class AccessTools extends JPanel {
 
     private ProjectComboBoxModel projectComboBoxModel;
     private SourceComboBoxModel sourceComboBoxModel;
-    private final BaseMainWindowMenuHandler mainWindowMenuHandler;
 
     private URI selectedProject = null;
 
     private static final int MAX_PATH_LENGTH_SHOWN = 25;
     private static final float CHECKBOX_HEIGHT_RATIO = 1.8f;
 
-    public AccessTools(final BaseMainWindowMenuHandler mainWindowMenuHandler) {
-        this.mainWindowMenuHandler = mainWindowMenuHandler;
+    public AccessTools() {
         initComponents();
     }
 
@@ -126,10 +123,12 @@ public class AccessTools extends JPanel {
                 Objects.requireNonNullElseGet(UIManager.getIcon("OmegaT.newUI.search.icon"),
                         () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.search.png"))));
         searchButton.setBorderPainted(false);
+        searchButton.setActionCommand("editFindInProjectMenuItem");
         settingsButton = new JButton("", Objects.requireNonNullElseGet(
                 UIManager.getIcon("OmegaT.newUI.settings.icon"),
                 () -> MainMenuIcons.newImageIcon(ResourcesUtil.getBundledImage("newUI.settings.png"))));
         settingsButton.setBorderPainted(false);
+        settingsButton.setActionCommand("optionsPreferencesMenuItem");
 
         // -- right side
         add(Box.createGlue());
@@ -137,10 +136,10 @@ public class AccessTools extends JPanel {
         add(settingsButton);
 
         searchButton.addActionListener(actionEvent -> {
-            mainWindowMenuHandler.editFindInProjectMenuItemActionPerformed();
+            Core.getMainMenu().invokeAction(actionEvent);
         });
         settingsButton.addActionListener(actionEvent -> {
-            mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed();
+            Core.getMainMenu().invokeAction(actionEvent);
         });
         recentProjectCB.addActionListener(actionEvent -> {
             // when select a project from the list, we open it.
@@ -153,13 +152,13 @@ public class AccessTools extends JPanel {
                 if (projectUri.getScheme().equals("omegat")) {
                     switch (projectUri.getSchemeSpecificPart()) {
                     case "new":
-                        mainWindowMenuHandler.projectNewMenuItemActionPerformed();
+                        Core.getMainWindow().getMainMenu().invokeAction("projectNewMenuItem", 0);
                         break;
                     case "open":
-                        mainWindowMenuHandler.projectOpenMenuItemActionPerformed();
+                        Core.getMainWindow().getMainMenu().invokeAction("projectOpenMenuItem", 0);
                         break;
                     case "team":
-                        mainWindowMenuHandler.projectTeamNewMenuItemActionPerformed();
+                        Core.getMainWindow().getMainMenu().invokeAction("projectTeamNewMenuItem", 0);
                         break;
                     default:
                         break;

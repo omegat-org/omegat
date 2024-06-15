@@ -124,12 +124,12 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected final JMenuBar mainMenu = new JMenuBar();
 
     /** MainWindow menu handler instance. */
-    protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
+    protected final MainWindowMenuHandler mainWindowMenuHandler;
 
     private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
     public BaseMainWindowMenu(final IMainWindow mainWindow,
-            final BaseMainWindowMenuHandler mainWindowMenuHandler) {
+            final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
@@ -664,7 +664,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
             @Override
             public void actionPerformed(ActionEvent e) {
                 Log.logInfoRB("LOG_MENU_CLICK", key);
-                mainWindowMenuHandler.findInProjectReuseLastWindow();
+                MainWindowUI.findInProjectReuseLastWindow();
             }
         });
 
@@ -939,10 +939,10 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected void initMacSpecific() {
         try {
             // MacOSX-specific
-            OSXIntegration.setQuitHandler(e -> mainWindowMenuHandler.projectExitMenuItemActionPerformed());
-            OSXIntegration.setAboutHandler(e -> mainWindowMenuHandler.helpAboutMenuItemActionPerformed());
+            OSXIntegration.setQuitHandler(e -> MainWindowUI.projectExit());
+            OSXIntegration.setAboutHandler(mainWindowMenuHandler::helpAboutMenuItemActionPerformed);
             OSXIntegration.setPreferencesHandler(
-                    e -> mainWindowMenuHandler.optionsPreferencesMenuItemActionPerformed());
+                    mainWindowMenuHandler::optionsPreferencesMenuItemActionPerformed);
         } catch (NoClassDefFoundError e) {
             Log.log(e);
         }

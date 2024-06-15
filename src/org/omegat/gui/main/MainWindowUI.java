@@ -46,18 +46,30 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
+import javax.swing.text.JTextComponent;
 
+import org.omegat.Main;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.KnownException;
+import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.search.SearchMode;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.editor.EditorUtils;
+import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.UIDesignManager;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -132,7 +144,7 @@ public final class MainWindowUI {
 
         mw.getApplicationFrame().addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                mainWindowMenuHandler.projectExitMenuItemActionPerformed();
+                projectExit();
             }
 
             @Override
@@ -165,6 +177,10 @@ public final class MainWindowUI {
         PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
         CoreEvents.registerProjectChangeListener(handler);
         CoreEvents.registerApplicationEventListener(handler);
+    }
+
+    static void createSearchWindow(SearchMode mode) {
+        createSearchWindow(mode, getTrimmedSelectedTextInMainWindow());
     }
 
     static void createSearchWindow(SearchMode mode, String query) {
@@ -367,5 +383,102 @@ public final class MainWindowUI {
         } catch (Exception e) {
             Log.log(e);
         }
+    }
+
+    public static void findInProjectReuseLastWindow() {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String text = getTrimmedSelectedTextInMainWindow();
+        if (!reuseSearchWindow(text)) {
+            createSearchWindow(SearchMode.SEARCH, text);
+        }
+    }
+
+    public static String getTrimmedSelectedTextInMainWindow() {
+        String selection = null;
+        Component component = Core.getMainWindow().getApplicationFrame().getMostRecentFocusOwner();
+        if (component instanceof JTextComponent) {
+            selection = ((JTextComponent) component).getSelectedText();
+            if (!StringUtil.isEmpty(selection)) {
+                selection = EditorUtils.removeDirectionChars(selection);
+                selection = selection.trim();
+            }
+        }
+        return selection;
+    }
+
+    public static void projectExit() {
+        prepareForExit(() -> System.exit(-1));
+    }
+
+    public static void projectRestart(String projectDir) {
+        prepareForExit(() -> Main.restartGUI(projectDir));
+    }
+
+    private static void prepareForExit(Runnable onCompletion) {
+        // Bug #902: commit the current entry first
+        // We do it before checking project status, so that it can eventually
+        // change it
+        if (Core.getProject().isProjectLoaded()) {
+            Core.getEditor().commitAndLeave();
+        }
+
+        boolean projectModified = false;
+        if (Core.getProject().isProjectLoaded()) {
+            projectModified = Core.getProject().isProjectModified();
+        }
+        // RFE 1302358
+        // Add Yes/No Warning before OmegaT quits
+        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
+                    JOptionPane.YES_NO_OPTION)) {
+                return;
+            }
+        }
+
+        SegmentExportImport.flushExportedSegments();
+
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                if (Core.getProject().isProjectLoaded()) {
+                    // Save the list of learned and ignore words
+                    ISpellChecker sc = Core.getSpellChecker();
+                    sc.saveWordLists();
+                    try {
+                        Core.executeExclusively(true, () -> {
+                            Core.getProject().saveProject(true);
+                            ProjectFactory.closeProject();
+                        });
+                    } catch (KnownException ex) {
+                        // hide exception on shutdown
+                    }
+                }
+
+                CoreEvents.fireApplicationShutdown();
+
+                PluginUtils.unloadPlugins();
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+
+                    Core.getMainWindow().saveDesktopLayout();
+
+                    Preferences.save();
+
+                    onCompletion.run();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+            }
+        }.execute();
     }
 }

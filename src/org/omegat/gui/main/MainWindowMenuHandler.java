@@ -47,22 +47,14 @@ import java.util.regex.Pattern;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-import javax.swing.text.JTextComponent;
 
-import org.omegat.Main;
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.KnownException;
-import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.search.SearchMode;
-import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
@@ -387,7 +379,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed(ActionEvent evt) {
-        prepareForExit(() -> System.exit(0));
+        MainWindowUI.projectExit();
     }
 
     /** Restart OmegaT */
@@ -395,75 +387,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         String projectDir = Core.getProject().isProjectLoaded()
                 ? Core.getProject().getProjectProperties().getProjectRoot()
                 : null;
-        prepareForExit(() -> {
-            Main.restartGUI(projectDir);
-        });
-    }
-
-    private void prepareForExit(Runnable onCompletion) {
-        // Bug #902: commit the current entry first
-        // We do it before checking project status, so that it can eventually
-        // change it
-        if (Core.getProject().isProjectLoaded()) {
-            Core.getEditor().commitAndLeave();
-        }
-
-        boolean projectModified = false;
-        if (Core.getProject().isProjectLoaded()) {
-            projectModified = Core.getProject().isProjectModified();
-        }
-        // RFE 1302358
-        // Add Yes/No Warning before OmegaT quits
-        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
-                    JOptionPane.YES_NO_OPTION)) {
-                return;
-            }
-        }
-
-        SegmentExportImport.flushExportedSegments();
-
-        new SwingWorker<Void, Void>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                if (Core.getProject().isProjectLoaded()) {
-                    // Save the list of learned and ignore words
-                    ISpellChecker sc = Core.getSpellChecker();
-                    sc.saveWordLists();
-                    try {
-                        Core.executeExclusively(true, () -> {
-                            Core.getProject().saveProject(true);
-                            ProjectFactory.closeProject();
-                        });
-                    } catch (KnownException ex) {
-                        // hide exception on shutdown
-                    }
-                }
-
-                CoreEvents.fireApplicationShutdown();
-
-                PluginUtils.unloadPlugins();
-
-                return null;
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    get();
-
-                    Core.getMainWindow().saveDesktopLayout();
-
-                    Preferences.save();
-
-                    onCompletion.run();
-                } catch (Exception ex) {
-                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                }
-            }
-        }.execute();
+        MainWindowUI.projectRestart(projectDir);
     }
 
     public void editUndoMenuItemActionPerformed(ActionEvent evt) {
@@ -576,38 +500,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        MainWindowUI.createSearchWindow(SearchMode.SEARCH, getTrimmedSelectedTextInMainWindow());
-    }
-
-    void findInProjectReuseLastWindow() {
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-        String text = getTrimmedSelectedTextInMainWindow();
-        if (!MainWindowUI.reuseSearchWindow(text)) {
-            MainWindowUI.createSearchWindow(SearchMode.SEARCH, text);
-        }
-        editFindInProjectMenuItemActionPerformed();
+        MainWindowUI.createSearchWindow(SearchMode.SEARCH);
     }
 
     public void editReplaceInProjectMenuItemActionPerformed(ActionEvent evt) {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        MainWindowUI.createSearchWindow(SearchMode.REPLACE, getTrimmedSelectedTextInMainWindow());
-    }
-
-    private String getTrimmedSelectedTextInMainWindow() {
-        String selection = null;
-        Component component = Core.getMainWindow().getApplicationFrame().getMostRecentFocusOwner();
-        if (component instanceof JTextComponent) {
-            selection = ((JTextComponent) component).getSelectedText();
-            if (!StringUtil.isEmpty(selection)) {
-                selection = EditorUtils.removeDirectionChars(selection);
-                selection = selection.trim();
-            }
-        }
-        return selection;
+        MainWindowUI.createSearchWindow(SearchMode.REPLACE);
     }
 
     /** Set active match to #1. */

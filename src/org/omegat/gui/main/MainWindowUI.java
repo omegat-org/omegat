@@ -262,9 +262,9 @@ public final class MainWindowUI {
         }
     }
 
-    public static String getTrimmedSelectedTextInMainWindow() {
+    public static String getTrimmedSelectedTextInMainWindow(MainWindow mainWindow) {
         String selection = null;
-        Component component = Core.getMainWindow().getApplicationFrame().getMostRecentFocusOwner();
+        Component component = mainWindow.getApplicationFrame().getMostRecentFocusOwner();
         if (component instanceof JTextComponent) {
             selection = ((JTextComponent) component).getSelectedText();
             if (!StringUtil.isEmpty(selection)) {

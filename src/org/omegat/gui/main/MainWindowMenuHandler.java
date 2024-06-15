@@ -446,7 +446,10 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
-        String text = MainWindowUI.getTrimmedSelectedTextInMainWindow();
+        String text = Core.getMainWindow().getSelectedText();
+        if (text == null) {
+            return;
+        }
         if (!SearchWindowManager.reuseSearchWindow(text)) {
             SearchWindowManager.createSearchWindow(SearchMode.SEARCH, text);
         }

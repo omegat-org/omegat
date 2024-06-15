@@ -295,6 +295,11 @@ public class MainWindow implements IMainWindow {
         return applicationFrame.getCursor();
     }
 
+    @Override
+    public String getSelectedText() {
+        return MainWindowUI.getTrimmedSelectedTextInMainWindow(this);
+    }
+
     /**
      * Sets the title of the main window appropriately
      */

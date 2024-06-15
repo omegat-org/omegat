@@ -25,8 +25,8 @@
 
 package org.omegat.gui.search;
 
+import org.omegat.core.Core;
 import org.omegat.core.search.SearchMode;
-import org.omegat.gui.main.MainWindowUI;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -41,7 +41,8 @@ public final class SearchWindowManager {
     private static final List<SearchWindowController> searches = new ArrayList<>();
 
     public static void createSearchWindow(SearchMode mode) {
-        createSearchWindow(mode, MainWindowUI.getTrimmedSelectedTextInMainWindow());
+        String text = Core.getMainWindow().getSelectedText();
+        createSearchWindow(mode, text);
     }
 
     public static void createSearchWindow(SearchMode mode, String query) {

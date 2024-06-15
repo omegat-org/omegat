@@ -195,6 +195,10 @@ public interface IMainWindow {
      */
     Cursor getCursor();
 
+    default String getSelectedText() {
+        return "";
+    }
+
     /**
      * Retrieve main manu instance.
      */

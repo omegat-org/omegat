@@ -209,4 +209,9 @@ public interface IMainWindow {
      * Restores the main window layout to the default values.
      */
     default void resetDesktopLayout() {}
+
+    /**
+     * Save the main window layout.
+     */
+    default void saveDesktopLayout() {}
 }

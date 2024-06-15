@@ -55,7 +55,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
-import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
@@ -109,16 +108,15 @@ import org.omegat.util.gui.DesktopWrapper;
  * @author Aaron Madlon-Kay
  */
 public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
-    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
-    private final MainWindow mainWindow;
+    public MainWindowMenuHandler() {
+    }
 
     public MainWindowMenuHandler(final MainWindow mainWindow) {
-        this.mainWindow = mainWindow;
     }
 
     /**
-     * Create new project.
+     * Create a new project.
      */
     public void projectNewMenuItemActionPerformed(ActionEvent evt) {
         ProjectUICommands.projectCreate();
@@ -417,7 +415,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow.getApplicationFrame(),
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION)) {
                 return;
@@ -455,7 +453,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
                 try {
                     get();
 
-                    MainWindowUI.saveScreenLayout(mainWindow);
+                    Core.getMainWindow().saveDesktopLayout();
 
                     Preferences.save();
 

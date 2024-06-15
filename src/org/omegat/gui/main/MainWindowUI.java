@@ -109,7 +109,7 @@ public final class MainWindowUI {
     @SuppressWarnings("unchecked")
     public static BaseMainWindowMenu initMainMenu(MainWindow mw) {
         BaseMainWindowMenu menu;
-        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler(mw);
+        MainWindowMenuHandler mainWindowMenuHandler = new MainWindowMenuHandler();
 
         // Load Menu extension
         Object menuClass = UIManager.get(UIDesignManager.menuClassID);

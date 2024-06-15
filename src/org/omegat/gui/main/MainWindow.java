@@ -179,6 +179,7 @@ public class MainWindow implements IMainWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void resetDesktopLayout() {
        MainWindowUI.resetDesktopLayout(this);
     }
@@ -229,6 +230,14 @@ public class MainWindow implements IMainWindow {
                     | NoSuchMethodException ignored) {
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void saveDesktopLayout() {
+        MainWindowUI.saveScreenLayout(this);
     }
 
     /**

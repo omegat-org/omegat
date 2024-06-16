@@ -53,6 +53,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import org.omegat.CLIParameters;
+import org.omegat.Main;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -62,15 +63,19 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.ChooseMedProject;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
 import org.omegat.gui.dialogs.ProjectPropertiesDialogController;
+import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.util.FileUtil;
 import org.omegat.util.FileUtil.ICollisionCallback;
 import org.omegat.util.HttpConnectionUtils;
@@ -83,6 +88,7 @@ import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
+import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -1238,6 +1244,131 @@ public final class ProjectUICommands {
         } catch (IOException ioe) {
             Core.getMainWindow().displayErrorRB(ioe, "MAIN_ERROR_File_Import_Failed");
         }
+    }
+
+    public static void openWriteableGlossaryFile(boolean parent) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String path = Core.getProject().getProjectProperties().getWriteableGlossary();
+        if (StringUtil.isEmpty(path)) {
+            return;
+        }
+        File toOpen = new File(path);
+        if (parent) {
+            toOpen = toOpen.getParentFile();
+        }
+        openFile(toOpen);
+    }
+
+    public static void openFile(File path) {
+        try {
+            path = path.getCanonicalFile(); // Normalize file name in case it is
+            // displayed
+        } catch (Exception ex) {
+            // Ignore
+        }
+        if (!path.exists()) {
+            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", path);
+            return;
+        }
+        try {
+            DesktopWrapper.open(path);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "RPF_ERROR");
+            Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");
+        }
+    }
+
+    /**
+     * Check whether tags are OK
+     *
+     * @return false is there is a tag issue, true otherwise
+     */
+    static boolean areTagsValid() {
+        boolean result = false;
+        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
+            if (!stes.isEmpty()) {
+                Core.getIssues().showAll(OStrings.getString("TF_MESSAGE_COMPILE"));
+                result = true;
+            }
+        }
+        return !result;
+    }
+
+    public static void projectExit() {
+        prepareForExit(() -> System.exit(-1));
+    }
+
+    public static void projectRestart(String projectDir) {
+        prepareForExit(() -> Main.restartGUI(projectDir));
+    }
+
+    private static void prepareForExit(Runnable onCompletion) {
+        // Bug #902: commit the current entry first
+        // We do it before checking project status, so that it can eventually
+        // change it
+        if (Core.getProject().isProjectLoaded()) {
+            Core.getEditor().commitAndLeave();
+        }
+
+        boolean projectModified = false;
+        if (Core.getProject().isProjectLoaded()) {
+            projectModified = Core.getProject().isProjectModified();
+        }
+        // RFE 1302358
+        // Add Yes/No Warning before OmegaT quits
+        if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
+                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
+                    JOptionPane.YES_NO_OPTION)) {
+                return;
+            }
+        }
+
+        SegmentExportImport.flushExportedSegments();
+
+        new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                if (Core.getProject().isProjectLoaded()) {
+                    // Save the list of learned and ignore words
+                    ISpellChecker sc = Core.getSpellChecker();
+                    sc.saveWordLists();
+                    try {
+                        Core.executeExclusively(true, () -> {
+                            Core.getProject().saveProject(true);
+                            ProjectFactory.closeProject();
+                        });
+                    } catch (KnownException ex) {
+                        // hide exception on shutdown
+                    }
+                }
+
+                CoreEvents.fireApplicationShutdown();
+
+                PluginUtils.unloadPlugins();
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+
+                    Core.getMainWindow().saveDesktopLayout();
+
+                    Preferences.save();
+
+                    onCompletion.run();
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+            }
+        }.execute();
     }
 
     private static class CollisionCallback implements ICollisionCallback {

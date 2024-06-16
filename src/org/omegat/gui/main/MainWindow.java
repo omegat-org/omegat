@@ -75,6 +75,7 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.matches.IMatcher;
+import org.omegat.gui.search.SearchWindowManager;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -137,7 +138,7 @@ public class MainWindow implements IMainWindow {
         CoreEvents.registerProjectChangeListener(eventType -> {
             updateTitle();
             if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
-                MainWindowUI.closeSearchWindows();
+                SearchWindowManager.closeSearchWindows();
             }
         });
 
@@ -179,6 +180,7 @@ public class MainWindow implements IMainWindow {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void resetDesktopLayout() {
        MainWindowUI.resetDesktopLayout(this);
     }
@@ -229,6 +231,14 @@ public class MainWindow implements IMainWindow {
                     | NoSuchMethodException ignored) {
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void saveDesktopLayout() {
+        MainWindowUI.saveScreenLayout(this);
     }
 
     /**
@@ -283,6 +293,11 @@ public class MainWindow implements IMainWindow {
     @Override
     public Cursor getCursor() {
         return applicationFrame.getCursor();
+    }
+
+    @Override
+    public String getSelectedText() {
+        return MainWindowUI.getTrimmedSelectedTextInMainWindow(this);
     }
 
     /**

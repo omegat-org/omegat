@@ -14,6 +14,5 @@ steps:
         srcdir=$(system.defaultworkingdirectory)/build/distributions/
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir="/home/frs/project/omegat/OmegaT\\ -\\ Latest/OmegaT\\ ${{ parameters.omegatVersion }}/"
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -v $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -p -s -oStrictHostKeyChecking=no $srcdir/* "$dest:$destdir"
-
+        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -s -oStrictHostKeyChecking=no $srcdir/* "$dest:$destdir"

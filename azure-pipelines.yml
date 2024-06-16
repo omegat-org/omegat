@@ -140,10 +140,20 @@ stages:
       - checkout: self
         fetchDepth: 1
         fetchTags: false
+      - template: ci/azure-pipelines/build_steps.yml
+      - script: echo "##vso[task.setvariable variable=result;]false"
+        condition: failed()
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - template: ci/azure-pipelines/build_steps.yml
+          # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+          ./gradlew --stop
+          # Check task result
+          if [[ "$(result)" == "false" ]]; then
+            exit 1
+          fi
+        condition: always()
+        displayName: Stop Gradle daemon
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
           omegatVersion: $(version)
@@ -168,10 +178,20 @@ stages:
       - checkout: self
         fetchDepth: 0
         fetchTags: true
+      - template: ci/azure-pipelines/build_steps.yml
+      - script: echo "##vso[task.setvariable variable=result;]false"
+        condition: failed()
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - template: ci/azure-pipelines/build_steps.yml
+          # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+          ./gradlew --stop
+          # Check task result
+          if [[ "$(result)" == "false" ]]; then
+            exit 1
+          fi
+        condition: always()
+        displayName: Stop Gradle daemon
       - template: ci/azure-pipelines/publish_release.yml
         parameters:
           omegatVersion: $(version)

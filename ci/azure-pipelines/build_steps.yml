@@ -35,14 +35,3 @@ steps:
       options: '--build-cache -PenvIsCi --scan -PassetDir=$(System.ArtifactsDirectory)/asset'
       jdkVersionOption: '1.17'
     displayName: 'Build distribution packages and docs'
-  - script: echo "##vso[task.setvariable variable=result;]false"
-    condition: failed()
-  - script: |
-      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
-      ./gradlew --stop
-      # Check task result
-      if [[ "$(result)" == "false" ]]; then
-        exit 1
-      fi
-    condition: always()
-    displayName: Stop Gradle daemon

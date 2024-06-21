@@ -9,6 +9,7 @@
                2013 Zoltan Bartko
                2014 Aaron Madlon-Kay
                2015 Yu Tang
+               2023-2024 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -373,14 +374,6 @@ public class EditorTextArea3 extends JEditorPane {
             return;
         } else if (keyEvent == KeyEvent.KEY_TYPED) {
             //key typed
-            // Treat the case of enforced translations which should be locked            
-            if (lockListener.isLocked != null) {
-                // If active, prevent modifying the segment. Else, only display locked status
-                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
-                    return;
-                }
-            }
             super.processKeyEvent(e);
             return;
         }
@@ -435,13 +428,6 @@ public class EditorTextArea3 extends JEditorPane {
                 processed = true;
             }
         } else if (s.equals(KEYSTROKE_INSERT_LF)) {
-            // Treat the case of enforced translations which should be locked            
-            if (lockListener.isLocked != null) {
-                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
-                    return;
-                }
-            }
             // Insert LF
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
@@ -452,13 +438,6 @@ public class EditorTextArea3 extends JEditorPane {
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
         } else if (s.equals(KEYSTROKE_DELETE_PREV_TOKEN)) {
-            // Treat the case of enforced translations which should be locked            
-            if (lockListener.isLocked != null) {
-                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
-                    return;
-                }
-            }
             // Delete previous token
             try {
                 processed = wholeTagDelete(false);
@@ -476,13 +455,6 @@ public class EditorTextArea3 extends JEditorPane {
                 // do nothing
             }
         } else if (s.equals(KEYSTROKE_DELETE_NEXT_TOKEN)) {
-            // Treat the case of enforced translations which should be locked            
-            if (lockListener.isLocked != null) {
-                Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
-                if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
-                    return;
-                }
-            }
             // Delete next token
             try {
                 processed = wholeTagDelete(true);
@@ -544,16 +516,15 @@ public class EditorTextArea3 extends JEditorPane {
                     checkAndFixCaret(true);
                 }
             }
-            // Treat the case of enforced translations which should be locked            
+            // Treat the case of enforced translations which should be locked - this case does not seem to be treated via replaceSelection        
             if (lockListener.isLocked != null) {
-                if ( ((e.getKeyCode() == KeyEvent.VK_BACK_SPACE) || (e.getKeyCode() == KeyEvent.VK_DELETE)) 
-                  || (e.getKeyCode() == KeyEvent.VK_V && ( (e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) > 0) ) ) {
+                if ((e.getKeyCode() == KeyEvent.VK_BACK_SPACE) || (e.getKeyCode() == KeyEvent.VK_DELETE)) {
                     Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
                     if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
                         return;
                     }
                 }
-            }            
+            }
             super.processKeyEvent(e);
             // note that the translation start/end position are not updated yet. This has been updated when
             // then keyreleased event occurs.
@@ -907,6 +878,12 @@ public class EditorTextArea3 extends JEditorPane {
 
     @Override
     public void replaceSelection(String content) {
+        if (lockListener.isLocked != null) {
+            Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
+            if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                return;
+            }
+        }
         // Overwrite current selection, and if at the end of the segment, allow
         // inserting new text.
         if (isEditable() && overtypeMode && getSelectionStart() == getSelectionEnd()

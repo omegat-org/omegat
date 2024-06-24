@@ -10,7 +10,7 @@ commons_validator = "1.9.0"
 jsoup = "1.17.2"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }
 stax2api = "4.2.2"
-woodstox = "6.5.0"
+woodstox = "7.0.0"
 languagetool = "6.1"
 languagedetector = "0.6-2"
 lucene = "5.5.5"

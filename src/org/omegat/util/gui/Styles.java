@@ -167,7 +167,9 @@ public final class Styles {
         COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(UIManager.getColor("OmegaT.alignerTableRowHighlight")),
 
         COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT(
-                UIManager.getColor("OmegaT.machinetranslateSelectedHighlight"));
+                UIManager.getColor("OmegaT.machinetranslateSelectedHighlight")),
+
+        COLOR_MARK_COMES_FROM_TM_MT(UIManager.getColor("OmegaT.markComesFromTmMt"));
 
         private static final String DEFAULT_COLOR = "__DEFAULT__";
         private Color color;

@@ -72,6 +72,7 @@ import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
@@ -86,6 +87,8 @@ import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TooltipAttribute;
 import org.omegat.util.gui.UIThreadsUtil;
+
+import static org.openide.awt.Mnemonics.setLocalizedText;
 
 /**
  * This is a Glossary pane that displays glossary entries.
@@ -294,20 +297,13 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
 
     private void populateContextMenu(JPopupMenu popup) {
         boolean projectLoaded = Core.getProject().isProjectLoaded();
-
         final String selection = getSelectedText();
-        JMenuItem item = popup.add(OStrings.getString("GUI_GLOSSARYWINDOW_insertselection"));
+        JMenuItem item = popup.add(createMenuItem("GUI_GLOSSARYWINDOW_insertselection",
+                "glossaryWindowInsertSelectionPopupMenuItem", () -> Core.getEditor().insertText(selection)));
         item.setEnabled(projectLoaded && !StringUtil.isEmpty(selection));
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Core.getEditor().insertText(selection);
-            }
-        });
-        item = popup.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
+        item = popup.add(createMenuItem("GUI_GLOSSARYWINDOW_addentry", "glossaryWindowAddEntryPopupMenuItem",
+                () -> showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame())));
         item.setEnabled(projectLoaded);
-        item.addActionListener(
-                e -> showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame()));
     }
 
     @Override
@@ -410,14 +406,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     public void populatePaneMenu(JPopupMenu menu) {
         populateContextMenu(menu);
         menu.addSeparator();
-        final JMenuItem openFile = new JMenuItem(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE"));
-        openFile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWritableGlossaryMenuItem",
-                        e.getModifiers());
-            }
-        });
+        JMenuItem openFile = createMenuItem("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE",
+                "glossaryWindowSettingsOpenWriteableFileMenuItem", evt -> {
+                    Log.logInfoRB("LOG_MENU_CLICK", evt.getActionCommand());
+                    final int modifier = evt.getModifiers();
+                    ProjectUICommands.openWritableGlossaryFile((modifier & ActionEvent.ALT_MASK) != 0);
+                });
         openFile.setEnabled(false);
         if (Core.getProject().isProjectLoaded()) {
             String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
@@ -425,15 +419,16 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         }
         menu.add(openFile);
         menu.addSeparator();
-        final JMenuItem notify = new JCheckBoxMenuItem(
-                OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_NOTIFICATIONS"));
+        final JMenuItem notify = createCheckBoxMenuItem("GUI_GLOSSARYWINDOW_SETTINGS_NOTIFICATIONS",
+                "glossaryWindowSettingsNotificationMenuItem", evt -> {
+                    Log.logInfoRB("LOG_MENU_CLICK", evt.getActionCommand());
+                    Object o = evt.getSource();
+                    if (o instanceof JCheckBoxMenuItem) {
+                        Preferences.setPreference(Preferences.NOTIFY_GLOSSARY_HITS,
+                                ((JCheckBoxMenuItem) o).isSelected());
+                    }
+                });
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_GLOSSARY_HITS));
-        notify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Preferences.setPreference(Preferences.NOTIFY_GLOSSARY_HITS, notify.isSelected());
-            }
-        });
         menu.add(notify);
         menu.addSeparator();
         final JMenuItem sortOrderSrcLength = new JCheckBoxMenuItem(
@@ -450,5 +445,30 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         sortOrderLocLength.addActionListener(actionEvent -> Preferences
                 .setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, sortOrderLocLength.isSelected()));
         menu.add(sortOrderLocLength);
+    }
+
+    private static JMenuItem createMenuItem(String titleKey, String command, Runnable action) {
+        return createMenuItem(titleKey, command, ev -> {
+            Log.logInfoRB("LOG_MENU_CLICK", ev.getActionCommand());
+            action.run();
+        });
+    }
+
+    private static JMenuItem createMenuItem(String titleKey, String command, ActionListener actionListener) {
+        JMenuItem result = new JMenuItem();
+        setLocalizedText(result, OStrings.getString(titleKey));
+        result.setActionCommand(command);
+        result.addActionListener(actionListener);
+        return result;
+    }
+
+    private static JCheckBoxMenuItem createCheckBoxMenuItem(String titleKey, String command,
+            ActionListener actionListener) {
+        JCheckBoxMenuItem result = new JCheckBoxMenuItem();
+        result.setActionCommand(command);
+        setLocalizedText(result, OStrings.getString(titleKey));
+        result.setSelected(Preferences.isPreference(Preferences.NOTIFY_GLOSSARY_HITS));
+        result.addActionListener(actionListener);
+        return result;
     }
 }

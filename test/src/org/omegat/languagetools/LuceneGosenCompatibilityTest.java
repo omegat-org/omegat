@@ -30,6 +30,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Objects;
 
 import net.java.sen.SenFactory;
 import net.java.sen.StringTagger;
@@ -37,7 +38,7 @@ import net.java.sen.StringTagger;
 import org.junit.Test;
 
 import org.languagetool.JLanguageTool;
-import org.languagetool.language.Japanese;
+import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.patterns.PatternRule;
 
@@ -45,7 +46,8 @@ public class LuceneGosenCompatibilityTest {
 
     /**
      * Regression test for bugs#1204.
-     * https://sourceforge.net/p/omegat/bugs/1204/
+     * <a href="https://sourceforge.net/p/omegat/bugs/1204/">
+     * LanguageTool6 lucene-gosen-ipadic from omegat project is incompatible</a>
      */
     @Test
     public void testLuceneGosenGetStringTagger6() {
@@ -55,7 +57,7 @@ public class LuceneGosenCompatibilityTest {
 
     @Test
     public void testJapanese() throws Exception {
-        JLanguageTool lt = new JLanguageTool(new Japanese());
+        JLanguageTool lt = new JLanguageTool(Objects.requireNonNull(Languages.getLanguageForName("Japanese")));
         List<RuleMatch> matches = lt.check("そんじゃそこらのやつらとは違う");
         assertEquals(1, matches.size());
         assertTrue(matches.get(0).getRule() instanceof PatternRule);

@@ -626,7 +626,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      */
     public void gotoSegmentMenuItemActionPerformed() {
         // Create a dialog for input
-        GoToSegmentDialog dialog = new GoToSegmentDialog(mainWindow.getApplicationFrame());
+        GoToSegmentDialog dialog = new GoToSegmentDialog(Core.getMainWindow().getApplicationFrame());
         dialog.setVisible(true);
 
         int jumpTo = dialog.getResult();
@@ -750,7 +750,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     public void toolsCheckIssuesMenuItemActionPerformed() {
         if (!Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK)) {
             IssueProvidersSelectorController dialog = new IssueProvidersSelectorController();
-            if (!dialog.show(mainWindow.getApplicationFrame())) {
+            if (!dialog.show(Core.getMainWindow().getApplicationFrame())) {
                 return;
             }
         }
@@ -831,14 +831,14 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), FiltersCustomizerController.class);
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), FiltersCustomizerController.class);
     }
 
     /**
      * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), SegmentationCustomizerController.class);
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), SegmentationCustomizerController.class);
 
     }
 
@@ -846,7 +846,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Displays the workflow setup dialog to allow customizing the diverse workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
-        new PreferencesWindowController().show(mainWindow.getApplicationFrame(), EditingBehaviorController.class);
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), EditingBehaviorController.class);
     }
 
     /**
@@ -868,7 +868,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         try {
             Help.showHelp();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(mainWindow.getApplicationFrame(), ex.getLocalizedMessage(), OStrings.getString(
+            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), ex.getLocalizedMessage(), OStrings.getString(
                     "ERROR_TITLE"),
                     JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
@@ -879,27 +879,27 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Shows About dialog
      */
     public void helpAboutMenuItemActionPerformed() {
-        new AboutDialog(mainWindow.getApplicationFrame()).setVisible(true);
+        new AboutDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Shows Last changes
      */
     public void helpLastChangesMenuItemActionPerformed() {
-        new LastChangesDialog(mainWindow.getApplicationFrame()).setVisible(true);
+        new LastChangesDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Show log
      */
     public void helpLogMenuItemActionPerformed() {
-        new LogDialog(mainWindow.getApplicationFrame()).setVisible(true);
+        new LogDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
     }
 
     /**
      * Check for updates
      */
     public void helpUpdateCheckMenuItemActionPerformed() {
-        VersionCheckDialog.checkAndShowResultAsync(mainWindow.getApplicationFrame());
+        VersionCheckDialog.checkAndShowResultAsync(Core.getMainWindow().getApplicationFrame());
     }
 }

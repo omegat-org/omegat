@@ -1347,7 +1347,7 @@ ext.makeWinTask = { args ->
         }
     }
 
-    tasks.register(distsTaskName, Sync) {
+    tasks.register(distsTaskName, Copy) {
         description = "Create a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         onlyIf {

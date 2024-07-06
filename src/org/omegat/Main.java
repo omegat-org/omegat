@@ -70,7 +70,6 @@ import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;

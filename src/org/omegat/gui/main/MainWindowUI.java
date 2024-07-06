@@ -80,22 +80,6 @@ public final class MainWindowUI {
     public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
 
     /**
-     * Create docking desktop panel.
-     */
-    public static DockingDesktop initDocking(final MainWindow mainWindow) {
-        mainWindow.desktop = new DockingDesktop();
-        mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
-            public void dockableStateWillChange(DockableStateWillChangeEvent event) {
-                if (event.getFutureState().isClosed()) {
-                    event.cancel();
-                }
-            }
-        });
-
-        return mainWindow.desktop;
-    }
-
-    /**
      * Installs a {@link IProjectEventListener} that handles loading, storing,
      * and restoring the main window layout when a project-specific layout is
      * present.

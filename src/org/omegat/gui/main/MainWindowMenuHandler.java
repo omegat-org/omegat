@@ -98,7 +98,6 @@ import org.omegat.util.TagUtil.Tag;
  * @author Aaron Madlon-Kay
  */
 public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
-    private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     private final MainWindow mainWindow;
 
@@ -442,6 +441,9 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
 
+    /**
+     * Used in BaseMainWindowMenu#configuraActions for macOS.
+     */
     void findInProjectReuseLastWindow() {
         if (!Core.getProject().isProjectLoaded()) {
             return;

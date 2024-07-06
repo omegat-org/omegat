@@ -46,7 +46,6 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
@@ -222,7 +221,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void viewFileListMenuItemActionPerformed() {
-         IProjectFilesList projWin = Core.getProjectFilesList();
+        IProjectFilesList projWin = Core.getProjectFilesList();
         if (projWin == null) {
             mainWindow.menu.viewFileListMenuItem.setSelected(false);
             return;
@@ -659,59 +658,41 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkUntranslated(
-                        mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkUntranslated(
+                mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkParagraphStartCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkParagraphDelimitations(
-                        mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkParagraphDelimitations(
+                mainWindow.menu.viewMarkParagraphStartCheckBoxMenuItem.isSelected());
     }
 
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setDisplaySegmentSources(
-                        mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setDisplaySegmentSources(
+                mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkNonUniqueSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkNonUniqueSegments(
-                        mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkNonUniqueSegments(
+                mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkNotedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkNotedSegments(
-                        mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings()
+                .setMarkNotedSegments(mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkNBSPCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkNBSP(
-                        mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkNBSP(mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkWhitespace(
-                        mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings()
+                .setMarkWhitespace(mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkBidiCheckBoxMenuItemActionPerformed() {
-        Core.getEditor()
-                .getSettings()
-                .setMarkBidi(
-                        mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings().setMarkBidi(mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
@@ -793,8 +774,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed() {
-        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(), StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE)
-                .setVisible(true);
+        new StatisticsWindow(Core.getMainWindow().getApplicationFrame(),
+                StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
     }
 
     public void optionsAutoCompleteShowAutomaticallyItemActionPerformed() {
@@ -833,14 +814,16 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), FiltersCustomizerController.class);
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
+                FiltersCustomizerController.class);
     }
 
     /**
      * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
-        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), SegmentationCustomizerController.class);
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
+                SegmentationCustomizerController.class);
 
     }
 
@@ -848,7 +831,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Displays the workflow setup dialog to allow customizing the diverse workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
-        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(), EditingBehaviorController.class);
+        new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
+                EditingBehaviorController.class);
     }
 
     /**
@@ -870,9 +854,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         try {
             Help.showHelp();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), ex.getLocalizedMessage(), OStrings.getString(
-                    "ERROR_TITLE"),
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                    ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
             Log.log(ex);
         }
     }

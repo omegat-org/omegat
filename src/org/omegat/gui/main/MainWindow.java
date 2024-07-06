@@ -179,7 +179,7 @@ public class MainWindow implements IMainWindow {
 
     @Override
     public void resetDesktopLayout() {
-       MainWindowUI.resetDesktopLayout(this);
+        MainWindowUI.resetDesktopLayout(this);
     }
 
     @SuppressWarnings("unchecked")

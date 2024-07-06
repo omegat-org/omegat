@@ -54,10 +54,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.UIDesignManager;
 
-import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
-
 /**
  * Class for initialize, load/save, etc. for main window UI components.
  *

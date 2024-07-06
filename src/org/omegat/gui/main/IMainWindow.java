@@ -195,6 +195,10 @@ public interface IMainWindow {
      */
     Cursor getCursor();
 
+    default String getSelectedText() {
+        return "";
+    }
+
     /**
      * Retrieve main manu instance.
      */
@@ -209,4 +213,9 @@ public interface IMainWindow {
      * Restores the main window layout to the default values.
      */
     default void resetDesktopLayout() {}
+
+    /**
+     * Save the main window layout.
+     */
+    default void saveDesktopLayout() {}
 }

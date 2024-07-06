@@ -142,10 +142,6 @@ public class ConsoleWindow implements IMainWindow {
         return null;
     }
 
-    @Override
-    public void resetDesktopLayout() {
-    }
-
     public Cursor getCursor() {
         return Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
     }
@@ -153,13 +149,13 @@ public class ConsoleWindow implements IMainWindow {
     public void setCursor(Cursor cursor) {
     }
 
-    public int showConfirmDialog(Object message, String title, int optionType,
-            int messageType) throws HeadlessException {
+    public int showConfirmDialog(Object message, String title, int optionType, int messageType)
+            throws HeadlessException {
 
         System.out.println(title);
         System.out.println(message);
         System.out.println(OStrings.getString("TF_CHOSEN_YES"));
-        return 0; //JOptionPane.YES_OPTION
+        return 0; // JOptionPane.YES_OPTION
     }
 
     public void showMessageDialog(String message) {

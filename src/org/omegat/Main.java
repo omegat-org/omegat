@@ -50,9 +50,11 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -66,8 +68,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import org.apache.commons.lang3.StringUtils;
 import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
@@ -117,12 +119,11 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Hiroshi Miura
  */
 public final class Main {
-    private static final ILogger LOGGER = LoggerFactory.getLogger(Main.class, OStrings.getResourceBundle());
 
     private Main() {
     }
 
-    /** Project location for load on startup. */
+    /** Project location for a load on startup. */
     protected static File projectLocation = null;
 
     /** Remote project location. */
@@ -183,13 +184,20 @@ public final class Main {
         if (PARAMS.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
-        LOGGER.atInfo().log(
-                "\n===================================================================\n"
-                        + "{0} ({1}) Locale {2}",
-                OStrings.getNameAndVersion(), DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
-                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
-                Locale.getDefault().getDisplayName());
-        LOGGER.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+
+        // initialize logging backend and loading configuration.
+        ILogger logger = Log.getLogger(Main.class);
+
+        logger.atInfo()
+                .setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
+                .addArgument(StringUtils.repeat('=', 120))
+                .addArgument(OStrings.getNameAndVersion())
+                .addArgument(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now()))
+                .addArgument(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()))
+                .addArgument(Locale.getDefault().toLanguageTag())
+                .log();
+        logger.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());

@@ -56,19 +56,24 @@ import org.omegat.util.logging.OmegaTFileHandler;
  */
 public final class Log {
 
-    private static final ILogger LOGGER = LoggerFactory.getLogger(ILogger.ROOT_LOGGER_NAME,
-            OStrings.getResourceBundle());
+    private static final ILogger LOGGER;
 
     private Log() {
     }
 
     static {
+        LOGGER = LoggerFactory.getLogger(ILogger.ROOT_LOGGER_NAME,
+                OStrings.getResourceBundle());
+        init();
+    }
+
+    private static void init() {
         boolean loaded = false;
 
         // Ask slf4j-format-jdk14 to append (KEY) to log message.
         // When you switch to backend other than slf4j-jdk14(aka. JUL),
         // you should set to false. Otherwise, you may get duplicated key
-        // in message.
+        // in a message.
         System.setProperty(LoggerDecorator.LOCALISATION_KEY_APPENDER, "true");
 
         String customLogConfig = System.getProperty("java.util.logging.config.file");

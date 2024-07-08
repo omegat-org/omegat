@@ -29,15 +29,13 @@ package org.omegat.util.logging;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
@@ -49,10 +47,8 @@ import org.omegat.util.StringUtil;
  */
 public class OmegaTLogFormatter extends Formatter {
 
-    // Line mark is day-of-the-year and five-character random number
-    protected static final String LINE_MARK = String.format("%s%05d",
-            DateTimeFormatter.ofPattern("DDD").format(ZonedDateTime.now()),
-            ThreadLocalRandom.current().nextInt(100000));
+    // Line mark is five-character random number
+    protected final String LINE_MARK;
 
     private String logMask;
     private final boolean isMaskContainsMark;
@@ -82,6 +78,8 @@ public class OmegaTLogFormatter extends Formatter {
     public OmegaTLogFormatter() {
         LogManager manager = LogManager.getLogManager();
         String cname = getClass().getName();
+
+        LINE_MARK = Log.getSessionId();
 
         logMask = manager.getProperty(cname + ".mask");
         if (logMask == null) {

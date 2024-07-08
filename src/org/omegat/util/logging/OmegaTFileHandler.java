@@ -27,20 +27,20 @@
 package org.omegat.util.logging;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.logging.ErrorManager;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -65,6 +65,7 @@ public class OmegaTFileHandler extends StreamHandler {
     private FileOutputStream lockStream;
     private final long maxSize;
     private final int count;
+    private final long retention;
 
     public OmegaTFileHandler() throws IOException {
         LogManager manager = LogManager.getLogManager();
@@ -89,6 +90,13 @@ public class OmegaTFileHandler extends StreamHandler {
             count = 10;
         }
 
+        String retentionStr = manager.getProperty(cname + ".retention");
+        if (retentionStr != null) {
+            retention = Integer.parseInt(retentionStr) * 1000L;
+        } else {
+            retention = 10 * 24 * 60 * 60 * 1000L;
+        }
+
         openFiles(new File(StaticUtils.getConfigDir(), "logs"));
     }
 
@@ -104,11 +112,12 @@ public class OmegaTFileHandler extends StreamHandler {
      */
     @SuppressWarnings("resource")
     private void openFiles(final File dir) throws IOException {
-        dir.mkdirs();
+        boolean ignored = dir.mkdirs();
         for (int instanceIndex = 0; instanceIndex < 100; instanceIndex++) {
-            String fileName = OStrings.getApplicationName()
+            String fileName = String.format("%s_%s_%s%s", OStrings.getApplicationName(), Log.getSessionId(),
+                    Log.getSessionStartDateTime(),
                     // Instance index
-                    + (instanceIndex > 0 ? ("-" + instanceIndex) : "");
+                    instanceIndex > 0 ? ("-" + instanceIndex) : "");
 
             lockFile = new File(dir, fileName + ".log.lck");
             logFileName = fileName;
@@ -116,7 +125,7 @@ public class OmegaTFileHandler extends StreamHandler {
             // try to create lock file
             lockStream = new FileOutputStream(lockFile);
             if (lockStream.getChannel().tryLock() != null) {
-                rotate(dir, fileName);
+                cleanOldLogFiles(dir);
                 setEncoding(StandardCharsets.UTF_8.name());
                 setOutputStream(new FileOutputStream(new File(dir, fileName + ".log"), true));
                 break;
@@ -131,40 +140,10 @@ public class OmegaTFileHandler extends StreamHandler {
         super.close();
         try {
             lockStream.close();
-            lockFile.delete();
+            boolean ignored = lockFile.delete();
         } catch (Exception ex) {
             // shouldn't happen
             ex.printStackTrace();
-        }
-    }
-
-    /**
-     * Rotate log files if need.
-     */
-    private void rotate(final File dir, final String fileName) {
-        File logFile = new File(dir, fileName + ".log");
-        if (!logFile.exists() || logFile.length() < maxSize) {
-            // do not need to rotate
-            return;
-        }
-
-        String suffix = new SimpleDateFormat("yyyyMMdd.HHmm").format(new Date());
-        File destFile = new File(dir, fileName + '.' + suffix + ".log");
-        logFile.renameTo(destFile);
-        File[] oldLogs = dir.listFiles(new FileFilter() {
-            public boolean accept(File pathname) {
-                return pathname.getName().startsWith(fileName + '.') && pathname.getName().endsWith(".log");
-            }
-        });
-        if (oldLogs != null) {
-            Arrays.sort(oldLogs, new Comparator<File>() {
-                public int compare(File o1, File o2) {
-                    return o2.getName().compareToIgnoreCase(o1.getName());
-                }
-            });
-            for (int i = count; i < oldLogs.length; i++) {
-                oldLogs[i].delete();
-            }
         }
     }
 
@@ -173,6 +152,32 @@ public class OmegaTFileHandler extends StreamHandler {
         if (isLoggable(record)) {
             super.publish(record);
             flush();
+        }
+    }
+
+    private void cleanOldLogFiles(File dir) {
+        if (!dir.exists() || !dir.isDirectory()) {
+            return;
+        }
+
+        File[] files = dir.listFiles((d, name) -> name.startsWith(OStrings.getApplicationName())
+                && name.endsWith(".log"));
+        if (files == null) {
+            return;
+        }
+
+        long cutoffTime = System.currentTimeMillis() - retention;
+
+        for (File file : files) {
+            try {
+                Path filePath = Paths.get(file.getAbsolutePath());
+                BasicFileAttributes attrs = Files.readAttributes(filePath, BasicFileAttributes.class);
+                if (attrs.creationTime().toMillis() < cutoffTime) {
+                    Files.delete(filePath);
+                }
+            } catch (IOException e) {
+                Log.log("Failed to delete old log file: " + file.getAbsolutePath());
+            }
         }
     }
 }

@@ -34,6 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.ErrorManager;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -115,7 +116,7 @@ public class OmegaTFileHandler extends StreamHandler {
         boolean ignored = dir.mkdirs();
         for (int instanceIndex = 0; instanceIndex < 100; instanceIndex++) {
             String fileName = String.format("%s_%s_%s%s", OStrings.getApplicationName(), Log.getSessionId(),
-                    Log.getSessionStartDateTime(),
+                    DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss").format(Log.getSessionStartDateTime()),
                     // Instance index
                     instanceIndex > 0 ? ("-" + instanceIndex) : "");
 

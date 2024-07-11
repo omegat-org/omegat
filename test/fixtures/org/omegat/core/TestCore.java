@@ -387,6 +387,15 @@ public abstract class TestCore {
             }
 
             @Override
+            public boolean isMarkAltTranslations() {
+                return false;
+            }
+
+            @Override
+            public void setMarkAltTranslations(final boolean markAltTranslations) {
+            }
+
+            @Override
             public boolean isAutoSpellChecking() {
                 return false;
             }

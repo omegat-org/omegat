@@ -63,6 +63,7 @@ public class MarkerTestBase extends TestCore {
         private boolean markGlossaryMatches;
         private boolean markLanguageChecker;
         private boolean doFontFallback;
+        private boolean markAlt;
 
         @Override
         public boolean isUseTabForAdvance() {
@@ -162,6 +163,16 @@ public class MarkerTestBase extends TestCore {
         @Override
         public void setMarkBidi(boolean markBidi) {
             this.markBidi = markBidi;
+        }
+
+        @Override
+        public boolean isMarkAltTranslations() {
+            return markAlt;
+        }
+
+        @Override
+        public void setMarkAltTranslations(final boolean markAltTranslations) {
+            markAlt = markAltTranslations;
         }
 
         @Override

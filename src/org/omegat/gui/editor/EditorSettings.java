@@ -62,6 +62,7 @@ public class EditorSettings implements IEditorSettings {
     private boolean markWhitespace;
     private boolean markParagraphDelimitations;
     private boolean markBidi;
+    private boolean markAltTranslations;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
@@ -83,19 +84,20 @@ public class EditorSettings implements IEditorSettings {
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;
 
-        //options from menu 'view'
+        // options from menu 'view'
         useTabForAdvance = Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE);
         markTranslated = Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
         markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
         markNonUniqueSegments = Preferences.isPreferenceDefault(Preferences.MARK_NON_UNIQUE_SEGMENTS,
-               MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
+                MARK_NON_UNIQUE_SEGMENTS_DEFAULT);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
-        markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
+        markAltTranslations = Preferences.isPreference(Preferences.MARK_ALT_TRANSLATIONS);
+        markNBSP = Preferences.isPreference(Preferences.MARK_NBSP);
         markParagraphDelimitations = Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS,
                 MARK_PARA_DELIMITATIONS_DEFAULT);
-        markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
-        markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
+        markWhitespace = Preferences.isPreference(Preferences.MARK_WHITESPACE);
+        markBidi = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_SELECTED);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
@@ -211,19 +213,27 @@ public class EditorSettings implements IEditorSettings {
     public boolean isMarkNBSP() {
         return markNBSP;
     }
+
     /**
      * mark whitespace?
+     * 
      * @return true when set, false otherwise
      */
     public boolean isMarkWhitespace() {
         return markWhitespace;
     }
+
     /**
      * mark Bidirectional control characters
+     * 
      * @return true when set, false otherwise
      */
     public boolean isMarkBidi() {
         return markBidi;
+    }
+
+    public boolean isMarkAltTranslations() {
+        return markAltTranslations;
     }
 
     public boolean isDoFontFallback() {
@@ -285,6 +295,7 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
+
     public void setMarkWhitespace(boolean markWhitespace) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -298,7 +309,7 @@ public class EditorSettings implements IEditorSettings {
             parent.activateEntry();
         }
     }
-    
+
     public void setMarkParagraphDelimitations(boolean delimitations) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -324,6 +335,20 @@ public class EditorSettings implements IEditorSettings {
 
         this.markBidi = markBidi;
         Preferences.setPreference(Preferences.MARK_BIDI, markBidi);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
+    public void setMarkAltTranslations(boolean markAltTranslations) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markAltTranslations = markAltTranslations;
+        Preferences.setPreference(Preferences.MARK_ALT_TRANSLATIONS, markAltTranslations);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
@@ -437,15 +462,15 @@ public class EditorSettings implements IEditorSettings {
     }
 
     /**
-     * repaint segments in editor according to new view options. Use when options change to make them effective
-     * immediately.
+     * repaint segments in editor according to new view options. Use when
+     * options change to make them effective immediately.
      */
     public void updateViewPreferences() {
         UIThreadsUtil.mustBeSwingThread();
 
         parent.commitAndDeactivate();
 
-        //update variables
+        // update variables
         viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
         viewActiveSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ACTIVE_BOLD);
         markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
@@ -457,15 +482,16 @@ public class EditorSettings implements IEditorSettings {
     }
 
     /**
-     * repaint segments in editor according to new view tag validation options. Use when options change to make them
-     * effective immediately.
+     * repaint segments in editor according to new view tag validation options.
+     * Use when options change to make them effective immediately.
      */
     public void updateTagValidationPreferences() {
         UIThreadsUtil.mustBeSwingThread();
 
         parent.commitAndDeactivate();
 
-        // nothing special to do: tags/placeholders are determined by segment builder and info is passed as argument to
+        // nothing special to do: tags/placeholders are determined by segment
+        // builder and info is passed as argument to
         // getattributeSet.
 
         if (Core.getProject().isProjectLoaded()) {
@@ -480,12 +506,14 @@ public class EditorSettings implements IEditorSettings {
      * @param isSource
      *            is it a source segment or a target segment
      * @param isPlaceholder
-     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
+     *            is it for a placeholder (OmegaT tag or sprintf-variable etc.)
+     *            or regular text inside the segment?
      * @param isRemoveText
      *            is it text that should be removed from translation?
      * @param duplicate
-     *            is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT.
-     *            See sourceTextEntryste.getDuplicate()
+     *            is the sourceTextEntry a duplicate or not? values:
+     *            DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See
+     *            sourceTextEntryste.getDuplicate()
      * @param active
      *            is it an active segment?
      * @param translationExists
@@ -544,7 +572,7 @@ public class EditorSettings implements IEditorSettings {
             fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor();
         }
 
-        //determine background color
+        // determine background color
         Color bg = null;
         if (active) {
             if (isSource) {
@@ -585,11 +613,12 @@ public class EditorSettings implements IEditorSettings {
                 break;
             }
         }
-        if (isNBSP && isMarkNBSP()) { //overwrite others, because space is smallest.
+        if (isNBSP && isMarkNBSP()) { // overwrite others, because space is
+                                      // smallest.
             bg = Styles.EditorColor.COLOR_NBSP.getColor();
         }
 
-        //determine bold
+        // determine bold
         Boolean bold = false;
         if (isSource) {
             if (viewSourceBold || (active && viewActiveSourceBold)) {
@@ -597,7 +626,7 @@ public class EditorSettings implements IEditorSettings {
             }
         }
 
-        //determine italic
+        // determine italic
         Boolean italic = false;
         if (isRemoveText && isSource) {
             italic = true;
@@ -608,15 +637,17 @@ public class EditorSettings implements IEditorSettings {
 
     /**
      * Returns font attributes for paragraph start
+     * 
      * @return
      */
     public AttributeSet getParagraphStartAttributeSet() {
-        return Styles.createAttributeSet(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(),
-                null, false, true);
+        return Styles.createAttributeSet(Styles.EditorColor.COLOR_PARAGRAPH_START.getColor(), null, false,
+                true);
     }
 
     /**
      * Returns font attributes for the modification info line.
+     * 
      * @return
      */
     public AttributeSet getModificationInfoAttributeSet() {

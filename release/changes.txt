@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  44 Enhancement
+  45 Enhancement
   69 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Alternative translation highlight
+  https://sourceforge.net/p/omegat/feature-requests/1736/
 
   - Support for Stardict's Pango content type
   https://sourceforge.net/p/omegat/feature-requests/1727/

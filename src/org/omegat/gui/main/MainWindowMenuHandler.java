@@ -695,6 +695,11 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
         Core.getEditor().getSettings().setMarkBidi(mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
     }
 
+    public void viewMarkAlternativeTranslationsCheckBoxMenuItemActionPerformed() {
+        Core.getEditor().getSettings().setMarkAltTranslations(
+                mainWindow.menu.viewMarkAlternativeTranslationsCheckBoxMenuItem.isSelected());
+    }
+
     public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
@@ -745,7 +750,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * Identify all the placeholders in the source text and automatically inserts them into the target text.
+     * Identify all the placeholders in the source text and automatically
+     * inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
         // insert tags
@@ -811,7 +817,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * Displays the filters setup dialog to allow customizing file filters in detail.
+     * Displays the filters setup dialog to allow customizing file filters in
+     * detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
         new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
@@ -819,7 +826,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
+     * Displays the segmentation setup dialog to allow customizing the
+     * segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
         new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
@@ -828,7 +836,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * Displays the workflow setup dialog to allow customizing the diverse workflow options.
+     * Displays the workflow setup dialog to allow customizing the diverse
+     * workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
         new PreferencesWindowController().show(Core.getMainWindow().getApplicationFrame(),
@@ -836,8 +845,8 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * Restores defaults for all dockable parts. May be expanded in the future to reset the entire GUI to its
-     * defaults.
+     * Restores defaults for all dockable parts. May be expanded in the future
+     * to reset the entire GUI to its defaults.
      */
     public void viewRestoreGUIMenuItemActionPerformed() {
         Core.getMainWindow().resetDesktopLayout();

@@ -27,7 +27,6 @@ package org.omegat.gui.editor.mark;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.EditorSettings;
 import org.omegat.util.gui.Styles;
 
 import javax.swing.text.Highlighter;
@@ -39,19 +38,13 @@ public class AltTranslationsMarker extends AbstractMarker {
     private final Highlighter.HighlightPainter painter = new TransparentHighlightPainter(
             Styles.EditorColor.COLOR_MARK_ALT_TRANSLATION.getColor(), 0.5F);
 
-    public static void loadPlugins() {
-        Core.registerMarkerClass(AltTranslationsMarker.class);
-    }
-    public static void unloadPlugins() {
-    }
-
     public AltTranslationsMarker() throws Exception {
         super();
     }
 
     @Override
     protected boolean isEnabled() {
-        return ((EditorSettings) Core.getEditor().getSettings()).isMarkAltTranslations();
+        return Core.getEditor().getSettings().isMarkAltTranslations();
     }
 
     @Override

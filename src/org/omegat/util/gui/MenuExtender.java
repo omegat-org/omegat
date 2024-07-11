@@ -54,7 +54,7 @@ public final class MenuExtender {
         /**
          * View menu.
          */
-        VIEW("view", 13),
+        VIEW("view", 14),
         /**
          * Tools menu.
          */

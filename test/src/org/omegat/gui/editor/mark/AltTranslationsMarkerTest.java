@@ -48,7 +48,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
 
-public class AltTranslationsMarkerTest  extends MarkerTestBase {
+public class AltTranslationsMarkerTest extends MarkerTestBase {
 
     private ProjectTMX projectTMX;
 

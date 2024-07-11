@@ -48,7 +48,8 @@ public class AltTranslationsMarker extends AbstractMarker {
     }
 
     @Override
-    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) throws Exception {
+    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+            boolean isActive) throws Exception {
         if (!isEnabled()) {
             return null;
         }

@@ -66,9 +66,9 @@ public interface IEditorSettings {
     boolean isMarkWhitespace();
 
     void setMarkWhitespace(boolean markWhitespace);
-    
+
     void setMarkParagraphDelimitations(boolean mark);
-    
+
     boolean isMarkParagraphDelimitations();
 
     boolean isMarkBidi();

@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,6 +42,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.analysis.hunspell.HunspellStemFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.NIOFSDirectory;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
@@ -160,7 +163,8 @@ public class HunspellTokenizer extends BaseTokenizer {
             return null;
         }
         try {
-            return new Dictionary(new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
+            Directory tempDir = new NIOFSDirectory(Files.createTempDirectory("omegat"));
+            return new Dictionary(tempDir, "hunspell",  new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
         } catch (Throwable t) {
             Log.log(t);
             return null;

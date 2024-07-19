@@ -332,15 +332,7 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader;
-        if (cl instanceof MainClassLoader) {
-            mainClassLoader = (MainClassLoader) cl;
-        } else {
-            mainClassLoader = new MainClassLoader(cl);
-        }
-        PluginUtils.getThemePluginJars().forEach(mainClassLoader::addJarToClasspath);
-        UIManager.put("ClassLoader", mainClassLoader);
+        UIManager.put("ClassLoader",  PluginUtils.getThemeClassLoader());
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {

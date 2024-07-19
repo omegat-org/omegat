@@ -35,7 +35,6 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -56,6 +55,7 @@ import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 import org.omegat.CLIParameters;
+import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.tokenizer.DefaultTokenizer;
@@ -78,6 +78,12 @@ import org.omegat.util.VersionChecker;
 public final class PluginUtils {
 
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
+
+    private static final String PLUGIN_CATEGORY = "Plugin-Category";
+    private static final String MAIN_CLASS = "Main-Class";
+    private static final String MANIFEST_MF = "META-INF/MANIFEST.MF";
+    private static final String OMEGAT_PLUGINS = "OmegaT-Plugins";
+    private static final String OMEGAT_PLUGIN = "OmegaT-Plugin";
 
     /**
      * Plugin type definitions.
@@ -155,6 +161,12 @@ public final class PluginUtils {
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
+    private static final MainClassLoader THEME_CLASSLOADER;
+
+    static {
+        THEME_CLASSLOADER = new MainClassLoader(PluginUtils.class.getClassLoader());
+    }
+
     /** Private constructor to disallow creation */
     private PluginUtils() {
     }
@@ -185,26 +197,28 @@ public final class PluginUtils {
 
         boolean foundMain = false;
         // look on all manifests
-        URLClassLoader pluginsClassLoader = new URLClassLoader(urlList.toArray(new URL[0]),
-                PluginUtils.class.getClassLoader());
+        ClassLoader cl = PluginUtils.class.getClassLoader();
+        MainClassLoader pluginsClassLoader = new MainClassLoader(urlList.toArray(new URL[0]), cl);
         try {
-            Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF");
+            Enumeration<URL> mlist = pluginsClassLoader.getResources(MANIFEST_MF);
             while (mlist.hasMoreElements()) {
                 URL mu = mlist.nextElement();
                 try (InputStream in = mu.openStream()) {
                     Manifest m = new Manifest(in);
-                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
+                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue(MAIN_CLASS))) {
                         // found a main manifest - not in development mode
                         foundMain = true;
                     }
-                    loadFromManifest(m, pluginsClassLoader, mu);
-                    if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
+                    if ("theme".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
                         String target = mu.toString();
                         for (URL url : urlList) {
                             if (target.contains(url.toString())) {
-                                THEME_PLUGIN_JARS.add(url);
+                                THEME_CLASSLOADER.addJarToClasspath(url);
+                                loadFromManifest(m, THEME_CLASSLOADER, mu);
                             }
                         }
+                    } else {
+                        loadFromManifest(m, pluginsClassLoader, mu);
                     }
                 } catch (ClassNotFoundException e) {
                     Log.log(e);
@@ -258,10 +272,6 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             when specified plugin is not found.
      */
-    public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
-        ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
-        loadFromProperties(props, pluginsClassLoader);
-    }
 
     /**
      * This method creates a list of plugins to load. It tries to only take the
@@ -298,8 +308,8 @@ public final class PluginUtils {
         for (URL url : urlList) {
             try (JarInputStream jarStream = new JarInputStream(url.openStream())) {
                 Manifest mf = jarStream.getManifest();
-                String pluginClass = mf.getMainAttributes().getValue("OmegaT-Plugins");
-                String oldPluginClass = mf.getMainAttributes().getValue("OmegaT-Plugin");
+                String pluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGINS);
+                String oldPluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGIN);
 
                 // if the jar doesn't look like an OmegaT plugin (it doesn't
                 // contain any "Omegat-Plugins?" attribute, we don't need to
@@ -384,7 +394,7 @@ public final class PluginUtils {
             return exactResult;
         }
 
-        // Otherwise return a match for the language only (XX).
+        // Otherwise, return a match for the language only (XX).
         Class<?> generalResult = searchForTokenizer(lang.getLanguageCode());
         if (isDefault(generalResult)) {
             return generalResult;
@@ -456,8 +466,8 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
-    public static List<URL> getThemePluginJars() {
-        return THEME_PLUGIN_JARS;
+    public static ClassLoader getThemeClassLoader() {
+        return THEME_CLASSLOADER;
     }
 
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
@@ -473,8 +483,6 @@ public final class PluginUtils {
     private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
-
-    private static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
 
     /**
      * Parse one manifest file.

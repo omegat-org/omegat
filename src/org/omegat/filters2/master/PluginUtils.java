@@ -272,6 +272,10 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             when specified plugin is not found.
      */
+    public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
+        ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
+        loadFromProperties(props, pluginsClassLoader);
+    }
 
     /**
      * This method creates a list of plugins to load. It tries to only take the

@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.regex.Matcher;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
@@ -39,7 +40,6 @@ import org.apache.lucene.analysis.ja.JapaneseTokenizer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer.Mode;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.analysis.util.CharArraySet;
 import org.omegat.util.PatternConsts;
 
 /**

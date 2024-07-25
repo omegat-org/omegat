@@ -49,17 +49,8 @@ plugins.forEach { args ->
     sourceSets.create(name)
     dependencies.add("${name}CompileOnly", project.rootProject)
     dependencies.add("${name}CompileOnly", libs.languagetool.core)
-    if (name.equals("ja")) {
-        dependencies.add("jaImplementation", libs.languagetool.ja.get()) {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-            exclude module: 'languagetool-core'
-        }
-        dependencies.add("jaImplementation", 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic')
-    } else {
-         dependencies.add("${name}Implementation", "${languageToolGroup}:language-${name}:${languageToolVersion}") {
-            exclude module: 'languagetool-core'
-        }
+    dependencies.add("${name}Implementation", "${languageToolGroup}:language-${name}:${languageToolVersion}") {
+        exclude module: 'languagetool-core'
     }
     configurations.getByName("${name}RuntimeClasspath").exclude(group: languageToolGroup, module: 'languagetool-core')
     tasks.getByName("${name}Classes") {

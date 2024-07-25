@@ -5,15 +5,15 @@ groovy = "4.0.22"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.16.1"
-commons_text = "1.11.0"
+commons_text = "1.10.0"
 commons_validator = "1.9.0"
 jsoup = "1.18.1"
 icu4j = { require = "[70,73.2[", prefer = "72.1" }
 stax2api = "4.2.2"
 woodstox = "6.5.0"
-languagetool = "6.1"
-languagedetector = "0.6-2"
-lucene = "5.5.5"
+languagetool = "6.3-omt1.0"
+language_detector = "0.6-2"
+lucene = "8.11.3"
 checkstyle = "8.45.1"
 guava = "32.1.2-jre"
 annotations = "23.0.0"
@@ -65,14 +65,14 @@ jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
 icj4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
-languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}
-languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
-languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
-languagetool-be = {group = "org.languagetool", name = "language-be", version.ref = "languagetool"}
-languagetool-en = {group = "org.languagetool", name = "language-en", version.ref = "languagetool"}
-languagetool-fr = {group = "org.languagetool", name = "language-fr", version.ref = "languagetool"}
-languagetool-ja = {group = "org.languagetool", name = "language-ja", version.ref = "languagetool"}
-languagetool-pl = {group = "org.languagetool", name = "language-pl", version.ref = "languagetool"}
+languagetool-all = {group = "org.omegat.lucene", name = "language-all", version.ref = "languagetool"}
+languagetool-core = {group = "org.omegat.lucene", name = "languagetool-core", version.ref = "languagetool"}
+languagetool-server = {group = "org.omegat.lucene", name = "languagetool-server", version.ref = "languagetool"}
+languagetool-be = {group = "org.omegat.lucene", name = "language-be", version.ref = "languagetool"}
+languagetool-en = {group = "org.omegat.lucene", name = "language-en", version.ref = "languagetool"}
+languagetool-fr = {group = "org.omegat.lucene", name = "language-fr", version.ref = "languagetool"}
+languagetool-ja = {group = "org.omegat.lucene", name = "language-ja", version.ref = "languagetool"}
+languagetool-pl = {group = "org.omegat.lucene", name = "language-pl", version.ref = "languagetool"}
 lucene-core = {group = "org.apache.lucene", name = "lucene-core", version.ref = "lucene"}
 lucene-analyzers-common = {group = "org.apache.lucene", name = "lucene-analyzers-common", version.ref = "lucene"}
 lucene-analyzers-kuromoji = {group = "org.apache.lucene", name = "lucene-analyzers-kuromoji", version.ref = "lucene"}
@@ -134,7 +134,7 @@ tipoftheday = {group = "tokyo.northside", name = "tipoftheday", version.ref = "t
 jna = {group = "net.java.dev.jna", name = "jna-platform", version.ref = "jna"}
 jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
 flatlaf = {group = "com.formdev", name = "flatlaf", version.ref = "flatlaf"}
-language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
+language-detector = {group = "org.omegat", name = "language-detector", version.ref = "language_detector"}
 assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", version.ref = "assertj_swing_junit"}
 morfologik = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
 morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }

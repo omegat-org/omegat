@@ -234,6 +234,7 @@ dependencies {
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
+        implementation(libs.commons.text)
         implementation(libs.commons.validator)
         api(libs.slf4j.api)
         implementation(libs.slf4j.format.jdk14)
@@ -273,11 +274,8 @@ dependencies {
         implementation(libs.language.detector)
 
         runtimeOnly(libs.languagetool.all) {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
             exclude module: 'language-detector'
         }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
@@ -352,14 +350,9 @@ dependencies {
     testImplementation(libs.bundles.xmlunit)
     // LanguageTool unit tests exercise these languages
     testImplementation(libs.bundles.languagetool.tests) {
-        exclude group: 'org.slf4j'
-        exclude module: 'guava'
         exclude module: 'language-detector'
-        exclude group: 'ch.qos.logback'
-        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-        exclude module: 'lucene-gosen'
     }
-    testImplementation("org.omegat.lucene:lucene-gosen:5.5.1:ipadic")
+    testImplementation("org.omegat.lucene:lucene-gosen:8.11.0:ipadic")
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only

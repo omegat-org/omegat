@@ -70,8 +70,8 @@ import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
-import org.omegat.languagetools.LanguageToolClassBroker;
-import org.omegat.languagetools.LanguageToolDataBroker;
+import org.omegat.languagetools.LanguageClassBroker;
+import org.omegat.languagetools.LanguageDataBroker;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -209,8 +209,8 @@ public final class Main {
         ConvertConfigs.convert();
         Preferences.init();
         // broker should be loaded before module loading
-        JLanguageTool.setClassBrokerBroker(new LanguageToolClassBroker());
-        JLanguageTool.setDataBroker(new LanguageToolDataBroker());
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
         PluginUtils.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();

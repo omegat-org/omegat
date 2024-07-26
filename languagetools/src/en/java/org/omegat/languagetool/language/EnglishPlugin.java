@@ -27,22 +27,14 @@ package org.omegat.languagetool.language;
 
 import java.io.IOException;
 
-import org.languagetool.language.AmericanEnglish;
-import org.languagetool.language.AustralianEnglish;
-import org.languagetool.language.CanadianEnglish;
-import org.languagetool.language.NewZealandEnglish;
-import org.languagetool.language.SouthAfricanEnglish;
-
-import org.omegat.languagetools.LanguageToolLanguageManager;
+import org.omegat.languagetools.LanguageManager;
 
 public class EnglishPlugin {
 
+    private static final String AMERICAN_ENGLISH = "org.languagetool.language.AmericanEnglish";
+
     public static void loadPlugins() throws IOException {
-        LanguageToolLanguageManager.registerLTLanguage(new AmericanEnglish());
-        LanguageToolLanguageManager.registerLTLanguage(new AustralianEnglish());
-        LanguageToolLanguageManager.registerLTLanguage(new CanadianEnglish());
-        LanguageToolLanguageManager.registerLTLanguage(new NewZealandEnglish());
-        LanguageToolLanguageManager.registerLTLanguage(new SouthAfricanEnglish());
+        LanguageManager.registerLTLanguage(AMERICAN_ENGLISH);
     }
 
     public static void unloadPlugins() {

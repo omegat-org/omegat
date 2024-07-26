@@ -28,10 +28,10 @@ package org.omegat.languagetools;
 import org.languagetool.broker.ClassBroker;
 import org.omegat.filters2.master.PluginUtils;
 
-public class LanguageToolClassBroker implements ClassBroker {
+public class LanguageClassBroker implements ClassBroker {
 
 
-    public LanguageToolClassBroker() {
+    public LanguageClassBroker() {
     }
 
     @Override
@@ -41,7 +41,7 @@ public class LanguageToolClassBroker implements ClassBroker {
         try {
             clazz = classLoader.loadClass(qualifiedName);
         } catch (ClassNotFoundException e) {
-            clazz = LanguageToolClassBroker.class.getClassLoader().loadClass(qualifiedName);
+            clazz = LanguageClassBroker.class.getClassLoader().loadClass(qualifiedName);
         }
         return clazz;
     }

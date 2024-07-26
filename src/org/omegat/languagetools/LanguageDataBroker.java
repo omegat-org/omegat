@@ -43,17 +43,17 @@ import org.jetbrains.annotations.NotNull;
 import org.languagetool.Language;
 import org.languagetool.broker.ResourceDataBroker;
 
-public class LanguageToolDataBroker implements ResourceDataBroker {
+public class LanguageDataBroker implements ResourceDataBroker {
 
     private final String resourceDir;
     private final String rulesDir;
 
-    public LanguageToolDataBroker(String resourceDir, String rulesDir) {
+    public LanguageDataBroker(String resourceDir, String rulesDir) {
         this.resourceDir = resourceDir == null ? "" : resourceDir;
         this.rulesDir = rulesDir == null ? "" : rulesDir;
     }
 
-    public LanguageToolDataBroker() {
+    public LanguageDataBroker() {
         this(ResourceDataBroker.RESOURCE_DIR, ResourceDataBroker.RULES_DIR);
     }
 
@@ -123,15 +123,23 @@ public class LanguageToolDataBroker implements ResourceDataBroker {
         }
     }
 
+    private Language getLanguage() {
+        org.omegat.util.Language omLang = LanguageManager.getProjectTargetLanguage();
+        if (omLang == null) {
+            return null;
+        }
+        Language lang = LanguageManager.getLTLanguage(omLang.getLanguageCode(), omLang.getCountryCode());
+        if (lang == null) {
+            lang = LanguageManager.getLTLanguage("en", "US");
+        }
+        return lang;
+    }
+
     @Override
     public InputStream getAsStream(String path) {
         InputStream inputStream = ResourceDataBroker.class.getResourceAsStream(path);
         if (inputStream == null) {
-            Language lang = LanguageToolLanguageManager.getLTLanguage(
-                    LanguageToolLanguageManager.getProjectTargetLanguage());
-            if (lang == null) {
-                lang = LanguageToolLanguageManager.getLTLanguage(new org.omegat.util.Language("en"));
-            }
+            Language lang = getLanguage();
             if (lang != null) {
                 inputStream = lang.getClass().getResourceAsStream(path);
             }
@@ -143,11 +151,7 @@ public class LanguageToolDataBroker implements ResourceDataBroker {
     public URL getAsURL(String path) {
         URL url = ResourceDataBroker.class.getResource(path);
         if (url == null) {
-            Language lang = LanguageToolLanguageManager.getLTLanguage(
-                    LanguageToolLanguageManager.getProjectTargetLanguage());
-            if (lang == null) {
-                lang = LanguageToolLanguageManager.getLTLanguage(new org.omegat.util.Language("en"));
-            }
+            Language lang = getLanguage();
             if (lang != null) {
                 url = lang.getClass().getResource(path);
             }
@@ -157,31 +161,25 @@ public class LanguageToolDataBroker implements ResourceDataBroker {
 
     @Override
     public @NotNull List<URL> getAsURLs(String path) {
-        List<URL> urls;
         Enumeration<URL> enumeration = null;
         try {
             enumeration = ResourceDataBroker.class.getClassLoader().getResources(path);
         } catch (IOException ignored) {
         }
         if (enumeration != null) {
-            urls = Collections.list(enumeration);
+            List<URL> urls = Collections.list(enumeration);
             if (!urls.isEmpty()) {
                 return urls;
             }
         }
+        Language lang = getLanguage();
+        if (lang == null) {
+            return Collections.emptyList();
+        }
         try {
-            Language lang = LanguageToolLanguageManager.getLTLanguage(
-                    LanguageToolLanguageManager.getProjectTargetLanguage());
-            if (lang == null) {
-                lang = LanguageToolLanguageManager.getLTLanguage(new org.omegat.util.Language("en"));
-            }
-            if (lang != null) {
-                enumeration = lang.getClass().getClassLoader().getResources(path);
-            } else {
-                return List.of();
-            }
+            enumeration = lang.getClass().getClassLoader().getResources(path);
         } catch (IOException ignored) {
-            return List.of();
+            return Collections.emptyList();
         }
         return Collections.list(enumeration);
     }

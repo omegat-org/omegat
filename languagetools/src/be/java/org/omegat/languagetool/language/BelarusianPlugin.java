@@ -25,15 +25,13 @@
 
 package org.omegat.languagetool.language;
 
-import org.languagetool.language.Belarusian;
-
-import org.omegat.languagetools.LanguageToolLanguageManager;
+import org.omegat.languagetools.LanguageManager;
 
 public class BelarusianPlugin {
 
     @SuppressWarnings("deprecation")
     public static void loadPlugins() {
-        LanguageToolLanguageManager.registerLTLanguage(new Belarusian());
+        LanguageManager.registerLTLanguage("org.languagetool.language.Belarusian");
     }
 
     public static void unloadPlugins() {

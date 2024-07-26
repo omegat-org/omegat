@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class ItalianPlugin {
 
+    private static final String ITALIAN = "org.languagetool.language.Italian";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(ITALIAN);
     }
 
     public static void unloadPlugins() {

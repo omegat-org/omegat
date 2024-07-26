@@ -40,12 +40,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Languages;
-import org.languagetool.language.AmericanEnglish;
-import org.languagetool.language.Belarusian;
-import org.languagetool.language.CanadianEnglish;
-import org.languagetool.language.English;
-import org.languagetool.language.French;
-import org.languagetool.language.Japanese;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.server.HTTPServer;
@@ -64,14 +58,13 @@ public class LanguageToolTest {
     @BeforeClass
     @SuppressWarnings("deprecation")
     public static void setUpClass() {
-        JLanguageTool.setClassBrokerBroker(new LanguageToolClassBroker());
-        JLanguageTool.setDataBroker(new LanguageToolDataBroker());
-        LanguageToolLanguageManager.registerLTLanguage(new English());
-        LanguageToolLanguageManager.registerLTLanguage(new AmericanEnglish());
-        LanguageToolLanguageManager.registerLTLanguage(new CanadianEnglish());
-        LanguageToolLanguageManager.registerLTLanguage(new Belarusian());
-        LanguageToolLanguageManager.registerLTLanguage(new French());
-        LanguageToolLanguageManager.registerLTLanguage(new Japanese());
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
+        LanguageManager.registerLTLanguage("org.languagetool.language.English");
+        LanguageManager.registerLTLanguage("org.languagetool.language.AmericanEnglish");
+        LanguageManager.registerLTLanguage("org.languagetool.language.CanadianEnglish");
+        LanguageManager.registerLTLanguage("org.languagetool.language.Belarusian");
+        LanguageManager.registerLTLanguage("org.languagetool.language.French");
     }
 
     @Before

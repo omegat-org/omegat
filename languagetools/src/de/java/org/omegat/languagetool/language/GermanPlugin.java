@@ -25,18 +25,18 @@
 
 package org.omegat.languagetool.language;
 
-import org.languagetool.language.AustrianGerman;
-import org.languagetool.language.GermanyGerman;
-import org.languagetool.language.SwissGerman;
-
-import org.omegat.languagetools.LanguageToolLanguageManager;
+import org.omegat.languagetools.LanguageManager;
 
 public class GermanPlugin {
 
+    private static final String AUSTRARIAN_GERMAN = "org.languagetool.language.AustrianGerman";
+    private static final String GERMANY_GERMAN = "org.languagetool.language.GermanyGerman";
+    private static final String SWISS_GERMAN = "org.languagetool.language.SwissGerman";
+
     public static void loadPlugins() {
-        LanguageToolLanguageManager.registerLTLanguage(new AustrianGerman());
-        LanguageToolLanguageManager.registerLTLanguage(new GermanyGerman());
-        LanguageToolLanguageManager.registerLTLanguage(new SwissGerman());
+        LanguageManager.registerLTLanguage(AUSTRARIAN_GERMAN);
+        LanguageManager.registerLTLanguage(GERMANY_GERMAN);
+        LanguageManager.registerLTLanguage(SWISS_GERMAN);
     }
 
     public static void unloadPlugins() {

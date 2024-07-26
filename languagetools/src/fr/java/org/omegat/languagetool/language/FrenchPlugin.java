@@ -25,14 +25,14 @@
 
 package org.omegat.languagetool.language;
 
-import org.languagetool.language.French;
-
-import org.omegat.languagetools.LanguageToolLanguageManager;
+import org.omegat.languagetools.LanguageManager;
 
 public class FrenchPlugin {
 
+    private static final String FRENCH = "org.languagetool.language.French";
+
     public static void loadPlugins() {
-        LanguageToolLanguageManager.registerLTLanguage(new French());
+        LanguageManager.registerLTLanguage(FRENCH);
     }
 
     public static void unloadPlugins() {

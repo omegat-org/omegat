@@ -25,14 +25,14 @@
 
 package org.omegat.languagetool.language;
 
-import org.languagetool.language.Japanese;
-
-import org.omegat.languagetools.LanguageToolLanguageManager;
+import org.omegat.languagetools.LanguageManager;
 
 public class JapanesePlugin {
 
+    private static final String JAPANESE = "org.languagetool.language.Japanese";
+
     public static void loadPlugins() {
-        LanguageToolLanguageManager.registerLTLanguage(new Japanese());
+        LanguageManager.registerLTLanguage(JAPANESE);
     }
 
     public static void unloadPlugins() {

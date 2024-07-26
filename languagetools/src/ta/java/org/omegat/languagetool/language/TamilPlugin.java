@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class TamilPlugin {
 
+    private static final String TAMIL = "org.languagetool.language.Tamil";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(TAMIL);
     }
 
     public static void unloadPlugins() {

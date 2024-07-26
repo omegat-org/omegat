@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class PersianPlugin {
 
+    private static final String PERSIAN = "org.languagetool.language.Persian";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(PERSIAN);
     }
 
     public static void unloadPlugins() {

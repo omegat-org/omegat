@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class BretonPlugin {
 
+    private static final String BRETON = "org.languagetool.language.Breton";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(BRETON);
     }
 
     public static void unloadPlugins() {

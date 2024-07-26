@@ -25,9 +25,22 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class PortuguesePlugin {
 
+    private static final String PORTUGUESE = "org.languagetool.language.Portuguese";
+    private static final String PORTUGAL_PORTUGUESE = "org.languagetool.language.PortugalPortuguese";
+    private static final String BRAZILIAN_PORTUGUESE = "org.languagetool.language.BrazilianPortuguese";
+    private static final String ANGOLA_PORTUGUESE = "org.languagetool.language.AngolaPortuguese";
+    private static final String MOZAMBIQUE_PORTUGUESE = "org.languagetool.language.MozambiquePortuguese";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(PORTUGUESE);
+        LanguageManager.registerLTLanguage(PORTUGAL_PORTUGUESE);
+        LanguageManager.registerLTLanguage(BRAZILIAN_PORTUGUESE);
+        LanguageManager.registerLTLanguage(ANGOLA_PORTUGUESE);
+        LanguageManager.registerLTLanguage(MOZAMBIQUE_PORTUGUESE);
     }
 
     public static void unloadPlugins() {

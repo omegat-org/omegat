@@ -25,9 +25,13 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class SlovakPlugin {
+    private static final String SLOVAK = "org.languagetool.language.Slovak";
 
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(SLOVAK);
     }
 
     public static void unloadPlugins() {

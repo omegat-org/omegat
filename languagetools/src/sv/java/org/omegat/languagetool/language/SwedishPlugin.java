@@ -25,9 +25,13 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class SwedishPlugin {
+    private static final String SWEDISH = "org.languagetool.language.Swedish";
 
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(SWEDISH);
     }
 
     public static void unloadPlugins() {

@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class ChinesePlugin {
 
+    private static final String CHINESE = "org.languagetool.language.Chinese";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(CHINESE);
     }
 
     public static void unloadPlugins() {

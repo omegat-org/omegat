@@ -25,9 +25,16 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class SpanishPlugin {
 
+    private static final String SPANISH = "org.languagetool.language.Spanish";
+    private static final String SPANISH_VOSEO = "org.languagetool.language.SpanishVoseo";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(SPANISH);
+        LanguageManager.registerLTLanguage(SPANISH_VOSEO);
     }
 
     public static void unloadPlugins() {

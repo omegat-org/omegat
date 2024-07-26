@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class ArabicPlugin {
 
+    private static final String ARABIC = "org.languagetool.language.Arabic";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(ARABIC);
     }
 
     public static void unloadPlugins() {

@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class TagalogPlugin {
 
+    private static final String TAGALOG = "org.languagetool.language.Tagalog";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(TAGALOG);
     }
 
     public static void unloadPlugins() {

@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class RomanianPlugin {
 
+    private static final String ROMANIAN = "org.languagetool.language.Romanian";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(ROMANIAN);
     }
 
     public static void unloadPlugins() {

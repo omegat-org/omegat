@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class CatalanPlugin {
 
+    private static final String CATALAN = "org.languagetool.language.Catalan";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(CATALAN);
     }
 
     public static void unloadPlugins() {

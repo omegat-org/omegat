@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class GreekPlugin {
 
+    private static final String GREEK = "org.languagetool.language.Greek";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(GREEK);
     }
 
     public static void unloadPlugins() {

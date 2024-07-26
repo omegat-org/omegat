@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class IrishPlugin {
 
+    private static final String IRISH = "org.languagetool.language.Irish";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(IRISH);
     }
 
     public static void unloadPlugins() {

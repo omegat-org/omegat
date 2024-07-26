@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class DanishPlugin {
 
+    private static final String DANISH = "org.languagetool.language.Danish";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(DANISH);
     }
 
     public static void unloadPlugins() {

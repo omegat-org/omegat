@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class RussianPlugin {
 
+    private static final String RUSSIAN = "org.languagetool.language.Russian";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(RUSSIAN);
     }
 
     public static void unloadPlugins() {

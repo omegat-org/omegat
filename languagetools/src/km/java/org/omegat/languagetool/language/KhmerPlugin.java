@@ -25,9 +25,16 @@
 
 package org.omegat.languagetool.language;
 
+import org.checkerframework.checker.units.qual.K;
+
+import org.omegat.languagetools.LanguageManager;
+
 public class KhmerPlugin {
 
+    private static final String KHMER = "org.languagetool.language.Khmer";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(KHMER);
     }
 
     public static void unloadPlugins() {

@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class UkrainianPlugin {
 
+    private static final String UKRAINIAN = "org.languagetool.language.Ukrainian";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(UKRAINIAN);
     }
 
     public static void unloadPlugins() {

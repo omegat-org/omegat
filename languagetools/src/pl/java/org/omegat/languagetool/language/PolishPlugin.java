@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class PolishPlugin {
 
+    private static final String POLISH = "org.languagetool.language.Polish";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(POLISH);
     }
 
     public static void unloadPlugins() {

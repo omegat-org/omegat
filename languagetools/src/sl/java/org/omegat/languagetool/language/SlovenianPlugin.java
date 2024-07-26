@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class SlovenianPlugin {
 
+    private static final String SLOVENIAN = "org.languagetool.language.Slovenian";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(SLOVENIAN);
     }
 
     public static void unloadPlugins() {

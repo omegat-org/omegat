@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class DutchPlugin {
 
+    private static final String DUTCH = "org.languagetool.language.Dutch";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(DUTCH);
     }
 
     public static void unloadPlugins() {

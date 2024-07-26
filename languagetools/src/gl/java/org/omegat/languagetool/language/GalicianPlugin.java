@@ -25,9 +25,14 @@
 
 package org.omegat.languagetool.language;
 
+import org.omegat.languagetools.LanguageManager;
+
 public class GalicianPlugin {
 
+    private static final String GALICIAN = "org.languagetool.language.Galician";
+
     public static void loadPlugins() {
+        LanguageManager.registerLTLanguage(GALICIAN);
     }
 
     public static void unloadPlugins() {

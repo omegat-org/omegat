@@ -29,7 +29,7 @@ import org.omegat.languagetools.LanguageManager;
 
 public class EsperantoPlugin {
 
-    private static final String ESPERANTO = "org.languagetool.language.esperanto";
+    private static final String ESPERANTO = "org.languagetool.language.Esperanto";
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ESPERANTO);

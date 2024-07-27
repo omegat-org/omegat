@@ -32,7 +32,6 @@ import java.util.stream.Collectors;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
-import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;

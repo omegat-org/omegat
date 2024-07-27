@@ -1,0 +1,95 @@
+plugins {
+    id 'java'
+}
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+def plugins = [
+        [ code: 'ar', lang: 'Arabic'],
+        [ code: 'ast', lang: 'Asturian'],
+        [ code: 'be', lang: 'Belarusian'],
+        [ code: 'br', lang: 'Breton'],
+        [ code: 'ca', lang: 'Catalan'],
+        [ code: 'da', lang: 'Danish'],
+        [ code: 'de', lang: 'German'],
+        [ code: 'el', lang: 'Greek'],
+        [ code: 'en', lang: 'English'],
+        [ code: 'eo', lang: 'Esperanto'],
+        [ code: 'es', lang: 'Spanish'],
+        [ code: 'fa', lang: 'Persian'],
+        [ code: 'fr', lang: 'French'],
+        [ code: 'ga', lang: 'Irish'],
+        [ code: 'gl', lang: 'Galician'],
+        [ code: 'it', lang: 'Italian'],
+        [ code: 'ja', lang: 'Japanese'],
+        [ code: 'km', lang: 'CentralKhmer'],
+        [ code: 'nl', lang: 'Dutch'],
+        [ code: 'pl', lang: 'Polish'],
+        [ code: 'pt', lang: 'Portuguese'],
+        [ code: 'ro', lang: 'Romanian'],
+        [ code: 'ru', lang: 'Russian',],
+        [ code: 'sk', lang: 'Slovak'],
+        [ code: 'sl', lang: 'Slovenian'],
+        [ code: 'sv', lang: 'Swedish'],
+        [ code: 'ta', lang: 'Tamil'],
+        [ code: 'tl', lang: 'Tagalog'],
+        [ code: 'uk', lang: 'Ukrainian'],
+        [ code: 'zh', lang: 'Chinese']
+]
+
+def pluginPackage = 'org.omegat.languages'
+def languageToolVersion = libs.versions.languagetool.get()
+def languageToolGroup = libs.languagetool.core.get().group
+plugins.forEach { args ->
+    def name = args.get('code')
+    def lang = args.get('lang')
+    def pluginClass = "${pluginPackage}.${name}.${lang}Plugin"
+    sourceSets.create(name)
+    dependencies.add("${name}CompileOnly", project.rootProject)
+    dependencies.add("${name}CompileOnly", libs.languagetool.core)
+    if (name.equals("ja")) {
+        dependencies.add("jaImplementation", libs.languagetool.ja.get()) {
+            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+            exclude module: 'lucene-gosen'
+            exclude module: 'languagetool-core'
+        }
+        dependencies.add("jaImplementation", 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic')
+    } else {
+         dependencies.add("${name}Implementation", "${languageToolGroup}:language-${name}:${languageToolVersion}") {
+            exclude module: 'languagetool-core'
+        }
+    }
+    configurations.getByName("${name}RuntimeClasspath").exclude(group: languageToolGroup, module: 'languagetool-core')
+    tasks.getByName("${name}Classes") {
+        group = 'languagetool'
+    }
+    tasks.register("${name}Jar", Jar) {
+        archiveFileName.set("omegat-language-${name}.${archiveExtension.get()}")
+        destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from configurations.getByName("${name}RuntimeClasspath").collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        from sourceSets.getByName("${name}").output
+        manifest {
+            attributes(
+                    'Plugin-Name': "${lang} plugin",
+                    'Plugin-License': 'GNU Public License version 3 or later',
+                    'OmegaT-Plugins': pluginClass,
+                    'Plugin-Author': 'OmegaT team',
+                    'Plugin-Link': 'https://omegat.org',
+                    'Plugin-Description': "Provide ${lang}",
+                    'Plugin-Category': 'language',
+                    'Plugin-Version': "${languageToolVersion}"
+            )
+        }
+        group = 'languagetool'
+    }
+    jar.dependsOn "${name}Jar"
+    def capitalName = name.capitalize()
+    tasks.getByName("spotbugs${capitalName}") {
+        group = 'other'
+    }
+}

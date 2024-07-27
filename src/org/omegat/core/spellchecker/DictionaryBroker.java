@@ -29,7 +29,7 @@ import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DictionaryBroker {
+public final class DictionaryBroker {
 
     private static final Set<URI> dictionaries = new HashSet<>();
 

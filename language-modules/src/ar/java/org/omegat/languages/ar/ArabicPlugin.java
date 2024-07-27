@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class ArabicPlugin {
+public final class ArabicPlugin {
 
     private static final String ARABIC = "org.languagetool.language.Arabic";
     private static final String RESOURCE_PATH = "/org/omegat/languages/ar/";

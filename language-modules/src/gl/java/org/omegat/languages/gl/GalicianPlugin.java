@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class GalicianPlugin {
+public final class GalicianPlugin {
 
     private static final String GALICIAN = "org.languagetool.language.Galician";
     private static final String RESOURCE_PATH = "/org/omegat/languages/gl/";

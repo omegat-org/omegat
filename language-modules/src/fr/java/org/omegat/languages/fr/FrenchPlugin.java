@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class FrenchPlugin {
+public final class FrenchPlugin {
 
     private static final String FRENCH = "org.languagetool.language.French";
     private static final String RESOURCE_PATH = "/org/omegat/languages/fr/";

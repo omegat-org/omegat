@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class EsperantoPlugin {
+public final class EsperantoPlugin {
 
     private static final String ESPERANTO = "org.languagetool.language.Esperanto";
     private static final String RESOURCE_PATH = "/org/omegat/languages/eo/";

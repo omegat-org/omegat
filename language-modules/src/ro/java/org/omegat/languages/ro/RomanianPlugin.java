@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class RomanianPlugin {
+public final class RomanianPlugin {
 
     private static final String ROMANIAN = "org.languagetool.language.Romanian";
     private static final String RESOURCE_PATH = "/org/omegat/languages/ro/";

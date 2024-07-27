@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class PersianPlugin {
+public final class PersianPlugin {
 
     private static final String PERSIAN = "org.languagetool.language.Persian";
     private static final String RESOURCE_PATH = "/org/omegat/languages/fa/";

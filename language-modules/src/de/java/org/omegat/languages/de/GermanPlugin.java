@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class GermanPlugin {
+public final class GermanPlugin {
 
     private static final String AUSTRARIAN_GERMAN = "org.languagetool.language.AustrianGerman";
     private static final String GERMANY_GERMAN = "org.languagetool.language.GermanyGerman";

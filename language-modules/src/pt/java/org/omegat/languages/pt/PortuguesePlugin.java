@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class PortuguesePlugin {
+public final class PortuguesePlugin {
 
     private static final String PORTUGUESE = "org.languagetool.language.Portuguese";
     private static final String PORTUGAL_PORTUGUESE = "org.languagetool.language.PortugalPortuguese";

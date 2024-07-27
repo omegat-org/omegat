@@ -32,7 +32,7 @@ import java.net.URL;
 import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
 
-public class EnglishPlugin {
+public final class EnglishPlugin {
 
     private static final String AMERICAN_ENGLISH = "org.languagetool.language.AmericanEnglish";
     private static final String AUSTRALIAN_ENGLISH = "org.languagetool.language.AustralianEnglish";

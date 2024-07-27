@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class SlovakPlugin {
+public final class SlovakPlugin {
 
     private static final String SLOVAK = "org.languagetool.language.Slovak";
     private static final String RESOURCE_PATH = "/org/omegat/languages/sk/";

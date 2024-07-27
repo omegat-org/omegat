@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class BelarusianPlugin {
+public final class BelarusianPlugin {
 
     private static final String BELARUSIAN = "org.languagetool.language.Belarusian";
     private static final String RESOURCE_PATH = "/org/omegat/languages/be/";

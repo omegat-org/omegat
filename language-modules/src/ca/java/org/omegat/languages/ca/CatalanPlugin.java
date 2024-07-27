@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class CatalanPlugin {
+public final class CatalanPlugin {
 
     private static final String CATALAN = "org.languagetool.language.Catalan";
     private static final String RESOURCE_PATH = "/org/omegat/languages/ca/";

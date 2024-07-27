@@ -27,7 +27,7 @@ package org.omegat.languages.uk;
 
 import org.omegat.languagetools.LanguageManager;
 
-public class UkrainianPlugin {
+public final class UkrainianPlugin {
 
     private static final String UKRAINIAN = "org.languagetool.language.Ukrainian";
 

@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class DanishPlugin {
+public final class DanishPlugin {
 
     private static final String DANISH = "org.languagetool.language.Danish";
     private static final String RESOURCE_PATH = "/org/omegat/languages/da/";

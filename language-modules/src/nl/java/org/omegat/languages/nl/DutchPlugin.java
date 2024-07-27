@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class DutchPlugin {
+public final class DutchPlugin {
 
     private static final String DUTCH = "org.languagetool.language.Dutch";
     private static final String RESOURCE_PATH = "/org/omegat/languages/nl/";

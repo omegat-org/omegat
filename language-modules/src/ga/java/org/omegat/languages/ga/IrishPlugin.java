@@ -27,7 +27,7 @@ package org.omegat.languages.ga;
 
 import org.omegat.languagetools.LanguageManager;
 
-public class IrishPlugin {
+public final class IrishPlugin {
 
     private static final String IRISH = "org.languagetool.language.Irish";
 

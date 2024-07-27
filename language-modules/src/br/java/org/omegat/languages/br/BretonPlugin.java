@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class BretonPlugin {
+public final class BretonPlugin {
 
     private static final String BRETON = "org.languagetool.language.Breton";
     private static final String RESOURCE_PATH = "/org/omegat/languages/br/";

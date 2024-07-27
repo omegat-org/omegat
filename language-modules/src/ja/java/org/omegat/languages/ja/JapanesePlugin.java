@@ -27,7 +27,7 @@ package org.omegat.languages.ja;
 
 import org.omegat.languagetools.LanguageManager;
 
-public class JapanesePlugin {
+public final class JapanesePlugin {
 
     private static final String JAPANESE = "org.languagetool.language.Japanese";
 

@@ -30,7 +30,7 @@ import org.omegat.languagetools.LanguageManager;
 
 import java.net.URISyntaxException;
 
-public class SpanishPlugin {
+public final class SpanishPlugin {
 
     private static final String SPANISH = "org.languagetool.language.Spanish";
     private static final String SPANISH_VOSEO = "org.languagetool.language.SpanishVoseo";

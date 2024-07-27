@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class SlovenianPlugin {
+public final class SlovenianPlugin {
 
     private static final String SLOVENIAN = "org.languagetool.language.Slovenian";
     private static final String RESOURCE_PATH = "/org/omegat/languages/sl/";

@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class SwedishPlugin {
+public final class SwedishPlugin {
 
     private static final String SWEDISH = "org.languagetool.language.Swedish";
     private static final String RESOURCE_PATH = "/org/omegat/languages/sv/";

@@ -27,7 +27,7 @@ package org.omegat.languages.zh;
 
 import org.omegat.languagetools.LanguageManager;
 
-public class ChinesePlugin {
+public final class ChinesePlugin {
 
     private static final String CHINESE = "org.languagetool.language.Chinese";
 

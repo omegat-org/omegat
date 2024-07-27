@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class RussianPlugin {
+public final class RussianPlugin {
 
     private static final String RUSSIAN = "org.languagetool.language.Russian";
     private static final String RESOURCE_PATH = "/org/omegat/languages/ru/";

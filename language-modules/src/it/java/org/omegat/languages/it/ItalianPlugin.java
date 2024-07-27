@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class ItalianPlugin {
+public final class ItalianPlugin {
 
     private static final String ITALIAN = "org.languagetool.language.Italian";
     private static final String RESOURCE_PATH = "/org/omegat/languages/it/";

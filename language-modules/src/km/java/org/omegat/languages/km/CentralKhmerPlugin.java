@@ -27,7 +27,7 @@ package org.omegat.languages.km;
 
 import org.omegat.languagetools.LanguageManager;
 
-public class CentralKhmerPlugin {
+public final class CentralKhmerPlugin {
 
     private static final String KHMER = "org.languagetool.language.Khmer";
 

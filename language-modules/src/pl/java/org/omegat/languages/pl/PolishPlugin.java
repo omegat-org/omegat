@@ -31,7 +31,7 @@ import org.omegat.languagetools.LanguageManager;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class PolishPlugin {
+public final class PolishPlugin {
 
     private static final String POLISH = "org.languagetool.language.Polish";
     private static final String RESOURCE_PATH = "/org/omegat/languages/pl/";

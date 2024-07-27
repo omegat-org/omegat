@@ -31,6 +31,9 @@ public class RussianPlugin {
 
     private static final String RUSSIAN = "org.languagetool.language.Russian";
 
+    private RussianPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(RUSSIAN);
     }

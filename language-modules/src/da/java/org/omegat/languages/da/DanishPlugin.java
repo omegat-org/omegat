@@ -31,6 +31,9 @@ public class DanishPlugin {
 
     private static final String DANISH = "org.languagetool.language.Danish";
 
+    private DanishPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(DANISH);
     }

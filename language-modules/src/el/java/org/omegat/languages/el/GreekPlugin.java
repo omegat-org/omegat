@@ -31,6 +31,9 @@ public class GreekPlugin {
 
     private static final String GREEK = "org.languagetool.language.Greek";
 
+    private GreekPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(GREEK);
     }

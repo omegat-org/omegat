@@ -1,11 +1,3 @@
-plugins {
-    id 'java'
-}
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
 def plugins = [
         [ code: 'ar', lang: 'Arabic'],
         [ code: 'ast', lang: 'Asturian'],

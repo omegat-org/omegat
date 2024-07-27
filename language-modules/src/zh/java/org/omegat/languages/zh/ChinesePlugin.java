@@ -31,6 +31,9 @@ public class ChinesePlugin {
 
     private static final String CHINESE = "org.languagetool.language.Chinese";
 
+    private ChinesePlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(CHINESE);
     }

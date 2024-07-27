@@ -115,8 +115,9 @@ public class LanguageDataBroker implements ResourceDataBroker {
     @Override
     public @NotNull List<String> getFromResourceDirAsLines(String path) {
         try (InputStream inputStram = getFromResourceDirAsStream(path);
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStram, StandardCharsets.UTF_8);
-             BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStram,
+                        StandardCharsets.UTF_8);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
             return bufferedReader.lines().collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -33,6 +33,9 @@ public class GermanPlugin {
     private static final String GERMANY_GERMAN = "org.languagetool.language.GermanyGerman";
     private static final String SWISS_GERMAN = "org.languagetool.language.SwissGerman";
 
+    private GermanPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(AUSTRARIAN_GERMAN);
         LanguageManager.registerLTLanguage(GERMANY_GERMAN);

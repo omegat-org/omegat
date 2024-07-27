@@ -29,9 +29,14 @@ import org.omegat.languagetools.LanguageManager;
 
 public class BelarusianPlugin {
 
+    private static final String BELARUSIAN = "org.languagetool.language.Belarusian";
+
+    private BelarusianPlugin() {
+    }
+
     @SuppressWarnings("deprecation")
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage("org.languagetool.language.Belarusian");
+        LanguageManager.registerLTLanguage(BELARUSIAN);
     }
 
     public static void unloadPlugins() {

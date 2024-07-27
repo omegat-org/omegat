@@ -31,6 +31,9 @@ public class RomanianPlugin {
 
     private static final String ROMANIAN = "org.languagetool.language.Romanian";
 
+    private RomanianPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ROMANIAN);
     }

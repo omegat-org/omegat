@@ -31,6 +31,9 @@ public class FrenchPlugin {
 
     private static final String FRENCH = "org.languagetool.language.French";
 
+    private FrenchPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(FRENCH);
     }

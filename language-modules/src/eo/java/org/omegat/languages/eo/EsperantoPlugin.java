@@ -31,6 +31,9 @@ public class EsperantoPlugin {
 
     private static final String ESPERANTO = "org.languagetool.language.Esperanto";
 
+    private EsperantoPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ESPERANTO);
     }

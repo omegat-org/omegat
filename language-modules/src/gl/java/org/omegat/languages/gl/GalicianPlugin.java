@@ -31,6 +31,9 @@ public class GalicianPlugin {
 
     private static final String GALICIAN = "org.languagetool.language.Galician";
 
+    private GalicianPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(GALICIAN);
     }

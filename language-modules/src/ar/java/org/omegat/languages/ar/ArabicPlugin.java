@@ -31,6 +31,9 @@ public class ArabicPlugin {
 
     private static final String ARABIC = "org.languagetool.language.Arabic";
 
+    private ArabicPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ARABIC);
     }

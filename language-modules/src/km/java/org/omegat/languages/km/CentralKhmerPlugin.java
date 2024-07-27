@@ -31,6 +31,9 @@ public class CentralKhmerPlugin {
 
     private static final String KHMER = "org.languagetool.language.Khmer";
 
+    private CentralKhmerPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(KHMER);
     }

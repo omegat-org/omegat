@@ -31,6 +31,9 @@ public class CatalanPlugin {
 
     private static final String CATALAN = "org.languagetool.language.Catalan";
 
+    private CatalanPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(CATALAN);
     }

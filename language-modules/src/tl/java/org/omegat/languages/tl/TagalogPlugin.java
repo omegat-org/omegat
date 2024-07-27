@@ -31,6 +31,9 @@ public class TagalogPlugin {
 
     private static final String TAGALOG = "org.languagetool.language.Tagalog";
 
+    private TagalogPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(TAGALOG);
     }

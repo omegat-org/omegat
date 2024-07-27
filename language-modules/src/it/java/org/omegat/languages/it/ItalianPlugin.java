@@ -31,6 +31,9 @@ public class ItalianPlugin {
 
     private static final String ITALIAN = "org.languagetool.language.Italian";
 
+    private ItalianPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ITALIAN);
     }

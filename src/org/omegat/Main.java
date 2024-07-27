@@ -191,15 +191,12 @@ public final class Main {
         // initialize logging backend and loading configuration.
         ILogger logger = Log.getLogger(Main.class);
 
-        logger.atInfo()
-                .setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
-                .addArgument(StringUtils.repeat('=', 120))
-                .addArgument(OStrings.getNameAndVersion())
+        logger.atInfo().setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
+                .addArgument(StringUtils.repeat('=', 120)).addArgument(OStrings.getNameAndVersion())
                 .addArgument(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
                         .withLocale(Locale.getDefault()).format(ZonedDateTime.now()))
                 .addArgument(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()))
-                .addArgument(Locale.getDefault().toLanguageTag())
-                .log();
+                .addArgument(Locale.getDefault().toLanguageTag()).log();
         logger.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
 

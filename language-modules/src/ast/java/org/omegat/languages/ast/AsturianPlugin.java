@@ -28,7 +28,11 @@ package org.omegat.languages.ast;
 import org.omegat.languagetools.LanguageManager;
 
 public class AsturianPlugin {
+
     private static final String ASTURIAN = "org.languagetool.language.Asturian";
+
+    private AsturianPlugin() {
+    }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ASTURIAN);

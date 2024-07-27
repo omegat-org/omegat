@@ -33,6 +33,9 @@ public class EnglishPlugin {
 
     private static final String AMERICAN_ENGLISH = "org.languagetool.language.AmericanEnglish";
 
+    private EnglishPlugin() {
+    }
+
     public static void loadPlugins() throws IOException {
         LanguageManager.registerLTLanguage(AMERICAN_ENGLISH);
     }

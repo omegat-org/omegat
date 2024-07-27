@@ -31,6 +31,9 @@ public class BretonPlugin {
 
     private static final String BRETON = "org.languagetool.language.Breton";
 
+    private BretonPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(BRETON);
     }

@@ -35,12 +35,12 @@ import org.languagetool.Languages;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 
-
 public final class LanguageManager {
 
     private static final Set<String> LT_LANGUAGE_CLASSES = new HashSet<>();
 
-    private LanguageManager() {}
+    private LanguageManager() {
+    }
 
     public static void registerLTLanguage(String fqcn) {
         LT_LANGUAGE_CLASSES.add(fqcn);

@@ -31,6 +31,9 @@ public class PolishPlugin {
 
     private static final String POLISH = "org.languagetool.language.Polish";
 
+    private PolishPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(POLISH);
     }

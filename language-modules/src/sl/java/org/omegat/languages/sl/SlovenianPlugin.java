@@ -31,6 +31,9 @@ public class SlovenianPlugin {
 
     private static final String SLOVENIAN = "org.languagetool.language.Slovenian";
 
+    private SlovenianPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(SLOVENIAN);
     }

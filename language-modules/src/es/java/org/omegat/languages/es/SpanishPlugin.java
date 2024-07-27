@@ -32,6 +32,9 @@ public class SpanishPlugin {
     private static final String SPANISH = "org.languagetool.language.Spanish";
     private static final String SPANISH_VOSEO = "org.languagetool.language.SpanishVoseo";
 
+    private SpanishPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(SPANISH);
         LanguageManager.registerLTLanguage(SPANISH_VOSEO);

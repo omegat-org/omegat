@@ -35,6 +35,9 @@ public class PortuguesePlugin {
     private static final String ANGOLA_PORTUGUESE = "org.languagetool.language.AngolaPortuguese";
     private static final String MOZAMBIQUE_PORTUGUESE = "org.languagetool.language.MozambiquePortuguese";
 
+    private PortuguesePlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(PORTUGUESE);
         LanguageManager.registerLTLanguage(PORTUGAL_PORTUGUESE);

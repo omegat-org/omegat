@@ -31,6 +31,9 @@ public class UkrainianPlugin {
 
     private static final String UKRAINIAN = "org.languagetool.language.Ukrainian";
 
+    private UkrainianPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(UKRAINIAN);
     }

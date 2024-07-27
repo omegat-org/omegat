@@ -31,6 +31,9 @@ public class PersianPlugin {
 
     private static final String PERSIAN = "org.languagetool.language.Persian";
 
+    private PersianPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(PERSIAN);
     }

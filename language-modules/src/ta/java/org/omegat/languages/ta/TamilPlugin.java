@@ -31,6 +31,9 @@ public class TamilPlugin {
 
     private static final String TAMIL = "org.languagetool.language.Tamil";
 
+    private TamilPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(TAMIL);
     }

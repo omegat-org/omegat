@@ -31,6 +31,9 @@ public class JapanesePlugin {
 
     private static final String JAPANESE = "org.languagetool.language.Japanese";
 
+    private JapanesePlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(JAPANESE);
     }

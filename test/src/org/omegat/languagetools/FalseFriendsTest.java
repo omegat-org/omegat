@@ -203,8 +203,8 @@ public class FalseFriendsTest extends TestCore {
             }
 
             @Override
-            public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
-            throws Exception {
+            public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing,
+                    boolean commitTargetFiles) throws Exception {
             }
         });
         LanguageToolWrapper.setBridgeFromCurrentProject();
@@ -231,7 +231,8 @@ public class FalseFriendsTest extends TestCore {
             };
         };
 
-        List<Mark> marks = marker.getMarksForEntry(null, "This is some long text without translation.", "", true);
+        List<Mark> marks = marker.getMarksForEntry(null, "This is some long text without translation.", "",
+                true);
         assertEquals(0, marks.size());
 
         marks = marker.getMarksForEntry(null, "This is text with the same translation.",

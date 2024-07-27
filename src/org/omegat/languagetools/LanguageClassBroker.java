@@ -30,7 +30,6 @@ import org.omegat.filters2.master.PluginUtils;
 
 public class LanguageClassBroker implements ClassBroker {
 
-
     public LanguageClassBroker() {
     }
 

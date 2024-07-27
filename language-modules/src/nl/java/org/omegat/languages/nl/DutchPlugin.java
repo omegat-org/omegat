@@ -31,6 +31,9 @@ public class DutchPlugin {
 
     private static final String DUTCH = "org.languagetool.language.Dutch";
 
+    private DutchPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(DUTCH);
     }

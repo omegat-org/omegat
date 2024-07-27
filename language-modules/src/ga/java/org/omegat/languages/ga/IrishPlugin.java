@@ -31,6 +31,9 @@ public class IrishPlugin {
 
     private static final String IRISH = "org.languagetool.language.Irish";
 
+    private IrishPlugin() {
+    }
+
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(IRISH);
     }

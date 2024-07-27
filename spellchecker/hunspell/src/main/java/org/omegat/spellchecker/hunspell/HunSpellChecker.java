@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +41,7 @@ import java.util.ResourceBundle;
 import dumonts.hunspell.Hunspell;
 import org.apache.commons.io.IOUtils;
 import org.languagetool.JLanguageTool;
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.util.Language;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
@@ -107,6 +109,10 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
         }
 
         if (!affixName.exists()) {
+            installLanguageModuleDictionary(dictionaryDir, language);
+        }
+
+        if (!affixName.exists()) {
             // Try installing from LanguageTool bundled resources
             installLTBundledDictionary(dictionaryDir, language);
         }
@@ -145,24 +151,54 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
     }
 
     /**
+     * If there is a language module that bundles hunspell dictionaries for the
+     * current target language, install it.
+     * <p>
+     * Because OmegaT language module bundles LT language class, so we can use
+     * a common method to load dictionary into OmegaT configDir.
+     */
+    private static void installLanguageModuleDictionary(String dictionaryDir, String language) {
+        URI dicURI = DictionaryBroker.getDictionaryURI(language + SC_DICTIONARY_EXTENSION);
+        if (dicURI == null) {
+            return;
+        }
+        URI affURI = DictionaryBroker.getDictionaryURI(language + SC_AFFIX_EXTENSION);
+        if (affURI == null) {
+            return;
+        }
+        try {
+            try(InputStream dicStream = dicURI.toURL().openStream();
+                FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + SC_DICTIONARY_EXTENSION))) {
+                IOUtils.copy(dicStream, fos);
+            }
+            try(InputStream dicStream = affURI.toURL().openStream();
+                FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + SC_AFFIX_EXTENSION))) {
+                IOUtils.copy(dicStream, fos);
+            }
+        } catch (IOException ex) {
+            LOGGER.atWarn().setCause(ex).log();
+        }
+    }
+
+    /**
      * If there is a Hunspell dictionary for the current target language bundled
      * with LanguageTool, install it. See <code>init()</code> and
      * <code>getDictionaryPath(String, String)</code> internal methods of
      * <code>org.languagetool.rules.spelling.hunspell.HunspellRule</code>.
      */
     private static void installLTBundledDictionary(String dictionaryDir, String language) {
-        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + ".dic";
+        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + SC_DICTIONARY_EXTENSION;
         if (!JLanguageTool.getDataBroker().resourceExists(resPath)) {
             return;
         }
         try {
             try (InputStream dicStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
-                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".dic"))) {
+                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + SC_DICTIONARY_EXTENSION))) {
                 IOUtils.copy(dicStream, fos);
             }
             try (InputStream affStream = JLanguageTool.getDataBroker()
-                    .getFromResourceDirAsStream(resPath.replaceFirst(".dic$", ".aff"));
-                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".aff"))) {
+                    .getFromResourceDirAsStream(resPath.replaceFirst(".dic$", SC_AFFIX_EXTENSION));
+                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + SC_AFFIX_EXTENSION))) {
                 IOUtils.copy(affStream, fos);
             }
         } catch (Exception ex) {

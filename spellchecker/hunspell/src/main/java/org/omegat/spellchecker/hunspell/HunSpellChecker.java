@@ -167,12 +167,14 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
             return;
         }
         try {
-            try(InputStream dicStream = dicURI.toURL().openStream();
-                FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + SC_DICTIONARY_EXTENSION))) {
+            try (InputStream dicStream = dicURI.toURL().openStream();
+                FileOutputStream fos = new FileOutputStream(new File(dictionaryDir,
+                        language + SC_DICTIONARY_EXTENSION))) {
                 IOUtils.copy(dicStream, fos);
             }
-            try(InputStream dicStream = affURI.toURL().openStream();
-                FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + SC_AFFIX_EXTENSION))) {
+            try (InputStream dicStream = affURI.toURL().openStream();
+                FileOutputStream fos = new FileOutputStream(new File(dictionaryDir,
+                        language + SC_AFFIX_EXTENSION))) {
                 IOUtils.copy(dicStream, fos);
             }
         } catch (IOException ex) {

@@ -25,17 +25,26 @@
 
 package org.omegat.languages.br;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class BretonPlugin {
 
     private static final String BRETON = "org.languagetool.language.Breton";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/br/";
 
     private BretonPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(BRETON);
+        try {
+            DictionaryBroker.registerDictionary(BretonPlugin.class.getResource(RESOURCE_PATH + "br.dic").toURI());
+            DictionaryBroker.registerDictionary(BretonPlugin.class.getResource(RESOURCE_PATH + "br.aff").toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

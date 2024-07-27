@@ -25,13 +25,18 @@
 
 package org.omegat.languages.de;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class GermanPlugin {
 
     private static final String AUSTRARIAN_GERMAN = "org.languagetool.language.AustrianGerman";
     private static final String GERMANY_GERMAN = "org.languagetool.language.GermanyGerman";
     private static final String SWISS_GERMAN = "org.languagetool.language.SwissGerman";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/de/";
+    private static final String[] languages = new String[] {"de_AT", "de_CH", "de_DE"};
 
     private GermanPlugin() {
     }
@@ -40,6 +45,13 @@ public class GermanPlugin {
         LanguageManager.registerLTLanguage(AUSTRARIAN_GERMAN);
         LanguageManager.registerLTLanguage(GERMANY_GERMAN);
         LanguageManager.registerLTLanguage(SWISS_GERMAN);
+        try {
+            for (String lang : languages) {
+                DictionaryBroker.registerDictionary(GermanPlugin.class.getResource(RESOURCE_PATH + lang + ".dic").toURI());
+                DictionaryBroker.registerDictionary(GermanPlugin.class.getResource(RESOURCE_PATH + lang + ".aff").toURI());
+            }
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

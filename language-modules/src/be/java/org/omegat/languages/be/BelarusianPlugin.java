@@ -25,11 +25,15 @@
 
 package org.omegat.languages.be;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class BelarusianPlugin {
 
     private static final String BELARUSIAN = "org.languagetool.language.Belarusian";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/be/";
 
     private BelarusianPlugin() {
     }
@@ -37,6 +41,11 @@ public class BelarusianPlugin {
     @SuppressWarnings("deprecation")
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(BELARUSIAN);
+        try {
+            DictionaryBroker.registerDictionary(BelarusianPlugin.class.getResource(RESOURCE_PATH + "be.dic").toURI());
+            DictionaryBroker.registerDictionary(BelarusianPlugin.class.getResource(RESOURCE_PATH + "be.aff").toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

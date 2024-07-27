@@ -25,17 +25,29 @@
 
 package org.omegat.languages.pl;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class PolishPlugin {
 
     private static final String POLISH = "org.languagetool.language.Polish";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/pl/";
 
     private PolishPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(POLISH);
+        try {
+            URL url = PolishPlugin.class.getResource(RESOURCE_PATH + "pl_PL.dic");
+            DictionaryBroker.registerDictionary(url.toURI());
+            url = PolishPlugin.class.getResource(RESOURCE_PATH + "pl_PL.aff");
+            DictionaryBroker.registerDictionary(url.toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

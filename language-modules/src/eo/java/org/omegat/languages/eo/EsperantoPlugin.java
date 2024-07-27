@@ -25,17 +25,26 @@
 
 package org.omegat.languages.eo;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class EsperantoPlugin {
 
     private static final String ESPERANTO = "org.languagetool.language.Esperanto";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/eo/";
 
     private EsperantoPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ESPERANTO);
+        try {
+            DictionaryBroker.registerDictionary(EsperantoPlugin.class.getResource(RESOURCE_PATH + "eo.dic").toURI());
+            DictionaryBroker.registerDictionary(EsperantoPlugin.class.getResource(RESOURCE_PATH + "eo.aff").toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

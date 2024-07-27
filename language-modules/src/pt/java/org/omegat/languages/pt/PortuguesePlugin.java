@@ -25,7 +25,11 @@
 
 package org.omegat.languages.pt;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class PortuguesePlugin {
 
@@ -34,6 +38,7 @@ public class PortuguesePlugin {
     private static final String BRAZILIAN_PORTUGUESE = "org.languagetool.language.BrazilianPortuguese";
     private static final String ANGOLA_PORTUGUESE = "org.languagetool.language.AngolaPortuguese";
     private static final String MOZAMBIQUE_PORTUGUESE = "org.languagetool.language.MozambiquePortuguese";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/pt/";
 
     private PortuguesePlugin() {
     }
@@ -44,6 +49,18 @@ public class PortuguesePlugin {
         LanguageManager.registerLTLanguage(BRAZILIAN_PORTUGUESE);
         LanguageManager.registerLTLanguage(ANGOLA_PORTUGUESE);
         LanguageManager.registerLTLanguage(MOZAMBIQUE_PORTUGUESE);
+        try {
+            URL url = PortuguesePlugin.class.getResource(RESOURCE_PATH + "pt_BR.dic");
+            DictionaryBroker.registerDictionary(url.toURI());
+            url = PortuguesePlugin.class.getResource(RESOURCE_PATH + "pt_BR.aff");
+            DictionaryBroker.registerDictionary(url.toURI());
+            url = PortuguesePlugin.class.getResource(RESOURCE_PATH + "pt_PT.dic");
+            DictionaryBroker.registerDictionary(url.toURI());
+            url = PortuguesePlugin.class.getResource(RESOURCE_PATH + "pt_PT.aff");
+            DictionaryBroker.registerDictionary(url.toURI());
+        } catch (URISyntaxException ignored) {
+        }
+
     }
 
     public static void unloadPlugins() {

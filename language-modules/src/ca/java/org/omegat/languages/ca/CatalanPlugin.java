@@ -25,17 +25,30 @@
 
 package org.omegat.languages.ca;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class CatalanPlugin {
 
     private static final String CATALAN = "org.languagetool.language.Catalan";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/ca/";
 
     private CatalanPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(CATALAN);
+        try {
+            DictionaryBroker.registerDictionary(CatalanPlugin.class.getResource(RESOURCE_PATH + "ca.dic").toURI());
+            DictionaryBroker.registerDictionary(CatalanPlugin.class.getResource(RESOURCE_PATH + "ca.aff").toURI());
+            DictionaryBroker.registerDictionary(CatalanPlugin.class.getResource(
+                    RESOURCE_PATH + "ca-valencia.dic").toURI());
+            DictionaryBroker.registerDictionary(CatalanPlugin.class.getResource(
+                    RESOURCE_PATH + "ca-valencia.aff").toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

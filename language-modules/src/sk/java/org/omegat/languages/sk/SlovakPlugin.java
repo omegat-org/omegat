@@ -25,17 +25,30 @@
 
 package org.omegat.languages.sk;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class SlovakPlugin {
 
     private static final String SLOVAK = "org.languagetool.language.Slovak";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/sk/";
 
     private SlovakPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(SLOVAK);
+        try {
+            URL url = SlovakPlugin.class.getResource(RESOURCE_PATH + "sk_SK.dic");
+            DictionaryBroker.registerDictionary(url.toURI());
+            url = SlovakPlugin.class.getResource(RESOURCE_PATH + "sk_SK.aff");
+            DictionaryBroker.registerDictionary(url.toURI());
+        } catch (URISyntaxException ignored) {
+        }
+
     }
 
     public static void unloadPlugins() {

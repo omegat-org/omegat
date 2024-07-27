@@ -25,12 +25,20 @@
 
 package org.omegat.languages.es;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class SpanishPlugin {
 
     private static final String SPANISH = "org.languagetool.language.Spanish";
     private static final String SPANISH_VOSEO = "org.languagetool.language.SpanishVoseo";
+
+    private static final String RESOURCE_PATH = "/org/omegat/languages/en/";
+    private static final String[] languages = new String[] {"es_AR", "es_BO", "es_CL", "es_CR", "es_CU",
+    "es_DO", "es_EC", "es_ES", "es_GQ", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PE", "es_PH",
+    "es_PR", "es_PY", "es_SV", "es_US", "es_UY", "es_VE"};
 
     private SpanishPlugin() {
     }
@@ -38,6 +46,13 @@ public class SpanishPlugin {
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(SPANISH);
         LanguageManager.registerLTLanguage(SPANISH_VOSEO);
+        try {
+            for (String lang : languages) {
+                DictionaryBroker.registerDictionary(SpanishPlugin.class.getResource(RESOURCE_PATH + lang + ".dic").toURI());
+                DictionaryBroker.registerDictionary(SpanishPlugin.class.getResource(RESOURCE_PATH + lang + ".aff").toURI());
+            }
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

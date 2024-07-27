@@ -25,17 +25,27 @@
 
 package org.omegat.languages.fa;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class PersianPlugin {
 
     private static final String PERSIAN = "org.languagetool.language.Persian";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/fa/";
 
     private PersianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(PERSIAN);
+        try {
+            DictionaryBroker.registerDictionary(PersianPlugin.class.getResource(RESOURCE_PATH + "fa_IR.dic").toURI());
+            DictionaryBroker.registerDictionary(PersianPlugin.class.getResource(RESOURCE_PATH + "fa_IR.aff").toURI());
+        } catch (URISyntaxException ignored) {
+        }
+
     }
 
     public static void unloadPlugins() {

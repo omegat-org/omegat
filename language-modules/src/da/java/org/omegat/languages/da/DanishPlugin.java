@@ -25,17 +25,26 @@
 
 package org.omegat.languages.da;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class DanishPlugin {
 
     private static final String DANISH = "org.languagetool.language.Danish";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/da/";
 
     private DanishPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(DANISH);
+        try {
+            DictionaryBroker.registerDictionary(DanishPlugin.class.getResource(RESOURCE_PATH + "da_DK.dic").toURI());
+            DictionaryBroker.registerDictionary(DanishPlugin.class.getResource(RESOURCE_PATH + "da_DK.aff").toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

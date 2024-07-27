@@ -25,17 +25,26 @@
 
 package org.omegat.languages.ar;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
 
 public class ArabicPlugin {
 
     private static final String ARABIC = "org.languagetool.language.Arabic";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/ar/";
 
     private ArabicPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ARABIC);
+        try {
+            DictionaryBroker.registerDictionary(ArabicPlugin.class.getResource(RESOURCE_PATH + "ar.dic").toURI());
+            DictionaryBroker.registerDictionary(ArabicPlugin.class.getResource(RESOURCE_PATH + "ar.aff").toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

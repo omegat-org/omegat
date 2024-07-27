@@ -26,18 +26,38 @@
 package org.omegat.languages.en;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
 
 public class EnglishPlugin {
 
     private static final String AMERICAN_ENGLISH = "org.languagetool.language.AmericanEnglish";
+    private static final String AUSTRALIAN_ENGLISH = "org.languagetool.language.AustralianEnglish";
+    private static final String CANADIAN_ENGLISH = "org.languagetool.language.CanadianEnglish";
+    private static final String ENGLISH = "org.languagetool.language.English";
+
+    private static final String RESOURCE_PATH = "/org/omegat/languages/en/";
+    private static final String[] languages = new String[] {"en_AU", "en_CA", "en_GB", "en_US", "en_ZA"};
 
     private EnglishPlugin() {
     }
 
     public static void loadPlugins() throws IOException {
         LanguageManager.registerLTLanguage(AMERICAN_ENGLISH);
+        LanguageManager.registerLTLanguage(AUSTRALIAN_ENGLISH);
+        LanguageManager.registerLTLanguage(CANADIAN_ENGLISH);
+        LanguageManager.registerLTLanguage(ENGLISH);
+        try {
+            for (String lang : languages) {
+                DictionaryBroker.registerDictionary(EnglishPlugin.class.getResource(RESOURCE_PATH + lang + ".dic").toURI());
+                DictionaryBroker.registerDictionary(EnglishPlugin.class.getResource(RESOURCE_PATH + lang + ".aff").toURI());
+            }
+        } catch (URISyntaxException ignored) {
+        }
+
     }
 
     public static void unloadPlugins() {

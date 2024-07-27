@@ -25,17 +25,30 @@
 
 package org.omegat.languages.ru;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class RussianPlugin {
 
     private static final String RUSSIAN = "org.languagetool.language.Russian";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/ru/";
 
     private RussianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(RUSSIAN);
+        try {
+            URL url = RussianPlugin.class.getResource(RESOURCE_PATH + "it_IT.dic");
+            DictionaryBroker.registerDictionary(url.toURI());
+            url = RussianPlugin.class.getResource(RESOURCE_PATH + "it_IT.aff");
+            DictionaryBroker.registerDictionary(url.toURI());
+        } catch (URISyntaxException ignored) {
+        }
+
     }
 
     public static void unloadPlugins() {

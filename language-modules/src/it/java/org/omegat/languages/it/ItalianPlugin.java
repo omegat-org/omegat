@@ -25,17 +25,29 @@
 
 package org.omegat.languages.it;
 
+import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
+
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class ItalianPlugin {
 
     private static final String ITALIAN = "org.languagetool.language.Italian";
+    private static final String RESOURCE_PATH = "/org/omegat/languages/it/";
 
     private ItalianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(ITALIAN);
+        try {
+            URL url = ItalianPlugin.class.getResource(RESOURCE_PATH + "it_IT.dic");
+            DictionaryBroker.registerDictionary(url.toURI());
+            url = ItalianPlugin.class.getResource(RESOURCE_PATH + "it_IT.aff");
+            DictionaryBroker.registerDictionary(url.toURI());
+        } catch (URISyntaxException ignored) {
+        }
     }
 
     public static void unloadPlugins() {

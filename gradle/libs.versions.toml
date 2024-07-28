@@ -48,7 +48,7 @@ xjc = "2.3.4"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.4.4"
-flatlaf="3.4.1"
+flatlaf="3.5"
 assertj_swing_junit = "4.0.0-beta-1"
 morfologik = "2.1.9"
 
@@ -102,7 +102,7 @@ bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
-fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.4.1"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.5.0"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.1"}
 fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
 fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.1"}

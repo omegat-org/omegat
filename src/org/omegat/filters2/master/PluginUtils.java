@@ -166,12 +166,12 @@ public final class PluginUtils {
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
-    private static final MainClassLoader themeClassloader;
+    private static final MainClassLoader THEME_CLASSLOADER;
     private static final MainClassLoader languageClassloader;
-
+  
     static {
         ClassLoader cl = PluginUtils.class.getClassLoader();
-        themeClassloader = new MainClassLoader(cl);
+        THEME_CLASSLOADER = new MainClassLoader(cl);
         languageClassloader = new MainClassLoader(cl);
     }
 
@@ -221,8 +221,8 @@ public final class PluginUtils {
                         String target = mu.toString();
                         for (URL url : urlList) {
                             if (target.contains(url.toString())) {
-                                themeClassloader.addJarToClasspath(url);
-                                loadFromManifest(m, themeClassloader, mu);
+                                THEME_CLASSLOADER.addJarToClasspath(url);
+                                loadFromManifest(m, THEME_CLASSLOADER, mu);
                             }
                         }
                     } else if ("language".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
@@ -487,7 +487,7 @@ public final class PluginUtils {
     }
 
     public static ClassLoader getThemeClassLoader() {
-        return themeClassloader;
+        return THEME_CLASSLOADER;
     }
 
     public static ClassLoader getLanguageClassLoader() {

@@ -35,7 +35,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.dialogs.AboutDialog;
-import org.omegat.gui.dialogs.LogDialog;
+import org.omegat.gui.dialogs.LogDialogController;
 import org.omegat.gui.editor.EditorUtils;
 import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.exttrans.MachineTranslationInfo;
@@ -379,7 +379,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Show log
      */
     public void helpLogMenuItemActionPerformed() {
-        new LogDialog(mainWindow.getApplicationFrame()).setVisible(true);
+        LogDialogController.show(Core.getMainWindow().getApplicationFrame());
     }
 
     public void helpAboutMenuItemActionPerformed() {

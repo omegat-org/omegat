@@ -30,12 +30,12 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
@@ -47,17 +47,17 @@ import org.omegat.util.StringUtil;
  */
 public class OmegaTLogFormatter extends Formatter {
 
-    // Line mark is a five-character random number
-    protected static final String LINE_MARK = String.format("%05d", ThreadLocalRandom.current().nextInt(100000));
+    // Line mark is five-character random number
+    protected final String LINE_MARK;
 
     private String logMask;
-    private boolean isMaskContainsMark;
-    private boolean isMaskContainsThreadName;
-    private boolean isMaskContainsLevel;
-    private boolean isMaskContainsText;
-    private boolean isMaskContainsKey;
-    private boolean isMaskContainsLoggerName;
-    private boolean isMaskContainsTime;
+    private final boolean isMaskContainsMark;
+    private final boolean isMaskContainsThreadName;
+    private final boolean isMaskContainsLevel;
+    private final boolean isMaskContainsText;
+    private final boolean isMaskContainsKey;
+    private final boolean isMaskContainsLoggerName;
+    private final boolean isMaskContainsTime;
 
     private String defaultTimeFormat = "HH:mm:ss";
 
@@ -65,7 +65,7 @@ public class OmegaTLogFormatter extends Formatter {
      * We have to use ThreadLocal for formatting time because DateFormat is not
      * thread safe.
      */
-    private ThreadLocal<SimpleDateFormat> timeFormatter = new ThreadLocal<SimpleDateFormat>() {
+    private final ThreadLocal<SimpleDateFormat> timeFormatter = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected SimpleDateFormat initialValue() {
             return new SimpleDateFormat(defaultTimeFormat);
@@ -78,6 +78,8 @@ public class OmegaTLogFormatter extends Formatter {
     public OmegaTLogFormatter() {
         LogManager manager = LogManager.getLogManager();
         String cname = getClass().getName();
+
+        LINE_MARK = Log.getSessionId();
 
         logMask = manager.getProperty(cname + ".mask");
         if (logMask == null) {

@@ -55,7 +55,7 @@ import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.GoToSegmentDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
-import org.omegat.gui.dialogs.LogDialog;
+import org.omegat.gui.dialogs.LogDialogController;
 import org.omegat.gui.dialogs.VersionCheckDialog;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.EditorUtils;
@@ -887,7 +887,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
      * Show log
      */
     public void helpLogMenuItemActionPerformed() {
-        new LogDialog(Core.getMainWindow().getApplicationFrame()).setVisible(true);
+        LogDialogController.show(Core.getMainWindow().getApplicationFrame());
     }
 
     /**

@@ -25,11 +25,12 @@
 
 package org.omegat.languages.sv;
 
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
 
-import java.net.URISyntaxException;
-import java.net.URL;
 
 public final class SwedishPlugin {
 

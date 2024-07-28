@@ -26,7 +26,6 @@
 package org.omegat.languages.sv;
 
 import java.net.URISyntaxException;
-import java.net.URL;
 
 import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;
@@ -37,23 +36,18 @@ public final class SwedishPlugin {
     private static final String SWEDISH = "org.languagetool.language.Swedish";
     private static final String RESOURCE_PATH = "/org/omegat/languages/sv/";
 
-    public SwedishPlugin() {
+    private SwedishPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(SWEDISH);
         try {
-            URL url = SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_FI.dic");
-            DictionaryBroker.registerDictionary(url.toURI());
-            url = SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_FI.aff");
-            DictionaryBroker.registerDictionary(url.toURI());
-            url = SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_SE.dic");
-            DictionaryBroker.registerDictionary(url.toURI());
-            url = SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_SE.aff");
-            DictionaryBroker.registerDictionary(url.toURI());
-         } catch (URISyntaxException ignored) {
+            DictionaryBroker.registerDictionary(SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_FI.dic").toURI());
+            DictionaryBroker.registerDictionary(SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_FI.aff").toURI());
+            DictionaryBroker.registerDictionary(SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_SE.dic").toURI());
+            DictionaryBroker.registerDictionary(SwedishPlugin.class.getResource(RESOURCE_PATH + "sv_SE.aff").toURI());
+        } catch (URISyntaxException ignored) {
         }
-
     }
 
     public static void unloadPlugins() {

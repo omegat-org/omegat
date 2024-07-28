@@ -27,7 +27,6 @@ package org.omegat.languages.en;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 import org.omegat.core.spellchecker.DictionaryBroker;
 import org.omegat.languagetools.LanguageManager;

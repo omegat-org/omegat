@@ -84,4 +84,5 @@ plugins.forEach { args ->
     tasks.getByName("spotbugs${capitalName}") {
         group = 'other'
     }
+    tasks.getByName("checkstyleMain").dependsOn tasks.named("checkstyle${capitalName}")
 }

@@ -69,6 +69,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
+import org.languagetool.JLanguageTool;
+import org.omegat.languagetools.LanguageClassBroker;
+import org.omegat.languagetools.LanguageDataBroker;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -188,15 +191,12 @@ public final class Main {
         // initialize logging backend and loading configuration.
         ILogger logger = Log.getLogger(Main.class);
 
-        logger.atInfo()
-                .setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
-                .addArgument(StringUtils.repeat('=', 120))
-                .addArgument(OStrings.getNameAndVersion())
+        logger.atInfo().setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
+                .addArgument(StringUtils.repeat('=', 120)).addArgument(OStrings.getNameAndVersion())
                 .addArgument(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
                         .withLocale(Locale.getDefault()).format(ZonedDateTime.now()))
                 .addArgument(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()))
-                .addArgument(Locale.getDefault().toLanguageTag())
-                .log();
+                .addArgument(Locale.getDefault().toLanguageTag()).log();
         logger.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
 
@@ -205,6 +205,9 @@ public final class Main {
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
+        // broker should be loaded before module loading
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
         PluginUtils.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
@@ -332,7 +335,7 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
-        UIManager.put("ClassLoader",  PluginUtils.getThemeClassLoader());
+        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {

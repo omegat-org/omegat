@@ -27,6 +27,8 @@ package org.omegat.core.spellchecker;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Comparator;
+import java.util.List;
 
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
@@ -48,7 +50,9 @@ public final class SpellCheckerManager {
             return spellChecker;
         }
         // Try to use a custom spell checker if one is available.
-        for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
+        List<Class<?>> spellCheckers = PluginUtils.getSpellCheckClasses();
+        spellCheckers.sort(Comparator.comparing(Class::getName));
+        for (Class<?> customSpellChecker : spellCheckers) {
             try {
                 spellChecker = (ISpellChecker) customSpellChecker.getDeclaredConstructor().newInstance();
                 if (spellChecker.initialize()) {

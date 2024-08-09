@@ -176,7 +176,7 @@
       <varlistentry>
         <term>フィルター...</term>
         <listitem>
-          <para>プロジェクトに適用されるファイルフィルターを編集するには、このボタンを使用します。詳細については、設定-<link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>を参照してください。</para>
+          <para>プロジェクトに適用されるファイルフィルターを編集するには、このボタンを使用します。詳細については、<link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>環境設定を参照してください。</para>
 
           <warning>
             <para>ファイルフィルタを変更した場合は、整合ツールを終了するときに、変更を保存するかどうかを確認するメッセージが表示されます。デフォルトの選択肢は<guibutton>はい</guibutton>です。ユーザレベルのOmegaTのファイルフィルターの設定を編集した場合、保存を必要としない場合もあります。</para>

@@ -117,21 +117,21 @@
 	  <varlistentry id="configuration.folder.extra.contents.filters">
 		<term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
 		<listitem>
-		  <para>これは、ファイル種別ごとのフィルター設定が保存されるファイルです。詳細については、設定-<link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>を参照してください。</para>
+		  <para>これは、ファイル種別ごとのフィルター設定が保存されるファイルです。詳細については、<link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>環境設定を参照してください。</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="configuration.folder.extra.contents.finder">
 		<term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
 		<listitem>
-		  <para>これは、外部検索の設定パラメータが保存されるファイルです。詳細については、設定-<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>を参照してください。</para>
+		  <para>これは、外部検索の設定パラメータが保存されるファイルです。詳細については、<link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>環境設定を参照してください。</para>
 		</listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.omegat.autotext">
 	  <term id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
 	  <listitem>
-		<para>これは、自動テキスト置換の設定パラメータが保存されるファイルです。詳細については、設定-<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>を参照してください。</para>
+		<para>これは、自動テキスト置換の設定パラメータが保存されるファイルです。詳細については、<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>環境設定を参照してください。</para>
 	  </listitem>
 	</varlistentry>
 
@@ -145,7 +145,7 @@
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
 	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
 	  <listitem>
-		<para>これは、分節化ルールをカスタマイズするためのファイルです。詳細については、設定-<link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>を参照してください。</para>
+		<para>これは、分節化ルールをカスタマイズするためのファイルです。詳細については、<link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>環境設定を参照してください。</para>
 	  </listitem>
 	</varlistentry>
 	
@@ -160,7 +160,7 @@
 	<varlistentry id="configuration.folder.extra.contents.spelling">
 	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
 	  <listitem>
-		<para>このフォルダには、綴り確認用の辞書が格納されます。詳細については、設定-<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>を参照してください。</para>
+		<para>このフォルダには、綴り確認用の辞書が格納されます。詳細については、<link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>環境設定を参照してください。</para>
 	  </listitem>
 	</varlistentry>
 	</variablelist>

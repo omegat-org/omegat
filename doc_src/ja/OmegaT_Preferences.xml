@@ -60,9 +60,9 @@
       <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
         <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>翻訳を自動的に取得する</option></term>
 
-        <listitem>
-          <para>このオプションを無効にすると、 <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/>を押した場合に現在の分節の機械翻訳が取得されます。再度、キーを押すと、提案された機械翻訳結果が挿入されます。</para>
-        </listitem>
+				<listitem>
+					<para>このオプションを有効にすると、有効にして構成したプロバイダーから機械翻訳が自動的にフェッチされます。このオプションを無効のままにすると、現在の分節で<link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/>を使用した場合にのみ機械翻訳が取得されます。その後、その組み合わせをもう一度押して、訳文を挿入する必要があります。</para>
+				</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">

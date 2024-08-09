@@ -154,7 +154,7 @@ xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
 morfologik = ['morfologik', 'morfologik-speller']
 
 [plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.0.19"}
+spotbugs = {id = "com.github.spotbugs", version = "6.0.20"}
 spotless = {id = "com.diffplug.spotless", version = "6.25.0"}
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
 versions = {id = "com.github.ben-manes.versions", version = "0.51.0"}

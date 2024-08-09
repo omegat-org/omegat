@@ -215,7 +215,7 @@
 			<listitem>
 			  <para>現在の原文ファイルは<link linkend="project.folder.source" endterm="project.folder.source.title"/>フォルダーにあります。</para>
 
-			  <para>元のアプリケーションでドキュメントを再度開きます。</para>
+              <para>アプリケーションでドキュメントを再度開きます。メニュー項目を選択しながらAltキーを押すと、ファイルを開く代わりに、FinderやファイルエクスプローラーなどのOS標準のファイルマネージャーでファイルを含むフォルダーが開きます。</para>
 			</listitem>
 		  </varlistentry>
 
@@ -224,7 +224,7 @@
 			<listitem>
 			  <para>現在の訳文ファイルは<link linkend="project.folder.target" endterm="project.folder.target.title"/>フォルダーにあります。</para>
 
-			  <para>アプリケーションでドキュメントを再度開きます。</para>
+			  <para>アプリケーションでドキュメントを再度開きます。メニュー項目を選択しながらAltキーを押すと、ファイルを開く代わりに、FinderやファイルエクスプローラーなどのOS標準のファイルマネージャーでファイルを含むフォルダーが開きます。</para>
 			</listitem>
 		  </varlistentry>
 
@@ -233,7 +233,7 @@
 			<listitem>
 			  <para>書き込み可能な用語集は<link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>フォルダーにあります。</para>
 
-			  <para>アプリケーションでドキュメントを再度開きます。</para>
+			  <para>アプリケーションでドキュメントを再度開きます。メニュー項目を選択しながらAltキーを押すと、ファイルを開く代わりに、FinderやファイルエクスプローラーなどのOS標準のファイルマネージャーでファイルを含むフォルダーが開きます。</para>
 			</listitem>
 		  </varlistentry>
 		</variablelist>

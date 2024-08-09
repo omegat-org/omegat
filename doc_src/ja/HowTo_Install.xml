@@ -17,9 +17,9 @@
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>開発版:OmegaT Nightly</term>
+	  <term>開発版:OmegaT Weekly</term>
 	  <listitem>
-		<para>この版は、新しいコードがOmegaTに追加されるたびに自動的に生成されます。テスト目的で使用されます。</para>
+		<para>これは、現在開発が進められている OmegaT のバージョンです。毎週自動的に生成され、テスト用のベータ版として機能します。</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
@@ -31,9 +31,9 @@
 
 	<para>OmeaTパッケージは、Javaにバンドルされているバージョンとバンドルされていないバージョンの両方で利用できます。Javaを含まないパッケージは、システム全体にインストールされたJava 11 Runtime Environmentに依存します。</para>
 
-	<para>OmegaT 5.8.0以降では、すべてのプラットフォームでJava 11 Runtime Environmentもサポートしています。</para>
+	<para>OmegaT 6.1.0 以降は、どのプラットフォームでも Java 17 ランタイム環境と併用して実行できます。</para>
 
-	<para>OmegaTチームはEclipse FoundationのAdoptium Projectが提供するJavaランタイムEclipse Temurinを推奨していますが、Java 8互換のランタイム環境であればどれでも動作するはずです。 <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse Temurin™ project</ulink>を参照。</para>
+	<para>ライセンス上の考慮事項から、OmegaT チームは Eclipse Foundation の Adoptium Project が提供する Eclipse Temurin Java ランタイムを推奨していますが、Java 11 と互換性のあるランタイム環境であれば、どれでも動作するはずです。 <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse Temurin™ project</ulink>を参照。</para>
 
 	<para>IBMは<ulink url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/>でLinux PowerPC 用のJREを提供しています。</para>
   </note>

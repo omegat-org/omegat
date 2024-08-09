@@ -26,7 +26,7 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>機械翻訳エンジンを有効または無効にします。</para>
+        <para>適切に構成された機械翻訳エンジンを有効または無効にします。</para>
 
         <para>複数の変換エンジンを選択した場合は、<keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>を使用して変換エンジンの翻訳結果を切り替え、最後に選択した訳文候補を挿入します。詳細の<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>環境設定を参照してください。</para>
       </listitem>

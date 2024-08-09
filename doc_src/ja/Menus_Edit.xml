@@ -246,11 +246,11 @@
 		
 		<itemizedlist>
 		  <listitem>
-			<para><guimenuitem>前の参考訳文を選択</guimenuitem> <keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+			<para><guimenuitem>前の参考訳文を選択</guimenuitem> <keycombo><keycap>C</keycap><keycap>↑</keycap></keycombo>(<keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo>macOSの場合)</para>
 		  </listitem>
 
 		  <listitem>
-			<para><guimenuitem>次の参考訳文を選択</guimenuitem> <keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+			<para><guimenuitem>次の参考訳文を選択</guimenuitem> <keycombo><keycap>C</keycap><keycap>↓</keycap></keycombo>(<keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo>macOSの場合)</para>
 		  </listitem>
 
 		  <listitem>

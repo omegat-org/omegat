@@ -555,7 +555,7 @@
 
     <para>参考訳文は、プロジェクトの翻訳メモリ時にリアルタイムで作成された内部プロジェクト翻訳と、以前のプロジェクトからインポートした外部メモリまたはサードパーティから受け取った外部メモリの全てから取得されます。詳細については、 <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/>を参照してください。</para>
 
-    <para>次の分節に移動すると、最初の参考訳文（最も一致率の高いもの）が自動的に選択されます。別の参考訳文を選択するには、<keycombo><keycap>C</keycap><keycap>2、3、4、または5</keycap></keycombo>を押すか、<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/>を使用します。</para>
+    <para>次の分節に移動すると、最初の参考訳文（最も一致率の高いもの）が自動的に選択されます。特定の参考訳文を選択するには、<keycombo><keycap>C</keycap><keycap>2、3、4、または 5</keycap> </keycombo> を押すか、<keycombo><keycap>C</keycap><keycap>↑ または ↓</keycap></keycombo> (macOS では <keycombo><keycap>A</keycap><keycap>↑ または ↓</keycap></keycombo>) を使用して使用する候補を切り替えることができます。または、<link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> を使用して別の参考訳文を選択することもできます。</para>
 
 	<example id="the.first.match">
 	  <title id="the.first.match.title">空の分節と最初の2つのマッチ</title>
@@ -683,7 +683,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>機械翻訳</guilabel></title>
 
-    <para>このウィンドウを開くと、有効になっている各機械翻訳エンジンによって生成された分節の訳文候補が表示されます。複数のエンジンからの訳文の提案が利用可能な場合</para>
+    <para>機械翻訳エンジンを有効にして構成している場合、このウィンドウには有効にしたエンジンが生成した分節の訳文が表示されます。複数の翻訳エンジンからの提案が利用可能な場合、</para>
 	
     <itemizedlist>
       <listitem>

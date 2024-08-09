@@ -60,9 +60,9 @@
       <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
         <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>翻訳を自動的に取得する</option></term>
 
-        <listitem>
-          <para>このオプションを無効にすると、 <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/>を押した場合に現在の分節の機械翻訳が取得されます。再度、キーを押すと、提案された機械翻訳結果が挿入されます。</para>
-        </listitem>
+				<listitem>
+					<para>このオプションを有効にすると、有効にして構成したプロバイダーから機械翻訳が自動的にフェッチされます。このオプションを無効のままにすると、現在の分節で<link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/>を使用した場合にのみ機械翻訳が取得されます。その後、その組み合わせをもう一度押して、訳文を挿入する必要があります。</para>
+				</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
@@ -214,7 +214,21 @@
           <para>用語集の用語に複数の定義があったときに、同じ行に一度に表示します。</para>
         </listitem>
       </varlistentry>
-    </variablelist>
+
+	  <varlistentry id="dialogs.preferences.glossary.sort.by.source.term.length">
+		  <term id="dialogs.preference.glossary.sort.by.source.term.length.title"><option>用語の原文の長さ順に並べ替える</option></term>
+		  <listitem>
+			  <para>一部の用語集項目がソース用語テキストで類似しており、そのうちの1つに別の用語テキストが含まれている場合は、ソーステキストの長さでソートします。</para>
+		  </listitem>
+	  </varlistentry>
+
+		<varlistentry id="dialogs.preferences.glossary.sort.by.target.term.length">
+			<term id="dialogs.preference.glossary.sort.by.target.term.length.title"><option>用語の原文の長さ順に並べ替える</option></term>
+			<listitem>
+				<para>用語集の項目に複数の定義がある場合は、定義テキストの長さで並べ替えます。</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
   </section>
 
   <section id="dialogs.preferences.dictionary">
@@ -1194,7 +1208,11 @@ ${filePath}&gt;</programlisting></para>
 
 	<para>プラグインは、<link linkend="configuration.folder">構成フォルダー</link>にインストールされますが、<link linkend="application.folder">プログラム</link>フォルダーの下の<link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>フォルダーにインストールすることもできます。</para>
 
-	<para>その他のプラグインは、<ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT開発サイト</ulink>にあります。</para>
+	<para>その他のプラグインは、<ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">OmegaT wiki サイト</ulink>にあります。</para>
+	<para>「<guibutton>ディスクからプラグインをインストール</guibutton>」ボタンを使用して、プラグインをインストールまたはアップグレードします。プラグインファイルは、<filename>拡張子が.jar</filename> JARファイルです。OmegaT は、JAR プラグインファイルを含む zip アーカイブも受け付けます。サードパーティのプラグインは通常、プラグインファイル自体、READMEファイル、LICENSEファイルを含むzipアーカイブとして配布されます。</para>
+	<warning>
+		<para>プラグインインストーラは、JAR プラグインを含むアーカイブのみを受け入れます。<filename>.zip</filename>拡張子で名前が変更されたプラグインファイルは認識されません。</para>
+	</warning>
   </section>
 
   <section id="dialogs.preferences.updates">

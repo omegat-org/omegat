@@ -875,7 +875,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-mh13hly1dpnd-1nfp4ze3w49ql";
+var storageId = "1fovlq169k03o-175glkqc1cu6q";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

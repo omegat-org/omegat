@@ -695,8 +695,7 @@
                            </a>にあるナビゲーションメニューを使用して、自動的に挿入された分節にナビゲートします。</p>
                      </li>
                      <li class="listitem">
-                        <p>参照用の翻訳として、OmegaTはTMXファイルではないバイリンガル文書もサポートしています。OmegaTがサポートするファイル形式は、OmegaT
-			がソースファイルとして受け入れるすべてのバイリンガル形式です。</p>
+                        <p>参照翻訳として、OmegaTはTMXファイルではないバイリンガル文書もサポートしています。OmegaTがサポートするファイル形式は、OmegaTがソースファイルとして受け入れるすべてのバイリンガル形式です。</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
@@ -876,52 +875,88 @@
                </div>
                <p>OmegaTは、<a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="参考訳文">
                      <span class="guilabel">参考訳文</span>
-                  </a>ウィンドウに参考訳文を表示します。このような検索の一致は、<a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="プロジェクト設定">
+                  </a>ウィンドウに参考訳文を表示します。By default, those matches are limited to the source and target languages defined in the <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="プロジェクト設定">
                      <span class="guilabel">プロジェクト設定</span>
-                  </a>デフォルトではで定義された原文言語と訳文言語に限定された訳文候補になりますが、プロジェクトの訳文言語以外の言語での検索一致の表示を追加することもできます。詳細は<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
+                  </a> dialog.</p>
+               <p>You can add matches in languages that are not the target language. 詳細は<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
                      <code class="option">他の言語の一致をふくむ</code>
                   </a>の設定を参照してください。</p>
-               <p>OmegaTでは、原文分節の<span class="emphasis">
-                     <em>右</em>
-                  </span>に第3の言語の内容を表示して、原文文章の代替言語の参照として使用することもできます。</p>
+               <p>原文文書に対応し、異なる言語への翻訳を含むTMXをお持ちの場合は、原文分節を表示している<span class="emphasis">
+                     <em>すぐ下</em>
+                  </span>に追加の参照言語として表示することもできます。</p>
+               <p>これを実行するためには:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>追加の参照言語を含む翻訳メモリを、<a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>フォルダーの<code class="filename">tmx2source</code>にコピーします。</p>
+                     </li>
+                     <li class="listitem">
+                        <p>翻訳メモリのファイル名を次のように変更します。</p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL_CC.tmx</code>,
+			</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL-CC.tmx</code>, or
+			</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>
+			  
+                                    <code class="filename">LL.tmx</code>,
+			</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>ここで、<span class="emphasis">
+                              <em>LL</em>
+                           </span>は参照として内容表示する言語コードで、<span class="emphasis">
+                              <em>CC</em>
+                           </span>は任意の2文字のコードです。</p>
+                        <div class="warning">
+                           <h3 class="title">警告</h3>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" style="list-style-type: disc; ">
+                                 <li class="listitem">
+                                    <p>すべての文字は大文字でなければなりません。</p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p>原文<span class="bold">
+                                          <strong>と完全に一致する</strong>
+                                       </span>分節のみが表示されます。</p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </li>
+                  </ol>
+               </div>
                <div class="example" id="bridge.english.and.french.with.japanese">
-                  <div class="example-title">例6 英語、フランス語と日本語の橋渡し</div>
+                  <div class="example-title">例6 英語原文の下での日本語の参照訳の使用</div>
                   <div class="example-contents">
+                     <p>フランス語に翻訳するときに、英語文書の日本語訳を含むTMXをお持ちの場合は、対象の英語文の下に表示することで、日本語訳を代替の正確な参照として使用できます。</p>
+                     <p>英語から日本語のファイルを<code class="filename">tm/tmx2source</code>に<code class="filename">JA-JP.tmx</code>という名前で置いてください。OmegaTは、英語の原文に対応する日本語の分節を表示します。</p>
                      <p>
 	  
                      </p>
                      <pre class="programlisting">— ¶ —————————————————————
 <span class="token">A whitespace character: [ \t\n\x0B\f\r]
-fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
-ja-RV: 空白文字：[ \t\n\x0B\f\r]</span>
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</span>
 Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 3075 ¶&gt;</span>
 — ¶ —————————————————————</pre>
-                     <p>最初の行はオリジナルの英語、2行目は任意の言語コードの古いフランス語、3行目は同じように任意の言語コードの日本語、4行目は現在のフランス語への翻訳です。</p>
+                     <p>最初の行は元の英語、2行目は翻訳を作成するときに役立つと予想されるブリッジ言語、3行目は現在のフランス語への翻訳です。</p>
                   </div>
                </div>
                <br class="example-break" />
-               <p>これを実行するためには:</p>
-               <div class="orderedlist">
-                  <ol class="orderedlist" type="1">
-                     <li class="listitem">
-                        <p>
-                           <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>フォルダーに<code class="filename">tmx2source</code>という名前のフォルダーを作成します。</p>
-                     </li>
-                     <li class="listitem">
-                        <p>そこであなたの「第三外国語」の翻訳メモリをコピーしてください。</p>
-                     </li>
-                     <li class="listitem">
-                        <p>翻訳メモリの名前を<code class="filename">LL_CC.tmx</code>または<code class="filename">LL-CC.tmx</code>に変更します。ここで、<span class="emphasis">
-                              <em>LL</em>
-                           </span>は参照として内容表示する言語コードで、<span class="emphasis">
-                              <em>CC</em>
-                           </span>は任意の2文字のコードです。</p>
-                     </li>
-                  </ol>
-               </div>
                <div class="note">
                   <h3 class="title">注記</h3>
-                  <p>異なる「ブリッジ」言語ペアを含むTMXファイルは、必要な数だけ使用できます。</p>
+                  <p>異なるブリッジ言語を含むTMXファイルは、必要な数だけ使用できます。</p>
                </div>
             </section>
          </section>
@@ -962,9 +997,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
                <p>ファイルフィルターは、それぞれ関連付けるファイル拡張子のリストを持っています。翻訳したいファイル形式がサポートのあるファイル形式に構造的に近い場合は、対応するファイルフィルターの拡張子のリストにそのファイル拡張子を追加するか、そのファイルフィルターで受け入れられる拡張子に変更します。詳細については-<a class="link" href="chapter.appendices.html#file.filters" title="ファイルフィルター">ファイルフィルター</a>を参照してください。</p>
-               <p>また、OmegaTのカスタムタグ機能を使用して書式固有の文字列を登録し、OmegaTに通常のタグと同じように処理させることもできます。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
+               <p>また、OmegaTのカスタムタグ機能を使用して書式固有の文字列を登録し、OmegaTに通常のタグと同じように処理させることもできます。詳細については、<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
                      <code class="option">カスタムタグ</code>
-                  </a>を参照してください。</p>
+                  </a>環境設定を参照してください。</p>
             </section>
             <section class="section" id="how.to.translate.other.files.convert">
                <div class="titlepage">
@@ -1591,7 +1626,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   </div>
                </div>
                <p>一部のLinuxディストリビューションでは、パッケージマネージャにOmegaTが用意されています。ここに記載されている手順は、<a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>のサイトからパッケージをダウンロードする人に適用されます。</p>
-               <p>ダウンロードしたファイルを解凍します。これにより、ダウンロードしたパッケージの名前が付いた新しいフォルダが作成されます。このフォルダーには、OmegaTの実行に必要なすべてのファイルが含まれています。</p>
+               <p>ダウンロードしたファイルを解凍します。解凍すると、ダウンロードしたパッケージの名前が付いた新しいフォルダーが作成されているはずです。このフォルダーには、OmegaTの実行に必要なすべてのファイルが含まれています。</p>
                <div class="note">
                   <h3 class="title">注記</h3>
                   <p>使用可能なファイルからOmegaTを直接実行することもできますが、そこにある<code class="filename">linux-install.sh</code>スクリプトを実行して、OmegaTをより適切な場所にインストールすることもできます。</p>
@@ -1755,7 +1790,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                </div>
                <p>OmegaT の実行は、起動オプションを記述したスクリプトを使ってコマンドラインから可能です。詳細は<a class="link" href="chapter.how.to.html#launch.with.command.line" title="コマンドライン起動">コマンドライン起動</a>項をご覧ください。</p>
                <p>
-                  <code class="filename">.jar</code>拡張子がシステムJavaランチャーに関連付けられている場合は、<code class="filename">OmegaT.jar</code>をクリックして直接起動することもできます。</p>
+                  <code class="filename">.jar</code>拡張子がシステムJavaランチャーに関連付けられている場合は、<code class="filename">OmegaT.jar</code>をダブルクリックして直接起動することもできます。</p>
                <p>このパッケージには、KDEユーザーに役立つ<code class="filename">OmegaT.kaptn</code>Kaptainスクリプトと、OmegaTを実行するために適切な<span class="application">java</span>コマンドを自動的に起動する<code class="filename">OmegaT</code>bashスクリプトも用意されています。</p>
             </section>
             <section class="section" id="running.omegat.on.macos">
@@ -2195,7 +2230,7 @@ config-dir=&quot;path/to/new/configdir&quot;</pre>
                                                       </span>
                                                    </dt>
                                                    <dd>
-                                                      <p>処理する原文ファイルを定義する正規表現のホワイトリスト。正規表現では、ピリオドとバックスラッシュ文字(<code class="code">\.</code>と<code class="code">\\</code>)をエスケープする必要があります。</p>
+                                                      <p>処理する原文ファイルを定義する正規表現の許可リスト。正規表現では、ピリオドとバックスラッシュ文字(<code class="code">\.</code>と<code class="code">\\</code>)をエスケープする必要があります。</p>
                                                       <p>次に、典型的な例をいくつか示します。</p>
                                                       <div class="variablelist">
                                                          <dl class="variablelist">

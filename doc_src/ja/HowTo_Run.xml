@@ -32,7 +32,7 @@
 
 	<para>OmegaT の実行は、起動オプションを記述したスクリプトを使ってコマンドラインから可能です。詳細は<link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>項をご覧ください。</para>
 
-	<para><filename>.jar</filename>拡張子がシステムJavaランチャーに関連付けられている場合は、<filename>OmegaT.jar</filename>をクリックして直接起動することもできます。</para>
+	<para><filename>.jar</filename>拡張子がシステムJavaランチャーに関連付けられている場合は、<filename>OmegaT.jar</filename>をダブルクリックして直接起動することもできます。</para>
 
 	<para>このパッケージには、KDEユーザーに役立つ<filename>OmegaT.kaptn</filename>Kaptainスクリプトと、OmegaTを実行するために適切な<application>java</application>コマンドを自動的に起動する<filename>OmegaT</filename>bashスクリプトも用意されています。</para>
   </section>
@@ -365,7 +365,7 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
 							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=&lt;パターン&gt;</option></term>
 							<listitem>
-							  <para>処理する原文ファイルを定義する正規表現のホワイトリスト。正規表現では、ピリオドとバックスラッシュ文字(<code>\.</code>と<code>\\</code>)をエスケープする必要があります。</para>
+							  <para>処理する原文ファイルを定義する正規表現の許可リスト。正規表現では、ピリオドとバックスラッシュ文字(<code>\.</code>と<code>\\</code>)をエスケープする必要があります。</para>
 
 							  <para>次に、典型的な例をいくつか示します。</para>
 							  

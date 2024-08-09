@@ -91,7 +91,7 @@
     <varlistentry id="menus.view.mark.language.checker">
       <term id="menus.view.mark.language.checker.title"><guimenuitem>言語チェッカーの指摘</guimenuitem></term>
       <listitem>
-        <para>LanguageToolがエラーを検出した訳文の部分に下線を引きます。詳細については、設定-<link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>を参照してください。</para>
+        <para>LanguageToolがエラーを検出した訳文の部分に下線を引きます。詳細については、<link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>環境設定を参照してください。</para>
 	  </listitem>
     </varlistentry>
 	
@@ -113,7 +113,7 @@
 		
 		<para>デフォルトの値は<guimenuitem>現在の分節</guimenuitem>で、<guimenuitem>すべての分節</guimenuitem>または<guimenuitem>なし</guimenuitem>に設定できます。</para>
 
-		<para>表示された情報を修正できます。詳細については、設定-<link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/>を参照してください。</para>
+		<para>表示された情報を修正できます。詳細については、<link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/>環境設定を参照してください。</para>
       </listitem>
     </varlistentry>
 	

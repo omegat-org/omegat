@@ -18,7 +18,7 @@ jobs:
         java-version: '11'
     - name: create annotation
       run: echo "::add-matcher::${{ github.workspace }}/ci/github/problem-matcher.json"
-    - name: run checkstyle
+    - name: setup gradle
       uses: gradle/actions/setup-gradle@v4
-      with:
-        arguments: -PenvIsCi checkstyleMain checkstyleTest
+    - name: run checkstyle
+      run: ./gradlew -PenvIsCi checkstyleMain checkstyleTest

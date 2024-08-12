@@ -53,7 +53,7 @@ plugins.forEach { args ->
     configurations.getByName("${name}RuntimeClasspath").exclude(module: 'languagetool-core')
     tasks.register("${name}Jar", Jar) {
         archiveFileName.set("omegat-language-${name}.${archiveExtension.get()}")
-        destinationDirectory.set(new File(rootProject.buildDir, "modules"))
+        destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         from configurations.getByName("${name}RuntimeClasspath").collect {
             it.isDirectory() ? it : zipTree(it)

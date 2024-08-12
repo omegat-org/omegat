@@ -59,7 +59,6 @@ import org.omegat.util.Language;
 public class FalseFriendsTest extends TestCore {
 
     @BeforeClass
-    @SuppressWarnings("deprecation")
     public static void setUpClass() {
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());

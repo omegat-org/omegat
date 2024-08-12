@@ -56,7 +56,6 @@ public class LanguageToolTest {
     private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
 
     @BeforeClass
-    @SuppressWarnings("deprecation")
     public static void setUpClass() {
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());

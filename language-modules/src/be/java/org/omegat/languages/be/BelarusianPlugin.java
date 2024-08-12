@@ -34,7 +34,6 @@ public final class BelarusianPlugin {
     private BelarusianPlugin() {
     }
 
-    @SuppressWarnings("deprecation")
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage(BELARUSIAN);
     }

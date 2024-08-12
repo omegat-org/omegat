@@ -31,32 +31,26 @@ def plugins = [
         [ code: 'zh', lang: 'Chinese']
 ]
 
-def pluginPackage = 'org.omegat.languages'
-def languageToolVersion = libs.versions.languagetool.get()
-def languageToolGroup = libs.languagetool.core.get().group
 plugins.forEach { args ->
     def name = args.get('code')
     def lang = args.get('lang')
-    def pluginClass = "${pluginPackage}.${name}.${lang}Plugin"
+    def pluginClass = "org.omegat.languages.${name}.${lang}Plugin"
     sourceSets.create(name)
     dependencies.add("${name}CompileOnly", project.rootProject)
     dependencies.add("${name}CompileOnly", libs.languagetool.core)
     if (name.equals("ja")) {
-        dependencies.add("jaImplementation", libs.languagetool.ja.get()) {
+        dependencies.jaImplementation(libs.languagetool.ja) {
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen'
             exclude module: 'languagetool-core'
         }
-        dependencies.add("jaImplementation", 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic')
+        dependencies.jaImplementation(dependencies.variantOf(libs.lucene.gosen){ classifier("ipadic") })
     } else {
-         dependencies.add("${name}Implementation", "${languageToolGroup}:language-${name}:${languageToolVersion}") {
+        dependencies.add("${name}Implementation", libs.languagetool.getAt(name)) {
             exclude module: 'languagetool-core'
         }
     }
-    configurations.getByName("${name}RuntimeClasspath").exclude(group: languageToolGroup, module: 'languagetool-core')
-    tasks.getByName("${name}Classes") {
-        group = 'languagetool'
-    }
+    configurations.getByName("${name}RuntimeClasspath").exclude(module: 'languagetool-core')
     tasks.register("${name}Jar", Jar) {
         archiveFileName.set("omegat-language-${name}.${archiveExtension.get()}")
         destinationDirectory.set(new File(rootProject.buildDir, "modules"))
@@ -67,19 +61,22 @@ plugins.forEach { args ->
         from sourceSets.getByName("${name}").output
         manifest {
             attributes(
-                    'Plugin-Name': "${lang} plugin",
+                    'Plugin-Name': "OmegaT language-${lang} plugin",
                     'Plugin-License': 'GNU Public License version 3 or later',
                     'OmegaT-Plugins': pluginClass,
                     'Plugin-Author': 'OmegaT team',
                     'Plugin-Link': 'https://omegat.org',
-                    'Plugin-Description': "Provide ${lang}",
+                    'Plugin-Description': "Provide languagetool rules, and spell check dictionary for language-${lang}",
                     'Plugin-Category': 'language',
-                    'Plugin-Version': "${languageToolVersion}"
+                    'Plugin-Version': libs.versions.languagetool.get()
             )
         }
-        group = 'languagetool'
+        group = 'build'
     }
     jar.dependsOn tasks.named("${name}Jar")
+    tasks.getByName("${name}Classes") {
+        group = 'build'
+    }
     def capitalName = name.capitalize()
     tasks.getByName("spotbugs${capitalName}") {
         group = 'other'

@@ -35,7 +35,8 @@ public final class PersianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(PERSIAN);
+        LanguageManager.registerLTLanguage("fa-IR", PERSIAN);
+        LanguageManager.registerLTLanguage("fa-AF", PERSIAN);
     }
 
     public static void unloadPlugins() {

@@ -35,7 +35,7 @@ public final class TamilPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(TAMIL);
+        LanguageManager.registerLTLanguage("ta-IN", TAMIL);
     }
 
     public static void unloadPlugins() {

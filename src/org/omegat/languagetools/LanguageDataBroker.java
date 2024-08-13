@@ -124,23 +124,11 @@ public class LanguageDataBroker implements ResourceDataBroker {
         }
     }
 
-    private Language getLanguage() {
-        org.omegat.util.Language omLang = LanguageManager.getProjectTargetLanguage();
-        if (omLang == null) {
-            return null;
-        }
-        Language lang = LanguageManager.getLTLanguage(omLang.getLanguageCode(), omLang.getCountryCode());
-        if (lang == null) {
-            lang = LanguageManager.getLTLanguage("en", "US");
-        }
-        return lang;
-    }
-
     @Override
     public InputStream getAsStream(String path) {
         InputStream inputStream = ResourceDataBroker.class.getResourceAsStream(path);
         if (inputStream == null) {
-            Language lang = getLanguage();
+            Language lang = LanguageManager.getLTLanguage();
             if (lang != null) {
                 inputStream = lang.getClass().getResourceAsStream(path);
             }
@@ -152,7 +140,7 @@ public class LanguageDataBroker implements ResourceDataBroker {
     public URL getAsURL(String path) {
         URL url = ResourceDataBroker.class.getResource(path);
         if (url == null) {
-            Language lang = getLanguage();
+            Language lang = LanguageManager.getLTLanguage();
             if (lang != null) {
                 url = lang.getClass().getResource(path);
             }
@@ -173,7 +161,7 @@ public class LanguageDataBroker implements ResourceDataBroker {
                 return urls;
             }
         }
-        Language lang = getLanguage();
+        Language lang = LanguageManager.getLTLanguage();
         if (lang == null) {
             return Collections.emptyList();
         }

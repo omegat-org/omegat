@@ -35,7 +35,7 @@ public final class EsperantoPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(ESPERANTO);
+        LanguageManager.registerLTLanguage("eo", ESPERANTO);
     }
 
     public static void unloadPlugins() {

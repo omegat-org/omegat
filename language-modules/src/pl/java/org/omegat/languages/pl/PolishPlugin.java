@@ -35,7 +35,7 @@ public final class PolishPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(POLISH);
+        LanguageManager.registerLTLanguage("pl-PL", POLISH);
     }
 
     public static void unloadPlugins() {

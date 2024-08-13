@@ -35,7 +35,7 @@ public final class BretonPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(BRETON);
+        LanguageManager.registerLTLanguage("br", BRETON);
     }
 
     public static void unloadPlugins() {

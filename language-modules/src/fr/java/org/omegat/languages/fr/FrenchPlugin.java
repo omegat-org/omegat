@@ -35,7 +35,7 @@ public final class FrenchPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(FRENCH);
+        LanguageManager.registerLTLanguage("fr", FRENCH);
     }
 
     public static void unloadPlugins() {

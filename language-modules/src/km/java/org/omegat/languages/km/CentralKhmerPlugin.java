@@ -35,7 +35,7 @@ public final class CentralKhmerPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(KHMER);
+        LanguageManager.registerLTLanguage("km-KH", KHMER);
     }
 
     public static void unloadPlugins() {

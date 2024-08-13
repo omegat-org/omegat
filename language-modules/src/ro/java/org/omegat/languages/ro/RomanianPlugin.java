@@ -35,7 +35,7 @@ public final class RomanianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(ROMANIAN);
+        LanguageManager.registerLTLanguage("ro-RO", ROMANIAN);
     }
 
     public static void unloadPlugins() {

@@ -35,7 +35,7 @@ public final class GalicianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(GALICIAN);
+        LanguageManager.registerLTLanguage("gl-ES", GALICIAN);
     }
 
     public static void unloadPlugins() {

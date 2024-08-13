@@ -35,7 +35,8 @@ public final class SwedishPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(SWEDISH);
+        LanguageManager.registerLTLanguage("sv-SE", SWEDISH);
+        LanguageManager.registerLTLanguage("sv-FI", SWEDISH);
     }
 
     public static void unloadPlugins() {

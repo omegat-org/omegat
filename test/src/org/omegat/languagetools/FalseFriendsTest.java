@@ -63,10 +63,10 @@ public class FalseFriendsTest extends TestCore {
     public static void setUpClass() {
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        LanguageManager.registerLTLanguage("org.languagetool.language.English");
-        LanguageManager.registerLTLanguage("org.languagetool.language.AmericanEnglish");
-        LanguageManager.registerLTLanguage("org.languagetool.language.CanadianEnglish");
-        LanguageManager.registerLTLanguage("org.languagetool.language.Polish");
+        LanguageManager.registerLTLanguage("en", "org.languagetool.language.English");
+        LanguageManager.registerLTLanguage("en-US", "org.languagetool.language.AmericanEnglish");
+        LanguageManager.registerLTLanguage("en-CA", "org.languagetool.language.CanadianEnglish");
+        LanguageManager.registerLTLanguage("pl-PL", "org.languagetool.language.Polish");
     }
 
     @Before

@@ -35,7 +35,7 @@ public final class GreekPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(GREEK);
+        LanguageManager.registerLTLanguage("el-GR", GREEK);
     }
 
     public static void unloadPlugins() {

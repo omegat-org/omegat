@@ -135,6 +135,6 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
      *      <code>getLanguageForLanguageNameOnly</code> in {@link Languages}.
      */
     public static Language getLTLanguage(org.omegat.util.Language lang) {
-        return LanguageManager.getLTLanguage(lang.getLanguageCode(), lang.getCountryCode());
+        return LanguageManager.getLTLanguage(lang);
     }
 }

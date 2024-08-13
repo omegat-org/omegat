@@ -35,7 +35,7 @@ public final class IrishPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(IRISH);
+        LanguageManager.registerLTLanguage("ga-IE", IRISH);
     }
 
     public static void unloadPlugins() {

@@ -35,7 +35,8 @@ public final class ItalianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(ITALIAN);
+        LanguageManager.registerLTLanguage("it-CH", ITALIAN);
+        LanguageManager.registerLTLanguage("it-IT", ITALIAN);
     }
 
     public static void unloadPlugins() {

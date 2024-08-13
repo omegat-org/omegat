@@ -35,7 +35,7 @@ public final class TagalogPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(TAGALOG);
+        LanguageManager.registerLTLanguage("tl-PH", TAGALOG);
     }
 
     public static void unloadPlugins() {

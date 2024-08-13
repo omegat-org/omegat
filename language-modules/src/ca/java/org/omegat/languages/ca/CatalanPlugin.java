@@ -35,7 +35,7 @@ public final class CatalanPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(CATALAN);
+        LanguageManager.registerLTLanguage("ca", CATALAN);
     }
 
     public static void unloadPlugins() {

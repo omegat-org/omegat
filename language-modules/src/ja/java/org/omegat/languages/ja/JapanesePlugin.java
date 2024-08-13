@@ -35,7 +35,7 @@ public final class JapanesePlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(JAPANESE);
+        LanguageManager.registerLTLanguage("ja-JP", JAPANESE);
     }
 
     public static void unloadPlugins() {

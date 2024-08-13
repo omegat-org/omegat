@@ -35,7 +35,7 @@ public final class AsturianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(ASTURIAN);
+        LanguageManager.registerLTLanguage("ast-ES", ASTURIAN);
     }
 
     public static void unloadPlugins() {

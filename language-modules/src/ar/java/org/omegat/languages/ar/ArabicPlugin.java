@@ -35,7 +35,7 @@ public final class ArabicPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(ARABIC);
+        LanguageManager.registerLTLanguage("ar-AR", ARABIC);
     }
 
     public static void unloadPlugins() {

@@ -31,13 +31,21 @@ import org.omegat.languagetools.LanguageManager;
 
 public final class EnglishPlugin {
 
+    private static final String ENGLISH = "org.languagetool.language.English";
     private static final String AMERICAN_ENGLISH = "org.languagetool.language.AmericanEnglish";
+    private static final String BRITISH_ENGLISH = "org.languagetool.language.BritishEnglish";
+    private static final String CANADIAN_ENGLISH = "org.languagetool.language.CanadianEnglish";
+    private static final String AUSTRALIAN_ENGLISH = "org.languagetool.language.AUSTRARLANEnglish";
 
     private EnglishPlugin() {
     }
 
     public static void loadPlugins() throws IOException {
-        LanguageManager.registerLTLanguage(AMERICAN_ENGLISH);
+        LanguageManager.registerLTLanguage("en", ENGLISH);
+        LanguageManager.registerLTLanguage("en-US", AMERICAN_ENGLISH);
+        LanguageManager.registerLTLanguage("en-GB", BRITISH_ENGLISH);
+        LanguageManager.registerLTLanguage("en-CA", CANADIAN_ENGLISH);
+        LanguageManager.registerLTLanguage("en-AU", AUSTRALIAN_ENGLISH);
     }
 
     public static void unloadPlugins() {

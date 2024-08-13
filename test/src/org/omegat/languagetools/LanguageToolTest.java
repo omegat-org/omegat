@@ -60,11 +60,11 @@ public class LanguageToolTest {
     public static void setUpClass() {
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        LanguageManager.registerLTLanguage("org.languagetool.language.English");
-        LanguageManager.registerLTLanguage("org.languagetool.language.AmericanEnglish");
-        LanguageManager.registerLTLanguage("org.languagetool.language.CanadianEnglish");
-        LanguageManager.registerLTLanguage("org.languagetool.language.Belarusian");
-        LanguageManager.registerLTLanguage("org.languagetool.language.French");
+        LanguageManager.registerLTLanguage("en", "org.languagetool.language.English");
+        LanguageManager.registerLTLanguage("en-US", "org.languagetool.language.AmericanEnglish");
+        LanguageManager.registerLTLanguage("en-CA", "org.languagetool.language.CanadianEnglish");
+        LanguageManager.registerLTLanguage("be-BE", "org.languagetool.language.Belarusian");
+        LanguageManager.registerLTLanguage("fr-FR", "org.languagetool.language.French");
     }
 
     @Before

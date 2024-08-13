@@ -35,7 +35,7 @@ public final class SlovakPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(SLOVAK);
+        LanguageManager.registerLTLanguage("sk-SK", SLOVAK);
     }
 
     public static void unloadPlugins() {

@@ -35,7 +35,7 @@ public final class SlovenianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(SLOVENIAN);
+        LanguageManager.registerLTLanguage("sl-SI", SLOVENIAN);
     }
 
     public static void unloadPlugins() {

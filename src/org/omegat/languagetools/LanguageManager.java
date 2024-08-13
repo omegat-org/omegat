@@ -24,10 +24,8 @@
  ******************************************************************************/
 package org.omegat.languagetools;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.languagetool.Language;
 import org.languagetool.Languages;
@@ -37,41 +35,44 @@ import org.omegat.core.data.ProjectProperties;
 
 public final class LanguageManager {
 
-    private static final Set<String> LT_LANGUAGE_CLASSES = new HashSet<>();
+    private static final Map<String, String> LT_LANGUAGE_CLASSES = new HashMap<>();
 
     private LanguageManager() {
     }
 
-    public static void registerLTLanguage(String fqcn) {
-        LT_LANGUAGE_CLASSES.add(fqcn);
+    public static void registerLTLanguage(String lang, String fqcn) {
+        LT_LANGUAGE_CLASSES.put(lang, fqcn);
     }
 
-    static Language getLTLanguage(String omLang, String omCountry) {
-        if (omLang == null) {
+    static Language getLTLanguage(org.omegat.util.Language lang) {
+        if (lang == null) {
             return null;
         }
-        // Search for full xx-YY match
-        for (String fqcn : LT_LANGUAGE_CLASSES) {
-            Language ltLang = Languages.getOrAddLanguageByClassName(fqcn);
-            if (omLang.equalsIgnoreCase(ltLang.getShortCode())) {
-                List<String> countries = Arrays.asList(ltLang.getCountries());
-                if (countries.contains(omCountry)) {
-                    return ltLang;
-                }
-            }
+        String fqcn = LT_LANGUAGE_CLASSES.get(lang.getLanguage());
+        if (fqcn != null) {
+            return Languages.getOrAddLanguageByClassName(fqcn);
         }
-
-        // Search for just xx match
-        for (String fqcn : LT_LANGUAGE_CLASSES) {
-            Language ltLang = Languages.getOrAddLanguageByClassName(fqcn);
-            if (omLang.equalsIgnoreCase(ltLang.getShortCode())) {
-                return ltLang;
+        // Search for language code
+        fqcn = LT_LANGUAGE_CLASSES.get(lang.getLanguageCode());
+        if (fqcn != null) {
+            return Languages.getOrAddLanguageByClassName(fqcn);
+        }
+        // Search for just language code match but allow country difference
+        String languageCode;
+        for (Map.Entry<String, String> entry : LT_LANGUAGE_CLASSES.entrySet()) {
+            if (entry.getKey().contains("-")) {
+                languageCode = entry.getKey().substring(0, entry.getKey().indexOf('-'));
+            } else {
+                languageCode = entry.getKey();
+            }
+            if (languageCode.equals(lang.getLanguageCode())) {
+                return Languages.getOrAddLanguageByClassName(entry.getValue());
             }
         }
         return null;
     }
 
-    static org.omegat.util.Language getProjectTargetLanguage() {
+    static Language getLTLanguage() {
         if (Core.getProject() == null) {
             return null;
         }
@@ -79,6 +80,14 @@ public final class LanguageManager {
         if (prop == null) {
             return null;
         }
-        return prop.getTargetLanguage();
+        org.omegat.util.Language omLang = prop.getTargetLanguage();
+        if (omLang == null) {
+            return null;
+        }
+        Language lang = getLTLanguage(omLang);
+        if (lang == null) {
+            lang = getLTLanguage(new org.omegat.util.Language("en-US"));
+        }
+        return lang;
     }
 }

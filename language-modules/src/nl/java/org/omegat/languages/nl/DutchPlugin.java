@@ -30,12 +30,14 @@ import org.omegat.languagetools.LanguageManager;
 public final class DutchPlugin {
 
     private static final String DUTCH = "org.languagetool.language.Dutch";
+    private static final String BELGIAN_DUTCH = "org.languagetool.language.BelgianDutch";
 
     private DutchPlugin() {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(DUTCH);
+        LanguageManager.registerLTLanguage("nl-NL", DUTCH);
+        LanguageManager.registerLTLanguage("nl-BE", BELGIAN_DUTCH);
     }
 
     public static void unloadPlugins() {

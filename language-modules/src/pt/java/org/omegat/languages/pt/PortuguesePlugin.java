@@ -39,11 +39,11 @@ public final class PortuguesePlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(PORTUGUESE);
-        LanguageManager.registerLTLanguage(PORTUGAL_PORTUGUESE);
-        LanguageManager.registerLTLanguage(BRAZILIAN_PORTUGUESE);
-        LanguageManager.registerLTLanguage(ANGOLA_PORTUGUESE);
-        LanguageManager.registerLTLanguage(MOZAMBIQUE_PORTUGUESE);
+        LanguageManager.registerLTLanguage("pt", PORTUGUESE);
+        LanguageManager.registerLTLanguage("pt-PT", PORTUGAL_PORTUGUESE);
+        LanguageManager.registerLTLanguage("pt-BR", BRAZILIAN_PORTUGUESE);
+        LanguageManager.registerLTLanguage("pt-AO", ANGOLA_PORTUGUESE);
+        LanguageManager.registerLTLanguage("pt-MZ", MOZAMBIQUE_PORTUGUESE);
     }
 
     public static void unloadPlugins() {

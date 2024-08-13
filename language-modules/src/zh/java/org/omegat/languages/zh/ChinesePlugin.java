@@ -35,7 +35,7 @@ public final class ChinesePlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(CHINESE);
+        LanguageManager.registerLTLanguage("zh-CH", CHINESE);
     }
 
     public static void unloadPlugins() {

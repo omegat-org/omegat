@@ -35,7 +35,7 @@ public final class RussianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(RUSSIAN);
+        LanguageManager.registerLTLanguage("ru-RU", RUSSIAN);
     }
 
     public static void unloadPlugins() {

@@ -35,7 +35,7 @@ public final class BelarusianPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(BELARUSIAN);
+        LanguageManager.registerLTLanguage("be", BELARUSIAN);
     }
 
     public static void unloadPlugins() {

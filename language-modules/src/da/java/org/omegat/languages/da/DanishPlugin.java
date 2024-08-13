@@ -35,7 +35,7 @@ public final class DanishPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(DANISH);
+        LanguageManager.registerLTLanguage("da", DANISH);
     }
 
     public static void unloadPlugins() {

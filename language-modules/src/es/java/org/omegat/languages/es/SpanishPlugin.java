@@ -36,8 +36,8 @@ public final class SpanishPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(SPANISH);
-        LanguageManager.registerLTLanguage(SPANISH_VOSEO);
+        LanguageManager.registerLTLanguage("es", SPANISH);
+        LanguageManager.registerLTLanguage("es-AR", SPANISH_VOSEO);
     }
 
     public static void unloadPlugins() {

@@ -37,9 +37,9 @@ public final class GermanPlugin {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage(AUSTRARIAN_GERMAN);
-        LanguageManager.registerLTLanguage(GERMANY_GERMAN);
-        LanguageManager.registerLTLanguage(SWISS_GERMAN);
+        LanguageManager.registerLTLanguage("de-AT", AUSTRARIAN_GERMAN);
+        LanguageManager.registerLTLanguage("de-DE", GERMANY_GERMAN);
+        LanguageManager.registerLTLanguage("de-CH", SWISS_GERMAN);
     }
 
     public static void unloadPlugins() {

@@ -69,10 +69,10 @@ import org.omegat.util.Token;
  * <ol>
  * <li>Split the original segment into word-only tokens using stemmer (with stop
  * words list), then compare tokens.</li>
- * <li>Split the original segment into word-only tokens without a stemmer, then compare
- * tokens.</li>
- * <li>Split the original segment into not-only-words tokens (including numbers and
- * tags) without a stemmer, then compare tokens.</li>
+ * <li>Split the original segment into word-only tokens without a stemmer, then
+ * compare tokens.</li>
+ * <li>Split the original segment into not-only-words tokens (including numbers
+ * and tags) without a stemmer, then compare tokens.</li>
  * </ol>
  * This class is not thread safe! Must be used in the one thread only.
  *
@@ -86,7 +86,8 @@ public class FindMatches {
 
     /**
      * According to gettext source code, PO fuzzy items are created above 60%
-     * <a href="https://sourceforge.net/p/omegat/feature-requests/1258/">RFE#1258</a>
+     * <a href=
+     * "https://sourceforge.net/p/omegat/feature-requests/1258/">RFE#1258</a>
      */
     static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
@@ -138,16 +139,19 @@ public class FindMatches {
 
     /**
      * Constructor.
-     * @param project OmegaT project.
-     * @param maxCount limit the maximum count of the results.
+     * 
+     * @param project
+     *            OmegaT project.
+     * @param maxCount
+     *            limit the maximum count of the results.
      * @param searchExactlyTheSame
      *            allows searching similarities with the same text as source
      *            segment. This mode is used only for separate sentence match in
      *            a paragraph project, i.e. where a source is just part of the
      *            current source.
      * @param applyThreshold
-     *            Cut off the result by a custom threshold. It is useful
-     *            when results are used only for the display.
+     *            Cut off the result by a custom threshold. It is useful when
+     *            results are used only for the display.
      */
     public FindMatches(IProject project, int maxCount, boolean searchExactlyTheSame, boolean applyThreshold) {
         this.project = project;
@@ -194,8 +198,8 @@ public class FindMatches {
         /* HP: includes non - word tokens */
     }
 
-    private List<NearString> searchNormal(String searchText, boolean requiresTranslation, boolean isFillSimilarityData,
-            boolean skipExternal, IStopped stop) throws StoppedException {
+    private List<NearString> searchNormal(String searchText, boolean requiresTranslation,
+            boolean isFillSimilarityData, boolean skipExternal, IStopped stop) throws StoppedException {
         init(searchText);
 
         // travel by project entries, including orphaned
@@ -276,7 +280,8 @@ public class FindMatches {
 
                 processEntry(null, tmen.getSourceText(), tmen.getTranslationText(),
                         NearString.MATCH_SOURCE.TM, false, tmenPenalty, en.getKey(), tmen.getCreator(),
-                        tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(), tmen.getProperties());
+                        tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(),
+                        tmen.getProperties());
             }
         }
     }
@@ -298,7 +303,8 @@ public class FindMatches {
             // multiple segments
             for (String onesrc : segments) {
                 // find match for separate segment
-                List<NearString> segmentMatch = separateSegmentMatcher.searchNormal(onesrc, true, false, true, stop);
+                List<NearString> segmentMatch = separateSegmentMatcher.searchNormal(onesrc, true, false, true,
+                        stop);
                 if (!segmentMatch.isEmpty()
                         && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                     fsrc.add(segmentMatch.get(0).source);
@@ -312,8 +318,8 @@ public class FindMatches {
             String foundSrc = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
             // glue found translations
             String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
-            processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
-                    0, null);
+            processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "", 0,
+                    null);
         }
         return result;
     }
@@ -436,8 +442,8 @@ public class FindMatches {
         }
 
         // BUGS#1236 - stat display does not use threshold config check
-        if (applyThreshold && similarityStem < fuzzyMatchThreshold
-                && similarityNoStem < fuzzyMatchThreshold && simAdjusted < fuzzyMatchThreshold) {
+        if (applyThreshold && similarityStem < fuzzyMatchThreshold && similarityNoStem < fuzzyMatchThreshold
+                && simAdjusted < fuzzyMatchThreshold) {
             return;
         }
 

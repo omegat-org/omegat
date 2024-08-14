@@ -100,8 +100,8 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     private final ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal
             .withInitial(LevenshteinDistance::new);
-    private final ThreadLocal<FindMatches> finder = ThreadLocal.withInitial(
-            () -> new FindMatches(Core.getProject(), OConsts.MAX_NEAR_STRINGS, false, false));
+    private final ThreadLocal<FindMatches> finder = ThreadLocal
+            .withInitial(() -> new FindMatches(Core.getProject(), OConsts.MAX_NEAR_STRINGS, false, false));
     private final StringBuilder textForLog = new StringBuilder();
 
     public CalcMatchStatistics(IStatsConsumer callback, boolean perFile) {

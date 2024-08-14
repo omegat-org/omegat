@@ -115,11 +115,22 @@ public class FindMatchesTest {
     /**
      * Test with tmx file with en-US, en-GB, fr and sr.
      * <p>
-     * test conditions: header adminlang=en header srclang=en-US header
-     * segtype=sentence 1st tuv: en-US value: XXx 2nd tuv: en-GB value: XXX 3rd
-     * tuv: fr value: YYY 4th tuv: sr value: ZZZ project properties: source: en
-     * target: cnr
-     *
+     * test conditions:
+     * <ul>
+     * <li>header adminlang=en</li>
+     * <li>header srclang=en-US</li>
+     * <li>header segtype=sentence</li>
+     * <li>1st tuv: en-US value: XXx</li>
+     * <li>2nd tuv: en-GB value: XXX</li>
+     * <li>3rd tuv: fr value: YYY</li>
+     * <li>4th tuv: sr value: ZZZ</li>
+     * <li></li>
+     * </ul>
+     * project properties:
+     * <ul>
+     * <li>source: en</li>
+     * <li>target: cnr</li>
+     * </ul>
      */
     @Test
     public void testSearchRFE1578_2() throws Exception {

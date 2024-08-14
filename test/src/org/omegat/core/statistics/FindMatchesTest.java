@@ -79,13 +79,19 @@ public class FindMatchesTest {
     /**
      * Reproduce and test for RFE#1578.
      * <p>
-     * When external TM has different target language, and source has country
-     * code such as "en-US", and project source is only language code such as
-     * "en", and set preference to use other target language, OmegaT show the
+     * When external TM has different target language, and a source has country
+     * code such as "en-US", and a project source is only language code such as
+     * "en", and set preference to use another target language, OmegaT shows the
      * source of "en-US" as reference.
      *
-     * test conditions: header adminlang=en header srclang=en-US header
-     * segtype=sentence 1st tuv: en-US value: XXX 2nd tuv: sr value: YYY
+     * test conditions:
+     * <ul>
+     * <li>header adminlang=en</li>
+     * <li>header srclang=en-US</li>
+     * <li>header segtype=sentence</li>
+     * <li>1st tuv: en-US value: XXX</li>
+     * <li>2nd tuv: sr value: YYY</li>
+     * </ul>
      */
     @Test
     public void testSearchRFE1578() throws Exception {

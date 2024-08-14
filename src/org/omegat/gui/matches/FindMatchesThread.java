@@ -82,7 +82,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         long before = System.currentTimeMillis();
 
         try {
-            List<NearString> result = finderSearch(project, processedEntry.getSrcText(), this::isEntryChanged);
+            List<NearString> result = finderSearch(project, processedEntry.getSrcText(),
+                    this::isEntryChanged);
             LOGGER.finer(() -> "Time for find matches: " + (System.currentTimeMillis() - before));
             return result;
         } catch (FindMatches.StoppedException ex) {
@@ -92,25 +93,25 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
 
     /**
      * Search matches (static for test purpose).
-     * @param project OmegaT project.
-     * @param srcText source text to look for.
-     * @param isEntryChanged stop and raise StopException when it returns true.
+     * 
+     * @param project
+     *            OmegaT project.
+     * @param srcText
+     *            source text to look for.
+     * @param isEntryChanged
+     *            stop and raise StopException when it returns true.
      * @return result as a list of NearString.
      */
-    protected static List<NearString> finderSearch(IProject project, String srcText, IStopped isEntryChanged) {
+    protected static List<NearString> finderSearch(IProject project, String srcText,
+            IStopped isEntryChanged) {
         FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
         List<NearString> result = finder.search(srcText, true, true, isEntryChanged);
         if (!project.getProjectProperties().isSentenceSegmentingEnabled()) {
-            /* TODO: enable this when refactoring done instead of addAll
-            for (NearString entry: finder.searchSegmented(processedEntry.getSrcText(),
-                    isEntryChanged)){
-                if (result.stream().noneMatch(resultEntry -> entry.translation.equals(resultEntry.translation))) {
-                    result.add(entry);
-                }
-            }
-            */
             finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, true);
-            result.addAll(finder.searchSegmented(srcText, isEntryChanged));
+            finder.searchSegmented(srcText, isEntryChanged).stream()
+                    .filter(nearString -> result.stream()
+                            .noneMatch(e -> nearString.translation.equals(e.translation)))
+                    .forEach(result::add);
         }
         return result;
     }

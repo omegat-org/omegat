@@ -95,7 +95,8 @@ public class FindMatchesThreadTest {
         prop.setTargetLanguage("fr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        IProject project = new TestProject(prop, TMX_SEGMENT, new LuceneCJKTokenizer(), new LuceneFrenchTokenizer());
+        IProject project = new TestProject(prop, TMX_SEGMENT, new LuceneCJKTokenizer(),
+                new LuceneFrenchTokenizer());
         Core.setProject(project);
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         List<NearString> result = FindMatchesThread.finderSearch(project, SOURCE_TEXT, () -> false);
@@ -104,7 +105,7 @@ public class FindMatchesThreadTest {
         assertEquals(1, result.size());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
-     }
+    }
 
     static class TestProject extends NotLoadedProject implements IProject {
         private final ProjectProperties prop;
@@ -131,8 +132,8 @@ public class FindMatchesThreadTest {
         @Override
         public List<SourceTextEntry> getAllEntries() {
             List<SourceTextEntry> ste = new ArrayList<>();
-            ste.add(new SourceTextEntry(new EntryKey("source.txt", SOURCE_TEXT, null, "", "", null),
-                    1, null, null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", SOURCE_TEXT, null, "", "", null), 1, null,
+                    null, Collections.emptyList()));
             return ste;
         }
 

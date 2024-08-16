@@ -359,7 +359,7 @@ dependencies {
         // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
         exclude module: 'lucene-gosen'
     }
-    testImplementation("org.omegat.lucene:lucene-gosen:5.5.1:ipadic")
+    testImplementation(variantOf(libs.lucene.gosen){ classifier("ipadic") })
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only

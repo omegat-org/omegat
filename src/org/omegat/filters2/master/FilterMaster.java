@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -205,20 +206,25 @@ public class FilterMaster {
     public IFilter loadFile(String filename, FilterContext fc, IParseCallback parseCallback)
             throws IOException, TranslationException {
         IFilter filterObject = null;
+        LookupInformation lookup = lookupFilter(new File(filename), fc);
+        if (lookup == null) {
+            return null;
+        }
         try {
-            LookupInformation lookup = lookupFilter(new File(filename), fc);
-            if (lookup == null) {
-                return null;
-            }
             File inFile = new File(filename);
+            filterObject = lookup.filterObject;
             fc.setInEncoding(lookup.outFilesInfo.getSourceEncoding());
             fc.setOutEncoding(lookup.outFilesInfo.getTargetEncoding());
-
-            filterObject = lookup.filterObject;
 
             filterObject.parseFile(inFile, lookup.config, fc, parseCallback);
         } catch (TranslationException e) {
             throw e;
+        } catch (UnsupportedEncodingException | CharacterCodingException ex) {
+            Log.logWarningRB("FILTERMASTER_ERROR_UNKNOWN_ENCODING_INPUT", filename,
+                    filterObject.getFileFormatName());
+            throw new TranslationException(MessageFormat.format(OStrings.getString(
+                    "FILTERMASTER_ERROR_UNKNOWN_ENCODING_INPUT"), filename,
+                    filterObject.getFileFormatName()), ex);
         } catch (Exception ioe) {
             throw new IOException(filename + "\n" + ioe, ioe);
         }
@@ -273,8 +279,10 @@ public class FilterMaster {
         try {
             filterObject.translateFile(inFile, outFile, lookup.config, fc, translateCallback);
         } catch (UnsupportedEncodingException | CharacterCodingException ex) {
-            Log.logErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
-            Core.getMainWindow().displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            String formatName = filterObject.getFileFormatName();
+            Log.logWarningRB("FILTERMASTER_ERROR_UNKNOWN_ENCODING_OUTPUT", outFile.getPath(), formatName);
+            Core.getMainWindow().displayWarningRB("FILTERMASTER_ERROR_UNKNOWN_ENCODING_OUTPUT",
+                    outFile.getPath(), formatName);
         } catch (Exception ex) {
             Log.log(ex);
         }

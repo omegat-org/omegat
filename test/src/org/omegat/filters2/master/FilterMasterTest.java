@@ -32,7 +32,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -54,7 +53,6 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
-import org.omegat.filters2.TranslationException;
 
 import gen.core.filters.Filter.Option;
 import gen.core.filters.Filters;
@@ -126,27 +124,34 @@ public class FilterMasterTest {
         defaultFilters.setRemoveSpacesNonseg(true);
 
         assertEquals("More than one filter found", 1, defaultFilters.getFilters().size());
-        FilterMaster fm = new FilterMaster(defaultFilters);
 
         // Note that if we use `loadFile(fm)` here, the default configuration
         // would be OK for the rest of the test.
-
         FilterMaster.saveConfig(defaultFilters, tempFilter);
         assertTrue("Temp filters.xml file not created", tempFilter.exists());
 
         Filters loadedFilters = FilterMaster.loadConfig(tempFilter);
         assertEquals("More than one filter found in serialized filters", 1,
                 loadedFilters.getFilters().size());
-        fm = new FilterMaster(loadedFilters);
-        loadFile(fm);
+        FilterMaster fm = new FilterMaster(loadedFilters);
+        loadFile(fm, "foo.html");
 
         List<Option> option = fm.getConfig().getFilters().get(0).getOption();
         assertNotNull("Filter option is not null", option);
         assertTrue("Filter option is not empty", option.isEmpty());
     }
 
-    private static void loadFile(FilterMaster fm) throws IOException, TranslationException, Exception {
-        fm.loadFile("foo.html", new FilterContext(new ProjectProperties(new File("test-filemaster"))),
+    @Test
+    public void testFilterMasterWrongEncoding() throws Exception {
+        Filters defaultFilters = FilterMaster.createDefaultFiltersConfig();
+        FilterMaster.saveConfig(defaultFilters, tempFilter);
+        Filters loadedFilters = FilterMaster.loadConfig(tempFilter);
+        FilterMaster fm = new FilterMaster(loadedFilters);
+        loadFile(fm, "boo.html");
+    }
+
+    private static void loadFile(FilterMaster fm, String source) throws Exception {
+        fm.loadFile(source, new FilterContext(new ProjectProperties(new File("test-filemaster"))),
                 new IParseCallback() {
 
                     @Override

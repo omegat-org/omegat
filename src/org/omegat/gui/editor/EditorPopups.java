@@ -1,15 +1,15 @@
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
-          with fuzzy matching, translation memory, keyword search,
-          glossaries, and translation leveraging into updated projects.
+ with fuzzy matching, translation memory, keyword search,
+ glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Didier Briel
-               2010 Wildrich Fourie
-               2011 Alex Buloichik, Didier Briel
-               2015 Aaron Madlon-Kay
-               2023 Thomas Cordonnier
-               Home page: https://www.omegat.org/
-               Support center: https://omegat.org/support
+ 2010 Wildrich Fourie
+ 2011 Alex Buloichik, Didier Briel
+ 2015 Aaron Madlon-Kay
+ 2023 Thomas Cordonnier
+ Home page: https://www.omegat.org/
+ Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -29,23 +29,8 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.JTextComponent;
-
-import org.openide.awt.Mnemonics;
-
 import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
@@ -57,6 +42,28 @@ import org.omegat.util.TagUtil.Tag;
 import org.omegat.util.Token;
 import org.omegat.util.gui.MenuItemPager;
 import org.omegat.util.gui.UIThreadsUtil;
+import org.openide.awt.Mnemonics;
+
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.Transferable;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 
 /**
  * Some standard editor popups.
@@ -71,7 +78,8 @@ public final class EditorPopups {
     public static void init(EditorController ec) {
         ec.registerPopupMenuConstructors(100, new SpellCheckerPopup(ec));
         ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec));
-        ec.registerPopupMenuConstructors(400, new DefaultPopup());
+        ec.registerPopupMenuConstructors(300, new DefaultPopup());
+        ec.registerPopupMenuConstructors(400, new GlossaryPopup());
         ec.registerPopupMenuConstructors(500, new DuplicateSegmentsPopup(ec));
         ec.registerPopupMenuConstructors(600, new EmptyNoneTranslationPopup(ec));
         ec.registerPopupMenuConstructors(700, new InsertTagsPopup(ec));
@@ -80,13 +88,10 @@ public final class EditorPopups {
 
     private EditorPopups() {
     }
-    
+
     /**
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
-     *
-     * @param point
-     *            : where should the popup be shown
      */
     public static class SpellCheckerPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
@@ -96,7 +101,7 @@ public final class EditorPopups {
         }
 
         public void addItems(JPopupMenu menu, final JTextComponent comp, int mousepos,
-                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+                             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             if (!ec.getSettings().isAutoSpellChecking()) {
                 // spellchecker disabled
                 return;
@@ -188,12 +193,9 @@ public final class EditorPopups {
         /**
          * add a new word to the spell checker or ignore a word
          *
-         * @param word
-         *            : the word in question
-         * @param offset
-         *            : the offset of the word in the editor
-         * @param add
-         *            : true for add, false for ignore
+         * @param word   : the word in question
+         * @param offset : the offset of the word in the editor
+         * @param add    : true for add, false for ignore
          */
         protected void addIgnoreWord(final String word, final int offset, final boolean add) {
             UIThreadsUtil.mustBeSwingThread();
@@ -213,7 +215,7 @@ public final class EditorPopups {
          * Creates the Cut, Copy and Paste menu items
          */
         public void addItems(JPopupMenu menu, final JTextComponent comp, int mousepos,
-                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+                             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             final String selText = comp.getSelectedText();
             final Clipboard omClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable contents = omClipboard.getContents(this);
@@ -273,18 +275,71 @@ public final class EditorPopups {
             }
 
             menu.addSeparator();
+        }
+    }
+
+    /**
+     * Allow users to add new words and select writable glossary
+     *
+     * @author HanQin Chen
+     */
+    public static class GlossaryPopup implements IPopupMenuConstructor {
+        protected List<String> glossFileName = new ArrayList<>();
+
+        @Override
+        public void addItems(JPopupMenu menu, JTextComponent comp, int mousepos,
+                             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+
+            String folder = Core.getProject().getProjectProperties().getGlossaryRoot();
+            Path glossDir = Paths.get(folder);
+            try (var stream = Files.walk(glossDir).filter(Files::isRegularFile)) {
+                stream.forEach(path -> {
+                    String fileName = path.getFileName().toString();
+                    if (!glossFileName.contains(fileName)) {
+                        glossFileName.add(fileName);
+                    }
+                });
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             // Add glossary entry
-            JMenuItem item = menu.add(Mnemonics.removeMnemonics(OStrings.getString("GUI_GLOSSARYWINDOW_addentry")));
-            item.addActionListener(new ActionListener() {
+            JMenuItem addGlossaryItem = menu.add(Mnemonics.removeMnemonics(OStrings.getString("GUI_GLOSSARYWINDOW_addentry")));
+            addGlossaryItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Core.getGlossary()
                             .showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
-                 }
+                }
             });
 
-            menu.addSeparator();
+            // Change writable glossary
+            JMenu submenu = new JMenu(Mnemonics.removeMnemonics(OStrings.getString("GUI_GLOSSARYWINDOW_changeglossary")));
+            ButtonGroup group = new ButtonGroup();
 
+            for (String s : glossFileName) {
+                JCheckBoxMenuItem item = new JCheckBoxMenuItem(s);
+
+                ProjectProperties props = Core.getProject().getProjectProperties();
+                String writableGlossPath = folder + s;
+                String test = props.getWriteableGlossary();
+                if (writableGlossPath.equals(test)) {
+                    item.setSelected(true);
+                }
+
+                item.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        props.setWriteableGlossary(writableGlossPath);
+                    }
+                });
+                group.add(item);
+                submenu.add(item);
+            }
+            menu.add(submenu);
+            menu.addSeparator();
         }
     }
 
@@ -300,7 +355,7 @@ public final class EditorPopups {
          * go to the given segment.
          */
         public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
-                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+                             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             if (isInActiveEntry) {
                 return;
             }
@@ -325,8 +380,8 @@ public final class EditorPopups {
 
         @Override
         public void addItems(JPopupMenu menu, JTextComponent comp,
-                int mousepos, boolean isInActiveEntry,
-                boolean isInActiveTranslation, SegmentBuilder sb) {
+                             int mousepos, boolean isInActiveEntry,
+                             boolean isInActiveTranslation, SegmentBuilder sb) {
             if (!isInActiveEntry) {
                 return;
             }
@@ -336,14 +391,14 @@ public final class EditorPopups {
                 return;
             }
             JMenuItem header = menu
-                    .add(StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER")), 
-                    dups.size()));
+                    .add(StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_HEADER")),
+                            dups.size()));
             header.setEnabled(false);
             MenuItemPager pager = new MenuItemPager(menu);
             for (SourceTextEntry entry : dups) {
                 int entryNum = entry.entryNum();
-                String label = StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM")), 
-                    entryNum);
+                String label = StringUtil.format(Mnemonics.removeMnemonics(OStrings.getString("MW_GO_TO_DUPLICATE_ITEM")),
+                        entryNum);
                 JMenuItem item = pager.add(new JMenuItem(label));
                 item.addActionListener(e -> ec.gotoEntry(entryNum));
             }
@@ -362,7 +417,7 @@ public final class EditorPopups {
          * creates a popup menu to remove translation or set empty translation
          */
         public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
-                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+                             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             if (!isInActiveEntry) {
                 return;
             }
@@ -397,14 +452,14 @@ public final class EditorPopups {
         }
 
         public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos, boolean isInActiveEntry,
-                boolean isInActiveTranslation, SegmentBuilder sb) {
+                             boolean isInActiveTranslation, SegmentBuilder sb) {
             if (!isInActiveTranslation) {
                 return;
             }
 
             for (final Tag tag : TagUtil.getAllTagsMissingFromTarget()) {
                 JMenuItem item = menu.add(StringUtil.format(Mnemonics.removeMnemonics(
-                    OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N")), tag.tag));
+                        OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N")), tag.tag));
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         Core.getEditor().insertTag(tag.tag);
@@ -417,17 +472,17 @@ public final class EditorPopups {
 
     public static class InsertBidiPopup implements IPopupMenuConstructor {
         protected final EditorController ec;
-        protected String[] names = new String[] { "TF_MENU_EDIT_INSERT_CHARS_LRM",
+        protected String[] names = new String[]{"TF_MENU_EDIT_INSERT_CHARS_LRM",
                 "TF_MENU_EDIT_INSERT_CHARS_RLM", "TF_MENU_EDIT_INSERT_CHARS_LRE",
-                "TF_MENU_EDIT_INSERT_CHARS_RLE", "TF_MENU_EDIT_INSERT_CHARS_PDF" };
-        protected String[] inserts = new String[] { "\u200E", "\u200F", "\u202A", "\u202B", "\u202C" };
+                "TF_MENU_EDIT_INSERT_CHARS_RLE", "TF_MENU_EDIT_INSERT_CHARS_PDF"};
+        protected String[] inserts = new String[]{"\u200E", "\u200F", "\u202A", "\u202B", "\u202C"};
 
         public InsertBidiPopup(EditorController ec) {
             this.ec = ec;
         }
 
         public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
-                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+                             boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             if (!isInActiveTranslation) {
                 return;
             }

@@ -58,7 +58,7 @@
   - Dutch localization updated (UI, readme, documentation, scripts)
   - French localization updated (UI, documentation)
   - German localization updated (UI, readme, documentation, scripts)
-  - Japanese localization updated (documentation)
+  - Japanese localization updated (UI, documentation)
   - Ukrainian localization updated (UI, readme, scripts)
 
 ----------------------------------------------------------------------

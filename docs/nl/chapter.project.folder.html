@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>Projectmap</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.dialogs.preferences.html" rel="prev" title="Voorkeuren" />
+      <link href="chapter.appendices.html" rel="next" title="Appendices" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - User Manual</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">Projectmap</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.dialogs.preferences.html">Terug</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.appendices.html">Volgende</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.project.folder">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">Projectmap</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#d0e10458">Standaard structuur</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#d0e10536">Minimale inhoud</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.source">source</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.target">target</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.tm">tm</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.exported.tm">map voor geëxporteerde tm's</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.dictionary">Woordenboek</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.glossary">glossary</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.omegat.folder">omegat</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.project.folder.html#project.folder.repositories">.repositories</a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <section class="section" id="d0e10458">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Standaard structuur</h2>
+                  </div>
+               </div>
+            </div>
+            <p>Een project van OmegaT bestaat uit een set mappen en bestanden die al uw bronnen voor vertaling bevat.</p>
+            <p>Standaard zal een nieuw gemaakt project alle vereiste bronnen bevatten in zijn map, en aan deze bronnen worden de standaard namen hieronder toegewezen.</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>bevat de bronbestanden</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>is de locatie waar de doelbestanden worden gemaakt</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>bevat de woordenlijsten</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a>is de voor het project beschrijfbare woordenlijst</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.tm" title="tm">tm</a>bevat de vertaalgeheugens voor verwijzingen</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="Woordenboek">Woordenboek</a>bevat de woordenboeken voor verwijzingen</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                  <span class="guimenu">Project</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.access.project.contents">
+                  <span class="guisubmenu">Ga naar inhoud van project</span>
+               </a> voor toegang tot de projectmap en zijn submappen.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                  <span class="guimenu">Project</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.properties">
+                  <span class="guimenuitem">Eigenschappen…</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a> om eenvoudig andere locaties dan de standaard toe te wijzen aan de verschillende bronnen als u het project maakt, of later.</p>
+            <p>U kunt bijvoorbeeld</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>de vertaalde bestanden maken in een gedeelde map buiten de projectmap, op een locatie die eenvoudig toegankelijk is voor uw recensent, of</p>
+                  </li>
+                  <li class="listitem">
+                     <p>een map glossary gebruiken uit een afzonderlijk maar gerelateerd project, of</p>
+                  </li>
+                  <li class="listitem">
+                     <p>een map voor vertaalgeheugens voor verwijzing gebruiken die u hebt ingesteld voor gerelateerde projecten, enzovoort.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Maken van een project geeft een basishiërarchie, maar zijn uiteindelijke structuur staat niet vast. U kunt altijd bestanden en mappen verwijderen uit of toevoegen aan het project.</p>
+            <div class="note">
+               <h3 class="title">Opmerking</h3>
+               <p>U kunt ook projecten van OmegaT maken, ofwel handmatig of met scripts door een set met vooraf geschreven bestanden naar een nieuwe map te kopiëren:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Elke opgegeven map die een geldig bestand <code class="filename">omegat.project</code> bevat zal worden herkend als een vertaalproject door OmegaT (zelfs als het later handmatig aanpassingen nodig hebt).</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Als de map een lege opslagplaats is en het bestand <code class="filename">omegat.project</code> bevat informatie over de opslagplaats op afstand, zal het project door OmegaT worden herkend als een teamproject:</p>
+                        <pre class="programlisting">…
+    &lt;externe_opdracht&gt;&lt;/externe_opdracht&gt;
+    &lt;opslagplaatsen&gt;
+        &lt;repository type=&quot;git&quot; url=&quot;https://URL/VAN/DE/OPSLAGPLAATS/OP/AFSTAND&quot;&gt;
+            &lt;mapping local=&quot;/&quot; repository=&quot;/&quot;/&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+		  </pre>
+                        <p>Bekijk de <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Instellen van een Teamproject">Instellen van een Teamproject</a> how-to voor details.</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </section>
+         <section class="section" id="d0e10536">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Minimale inhoud</h2>
+                  </div>
+               </div>
+            </div>
+            <p>Een project map moet, minstens, het volgende bevatten:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.omegat">
+                     <span class="term" id="project.folder.omegat.title">omegat</span>
+                  </dt>
+                  <dd>
+                     <p>Dit is de projectmap die altijd <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> bevat, het vertaalgeheugen voor het project, en <a class="link" href="chapter.project.folder.html#project.folder.project.stats">project_stats.txt</a>, het gegevensbestand met statistieken voor het project.</p>
+                     <p>Andere bestanden zullen worden toegevoegd gedurende de vertaling.</p>
+                     <p>Zie <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">hieronder</a> voor details.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.project.file">
+                     <span class="term" id="project.folder.omegat.project.file.title">omegat.project</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand bevat de parameters voor het project gedefinieerd in de <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projecteigenschappen">projecteigenschappen</a>, zoals de bron- en doeltalen, hun respectievelijke tokenizers en het type segmentatie.</p>
+                     <p>Het acteert ook als een <span class="emphasis">
+                           <em>adresboek</em>
+                        </span> dat specificeert waar de bronnen voor het project zijn geplaatst.</p>
+                     <p>OmegaT maakt ook een back-up van dat bestand (<code class="filename">omegat.project.bak</code>) en zal het automatisch gebruiken om uw instellingen voor het project te herstellen in noodgevallen.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="project.folder.source">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">source</h2>
+                  </div>
+               </div>
+            </div>
+            <p>De map source bevat de bestanden die moeten worden vertaald.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                  <span class="guimenu">Project</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.copy.files.to.source.folder">
+                  <span class="guimenuitem">Bestanden toevoegen…</span>
+               </a> of zet bestanden neer in het venster <a class="link" href="chapter.panes.html#panes.editor" title="venster Bewerken">
+                  <span class="guilabel">venster Bewerken</span>
+               </a> om, elke keer als u dat wilt, bestanden toe te voegen.</p>
+            <p>De inhoud van de bestanden in een indeling die wordt ondersteund door OmegaT zal voor vertaling worden weergegeven in het venster <a class="link" href="chapter.panes.html#panes.editor" title="venster Bewerken">
+                  <span class="guilabel">venster Bewerken</span>
+               </a>.</p>
+            <p>U kunt mappen toevoegen of verwijderen met uw bestandsbeheerder.</p>
+            <p>Als uw vertaalproject een aantal mappen bevat en u zou willen werken met één map tegelijk, gebruik dan <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                  <span class="guimenu">Project</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.project.properties">
+                  <span class="guimenuitem">Eigenschappen…</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a> om toegang te krijgen tot de projecteigenschappen en wijzig de aangewezen <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.source.files">map source</a> zoals u dat wilt.</p>
+         </section>
+         <section class="section" id="project.folder.target">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">target</h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deze map is bij aanvang leeg.</p>
+            <p>Hij zal worden gevuld met de vertaalde bestanden, elk keer dat u <a class="link" href="chapter.menus.html#menus.project.create.translated.documents">
+                  <span class="guimenuitem">Vertaalde documenten maken</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>D</strong>
+                  </span>
+               </a> gebruikt of <a class="link" href="chapter.menus.html#menus.project.create.current.translated.document">
+                  <span class="guimenuitem">Vertaald huidig document maken</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>S</strong>
+                  </span>+<span class="keycap">
+                     <strong>D</strong>
+                  </span>
+               </a>.</p>
+            <p>De vertaalde bestanden die corresponderen met de inhoud van de map <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>, of zij volledig vertaald zijn of niet, worden dan hier gemaakt, met dezelfde hiërarchie als in de map source.</p>
+            <p>De hier gemaakte bestanden zullen de huidige staat van de vertaling weergeven. Niet-vertaalde segmenten zullen in de brontaal zijn.</p>
+         </section>
+         <section class="section" id="project.folder.tm">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">tm</h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deze map kan elk aantal tweetalige documenten ter verwijzing bevatten (TMX-bestanden, maar ook elk bestand in een tweetalige indeling die wordt ondersteund door OmegaT, inclusief PO-bestanden, etc.) en de TMX-bestanden kunnen ook worden gecomprimeerd naar de indeling gzip.</p>
+            <p>OmegaT kan worden geïnstrueerd om automatisch overeenkomsten in te voegen. OmegaT voegt het voorvoegsel dat is ingesteld in de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.best.fuzzy.match">
+                  <code class="option">Beste overeenkomst invoegen</code>
+               </a> toe om u er aan te herinneren dat een overeenkomst was ingevoegd door OmegaT en niet door u.</p>
+            <p>Overeenkomsten uit de vertaalgeheugens in het venster worden weergegeven in het venster <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy overeenkomsten">
+                  <span class="guilabel">Fuzzy overeenkomsten</span>
+               </a>, net als overeenkomsten uit <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>, het vertaalgeheugen voor het project.</p>
+            <p>Zulke overeenkomsten zijn standaard beperkt tot de bron- en doeltalen die zijn gedefinieerd in het dialoogvenster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projecteigenschappen">
+                  <span class="guilabel">Projecteigenschappen</span>
+               </a>, maar u kunt ook overeenkomsten toevoegen die niet in de doeltaal zijn. Bekijk de <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches.other.languages">
+                  <code class="option">Inclusief overeenkomsten van andere talen</code>
+               </a> voorkeuren voor details.</p>
+            <p>De map mag elk aantal submappen bevatten, inclusief sommige die speciale functies hebben:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.tm.auto">
+                     <span class="term" id="project.folder.tm.auto.title">tm/auto</span>
+                  </dt>
+                  <dd>
+                     <p>Deze map is bestemd voor betrouwbare verwijzingsbestanden die automatisch exacte overeenkomsten kunnen vullen en nog niet vertaalde segmenten.</p>
+                     <p>Vertalingen uit TMX-bestanden die in deze map zijn geplaatst worden automatisch ingevoegd in overeenkomende segmenten zonder het automatische voorvoegsel, wat het niet nodig maakt deze segmenten te moeten bevestigen.</p>
+                     <p>Vertalingen die uit deze map komen worden geacht <span class="emphasis">
+                           <em>net</em>
+                        </span> zo betrouwbaar te zijn als het vertaalgeheugen voor het project.</p>
+                     <div class="note">
+                        <h3 class="title">Opmerking</h3>
+                        <p>Schakel de optie <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.save.auto-populated.status">
+                              <code class="option">Status voor automatisch vergroten van vertalingen opslaan</code>
+                           </a> in om OmegaT te laten onthouden dat de ingevoegde overeenkomsten uit deze map kwamen.</p>
+                     </div>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Plaats de geheugens die hiervoor van toepassing zijn in de map <code class="filename">tm/auto</code>.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Open het project. U zult zien dat segmenten die identiek zijn aan bronsegmenten in deze geheugens reeds zijn gevuld. Gebruik <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                                    <span class="guimenu">Weergave</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.view.mark.auto.populated.segments">
+                                    <span class="guimenuitem">Segmenten van Automatisch vergroten van vertalingen markeren</span>
+                                 </a> om ze te accentueren.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Maak ergens een kleine wijziging in het project en sla het op. Dit zal de vertalingen die zijn geladen uit de map tm/auto folder aan het vertaalgeheugen van het project toevoegen.</p>
+                           </li>
+                        </ol>
+                     </div>
+                     <p>Gebruik de menu's voor navigatie in <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                           <span class="guimenu">Ga naar</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.auto.populated.segments">
+                           <span class="guisubmenu">Automatisch gevulde segmenten</span>
+                        </a> om te navigeren naar de ingevoegde segmenten.</p>
+                     <div class="warning">
+                        <h3 class="title">Waarschuwing</h3>
+                        <p>Als u een TMX-bestand uit <code class="filename">tm/auto</code> verwijdert vóór Stap 3, zal de inhoud ervan niet worden behouden.</p>
+                     </div>
+                  </dd>
+                  <dt id="project.folder.tm.enforce">
+                     <span class="term" id="project.folder.tm.enforce.title">tm/enforce</span>
+                  </dt>
+                  <dd>
+                     <p>Deze map is bestemd voor betrouwbare verwijzingsbestanden die ook zijn bedoeld om automatisch eerder vertaalde inhoud te overschrijven.</p>
+                     <p>Vertalingen uit TMX-bestanden die in deze map zijn geplaatst worden automatisch ingevoegd in overeenkomende segmenten zonder het voorvoegsel voor fuzzy overeenkomsten, wat het niet nodig maakt deze segmenten te moeten bevestigen.</p>
+                     <p>Vertalingen die uit deze map komen worden geacht <span class="emphasis">
+                           <em>meer</em>
+                        </span> betrouwbaar te zijn dan het huidige vertaalgeheugen voor het project.</p>
+                     <p>Als u twijfel heeft of een bepaalde TMX meer nauwkeuriger vertalingen bevat dan het huidige bestand <code class="filename">project_save.tmx</code>, plaats die TMX in de map <code class="filename">tm/enforce</code> om de bestaande vertalingen onvoorwaardelijk te overschrijven.</p>
+                     <div class="note">
+                        <h3 class="title">Opmerking</h3>
+                        <p>Schakel de optie <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.save.auto-populated.status">
+                              <code class="option">Status voor automatisch vergroten van vertalingen opslaan</code>
+                           </a> in om OmegaT te laten onthouden dat de ingevoegde overeenkomsten uit deze map kwamen.</p>
+                     </div>
+                     <div class="orderedlist">
+                        <ol class="orderedlist" type="1">
+                           <li class="listitem">
+                              <p>Plaats de geheugens die hiervoor van toepassing zijn in de map <code class="filename">tm/enforce</code>.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Open het project. U zult zien dat segmenten die identiek zijn aan bronsegmenten in deze geheugens reeds zijn gevuld.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Maak ergens een kleine wijziging in het project en sla het op. Dit werkt het vertaalgeheugen van het project bij.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Neem een beslissing over de onveranderlijkheid van de afgedwongen segmenten:</p>
+                              <div class="itemizedlist">
+                                 <ul class="itemizedlist" style="list-style-type: disc; ">
+                                    <li class="listitem">
+                                       <p>Als zij <span class="emphasis">
+                                             <em>niet</em>
+                                          </span> onveranderlijk moeten blijven voor verdere wijzigingen, verwijder dan de TMX uit <code class="filename">tm/enforce</code>.</p>
+                                    </li>
+                                    <li class="listitem">
+                                       <p>Als zij <span class="emphasis">
+                                             <em>wel</em>
+                                          </span> onveranderlijk moeten blijven voor verdere wijzigingen, laat dan de TMX in <code class="filename">tm/enforce</code> staan. Met elke aanpassing aan de segmenten, die uit deze geheugens komen, zal <span class="emphasis">
+                                             <em>geen</em>
+                                          </span> rekening worden gehouden.</p>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </li>
+                        </ol>
+                     </div>
+                     <p>Gebruik de menu's voor navigatie in <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                           <span class="guimenu">Ga naar</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.auto.populated.segments">
+                           <span class="guisubmenu">Automatisch gevulde segmenten</span>
+                        </a> om te navigeren naar de segmenten die zijn ingevoegd.</p>
+                     <div class="warning">
+                        <h3 class="title">Waarschuwing</h3>
+                        <p>Als u een TMX-bestand uit <code class="filename">tm/enforce</code> verwijdert vóór Stap 3, zal geen van de afgedwongen vertalingen worden behouden.</p>
+                     </div>
+                  </dd>
+                  <dt id="project.folder.tm.mt">
+                     <span class="term" id="project.folder.tm.mt.title">tm/mt</span>
+                  </dt>
+                  <dd>
+                     <p>Wanneer een overeenkomst wordt ingevoegd vanuit een TMX die is opgenomen in deze map, wordt de achtergrond van het actieve segment gewijzigd naar rood.</p>
+                     <p>De kleur van de achtergrond wordt hersteld naar normaal als u het segment verlaat of als u het segment aanpast.</p>
+                  </dd>
+                  <dt id="project.folder.tm.penalty">
+                     <span class="term" id="project.folder.tm.penalty.title">tm/penalty-xxx</span>
+                  </dt>
+                  <dd>
+                     <p>
+                        <code class="literal">xxx</code> is een getal tussen 0 tot en met 100 dat zal acteren als een straf, afgetrokken van het percentage van de overeenkomst van segmenten die uit deze map komen.</p>
+                     <p>Bijvoorbeeld: een overeenkomst van 100% in een TMX, opgeslagen in een map genaamd <code class="filename">penalty-30</code> wordt een overeenkomst van 70%. De straf is van toepassing op alle drie percentages voor de overeenkomst. Scores van 75, 80 en 90 voor een overeenkomst worden verlaagd naar 45, 50 en 60.</p>
+                  </dd>
+                  <dt id="project.folder.tm.tmx2source">
+                     <span class="term" id="project.folder.tm.tmx2source.title">tm/tmx2source</span>
+                  </dt>
+                  <dd>
+                     <p>U kunt een derde taal weergeven <span class="emphasis">
+                           <em>direct onder</em>
+                        </span> het bronsegment om te gebruiken als verwijzing naar een derde taal. Bekijk de <a class="link" href="chapter.how.to.html#how.to.tm.bridge.two.languages" title="Brug tussen twee talen">Brug tussen twee talen</a> how-to voor details.</p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="note">
+               <h3 class="title">Opmerking</h3>
+               <p>U mag mappen combineren om nieuwe functies te maken. Bijvoorbeeld, een map voor een 10%-straf in de map voor machinevertaling: <code class="filename">tm/mt/penalty-010</code> zou nooit 100% overeenkomsten maken die anders automatisch zouden door OmegaT kunnen worden ingevoegd, en zou altijd een rode achtergrond instellen voor de overeenkomst als die zou worden ingevoegd.</p>
+            </div>
+         </section>
+         <section class="section" id="project.folder.exported.tm">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">map voor geëxporteerde tm's</h2>
+                  </div>
+               </div>
+            </div>
+            <p>Standaard is die map de projectmap zelf, maar u kunt de locatie ervan wijzigen om het praktischer te maken om geëxporteerde TMX-bestanden te delen. Bekijk de <a class="link" href="chapter.how.to.html#how.to.tm.share.translation.memories" title="TM's delen">TM's delen</a> how-to voor details.</p>
+         </section>
+         <section class="section" id="project.folder.dictionary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Woordenboek</h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deze map is initieel leeg en wordt gebruikt om woordenboeken op te slaan die u toevoegt aan het project.</p>
+            <p>Termen van woordenboeken die overeenkomen met delen van het segment worden weergegeven in het venster <a class="link" href="chapter.panes.html#panes.dictionary" title="Woordenboeken">
+                  <span class="guilabel">Woordenboeken</span>
+               </a>. Bekijk de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Woordenboeken">
+                  <span class="guilabel">Woordenboeken</span>
+               </a> voorkeuren voor details.</p>
+            <p>OmegaT ondersteunt woordenboeken in de indelingen StarDict of Lingvo DSL. U kunt enkele woordenboeken vinden op de <a class="ulink" href="https://sourceforge.net/p/omegat/wiki/Reference%20Material/" target="_top">wiki van OmegaT</a>.</p>
+            <p>Installeren van woordenboeken:</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>download het bestand - het zou een tarball-archief (extensie <code class="filename">tar.bz</code> of <code class="filename">tar.bz2</code>) moeten zijn,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>pak de inhoud uit naar deze map. Er zouden drie bestanden per woordenboek moeten zijn, met de extensies <code class="filename">dz</code>, <code class="filename">idx</code> en <code class="filename">ifo</code>.</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Als u woorden uit potentiële overeenkomsten van woordenboeken wilt verwijderen, voeg dan een bestand <code class="filename">ignore.txt</code>, gecodeerd in UTF-8, toe aan de map. Het bestand moet één woord per regel hebben. Alle woorden die zijn opgenomen in die lijst zullen worden genegeerd door OmegaT.</p>
+         </section>
+         <section class="section" id="project.folder.glossary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">glossary</h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deze map is bij aanvang leeg. Het wordt gebruikt om de beschrijfbare woordenlijst en andere woordenlijsten, die u gebruikt in het project, op te slaan.</p>
+            <p>Termen van woordenlijsten die overeenkomen met delen van het segment worden weergegeven in het venster <a class="link" href="chapter.panes.html#panes.glossary" title="Woordenlijsten">
+                  <span class="guilabel">Woordenlijsten</span>
+               </a>. Bekijk de appendix <a class="link" href="chapter.appendices.html#app.glossaries" title="Woordenlijsten">Woordenlijsten</a> voor details.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.glossary.txt">
+                     <span class="term" id="project.folder.glossary.txt.title">glossary.txt</span>
+                  </dt>
+                  <dd>
+                     <p>Dit is de beschrijfbare woordenlijst voor het project Het wordt gemaakt als u voor de eerste keer <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                           <span class="guimenuitem">Item voor woordenlijst maken…</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>+<span class="keycap">
+                              <strong>G</strong>
+                           </span>
+	  
+                        </a> gebruikt.</p>
+                     <p>U kunt er toegang toe krijgen met <a class="link" href="chapter.menus.html#menus.project.access.project.contents.title">
+                           <span class="guisubmenu">Ga naar inhoud van project</span>
+                        </a>, het openen in een tekstbewerker, het aanpassen met een tekstbewerker. Zodra u uw aanpassingen hebt opgeslagen zal OmegaT rekening met ze houden.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="project.folder.omegat.folder">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">omegat</h2>
+                  </div>
+               </div>
+            </div>
+            <p>De map <code class="filename">omegat</code> bevat, minstens, de bestanden <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> en <a class="link" href="chapter.project.folder.html#project.folder.project.stats">project_stats.txt</a>. Het kan ook verscheidene andere bestanden bevatten.</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="project.folder.project.save.tmx">
+                     <span class="term" id="project.folder.project.save.tmx.title">project_save.tmx</span>
+                  </dt>
+                  <dd>
+                     <p>Dit is het meest belangrijke bestand in het project. Wanneer u een nieuw project maakt is het ebstand leeg en het wordt gaandeweg gevuld met de vertalingen van de tekst in bestanden die zijn geplaatst in de map <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>.</p>
+                     <p>Het vormt het werkende vertaalgeheugen van het project.</p>
+                     <p>OmegaT maakt regelmatig back-ups van dat bestand. Bekijk de <a class="link" href="chapter.how.to.html#how.to.restore.your.data" title="Problemen oplossen">Problemen oplossen</a> how-to voor details.</p>
+                  </dd>
+                  <dt id="project.folder.project.save.tmx.bak">
+                     <span class="term" id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand is een back-up van <code class="filename">project_save.tmx</code> en wordt automatisch gemaakt, elke keer als <code class="filename">project_save.tmx</code> is aangepast: ofwel na het gebruiken van <a class="link" href="chapter.menus.html#menus.project" title="Project">
+                           <span class="guimenu">Project</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.project.save">
+                           <span class="guimenuitem">Opslaan</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>S</strong>
+                           </span>
+                        </a>, of als een normale back-up, standaard elke 3 minuten. Bekijk de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.saving.and.output.interval">
+                           <code class="option">Interval voor opslaan van projectgegevens</code>
+                        </a> voor details.</p>
+                  </dd>
+                  <dt id="project.folder.project.save.tmx.timestamp.bak">
+                     <span class="term" id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.tijdstempel.bak</span>
+                  </dt>
+                  <dd>
+                     <p>Elke keer als een project wordt geladen maakt OmegaT een back-up van <code class="filename">project_save.tmx</code> met de naam <code class="filename">project_save.tmx.[tijdstempel].bak</code>. OmegaT behoudt tot maximaal 10 van deze bestanden.</p>
+                  </dd>
+                  <dt id="project.folder.project.stats">
+                     <span class="term" id="project.folder.project.stats.title">project_stats.txt</span>
+                  </dt>
+                  <dd>
+                     <p>Dit is het bestand met statistieken voor het gehele project. Het wordt, elke keer als een project wordt herladen, bijgewerkt.</p>
+                     <p>Gebruik <a class="link" href="chapter.menus.html#menus.tools" title="Extra">
+                           <span class="guimenu">Extra</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.tools.statistics">
+                           <span class="guimenuitem">Statistieken</span>
+                        </a> om het bij te werken.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.project.stats.match">
+                     <span class="term" id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand bevat de laatst statistieken voor overeenkomsten in het project. Gebruik <a class="link" href="chapter.menus.html#menus.tools" title="Extra">
+                           <span class="guimenu">Extra</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.tools.match.statistics">
+                           <span class="guimenuitem">Statistieken voor overeenkomsten</span>
+                        </a> om het te maken.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.project.stats.match.per.file">
+                     <span class="term" id="project.folder.omegat.project.stats.match.per.file.title">project_stats_match_per_file.txt</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand bevat de laatst statistieken voor overeenkomsten voor het project, per bestand. Gebruik <a class="link" href="chapter.menus.html#menus.tools" title="Extra">
+                           <span class="guimenu">Extra</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.tools.match.statistics.per.file">
+                           <span class="guimenuitem">Statistieken voor overeenkomsten per bestand</span>
+                        </a> om het te maken.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.spellcheck">
+                     <span class="term" id="project.folder.omegat.ignored.words.title">ignored_words.txt., </span>
+                     <span class="term" id="project.folder.omegat.learned.words">learned_words.txt</span>
+                  </dt>
+                  <dd>
+                     <p>Deze bestanden worden gemaakt en gebruikt door de spellingscontrole. U kunt termen in het venster <a class="link" href="chapter.panes.html#panes.editor" title="venster Bewerken">
+                           <span class="guilabel">venster Bewerken</span>
+                        </a> toevoegen door met rechts te klikken op een als onjuist gemarkeerd woord en, respectievelijk, <span class="guimenuitem">Alles negeren</span> (voor woorden die moeten worden overgeslagen gedurende spellingscontrole), of <span class="guimenuitem">Aan woordenboek toevoegen</span> (voor woorden die moeten worden geaccepteerd als correct) uit het <a class="link" href="chapter.panes.html#panes.editor.context.menu">contextmenu</a>. Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Spellingscontrole">
+                           <span class="guilabel">Spellingscontrole</span>
+                        </a> voor details.</p>
+                     <p>Als u al een collectie woorden hebt verzameld, waarvan u wilt dat de spellingscontrole die negeert of accepteert, sla ze dan eenvoudigweg op in tekstbestanden met corresponderende namen in de map <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> van uw huidige project.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.segmentation">
+                     <span class="term" id="project.folder.omegat.segmentation.title">segmentation.conf</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand bevat de project-specifieke segmentatieregels.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.filters">
+                     <span class="term" id="project.folder.omegat.filters.title">filters.xml</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand bevat de project-specifieke bestandsfilters.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.uiLayout">
+                     <span class="term" id="project.folder.omegat.uiLayout.title">uiLayout.xml</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand bevat de project-specifieke instellingen voor de gebruikersinterface.&gt;</p>
+                  </dd>
+                  <dt id="project.folder.omegat.finder">
+                     <span class="term" id="project.folder.omegat.finder.title">finder.xml</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand bevat de project-specifieke externe zoekacties.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.file.order">
+                     <span class="term" id="project.folder.omegat.file.order.title">files_order.txt</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand wordt gemaakt als u handmatig de volgorde wijzigt van de bestanden in het venster <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="Bronbestanden">
+                           <span class="guilabel">Bronbestanden</span>
+                        </a>.</p>
+                  </dd>
+                  <dt id="project.folder.omegat.last.entry">
+                     <span class="term" id="project.folder.omegat.last.entry.title">last_entry.properties</span>
+                  </dt>
+                  <dd>
+                     <p>Dit bestand houdt bij welk segment u voor het laatst bezocht, inclusief het nummer ervan, de inhoud van de bron ervan, de bestandsnaam en de datum, zodat u er naar terug kan keren als u het project opnieuw laadt of opnieuw start.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="project.folder.repositories">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">.repositories</h2>
+                  </div>
+               </div>
+            </div>
+            <p>In een teamproject bevat deze map een geversioneerde kopie van de boomstructuur van het project, direct gekoppeld aan de server op afstand.</p>
+            <p>U kunt wijzigingen maken in bestanden op afstand (zoals ze verwijderen of vervangen)  door uw wijzigingen in de map te maken en een cliënt voor Git of SVN te gebruiken om ze te synchroniseren met de server op afstand. Bekijk de <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Instellen van een Teamproject">Instellen van een Teamproject</a> how-to voor details.</p>
+            <p>In sommige besturingssystemen is deze map standaard verborgen. Activeer de optie om verborgen bestanden weer te geven in uw systeem om hem zichtbaar te maken.</p>
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.dialogs.preferences.html">Terug</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.appendices.html">Volgende</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">
+                     <span class="guilabel">Voorkeuren</span> </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">Begin</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> Appendices</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

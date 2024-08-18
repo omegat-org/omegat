@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Actualitzacions\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Carpeta del projecte","chapter.project.folder.html",[
-["Estructura per defecte","chapter.project.folder.html#d0e10481",null],
-["Contingut mínim","chapter.project.folder.html#d0e10559",null],
+["Estructura per defecte","chapter.project.folder.html#d0e10449",null],
+["Contingut mínim","chapter.project.folder.html#d0e10527",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "yv048pdfmg0i-1s2oraawj1s78";
+var storageId = "196s9npv3bix1-1izs9hcs8daw5";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

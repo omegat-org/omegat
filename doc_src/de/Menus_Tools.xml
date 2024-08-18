@@ -7,9 +7,9 @@
 
   <example id="example.check.issues">
 	<title id="example.check.issues.title">Tastenkürzelbeschreibungsbeispiel</title>
-	<para>In Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>Umschalt</keycap><keycap>V</keycap></keycombo></para>
+	<para>Unter Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>Umschalt</keycap><keycap>V</keycap></keycombo></para>
 
-	<para>In macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo></para>
+	<para>Unter macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo></para>
 
 	<para><emphasis role="bold">In dieser Bedienungsanleitung:</emphasis> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></para>
   </example>
@@ -18,13 +18,13 @@
     <varlistentry id="menus.tools.check.issues">
       <term id="menus.tools.check.issues.title"><guimenuitem>Probleme untersuchen...</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
-        <para>Dieses Tool zur Qualitätssicherung führt alle automatischen Überprüfungen in einem Rutsch durch und zeigt die Ergebnisse in einem Fenster an.</para>
+        <para>Dieses Qualitätssicherungstool führt alle automatischen Prüfungen auf einmal durch und zeigt die Ergebnisse in einem Fenster an.</para>
 
         <para>Vier Arten von Problemen können erkannt werden:</para>
 
         <itemizedlist>
           <listitem>
-            <para><guilabel>Tag-Probleme</guilabel> (immer ausgewählt): Erkennt fehlende oder falsch platzierte Tags, einschließlich benutzerdefinierter Tags und geschütztem Text. Siehe die <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/>-Einstellungen für weitere Informationen.</para>
+            <para><guilabel>Tag-Probleme</guilabel> (immer ausgewählt): Erkennt fehlende oder falsch platzierte Tags, einschließlich benutzerdefinierter Tags und geschützter Texte. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.tag.processing" endterm="dialogs.preferences.tag.processing.title"/> (Einstellungen).</para>
 
 			<note>
 			  <para>Diese Option ist immer ausgewählt.</para>
@@ -32,35 +32,35 @@
           </listitem>
 
           <listitem>
-            <para><guilabel>Rechtschreibprobleme</guilabel> (optional): Erkennt Rechtschreibfehler. Funktioniert nur, wenn ein Rechtschreibwörterbuch installiert ist. Siehe die <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>-Einstellungen für weitere Informationen.</para>
+            <para><guilabel>Rechtschreibprobleme</guilabel> (optional): Erkennt Rechtschreibfehler. Funktioniert nur, wenn ein Rechtschreibwörterbuch installiert ist. Einzelheiten finden Sie unter <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> (Einstellungen).</para>
           </listitem>
 
           <listitem>
-            <para><guilabel>Terminologieprobleme</guilabel> (optional): Erkennt alle Glossareinträge, die nicht richtig übersetzt sind. Siehe die <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>-Einstellungen für weitere Informationen.</para>
+            <para><guilabel>Terminologieprobleme</guilabel> (optional): Erkennt alle Glossareinträge, die möglicherweise nicht korrekt übersetzt wurden. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> (Einstellungen).</para>
           </listitem>
 
 		  <listitem>
-            <para><guilabel>LanguageTool-Probleme</guilabel> (optional): Erkennt grammatikalische oder typografische Probleme. Siehe die <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>-Einstellungen für weitere Informationen.</para>
+            <para><guilabel>LanguageTool-Probleme</guilabel> (optional): Erkennt grammatikalische oder typografische Probleme. Einzelheiten finden Sie unter <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> (Einstellungen).</para>
           </listitem>
         </itemizedlist>
 
-        <para>Die Ergebnisse werden in Form einer Tabelle dargestellt, in der Sie Folgendes tun können:</para>
+        <para>Die Ergebnisse werden in einer Tabelle angezeigt, in der Sie folgendes tun können:</para>
         <itemizedlist>
           <listitem>
-            <para>Doppelklicken Sie auf eine Zeile, um das entsprechende Segment im Editorbereich zu öffnen.</para>
+            <para>Eine Zeile doppelt anklicken, um das entsprechende Segment im Editorbereich zu öffnen.</para>
           </listitem>
 
           <listitem>
-            <para>Klicken Sie auf eine Spaltenüberschrift, um die Sortierreihenfolge der Spalte zu ändern.</para>
+            <para>Eine Spaltenüberschrift anklicken, um die Sortierreihenfolge der Spalte zu ändern.</para>
           </listitem>
 
           <listitem>
-            <para>Wählen Sie eine Zeile aus oder bewegen Sie den Mauszeiger über eine Zeile, um in der letzten Spalte ein Kontextmenü-Symbol anzuzeigen. Wenn Sie auf dieses Symbol klicken, werden Aktionen angezeigt, mit denen Sie den Fehler beheben oder ignorieren können.</para>
+            <para>Eine Zeile auswählen oder den Mauszeiger darüber bewegen, um ein Kontextmenü-Symbol in der letzten Spalte anzuzeigen. Wenn Sie auf dieses Symbol klicken, werden Aktionen angezeigt, mit denen Sie den Fehler beheben oder ignorieren können.</para>
 
 			<note>
-			  <para>Um jedes Mal, wenn Sie ein Segment verlassen, eine Problemprüfung zu erzwingen, aktivieren Sie die <link linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment" endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/>-Einstellung.</para>
+			  <para>Um jedes Mal, wenn Sie ein Segment verlassen, eine Problemprüfung durchzuführen, aktivieren Sie die Einstellung <link linkend="dialogs.preferences.editor.validate.tags.when.leaving.a.segment" endterm="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"/>.</para>
 
-			  <para>Um die Erstellung übersetzter Dateien bei Tag-Problemen zu verhindern, aktivieren Sie die <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>-Einstellung.</para>
+			  <para>Um die Erstellung der übersetzten Dateien bei Tag-Problemen zu verhindern, aktivieren Sie die Einstellung <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/>.</para>
 			</note>
           </listitem>
         </itemizedlist>
@@ -77,16 +77,16 @@
     <varlistentry id="menus.tools.statistics">
       <term id="menus.tools.statistics.title"><guimenuitem>Statistiken</guimenuitem></term>
       <listitem>
-        <para>Öffnet ein neues Fenster und zeigt projektspezifische Statistiken an, wie z. B. die Gesamtwortzahl des Projekts oder die Gesamtzahl der Segmente, und Gesamtzahlen für jede Datei im Projekt.</para>
+        <para>Öffnet ein neues Fenster und zeigt Statistiken für das gesamte Projekt oder pro Datei an, wie z.B. die Anzahl der Wörter oder Segmente.</para>
 
-		<para>Die Daten werden in die <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>-Datei im Projektordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> gespeichert.</para>
+		<para>Die Daten werden in die Datei <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/> im Ordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> Ihres Projekts gespeichert.</para>
 
 		<note>
-		  <para>Wortzahl, Gesamtzahl der Segmente und andere Elemente hängen von den folgenden Faktoren ab:</para>
+		  <para>Die Anzahl der Wörter, Segmente usw. hängt von den folgenden Faktoren ab:</para>
 		  
 		  <itemizedlist>
 			<listitem>
-			  <para>Dateifiltereinstellungen: Einige Filter erlauben es, dass zusätzliche Teile für die Übersetzung herangezogen werden. Siehe die Dateifilter-<link linkend="filters.options">Optionen</link> für weitere Informationen.</para>
+			  <para>Dateifiltereinstellungen: Bei einigen Filtern können zusätzliche Teile für die Übersetzung herangezogen werden. Einzelheiten finden Sie unter <link linkend="filters.options">Dateifilter-Optionen</link>.</para>
 			</listitem>
 
 			<listitem>
@@ -94,11 +94,11 @@
 			</listitem>
 
 			<listitem>
-			  <para>Tags: OmegaT-Tags werden in den Statistiken nie gezählt, können aber in manchen Fällen Begriffe splitten und zu Diskrepanzen in der Zählweise von OmegaT führen. Siehe die <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/>-Einstellung im <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster für weitere Informationen.</para>
+			  <para>Tags: OmegaT-Tags werden in den Statistiken ignoriert, können aber in einigen Fällen Begriffe splitten und zu Diskrepanzen in der Zählweise von OmegaT führen. Einzelheiten finden Sie unter <link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/> (Einstellung im <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>-Dialogfenster).</para>
 			</listitem>
 
 			<listitem>
-			  <para>Benutzerdefinierte Tags und geschützter Text: Genau wie die OmegaT-Tags werden diese standardmäßig nicht in den Statistiken gezählt, aber Sie können OmegaT veranlassen, sie als Wörter zu zählen. Siehe die <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/>-Einstellung für weitere Informationen.</para>
+			  <para>Benutzerdefinierte Tags und geschützte Texte: Genau wie die OmegaT-Tags werden diese standardmäßig in den Statistiken ignoriert, aber Sie können OmegaT so einstellen, dass sie mitgezählt werden. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics" endterm="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"/> (Einstellungen).</para>
 			</listitem>
 		  </itemizedlist>
 		</note>
@@ -108,35 +108,35 @@
     <varlistentry id="menus.tools.match.statistics">
       <term id="menus.tools.match.statistics.title"><guimenuitem>Match-Statistiken</guimenuitem></term>
       <listitem>
-        <para>Zeigt die Match-Statistiken für das gesamte Projekt an: Die Anzahl der Wiederholungen, exakten Matches, Fuzzy Matches und No-Matches für Segmente, Wörter und Zeichen.</para>
+        <para>Zeigt die Match-Statistiken für das gesamte Projekt an: Die Anzahl der Wiederholungen, exakten Matches, Fuzzy Matches und No-Matches von Segmenten, Wörtern und Zeichen.</para>
 
-		<para>Die Daten werden in die <link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"/>-Datei im Projektordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> gespeichert.</para>
+		<para>Die Daten werden in die Datei <link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"/> im Ordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> Ihres Projekts gespeichert.</para>
       </listitem>
     </varlistentry>
 	
     <varlistentry id="menus.tools.match.statistics.per.file">
       <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Match-Statistiken pro Datei</guimenuitem></term>
       <listitem>
-        <para>Zeigt die Match-Statistiken für jede einzelne Projektdatei an: Die Anzahl der Wiederholungen, exakten Matches, Fuzzy Matches und No-Matches für Segmente, Wörter und Zeichen.</para>
+        <para>Zeigt die Match-Statistiken für jede einzelne Projektdatei an: Die Anzahl der Wiederholungen, exakten Matches, Fuzzy Matches und No-Matches von Segmenten, Wörtern und Zeichen.</para>
 
-		<para>Die Daten werden in die <link linkend="project.folder.omegat.project.stats.match.per.file" endterm="project.folder.omegat.project.stats.match.per.file.title"/>-Datei im Projektordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> gespeichert.</para>
+		<para>Die Daten werden in die Datei <link linkend="project.folder.omegat.project.stats.match.per.file" endterm="project.folder.omegat.project.stats.match.per.file.title"/> im Ordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> Ihres Projekts gespeichert.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.tools.align.files">
       <term id="menus.tools.align.files.title"><guimenuitem>Dateien ausrichten...</guimenuitem></term>
       <listitem>
-        <para>Wählen Sie zwei Dateien aus (die Quelldatei und ihre Übersetzung), die aneinander ausgerichtet werden sollen und klicken Sie auf <guibutton>OK</guibutton>, um das <link linkend="windows.aligner" endterm="windows.aligner.title"/>-Fenster zu öffnen.</para>
+        <para>Wählen Sie zwei Dateien aus (die Quelldatei und ihre Übersetzung), die Sie aneinander ausrichten möchten, und klicken Sie auf <guibutton>OK</guibutton>, um das Fenster <link linkend="windows.aligner" endterm="windows.aligner.title"/> zu öffnen.</para>
 
-        <para>Die unterstützten Dateiformate hängen von Ihren Projekteinstellungen ab. Einzelheiten finden Sie unter <link linkend="file.filters" endterm="file.filters.title"/>.</para>
-        <para>Die Quell- und Zieldateien können unterschiedliche Formate haben (z. B. kann eine <filename>.docx</filename>-Datei mit einer <filename>.pdf</filename>-Datei ausgerichtet werden).</para>
+        <para>Welche Dateiformate unterstützt werden, hängt von Ihren Projekteinstellungen ab. Einzelheiten finden Sie unter <link linkend="file.filters" endterm="file.filters.title"/>.</para>
+        <para>Die Quell- und Zieldateien können unterschiedliche Formate haben (z.B. können <filename>.docx</filename>- und <filename>.pdf</filename>-Dateien aneinander ausgerichtet werden).</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.tools.scripting">
       <term id="menus.tools.scripting.title"><guimenuitem>Scripting...</guimenuitem></term>
       <listitem>
-        <para>Öffnet das <link linkend="windows.scripts" endterm="windows.scripts.title"/>-Fenster, mit dem Sie den Speicherort für Skripte festlegen, Skripte schreiben und ausführen sowie ihnen ein Tastenkürzel zuweisen können.</para>
+        <para>Öffnet das Fenster <link linkend="windows.scripts" endterm="windows.scripts.title"/>, mit dem Sie den Speicherort für Skripte festlegen, Skripte schreiben/ausführen und ihnen ein Tastenkürzel zuweisen können.</para>
 		<para>Die Liste unter diesem Menüpunkt zeigt 12 mögliche Slots für Skripte an. Wenn Sie auf einen belegten Slot klicken, wird das zugewiesene Skript gestartet.</para>
 
 		<note>
@@ -152,7 +152,7 @@
 			</listitem>
 
 			<listitem>
-              <para>Machen Sie einen Rechtsklick auf eine nicht zugewiesene Nummer im unteren Bereich des Fensters und wählen Sie <guilabel>Skript hinzufügen</guilabel> aus.</para>
+              <para>Rechtsklicken Sie auf eine nicht zugewiesene Nummer im unteren Teil des Fensters und wählen Sie <guilabel>Skript hinzufügen</guilabel> aus.</para>
 			</listitem>
           </orderedlist>
 		</note>
@@ -162,7 +162,7 @@
     <varlistentry id="menus.tools.external.search.commands">
       <term id="menus.tools.external.search.commands.title">Externe Suchbefehle</term>
       <listitem>
-        <para>Wenn Sie externe Suchvorgänge in den <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>-Einstellungen definiert haben, sind diese hier aufgelistet und zugänglich.</para>
+        <para>Wenn Sie <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> definiert haben, sind diese hier aufgelistet und zugänglich.</para>
       </listitem>
     </varlistentry>
   </variablelist>

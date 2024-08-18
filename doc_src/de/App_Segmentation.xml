@@ -6,26 +6,26 @@
   <section id="dialog.preferences.segmentation.setup.type">
 	<title id="dialog.preferences.segmentation.setup.type.title">Absatz oder Satz?</title>
 	
-	<para>Translation-Memory-Tools arbeiten mit Texteinheiten, die als Segmente bezeichnet werden. Nachdem eine Übersetzung eingegeben wurde, wird das Segment, das den Quelltext enthält, zusammen mit seiner Übersetzung in den Translation Memory des Projekts gespeichert und anschließend mit anderen Quelltexten im Projekt abgeglichen.</para>
+	<para>Translation-Memory-Tools arbeiten mit Texteinheiten, die als Segmente bezeichnet werden. Nachdem eine Übersetzung eingegeben wurde, wird das Segment, das den Quelltext enthält, zusammen mit seiner Übersetzung in den Translation Memory des Projekts gespeichert und anschließend mit anderen Quelltexten im Projekt verglichen.</para>
 
 	<para>Um die Art der Segmentierung anzugeben, verwenden Sie die Projekteigenschaft <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>.</para>
 
-	<para>Segmente sind standardmäßig <emphasis role="bold">Absätze</emphasis>, die vom Dateiformat selbst vorgegeben werden.</para>
+	<para>Segmente sind standardmäßig <emphasis role="bold">Absätze</emphasis>, die durch das Dateiformat selbst vorgegeben sind.</para>
 	
-	<para>Der Verzicht auf die <emphasis role="bold">Satzsegmentierung</emphasis> in einem Dokument führt dazu, dass automatisch die <emphasis>Absatzsegmentierung</emphasis> verwendet wird. In diesem Fall wird jeder Absatz (wie vom Format des Originaldokuments vorgegeben) als ein einzelnes Segment angezeigt, wodurch es dem Übersetzer freisteht, die Sätze innerhalb des Segments nach Belieben neu anzuordnen.</para>
+	<para>Der Verzicht auf die <emphasis role="bold">Satzsegmentierung</emphasis> in einem Dokument führt dazu, dass automatisch die <emphasis>Absatzsegmentierung</emphasis> verwendet wird. In diesem Fall wird jeder Absatz (abhängig vom Format des Originaldokuments) als ein einzelnes Segment angezeigt. Dem Übersetzer ist es somit freigestellt, die Sätze innerhalb des Segments beliebig anzuordnen.</para>
 	
-	<para><emphasis>Absatzsegmentierung</emphasis> funktioniert gut bei eher literarischen oder kreativen Texten sowie generell bei Dokumenten, bei denen Translation-Memory-Matches nicht so wichtig sind.</para>
+	<para><emphasis>Absatzsegmentierung</emphasis> eignet sich gut für eher literarische oder kreative Texte und generell für Dokumente, bei denen Translation-Memory-Matches nicht so wichtig sind.</para>
 
-	<para><emphasis>Satzsegmentierung</emphasis> stützt sich auf eine Reihe von Regeln (sogenannte <emphasis>Segmentierungsregeln</emphasis>), die definieren, was einen Satz in der Quellsprache ausmacht. Diese Einstellung eignet sich gut für Dokumente, in denen Wiederholungen oder ähnliche Sätze häufig vorkommen, wie z. B. in technischen oder juristischen Dokumenten.</para>
+	<para><emphasis>Satzsegmentierung</emphasis> stützt sich auf eine Reihe von Regeln (sogenannte <emphasis>Segmentierungsregeln</emphasis>), die definieren, was einen Satz in der Quellsprache ausmacht. Diese Einstellung eignet sich gut für Dokumente, in denen Wiederholungen oder ähnliche Sätze häufig vorkommen, wie z.B. in technischen oder juristischen Dokumenten.</para>
 
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
 		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentierung auf Absatzebene</term>
 
 		<listitem>
-		  <para>OmegaT segmentiert den Text zunächst auf Absatzebene. Dieser Vorgang verlässt sich nur auf die Struktur der Quelldatei, um Segmente zu erzeugen.</para>
+		  <para>OmegaT segmentiert den Text zunächst auf Absatzebene. Dieses Verfahren verwendet ausschließlich die Struktur der Quelldatei zur Segmentgenerierung.</para>
 
-		  <para>Textdateien können zum Beispiel an Zeilenumbrüchen, Leerzeilen oder überhaupt nicht segmentiert werden. Dateien, die Formatierungen enthalten (ODF-, HTML- oder andere Dokumente), werden bei Block-Elementen (Paragraph-Tags) geteilt. Übersetzbare Objektattribute in XHTML- oder HTML-Dateien können als separate &quot;Absätze&quot; extrahiert werden.</para>
+		  <para>Textdateien können zum Beispiel an Zeilenumbrüchen, Leerzeilen oder gar nicht segmentiert werden. Dateien mit Formatierungen (z.B. ODF- oder HTML-Dokumente) werden an Blockelementen (Paragraph-Tags) segmentiert. Übersetzbare Objektattribute in XHTML- oder HTML-Dateien können als separate &quot;Absätze&quot; extrahiert werden.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -33,9 +33,9 @@
         <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentierung auf Satzebene</term>
 
         <listitem>
-		  <para>Nach der Unterteilung der Quelldatei in Struktureinheiten teilt OmegaT diese Einheiten weiter in Segmente auf.</para>
+		  <para>Nachdem OmegaT die Quelldatei in Struktureinheiten zerlegt hat, werden diese weiter in Segmente zerlegt.</para>
 
-		  <para>Sie können sich die Segmentierung auch so vorstellen, dass der Textcursor zeichenweise entlang des Textes bewegt wird und nach der Stelle gesucht wird, an der ein Umbruch erfolgen oder nicht erfolgen soll.</para>
+		  <para>Sie können sich die Segmentierung so vorstellen, dass Sie den Textcursor zeichenweise über den Text bewegen und nach der Stelle suchen, an der ein Umbruch erfolgen oder nicht erfolgen soll.</para>
 
 		  <para>Jedes Mal, wenn sich der Textcursor zum nächsten Zeichen bewegt, prüft OmegaT, ob:</para>
 		  
@@ -59,16 +59,16 @@
 	<title id="dialog.preferences.segmentation.setup.scope.title">Global oder lokal?</title>
 
 	<note>
-	  <para>Die gleichen Mechanismen und Dialogfenster werden verwendet, um globale und lokale Segmentierungsregeln zu definieren.</para>
+	  <para>Für die Definition von globalen und lokalen Segmentierungsregeln werden die gleichen Mechanismen und Dialogfenster verwendet.</para>
 	</note>
 
-	<para>Standardmäßig sind Segmentierungseinstellungen global und werden für alle Projekte verwendet.</para>
+	<para>Standardmäßig sind Segmentierungseinstellungen global und werden von allen Projekten gemeinsam genutzt.</para>
 
 	<para>Verwenden Sie die Projekteigenschaft <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/>, um den Geltungsbereich der Segmentierungsregeln auf das aktuelle Projekt zu beschränken.</para>
 
 	<para>Sie können dasselbe erreichen, wenn Sie OmegaT über die Befehlszeile starten. Einzelheiten finden Sie unter <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>.</para>
 	
-	<para>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber diese zu ändern, wirkt sich nicht auf Ihr Projekt aus.</para>
+	<para>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber eine Änderung der globalen Regeln wirkt sich nicht auf Ihr Projekt aus.</para>
   </section>
 
 
@@ -76,10 +76,10 @@
 	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Regeln</title>
 	<para>OmegaT bietet vordefinierte Segmentierungsregeln, die der Übersetzer mit regulären Ausdrücken ändern kann. Einzelheiten finden Sie unter <link linkend="app.regex" endterm="app.regex.title"/>.</para>
 
-	<para>Zur Erinnerung: Regeln funktionieren wie folgt: Wenn eine Regel zutrifft, setzt OmegaT eine Markierung an die entsprechende Stelle, so dass nachfolgende Regeln diese Stelle ignorieren. Das ist der Grund, warum Ausnahmeregeln vor Segmentierungsregeln erfolgen müssen.</para>
+	<para>Zur Erinnerung: Regeln funktionieren wie folgt: Wenn eine Regel zutrifft, setzt OmegaT eine Markierung an die entsprechende Stelle, so dass nachfolgende Regeln diese Stelle ignorieren. Aus diesem Grund müssen Ausnahmeregeln vor Segmentierungsregeln definiert werden.</para>
 	
 	<warning>
-	  <para>Wenn Sie die Segmentierung während einer laufenden Übersetzung ändern, müssen Sie das Projekt neu laden, damit die neue Segmentierung wirksam wird. Dabei werden einige zuvor übersetzte Segmente geteilt oder zusammengeführt, so dass sie nicht mehr als übersetzt gelten. Die Originalübersetzung bleibt jedoch im Translation Memory des Projekts erhalten.</para>
+	  <para>Wenn Sie die Segmentierung während einer laufenden Übersetzung ändern, müssen Sie das Projekt neu laden, damit die neue Segmentierung wirksam wird. Dabei kann es vorkommen, dass einige bereits übersetzte Segmente geteilt oder zusammengeführt werden, wodurch sie nicht mehr übersetzt sind. Die ursprüngliche Übersetzung bleibt jedoch im Translation Memory des Projekts erhalten.</para>
 	</warning>
 
 	<table id="segmentation.simple.examples">
@@ -116,14 +116,14 @@
 		  </row>
 		  <row>
 			<entry>Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</entry>
-			<entry>Ein neues Segment nach einem Punkt, gefolgt von einem Leer-, Tabulator- oder sonstigem Leerraumzeichen, beginnen.</entry>
+			<entry>Beginn eines neuen Segments nach einem Punkt, gefolgt von einem Leerraum wie z.B. Leer- oder Tabulatorzeichen.</entry>
 			<entry align="center">\.</entry>
 			<entry align="center">\s</entry>
 			<entry>Ein Punkt, gefolgt von einem Leerraum</entry>
 		  </row>
 		  <row>
 			<entry>Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</entry>
-			<entry>Ein neues Segment nach &quot;。&quot; (japanischer Punkt) beginnen.</entry>
+			<entry>Beginn eines neuen Segments nach &quot;。&quot; (japanischer Punkt).</entry>
 			<entry align="center">。</entry>
 			<entry align="center"/>
 			<entry>Beachten Sie, dass das Feld <literal>Muster danach</literal> leer sein kann.</entry>

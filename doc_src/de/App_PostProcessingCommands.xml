@@ -3,14 +3,14 @@
 <section id="post.processing.commands">
   <title id="post.processing.commands.title">Nachbearbeitungsbefehle</title>
 
-  <para>Siehe die Projekteigenschaft <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> für projektspezifische Befehle.</para>
+  <para>Einzelheiten zu projektspezifischen Befehlen finden Sie unter <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> (Projekteigenschaft).</para>
 
-  <para>Siehe die Einstellung <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> für globale Befehle.</para>
+  <para>Einzelheiten zu globalen Befehlen finden Sie unter <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> (Einstellungen).</para>
 	
 
   <section id="post.processing.commands.template.variables">
     <title id="post.processing.commands.template.variables.title">Variablen</title>
-    <para>Der Befehl wird an die Java-Laufzeitausführung als Zeichenkette übergeben, wobei die Variablen in ihre Werte aufgelöst werden. Alle Argumente sollten in Anführungszeichen gesetzt werden, z. B. <literal>&quot;${fileName}&quot;</literal>.</para>
+    <para>Der Befehl wird an die Java Runtime als Zeichenkette übergeben, wobei die Variablen in ihre Werte aufgelöst werden. Alle Argumente sollten in Anführungszeichen gesetzt werden, z.B. <literal>&quot;${fileName}&quot;</literal>.</para>
 
     <para>Die folgenden Variablen sind immer verfügbar. Die anderen Einträge in der Variablenliste sind Umgebungsvariablen Ihres Systems.</para>
 	
@@ -99,33 +99,33 @@
   <section id="post.processing.commands.user.defined.scripts">
     <title id="post.processing.commands.user.defined.scripts.title">Lokale Skripte</title>
     <para>Zusätzlich zu einem regulären Befehl können Sie auch ein Skript aufrufen. Führen Sie nur Nachbearbeitungsskripte aus, die aus vertrauenswürdigen Quellen stammen. Aus Sicherheitsgründen sind lokale Nachbearbeitungsbefehle standardmäßig deaktiviert.</para>
-    <para>Die Variablen können sowohl mit regulären Befehlen als auch mit benutzerdefinierten Skripten verwendet werden. Möglicherweise müssen Sie einen absoluten Pfad für Ihr Skript verwenden. Der PATH, den OmegaT verwendet, ist möglicherweise nicht derselbe wie der PATH des aktuellen Benutzers.</para>
-    <para>STDOUT und STDERR werden in die <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>-Datei geschrieben. Der Exitcode und STDERR oder das letzte STDOUT werden in der Statusleiste angezeigt.</para>
+    <para>Die Variablen können sowohl mit regulären Befehlen als auch mit benutzerdefinierten Skripten verwendet werden. Möglicherweise müssen Sie einen absoluten Pfad für Ihr Skript verwenden. Der von OmegaT verwendete PATH kann von dem des aktuellen Benutzers abweichen.</para>
+    <para>STDOUT und STDERR werden in die Datei <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link> geschrieben. Der Exitcode und STDERR oder das letzte STDOUT werden in der Statusleiste angezeigt.</para>
   </section>
 
   <section id="post.processing.commands.linux.and.macos">
     <title id="post.processing.commands.linux.and.macos.title">Linux und macOS</title>
-    <para>Sie sollten ein Shebang verwenden, z. B. <literal>#! /bin/bash</literal> oder <literal>#! /usr/bin/env python3</literal>. Und das Skript muss ausführbar sein. Die Verkettung von Befehlen mit <literal>&amp;&amp;</literal> oder <literal>||</literal> oder Pipes <literal>|</literal> wird hier nicht funktionieren.</para>
+    <para>Sie sollten ein Shebang verwenden, z.B. <literal>#! /bin/bash</literal> oder <literal>#! /usr/bin/env python3</literal>. Das Skript muss ausführbar sein. Die Verkettung von Befehlen mit <literal>&amp;&amp;</literal> oder <literal>||</literal> oder Pipes <literal>|</literal> funktioniert hier nicht.</para>
   </section>
   
   <example id="post.processing.commands.example">
 	  <title id="post.processing.commands.example.title">Einfache Beispiele für Nachbearbeitungsbefehle:</title>
 	  <variablelist>
 		<varlistentry>
-		  <term>Den Zielordner in Linux öffnen</term>
+		  <term>Zielordner unter Linux öffnen</term>
 		  <listitem>
 			<programlisting>xdg-open ${targetRoot}</programlisting>
 		  </listitem>
 		</varlistentry>
 		<varlistentry>
-		  <term>Den Zielordner in macOS öffnen</term>
+		  <term>Zielordner unter macOS öffnen</term>
 		  <listitem>
 			<programlisting>open ${targetRoot}</programlisting>
 		  </listitem>
 		</varlistentry>
 
 		<varlistentry>
-		  <term>Den Zielordner via Windows Powershell öffnen</term>
+		  <term>Zielordner mit Windows Powershell öffnen</term>
 		  <listitem>
 			<programlisting>Invoke-Item ${targetRoot}</programlisting>
 		  </listitem>

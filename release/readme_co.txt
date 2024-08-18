@@ -1,4 +1,4 @@
-A versione @language@ d’OmegaT hè stata tradutta da :
+A versione corsa d’OmegaT hè stata tradutta da :
 Patriccollu di Santa Maria è Sichè
 
 
@@ -62,18 +62,18 @@ Piazzate l’archiviu in u cartulare di a vostra scelta è spacchittatelu. Tandu
 Lanciu d’OmegaT (Windows)
 =========================
 
-S’è, durante l’installazione, avete creatu un accurtatoghju nant’à u scagnu, fate un doppiu-cliccu nant’à st’accurtatoghju.
+S’è, durante l’installazione, avete creatu un accurtatoghju nant’à u scagnu, fate un doppiu cliccu nant’à st’accurtatoghju.
 
 U prugramma d’installazione pò creà accurtatoghji per voi in u listinu « démarrer », nant’à u scagnu o in a barra di lanciu rapidu. Pudete dinù fà sguillà manualmente u schedariu OmegaT.exe in u listinu « démarrer », nant’à u scagnu o in a barra di lanciu rapidu per creacci l’accurtatoghji.
 
-S’ellu vi hè pussibule di fighjà u schedariu OmegaT ma micca OmegaT.exe in u vostru ghjestiunariu di schedariu (Espluratore WIndows), mudificate e preferenze per chì l’estensioni sianu affissate.
+S’ellu vi hè pussibule di fighjà u schedariu OmegaT ma micca OmegaT.exe in u vostru ghjestiunariu di schedariu (Espluratore WIndows), mudificate i parametri per chì l’estensioni sianu affissate.
 
 
 
 Lanciu d’OmegaT (Mac)
 =====================
 
-Doppiu-cliccate nant’à l’appiecazione OmegaT.
+Fate un doppiu cliccu nant’à l’appiecazione OmegaT.
 
 Pudete fà sguillà OmegaT.app nant’à u vostru Dock o nant’à a barra d’attrezzi d’una finestra di Finder per pudè eseguiscelu da qualsiasi locu. Pudete dinù eseguiscelu da u campu di ricerca di Spotlight.
 
@@ -132,7 +132,7 @@ A squadra attuale hè :
 - Philippe Tourigny (rispunsevule di a documentazione)
 - Lucie Vecerova (rispunsevule di cumunità Facebook)
 
-E cuntribuzioni à u codice sò ducumentate in /docs/contributors.txt.
+E cuntribuzioni à u codice sò documentate in /docs/contributors.txt.
 
 I precedente cuntribuenti includenu :
 (in ordine alfabeticu)
@@ -174,3 +174,7 @@ E dumande d’amendamentu (in inglese) nant’à u situ SourceForge :
 I raporti di penseru (in inglese) nant’à u situ SourceForge :
 
   https://sourceforge.net/p/omegat/bugs/
+
+Manuale di cuntribuzione à OmegaT
+
+  https://omegat.readthedocs.io/en/latest/

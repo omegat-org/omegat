@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="post.processing.commands">
+  <title id="post.processing.commands.title">Opdrachten voor nabewerking</title>
+
+  <para>Bekijk de projecteigenschap <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>  voor projectspecifieke opdrachten.</para>
+
+  <para>Bekijk de voorkeur <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> voor globale opdrachten.</para>
+	
+
+  <section id="post.processing.commands.template.variables">
+    <title id="post.processing.commands.template.variables.title">Sjabloon variabelen</title>
+    <para>De opdracht wordt doorgegeven aan het uitvoerbare bestand voor de Java runtime als een tekenreeks met de daaraan toegevoegde waarden uit het sjabloon. Alle argumenten zouden tussen aanhalingstekens moeten staan, bijv. <literal>&quot;${fileName}&quot;</literal>.</para>
+
+    <para>De volgende variabelen voor sjablonen zijn altijd beschikbaar. De andere items op de lijst voor het sjabloon zijn omgevingsvariabelen voor uw systeem.</para>
+	
+    <table id="post.processing.commands.template.variables.table">
+      <title id="post.processing.commands.template.variables.table.title">Sjabloon variabelen</title>
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+        <colspec align="left" colname="2" colnum="2"/>
+        <thead>
+          <row>
+            <entry>Naam variabele</entry>
+            <entry>Waarde</entry>
+          </row>
+        </thead>
+
+        <tbody>
+		  <row>
+			<entry>${projectName}</entry>
+			<entry>De naam van de projectmap</entry>
+		  </row>
+		  <row>
+			<entry>${projectRoot}</entry>
+			<entry>Volledig pad naar de projectmap</entry>
+		  </row>
+		  <row>
+			<entry>${sourceRoot}</entry>
+			<entry>Volledig pad naar de bronmap</entry>
+		  </row>
+		  <row>
+			<entry>${targetRoot}</entry>
+			<entry>Volledig pad naar de doelmap</entry>
+		  </row>
+		  <row>
+			<entry>${glossaryRoot}</entry>
+			<entry>Volledig pad naar de map glossary</entry>
+		  </row>
+		  <row>
+			<entry>${tmRoot}</entry>
+			<entry>Volledig pad naar de map voor de bron van de TM</entry>
+		  </row>
+		  <row>
+			<entry>${tmAutoRoot}</entry>
+			<entry>Volledig pad naar de map auto van de TM</entry>
+		  </row>
+		  <row>
+			<entry>${dictRoot}</entry>
+			<entry>Volledig pad naar de map dictionary</entry>
+		  </row>
+		  <row>
+			<entry>${tmOtherLangRoot}</entry>
+			<entry>TM Root + tmx2source (Bekijk de <link linkend="how.to.tm.bridge.two.languages" endterm="how.to.tm.bridge.two.languages.title"/> how-to voor details.)</entry>
+		  </row>
+		  <row>
+			<entry>${sourceLang}</entry>
+			<entry>Brontaal</entry>
+		  </row>
+		  <row>
+			<entry>${targetLang}</entry>
+			<entry>Doeltaal</entry>
+		  </row>
+		  <row>
+			<entry>${filePath}</entry>
+			<entry>Volledig pad naar het bronbestand</entry>
+		  </row>
+		  <row>
+			<entry>${fileShortPath}</entry>
+			<entry>Naam van het bronbestand, relatief aan de opgegeven bron</entry>
+		  </row>
+		  <row>
+			<entry>${fileName}</entry>
+			<entry>Volledige naam van het bronbestand</entry>
+		  </row>
+		  <row>
+			<entry>${fileNameOnly}</entry>
+			<entry>Naam van het bronbestand, zonder de extensie</entry>
+		  </row>
+		  <row>
+			<entry>${fileExtension}</entry>
+			<entry>Extensie van het bronbestand zonder punt</entry>
+		  </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  
+  <section id="post.processing.commands.user.defined.scripts">
+    <title id="post.processing.commands.user.defined.scripts.title">Locale scripts</title>
+    <para>In aanvulling op een reguliere opdracht, kunt u een script aanroepen. Voer nooit scripts voor bewerken uit vanuit niet vertrouwde bronnen. Opdrachten voor lokale nabewerking zijn om veiligheidsredenen standaard uitgeschakeld.</para>
+    <para>Variabelen voor sjablonen kunnen worden gebruikt met zowel reguliere opdrachten als met aangepaste scripts. U moet misschien een absoluut pad gebruiken voor uw script. Het gebruiken van PATH OmegaT zou niet hetzelfde hoeven te zijn als het PATH van de huidige gebruiker.</para>
+    <para>STDOUT en STDERR worden geschreven naar het bestand <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. De exitcode en STDERR of de laatste STDOUT zullen op de statusbalk verschijnen.</para>
+  </section>
+
+  <section id="post.processing.commands.linux.and.macos">
+    <title id="post.processing.commands.linux.and.macos.title">Linux en macOS</title>
+    <para>U zou een shebang moeten gebruiken, bijv. <literal>#! /bin/bash</literal> of <literal>#! /usr/bin/env python3</literal>. En het script moet uitvoerbaar zijn. Koppelen van opdrachten met <literal>&amp;&amp;</literal> of <literal>||</literal> of pipes <literal>|</literal> zal hier niet werken.</para>
+  </section>
+  
+  <example id="post.processing.commands.example">
+	  <title id="post.processing.commands.example.title">Eenvoudig voorbeeld van een opdracht voor nabewerken:</title>
+	  <variablelist>
+		<varlistentry>
+		  <term>Open de doelmap in Linux</term>
+		  <listitem>
+			<programlisting>xdg-open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+		<varlistentry>
+		  <term>Open de doelmap in macOS</term>
+		  <listitem>
+			<programlisting>open ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Open de doelmap Windows Powershell</term>
+		  <listitem>
+			<programlisting>Invoke-Item ${targetRoot}</programlisting>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>

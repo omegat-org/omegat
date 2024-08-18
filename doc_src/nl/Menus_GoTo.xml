@@ -1,92 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.goto">
-  <title>Ga naar</title>
+  <title id="menus.goto.title"><guimenu>Ga naar</guimenu></title>
 
-  <para>Dit menu geeft alleen items weer als een project is geopend.</para>
+  <para>Dit menu geeft u toegang tot de opdrachten voor navigatie in de segmenten en de vensters.</para>
+
+  <example id="example.next.untranslated.segment">
+	<title id="example.next.untranslated.segment.title">Voorbeeld omschrijving sneltoets</title>
+	<para>Op Windows en Linux: <keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo></para>
+
+	<para>Op macOS: <keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo></para>
+
+	<para><emphasis role="bold">In deze handleiding:</emphasis><keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term>Volgende niet-vertaalde segment</term>
+    <varlistentry id="menus.goto.next.untranslated.segment">
+      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>Volgende niet-vertaalde segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
-        <para>Verplaatst naar het volgende segment dat geen equivalent heeft in het vertaalgeheugen.</para>
+        <para>Verplaatst naar het volgende segment zonder item voor de doeltaal in het vertaalgeheugen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Volgende vertaalde segment</term>
+    <varlistentry id="menus.goto.next.translated.segment">
+      <term id="menus.goto.next.translated.segment.title"><guimenuitem>Volgende vertaalde segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>Verplaatst naar het volgende, reeds vertaalde, segment, niet-vertaalde segmenten negerend.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Volgende segment</term>
+    <varlistentry id="menus.goto.next.segment">
+      <term id="menus.goto.next.segment.title"><guimenuitem>Volgende segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 
       <listitem>
-        <para>Verplaatst naar het volgende segment. Als het huidige segment het laatste in een bestand is, verplaatst het naar het eerste segment van het volgende bestand.</para>
+		<para>Ook: <keycombo><keycap>Enter</keycap></keycombo></para>
 
-        <para>Opmerking: <keycap>Enter</keycap> is een alternatieve sneltoets als de optie <link linkend="dialogs.preferences.general.usetabtoadvance">TAB gebruiken om door te gaan</link> niet is geselecteerd.</para>
+        <para>Verplaatst naar het volgende segment, of naar het eerste segment van het volgende bestand als het huidige segment het laatste in het bestand is.</para>
+
+        <note>
+		  <para>U kunt <keycap>TAB</keycap> gebruiken als een alternatieve sneltoets door de voorkeur <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> in te schakelen.</para>
+		  
+		  <para>Dit is nuttig bij systemen voor het invoeren van tekens die <keycap>Enter</keycap> gebruiken om invoer te valideren.</para></note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vorige segment</term>
-
+    <varlistentry id="menus.goto.previous.segment">
+      <term id="menus.goto.previous.segment.title"><guimenuitem>Vorige segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>Verplaatst naar het vorige segment. Als het huidige segment het eerste in een bestand is, verplaatst het naar het laatste segment van het vorige bestand.</para>
+		<para>Ook: <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo></para>
 
-        <para>Opmerking: <keycombo> <keycap>Ctrl</keycap><keycap>Enter</keycap> </keycombo> is een alternatieve sneltoets als de optie <link linkend="dialogs.preferences.general.usetabtoadvance">TAB gebruiken om door te gaan</link> niet is geselecteerd.</para>
+        <para>Verplaatst naar het vorige segment, of naar het laatste segment van het vorige bestand als het huidige segment het eerste in het bestand is.</para>
+
+        <note>
+		  <para>U kunt <keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo> gebruiken als een alternatieve sneltoets door de voorkeur <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> in te schakelen.</para>
+		  
+		  <para>Dit is nuttig bij systemen voor het invoeren van tekens die <keycap>Enter</keycap> gebruiken om invoer te valideren.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segmentnummer…</term>
-
+    <varlistentry id="menus.goto.segment.number">
+      <term id="menus.goto.segment.number.title"><guimenuitem>Segmentnummer…</guimenuitem> <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
-        <para>Het segment wordt geopend ofwel als de letter van de tekstballon of als het segmentnummer wordt ingevoerd.</para>
+        <para>Springt naar het segment waarvan de aanroep of het nummer is ingevoerd.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Volgende notitie</term>
-
+    <varlistentry id="menus.goto.next.note">
+      <term id="menus.goto.next.note.title"><guimenuitem>Volgende opmerking</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>Het volgende segment waar een notitie aan is verbonden, zal openen.</para>
+		<para>Verplaatst naar het volgende segment met een opmerking.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vorige notitie</term>
-
+    <varlistentry id="menus.goto.previous.note">
+      <term id="menus.goto.previous.note.title"><guimenuitem>Vorige opmerking</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para>Het vorige segment met een notitie zal openen.</para>
+		<para>Verplaatst naar het vorige segment met een opmerking.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Bron van geselecteerde overeenkomst</term>
+    <varlistentry id="menus.goto.next.unique.segment">
+      <term id="menus.goto.next.unique.segment.title"><guimenuitem>Volgende unieke segment</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
+      <listitem>
+        <para>Verplaatst naar het volgende unieke segment.</para>
+      </listitem>
+    </varlistentry>
 
+    <varlistentry id="menus.goto.source.of.selected.match">
+      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Bron van geselecteerde overeenkomst</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
         <para>Verplaatst naar het segment dat correspondeert met de huidige geselecteerde overeenkomst in het venster <guilabel>Fuzzy overeenkomsten</guilabel>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Verder in geschiedenis...</term>
+	<varlistentry id="menus.goto.auto.populated.segments">
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Automatisch gevulde segmenten</guisubmenu></term>
+	  <listitem>
+        <para>Navigeer tussen segmenten die automatisch werden gevuld door exacte overeenkomsten uit de submappen <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> en <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/>.</para>
 
+		<para>Bekijk de <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> how-to voor details.</para>
+
+		<itemizedlist>
+		  <listitem id="menus.goto.auto.populated.segments.next.auto">
+			<para id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Volgende segment vanuit tm/auto/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Verplaatst naar het volgende segment, ingevoegd vanuit <filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
+			<para id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Vorige segment vanuit tm/auto/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
+
+			<para>Verplaatst naar het vorige segment, ingevoegd vanuit <filename>tm/auto/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
+			<para id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Volgende segment vanuit tm/enforce/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Verplaatst naar het volgende segment, ingevoegd vanuit <filename>tm/enforce/</filename>.</para>
+		  </listitem>
+
+		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Vorige segment vanuit tm/enforce/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+
+			<para>Verplaatst naar het vorige segment, ingevoegd vanuit <filename>tm/enforce/</filename>.</para>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+    <varlistentry id="menus.goto.back.in.history">
+      <term id="menus.goto.back.in.history.title"><guimenuitem>Terug in geschiedenis</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
-        <para><application>OmegaT</application> onthoudt de verwerkte segmenten. Met deze opdracht kunt u vooruit naar het segment dat u eerder verliet met de opdracht <guimenuitem>Terug in geschiedenis</guimenuitem>…</para>
+        <para>OmegaT onthoudt uw geschiedenis van het navigeren door de segmenten.</para>
+        <para>Deze opdracht laat u één segment per keer terug gaan naar segmenten die u eerder hebt bezocht.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry id="menus.goto.forward.in.history">
+      <term id="menus.goto.forward.in.history.title"><guimenuitem>Verder in geschiedenis</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
+      <listitem>
+        <para>OmegaT onthoudt uw geschiedenis van het navigeren door de segmenten.</para>
+
+        <para>Deze opdracht laat u één segment per keer terug gaan naar segmenten die u eerder hebt bezocht met de opdracht <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> hierboven.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Terug in geschiedenis…</term>
-
+    <varlistentry id="menus.goto.notes.pane">
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Notepad</guimenuitem>
+	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>Met deze opdracht kunt u één segment terug in de tijd gaan, om later terug te keren naar het huidige segment met behulp van de opdracht <guimenuitem>Verder in geschiedenis…</guimenuitem>hieronder.</para>
+        <para>Voer de <link linkend="panes.notes" endterm="panes.notes.title"/> in om een notitie te schrijven of aan te passen die is geassocieerd met het huidige segment.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.goto.editor.pane">
+      <term id="menus.goto.editor.pane.title"><guimenuitem>venster Bewerken</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+      <listitem>
+        <para>Voer de <link linkend="panes.editor" endterm="panes.editor.title"/> in om door te gaan met uw vertaling.</para>
       </listitem>
     </varlistentry>
   </variablelist>

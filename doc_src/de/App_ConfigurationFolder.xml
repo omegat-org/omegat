@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="configuration.folder">
   <title id="configuration.folder.title">Konfigurationsordner</title>
-  <para>Der Konfigurationsordner enthält den Großteil der OmegaT-Optionen und -Einstellungen für den Nutzer.</para>
+  <para>Der Konfigurationsordner enthält die meisten OmegaT-Optionen und -Einstellungen für den Benutzer.</para>
   
   <para>Verwenden Sie <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/>, um direkt darauf zuzugreifen.</para>
 
@@ -17,7 +17,7 @@
 	<note>
 	  <para>Sie können einen benutzerdefinierten Konfigurationsordner angeben, wenn Sie OmegaT über die Befehlszeile starten. Einzelheiten finden Sie unter <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>.</para>
 
-	  <para>Geänderte Einstellungen werden im Konfigurationsordner gespeichert, der vom Projekt verwendet wird. Wenn Sie nicht den regulären Konfigurationsordner verwenden, werden alle Änderungen, die in den <link linkend="chapter.dialogs.preferences">Einstellungen</link> vorgenommen wurden, im angegebenen Konfigurationsordner gespeichert. Diese Änderungen haben keine Wirkung, wenn Sie Ihre Arbeit mit dem regulären Konfigurationsordner fortsetzen.</para>
+	  <para>Geänderte Einstellungen werden im vom Projekt verwendeten Konfigurationsordner gespeichert. Wenn Sie nicht den regulären Konfigurationsordner verwenden, werden alle Änderungen, die in den <link linkend="chapter.dialogs.preferences">Einstellungen</link> vorgenommen wurden, im angegebenen Konfigurationsordner gespeichert. Diese Änderungen haben keine Wirkung, wenn Sie Ihre Arbeit mit dem regulären Konfigurationsordner fortsetzen.</para>
 	</note>
   </section>
   
@@ -27,13 +27,13 @@
 	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
 		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
 		<listitem>
-		  <para>Diese Datei enthält eine Reihe von wichtigen Benutzereinstellungen.</para>
+		  <para>Diese Datei enthält eine Reihe wichtiger Benutzereinstellungen.</para>
 
 		  <para>Einige Einstellungen haben kein Äquivalent in der Benutzeroberfläche. Diese müssen manuell geändert werden.</para>
 		  
 		  <example id="no.source.file.display">
 			<title id="no.source.file.display.title">Die Quelldateien-Liste nicht automatisch anzeigen</title>
-			<para>Um das automatische Öffnen des Projektdateien-Fensters beim Laden eines Projekts zu verhindern, suchen Sie <token>&lt;project_files_show_on_load&gt;</token> und ersetzen Sie <token>true</token> mit <token>false</token>:</para>
+			<para>Um das automatische Öffnen des Projektdateien-Fensters beim Laden eines Projekts zu verhindern, suchen Sie nach <token>&lt;project_files_show_on_load&gt;</token> und ersetzen Sie <token>true</token> mit <token>false</token>:</para>
 
 			<para><programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting></para>
 		  </example>
@@ -117,42 +117,42 @@
 	  <varlistentry id="configuration.folder.extra.contents.filters">
 		<term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
 		<listitem>
-		  <para>Diese Parameterdatei enthält benutzerdefinierte Dateifilter. Siehe die <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>-Einstellungen für weitere Informationen.</para>
+		  <para>Diese Parameterdatei enthält benutzerdefinierte Dateifilter. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> (Einstellungen).</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="configuration.folder.extra.contents.finder">
 		<term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
 		<listitem>
-		  <para>Diese Parameterdatei enthält benutzerdefinierte Parameter für externe Suchvorgänge. Siehe die <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>-Einstellungen für weitere Informationen.</para>
+		  <para>Diese Parameterdatei enthält benutzerdefinierte Parameter für externe Suchvorgänge. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> (Einstellungen).</para>
 		</listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.omegat.autotext">
 	  <term id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
 	  <listitem>
-		<para>Diese Parameterdatei enthält benutzerdefinierte Autotext-Parameter. Siehe die <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Diese Parameterdatei enthält benutzerdefinierte Autotext-Parameter. Einzelheiten finden Sie unter <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> (Einstellungen).</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.repositories">
 	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
 	  <listitem>
-		<para>Diese Datei enthält die Zugangsdaten für Ihre Teamprojekt-Repositories.<warning><para>Der Inhalt der Datei ist nicht verschlüsselt.</para></warning>Einzelheiten finden Sie unter <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>.</para>
+		<para>Diese Datei enthält die Zugangsdaten für Ihre Teamprojekt-Repositories.<warning><para>Der Inhalt der Datei ist unverschlüsselt.</para></warning>Einzelheiten finden Sie unter <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/>.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
 	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
 	  <listitem>
-		<para>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter. Siehe die <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> (Einstellungen).</para>
 	  </listitem>
 	</varlistentry>
 	
 	<varlistentry id="configuration.folder.extra.contents.plugin">
 	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
 	  <listitem>
-		<para>Dieser Ordner ist der Standardspeicherort für manuell installierte OmegaT-Erweiterungs-Plugins. Siehe die <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/>-Einstellung für weitere Informationen.</para>
+		<para>Dieser Ordner ist der Standardspeicherort für manuell installierte OmegaT-Erweiterungs-Plugins. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> (Einstellungen).</para>
 		<para>Es ist auch möglich, Plugins in den <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>-Ordner des Programms zu installieren.</para>
 	  </listitem>
 	</varlistentry>
@@ -160,7 +160,7 @@
 	<varlistentry id="configuration.folder.extra.contents.spelling">
 	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
 	  <listitem>
-		<para>Dieser Ordner enthält Ihre Rechtschreibwörterbücher. Siehe die <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Dieser Ordner enthält Ihre Rechtschreibwörterbücher. Einzelheiten finden Sie unter <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> (Einstellungen).</para>
 	  </listitem>
 	</varlistentry>
 	</variablelist>

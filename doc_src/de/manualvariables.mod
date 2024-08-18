@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ENTITY vernb "6.1.0">
+<!ENTITY vernb "6.0.0">
 <!ENTITY javaversionshort "Java 11">
 <!ENTITY javaversionlong "Java 11 Runtime Environment">
 <!ENTITY javaregex "https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">

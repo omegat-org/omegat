@@ -317,6 +317,10 @@
       <term id="menus.edit.create.alternative.translation.title"><guimenuitem>Crea una traducció alternativa</guimenuitem></term>
       <listitem>
 		<para>És possible que els segments idèntics, en funció del context, requereixin traduccions diferents. Si la traducció actual no és adequada, seleccioneu aquest element del menú i indiqueu la traducció alternativa.</para>
+		<warning>
+		<para>L'OmegaT distingeix els segments idèntics a partir de l'identificador intern proporcionat pel tipus de fitxer o fent referència als segments anteriors i següents. En aquests casos, les traduccions alternatives depenen que els segments idèntics tinguin segments anteriors o posteriors diferents. Si els segments idèntics també tenen segments anteriors o posteriors idèntics, no podreu traduir-los de manera diferent i marcar-ne un com a traducció alternativa en l'OmegaT.</para>
+		<para>Podeu evitar aquest problema aplicant un petit canvi a un dels segments anteriors o posteriors en el fitxer d'origen per a distingir les diferents repeticions dels mateixos segments anteriors i posteriors.</para>
+		</warning>
       </listitem>
 	</varlistentry>
 

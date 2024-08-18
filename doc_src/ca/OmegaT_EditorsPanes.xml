@@ -237,7 +237,7 @@
 			</listitem>
 
 			<listitem>
-			  <para>Feu clic en el giny <guilabel>Acció</guilabel>de la cantonada superior dreta,</para>
+			  <para>Feu clic en el giny <guilabel>Acció</guilabel> de la cantonada superior dreta,</para>
 			</listitem>
 			
 			<listitem>
@@ -683,7 +683,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>Traducció automàtica</guilabel></title>
 
-    <para>Aquesta finestra, quan s'obre, conté els suggeriments per al segment actual produïts per un o més motors de traducció automàtica habilitats. Quan hi ha suggeriments disponibles de més d'un motor:</para>
+    <para>Si heu habilitat i configurat com a mínim un motor de traducció automàtica, aquesta subfinestra mostra els suggeriments del segment actual generats pels motors disponibles. Quan hi ha suggeriments disponibles de més d'un motor de traducció automàtica:</para>
 	
     <itemizedlist>
       <listitem>

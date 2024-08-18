@@ -6,7 +6,7 @@
 ]>
 <book lang="de" id="book.user.manual">
   <bookinfo>
-    <title id="book.user.manual.title">OmegaT 6.1.0 - Bedienungsanleitung</title>
+    <title id="book.user.manual.title">OmegaT 6.0.0 - Bedienungsanleitung</title>
 
 	<!-- Copyright 2002-2023
 		 - Vincent Bidaux
@@ -23,21 +23,21 @@
     <!-- <pubdate>@timestamp@</pubdate> -->
 	<!-- TODO automate date insertion -->
     <abstract>
-      <para>Dieses Dokument ist die offizielle Bedienungsanleitung für OmegaT, dem kostenlosen Tool für computergestützte Übersetzung.</para>
+      <para>Dieses Dokument ist die offizielle Bedienungsanleitung für OmegaT, ein kostenloses Tool für computergestützte Übersetzung.</para>
 
-	  <para>Der Hauptzweck von OmegaT besteht darin, Ihnen auf möglichst zuverlässige Weise Zugang zu Ihren Übersetzungsressourcen zu verschaffen, damit Sie eine gute Übersetzung so schnell wie möglich erstellen können.</para>
+	  <para>Der Hauptzweck von OmegaT besteht darin, Ihnen einen möglichst zuverlässigen Zugriff auf Ihre Übersetzungsressourcen zu ermöglichen, damit Sie so schnell wie möglich eine gute Übersetzung anfertigen können.</para>
 
-	  <para>OmegaT wird unter den Bedingungen der <emphasis>GNU General Public License, Version 3.0</emphasis> verteilt. Die Lizenz gewährt Ihnen die folgenden Freiheiten:<itemizedlist id="freedoms.list">
+	  <para>OmegaT wird unter den Bedingungen der <emphasis>GNU General Public License, Version 3.0</emphasis> verteilt. Diese Lizenz gibt Ihnen die folgenden Freiheiten:<itemizedlist id="freedoms.list">
 		<listitem>
-		  <para>Die Freiheit, die Software für beliebige Zwecke zu nutzen.</para>
+		  <para>Die Freiheit, die Software für jeden Zweck zu verwenden.</para>
 		</listitem>
 
 		<listitem>
-		  <para>Die Freiheit, die Funktionsweise von OmegaT zu analysieren und es so zu verändern, dass es nach Ihren Wünschen läuft.</para>
+		  <para>Die Freiheit, die Funktionsweise von OmegaT zu analysieren und es so zu verändern, dass es Ihren Wünschen entspricht.</para>
 		</listitem>
 
 		<listitem>
-		  <para>Die Freiheit, Kopien weiterzugeben, damit Sie anderen helfen können.</para>
+		  <para>Die Freiheit, Kopien weiterzugeben, um anderen zu helfen.</para>
 		</listitem>
 
 		<listitem>

@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="app.regex">
+  <title id="app.regex.title">Reguliere uitdrukkingen</title>
+
+  <para>Deze appendix is bedoeld voor gebruikers die zijn geïnteresseerd in het verkennen van een krachtige manier om hun productiviteit op te voeren. Hoewel gezien als uitdagend en complex, zijn zelfs de meest eenvoudige reguliere uitdrukkingen (vaak afgekort tot <emphasis>regex</emphasis> of <emphasis>regexp</emphasis>) bijzonder nuttig, niet alleen in OmegaT, maar in vele andere toepassingen zou u er een op een dag-tot-dag-basis kunnen gebruiken, met enige variaties.</para>
+
+  <para>Alleen de basisbeginselen die het meest nuttig zijn voor vertalers worden behandeld. Het gedeelte <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> aan het einde van deze appendix verschaft een aantal startpunten voor het verkennen van geavanceerd of complex gebruik buiten het bereik van deze handleiding. Indien u hulp nodig hebt voor een specifiek geval, kunt u ook vragen stellen in de verschillende kanalen voor ondersteuning.</para>
+  
+  <para>Reguliere uitdrukkingen gebruiken een combinatie van letters, cijfers en symbolen (collectief bekend als <emphasis>tekens</emphasis>) om een <emphasis>expressie</emphasis> te definiëren die een specifiek tekstpatroon weergeeft.</para>
+
+  <para>Hier zijn een aantal voorbeelden.</para>
+  
+  <variablelist>
+    <varlistentry>
+      <term>[0-9]</term>
+      <listitem><para>Elk enkel getal van 0 tot en met 9.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\w+</term>
+      <listitem><para>Geeft één of meer tekens voor een “woord” weer, namelijk de letters van het alfabet, cijfers en symbolen underscore.</para>
+      </listitem>
+    </varlistentry>
+
+	<varlistentry>
+      <term>\h?</term>
+      <listitem><para>Geeft één of meer tekens voor horizontale witruimte weer (dit is inclusief normale en niet-afbreekbare spaties, als ook tabs, maar geen tekens voor een regeleinde, die behoren tot de categorie “verticale witruimte”: \v.)</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>    
+  
+  <para>Veel functies van OmegaT vertrouwen op reguliere expressies of maken ze als een optie beschikbaar:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Zoeken</term>
+      <listitem>
+        <para>Zoeken bevat een functie <link linkend="windows.text.search.methods.regex" endterm="windows.text.search.methods.regex.title"/> die u in staat stelt bijzonder krachtige zoekacties in uw bestanden uit te voeren.</para>
+
+        <para>Dezelfde optie in het dialoogvenster <link linkend="windows.text.replace" endterm="windows.text.replace.title"/> stelt u in staat reguliere expressies toe te passen op zowel gezochte en vervangen tekst.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Aangepaste tags</term>
+      <listitem>
+        <para>Aangepaste tags zijn tags die zijn gedefinieerd met reguliere expressies die exact hetzelfde worden afgehandeld als de eigen tags van OmegaT. Bekijk de <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> voorkeur voor details.</para>
+
+		<para>Gebruik het teken <code>|</code> (OR) om individuele definities voor tags te scheiden.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Gevlagde tekst</term>
+      <listitem>
+        <para>De voorkeur <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> stelt u in staat tekenreeksen te definiëren die OmegaT standaard in rood zal markeren, en behandelen als extra tags voor validatie-doeleinden.</para>
+
+		<para>Gebruik het teken <code>|</code> (OR) om individuele definities voor fragmenten te scheiden.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Accentueren van tekst bij uitlijnen</term>
+      <listitem>
+        <para>Visuele aanwijzingen kunnen helpen bij het verifiëren of uw uitlijning correct is. De instelling <link linkend="windows.aligner.adjust.highlight" endterm="windows.aligner.adjust.highlight.title"/> stelt u in staat tekenreeksen te definiëren die OmegaT zal accentueren in de uitgelijnde documenten.</para>
+
+		<para>Gebruik het teken <code>|</code> (OR) om individuele expressies te scheiden.</para>
+      </listitem>
+    </varlistentry>	
+
+    <varlistentry>
+      <term>Segmentatie</term>
+      <listitem>
+        <para>Segmentatieregels en taalpatronen worden gedefinieerd met reguliere expressies. U kunt ze vrij aanpassen om de segmentatie van een document te verbeteren of aanvullende algemene regels toevoegen. Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor details.</para>
+
+        <para>Segmentatie- of regel voor uitzonderingen definiëren de positie in een segment waar een afbreking zal, of niet zal, worden gemaakt. Twee reguliere expressies zijn vereist om die positie te definiëren: een expressie voor “vóór” om het tekstpatroon te definiëren dat voor de plaats staat de regel van toepassing zou moeten zijn, en een expressie voor “na” om het tekstpatroon te definiëren dat volgt op die positie.</para>
+
+		<para>Een taalpatroon dat overeenkomt met de brontaal van het project zal van toepassing zijn op dat project.</para>
+	  </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="app.regex.four.rules">
+    <title id="app.regex.four.rules.title">De 4 regels</title>
+
+    <para>Reguliere expressies worden gebruikt om tekst te zoeken, inclusief tekens die niet zichtbaar zijn op het scherm of bij afdrukken, zoals spaties, tabs, of regeleinden. Elke opgegeven expressie ofwel <emphasis>komt overeen</emphasis>, of <emphasis>komt <emphasis role="bold">niet</emphasis> overeen</emphasis> met een woord, frase, of andere tekstreeks.</para>
+    
+    <para>Elk teken in de expressie is relevant bij het bepalen van een overeenkomst.</para>
+    <para>Een aantal tekens of combinatie van tekens hebben een speciale betekenis in een reguliere expressie.</para>
+    
+    <warning>
+      <para>Reguliere expressies komen alleen overeen met tekst. Zij kunnen niet overeenkomen met decoraties, zoals <emphasis>vet</emphasis>, <emphasis>cursief</emphasis>, of andere <emphasis>stijleffecten</emphasis>.</para>
+    </warning>
+
+    <para>Er  zijn vier regels om te onthouden.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>De meeste tekens komen eenvoudige overeen met zichzelf</term>
+        <listitem>
+          <para>De meerderheid van tekens in een reguliere expressie <emphasis>zoeken eenvoudigweg naar zichzelf</emphasis> in de tekstreeks.</para>
+
+		  <para>Bijvoorbeeld: de zeven letters die het woord “<emphasis>example</emphasis>” spellen vertellen de zoekfunctie om exact die letters overeen te laten komen, in die volgorde. Eenvoudig gezegd, de zoekactie zoekt alleen naar het woord “<emphasis>example</emphasis>”.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Cijfers en letters van het alfabet die worden voorafgegaan door een backslash (<literal>\</literal>) hebben een speciale betekenis</term>
+        <listitem>
+          <para>Anders dan een letter op zichzelf, die eenvoudigweg zichzelf weergeeft, zoals hierboven vermeld, heeft een letter die wordt voorafgegaan door een <literal>\</literal> een speciale functie in een reguliere expressie.</para>
+
+		  <para>Bijvoorbeeld: <emphasis>r</emphasis> is slechts een normaal teken, maar door het te laten voorafgaan door een <literal>\</literal> maakt dat <literal>\r</literal> het in een speciale combinatie verandert die overeenkomt met een <emphasis>teken voor een hard-regeleinde</emphasis>. Soortgelijk komt <literal>\R</literal> overeen met <emphasis>elk teken voor een regeleinde</emphasis>.</para>
+		  
+          <note>
+            <para>Alleen de letters <emphasis>i j l m o</emphasis> en <emphasis>y</emphasis>, in zowel hoofd- als kleine letters, hebben geen speciale betekenis indien voorafgegaan door een backslash. Deze handleiding beschrijft slechts een kleine subset van letters die een speciale betekenis kunnen krijgen.</para>
+
+			<para>Bekijk de pagina's in het gedeelte <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> hieronder voor informatie over combinaties die hier niet worden behandeld.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+        
+      <varlistentry>
+      <term>Twaalf tekens hebben standaard een speciale betekenis</term>
+        <listitem>
+          <para>Die speciale betekenis moet worden geannuleerd door een ander teken om het teken zelf overeen te laten komen.</para>
+
+          <para>De volledige lijst van tekens wordt <link linkend="app.regex.twelve.characters">hieronder</link> weergegeven. Één voorbeeld is <literal>.</literal>: op zichzelf heeft het de speciale betekenis voor het overeenkomen van <emphasis>elk enkel teken</emphasis>.</para>
+
+		  <para>De betekenis moet worden geannuleerd, om een normale punt te zoeken, met de <literal>\</literal>, om de expressie <literal>\.</literal> te maken, die slechts overeenkomt met één punt.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Het teken <literal>\</literal> is een zeer speciaal teken</term>
+        <listitem>
+          <para>Zoals hierboven vermeld heeft het teken <literal>\</literal> standaard de speciale betekenis van ofwel het annuleren of het activeren van de speciale betekenis van andere tekens. Het heeft geen effect indien het is geplaatst vóór een teken zonder speciale betekenis (ofwel standaard of door toevoeging).</para>
+
+          <para>De <literal>\</literal> kan zijn eigen speciale betekenis annuleren door zichzelf te verdubbelen en <literal>\\</literal> te vormen, wat eenvoudigweg overeenkomt met het teken <emphasis>backslash</emphasis> zelf.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="app.regex.twelve.characters">
+    <title id="app.regex.twelve.characters.title">De 12 tekens</title>
+  
+    <para>De twaalf speciale tekens zijn de <emphasis>backslash</emphasis> <literal>\</literal>, de <emphasis>caret</emphasis> <literal>^</literal>, het <emphasis>dollar-teken</emphasis> <literal>$</literal>, de <emphasis>punt</emphasis> (or <emphasis>dot</emphasis>) <literal>.</literal>, de <emphasis>verticale streep</emphasis> (of <emphasis>symbool pipe</emphasis>) <literal>|</literal>, het <emphasis>vraagteken</emphasis> <literal>?</literal>, de <emphasis>asterisk</emphasis> (of <emphasis>sterretje</emphasis>) <literal>*</literal>, het <emphasis>plus-teken</emphasis> <literal>+</literal>, het  <emphasis>haakje</emphasis> voor openen <literal>(</literal>, het <emphasis>haakje</emphasis> voor sluiten, <literal>)</literal>, het <emphasis>vierkante haakje</emphasis> voor openen <literal>[</literal>, en de <emphasis>accolade</emphasis> voor openen <literal>{</literal>.</para>
+
+    <para>Elk teken wordt hieronder kort beschreven met voorbeelden van reguliere expressies die vertrouwen op het teken zelf of tekst waarmee zij wel, of niet, overeenkomen.</para>
+    
+      <variablelist>
+        <varlistentry>
+          <term>De BACKSLASH: <literal>\</literal></term>
+          <listitem>
+            <para>Dit teken ofwel annuleert of activeert de speciale betekenis van het volgende teken.</para>
+            
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>0\.[0-9]</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Een getal tussen <emphasis>0.0</emphasis> en <emphasis>0.9</emphasis>, of slechts het uiteindelijke <emphasis>0.5</emphasis> in cijfers, zoals 10.5 of 560.5.</para>
+
+                      <para>De <literal>\.</literal> annuleert de betekenis “elk teken” van de punt om overeen te komen met de decimale punt, terwijl de <literal>\d</literal> de normale kleine  letter “d” wijzigt naar een expressie die overeenkomt met elk cijfer tussen 0 en 9.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>Reeksen, zoals 0,1, 0-3, of de eerste drie tekens van 0x002E, die zouden overeenkomen als de expressie slechts <literal>0.[0-9]</literal> zou zijn, zonder backslash vóór de punt</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>De CARET: <literal>^</literal></term>
+          <listitem>
+            <para>Waar dit teken het eerste teken in de expressie is, komt het teken <emphasis>caret</emphasis> overeen met het begin van een regel.</para>
+
+            <para>Als het het eerst teken is in een <link linkend="app.regex.types.of.expressions.classes">een tekenklasse die wordt omsloten door vierkante haakjes</link>, komt het overeen met alle tekens die geen deel uitmaken van die klasse.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para><literal>^A</literal></para>
+                        </listitem>
+        
+                        <listitem>
+                          <para>[^abc]</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>De hoofdletter “A” in de volgende zin: “A long, but exciting journey was about to begin”.</para>
+                        </listitem>
+
+                        <listitem>
+                          <para>Elk teken dat <emphasis>niet</emphasis> “a”, “b”, of “c” is. In het woord “back”, bijvoorbeeld, komt alleen de “k” overeen.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <orderedlist>
+                        <listitem>
+                          <para>De hoofdletter “A” in de volgende zin: “My friend is writing a book called <emphasis>A Long Journey</emphasis>”.</para>
+                        </listitem>
+                      
+                        <listitem>
+                          <para>De kleine letter “a”, “b”, of “c” in het woord “back”.</para>
+                        </listitem>
+                      </orderedlist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Het DOLLAR-teken: <literal>$</literal></term>
+          <listitem>
+            <para>Wanneer het het laatste teken in een expressie is, komt het teken <emphasis>dollar</emphasis> overeen met het einde van een regel.</para>
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\w+:$</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Een regel die bestaat uit één enkel woord en eindigt met een dubbele punt:</para>
+                      <para><emphasis>Vragen:</emphasis></para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>Een regel die bestaat uit één enkel woord, maar niet eindigt met een dubbele punt:</para>
+                      <para><emphasis>Vragen?</emphasis></para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>De PUNT: <literal>.</literal></term>
+          <listitem>
+            <para>Komt overeen met elk enkel teken.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>c.t</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Elke combinaties van drie letters die begint met “c” en eindigt met “t”: “<emphasis>cat</emphasis>”, “<emphasis>cut</emphasis>”, “<emphasis>cot</emphasis>”, of zelfs niet zinnige combinaties, zoals “<emphasis>czt</emphasis>” of “<emphasis>cqt</emphasis>”.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>Combinaties die drie letter bevatten, beginnend met “c” en eindigend met “t”, maar over meer dan één regel zijn gesplitst.</para>
+                      <para>Wat is de ontbrekende letter?</para>
+                        <simplelist>
+                          <member><literal>c</literal></member>
+                          <member><literal/></member>
+                          <member><literal>t</literal></member>
+                        </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>De VERTICALE STREEP: <literal>|</literal></term>
+          <listitem>
+            <para>Dit teken functioneert als een “OR” en komt overeen met de expressies ervoor of erachter.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^An|^The</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>De initiële “An” of “The” in frases zoals:<simplelist>
+                          <member>“An apple a day…”</member>
+                          <member>“The apple of my eye…”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>De initiële “An” of “The” in frases zoals:<simplelist>
+                          <member>“A story called <emphasis>An Unsung
+                          Hero</emphasis>.”</member>
+                          <member>“They work for <emphasis>The Daily
+                            Post</emphasis>.”</member>
+                        </simplelist>
+                      </para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Het VRAAGTEKEN: <literal>?</literal></term>
+          <listitem>
+            <para>Dit teken specificeert dat ofwel nul of één voorkomen van het voorafgaande teken of expressie overeen zou moeten komen.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry>
+                      <literal>an?␣</literal> (waar “␣” één enkele spatie weergeeft).</entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Ofwel de “a ” of de “an ” in:<simplelist>
+                          <member>“I have a question.”</member>
+                          <member>“I know an excellent doctor.”</member>
+                        </simplelist>
+                      </para>
+                      
+                      <para>Het zal ook de laatste “an ” vinden van “Can ” in een zin zoals “Can I help you?”, of de laatste “a ” van “pasta ” in “We had pasta for lunch.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>Noch de “a” noch de “an” in:<simplelist>
+                          <member>Het lidwoord: “a” (of “an”).</member>
+                        </simplelist>
+                      </para>
+                      <para>Zij worden niet gevolgd door een spatie.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>De ASTERISK: <literal>*</literal></term>
+          <listitem>
+            <para>Dit teken specificeert dat nul of meer voorkomen van het voorafgaande teken of expressie overeen zou moeten komen.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>run\w*</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Het woord “run”, als ook “runs”, “runner”, “runway”, “runt” in “grunt” of “brunt”, en elk ander woord of reeks van tekens die “run” bevatten, gevolgd door nul of meer “<emphasis>tekens voor woorden</emphasis>” (wat ook cijfers en de underscore omvat, dus het gedeelte vóór de “@” in een e-mailadres, zoals run_123@example.email.org, is ook een overeenkomst).</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>De complete frase in “run-on” of “run'n'gun”, omdat het afbreekstreepje en apostrof niet zijn opgenomen in <literal>\w</literal>. Alleen de initiële “run” in deze frasen komt overeen.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Het PLUS-teken: <literal>+</literal></term>
+          <listitem>
+            <para>Dit teken specificeert dat één of meer voorkomen van het voorafgaande teken of expressie overeen zou moeten komen.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d+.d</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Cijfers, zoals “1.5”, “23.2” of “5235.8” met één enkele decimale plaats en elk aantal cijfers vóór de decimale punt.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>De gehele waarde van cijfers zoals “5,235.8” of “21,571.9”. Alleen het gedeelte achter de duizendtalscheiding zal overeenkomen.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Het HAAKJE VOOR OPENEN: <literal>(</literal></term>
+
+          <listitem>
+            <para>Dit teken begint een <emphasis>groep</emphasis>, wat een set tekens is die wordt behandeld als één enkele eenheid. Groepen zijn genummerd, en de inhoud van de groep wordt opgeslagen in het geheugen. Zij kunnen later in de zoek-expressie worden gebruikt met <literal>\<option>n</option></literal>, waar <option>n</option> het nummer van de groep is.</para>
+
+            <note>
+              <para>De inhoud van de groep kan ook worden gebruikt in de <link linkend="windows.text.replace">vervangende tekst</link>. Gebruik <literal>$<option>n</option></literal>, waar <option>n</option> het nummer van de groep is die is gedefinieerd in de zoekactie.</para>
+            </note>
+
+            <para>Haakjes worden altijd gebruikt in paren van openen en sluiten. Het proberen te gebruiken van alleen het haakje voor openen of sluiten op zichzelf zal een fout veroorzaken.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Dubbele woorden, gescheiden door een spatie, zoals de de opeenvolgende “an” in de volgende zin:</para>
+
+					  <para>“I bought an an apple.”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>De “that, that” in de volgende zin:</para>
+
+					  <para>“But that, that is just unbelievable”, omdat de eerste “that” wordt gevolgd door zowel een komma als een spatie, in plaats van alleen een spatie.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Het HAAKJE VOOR SLUITEN: <literal>(</literal></term>
+
+          <listitem>
+            <para>Dit teken sluit een groep. Het is speciaal omdat het nooit op zichzelf kan worden gebruikt. Het moet worden voorafgegaan door de <literal>\</literal> als u het haakje voor sluiten zelf overeen wil laten komen.</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>^\d+\)</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Het nummer van de reeks (inclusief het haakje) aan het begin van elke regel in een lijst, zoals:</para>
+
+                      <simplelist>
+                        <member>1) Apples</member>
+                        <member>2) Oranges</member>
+                        <member>3) Pears</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>Nummers van reeksen die niet aan het begin van een regel staan.</para>
+
+                      <para>Volg deze stappen:</para>
+                      <simplelist>
+                        <member>Step 1) Preparation</member>
+                        <member>Step 2) …</member>
+                      </simplelist>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Het VIERKANTE HAAKJE VOOR OPENEN: <literal>(</literal></term>
+
+          <listitem>
+            <para>Dit teken moet zijn gepaard aan het vierkante haakje voor sluiten om een set individuele tekens te omsluiten die elk een geldige potentiële overeenkomst weergeven.</para>
+
+            <para>Alleen het vierkante haakje voor openen is speciaal en moet worden voorafgegaan door een backslash om naar het teken voor het haakje zelf te zoeken. Als u alleen het vierkante haakje zelf overeen wilt laten komen, hoeft u dat niet vooraf te laten gaan door een backslash. (U kunt het nog steeds toevoegen, maar het zal geen effect hebben op de expressie of het resultaat.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>li[cs]en[cs]e</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>De correcte spellingen voor “licence” en “license”, als ook de potentieel foute spellingen “lisence” en “lisense”</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>Meer flagrante foute spellingen, zoals “licensse” of “lissense”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Het ACCOLADE VOOR OPENEN: <literal>(</literal></term>
+
+          <listitem>
+            <para>Dit teken moet zijn gepaard aan de accolade voor sluiten om een <emphasis>exact aantal</emphasis>, <emphasis>minimum</emphasis>, <emphasis>maximum</emphasis>, of <emphasis>bereik</emphasis> te omsluiten, die specificeren hoeveel maal het voorkomen van het voorafgaande teken of groep overeen zou moeten komen.</para>
+
+            <para>Alleen de accolade voor openen is speciaal en moet worden voorafgegaan door een backslash om naar het teken voor de accolade zelf te zoeken. Als u alleen de accolade voor sluiten zelf overeen wilt laten komen, hoeft u dat niet vooraf te laten gaan door een backslash. (U kunt het nog steeds toevoegen, maar het zal geen effect hebben op de expressie of het resultaat.)</para>
+
+            <informaltable>
+              <tgroup cols="2">
+                <colspec colwidth="300*"/>
+                <colspec colwidth="700*"/>
+
+                <tbody>
+                  <row>
+                    <entry/>
+                    <entry><literal>\d{4}/\d{1,3}</literal></entry>
+                  </row>
+
+                  <row>
+                    <entry>Overeenkomsten</entry>
+                    <entry>
+                      <para>Codes, zoals “1234/5”, “1472/69”, of “9513/842”, bestaande uit vier cijfers, een slash voorwaarts, en één tot en met drie cijfers.</para>
+                    </entry>
+                  </row>
+
+                  <row>
+                    <entry>Komt niet overeen</entry>
+                    <entry>
+                      <para>Codes zoals “123/45”, “1472/6985”, of “95133/15746”.</para>
+                      <para><emphasis role="bold">Waarschuwing:</emphasis> Hoewel de laatste twee codes hierboven niet volledig overeenkomen, zal de expressie he gedeelte “<emphasis>1472/698</emphasis>” van “1472/6985” teruggeven, als ook de “<emphasis>5133/157</emphasis>” van “95133/15746”.</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+  </section>
+
+  <section id="app.regex.types.of.expressions">
+    <title id="app.regex.types.of.expressions.title">Heel veel expressies</title>
+
+    <para>Dit gedeelte presenteert verscheidene typen reguliere expressies, van eenvoudig tot complex.</para>
+      
+    <note>
+      <para>Onthoud dat de meest <emphasis>alfabetische</emphasis> tekens, die worden voorafgegaan door een <literal>\</literal>, veranderen in een expressie die <emphasis>niet het teken zelf, maar zijn geassocieerde speciale betekenis</emphasis> weergeeft.</para>
+    </note>
+
+    <section id="app.regex.types.of.expressions.simple.expressions">
+      <title id="app.regex.types.of.expressions.simple.expressions.title">Eenvoudige expressies</title>
+      <para>De eenvoudigste reguliere expressie bestaat uit één enkel teken, of combinatie van een <literal>\</literal> en een teken dat een eenheid vormt met één enkele betekenis.</para>
+      
+      <table id="app.regex.characters">
+        <title id="app.regex.characters.title">Tekens</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expressie</entry>
+              <entry align="left">Overeenkomst</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry><literal>x</literal></entry>
+              <entry>
+                <para>Het teken “x” zelf</para>
+                <para>De meeste tekens komen overeen met zichzelf.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\t</literal></entry>
+              <entry>
+                <para>Het teken voor een tab, niet de letter “t”.</para>
+			  </entry>
+            </row>
+
+            <row>
+              <entry><literal>\n</literal></entry>
+              <entry>Het teken voor een nieuwe regel (line feed), niet de letter “n”.</entry>
+            </row>
+
+            <row>
+              <entry><literal>\r</literal></entry>
+              <entry>
+                <para>Het teken voor een harde nieuwe regel (carriage-return), niet de letter “r”.</para>
+                <para>soortgelijk is <literal>\R</literal> elke teken voor het afbreken van een regel.</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.types.of.expressions.case">
+      <title id="app.regex.types.of.expressions.case.title">Hoofd-/Kleine letters</title>
+
+      
+      <para>Gewoonlijk zijn zoekacties van OmegaT standaard niet gevoelig voor het verschil in hoofd- en kleine letters: zij komen overeen met zowel tekens in hoofd- als kleine letters, tenzij u er voor kiest de optie <link linkend="windows.text.search.options" endterm="windows.text.search.options.title"/> in te schakelen. Door dat te doen maakt het de gehele zoek-expressie gevoelig voor hoofd- en kleine letters.</para>
+
+      <para>In tegenstelling daaraan zijn reguliere expressies standaard gevoelig voor hoofd- en kleine letters. Dit betekent, bijvoorbeeld, dat een zoekactie met een reguliere expressie naar “OmegaT”, niet overeen zal komen met “omegat”. Echter, reguliere expressies verschaffen ook speciale aanpassingen om gevoeligheid voor hoofd-/kleine letters binnen de expressie te specificeren:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><literal>(?i)</literal></term>
+          <listitem>
+            <para>Maakt het gedeelte aan de rechterkant van de aanpassing voor de expressie ongevoelig voor hoofd-/kleine letters.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><literal>(?-i)</literal></term>
+          <listitem>
+            <para>Maakt het gedeelte aan de rechterkant van de aanpassing voor de expressie gevoelig voor hoofd-/kleine letters.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+	  
+      <para>U kunt hieruit uw voordeel door een fijnmazig beheer toe te passen voor gevoeligheid voor hoofd-kleine letters in zoekacties. Veronderstel, bijvoorbeeld, dat u wilt zoeken naar het voorkomen van “OmegaT” en “omegat”, maar niet “OMEGAT”. U kunt dat doen met de volgende expressie: <literal>(?i)o</literal><literal>(?-i)mega</literal> <literal>(?i)t</literal>, wat een hoofd-/kleine letters ongevoelige “o” weergeeft, gevolgd door een hoofd-/kleine letters gevoelige “mega”, gevolgd door een hoofd-/kleine letters ongevoelige “t”.</para>
+    </section>
+
+    <section id="app.regex.types.of.expressions.classes">
+      <title id="app.regex.types.of.expressions.classes.title">Klassen</title>
+
+      <para>Reguliere expressies stellen u in staat sets van tekens te maken—bekend als <emphasis>klassen</emphasis>. Zoekacties zullen overeenkomen met elk van de tekens in de set.</para>
+
+	  <para>Klassen worden gedefinieerd door de gewenste te omsluiten met vierkante haken, en kunnen worden gespecificeerd ofwel door elk individueel teken te vermelden om te worden opgenomen, of door het specificeren van een bereik van tekens. U zou, bijvoorbeeld, de klasse <literal>[£€$]</literal> kunnen maken om te zoeken naar één van deze symbolen voor valuta in de tekst, of [1-3] om te zoeken naar de cijfers 1, 2 of 3.</para>
+
+      <note>
+        <para>Binnen een klasse zijn alleen de backslash (<literal>\</literal>), caret (<literal>^</literal>), vierkante haakje voor sluiten (<literal>]</literal>) en afbreekstreepje (<literal>-</literal>) speciaal. De rest van de twaalf tekens zijn normaal, en hoeven niet te worden voorafgegaan door een backslash als u wilt zoeken naar deze tekens zelf.</para>
+
+		<para>U kunt zoeken naar elk van de vier klassen voor speciale tekens als voor normale tekens door ze vooraf te laten gaan door een backslash. U kunt ook zoeken naar de caret, vierkante haakje voor sluiten en afbreekstreepje als zichzelf door ze te plaatsen op een positie die niet hun speciale betekenis activeert: overal, behalve direct achter het vierkante haakje voor openen voor de caret, direct achter ofwel het vierkante haakje voor openen of de caret gevolgd door het vierkante haakje voor sluiten, en ofwel net na het vierkante haakje voor openen of net voor het vierkante haakje voor sluiten voor het afbreekstreepje.</para>
+      </note>
+
+	  <para>Veel frequent gebruikte hebben een vorm van een sneltoets de bestaat uit een backslash, gevolgd door een van het alfabet. Bijvoorbeeld <literal>\d</literal> is een sneltoets voor <literal>[0-9]</literal>, wat overeenkomt met elk cijfer tussen 0 tot en met 9. In veel gevallen wordt de overeenkomende hoofdletter gebruikt om de betekenis van de teniet te doen: <literal>\D</literal> komt overeen met elk dat <emphasis role="bold">geen</emphasis> cijfer is.</para>
+      <para>De tabel hieronder verschaft verschillende aanvullende voorbeelden. Deze klassen geven nooit alleen de feitelijke letter weer die wordt gebruikt om de sneltoets te vormen.</para>
+      
+      <table id="app.regex.classes">
+        <title id="app.regex.classes.title">Voorbeelden van klassen</title>
+
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expressie</entry>
+              <entry align="left">Overeenkomst</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            
+            <row>
+              <entry><literal>[abc]</literal></entry>
+              <entry>
+                <para>De letter “a”, “b”, of “c”.</para>
+
+				<para>Een eenvoudige klasse bestaat uit elk aantal tekens, omsloten door <literal>[</literal> en <literal>]</literal>.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[C-X]</literal></entry>
+              <entry>
+                <para>Een teken in het bereik van “C” tot en met “X”.</para>
+
+				<para>Een bereik wordt gedefinieerd door het eerste teken in een serie, gevolgd door een afbreekstreepje, gevolgd door het laatste teken in de serie. Elk aantal bereiken kan worden gedefinieerd: <literal>[a-zA-Z0-9]</literal> betekent elke kleine letter van “a” tot en met “z”, of elke hoofdletter van “A” tot en met “Z”, of enig cijfer van “0” tot en met “9”. Een afbreekstreepje dat is geplaatst buiten de serie is slechts een afbreekstreepje: <literal>[a-z-]</literal> betekent elke kleine letter van “a” tot en met “z”, of het teken voor het afbreekstreepje zelf.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>[^\n\r\t]</literal></entry>
+              <entry>
+                <para>Elk teken, <emphasis>behalve</emphasis> een nieuwe regel, een harde nieuwe regel, of tab.</para>
+
+                <para>De caret die is geplaatst direct achter het vierkante haakje voor openen sluit de rest van de tekens in de klasse uit.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\w</literal></entry>
+              <entry>
+                <para>Een teken voor een woord, over het algemeen gedefinieerd als <literal>[A-Za-z0-9_]</literal>.</para>
+
+                <para><literal>\W</literal> is elk teken dat <emphasis role="bold">geen</emphasis> teken voor een woord (<literal>[^\w]</literal>) is.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry><literal>\s</literal></entry>
+              <entry>
+                <para>Een teken voor witruimte, inclusief de tekens voor spatie en tab, als ook regeleinden.</para>
+
+                <para><literal>\S</literal> is elk teken dat <emphasis role="bold">geen</emphasis> teken voor witruimte (<literal>[^\s]</literal>) is.</para>
+              </entry>
+            </row>
+
+            <row>
+              <entry>
+				<literal>\h</literal> en <literal>\v</literal>
+			  </entry>
+
+              <entry>
+				<para>Horizontale en verticale witruimte (over het algemeen heeft dit de voorkeur boven <literal>\s</literal>).</para>
+
+				<para><literal>\H </literal> is elk teken dat <emphasis role="bold">geen</emphasis> teken voor horizontale witruimte is, en <literal>\V</literal> elk teken dat <emphasis role="bold">geen</emphasis> teken voor verticale witruimte is, respectievelijk (<literal>[^\h]</literal> en <literal>[^\v]</literal>).</para>
+			  </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      
+      <para>Reguliere expressies zijn niet beperkt tot alfanumerieke tekens. Zij bedekken de gehele Unicode tekenset. Gebruik Unicode-blokken, scripts en categorieën om tekenklassen te specificeren buiten het bereik van alfanumerieke tekens. Een aantal voorbeelden worden in de tabel hieronder weergegeven.</para>
+
+      <para>Bekijk ook <ulink url="https://www.regular-expressions.info/unicode.html">Unicode Regular Expressions</ulink> voor een uitgebreide beschouwing van reguliere expressies voor Unicode.</para>
+
+      <table id="app.regex.unicode.blocks">
+        <title id="app.regex.unicode.blocks.title">Unicode-blokken, scripts en categorieën</title>
+        
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+          <thead>
+            <row>
+              <entry align="left">Expressie</entry>
+              <entry align="left">Overeenkomst</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>\p{InGreek}</literal></entry>
+              <entry>
+                <para>Een teken in het Griekse blok (<ulink url="https://unicode.org/reports/tr18/#Blocks">Unicode-blok</ulink>)</para>
+				
+                <para><literal>\P{InGreek}</literal> is elk teken dat <emphasis role="bold">niet</emphasis> in het Griekse blok staat.</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{IsHan}</literal></entry>
+              <entry>
+                <para>Een logogram (teken voor <emphasis>Han</emphasis>/<emphasis>kanji</emphasis>/<emphasis>hanja</emphasis>) te vinden in CJK-talen (<ulink url="https://unicode.org/reports/tr18/#Script_Property">Unicode script</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Lu}</literal></entry>
+              <entry>
+                <para>Een hoofdletter (<ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode categorie</ulink>)</para>
+              </entry>
+            </row>
+          
+            <row>
+              <entry><literal>\p{Sc}</literal></entry>
+              <entry>
+                <para>Een valutasymbool, dat ook een <ulink url="https://unicode.org/reports/tr18/#General_Category_Property">Unicode categorie</ulink> is.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="app.regex.more.advanced.expressions">
+      <title id="app.regex.more.advanced.expressions.title">Meer geavanceerde expressies</title>
+      
+      <para>Sommige expressies specificeren een positie in plaats van een teken. Zij geven aan waar in de tekst moet worden gezocht voor de overeenkomst, maar bevatten geen tekens in die overeenkomst. De tabel hieronder vermeld een aantal meer algemene voorbeelden. Bekijk de pagina's in het gedeelte <link linkend="app.regex.tools" endterm="app.regex.tools.title"/> voor informatie.</para>
+
+      <table id="app.regex.boundary.matchers">
+        <title id="app.regex.boundary.matchers.title">Expressies die een positie markeren</title>
+      
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <thead>
+            <row>
+              <entry align="left">Expressie</entry>
+              <entry align="left">Overeenkomst</entry>
+            </row>
+          </thead>
+          
+          <tbody>
+            <row>
+              <entry><literal>^</literal></entry>
+              <entry>
+                <para>Het begin van een regel</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>$</literal></entry>
+              <entry>
+                <para>Het einde van een regel</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\b</literal></entry>
+              <entry>
+                <para>Een woordgrens</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>\B</literal></entry>
+              <entry>
+                <para><emphasis>Geen</emphasis>  woordgrens</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?=u)</literal></entry>
+              <entry>
+                <para>Een teken, gevolgd door een “u”.</para>
+				
+                <para>Bijvoorbeeld, <literal>q(?=u)</literal> komt overeen met de letter “q” wanneer die wordt gevolgd door een “u”. Het komt daarom overeen met de “q” in “equal” of “question”, maar <emphasis>niet</emphasis> die in “qigong” of “Iraq”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?!u)</literal></entry>
+              <entry>
+                <para>Een teken dat <emphasis>niet</emphasis> wordt gevolgd door de letter “u”.</para>
+				
+                <para>Bijvoorbeeld, <literal>q(?!=u)</literal> komt overeen met de letter “q” wanneer die <emphasis>niet</emphasis> wordt gevolgd door een “u”. Het komt daarom overeen met de “q” in “qigong” of “Iraq”, maar <emphasis>niet</emphasis> die in “equal” of “question”.</para>
+              </entry>
+            </row>
+            
+            <row>
+              <entry><literal>(?&lt;=q)</literal></entry>
+              <entry>
+                <para>Een teken voorafgegaan door de “q”.</para>
+				
+                <para>Bijvoorbeeld, <literal>q(?&lt;=u)</literal> komt overeen met de letter “u” wanneer die achter “q” staat. Het komt daarom overeen met de “u” in “quick”, maar niet die in “run”.</para>
+              </entry>
+            </row>
+        
+            <row>
+              <entry><literal>(?&lt;!q)</literal></entry>
+              <entry>
+                <para>Een teken dat <emphasis>niet</emphasis> wordt voorafgegaan door de letter “q”.</para>
+				
+                <para>Bijvoorbeeld, <literal>q(?&lt;!=u)</literal> komt overeen met de letter “u” wanneer die <emphasis>niet</emphasis> achter “q” staat. Het komt daarom overeen met de “u” in “run”, maar <emphasis>niet</emphasis> die in “quick”.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>  
+  </section>
+
+  <section id="app.regex.more.examples">
+    <title id="app.regex.more.examples.title">Meer voorbeelden</title>
+
+    <para>Dit gedeelte geeft een aantal voorbeelden weer die demonstreren hoe de verschillende hierboven beschreven kunnen worden gecombineerd op krachtige zoekacties in OmegaT uit te voeren.</para>
+    
+    <table id="regex.examples">
+      <title id="regex.examples.title">Voorbeelden van reguliere expressies die de hierboven vermelde expressies gebruiken</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Expressie</entry>
+            <entry>Doel</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry><literal>(\b\w+\b)\h\1\b</literal></entry>
+            <entry>
+              <para>Zoek naar dubbele woorden.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>,\h[\h(\w+\.\w+)\w,'ʼ&quot;“”-]+[\.,]</literal></entry>
+            <entry>
+              <para>Zoek naar clausules die beginnen met een komma, gevolgd door een teken voor witruimte, één of meer woorden bevatten (inclusief woorden tussen aanhalingstekens, samenvoegingen, en bestandsnamen met een bestandsextensie), en eindigen met ofwel een komma of een punt.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\. \h+$</literal></entry>
+            <entry>
+              <para>Zoek extra witruimte achter de punt aan het einde van een regel.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+a\h+[aeiou]</literal></entry>
+            <entry>
+              <para>Zoek woorden die beginnen met een klinker na het lidwoord “a” in plaats van “an”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\h+an\h+[^aeiou]</literal></entry>
+            <entry>
+              <para>Het tegenovergestelde van het vorige voorbeeld. Zoek woorden die beginnen met een medeklinker na het lidwoord “an” in plaats van “a”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\d{4}([/\.-]\d{1,2}){2}</literal></entry>
+            <entry>
+              <para>Zoek numerieke datums in de volgorde jaar, maand en dag waarbij de dag en maand worden gescheiden door een slash, punt, of afbreekstreepje, zoals:</para>
+			  
+                <itemizedlist>
+                  <listitem>
+                    <para>2002/11/8</para>
+                  </listitem>
+                  <listitem>
+                    <para>1969.7.20</para>
+                  </listitem>
+                  <listitem>
+                    <para>2022-10-31</para>
+                  </listitem>
+                </itemizedlist>
+
+				<note>
+                  <para>Deze expressie zoekt patronen van getallen en scheidingstekens die overeenkomen met mogelijke datums, maar valideert ze niet. Het zal ook patronen vinden zoals “5136/36/71”.</para>
+				</note>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\.[A-Z]</literal></entry>
+            <entry>
+              <para>Zoek een punt, gevolgd door een hoofdletter. Nuttig om te zoeken naar mogelijke ontbrekende spaties tussen de punt en het begin van een nieuwe zin</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>\bis\b</literal></entry>
+            <entry>
+              <para>Zoek naar “is” als een heel woord in een zin, zonder overeen te komen met “this”, “isn’t”, of zelfs “Is”.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry><literal>[\w\.-]+@[\w\.-]+</literal></entry>
+            <entry>
+              <para>Zoek een e-mailadres. Deze eenvoudige expressie zou niet voor elke mogelijke geldige indeling voor een e-mailadres kunnen gelden.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="app.regex.tools">
+    <title id="app.regex.tools.title">Verwijzingen</title>
+
+    <para>Hoewel OmegaT geen mooie kleuren aanbiedt voor uw reguliere expressies, kunt u veel oefenen door het venster <link linkend="windows.text.search" endterm="windows.text.search.title"/> te gebruiken omdat OmegaT de overeenkomende resultaten wel een kleur geeft.</para>
+    
+    <para>Een aantal aanvullende bronnen worden hieronder weergegeven.</para>
+
+    <para>De technische verwijzing voor Java is nuttig als een canonieke verwijzing.<variablelist>
+        <varlistentry id="app.regex.java">
+          <term id="app.regex.java.title"><ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html">Documentatie voor Java Regex </ulink></term>
+          <listitem>
+            <para>De officiële verwijzing voor reguliere expressies die worden gebruikt in Java.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>Als u meer wilt leren over het gebruiken van reguliere expressies, hebben de volgende twee pagina's bewezen heel nuttig te zijn.<variablelist>
+        <varlistentry id="app.regex.tools.regex101">
+          <term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
+          <listitem>
+            <para>Een online programma voor overeenkomsten van reguliere expressies dat u de tekst in laat voeren die u wilt zoeken en de reguliere expressies die u wilt testen.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry id="app.regex.tools.regular.expression.info">
+          <term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+          <listitem>
+            <para>Een van de meest uitgebreide handleidingen voor reguliere expressies en verwijzingen op het web.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <note>
+        <para>OmegaT ondersteunt op geen enkele wijze de beide pagina's. Als u andere interessante verwijzingen vindt—in elke taal—zou het team van OmegaT dat graag horen.</para>
+      </note>
+    </para>
+  </section>
+</section>

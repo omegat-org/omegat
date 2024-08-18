@@ -3,8 +3,8 @@
 <chapter id="chapter.windows.and.dialogs">
   <title id="chapter.windows.and.dialogs.title">Fenster und Dialogfenster</title>
   
-  <para>Ein <emphasis>Fenster</emphasis> kann parallel zum Editor offen sein und lässt Sie mit beiden interagieren.</para>
-  <para>Ein <emphasis>Dialogfenster</emphasis> verlangt eine Aktion von Ihnen und muss geschlossen werden, bevor Sie mit dem Übersetzen weitermachen können.</para>
+  <para>Ein <emphasis>Fenster</emphasis> kann parallel zum Editor geöffnet sein und ermöglicht die Interaktion mit beiden.</para>
+  <para>Ein <emphasis>Dialogfenster</emphasis> verlangt eine Aktion von Ihnen und muss geschlossen werden, bevor Sie mit der Übersetzung fortfahren können.</para>
 
   <xi:include href="Dialogs_ProjectProperties.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

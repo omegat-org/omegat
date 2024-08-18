@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="configuration.folder">
+  <title id="configuration.folder.title">Configuratiemap</title>
+  <para>De configuratiemap bevat de meerderheid van de opties voor OmegaT en de voorkeuren voor de gebruiker.</para>
+  
+  <para>Gebruik <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.access.configuration.folder" endterm="menus.options.access.configuration.folder.title"/> om er direct toegang toe te krijgen.</para>
+
+  <section id="configuration.folder.location">
+    <title id="configuration.folder.location.title">Locatie</title>	
+	<para>De locatie van de standaard configuratiemap varieert per systeem (het teken <emphasis>~</emphasis> geeft uw thuismap aan):<variablelist>
+	  <varlistentry><term>Linux</term><listitem><para><filename>~/.Omegat</filename></para></listitem></varlistentry>
+	  <varlistentry><term>macOS</term><listitem><para><filename>~/Library/Preferences/OmegaT</filename></para></listitem></varlistentry>
+	  <varlistentry><term>Windows</term><listitem><para><filename>~\AppData\Roaming\OmegaT</filename></para></listitem></varlistentry>
+	</variablelist></para>
+
+	<note>
+	  <para>Normaal gesproken is het niet nodig om OmegaT te starten vanaf de opdrachtregel. Bekijk de <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> how-to voor details.</para>
+
+	  <para>Aangepaste voorkeuren worden opgeslagen in de configuratiemap die wordt gebruikt door het project. Als u de standaard configuratiemap niet gebruikt, zullen alle wijzigingen die worden gemaakt in de <link linkend="chapter.dialogs.preferences">voorkeuren</link> worden opgeslagen in de gespecificeerde configuratiemap en en zullen niet verschijnen wanneer u uw werk voortzet met de standaard configuratiemap.</para>
+	</note>
+  </section>
+  
+  <section id="configuration.folder.default.contents">
+    <title id="configuration.folder.default.contents.title">Standaard inhoud</title>
+	<variablelist>
+	  <varlistentry id="configuration.folder.default.contents.omegat.prefs">
+		<term id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</term>
+		<listitem>
+		  <para>Dit bestand bevat een aantal belangrijke voorkeuren van de gebruiker.</para>
+
+		  <para>Sommige voorkeuren hebben geen equivalent in de gebruikersinterface. Zij moeten handmatig worden aangepast.</para>
+		  
+		  <example id="no.source.file.display">
+			<title id="no.source.file.display.title">Lijst met Bronbestanden niet automatisch weergeven</title>
+			<para>Zoek, om te voorkomen dat het venster met de lijst met Bronbestanden automatisch opent als een project wordt geladen, <token>&lt;project_files_show_on_load&gt;</token> en vervang <token>true</token> door <token>false</token>:</para>
+
+			<para><programlisting>&lt;project_files_show_on_load&gt;<token>false</token>&lt;/project_files_show_on_load&gt;</programlisting></para>
+		  </example>
+		  
+		  <note>
+			<para>Momenteel vereist alleen deze voorkeur handmatige aanpassing.</para>
+		  </note>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="configuration.folder.default.contents.uilayout">
+		<term id="configuration.folder.default.contents.uilayout.title">uiLayout.xml</term>
+		<listitem>
+		  <para>Dit bestand beschrijft de algehele lay-out van OmegaT.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="configuration.folder.default.contents.logs">
+		<term id="configuration.folder.default.contents.logs.title">logs/</term>
+		<listitem>
+		  <para>Deze map bevat een aantal logbestanden. Het meest recente is <filename>OmegaT.log</filename>.</para>
+
+		  <para>Deze bestanden leggen verschillende interne status en berichten voor programmagebeurtenissen vast, gegenereerd terwijl OmegaT wordt uitgevoerd. Als OmegaT zich vreemd lijkt te gedragen is neem dan dit bestand, of het relevante gedeelte daarvan, op in uw foutenrapport.</para>
+
+		  <para>Gebruik <link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/> om de inhoud van het bestand te bekijken.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="configuration.folder.default.contents.script">
+		<term id="configuration.folder.default.contents.script.title">script/</term>
+		<listitem>
+		  <para>Als de toepasbare functies worden gebruikt kan deze map tot drie tekstbestanden bevatten:</para>
+
+		  <variablelist>
+			<varlistentry id="configuration.folder.default.contents.script.selection">
+			  <term id="configuration.folder.default.contents.script.selection.title">selection.txt</term>
+			  <listitem>
+				<para>Dit bestand slaat de huidige geselecteerde tekst op als <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.export.selection" endterm="menus.edit.export.selection.title"/> wordt gebruikt. De tekst in het bestand wordt, elke keer als de functie wordt aangeroepen, vervangen.</para>
+			  </listitem>
+			</varlistentry>
+		  
+			<varlistentry id="configuration.folder.default.contents.script.source">
+			  <term id="configuration.folder.default.contents.script.source.title">source.txt</term>
+			  <listitem>
+				<para>Dit bestand bevat de <emphasis>originele tekst</emphasis> uit het huidige segment als de voorkeur <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is ingeschakeld. De tekst in het bestand wordt elke keer vervangen als een nieuw segment wordt ingevoerd.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry id="configuration.folder.default.contents.script.target">
+			  <term id="configuration.folder.default.contents.script.target.title">target.txt</term>
+			  <listitem>
+				<para>Dit bestand bevat de <emphasis>vertaalde tekst</emphasis> uit het huidige segment als de voorkeur <link linkend="dialogs.preferences.editor.export.the.segment.to.text.files" endterm="dialogs.preferences.editor.export.the.segment.to.text.files.title"/> is ingeschakeld. De tekst in het bestand wordt elke keer vervangen als een nieuw segment wordt ingevoerd.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+
+		  <para>Deze drie bestanden verschaffen een eenvoudige manier om toegang te verkrijgen tot enige inhoud van OmegaT en het te verwerken met lokale programma's, zoals shell scripts.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="configuration.folder.extra.contents">
+    <title id="configuration.folder.extra.contents.title">Aanvullende inhoud</title>
+
+	<variablelist>
+	  <varlistentry id="configuration.folder.extra.contents.editorshortcuts">
+		<term id="configuration.folder.extra.contents.editorshortcuts.title">EditorShortcuts.properties</term>
+		<listitem>
+		  <para>Dit parameterbestand bevat aangepaste sneltoetsen voor de bewerker. Bekijk de appendix <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> voor details.</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry id="configuration.folder.extra.contents.maninmenushortcut">
+		<term id="configuration.folder.extra.contents.maninmenushortcut.title">MainMenuShortcuts.properties</term>
+		<listitem>
+		  <para>Dit parameterbestand bevat aangepaste sneltoetsen voor de gebruikersinterface. Bekijk de appendix <link linkend="app.shortcuts.customization" endterm="app.shortcuts.customization.title"/> voor details.</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry id="configuration.folder.extra.contents.filters">
+		<term id="configuration.folder.extra.contents.filters.title">filters.xml</term>
+		<listitem>
+		  <para>Dit parameterbestand bevat aangepaste bestandsfilters. Bekijk de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> voor details.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="configuration.folder.extra.contents.finder">
+		<term id="configuration.folder.extra.contents.finder.title">finder.xml</term>
+		<listitem>
+		  <para>Dit parameterbestand bevat aangepaste parameters voor Extern zoeken. Bekijk de voorkeuren <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> voor details.</para>
+		</listitem>
+	</varlistentry>
+	
+	<varlistentry id="configuration.folder.extra.contents.omegat.autotext">
+	  <term id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</term>
+	  <listitem>
+		<para>Dit parameterbestand bevat aangepaste parameters voor autotekst. Bekijk de voorkeuren <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> voor details.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.repositories">
+	  <term id="configuration.folder.extra.contents.repositories.title">repositories.properties</term>
+	  <listitem>
+		<para>Dit bestand bevat de informatie voor het inloggen in uw opslagplaatsen voor teamprojecten.<warning><para>De bestandsinhoud is niet versleuteld.</para></warning>Bekijk de <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> how-to voor details.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.segmentation">
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <listitem>
+		<para>Dit parameterbestand bevat aangepaste parameters voor segmentatie. Bekijk de voorkeuren <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> voor details.</para>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry id="configuration.folder.extra.contents.plugin">
+	  <term id="configuration.folder.extra.contents.plugin.title">plug-ins/</term>
+	  <listitem>
+		<para>Deze map verschaft de standaard locatie voor handmatig geïnstalleerde plug-ins voor uitbreiding van OmegaT. Bekijk de <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> voorkeur voor details.</para>
+		<para>Het is ook mogelijk plug-ins te installeren in de map <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> voor de toepassing.</para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="configuration.folder.extra.contents.spelling">
+	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
+	  <listitem>
+		<para>Deze map bevat uw woordenboeken voor de spellingscontrole. Bekijk de voorkeuren <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> voor details.</para>
+	  </listitem>
+	</varlistentry>
+	</variablelist>
+  </section>
+</section>

@@ -108,7 +108,7 @@
     <varlistentry id="menus.tools.match.statistics">
       <term id="menus.tools.match.statistics.title"><guimenuitem>Estadístiques de coincidències</guimenuitem></term>
       <listitem>
-        <para>Mostra les estadístiques de coincidències del projecte: nombre de repeticions, coincidències exactes, coincidències parcials i no concordances per segments, paraules i caràcters.</para>
+        <para>Mostra les estadístiques de coincidències del projecte: nombre de repeticions, coincidències exactes, coincidències parcials i no coincidències per segments, paraules i caràcters.</para>
 
 		<para>Les dades es desen en el fitxer <link linkend="project.folder.omegat.project.stats.match" endterm="project.folder.omegat.project.stats.match.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> del projecte.</para>
       </listitem>
@@ -117,7 +117,7 @@
     <varlistentry id="menus.tools.match.statistics.per.file">
       <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Estadístiques de coincidències per fitxer</guimenuitem></term>
       <listitem>
-        <para>Mostra les estadístiques de coincidències individuals: nombre de repeticions, coincidències exactes, coincidències parcials i no concordances per segments, paraules i caràcters, per a cada fitxer del projecte.</para>
+        <para>Mostra les estadístiques de coincidències individuals: nombre de repeticions, coincidències exactes, coincidències parcials i no coincidències per segments, paraules i caràcters, per a cada fitxer del projecte.</para>
 
 		<para>Les dades es desen en el fitxer <link linkend="project.folder.omegat.project.stats.match.per.file" endterm="project.folder.omegat.project.stats.match.per.file.title"/> de la carpeta <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/> del projecte.</para>
       </listitem>

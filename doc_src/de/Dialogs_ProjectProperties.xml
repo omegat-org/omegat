@@ -5,46 +5,46 @@
 
   <para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>, um das Dialogfenster zu öffnen.</para>
   
-  <para>In diesem Dialogfenster können Sie die anfänglichen Projekteigenschaften beim Erstellen eines neuen Projekts festlegen oder später nachträglich ändern.</para>
+  <para>In diesem Dialogfenster können Sie die anfänglichen Projekteigenschaften beim Erstellen eines neuen Projekts festlegen oder später ändern.</para>
 
-  <para>Einzelheiten finden Sie unter <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/>.</para>
+  <para>Einzelheiten finden Sie im Kapitel <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/>.</para>
   
 
   <section id="dialogs.project.properties.languages">
     <title id="dialogs.project.properties.languages.title"><guilabel>Sprachen</guilabel></title>
 
-    <para>Wählen Sie die Quell- und Zielsprache in der Aufklappliste aus, oder geben Sie sie manuell ein.</para>
+    <para>Wählen Sie die Quell- und Zielsprache in den Aufklapplisten aus oder tragen Sie sie manuell ein.</para>
 
-	<para>OmegaT bietet eine kurze Liste von zweistelligen Sprachcodes, aber Sie können jeden Code, der mit <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> konform ist (einschließlich der dreistelligen Sprachcodes), in das entsprechende Feld eingeben.</para>
+	<para>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können die Codes (zweistellig oder dreistellig) auch manuell in die Felder eintragen. Beachten Sie, dass die Codes konform mit <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> sein müssen.</para>
 	
 	<para>Sprachcodes werden an verschiedenen Stellen in OmegaT verwendet, um:</para>
 	
 	<itemizedlist>
 	  <listitem>
-		<para>Übereinstimmungen im <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>-Bereich zu finden,</para>
+		<para>Übereinstimmungen im Fensterbereich <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> zu finden,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>Segmentierungsregeln anzuwenden, die in den <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>-Einstellungen definiert wurden,</para>
+		<para>Segmentierungsregeln gemäß den Einstellungen <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> anzuwenden,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>Rechtschreibfehler mittels Wörterbüchern zu finden, die mit den <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/>-Einstellungen installiert wurden,</para>
+		<para>Rechtschreibfehler mittels Wörterbüchern gemäß den Einstellungen <link linkend="dialog.preferences.spellchecker" endterm="dialog.preferences.spellchecker.title"/> zu finden,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>grammatikalische und typografische Fehler mittels Regeln zu finden, die in den <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>-Einstellungen festgelegt wurden,</para>
+		<para>grammatikalische und typografische Fehler mittels Regeln gemäß den Einstellungen <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> zu finden,</para>
 	  </listitem>
 	</itemizedlist>
 
 	  <para>und so weiter.</para>
 
 	<warning>
-	  <para>Achten Sie darauf, dass Sie die richtigen Sprachcodes eingeben und dass alle anderen Orte, die einen solchen Code erfordern, genau mit dem Code übereinstimmen, den Sie hier eingegeben haben. Sprachabhängige Funktionen schlagen fehl oder liefern falsche Ergebnisse, wenn die Sprachcodes nicht übereinstimmen.</para>
+	  <para>Vergewissern Sie sich, dass Sie die richtigen Sprachcodes eingetragen haben und dass alle anderen Stellen, an denen ein Code erforderlich ist, genau diesen Codes entsprechen. Sprachabhängige Funktionen schlagen fehl oder liefern falsche Ergebnisse, wenn die Sprachcodes nicht übereinstimmen.</para>
 	</warning>
 
 	  
-      <para>OmegaT wählt automatisch die Tokenizer aus, die der Quell- und Zielsprache entsprechen, aber Sie können solche Einstellungen auch manuell ändern. Die Tokenizer helfen OmegaT, bessere Treffer zu liefern.</para>
+      <para>OmegaT wählt automatisch die Tokenizer aus, die der Quell- und Zielsprache entsprechen, aber Sie können diese auch manuell ändern. Die Tokenizer helfen OmegaT, bessere Treffer zu liefern.</para>
   </section>
 
   <section id="dialogs.project.properties.options">
@@ -57,7 +57,7 @@
 		<listitem>		  
           <para>Die Satzsegmentierung teilt Absätze oder andere Textblöcke der Quelldatei in mehrere Segmente auf, basierend auf den Segmentierungsregeln.</para>
 
-		  <para>Deaktivieren Sie diese Option, wenn die Absätze nicht weiter aufgeteilt werden sollen.</para>
+		  <para>Deaktivieren Sie diese Option, wenn die Absätze nicht weiter segmentiert werden sollen.</para>
 
 		  <para>Standardmäßig sind Segmentierungsregeln global und gelten für alle Projekte.</para>
 
@@ -68,14 +68,14 @@
 		  <para>Einzelheiten finden Sie im Abschnitt <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>.</para>
 
 		  <note>
-			<para>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber diese zu ändern, wirkt sich nicht auf Ihr Projekt aus.</para>
+			<para>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber eine Änderung der globalen Regeln wirkt sich nicht auf Ihr Projekt aus.</para>
 		  </note>
 		  
-		  <para>Wenn Sie die Segmentierungsregeln während einer laufenden Übersetzung ändern, werden die registrierten Segmente im Translation Memory des Projekts nicht verändert.</para>
+		  <para>Eine Änderung der Segmentierungsregeln während einer laufenden Übersetzung hat keine Auswirkungen auf die im Translation Memory des Projekts registrierten Segmente.</para>
 		  
-		  <para>Der Wechsel von <emphasis role="bold">Satz</emphasis>- zu <emphasis role="bold">Absatz</emphasis>-Segmentierung mitten in der Übersetzung könnte OmegaT dazu zwingen, alte Translation Memories zu aktualisieren, die keine Satzsegmentierung verwenden, aber nicht umgekehrt. Allerdings wird OmegaT versuchen, Fuzzy Matches für Absätze zu erstellen, indem es vorhandene Satzübersetzungen kombiniert.</para>
+		  <para>Das Umschalten von <emphasis role="bold">Satzsegmentierung</emphasis> auf <emphasis role="bold">Absatzsegmentierung</emphasis> während einer laufenden Übersetzung kann OmegaT dazu zwingen, alte Translation Memories zu aktualisieren, die keine Satzsegmentierung verwendet haben, aber nicht umgekehrt. Allerdings wird OmegaT versuchen, Fuzzy Matches für Absätze zu erstellen, indem es vorhandene Satzübersetzungen kombiniert.</para>
 
-		  <para>Wenn Sie die Segmentierung während einer laufenden Übersetzung ändern, müssen Sie das Projekt neu laden, damit die neue Segmentierung wirksam wird. Dabei werden einige zuvor übersetzte Segmente geteilt oder zusammengeführt, wodurch sie nicht mehr übersetzt sind. Die Originalübersetzung bleibt jedoch im Translation Memory des Projekts erhalten.</para>
+		  <para>Wenn Sie die Segmentierung während einer laufenden Übersetzung ändern, müssen Sie das Projekt neu laden, damit die neue Segmentierung wirksam wird. Dabei kann es vorkommen, dass einige bereits übersetzte Segmente geteilt oder zusammengeführt werden, wodurch sie nicht mehr übersetzt sind. Die ursprüngliche Übersetzung bleibt jedoch im Translation Memory des Projekts erhalten.</para>
 
 		  <para>Allgemeine Erläuterungen zur Segmentierung (global oder lokal, Absatz oder Satz, Einstellungen usw.) finden Sie unter <link linkend="app.segmentation" endterm="app.segmentation.title"/>.</para>
         </listitem>
@@ -89,14 +89,14 @@
 		  
 			<para>Die angezeigten Segmentierungsregeln beim Öffnen der Einstellungen <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/> (via <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.segmentation" endterm="menus.options.segmentation.title"/>) sind globale Regeln.</para>
 
-		  <para>Verwenden Sie diese Schaltfläche, um lokale Regeln für Ihr Projekt festzulegen. Setzen Sie ein Häkchen bei <option>Lokale Segmentierungsregeln verwenden</option>, und passen Sie die Segmentierungsregeln nach Belieben an.</para>
+		  <para>Verwenden Sie diese Schaltfläche, um lokale Regeln für Ihr Projekt festzulegen. Aktivieren Sie die Option <option>Lokale Segmentierungsregeln verwenden</option> und passen Sie die Segmentierungsregeln nach Bedarf an.</para>
 		  
 		  <para>Das Projekt speichert den neuen Satz von Regeln in die Datei <link linkend="project.folder.omegat.segmentation" endterm="project.folder.omegat.segmentation.title"/> im Ordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Diese Regeln haben Vorrang vor den globalen Segmentierungsregeln.</para>
 		  
-		  <para>Um lokale Segmentierungsregeln zu deaktivieren, entfernen Sie das Häkchen bei dieser Option oder löschen Sie die Datei.</para>
+		  <para>Um lokale Segmentierungsregeln zu deaktivieren, deaktivieren Sie diese Option oder löschen Sie die Datei.</para>
 
 		  <warning>
-			<para>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber diese zu ändern, wirkt sich nicht auf Ihr Projekt aus.</para>
+			<para>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber eine Änderung der globalen Regeln wirkt sich nicht auf Ihr Projekt aus.</para>
 		  </warning>
 
 		  <para>Allgemeine Erläuterungen zur Segmentierung (global oder lokal, Absatz oder Satz, Einstellungen usw.) finden Sie unter <link linkend="app.segmentation" endterm="app.segmentation.title"/>.</para>
@@ -108,11 +108,11 @@
         <term id="dialogs.project.properties.auto.propagation.title"><option>Auto-Propagation von Übersetzungen</option></term>
 
 		<listitem>
-          <para>Wenn mehrmalige Segmente in den Quelldokumenten vorhanden sind und ein Häkchen bei dieser Option gesetzt ist, wird das erste übersetzte Segment als Standard festgelegt, was zur Folge hat, dass alle Segmente mit demselben Quelltext automatisch den Zieltext der Standardübersetzung erhalten.</para>
+          <para>Wenn die Quelldokumente wiederkehrende Segmente aufweisen, wird durch Aktivieren dieser Option das erste übersetzte Segment als Standardübersetzung festgelegt und in den übrigen wiederkehrenden Segmenten automatisch der gleiche Zieltext verwendet.</para>
 		  
 		  <para>Verwenden Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/>, um einem Segment, das eine andere Übersetzung erfordert, eine alternative Übersetzung zuzuweisen.</para>
 		  
-		  <para>Wenn Sie kein Häkchen bei dieser Option setzen, können Sie allen Segmenten eine andere Übersetzung zuweisen, auch wenn sie im Projekt doppelt vorhanden sind.</para>
+		  <para>Wenn Sie diese Option nicht aktivieren, können Sie allen Segmenten eine andere Übersetzung zuweisen, auch wenn sie im Projekt doppelt vorhanden sind.</para>
         </listitem>
       </varlistentry>
 
@@ -124,7 +124,7 @@
 
 		  <para>Wenn Sie diese Funktion aktivieren, werden die Tags in den Quellsegmenten versteckt, so dass Sie sie nicht mehr manuell bearbeiten müssen.</para>
 		  
-		  <para>Dies ist vor allem dann nützlich, wenn es sich um Texte handelt, bei denen eine Inline-Formatierung nicht besonders sinnvoll ist (z. B. OCRed-PDF-Dateien oder schlecht konvertierte .odt- oder .docx-Dateien).</para>
+		  <para>Dies ist besonders nützlich, wenn es sich um Texte handelt, bei denen eine Inline-Formatierung nicht besonders sinnvoll ist (z.B. OCRed-PDF-Dateien oder schlecht konvertierte .odt- oder .docx-Dateien).</para>
 
 		  <note>
 			<para>Versteckte Tags werden einfach an das Ende des Segments angehängt. Normalerweise sollte es keine Probleme beim Öffnen der übersetzten Datei geben, aber beachten Sie die folgenden Punkte, wenn Sie diese Funktion verwenden:</para>
@@ -133,7 +133,7 @@
 					<para>Textformatierungen wie fett oder kursiv müssen manuell in die übersetzte Datei eingefügt werden.</para>
 				</listitem>
 				<listitem>
-					<para>Wenn Sie einfach nur die Anzahl der Tags in einem Dokument von <application>Microsoft Word</application> (2007 oder höher) reduzieren möchten, können Sie das Skript <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/> verwenden.</para>
+					<para>Wenn Sie lediglich die Anzahl der Tags in einem Dokument von <application>Microsoft Word</application> (2007 oder höher) reduzieren möchten, können Sie das Skript <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/> verwenden.</para>
 					<para>Einzelheiten finden Sie im Abschnitt <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
 				</listitem>
 			</itemizedlist>
@@ -148,22 +148,22 @@
 		  <warning>
 			<para>Aus Sicherheitsgründen sind lokale Nachbearbeitungsbefehle standardmäßig deaktiviert.</para>
 
-			<para>Siehe die <link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/>-Einstellungen für weitere Informationen.</para>
+			<para>Einzelheiten finden Sie unter <link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/> (Einstellungen).</para>
 		  </warning>
 
-		  <para>OmegaT kann automatisch Befehle ausführen, nachdem die Zieldateien erstellt worden sind.</para>
+		  <para>OmegaT kann Befehle automatisch ausführen, nachdem die Zieldateien erzeugt wurden.</para>
 
-		  <para>Geben Sie in diesem Feld die Befehle ein, die Sie ausführen möchten.</para>
+		  <para>Tragen Sie in diesem Feld die Befehle ein, die ausgeführt werden sollen.</para>
 
 		  <para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> oder <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>, um die Zieldateien zu erstellen und die Befehle auszulösen.</para>
 
-		  <para>Die hier angegebenen Befehle sind nur für dieses Projekt verfügbar. Diese werden in der <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>-Datei gespeichert. Lokale Nachbearbeitungsbefehle sollten Sie nur aktivieren, wenn Sie der Quelle dieser Datei vertrauen.</para>
+		  <para>Die hier angegebenen Befehle sind nur für dieses Projekt verfügbar. Diese werden in die Datei <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/> gespeichert. Lokale Nachbearbeitungsbefehle sollten nur aktiviert werden, wenn Sie der Quelle dieser Datei vertrauen.</para>
 		
 		  <para>Die Variablenliste bietet Ihnen Zugriff auf verschiedene Projektdaten und Systemvariablen.</para>
 
 		  <para>Einzelheiten finden Sie unter <link linkend="post.processing.commands" endterm="post.processing.commands.title"/>.</para>
 
-		  <para>Sie können auch globale Nachbearbeitungsbefehle für alle Projekte definieren, die sich denselben Konfigurationsordner teilen. Solche Befehle sind in der <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>-Einstellung definiert.</para>
+		  <para>Sie können auch globale Nachbearbeitungsbefehle für alle Projekte definieren, die sich denselben Konfigurationsordner teilen. Solche Befehle werden in der Einstellung <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/> definiert.</para>
 
 		  <note>
 			<para>Lokale Befehle werden vor globalen Befehlen ausgeführt.</para>
@@ -175,14 +175,14 @@
         <term id="dialogs.project.properties.filters.title"><guibutton>Lokale Dateifilter...</guibutton></term>
 
         <listitem>
-          <para>Standardmäßig sind Dateifiltereinstellungen global und werden von allen Projekten gemeinsam genutzt. Sie können diese in den <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>-Einstellungen finden.</para>
+          <para>Standardmäßig sind Dateifiltereinstellungen global und werden von allen Projekten gemeinsam genutzt. Sie können diese in den Einstellungen <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> finden.</para>
 
-		  <para>Verwenden Sie diese Schaltfläche, um lokale Dateifilter für Ihr Projekt festzulegen. Setzen Sie ein Häkchen bei <option>Lokale Dateifiltereinstellungen verwenden</option>, und passen Sie die Einstellungen nach Belieben an.</para>
+		  <para>Verwenden Sie diese Schaltfläche, um lokale Dateifilter für Ihr Projekt festzulegen. Aktivieren Sie die Option <option>Lokale Dateifiltereinstellungen verwenden</option> und passen Sie die Einstellungen nach Bedarf an.</para>
 
 		  <para>Das Projekt speichert den neuen Satz von Dateifiltern in die Datei <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/> im Ordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Diese Einstellungen haben Vorrang vor den globalen Dateifiltereinstellungen.</para>
 
 		  <note>
-			<para>Um projektspezifische Dateifilter zu deaktivieren, entfernen Sie das Häkchen bei dieser Option oder löschen Sie die Datei.</para>
+			<para>Um projektspezifische Dateifilter zu deaktivieren, deaktivieren Sie diese Option oder löschen Sie die Datei.</para>
 		  </note>
 		  
 		  <para>Einzelheiten finden Sie unter <link linkend="file.filters" endterm="file.filters.title"/>.</para>
@@ -203,18 +203,18 @@
         <term id="dialogs.project.properties.external.searches.title"><guibutton>Lokale externe Suchvorgänge</guibutton></term>
 
         <listitem>
-          <para>Standardmäßig sind externe Suchvorgänge global und werden für alle Projekte verwendet. Diese sind in den <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>-Einstellungen definiert.</para>
+          <para>Standardmäßig sind externe Suchvorgänge global und werden von allen Projekten gemeinsam genutzt. Diese werden in den Einstellungen <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> definiert.</para>
 
-		  <para>Verwenden Sie diese Schaltfläche, um externe Suchvorgänge für Ihr Projekt festzulegen, und passen Sie die Einstellungen nach Belieben an.</para>
+		  <para>Verwenden Sie diese Schaltfläche, um externe Suchvorgänge für Ihr Projekt festzulegen, und passen Sie die Einstellungen nach Bedarf an.</para>
 
-		  <para>Das Projekt speichert den neuen Satz von externen Suchvorgängen in die Datei <link linkend="project.folder.omegat.finder" endterm="project.folder.omegat.finder.title"/> im Ordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Diese Einstellungen haben Vorrang vor den globalen externen Suchvorgängen.</para>
+		  <para>Das Projekt speichert den neuen Satz externer Suchvorgänge in die Datei <link linkend="project.folder.omegat.finder" endterm="project.folder.omegat.finder.title"/> im Ordner <link linkend="project.folder.omegat.folder" endterm="project.folder.omegat.folder.title"/>. Diese Einstellungen haben Vorrang vor den globalen externen Suchvorgängen.</para>
 
-		  <para>Um projektspezifische externe Suchvorgänge zu entfernen, klicken Sie auf die <guibutton>Entfernen</guibutton>-Schaltfläche oder löschen Sie die Datei.</para>
+		  <para>Um projektspezifische externe Suchvorgänge zu entfernen, klicken Sie auf die Schaltfläche <guibutton>Entfernen</guibutton> oder löschen Sie die Datei.</para>
 		  
-		  <para>Siehe die <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>-Einstellungen für weitere Informationen.</para>
+		  <para>Einzelheiten finden Sie unter <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/> (Einstellungen).</para>
 
 		  <note>
-			<para>Aus Sicherheitsgründen sind lokale projektbasierte externe Suchvorgänge standardmäßig deaktiviert. Um diese zu aktivieren, setzen Sie ein Häkchen bei <link linkend="dialogs.preferences.external.search.enable.project.specific.commands" endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/> in den Einstellungen <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
+			<para>Aus Sicherheitsgründen sind lokale projektspezifische externe Suchvorgänge standardmäßig deaktiviert. Um sie zu aktivieren, aktivieren Sie die Option <link linkend="dialogs.preferences.external.search.enable.project.specific.commands" endterm="dialogs.preferences.external.search.enable.project.specific.commands.title"/> in den Einstellungen <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
 		  </note>
         </listitem>
       </varlistentry>
@@ -230,9 +230,9 @@
 
 	<para>Ressourcenordner können sich überall auf Ihrem System befinden, auch auf gemeinsam genutzten Laufwerken.</para>
 
-	<para>Einzelheiten finden Sie unter <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>.</para>
+	<para>Einzelheiten finden Sie im Kapitel <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>.</para>
 
-	<para>Sie können jederzeit die Struktur Ihres Projekts ändern, indem Sie Dateien aus den Ordnern hinzufügen bzw. entfernen oder die vom Projekt verwendeten Ordner ändern, selbst während einer laufenden Übersetzung.</para>
+	<para>Sie können die Struktur Ihres Projekts jederzeit ändern, indem Sie Dateien aus den Ordnern hinzufügen bzw. entfernen oder die vom Projekt verwendeten Ordner ändern, selbst während einer laufenden Übersetzung.</para>
 
 	<para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents" endterm="menus.project.access.project.contents.title"/> und die Untermenüs, um auf die Speicherorte der Projektressourcen zuzugreifen.</para>
 
@@ -241,10 +241,10 @@
 		<term id="dialogs.project.properties.file.locations.browse.title"><guibutton>Durchsuchen</guibutton></term>
 
 		<listitem>
-		  <para>Die <guibutton>Durchsuchen</guibutton>-Schaltfläche ist für alle benutzerdefinierbaren Projektressourcen verfügbar.</para>
+		  <para>Die Schaltfläche <guibutton>Durchsuchen</guibutton> ist für alle benutzerdefinierbaren Projektressourcen verfügbar.</para>
 
 		  <note>
-			<para>Die Ressourcen müssen nicht unbedingt im Projektordner aufbewahrt werden, den OmegaT standardmäßig vorgibt. Sie können einen beliebigen Ordner zur Aufbewahrung Ihrer Ressourcen auswählen, inklusive Ordner auf gemeinsam genutzten Laufwerken.</para>
+			<para>Die Ressourcen müssen nicht unbedingt im von OmegaT vorgegebenen Projektordner enthalten sein. Sie können einen beliebigen Ordner zur Aufbewahrung Ihrer Ressourcen auswählen, inklusive Ordner auf gemeinsam genutzten Laufwerken.</para>
 		  </note>
 
 		  <para>Klicken Sie auf die Schaltfläche, um einen Ordner auszuwählen, den Sie anstelle des vorgegebenen Ressourcenordners verwenden möchten.</para>
@@ -255,18 +255,18 @@
 		<term id="dialogs.project.properties.file.locations.source.files.title"><option>Ordner für Quelldateien</option></term>
 
 		<listitem>
-		  <para>Dieser Ordner enthält Dateien, die Sie übersetzen möchten. OmegaT versucht, alle Dateien einzulesen, und zeigt alle übersetzbaren Inhalte, die es gefunden hat, im Editor an.</para>
+		  <para>Dieser Ordner enthält Dateien, die Sie übersetzen möchten. OmegaT versucht, alle Dateien einzulesen, und zeigt dann die übersetzbaren Inhalte im Editor an.</para>
 
 		  <para>Einzelheiten finden Sie im Abschnitt <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
-		  <para>Wenn der Ordner leer ist, alle Dateien keine übersetzbaren Inhalte enthalten oder alle Dateien von den verfügbaren OmegaT-Dateifiltern nicht unterstützt werden, wird OmegaT Ihnen mitteilen, dass der Ordner leer ist.</para>
+		  <para>Wenn der Ordner leer ist, keine der Dateien übersetzbaren Text enthält oder keine der Dateien von den verfügbaren Dateifiltern unterstützt wird, weist OmegaT Sie darauf hin, dass der Ordner leer ist.</para>
 
 		  <variablelist>
 			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
 			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Ausnahmen...</guibutton></term>
 
 			  <listitem>
-				<para>Klicken Sie auf die <guibutton>Ausnahmen...</guibutton>-Schaltfläche, um Dateien oder Ordner anzugeben, die von OmegaT ignoriert werden sollen. Eine ignorierte Datei oder ein ignorierter Ordner wird:</para>
+				<para>Klicken Sie auf die Schaltfläche <guibutton>Ausnahmen...</guibutton>, um Dateien oder Ordner anzugeben, die von OmegaT ignoriert werden sollen. Eine ignorierte Datei oder ein ignorierter Ordner wird:</para>
 		  
 				<itemizedlist>
 				  <listitem>
@@ -274,11 +274,11 @@
 				  </listitem>
 
 				  <listitem>
-					<para>in den verschiedenen Statistikberichten nicht berücksichtigt (z. B. der Befehl <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>), und</para>
+					<para>in den verschiedenen Statistikberichten nicht berücksichtigt (z.B. der Befehl <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/>), und</para>
 				  </listitem>
 
 				  <listitem>
-					<para>nicht in den Ordner <link linkend="project.folder.target" endterm="project.folder.target.title"/> kopiert, wenn die übersetzten Dateien erstellt werden.</para>
+					<para>nicht in den Ordner <link linkend="project.folder.target" endterm="project.folder.target.title"/> beim Erstellen der übersetzten Dateien kopiert.</para>
 				  </listitem>
 				</itemizedlist>
 
@@ -292,11 +292,11 @@
 	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
 		<term id="dialogs.project.properties.file.locations.translation.memories.title"><option>Ordner für Translation-Memory-Dateien</option></term>
 		<listitem>
-		  <para>Dieser Ordner enthält Translation Memories, die Sie als Referenz verwenden möchten. OmegaT versucht, alle Dateien einzulesen, und vergleicht ihre Inhalte mit dem Segment, den Sie gerade übersetzen, um Übereinstimmungen zu finden.</para>
+		  <para>Dieser Ordner enthält Translation Memories, die Sie als Referenz verwenden möchten. OmegaT versucht, alle Dateien einzulesen, und vergleicht dann ihren Inhalt mit dem Segment, das Sie gerade übersetzen, um Übereinstimmungen zu finden.</para>
 
 		  <para>Einzelheiten finden Sie im Abschnitt <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
 
-		  <para>Wenn Übereinstimmungen gefunden werden, werden sie im Fensterbereich <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> angezeigt.</para>
+		  <para>Gefundene Übereinstimmungen werden im Fensterbereich <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> angezeigt.</para>
 		</listitem>
 	  </varlistentry>
 	  
@@ -304,11 +304,11 @@
 		<term id="dialogs.project.properties.file.locations.glossaries.title"><option>Ordner für Glossardateien</option></term>
 
 		<listitem>
-		  <para>Dieser Ordner enthält Glossardateien, die Sie als Referenz verwenden möchten. OmegaT versucht, alle Dateien einzulesen, und vergleicht ihre Inhalte mit dem Segment, den Sie gerade übersetzen, um Übereinstimmungen zu finden.</para>
+		  <para>Dieser Ordner enthält Glossardateien, die Sie als Referenz verwenden möchten. OmegaT versucht, alle Dateien einzulesen, und vergleicht dann ihren Inhalt mit dem Segment, das Sie gerade übersetzen, um Übereinstimmungen zu finden.</para>
 
 		  <para>Einzelheiten finden Sie im Abschnitt <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 		  
-		  <para>Wenn Übereinstimmungen gefunden werden, werden sie im Fensterbereich <link linkend="panes.glossary" endterm="panes.glossary.title"/> angezeigt.</para>
+		  <para>Gefundene Übereinstimmungen werden im Fensterbereich <link linkend="panes.glossary" endterm="panes.glossary.title"/> angezeigt.</para>
 
 		  <para>Einzelheiten finden Sie unter <link linkend="app.glossaries" endterm="app.glossaries.title"/>.</para>
 		</listitem>
@@ -318,9 +318,9 @@
 		<term id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Beschreibbare Glossardatei</option></term>
 
 		<listitem>
-		  <para>OmegaT verwendet diese Datei, sobald Sie Ihrem Projekt übersetzte Glossarbegriffe mit dem <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/>-Befehl hinzufügen.</para>
+		  <para>OmegaT verwendet diese Datei, sobald Sie Ihrem Projekt mit dem Befehl <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> übersetzte Glossarbegriffe hinzufügen.</para>
 
-		  <para>Diese wird automatisch erstellt, wenn ein Begriff zum ersten Mal hinzugefügt wird.</para>
+		  <para>Die Datei wird automatisch erstellt, wenn ein Begriff zum ersten Mal hinzugefügt wird.</para>
 
 		  <para>Neu hinzugefügte Einträge werden automatisch erkannt und angezeigt, wenn sie mit Begriffen im aktuellen Segment übereinstimmen.</para>
 
@@ -332,11 +332,11 @@
 		<term id="dialogs.project.properties.file.locations.dictionaries.title"><option>Ordner für Wörterbücher</option></term>
 
 		<listitem>
-		  <para>Dieser Ordner enthält Wörterbuchdateien, die Sie als Referenz verwenden möchten. OmegaT versucht, alle Dateien einzulesen, und vergleicht ihre Inhalte mit dem Segment, den Sie gerade übersetzen, um Übereinstimmungen zu finden.</para>
+		  <para>Dieser Ordner enthält Wörterbuchdateien, die Sie als Referenz verwenden möchten. OmegaT versucht, alle Dateien einzulesen, und vergleicht dann ihren Inhalt mit dem Segment, das Sie gerade übersetzen, um Übereinstimmungen zu finden.</para>
 
 		  <para>Einzelheiten finden Sie im Abschnitt <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/>.</para>
 
-		  <para>Wenn Übereinstimmungen gefunden werden, werden sie im Fensterbereich <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> angezeigt.</para>
+		  <para>Gefundene Übereinstimmungen werden im Fensterbereich <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> angezeigt.</para>
 		</listitem>
 	  </varlistentry>
 	  
@@ -348,9 +348,9 @@
 
 		  <para>Die übersetzten Dateien sind die übersetzten Versionen der Dateien im Ordner <link linkend="project.folder.source" endterm="project.folder.source.title"/>.</para>
 
-		  <para>Jedes Segment, das übersetzt wurde, wird in der Zieldatei ersetzt. Unübersetzte Segmente bleiben in der Quellsprache.</para>
+		  <para>Übersetzte Segmente werden mit ihrer Übersetzung ersetzt, während unübersetzte Segmente in der Quellsprache verbleiben.</para>
 		
-		  <para>Die Ordnerstruktur spiegelt den Inhalt des <link linkend="project.folder.source" endterm="project.folder.source.title"/>-Ordners wider. Dateien, die nicht von den OmegaT-Dateifiltern unterstützt werden, werden unverändert kopiert.</para>
+		  <para>Die Ordnerstruktur spiegelt den Inhalt des Ordners <link linkend="project.folder.source" endterm="project.folder.source.title"/> wider. Dateien, die von den OmegaT-Dateifiltern nicht unterstützt werden, werden unverändert kopiert.</para>
 
 		  <para>Verwenden Sie <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> oder <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>, um die übersetzten Dateien zu erstellen.</para>
 
@@ -364,12 +364,12 @@
 		  <para>In diesen Ordner kopiert OmegaT den aktuellen Übersetzungsstand in Form von TMX-Dateien, wenn Sie die übersetzten Dateien erstellen.</para>
 
 		  <note>
-			<para>Standardmäßig ist dieser Ordner der Projektordner selbst, aber Sie können den Speicherort ändern, um die gemeinsame Nutzung exportierter TM-Dateien zu erleichtern.</para>
+			<para>Standardmäßig der Projektordner selbst, aber Sie können seinen Speicherort ändern, um die gemeinsame Nutzung exportierter TM-Dateien zu erleichtern.</para>
 
 			<para>Einzelheiten finden Sie unter <link linkend="how.to.tm.share.translation.memories" endterm="how.to.tm.share.translation.memories.title"/>.</para>
 		  </note>
 		
-		  <para>Die TMX-Dateien enthalten nur die Segmente aus den Dateien, die derzeit im <link linkend="project.folder.source" endterm="project.folder.source.title"/>-Ordner abgelegt sind.</para>
+		  <para>Die TMX-Dateien enthalten nur die Segmente der Dateien, die sich aktuell im Ordner <link linkend="project.folder.source" endterm="project.folder.source.title"/> befinden.</para>
 
 		  <para>Verwenden Sie <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> oder <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>, um die übersetzten Dateien und die exportierten TMX-Dateien zu erstellen.</para>
 
@@ -377,7 +377,7 @@
 			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
 			  <term id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Zu exportierende Translation-Memory-Dateien</option></term>
 			  <listitem>
-				<para>Mit dieser Option können Sie die Formate auswählen, mit denen OmegaT die oben genannten TMX-Dateien erstellen soll.</para>
+				<para>Mit dieser Option können Sie die Formate auswählen, in denen OmegaT die oben genannten TMX-Dateien erstellen soll.</para>
 
 				<para>Einzelheiten finden Sie unter <link linkend="how.to.use.tm" endterm="how.to.use.tm.title"/>.</para>
 		
@@ -385,7 +385,7 @@
 				  <varlistentry>
 					<term><option>OmegaT</option></term>
 					<listitem>
-					  <para>Eine &quot;OmegaT&quot;-TMX-Datei enthält die von OmegaT erstellten Tags in einer Form, die nur von einem OmegaT-Projekt sinnvoll genutzt werden kann.</para>
+					  <para>Eine &quot;OmegaT&quot;-TMX-Datei enthält die von OmegaT erstellten Tags in einer Form, die nur von einem OmegaT-Projekt sinnvoll verwendet werden kann.</para>
 					</listitem>
 				  </varlistentry>
 		  
@@ -399,7 +399,7 @@
 				  <varlistentry>
 					<term><option>TMX-Level 2</option></term>
 					<listitem>
-					  <para>Eine &quot;Level 2&quot;-TMX-Datei enthält Textdaten und Tags, zusammengefasst in einer Form, die mit anderen CAT-Tools kompatibel ist.</para>
+					  <para>Eine &quot;Level 2&quot;-TMX-Datei enthält Textdaten und Tags in einer Form, die mit anderen CAT-Tools kompatibel ist.</para>
 					</listitem>
 				  </varlistentry>
 				</variablelist>

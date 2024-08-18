@@ -3,27 +3,27 @@
 <section id="windows.scripts">
   <title id="windows.scripts.title"><guilabel>Scripting</guilabel></title>
 
-  <para>Skripte sind kurze Programme (ähnlich den Makros in Office-Applikationen), die zur Automatisierung von Aufgaben sowie zur Erweiterung oder Anpassung der OmegaT-Funktionen verwendet werden können. Nutzer können zum Schreiben von Skripten nur Skriptsprachen verwenden, die von der verwendeten Java Virtual Machine unterstützt wird.</para>
+  <para>Skripte sind kurze Programme (ähnlich den Makros in Office-Applikationen), die zur Automatisierung von Aufgaben und zur Erweiterung oder Anpassung der OmegaT-Funktionen verwendet werden können. Benutzer können Skripte nur in Skriptsprachen schreiben, die von der verwendeten Java Virtual Machine unterstützt werden.</para>
 
 
-  <para>Das Scripting-Fenster ermöglicht es Ihnen, ein existierendes Skript zu laden und im aktuellen Projekt auszuführen.</para>
+  <para>Das Scripting-Fenster ermöglicht es Ihnen, ein bestehendes Skript zu laden und im aktuellen Projekt auszuführen.</para>
 
-  <para>Verwenden Sie <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/>, um auf das Fenster zuzugreifen.</para>
+  <para>Verwenden Sie <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/>, um das Fenster zu öffnen.</para>
 
   <section id="windows.scripts.folder">
   <title id="windows.scripts.folder.title">Der Skriptordner</title>
 
   <para>Standardmäßig werden Skripte im <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>-Ordner des Applikationsordners von OmegaT aufbewahrt.</para>
 
-  <para>Neue Skripte, die dort hinzugefügt werden, erscheinen in der Liste der verfügbaren Skripte im linken Bereich des Fensters.</para>
+  <para>Neue Skripte, die dort hinzugefügt werden, erscheinen in der Liste der verfügbaren Skripte auf der linken Seite des Fensters.</para>
 
   <warning>
-    <para>Wenn auf der linken Seite des Scripting-Fensters keine Skriptliste angezeigt wird, verwenden Sie den Menüpunkt <guimenu>Datei</guimenu> &gt; <guimenuitem>Scripts-Ordner setzen...</guimenuitem>, um den Speicherort der Skripte zu setzen.</para>
+    <para>Wenn diese Liste leer ist, verwenden Sie den Menüpunkt <guimenu>Datei</guimenu> &gt; <guimenuitem>Scripts-Ordner setzen...</guimenuitem>, um den Speicherort der Skripte zu setzen.</para>
   </warning>
 
-  <para>Weitere Skripte können Sie hier finden: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>. Kopieren Sie die Datei einfach in den <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>-Ordner.</para>
+  <para>Weitere Skripte finden Sie hier: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>. Kopieren Sie die Datei einfach in den <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>-Ordner.</para>
 
-  <para>Einige Skripte basieren auf <emphasis>Ereignissen</emphasis>. Der Ordner mit den Skripten enthält Unterordner, die den verfügbaren Ereignissen entsprechen. Sie können Skripte automatisch auslösen lassen, indem Sie sie in den entsprechenden Unterordner ablegen:</para>
+  <para>Einige Skripte sind <emphasis>ereignisgesteuert</emphasis>. Der Ordner mit den Skripten enthält Unterordner, die den verfügbaren Ereignissen entsprechen. Sie können Skripte automatisch ausführen lassen, indem Sie sie in den entsprechenden Unterordner kopieren oder verschieben:</para>
 
   <variablelist>
 	<varlistentry id="application.folder.scripts.application.shutdown">
@@ -36,26 +36,26 @@
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.entry.activated">
 	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn ein neues Segment editiert wird. Das Segment ist im <code>newEntry</code>-Binding.</para></listitem>
+	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn ein neues Segment editiert wird. Das Segment befindet sich im <code>newEntry</code>-Binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.new.file">
 	  <term id="application.folder.scripts.new.file.title">new_file</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn der Editor zur nächsten Datei im Projekt wechselt. Der neue Dateiname ist im <code>activeFileName</code>-Binding.</para></listitem>
+	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn der Editor zur nächsten Datei im Projekt wechselt. Der neue Dateiname befindet sich im <code>activeFileName</code>-Binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.new.word">
 	  <term id="application.folder.scripts.new.word.title">new_word</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn ein neues Wort im Editorfenster editiert wird. Das neue Wort ist im <code>newWord</code>-Binding verfügbar.</para></listitem>
+	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn ein neues Wort im Editorfenster editiert wird. Das neue Wort befindet sich im <code>newWord</code>-Binding.</para></listitem>
 	</varlistentry>
 	<varlistentry id="application.folder.scripts.project.changed">
 	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
-	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn sich der Status des Projekts ändert. Ein <code>eventType</code>-Objekt wird gebunden und kann die folgenden Werte akzeptieren: CLOSE, COMPILE, CREATE, LOAD oder SAVE.</para></listitem>
+	  <listitem><para>Skripte in diesem Ordner werden gestartet, wenn sich der Status des Projekts ändert. Ein <code>eventType</code>-Objekt wird gebunden und kann folgende Werte akzeptieren: CLOSE, COMPILE, CREATE, LOAD oder SAVE.</para></listitem>
 	</varlistentry>
   </variablelist>
 
   <para>Diese Unterordner sind bereits im Skriptordner angelegt, der mit der Distribution einhergeht.</para>
   
   <warning>
-	<para>Skripte werden auch gestartet, wenn Sie andere Skripte ausführen. Folglich wird in einem großen Projekt ein <code>entry_activated</code>-Skript häufig aufgerufen, wenn ein Skript vom Typ Suchen/Ersetzen verwendet wird, das alle Segmente in einer Schleife durchläuft, was die Performance der Applikation negativ beeinträchtigt.</para>
+	<para>Skripte werden auch gestartet, wenn Sie andere Skripte ausführen. Folglich wird in einem großen Projekt ein <code>entry_activated</code>-Skript häufig aufgerufen, wenn ein Skript vom Typ Suchen/Ersetzen verwendet wird, das alle Segmente in einer Schleife durchläuft, was sich negativ auf die Leistungsfähigkeit der Applikation auswirkt.</para>
   </warning>
   </section>
   
@@ -64,40 +64,40 @@
 
 	<itemizedlist>
     <listitem>
-		<para>Klicken Sie auf den Namen eines Skripts in der Liste im linken Bereich. Das Skript wird in den Editor geladen.</para>
+		<para>Klicken Sie auf den Namen eines Skripts in der linken Liste. Das Skript wird in den Editor geladen.</para>
       </listitem>
 
       <listitem>
-		<para>Klicken Sie auf die <guibutton>Ausführen</guibutton>-Schaltfläche am unteren Rand des Fensters oder drücken Sie <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>, um das Skript sofort zu starten.</para>
+		<para>Klicken Sie auf die Schaltfläche <guibutton>Ausführen</guibutton> am unteren Rand des Fensters oder drücken Sie <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>, um das Skript sofort zu starten.</para>
       </listitem>
 
       <listitem>
-		<para>Um einen Shortcut (Tastenkürzel und Menüpunkt) für ein häufig verwendetes Skript zu erstellen, rechtsklicken Sie auf eine der Schaltflächen <guibutton>&lt;1&gt;</guibutton> bis <guibutton>&lt;12&gt;</guibutton> am unteren Rand des Fensters und wählen Sie <guilabel>Skript hinzufügen</guilabel> aus, um das Skript dieser Nummer zuzuweisen.</para>
+		<para>Um einen Shortcut (Tastenkürzel und Menüpunkt) für ein häufig verwendetes Skript zu erstellen, rechtsklicken Sie auf eine der Schaltflächen <guibutton>&lt;1&gt;</guibutton> bis <guibutton>&lt;12&gt;</guibutton> am unteren Rand des Fensters und wählen Sie &quot;<guilabel>Skript hinzufügen</guilabel>&quot; aus, um das Skript dieser Nummer zuzuweisen.</para>
 
-		<para>Wenn Sie das Skript vom Shortcut lösen möchten, rechtsklicken Sie auf seine Schaltfläche und wählen Sie <guilabel>Skript entfernen</guilabel> aus.</para>
+		<para>Wenn Sie das Skript vom Shortcut lösen möchten, rechtsklicken Sie auf seine Schaltfläche und wählen Sie &quot;<guilabel>Skript entfernen</guilabel>&quot; aus.</para>
       </listitem>
 
       <listitem>
-		<para>Sie können dann auf die Nummer klicken, um das das zugewiesene Skript auszuführen. Sie können das Skript auch über das Menü <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> ausführen, indem Sie den entsprechenden Menüpunkt auswählen oder das zugehörige Tastenkürzel (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 bis F12</keycap></keycombo>) drücken.</para>
+		<para>Sie können dann auf die Nummer klicken, um das zugewiesene Skript auszuführen. Sie können das Skript auch über das Menü <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> ausführen, indem Sie den entsprechenden Menüpunkt auswählen oder das zugehörige Tastenkürzel (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 bis F12</keycap></keycombo>) drücken.</para>
       </listitem>
 	</itemizedlist>
 
 	<warning>
-      <para>Linux-Nutzer: Je nach der Konfiguration Ihres Betriebssystems kann es sein, dass Sie keine Schreibrechte für standardmäßig verwendeten Scripts-Ordner haben.</para>
+      <para>Linux-Benutzer: Je nach Konfiguration Ihres Betriebssystems kann es vorkommen, dass Sie keine Schreibrechte für den regulären Scripts-Ordner haben.</para>
 
-      <para>In solchen Fällen müssen Sie den Skriptordner an einen anderen Speicherort kopieren oder verschieben, für den Sie Schreibrechte haben, z. B. der <link linkend="configuration.folder.location">Konfigurationsordner</link>, wenn Sie Ihre eigenen Skripte schreiben, neue hinzufügen oder bestehende ändern wollen.</para>
+      <para>In diesem Fall müssen Sie den Skriptordner an einen anderen Speicherort kopieren oder verschieben, für den Sie Schreibrechte haben, z.B. den <link linkend="configuration.folder.location">Konfigurationsordner</link>, wenn Sie eigene Skripte schreiben, neue Skripte hinzufügen oder bestehende Skripte ändern möchten.</para>
 
-      <para>Wenn Sie Schreibrechte für den Standardordner haben, stellen Sie sicher, dass Sie den Namen aller von Ihnen geänderten Skripte ändern oder eine Sicherungskopie erstellen, da sie bei einer Aktualisierung von OmegaT überschrieben werden.</para>
+      <para>Wenn Sie Schreibrechte für den Standardordner haben und ein Skript ändern, sollten Sie das Skript umbenennen oder eine Sicherungskopie erstellen, da es bei einem Update von OmegaT überschrieben wird.</para>
 	</warning>
   </section>
 
   <section id="windows.scripts.distribution">
     <title id="windows.scripts.distribution.title">Mitgelieferte Skripte</title>
 
-    <para>OmegaT kommt mit einer Reihe von Skripten, die von Freiwilligen entwickelt wurden. Verwenden Sie den Skripteditor, um Skripte direkt zu öffnen, auszuführen oder zu ändern, oder um neue Skripte für den eigenen Gebrauch zu schreiben.</para>
+    <para>OmegaT wird mit einer Reihe von Skripten ausgeliefert, die von Freiwilligen entwickelt wurden. Verwenden Sie den Skripteditor, um Skripte direkt zu öffnen, auszuführen oder zu ändern, oder um neue Skripte für den eigenen Gebrauch zu schreiben.</para>
 
 	<note>
-	  <para>Die mitgelieferten Skripte sollen Ihnen den Umgang mit OmegaT erleichtern, werden aber nicht von den OmegaT-Entwicklern unterstützt.</para>
+	  <para>Die mitgelieferten Skripte sollen Ihnen die Arbeit mit OmegaT erleichtern, werden aber nicht von den OmegaT-Entwicklern unterstützt.</para>
 	</note>
 	
 	<para>Folgen Sie den Anweisungen im Skript selbst.</para>
@@ -133,7 +133,7 @@
         <listitem>
           <para>Währungen entsprechend der Quell- und Zielsprache übersetzen.</para>
 
-          <para>Dadurch wird zum Beispiel eine Zeichenkette wie &quot;$123,399.99&quot; in &quot;123 399,99 USD&quot; übersetzt.</para>
+          <para>Zum Beispiel wird eine Zeichenkette wie &quot;$123,399.99&quot; in &quot;123 399,99 USD&quot; übersetzt.</para>
         </listitem>
       </varlistentry>
 
@@ -157,7 +157,7 @@
         <term id="windows.scripts.distribution.example.modify.segment.title">Example - Modify Segment (Beispiel - Segment modifizieren)</term>
 
         <listitem>
-          <para>Beispiel, das zeigt, wie man ein Segment modifiziert.</para>
+          <para>Beispiel für die Modifikation eines Segments.</para>
         </listitem>
       </varlistentry>
 
@@ -173,7 +173,7 @@
         <term id="windows.scripts.distribution.external.spellcheck.title">External spellcheck (Externe Rechtschreibprüfung)</term>
 
         <listitem>
-          <para>Schreibt alle Segmente in eine Datei namens <filename>[Projektname].doc</filename> und öffnet sie im standardmäßig verwendeten Textverarbeitungsprogramm des Systems. Beachten Sie, dass die Datei eine reine Textdatei ist. Die <filename>.doc</filename>-Endung sorgt lediglich dafür, dass die Datei im Textverarbeitungsprogramm geöffnet wird.</para>
+          <para>Schreibt alle Segmente in eine Datei namens <filename>[Projektname].doc</filename> und öffnet sie im regulären Textverarbeitungsprogramm des Systems. Beachten Sie, dass es sich um eine reine Textdatei handelt. Die Endung <filename>.doc</filename> stellt lediglich sicher, dass die Datei in einem Textverarbeitungsprogramm geöffnet werden kann.</para>
         </listitem>
       </varlistentry>
 
@@ -189,7 +189,7 @@
         <term id="windows.scripts.distribution.non.breaking.space.title">Geschütztes Leerzeichen</term>
 
         <listitem>
-          <para>Leerzeichen mit geschützten Leerzeichen ersetzen, wo dies in Französisch angebracht ist.</para>
+          <para>Leerzeichen mit geschützten Leerzeichen ersetzen, wo dies im Französischen angebracht ist.</para>
         </listitem>
       </varlistentry>
 
@@ -213,7 +213,7 @@
         <term id="windows.scripts.distribution.open.project.folder.title">Open Project Folder (Projektordner öffnen)</term>
 
         <listitem>
-          <para>Den Projektordner im Standard-Dateimanager öffnen.</para>
+          <para>Den Projektordner in Ihrem Dateimanager öffnen.</para>
         </listitem>
       </varlistentry>
 
@@ -234,10 +234,10 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.qa.check.rules">
-        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Regeln überprüfen</term>
+        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Regeln prüfen</term>
 
         <listitem>
-          <para>QA-Skript (Quality Assurance bzw. Qualitätssicherung).</para>
+          <para>Ein Skript zur Qualitätssicherung (engl. Quality Assurance, kurz QA).</para>
         </listitem>
       </varlistentry>
 
@@ -346,7 +346,7 @@
         <term>Groovy</term>
 
         <listitem>
-          <para>Eine dynamische Sprache für die Java Virtual Machine. Sie baut auf den Stärken von Java auf, und fügt mächtige Features hinzu, die von Sprachen wie Python, Ruby und Smalltalk inspiriert sind. Einzelheiten finden Sie unter <ulink url="https://groovy-lang.org/documentation.html">Apache Groovy</ulink>.</para>
+          <para>Eine dynamische Sprache für die Java Virtual Machine. Sie baut auf den Stärken von Java auf und fügt mächtige Features hinzu, die von Sprachen wie Python, Ruby und Smalltalk inspiriert sind. Einzelheiten finden Sie unter <ulink url="https://groovy-lang.org/documentation.html">Apache Groovy</ulink>.</para>
         </listitem>
       </varlistentry>
 

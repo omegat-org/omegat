@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.use.tm">
+  <title id="how.to.use.tm.title">Vertaalgeheugens gebruiken</title>
+
+  <para>Wanneer een project initieel is gemaakt, heeft het zijn eigen lege vertaalgeheugen voor het project, het bestand <link linkend="project.folder.project.save.tmx.title" endterm="project.folder.project.save.tmx.title"/>, geplaatst in de map <link linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>. Dit geheugen wordt gedurende de vertaling gevuld.</para>
+
+	<para>Bestaande vertalingen worden gebruikt om het vertaalproces te versnellen.</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Indien een bepaalde zin al eens is vertaald, is er geen reden om die opnieuw te gaan vertalen. Bekijk de projecteigenschap <link linkend="dialogs.project.properties.auto.propagation" endterm="dialogs.project.properties.auto.propagation.title"/>.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>Als een oude vertaling soortgelijk is aan de inhoud van het segment dat u vertaalt, kunt u die opnieuw gebruiken in uw vertaling. Bekijk het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> voor details.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>U kunt ook gebruik maken van vertaalgeheugen voor verwijzing door ze in de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> van uw project te plaatsen.</para>
+	  </listitem>
+	</itemizedlist>
+
+  <section id="how.to.use.tm.create.your.tm">
+	<title id="how.to.use.tm.create.your.tm.title">Uw eigen TM's maken</title>
+	
+	<para>Wanneer u <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> gebruikt om de doeldocumenten in een project te maken, voert OmegaT ook drie vertaalgeheugens uit die de huidige staat van de vertaling voor de bestanden in de bronmap reflecteren. Bekijk de project-eigenschap <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> voor details.</para>
+
+	<para>Elk van de drie bestanden bestaat uit een tweetalige export van de huidige inhoud van uw vertaling. Hun inhoud komt uit het globale geheugen van het project (het bestand <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>), maar is <emphasis>strikt beperkt</emphasis> tot wat u tot dusverre hebt vertaald.</para>
+
+	<para>U kunt ook het gereedschap <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.align.files" endterm="menus.tools.align.files.title"/> gebruiken om een TMX te maken vanuit twee bestanden in een indeling die OmegaT ondersteunt.</para>
+  </section>
+
+  <section id="how.to.use.tm.reuse.tm">
+	<title id="how.to.use.tm.reuse.tm.title">TM's opnieuw gebruiken</title>
+	
+	<para>U heeft twee opties om vertaalgeheugens uit een eerder project opnieuw te gebruiken:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Open het oude project en plaats de nieuwe bronbestanden in de map <link linkend="project.folder.source" endterm="project.folder.source.title"/> daarvan.</para>
+		
+		<note>
+		  <para>Dat is de gemakkelijkste manier om aan een nieuwe versie van een reeds vertaald document te werken.</para>
+		</note>
+
+		<para>Na het opnieuw laden van het oude project, zal het vertaalgeheugen daarvan worden toegepast op de nieuwe bronbestanden. Identieke segmenten zullen automatisch worden vertaald. Soortgelijke segmenten zullen worden verschaft met overeenkomsten vanuit het vertaalgeheugen van het project als u ze invoert.</para>
+
+	  </listitem>
+	  
+	  <listitem>
+		<para>Plaats, als alternatief, de geheugens voor verwijzing vanuit het oude project in de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> van het nieuwe.</para>
+
+		<note>
+		  <para>Dat heeft de voorkeur als u vanaf nul wilt beginnen met uw vertaling.</para>
+		</note>
+
+		<para>Afhankelijk van hoe betrouwbaar het geheugen is, kunt u de voorkeur hebben om het in één van de volgende submappen te plaatsen:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/>,</para>
+		  </listitem>
+		  <listitem>
+			<para><link linkend="project.folder.tm.penalty" endterm="project.folder.tm.penalty.title"/>,</para>
+		  </listitem>
+		</itemizedlist>
+
+		<para>Exacte overeenkomsten die vanuit de  <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> en de submappen <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> komen zullen automatisch in de vertaling worden ingevoegd, zonder het voorvoegsel dat wordt ingevoegd door OmegaT wanneer het overeenkomsten boven een bepaalde ingestelde drempel invoegt. Bekijk de voorkeur <link linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match" endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"/> voor details.</para>
+
+		<para>Schakel de optie <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> in om OmegaT te laten onthouden dat de ingevoegde overeenkomsten uit die mappen kwamen.</para>
+
+		<para>Gebruik de menu's voor navigatie in <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/> om te navigeren naar een automatisch ingevoegd segment.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>OmegaT ondersteunt ook tweetalige documenten die geen TMX-bestanden zijn als vertalingen ter verwijzing. De bestandsindelingen die OmegaT ondersteunt zijn alle tweetalige indelingen die OmegaT accepteert als bronbestanden:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para>PO-bestanden</para>
+		  </listitem>
+		  <listitem>
+			<para>TXML-bestanden</para>
+		  </listitem>
+		  <listitem>
+			<para>XLIFF-bestanden</para>
+		  </listitem>
+		  <listitem>
+			<para>SDLXLIFF-bestanden</para>
+		  </listitem>
+		</itemizedlist>
+
+	  <para>U kunt dergelijk bestanden toevoegen aan de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> van uw project of een van de submappen daarvan en de vertaalde gegevens zullen direct beschikbaar zijn voor overeenkomsten.</para>
+	  </listitem>
+	</itemizedlist>
+	
+    <section id="how.to.tm.read.and.write">
+      <title id="how.to.tm.read.and.write.title">TM's lezen uit andere programma's</title>
+
+      <para>OmegaT kan TMX-standaard conforme geheugens lezen die zijn gemaakt door andere programma's.</para>
+
+      <para>Sommige programma's produceren onder bepaalde omstandigheden ongeldige TMX-bestanden maken. U zult ze moeten repareren als u ze wilt gebruiken als geheugens voor verwijzingen, of OmegaT zal een fout rapporteren en het weigeren ze te laden. Reparaties zijn over het algemeen eenvoudig, en het foutbericht dat OmegaT  verschaft zal u helpen de fout te lokaliseren. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.</para>
+	</section>
+
+	<section id="how.to.use.tm.store.your.tm">
+	  <title id="how.to.use.tm.store.your.tm.title">Uw TM's beheren</title>
+
+	  <para>U zou uw vertaalgeheugens misschien willen opslaan in afzonderlijke mappen, per cliënt of onderwerp zodat u ze snel opnieuw kunt gebruiken als dat nodig is. Elke map met schrijfrechten kan worden gebruikt in plaats van de projectmap <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>. Bekijk het gedeelte <link linkend="dialogs.project.properties.file.locations" endterm="dialogs.project.properties.file.locations.title"/> van het dialoogvenster voor de projecteigenschappen.</para>
+	</section>
+  
+	<section id="how.to.tm.creating.a.tm.for.selected.documents">
+      <title id="how.to.tm.creating.a.tm.for.selected.documents.title">Een TM maken, specifiek voor geselecteerde documenten</title>
+
+      <para>In situaties waar u een TMX moet delen die alleen de tekst uit bepaalde speciefieke bestanden bevat en ander inhoud uitsluit, volg dan de procedure hieronder:</para>
+
+      <itemizedlist>
+		<listitem>
+          <para>Kopieer alleen de documenten waarvan u de inhoud wilt opnemen naar de map <filename class="directory">source</filename> van uw project.</para>
+		</listitem>
+		
+		<listitem>
+          <para>Open het project.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Gebruik <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/> om te zoeken naar niet vertaalde segmenten (en vertaal ze indien nodig).</para>
+		</listitem>
+
+		<listitem>
+		  <para>Gebruik <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> om te controleren op mogelijke problemen.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> om de TMX-bestanden te maken die corresponderen met de huidige inhoud.</para>
+		</listitem>
+      </itemizedlist>
+
+      <para>De TMX-bestanden die zijn geplaatst in de map van het geëxporteerde vertaalgeheugen bevatten nu alleen de originele en vertaalde tekst uit de bestanden die u hebt gekopieerd naar de bronmap, in het geselecteerde taalpaar. Bekijk de project-eigenschap <link linkend="dialogs.project.properties.file.locations.exported.tms" endterm="dialogs.project.properties.file.locations.exported.tms.title"/> voor details.</para>
+  </section>
+</section>
+
+<section id="how.to.tm.share.translation.memories">
+  <title id="how.to.tm.share.translation.memories.title">TM's delen</title>
+
+  <para>Voor grote taken, waar een team van vertalers bij betrokken is, is het voor alle betrokkenen eenvoudiger algemene vertaalgeheugens te delen dan hun eigen lokale versies heen en weer te sturen.</para>
+
+  <para>Er zijn twee manieren om vertaalgeheugens te delen:</para>
+
+  <variablelist>
+	<varlistentry>
+	  <term>De goed genoeg-manier</term>
+	  <listitem>
+		
+		<para>Bekijk het gedeelte <link linkend="how.to.use.tm.create.your.tm" endterm="how.to.use.tm.create.your.tm.title"/> hierboven.</para>
+
+		<para>Als u het TMX-bestand wegschrijft naar een map op een gedeelde schijf, kunt u uw partner vragen om die map als de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> voor de huidige vertaling toe te wijzen.</para>
+
+		<para>Omgekeerd kunt u uw partner vragen de TMX-bestanden voor het project weg te schijven naar een gedeelde schijf die u kunt toewijzen als uw map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> voor de huidige vertaling.</para>
+
+		<para>OmegaT herkent onmiddellijk aanpassingen aan de TMX-bestanden. Daarom zal, iedere keer als één kant een dergelijke TMX maakt of aanpast met <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, hoeft de andere kant niets te doen om er voor te zorgen dat de TMX lkaal wordt herkend.</para>
+
+		<para>Deze benadering werkt net zo goed voor het delen van woordenlijsten waar de beschrijfbare woordenlijst van het project (met een niet-standaard naam om overschrijven van het bestand te voorkomen) is geplaatst in een gedeelde map glossary. Bekijk de appendix <link linkend="app.glossaries" endterm="app.glossaries.title"/> voor details.</para>
+
+		<note>
+		  <para>Deze benadering werkt goed als het gat tussen updates van de TMX niet belangrijk is: een vertaler die bijvoorbeeld enkele keren per dag gegevens naar een recensent stuurt.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>De technische benadering</term>
+	  <listitem>
+		<para>OmegaT gebruikt collaboratieve versiesystemen om gegevens te delen.</para>
+
+		<para>Dergelijke systemen zijn vrij te gebruiken, te installeren en te beheren en worden breed gebruikt in de wereld van het ontwikkelen van computersoftware, war ze extreem robuust maakt.</para>
+
+		<para>Bekijk de <link linkend="how.to.setup.team.project" endterm="how.to.setup.team.project.title"/> how-to voor details.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  <warning>
+	<para>Wees voorzichtig als u een heel project in een systeem voor het delen van bestanden, zoals DropBox, OneCloud en soortgelijke, plaatst.</para>
+	<para><emphasis>Dergelijke systemen zijn niet ontworpen om de interne wijzigingen in een bepaald bestand bij te houden.</emphasis></para>
+	<para>Een project van OmegaT is een complexe set bestanden. Dergelijke systemen zullen niet altijd in staat zijn om u te voorzien van de meest recente versie van uw gegevens, zou zelfs sommige bestanden kunnen vergrendelen zonder duidelijke reden en kunnen zelfs teamproject gerelateerde bestanden corrumperen.</para>
+	<para>Zorg er voor dat u de lay-out van uw project deugdelijk hebt getest en stel een afzonderlijk back-up van de gegevens in, voordat u gegevens deelt in een dergelijk systeem.</para>
+  </warning>
+</section>
+
+<section id="how.to.tm.bridge.two.languages">
+  <title id="how.to.tm.bridge.two.languages.title">Brug tussen twee talen</title>
+
+  <para>OmegaT geeft fuzzy overeenkomsten weer in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Standaard zijn deze overeenkomsten beperkt tot de bron- en doeltalen, gedefinieerd in het dialoogvenster <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
+
+  <para>U kunt overeenkomsten toevoegen in talen die niet de doeltaal zijn. Bekijk de <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> voorkeur voor details.</para>
+
+  <para>Als u een TMX hebt dat correspondeert met uw brondocument en zijn vertaling in een andere taal bevat, kunt u ook die taal <emphasis>direct onder</emphasis> het bronsegment weergeven, om te gebruiken als een aanvullende taal voor verwijzing.</para>
+
+  <para>Om dit te bereiken:</para>
+
+	<orderedlist>
+	  <listitem>
+		<para>Kopieer het vertaalgeheugen, dat de aanvullende taal voor verwijzing bevat, naar de map <filename class="directory">tmx2source</filename> in de map <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> folder.</para>
+	  </listitem>
+
+	  <listitem>
+		<para>hernoem het bestand voor het geheugen naar:<itemizedlist>
+		  <listitem>
+			<para>
+			  <filename>LL_CC.tmx</filename>,
+			</para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL-CC.tmx</filename>, of</para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL.tmx</filename>,
+			</para>
+		  </listitem>
+		</itemizedlist>waar <emphasis>LL</emphasis> de interne taalcode is van de taal die u als verwijzing wilt weergeven, en <emphasis>CC</emphasis> is een willekeurige 2-letterige code.</para>
+		<warning>
+		  <itemizedlist>
+			<listitem>
+			  <para>Alle letters moeten hoofdletters zijn.</para>
+			</listitem>
+			<listitem>
+			  <para>Alleen segmenten die <emphasis role="bold">exact</emphasis> overeenkomen met de bron worden weergegeven.</para>
+			</listitem>
+		  </itemizedlist>
+		</warning>
+	  </listitem>
+	</orderedlist>
+
+  <example id="bridge.english.and.french.with.japanese">
+	<title id="replace.with.allemand.title">Gebruiken van een Japanse verwijzing onder de Engelse bron</title>
+	<para>Als u een TMX hebt die de Japanse vertaling van een Engels document bevat dat u vertaalt naar het Frans, kunt u de Japanse vertaling gebruiken als een alternatieve exacte verwijzing door het onder de te vertalen Engelse tekst weer te geven.</para>
+	<para>Plaats eenvoudigweg het Engels-Japanse bestand in <filename class="directory">tm/tmx2source</filename> met de naam <filename>JA-JP.tmx</filename>. OmegaT zal u nu de Japanse tekst, die correspondeert met het Engelse bronsegment, laten zien:</para>
+	<para>
+	  <programlisting>— ¶ —————————————————————
+<token>A whitespace character: [ \t\n\x0B\f\r]
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</token>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
+— ¶ —————————————————————</programlisting></para>
+<para>De eerste regel is het originele Engels, de tweede regel is de taal van de brugtaal waarvan u verwacht dat die nuttig is bij het maken van uw vertaling, en de derde regel is de huidige vertaling naar Frans.</para>
+  </example>
+  
+    <note>
+	  <para>U mag elk aantal TMX-bestanden, die net zoveel verschillende brugtalen bevatten als u wilt, gebruiken.</para>	  
+	</note>
+  </section>
+</section>

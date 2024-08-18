@@ -51,7 +51,7 @@ OmegaT installieren (Mac)
 
 Entpacken Sie das .zip-Archiv von OmegaT, um einen Ordner mit einer
 Dokumentationsdatei und der OmegaT-Anwendung zu erhalten. Verschieben Sie den
-Ordner an einen geeigneten Ort, z. B. in den Programme-Ordner.
+Ordner an einen geeigneten Ort, z.B. in den Programme-Ordner.
 
 
 
@@ -197,7 +197,7 @@ Die aktuellsten Informationen über OmegaT finden Sie unter:
 
   https://omegat.org/
 
-Unterstützungen für den Nutzer:
+Unterstützungen für den Benutzer:
 
   https://omegat.org/support
 
@@ -208,3 +208,7 @@ Verbesserungswünsche (in Englisch), auf der SourceForge-Seite:
 Fehlerberichte (in Englisch), auf der SourceForge-Seite:
 
   https://sourceforge.net/p/omegat/bugs/
+
+OmegaT Contribution Guide
+
+  https://omegat.readthedocs.io/en/latest/

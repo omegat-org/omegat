@@ -6,13 +6,13 @@
   <section id="app.shortcuts.description">
     <title id="app.shortcuts.description.title">Beschreibung</title>
 
-    <para>Die Benutzeroberfläche von OmegaT verwendet in der Regel keine Schaltflächen für den Zugriff auf die Funktionen von OmegaT. Stattdessen werden sie über die Menüs oder, bei den meisten Funktionen, über ihre Tastenkürzel aufgerufen.</para>
+    <para>Die Benutzeroberfläche von OmegaT bietet grundsätzlich keine Schaltflächen für den Zugriff auf die Funktionen von OmegaT. Stattdessen werden die Funktionen über die Menüs oder die meisten davon über ihre zugewiesenen Tastenkürzel ausgeführt.</para>
   
-    <para>Es wird nicht lange dauern, bis Sie die häufig verwendeten Tastenkürzel gelernt haben, sobald Sie mit OmegaT arbeiten. Die Tastenkürzel werden neben jedem Menüpunkt angezeigt, so dass Sie nach und nach neue Tastenkürzel lernen können, während Sie die Software verwenden.</para>
+    <para>Es wird nicht lange dauern, bis Sie die gebräuchlichsten Tastenkürzel gelernt haben, sobald Sie mit OmegaT arbeiten. Die Tastenkürzel werden neben jedem Menüpunkt angezeigt, so dass Sie nach und nach neue Tastenkürzel lernen können, während Sie die Software verwenden.</para>
 
     <para>Sie können die meisten Tastenkürzel in OmegaT individuell anpassen. Einzelheiten finden Sie im Abschnitt <link endterm="app.shortcuts.customization.title" linkend="app.shortcuts.customization"/>.</para>
 
-    <para>OmegaT läuft auf jeder Plattform, auf der eine Java-Laufzeitumgebung installiert ist (Windows, macOS und Linux sind die gängigsten). Die Modifikatortasten der Tastenkürzel unterscheiden sich leicht je nach Plattform. Um das Lesen zu erleichtern, werden wir die Modifikatortasten in dieser Dokumentation wie folgt darstellen:</para>
+    <para>OmegaT läuft auf jeder Plattform, auf der eine Java Runtime installiert ist (Windows, macOS und Linux sind die gängigsten). Die Modifikatortasten der Tastenkürzel unterscheiden sich leicht je nach Plattform. Um das Lesen zu erleichtern, werden wir die Modifikatortasten in dieser Dokumentation wie folgt darstellen:</para>
 	
     <table id="app.shortcut.description">
       <title id="app.shortcut.description.title">Modifikatortastendarstellung</title>
@@ -28,39 +28,39 @@
 
         <tbody>
           <row>
-            <entry><keycap>Umschalt</keycap></entry>
+            <entry><keycap>Shift</keycap></entry>
             <entry><keycap>S</keycap></entry>
-            <entry><keycap>shift</keycap> oder <keycap>⇧</keycap></entry>
+            <entry><keycap>shift</keycap> / <keycap>⇧</keycap></entry>
           </row>
 
           <row>
-            <entry><keycap>Strg</keycap> oder <keycap>Ctrl</keycap></entry>
+            <entry><keycap>Ctrl</keycap> / <keycap>Control</keycap></entry>
             <entry><keycap>C</keycap></entry>
-            <entry><keycap>command</keycap> oder <keycap>⌘</keycap></entry>
+            <entry><keycap>command</keycap> / <keycap>⌘</keycap></entry>
           </row>
 
           <row>
             <entry><keycap>Alt</keycap></entry>
             <entry><keycap>A</keycap></entry>
-            <entry><keycap>alt / option</keycap> oder <keycap>⌥</keycap></entry>
+            <entry><keycap>alt / option</keycap> / <keycap>⌥</keycap></entry>
           </row>
 
           <row>
             <entry/>
             <entry><keycap>Ctrl</keycap></entry>
-            <entry><keycap>control</keycap> oder <keycap>⌃</keycap></entry>
+            <entry><keycap>control</keycap> / <keycap>⌃</keycap></entry>
           </row>
         </tbody>
       </tgroup>
     </table>
         
-    <para>Dank der oben genannten <emphasis role="bold">Tastendarstellungen</emphasis> müssen wir nicht für jedes Tastenkürzel mehrere Schreibweisen auflisten.</para>
+    <para>Dank der obigen <emphasis role="bold">Tastendarstellungen</emphasis> müssen wir nicht für jedes Tastenkürzel mehrere Schreibweisen auflisten.</para>
 
     <example id="example.avoid.listing.multiple.notations">
-	  <title id="example.avoid.listing.multiple.notations.title">So vermeiden wir die Auflistung mehrerer Schreibweisen:</title>
-	  <para>Bei Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>Umschalt</keycap><keycap>N</keycap></keycombo></para>
+	  <title id="example.avoid.listing.multiple.notations.title">Auf diese Weise vermeiden wir die Auflistung mehrerer Schreibweisen:</title>
+	  <para>Unter Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>Umschalt</keycap><keycap>N</keycap></keycombo></para>
 
-	  <para>In macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo></para>
+	  <para>Unter macOS: <keycombo><keycap>Shift</keycap><keycap>Command</keycap><keycap>N</keycap></keycombo></para>
 
 	  <para>In dieser Bedienungsanleitung: <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></para>
 	</example>
@@ -69,7 +69,7 @@
   <section id="app.shortcuts.customization">
     <title id="app.shortcuts.customization.title">Anpassung</title>
 
-    <para>OmegaT weist den meisten Funktionen, die über die Menüs <link linkend="menus.project" endterm="menus.project.title"/>, <link linkend="menus.edit" endterm="menus.edit.title"/> und <link linkend="menus.goto" endterm="menus.goto.title"/> aufrufbar sind, sowie einer Reihe von Funktionen im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich Tastenkürzel zu. Sie können auch die Tastenkürzel für die meisten Funktionen hinzufügen oder ändern.</para>
+    <para>OmegaT weist den meisten Funktionen, die über die Menüs <link linkend="menus.project" endterm="menus.project.title"/>, <link linkend="menus.edit" endterm="menus.edit.title"/> und <link linkend="menus.goto" endterm="menus.goto.title"/> aufrufbar sind, sowie einer Reihe von Funktionen im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich Tastenkürzel zu. Für die meisten Funktionen können Sie auch Tastenkürzel hinzufügen oder ändern.</para>
 
 	<para>Um das zu tun, müssen Sie die entsprechende Tastenkürzel-Definitionsdatei in Ihrem OmegaT-Konfigurationsordner ablegen. Einzelheiten finden Sie unter <link endterm="configuration.folder.title" linkend="configuration.folder"/>.</para>
 
@@ -79,7 +79,7 @@
       <varlistentry>
         <term id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</term>
         <listitem>
-          <para>Die Tastenkürzel-Definitionsdatei für Menüs und einigen anderen Menüpunkten.</para>
+          <para>Die Tastenkürzel-Definitionsdatei für Menüs und einige andere Menüpunkte.</para>
         </listitem>
       </varlistentry>
 
@@ -90,7 +90,7 @@
       </varlistentry>
     </variablelist>
 
-    <para>OmegaT muss nach dem Ändern einer Tastenkürzel-Definitionsdatei neu gestartet werden, damit die neuen Tastenkürzel wirksam werden.</para>
+    <para>Nach dem Ändern einer Tastenkürzel-Definitionsdatei muss OmegaT neu gestartet werden, damit die neuen Tastenkürzel wirksam werden.</para>
 
     <note>
       <para>Sie können die Standard-OmegaT-Dateien von der OmegaT-Entwicklungsseite auf Sourceforge in <link linkend="configuration.folder">Ihren Konfigurationsordner</link> kopieren und sie nach Belieben anpassen:</para>
@@ -129,19 +129,19 @@
       <para>Die macOS-Dateien müssen <link linkend="MainMenuShortcuts.properties" endterm="MainMenuShortcuts.properties"/> und <link linkend="EditorShortcuts.properties" endterm="EditorShortcuts.properties"/> heißen, damit OmegaT sie erkennt.</para>
     </note>
 
-    <para>Der nächste Abschnitt beschreibt die Syntax, die in den Tastenkürzel-Definitionsdateien verwendet wird, und enthält ein Bearbeitungsbeispiel.</para>
+    <para>Der folgende Abschnitt beschreibt die Syntax, die in den Tastenkürzel-Definitionsdateien verwendet wird, und enthält ein Änderungsbeispiel.</para>
   </section>
 
   <section id="app.shortcuts.syntax">
     <title id="app.shortcuts.syntax.title">Syntax</title>
 
-    <para>Die grundlegende Syntax der Tastenkürzel-Definitionsdateien ist einfach:</para>
+    <para>Die Grundsyntax der Tastenkürzel-Definitionsdateien ist einfach:</para>
 
     <para><code>Funktionscode=Tastenkürzel</code></para>
 
-	<para>Verwenden Sie die Tabellen im Abschnitt <link linkend="app.shortcuts.lists" endterm="app.shortcuts.lists.title"/> unten, um die Werte für <code>Funktionscode</code> zu finden.</para>
+	<para>Verwenden Sie für <code>Funktionscode</code> die Tabellen im Abschnitt <link linkend="app.shortcuts.lists" endterm="app.shortcuts.lists.title"/> unten.</para>
     
-    <para><code>Tastenkürzel</code> repräsentiert die vom Nutzer gedrückte Tastenkombination. Es hat die folgende Form:</para>
+    <para><code>Tastenkürzel</code> repräsentiert die vom Benutzer gedrückte Tastenkombination. Es hat die folgende Form:</para>
     
     <itemizedlist>
       <listitem>
@@ -162,7 +162,7 @@
         <para>wobei <code>Modifikator</code> folgendes sein kann: <literal>shift</literal>, <literal>ctrl</literal>, <literal>meta</literal>, <literal>alt</literal> oder <literal>altGraph</literal></para>
 
         <note>
-          <para><literal>meta</literal> bezieht sich bei den meisten Tastaturen für Windows- oder Linux-Systeme auf die Taste mit dem Windows-Logo und bei macOS auf die <literal>command</literal>-Taste.</para>
+          <para><literal>meta</literal> bezieht sich auf die Taste mit dem Windows-Logo, die auf den meisten Tastaturen für Windows- oder Linux-Systeme zu finden ist, und auf die <literal>command</literal>-Taste unter macOS.</para>
 
           <para><literal>altGraph</literal> bezieht sich auf die <emphasis>Alt</emphasis>-Taste rechts neben der Leertaste bei Tastaturen mit zwei <emphasis>Alt</emphasis>-Tasten.</para>
         </note>
@@ -177,14 +177,14 @@
       </listitem>
     </itemizedlist>
 
-    <para>Es können Leerzeilen und Kommentare hinzugefügt werden, um die Liste zu ordnen und besser lesbar zu machen. Eine Kommentarzeile beginnt mit einem <code>#</code>; alles, was danach kommt, wird von der Applikation ignoriert.</para>
+    <para>Es können Leerzeilen und Kommentare hinzugefügt werden, um die Liste zu ordnen und lesbarer zu machen. Eine Kommentarzeile beginnt mit einem <code>#</code>, und alles was danach kommt, wird von der Applikation ignoriert.</para>
 
-    <para>Am einfachsten können Sie die Tastenkürzel ändern, indem Sie, wie oben erwähnt, die Standarddateien herunterladen und in <link linkend="configuration.folder">Ihren Konfigurationsordner</link> kopieren und dort die gewünschten Änderungen vornehmen.</para>
+    <para>Am einfachsten ändern Sie die Tastenkürzel, indem Sie die Standarddateien wie oben beschrieben herunterladen, in <link linkend="configuration.folder">Ihren Konfigurationsordner</link> kopieren und dort die gewünschten Änderungen vornehmen.</para>
     
     <example id="example.shortcut.modification">
       <title id="example.shortcut.modification.title">Tastenkürzel ändern</title>
 
-      <para>Das reguläre Tastenkürzel zum <link linkend="menus.project.close">Schließen eines Projekts</link> ist in Windows und Linux definiert als:</para>
+      <para>Das reguläre Tastenkürzel zum <link linkend="menus.project.close">Schließen eines Projekts</link> ist unter Windows und Linux wie folgt definiert:</para>
 
 	  <para><code>projectCloseMenuItem=ctrl shift W</code></para>
 
@@ -192,9 +192,9 @@
 	  
 	  <para><code>projectCloseMenuItem=meta shift W</code></para>
 
-      <para>Möglicherweise möchten Sie jedoch die <keycap>S</keycap>-Taste aus dem Tastenkürzel entfernen, so dass es nur noch <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (bzw. <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> unter macOS) ist, damit es dem Tastenkürzel entspricht, das Sie in anderen Applikationen verwenden.</para>
+      <para>Möglicherweise möchten Sie jedoch die <keycap>S</keycap>-Taste aus dem Tastenkürzel entfernen, um in Endeffekt <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> (bzw. <keycombo><keycap>Command</keycap><keycap>W</keycap></keycombo> unter macOS) zu haben, entsprechend dem Tastenkürzel, das Sie in anderen Applikationen verwenden.</para>
 
-	  <para>Um das zu tun, ändern Sie die <filename>MainMenuShortcuts.properties</filename>-Datei wie folgt für Windows und Linux:</para>
+	  <para>Um das zu tun, ändern Sie die Datei <filename>MainMenuShortcuts.properties</filename> wie folgt für Windows und Linux:</para>
 
 	  <para><code>projectCloseMenuItem=ctrl W</code></para>
 
@@ -208,47 +208,47 @@
 
       <para>Wenn Ihr Sprachpaar die häufige Nutzung <link linkend="menus.edit.create.alternative.translation">alternativer Übersetzungen</link> erfordert, sollten Sie dieser Funktion ein Tastenkürzel zuweisen, da sie standardmäßig keines hat.</para>
 
-      <para>Die folgenden Schritte zeigen, wie Sie das Tastenkürzel <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> dem Menüpunkt <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> zuweisen.</para>
+      <para>Die folgenden Schritte zeigen, wie Sie dem Menüpunkt <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.alternative.translation" endterm="menus.edit.create.alternative.translation.title"/> das Tastenkürzel <keycombo><keycap>Alt</keycap><keycap>X</keycap></keycombo> zuweisen.</para>
 	  
       <orderedlist>
         <listitem>
-          <para>Öffnen Sie die <filename>MainMenuShortcuts.properties</filename>-Datei, die Sie in <link linkend="configuration.folder">Ihren Konfigurationsordner</link> kopiert haben, in einem Texteditor.</para>
+          <para>Öffnen Sie die Datei <filename>MainMenuShortcuts.properties</filename>, die Sie in <link linkend="configuration.folder">Ihren Konfigurationsordner</link> kopiert haben, in einem Texteditor.</para>
         </listitem>
 
 		<listitem>
-          <para>Wie in der <link linkend="app.shortcuts.lists.function.codes.edit.menu.table">Bearbeiten-Menü-Tabelle</link> unten gezeigt, lautet der Funktionscode für die Funktion <guimenuitem>Alternative Übersetzung erstellen</guimenuitem> <code>editMultipleAlternate</code>.</para>
+          <para>Wie in der <link linkend="app.shortcuts.lists.function.codes.edit.menu.table">Bearbeiten-Menü-Tabelle</link> unten gezeigt, hat die Funktion &quot;<guimenuitem>Alternative Übersetzung erstellen</guimenuitem>&quot; den Funktionscode <code>editMultipleAlternate</code>.</para>
 
-          <para>Wenn Sie nach diesem Code in der Datei suchen, werden Sie die folgende Zeile finden:</para>
+          <para>Wenn Sie in der Datei nach diesem Code suchen, werden Sie die folgende Zeile finden:</para>
 		  
           <para><code>#	editMultipleAlternate=</code></para>
         </listitem>
 
 		<listitem>
-            <para>Aktuell ist die Zeile ein Kommentar. Löschen Sie das <code>#</code> am Anfang der Zeile, damit OmegaT das Tastenkürzel erkennt, und fügen Sie <option>alt X</option> nach dem <code>=</code>-Zeichen am Ende der Zeile ein:</para>
+            <para>Derzeit ist diese Zeile ein Kommentar. Löschen Sie das <code>#</code> am Anfang der Zeile, damit OmegaT das Tastenkürzel erkennt, und fügen Sie <option>alt X</option> nach dem <code>=</code>-Zeichen am Ende der Zeile ein:</para>
 			
             <para><code>editMultipleAlternate=alt X</code></para>
         </listitem>
 
 		<listitem>
-            <para>Speichern und schließen Sie die Datei. Wenn Sie OmegaT das nächste Mal starten, sollte Ihr neues Tastenkürzel aktiv sein und neben dem Namen der Funktion im Menü angezeigt werden.</para>
+            <para>Speichern und schließen Sie die Datei. Wenn Sie OmegaT das nächste Mal starten, sollte Ihr neues Tastenkürzel aktiv sein und im Menü neben dem Namen der Funktion angezeigt werden.</para>
           </listitem>
         </orderedlist>
     </example>
 
-    <para>Speichern Sie die Datei, nachdem Sie Ihre Änderungen vorgenommen haben. Wenn OmegaT offen ist, müssen Sie es neu starten, damit Ihre Änderungen wirksam werden.</para>
-    <para>Ihre geänderten oder hinzugefügten Tastenkürzel sollten nun neben den von Ihnen geänderten Menüpunkten angezeigt werden. Sie stehen nun in OmegaT zur Verfügung, sofern es keine Konflikte mit anderen Funktionen oder mit systemweiten Tastenkürzeln gibt.</para>
+    <para>Speichern Sie die Datei, nachdem Sie Ihre Änderungen vorgenommen haben. Wenn OmegaT geöffnet ist, müssen Sie es neu starten, damit Ihre Änderungen wirksam werden.</para>
+    <para>Ihre geänderten oder hinzugefügten Tastenkürzel sollten nun neben den von Ihnen geänderten Menüpunkten angezeigt werden. Sie sind nun in OmegaT verfügbar, sofern es keine Konflikte mit anderen Funktionen oder mit systemweiten Tastenkürzeln gibt.</para>
 
-    <para>Der nächste Abschnitt enthält Tabellen mit den Funktionscodes und den zugehörigen regulären Tastenkürzeln für jedes Menü oder jede Editorfunktion in OmegaT.</para>
+    <para>Der nächste Abschnitt enthält Tabellen mit den Funktionscodes und den zugehörigen regulären Tastenkürzeln für jede Menü- oder Editorfunktion in OmegaT.</para>
   </section>
 
   
 
   <section id="app.shortcuts.lists">
-    <title id="app.shortcuts.lists.title">Listen von Funktionen und Codes</title>
+    <title id="app.shortcuts.lists.title">Listen der Funktionen und Codes</title>
     <section id="app.shortcuts.lists.function.codes.menus">
       <title id="app.shortcuts.lists.function.codes.menus.title">Menüfunktionen</title>
 
-      <para>In den folgenden Tabellen finden Sie Funktionen, die in der <filename>MainMenuShortcuts.properties</filename>-Datei geändert werden können, sowie ihre Standardwerte. Die Tastenkürzel in Klammern sind Alternativen für dieselbe Funktion aus der <filename>EditorShortcuts.properties</filename>-Datei.</para>
+      <para>Die folgenden Tabellen enthalten Funktionen, die in der Datei <filename>MainMenuShortcuts.properties</filename> geändert werden können, sowie deren Standardwerte. Die Tastenkürzel in Klammern sind Alternativen für dieselbe Funktion in <filename>EditorShortcuts.properties</filename>.</para>
 
       <table id="app.shortcuts.lists.function.codes.project.menu.table">
         <title id="app.shortcuts.lists.function.codes.project.menu.table.title">Projekt-Menü</title>
@@ -470,14 +470,14 @@
             </row>
 
             <row>
-              <entry>Mit Match oder Auswahl ersetzen</entry>
+              <entry>Mit Match oder Markiertem ersetzen</entry>
               <entry>editOverwriteTranslationMenuItem</entry>
               <entry>ctrl R</entry>
               <entry>meta R</entry>
             </row>
 
             <row>
-              <entry>Match oder Auswahl einfügen</entry>
+              <entry>Match oder Markiertes einfügen</entry>
               <entry>editInsertTranslationMenuItem</entry>
               <entry>ctrl I</entry>
               <entry>meta I</entry>
@@ -526,7 +526,7 @@
             </row>
 
             <row>
-              <entry>Auswahl exportieren</entry>
+              <entry>Markiertes exportieren</entry>
               <entry>editExportSelectionMenuItem</entry>
               <entry>ctrl shift C</entry>
               <entry>meta shift C</entry>
@@ -781,28 +781,28 @@
             </row>
 
             <row>
-              <entry>Automatisch ausgefüllte Segmente → Nächstes Segment von tm/auto/</entry>
+              <entry>Automatisch gefüllte Segmente → Nächstes Segment von tm/auto/</entry>
               <entry>gotoNextXAutoMenuItem</entry>
               <entry>ctrl alt COMMA</entry>
               <entry>meta alt COMMA</entry>
             </row>
 
             <row>
-              <entry>Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/auto/</entry>
+              <entry>Automatisch gefüllte Segmente → Vorheriges Segment von tm/auto/</entry>
               <entry>gotoPrevXAutoMenuItem</entry>
               <entry>ctrl alt shift COMMA</entry>
               <entry>meta alt shift COMMA</entry>
             </row>
 
             <row>
-              <entry>Automatisch ausgefüllte Segmente → Nächstes Segment von tm/enforce/</entry>
+              <entry>Automatisch gefüllte Segmente → Nächstes Segment von tm/enforce/</entry>
               <entry>gotoNextXEnforcedMenuItem</entry>
               <entry>ctrl alt PERIOD</entry>
               <entry>meta alt PERIOD</entry>
             </row>
 
             <row>
-              <entry>Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/enforce/</entry>
+              <entry>Automatisch gefüllte Segmente → Vorheriges Segment von tm/enforce/</entry>
               <entry>gotoPrevXEnforcedMenuItem</entry>
               <entry>ctrl alt shift PERIOD</entry>
               <entry>meta alt shift PERIOD</entry>
@@ -895,7 +895,7 @@
             </row>
 
             <row>
-              <entry>Leerraum anzeigen</entry>
+              <entry>Leerräume anzeigen</entry>
               <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
             </row>
 
@@ -905,7 +905,7 @@
             </row>
 
             <row>
-              <entry>Automatisch ausgefüllte Segmente hervorheben</entry>
+              <entry>Automatisch gefüllte Segmente hervorheben</entry>
               <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
             </row>
 
@@ -1004,7 +1004,7 @@
       <note>
         <para>Der Menüpunkt <link linkend="windows.scripts" endterm="windows.scripts.title"/> im Menü <link linkend="menus.tools" endterm="menus.tools.title"/> ist eine Ausnahme.</para>
 
-        <para>Es ist nicht möglich, ein Tastenkürzel zum Aufrufen des Skripteditors hinzuzufügen oder die Tastenkürzel, die den Skripten zugewiesen sind, zu ändern.</para>
+        <para>Es ist nicht möglich, ein Tastenkürzel für den Aufruf des Skripteditors hinzuzufügen oder die Tastenkürzel der zugewiesenen Skripte zu ändern.</para>
       </note>
 
       <table id="app.shortcuts.lists.function.codes.options.menu.table">
@@ -1165,7 +1165,7 @@
     <section id="app.shortcuts.lists.function.codes.windows">
       <title id="app.shortcuts.lists.function.codes.windows.title">Editorfunktionen</title>
 
-      <para>In den folgenden Tabellen finden Sie Funktionen, die in der <filename>EditorShortcuts.properties</filename>-Datei geändert werden können, sowie ihre Standardwerte.</para>
+      <para>Die folgenden Tabellen enthalten Funktionen, die in der Datei <filename>EditorShortcuts.properties</filename> geändert werden können, sowie deren Standardwerte.</para>
 
       <table id="app.shortcuts.lists.function.codes.editor.table">
         <title id="app.shortcuts.lists.function.codes.editor.table.title">Editor</title>

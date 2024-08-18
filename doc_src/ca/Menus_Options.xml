@@ -26,7 +26,7 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>Us permet activar o desactivar els motors de traducció automàtica disponibles.</para>
+        <para>Us permet activar o desactivar els motors de traducció automàtica habilitats i configurats correctament.</para>
 
         <para>Si se seleccionen diversos motors de traducció, també podeu utilitzar <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> per a canviar de motor i inserir el resultat de l'últim motor seleccionat. Consulteu les preferències de <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> per a conèixer més detalls.</para>
       </listitem>

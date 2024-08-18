@@ -1,9 +1,8 @@
-De NL versie van OmegaT is vertaald door:
-Dick Groskamp
+De versie @language@ van OmegaT is vertaald door:
+@TRANSLATION_NOTICE@
 
 
 Wat is OmegaT?
-
 ==============
 
 OmegaT is een vrij en open source multiplatform Computer Assisted Translation-programma met fuzzy overeenkomsten, vertaalgeheugen, zoeken op sleutelwoorden, woordenlijsten en vertalinguitbreiding in bijgewerkte projecten.
@@ -24,7 +23,8 @@ in /lib/licenses/Licenses.txt.
 Vereisten voor installeren van OmegaT
 =====================================
 
-OmegaT vereist dat de Java Runtime Environment (JRE) versie 1.8 of hoger is geïnstalleerd op uw systeem.
+OmegaT vereist dat de Java Runtime Environment (JRE) versie 1.8 of hoger is
+geïnstalleerd op uw systeem.
 
 We bevelen aan OmegaT-pakketten te gebruiken die de JRE bevatten,
 om u het probleem van selecteren, verkrijgen en installeren te besparen.
@@ -39,6 +39,7 @@ Start het installatieprogramma.
 
 
 Installeren van OmegaT (Mac)
+=======================
 
 Pak het OmegaT .zip-archief uit om een map te krijgen die een
 bestand met documentatie en de toepassing OmegaT bevat. Verplaats de map naar een
@@ -51,13 +52,13 @@ Installeren van OmegaT (Linux)
 
 Plaats het archief in een geschikte map en pak het uit. OmegaT is dan gereed om te worden opgestart.
 
-U kunt echter een meer nette en gebruikersvriendelijker installatie verkrijgen door installatie krijgen door het installatiescript te gebruiken (linux-install.sh). Open, om dit script te gebruiken, een venster voor de terminal (console), wijzig de folder naar de folder die OmegaT.jar bevat en het script linux-install.sh, en voer het script uit met ./linux-
-install.sh.
+U kunt echter een meer nette en gebruikersvriendelijker installatie verkrijgen door installatie krijgen door het installatiescript te gebruiken (linux-install.sh). Open, om dit script te gebruiken, een venster voor de terminal
+(console), wijzig de folder naar de folder die OmegaT.jar bevat en het script linux-install.sh, en voer het script uit met ./linux-install.sh.
 
 
 
 Installeren van OmegaT (Solaris, FreeBSD, etc.)
-===============================================
+=============================================
 
 Plaats het archief in een geschikte map en pak het uit. OmegaT is dan gereed om te worden opgestart.
 
@@ -79,11 +80,13 @@ maar niet OmegaT.exe, wijzig dan de instellingen zodat de bestandsextensies word
 
 
 Starten van OmegaT (Mac)
+======================
 
 Dubbelklik op de toepassing OmegaT.
 
 Sleep de toepassing OmegaT naar uw dock of naar de werkbalk van een Finder-venster
-om het vanaf elke locatie te kunnen starten. U kunt het ook starten in het zoekveld van Spotlight.
+om het vanaf elke locatie te kunnen starten. U kunt het ook starten
+ in het zoekveld van Spotlight.
 
 
 
@@ -98,8 +101,7 @@ en dan:
 
     omegat
 
-Voor een meer gebruikersvriendelijker manier om OmegaT op te starten, kunt u het meegeleverde script van Kaptain gebruiken (omegat.kaptn). U moet eerst Kaptain installeren
- om het te kunnen gebruiken. U kunt dan het Kaptain opstartscript starten met:
+Voor een meer gebruikersvriendelijker manier om OmegaT op te starten, kunt u het meegeleverde script van Kaptain gebruiken (omegat.kaptn). U moet eerst Kaptain installeren om dit script te kunnen gebruiken. U kunt dan het Kaptain opstartscript starten met:
 
     Alt+F2
 
@@ -167,6 +169,7 @@ maar ziet u uw naam niet op deze lijst, neem dan alstublieft contact met ons op.
 
 
 Nuttige links
+============
 
 De meest recente informatie over OmegaT is te vinden op:
 
@@ -183,3 +186,7 @@ Verzoeken tot verbeteringen (in het Engels) op de website van SourceForge:
 Foutrapportages (in het Engels) op de website van SourceForge:
 
   https://sourceforge.net/p/omegat/bugs/
+
+OmegaT Contribution Guide
+
+  https://omegat.readthedocs.io/en/latest/

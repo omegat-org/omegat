@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   0 Enhancement
  14 Bug fixes
-  2 Localisation updates
+  7 Localisation updates
 ----------------------------------------------------------------------
 6.0.1 vs 6.0.0
 
@@ -53,8 +53,13 @@
 
   Localization Updates:
 
+  - Catalan localization updated (UI, readme, documentation)
+  - Corsican localization updated (UI, readme)
+  - Dutch localization updated (UI, readme, documentation, scripts)
   - French localization updated (UI, documentation)
+  - German localization updated (UI, readme, documentation, scripts)
   - Japanese localization updated (documentation)
+  - Ukrainian localization updated (UI, readme, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-22)

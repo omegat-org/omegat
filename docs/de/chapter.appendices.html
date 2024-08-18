@@ -9,7 +9,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -139,7 +139,7 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.appendices.html#glossaries.default.glossary">Projekteigenes Glossar</a>
+                           <a href="chapter.appendices.html#glossaries.default.glossary">Projektglossar</a>
                         </span>
                      </li>
                      <li>
@@ -210,7 +210,7 @@
                      </li>
                      <li>
                         <span class="section">
-                           <a href="chapter.appendices.html#app.shortcuts.lists">Listen von Funktionen und Codes</a>
+                           <a href="chapter.appendices.html#app.shortcuts.lists">Listen der Funktionen und Codes</a>
                         </span>
                      </li>
                   </ul>
@@ -254,7 +254,7 @@
             </div>
             <div class="warning">
                <h3 class="title">Warnung</h3>
-               <p>Dateifilter sind entweder lokal und spezifisch für ein bestimmtes Projekt, oder global und für alle Projekte verfügbar, die sich einen Konfigurationsordner teilen.</p>
+               <p>Dateifilter sind entweder lokal und spezifisch für ein bestimmtes Projekt oder global und für alle Projekte, die sich einen Konfigurationsordner teilen, verfügbar.</p>
                <p>Einzelheiten finden Sie unter:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -281,16 +281,16 @@
                </div>
             </div>
             <p>Filter in fetter Schrift werden im aktuellen Projekt verwendet.</p>
-            <p>Deaktivieren Sie einen Filter durch Entfernen des Häkchens, wenn Sie die mit ihm verknüpften Dateien nicht übersetzen möchten. Der Inhalt dieser Dateien wird bei der Übersetzung nicht angezeigt.</p>
+            <p>Deaktivieren Sie einen Filter durch Entfernen des Häkchens, wenn Sie Dateien, die mit dem Filter verknüpft sind, nicht übersetzen möchten. Der Inhalt dieser Dateien wird während der Übersetzung nicht angezeigt.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Sie können die Filter nach Namen oder aktiviertem Zustand sortieren. Klicken Sie auf die entsprechende Spaltenüberschrift, um diese in aufsteigender oder absteigender Reihenfolge zu sortieren.</p>
+               <p>Sie können die Filter nach Namen oder Aktivierungsstatus sortieren. Klicken Sie auf die entsprechende Spaltenüberschrift, um auf- oder absteigend zu sortieren.</p>
             </div>
             <p>Um die Dateiendungen, Zieldateinamen und Kodierungen eines Filters zu ändern, wählen Sie ihn in der Liste aus und klicken Sie auf die Schaltfläche <span class="guibutton">Bearbeiten...</span>.</p>
-            <p>Einige Filter lassen sich mit der Schaltfläche <span class="guibutton">Optionen...</span> weiter anpassen.</p>
+            <p>Einige Filter können über die Schaltfläche <span class="guibutton">Optionen...</span> weiter angepasst werden.</p>
             <p>Klicken Sie auf die Schaltfläche <span class="guibutton">Standardwerte wiederherstellen</span>, um die Dateifilter auf ihre Standardeinstellungen zurückzusetzen.</p>
-            <p>Geänderte globale Dateifiltereinstellungen werden in <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.filters">filters.xml</a> im Konfigurationsordner gespeichert. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a>. Löscht man diese Datei, werden auch die Filtereinstellungen zurückgesetzt.</p>
-            <p>Geänderte lokale Dateifiltereinstellungen werden in die <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.filters">filters.xml</a>-Datei im Projektordner gespeichert. Einzelheiten finden Sie unter <a class="link" href="chapter.project.folder.html" title="Projektordner">Projektordner</a>. Löscht man diese Datei, werden auch die Filtereinstellungen zurückgesetzt und das Projekt wird wieder auf globale Dateifilter umgestellt.</p>
+            <p>Geänderte globale Dateifiltereinstellungen werden in <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.filters">filters.xml</a> im Konfigurationsordner gespeichert. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a>. Wird diese Datei gelöscht, werden die Filtereinstellungen zurückgesetzt.</p>
+            <p>Geänderte lokale Dateifiltereinstellungen werden in die <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.filters">filters.xml</a>-Datei im Projektordner gespeichert. Einzelheiten finden Sie im Kapitel <a class="link" href="chapter.project.folder.html" title="Projektordner">Projektordner</a>. Wird diese Datei gelöscht, werden die Filtereinstellungen zurückgesetzt und das Projekt verwendet wieder globale Dateifilter.</p>
             <section class="section" id="file.filters.general">
                <div class="titlepage">
                   <div>
@@ -305,26 +305,26 @@
                         <span class="term">Führende und nachfolgende Tags verstecken</span>
                      </dt>
                      <dd>
-                        <p>Führende und nachfolgende Tags werden von OmegaT in der Regel benötigt, um das übersetzte Segment korrekt wiederzugeben. Die Tags im übersetzbaren Inhalt zu verstecken, stellt sicher, dass Sie sie nicht versehentlich löschen oder verändern.</p>
-                        <p>Wenn Sie die führenden und nachfolgenden Tags nicht verstecken, müssen Sie darauf achten, die Tags auch in den übersetzten Text einzufügen.</p>
+                        <p>Führende und nachfolgende Tags werden von OmegaT in der Regel benötigt, um das übersetzte Segment korrekt wiederzugeben. Das Verstecken dieser Tags im übersetzbaren Inhalt stellt sicher, dass sie nicht versehentlich gelöscht oder geändert werden.</p>
+                        <p>Wenn die führenden und nachfolgenden Tags nicht versteckt werden, muss darauf geachtet werden, dass sie auch in den übersetzten Text eingefügt werden.</p>
                      </dd>
                      <dt>
                         <span class="term">Führende und nachfolgende Leerräume in unsegmentierten Projekten entfernen</span>
                      </dt>
                      <dd>
-                        <p>Standardmäßig entfernt OmegaT alle führenden und nachfolgenden Leerzeichen aus den übersetzbaren Inhalten. Wenn ein Projekt nicht segmentiert ist, bewirkt die Deaktivierung dieser Option, dass führende und nachfolgende Leerräume in der Übersetzung geändert werden können.</p>
+                        <p>Standardmäßig entfernt OmegaT alle führenden und nachfolgenden Leerräume (Leerzeichen, Zeilenumbrüche usw.) aus den übersetzbaren Inhalten. In unsegmentierten Projekten bewirkt das Deaktivieren dieser Option, dass führende und nachfolgende Leerräume in der Übersetzung veränderbar sind.</p>
                      </dd>
                      <dt>
                         <span class="term">Leerräume für alle Tags beibehalten</span>
                      </dt>
                      <dd>
-                        <p>Wenn die Quelldokumente Leerräume zur Gestaltung des Layouts enthalten, werden die Leerräume im übersetzten Dokument beibehalten.</p>
+                        <p>Wenn die Quelldokumente Leerräume (Leerzeichen, Zeilenumbrüche usw.) zur Gestaltung des Layouts enthalten, werden diese im übersetzten Dokument beibehalten.</p>
                      </dd>
                      <dt>
                         <span class="term">Dateinamen nicht zur Identifizierung alternativer Übersetzungen verwenden</span>
                      </dt>
                      <dd>
-                        <p>Der Name der Quelldatei ist eines der Elemente, die eine alternative Übersetzung kennzeichnen. Wenn diese Option aktiviert ist, werden nur die vorherigen/nächsten Segmente oder ein Segmentidentifikator verwendet, um eine alternative Übersetzung zu kennzeichnen.</p>
+                        <p>Standardmäßig ist der Name der Quelldatei eines der Elemente zur Identifizierung einer alternativen Übersetzung. Wenn diese Option aktiviert ist, werden nur die vorherigen/nächsten Segmente oder ein Segmentidentifikator verwendet, um eine alternative Übersetzung zu identifizieren.</p>
                         <p>Segmente, die dieselben Merkmale aufweisen und sich in anderen Dateien befinden, werden so auf dieselbe Weise übersetzt.</p>
                      </dd>
                   </dl>
@@ -340,7 +340,7 @@
                </div>
                <p>Doppelklicken Sie auf die editierbaren Felder, um einfache Änderungen vorzunehmen, oder klicken Sie auf die Schaltfläche <span class="guibutton">Bearbeiten...</span>, um das Bearbeitungsdialogfenster aufzurufen.</p>
                <p>Wenn Sie ein Filtermuster hinzufügen wollen, klicken Sie auf <span class="guibutton">Hinzufügen...</span>, um ein ähnliches Dialogfenster zu öffnen.</p>
-               <p>Beide Dialogfenster bieten Ihnen die Möglichkeit, die Namensmuster für die Quell- und Zieldateien, die mit diesem Filter verbunden sind, anzupassen und ihre jeweilige Kodierung auszuwählen.</p>
+               <p>Beide Dialogfenster bieten Ihnen die Möglichkeit, die Namensmuster für die Quell- und Zieldateien, die mit diesem Filter verknüpft sind, anzupassen und ihre jeweilige Kodierung auszuwählen.</p>
                <p>Verwenden Sie das Aufklappmenü <span class="guilabel">Dateinamenvariablen</span>, um den Zieldateinamen anzupassen.</p>
                <section class="section" id="source.filetype.and.filename.pattern">
                   <div class="titlepage">
@@ -350,15 +350,15 @@
                         </div>
                      </div>
                   </div>
-                  <p>Um einen Filter mit einer Datei zu verknüpfen, überprüft OmegaT die Dateiendung und versucht, sie mit einem Quelldateinamensmuster in einem Filter abzugleichen.</p>
-                  <p>Zum Beispiel findet das im XHTML-Filter registrierte Muster <code class="literal">.xhtml</code> jede Datei mit der Endung <code class="filename">xhtml</code>. Wenn eine solche Datei im Ordner <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a> gefunden wird, wird sie vom XHTML-Filter erfasst und bearbeitet.</p>
+                  <p>Um einen Filter mit einer Datei zu verknüpfen, prüft OmegaT die Dateiendung und versucht, diese mit einem Quelldateinamensmuster in einem Filter abzugleichen.</p>
+                  <p>Zum Beispiel findet das im XHTML-Filter registrierte Muster <code class="literal">.xhtml</code> jede Datei mit der Endung <code class="filename">xhtml</code>. Wenn eine solche Datei im Ordner <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a> gefunden wird, wird sie vom XHTML-Filter erfasst und verarbeitet.</p>
                   <p>Sie können Dateinamensmuster ändern oder hinzufügen, um verschiedene Dateien mit einem Filter zu verknüpfen.</p>
                   <div class="warning">
                      <h3 class="title">Warnung</h3>
-                     <p>Die Verknüpfung einer Dateiendung mit einem Filter ist kein Garant dafür, dass der Filter die Datei ordnungsgemäß erfasst und bearbeitet. Die Dateistruktur muss ebenfalls mit dem Filter kompatibel sein: Selbst wenn Sie <code class="literal">.odt</code> mit dem XHMTL-Filter verknüpfen, kann der Filter den Inhalt einer LibreOffice Writer-Datei nicht verstehen.</p>
+                     <p>Die Verknüpfung einer Dateiendung mit einem Filter ist kein Garant dafür, dass der Filter die Datei korrekt erfasst und verarbeitet. Auch die Dateistruktur muss mit dem Filter kompatibel sein: Selbst wenn Sie <code class="literal">.odt</code> mit dem XHMTL-Filter verknüpfen, kann der Filter den Inhalt einer LibreOffice Writer-Datei nicht verstehen.</p>
                   </div>
                   <p>Quelldateinamensmuster verwenden Platzhalterzeichen: Das <code class="literal">*</code>-Zeichen findet null oder mehr Zeichen, während das <code class="literal">?</code>-Zeichen genau ein Zeichen findet.</p>
-                  <p>Zum Beispiel können Sie das Muster <code class="literal">read*</code> verwenden, um den Textfilter Readme-Dateien (<code class="literal">readme, read.me</code> oder <code class="literal">readme.txt</code>) erfassen und bearbeiten zu lassen.</p>
+                  <p>Zum Beispiel können Sie das Muster <code class="literal">read*</code> für den Textfilter verwenden, um Readme-Dateien (<code class="literal">readme, read.me</code> oder <code class="literal">readme.txt</code>) zu erfassen.</p>
                </section>
                <section class="section" id="source.and.target.files.encoding">
                   <div class="titlepage">
@@ -368,8 +368,8 @@
                         </div>
                      </div>
                   </div>
-                  <p>Die meisten Dateiformate lassen verschiedene Kodierungen zu. Standardmäßig sind die Kodierung der Quelldatei und die Kodierung der übersetzten Dateien identisch.</p>
-                  <p>Die Felder bei der Quell- und Zielkodierung sind Aufklappmenüs, die alle unterstützten Kodierungen auflisten. Die Auswahloption <span class="guilabel">&lt;auto&gt;</span> überlässt OmegaT die Wahl der Kodierung, basierend auf folgenden Kriterien:</p>
+                  <p>Die meisten Dateiformate erlauben verschiedene Kodierungen. Standardmäßig sind die Kodierungen der Quell- und Zieldateien identisch.</p>
+                  <p>Die Felder bei der Quell- und Zielkodierung sind Aufklappmenüs, die alle unterstützten Kodierungen auflisten. Die Auswahloption <span class="guilabel">&lt;auto&gt;</span> überlässt OmegaT die Wahl der Kodierung, basierend auf den folgenden Kriterien:</p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
@@ -380,7 +380,7 @@
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p>OmegaT erzwingt für einige Dateiformate (z. B. Java-Eigenschaften) eine bestimmte Kodierung.</p>
+                           <p>OmegaT erzwingt eine bestimmte Kodierung für einige Dateiformate (z.B. Java-Eigenschaften).</p>
                         </li>
                      </ul>
                   </div>
@@ -400,8 +400,8 @@
                         </div>
                      </div>
                   </div>
-                  <p>Dateien im Ordner <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> werden bei jeder Erstellung überschrieben, wenn sie mit demselben Namen erstellt wurden.</p>
-                  <p>OmegaT kann automatisch neue Namen für Dateien vergeben, die Sie erstellen, indem es z. B. einen Sprachcode oder einen Zeitstempel hinzufügt.</p>
+                  <p>Dateien im Ordner <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> werden jedes Mal überschrieben, wenn sie generiert werden (sofern sie denselben Namen haben).</p>
+                  <p>OmegaT kann automatisch neue Namen für die generierten Dateien vergeben, z.B. durch Anfügen eines Sprachcodes oder eines Zeitstempels.</p>
                   <p>Das Zieldateinamensmuster verwendet eine spezielle Syntax. Mit dem Dialogfenster <span class="guilabel">Muster bearbeiten</span> kann es auf einfache Weise geändert werden. Das Dialogfenster bietet verschiedene Optionen:</p>
                   <div class="variablelist">
                      <dl class="variablelist">
@@ -409,7 +409,7 @@
                            <span class="term">${filename}</span>
                         </dt>
                         <dd>
-                           <p>Das Standardmuster. Es repräsentiert den vollständigen Dateinamen der Quelldatei, inklusive Endung. Dieses Muster bewirkt, dass der Zieldatei der Name der Quelldatei zugewiesen wird.</p>
+                           <p>Das Standardmuster. Es repräsentiert den vollständigen Dateinamen der Quelldatei, inklusive Endung. Dieses Muster bewirkt, dass die Zieldatei den Namen der Quelldatei zugewiesen bekommt.</p>
                         </dd>
                         <dt>
                            <span class="term">${nameOnly}</span>
@@ -464,7 +464,7 @@
                            <span class="term">${system-user-name}</span>
                         </dt>
                         <dd>
-                           <p>Anmeldename des Nutzers</p>
+                           <p>Anmeldename des Benutzers</p>
                         </dd>
                         <dt>
                            <span class="term">${system-host-name}</span>
@@ -493,7 +493,7 @@
                      </dl>
                   </div>
                   <p>Zusätzliche Varianten sind für <code class="literal">${nameOnly}</code> und <code class="literal">${extension}</code> verfügbar.</p>
-                  <p>Wenn die Nutzung mehrerer Punkte die Identifizierung des Dateinamens und der Dateiendung erschwert, können Sie Variablen in Form von <code class="literal">${nameOnly-<span class="emphasis">
+                  <p>Wenn die Verwendung von mehreren Punkten die Identifizierung des Dateinamens und der Dateiendung erschwert, können Sie Variablen in Form von <code class="literal">${nameOnly-<span class="emphasis">
                            <em>Nummer</em>
                         </span>}</code> oder <code class="literal">${extension-<span class="emphasis">
                            <em>Nummer</em>
@@ -501,7 +501,7 @@
                   <div class="example" id="target.name.example">
                      <div class="example-title">Beispiel 26. Zieldateinamen</div>
                      <div class="example-contents">
-                        <p>Handelt es sich zum Beispiel um eine Quelldatei namens Dokument.xx.docx, würde die Nutzung folgender Variablenvarianten zu folgenden Ergebnissen führen:</p>
+                        <p>Für eine Quelldatei mit dem Namen Dokument.xx.docx würde die Verwendung der folgenden Variablenvarianten zu den folgenden Ergebnissen führen:</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
@@ -549,7 +549,7 @@
                      </div>
                   </div>
                </div>
-               <p>Mehrere Filter bieten zusätzliche Optionen. Wählen Sie den Filter in der Liste aus und klicken Sie auf <span class="guibutton">Optionen...</span>, um ihn zu ändern.</p>
+               <p>Einige Filter bieten zusätzliche Optionen. Wählen Sie den Filter in der Liste aus und klicken Sie auf <span class="guibutton">Optionen...</span>, um ihn zu ändern.</p>
                <p>Die verfügbaren Optionen sind:</p>
                <div class="variablelist">
                   <dl class="variablelist">
@@ -566,10 +566,10 @@
                                  <span class="term">Absätze erstellen bei:</span>
                               </dt>
                               <dd>
-                                 <p>Textdateien haben keine generischen Absatzmarkierungen. Wählen Sie hier, wie OmegaT Absätze in Ihren Textdateien erzeugt.</p>
+                                 <p>Textdateien haben keine generischen Absatzmarken. Wählen Sie hier, wie OmegaT Absätze in Ihren Textdateien erzeugen soll.</p>
                               </dd>
                               <dt>
-                                 <span class="term">Zeilenlänge in Zieldateien (0 = unlimitiert)</span>
+                                 <span class="term">Zeilenlänge in Zieldateien (0 = unbegrenzt)</span>
                               </dt>
                               <dd>
                                  <p>
@@ -581,13 +581,13 @@
                                           <span class="term">Zeilenlänge</span>
                                        </dt>
                                        <dd>
-                                          <p>spezifiziert die maximale Anzahl von Zeichen, bevor eine lange Zeile umgebrochen wird. 0 bedeutet unlimitiert.</p>
+                                          <p>gibt die maximale Anzahl von Zeichen an, bevor eine lange Zeile umgebrochen wird. 0 bedeutet unbegrenzt.</p>
                                        </dd>
                                        <dt>
                                           <span class="term">Maximale Zeilenlänge</span>
                                        </dt>
                                        <dd>
-                                          <p>spezifiziert die maximale Anzahl von Zeichen, bevor eine Zeile abgeschnitten und der Rest ignoriert wird. 0 bedeutet unlimitiert.</p>
+                                          <p>gibt die maximale Anzahl von Zeichen an, bevor eine Zeile abgeschnitten und der Rest ignoriert wird. 0 bedeutet unbegrenzt.</p>
                                        </dd>
                                     </dl>
                                  </div>
@@ -609,11 +609,11 @@
                            <h3 class="title">Warnung</h3>
                            <p>Der Filter <code class="code">Microsoft Office Open XML (Legacy-Filter)</code> ist der originale OmegaT-Filter. Sie sollten ihn nur verwenden, um Kompatibilitätsprobleme mit früheren Projekten zu verhindern, die bereits Dateien enthalten, welche Sie mit diesem Filter bearbeitet haben.</p>
                         </div>
-                        <p>Sie können zusätzliche Dokumentelemente für die Übersetzung auswählen. Die Elemente werden im Editor als separate Segmente angezeigt.</p>
+                        <p>Sie können zusätzliche Dokumentelemente für die Übersetzung auswählen. Diese Elemente werden im Editor als separate Segmente angezeigt.</p>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
-                                 <span class="term">Word</span>
+                                 <span class="term">Wort</span>
                               </dt>
                               <dd>
                                  <p>Unsichtbare Anweisungstexte, Kommentare, Fußnoten, Endnoten, Fußzeilen, Reservetext für Kompatibilität, und Dokumenteigenschaften.</p>
@@ -652,7 +652,7 @@
                                           <span class="term">Leerräume für alle Tags beibehalten</span>
                                        </dt>
                                        <dd>
-                                          <p>Leerräume (Leerzeichen, Zeilenumbrüche usw.) werden beibehalten, selbst wenn diese Option im Dokument nicht definiert ist.</p>
+                                          <p>Leerräume (Leerzeichen, Zeilenumbrüche usw.) werden beibehalten, auch wenn diese Option im Dokument nicht definiert ist.</p>
                                        </dd>
                                        <dt>
                                           <span class="term">Neuen Absatz bei weichem Zeilenumbruch beginnen</span>
@@ -688,8 +688,8 @@
                                  <span class="term">Ignorierte Absätze (regulärer Ausdruck)</span>
                               </dt>
                               <dd>
-                                 <p>Beim Laden werden alle Absätze, die dem regulären Ausdruck entsprechen, ignoriert und nicht zum Übersetzen angeboten.</p>
-                                 <p>Diese Option ist praktisch, wenn Sie mit HTML-Abschnitten arbeiten, die unübersetzbare Texte enthalten.</p>
+                                 <p>Beim Laden werden alle Absätze, die dem regulären Ausdruck entsprechen, ignoriert und nicht zur Übersetzung angeboten.</p>
+                                 <p>Diese Option ist nützlich, wenn Sie mit HTML-Abschnitten arbeiten, die unübersetzbaren Text enthalten.</p>
                               </dd>
                               <dt>
                                  <span class="term">Ignoriertes &quot;content&quot;-Attribut von &lt;meta&gt;-Tags</span>
@@ -705,7 +705,7 @@
                                           <code class="code">&lt;meta name=&quot;robots&quot; content=&quot;index,
 				  follow&quot;&gt;</code>
                                        </p>
-                                       <p>können Sie Folgendes nutzen:</p>
+                                       <p>können Sie folgendes verwenden:</p>
                                        <p>
                                           <code class="literal">name=robots</code>
                                        </p>
@@ -748,11 +748,11 @@
                               <dd>
                                  <p>Die Kodierung eines HTML-Dokuments wird in der Regel in einem &lt;meta&gt;-Element angegeben, das sich im &lt;head&gt;-Element befindet.</p>
                                  <p>Quell- und Zieldateien benötigen manchmal eine unterschiedliche Kodierung.</p>
-                                 <p>Hier können Sie einstellen, ob die Deklaration der Zieldatei hinzugefügt oder geändert werden soll</p>
+                                 <p>Hier können Sie festlegen, ob die Deklaration der Zieldatei hinzugefügt oder geändert werden soll</p>
                                  <div class="itemizedlist">
                                     <ul class="itemizedlist" style="list-style-type: disc; ">
                                        <li class="listitem">
-                                          <p>immer, basierend auf den Einstellungen des Dateifilters,</p>
+                                          <p>immer, abhängig von den Dateifiltereinstellungen,</p>
                                        </li>
                                        <li class="listitem">
                                           <p>nur wenn die Datei bereits einen &lt;head&gt;-Tag hat,</p>
@@ -770,15 +770,15 @@
                                  <span class="term">Leerraum in der übersetzten Datei komprimieren</span>
                               </dt>
                               <dd>
-                                 <p>Leerräume außerhalb der Tags werden in HTML/XHTML als unbedeutend angesehen.</p>
+                                 <p>Leerräume (Leerzeichen, Zeilenumbrüche usw.) außerhalb von Tags werden in HTML/XHTML als unbedeutend angesehen.</p>
                                  <p>Diese Option wandelt mehrere zusammenhängende Leerraumzeichen im übersetzten Dokument in ein einzelnes Leerzeichen um.</p>
                               </dd>
                               <dt>
                                  <span class="term">HTML-Kommentare entfernen</span>
                               </dt>
                               <dd>
-                                 <p>Kommentare in einer HTML-Datei sind in der Regel nur für Entwickler interessant. Verwenden Sie diese Option, um die Kommentare zu entfernen. Wenn diese Option deaktiviert ist, werden die Kommentare als Tags angezeigt.</p>
-                                 <p>Texte in den HTML-Kommentaren (zwischen <code class="literal">&lt;!--</code> und <code class="literal">--&gt;</code>) werden nicht in das übersetzte Dokument kopiert.</p>
+                                 <p>Kommentare in einer HTML-Datei sind normalerweise nur für Entwickler von Interesse. Verwenden Sie diese Option, um die Kommentare zu entfernen. Wenn diese Option deaktiviert ist, werden die Kommentare als Tags angezeigt.</p>
+                                 <p>Der Text in den HTML-Kommentaren (zwischen <code class="literal">&lt;!--</code> und <code class="literal">--&gt;</code>) wird nicht in das übersetzte Dokument übernommen.</p>
                               </dd>
                            </dl>
                         </div>
@@ -817,9 +817,9 @@
                         <span class="term" id="file.filters.po.title">PO-Dateien</span>
                      </dt>
                      <dd>
-                        <p>Der Filter überprüft standardmäßig printf-Variablen (z. B. %s). Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.programming.variables">
-                              <code class="option">Variablen der printf-Funktion überprüfen</code>
-                           </a>-Einstellung für weitere Informationen.</p>
+                        <p>Der Filter prüft standardmäßig printf-Variablen (z.B. %s). Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.programming.variables">
+                              <code class="option">Variablen der printf-Funktion prüfen</code>
+                           </a> (Einstellungen).</p>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
@@ -832,7 +832,7 @@
                                  <span class="term">Leere Quelltexte übersetzen</span>
                               </dt>
                               <dd>
-                                 <p>Leere Quelltexte dienen manchmal als Platzhalter für Abschnitte, die es in der Quellsprache nicht gibt, die aber in der Zielsprache notwendig sind. Verwenden Sie diese Option, um eine Übersetzung auf Basis der zugehörigen Kommentare zu erstellen.</p>
+                                 <p>Leere Quelltexte agieren manchmal als Platzhalter für Abschnitte, die in der Quellsprache nicht vorhanden sind, aber in der Zielsprache benötigt werden. Verwenden Sie diese Option, um eine Übersetzung auf Basis der zugehörigen Kommentare zu erstellen.</p>
                               </dd>
                               <dt>
                                  <span class="term">PO-Header ignorieren</span>
@@ -844,7 +844,7 @@
                                  <span class="term">Pluralspezifikation automatisch ersetzen</span>
                               </dt>
                               <dd>
-                                 <p>Überschreiben Sie die Pluralspezifikation im Header und verwenden Sie den Zielsprachenstandard.</p>
+                                 <p>Überschreibt die Pluralspezifikation im Header und verwendet den Zielsprachenstandard.</p>
                               </dd>
                               <dt>
                                  <span class="term">Format:</span>
@@ -889,16 +889,16 @@
                         <span class="term" id="file.filter.java.bundle.title">Java-Resource-Bundle</span>
                      </dt>
                      <dd>
-                        <p>Der Filter überprüft standardmäßig Java-MessageFormat-Muster (z. B. \{0\}). Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.programming.variables">
-                              <code class="option">Variablen der printf-Funktion überprüfen</code>
-                           </a>-Einstellung für weitere Informationen.</p>
+                        <p>Der Filter prüft standardmäßig Java-MessageFormat-Muster (z.B. \{0\}). Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.programming.variables">
+                              <code class="option">Variablen der printf-Funktion prüfen</code>
+                           </a> (Einstellungen).</p>
                         <div class="variablelist">
                            <dl class="variablelist">
                               <dt>
                                  <span class="term">Unicode-Literale-Kompatibilität mit Java 8 erzwingen</span>
                               </dt>
                               <dd>
-                                 <p>Java 8 benötigt die ISO-8859-1-Kodierung und verwendet Unicode-Literale für Zeichen außerhalb dieses Zeichensatzes. Java 9 und höher benötigt die UTF-8-Kodierung. Diese Option erzwingt die Kompatibilität mit Java 8.</p>
+                                 <p>Java 8 benötigt die ISO-8859-1-Kodierung und verwendet Unicode-Literale für Zeichen außerhalb dieses Zeichensatzes. Java 9 oder höher benötigt die UTF-8-Kodierung. Diese Option erzwingt die Kompatibilität mit Java 8.</p>
                               </dd>
                               <dt>
                                  <span class="term">Unübersetzte Texte in Zieldateien entfernen</span>
@@ -910,7 +910,7 @@
                                  <span class="term">Unicode-Literale (\\uXXXX) beibehalten</span>
                               </dt>
                               <dd>
-                                 <p>Einige Applikationen erfordern die Beibehaltung einiger Unicode-Literale. Diese Option ermöglicht das.</p>
+                                 <p>Einige Applikationen erfordern die Beibehaltung bestimmter Unicode-Literale. Diese Option ermöglicht dies.</p>
                               </dd>
                            </dl>
                         </div>
@@ -953,7 +953,7 @@
                                  <span class="term">Identifikator für alternative Übersetzungen</span>
                               </dt>
                               <dd>
-                                 <p>Der Nutzer kann zwischen drei Optionen wählen: vorheriger und nächster Absatz, &lt;trans-unit&gt;-ID, oder &lt;trans-unit&gt;-resname-Attribut, sofern verfügbar (ist es nicht verfügbar, wird die ID als Fallback verwendet).</p>
+                                 <p>Der Benutzer kann zwischen drei Optionen wählen: vorheriger und nächster Absatz, &lt;trans-unit&gt;-ID, oder &lt;trans-unit&gt;-resname-Attribut sofern verfügbar (wenn nicht verfügbar, wird die ID als Fallback verwendet).</p>
                               </dd>
                               <dt>
                                  <span class="term">Tag-Kürzel</span>
@@ -993,43 +993,43 @@
                      </div>
                   </div>
                </div>
-               <p>Translation-Memory-Tools arbeiten mit Texteinheiten, die als Segmente bezeichnet werden. Nachdem eine Übersetzung eingegeben wurde, wird das Segment, das den Quelltext enthält, zusammen mit seiner Übersetzung in den Translation Memory des Projekts gespeichert und anschließend mit anderen Quelltexten im Projekt abgeglichen.</p>
+               <p>Translation-Memory-Tools arbeiten mit Texteinheiten, die als Segmente bezeichnet werden. Nachdem eine Übersetzung eingegeben wurde, wird das Segment, das den Quelltext enthält, zusammen mit seiner Übersetzung in den Translation Memory des Projekts gespeichert und anschließend mit anderen Quelltexten im Projekt verglichen.</p>
                <p>Um die Art der Segmentierung anzugeben, verwenden Sie die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.options.segmentation">
                      <code class="option">Segmentierung auf Satzebene</code>
                   </a>.</p>
                <p>Segmente sind standardmäßig <span class="bold">
                      <strong>Absätze</strong>
-                  </span>, die vom Dateiformat selbst vorgegeben werden.</p>
+                  </span>, die durch das Dateiformat selbst vorgegeben sind.</p>
                <p>Der Verzicht auf die <span class="bold">
                      <strong>Satzsegmentierung</strong>
                   </span> in einem Dokument führt dazu, dass automatisch die <span class="emphasis">
                      <em>Absatzsegmentierung</em>
-                  </span> verwendet wird. In diesem Fall wird jeder Absatz (wie vom Format des Originaldokuments vorgegeben) als ein einzelnes Segment angezeigt, wodurch es dem Übersetzer freisteht, die Sätze innerhalb des Segments nach Belieben neu anzuordnen.</p>
+                  </span> verwendet wird. In diesem Fall wird jeder Absatz (abhängig vom Format des Originaldokuments) als ein einzelnes Segment angezeigt. Dem Übersetzer ist es somit freigestellt, die Sätze innerhalb des Segments beliebig anzuordnen.</p>
                <p>
                   <span class="emphasis">
                      <em>Absatzsegmentierung</em>
-                  </span> funktioniert gut bei eher literarischen oder kreativen Texten sowie generell bei Dokumenten, bei denen Translation-Memory-Matches nicht so wichtig sind.</p>
+                  </span> eignet sich gut für eher literarische oder kreative Texte und generell für Dokumente, bei denen Translation-Memory-Matches nicht so wichtig sind.</p>
                <p>
                   <span class="emphasis">
                      <em>Satzsegmentierung</em>
                   </span> stützt sich auf eine Reihe von Regeln (sogenannte <span class="emphasis">
                      <em>Segmentierungsregeln</em>
-                  </span>), die definieren, was einen Satz in der Quellsprache ausmacht. Diese Einstellung eignet sich gut für Dokumente, in denen Wiederholungen oder ähnliche Sätze häufig vorkommen, wie z. B. in technischen oder juristischen Dokumenten.</p>
+                  </span>), die definieren, was einen Satz in der Quellsprache ausmacht. Diese Einstellung eignet sich gut für Dokumente, in denen Wiederholungen oder ähnliche Sätze häufig vorkommen, wie z.B. in technischen oder juristischen Dokumenten.</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
                         <span class="term" id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentierung auf Absatzebene</span>
                      </dt>
                      <dd>
-                        <p>OmegaT segmentiert den Text zunächst auf Absatzebene. Dieser Vorgang verlässt sich nur auf die Struktur der Quelldatei, um Segmente zu erzeugen.</p>
-                        <p>Textdateien können zum Beispiel an Zeilenumbrüchen, Leerzeilen oder überhaupt nicht segmentiert werden. Dateien, die Formatierungen enthalten (ODF-, HTML- oder andere Dokumente), werden bei Block-Elementen (Paragraph-Tags) geteilt. Übersetzbare Objektattribute in XHTML- oder HTML-Dateien können als separate &quot;Absätze&quot; extrahiert werden.</p>
+                        <p>OmegaT segmentiert den Text zunächst auf Absatzebene. Dieses Verfahren verwendet ausschließlich die Struktur der Quelldatei zur Segmentgenerierung.</p>
+                        <p>Textdateien können zum Beispiel an Zeilenumbrüchen, Leerzeilen oder gar nicht segmentiert werden. Dateien mit Formatierungen (z.B. ODF- oder HTML-Dokumente) werden an Blockelementen (Paragraph-Tags) segmentiert. Übersetzbare Objektattribute in XHTML- oder HTML-Dateien können als separate &quot;Absätze&quot; extrahiert werden.</p>
                      </dd>
                      <dt id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
                         <span class="term" id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentierung auf Satzebene</span>
                      </dt>
                      <dd>
-                        <p>Nach der Unterteilung der Quelldatei in Struktureinheiten teilt OmegaT diese Einheiten weiter in Segmente auf.</p>
-                        <p>Sie können sich die Segmentierung auch so vorstellen, dass der Textcursor zeichenweise entlang des Textes bewegt wird und nach der Stelle gesucht wird, an der ein Umbruch erfolgen oder nicht erfolgen soll.</p>
+                        <p>Nachdem OmegaT die Quelldatei in Struktureinheiten zerlegt hat, werden diese weiter in Segmente zerlegt.</p>
+                        <p>Sie können sich die Segmentierung so vorstellen, dass Sie den Textcursor zeichenweise über den Text bewegen und nach der Stelle suchen, an der ein Umbruch erfolgen oder nicht erfolgen soll.</p>
                         <p>Jedes Mal, wenn sich der Textcursor zum nächsten Zeichen bewegt, prüft OmegaT, ob:</p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -1060,14 +1060,14 @@
                </div>
                <div class="note">
                   <h3 class="title">Anmerkung</h3>
-                  <p>Die gleichen Mechanismen und Dialogfenster werden verwendet, um globale und lokale Segmentierungsregeln zu definieren.</p>
+                  <p>Für die Definition von globalen und lokalen Segmentierungsregeln werden die gleichen Mechanismen und Dialogfenster verwendet.</p>
                </div>
-               <p>Standardmäßig sind Segmentierungseinstellungen global und werden für alle Projekte verwendet.</p>
+               <p>Standardmäßig sind Segmentierungseinstellungen global und werden von allen Projekten gemeinsam genutzt.</p>
                <p>Verwenden Sie die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.local.segmentation">
                      <span class="guibutton">Lokale Segmentierungsregeln...</span>
                   </a>, um den Geltungsbereich der Segmentierungsregeln auf das aktuelle Projekt zu beschränken.</p>
                <p>Sie können dasselbe erreichen, wenn Sie OmegaT über die Befehlszeile starten. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Start über die Befehlszeile">Start über die Befehlszeile</a>.</p>
-               <p>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber diese zu ändern, wirkt sich nicht auf Ihr Projekt aus.</p>
+               <p>Wenn Sie lokale Regeln verwenden, können Sie zwar immer noch auf die globalen Regeln zugreifen, aber eine Änderung der globalen Regeln wirkt sich nicht auf Ihr Projekt aus.</p>
             </section>
             <section class="section" id="dialog.preferences.segmentation.setup.rules.based.segmentation">
                <div class="titlepage">
@@ -1078,10 +1078,10 @@
                   </div>
                </div>
                <p>OmegaT bietet vordefinierte Segmentierungsregeln, die der Übersetzer mit regulären Ausdrücken ändern kann. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#app.regex" title="Reguläre Ausdrücke">Reguläre Ausdrücke</a>.</p>
-               <p>Zur Erinnerung: Regeln funktionieren wie folgt: Wenn eine Regel zutrifft, setzt OmegaT eine Markierung an die entsprechende Stelle, so dass nachfolgende Regeln diese Stelle ignorieren. Das ist der Grund, warum Ausnahmeregeln vor Segmentierungsregeln erfolgen müssen.</p>
+               <p>Zur Erinnerung: Regeln funktionieren wie folgt: Wenn eine Regel zutrifft, setzt OmegaT eine Markierung an die entsprechende Stelle, so dass nachfolgende Regeln diese Stelle ignorieren. Aus diesem Grund müssen Ausnahmeregeln vor Segmentierungsregeln definiert werden.</p>
                <div class="warning">
                   <h3 class="title">Warnung</h3>
-                  <p>Wenn Sie die Segmentierung während einer laufenden Übersetzung ändern, müssen Sie das Projekt neu laden, damit die neue Segmentierung wirksam wird. Dabei werden einige zuvor übersetzte Segmente geteilt oder zusammengeführt, so dass sie nicht mehr als übersetzt gelten. Die Originalübersetzung bleibt jedoch im Translation Memory des Projekts erhalten.</p>
+                  <p>Wenn Sie die Segmentierung während einer laufenden Übersetzung ändern, müssen Sie das Projekt neu laden, damit die neue Segmentierung wirksam wird. Dabei kann es vorkommen, dass einige bereits übersetzte Segmente geteilt oder zusammengeführt werden, wodurch sie nicht mehr übersetzt sind. Die ursprüngliche Übersetzung bleibt jedoch im Translation Memory des Projekts erhalten.</p>
                </div>
                <div class="table" id="segmentation.simple.examples">
                   <div class="table-title">Tabelle 5. Einige einfache Beispiele</div>
@@ -1120,14 +1120,14 @@
                            </tr>
                            <tr>
                               <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</td>
-                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Ein neues Segment nach einem Punkt, gefolgt von einem Leer-, Tabulator- oder sonstigem Leerraumzeichen, beginnen.</td>
+                              <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Beginn eines neuen Segments nach einem Punkt, gefolgt von einem Leerraum wie z.B. Leer- oder Tabulatorzeichen.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\.</td>
                               <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">\s</td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">Ein Punkt, gefolgt von einem Leerraum</td>
                            </tr>
                            <tr>
                               <td style="text-align: left; border-right: 1px solid ; ">Umbruchregel, Häkchen gesetzt, weiter unten in der Liste</td>
-                              <td style="text-align: left; border-right: 1px solid ; ">Ein neues Segment nach &quot;。&quot; (japanischer Punkt) beginnen.</td>
+                              <td style="text-align: left; border-right: 1px solid ; ">Beginn eines neuen Segments nach &quot;。&quot; (japanischer Punkt).</td>
                               <td style="text-align: center; border-right: 1px solid ; ">。</td>
                               <td style="text-align: center; border-right: 1px solid ; "> </td>
                               <td style="text-align: left; ">Beachten Sie, dass das Feld <code class="literal">Muster danach</code> leer sein kann.</td>
@@ -1147,12 +1147,12 @@
                   </div>
                </div>
             </div>
-            <p>Diese Seite richtet sich an Nutzer, die ihre Produktivität erheblich steigern möchten. Obwohl reguläre Ausdrücke (oft mit <span class="emphasis">
+            <p>Diese Seite richtet sich an Benutzer, die ihre Produktivität erheblich steigern möchten. Obwohl reguläre Ausdrücke (oft mit <span class="emphasis">
                   <em>regex</em>
                </span> oder <span class="emphasis">
                   <em>regexp</em>
-               </span> abgekürzt) als abschreckend und komplex angesehen werden, sind die einfachsten unter ihnen äußerst nützlich - sowohl in OmegaT als auch in vielen anderen Applikationen, die Sie tagtäglich verwenden, mit einigen Variationen.</p>
-            <p>Es werden nur die Grundlagen behandelt, die für Übersetzer am nützlichsten sind. Der Abschnitt <a class="link" href="chapter.appendices.html#app.regex.tools" title="Referenzen">Referenzen</a> am Ende dieser Seite bietet einige Anregungen für fortgeschrittene oder komplexe Anwendungsfälle, die über den Rahmen dieser Dokumentation hinausgehen. Wenn Sie Hilfe benötigen, können Sie Ihre Fragen auch in den verschiedenen Support-Kanälen stellen.</p>
+               </span> abgekürzt) als abschreckend und komplex empfunden werden, sind die einfachsten unter ihnen äußerst nützlich - sowohl in OmegaT als auch in vielen anderen Applikationen, die Sie tagtäglich verwenden, mit einigen Variationen.</p>
+            <p>Es werden nur die Grundlagen behandelt, die für Übersetzer am nützlichsten sind. Der Abschnitt <a class="link" href="chapter.appendices.html#app.regex.tools" title="Referenzen">Referenzen</a> am Ende dieser Seite enthält einige Beispiele für fortgeschrittene oder komplexe Anwendungsfälle, die den Rahmen dieser Dokumentation sprengen würden. Wenn Sie Hilfe benötigen, können Sie Ihre Fragen auch in den verschiedenen Support-Kanälen stellen.</p>
             <p>Reguläre Ausdrücke verwenden eine Kombination aus Buchstaben, Ziffern und Symbolen (zusammenfassend als <span class="emphasis">
                   <em>Zeichen</em>
                </span> bezeichnet), um einen <span class="emphasis">
@@ -1181,49 +1181,49 @@
                   </dd>
                </dl>
             </div>
-            <p>Viele OmegaT-Funktionen verwenden reguläre Ausdrücke oder stellen sie als Option zur Verfügung:</p>
+            <p>Viele OmegaT-Funktionen verwenden reguläre Ausdrücke oder bieten diese als Option an:</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
                      <span class="term">Suche</span>
                   </dt>
                   <dd>
-                     <p>Die Suche bietet die Option <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.methods.regex">Reguläre Ausdrücke</a>, mit der Sie Ihre Dateien mit hoher Effizienz durchsuchen können.</p>
+                     <p>Die Suche bietet die Option <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.methods.regex">Reguläre Ausdrücke</a>, mit der Sie Ihre Dateien effizient durchsuchen können.</p>
                      <p>Das Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Textersetzung">
                            <span class="guilabel">Textersetzung</span>
-                        </a> besitzt dieselbe Option, mit der Sie reguläre Ausdrücke sowohl auf den gesuchten als auch auf den ersetzten Text anwenden können.</p>
+                        </a> bietet die gleiche Option, mit der Sie reguläre Ausdrücke sowohl auf den gesuchten als auch auf den ersetzten Text anwenden können.</p>
                   </dd>
                   <dt>
                      <span class="term">Benutzerdefinierte Tags</span>
                   </dt>
                   <dd>
-                     <p>Benutzerdefinierte Tags sind regex-definierte Tags, die von OmegaT wie normale Tags behandelt werden. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
+                     <p>Benutzerdefinierte Tags sind regex-definierte Tags, die von OmegaT wie normale Tags behandelt werden. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
                            <code class="option">Benutzerdefinierte Tags</code>
-                        </a>-Einstellung für weitere Informationen.</p>
+                        </a> (Einstellungen).</p>
                      <p>Verwenden Sie das <code class="code">|</code>-Zeichen (OR), um mehrere Tags voneinander zu trennen.</p>
                   </dd>
                   <dt>
-                     <span class="term">Geschützter Text</span>
+                     <span class="term">Geschützte Texte</span>
                   </dt>
                   <dd>
-                     <p>Die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
-                           <code class="option">Geschützter Text</code>
-                        </a>-Einstellung ermöglicht es Ihnen, Zeichenketten zu definieren, die OmegaT standardmäßig rot markiert und zu Validierungszwecken als überschüssige Tags behandelt.</p>
+                     <p>Mit der Einstellung <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+                           <code class="option">Geschützte Texte</code>
+                        </a> können Sie Zeichenketten definieren, die OmegaT standardmäßig rot markiert und für Validierungszwecke als überflüssige Tags behandelt.</p>
                      <p>Verwenden Sie das <code class="code">|</code>-Zeichen (OR), um mehrere Textfragmente voneinander zu trennen.</p>
                   </dd>
                   <dt>
                      <span class="term">Texthervorhebung in Ausrichtungen</span>
                   </dt>
                   <dd>
-                     <p>Mithilfe von visuellen Indikatoren können Sie überprüfen, ob Ihre Ausrichtung korrekt ist. Mit der <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner.adjust.highlight">Hervorheben</a>-Einstellung können Sie Zeichenketten festlegen, die OmegaT in den ausgerichteten Dokumenten hervorheben soll.</p>
+                     <p>Mithilfe von visuellen Indikatoren können Sie prüfen, ob Ihre Ausrichtung korrekt ist. Mit der Einstellung<a class="link" href="chapter.windows.and.dialogs.html#windows.aligner.adjust.highlight">Hervorheben</a> können Sie Zeichenketten festlegen, die OmegaT in den ausgerichteten Dokumenten hervorheben soll.</p>
                      <p>Verwenden Sie das <code class="code">|</code>-Zeichen (OR), um mehrere Ausdrücke voneinander zu trennen.</p>
                   </dd>
                   <dt>
                      <span class="term">Segmentierung</span>
                   </dt>
                   <dd>
-                     <p>Segmentierungsregeln und Sprachmuster werden mit regulären Ausdrücken definiert. Sie können diese nach Belieben ändern, um die Segmentierung eines Dokuments zu verbessern oder zusätzliche Grundregeln hinzuzufügen. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentierung">Segmentierung</a>.</p>
-                     <p>Segmentierungs- oder Ausnahmeregeln definieren die Position in einem Segment, an der eine Trennung erfolgen oder nicht erfolgen soll. Um diese Position zu definieren, sind zwei reguläre Ausdrücke erforderlich: ein &quot;davor&quot;-Ausdruck, um das Textmuster vor der Position zu definieren, auf die die Regel angewendet werden soll, und ein &quot;danach&quot;-Ausdruck, um das Textmuster nach dieser Position zu definieren.</p>
+                     <p>Segmentierungsregeln und Sprachmuster werden mit regulären Ausdrücken definiert. Sie können diese nach Belieben ändern, um die Segmentierung eines Dokuments zu verbessern oder um weitere Grundregeln hinzuzufügen. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentierung">Segmentierung</a>.</p>
+                     <p>Segmentierungs- oder Ausnahmeregeln definieren die Position in einem Segment, an der eine Trennung erfolgen oder nicht erfolgen soll. Um diese Position zu definieren, werden zwei reguläre Ausdrücke benötigt: ein &quot;davor&quot;-Ausdruck, um das Textmuster vor der Position zu definieren, auf die die Regel angewendet werden soll, und ein &quot;danach&quot;-Ausdruck, um das Textmuster nach dieser Position zu definieren.</p>
                      <p>Jedes Sprachmuster, das mit der Quellsprache des Projekts übereinstimmt, wird auf dieses Projekt angewendet.</p>
                   </dd>
                </dl>
@@ -1236,7 +1236,7 @@
                      </div>
                   </div>
                </div>
-               <p>Reguläre Ausdrücke werden verwendet, um Texte zu finden, einschließlich Zeichen, die auf dem Bildschirm oder beim Ausdruck nicht sichtbar sind, wie z. B. Leerzeichen, Tabulatorzeichen oder Zeilenumbrüche. Jeder Ausdruck ist so beschaffen, dass er entweder mit einem Wort, einem Satz oder einer anderen Zeichenkette <span class="emphasis">
+               <p>Reguläre Ausdrücke werden verwendet, um Texte zu finden, einschließlich Zeichen, die auf dem Bildschirm oder im Ausdruck nicht sichtbar sind, wie z.B. Leerzeichen, Tabulatorzeichen oder Zeilenumbrüche. Jeder Ausdruck ist so beschaffen, dass er entweder mit einem Wort, einem Satz oder einer anderen Zeichenkette <span class="emphasis">
                      <em>übereinstimmt</em>
                   </span> oder <span class="emphasis">
                      <em>
@@ -1245,16 +1245,16 @@
                         </span> übereinstimmt</em>
                   </span>.</p>
                <p>Jedes einzelne Zeichen des Ausdrucks ist für die Ermittlung einer Übereinstimmung relevant.</p>
-               <p>Eine Vielzahl von Zeichen oder Zeichenkombinationen haben eine besondere Bedeutung in regulären Ausdrücken.</p>
+               <p>Eine Vielzahl von Zeichen oder Zeichenkombinationen haben in regulären Ausdrücken eine Sonderbedeutung.</p>
                <div class="warning">
                   <h3 class="title">Warnung</h3>
-                  <p>Reguläre Ausdrücke finden nur Text. Sie können keine Schriftauszeichnungen wie <span class="emphasis">
+                  <p>Reguläre Ausdrücke finden ausschließlich Text. Sie finden keine Schriftauszeichnungen wie <span class="emphasis">
                         <em>fett</em>
                      </span>, <span class="emphasis">
                         <em>kursiv</em>
                      </span> oder <span class="emphasis">
                         <em>andere stilistische Effekte</em>
-                     </span> finden.</p>
+                     </span>.</p>
                </div>
                <p>Es gibt vier Regeln, die zu beachten sind.</p>
                <div class="variablelist">
@@ -1266,21 +1266,20 @@
                         <p>Die meisten Zeichen in einem regulären Ausdruck <span class="emphasis">
                               <em>suchen sich einfach selbst</em>
                            </span> in der Zeichenkette.</p>
-                        <p>Die acht Buchstaben des Wortes &quot;<span class="emphasis">
+                        <p>Zum Beispiel bewirken die acht Buchstaben des Wortes &quot;<span class="emphasis">
                               <em>Beispiel</em>
-                           </span>&quot; bewirken zum Beispiel, dass die Suchfunktion genau diese Buchstaben in dieser Reihenfolge finden soll. Es wird einfach nach dem Wort &quot;<span class="emphasis">
+                           </span>&quot;, dass die Suchfunktion genau diese Buchstaben in dieser Reihenfolge versucht zu finden. Das heißt, es wird einfach nach dem Wort &quot;<span class="emphasis">
                               <em>Beispiel</em>
                            </span>&quot; gesucht.</p>
                      </dd>
                      <dt>
-                        <span class="term">Ziffern und Buchstaben mit einem umgekehrten Schrägstrich (<code class="literal">\</code>) davor haben eine besondere Bedeutung</span>
+                        <span class="term">Ziffern und Buchstaben, denen ein umgekehrter Schrägstrich (<code class="literal">\</code>) vorangestellt ist, haben eine Sonderbedeutung</span>
                      </dt>
                      <dd>
-                        <p>Im Gegensatz zu einem einzelnen Buchstaben, der wie oben erwähnt einfach nur sich selbst repräsentiert, hat ein Buchstabe, dem ein <code class="literal">\</code> vorangestellt ist, eine spezielle Funktion in einem regulären Ausdruck.</p>
-                        <p>
-                           <span class="emphasis">
+                        <p>Im Gegensatz zu einem einzelnen Buchstaben, der, wie oben beschrieben, nur für sich selbst steht, hat ein Buchstabe mit einem vorangestelltem <code class="literal">\</code> eine spezielle Funktion in einem regulären Ausdruck.</p>
+                        <p>Zum Beispiel ist <span class="emphasis">
                               <em>r</em>
-                           </span> ist zum Beispiel ein normales Zeichen, aber wenn ein <code class="literal">\</code> vorangestellt wird, um es zu einem <code class="literal">\r</code> zu machen, wird daraus eine spezielle Kombination, die ein <span class="emphasis">
+                           </span> ein normales Zeichen, aber wenn <code class="literal">\</code> vorangestellt wird, um es zu <code class="literal">\r</code> zu machen, wird daraus eine spezielle Kombination, die ein <span class="emphasis">
                               <em>Wagenrücklaufzeichen (CR)</em>
                            </span> findet. <code class="literal">\R</code> hingegen findet <span class="emphasis">
                               <em>ein beliebiges Zeilenumbruchzeichen</em>
@@ -1291,27 +1290,27 @@
                                  <em>i j l m o</em>
                               </span> und <span class="emphasis">
                                  <em>y</em>
-                              </span>, egal ob groß- oder kleingeschrieben, haben keine besondere Bedeutung, wenn ihnen ein umgekehrter Schrägstrich vorangestellt wird. Diese Dokumentation behandelt nur einen kleinen Teil der Buchstaben, die eine besondere Bedeutung haben.</p>
-                           <p>Informieren Sie sich auf den Seiten im Abschnitt <a class="link" href="chapter.appendices.html#app.regex.tools" title="Referenzen">Referenzen</a> über Kombinationen, die hier nicht aufgeführt sind.</p>
+                              </span>, egal ob groß- oder kleingeschrieben, haben keine Sonderbedeutung, wenn ihnen ein umgekehrter Schrägstrich vorangestellt wird. Diese Dokumentation behandelt nur einen kleinen Teil der Buchstaben, die eine Sonderbedeutung haben.</p>
+                           <p>Andere hier nicht aufgelistete Kombinationen finden Sie auf den Seiten im Abschnitt <a class="link" href="chapter.appendices.html#app.regex.tools" title="Referenzen">Referenzen</a>.</p>
                         </div>
                      </dd>
                      <dt>
-                        <span class="term">Zwölf Zeichen haben standardmäßig eine besondere Bedeutung</span>
+                        <span class="term">Zwölf Zeichen haben standardmäßig eine Sonderbedeutung</span>
                      </dt>
                      <dd>
-                        <p>Diese besondere Bedeutung muss durch ein anderes Zeichen aufgehoben werden, um das Zeichen selbst zu finden.</p>
-                        <p>Die vollständige Liste der Zeichen finden Sie <a class="link" href="chapter.appendices.html#app.regex.twelve.characters" title="Die 12 Zeichen">unten</a>. Ein Beispiel ist <code class="literal">.</code>: Alleinstehend hat es die besondere Bedeutung, <span class="emphasis">
+                        <p>Diese Sonderbedeutung muss durch ein anderes Zeichen aufgehoben werden, wenn das Zeichen selbst gefunden werden soll.</p>
+                        <p>Die vollständige Liste der Zeichen finden Sie <a class="link" href="chapter.appendices.html#app.regex.twelve.characters" title="Die 12 Zeichen">unten</a>. Ein Beispiel ist <code class="literal">.</code>: Allein hat es die Sonderbedeutung, <span class="emphasis">
                               <em>ein beliebiges Zeichen</em>
                            </span> zu finden.</p>
-                        <p>Um einen normalen Punkt zu finden, muss diese Bedeutung mithilfe von <code class="literal">\</code> aufgehoben werden, wodurch der Ausdruck <code class="literal">\.</code> entsteht.</p>
+                        <p>Um einen normalen Punkt zu finden, muss ihm ein <code class="literal">\</code> vorangestellt werden, also <code class="literal">\.</code>.</p>
                      </dd>
                      <dt>
                         <span class="term">Das <code class="literal">\</code>-Zeichen ist etwas ganz Besonderes</span>
                      </dt>
                      <dd>
-                        <p>Wie bereits erwähnt, hat das <code class="literal">\</code>-Zeichen standardmäßig die besondere Bedeutung, die besondere Bedeutung der anderen Zeichen entweder aufzuheben oder zu aktivieren. Es hat keine Wirkung, wenn es vor einem Zeichen ohne besondere Bedeutung steht (entweder standardmäßig oder durch Hinzufügen).</p>
+                        <p>Wie bereits erwähnt, hat das <code class="literal">\</code>-Zeichen standardmäßig den Effekt, die Sonderbedeutung der anderen Zeichen entweder aufzuheben oder zu aktivieren. Es hat keine Wirkung, wenn es vor einem Zeichen ohne Sonderbedeutung steht (entweder standardmäßig oder durch Hinzufügen).</p>
                         <p>
-                           <code class="literal">\</code> kann seine eigene besondere Bedeutung aufheben, indem man es verdoppelt, um <code class="literal">\\</code> zu erhalten. Auf diese Wiese kann ein <span class="emphasis">
+                           <code class="literal">\</code> kann seine eigene Sonderbedeutung aufheben, indem man es verdoppelt, also <code class="literal">\\</code>. Auf diese Weise kann ein <span class="emphasis">
                               <em>umgekehrter Schrägstrich</em>
                            </span> gefunden werden.</p>
                      </dd>
@@ -1376,7 +1375,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen hebt die besondere Bedeutung des nächsten Zeichens entweder auf oder aktiviert sie.</p>
+                        <p>Dieses Zeichen bewirkt, dass die Sonderbedeutung des nächsten Zeichens aufgehoben oder deaktiviert wird.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1398,13 +1397,13 @@
                                              <em>0.0</em>
                                           </span> und <span class="emphasis">
                                              <em>0.9</em>
-                                          </span>, oder eine Zahl, die mit <span class="emphasis">
+                                          </span> oder eine Zahl, die mit <span class="emphasis">
                                              <em>0.5</em>
-                                          </span> endet, wie z. B. 10.5 oder 560.5.</p>
+                                          </span> endet, z.B. 10.5 oder 560.5.</p>
 
                       
                                        <p>
-                                          <code class="literal">\.</code> hebt die &quot;beliebiges Zeichen&quot;-Bedeutung des Punktes auf, um den Dezimalpunkt zu finden, während <code class="literal">\d</code> den normalen Kleinbuchstaben &quot;d&quot; in einen Ausdruck verwandelt, der eine beliebige Ziffer zwischen 0 und 9 findet.</p>
+                                          <code class="literal">\.</code> hebt die Bedeutung des Punktes als &quot;beliebiges Zeichen&quot; auf, um den Dezimalpunkt zu finden, während <code class="literal">\d</code> den normalen Kleinbuchstaben &quot;d&quot; in einen Ausdruck umwandelt, der eine beliebige Ziffer zwischen 0 und 9 findet.</p>
                     
                                     </td>
                                  </tr>
@@ -1425,10 +1424,10 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Wird er als erstes Zeichen in einem Ausdruck verwendet, findet der <span class="emphasis">
+                        <p>Wenn der <span class="emphasis">
                               <em>Zirkumflex</em>
-                           </span> den Anfang einer Zeile.</p>
-                        <p>Wird er als erstes Zeichen in einer <a class="link" href="chapter.appendices.html#app.regex.types.of.expressions.classes" title="Klassen">mit eckigen Klammern umschlossenen Zeichenklasse</a> verwendet, werden alle Zeichen gefunden, die nicht zu dieser Klasse gehören.</p>
+                           </span> als erstes Zeichen in einem Ausdruck verwendet wird, findet er den Anfang einer Zeile.</p>
+                        <p>Wenn der Zirkumflex als erstes Zeichen in einer <a class="link" href="chapter.appendices.html#app.regex.types.of.expressions.classes" title="Klassen">mit eckigen Klammern umschlossenen Zeichenklasse</a> verwendet wird, findet die Zeichenklasse alle Zeichen, die nicht Teil dieser Klasse sind.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1502,9 +1501,9 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Wird es als erstes Zeichen in einem Ausdruck verwendet, findet das <span class="emphasis">
+                        <p>Wenn das <span class="emphasis">
                               <em>Dollarzeichen</em>
-                           </span> das Ende einer Zeile.</p>
+                           </span> als erstes Zeichen in einem Ausdruck verwendet wird, findet es das Ende einer Zeile.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1522,7 +1521,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Findet</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Eine Zeile, die aus einem einzigen Wort besteht und mit einem Doppelpunkt endet:</p>
+                                       <p>Eine Zeile, die nur aus einem einzigen Wort besteht und mit einem Doppelpunkt endet:</p>
                       
                                        <p>
                                           <span class="emphasis">
@@ -1536,7 +1535,7 @@
                                     <td style="border-right: 1px solid ; ">Findet nicht</td>
                                     <td>
                       
-                                       <p>Eine Zeile, die aus einem einzigen Wort besteht, aber nicht mit einem Doppelpunkt endet:</p>
+                                       <p>Eine Zeile, die nur aus einem einzigen Wort besteht, aber nicht mit einem Doppelpunkt endet:</p>
                       
                                        <p>
                                           <span class="emphasis">
@@ -1579,7 +1578,7 @@
                                              <em>cut</em>
                                           </span>&quot;, &quot;<span class="emphasis">
                                              <em>cot</em>
-                                          </span>&quot;, oder auch absurde Kombinationen wie &quot;<span class="emphasis">
+                                          </span>&quot;, oder auch sinnlose Kombinationen wie &quot;<span class="emphasis">
                                              <em>czt</em>
                                           </span>&quot; oder &quot;<span class="emphasis">
                                              <em>cqt</em>
@@ -1591,7 +1590,7 @@
                                     <td style="border-right: 1px solid ; ">Findet nicht</td>
                                     <td>
                       
-                                       <p>Kombinationen aus drei Buchstaben, die mit &quot;c&quot; beginnen und mit &quot;t&quot; enden, aber auf mehr als eine Zeile verteilt sind.</p>
+                                       <p>Kombinationen aus drei Buchstaben, die mit &quot;c&quot; beginnen und mit &quot;t&quot; enden, aber auf mehrere Zeilen verteilt sind.</p>
                       
                                        <p>Welcher Buchstabe fehlt?</p>
                         
@@ -1624,7 +1623,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen fungiert als &quot;ODER&quot; und findet entweder den vorangehenden oder den nachfolgenden Ausdruck.</p>
+                        <p>Dieses Zeichen fungiert als &quot;ODER&quot; und findet entweder den vorherigen oder nächsten Ausdruck.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1691,7 +1690,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen bewirkt, dass entweder keine oder eine Instanz des vorangehenden Zeichens oder Ausdrucks gefunden wird.</p>
+                        <p>Dieses Zeichen bewirkt, dass keine oder eine Instanz des vorherigen Zeichens oder Ausdrucks gefunden wird.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1703,7 +1702,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <code class="literal">an?␣</code> (wobei &quot;␣&quot; ein einzelnes Leerzeichen repräsentiert).</td>
+                                       <code class="literal">an?␣</code> (wobei &quot;␣&quot; für ein einzelnes Leerzeichen steht).</td>
                                  </tr>
                                  <tr>
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Findet</td>
@@ -1755,7 +1754,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen bewirkt, dass entweder keine oder mehrere Instanzen des vorangehenden Zeichens oder Ausdrucks gefunden werden.</p>
+                        <p>Dieses Zeichen bewirkt, dass keine oder mehrere Instanzen des vorherigen Zeichens oder Ausdrucks gefunden werden.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1773,9 +1772,9 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Findet</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Das Wort &quot;run&quot; sowie auch &quot;runs&quot;, &quot;runner&quot;, &quot;runway&quot;, &quot;runt&quot; in &quot;grunt&quot; oder &quot;brunt&quot; und jede andere Zeichenkette, die &quot;run&quot; enthält, gefolgt von null oder mehr &quot;<span class="emphasis">
+                                       <p>Das Wort &quot;run&quot; sowie &quot;runs&quot;, &quot;runner&quot;, &quot;runway&quot;, &quot;runt&quot; in &quot;grunt&quot; oder &quot;brunt&quot; und jede andere Zeichenkette, die &quot;run&quot; gefolgt von null oder mehr &quot;<span class="emphasis">
                                              <em>Wortzeichen</em>
-                                          </span>&quot; (zu denen auch Ziffern und der Unterstrich gehören, so dass der Teil vor dem &quot;@&quot; in einer E-Mail-Adresse wie run_123@example.email.org ebenfalls gefunden werden kann).</p>
+                                          </span>&quot; enthält (dazu gehören auch Ziffern und der Unterstrich, so dass z.B. auch der Teil vor dem &quot;@&quot; in einer E-Mail-Adresse wie run_123@example.email.org gefunden wird).</p>
                     
                                     </td>
                                  </tr>
@@ -1783,7 +1782,7 @@
                                     <td style="border-right: 1px solid ; ">Findet nicht</td>
                                     <td>
                       
-                                       <p>Den vollständigen Satz in &quot;run-on&quot; oder &quot;run'n'gun&quot;, weil der Bindestrich und Apostroph nicht in <code class="literal">\w</code> enthalten sind. Nur das initiale &quot;run&quot; in diesen Sätzen wird gefunden.</p>
+                                       <p>Den vollständigen Satz in &quot;run-on&quot; oder &quot;run'n'gun&quot;, da der Bindestrich und der Apostroph nicht in <code class="literal">\w</code> enthalten sind. Nur das anfängliche &quot;run&quot; in diesen Sätzen wird gefunden.</p>
                     
                                     </td>
                                  </tr>
@@ -1796,7 +1795,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen bewirkt, dass entweder eine oder mehrere Instanzen des vorangehenden Zeichens oder Ausdrucks gefunden werden.</p>
+                        <p>Dieses Zeichen bewirkt, dass eine oder mehrere Instanzen des vorherigen Zeichens oder Ausdrucks gefunden werden.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1814,7 +1813,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Findet</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Zahlen wie &quot;1.5&quot;, &quot;23.2&quot; oder &quot;5235.8&quot; mit einer Dezimalstelle und einer beliebigen Anzahl von Ziffern vor dem Dezimalpunkt.</p>
+                                       <p>Zahlen wie &quot;1.5&quot;, &quot;23.2&quot; oder &quot;5235.8&quot; mit einer Dezimalstelle und beliebig vielen Ziffern vor dem Dezimalpunkt.</p>
                     
                                     </td>
                                  </tr>
@@ -1835,16 +1834,16 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen leitet eine <span class="emphasis">
+                        <p>Dieses Zeichen beginnt eine <span class="emphasis">
                               <em>Gruppe</em>
-                           </span> ein; also eine Gruppe von Zeichen, die als eine Einheit behandelt werden. Die Gruppen sind nummeriert, und ihr Inhalt wird im Speicher abgelegt. Sie können später im Suchausdruck mit <code class="literal">\<code class="option">n</code>
+                           </span>, d.h. mehrere Zeichen, die als eine Einheit behandelt werden. Die Gruppen sind nummeriert, und ihr Inhalt wird im Speicher abgelegt. Sie können später im Suchausdruck mit <code class="literal">\<code class="option">n</code>
                            </code> wiederverwendet werden, wobei <code class="option">n</code> die Nummer der Gruppe ist.</p>
                         <div class="note">
                            <h3 class="title">Anmerkung</h3>
                            <p>Der Inhalt der Gruppe kann auch im <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Textersetzung">Ersetzungstext</a> verwendet werden. Verwenden Sie <code class="literal">$<code class="option">n</code>
-                              </code>, wobei <code class="option">n</code> die Nummer der Gruppe ist, die in der Suche definiert wurde.</p>
+                              </code>, wobei <code class="option">n</code> die Nummer der in der Suche definierten Gruppe ist.</p>
                         </div>
-                        <p>Öffnende und schließende runde Klammern werden immer paarweise verwendet. Der Versuch, eine runde Klammer ohne ihr Gegenstück zu benutzen, löst einen Fehler aus.</p>
+                        <p>Öffnende und schließende runde Klammern werden immer paarweise verwendet. Der Versuch, eine runde Klammer ohne ihr Gegenstück zu verwenden, löst einen Fehler aus.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1862,7 +1861,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Findet</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Doppelte Wörter, die mit einem Leerzeichen voneinander getrennt sind, wie z. B. das doppelte &quot;an&quot; im folgenden Satz:</p>
+                                       <p>Doppelte Wörter, die mit einem Leerzeichen voneinander getrennt sind, z.B. das doppelte &quot;an&quot; im folgenden Satz:</p>
 
 					  
                                        <p>“I bought an an apple.”</p>
@@ -1889,7 +1888,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen schließt eine Gruppe. Es ist besonders, weil es niemals allein verwendet werden kann. Um die schließende runde Klammer selbst zu finden, müssen Sie ihr das Zeichen <code class="literal">\</code> voranstellen.</p>
+                        <p>Dieses Zeichen beendet eine Gruppe. Es ist besonders, weil es nie allein verwendet werden kann. Um die schließende runde Klammer selbst zu finden, muss ihr ein <code class="literal">\</code> vorangestellt werden.</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1907,7 +1906,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Findet</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Die Ordnungszahlen (einschließlich der runden Klammern) am Anfang jeder Zeile einer Liste wie z. B.:</p>
+                                       <p>Die Ordnungszahlen (einschließlich der runden Klammern) am Anfang jeder Zeile einer Liste, zum Beispiel:</p>
 
                       
                                        <table class="simplelist" style="border: 0; ">
@@ -1953,8 +1952,8 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen muss mit der schließenden eckigen Klammer kombiniert werden, um eine Reihe von einzelnen Zeichen zu umschließen, die jeweils eine potenzielle Übereinstimmung darstellen.</p>
-                        <p>Nur die öffnende eckige Klammer ist besonders und muss mit einem umgekehrten Schrägstrich vorangestellt werden, wenn sie gefunden werden soll. Wenn Sie nur die schließende eckige Klammer finden wollen, müssen Sie ihr keinen umgekehrten Schrägstrich voranstellen. (Sie können den Schrägstrich trotzdem hinzufügen, aber er hat keine Auswirkungen auf den Ausdruck oder das Ergebnis).</p>
+                        <p>Dieses Zeichen muss zusammen mit der schließenden eckigen Klammer verwendet werden, um mehrere einzelne Zeichen zu umschließen, von denen jedes eine potenzielle Übereinstimmung darstellt.</p>
+                        <p>Nur die öffnende eckige Klammer ist besonders und muss einen umgekehrten Schrägstrich davor haben, um gefunden zu werden. Um die schließende eckige Klammer selbst zu finden, muss ihr kein umgekehrter Schrägstrich vorangestellt werden. (Sie können den Schrägstrich trotzdem hinzufügen, aber er hat keinen Einfluss auf den Ausdruck oder das Ergebnis.)</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -1972,7 +1971,7 @@
                                     <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">Findet</td>
                                     <td style="border-bottom: 1px solid ; ">
                       
-                                       <p>Die korrekte Schreibweise von &quot;licence&quot; und &quot;license&quot; sowie die möglichen Falschschreibungen von &quot;lisence&quot; und &quot;lisense&quot;</p>
+                                       <p>Die korrekte Schreibweise von &quot;licence&quot; und &quot;license&quot; sowie mögliche Falschschreibungen wie &quot;lisence&quot; oder &quot;lisense&quot;</p>
                     
                                     </td>
                                  </tr>
@@ -1980,7 +1979,7 @@
                                     <td style="border-right: 1px solid ; ">Findet nicht</td>
                                     <td>
                       
-                                       <p>Krassere Falschschreibungen wie &quot;licensse&quot; oder &quot;lissense&quot;.</p>
+                                       <p>Grobe Falschschreibungen wie &quot;licensse&quot; oder &quot;lissense&quot;.</p>
                     
                                     </td>
                                  </tr>
@@ -1993,7 +1992,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Dieses Zeichen muss mit der schließenden geschweiften Klammer kombiniert werden, um eine <span class="emphasis">
+                        <p>Dieses Zeichen muss zusammen mit der schließenden geschweiften Klammer verwendet werden, um eine <span class="emphasis">
                               <em>genaue Anzahl</em>
                            </span>, ein <span class="emphasis">
                               <em>Minimum</em>
@@ -2002,7 +2001,7 @@
                            </span> oder einen <span class="emphasis">
                               <em>Zahlenbereich</em>
                            </span> zu umschließen. Diese geben an, wie viele Instanzen des vorherigen Zeichens oder der vorherigen Gruppe gefunden werden sollen.</p>
-                        <p>Nur die öffnende geschweifte Klammer ist besonders und muss mit einem umgekehrten Schrägstrich vorangestellt werden, wenn sie gefunden werden soll. Wenn Sie nur die schließende geschweifte Klammer finden wollen, müssen Sie ihr keinen umgekehrten Schrägstrich voranstellen. (Sie können den Schrägstrich trotzdem hinzufügen, aber er hat keine Auswirkungen auf den Ausdruck oder das Ergebnis).</p>
+                        <p>Nur die öffnende geschweifte Klammer ist besonders und muss einen umgekehrten Schrägstrich davor haben, um gefunden zu werden. Um die schließende geschweifte Klammer selbst zu finden, muss ihr kein umgekehrter Schrägstrich vorangestellt werden. (Sie können den Schrägstrich trotzdem hinzufügen, aber er hat keinen Einfluss auf den Ausdruck oder das Ergebnis.)</p>
                         <div class="informaltable">
                            <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                               <colgroup>
@@ -2033,9 +2032,9 @@
                                        <p>
                                           <span class="bold">
                                              <strong>Warnung:</strong>
-                                          </span> Obwohl die beiden letzten Codes als Ganzes nicht gefunden werden, gibt der Ausdruck den Teil &quot;<span class="emphasis">
+                                          </span> Obwohl die letzten beiden Codes nicht als Ganzes gefunden werden, gibt der Ausdruck den Teil &quot;<span class="emphasis">
                                              <em>1472/698</em>
-                                          </span>&quot; von &quot;1472/6985&quot; sowie den Teil &quot;<span class="emphasis">
+                                          </span>&quot; von &quot;1472/6985&quot; und den Teil &quot;<span class="emphasis">
                                              <em>5133/157</em>
                                           </span>&quot; von &quot;95133/15746&quot; zurück.</p>
                     
@@ -2056,14 +2055,14 @@
                      </div>
                   </div>
                </div>
-               <p>Dieser Abschnitt enthält verschiedene Arten von regulären Ausdrücken, die von einfach bis komplex reichen.</p>
+               <p>Dieser Abschnitt enthält verschiedene Arten von regulären Ausdrücken, von einfach bis komplex.</p>
                <div class="note">
                   <h3 class="title">Anmerkung</h3>
-                  <p>Denken Sie daran, dass die meisten <span class="emphasis">
+                  <p>Beachten Sie, dass die meisten <span class="emphasis">
                         <em>alphabetischen</em>
-                     </span> Zeichen, denen ein <code class="literal">\</code> vorangestellt ist, zu einem Ausdruck werden, der <span class="emphasis">
-                        <em>nicht das Zeichen selbst, sondern die damit verbundene besondere Bedeutung</em>
-                     </span> repräsentiert.</p>
+                     </span> Zeichen, denen ein <code class="literal">\</code> vorangestellt ist, <span class="emphasis">
+                        <em>nicht das Zeichen selbst darstellt, sondern eine Sonderbedeutung hat</em>
+                     </span>.</p>
                </div>
                <section class="section" id="app.regex.types.of.expressions.simple.expressions">
                   <div class="titlepage">
@@ -2073,7 +2072,7 @@
                         </div>
                      </div>
                   </div>
-                  <p>Der einfachste reguläre Ausdruck besteht aus einem einzigen Zeichen, oder aus einem <code class="literal">\</code> und einem Zeichen, die zusammen eine besondere Bedeutung haben.</p>
+                  <p>Der einfachste reguläre Ausdruck besteht aus einem einzelnen Zeichen, oder aus einem <code class="literal">\</code> und einem Zeichen, die zusammen eine Sonderbedeutung haben.</p>
                   <div class="table" id="app.regex.characters">
                      <div class="table-title">Tabelle 6. Zeichen</div>
                      <div class="table-contents">
@@ -2095,7 +2094,7 @@
                                  </td>
                                  <td style="text-align: left; border-bottom: 1px solid ; ">
                 
-                                    <p>Das &quot;x&quot;-Zeichen selbst</p>
+                                    <p>Das Zeichen &quot;x&quot; selbst</p>
                 
                                     <p>Die meisten Zeichen finden sich selbst.</p>
               
@@ -2145,7 +2144,7 @@
                      </div>
                   </div>
                   <p>Die normale OmegaT-Suche ist standardmäßig nicht Groß-/Kleinschreibung-sensitiv: Sie findet sowohl Groß- als auch Kleinbuchstaben, es sei denn, Sie haben die Option <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search.options" title="Optionen">Optionen</a> aktiviert. Dadurch wird die Groß- und Kleinschreibung des gesamten Suchbegriffs berücksichtigt.</p>
-                  <p>Reguläre Ausdrücke hingegen sind standardmäßig Groß-/Kleinschreibung-sensitiv. Das bedeutet, dass eine RegEx-Suche nach &quot;OmegaT&quot; zum Beispiel &quot;omegat&quot; nicht finden wird. Allerdings bieten reguläre Ausdrücke spezielle Modifikatoren, um die Groß-/Kleinschreibung-Sensitivität innerhalb des Ausdrucks umzustellen:</p>
+                  <p>Reguläre Ausdrücke hingegen sind standardmäßig Groß-/Kleinschreibung-sensitiv. Das bedeutet, dass eine RegEx-Suche nach &quot;OmegaT&quot; zum Beispiel &quot;omegat&quot; nicht finden wird. Allerdings bieten reguläre Ausdrücke spezielle Modifikatoren, mit denen die Groß-/Kleinschreibung-Sensitivität innerhalb des Ausdrucks umgeschaltet werden kann:</p>
                   <div class="variablelist">
                      <dl class="variablelist">
                         <dt>
@@ -2166,9 +2165,9 @@
                         </dd>
                      </dl>
                   </div>
-                  <p>Sie können das nutzen, um die Groß-/Kleinschreibung-Sensitivität bei der Suche präzise einzustellen. Nehmen wir zum Beispiel an, dass Sie Instanzen von &quot;OmegaT&quot; und &quot;omegat&quot; finden wollen, aber nicht &quot;OMEGAT&quot;. Sie können das mit folgendem Ausdruck tun: <code class="literal">(?i)o</code>
+                  <p>Damit können Sie die Groß-/Kleinschreibung-Sensitivität bei der Suche genau einstellen. Angenommen, Sie möchten Instanzen von &quot;OmegaT&quot; und &quot;omegat&quot; finden, aber nicht von &quot;OMEGAT&quot;. Dies können Sie mit dem folgenden Ausdruck erreichen: <code class="literal">(?i)o</code>
                      <code class="literal">(?-i)mega</code> 
-                     <code class="literal">(?i)t</code> (ein groß- oder kleingeschriebenes &quot;o&quot;, gefolgt von einem kleingeschriebenen &quot;mega&quot;, gefolgt von einem groß- oder kleingeschriebenen &quot;t&quot;).</p>
+                     <code class="literal">(?i)t</code> (ein großes oder kleines &quot;o&quot;, gefolgt von einem kleingeschriebenen &quot;mega&quot;, gefolgt von einem großen oder kleinen &quot;t&quot;).</p>
                </section>
                <section class="section" id="app.regex.types.of.expressions.classes">
                   <div class="titlepage">
@@ -2178,19 +2177,19 @@
                         </div>
                      </div>
                   </div>
-                  <p>Reguläre Ausdrücke ermöglichen es Ihnen, Zeichensätze zu erstellen, die als <span class="emphasis">
+                  <p>Mit regulären Ausdrücken können Sie Zeichengruppen erstellen, die als <span class="emphasis">
                         <em>Klassen</em>
-                     </span> bezeichnet werden. Bei der Suche werden alle Zeichen des Satzes berücksichtigt.</p>
-                  <p>Um eine Klasse zu definieren, umschließen Sie einzelne Zeichen und/oder Zeichenbereiche mit eckigen Klammern. Sie können zum Beispiel die Klasse <code class="literal">[£€$]</code> erstellen, um eines der drei Währungssymbole im Text zu finden, oder [1-3], um die Zahlen 1, 2 oder 3 zu finden.</p>
+                     </span> bezeichnet werden. Bei der Suche werden alle Zeichen in der Klasse berücksichtigt.</p>
+                  <p>Um eine Klasse zu definieren, umschließen Sie einzelne Zeichen und/oder Zeichenbereiche mit eckigen Klammern. Zum Beispiel können Sie die Klasse <code class="literal">[£€$]</code> erstellen, um eines der drei Währungssymbole im Text zu finden, oder [1-3], um die Zahlen 1, 2 oder 3 zu finden.</p>
                   <div class="note">
                      <h3 class="title">Anmerkung</h3>
-                     <p>Innerhalb einer Klasse haben nur der umgekehrte Schrägstrich (<code class="literal">\</code>), der Zirkumflex (<code class="literal">^</code>), die schließende eckige Klammer (<code class="literal">]</code>) und der Bindestrich (<code class="literal">-</code>) eine besondere Bedeutung. Die restlichen zwölf Zeichen sind normal und müssen nicht mit einem umgekehrten Schrägstrich versehen werden, wenn Sie nach diesen Zeichen selbst suchen möchten.</p>
-                     <p>Wenn Sie eines der vier besonderen Klassenzeichen als normales Zeichen suchen möchten, setzen Sie einen umgekehrten Schrägstrich davor. Sie können auch nach dem Zirkumflex, der schließenden eckigen Klammer und dem Bindestrich selbst suchen, indem Sie sie an einer Position platzieren, die ihre besondere Bedeutung nicht auslöst: Im Falle des Zirkumflexes an einer beliebigen Stelle außer direkt nach der öffnenden eckigen Klammer, im Falle der schließenden eckigen Klammer direkt nach entweder der öffnenden eckigen Klammer oder dem Zirkumflex und im Falle des Bindestrichs entweder direkt nach der öffnenden eckigen Klammer oder direkt vor der schließenden eckigen Klammer.</p>
+                     <p>Innerhalb einer Klasse haben nur der umgekehrte Schrägstrich (<code class="literal">\</code>), der Zirkumflex (<code class="literal">^</code>), die schließende eckige Klammer (<code class="literal">]</code>) und der Bindestrich (<code class="literal">-</code>) eine Sonderbedeutung. Die restlichen zwölf sind normale Zeichen und müssen nicht mit einem umgekehrten Schrägstrich versehen werden, um nach diesen selbst zu suchen.</p>
+                     <p>Um nach einem der vier Sonderklassenzeichen selbst zu suchen, muss ihm ein umgekehrter Schrägstrich vorangestellt werden. Sie können auch nach dem Zirkumflex, der schließenden eckigen Klammer und dem Bindestrich selbst suchen, indem Sie sie an eine Position setzen, die ihre Sonderbedeutung nicht auslöst: Im Falle des Zirkumflexes an einer beliebigen Stelle außer direkt nach der öffnenden eckigen Klammer, im Falle der schließenden eckigen Klammer direkt nach entweder der öffnenden eckigen Klammer oder dem Zirkumflex und im Falle des Bindestrichs entweder direkt nach der öffnenden eckigen Klammer oder direkt vor der schließenden eckigen Klammer.</p>
                   </div>
-                  <p>Viele häufig verwendete Zeichensätze haben eine Kurzform, die aus einem umgekehrten Schrägstrich, gefolgt von einem Buchstaben, besteht. Zum Beispiel ist <code class="literal">\d</code> die Kurzform für <code class="literal">[0-9]</code>, womit eine beliebige Ziffer zwischen 0 und 9 gefunden werden kann. In vielen Fällen wird der entsprechende Großbuchstabe verwendet, um die Klasse zu negieren: <code class="literal">\D</code> findet ein beliebiges Zeichen, das <span class="bold">
+                  <p>Viele häufig verwendete Zeichengruppen haben eine Kurzschreibweise in Form eines umgekehrten Schrägstrichs gefolgt von einem Buchstaben. Zum Beispiel ist <code class="literal">\d</code> die Kurzschreibweise für <code class="literal">[0-9]</code>, mit der eine beliebige Ziffer zwischen 0 und 9 gefunden werden kann. In vielen Fällen wird der entsprechende Großbuchstabe verwendet, um die Klasse zu negieren: <code class="literal">\D</code> findet ein beliebiges Zeichen, das <span class="bold">
                         <strong>keine</strong>
                      </span> Ziffer ist.</p>
-                  <p>Die folgende Tabelle enthält weitere Beispiele. Diese Klassen repräsentieren niemals nur den eigentlichen Buchstaben, mit dem die Kurzform gebildet wird.</p>
+                  <p>Die folgende Tabelle zeigt weitere Beispiele. Diese Klassen repräsentieren nie nur den eigentlichen Buchstaben, mit dem die Kurzschreibweise gebildet wird.</p>
                   <div class="table" id="app.regex.classes">
                      <div class="table-title">Tabelle 7. Klassenbeispiele</div>
                      <div class="table-contents">
@@ -2215,7 +2214,7 @@
                                     <p>Der Buchstabe &quot;a&quot;, &quot;b&quot; oder &quot;c&quot;.</p>
 
 				
-                                    <p>Eine einfache Klasse besteht aus einer beliebigen Anzahl von Zeichen, die von <code class="literal">[</code> und <code class="literal">]</code> umschlossen sind.</p>
+                                    <p>Eine einfache Klasse besteht aus beliebig vielen Zeichen, die von <code class="literal">[</code> und <code class="literal">]</code> umschlossen sind.</p>
               
                                  </td>
                               </tr>
@@ -2225,10 +2224,10 @@
                                  </td>
                                  <td style="text-align: left; border-bottom: 1px solid ; ">
                 
-                                    <p>Ein Zeichen im Bereich von &quot;C&quot; bis &quot;X&quot;.</p>
+                                    <p>Ein Zeichen aus dem Buchstabenbereich &quot;C&quot; bis &quot;X&quot;.</p>
 
 				
-                                    <p>Ein Zeichenbereich besteht aus dem ersten Zeichen einer Reihe, gefolgt von einem Bindestrich, gefolgt vom letzten Zeichen der Reihe. Es können beliebig viele Zeichenbereiche definiert werden: <code class="literal">[a-zA-Z0-9]</code> findet einen beliebigen Kleinbuchstaben von &quot;a&quot; bis &quot;z&quot;, oder einen beliebigen Großbuchstaben von &quot;A&quot; bis &quot;Z&quot;, oder eine beliebige Ziffer von &quot;0&quot; bis &quot;9&quot;. Ein Bindestrich außerhalb des Zeichenbereichs wird als normaler Bindestrich behandelt: <code class="literal">[a-z-]</code> findet einen beliebigen Kleinbuchstaben von &quot;a&quot; bis &quot;z&quot; oder den Bindestrich selbst.</p>
+                                    <p>Um einen Bereich zu definieren, geben Sie das erste Zeichen, einen Bindestrich und das letzte Zeichen an. Es können beliebig viele Bereiche definiert werden: <code class="literal">[a-zA-Z0-9]</code> findet einen beliebigen Kleinbuchstaben von &quot;a&quot; bis &quot;z&quot;, oder einen beliebigen Großbuchstaben von &quot;A&quot; bis &quot;Z&quot;, oder eine beliebige Ziffer von &quot;0&quot; bis &quot;9&quot;. Ein Bindestrich außerhalb eines Bereichs wird als normaler Bindestrich behandelt: <code class="literal">[a-z-]</code> findet einen beliebigen Kleinbuchstaben von &quot;a&quot; bis &quot;z&quot; oder den Bindestrich selbst.</p>
               
                                  </td>
                               </tr>
@@ -2243,7 +2242,7 @@
                                        </span> Zeilenvorschub-, Wagenrücklauf- oder Tabulatorzeichen ist.</p>
 
                 
-                                    <p>Der Zirkumflex unmittelbar nach der öffnenden eckigen Klammer exkludiert die nachfolgenden Zeichen in der Klasse.</p>
+                                    <p>Der Zirkumflex unmittelbar nach der öffnenden eckigen Klammer bewirkt, dass ein Zeichen gefunden wird, dass keines der nachfolgenden Zeichen ist.</p>
               
                                  </td>
                               </tr>
@@ -2253,7 +2252,7 @@
                                  </td>
                                  <td style="text-align: left; border-bottom: 1px solid ; ">
                 
-                                    <p>Ein Wortzeichen, generell definiert als <code class="literal">[A-Za-z0-9_]</code>.</p>
+                                    <p>Ein Wortzeichen, allgemein definiert als <code class="literal">[A-Za-z0-9_]</code>.</p>
 
                 
                                     <p>
@@ -2269,7 +2268,7 @@
                                  </td>
                                  <td style="text-align: left; border-bottom: 1px solid ; ">
                 
-                                    <p>Ein Leerraumzeichen, wozu auch die Leer- und Tabulatorzeichen sowie Zeilenumbrüche gehören.</p>
+                                    <p>Ein Leerraumzeichen wie z.B. Leer-, Tabulator- oder Zeilenumbruchzeichen.</p>
 
                 
                                     <p>
@@ -2287,7 +2286,7 @@
                                  </td>
                                  <td style="text-align: left; ">
 				
-                                    <p>Horizontales und vertikales Leerraumzeichen (grundsätzlich gegenüber <code class="literal">\s</code> vorzuziehen).</p>
+                                    <p>Horizontales bzw. vertikales Leerraumzeichen (grundsätzlich besser als <code class="literal">\s</code>).</p>
 
 				
                                     <p>
@@ -2304,7 +2303,7 @@
                      </div>
                   </div>
                   <br class="table-break" />
-                  <p>Reguläre Ausdrücke sind nicht auf alphanumerische Zeichen beschränkt. Sie decken den gesamten Unicode-Zeichensatz ab. Verwenden Sie Unicode-Blöcke, -Skripte und -Kategorien, um Zeichenklassen außerhalb des alphanumerischen Zeichenbereichs anzugeben. Einige Beispiele sind in der folgenden Tabelle aufgeführt.</p>
+                  <p>Reguläre Ausdrücke sind nicht auf alphanumerische Zeichen beschränkt. Sie decken den gesamten Unicode-Zeichensatz ab. Verwenden Sie Unicode-Blöcke, -Skripte und -Kategorien, um Zeichenklassen außerhalb des alphanumerischen Zeichenbereichs anzugeben. Die folgende Tabelle enthält einige Beispiele.</p>
                   <p>Eine ausführliche Übersicht über Unicode-basierte reguläre Ausdrücke finden Sie auch unter <a class="ulink" href="https://www.regular-expressions.info/unicode.html" target="_top">Unicode Regular Expressions</a> (englisch).</p>
                   <div class="table" id="app.regex.unicode.blocks">
                      <div class="table-title">Tabelle 8. Unicode-Blöcke, -Skripte und -Kategorien</div>
@@ -2333,7 +2332,7 @@
                                     <p>
                                        <code class="literal">\P{InGreek}</code> ist ein beliebiges Zeichen, das <span class="bold">
                                           <strong>nicht</strong>
-                                       </span> im griechischen Block ist.</p>
+                                       </span> im griechischen Block vorkommt.</p>
               
                                  </td>
                               </tr>
@@ -2369,7 +2368,7 @@
                                  </td>
                                  <td style="text-align: left; ">
                 
-                                    <p>Ein Währungssymbol, das auch eine <a class="ulink" href="https://unicode.org/reports/tr18/#General_Category_Property" target="_top">Unicode-Kategorie</a> ist.</p>
+                                    <p>Ein Währungssymbol, das ebenfalls eine <a class="ulink" href="https://unicode.org/reports/tr18/#General_Category_Property" target="_top">Unicode-Kategorie</a> ist.</p>
               
                                  </td>
                               </tr>
@@ -2387,9 +2386,9 @@
                         </div>
                      </div>
                   </div>
-                  <p>Einige Ausdrücke spezifizieren eher eine Position als ein Zeichen. Sie geben an, wo im Text nach der Übereinstimmung zu suchen ist, enthalten aber keine Zeichen in dieser Übereinstimmung. Die folgende Tabelle enthält einige der Beispiele, die häufiger verwendet werden. Informieren Sie sich auf den Seiten im Abschnitt <a class="link" href="chapter.appendices.html#app.regex.tools" title="Referenzen">Referenzen</a>, um mehr zu erfahren.</p>
+                  <p>Einige Ausdrücke geben eher eine Position als ein Zeichen an. Sie geben an, wo im Text nach der Übereinstimmung gesucht werden soll, enthalten aber keine Zeichen in dieser Übereinstimmung. Die folgende Tabelle enthält einige der am häufigsten verwendeten Beispiele. Weitere Informationen finden Sie auf den Seiten im Abschnitt <a class="link" href="chapter.appendices.html#app.regex.tools" title="Referenzen">Referenzen</a>.</p>
                   <div class="table" id="app.regex.boundary.matchers">
-                     <div class="table-title">Tabelle 9. Ausdrücke, die eine Position kennzeichnen</div>
+                     <div class="table-title">Tabelle 9. Positionelle Ausdrücke</div>
                      <div class="table-contents">
                         <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                            <colgroup>
@@ -2455,7 +2454,7 @@
                                     <p>Ein Zeichen gefolgt von einem &quot;u&quot;.</p>
 				
                 
-                                    <p>Zum Beispiel findet <code class="literal">q(?=u)</code> den Buchstaben &quot;q&quot;, wenn dahinter ein &quot;u&quot; steht. Es findet also das &quot;q&quot; in &quot;equal&quot; oder &quot;question&quot;, aber <span class="emphasis">
+                                    <p>Zum Beispiel findet <code class="literal">q(?=u)</code> den Buchstaben &quot;q&quot;, hinter dem ein &quot;u&quot; steht. Es findet also das &quot;q&quot; in &quot;equal&quot; oder &quot;question&quot;, aber <span class="emphasis">
                                           <em>nicht</em>
                                        </span> in &quot;qigong&quot; oder &quot;Iraq&quot;.</p>
               
@@ -2467,12 +2466,12 @@
                                  </td>
                                  <td style="text-align: left; border-bottom: 1px solid ; ">
                 
-                                    <p>Ein Zeichen, das <span class="emphasis">
-                                          <em>nicht</em>
-                                       </span> den Buchstaben &quot;u&quot; dahinter hat.</p>
+                                    <p>Ein Zeichen, hinter dem <span class="emphasis">
+                                          <em>kein</em>
+                                       </span> &quot;u&quot; steht.</p>
 				
                 
-                                    <p>Zum Beispiel findet <code class="literal">q(?!u)</code> den Buchstaben &quot;q&quot;, wenn dahinter <span class="emphasis">
+                                    <p>Zum Beispiel findet <code class="literal">q(?!u)</code> den Buchstaben &quot;q&quot;, hinter dem <span class="emphasis">
                                           <em>kein</em>
                                        </span> &quot;u&quot; steht. Es findet also das &quot;q&quot; in &quot;qigong&quot; oder &quot;Iraq&quot;, aber <span class="emphasis">
                                           <em>nicht</em>
@@ -2486,10 +2485,10 @@
                                  </td>
                                  <td style="text-align: left; border-bottom: 1px solid ; ">
                 
-                                    <p>Ein Zeichen, das den Buchstaben &quot;q&quot; davor hat.</p>
+                                    <p>Ein Zeichen, dem der Buchstabe &quot;q&quot; vorangestellt ist.</p>
 				
                 
-                                    <p>Zum Beispiel findet <code class="literal">(?&lt;=q)u</code> den Buchstaben &quot;u&quot;, wenn davor ein &quot;q&quot; steht. Es findet also das &quot;u&quot; in &quot;quick&quot;, aber nicht in &quot;run&quot;.</p>
+                                    <p>Zum Beispiel findet <code class="literal">(?&lt;=q)u</code> den Buchstaben &quot;u&quot;, vor dem ein &quot;q&quot; steht. Es findet also das &quot;u&quot; in &quot;quick&quot;, aber nicht in &quot;run&quot;.</p>
               
                                  </td>
                               </tr>
@@ -2499,12 +2498,12 @@
                                  </td>
                                  <td style="text-align: left; ">
                 
-                                    <p>Ein Zeichen, das <span class="emphasis">
+                                    <p>Ein Zeichen, dem <span class="emphasis">
                                           <em>nicht</em>
-                                       </span> den Buchstaben &quot;q&quot; davor hat.</p>
+                                       </span> der Buchstabe &quot;q&quot; vorangestellt ist.</p>
 				
                 
-                                    <p>Zum Beispiel findet <code class="literal">(?&lt;!q)u</code> den Buchstaben &quot;u&quot;, wenn davor <span class="emphasis">
+                                    <p>Zum Beispiel findet <code class="literal">(?&lt;!q)u</code> den Buchstaben &quot;u&quot;, vor dem <span class="emphasis">
                                           <em>kein</em>
                                        </span> &quot;q&quot; steht. Es findet also das &quot;u&quot; in &quot;run&quot;, aber <span class="emphasis">
                                           <em>nicht</em>
@@ -2529,7 +2528,7 @@
                </div>
                <p>Dieser Abschnitt enthält einige Beispiele, die zeigen, wie die verschiedenen oben beschriebenen Ausdrücke kombiniert werden können, um die Suche in OmegaT zu optimieren.</p>
                <div class="table" id="regex.examples">
-                  <div class="table-title">Tabelle 10. RegEx-Beispiele, die die oben genannten Ausdrücke verwenden</div>
+                  <div class="table-title">Tabelle 10. RegEx-Beispiele mit den obigen Ausdrücken</div>
                   <div class="table-contents">
                      <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
                         <colgroup>
@@ -2559,7 +2558,7 @@
                               </td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">
               
-                                 <p>Nebensätze finden, die mit einem Komma gefolgt von einem Leerzeichen beginnen, ein oder mehrere Wörter enthalten (einschließlich Wörter in Anführungszeichen, Verschmelzungen und Dateinamen mit einer Dateiendung) und entweder mit einem Komma oder einem Punkt enden.</p>
+                                 <p>Nebensätze finden, die mit einem Komma gefolgt von einem Leerzeichen beginnen, ein oder mehrere Wörter enthalten (einschließlich Wörtern in Anführungszeichen, Kompositionen und Dateinamen mit einer Dateiendung) und entweder mit einem Komma oder einem Punkt enden.</p>
             
                               </td>
                            </tr>
@@ -2599,7 +2598,7 @@
                               </td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">
               
-                                 <p>Numerische Datumsangaben in der Reihenfolge Jahr, Monat und Tag finden, wobei Monat und Tag mit einem Schrägstrich, Punkt oder Bindestrich voneinander getrennt sind, wie z. B.:</p>
+                                 <p>Numerische Datumsangaben in der Reihenfolge Jahr, Monat und Tag finden, wobei Monat und Tag mit einem Schrägstrich, Punkt oder Bindestrich voneinander getrennt sind, zum Beispiel:</p>
 			  
                 
                                  <div class="itemizedlist">
@@ -2619,7 +2618,7 @@
 				
                                  <div class="note">
                                     <h3 class="title">Anmerkung</h3>
-                                    <p>Dieser Ausdruck findet Zahlen- und Trennzeichenmuster, die eventuell Datumsangaben sein könnten, prüft sie aber nicht auf Richtigkeit. Er wird auch Muster wie &quot;5136/36/71&quot; finden.</p>
+                                    <p>Dieser Ausdruck findet Zahlen- und Trennzeichenmuster, die eventuell Datumsangaben sein könnten, prüft sie aber nicht auf Richtigkeit. Er findet auch Muster wie &quot;5136/36/71&quot;.</p>
                                  </div>
             
                               </td>
@@ -2630,7 +2629,7 @@
                               </td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">
               
-                                 <p>Einen Punkt gefolgt von einem Großbuchstaben finden. Nützlich, um eventuell fehlende Leerzeichen zwischen dem Punkt und dem Beginn eines neuen Satzes zu finden.</p>
+                                 <p>Einen Punkt gefolgt von einem Großbuchstaben finden. Nützlich, um fehlende Leerzeichen zwischen dem Punkt und dem Beginn eines neuen Satzes zu finden.</p>
             
                               </td>
                            </tr>
@@ -2640,7 +2639,7 @@
                               </td>
                               <td style="text-align: left; border-bottom: 1px solid ; ">
               
-                                 <p>&quot;is&quot; als ganzes Wort in einem Satz finden, ohne &quot;this&quot;, &quot;isn't&quot; oder sogar &quot;Is&quot; einzubeziehen.</p>
+                                 <p>&quot;is&quot; als ganzes Wort in einem Satz finden, aber nicht &quot;this&quot;, &quot;isn't&quot; oder sogar &quot;Is&quot;.</p>
             
                               </td>
                            </tr>
@@ -2668,11 +2667,11 @@
                      </div>
                   </div>
                </div>
-               <p>Obwohl OmegaT keine ausgefallene Färbung für Ihre regulären Ausdrücke bereitstellt, können Sie durch Nutzung des Fensters <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Textsuche">
+               <p>Obwohl OmegaT keine ausgefallene Syntaxhervorhebung für Ihre regulären Ausdrücke bietet, können Sie durch Nutzung des Fensters <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Textsuche">
                      <span class="guilabel">Textsuche</span>
                   </a> viel Übung bekommen, da OmegaT die passenden Ergebnisse einfärbt.</p>
-               <p>Nachfolgend sind einige zusätzliche Ressourcen aufgeführt.</p>
-               <p>Die technische Java-Referenz ist nützlich als kanonische Referenz.</p>
+               <p>Im Folgenden sind einige zusätzliche Ressourcen aufgelistet.</p>
+               <p>Die Java Technical Reference ist als kanonische Referenz nützlich.</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt id="app.regex.java">
@@ -2681,11 +2680,11 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Die offizielle Referenz für in Java verwendete reguläre Ausdrücke.</p>
+                        <p>Die offizielle Referenz für reguläre Ausdrücke in Java.</p>
                      </dd>
                   </dl>
                </div>
-               <p>Wenn Sie mehr über die Nutzung regulärer Ausdrücke erfahren möchten, könnten die beiden folgenden Seiten sehr nützlich sein.</p>
+               <p>Wenn Sie mehr über die Nutzung von regulären Ausdrücken erfahren möchten, könnten die beiden folgenden Seiten sehr nützlich sein.</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt id="app.regex.tools.regex101">
@@ -2694,7 +2693,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Ein RegEx-Online-Tool, das Ihnen erlaubt, den Text, der durchsucht werden soll, und die regulären Ausdrücke, die getestet werden sollen, einzutragen.</p>
+                        <p>Ein RegEx-Online-Tool, um reguläre Ausdrücke auf einem bestimmten Text zu testen.</p>
                      </dd>
                      <dt id="app.regex.tools.regular.expression.info">
                         <span class="term" id="app.regex.tools.regular.expression.info.title">
@@ -2702,7 +2701,7 @@
                         </span>
                      </dt>
                      <dd>
-                        <p>Eines der ausführlichsten Tutorials und Referenzen für reguläre Ausdrücke im Internet.</p>
+                        <p>Eines der ausführlichsten Tutorials und Referenzen zu regulären Ausdrücken, das im Internet gefunden werden kann.</p>
                      </dd>
                   </dl>
                </div>
@@ -2754,7 +2753,7 @@
                               <strong>G</strong>
                            </span>
 	  
-                        </a>, um neue Begriffe in dieses Glossar einzutragen. Deshalb wird es auch als <span class="emphasis">
+                        </a>, um neue Begriffe in dieses Glossar einzutragen. Es wird daher auch als <span class="emphasis">
                            <em>beschreibbares</em>
                         </span> Glossar bezeichnet.</p>
                      <p>Verwenden Sie <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
@@ -2764,11 +2763,11 @@
                            <span class="guisubmenu">Auf Projektinhalte zugreifen</span>
                         </a>, um direkt darauf zuzugreifen. Sie können es dann in einem Texteditor öffnen und ändern.</p>
                      <p>Sie müssen die Datei nicht vorab vorbereiten.</p>
-                     <p>Sie wird erstellt, wenn Sie das erste Mal einen Eintrag zum Glossar hinzufügen.</p>
+                     <p>Die Datei wird automatisch erstellt, sobald Sie den ersten Glossareintrag hinzufügen.</p>
                      <div class="note">
                         <h3 class="title">Anmerkung</h3>
-                        <p>Wenn Sie eine vorhandene Datei als Standardglossar verwenden, werden alle neuen Einträge standardmäßig im tabulatorgetrennten Format und in UTF-8 gespeichert.</p>
-                        <p>Wenn Sie eine andere Kodierung angeben möchten, können Sie einen &quot;magischen&quot; Kommentar hinzufügen, der die folgende Form hat:</p>
+                        <p>Wenn Sie eine vorhandene Datei als Standardglossar verwenden, werden alle neuen Einträge standardmäßig im tabulatorgetrennten Format gelesen und in UTF-8 gespeichert.</p>
+                        <p>Wenn Sie eine andere Kodierung angeben möchten, können Sie einen &quot;magischen&quot; Kommentar in folgender Form hinzufügen:</p>
                         <table class="simplelist" style="border: 0; ">
                            <tr>
                               <td>
@@ -2778,14 +2777,14 @@
                         </table>
                         <p>wobei <em class="parameter">
                               <code>&lt;Zeichensatz&gt;</code>
-                           </em> in der Regel einer der Zeichensätze ist, die in <a class="ulink" href="http://www.iana.org/assignments/character-sets/character-sets.xhtml" target="_top">IANA Charset Registry</a> aufgelistet sind.</p>
+                           </em> üblicherweise einer der Zeichensätze ist, die in der <a class="ulink" href="http://www.iana.org/assignments/character-sets/character-sets.xhtml" target="_top">IANA Charset Registry</a> aufgelistet sind.</p>
                      </div>
                   </dd>
                   <dt>
                      <span class="term">Referenzglossare</span>
                   </dt>
                   <dd>
-                     <p>Referenzglossare sind Terminologiedateien in einem von OmegaT erkannten Format. Sie können diese nicht über die Benutzeroberfläche von OmegaT ändern, wie es beim projekteigenen Glossar der Fall ist, aber Sie können stattdessen einen Texteditor verwenden.</p>
+                     <p>Referenzglossare sind Terminologiedateien in einem von OmegaT erkannten Format. Im Gegensatz zum Projektglossar können solche Glossare nicht mit der Benutzeroberfläche von OmegaT geändert werden. Verwenden Sie stattdessen einen Texteditor.</p>
                   </dd>
                </dl>
             </div>
@@ -2803,27 +2802,27 @@
                      </div>
                   </div>
                </div>
-               <p>Standardmäßig enthält jedes Projekt einen <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>-Ordner, wo das beschreibbare Glossar aufbewahrt wird, sowie alle Referenzglossare, die Sie dem Projekt hinzufügen möchten. Siehe die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.glossaries">
+               <p>Standardmäßig enthält jedes Projekt einen <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>-Ordner, in dem das beschreibbare Glossar sowie alle Referenzglossare, die Sie dem Projekt hinzufügen möchten, gespeichert werden. Einzelheiten finden Sie unter <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.glossaries">
                      <code class="option">Ordner für Glossardateien</code>
-                  </a> für weitere Informationen.</p>
+                  </a> (Projekteigenschaft).</p>
                <p>Alle Glossare müssen sich im <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>-Ordner befinden. Glossare in Unterordnern werden ebenfalls erkannt.</p>
-               <p>Innerhalb dieses Ordners können Sie mehrere Terminologie-Unterordner erstellen, die nach Thema, Kunde oder einer anderen Kategorie passend zu Ihrem Workflow geordnet sind.</p>
+               <p>Innerhalb dieses Ordners können Sie mehrere Terminologie-Unterordner erstellen, die nach Thema, Kunde oder einer beliebig anderen Kategorie geordnet sind.</p>
                <p>Verwenden Sie die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.glossaries">
                      <code class="option">Ordner für Glossardateien</code>
-                  </a>, um den Speicherort des Ordners für Glossardateien zu ändern. Dieser Ordner kann außerhalb des Projekts festgelegt werden, so dass Sie ihn oder einen der spezifischen Unterordner in anderen Projekten verwenden können.</p>
+                  </a>, um den Speicherort des Ordners für Glossardateien zu ändern. Dieser Ordner kann außerhalb des Projekts festgelegt werden, so dass Sie ihn oder einen seiner Unterordner auch in anderen Projekten verwenden können.</p>
             </section>
             <section class="section" id="glossaries.default.glossary">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Projekteigenes Glossar</h3>
+                        <h3 class="title">Projektglossar</h3>
                      </div>
                   </div>
                </div>
-               <p>Das beschreibbare Glossar des Projekts befindet sich standardmäßig im <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>-Ordner und heißt <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a>.</p>
+               <p>Das beschreibbare Projektglossar befindet sich standardmäßig im <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>-Ordner und heißt <a class="link" href="chapter.project.folder.html#project.folder.glossary.txt">glossary.txt</a>.</p>
                <p>Sie können den Namen und den Speicherort im Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.writable.glossary">
                      <code class="option">Beschreibbare Glossardatei</code>
-                  </a> ändern, aber Sie müssen der Datei die Endung <code class="filename">.txt</code> oder <code class="filename">.utf8</code> geben und sie in den <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>-Ordner oder in einen seiner Unterordner ablegen.</p>
+                  </a> ändern, aber die Datei muss die Endung <code class="filename">.txt</code> oder <code class="filename">.utf8</code> haben und im <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a>-Ordner oder in einem seiner Unterordner gespeichert sein.</p>
             </section>
             <section class="section" id="glossaries.fileformat">
                <div class="titlepage">
@@ -2833,10 +2832,10 @@
                      </div>
                   </div>
                </div>
-               <p>OmegaT-Glossardateien sind reine Textdateien, die aus drei Spalten bestehen. In der ersten Spalte steht der Quellbegriff, in der zweiten Spalte ein optionaler Zielbegriff und in der dritten Spalte ein optionaler Kommentar.</p>
-               <p>Glossare können Dateien mit tabulatorgetrennten Werten (TSV) oder kommagetrennten Werten (CSV) sein oder auch das TermBase-eXchange-Format (TBX 2) verwenden.</p>
-               <p>Ein beschreibbares Glossar, das von OmegaT für das Projekt erstellt wird, wird als UTF-8-kodierte TSV-Datei gespeichert. Benutzerdefinierte Dateien, die nur lateinische Zeichen verwenden, werden eventuell erkannt und als ISO-8859-1 behandelt, wenn sie keine ASCII-fremden Zeichen oder andere Zeichen enthalten, die als UTF-8 interpretiert werden.</p>
-               <p>Die Kodierung, die zum Lesen von Referenzglossaren verwendet wird, hängt von deren Dateiendung ab:</p>
+               <p>OmegaT-Glossardateien sind reine Textdateien, die aus drei Spalten bestehen. Die erste Spalte enthält den Quellbegriff, die zweite Spalte einen optionalen Zielbegriff und die dritte Spalte einen optionalen Kommentar.</p>
+               <p>Glossare können TSV-Dateien (TSV = tab-separated values), CSV-Dateien (CSV = comma-separated values) oder im TermBase-eXchange-Format (TBX 2) sein.</p>
+               <p>Das von OmegaT erstellte beschreibbare Glossar ist eine TSV-Datei mit UTF-8-Kodierung. Vom Benutzer erstellte Dateien, die nur lateinische Zeichen verwenden, können als ISO-8859-1 erkannt und behandelt werden, wenn sie keine ASCII-fremden oder andere als UTF-8 interpretierte Zeichen enthalten.</p>
+               <p>Die zum Lesen von Referenzglossaren verwendete Kodierung hängt von der Dateiendung ab:</p>
                <div class="table" id="glossary.extensions">
                   <div class="table-title">Tabelle 11. Format, Endungen und erwartete Kodierung</div>
                   <div class="table-contents">
@@ -2932,7 +2931,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Ein unsichtbares Zeichen mit einer starken Direktionalität einzufügen, um eine bestimmte Position für ein Zeichen mit schwacher oder neutraler Direktionalität zu erzwingen.</p>
+                     <p>Ein unsichtbares Zeichen mit starker Direktionalität einzufügen, um eine bestimmte Position für ein Zeichen mit schwacher oder neutraler Direktionalität zu erzwingen.</p>
                   </li>
                   <li class="listitem">
                      <p>Einen Textabschnitt zu erstellen, der in die entgegengesetzte Richtung des Abschnitts fließt.</p>
@@ -2953,14 +2952,14 @@
                      </div>
                   </div>
                </div>
-               <p>Um die Position eines Zeichens mit schwacher oder neutraler Direktionalität (z. B. Interpunktionszeichen) zu ändern, fügen Sie je nach der Direktionalität des Segments ein LRM- oder RLM-Zeichen nach dem Zeichen ein:</p>
+               <p>Um die Position eines Zeichens mit schwacher oder neutraler Direktionalität (z.B. Interpunktionszeichen) zu ändern, fügen Sie je nach der Direktionalität des Segments ein LRM- oder RLM-Zeichen nach dem Zeichen ein:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>Fügen Sie eine LRM nach einem Zeichen mit schwacher Direktionalität ein, das von links nach rechts in einem Rechts-nach-Links-Segment verlaufen muss (z. B. ein englischer Auszug in einem arabischen Text).</p>
+                        <p>Fügen Sie eine LRM nach einem Zeichen mit schwacher Direktionalität ein, das in einem Rechts-nach-Links-Segment von links nach rechts laufen muss (z.B. ein englischer Auszug in einem arabischen Text).</p>
                      </li>
                      <li class="listitem">
-                        <p>Fügen Sie eine RLM nach einem Zeichen mit schwacher Direktionalität ein, das von rechts nach links in einem Links-nach-Rechts-Segment verlaufen muss (z. B. ein arabischer Auszug in einem englischen Text).</p>
+                        <p>Fügen Sie eine RLM nach einem Zeichen mit schwacher Direktionalität ein, das in einem Links-nach-Rechts-Segment von rechts nach links laufen muss (z.B. ein arabischer Auszug in einem englischen Text).</p>
                      </li>
                   </ul>
                </div>
@@ -2977,10 +2976,10 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>Um eine Links-nach-Rechts-Einbettung in einem Rechts-nach-Links-Segment zu erstellen, fügen Sie ein Links-nach-Rechts-Einbettungszeichen (LRE) ein, geben oder fügen Sie den Links-nach-Rechts-Text ein, und fügen Sie dann das Einbettung-beenden-Zeichen (&quot;pop directional formatting&quot; oder kurz PDF) ein.</p>
+                        <p>Um eine Links-nach-Rechts-Einbettung in einem Rechts-nach-Links-Segment zu erstellen, fügen Sie ein LRE-Zeichen (LRE = left-to-right embedding) ein, geben/fügen Sie den Links-nach-Rechts-Text ein, und fügen Sie dann das PDF-Zeichen (PDF = pop directional formatting) ein, um die Einbettung zu beenden.</p>
                      </li>
                      <li class="listitem">
-                        <p>Um eine Rechts-nach-Links-Einbettung in einem Links-nach-Rechts-Segment zu erstellen, fügen Sie ein Rechts-nach-Links-Einbettungszeichen (RLE) ein, geben oder fügen Sie den Rechts-nach-Links-Text ein, und fügen Sie dann das Einbettung-beenden-Zeichen (&quot;pop directional formatting&quot; oder kurz PDF) ein.</p>
+                        <p>Um eine Rechts-nach-Links-Einbettung in einem Links-nach-Rechts-Segment zu erstellen, fügen Sie ein RLE-Zeichen (LRE = right-to-left embedding) ein, geben/fügen Sie den Rechts-nach-Links-Text ein, und fügen Sie dann das PDF-Zeichen (PDF = pop directional formatting) ein, um die Einbettung zu beenden.</p>
                      </li>
                   </ul>
                </div>
@@ -2994,12 +2993,12 @@
                   </div>
                </div>
             </div>
-            <p>Siehe die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.external.processing.command">
+            <p>Einzelheiten zu projektspezifischen Befehlen finden Sie unter <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.external.processing.command">
                   <code class="option">Lokale Nachbearbeitungsbefehle</code>
-               </a> für projektspezifische Befehle.</p>
-            <p>Siehe die Einstellung <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output.external.post-processing.command">
+               </a> (Projekteigenschaft).</p>
+            <p>Einzelheiten zu globalen Befehlen finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output.external.post-processing.command">
                   <code class="option">Globale Nachbearbeitungsbefehle</code>
-               </a> für globale Befehle.</p>
+               </a> (Einstellungen).</p>
             <section class="section" id="post.processing.commands.template.variables">
                <div class="titlepage">
                   <div>
@@ -3008,7 +3007,7 @@
                      </div>
                   </div>
                </div>
-               <p>Der Befehl wird an die Java-Laufzeitausführung als Zeichenkette übergeben, wobei die Variablen in ihre Werte aufgelöst werden. Alle Argumente sollten in Anführungszeichen gesetzt werden, z. B. <code class="literal">&quot;${fileName}&quot;</code>.</p>
+               <p>Der Befehl wird an die Java Runtime als Zeichenkette übergeben, wobei die Variablen in ihre Werte aufgelöst werden. Alle Argumente sollten in Anführungszeichen gesetzt werden, z.B. <code class="literal">&quot;${fileName}&quot;</code>.</p>
                <p>Die folgenden Variablen sind immer verfügbar. Die anderen Einträge in der Variablenliste sind Umgebungsvariablen Ihres Systems.</p>
                <div class="table" id="post.processing.commands.template.variables.table">
                   <div class="table-title">Tabelle 12. Variablen</div>
@@ -3104,8 +3103,8 @@
                   </div>
                </div>
                <p>Zusätzlich zu einem regulären Befehl können Sie auch ein Skript aufrufen. Führen Sie nur Nachbearbeitungsskripte aus, die aus vertrauenswürdigen Quellen stammen. Aus Sicherheitsgründen sind lokale Nachbearbeitungsbefehle standardmäßig deaktiviert.</p>
-               <p>Die Variablen können sowohl mit regulären Befehlen als auch mit benutzerdefinierten Skripten verwendet werden. Möglicherweise müssen Sie einen absoluten Pfad für Ihr Skript verwenden. Der PATH, den OmegaT verwendet, ist möglicherweise nicht derselbe wie der PATH des aktuellen Benutzers.</p>
-               <p>STDOUT und STDERR werden in die <a class="link" href="chapter.appendices.html#configuration.folder.default.contents.logs.title">omegat.log</a>-Datei geschrieben. Der Exitcode und STDERR oder das letzte STDOUT werden in der Statusleiste angezeigt.</p>
+               <p>Die Variablen können sowohl mit regulären Befehlen als auch mit benutzerdefinierten Skripten verwendet werden. Möglicherweise müssen Sie einen absoluten Pfad für Ihr Skript verwenden. Der von OmegaT verwendete PATH kann von dem des aktuellen Benutzers abweichen.</p>
+               <p>STDOUT und STDERR werden in die Datei <a class="link" href="chapter.appendices.html#configuration.folder.default.contents.logs.title">omegat.log</a> geschrieben. Der Exitcode und STDERR oder das letzte STDOUT werden in der Statusleiste angezeigt.</p>
             </section>
             <section class="section" id="post.processing.commands.linux.and.macos">
                <div class="titlepage">
@@ -3115,7 +3114,7 @@
                      </div>
                   </div>
                </div>
-               <p>Sie sollten ein Shebang verwenden, z. B. <code class="literal">#! /bin/bash</code> oder <code class="literal">#! /usr/bin/env python3</code>. Und das Skript muss ausführbar sein. Die Verkettung von Befehlen mit <code class="literal">&amp;&amp;</code> oder <code class="literal">||</code> oder Pipes <code class="literal">|</code> wird hier nicht funktionieren.</p>
+               <p>Sie sollten ein Shebang verwenden, z.B. <code class="literal">#! /bin/bash</code> oder <code class="literal">#! /usr/bin/env python3</code>. Das Skript muss ausführbar sein. Die Verkettung von Befehlen mit <code class="literal">&amp;&amp;</code> oder <code class="literal">||</code> oder Pipes <code class="literal">|</code> funktioniert hier nicht.</p>
             </section>
             <div class="example" id="post.processing.commands.example">
                <div class="example-title">Beispiel 29. Einfache Beispiele für Nachbearbeitungsbefehle:</div>
@@ -3123,19 +3122,19 @@
                   <div class="variablelist">
                      <dl class="variablelist">
                         <dt>
-                           <span class="term">Den Zielordner in Linux öffnen</span>
+                           <span class="term">Zielordner unter Linux öffnen</span>
                         </dt>
                         <dd>
                            <pre class="programlisting">xdg-open ${targetRoot}</pre>
                         </dd>
                         <dt>
-                           <span class="term">Den Zielordner in macOS öffnen</span>
+                           <span class="term">Zielordner unter macOS öffnen</span>
                         </dt>
                         <dd>
                            <pre class="programlisting">open ${targetRoot}</pre>
                         </dd>
                         <dt>
-                           <span class="term">Den Zielordner via Windows Powershell öffnen</span>
+                           <span class="term">Zielordner mit Windows Powershell öffnen</span>
                         </dt>
                         <dd>
                            <pre class="programlisting">Invoke-Item ${targetRoot}</pre>
@@ -3162,10 +3161,10 @@
                      </div>
                   </div>
                </div>
-               <p>Die Benutzeroberfläche von OmegaT verwendet in der Regel keine Schaltflächen für den Zugriff auf die Funktionen von OmegaT. Stattdessen werden sie über die Menüs oder, bei den meisten Funktionen, über ihre Tastenkürzel aufgerufen.</p>
-               <p>Es wird nicht lange dauern, bis Sie die häufig verwendeten Tastenkürzel gelernt haben, sobald Sie mit OmegaT arbeiten. Die Tastenkürzel werden neben jedem Menüpunkt angezeigt, so dass Sie nach und nach neue Tastenkürzel lernen können, während Sie die Software verwenden.</p>
+               <p>Die Benutzeroberfläche von OmegaT bietet grundsätzlich keine Schaltflächen für den Zugriff auf die Funktionen von OmegaT. Stattdessen werden die Funktionen über die Menüs oder die meisten davon über ihre zugewiesenen Tastenkürzel ausgeführt.</p>
+               <p>Es wird nicht lange dauern, bis Sie die gebräuchlichsten Tastenkürzel gelernt haben, sobald Sie mit OmegaT arbeiten. Die Tastenkürzel werden neben jedem Menüpunkt angezeigt, so dass Sie nach und nach neue Tastenkürzel lernen können, während Sie die Software verwenden.</p>
                <p>Sie können die meisten Tastenkürzel in OmegaT individuell anpassen. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.appendices.html#app.shortcuts.customization" title="Anpassung">Anpassung</a>.</p>
-               <p>OmegaT läuft auf jeder Plattform, auf der eine Java-Laufzeitumgebung installiert ist (Windows, macOS und Linux sind die gängigsten). Die Modifikatortasten der Tastenkürzel unterscheiden sich leicht je nach Plattform. Um das Lesen zu erleichtern, werden wir die Modifikatortasten in dieser Dokumentation wie folgt darstellen:</p>
+               <p>OmegaT läuft auf jeder Plattform, auf der eine Java Runtime installiert ist (Windows, macOS und Linux sind die gängigsten). Die Modifikatortasten der Tastenkürzel unterscheiden sich leicht je nach Plattform. Um das Lesen zu erleichtern, werden wir die Modifikatortasten in dieser Dokumentation wie folgt darstellen:</p>
                <div class="table" id="app.shortcut.description">
                   <div class="table-title">Tabelle 13. Modifikatortastendarstellung</div>
                   <div class="table-contents">
@@ -3186,7 +3185,7 @@
                            <tr>
                               <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
                                  <span class="keycap">
-                                    <strong>Umschalt</strong>
+                                    <strong>Shift</strong>
                                  </span>
                               </td>
                               <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
@@ -3197,7 +3196,7 @@
                               <td style="border-bottom: 1px solid ; ">
                                  <span class="keycap">
                                     <strong>shift</strong>
-                                 </span> oder <span class="keycap">
+                                 </span> / <span class="keycap">
                                     <strong>⇧</strong>
                                  </span>
                               </td>
@@ -3205,9 +3204,9 @@
                            <tr>
                               <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
                                  <span class="keycap">
-                                    <strong>Strg</strong>
-                                 </span> oder <span class="keycap">
                                     <strong>Ctrl</strong>
+                                 </span> / <span class="keycap">
+                                    <strong>Control</strong>
                                  </span>
                               </td>
                               <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
@@ -3218,7 +3217,7 @@
                               <td style="border-bottom: 1px solid ; ">
                                  <span class="keycap">
                                     <strong>command</strong>
-                                 </span> oder <span class="keycap">
+                                 </span> / <span class="keycap">
                                     <strong>⌘</strong>
                                  </span>
                               </td>
@@ -3237,7 +3236,7 @@
                               <td style="border-bottom: 1px solid ; ">
                                  <span class="keycap">
                                     <strong>alt / option</strong>
-                                 </span> oder <span class="keycap">
+                                 </span> / <span class="keycap">
                                     <strong>⌥</strong>
                                  </span>
                               </td>
@@ -3252,7 +3251,7 @@
                               <td>
                                  <span class="keycap">
                                     <strong>control</strong>
-                                 </span> oder <span class="keycap">
+                                 </span> / <span class="keycap">
                                     <strong>⌃</strong>
                                  </span>
                               </td>
@@ -3262,13 +3261,13 @@
                   </div>
                </div>
                <br class="table-break" />
-               <p>Dank der oben genannten <span class="bold">
+               <p>Dank der obigen <span class="bold">
                      <strong>Tastendarstellungen</strong>
                   </span> müssen wir nicht für jedes Tastenkürzel mehrere Schreibweisen auflisten.</p>
                <div class="example" id="example.avoid.listing.multiple.notations">
-                  <div class="example-title">Beispiel 30. So vermeiden wir die Auflistung mehrerer Schreibweisen:</div>
+                  <div class="example-title">Beispiel 30. Auf diese Weise vermeiden wir die Auflistung mehrerer Schreibweisen:</div>
                   <div class="example-contents">
-                     <p>Bei Windows und Linux: <span class="keycap">
+                     <p>Unter Windows und Linux: <span class="keycap">
                            <strong>Strg</strong>
                         </span>+<span class="keycap">
                            <strong>Umschalt</strong>
@@ -3276,7 +3275,7 @@
                            <strong>N</strong>
                         </span>
                      </p>
-                     <p>In macOS: <span class="keycap">
+                     <p>Unter macOS: <span class="keycap">
                            <strong>Shift</strong>
                         </span>+<span class="keycap">
                            <strong>Command</strong>
@@ -3312,7 +3311,7 @@
                      <span class="guimenu">Gehe zu</span>
                   </a> aufrufbar sind, sowie einer Reihe von Funktionen im <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
                      <span class="guilabel">Editor</span>
-                  </a>-Bereich Tastenkürzel zu. Sie können auch die Tastenkürzel für die meisten Funktionen hinzufügen oder ändern.</p>
+                  </a>-Bereich Tastenkürzel zu. Für die meisten Funktionen können Sie auch Tastenkürzel hinzufügen oder ändern.</p>
                <p>Um das zu tun, müssen Sie die entsprechende Tastenkürzel-Definitionsdatei in Ihrem OmegaT-Konfigurationsordner ablegen. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a>.</p>
                <p>Es gibt zwei Tastenkürzel-Definitionsdateien.</p>
                <div class="variablelist">
@@ -3321,7 +3320,7 @@
                         <span class="term" id="MainMenuShortcuts.properties">MainMenuShortcuts.properties</span>
                      </dt>
                      <dd>
-                        <p>Die Tastenkürzel-Definitionsdatei für Menüs und einigen anderen Menüpunkten.</p>
+                        <p>Die Tastenkürzel-Definitionsdatei für Menüs und einige andere Menüpunkte.</p>
                      </dd>
                      <dt>
                         <span class="term" id="EditorShortcuts.properties">EditorShortcuts.properties</span>
@@ -3331,7 +3330,7 @@
                      </dd>
                   </dl>
                </div>
-               <p>OmegaT muss nach dem Ändern einer Tastenkürzel-Definitionsdatei neu gestartet werden, damit die neuen Tastenkürzel wirksam werden.</p>
+               <p>Nach dem Ändern einer Tastenkürzel-Definitionsdatei muss OmegaT neu gestartet werden, damit die neuen Tastenkürzel wirksam werden.</p>
                <div class="note">
                   <h3 class="title">Anmerkung</h3>
                   <p>Sie können die Standard-OmegaT-Dateien von der OmegaT-Entwicklungsseite auf Sourceforge in <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Ihren Konfigurationsordner</a> kopieren und sie nach Belieben anpassen:</p>
@@ -3379,7 +3378,7 @@
                   </div>
                   <p>Die macOS-Dateien müssen <a class="link" href="chapter.appendices.html#MainMenuShortcuts.properties">MainMenuShortcuts.properties</a> und <a class="link" href="chapter.appendices.html#EditorShortcuts.properties">EditorShortcuts.properties</a> heißen, damit OmegaT sie erkennt.</p>
                </div>
-               <p>Der nächste Abschnitt beschreibt die Syntax, die in den Tastenkürzel-Definitionsdateien verwendet wird, und enthält ein Bearbeitungsbeispiel.</p>
+               <p>Der folgende Abschnitt beschreibt die Syntax, die in den Tastenkürzel-Definitionsdateien verwendet wird, und enthält ein Änderungsbeispiel.</p>
             </section>
             <section class="section" id="app.shortcuts.syntax">
                <div class="titlepage">
@@ -3389,13 +3388,13 @@
                      </div>
                   </div>
                </div>
-               <p>Die grundlegende Syntax der Tastenkürzel-Definitionsdateien ist einfach:</p>
+               <p>Die Grundsyntax der Tastenkürzel-Definitionsdateien ist einfach:</p>
                <p>
                   <code class="code">Funktionscode=Tastenkürzel</code>
                </p>
-               <p>Verwenden Sie die Tabellen im Abschnitt <a class="link" href="chapter.appendices.html#app.shortcuts.lists" title="Listen von Funktionen und Codes">Listen von Funktionen und Codes</a> unten, um die Werte für <code class="code">Funktionscode</code> zu finden.</p>
+               <p>Verwenden Sie für <code class="code">Funktionscode</code> die Tabellen im Abschnitt <a class="link" href="chapter.appendices.html#app.shortcuts.lists" title="Listen der Funktionen und Codes">Listen der Funktionen und Codes</a> unten.</p>
                <p>
-                  <code class="code">Tastenkürzel</code> repräsentiert die vom Nutzer gedrückte Tastenkombination. Es hat die folgende Form:</p>
+                  <code class="code">Tastenkürzel</code> repräsentiert die vom Benutzer gedrückte Tastenkombination. Es hat die folgende Form:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -3420,7 +3419,7 @@
                         <div class="note">
                            <h3 class="title">Anmerkung</h3>
                            <p>
-                              <code class="literal">meta</code> bezieht sich bei den meisten Tastaturen für Windows- oder Linux-Systeme auf die Taste mit dem Windows-Logo und bei macOS auf die <code class="literal">command</code>-Taste.</p>
+                              <code class="literal">meta</code> bezieht sich auf die Taste mit dem Windows-Logo, die auf den meisten Tastaturen für Windows- oder Linux-Systeme zu finden ist, und auf die <code class="literal">command</code>-Taste unter macOS.</p>
                            <p>
                               <code class="literal">altGraph</code> bezieht sich auf die <span class="emphasis">
                                  <em>Alt</em>
@@ -3438,12 +3437,12 @@
                      </li>
                   </ul>
                </div>
-               <p>Es können Leerzeilen und Kommentare hinzugefügt werden, um die Liste zu ordnen und besser lesbar zu machen. Eine Kommentarzeile beginnt mit einem <code class="code">#</code>; alles, was danach kommt, wird von der Applikation ignoriert.</p>
-               <p>Am einfachsten können Sie die Tastenkürzel ändern, indem Sie, wie oben erwähnt, die Standarddateien herunterladen und in <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Ihren Konfigurationsordner</a> kopieren und dort die gewünschten Änderungen vornehmen.</p>
+               <p>Es können Leerzeilen und Kommentare hinzugefügt werden, um die Liste zu ordnen und lesbarer zu machen. Eine Kommentarzeile beginnt mit einem <code class="code">#</code>, und alles was danach kommt, wird von der Applikation ignoriert.</p>
+               <p>Am einfachsten ändern Sie die Tastenkürzel, indem Sie die Standarddateien wie oben beschrieben herunterladen, in <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Ihren Konfigurationsordner</a> kopieren und dort die gewünschten Änderungen vornehmen.</p>
                <div class="example" id="example.shortcut.modification">
                   <div class="example-title">Beispiel 31. Tastenkürzel ändern</div>
                   <div class="example-contents">
-                     <p>Das reguläre Tastenkürzel zum <a class="link" href="chapter.menus.html#menus.project.close">Schließen eines Projekts</a> ist in Windows und Linux definiert als:</p>
+                     <p>Das reguläre Tastenkürzel zum <a class="link" href="chapter.menus.html#menus.project.close">Schließen eines Projekts</a> ist unter Windows und Linux wie folgt definiert:</p>
                      <p>
                         <code class="code">projectCloseMenuItem=ctrl shift W</code>
                      </p>
@@ -3453,7 +3452,7 @@
                      </p>
                      <p>Möglicherweise möchten Sie jedoch die <span class="keycap">
                            <strong>S</strong>
-                        </span>-Taste aus dem Tastenkürzel entfernen, so dass es nur noch <span class="keycap">
+                        </span>-Taste aus dem Tastenkürzel entfernen, um in Endeffekt <span class="keycap">
                            <strong>Ctrl</strong>
                         </span>+<span class="keycap">
                            <strong>W</strong>
@@ -3461,8 +3460,8 @@
                            <strong>Command</strong>
                         </span>+<span class="keycap">
                            <strong>W</strong>
-                        </span> unter macOS) ist, damit es dem Tastenkürzel entspricht, das Sie in anderen Applikationen verwenden.</p>
-                     <p>Um das zu tun, ändern Sie die <code class="filename">MainMenuShortcuts.properties</code>-Datei wie folgt für Windows und Linux:</p>
+                        </span> unter macOS) zu haben, entsprechend dem Tastenkürzel, das Sie in anderen Applikationen verwenden.</p>
+                     <p>Um das zu tun, ändern Sie die Datei <code class="filename">MainMenuShortcuts.properties</code> wie folgt für Windows und Linux:</p>
                      <p>
                         <code class="code">projectCloseMenuItem=ctrl W</code>
                      </p>
@@ -3477,52 +3476,51 @@
                   <div class="example-title">Beispiel 32. Tastenkürzel hinzufügen</div>
                   <div class="example-contents">
                      <p>Wenn Ihr Sprachpaar die häufige Nutzung <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">alternativer Übersetzungen</a> erfordert, sollten Sie dieser Funktion ein Tastenkürzel zuweisen, da sie standardmäßig keines hat.</p>
-                     <p>Die folgenden Schritte zeigen, wie Sie das Tastenkürzel <span class="keycap">
-                           <strong>Alt</strong>
-                        </span>+<span class="keycap">
-                           <strong>X</strong>
-                        </span> dem Menüpunkt <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
+                     <p>Die folgenden Schritte zeigen, wie Sie dem Menüpunkt <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
                            <span class="guimenu">Bearbeiten</span>
                         </a>
                         <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
                            <span class="guimenuitem">Alternative Übersetzung erstellen</span>
-                        </a> zuweisen.</p>
+                        </a> das Tastenkürzel <span class="keycap">
+                           <strong>Alt</strong>
+                        </span>+<span class="keycap">
+                           <strong>X</strong>
+                        </span> zuweisen.</p>
                      <div class="orderedlist">
                         <ol class="orderedlist" type="1">
                            <li class="listitem">
-                              <p>Öffnen Sie die <code class="filename">MainMenuShortcuts.properties</code>-Datei, die Sie in <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Ihren Konfigurationsordner</a> kopiert haben, in einem Texteditor.</p>
+                              <p>Öffnen Sie die Datei <code class="filename">MainMenuShortcuts.properties</code>, die Sie in <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Ihren Konfigurationsordner</a> kopiert haben, in einem Texteditor.</p>
                            </li>
                            <li class="listitem">
-                              <p>Wie in der <a class="link" href="chapter.appendices.html#app.shortcuts.lists.function.codes.edit.menu.table" title="Tabelle 15. Bearbeiten-Menü">Bearbeiten-Menü-Tabelle</a> unten gezeigt, lautet der Funktionscode für die Funktion <span class="guimenuitem">Alternative Übersetzung erstellen</span> 
-                                 <code class="code">editMultipleAlternate</code>.</p>
-                              <p>Wenn Sie nach diesem Code in der Datei suchen, werden Sie die folgende Zeile finden:</p>
+                              <p>Wie in der <a class="link" href="chapter.appendices.html#app.shortcuts.lists.function.codes.edit.menu.table" title="Tabelle 15. Bearbeiten-Menü">Bearbeiten-Menü-Tabelle</a> unten gezeigt, hat die Funktion &quot;<span class="guimenuitem">Alternative Übersetzung erstellen</span>&quot; den Funktionscode <code class="code">editMultipleAlternate</code>.</p>
+                              <p>Wenn Sie in der Datei nach diesem Code suchen, werden Sie die folgende Zeile finden:</p>
                               <p>
                                  <code class="code">#	editMultipleAlternate=</code>
                               </p>
                            </li>
                            <li class="listitem">
-                              <p>Aktuell ist die Zeile ein Kommentar. Löschen Sie das <code class="code">#</code> am Anfang der Zeile, damit OmegaT das Tastenkürzel erkennt, und fügen Sie <code class="option">alt X</code> nach dem <code class="code">=</code>-Zeichen am Ende der Zeile ein:</p>
+                              <p>Derzeit ist diese Zeile ein Kommentar. Löschen Sie das <code class="code">#</code> am Anfang der Zeile, damit OmegaT das Tastenkürzel erkennt, und fügen Sie <code class="option">alt X</code> nach dem <code class="code">=</code>-Zeichen am Ende der Zeile ein:</p>
                               <p>
                                  <code class="code">editMultipleAlternate=alt X</code>
                               </p>
                            </li>
                            <li class="listitem">
-                              <p>Speichern und schließen Sie die Datei. Wenn Sie OmegaT das nächste Mal starten, sollte Ihr neues Tastenkürzel aktiv sein und neben dem Namen der Funktion im Menü angezeigt werden.</p>
+                              <p>Speichern und schließen Sie die Datei. Wenn Sie OmegaT das nächste Mal starten, sollte Ihr neues Tastenkürzel aktiv sein und im Menü neben dem Namen der Funktion angezeigt werden.</p>
                            </li>
                         </ol>
                      </div>
                   </div>
                </div>
                <br class="example-break" />
-               <p>Speichern Sie die Datei, nachdem Sie Ihre Änderungen vorgenommen haben. Wenn OmegaT offen ist, müssen Sie es neu starten, damit Ihre Änderungen wirksam werden.</p>
-               <p>Ihre geänderten oder hinzugefügten Tastenkürzel sollten nun neben den von Ihnen geänderten Menüpunkten angezeigt werden. Sie stehen nun in OmegaT zur Verfügung, sofern es keine Konflikte mit anderen Funktionen oder mit systemweiten Tastenkürzeln gibt.</p>
-               <p>Der nächste Abschnitt enthält Tabellen mit den Funktionscodes und den zugehörigen regulären Tastenkürzeln für jedes Menü oder jede Editorfunktion in OmegaT.</p>
+               <p>Speichern Sie die Datei, nachdem Sie Ihre Änderungen vorgenommen haben. Wenn OmegaT geöffnet ist, müssen Sie es neu starten, damit Ihre Änderungen wirksam werden.</p>
+               <p>Ihre geänderten oder hinzugefügten Tastenkürzel sollten nun neben den von Ihnen geänderten Menüpunkten angezeigt werden. Sie sind nun in OmegaT verfügbar, sofern es keine Konflikte mit anderen Funktionen oder mit systemweiten Tastenkürzeln gibt.</p>
+               <p>Der nächste Abschnitt enthält Tabellen mit den Funktionscodes und den zugehörigen regulären Tastenkürzeln für jede Menü- oder Editorfunktion in OmegaT.</p>
             </section>
             <section class="section" id="app.shortcuts.lists">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title">Listen von Funktionen und Codes</h3>
+                        <h3 class="title">Listen der Funktionen und Codes</h3>
                      </div>
                   </div>
                </div>
@@ -3534,7 +3532,7 @@
                         </div>
                      </div>
                   </div>
-                  <p>In den folgenden Tabellen finden Sie Funktionen, die in der <code class="filename">MainMenuShortcuts.properties</code>-Datei geändert werden können, sowie ihre Standardwerte. Die Tastenkürzel in Klammern sind Alternativen für dieselbe Funktion aus der <code class="filename">EditorShortcuts.properties</code>-Datei.</p>
+                  <p>Die folgenden Tabellen enthalten Funktionen, die in der Datei <code class="filename">MainMenuShortcuts.properties</code> geändert werden können, sowie deren Standardwerte. Die Tastenkürzel in Klammern sind Alternativen für dieselbe Funktion in <code class="filename">EditorShortcuts.properties</code>.</p>
                   <div class="table" id="app.shortcuts.lists.function.codes.project.menu.table">
                      <div class="table-title">Tabelle 14. Projekt-Menü</div>
                      <div class="table-contents">
@@ -3764,13 +3762,13 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta Y</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mit Match oder Auswahl ersetzen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Mit Match oder Markiertem ersetzen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editOverwriteTranslationMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl R</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta R</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match oder Auswahl einfügen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Match oder Markiertes einfügen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editInsertTranslationMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl I</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta I</td>
@@ -3812,7 +3810,7 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta T</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Auswahl exportieren</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Markiertes exportieren</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">editExportSelectionMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl shift C</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift C</td>
@@ -4056,25 +4054,25 @@
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta shift M</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Nächstes Segment von tm/auto/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch gefüllte Segmente → Nächstes Segment von tm/auto/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNextXAutoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt COMMA</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt COMMA</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/auto/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch gefüllte Segmente → Vorheriges Segment von tm/auto/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoPrevXAutoMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt shift COMMA</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt shift COMMA</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Nächstes Segment von tm/enforce/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch gefüllte Segmente → Nächstes Segment von tm/enforce/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoNextXEnforcedMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt PERIOD</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt PERIOD</td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente → Vorheriges Segment von tm/enforce/</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch gefüllte Segmente → Vorheriges Segment von tm/enforce/</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">gotoPrevXEnforcedMenuItem</td>
                                  <td style="text-align: center; border-right: 1px solid ; border-bottom: 1px solid ; ">ctrl alt shift PERIOD</td>
                                  <td style="text-align: center; border-bottom: 1px solid ; ">meta alt shift PERIOD</td>
@@ -4170,7 +4168,7 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Leerraum anzeigen</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Leerräume anzeigen</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkWhitespaceCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4182,7 +4180,7 @@
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
                               </tr>
                               <tr>
-                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch ausgefüllte Segmente hervorheben</td>
+                                 <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">Automatisch gefüllte Segmente hervorheben</td>
                                  <td style="text-align: left; border-right: 1px solid ; border-bottom: 1px solid ; ">viewMarkAutoPopulatedCheckBoxMenuItem</td>
                                  <td class="auto-generated" style="border-right: 1px solid ; border-bottom: 1px solid ; "> </td>
                                  <td class="auto-generated" style="border-bottom: 1px solid ; "> </td>
@@ -4301,7 +4299,7 @@
                         </a> im Menü <a class="link" href="chapter.menus.html#menus.tools" title="Tools">
                            <span class="guimenu">Tools</span>
                         </a> ist eine Ausnahme.</p>
-                     <p>Es ist nicht möglich, ein Tastenkürzel zum Aufrufen des Skripteditors hinzuzufügen oder die Tastenkürzel, die den Skripten zugewiesen sind, zu ändern.</p>
+                     <p>Es ist nicht möglich, ein Tastenkürzel für den Aufruf des Skripteditors hinzuzufügen oder die Tastenkürzel der zugewiesenen Skripte zu ändern.</p>
                   </div>
                   <div class="table" id="app.shortcuts.lists.function.codes.options.menu.table">
                      <div class="table-title">Tabelle 19. Optionen-Menü</div>
@@ -4485,7 +4483,7 @@
                         </div>
                      </div>
                   </div>
-                  <p>In den folgenden Tabellen finden Sie Funktionen, die in der <code class="filename">EditorShortcuts.properties</code>-Datei geändert werden können, sowie ihre Standardwerte.</p>
+                  <p>Die folgenden Tabellen enthalten Funktionen, die in der Datei <code class="filename">EditorShortcuts.properties</code> geändert werden können, sowie deren Standardwerte.</p>
                   <div class="table" id="app.shortcuts.lists.function.codes.editor.table">
                      <div class="table-title">Tabelle 22. Editor</div>
                      <div class="table-contents">
@@ -4747,7 +4745,7 @@
                   </div>
                </div>
             </div>
-            <p>Der Konfigurationsordner enthält den Großteil der OmegaT-Optionen und -Einstellungen für den Nutzer.</p>
+            <p>Der Konfigurationsordner enthält die meisten OmegaT-Optionen und -Einstellungen für den Benutzer.</p>
             <p>Verwenden Sie <a class="link" href="chapter.menus.html#menus.options" title="Optionen">
                   <span class="guimenu">Optionen</span>
                </a>
@@ -4796,7 +4794,7 @@
                <div class="note">
                   <h3 class="title">Anmerkung</h3>
                   <p>Sie können einen benutzerdefinierten Konfigurationsordner angeben, wenn Sie OmegaT über die Befehlszeile starten. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Start über die Befehlszeile">Start über die Befehlszeile</a>.</p>
-                  <p>Geänderte Einstellungen werden im Konfigurationsordner gespeichert, der vom Projekt verwendet wird. Wenn Sie nicht den regulären Konfigurationsordner verwenden, werden alle Änderungen, die in den <a class="link" href="chapter.dialogs.preferences.html" title="Einstellungen">Einstellungen</a> vorgenommen wurden, im angegebenen Konfigurationsordner gespeichert. Diese Änderungen haben keine Wirkung, wenn Sie Ihre Arbeit mit dem regulären Konfigurationsordner fortsetzen.</p>
+                  <p>Geänderte Einstellungen werden im vom Projekt verwendeten Konfigurationsordner gespeichert. Wenn Sie nicht den regulären Konfigurationsordner verwenden, werden alle Änderungen, die in den <a class="link" href="chapter.dialogs.preferences.html" title="Einstellungen">Einstellungen</a> vorgenommen wurden, im angegebenen Konfigurationsordner gespeichert. Diese Änderungen haben keine Wirkung, wenn Sie Ihre Arbeit mit dem regulären Konfigurationsordner fortsetzen.</p>
                </div>
             </section>
             <section class="section" id="configuration.folder.default.contents">
@@ -4813,12 +4811,12 @@
                         <span class="term" id="configuration.folder.default.contents.omegat.prefs.title">omegat.prefs</span>
                      </dt>
                      <dd>
-                        <p>Diese Datei enthält eine Reihe von wichtigen Benutzereinstellungen.</p>
+                        <p>Diese Datei enthält eine Reihe wichtiger Benutzereinstellungen.</p>
                         <p>Einige Einstellungen haben kein Äquivalent in der Benutzeroberfläche. Diese müssen manuell geändert werden.</p>
                         <div class="example" id="no.source.file.display">
                            <div class="example-title">Beispiel 33. Die Quelldateien-Liste nicht automatisch anzeigen</div>
                            <div class="example-contents">
-                              <p>Um das automatische Öffnen des Projektdateien-Fensters beim Laden eines Projekts zu verhindern, suchen Sie <span class="token">&lt;project_files_show_on_load&gt;</span> und ersetzen Sie <span class="token">true</span> mit <span class="token">false</span>:</p>
+                              <p>Um das automatische Öffnen des Projektdateien-Fensters beim Laden eines Projekts zu verhindern, suchen Sie nach <span class="token">&lt;project_files_show_on_load&gt;</span> und ersetzen Sie <span class="token">true</span> mit <span class="token">false</span>:</p>
                               <pre class="programlisting">&lt;project_files_show_on_load&gt;<span class="token">false</span>&lt;/project_files_show_on_load&gt;</pre>
                            </div>
                         </div>
@@ -4862,7 +4860,7 @@
                                        <span class="guimenu">Bearbeiten</span>
                                     </a>
                                     <a class="link" href="chapter.menus.html#menus.edit.export.selection">
-                                       <span class="guimenuitem">Auswahl exportieren</span> 
+                                       <span class="guimenuitem">Markiertes exportieren</span> 
                                        <span class="keycap">
                                           <strong>C</strong>
                                        </span>+<span class="keycap">
@@ -4926,25 +4924,25 @@
                         <span class="term" id="configuration.folder.extra.contents.filters.title">filters.xml</span>
                      </dt>
                      <dd>
-                        <p>Diese Parameterdatei enthält benutzerdefinierte Dateifilter. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.file.filters" title="Globale Dateifilter">
+                        <p>Diese Parameterdatei enthält benutzerdefinierte Dateifilter. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.file.filters" title="Globale Dateifilter">
                               <span class="guilabel">Globale Dateifilter</span>
-                           </a>-Einstellungen für weitere Informationen.</p>
+                           </a> (Einstellungen).</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.finder">
                         <span class="term" id="configuration.folder.extra.contents.finder.title">finder.xml</span>
                      </dt>
                      <dd>
-                        <p>Diese Parameterdatei enthält benutzerdefinierte Parameter für externe Suchvorgänge. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Globale externe Suchvorgänge">
+                        <p>Diese Parameterdatei enthält benutzerdefinierte Parameter für externe Suchvorgänge. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Globale externe Suchvorgänge">
                               <span class="guilabel">Globale externe Suchvorgänge</span>
-                           </a>-Einstellungen für weitere Informationen.</p>
+                           </a> (Einstellungen).</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.omegat.autotext">
                         <span class="term" id="configuration.folder.extra.contents.omegat.autotext.title">omegat.autotext</span>
                      </dt>
                      <dd>
-                        <p>Diese Parameterdatei enthält benutzerdefinierte Autotext-Parameter. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Autovervollständigung">
+                        <p>Diese Parameterdatei enthält benutzerdefinierte Autotext-Parameter. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Autovervollständigung">
                               <span class="guilabel">Autovervollständigung</span>
-                           </a>-Einstellungen für weitere Informationen.</p>
+                           </a> (Einstellungen).</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.repositories">
                         <span class="term" id="configuration.folder.extra.contents.repositories.title">repositories.properties</span>
@@ -4953,7 +4951,7 @@
                         <p>Diese Datei enthält die Zugangsdaten für Ihre Teamprojekt-Repositories.</p>
                         <div class="warning">
                            <h3 class="title">Warnung</h3>
-                           <p>Der Inhalt der Datei ist nicht verschlüsselt.</p>
+                           <p>Der Inhalt der Datei ist unverschlüsselt.</p>
                         </div>
                         <p>Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.setup.team.project" title="Ein Teamprojekt einrichten">Ein Teamprojekt einrichten</a>.</p>
                      </dd>
@@ -4961,26 +4959,26 @@
                         <span class="term" id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</span>
                      </dt>
                      <dd>
-                        <p>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Globale Segmentierungsregeln">
+                        <p>Diese Parameterdatei enthält benutzerdefinierte Segmentierungsparameter. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup" title="Globale Segmentierungsregeln">
                               <span class="guilabel">Globale Segmentierungsregeln</span>
-                           </a>-Einstellungen für weitere Informationen.</p>
+                           </a> (Einstellungen).</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.plugin">
                         <span class="term" id="configuration.folder.extra.contents.plugin.title">plugins/</span>
                      </dt>
                      <dd>
-                        <p>Dieser Ordner ist der Standardspeicherort für manuell installierte OmegaT-Erweiterungs-Plugins. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.plugins" title="Plugins">
+                        <p>Dieser Ordner ist der Standardspeicherort für manuell installierte OmegaT-Erweiterungs-Plugins. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.plugins" title="Plugins">
                               <span class="guilabel">Plugins</span>
-                           </a>-Einstellung für weitere Informationen.</p>
+                           </a> (Einstellungen).</p>
                         <p>Es ist auch möglich, Plugins in den <a class="link" href="chapter.appendices.html#application.folder.plugins">plugins/</a>-Ordner des Programms zu installieren.</p>
                      </dd>
                      <dt id="configuration.folder.extra.contents.spelling">
                         <span class="term" id="configuration.folder.extra.contents.spelling.title">spelling/</span>
                      </dt>
                      <dd>
-                        <p>Dieser Ordner enthält Ihre Rechtschreibwörterbücher. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Rechtschreibprüfung">
+                        <p>Dieser Ordner enthält Ihre Rechtschreibwörterbücher. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Rechtschreibprüfung">
                               <span class="guilabel">Rechtschreibprüfung</span>
-                           </a>-Einstellungen für weitere Informationen.</p>
+                           </a> (Einstellungen).</p>
                      </dd>
                   </dl>
                </div>
@@ -4997,7 +4995,7 @@
             <p>Der Applikationsordner enthält die <code class="filename">OmegaT.jar</code>-Applikation und eine Reihe anderer wichtiger Dateien.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Der Speicherort des Applikationsordners ist abhängig davon, welche Plattform Sie verwenden und wie Sie OmegaT installiert haben. Folgende Speicherorte werden empfohlen bzw. sind Standard:</p>
+               <p>Der Speicherort des Applikationsordners hängt davon ab, welche Plattform Sie verwenden und wie Sie OmegaT installiert haben. Folgende Speicherorte werden empfohlen bzw. sind Standard:</p>
                <div class="variablelist">
                   <dl class="variablelist">
                      <dt>
@@ -5047,19 +5045,19 @@
                      <span class="term" id="application.folder.omegat.jar.title">OmegaT.jar</span>
                   </dt>
                   <dd>
-                     <p>Ausführbare Datei von OmegaT. Dient zum Starten von OmegaT über die Befehlszeile. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Start über die Befehlszeile">Start über die Befehlszeile</a>.</p>
+                     <p>Ausführbare Datei von OmegaT. Dient zum Starten von OmegaT über die Befehlszeile. Einzelheiten finden Sie im Kapitel <a class="link" href="chapter.how.to.html#launch.with.command.line" title="Start über die Befehlszeile">Start über die Befehlszeile</a>.</p>
                   </dd>
                   <dt id="application.folder.changes">
                      <span class="term" id="application.folder.changes.title">changes.txt</span>
                   </dt>
                   <dd>
-                     <p>Eine Liste mit Verbesserungen und Fehlerbehebungen. Schauen Sie hier nach, wenn Sie Informationen über die Entwicklung von OmegaT benötigen.</p>
+                     <p>Eine Liste von Verbesserungen und Fehlerbehebungen. Schauen Sie hier nach, wenn Sie Informationen über die Entwicklung von OmegaT benötigen.</p>
                   </dd>
                   <dt id="application.folder.doc.license">
                      <span class="term" id="application.folder.doc.license.title">doc-license.txt</span>
                   </dt>
                   <dd>
-                     <p>Die Vertriebslizenz für die Dokumentation. GPL-Version 3.</p>
+                     <p>Die Distributionslizenz für die Dokumentation. GPL-Version 3.</p>
                   </dd>
                   <dt id="application.folder.index.html">
                      <span class="term" id="application.folder.index.html.title">index.html</span>
@@ -5071,13 +5069,13 @@
                      <span class="term" id="application.folder.join.html.title">join.html</span>
                   </dt>
                   <dd>
-                     <p>Ein Link zur Support-Seite.</p>
+                     <p>Ein Link zur Supportseite.</p>
                   </dd>
                   <dt id="application.folder.readme.txt">
                      <span class="term" id="application.folder.readme.txt.title">readme.txt</span>
                   </dt>
                   <dd>
-                     <p>Einfache Installation und Bedienungsanleitung.</p>
+                     <p>Einfache Installations- und Bedienungsanleitung.</p>
                   </dd>
                   <dt id="application.folder.docs">
                      <span class="term" id="application.folder.docs.title">docs/</span>
@@ -5132,17 +5130,17 @@
                      <span class="term" id="application.folder.plugins.title">plugins/</span>
                   </dt>
                   <dd>
-                     <p>Ein Ordner, den Sie zum Installieren externer Plugins verwenden können. Der bevorzugte Ort für manuelle Plugin-Installationen ist der <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.plugin">plugins/</a>-Ordner im <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a>. Siehe die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.plugins" title="Plugins">
+                     <p>Ein Ordner, in dem externe Plugins installiert werden können. Der bevorzugte Ort für manuelle Plugin-Installationen ist der <a class="link" href="chapter.appendices.html#configuration.folder.extra.contents.plugin">plugins/</a>-Ordner im <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a>. Einzelheiten finden Sie unter <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.plugins" title="Plugins">
                            <span class="guilabel">Plugins</span>
-                        </a>-Einstellungen für weitere Informationen.</p>
+                        </a> (Einstellungen).</p>
                   </dd>
                   <dt id="application.folder.scripts">
                      <span class="term" id="application.folder.scripts.title">scripts/</span>
                   </dt>
                   <dd>
-                     <p>Ein Ordner mit Skripten. Siehe das <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="Scripting">
+                     <p>Ein Ordner mit Skripten. Einzelheiten finden Sie unter <a class="link" href="chapter.windows.and.dialogs.html#windows.scripts" title="Scripting">
                            <span class="guilabel">Scripting</span>
-                        </a>-Fenster für weitere Informationen.</p>
+                        </a> (Fenster).</p>
                   </dd>
                </dl>
             </div>

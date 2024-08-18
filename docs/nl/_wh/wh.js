@@ -517,90 +517,105 @@ return this;
 })(jQuery);
 var wh = (function () {
 var toc_entries = [
-["Installeren en uitvoeren van OmegaT\n                     ","chapter.installing.and.running.html",[
-["Windows-gebruikers","chapter.installing.and.running.html#d0e17",null],
-["Linux (Intel)-gebruikers","chapter.installing.and.running.html#Linux.Intel.users",null],
-["Gebruikers van macOS","chapter.installing.and.running.html#MAC.OSX.users",null],
-["Andere systemen","chapter.installing.and.running.html#other.systems",null],
-["Slepen en neerzetten","chapter.installing.and.running.html#drag.and.drop",null],
-["Java Web Start gebruiken","chapter.installing.and.running.html#using.Java.Web.Start",null],
-["OmegaT starten vanaf de opdrachtregel","chapter.installing.and.running.html#commandline.launching",null],
-["\n                              OmegaT bouwen vanuit de bron","chapter.installing.and.running.html#building.OmegaT.from.source",null]
+["Introductie voor OmegaT","chapter.instant.start.guide.html",[
+["Principes","chapter.instant.start.guide.html#introduction.omegat.principles",null],
+["Conventies die in deze handleiding worden gebruikt","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
+["Een nieuw project maken","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
+["Woordenboeken voor spellingscontrole","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
+["Uw segmenten beheren","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
+["Laat het er goed uitzien!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
+["Uw bestanden vertalen","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
+["Uw tags beheren","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
+["Uw vertaling nakijken","chapter.instant.start.guide.html#introduction.review.the.translation",null],
+["De vertaalde documenten maken","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
+["Uw projecten beheren","chapter.instant.start.guide.html#introduction.one.more.thing",null],
+["Een op sneltoetsen gebaseerd werkstroom","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
 ]],
-["Menu\'s","menus.html",[
-["Project","menus.html#menus.project",null],
-["Bewerken","menus.html#menus.edit",null],
-["Ga naar","menus.html#menus.goto",null],
-["Weergave","menus.html#menus.view",null],
-["Extra","menus.html#menus.tools",null],
-["Opties","menus.html#menus.options",null],
-["Help","menus.html#menus.help",null]
+["How-to…","chapter.how.to.html",[
+["Problemen oplossen","chapter.how.to.html#how.to.restore.your.data",null],
+["Vertaalgeheugens gebruiken","chapter.how.to.html#how.to.use.tm",null],
+["Ondersteuning voor andere indelingen","chapter.how.to.html#how.to.translate.other.files",null],
+["Instellen van een Teamproject","chapter.how.to.html#how.to.setup.team.project",null],
+["Een Teamproject gebruiken","chapter.how.to.html#how.to.use.team.project",null],
+["Installeren van OmegaT","chapter.how.to.html#how.to.installing.omegat",null],
+["OmegaT uitvoeren","chapter.how.to.html#how.to.running.omegat",null]
 ]],
-["Vensters en dialoogvensters","windows.and.dialogs.html",[
-["Projecteigenschappen","windows.and.dialogs.html#dialogs.projectproperties",null],
-["Projectbestanden","windows.and.dialogs.html#windows.projectfiles",null],
-["Tekst zoeken","windows.and.dialogs.html#windows.textsearch",null],
-["Tekst vervangen","windows.and.dialogs.html#windows.textreplace",null],
-["Uitlijnen","windows.and.dialogs.html#windows.aligner",null],
-["Scripts","windows.and.dialogs.html#windows.scripts",null],
-["Algemene voorkeuren","windows.and.dialogs.html#dialogs.preferences",null]
+["Vensters","chapter.panes.html",[
+["Standaard lay-out","chapter.panes.html#panes.default.layout",null],
+["Principes","chapter.panes.html#panes.principles",null],
+["\n                              venster Bewerken\n                           ","chapter.panes.html#panes.editor",null],
+["\n                              Fuzzy overeenkomsten\n                           ","chapter.panes.html#panes.fuzzy.matches",null],
+["\n                              Woordenlijsten\n                           ","chapter.panes.html#panes.glossary",null],
+["\n                              Woordenboeken\n                           ","chapter.panes.html#panes.dictionary",null],
+["\n                              Machinevertaling\n                           ","chapter.panes.html#panes.machinetranslation",null],
+["\n                              Meerdere vertalingen\n                           ","chapter.panes.html#panes.multipletranslations",null],
+["\n                              Notepad\n                           ","chapter.panes.html#panes.notes",null],
+["\n                              Opmerkingen\n                           ","chapter.panes.html#panes.comments",null],
+["\n                              Segmenteigenschappen\n                           ","chapter.panes.html#panes.segment.properties",null],
+["\n                              Statusbalk\n                           ","chapter.panes.html#panes.statusbar",null]
 ]],
-["Vensters","panes.html",[
-["venster Bewerken","panes.html#editor.pane",null],
-["Fuzzy overeenkomsten","panes.html#d0e4351",null],
-["Woordenlijst","panes.html#d0e4399",null],
-["Woordenboek","panes.html#d0e4412",null],
-["Machinevertaling","panes.html#d0e4419",null],
-["Meerdere vertalingen","panes.html#d0e4427",null],
-["Notities","panes.html#d0e4437",null],
-["Opmerkingen","panes.html#d0e4448",null],
-["Statusbalk","panes.html#d0e4453",null]
+["Menu\'s","chapter.menus.html",[
+["\n                              Project\n                           ","chapter.menus.html#menus.project",null],
+["\n                              Bewerken\n                           ","chapter.menus.html#menus.edit",null],
+["\n                              Ga naar\n                           ","chapter.menus.html#menus.goto",null],
+["\n                              Weergave\n                           ","chapter.menus.html#menus.view",null],
+["\n                              Extra\n                           ","chapter.menus.html#menus.tools",null],
+["\n                              Opties\n                           ","chapter.menus.html#menus.options",null],
+["\n                              Help\n                           ","chapter.menus.html#menus.help",null]
 ]],
-["Projectmap","project.folder.html",[
-["source","project.folder.html#d0e4493",null],
-["target","project.folder.html#d0e4498",null],
-["tm","project.folder.html#d0e4521",null],
-["Woordenboek","project.folder.html#d0e4632",null],
-["glossary","project.folder.html#d0e4640",null],
-["omegat","project.folder.html#folder.omegat",null],
-["omegat.project (bestand)","project.folder.html#d0e4707",null],
-[".repositories","project.folder.html#d0e4715",null]
+["Vensters en dialoogvensters","chapter.windows.and.dialogs.html",[
+["\n                              Projecteigenschappen\n                           ","chapter.windows.and.dialogs.html#dialogs.project.properties",null],
+["\n                              Bronbestanden\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
+["\n                              Tekst zoeken\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
+["\n                              Tekst vervangen\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
+["\n                              Bestanden uitlijnen\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
+["\n                              Scripten\n                           ","chapter.windows.and.dialogs.html#windows.scripts",null]
 ]],
-["How-To…","howtos.html",[
-["Instellen van een Teamproject","howtos.html#howto.setupteamproject",null],
-["Een Teamproject gebruiken","howtos.html#howto.useteamproject",null],
-["Vertaalgeheugens opnieuw gebruiken","howtos.html#howto.reusetm",null],
-["Gegevensverlies voorkomen","howtos.html#howto.preventdataloss",null],
-["Een PDF-bestand vertalen","howtos.html#howto.translatepdf",null],
-["Van rechts naar links talen beheren","howtos.html#howto.managerighttoleft",null]
+["\n                        Voorkeuren\n                     ","chapter.dialogs.preferences.html",[
+["\n                              Algemeen\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.general",null],
+["\n                              Machinevertaling\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.mt",null],
+["\n                              Woordenlijsten\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.glossary",null],
+["\n                              Woordenboeken\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.dictionary",null],
+["\n                              Uiterlijk\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.appearance",null],
+["\n                              Globale bestandsfilters\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.file.filters",null],
+["\n                              Globale segmentatieregels\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.segmentation.setup",null],
+["\n                              Auto-aanvullen\n                           ","chapter.dialogs.preferences.html#dialog.preferences.auto.completion",null],
+["\n                              Spellingscontrole\n                           ","chapter.dialogs.preferences.html#dialog.preferences.spellchecker",null],
+["\n                              LanguageTool\n                           ","chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin",null],
+["\n                              Globaal extern zoeken\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.external.searches",null],
+["\n                              venster Bewerken\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.editor",null],
+["\n                              Tag verwerken\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.tag.processing",null],
+["\n                              Team\n                           ","chapter.dialogs.preferences.html#dialog.preferences.team",null],
+["\n                              Overeenkomsten TM\n                           ","chapter.dialogs.preferences.html#dialog.preferences.tm.matches",null],
+["\n                              Weergave\n                           ","chapter.dialogs.preferences.html#dialog.preferences.view",null],
+["\n                              Opslaan en uitvoer\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.saving.and.output",null],
+["\n                              Inloggen proxy\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.proxy.login",null],
+["\n                              Veilig opslaan\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.secure.store",null],
+["\n                              Plug-ins\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.plugins",null],
+["\n                              Updates\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
-["A. Woordenboeken","appendix.dictionaries.html",[
-["Hoe woordenboeken te downloaden en te installeren","appendix.dictionaries.html#d0e5513",null],
-["Problemen met woordenboeken","appendix.dictionaries.html#d0e5582",null]
+["Projectmap","chapter.project.folder.html",[
+["Standaard structuur","chapter.project.folder.html#d0e10458",null],
+["Minimale inhoud","chapter.project.folder.html#d0e10536",null],
+["source","chapter.project.folder.html#project.folder.source",null],
+["target","chapter.project.folder.html#project.folder.target",null],
+["tm","chapter.project.folder.html#project.folder.tm",null],
+["map voor geëxporteerde tm\'s","chapter.project.folder.html#project.folder.exported.tm",null],
+["Woordenboek","chapter.project.folder.html#project.folder.dictionary",null],
+["glossary","chapter.project.folder.html#project.folder.glossary",null],
+["omegat","chapter.project.folder.html#project.folder.omegat.folder",null],
+[".repositories","chapter.project.folder.html#project.folder.repositories",null]
 ]],
-["B. Woordenlijsten","appendix.glossaries.html",[
-["Standaard woordenlijst","appendix.glossaries.html#d0e5617",null],
-["Gebruik","appendix.glossaries.html#d0e5641",null],
-["Bestandsindeling","appendix.glossaries.html#d0e5691",null],
-["Algemene problemen met woordenlijsten","appendix.glossaries.html#d0e5807",null]
-]],
-["C. Spellingscontrole","appendix.spellchecker.html",[
-["Installeren van woordenboeken voor spelling","appendix.spellchecker.html#d0e5857",null],
-["Woordenboeken voor spelling gebruiken","appendix.spellchecker.html#d0e5906",null],
-["Hints","appendix.spellchecker.html#hints",null]
-]],
-["D. Reguliere uitdrukkingen","appendix.regexp.html",[
-["Regex-programma\'s en voorbeelden van gebruik","appendix.regexp.html#regex.tools.and.examples.of.use",null]
-]],
-["E. Aanpassen van sneltoetsen toetsenbord","appendix.shortcut.custom.html",[
-["Aanpassen van sneltoetsen toetsenbord","appendix.shortcut.custom.html#ch04.shortcuts.customization",null],
-["menu Project","appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu",null],
-["menu Bewerken","appendix.shortcut.custom.html#ch04.shortcuts.EditMenu",null],
-["menu Ga naar","appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu",null],
-["menu Weergave","appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu",null],
-["menu Extra","appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu",null],
-["menu Opties","appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu",null],
-["menu Help","appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu",null]
+["Appendices","chapter.appendices.html",[
+["Bestandsfilters","chapter.appendices.html#file.filters",null],
+["Segmentatie","chapter.appendices.html#app.segmentation",null],
+["Reguliere uitdrukkingen","chapter.appendices.html#app.regex",null],
+["Woordenlijsten","chapter.appendices.html#app.glossaries",null],
+["Directionele opmaaktekens","chapter.appendices.html#app.bidi",null],
+["Opdrachten voor nabewerking","chapter.appendices.html#post.processing.commands",null],
+["OmegaT sneltoetsen","chapter.appendices.html#app.shortcuts",null],
+["Configuratiemap","chapter.appendices.html#configuration.folder",null],
+["Toepassingsmap","chapter.appendices.html#application.folder",null]
 ]]];
 var toc_initiallyCollapsed = false;
 var messages = [
@@ -875,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-2mit66s7vm4g-13vgd3frl3xwq";
+var storageId = "-1woixq094w6mg-1cprk49p4ca2r";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

@@ -1,11 +1,11 @@
+OmegaT 的 @language@ 版本已由以下人员翻译：
 @TRANSLATION_NOTICE@
 
 
 OmegaT 是什么？
 ===============
 
-OmegaT 是自由且开源的跨平台计算机辅助翻译工具，具有模糊匹配、翻译记忆、
-关键字搜索、词汇表、以及为更新后的项目自动套用翻译等特性。
+OmegaT 是自由且开源的多平台计算机辅助翻译工具，具有模糊匹配、翻译记忆、关键字查找、词汇表、以及为更新后的项目自动套用翻译等特性。
 
 
 
@@ -26,7 +26,7 @@ OmegaT使用了许多库。各个库的许可证在以下文件中有所提及�
 
 OmegaT 需要您的系统安装有 Java 运行环境（JRE）1.8 或者更高版本。
 
-我们推荐使用包含 JRE 的 OmegaT 软件包，以避免选择、获取、与安装 JRE 的麻烦。
+我们推荐使用包含 JRE 的 OmegaT 软件包，以避免选择、获取、安装 JRE 的麻烦。
 
 
 
@@ -140,6 +140,7 @@ Jean-Christophe Helary 是 OmegaT 的项目经理。
 - Concepción Martin（Facebook 社区经理）
 - Hiroshi Miura（首席开发人员）
 - Briac Pilpré（网站管理员）
+- Philippe Tourigny（文档经理）
 - Lucie Vecerova（Facebook 社区经理）
 
 对代码的贡献记录在 /docs/contributors.txt 中。
@@ -185,3 +186,7 @@ Jean-Christophe Helary 是 OmegaT 的项目经理。
 可以在 SourceForge 网站（用英语）报告 Bug：
 
   https://sourceforge.net/p/omegat/bugs/
+
+OmegaT 贡献指南
+
+  https://omegat.readthedocs.io/en/latest/

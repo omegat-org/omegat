@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head><meta charset="UTF-8" />
+      <title>Vensters</title>
+      <link href="OmegaT.css" rel="stylesheet" type="text/css" />
+      <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
+      <link href="chapter.how.to.html" rel="prev" title="How-to…" />
+      <link href="chapter.menus.html" rel="next" title="Menu's" />
+   <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
+   
+<body>
+    <div id="wh-header">
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - User Manual</a></div></div>
+
+    <div id="wh-body">
+      <div class="wh-icon-menu" id="wh-menu"></div>
+      <div id="wh-navigation">
+        <div id="wh-navigation-form"><span id="wh-search-group"><span class="wh-icon-search" id="wh-do-search"></span><input id="wh-search-field" type="text" /><span class="wh-icon-cancel" id="wh-cancel-search"></span></span></div>
+        <div id="wh-toc-pane">
+        </div>
+        <div id="wh-search-pane">
+          <div id="wh-search-results">
+          </div>
+        </div>
+      </div>
+      <div id="wh-separator"></div>
+      <div id="wh-content">
+      
+      <header>
+         <div class="navheader">
+            <table style="width: 100%; ">
+               <tr>
+                  <th colspan="3" style="text-align: center; ">Vensters</th>
+               </tr>
+               <tr>
+                  <td style="width: 20%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Terug</a> </td>
+                  <th style="width: 60%; text-align: center; "> </th>
+                  <td style="width: 20%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Volgende</a>
+                  </td>
+               </tr>
+            </table>
+            <hr />
+         </div>
+      </header>
+      <section class="chapter" id="chapter.panes">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title">Vensters</h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <ul class="toc">
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.default.layout">Standaard lay-out</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.principles">Principes</a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.editor">
+                        <span class="guilabel">venster Bewerken</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.fuzzy.matches">
+                        <span class="guilabel">Fuzzy overeenkomsten</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.glossary">
+                        <span class="guilabel">Woordenlijsten</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.dictionary">
+                        <span class="guilabel">Woordenboeken</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.machinetranslation">
+                        <span class="guilabel">Machinevertaling</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.multipletranslations">
+                        <span class="guilabel">Meerdere vertalingen</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.notes">
+                        <span class="guilabel">Notepad</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.comments">
+                        <span class="guilabel">Opmerkingen</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.segment.properties">
+                        <span class="guilabel">Segmenteigenschappen</span>
+                     </a>
+                  </span>
+               </li>
+               <li>
+                  <span class="section">
+                     <a href="chapter.panes.html#panes.statusbar">
+                        <span class="guilabel">Statusbalk</span>
+                     </a>
+                  </span>
+               </li>
+            </ul>
+         </div>
+         <section class="section" id="panes.default.layout">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Standaard lay-out</h2>
+                  </div>
+               </div>
+            </div>
+            <p>De eerste keer dat u OmegaT start, geeft het hoofdvenster de volgende standaard lay-out weer:</p>
+            <div class="figure" id="default.omegat.layout">
+               <div class="figure-title">Afbeelding 2. Standaard lay-out OmegaT op macOS</div>
+               <div class="figure-contents">
+                  <div class="mediaobject">
+                     <img alt="Standaard lay-out OmegaT op macOS" src="images/defaultOmegaTLayout.png" />
+                  </div>
+               </div>
+            </div>
+            <br class="figure-break" />
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>Het venster <a class="link" href="chapter.panes.html#panes.editor" title="venster Bewerken">
+                           <span class="guilabel">venster Bewerken</span>
+                        </a>.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het venster <a class="link" href="chapter.panes.html#panes.notes" title="Notepad">
+                           <span class="guilabel">Notepad</span>
+                        </a>.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het venster <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy overeenkomsten">
+                           <span class="guilabel">Fuzzy overeenkomsten</span>
+                        </a>.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het venster <a class="link" href="chapter.panes.html#panes.glossary" title="Woordenlijsten">
+                           <span class="guilabel">Woordenlijsten</span>
+                        </a>.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het venster <a class="link" href="chapter.panes.html#panes.segment.properties" title="Segmenteigenschappen">
+                           <span class="guilabel">Segmenteigenschappen</span>
+                        </a>.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het venster <a class="link" href="chapter.panes.html#panes.comments" title="Opmerkingen">
+                           <span class="guilabel">Opmerkingen</span>
+                        </a>.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het venster <a class="link" href="chapter.panes.html#panes.multipletranslations" title="Meerdere vertalingen">
+                           <span class="guilabel">Meerdere vertalingen</span>
+                        </a>.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>De vensters <a class="link" href="chapter.panes.html#panes.dictionary" title="Woordenboeken">
+                           <span class="guilabel">Woordenboeken</span>
+                        </a> en <a class="link" href="chapter.panes.html#panes.machinetranslation" title="Machinevertaling">
+                           <span class="guilabel">Machinevertaling</span>
+                        </a> zijn vastgezet</p>
+                  </li>
+                  <li class="listitem">
+                     <p>
+                        <a class="link" href="chapter.panes.html#panes.statusbar" title="Statusbalk">
+                           <span class="guilabel">Statusbalk</span>
+                        </a> (aan de rechterkant), dat projectinformatie bevat</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Gebruik de verschillende opties in het menu <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                  <span class="guimenu">Weergave</span>
+               </a> en verplaats de verschillende  <a class="link" href="chapter.panes.html" title="Vensters">vensters</a> om de lay-out te krijgen die het beste bij uw werkstroom past.</p>
+            <div class="warning">
+               <h3 class="title">Waarschuwing</h3>
+               <p>Gebruik <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                     <span class="guimenu">Weergave</span>
+                  </a>
+                  <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                     <span class="guimenuitem">Hoofdvenster herstellen</span>
+                  </a> als u in problemen komt bij het opnieuw schikken van de lay-out van het hoofdvenster.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.principles">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">Principes</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt id="panes.manipulation">
+                     <span class="term" id="panes.manipulation.title">Manipuleren</span>
+                  </dt>
+                  <dd>
+                     <p>Het hoofdvenster bestaat uit verschillende vensters, hier beschreven, menu's, beschreven in het hoofdstuk <a class="link" href="chapter.menus.html" title="Menu's">Menu's</a> en een statusbalk, <a class="link" href="chapter.panes.html#panes.statusbar" title="Statusbalk">hieronder</a> beschreven. U kunt door te klikken en vast te houden aan de naam van een venster het slepen naar een nieuwe positie of zelfs het als een zelfstandig venster losmaken.</p>
+                     <p>De rechterbovenhoek van elk venster geeft verschillende pictogrammen weer, afhankelijk van het type venster en zijn huidige status:</p>
+                     <div class="table" id="table.pane.widgets">
+                        <div class="table-title">Tabel 1. Pictogrammen voor vensters</div>
+                        <div class="table-contents">
+                           <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                              <colgroup>
+                                 <col />
+                                 <col />
+                              </colgroup>
+                              <tbody>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Settings.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">Vermeld de verschillende extra <span class="bold">
+                                          <strong>acties</strong>
+                                       </span> die beschikbaar zijn in het venster.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Minimize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Minimaliseert</strong>
+                                       </span> het venster tot een tab aan de onderzijde van het venster.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Maximize.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Maximaliseert</strong>
+                                       </span> het venster</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Restore.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Herstelt</strong>
+                                       </span> een gemaximaliseerd venster naar zijn zijn vorige lay-out.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; border-bottom: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Undock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td style="border-bottom: 1px solid ; ">
+                                       <span class="bold">
+                                          <strong>Maakt het venster los</strong>
+                                       </span> van het hoofdvenster.</td>
+                                 </tr>
+                                 <tr>
+                                    <td style="border-right: 1px solid ; ">
+                                       <span class="inlinemediaobject">
+                                          <img src="images/Dock.png" width="60%" />
+                                       </span>
+                                    </td>
+                                    <td>
+                                       <span class="bold">
+                                          <strong>Brengt</strong>
+                                       </span> het venster terug in het hoofdvenster.</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <br class="table-break" />
+                     <p>U kunt vensters groeperen in hetzelfde gebied van het hoofdvenster. Door dat te doen wordt een tab met de naam van het venster aan de bovenzijde van de groep weergegeven. Vensters kunnen op grootte worden gebracht door te slepen aan de scheidingen tussen hen.</p>
+                     <div class="note">
+                        <h3 class="title">Opmerking</h3>
+                        <p>Gebruik <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                              <span class="guimenu">Weergave</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.restore.main.window">
+                              <span class="guimenuitem">Hoofdvenster herstellen</span>
+                           </a> om terug te gaan naar de standaard lay-out als u de wijzigingen in de gebruikersinterface niet meer weet en bepaalde vensters niet langer ziet.</p>
+                     </div>
+                  </dd>
+                  <dt id="panes.context.menus">
+                     <span class="term" id="panes.context.menus.title">Contextmenu's</span>
+                  </dt>
+                  <dd>
+                     <p>Sommige vensters hebben een contextmenu. U kunt dat menu oproepen met de standaardmethode voor uw besturingssysteem, of met de voor OmegaT gedefinieerde sneltoetsen:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Op Windows en Linux: <span class="keycap">
+                                    <strong>Menu</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Op macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+                  <dt id="panes.drag.and.drop">
+                     <span class="term" id="panes.drag.and.drop.title">Slepen en neerzetten</span>
+                  </dt>
+                  <dd>
+                     <p>Bestanden kunnen op bepaalde vensters worden gesleept en neergezet, met de volgende resultaten:</p>
+                     <div class="variablelist">
+                        <dl class="variablelist">
+                           <dt>
+                              <span class="term">venster Bewerken</span>
+                           </dt>
+                           <dd>
+                              <p>Hier neerzetten van een projectbestand van OmegaT (<code class="filename">omegat.project</code>) of een volledig project zal het corresponderende project openen nadat, indien aanwezig, het huidige geopende project is gesloten.</p>
+                              <p>Andere neergezette bestanden zullen worden gekopieerd naar de map <code class="filename">source</code>. Dit is ook van toepassing op het venster <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="Bronbestanden">
+                                    <span class="guilabel">Bronbestanden</span>
+                                 </a>.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">venster Overeenkomsten</span>
+                           </dt>
+                           <dd>
+                              <p>Hier neergezette <code class="filename">.tmx</code>-bestanden zullen worden gekopieerd naar de map <code class="filename">tm</code>.</p>
+                           </dd>
+                           <dt>
+                              <span class="term">venster Woordenlijst</span>
+                           </dt>
+                           <dd>
+                              <p>Hier neergezette bestanden met een herkende extensie voor woordenlijsten (<code class="filename">.txt</code>, <code class="filename">.tab</code>, etc.) zullen worden gekopieerd naar de map <code class="filename">glossary</code>.</p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </dd>
+                  <dt id="panes.notifications">
+                     <span class="term" id="panes.notifications.title">Notificaties</span>
+                  </dt>
+                  <dd>
+                     <p>Als een venster is gesloten, maar wel inhoud om weer te geven heeft, kan OmegaT tijdelijk de tab van het venster accentueren in oranje wanneer u het segment in gaat.</p>
+                     <p>Standaard hebben de vensters <span class="guilabel">Opmerkingen</span> en <span class="guilabel">Notepad</span> notificaties ingeschakeld.</p>
+                     <p>Notificaties in- of uitschakelen:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Ga in het venster.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Klik op het widget <span class="guilabel">Actie</span> rechtsboven.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Selecteer <span class="guilabel">Laat het me weten als een segment overeenkomsten met … heeft</span> (waar … varieert, afhankelijk van het venster waarvoor u de notificaties inschakelt.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>De volgende vensters kunnen notificaties geven:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Opmerkingen</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Woordenboeken</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Fuzzy overeenkomsten</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Woordenlijsten</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Meerdere vertalingen</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Notepad</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Segmenteigenschappen</p>
+                              <p>Het venster <span class="guilabel">Segmenteigenschappen</span> staat instellingen voor notificatie toe voor elk van zijn items.</p>
+                              <p>In <span class="guilabel">Tabelweergave</span>, klik met rechts op het item en selecteer <span class="guilabel">Laat het me weten als een segment overeenkomsten met … heeft</span> (waar … varieert, afhankelijk van de gewenste notificatie).</p>
+                              <p>In <span class="guilabel">Lijstweergave</span>, klik met rechts op het widget <span class="guilabel">Actie</span> aan het rechter uiteinde van de regel van de geselecteerde eigenschap en selecteer <span class="guilabel">Laat het me weten als een segment overeenkomsten met … heeft</span> (waar … varieert, afhankelijk van de gewenste notificatie).</p>
+                           </li>
+                        </ul>
+                     </div>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.editor">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">venster Bewerken</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Hier typt en bewerkt u uw vertaling.</p>
+            <p>De tekst is gesplitst in genummerde segmenten. U kunt door het gehele document scrollen en dubbelklikken op enig segment om het te openen en te bewerken.</p>
+            <div class="example" id="panes.editor.default.editor.writing.space">
+               <div class="example-title">Voorbeeld 7. Standaard schrijfruimte venster Bewerken</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Hide Tags</span>
+|Dissimuler les balises<span class="token">&lt;segment 2148 ¶&gt;</span>
+
+— ¶ —————————————————————
+
+Indien ingeschakeld wordt alle opmaak in de bronsegmenten verborgen.</pre>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>De eerste regel, in vette tekens tegen een groene achtergrond, is de te vertalen brontekst.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het <span class="bold">
+                           <strong>veld voor vertaling</strong>
+                        </span> is de tweede regel, tussen de linkermarge en de markering van het segment aan de rechterkant. Het <span class="bold">
+                           <strong>veld voor vertaling</strong>
+                        </span> is waar u uw vertaling invoert.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>De markering voor het segment is hier <code class="literal">&lt;segment 2148 ¶&gt;</code>.</p>
+                     <p>
+                        <code class="literal">2148</code> is het nummer van het segment in het project en het symbool <code class="literal">¶</code> geeft aan dat het segment het eerste segment in een alinea is.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>De cursor is standaard vergrendeld in het veld vertaling.</p>
+                     <p>Gebruik <span class="keycap">
+                           <strong>F2</strong>
+                        </span> om die te ontgrendelen en vrij te verplaatsen tussen het veld voor vertaling en andere delen van het venster.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>De regel onder het veld voor vertaling is een ander segment.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Gebruik <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                           <span class="guimenu">Ga naar</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">
+                           <span class="guimenuitem">Volgende niet-vertaalde segment</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>U</strong>
+                           </span>
+                        </a> of andere opdrachten voor navigatie om:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p>de inhoud van het veld voor vertaling te registreren in het vertaalgeheugen van het project en</p>
+                           </li>
+                           <li class="listitem">
+                              <p>naar het volgende te vertalen segment te gaan.</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Bekijk het menu <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                           <span class="guimenu">Ga naar</span>
+                        </a> voor details.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="note">
+               <h3 class="title">Opmerking</h3>
+               <p>Pas de weergave van het venster Bewerken aan zodat het past bij uw werkstroom.</p>
+               <p>Aanpassingen zouden kunnen zijn:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Wijzigen van het lettertype zoals beschreven in de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.fonts" title="Lettertype">
+                              <span class="guilabel">Lettertype</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Weergeven of verbergen van alineascheidingen met <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                              <span class="guimenu">Weergave</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.paragraph.delimitations">
+                              <span class="guimenuitem">Alinea-scheidingen markeren</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Wijzigen van de indeling van de alineascheiding, gedefinieerd in de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.paragraph.delimitation.format">
+                              <code class="option">Indeling alinea-scheiding</code>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Weergeven van informatie over aanpassing van het segment met <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                              <span class="guimenu">Weergave</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.modification.info">
+                              <span class="guisubmenu">Informatie over wijzigingen weergeven</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Weergeven of verbergen van bronsegmenten met <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                              <span class="guimenu">Weergave</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.display.source.segments">
+                              <span class="guimenuitem">Bronsegmenten weergeven</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Accentueren van vertaalde segmenten met <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                              <span class="guimenu">Weergave</span>
+                           </a>
+                           <a class="link" href="chapter.menus.html#menus.view.mark.translated.segments">
+                              <span class="guimenuitem">Vertaalde segmenten accentueren</span>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Automatisch invoegen van de brontekst in het veld voor vertaling door de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.leave.the.segment.empty">
+                              <code class="option">Segment leeg laten</code>
+                           </a> uit te schakelen.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Invoegen van de beste fuzzy overeenkomst die boven de drempel ligt die is gedefinieerd in voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor.insert.the.best.fuzzy.match">
+                              <code class="option">Beste overeenkomst invoegen</code>
+                           </a>.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Definiëren van tekst die u buiten de vertaling wilt laten, ingeschakeld met de voorkeur <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+                              <code class="option">Gevlagde tekst</code>
+                           </a>.</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.editor" title="venster Bewerken">
+                     <span class="guilabel">venster Bewerken</span>
+                  </a> en het <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                     <span class="guimenu">Weergave</span>
+                  </a> menu voor details.</p>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">Lege vertalingen</span>
+                  </dt>
+                  <dd>
+                     <p>Als u het veld voor vertaling leeg laat, zal OmegaT het segment behandelen als niet vertaald en het in de originele taal behouden als het de vertaalde documenten maakt.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Vertalingen gelijk aan brontekst</span>
+                  </dt>
+                  <dd>
+                     <p>OmegaT kan vertalingen opslaan die identiek zijn aan de brontekst. Het kan handig zijn voor documenten die handelsmerken, namen of andere woorden met hoofdletters bevatten of delen in een derde taal die niet vertaald behoeven te worden.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Tekst slepen</span>
+                  </dt>
+                  <dd>
+                     <p>Het is mogelijk om tekst te slepen, vanaf elke plek vanuit het hoofdvenster en het neer te zetten in het veld voor vertaling. Gesleepte tekst van buiten het veld voor vertaling wordt gekopieerd, terwijl tekst vanuit het veld voor vertaling wordt verplaatst.</p>
+                  </dd>
+                  <dt id="panes.editor.overwriting">
+                     <span class="term" id="panes.editor.overwriting.title">Overschrijven</span>
+                  </dt>
+                  <dd>
+                     <p>Standaard voegt het typen van tekst de nieuwe tekst in na de cursor in de richting van het typen. Gebruik de volgende toetsen om de bestaande tekst te overschrijven:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Op Windows en Linux: <span class="keycap">
+                                    <strong>INSERT</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Op macOS: <span class="keycap">
+                                    <strong>F3</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>De modus voor het schrijven (overschrijven - <span class="guilabel">OVR</span> of invoegen - <span class="guilabel">INS</span>) wordt weergegeven aan de rechterkant van de <a class="link" href="chapter.panes.html#panes.statusbar" title="Statusbalk">statusbalk</a>. Dezelfde toets schakelt tussen de modi.</p>
+                  </dd>
+                  <dt id="panes.editor.cursor.lock">
+                     <span class="term" id="panes.editor.cursor.lock.title">Cursor vastgezet</span>
+                  </dt>
+                  <dd>
+                     <p>Standaard is de cursor vergrendeld in het veld voor vertaling, en de pijltjestoetsen kunnen niet worden gebruikt om door de brontekst te verplaatsen.</p>
+                     <p>Drukken op <span class="keycap">
+                           <strong>F2</strong>
+                        </span> ontgrendelt de cursor en maakt het mogelijk om de pijltjestoetsen te gebruiken om door de brontekst te verplaatsen (of waar dan ook anders in het venster Bewerken). Dit stelt u in staat tekst te selecteren met het toetsenbord.</p>
+                     <p>De status van de cursor (vergrendeld - <span class="guilabel">LCK</span> of niet vergrendeld - <span class="guilabel">UNL</span>) wordt weergegeven aan de rechterkant van de <a class="link" href="chapter.panes.html#panes.statusbar" title="Statusbalk">statusbalk</a>. Dezelfde toets schakelt tussen vergrendelen en ontgrendelen van de cursor.</p>
+                  </dd>
+                  <dt id="panes.editor.context.menu">
+                     <span class="term" id="panes.editor.context.menu.title">Contextmenu</span>
+                  </dt>
+                  <dd>
+                     <p>Standaard sneltoets:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Op Windows en Linux: <span class="keycap">
+                                    <strong>Menu</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Op macOS: <span class="keycap">
+                                    <strong>S</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>U kunt het menu ook oproepen door met rechts te klikken met de muis (<span class="keycap">
+                           <strong>C</strong>
+                        </span> + <span class="keycap">
+                           <strong>klik</strong>
+                        </span> op macOS).</p>
+                     <p>Het venster Bewerken biedt verschillende beschikbare functies vanuit het menu <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                           <span class="guimenu">Bewerken</span>
+                        </a>, met name:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Overeenkomende items uit de woordenlijst, met opmerkingen, indien aanwezig weergegeven als een helptip. Gebruik <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                                    <span class="guimenu">Weergave</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                                    <span class="guimenuitem">Overeenkomsten woordenlijst markeren</span>
+                                 </a> om deze mogelijkheid in te schakelen.</p>
+                           </li>
+                           <li class="listitem">
+                              <p>Functies <span class="guilabel">Knippen</span>, <span class="guilabel">Kopiëren</span>, <span class="guilabel">Plakken</span>,</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Ga naar segment</span> (om naar het segment onder de aanwijzer te springen).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Zoeken in woordenboeken</span> (om naar de geselecteerde term te zoeken in een geïnstalleerd woordenboek).</p>
+                           </li>
+                           <li class="listitem">
+                              <p>
+                                 <span class="guilabel">Item voor woordenlijst toevoegen</span> (equivalent voor het gebruiken van <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                                    <span class="guimenu">Bewerken</span>
+                                 </a>
+                                 <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                                    <span class="guimenuitem">Item voor woordenlijst maken…</span> 
+                                    <span class="keycap">
+                                       <strong>C</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>S</strong>
+                                    </span>+<span class="keycap">
+                                       <strong>G</strong>
+                                    </span>
+	  
+                                 </a>).</p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Als u tekst hebt geselecteerd en items gedefinieerd in de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.external.searches" title="Globaal extern zoeken">
+                           <span class="guilabel">Globaal extern zoeken</span>
+                        </a> zullen zij ook worden weergegeven in dit menu (net als lokale zoekacties).</p>
+                  </dd>
+                  <dt id="panes.editor.auto.completion.menu">
+                     <span class="term" id="panes.editor.auto.completion.menu.title">Menu Auto-aanvullen</span>
+                  </dt>
+                  <dd>
+                     <p>Standaard sneltoets:</p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: disc; ">
+                           <li class="listitem">
+                              <p>Op Windows en Linux: <span class="keycap">
+                                    <strong>C</strong>
+                                 </span>+<span class="keycap">
+                                    <strong>Spatie</strong>
+                                 </span>
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p>Op macOS: <span class="keycap">
+                                    <strong>Esc</strong>
+                                 </span>
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     <p>Dit menu biedt de opties voor automatisch aanvullen aan die zijn ingesteld in de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Auto-aanvullen">
+                           <span class="guilabel">Auto-aanvullen</span>
+                        </a>.</p>
+                  </dd>
+                  <dt id="panes.editor.navigation">
+                     <span class="term" id="panes.editor.navigation.title">Navigatie</span>
+                  </dt>
+                  <dd>
+                     <p>Gebruik <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                           <span class="guimenu">Ga naar</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                           <span class="guimenuitem">Notepad</span>
+	  
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>N</strong>
+                           </span>
+                        </a> om in het venster te gaan en een opmerking toe te voegen of aan te passen.</p>
+                     <p>Gebruik <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                           <span class="guimenu">Ga naar</span>
+                        </a>
+                        <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                           <span class="guimenuitem">venster Bewerken</span> 
+                           <span class="keycap">
+                              <strong>C</strong>
+                           </span>+<span class="keycap">
+                              <strong>A</strong>
+                           </span>+<span class="keycap">
+                              <strong>E</strong>
+                           </span>
+                        </a> om terug te gaan naar het venster Bewerken.</p>
+                  </dd>
+               </dl>
+            </div>
+         </section>
+         <section class="section" id="panes.fuzzy.matches">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Fuzzy overeenkomsten</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Het venster Fuzzy overeenkomsten geeft de segmenten weer uit uw vertaalgeheugens die het meest soortgelijk zijn aan het segment dat u momenteel vertaalt.</p>
+            <p>Overeenkomsten komen zowel uit het interne vertaalgeheugen voor het project, in real time gemaakt terwijl u het project vertaalt, en externe geheugens die u hebt geïmporteerd uit eerdere projecten of hebt ontvangen van derde partijen. Bekijk de <a class="link" href="chapter.how.to.html#how.to.use.tm" title="Vertaalgeheugens gebruiken">Vertaalgeheugens gebruiken</a> how-to voor details.</p>
+            <p>Als u naar een segment gaat, wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt drukken op <span class="keycap">
+                  <strong>C</strong>
+               </span>+<span class="keycap">
+                  <strong>2, 3, 4, of 5</strong>
+               </span>, of <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                  <span class="guimenu">Bewerken</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.select.match">
+                  <span class="guisubmenu">Overeenkomst selecteren</span>
+               </a> gebruiken om een andere overeenkomst te selecteren .</p>
+            <div class="example" id="the.first.match">
+               <div class="example-title">Voorbeeld 8. Een leeg segment en zijn eerste twee overeenkomsten</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <div class="informaltable" id="table.pane.matches">
+                     <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                        <colgroup>
+                           <col />
+                           <col />
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td style="border-right: 1px solid ; ">
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">— ¶ —————————————————————
+
+<span class="token">Application Folder</span>
+|<span class="token">&lt;segment 1879 ¶&gt;</span>
+
+— ¶ —————————————————————
+</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                              <td>
+                                 <p>
+				  
+                                 </p>
+                                 <div class="informaltable">
+                                    <table style="border-collapse: collapse; border-top: 1px solid ; border-bottom: 1px solid ; border-left: 1px solid ; border-right: 1px solid ; ">
+                                       <colgroup>
+                                          <col />
+                                       </colgroup>
+                                       <tbody>
+                                          <tr>
+                                             <td>
+							
+                                                <pre class="programlisting">1. <span class="token">Top</span> Folder
+Dossier racine
+&lt;50/50/66% Wezen-segmenten (+1 meer)&gt;</pre>
+
+                                                <pre class="programlisting">2. Configuration Folder
+Dossier de configuration
+&lt;50/50/66% &gt;</pre>
+                                             </td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                                 <p>
+				
+                                 </p>
+				
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>De geselecteerde fuzzy overeenkomst is <span class="bold">
+                  <strong>vet</strong>
+               </span> geaccentueerd. Ontbrekende woorden in het segment dat u aan het vertalen bent worden weergegeven in <span class="bold">
+                  <strong>blauw</strong>
+               </span>, en aanliggende delen in <span class="bold">
+                  <strong>groen</strong>
+               </span> (als het aanliggende deel een spatie is, zoals hierboven, wordt dat deel niet gekleurd).</p>
+            <p>De overeenkomst geeft ook drie percentages weer voor de overeenkomst.</p>
+            <p>Deze percentages hebben de volgende betekenis, in volgorde:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Berekend percentage <span class="bold">
+                           <strong>met stemming</strong>
+                        </span>, gebaseerd op de tokenizer van de brontaal, en <span class="bold">
+                           <strong>negeren van tags en getallen</strong>
+                        </span> (over het algemeen het hoogste).</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Berekend percentage <span class="bold">
+                           <strong>zonder stemming</strong>
+                        </span>, terwijl het nog steeds <span class="bold">
+                           <strong>tags en getallen negeert</strong>
+                        </span> (in het algemeen iets lager)</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Berekend percentage over <span class="bold">
+                           <strong>de volledige tekst, inclusief tags en getallen</strong>
+                        </span> (in het algemeen het laagste)</p>
+                     <div class="note">
+                        <h3 class="title">Opmerking</h3>
+                        <p>Als het segment alleen getallen of symbolen bevat, zal dit percentage het hoogste zijn.</p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p>U kunt wijzigen hoe de overeenkomsten worden weergegeven of gesorteerd. Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.tm.matches" title="Overeenkomsten TM">
+                  <code class="option">Overeenkomsten TM</code>
+               </a> voor details.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                  <span class="guimenu">Bewerken</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.match.or.selection">
+                  <span class="guimenuitem">Door overeenkomst of selectie vervangen</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>R</strong>
+                  </span>
+	  
+               </a> om het veld voor vertaling te vervagen door de overeenkomst, of <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                  <span class="guimenu">Bewerken</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.insert.match.or.selection">
+                  <span class="guimenuitem">Overeenkomst of selectie invoegen</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>I</strong>
+                  </span>
+               </a> om het op de positie van de cursor in te voegen.</p>
+         </section>
+         <section class="section" id="panes.glossary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Woordenlijsten</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit venster geeft termen weer uit uw woordenlijsten die corresponderen met termen in het huidige segment. De woordenlijsten zijn geplaatst in de map <a class="link" href="chapter.project.folder.html#project.folder.glossary" title="glossary">glossary</a> van het project.</p>
+            <p>De bronterm wordt weergegeven voor het teken “=” en de doeltermen erachter. Als het item opmerkingen bevat zijn zij genummerd en worden weergegeven op afzonderlijke regels onder de termen. Termen die zijn gevonden in de beschrijfbare woordenlijst worden vet weergegeven, terwijl die uit andere woordenlijsten worden gepresenteerd als gewone tekst.</p>
+            <div class="example" id="glossary.matches">
+               <div class="example-title">Voorbeeld 9. Overeenkomsten woordenlijst</div>
+               <div class="example-contents">
+                  <p>
+		
+                  </p>
+                  <pre class="programlisting">Project = <span class="token">Projet</span>
+1. Projet de traduction
+
+Folder = <span class="token">Dossier</span>
+                  </pre>
+                  <p>
+	  
+                  </p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>De bestandsnaam van de woordenlijst wordt als een helptip weergegeven bij het over de termen gaan met de muis.</p>
+            <p>Het veld voor opmerkingen van een item mag hyperlinks bevatten, waarop kan worden geklikt voor nadere verwijzing.</p>
+            <p>Links naar lokale bestanden (<code class="filename">file:///PAD/bestandsnaam</code>) openen in het geassocieerde programma. Webadressen (<code class="filename">https://…</code>) openen in de standaard browser.</p>
+            <p>U kunt een term in het venster van de woordenlijst selecteren en er met rechts op klikken om het in de vertaling in te voegen.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.view" title="Weergave">
+                  <span class="guimenu">Weergave</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
+                  <span class="guimenuitem">Overeenkomsten woordenlijst markeren</span>
+               </a> om overeenkomsten van woordenlijsten te onderstrepen.</p>
+            <p>U kunt dan met rechts klikken op het onderstreepte woord in het bronsegment om een pop-upmenu te openen dat de beschikbare vertalingen in uw woordenlijsten vermeld. Selecteer er een om in te voegen op de huidige plaats van de cursor in het segment.</p>
+            <p>U kunt de voorkeuren voor de woordenlijsten gebruiken om fijn af te stemmen hoe de woordenlijsten worden weergegeven. Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Woordenlijsten">
+                  <span class="guilabel">Woordenlijsten</span>
+               </a> voor details.</p>
+            <p>Aanpassingen aan een bestand voor een woordenlijst in de map glossary worden onmiddellijk herkend door OmegaT en weergegeven in het venster Woordenlijst.</p>
+            <p>OmegaT bevat één bestand voor de beschrijfbare woordenlijst per project. Gebruik <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                  <span class="guimenu">Bewerken</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">
+                  <span class="guimenuitem">Item voor woordenlijst maken…</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>S</strong>
+                  </span>+<span class="keycap">
+                     <strong>G</strong>
+                  </span>
+	  
+               </a> om termen aan dat bestand toe te voegen.</p>
+            <p>Bekijk de appendix <a class="link" href="chapter.appendices.html#app.glossaries" title="Woordenlijsten">Woordenlijsten</a> voor details.</p>
+         </section>
+         <section class="section" id="panes.dictionary">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Woordenboeken</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit venster geeft termen weer uit uw woordenboeken die corresponderen met termen in het huidige segment. De woordenboeken zijn geplaatst in de map <a class="link" href="chapter.project.folder.html#project.folder.dictionary" title="Woordenboek">Woordenboek</a> van het project. Bekijk de <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Woordenboeken">
+                  <span class="guilabel">Woordenboeken</span>
+               </a> voorkeuren voor details.</p>
+         </section>
+         <section class="section" id="panes.machinetranslation">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Machinevertaling</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Als u ten minste een programma voor machinevertaling hebt ingeschakeld en geconfigureerd geeft dit venster de suggesties weer voor het huidige segment, geproduceerd door de de beschikbare programma's. Als er suggesties van meer dan één programma voor machinevertaling beschikbaar zijn,</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>verschijnt de naam van het programma achter de vertaalde tekst,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>worden de resultaten alfabetisch gesorteerd op de naam van het programma, and</p>
+                  </li>
+                  <li class="listitem">
+                     <p>wordt de momenteel geselecteerde vertaling geaccentueerd.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                  <span class="guimenu">Bewerken</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.replace.with.mt.title">
+                  <span class="guimenuitem">Door machinevertaling vervangen</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>M</strong>
+                  </span>
+	  
+               </a> om de vertaling van het huidige segment te vervangen door die van het geselecteerde vertaalprogramma.</p>
+            <p>De geselecteerde naam van het programma wordt toegewezen aan de eigenschap <em class="parameter">
+                  <code>Origin</code>
+               </em> van het huidige segment.</p>
+            <p>Als er een verbindings- of authenticatie optreedt met een programma voor machinevertaling, zal de statusbalk aan de onderzijde van het venster kort een statusbericht weergeven.</p>
+            <p>Zorg er voor dat de service is ingeschakeld en dat uw inloggegevens correct zijn ingevoerd. Als dat zo is zou u misschien contact met de serviceprovider moeten opnemen voor hulp. Soortgelijk kan een fout, zoals <code class="literal">Kan antwoord van vertaalservice niet parsen</code>, suggereren dat er een communicatieprobleem bestaat tussen uw systeem en de server van de provider.</p>
+            <p>Bekijk de voorkeuren <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.mt" title="Machinevertaling">
+                  <span class="guilabel">Machinevertaling</span>
+               </a> voor details.</p>
+         </section>
+         <section class="section" id="panes.multipletranslations">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Meerdere vertalingen</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Een bronsegment, dat op meerdere plaatsen in het project verschijnt, zou verschillende vertalingen kunnen hebben, afhankelijk van de context.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                  <span class="guimenu">Bewerken</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
+                  <span class="guimenuitem">Alternatieve vertaling maken</span>
+               </a> om een alternatieve vertaling te registreren als de huidige vertaling van het segment niet geschikt is. De ingevoerde vertaling zal dan worden behandeld als een alternatieve vertaling van het bronsegment.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.edit" title="Bewerken">
+                  <span class="guimenu">Bewerken</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.edit.use.as.default.translation">
+                  <span class="guimenuitem">Als standaard vertaling gebruiken</span>
+               </a> om een van de alternatieven te definiëren—waarschijnlijk de meest voorkomende bijvoorbeeld—als de standaard vertaling.</p>
+         </section>
+         <section class="section" id="panes.notes">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Notepad</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit venster is een <span class="emphasis">
+                  <em>bewerkbare</em>
+               </span> ruimte waar u opmerkingen kunt toevoegen aan het huidige actieve segment.</p>
+            <p>Het stelt u in staat later terug te kunnen keren naar het segment en, bijvoorbeeld, de vertaling na te kijken, te controleren dat alternatieve vertalingen juist zijn, of in gedeelde projecten, om collega's om hun mening te vragen.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                  <span class="guimenu">Ga naar</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.next.note">
+                  <span class="guimenuitem">Volgende opmerking</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> en <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                  <span class="guimenu">Ga naar</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.previous.note">
+                  <span class="guimenuitem">Vorige opmerking</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>P</strong>
+                  </span>
+               </a> om door de opmerkingen te bladeren.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                  <span class="guimenu">Ga naar</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.notes.pane">
+                  <span class="guimenuitem">Notepad</span>
+	  
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>N</strong>
+                  </span>
+               </a> om in het venster te gaan en een opmerking toe te voegen of aan te passen.</p>
+            <p>Gebruik <a class="link" href="chapter.menus.html#menus.goto" title="Ga naar">
+                  <span class="guimenu">Ga naar</span>
+               </a>
+               <a class="link" href="chapter.menus.html#menus.goto.editor.pane">
+                  <span class="guimenuitem">venster Bewerken</span> 
+                  <span class="keycap">
+                     <strong>C</strong>
+                  </span>+<span class="keycap">
+                     <strong>A</strong>
+                  </span>+<span class="keycap">
+                     <strong>E</strong>
+                  </span>
+               </a> om terug te gaan naar het venster Bewerken.</p>
+            <div class="note">
+               <h3 class="title">Opmerking</h3>
+               <p>De opmerkingen worden opgeslagen in het vertaalgeheugen van het project. Zij worden <span class="emphasis">
+                     <em>niet</em>
+                  </span> opgeslagen in de vertaalde documenten.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.comments">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Opmerkingen</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Sommige bestandsindelingen, zoals de indeling PO, kunnen opmerkingen voor de vertaler bevatten om context aan de vertaling te geven. Zulke opmerkingen worden hier weergegeven.</p>
+            <div class="note">
+               <h3 class="title">Opmerking</h3>
+               <p>Het venster <span class="guilabel">Notities</span> is <span class="emphasis">
+                     <em>niet</em>
+                  </span> te bewerken. Het geeft alleen de informatie weer die is opgenomen in het bestand.</p>
+               <p>Gebruik het venster <a class="link" href="chapter.panes.html#panes.notes" title="Notepad">
+                     <span class="guilabel">Notepad</span>
+                  </a> om uw eigen opmerkingen overeen vertaling in te voeren.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.segment.properties">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Segmenteigenschappen</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Alle segmenten hebben eigenschappen. De eigenschappen worden in dit venster weergegeven.</p>
+            <p>Algemene eigenschappen omvatten:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt>
+                     <span class="term">Is herhaling</span>
+                  </dt>
+                  <dd>
+                     <p>Geeft aan dat een segment een herhaling is en specificeert of het de EERSTE keer is dat het voorkomt.</p>
+                  </dd>
+                  <dt>
+                     <span class="term">Bestand</span>
+                  </dt>
+                  <dd>
+                     <p>Geeft aan welk bestanden het segment bevat.</p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="note">
+               <h3 class="title">Opmerking</h3>
+               <p>Het venster Segmenteigenschappen is <span class="emphasis">
+                     <em>niet</em>
+                  </span> te bewerken. Het geeft alleen informatie weer die is gerelateerd aan het segment.</p>
+            </div>
+         </section>
+         <section class="section" id="panes.statusbar">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both">
+                        <span class="guilabel">Statusbalk</span>
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>De onderzijde van het hoofdvenster is de statusbalk.</p>
+            <p>De linkerkant van de statusbalk geeft informatie weer over acties van het project of foutberichten.</p>
+            <div class="example" id="panes.statusbar.messages">
+               <div class="example-title">Voorbeeld 10. Voorbeelden van berichten op de statusbalk</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">Synchronisatie van opslagplaatsen</code>
+                  </p>
+                  <p>→ OmegaT is een teamproject aan het openen en synchroniseert met de opslagplaats op afstand.</p>
+                  <p>
+                     <code class="literal">Naar laatste bewerkte segment springen…</code>
+                  </p>
+                  <p>→ OmegaT opent het laatste bewerkte segment uit de laatste sessie.</p>
+                  <p>
+                     <code class="literal">Project automatisch opgeslagen om 10:48</code>
+                  </p>
+                  <p>→ OmegaT heeft het project recent opgeslagen.</p>
+                  <p>
+                     <code class="literal">Vertaalde documenten gemaakt</code>
+                  </p>
+                  <p>→ Bestanden werden door de gebruiker gemaakt.</p>
+               </div>
+            </div>
+            <br class="example-break" />
+            <p>De rechterkant van de statusbalk geeft aan of de cursor is vergrendeld in het segment (bekijk de instelling <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">Cursor vastgezet</a>) en of de cursor de bestaande tekst overschrijft (bekijk de instelling <a class="link" href="chapter.panes.html#panes.editor.overwriting">Overschrijven</a>). Het geeft ook informatie over de voortgang.</p>
+            <p>Klik op de getallen om te wissel tussen het weergeven van de voortgang als getallen of als percentages.</p>
+            <div class="example" id="panes.statusbar.widgets">
+               <div class="example-title">Voorbeeld 11. Informatie op de statusbalk </div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">LCK | OVR <span class="token">257/271 (12292/154896,
+	  177692)</span>
+                        <span class="token"> 35/0 </span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Status cursor </span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">LCK</code> geeft aan dat de cursor is vergrendeld in het segment.</p>
+                           <p>
+                              <code class="literal">OVR</code> geeft aan dat de cursor de bestaande tekst overschrijft.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In het bestand</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>257</strong>
+                              </span> = aantal vertaalde segmenten / <span class="bold">
+                                 <strong>271</strong>
+                              </span> = totaal aantal segmenten</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In het project</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>12292</strong>
+                              </span> = aantal unieke vertaalde segmenten / <span class="bold">
+                                 <strong>154896</strong>
+                              </span> = totaal aantal unieke segmenten, <span class="bold">
+                                 <strong>(177692)</strong>
+                              </span> = totaal aantal segmenten</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In het segment</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = aantal tekens in de bron / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = aantal tekens in het doelgebied, tot nu</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+            <div class="example" id="panes.statusbar.widgets.percentage">
+               <div class="example-title">Voorbeeld 12. Informatie op de statusbalk, modus Percentage</div>
+               <div class="example-contents">
+                  <p>
+                     <code class="literal">UNL | INS <span class="token">94.8% (14 resterend) / 7.9% (142,604 resterend), 177,692</span> 
+                        <span class="token">35/0</span>
+                     </code>
+                  </p>
+                  <div class="variablelist">
+                     <dl class="variablelist">
+                        <dt>
+                           <span class="term">Status cursor </span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <code class="literal">UNL</code> geeft aan dat de cursor niet is vergrendeld in het segment en door het venster Bewerken kan navigeren met de standaard opdrachten voor navigatie.</p>
+                           <p>
+                              <code class="literal">INS</code> geeft aan dat de cursor tekst invoegt.</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In het bestand</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>94.8%</strong>
+                              </span> = % of vertaalde segmenten / <span class="bold">
+                                 <strong>14</strong>
+                              </span> = aantal niet-vertaalde segmenten</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In het project</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>7.9%</strong>
+                              </span> = % vertaalde segmenten / <span class="bold">
+                                 <strong>142,604</strong>
+                              </span> = aantal niet-vertaalde segmenten, <span class="bold">
+                                 <strong>(177,692)</strong>
+                              </span> = totaal aantal segmenten</p>
+                        </dd>
+                        <dt>
+                           <span class="term">In het segment</span>
+                        </dt>
+                        <dd>
+                           <p>
+                              <span class="bold">
+                                 <strong>35</strong>
+                              </span> = aantal tekens in de bron / <span class="bold">
+                                 <strong>0</strong>
+                              </span> = aantal tekens in het doelgebied, tot nu</p>
+                        </dd>
+                     </dl>
+                  </div>
+               </div>
+            </div>
+            <br class="example-break" />
+         </section>
+      </section>
+      <footer>
+         <div class="navfooter">
+            <hr />
+            <table style="width: 100%; ">
+               <tr>
+                  <td style="width: 40%; text-align: left; ">
+                     <a accesskey="p" href="chapter.how.to.html">Terug</a> </td>
+                  <td style="width: 20%; text-align: center; "> </td>
+                  <td style="width: 40%; text-align: right; "> <a accesskey="n" href="chapter.menus.html">Volgende</a>
+                  </td>
+               </tr>
+               <tr>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">How-to… </td>
+                  <td style="width: 20%; text-align: center; ">
+                     <a accesskey="h" href="index_.html">Begin</a>
+                  </td>
+                  <td style="width: 40%; text-align: right; vertical-align: top; "> Menu's</td>
+               </tr>
+            </table>
+         </div>
+      </footer>
+   </div>
+    </div>
+
+    
+  </body></html>

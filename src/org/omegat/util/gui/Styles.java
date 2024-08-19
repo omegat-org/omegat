@@ -110,7 +110,7 @@ public final class Styles {
 
         COLOR_PARAGRAPH_START(UIManager.getColor("OmegaT.paragraphStart")),
 
-        COLOR_MARK_COMES_FROM_TM(UIManager.getColor("OmegaT.markComesFromTm")),
+        COLOR_MARK_COMES_FROM_TM_MT(UIManager.getColor("OmegaT.markComesFromTmMt")),
 
         COLOR_MARK_COMES_FROM_TM_XICE(UIManager.getColor("OmegaT.markComesFromTmXice")),
 
@@ -167,9 +167,7 @@ public final class Styles {
         COLOR_ALIGNER_TABLE_ROW_HIGHLIGHT(UIManager.getColor("OmegaT.alignerTableRowHighlight")),
 
         COLOR_MACHINETRANSLATE_SELECTED_HIGHLIGHT(
-                UIManager.getColor("OmegaT.machinetranslateSelectedHighlight")),
-
-        COLOR_MARK_COMES_FROM_TM_MT(UIManager.getColor("OmegaT.markComesFromTmMt"));
+                UIManager.getColor("OmegaT.machinetranslateSelectedHighlight"));
 
         private static final String DEFAULT_COLOR = "__DEFAULT__";
         private Color color;

@@ -37,7 +37,7 @@
     <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>
     <suppress files="(TestFilterBase|TmxComplianceBase|FilterMasterTest)\.java" checks="(HiddenField|ParameterNumber)"/>
     <suppress files="AutoTmxTest\.java" checks="InnerAssignment"/>
-    <suppress files="(CLIParameters|LanguageTool|WordPredictor|JsonParser|POFilter)Test\.java"
+    <suppress files="(CLIParameters|WordPredictor|JsonParser|POFilter)Test\.java"
               checks="AvoidNestedBlocks"/>
     <!-- expectation string lengthy -->
     <suppress files="ResourceBundleFilterTest\.java" checks="LineLength" lines="221"/>

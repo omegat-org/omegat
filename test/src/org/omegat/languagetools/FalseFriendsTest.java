@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,7 +33,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.languagetool.JLanguageTool;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
@@ -54,6 +58,17 @@ import org.omegat.util.Language;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class FalseFriendsTest extends TestCore {
+
+    @BeforeClass
+    public static void setUpClass() {
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
+        LanguageManager.registerLTLanguage("en", "org.languagetool.language.English");
+        LanguageManager.registerLTLanguage("en-US", "org.languagetool.language.AmericanEnglish");
+        LanguageManager.registerLTLanguage("en-CA", "org.languagetool.language.CanadianEnglish");
+        LanguageManager.registerLTLanguage("pl-PL", "org.languagetool.language.Polish");
+    }
+
     @Before
     public final void setUp() {
         final ProjectProperties props = new ProjectProperties() {
@@ -188,8 +203,8 @@ public class FalseFriendsTest extends TestCore {
             }
 
             @Override
-            public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
-            throws Exception {
+            public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing,
+                    boolean commitTargetFiles) throws Exception {
             }
         });
         LanguageToolWrapper.setBridgeFromCurrentProject();
@@ -216,7 +231,8 @@ public class FalseFriendsTest extends TestCore {
             };
         };
 
-        List<Mark> marks = marker.getMarksForEntry(null, "This is some long text without translation.", "", true);
+        List<Mark> marks = marker.getMarksForEntry(null, "This is some long text without translation.", "",
+                true);
         assertEquals(0, marks.size());
 
         marks = marker.getMarksForEntry(null, "This is text with the same translation.",

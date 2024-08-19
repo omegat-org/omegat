@@ -14,6 +14,7 @@ woodstox = "6.5.0"
 languagetool = "6.1"
 languagedetector = "0.6-2"
 lucene = "5.5.5"
+lucene_gosen = "5.5.1"
 checkstyle = "8.45.1"
 guava = "32.1.2-jre"
 annotations = "23.0.0"
@@ -68,16 +69,42 @@ woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", versi
 languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}
 languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
 languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
+languagetool-ar = {group = "org.languagetool", name = "language-ar", version.ref = "languagetool"}
+languagetool-ast = {group = "org.languagetool", name = "language-ast", version.ref = "languagetool"}
 languagetool-be = {group = "org.languagetool", name = "language-be", version.ref = "languagetool"}
+languagetool-br = {group = "org.languagetool", name = "language-br", version.ref = "languagetool"}
+languagetool-ca = {group = "org.languagetool", name = "language-ca", version.ref = "languagetool"}
+languagetool-da = {group = "org.languagetool", name = "language-da", version.ref = "languagetool"}
+languagetool-de = {group = "org.languagetool", name = "language-de", version.ref = "languagetool"}
+languagetool-el = {group = "org.languagetool", name = "language-el", version.ref = "languagetool"}
 languagetool-en = {group = "org.languagetool", name = "language-en", version.ref = "languagetool"}
+languagetool-eo = {group = "org.languagetool", name = "language-eo", version.ref = "languagetool"}
+languagetool-es = {group = "org.languagetool", name = "language-es", version.ref = "languagetool"}
+languagetool-fa = {group = "org.languagetool", name = "language-fa", version.ref = "languagetool"}
 languagetool-fr = {group = "org.languagetool", name = "language-fr", version.ref = "languagetool"}
+languagetool-ga = {group = "org.languagetool", name = "language-ga", version.ref = "languagetool"}
+languagetool-gl = {group = "org.languagetool", name = "language-gl", version.ref = "languagetool"}
+languagetool-it = {group = "org.languagetool", name = "language-it", version.ref = "languagetool"}
 languagetool-ja = {group = "org.languagetool", name = "language-ja", version.ref = "languagetool"}
+languagetool-km = {group = "org.languagetool", name = "language-km", version.ref = "languagetool"}
+languagetool-nl = {group = "org.languagetool", name = "language-nl", version.ref = "languagetool"}
 languagetool-pl = {group = "org.languagetool", name = "language-pl", version.ref = "languagetool"}
+languagetool-pt = {group = "org.languagetool", name = "language-pt", version.ref = "languagetool"}
+languagetool-ro = {group = "org.languagetool", name = "language-ro", version.ref = "languagetool"}
+languagetool-ru = {group = "org.languagetool", name = "language-ru", version.ref = "languagetool"}
+languagetool-sk = {group = "org.languagetool", name = "language-sk", version.ref = "languagetool"}
+languagetool-sl = {group = "org.languagetool", name = "language-sl", version.ref = "languagetool"}
+languagetool-sv = {group = "org.languagetool", name = "language-sv", version.ref = "languagetool"}
+languagetool-ta = {group = "org.languagetool", name = "language-ta", version.ref = "languagetool"}
+languagetool-tl = {group = "org.languagetool", name = "language-tl", version.ref = "languagetool"}
+languagetool-uk = {group = "org.languagetool", name = "language-uk", version.ref = "languagetool"}
+languagetool-zh = {group = "org.languagetool", name = "language-zh", version.ref = "languagetool"}
 lucene-core = {group = "org.apache.lucene", name = "lucene-core", version.ref = "lucene"}
 lucene-analyzers-common = {group = "org.apache.lucene", name = "lucene-analyzers-common", version.ref = "lucene"}
 lucene-analyzers-kuromoji = {group = "org.apache.lucene", name = "lucene-analyzers-kuromoji", version.ref = "lucene"}
 lucene-analyzers-smartcn = {group = "org.apache.lucene", name = "lucene-analyzers-smartcn", version.ref = "lucene"}
 lucene-analyzers-stempel = {group = "org.apache.lucene", name = "lucene-analyzers-stempel", version.ref = "lucene"}
+lucene-gosen = {group = "org.omegat.lucene", name = "lucene-gosen", version.ref = "lucene_gosen"}
 guava = {group = "com.google.guava", name = "guava", version.ref = "guava"}
 jetbrains-annotations = {group = "org.jetbrains", name = "annotations", version.ref = "annotations"}
 groovy-jsr223 = {group = "org.apache.groovy", name = "groovy-jsr223", version.ref = "groovy"}

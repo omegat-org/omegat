@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -36,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Languages;
@@ -54,19 +56,29 @@ public class LanguageToolTest {
     private static final Language SOURCE_LANG = new Language(Locale.FRENCH);
     private static final Language TARGET_LANG = new Language(Locale.ENGLISH);
 
+    @BeforeClass
+    public static void setUpClass() {
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
+        LanguageManager.registerLTLanguage("en", "org.languagetool.language.English");
+        LanguageManager.registerLTLanguage("en-US", "org.languagetool.language.AmericanEnglish");
+        LanguageManager.registerLTLanguage("en-CA", "org.languagetool.language.CanadianEnglish");
+        LanguageManager.registerLTLanguage("be-BE", "org.languagetool.language.Belarusian");
+        LanguageManager.registerLTLanguage("fr-FR", "org.languagetool.language.French");
+    }
+
     @Before
     public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
     }
 
     @Test
-    @SuppressWarnings("deprecation")
     public void testExecuteLanguageToolCheck() throws Exception {
         JLanguageTool lt = new JLanguageTool(Languages.getLanguageForShortCode("be"));
 
         // The test string is Belarusian; originally it was actual UTF-8,
-        // but that causes the test to fail when environment encodings aren't set
-        // correctly, so we are now using Unicode literals.
+        // but that causes the test to fail when environment encodings aren't
+        // set correctly, so we are now using Unicode literals.
         List<RuleMatch> matches = lt.check("\u0441\u043F\u0440\u0430\u0443\u0434\u0437\u0456\u043C.");
         assertEquals(1, matches.size());
         assertTrue(matches.get(0).getRule() instanceof PatternRule);
@@ -76,7 +88,8 @@ public class LanguageToolTest {
     public void testFrench() throws Exception {
         JLanguageTool lt = new JLanguageTool(Languages.getLanguageForShortCode("fr"));
 
-        // example from https://github.com/languagetool-org/languagetool/issues/2852
+        // example from
+        // https://github.com/languagetool-org/languagetool/issues/2852
         List<RuleMatch> matches = lt.check("Il est par cons\u00E9quent perdue.");
         assertEquals(1, matches.size());
         assertTrue(matches.get(0).getRule() instanceof PatternRule);
@@ -98,15 +111,15 @@ public class LanguageToolTest {
 
             assertThrows("URL not specifying API actions should fail due to missing argument.",
                     java.lang.Exception.class,
-                    () -> new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081")
-            );
+                    () -> new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081"));
 
             ILanguageToolBridge bridge = new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG,
                     "http://localhost:8081/v2/check");
 
-            // Set some rules to prevent the server from looking at config files.
-            // User config files can specify languages we aren't providing at test
-            // runtime, in which case queries will fail.
+            // Set some rules to prevent the server from looking at config
+            // files.
+            // User config files can specify languages we aren't providing at
+            // test runtime, in which case queries will fail.
             bridge.applyRuleFilters(Collections.singleton("FOO"), Collections.emptySet(),
                     Collections.emptySet());
 
@@ -138,44 +151,31 @@ public class LanguageToolTest {
         assertTrue(bridge instanceof LanguageToolNativeBridge);
 
         // Bad URL: fall back to local implementation
-        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE, LanguageToolWrapper.BridgeType.REMOTE_URL);
+        Preferences.setPreference(Preferences.LANGUAGETOOL_BRIDGE_TYPE,
+                LanguageToolWrapper.BridgeType.REMOTE_URL);
         Preferences.setPreference(Preferences.LANGUAGETOOL_REMOTE_URL, "blah");
         bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
         assertTrue(bridge instanceof LanguageToolNativeBridge);
     }
 
     @Test
-    @SuppressWarnings("deprecation")
     public void testLanguageMapping() {
-        {
-            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));
-            assertEquals(Languages.getLanguageForLocale(new Locale("en", "US")).getClass(), lang.getClass());
-        }
-        {
-            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-CA"));
-            assertEquals(Languages.getLanguageForLocale(new Locale("en", "CA")).getClass(), lang.getClass());
-        }
-        {
-            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en"));
-            assertEquals(Languages.getLanguageForShortCode("en").getClass(), lang.getClass());
-        }
-        {
-            // Unknown region--fall back to generic class
-            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-JA"));
-            assertEquals(Languages.getLanguageForShortCode("en").getClass(), lang.getClass());
-        }
-        {
-            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be-BY"));
-            assertEquals(Languages.getLanguageForShortCode("be").getClass(), lang.getClass());
-        }
-        {
-            // Belarusian is offered in be-BY only; ensure hit with just "be"
-            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("be"));
-            assertEquals(Languages.getLanguageForShortCode("be").getClass(), lang.getClass());
-        }
-        {
-            org.languagetool.Language lang = LanguageToolNativeBridge.getLTLanguage(new Language("xyz"));
-            assertNull(lang);
-        }
+        org.languagetool.Language lang;
+        lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-US"));
+        assertEquals(Languages.getLanguageForLocale(new Locale("en", "US")).getClass(), lang.getClass());
+        lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-CA"));
+        assertEquals(Languages.getLanguageForLocale(new Locale("en", "CA")).getClass(), lang.getClass());
+        lang = LanguageToolNativeBridge.getLTLanguage(new Language("en"));
+        assertEquals(Languages.getLanguageForShortCode("en").getClass(), lang.getClass());
+        // Unknown region--fall back to generic class
+        lang = LanguageToolNativeBridge.getLTLanguage(new Language("en-JA"));
+        assertEquals(Languages.getLanguageForShortCode("en").getClass(), lang.getClass());
+        lang = LanguageToolNativeBridge.getLTLanguage(new Language("be-BY"));
+        assertEquals(Languages.getLanguageForShortCode("be").getClass(), lang.getClass());
+        // Belarusian is offered in be-BY only; ensure hit with just "be"
+        lang = LanguageToolNativeBridge.getLTLanguage(new Language("be"));
+        assertEquals(Languages.getLanguageForShortCode("be").getClass(), lang.getClass());
+        lang = LanguageToolNativeBridge.getLTLanguage(new Language("xyz"));
+        assertNull(lang);
     }
 }

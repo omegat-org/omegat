@@ -26,7 +26,6 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +38,7 @@ import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.bitext.BitextRule;
 import org.languagetool.tools.Tools;
+
 import org.omegat.util.Log;
 
 public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
@@ -135,34 +135,6 @@ public class LanguageToolNativeBridge extends BaseLanguageToolBridge {
      *      <code>getLanguageForLanguageNameOnly</code> in {@link Languages}.
      */
     public static Language getLTLanguage(org.omegat.util.Language lang) {
-        List<Language> ltLangs = Languages.get();
-
-        // Search for full xx-YY match
-        String omLang = lang.getLanguageCode();
-        String omCountry = lang.getCountryCode();
-        for (Language ltLang : ltLangs) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortCode())) {
-                List<String> countries = Arrays.asList(ltLang.getCountries());
-                if (countries.contains(omCountry)) {
-                    return ltLang;
-                }
-            }
-        }
-
-        // Search for just xx match
-        for (Language ltLang : ltLangs) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortCode()) && ltLang.hasVariant()) {
-                Language defaultVariant = ltLang.getDefaultLanguageVariant();
-                if (defaultVariant != null) {
-                    return ltLang;
-                }
-            }
-        }
-        for (Language ltLang : ltLangs) {
-            if (omLang.equalsIgnoreCase(ltLang.getShortCode()) && !ltLang.hasVariant()) {
-                return ltLang;
-            }
-        }
-        return null;
+        return LanguageManager.getLTLanguage(lang);
     }
 }

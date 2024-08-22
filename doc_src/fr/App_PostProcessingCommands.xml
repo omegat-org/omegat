@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="post.processing.commands">
-  <title id="post.processing.commands.title">Commandes de post-traitement</title>
+  <title id="post.processing.commands.title">Commandes de posttraitement</title>
 
   <para>Voir la propriété du projet <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/> pour les commandes spécifiques au projet.</para>
 
@@ -98,18 +98,18 @@
   
   <section id="post.processing.commands.user.defined.scripts">
     <title id="post.processing.commands.user.defined.scripts.title">Script local</title>
-    <para>En plus d’une commande normale, vous pouvez faire appel à un script. N’exécutez jamais de scripts de post-traitement à partir de sources non fiables. Pour des raisons de sécurité, les commandes locales de post-traitement sont désactivées par défaut.</para>
+    <para>En plus d’une commande normale, vous pouvez faire appel à un script. N’exécutez jamais de scripts de posttraitement à partir de sources non fiables. Pour des raisons de sécurité, les commandes locales de posttraitement sont désactivées par défaut.</para>
     <para>Les variables de modèle peuvent être utilisées à la fois avec les commandes normales et les scripts personnalisés. Il vous faudra peut-être utiliser un chemin d’accès absolu pour votre script. Le chemin utilisé par OmegaT peut être différent du vôtre.</para>
     <para>STDOUT et STDERR sont écrits dans le fichier <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. Le code de sortie et STDERR ou le dernier STDOUT apparaissent dans la barre d’état.</para>
   </section>
 
   <section id="post.processing.commands.linux.and.macos">
     <title id="post.processing.commands.linux.and.macos.title">Linux et macOS</title>
-    <para>Vous devez utiliser un shebang, par exemple <literal># ! /bin/bash</literal> ou <literal>#! /usr/bin/env python3</literal>. Le script doit être exécutable. Enchainer des commandes avec <literal>&amp;&amp;</literal> ou <literal>||</literal> ou des barres verticales <literal>|</literal> ne fonctionnera pas ici.</para>
+    <para>Vous devez utiliser l’en-tête <literal># ! /bin/bash</literal> ou <literal>#! /usr/bin/env python3</literal>. Le script doit être exécutable. Enchainer des commandes avec <literal>&amp;&amp;</literal> ou <literal>||</literal> ou des barres verticales <literal>|</literal> ne fonctionnera pas ici.</para>
   </section>
   
   <example id="post.processing.commands.example">
-	  <title id="post.processing.commands.example.title">Exemple simple de commande de post-traitement :</title>
+	  <title id="post.processing.commands.example.title">Exemple simple de commande de posttraitement :</title>
 	  <variablelist>
 		<varlistentry>
 		  <term>Ouvrir le dossier cible sous Linux</term>

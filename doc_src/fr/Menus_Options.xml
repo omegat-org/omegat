@@ -26,7 +26,7 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>Permet d’activer ou de désactiver les moteurs de traduction automatique disponibles.</para>
+        <para>Permet d’activer ou de désactiver les moteurs de traduction automatique disponibles et correctement configurés.</para>
 
         <para>Si plusieurs moteurs de traductions sont sélectionnés, vous pouvez aussi utiliser <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> pour passer de l’un à l’autre et insérer le dernier moteur sélectionné. Voir les préférences <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> pour en savoir plus.</para>
       </listitem>

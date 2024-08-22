@@ -251,9 +251,7 @@
 		<listitem>
 		  <para><literal>xxx</literal> est un nombre de 0 à 100 qui agira comme une pénalité soustraite du pourcentage de concordance des segments provenant de ce dossier.</para>
 
-		  <para>Par exemple, une correspondance de 100 % dans un TMX, stocké dans un dossier appelé <filename class="directory">pénalité-30</filename> devient une correspondance de 70 %.
- La pénalité s’applique aux trois pourcentages de correspondance.
- Les scores de 75, 80 et 90 pour une correspondance sont ramenés à 45, 50 et 60.</para>
+		  <para>Par exemple, une correspondance de 100 % dans un TMX, stocké dans un dossier appelé <filename class="directory">pénalité-30</filename> devient une correspondance de 70 %. La pénalité s’applique aux trois pourcentages de correspondance. Les scores de 75, 80 et 90 pour une correspondance sont ramenés à 45, 50 et 60.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -266,8 +264,7 @@
 	</variablelist>
 
 	<note>
-	  <para>Vous pouvez combiner des dossiers pour créer de nouvelles fonctions.
- Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <filename>tm/mt/penalty-010</filename> ne génèrerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</para>
+	  <para>Vous pouvez combiner des dossiers pour créer de nouvelles fonctions. Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <filename>tm/mt/penalty-010</filename> ne génèrerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</para>
 	</note>
   </section>
 
@@ -282,8 +279,7 @@
 
 	<para>Les termes du dictionnaire qui correspondent à des parties du segment sont affichés dans le volet <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>. Voir les préférences <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> pour en savoir plus.</para>
 
-    <para>OmegaT prend en charge les dictionnaires au format StarDict ou Lingvo DSL.
- Vous pouvez trouver certains dictionnaires sur le <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">Wiki OmegaT</ulink>.</para>
+    <para>OmegaT prend en charge les dictionnaires au format StarDict ou Lingvo DSL. Vous pouvez trouver certains dictionnaires sur le <ulink url="https://sourceforge.net/p/omegat/wiki/Reference%20Material/">Wiki OmegaT</ulink>.</para>
 
 	<para>Pour installer les dictionnaires :</para>
 
@@ -320,8 +316,7 @@
 
   <section id="project.folder.omegat.folder">
     <title id="project.folder.omegat.folder.title">omegat</title>
-    <para>Le dossier <filename class="directory">omegat</filename> contient, au minimum, les fichiers <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> et <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>.
- Il peut également contenir plusieurs autres fichiers.</para>
+    <para>Le dossier <filename class="directory">omegat</filename> contient, au minimum, les fichiers <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/> et <link linkend="project.folder.project.stats" endterm="project.folder.project.stats.title"/>. Il peut également contenir plusieurs autres fichiers.</para>
 
     <variablelist>
       <varlistentry id="project.folder.project.save.tmx">
@@ -361,8 +356,7 @@
       <varlistentry id="project.folder.omegat.project.stats.match">
         <term id="project.folder.omegat.project.stats.match.title">Le fichier project_stats_match.txt</term>
         <listitem>
-          <para>Ce fichier contient les dernières statistiques de correspondance du projet.
- Utilisez <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics" endterm="menus.tools.match.statistics.title"/> pour le générer.</para>
+          <para>Ce fichier contient les dernières statistiques de correspondance du projet. Utilisez <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.match.statistics" endterm="menus.tools.match.statistics.title"/> pour le générer.</para>
         </listitem>
       </varlistentry>
 

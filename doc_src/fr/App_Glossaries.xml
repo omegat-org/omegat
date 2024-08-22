@@ -5,7 +5,7 @@
 
   <para>Les glossaires sont des fichiers terminologiques situés dans le dossier <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
-  <para>Tous les termes d’un segment qui trouvent une correspondance dans l’<emphasis>un</emphasis> des glossaires seront affichés dans le volet <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+  <para>Tous les termes d’un segment qui trouvent une correspondance dans <emphasis>un</emphasis> des glossaires seront affichés dans le volet <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
 
   <para>Les termes source peuvent être des expressions multimots.</para>
 
@@ -21,7 +21,7 @@
 
 		<para>Il n’est pas nécessaire de préparer ce fichier en avance.</para>
 
-		<para>Il sera créé la première fois que vous y insérerez un terme.</para>
+		<para>Il sera créé la première fois que vous y insèrerez un terme.</para>
 
 		<note>
           <para>Si vous utilisez un fichier existant comme glossaire par défaut, toutes les nouvelles entrées seront enregistrées dans un format séparé par des tabulations et sauvegardées en UTF-8 par défaut.</para>

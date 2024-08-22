@@ -60,9 +60,9 @@
       <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
         <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Récupérer automatiquement les traductions</option></term>
 
-        <listitem>
-          <para>Si vous désactivez cette option, les traductions automatiques ne seront récupérées que lorsque vous utiliserez <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> dans le segment actuel. Vous devrez alors appuyer à nouveau sur cette combinaison pour insérer la suggestion.</para>
-        </listitem>
+				<listitem>
+					<para>Enable this option to automatically fetch machine translations from the providers you have enabled and configured. If you leave this option disabled, machine translations are only fetched when you use <link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> in the current segment. Vous devrez alors appuyer à nouveau sur cette combinaison pour insérer la suggestion.</para>
+				</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
@@ -155,7 +155,7 @@
         <term id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text.title"><option>Faire correspondre des groupes de termes même si les termes apparaissent séparément</option></term>
 
         <listitem>
-          <para>Lorsqu’un terme du glossaire est un mot composé, le terme correspondra même si les mots apparaissent séparément dans le texte source. </para>
+          <para>Lorsqu’un terme du glossaire est un mot composé, le terme correspondra même si les mots apparaissent séparément dans le texte source.</para>
         </listitem>
       </varlistentry>
 
@@ -269,8 +269,7 @@
         <term id="dialogs.preferences.appearance.restore.main.window.title"><option>Réinitialiser la fenêtre d’OmegaT</option></term>
 
         <listitem>
-          <para>Rétablit la disposition par défaut des fenêtres d’OmegaT.
-</para>
+          <para>Rétablit la disposition par défaut des fenêtres d’OmegaT.</para>
 
 		  <para>Utilisez cette fonction lorsque vous ne parvenez pas à rétablir la disposition souhaitée après avoir supprimé, déplacé ou masqué une ou plusieurs fenêtres. Vous pouvez l’utiliser lorsque les fenêtres n’apparaissent pas comme prévu après une mise à jour d’OmegaT.</para>
         </listitem>
@@ -308,8 +307,7 @@
 
       <para>Vous pouvez associer des couleurs différentes aux diverses parties de l’interface graphique.</para>
 
-      <para>Les scripts peuvent être utilisés pour définir des thèmes prédéfinis.
- OmegaT est livré avec un script appelé <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/> qui fournit un thème sombre par défaut. Voir la fenêtre <link linkend="windows.scripts" endterm="windows.scripts.title"/> pour en savoir plus.</para>
+      <para>Les scripts peuvent être utilisés pour définir des thèmes prédéfinis. OmegaT est livré avec un script appelé <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/> qui fournit un thème sombre par défaut. Voir la fenêtre <link linkend="windows.scripts" endterm="windows.scripts.title"/> pour en savoir plus.</para>
 
 	  <note>
 		<para>La détection automatique des thèmes sombres est disponible sur les systèmes Linux avec la présentation Gnome/GTK pour les personnes qui exécutent OmegaT sur OpenJDK. Cette fonction dépend d’une fonctionnalité Java qui n’est pas encore disponible sur d’autres plates-formes.</para>
@@ -349,7 +347,7 @@
 		<para>Dans le cas d’une traduction à partir du japonais, <emphasis>seuls</emphasis> l’ensemble de règles associé au masque <code>JA.*</code> et les ensembles de règles génériques associés au motif <code>.*</code> seront pris en compte.</para>
 	  </example>
 
-	  <para>Lorsque vous cliquez sur un masque de langue dans la partie supérieure de la boite de dialogue, une liste de règles associées s’affiche dans la partie inférieure de la boite de dialogue. </para>
+	  <para>Lorsque vous cliquez sur un masque de langue dans la partie supérieure de la boite de dialogue, une liste de règles associées s’affiche dans la partie inférieure de la boite de dialogue.</para>
 
 	  <para>Tous les ensembles de règles de segmentation pour un modèle de langue correspondant sont actifs et sont appliqués dans l’ordre. Les règles pour des langues spécifiques doivent être plus élevées que les règles par défaut.</para>
 
@@ -357,7 +355,7 @@
 		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Priorités en cascade</title>
 		<para>Les règles pour <emphasis>FR-CA</emphasis> doivent être plus élevées que celles pour <emphasis>FR.*</emphasis>, qui doivent elles-mêmes être plus élevées que l’ensemble générique <emphasis>.*</emphasis>.</para>
 
-		<para>Ainsi, lors d’une traduction à partir du français canadien, les règles pour le français canadien - s’il y en a - s’appliqueront en premier, suivies par les règles pour le français et, enfin, par les règles génériques. </para>
+		<para>Ainsi, lors d’une traduction à partir du français canadien, les règles pour le français canadien - s’il y en a - s’appliqueront en premier, suivies par les règles pour le français et, enfin, par les règles génériques.</para>
 	  </example>
 	  
 	  <para>Pour créer un nouvel ensemble de règles :</para>
@@ -433,7 +431,7 @@
 
 	<para>Cliquez sur <guilabel>Table de caractères</guilabel> pour définir les options de la table de caractères de la saisie automatique.</para>
 
-	<para>Cliquez sur <guilabel>Activer la saisie historique</guilabel> ou <guilabel>Activer la prédiction de l’historique</guilabel> pour définir des saisies basées sur l’historique.</para>
+	<para>Cliquez sur <guilabel>Activer les propositions à partir de l’historique</guilabel> ou <guilabel>Activer les prédictions à partir de l’historique</guilabel> pour rendre possible des saisies basées sur l’historique.</para>
 
 	<note>
 	  <para>Aucune de vos données (historique, etc.) n’est <emphasis>jamais</emphasis> envoyée par OmegaT à un serveur externe pour y être traitée. Tous les résultats de prédiction/saisie sont traités localement.</para>
@@ -647,7 +645,7 @@
 		<term id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"><option>Autoriser une traduction identique à la source</option></term>
 
 		<listitem>
-		  <para>Une traduction identique au texte source n’est pas reconnue comme une traduction par défaut. OmegaT l’effacera et considérera le segment comme non traduit.</para>
+		  <para>Une traduction identique au texte source n’est pas reconnue comme une traduction par défaut. OmegaT l’effacera et considèrera le segment comme non traduit.</para>
 
 		  <para>Cette option permet de forcer OmegaT à enregistrer ces entrées et à les compter comme traduites.</para>
 		</listitem>
@@ -664,24 +662,19 @@
 			  <para>le contenu de la partie source est copié dans le fichier <link linkend="configuration.folder.default.contents.script.source" endterm="configuration.folder.default.contents.script.source.title"/>,</para>
 			</listitem>
 			<listitem>
-			  <para>le contenu de la partie cible (le cas échéant) est copié dans le fichier <link linkend="configuration.folder.default.contents.script.target" endterm="configuration.folder.default.contents.script.target.title"/>,
-</para>
+			  <para>le contenu de la partie cible (le cas échéant) est copié dans le fichier <link linkend="configuration.folder.default.contents.script.target" endterm="configuration.folder.default.contents.script.target.title"/>,</para>
 			</listitem>
 		  </itemizedlist>
 		  
-		  <para>tous deux situés dans le <link linkend="windows.scripts.folder">dossier de script</link>.
-</para>
+		  <para>tous deux situés dans le <link linkend="windows.scripts.folder">dossier de script</link>.</para>
 		  
 		  <note>
-			<para>Cette fonction n’a aucun rapport avec la fonction <link linkend="windows.scripts" endterm="windows.scripts.title"/>.
-</para>
+			<para>Cette fonction n’a aucun rapport avec la fonction <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
 		  </note>
 
-		  <para>Les fichiers sont écrasés lorsque OmegaT entre dans un nouveau segment.
-</para>
+		  <para>Les fichiers sont écrasés lorsque OmegaT entre dans un nouveau segment.</para>
 
-		  <para>Le script <link linkend="windows.scripts.distribution.extract.text.content" endterm="windows.scripts.distribution.extract.text.content.title"/> fait quelque chose de similaire, mais pour l’ensemble du projet en une seule fois.
- Voir la fenêtre <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
+		  <para>Le script <link linkend="windows.scripts.distribution.extract.text.content" endterm="windows.scripts.distribution.extract.text.content.title"/> fait quelque chose de similaire, mais pour l’ensemble du projet en une seule fois. Voir la fenêtre <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
 
 		</listitem>
 	  </varlistentry>
@@ -714,8 +707,7 @@
 		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>Enregistrer l’état autotraduit</option></term>
 
 		<listitem>
-		  <para>Les mémoires de traduction situées dans <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> et <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> peuvent alimenter automatiquement la mémoire du projet.
- Les segments qui reçoivent une traduction automatique à ce moment-là peuvent être marqués dans le volet <guilabel>Éditeur</guilabel> en utilisant <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>.</para>
+		  <para>Les mémoires de traduction situées dans <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> et <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> peuvent alimenter automatiquement la mémoire du projet. Les segments qui reçoivent une traduction automatique à ce moment-là peuvent être marqués dans le volet <guilabel>Éditeur</guilabel> en utilisant <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>.</para>
 
 		  <para>Voir le guide pratique <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> pour en savoir plus.</para>
 		</listitem>
@@ -725,8 +717,7 @@
 		<term id="dialogs.preferences.editor.save.orgin.of.translation.title"><option>Enregistrer l’origine de la traduction</option></term>
 
 		<listitem>
-          <para>Lorsque la traduction automatique est activée, OmegaT enregistre le nom du moteur qui a été utilisé pour remplir un segment donné.
-</para>
+          <para>Lorsque la traduction automatique est activée, OmegaT enregistre le nom du moteur qui a été utilisé pour remplir un segment donné.</para>
 		</listitem>
       </varlistentry>
 
@@ -734,8 +725,7 @@
 		<term id="dialogs.preferences.editor.initially.load.this.many.segments.title"><option>Nombre initial de segments chargés</option></term>
 
 		<listitem>
-		  <para>L’éditeur charge et affiche initialement 2 000 segments et en charge progressivement davantage à mesure que vous défilez vers le haut ou vers le bas. Modifiez ce nombre en fonction des performances de votre machine.
-</para>
+		  <para>L’éditeur charge et affiche initialement 2 000 segments et en charge progressivement davantage à mesure que vous défilez vers le haut ou vers le bas. Modifiez ce nombre en fonction des performances de votre machine.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -743,8 +733,7 @@
 		<term id="dialogs.preferences.editor.paragraph.delimitation.format.title"><option>Format de la délimitation des paragraphes </option></term>
 
 		<listitem>
-		  <para>Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.paragraph.delimitations" endterm="menus.view.mark.paragraph.delimitations.title"/> pour identifier les segments qui appartiennent au même paragraphe.
-</para>
+		  <para>Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.paragraph.delimitations" endterm="menus.view.mark.paragraph.delimitations.title"/> pour identifier les segments qui appartiennent au même paragraphe.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
@@ -757,8 +746,7 @@
 	  <varlistentry id="dialogs.preferences.tag.processing.programming.variables">
 		<term id="dialogs.preferences.tag.processing.programming.variables.title"><option>Vérifier les variables de la fonction printf</option></term>
 		<listitem>
-		  <para>Vérifier les variables printf dans les formats de fichiers autres que le format PO.
- Le filtre PO traite déjà les variables marquées avec <literal>%</literal>.</para>
+		  <para>Vérifier les variables printf dans les formats de fichiers autres que le format PO. Le filtre PO traite déjà les variables marquées avec <literal>%</literal>.</para>
 
 		  <para>Vous pouvez sélectionner</para>
 		  
@@ -766,8 +754,7 @@
 			<varlistentry>
 			  <term><option>Aucun</option></term>
 			  <listitem>
-				<para>Aucun des modèles de variables n’est vérifié.
-</para>
+				<para>Aucun des modèles de variables n’est vérifié.</para>
 			  </listitem>
 			</varlistentry>
 			
@@ -875,8 +862,7 @@
 		<listitem>
 		  <para>Par défaut, OmegaT affiche les cinq meilleures correspondances partielles au-delà de 30 %. Vous pouvez modifier le seuil ici.</para>
 			<note>
-				<para>Chacun des trois types de pourcentages de concordance présentés dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> est pris en compte pour déterminer si une concordance est affichée.
- Les correspondances potentielles sont rejetées si les trois pourcentages sont inférieurs au seuil.</para>
+				<para>Chacun des trois types de pourcentages de concordance présentés dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> est pris en compte pour déterminer si une concordance est affichée. Les correspondances potentielles sont rejetées si les trois pourcentages sont inférieurs au seuil.</para>
 			</note>
 		</listitem>
 	  </varlistentry>
@@ -1085,16 +1071,14 @@ ${filePath}&gt;</programlisting></para>
 	  <varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
 		<term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>Colorer tous les segments répétés</option></term>
 		<listitem>
-		  <para>Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> pour colorer la deuxième copie et les copies suivantes d’un segment répété. Utilisez cette option pour colorer également la première copie du segment.
-</para>
+		  <para>Utilisez <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> pour colorer la deuxième copie et les copies suivantes d’un segment répété. Utilisez cette option pour colorer également la première copie du segment.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
 		<term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>Simplifier les infobulles des balises</option></term>
 		<listitem>
-		  <para>Les balises OmegaT sont des textes protégés qui représentent des balises spécifiques à un format dans le document source. Lors du survol d’une balise, OmegaT affiche une infobulle qui contient le contenu original de la balise. Si ce contenu était à l’origine entouré de balises jumelées, ces dernières peuvent être supprimées de l’infobulle pour une meilleure lisibilité.
-</para>
+		  <para>Les balises OmegaT sont des textes protégés qui représentent des balises spécifiques à un format dans le document source. Lors du survol d’une balise, OmegaT affiche une infobulle qui contient le contenu original de la balise. Si ce contenu était à l’origine entouré de balises jumelées, ces dernières peuvent être supprimées de l’infobulle pour une meilleure lisibilité.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -1156,7 +1140,7 @@ ${filePath}&gt;</programlisting></para>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
-		<term id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>Commandes globales de post-traitement</option></term>
+		<term id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>Commandes globales de posttraitement</option></term>
 
 		<listitem>
 		  <para>OmegaT peut exécuter automatiquement des commandes après l’utilisation de <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> ou <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. Vous pouvez définir ces commandes ici.</para>
@@ -1169,16 +1153,16 @@ ${filePath}&gt;</programlisting></para>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
-		<term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Autoriser les commandes locales de post-traitement</option></term>
+		<term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Autoriser les commandes locales de posttraitement</option></term>
 
 		<listitem>
 		  <warning>
-			<para>Pour des raisons de sécurité, les <link linkend="dialogs.project.properties.external.processing.command">commandes locales de post-traitement</link> sont désactivées par défaut.</para>
+			<para>Pour des raisons de sécurité, les <link linkend="dialogs.project.properties.external.processing.command">commandes locales de posttraitement</link> sont désactivées par défaut.</para>
 		  </warning>
 
-		  <para>Vous pouvez également définir des commandes locales de post-traitement disponibles uniquement pour un projet donné. Ces commandes sont définies dans la fenêtre <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
+		  <para>Vous pouvez également définir des commandes locales de posttraitement disponibles uniquement pour un projet donné. Ces commandes sont définies dans la fenêtre <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
 
-		  <para>Les commandes locales de post-traitement sont enregistrées dans le fichier <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. N’activez cette option que si vous avez confiance en la source de ce fichier.</para>
+		  <para>Les commandes locales de posttraitement sont enregistrées dans le fichier <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. N’activez cette option que si vous avez confiance en la source de ce fichier.</para>
 
 	  	  <note>
 			<para>Les commandes locales sont exécutées avant les commandes globales.</para>
@@ -1206,9 +1190,9 @@ ${filePath}&gt;</programlisting></para>
   <section id="dialogs.preferences.plugins">
 	<title id="dialogs.preferences.plugins.title"><guilabel>Modules d’extension</guilabel></title>
 
-	<para>Affiche la liste de tous les plug-ins installés.</para>
+	<para>Affiche la liste de tous les modules d'extension installés.</para>
 
-	<para>Les plug-ins sont installés par défaut dans le dossier <link linkend="configuration.folder">configuration</link>, mais peuvent également être installés dans le dossier <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> sous le dossier <link linkend="application.folder">application</link>.</para>
+	<para>Les modules d'extension sont installés par défaut dans le dossier <link linkend="configuration.folder">configuration</link>, mais peuvent également être installés dans le dossier <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> sous le dossier <link linkend="application.folder">application</link>.</para>
 
 	<para>Des modules d’extension supplémentaires sont disponibles sur le <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">site de développement d’OmegaT</ulink>.</para>
   </section>

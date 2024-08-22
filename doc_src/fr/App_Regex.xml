@@ -30,7 +30,7 @@
 
 	<varlistentry>
       <term>\h?</term>
-      <listitem><para>Représente zéro ou un caractère d’espacement (cela inclut les espaces régulières et insécables ainsi que les tabulations, mais pas les caractères de saut de ligne, qui appartiennent à la catégorie des « caractère d’espacement verticaux  » : \v.)</para>
+      <listitem><para>Représente zéro ou un caractère d’espacement (cela inclut les espaces régulières et insécables ainsi que les tabulations, mais pas les caractères de saut de ligne, qui appartiennent à la catégorie « caractère d’espacement vertical  » : \v.)</para>
       </listitem>
     </varlistentry>
   </variablelist>    
@@ -115,7 +115,7 @@
         <listitem>
           <para>Contrairement à une lettre seule, qui se représente simplement comme indiqué ci-dessus, une lettre précédée d’une <literal>\</literal> a une fonction particulière dans une expression régulière.</para>
 
-		  <para>Par exemple, <emphasis>r</emphasis> est juste un caractère normal mais le fait de le précéder d’une <literal>\</literal> pour en faire <literal>\r</literal> le transforme en une combinaison spéciale qui correspond à un <emphasis>caractère retour chariot</emphasis>. De même, <literal>\R</literal> correspond à <emphasis>tout caractère de saut de ligne</emphasis>.</para>
+		  <para>Par exemple, <emphasis>r</emphasis> est juste un caractère normal mais le fait de le précéder d’une <literal>\</literal> pour en faire <literal>\r</literal> le transforme en une combinaison spéciale qui correspond à un <emphasis>caractère retour charriot</emphasis>. De même, <literal>\R</literal> correspond à <emphasis>tout caractère de saut de ligne</emphasis>.</para>
 		  
           <note>
             <para>Seules les lettres <emphasis>i j l m o</emphasis>, et <emphasis>y</emphasis>, en minuscules et en majuscules, n’ont pas de signification particulière lorsqu’elles sont précédées d’une barre oblique inversée. Ce manuel ne décrit qu’un petit sous-ensemble de lettres qui ont une signification particulière.</para>
@@ -440,7 +440,7 @@
                   <row>
                     <entry>Correspond à</entry>
                     <entry>
-                      <para>Le mot « jour », ainsi que « Joure », « journée », « journalier », « jours » dans « toujours » ou « séjours », et tout autre mot ou suite de caractères contenant « jour » suivi de zéro ou plus « <emphasis>caractères de mot</emphasis> » (qui incluent les chiffres et le trait bas, de sorte que la partie précédant le « @ » dans une adresse de courriel telle que jour_123@example.email.org soit également une correspondance).</para>
+                      <para>Le mot « jour », ainsi que « Joure », « journée », « journalier », « jours » dans « toujours » ou « séjours », et tout autre mot ou suite de caractères contenant « jour » suivi de zéro ou plus « <emphasis>caractères de mot</emphasis> » (qui incluent les chiffres et le trait bas, de sorte que la partie précédant le « @ » dans une adresse de courriel telle que jour_123@exemple.email.org soit également une correspondance).</para>
                     </entry>
                   </row>
 
@@ -714,7 +714,7 @@
             <row>
               <entry><literal>\r</literal></entry>
               <entry>
-                <para>Le caractère retour de chariot, et non la lettre « r ».</para>
+                <para>Le caractère retour de charriot, et non la lettre « r ».</para>
                 <para>de même, <literal>\R</literal> est n’importe quel caractère de saut de ligne.</para>
 			  </entry>
             </row>
@@ -801,7 +801,7 @@
             <row>
               <entry><literal>[^\n\r\t]</literal></entry>
               <entry>
-                <para>Tout caractère <emphasis>sauf</emphasis> une nouvelle ligne, un retour chariot ou une tabulation.</para>
+                <para>Tout caractère <emphasis>sauf</emphasis> une nouvelle ligne, un retour charriot ou une tabulation.</para>
 
                 <para>Le caret placé immédiatement après le crochet ouvrant exclut le reste des caractères de la classe.</para>
               </entry>

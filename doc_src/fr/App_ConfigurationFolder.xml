@@ -55,7 +55,7 @@
 		<listitem>
 		  <para>Ce dossier contient un certain nombre de fichiers journaux. Le plus récent est <filename>OmegaT.log</filename>.</para>
 
-		  <para>Ces fichiers enregistrent divers messages d’état interne et d’événements de programme générés pendant qu’OmegaT est en cours d’exécution. Ajoutez ce fichier, ou la partie correspondante, à votre rapport si OmegaT se comporte de manière anormale.</para>
+		  <para>Ces fichiers enregistrent divers messages d’état interne et d’évènements de programme générés pendant qu’OmegaT est en cours d’exécution. Ajoutez ce fichier, ou la partie correspondante, à votre rapport si OmegaT se comporte de manière anormale.</para>
 
 		  <para>Pour afficher le contenu du fichier, utilisez <link linkend="menus.help" endterm="menus.help.title"/><link linkend="menus.help.log" endterm="menus.help.log.title"/>.</para>
 		</listitem>
@@ -151,8 +151,8 @@
 	<varlistentry id="configuration.folder.extra.contents.plugin">
 	  <term id="configuration.folder.extra.contents.plugin.title">plugins/</term>
 	  <listitem>
-		<para>Ce dossier fournit l’emplacement standard pour les plug-ins d’extension d’OmegaT installés manuellement. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
-		<para>Il est également possible d’installer des plug-ins dans le dossier de l’application <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>.</para>
+		<para>Ce dossier fournit l’emplacement standard pour les modules d’extension d’OmegaT installés manuellement. Voir le paramètre <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> pour en savoir plus.</para>
+		<para>Il est également possible d’installer des modules d'extension dans le dossier de l’application <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/>.</para>
 	  </listitem>
 	</varlistentry>
 

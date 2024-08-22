@@ -3,7 +3,7 @@
 <section id="how.to.setup.team.project">
   <title id="how.to.setup.team.project.title">Préparation d’un projet en équipe</title>
 
-  <para>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des logiciels de gestion de version : <emphasis>SVN</emphasis> ou <emphasis>Git</emphasis>.</para>
+  <para>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des <emphasis>logiciels de gestion de version</emphasis> : <emphasis>SVN</emphasis> ou <emphasis>Git</emphasis>.</para>
 
   <para>Étant donné que les informations sur ces sujets sont faciles à trouver, ce manuel se limite à décrire leur utilisation dans le contexte d’un projet en équipe OmegaT.</para>
 

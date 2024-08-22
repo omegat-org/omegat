@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Mises à jour\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Racine du projet","chapter.project.folder.html",[
-["Structure par défaut","chapter.project.folder.html#d0e10450",null],
-["Contenu minimal","chapter.project.folder.html#d0e10528",null],
+["Structure par défaut","chapter.project.folder.html#d0e10453",null],
+["Contenu minimal","chapter.project.folder.html#d0e10531",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -612,7 +612,7 @@ var toc_entries = [
 ["Expressions régulières","chapter.appendices.html#app.regex",null],
 ["Glossaires","chapter.appendices.html#app.glossaries",null],
 ["Caractères de formatage directionnel","chapter.appendices.html#app.bidi",null],
-["Commandes de post-traitement","chapter.appendices.html#post.processing.commands",null],
+["Commandes de posttraitement","chapter.appendices.html#post.processing.commands",null],
 ["Raccourcis OmegaT","chapter.appendices.html#app.shortcuts",null],
 ["Dossier de configuration","chapter.appendices.html#configuration.folder",null],
 ["Dossier Application","chapter.appendices.html#application.folder",null]
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-x13ug2sem9a2-1nivmc10k2ouc";
+var storageId = "12k3u5pm08z8k-1wxiiafaqwciw";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

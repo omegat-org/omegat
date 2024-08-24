@@ -1053,8 +1053,9 @@ public class RealProject implements IProject {
 
                         @Override
                         public void reload(File file) throws Exception {
-                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, null);
+                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(),
+                                    config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), file,
+                                    null);
                             projectTMX.replaceContent(newTMX);
                         }
 
@@ -1077,8 +1078,8 @@ public class RealProject implements IProject {
                 final List<GlossaryEntry> glossaryEntries;
                 if (glossaryFile.exists()) {
                     glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-                    logger.atDebug().setMessage("Read {0} glossaries from {1}").addArgument(glossaryEntries.size())
-                            .addArgument(glossaryFile).log();
+                    logger.atDebug().setMessage("Read {0} glossaries from {1}")
+                            .addArgument(glossaryEntries.size()).addArgument(glossaryFile).log();
                 } else {
                     glossaryEntries = Collections.emptyList();
                 }
@@ -1091,8 +1092,7 @@ public class RealProject implements IProject {
                                 if (file.exists()) {
                                     baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
                                     logger.atDebug().setMessage("read {0} entries from local glossary.txt")
-                                            .addArgument(baseGlossaryEntries.size())
-                                            .log();
+                                            .addArgument(baseGlossaryEntries.size()).log();
                                 } else {
                                     baseGlossaryEntries = new ArrayList<>();
                                 }
@@ -1102,10 +1102,8 @@ public class RealProject implements IProject {
                             public void parseHeadFile(File file) throws Exception {
                                 if (file.exists()) {
                                     headGlossaryEntries = GlossaryReaderTSV.read(file, true);
-                                    logger.atDebug()
-                                            .setMessage("read {0} entries from remote glossaries")
-                                            .addArgument(headGlossaryEntries.size())
-                                            .log();
+                                    logger.atDebug().setMessage("read {0} entries from remote glossaries")
+                                            .addArgument(headGlossaryEntries.size()).log();
                                 } else {
                                     headGlossaryEntries = new ArrayList<>();
                                 }
@@ -1131,7 +1129,8 @@ public class RealProject implements IProject {
 
                             @Override
                             public void reload(final File file) {
-                                logger.atDebug().setMessage("Reloading glossary file {0}").addArgument(file).log();
+                                logger.atDebug().setMessage("Reloading glossary file {0}").addArgument(file)
+                                        .log();
                                 notifyGlossaryManagerFileChanged(file);
                             }
 
@@ -1888,11 +1887,11 @@ public class RealProject implements IProject {
         }
 
         protected void addSegment(String id, short segmentIndex, String segmentSource,
-                                  List<ProtectedPart> protectedParts, String segmentTranslation,
-                                  boolean segmentTranslationFuzzy, String[] props, String prevSegment, String nextSegment,
-                                  String path) {
-            addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation, segmentTranslationFuzzy,
-                    props, prevSegment, nextSegment, path, false);
+                List<ProtectedPart> protectedParts, String segmentTranslation,
+                boolean segmentTranslationFuzzy, String[] props, String prevSegment, String nextSegment,
+                String path) {
+            addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation,
+                    segmentTranslationFuzzy, props, prevSegment, nextSegment, path, false);
         }
 
         protected void addSegment(String id, short segmentIndex, String segmentSource,

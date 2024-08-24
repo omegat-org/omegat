@@ -47,8 +47,8 @@ import org.omegat.util.StringUtil;
 /**
  * Process one entry on parse source file.
  *
- * This class caches segments for one file, then flushes they. It required to ability to link prev/next
- * segments.
+ * This class caches segments for one file, then flushes they. It required to
+ * ability to link prev/next segments.
  *
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -73,9 +73,9 @@ public abstract class ParseEntry implements IParseCallback {
          * Flush queue.
          */
         for (ParseEntryQueueItem item : parseQueue) {
-            addSegment(item.id, item.segmentIndex, item.segmentSource, item.protectedParts, item.segmentTranslation,
-                    item.segmentTranslationFuzzy, item.props, item.prevSegment, item.nextSegment, item.path,
-                    item.isFinal);
+            addSegment(item.id, item.segmentIndex, item.segmentSource, item.protectedParts,
+                    item.segmentTranslation, item.segmentTranslationFuzzy, item.props, item.prevSegment,
+                    item.nextSegment, item.path, item.isFinal);
         }
 
         /*
@@ -107,7 +107,8 @@ public abstract class ParseEntry implements IParseCallback {
     }
 
     /**
-     * This method is called by filters to add new entry in OmegaT after read it from source file.
+     * This method is called by filters to add new entry in OmegaT after read it
+     * from source file.
      *
      * @param id
      *            ID of entry, if format supports it
@@ -116,16 +117,21 @@ public abstract class ParseEntry implements IParseCallback {
      * @param translation
      *            translation of the source string, if format supports it
      * @param isFuzzy
-     *            flag for fuzzy translation. If a translation is fuzzy, it is not added to the projects TMX,
-     *            but it is added to the generated 'reference' TMX, a special TMX that is used as extra
+     *            flag for fuzzy translation. If a translation is fuzzy, it is
+     *            not added to the projects TMX, but it is added to the
+     *            generated 'reference' TMX, a special TMX that is used as extra
      *            reference during translation.
      * @param props
-     *            a staggered array of non-uniquely-identifying key=value properties (metadata) for the entry.
-     *            If property is org.omegat.core.data.SegmentProperties.REFERENCE, the entire segment is added only to
-     *            the generated 'reference' TMX, a special TMX that is used as extra reference during translation.
-     *            The segment is not added to the list of translatable segments.
-     *            Property can also be org.omegat.core.data.SegmentProperties.COMMENT, which shown in the comment panel.
-     *            Other properties are possible, but have no special meaning in OmegaT.
+     *            a staggered array of non-uniquely-identifying key=value
+     *            properties (metadata) for the entry. If property is
+     *            org.omegat.core.data.SegmentProperties.REFERENCE, the entire
+     *            segment is added only to the generated 'reference' TMX, a
+     *            special TMX that is used as extra reference during
+     *            translation. The segment is not added to the list of
+     *            translatable segments. Property can also be
+     *            org.omegat.core.data.SegmentProperties.COMMENT, which shown in
+     *            the comment panel. Other properties are possible, but have no
+     *            special meaning in OmegaT.
      * @param path
      *            path of entry in file
      * @param filter
@@ -134,8 +140,9 @@ public abstract class ParseEntry implements IParseCallback {
      *            protected parts
      */
     @Override
-    public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
-            String path, IFilter filter, List<ProtectedPart> protectedParts, boolean isFinal) {
+    public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
+            String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts,
+            boolean isFinal) {
         if (StringUtil.isEmpty(source)) {
             // empty string - not need to save
             return;
@@ -182,24 +189,28 @@ public abstract class ParseEntry implements IParseCallback {
                     String onesrc = segments.get(i);
                     List<ProtectedPart> segmentProtectedParts = ProtectedPart.extractFor(protectedParts,
                             onesrc);
-                    internalAddSegment(id, i, onesrc, null, false, props, path, segmentProtectedParts, isFinal);
+                    internalAddSegment(id, i, onesrc, null, false, props, path, segmentProtectedParts,
+                            isFinal);
                 }
             }
         } else {
-            internalAddSegment(id, (short) 0, source, translation, isFuzzy, props, path, protectedParts, isFinal);
+            internalAddSegment(id, (short) 0, source, translation, isFuzzy, props, path, protectedParts,
+                    isFinal);
         }
     }
 
     @Override
-    public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
-                                       String path, IFilter filter, List<ProtectedPart> protectedParts) {
+    public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
+            String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
         addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts, false);
     }
 
     /**
-     * This method is called by filters to add new entry in OmegaT after read it from source file.
+     * This method is called by filters to add new entry in OmegaT after read it
+     * from source file.
      * <p>
-     * Old call for filters that only support extracting a "comment" property. Kept for compatibility.
+     * Old call for filters that only support extracting a "comment" property.
+     * Kept for compatibility.
      */
     @Override
     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
@@ -209,9 +220,11 @@ public abstract class ParseEntry implements IParseCallback {
     }
 
     /**
-     * This method is called by filters to add new entry in OmegaT after read it from source file.
+     * This method is called by filters to add new entry in OmegaT after read it
+     * from source file.
      * <p>
-     * Old call without path, for compatibility. Comment is converted to a property.
+     * Old call without path, for compatibility. Comment is converted to a
+     * property.
      *
      * @param id
      *            ID of entry, if format supports it
@@ -220,8 +233,9 @@ public abstract class ParseEntry implements IParseCallback {
      * @param translation
      *            translation of the source string, if format supports it
      * @param isFuzzy
-     *            flag for fuzzy translation. If a translation is fuzzy, it is not added to the projects TMX,
-     *            but it is added to the generated 'reference' TMX, a special TMX that is used as extra
+     *            flag for fuzzy translation. If a translation is fuzzy, it is
+     *            not added to the projects TMX, but it is added to the
+     *            generated 'reference' TMX, a special TMX that is used as extra
      *            reference during translation.
      * @param comment
      *            entry's comment, if format supports it
@@ -237,9 +251,9 @@ public abstract class ParseEntry implements IParseCallback {
     /**
      * Add segment to queue because we possible need to link prev/next segments.
      */
-    private void internalAddSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
-            boolean segmentTranslationFuzzy, String[] props, String path, List<ProtectedPart> protectedParts,
-                                    boolean isFinal) {
+    private void internalAddSegment(String id, short segmentIndex, String segmentSource,
+            String segmentTranslation, boolean segmentTranslationFuzzy, String[] props, String path,
+            List<ProtectedPart> protectedParts, boolean isFinal) {
         if (segmentSource.trim().isEmpty()) {
             // skip empty segments
             return;
@@ -283,14 +297,13 @@ public abstract class ParseEntry implements IParseCallback {
      * @param path
      *            path of segment
      * @param isFinal
-     *           (since 6.1.0) translation is final state.
+     *            (since 6.1.0) translation is final state.
      */
     protected void addSegment(String id, short segmentIndex, String segmentSource,
-                              List<ProtectedPart> protectedParts, String segmentTranslation, boolean segmentTranslationFuzzy,
-                              String[] props, String prevSegment, String nextSegment, String path,
-                              boolean isFinal) {
-        addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation, segmentTranslationFuzzy,
-                props, prevSegment, nextSegment, path);
+            List<ProtectedPart> protectedParts, String segmentTranslation, boolean segmentTranslationFuzzy,
+            String[] props, String prevSegment, String nextSegment, String path, boolean isFinal) {
+        addSegment(id, segmentIndex, segmentSource, protectedParts, segmentTranslation,
+                segmentTranslationFuzzy, props, prevSegment, nextSegment, path);
     }
 
     /**

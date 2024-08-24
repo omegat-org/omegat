@@ -113,6 +113,48 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         translateText(filter, f, options);
     }
 
+    /**
+     * Test Unicode case.
+     * @throws Exception when error occurred.
+     */
+    @Test
+    public void testNonEscapeUnicode() throws Exception {
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeUTF8.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        context.setOutEncoding("UTF-8");
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("\u30E6\u30CB\u30B3\u30FC\u30C9", "Unicode", null, null, null, "#");
+        checkMultiEnd();
+
+        translateText(filter, f);
+    }
+
+    /**
+     * Test Unicode case, when the filter configured not to force escape
+     * and output encoding context is US-ASCII.
+     * Check loaded Unicode literals are in code points out of ASCII,
+     * then check the output file is escaped.
+     * @throws Exception when error occurred.
+     */
+    @Test
+    public void testEscapeUnicodeWhenASCII() throws Exception {
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeEscaped.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        context.setOutEncoding("US-ASCII");
+        Map<String, String> options = new HashMap<>();
+        options.put(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS, "false");
+        options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, "false");
+        IProject.FileInfo fi = loadSourceFiles(filter, f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("\u30E6\u30CB\u30B3\u30FC\u30C9", "Unicode", null, null, null, "#");
+        checkMultiEnd();
+
+        translateText(filter, f, options);
+    }
+
     @Test
     public void testBadUnicodeLiterals() throws Exception {
         String base = "test/data/filters/resourceBundle/";

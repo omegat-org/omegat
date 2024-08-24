@@ -117,10 +117,9 @@ public final class EditorPopups {
             // Use the project's target tokenizer to determine the word that was
             // right-clicked.
             // EditorUtils.getWordEnd() and getWordStart() use Java's built-in
-            // BreakIterator
-            // under the hood, which leads to inconsistent results when compared
-            // to other spell-
-            // checking functionality in OmegaT.
+            // BreakIterator under the hood, which leads to inconsistent 
+            // results when compared to other spell-checking functionality
+            // in OmegaT.
             String translation = ec.getCurrentTranslation();
             Token tok = null;
             int relOffset = ec.getPositionInEntryTranslation(mousepos);

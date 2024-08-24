@@ -15,7 +15,7 @@
 	<section id="introduction.omegat.principles.translation.project">
       <title id="introduction.omegat.principles.translation.project.title">Projet de traduction</title>
 
-      <para>Un projet de traduction OmegaT est constitué de plusieurs ressources stockées dans différents dossiers, ainsi que de deux fichiers : un fichier <link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link> qui indique où se trouvent toutes les ressources, et un fichier de mémoire de traduction <link linkend="project.folder.project.save.tmx"><filename>project_save.tmx</filename></link> qui contient toutes les traductions effectuées pendant le travail sur ce projet.</para>
+      <para>Un projet de traduction OmegaT est constitué de plusieurs ressources stockées dans différents dossiers, du fichier <link linkend="project.folder.omegat.project.file"><filename>omegat.project</filename></link> qui indique où se trouvent toutes ces ressources et du fichier de mémoire de traduction <link linkend="project.folder.project.save.tmx"><filename>project_save.tmx</filename></link> qui contient toutes les traductions effectuées pendant le travail sur ce projet.</para>
 
       <para>Les traductaires peuvent facilement modifier le contenu ou l’emplacement de ces ressources à n’importe quel moment pendant la traduction.</para>
 
@@ -391,7 +391,7 @@
     </example>
 
 	<note>
-	  <para>Les différents paramètres liés aux balises peuvent être très utiles pour gérer correctement les balises dans un document. Pour en savoir plus, consultez les options et les scripts suivants :</para>
+	  <para>Les différents paramètres liés aux balises peuvent être très utiles pour gérer correctement les balises dans un document. Consulter les options et les scripts suivants  pour en savoir plus :</para>
 	  <itemizedlist>
 		<listitem>
 		  <para><link linkend="dialogs.project.properties.hide.tags" endterm="dialogs.project.properties.hide.tags.title"/></para>
@@ -491,7 +491,7 @@
 
       <para>Quelques segments plus tard, vous tombez sur un terme que vous devriez ajouter au glossaire. Au lieu de prendre la souris, vous déverrouillez le curseur avec <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link>, en utilisant les touches du curseur et les raccourcis standards du système pour naviguer jusqu’au terme et le sélectionner. Puis appuyez sur <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo> pour afficher <link linkend="menus.edit.create.glossary.entry">la boite de dialogue de saisie du glossaire</link> et y insérer le terme source. Ensuite, vous retournez à l’éditeur, vous verrouillez à nouveau le curseur avec <link linkend="panes.editor.cursor.lock"><keycap>F2</keycap></link> et vous répétez le même processus pour saisir le terme cible.</para>
 
-	  <para>Vous avez activé la <link linkend="dialog.preferences.auto.completion">saisie automatique</link> pour afficher automatiquement non seulement les prédictions de l’historique, mais aussi les termes du glossaire et les chaines de caractères courtes prédéfinies, qui peuvent être saisies à l’aide d’une simple flèche de navigation.</para>
+	  <para>Vous avez activé la <link linkend="dialog.preferences.auto.completion">saisie automatique</link> pour afficher automatiquement non seulement les prédictions à partir de l’historique, mais aussi les termes du glossaire et les chaines de caractères courtes prédéfinies, qui peuvent être saisies à l’aide d’une simple flèche de navigation.</para>
 		
       <para>Vous arrivez ensuite à une partie révisée du texte où le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> affiche un certain nombre de segments similaires tirés du travail précédent.</para>
 

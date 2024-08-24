@@ -38,10 +38,10 @@ import org.omegat.core.data.ProtectedPart;
  */
 public interface IParseCallback {
     /**
-     * Read entry from source file, with arbitrary (optional) properties
+     * Read entry from a source file, with arbitrary (optional) properties
      *
      * @param id
-     *            ID in source file, or null if ID not supported by format
+     *            ID in a source file, or null if ID not supported by format
      * @param source
      *            source entry text
      * @param translation
@@ -55,24 +55,46 @@ public interface IParseCallback {
      * @param filter
      *            filter which produces entry
      * @param protectedParts
-     *            (since 3.0.6) protected parts
+     *            protected parts
      */
     void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy, String[] props,
             String path, IFilter filter, List<ProtectedPart> protectedParts);
 
     /**
-     * Read entry from source file, with single "comment" property. Convenience
-     * method for
+     * Read entry from a source file, with single "comment" property.
+     * Convenience method for
      * {@link #addEntryWithProperties(String, String, String, boolean, String[], String, IFilter, List)}.
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
             IFilter filter, List<ProtectedPart> protectedParts);
 
     /**
-     * Old call without path, for compatibility with OmegaT &lt; 2.5.0
+     * This method is called by filters to add new entry in OmegaT after read it
+     * from a source file.
+     * <p>
+     * Old call without a path, for compatibility. Comment is converted to a
+     * property.
+     *
+     * @param id
+     *            ID of entry, if a format supports it
+     * @param source
+     *            Translatable source string
+     * @param translation
+     *            translation of the source string, if a format supports it
+     * @param isFuzzy
+     *            flag for fuzzy translation. If a translation is fuzzy, it is
+     *            not added to the projects TMX, but it is added to the
+     *            generated 'reference' TMX, a special TMX that is used as extra
+     *            reference during translation.
+     * @param comment
+     *            entry's comment, if format supports it
+     * @param filter
+     *            filter which produces entry
      */
-    void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-            IFilter filter);
+    default void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+            IFilter filter) {
+        addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
+    }
 
     /**
      * This method can be called from any filter on the end of file processing.

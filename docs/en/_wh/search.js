@@ -1325,7 +1325,7 @@ wh.search_titleList = [
  "Panes",
  "Project Folder",
  "Windows and Dialogs",
- "OmegaT 6.0.0 - User Manual"
+ "OmegaT 6.0.1 - User Manual"
 ];
 wh.search_wordMap= {
 "cancel": [0,4,7],

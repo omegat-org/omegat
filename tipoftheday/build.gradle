@@ -18,16 +18,22 @@ sourceSets {
 
 dependencies {
     compileOnly(project.rootProject)
-    if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/jackson*.jar'])
-        implementation fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar'])
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-lang3-*.jar', '**/jackson*.jar',
+                                                                  '**/icu4j-*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar'])
     } else {
         // runtime dependencies should be in main project
-        implementation(libs.tipoftheday)
+        implementation(libs.tipoftheday) {
+            exclude module: 'commons-lang3'
+            exclude module: 'commons-io'
+        }
+        compileOnly(libs.commons.lang3)
         constraints {
             implementation(libs.icj4j)
         }
-        implementation(libs.jackson.yaml)
+        // jackson-databind-yaml is dependency of languagetool-core
+        compileOnly(libs.jackson.yaml)
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)

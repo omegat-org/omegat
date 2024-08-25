@@ -37,17 +37,64 @@ plugins.forEach { args ->
     def pluginClass = "org.omegat.languages.${name}.${lang}Plugin"
     sourceSets.create(name)
     dependencies.add("${name}CompileOnly", project.rootProject)
-    dependencies.add("${name}CompileOnly", libs.languagetool.core)
-    if (name.equals("ja")) {
-        dependencies.jaImplementation(libs.languagetool.ja) {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-            exclude module: 'languagetool-core'
+    dependencies.add("${name}CompileOnly", libs.languagetool.core) {
+        exclude module: "hunspell"
+    }
+    // when build from sourceZip
+    if (providedModuleLibsDir.directory) {
+        dependencies.add("${name}Implementation", fileTree(dir: providedModuleLibsDir,
+                include: "**/language-${name}-*.jar"))
+        if (name.equals("ja")) {
+            dependencies.jaImplementation(fileTree(dir: providedModuleLibsDir,
+                    includes: ['**/lucene-gosen-*.jar', '**/icu4j-*.jar']))
+        } else if (name.equals("en")) {
+            dependencies.add("enRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    includes: ['**/opennlp-*.jar']))
+        } else if (name.equals("ca")) {
+            dependencies.add("caRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/catalan-pos-dict-*.jar'))
+        } else if (name.equals("de")) {
+            dependencies.add("deRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    includes: ['**/commons-lang3-*.jar', '**/jwordsplitter-*.jar', '**/german-*.jar', '**/openregex-*.jar']))
+        } else if (name.equals("el")) {
+            dependencies.add("elRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/morphology-el-*.jar'))
+        } else if (name.equals("es")) {
+            dependencies.add("esRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/spanish-pos-dict-*.jar'))
+        } else if (name.equals("fr")) {
+            dependencies.add("frRuntimeOnly", fileTree(dir: providedModuleLibsDir, include: '**/french-*.jar'))
+        } else if (name.equals("ga")) {
+            dependencies.add("gaRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/languagetool-ga-dicts-*.jar'))
+        } else if (name.equals('pt')) {
+            dependencies.add("ptRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/portuguese-pos-dict-*.jar'))
+        } else if (name.equals("ru")) {
+            dependencies.add("ruRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/openregex-*.jar'))
+        } else if (name.equals("uk")) {
+            dependencies.add("ukRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/morfologik-ukrainian-*.jar'))
+        } else if (name.equals("zh")) {
+            dependencies.add("zhRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/hanlp-portable-*.jar'))
         }
-        dependencies.jaImplementation(dependencies.variantOf(libs.lucene.gosen){ classifier("ipadic") })
     } else {
-        dependencies.add("${name}Implementation", libs.languagetool.getAt(name)) {
-            exclude module: 'languagetool-core'
+        // build from project git repository
+        if (name.equals("ja")) {
+            dependencies.jaImplementation(libs.languagetool.ja) {
+                // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+                exclude module: 'lucene-gosen'
+                exclude module: 'languagetool-core'
+                exclude module: 'icu4j'
+            }
+            dependencies.jaImplementation(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+            dependencies.jaImplementation(libs.icj4j)
+        } else {
+            dependencies.add("${name}Implementation", libs.languagetool.getAt(name)) {
+                exclude module: 'languagetool-core'
+            }
         }
     }
     configurations.getByName("${name}RuntimeClasspath").exclude(module: 'languagetool-core')

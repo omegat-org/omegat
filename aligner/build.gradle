@@ -4,13 +4,18 @@ plugins {
 
 dependencies {
     compileOnly(project.rootProject)
-    if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
-                                                              '**/maligna-*.jar', '**/supertmxmerge-*.jar',
-                                                              '**/slf4j*'])
+    if (providedModuleLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
+            '**/slf4j*.jar', '**/supertmxmerge-*.jar', '**/jaxb-api*.jar'])
+        compileOnly fileTree(dir: providedModuleLibsDir, includes: ['**/maligna-*.jar'])
     } else {
         // Aligner
-        implementation(libs.loomchild.maligna)
+        implementation(libs.loomchild.maligna) {
+            exclude module: 'jaxb-api'
+            exclude module: 'jaxb-core'
+            exclude module: 'jaxb-runtime'
+        }
+        compileOnly(libs.jaxb.api)
         compileOnly(libs.madlonkay.supertmxmerge)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.commons.io)

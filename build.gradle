@@ -49,7 +49,8 @@ ext {
             }
         }
     }
-    providedLibsDir = file('lib/provided')
+    providedCoreLibsDir = file('lib/provided/core')
+    providedModuleLibsDir = file('lib/provided/module')
 }
 def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
 def omtWebsite = 'https://omegat.org'
@@ -223,14 +224,16 @@ configurations {
     genMac
 }
 
-ext {
-    providedLibsDir = file('lib/provided')
-}
 
 dependencies {
     // Libs are provided in the "source" distribution only
-    if (providedLibsDir.directory) {
-        implementation fileTree(dir: providedLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-1.*.jar'])
+    if (providedCoreLibsDir.directory) {
+        api fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-api-*.jar', '**/jaxb-api-*.jar'])
+        implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-*.jar',
+            '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/hunspell-*.jar',
+                '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
+        runtimeOnly fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-jdk14-*.jar',
+            '**/language-detector-*.jar', '**/hunspell-*.jar', '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -239,12 +242,17 @@ dependencies {
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
 
+        // jaxb gen compilation
+        implementation(libs.jaxb.api)
+        runtimeOnly(libs.jaxb.core)
+        runtimeOnly(libs.jaxb.runtime)
+
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
 
         // stax
         implementation(libs.stax2.api)
-        runtimeOnly(libs.woodstox.core)
+        implementation(libs.woodstox.core)
 
         // Data: inline data URL handler
         implementation(libs.url.protocol.handler)
@@ -269,15 +277,10 @@ dependencies {
             exclude module: 'guava'
             exclude module: 'language-detector'
             exclude group: 'com.google.android'
+            exclude module: 'hunspell'
         }
-        implementation(libs.language.detector)
-
-        runtimeOnly(libs.languagetool.all) {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-            exclude module: 'language-detector'
-        }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
+        runtimeOnly(libs.language.detector)
+        runtimeOnly(libs.dumont.hunspell)
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
@@ -732,18 +735,21 @@ distributions {
         contents {
             from(rootDir) {
                 include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
-                    'src/**/*.java', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                    'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
-                    '.checkstyle'
+                        'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
+                        'docs_devel/**', 'scripts/**',
+                        'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
+                        'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
+                        'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', '.checkstyle'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
             }
             from(processResources) {
                 into('src')
             }
-            into('lib/provided') {
-                // collect project runtime dependencies in all subprojects and sourceSets
+            into('lib/provided/core') {
                 from configurations.runtimeClasspath
+            }
+            into('lib/provided/module') {
+                // collect project runtime dependencies in all subprojects and sourceSets
                 from {subprojects.findAll { it.getSubprojects().isEmpty()}
                         .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
                                 && !it.name.startsWith('test') && !it.name.startsWith('jaxb')

@@ -725,10 +725,11 @@ distributions {
         contents {
             from(rootDir) {
                 include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
-                    'src/**/*.java', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                    'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
-                    '.checkstyle'
+                        'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
+                        'docs_devel/**', 'scripts/**',
+                        'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
+                        'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
+                        'aligner/**', 'language-modules/**', 'spellchecker/**', '.checkstyle'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
             }
             from(processResources) {

@@ -5,11 +5,13 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/languagetool-core-*.jar',
-                                                                  '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/languagetool-core-*.jar',
+                                       '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar', '**/morfologik-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/morfologik-*.jar'])
     } else {
-        implementation(libs.bundles.morfologik)
+        // morfologik stemming and speller are dependency of languagetool-core
+        compileOnly(libs.morfologik.stemming)
+        compileOnly(libs.morfologik.speller)
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.slf4j.format.jdk14)
@@ -20,6 +22,7 @@ dependencies {
             exclude module: 'hunspell'
             exclude group: 'com.google.android'
             exclude group: 'org.jetbrains'
+            exclude module: 'morfologik-fsa'
         }
     }
     testImplementation(libs.junit4)

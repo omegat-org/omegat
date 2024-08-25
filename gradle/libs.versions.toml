@@ -167,7 +167,7 @@ jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
 flatlaf = {group = "com.formdev", name = "flatlaf", version.ref = "flatlaf"}
 language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
 assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", version.ref = "assertj_swing_junit"}
-morfologik = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
+morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
 morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
 
 [bundles]
@@ -182,7 +182,6 @@ lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji",
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
-morfologik = ['morfologik', 'morfologik-speller']
 
 [plugins]
 spotbugs = {id = "com.github.spotbugs", version = "6.0.19"}

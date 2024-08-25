@@ -739,7 +739,7 @@ distributions {
                         'docs_devel/**', 'scripts/**',
                         'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
                         'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
-                        'aligner/**', 'language-modules/**', 'spellchecker/**', '.checkstyle'
+                        'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', '.checkstyle'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
             }
             from(processResources) {

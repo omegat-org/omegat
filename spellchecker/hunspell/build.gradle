@@ -16,6 +16,8 @@ dependencies {
         implementation(libs.dumont.hunspell)
         compileOnly(libs.languagetool.core) {
             exclude module: 'guava'
+            exclude module: 'language-detector'
+            exclude group: 'com.google.android'
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
@@ -25,6 +27,7 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
     testRuntimeOnly(libs.languagetool.en)
+    testRuntimeOnly(libs.languagetool.de)
 }
 
 jar {

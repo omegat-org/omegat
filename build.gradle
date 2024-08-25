@@ -272,13 +272,6 @@ dependencies {
         }
         implementation(libs.language.detector)
 
-        runtimeOnly(libs.languagetool.all) {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-            exclude module: 'language-detector'
-        }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
-
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
 

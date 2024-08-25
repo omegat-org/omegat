@@ -5,9 +5,8 @@ plugins {
 dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar',
-                                                              '**/lib-mnemonics-*.jar',
-                                                              '**/slf4j-format-jdk14-*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/languagetool-core-*.jar',
+                                                                  '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar'])
         implementation fileTree(dir: providedModuleLibsDir, includes: ['**/morfologik-*.jar'])
     } else {
         implementation(libs.bundles.morfologik)

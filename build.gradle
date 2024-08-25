@@ -228,7 +228,12 @@ configurations {
 dependencies {
     // Libs are provided in the "source" distribution only
     if (providedCoreLibsDir.directory) {
-        implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-1.*.jar'])
+        api fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-api-*.jar', '**/jaxb-api-*.jar'])
+        implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-*.jar',
+            '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/hunspell-*.jar',
+                '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
+        runtimeOnly fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-jdk14-*.jar',
+            '**/language-detector-*.jar', '**/hunspell-*.jar', '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -237,12 +242,17 @@ dependencies {
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
 
+        // jaxb gen compilation
+        implementation(libs.jaxb.api)
+        runtimeOnly(libs.jaxb.core)
+        runtimeOnly(libs.jaxb.runtime)
+
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
 
         // stax
         implementation(libs.stax2.api)
-        runtimeOnly(libs.woodstox.core)
+        implementation(libs.woodstox.core)
 
         // Data: inline data URL handler
         implementation(libs.url.protocol.handler)
@@ -267,8 +277,10 @@ dependencies {
             exclude module: 'guava'
             exclude module: 'language-detector'
             exclude group: 'com.google.android'
+            exclude module: 'hunspell'
         }
-        implementation(libs.language.detector)
+        runtimeOnly(libs.language.detector)
+        runtimeOnly(libs.dumont.hunspell)
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)

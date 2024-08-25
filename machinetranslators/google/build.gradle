@@ -8,8 +8,9 @@ plugins {
 
 dependencies {
     compileOnly(project.rootProject)
-    if (providedModuleLibsDir.directory) {
-        compileOnly fileTree(dir: providedModuleLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar', '**/jackson*.jar'])
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/*commons-*.jar', '**/slf4j*.jar',
+                                                                  '**/jackson*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.commons.text)

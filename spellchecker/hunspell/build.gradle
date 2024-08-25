@@ -4,11 +4,11 @@ plugins {
 
 dependencies {
     compileOnly(project.rootProject)
-    if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-io-*.jar',
+    if (providedModuleLibsDir.directory) {
+        compileOnly fileTree(dir: providedModuleLibsDir, includes: ['**/commons-io-*.jar',
                                                               '**/lib-mnemonics-*.jar',
                                                               '**/slf4j-format-jdk14-*.jar'])
-        implementation fileTree(dir: providedLibsDir, includes: ['**/hunspell-*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/hunspell-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)

@@ -49,7 +49,8 @@ ext {
             }
         }
     }
-    providedLibsDir = file('lib/provided')
+    providedCoreLibsDir = file('lib/provided/core')
+    providedModuleLibsDir = file('lib/provided/module')
 }
 def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
 def omtWebsite = 'https://omegat.org'
@@ -223,14 +224,11 @@ configurations {
     genMac
 }
 
-ext {
-    providedLibsDir = file('lib/provided')
-}
 
 dependencies {
     // Libs are provided in the "source" distribution only
-    if (providedLibsDir.directory) {
-        implementation fileTree(dir: providedLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-1.*.jar'])
+    if (providedCoreLibsDir.directory) {
+        implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-1.*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -735,9 +733,11 @@ distributions {
             from(processResources) {
                 into('src')
             }
-            into('lib/provided') {
-                // collect project runtime dependencies in all subprojects and sourceSets
+            into('lib/provided/core') {
                 from configurations.runtimeClasspath
+            }
+            into('lib/provided/module') {
+                // collect project runtime dependencies in all subprojects and sourceSets
                 from {subprojects.findAll { it.getSubprojects().isEmpty()}
                         .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
                                 && !it.name.startsWith('test') && !it.name.startsWith('jaxb')

@@ -18,9 +18,9 @@ sourceSets {
 
 dependencies {
     compileOnly(project.rootProject)
-    if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/jackson*.jar'])
-        implementation fileTree(dir: providedLibsDir, includes: ['**/tipoftheday-*.jar'])
+    if (providedModuleLibsDir.directory) {
+        compileOnly fileTree(dir: providedModuleLibsDir, includes: ['**/jackson*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar', '**/icu4j-72*.jar'])
     } else {
         // runtime dependencies should be in main project
         implementation(libs.tipoftheday)

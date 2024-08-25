@@ -43,8 +43,10 @@ plugins.forEach { args ->
             // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
             exclude module: 'lucene-gosen'
             exclude module: 'languagetool-core'
+            exclude module: 'icu4j'
         }
         dependencies.jaImplementation(dependencies.variantOf(libs.lucene.gosen){ classifier("ipadic") })
+        dependencies.jaImplementation(libs.icj4j)
     } else {
         dependencies.add("${name}Implementation", libs.languagetool.getAt(name)) {
             exclude module: 'languagetool-core'

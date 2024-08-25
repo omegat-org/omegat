@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
     compileOnly(project.rootProject)
-    if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
+    if (providedModuleLibsDir.directory) {
+        compileOnly fileTree(dir: providedModuleLibsDir, includes: ['**/commons-*.jar', '**/lib-mnemonics*.jar',
                                                               '**/maligna-*.jar', '**/supertmxmerge-*.jar',
                                                               '**/slf4j*'])
     } else {

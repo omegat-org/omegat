@@ -9,7 +9,7 @@
                2013-2014 Enrique Estevez, Didier Briel
                2015 Aaron Madlon-Kay, Enrique Estevez
                2016 Aaron Madlon-Kay
-               2023 Hiroshi Miura
+               2023-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -99,9 +99,6 @@ public class ResourceBundleFilter extends AbstractFilter {
     public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.UTF_8.name();
 
     protected Map<String, String> align;
-
-    private String targetEncoding = DEFAULT_TARGET_ENCODING;
-    private Boolean forceTargetEscape = true;
 
     /**
      * If true, will not convert characters into \\uXXXX notation
@@ -248,8 +245,8 @@ public class ResourceBundleFilter extends AbstractFilter {
      *            Is the string part of a key, a value or a comment?
      * @return The ascii string
      */
-    private String toAscii(String text, EscapeMode mode) {
-        CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
+    private String toAscii(String text, EscapeMode mode, CharsetEncoder charsetEncoder,
+            boolean forceTargetEscape) {
 
         StringBuilder result = new StringBuilder();
 
@@ -282,7 +279,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                 char[] chars = Character.toChars(cp); // optimized for speed
                 for (int j = 0, charsLength = chars.length; j < charsLength; j++) {
                     String code = Integer.toString(chars[j], 16).toUpperCase();
-                    result.append("\\u").append("0".repeat(Math.max(0, 4 - code.codePointCount(0, code.length()))))
+                    result.append("\\u")
+                            .append("0".repeat(Math.max(0, 4 - code.codePointCount(0, code.length()))))
                             .append(code);
                 }
             }
@@ -359,10 +357,10 @@ public class ResourceBundleFilter extends AbstractFilter {
         dontUnescapeULiterals = processOptions != null
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
 
-        if (processOptions != null) {
-            forceTargetEscape = "true"
-                    .equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
-        }
+        // BUGS#1264
+        boolean forceTargetEscape = processOptions != null
+                && "true".equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
+        CharsetEncoder charsetEncoder = Charset.forName(getOutputEncoding(fc)).newEncoder();
 
         boolean dontTranslateComment = processOptions != null
                 && !"false".equalsIgnoreCase(processOptions.get(OPTION_DONT_TRANSLATE_COMMENT));
@@ -398,7 +396,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                 // skipping comments
                 int firstCp = trimmed.codePointAt(0);
                 if (firstCp == '#' || firstCp == '!') {
-                    outfile.write(toAscii(raw, EscapeMode.COMMENT));
+                    outfile.write(toAscii(raw, EscapeMode.COMMENT, charsetEncoder, forceTargetEscape));
                     outfile.write(lbpr.getLinebreak());
                     // Save the comments
                     comments = (comments == null ? processed : comments + "\n" + processed);
@@ -456,9 +454,9 @@ public class ResourceBundleFilter extends AbstractFilter {
 
                     if (noi18n && dontTranslateComment) {
                         // if we don't need to internationalize
-                        outfile.write(toAscii(key, EscapeMode.KEY));
+                        outfile.write(toAscii(key, EscapeMode.KEY, charsetEncoder, forceTargetEscape));
                         outfile.write(equals);
-                        outfile.write(toAscii(value, EscapeMode.VALUE));
+                        outfile.write(toAscii(value, EscapeMode.VALUE, charsetEncoder, forceTargetEscape));
                         outfile.write(lbpr.getLinebreak());
                         noi18n = false;
                     } else {
@@ -474,14 +472,14 @@ public class ResourceBundleFilter extends AbstractFilter {
                             trans = value;
                         }
                         trans = trans.replaceAll("\\n\\s\\n", "\n\n");
-                        trans = toAscii(trans, EscapeMode.VALUE);
+                        trans = toAscii(trans, EscapeMode.VALUE, charsetEncoder, forceTargetEscape);
                         if (!trans.isEmpty() && trans.codePointAt(0) == ' ') {
                             trans = '\\' + trans;
                         }
                         // Non-translated segments are written based on the
                         // filter options
                         if (translatedSegment || !removeStringsUntranslated) {
-                            outfile.write(toAscii(key, EscapeMode.KEY));
+                            outfile.write(toAscii(key, EscapeMode.KEY, charsetEncoder, forceTargetEscape));
                             outfile.write(equals);
                             outfile.write(trans);
                             outfile.write(lbpr.getLinebreak()); // fix for bug

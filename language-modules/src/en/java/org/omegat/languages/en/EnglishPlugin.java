@@ -35,7 +35,7 @@ public final class EnglishPlugin {
     private static final String AMERICAN_ENGLISH = "org.languagetool.language.AmericanEnglish";
     private static final String BRITISH_ENGLISH = "org.languagetool.language.BritishEnglish";
     private static final String CANADIAN_ENGLISH = "org.languagetool.language.CanadianEnglish";
-    private static final String AUSTRALIAN_ENGLISH = "org.languagetool.language.AUSTRARLANEnglish";
+    private static final String AUSTRALIAN_ENGLISH = "org.languagetool.language.AustralianEnglish";
 
     private EnglishPlugin() {
     }

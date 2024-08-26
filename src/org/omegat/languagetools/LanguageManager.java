@@ -51,7 +51,7 @@ public final class LanguageManager {
      *     It loads a specified language-country.
      *     It also loads a variant of countries, such as "en-US" for "en-AU".
      *     And also it loads language code module such as "en".
-     *     It is because sone language definition depends on another language,
+     *     It is because some language definition depends on another language,
      *     for example, en-AU depends on en-US.
      *     When loading only en-AU language module class, it failed to load
      *     with an error, not-found "en-US".
@@ -59,7 +59,7 @@ public final class LanguageManager {
      * @param lang OmegaT language code.
      * @return LanguageTool's Language object.
      */
-    static Language getLTLanguage(org.omegat.util.Language lang) {
+    public static Language getLTLanguage(org.omegat.util.Language lang) {
         Language result = null;
         if (lang == null) {
             return null;

@@ -44,18 +44,39 @@ public final class LanguageManager {
         LT_LANGUAGE_CLASSES.put(lang, fqcn);
     }
 
-    static Language getLTLanguage(org.omegat.util.Language lang) {
+    /**
+     * Get LanguageTool language.
+     * <p>
+     *     This code made side effect to load LT modules eventually.
+     *     It loads a specified language-country.
+     *     It also loads a variant of countries, such as "en-US" for "en-AU".
+     *     And also it loads language code module such as "en".
+     *     It is because some language definition depends on another language,
+     *     for example, en-AU depends on en-US.
+     *     When loading only en-AU language module class, it failed to load
+     *     with an error, not-found "en-US".
+     * </p>
+     * @param lang OmegaT language code.
+     * @return LanguageTool's Language object.
+     */
+    public static Language getLTLanguage(org.omegat.util.Language lang) {
+        Language result = null;
         if (lang == null) {
             return null;
         }
+        // search for language-country code.
         String fqcn = LT_LANGUAGE_CLASSES.get(lang.getLanguage());
         if (fqcn != null) {
-            return Languages.getOrAddLanguageByClassName(fqcn);
+            result = Languages.getOrAddLanguageByClassName(fqcn);
         }
         // Search for language code
         fqcn = LT_LANGUAGE_CLASSES.get(lang.getLanguageCode());
         if (fqcn != null) {
-            return Languages.getOrAddLanguageByClassName(fqcn);
+            // when exists, load it.
+            Language language = Languages.getOrAddLanguageByClassName(fqcn);
+            if (result == null) {
+                result = language;
+            }
         }
         // Search for just language code match but allow country difference
         String languageCode;
@@ -66,10 +87,14 @@ public final class LanguageManager {
                 languageCode = entry.getKey();
             }
             if (languageCode.equals(lang.getLanguageCode())) {
-                return Languages.getOrAddLanguageByClassName(entry.getValue());
+                // when exists, load it.
+                Language language = Languages.getOrAddLanguageByClassName(entry.getValue());
+                if (result == null) {
+                    result = language;
+                }
             }
         }
-        return null;
+        return result;
     }
 
     static Language getLTLanguage() {

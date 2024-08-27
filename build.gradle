@@ -353,16 +353,9 @@ dependencies {
 
     testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
-    // LanguageTool unit tests exercise these languages
-    testImplementation(libs.bundles.languagetool.tests) {
-        exclude group: 'org.slf4j'
-        exclude module: 'guava'
-        exclude module: 'language-detector'
-        exclude group: 'ch.qos.logback'
-        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-        exclude module: 'lucene-gosen'
-    }
-    testImplementation(variantOf(libs.lucene.gosen){ classifier("ipadic") })
+
+    testImplementation(project(":language-modules"))
+    testImplementation(libs.languagetool.server)
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only

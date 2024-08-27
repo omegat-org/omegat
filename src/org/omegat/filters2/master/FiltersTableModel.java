@@ -51,7 +51,7 @@ public class FiltersTableModel extends AbstractTableModel {
 
     public FiltersTableModel(final Filters config) {
         // add only exist filters
-        for (Filter f : config.getFilters()) {
+        for (Filter f : config.getFilter()) {
             IFilter fi = FilterMaster.getFilterInstance(f.getClassName());
             if (fi != null) {
                 // filter exist

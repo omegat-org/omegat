@@ -1,17 +1,18 @@
-<jxb:bindings xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" version="2.1">
-	<jxb:bindings schemaLocation="tmx14.xsd">
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema" jaxb:extensionBindingPrefixes="xjc">
+	<jaxb:bindings schemaLocation="tmx14.xsd">
   
-		<jxb:bindings node="//xs:element[@name='note']/xs:complexType/xs:attribute[@ref='xml:lang']">
-			<jxb:property name="xmlLang"/>
-		</jxb:bindings>
+		<jaxb:bindings node="//xs:element[@name='note']/xs:complexType/xs:attribute[@ref='xml:lang']">
+			<jaxb:property name="xmlLang"/>
+		</jaxb:bindings>
 
-		<jxb:bindings node="//xs:element[@name='prop']/xs:complexType/xs:attribute[@ref='xml:lang']">
-			<jxb:property name="xmlLang"/>
-		</jxb:bindings>
+		<jaxb:bindings node="//xs:element[@name='prop']/xs:complexType/xs:attribute[@ref='xml:lang']">
+			<jaxb:property name="xmlLang"/>
+		</jaxb:bindings>
 
-		<jxb:bindings node="//xs:element[@name='tuv']/xs:complexType/xs:attribute[@ref='xml:lang']">
-			<jxb:property name="xmlLang"/>
-		</jxb:bindings>
+		<jaxb:bindings node="//xs:element[@name='tuv']/xs:complexType/xs:attribute[@ref='xml:lang']">
+			<jaxb:property name="xmlLang"/>
+		</jaxb:bindings>
     
-	</jxb:bindings>
-</jxb:bindings>
+	</jaxb:bindings>
+</jaxb:bindings>

@@ -3,40 +3,40 @@ package gen.core.tmx14;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
+import jakarta.xml.bind.annotation.XmlMixed;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
- *         &lt;element ref="{}bpt"/&gt;
- *         &lt;element ref="{}ept"/&gt;
- *         &lt;element ref="{}it"/&gt;
- *         &lt;element ref="{}ph"/&gt;
- *         &lt;element ref="{}hi"/&gt;
- *         &lt;element ref="{}ut"/&gt;
- *       &lt;/choice&gt;
- *       &lt;attribute name="datatype" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice maxOccurs="unbounded" minOccurs="0">
+ *         <element ref="{}bpt"/>
+ *         <element ref="{}ept"/>
+ *         <element ref="{}it"/>
+ *         <element ref="{}ph"/>
+ *         <element ref="{}hi"/>
+ *         <element ref="{}ut"/>
+ *       </choice>
+ *       <attribute name="datatype" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -67,16 +67,16 @@ public class Sub {
     /**
      * Gets the value of the content property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
+     * <p>This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * This is why there is not a <CODE>set</CODE> method for the content property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
@@ -89,12 +89,15 @@ public class Sub {
      * {@link Ph }
      * {@link Ut }
      * {@link String }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the content property.
      */
     public List<Object> getContent() {
         if (content == null) {
-            content = new ArrayList<Object>();
+            content = new ArrayList<>();
         }
         return this.content;
     }

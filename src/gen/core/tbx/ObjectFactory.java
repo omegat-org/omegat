@@ -1,14 +1,14 @@
 
 package gen.core.tbx;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the gen.core.tbx package. 
- * <p>An ObjectFactory allows you to programatically 
+ * <p>An ObjectFactory allows you to programmatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
@@ -32,6 +32,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Hi }
      * 
+     * @return
+     *     the new instance of {@link Hi }
      */
     public Hi createHi() {
         return new Hi();
@@ -40,6 +42,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Foreign }
      * 
+     * @return
+     *     the new instance of {@link Foreign }
      */
     public Foreign createForeign() {
         return new Foreign();
@@ -48,6 +52,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Bpt }
      * 
+     * @return
+     *     the new instance of {@link Bpt }
      */
     public Bpt createBpt() {
         return new Bpt();
@@ -56,6 +62,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ept }
      * 
+     * @return
+     *     the new instance of {@link Ept }
      */
     public Ept createEpt() {
         return new Ept();
@@ -64,6 +72,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ph }
      * 
+     * @return
+     *     the new instance of {@link Ph }
      */
     public Ph createPh() {
         return new Ph();
@@ -72,6 +82,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Admin }
      * 
+     * @return
+     *     the new instance of {@link Admin }
      */
     public Admin createAdmin() {
         return new Admin();
@@ -80,6 +92,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link AdminGrp }
      * 
+     * @return
+     *     the new instance of {@link AdminGrp }
      */
     public AdminGrp createAdminGrp() {
         return new AdminGrp();
@@ -88,6 +102,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link AdminNote }
      * 
+     * @return
+     *     the new instance of {@link AdminNote }
      */
     public AdminNote createAdminNote() {
         return new AdminNote();
@@ -96,6 +112,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Note }
      * 
+     * @return
+     *     the new instance of {@link Note }
      */
     public Note createNote() {
         return new Note();
@@ -104,6 +122,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ref }
      * 
+     * @return
+     *     the new instance of {@link Ref }
      */
     public Ref createRef() {
         return new Ref();
@@ -112,6 +132,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Xref }
      * 
+     * @return
+     *     the new instance of {@link Xref }
      */
     public Xref createXref() {
         return new Xref();
@@ -120,6 +142,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Date }
      * 
+     * @return
+     *     the new instance of {@link Date }
      */
     public Date createDate() {
         return new Date();
@@ -128,6 +152,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Descrip }
      * 
+     * @return
+     *     the new instance of {@link Descrip }
      */
     public Descrip createDescrip() {
         return new Descrip();
@@ -136,6 +162,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link DescripGrp }
      * 
+     * @return
+     *     the new instance of {@link DescripGrp }
      */
     public DescripGrp createDescripGrp() {
         return new DescripGrp();
@@ -144,6 +172,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link DescripNote }
      * 
+     * @return
+     *     the new instance of {@link DescripNote }
      */
     public DescripNote createDescripNote() {
         return new DescripNote();
@@ -152,6 +182,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TransacGrp }
      * 
+     * @return
+     *     the new instance of {@link TransacGrp }
      */
     public TransacGrp createTransacGrp() {
         return new TransacGrp();
@@ -160,6 +192,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Transac }
      * 
+     * @return
+     *     the new instance of {@link Transac }
      */
     public Transac createTransac() {
         return new Transac();
@@ -168,6 +202,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TransacNote }
      * 
+     * @return
+     *     the new instance of {@link TransacNote }
      */
     public TransacNote createTransacNote() {
         return new TransacNote();
@@ -176,6 +212,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link LangSet }
      * 
+     * @return
+     *     the new instance of {@link LangSet }
      */
     public LangSet createLangSet() {
         return new LangSet();
@@ -184,6 +222,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Tig }
      * 
+     * @return
+     *     the new instance of {@link Tig }
      */
     public Tig createTig() {
         return new Tig();
@@ -192,6 +232,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Term }
      * 
+     * @return
+     *     the new instance of {@link Term }
      */
     public Term createTerm() {
         return new Term();
@@ -200,6 +242,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TermNote }
      * 
+     * @return
+     *     the new instance of {@link TermNote }
      */
     public TermNote createTermNote() {
         return new TermNote();
@@ -208,6 +252,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ntig }
      * 
+     * @return
+     *     the new instance of {@link Ntig }
      */
     public Ntig createNtig() {
         return new Ntig();
@@ -216,6 +262,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TermGrp }
      * 
+     * @return
+     *     the new instance of {@link TermGrp }
      */
     public TermGrp createTermGrp() {
         return new TermGrp();
@@ -224,6 +272,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TermNoteGrp }
      * 
+     * @return
+     *     the new instance of {@link TermNoteGrp }
      */
     public TermNoteGrp createTermNoteGrp() {
         return new TermNoteGrp();
@@ -232,6 +282,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TermCompList }
      * 
+     * @return
+     *     the new instance of {@link TermCompList }
      */
     public TermCompList createTermCompList() {
         return new TermCompList();
@@ -240,6 +292,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TermComp }
      * 
+     * @return
+     *     the new instance of {@link TermComp }
      */
     public TermComp createTermComp() {
         return new TermComp();
@@ -248,6 +302,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TermCompGrp }
      * 
+     * @return
+     *     the new instance of {@link TermCompGrp }
      */
     public TermCompGrp createTermCompGrp() {
         return new TermCompGrp();
@@ -256,6 +312,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TermEntry }
      * 
+     * @return
+     *     the new instance of {@link TermEntry }
      */
     public TermEntry createTermEntry() {
         return new TermEntry();
@@ -264,6 +322,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Martif }
      * 
+     * @return
+     *     the new instance of {@link Martif }
      */
     public Martif createMartif() {
         return new Martif();
@@ -272,6 +332,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link MartifHeader }
      * 
+     * @return
+     *     the new instance of {@link MartifHeader }
      */
     public MartifHeader createMartifHeader() {
         return new MartifHeader();
@@ -280,6 +342,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link FileDesc }
      * 
+     * @return
+     *     the new instance of {@link FileDesc }
      */
     public FileDesc createFileDesc() {
         return new FileDesc();
@@ -288,6 +352,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link TitleStmt }
      * 
+     * @return
+     *     the new instance of {@link TitleStmt }
      */
     public TitleStmt createTitleStmt() {
         return new TitleStmt();
@@ -296,6 +362,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Title }
      * 
+     * @return
+     *     the new instance of {@link Title }
      */
     public Title createTitle() {
         return new Title();
@@ -304,6 +372,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link PublicationStmt }
      * 
+     * @return
+     *     the new instance of {@link PublicationStmt }
      */
     public PublicationStmt createPublicationStmt() {
         return new PublicationStmt();
@@ -312,6 +382,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link P }
      * 
+     * @return
+     *     the new instance of {@link P }
      */
     public P createP() {
         return new P();
@@ -320,6 +392,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link SourceDesc }
      * 
+     * @return
+     *     the new instance of {@link SourceDesc }
      */
     public SourceDesc createSourceDesc() {
         return new SourceDesc();
@@ -328,6 +402,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link EncodingDesc }
      * 
+     * @return
+     *     the new instance of {@link EncodingDesc }
      */
     public EncodingDesc createEncodingDesc() {
         return new EncodingDesc();
@@ -336,6 +412,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link RevisionDesc }
      * 
+     * @return
+     *     the new instance of {@link RevisionDesc }
      */
     public RevisionDesc createRevisionDesc() {
         return new RevisionDesc();
@@ -344,6 +422,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Change }
      * 
+     * @return
+     *     the new instance of {@link Change }
      */
     public Change createChange() {
         return new Change();
@@ -352,6 +432,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Text }
      * 
+     * @return
+     *     the new instance of {@link Text }
      */
     public Text createText() {
         return new Text();
@@ -360,6 +442,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Body }
      * 
+     * @return
+     *     the new instance of {@link Body }
      */
     public Body createBody() {
         return new Body();
@@ -368,6 +452,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Back }
      * 
+     * @return
+     *     the new instance of {@link Back }
      */
     public Back createBack() {
         return new Back();
@@ -376,6 +462,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link RefObjectList }
      * 
+     * @return
+     *     the new instance of {@link RefObjectList }
      */
     public RefObjectList createRefObjectList() {
         return new RefObjectList();
@@ -384,6 +472,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link RefObject }
      * 
+     * @return
+     *     the new instance of {@link RefObject }
      */
     public RefObject createRefObject() {
         return new RefObject();
@@ -392,6 +482,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ItemSet }
      * 
+     * @return
+     *     the new instance of {@link ItemSet }
      */
     public ItemSet createItemSet() {
         return new ItemSet();
@@ -400,6 +492,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Item }
      * 
+     * @return
+     *     the new instance of {@link Item }
      */
     public Item createItem() {
         return new Item();
@@ -408,6 +502,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ItemGrp }
      * 
+     * @return
+     *     the new instance of {@link ItemGrp }
      */
     public ItemGrp createItemGrp() {
         return new ItemGrp();

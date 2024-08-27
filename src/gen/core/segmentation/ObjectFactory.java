@@ -1,14 +1,14 @@
 
 package gen.core.segmentation;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the gen.core.segmentation package. 
- * <p>An ObjectFactory allows you to programatically 
+ * <p>An ObjectFactory allows you to programmatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
@@ -32,6 +32,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Afterbreak }
      * 
+     * @return
+     *     the new instance of {@link Afterbreak }
      */
     public Afterbreak createAfterbreak() {
         return new Afterbreak();
@@ -40,6 +42,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Beforebreak }
      * 
+     * @return
+     *     the new instance of {@link Beforebreak }
      */
     public Beforebreak createBeforebreak() {
         return new Beforebreak();
@@ -48,6 +52,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Body }
      * 
+     * @return
+     *     the new instance of {@link Body }
      */
     public Body createBody() {
         return new Body();
@@ -56,6 +62,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Languagerules }
      * 
+     * @return
+     *     the new instance of {@link Languagerules }
      */
     public Languagerules createLanguagerules() {
         return new Languagerules();
@@ -64,6 +72,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Languagerule }
      * 
+     * @return
+     *     the new instance of {@link Languagerule }
      */
     public Languagerule createLanguagerule() {
         return new Languagerule();
@@ -72,6 +82,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Rule }
      * 
+     * @return
+     *     the new instance of {@link Rule }
      */
     public Rule createRule() {
         return new Rule();
@@ -80,6 +92,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Maprules }
      * 
+     * @return
+     *     the new instance of {@link Maprules }
      */
     public Maprules createMaprules() {
         return new Maprules();
@@ -88,6 +102,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Languagemap }
      * 
+     * @return
+     *     the new instance of {@link Languagemap }
      */
     public Languagemap createLanguagemap() {
         return new Languagemap();
@@ -96,6 +112,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Formathandle }
      * 
+     * @return
+     *     the new instance of {@link Formathandle }
      */
     public Formathandle createFormathandle() {
         return new Formathandle();
@@ -104,6 +122,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Header }
      * 
+     * @return
+     *     the new instance of {@link Header }
      */
     public Header createHeader() {
         return new Header();
@@ -112,6 +132,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Srx }
      * 
+     * @return
+     *     the new instance of {@link Srx }
      */
     public Srx createSrx() {
         return new Srx();

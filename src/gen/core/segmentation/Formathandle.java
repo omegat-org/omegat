@@ -1,43 +1,43 @@
 
 package gen.core.segmentation;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="include" use="required"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;enumeration value="yes"/&gt;
- *             &lt;enumeration value="no"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="type" use="required"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;enumeration value="start"/&gt;
- *             &lt;enumeration value="end"/&gt;
- *             &lt;enumeration value="isolated"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attribute name="include" use="required">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             <enumeration value="yes"/>
+ *             <enumeration value="no"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *       <attribute name="type" use="required">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             <enumeration value="start"/>
+ *             <enumeration value="end"/>
+ *             <enumeration value="isolated"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -46,13 +46,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "formathandle")
 public class Formathandle {
 
+    /**
+     * A value of "no" indicates that the format code does not belong
+     *                         to the segment being created. A value of "yes" indicates that the format code
+     *                         belongs to the segment being created.
+     * 
+     */
     @XmlAttribute(name = "include", required = true)
     protected String include;
+    /**
+     * The type of format for which behaviour is being defined. Can be
+     *                         "start", "end" or "isolated".
+     * 
+     */
     @XmlAttribute(name = "type", required = true)
     protected String type;
 
     /**
-     * Gets the value of the include property.
+     * A value of "no" indicates that the format code does not belong
+     *                         to the segment being created. A value of "yes" indicates that the format code
+     *                         belongs to the segment being created.
      * 
      * @return
      *     possible object is
@@ -70,13 +83,15 @@ public class Formathandle {
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getInclude()
      */
     public void setInclude(String value) {
         this.include = value;
     }
 
     /**
-     * Gets the value of the type property.
+     * The type of format for which behaviour is being defined. Can be
+     *                         "start", "end" or "isolated".
      * 
      * @return
      *     possible object is
@@ -94,6 +109,7 @@ public class Formathandle {
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getType()
      */
     public void setType(String value) {
         this.type = value;

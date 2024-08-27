@@ -1,32 +1,32 @@
 
 package gen.core.tbx;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlIDREF;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="target" type="{http://www.w3.org/2001/XMLSchema}IDREF" /&gt;
- *       &lt;attribute ref="{http://www.w3.org/XML/1998/namespace}lang"/&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <attribute name="type" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="target" type="{http://www.w3.org/2001/XMLSchema}IDREF" />
+ *       <attribute ref="{http://www.w3.org/XML/1998/namespace}lang"/>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -46,6 +46,48 @@ public class Hi {
     @XmlIDREF
     @XmlSchemaType(name = "IDREF")
     protected Object target;
+    /**
+     * <pre>
+     * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;div xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+     *      
+     *       &lt;h3&gt;lang (as an attribute name)&lt;/h3&gt;
+     *       &lt;p&gt;
+     * 
+     *        denotes an attribute whose value
+     *        is a language code for the natural language of the content of
+     *        any element; its value is inherited.  This name is reserved
+     *        by virtue of its definition in the XML specification.&lt;/p&gt;
+     *      
+     *     &lt;/div&gt;
+     * </pre>
+     * 
+     *     
+     * <pre>
+     * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;div xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+     *      &lt;h4&gt;Notes&lt;/h4&gt;
+     *      &lt;p&gt;
+     *       Attempting to install the relevant ISO 2- and 3-letter
+     *       codes as the enumerated possible values is probably never
+     *       going to be a realistic possibility.  
+     *      &lt;/p&gt;
+     *      &lt;p&gt;
+     * 
+     *       See BCP 47 at &lt;a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt"&gt;
+     *        http://www.rfc-editor.org/rfc/bcp/bcp47.txt&lt;/a&gt;
+     *       and the IANA language subtag registry at
+     *       &lt;a href="http://www.iana.org/assignments/language-subtag-registry"&gt;
+     *        http://www.iana.org/assignments/language-subtag-registry&lt;/a&gt;
+     *       for further information.
+     *      &lt;/p&gt;
+     *      &lt;p&gt;
+     * 
+     *       The union allows for the 'un-declaration' of xml:lang with
+     *       the empty string.
+     *      &lt;/p&gt;
+     *     &lt;/div&gt;
+     * </pre>
+     * 
+     */
     @XmlAttribute(name = "lang", namespace = "http://www.w3.org/XML/1998/namespace")
     protected String lang;
 
@@ -122,7 +164,45 @@ public class Hi {
     }
 
     /**
-     * Gets the value of the lang property.
+     * <pre>
+     * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;div xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+     *      
+     *       &lt;h3&gt;lang (as an attribute name)&lt;/h3&gt;
+     *       &lt;p&gt;
+     * 
+     *        denotes an attribute whose value
+     *        is a language code for the natural language of the content of
+     *        any element; its value is inherited.  This name is reserved
+     *        by virtue of its definition in the XML specification.&lt;/p&gt;
+     *      
+     *     &lt;/div&gt;
+     * </pre>
+     * 
+     *     
+     * <pre>
+     * &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;div xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+     *      &lt;h4&gt;Notes&lt;/h4&gt;
+     *      &lt;p&gt;
+     *       Attempting to install the relevant ISO 2- and 3-letter
+     *       codes as the enumerated possible values is probably never
+     *       going to be a realistic possibility.  
+     *      &lt;/p&gt;
+     *      &lt;p&gt;
+     * 
+     *       See BCP 47 at &lt;a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt"&gt;
+     *        http://www.rfc-editor.org/rfc/bcp/bcp47.txt&lt;/a&gt;
+     *       and the IANA language subtag registry at
+     *       &lt;a href="http://www.iana.org/assignments/language-subtag-registry"&gt;
+     *        http://www.iana.org/assignments/language-subtag-registry&lt;/a&gt;
+     *       for further information.
+     *      &lt;/p&gt;
+     *      &lt;p&gt;
+     * 
+     *       The union allows for the 'un-declaration' of xml:lang with
+     *       the empty string.
+     *      &lt;/p&gt;
+     *     &lt;/div&gt;
+     * </pre>
      * 
      * @return
      *     possible object is
@@ -140,6 +220,7 @@ public class Hi {
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getLang()
      */
     public void setLang(String value) {
         this.lang = value;

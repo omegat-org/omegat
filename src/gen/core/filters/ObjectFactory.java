@@ -1,14 +1,14 @@
 
 package gen.core.filters;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the gen.core.filters package. 
- * <p>An ObjectFactory allows you to programatically 
+ * <p>An ObjectFactory allows you to programmatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
@@ -32,6 +32,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Filter }
      * 
+     * @return
+     *     the new instance of {@link Filter }
      */
     public Filter createFilter() {
         return new Filter();
@@ -40,6 +42,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Filters }
      * 
+     * @return
+     *     the new instance of {@link Filters }
      */
     public Filters createFilters() {
         return new Filters();
@@ -48,6 +52,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Files }
      * 
+     * @return
+     *     the new instance of {@link Files }
      */
     public Files createFiles() {
         return new Files();
@@ -56,6 +62,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Filter.Option }
      * 
+     * @return
+     *     the new instance of {@link Filter.Option }
      */
     public Filter.Option createFilterOption() {
         return new Filter.Option();

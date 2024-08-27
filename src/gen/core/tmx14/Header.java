@@ -3,57 +3,57 @@ package gen.core.tmx14;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
- *         &lt;element ref="{}note"/&gt;
- *         &lt;element ref="{}prop"/&gt;
- *         &lt;element ref="{}ude"/&gt;
- *       &lt;/choice&gt;
- *       &lt;attribute name="creationtool" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="creationtoolversion" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="segtype" use="required"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN"&gt;
- *             &lt;enumeration value="block"/&gt;
- *             &lt;enumeration value="sentence"/&gt;
- *             &lt;enumeration value="phrase"/&gt;
- *             &lt;enumeration value="paragraph"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *       &lt;attribute name="o-tmf" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="adminlang" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="srclang" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="datatype" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="o-encoding" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="creationdate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="creationid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="changedate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="changeid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <choice maxOccurs="unbounded" minOccurs="0">
+ *         <element ref="{}note"/>
+ *         <element ref="{}prop"/>
+ *         <element ref="{}ude"/>
+ *       </choice>
+ *       <attribute name="creationtool" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="creationtoolversion" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="segtype" use="required">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
+ *             <enumeration value="block"/>
+ *             <enumeration value="sentence"/>
+ *             <enumeration value="phrase"/>
+ *             <enumeration value="paragraph"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *       <attribute name="o-tmf" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="adminlang" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="srclang" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="datatype" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="o-encoding" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="creationdate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="creationid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="changedate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="changeid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -110,16 +110,16 @@ public class Header {
     /**
      * Gets the value of the noteOrPropOrUde property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
+     * <p>This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the noteOrPropOrUde property.
+     * This is why there is not a <CODE>set</CODE> method for the noteOrPropOrUde property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getNoteOrPropOrUde().add(newItem);
+     * getNoteOrPropOrUde().add(newItem);
      * </pre>
      * 
      * 
@@ -128,12 +128,15 @@ public class Header {
      * {@link Note }
      * {@link Prop }
      * {@link Ude }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the noteOrPropOrUde property.
      */
     public List<Object> getNoteOrPropOrUde() {
         if (noteOrPropOrUde == null) {
-            noteOrPropOrUde = new ArrayList<Object>();
+            noteOrPropOrUde = new ArrayList<>();
         }
         return this.noteOrPropOrUde;
     }

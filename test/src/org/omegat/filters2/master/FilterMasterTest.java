@@ -105,13 +105,13 @@ public class FilterMasterTest {
             throw new ExceptionInInitializerError(ex);
         }
         Filters filtersConfig = (Filters) unm.unmarshal(new StringReader(filters));
-        List<Option> option = filtersConfig.getFilters().get(0).getOption();
+        List<Option> option = filtersConfig.getFilter().get(0).getOption();
         assertFalse("Desierialized <option/> is empty", option.isEmpty());
         assertNull(option.get(0).getName());
 
         XmlMapper mapper = FilterMaster.getMapper();
         Filters filtersConfig2 = mapper.readValue(filters, Filters.class);
-        List<Option> option2 = filtersConfig2.getFilters().get(0).getOption();
+        List<Option> option2 = filtersConfig2.getFilter().get(0).getOption();
         assertFalse("Desierialized <option/> is empty", option2.isEmpty());
         assertNull(option2.get(0).getName());
     }
@@ -125,7 +125,7 @@ public class FilterMasterTest {
         defaultFilters.setRemoveTags(true);
         defaultFilters.setRemoveSpacesNonseg(true);
 
-        assertEquals("More than one filter found", 1, defaultFilters.getFilters().size());
+        assertEquals("More than one filter found", 1, defaultFilters.getFilter().size());
         FilterMaster fm = new FilterMaster(defaultFilters);
 
         // Note that if we use `loadFile(fm)` here, the default configuration
@@ -136,11 +136,11 @@ public class FilterMasterTest {
 
         Filters loadedFilters = FilterMaster.loadConfig(tempFilter);
         assertEquals("More than one filter found in serialized filters", 1,
-                loadedFilters.getFilters().size());
+                loadedFilters.getFilter().size());
         fm = new FilterMaster(loadedFilters);
         loadFile(fm);
 
-        List<Option> option = fm.getConfig().getFilters().get(0).getOption();
+        List<Option> option = fm.getConfig().getFilter().get(0).getOption();
         assertNotNull("Filter option is not null", option);
         assertTrue("Filter option is not empty", option.isEmpty());
     }

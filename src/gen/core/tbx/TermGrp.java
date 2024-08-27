@@ -3,43 +3,43 @@ package gen.core.tbx;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{}term"/&gt;
- *         &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
- *           &lt;element ref="{}termNote"/&gt;
- *           &lt;element ref="{}termNoteGrp"/&gt;
- *         &lt;/choice&gt;
- *         &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
- *           &lt;element ref="{}termCompList"/&gt;
- *         &lt;/choice&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}ID" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{}term"/>
+ *         <choice maxOccurs="unbounded" minOccurs="0">
+ *           <element ref="{}termNote"/>
+ *           <element ref="{}termNoteGrp"/>
+ *         </choice>
+ *         <choice maxOccurs="unbounded" minOccurs="0">
+ *           <element ref="{}termCompList"/>
+ *         </choice>
+ *       </sequence>
+ *       <attribute name="id" type="{http://www.w3.org/2001/XMLSchema}ID" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -93,16 +93,16 @@ public class TermGrp {
     /**
      * Gets the value of the termNoteOrTermNoteGrp property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
+     * <p>This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the termNoteOrTermNoteGrp property.
+     * This is why there is not a <CODE>set</CODE> method for the termNoteOrTermNoteGrp property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getTermNoteOrTermNoteGrp().add(newItem);
+     * getTermNoteOrTermNoteGrp().add(newItem);
      * </pre>
      * 
      * 
@@ -110,12 +110,15 @@ public class TermGrp {
      * Objects of the following type(s) are allowed in the list
      * {@link TermNote }
      * {@link TermNoteGrp }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the termNoteOrTermNoteGrp property.
      */
     public List<Object> getTermNoteOrTermNoteGrp() {
         if (termNoteOrTermNoteGrp == null) {
-            termNoteOrTermNoteGrp = new ArrayList<Object>();
+            termNoteOrTermNoteGrp = new ArrayList<>();
         }
         return this.termNoteOrTermNoteGrp;
     }
@@ -123,28 +126,31 @@ public class TermGrp {
     /**
      * Gets the value of the termCompList property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
+     * <p>This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the termCompList property.
+     * This is why there is not a <CODE>set</CODE> method for the termCompList property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getTermCompList().add(newItem);
+     * getTermCompList().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TermCompList }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the termCompList property.
      */
     public List<TermCompList> getTermCompList() {
         if (termCompList == null) {
-            termCompList = new ArrayList<TermCompList>();
+            termCompList = new ArrayList<>();
         }
         return this.termCompList;
     }

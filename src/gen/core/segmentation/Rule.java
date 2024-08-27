@@ -1,38 +1,38 @@
 
 package gen.core.segmentation;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.lisa.org/srx20}beforebreak" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.lisa.org/srx20}afterbreak" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="break"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;enumeration value="yes"/&gt;
- *             &lt;enumeration value="no"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.lisa.org/srx20}beforebreak" minOccurs="0"/>
+ *         <element ref="{http://www.lisa.org/srx20}afterbreak" minOccurs="0"/>
+ *       </sequence>
+ *       <attribute name="break">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             <enumeration value="yes"/>
+ *             <enumeration value="no"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -44,13 +44,29 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "rule")
 public class Rule {
 
+    /**
+     * Contains the regular expression to match after the segment
+     *                 break
+     * 
+     */
     protected Beforebreak beforebreak;
+    /**
+     * Contains the regular expression to match before the segment
+     *                 break
+     * 
+     */
     protected Afterbreak afterbreak;
+    /**
+     * Determines whether this is a segment break or an exception
+     *                         rule
+     * 
+     */
     @XmlAttribute(name = "break")
     protected String _break;
 
     /**
-     * Gets the value of the beforebreak property.
+     * Contains the regular expression to match after the segment
+     *                 break
      * 
      * @return
      *     possible object is
@@ -68,13 +84,15 @@ public class Rule {
      *     allowed object is
      *     {@link Beforebreak }
      *     
+     * @see #getBeforebreak()
      */
     public void setBeforebreak(Beforebreak value) {
         this.beforebreak = value;
     }
 
     /**
-     * Gets the value of the afterbreak property.
+     * Contains the regular expression to match before the segment
+     *                 break
      * 
      * @return
      *     possible object is
@@ -92,13 +110,15 @@ public class Rule {
      *     allowed object is
      *     {@link Afterbreak }
      *     
+     * @see #getAfterbreak()
      */
     public void setAfterbreak(Afterbreak value) {
         this.afterbreak = value;
     }
 
     /**
-     * Gets the value of the break property.
+     * Determines whether this is a segment break or an exception
+     *                         rule
      * 
      * @return
      *     possible object is
@@ -116,6 +136,7 @@ public class Rule {
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getBreak()
      */
     public void setBreak(String value) {
         this._break = value;

@@ -1,14 +1,14 @@
 
 package gen.core.tmx14;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the gen.core.tmx14 package. 
- * <p>An ObjectFactory allows you to programatically 
+ * <p>An ObjectFactory allows you to programmatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
  * content can consist of schema derived interfaces 
@@ -32,6 +32,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Tmx }
      * 
+     * @return
+     *     the new instance of {@link Tmx }
      */
     public Tmx createTmx() {
         return new Tmx();
@@ -40,6 +42,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Header }
      * 
+     * @return
+     *     the new instance of {@link Header }
      */
     public Header createHeader() {
         return new Header();
@@ -48,6 +52,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Note }
      * 
+     * @return
+     *     the new instance of {@link Note }
      */
     public Note createNote() {
         return new Note();
@@ -56,6 +62,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Prop }
      * 
+     * @return
+     *     the new instance of {@link Prop }
      */
     public Prop createProp() {
         return new Prop();
@@ -64,6 +72,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ude }
      * 
+     * @return
+     *     the new instance of {@link Ude }
      */
     public Ude createUde() {
         return new Ude();
@@ -72,6 +82,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Map }
      * 
+     * @return
+     *     the new instance of {@link Map }
      */
     public Map createMap() {
         return new Map();
@@ -80,6 +92,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Body }
      * 
+     * @return
+     *     the new instance of {@link Body }
      */
     public Body createBody() {
         return new Body();
@@ -88,6 +102,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Tu }
      * 
+     * @return
+     *     the new instance of {@link Tu }
      */
     public Tu createTu() {
         return new Tu();
@@ -96,6 +112,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Tuv }
      * 
+     * @return
+     *     the new instance of {@link Tuv }
      */
     public Tuv createTuv() {
         return new Tuv();
@@ -104,6 +122,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Seg }
      * 
+     * @return
+     *     the new instance of {@link Seg }
      */
     public Seg createSeg() {
         return new Seg();
@@ -112,6 +132,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Bpt }
      * 
+     * @return
+     *     the new instance of {@link Bpt }
      */
     public Bpt createBpt() {
         return new Bpt();
@@ -120,6 +142,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Sub }
      * 
+     * @return
+     *     the new instance of {@link Sub }
      */
     public Sub createSub() {
         return new Sub();
@@ -128,6 +152,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ept }
      * 
+     * @return
+     *     the new instance of {@link Ept }
      */
     public Ept createEpt() {
         return new Ept();
@@ -136,6 +162,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link It }
      * 
+     * @return
+     *     the new instance of {@link It }
      */
     public It createIt() {
         return new It();
@@ -144,6 +172,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ph }
      * 
+     * @return
+     *     the new instance of {@link Ph }
      */
     public Ph createPh() {
         return new Ph();
@@ -152,6 +182,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Hi }
      * 
+     * @return
+     *     the new instance of {@link Hi }
      */
     public Hi createHi() {
         return new Hi();
@@ -160,6 +192,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link Ut }
      * 
+     * @return
+     *     the new instance of {@link Ut }
      */
     public Ut createUt() {
         return new Ut();

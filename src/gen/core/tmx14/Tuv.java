@@ -3,49 +3,49 @@ package gen.core.tmx14;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
- *           &lt;element ref="{}note"/&gt;
- *           &lt;element ref="{}prop"/&gt;
- *         &lt;/choice&gt;
- *         &lt;element ref="{}seg"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute ref="{http://www.w3.org/XML/1998/namespace}lang use="required""/&gt;
- *       &lt;attribute name="o-encoding" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="datatype" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="usagecount" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="lastusagedate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="creationtool" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="creationtoolversion" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="creationdate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="creationid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="changedate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="o-tmf" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="changeid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <choice maxOccurs="unbounded" minOccurs="0">
+ *           <element ref="{}note"/>
+ *           <element ref="{}prop"/>
+ *         </choice>
+ *         <element ref="{}seg"/>
+ *       </sequence>
+ *       <attribute ref="{http://www.w3.org/XML/1998/namespace}lang use="required""/>
+ *       <attribute name="o-encoding" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="datatype" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="usagecount" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="lastusagedate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="creationtool" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="creationtoolversion" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="creationdate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="creationid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="changedate" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="o-tmf" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="changeid" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       <attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -106,16 +106,16 @@ public class Tuv {
     /**
      * Gets the value of the noteOrProp property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
+     * <p>This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the noteOrProp property.
+     * This is why there is not a <CODE>set</CODE> method for the noteOrProp property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getNoteOrProp().add(newItem);
+     * getNoteOrProp().add(newItem);
      * </pre>
      * 
      * 
@@ -123,12 +123,15 @@ public class Tuv {
      * Objects of the following type(s) are allowed in the list
      * {@link Note }
      * {@link Prop }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the noteOrProp property.
      */
     public List<Object> getNoteOrProp() {
         if (noteOrProp == null) {
-            noteOrProp = new ArrayList<Object>();
+            noteOrProp = new ArrayList<>();
         }
         return this.noteOrProp;
     }

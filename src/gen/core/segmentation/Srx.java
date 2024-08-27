@@ -1,38 +1,38 @@
 
 package gen.core.segmentation;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.lisa.org/srx20}header"/&gt;
- *         &lt;element ref="{http://www.lisa.org/srx20}body"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="version" use="required"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;enumeration value="2.0"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <element ref="{http://www.lisa.org/srx20}header"/>
+ *         <element ref="{http://www.lisa.org/srx20}body"/>
+ *       </sequence>
+ *       <attribute name="version" use="required">
+ *         <simpleType>
+ *           <restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             <enumeration value="2.0"/>
+ *           </restriction>
+ *         </simpleType>
+ *       </attribute>
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -44,15 +44,27 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "srx")
 public class Srx {
 
+    /**
+     * SRX header
+     * 
+     */
     @XmlElement(required = true)
     protected Header header;
+    /**
+     * SRX body
+     * 
+     */
     @XmlElement(required = true)
     protected Body body;
+    /**
+     * The version of SRX
+     * 
+     */
     @XmlAttribute(name = "version", required = true)
     protected String version;
 
     /**
-     * Gets the value of the header property.
+     * SRX header
      * 
      * @return
      *     possible object is
@@ -70,13 +82,14 @@ public class Srx {
      *     allowed object is
      *     {@link Header }
      *     
+     * @see #getHeader()
      */
     public void setHeader(Header value) {
         this.header = value;
     }
 
     /**
-     * Gets the value of the body property.
+     * SRX body
      * 
      * @return
      *     possible object is
@@ -94,13 +107,14 @@ public class Srx {
      *     allowed object is
      *     {@link Body }
      *     
+     * @see #getBody()
      */
     public void setBody(Body value) {
         this.body = value;
     }
 
     /**
-     * Gets the value of the version property.
+     * The version of SRX
      * 
      * @return
      *     possible object is
@@ -118,6 +132,7 @@ public class Srx {
      *     allowed object is
      *     {@link String }
      *     
+     * @see #getVersion()
      */
     public void setVersion(String value) {
         this.version = value;

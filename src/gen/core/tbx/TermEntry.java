@@ -3,50 +3,50 @@ package gen.core.tbx;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlID;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for anonymous complex type</p>.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>The following schema fragment specifies the expected content contained within this class.</p>
  * 
- * <pre>
- * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;choice&gt;
- *           &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
- *             &lt;element ref="{}descrip"/&gt;
- *             &lt;element ref="{}descripGrp"/&gt;
- *             &lt;element ref="{}admin"/&gt;
- *             &lt;element ref="{}adminGrp"/&gt;
- *             &lt;element ref="{}transacGrp"/&gt;
- *             &lt;element ref="{}note"/&gt;
- *             &lt;element ref="{}ref"/&gt;
- *             &lt;element ref="{}xref"/&gt;
- *           &lt;/choice&gt;
- *         &lt;/choice&gt;
- *         &lt;choice&gt;
- *           &lt;element ref="{}langSet" maxOccurs="unbounded"/&gt;
- *         &lt;/choice&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}ID" /&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
- * </pre>
+ * <pre>{@code
+ * <complexType>
+ *   <complexContent>
+ *     <restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       <sequence>
+ *         <choice>
+ *           <choice maxOccurs="unbounded" minOccurs="0">
+ *             <element ref="{}descrip"/>
+ *             <element ref="{}descripGrp"/>
+ *             <element ref="{}admin"/>
+ *             <element ref="{}adminGrp"/>
+ *             <element ref="{}transacGrp"/>
+ *             <element ref="{}note"/>
+ *             <element ref="{}ref"/>
+ *             <element ref="{}xref"/>
+ *           </choice>
+ *         </choice>
+ *         <choice>
+ *           <element ref="{}langSet" maxOccurs="unbounded"/>
+ *         </choice>
+ *       </sequence>
+ *       <attribute name="id" type="{http://www.w3.org/2001/XMLSchema}ID" />
+ *     </restriction>
+ *   </complexContent>
+ * </complexType>
+ * }</pre>
  * 
  * 
  */
@@ -79,16 +79,16 @@ public class TermEntry {
     /**
      * Gets the value of the descripOrDescripGrpOrAdmin property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
+     * <p>This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the descripOrDescripGrpOrAdmin property.
+     * This is why there is not a <CODE>set</CODE> method for the descripOrDescripGrpOrAdmin property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getDescripOrDescripGrpOrAdmin().add(newItem);
+     * getDescripOrDescripGrpOrAdmin().add(newItem);
      * </pre>
      * 
      * 
@@ -102,12 +102,15 @@ public class TermEntry {
      * {@link Ref }
      * {@link TransacGrp }
      * {@link Xref }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the descripOrDescripGrpOrAdmin property.
      */
     public List<Object> getDescripOrDescripGrpOrAdmin() {
         if (descripOrDescripGrpOrAdmin == null) {
-            descripOrDescripGrpOrAdmin = new ArrayList<Object>();
+            descripOrDescripGrpOrAdmin = new ArrayList<>();
         }
         return this.descripOrDescripGrpOrAdmin;
     }
@@ -115,28 +118,31 @@ public class TermEntry {
     /**
      * Gets the value of the langSet property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
+     * <p>This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the langSet property.
+     * This is why there is not a <CODE>set</CODE> method for the langSet property.</p>
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * </p>
      * <pre>
-     *    getLangSet().add(newItem);
+     * getLangSet().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link LangSet }
+     * </p>
      * 
      * 
+     * @return
+     *     The value of the langSet property.
      */
     public List<LangSet> getLangSet() {
         if (langSet == null) {
-            langSet = new ArrayList<LangSet>();
+            langSet = new ArrayList<>();
         }
         return this.langSet;
     }

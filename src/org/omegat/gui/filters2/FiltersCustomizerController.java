@@ -194,7 +194,7 @@ public class FiltersCustomizerController extends BasePreferencesController {
         if (!isEditable()) {
             return;
         }
-        List<Filter> filters = editableFilters.getFilters();
+        List<Filter> filters = editableFilters.getFilter();
         Filter filter = getFilterAtRow(row);
         FilterEditor editor = new FilterEditor(SwingUtilities.windowForComponent(panel), filter);
         editor.setVisible(true);

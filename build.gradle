@@ -243,9 +243,9 @@ dependencies {
         runtimeOnly(libs.slf4j.jdk14)
 
         // jaxb gen compilation
-        implementation(libs.jaxb.api)
-        runtimeOnly(libs.jaxb.core)
-        runtimeOnly(libs.jaxb.runtime)
+        implementation(libs.jaxb4.api)
+        runtimeOnly(libs.jaxb4.core)
+        runtimeOnly(libs.jaxb4.runtime)
 
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
@@ -366,7 +366,9 @@ dependencies {
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
-    jaxb(libs.jaxb.xjc)
+    jaxb(libs.jaxb4.xjc)
+    jaxb(libs.jaxb4.api)
+    jaxb(libs.jaxb4.runtime)
 
     // genMac only
     genMac(libs.omegat.appbundler)
@@ -1448,6 +1450,7 @@ tasks.register('checksums') {
 
 tasks.register('genJAXB') {
     description = 'Generate classes for loading and manipulating XML formats'
+    group = 'omegat workflow'
 }
 
 ext.makeJaxbTask = { args ->
@@ -1457,6 +1460,7 @@ ext.makeJaxbTask = { args ->
         mainClass = 'com.sun.tools.xjc.XJCFacade'
         delegate.args args.args
         outputs.dir args.outdir
+        jvmArguments = ["-Duser.language=en"]
     }
     genJAXB.dependsOn taskName
 }

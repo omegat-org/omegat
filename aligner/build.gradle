@@ -15,7 +15,7 @@ dependencies {
             exclude module: 'jaxb-core'
             exclude module: 'jaxb-runtime'
         }
-        compileOnly(libs.jaxb.api)
+        compileOnly(libs.jaxb4.api)
         compileOnly(libs.madlonkay.supertmxmerge)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.commons.io)

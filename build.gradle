@@ -1458,6 +1458,7 @@ ext.makeJaxbTask = { args ->
         jvmArguments = ["-Duser.language=en"]
     }
     compileJava.dependsOn taskName
+    sourcesJar.dependsOn taskName
 }
 
 makeJaxbTask(name: 'segmentation', outdir: 'gen/core/segmentation',

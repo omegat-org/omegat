@@ -224,8 +224,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET");
         projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE");
         projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE");
-        projectMedOpenMenuItem = createMenuItem("TF_MENU_FILE_MED_OPEN");
-        projectMedCreateMenuItem = createMenuItem("TF_MENU_FILE_MED_CREATE");
         projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT");
         viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN");
 
@@ -445,9 +443,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMenu.addSeparator();
         projectMenu.add(projectCompileMenuItem);
         projectMenu.add(projectSingleCompileMenuItem);
-        projectMenu.addSeparator();
-        projectMenu.add(projectMedOpenMenuItem);
-        projectMenu.add(projectMedCreateMenuItem);
         projectMenu.addSeparator();
         projectMenu.add(projectEditMenuItem);
         projectMenu.add(viewFileListMenuItem);
@@ -827,12 +822,11 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected void onProjectStatusChanged(final boolean isProjectOpened) {
 
         JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem,
-                projectOpenMenuItem, projectMedOpenMenuItem };
+                projectOpenMenuItem };
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu,
-                projectMedCreateMenuItem,
 
                 editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem, editInsertSourceMenuItem,
                 editInsertTranslationMenuItem, editTagPainterMenuItem, editOverwriteSourceMenuItem,
@@ -1081,8 +1075,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem projectCommitTargetFiles;
     JMenuItem projectCompileMenuItem;
     JMenuItem projectSingleCompileMenuItem;
-    JMenuItem projectMedOpenMenuItem;
-    JMenuItem projectMedCreateMenuItem;
     JMenuItem projectEditMenuItem;
     JMenuItem projectExitMenuItem;
     JMenuItem projectRestartMenuItem;

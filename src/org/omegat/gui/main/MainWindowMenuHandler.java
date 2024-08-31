@@ -130,20 +130,6 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
     }
 
     /**
-     * Open MED project.
-     */
-    public void projectMedOpenMenuItemActionPerformed() {
-        ProjectUICommands.projectOpenMED();
-    }
-
-    /**
-     * Create MED project.
-     */
-    public void projectMedCreateMenuItemActionPerformed() {
-        ProjectUICommands.projectCreateMED();
-    }
-
-    /**
      * Imports the file/files/folder into project's source files.
      */
     public void projectImportMenuItemActionPerformed() {

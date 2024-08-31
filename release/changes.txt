@@ -2,12 +2,15 @@
  OmegaT 6.0.1 (2024-08-17)
 ----------------------------------------------------------------------
   0 Enhancement
- 14 Bug fixes
+ 15 Bug fixes
   8 Localisation updates
 ----------------------------------------------------------------------
 6.0.1 vs 6.0.0
 
   Bug fixes:
+
+  - Removal of MED package save/load feature
+  https://sourceforge.net/p/omegat/bugs/1266/
 
   - sdlxliff filter does not display (some) comments
   https://sourceforge.net/p/omegat/bugs/1244/

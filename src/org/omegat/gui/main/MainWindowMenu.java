@@ -691,11 +691,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
      *            project open status: true if opened, false if closed
      */
     private void onProjectStatusChanged(final boolean isProjectOpened) {
-        JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem, projectOpenMenuItem, projectMedOpenMenuItem };
+        JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem, projectOpenMenuItem };
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
-                projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu, projectMedCreateMenuItem,
+                projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu,
 
                 editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem, editInsertSourceMenuItem,
                 editInsertTranslationMenuItem, editTagPainterMenuItem, editOverwriteSourceMenuItem,

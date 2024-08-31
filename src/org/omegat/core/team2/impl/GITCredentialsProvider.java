@@ -280,7 +280,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private boolean isGUI() {
-        return Core.getMainWindow() != null;
+        IMainWindow mainWindow = Core.getMainWindow();
+        return mainWindow != null && mainWindow.getApplicationFrame() != null;
     }
 
     private void askYesNoGUI(CredentialItem item, String promptText, URIish uri, String promptedFingerprint) {

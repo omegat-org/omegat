@@ -122,7 +122,7 @@ public class SaveThread extends Thread implements IAutoSave {
                         // Just quit, we can't help it anyway
                         System.exit(1);
                     } catch (Exception ex) {
-                        Log.logWarningRB(LOGGER, "AUTOSAVE_GENERIC_ERROR", ex.getMessage());
+                        Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
                     }
                     Log.logDebug(LOGGER, "Finish project save from SaveThread"); // NOI18N
                 }

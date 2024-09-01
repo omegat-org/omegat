@@ -43,9 +43,9 @@ public class FindGlossaryThreadTest extends TestCore {
         entries.add(new GlossaryEntry("cat", "mikeneko", "ccat", false, null));
         entries.add(new GlossaryEntry("zzz", "zzz", "czzz", true, null));
         entries.add(new GlossaryEntry("horse", "catty", "chorse", false, null));
-        entries.add(new GlossaryEntry("向上", "enhance", "", false, null));
-        entries.add(new GlossaryEntry("向", "direct", "", false, null));
-        entries.add(new GlossaryEntry("上", "up", "", false, null));
+        entries.add(new GlossaryEntry("\u5411\u4E0A", "enhance", "", false, null));
+        entries.add(new GlossaryEntry("\u5411", "direct", "", false, null));
+        entries.add(new GlossaryEntry("\u4E0A", "up", "", false, null));
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false);
         GlossarySearcher.sortGlossaryEntries(entries);

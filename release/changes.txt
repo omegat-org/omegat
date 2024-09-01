@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   45 Enhancement
-  70 Bug fixes
+  72 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -166,11 +166,17 @@
   - Windows launcher does not launch when witout_JRE installer used
   https://sourceforge.net/p/omegat/bugs/1240/
 
+  - Glossary popups behavior changed unintended way
+  https://sourceforge.net/p/omegat/bugs/1239/
+
   - OmegaT does not use cached MT result for translated segments
   https://sourceforge.net/p/omegat/bugs/1238/
 
   - Match statistics are affected by fuzzy match threshold
   https://sourceforge.net/p/omegat/bugs/1236/
+
+  - PluginInstaller throws NPE in certain condition
+  https://sourceforge.net/p/omegat/bugs/1235/
 
   - Issue window cause exception
   https://sourceforge.net/p/omegat/bugs/1234/

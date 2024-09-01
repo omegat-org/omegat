@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   45 Enhancement
-  72 Bug fixes
+  73 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -138,6 +138,9 @@
 
 
   Bug fixes:
+
+  - Removal of MED package save/load feature
+  https://sourceforge.net/p/omegat/bugs/1266/
 
   - filter: bundle: when charsert configuration is US_ASCII, force unicode escape
   https://sourceforge.net/p/omegat/bugs/1264/

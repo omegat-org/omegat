@@ -2,7 +2,7 @@
  OmegaT 6.0.1 (2024-08-17)
 ----------------------------------------------------------------------
   0 Enhancement
- 15 Bug fixes
+ 16 Bug fixes
   8 Localisation updates
 ----------------------------------------------------------------------
 6.0.1 vs 6.0.0
@@ -17,6 +17,9 @@
 
   - Windows launcher does not launch when without_JRE installer used
   https://sourceforge.net/p/omegat/bugs/1240/
+
+  - Glossary popups behavior changed unintended way
+  https://sourceforge.net/p/omegat/bugs/1239/
 
   - Match statistics are affected by fuzzy match threshold
   https://sourceforge.net/p/omegat/bugs/1236/

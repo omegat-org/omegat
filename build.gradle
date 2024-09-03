@@ -28,17 +28,23 @@ application {
     mainClass = 'org.omegat.Main'
 }
 
+// Force Java runtime for Gradle on Java 17
+def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 tasks.named('updateDaemonJvm') {
     jvmVersion = JavaVersion.VERSION_17
 }
 
+// Define target Java version to compatible.
+def javaVersion = 11;
+
+// OmegaT distribution package meta data.
 def shortDescription = 'The free translation memory tool'
 def distDescription = 'OmegaT is a free and open source multiplatform Computer Assisted Translation tool with' +
         ' fuzzy matching, translation memory, keyword search, glossaries, and translation leveraging into updated' +
         ' projects.'
 def distAppVendor = 'The OmegaT project'
-def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
-def javaVersion = 11;
+
+// Definition of OmegaT versioning
 def localPropsFile = file('local.properties')
 ext {
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
@@ -53,9 +59,20 @@ ext {
 }
 def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
 def omtWebsite = 'https://omegat.org'
-def envIsCi = project.hasProperty('envIsCi') as Boolean
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
+
+// Flag to detect CI/CD environment
+def envIsCi = project.hasProperty('envIsCi') as Boolean
+
+// Definition of bundled JRE file names
+def assetDir = findProperty('assetDir') ?: '../'
+def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
+def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
+def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
+def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
+def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
+def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
 
 java {
     withSourcesJar()
@@ -434,14 +451,6 @@ jar {
 def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
 project(":spellchecker") {jar.enabled = false}
-
-def assetDir = findProperty('assetDir') ?: '../'
-def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
-def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
-def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
-def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
-def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
-def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
 
 /*
  * Configuration of launch4j java launcher.

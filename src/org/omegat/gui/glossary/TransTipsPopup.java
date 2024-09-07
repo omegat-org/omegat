@@ -39,7 +39,6 @@ import javax.swing.text.JTextComponent;
 import org.omegat.core.Core;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
-import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.MenuItemPager;
 
@@ -62,7 +61,7 @@ public class TransTipsPopup implements IPopupMenuConstructor {
             return;
         }
 
-        // is mouse in active entry's source ?
+        // is mouse in active entry's source?
         final int startSource = sb.getStartSourcePosition();
         int len = sb.getSourceText().length();
         if (mousepos < startSource || mousepos > startSource + len) {
@@ -73,21 +72,21 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         for (GlossaryEntry ge : GlossaryTextArea.nowEntries) {
             for (Token[] toks : Core.getGlossaryManager().searchSourceMatchTokens(sb.getSourceTextEntry(), ge)) {
                 for (Token tok : toks) {
-                    // is inside found word ?
+                    // is it on found word?
                     if (startSource + tok.getOffset() <= mousepos
                             && mousepos <= startSource + tok.getOffset() + tok.getLength()) {
                         // Create the MenuItems
+
                         for (String s : ge.getLocTerms(true)) {
                             if (!added.contains(s)) {
                                 JMenuItem it = pager.add(new JMenuItem(s));
                                 it.addActionListener(e -> Core.getEditor().insertText(s));
+                                StringBuilder tooltip = new StringBuilder();
+                                tooltip.append(ge.getSourceText()).append(": ").append(ge.getCommentText());
                                 it.addMouseListener(new MouseAdapter() {
                                     @Override
                                     public void mouseEntered(final MouseEvent e) {
-                                        String comment = ge.getCommentText();
-                                        if (!StringUtil.isEmpty(comment)) {
-                                            it.setToolTipText(comment);
-                                        }
+                                        it.setToolTipText(tooltip.toString());
                                     }
 
                                     @Override

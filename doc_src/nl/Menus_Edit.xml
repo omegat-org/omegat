@@ -1,191 +1,350 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
-  <title>Bewerken</title>
+  <title id="menus.edit.title"><guimenu>Bewerken</guimenu></title>
 
-  <para>Dit menu geeft alleen items weer als een project is geopend.</para>
+  <para>Dit menu geeft u toegang tot de opdrachten voor het bewerken van de segmenten.</para>
+
+  <example id="example.undo.last.action">
+	<title id="example.undo.last.action.title">Voorbeeld omschrijving sneltoets</title>
+	<para>Op Windows en Linux: <keycombo><keycap>Control</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para>Op macOS: <keycombo><keycap>Command</keycap><keycap>Z</keycap></keycombo></para>
+
+	<para><emphasis role="bold">In deze handleiding:</emphasis> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></para>
+  </example>
 
   <variablelist>
-    <varlistentry>
-      <term><guimenuitem>Laatste actie ongedaan maken</guimenuitem></term>
-
+    <varlistentry id="menus.edit.undo.last.action">
+      <term id="menus.edit.undo.last.action.title"><guimenuitem>Laatste actie ongedaan maken</guimenuitem> <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
-        <para>Herstelt de status naar vóórdat de laatste actie werd uitgevoerd. Deze opdracht werkt niet als het gewijzigde segment al is gevalideerd.</para>
+        <para>Annuleert aanpassingen aan het segment terwijl het huidige is. De geschiedenis van de aanpassingen gaat verloren bij het verlaten van het segment.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Laatste actie opnieuw</term>
-
+    <varlistentry id="menus.edit.redo.last.action">
+      <term id="menus.edit.redo.last.action.title"><guimenuitem>Laatste actie opnieuw</guimenuitem> <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Herstelt de status naar vóórdat de laatste actie werd geannuleerd. Deze opdracht werkt niet als het gewijzigde segment al is gevalideerd.</para>
+        <para>Past de geannuleerde aanpassingen opnieuw toe als het segment het huidige is. De geschiedenis van de aanpassingen gaat verloren bij het verlaten van het segment.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Door overeenkomst of selectie vervangen</term>
-
+    <varlistentry id="menus.edit.replace.with.match.or.selection">
+      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Door overeenkomst of selectie vervangen</guimenuitem> <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Vervangt het gehele doelsegment door de huidige geselecteerde overeenkomst (de eerste overeenkomst is standaard geselecteerd)</para>
+        <para>Vervangt het doelsegment door de huidige geselecteerde overeenkomst (standaard de eerste overeenkomst) of door de tekst die is geselecteerd in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>.</para>
 
-        <para>Indien binnen de fuzzy overeenkomst enkele teksten zijn geselecteerd, zal alleen die selectie het gehele doelsegment vervangen.</para>
+        <para>Geselecteerde tekst heeft prioriteit boven de geselecteerde overeenkomst.</para>
+
+		<para>Bekijk de beschrijving van het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Overeenkomst of selectie invoegen</term>
-
+    <varlistentry id="menus.edit.insert.match.or.selection">
+      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>Overeenkomst of selectie invoegen</guimenuitem> <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
       <listitem>
-        <para>Voegt de huidige geselecteerde overeenkomst in op de cursorpositie. Indien een gedeelte van het doelsegment is geselecteerd, overschrijft deze functie het geselecteerde gedeelte.</para>
+        <para>Voegt de huidige geselecteerde fuzzy overeenkomst of de tekst die is geselecteerd in het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> in op de positie van de cursor. Als een gedeelte van het doelsegment is geselecteerd, zal dat gedeelte worden overschreven.</para>
 
-        <para>Indien binnen de fuzzy overeenkomst enkele teksten zijn geselecteerd, zal alleen die selectie op de positie van de cursor worden ingevoegd.</para>
+        <para>De geselecteerde tekst heeft prioriteit boven de geselecteerde overeenkomst.</para>
+
+		<para>Bekijk de beschrijving van het venster <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> voor details.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.replace.with.source">
+      <term id="menus.edit.replace.with.source.title"><guimenuitem>Vervangen door bron</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Vervangt het gehele doelsegment door het bronsegment.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vervangen door machinevertaling</term>
-
+    <varlistentry id="menus.edit.insert.source">
+      <term id="menus.edit.insert.source.title"><guimenuitem>Bron invoegen</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Vervangt het doelsegment door de vertaling die wordt verschaft door de service van de machinevertaling. Geen actie wordt ondernomen indien er geen service voor machinevertaling is geactiveerd (in <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Machinevertaling</guimenuitem> </menuchoice>).</para>
+        <para>Voegt de brontekst in op de cursorpositie. Als een gedeelte van het doelsegment is geselecteerd, zal dat gedeelte worden overschreven.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Vervangen door bron</term>
-
+    <varlistentry id="menus.edit.select.source.text">
+      <term id="menus.edit.select.source.text.title">‬<guimenuitem>Brontekst selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Vervangt het huidige doelsegment door de brontekst.</para>
+        <para>Selecteert de brontekst.</para>
+
+		<para>De selectie kan direct in OmegaT worden gebruikt voor <link linkend="windows.text.search">interne zoekacties</link>, <link linkend="windows.text.replace">vervangingen</link>, <link linkend="menus.edit.create.glossary.entry">invoeren van termen voor de woordenlijst</link>, <link linkend="dialogs.preferences.external.searches">externe zoekacties</link>, enzovoort. Eenmaal gekopieerd naar het klembord van het besturingssysteem kan het ook worden gebruikt in zoekacties op het web en elders.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Bron invoegen</term>
-
+    <varlistentry id="menus.edit.replace.with.mt">
+      <term id="menus.edit.replace.with.mt.title"><guimenuitem>Door machinevertaling vervangen</guimenuitem> <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Voegt de brontekst in op de cursorpositie.</para>
+        <para>Vervangt het doelsegment door de vertaling die wordt verschaft door de service van de machinevertaling.</para>
+		<para>Als de voorkeur <link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/> is uitgeschakeld, gebruik dan deze actie eenmaal om de vertaling op te halen, en een tweede keer om die in te voegen.</para>
+		
+		<para>Geen actie wordt ondernomen indien er geen service voor machinevertaling is geactiveerd in het menu <link linkend="menus.options" endterm="menus.options.title"/><link linkend="menus.options.mt" endterm="menus.options.mt.title"/>. Bekijk de <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> voorkeuren voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Ontbrekende brontags invoegen</term>
-
+    <varlistentry id="menus.edit.insert.missing.source.tag">
+      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Ontbrekende tags invoegen</guimenuitem>
+<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Voegt de brontags (indien zij ontbraken) in op de cursorpositie.</para>
+        <para>Voegt de resterende ontbrekende brontags in op de cursorpositie.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Volgende ontbrekende tag invoegen</term>
-
+    <varlistentry id="menus.edit.insert.next.missing.tag">
+      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Volgende ontbrekende tag invoegen</guimenuitem> <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Voegt slechts één tag (naast de ontbrekende) in op de cursorpositie.</para>
+        <para>Voegt de volgende ontbrekende tag in op de cursorpositie.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Selectie exporteren</term>
-
+    <varlistentry id="menus.edit.export.selection">
+      <term id="menus.edit.export.selection.title"><guimenuitem> Selectie exporteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Exporteert de huidige selectie naar een tekstbestand voor verwerking. Indien geen tekst is geselecteerd, wordt het huidige bronsegment naar dit bestand geschreven. Wanneer de gebruiker <application>OmegaT</application> afsluit, wordt dit bestand niet geleegd, om consistent te zijn aan het gebruikelijke gedrag van het klembord. De geëxporteerde inhoud wordt gekopieerd naar het bestand <filename>selection.txt</filename> dat is geplaatst in de voorkeursmap van de gebruiker.</para>
+        <para>Exporteert de huidige selectie naar een tekstbestand voor verwerking. Indien geen tekst is geselecteerd, wordt het huidige bronsegment naar dit bestand geschreven. Dit bestand wordt niet leeg gemaakt wanneer de gebruiker OmegaT afsluit om consistent te blijven met het normale gedrag van het klembord. De geëxporteerde inhoud wordt gekopieerd naar het bestand <link linkend="configuration.folder.default.contents.script.selection.title" endterm="configuration.folder.default.contents.script.selection.title"/> geplaatst in de <link linkend="configuration.folder">configuratie</link>map.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Item voor woordenlijst maken</term>
-
+    <varlistentry id="menus.edit.create.glossary.entry">
+      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Item voor woordenlijst maken…</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Laat de gebruiker een item maken in het standaard bestand voor de woordenlijst.</para>
+        <para>Laat de gebruiker een item maken in de beschrijfbare woordenlijst (het bestand <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>) van het project.</para>
 
-        <para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Bronterm</guilabel>.</para>
+		<para>Er zijn twee manieren om deze functie te gebruiken.</para>
 
-        <para>Dit kan ook van toepassing zijn op de velden <guimenuitem>Doelterm</guimenuitem> en <guimenuitem>Opmerking</guimenuitem> als nieuwe selecties worden gemaakt en <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>G</keycap> </keycombo> opnieuw wordt ingedrukt.</para>
+		<itemizedlist>
+		  <listitem>
+			<para>De eerste is om het dialoogvenster op te roepen en dan handmatig de verschillende velden in te vullen.</para>
+		  </listitem>
+
+		  <listitem>
+			<para>De tweede is om items te selecteren in één van de vensters van OmegaT en achtereenvolgens het dialoogvenster op te roepen na elke selectie om OmegaT het automatisch in de verschillende velden te laten invullen:</para>
+			
+			<orderedlist>
+			  <listitem>
+				<para>Selecteer een tekstreeks in een willekeurig venster</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Druk op <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+				
+				<para>De selectie wordt ingevoerd in het veld <guilabel>Bronterm</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Selecteer een tekstreeks in een willekeurig venster</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Druk op <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>De selectie wordt ingevoerd in het veld <guilabel>Doelterm</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>[Optioneel] Selecteer een tekstreeks in een willekeurig venster</para>
+			  </listitem>
+
+			  <listitem>
+				<para>[Optioneel] Druk op <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo></para>
+
+				<para>De selectie wordt ingevoerd in het veld <guilabel>Opmerking</guilabel>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>Druk op <keycap>Enter</keycap> of klik op <guibutton>OK</guibutton></para>
+			  </listitem>
+			</orderedlist>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.edit.search.project">
+      <term id="menus.edit.search.project.title"><guimenuitem>Zoeken…</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+	  </term>
+      <listitem>
+        <para>Opent een nieuw venster <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
+
+        <para>Als u een tekstreeks selecteert (in een willekeurig venster) vóórdat u de functie aanroept, zal de tekst standaard worden geplakt in het veld <guilabel>Zoeken naar:</guilabel>.</para>
+
+		<para>De combinatie <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>F</keycap></keycombo> gebruikt het meest recente nog steeds geopende venster Zoeken in plaats van een nieuw te openen.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Zoeken in project...</term>
-
+    <varlistentry id="menus.edit.search.and.replace">
+      <term id="menus.edit.search.and.replace.title"><guimenuitem>Vervangen…</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Opent een nieuw <link linkend="windows.textsearch">venster Zoeken</link>.</para>
+        <para>Opent een nieuw venster <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>.</para>
 
-        <para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap>  </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Zoeken naar</guilabel>.</para>
-
-        <para>Drukken op <keycombo> <keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>F</keycap> </keycombo> geeft het laatst geopende venster Zoeken weer (in plaats van een nieuw te openen).</para>
+        <para>Als u een tekstreeks selecteert (in een willekeurig venster) vóórdat u de functie aanroept, zal de tekst standaard worden geplakt in het veld <guilabel>Zoeken naar:</guilabel>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Zoeken en vervangen…</term>
-
+    <varlistentry id="menus.edit.search.dictionaries">
+      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Zoeken in woordenboeken</guimenuitem> <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>Opent een nieuw <link linkend="windows.textreplace">venster Zoeken en vervangen</link>.</para>
-
-        <para>Als u een tekstreeks selecteert (in enig paneel) vóórdat u drukt op <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap>  </keycombo>, zal die tekst standaard worden geplakt in het veld <guilabel>Zoeken naar</guilabel>.</para>
+        <para>Als de voorkeur <link linkend="dialogs.preferences.dictionary.automatically.search.segment" endterm="dialogs.preferences.dictionary.automatically.search.segment.title"/> is uitgeschakeld, stelt deze functie u in staat naar het geselecteerde woord of alle termen in het segment te zoeken in de woordenboeken.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Zoeken in woordenboeken</term>
-
+    <varlistentry id="menus.edit.switch.case">
+      <term id="menus.edit.switch.case.title"><guisubmenu>Schakel Hoofd-/kleine letters naar</guisubmenu></term>
       <listitem>
-        <para>Als <link linkend="dialogs.preferences.dictionary">Automatisch tekst segment opzoeken in woordenboeken</link> is uitgeschakeld, stelt deze functie u in staat naar het geselecteerde woord te zoeken in de woordenboeken.</para>
-      </listitem>
-    </varlistentry>
+        <para>Wijzigt hoofd-/kleine letters van de geselecteerde tekst in het doelsegment naar de geselecteerde optie of gaat door alle opties. Indien geen tekst is geselecteerd, selecteert OmegaT het woord, dat de letter bevat, direct rechts naast de cursor.</para>
 
-    <varlistentry>
-      <term>Schakel Hoofd-/kleine letters naar</term>
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>kleine letters</guimenuitem></para>
 
+			<para>alle letters in kleine letters</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>HOOFDLETTERS</guimenuitem></para>
+
+			<para>ALLE LETTERS IN HOOFDLETTERS</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Alle woorden hoofdletters</guimenuitem></para>
+
+			<para>Bijna Alle Letters In Kleine Letters</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Hoofdletter zin</guimenuitem></para>
+			<para>Alleen de eerste letter als hoofdletter.</para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Cyclus</guimenuitem> <keycombo><keycap>S</keycap><keycap>F3</keycap></keycombo></para>
+			<warning>
+			  <para>Op macOS, schakelt de toets <keycombo><keycap>F3</keycap></keycombo> de modus <emphasis role="bold">overschrijven</emphasis> in in het venster Bewerken. Bekijk <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/> voor de details.</para>
+			</warning>
+		  </listitem>
+		</itemizedlist>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.select.match">
+      <term id="menus.edit.select.match.title"><guisubmenu>Overeenkomst selecteren</guisubmenu></term>
       <listitem>
-        <para>Wijzigt hoofd-/kleine letters van de geaccentueerde tekst in het doelsegment naar de geselecteerde optie (Kleine letters, Hoofdletters of Alle woorden hoofdletters). Gebruik <keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> om tussen de vier keuzes te schakelen. Indien geen tekst is geselecteerd, selecteert <application>OmegaT</application> het woord dat de letter bevat direct rechts naast de cursor.</para>
+		<para>Selecteert de vorige, de volgende of de <varname>N</varname>e overeenkomst die is weergegeven in het venster Overeenkomsten om het segment te vervangen of het er in te voegen.</para>
+		
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Vorige overeenkomst selecteren</guimenuitem> <keycombo><keycap>A</keycap><keycap>↑</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Volgende overeenkomst selecteren</guimenuitem> <keycombo><keycap>A</keycap><keycap>↓</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Overeenkomst #1 selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>1</keycap></keycombo></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Overeenkomst #2 selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>2</keycap></keycombo></para>
+		  </listitem>
+		  <listitem>
+			<para><guimenuitem>Overeenkomst #3 selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>3</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Overeenkomst #4 selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>4</keycap></keycombo></para>
+		  </listitem>
+
+		  <listitem>
+			<para><guimenuitem>Overeenkomst #5 selecteren</guimenuitem> <keycombo><keycap>C</keycap><keycap>5</keycap></keycombo></para>
+		  </listitem>
+		</itemizedlist>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Overeenkomst selecteren</term>
+	<varlistentry id="menus.edit.insert.unicode.control.character">
+      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Unicode besturingsteken invoegen</guisubmenu></term>
+	  <listitem>
+		<para>Voegt het geselecteerde Unicode directionele opmaakteken in. Bekijk <ulink url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode Bidirectional Algorithm</ulink> voor details.</para>
 
+		<itemizedlist>
+		  <listitem>
+			<para><guimenuitem>Markering van Links naar rechts (LRM U+200E)</guimenuitem></para>
+		  </listitem>
+		
+		  <listitem>
+			<para><guimenuitem>Markering van rechts naar links (RLM U+200F)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Inbedden van Links naar rechts (LRE U+202A)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Inbedden van Rechts naar links (RLE U+202B)</guimenuitem></para>
+		  </listitem>
+		  
+		  <listitem>
+			<para><guimenuitem>Pop Directional Formatting (PDF U+202C)</guimenuitem></para>
+		  </listitem>
+		</itemizedlist>
+		<para>Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> om de tekens weer te laten geven om ze gemakkelijker te bewerken. Bekijk <link linkend="app.bidi" endterm="app.bidi.title"/> voor de details.</para>
+
+      </listitem>
+	</varlistentry>
+
+	<varlistentry id="menus.edit.use.as.default.translation">
+      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>Als standaard vertaling gebruiken</guimenuitem></term>
       <listitem>
-        <para>Selecteert de vorige, de volgende of de Ne overeenkomst die is weergegeven in het venster Overeenkomsten om het segment te vervangen of het in te voegen in het segment.</para>
+		<para>Indien meerdere alternatieve vertalingen beschikbaar zijn voor het actieve segment, kunt u het geselecteerde alternatief als de standaard vertaling instellen. Het item zal grijs worden als er slechts één vertaling beschikbaar is.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Als standaard vertaling gebruiken</term>
-
+	<varlistentry id="menus.edit.create.alternative.translation">
+      <term id="menus.edit.create.alternative.translation.title"><guimenuitem>Alternatieve vertaling maken</guimenuitem></term>
       <listitem>
-        <para>Indien er meerdere alternatieve vertalingen beschikbaar zijn voor het actieve segment, kunt u het geselecteerde alternatief als de standaard vertaling instellen. Het item zal grijs worden als er slechts één vertaling beschikbaar is.</para>
+		<para>Segmenten die één en hetzelfde segment zijn, kunnen, afhankelijk van de context, verschillende vertalingen vereisen. Als de huidige vertaling van het segment niet van toepassing is, selecteer dit menu en voer de alternatieve vertaling in.</para>
+		<warning>
+		<para>OmegaT maakt verschil tussen identieke segmenten met ofwel een interne identificatie voor het type bestand verschaffen of door te verwijzen naar hun voorafgaande en volgende segmenten. In dergelijke gevallen vertrouwen alternatieve vertalingen erop dat de identieke segmenten verschillende voorafgaande of volgende segmenten hebben. Als de identieke segmenten ook identieke voorafgaande en volgende segmenten hebben, zult u ze niet verschillend kunnen vertalen en één ervan een alternatieve vertaling in OmegaT maken.</para>
+		<para>U kunt om dit probleem heen werken door een kleine wijziging te maken in één van de voorafgaande of volgende segmenten in het bronbestand om onderscheid te maken tussen de verscheidene instanties van hetzelfde voorafgaande of volgende segment.</para>
+		</warning>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Alternatieve vertaling maken</term>
-
+	<varlistentry id="menus.edit.remove.translation">
+      <term id="menus.edit.remove.translation.title"><guimenuitem>Vertaling verwijderen</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
-        <para>Het een en hetzelfde segment kan, afhankelijk van de context, verschillende vertalingen vereisen. Selecteer dit menuitem als de huidige vertaling niet van toepassing is en voer de alternatieve vertaling in.</para>
+		<para>Verwijdert de huidige vertaling en stelt het segment in als niet-vertaald.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Vertaling verwijderen</term>
-
+	<varlistentry id="menus.edit.set.empty.translation">
+      <term id="menus.edit.set.empty.translation.title"><guimenuitem>Lege vertaling instellen</guimenuitem></term>
       <listitem>
-        <para>Verwijdert de vertaling en stelt segment in als niet-vertaald.</para>
+		<para>De vertaling als leeg definiëren. Het doeldocument bevat niets voor dit segment, terwijl het venster Bewerken het markeert met de identificatie <literal>&lt;LEEG&gt;</literal>.</para>
       </listitem>
-    </varlistentry>
+	</varlistentry>
 
-    <varlistentry>
-      <term>Lege vertaling instellen</term>
-
+	<varlistentry id="menus.edit.register.identical.translation">
+      <term id="menus.edit.register.identical.translation.title"><guimenuitem>Identieke vertaling registreren</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
+	  </term>
       <listitem>
-        <para>De vertaling als leeg definiëren. In het doeldocument zal voor dit segment niets verschijnen. In het venster Bewerken wordt de vertaling weergegeven als &lt;LEEG&gt;</para>
+		<para>Gebruik deze opdracht om een vertaling te registreren als identiek aan de bron, zelfs als voorkeur <link linkend="dialogs.preferences.editor.allow.translation.to.be.equal.to.source" endterm="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"/> niet is ingeschakeld.</para>
       </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Identieke vertaling registreren</term>
-
-      <listitem>
-        <para>Gebruik deze opdracht om de vertaling te registreren als identiek aan de bron, zelfs als <link linkend="dialogs.preferences.editor.allowtranslationtobeequaltosource"><guilabel>Vertaling mag gelijk zijn aan brontekst</guilabel></link> niet is geselecteerd.</para>
-      </listitem>
-    </varlistentry>
+	</varlistentry>
   </variablelist>
 </section>

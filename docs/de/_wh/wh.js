@@ -519,14 +519,14 @@ var wh = (function () {
 var toc_entries = [
 ["Einführung in OmegaT","chapter.instant.start.guide.html",[
 ["Grundsätze","chapter.instant.start.guide.html#introduction.omegat.principles",null],
-["Verwendete Konventionen in dieser Bedienungsanleitung","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
+["Konventionen in dieser Bedienungsanleitung","chapter.instant.start.guide.html#introduction.how.to.use.the.manual",null],
 ["Ein neues Projekt erstellen","chapter.instant.start.guide.html#introduction.create.and.open.new.project",null],
 ["Rechtschreibwörterbücher","chapter.instant.start.guide.html#introduction.install.spellchecker.dictionary",null],
 ["Segmente verwalten","chapter.instant.start.guide.html#introduction.manage.your.segments",null],
 ["Lassen Sie es gut aussehen!","chapter.instant.start.guide.html#introduction.make.it.look.good",null],
 ["Dateien übersetzen","chapter.instant.start.guide.html#introduction.translate.the.segments.one.by.one",null],
 ["Tags verwalten","chapter.instant.start.guide.html#introduction.manage.your.tags",null],
-["Übersetzung überprüfen","chapter.instant.start.guide.html#introduction.review.the.translation",null],
+["Übersetzung prüfen","chapter.instant.start.guide.html#introduction.review.the.translation",null],
 ["Die übersetzten Dateien erstellen","chapter.instant.start.guide.html#introduction.generate.the.translated.file",null],
 ["Projekte verwalten","chapter.instant.start.guide.html#introduction.one.more.thing",null],
 ["Ein auf Tastenkürzeln basierender Workflow","chapter.instant.start.guide.html#app.shortcuts.streamline.workflow",null]
@@ -568,7 +568,7 @@ var toc_entries = [
 ["\n                              Quelldateien\n                           ","chapter.windows.and.dialogs.html#windows.source.files.list",null],
 ["\n                              Textsuche\n                           ","chapter.windows.and.dialogs.html#windows.text.search",null],
 ["\n                              Textersetzung\n                           ","chapter.windows.and.dialogs.html#windows.text.replace",null],
-["\n                              Dateien ausrichten\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
+["\n                              Dateien ausrichten (Aligner)\n                           ","chapter.windows.and.dialogs.html#windows.aligner",null],
 ["\n                              Scripting\n                           ","chapter.windows.and.dialogs.html#windows.scripts",null]
 ]],
 ["\n                        Einstellungen\n                     ","chapter.dialogs.preferences.html",[
@@ -595,8 +595,8 @@ var toc_entries = [
 ["\n                              Updates\n                           ","chapter.dialogs.preferences.html#dialogs.preferences.updates",null]
 ]],
 ["Projektordner","chapter.project.folder.html",[
-["Standardstruktur","chapter.project.folder.html#d0e10504",null],
-["Mindestinhalt","chapter.project.folder.html#d0e10582",null],
+["Standardstruktur","chapter.project.folder.html#d0e10450",null],
+["Mindestinhalt","chapter.project.folder.html#d0e10528",null],
 ["source","chapter.project.folder.html#project.folder.source",null],
 ["target","chapter.project.folder.html#project.folder.target",null],
 ["tm","chapter.project.folder.html#project.folder.tm",null],
@@ -890,7 +890,7 @@ message = translation[index];
 }
 return message;
 }
-var storageId = "-e7mij6lnlz8p-1lz0kxu9ycdfk";
+var storageId = "-sfumuos6fh9p-1ggepjm1vywv0";
 function storageSet(key, value) {
 window.sessionStorage.setItem(key + storageId, String(value));
 }

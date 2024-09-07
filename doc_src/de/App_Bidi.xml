@@ -7,7 +7,7 @@
 
   <itemizedlist>
 	<listitem>
-	  <para>Ein unsichtbares Zeichen mit einer starken Direktionalität einzufügen, um eine bestimmte Position für ein Zeichen mit schwacher oder neutraler Direktionalität zu erzwingen.</para>
+	  <para>Ein unsichtbares Zeichen mit starker Direktionalität einzufügen, um eine bestimmte Position für ein Zeichen mit schwacher oder neutraler Direktionalität zu erzwingen.</para>
 	</listitem>
 	<listitem>
 	  <para>Einen Textabschnitt zu erstellen, der in die entgegengesetzte Richtung des Abschnitts fließt.</para>
@@ -19,14 +19,14 @@
   <section id="app.bidi.marks">
 	<title id="app.bidi.marks.title">Markierungen</title>
 
-	<para>Um die Position eines Zeichens mit schwacher oder neutraler Direktionalität (z. B. Interpunktionszeichen) zu ändern, fügen Sie je nach der Direktionalität des Segments ein LRM- oder RLM-Zeichen nach dem Zeichen ein:</para>
+	<para>Um die Position eines Zeichens mit schwacher oder neutraler Direktionalität (z.B. Interpunktionszeichen) zu ändern, fügen Sie je nach der Direktionalität des Segments ein LRM- oder RLM-Zeichen nach dem Zeichen ein:</para>
 
 	<itemizedlist>
 	  <listitem>
-		<para>Fügen Sie eine LRM nach einem Zeichen mit schwacher Direktionalität ein, das von links nach rechts in einem Rechts-nach-Links-Segment verlaufen muss (z. B. ein englischer Auszug in einem arabischen Text).</para>
+		<para>Fügen Sie eine LRM nach einem Zeichen mit schwacher Direktionalität ein, das in einem Rechts-nach-Links-Segment von links nach rechts laufen muss (z.B. ein englischer Auszug in einem arabischen Text).</para>
 	  </listitem>
 	  <listitem>
-		<para>Fügen Sie eine RLM nach einem Zeichen mit schwacher Direktionalität ein, das von rechts nach links in einem Links-nach-Rechts-Segment verlaufen muss (z. B. ein arabischer Auszug in einem englischen Text).</para>
+		<para>Fügen Sie eine RLM nach einem Zeichen mit schwacher Direktionalität ein, das in einem Links-nach-Rechts-Segment von rechts nach links laufen muss (z.B. ein arabischer Auszug in einem englischen Text).</para>
 	  </listitem>
 	</itemizedlist>
   </section>
@@ -38,10 +38,10 @@
 
 	<itemizedlist>
 	  <listitem>
-		<para>Um eine Links-nach-Rechts-Einbettung in einem Rechts-nach-Links-Segment zu erstellen, fügen Sie ein Links-nach-Rechts-Einbettungszeichen (LRE) ein, geben oder fügen Sie den Links-nach-Rechts-Text ein, und fügen Sie dann das Einbettung-beenden-Zeichen (&quot;pop directional formatting&quot; oder kurz PDF) ein.</para>
+		<para>Um eine Links-nach-Rechts-Einbettung in einem Rechts-nach-Links-Segment zu erstellen, fügen Sie ein LRE-Zeichen (LRE = left-to-right embedding) ein, geben/fügen Sie den Links-nach-Rechts-Text ein, und fügen Sie dann das PDF-Zeichen (PDF = pop directional formatting) ein, um die Einbettung zu beenden.</para>
 	  </listitem>
 	  <listitem>
-		<para>Um eine Rechts-nach-Links-Einbettung in einem Links-nach-Rechts-Segment zu erstellen, fügen Sie ein Rechts-nach-Links-Einbettungszeichen (RLE) ein, geben oder fügen Sie den Rechts-nach-Links-Text ein, und fügen Sie dann das Einbettung-beenden-Zeichen (&quot;pop directional formatting&quot; oder kurz PDF) ein.</para>
+		<para>Um eine Rechts-nach-Links-Einbettung in einem Links-nach-Rechts-Segment zu erstellen, fügen Sie ein RLE-Zeichen (LRE = right-to-left embedding) ein, geben/fügen Sie den Rechts-nach-Links-Text ein, und fügen Sie dann das PDF-Zeichen (PDF = pop directional formatting) ein, um die Einbettung zu beenden.</para>
 	  </listitem>
 	</itemizedlist>
   </section>

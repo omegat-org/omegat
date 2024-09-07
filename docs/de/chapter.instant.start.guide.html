@@ -4,13 +4,13 @@
       <title>Einführung in OmegaT</title>
       <link href="OmegaT.css" rel="stylesheet" type="text/css" />
       <meta content="DocBook XSL Stylesheets V1.79.1" name="generator" />
-      <link href="index_.html" rel="prev" title="OmegaT 6.1.0 - Bedienungsanleitung" />
+      <link href="index_.html" rel="prev" title="OmegaT 6.0.0 - Bedienungsanleitung" />
       <link href="chapter.how.to.html" rel="next" title="Anleitungen" />
    <meta content="width=device-width, initial-scale=1" name="viewport" /><link href="_wh/wh.css" rel="stylesheet" type="text/css" /><script src="_wh/jquery/jquery.min.js" type="text/javascript"></script><script charset="UTF-8" src="_wh/wh.js" type="text/javascript"></script><script charset="UTF-8" defer="defer" src="_wh/search.js" type="text/javascript"></script></head>
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Bedienungsanleitung</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Bedienungsanleitung</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -82,7 +82,7 @@
                </li>
                <li>
                   <span class="section">
-                     <a href="chapter.instant.start.guide.html#introduction.how.to.use.the.manual">Verwendete Konventionen in dieser Bedienungsanleitung</a>
+                     <a href="chapter.instant.start.guide.html#introduction.how.to.use.the.manual">Konventionen in dieser Bedienungsanleitung</a>
                   </span>
                </li>
                <li>
@@ -117,7 +117,7 @@
                </li>
                <li>
                   <span class="section">
-                     <a href="chapter.instant.start.guide.html#introduction.review.the.translation">Übersetzung überprüfen</a>
+                     <a href="chapter.instant.start.guide.html#introduction.review.the.translation">Übersetzung prüfen</a>
                   </span>
                </li>
                <li>
@@ -145,7 +145,7 @@
                   </div>
                </div>
             </div>
-            <p>Willkommen bei OmegaT, einem Tool für computergestützte Übersetzung (CAT), das große Flexibilität, Performance und Zuverlässigkeit sowie Funktionen bietet, die über die kommerziellen Angebote hinausgehen, selbst für angehende Übersetzer.</p>
+            <p>Willkommen bei OmegaT, einem computergestützten Übersetzungstool (engl. Computer-Assisted Translation Tool, kurz CAT), das Flexibilität, Leistung, Zuverlässigkeit und Funktionen bietet, die weit über das hinausgehen, was kommerziell angeboten wird, selbst für angehende Übersetzer.</p>
             <section class="section" id="introduction.omegat.principles.translation.project">
                <div class="titlepage">
                   <div>
@@ -154,14 +154,14 @@
                      </div>
                   </div>
                </div>
-               <p>Ein OmegaT-Übersetzungsprojekt besteht aus einer Reihe von Ressourcen, die in separaten Ordnern aufbewahrt werden, aus einer <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">
+               <p>Ein Übersetzungsprojekt in OmegaT besteht aus den folgenden Elementen: Eine Reihe von Ressourcen, die in separaten Ordnern aufbewahrt werden, eine Datei namens <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">
                      <code class="filename">omegat.project</code>
-                  </a>-Datei, die den Speicherort aller Ressourcen enthält, und aus einer <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">
+                  </a>, die die Speicherorte aller Ressourcen enthält, und eine Translation-Memory-Datei namens <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">
                      <code class="filename">project_save.tmx</code>
-                  </a>-Translation-Memory-Datei, die alle Übersetzungen enthält, die während der Arbeit an diesem Projekt angefertigt wurden.</p>
-               <p>Übersetzer können den Inhalt oder den Speicherort dieser Ressourcen jederzeit während der Übersetzung problemlos ändern.</p>
-               <p>Zu den Ressourcen gehören standardmäßig der Translation Memory des Projekts, der bei der Projekterstellung automatisch angelegt wird, und die zu übersetzenden Dateien. Sie können auch externe Translation Memories, Glossare und andere Referenzdateien enthalten.</p>
-               <p>Einzelheiten finden Sie unter <a class="link" href="chapter.project.folder.html" title="Projektordner">Projektordner</a>.</p>
+                  </a>, die alle Übersetzungen enthält, die während der Arbeit an diesem Projekt anfallen.</p>
+               <p>Übersetzer können den Inhalt oder den Speicherort dieser Ressourcen jederzeit während der Übersetzung ändern.</p>
+               <p>Zu den Ressourcen gehören standardmäßig der Übersetzungsspeicher (engl. Translation Memory, kurz TM) des Projekts, der bei der Projekterstellung automatisch angelegt wird, sowie die zu übersetzenden Dateien. Ressourcen können auch externe Translation Memories, Glossare und andere Referenzdateien sein.</p>
+               <p>Einzelheiten finden Sie im Kapitel <a class="link" href="chapter.project.folder.html" title="Projektordner">Projektordner</a>.</p>
             </section>
             <section class="section" id="introduction.omegat.principles.translation.memories">
                <div class="titlepage">
@@ -175,10 +175,10 @@
                      <em>erstellen</em>
                   </span> noch einem neuen Projekt <span class="emphasis">
                      <em>zuordnen</em>
-                  </span>. OmegaT kümmert sich <span class="emphasis">
+                  </span>. OmegaT erledigt dies <span class="emphasis">
                      <em>automatisch</em>
-                  </span> darum.</p>
-               <p>Übersetzer können den Translation Memory eines bestehenden Projekts sehr leicht wiederverwenden, indem sie einfach neue Übersetzungsdateien zu einem existierenden Projekt hinzufügen oder einen existierenden Translation Memory in ein neues Projekt kopieren.</p>
+                  </span>.</p>
+               <p>Übersetzer können den Translation Memory eines bestehenden Projekts ganz einfach wiederverwenden, indem sie neue Übersetzungsdateien zu einem existierenden Projekt hinzufügen oder einen existierenden Translation Memory in ein neues Projekt kopieren.</p>
                <p>Die Anzahl der Translation Memories, die in einem Übersetzungsprojekt als Referenz verwendet werden können, ist unbegrenzt, und OmegaT macht es sehr einfach, diesen zusätzlichen Memories unterschiedliche Prioritätsstufen zuzuweisen.</p>
                <p>Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.use.tm" title="Translation Memories (TM) verwenden">Translation Memories (TM) verwenden</a>.</p>
             </section>
@@ -190,9 +190,9 @@
                      </div>
                   </div>
                </div>
-               <p>Dank einfacher Einstellungen können Übersetzer problemlos Ressourcen gemeinsam nutzen und gemeinsam an einem Projekt arbeiten.</p>
+               <p>Dank einfacher Einstellungen können Übersetzer problemlos Ressourcen teilen und gemeinsam an einem Projekt arbeiten.</p>
                <p>Die Teamfunktionalität bietet professionelle Zuverlässigkeit und Flexibilität bei der Synchronisierung von Projektressourcen zwischen den Teammitgliedern und ermöglicht gleichzeitig eine einfache Behebung von Konflikten zwischen verschiedenen Übersetzungen.</p>
-               <p>Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.tm.share.translation.memories" title="TMs teilen">TMs teilen</a>.</p>
+               <p>Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.tm.share.translation.memories" title="TMs gemeinsam nutzen">TMs gemeinsam nutzen</a>.</p>
             </section>
             <section class="section" id="introduction.omegat.principles.made.for.translators">
                <div class="titlepage">
@@ -205,32 +205,32 @@
                <p>OmegaT wurde nicht nur entwickelt, um den Übersetzungsprozess zu vereinfachen, sondern auch, um sicherzustellen, dass der Übersetzer keine Angst vor Datenverlust haben muss.</p>
                <div class="note">
                   <h3 class="title">Anmerkung</h3>
-                  <p>Sie haben OmegaT noch nicht benutzt, aber Sie erinnern sich an Zeiten, als Sie beim Übersetzen eines Buches, an dem Sie seit sechs Monaten gearbeitet haben, oder an den Bericht, der in einer Stunde fällig war, durch ein Computerproblem zunichte gemacht wurden.</p>
-                  <p>Sie ziehen OmegaT in Betracht, aber...</p>
-                  <p>Wie kann OmegaT gegen solche Probleme helfen?</p>
+                  <p>Sie haben OmegaT noch nicht benutzt, aber Sie erinnern sich an Zeiten, als die Übersetzung eines Buches, an der Sie ein halbes Jahr gearbeitet hatten, oder eines Berichts, der in einer Stunde fällig war, durch ein Computerproblem zunichte gemacht wurde.</p>
+                  <p>Sie erwägen, OmegaT zu verwenden, aber...</p>
+                  <p>Wie kann OmegaT bei solchen Problemen helfen?</p>
                   <p>Kein Grund zur Sorge. Die Zuverlässigkeit von OmegaT macht es <span class="emphasis">
                         <em>äußerst</em>
                      </span> unwahrscheinlich, dass Sie mehr als ein paar Minuten Arbeit verlieren.</p>
-                  <p>Selbst wenn die Dinge sehr kaputt aussehen, keine Panik. Folgen Sie einfach den Anweisungen in <a class="link" href="chapter.how.to.html#how.to.restore.your.data" title="Probleme beheben">Probleme beheben</a>.</p>
+                  <p>Auch wenn alles sehr kaputt aussieht, keine Panik. Folgen Sie einfach den Anweisungen unter <a class="link" href="chapter.how.to.html#how.to.restore.your.data" title="Probleme beheben">Probleme beheben</a>.</p>
                </div>
                <p>OmegaT ermöglicht es Ihnen, sich auf das eigentliche Übersetzen zu konzentrieren, und hilft Ihnen hoffentlich, ein besserer Übersetzer zu werden.</p>
-               <p>Wenn Sie Hilfe zu irgendeinem Aspekt von OmegaT benötigen, können Sie gerne den <a class="ulink" href="https://omegat.org/support" target="_top">OmegaT-Benutzergruppen</a> beitreten.</p>
+               <p>Wenn Sie Hilfe zu irgendeinem Aspekt von OmegaT benötigen, sind Sie herzlich eingeladen, den <a class="ulink" href="https://omegat.org/support" target="_top">Benutzergruppen von OmegaT</a> beizutreten.</p>
             </section>
          </section>
          <section class="section" id="introduction.how.to.use.the.manual">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both">Verwendete Konventionen in dieser Bedienungsanleitung</h2>
+                     <h2 class="title" style="clear: both">Konventionen in dieser Bedienungsanleitung</h2>
                   </div>
                </div>
             </div>
-            <p>In diesem Abschnitt werden die Konventionen vorgestellt, die zur Unterscheidung der Elemente der OmegaT-Benutzeroberfläche in dieser Bedienungsanleitung verwendet werden. Diese werden auf eine Weise dargestellt, die es leichter macht, ihre Funktion zu erkennen. Die Aktion, die mit einem Element verbunden ist, gibt auch einen Hinweis auf seine Funktion, falls die Darstellung die visuellen Unterschiede nicht vermitteln kann: <span class="emphasis">
+            <p>In diesem Abschnitt werden die Konventionen vorgestellt, die zur Unterscheidung der Elemente der OmegaT-Benutzeroberfläche in dieser Bedienungsanleitung verwendet werden. Diese Elemente werden so dargestellt, dass ihre Funktion leicht zu erkennen ist. Die mit einem Element verbundene Aktion gibt außerdem einen Hinweis auf seine Funktion, wenn eine visuelle Unterscheidung nicht möglich ist: <span class="emphasis">
                   <em>Verwenden</em>
                </span> Sie einen Menüpunkt oder <span class="emphasis">
                   <em>klicken</em>
                </span> Sie auf eine Schaltfläche.</p>
-            <p>Auch die Links zu den verschiedenen Teilen der Bedienungsanleitung werden auf eine Weise dargestellt, die es leichter macht, die Funktion des verlinkten Elements zu erkennen.</p>
+            <p>Auch die Links zu den verschiedenen Teilen der Bedienungsanleitung werden so dargestellt, dass die Funktion des verlinkten Elements leicht zu erkennen ist.</p>
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
@@ -275,25 +275,25 @@
                      <span class="term">Fensterbereiche, Fenster, Dialogfenster</span>
                   </dt>
                   <dd>
-                     <p>Der <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
                            <span class="guilabel">Editor</span>
-                        </a>-Bereich.</p>
+                        </a>.</p>
                   </dd>
                   <dt>
                      <span class="term">Dateien und Ordner</span>
                   </dt>
                   <dd>
-                     <p>Die <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">
+                     <p>Die Datei <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.file">
                            <code class="filename">omegat.project</code>
-                        </a>-Datei.</p>
+                        </a>.</p>
                   </dd>
                   <dt>
                      <span class="term">Einstellungen und Projekteigenschaften</span>
                   </dt>
                   <dd>
-                     <p>Die <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.fonts" title="Schriftart">
+                     <p>Die Einstellung <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.fonts" title="Schriftart">
                            <span class="guilabel">Schriftart</span>
-                        </a>-Einstellung.</p>
+                        </a>.</p>
                   </dd>
                   <dt>
                      <span class="term">Kapitel, Howtos und Anhänge</span>
@@ -311,17 +311,17 @@
                      <span class="term">Tastenkürzel</span>
                   </dt>
                   <dd>
-                     <p>Um mehrfache Angaben von Tastenkürzeln zu vermeiden, verwenden wir einzelne Buchstaben als gemeinsame Kennung für Modifikatoren. Einzelheiten finden Sie unter <a class="link" href="chapter.menus.html" title="Menüs">Menüs</a>.</p>
+                     <p>Um die mehrfache Angabe von Tastenkürzeln zu vermeiden, verwenden wir einzelne Buchstaben als gemeinsame Kennung für Modifikatoren. Einzelheiten finden Sie im Kapitel <a class="link" href="chapter.menus.html" title="Menüs">Menüs</a>.</p>
                      <div class="example" id="example.introduction.note.on.shortcuts">
                         <div class="example-title">Beispiel 1. Tastenmodifikatoren werden als einzelne Buchstaben dargestellt.</div>
                         <div class="example-contents">
-                           <p>In Windows und Linux: <span class="keycap">
+                           <p>Unter Windows und Linux: <span class="keycap">
                                  <strong>Strg</strong>
                               </span>+<span class="keycap">
                                  <strong>E</strong>
                               </span>
                            </p>
-                           <p>In macOS: <span class="keycap">
+                           <p>Unter macOS: <span class="keycap">
                                  <strong>Command</strong>
                               </span>+<span class="keycap">
                                  <strong>E</strong>
@@ -354,10 +354,10 @@
             </div>
             <div class="warning">
                <h3 class="title">Warnung</h3>
-               <p>Wenn Sie OmegaT noch nicht installiert haben, schauen Sie sich <a class="link" href="chapter.how.to.html#how.to.installing.omegat" title="OmegaT installieren">OmegaT installieren</a> an.</p>
-               <p>Um zu erfahren, wie man OmegaT startet, siehe <a class="link" href="chapter.how.to.html#how.to.running.omegat" title="OmegaT ausführen">OmegaT ausführen</a>.</p>
+               <p>Wenn Sie OmegaT noch nicht installiert haben, lesen Sie bitte <a class="link" href="chapter.how.to.html#how.to.installing.omegat" title="OmegaT installieren">OmegaT installieren</a>.</p>
+               <p>Wie Sie OmegaT starten, erfahren Sie unter <a class="link" href="chapter.how.to.html#how.to.running.omegat" title="OmegaT ausführen">OmegaT ausführen</a>.</p>
             </div>
-            <p>Um mit OmegaT zu arbeiten, müssen Sie zunächst ein Projekt erstellen, das Ihre gesamten Dateien enthält.</p>
+            <p>Um mit OmegaT arbeiten zu können, müssen Sie zunächst ein Projekt erstellen, das Ihre gesamten Dateien enthält.</p>
             <p>Verwenden Sie <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
                   <span class="guimenu">Projekt</span>
                </a>
@@ -373,14 +373,14 @@
 	  
                </a> und wählen Sie einen leeren Ordner aus oder erstellen Sie einen neuen Ordner mit dem Namen Ihres Projekts.</p>
             <p>Ein OmegaT-Projekt ist lediglich eine Sammlung von Ordnern, die Ihre gesamten Standardressourcen enthalten.</p>
-            <p>Es öffnet sich das Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projekteigenschaften">
+            <p>Nachdem Sie Ihr Projekt benannt haben, öffnet sich das Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties" title="Projekteigenschaften">
                   <span class="guilabel">Projekteigenschaften</span>
-               </a>, nachdem Sie Ihr Projekt benannt haben.</p>
-            <p>Wählen oder geben Sie in diesem Dialogfenster die Sprachen Ihrer Quelldateien und übersetzten Dateien ein, stellen Sie alles ein und klicken Sie dann auf <span class="guibutton">OK</span>, um fortzufahren.</p>
-            <p>OmegaT bietet eine kurze Liste von zweistelligen Sprachcodes, aber Sie können jeden Code, der mit <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> konform ist (einschließlich der dreistelligen Sprachcodes), in das entsprechende Feld eingeben.</p>
+               </a>.</p>
+            <p>In diesem Dialogfenster können Sie die Sprache der Quelldateien und der übersetzten Dateien auswählen oder eintragen, verschiedene Einstellungen vornehmen und dann auf <span class="guibutton">OK</span> klicken, um fortzufahren.</p>
+            <p>OmegaT stellt eine kurze Liste von zweistelligen Sprachcodes bereit, aber Sie können die Codes (zweistellig oder dreistellig) auch manuell in die Felder eintragen. Beachten Sie, dass die Codes konform mit <a class="ulink" href="https://www.rfc-editor.org/rfc/bcp/bcp47.txt" target="_top">BCP-47</a> sein müssen.</p>
             <div class="warning">
                <h3 class="title">Warnung</h3>
-               <p>Achten Sie darauf, dass Sie die richtigen Sprachen eingeben und dass alle anderen Orte, die einen Sprachcode erfordern, genau mit dem Code übereinstimmen, den Sie hier eingegeben haben. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Sprachen">
+               <p>Vergewissern Sie sich, dass Sie die richtigen Sprachcodes eingetragen haben und dass alle anderen Stellen, an denen ein Code erforderlich ist, genau diesen Codes entsprechen. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.languages" title="Sprachen">
                      <span class="guilabel">Sprachen</span>
                   </a>.</p>
             </div>
@@ -397,11 +397,11 @@
                </a>, um zu diesem Dialogfenster zurückzukehren, nachdem Sie das Projekt erstellt haben.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Sie können die Struktur eines Projekts jederzeit ändern, nachdem Sie mit dem Übersetzen begonnen haben. Teilen Sie OmegaT in dem Dialogfenster einfach mit, welche neuen Ressourcenordner verwendet werden sollen. Es wird Sie dann lediglich auffordern, das Projekt neu zu laden, um die neuen Speicherorte zu verwenden.</p>
+               <p>Sie können die Projektstruktur jederzeit ändern, nachdem Sie mit der Übersetzung begonnen haben. In diesem Dialogfenster können Sie OmegaT mitteilen, welche neuen Ressourcenordner verwendet werden sollen. Sie werden dann lediglich aufgefordert, das Projekt neu zu laden, um die neuen Speicherorte zu verwenden.</p>
             </div>
-            <p>Als Nächstes wird das Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="Quelldateien">
+            <p>Als Nächstes öffnet sich das Dialogfenster <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list" title="Quelldateien">
                   <span class="guilabel">Quelldateien</span>
-               </a> geöffnet.</p>
+               </a>.</p>
             <p>Klicken Sie auf <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list.copy.files">
                   <span class="guibutton">Dateien hinzufügen...</span>
                </a> oder <a class="link" href="chapter.windows.and.dialogs.html#windows.source.files.list.download.page">
@@ -413,14 +413,14 @@
                <a class="link" href="chapter.menus.html#menus.project.access.project.contents">
                   <span class="guisubmenu">Auf Projektinhalte zugreifen</span>
                </a>, wenn Sie nicht mehr wissen, wo sich Ihr Projekt befindet.</p>
-            <p>Wenn Sie den Inhalt einer Datei im <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+            <p>Wenn Sie den Inhalt einer Datei im Fensterbereich <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
                   <span class="guilabel">Editor</span>
-               </a>-Bereich nicht sehen, ist diese Datei möglicherweise leer oder hat ein Format, das von OmegaT nicht unterstützt wird. Verwenden Sie <a class="link" href="chapter.menus.html#menus.options" title="Optionen">
+               </a> nicht sehen, kann es sein, dass die Datei leer ist oder ein Format hat, das von OmegaT nicht unterstützt wird. Verwenden Sie <a class="link" href="chapter.menus.html#menus.options" title="Optionen">
                   <span class="guimenu">Optionen</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.options.file.filters">
                   <span class="guimenuitem">Globale Dateifilter...</span>
-               </a>, um die Liste der unterstützten Dateiformate zu öffnen. Wenn das Format Ihrer Datei nicht aufgeführt ist, verwenden Sie Plugins von Drittanbietern oder konvertieren Sie die Datei in ein Format, das unterstützt wird. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.translate.other.files" title="Andere Formate unterstützen">Andere Formate unterstützen</a>.</p>
+               </a>, um eine Liste unterstützter Dateiformate zu öffnen. Wenn das Format Ihrer Datei nicht aufgeführt ist, verwenden Sie Plugins von Drittanbietern oder konvertieren Sie die Datei in ein unterstütztes Format. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.translate.other.files" title="Andere Formate unterstützen">Andere Formate unterstützen</a>.</p>
          </section>
          <section class="section" id="introduction.install.spellchecker.dictionary">
             <div class="titlepage">
@@ -430,40 +430,40 @@
                   </div>
                </div>
             </div>
-            <p>Omegat bietet ein System zur Rechtschreibprüfung, enthält aber keine Wörterbücher für die eigentliche Rechtschreibprüfung Ihrer Übersetzungen. Sie müssen die entsprechenden Wörterbücher selbst installieren.</p>
-            <p>Verwenden Sie den <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Rechtschreibprüfung">
+            <p>Omegat unterstützt eine automatische Rechtschreibprüfung, enthält aber keine Wörterbücher für die eigentliche Rechtschreibprüfung Ihrer Übersetzungen. Diese müssen Sie selbst installieren.</p>
+            <p>Verwenden Sie den Bereich <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker" title="Rechtschreibprüfung">
                   <span class="guilabel">Rechtschreibprüfung</span>
-               </a>-Abschnitt im <a class="link" href="chapter.dialogs.preferences.html" title="Einstellungen">
+               </a> im Dialogfenster <a class="link" href="chapter.dialogs.preferences.html" title="Einstellungen">
                   <span class="guilabel">Einstellungen</span>
-               </a>-Dialogfenster, um auf die Einstellungen für die Rechtschreibprüfung zuzugreifen.</p>
+               </a>, um Einstellungen vorzunehmen.</p>
             <div class="orderedlist">
                <ol class="orderedlist" type="1">
                   <li class="listitem">
-                     <p>Klicken Sie auf die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker.install.new">
+                     <p>Klicken Sie auf die Schaltfläche <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.spellchecker.install.new">
                            <span class="guibutton">Neue Sprache installieren...</span>
-                        </a>-Schaltfläche, um eine Liste der Wörterbücher anzuzeigen, die unter der URL im Feld <span class="guilabel">URL von herunterladbaren Rechtschreibwörterbüchern</span> oberhalb dieser Schaltfläche verfügbar sind.</p>
+                        </a>, um eine Liste von Wörterbüchern anzuzeigen. Sie finden die Schaltfläche unter dem Eingabefeld &quot;<span class="guilabel">URL von herunterladbaren Rechtschreibwörterbüchern</span>&quot;.</p>
                   </li>
                   <li class="listitem">
-                     <p>Wählen Sie so viele Wörterbücher aus, wie Sie möchten, und klicken Sie auf die Schaltfläche <span class="guibutton">Installieren</span>. OmegaT lädt die Wörterbücher herunter und kopiert sie in den Speicherort der Rechtschreibwörterbücher, der oben im Dialogfenster angegeben ist (standardmäßig der <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a>). Dieser Vorgang kann einige Zeit in Anspruch nehmen.</p>
+                     <p>Wählen Sie so viele Wörterbücher aus, wie Sie möchten, und klicken Sie auf die Schaltfläche <span class="guibutton">Installieren</span>. OmegaT lädt die Wörterbücher herunter und kopiert sie in den Speicherort für Rechtschreibwörterbücher (standardmäßig im <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a>), den Sie im oberen Bereich des Dialogfensters ändern können. Dieser Vorgang kann einige Zeit dauern.</p>
                   </li>
                   <li class="listitem">
-                     <p>Klicken Sie auf die Schaltfläche <span class="guibutton">Schließen</span>. OmegaT wird eine Liste mit den installierten Wörterbüchern anzeigen.</p>
+                     <p>Klicken Sie auf die Schaltfläche <span class="guibutton">Schließen</span>. OmegaT zeigt eine Liste der installierten Wörterbücher an.</p>
                   </li>
                </ol>
             </div>
             <div class="warning">
                <h3 class="title">Warnung</h3>
-               <p>OmegaT ist nicht in der Lage, Sprachen automatisch zu erkennen und verwendet nur dann ein Wörterbuch, wenn dessen Name mit dem Zielsprachcode übereinstimmt.</p>
+               <p>OmegaT erkennt Sprachen nicht automatisch und verwendet ein Wörterbuch nur dann, wenn dessen Name mit dem Zielsprachcode übereinstimmt.</p>
                <div class="example" id="d0e349">
                   <div class="example-title">Beispiel 2. Zielsprachcode des Projekts und Name des Rechtschreibwörterbuchs</div>
                   <div class="example-contents">
-                     <p>Wenn die Projektzielsprache <span class="bold">
+                     <p>Wenn die Sprache des Projekts <span class="bold">
                            <strong>fr</strong>
-                        </span> und der Wörterbuchname <span class="bold">
+                        </span> ist und der Name des Wörterbuchs <span class="bold">
                            <strong>fr_fr</strong>
                         </span> oder <span class="bold">
                            <strong>fr-fr</strong>
-                        </span> ist, können Sie entweder:</p>
+                        </span> lautet, können Sie entweder:</p>
                      <div class="itemizedlist">
                         <ul class="itemizedlist" style="list-style-type: disc; ">
                            <li class="listitem">
@@ -478,7 +478,7 @@
                                     </span>+<span class="keycap">
                                        <strong>E</strong>
                                     </span>
-                                 </a> nutzen, um die Projektzielsprache in <span class="bold">
+                                 </a> verwenden, um die Zielsprache des Projekts in <span class="bold">
                                     <strong>fr-fr</strong>
                                  </span> zu ändern, oder</p>
                            </li>
@@ -489,7 +489,7 @@
                                  </a>
                                  <a class="link" href="chapter.menus.html#menus.options.access.configuration.folder">
                                     <span class="guimenuitem">Konfigurationsordner öffnen</span>
-                                 </a> verwenden, um den <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a> zu öffnen und den Wörterbuchdateinamen in <span class="bold">
+                                 </a> verwenden, um den <a class="link" href="chapter.appendices.html#configuration.folder" title="Konfigurationsordner">Konfigurationsordner</a> zu öffnen und die Dateinamen der Wörterbücher in <span class="bold">
                                     <strong>fr</strong>
                                  </span> zu ändern.</p>
                            </li>
@@ -510,15 +510,15 @@
             </div>
             <p>Standardmäßig werden bei einem Übersetzungsprojekt <span class="emphasis">
                   <em>Sätze</em>
-               </span> erstellt, indem vorhandene <span class="emphasis">
+               </span> erstellt, indem die <span class="emphasis">
                   <em>Absatzblöcke</em>
-               </span> im Dokument aufgeteilt werden. Siehe die Projekteigenschaft <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.options.segmentation">
+               </span> des Dokuments geteilt werden. Einzelheiten finden Sie unter <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.options.segmentation">
                   <code class="option">Segmentierung auf Satzebene</code>
-               </a> für weitere Informationen.</p>
-            <p>Segmente innerhalb eines Absatzes können weiter segmentiert oder &quot;unsegmentiert&quot; (zusammengeführt) bleiben. Fügen Sie eine Segmentierungsregel hinzu, um sie weiter zu segmentieren, oder eine Ausnahmeregel, um sie mit dem Teil zusammenzuführen, von dem sie abgetrennt wurden. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentierung">Segmentierung</a>.</p>
+               </a> (Projekteigenschaft).</p>
+            <p>Segmente innerhalb eines Absatzes können weiter segmentiert oder &quot;unsegmentiert&quot; (zusammengeführt) bleiben. Fügen Sie eine Segmentierungsregel hinzu, um sie weiter zu segmentieren, oder eine Ausnahmeregel, um sie mit dem Teil zusammenzuführen, von dem sie getrennt wurden. Einzelheiten finden Sie unter <a class="link" href="chapter.appendices.html#app.segmentation" title="Segmentierung">Segmentierung</a>.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Das normale Leerzeichen wird häufig als Segmentbegrenzung verwendet. Sie können die folgenden Schritte befolgen, um zwei via Leerzeichen getrennte Textabschnitte zusammenzufügen:</p>
+               <p>Als Segmentbegrenzung wird häufig das normale Leerzeichen verwendet. Um zwei durch Leerzeichen getrennte Textabschnitte zusammenzuführen, gehen Sie z.B. wie folgt vor:</p>
                <div class="orderedlist">
                   <ol class="orderedlist" type="1">
                      <li class="listitem">
@@ -530,10 +530,10 @@
                            </a>.</p>
                      </li>
                      <li class="listitem">
-                        <p>Suchen Sie die Stelle, an der sich das Leerzeichen befindet.</p>
+                        <p>Suchen Sie die Stelle mit dem Leerzeichen.</p>
                      </li>
                      <li class="listitem">
-                        <p>Ersetzen Sie es mit einem geschütztes Leerzeichen.</p>
+                        <p>Ersetzen Sie es mit einem geschützten Leerzeichen.</p>
                      </li>
                      <li class="listitem">
                         <p>Speichern Sie die Datei.</p>
@@ -561,12 +561,12 @@
                   </div>
                </div>
             </div>
-            <p>Wenn alles erledigt ist, erscheinen die Quelldateien in OmegaT in einem Layout, das wie folgt aussieht:</p>
+            <p>Wenn alles fertig ist, erscheinen die Quelldateien in OmegaT in einem Layout, das wie folgt aussieht:</p>
             <div class="figure" id="default.omegat.layout">
-               <div class="figure-title">Abbildung 1. Standard-OmegaT-Layout unter macOS</div>
+               <div class="figure-title">Abbildung 1. Standardlayout von OmegaT unter macOS</div>
                <div class="figure-contents">
                   <div class="mediaobject">
-                     <img alt="Standard-OmegaT-Layout unter macOS" src="images/defaultOmegaTLayout.png" />
+                     <img alt="Standardlayout von OmegaT unter macOS" src="images/defaultOmegaTLayout.png" />
                   </div>
                </div>
             </div>
@@ -574,57 +574,64 @@
             <div class="orderedlist">
                <ol class="orderedlist" type="1">
                   <li class="listitem">
-                     <p>Der <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
                            <span class="guilabel">Editor</span>
-                        </a>-Bereich</p>
+                        </a>
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>Der <a class="link" href="chapter.panes.html#panes.notes" title="Notizblock">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.notes" title="Notizblock">
                            <span class="guilabel">Notizblock</span>
-                        </a>-Bereich</p>
+                        </a>
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>Der <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
                            <span class="guilabel">Fuzzy Matches</span>
-                        </a>-Bereich</p>
+                        </a>
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>Der <a class="link" href="chapter.panes.html#panes.glossary" title="Glossare">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.glossary" title="Glossare">
                            <span class="guilabel">Glossare</span>
-                        </a>-Bereich</p>
+                        </a>
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>Der <a class="link" href="chapter.panes.html#panes.segment.properties" title="Segmenteigenschaften">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.segment.properties" title="Segmenteigenschaften">
                            <span class="guilabel">Segmenteigenschaften</span>
-                        </a>-Bereich</p>
+                        </a>
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>Der <a class="link" href="chapter.panes.html#panes.comments" title="Kommentare">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.comments" title="Kommentare">
                            <span class="guilabel">Kommentare</span>
-                        </a>-Bereich</p>
+                        </a>
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>Der <a class="link" href="chapter.panes.html#panes.multipletranslations" title="Mehrere Übersetzungen">
+                     <p>Der Fensterbereich <a class="link" href="chapter.panes.html#panes.multipletranslations" title="Mehrere Übersetzungen">
                            <span class="guilabel">Mehrere Übersetzungen</span>
-                        </a>-Bereich</p>
+                        </a>
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>Die Bereiche <a class="link" href="chapter.panes.html#panes.dictionary" title="Wörterbücher">
+                     <p>Die Fensterbereiche <a class="link" href="chapter.panes.html#panes.dictionary" title="Wörterbücher">
                            <span class="guilabel">Wörterbücher</span>
                         </a> und <a class="link" href="chapter.panes.html#panes.machinetranslation" title="Maschinelle Übersetzungen">
                            <span class="guilabel">Maschinelle Übersetzungen</span>
                         </a> sind angedockt</p>
                   </li>
                   <li class="listitem">
-                     <p>Die <a class="link" href="chapter.panes.html#panes.statusbar" title="Statusleiste">
+                     <p>Die rechte <a class="link" href="chapter.panes.html#panes.statusbar" title="Statusleiste">
                            <span class="guilabel">Statusleiste</span>
-                        </a> (rechts), die Projektinformationen enthält</p>
+                        </a> enthält Informationen über das Projekt</p>
                   </li>
                </ol>
             </div>
-            <p>Verwenden Sie die Optionen im <a class="link" href="chapter.menus.html#menus.view" title="Ansicht">
+            <p>Verwenden Sie die Optionen im Menü <a class="link" href="chapter.menus.html#menus.view" title="Ansicht">
                   <span class="guimenu">Ansicht</span>
-               </a>-Menü und verschieben Sie die einzelnen <a class="link" href="chapter.panes.html" title="Fensterbereiche">Fensterbereiche</a>, um ein Layout zu erhalten, das Ihrem Arbeitsablauf am besten entspricht.</p>
+               </a> und verschieben Sie die einzelnen <a class="link" href="chapter.panes.html" title="Fensterbereiche">Fensterbereiche</a>, um Ihren Workflow zu verbessern.</p>
          </section>
          <section class="section" id="introduction.translate.the.segments.one.by.one">
             <div class="titlepage">
@@ -634,14 +641,14 @@
                   </div>
                </div>
             </div>
-            <p>Im <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
+            <p>Im Fensterbereich <a class="link" href="chapter.panes.html#panes.editor" title="Editor">
                   <span class="guilabel">Editor</span>
-               </a>-Bereich geben Sie Ihre Übersetzung ein.</p>
+               </a> geben Sie Ihre Übersetzung ein.</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Wie effizient Sie mit Tastenkürzeln arbeiten können, erfahren Sie im Abschnitt <a class="link" href="chapter.instant.start.guide.html#app.shortcuts.streamline.workflow" title="Ein auf Tastenkürzeln basierender Workflow">Ein auf Tastenkürzeln basierender Workflow</a>.</p>
+               <p>Im Abschnitt <a class="link" href="chapter.instant.start.guide.html#app.shortcuts.streamline.workflow" title="Ein auf Tastenkürzeln basierender Workflow">Ein auf Tastenkürzeln basierender Workflow</a> erfahren Sie, wie effizient Sie mit Tastenkürzeln arbeiten können.</p>
             </div>
-            <p>Nachdem Sie die Übersetzung eines Segments eingegeben haben, verwenden Sie <a class="link" href="chapter.menus.html#menus.goto" title="Gehe zu">
+            <p>Nachdem Sie die Übersetzung eines Segments eingegeben haben, können Sie mit <a class="link" href="chapter.menus.html#menus.goto" title="Gehe zu">
                   <span class="guimenu">Gehe zu</span>
                </a>
                <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">
@@ -651,21 +658,21 @@
                   </span>+<span class="keycap">
                      <strong>U</strong>
                   </span>
-               </a>, um zum nächsten unübersetzten Segment zu springen.</p>
-            <p>Sobald Sie das Segment verlassen, wird die Übersetzung automatisch in die <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>-Datei gespeichert und als Referenz für den Rest Ihrer Übersetzung verwendet.</p>
-            <p>Im <a class="link" href="chapter.menus.html#menus.goto" title="Gehe zu">
+               </a> zum nächsten unübersetzten Segment springen.</p>
+            <p>Sobald Sie das Segment verlassen, wird die Übersetzung automatisch in die Datei <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> gespeichert und als Referenz für den Rest Ihrer Übersetzung verwendet.</p>
+            <p>Weitere Navigationsmöglichkeiten finden Sie unter <a class="link" href="chapter.menus.html#menus.goto" title="Gehe zu">
                   <span class="guimenu">Gehe zu</span>
-               </a>-Menü finden Sie weitere Navigationsmöglichkeiten.</p>
+               </a> (Menü).</p>
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>OmegaT weist den übersetzten Segmenten keine unterschiedlichen Zustände zu. Entweder ist ein Segment übersetzt oder nicht.</p>
-               <p>Wenn Sie ein bestimmtes Überprüfungsverfahren benötigen, können Sie zum Beispiel folgendes tun:</p>
+               <p>OmegaT weist den übersetzten Segmenten keine unterschiedlichen Zustände zu. Ein Segment ist entweder übersetzt oder nicht.</p>
+               <p>Wenn Sie eine bestimmte Art der Überprüfung benötigen, können Sie z.B. folgendes tun:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>Fügen Sie Erinnerungen im <a class="link" href="chapter.panes.html#panes.notes" title="Notizblock">
+                        <p>Fügen Sie für problematische Segmente Erinnerungen im Fensterbereich <a class="link" href="chapter.panes.html#panes.notes" title="Notizblock">
                               <span class="guilabel">Notizblock</span>
-                           </a>-Bereich für problematische Segmente hinzu</p>
+                           </a> hinzu</p>
                         <p>Verwenden Sie <a class="link" href="chapter.menus.html#menus.goto" title="Gehe zu">
                               <span class="guimenu">Gehe zu</span>
                            </a>
@@ -692,7 +699,7 @@
                               </span>+<span class="keycap">
                                  <strong>E</strong>
                               </span>
-                           </a>, um zum Editor zurückzukehren und Ihre Übersetzung fortzusetzen.</p>
+                           </a>, um zum Editor zurückzukehren und mit der Übersetzung fortzufahren.</p>
                      </li>
                      <li class="listitem">
                         <p>Verwenden Sie <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
@@ -730,18 +737,18 @@
                </a>
                <a class="link" href="chapter.menus.html#menus.view.mark.glossary.matches">
                   <span class="guimenuitem">Glossar-Matches hervorheben</span>
-               </a> und die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Autovervollständigung">
+               </a> und <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Autovervollständigung">
                   <span class="guilabel">Autovervollständigung</span>
-               </a>-Einstellungen, um die Glossareinträge zu verwalten.</p>
-            <p>Wenn Sie ein Segment betreten, das Begriffe enthält, die mit Begriffen in Ihren Glossaren übereinstimmen, werden die Begriffe und ihre Übersetzungen im <a class="link" href="chapter.panes.html#panes.glossary" title="Glossare">
+               </a> in den Einstellungen, um die Glossar-Matches zu verwalten.</p>
+            <p>Wenn Sie ein Segment betreten, das Begriffe enthält, die mit Begriffen in Ihren Glossaren übereinstimmen, werden die Begriffe und ihre Übersetzungen im Fensterbereich <a class="link" href="chapter.panes.html#panes.glossary" title="Glossare">
                   <span class="guilabel">Glossare</span>
-               </a>-Bereich angezeigt.</p>
-            <p>Wenn Sie ein Segment betreten, dessen Quelltext teilweise oder vollständig mit den Inhalten der Translation Memories des Projekts übereinstimmt, zeigt OmegaT die Matches im <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
+               </a> angezeigt.</p>
+            <p>Wenn Sie ein Segment betreten, dessen Quelltext teilweise oder vollständig mit den Inhalten der Translation Memories des Projekts übereinstimmt, zeigt OmegaT die Matches im Fensterbereich <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
                   <span class="guilabel">Fuzzy Matches</span>
-               </a>-Fenster an.</p>
-            <p>Verwenden Sie das <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
+               </a> an.</p>
+            <p>Verwenden Sie das Menü <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
                   <span class="guimenu">Bearbeiten</span>
-               </a>-Menü, um Translation Memory Matches zu verwalten und verschiedene andere nützliche Funktionen auszuführen.</p>
+               </a>, um Translation Memory Matches zu verwalten und verschiedene andere nützliche Funktionen auszuführen.</p>
             <p>Mit der Funktion <a class="link" href="chapter.menus.html#menus.edit.search.project">
                   <span class="guimenuitem">Suchen...</span> 
                   <span class="keycap">
@@ -750,7 +757,7 @@
                      <strong>F</strong>
                   </span>
 	  
-               </a> können Sie das gesamte Projekt nach Begriffen, Satzfragmenten usw. durchsuchen - entweder als exakte Suche, Stichwortsuche oder RegEx-Suche. Sie können die Suche auch anhand von Informationen wie Autor oder Datum einschränken.</p>
+               </a> können Sie das gesamte Projekt nach Begriffen, Satzfragmenten usw. durchsuchen - entweder als exakte Suche, Stichwortsuche oder RegEx-Suche. Sie können die Suche auch verfeinern, indem Sie Informationen wie Autor oder Datum eingeben.</p>
             <p>Sie können sich auch nur auf die Ergebnisse konzentrieren, indem Sie sie im Editor filtern. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Textsuche">
                   <span class="guilabel">Textsuche</span>
                </a>.</p>
@@ -762,12 +769,12 @@
                      <strong>K</strong>
                   </span>
 	  
-               </a> unter Nutzung desselben Dialogfensters ersetzen. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Textersetzung">
+               </a> ersetzen, die dasselbe Dialogfenster verwendet. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#windows.text.replace" title="Textersetzung">
                   <span class="guilabel">Textersetzung</span>
                </a>.</p>
-            <p>Sie können während der Übersetzung Notizen für sich selbst oder für Teammitglieder im <a class="link" href="chapter.panes.html#panes.notes" title="Notizblock">
+            <p>Sie können während der Übersetzung Notizen für sich selbst oder für Teammitglieder im Fensterbereich <a class="link" href="chapter.panes.html#panes.notes" title="Notizblock">
                   <span class="guilabel">Notizblock</span>
-               </a>-Bereich hinterlegen und mit <a class="link" href="chapter.menus.html#menus.goto.next.note">
+               </a> hinterlegen und mit <a class="link" href="chapter.menus.html#menus.goto.next.note">
                   <span class="guimenuitem">Nächste Notiz</span> 
                   <span class="keycap">
                      <strong>C</strong>
@@ -785,12 +792,12 @@
                   </span>+<span class="keycap">
                      <strong>P</strong>
                   </span>
-               </a> im <a class="link" href="chapter.menus.html#menus.goto" title="Gehe zu">
+               </a> im Menü <a class="link" href="chapter.menus.html#menus.goto" title="Gehe zu">
                   <span class="guimenu">Gehe zu</span>
-               </a>-Menü oder über das <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Textsuche">
+               </a> oder im Fenster <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Textsuche">
                   <span class="guilabel">Textsuche</span>
-               </a>-Fenster zu den Segmenten mit Notizen zurückkehren.</p>
-            <p>Das <a class="link" href="chapter.panes.html#panes.editor.context.menu">Kontextmenü</a> ermöglicht den einfachen Zugriff auf diverse häufig verwendete Funktionen. Das <a class="link" href="chapter.panes.html#panes.editor.auto.completion.menu">Autovervollständigungsmenü</a> ist auch im Editorbereich verfügbar.</p>
+               </a> zu den Segmenten mit Notizen zurückkehren.</p>
+            <p>Das <a class="link" href="chapter.panes.html#panes.editor.context.menu">Kontextmenü</a> ermöglicht einen einfachen Zugriff auf verschiedene häufig verwendete Funktionen. Das <a class="link" href="chapter.panes.html#panes.editor.auto.completion.menu">Autovervollständigungsmenü</a> ist auch im Editorbereich verfügbar.</p>
          </section>
          <section class="section" id="introduction.manage.your.tags">
             <div class="titlepage">
@@ -800,8 +807,8 @@
                   </div>
                </div>
             </div>
-            <p>Wenn die von Ihnen übersetzten Dokumente fett, kursiv oder andere dekorative Elemente enthalten, wandelt OmegaT diese in Tags um, die den dekorierten Text umschließen. Zu solchen Dateien gehören zum Beispiel LibreOffice-Dateien, HTML-Dateien und Microsoft Office-Dateien. Dokumente enthalten oft auch Tags, die nichts mit Dekorationen zu tun haben, aber dennoch in den Quelldateien (und folglich auch in den übersetzten Dateien) wichtig sind.</p>
-            <p>Ein Satz könnte in seiner ursprünglichen Applikation wie folgt aussehen:</p>
+            <p>Wenn die zu übersetzenden Dokumente fett, kursiv oder andere dekorative Elemente enthalten, wandelt OmegaT diese in Tags um, die den dekorierten Text umschließen. Beispiele für solche Dateien sind LibreOffice-Dateien, HTML-Dateien und Microsoft Office-Dateien. Oft enthalten Dokumente auch Tags, die nichts mit der Dekoration zu tun haben, aber dennoch für die Quelldateien (und somit auch für die übersetzten Dateien) wichtig sind.</p>
+            <p>Ein Satz könnte in der ursprünglichen Applikation wie folgt dargestellt werden:</p>
             <div class="example" id="example.source.segment.with.decorations">
                <div class="example-title">Beispiel 3. Satz mit dekorativer Formatierung</div>
                <div class="example-contents">
@@ -813,7 +820,7 @@
                </div>
             </div>
             <br class="example-break" />
-            <p>Je nach ursprünglichem Format wird OmegaT diesen Satz jedoch auf eine ähnliche Weise darstellen:</p>
+            <p>Je nach ursprünglichem Format wird OmegaT diesen Satz jedoch etwas anders darstellen:</p>
             <div class="example" id="example.how.decorations.are.displayed">
                <div class="example-title">Beispiel 4. Wie Dekorationen in OmegaT angezeigt werden</div>
                <div class="example-contents">
@@ -823,7 +830,7 @@
             <br class="example-break" />
             <div class="note">
                <h3 class="title">Anmerkung</h3>
-               <p>Die verschiedenen Tag-bezogenen Einstellungen können sehr hilfreich sein, um die Tags in einem Dokument richtig anzuordnen. Einzelheiten finden Sie in den folgenden Optionen und Skripten:</p>
+               <p>Die verschiedenen Tag-Einstellungen können sehr hilfreich sein, um die Tags in einem Dokument richtig anzuordnen. Einzelheiten finden Sie in den folgenden Optionen und Skripten:</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -863,7 +870,7 @@
                   </ul>
                </div>
             </div>
-            <p>Die Tags in OmegaT sind grau gefärbt, um sie leichter erkennen zu können. Diese sind geschützt, um zu verhindern, dass ihr Inhalt geändert werden kann, doch sie können als Ganzes gelöscht, manuell eingegeben oder innerhalb des Zielsatzes verschoben werden.</p>
+            <p>Die Tags in OmegaT werden grau dargestellt, um sie leichter erkennen zu können. Die Tags sind geschützt, damit ihr Inhalt nicht verändert werden kann, aber sie können als Ganzes gelöscht, manuell eingegeben oder innerhalb des Zielsatzes verschoben werden.</p>
             <p>Verwenden Sie <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
                   <span class="guimenu">Bearbeiten</span>
                </a> 
@@ -886,13 +893,13 @@
                   </span>
 	  
                </a>, um die Tags an der Position des Textcursors einzufügen.</p>
-            <p>Sie können benutzerdefinierte Tags definieren, die auf die gleiche Weise verwaltet werden. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
+            <p>Sie können benutzerdefinierte Tags definieren, die auf die gleiche Weise gehandhabt werden. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
                   <code class="option">Benutzerdefinierte Tags</code>
                </a>.</p>
-            <p>Sie können auch Zeichenketten definieren, für die OmegaT eine Warnung ausgeben soll, wenn Sie sie in einer Übersetzung stehen lassen. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
-                  <code class="option">Geschützter Text</code>
+            <p>Sie können auch Zeichenketten definieren, für die OmegaT eine Warnung ausgeben soll, wenn diese in einer Übersetzung belassen werden. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+                  <code class="option">Geschützte Texte</code>
                </a>.</p>
-            <p>Wenn Sie allerdings beim Verwalten der Tags einen Fehler machen, kann es vorkommen, dass die übersetzten Dateien nicht mehr geöffnet werden können. Verwenden Sie <a class="link" href="chapter.menus.html#menus.tools" title="Tools">
+            <p>Wenn Sie einen Fehler bei den Tags machen, kann es passieren, dass die übersetzten Dateien nicht mehr geöffnet werden können. Verwenden Sie <a class="link" href="chapter.menus.html#menus.tools" title="Tools">
                   <span class="guimenu">Tools</span>
                </a> 
                <a class="link" href="chapter.menus.html#menus.tools.check.issues">
@@ -904,24 +911,24 @@
                   </span>+<span class="keycap">
                      <strong>V</strong>
                   </span>
-               </a>, um Ihre Tags zu untersuchen, bevor Sie Ihre übersetzten Dateien erstellen.</p>
+               </a>, um Ihre Tags zu überprüfen, bevor Sie Ihre übersetzten Dateien erstellen.</p>
             <div class="warning">
                <h3 class="title">Warnung</h3>
-               <p>Wenn sich eine Datei in LibreOffice, Word oder einer anderen Applikation nicht öffnen lässt, liegt das oft an Fehlern in der Verwaltung der OmegaT-Tags. Kehren Sie zu OmegaT zurück, überprüfen Sie Ihr Dokument auf Tag-Probleme und erstellen Sie erneut die übersetzte Datei.</p>
+               <p>Wenn eine Datei nicht mehr in LibreOffice, Word oder einer anderen Applikation geöffnet werden kann, liegt das oft an den Tags. Kehren Sie zu OmegaT zurück, prüfen Sie Ihr Dokument auf Tag-Probleme und erstellen Sie die übersetzte Datei erneut.</p>
             </div>
          </section>
          <section class="section" id="introduction.review.the.translation">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both">Übersetzung überprüfen</h2>
+                     <h2 class="title" style="clear: both">Übersetzung prüfen</h2>
                   </div>
                </div>
             </div>
-            <p>Es steht Ihnen frei, beim Überprüfen der Übersetzung das <a class="link" href="chapter.panes.html" title="Fensterbereiche">Fensterbereiche</a>-Layout und die <a class="link" href="chapter.menus.html#menus.view" title="Ansicht">
+            <p>Es steht Ihnen frei, beim Prüfen der Übersetzung das Layout der <a class="link" href="chapter.panes.html" title="Fensterbereiche">Fensterbereiche</a> und die Optionen im Menü <a class="link" href="chapter.menus.html#menus.view" title="Ansicht">
                   <span class="guimenu">Ansicht</span>
-               </a>-Optionen zu ändern.</p>
-            <p>Verwenden Sie die Option <a class="link" href="chapter.menus.html#menus.tools.check.issues">
+               </a> zu ändern.</p>
+            <p>Verwenden Sie den Menüpunkt <a class="link" href="chapter.menus.html#menus.tools.check.issues">
                   <span class="guimenuitem">Probleme untersuchen...</span> 
                   <span class="keycap">
                      <strong>C</strong>
@@ -930,7 +937,7 @@
                   </span>+<span class="keycap">
                      <strong>V</strong>
                   </span>
-               </a>, um verschiedene Prüfungen des Inhalts Ihrer Übersetzung durchzuführen.</p>
+               </a>, um verschiedene inhaltliche Prüfungen an Ihrer Übersetzung durchzuführen.</p>
          </section>
          <section class="section" id="introduction.generate.the.translated.file">
             <div class="titlepage">
@@ -940,7 +947,7 @@
                   </div>
                </div>
             </div>
-            <p>Wenn Sie sehen wollen, wie Ihre Übersetzung im endgültigen Format aussehen wird, verwenden Sie <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
+            <p>Wenn Sie Ihre Übersetzung im endgültigen Format sehen möchten, verwenden Sie <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
                   <span class="guimenu">Projekt</span>
                </a> 
                <a class="link" href="chapter.menus.html#menus.project.create.translated.documents">
@@ -953,20 +960,20 @@
                </a>.</p>
             <div class="warning">
                <h3 class="title">Warnung</h3>
-               <p>Jedes Mal, wenn Sie die übersetzten Dateien erstellen, werden alle zuvor erstellten Dateien mit demselben Namen überschrieben. Benennen Sie alle Dateien um, die nicht überschrieben werden sollen, nachdem Sie sie erstellt haben. Sie können die Änderung von Dateinamen automatisieren, indem Sie die Option <a class="link" href="chapter.appendices.html#edit.filter.dialog" title="Bearbeiten">Bearbeiten</a> für den Dateifilter verwenden.</p>
+               <p>Jedes Mal, wenn Sie die übersetzten Dateien erstellen, werden alle zuvor erstellten Dateien mit demselben Namen überschrieben. Benennen Sie alle Dateien, die nicht überschrieben werden sollen, nach ihrer Erstellung um. Mit der <a class="link" href="chapter.appendices.html#edit.filter.dialog" title="Bearbeiten">Bearbeiten</a>-Option des Dateifilters können Sie die Umbenennung automatisieren.</p>
                <p>Ihre Übersetzungen werden <span class="emphasis">
                      <em>immer</em>
-                  </span> in die <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a>-Datei (den Translation Memory des Projekts) im <a class="link" href="chapter.project.folder.html#project.folder.omegat">omegat</a>-Ordner Ihres Projekts gespeichert.</p>
-               <p>Die Löschung des Inhalts im <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>-Ordner hat <span class="emphasis">
-                     <em>keine</em>
-                  </span> Auswirkungen auf den Inhalt Ihrer Übersetzungen.</p>
+                  </span> in die Datei <a class="link" href="chapter.project.folder.html#project.folder.project.save.tmx">project_save.tmx</a> (Translation Memory des Projekts) im Ordner <a class="link" href="chapter.project.folder.html#project.folder.omegat">omegat</a> Ihres Projekts gespeichert.</p>
+               <p>Löschungen im Ordner <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> haben <span class="emphasis">
+                     <em>keinen</em>
+                  </span> Einfluss auf Ihre Übersetzungen.</p>
             </div>
-            <p>Die Dokumente werden im <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a>-Ordner Ihres Projekts erstellt. Zuvor erstellte Dateien werden dabei überschrieben, es sei denn, Sie haben sie umbenannt...</p>
-            <p>Sobald die übersetzten Dateien erstellt sind, können Sie sie in ihrer ursprünglichen Applikation öffnen, um ihren Inhalt zu überprüfen und gegebenenfalls weiter zu verändern. Solche externen Änderungen spiegeln sich in OmegaT <span class="emphasis">
+            <p>Die Dokumente werden im Ordner <a class="link" href="chapter.project.folder.html#project.folder.target" title="target">target</a> Ihres Projekts erstellt. Zuvor erstellte Dateien werden dabei überschrieben, es sei denn, Sie haben sie umbenannt...</p>
+            <p>Sobald die übersetzten Dateien erstellt sind, können Sie sie in der ursprünglichen Applikation öffnen, um den Inhalt zu prüfen und gegebenenfalls weitere Änderungen vorzunehmen. OmegaT spiegelt solche externen Änderungen <span class="emphasis">
                   <em>nicht</em>
                </span> wider.</p>
-            <p>Änderungen, die außerhalb von OmegaT vorgenommen wurden, können wieder in OmegaT (und damit in den Translation Memory des Projekts, um es auf dem neuesten Stand zu halten) eingefügt werden, indem man sie entweder manuell in die entsprechenden Segmente einträgt oder indem man die ursprüngliche Datei und die übersetzte Datei aneinander ausrichtet, um eine neue Translation-Memory-Datei (TMX) zu erstellen, die im <a class="link" href="chapter.project.folder.html#project.folder.tm.enforce">tm/enforce</a>-Ordner Ihres Projektordners abgelegt wird. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner" title="Dateien ausrichten">
-                  <span class="guilabel">Dateien ausrichten</span>
+            <p>Änderungen, die außerhalb von OmegaT vorgenommen wurden, müssen Sie in OmegaT (und somit in den Translation Memory des Projekts) einfügen, um die Übersetzung auf dem neuesten Stand zu halten. Dafür gibt es zwei Möglichkeiten: Entweder Sie tragen die Änderungen manuell in die entsprechenden Segmente ein, oder Sie richten die Originaldatei und die übersetzte Datei aneinander aus, um eine neue Translation-Memory-Datei (TMX) zu erstellen, die im Ordner <a class="link" href="chapter.project.folder.html#project.folder.tm.enforce">tm/enforce</a> Ihres Projekts abgelegt wird. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#windows.aligner" title="Dateien ausrichten (Aligner)">
+                  <span class="guilabel">Dateien ausrichten (Aligner)</span>
                </a>.</p>
          </section>
          <section class="section" id="introduction.one.more.thing">
@@ -980,10 +987,10 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Übersetzungsprojekte sind lediglich Ordner mit Dateien. Sie können für jeden neuen Auftrag ein neues Projekt erstellen oder jederzeit neue Quelldateien zu einem bestehenden Projekt hinzufügen.</p>
+                     <p>Übersetzungsprojekte sind einfach Ordner, die Dateien enthalten. Sie können für jeden neuen Auftrag ein neues Projekt erstellen oder einem bestehenden Projekt jederzeit neue Quelldateien hinzufügen.</p>
                   </li>
                   <li class="listitem">
-                     <p>Sie können die Projekteinstellungen mittels <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
+                     <p>Die Projekteinstellungen können mit <a class="link" href="chapter.menus.html#menus.project" title="Projekt">
                            <span class="guimenu">Projekt</span>
                         </a> 
                         <a class="link" href="chapter.menus.html#menus.project.properties">
@@ -993,19 +1000,19 @@
                            </span>+<span class="keycap">
                               <strong>E</strong>
                            </span>
-                        </a> aufrufen und ändern. Um die Liste der Projektdateien anzuzeigen, verwenden Sie <a class="link" href="chapter.menus.html#menus.project.source.files.list">
+                        </a> aufgerufen und geändert werden. Um eine Liste der Projektdateien anzuzeigen, verwenden Sie <a class="link" href="chapter.menus.html#menus.project.source.files.list">
                            <span class="guimenuitem">Quelldateien...</span> 
                            <span class="keycap">
                               <strong>C</strong>
                            </span>+<span class="keycap">
                               <strong>L</strong>
                            </span>
-                        </a> im gleichen Menü. Mit der Option <a class="link" href="chapter.menus.html#menus.project.access.project.contents">
+                        </a> im selben Menü. Mit dem Menüpunkt <a class="link" href="chapter.menus.html#menus.project.access.project.contents">
                            <span class="guisubmenu">Auf Projektinhalte zugreifen</span>
-                        </a> können Sie jederzeit auf den Inhalt aller Ressourcen zugreifen.</p>
+                        </a> können Sie jederzeit auf die Inhalte aller Ressourcen zugreifen.</p>
                   </li>
                   <li class="listitem">
-                     <p>Jedes Mal, wenn Sie die übersetzten Dateien erstellen (siehe <a class="link" href="chapter.instant.start.guide.html#introduction.generate.the.translated.file" title="Die übersetzten Dateien erstellen">Die übersetzten Dateien erstellen</a> oben), erstellt OmegaT drei Translation Memories, die den aktuellen Übersetzungsstand der Dateien im <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a>-Ordner enthalten. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.exported.tms">
+                     <p>Jedes Mal, wenn Sie die übersetzten Dateien erstellen (siehe oben <a class="link" href="chapter.instant.start.guide.html#introduction.generate.the.translated.file" title="Die übersetzten Dateien erstellen">Die übersetzten Dateien erstellen</a>), erzeugt OmegaT drei Translation Memories, die den aktuellen Übersetzungsstand der Dateien im Ordner <a class="link" href="chapter.project.folder.html#project.folder.source" title="source">source</a> widerspiegeln. Einzelheiten finden Sie im Abschnitt <a class="link" href="chapter.windows.and.dialogs.html#dialogs.project.properties.file.locations.exported.tms">
                            <code class="option">Ordner für exportierte Translation-Memory-Dateien</code>
                         </a>.</p>
                   </li>
@@ -1020,37 +1027,37 @@
                   </div>
                </div>
             </div>
-            <p>Merken Sie sich die wichtigsten Tastenkürzel für die Bearbeitung und Navigation (oder <a class="link" href="chapter.appendices.html#app.shortcuts.customization" title="Anpassung">passen Sie sie an Ihre Bedürfnisse an</a>), um Ihre Arbeitsweise zu optimieren.</p>
+            <p>Das Einprägen (oder <a class="link" href="chapter.appendices.html#app.shortcuts.customization" title="Anpassung">Anpassen</a>) der wichtigsten Bearbeitungs- und Navigationskürzel kann Ihnen die Arbeit erleichtern.</p>
             <p>Dies lässt sich am besten anhand eines Beispiels veranschaulichen:</p>
             <div class="example" id="example.shortcuts.streamline.workflow">
-               <div class="example-title">Beispiel 5. Tastenkürzel verwenden, um die Übersetzung zu beschleunigen</div>
+               <div class="example-title">Beispiel 5. Mit Tastenkürzeln die Übersetzung erleichtern</div>
                <div class="example-contents">
-                  <p>Stellen Sie sich vor, Sie sind mit der Übersetzung einer aktualisierten Version einer bereits damals übersetzten Bedienungsanleitung beauftragt. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.use.tm.reuse.tm" title="TMs wiederverwenden">TMs wiederverwenden</a>.</p>
+                  <p>Stellen Sie sich vor, Sie erhalten den Auftrag, eine aktualisierte Version einer bereits übersetzten Bedienungsanleitung zu übersetzen. Einzelheiten finden Sie unter <a class="link" href="chapter.how.to.html#how.to.use.tm.reuse.tm" title="TMs wiederverwenden">TMs wiederverwenden</a>.</p>
                   <p>Da sich die ersten Seiten nicht geändert haben, werden Sie beim Öffnen des Projekts mit einem Bildschirm voller bereits übersetzter Segmente aus dem Translation Memory des vorherigen Auftrags begrüßt.</p>
-                  <p>Anstatt mühsam nach unten zu scrollen, bis Sie das erste zu übersetzende Segment gefunden haben, drücken Sie schnell <span class="keycap">
+                  <p>Anstatt mühsam nach unten zu scrollen, um das erste unübersetzte Segment zu finden, drücken Sie schnell <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>U</strong>
-                     </span>, um <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">sofort loszulegen</a> und mit der Übersetzung zu beginnen. (Und zwar jedes Mal, wenn Sie einen großen, unveränderten Abschnitt erreichen.)</p>
-                  <p>Ein paar Abschnitte später stoßen Sie auf einen Begriff, den Sie in das Glossar aufnehmen wollen. Statt zur Maus zu greifen, entsperren Sie den Textcursor mit <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">
+                     </span>, um <a class="link" href="chapter.menus.html#menus.goto.next.untranslated.segment">sofort loszulegen</a> und mit der Übersetzung zu beginnen. (Wiederholen Sie dies jedes Mal, wenn Sie einen großen, unveränderten Abschnitt erreichen.)</p>
+                  <p>Nach einigen Abschnitten stoßen Sie auf einen Begriff, den Sie in das Glossar aufnehmen möchten. Anstatt zur Maus zu greifen, können Sie den Textcursor mit <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">
                         <span class="keycap">
                            <strong>F2</strong>
                         </span>
-                     </a>, verwenden die Cursortasten und die regulären Systemkurzbefehle, um zum Begriff zu navigieren und ihn auszuwählen, und drücken dann <span class="keycap">
+                     </a> entsperren, mit den Cursortasten und den systemüblichen Tastenkürzeln zum Begriff navigieren und ihn markieren, und anschließend mit <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>S</strong>
                      </span>+<span class="keycap">
                         <strong>G</strong>
-                     </span>, um <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">den Glossareintragsdialogfenster zu öffnen</a>, wo Sie den Quellbegriff eintragen. Danach kehren Sie zum Editor zurück, sperren den Textcursor wieder mit <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">
+                     </span> das Dialogfenster <a class="link" href="chapter.menus.html#menus.edit.create.glossary.entry">Glossareintrag erstellen</a> öffnen. Danach können Sie zum Editor zurückkehren, den Textcursor mit <a class="link" href="chapter.panes.html#panes.editor.cursor.lock">
                         <span class="keycap">
                            <strong>F2</strong>
                         </span>
-                     </a> und wiederholen den Vorgang, um den Zielbegriff einzutragen.</p>
-                  <p>Sie haben die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Autovervollständigung">Autovervollständigung</a> in die Lage versetzt, automatisch nicht nur Verlaufsvorhersagen, sondern auch Glossarbegriffe und vordefinierte kurze Zeichenketten anzuzeigen, die mit einfacher Pfeilnavigation eingefügt werden können.</p>
-                  <p>Sie gelangen dann zu einem überarbeiteten Abschnitt des Textes, wo der Fensterbereich <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
+                     </a> sperren und den Vorgang wiederholen, um den Zielbegriff einzutragen.</p>
+                  <p>Sie haben die <a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="Autovervollständigung">Autovervollständigung</a> so eingestellt, dass nicht nur Verlaufsvorhersagen automatisch angezeigt werden, sondern auch Glossarbegriffe und vordefinierte kurze Zeichenketten, die durch einfache Pfeilnavigation eingefügt werden können.</p>
+                  <p>Sie gelangen dann zu einem überarbeiteten Abschnitt des Textes, wo im Fensterbereich <a class="link" href="chapter.panes.html#panes.fuzzy.matches" title="Fuzzy Matches">
                         <span class="guilabel">Fuzzy Matches</span>
-                     </a> eine Reihe von ähnlichen Segmenten aus dem vorherigen Auftrag anzeigt.</p>
+                     </a> eine Reihe ähnlicher Segmente aus dem vorherigen Auftrag angezeigt werden.</p>
                   <p>Nachdem Sie schnell <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
@@ -1064,7 +1071,7 @@
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>I</strong>
-                     </span> drücken, wenn einer der Treffer von 2 bis 5 besser geeignet ist.</p>
+                     </span> drücken, wenn einer der Treffer von 2 bis 5 besser passt.</p>
                   <p>Einige Segmente müssen später noch geändert werden, also öffnen Sie den Notizblock mit <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
@@ -1083,11 +1090,11 @@
                      </span>+<span class="keycap">
                         <strong>R</strong>
                      </span> gedrückt, um automatisch eingefügte Fuzzy Matches aus der früheren Übersetzung mit besseren Treffern von weiter vorne im aktuellen Abschnitt zu ersetzen.</p>
-                  <p>Später fällt Ihnen eine bessere Formulierung für einen etwas sperrigen Ausdruck ein. Sie wählen ihn im Quelltext aus, drücken <span class="keycap">
+                  <p>Später fällt Ihnen eine bessere Formulierung für einen etwas sperrigen Ausdruck ein. Sie markieren ihn im Quelltext, drücken <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>F</strong>
-                     </span> um ihn mit dem Suchdialogfenster <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Textsuche">zu suchen</a>, und springen dann mit <span class="keycap">
+                     </span>, um ihn mit dem Suchdialogfenster <a class="link" href="chapter.windows.and.dialogs.html#windows.text.search" title="Textsuche">zu suchen</a>, und springen dann mit <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>J</strong>
@@ -1099,11 +1106,11 @@
                      </span>+<span class="keycap">
                         <strong>J</strong>
                      </span> zu drücken, um sofort dort weiterzumachen, wo Sie aufgehört haben.</p>
-                  <p>Sie beschließen nun, alle Segmente mit Notizen zu überprüfen. Sie verwenden <span class="keycap">
+                  <p>Sie beschließen nun, alle Segmente zu prüfen, die Notizen haben. Sie verwenden <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>F</strong>
-                     </span>, um diese zu finden, und drücken <span class="keycap">
+                     </span>, um solche Segmente zu finden, und drücken <span class="keycap">
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>N</strong>
@@ -1111,19 +1118,19 @@
                         <strong>C</strong>
                      </span>+<span class="keycap">
                         <strong>P</strong>
-                     </span> im Suchfenster, um durch die Ergebnisse zu navigieren. OmegaT synchronisiert die Editorinhalte mit dem ausgewählten Ergebnis, so dass Sie die Segmente sofort bearbeiten können.</p>
-                  <p>Zeit für eine Pause. Während Sie Ihren Kaffee genießen, denken Sie darüber nach, wie viel reibungsloser Sie die verschiedenen OmegaT-Funktionen nutzen konnten, verglichen zu früher, als Sie noch ganz am Anfang standen und viel Zeit damit verbrachten, sich durch die Menüs zu klicken.</p>
-                  <p>Dank des flüssigeren Workflows konnten Sie sich besser auf die eigentliche Übersetzung konzentrieren.</p>
-                  <p>Gleichzeitig haben Sie festgestellt, dass Sie während Ihrer Sitzung mehrmals das <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
+                     </span> im Suchfenster, um durch die Ergebnisse zu navigieren. OmegaT synchronisiert den Inhalt des Editors mit dem ausgewählten Ergebnis, so dass Sie die Segmente sofort editieren können.</p>
+                  <p>Zeit für eine Pause. Während Sie Ihren Kaffee genießen, denken Sie darüber nach, wie viel reibungsloser Sie die verschiedenen OmegaT-Funktionen nutzen konnten im Vergleich zu früher, als Sie noch ganz am Anfang standen und viel Zeit damit verbrachten, sich durch die Menüs zu klicken.</p>
+                  <p>Durch den flüssigeren Workflow konnten Sie sich besser auf die eigentliche Übersetzung konzentrieren.</p>
+                  <p>Gleichzeitig haben Sie festgestellt, dass Sie während Ihrer Sitzung mehrmals den Menüpunkt <a class="link" href="chapter.menus.html#menus.edit" title="Bearbeiten">
                         <span class="guimenu">Bearbeiten</span>
                      </a>
                      <a class="link" href="chapter.menus.html#menus.edit.create.alternative.translation">
                         <span class="guimenuitem">Alternative Übersetzung erstellen</span>
-                     </a>-Menü und die Cursortasten verwendet haben, und beschließen, <a class="link" href="chapter.appendices.html#example.shortcut.addition" title="Beispiel 32. Tastenkürzel hinzufügen">ein neues Tastenkürzel hinzuzufügen</a>, um auch diesen Arbeitsschritt zu beschleunigen.</p>
+                     </a> und die Cursortasten verwendet haben, und Sie beschließen, <a class="link" href="chapter.appendices.html#example.shortcut.addition" title="Beispiel 32. Tastenkürzel hinzufügen">ein neues Tastenkürzel hinzuzufügen</a>, um auch diesen Arbeitsschritt zu beschleunigen.</p>
                </div>
             </div>
             <br class="example-break" />
-            <p>Wenn Sie sich die Zeit nehmen, die Tastenkürzel für häufig verwendete Funktionen zu lernen, wird sich das für Sie lohnen.</p>
+            <p>Wenn Sie sich die Zeit nehmen, die Tastenkürzel für häufig verwendete Funktionen zu lernen, wird es sich für Sie lohnen.</p>
          </section>
       </section>
       <footer>
@@ -1138,7 +1145,7 @@
                   </td>
                </tr>
                <tr>
-                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.1.0 - Bedienungsanleitung </td>
+                  <td style="width: 40%; text-align: left; vertical-align: top; ">OmegaT 6.0.0 - Bedienungsanleitung </td>
                   <td style="width: 20%; text-align: center; ">
                      <a accesskey="h" href="index_.html">Zum Anfang</a>
                   </td>

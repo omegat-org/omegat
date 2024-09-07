@@ -1052,12 +1052,12 @@
             </row>
 
             <row>
-              <entry>Saisie automatique/Saisie à partir de l’historique</entry>
+              <entry>Saisie automatique/Propositions à partir de l’historique</entry>
               <entry>optionsAutoCompleteHistoryCompletionMenuItem</entry>
             </row>
 
             <row>
-              <entry>Saisie automatique/Prédiction historique</entry>
+              <entry>Saisie automatique/Prédictions à partir de l’historique</entry>
               <entry>optionsAutoCompleteHistoryPredictionMenuItem</entry>
             </row>
 

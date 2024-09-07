@@ -4,12 +4,11 @@
   <title id="app.segmentation.title">分節化規則</title>
 
   <section id="dialog.preferences.segmentation.setup.type">
-	<title id="dialog.preferences.segmentation.setup.type.title">Paragraph or
-	sentence?</title>
+	<title id="dialog.preferences.segmentation.setup.type.title">段落か文か？</title>
 	
 	<para>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。訳文を入力すると、原文分節を含むテキストがその翻訳結果とともにプロジェクトのメモリに保存され、その後、プロジェクト内の他の原文セグメントとの一致の判定に使用されます。</para>
 
-	<para><link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>プロジェクト設定を使用して、分節化のタイプを選択します。</para>
+	<para>分節化の種類を指定するには、<link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>プロジェクト設定を使用します。</para>
 
 	<para>分節は、デフォルトではファイル形式自体によって定義される<emphasis role="bold">段落</emphasis>になります。</para>
 	

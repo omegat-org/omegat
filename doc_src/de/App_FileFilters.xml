@@ -8,7 +8,7 @@
   <title id="file.filters.title">Dateifilter</title>
 
   <warning>
-	<para>Dateifilter sind entweder lokal und spezifisch für ein bestimmtes Projekt, oder global und für alle Projekte verfügbar, die sich einen Konfigurationsordner teilen.</para>
+	<para>Dateifilter sind entweder lokal und spezifisch für ein bestimmtes Projekt oder global und für alle Projekte, die sich einen Konfigurationsordner teilen, verfügbar.</para>
 
 	<para>Einzelheiten finden Sie unter:</para>
 	<itemizedlist>
@@ -26,21 +26,21 @@
   
   <para>Filter in fetter Schrift werden im aktuellen Projekt verwendet.</para>
 
-  <para>Deaktivieren Sie einen Filter durch Entfernen des Häkchens, wenn Sie die mit ihm verknüpften Dateien nicht übersetzen möchten. Der Inhalt dieser Dateien wird bei der Übersetzung nicht angezeigt.</para>
+  <para>Deaktivieren Sie einen Filter durch Entfernen des Häkchens, wenn Sie Dateien, die mit dem Filter verknüpft sind, nicht übersetzen möchten. Der Inhalt dieser Dateien wird während der Übersetzung nicht angezeigt.</para>
 
   <note>
-	<para>Sie können die Filter nach Namen oder aktiviertem Zustand sortieren. Klicken Sie auf die entsprechende Spaltenüberschrift, um diese in aufsteigender oder absteigender Reihenfolge zu sortieren.</para>
+	<para>Sie können die Filter nach Namen oder Aktivierungsstatus sortieren. Klicken Sie auf die entsprechende Spaltenüberschrift, um auf- oder absteigend zu sortieren.</para>
   </note>
 
   <para>Um die Dateiendungen, Zieldateinamen und Kodierungen eines Filters zu ändern, wählen Sie ihn in der Liste aus und klicken Sie auf die Schaltfläche <guibutton>Bearbeiten...</guibutton>.</para>
 
-  <para>Einige Filter lassen sich mit der Schaltfläche <guibutton>Optionen...</guibutton> weiter anpassen.</para>
+  <para>Einige Filter können über die Schaltfläche <guibutton>Optionen...</guibutton> weiter angepasst werden.</para>
 	
   <para>Klicken Sie auf die Schaltfläche <guibutton>Standardwerte wiederherstellen</guibutton>, um die Dateifilter auf ihre Standardeinstellungen zurückzusetzen.</para>
 
-  <para>Geänderte globale Dateifiltereinstellungen werden in <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/> im Konfigurationsordner gespeichert. Einzelheiten finden Sie unter <link linkend="configuration.folder" endterm="configuration.folder.title"/>. Löscht man diese Datei, werden auch die Filtereinstellungen zurückgesetzt.</para>
+  <para>Geänderte globale Dateifiltereinstellungen werden in <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/> im Konfigurationsordner gespeichert. Einzelheiten finden Sie unter <link linkend="configuration.folder" endterm="configuration.folder.title"/>. Wird diese Datei gelöscht, werden die Filtereinstellungen zurückgesetzt.</para>
 
-  <para>Geänderte lokale Dateifiltereinstellungen werden in die <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>-Datei im Projektordner gespeichert. Einzelheiten finden Sie unter <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>. Löscht man diese Datei, werden auch die Filtereinstellungen zurückgesetzt und das Projekt wird wieder auf globale Dateifilter umgestellt.</para>
+  <para>Geänderte lokale Dateifiltereinstellungen werden in die <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>-Datei im Projektordner gespeichert. Einzelheiten finden Sie im Kapitel <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/>. Wird diese Datei gelöscht, werden die Filtereinstellungen zurückgesetzt und das Projekt verwendet wieder globale Dateifilter.</para>
 
   <section id="file.filters.general">
 	<title id="file.filters.general.title">Häufig verwendete Einstellungen</title>
@@ -49,29 +49,29 @@
 	  <varlistentry>
 		<term>Führende und nachfolgende Tags verstecken</term>
 		<listitem>
-		  <para>Führende und nachfolgende Tags werden von OmegaT in der Regel benötigt, um das übersetzte Segment korrekt wiederzugeben. Die Tags im übersetzbaren Inhalt zu verstecken, stellt sicher, dass Sie sie nicht versehentlich löschen oder verändern.</para>
+		  <para>Führende und nachfolgende Tags werden von OmegaT in der Regel benötigt, um das übersetzte Segment korrekt wiederzugeben. Das Verstecken dieser Tags im übersetzbaren Inhalt stellt sicher, dass sie nicht versehentlich gelöscht oder geändert werden.</para>
 
-		  <para>Wenn Sie die führenden und nachfolgenden Tags nicht verstecken, müssen Sie darauf achten, die Tags auch in den übersetzten Text einzufügen.</para>
+		  <para>Wenn die führenden und nachfolgenden Tags nicht versteckt werden, muss darauf geachtet werden, dass sie auch in den übersetzten Text eingefügt werden.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 		<term>Führende und nachfolgende Leerräume in unsegmentierten Projekten entfernen</term>
 		<listitem>
-		  <para>Standardmäßig entfernt OmegaT alle führenden und nachfolgenden Leerzeichen aus den übersetzbaren Inhalten. Wenn ein Projekt nicht segmentiert ist, bewirkt die Deaktivierung dieser Option, dass führende und nachfolgende Leerräume in der Übersetzung geändert werden können.</para>
+		  <para>Standardmäßig entfernt OmegaT alle führenden und nachfolgenden Leerräume (Leerzeichen, Zeilenumbrüche usw.) aus den übersetzbaren Inhalten. In unsegmentierten Projekten bewirkt das Deaktivieren dieser Option, dass führende und nachfolgende Leerräume in der Übersetzung veränderbar sind.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 		<term>Leerräume für alle Tags beibehalten</term>
 		<listitem>
-		  <para>Wenn die Quelldokumente Leerräume zur Gestaltung des Layouts enthalten, werden die Leerräume im übersetzten Dokument beibehalten.</para>
+		  <para>Wenn die Quelldokumente Leerräume (Leerzeichen, Zeilenumbrüche usw.) zur Gestaltung des Layouts enthalten, werden diese im übersetzten Dokument beibehalten.</para>
 		</listitem>
 	  </varlistentry>
 	  <varlistentry>
 		<term>Dateinamen nicht zur Identifizierung alternativer Übersetzungen verwenden</term>
 		<listitem>
-		  <para>Der Name der Quelldatei ist eines der Elemente, die eine alternative Übersetzung kennzeichnen. Wenn diese Option aktiviert ist, werden nur die vorherigen/nächsten Segmente oder ein Segmentidentifikator verwendet, um eine alternative Übersetzung zu kennzeichnen.</para>
+		  <para>Standardmäßig ist der Name der Quelldatei eines der Elemente zur Identifizierung einer alternativen Übersetzung. Wenn diese Option aktiviert ist, werden nur die vorherigen/nächsten Segmente oder ein Segmentidentifikator verwendet, um eine alternative Übersetzung zu identifizieren.</para>
 
 		  <para>Segmente, die dieselben Merkmale aufweisen und sich in anderen Dateien befinden, werden so auf dieselbe Weise übersetzt.</para>
 		</listitem>
@@ -86,35 +86,35 @@
 
 	<para>Wenn Sie ein Filtermuster hinzufügen wollen, klicken Sie auf <guibutton>Hinzufügen...</guibutton>, um ein ähnliches Dialogfenster zu öffnen.</para>
 
-	<para>Beide Dialogfenster bieten Ihnen die Möglichkeit, die Namensmuster für die Quell- und Zieldateien, die mit diesem Filter verbunden sind, anzupassen und ihre jeweilige Kodierung auszuwählen.</para>
+	<para>Beide Dialogfenster bieten Ihnen die Möglichkeit, die Namensmuster für die Quell- und Zieldateien, die mit diesem Filter verknüpft sind, anzupassen und ihre jeweilige Kodierung auszuwählen.</para>
 
 	<para>Verwenden Sie das Aufklappmenü <guilabel>Dateinamenvariablen</guilabel>, um den Zieldateinamen anzupassen.</para>
 
     <section id="source.filetype.and.filename.pattern">
 	  <title id="source.filetype.and.filename.pattern.title">Namensmuster der Quelldatei</title>
 
-	  <para>Um einen Filter mit einer Datei zu verknüpfen, überprüft OmegaT die Dateiendung und versucht, sie mit einem Quelldateinamensmuster in einem Filter abzugleichen.</para>
+	  <para>Um einen Filter mit einer Datei zu verknüpfen, prüft OmegaT die Dateiendung und versucht, diese mit einem Quelldateinamensmuster in einem Filter abzugleichen.</para>
 
-	  <para>Zum Beispiel findet das im XHTML-Filter registrierte Muster <literal>.xhtml</literal> jede Datei mit der Endung <filename>xhtml</filename>. Wenn eine solche Datei im Ordner <link linkend="project.folder.source" endterm="project.folder.source.title"/> gefunden wird, wird sie vom XHTML-Filter erfasst und bearbeitet.</para>
+	  <para>Zum Beispiel findet das im XHTML-Filter registrierte Muster <literal>.xhtml</literal> jede Datei mit der Endung <filename>xhtml</filename>. Wenn eine solche Datei im Ordner <link linkend="project.folder.source" endterm="project.folder.source.title"/> gefunden wird, wird sie vom XHTML-Filter erfasst und verarbeitet.</para>
 
 	  <para>Sie können Dateinamensmuster ändern oder hinzufügen, um verschiedene Dateien mit einem Filter zu verknüpfen.</para>
 		
 	  <warning>
-		<para>Die Verknüpfung einer Dateiendung mit einem Filter ist kein Garant dafür, dass der Filter die Datei ordnungsgemäß erfasst und bearbeitet. Die Dateistruktur muss ebenfalls mit dem Filter kompatibel sein: Selbst wenn Sie <literal>.odt</literal> mit dem XHMTL-Filter verknüpfen, kann der Filter den Inhalt einer LibreOffice Writer-Datei nicht verstehen.</para>
+		<para>Die Verknüpfung einer Dateiendung mit einem Filter ist kein Garant dafür, dass der Filter die Datei korrekt erfasst und verarbeitet. Auch die Dateistruktur muss mit dem Filter kompatibel sein: Selbst wenn Sie <literal>.odt</literal> mit dem XHMTL-Filter verknüpfen, kann der Filter den Inhalt einer LibreOffice Writer-Datei nicht verstehen.</para>
 	  </warning>
 		
 		
 	  <para>Quelldateinamensmuster verwenden Platzhalterzeichen: Das <literal>*</literal>-Zeichen findet null oder mehr Zeichen, während das <literal>?</literal>-Zeichen genau ein Zeichen findet.</para>
 
-	  <para>Zum Beispiel können Sie das Muster <literal>read*</literal> verwenden, um den Textfilter Readme-Dateien (<literal>readme, read.me</literal> oder <literal>readme.txt</literal>) erfassen und bearbeiten zu lassen.</para>
+	  <para>Zum Beispiel können Sie das Muster <literal>read*</literal> für den Textfilter verwenden, um Readme-Dateien (<literal>readme, read.me</literal> oder <literal>readme.txt</literal>) zu erfassen.</para>
     </section>
 
     <section id="source.and.target.files.encoding">
 	  <title id="source.and.target.files.encoding.title">Kodierung der Quell- und Zieldatei</title>
 
-	  <para>Die meisten Dateiformate lassen verschiedene Kodierungen zu. Standardmäßig sind die Kodierung der Quelldatei und die Kodierung der übersetzten Dateien identisch.</para>
+	  <para>Die meisten Dateiformate erlauben verschiedene Kodierungen. Standardmäßig sind die Kodierungen der Quell- und Zieldateien identisch.</para>
 
-	  <para>Die Felder bei der Quell- und Zielkodierung sind Aufklappmenüs, die alle unterstützten Kodierungen auflisten. Die Auswahloption <guilabel>&lt;auto&gt;</guilabel> überlässt OmegaT die Wahl der Kodierung, basierend auf folgenden Kriterien:</para>
+	  <para>Die Felder bei der Quell- und Zielkodierung sind Aufklappmenüs, die alle unterstützten Kodierungen auflisten. Die Auswahloption <guilabel>&lt;auto&gt;</guilabel> überlässt OmegaT die Wahl der Kodierung, basierend auf den folgenden Kriterien:</para>
 
 	  <itemizedlist>
         <listitem>
@@ -124,7 +124,7 @@
 
 	  <itemizedlist>
         <listitem>
-		  <para>OmegaT erzwingt für einige Dateiformate (z. B. Java-Eigenschaften) eine bestimmte Kodierung.</para>
+		  <para>OmegaT erzwingt eine bestimmte Kodierung für einige Dateiformate (z.B. Java-Eigenschaften).</para>
         </listitem>
 	  </itemizedlist>
 
@@ -138,9 +138,9 @@
     <section id="target.name">
 	  <title id="target.name.title">Zieldateiname</title>
 	  
-	  <para>Dateien im Ordner <link linkend="project.folder.target" endterm="project.folder.target.title"/> werden bei jeder Erstellung überschrieben, wenn sie mit demselben Namen erstellt wurden.</para>
+	  <para>Dateien im Ordner <link linkend="project.folder.target" endterm="project.folder.target.title"/> werden jedes Mal überschrieben, wenn sie generiert werden (sofern sie denselben Namen haben).</para>
 
-	  <para>OmegaT kann automatisch neue Namen für Dateien vergeben, die Sie erstellen, indem es z. B. einen Sprachcode oder einen Zeitstempel hinzufügt.</para>
+	  <para>OmegaT kann automatisch neue Namen für die generierten Dateien vergeben, z.B. durch Anfügen eines Sprachcodes oder eines Zeitstempels.</para>
 
 	  <para>Das Zieldateinamensmuster verwendet eine spezielle Syntax. Mit dem Dialogfenster <guilabel>Muster bearbeiten</guilabel> kann es auf einfache Weise geändert werden. Das Dialogfenster bietet verschiedene Optionen:</para>
 
@@ -148,7 +148,7 @@
         <varlistentry>
           <term>${filename}</term>
           <listitem>
-			<para>Das Standardmuster. Es repräsentiert den vollständigen Dateinamen der Quelldatei, inklusive Endung. Dieses Muster bewirkt, dass der Zieldatei der Name der Quelldatei zugewiesen wird.</para>
+			<para>Das Standardmuster. Es repräsentiert den vollständigen Dateinamen der Quelldatei, inklusive Endung. Dieses Muster bewirkt, dass die Zieldatei den Namen der Quelldatei zugewiesen bekommt.</para>
           </listitem>
 		</varlistentry>
 
@@ -213,7 +213,7 @@
         <varlistentry>
           <term>${system-user-name}</term>
           <listitem>
-			<para>Anmeldename des Nutzers</para>
+			<para>Anmeldename des Benutzers</para>
           </listitem>
 		</varlistentry>
 
@@ -248,11 +248,11 @@
 		
 	  <para>Zusätzliche Varianten sind für <literal>${nameOnly}</literal> und <literal>${extension}</literal> verfügbar.</para>
 		
-	  <para>Wenn die Nutzung mehrerer Punkte die Identifizierung des Dateinamens und der Dateiendung erschwert, können Sie Variablen in Form von <literal>${nameOnly-<emphasis>Nummer</emphasis>}</literal> oder <literal>${extension-<emphasis>Nummer</emphasis>}</literal> verwenden, um anzugeben, welche Teile zum Namen oder zur Endung gehören, wie im folgenden Beispiel gezeigt.</para>
+	  <para>Wenn die Verwendung von mehreren Punkten die Identifizierung des Dateinamens und der Dateiendung erschwert, können Sie Variablen in Form von <literal>${nameOnly-<emphasis>Nummer</emphasis>}</literal> oder <literal>${extension-<emphasis>Nummer</emphasis>}</literal> verwenden, um anzugeben, welche Teile zum Namen oder zur Endung gehören, wie im folgenden Beispiel gezeigt.</para>
 
 	  <example id="target.name.example">
 		<title id="target.name.example.title">Zieldateinamen</title>
-		<para>Handelt es sich zum Beispiel um eine Quelldatei namens Dokument.xx.docx, würde die Nutzung folgender Variablenvarianten zu folgenden Ergebnissen führen:</para>
+		<para>Für eine Quelldatei mit dem Namen Dokument.xx.docx würde die Verwendung der folgenden Variablenvarianten zu den folgenden Ergebnissen führen:</para>
 
 		<itemizedlist>
           <listitem>
@@ -286,7 +286,7 @@
   <section id="filters.options">
     <title id="filters.options.title">Optionen</title>
 
-    <para>Mehrere Filter bieten zusätzliche Optionen. Wählen Sie den Filter in der Liste aus und klicken Sie auf <guibutton>Optionen...</guibutton>, um ihn zu ändern.</para>
+    <para>Einige Filter bieten zusätzliche Optionen. Wählen Sie den Filter in der Liste aus und klicken Sie auf <guibutton>Optionen...</guibutton>, um ihn zu ändern.</para>
 
 	<para>Die verfügbaren Optionen sind:</para>
 
@@ -299,26 +299,26 @@
 			  <varlistentry>
 				<term>Absätze erstellen bei:</term>
 				<listitem>
-				  <para>Textdateien haben keine generischen Absatzmarkierungen. Wählen Sie hier, wie OmegaT Absätze in Ihren Textdateien erzeugt.</para>
+				  <para>Textdateien haben keine generischen Absatzmarken. Wählen Sie hier, wie OmegaT Absätze in Ihren Textdateien erzeugen soll.</para>
 				</listitem>
 			  </varlistentry>
 
 			  <varlistentry>
-				<term>Zeilenlänge in Zieldateien (0 = unlimitiert)</term>
+				<term>Zeilenlänge in Zieldateien (0 = unbegrenzt)</term>
 				<listitem>
 				  <para>
 					<variablelist>
 					  <varlistentry>
 						<term>Zeilenlänge</term>
 						<listitem>
-						  <para>spezifiziert die maximale Anzahl von Zeichen, bevor eine lange Zeile umgebrochen wird. 0 bedeutet unlimitiert.</para>
+						  <para>gibt die maximale Anzahl von Zeichen an, bevor eine lange Zeile umgebrochen wird. 0 bedeutet unbegrenzt.</para>
 						</listitem>
 					  </varlistentry>
 
 					  <varlistentry>
 						<term>Maximale Zeilenlänge</term>
 						<listitem>
-						  <para>spezifiziert die maximale Anzahl von Zeichen, bevor eine Zeile abgeschnitten und der Rest ignoriert wird. 0 bedeutet unlimitiert.</para>
+						  <para>gibt die maximale Anzahl von Zeichen an, bevor eine Zeile abgeschnitten und der Rest ignoriert wird. 0 bedeutet unbegrenzt.</para>
 						</listitem>
 					  </varlistentry>
 					</variablelist>
@@ -337,10 +337,10 @@
 			<para>Der Filter <code>Microsoft Office Open XML (Legacy-Filter)</code> ist der originale OmegaT-Filter. Sie sollten ihn nur verwenden, um Kompatibilitätsprobleme mit früheren Projekten zu verhindern, die bereits Dateien enthalten, welche Sie mit diesem Filter bearbeitet haben.</para>
 		  </warning>
 
-		  <para>Sie können zusätzliche Dokumentelemente für die Übersetzung auswählen. Die Elemente werden im Editor als separate Segmente angezeigt.</para>
+		  <para>Sie können zusätzliche Dokumentelemente für die Übersetzung auswählen. Diese Elemente werden im Editor als separate Segmente angezeigt.</para>
 		  <variablelist>
 			<varlistentry>
-			  <term>Word</term>
+			  <term>Wort</term>
 			  <listitem>
 				<para>Unsichtbare Anweisungstexte, Kommentare, Fußnoten, Endnoten, Fußzeilen, Reservetext für Kompatibilität, und Dokumenteigenschaften.</para>
 			  </listitem>
@@ -381,7 +381,7 @@
 					<varlistentry>
 					  <term>Leerräume für alle Tags beibehalten</term>
 					  <listitem>
-						<para>Leerräume (Leerzeichen, Zeilenumbrüche usw.) werden beibehalten, selbst wenn diese Option im Dokument nicht definiert ist.</para>
+						<para>Leerräume (Leerzeichen, Zeilenumbrüche usw.) werden beibehalten, auch wenn diese Option im Dokument nicht definiert ist.</para>
 					  </listitem>
 					</varlistentry>
 
@@ -417,9 +417,9 @@
 			<varlistentry>
 			  <term>Ignorierte Absätze (regulärer Ausdruck)</term>
 			  <listitem>
-				  <para>Beim Laden werden alle Absätze, die dem regulären Ausdruck entsprechen, ignoriert und nicht zum Übersetzen angeboten.</para>
+				  <para>Beim Laden werden alle Absätze, die dem regulären Ausdruck entsprechen, ignoriert und nicht zur Übersetzung angeboten.</para>
 
-				  <para>Diese Option ist praktisch, wenn Sie mit HTML-Abschnitten arbeiten, die unübersetzbare Texte enthalten.</para>
+				  <para>Diese Option ist nützlich, wenn Sie mit HTML-Abschnitten arbeiten, die unübersetzbaren Text enthalten.</para>
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
@@ -436,7 +436,7 @@
 				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
 				  follow&quot;&gt;</code></para>
 
-				  <para>können Sie Folgendes nutzen:</para>
+				  <para>können Sie folgendes verwenden:</para>
 
 				  <para><literal>name=robots</literal></para>					
 				</example>
@@ -479,11 +479,11 @@
 
 				<para>Quell- und Zieldateien benötigen manchmal eine unterschiedliche Kodierung.</para>
 
-				<para>Hier können Sie einstellen, ob die Deklaration der Zieldatei hinzugefügt oder geändert werden soll</para>
+				<para>Hier können Sie festlegen, ob die Deklaration der Zieldatei hinzugefügt oder geändert werden soll</para>
 				
 				<itemizedlist>
 				  <listitem>
-					<para>immer, basierend auf den Einstellungen des Dateifilters,</para>
+					<para>immer, abhängig von den Dateifiltereinstellungen,</para>
 				  </listitem>
 
 				  <listitem>
@@ -504,7 +504,7 @@
 			<varlistentry>
 			  <term>Leerraum in der übersetzten Datei komprimieren</term>
 			  <listitem>
-				<para>Leerräume außerhalb der Tags werden in HTML/XHTML als unbedeutend angesehen.</para>
+				<para>Leerräume (Leerzeichen, Zeilenumbrüche usw.) außerhalb von Tags werden in HTML/XHTML als unbedeutend angesehen.</para>
 
 				<para>Diese Option wandelt mehrere zusammenhängende Leerraumzeichen im übersetzten Dokument in ein einzelnes Leerzeichen um.</para>
 			  </listitem>
@@ -512,9 +512,9 @@
 			<varlistentry>
 			  <term>HTML-Kommentare entfernen</term>
 			  <listitem>
-				<para>Kommentare in einer HTML-Datei sind in der Regel nur für Entwickler interessant. Verwenden Sie diese Option, um die Kommentare zu entfernen. Wenn diese Option deaktiviert ist, werden die Kommentare als Tags angezeigt.</para>
+				<para>Kommentare in einer HTML-Datei sind normalerweise nur für Entwickler von Interesse. Verwenden Sie diese Option, um die Kommentare zu entfernen. Wenn diese Option deaktiviert ist, werden die Kommentare als Tags angezeigt.</para>
 
-				<para>Texte in den HTML-Kommentaren (zwischen <literal>&lt;!--</literal> und <literal>--&gt;</literal>) werden nicht in das übersetzte Dokument kopiert.</para>
+				<para>Der Text in den HTML-Kommentaren (zwischen <literal>&lt;!--</literal> und <literal>--&gt;</literal>) wird nicht in das übersetzte Dokument übernommen.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
@@ -552,7 +552,7 @@
 	  <varlistentry id="file.filters.po">
 		<term id="file.filters.po.title">PO-Dateien</term>
 		<listitem>
-			<para>Der Filter überprüft standardmäßig printf-Variablen (z. B. %s). Siehe die <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/>-Einstellung für weitere Informationen.</para>
+			<para>Der Filter prüft standardmäßig printf-Variablen (z.B. %s). Einzelheiten finden Sie unter <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> (Einstellungen).</para>
 
 			<variablelist>
 			  <varlistentry>
@@ -565,7 +565,7 @@
 			  <varlistentry>
 				<term>Leere Quelltexte übersetzen</term>
 				<listitem>
-				  <para>Leere Quelltexte dienen manchmal als Platzhalter für Abschnitte, die es in der Quellsprache nicht gibt, die aber in der Zielsprache notwendig sind. Verwenden Sie diese Option, um eine Übersetzung auf Basis der zugehörigen Kommentare zu erstellen.</para>
+				  <para>Leere Quelltexte agieren manchmal als Platzhalter für Abschnitte, die in der Quellsprache nicht vorhanden sind, aber in der Zielsprache benötigt werden. Verwenden Sie diese Option, um eine Übersetzung auf Basis der zugehörigen Kommentare zu erstellen.</para>
 				</listitem>
 			  </varlistentry>
 			  
@@ -579,7 +579,7 @@
 			  <varlistentry>
 				<term>Pluralspezifikation automatisch ersetzen</term>
 				<listitem>
-				  <para>Überschreiben Sie die Pluralspezifikation im Header und verwenden Sie den Zielsprachenstandard.</para>
+				  <para>Überschreibt die Pluralspezifikation im Header und verwendet den Zielsprachenstandard.</para>
 				</listitem>
 			  </varlistentry>
 
@@ -624,13 +624,13 @@
 	  <varlistentry id="file.filter.java.bundle">
 		<term id="file.filter.java.bundle.title">Java-Resource-Bundle</term>
 		<listitem>
-			<para>Der Filter überprüft standardmäßig Java-MessageFormat-Muster (z. B. \{0\}). Siehe die <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/>-Einstellung für weitere Informationen.</para>
+			<para>Der Filter prüft standardmäßig Java-MessageFormat-Muster (z.B. \{0\}). Einzelheiten finden Sie unter <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> (Einstellungen).</para>
 
 			<variablelist>
 			  <varlistentry>
 				<term>Unicode-Literale-Kompatibilität mit Java 8 erzwingen</term>
 				<listitem>
-				  <para>Java 8 benötigt die ISO-8859-1-Kodierung und verwendet Unicode-Literale für Zeichen außerhalb dieses Zeichensatzes. Java 9 und höher benötigt die UTF-8-Kodierung. Diese Option erzwingt die Kompatibilität mit Java 8.</para>
+				  <para>Java 8 benötigt die ISO-8859-1-Kodierung und verwendet Unicode-Literale für Zeichen außerhalb dieses Zeichensatzes. Java 9 oder höher benötigt die UTF-8-Kodierung. Diese Option erzwingt die Kompatibilität mit Java 8.</para>
 				</listitem>
 			  </varlistentry>
 
@@ -644,7 +644,7 @@
 			  <varlistentry>
 				<term>Unicode-Literale (\\uXXXX) beibehalten</term>
 				<listitem>
-				  <para>Einige Applikationen erfordern die Beibehaltung einiger Unicode-Literale. Diese Option ermöglicht das.</para>
+				  <para>Einige Applikationen erfordern die Beibehaltung bestimmter Unicode-Literale. Diese Option ermöglicht dies.</para>
 				</listitem>
 			  </varlistentry>
 			</variablelist>
@@ -684,7 +684,7 @@
 			  <varlistentry>
 				<term>Identifikator für alternative Übersetzungen</term>
 				<listitem>
-				  <para>Der Nutzer kann zwischen drei Optionen wählen: vorheriger und nächster Absatz, &lt;trans-unit&gt;-ID, oder &lt;trans-unit&gt;-resname-Attribut, sofern verfügbar (ist es nicht verfügbar, wird die ID als Fallback verwendet).</para>
+				  <para>Der Benutzer kann zwischen drei Optionen wählen: vorheriger und nächster Absatz, &lt;trans-unit&gt;-ID, oder &lt;trans-unit&gt;-resname-Attribut sofern verfügbar (wenn nicht verfügbar, wird die ID als Fallback verwendet).</para>
 				</listitem>
 			  </varlistentry>
 			  

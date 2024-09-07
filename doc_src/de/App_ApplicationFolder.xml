@@ -6,7 +6,7 @@
   <para>Der Applikationsordner enthält die <filename>OmegaT.jar</filename>-Applikation und eine Reihe anderer wichtiger Dateien.</para>
 
   <note>
-	<para>Der Speicherort des Applikationsordners ist abhängig davon, welche Plattform Sie verwenden und wie Sie OmegaT installiert haben. Folgende Speicherorte werden empfohlen bzw. sind Standard:</para>
+	<para>Der Speicherort des Applikationsordners hängt davon ab, welche Plattform Sie verwenden und wie Sie OmegaT installiert haben. Folgende Speicherorte werden empfohlen bzw. sind Standard:</para>
 
 	<variablelist>
 	  <varlistentry>
@@ -50,21 +50,21 @@
 	<varlistentry id="application.folder.omegat.jar">
 	  <term id="application.folder.omegat.jar.title">OmegaT.jar</term>
 	  <listitem>
-		<para>Ausführbare Datei von OmegaT. Dient zum Starten von OmegaT über die Befehlszeile. Einzelheiten finden Sie unter <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>.</para>
+		<para>Ausführbare Datei von OmegaT. Dient zum Starten von OmegaT über die Befehlszeile. Einzelheiten finden Sie im Kapitel <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/>.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="application.folder.changes">
 	  <term id="application.folder.changes.title">changes.txt</term>
 	  <listitem>
-		<para>Eine Liste mit Verbesserungen und Fehlerbehebungen. Schauen Sie hier nach, wenn Sie Informationen über die Entwicklung von OmegaT benötigen.</para>
+		<para>Eine Liste von Verbesserungen und Fehlerbehebungen. Schauen Sie hier nach, wenn Sie Informationen über die Entwicklung von OmegaT benötigen.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="application.folder.doc.license">
 	  <term id="application.folder.doc.license.title">doc-license.txt</term>
 	  <listitem>
-		<para>Die Vertriebslizenz für die Dokumentation. GPL-Version 3.</para>
+		<para>Die Distributionslizenz für die Dokumentation. GPL-Version 3.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -78,14 +78,14 @@
 	<varlistentry id="application.folder.join.html">
 	  <term id="application.folder.join.html.title">join.html</term>
 	  <listitem>
-		<para>Ein Link zur Support-Seite.</para>
+		<para>Ein Link zur Supportseite.</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="application.folder.readme.txt">
 	  <term id="application.folder.readme.txt.title">readme.txt</term>
 	  <listitem>
-		<para>Einfache Installation und Bedienungsanleitung.</para>
+		<para>Einfache Installations- und Bedienungsanleitung.</para>
 	  </listitem>
 	</varlistentry>
 
@@ -143,14 +143,14 @@
 	<varlistentry id="application.folder.plugins">
 	  <term id="application.folder.plugins.title">plugins/</term>
 	  <listitem>
-		<para>Ein Ordner, den Sie zum Installieren externer Plugins verwenden können. Der bevorzugte Ort für manuelle Plugin-Installationen ist der <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>-Ordner im <link linkend="configuration.folder">Konfigurationsordner</link>. Siehe die <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Ein Ordner, in dem externe Plugins installiert werden können. Der bevorzugte Ort für manuelle Plugin-Installationen ist der <link linkend="configuration.folder.extra.contents.plugin" endterm="configuration.folder.extra.contents.plugin.title"/>-Ordner im <link linkend="configuration.folder">Konfigurationsordner</link>. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.plugins" endterm="dialogs.preferences.plugins.title"/> (Einstellungen).</para>
 	  </listitem>
 	</varlistentry>
 
 	<varlistentry id="application.folder.scripts">
 	  <term id="application.folder.scripts.title">scripts/</term>
 	  <listitem>
-		<para>Ein Ordner mit Skripten. Siehe das <link linkend="windows.scripts" endterm="windows.scripts.title"/>-Fenster für weitere Informationen.</para>
+		<para>Ein Ordner mit Skripten. Einzelheiten finden Sie unter <link linkend="windows.scripts" endterm="windows.scripts.title"/> (Fenster).</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>

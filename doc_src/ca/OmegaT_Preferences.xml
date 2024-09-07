@@ -60,9 +60,9 @@
       <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
         <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Obtén les traduccions automàticament</option></term>
 
-        <listitem>
-          <para>Si inhabiliteu aquesta opció, els resultats de traducció automàtica només s'obtindran quan utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> en el segment actual. Haureu de tornar a prémer aquesta combinació per a inserir el suggeriment.</para>
-        </listitem>
+				<listitem>
+					<para>Habiliteu aquesta opció per a obtenir automàticament els resultats de traducció automàtica dels proveïdors que heu habilitat i configurat. Si deixeu aquesta opció inhabilitada, els resultats de traducció automàtica només s'obtindran quan utilitzeu <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> en el segment actual. Haureu de tornar a prémer aquesta combinació per a inserir el suggeriment.</para>
+				</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
@@ -569,7 +569,7 @@
 
 			<para>Això obre una cerca del terme {target} a DuckDuckGo amb una sèrie de paràmetres de cerca.</para></example>
 
-			<para>Les ordres s'obren en la línia d'ordres. El <guilabel>delimitador</guilabel>defineix el delimitador entre els paràmetres de l'ordre. El delimitador per defecte és <code>|</code>.</para>
+			<para>Les ordres s'obren en la línia d'ordres. El <guilabel>delimitador</guilabel> defineix el delimitador entre els paràmetres de l'ordre. El delimitador per defecte és <code>|</code>.</para>
 
 		  <example id="dialogs.preferences.external.search.items.command.example">
 			<title id="dialogs.preferences.external.search.items.command.example.title">Exemple d'ordre</title>

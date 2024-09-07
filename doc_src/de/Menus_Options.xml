@@ -26,9 +26,9 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>Ermöglicht es Ihnen, die verfügbaren maschinellen Übersetzungsdienste zu aktivieren oder deaktivieren.</para>
+        <para>Ermöglicht es Ihnen, maschinelle Übersetzungsdienste zu aktivieren oder zu deaktivieren, die eingeschaltet und korrekt konfiguriert sind.</para>
 
-        <para>Wenn mehrere Übersetzungsdienste ausgewählt sind, können Sie auch <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> verwenden, um zwischen ihnen umzuschalten und den zuletzt ausgewählten einfügen. Siehe die <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>-Einstellungen für weitere Informationen.</para>
+        <para>Wenn mehrere Übersetzungsdienste ausgewählt sind, können Sie auch <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> verwenden, um zwischen ihnen zu wechseln und den zuletzt ausgewählten einzufügen. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> (Einstellungen).</para>
       </listitem>
     </varlistentry>
 
@@ -41,9 +41,9 @@
 		  </listitem>
 		</itemizedlist>
 
-        <para>Ermöglicht es Ihnen, Fuzzy-Matching für Glossar-Matches zu aktivieren oder deaktivieren.</para>
+        <para>Ermöglicht es Ihnen, Fuzzy-Matching für Glossar-Matches zu aktivieren oder zu deaktivieren.</para>
 
-		<para>Siehe die <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Einzelheiten finden Sie unter <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> (Einstellungen).</para>
       </listitem>
     </varlistentry>
 
@@ -56,16 +56,16 @@
 		  </listitem>
 		</itemizedlist>
 
-        <para>Ermöglicht es Ihnen, Fuzzy-Matching für Wörterbuch-Matches zu aktivieren oder deaktivieren.</para>
+        <para>Ermöglicht es Ihnen, Fuzzy-Matching für Wörterbuch-Matches zu aktivieren oder zu deaktivieren.</para>
 
-		<para>Siehe die <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Einzelheiten finden Sie unter <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> (Einstellungen).</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
       <term id="menus.options.autocompletion.title"><guisubmenu>Autovervollständigung</guisubmenu></term>
       <listitem>
-		<para>Wählen Sie die verschiedenen Optionen aus, um sie zu aktivieren oder deaktivieren. Siehe die <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Aktivieren oder deaktivieren Sie verschiedene Optionen für die Autovervollständigung. Einzelheiten finden Sie unter <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> (Einstellungen).</para>
 	  </listitem>
     </varlistentry>
 
@@ -83,7 +83,7 @@
       <listitem>
         <para>Öffnet die <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>-Einstellungen.</para>
 
-        <para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>, um auf die Einstellungen für die lokalen Segmentierungsregeln zuzugreifen.</para>
+        <para>Verwenden Sie <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/>, um auf die Einstellungen der lokalen Segmentierungsregeln zuzugreifen.</para>
       </listitem>
     </varlistentry>
 
@@ -97,7 +97,7 @@
     <varlistentry id="menus.options.access.configuration.folder">
       <term id="menus.options.access.configuration.folder.title"><guimenuitem>Konfigurationsordner öffnen</guimenuitem></term>
       <listitem>
-        <para>Öffnet den lokalen Ordner, in dem die OmegaT-Konfigurationsdateien gespeichert sind.</para>
+        <para>Öffnet den lokalen Ordner mit den Konfigurationsdateien von OmegaT.</para>
 
 		<note>
 		  <para>Der Speicherort hängt vom Betriebssystem und den Startoptionen ab. Einzelheiten finden Sie unter <link linkend="configuration.folder" endterm="configuration.folder.title"/>.</para>

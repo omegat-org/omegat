@@ -1,103 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
-  <title>Weergave</title>
+  <title id="menus.view.title"><guimenu>Weergave</guimenu></title>
+
+  <para>Dit menu stelt u in staat de informatie te selecteren waarvan u wilt dat OmegaT die weergeeft.</para>
+
+  <para>Alle in de beschrijvingen aangegeven kleuren kunnen worden aangepast in de voorkeur <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>.</para>
 
   <variablelist>
-    <varlistentry>
-      <term>Vertaalde segmenten markeren</term>
-
+    <varlistentry id="menus.view.mark.translated.segments">
+      <term id="menus.view.mark.translated.segments.title"><guimenuitem>Vertaalde segmenten accentueren</guimenuitem></term>
       <listitem>
-        <para>Indien aangevinkt, zullen de vertaalde segmenten in geel worden geaccentueerd.</para>
+        <para>Indien geselecteerd, zullen de vertaalde segmenten in geel worden geaccentueerd.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Niet-vertaalde segmenten markeren</term>
-
+    <varlistentry id="menus.view.mark.untranslated.segments">
+      <term id="menus.view.mark.untranslated.segments.title"><guimenuitem>Niet-vertaalde segmenten accentueren</guimenuitem></term>
       <listitem>
-        <para>Indien aangevinkt, zullen de niet-vertaalde segmenten in paars worden geaccentueerd.</para>
+        <para>Indien geselecteerd, worden niet-vertaalde segmenten in paars  geaccentueerd.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Alinea-scheidingen markeren</term>
-
+    <varlistentry id="menus.view.mark.paragraph.delimitations">
+      <term id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Alinea-scheidingen markeren</guimenuitem></term>
       <listitem>
-        <para>Indien geselecteerd worden de scheidingen tussen alinea's in de bron visueel aangegeven.</para>
+        <para>Indien geselecteerd, worden de scheidingen tussen alinea's in de bron visueel aangegeven. U kunt de tekenreeks voor de scheiding van de alinea wijzigen in de voorkeur <link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Bronsegmenten weergeven</term>
-
+    <varlistentry id="menus.view.display.source.segments">
+      <term id="menus.view.display.source.segments.title"><guimenuitem>Bronsegmenten weergeven</guimenuitem></term>
       <listitem>
-        <para>Indien aangevinkt, zullen de bronsegmenten in groen worden geaccentueerd. Indien niet aangevinkt, zullen de bronsegmenten niet worden weergegeven.</para>
+        <para>Indien aangevinkt, worden alle bronsegmenten weergegeven en in groen geaccentueerd. Indien niet aangevinkt, zullen alleen de huidige bronsegmenten worden weergegeven.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Niet-unieke segmenten markeren</term>
-
+    <varlistentry id="menus.view.mark.non.unique.segments">
+      <term id="menus.view.mark.non.unique.segments.title"><guimenuitem>Herhaalde segmenten accentueren</guimenuitem></term>
       <listitem>
-        <para>Indien aangevinkt zullen niet-unieke segmenten bleekgrijs worden gemarkeerd.</para>
+        <para>Indien geselecteerd, worden herhaalde segmenten in vaalgrijs geaccentueerd.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segmenten met opmerkingen markeren</term>
-
+    <varlistentry id="menus.view.mark.segments.with.notes">
+      <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Segmenten met Opmerkingen accentueren</guimenuitem></term>
       <listitem>
-        <para>In aangevinkt zullen segmenten met opmerkingen cyaankleurig worden gemarkeerd. Deze markering heeft prioriteit boven <guimenuitem>Vertaalde segmenten markeren</guimenuitem> en <guimenuitem>Niet-vertaalde segmenten markeren</guimenuitem>.</para>
+        <para>In geselecteerd, worden segmenten met opmerkingen cyaankleurig gemarkeerd. Deze markering heeft prioriteit boven <guimenuitem>Vertaalde segmenten accentueren</guimenuitem> en <guimenuitem>Niet-vertaalde segmenten accentueren</guimenuitem>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Niet-afbreekbare spaties markeren</term>
-
+    <varlistentry id="menus.view.mark.non.breakable.space">
+      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Niet-afbreekbare spaties weergeven</guimenuitem></term>
       <listitem>
-        <para>Indien aangevinkt worden niet-afbreekbare spaties met een grijze achtergrond weergegeven.</para>
+        <para>Indien geselecteerd, worden niet-afbreekbare spaties met een grijze achtergrond weergegeven.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Witruimte markeren</term>
-
+    <varlistentry id="menus.view.mark.white.space">
+      <term id="menus.view.mark.white.space.title"><guimenuitem>Witruimte markeren</guimenuitem></term>
       <listitem>
-        <para>Indien aangevinkt wordt witte ruimte met kleine puntjes weergegeven.</para>
+        <para>Indien geselecteerd, wordt witruimte als een kleine punt weergegeven.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Bidirectional Algorithm Control Characters markeren</term>
-
+    <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
+      <term id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Bidi-controletekens weergeven</guimenuitem></term>
       <listitem>
-        <para>Deze optie geeft <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink> weer</para>
+        <para>Deze optie geeft Unicode bidirectionele opmaaktekens weer. Bekijk <ulink url="https://www.unicode.org/reports/tr9/">Unicode Bidirectional Algorithm</ulink> voor details.</para>
+		<para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/> om een selectie van tekens direct vanuit de interface van OmegaT in te voegen. Bekijk <link linkend="app.bidi" endterm="app.bidi.title"/> voor de details.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.auto.populated.segments">
+      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Segmenten van Automatisch vergroten van vertalingen markeren</guimenuitem></term>
+      <listitem>
+        <para>Indien geselecteerd, worden segmenten die automatisch zijn gevuld geaccentueerd in verschillende kleuren.</para>
+
+		<para>Bekijk de <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> voorkeur voor details.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segmenten van Automatisch vergroten van vertalingen markeren</term>
-
+    <varlistentry id="menus.view.mark.glossary.matches">
+      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Overeenkomsten woordenlijst markeren</guimenuitem></term>
       <listitem>
-        <para>Indien geselecteerd wordt de achtergrond van alle segmenten waar het doelsegment automatisch is gevuld (vanuit TMX-en geplaatst in <filename>/tm/auto</filename> bijvoorbeeld) in kleur weergegeven. De kleuren worden weergegeven zolang als de optie <link linkend="dialogs.preferences.editor.saveautopopulatedstatus"><guimenuitem>Status voor automatisch vergroten van vertalingen opslaan</guimenuitem></link> is aangevinkt. Normaal gesproken worden vertalingen die worden ingevoegd vanuit de map auto weergegeven in oranje. Andere vertalingen, specifiek geïdentificeerd in de TMX, kunnen met behulp van verschillende kleuren worden weergegeven. Bekijk het <ulink url="http://sourceforge.net/p/omegat/feature-requests/963/">Request For Enhancement</ulink> voor technische details</para>
+        <para>Onderstreept brontermen die een overeenkomst in de woordenlijsten hebben. Over een onderstreept item gaan met de muis geeft de overeenkomende doelterm weer. Klikken met rechts op een onderstreepte term geeft de overeenkomende doelterm weer, die kan worden geselecteerd en ingevoegd op de locatie van de cursor in de doeltekst.</para>
+	  </listitem>
+    </varlistentry>
+
+    <varlistentry id="menus.view.mark.language.checker">
+      <term id="menus.view.mark.language.checker.title"><guimenuitem>Problemen voor taalcontrole markeren</guimenuitem></term>
+      <listitem>
+        <para>Onderstreept de delen van het doel waar LanguageTool fouten heeft gevonden. Bekijk de voorkeuren <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> voor details.</para>
+	  </listitem>
+    </varlistentry>
+	
+    <varlistentry id="menus.view.aggressive.font.fallback">
+      <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Agressief terugvallen op lettertype gebruiken</guimenuitem></term>
+      <listitem>
+        <para>Selecteer deze optie als OmegaT bepaalde tekens niet juist weergeeft (zelfs niet als de lettertypen die de relevante tekens bevatten op uw machine zijn geïnstalleerd).</para>
+
+		<note>
+		  <para>Op Windows lijkt het erop dat dit handmatige mechanisme voor terugvallen op lettertype kan botsen met de standaard voor terugvallen op lettertype, wat ongewenst vervangen van het lettertype kan veroorzaken. Daarom staat het standaard op OFF.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Agressief terugvallen op lettertype</term>
-
+    <varlistentry id="menus.view.modification.info">
+      <term id="menus.view.modification.info.title"><guisubmenu>Informatie over wijzigingen weergeven</guisubmenu></term>
       <listitem>
-        <para>Selecteer deze optie in het geval dat <application>OmegaT</application> sommige tekens niet juist weergeeft (zelfs niet als de lettertypen die de relevante tekens bevatten op uw machine zijn geïnstalleerd). Opmerking: op Windows lijkt het erop dat dit handmatige mechanisme voor terugvallen op lettertype kan botsen met de standaard voor terugvallen op lettertype, wat ongewenst vervangen van het lettertype kan veroorzaken. Daarom staat het standaard op OFF.</para>
+        <para>Geeft de datum en tijd en de auteur van de laatste wijziging aan het huidige segment weer.</para>
+		
+		<para>De standaard waarde is <guimenuitem>Huidige segment</guimenuitem> en het kan worden ingesteld op <guimenuitem>Alle segmenten</guimenuitem> of op <guimenuitem>Geen</guimenuitem>.</para>
+
+		<para>U kunt de weergegeven informatie aanpassen. Bekijk de voorkeuren <link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/> voor details.</para>
       </listitem>
     </varlistentry>
-
-    <varlistentry>
-      <term>Info over wijzigingen</term>
-
+	
+	<varlistentry id="menus.view.restore.main.window">
+      <term id="menus.view.restore.main.window.title"><guimenuitem>Hoofdvenster herstellen</guimenuitem></term>
       <listitem>
-        <para>Instellen van de optie Info over wijzigingen op <guimenuitem>Weergave voor huidige segment</guimenuitem> zal datum en tijd en de auteur weergeven van de laatste wijziging aan het huidige segment. Het instellen op<guimenuitem> Weergave voor alle segmenten </guimenuitem>geeft deze informatie weer voor alle segmenten en <guimenuitem>Niet weergeven</guimenuitem> schakelt deze optie uit.</para>
-      </listitem>
+        <para>Herstelt de lay-out van het hoofdvenster van OmegaT naar zijn standaard waarden.</para>
+
+		<note>
+		  <para>Gebruik deze functie wanneer u in problemen komt bij het opnieuw schikken van de lay-out van het hoofdvenster.</para>
+		</note>
+	  </listitem>
     </varlistentry>
   </variablelist>
 </section>

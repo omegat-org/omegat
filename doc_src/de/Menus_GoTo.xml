@@ -3,13 +3,13 @@
 <section id="menus.goto">
   <title id="menus.goto.title"><guimenu>Gehe zu</guimenu></title>
 
-  <para>Über dieses Menü haben Sie Zugriff auf die Befehle zum Navigieren in Segmenten und Fensterbereichen.</para>
+  <para>Über dieses Menü haben Sie Zugriff auf die Befehle für die Navigation in Segmenten und Fensterbereichen.</para>
 
   <example id="example.next.untranslated.segment">
 	<title id="example.next.untranslated.segment.title">Tastenkürzelbeschreibungsbeispiel</title>
-	<para>In Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>U</keycap></keycombo></para>
+	<para>Unter Windows und Linux: <keycombo><keycap>Strg</keycap><keycap>U</keycap></keycombo></para>
 
-	<para>In macOS: <keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo></para>
+	<para>Unter macOS: <keycombo><keycap>Command</keycap><keycap>U</keycap></keycombo></para>
 
 	<para><emphasis role="bold">In dieser Bedienungsanleitung:</emphasis> <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></para>
   </example>
@@ -37,12 +37,12 @@
       <listitem>
 		<para>Auch: <keycombo><keycap>Enter</keycap></keycombo></para>
 
-        <para>Springt zum nächsten Segment, oder zum ersten Segment der nächsten Datei, wenn das aktuelle Segment das letzte in der Datei ist.</para>
+        <para>Springt zum nächsten Segment oder zum ersten Segment der nächsten Datei, wenn das aktuelle Segment das letzte in der Datei ist.</para>
 
         <note>
-		  <para>Sie können <keycap>TAB</keycap> als alternatives Tastenkürzel verwenden, indem Sie die <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>-Einstellung aktivieren.</para>
+		  <para>Sie können <keycap>Tab</keycap> als alternatives Tastenkürzel verwenden, wenn Sie die Einstellung <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> aktivieren.</para>
 		  
-		  <para>Das ist nützlich für Zeicheneingabesysteme, die <keycap>Enter</keycap> zur Validierung der Eingabe verwenden.</para></note>
+		  <para>Dies ist nützlich für Zeicheneingabesysteme, die <keycap>Enter</keycap> zur Bestätigung der Eingabe verwenden.</para></note>
       </listitem>
     </varlistentry>
 
@@ -51,12 +51,12 @@
       <listitem>
 		<para>Auch: <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo></para>
 
-        <para>Springt zum vorherigen Segment, oder zum letzten Segment der vorherigen Datei, wenn das aktuelle Segment das erste in der Datei ist.</para>
+        <para>Springt zum vorherigen Segment oder zum letzten Segment der vorherigen Datei, wenn das aktuelle Segment das erste in der Datei ist.</para>
 
         <note>
-		  <para>Sie können <keycombo><keycap>C</keycap><keycap>TAB</keycap></keycombo> als alternatives Tastenkürzel verwenden, indem Sie die <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/>-Einstellung aktivieren.</para>
+		  <para>Sie können <keycombo><keycap>C</keycap><keycap>Tab</keycap></keycombo> als alternatives Tastenkürzel verwenden, wenn Sie die Einstellung <link linkend="dialogs.preferences.general.use.tab.to.advance" endterm="dialogs.preferences.general.use.tab.to.advance.title"/> aktivieren.</para>
 		  
-		  <para>Das ist nützlich für Zeicheneingabesysteme, die <keycap>Enter</keycap> zur Validierung der Eingabe verwenden.</para>
+		  <para>Dies ist nützlich für Zeicheneingabesysteme, die <keycap>Enter</keycap> zur Bestätigung der Eingabe verwenden.</para>
 		</note>
       </listitem>
     </varlistentry>
@@ -92,12 +92,12 @@
     <varlistentry id="menus.goto.source.of.selected.match">
       <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Quelle des ausgewählten Matches</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
-        <para>Springt zum Segment, das dem aktuell ausgewählten Match im <guilabel>Fuzzy-Matches</guilabel>-Bereich entspricht.</para>
+        <para>Springt zum Segment, das dem aktuell ausgewählten Match im Fensterbereich &quot;<guilabel>Fuzzy Matches</guilabel>&quot; entspricht.</para>
       </listitem>
     </varlistentry>
 
 	<varlistentry id="menus.goto.auto.populated.segments">
-	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Automatisch ausgefüllte Segmente</guisubmenu></term>
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Automatisch gefüllte Segmente</guisubmenu></term>
 	  <listitem>
         <para>Navigiert zwischen Segmenten, die automatisch mit exakten Matches aus den Unterordnern <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> und <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/> gefüllt wurden.</para>
 
@@ -107,25 +107,25 @@
 		  <listitem id="menus.goto.auto.populated.segments.next.auto">
 			<para id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Nächstes Segment von tm/auto/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
 
-			<para>Springt zum nächsten Segment, das von <filename>tm/auto/</filename> eingefügt wurde.</para>
+			<para>Springt zum nächsten Segment, das von <filename>tm/auto/</filename> gefüllt wurde.</para>
 		  </listitem>
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
 			<para id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Vorheriges Segment von tm/auto/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
 
-			<para>Springt zum vorherigen Segment, das von <filename>tm/auto/</filename> eingefügt wurde.</para>
+			<para>Springt zum vorherigen Segment, das von <filename>tm/auto/</filename> gefüllt wurde.</para>
 		  </listitem>
 
 		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
 			<para id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Nächstes Segment von tm/enforce/</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
 
-			<para>Springt zum nächsten Segment, das von <filename>tm/enforce/</filename> eingefügt wurde.</para>
+			<para>Springt zum nächsten Segment, das von <filename>tm/enforce/</filename> gefüllt wurde.</para>
 		  </listitem>
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
 			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Vorheriges Segment von tm/enforce/</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
 
-			<para>Springt zum vorherigen Segment, das von <filename>tm/enforce/</filename> eingefügt wurde.</para>
+			<para>Springt zum vorherigen Segment, das von <filename>tm/enforce/</filename> gefüllt wurde.</para>
 		  </listitem>
 		</itemizedlist>
 	  </listitem>
@@ -135,7 +135,7 @@
       <term id="menus.goto.back.in.history.title"><guimenuitem>Zurück im Verlauf</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
         <para>OmegaT merkt sich den Verlauf Ihrer Segmentnavigation.</para>
-        <para>Mit diesem Befehl können Sie sich segmentweise zu Segmenten rückwärts bewegen, die Sie zuvor besucht haben.</para>
+        <para>Mit diesem Befehl können Sie jeweils ein Segment zurück zu Segmenten navigieren, die Sie zuvor besucht haben.</para>
       </listitem>
     </varlistentry>
     
@@ -144,7 +144,7 @@
       <listitem>
         <para>OmegaT merkt sich den Verlauf Ihrer Segmentnavigation.</para>
 
-        <para>Mit diesem Befehl können Sie sich segmentweise zu Segmenten vorwärts bewegen, die Sie zuvor mit dem obigen Befehl <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> besucht haben.</para>
+        <para>Mit diesem Befehl können Sie jeweils ein Segment vorwärts zu Segmenten navigieren, die Sie zuvor mit dem obigen Befehl <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.back.in.history" endterm="menus.goto.back.in.history.title"/> besucht haben.</para>
       </listitem>
     </varlistentry>
 
@@ -159,7 +159,7 @@
       <term id="menus.goto.editor.pane.title"><guimenuitem>Editor</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
-        <para>Wechselt zum <link linkend="panes.editor" endterm="panes.editor.title"/>, um Ihre Übersetzung fortzusetzen.</para>
+        <para>Wechselt zum <link linkend="panes.editor" endterm="panes.editor.title"/>, um mit der Übersetzung fortzufahren.</para>
       </listitem>
     </varlistentry>
   </variablelist>

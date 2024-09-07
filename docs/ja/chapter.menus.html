@@ -824,7 +824,7 @@
                   </dd>
                   <dt id="menus.edit.insert.missing.source.tag">
                      <span class="term" id="menus.edit.insert.missing.source.tag.title">
-                        <span class="guimenuitem">未使用の原文のタグを挿入</span> 
+                        <span class="guimenuitem">未使用のタグを挿入</span> 
                         <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
@@ -858,9 +858,9 @@
                         <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
-                           <strong>C</strong>
-                        </span>+<span class="keycap">
                            <strong>S</strong>
+                        </span>+<span class="keycap">
+                           <strong>C</strong>
                         </span>
 	  
                      </span>
@@ -1204,6 +1204,13 @@
                   </dt>
                   <dd>
                      <p>同じ内容の原文分節が複数存在し、それぞれの文脈に応じて異なる対訳が必要になることがあります。現在の翻訳が適用されない場合は、このメニュー項目を選択して例外訳文を入力します。</p>
+                     <div class="warning">
+                        <h3 class="title">警告</h3>
+                        <p>OmegaT は、ファイルの種類によって提供される内部識別子に加え、前後の分節を参照することによって、同一の分節を区別します。このような場合、例外訳文は、前後の分節が異なる同一の分節に依存します。同一の分節の前後の分節も同一の場合、それらを別々の訳文に翻訳する OmegaT の例外訳文に登録することはできません。</p>
+                        <p>You can work around this issue by introducing a small change to one
+		  of the preceding or following segments in the source file to distinguish
+		  between the various instances of the same preceding or following segment.</p>
+                     </div>
                   </dd>
                   <dt id="menus.edit.remove.translation">
                      <span class="term" id="menus.edit.remove.translation.title">
@@ -1512,7 +1519,7 @@
                            </li>
                            <li class="listitem" id="menus.goto.auto.populated.segments.prev.enforce">
                               <p id="menus.goto.auto.populated.segments.prev.enforce.title">
-                                 <span class="guimenuitem">次のtm/auto/からの分節</span>
+                                 <span class="guimenuitem"> tm/enforce/からの前の分節</span> 
                                  <span class="keycap">
                                     <strong>S</strong>
                                  </span>+<span class="keycap">
@@ -1734,9 +1741,9 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>LanguageToolがエラーを検出した訳文の部分に下線を引きます。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
+                     <p>LanguageToolがエラーを検出した訳文の部分に下線を引きます。詳細については、<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.languagetool.plugin" title="LanguageTool">
                            <span class="guilabel">LanguageTool</span>
-                        </a>を参照してください。</p>
+                        </a>環境設定を参照してください。</p>
                   </dd>
                   <dt id="menus.view.aggressive.font.fallback">
                      <span class="term" id="menus.view.aggressive.font.fallback.title">
@@ -1758,9 +1765,9 @@
                   <dd>
                      <p>現在の分節を最後に更新した作業者と更新日時の情報を表示します。</p>
                      <p>デフォルトの値は<span class="guimenuitem">現在の分節</span>で、<span class="guimenuitem">すべての分節</span>または<span class="guimenuitem">なし</span>に設定できます。</p>
-                     <p>表示された情報を修正できます。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.view.use.custom.templates.for.modification.info">
+                     <p>表示された情報を修正できます。詳細については、<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.view.use.custom.templates.for.modification.info">
                            <code class="option">分節の変更情報のカスタマイズ</code>
-                        </a>を参照してください。</p>
+                        </a>環境設定を参照してください。</p>
                   </dd>
                   <dt id="menus.view.restore.main.window">
                      <span class="term" id="menus.view.restore.main.window.title">
@@ -2054,7 +2061,7 @@
                            </li>
                         </ul>
                      </div>
-                     <p>機械翻訳エンジンを有効または無効にします。</p>
+                     <p>適切に構成された機械翻訳エンジンを有効または無効にします。</p>
                      <p>複数の変換エンジンを選択した場合は、<span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">
@@ -2081,9 +2088,9 @@
                         </ul>
                      </div>
                      <p>用語集検索のファジーマッチングを有効または無効にできます。</p>
-                     <p>詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="用語集">
+                     <p>詳細については、<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="用語集">
                            <span class="guilabel">用語集</span>
-                        </a>を参照してください。</p>
+                        </a>環境設定を参照してください。</p>
                   </dd>
                   <dt id="menus.options.dictionary">
                      <span class="term" id="menus.options.dictionary.title">
@@ -2103,9 +2110,9 @@
                         </ul>
                      </div>
                      <p>辞書検索のファジーマッチングを有効または無効にできます。</p>
-                     <p>詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="辞書">
+                     <p>詳細については、<a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="辞書">
                            <span class="guilabel">辞書</span>
-                        </a>を参照してください。</p>
+                        </a>環境設定を参照してください。</p>
                   </dd>
                   <dt id="menus.options.autocompletion">
                      <span class="term" id="menus.options.autocompletion.title">
@@ -2113,9 +2120,9 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>さまざまな機能の毎に有効または無効にします。詳細については、設定-<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="入力補完">
+                     <p>さまざまな機能の毎に有効または無効にします。詳細については、<a class="link" href="chapter.dialogs.preferences.html#dialog.preferences.auto.completion" title="入力補完">
                            <span class="guilabel">入力補完</span>
-                        </a>を参照してください。</p>
+                        </a>環境設定を参照してください。</p>
                   </dd>
                   <dt id="menus.options.file.filters">
                      <span class="term" id="menus.options.file.filters.title">

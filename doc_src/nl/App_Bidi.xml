@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.bidi">
+  <title id="app.bidi.title">Directionele opmaaktekens</title>
+
+  <para>Bi-drectionele beheerstekens zijn beschikbaar vanuit <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>. Zij kunnen worden gebruikt om:</para>
+
+  <itemizedlist>
+	<listitem>
+	  <para>Een onzichtbaar teken in te voegen met een sterke richting om een specifieke positie voor een teken te forceren met een zwakke of neutrale richting.</para>
+	</listitem>
+	<listitem>
+	  <para>Een gedeelte tekst te maken dat tegengesteld loopt aan de tekst van het segment.</para>
+	</listitem>
+  </itemizedlist>
+  
+  <para>Deze beheerstekens wijzigen de richting, maar zijn onzichtbaar. Gebruik <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.bidirectional.algorithm.control.character" endterm="menus.view.mark.bidirectional.algorithm.control.character.title"/> om een visuele indicatie van hun psitie weer te geven.</para>
+
+  <section id="app.bidi.marks">
+	<title id="app.bidi.marks.title">Markeringen</title>
+
+	<para>Voeg, om de positie van een teken met een zwakke of neutrale richting te wijzigen (zoals symbolen voor punctuatie), een teken LRM of RLM in na het teken, afhankelijk van de richting van het segment:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Voeg een teken LRM in na een zwakke-richting teken dat van links naar rechts moet lopen in een segment dat gaat van rechts naar links (bijv. een Engels uittreksel binnen een Arabische tekst).</para>
+	  </listitem>
+	  <listitem>
+		<para>Voeg een teken RLM in na een zwakke-richting teken dat van rechts naar links moet lopen in een segment dat gaat van links naar rechts naar links (bijv. een Arabisch uittreksel binnen een Engelse tekst)</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+
+  <section id="app.bidi.embeddings">
+	<title id="app.bidi.embeddings.title">Inbeddingen</title>
+
+	<para>Inbeddingen kunnen worden gebruikt om een langere sectie tekst te maken (die meerdere woorden en spaties bevatten) die moeten lopen in de richting die tegengesteld is aan die van het segment. U kunt twee soorten inbeddingen maken, afhankelijk van de richting van het segment:</para>
+
+	<itemizedlist>
+	  <listitem>
+		<para>Voeg, om een inbedding van links naar rechts te maken in een segment dat loopt van rechts naar links, een LRE-teken (LRE) voor inbedding in, typ of voeg de tekst die loopt van links naar rechts in, en voeg dan het teken voor pop directional formatting (PDF) in.</para>
+	  </listitem>
+	  <listitem>
+		<para>Voeg, om een inbedding van rechts naar links te maken in een segment dat loopt van links naar rechts, een RLE-teken (LRE) voor inbedding in, typ of voeg de tekst die loopt van rechts naar links in, en voeg dan het teken voor pop directional formatting (PDF) in.</para>
+	  </listitem>
+	</itemizedlist>
+  </section>
+</section>

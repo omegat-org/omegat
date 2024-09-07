@@ -1,18 +1,25 @@
 ----------------------------------------------------------------------
- OmegaT 6.0.1
+ OmegaT 6.0.1 (2024-08-17)
 ----------------------------------------------------------------------
   0 Enhancement
- 15 Bug fixes
-  1 Localisation updates
+ 17 Bug fixes
+  8 Localisation updates
 ----------------------------------------------------------------------
+6.0.1 vs 6.0.0
 
   Bug fixes:
+
+  - Removal of MED package save/load feature
+  https://sourceforge.net/p/omegat/bugs/1266/
 
   - sdlxliff filter does not display (some) comments
   https://sourceforge.net/p/omegat/bugs/1244/
 
   - Windows launcher does not launch when without_JRE installer used
   https://sourceforge.net/p/omegat/bugs/1240/
+
+  - Glossary popups behavior changed unintended way
+  https://sourceforge.net/p/omegat/bugs/1239/
 
   - Match statistics are affected by fuzzy match threshold
   https://sourceforge.net/p/omegat/bugs/1236/
@@ -55,10 +62,14 @@
 
   Localization Updates:
 
+  - Catalan localization updated (UI, readme, documentation)
+  - Chinese localization updated (UI, readme, scripts)
+  - Corsican localization updated (UI, readme)
+  - Dutch localization updated (UI, readme, documentation, scripts)
   - French localization updated (UI, documentation)
-
-  - Error when trying to backup the project file on Windows
-  https://sourceforge.net/p/omegat/bugs/1166/
+  - German localization updated (UI, readme, documentation, scripts)
+  - Japanese localization updated (UI, documentation)
+  - Ukrainian localization updated (UI, readme, scripts)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-22)

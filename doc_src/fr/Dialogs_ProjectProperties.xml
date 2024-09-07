@@ -142,11 +142,11 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.processing.command">
-        <term id="dialogs.project.properties.external.processing.command.title"><option>Commandes locales de post-traitement</option></term>
+        <term id="dialogs.project.properties.external.processing.command.title"><option>Commandes locales de posttraitement</option></term>
 
 		<listitem>
 		  <warning>
-			<para>Pour des raisons de sécurité, les commandes locales de post-traitement sont désactivées par défaut.</para>
+			<para>Pour des raisons de sécurité, les commandes locales de posttraitement sont désactivées par défaut.</para>
 
 			<para>Voir le paramètre <link linkend="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands" endterm="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"/> pour en savoir plus.</para>
 		  </warning>
@@ -157,13 +157,13 @@
 
 		  <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> ou <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/> pour créer les fichiers cibles et déclencher la commande.</para>
 
-		  <para>Les commandes spécifiées ici ne sont disponibles que pour ce projet. Elles sont enregistrées dans le fichier <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. N’activez les commandes locales de post-traitement que si vous faites confiance à la source de ce fichier.</para>
+		  <para>Les commandes spécifiées ici ne sont disponibles que pour ce projet. Elles sont enregistrées dans le fichier <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. N’activez les commandes locales de posttraitement que si vous faites confiance à la source de ce fichier.</para>
 		
 		  <para>La liste des variables de modèle vous permet d’accéder à diverses données de projet et variables système.</para>
 
 		  <para>Voir l’annexe <link linkend="post.processing.commands" endterm="post.processing.commands.title"/> pour en savoir plus.</para>
 
-		  <para>Vous pouvez également définir des commandes globales de post-traitement accessibles à tous les projets qui partagent le même dossier de configuration. Ces commandes sont définies dans le paramètre <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
+		  <para>Vous pouvez également définir des commandes globales de posttraitement accessibles à tous les projets qui partagent le même dossier de configuration. Ces commandes sont définies dans le paramètre <link linkend="dialogs.preferences.saving.and.output.external.post-processing.command" endterm="dialogs.preferences.saving.and.output.external.post-processing.command.title"/>.</para>
 
 		  <note>
 			<para>Les commandes locales sont exécutées avant les commandes globales.</para>
@@ -407,7 +407,7 @@
 			</varlistentry>
 		  </variablelist>
 		  
-		  <para>Voir la <ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">Spécification TMX 1.4b</ulink> pour plus de détails.</para>
+		  <para>Voir la <ulink url="https://www.gala-global.org/tmx-14b#SectionIntroduction">spécification TMX 1.4b</ulink> pour en savoir plus.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>

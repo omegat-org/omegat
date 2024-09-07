@@ -130,7 +130,7 @@
 			</listitem>
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.macos">
-			<term id="launch.with.command.line.macos.title">MacOS</term>
+			<term id="launch.with.command.line.macos.title">macOS</term>
 			<listitem>
 			  <para><filename>/Applications/OmegaT.app/Contents/Java/OmegaT.jar</filename></para>
 			</listitem>
@@ -213,7 +213,7 @@
 		  <listitem>
 			<para><option>-Duser.country=PP</option></para>
 
-			<para>Remplacez <code>PP</code> par le code à deux lettres du pays souhaité de la liste <ulink url="https://fr.wikipedia.org/wiki/ISO_3166-2">ISO 3166-1 alpha-2</ulink>.</para>
+			<para>Remplacez <code>PP</code> par le code à deux lettres du pays souhaité de la liste <ulink url="https://fr.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</ulink>.</para>
 
 			<para>Ce paramètre se combine avec le paramètre précédent de langue de l’interface pour spécifier une variante régionale. Si cette variante n’est pas disponible, l’interface adopte la même priorité que ci-dessus.</para>
 		  </listitem>

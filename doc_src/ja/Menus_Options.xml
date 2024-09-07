@@ -26,7 +26,7 @@
 		  </listitem>
 		</itemizedlist>
 
-		<para>機械翻訳エンジンを有効または無効にします。</para>
+        <para>適切に構成された機械翻訳エンジンを有効または無効にします。</para>
 
         <para>複数の変換エンジンを選択した場合は、<keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>を使用して変換エンジンの翻訳結果を切り替え、最後に選択した訳文候補を挿入します。詳細の<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>環境設定を参照してください。</para>
       </listitem>
@@ -43,7 +43,7 @@
 
         <para>用語集検索のファジーマッチングを有効または無効にできます。</para>
 
-		<para>詳細については、設定-<link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>を参照してください。</para>
+		<para>詳細については、<link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/>環境設定を参照してください。</para>
       </listitem>
     </varlistentry>
 
@@ -58,14 +58,14 @@
 
         <para>辞書検索のファジーマッチングを有効または無効にできます。</para>
 
-		<para>詳細については、設定-<link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>を参照してください。</para>
+		<para>詳細については、<link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/>環境設定を参照してください。</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.options.autocompletion">
       <term id="menus.options.autocompletion.title"><guisubmenu>入力補完</guisubmenu></term>
       <listitem>
-		<para>さまざまな機能の毎に有効または無効にします。詳細については、設定-<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>を参照してください。</para>
+		<para>さまざまな機能の毎に有効または無効にします。詳細については、<link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/>環境設定を参照してください。</para>
 	  </listitem>
     </varlistentry>
 

@@ -295,16 +295,6 @@
             </row>
 
             <row>
-              <entry>ファイルを追加...</entry>
-              <entry>projectImportMenuItem</entry>
-            </row>
-
-            <row>
-              <entry>MediaWiki からの原文ファイル追加</entry>
-              <entry>projectWikiImportMenuItem</entry>
-            </row>
-
-            <row>
               <entry>再読み込み</entry>
               <entry>projectReloadMenuItem</entry>
               <entry namest="3" nameend="4">F5</entry>
@@ -322,6 +312,16 @@
               <entry>projectSaveMenuItem</entry>
               <entry>ctrl S</entry>
               <entry>meta S</entry>
+            </row>
+
+            <row>
+              <entry>ファイルを追加...</entry>
+              <entry>projectImportMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>MediaWiki からの原文ファイル追加</entry>
+              <entry>projectWikiImportMenuItem</entry>
             </row>
 
             <row>
@@ -346,6 +346,16 @@
               <entry>projectSingleCompileMenuItem</entry>
               <entry>ctrl shift D</entry>
               <entry>meta shift D</entry>
+            </row>
+
+            <row>
+              <entry>MED プロジェクトを開く...</entry>
+              <entry>projectMedOpenMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>MEDプロジェクトの作成</entry>
+              <entry>projectMedCreateMenuItem</entry>
             </row>
 
             <row>
@@ -447,14 +457,14 @@
 
           <tbody>
             <row>
-              <entry>取り消す</entry>
+              <entry>Undo</entry>
               <entry>editUndoMenuItem</entry>
               <entry>ctrl Z</entry>
               <entry>meta Z</entry>
             </row>
 
             <row>
-              <entry>やり直す</entry>
+              <entry>Redo</entry>
               <entry>editRedoMenuItem</entry>
               <entry>ctrl Y</entry>
               <entry>meta Y</entry>
@@ -472,13 +482,6 @@
               <entry>editInsertTranslationMenuItem</entry>
               <entry>ctrl I</entry>
               <entry>meta I</entry>
-            </row>
-
-            <row>
-              <entry>機械翻訳に置換</entry>
-              <entry>editOverwriteMachineTranslationMenuItem</entry>
-              <entry>ctrl M</entry>
-              <entry>meta M</entry>
             </row>
 
             <row>
@@ -503,7 +506,14 @@
             </row>
 
             <row>
-              <entry>未使用の原文のタグを挿入</entry>
+              <entry>機械翻訳に置換</entry>
+              <entry>editOverwriteMachineTranslationMenuItem</entry>
+              <entry>ctrl M</entry>
+              <entry>meta M</entry>
+            </row>
+
+            <row>
+              <entry>Insert Missing Tags</entry>
               <entry>editTagPainterMenuItem</entry>
               <entry>ctrl shift T</entry>
               <entry>meta shift T</entry>
@@ -531,7 +541,7 @@
             </row>
 
             <row>
-              <entry>プロジェクトを検索...</entry>
+              <entry>検索...</entry>
               <entry>editFindInProjectMenuItem</entry>
               <entry>ctrl F</entry>
               <entry>meta F</entry>
@@ -545,7 +555,7 @@
             </row>
 
             <row>
-              <entry>検索と置換...</entry>
+              <entry>置換...</entry>
               <entry>editReplaceInProjectMenuItem</entry>
               <entry>ctrl K</entry>
               <entry>meta K</entry>
@@ -584,49 +594,49 @@
             </row>
 
             <row>
-              <entry>前の参考訳文を選択</entry>
+              <entry>参考訳文の選択/前の参考訳文を選択</entry>
               <entry>editSelectFuzzyPrevMenuItem</entry>
               <entry>ctrl UP</entry>
               <entry>meta UP</entry>
             </row>
 
             <row>
-              <entry>次の参考訳文を選択</entry>
+              <entry>参考訳文の選択/次の参考訳文を選択</entry>
               <entry>editSelectFuzzyNextMenuItem</entry>
               <entry>ctrl DOWN</entry>
               <entry>meta DOWN</entry>
             </row>
 
             <row>
-              <entry>一致#1を選択</entry>
+              <entry>参考訳文の選択/参考訳文１を選択</entry>
               <entry>editSelectFuzzy1MenuItem</entry>
               <entry>ctrl 1</entry>
               <entry>meta 1</entry>
             </row>
 
             <row>
-              <entry>一致#2を選択</entry>
+              <entry>参考訳文の選択/参考訳文２を選択</entry>
               <entry>editSelectFuzzy2MenuItem</entry>
               <entry>ctrl 2</entry>
               <entry>meta 2</entry>
             </row>
 
             <row>
-              <entry>一致#3を選択</entry>
+              <entry>参考訳文の選択/参考訳文３を選択</entry>
               <entry>editSelectFuzzy3MenuItem</entry>
               <entry>ctrl 3</entry>
               <entry>meta 3</entry>
             </row>
 
             <row>
-              <entry>一致#4を選択</entry>
+              <entry>参考訳文の選択/参考訳文４を選択</entry>
               <entry>editSelectFuzzy4MenuItem</entry>
               <entry>ctrl 4</entry>
               <entry>meta 4</entry>
             </row>
 
             <row>
-              <entry>一致#5を選択</entry>
+              <entry>参考訳文の選択/参考訳文５を選択</entry>
               <entry>editSelectFuzzy5MenuItem</entry>
               <entry>ctrl 5</entry>
               <entry>meta 5</entry>
@@ -772,38 +782,31 @@
             </row>
 
             <row>
-              <entry>tm/auto/ からの次の分節</entry>
+              <entry>分節の自動設定 /  次のtm/auto/からの分節</entry>
               <entry>gotoNextXAutoMenuItem</entry>
               <entry>ctrl alt COMMA</entry>
               <entry>meta alt COMMA</entry>
             </row>
 
             <row>
-              <entry>tm/auto/ からの前の分節</entry>
+              <entry>分節の自動設定 /  前のtm/auto/からの分節</entry>
               <entry>gotoPrevXAutoMenuItem</entry>
               <entry>ctrl alt shift COMMA</entry>
               <entry>meta alt shift COMMA</entry>
             </row>
 
             <row>
-              <entry>tm/enforce/からの次の分節</entry>
+              <entry>分節の自動設定 /  次のtm/enforce/からの分節</entry>
               <entry>gotoNextXEnforcedMenuItem</entry>
               <entry>ctrl alt PERIOD</entry>
               <entry>meta alt PERIOD</entry>
             </row>
 
             <row>
-              <entry>tm/enforce/からの以前の分節</entry>
+              <entry>分節の自動設定 /  次のtm/enforce/からの分節</entry>
               <entry>gotoPrevXEnforcedMenuItem</entry>
               <entry>ctrl alt shift PERIOD</entry>
               <entry>meta alt shift PERIOD</entry>
-            </row>
-
-            <row>
-              <entry>分節の選択履歴を進む</entry>
-              <entry>gotoHistoryForwardMenuItem</entry>
-              <entry>ctrl shift N</entry>
-              <entry>meta shift N</entry>
             </row>
 
             <row>
@@ -814,14 +817,21 @@
             </row>
 
             <row>
-              <entry>メモウィンドウ</entry>
+              <entry>分節の選択履歴を進む</entry>
+              <entry>gotoHistoryForwardMenuItem</entry>
+              <entry>ctrl shift N</entry>
+              <entry>meta shift N</entry>
+            </row>
+
+            <row>
+              <entry>メモ帳</entry>
               <entry>gotoNotesPanelMenuItem</entry>
               <entry>ctrl alt 9</entry>
               <entry>meta alt 9</entry>
             </row>
 
             <row>
-              <entry>編集ウィンドウ</entry>
+              <entry>編集</entry>
               <entry>gotoEditorPanelMenuItem</entry>
               <entry>ctrl alt 0</entry>
               <entry>meta alt 0</entry>
@@ -861,7 +871,7 @@
             </row>
 
             <row>
-              <entry>Mark Paragraph Delimitations</entry>
+              <entry>段落区切りを表示</entry>
               <entry>viewMarkParagraphStartCheckBoxMenuItem</entry>
             </row>
 
@@ -881,22 +891,22 @@
             </row>
 
             <row>
-              <entry>ノーブレークスペースを色付け</entry>
+              <entry>ノーブレークスペース(NBSP)を表示</entry>
               <entry>viewMarkNBSPCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>空白文字を色付け</entry>
+              <entry>空白文字を表示</entry>
               <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>双方向アルゴリズム制御文字を色付け</entry>
+              <entry>双方向アルゴリズム制御文字を表示</entry>
               <entry>viewMarkBidiCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>auto フォルダー由来の分節を色付け</entry>
+              <entry>自動生成分節を色づけ</entry>
               <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
             </row>
 
@@ -906,7 +916,7 @@
             </row>
 
             <row>
-              <entry>言語チェッカー</entry>
+              <entry>言語チェッカーの指摘</entry>
               <entry>viewMarkLanguageCheckerCheckBoxMenuItem</entry>
             </row>
 
@@ -916,18 +926,23 @@
             </row>
 
             <row>
-              <entry>更新情報を表示 / 表示しない</entry>
+              <entry>変更情報表示 / 変更なし</entry>
               <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
             </row>
 
             <row>
-              <entry>Modification Info/Display for Current Segment</entry>
+              <entry>変更情報表示 / 現在の分節</entry>
               <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
             </row>
 
             <row>
-              <entry>更新情報を表示 / すべての分節で表示</entry>
+              <entry>変更情報表示 / 全ての分節</entry>
               <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+            </row>
+
+            <row>
+              <entry>ウインドウを初期位置に復元</entry>
+              <entry>viewRestoreGUIMenuItem</entry>
             </row>
           </tbody>
         </tgroup>
@@ -960,7 +975,7 @@
             </row>
 
             <row>
-              <entry>現在のドキュメントの品質をチェック</entry>
+              <entry>現在の文書の品質チェック</entry>
               <entry>toolsCheckIssuesCurrentFileMenuItem</entry>
             </row>
 
@@ -1023,12 +1038,12 @@
             </row>
 
             <row>
-              <entry>用語集/用語の照合にトークナイザーを使う</entry>
+              <entry>用語集 / ファジーマッチを使用</entry>
               <entry>optionsGlossaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
             <row>
-              <entry>辞書/辞書項目の照合にトークナイザーを使う</entry>
+              <entry>辞書 / ファジーマッチを使用</entry>
               <entry>optionsDictionaryFuzzyMatchingCheckBoxMenuItem</entry>
             </row>
 
@@ -1038,22 +1053,22 @@
             </row>
 
             <row>
-              <entry>Auto-completion/History Completion</entry>
+              <entry>自動補完/履歴から補完</entry>
               <entry>optionsAutoCompleteHistoryCompletionMenuItem</entry>
             </row>
 
             <row>
-              <entry>Auto-completion/History Prediction</entry>
+              <entry>自動補完/履歴から予測</entry>
               <entry>optionsAutoCompleteHistoryPredictionMenuItem</entry>
             </row>
 
             <row>
-              <entry>ファイルフィルター...</entry>
+              <entry>ユーザーレベルのファイルフィルター...</entry>
               <entry>optionsSetupFileFiltersMenuItem</entry>
             </row>
 
             <row>
-              <entry>分節化規則...</entry>
+              <entry>ユーザーレベルの分節化規則...</entry>
               <entry>optionsSentsegMenuItem</entry>
             </row>
 
@@ -1063,7 +1078,7 @@
             </row>
 
             <row>
-              <entry>設定フォルダにアクセス</entry>
+              <entry>設定フォルダにアクセス...</entry>
               <entry>optionsAccessConfigDirMenuItem</entry>
             </row>
           </tbody>
@@ -1256,7 +1271,7 @@
               <entry>前のトークンをスキップ</entry>
               <entry>editorSkipPrevToken</entry>
               <entry>ctrl LEFT</entry>
-              <entry>alt RIGHT</entry>
+              <entry>alt LEFT</entry>
             </row>
 
             <row>

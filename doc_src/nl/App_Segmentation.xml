@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="app.segmentation">
+  <title id="app.segmentation.title">Segmentatie</title>
+
+  <section id="dialog.preferences.segmentation.setup.type">
+	<title id="dialog.preferences.segmentation.setup.type.title">Alinea of zin?</title>
+	
+	<para>Programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. Wanneer een vertaling wordt ingevoerd, wordt het segment dat de brontekst bevat, opgeslagen met zijn vertaling in the projectgeheugen, en vervolgens gebruikt voor overeenkomsten met andere bronsegmenten in het project.</para>
+
+	<para>Gebruik de projecteigenschap <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> om het type segmentatie te specificeren.</para>
+
+	<para>Segmenten zijn standaard <emphasis role="bold">alinea's</emphasis>, gedefinieerd door de indeling van het bestand zelf.</para>
+	
+	<para>Niet gebruiken van <emphasis role="bold">zin-</emphasis> segmentatie voor een document is hetzelfde als het gebruiken van <emphasis>alinea-</emphasis> segmentatie. In dat geval wordt elke alinea (zoals gedefinieerd in de originele indeling van het document) weergegeven als één enkel segment, en het staat de vertaler vrij om de zinnen binnen het segment in de vertaling te herschikken.</para>
+	
+	<para><emphasis>Alinea-segmentatie</emphasis> werkt zeer goed met meer letterlijke of creatieve teksten, als ook, meer algemeen, met documenten waarvoor overeenkomsten van vertaalgeheugens niet zo belangrijk zijn.</para>
+
+	<para><emphasis>Zin-segmentatie</emphasis> vertrouwd op een aantal regels (<emphasis>segmentatieregels</emphasis> genoemd) die definiëren wat een zin samenstelt in de brontaal. Deze instelling werkt goed met documenten waarin herhalingen of soortgelijke zinnen veel voorkomen, zoals technische of gerechtelijke documenten.</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
+		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">Segmentatie op niveau van de alinea</term>
+
+		<listitem>
+		  <para>OmegaT parst eerst de tekst voor segmentatie op niveau van de alinea. Dit proces vertrouwd alleen op de structuur van het bronbestand om de segmenten te maken.</para>
+
+		  <para>Tekstbestanden kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden die opmaak bevatten (ODF, HTML en andere documenten) worden gesegmenteerd op het blokniveau van (alinea)tags. Vertaalbare object-attributen in XHTML of HTML-bestanden kunnen als afzonderlijke &quot;alinea's&quot; worden uitgenomen.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
+        <term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">Segmentatie op niveau van de zin</term>
+
+        <listitem>
+		  <para>Nadat het bronbestand in structurele eenheden is opgedeeld, zal OmegaT deze blokken verder opdelen in zinnen.</para>
+
+		  <para>Het proces van segmentering kan als volgt worden voorgesteld: de cursor verplaatst zich langs de tekst, één teken per keer, zoekend naar de positie waar een afbreking zal voorkomen, of waar een afbreking niet is toegestaan.</para>
+
+		  <para>Elke keer als de cursor zich verplaatst naar het volgende teken, controleert, OmegaT of:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>de tekst voor de locatie correspondeert met een regel <emphasis role="bold">Vóór</emphasis>,</para>
+			</listitem>
+			
+			<listitem>
+			  <para>en of de tekst na de locatie correspondeert met de geassocieerde <emphasis role="bold">Na</emphasis>-regel.</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>Als de locatie overeenkomt met beide regels, wordt het beschouwd als ofwel een afbreking, of als niet-afbreking, afhankelijk van wat de regel definieert.</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+  
+  <section id="dialog.preferences.segmentation.setup.scope">
+	<title id="dialog.preferences.segmentation.setup.scope.title">Globaal of lokaal?</title>
+
+	<note>
+	  <para>Dezelfde mechanismen en dialoogvensters worden gebruikt voor het definiëren van globale en lokale segmentatieregels.</para>
+	</note>
+
+	<para>Standaard zijn de instellingen voor segmentatie globaal en worden gedeeld door alle projecten.</para>
+
+	<para>Gebruik de projecteigenschap <link linkend="dialogs.project.properties.local.segmentation" endterm="dialogs.project.properties.local.segmentation.title"/> om het bereik van de segmentatieregels te beperken tot het huidige project.</para>
+
+	<para>U kunt een soortgelijk resultaat bereiken door OmegaT te starten vanaf de opdrachtregel. Bekijk de <link linkend="launch.with.command.line" endterm="launch.with.command.line.title"/> how-to voor details.</para>
+	
+	<para>Als u lokale regels gebruikt, heeft u nog steeds toegang tot de globale regels, maar het aanpassen daarvan zal geen effect hebben op uw project.</para>
+  </section>
+
+
+  <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
+	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Regels</title>
+	<para>OmegaT verschaft vooraf gedefinieerde segmentatieregels, en de vertaler kan reguliere expressies gebruiken om ze aan te passen. Bekijk de appendix <link linkend="app.regex" endterm="app.regex.title"/> voor details.</para>
+
+	<para>Als een herinnering, regels werken op de volgende manier: wanneer een regel overeenkomt, plaatst OmegaT een markering op de locatie van de overeenkomst, zodat regels die erna komen die locatie negeren. Dat is de reden waarom regels voor uitzonderingen vóór segmentatieregels moeten staan.</para>
+	
+	<warning>
+	  <para>Als u de segmentatie wijzigt tijdens het vertalen, moet u het project herladen vóórdat de nieuwe segmentatie effect heeft. Dit zal sommige eerder vertaalde segmenten splitsen of samenvoegen, en die daarom als niet vertaald zullen worden beschouwd. Niettegenstaande dat zal hun originele vertaling nog steeds in het projectgeheugen staan.</para>
+	</warning>
+
+	<table id="segmentation.simple.examples">
+	  <title id="segmentation.simple.examples.title">Een paar eenvoudige voorbeelden</title>
+      <tgroup cols="5">
+		<colspec align="left" colnum="1"/>
+		<colspec align="left" colnum="2"/>
+		<colspec align="center" colnum="3"/>
+		<colspec align="center" colnum="4"/>
+		<colspec align="left" colnum="5"/>
+		<thead>
+          <row>
+			<entry>Categorie</entry>
+			<entry>Bedoeling</entry>
+			<entry align="center">Vóór</entry>
+			<entry align="center">Na</entry>
+			<entry>Uitleg</entry>
+          </row>
+		</thead>
+		<tbody>
+		  <row>
+			<entry>Uitzonderingsregel, vak niet geselecteerd, hoger in de lijst</entry>
+			<entry>Niet segmenteren na Ms.</entry>
+			<entry align="center">Ms\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Ms, gevolgd door een punt, gevolgd door witruimte.</entry>
+		  </row>
+		  <row>
+			<entry>Uitzonderingsregel, vak niet geselecteerd, hoger in de lijst</entry>
+			<entry>Cellen van Excel met regeleinden die geen segmenten weergeven</entry>
+			<entry align="center">\n</entry>
+			<entry align="center">.</entry>
+			<entry>Regeleinde, gevolgd door iets.</entry>
+		  </row>
+		  <row>
+			<entry>Afbreekregel, vak geselecteerd, lager in de lijst</entry>
+			<entry>Begin een nieuw segment na een punt, gevolgd door een spatie, tab of andere witruimte</entry>
+			<entry align="center">\.</entry>
+			<entry align="center">\s</entry>
+			<entry>Een punt, gevolgd door witruimte</entry>
+		  </row>
+		  <row>
+			<entry>Afbreekregel, vak geselecteerd, lager in de lijst</entry>
+			<entry>Begin een nieuw segment na “。” (Japanse punt).</entry>
+			<entry align="center">。</entry>
+			<entry align="center"/>
+			<entry>Onthoud dat het veld <literal>Patroon na</literal> leeg mag zijn.</entry>
+		  </row>
+		</tbody>
+	  </tgroup>
+	</table>
+  </section>
+</section>

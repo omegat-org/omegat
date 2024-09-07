@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -1562,7 +1562,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <div class="variablelist">
                <dl class="variablelist">
                   <dt>
-                     <span class="term">Estàndard: OmegaT 6.1.0</span>
+                     <span class="term">Estàndard: OmegaT 6.0.0</span>
                   </dt>
                   <dd>
                      <p>Es recomana aquesta versió per a l'ús diari.</p>
@@ -1578,7 +1578,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
             <p>Els fitxers es poden baixar directament des del lloc web <a class="ulink" href="https://omegat.org/download" target="_top">https://omegat.org</a>.</p>
             <div class="note">
                <h3 class="title">Nota</h3>
-               <p>L'OmegaT 6.1.0 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</p>
+               <p>L'OmegaT 6.0.0 requereix el Java 11 Runtime Environment (JRE) per a executar-se.</p>
                <p>Els paquets de l'OmegaT estan disponibles tant en versions empaquetades amb el Java, com en versions sense el Java. Els paquets sense el Java depenen d'una instal·lació del Java 11 Runtime Environment en el sistema.</p>
                <p>L'OmegaT 5.8.0 i les versions posteriors també es poden executar amb el Java 11 Runtime Environment en qualsevol plataforma.</p>
                <p>Per qüestions de llicències, l'equip de l'OmegaT recomana l'entorn d'execució del Java Eclipse Temurin proporcionat pel Projecte Adoptium de la Fundació Eclipse, però qualsevol entorn d'execució compatible amb el Java 8 hauria de funcionar. Consulteu <a class="ulink" href="https://projects.eclipse.org/projects/adoptium.temurin" target="_top">Projecte Eclipse Temurin™</a>.</p>
@@ -1609,7 +1609,7 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                   <h3 class="title">Nota</h3>
                   <p>Tot i que podeu executar l'OmegaT directament des dels fitxers disponibles, també podeu executar l'script <code class="filename">linux-install.sh</code> per a instal·lar l'OmegaT en una ubicació més adequada.</p>
                   <p>En executar l'script haureu d'introduir la contrasenya de <code class="filename">sudo</code>.</p>
-                  <p>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <code class="filename">/opt/omegat/</code>. Si no n'hi ha cap, instal·la el programa en la carpeta <code class="filename">/opt/omegat/OmegaT_6.1.0</code> i l'estableix com a versió per defecte (en la carpeta <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
+                  <p>L'script comprova si hi ha una instal·lació existent de la mateixa versió de l'OmegaT en la carpeta <code class="filename">/opt/omegat/</code>. Si no n'hi ha cap, instal·la el programa en la carpeta <code class="filename">/opt/omegat/OmegaT_6.0.0</code> i l'estableix com a versió per defecte (en la carpeta <code class="filename">/opt/omegat/OmegaT-default</code>).</p>
                </div>
                <p>Després de desempaquetar el fitxer o quan s'hagi completat la instal·lació, podeu suprimir el fitxer baixat, que ja no és necessari.</p>
             </section>
@@ -2052,9 +2052,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <dt id="launch.with.command.line.remote.project.">
                                     <span class="term" id="launch.with.command.line.remote.project.title">
                                        <code class="option">--remote-project</code> 
-                                       <strong class="userinput">
-                                          <code>&lt;camí a un fitxer de projecte de l'OmegaT&gt;</code>
-                                       </strong>
+                                       <span class="emphasis">
+                                          <em>&lt;camí a un fitxer de projecte de l'OmegaT&gt;</em>
+                                       </span>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2073,14 +2073,14 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  <dt id="launch.with.command.line.team.init">
                                     <span class="term" id="launch.with.command.line.team.init.title">
                                        <code class="option">team
-				init</code> 
-                                       <strong class="userinput">
-                                          <code>SL</code>
-                                       </strong>
+				init <span class="emphasis">
+                                             <em>SL</em>
+                                          </span>
 				
-                                       <strong class="userinput">
-                                          <code>TL</code>
-                                       </strong>
+                                          <span class="emphasis">
+                                             <em>TL</em>
+                                          </span>
+                                       </code>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2109,15 +2109,9 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.itokenizer.lt.classname.gt.">
                                     <span class="term" id="launch.with.command.line.itokenizer.lt.classname.gt.title">
-                                       <code class="option">--ITokenizer=</code>
-                                       <strong class="userinput">
-                                          <code>&lt;nom de la classe&gt;</code>
-                                       </strong>, </span>
+                                       <code class="option">--ITokenizer=&lt;nom de la classe&gt;</code>, </span>
                                     <span class="term">
-                                       <code class="option">--ITokenizerTarget=</code>
-                                       <strong class="userinput">
-                                          <code>&lt;nom de la classe&gt;</code>
-                                       </strong>
+                                       <code class="option">--ITokenizerTarget=&lt;nom de la classe&gt;</code>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2125,10 +2119,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.config.dir.">
                                     <span class="term" id="launch.with.command.line.config.dir.title">
-                                       <code class="option">--config-dir=</code>
-                                       <strong class="userinput">
-                                          <code>&lt;camí&gt;</code>
-                                       </strong>
+                                       <code class="option">--config-dir=<span class="emphasis">
+                                             <em>&lt;camí&gt;</em>
+                                          </span>
+                                       </code>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2136,10 +2130,10 @@ Un caractère d'espacement : [ \t\n\r\f\x0B]<span class="token">&lt;segment 30
                                  </dd>
                                  <dt id="launch.with.command.line.config.file.">
                                     <span class="term" id="launch.with.command.line.config.file.title">
-                                       <code class="option">--config-file=</code>
-                                       <strong class="userinput">
-                                          <code>&lt;camí&gt;</code>
-                                       </strong>
+                                       <code class="option">--config-file=<span class="emphasis">
+                                             <em>&lt;camí&gt;</em>
+                                          </span>
+                                       </code>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2158,10 +2152,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.resource.bundle.">
                                     <span class="term" id="launch.with.command.line.resource.bundle.title">
-                                       <code class="option">--resource-bundle=</code>
-                                       <strong class="userinput">
-                                          <code>&lt;camí&gt;</code>
-                                       </strong>
+                                       <code class="option">--resource-bundle=<span class="emphasis">
+                                             <em>&lt;camí&gt;</em>
+                                          </span>
+                                       </code>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2169,13 +2163,7 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
                                     <span class="term" id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title">
-                                       <code class="option">--mode=[nom del mode de consola]</code> 
-                                       <strong class="userinput">
-                                          <code>&lt;camí del projecte&gt;</code>
-                                       </strong> 
-                                       <strong class="userinput">
-                                          <code>&lt;opcions del mode&gt;</code>
-                                       </strong>
+                                       <code class="option">--mode=[nom del mode de consola]</code>
                                     </span>
                                  </dt>
                                  <dd>
@@ -2184,10 +2172,7 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                        <dl class="variablelist">
                                           <dt id="launch.with.command.line.mode.console.translate">
                                              <span class="term" id="launch.with.command.line.mode.console.translate.title">
-                                                <code class="option">--mode=console-translate</code> 
-                                                <strong class="userinput">
-                                                   <code>&lt;camí del projecte&gt;</code>
-                                                </strong>
+                                                <code class="option">--mode=console-translate</code>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2197,10 +2182,7 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.source.pattern.lt.pattern.gt.">
                                                       <span class="term" id="launch.with.command.line.source.pattern.lt.pattern.gt.title">
-                                                         <code class="option">--source-pattern=</code>
-                                                         <strong class="userinput">
-                                                            <code>&lt;patró&gt;</code>
-                                                         </strong>
+                                                         <code class="option">--source-pattern=&lt;patró&gt;</code>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2241,10 +2223,7 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.pseudotranslatetmx">
                                              <span class="term" id="launch.with.command.line.mode.console.pseudotranslatetmx.title">
-                                                <code class="option">--mode=console-createpseudotranslatetmx</code> 
-                                                <strong class="userinput">
-                                                   <code>&lt;camí del projecte&gt;</code>
-                                                </strong>
+                                                <code class="option">--mode=console-createpseudotranslatetmx</code>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2254,10 +2233,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.pseudotranslatetmx.">
                                                       <span class="term" id="launch.with.command.line.pseudotranslatetmx.title">
-                                                         <code class="option">--pseudotranslatetmx=</code>
-                                                         <strong class="userinput">
-                                                            <code>&lt;camí&gt;</code>
-                                                         </strong>
+                                                         <code class="option">--pseudotranslatetmx=<span class="emphasis">
+                                                               <em>&lt;camí&gt;</em>
+                                                            </span>
+                                                         </code>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2276,40 +2255,28 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.align">
                                              <span class="term" id="launch.with.command.line.mode.console.align.title">
-                                                <code class="option">--mode=console-align</code> 
-                                                <strong class="userinput">
-                                                   <code>&lt;camí del projecte&gt;</code>
-                                                </strong>
+                                                <code class="option">--mode=console-align <span class="emphasis">
+                                                      <em>--alignDir=&lt;camí&gt;</em>
+                                                   </span>
+                                                </code>
                                              </span>
                                           </dt>
                                           <dd>
                                              <p>En aquest mode, l'OmegaT alinearà els fitxers de la carpeta «/source» del projecte amb els de la ubicació especificada amb el paràmetre <span class="emphasis">
                                                    <em>--alignDir</em>
-                                                </span> a continuació.</p>
-                                             <div class="variablelist">
-                                                <dl class="variablelist">
-                                                   <dt>
-                                                      <span class="term">
-                                                         <code class="option">--alignDir=</code>
-                                                         <strong class="userinput">
-                                                            <code>&lt;camí del projecte&gt;</code>
-                                                         </strong>
-                                                      </span>
-                                                   </dt>
-                                                   <dd>
-                                                      <p>Camí que conté els fitxers traduïts en la llengua de destinació.</p>
-                                                      <p>Aquesta carpeta ha de contenir una traducció en la llengua de destinació del projecte. Per exemple, si el projecte és EN a FR, la carpeta ha de contenir un paquet que acabi amb <code class="filename">_fr</code>.</p>
-                                                   </dd>
-                                                </dl>
-                                             </div>
-                                             <p>El fitxer TMX resultant es desa en la carpeta <code class="filename">omegat/</code> amb el nom <code class="filename">align.tmx</code>. Els tipus de fitxers que es poden alinear depenen de si el filtre de fitxers és compatible amb l'alineació. Alguns dels filtres compatibles són: fitxers de llengua ILIAS, paquets de recursos del Java(TM), text clau=valor, CSV de llengua del Magento CE, MoodlePHP, DTD de Mozilla, FTL de Mozilla, PO, RC, subtítols SubRip i recursos del Windows.</p>
+                                                </span>.</p>
+                                             <p>El fitxer TMX resultant es desa en la carpeta «/omegat» amb el nom «align.tmx». Els tipus de fitxers que es poden alinear depenen de si el filtre de fitxers és compatible amb l'alineació. Alguns dels filtres compatibles són: fitxers de llengua ILIAS, paquets de recursos del Java(TM), text clau=valor, CSV de llengua del Magento CE, MoodlePHP, DTD de Mozilla, FTL de Mozilla, PO, RC, subtítols SubRip i recursos del Windows.</p>
+                                             <p>El paràmetre <span class="emphasis">
+                                                   <em>--alignDir</em>
+                                                </span> s'utilitza per a especificar la ubicació de les dades en la llengua de destinació, que ha de ser una carpeta que contingui els fitxers traduïts.</p>
+                                             <p>Aquesta carpeta ha de contenir una traducció en la llengua de destinació del projecte. Per exemple, si el projecte és EN a FR, la carpeta ha de contenir un paquet que acabi amb _fr. El fitxer TMX resultant es desa en la carpeta «/omegat» amb el nom «align.tmx».</p>
                                           </dd>
                                           <dt id="launch.with.command.line.mode.console.stats">
                                              <span class="term" id="launch.with.command.line.mode.console.stats.title">
-                                                <code class="option">--mode=console-stats</code> 
-                                                <strong class="userinput">
-                                                   <code>&lt;camí del projecte&gt;</code>
-                                                </strong>
+                                                <code class="option">--mode=console-stats <span class="emphasis">
+                                                      <em>&lt;camí&gt;</em>
+                                                   </span>
+                                                </code>
                                              </span>
                                           </dt>
                                           <dd>
@@ -2317,10 +2284,7 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                                 <dl class="variablelist">
                                                    <dt id="launch.with.command.line.console.stats.output.file">
                                                       <span class="term" id="launch.with.command.line.console.stats.output.file.title">
-                                                         <code class="option">--output-file=</code>
-                                                         <strong class="userinput">
-                                                            <code>[fitxer de sortida d'estadístiques]</code>
-                                                         </strong>
+                                                         <code class="option">--output-file=[fitxer de sortida d'estadístiques]</code>
                                                       </span>
                                                    </dt>
                                                    <dd>
@@ -2369,10 +2333,10 @@ config-dir=&quot;camí/a/una/carpeta/de/configuració&quot;</pre>
                                  </dd>
                                  <dt id="launch.with.command.line.script.">
                                     <span class="term" id="launch.with.command.line.script.title">
-                                       <code class="option">--script=</code>
-                                       <strong class="userinput">
-                                          <code>&lt;camí&gt;</code>
-                                       </strong>
+                                       <code class="option">--script=<span class="emphasis">
+                                             <em>&lt;camí&gt;</em>
+                                          </span>
+                                       </code>
                                     </span>
                                  </dt>
                                  <dd>

@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.1.0 - Manual d'usuari</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - Manual d'usuari</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -1196,6 +1196,11 @@
                   </dt>
                   <dd>
                      <p>És possible que els segments idèntics, en funció del context, requereixin traduccions diferents. Si la traducció actual no és adequada, seleccioneu aquest element del menú i indiqueu la traducció alternativa.</p>
+                     <div class="warning">
+                        <h3 class="title">Avís</h3>
+                        <p>L'OmegaT distingeix els segments idèntics a partir de l'identificador intern proporcionat pel tipus de fitxer o fent referència als segments anteriors i següents. En aquests casos, les traduccions alternatives depenen que els segments idèntics tinguin segments anteriors o posteriors diferents. Si els segments idèntics també tenen segments anteriors o posteriors idèntics, no podreu traduir-los de manera diferent i marcar-ne un com a traducció alternativa en l'OmegaT.</p>
+                        <p>Podeu evitar aquest problema aplicant un petit canvi a un dels segments anteriors o posteriors en el fitxer d'origen per a distingir les diferents repeticions dels mateixos segments anteriors i posteriors.</p>
+                     </div>
                   </dd>
                   <dt id="menus.edit.remove.translation">
                      <span class="term" id="menus.edit.remove.translation.title">
@@ -1925,7 +1930,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Mostra les estadístiques de coincidències del projecte: nombre de repeticions, coincidències exactes, coincidències parcials i no concordances per segments, paraules i caràcters.</p>
+                     <p>Mostra les estadístiques de coincidències del projecte: nombre de repeticions, coincidències exactes, coincidències parcials i no coincidències per segments, paraules i caràcters.</p>
                      <p>Les dades es desen en el fitxer <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.stats.match">project_stats_match.txt</a> de la carpeta <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> del projecte.</p>
                   </dd>
                   <dt id="menus.tools.match.statistics.per.file">
@@ -1934,7 +1939,7 @@
                      </span>
                   </dt>
                   <dd>
-                     <p>Mostra les estadístiques de coincidències individuals: nombre de repeticions, coincidències exactes, coincidències parcials i no concordances per segments, paraules i caràcters, per a cada fitxer del projecte.</p>
+                     <p>Mostra les estadístiques de coincidències individuals: nombre de repeticions, coincidències exactes, coincidències parcials i no coincidències per segments, paraules i caràcters, per a cada fitxer del projecte.</p>
                      <p>Les dades es desen en el fitxer <a class="link" href="chapter.project.folder.html#project.folder.omegat.project.stats.match.per.file">project_stats_match_per_file.txt</a> de la carpeta <a class="link" href="chapter.project.folder.html#project.folder.omegat.folder" title="omegat">omegat</a> del projecte.</p>
                   </dd>
                   <dt id="menus.tools.align.files">
@@ -2032,7 +2037,7 @@
                            </li>
                         </ul>
                      </div>
-                     <p>Us permet activar o desactivar els motors de traducció automàtica disponibles.</p>
+                     <p>Us permet activar o desactivar els motors de traducció automàtica habilitats i configurats correctament.</p>
                      <p>Si se seleccionen diversos motors de traducció, també podeu utilitzar <span class="keycap">
                            <strong>C</strong>
                         </span>+<span class="keycap">

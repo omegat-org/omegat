@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title id="windows.aligner.title"><guilabel>Dateien ausrichten</guilabel></title>
+  <title id="windows.aligner.title"><guilabel>Dateien ausrichten (Aligner)</guilabel></title>
 
   <para>Verwenden Sie <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/>, um auf dieses Tool zuzugreifen.</para>
 
-  <para>OmegaT bietet auch einen befehlszeilenbasierten Ausrichtungsmodus für schlüsselbasierte Formate. Siehe die <link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/>-Option für weitere Informationen.</para>
+  <para>OmegaT bietet auch einen befehlszeilenbasierten Ausrichtungsmodus für schlüsselbasierte Formate. Einzelheiten finden Sie unter <link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/> (Option).</para>
 
   <warning>
-    <para>Der Aligner erlaubt es Ihnen nicht, Ihre Arbeit während einer Ausrichtung zu speichern. Daher empfiehlt es sich, die auszurichtenden Dateien in kürzere Dateien aufzuteilen, um diese bequem in einer einzigen Sitzung ausrichten zu können. Außerdem hat das den Vorteil, dass bei der ersten automatischen Ausrichtung weniger Unstimmigkeiten auftreten, was die manuelle Korrektur vereinfacht.</para>
+    <para>Der Aligner erlaubt es Ihnen nicht, Ihre Arbeit während einer Ausrichtung zu speichern. Daher ist es ratsam, die auszurichtenden Dateien in kürzere Dateien aufzuteilen, um sie bequem in einer einzigen Sitzung auszurichten. Dies hat auch den Vorteil, dass bei der ersten automatischen Ausrichtung weniger Mismatches auftreten, was die manuelle Korrektur erleichtert.</para>
   </warning>
 
 
-  <para>Beim Ausrichten wird aus zwei bereits übersetzten einsprachigen Dokumenten ein zweisprachiges Translation Memory erstellt. Die Ausrichtung von Dateiinhalten erfolgt in vier Schritten:</para>
+  <para>Beim Ausrichten wird aus zwei bereits übersetzten einsprachigen Dokumenten ein zweisprachiger Translation Memory erstellt. Die Ausrichtung von Dateiinhalten erfolgt in vier Schritten:</para>
 
   <orderedlist>
 	<listitem>
@@ -24,7 +24,7 @@
 	</listitem>
 
 	<listitem>
-	  <para>Überprüfen Sie die Ergebnisse und nehmen Sie gegebenenfalls manuelle Anpassungen vor.</para>
+	  <para>Prüfen Sie das Ergebnis und nehmen Sie gegebenenfalls manuelle Anpassungen vor.</para>
 	</listitem>
 
 	<listitem>
@@ -35,16 +35,16 @@
   <para>Der Aligner kann alle von OmegaT unterstützten Dateiformate lesen.</para>
   
   <note>
-    <para>Wenn Sie ein Übersetzungsprojekt offen haben, wird der Aligner automatisch die Sprachen des Projekts sowie die projektspezifischen Segmentierungsregeln verwenden, falls vorhanden.</para>
+    <para>Wenn Sie ein Übersetzungsprojekt geöffnet haben, verwendet der Aligner automatisch die Sprachen des Projekts und die projektspezifischen Segmentierungsregeln, sofern vorhanden.</para>
   </note>
 
-  <para>Nachdem Sie die Sprache und die Dateien ausgewählt haben, klicken Sie auf die <guibutton>OK</guibutton>-Schaltfläche, um das <guilabel>Ausrichten</guilabel>-Fenster zu öffnen, wo die Ergebnisse der automatischen Ausrichtung angezeigt werden.</para>
+  <para>Nachdem Sie die Sprache und die Dateien ausgewählt haben, klicken Sie auf die Schaltfläche <guibutton>OK</guibutton>, um das Fenster &quot;<guilabel>Ausrichten</guilabel>&quot; zu öffnen und das Ergebnis der automatischen Ausrichtung anzuzeigen.</para>
 
-  <para>Der Hauptteil des Fensters ist in drei Spalten unterteilt:</para>
+  <para>Der Hauptteil des Fensters ist in drei Spalten aufgeteilt:</para>
   
   <itemizedlist>
     <listitem>
-      <para><guilabel>Behalten</guilabel>: Die Segmentpaare einer Zeile, bei der ein Häkchen in diesem Kästchen gesetzt ist, werden in die Translation Memory-Datei gespeichert. Zeilen ohne Häkchen werden verworfen.</para>
+      <para><guilabel>Behalten</guilabel>: Die Segmentpaare einer Zeile, bei der ein Häkchen in diesem Kästchen gesetzt ist, werden in die Translation-Memory-Datei gespeichert. Zeilen ohne Häkchen werden verworfen.</para>
     </listitem>
 
     <listitem>
@@ -59,9 +59,9 @@
   <section id="windows.aligner.adjust">
     <title id="windows.aligner.adjust.title">Einstellungen</title>
 
-    <para>Im unteren Teil des Fensters werden verschiedene Parameter und Optionen angezeigt, die Sie ändern können, wenn die Ausrichtung optimiert werden muss. Dort wird auch eine <guilabel>Durchschnittsbewertung</guilabel> für die Ausrichtung angezeigt. Als Faustregel gilt: Je niedriger die Bewertung, desto genauer die Ausrichtung. Beim Ändern eines Parameters wird die Ausrichtung sofort neu berechnet, so dass Sie schnell verschiedene Kombinationen ausprobieren können, um die besten Ergebnisse zu erzielen.</para>
+    <para>Im unteren Teil des Fensters werden verschiedene Parameter und Optionen angezeigt. Sie können diese ändern, um die Ausrichtung zu optimieren. Dort wird auch eine <guilabel>Durchschnittsbewertung</guilabel> für die Ausrichtung angezeigt. Als Faustregel gilt: Je niedriger die Bewertung, desto genauer die Ausrichtung. Wenn Sie einen Parameter ändern, wird die Ausrichtung sofort neu berechnet, so dass Sie schnell verschiedene Kombinationen ausprobieren können, um das beste Ergebnis zu erzielen.</para>
 
-    <para>Die verfügbaren Parameter und Optionen sind:</para>
+    <para>Folgende Parameter und Optionen stehen zur Verfügung:</para>
 
     <variablelist>
 	  <title>Parameter</title>
@@ -74,11 +74,11 @@
             </listitem>
 
             <listitem>
-              <para><guilabel>Parsewise</guilabel>: Mit diesem Modus werden die Dokumente segmentweise verglichen. Er wird nur angezeigt, wenn er für die auszurichtenden Dateien verfügbar ist.</para>
+              <para><guilabel>Parsewise</guilabel>: Mit diesem Modus werden die Dokumente segmentweise verglichen. Er wird nur angezeigt, wenn er für die zu vergleichenden Dateien verfügbar ist.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>ID</guilabel>: Dieser Modus eignet sich für Dateien, die aus <literal>Schlüssel = Wert</literal>-Einträgen bestehen. Dieser Modus funktioniert auch dann, wenn die Anordnung der Schlüssel in den einzelnen Dateien unterschiedlich ist und wenn die Dateien eine unterschiedliche Anzahl von Einträgen haben. Er wird nur angezeigt, wenn beide ausgewählten Dateien als Schlüssel=Wert-Dateien erkannt werden.</para>
+              <para><guilabel>ID</guilabel>: Dieser Modus ist für Dateien geeignet, die aus <literal>Schlüssel=Wert</literal>-Einträgen bestehen. Dieser Modus funktioniert auch dann, wenn die Anordnung der Schlüssel in den einzelnen Dateien unterschiedlich ist und wenn die Dateien eine unterschiedliche Anzahl von Einträgen haben. Er wird nur angezeigt, wenn beide ausgewählten Dateien als Schlüssel=Wert-Dateien erkannt werden.</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -97,7 +97,7 @@
             </listitem>
           </itemizedlist>
 
-          <para>Es gibt keine feste Regel, welcher Algorithmus am besten geeignet ist. Probieren Sie beide aus, und nehmen Sie eins, das das bessere Ergebnis für Ihre Dateien liefert.</para>
+          <para>Es gibt keine feste Regel, welcher Algorithmus am besten geeignet ist. Probieren Sie beide Optionen aus und wählen Sie diejenige, die für Ihre Dateien das beste Ergebnis liefert.</para>
         </listitem>
       </varlistentry>
 
@@ -106,15 +106,15 @@
         <listitem>
           <itemizedlist>
             <listitem>
-              <para><guilabel>Normal</guilabel>: Die statistische Standardverteilung zum Ausrichten der Dokumente.</para>
+              <para><guilabel>Normal</guilabel>: Die reguläre statistische Verteilung für die Ausrichtung der Dokumente.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>Poisson</guilabel>: Eine alternative statistische Verteilung zum Ausrichten der Dokumente.</para>
+              <para><guilabel>Poisson</guilabel>: Eine alternative statistische Verteilung für die Ausrichtung der Dokumente.</para>
             </listitem>
           </itemizedlist>
 
-          <para>Wie bei den Algorithmen gibt es auch hier keine feste Regel, welche statistische Verteilung am besten geeignet ist. Probieren Sie beide aus, und nehmen Sie eins, das das bessere Ergebnis für Ihre Dateien liefert.</para>
+          <para>Wie bei den Algorithmen gibt es keine feste Regel, welche statistische Verteilung am besten geeignet ist. Probieren Sie beide Optionen aus und wählen Sie diejenige, die für Ihre Dateien das beste Ergebnis liefert.</para>
         </listitem>
       </varlistentry>
 
@@ -123,15 +123,15 @@
         <listitem>
           <itemizedlist>
             <listitem>
-              <para><guilabel>Zeichen</guilabel>: Die Grundeinheit zum Bestimmen der Größe von Segmenten in Sprachen, die kein Leerzeichen zur Abgrenzung von Wörtern verwenden.</para>
+              <para><guilabel>Zeichen</guilabel>: Die Grundeinheit zur Bestimmung der Größe von Segmenten in Sprachen, die keine Leerzeichen zur Trennung von Wörtern verwenden.</para>
             </listitem>
 
             <listitem>
-              <para><guilabel>Wort</guilabel>: Die Grundeinheit zum Bestimmen der Größe von Segmenten in Sprachen, die Leerzeichen zur Abgrenzung von Wörtern verwenden.</para>
+              <para><guilabel>Wort</guilabel>: Die Grundeinheit zur Bestimmung der Größe von Segmenten in Sprachen, die Leerzeichen zur Trennung von Wörtern verwenden.</para>
             </listitem>
           </itemizedlist>
 
-          <para>Der Aligner wählt den Zähler automatisch auf Basis der Quell- und Zielsprache der auszurichtenden Dateien aus. Er verwendet standardmäßig <guilabel>Zeichen</guilabel>, wenn mindestens eine der beiden Sprachen die Wörter nicht mit Leerzeichen abgrenzt, ansonsten <guilabel>Wort</guilabel>. Wenn Sie mit einem von beiden arbeiten, können Sie versuchen, zwischen den beiden zu wechseln, um zu sehen, welches von beiden die besseren Ergebnisse liefert.</para>
+          <para>Der Aligner wählt den Zähler automatisch anhand der Quell- und Zielsprache der auszurichtenden Dateien aus. Standardmäßig verwendet der Aligner &quot;<guilabel>Zeichen</guilabel>&quot;, wenn bei mindestens einer der beteiligten Sprachen die Worttrennung ohne Leerzeichen erfolgt, andernfalls &quot;<guilabel>Wort</guilabel>&quot;. Wenn beide Optionen zutreffen, können Sie versuchen, zwischen ihnen zu wechseln, um zu sehen, welche das bessere Ergebnis liefert.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -141,14 +141,14 @@
       <varlistentry>
         <term>Segment</term>
         <listitem>
-          <para>Der Aligner verwendet standardmäßig die Satzsegmentierung. Entfernen Sie das Häkchen, um die Absatzsegmentierung zu verwenden. Siehe die <link endterm="dialogs.preferences.segmentation.setup.title" linkend="dialogs.preferences.segmentation.setup"/>-Einstellungen.</para>
+          <para>Standardmäßig verwendet der Aligner die Satzsegmentierung. Entfernen Sie das Häkchen, um die Absatzsegmentierung zu verwenden. Siehe <link endterm="dialogs.preferences.segmentation.setup.title" linkend="dialogs.preferences.segmentation.setup"/> (Einstellungen).</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Tags entfernen</term>
         <listitem>
-          <para>Der Aligner fügt standardmäßig Tags in die Segmente ein. Entfernen Sie das Häkchen, um alle Tags beim Ausrichten und in der resultierenden TMX-Datei zu entfernen.</para>
+          <para>Standardmäßig fügt der Aligner Tags in die Segmente ein. Entfernen Sie das Häkchen, um alle Tags beim Ausrichten und in der resultierenden TMX-Datei zu entfernen.</para>
         </listitem>
       </varlistentry>
 
@@ -158,7 +158,7 @@
 		  <para>Entfernen Sie das Häkchen, um die Hervorhebung auszuschalten.</para>
 
           <para>Der Aligner verwendet den regulären Ausdruck <code>\d+</code>, um alle Zahlen in den Quell- und Zieltexten hervorzuheben.</para>
-		  <para>Sie können den regulären Ausdruck ändern, um hervorgehobene Teile hinzuzufügen. Einzelheiten finden Sie unter <link linkend="app.regex" endterm="app.regex.title"/>.</para>
+		  <para>Sie können den regulären Ausdruck ändern, um weitere Teile hervorzuheben. Einzelheiten finden Sie im Kapitel <link linkend="app.regex" endterm="app.regex.title"/>.</para>
         </listitem>
       </varlistentry>
 
@@ -168,7 +168,7 @@
           <para>Klicken Sie auf diese Schaltfläche, um die projektspezifischen Segmentierungsregeln zu bearbeiten. Einzelheiten finden Sie unter <link linkend="app.segmentation" endterm="app.segmentation.title"/>.</para>
 
           <warning>
-            <para>Wenn Sie die Segmentierungsregeln ändern, werden Sie beim Beenden des Aligners gefragt, ob Sie diese Änderungen speichern möchten. Die Standardauswahl ist <guibutton>Ja</guibutton>, was möglicherweise nicht das ist, was Sie wollen, wenn Sie die globalen OmegaT-Segmentierungsregeln bearbeitet haben.</para>
+            <para>Wenn Sie die Segmentierungsregeln ändern, werden Sie beim Beenden des Aligners gefragt, ob Sie die Änderungen speichern möchten. Die Standardauswahl ist &quot;<guibutton>Ja</guibutton>&quot;, was möglicherweise nicht das ist, was Sie wollen, wenn Sie die globalen Segmentierungsregeln von OmegaT bearbeitet haben.</para>
           </warning>
         </listitem>
       </varlistentry>
@@ -176,10 +176,10 @@
       <varlistentry>
         <term>Filter...</term>
         <listitem>
-          <para>Klicken Sie auf diese Schaltfläche, um die projektspezifischen Dateifilter zu bearbeiten. Siehe die <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>-Einstellungen für weitere Informationen.</para>
+          <para>Klicken Sie auf diese Schaltfläche, um die projektspezifischen Dateifilter zu bearbeiten. Einzelheiten finden Sie unter <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> (Einstellungen).</para>
 
           <warning>
-            <para>Wenn Sie die Dateifilter ändern, werden Sie beim Beenden des Aligners gefragt, ob Sie diese Änderungen speichern möchten. Die Standardauswahl ist <guibutton>Ja</guibutton>, was möglicherweise nicht das ist, was Sie wollen, wenn Sie die globalen OmegaT-Dateifilter bearbeitet haben.</para>
+            <para>Wenn Sie die Dateifilter ändern, werden Sie beim Beenden des Aligners gefragt, ob Sie die Änderungen speichern möchten. Die Standardauswahl ist &quot;<guibutton>Ja</guibutton>&quot;, was möglicherweise nicht das ist, was Sie wollen, wenn Sie die globalen Dateifilter von OmegaT bearbeitet haben.</para>
           </warning>
         </listitem>
       </varlistentry>
@@ -187,14 +187,14 @@
       <varlistentry>
         <term>Muster...</term>
         <listitem>
-          <para>Mit dieser Option können Sie einen regulären Ausdruck eingeben, um das Muster für die Hervorhebung von Text in den Quell- und Zielsegmenten zu definieren. Standardmäßig verwendet der Aligner <literal>\d+</literal>, um Zahlen hervorzuheben. Wenn Ihre Texte andere Elemente enthalten, die eine Hervorhebung rechtfertigen, ändern Sie den regulären Ausdruck so, dass er auch diese Elemente enthält, unter Nutzung des <literal>|</literal>-Symbols zum Trennen der Elemente.</para>
+          <para>Mit dieser Option können Sie einen regulären Ausdruck für die Hervorhebung von Text in den Quell- und Zielsegmenten eingeben. Standardmäßig verwendet der Aligner <literal>\d+</literal>, um Zahlen hervorzuheben. Wenn Ihr Text andere Elemente enthält, die eine Hervorhebung rechtfertigen, ändern Sie den regulären Ausdruck so, dass er auch diese Elemente enthält, indem Sie die Elemente mit dem <literal>|</literal>-Symbol trennen.</para>
         </listitem>
       </varlistentry>      
     </variablelist>
 
-    <para>Die <guilabel>Hervorheben</guilabel>-Option und das Dialogfenster zum Ändern des Musters ist auch über das <guimenu>Ansicht</guimenu>-Menü zugänglich, sowie weitere Optionen über das <guimenu>Optionen</guimenu>-Menü.</para>
+    <para>Die <guilabel>Hervorheben</guilabel>-Option und das Dialogfenster zum Ändern des Musters sind auch über das <guimenu>Ansicht</guimenu>-Menü zugänglich. Weitere Optionen finden Sie im <guimenu>Optionen</guimenu>-Menü.</para>
 
-    <para>Darüber hinaus bietet das <guimenu>Datei</guimenu>-Menü die folgenden Befehle:</para>
+    <para>Zusätzlich bietet das <guimenu>Datei</guimenu>-Menü die folgenden Menüpunkte:</para>
 	
     <itemizedlist>
       <listitem>
@@ -202,146 +202,146 @@
       </listitem>
 	  
       <listitem>
-        <para><guimenuitem>Zurücksetzen</guimenuitem>: Dieser Befehl setzt alle Parameter auf ihre Standardwerte zurück. Er kann auch durch Anklicken von <guibutton>Zurücksetzen</guibutton> unten rechts im Fenster oder durch Drücken von <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo> aufgerufen werden.</para>
+        <para><guimenuitem>Zurücksetzen</guimenuitem>: Dieser Menüpunkt setzt alle Parameter auf ihre Standardwerte zurück. Entspricht der Schaltfläche <guibutton>Zurücksetzen</guibutton> unten rechts im Fenster oder dem Tastenkürzel <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>.</para>
       </listitem>
 
       <listitem>
-        <para><guimenuitem>Neu laden</guimenuitem>: Dieser Befehl lädt die Datei erneut von der Festplatte. Sie können diesen Befehl verwenden, um die Dateien erneut zu parsen und auszurichten, wenn Sie ihre Inhalte ändern mussten.</para>
+        <para><guimenuitem>Neu laden</guimenuitem>: Dieser Menüpunkt lädt die Datei erneut von der Festplatte. Sie können ihn verwenden, um die Dateien erneut zu parsen und auszurichten, z.B. wenn Sie deren Inhalt geändert haben.</para>
       </listitem>
 
       <listitem>
-        <para><guimenuitem>Schließen</guimenuitem>: Schließt das <guilabel>Ausrichten</guilabel>-Dialogfenster. Wenn Sie das in diesem Schritt tun, wird die Ausrichtung abgebrochen, ohne dass Daten in eine Translation-Memory-Datei gespeichert werden. Sie können diesen Befehl auch durch Drücken von <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo> aufrufen.</para>
+        <para><guimenuitem>Schließen</guimenuitem>: Schließt das Dialogfenster &quot;<guilabel>Ausrichten</guilabel>&quot;. In diesem Schritt wird die Ausrichtung abgebrochen, ohne die Daten in eine Translation-Memory-Datei zu speichern. Entspricht dem Tastenkürzel <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
       </listitem>
     </itemizedlist>
 
     <para>Das <guimenu>Bearbeiten</guimenu>-Menü ist in diesem Schritt ausgegraut.</para>
 
-    <para>Wenn Sie mit den Ergebnissen in diesem Schritt zufrieden sind, klicken Sie auf die <guibutton>Weiter</guibutton>-Schaltfläche, um zum nächsten Schritt überzugehen.</para>
+    <para>Wenn Sie mit dem Ergebnis dieses Schrittes zufrieden sind, klicken Sie auf die Schaltfläche <guibutton>Weiter</guibutton>, um mit dem nächsten Schritt fortzufahren.</para>
   </section>
 
   <section id="windows.aligner.manual.corrections">
     <title id="windows.aligner.manual.corrections.title">Korrekturen</title>
 
-    <para>Nach der ersten automatischen Ausrichtung ist in der Regel eine manuelle Anpassung erforderlich. Hierbei ist es meist notwendig, ein Segment nach oben oder nach unten zu verschieben, um es an die richtigen Segmente der anderen Sprache auszurichten, und Segmente zu splitten oder zusammenzuführen. Der Aligner bietet auch die Möglichkeit, den Inhalt eines Segments zu editieren, was nützlich sein kann, wenn Sie Fehler wie z. B. einen Rechtschreibfehler in einem Segment entdecken.</para>
+    <para>Nach der ersten automatischen Ausrichtung ist in der Regel eine manuelle Anpassung erforderlich. Hierbei ist es meist notwendig, ein Segment nach oben oder nach unten zu verschieben, um es mit den richtigen Segmenten der anderen Sprache auszurichten, oder Segmente zu teilen oder zusammenzuführen. Der Aligner bietet auch die Möglichkeit, den Inhalt eines Segments zu editieren, was nützlich sein kann, wenn Sie Fehler entdecken, z.B. einen Rechtschreibfehler.</para>
 
-    <para>Alle verfügbaren Aktionen können über das <guimenu>Bearbeiten</guimenu>-Menü oder durch Drücken des entsprechenden Tastenkürzels aufgerufen werden. Die gängigsten Aktionen sind auch über die Schaltflächen rechts neben dem Hauptfensterbereich zugänglich.</para>
+    <para>Alle verfügbaren Aktionen können über das <guimenu>Bearbeiten</guimenu>-Menü oder durch Drücken des entsprechenden Tastenkürzels aufgerufen werden. Die am häufigsten verwendeten Aktionen sind auch über die Schaltflächen rechts neben dem Hauptbereich zugänglich.</para>
 
     <note>
-      <para>Die Tastenkürzel sollten Sie sich merken, wenn Sie den Aligner häufig benutzen oder an umfangreichen Dokumenten arbeiten, da Sie mit ihnen sehr schnell Aktionen durchführen können.</para>
+      <para>Wenn Sie den Aligner häufig verwenden oder mit umfangreichen Dokumenten arbeiten, sollten Sie sich die Tastenkürzel merken, da Sie damit sehr schnell Aktionen ausführen können.</para>
     </note>
 
-    <para>Um eine Aktion durchzuführen, wählen Sie das entsprechende Segment oder einen Block mehrerer angrenzender Segmente aus. Einzelne Segmente können mit der Maus oder den Pfeiltasten ausgewählt werden. Um einen Block von Segmenten auszuwählen, klicken Sie mit der Maus auf das erste Segment und halten die <keycap>Umschalt</keycap>-Taste gedrückt, während Sie das letzte Segment anklicken.</para>
+    <para>Um eine Aktion auszuführen, wählen Sie das entsprechende Segment oder eine Gruppe mehrerer benachbarter Segmente aus. Einzelne Segmente können mit der Maus oder den Pfeiltasten ausgewählt werden. Um eine Gruppe von Segmenten auszuwählen, klicken Sie zuerst auf das erste Segment und dann auf das letzte Segment, während Sie <keycap>Umschalt</keycap> gedrückt halten.</para>
 
-	<para>Alternativ können Sie auch die Pfeiltasten drücken, während Sie <keycap>Umschalt</keycap> gedrückt halten, um angrenzende Segmente auszuwählen. Die verfügbaren Aktionen werden unten aufgeführt.</para>
+	<para>Alternativ können Sie auch die Pfeiltasten verwenden, während Sie <keycap>Umschalt</keycap> gedrückt halten, um benachbarte Segmente auszuwählen. Die möglichen Aktionen sind unten aufgelistet.</para>
 
     <variablelist>
       <varlistentry>
         <term>Nach oben (<keycap>U</keycap>)</term>
         <listitem>
-          <para>Verschiebt das ausgewählte Segment oder den Block angrenzender Segmente um eine Zeile nach oben.</para>
-          <para>Dieser Befehl ist auch über die Schaltfläche rechts neben dem Hauptfensterbereich zugänglich.</para>
+          <para>Verschiebt das ausgewählte Segment oder die Gruppe benachbarter Segmente um eine Zeile nach oben.</para>
+          <para>Diesen Befehl gibt es auch als Schaltfläche rechts neben dem Hauptbereich.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Nach unten (<keycap>D</keycap>)</term>
         <listitem>
-          <para>Verschiebt das ausgewählte Segment oder den Block angrenzender Segmente um eine Zeile nach unten.</para>
+          <para>Verschiebt das ausgewählte Segment oder die Gruppe benachbarter Segmente um eine Zeile nach unten.</para>
 
-          <para>Dieser Befehl ist auch über die Schaltfläche rechts neben dem Hauptfensterbereich zugänglich.</para>
+          <para>Diesen Befehl gibt es auch als Schaltfläche rechts neben dem Hauptbereich.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Splitten (<keycap>S</keycap>)</term>
+        <term>Teilen (<keycap>S</keycap>)</term>
         <listitem>
-          <para>Wenn ein einzelnes Segment ausgewählt ist, öffnet dieser Befehl das Dialogfenster <guilabel>Text splitten</guilabel>. Verwenden Sie die Maus oder die Pfeiltasten, um den Textcursor auf eine Stelle zu setzen, an der Sie den Text teilen möchten, und klicken Sie auf die <guibutton>OK</guibutton>-Schaltfläche oder drücken Sie <keycap>Enter</keycap>.</para>
+          <para>Wenn ein einzelnes Segment ausgewählt ist, wird das Dialogfenster &quot;<guilabel>Text teilen</guilabel>&quot; geöffnet. Verwenden Sie die Maus oder die Pfeiltasten, um den Textcursor an die Stelle zu bewegen, an der der Text geteilt werden soll, und klicken Sie auf die Schaltfläche <guibutton>OK</guibutton> oder drücken Sie <keycap>Enter</keycap>.</para>
 
-          <para>Wenn zwei oder mehr Segmente, die separate Zellen in derselben Zeile belegen (mehrzellige Segmente mit Zeilen ohne <guilabel>Behalten</guilabel>-Kästchen), ausgewählt sind, teilt dieser Befehl die ausgewählten Zellen wieder in separate Zeilen auf (mit einem <guilabel>Behalten</guilabel>-Kästchen).</para>
+          <para>Wenn zwei oder mehr Segmente ausgewählt sind, die separate Zellen in derselben Zeile belegen (mehrzellige Segmente mit Zeilen ohne <guilabel>Behalten</guilabel>-Option), werden die ausgewählten Zellen wieder in separate Zeilen geteilt (mit <guilabel>Behalten</guilabel>-Option).</para>
 
-		  <para>Dieser Befehl ist auch über die Schaltfläche rechts neben dem Hauptfensterbereich zugänglich.</para>
+		  <para>Diesen Befehl gibt es auch als Schaltfläche rechts neben dem Hauptbereich.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Zusammenführen (<keycap>M</keycap>)</term>
         <listitem>
-          <para>Wenn nur ein Segment ausgewählt ist, wird es mit dem nächsten Segment zusammengeführt. Wenn zwei oder mehr Segmente ausgewählt sind, werden sie alle zusammengeführt, bleiben aber in separaten Zellen. Wenn Sie den Befehl ein weiteres Mal für dieselbe Auswahl aufrufen, werden die Inhalte aller ausgewählten Zellen zu einer einzigen Zelle zusammengeführt.</para>
+          <para>Wenn nur ein Segment ausgewählt ist, wird es mit dem nächsten Segment zusammengeführt. Wenn zwei oder mehr Segmente ausgewählt sind, werden sie zusammengeführt, bleiben aber in separaten Zellen. Wenn Sie den Befehl erneut für dieselbe Auswahl ausführen, werden die Inhalte aller ausgewählten Zellen zu einer einzigen Zelle zusammengeführt.</para>
 
-		  <para>Dieser Befehl ist auch über die Schaltfläche rechts neben dem Hauptfensterbereich zugänglich.</para>
+		  <para>Diesen Befehl gibt es auch als Schaltfläche rechts neben dem Hauptbereich.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Bearbeiten (<keycap>E</keycap>)</term>
         <listitem>
-          <para>Dieser Befehl kann nur für ein einzelnes Segment ausgeführt werden. Wenn Sie diesen Befehl ausführen, wird das Dialogfenster <guilabel>Text bearbeiten</guilabel> geöffnet, wo Sie Änderungen am Text des Segments vornehmen können. Verwenden Sie die <guibutton>OK</guibutton>-Schaltfläche, um das Dialogfenster zu schließen, wenn Sie fertig sind. In diesem Dialogfenster wird beim Drücken von <keycap>Enter</keycap> ein Zeilenumbruch in den Text eingefügt.</para>
+          <para>Dieser Befehl kann nur für ein einzelnes Segment ausgeführt werden. Wenn Sie diesen Befehl ausführen, wird das Dialogfenster &quot;<guilabel>Text bearbeiten</guilabel>&quot; geöffnet, wo Sie Änderungen am Text des Segments vornehmen können. Wenn Sie fertig sind, klicken Sie auf die Schaltfläche <guibutton>OK</guibutton>, um das Dialogfenster zu schließen. Wenn Sie in diesem Dialogfenster <keycap>Enter</keycap> drücken, wird ein Zeilenumbruch in den Text eingefügt.</para>
 
-		  <para>Verwenden Sie <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>, um es ohne Mausklick zu schließen.</para>
+		  <para>Verwenden Sie <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo>, um das Dialogfenster ohne Maus zu schließen.</para>
 
-		  <para>Dieser Befehl ist auch über die Schaltfläche rechts neben dem Hauptfensterbereich zugänglich.</para>
+		  <para>Diesen Befehl gibt es auch als Schaltfläche rechts neben dem Hauptbereich.</para>
         </listitem>
       </varlistentry>
 
 	  <varlistentry>
         <term>Als 'Akzeptiert' markieren (<keycap>A</keycap>)</term>
         <listitem>
-          <para>Verwenden Sie diesen Befehl, um zu bestätigen, dass die Ausrichtung der Segmente in der ausgewählten Zeile oder dem ausgewählten Zeilenblock korrekt ist. Dabei wird die zugehörige <guilabel>Behalten</guilabel>-Spalte grün hervorgehoben.</para>
+          <para>Verwenden Sie diesen Befehl, um zu bestätigen, dass die Ausrichtung der Segmente in der ausgewählten Zeile oder Gruppe von Zeilen korrekt ist. Dadurch wird die zugehörige <guilabel>Behalten</guilabel>-Spalte grün gefärbt.</para>
         </listitem>
       </varlistentry>
 
 	  <varlistentry>
         <term>Als 'Benötigt Review' markieren (<keycap>R</keycap>)</term>
         <listitem>
-          <para>Verwenden Sie diesen Befehl, um eine Zeile oder einen Zeilenblock zu kennzeichnen, bei der bzw. dem die Ausrichtung der Segmente fragwürdig ist. Dabei wird die zugehörige <guilabel>Behalten</guilabel>-Spalte rot hervorgehoben.</para>
+          <para>Verwenden Sie diesen Befehl, um eine Zeile oder Gruppe von Zeilen zu kennzeichnen, bei der die Ausrichtung der Segmente fraglich ist. Dadurch wird die zugehörige <guilabel>Behalten</guilabel>-Spalte rot gefärbt.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Markierung entfernen (<keycap>C</keycap>)</term>
         <listitem>
-          <para>Verwenden Sie diesen Befehl, um eine oder mehrere Markierungen zu entfernen, die mit den Befehlen <guilabel>Als 'Akzeptiert' markieren</guilabel> oder <guilabel>Als 'Benötigt Review' markieren</guilabel> gesetzt wurden.</para>
+          <para>Verwenden Sie diesen Befehl, um eine oder mehrere Markierungen zu entfernen, die mit den Befehlen &quot;<guilabel>Als 'Akzeptiert' markieren</guilabel>&quot; oder &quot;<guilabel>Als 'Benötigt Review' markieren</guilabel>&quot; gesetzt wurden.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Ausstehende neu ausrichten (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
         <listitem>
-          <para>Wenn Zeilen als 'Akzeptiert' markiert wurden, verwenden Sie diesen Befehl, um die Ausrichtung für die übrigen Zeilen zu aktualisieren.</para>
+          <para>Wenn Zeilen als 'Akzeptiert' markiert wurden, verwenden Sie diesen Befehl, um die Ausrichtung für die verbleibenden Zeilen zu aktualisieren.</para>
         </listitem>
       </varlistentry>
 
 	  <varlistentry>
         <term>Alle behalten</term>
         <listitem>
-          <para>Verwenden Sie diesen Befehl, um bei jedem <guilabel>Behalten</guilabel>-Kästchen ein Häkchen zu setzen.</para>
+          <para>Verwenden Sie diesen Befehl, um die <guilabel>Behalten</guilabel>-Option bei allen Zeilen zu aktivieren.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Keine behalten</term>
         <listitem>
-          <para>Verwenden Sie diesen Befehl, um bei jedem <guilabel>Behalten</guilabel>-Kästchen das Häkchen zu entfernen.</para>
+          <para>Verwenden Sie diesen Befehl, um die <guilabel>Behalten</guilabel>-Option bei allen Zeilen zu deaktivieren.</para>
         </listitem>
       </varlistentry>
 
 	  <varlistentry>
         <term>Ausgewählte umschalten (<keycap>K</keycap>)</term>
         <listitem>
-          <para>Verwenden Sie diesen Befehl, um bei jedem <guilabel>Behalten</guilabel>-Kästchen einer ausgewählten Zeile ein Häkchen zu setzen oder zu entfernen, oder umgekehrt.</para>
+          <para>Verwenden Sie diesen Befehl, um die <guilabel>Behalten</guilabel>-Option bei der ausgewählten Zeile oder Gruppe von Zeilen auf den entgegengesetzten Status zu setzen.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
         <term>Punktuelles Ausrichten starten (<keycap>Space</keycap>)</term>
         <listitem>
-          <para>Wenn bestimmte Segmente mehrere Zeilen voneinander entfernt sind und Sie diese schnell ausrichten möchten, verwenden Sie diesen Befehl, um das erste Segment auszuwählen, und klicken Sie dann auf das zugehörige Segment in der anderen Spalte.</para>
+          <para>Wenn bestimmte Segmente mehrere Zeilen voneinander entfernt sind und Sie diese schnell ausrichten möchten, verwenden Sie diesen Befehl, um das erste Segment auszuwählen und dann auf das zugehörige Segment in der anderen Spalte zu klicken.</para>
 		  
-		  <para>Sie können auch die Pfeiltasten verwenden und im zugehörigen Segment <keycap>Space</keycap> drücken.</para>
+		  <para>Sie können auch die Pfeiltasten verwenden und <keycap>Space</keycap> im zugehörigen Segment drücken.</para>
 		  
-          <para>Segmente, die mit dieser Methode aneinander ausgerichtet werden, werden automatisch als 'Akzeptiert' markiert.</para>
+          <para>Auf diese Weise ausgerichtete Segmente werden automatisch als 'Akzeptiert' markiert.</para>
 
-		  <para>Es kann hilfreich sein, den Befehl <guimenuitem>Ausstehende neu ausrichten</guimenuitem> auszuführen, nachdem Sie die punktuelle Ausrichtung ein paar Mal verwendet haben.</para>
+		  <para>Es kann hilfreich sein, nach mehrmaliger Verwendung der punktuellen Ausrichtung den Befehl &quot;<guimenuitem>Ausstehende neu ausrichten</guimenuitem>&quot; auszuführen.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -349,14 +349,14 @@
     <para>Wenn Sie die Ausrichtung der beiden Spalten abgeschlossen haben, klicken Sie auf die Schaltfläche <guibutton>TMX speichern...</guibutton>, um den Translation Memory zu erstellen.</para>
 
     <note>
-      <para>Nur Zeilen, bei denen in der ersten Spalte ein Häkchen im <guilabel>Behalten</guilabel>-Kästchen gesetzt ist, werden in den Translation Memory gespeichert.</para>
+      <para>Es werden nur die Zeilen in den Translation Memory gespeichert, bei denen in der ersten Spalte die <guilabel>Behalten</guilabel>-Option aktiviert ist.</para>
     </note>
 
 
-    <para>Zusätzlich zur Schaltfläche <guibutton>TMX speichern...</guibutton> ist im unteren Teil des <guilabel>Ausrichten</guilabel>-Fensters im Manuelle-Korrektur-Schritt das gleiche <guilabel>Hervorheben</guilabel>-Kästchen und die <guibutton>Muster...</guibutton>-Schaltfläche wie im ersten Schritt vorhanden. Diese Option ist auch über das <guimenu>Ansicht</guimenu>-Menü zugänglich.</para>
+    <para>Zusätzlich zur Schaltfläche <guibutton>TMX speichern...</guibutton> gibt es im unteren Teil des Fensters &quot;<guilabel>Ausrichten</guilabel>&quot; wie im ersten Schritt die <guilabel>Hervorheben</guilabel>-Option und die Schaltfläche <guibutton>Muster...</guibutton>. Diese Option ist auch über das <guimenu>Ansicht</guimenu>-Menü zugänglich.</para>
 
     <warning>
-      <para>Am unteren Rand des Fensters befindet sich außerdem eine <guibutton>Zurücksetzen</guibutton>-Schaltfläche. <emphasis role="bold">Seien Sie damit vorsichtig!</emphasis> Wenn Sie auf diese Schaltfläche klicken, werden sämtliche Änderungen verworfen, außerdem kehren Sie zum ersten Schritt zurück.</para>
+      <para>Am unteren Rand des Fensters befindet sich außerdem die Schaltfläche <guibutton>Zurücksetzen</guibutton>. <emphasis role="bold">Seien Sie vorsichtig damit!</emphasis> Wenn Sie auf diese Schaltfläche klicken, werden alle Änderungen verworfen und Sie kehren zum ersten Schritt zurück.</para>
     </warning>    
     
   </section>

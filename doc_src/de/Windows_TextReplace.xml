@@ -5,15 +5,15 @@
 
   <para>Verwenden Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>, um ein neues Ersetzungsfenster zu öffnen, und geben Sie das Wort oder die Wortgruppe, nach dem/der Sie suchen möchten, in das Suchfeld ein.</para>
   
-  <para>Alternativ können Sie ein Wort oder eine Wortgruppe im <link linkend="panes.editor" endterm="panes.editor.title"/>-, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>- oder <link linkend="panes.glossary" endterm="panes.glossary.title"/>-Bereich markieren und <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> verwenden. Der markierte Text wird automatisch in das Suchfeld eingetragen.</para>
+  <para>Alternativ können Sie auch ein Wort oder eine Wortgruppe im Fensterbereich <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> oder <link linkend="panes.glossary" endterm="panes.glossary.title"/> markieren und <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> verwenden. Der markierte Text wird automatisch in das Suchfeld eingetragen.</para>
 
-  <para>Sie können mehrere Ersetzungsfenster gleichzeitig offen haben.</para>
+  <para>Es können mehrere Ersetzungsfenster gleichzeitig geöffnet sein.</para>
 
-  <para>Klicken Sie auf die Pfeilschaltfläche im Feld <guilabel>Suche nach:</guilabel> oder <guilabel>Ersetzen mit:</guilabel>, um die letzten zehn Einträge anzuzeigen.</para>
+  <para>Klicken Sie auf die Pfeilschaltfläche im Feld &quot;<guilabel>Suchen nach:</guilabel>&quot; oder &quot;<guilabel>Ersetzen mit:</guilabel>&quot;, um die letzten zehn Einträge anzuzeigen.</para>
 
-  <para>Geben Sie die Zeichenkette, die Sie als Ersatz für Ihren Suchbegriff einfügen möchten, in das Feld <guilabel>Ersetzen mit:</guilabel> ein und klicken Sie auf <guibutton>Suchen</guibutton>, oder drücken Sie <keycap>Enter</keycap>, wenn sich der Textcursor noch im Feld befindet.</para>
+  <para>Geben Sie die Zeichenkette, die Sie als Ersatz für Ihren Suchtext einfügen möchten, in das Feld &quot;<guilabel>Ersetzen mit:</guilabel>&quot; ein und klicken Sie auf <guibutton>Suchen</guibutton>, oder drücken Sie <keycap>Enter</keycap>, wenn sich der Textcursor noch im Feld befindet.</para>
 
-  <para>Suchtreffer werden in blauer fetter Schrift dargestellt, und die modifizierten Zeichenketten werden in orange dargestellt, um das Ergebnis der Ersetzung anzuzeigen.</para>
+  <para>Suchtreffer werden blau und fett dargestellt. Geänderten Zeichenketten werden orange dargestellt, um das Ergebnis der Ersetzung anzuzeigen.</para>
 
 
   <example id="replace.with.allemand">
@@ -27,19 +27,19 @@
   </example>
   
   <note>
-	<para>Zu diesem Zeitpunkt wurden noch nichts ersetzt.</para>
+	<para>Zum jetzigen Zeitpunkt wurden noch nichts ersetzt.</para>
   </note>
 
   <para>Klicken Sie auf eine der folgenden Optionen:</para>
 
   <itemizedlist>
     <listitem>
-      <para><guibutton>Alle ersetzen</guibutton>: Ersetzt jedes Vorkommen (nach Anzeige eines Bestätigungsfensters mit der Anzahl der Vorkommen).</para>
+      <para><guibutton>Alle ersetzen</guibutton>: Ersetzt alle Vorkommen (nach einem Bestätigungsfenster mit der Anzahl der Vorkommen).</para>
     </listitem>
 
     <listitem>
         <para><guibutton>Ersetzungen anzeigen</guibutton> filtert die Einträge im Editor und hebt die Textbereiche hervor, die ersetzt werden sollen.</para>
-		<para>Klicken Sie auf die Schaltfläche <guibutton>Ersetzen und Nächstes finden</guibutton> oder <guibutton>Nächstes finden</guibutton>, oder klicken Sie auf die Schaltfläche <guibutton>Beenden</guibutton>, um den Ersetzungsvorgang zu beenden.</para>
+		<para>Klicken Sie auf die Schaltfläche <guibutton>Ersetzen und Nächstes finden</guibutton> oder <guibutton>Nächstes finden</guibutton>, oder auf die Schaltfläche <guibutton>Beenden</guibutton>, um den Ersetzungsvorgang zu beenden.</para>
     </listitem>
   </itemizedlist>
 
@@ -53,7 +53,7 @@
  
   <itemizedlist>
     <listitem>
-      <para><guimenu>Datei</guimenu> &gt; <guimenuitem>Markierten Text suchen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): Fügt den aktuell markierten Text in das Suchfeld ein.</para>
+      <para><guimenu>Datei</guimenu> &gt; <guimenuitem>Markiertes suchen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): Fügt den aktuell markierten Text in das Suchfeld ein.</para>
     </listitem>
 
     <listitem>
@@ -82,7 +82,7 @@
 
     <para>Verwenden Sie die Radiobuttons, um die Art der Suche auszuwählen.</para>
 
-	<para>Folgende Suchmethoden stehen zur Verfügung:</para>
+	<para>Es gibt folgende Suchmethoden:</para>
 
     <variablelist>
       <varlistentry id="windows.text.replace.methods.exact">
@@ -90,18 +90,18 @@
         <listitem>
           <para>Nach einer Zeichenkette suchen, genau wie im Suchfeld angegeben.</para>
 
-		  <para>Das entspricht einer Websuche mit Anführungszeichen.</para>
+		  <para>Entspricht einer Websuche mit Anführungszeichen.</para>
 
 		  <note>
 			<para>Die Platzhalterzeichen <code>*</code> und <code>?</code> können für die exakte Suche verwendet werden:</para>
 
 			<itemizedlist>
 			  <listitem>
-				<para>'*' findet null oder mehr Zeichen, von der aktuellen Position bis zum Ende eines Wortes. Der Suchbegriff <literal>'run*'</literal> beispielsweise findet <literal>'run'</literal>, <literal>'runs'</literal> und <literal>'running'</literal>.</para>
+				<para>'*' findet null oder mehr Zeichen ab der aktuellen Position bis zum Ende eines Wortes. Der Suchtext <literal>'run*'</literal> findet z.B. <literal>'run'</literal>, <literal>'runs'</literal> und <literal>'running'</literal>.</para>
 			  </listitem>
 
 			  <listitem>
-				<para>'?' findet ein beliebiges Zeichen. <literal>'run?'</literal> beispielsweise findet <literal>'runs'</literal>, aber auch den <literal>'runn'</literal>-Teil von <literal>'running'</literal> oder <literal>'runner'</literal>.</para>
+				<para>'?' findet ein beliebiges Zeichen. <literal>'run?'</literal> findet z.B. <literal>'runs'</literal>, aber auch den <literal>'runn'</literal>-Teil von <literal>'running'</literal> oder <literal>'runner'</literal>.</para>
 			  </listitem>
 			</itemizedlist>
 		  </note>
@@ -111,12 +111,12 @@
       <varlistentry id="windows.text.replace.methods.regex">
         <term id="windows.text.replace.methods.regex.title">Reguläre Ausdrücke</term>
         <listitem>
-          <para>Die Suchzeichenkette als einen regulären Ausdruck behandeln.</para>
+          <para>Die Suchzeichenkette als regulären Ausdruck behandeln.</para>
 
-		  <para>Reguläre Ausdrücke sind eine äußerst effiziente Methode, um nach allgemeinen oder komplexen Mustern zu suchen, statt nach exakten Zeichenketten. Einzelheiten finden Sie unter <link linkend="app.regex" endterm="app.regex.title"/>.</para>
+		  <para>Reguläre Ausdrücke sind eine sehr effiziente Methode, um nach allgemeinen oder komplexen Mustern zu suchen, anstatt nach exakten Zeichenketten. Einzelheiten finden Sie unter <link linkend="app.regex" endterm="app.regex.title"/>.</para>
 
 		  <note>
-			<para>Das Ersetzungsfeld unterstützt sogenannte Rückreferenzen, die auf die gefundenen Texte von im Suchfeld definierten Gruppen verweisen. Verwenden Sie <code>$n</code> (wobei <code>n</code> eine Ziffer von 1 bis 9 ist) im Ersetzungsfeld, um auf die <code>n-te</code> Gruppe im Suchfeld zu verweisen.</para>
+			<para>Der Ersatztext unterstützt sogenannte Rückreferenzen, die auf die im Suchtext definierten Gruppen verweisen. Verwenden Sie <code>$n</code> (wobei <code>n</code> eine Ziffer von 1 bis 9 ist) im Ersatztext, um auf die <code>n-te</code> Gruppe im Suchtext zu verweisen.</para>
 		  </note>
         </listitem>
       </varlistentry>
@@ -130,38 +130,38 @@
 	  <varlistentry>
 		<term>Groß-/Kleinschreibung beachten</term>
 		<listitem>
-		  <para>Zeigt nur Ergebnisse an, die dieselbe Groß-/Kleinschreibung wie die Suchbegriffe aufweisen.</para>
+		  <para>Zeigt nur Ergebnisse an, die die gleiche Groß-/Kleinschreibung wie der Suchtext aufweisen.</para>
 		</listitem>
 	  </varlistentry>
 	
 	  <varlistentry>
 		<term>Leerzeichen findet nbsp</term>
 		<listitem>
-		  <para>Leerzeichen in Suchbegriffen finden sowohl normale Leerzeichen als auch geschützte Leerzeichen (\u00A).</para>
+		  <para>Leerzeichen im Suchtext finden sowohl normale Leerzeichen als auch geschützte Leerzeichen (\u00A).</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 		<term>Unübersetzt</term>
 		<listitem>
-		  <para>Sucht auch in unübersetzten Segmenten.</para>
+		  <para>Auch in unübersetzten Segmenten suchen.</para>
 		</listitem>
 	  </varlistentry>
  
 	  <varlistentry>
-		<term><guibutton>Erweiterte Optionen anzeigen</guibutton></term>
+		<term><guibutton>TM-Suchoptionen</guibutton></term>
 		<listitem>
-		  <para>Wählen Sie zusätzliche Kriterien aus, wie z. B. die Person, die die Übersetzung erstellt oder geändert hat, das Datum und die Uhrzeit der Übersetzung (Modifikation) oder ob verwaiste Segmente ausgeschlossen werden sollen.</para>
+		  <para>Sie können zusätzliche Kriterien auswählen, z.B. wer die Übersetzung erstellt oder geändert hat, wann die Übersetzung geändert wurde oder ob verwaiste Segmente ausgeschlossen werden sollen.</para>
 
 		  <variablelist>
 			<varlistentry>
 			  <term>Zeichen unabhängig von voller/halber Breite</term>
 			  <listitem>
-				<para>Zeigt Ergebnisse an, die sowohl mit den voll- als auch halbbreiten Formen (CJK-Zeichen) der Zeichen in den Suchbegriffen übereinstimmen.</para>
+				<para>Zeigt Ergebnisse an, die sowohl mit den voll- als auch halbbreiten Formen (CJK-Zeichen) der Zeichen im Suchtext übereinstimmen.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
-		  <para>Verwenden Sie die Schaltfläche <guibutton>Erweiterte Optionen verstecken</guibutton>, um die zusätzlichen Optionen auszublenden.</para>
+		  <para>Verwenden Sie die Schaltfläche <guibutton>Optionen verstecken</guibutton>, um die zusätzlichen Optionen auszublenden.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
@@ -170,24 +170,24 @@
   <section id="windows.text.replace.result.display">
     <title id="windows.text.replace.result.display.title">Ergebnisanzeige</title>
 
-    <para>Die Suchergebnisse werden entsprechend der Reihenfolge ihres Auftretens im Projekt angezeigt. Bei übersetzten Segmenten wird der Originaltext oberhalb des übersetzten Textes angezeigt. Bei unübersetzten Segmenten wird nur der Quelltext angezeigt.</para>
+    <para>Die Suchergebnisse werden gemäß ihrer Reihenfolge im Projekt angeordnet. Bei übersetzten Segmenten wird der Quelltext über dem übersetzten Text angezeigt. Bei unübersetzten Segmenten wird nur der Quelltext angezeigt.</para>
 
-	<para>Doppelklicken Sie auf ein Segment, um es im <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich zu öffnen.</para>
+	<para>Doppelklicken Sie auf ein Segment, um es im Fensterbereich <link linkend="panes.editor" endterm="panes.editor.title"/> zu öffnen.</para>
 
-    <para>Sie können in der Ergebnisanzeige die folgenden Tastenkürzel verwenden:</para>
+    <para>In der Ergebnisanzeige können Sie die folgenden Tastenkürzel verwenden:</para>
 	
 	<variablelist>
 	  <varlistentry>
 		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 		<listitem>
-		  <para>Springt zum nächsten Segment</para>
+		  <para>Zum nächsten Segment springen</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry>
 		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
 		<listitem>
-		  <para>Springt zum vorherigen Segment</para>
+		  <para>Zum vorherigen Segment springen</para>
 		</listitem>
 
 	  </varlistentry>
@@ -195,7 +195,7 @@
 	  <varlistentry>
 		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
 		<listitem>
-		  <para>Springt zum aktuellen Segment im Editor</para>
+		  <para>Zum aktuellen Segment im Editor springen</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>
@@ -206,14 +206,14 @@
 	  <varlistentry>
 		<term>Mit Editor auto-synchronisieren</term>
 		<listitem>
-		  <para>Der <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich synchronisiert seine Anzeige mit dem ausgewählten Suchergebnis.</para>
+		  <para>Der Fensterbereich <link linkend="panes.editor" endterm="panes.editor.title"/> synchronisiert seine Anzeige mit dem ausgewählten Suchergebnis.</para>
 		</listitem>
 	  </varlistentry>
 	  
 	  <varlistentry>
 		<term>Nach Beendigung zurück zum Anfangssegment</term>
 		<listitem>
-		  <para>Wenn Sie die Suchfenster schließen, kehrt der <link linkend="panes.editor" endterm="panes.editor.title"/>-Bereich automatisch zu dem Segment zurück, das er vor dem Start der Suche angezeigt hat.</para>
+		  <para>Wenn Sie das Suchfenster schließen, kehrt der Fensterbereich <link linkend="panes.editor" endterm="panes.editor.title"/> automatisch zu dem Segment zurück, das er vor dem Start der Suche angezeigt hat.</para>
 		</listitem>
 	  </varlistentry>
 	</variablelist>

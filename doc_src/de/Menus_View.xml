@@ -3,9 +3,9 @@
 <section id="menus.view">
   <title id="menus.view.title"><guimenu>Ansicht</guimenu></title>
 
-  <para>Über dieses Menü können Sie Informationen auswählen, die OmegaT anzeigen soll.</para>
+  <para>Über dieses Menü können Sie auswählen, welche Informationen OmegaT anzeigen soll.</para>
 
-  <para>Alle angegebenen Farben in den Beschreibungen können in der <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/>-Einstellung geändert werden.</para>
+  <para>Alle angegebenen Farben in den Beschreibungen können mit der Einstellung <link linkend="dialogs.preferences.colours" endterm="dialogs.preferences.colours.title"/> geändert werden.</para>
 
   <variablelist>
     <varlistentry id="menus.view.mark.translated.segments">
@@ -25,7 +25,7 @@
     <varlistentry id="menus.view.mark.paragraph.delimitations">
       <term id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Absatzbegrenzungen anzeigen</guimenuitem></term>
       <listitem>
-        <para>Wenn aktiviert, werden die Begrenzungen zwischen den Absätzen im Quelldokument visuell kenntlich gemacht. Sie können die Absatzbegrenzung in der <link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/>-Einstellung ändern.</para>
+        <para>Wenn aktiviert, wird visuell kenntlich gemacht, wann ein Absatz beginnt und endet. Sie können die <link linkend="dialogs.preferences.editor.paragraph.delimitation.format" endterm="dialogs.preferences.editor.paragraph.delimitation.format.title"/> ändern.</para>
       </listitem>
     </varlistentry>
 
@@ -46,21 +46,21 @@
     <varlistentry id="menus.view.mark.segments.with.notes">
       <term id="menus.view.mark.segments.with.notes.title"><guimenuitem>Segmente mit Notizen hervorheben</guimenuitem></term>
       <listitem>
-        <para>Wenn aktiviert, werden Segmente mit Notizen türkisfarben hervorgehoben. Diese Hervorhebung hat Vorrang vor <guimenuitem>Übersetzte Segmente hervorheben</guimenuitem> und <guimenuitem>Unübersetzte Segmente hervorheben</guimenuitem>.</para>
+        <para>Wenn aktiviert, werden Segmente mit Notizen türkisfarben hervorgehoben. Diese Hervorhebung hat Vorrang vor &quot;<guimenuitem>Übersetzte Segmente hervorheben</guimenuitem>&quot; und &quot;<guimenuitem>Unübersetzte Segmente hervorheben</guimenuitem>&quot;.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.non.breakable.space">
       <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Geschützte Leerzeichen anzeigen</guimenuitem></term>
       <listitem>
-        <para>Wenn aktiviert, werden geschützte Leerzeichen mit einem grauen Hintergrund angezeigt.</para>
+        <para>Wenn aktiviert, werden geschützte Leerzeichen grau hinterlegt.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.white.space">
-      <term id="menus.view.mark.white.space.title"><guimenuitem>Leerraum anzeigen</guimenuitem></term>
+      <term id="menus.view.mark.white.space.title"><guimenuitem>Leerräume anzeigen</guimenuitem></term>
       <listitem>
-        <para>Wenn aktiviert, werden Leerräume als kleiner Punkt angezeigt.</para>
+        <para>Wenn aktiviert, werden Leerräume als kleine Punkte dargestellt.</para>
       </listitem>
     </varlistentry>
 
@@ -68,40 +68,40 @@
       <term id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>BiDi-Steuerzeichen anzeigen</guimenuitem></term>
       <listitem>
         <para>Wenn aktiviert, werden bidirektionale Unicode-Formatierungszeichen angezeigt. Einzelheiten finden Sie unter <ulink url="https://www.unicode.org/reports/tr9/">Unicode Bidirectional Algorithm</ulink>.</para>
-		<para>Verwenden Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>, um eine Auswahl von Zeichen direkt über die OmegaT-Benutzeroberfläche einzufügen. Einzelheiten finden Sie unter <link linkend="app.bidi" endterm="app.bidi.title"/>.</para>
+		<para>Verwenden Sie <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.unicode.control.character" endterm="menus.edit.insert.unicode.control.character.title"/>, um diese Zeichen direkt über die OmegaT-Benutzeroberfläche einzufügen. Einzelheiten finden Sie unter <link linkend="app.bidi" endterm="app.bidi.title"/>.</para>
 	  </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.auto.populated.segments">
-      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Automatisch ausgefüllte Segmente hervorheben</guimenuitem></term>
+      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Automatisch gefüllte Segmente hervorheben</guimenuitem></term>
       <listitem>
-        <para>Wenn aktiviert, werden automatisch ausgefüllte Segmente mit unterschiedlichen Farben hervorgehoben.</para>
+        <para>Wenn aktiviert, werden automatisch gefüllte Segmente in verschiedenen Farben hervorgehoben.</para>
 
-		<para>Siehe die <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/>-Einstellung für weitere Informationen.</para>
+		<para>Einzelheiten finden Sie unter <link linkend="dialogs.preferences.editor.save.auto-populated.status" endterm="dialogs.preferences.editor.save.auto-populated.status.title"/> (Einstellungen).</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.glossary.matches">
       <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Glossar-Matches hervorheben</guimenuitem></term>
       <listitem>
-        <para>Unterstreicht Quellbegriffe, die mit Glossareinträgen übereinstimmen. Wenn Sie den Mauszeiger über einen unterstrichenen Begriff bewegen, wird der zugehörige Zielbegriff angezeigt. Wenn Sie mit der rechten Maustaste auf einen unterstrichenen Begriff klicken, wird der zugehörige Zielbegriff angezeigt, der ausgewählt und an der Position des Textcursors im Zieltext eingefügt werden kann.</para>
+        <para>Unterstreicht Quellbegriffe, die mit Glossareinträgen übereinstimmen. Wenn Sie den Mauszeiger über einen unterstrichenen Begriff bewegen, wird der zugehörige Zielbegriff angezeigt. Wenn Sie mit der rechten Maustaste auf einen unterstrichenen Begriff klicken, können Sie den zugehörigen Zielbegriff auswählen und an der Position des Textcursors im Zieltext einfügen.</para>
 	  </listitem>
     </varlistentry>
 
     <varlistentry id="menus.view.mark.language.checker">
       <term id="menus.view.mark.language.checker.title"><guimenuitem>LanguageTool-Probleme hervorheben</guimenuitem></term>
       <listitem>
-        <para>Unterstreicht Teile des Zieltextes, die LanguageTool als Fehler erkannt hat. Siehe die <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/>-Einstellungen für weitere Informationen.</para>
+        <para>Unterstreicht Teile des Zieltextes, die LanguageTool als Fehler erkannt hat. Einzelheiten finden Sie unter <link linkend="dialog.preferences.languagetool.plugin" endterm="dialog.preferences.languagetool.plugin.title"/> (Einstellungen).</para>
 	  </listitem>
     </varlistentry>
 	
     <varlistentry id="menus.view.aggressive.font.fallback">
       <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Aggressiven Font-Fallback nutzen</guimenuitem></term>
       <listitem>
-        <para>Aktivieren Sie diese Option, falls OmegaT bestimmte Glyphen nicht korrekt anzeigt (auch wenn die Schriftarten, die die entsprechenden Glyphen enthalten, auf Ihrem Rechner installiert sind).</para>
+        <para>Aktivieren Sie diese Option, wenn OmegaT bestimmte Glyphen nicht korrekt anzeigt (auch wenn die Schriftarten mit den entsprechenden Glyphen auf Ihrem Computer installiert sind).</para>
 
 		<note>
-		  <para>In Windows wurde festgestellt, dass dieser manuelle Font-Fallback-Mechanismus mit dem Standard-Font-Fallback interferiert, was zu unerwünschten Font-Substitutionen führen kann. Aus diesem Grund ist dieser Mechanismus standardmäßig ausgeschaltet.</para>
+		  <para>Unter Windows hat sich gezeigt, dass dieser manuelle Font-Fallback-Mechanismus mit dem Standard-Font-Fallback interferiert, was zu unerwünschten Font-Ersetzungen führen kann. Aus diesem Grund ist dieser Mechanismus standardmäßig deaktiviert.</para>
 		</note>
       </listitem>
     </varlistentry>
@@ -109,21 +109,21 @@
     <varlistentry id="menus.view.modification.info">
       <term id="menus.view.modification.info.title"><guisubmenu>Modifikationsinfo anzeigen</guisubmenu></term>
       <listitem>
-        <para>Zeigt die Uhrzeit und den Autor der letzten Änderung an einem Segment an.</para>
+        <para>Zeigt den Zeitpunkt und den Autor der letzten Änderung eines Segments an.</para>
 		
-		<para>Der Standardwert ist <guimenuitem>Nur für aktives Segment</guimenuitem> und kann auf <guimenuitem>Für alle Segmente</guimenuitem> oder <guimenuitem>Keine</guimenuitem> gesetzt werden.</para>
+		<para>Der Standardeinstellung ist &quot;<guimenuitem>Nur für aktives Segment</guimenuitem>&quot; und kann auf &quot;<guimenuitem>Für alle Segmente</guimenuitem>&quot; oder &quot;<guimenuitem>Keine</guimenuitem>&quot; gesetzt werden.</para>
 
-		<para>Sie können die angezeigten Informationen ändern. Siehe die <link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/>-Einstellungen für weitere Informationen.</para>
+		<para>Sie können die angezeigten Informationen ändern. Einzelheiten finden Sie unter <link linkend="dialog.preferences.view.use.custom.templates.for.modification.info" endterm="dialog.preferences.view.use.custom.templates.for.modification.info.title"/> (Einstellungen).</para>
       </listitem>
     </varlistentry>
 	
 	<varlistentry id="menus.view.restore.main.window">
       <term id="menus.view.restore.main.window.title"><guimenuitem>OmegaT-Fenster wiederherstellen</guimenuitem></term>
       <listitem>
-        <para>Setzt das Layout des OmegaT-Fensters auf seine Standardwerte zurück.</para>
+        <para>Stellt das Standardfensterlayout von OmegaT wieder her.</para>
 
 		<note>
-		  <para>Verwenden Sie diese Funktion, wenn Sie bei der Neuanordnung des Fensterlayouts auf Probleme stoßen.</para>
+		  <para>Verwenden Sie diese Funktion, wenn Sie Probleme mit der aktuellen Anordnung des Fensterlayouts haben.</para>
 		</note>
 	  </listitem>
     </varlistentry>

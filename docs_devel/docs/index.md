@@ -10,6 +10,7 @@
 * [How to build OmegaT](02.HowToBuild.md)
 * [Git workflow](03.GitWorkFlows.md)
 * [Coding styles](30.CodingStyles.md)
+* [Versioning](05.Versioning.md)
 
 ## How to create plugin
 

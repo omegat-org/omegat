@@ -10,7 +10,7 @@
    
 <body>
     <div id="wh-header">
-    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.0 - User Manual</a></div></div>
+    <div class="logo"><a href="https://omegat.org/"><img alt="OmegaT" height="50" src="images/omegat.svg" style="border-style: none;" width="100" /></a></div><div class="title"><a href="index.html">OmegaT 6.0.1 - User Manual</a></div></div>
 
     <div id="wh-body">
       <div class="wh-icon-menu" id="wh-menu"></div>
@@ -1380,6 +1380,19 @@
 		context, require different translations. If the current translation does
 		not apply, select this menu item and enter the alternative
 		translation.</p>
+                     <div class="warning">
+                        <h3 class="title">Warning</h3>
+                        <p>OmegaT differentiates between identical segments using either
+		  an internal identifier provided by the file type, or by referring to
+		  their preceding and following segments. In such cases, alternative
+		  translations relies on the identical segments having different preceding
+		  or following segments. If the identical segments also have identical
+		  preceding and following segments, you will not be able to translate them
+		  differently and make one of them an alternative translation in OmegaT.</p>
+                        <p>You can work around this issue by introducing a small change to one
+		  of the preceding or following segments in the source file to distinguish
+		  between the various instances of the same preceding or following segment.</p>
+                     </div>
                   </dd>
                   <dt id="menus.edit.remove.translation">
                      <span class="term" id="menus.edit.remove.translation.title">
@@ -2412,8 +2425,8 @@
                            </li>
                         </ul>
                      </div>
-                     <p>Allows you to activate or deactivate the available machine
-		translation engines.</p>
+                     <p>Allows you to activate or deactivate enabled and properly configured
+          machine translation engines.</p>
                      <p>If several translation engines are selected, you can also use
         <span class="keycap">
                            <strong>C</strong>
@@ -2443,7 +2456,7 @@
                         </ul>
                      </div>
                      <p>Allows you to activate or deactivate fuzzy matching for glossary
-        maches.</p>
+        matches.</p>
                      <p>See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.glossary" title="Glossaries">
                            <span class="guilabel">Glossaries</span>
                         </a> preferences for
@@ -2468,7 +2481,7 @@
                         </ul>
                      </div>
                      <p>Allows you to activate or deactivate fuzzy matching for dictionary
-        maches.</p>
+        matches.</p>
                      <p>See the <a class="link" href="chapter.dialogs.preferences.html#dialogs.preferences.dictionary" title="Dictionaries">
                            <span class="guilabel">Dictionaries</span>
                         </a> preferences for

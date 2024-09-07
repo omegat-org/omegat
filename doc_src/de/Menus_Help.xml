@@ -3,7 +3,7 @@
 <section id="menus.help">
   <title id="menus.help.title"><guimenu>Hilfe</guimenu></title>
 
-  <para>Über dieses Menü erhalten Sie Zugriff auf Informationen, die Ihnen helfen, OmegaT zu meistern.</para>
+  <para>Über dieses Menü erhalten Sie Zugang zu Informationen, die Ihnen die Arbeit mit OmegaT erleichtern.</para>
 
   <variablelist>
     <varlistentry id="menus.help.user.manual">
@@ -23,21 +23,21 @@
     <varlistentry id="menus.help.last.changes">
       <term id="menus.help.last.changes.title"><guimenuitem>Letzte Änderungen...</guimenuitem></term>
       <listitem>
-        <para>Zeigt die Liste mit neuen Features, Verbesserungen und Fehlerbehebungen an, die mit jeder neuen Version einhergehen.</para>
+        <para>Zeigt eine Liste mit neuen Features, Verbesserungen und Fehlerbehebungen an, die mit jeder neuen Version einhergehen.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.help.log">
       <term id="menus.help.log.title"><guimenuitem>Log...</guimenuitem></term>
       <listitem>
-        <para>Zeigt die aktuelle Log-Datei an. Der Titel des Dialogfensters spiegelt die aktuell verwendete Datei wider (abhängig von der Anzahl der gleichzeitig laufenden OmegaT-Instanzen).</para>
+        <para>Zeigt die aktuelle Logdatei an. Der Titel des Dialogfensters spiegelt die aktuell verwendete Datei wider (abhängig von der Anzahl der gleichzeitig laufenden OmegaT-Instanzen).</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.help.check.for.updates">
       <term id="menus.help.check.for.updates.title"><guimenuitem>Nach Updates suchen...</guimenuitem></term>
       <listitem>
-        <para>Überprüft, ob eine neuere Version von OmegaT verfügbar ist.</para>
+        <para>Prüft, ob eine neue Version von OmegaT verfügbar ist.</para>
       </listitem>
     </varlistentry>
   </variablelist>

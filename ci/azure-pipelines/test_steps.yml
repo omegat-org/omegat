@@ -1,0 +1,20 @@
+steps:
+  - task: Cache@2
+    displayName: 'Cache Gradle'
+    inputs:
+      key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
+      path: '$(GRADLE_USER_HOME)'
+  - script: |
+      umask a+w
+      chmod -R a+w doc_src
+    displayName: 'Prepare for build'
+  - task: Gradle@3
+    displayName: Check
+    inputs:
+      tasks: test
+      options: '-PenvIsCi --no-daemon'
+      jdkVersionOption: '1.11'
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results build/test-results/**/TEST-*.xml'
+    inputs:
+      testResultsFiles: 'build/test-results/**/TEST-*.xml'

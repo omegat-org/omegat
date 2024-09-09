@@ -16,7 +16,7 @@ steps:
   - task: Gradle@3
     condition: ${{ parameters.condition }}
     inputs:
-      tasks: 'clean webManual'
-      options: '-PenvIsCi --no-daemon'
+      tasks: 'webManual'
+      options: '-PenvIsCi'
       jdkVersionOption: '1.17'
     displayName: 'Run Gradle clean&webManual'

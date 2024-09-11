@@ -13,3 +13,8 @@ steps:
       tasks: check
       options: '-PenvIsCi --no-daemon --scan'
       jdkVersionOption: '1.17'
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results build/reports/**/*.xml'
+    condition: always()
+    inputs:
+      testResultsFiles: 'build/reports/**/*.xml'

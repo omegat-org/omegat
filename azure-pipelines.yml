@@ -32,54 +32,115 @@ schedules:
     always: true
 
 variables:
-  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-  isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
-  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
-  isJRE11: $[contains(variables['Build.SourceBranch'], 'refs/tags/v6')]
-  isSchedule: $[eq(variables['Build.Reason'], 'Schedule')]
   GRADLE_USER_HOME: '$(Pipeline.Workspace)/.gradle'
+  isRelease: $[contains(variables['Build.SourceBranch'], 'refs/tags/v')]
+  isReleasesBranch: $[contains(variables['Build.SourceBranch'], 'refs/heads/releases/')]
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
-- stage: Check
-  condition: not(or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual')))
+- stage: TestAndDocCI
+  condition: and(ne(variables['Build.Reason'], 'Schedule'), ne(variables['Build.Reason'], 'Manual'), ne(variables .isRelease, true))
   jobs:
-  - job: GitHubCI
-    displayName: CI Check for master, releases/* and Pull-Requests
+  - job: TestOnJava11
+    displayName: on linux
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
-      - template: ci/azure-pipelines/check_steps.yml
+      - checkout: self
+        fetchDepth: 1
+        fetchTags: false
+      - template: ci/azure-pipelines/test_steps.yml
+  - job: testOnWindows
+    displayName: on Windows
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - checkout: self
+        fetchDepth: 2
+      - template: ci/azure-pipelines/test_steps.yml
+  - job: testOnMac
+    displayName: on mac
+    pool:
+      vmImage: 'macOS-latest'
+    steps:
+      - checkout: self
+        fetchDepth: 1
+        fetchTags: false
+      - template: ci/azure-pipelines/test_steps.yml
 
   # Weekly release steps will be triggerred after integration-test succeeded.
 - stage: Weekly
   condition: or(eq(variables['Build.Reason'], 'Schedule'), eq(variables['Build.Reason'], 'Manual'))
   jobs:
-  - job: WeeklyBuild
-    displayName: Build for master weekly
+  - job: CheckForWeekly
+    displayName: Test and Check
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
+      - template: ci/azure-pipelines/check_steps.yml
+  - job: WeeklyBuild
+    displayName: Build for master weekly
+    dependsOn:
+      - CheckForWeekly
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - checkout: self
+        fetchDepth: 1
+        fetchTags: false
+      - template: ci/azure-pipelines/build_steps.yml
+      - script: echo "##vso[task.setvariable variable=result;]false"
+        condition: failed()
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - template: ci/azure-pipelines/build_steps.yml
+          # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+          ./gradlew --stop
+          # Check task result
+          if [[ "$(result)" == "false" ]]; then
+            exit 1
+          fi
+        condition: always()
+        displayName: Stop Gradle daemon
       - template: ci/azure-pipelines/publish_weekly.yml
         parameters:
           omegatVersion: $(version)
+          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Agent.JobStatus'], 'Succeeded'))
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release
-  dependsOn: Check
   condition: and(succeeded(), eq(variables.isRelease, true))
   jobs:
+  - job: CheckForRelease
+    displayName: Test and Check
+    pool:
+      vmImage: 'ubuntu-22.04'
+    steps:
+      - checkout: self
+        fetchDepth: 2
+      - template: ci/azure-pipelines/check_steps.yml
   - job: ReleaseBuild
     pool:
       vmImage: 'ubuntu-22.04'
     steps:
+      - checkout: self
+        fetchDepth: 0
+        fetchTags: true
+      - template: ci/azure-pipelines/build_steps.yml
+      - script: echo "##vso[task.setvariable variable=result;]false"
+        condition: failed()
       - script: |
           version=$(./gradlew -qq printVersion | head -n -1 )
           echo "##vso[task.setvariable variable=version]$version"
-      - template: ci/azure-pipelines/build_steps.yml
+          # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+          ./gradlew --stop
+          # Check task result
+          if [[ "$(result)" == "false" ]]; then
+            exit 1
+          fi
+        condition: always()
+        displayName: Stop Gradle daemon
       - template: ci/azure-pipelines/publish_release.yml
         parameters:
           omegatVersion: $(version)
+          condition: eq(variables['Agent.JobStatus'], 'Succeeded')

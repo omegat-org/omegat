@@ -1,8 +1,5 @@
 parameters:
-  - name: omegatVersion
-    default: ''
-  - name: condition
-    default: false
+  condition: false
 
 steps:
   - task: Bash@3
@@ -11,8 +8,9 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        srcdir=$(system.defaultworkingdirectory)/build/distributions/
+        echo "Push manuals to sourceforge project web"
+        srcdir=$(system.defaultworkingdirectory)/docs
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
-        destdir="/home/frs/project/omegat/OmegaT\\ -\\ Standard/OmegaT\\ ${{ parameters.omegatVersion }}/"
+        destdir=/home/project-web/omegat/htdocs/manual-standard/
         echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -s -oStrictHostKeyChecking=no $srcdir/* "$dest:$destdir"
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -r -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir

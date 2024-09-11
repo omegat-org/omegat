@@ -94,6 +94,13 @@ public final class Platform {
     }
 
     /**
+     * Returns true if running on Windows.
+     */
+    public static boolean isWindows() {
+        return !(isLinux() || isMacOSX());
+    }
+
+    /**
      * Returns true if the JVM (NOT the OS) is 64-bit
      */
     public static boolean is64Bit() {

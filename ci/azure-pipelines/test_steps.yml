@@ -16,5 +16,6 @@ steps:
       jdkVersionOption: '1.11'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/test-results/**/TEST-*.xml'
+    condition: always()
     inputs:
       testResultsFiles: 'build/test-results/**/TEST-*.xml'

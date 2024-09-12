@@ -2,7 +2,7 @@
  OmegaT 6.0.2
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bug fixes
+  2 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 
@@ -10,6 +10,9 @@
 
   - [Revert regression] List of issues stays hidden in the background
   https://sourceforge.net/p/omegat/bugs/1225/
+
+  - Unit tests failed on Windows
+  https://sourceforge.net/p/omegat/bugs/1223/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.1 (2024-08-17)

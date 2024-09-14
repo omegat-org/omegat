@@ -100,8 +100,8 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     private final ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal
             .withInitial(LevenshteinDistance::new);
-    private final ThreadLocal<FindMatches> finder = ThreadLocal.withInitial(
-            () -> new FindMatches(Core.getProject(), OConsts.MAX_NEAR_STRINGS, true, false, false));
+    private final ThreadLocal<FindMatches> finder = ThreadLocal
+            .withInitial(() -> new FindMatches(Core.getProject(), OConsts.MAX_NEAR_STRINGS, false, false));
     private final StringBuilder textForLog = new StringBuilder();
 
     public CalcMatchStatistics(IStatsConsumer callback, boolean perFile) {
@@ -299,7 +299,7 @@ public class CalcMatchStatistics extends LongProcessThread {
     int calcMaxSimilarity(SourceTextEntry ste) {
         String srcNoXmlTags = removeXmlTags(ste);
         FindMatches localFinder = finder.get();
-        List<NearString> nears = localFinder.search(srcNoXmlTags, true, false, this::isInterrupted);
+        List<NearString> nears = localFinder.search(srcNoXmlTags, false, false, this::isInterrupted);
         final Token[] strTokensStem = localFinder.tokenizeAll(ste.getSrcText());
         int maxSimilarity = 0;
         CACHE: for (NearString near : nears) {

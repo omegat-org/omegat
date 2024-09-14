@@ -56,7 +56,6 @@ public class SaveOptionsPanel extends JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         intervalDescriptionPanel = new javax.swing.JPanel();
-        intervalDescriptionTextArea = new javax.swing.JTextArea();
         intervalConfigurationPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         minutesLabel = new javax.swing.JLabel();
@@ -84,21 +83,6 @@ public class SaveOptionsPanel extends JPanel {
 
         intervalDescriptionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SAVE_DIALOG_INTERVAL_LABEL")));
         intervalDescriptionPanel.setLayout(new java.awt.BorderLayout());
-
-        intervalDescriptionTextArea.setEditable(false);
-        intervalDescriptionTextArea.setColumns(40);
-        intervalDescriptionTextArea.setFont(minutesLabel.getFont()
-        );
-        intervalDescriptionTextArea.setLineWrap(true);
-        intervalDescriptionTextArea.setRows(1);
-        intervalDescriptionTextArea.setTabSize(4);
-        intervalDescriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION"));
-        intervalDescriptionTextArea.setWrapStyleWord(true);
-        intervalDescriptionTextArea.setAutoscrolls(false);
-        intervalDescriptionTextArea.setFocusable(false);
-        intervalDescriptionTextArea.setOpaque(false);
-        intervalDescriptionTextArea.setRequestFocusEnabled(false);
-        intervalDescriptionPanel.add(intervalDescriptionTextArea, java.awt.BorderLayout.NORTH);
 
         intervalConfigurationPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -229,7 +213,6 @@ public class SaveOptionsPanel extends JPanel {
     javax.swing.JButton insertButton;
     private javax.swing.JPanel intervalConfigurationPanel;
     private javax.swing.JPanel intervalDescriptionPanel;
-    private javax.swing.JTextArea intervalDescriptionTextArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel8;

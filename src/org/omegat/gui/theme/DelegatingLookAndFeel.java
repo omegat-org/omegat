@@ -39,6 +39,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.plaf.basic.BasicLookAndFeel;
 
 import org.madlonkay.desktopsupport.DesktopSupport;
+
+import org.omegat.swing.extra.ExtraLocales;
 import org.omegat.util.gui.ResourcesUtil;
 
 /**
@@ -128,6 +130,6 @@ public abstract class DelegatingLookAndFeel extends BasicLookAndFeel {
 
     @Override
     public UIDefaults getDefaults() {
-        return systemLookAndFeel.getDefaults();
+        return ExtraLocales.setDefaults(systemLookAndFeel.getDefaults());
     }
 }

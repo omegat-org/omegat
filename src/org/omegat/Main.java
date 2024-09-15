@@ -70,8 +70,6 @@ import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
-import org.omegat.languagetools.LanguageClassBroker;
-import org.omegat.languagetools.LanguageDataBroker;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -95,6 +93,9 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.languagetools.LanguageClassBroker;
+import org.omegat.languagetools.LanguageDataBroker;
+import org.omegat.swing.extra.ExtraLocales;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;

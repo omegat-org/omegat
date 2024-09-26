@@ -45,12 +45,10 @@ import javax.swing.JSeparator;
 import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
-import javax.swing.plaf.ColorUIResource;
 
 import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.preferences.IMenuPreferece;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -177,7 +175,7 @@ public final class UIDesignManager {
      */
     public static void initialize() throws IOException {
         // Install VLDocking defaults
-        DockingUISettings.getInstance().installUI();
+        DockingUISettings.setInstance(new CustomDockingUISettings());
         DockableContainerFactory.setFactory(new CustomContainerFactory());
 
         // Set Look And Feel
@@ -211,71 +209,10 @@ public final class UIDesignManager {
         // Enable animated popup when mousing over minimized tab
         AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);
 
-        // UI strings
-        UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
-        UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
-        UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
-        UIManager.put("DockViewTitleBar.attachButtonText", OStrings.getString("DOCKING_HINT_DOCK"));
-        UIManager.put("DockViewTitleBar.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
-        UIManager.put("DockViewTitleBar.closeButtonText", "");
-        UIManager.put("DockTabbedPane.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
-        UIManager.put("DockTabbedPane.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
-        UIManager.put("DockTabbedPane.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
-        UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
-        UIManager.put("DockTabbedPane.closeButtonText", "");
-
         // Fonts
         Font defaultFont = UIManager.getFont("Label.font");
-        UIManager.put("DockViewTitleBar.titleFont", defaultFont);
         UIManager.put("JTabbedPaneSmartIcon.font", defaultFont);
         UIManager.put("AutoHideButton.font", defaultFont);
-
-        // UI settings
-        UIManager.put("DockViewTitleBar.isCloseButtonDisplayed", false);
-        UIManager.put("DockingDesktop.closeActionAccelerator", null);
-        UIManager.put("DockingDesktop.maximizeActionAccelerator", null);
-        UIManager.put("DockingDesktop.dockActionAccelerator", null);
-        UIManager.put("DockingDesktop.floatActionAccelerator", null);
-
-        // Disused icons
-        UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
-
-        // Panel notification (blinking tabs/headers) settings
-        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor",
-                Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
-
-        ensureTitlebarReadability();
-    }
-
-    private static void ensureTitlebarReadability() {
-        // to ensure DockViewTitleBar title readability
-        Color textColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
-        Color backColor = UIManager.getColor("Panel.background");
-        // One of these could be null
-        if (textColor != null && backColor != null) {
-            if (textColor.equals(backColor)) {
-                float[] hsb = Color.RGBtoHSB(textColor.getRed(), textColor.getGreen(), textColor.getBlue(),
-                        null);
-                float brightness = hsb[2]; // darkest 0.0f <--> 1.0f brightest
-                if (brightness >= 0.5f) {
-                    brightness -= 0.5f; // to darker
-                } else {
-                    brightness += 0.5f; // to brighter
-                }
-                int rgb = Color.HSBtoRGB(hsb[0], hsb[1], brightness);
-                ColorUIResource res = new ColorUIResource(rgb);
-                UIManager.put("InternalFrame.inactiveTitleForeground", res);
-            }
-        }
-
-        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor",
-                Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
     }
 
     /**

@@ -95,7 +95,6 @@ import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
 import org.omegat.languagetools.LanguageClassBroker;
 import org.omegat.languagetools.LanguageDataBroker;
-import org.omegat.swing.extra.ExtraLocales;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;

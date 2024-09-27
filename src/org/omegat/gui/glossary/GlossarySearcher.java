@@ -26,6 +26,7 @@
 
 package org.omegat.gui.glossary;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -256,22 +257,41 @@ public class GlossarySearcher {
                 // longer is better if one contains another
                 c = o2.getSrcText().length() - o1.getSrcText().length();
             }
-            // sort source text alphabetically, first ignore a case, then
-            // consider a case
+            // sort source text alphabetically.
+            // Notion of alphabetical order is language-dependent 
             if (c == 0) {
-                c = o1.getSrcText().compareToIgnoreCase(o2.getSrcText());
-            }
-            if (c == 0) {
-                c = o1.getSrcText().compareTo(o2.getSrcText());
+                c = compareLanguageDependent(Core.getProject().getProjectProperties().getSourceLanguage(), o1.getSrcText(), o2.getSrcText());
             }
             if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
                 c = o2.getLocText().length() - o1.getLocText().length();
             }
             if (c == 0) {
-                c = o1.getLocText().compareToIgnoreCase(o2.getLocText());
+                c = compareLanguageDependent(Core.getProject().getProjectProperties().getTargetLanguage(), o1.getSrcText(), o2.getSrcText());
             }
             return c;
         });
+    }
+    
+    private static int compareLanguageDependent(Language lang, String s1, String s2) {
+        Collator langCollator = Collator.getInstance(lang.getLocale());
+        // Use primary criteria - for most languages written with latin alphabet, PRIMARY means case-insensitive 
+        // (see https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+        langCollator.setStrength(Collator.PRIMARY);
+        int c = langCollator.compare(s1, s2);
+        if (c != 0) {
+            return c;
+        }
+        // Use secondary criteria - for most languages written with latin alphabet, SECONDARY means ignore accents 
+        // (see https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+        langCollator.setStrength(Collator.SECONDARY);
+        c = langCollator.compare(s1, s2);
+        if (c != 0) {
+            return c;
+        }
+        // Use tertiary criteria - language-dependent
+        // (see https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#TERTIARY)
+        langCollator.setStrength(Collator.TERTIARY);
+        return langCollator.compare(s1, s2);             
     }
 
     private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result,

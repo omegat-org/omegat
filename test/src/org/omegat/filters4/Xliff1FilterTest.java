@@ -29,6 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -102,6 +103,29 @@ public class Xliff1FilterTest extends org.omegat.filters.TestFilterBase {
         // entry translated in the callback, not in the source file
         assertEquals("Devrait traduire dans le r\u00E9sultat.", entries.get(2).translation); 
     }
+    
+    @Test
+    public void testKeepProperties() throws Exception {
+        Xliff1Filter filter = new Xliff1Filter();
+        String f = "test/data/filters/xliff/file-XLIFFFilter-state-final.xlf";
+        org.omegat.core.data.IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("This is test", "1", "//text.txt", null, null, null);
+        assertEquals(fi.entries.get(fiCount - 1).getRawProperties().length, 0);
+        checkMultiProps("test2", "2", "//text.txt", null, null,"LOCKED", "xliff final");
+        checkMultiEnd();
+        
+        translate(filter, new File(f).getPath());
+        fi = loadSourceFiles(filter, outFile.toString());
+        
+        checkMultiStart(fi, outFile.toString());
+        checkMulti("This is test", "1", "//text.txt", null, null, null);
+        assertEquals(fi.entries.get(fiCount - 1).getRawProperties().length, 0);
+        checkMultiProps("test2", "2", "//text.txt", null, null,"LOCKED", "xliff final");
+        checkMultiEnd();
+    }    
+    
     
     /**
      * Test with live example of XLIFF version 1.2, as similar with exported

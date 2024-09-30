@@ -499,4 +499,7 @@ public interface IEditor {
     default boolean isOrientationAllLtr() {
         return true;
     }
+    
+    /** Enable to edit a segment which was locked **/
+    void unlockSegment();
 }

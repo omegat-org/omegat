@@ -249,6 +249,9 @@ public final class Preferences {
     /** Workflow Option: Number of segments to load initially in editor */
     public static final String EDITOR_INITIAL_SEGMENT_LOAD_COUNT = "editor_initial_segment_load_count";
     public static final int EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT = 2000;
+    /** Activate support for locked segments **/
+    public static final String SUPPORT_LOCKED_SEGMENTS = "support_locked_segments";
+    
 
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";

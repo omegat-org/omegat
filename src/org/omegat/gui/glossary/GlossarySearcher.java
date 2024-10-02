@@ -55,12 +55,19 @@ import org.omegat.util.Token;
  */
 public class GlossarySearcher {
     private final ITokenizer tok;
-    private final Language lang;
+    private final Language srcLang;
+    private final Language targetLang;
     private final boolean mergeAltDefinitions;
 
-    public GlossarySearcher(ITokenizer tok, Language lang, boolean mergeAltDefinitions) {
+    public GlossarySearcher(ITokenizer tok, Language srcLang, boolean mergeAltDefinitions) {
+        this(tok, srcLang, Core.getProject().getProjectProperties().getTargetLanguage(), mergeAltDefinitions);
+    }
+
+    public GlossarySearcher(ITokenizer tok, Language srcLang, Language targetLang,
+            boolean mergeAltDefinitions) {
         this.tok = tok;
-        this.lang = lang;
+        this.srcLang = srcLang;
+        this.targetLang = targetLang;
         this.mergeAltDefinitions = mergeAltDefinitions;
     }
 
@@ -89,6 +96,9 @@ public class GlossarySearcher {
         // 5) by alphabet of localized term
         // Then remove the duplicates and combine the synonyms.
         sortGlossaryEntries(result);
+        final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
+        final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
+        sortGlossaryEntries(srcLangCollator, targetLangCollator, result);
         return filterGlossary(result, mergeAltDefinitions);
     }
 
@@ -213,7 +223,7 @@ public class GlossarySearcher {
 
     private Token[] tokenize(String str) {
         // Make comparison case-insensitive
-        String strLower = str.toLowerCase(lang.getLocale());
+        String strLower = str.toLowerCase(srcLang.getLocale());
         if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
                 Preferences.GLOSSARY_STEMMING_DEFAULT)) {
             return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
@@ -246,52 +256,68 @@ public class GlossarySearcher {
         return false;
     }
 
-    static void sortGlossaryEntries(List<GlossaryEntry> entries) {
+    /**
+     * sort glossary entries for test.
+     * 
+     * @param entries
+     */
+    void sortGlossaryEntries(List<GlossaryEntry> entries) {
+        final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
+        final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
+        sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
+    }
+
+    private void sortGlossaryEntries(Collator srcLangCollator, Collator targetLangCollator,
+            List<GlossaryEntry> entries) {
         entries.sort((o1, o2) -> {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
             if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true)
-                    && (o2.getSrcText().contains(o1.getSrcText())
-                            || o1.getSrcText().contains(o2.getSrcText()))) {
+                    && (o2.getSrcText().startsWith(o1.getSrcText())
+                            || o1.getSrcText().startsWith(o2.getSrcText()))) {
                 // longer is better if one contains another
                 c = o2.getSrcText().length() - o1.getSrcText().length();
             }
             // sort source text alphabetically.
-            // Notion of alphabetical order is language-dependent 
+            // Notion of alphabetical order is language-dependent
             if (c == 0) {
-                c = compareLanguageDependent(Core.getProject().getProjectProperties().getSourceLanguage(), o1.getSrcText(), o2.getSrcText());
+                c = compareLanguageDependent(srcLangCollator, o1.getSrcText(), o2.getSrcText());
             }
             if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
                 c = o2.getLocText().length() - o1.getLocText().length();
             }
             if (c == 0) {
-                c = compareLanguageDependent(Core.getProject().getProjectProperties().getTargetLanguage(), o1.getSrcText(), o2.getSrcText());
+                c = compareLanguageDependent(targetLangCollator, o1.getLocText(), o2.getLocText());
             }
             return c;
         });
     }
-    
-    private static int compareLanguageDependent(Language lang, String s1, String s2) {
-        Collator langCollator = Collator.getInstance(lang.getLocale());
-        // Use primary criteria - for most languages written with latin alphabet, PRIMARY means case-insensitive 
-        // (see https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+
+    private int compareLanguageDependent(Collator langCollator, String s1, String s2) {
+        // Use primary criteria - for most languages written with latin
+        // alphabet, PRIMARY means case-insensitive
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
         langCollator.setStrength(Collator.PRIMARY);
         int c = langCollator.compare(s1, s2);
         if (c != 0) {
             return c;
         }
-        // Use secondary criteria - for most languages written with latin alphabet, SECONDARY means ignore accents 
-        // (see https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+        // Use secondary criteria - for most languages written with latin
+        // alphabet, SECONDARY means ignore accents
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
         langCollator.setStrength(Collator.SECONDARY);
         c = langCollator.compare(s1, s2);
         if (c != 0) {
             return c;
         }
         // Use tertiary criteria - language-dependent
-        // (see https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#TERTIARY)
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#TERTIARY)
         langCollator.setStrength(Collator.TERTIARY);
-        return langCollator.compare(s1, s2);             
+        return langCollator.compare(s1, s2);
     }
 
     private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result,

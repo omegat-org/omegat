@@ -95,7 +95,6 @@ public class GlossarySearcher {
         // 4) by length of localized term (optional)
         // 5) by alphabet of localized term
         // Then remove the duplicates and combine the synonyms.
-        sortGlossaryEntries(result);
         final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
         final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
         sortGlossaryEntries(srcLangCollator, targetLangCollator, result);

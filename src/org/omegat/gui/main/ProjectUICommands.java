@@ -1314,6 +1314,53 @@ public final class ProjectUICommands {
         }
     }
 
+    /**
+     * Open file or parent directory of writeable glossary with OS's standard
+     * file manager.
+     *
+     * @param parentDirectory
+     *            true when opening parent folder, otherwise false.
+     */
+    public static void openWritableGlossaryFile(boolean parentDirectory) {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+        String path = Core.getProject().getProjectProperties().getWriteableGlossary();
+        if (StringUtil.isEmpty(path)) {
+            return;
+        }
+        File toOpen = new File(path);
+        if (parentDirectory) {
+            toOpen = toOpen.getParentFile();
+        }
+        openFile(toOpen);
+    }
+
+    /**
+     * Open specified path with OS standard file manager.
+     *
+     * @param path
+     *            to open.
+     */
+    public static void openFile(File path) {
+        try {
+            path = path.getCanonicalFile(); // Normalize file name in case it is
+            // displayed
+        } catch (Exception ex) {
+            // Ignore
+        }
+        if (!path.exists()) {
+            Core.getMainWindow().showStatusMessageRB("LFC_ERROR_FILE_DOESNT_EXIST", path);
+            return;
+        }
+        try {
+            DesktopWrapper.open(path);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "RPF_ERROR");
+            Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");
+        }
+    }
+
     private static boolean ensureProjectDir(File dir) {
         if (!dir.isDirectory() && !dir.mkdirs()) {
             Log.logErrorRB("CT_ERROR_CREATING_PROJECT_DIR", dir);

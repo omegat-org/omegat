@@ -28,10 +28,13 @@ package org.omegat.languagetools;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -44,6 +47,7 @@ import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.server.HTTPServer;
+import org.languagetool.server.HTTPServerConfig;
 
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
@@ -103,18 +107,35 @@ public class LanguageToolTest {
         assertEquals(0, matches.size());
     }
 
+    private static final int[] FREE_PORT_RANGE = {8081, 10080, 10081, 10082, 10083, 10084, 10085, 10086};
+
+    private int getFreePort() {
+        for (int p : FREE_PORT_RANGE) {
+            try (ServerSocket serverSocket = new ServerSocket(p)) {
+                return serverSocket.getLocalPort();
+            } catch (IOException ignored) {
+            }
+        }
+        return -1;
+    }
+
     @Test
     public void testRemoteServer() throws Exception {
-        HTTPServer server = new HTTPServer();
+        int port = getFreePort();
+        assertNotEquals("Port has been already used.", -1, port);
+        HTTPServerConfig config = new HTTPServerConfig(port);
+        HTTPServer server = new HTTPServer(config);
         try {
             server.run();
 
+            String urlBase = "http://localhost:" + port;
+
             assertThrows("URL not specifying API actions should fail due to missing argument.",
                     java.lang.Exception.class,
-                    () -> new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081"));
+                    () -> new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, urlBase));
 
             ILanguageToolBridge bridge = new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG,
-                    "http://localhost:8081/v2/check");
+                    urlBase + "/v2/check");
 
             // Set some rules to prevent the server from looking at config
             // files.

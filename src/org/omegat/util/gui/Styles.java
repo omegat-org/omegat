@@ -110,7 +110,7 @@ public final class Styles {
 
         COLOR_PARAGRAPH_START(UIManager.getColor("OmegaT.paragraphStart")),
 
-        COLOR_MARK_COMES_FROM_TM(UIManager.getColor("OmegaT.markComesFromTm")),
+        COLOR_MARK_COMES_FROM_TM_MT(UIManager.getColor("OmegaT.markComesFromTmMt")),
 
         COLOR_MARK_COMES_FROM_TM_XICE(UIManager.getColor("OmegaT.markComesFromTmXice")),
 

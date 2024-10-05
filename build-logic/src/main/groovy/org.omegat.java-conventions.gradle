@@ -13,7 +13,7 @@ plugins {
 def localPropsFile = file('local.properties')
 
 // Define target Java version to compatible.
-def javaVersion = 11
+def javaVersion = 17
 
 // Flag to detect CI/CD environment
 def envIsCi = project.hasProperty('envIsCi') as Boolean
@@ -39,8 +39,8 @@ java {
     withSourcesJar()
     withJavadocJar()
     if (isWindows11 && isArm64) {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     } else {
         toolchain {
             languageVersion = JavaLanguageVersion.of(javaVersion)

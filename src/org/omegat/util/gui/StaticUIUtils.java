@@ -67,6 +67,7 @@ import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
 import org.omegat.gui.main.DockableScrollPane;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
@@ -470,5 +471,13 @@ public final class StaticUIUtils {
             Dockable dockable = desktop.getContext().getDockableByKey(scrollPane.getDockKey().getKey());
             desktop.setAutoHide(dockable, false);
         }
+    }
+
+    /**
+     * Whether run on GUI or not.
+     */
+    public static boolean isGUI() {
+        IMainWindow mainWindow = Core.getMainWindow();
+        return mainWindow != null && mainWindow.getApplicationFrame() != null;
     }
 }

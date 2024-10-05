@@ -163,12 +163,6 @@ public class FilterMasterTest {
                     }
 
                     @Override
-                    public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                            String comment, IFilter filter) {
-                        /* empty */
-                    }
-
-                    @Override
                     public void linkPrevNextSegments() {
                         /* empty */
                     }

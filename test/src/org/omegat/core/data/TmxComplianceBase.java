@@ -153,6 +153,7 @@ public abstract class TmxComplianceBase {
                 assertNotNull(e);
                 return e.translation;
             }
+
             @Override
             String getCurrentFile() {
                 return fileTextIn;
@@ -168,20 +169,16 @@ public abstract class TmxComplianceBase {
         final List<String> result = new ArrayList<String>();
 
         IParseCallback callback = new IParseCallback() {
+            @Override
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, IFilter filter) {
-            }
-
-            public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, List<ProtectedPart> protectedParts) {
+                    String comment, String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
                 addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
             }
 
             @Override
-            public void addEntryWithProperties(String id, String source, String translation,
-                    boolean isFuzzy, String[] props, String path,
-                    IFilter filter, List<ProtectedPart> protectedParts) {
+            public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
+                    String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 result.addAll(Core.getSegmenter().segment(context.getSourceLang(), source, null, null));
             }
 

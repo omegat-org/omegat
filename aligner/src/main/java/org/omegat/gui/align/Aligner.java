@@ -262,14 +262,14 @@ public class Aligner {
                     @Override
                     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
                             String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                        process(source, id != null ? id : path != null ? path : null);
+                        process(source, id != null ? id : path);
                     }
 
                     @Override
                     public void addEntryWithProperties(String id, String source, String translation,
                             boolean isFuzzy, String[] props, String path, IFilter filter,
                             List<ProtectedPart> protectedParts) {
-                        process(source, id != null ? id : path != null ? path : null);
+                        process(source, id != null ? id : path);
 
                     }
 

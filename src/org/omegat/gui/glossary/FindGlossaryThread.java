@@ -86,11 +86,13 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             return Collections.emptyList();
         }
 
-        Language language = Core.getProject().getProjectProperties().getSourceLanguage();
+        Language srcLang = Core.getProject().getProjectProperties().getSourceLanguage();
+        Language trLang = Core.getProject().getProjectProperties().getTargetLanguage();
+
         boolean merge = Preferences.isPreferenceDefault(Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS,
                 Preferences.GLOSSARY_MERGE_ALTERNATE_DEFINITIONS_DEFAULT);
 
-        GlossarySearcher searcher = new GlossarySearcher(tok, language, merge) {
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, merge) {
             @Override
             protected void checkCancelled() {
                 checkEntryChanged();

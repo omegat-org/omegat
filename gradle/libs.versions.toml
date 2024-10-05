@@ -53,7 +53,8 @@ flatlaf="3.5.4"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
-swing_extra_locales = "0.3.3"
+swing_extra_locales = "0.3.2"
+jgit_gpg_signer = "0.2.3"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -126,6 +127,7 @@ jgit-ssh = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache", ve
 jgit-agent = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache.agent", version.ref = "jgit"}
 jgit-http = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.http.apache", version.ref = "jgit"}
 jgit-bc = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.gpg.bc", version.ref = "jgit"}
+jgit-gpg-signer = {group = "tokyo.northside", name = "jgit-gpg-signer", version.ref = "jgit_gpg_signer"}
 bc-prov = {group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bc"}
 bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
@@ -181,6 +183,6 @@ caffeine = ["caffeine", "caffeine-jcache"]
 languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr", "languagetool-en",
     "languagetool-ja", "languagetool-pl"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
-jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
+jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh", "jgit-gpg-signer"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]

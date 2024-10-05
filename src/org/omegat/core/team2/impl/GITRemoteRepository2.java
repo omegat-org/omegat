@@ -55,7 +55,6 @@ import org.eclipse.jgit.dircache.DirCacheIterator;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
-import org.eclipse.jgit.lib.GpgSigner;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Ref;
@@ -79,6 +78,7 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.eclipse.jgit.util.FS;
+import tokyo.northside.jgit.signing.GpgSetup;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -232,7 +232,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
         String signingkey = repository.getConfig().getString("user", null, "signingkey");
         if (!StringUtil.isEmpty(signingkey)) {
-            GpgSigner.setDefault(new GITExternalGpgSigner());
+            GpgSetup.update("gpg");
         }
 
         // cleanup repository

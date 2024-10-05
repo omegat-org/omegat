@@ -35,7 +35,7 @@ tasks.named('updateDaemonJvm') {
 }
 
 // Define target Java version to compatible.
-def javaVersion = 11;
+def javaVersion = 17;
 
 // OmegaT distribution package meta data.
 def shortDescription = 'The free translation memory tool'

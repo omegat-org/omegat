@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   45 Enhancement
-  73 Bug fixes
+  74 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -138,6 +138,9 @@
 
 
   Bug fixes:
+
+  - Console-stats command failed with error
+  https://sourceforge.net/p/omegat/bugs/1267/
 
   - Removal of MED package save/load feature
   https://sourceforge.net/p/omegat/bugs/1266/

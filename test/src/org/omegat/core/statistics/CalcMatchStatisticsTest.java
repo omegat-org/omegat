@@ -375,18 +375,24 @@ public class CalcMatchStatisticsTest {
                 "RowMatch85", "RowMatch75", "RowMatch50", "RowNoMatch", "Total" };
 
         private MatchStatCounts result;
+        private final IStatsConsumer callback;
 
         CalcMatchStatisticsMock(IStatsConsumer callback) {
             super(callback, false);
+            this.callback = callback;
         }
 
         @Override
         public void run() {
             entriesToProcess = Core.getProject().getAllEntries().size();
             result = calcTotal(false);
+            callback.finishData();
         }
 
         public String[][] getTable() {
+            if (result == null) {
+                return null;
+            }
             return result.calcTable(rowsTotal, i -> i != 1);
         }
     }

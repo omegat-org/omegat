@@ -53,7 +53,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -92,7 +92,7 @@ public final class ProjectFileStorage {
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
         mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
-        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.registerModule(new JakartaXmlBindAnnotationModule());
         SimpleModule module = new SimpleModule();
         TypeFactory typeFactory = mapper.getTypeFactory();
         final RepositoryDefinition def = new RepositoryDefinition();

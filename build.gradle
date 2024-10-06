@@ -60,6 +60,7 @@ ext {
 }
 def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
 def omtWebsite = 'https://omegat.org'
+def xjcOutputDir = 'generated/xjc/main/'
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
@@ -197,7 +198,8 @@ allprojects {
 sourceSets {
     main {
         java {
-            srcDir 'src'
+            srcDir layout.buildDirectory.dir(xjcOutputDir)
+            srcDir'src'
         }
         resources {
             srcDir 'src'
@@ -260,9 +262,9 @@ dependencies {
         runtimeOnly(libs.slf4j.jdk14)
 
         // jaxb gen compilation
-        implementation(libs.jaxb.api)
-        runtimeOnly(libs.jaxb.core)
-        runtimeOnly(libs.jaxb.runtime)
+        implementation(libs.jaxb4.api)
+        runtimeOnly(libs.jaxb4.core)
+        runtimeOnly(libs.jaxb4.runtime)
 
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
@@ -376,7 +378,9 @@ dependencies {
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
-    jaxb(libs.jaxb.xjc)
+    jaxb(libs.jaxb4.xjc)
+    jaxb(libs.jaxb4.api)
+    jaxb(libs.jaxb4.runtime)
 
     // genMac only
     genMac(libs.omegat.appbundler)
@@ -1448,31 +1452,34 @@ tasks.register('checksums') {
     }
 }
 
-tasks.register('genJAXB') {
-    description = 'Generate classes for loading and manipulating XML formats'
+tasks.register('createXjcOutputDir') {
+    mkdir(layout.buildDirectory.dir(xjcOutputDir))
 }
 
 ext.makeJaxbTask = { args ->
     def taskName = "gen${args.name.capitalize()}"
     tasks.register(taskName, JavaExec) {
+        dependsOn createXjcOutputDir
         classpath = configurations.jaxb
         mainClass = 'com.sun.tools.xjc.XJCFacade'
         delegate.args args.args
-        outputs.dir args.outdir
+        outputs.dir layout.buildDirectory.dir(xjcOutputDir + args.outdir)
+        jvmArguments = ["-Duser.language=en"]
     }
-    genJAXB.dependsOn taskName
+    compileJava.dependsOn taskName
+    sourcesJar.dependsOn taskName
 }
 
-makeJaxbTask(name: 'segmentation', outdir: 'src/gen/core/segmentation',
-             args: ['-no-header', '-d', 'src', '-p', 'gen.core.segmentation', 'src/schemas/srx20.xsd'])
-makeJaxbTask(name: 'filters', outdir: 'src/gen/core/filters',
-             args: ['-no-header', '-d', 'src', '-p', 'gen.core.filters', 'src/schemas/filters.xsd'])
-makeJaxbTask(name: 'tbx', outdir: 'src/gen/core/tbx',
-             args: ['-no-header', '-d', 'src', '-p', 'gen.core.tbx', 'src/schemas/tbx.xsd'])
-makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',
-             args: ['-no-header', '-d', 'src', '-p', 'gen.core.project', 'src/schemas/project_properties.xsd'])
-makeJaxbTask(name: 'tmx14', outdir: 'src/gen/core/tmx14',
-             args: ['-no-header', '-d', 'src', '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])
+makeJaxbTask(name: 'segmentation', outdir: 'gen/core/segmentation',
+             args: ['-no-header', '-d', "$buildDir/" + xjcOutputDir, '-p', 'gen.core.segmentation', 'src/schemas/srx20.xsd'])
+makeJaxbTask(name: 'filters', outdir: 'gen/core/filters',
+             args: ['-no-header', '-d', "$buildDir/" + xjcOutputDir, '-p', 'gen.core.filters', 'src/schemas/filters.xsd'])
+makeJaxbTask(name: 'tbx', outdir: 'gen/core/tbx',
+             args: ['-no-header', '-d', "$buildDir/" + xjcOutputDir, '-p', 'gen.core.tbx', 'src/schemas/tbx.xsd'])
+makeJaxbTask(name: 'project', outdir: 'gen/core/project',
+             args: ['-no-header', '-d', "$buildDir/" + xjcOutputDir, '-p', 'gen.core.project', 'src/schemas/project_properties.xsd'])
+makeJaxbTask(name: 'tmx14', outdir: 'gen/core/tmx14',
+             args: ['-no-header', '-d', "$buildDir/" + xjcOutputDir, '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])
 
 tasks.register('changedOnBranch') {
     description = 'List files that have been modified on this git branch.'
@@ -1553,6 +1560,9 @@ tasks.register('debug', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--illegal-access=warn"])
     debug true
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 tasks.register('runOnJava17', JavaExec) {
@@ -1565,6 +1575,9 @@ tasks.register('runOnJava17', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 tasks.register('runOnJava21', JavaExec) {
@@ -1577,6 +1590,9 @@ tasks.register('runOnJava21', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 // E.g. when doing `build`, run checks before making distfiles
@@ -1587,6 +1603,9 @@ test {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 tasks.register('testIntegration', JavaExec) {
@@ -1599,6 +1618,9 @@ tasks.register('testIntegration', JavaExec) {
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 tasks.register('testOnJava17', Test) {
@@ -1611,6 +1633,9 @@ tasks.register('testOnJava17', Test) {
         systemProperty 'java.awt.headless', 'true'
     }
     group = 'verification'
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 tasks.register('testOnJava21', Test) {
@@ -1623,6 +1648,9 @@ tasks.register('testOnJava21', Test) {
         systemProperty 'java.awt.headless', 'true'
     }
     group = 'verification'
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 tasks.register('testAcceptance', Test) {
@@ -1638,6 +1666,9 @@ tasks.register('testAcceptance', Test) {
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties
     shouldRunAfter(tasks.test)
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.tasks.jar
+    dependsOn firstSteps
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')
@@ -1753,9 +1784,6 @@ tasks.withType(JavaExec).configureEach {
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
     maxHeapSize = findProperty('runMaxHeapSize')
-    // Ask modules to be up-to-date before run task executed
-    dependsOn subprojects.tasks.jar
-    dependsOn firstSteps
 }
 
 tasks.register('printVersion') {

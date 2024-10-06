@@ -115,7 +115,7 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     public JFrame getApplicationFrame() {
-        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+        return null;
     }
 
     public void lockUI() {

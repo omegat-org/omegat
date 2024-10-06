@@ -6,6 +6,7 @@
  Copyright (C) 2006 Henry Pijffers
                2013 Yu Tang
                2014-2015 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -36,7 +37,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.FocusAdapter;
@@ -47,12 +47,12 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -67,7 +67,8 @@ import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
 import org.omegat.gui.main.DockableScrollPane;
-import org.omegat.util.Java8Compat;
+import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.FunctionalAction;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
@@ -93,9 +94,10 @@ public final class StaticUIUtils {
      * {@link JDialog#dispose()} will be called.
      *
      * @param dialog
+     *            to configure.
      */
     public static void setEscapeClosable(JDialog dialog) {
-        setEscapeAction(dialog.getRootPane(), makeCloseAction(dialog));
+        setEscapeAction(dialog.getRootPane(), new FunctionalAction(e -> closeWindowByEvent(dialog)));
     }
 
     /**
@@ -103,19 +105,10 @@ public final class StaticUIUtils {
      * will be called.
      *
      * @param frame
+     *            to configure.
      */
     public static void setEscapeClosable(JFrame frame) {
-        setEscapeAction(frame.getRootPane(), makeCloseAction(frame));
-    }
-
-    @SuppressWarnings("serial")
-    public static Action makeCloseAction(final Window window) {
-        return new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                closeWindowByEvent(window);
-            }
-        };
+        setEscapeAction(frame.getRootPane(), new FunctionalAction(e -> closeWindowByEvent(frame)));
     }
 
     /**
@@ -130,7 +123,9 @@ public final class StaticUIUtils {
      * Associate a custom action to be called when the Esc key is pressed.
      *
      * @param dialog
+     *            target dialog.
      * @param action
+     *            object to set.
      */
     public static void setEscapeAction(JDialog dialog, Action action) {
         setEscapeAction(dialog.getRootPane(), action);
@@ -140,7 +135,9 @@ public final class StaticUIUtils {
      * Associate a custom action to be called when the Esc key is pressed.
      *
      * @param frame
+     *            target frame.
      * @param action
+     *            object to set.
      */
     public static void setEscapeAction(JFrame frame, Action action) {
         setEscapeAction(frame.getRootPane(), action);
@@ -150,7 +147,9 @@ public final class StaticUIUtils {
      * Associate a custom action to be called when the Esc key is pressed.
      *
      * @param pane
+     *            target UI pane.
      * @param action
+     *            object to set.
      */
     public static void setEscapeAction(JRootPane pane, Action action) {
         // Handle escape key to close the window
@@ -215,8 +214,7 @@ public final class StaticUIUtils {
         }
 
         if (chomp != null) {
-            text = text.substring(0, chompStart) + StringUtil.TRUNCATE_CHAR
-                    + text.substring(chompEnd, text.length());
+            text = text.substring(0, chompStart) + StringUtil.TRUNCATE_CHAR + text.substring(chompEnd);
         }
         return text;
     }
@@ -319,6 +317,14 @@ public final class StaticUIUtils {
         }
     }
 
+    /**
+     * list hierarchy for debug.
+     * 
+     * @param parent
+     *            component to determine.
+     * @return list of components.
+     */
+    @SuppressWarnings("unused")
     public static List<Component> listHierarchy(Component parent) {
         List<Component> cs = new ArrayList<>();
         visitHierarchy(parent, cs::add);
@@ -374,7 +380,7 @@ public final class StaticUIUtils {
     public static void setWindowIcon(Window window) {
         List<Image> icons;
         if (Platform.isMacOSX()) {
-            icons = Arrays.asList(OSXIntegration.APP_ICON_MAC);
+            icons = Collections.singletonList(OSXIntegration.APP_ICON_MAC);
         } else {
             icons = Arrays.asList(ResourcesUtil.APP_ICON_16X16, ResourcesUtil.APP_ICON_32X32);
         }
@@ -431,34 +437,29 @@ public final class StaticUIUtils {
         return sb.toString();
     }
 
-    @SuppressWarnings("serial")
     public static void makeUndoable(JTextComponent comp) {
         UndoManager manager = new UndoManager();
         comp.getDocument().addUndoableEditListener(manager);
 
         // Handle undo (Ctrl/Cmd+Z);
-        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z, Java8Compat.getMenuShortcutKeyMaskEx(), false);
-        Action undoAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (manager.canUndo()) {
-                    manager.undo();
-                }
-            }
-        };
+        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(), false);
         comp.getInputMap().put(undo, "UNDO");
-        comp.getActionMap().put("UNDO", undoAction);
+        comp.getActionMap().put("UNDO", new FunctionalAction(e -> {
+            if (manager.canUndo()) {
+                manager.undo();
+            }
+        }));
 
         // Handle redo (Ctrl/Cmd+Y);
-        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y, Java8Compat.getMenuShortcutKeyMaskEx(), false);
-        Action redoAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (manager.canRedo()) {
-                    manager.redo();
-                }
-            }
-        };
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx(), false);
         comp.getInputMap().put(redo, "REDO");
-        comp.getActionMap().put("REDO", redoAction);
+        comp.getActionMap().put("REDO", new FunctionalAction(e -> {
+            if (manager.canRedo()) {
+                manager.redo();
+            }
+        }));
     }
 
     /**
@@ -470,5 +471,13 @@ public final class StaticUIUtils {
             Dockable dockable = desktop.getContext().getDockableByKey(scrollPane.getDockKey().getKey());
             desktop.setAutoHide(dockable, false);
         }
+    }
+
+    /**
+     * Whether run on GUI or not.
+     */
+    public static boolean isGUI() {
+        IMainWindow mainWindow = Core.getMainWindow();
+        return mainWindow != null && mainWindow.getApplicationFrame() != null;
     }
 }

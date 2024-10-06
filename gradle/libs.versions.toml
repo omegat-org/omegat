@@ -1,7 +1,7 @@
 [versions]
 slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
 slf4j-format = "0.5.1"
-groovy = "4.0.22"
+groovy = "4.0.23"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.16.1"
@@ -26,7 +26,7 @@ bc = "1.78.1"
 nashorn = "15.4"
 caffeine = "3.1.8"
 wiremock = "3.9.1"
-vldocking = "3.0.5-2"
+vldocking = "3.1.1"
 xmlunit = "2.10.0"
 assertj = "3.26.0"
 appbundler = "1.2.1"
@@ -52,7 +52,7 @@ jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.4.4"
 flatlaf="3.5.1"
-assertj_swing_junit = "4.0.0-beta-1"
+assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 
 [libraries]
@@ -185,7 +185,7 @@ dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
 
 [plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.0.21"}
+spotbugs = {id = "com.github.spotbugs", version = "6.0.24"}
 spotless = {id = "com.diffplug.spotless", version = "6.25.0"}
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
 versions = {id = "com.github.ben-manes.versions", version = "0.51.0"}

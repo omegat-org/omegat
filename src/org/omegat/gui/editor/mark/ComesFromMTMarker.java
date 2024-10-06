@@ -59,7 +59,7 @@ public class ComesFromMTMarker implements IMarker {
             }
         });
         highlightPainter = new TransparentHighlightPainter(
-                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM.getColor(), 0.5F);
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_MT.getColor(), 0.5F);
     }
 
     public void setMark(SourceTextEntry ste, String text) {
@@ -73,7 +73,7 @@ public class ComesFromMTMarker implements IMarker {
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) {
         synchronized (this) {
-            if (!isActive || ste != markedSte || !translationText.equals(markedText)) {
+            if (!isActive || ste != markedSte || translationText == null || !translationText.equals(markedText)) {
                 return null;
             }
         }

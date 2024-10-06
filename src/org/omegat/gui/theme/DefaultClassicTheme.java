@@ -95,39 +95,36 @@ public class DefaultClassicTheme extends DelegatingLookAndFeel {
         } catch (IOException e) {
             Log.log(e);
         }
-        // FIXME: VLDocking values have to be set to the "developer defaults"
-        // not the "LAF defaults" because that's where
-        // DockingUISettings#installUI puts them
-        UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
-        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
-        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
-        UIManager.put("DockViewTitleBar.maximize", getIcon("maximize.gif"));
-        UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("maximize.rollover.gif"));
-        UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("maximize.pressed.gif"));
-        UIManager.put("DockViewTitleBar.restore", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.restore.rollover", getIcon("restore.rollover.gif"));
-        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif"));
-        UIManager.put("DockViewTitleBar.dock", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif"));
-        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif"));
-        UIManager.put("DockViewTitleBar.float", getIcon("undock.gif"));
-        UIManager.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif"));
-        UIManager.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif"));
-        UIManager.put("DockViewTitleBar.attach", getIcon("dock.gif"));
-        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));
-        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));
-        UIManager.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif"));
-        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif"));
-        UIManager.put("DockViewTitleBar.menu.restore", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.menu.dock", getIcon("restore.gif"));
-        UIManager.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));
-        UIManager.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));
-        UIManager.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
-        UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
+        defaults.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
+        defaults.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
+        defaults.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
+        defaults.put("DockViewTitleBar.maximize", getIcon("maximize.gif"));
+        defaults.put("DockViewTitleBar.maximize.rollover", getIcon("maximize.rollover.gif"));
+        defaults.put("DockViewTitleBar.maximize.pressed", getIcon("maximize.pressed.gif"));
+        defaults.put("DockViewTitleBar.restore", getIcon("restore.gif"));
+        defaults.put("DockViewTitleBar.restore.rollover", getIcon("restore.rollover.gif"));
+        defaults.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif"));
+        defaults.put("DockViewTitleBar.dock", getIcon("restore.gif"));
+        defaults.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif"));
+        defaults.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif"));
+        defaults.put("DockViewTitleBar.float", getIcon("undock.gif"));
+        defaults.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif"));
+        defaults.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif"));
+        defaults.put("DockViewTitleBar.attach", getIcon("dock.gif"));
+        defaults.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));
+        defaults.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));
+        defaults.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif"));
+        defaults.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif"));
+        defaults.put("DockViewTitleBar.menu.restore", getIcon("restore.gif"));
+        defaults.put("DockViewTitleBar.menu.dock", getIcon("restore.gif"));
+        defaults.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));
+        defaults.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));
+        defaults.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));
+        defaults.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));
+        defaults.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
+        defaults.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
+        defaults.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
+        defaults.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
         return defaults;
     }
 }

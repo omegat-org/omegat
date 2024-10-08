@@ -128,6 +128,10 @@ public abstract class DelegatingLookAndFeel extends BasicLookAndFeel {
         systemLookAndFeel.uninitialize();
     }
 
+    public String getSystemLafID() {
+        return systemLookAndFeel.getID();
+    }
+
     @Override
     public UIDefaults getDefaults() {
         return ExtraLocales.setDefaults(systemLookAndFeel.getDefaults());

@@ -76,7 +76,7 @@ public class DefaultClassicTheme extends DelegatingLookAndFeel {
     }
 
     public UIDefaults getDefaults() {
-        return setDefaults(systemLookAndFeel.getDefaults());
+        return setDefaults(super.getDefaults());
     }
 
     /**

@@ -84,7 +84,7 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
     @Override
     public UIDefaults getDefaults() {
         // Use system LAF ID because we use the ID to see if it's e.g. Windows
-        return setDefaults(systemLookAndFeel.getDefaults(), systemLookAndFeel.getID());
+        return setDefaults(super.getDefaults(), getSystemLafID());
     }
 
     /**

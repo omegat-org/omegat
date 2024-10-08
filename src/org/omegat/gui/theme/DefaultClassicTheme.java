@@ -39,6 +39,7 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 
+import org.omegat.swing.extra.ExtraLocales;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.UIDesignManager;
@@ -76,7 +77,7 @@ public class DefaultClassicTheme extends DelegatingLookAndFeel {
     }
 
     public UIDefaults getDefaults() {
-        return setDefaults(super.getDefaults());
+        return setDefaults(systemLookAndFeel.getDefaults());
     }
 
     /**
@@ -88,6 +89,7 @@ public class DefaultClassicTheme extends DelegatingLookAndFeel {
      * @return the modified {@link UIDefaults} object
      */
     public static UIDefaults setDefaults(UIDefaults defaults) {
+        ExtraLocales.setDefaults(defaults);
         defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, Color.BLACK));
 
         try {

@@ -58,9 +58,8 @@ public class DefaultFlatLightTheme extends FlatLaf {
     @Override
     public UIDefaults getDefaults() {
         UIDefaults origin = new FlatLightLaf().getDefaults();
-        UIDefaults defaults = DefaultFlatTheme.setDefaults(origin, ID); // get
-                                                                        // omegat
-                                                                        // defaults
+        // get omegat defaults
+        UIDefaults defaults = DefaultFlatTheme.setDefaults(origin, ID);
         UIDefaults custom = setLightDefaults(defaults);
         UIManager.put("DockViewTitleBar.border", new MatteBorder(1, 1, 1, 1, custom.getColor("borderColor")));
         DefaultFlatDarkTheme.setupDecoration();

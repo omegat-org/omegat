@@ -198,7 +198,7 @@ public class Rule implements Serializable {
 
     /** Indicates whether some other Rule is "equal to" this one. */
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof Rule)) {
+        if (!(obj instanceof Rule)) {
             return false;
         }
         Rule that = (Rule) obj;

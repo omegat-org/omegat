@@ -31,9 +31,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import gen.core.segmentation.Languagemap;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
+
+import gen.core.segmentation.Languagemap;
 
 /**
  * A class representing the language rules and their mapping to the segmentation
@@ -51,8 +52,8 @@ public class MapRule implements Serializable {
 
     /** creates an initialized MapRule */
     public MapRule(String language, String pattern, List<Rule> rules) {
-        this.setLanguage(language);
         this.setPattern(pattern);
+        this.setLanguage(language);
         this.setRules(rules);
     }
 
@@ -113,7 +114,7 @@ public class MapRule implements Serializable {
     /** Sets Pattern for the language/country ISO code (of a form LL-CC). */
     public void setPattern(String pattern) throws PatternSyntaxException {
         // Fix for bug [1643500]
-        // language code in segmentation rule is case sensitive
+        // language code in segmentation rule is a case-sensitive
         // Correction contributed by Tiago Saboga.
         this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
     }
@@ -144,7 +145,7 @@ public class MapRule implements Serializable {
 
     /** Indicates whether some other MapRule is "equal to" this one. */
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof MapRule)) {
+        if (!(obj instanceof MapRule)) {
             return false;
         }
         MapRule that = (MapRule) obj;

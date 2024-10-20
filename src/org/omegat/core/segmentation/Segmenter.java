@@ -55,7 +55,7 @@ public final class Segmenter {
     }
 
     /**
-     * Segments the paragraph to sentences according to currently setup rules.
+     * Segments the paragraph to sentences, according to currently setup rules.
      * <p>
      * Bugfix for <a href="https://sourceforge.net/p/omegat/bugs/83/">bug 83</a>
      * : Sentences are returned without spaces in the beginning and at the end

@@ -40,6 +40,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,6 +55,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import org.jetbrains.annotations.NotNull;
 
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -383,13 +385,13 @@ public class SRX implements Serializable {
      *            language name
      * @return list of rules
      */
-    private static List<Rule> getRulesForLanguage(final SRX source, String langName) {
+    private static @NotNull List<Rule> getRulesForLanguage(final SRX source, String langName) {
         for (MapRule mr : source.getMappingRules()) {
             if (langName.equals(mr.getLanguage())) {
                 return mr.getRules();
             }
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -397,7 +399,7 @@ public class SRX implements Serializable {
      * configuration.
      */
     static class MyExceptionListener implements ExceptionListener {
-        private List<Exception> exceptionsList = new ArrayList<Exception>();
+        private final List<Exception> exceptionsList = new ArrayList<>();
         private boolean exceptionOccured = false;
 
         public void exceptionThrown(Exception e) {

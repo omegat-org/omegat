@@ -42,6 +42,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import org.omegat.swing.extra.ExtraLocales;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -98,6 +99,9 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
      * @return the modified {@link UIDefaults} object
      */
     public static UIDefaults setDefaults(UIDefaults defaults, String lafId) {
+        // load extra locales
+        ExtraLocales.setDefaults(defaults);
+
         // Colors
         // #EEEEEE on Metal & OS X LAF
         Color standardBgColor = defaults.getColor("Panel.background");

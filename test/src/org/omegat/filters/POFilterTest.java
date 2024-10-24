@@ -52,16 +52,16 @@ public class POFilterTest extends TestFilterBase {
 
         parse2(new PoFilter(), "test/data/filters/po/file-POFilter-be.po", data, tmx);
 
-        assertEquals(data.get("non-fuzzy"), "non-fuzzy translation");
-        assertEquals(tmx.get("[PO-fuzzy] fuzzy"), "fuzzy translation");
-        assertEquals(tmx.get("[PO-fuzzy] Delete Account"), "Supprimer le compte");
-        assertEquals(tmx.get("[PO-fuzzy] Delete Accounts"), "Supprimer des comptes");
+        assertEquals("non-fuzzy translation", data.get("non-fuzzy"));
+        assertEquals("fuzzy translation", tmx.get("[PO-fuzzy] fuzzy"));
+        assertEquals("Supprimer le compte", tmx.get("[PO-fuzzy] Delete Account"));
+        assertEquals("Supprimer des comptes", tmx.get("[PO-fuzzy] Delete Accounts"));
     }
 
     @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/po/file-POFilter-multiple.po";
-        Map<String, String> options = new TreeMap<String, String>();
+        Map<String, String> options = new TreeMap<>();
         options.put("skipHeader", "true");
         TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
 
@@ -76,7 +76,8 @@ public class POFilterTest extends TestFilterBase {
         checkMulti("source3", null, "", null, null, null);
         checkMulti("source1", null, "", null, null, null);
         checkMulti("source1", null, "other context", null, null, null);
-        checkMulti("source4", null, "one more context", null, null, null);
+        checkMulti("source4", null, "one more context", null, null,
+        OStrings.getString("POFILTER_SINGULAR_COMMENT") + "\nsource4\n\n");
         checkMulti("source4", null, "one more context[1]", null, null,
                 StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), 1) + "\n");
         checkMulti("source4", null, "one more context[2]", null, null,
@@ -103,7 +104,7 @@ public class POFilterTest extends TestFilterBase {
     public void testLoadMonolingual() throws Exception {
         String f = "test/data/filters/po/file-POFilter-Monolingual.po";
         PoFilter filter = new PoFilter();
-        Map<String, String> options = new TreeMap<String, String>();
+        Map<String, String> options = new TreeMap<>();
         options.put(PoFilter.OPTION_FORMAT_MONOLINGUAL, "true");
         List<ParsedEntry> parsed = parse3(filter, f, options);
         assertEquals(2, parsed.size());
@@ -138,7 +139,8 @@ public class POFilterTest extends TestFilterBase {
         TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
 
         checkMultiStart(fi, f);
-        checkMulti("Changed %d key", null, "", null, null, null);
+        checkMulti("Changed %d key", null, "", null, null,
+                   OStrings.getString("POFILTER_SINGULAR_COMMENT") + "\n\nChanged %d keys\n\n");
         checkMulti("Changed %d keys", null, "[1]", null, null,
                 OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 1) + "\n");
         checkMulti("Changed %d keys", null, "[2]", null, null,
@@ -159,7 +161,8 @@ public class POFilterTest extends TestFilterBase {
         TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
 
         checkMultiStart(fi, f);
-        checkMulti("Changed %d key", null, "", null, null, null);
+        checkMulti("Changed %d key", null, "", null, null,
+                   OStrings.getString("POFILTER_SINGULAR_COMMENT") + "\n\nChanged %d keys\n\n");
         checkMulti("Changed %d keys", null, "[1]", null, null,
                 OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 1) + "\n");
         checkMulti("Changed %d keys", null, "[2]", null, null,

@@ -272,10 +272,10 @@ public class GlossarySearcher {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
-            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true)
+            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false)
                     && (o2.getSrcText().startsWith(o1.getSrcText())
                             || o1.getSrcText().startsWith(o2.getSrcText()))) {
-                // longer is better if one contains another
+                // longer is better if one source term starts with another
                 c = o2.getSrcText().length() - o1.getSrcText().length();
             }
             // sort source text alphabetically.

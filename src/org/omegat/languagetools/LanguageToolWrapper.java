@@ -182,6 +182,9 @@ public final class LanguageToolWrapper {
             case LOCAL_INSTALLATION:
                 String localServerJarPath = LanguageToolPrefs.getLocalServerJarPath();
                 String languageModelPath = LanguageToolPrefs.getLanguageModelPath();
+                if (languageModelPath == null) {
+                    languageModelPath = LanguageToolPrefs.getLanguageModelDefaultPath();
+                }
                 bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, 8081,
                         languageModelPath);
                 break;
@@ -201,4 +204,5 @@ public final class LanguageToolWrapper {
         LanguageToolPrefs.applyRules(bridge, targetLang.getLanguageCode());
         return bridge;
     }
+
 }

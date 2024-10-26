@@ -251,27 +251,7 @@ public final class StaticUtils {
             return configDir;
         }
 
-        String home; // user home directory
-
-        // get os and user home properties
-        try {
-            // get the user's home directory
-            home = System.getProperty("user.home");
-        } catch (SecurityException e) {
-            // access to the os/user home properties is restricted,
-            // the location of the config dir cannot be determined,
-            // set the config dir to the current working dir
-            configDir = new File(".").getAbsolutePath() + File.separator;
-
-            // log the exception, only do this after the config dir
-            // has been set to the current working dir, otherwise
-            // the log method will probably fail
-            Log.logErrorRB("SU_USERHOME_PROP_ACCESS_ERROR");
-            Log.log(e.toString());
-
-            return configDir;
-        }
-
+        String home = getHomeDir();
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
         if (StringUtil.isEmpty(home)) {
@@ -357,6 +337,23 @@ public final class StaticUtils {
 
         // we should have a correct, existing config dir now
         return configDir;
+    }
+
+    public static String getHomeDir() {
+        String home; // user home directory
+        // get os and user home properties
+        try {
+            // get the user's home directory
+            home = System.getProperty("user.home");
+        } catch (SecurityException e) {
+            // log the exception, only do this after the config dir
+            // has been set to the current working dir, otherwise
+            // the log method will probably fail
+            Log.logErrorRB("SU_USERHOME_PROP_ACCESS_ERROR");
+            Log.log(e.toString());
+            return null;
+        }
+        return home;
     }
 
     public static String getScriptDir() {

@@ -120,6 +120,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
         panel.bridgeLocalRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.LOCAL_INSTALLATION));
         panel.bridgeRemoteRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.REMOTE_URL));
         panel.directoryChooseButton.addActionListener(e -> chooseLocalInstallation());
+        panel.modelDirectoryChooseButton.addActionListener(e -> chooseLanguageModel());
         panel.addRuleButton.addActionListener(e -> addRule());
         panel.deleteRuleButton.addActionListener(e -> deleteRules());
         if (Core.getProject().isProjectLoaded()) {
@@ -145,6 +146,19 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             panel.localServerJarPathTextField.setText(file.getAbsolutePath());
+        }
+    }
+
+    private void chooseLanguageModel() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setDialogTitle(OStrings.getString("GUI_LANGUAGETOOL_DIRECTORY_CHOOSER_TITLE"));
+        String modelPath = LanguageToolPrefs.getLanguageModelDefaultPath();
+        fileChooser.setCurrentDirectory(new File(modelPath));
+        int result = fileChooser.showOpenDialog(panel);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            panel.modelDirectoryTextField.setText(file.getAbsolutePath());
         }
     }
 

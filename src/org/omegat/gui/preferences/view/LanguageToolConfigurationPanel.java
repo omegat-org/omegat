@@ -143,11 +143,9 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(modelDirectoryLabel, OStrings.getString("GUI_LANGUAGETOOL_MODEL_PATH"));
         jPanel1.add(modelDirectoryLabel, java.awt.BorderLayout.NORTH);
-
-        modelDirectoryTextField.setText(OStrings.getString("GUI_LANGUAGETOOL_MODEL_PATH"));
         jPanel1.add(modelDirectoryTextField, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(modelDirectoryChooseButton, OStrings.getString("GUI_LANGUAGETOOL_MODELCHOOSE_BUTTON"));
+        org.openide.awt.Mnemonics.setLocalizedText(modelDirectoryChooseButton, OStrings.getString("GUI_LANGUAGETOOL_MODEL_CHOOSE_BUTTON"));
         jPanel1.add(modelDirectoryChooseButton, java.awt.BorderLayout.EAST);
 
         localPanel.add(jPanel1, java.awt.BorderLayout.PAGE_END);

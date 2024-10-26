@@ -88,6 +88,14 @@ public final class LanguageToolPrefs {
         return Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH);
     }
 
+    public static void setLanguageModelPath(String path) {
+        Preferences.setPreference(Preferences.LANGUAGETOOL_LANGUAGE_MODEL_PATH, path);
+    }
+
+    public static String getLanguageModelPath() {
+        return Preferences.getPreference(Preferences.LANGUAGETOOL_LANGUAGE_MODEL_PATH);
+    }
+
     public static void setDisabledRules(Set<String> rules, String languageCode) {
         setLanguageSpecificPreference(rules,
                 Preferences.LANGUAGETOOL_DISABLED_RULES_PREFIX, languageCode);

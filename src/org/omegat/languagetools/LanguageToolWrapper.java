@@ -181,7 +181,9 @@ public final class LanguageToolWrapper {
             switch (type) {
             case LOCAL_INSTALLATION:
                 String localServerJarPath = LanguageToolPrefs.getLocalServerJarPath();
-                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, 8081);
+                String languageModelPath = LanguageToolPrefs.getLanguageModelPath();
+                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, 8081,
+                        languageModelPath);
                 break;
             case REMOTE_URL:
                 String remoteUrl = LanguageToolPrefs.getRemoteUrl();

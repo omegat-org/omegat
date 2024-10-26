@@ -61,6 +61,10 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
         localPathLabel = new javax.swing.JLabel();
         localServerJarPathTextField = new javax.swing.JTextField();
         directoryChooseButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        modelDirectoryLabel = new javax.swing.JLabel();
+        modelDirectoryTextField = new javax.swing.JTextField();
+        modelDirectoryChooseButton = new javax.swing.JButton();
         rulesPanel = new javax.swing.JPanel();
         rulesMessagePanel = new javax.swing.JPanel();
         rulesMessageLabel = new javax.swing.JLabel();
@@ -122,12 +126,31 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
         directoryPanel.add(localPathLabel, java.awt.BorderLayout.NORTH);
 
         localServerJarPathTextField.setToolTipText("");
+        localServerJarPathTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                localServerJarPathTextFieldActionPerformed(evt);
+            }
+        });
         directoryPanel.add(localServerJarPathTextField, java.awt.BorderLayout.CENTER);
 
         org.openide.awt.Mnemonics.setLocalizedText(directoryChooseButton, OStrings.getString("GUI_LANGUAGETOOL_CHOOSE_BUTTON")); // NOI18N
         directoryPanel.add(directoryChooseButton, java.awt.BorderLayout.EAST);
 
         localPanel.add(directoryPanel, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 25, 0, 0));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        org.openide.awt.Mnemonics.setLocalizedText(modelDirectoryLabel, OStrings.getString("GUI_LANGUAGETOOL_MODEL_PATH"));
+        jPanel1.add(modelDirectoryLabel, java.awt.BorderLayout.NORTH);
+
+        modelDirectoryTextField.setText(OStrings.getString("GUI_LANGUAGETOOL_MODEL_PATH"));
+        jPanel1.add(modelDirectoryTextField, java.awt.BorderLayout.CENTER);
+
+        org.openide.awt.Mnemonics.setLocalizedText(modelDirectoryChooseButton, OStrings.getString("GUI_LANGUAGETOOL_MODELCHOOSE_BUTTON"));
+        jPanel1.add(modelDirectoryChooseButton, java.awt.BorderLayout.EAST);
+
+        localPanel.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         externalOptionsPanel.add(localPanel);
 
@@ -169,6 +192,10 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
         add(rulesPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void localServerJarPathTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localServerJarPathTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_localServerJarPathTextFieldActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton addRuleButton;
     javax.swing.JRadioButton bridgeLocalRadioButton;
@@ -179,9 +206,13 @@ public class LanguageToolConfigurationPanel extends javax.swing.JPanel {
     javax.swing.JButton directoryChooseButton;
     private javax.swing.JPanel directoryPanel;
     private javax.swing.JPanel externalOptionsPanel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel localPanel;
     private javax.swing.JLabel localPathLabel;
     javax.swing.JTextField localServerJarPathTextField;
+    javax.swing.JButton modelDirectoryChooseButton;
+    private javax.swing.JLabel modelDirectoryLabel;
+    javax.swing.JTextField modelDirectoryTextField;
     private javax.swing.JPanel nativePanel;
     private javax.swing.JPanel remotePanel;
     javax.swing.JPanel rulesButtonsPanel;

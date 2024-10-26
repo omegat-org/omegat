@@ -297,6 +297,8 @@ public final class Preferences {
     public static final String LANGUAGETOOL_REMOTE_URL = "lt_remoteURL";
     /** Local path to LanguageTool server jar file */
     public static final String LANGUAGETOOL_LOCAL_SERVER_JAR_PATH = "lt_localServerJarPath";
+    /** Local path to LanguageTool ngram model files */
+    public static final String LANGUAGETOOL_LANGUAGE_MODEL_PATH = "lt_languageModelPath";
     /** Disabled categories */
     public static final String LANGUAGETOOL_DISABLED_CATEGORIES_PREFIX = "lt_disabledCategories";
     /** Disabled rules prefix */

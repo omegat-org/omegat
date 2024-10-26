@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +50,7 @@ import java.util.stream.StreamSupport;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
+
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -94,8 +99,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port)
-            throws Exception {
+    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port,
+                                     String languageModel) throws Exception {
         // Remember port
         localPort = port;
 
@@ -114,11 +119,24 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             Log.logWarningRB("LT_BAD_SOCKET");
             throw new Exception();
         }
+
+        Path languageModelPath = Paths.get(languageModel);
+        boolean useModel =
+                LanguageToolPrefs.getLanguageModelPath() != null && Files.exists(languageModelPath) &&
+                        Files.isDirectory(languageModelPath.resolve(targetLang.getLanguageCode()));
         // Run the server
-        ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
-                "--port", Integer.toString(port));
-        pb.redirectErrorStream(true);
-        server = pb.start();
+        if (useModel) {
+            Path config = prepareConfig();
+            ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
+                    "--port", Integer.toString(port), "--config", config.toString());
+            pb.redirectErrorStream(true);
+            server = pb.start();
+        } else {
+            ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
+                    "--port", Integer.toString(port));
+            pb.redirectErrorStream(true);
+            server = pb.start();
+        }
 
         // Create thread to consume server output
         new Thread(() -> {
@@ -160,6 +178,16 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             stop();
             throw ex;
         }
+    }
+
+    private Path prepareConfig() throws IOException {
+        Path tmpDir = Files.createTempDirectory("omegat");
+        Path config = tmpDir.resolve("languagetool.cfg");
+        try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
+            writer.write("languageModel=" + LanguageToolPrefs.getLanguageModelPath() + "\n");
+        }
+        tmpDir.toFile().deleteOnExit();
+        return config;
     }
 
     /**

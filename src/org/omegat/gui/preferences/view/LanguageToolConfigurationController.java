@@ -426,16 +426,22 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
             panel.localServerJarPathTextField.setEnabled(false);
             panel.directoryChooseButton.setEnabled(false);
             panel.urlTextField.setEnabled(false);
+            panel.modelDirectoryTextField.setEnabled(false);
+            panel.modelDirectoryChooseButton.setEnabled(false);
             break;
         case REMOTE_URL:
             panel.localServerJarPathTextField.setEnabled(false);
             panel.directoryChooseButton.setEnabled(false);
             panel.urlTextField.setEnabled(true);
+            panel.modelDirectoryTextField.setEnabled(false);
+            panel.modelDirectoryChooseButton.setEnabled(false);
             break;
         case LOCAL_INSTALLATION:
             panel.localServerJarPathTextField.setEnabled(true);
             panel.directoryChooseButton.setEnabled(true);
             panel.urlTextField.setEnabled(false);
+            panel.modelDirectoryTextField.setEnabled(true);
+            panel.modelDirectoryChooseButton.setEnabled(true);
             break;
         }
     }
@@ -457,6 +463,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
 
         panel.urlTextField.setText(LanguageToolPrefs.getRemoteUrl());
         panel.localServerJarPathTextField.setText(LanguageToolPrefs.getLocalServerJarPath());
+        panel.modelDirectoryTextField.setText(LanguageToolPrefs.getLanguageModelPath());
 
         if (targetLanguageCode != null) {
             disabledCategories = LanguageToolPrefs.getDisabledCategories(targetLanguageCode);
@@ -474,6 +481,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
         panel.bridgeNativeRadioButton.setSelected(true);
         panel.urlTextField.setText("");
         panel.localServerJarPathTextField.setText("");
+        panel.modelDirectoryTextField.setText("");
 
         if (targetLanguageCode != null) {
             disabledCategories = LanguageToolPrefs.getDefaultDisabledCategories();
@@ -491,6 +499,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
         LanguageToolPrefs.setBridgeType(selectedBridgeType);
         LanguageToolPrefs.setRemoteUrl(panel.urlTextField.getText());
         LanguageToolPrefs.setLocalServerJarPath(panel.localServerJarPathTextField.getText());
+        LanguageToolPrefs.setLanguageModelPath(panel.modelDirectoryTextField.getText());
 
         if (targetLanguageCode != null) {
             LanguageToolPrefs.setDisabledCategories(disabledCategories, targetLanguageCode);

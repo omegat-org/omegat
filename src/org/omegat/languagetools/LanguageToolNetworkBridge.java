@@ -127,13 +127,15 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         // Run the server
         if (useModel) {
             Path config = prepareConfig();
-            ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
-                    "--port", Integer.toString(port), "--config", config.toString());
+            ProcessBuilder pb = new ProcessBuilder("java", "-Xms256m", "-Xmx512m",
+                    "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
+                    "--port", Integer.toString(port), "--public", "--config", config.toString(), "--allow-origin");
             pb.redirectErrorStream(true);
             server = pb.start();
         } else {
-            ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
-                    "--port", Integer.toString(port));
+            ProcessBuilder pb = new ProcessBuilder("java", "-Xms256m", "-Xmx512m",
+                    "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
+                    "--port", Integer.toString(port), "--public", "--allow-origin");
             pb.redirectErrorStream(true);
             server = pb.start();
         }

@@ -8,7 +8,7 @@
                2008 Martin Fleurke
                2009 Alex Buloichik
                2011 Didier Briel
-               2013-1014 Alex Buloichik, Enrique Estevez
+               2013-2014 Alex Buloichik, Enrique Estevez
                2017 Didier Briel
                2023-2024 Hiroshi Miura
                Home page: https://www.omegat.org/

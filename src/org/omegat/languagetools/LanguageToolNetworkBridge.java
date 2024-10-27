@@ -157,7 +157,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         List<String> commands = new ArrayList<>();
         commands.add("java");
         commands.add("-Xms256m");
-        commands.add("-Xmx512m");
+        commands.add("-Xmx768m");
         commands.add("-cp");
         commands.add(classPath);
         commands.add(SERVER_CLASS_NAME);

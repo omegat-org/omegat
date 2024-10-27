@@ -192,7 +192,7 @@ public final class LanguageToolPrefs {
             String path = "Library/Application Support/" + APPLICATION_ID;
             directory = Paths.get(userHome).resolve(path);
         } else if (Platform.isLinux()) {
-            // Path: /home/<YourUserName>/.local/LanguageTool/ngrams
+            // Path: /home/<YourUserName>/.local/share/LanguageTool/ngrams
             Path appDataDir = null;
             try {
                 String xdgConfigHome = System.getenv("XDG_CONFIG_HOME");
@@ -208,7 +208,7 @@ public final class LanguageToolPrefs {
                 String path = APPLICATION_ID + "/ngrams";
                 directory = appDataDir.resolve(path);
             } else {
-                String path = ".local/" + APPLICATION_ID + "/ngrams";
+                String path = ".local/share/" + APPLICATION_ID + "/ngrams";
                 directory = Paths.get(userHome).resolve(path);
             }
         } else {

@@ -40,6 +40,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -120,26 +121,55 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             throw new Exception();
         }
 
+        List<String> commands = serverCommands(serverJar.getAbsolutePath(), Integer.toString(port));
         Path languageModelPath = Paths.get(languageModel);
-        boolean useModel =
-                LanguageToolPrefs.getLanguageModelPath() != null && Files.exists(languageModelPath) &&
+        boolean useModel = LanguageToolPrefs.getLanguageModelPath() != null && Files.exists(languageModelPath) &&
                         Files.isDirectory(languageModelPath.resolve(targetLang.getLanguageCode()));
-        // Run the server
         if (useModel) {
-            Path config = prepareConfig();
-            ProcessBuilder pb = new ProcessBuilder("java", "-Xms256m", "-Xmx512m",
-                    "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
-                    "--port", Integer.toString(port), "--public", "--config", config.toString(), "--allow-origin");
-            pb.redirectErrorStream(true);
-            server = pb.start();
-        } else {
-            ProcessBuilder pb = new ProcessBuilder("java", "-Xms256m", "-Xmx512m",
-                    "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
-                    "--port", Integer.toString(port), "--public", "--allow-origin");
-            pb.redirectErrorStream(true);
-            server = pb.start();
+            commands.add("--config");
+            commands.add(prepareConfig().toString());
         }
+        commands.add("--allow-origin");
 
+        // Run the server
+        ProcessBuilder pb = new ProcessBuilder(commands);
+        pb.redirectErrorStream(true);
+        server = pb.start();
+        startServer(port);
+
+        try {
+            init(sourceLang, targetLang);
+        } catch (Exception ex) {
+            stop();
+            throw ex;
+        }
+    }
+
+    private List<String> serverCommands(String classPath, String port) {
+        List<String> commands = new ArrayList<>();
+        commands.add("java");
+        commands.add("-Xms256m");
+        commands.add("-Xmx512m");
+        commands.add("-cp");
+        commands.add(classPath);
+        commands.add(SERVER_CLASS_NAME);
+        commands.add("--port");
+        commands.add(port);
+        commands.add("--public");
+        return commands;
+    }
+
+    private Path prepareConfig() throws IOException {
+        Path tmpDir = Files.createTempDirectory("omegat");
+        Path config = tmpDir.resolve("languagetool.cfg");
+        try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
+            writer.write("languageModel=" + LanguageToolPrefs.getLanguageModelPath() + "\n");
+        }
+        tmpDir.toFile().deleteOnExit();
+        return config;
+    }
+
+    private void startServer(int port) throws Exception {
         // Create thread to consume server output
         new Thread(() -> {
             try (InputStream is = server.getInputStream()) {
@@ -163,7 +193,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             try {
                 new Socket("localhost", port).close();
                 break;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
             if (timeWaiting >= timeout) {
                 Log.logWarningRB("LT_SERVER_START_TIMEOUT");
@@ -171,25 +201,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                 throw new Exception();
             }
         }
-
         serverUrl = "http://localhost:" + port + CHECK_PATH;
         Log.logInfoRB("LT_SERVER_STARTED");
-        try {
-            init(sourceLang, targetLang);
-        } catch (Exception ex) {
-            stop();
-            throw ex;
-        }
-    }
-
-    private Path prepareConfig() throws IOException {
-        Path tmpDir = Files.createTempDirectory("omegat");
-        Path config = tmpDir.resolve("languagetool.cfg");
-        try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
-            writer.write("languageModel=" + LanguageToolPrefs.getLanguageModelPath() + "\n");
-        }
-        tmpDir.toFile().deleteOnExit();
-        return config;
     }
 
     /**

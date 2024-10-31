@@ -118,8 +118,8 @@ public class MappingRulesModel extends AbstractTableModel {
     /** Adds a new empty mapping rule. */
     public int addRow() {
         int rows = srx.getMappingRules().size();
-        srx.getMappingRules().add(
-                new MapRule(OStrings.getString("SEG_NEW_LN_CO"), "LN-CO", new ArrayList<Rule>()));
+        srx.getMappingRules()
+                .add(new MapRule(OStrings.getString("SEG_NEW_LN_CO"), "LN-CO", new ArrayList<Rule>()));
         fireTableRowsInserted(rows, rows);
         return rows;
     }

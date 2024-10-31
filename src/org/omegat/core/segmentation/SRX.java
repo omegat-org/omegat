@@ -287,7 +287,9 @@ public class SRX implements Serializable {
         res.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
         res.setVersion(srx.getVersion());
         res.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
-                .map(s -> new MapRule(s, mapping.get(s.getLanguagerulename()))).collect(Collectors.toList()));
+                .map(languagemap -> new MapRule(languagemap.getLanguagerulename(),
+                        languagemap.getLanguagepattern(), mapping.get(languagemap.getLanguagerulename())))
+                .collect(Collectors.toList()));
         return res;
     }
 

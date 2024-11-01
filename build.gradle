@@ -372,7 +372,9 @@ dependencies {
     testImplementation(libs.bundles.xmlunit)
 
     testImplementation(project(":language-modules"))
-    testImplementation(libs.languagetool.server)
+    testImplementation(libs.languagetool.server) {
+        exclude module: "logback-classic"
+    }
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
@@ -1587,6 +1589,7 @@ test {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
 tasks.register('testIntegration', JavaExec) {
@@ -1599,6 +1602,7 @@ tasks.register('testIntegration', JavaExec) {
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
 tasks.register('testOnJava17', Test) {
@@ -1607,9 +1611,11 @@ tasks.register('testOnJava17', Test) {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
     }
+    systemProperties = System.properties
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     group = 'verification'
 }
 
@@ -1619,9 +1625,11 @@ tasks.register('testOnJava21', Test) {
         languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
     }
+    systemProperties = System.properties
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     group = 'verification'
 }
 
@@ -1637,7 +1645,7 @@ tasks.register('testAcceptance', Test) {
     testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties
-    shouldRunAfter(tasks.test)
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')

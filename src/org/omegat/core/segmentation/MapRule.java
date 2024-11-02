@@ -113,7 +113,7 @@ public class MapRule implements Serializable {
                 if (code != null && code.contains("Textdateien")) {
                     languageCode = LanguageCodes.F_TEXT_CODE;
                 } else {
-                    LOGGER.atDebug().setMessageRB("CORE_SRX_RULES_UNKNOWN_LANGUAGE_CODE").addArgument(code)
+                    LOGGER.atDebug().setMessage("Unknown language code '{}' specified").addArgument(code)
                             .log();
                     languageCode = code;
                 }

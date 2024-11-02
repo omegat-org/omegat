@@ -51,7 +51,13 @@ public class MapRule implements Serializable {
     /** Language Name */
     private String languageCode;
 
-    /** creates a new empty MapRule */
+    /**
+     * Creates a new empty MapRule.
+     * <p>
+     * When SRX.loadSrxFile loads segmentation.conf, java.beans.XMLDecoder
+     * create an empty object, then calls setLanguage and setPattern methods.
+     * </p>
+     */
     public MapRule() {
     }
 
@@ -97,28 +103,18 @@ public class MapRule implements Serializable {
          * defined as "LanguageCodes.*_CODE". The behavior was changed in OmegaT
          * 6.0.0 release in 2023. We first detect whether the argument is
          * standard code. If the code is not a standard code, then try to find a
-         * localized name of the language name. When you read the comment long
-         * after OmegaT 6.x, and you believe all the OmegaT 4.x and 5.x users
-         * are migrated to OmegaT 6.x or later, you may want to remove the chunk
-         * below.
+         * localized name of the language name. When you believe all the OmegaT
+         * 4.x and 5.x users are migrated to OmegaT 6.x or later, you may want
+         * to remove the workaround here.
          */
         if (!LanguageCodes.isLanguageCodeKnown(code)) {
             String alt = LanguageCodes.getLanguageCodeByName(code);
             if (alt != null) {
                 languageCode = alt;
+                return;
             } else {
-                // migration heuristics: Germany translation changed in v5.5.
-                // See:
-                // https://github.com/omegat-org/omegat/pull/1158#issuecomment-2448788253
-                if (code != null && code.contains("Textdateien")) {
-                    languageCode = LanguageCodes.F_TEXT_CODE;
-                } else {
-                    LOGGER.atDebug().setMessage("Unknown language code '{}' specified").addArgument(code)
-                            .log();
-                    languageCode = code;
-                }
+                LOGGER.atDebug().setMessage("Unknown languagerulename '{}'").addArgument(code).log();
             }
-            return;
         }
         languageCode = code;
     }

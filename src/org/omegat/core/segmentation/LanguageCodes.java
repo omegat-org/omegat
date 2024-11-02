@@ -158,10 +158,19 @@ public final class LanguageCodes {
     }
 
     public static String getLanguageCodeByName(String name) {
+        if (name == null) {
+            return null;
+        }
         for (Map.Entry<String, String> entry : codeKeyHash.entrySet()) {
             if (OStrings.getString(entry.getValue()).equals(name)) {
                 return entry.getKey();
             }
+        }
+        // migration heuristics: Germany translation changed in v5.5.
+        // See:
+        // https://github.com/omegat-org/omegat/pull/1158#issuecomment-2448788253
+        if (name.contains("Textdateien")) {
+            return LanguageCodes.F_TEXT_CODE;
         }
         return null;
     }

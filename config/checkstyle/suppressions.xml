@@ -78,8 +78,8 @@
     <suppress files="Platform\.java" checks="ConstantName" lines="61-80"/>
     <!-- util/Preferences -->
     <suppress files="Preferences\.java" checks="LineLength" lines="197"/>
-    <!-- core/stat -->
-    <suppress checks="(ParameterNumber|MethodLength)" files="FindMatches\.java" lines="164,350,459"/>
+    <!-- core/statistics, ignore private FindMatches#addNearString -->
+    <suppress checks="ParameterNumber" files="FindMatches\.java" lines="410-440"/>
     <!-- util/xml -->
     <suppress checks="(EmptyBlock|MethodLength)" files="XMLStreamReader\.java"/>
     <!-- util -->

@@ -1633,7 +1633,60 @@ tasks.register('testOnJava21', Test) {
     group = 'verification'
 }
 
+def startX(display) {
+    def outputStream = new ByteArrayOutputStream()
+    exec {
+        commandLine 'sh', '-c', "Xvfb :${display} -screen 0 1280x1024x24 >>/dev/null 2>&1 & echo \$!"
+        standardOutput = outputStream
+    }
+    def xvfbPid = outputStream.toString().trim()
+    println "Virtual X server is started with DISPLAY :${display} and PID: ${xvfbPid}"
+    return xvfbPid
+}
+
+def stopX(pid) {
+    println "Stopping virtual X server..."
+    def outputStream = new ByteArrayOutputStream()
+    exec {
+        commandLine 'sh', '-c', "kill ${pid} &"
+        standardOutput = outputStream
+        errorOutput = outputStream
+    }
+}
+
+def isCommandAvailable(command) {
+    def outputStream = new ByteArrayOutputStream()
+    exec {
+        commandLine 'sh', '-c', "command -v ${command}"
+        ignoreExitValue true
+        standardOutput = outputStream
+        errorOutput = outputStream
+    }.exitValue == 0
+}
+
 tasks.register('testAcceptance', Test) {
+    onlyIf {
+        isCommandAvailable('Xvfb')
+    }
+    def display = 99
+    doFirst {
+        if (display != null) {
+            def lockFile = new File("/tmp/.X${display}-lock")
+            if (!lockFile.exists()) {
+                ext.xvfbPid = startX(display)
+                environment 'DISPLAY', ":${display}"
+            }
+        }
+    }
+    doLast {
+        if (display != null) {
+            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
+            if (pid != null) {
+                stopX(pid)
+            }
+        }
+    }
+
     description = 'Run Acceptance GUI test'
     group = 'verification'
     javaLauncher = javaToolchains.launcherFor {

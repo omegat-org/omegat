@@ -262,10 +262,9 @@ public final class Core {
 
     /**
      * initialize GUI body.
-     * TODO: this should accept IMainWindow.
      * @throws Exception
      */
-    static void initializeGUIimpl(MainWindow me) throws Exception {
+    static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 

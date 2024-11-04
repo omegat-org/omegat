@@ -108,7 +108,7 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.IMainMenu;
-import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindowStatusBar;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.notes.INotes;
@@ -183,7 +183,7 @@ public class EditorController implements IEditor {
     private String emptyProjectPaneTitle;
     private JTextPane introPane;
     private JTextPane emptyProjectPane;
-    protected final MainWindow mw;
+    protected final IMainWindow mw;
 
     /** Currently displayed segments info. */
     protected SegmentBuilder[] m_docSegList;
@@ -229,7 +229,7 @@ public class EditorController implements IEditor {
      */
     private IProject.AllTranslations previousTranslations;
 
-    public EditorController(final MainWindow mainWindow) {
+    public EditorController(final IMainWindow mainWindow) {
         this.mw = mainWindow;
 
         segmentExportImport = new SegmentExportImport(this);

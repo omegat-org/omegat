@@ -27,10 +27,13 @@
 
 package org.omegat.gui.editor;
 
+import java.text.BreakIterator;
 import java.util.List;
 import java.util.Locale;
 
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
 
@@ -61,15 +64,40 @@ public final class EditorUtils {
      * Determines the start of a word for the given model location. This method
      * skips direction char.
      *
-     * TODO: change to use document's locale
-     *
-     * @param c
-     * @param offs
-     * @return
+     * @param c TextComponent of the editor area.
+     * @param offs offset of the text.
+     * @return position of word start on the text component.
      * @throws BadLocationException
+     *         when there is no line found in the text component.
      */
     public static int getWordStart(JTextComponent c, int offs) throws BadLocationException {
-        int result = Utilities.getWordStart(c, offs);
+        int result = offs;
+        Element line = Utilities.getParagraphElement(c, offs);
+        if (line == null) {
+            throw new BadLocationException("No word at " + offs, offs);
+        }
+        int lineStart = line.getStartOffset();
+        Document doc = c.getDocument();
+        int lineEnd = Math.min(line.getEndOffset(), doc.getLength());
+        if  (lineEnd - lineStart > 0) {
+            String lineString = doc.getText(lineStart, lineEnd - lineStart);
+            Locale locale = c.getLocale();
+            if (c instanceof EditorTextArea3 && Core.getProject().isProjectLoaded()) {
+                if (((EditorTextArea3) c).isInActiveTranslation(offs)) {
+                    locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+                } else {
+                    locale =  Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+                }
+            }
+            BreakIterator words = BreakIterator.getWordInstance(locale);
+            words.setText(lineString);
+            int wordPosition = offs - lineStart;
+            if (wordPosition >= words.last()) {
+                wordPosition = words.last() - 1;
+            }
+            words.following(wordPosition);
+            result = lineStart + words.previous();
+        }
         char ch = c.getDocument().getText(result, 1).charAt(0);
         if (isDirectionChar(ch)) {
             result++;
@@ -81,15 +109,39 @@ public final class EditorUtils {
      * Determines the end of a word for the given model location. This method
      * skips direction char.
      *
-     * TODO: change to use document's locale
-     *
-     * @param c
-     * @param offs
-     * @return
+     * @param c TextComponent of the editor area.
+     * @param offs offset of the text.
+     * @return position of the word end on the text component.
      * @throws BadLocationException
+     *         when there is no line found in the text component.
      */
     public static int getWordEnd(JTextComponent c, int offs) throws BadLocationException {
-        int result = Utilities.getWordEnd(c, offs);
+        int result = offs;
+        Element line = Utilities.getParagraphElement(c, offs);
+        if (line == null) {
+            throw new BadLocationException("No word at " + offs, offs);
+        }
+        int lineStart = line.getStartOffset();
+        Document doc = c.getDocument();
+        int lineEnd = Math.min(line.getEndOffset(), doc.getLength());
+        if  (lineEnd - lineStart > 0) {
+            String lineString = doc.getText(lineStart, lineEnd - lineStart);
+            Locale locale = c.getLocale();
+            if (c instanceof EditorTextArea3 && Core.getProject().isProjectLoaded()) {
+                if (((EditorTextArea3) c).isInActiveTranslation(offs)) {
+                    locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+                } else {
+                    locale =  Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+                }
+            }
+            BreakIterator words = BreakIterator.getWordInstance(locale);
+            words.setText(lineString);
+            int wordPosition = offs - lineStart;
+            if (wordPosition >= words.last()) {
+                wordPosition = words.last() - 1;
+            }
+            result = lineStart + words.following(wordPosition);
+        }
         if (result > 0) {
             char ch = c.getDocument().getText(result - 1, 1).charAt(0);
             if (isDirectionChar(ch)) {

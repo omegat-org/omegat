@@ -196,6 +196,8 @@ class TestMainWindow implements IMainWindow {
 
         Rectangle defaultWindowSize = new Rectangle(omegatLeftPosition, 0, omegatWidth, omegatHeight);
         applicationFrame.setBounds(defaultWindowSize);
+
+        MainWindowUI.initializeScreenLayout(TestMainWindow.this);
     }
 
     @Override

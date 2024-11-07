@@ -1264,24 +1264,13 @@ public class RealProject implements IProject {
                 loadFilesCallback.fileFinished();
 
                 if (filter != null && !fi.entries.isEmpty()) {
-                    fi.filterClass = filter.getClass(); // Don't store the
-                                                        // instance, because
-                                                        // every file gets an
-                                                        // instance and
-                                                        // then we consume a lot
-                                                        // of memory for all
-                                                        // instances.
-                                                        // See also IFilter
-                                                        // "TODO: each filter
-                                                        // should be stateless"
+                    fi.filterClass = filter.getClass();
+                    // Don't store the instance, because
+                    // every file gets an instance and
+                    // then we consume a lot of memory for all
+                    // instances. See also IFilter
                     fi.filterFileFormatName = filter.getFileFormatName();
-                    try {
-                        fi.fileEncoding = filter.getInEncodingLastParsedFile();
-                    } catch (Error e) { // In case a filter doesn't have
-                                        // getInEncodingLastParsedFile() (e.g.,
-                                        // Okapi plugin)
-                        fi.fileEncoding = "";
-                    }
+                    fi.fileEncoding = filter.getInEncodingLastParsedFile();
                     projectFilesList.add(fi);
                 }
             } catch (TranslationException e) {

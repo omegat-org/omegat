@@ -462,11 +462,10 @@ public class LatexFilter extends AbstractFilter {
 
                 par = sb.toString();
             } catch (java.util.regex.PatternSyntaxException e) {
-                // TODO: understand the exceptions
-                Log.log("LaTeX PatternSyntaxException: " + e.getMessage());
-                Log.log(command);
+                Log.getLogger(LatexFilter.class).atDebug()
+                        .setMessage("LaTeX command \"{}\" cause PatternSyntaxException: {}")
+                        .addArgument(command).addArgument(e.getMessage()).log();
             }
-
         }
         return par;
     }

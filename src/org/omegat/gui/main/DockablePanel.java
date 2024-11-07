@@ -71,4 +71,12 @@ public class DockablePanel extends JPanel implements Dockable {
     public void setName(String name) {
         dockKey.setName(name);
     }
+
+    @Override
+    public String getName() {
+        if (dockKey ==null) {
+            return null;
+        }
+        return dockKey.getName();
+    }
 }

@@ -146,7 +146,7 @@ public final class MainWindowUI {
     /**
      * Initialize the size of OmegaT window, then load the layout prefs.
      */
-    public static void initializeScreenLayout(MainWindow mainWindow) {
+    public static void initializeScreenLayout(IMainWindow mainWindow) {
         /**
          * (23dec22) Set a reasonable default window size assuming a
          * standard"pro" laptop resolution of 1920x1080. Smaller screens do not
@@ -182,14 +182,14 @@ public final class MainWindowUI {
         // Ensure any "closed" Dockables are visible. These can be newly added
         // panes not included in an older layout file, or e.g. panes installed
         // by plugins.
-        UIDesignManager.ensureDockablesVisible(mainWindow.desktop);
+        UIDesignManager.ensureDockablesVisible(mainWindow.getDesktop());
     }
 
     /**
      * Load the main window layout from the global preferences file. Will reset
      * to defaults if global preferences are not present or if an error occurs.
      */
-    private static void loadScreenLayoutFromPreferences(MainWindow mainWindow) {
+    private static void loadScreenLayoutFromPreferences(IMainWindow mainWindow) {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
         if (uiLayoutFile.exists()) {
             loadScreenLayout(mainWindow, uiLayoutFile);
@@ -202,9 +202,9 @@ public final class MainWindowUI {
      * Load the main window layout from the specified file. Will reset to
      * defaults if an error occurs.
      */
-    private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
+    private static void loadScreenLayout(IMainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
-            mainWindow.desktop.readXML(in);
+            mainWindow.getDesktop().readXML(in);
         } catch (Exception ex) {
             Log.log(ex);
             resetDesktopLayout(mainWindow);
@@ -234,9 +234,9 @@ public final class MainWindowUI {
      * Restores main window layout to the default values (distinct from global
      * preferences).
      */
-    public static void resetDesktopLayout(MainWindow mainWindow) {
+    public static void resetDesktopLayout(IMainWindow mainWindow) {
         try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {
-            mainWindow.desktop.readXML(in);
+            mainWindow.getDesktop().readXML(in);
         } catch (Exception e) {
             Log.log(e);
         }

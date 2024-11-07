@@ -1666,11 +1666,11 @@ def isCommandAvailable(command) {
 
 tasks.register('testAcceptance', Test) {
     onlyIf {
-        isCommandAvailable('Xvfb')
+        isCommandAvailable('Xvfb') || project.hasProperty("acceptanceTestLive")
     }
-    def display = 99
+    def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
     doFirst {
-        if (display != null) {
+        if (!display.isEmpty()) {
             def lockFile = new File("/tmp/.X${display}-lock")
             if (!lockFile.exists()) {
                 ext.xvfbPid = startX(display)
@@ -1679,7 +1679,7 @@ tasks.register('testAcceptance', Test) {
         }
     }
     doLast {
-        if (display != null) {
+        if (!display.isEmpty()) {
             def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
             if (pid != null) {
                 stopX(pid)

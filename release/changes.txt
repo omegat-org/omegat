@@ -2,11 +2,14 @@
  OmegaT 6.0.2
 ----------------------------------------------------------------------
   0 Enhancement
-  2 Bug fixes
+  4 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 
   Bug fixes:
+
+  - Preferences/CutomColorSelector don't show notification immediately when modifying color
+  https://sourceforge.net/p/omegat/bugs/1273/
 
   - [Revert regression] List of issues stays hidden in the background
   https://sourceforge.net/p/omegat/bugs/1225/
@@ -14,11 +17,14 @@
   - Unit tests failed on Windows
   https://sourceforge.net/p/omegat/bugs/1223/
 
+  - Translation memories are not correctly reloaded after team synchronization
+  https://sourceforge.net/p/omegat/bugs/1164/
+
 ----------------------------------------------------------------------
  OmegaT 6.0.1 (2024-08-17)
 ----------------------------------------------------------------------
   0 Enhancement
- 17 Bug fixes
+ 16 Bug fixes
   8 Localisation updates
 ----------------------------------------------------------------------
 6.0.1 vs 6.0.0
@@ -69,9 +75,6 @@
 
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/
-
-  - Translation memories are not correctly reloaded after team synchronization
-  https://sourceforge.net/p/omegat/bugs/1164/
 
   - Backup file does not created in no-team project
   https://sourceforge.net/p/omegat/bugs/1159/

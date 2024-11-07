@@ -1,4 +1,3 @@
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
@@ -26,21 +25,44 @@
 
 package org.omegat.gui.editor;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.Locale;
+
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.OStrings;
+import org.omegat.util.LocaleRule;
 
-public class EditorTextAreaTest extends TestCoreGUI {
+/**
+ * @author Hiroshi Miura
+ */
+@RunWith(Enclosed.class)
+public class EditorUtilsTest {
 
-    @Test
-    public void testIntroPaneExist() {
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).requireEnabled();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane").requireEnabled();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
-                .verticalScrollBar().requireVisible();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
-                .horizontalScrollBar().requireNotVisible();
+    public static class EditorUtilsEnTest extends TestCoreGUI {
+
+        @Rule
+        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+
+        @Test
+        public void testEditorUtilsGetWordEn() throws BadLocationException {
+            int offs = 518;
+            JTextComponent editPane = window.panel("First Steps").textBox("IntroPane").target();
+            String text = editPane.getText();
+            int posStart = EditorUtils.getWordStart(editPane, offs);
+            int posEnd = EditorUtils.getWordEnd(editPane, offs);
+            String word = editPane.getText(posStart, posEnd - posStart);
+            assertEquals("translation", word);
+            assertEquals(508, posStart);
+            assertEquals(519, posEnd);
+        }
     }
 
 }

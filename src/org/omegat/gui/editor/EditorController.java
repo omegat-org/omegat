@@ -1947,6 +1947,7 @@ public class EditorController implements IEditor {
                     .setComponentOrientation(BiDiUtils.isRtl(language) ? ComponentOrientation.RIGHT_TO_LEFT
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
+            introPane.setName("IntroPane");
             DragTargetOverlay.apply(introPane, dropInfo);
             URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS);
             if (uri != null) {
@@ -1958,6 +1959,7 @@ public class EditorController implements IEditor {
         emptyProjectPaneTitle = OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
         emptyProjectPane = new JTextPane();
         emptyProjectPane.setEditable(false);
+        emptyProjectPane.setName("EmptyProjectPane");
         emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
         emptyProjectPane.setFont(mw.getApplicationFont());
         DragTargetOverlay.apply(emptyProjectPane, dropInfo);

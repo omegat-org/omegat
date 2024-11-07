@@ -28,6 +28,7 @@ package org.omegat.util;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -71,14 +72,24 @@ public final class OStrings {
         IS_BETA = !b.getString("beta").isEmpty();
     }
 
+    private static final String BASENAME = "org/omegat/Bundle";
+
     /** Resource bundle that contains all the strings */
-    private static ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
+    private static ResourceBundle bundle = ResourceBundle.getBundle(BASENAME);
 
     /**
      * Returns resource bundle.
      */
     public static ResourceBundle getResourceBundle() {
         return bundle;
+    }
+
+    /**
+     * Loads resources with the specified locale.
+     * @param locale Locale to load.
+     */
+    public static void loadBundle(Locale locale) {
+        bundle = ResourceBundle.getBundle(BASENAME, locale);
     }
 
     /**

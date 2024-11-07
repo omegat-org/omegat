@@ -373,7 +373,7 @@ public class EditorController implements IEditor {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollListener);
-
+        scrollPane.setName("EditorScrollPane");
         pane.setLayout(new BorderLayout());
         pane.add(scrollPane, BorderLayout.CENTER);
 

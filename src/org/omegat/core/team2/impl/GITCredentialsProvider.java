@@ -52,6 +52,7 @@ import org.omegat.core.team2.impl.TeamUtils.Credentials;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Git repository credentials provider. One credential provider created for all
@@ -279,10 +280,6 @@ public class GITCredentialsProvider extends CredentialsProvider {
         return true;
     }
 
-    private boolean isGUI() {
-        return Core.getMainWindow() != null;
-    }
-
     private void askYesNoGUI(CredentialItem item, String promptText, URIish uri, String promptedFingerprint) {
         IMainWindow mw = Core.getMainWindow();
         int choice = mw.showConfirmDialog(promptText, null, JOptionPane.YES_NO_OPTION,
@@ -305,7 +302,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private void askYesNo(CredentialItem item, String promptText, URIish uri, String promptedFingerprint) {
-        if (isGUI()) {
+        if (StaticUIUtils.isGUI()) {
             askYesNoGUI(item, promptText, uri, promptedFingerprint);
         } else {
             askYesNoCUI(item, promptText, uri, promptedFingerprint);
@@ -403,7 +400,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     private Credentials askCredentials(URIish uri, Credentials credentials, boolean passwordOnly,
             String msg) {
         Credentials result;
-        if (isGUI()) {
+        if (StaticUIUtils.isGUI()) {
             result = askCredentialsGUI(uri, credentials, passwordOnly, msg);
         } else {
             result = askCredentialsCUI(uri, credentials, passwordOnly, msg);

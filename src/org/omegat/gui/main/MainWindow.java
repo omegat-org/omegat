@@ -75,6 +75,7 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.matches.IMatcher;
+import org.omegat.gui.search.SearchWindowManager;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -137,7 +138,7 @@ public class MainWindow implements IMainWindow {
         CoreEvents.registerProjectChangeListener(eventType -> {
             updateTitle();
             if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
-                MainWindowUI.closeSearchWindows();
+                SearchWindowManager.closeSearchWindows();
             }
         });
 
@@ -174,6 +175,11 @@ public class MainWindow implements IMainWindow {
                 }
             }
         });
+    }
+
+    @Override
+    public void resetDesktopLayout() {
+        MainWindowUI.resetDesktopLayout(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -224,6 +230,11 @@ public class MainWindow implements IMainWindow {
         }
     }
 
+    @Override
+    public void saveDesktopLayout() {
+        MainWindowUI.saveScreenLayout(this);
+    }
+
     /**
      * Create docking desktop panel and status bar.
      */
@@ -240,30 +251,18 @@ public class MainWindow implements IMainWindow {
         applicationFrame.pack();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public JFrame getApplicationFrame() {
         return applicationFrame;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public Font getApplicationFont() {
         return font;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public IMainMenu getMainMenu() {
         return menu;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void addDockable(Dockable pane) {
         desktop.addDockable(pane);
     }
@@ -276,6 +275,11 @@ public class MainWindow implements IMainWindow {
     @Override
     public Cursor getCursor() {
         return applicationFrame.getCursor();
+    }
+
+    @Override
+    public String getSelectedText() {
+        return MainWindowUI.getTrimmedSelectedTextInMainWindow(this);
     }
 
     /**
@@ -355,9 +359,6 @@ public class MainWindow implements IMainWindow {
         return matcher instanceof JTextComponent ? ((JTextComponent) matcher).getSelectedText() : null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void showStatusMessageRB(final String messageKey, final Object... params) {
         final String msg = getLocalizedString(messageKey, params);
         UIThreadsUtil.executeInSwingThread(new Runnable() {
@@ -378,9 +379,6 @@ public class MainWindow implements IMainWindow {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void showTimedStatusMessageRB(String messageKey, Object... params) {
         showStatusMessageRB(messageKey, params);
@@ -442,16 +440,10 @@ public class MainWindow implements IMainWindow {
     private JPanel lastDialogText;
     private String lastDialogKey;
 
-    /**
-     * {@inheritDoc}
-     */
     public void displayWarningRB(String warningKey, Object... params) {
         displayWarningRB(warningKey, null, params);
     };
 
-    /**
-     * {@inheritDoc}
-     */
     public void displayWarningRB(final String warningKey, final String supercedesKey,
             final Object... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
@@ -485,9 +477,6 @@ public class MainWindow implements IMainWindow {
         });
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
             String msg;
@@ -540,9 +529,6 @@ public class MainWindow implements IMainWindow {
         });
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void lockUI() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -566,9 +552,6 @@ public class MainWindow implements IMainWindow {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void unlockUI() {
         UIThreadsUtil.mustBeSwingThread();
 

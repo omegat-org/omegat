@@ -10,6 +10,7 @@ steps:
   - task: DockerCompose@0
     displayName: 'Execute Integration-Test'
     inputs:
+      projectName: omegat
       action: Run services
       containerregistrytype: Container Registry
       dockerComposeFile: compose.yml
@@ -22,6 +23,7 @@ steps:
   - task: DockerCompose@0
     displayName: 'Clean up Integration-Test'
     inputs:
+      projectName: omegat
       action: Run a Docker Compose command
       containerregistrytype: Container Registry
       dockerComposeFile: compose.yml

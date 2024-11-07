@@ -93,16 +93,28 @@ public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpe
         return Optional.empty();
     }
 
+    private String findDictionaryFolderInLTJar(String language) {
+        final String[] folders = new String[] {"/hunspell/", "/spelling/"};
+        for (String folder : folders) {
+            String path = "/" + new Language(language).getLanguageCode() + folder + language;
+            if (JLanguageTool.getDataBroker().resourceExists(path + SC_DICT_EXTENSION)) {
+                return path;
+            }
+        }
+        return null;
+    }
+
     /**
      * If there is a Morfologik dictionary for the current target language
      * bundled with LanguageTool, install it.
      */
     private void installLTBundledDictionary(String dictionaryDir, String language) {
-        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + SC_DICT_EXTENSION;
-        String infoPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + SC_INFO_EXTENSION;
-        if (!JLanguageTool.getDataBroker().resourceExists(resPath)) {
+        String path = findDictionaryFolderInLTJar(language);
+        if (path == null) {
             return;
         }
+        String resPath = path + SC_DICT_EXTENSION;
+        String infoPath = path + SC_INFO_EXTENSION;
         try {
             try (InputStream dictStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
                  FileOutputStream fos = new FileOutputStream(

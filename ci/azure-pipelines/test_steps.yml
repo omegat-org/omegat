@@ -12,5 +12,6 @@ steps:
     displayName: 'Run Gradle clean, test and test on Java17'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/test-results/**/TEST-*.xml'
+    condition: always()
     inputs:
       testResultsFiles: 'build/test-results/**/TEST-*.xml'

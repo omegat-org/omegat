@@ -1,0 +1,151 @@
+def moduleList = [
+        [ code: 'ar', lang: 'Arabic'],
+        [ code: 'ast', lang: 'Asturian'],
+        [ code: 'be', lang: 'Belarusian'],
+        [ code: 'br', lang: 'Breton'],
+        [ code: 'ca', lang: 'Catalan'],
+        [ code: 'da', lang: 'Danish'],
+        [ code: 'de', lang: 'German'],
+        [ code: 'el', lang: 'Greek'],
+        [ code: 'en', lang: 'English'],
+        [ code: 'eo', lang: 'Esperanto'],
+        [ code: 'es', lang: 'Spanish'],
+        [ code: 'fa', lang: 'Persian'],
+        [ code: 'fr', lang: 'French'],
+        [ code: 'ga', lang: 'Irish'],
+        [ code: 'gl', lang: 'Galician'],
+        [ code: 'it', lang: 'Italian'],
+        [ code: 'ja', lang: 'Japanese'],
+        [ code: 'km', lang: 'CentralKhmer'],
+        [ code: 'nl', lang: 'Dutch'],
+        [ code: 'pl', lang: 'Polish'],
+        [ code: 'pt', lang: 'Portuguese'],
+        [ code: 'ro', lang: 'Romanian'],
+        [ code: 'ru', lang: 'Russian',],
+        [ code: 'sk', lang: 'Slovak'],
+        [ code: 'sl', lang: 'Slovenian'],
+        [ code: 'sv', lang: 'Swedish'],
+        [ code: 'ta', lang: 'Tamil'],
+        [ code: 'tl', lang: 'Tagalog'],
+        [ code: 'uk', lang: 'Ukrainian'],
+        [ code: 'zh', lang: 'Chinese']
+]
+
+moduleList.forEach { args ->
+    def name = args.get('code')
+    def lang = args.get('lang')
+    def pluginClass = "org.omegat.languages.${name}.${lang}Plugin"
+    sourceSets.create(name)
+    dependencies.add("${name}CompileOnly", project.rootProject)
+    dependencies.add("${name}CompileOnly", libs.languagetool.core) {
+        exclude module: "hunspell"
+    }
+    // when build from sourceZip
+    if (providedModuleLibsDir.directory) {
+        dependencies.add("${name}Implementation", fileTree(dir: providedModuleLibsDir,
+                include: "**/language-${name}-*.jar"))
+        if (name.equals("ja")) {
+            dependencies.jaImplementation(fileTree(dir: providedModuleLibsDir,
+                    includes: ['**/lucene-gosen-*.jar', '**/icu4j-*.jar']))
+        } else if (name.equals("en")) {
+            dependencies.add("enRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    includes: ['**/opennlp-*.jar']))
+        } else if (name.equals("ca")) {
+            dependencies.add("caRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/catalan-pos-dict-*.jar'))
+        } else if (name.equals("de")) {
+            dependencies.add("deRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    includes: ['**/commons-lang3-*.jar', '**/jwordsplitter-*.jar', '**/german-*.jar', '**/openregex-*.jar']))
+        } else if (name.equals("el")) {
+            dependencies.add("elRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/morphology-el-*.jar'))
+        } else if (name.equals("es")) {
+            dependencies.add("esRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/spanish-pos-dict-*.jar'))
+        } else if (name.equals("fr")) {
+            dependencies.add("frRuntimeOnly", fileTree(dir: providedModuleLibsDir, include: '**/french-*.jar'))
+        } else if (name.equals("ga")) {
+            dependencies.add("gaRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/languagetool-ga-dicts-*.jar'))
+        } else if (name.equals('pt')) {
+            dependencies.add("ptRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/portuguese-pos-dict-*.jar'))
+        } else if (name.equals("ru")) {
+            dependencies.add("ruRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/openregex-*.jar'))
+        } else if (name.equals("uk")) {
+            dependencies.add("ukRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/morfologik-ukrainian-*.jar'))
+        } else if (name.equals("zh")) {
+            dependencies.add("zhRuntimeOnly", fileTree(dir: providedModuleLibsDir,
+                    include: '**/hanlp-portable-*.jar'))
+        }
+    } else {
+        // build from project git repository
+        if (name.equals("ja")) {
+            dependencies.jaImplementation(libs.languagetool.ja) {
+                // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+                exclude module: 'lucene-gosen'
+                exclude module: 'languagetool-core'
+                exclude module: 'icu4j'
+            }
+            dependencies.jaImplementation(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+            dependencies.jaImplementation(libs.icj4j)
+        } else {
+            dependencies.add("${name}Implementation", libs.languagetool.getAt(name)) {
+                exclude module: 'languagetool-core'
+            }
+        }
+    }
+    configurations.getByName("${name}RuntimeClasspath").exclude(module: 'languagetool-core')
+    tasks.register("${name}Jar", Jar) {
+        archiveFileName.set("omegat-language-${name}.${archiveExtension.get()}")
+        destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from configurations.getByName("${name}RuntimeClasspath").collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+        from sourceSets.getByName("${name}").output
+        manifest {
+            attributes(
+                    'Plugin-Name': "OmegaT language-${lang} plugin",
+                    'Plugin-License': 'GNU Public License version 3 or later',
+                    'OmegaT-Plugins': pluginClass,
+                    'Plugin-Author': 'OmegaT team',
+                    'Plugin-Link': 'https://omegat.org',
+                    'Plugin-Description': "Provide languagetool rules, and spell check dictionary for language-${lang}",
+                    'Plugin-Category': 'language',
+                    'Plugin-Version': libs.versions.languagetool.get()
+            )
+        }
+        group = 'build'
+    }
+    jar.dependsOn tasks.named("${name}Jar")
+    tasks.getByName("${name}Classes") {
+        group = 'build'
+    }
+    def capitalName = name.capitalize()
+    tasks.getByName("spotbugs${capitalName}") {
+        group = 'other'
+    }
+    tasks.getByName("checkstyleMain").dependsOn tasks.named("checkstyle${capitalName}")
+}
+
+dependencies {
+    testImplementation(libs.junit4)
+    testRuntimeOnly(libs.slf4j.jdk14)
+    testImplementation(project.rootProject)
+
+    testCompileOnly(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+    testImplementation(libs.languagetool.core) {
+        exclude module: 'language-all'
+    }
+    testRuntimeOnly(libs.languagetool.ja) {
+        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+        exclude module: 'lucene-gosen'
+        exclude module: 'languagetool-core'
+        exclude module: 'icu4j'
+    }
+    testRuntimeOnly(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+    testRuntimeOnly(libs.icj4j)
+}

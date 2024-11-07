@@ -110,7 +110,7 @@ public final class Styles {
 
         COLOR_PARAGRAPH_START(UIManager.getColor("OmegaT.paragraphStart")),
 
-        COLOR_MARK_COMES_FROM_TM(UIManager.getColor("OmegaT.markComesFromTm")),
+        COLOR_MARK_COMES_FROM_TM_MT(UIManager.getColor("OmegaT.markComesFromTmMt")),
 
         COLOR_MARK_COMES_FROM_TM_XICE(UIManager.getColor("OmegaT.markComesFromTmXice")),
 
@@ -119,6 +119,8 @@ public final class Styles {
         COLOR_MARK_COMES_FROM_TM_XAUTO(UIManager.getColor("OmegaT.markComesFromTmXauto")),
 
         COLOR_MARK_COMES_FROM_TM_XENFORCED(UIManager.getColor("OmegaT.markComesFromTmXenforced")),
+
+        COLOR_MARK_ALT_TRANSLATION(UIManager.getColor("OmegaT.markAltTranslations")),
 
         COLOR_REPLACE(UIManager.getColor("OmegaT.replace")),
 

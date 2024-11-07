@@ -26,13 +26,25 @@
 package org.omegat.util.gui;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.awt.Color;
 import java.util.stream.IntStream;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import org.omegat.core.TestCoreInitializer;
+import org.omegat.gui.main.ConsoleWindow;
+import org.omegat.gui.main.IMainWindow;
+
 public class StaticUIUtilsTest {
+
+    @Before
+    public void setUp() throws Exception {
+        IMainWindow mainWindow = new ConsoleWindow();
+        TestCoreInitializer.initMainWindow(mainWindow);
+    }
 
     @Test
     public void testGetHighlightColor() {
@@ -43,5 +55,10 @@ public class StaticUIUtilsTest {
         assertEquals(new Color(10, 10, 10), StaticUIUtils.getHighlightColor(Color.BLACK, -10));
         assertEquals(new Color(245, 245, 245), StaticUIUtils.getHighlightColor(Color.WHITE, 10));
         assertEquals(new Color(245, 245, 245), StaticUIUtils.getHighlightColor(Color.WHITE, -10));
+    }
+
+    @Test
+    public void testIsGUI() {
+        assertFalse("Run with ConsoleWindow", StaticUIUtils.isGUI());
     }
 }

@@ -4,6 +4,9 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2018 Thomas Cordonnier
+               2007-2013 Didier Briel
+               2015-2016 Didier Briel
+               2019 Didier Briel
                Home page: https://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -45,6 +48,7 @@ import org.omegat.util.OStrings;
  * Filter for Microsoft Open XML.
  *
  * @author Thomas Cordonnier
+ * @author Didier Briel
  */
 public class MsOfficeFileFilter extends AbstractZipFilter {
     private String DOCUMENTS;

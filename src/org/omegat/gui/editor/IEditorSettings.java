@@ -66,14 +66,18 @@ public interface IEditorSettings {
     boolean isMarkWhitespace();
 
     void setMarkWhitespace(boolean markWhitespace);
-    
+
     void setMarkParagraphDelimitations(boolean mark);
-    
+
     boolean isMarkParagraphDelimitations();
 
     boolean isMarkBidi();
 
     void setMarkBidi(boolean markBidi);
+
+    boolean isMarkAltTranslations();
+
+    void setMarkAltTranslations(boolean markAltTranslations);
 
     boolean isAutoSpellChecking();
 

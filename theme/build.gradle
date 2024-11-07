@@ -4,8 +4,8 @@ plugins {
 
 dependencies {
     compileOnly(project.rootProject)
-    if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, include: '**/flatlaf*.jar')
+    if (providedModuleLibsDir.directory) {
+        compileOnly fileTree(dir: providedModuleLibsDir, include: '**/flatlaf*.jar')
     } else {
         // platform independent dark theme
         implementation(libs.flatlaf)

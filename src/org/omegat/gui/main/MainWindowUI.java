@@ -31,33 +31,28 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Component;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.search.SearchMode;
-import org.omegat.gui.search.SearchWindowController;
+import org.omegat.gui.editor.EditorUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.UIDesignManager;
-
-import com.vlsolutions.swing.docking.DockingDesktop;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeEvent;
-import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
 
 /**
  * Class for initialize, load/save, etc. for main window UI components.
@@ -75,31 +70,10 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  */
 public final class MainWindowUI {
 
-    /**
-     * Set of all open search windows.
-     */
-    private static final List<SearchWindowController> searches = new ArrayList<>();
-
     private MainWindowUI() {
     }
 
     public static final String UI_LAYOUT_FILE = "uiLayout" + OStrings.getBrandingToken() + ".xml";
-
-    /**
-     * Create docking desktop panel.
-     */
-    public static DockingDesktop initDocking(final MainWindow mainWindow) {
-        mainWindow.desktop = new DockingDesktop();
-        mainWindow.desktop.addDockableStateWillChangeListener(new DockableStateWillChangeListener() {
-            public void dockableStateWillChange(DockableStateWillChangeEvent event) {
-                if (event.getFutureState().isClosed()) {
-                    event.cancel();
-                }
-            }
-        });
-
-        return mainWindow.desktop;
-    }
 
     /**
      * Installs a {@link IProjectEventListener} that handles loading, storing,
@@ -110,51 +84,6 @@ public final class MainWindowUI {
         PerProjectLayoutHandler handler = new PerProjectLayoutHandler(mainWindow);
         CoreEvents.registerProjectChangeListener(handler);
         CoreEvents.registerApplicationEventListener(handler);
-    }
-
-    static void createSearchWindow(SearchMode mode, String query) {
-        SearchWindowController search = new SearchWindowController(mode);
-        addSearchWindow(search);
-        search.makeVisible(query);
-    }
-
-    static void closeSearchWindows() {
-        synchronized (searches) {
-            // dispose other windows
-            for (SearchWindowController sw : searches) {
-                sw.dispose();
-            }
-            searches.clear();
-        }
-    }
-
-    static boolean reuseSearchWindow(String text) {
-        for (int i = searches.size() - 1; i >= 0; i--) {
-            SearchWindowController swc = searches.get(i);
-            if (swc.getMode() == SearchMode.SEARCH) {
-                swc.makeVisible(text);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static void addSearchWindow(final SearchWindowController newSearchWindow) {
-        newSearchWindow.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                removeSearchWindow(newSearchWindow);
-            }
-        });
-        synchronized (searches) {
-            searches.add(newSearchWindow);
-        }
-    }
-
-    private static void removeSearchWindow(SearchWindowController searchWindow) {
-        synchronized (searches) {
-            searches.remove(searchWindow);
-        }
     }
 
     private static class PerProjectLayoutHandler implements IProjectEventListener, IApplicationEventListener {
@@ -217,7 +146,7 @@ public final class MainWindowUI {
     /**
      * Initialize the size of OmegaT window, then load the layout prefs.
      */
-    public static void initializeScreenLayout(MainWindow mainWindow) {
+    public static void initializeScreenLayout(IMainWindow mainWindow) {
         /**
          * (23dec22) Set a reasonable default window size assuming a
          * standard"pro" laptop resolution of 1920x1080. Smaller screens do not
@@ -252,16 +181,15 @@ public final class MainWindowUI {
 
         // Ensure any "closed" Dockables are visible. These can be newly added
         // panes not included in an older layout file, or e.g. panes installed
-        // by
-        // plugins.
-        UIDesignManager.ensureDockablesVisible(mainWindow.desktop);
+        // by plugins.
+        UIDesignManager.ensureDockablesVisible(mainWindow.getDesktop());
     }
 
     /**
      * Load the main window layout from the global preferences file. Will reset
      * to defaults if global preferences are not present or if an error occurs.
      */
-    private static void loadScreenLayoutFromPreferences(MainWindow mainWindow) {
+    private static void loadScreenLayoutFromPreferences(IMainWindow mainWindow) {
         File uiLayoutFile = new File(StaticUtils.getConfigDir(), MainWindowUI.UI_LAYOUT_FILE);
         if (uiLayoutFile.exists()) {
             loadScreenLayout(mainWindow, uiLayoutFile);
@@ -274,9 +202,9 @@ public final class MainWindowUI {
      * Load the main window layout from the specified file. Will reset to
      * defaults if an error occurs.
      */
-    private static void loadScreenLayout(MainWindow mainWindow, File uiLayoutFile) {
+    private static void loadScreenLayout(IMainWindow mainWindow, File uiLayoutFile) {
         try (InputStream in = new FileInputStream(uiLayoutFile)) {
-            mainWindow.desktop.readXML(in);
+            mainWindow.getDesktop().readXML(in);
         } catch (Exception ex) {
             Log.log(ex);
             resetDesktopLayout(mainWindow);
@@ -306,11 +234,24 @@ public final class MainWindowUI {
      * Restores main window layout to the default values (distinct from global
      * preferences).
      */
-    public static void resetDesktopLayout(MainWindow mainWindow) {
+    public static void resetDesktopLayout(IMainWindow mainWindow) {
         try (InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml")) {
-            mainWindow.desktop.readXML(in);
+            mainWindow.getDesktop().readXML(in);
         } catch (Exception e) {
             Log.log(e);
         }
+    }
+
+    public static String getTrimmedSelectedTextInMainWindow(MainWindow mainWindow) {
+        String selection = null;
+        Component component = mainWindow.getApplicationFrame().getMostRecentFocusOwner();
+        if (component instanceof JTextComponent) {
+            selection = ((JTextComponent) component).getSelectedText();
+            if (!StringUtil.isEmpty(selection)) {
+                selection = EditorUtils.removeDirectionChars(selection);
+                selection = selection.trim();
+            }
+        }
+        return selection;
     }
 }

@@ -187,6 +187,8 @@ public final class Preferences {
     public static final String MARK_WHITESPACE = "mark_whitespace";
     /** Mark Bidi controls as symbols */
     public static final String MARK_BIDI = "mark_bidi";
+    /** Mark alternative translations */
+    public static final String MARK_ALT_TRANSLATIONS = "mark_alt_translations";
     /** Do aggressive font fallback */
     public static final String FONT_FALLBACK = "font_fallback";
 

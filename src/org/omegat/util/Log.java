@@ -34,7 +34,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZonedDateTime;
 import java.util.Properties;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -56,19 +58,38 @@ import org.omegat.util.logging.OmegaTFileHandler;
  */
 public final class Log {
 
-    private static final ILogger LOGGER = LoggerFactory.getLogger(ILogger.ROOT_LOGGER_NAME,
-            OStrings.getResourceBundle());
+    private static final ILogger LOGGER;
+
+    // Line mark is day-of-the-year and five-character random number
+    private static final String SESSION_ID;
+    private static final ZonedDateTime SESSION_START_DATETIME;
 
     private Log() {
     }
 
     static {
+        SESSION_ID = String.format("%05d", ThreadLocalRandom.current().nextInt(100000));
+        SESSION_START_DATETIME = ZonedDateTime.now();
+        LOGGER = LoggerFactory.getLogger(ILogger.ROOT_LOGGER_NAME,
+                OStrings.getResourceBundle());
+        init();
+    }
+
+    public static String getSessionId() {
+        return SESSION_ID;
+    }
+
+    public static ZonedDateTime getSessionStartDateTime() {
+        return SESSION_START_DATETIME;
+    }
+
+    private static void init() {
         boolean loaded = false;
 
         // Ask slf4j-format-jdk14 to append (KEY) to log message.
         // When you switch to backend other than slf4j-jdk14(aka. JUL),
         // you should set to false. Otherwise, you may get duplicated key
-        // in message.
+        // in a message.
         System.setProperty(LoggerDecorator.LOCALISATION_KEY_APPENDER, "true");
 
         String customLogConfig = System.getProperty("java.util.logging.config.file");

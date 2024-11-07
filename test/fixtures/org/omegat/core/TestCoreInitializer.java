@@ -30,7 +30,6 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.main.MainWindow;
 
 /**
  * Core initializer for unit tests.
@@ -56,11 +55,7 @@ public final class TestCoreInitializer {
         if (mainWindow instanceof ConsoleWindow) {
             return;
         }
-
-        // FIXME: IMainWindow on GUI environment should be initialized
-        if (mainWindow instanceof MainWindow) {
-            Core.initializeGUIimpl((MainWindow) mainWindow);
-        }
+        Core.initializeGUIimpl(mainWindow);
     }
 
     public static void initGlossary(IGlossaries glossaries) {

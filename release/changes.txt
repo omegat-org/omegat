@@ -1,13 +1,30 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  44 Enhancement
-  69 Bug fixes
+  51 Enhancement
+  81 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Log filename to be date-time based
+  https://sourceforge.net/p/omegat/feature-requests/1753/
+
+  - Support Morfologik spell checker and use LT bundled dictionary
+  https://sourceforge.net/p/omegat/feature-requests/1748/
+
+  - Support U*ix variants
+  https://sourceforge.net/p/omegat/feature-requests/1746
+
+  - Alternative translation highlight
+  https://sourceforge.net/p/omegat/feature-requests/1736/
+
+  - Add timestamp to log
+  https://sourceforge.net/p/omegat/feature-requests/1734/
+
+  - Apertium MT now sends whole locale code to server instead of only the language code
 
   - Support for Stardict's Pango content type
   https://sourceforge.net/p/omegat/feature-requests/1727/
@@ -35,6 +52,9 @@
 
   -	Make repository connectors as plugin
   https://sourceforge.net/p/omegat/feature-requests/1715/
+
+  - Make language libraries in LanguageTools as module
+  https://sourceforge.net/p/omegat/feature-requests/1714/
 
   - ResourceBundle filter: "Don't translate NOI18N comment" feature optional
   https://sourceforge.net/p/omegat/feature-requests/1713/
@@ -136,8 +156,35 @@
 
   Bug fixes:
 
+  - Speller: morfologik: LT bundled dictionary not found in Dutch
+  https://sourceforge.net/p/omegat/bugs/1271/
+
+  - Console-stats command failed with error
+  https://sourceforge.net/p/omegat/bugs/1267/
+
+  - Removal of MED package save/load feature
+  https://sourceforge.net/p/omegat/bugs/1266/
+
+  - Failed to load "en-AU" LT language by IllegalArgumentException
+    https://sourceforge.net/p/omegat/bugs/1265/
+
+  - filter: bundle: when charsert configuration is US_ASCII, force unicode escape
+  https://sourceforge.net/p/omegat/bugs/1264/
+
+  - OmegaT 6.1 does not write startup message in log file
+  https://sourceforge.net/p/omegat/bugs/1262/
+
+  - Color customize UI label for marker come from tm/mt/ folder
+    https://sourceforge.net/p/omegat/bugs/1261/
+
+  - Fix behaviour where git repos would be recognised as SVN
+  https://sourceforge.net/p/omegat/bugs/1258/
+
   - OmegaT does not show entreis of stardict-JMDict dictionary
   https://sourceforge.net/p/omegat/bugs/1255/
+
+  - Links with ending parens in glossary panes
+  https://sourceforge.net/p/omegat/bugs/1253/
 
   - Short glossary items are not recognized with Korean source
   https://sourceforge.net/p/omegat/bugs/1250/
@@ -160,11 +207,17 @@
   - Windows launcher does not launch when witout_JRE installer used
   https://sourceforge.net/p/omegat/bugs/1240/
 
+  - Glossary popups behavior changed unintended way
+  https://sourceforge.net/p/omegat/bugs/1239/
+
   - OmegaT does not use cached MT result for translated segments
   https://sourceforge.net/p/omegat/bugs/1238/
 
   - Match statistics are affected by fuzzy match threshold
   https://sourceforge.net/p/omegat/bugs/1236/
+
+  - PluginInstaller throws NPE in certain condition
+  https://sourceforge.net/p/omegat/bugs/1235/
 
   - Issue window cause exception
   https://sourceforge.net/p/omegat/bugs/1234/
@@ -330,6 +383,9 @@
 
   - Manually assigned shortcuts open parent folders instead of files
   https://sourceforge.net/p/omegat/bugs/858/
+
+  - Team projects not saving properly or stopping synchronization
+  https://sourceforge.net/p/omegat/bugs/847/
 
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/

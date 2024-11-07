@@ -12,5 +12,5 @@ steps:
         srcdir=$(system.defaultworkingdirectory)/build/docs/manual/
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir=/home/project-web/omegat/htdocs/manual-snapshot/
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -v $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -v -r -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir
+        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -r -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir

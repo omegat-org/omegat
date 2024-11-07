@@ -224,8 +224,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectCommitTargetFiles = createMenuItem("TF_MENU_FILE_TARGET");
         projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE");
         projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE");
-        projectMedOpenMenuItem = createMenuItem("TF_MENU_FILE_MED_OPEN");
-        projectMedCreateMenuItem = createMenuItem("TF_MENU_FILE_MED_CREATE");
         projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT");
         viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN");
 
@@ -334,6 +332,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 "MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES");
         viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem(
                 "MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS");
+        viewMarkAlternativeTranslationsCheckBoxMenuItem = createCheckboxMenuItem(
+                "MW_VIEW_MENU_MARK_ALT_TRANSLATIONS");
         viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NOTED_SEGMENTS");
         viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP");
         viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE");
@@ -362,6 +362,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 .setIcon(MainMenuIcons.newTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor(), 'M'));
         viewMarkNotedSegmentsCheckBoxMenuItem
                 .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
+        viewMarkAlternativeTranslationsCheckBoxMenuItem
+                .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_MARK_ALT_TRANSLATION.getColor()));
         viewMarkNBSPCheckBoxMenuItem
                 .setIcon(MainMenuIcons.newColorIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
         viewMarkWhitespaceCheckBoxMenuItem
@@ -441,9 +443,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectMenu.addSeparator();
         projectMenu.add(projectCompileMenuItem);
         projectMenu.add(projectSingleCompileMenuItem);
-        projectMenu.addSeparator();
-        projectMenu.add(projectMedOpenMenuItem);
-        projectMenu.add(projectMedCreateMenuItem);
         projectMenu.addSeparator();
         projectMenu.add(projectEditMenuItem);
         projectMenu.add(viewFileListMenuItem);
@@ -551,6 +550,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMenu.add(viewMarkParagraphStartCheckBoxMenuItem);
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem);
         viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem);
+        viewMenu.add(viewMarkAlternativeTranslationsCheckBoxMenuItem);
         viewMenu.add(viewMarkNotedSegmentsCheckBoxMenuItem);
         viewMenu.add(viewMarkNBSPCheckBoxMenuItem);
         viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem);
@@ -822,12 +822,11 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     protected void onProjectStatusChanged(final boolean isProjectOpened) {
 
         JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectTeamNewMenuItem,
-                projectOpenMenuItem, projectMedOpenMenuItem };
+                projectOpenMenuItem };
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem, projectSingleCompileMenuItem, projectAccessProjectFilesMenu,
-                projectMedCreateMenuItem,
 
                 editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem, editInsertSourceMenuItem,
                 editInsertTranslationMenuItem, editTagPainterMenuItem, editOverwriteSourceMenuItem,
@@ -892,6 +891,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 .setSelected(Core.getEditor().getSettings().isMarkNonUniqueSegments());
         viewMarkNotedSegmentsCheckBoxMenuItem
                 .setSelected(Core.getEditor().getSettings().isMarkNotedSegments());
+        viewMarkAlternativeTranslationsCheckBoxMenuItem
+                .setSelected(Core.getEditor().getSettings().isMarkAltTranslations());
         viewMarkNBSPCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkNBSP());
         viewMarkWhitespaceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkWhitespace());
         viewMarkBidiCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkBidi());
@@ -1074,8 +1075,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem projectCommitTargetFiles;
     JMenuItem projectCompileMenuItem;
     JMenuItem projectSingleCompileMenuItem;
-    JMenuItem projectMedOpenMenuItem;
-    JMenuItem projectMedCreateMenuItem;
     JMenuItem projectEditMenuItem;
     JMenuItem projectExitMenuItem;
     JMenuItem projectRestartMenuItem;
@@ -1112,6 +1111,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JMenuItem upperCaseMenuItem;
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkAlternativeTranslationsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNotedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNBSPCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;

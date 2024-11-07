@@ -28,17 +28,23 @@ application {
     mainClass = 'org.omegat.Main'
 }
 
+// Force Java runtime for Gradle on Java 17
+def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 tasks.named('updateDaemonJvm') {
     jvmVersion = JavaVersion.VERSION_17
 }
 
+// Define target Java version to compatible.
+def javaVersion = 11;
+
+// OmegaT distribution package meta data.
 def shortDescription = 'The free translation memory tool'
 def distDescription = 'OmegaT is a free and open source multiplatform Computer Assisted Translation tool with' +
         ' fuzzy matching, translation memory, keyword search, glossaries, and translation leveraging into updated' +
         ' projects.'
 def distAppVendor = 'The OmegaT project'
-def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
-def javaVersion = 11;
+
+// Definition of OmegaT versioning
 def localPropsFile = file('local.properties')
 ext {
     omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
@@ -49,13 +55,25 @@ ext {
             }
         }
     }
-    providedLibsDir = file('lib/provided')
+    providedCoreLibsDir = file('lib/provided/core')
+    providedModuleLibsDir = file('lib/provided/module')
 }
 def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
 def omtWebsite = 'https://omegat.org'
-def envIsCi = project.hasProperty('envIsCi') as Boolean
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
+
+// Flag to detect CI/CD environment
+def envIsCi = project.hasProperty('envIsCi') as Boolean
+
+// Definition of bundled JRE file names
+def assetDir = findProperty('assetDir') ?: '../'
+def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
+def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
+def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
+def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
+def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
+def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
 
 java {
     withSourcesJar()
@@ -223,14 +241,16 @@ configurations {
     genMac
 }
 
-ext {
-    providedLibsDir = file('lib/provided')
-}
 
 dependencies {
     // Libs are provided in the "source" distribution only
-    if (providedLibsDir.directory) {
-        implementation fileTree(dir: providedLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-1.*.jar'])
+    if (providedCoreLibsDir.directory) {
+        api fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-api-*.jar', '**/jaxb-api-*.jar'])
+        implementation fileTree(dir: providedCoreLibsDir, include: '**/*.jar', excludes: ['**/slf4j-api-*.jar',
+            '**/slf4j-jdk14-*.jar', 'language-detector-*.jar', '**/hunspell-*.jar',
+                '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
+        runtimeOnly fileTree(dir: providedCoreLibsDir, includes: ['**/slf4j-jdk14-*.jar',
+            '**/language-detector-*.jar', '**/hunspell-*.jar', '**/groovy*.jar', '**/jaxb-runtime-*.jar'])
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
@@ -239,12 +259,17 @@ dependencies {
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
 
+        // jaxb gen compilation
+        implementation(libs.jaxb.api)
+        runtimeOnly(libs.jaxb.core)
+        runtimeOnly(libs.jaxb.runtime)
+
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
 
         // stax
         implementation(libs.stax2.api)
-        runtimeOnly(libs.woodstox.core)
+        implementation(libs.woodstox.core)
 
         // Data: inline data URL handler
         implementation(libs.url.protocol.handler)
@@ -269,15 +294,10 @@ dependencies {
             exclude module: 'guava'
             exclude module: 'language-detector'
             exclude group: 'com.google.android'
+            exclude module: 'hunspell'
         }
-        implementation(libs.language.detector)
-
-        runtimeOnly(libs.languagetool.all) {
-            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-            exclude module: 'lucene-gosen'
-            exclude module: 'language-detector'
-        }
-        runtimeOnly 'org.omegat.lucene:lucene-gosen:5.5.1:ipadic'
+        runtimeOnly(libs.language.detector)
+        runtimeOnly(libs.dumont.hunspell)
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
@@ -350,16 +370,11 @@ dependencies {
 
     testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
-    // LanguageTool unit tests exercise these languages
-    testImplementation(libs.bundles.languagetool.tests) {
-        exclude group: 'org.slf4j'
-        exclude module: 'guava'
-        exclude module: 'language-detector'
-        exclude group: 'ch.qos.logback'
-        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
-        exclude module: 'lucene-gosen'
+
+    testImplementation(project(":language-modules"))
+    testImplementation(libs.languagetool.server) {
+        exclude module: "logback-classic"
     }
-    testImplementation "org.omegat.lucene:lucene-gosen:5.5.1:ipadic"
     testRuntimeOnly(libs.slf4j.jdk14)
 
     // JAXB codegen only
@@ -434,14 +449,6 @@ jar {
 def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
 project(":spellchecker") {jar.enabled = false}
-
-def assetDir = findProperty('assetDir') ?: '../'
-def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
-def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
-def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
-def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
-def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
-def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
 
 /*
  * Configuration of launch4j java launcher.
@@ -714,11 +721,9 @@ distributions {
                 into 'lib'
             }
             // system core plugins into modules
-            from('releases/modules-specific') {
-                into 'modules'
-            }
-            from(subprojects.collect {it.tasks.withType(Jar)}) {
-                into 'modules'
+            into('modules') {
+                from(subprojects.collect {it.tasks.withType(Jar)})
+                from('releases/modules-specific')
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -734,18 +739,21 @@ distributions {
         contents {
             from(rootDir) {
                 include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
-                    'src/**/*.java', 'test/**', 'test-integration/**', 'doc_src/**', 'docs_devel/**', 'scripts/**',
-                    'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
-                    'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
-                    '.checkstyle'
+                        'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
+                        'docs_devel/**', 'scripts/**',
+                        'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
+                        'tipoftheday/**', 'machinetranslators/**', 'scriptengine/**', 'LICENSE', 'compose.yml',
+                        'aligner/**', 'language-modules/**', 'spellchecker/**', 'theme/**', '.checkstyle'
                 exclude '**/build/**', 'doc_src/**/pdf/**', 'doc_src/**/xhtml5/**', 'local.properties', '**/out/**'
             }
             from(processResources) {
                 into('src')
             }
-            into('lib/provided') {
-                // collect project runtime dependencies in all subprojects and sourceSets
+            into('lib/provided/core') {
                 from configurations.runtimeClasspath
+            }
+            into('lib/provided/module') {
+                // collect project runtime dependencies in all subprojects and sourceSets
                 from {subprojects.findAll { it.getSubprojects().isEmpty()}
                         .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')
                                 && !it.name.startsWith('test') && !it.name.startsWith('jaxb')
@@ -1347,7 +1355,7 @@ ext.makeWinTask = { args ->
         }
     }
 
-    tasks.register(distsTaskName, Sync) {
+    tasks.register(distsTaskName, Copy) {
         description = "Create a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         onlyIf {
@@ -1581,6 +1589,7 @@ test {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
 tasks.register('testIntegration', JavaExec) {
@@ -1593,6 +1602,7 @@ tasks.register('testIntegration', JavaExec) {
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
     systemProperties = System.properties
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
 tasks.register('testOnJava17', Test) {
@@ -1601,9 +1611,11 @@ tasks.register('testOnJava17', Test) {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
     }
+    systemProperties = System.properties
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     group = 'verification'
 }
 
@@ -1613,13 +1625,68 @@ tasks.register('testOnJava21', Test) {
         languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
     }
+    systemProperties = System.properties
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     group = 'verification'
 }
 
+def startX(display) {
+    def outputStream = new ByteArrayOutputStream()
+    exec {
+        commandLine 'sh', '-c', "Xvfb :${display} -screen 0 1280x1024x24 >>/dev/null 2>&1 & echo \$!"
+        standardOutput = outputStream
+    }
+    def xvfbPid = outputStream.toString().trim()
+    println "Virtual X server is started with DISPLAY :${display} and PID: ${xvfbPid}"
+    return xvfbPid
+}
+
+def stopX(pid) {
+    println "Stopping virtual X server..."
+    def outputStream = new ByteArrayOutputStream()
+    exec {
+        commandLine 'sh', '-c', "kill ${pid} &"
+        standardOutput = outputStream
+        errorOutput = outputStream
+    }
+}
+
+def isCommandAvailable(command) {
+    def outputStream = new ByteArrayOutputStream()
+    exec {
+        commandLine 'sh', '-c', "command -v ${command}"
+        ignoreExitValue true
+        standardOutput = outputStream
+        errorOutput = outputStream
+    }.exitValue == 0
+}
+
 tasks.register('testAcceptance', Test) {
+    onlyIf {
+        isCommandAvailable('Xvfb') || project.hasProperty("acceptanceTestLive")
+    }
+    def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
+    doFirst {
+        if (!display.isEmpty()) {
+            def lockFile = new File("/tmp/.X${display}-lock")
+            if (!lockFile.exists()) {
+                ext.xvfbPid = startX(display)
+                environment 'DISPLAY', ":${display}"
+            }
+        }
+    }
+    doLast {
+        if (!display.isEmpty()) {
+            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
+            if (pid != null) {
+                stopX(pid)
+            }
+        }
+    }
+
     description = 'Run Acceptance GUI test'
     group = 'verification'
     javaLauncher = javaToolchains.launcherFor {
@@ -1631,7 +1698,7 @@ tasks.register('testAcceptance', Test) {
     testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties
-    shouldRunAfter(tasks.test)
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')

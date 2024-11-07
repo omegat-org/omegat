@@ -37,7 +37,7 @@
     <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>
     <suppress files="(TestFilterBase|TmxComplianceBase|FilterMasterTest)\.java" checks="(HiddenField|ParameterNumber)"/>
     <suppress files="AutoTmxTest\.java" checks="InnerAssignment"/>
-    <suppress files="(CLIParameters|LanguageTool|WordPredictor|JsonParser|POFilter)Test\.java"
+    <suppress files="(CLIParameters|WordPredictor|JsonParser|POFilter)Test\.java"
               checks="AvoidNestedBlocks"/>
     <!-- expectation string lengthy -->
     <suppress files="ResourceBundleFilterTest\.java" checks="LineLength" lines="221"/>
@@ -101,7 +101,7 @@
     <suppress files="(BidiUtils|Java8Compat|MagicComment|JnaLoader)\.java" checks="HideUtilityClassConstructor"/>
     <suppress files="JTextPaneLinkifier\.java" checks="EmptyBlock"/>
     <suppress files="RepositoriesMappingController\.java:" checks="MethodLength"/>
-    <suppress files="EditorSettings\.java" checks="ParameterNumber" lines="497"/>
+    <suppress files="EditorSettings\.java" checks="ParameterNumber" lines="525"/>
     <suppress files="(IssuesPanel|PreferencesWindow)Controller\.java" checks="MethodLength"/>
     <suppress files="MatchesVarExpansion\.java" checks="InnerAssignment"/>
     <suppress files="EditorTextArea3\.java" checks="MethodLength"/>

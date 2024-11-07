@@ -55,7 +55,6 @@ public class EditorUtilsTest {
         public void testEditorUtilsGetWordEn() throws BadLocationException {
             int offs = 518;
             JTextComponent editPane = window.panel("First Steps").textBox("IntroPane").target();
-            String text = editPane.getText();
             int posStart = EditorUtils.getWordStart(editPane, offs);
             int posEnd = EditorUtils.getWordEnd(editPane, offs);
             String word = editPane.getText(posStart, posEnd - posStart);

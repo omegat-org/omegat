@@ -1699,6 +1699,7 @@ tasks.register('testAcceptance', Test) {
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    dependsOn firstStepsEn
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')

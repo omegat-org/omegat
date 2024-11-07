@@ -176,6 +176,9 @@ public class CustomColorSelectionController extends BasePreferencesController {
             Color color = temporaryPreferences.getOrDefault(style, style.getColor());
             setColorChooserWithoutNotifying(color);
         });
+        if (enabled) {
+            setRestartRequired(hasChanges());
+        }
     }
 
     private void resetCurrentColor() {

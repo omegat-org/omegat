@@ -95,3 +95,15 @@ Copyright 2015 Timothy Miller
 eye.svg, eye-slash.svg is distributed under The MIT License
 Copyright (c) 2019-2023 The Bootstrap Authors
 (https://github.com/twbs/icons)
+
+src/org/omegat/tokenizer/stopwords/* is distributed under The MIT License
+Copyright (c) 2016 Gene Diaz
+(https://github.com/stopwords-iso)
+
+Test spelldics, hunspell dictionary, for en_GB is distributed under
+The MIT license and BSD-3.0 license.
+see Hunspell_dictionary_en_GB_license.txt
+
+Test spelldics, hunspell dictionary, for es is distributed under
+GNU General Public License version 3.0 OR LGPL-3.0 or MPL-1.1.
+see Hunspell_dictionary_es_license.txt

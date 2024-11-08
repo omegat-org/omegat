@@ -28,11 +28,21 @@ package org.omegat.tokenizer;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.lucene.analysis.hunspell.Dictionary;
+import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.tokenizer.ITokenizer.StemmingMode;
+import org.omegat.util.Language;
+import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.Token;
 
 public class TokenizerTest {
+
+    @Before
+    public void setUp() throws Exception {
+        TestPreferencesInitializer.init();
+    }
 
     @Test
     public void testEnglish() {
@@ -226,6 +236,51 @@ public class TokenizerTest {
         assertResult(new String[] { "The", "quick", "brown", "jumped", "over", "lazy", "\u0130stanbul",
                 "\u65E5\u672C\u8A9E", "\u3042\u3044\u3046\u3048\u304A" },
                 tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
+    }
+
+    @Test
+    public void testHunspellEnglish() {
+        ITokenizer tok = new HunspellTokenizerMock(new Language("en"));
+        String orig = "The quick, brown <x0/> jumped over 1 \"lazy\" dog.";
+        assertVerbatim(new String[] { "The", " ", "quick", ",", " ", "brown", " ", "<x0/>", " ",
+                        "jumped", " ", "over", " ", "1", " ", "\"", "lazy", "\"", " ", "dog", "." },
+                tok.tokenizeVerbatimToStrings(orig),
+                tok.tokenizeVerbatim(orig),
+                orig);
+        assertResult(new String[] {"The", "quick", "brown", "jumped", "over", "lazy", "dog"},
+                tok.tokenizeWordsToStrings(orig, StemmingMode.NONE));
+        assertResult(new String[] {"The", "quick", "brown", "x0", "jumped", "over", "1", "lazy", "dog"},
+                tok.tokenizeWordsToStrings(orig, StemmingMode.GLOSSARY));
+        assertResult(new String[] {"The", "quick", "brown", "jumped", "over", "lazy", "dog"},
+                tok.tokenizeWordsToStrings(orig, StemmingMode.MATCHING));
+    }
+
+    @Test
+    public void testHunspellGerman() {
+        ITokenizer tok = new HunspellTokenizerMock(new Language("de"));
+        assertResult(new String[] { "pr\u00e4sentierte" },
+                tok.tokenizeWordsToStrings("pr\u00e4sentierte", StemmingMode.GLOSSARY));
+        assertResult(new String[] { "pr\u00e4sentieren" },
+                tok.tokenizeWordsToStrings("pr\u00e4sentieren", StemmingMode.GLOSSARY));
+    }
+
+    @Tokenizer(languages = { Tokenizer.DISCOVER_AT_RUNTIME })
+    public static class HunspellTokenizerMock extends HunspellTokenizer {
+        private final Language language;
+
+        public HunspellTokenizerMock(Language language) {
+            this.language = language;
+        }
+
+        @Override
+        protected Language getEffectiveLanguage() {
+            return language;
+        }
+
+        @Override
+        protected Dictionary getDict() {
+            return null;
+        }
     }
 
     private void assertVerbatim(String[] expected, String[] test, Token[] testTok, String origString) {

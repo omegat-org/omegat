@@ -795,8 +795,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     /**
-     * Set 'actionCommand' for all menu items. TODO: change to key from resource
-     * bundle values
+     * Set 'actionCommand' for all menu items.
      */
     protected void setActionCommands() {
         try {

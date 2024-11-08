@@ -2146,6 +2146,35 @@ public class EditorController implements IEditor {
         editor.autoCompleter.setVisible(false);
     }
 
+    @Override
+    public CaretPosition getCurrentPositionInEntryTranslationInEditor() {
+        int selectionEnd = getCurrentPositionInEntryTranslation();
+        String selection = getSelectedText();
+        String translation = getCurrentTranslation();
+
+        if (StringUtil.isEmpty(translation) || StringUtil.isEmpty(selection)) {
+            // no translation or no selection
+            return new CaretPosition(selectionEnd);
+        } else {
+            // get selected range
+            int selectionStart = selectionEnd;
+            int pos = 0;
+            do {
+                pos = translation.indexOf(selection, pos);
+                if (pos == selectionEnd) {
+                    selectionStart = pos;
+                    selectionEnd = pos + selection.length();
+                    break;
+                } else if ((pos + selection.length()) == selectionEnd) {
+                    selectionStart = pos;
+                    break;
+                }
+                pos++;
+            } while (pos > 0);
+            return new CaretPosition(selectionStart, selectionEnd);
+        }
+    }
+
     /**
      * Class for checking if alternative translation exist.
      */

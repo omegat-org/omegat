@@ -176,7 +176,9 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             }
         }
 
-        // TODO: We shouldn't be persisting anything here.
+        // Note: When we realize spellchecker dictionary as an extension plugin,
+        // We should remove the URL preference.
+        // See also SpellcheckerConfigurationController#initFromPrefs.
         Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, panel.dictionaryUrlTextField.getText());
 
         try {

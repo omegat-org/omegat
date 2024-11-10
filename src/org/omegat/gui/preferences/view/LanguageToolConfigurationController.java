@@ -115,7 +115,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
     private void initGui() {
         panel = new LanguageToolConfigurationPanel();
         org.openide.awt.Mnemonics.setLocalizedText(panel.bridgeNativeRadioButton,
-                StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), JLanguageTool.VERSION));
+                StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), getLTVersion()));
         panel.bridgeNativeRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.NATIVE));
         panel.bridgeLocalRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.LOCAL_INSTALLATION));
         panel.bridgeRemoteRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.REMOTE_URL));
@@ -129,6 +129,14 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
         } else {
             initWithoutLangs();
         }
+    }
+
+    @SuppressWarnings("deprecation")
+    private String getLTVersion() {
+        // JLanguageTool.VERSION is deprecated in LT 6.5.
+        // We should use LTBuildInfo.OS.getVersion() when
+        // we move to LanguageTool 6.5 or later.
+        return JLanguageTool.VERSION;
     }
 
     private void initWithoutLangs() {

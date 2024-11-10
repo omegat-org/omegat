@@ -19,6 +19,7 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
+        compileOnly(libs.lucene.analyzers.common)
         implementation(libs.languagetool.fr) {
             exclude module: 'languagetool-core'
         }

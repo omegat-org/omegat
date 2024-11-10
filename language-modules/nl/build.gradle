@@ -18,6 +18,7 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
+        compileOnly(libs.morfologik.stemming)
         implementation(libs.languagetool.nl) {
             exclude module: 'languagetool-core'
         }

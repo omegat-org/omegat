@@ -22,6 +22,7 @@ dependencies {
         implementation(libs.languagetool.br) {
             exclude module: 'languagetool-core'
         }
+        compileOnly(libs.morfologik.stemming)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

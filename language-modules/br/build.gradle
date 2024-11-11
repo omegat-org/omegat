@@ -6,7 +6,8 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar',
+                           '**/morfologik-stemming-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir,
                 includes: ['**/language-br-*.jar'])
     } else {
@@ -18,7 +19,9 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
-        implementation(libs.languagetool.br)
+        implementation(libs.languagetool.br) {
+            exclude module: 'languagetool-core'
+        }
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

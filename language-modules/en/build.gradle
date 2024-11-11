@@ -18,7 +18,9 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
-        implementation(libs.languagetool.en)
+        implementation(libs.languagetool.en) {
+            exclude module: 'languagetool-core'
+        }
         runtimeOnly fileTree(dir: providedModuleLibsDir, includes: ['**/opennlp-*.jar'])
     }
     testImplementation(libs.junit4)

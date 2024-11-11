@@ -20,7 +20,9 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
-        implementation(libs.languagetool.de)
+        implementation(libs.languagetool.de) {
+            exclude module: 'languagetool-core'
+        }
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

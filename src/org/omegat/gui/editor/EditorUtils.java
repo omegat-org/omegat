@@ -71,33 +71,7 @@ public final class EditorUtils {
      *         when there is no line found in the text component.
      */
     public static int getWordStart(JTextComponent c, int offs) throws BadLocationException {
-        int result = offs;
-        Element line = Utilities.getParagraphElement(c, offs);
-        if (line == null) {
-            throw new BadLocationException("No word at " + offs, offs);
-        }
-        int lineStart = line.getStartOffset();
-        Document doc = c.getDocument();
-        int lineEnd = Math.min(line.getEndOffset(), doc.getLength());
-        if  (lineEnd - lineStart > 0) {
-            String lineString = doc.getText(lineStart, lineEnd - lineStart);
-            Locale locale = c.getLocale();
-            if (c instanceof EditorTextArea3 && Core.getProject().isProjectLoaded()) {
-                if (((EditorTextArea3) c).isInActiveTranslation(offs)) {
-                    locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
-                } else {
-                    locale =  Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
-                }
-            }
-            BreakIterator words = BreakIterator.getWordInstance(locale);
-            words.setText(lineString);
-            int wordPosition = offs - lineStart;
-            if (wordPosition >= words.last()) {
-                wordPosition = words.last() - 1;
-            }
-            words.following(wordPosition);
-            result = lineStart + words.previous();
-        }
+        int result = getWordBoundary(c, offs, false);
         char ch = c.getDocument().getText(result, 1).charAt(0);
         if (isDirectionChar(ch)) {
             result++;
@@ -116,6 +90,17 @@ public final class EditorUtils {
      *         when there is no line found in the text component.
      */
     public static int getWordEnd(JTextComponent c, int offs) throws BadLocationException {
+        int result = getWordBoundary(c, offs, true);
+        if (result > 0) {
+            char ch = c.getDocument().getText(result - 1, 1).charAt(0);
+            if (isDirectionChar(ch)) {
+                result--;
+            }
+        }
+        return result;
+    }
+
+    private static int getWordBoundary(JTextComponent c, int offs, boolean end) throws BadLocationException {
         int result = offs;
         Element line = Utilities.getParagraphElement(c, offs);
         if (line == null) {
@@ -140,12 +125,11 @@ public final class EditorUtils {
             if (wordPosition >= words.last()) {
                 wordPosition = words.last() - 1;
             }
-            result = lineStart + words.following(wordPosition);
-        }
-        if (result > 0) {
-            char ch = c.getDocument().getText(result - 1, 1).charAt(0);
-            if (isDirectionChar(ch)) {
-                result--;
+            if (end) {
+                result = lineStart + words.following(wordPosition);
+            } else {
+                words.following(wordPosition);
+                result = lineStart + words.previous();
             }
         }
         return result;

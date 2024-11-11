@@ -29,17 +29,12 @@
 package org.omegat.spellchecker.hunspell;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import dumonts.hunspell.Hunspell;
-import org.apache.commons.io.IOUtils;
-import org.languagetool.JLanguageTool;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -48,9 +43,7 @@ import org.omegat.core.spellchecker.AbstractSpellChecker;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.ISpellCheckerProvider;
 import org.omegat.core.spellchecker.SpellCheckerManager;
-import org.omegat.util.Language;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
 
 /**
  * HunSpell spell checker.
@@ -100,15 +93,11 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
         File affixName = new File(dictionaryDir, language + SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + SC_DICTIONARY_EXTENSION);
 
-        // get the data from the preferences
-        if (!dictionaryName.exists()) {
-            // Try installing from bundled resources
-            installBundledDictionary(dictionaryDir, language);
-        }
-
         if (!affixName.exists()) {
-            // Try installing from LanguageTool bundled resources
-            installLTBundledDictionary(dictionaryDir, language);
+            // Try installing from Language module
+            if (SpellCheckerManager.installHunspellDictionary(dictionaryDir, language) == null) {
+                return Optional.empty();
+            }
         }
 
         // If we still don't have a dictionary, then return
@@ -124,50 +113,6 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
             LOGGER.atWarn().logRB("SPELLCHECKER_HUNSPELL_EXCEPTION", ex.getMessage());
         }
         return Optional.empty();
-    }
-
-    /**
-     * If there is a Hunspell dictionary for the current target language bundled
-     * inside this OmegaT distribution, install it.
-     */
-    protected void installBundledDictionary(String dictionaryDir, String language) {
-        try (InputStream bundledDict = HunspellProvider.class.getResourceAsStream(language + ".zip")) {
-            if (bundledDict == null) {
-                // The Relevant dictionary is not present.
-                return;
-            }
-            StaticUtils.extractFromZip(bundledDict, new File(dictionaryDir),
-                    Arrays.asList(language + SC_AFFIX_EXTENSION,
-                            language + SC_DICTIONARY_EXTENSION)::contains);
-        } catch (IOException e) {
-            LOGGER.atWarn().setCause(e).log();
-        }
-    }
-
-    /**
-     * If there is a Hunspell dictionary for the current target language bundled
-     * with LanguageTool, install it. See <code>init()</code> and
-     * <code>getDictionaryPath(String, String)</code> internal methods of
-     * <code>org.languagetool.rules.spelling.hunspell.HunspellRule</code>.
-     */
-    private static void installLTBundledDictionary(String dictionaryDir, String language) {
-        String resPath = "/" + new Language(language).getLanguageCode() + "/hunspell/" + language + ".dic";
-        if (!JLanguageTool.getDataBroker().resourceExists(resPath)) {
-            return;
-        }
-        try {
-            try (InputStream dicStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
-                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".dic"))) {
-                IOUtils.copy(dicStream, fos);
-            }
-            try (InputStream affStream = JLanguageTool.getDataBroker()
-                    .getFromResourceDirAsStream(resPath.replaceFirst(".dic$", ".aff"));
-                 FileOutputStream fos = new FileOutputStream(new File(dictionaryDir, language + ".aff"))) {
-                IOUtils.copy(affStream, fos);
-            }
-        } catch (Exception ex) {
-            LOGGER.atWarn().setCause(ex).log();
-        }
     }
 
     /**

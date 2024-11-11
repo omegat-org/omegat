@@ -27,7 +27,7 @@ dependencies {
 }
 
 jar {
-    archiveAppendix.set("language")
+    archiveFileName.set("omegat-language-gl.${archiveExtension.get()}")
     destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }

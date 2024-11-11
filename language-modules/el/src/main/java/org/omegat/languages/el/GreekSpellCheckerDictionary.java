@@ -5,12 +5,11 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.Collections;
 
-import org.apache.lucene.analysis.ar.ArabicAnalyzer;
 import org.apache.lucene.analysis.hunspell.Dictionary;
-import org.apache.lucene.analysis.util.CharArraySet;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 
 public class GreekSpellCheckerDictionary implements ISpellCheckerDictionary, AutoCloseable {
 
@@ -21,9 +20,9 @@ public class GreekSpellCheckerDictionary implements ISpellCheckerDictionary, Aut
 
     @Override
     public Dictionary getHunspellDictionary() {
+        affixInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "el_GR.aff");
+        dictInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "el_GR.dic");
         try {
-            affixInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "el_GR.aff");
-            dictInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "el_GRdict");
             return new Dictionary(affixInputStream, Collections.singletonList(dictInputStream), true);
         } catch (IOException | ParseException ignored) {
         }
@@ -31,18 +30,8 @@ public class GreekSpellCheckerDictionary implements ISpellCheckerDictionary, Aut
     }
 
     @Override
-    public morfologik.stemming.Dictionary getMofologikDictionary() {
-        return null;
-    }
-
-    @Override
-    public CharArraySet getStopWordSet() {
-        return ArabicAnalyzer.getDefaultStopSet();
-    }
-
-    @Override
-    public DictionaryType getDictionaryType() {
-        return DictionaryType.HUNSPELL;
+    public SpellCheckDictionaryType getDictionaryType() {
+        return SpellCheckDictionaryType.HUNSPELL;
     }
 
     @Override

@@ -27,34 +27,26 @@ package org.omegat.core.spellchecker;
 
 import java.io.Closeable;
 
-import org.apache.lucene.analysis.util.CharArraySet;
-
 public interface ISpellCheckerDictionary extends Closeable {
     /**
      * Get Hunspell dictionary.
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary();
+    default org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary() {
+        return null;
+    }
 
     /**
      * Get Morfologik dictionary.
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    morfologik.stemming.Dictionary getMofologikDictionary();
-
-    enum DictionaryType {
-        HUNSPELL, MORFOLOGIK,
+    default morfologik.stemming.Dictionary getMofologikDictionary() {
+        return null;
     }
-
-    /**
-     * Get the stop-words for the language.
-     * @return stop-words. If the module privides nothing, return null.
-     */
-    CharArraySet getStopWordSet();
 
     /**
      * Get a dictionary type.
      * @return type of dictionary. If the module provides nothing, return null.
      */
-    DictionaryType getDictionaryType();
+    SpellCheckDictionaryType getDictionaryType();
 }

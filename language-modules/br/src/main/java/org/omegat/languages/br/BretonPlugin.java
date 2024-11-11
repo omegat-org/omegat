@@ -25,17 +25,23 @@
 
 package org.omegat.languages.br;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class BretonPlugin {
 
     private static final String BRETON = "org.languagetool.language.Breton";
+    private static final String SPELLCHECK_DICTIONARY = "org.omegat.languages.br"
+            + ".BretonSpellCheckerDictionary";
 
     private BretonPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("br", BRETON);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("br", SpellCheckDictionaryType.MORFOLOGIK,
+                SPELLCHECK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

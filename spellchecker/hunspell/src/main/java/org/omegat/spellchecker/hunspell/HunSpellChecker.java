@@ -40,7 +40,6 @@ import java.util.ResourceBundle;
 import dumonts.hunspell.Hunspell;
 import org.apache.commons.io.IOUtils;
 import org.languagetool.JLanguageTool;
-import org.omegat.util.Language;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -49,6 +48,7 @@ import org.omegat.core.spellchecker.AbstractSpellChecker;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.ISpellCheckerProvider;
 import org.omegat.core.spellchecker.SpellCheckerManager;
+import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 

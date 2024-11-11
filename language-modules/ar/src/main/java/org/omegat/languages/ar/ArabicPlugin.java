@@ -25,17 +25,21 @@
 
 package org.omegat.languages.ar;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class ArabicPlugin {
 
-    private static final String ARABIC = "org.languagetool.language.Arabic";
+    private static final String ARABIC_LT = "org.languagetool.language.Arabic";
+    private static final String ARABIC_SCD = "org.omegat.languages.ar.ArabicSpellCheckerDictionary";
 
     private ArabicPlugin() {
     }
 
     public static void loadPlugins() {
-        LanguageManager.registerLTLanguage("ar-AR", ARABIC);
+        LanguageManager.registerLTLanguage("ar-AR", ARABIC_LT);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ar", SpellCheckDictionaryType.HUNSPELL, ARABIC_SCD);
     }
 
     public static void unloadPlugins() {

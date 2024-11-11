@@ -25,17 +25,24 @@
 
 package org.omegat.languages.be;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class BelarusianPlugin {
 
     private static final String BELARUSIAN = "org.languagetool.language.Belarusian";
+    private static final String SPELLCHECK_DICTIONARY = "org.omegat.languages.be"
+            + ".BelarusianSpellCheckerDictionary";
 
     private BelarusianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("be", BELARUSIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("be", SpellCheckDictionaryType.MORFOLOGIK,
+                SPELLCHECK_DICTIONARY);
+
     }
 
     public static void unloadPlugins() {

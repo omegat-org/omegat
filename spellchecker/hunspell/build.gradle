@@ -19,9 +19,8 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
-        // hunspell is in dependency of languagetool-core
-        // and usable in OmegaT-core libraries
-        // implementation(libs.dumont.hunspell)
+        compileOnly(libs.lucene.analyzers.common)
+        compileOnly(libs.dumont.hunspell)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

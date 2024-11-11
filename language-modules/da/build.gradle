@@ -21,6 +21,7 @@ dependencies {
         implementation(libs.languagetool.da) {
             exclude module: 'languagetool-core'
         }
+        compileOnly(libs.lucene.analyzers.common)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

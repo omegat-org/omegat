@@ -1,4 +1,4 @@
-package org.omegat.languages.ar;
+package org.omegat.languages.da;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,11 +15,11 @@ import org.languagetool.JLanguageTool;
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 
-public class ArabicSpellCheckerDictionary implements ISpellCheckerDictionary, AutoCloseable {
+public class DanishSpellCheckerDictionary implements ISpellCheckerDictionary, AutoCloseable {
 
-    private static final String DICTIONARY_BASE = "/org/languagetool/resource/ar/hunspell/";
-    private static final String DICTIONARY_PATH = DICTIONARY_BASE + "ar.dic";
-    private static final String AFFIX_PATH = DICTIONARY_BASE + "ar.aff";
+    private static final String DICTIONARY_BASE = "/org/languagetool/resource/da/hunspell/";
+    private static final String DICTIONARY_PATH = DICTIONARY_BASE + "da_DK.dic";
+    private static final String AFFIX_PATH = DICTIONARY_BASE + "da_DK.aff";
 
     private InputStream affixInputStream;
     private InputStream dictInputStream;
@@ -38,12 +38,12 @@ public class ArabicSpellCheckerDictionary implements ISpellCheckerDictionary, Au
     @Override
     public Path installHunspellDictionary(Path dictionaryDir) {
         try {
-            Path dictionaryPath = dictionaryDir.resolve("ar.dic");
+            Path dictionaryPath = dictionaryDir.resolve("da_DK.dic");
             try (InputStream dicStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(DICTIONARY_PATH);
                  FileOutputStream fos = new FileOutputStream(dictionaryPath.toFile())) {
                 IOUtils.copy(dicStream, fos);
             }
-            File affixFile = dictionaryDir.resolve("ar.aff").toFile();
+            File affixFile = dictionaryDir.resolve("da_DK.aff").toFile();
             try (InputStream affStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(AFFIX_PATH);
                  FileOutputStream fos = new FileOutputStream(affixFile)) {
                 IOUtils.copy(affStream, fos);

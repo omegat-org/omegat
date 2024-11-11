@@ -26,6 +26,7 @@
 package org.omegat.core.spellchecker;
 
 import java.io.Closeable;
+import java.nio.file.Path;
 
 public interface ISpellCheckerDictionary extends Closeable {
     /**
@@ -41,6 +42,10 @@ public interface ISpellCheckerDictionary extends Closeable {
      * @return Dictionary object when the language module has. Otherwise, null.
      */
     default morfologik.stemming.Dictionary getMofologikDictionary() {
+        return null;
+    }
+
+    default Path installHunspellDictionary(Path dictionaryDir) {
         return null;
     }
 

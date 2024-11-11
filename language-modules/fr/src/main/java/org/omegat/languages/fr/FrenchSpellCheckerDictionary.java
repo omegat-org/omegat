@@ -1,4 +1,4 @@
-package org.omegat.languages.ar;
+package org.omegat.languages.fr;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,11 +15,10 @@ import org.languagetool.JLanguageTool;
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 
-public class ArabicSpellCheckerDictionary implements ISpellCheckerDictionary, AutoCloseable {
+public class FrenchSpellCheckerDictionary implements ISpellCheckerDictionary, AutoCloseable {
 
-    private static final String DICTIONARY_BASE = "/org/languagetool/resource/ar/hunspell/";
-    private static final String DICTIONARY_PATH = DICTIONARY_BASE + "ar.dic";
-    private static final String AFFIX_PATH = DICTIONARY_BASE + "ar.aff";
+    private static final String DICTIONARY_PATH = "/org/omegat/languages/fr/fr_FR.dic";
+    private static final String AFFIX_PATH = "/org/omegat/languages/fr/fr_FR.aff";
 
     private InputStream affixInputStream;
     private InputStream dictInputStream;
@@ -38,12 +37,12 @@ public class ArabicSpellCheckerDictionary implements ISpellCheckerDictionary, Au
     @Override
     public Path installHunspellDictionary(Path dictionaryDir) {
         try {
-            Path dictionaryPath = dictionaryDir.resolve("ar.dic");
+            Path dictionaryPath = dictionaryDir.resolve("fr_FR.dic");
             try (InputStream dicStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(DICTIONARY_PATH);
                  FileOutputStream fos = new FileOutputStream(dictionaryPath.toFile())) {
                 IOUtils.copy(dicStream, fos);
             }
-            File affixFile = dictionaryDir.resolve("ar.aff").toFile();
+            File affixFile = dictionaryDir.resolve("fr_FR.aff").toFile();
             try (InputStream affStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(AFFIX_PATH);
                  FileOutputStream fos = new FileOutputStream(affixFile)) {
                 IOUtils.copy(affStream, fos);

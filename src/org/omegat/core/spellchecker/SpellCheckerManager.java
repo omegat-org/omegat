@@ -28,6 +28,8 @@ package org.omegat.core.spellchecker;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -83,6 +85,15 @@ public final class SpellCheckerManager {
         } else if (type == SpellCheckDictionaryType.MORFOLOGIK) {
             morfologikDictionaryProviders.put(lang, dictionaryProvider);
         }
+    }
+
+    public static Path installHunspellDictionary(String dictionaryDir, String language) {
+        String className = hunspellDictionaryProviders.get(language);
+        if (className == null) {
+            return null;
+        }
+        ISpellCheckerDictionary dictionaryProvider = getSpellCheckerDictionary(className);
+        return dictionaryProvider.installHunspellDictionary(Paths.get(dictionaryDir));
     }
 
     public static org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {

@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  51 Enhancement
+  52 Enhancement
   81 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - HunspellTokenizer to support stopwords
+  https://sourceforge.net/p/omegat/feature-requests/1767/
 
   - Log filename to be date-time based
   https://sourceforge.net/p/omegat/feature-requests/1753/

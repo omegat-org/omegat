@@ -7,6 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -250,10 +251,6 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = ste.getSrcText();
                 entry.translation = ste.getSourceTranslation();
-                entry.creator = "";
-                entry.changer = "";
-                entry.creationDate = 0;
-                entry.changeDate = 0;
                 processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.MEMORY,
                         ste.isSourceTranslationFuzzy(), 0);
             }
@@ -287,10 +284,6 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
-                entry.creator = "";
-                entry.changer = "";
-                entry.creationDate = 0;
-                entry.changeDate = 0;
                 processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, 0);
             }
         }
@@ -392,7 +385,8 @@ public class FindMatches {
             return;
         }
 
-        addNearString(key, entry, comesFrom, fuzzy, similarityStem, similarityNoStem, simAdjusted, tmxName);
+        addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
+                simAdjusted), tmxName);
     }
 
     /**
@@ -427,7 +421,7 @@ public class FindMatches {
      * simAdjusted"
      */
     private void addNearString(EntryKey key, ITMXEntry entry, NearString.MATCH_SOURCE comesFrom, boolean fuzzy,
-                               int similarity, int similarityNoStem, int simAdjusted, String tmxName) {
+                               NearString.Scores scores, String tmxName) {
         final String source = entry.getSourceText();
         final String translation = entry.getTranslationText();
         // find position for new data
@@ -437,38 +431,30 @@ public class FindMatches {
             if (source.equals(st.source) && Objects.equals(translation, st.translation)) {
                 // Consolidate identical matches from different sources into a
                 // single NearString with multiple project entries.
-                result.set(i,
-                        NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity,
-                                similarityNoStem, simAdjusted, null, tmxName,
-                                entry.getCreator(), entry.getCreationDate(), entry.getChanger(),
-                                entry.getChangeDate(), entry.getProperties()));
+                result.set(i, NearString.merge(st, key, entry, comesFrom, fuzzy, scores, null, tmxName));
                 return;
             }
-            if (st.scores[0].score < similarity) {
+            if (st.scores[0].score < scores.score) {
                 break;
             }
-            if (st.scores[0].score == similarity) {
-                if (st.scores[0].scoreNoStem < similarityNoStem) {
+            if (st.scores[0].score == scores.score) {
+                if (st.scores[0].scoreNoStem < scores.scoreNoStem) {
                     break;
                 }
-                if (st.scores[0].scoreNoStem == similarityNoStem) {
-                    if (st.scores[0].adjustedScore < simAdjusted) {
+                if (st.scores[0].scoreNoStem == scores.scoreNoStem) {
+                    if (st.scores[0].adjustedScore < scores.adjustedScore) {
                         break;
                     }
                     // Patch contributed by Antonio Vilei
                     // text with the same case has precedence
-                    if (similarity == 100 && !st.source.equals(srcText) && source.equals(srcText)) {
+                    if (scores.score == 100 && !st.source.equals(srcText) && source.equals(srcText)) {
                         break;
                     }
                 }
             }
             pos = i + 1;
         }
-
-        result.add(pos,
-                new NearString(key, source, translation, comesFrom, fuzzy, similarity, similarityNoStem, simAdjusted,
-                        null, tmxName, entry.getCreator(), entry.getCreationDate(), entry.getChanger(),
-                        entry.getChangeDate(), entry.getProperties()));
+        result.add(pos, new NearString(key, entry, comesFrom, fuzzy, scores, null, tmxName));
         if (result.size() > maxCount) {
             result.remove(result.size() - 1);
         }
@@ -526,17 +512,5 @@ public class FindMatches {
      */
     @SuppressWarnings("serial")
     public static class StoppedException extends RuntimeException {
-    }
-
-    static class Similarity {
-        int similarity;
-        int similarityNoStem;
-        int simAdjusted;
-
-        Similarity(int sim, int simNoStem, int simAdj) {
-            similarity = sim;
-            similarityNoStem = simNoStem;
-            simAdjusted = simAdj;
-        }
     }
 }

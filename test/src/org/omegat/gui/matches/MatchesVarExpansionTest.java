@@ -208,7 +208,7 @@ public class MatchesVarExpansionTest {
         entry.changeDate = 20020523;
         entry.otherProperties = testProps;
         NearString.Scores scores = new NearString.Scores(20, 40, 60);
-        return new NearString(null, entry, null, false, scores, null, null);
+        return new NearString(null, entry, null, false, scores, null, "mock testing project");
     };
 
     private void setupProject(Language sourceLanguage, Language targetLanguage) {

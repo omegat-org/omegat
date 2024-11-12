@@ -33,12 +33,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.LayoutStyle;
 import javax.swing.LookAndFeel;
-import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.plaf.basic.BasicLookAndFeel;
 
 import org.madlonkay.desktopsupport.DesktopSupport;
+
 import org.omegat.util.gui.ResourcesUtil;
 
 /**
@@ -124,10 +124,5 @@ public abstract class DelegatingLookAndFeel extends BasicLookAndFeel {
     @Override
     public void uninitialize() {
         systemLookAndFeel.uninitialize();
-    }
-
-    @Override
-    public UIDefaults getDefaults() {
-        return systemLookAndFeel.getDefaults();
     }
 }

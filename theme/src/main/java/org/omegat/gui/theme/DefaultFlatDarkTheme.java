@@ -93,6 +93,7 @@ public class DefaultFlatDarkTheme extends FlatLaf {
     @Override
     public UIDefaults getDefaults() {
         UIDefaults original = parent.getDefaults();
+        // get omegat defaults
         UIDefaults defaults = DefaultFlatTheme.setDefaults(original, ID);
         UIDefaults custom = setDarkDefaults(defaults);
         UIManager.put("DockViewTitleBar.border", new MatteBorder(1, 1, 1, 1, custom.getColor("border")));

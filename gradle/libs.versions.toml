@@ -53,6 +53,7 @@ flatlaf="3.5.2"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
+swing_extra_locales = "0.3.2"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -169,6 +170,7 @@ language-detector = {group = "org.omegat", name = "language-detector", version.r
 assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", version.ref = "assertj_swing_junit"}
 morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
 morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
+swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]

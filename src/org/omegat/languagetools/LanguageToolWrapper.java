@@ -27,6 +27,8 @@
 
 package org.omegat.languagetools;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -181,7 +183,13 @@ public final class LanguageToolWrapper {
             switch (type) {
             case LOCAL_INSTALLATION:
                 String localServerJarPath = LanguageToolPrefs.getLocalServerJarPath();
-                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, 8081);
+                String languageModelPath = LanguageToolPrefs.getLanguageModelPath();
+                if (languageModelPath == null) {
+                    languageModelPath = LanguageToolPrefs.getLanguageModelDefaultPath();
+                }
+                int port = getFreePort();
+                bridge = new LanguageToolNetworkBridge(sourceLang, targetLang, localServerJarPath, port,
+                        languageModelPath);
                 break;
             case REMOTE_URL:
                 String remoteUrl = LanguageToolPrefs.getRemoteUrl();
@@ -199,4 +207,17 @@ public final class LanguageToolWrapper {
         LanguageToolPrefs.applyRules(bridge, targetLang.getLanguageCode());
         return bridge;
     }
+
+    private static final int[] FREE_PORT_RANGE = {8081, 10080, 10081, 10082, 10083, 10084, 10085, 10086};
+
+    private static int getFreePort() {
+        for (int p : FREE_PORT_RANGE) {
+            try (ServerSocket serverSocket = new ServerSocket(p)) {
+                return serverSocket.getLocalPort();
+            } catch (IOException ignored) {
+            }
+        }
+        return -1;
+    }
+
 }

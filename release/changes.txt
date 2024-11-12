@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  52 Enhancement
-  81 Bug fixes
+  53 Enhancement
+  83 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -11,6 +11,9 @@
 
   - HunspellTokenizer to support stopwords
   https://sourceforge.net/p/omegat/feature-requests/1767/
+
+  - Localize UI for genuine dialogs in various languages
+  https://sourceforge.net/p/omegat/feature-requests/1763/
 
   - Log filename to be date-time based
   https://sourceforge.net/p/omegat/feature-requests/1753/
@@ -158,6 +161,11 @@
 
 
   Bug fixes:
+
+  - fix: Glossary sort order: Change src length sort condition and use Language Dependent sorter
+
+  - Preferences/CutomColorSelector don't show notification immediately when modifying color
+  https://sourceforge.net/p/omegat/bugs/1273/
 
   - Speller: morfologik: LT bundled dictionary not found in Dutch
   https://sourceforge.net/p/omegat/bugs/1271/

@@ -73,7 +73,9 @@ public class CalcMatchStatisticsTest {
         IStatsConsumer callback = new TestStatsConsumer();
         CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(callback);
         calcMatchStatistics.start();
-        while (calcMatchStatistics.isAlive()) {
+        try {
+            calcMatchStatistics.join();
+        } catch (InterruptedException e) {
             calcMatchStatistics.checkInterrupted();
         }
         String[][] result = calcMatchStatistics.getTable();
@@ -133,7 +135,9 @@ public class CalcMatchStatisticsTest {
         //
         calcMatchStatistics = new CalcMatchStatisticsMock(callback);
         calcMatchStatistics.start();
-        while (calcMatchStatistics.isAlive()) {
+        try {
+            calcMatchStatistics.join();
+        } catch (InterruptedException e) {
             calcMatchStatistics.checkInterrupted();
         }
         result = calcMatchStatistics.getTable();

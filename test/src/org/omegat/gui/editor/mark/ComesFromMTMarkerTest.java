@@ -41,6 +41,7 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -147,15 +148,18 @@ public class ComesFromMTMarkerTest extends MarkerTestBase {
 
     @Test
     public void testNearString() {
-        final String sourceText = "source";
-        final String targetText = "target";
-        final String user = "translator";
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = "source";
+        entry.translation = "target";
+        entry.changer = "translator";
+        entry.creator = "translator";
+        entry.changeDate = 10000L;
+        entry.creationDate = 10000L;
         final int score = 75;
         final byte[] nearData = null;
-        final long date = 10000L;
-        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
-        NearString near = new NearString(key, sourceText, targetText, NearString.MATCH_SOURCE.TM, false,
-                score, score, score, nearData, project.toString(), user, date, user, date, Collections.emptyList());
+        EntryKey key = new EntryKey("file", entry.getSourceText(), "id", "prev", "next", "path");
+        NearString near = new NearString(key, entry, NearString.MATCH_SOURCE.TM, false,
+                new NearString.Scores(score, score, score), nearData, project.toString());
         assertThat(DataUtils.isFromMTMemory(near)).isTrue();
     }
 }

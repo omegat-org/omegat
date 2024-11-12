@@ -248,12 +248,6 @@ public final class ExternalTMFactory {
 
                         @Override
                         public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                                String comment, IFilter filter) {
-                            process(source, translation, id, comment, null, null);
-                        }
-
-                        @Override
-                        public void addEntry(String id, String source, String translation, boolean isFuzzy,
                                 String comment, String path, IFilter filter,
                                 List<ProtectedPart> protectedParts) {
                             process(source, translation, id, comment, path, null);

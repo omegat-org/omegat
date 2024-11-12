@@ -363,12 +363,6 @@ public class CalcMatchStatisticsTest {
         }
 
         @Override
-        public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                IFilter filter) {
-            addEntry(id, source, translation, isFuzzy, comment, null, filter, Collections.emptyList());
-        }
-
-        @Override
         public void linkPrevNextSegments() {
         }
     }

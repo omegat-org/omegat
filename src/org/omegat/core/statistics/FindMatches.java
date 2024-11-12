@@ -7,6 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -42,11 +43,9 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMFactory;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.IProject.DefaultTranslationsIterator;
-import org.omegat.core.data.IProject.MultipleTranslationsIterator;
 import org.omegat.core.data.ITMXEntry;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
@@ -59,7 +58,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.TMXProp;
 import org.omegat.util.Token;
 
 /**
@@ -87,8 +85,9 @@ import org.omegat.util.Token;
 public class FindMatches {
 
     /**
-     * According to gettext source code, PO fuzzies are created above 60%
-     * https://sourceforge.net/p/omegat/feature-requests/1258/
+     * According to gettext source code, PO fuzzy entries are created above 60%
+     * <a href=
+     * "https://sourceforge.net/p/omegat/feature-requests/1258/">RFE#1258</a>
      */
     static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
@@ -164,10 +163,8 @@ public class FindMatches {
     public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
             IStopped stop) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
-
         srcText = searchText;
         removedText = "";
-
         // remove part that is to be removed according to user settings.
         // Rationale: it might be a big string influencing the 'editing
         // distance', while it is not really part
@@ -181,36 +178,16 @@ public class FindMatches {
             srcText = removeMatcher.replaceAll("");
             removedText = removedBuffer.toString();
         }
-
-        // get tokens for original string
+        // get tokens for original string which includes non-word tokens
         strTokensStem = tokenizeStem(srcText);
         strTokensNoStem = tokenizeNoStem(srcText);
         strTokensAll = tokenizeAll(srcText);
-        /* HP: includes non - word tokens */
 
         // travel by project entries, including orphaned
         if (project.getProjectProperties().isSupportDefaultTranslations()) {
-            project.iterateByDefaultTranslations(new DefaultTranslationsIterator() {
-                public void iterate(String source, TMXEntry trans) {
-                    checkStopped(stop);
-                    if (!searchExactlyTheSame && source.equals(searchText)) {
-                        // skip original==original entry comparison
-                        return;
-                    }
-                    if (requiresTranslation && trans.translation == null) {
-                        return;
-                    }
-                    String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
-                    processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
-                            fileName, trans.creator, trans.creationDate, trans.changer, trans.changeDate,
-                            null);
-                }
-            });
-        }
-        project.iterateByMultipleTranslations(new MultipleTranslationsIterator() {
-            public void iterate(EntryKey source, TMXEntry trans) {
+            project.iterateByDefaultTranslations((source, trans) -> {
                 checkStopped(stop);
-                if (!searchExactlyTheSame && source.sourceText.equals(searchText)) {
+                if (!searchExactlyTheSame && source.equals(searchText)) {
                     // skip original==original entry comparison
                     return;
                 }
@@ -218,19 +195,31 @@ public class FindMatches {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
-                processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY,
-                        false, 0, fileName, trans.creator, trans.creationDate, trans.changer,
-                        trans.changeDate, null);
+                PrepareTMXEntry entry = new PrepareTMXEntry(trans);
+                entry.source = source;
+                processEntry(null, entry, fileName, NearString.MATCH_SOURCE.MEMORY, false, 0);
+            });
+        }
+        project.iterateByMultipleTranslations((source, trans) -> {
+            checkStopped(stop);
+            if (!searchExactlyTheSame && source.sourceText.equals(searchText)) {
+                // skip original==original entry comparison
+                return;
             }
+            if (requiresTranslation && trans.translation == null) {
+                return;
+            }
+            String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
+            PrepareTMXEntry entry = new PrepareTMXEntry(trans);
+            entry.source = source.sourceText;
+            processEntry(source, entry, fileName, NearString.MATCH_SOURCE.MEMORY, false, 0);
         });
-
         /*
          * Penalty applied for fuzzy matches in another language (if no match in
          * the target language was found).
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
-
         // travel by translation memories
         for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
             int penalty = 0;
@@ -248,44 +237,38 @@ public class FindMatches {
                 if (requiresTranslation && tmen.getTranslationText() == null) {
                     continue;
                 }
-
                 int tmenPenalty = penalty;
                 if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
                     tmenPenalty += foreignPenalty;
                 }
-
-                processEntry(null, tmen.getSourceText(), tmen.getTranslationText(),
-                        NearString.MATCH_SOURCE.TM, false, tmenPenalty, en.getKey(), tmen.getCreator(),
-                        tmen.getCreationDate(), tmen.getChanger(), tmen.getChangeDate(), tmen.getProperties());
+                processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
             }
         }
-
         // travel by all entries for check source file translations
         for (SourceTextEntry ste : project.getAllEntries()) {
             checkStopped(stop);
             if (ste.getSourceTranslation() != null) {
-                processEntry(ste.getKey(), ste.getSrcText(), ste.getSourceTranslation(),
-                        NearString.MATCH_SOURCE.MEMORY, ste.isSourceTranslationFuzzy(), 0, ste.getKey().file,
-                        "", 0, "", 0, null);
+                PrepareTMXEntry entry = new PrepareTMXEntry();
+                entry.source = ste.getSrcText();
+                entry.translation = ste.getSourceTranslation();
+                processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.MEMORY,
+                        ste.isSourceTranslationFuzzy(), 0);
             }
         }
-
         if (separateSegmentMatcher != null) {
             // split paragraph even when segmentation disabled, then find
             // matches for every segment
-            List<StringBuilder> spaces = new ArrayList<StringBuilder>();
-            List<Rule> brules = new ArrayList<Rule>();
+            List<StringBuilder> spaces = new ArrayList<>();
+            List<Rule> brules = new ArrayList<>();
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
             Language targetLang = project.getProjectProperties().getTargetLanguage();
             List<String> segments = Core.getSegmenter().segment(sourceLang, srcText, spaces, brules);
             if (segments.size() > 1) {
-                List<String> fsrc = new ArrayList<String>(segments.size());
-                List<String> ftrans = new ArrayList<String>(segments.size());
+                List<String> fsrc = new ArrayList<>(segments.size());
+                List<String> ftrans = new ArrayList<>(segments.size());
                 // multiple segments
-                for (short i = 0; i < segments.size(); i++) {
-                    String onesrc = segments.get(i);
-
-                    // find match for separate segment
+                for (String onesrc : segments) {
+                    // find match for a separate segment
                     List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation,
                             false, stop);
                     if (!segmentMatch.isEmpty()
@@ -297,37 +280,29 @@ public class FindMatches {
                         ftrans.add("");
                     }
                 }
-                // glue found sources
-                String foundSrc = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
-                // glue found translations
-                String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
-                        0, null);
+                // glue found sources and translations
+                PrepareTMXEntry entry = new PrepareTMXEntry();
+                entry.source = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
+                entry.translation = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
+                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, 0);
             }
         }
-
+        // fill similarity data only for a result
         if (fillSimilarityData) {
-            // fill similarity data only for result
             for (NearString near : result) {
-                // fix for bug 1586397
-                byte[] similarityData = FuzzyMatcher.buildSimilarityData(strTokensAll,
-                        tokenizeAll(near.source));
-                near.attr = similarityData;
+                near.attr = FuzzyMatcher.buildSimilarityData(strTokensAll, tokenizeAll(near.source));
             }
         }
-
         return result;
     }
 
     /**
-     * Compare one entry with original entry.
+     * Compare one entry with the original entry.
      *
      * @param key
      *            entry to compare
-     * @param source
-     *            source text
-     * @param translation
-     *            translation text
+     * @param entry
+     *            PrepareTMXEntry entry to process.
      * @param comesFrom
      *            match source
      * @param fuzzy
@@ -336,22 +311,11 @@ public class FindMatches {
      *            penalty score
      * @param tmxName
      *            tmx name
-     * @param creator
-     *            translation creator
-     * @param creationDate
-     *            creation date of translation
-     * @param changer
-     *            last editor name
-     * @param changedDate
-     *            last change date
-     * @param props
-     *            TMX properties
      */
-    protected void processEntry(EntryKey key, String source, String translation,
-            NearString.MATCH_SOURCE comesFrom, boolean fuzzy, int penalty, String tmxName, String creator,
-            long creationDate, String changer, long changedDate, List<TMXProp> props) {
+    public void processEntry(EntryKey key, ITMXEntry entry, String tmxName,
+                              NearString.MATCH_SOURCE comesFrom, boolean fuzzy, int penalty) {
         // remove part that is to be removed prior to tokenize
-        String realSource = source;
+        String realSource = entry.getSourceText();
         int realPenaltyForRemoved = 0;
         if (removePattern != null) {
             StringBuilder entryRemovedText = new StringBuilder();
@@ -380,8 +344,8 @@ public class FindMatches {
         }
         similarityStem -= realPenaltyForRemoved;
 
-        // check if we have chance by first percentage only
-        if (!haveChanceToAdd(similarityStem, Integer.MAX_VALUE, Integer.MAX_VALUE)) {
+        // check if we have a chance by first percentage only
+        if (noChanceToAdd(similarityStem, Integer.MAX_VALUE, Integer.MAX_VALUE)) {
             return;
         }
 
@@ -395,8 +359,8 @@ public class FindMatches {
         }
         similarityNoStem -= realPenaltyForRemoved;
 
-        // check if we have chance by first and second percentages
-        if (!haveChanceToAdd(similarityStem, similarityNoStem, Integer.MAX_VALUE)) {
+        // check if we have a chance by first and second percentages
+        if (noChanceToAdd(similarityStem, similarityNoStem, Integer.MAX_VALUE)) {
             return;
         }
 
@@ -411,7 +375,7 @@ public class FindMatches {
         simAdjusted -= realPenaltyForRemoved;
 
         // check if we have chance by first, second and third percentages
-        if (!haveChanceToAdd(similarityStem, similarityNoStem, simAdjusted)) {
+        if (noChanceToAdd(similarityStem, similarityNoStem, simAdjusted)) {
             return;
         }
 
@@ -421,13 +385,13 @@ public class FindMatches {
             return;
         }
 
-        addNearString(key, source, translation, comesFrom, fuzzy, similarityStem, similarityNoStem,
-                simAdjusted, null, tmxName, creator, creationDate, changer, changedDate, props);
+        addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
+                simAdjusted), tmxName);
     }
 
     /**
-     * Check if entry have a chance to be added to result list. If no, there is
-     * no sense to calculate other parameters.
+     * Check if entries have a chance to be added to a result list. If true,
+     * there is no sense to calculate other parameters.
      *
      * @param simStem
      *            similarity with stemming
@@ -435,11 +399,11 @@ public class FindMatches {
      *            similarity without stemming
      * @param simExactly
      *            exactly similarity
-     * @return true if we have chance
+     * @return true if we have no chance.
      */
-    protected boolean haveChanceToAdd(final int simStem, final int simNoStem, final int simExactly) {
+    private boolean noChanceToAdd(int simStem, int simNoStem, int simExactly) {
         if (result.size() < maxCount) {
-            return true;
+            return false;
         }
         NearString st = result.get(result.size() - 1);
         int chance = Integer.compare(st.scores[0].score, simStem);
@@ -449,57 +413,48 @@ public class FindMatches {
         if (chance == 0) {
             chance = Integer.compare(st.scores[0].adjustedScore, simExactly);
         }
-        return chance != 1;
+        return chance == 1;
     }
 
     /**
-     * Add near string into result list. Near strings sorted by
-     * "similarity,simAdjusted"
+     * Add near string into the result list. Near strings sorted by "similarity,
+     * simAdjusted"
      */
-    protected void addNearString(final EntryKey key, final String source, final String translation,
-            NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int similarity,
-            final int similarityNoStem, final int simAdjusted, final byte[] similarityData,
-            final String tmxName, final String creator, final long creationDate, final String changer,
-            final long changedDate, final List<TMXProp> tuProperties) {
+    private void addNearString(EntryKey key, ITMXEntry entry, NearString.MATCH_SOURCE comesFrom, boolean fuzzy,
+                               NearString.Scores scores, String tmxName) {
+        final String source = entry.getSourceText();
+        final String translation = entry.getTranslationText();
         // find position for new data
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
             if (source.equals(st.source) && Objects.equals(translation, st.translation)) {
                 // Consolidate identical matches from different sources into a
-                // single NearString with
-                // multiple project entries.
-                result.set(i,
-                        NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity,
-                                similarityNoStem, simAdjusted, similarityData, tmxName, creator, creationDate,
-                                changer, changedDate, tuProperties));
+                // single NearString with multiple project entries.
+                result.set(i, NearString.merge(st, key, entry, comesFrom, fuzzy, scores, null, tmxName));
                 return;
             }
-            if (st.scores[0].score < similarity) {
+            if (st.scores[0].score < scores.score) {
                 break;
             }
-            if (st.scores[0].score == similarity) {
-                if (st.scores[0].scoreNoStem < similarityNoStem) {
+            if (st.scores[0].score == scores.score) {
+                if (st.scores[0].scoreNoStem < scores.scoreNoStem) {
                     break;
                 }
-                if (st.scores[0].scoreNoStem == similarityNoStem) {
-                    if (st.scores[0].adjustedScore < simAdjusted) {
+                if (st.scores[0].scoreNoStem == scores.scoreNoStem) {
+                    if (st.scores[0].adjustedScore < scores.adjustedScore) {
                         break;
                     }
                     // Patch contributed by Antonio Vilei
                     // text with the same case has precedence
-                    if (similarity == 100 && !st.source.equals(srcText) && source.equals(srcText)) {
+                    if (scores.score == 100 && !st.source.equals(srcText) && source.equals(srcText)) {
                         break;
                     }
                 }
             }
             pos = i + 1;
         }
-
-        result.add(pos,
-                new NearString(key, source, translation, comesFrom, fuzzy, similarity, similarityNoStem,
-                        simAdjusted, similarityData, tmxName, creator, creationDate, changer, changedDate,
-                        tuProperties));
+        result.add(pos, new NearString(key, entry, comesFrom, fuzzy, scores, null, tmxName));
         if (result.size() > maxCount) {
             result.remove(result.size() - 1);
         }
@@ -508,11 +463,11 @@ public class FindMatches {
     /*
      * Methods for tokenize strings with caching.
      */
-    Map<String, Token[]> tokenizeStemCache = new HashMap<String, Token[]>();
-    Map<String, Token[]> tokenizeNoStemCache = new HashMap<String, Token[]>();
-    Map<String, Token[]> tokenizeAllCache = new HashMap<String, Token[]>();
+    Map<String, Token[]> tokenizeStemCache = new HashMap<>();
+    Map<String, Token[]> tokenizeNoStemCache = new HashMap<>();
+    Map<String, Token[]> tokenizeAllCache = new HashMap<>();
 
-    public Token[] tokenizeStem(String str) {
+    Token[] tokenizeStem(String str) {
         Token[] tokens = tokenizeStemCache.get(str);
         if (tokens == null) {
             tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING);
@@ -521,7 +476,7 @@ public class FindMatches {
         return tokens;
     }
 
-    public Token[] tokenizeNoStem(String str) {
+    Token[] tokenizeNoStem(String str) {
         // No-stemming token comparisons are intentionally case-insensitive
         // for matching purposes.
         str = str.toLowerCase(srcLocale);
@@ -533,7 +488,7 @@ public class FindMatches {
         return tokens;
     }
 
-    public Token[] tokenizeAll(String str) {
+    Token[] tokenizeAll(String str) {
         // Verbatim token comparisons are intentionally case-insensitive.
         // for matching purposes.
         str = str.toLowerCase(srcLocale);
@@ -545,15 +500,15 @@ public class FindMatches {
         return tokens;
     }
 
-    protected void checkStopped(IStopped stop) throws StoppedException {
+    private void checkStopped(IStopped stop) throws StoppedException {
         if (stop.isStopped()) {
             throw new StoppedException();
         }
     }
 
     /**
-     * Process will throw this exception if it stopped.All callers must catch it
-     * and just skip.
+     * The Process will throw this exception if it stopped. All callers must
+     * catch it and just skip.
      */
     @SuppressWarnings("serial")
     public static class StoppedException extends RuntimeException {

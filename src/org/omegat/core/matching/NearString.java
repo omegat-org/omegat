@@ -57,29 +57,22 @@ public class NearString {
     }
 
     public NearString(EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom, boolean fuzzyMark,
-                      Scores scores,
-                      byte[] nearData, String projName) {
+                      Scores scores, byte[] nearData, String projName) {
         this(key, entry.getSourceText(), entry.getTranslationText(), comesFrom, fuzzyMark, scores,
                 nearData, projName, entry.getCreator(), entry.getCreationDate(), entry.getChanger(),
                 entry.getChangeDate(), entry.getProperties());
     }
 
-    public NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
-            boolean fuzzyMark, int nearScore, int nearScoreNoStem, int adjustedScore,
-            byte[] nearData, String projName, String creator, long creationDate,
-            String changer, long changedDate, List<TMXProp> props) {
-        this(key, source, translation, comesFrom, fuzzyMark, new Scores(nearScore, nearScoreNoStem,
-                adjustedScore), nearData, projName, creator, creationDate, changer, changedDate, props);
-    }
-
     /**
-     * Constructor, keep backward compatibility.
+     * Constructor, backward compatible.
      * @param key entry key
      * @param source source text
      * @param translation translation text
      * @param comesFrom origin
      * @param fuzzyMark fuzzy or not
-     * @param scores fuzzy similarity score
+     * @param nearScore
+     * @param nearScoreNoStem
+     * @param adjustedScore
      * @param nearData similarity data.
      * @param projName project name.
      * @param creator creator name
@@ -88,7 +81,16 @@ public class NearString {
      * @param changedDate changer date
      * @param props properties of entry.
      */
+    @Deprecated
     public NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
+            boolean fuzzyMark, int nearScore, int nearScoreNoStem, int adjustedScore,
+            byte[] nearData, String projName, String creator, long creationDate,
+            String changer, long changedDate, List<TMXProp> props) {
+        this(key, source, translation, comesFrom, fuzzyMark, new Scores(nearScore, nearScoreNoStem,
+                adjustedScore), nearData, projName, creator, creationDate, changer, changedDate, props);
+    }
+
+    private NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
                       boolean fuzzyMark, Scores scores, byte[] nearData, String projName, String creator,
                       long creationDate, String changer, long changedDate, List<TMXProp> props) {
         this.key = key;
@@ -188,7 +190,7 @@ public class NearString {
     public String[] projs;
 
     /** matching attributes of near strEntry */
-    public final byte[] attr;
+    public byte[] attr;
 
     public final List<TMXProp> props;
     public final String creator;

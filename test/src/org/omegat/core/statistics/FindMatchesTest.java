@@ -89,10 +89,9 @@ public class FindMatchesTest {
         prop.setTargetLanguage("ca");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
         IProject project = new TestProject(prop, TMX_MATCH_EN_CA, null, new LuceneEnglishTokenizer(),
-                new DefaultTokenizer());
-        Core.setProject(project);
+                new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         String srcText = "This badge is granted when you’ve invited 5 people who subsequently spent enough "
                 + "time on the site to become full members. "
@@ -108,7 +107,8 @@ public class FindMatchesTest {
                 + "han passat prou temps al lloc web per a convertir-se en usuaris bàsics."
                 + " Una comunitat vibrant necessita una entrada regular de nouvinguts que hi participen habitualment"
                 + " i aporten veus noves a les converses.\n";
-        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, false, false);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, false,
+                true);
         List<NearString> result = finder.search(srcText, true, true, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals(65, result.get(0).scores[0].score);
@@ -119,9 +119,9 @@ public class FindMatchesTest {
         //
         List<StringBuilder> spaces = new ArrayList<>();
         List<Rule> brules = new ArrayList<>();
-        List<String> segments = Core.getSegmenter().segment(prop.getSourceLanguage(), srcText, spaces, brules);
+        List<String> segments = segmenter.segment(prop.getSourceLanguage(), srcText, spaces, brules);
         assertEquals(3, segments.size());
-        finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+        finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false, true);
         result = finder.search(srcText, true, true, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
@@ -159,12 +159,11 @@ public class FindMatchesTest {
         prop.setTargetLanguage("cnr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
         IProject project = new TestProject(prop, null, TMX_EN_US_SR, new LuceneEnglishTokenizer(),
-                new DefaultTokenizer());
-        Core.setProject(project);
+                new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false, true);
         List<NearString> result = finder.search("XXX", true, true, iStopped);
         // Without the fix, the result has two entries, but it should one.
         assertEquals(1, result.size());
@@ -198,20 +197,20 @@ public class FindMatchesTest {
         prop.setTargetLanguage("cnr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
         IProject project = new TestProject(prop, null, TMX_EN_US_GB_SR, new LuceneEnglishTokenizer(),
-                new DefaultTokenizer());
-        Core.setProject(project);
+                new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
+                true);
         // Search source "XXx" in en-US
         List<NearString> result = finder.search("XXX", true, true, iStopped);
         // There should be three entries.
+        assertEquals(3, result.size());
         assertEquals("XXx", result.get(0).source); // should be en-US.
         assertEquals("XXX", result.get(0).translation); // should be en-GB
         assertEquals("YYY", result.get(1).translation); // fr
         assertEquals("ZZZ", result.get(2).translation); // sr
-        assertEquals(3, result.size());
     }
 
     @BeforeClass
@@ -238,6 +237,7 @@ public class FindMatchesTest {
         private final File externalTmx;
         private final ITokenizer sourceTokenizer;
         private final ITokenizer targetTokenizer;
+        private final Segmenter segmenter;
 
         final ProjectTMX.CheckOrphanedCallback checkOrphanedCallback = new ProjectTMX.CheckOrphanedCallback() {
             public boolean existSourceInProject(String src) {
@@ -249,17 +249,17 @@ public class FindMatchesTest {
         };
 
         TestProject(final ProjectProperties prop, File testTmx, File externalTmx,
-                    ITokenizer sourceTokenizer,
-                    ITokenizer targetTokenizer) {
+                    ITokenizer sourceTokenizer, ITokenizer targetTokenizer, Segmenter segmenter) {
             this.prop = prop;
             this.sourceTokenizer = sourceTokenizer;
             this.targetTokenizer = targetTokenizer;
             this.externalTmx = externalTmx;
+            this.segmenter = segmenter;
             projectTMX = null;
             if (testTmx != null) {
                 try {
                     projectTMX = new ProjectTMXMock(prop.getSourceLanguage(), prop.getTargetLanguage(),
-                            prop.isSentenceSegmentingEnabled(), testTmx, checkOrphanedCallback);
+                            prop.isSentenceSegmentingEnabled(), testTmx, checkOrphanedCallback, segmenter);
                 } catch (Exception ignored) {
                 }
             }
@@ -349,7 +349,7 @@ public class FindMatchesTest {
 
             Map<String, ExternalTMX> transMemories = new TreeMap<>();
             try {
-                ExternalTMX newTMX = ExternalTMFactory.load(externalTmx);
+                ExternalTMX newTMX = ExternalTMFactory.load(externalTmx, prop, segmenter, null);
                 transMemories.put(externalTmx.getPath(), newTMX);
             } catch (Exception ignored) {
             }
@@ -361,8 +361,8 @@ public class FindMatchesTest {
 
         public ProjectTMXMock(Language sourceLanguage, Language targetLanguage,
                            boolean isSentenceSegmentingEnabled,
-                          File file, CheckOrphanedCallback callback) throws Exception {
-            super(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback);
+                          File file, CheckOrphanedCallback callback, Segmenter segmenter) throws Exception {
+            super(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback, segmenter);
         }
 
         public Map<String, TMXEntry> getDefaultsMap() {

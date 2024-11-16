@@ -7,6 +7,7 @@
                2012 Thomas Cordonnier
                2013 Alex Buloichik
                2015 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -101,7 +102,8 @@ public class CalcMatchStatistics extends LongProcessThread {
     private final ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal
             .withInitial(LevenshteinDistance::new);
     private final ThreadLocal<FindMatches> finder = ThreadLocal.withInitial(
-            () -> new FindMatches(Core.getProject(), OConsts.MAX_NEAR_STRINGS, true, false, false));
+            () -> new FindMatches(Core.getProject(), Core.getSegmenter(), OConsts.MAX_NEAR_STRINGS, true,
+                    false, false));
     private final StringBuilder textForLog = new StringBuilder();
 
     public CalcMatchStatistics(IStatsConsumer callback, boolean perFile) {

@@ -52,6 +52,7 @@ import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Rule;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
@@ -133,6 +134,8 @@ public class FindMatches {
 
     private final boolean applyThreshold;
 
+    private final Segmenter segmenter;
+
     /**
      * @param searchExactlyTheSame
      *            allows to search similarities with the same text as source
@@ -142,12 +145,13 @@ public class FindMatches {
      */
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
-        this(project, maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true);
+        this(project, Core.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true);
     }
 
-    public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
+    public FindMatches(IProject project, Segmenter segmenter, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame, boolean applyThreshold) {
         this.project = project;
+        this.segmenter = segmenter;
         this.tok = project.getSourceTokenizer();
         this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
         this.maxCount = maxCount;
@@ -262,7 +266,7 @@ public class FindMatches {
             List<Rule> brules = new ArrayList<>();
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
             Language targetLang = project.getProjectProperties().getTargetLanguage();
-            List<String> segments = Core.getSegmenter().segment(sourceLang, srcText, spaces, brules);
+            List<String> segments = segmenter.segment(sourceLang, srcText, spaces, brules);
             if (segments.size() > 1) {
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
@@ -282,8 +286,8 @@ public class FindMatches {
                 }
                 // glue found sources and translations
                 PrepareTMXEntry entry = new PrepareTMXEntry();
-                entry.source = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
-                entry.translation = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
+                entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
+                entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
                 processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, 0);
             }
         }

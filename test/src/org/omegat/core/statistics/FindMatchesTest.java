@@ -55,12 +55,12 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Rule;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
@@ -89,7 +89,7 @@ public class FindMatchesTest {
         prop.setTargetLanguage("ca");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        Segmenter segmenter = new Segmenter(Preferences.getSRX());
         IProject project = new TestProject(prop, TMX_MATCH_EN_CA, null, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
@@ -108,7 +108,7 @@ public class FindMatchesTest {
                 + " Una comunitat vibrant necessita una entrada regular de nouvinguts que hi participen habitualment"
                 + " i aporten veus noves a les converses.\n";
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, false,
-                true);
+                true, 30);
         List<NearString> result = finder.search(srcText, true, true, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals(65, result.get(0).scores[0].score);
@@ -121,7 +121,7 @@ public class FindMatchesTest {
         List<Rule> brules = new ArrayList<>();
         List<String> segments = segmenter.segment(prop.getSourceLanguage(), srcText, spaces, brules);
         assertEquals(3, segments.size());
-        finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false, true);
+        finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false, true, 30);
         result = finder.search(srcText, true, true, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
@@ -159,11 +159,12 @@ public class FindMatchesTest {
         prop.setTargetLanguage("cnr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        Segmenter segmenter = new Segmenter(Preferences.getSRX());
         IProject project = new TestProject(prop, null, TMX_EN_US_SR, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false, true);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
+                true, 30);
         List<NearString> result = finder.search("XXX", true, true, iStopped);
         // Without the fix, the result has two entries, but it should one.
         assertEquals(1, result.size());
@@ -197,12 +198,12 @@ public class FindMatchesTest {
         prop.setTargetLanguage("cnr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        Segmenter segmenter = new Segmenter(Preferences.getSRX());
         IProject project = new TestProject(prop, null, TMX_EN_US_GB_SR, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
-                true);
+                true, 30);
         // Search source "XXx" in en-US
         List<NearString> result = finder.search("XXX", true, true, iStopped);
         // There should be three entries.
@@ -222,13 +223,12 @@ public class FindMatchesTest {
     @Before
     public void setUp() throws Exception {
         Core.initializeConsole(new TreeMap<>());
-        TestPreferencesInitializer.init();
-        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
-        Preferences.setPreference(Preferences.EXT_TMX_USE_SLASH, false);
-        Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
-        Preferences.setPreference(Preferences.PENALTY_FOR_FOREIGN_MATCHES, 15);
         Core.registerTokenizerClass(DefaultTokenizer.class);
         Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
+        // initialize Preferences and segmentation
+        TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
+        Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
     }
 
     static class TestProject extends NotLoadedProject implements IProject {
@@ -260,7 +260,8 @@ public class FindMatchesTest {
                 try {
                     projectTMX = new ProjectTMXMock(prop.getSourceLanguage(), prop.getTargetLanguage(),
                             prop.isSentenceSegmentingEnabled(), testTmx, checkOrphanedCallback, segmenter);
-                } catch (Exception ignored) {
+                } catch (Exception e) {
+                    Log.log(e);
                 }
             }
        }

@@ -145,11 +145,13 @@ public class FindMatches {
      */
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
-        this(project, Core.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true);
+        this(project, Core.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true,
+                Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
+                        OConsts.FUZZY_MATCH_THRESHOLD));
     }
 
     public FindMatches(IProject project, Segmenter segmenter, int maxCount, boolean allowSeparateSegmentMatch,
-            boolean searchExactlyTheSame, boolean applyThreshold) {
+            boolean searchExactlyTheSame, boolean applyThreshold, int threshold) {
         this.project = project;
         this.segmenter = segmenter;
         this.tok = project.getSourceTokenizer();
@@ -157,10 +159,9 @@ public class FindMatches {
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
         if (allowSeparateSegmentMatch && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
-            separateSegmentMatcher = new FindMatches(project, 1, false, true);
+            separateSegmentMatcher = new FindMatches(project, segmenter, 1, false, true, true, threshold);
         }
-        this.fuzzyMatchThreshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                OConsts.FUZZY_MATCH_THRESHOLD);
+        this.fuzzyMatchThreshold = threshold;
         this.applyThreshold = applyThreshold;
     }
 

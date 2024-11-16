@@ -73,6 +73,68 @@ public class FindMatchesTest {
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
     private static Path tmpDir;
 
+
+    /**
+     * Test the case when a translation project is configured in segmented mode,
+     * then change to non-segmented translation.
+     * <p>
+     * This is the case in which the original source text has three sentences.
+     * The project is configured in non-segmenting mode.
+     * There are three tmx entries for each sentence.
+     */
+    @Test
+    public void testSegmented() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("en");
+        prop.setTargetLanguage("ca");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        IProject project = new TestProject(prop, TMX_MATCH_EN_CA, null, new LuceneEnglishTokenizer(),
+                new DefaultTokenizer());
+        Core.setProject(project);
+        IStopped iStopped = () -> false;
+        String srcText = "This badge is granted when you’ve invited 5 people who subsequently spent enough "
+                + "time on the site to become full members. "
+                + "Wow! "
+                + "Thanks for expanding the diversity of our community with new members!";
+        String expectWhole = "Aquesta insígnia es concedeix quan heu convidat 5 persones que posteriorment "
+                + "han passat prou temps en ellloc web per a convertir-se en membres plens. "
+                + "Bé! "
+                + "Gràcies per ampliar la diversitat de la comunitat amb nous membres.";
+        String expectFirst = "Aquesta insígnia es concedeix quan heu convidat 5 persones que posteriorment "
+                + "han passat prou temps en ellloc web per a convertir-se en membres plens.";
+        String expectNear = "Aquesta insígnia es concedeix quan heu convidat 3 persones que posteriorment "
+                + "han passat prou temps al lloc web per a convertir-se en usuaris bàsics."
+                + " Una comunitat vibrant necessita una entrada regular de nouvinguts que hi participen habitualment"
+                + " i aporten veus noves a les converses.\n";
+        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, false, false);
+        List<NearString> result = finder.search(srcText, true, true, iStopped);
+        assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
+        assertEquals(65, result.get(0).scores[0].score);
+        assertEquals(62, result.get(0).scores[0].scoreNoStem);
+        assertEquals(62, result.get(0).scores[0].adjustedScore);
+        assertEquals(expectFirst, result.get(0).translation);
+        assertEquals(expectNear, result.get(1).translation);
+        //
+        List<StringBuilder> spaces = new ArrayList<>();
+        List<Rule> brules = new ArrayList<>();
+        List<String> segments = Core.getSegmenter().segment(prop.getSourceLanguage(), srcText, spaces, brules);
+        assertEquals(3, segments.size());
+        finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
+        result = finder.search(srcText, true, true, iStopped);
+        assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
+        assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
+        assertEquals(100, result.get(0).scores[0].scoreNoStem);
+        assertEquals(100, result.get(0).scores[0].adjustedScore);
+        assertEquals(expectWhole, result.get(0).translation);
+        assertEquals(65, result.get(1).scores[0].score);
+        assertEquals(62, result.get(1).scores[0].scoreNoStem);
+        assertEquals(62, result.get(1).scores[0].adjustedScore);
+        assertEquals(expectFirst, result.get(1).translation);
+        assertEquals(expectNear, result.get(2).translation);
+    }
+
     /**
      * Reproduce and test for RFE#1578.
      * <p>

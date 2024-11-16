@@ -1499,30 +1499,26 @@
     </tu>
     <tu>
       <tuv xml:lang="en">
-        <seg>This badge is granted when you’ve invited 5 people who subsequently spent enough time on the site to become full members. Wow! Thanks for expanding the diversity of our community with new members!
-</seg>
+        <seg>This badge is granted when you’ve invited 5 people who subsequently spent enough time on the site to become full members.</seg>
       </tuv>
       <tuv xml:lang="ca">
-        <seg>Aquesta insígnia es concedeix quan heu convidat 5 persones que posteriorment han passat prou temps en el lloc web per a convertir-se en membres plens. Bé! Gràcies per ampliar la diversitat de la comunitat amb nous membres.
-</seg>
+        <seg>Aquesta insígnia es concedeix quan heu convidat 5 persones que posteriorment han passat prou temps en ellloc web per a convertir-se en membres plens.</seg>
       </tuv>
     </tu>
     <tu>
       <tuv xml:lang="en">
-        <seg>Champion</seg>
+        <seg>Wow!</seg>
       </tuv>
       <tuv xml:lang="ca">
-        <seg>Campió</seg>
+        <seg>Bé!</seg>
       </tuv>
     </tu>
     <tu>
       <tuv xml:lang="en">
-        <seg>This badge is granted when you use all %{max_likes_per_day} of your daily likes for 20 days. Wow! You’re a role model for encouraging your fellow community members!
-</seg>
+        <seg>Thanks for expanding the diversity of our community with new members!</seg>
       </tuv>
       <tuv xml:lang="ca">
-        <seg>Aquesta insígnia es concedeix quan utilitzeu tots els vostres %{max_likes_per_day} 'm'agrada' diaris durant vint dies. Oh! Sou un model per a animar els companys de comunitat!
-</seg>
+        <seg>Gràcies per ampliar la diversitat de la comunitat amb nous membres.</seg>
       </tuv>
     </tu>
     <tu>

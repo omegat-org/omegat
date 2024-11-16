@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.data.ProjectProperties;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -69,7 +70,8 @@ public final class AlignerModule {
             }
 
             private void unregisterMenu() {
-                MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS, Collections.singletonList(alignerMenu));
+                MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS,
+                        Collections.singletonList(alignerMenu));
             }
 
             private void registerMenu() {
@@ -84,15 +86,16 @@ public final class AlignerModule {
                 Component mainWindow = Core.getMainWindow().getApplicationFrame();
                 AlignFilePickerController picker = new AlignFilePickerController();
                 if (Core.getProject().isProjectLoaded()) {
-                    String srcRoot = Core.getProject().getProjectProperties().getSourceRoot();
+                    ProjectProperties props = Core.getProject().getProjectProperties();
+                    String srcRoot = props.getSourceRoot();
                     String curFile = Core.getEditor().getCurrentFile();
                     if (curFile != null) {
                         picker.setSourceFile(srcRoot + curFile);
                     }
                     picker.setSourceDefaultDir(srcRoot);
-                    picker.setDefaultSaveDir(Core.getProject().getProjectProperties().getTMRoot());
-                    picker.setSourceLanguage(Core.getProject().getProjectProperties().getSourceLanguage());
-                    picker.setTargetLanguage(Core.getProject().getProjectProperties().getTargetLanguage());
+                    picker.setDefaultSaveDir(props.getTMRoot());
+                    picker.setSourceLanguage(props.getSourceLanguage());
+                    picker.setTargetLanguage(props.getTargetLanguage());
                 } else {
                     String srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
                     if (!StringUtil.isEmpty(srcLang)) {

@@ -54,8 +54,6 @@ import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.Core;
-import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
@@ -81,8 +79,8 @@ public class AlignFilePickerController {
     Language sourceLanguage = allLangs.get(0);
     Language targetLanguage = allLangs.get(allLangs.size() - 1);
 
-    private static final ILogger LOGGER = LoggerFactory.getLogger(AlignFilePickerController.class);
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
+    private static final ILogger LOGGER = LoggerFactory.getLogger(AlignFilePickerController.class, BUNDLE);
 
     /**
      * Set the source file for alignment.
@@ -499,16 +497,13 @@ public class AlignFilePickerController {
      * <li>Target file path
      * </ol>
      *
-     * @param args
-     * @throws Exception
+     * @param args command arguments.
      */
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
         Preferences.init();
         PluginUtils.loadPlugins(Collections.emptyMap());
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
 
         AlignFilePickerController picker = new AlignFilePickerController();
         if (args.length == 4) {

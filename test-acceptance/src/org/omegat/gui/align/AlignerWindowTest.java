@@ -31,8 +31,8 @@ public class AlignerWindowTest extends TestCoreGUI {
         picker.comboBox("sourceLanguagePicker").requireItemCount(languages.size());
         picker.comboBox("targetLanguagePicker").requireItemCount(languages.size());
         //
-        picker.button("sourceChooseFileButtion").requireEnabled();
-        picker.button("targetChooseFileButtion").requireEnabled();
+        picker.button("sourceChooseFileButton").requireEnabled();
+        picker.button("targetChooseFileButton").requireEnabled();
         //
         picker.button("OK").requireDisabled();
         picker.button("Cancel").requireEnabled();

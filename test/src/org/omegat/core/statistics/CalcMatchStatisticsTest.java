@@ -48,7 +48,6 @@ import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
@@ -59,19 +58,19 @@ import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.util.Language;
-import org.omegat.util.OConsts;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 public class CalcMatchStatisticsTest {
 
     @Test
-    public void testCalcMatchStatics() {
-        int threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                OConsts.FUZZY_MATCH_THRESHOLD);
-        Assert.assertEquals(30, threshold);
+    public void testCalcMatchStatics() throws Exception {
+        TestProject project = new TestProject(new ProjectPropertiesTest());
         IStatsConsumer callback = new TestStatsConsumer();
-        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(callback);
+        Segmenter segmenter = new Segmenter(Preferences.getSRX());
+        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter,
+                callback, 30);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -122,18 +121,9 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("938", result[7][2]);
         Assert.assertEquals("4894", result[7][3]);
         Assert.assertEquals("5699", result[7][4]);
-        // double check condition
-        threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                OConsts.FUZZY_MATCH_THRESHOLD);
-        Assert.assertEquals(30, threshold);
 
         // change threshold
-        Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, 70);
-        threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                OConsts.FUZZY_MATCH_THRESHOLD);
-        Assert.assertEquals(70, threshold);
-        //
-        calcMatchStatistics = new CalcMatchStatisticsMock(callback);
+        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, 70);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -184,10 +174,6 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("938", result[7][2]);
         Assert.assertEquals("4894", result[7][3]);
         Assert.assertEquals("5699", result[7][4]);
-        // double check condition
-        threshold = Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                OConsts.FUZZY_MATCH_THRESHOLD);
-        Assert.assertEquals(70, threshold);
     }
 
     /*
@@ -199,8 +185,6 @@ public class CalcMatchStatisticsTest {
         Core.initializeConsole(Collections.emptyMap());
         TestPreferencesInitializer.init();
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        Core.setProject(new TestProject(new ProjectPropertiesTest()));
     }
 
     protected static class ProjectPropertiesTest extends ProjectProperties {
@@ -219,12 +203,14 @@ public class CalcMatchStatisticsTest {
 
         private final ProjectTMX projectTMX;
         private Map<String, ExternalTMX> transMemories;
+        private final Segmenter segmenter;
 
         TestProject(ProjectProperties prop) throws Exception {
             super();
             this.prop = prop;
+            segmenter = new Segmenter(Preferences.getSRX());
             projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
-                    Paths.get("test/data/tmx/empty.tmx").toFile(), null);
+                    Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
         }
 
         @Override
@@ -257,7 +243,7 @@ public class CalcMatchStatisticsTest {
             try {
                 filter.parseFile(testSource.toFile(), Collections.emptyMap(), context, testCallback);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.log(e);
             }
             return ste;
         }
@@ -308,7 +294,7 @@ public class CalcMatchStatisticsTest {
                     try {
                         ExternalTMX newTMX;
                         Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
-                        newTMX = ExternalTMFactory.load(testTmx.toFile());
+                        newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter, null);
                         transMemories.put(testTmx.toString(), newTMX);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -372,17 +358,20 @@ public class CalcMatchStatisticsTest {
         private final String[] rowsTotal = new String[] { "RowRepetitions", "RowExactMatch", "RowMatch95",
                 "RowMatch85", "RowMatch75", "RowMatch50", "RowNoMatch", "Total" };
 
+        private final IProject project;
         private MatchStatCounts result;
         private final IStatsConsumer callback;
 
-        CalcMatchStatisticsMock(IStatsConsumer callback) {
-            super(callback, false);
+        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback,
+                                int threshold) {
+            super(project, segmenter, callback, false, threshold);
+            this.project = project;
             this.callback = callback;
         }
 
         @Override
         public void run() {
-            entriesToProcess = Core.getProject().getAllEntries().size();
+            entriesToProcess = project.getAllEntries().size();
             result = calcTotal(false);
             callback.finishData();
         }

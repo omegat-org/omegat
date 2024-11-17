@@ -74,6 +74,7 @@ public final class AlignerModule {
 
             private void registerMenu() {
                 alignerMenu = new JMenuItem();
+                alignerMenu.setName("aligner");
                 Mnemonics.setLocalizedText(alignerMenu, BUNDLE.getString("TF_MENU_TOOLS_ALIGN_FILES"));
                 alignerMenu.addActionListener(actionEvent -> alignerShow());
                 MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, alignerMenu);

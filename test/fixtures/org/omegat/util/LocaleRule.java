@@ -31,6 +31,14 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
+/**
+ * Locale rule to force specific runtime locale.
+ * <p>
+ * <code>
+ *      @Rule
+ *      public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+ * </code>
+ */
 public class LocaleRule implements TestRule {
     private final Locale testLocale;
     private Locale originalLocale;

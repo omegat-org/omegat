@@ -166,12 +166,15 @@ public class AlignFilePickerController {
         final JFrame frame = new JFrame(BUNDLE.getString("ALIGNER_FILEPICKER"));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         StaticUIUtils.setEscapeClosable(frame);
+        frame.setName("ALIGNER_FILEPICKER");
 
         final AlignFilePicker picker = new AlignFilePicker();
+        picker.setName("align_picker_panel");
         picker.sourceLanguagePicker
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
         picker.sourceLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.sourceLanguagePicker.setSelectedItem(sourceLanguage);
+        picker.sourceLanguagePicker.setName("sourceLanguagePicker");
         picker.sourceLanguagePicker.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -202,6 +205,7 @@ public class AlignFilePickerController {
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
         picker.targetLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.targetLanguagePicker.setSelectedItem(targetLanguage);
+        picker.targetLanguagePicker.setName("targetLanguagePicker");
         picker.targetLanguagePicker.addItemListener(e -> {
             if (e.getStateChange() != ItemEvent.SELECTED) {
                 return;
@@ -245,7 +249,10 @@ public class AlignFilePickerController {
                 picker.targetLanguageFileField.setText(file.getAbsolutePath());
             }
         });
+        picker.sourceChooseFileButton.setName("sourceChooseFileButton");
+        picker.targetChooseFileButton.setName("targetChooseFileButton");
         picker.sourceLanguageFileField.setText(sourceFile);
+        picker.sourceLanguageFileField.setName("sourceLanguageFileField");
         picker.sourceLanguageFileField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void removeUpdate(DocumentEvent e) {
@@ -268,6 +275,7 @@ public class AlignFilePickerController {
             }
         });
         picker.targetLanguageFileField.setText(targetFile);
+        picker.targetLanguageFileField.setName("targetLanguageFileField");
         picker.targetLanguageFileField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void removeUpdate(DocumentEvent e) {
@@ -385,6 +393,8 @@ public class AlignFilePickerController {
             }.execute();
         });
         picker.cancelButton.addActionListener(e -> frame.dispose());
+        picker.okButton.setName("OK");
+        picker.cancelButton.setName("Cancel");
 
         frame.getRootPane().setDefaultButton(picker.okButton);
 

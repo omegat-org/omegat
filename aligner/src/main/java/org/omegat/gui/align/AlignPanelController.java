@@ -178,6 +178,7 @@ public class AlignPanelController {
         alignMenuFrame = new AlignMenuFrame();
         alignMenuFrame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
         alignMenuFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        alignMenuFrame.setName("ALIGNER_FRAME");
 
         alignMenuFrame.addWindowListener(new WindowAdapter() {
             @Override

@@ -896,17 +896,19 @@ public class AlignPanelController {
                 alignPanel.comparisonComboBox.setModel(
                         new DefaultComboBoxModel<>(aligner.allowedModes.toArray(new ComparisonMode[0])));
 
-                String distanceValue = null;
+                String distanceValue;
                 if (beads != null) {
                     double avgDist = MutableBead.calculateAvgDist(beads);
                     distanceValue = StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE"),
-                            avgDist == Long.MAX_VALUE ? "-" : String.format("%.3f", avgDist));
+                            Double.compare(avgDist, 100.0) > 0 ? "-" : String.format("%.3f", avgDist));
                     alignPanel.table.setModel(new BeadTableModel(beads));
                     for (int i = 0; i < BeadTableModel.COL_SRC; i++) {
                         TableColumn col = alignPanel.table.getColumnModel().getColumn(i);
                         col.setMaxWidth(col.getWidth());
                     }
                     modified = false;
+                } else {
+                    distanceValue = StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE"), "-");
                 }
                 alignPanel.averageDistanceLabel.setText(distanceValue);
 

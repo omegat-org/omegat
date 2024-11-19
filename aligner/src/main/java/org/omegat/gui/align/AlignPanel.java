@@ -34,6 +34,7 @@ import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
 import org.omegat.gui.align.Aligner.ComparisonMode;
 import org.omegat.gui.align.Aligner.CounterType;
+import org.omegat.util.StringUtil;
 
 /**
  * UI component for displaying and editing the results of algorithmic alignment.
@@ -204,7 +205,7 @@ public class AlignPanel extends javax.swing.JPanel {
         jPanel7.add(comparisonComboBox);
         jPanel7.add(filler5);
 
-        averageDistanceLabel.setText(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE")); // NOI18N
+        averageDistanceLabel.setText(StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE"), "-"));
         jPanel7.add(averageDistanceLabel);
         jPanel7.add(filler6);
 

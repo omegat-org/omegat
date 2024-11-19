@@ -342,8 +342,8 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="averageDistanceLabel">
                   <Properties>
-                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/omegat/gui/align/Bundle.properties" key="ALIGNER_PANEL_LABEL_AVGSCORE" replaceFormat="BUNDLE.getString(&quot;{key}&quot;)"/>
+                    <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="StringUtil.format(BUNDLE.getString(&quot;ALIGNER_PANEL_LABEL_AVGSCORE&quot;), &quot;-&quot;)" type="code"/>
                     </Property>
                   </Properties>
                   <AuxValues>

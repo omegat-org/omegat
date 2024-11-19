@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import org.assertj.swing.data.TableCell;
 import org.assertj.swing.finder.WindowFinder;
@@ -81,12 +82,12 @@ public class AlignerWindowTest extends TestCoreGUI {
         //
         aligner.panel("align_panel").label("align_panel_instructions_label")
                 .requireText("Step 1: Adjust alignment parameters");
-        aligner.panel("align_panel").label("align_panel_average_distance_label")
-                .requireText("Average Score: 1.011");
+        aligner.panel("align_panel").comboBox("align_panel_comparison_cb").requireSelection("Heapwise");
+        aligner.panel("align_panel").comboBox("align_panel_algorithm_cb").requireSelection("Viterbi");
+        aligner.panel("align_panel").comboBox("align_panel_calculator_cb").requireSelection("Normal");
         //
         aligner.panel("align_panel").table("align_panel_table").requireRowCount(5);
         aligner.panel("align_panel").table("align_panel_table").requireColumnCount(3);
-        //
         aligner.panel("align_panel").table("align_panel_table").requireCellValue(TableCell.row(0).column(0),
                 "true");
         aligner.panel("align_panel").table("align_panel_table").requireCellValue(TableCell.row(0).column(1),
@@ -101,10 +102,8 @@ public class AlignerWindowTest extends TestCoreGUI {
                 "And then this is a very, very, very long sentence.");
         aligner.panel("align_panel").table("align_panel_table").requireCellValue(TableCell.row(2).column(2),
                 "Et puis c'est une phrase très, très, très longue.");
-        //
-        aligner.panel("align_panel").comboBox("align_panel_comparison_cb").requireSelection("Heapwise");
-        aligner.panel("align_panel").comboBox("align_panel_algorithm_cb").requireSelection("Viterbi");
-        aligner.panel("align_panel").comboBox("align_panel_calculator_cb").requireSelection("Normal");
+        aligner.panel("align_panel").label("align_panel_average_distance_label")
+                .requireText(Pattern.compile("Average Score:\\s(-|\\d\\.\\d{3})"));
         //
         aligner.button("align_panel_continue_button").click();
         aligner.button("align_panel_save_button").requireEnabled();

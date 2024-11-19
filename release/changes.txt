@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   53 Enhancement
-  83 Bug fixes
+  84 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -161,6 +161,9 @@
 
 
   Bug fixes:
+
+  - aligner average distance can be {0} which expected a numeric value
+  https://sourceforge.net/p/omegat/bugs/1275/
 
   - fix: Glossary sort order: Change src length sort condition and use Language Dependent sorter
 

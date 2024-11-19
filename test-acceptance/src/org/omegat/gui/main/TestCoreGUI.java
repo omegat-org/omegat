@@ -24,9 +24,15 @@
  **************************************************************************/
 package org.omegat.gui.main;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -52,6 +58,35 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     protected FrameFixture window;
     protected JFrame frame;
+
+    protected File tmpDir;
+
+    protected void openSampleProject(String projectPath) throws Exception {
+        // 0. Prepare project folder
+        tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
+        File projSrc = new File(projectPath);
+        FileUtils.copyDirectory(projSrc, tmpDir);
+        FileUtils.forceDeleteOnExit(tmpDir);
+        // 1. Prepare preference for the test;
+        Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
+        assertFalse(Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true));
+        // 2. Open a sample project.
+        SwingUtilities.invokeAndWait(() -> {
+            CountDownLatch latch = new CountDownLatch(1);
+            CoreEvents.registerProjectChangeListener(event -> {
+                if (Core.getProject().isProjectLoaded()) {
+                    latch.countDown();
+                }
+            });
+            ProjectUICommands.projectOpen(tmpDir);
+            try {
+                latch.await(5, TimeUnit.SECONDS);
+            } catch (InterruptedException ignored) {
+            }
+        });
+        // 3. check Project loaded
+        assertTrue("Sample project should be loaded.", Core.getProject().isProjectLoaded());
+    }
 
     @Override
     protected void onSetUp() throws Exception {

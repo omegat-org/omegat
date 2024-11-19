@@ -178,7 +178,6 @@ public class AlignPanelController {
         alignMenuFrame = new AlignMenuFrame();
         alignMenuFrame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
         alignMenuFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        alignMenuFrame.setName("ALIGNER_FRAME");
 
         alignMenuFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -188,6 +187,30 @@ public class AlignPanelController {
         });
 
         alignPanel = new AlignPanel();
+        // set names
+        alignPanel.setName("align_panel");
+        alignPanel.controlsPanel.setName("align_controls_panel");
+        alignPanel.advancedPanel.setName("align_advanced_panel");
+        alignPanel.comparisonComboBox.setName("align_panel_comparison_cb");
+        alignPanel.calculatorComboBox.setName("align_panel_calculator_cb");
+        alignPanel.algorithmComboBox.setName("align_panel_algorithm_cb");
+        alignPanel.counterComboBox.setName("align_panel_counter_cb");
+        alignPanel.segmentingCheckBox.setName("align_panel_segmenting_checkbox");
+        alignPanel.removeTagsCheckBox.setName("align_panel_remove_tags_checkbox");
+        alignPanel.highlightCheckBox.setName("align_panel_highlight_checkbox");
+        alignPanel.segmentingRulesButton.setName("align_panel_segmenting_rules_button");
+        alignPanel.fileFilterSettingsButton.setName("align_panel_file_filter_settings_button");
+        alignPanel.table.setName("align_panel_table");
+        alignPanel.instructionsLabel.setName("align_panel_instructions_label");
+        alignPanel.averageDistanceLabel.setName("align_panel_average_distance_label");
+        alignPanel.continueButton.setName("align_panel_continue_button");
+        alignPanel.saveButton.setName("align_panel_save_button");
+        alignMenuFrame.setName("ALIGN_MENU_FRAME");
+        alignMenuFrame.editMenu.setName("align_menu_edit");
+        alignMenuFrame.fileMenu.setName("align_menu_file");
+        alignMenuFrame.optionsMenu.setName("align_menu_options");
+        alignMenuFrame.segmentingItem.setName("align_menu_segmenting_item");
+        alignMenuFrame.closeItem.setName("align_menu_close_item");
 
         ActionListener comparisonListener = e -> {
             ComparisonMode newValue = (ComparisonMode) ((JComboBox<?>) e.getSource()).getSelectedItem();
@@ -240,33 +263,27 @@ public class AlignPanelController {
         alignPanel.counterComboBox.addActionListener(counterListener);
         alignPanel.counterComboBox.setRenderer(new EnumRenderer<CounterType>("ALIGNER_ENUM_COUNTER_TYPE_"));
 
-        ActionListener segmentingListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean newValue = ((AbstractButton) e.getSource()).isSelected();
-                if (newValue != aligner.segment && confirmReset(alignMenuFrame)) {
-                    aligner.segment = newValue;
-                    reloadBeads();
-                } else {
-                    alignPanel.segmentingCheckBox.setSelected(aligner.segment);
-                    alignMenuFrame.segmentingItem.setSelected(aligner.segment);
-                }
+        ActionListener segmentingListener = e -> {
+            boolean newValue = ((AbstractButton) e.getSource()).isSelected();
+            if (newValue != aligner.segment && confirmReset(alignMenuFrame)) {
+                aligner.segment = newValue;
+                reloadBeads();
+            } else {
+                alignPanel.segmentingCheckBox.setSelected(aligner.segment);
+                alignMenuFrame.segmentingItem.setSelected(aligner.segment);
             }
         };
         alignPanel.segmentingCheckBox.addActionListener(segmentingListener);
         alignMenuFrame.segmentingItem.addActionListener(segmentingListener);
 
-        ActionListener segmentingRulesListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (confirmReset(alignMenuFrame)) {
-                    SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
-                            Core.getSegmenter().getSRX(), null);
-                    if (customizer.show(alignMenuFrame)) {
-                        customizedSRX = customizer.getResult();
-                        Core.setSegmenter(new Segmenter(customizedSRX));
-                        reloadBeads();
-                    }
+        ActionListener segmentingRulesListener = e -> {
+            if (confirmReset(alignMenuFrame)) {
+                SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
+                        Core.getSegmenter().getSRX(), null);
+                if (customizer.show(alignMenuFrame)) {
+                    customizedSRX = customizer.getResult();
+                    Core.setSegmenter(new Segmenter(customizedSRX));
+                    reloadBeads();
                 }
             }
         };
@@ -879,17 +896,19 @@ public class AlignPanelController {
                 alignPanel.comparisonComboBox.setModel(
                         new DefaultComboBoxModel<>(aligner.allowedModes.toArray(new ComparisonMode[0])));
 
-                String distanceValue = null;
+                String distanceValue;
                 if (beads != null) {
                     double avgDist = MutableBead.calculateAvgDist(beads);
                     distanceValue = StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE"),
-                            avgDist == Long.MAX_VALUE ? "-" : String.format("%.3f", avgDist));
+                            Double.compare(avgDist, 100.0) > 0 ? "-" : String.format("%.3f", avgDist));
                     alignPanel.table.setModel(new BeadTableModel(beads));
                     for (int i = 0; i < BeadTableModel.COL_SRC; i++) {
                         TableColumn col = alignPanel.table.getColumnModel().getColumn(i);
                         col.setMaxWidth(col.getWidth());
                     }
                     modified = false;
+                } else {
+                    distanceValue = StringUtil.format(BUNDLE.getString("ALIGNER_PANEL_LABEL_AVGSCORE"), "-");
                 }
                 alignPanel.averageDistanceLabel.setText(distanceValue);
 

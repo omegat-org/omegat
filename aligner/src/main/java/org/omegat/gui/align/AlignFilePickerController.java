@@ -237,6 +237,7 @@ public class AlignFilePickerController {
                 targetDefaultDir = targetDefaultDir == null ? sourceDefaultDir : targetDefaultDir;
                 defaultSaveDir = defaultSaveDir == null ? sourceDefaultDir : defaultSaveDir;
                 picker.sourceLanguageFileField.setText(file.getAbsolutePath());
+                sourceFile = file.getAbsolutePath();
             }
         });
         picker.targetChooseFileButton.addActionListener(e -> {
@@ -247,6 +248,7 @@ public class AlignFilePickerController {
                 sourceDefaultDir = sourceDefaultDir == null ? targetDefaultDir : sourceDefaultDir;
                 defaultSaveDir = defaultSaveDir == null ? targetDefaultDir : defaultSaveDir;
                 picker.targetLanguageFileField.setText(file.getAbsolutePath());
+                targetFile = file.getAbsolutePath();
             }
         });
         picker.sourceChooseFileButton.setName("sourceChooseFileButton");

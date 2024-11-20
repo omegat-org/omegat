@@ -495,13 +495,15 @@ public class AlignFilePickerController {
      * </ol>
      *
      * @param args command arguments.
+     * @throws Exception when failed to ininitalize OmegaT core. 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
         Preferences.init();
         PluginUtils.loadPlugins(Collections.emptyMap());
-
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
         AlignFilePickerController picker = new AlignFilePickerController();
         if (args.length == 4) {
             picker.sourceLanguage = new Language(args[0]);

@@ -33,11 +33,11 @@ import java.util.ResourceBundle;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-import org.omegat.core.data.ProjectProperties;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;

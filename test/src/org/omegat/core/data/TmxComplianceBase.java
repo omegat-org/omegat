@@ -46,6 +46,7 @@ import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -67,6 +68,7 @@ public abstract class TmxComplianceBase {
     static final Pattern RE_SEG = Pattern.compile("(<seg>.+</seg>)");
 
     protected File outFile;
+    protected Segmenter segmenter;
 
     @Rule
     public TestName name = new TestName();
@@ -74,7 +76,7 @@ public abstract class TmxComplianceBase {
     @Before
     public final void setUp() throws Exception {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        segmenter = new Segmenter(SRX.getDefault());
         TestPreferencesInitializer.init();
 
         outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + name.getMethodName() + ".out");
@@ -179,7 +181,7 @@ public abstract class TmxComplianceBase {
             @Override
             public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
                     String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
-                result.addAll(Core.getSegmenter().segment(context.getSourceLang(), source, null, null));
+                result.addAll(segmenter.segment(context.getSourceLang(), source, null, null));
             }
 
             public void linkPrevNextSegments() {
@@ -197,7 +199,7 @@ public abstract class TmxComplianceBase {
         fc.setInEncoding(inCharset);
         fc.setOutEncoding(outCharset);
 
-        RealProject.AlignFilesCallback callback = new RealProject.AlignFilesCallback(props);
+        RealProject.AlignFilesCallback callback = new RealProject.AlignFilesCallback(props, segmenter);
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 

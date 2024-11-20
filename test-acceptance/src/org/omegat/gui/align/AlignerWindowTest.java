@@ -99,6 +99,7 @@ public class AlignerWindowTest extends TestCoreGUI {
         //
         picker.button("OK").requireEnabled(Timeout.timeout(100));
         picker.button("OK").click();
+        robot().waitForIdle();
         //
         FrameFixture aligner = WindowFinder.findFrame("ALIGN_MENU_FRAME").withTimeout(5000).using(robot());
         aligner.requireTitle("Align");
@@ -137,7 +138,7 @@ public class AlignerWindowTest extends TestCoreGUI {
                 .requireText(Pattern.compile("Average Score:\\s(-|\\d\\.\\d{3})"));
         //
         aligner.button("align_panel_continue_button").click();
-        aligner.button("align_panel_save_button").requireEnabled();
+        aligner.button("align_panel_save_button").requireEnabled(Timeout.timeout(100));
         aligner.panel("align_panel").label("align_panel_instructions_label")
                 .requireText("Step 2: Make manual corrections");
         aligner.panel("align_controls_panel").requireVisible();

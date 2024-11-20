@@ -79,11 +79,17 @@ public class AlignerWindowTest extends TestCoreGUI {
         picker.comboBox("targetLanguagePicker").requireSelection("fr - French");
         //
         picker.button("sourceChooseFileButton").click();
-        picker.fileChooser().selectFile(new File(tmpDir, SOURCE_PATH));
-        picker.fileChooser().approve();
+        picker.fileChooser("aligner_choose_source").requireVisible();
+        picker.fileChooser("aligner_choose_source").selectFile(new File(tmpDir, SOURCE_PATH));
+        picker.fileChooser("aligner_choose_source").approve();
+        robot().waitForIdle();
+        //
         picker.button("targetChooseFileButton").click();
-        picker.fileChooser().selectFile(new File(tmpDir, TARGET_PATH));
-        picker.fileChooser().approve();
+        picker.fileChooser("aligner_choose_target").requireVisible();
+        picker.fileChooser("aligner_choose_target").selectFile(new File(tmpDir, TARGET_PATH));
+        picker.fileChooser("aligner_choose_target").approve();
+        robot().waitForIdle();
+        //
         String srcFile = picker.textBox("sourceLanguageFileField").text();
         assertNotNull(srcFile);
         assertTrue(srcFile.endsWith(SOURCE_PATH.substring(SOURCE_PATH.indexOf('/') + 1)));

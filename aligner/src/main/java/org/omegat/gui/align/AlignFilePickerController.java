@@ -29,7 +29,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -172,31 +171,28 @@ public class AlignFilePickerController {
         picker.sourceLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.sourceLanguagePicker.setSelectedItem(sourceLanguage);
         picker.sourceLanguagePicker.setName("sourceLanguagePicker");
-        picker.sourceLanguagePicker.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() != ItemEvent.SELECTED) {
-                    return;
-                }
-                if (e.getItem() instanceof String) {
-                    String newVal = (String) e.getItem();
-                    if (Language.verifySingleLangCode(newVal)) {
-                        sourceLanguage = new Language(newVal);
-                    } else {
-                        sourceLanguage = null;
-                        JOptionPane.showMessageDialog(frame,
-                                BUNDLE.getString("NP_INVALID_SOURCE_LOCALE")
-                                        + BUNDLE.getString("NP_LOCALE_SUGGESTION"),
-                                BUNDLE.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-                        picker.sourceLanguagePicker.requestFocusInWindow();
-                    }
-                } else if (e.getItem() instanceof Language) {
-                    sourceLanguage = (Language) e.getItem();
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                updatePicker(picker);
+        picker.sourceLanguagePicker.addItemListener(e -> {
+            if (e.getStateChange() != ItemEvent.SELECTED) {
+                return;
             }
+            if (e.getItem() instanceof String) {
+                String newVal = (String) e.getItem();
+                if (Language.verifySingleLangCode(newVal)) {
+                    sourceLanguage = new Language(newVal);
+                } else {
+                    sourceLanguage = null;
+                    JOptionPane.showMessageDialog(frame,
+                            BUNDLE.getString("NP_INVALID_SOURCE_LOCALE")
+                                    + BUNDLE.getString("NP_LOCALE_SUGGESTION"),
+                            BUNDLE.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                    picker.sourceLanguagePicker.requestFocusInWindow();
+                }
+            } else if (e.getItem() instanceof Language) {
+                sourceLanguage = (Language) e.getItem();
+            } else {
+                throw new IllegalArgumentException();
+            }
+            updatePicker(picker);
         });
         picker.targetLanguagePicker
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
@@ -228,7 +224,7 @@ public class AlignFilePickerController {
         });
         picker.sourceChooseFileButton.addActionListener(e -> {
             File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"),
-                    StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile);
+                    StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile, "aligner_choose_source");
             if (file != null) {
                 sourceDefaultDir = file.getParent();
                 targetDefaultDir = targetDefaultDir == null ? sourceDefaultDir : targetDefaultDir;
@@ -239,7 +235,7 @@ public class AlignFilePickerController {
         });
         picker.targetChooseFileButton.addActionListener(e -> {
             File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"),
-                    StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile);
+                    StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile, "aligner_choose_target");
             if (file != null) {
                 targetDefaultDir = file.getParent();
                 sourceDefaultDir = sourceDefaultDir == null ? targetDefaultDir : sourceDefaultDir;
@@ -466,8 +462,9 @@ public class AlignFilePickerController {
         return result;
     }
 
-    static File chooseFile(Component parent, String title, String dir) {
+    static File chooseFile(Component parent, String title, String dir, String name) {
         JFileChooser chooser = new JFileChooser(dir);
+        chooser.setName(name);
         chooser.setDialogTitle(title);
         chooser.setFileFilter(new FileFilter() {
             @Override

@@ -50,13 +50,11 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
-
 import org.omegat.core.Core;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
@@ -80,7 +78,6 @@ public class AlignFilePickerController {
     Language targetLanguage = allLangs.get(allLangs.size() - 1);
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
-    private static final ILogger LOGGER = LoggerFactory.getLogger(AlignFilePickerController.class, BUNDLE);
 
     /**
      * Set the source file for alignment.
@@ -320,7 +317,7 @@ public class AlignFilePickerController {
                     field.setText(files.get(0).getAbsolutePath());
                     return true;
                 } catch (Exception e) {
-                    LOGGER.atInfo().setCause(e).log();
+                    Log.log(e);
                     return false;
                 }
             }
@@ -358,7 +355,7 @@ public class AlignFilePickerController {
                     }
                     return true;
                 } catch (Exception e) {
-                    LOGGER.atInfo().setCause(e).log();
+                    Log.log(e);
                     return false;
                 }
             }
@@ -384,7 +381,7 @@ public class AlignFilePickerController {
                     } catch (CancellationException e) {
                         // Ignore
                     } catch (Exception e) {
-                        LOGGER.atInfo().setCause(e).log();
+                        Log.log(e);
                         JOptionPane.showMessageDialog(frame, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
                                 BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
@@ -446,7 +443,7 @@ public class AlignFilePickerController {
                 } catch (CancellationException e) {
                     // Ignore
                 } catch (Exception e) {
-                    LOGGER.atInfo().setCause(e).log();
+                    Log.log(e);
                     message = e.getLocalizedMessage();
                 }
                 picker.okButton.setEnabled(enabled);

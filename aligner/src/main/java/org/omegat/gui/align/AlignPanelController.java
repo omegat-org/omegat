@@ -95,7 +95,6 @@ import tokyo.northside.logging.LoggerFactory;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.align.Aligner.AlgorithmClass;
 import org.omegat.gui.align.Aligner.CalculatorType;
@@ -160,16 +159,10 @@ public class AlignPanelController {
     }
 
     private Phase phase = Phase.ALIGN;
-    private final Segmenter segmenter;
 
     public AlignPanelController(Aligner aligner, String defaultSaveDir) {
-        this(aligner, defaultSaveDir, Core.getSegmenter());
-    }
-
-    public AlignPanelController(Aligner aligner, String defaultSaveDir, Segmenter segmenter) {
         this.aligner = aligner;
         this.defaultSaveDir = defaultSaveDir;
-        this.segmenter = segmenter;
     }
 
     /**
@@ -281,9 +274,10 @@ public class AlignPanelController {
         ActionListener segmentingRulesListener = e -> {
             if (confirmReset(alignMenuFrame)) {
                 SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
-                        segmenter.getSRX(), null);
+                        aligner.getSegmenter().getSRX(), null);
                 if (customizer.show(alignMenuFrame)) {
                     customizedSRX = customizer.getResult();
+                    aligner.updateSegmenter(customizedSRX);
                     reloadBeads();
                 }
             }

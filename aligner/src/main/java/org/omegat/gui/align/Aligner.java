@@ -164,7 +164,7 @@ public class Aligner {
     private List<String> trgRaw;
     private List<Entry<String, String>> idPairs;
     List<ComparisonMode> allowedModes;
-    private final Segmenter segmenter;
+    private Segmenter segmenter;
     private final FilterMaster fm;
 
     public Aligner(String srcFile, Language srcLang, String trgFile, Language trgLang) {
@@ -174,10 +174,18 @@ public class Aligner {
         this.trgLang = trgLang;
         restoreDefaults();
         SRX srx = Preferences.getSRX();
-        segmenter = srx != null ? new Segmenter(srx) : new Segmenter(SRX.getDefault());
+        updateSegmenter(srx != null ? srx : SRX.getDefault());
         Filters filters = Preferences.getFilters() != null ? Preferences.getFilters()
                 : FilterMaster.createDefaultFiltersConfig();
         fm = new FilterMaster(filters);
+    }
+
+    void updateSegmenter(SRX srx) {
+        segmenter = new Segmenter(srx);
+    }
+
+    Segmenter getSegmenter() {
+        return segmenter;
     }
 
     /**
@@ -330,7 +338,8 @@ public class Aligner {
             throw new UnsupportedOperationException();
         }
         return IntStream.range(0, srcRaw.size())
-                .mapToObj(i -> new Alignment(Arrays.asList(srcRaw.get(i)), Arrays.asList(trgRaw.get(i))));
+                .mapToObj(i -> new Alignment(Collections.singletonList(srcRaw.get(i)),
+                        Collections.singletonList(trgRaw.get(i))));
     }
 
     /**
@@ -364,7 +373,8 @@ public class Aligner {
             throw new UnsupportedOperationException();
         }
         return idPairs.stream()
-                .map(e -> new Alignment(Arrays.asList(e.getKey()), Arrays.asList(e.getValue())));
+                .map(e -> new Alignment(Collections.singletonList(e.getKey()),
+                        Collections.singletonList(e.getValue())));
     }
 
     /**

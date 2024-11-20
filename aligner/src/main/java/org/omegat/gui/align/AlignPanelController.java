@@ -89,8 +89,6 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import org.apache.commons.io.FilenameUtils;
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -106,6 +104,7 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
@@ -121,7 +120,6 @@ import gen.core.filters.Filters;
  */
 public class AlignPanelController {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
-    private static final ILogger LOGGER = LoggerFactory.getLogger(AlignPanelController.class, BUNDLE);
     private final Aligner aligner;
     private final String defaultSaveDir;
     private boolean modified = false;
@@ -402,7 +400,7 @@ public class AlignPanelController {
                                 MutableBead.beadsToEntries(aligner.srcLang, aligner.trgLang, beads));
                         modified = false;
                     } catch (Exception ex) {
-                        LOGGER.atInfo().setCause(ex).log();
+                        Log.log(ex);
                         JOptionPane.showMessageDialog(alignMenuFrame,
                                 BUNDLE.getString("ALIGNER_PANEL_SAVE_ERROR"), BUNDLE.getString("ERROR_TITLE"),
                                 JOptionPane.ERROR_MESSAGE);
@@ -813,7 +811,7 @@ public class AlignPanelController {
                 } catch (CancellationException ex) {
                     // Ignore
                 } catch (Exception e) {
-                    LOGGER.atInfo().setCause(e).log();
+                    Log.log(e);
                     JOptionPane.showMessageDialog(alignPanel, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
                             BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
@@ -985,7 +983,7 @@ public class AlignPanelController {
                 try {
                     Core.getProject().saveProjectProperties();
                 } catch (Exception ex) {
-                    LOGGER.atInfo().setCause(ex).log();
+                    Log.log(ex);
                     JOptionPane.showMessageDialog(comp, BUNDLE.getString("CT_ERROR_SAVING_PROJ"),
                             BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
@@ -1018,7 +1016,7 @@ public class AlignPanelController {
                 try {
                     Core.getProject().saveProjectProperties();
                 } catch (Exception ex) {
-                    LOGGER.atInfo().setCause(ex).log();
+                    Log.log(ex);
                     JOptionPane.showMessageDialog(comp, BUNDLE.getString("CT_ERROR_SAVING_PROJ"),
                             BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 }
@@ -1949,7 +1947,7 @@ public class AlignPanelController {
                     return model.canMoveTo(trgRow, realRows.get(realRows.size() - 1), col, false);
                 }
             } catch (Exception e) {
-                LOGGER.atInfo().setCause(e).log();
+                Log.log(e);
             }
             return false;
         }
@@ -1975,7 +1973,7 @@ public class AlignPanelController {
                 moveRows(rows, col, trgRow);
                 return true;
             } catch (Exception e) {
-                LOGGER.atInfo().setCause(e).log();
+                Log.log(e);
             }
             return false;
         }

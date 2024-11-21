@@ -29,7 +29,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,15 +49,13 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
-
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
@@ -81,7 +78,6 @@ public class AlignFilePickerController {
     Language sourceLanguage = allLangs.get(0);
     Language targetLanguage = allLangs.get(allLangs.size() - 1);
 
-    private static final ILogger LOGGER = LoggerFactory.getLogger(AlignFilePickerController.class);
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
 
     /**
@@ -175,31 +171,28 @@ public class AlignFilePickerController {
         picker.sourceLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.sourceLanguagePicker.setSelectedItem(sourceLanguage);
         picker.sourceLanguagePicker.setName("sourceLanguagePicker");
-        picker.sourceLanguagePicker.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() != ItemEvent.SELECTED) {
-                    return;
-                }
-                if (e.getItem() instanceof String) {
-                    String newVal = (String) e.getItem();
-                    if (Language.verifySingleLangCode(newVal)) {
-                        sourceLanguage = new Language(newVal);
-                    } else {
-                        sourceLanguage = null;
-                        JOptionPane.showMessageDialog(frame,
-                                BUNDLE.getString("NP_INVALID_SOURCE_LOCALE")
-                                        + BUNDLE.getString("NP_LOCALE_SUGGESTION"),
-                                BUNDLE.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
-                        picker.sourceLanguagePicker.requestFocusInWindow();
-                    }
-                } else if (e.getItem() instanceof Language) {
-                    sourceLanguage = (Language) e.getItem();
-                } else {
-                    throw new IllegalArgumentException();
-                }
-                updatePicker(picker);
+        picker.sourceLanguagePicker.addItemListener(e -> {
+            if (e.getStateChange() != ItemEvent.SELECTED) {
+                return;
             }
+            if (e.getItem() instanceof String) {
+                String newVal = (String) e.getItem();
+                if (Language.verifySingleLangCode(newVal)) {
+                    sourceLanguage = new Language(newVal);
+                } else {
+                    sourceLanguage = null;
+                    JOptionPane.showMessageDialog(frame,
+                            BUNDLE.getString("NP_INVALID_SOURCE_LOCALE")
+                                    + BUNDLE.getString("NP_LOCALE_SUGGESTION"),
+                            BUNDLE.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+                    picker.sourceLanguagePicker.requestFocusInWindow();
+                }
+            } else if (e.getItem() instanceof Language) {
+                sourceLanguage = (Language) e.getItem();
+            } else {
+                throw new IllegalArgumentException();
+            }
+            updatePicker(picker);
         });
         picker.targetLanguagePicker
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
@@ -231,7 +224,7 @@ public class AlignFilePickerController {
         });
         picker.sourceChooseFileButton.addActionListener(e -> {
             File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_SOURCE"),
-                    StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile);
+                    StringUtil.isEmpty(sourceFile) ? sourceDefaultDir : sourceFile, "aligner_choose_source");
             if (file != null) {
                 sourceDefaultDir = file.getParent();
                 targetDefaultDir = targetDefaultDir == null ? sourceDefaultDir : targetDefaultDir;
@@ -242,7 +235,7 @@ public class AlignFilePickerController {
         });
         picker.targetChooseFileButton.addActionListener(e -> {
             File file = chooseFile(frame, BUNDLE.getString("ALIGNER_FILEPICKER_CHOOSE_TARGET"),
-                    StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile);
+                    StringUtil.isEmpty(targetFile) ? targetDefaultDir : targetFile, "aligner_choose_target");
             if (file != null) {
                 targetDefaultDir = file.getParent();
                 sourceDefaultDir = sourceDefaultDir == null ? targetDefaultDir : sourceDefaultDir;
@@ -322,7 +315,7 @@ public class AlignFilePickerController {
                     field.setText(files.get(0).getAbsolutePath());
                     return true;
                 } catch (Exception e) {
-                    LOGGER.atInfo().setCause(e).log();
+                    Log.log(e);
                     return false;
                 }
             }
@@ -360,7 +353,7 @@ public class AlignFilePickerController {
                     }
                     return true;
                 } catch (Exception e) {
-                    LOGGER.atInfo().setCause(e).log();
+                    Log.log(e);
                     return false;
                 }
             }
@@ -386,7 +379,7 @@ public class AlignFilePickerController {
                     } catch (CancellationException e) {
                         // Ignore
                     } catch (Exception e) {
-                        LOGGER.atInfo().setCause(e).log();
+                        Log.log(e);
                         JOptionPane.showMessageDialog(frame, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
                                 BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                     }
@@ -448,7 +441,7 @@ public class AlignFilePickerController {
                 } catch (CancellationException e) {
                     // Ignore
                 } catch (Exception e) {
-                    LOGGER.atInfo().setCause(e).log();
+                    Log.log(e);
                     message = e.getLocalizedMessage();
                 }
                 picker.okButton.setEnabled(enabled);
@@ -469,8 +462,9 @@ public class AlignFilePickerController {
         return result;
     }
 
-    static File chooseFile(Component parent, String title, String dir) {
+    static File chooseFile(Component parent, String title, String dir, String name) {
         JFileChooser chooser = new JFileChooser(dir);
+        chooser.setName(name);
         chooser.setDialogTitle(title);
         chooser.setFileFilter(new FileFilter() {
             @Override
@@ -499,8 +493,8 @@ public class AlignFilePickerController {
      * <li>Target file path
      * </ol>
      *
-     * @param args
-     * @throws Exception
+     * @param args command arguments.
+     * @throws Exception when failed to ininitalize OmegaT core. 
      */
     public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
@@ -509,7 +503,6 @@ public class AlignFilePickerController {
         PluginUtils.loadPlugins(Collections.emptyMap());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-
         AlignFilePickerController picker = new AlignFilePickerController();
         if (args.length == 4) {
             picker.sourceLanguage = new Language(args[0]);

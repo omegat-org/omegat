@@ -25,11 +25,14 @@
 
 package org.omegat.languages.it;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class ItalianPlugin {
 
     private static final String ITALIAN = "org.languagetool.language.Italian";
+    private static final String DICTIONARY = "org.omegat.languages.it.ItalianMorfologikDictionary";
 
     private ItalianPlugin() {
     }
@@ -37,6 +40,10 @@ public final class ItalianPlugin {
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("it-CH", ITALIAN);
         LanguageManager.registerLTLanguage("it-IT", ITALIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("it_IT", SpellCheckDictionaryType.MORFOLOGIK,
+                DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("it", SpellCheckDictionaryType.MORFOLOGIK,
+                DICTIONARY);
     }
 
     public static void unloadPlugins() {

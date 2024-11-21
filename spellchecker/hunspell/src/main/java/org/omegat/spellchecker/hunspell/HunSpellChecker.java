@@ -88,7 +88,7 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
     protected Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // check that the dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                SpellCheckerManager.DEFAULT_DICTIONARY_DIR.getPath());
+                SpellCheckerManager.getDefaultDictionaryDir().getPath());
 
         File affixName = new File(dictionaryDir, language + SC_AFFIX_EXTENSION);
         File dictionaryName = new File(dictionaryDir, language + SC_DICTIONARY_EXTENSION);

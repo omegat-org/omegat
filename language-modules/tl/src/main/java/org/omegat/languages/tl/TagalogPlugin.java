@@ -25,17 +25,22 @@
 
 package org.omegat.languages.tl;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class TagalogPlugin {
 
     private static final String TAGALOG = "org.languagetool.language.Tagalog";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.tl.TagalogMorfologikDictionary";
 
     private TagalogPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("tl-PH", TAGALOG);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ta",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

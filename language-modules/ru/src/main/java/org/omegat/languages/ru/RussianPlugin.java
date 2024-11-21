@@ -25,17 +25,22 @@
 
 package org.omegat.languages.ru;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class RussianPlugin {
 
     private static final String RUSSIAN = "org.languagetool.language.Russian";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.ru.RussianMorfologikDictionary";
 
     private RussianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ru-RU", RUSSIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_AT",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

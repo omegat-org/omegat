@@ -19,7 +19,6 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
-        compileOnly(libs.lucene.analyzers.common)
         implementation(libs.languagetool.fr) {
             exclude module: 'languagetool-core'
         }
@@ -29,6 +28,13 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    testImplementation(libs.languagetool.core)
+    testImplementation project(":spellchecker:hunspell")
+}
+
+test {
+    dependsOn tasks.jar
+    dependsOn project(":spellchecker:hunspell").tasks.jar
 }
 
 jar {

@@ -31,26 +31,29 @@ import java.nio.file.Path;
 public interface ISpellCheckerDictionary extends Closeable {
     /**
      * Get Hunspell dictionary.
+     * 
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    default org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary() {
+    default org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
         return null;
     }
 
     /**
      * Get Morfologik dictionary.
+     * 
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    default morfologik.stemming.Dictionary getMofologikDictionary() {
+    default morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
         return null;
     }
 
-    default Path installHunspellDictionary(Path dictionaryDir) {
+    default Path installHunspellDictionary(Path dictionaryDir, String language) {
         return null;
     }
 
     /**
      * Get a dictionary type.
+     * 
      * @return type of dictionary. If the module provides nothing, return null.
      */
     SpellCheckDictionaryType getDictionaryType();

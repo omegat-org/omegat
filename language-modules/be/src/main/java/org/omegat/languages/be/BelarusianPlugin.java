@@ -33,16 +33,17 @@ public final class BelarusianPlugin {
 
     private static final String BELARUSIAN = "org.languagetool.language.Belarusian";
     private static final String SPELLCHECK_DICTIONARY = "org.omegat.languages.be"
-            + ".BelarusianSpellCheckerDictionary";
+            + ".BelarusianMorfologikDictionary";
 
     private BelarusianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("be", BELARUSIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("be_BY",
+                SpellCheckDictionaryType.MORFOLOGIK, SPELLCHECK_DICTIONARY);
         SpellCheckerManager.registerSpellCheckerDictionaryProvider("be", SpellCheckDictionaryType.MORFOLOGIK,
                 SPELLCHECK_DICTIONARY);
-
     }
 
     public static void unloadPlugins() {

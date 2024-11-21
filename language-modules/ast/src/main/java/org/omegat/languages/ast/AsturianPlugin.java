@@ -33,13 +33,15 @@ public final class AsturianPlugin {
 
     private static final String ASTURIAN = "org.languagetool.language.Asturian";
     private static final String SPELLCHECK_DICITONARY = "org.omegat.languages.ast"
-            + ".AstruianSpellCheckerDictionary";
+            + ".AsturianMorfologikDictionary";
 
     private AsturianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ast-ES", ASTURIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ast_ES",
+                SpellCheckDictionaryType.MORFOLOGIK, SPELLCHECK_DICITONARY);
         SpellCheckerManager.registerSpellCheckerDictionaryProvider("ast", SpellCheckDictionaryType.MORFOLOGIK,
                 SPELLCHECK_DICITONARY);
     }

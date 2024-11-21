@@ -25,17 +25,24 @@
 
 package org.omegat.languages.sk;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class SlovakPlugin {
 
     private static final String SLOVAK = "org.languagetool.language.Slovak";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.sk.SlovakMorfologikDictionary";
 
     private SlovakPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("sk-SK", SLOVAK);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("sk_SK",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("sk",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

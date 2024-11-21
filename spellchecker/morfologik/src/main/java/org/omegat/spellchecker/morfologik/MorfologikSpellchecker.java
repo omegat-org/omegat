@@ -64,10 +64,10 @@ public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpe
     }
 
     @Override
-    protected Optional<ISpellCheckerProvider> initializeWithLanguage(final String language) {
+    protected Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // check that the dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                SpellCheckerManager.DEFAULT_DICTIONARY_DIR.getPath());
+                SpellCheckerManager.getDefaultDictionaryDir().getPath());
         File dictionaryFile = new File(dictionaryDir, language + SC_DICT_EXTENSION);
         File infoFile = new File(dictionaryDir, language + SC_INFO_EXTENSION);
         Dictionary dictionary;

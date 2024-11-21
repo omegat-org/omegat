@@ -9,6 +9,7 @@ dependencies {
                 includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir,
                 includes: ['**/language-en-*.jar'])
+        runtimeOnly fileTree(dir: providedModuleLibsDir, includes: ['**/opennlp-*.jar'])
     } else {
         compileOnly(libs.commons.io)
         compileOnly(libs.languagetool.core) {
@@ -21,12 +22,17 @@ dependencies {
         implementation(libs.languagetool.en) {
             exclude module: 'languagetool-core'
         }
-        runtimeOnly fileTree(dir: providedModuleLibsDir, includes: ['**/opennlp-*.jar'])
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
-    testImplementation(libs.commons.io)
+    testImplementation(libs.languagetool.core)
+    testImplementation project(":spellchecker:morfologik")
+}
+
+test {
+    dependsOn tasks.jar
+    dependsOn project(":spellchecker:morfologik").tasks.jar
 }
 
 jar {

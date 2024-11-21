@@ -34,8 +34,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import org.languagetool.JLanguageTool;
-
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -45,12 +43,18 @@ public final class SpellCheckerManager {
 
     private static ISpellChecker spellChecker;
 
-    public static final File DEFAULT_DICTIONARY_DIR = new File(StaticUtils.getConfigDir(),
-            OConsts.SPELLING_DICT_DIR);
-
     private SpellCheckerManager() {
     }
 
+    public static File getDefaultDictionaryDir() {
+        return new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR);
+    }
+
+    /**
+     * Get a spell checker engine used currently.
+     * 
+     * @return spell checker engine.
+     */
     public static ISpellChecker getCurrentSpellChecker() {
         if (spellChecker != null) {
             return spellChecker;
@@ -65,7 +69,7 @@ public final class SpellCheckerManager {
                     spellChecker = null;
                 }
             } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException
-                     | InstantiationException ex) {
+                    | InstantiationException ex) {
                 Log.log(ex);
             }
         }
@@ -77,9 +81,18 @@ public final class SpellCheckerManager {
     private static final Map<String, String> morfologikDictionaryProviders = new HashMap<>();
     private static final Map<String, String> hunspellDictionaryProviders = new HashMap<>();
 
-    public static void registerSpellCheckerDictionaryProvider(String lang,
-                                                              SpellCheckDictionaryType type,
-                                                              String dictionaryProvider) {
+    /**
+     * The entry point to register spell checker dictionary class.
+     * 
+     * @param lang
+     *            supported language e.g., en, en_US
+     * @param type
+     *            enum type of dictionary.
+     * @param dictionaryProvider
+     *            full qualified class path of the dictionary provider.
+     */
+    public static void registerSpellCheckerDictionaryProvider(String lang, SpellCheckDictionaryType type,
+            String dictionaryProvider) {
         if (Objects.requireNonNull(type) == SpellCheckDictionaryType.HUNSPELL) {
             hunspellDictionaryProviders.put(lang, dictionaryProvider);
         } else if (type == SpellCheckDictionaryType.MORFOLOGIK) {
@@ -87,36 +100,59 @@ public final class SpellCheckerManager {
         }
     }
 
+    /**
+     * Install hunspell dictionary into the specified directory.
+     * 
+     * @param dictionaryDir
+     *            target directory.
+     * @param language
+     *            target dictionary language.
+     * @return Path of the dictionary installed.
+     */
     public static Path installHunspellDictionary(String dictionaryDir, String language) {
         String className = hunspellDictionaryProviders.get(language);
         if (className == null) {
             return null;
         }
         ISpellCheckerDictionary dictionaryProvider = getSpellCheckerDictionary(className);
-        return dictionaryProvider.installHunspellDictionary(Paths.get(dictionaryDir));
+        return dictionaryProvider.installHunspellDictionary(Paths.get(dictionaryDir), language);
     }
 
+    /**
+     * Provide the Hunspell dictionary object.
+     * 
+     * @param language
+     *            target language e.g, en, en_US
+     * @return Lucene hunspell Dictionary object.
+     */
     public static org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
         String className = hunspellDictionaryProviders.get(language);
         if (className == null) {
             return null;
         }
         ISpellCheckerDictionary dictionaryProvider = getSpellCheckerDictionary(className);
-        return dictionaryProvider.getHunspellDictionary();
+        return dictionaryProvider.getHunspellDictionary(language);
     }
 
-    public static morfologik.stemming.Dictionary getMorfologikDictionary(final String language) {
+    /**
+     * Provide the Mofologik dictionary object.
+     * 
+     * @param language
+     *            target language, e.g., en, en_US
+     * @return Morfologik Dictionary object.
+     */
+    public static morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
         String className = morfologikDictionaryProviders.get(language);
         if (className == null) {
             return null;
         }
         ISpellCheckerDictionary dictionaryProvider = getSpellCheckerDictionary(className);
-        return dictionaryProvider.getMofologikDictionary();
+        return dictionaryProvider.getMorfologikDictionary(language);
     }
 
     private static ISpellCheckerDictionary getSpellCheckerDictionary(String className) {
         try {
-            Class<?> aClass = JLanguageTool.getClassBroker().forName(className);
+            Class<?> aClass = PluginUtils.getLanguageClassLoader().loadClass(className);
             Constructor<?> constructor = aClass.getConstructor();
             return (ISpellCheckerDictionary) constructor.newInstance();
         } catch (ClassNotFoundException e) {
@@ -126,4 +162,3 @@ public final class SpellCheckerManager {
         }
     }
 }
-

@@ -33,13 +33,15 @@ public final class BretonPlugin {
 
     private static final String BRETON = "org.languagetool.language.Breton";
     private static final String SPELLCHECK_DICTIONARY = "org.omegat.languages.br"
-            + ".BretonSpellCheckerDictionary";
+            + ".BretonMorfologikDictionary";
 
     private BretonPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("br", BRETON);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("br_FR",
+                SpellCheckDictionaryType.MORFOLOGIK, SPELLCHECK_DICTIONARY);
         SpellCheckerManager.registerSpellCheckerDictionaryProvider("br", SpellCheckDictionaryType.MORFOLOGIK,
                 SPELLCHECK_DICTIONARY);
     }

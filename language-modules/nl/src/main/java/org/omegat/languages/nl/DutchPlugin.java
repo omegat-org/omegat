@@ -25,12 +25,15 @@
 
 package org.omegat.languages.nl;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class DutchPlugin {
 
     private static final String DUTCH = "org.languagetool.language.Dutch";
     private static final String BELGIAN_DUTCH = "org.languagetool.language.BelgianDutch";
+    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.DutchSpellChwckDictionary";
 
     private DutchPlugin() {
     }
@@ -38,6 +41,8 @@ public final class DutchPlugin {
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("nl-NL", DUTCH);
         LanguageManager.registerLTLanguage("nl-BE", BELGIAN_DUTCH);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("nl_NL", SpellCheckDictionaryType.MORFOLOGIK,
+                HUNSPELL_DICTIONARY);
     }
 
     public static void unloadPlugins() {

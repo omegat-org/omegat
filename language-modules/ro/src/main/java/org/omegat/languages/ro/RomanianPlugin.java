@@ -25,17 +25,22 @@
 
 package org.omegat.languages.ro;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class RomanianPlugin {
 
     private static final String ROMANIAN = "org.languagetool.language.Romanian";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.ro.RomanianMorfologikDictionary";
 
     private RomanianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ro-RO", ROMANIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ro_RO",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

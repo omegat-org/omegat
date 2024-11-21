@@ -27,6 +27,8 @@ package org.omegat.languages.en;
 
 import java.io.IOException;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class EnglishPlugin {
@@ -36,6 +38,8 @@ public final class EnglishPlugin {
     private static final String BRITISH_ENGLISH = "org.languagetool.language.BritishEnglish";
     private static final String CANADIAN_ENGLISH = "org.languagetool.language.CanadianEnglish";
     private static final String AUSTRALIAN_ENGLISH = "org.languagetool.language.AustralianEnglish";
+    private static final String DICTIONARY_CLASS = "org.omegat.languages.en"
+            + ".EnglishMorfologikDictionary";
 
     private EnglishPlugin() {
     }
@@ -46,6 +50,20 @@ public final class EnglishPlugin {
         LanguageManager.registerLTLanguage("en-GB", BRITISH_ENGLISH);
         LanguageManager.registerLTLanguage("en-CA", CANADIAN_ENGLISH);
         LanguageManager.registerLTLanguage("en-AU", AUSTRALIAN_ENGLISH);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("en_US",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("en", SpellCheckDictionaryType.MORFOLOGIK,
+                DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("en_AU",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("en_CA",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("en_NZ",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("en_GB",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("en_ZA",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {

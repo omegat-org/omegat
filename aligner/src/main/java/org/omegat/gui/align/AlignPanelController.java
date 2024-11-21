@@ -279,10 +279,10 @@ public class AlignPanelController {
         ActionListener segmentingRulesListener = e -> {
             if (confirmReset(alignMenuFrame)) {
                 SegmentationCustomizer customizer = new SegmentationCustomizer(false, SRX.getDefault(),
-                        Core.getSegmenter().getSRX(), null);
+                        aligner.getSegmenter().getSRX(), null);
                 if (customizer.show(alignMenuFrame)) {
                     customizedSRX = customizer.getResult();
-                    Core.setSegmenter(new Segmenter(customizedSRX));
+                    aligner.setSegmenter(new Segmenter(customizedSRX));
                     reloadBeads();
                 }
             }

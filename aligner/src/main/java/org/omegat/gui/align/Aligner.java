@@ -61,6 +61,8 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
@@ -157,6 +159,7 @@ public class Aligner {
     private List<String> trgRaw;
     private List<Entry<String, String>> idPairs;
     List<ComparisonMode> allowedModes;
+    private Segmenter segmenter;
 
     public Aligner(String srcFile, Language srcLang, String trgFile, Language trgLang) {
         this.srcFile = srcFile;
@@ -229,6 +232,15 @@ public class Aligner {
         } else {
             counterType = CounterType.WORD;
         }
+        segmenter = new Segmenter(SRX.getDefault());
+    }
+
+    void setSegmenter(Segmenter segmenter) {
+        this.segmenter = segmenter;
+    }
+
+    Segmenter getSegmenter() {
+        return segmenter;
     }
 
     /**
@@ -299,7 +311,7 @@ public class Aligner {
      * @return Flattened list of segments
      */
     private List<String> segmentAll(Language language, List<String> rawTexts) {
-        return rawTexts.stream().flatMap(text -> Core.getSegmenter().segment(language, text, null, null).stream())
+        return rawTexts.stream().flatMap(text -> segmenter.segment(language, text, null, null).stream())
                 .filter(s -> !s.isEmpty()).collect(Collectors.toList());
     }
 
@@ -330,9 +342,9 @@ public class Aligner {
             throw new UnsupportedOperationException();
         }
         return IntStream.range(0, srcRaw.size()).mapToObj(i -> {
-            List<String> source = Core.getSegmenter().segment(srcLang, srcRaw.get(i), null, null).stream()
+            List<String> source = segmenter.segment(srcLang, srcRaw.get(i), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());
-            List<String> target = Core.getSegmenter().segment(trgLang, trgRaw.get(i), null, null).stream()
+            List<String> target = segmenter.segment(trgLang, trgRaw.get(i), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());
             return doAlign(algorithmClass, calculatorType, counterType, source, target);
         }).flatMap(List::stream);
@@ -349,7 +361,8 @@ public class Aligner {
             throw new UnsupportedOperationException();
         }
         return idPairs.stream()
-                .map(e -> new Alignment(Arrays.asList(e.getKey()), Arrays.asList(e.getValue())));
+                .map(e -> new Alignment(Collections.singletonList(e.getKey()),
+                        Collections.singletonList(e.getValue())));
     }
 
     /**
@@ -363,9 +376,9 @@ public class Aligner {
             throw new UnsupportedOperationException();
         }
         return idPairs.stream().map(e -> {
-            List<String> source = Core.getSegmenter().segment(srcLang, e.getKey(), null, null).stream()
+            List<String> source = segmenter.segment(srcLang, e.getKey(), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());
-            List<String> target = Core.getSegmenter().segment(trgLang, e.getValue(), null, null).stream()
+            List<String> target = segmenter.segment(trgLang, e.getValue(), null, null).stream()
                     .filter(s -> !s.isEmpty()).collect(Collectors.toList());
             return doAlign(algorithmClass, calculatorType, counterType, source, target);
         }).flatMap(List::stream);

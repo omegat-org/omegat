@@ -79,11 +79,17 @@ public class AlignerWindowTest extends TestCoreGUI {
         picker.comboBox("targetLanguagePicker").requireSelection("fr - French");
         //
         picker.button("sourceChooseFileButton").click();
-        picker.fileChooser().selectFile(new File(tmpDir, SOURCE_PATH));
-        picker.fileChooser().approve();
+        picker.fileChooser("aligner_choose_source").requireVisible();
+        picker.fileChooser("aligner_choose_source").selectFile(new File(tmpDir, SOURCE_PATH));
+        picker.fileChooser("aligner_choose_source").approve();
+        robot().waitForIdle();
+        //
         picker.button("targetChooseFileButton").click();
-        picker.fileChooser().selectFile(new File(tmpDir, TARGET_PATH));
-        picker.fileChooser().approve();
+        picker.fileChooser("aligner_choose_target").requireVisible();
+        picker.fileChooser("aligner_choose_target").selectFile(new File(tmpDir, TARGET_PATH));
+        picker.fileChooser("aligner_choose_target").approve();
+        robot().waitForIdle();
+        //
         String srcFile = picker.textBox("sourceLanguageFileField").text();
         assertNotNull(srcFile);
         assertTrue(srcFile.endsWith(SOURCE_PATH.substring(SOURCE_PATH.indexOf('/') + 1)));
@@ -93,6 +99,7 @@ public class AlignerWindowTest extends TestCoreGUI {
         //
         picker.button("OK").requireEnabled(Timeout.timeout(100));
         picker.button("OK").click();
+        robot().waitForIdle();
         //
         FrameFixture aligner = WindowFinder.findFrame("ALIGN_MENU_FRAME").withTimeout(5000).using(robot());
         aligner.requireTitle("Align");
@@ -131,7 +138,7 @@ public class AlignerWindowTest extends TestCoreGUI {
                 .requireText(Pattern.compile("Average Score:\\s(-|\\d\\.\\d{3})"));
         //
         aligner.button("align_panel_continue_button").click();
-        aligner.button("align_panel_save_button").requireEnabled();
+        aligner.button("align_panel_save_button").requireEnabled(Timeout.timeout(100));
         aligner.panel("align_panel").label("align_panel_instructions_label")
                 .requireText("Step 2: Make manual corrections");
         aligner.panel("align_controls_panel").requireVisible();

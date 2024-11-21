@@ -544,7 +544,8 @@ public class FilterVisitor extends NodeVisitor {
         boolean changed = true;
         while (changed) {
             changed = false;
-            if (!filterContext.isRemoveAllTags()) {
+            boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
+            if (!removeTags) {
                 for (int i = 0; i < firstTagToIncludeFromPreceding; i++) {
                     Node node = allNodesInParagraph.get(i);
                     if (node instanceof Tag) {

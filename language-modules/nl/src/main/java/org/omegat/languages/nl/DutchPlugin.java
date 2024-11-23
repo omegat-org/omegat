@@ -43,6 +43,8 @@ public final class DutchPlugin {
         LanguageManager.registerLTLanguage("nl-BE", BELGIAN_DUTCH);
         SpellCheckerManager.registerSpellCheckerDictionaryProvider("nl_NL", SpellCheckDictionaryType.MORFOLOGIK,
                 HUNSPELL_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("nl", SpellCheckDictionaryType.MORFOLOGIK,
+                HUNSPELL_DICTIONARY);
     }
 
     public static void unloadPlugins() {

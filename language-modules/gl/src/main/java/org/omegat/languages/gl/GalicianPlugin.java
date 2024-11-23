@@ -39,8 +39,8 @@ public final class GalicianPlugin {
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("gl-ES", GALICIAN);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("gl_ES", SpellCheckDictionaryType.HUNSPELL,
-                DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("gl",
+                SpellCheckDictionaryType.HUNSPELL, DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {

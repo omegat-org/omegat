@@ -41,6 +41,8 @@ public final class RomanianPlugin {
         LanguageManager.registerLTLanguage("ro-RO", ROMANIAN);
         SpellCheckerManager.registerSpellCheckerDictionaryProvider("ro_RO",
                 SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ro",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

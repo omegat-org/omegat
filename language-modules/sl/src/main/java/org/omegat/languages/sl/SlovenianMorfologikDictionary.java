@@ -33,7 +33,7 @@ import org.omegat.core.spellchecker.AbstractMorfologikDictionary;
 public class SlovenianMorfologikDictionary extends AbstractMorfologikDictionary {
 
     private static final String DICTIONARY_BASE = "/org/languagetool/resource/sl/hunspell/";
-    private static final String[] MORFOLOGIK = { "sl_SL" };
+    private static final String[] MORFOLOGIK = { "sl_SI" };
 
     @Override
     protected String[] getDictionaries() {

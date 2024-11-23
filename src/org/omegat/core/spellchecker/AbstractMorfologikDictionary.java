@@ -40,7 +40,7 @@ public abstract class AbstractMorfologikDictionary implements ISpellCheckerDicti
     protected abstract String[] getDictionaries();
 
     protected String getDictionary(String language) {
-        return Arrays.stream(getDictionaries()).filter(language::startsWith).findFirst().orElse(null);
+        return Arrays.stream(getDictionaries()).filter(lang -> lang.startsWith(language)).findFirst().orElse(null);
     }
     protected abstract InputStream getResourceAsStream(String resource);
 

@@ -33,7 +33,7 @@ public final class DutchPlugin {
 
     private static final String DUTCH = "org.languagetool.language.Dutch";
     private static final String BELGIAN_DUTCH = "org.languagetool.language.BelgianDutch";
-    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.nl.DutchSpellChwckDictionary";
+    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.nl.DutchMorfologikDictionary";
 
     private DutchPlugin() {
     }

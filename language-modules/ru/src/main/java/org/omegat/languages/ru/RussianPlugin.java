@@ -39,7 +39,9 @@ public final class RussianPlugin {
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ru-RU", RUSSIAN);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_AT",
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ru_RU",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ru",
                 SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 

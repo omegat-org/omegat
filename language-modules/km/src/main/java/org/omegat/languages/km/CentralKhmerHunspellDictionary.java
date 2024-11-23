@@ -42,6 +42,6 @@ public class CentralKhmerHunspellDictionary extends AbstractHunspellDictionary {
 
     @Override
     protected InputStream getResourceAsStream(final String resource) {
-        return JLanguageTool.getDataBroker() .getAsStream(DICTIONARY_BASE + resource);
+        return JLanguageTool.getDataBroker().getAsStream(DICTIONARY_BASE + resource);
     }
 }

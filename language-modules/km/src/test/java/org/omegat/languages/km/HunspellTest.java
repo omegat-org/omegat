@@ -48,7 +48,7 @@ import org.omegat.util.TestPreferencesInitializer;
 public class HunspellTest {
 
     private static final String LANGUAGE = "km_KH";
-    private static final String GOOD = "រកឃើញ";
+    private static final String GOOD = "សួស្តី";
     private static Path tmpDir;
 
     @BeforeClass

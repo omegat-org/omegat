@@ -47,7 +47,7 @@ import org.omegat.util.TestPreferencesInitializer;
 
 public class HunspellTest {
 
-    private static final String LANGUAGE = "sv";
+    private static final String LANGUAGE = "sv_SE";
     private static final String GOOD = "Identifiera";
     private static Path tmpDir;
 

@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.align;
+package org.omegat.gui.theme;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

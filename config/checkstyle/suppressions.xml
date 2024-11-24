@@ -31,6 +31,9 @@
 <suppressions>
 
     <!-- Permanently suppress errors/warnings -->
+    
+    <!-- ignore -->
+    <suppress files="gen.core.*+" checks="RegexpHeader"/>
 
     <!-- tests -->
     <suppress files="TestCore\.java" checks="MethodLength"/>

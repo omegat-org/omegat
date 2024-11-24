@@ -4,7 +4,7 @@
            with fuzzy matching, translation memory, keyword search,
            glossaries, and translation leveraging into updated projects.
 
-  Copyright (c) 2023 Hiroshi Miura
+  Copyright (C) 2023 Hiroshi Miura
                 Home page: https://www.omegat.org/
                 Support center: https://omegat.org/support
 

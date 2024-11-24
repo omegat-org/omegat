@@ -39,7 +39,9 @@ public final class TagalogPlugin {
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("tl-PH", TAGALOG);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ta",
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("tl_PH",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("tl",
                 SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 

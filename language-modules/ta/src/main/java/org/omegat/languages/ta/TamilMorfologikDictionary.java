@@ -35,7 +35,7 @@ import org.omegat.core.spellchecker.SpellCheckDictionaryType;
 
 public class TamilMorfologikDictionary implements ISpellCheckerDictionary, AutoCloseable {
 
-    private static final String DICTIONARY_BASE = "/org/languagetool/resource/ta/hunspell/";
+    private static final String DICTIONARY_BASE = "/org/languagetool/resource/ta/";
     private static final String DICT_EXT = ".dict";
     private static final String META_EXT = ".info";
     private static final String DICT = "tamil";
@@ -45,7 +45,7 @@ public class TamilMorfologikDictionary implements ISpellCheckerDictionary, AutoC
 
     @Override
     public Dictionary getMorfologikDictionary(String language) {
-            if ("ta".equals(language)) {
+        if (language.startsWith("ta")) {
             infoInputStream = JLanguageTool.getDataBroker()
                     .getAsStream(DICTIONARY_BASE + DICT + META_EXT);
             dictInputStream = JLanguageTool.getDataBroker()
@@ -54,7 +54,6 @@ public class TamilMorfologikDictionary implements ISpellCheckerDictionary, AutoC
                 return Dictionary.read(dictInputStream, infoInputStream);
             } catch (IOException ignored) {
             }
-
         }
         return null;
     }

@@ -14,14 +14,14 @@ public class TagalogMorfologikDictionary implements ISpellCheckerDictionary, Aut
     private static final String DICTIONARY_BASE = "/org/languagetool/resource/tl/hunspell/";
     private static final String DICT_EXT = ".dict";
     private static final String META_EXT = ".info";
-    private static final String DICT = "tagalog";
+    private static final String DICT = "tl_PH";
 
     private InputStream infoInputStream;
     private InputStream dictInputStream;
 
     @Override
     public Dictionary getMorfologikDictionary(String language) {
-            if ("ta".equals(language)) {
+        if (DICT.startsWith(language)) {
             infoInputStream = JLanguageTool.getDataBroker()
                     .getAsStream(DICTIONARY_BASE + DICT + META_EXT);
             dictInputStream = JLanguageTool.getDataBroker()

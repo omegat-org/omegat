@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+ Copyright (C) 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2008 Didier Briel
                2015 Aaron Madlon-Kay
                Home page: https://www.omegat.org/

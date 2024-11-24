@@ -4,7 +4,7 @@
  *           glossaries, and translation leveraging into updated projects.
  *
  * Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
- *                         Benjamin Siband, and Kim Bruning
+ *               2000-2006 Benjamin Siband, and Kim Bruning
  *               2007 Zoltan Bartko
  *               2008 Andrzej Sawula, Alex Buloichik
  *               2009 Didier Briel, Alex Buloichik

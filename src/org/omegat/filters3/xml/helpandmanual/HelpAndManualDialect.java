@@ -6,7 +6,6 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel, Guido Leenders
                2012 Guido Leenders
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

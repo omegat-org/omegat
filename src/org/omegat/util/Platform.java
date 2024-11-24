@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+ Copyright (C) 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2011 Alex Buloichik
                2019 FormDev Software GmbH
                2023 Hiroshi Miura

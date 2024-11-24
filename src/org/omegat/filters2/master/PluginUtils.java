@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -50,6 +51,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 import java.util.jar.Attributes;
+import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -66,6 +68,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.VersionChecker;
 
 /**
  * Static utilities for OmegaT filter plugins.
@@ -76,6 +79,8 @@ import org.omegat.util.StringUtil;
 public final class PluginUtils {
 
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
+    private static final String OMEGAT_PLUGINS = "OmegaT-Plugins";
+    private static final String OMEGAT_PLUGIN = "OmegaT-Plugin";
 
     /**
      * Plugin type definitions.
@@ -155,6 +160,74 @@ public final class PluginUtils {
                 Log.log(ex);
             }
         }
+
+        List<URL> jarToRemove = new ArrayList<>();
+
+        Map<String, PluginInformation> pluginVersions = new HashMap<>();
+
+        // look on all manifests
+        for (URL url : urlList) {
+            try (JarInputStream jarStream = new JarInputStream(url.openStream())) {
+                Manifest mf = jarStream.getManifest();
+                if (mf == null) {
+                    // mf can be null when a jar file does not have a manifest.
+                    continue;
+                }
+                String pluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGINS);
+                String oldPluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGIN);
+
+                // if the jar doesn't look like an OmegaT plugin (it doesn't
+                // contain any "Omegat-Plugins?" attribute, we don't need to
+                // compare
+                // versions.
+                if ((oldPluginClass == null && pluginClass == null)
+                        || (pluginClass != null && pluginClass.indexOf('.') < 0)) {
+                    continue;
+                }
+
+                // Fetch all the information from the manifest
+                PluginInformation pluginInfo = PluginInformation.Builder.fromManifest(null, mf, url, null);
+
+                String pluginName = pluginInfo.getName();
+                if (pluginVersions.containsKey(pluginName)) {
+                    PluginInformation previousPlugin = pluginVersions.get(pluginName);
+                    // We get rid of versions qualifiers (x.y.z-beta) and we
+                    // assume dots are used to
+                    // separate version components
+                    String previousVersion = previousPlugin.getVersion().replaceAll("-.*", "");
+                    String pluginVersion = pluginInfo.getVersion().replaceAll("-.*", "");
+
+                    int isOlder = VersionChecker.compareVersions(previousVersion, "0", pluginVersion, "0");
+                    if (isOlder < 0) {
+                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
+                                previousPlugin.getVersion(), pluginInfo.getVersion());
+                        jarToRemove.add(previousPlugin.getUrl());
+                        pluginVersions.put(pluginName, pluginInfo);
+                    } else if (isOlder == 0) {
+                        Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
+                                previousPlugin.getVersion(), pluginInfo.getVersion());
+                        jarToRemove.add(previousPlugin.getUrl());
+                        pluginVersions.put(pluginName, pluginInfo);
+                    } else {
+                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, pluginInfo.getVersion(),
+                                previousPlugin.getVersion());
+                        jarToRemove.add(pluginInfo.getUrl());
+                        pluginVersions.put(pluginName, previousPlugin);
+                    }
+                } else {
+                    pluginVersions.put(pluginName, pluginInfo);
+                }
+
+            } catch (IOException | NumberFormatException ex) {
+                Log.log(ex);
+            }
+        }
+
+        if (!jarToRemove.isEmpty()) {
+            Log.logWarningRB("PLUGIN_EXCLUSION_MESSAGE", jarToRemove);
+            urlList.removeAll(jarToRemove);
+        }
+
         boolean foundMain = false;
         // look on all manifests
         URLClassLoader pluginsClassLoader = new URLClassLoader(urlList.toArray(new URL[0]),

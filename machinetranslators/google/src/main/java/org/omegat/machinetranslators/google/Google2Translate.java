@@ -7,7 +7,7 @@
  *                2011 Briac Pilpre, Alex Buloichik
  *                2013 Didier Briel
  *                2016 Aaron Madlon-Kay
- *                2021,2023 Hiroshi Miura
+ *                2021-2023 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *

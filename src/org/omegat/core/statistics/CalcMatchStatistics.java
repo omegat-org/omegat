@@ -7,6 +7,7 @@
                2012 Thomas Cordonnier
                2013 Alex Buloichik
                2015 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -44,11 +45,13 @@ import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches.StoppedException;
 import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.TextUtil;
@@ -100,22 +103,33 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     private final ThreadLocal<ISimilarityCalculator> distanceCalculator = ThreadLocal
             .withInitial(LevenshteinDistance::new);
-    private final ThreadLocal<FindMatches> finder = ThreadLocal.withInitial(
-            () -> new FindMatches(Core.getProject(), OConsts.MAX_NEAR_STRINGS, true, false, false));
+    private final ThreadLocal<FindMatches> finder;
     private final StringBuilder textForLog = new StringBuilder();
+    private final IProject project;
 
     public CalcMatchStatistics(IStatsConsumer callback, boolean perFile) {
+        this(Core.getProject(), Core.getSegmenter(), callback, perFile,
+                Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
+                OConsts.FUZZY_MATCH_THRESHOLD));
+    }
+
+    public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback,
+                               boolean perFile, int threshold) {
+        this.project = project;
         this.callback = callback;
         this.perFile = perFile;
+        finder = ThreadLocal.withInitial(
+                () -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true,
+                        false, false, threshold));
     }
 
     @Override
     public void run() {
         if (perFile) {
-            entriesToProcess = Core.getProject().getAllEntries().size() * 2;
+            entriesToProcess = project.getAllEntries().size() * 2;
             calcPerFile();
         } else {
-            entriesToProcess = Core.getProject().getAllEntries().size();
+            entriesToProcess = project.getAllEntries().size();
             calcTotal(true);
         }
         callback.finishData();
@@ -142,7 +156,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     void calcPerFile() {
         int fileNumber = 0;
-        for (IProject.FileInfo fi : Core.getProject().getProjectFiles()) {
+        for (IProject.FileInfo fi : project.getProjectFiles()) {
             fileNumber++;
 
             MatchStatCounts perFileCounts = forFile(fi);
@@ -166,7 +180,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         appendText(outText + "\n");
         appendTable(title, table);
 
-        String fn = Core.getProject().getProjectProperties().getProjectInternal()
+        String fn = project.getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_PER_FILE_FILENAME;
         Statistics.writeStat(fn, textForLog.toString());
         callback.setDataFile(fn);
@@ -179,11 +193,11 @@ public class CalcMatchStatistics extends LongProcessThread {
         final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
 
         // We should iterate all segments from all files in project.
-        for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
+        for (SourceTextEntry ste : project.getAllEntries()) {
             checkInterrupted();
             StatCount count = new StatCount(ste);
             boolean isFirst = alreadyProcessedInProject.add(ste.getSrcText());
-            if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+            if (project.getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as "Exact
                 // matched"
                 result.addExact(count);
@@ -212,7 +226,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             String outText = TextUtil.showTextTable(header, table, align);
             showText(outText);
             showTable(table);
-            String fn = Core.getProject().getProjectProperties().getProjectInternal()
+            String fn = project.getProjectProperties().getProjectInternal()
                     + OConsts.STATS_MATCH_FILENAME;
             Statistics.writeStat(fn, outText);
             callback.setDataFile(fn);
@@ -233,7 +247,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             StatCount count = new StatCount(ste);
             boolean existInFile = alreadyProcessedInFile.contains(ste.getSrcText());
             boolean existInPreviousFiles = alreadyProcessedInProject.contains(ste.getSrcText());
-            if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+            if (project.getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as
                 // "Exact matched"
                 result.addExact(count);

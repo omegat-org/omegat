@@ -13,7 +13,6 @@
                2011 Alex Buloichik, Didier Briel
                2012 Guido Leenders, Thomas Cordonnier
                2013 Alex Buloichik
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

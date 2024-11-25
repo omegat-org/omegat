@@ -148,11 +148,20 @@ public class SRX implements Serializable {
         jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
         for (MapRule mr : srx.getMappingRules()) {
             Languagemap map = new Languagemap();
-            map.setLanguagerulename(mr.getLanguage());
-            map.setLanguagepattern(mr.getPattern());
+            String pattern = mr.getPattern();
+            // we use standard name
+            String language = LanguageCodes.getLanguageCodeByPattern(pattern);
+            if (language == null) {
+                language = LanguageCodes.getLanguageCodeByName(mr.getLanguage());
+            }
+            if (language == null) {
+                language = mr.getLanguage();
+            }
+            map.setLanguagerulename(language);
+            map.setLanguagepattern(pattern);
             jaxbObject.getBody().getMaprules().getLanguagemap().add(map);
             Languagerule lr = new Languagerule();
-            lr.setLanguagerulename(mr.getLanguage());
+            lr.setLanguagerulename(language);
             jaxbObject.getBody().getLanguagerules().getLanguagerule().add(lr);
             for (Rule rule : mr.getRules()) {
                 gen.core.segmentation.Rule jaxbRule = factory.createRule();
@@ -195,13 +204,7 @@ public class SRX implements Serializable {
         // If file was not present or not readable
         inFile = new File(configDir, CONF_SENTSEG);
         if (inFile.exists()) {
-            SRX srx = loadConfFile(inFile);
-            try {
-                saveToSrx(srx, configDir);
-            } catch (Exception o3) {
-                Log.log(o3); // detail why conversion failed, but continue
-            }
-            return srx;
+            return loadConfFile(inFile, configDir);
         }
 
         // If none of the files (conf and srx) are present,
@@ -217,7 +220,7 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    private static SRX loadConfFile(File configFile) {
+    static SRX loadConfFile(File configFile, File configDir) {
         SRX res;
         try {
             SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
@@ -233,25 +236,31 @@ public class SRX implements Serializable {
                     sb.append("\n");
                 }
                 Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                return SRX.getDefault();
-            }
+                res = SRX.getDefault();
+            } else {
+                // checking the version
+                if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
+                    // yeap, the segmentation config file is of the older
+                    // version
 
-            // checking the version
-            if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-                // yeap, the segmentation config file is of the older version
-
-                // initing defaults
-                SRX defaults = SRX.getDefault();
-                // and merging them into loaded rules
-                res = merge(res, defaults);
+                    // initing defaults
+                    SRX defaults = SRX.getDefault();
+                    // and merging them into loaded rules
+                    res = merge(res, defaults);
+                }
+                Log.logInfoRB("SRX_RULE_FROM", configFile);
             }
-            Log.logInfoRB("SRX_RULE_FROM", configFile);
         } catch (Exception e) {
             // silently ignoring FNF
             if (!(e instanceof FileNotFoundException)) {
                 Log.log(e);
             }
             res = SRX.getDefault();
+        }
+        try {
+            saveToSrx(res, configDir);
+        } catch (Exception o3) {
+            Log.log(o3); // detail why conversion failed, but continue
         }
         return res;
     }
@@ -278,7 +287,9 @@ public class SRX implements Serializable {
         res.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
         res.setVersion(srx.getVersion());
         res.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
-                .map(s -> new MapRule(s, mapping.get(s.getLanguagerulename()))).collect(Collectors.toList()));
+                .map(languagemap -> new MapRule(languagemap.getLanguagerulename(),
+                        languagemap.getLanguagepattern(), mapping.get(languagemap.getLanguagerulename())))
+                .collect(Collectors.toList()));
         return res;
     }
 
@@ -397,7 +408,7 @@ public class SRX implements Serializable {
      * configuration.
      */
     static class MyExceptionListener implements ExceptionListener {
-        private List<Exception> exceptionsList = new ArrayList<Exception>();
+        private final List<Exception> exceptionsList = new ArrayList<>();
         private boolean exceptionOccured = false;
 
         public void exceptionThrown(Exception e) {

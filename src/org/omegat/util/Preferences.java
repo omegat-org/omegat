@@ -9,11 +9,10 @@
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                2011 John Moran, Didier Briel
                2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
-                    Aaron Madlon-Kay
-               2013 Aaron Madlon-Kay, Zoltan Bartko
-               2014 Piotr Kulik, Aaron Madlon-Kay
-               2015 Aaron Madlon-Kay, Yu Tang, Didier Briel, Hiroshi Miura
-               2016 Aaron Madlon-Kay
+               2013 Zoltan Bartko
+               2014 Piotr Kulik
+               2015 Yu Tang, Didier Briel, Hiroshi Miura
+               2012-2016 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -297,6 +296,8 @@ public final class Preferences {
     public static final String LANGUAGETOOL_REMOTE_URL = "lt_remoteURL";
     /** Local path to LanguageTool server jar file */
     public static final String LANGUAGETOOL_LOCAL_SERVER_JAR_PATH = "lt_localServerJarPath";
+    /** Local path to LanguageTool ngram model files */
+    public static final String LANGUAGETOOL_LANGUAGE_MODEL_PATH = "lt_languageModelPath";
     /** Disabled categories */
     public static final String LANGUAGETOOL_DISABLED_CATEGORIES_PREFIX = "lt_disabledCategories";
     /** Disabled rules prefix */

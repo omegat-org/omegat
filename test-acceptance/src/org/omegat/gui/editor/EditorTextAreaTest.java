@@ -1,4 +1,3 @@
-
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
@@ -26,12 +25,19 @@
 
 package org.omegat.gui.editor;
 
+import java.util.Locale;
+
+import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
 public class EditorTextAreaTest extends TestCoreGUI {
+
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testIntroPaneExist() {

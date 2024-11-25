@@ -266,6 +266,8 @@ dependencies {
 
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
+        // extra locales
+        implementation(libs.swing.extra.locales)
 
         // stax
         implementation(libs.stax2.api)
@@ -1700,6 +1702,7 @@ tasks.register('testAcceptance', Test) {
     systemProperties = System.properties
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     dependsOn firstStepsEn
+    dependsOn ':aligner:jar'
 }
 
 ext.mavenStyleVersion = version.replace('_', '-')

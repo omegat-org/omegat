@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
-               2013, 2015 Aaron Madlon-Kay
+               2013,2015 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

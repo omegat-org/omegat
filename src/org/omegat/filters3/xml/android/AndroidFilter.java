@@ -4,7 +4,6 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

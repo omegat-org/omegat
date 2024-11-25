@@ -4,7 +4,7 @@
  *           glossaries, and translation leveraging into updated projects.
  *
  * Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
- *                         Benjamin Siband, and Kim Bruning
+ *               2000-2006 Benjamin Siband, and Kim Bruning
  *               2007 Zoltan Bartko
  *               2008 Andrzej Sawula, Alex Buloichik
  *               2009 Didier Briel, Alex Buloichik
@@ -110,6 +110,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     private static final Logger LOGGER = Logger.getLogger(BaseMainWindowMenu.class.getName());
 
+    public static final String TOOLS_MENU = "tools_menu";
     public static final String HELP_MENU = "help_menu";
     public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
 
@@ -205,6 +206,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoMenu = createMenu("MW_GOTOMENU", MenuExtender.MenuKey.GOTO);
         viewMenu = createMenu("MW_VIEW_MENU", MenuExtender.MenuKey.VIEW);
         toolsMenu = createMenu("TF_MENU_TOOLS", MenuExtender.MenuKey.TOOLS);
+        toolsMenu.setName(TOOLS_MENU);
         optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
         helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
         helpMenu.setName(HELP_MENU);
@@ -795,8 +797,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     /**
-     * Set 'actionCommand' for all menu items. TODO: change to key from resource
-     * bundle values
+     * Set 'actionCommand' for all menu items.
      */
     protected void setActionCommands() {
         try {

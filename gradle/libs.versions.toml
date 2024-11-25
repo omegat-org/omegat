@@ -180,7 +180,7 @@ fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-langu
 caffeine = ["caffeine", "caffeine-jcache"]
 languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr", "languagetool-en",
     "languagetool-ja", "languagetool-pl"]
-lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
+lucene = ["lucene-core", "lucene-analyzers-common"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]

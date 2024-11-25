@@ -45,7 +45,6 @@ import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneCJKTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
-import org.omegat.tokenizer.LuceneJapaneseTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
@@ -103,7 +102,7 @@ public class GlossarySearcherTest extends TestCore {
         String sourceText = "場所";
         String translationText = "translation";
         String commentText = "comment";
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new LuceneCJKTokenizer();
         Language language = new Language("ja");
         Language trLang = new Language("en");
         setupProject(language);
@@ -122,7 +121,7 @@ public class GlossarySearcherTest extends TestCore {
         Language language = new Language("ja");
         Language trLang = new Language("en");
         setupProject(language);
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new LuceneCJKTokenizer();
         List<GlossaryEntry> entries = Arrays
                 .asList(new GlossaryEntry("\u5857\u5E03", "wrong", "", true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, trLang, entries);
@@ -134,7 +133,7 @@ public class GlossarySearcherTest extends TestCore {
         Language language = new Language("ja");
         Language trLang = new Language("en");
         setupProject(language);
-        ITokenizer tok = new LuceneJapaneseTokenizer();
+        ITokenizer tok = new LuceneCJKTokenizer();
         List<GlossaryEntry> entries = Arrays.asList(
                 new GlossaryEntry("\u307E\u3050\u308D", "tuna", "", true, ""),
                 new GlossaryEntry("\u7FFB\u8A33", "translation", "", true, ""),

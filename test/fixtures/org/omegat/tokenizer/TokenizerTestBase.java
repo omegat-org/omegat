@@ -28,6 +28,7 @@ package org.omegat.tokenizer;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 
 import org.omegat.util.Token;
 
@@ -35,7 +36,7 @@ public class TokenizerTestBase {
 
     protected void assertVerbatim(String[] expected, String[] test, Token[] testTok, String origString) {
         assertResult(expected, test);
-        assertEquals(StringUtils.join(expected), StringUtils.join(test));
+        Assert.assertEquals(StringUtils.join(expected), StringUtils.join(test));
         assertEquals(expected.length, testTok.length);
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i], testTok[i].getTextFromString(origString));

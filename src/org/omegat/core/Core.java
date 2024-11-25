@@ -98,6 +98,10 @@ public final class Core {
     private Core() {
     }
 
+    static {
+        currentProject = new NotLoadedProject();
+    }
+
     private static IProject currentProject;
     private static IMainWindow mainWindow;
     protected static IEditor editor;

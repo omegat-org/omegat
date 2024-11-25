@@ -75,6 +75,9 @@ public class HunspellTest {
         ISpellChecker checker = new HunSpellChecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect(GOOD)).as("Spell check for correct word").isTrue();
+        assertThat(checker.isCorrect("Hello")).as("Spell check for wrong word").isFalse();
+        assertThat(checker.suggest("Hello")).as("Get suggestion").hasSize(8).contains("Holle", "Hella",
+                "Cello", "Hell", "Helle", "Hallo", "Hellt", "Helot");
     }
 
 }

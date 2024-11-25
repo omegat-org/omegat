@@ -25,11 +25,15 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.languagetool.core)
     testImplementation(libs.commons.io)
+    testImplementation(project(":language-modules:de"))
+    testImplementation(project(":language-modules:fr"))
 }
 
 test {
-    dependsOn subprojects.collect { it.tasks.named('jar') }
+    dependsOn project(':language-modules:de').tasks.named('jar')
+    dependsOn project(':language-modules:fr').tasks.named('jar')
 }
 
 jar {

@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.tokenizer;
+package org.omegat.languages.ja;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -40,6 +40,9 @@ import org.apache.lucene.analysis.ja.JapaneseTokenizer.Mode;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.util.CharArraySet;
+
+import org.omegat.tokenizer.BaseTokenizer;
+import org.omegat.tokenizer.Tokenizer;
 import org.omegat.util.PatternConsts;
 
 /**

@@ -24,7 +24,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.tokenizer;
+package org.omegat.languages.pl;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -32,6 +32,9 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.pl.PolishAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
+
+import org.omegat.tokenizer.BaseTokenizer;
+import org.omegat.tokenizer.Tokenizer;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)

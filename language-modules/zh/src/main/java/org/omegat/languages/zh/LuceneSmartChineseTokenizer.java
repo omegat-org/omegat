@@ -23,7 +23,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.tokenizer;
+package org.omegat.languages.zh;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -31,6 +31,9 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.HMMChineseTokenizer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
+
+import org.omegat.tokenizer.BaseTokenizer;
+import org.omegat.tokenizer.Tokenizer;
 import org.omegat.util.Token;
 
 /**

@@ -25,6 +25,7 @@
 
 package org.omegat.languages.ja;
 
+import org.omegat.core.Core;
 import org.omegat.languagetools.LanguageManager;
 
 public final class JapanesePlugin {
@@ -36,6 +37,7 @@ public final class JapanesePlugin {
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ja-JP", JAPANESE);
+        Core.registerTokenizerClass(LuceneJapaneseTokenizer.class);
     }
 
     public static void unloadPlugins() {

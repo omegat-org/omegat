@@ -25,6 +25,9 @@ dependencies {
             exclude module: 'icu4j'
         }
         implementation(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+        compileOnly(libs.lucene.analyzers.common)
+        compileOnly(libs.lucene.core)
+        implementation(libs.lucene.analyzers.kuromoji)
         implementation(libs.icj4j)
     }
 

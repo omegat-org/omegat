@@ -18,6 +18,7 @@ dependencies {
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
         }
+        implementation(libs.lucene.analyzers.stempel)
         implementation(libs.languagetool.pl) {
             exclude module: 'languagetool-core'
         }

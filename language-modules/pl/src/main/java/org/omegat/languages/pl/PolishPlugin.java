@@ -25,6 +25,7 @@
 
 package org.omegat.languages.pl;
 
+import org.omegat.core.Core;
 import org.omegat.languagetools.LanguageManager;
 
 public final class PolishPlugin {
@@ -36,6 +37,7 @@ public final class PolishPlugin {
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("pl-PL", POLISH);
+        Core.registerTokenizerClass(LucenePolishTokenizer.class);
     }
 
     public static void unloadPlugins() {

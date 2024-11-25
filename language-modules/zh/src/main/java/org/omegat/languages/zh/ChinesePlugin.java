@@ -25,6 +25,7 @@
 
 package org.omegat.languages.zh;
 
+import org.omegat.core.Core;
 import org.omegat.languagetools.LanguageManager;
 
 public final class ChinesePlugin {
@@ -36,6 +37,7 @@ public final class ChinesePlugin {
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("zh-CH", CHINESE);
+        Core.registerTokenizerClass(LuceneSmartChineseTokenizer.class);
     }
 
     public static void unloadPlugins() {

@@ -73,7 +73,8 @@ import org.omegat.util.Token;
  * then compare tokens.</li>
  * <li>Split the original segment into not-only-words tokens (including numbers
  * and tags) without a stemmer, then compare tokens.</li>
- * /ol>
+ * </ol>
+ * <p>
  * This class is not thread safe! Must be used in the one thread only.
  *
  * @author Maxym Mykhalchuk

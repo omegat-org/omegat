@@ -63,20 +63,18 @@ import org.omegat.util.Token;
 
 /**
  * Class to find matches by specified criteria.
- *
+ * <p>
  * Since we can use stemmers to prepare tokens, we should use 3-pass comparison
  * of similarity. Similarity will be calculated in 3 steps:
- *
- * 1. Split original segment into word-only tokens using stemmer (with stop
- * words list), then compare tokens.
- *
- * 2. Split original segment into word-only tokens without stemmer, then compare
- * tokens.
- *
- * 3. Split original segment into not-only-words tokens (including numbers and
- * tags) without stemmer, then compare tokens.
- *
- * This class is not thread safe ! Must be used in the one thread only.
+ * <ol>
+ * <li>Split the original segment into word-only tokens using stemmer (with stop
+ * words list), then compare tokens.</li>
+ * <li>Split the original segment into word-only tokens without a stemmer,
+ * then compare tokens.</li>
+ * <li>Split the original segment into not-only-words tokens (including numbers
+ * and tags) without a stemmer, then compare tokens.</li>
+ * /ol>
+ * This class is not thread safe! Must be used in the one thread only.
  *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -139,19 +137,19 @@ public class FindMatches {
     }
 
     /**
-     * Constructor.
+     * FindMatches find fuzzy matched translation memories.
      *
      * @param project
      *            OmegaT project.
      * @param segmenter
-     *            Segmenter to use.
+     *            used when running a segmentation search.
      * @param maxCount
      *            limit the maximum count of the results.
      * @param searchExactlyTheSame
      *            allows searching similarities with the same text as a source
-     *            segment. This mode is used only for separate sentence match in
-     *            a paragraph project, i.e. where a source is just part of the
-     *            current source.
+     *            segment. This mode is used only for separate sentence match
+     *            in a paragraph project, i.e., where a source is just part of
+     *            the current source.
      * @param threshold
      *            threshold to use.
      */
@@ -188,15 +186,15 @@ public class FindMatches {
      */
     public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
             throws StoppedException {
-        return search(searchText, fillSimilarityData, stop, !project.getProjectProperties().isSentenceSegmentingEnabled(),
-                true);
+        return search(searchText, fillSimilarityData, stop,
+                !project.getProjectProperties().isSentenceSegmentingEnabled(), true);
     }
 
     /**
      * Search Translation memories.
      * <p>
      * Internal method to handle search conditions.
-     * It is accecible as package-private for testing.
+     * It is accessible as package-private for testing.
      *
      * @param searchText
      *        target segment or term to search.

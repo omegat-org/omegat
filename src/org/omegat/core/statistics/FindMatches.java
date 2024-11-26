@@ -126,27 +126,15 @@ public class FindMatches {
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
-    // This finder used for search separate segment matches
-    private FindMatches separateSegmentMatcher;
-
     private final int fuzzyMatchThreshold;
-
-    private final boolean applyThreshold;
 
     private final Segmenter segmenter;
 
-    /**
-     * @param searchExactlyTheSame
-     *            allows to search similarities with the same text as source
-     *            segment. This mode used only for separate sentence match in
-     *            paragraph project, i.e. where source is just part of current
-     *            source.
-     */
+    @Deprecated(since = "6.1.0")
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
-        this(project, Core.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true,
-                Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                        OConsts.FUZZY_MATCH_THRESHOLD));
+        this(project, Core.getSegmenter(), maxCount, searchExactlyTheSame, Preferences.getPreferenceDefault(
+                Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, OConsts.FUZZY_MATCH_THRESHOLD));
     }
 
     /**
@@ -166,19 +154,21 @@ public class FindMatches {
      * @param threshold
      *            threshold to use.
      */
-    public FindMatches(IProject project, Segmenter segmenter, int maxCount, boolean allowSeparateSegmentMatch,
-            boolean searchExactlyTheSame, boolean applyThreshold, int threshold) {
+    public FindMatches(IProject project, Segmenter segmenter, int maxCount,
+            boolean searchExactlyTheSame, int threshold) {
         this.project = project;
         this.segmenter = segmenter;
         this.tok = project.getSourceTokenizer();
         this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
-        if (allowSeparateSegmentMatch && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
-            separateSegmentMatcher = new FindMatches(project, segmenter, 1, false, true, true, threshold);
-        }
         this.fuzzyMatchThreshold = threshold;
-        this.applyThreshold = applyThreshold;
+    }
+
+    @Deprecated(since = "6.1.0")
+    public List<NearString> search(final String searchText, final boolean requiresTranslation,
+            final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
+        return search(searchText, fillSimilarityData, stop);
     }
 
     /**
@@ -195,8 +185,33 @@ public class FindMatches {
      * @throws StoppedException
      *        raised when stopped during a search process.
      */
-    public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
-            IStopped stop) throws StoppedException {
+    public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
+            throws StoppedException {
+        return search(searchText, fillSimilarityData, stop,
+                !project.getProjectProperties().isSentenceSegmentingEnabled());
+    }
+
+    /**
+     * Search Translation memories.
+     * <p>
+     * Internal method to handle search conditions.
+     * It is accessible as package-private for testing.
+     *
+     * @param searchText
+     *        target segment or term to search.
+     * @param fillSimilarityData
+     *        fill similarity data into the result of NearString objects.
+     * @param stop
+     *        IStopped callback object to indicate cancel operation.
+     * @param runSeparateSegmentMatch
+     *        Also search with segmented terms search.
+     * @return
+     *        List of NearString objects.
+     * @throws StoppedException
+     *        When stopped the process during search.
+     */
+    List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop,
+                            boolean runSeparateSegmentMatch) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
         srcText = searchText;
         removedText = "";
@@ -226,7 +241,7 @@ public class FindMatches {
                     // skip original==original entry comparison
                     return;
                 }
-                if (requiresTranslation && trans.translation == null) {
+                if (trans.translation == null) {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
@@ -241,7 +256,7 @@ public class FindMatches {
                 // skip original==original entry comparison
                 return;
             }
-            if (requiresTranslation && trans.translation == null) {
+            if (trans.translation == null) {
                 return;
             }
             String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
@@ -255,7 +270,6 @@ public class FindMatches {
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
-        // travel by translation memories
         for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
             int penalty = 0;
             Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
@@ -265,11 +279,11 @@ public class FindMatches {
             for (ITMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
                 if (tmen.getSourceText() == null) {
-                    // Not all TMX entries have a source; in that case there can
-                    // be no meaningful match, so skip.
+                    // Not all TMX entries have a source; skip it in
+                    // the case, because of no meaningful.
                     continue;
                 }
-                if (requiresTranslation && tmen.getTranslationText() == null) {
+                if (tmen.getTranslationText() == null) {
                     continue;
                 }
                 int tmenPenalty = penalty;
@@ -290,7 +304,9 @@ public class FindMatches {
                         ste.isSourceTranslationFuzzy(), 0);
             }
         }
-        if (separateSegmentMatcher != null) {
+        if (runSeparateSegmentMatch) {
+            FindMatches separateSegmentMatcher = new FindMatches(project, segmenter, 1, true,
+                    fuzzyMatchThreshold);
             // split paragraph even when segmentation disabled, then find
             // matches for every segment
             List<StringBuilder> spaces = new ArrayList<>();
@@ -303,9 +319,10 @@ public class FindMatches {
                 List<String> ftrans = new ArrayList<>(segments.size());
                 // multiple segments
                 for (String onesrc : segments) {
-                    // find match for a separate segment
-                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation,
-                            false, stop);
+                    // find match for a separate segment.
+                    // WARN: the 5th argument should be
+                    // `false` to avoid an infinite-loop.
+                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, false, stop, false);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
@@ -415,7 +432,7 @@ public class FindMatches {
         }
 
         // BUGS#1236 - stat display does not use threshold config check
-        if (applyThreshold && similarityStem < fuzzyMatchThreshold
+        if (fuzzyMatchThreshold > 0 && similarityStem < fuzzyMatchThreshold
                 && similarityNoStem < fuzzyMatchThreshold && simAdjusted < fuzzyMatchThreshold) {
             return;
         }

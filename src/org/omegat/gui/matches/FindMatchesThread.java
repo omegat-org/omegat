@@ -33,13 +33,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.FindMatches;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.util.OConsts;
+import org.omegat.util.Preferences;
 
 /**
  * Find matches in separate thread then show a result in the matches' pane.
@@ -82,7 +85,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         long before = System.currentTimeMillis();
 
         try {
-            List<NearString> result = finderSearch(project, processedEntry.getSrcText(), this::isEntryChanged);
+            List<NearString> result = finderSearch(project, Core.getSegmenter(), processedEntry.getSrcText(),
+                    this::isEntryChanged, Preferences.getPreferenceDefault(
+                            Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, OConsts.FUZZY_MATCH_THRESHOLD));
             LOGGER.finer(() -> "Time for find matches: " + (System.currentTimeMillis() - before));
             return result;
         } catch (FindMatches.StoppedException ex) {
@@ -97,8 +102,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      * @param isEntryChanged stop and raise StopException when it returns true.
      * @return result as a list of NearString.
      */
-    protected static List<NearString> finderSearch(IProject project, String srcText, IStopped isEntryChanged) {
-        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, false);
-        return finder.search(srcText, true, true, isEntryChanged);
+    protected static List<NearString> finderSearch(IProject project, Segmenter segmenter, String srcText,
+                                                   IStopped isEntryChanged, int threshold) {
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, threshold);
+        return finder.search(srcText, true, isEntryChanged);
     }
 }

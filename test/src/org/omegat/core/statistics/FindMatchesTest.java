@@ -114,22 +114,22 @@ public class FindMatchesTest {
                 + "han passat prou temps al lloc web per a convertir-se en usuaris bàsics."
                 + " Una comunitat vibrant necessita una entrada regular de nouvinguts que hi participen habitualment"
                 + " i aporten veus noves a les converses.\n";
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, false,
-                true, 30);
-        List<NearString> result = finder.search(srcText, true, true, iStopped);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        // search without a separated segment match.
+        List<NearString> result = finder.search(srcText, true, iStopped, false);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals(65, result.get(0).scores[0].score);
         assertEquals(62, result.get(0).scores[0].scoreNoStem);
         assertEquals(62, result.get(0).scores[0].adjustedScore);
         assertEquals(expectFirst, result.get(0).translation);
         assertEquals(expectNear, result.get(1).translation);
-        //
+        // search with a segmented match.
         List<StringBuilder> spaces = new ArrayList<>();
         List<Rule> brules = new ArrayList<>();
         List<String> segments = segmenter.segment(prop.getSourceLanguage(), srcText, spaces, brules);
         assertEquals(3, segments.size());
-        finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false, true, 30);
-        result = finder.search(srcText, true, true, iStopped);
+        finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        result = finder.search(srcText, false, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
         assertEquals(100, result.get(0).scores[0].scoreNoStem);
@@ -170,9 +170,8 @@ public class FindMatchesTest {
         IProject project = new TestProject(prop, null, TMX_EN_US_SR, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
-                true, 30);
-        List<NearString> result = finder.search("XXX", true, true, iStopped);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search("XXX", false, iStopped);
         // Without the fix, the result has two entries, but it should one.
         assertEquals(1, result.size());
         assertEquals("XXX", result.get(0).source);
@@ -209,10 +208,9 @@ public class FindMatchesTest {
         IProject project = new TestProject(prop, null, TMX_EN_US_GB_SR, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
-                true, 30);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         // Search source "XXx" in en-US
-        List<NearString> result = finder.search("XXX", true, true, iStopped);
+        List<NearString> result = finder.search("XXX", false, iStopped);
         // There should be three entries.
         assertEquals(3, result.size());
         assertEquals("XXx", result.get(0).source); // should be en-US.
@@ -240,9 +238,8 @@ public class FindMatchesTest {
         List<String> segments = segmenter.segment(sourceLanguage, srcText, spaces, brules);
         assertEquals(2, segments.size());
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
-                true, 30);
-        List<NearString> result = finder.search(srcText, true, true, iStopped);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search(srcText, false, iStopped);
         assertEquals(srcText, result.get(0).source);
         assertEquals(1, result.size());
         assertEquals("TM", result.get(0).comesFrom.name());

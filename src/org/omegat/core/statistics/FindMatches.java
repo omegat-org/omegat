@@ -131,7 +131,7 @@ public class FindMatches {
 
     private final Segmenter segmenter;
 
-    @Deprecated
+    @Deprecated(since = "6.1.0")
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
         this(project, Core.getSegmenter(), maxCount, searchExactlyTheSame, Preferences.getPreferenceDefault(
@@ -164,6 +164,12 @@ public class FindMatches {
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
         this.fuzzyMatchThreshold = threshold;
+    }
+
+    @Deprecated(since = "6.1.0")
+    public List<NearString> search(final String searchText, final boolean requiresTranslation,
+            final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
+        return search(searchText, fillSimilarityData, stop);
     }
 
     /**

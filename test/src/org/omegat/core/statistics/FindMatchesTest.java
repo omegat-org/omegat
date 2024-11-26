@@ -113,7 +113,7 @@ public class FindMatchesTest {
                 + " i aporten veus noves a les converses.\n";
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         // search without a separated segment match.
-        List<NearString> result = finder.search(srcText, true, true, iStopped, false, true);
+        List<NearString> result = finder.search(srcText, true, iStopped, false, true);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals(65, result.get(0).scores[0].score);
         assertEquals(62, result.get(0).scores[0].scoreNoStem);

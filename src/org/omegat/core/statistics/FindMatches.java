@@ -166,9 +166,24 @@ public class FindMatches {
         this.fuzzyMatchThreshold = threshold;
     }
 
-    public List<NearString> search(String searchText, boolean fillSimilarityData,
-            IStopped stop) throws StoppedException {
-        return search(searchText, true, fillSimilarityData, stop, true, true);
+    /**
+     * Search Translation memories.
+     *
+     * @param searchText
+     *        target segment or term to search.
+     * @param fillSimilarityData
+     *        fill similarity data into the result of NearString objects.
+     * @param stop
+     *        IStopped callback object to indicate cancel operation.
+     * @return
+     *        List of NearString objects, which hold matched translation entry.
+     * @throws StoppedException
+     *        raised when stopped during a search process.
+     */
+    public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
+            throws StoppedException {
+        return search(searchText, fillSimilarityData, stop, !project.getProjectProperties().isSentenceSegmentingEnabled(),
+                true);
     }
 
     /**
@@ -178,17 +193,22 @@ public class FindMatches {
      * It is accecible as package-private for testing.
      *
      * @param searchText
-     * @param requiresTranslation
+     *        target segment or term to search.
      * @param fillSimilarityData
+     *        fill similarity data into the result of NearString objects.
      * @param stop
-     * @param allowSeparateSegmentMatch
+     *        IStopped callback object to indicate cancel operation.
+     * @param runSeparateSegmentMatch
+     *        Also search with segmented terms search.
      * @param travelExternal
+     *        Check also external TMX databases that are under tm/ folder.
      * @return
+     *        List of NearString objects.
      * @throws StoppedException
+     *        When stopped the process during search.
      */
-    List<NearString> search(String searchText, boolean requiresTranslation,
-                            boolean fillSimilarityData, IStopped stop, boolean allowSeparateSegmentMatch,
-                            boolean travelExternal) throws StoppedException {
+    List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop,
+                            boolean runSeparateSegmentMatch, boolean travelExternal) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
         srcText = searchText;
         removedText = "";
@@ -218,7 +238,7 @@ public class FindMatches {
                     // skip original==original entry comparison
                     return;
                 }
-                if (requiresTranslation && trans.translation == null) {
+                if (trans.translation == null) {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
@@ -233,7 +253,7 @@ public class FindMatches {
                 // skip original==original entry comparison
                 return;
             }
-            if (requiresTranslation && trans.translation == null) {
+            if (trans.translation == null) {
                 return;
             }
             String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
@@ -263,7 +283,7 @@ public class FindMatches {
                         // the case, because of no meaningful.
                         continue;
                     }
-                    if (requiresTranslation && tmen.getTranslationText() == null) {
+                    if (tmen.getTranslationText() == null) {
                         continue;
                     }
                     int tmenPenalty = penalty;
@@ -285,7 +305,7 @@ public class FindMatches {
                         ste.isSourceTranslationFuzzy(), 0);
             }
         }
-        if (allowSeparateSegmentMatch && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
+        if (runSeparateSegmentMatch) {
             FindMatches separateSegmentMatcher = new FindMatches(project, segmenter, 1, true,
                     fuzzyMatchThreshold);
             // split paragraph even when segmentation disabled, then find
@@ -303,8 +323,7 @@ public class FindMatches {
                     // find match for a separate segment.
                     // WARN: the 5th argument should be
                     // `false` to avoid an infinite-loop.
-                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation,
-                            false, stop, false, false);
+                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, false, stop, false, false);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);

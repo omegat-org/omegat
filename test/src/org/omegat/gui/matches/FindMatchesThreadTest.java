@@ -26,11 +26,26 @@
 
 package org.omegat.gui.matches;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMFactory;
@@ -51,20 +66,6 @@ import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class FindMatchesThreadTest {
     private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
@@ -97,8 +98,9 @@ public class FindMatchesThreadTest {
         prop.setSentenceSegmentingEnabled(false);
         IProject project = new TestProject(prop, TMX_SEGMENT, new LuceneCJKTokenizer(), new LuceneFrenchTokenizer());
         Core.setProject(project);
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        List<NearString> result = FindMatchesThread.finderSearch(project, SOURCE_TEXT, () -> false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        List<NearString> result = FindMatchesThread.finderSearch(project, segmenter, SOURCE_TEXT, () -> false,
+                30);
         assertEquals(SOURCE_TEXT, result.get(0).source);
         assertEquals("TM", result.get(0).comesFrom.name());
         assertEquals(1, result.size());

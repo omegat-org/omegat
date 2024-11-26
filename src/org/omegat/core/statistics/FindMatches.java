@@ -127,46 +127,68 @@ public class FindMatches {
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
-    // This finder used for search separate segment matches
-    private FindMatches separateSegmentMatcher;
-
     private final int fuzzyMatchThreshold;
-
-    private final boolean applyThreshold;
 
     private final Segmenter segmenter;
 
-    /**
-     * @param searchExactlyTheSame
-     *            allows to search similarities with the same text as source
-     *            segment. This mode used only for separate sentence match in
-     *            paragraph project, i.e. where source is just part of current
-     *            source.
-     */
+    @Deprecated
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
-        this(project, Core.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true,
-                Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                        OConsts.FUZZY_MATCH_THRESHOLD));
+        this(project, Core.getSegmenter(), maxCount, searchExactlyTheSame, Preferences.getPreferenceDefault(
+                Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, OConsts.FUZZY_MATCH_THRESHOLD));
     }
 
-    public FindMatches(IProject project, Segmenter segmenter, int maxCount, boolean allowSeparateSegmentMatch,
-            boolean searchExactlyTheSame, boolean applyThreshold, int threshold) {
+    /**
+     * Constructor.
+     *
+     * @param project
+     *            OmegaT project.
+     * @param segmenter
+     *            Segmenter to use.
+     * @param maxCount
+     *            limit the maximum count of the results.
+     * @param searchExactlyTheSame
+     *            allows searching similarities with the same text as a source
+     *            segment. This mode is used only for separate sentence match in
+     *            a paragraph project, i.e. where a source is just part of the
+     *            current source.
+     * @param threshold
+     *            threshold to use.
+     */
+    public FindMatches(IProject project, Segmenter segmenter, int maxCount,
+            boolean searchExactlyTheSame, int threshold) {
         this.project = project;
         this.segmenter = segmenter;
         this.tok = project.getSourceTokenizer();
         this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
-        if (allowSeparateSegmentMatch && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
-            separateSegmentMatcher = new FindMatches(project, segmenter, 1, false, true, true, threshold);
-        }
         this.fuzzyMatchThreshold = threshold;
-        this.applyThreshold = applyThreshold;
     }
 
-    public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
+    public List<NearString> search(String searchText, boolean fillSimilarityData,
             IStopped stop) throws StoppedException {
+        return search(searchText, true, fillSimilarityData, stop, true, true);
+    }
+
+    /**
+     * Search Translation memories.
+     * <p>
+     * Internal method to handle search conditions.
+     * It is accecible as package-private for testing.
+     *
+     * @param searchText
+     * @param requiresTranslation
+     * @param fillSimilarityData
+     * @param stop
+     * @param allowSeparateSegmentMatch
+     * @param travelExternal
+     * @return
+     * @throws StoppedException
+     */
+    List<NearString> search(String searchText, boolean requiresTranslation,
+                            boolean fillSimilarityData, IStopped stop, boolean allowSeparateSegmentMatch,
+                            boolean travelExternal) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
         srcText = searchText;
         removedText = "";
@@ -225,28 +247,31 @@ public class FindMatches {
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
-        // travel by translation memories
-        for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
-            int penalty = 0;
-            Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
-            if (matcher.find()) {
-                penalty = Integer.parseInt(matcher.group(1));
-            }
-            for (ITMXEntry tmen : en.getValue().getEntries()) {
-                checkStopped(stop);
-                if (tmen.getSourceText() == null) {
-                    // Not all TMX entries have a source; in that case there can
-                    // be no meaningful match, so skip.
-                    continue;
+        // travel by external translation memories, when non-segmented search
+        // (see BUGS#1251)
+        if (travelExternal) {
+            for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
+                int penalty = 0;
+                Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
+                if (matcher.find()) {
+                    penalty = Integer.parseInt(matcher.group(1));
                 }
-                if (requiresTranslation && tmen.getTranslationText() == null) {
-                    continue;
+                for (ITMXEntry tmen : en.getValue().getEntries()) {
+                    checkStopped(stop);
+                    if (tmen.getSourceText() == null) {
+                        // Not all TMX entries have a source; skip it in
+                        // the case, because of no meaningful.
+                        continue;
+                    }
+                    if (requiresTranslation && tmen.getTranslationText() == null) {
+                        continue;
+                    }
+                    int tmenPenalty = penalty;
+                    if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
+                        tmenPenalty += foreignPenalty;
+                    }
+                    processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
                 }
-                int tmenPenalty = penalty;
-                if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
-                    tmenPenalty += foreignPenalty;
-                }
-                processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
             }
         }
         // travel by all entries for check source file translations
@@ -260,7 +285,9 @@ public class FindMatches {
                         ste.isSourceTranslationFuzzy(), 0);
             }
         }
-        if (separateSegmentMatcher != null) {
+        if (allowSeparateSegmentMatch && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
+            FindMatches separateSegmentMatcher = new FindMatches(project, segmenter, 1, true,
+                    fuzzyMatchThreshold);
             // split paragraph even when segmentation disabled, then find
             // matches for every segment
             List<StringBuilder> spaces = new ArrayList<>();
@@ -275,7 +302,7 @@ public class FindMatches {
                 for (String onesrc : segments) {
                     // find match for a separate segment
                     List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation,
-                            false, stop);
+                            false, stop, false, false);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
@@ -385,7 +412,7 @@ public class FindMatches {
         }
 
         // BUGS#1236 - stat display does not use threshold config check
-        if (applyThreshold && similarityStem < fuzzyMatchThreshold
+        if (fuzzyMatchThreshold > 0 && similarityStem < fuzzyMatchThreshold
                 && similarityNoStem < fuzzyMatchThreshold && simAdjusted < fuzzyMatchThreshold) {
             return;
         }

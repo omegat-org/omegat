@@ -25,6 +25,7 @@
 
 package org.omegat.core.statistics;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.util.TreeMap;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.omegat.core.Core;
@@ -48,6 +50,7 @@ import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
@@ -64,13 +67,17 @@ import org.omegat.util.TestPreferencesInitializer;
 
 public class CalcMatchStatisticsTest {
 
+    @BeforeClass
+    public static void setup() throws IOException {
+        TestPreferencesInitializer.init();
+    }
+
     @Test
     public void testCalcMatchStatics() throws Exception {
         TestProject project = new TestProject(new ProjectPropertiesTest());
         IStatsConsumer callback = new TestStatsConsumer();
-        Segmenter segmenter = new Segmenter(Preferences.getSRX());
-        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter,
-                callback, 30);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -123,7 +130,8 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
 
         // change threshold
-        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, 70);
+        Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, 70);
+        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -362,9 +370,8 @@ public class CalcMatchStatisticsTest {
         private MatchStatCounts result;
         private final IStatsConsumer callback;
 
-        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback,
-                                int threshold) {
-            super(project, segmenter, callback, false, threshold);
+        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback) {
+            super(project, segmenter, callback, false);
             this.project = project;
             this.callback = callback;
         }

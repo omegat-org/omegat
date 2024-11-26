@@ -300,7 +300,9 @@ public class FindMatches {
                 List<String> ftrans = new ArrayList<>(segments.size());
                 // multiple segments
                 for (String onesrc : segments) {
-                    // find match for a separate segment
+                    // find match for a separate segment.
+                    // WARN: the 5th argument should be
+                    // `false` to avoid an infinite-loop.
                     List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation,
                             false, stop, false, false);
                     if (!segmentMatch.isEmpty()

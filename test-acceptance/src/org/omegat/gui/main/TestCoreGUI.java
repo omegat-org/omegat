@@ -61,6 +61,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     protected File tmpDir;
 
+    protected void closeProject() throws Exception {
+        CountDownLatch latch = new CountDownLatch(1);
+        Core.getProject().closeProject();
+        CoreEvents.registerProjectChangeListener(event -> {
+            if (!Core.getProject().isProjectLoaded()) {
+                latch.countDown();
+            }
+        });
+        try {
+            latch.await(5, TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {
+        }
+        assertFalse("Project should not be loaded.", Core.getProject().isProjectLoaded());
+    }
+
     protected void openSampleProject(String projectPath) throws Exception {
         // 0. Prepare project folder
         tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
@@ -86,6 +101,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         });
         // 3. check Project loaded
         assertTrue("Sample project should be loaded.", Core.getProject().isProjectLoaded());
+    }
+
+    @Override
+    protected void onTearDown() throws Exception {
+        window.cleanUp();
     }
 
     @Override

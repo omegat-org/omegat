@@ -26,6 +26,8 @@
 package org.omegat.core.statistics;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -75,6 +77,7 @@ public class FindMatchesTest {
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
     private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
+    private static final File TMX_MULTI = new File("test/data/tmx/test-multiple-entries.tmx");
     private static Path tmpDir;
 
 
@@ -242,7 +245,31 @@ public class FindMatchesTest {
         assertEquals("TM", result.get(0).comesFrom.name());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
-     }
+    }
+
+    @Test
+    public void testSearchMulti() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("en-US");
+        prop.setTargetLanguage("co");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(true);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        IProject project = new TestProject(prop, TMX_MULTI, null, new LuceneEnglishTokenizer(),
+                new DefaultTokenizer(), segmenter);
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, 85);
+        List<NearString> result = finder.search("Other", false, iStopped);
+        assertEquals(3, result.size());
+        assertEquals("Other", result.get(0).source);
+        assertEquals("Altre", result.get(0).translation); // default
+        assertNull(result.get(0).key);
+        assertEquals("Altri", result.get(1).translation); // alternative
+        assertNotNull(result.get(1).key);
+        assertEquals("website/download.html", result.get(1).key.file);
+        assertEquals("Other", result.get(2).translation); // source translation
+    }
+
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -341,6 +368,10 @@ public class FindMatchesTest {
                     1, null, null, Collections.emptyList()));
             ste.add(new SourceTextEntry(new EntryKey("source.txt", "地力の搾取と浪費が現われる。(1)", null, "", "", null),
                     1, null, null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
+                    "For installation on Linux.",
+                    "For installation on other operating systems (such as FreeBSD and Solaris).&lt;br0/>",
+                    null), 1, null, "Other", Collections.emptyList()));
             return ste;
         }
 

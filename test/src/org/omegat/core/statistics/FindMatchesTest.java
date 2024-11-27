@@ -115,23 +115,21 @@ public class FindMatchesTest {
                 + " Una comunitat vibrant necessita una entrada regular de nouvinguts que hi participen habitualment"
                 + " i aporten veus noves a les converses.\n";
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
-        // search without a separated segment match.
-        List<NearString> result = finder.search(srcText, true, iStopped, false, true);
+
+        // search without a separated segment match process.
+        List<NearString> result = finder.searchForTest(srcText);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals(65, result.get(0).scores[0].score);
         assertEquals(62, result.get(0).scores[0].scoreNoStem);
         assertEquals(62, result.get(0).scores[0].adjustedScore);
         assertEquals(expectFirst, result.get(0).translation);
         assertEquals(expectNear, result.get(1).translation);
-        // search with a segmented match.
-        List<StringBuilder> spaces = new ArrayList<>();
-        List<Rule> brules = new ArrayList<>();
-        List<String> segments = segmenter.segment(prop.getSourceLanguage(), srcText, spaces, brules);
-        assertEquals(3, segments.size());
+
+        // normal search.
         finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         result = finder.search(srcText, false, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
-        assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
+        assertEquals("Hit segmented tmx records", 100, result.get(0).scores[0].score);
         assertEquals(100, result.get(0).scores[0].scoreNoStem);
         assertEquals(100, result.get(0).scores[0].adjustedScore);
         assertEquals(expectWhole, result.get(0).translation);
@@ -241,10 +239,16 @@ public class FindMatchesTest {
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         List<NearString> result = finder.search(srcText, false, iStopped);
         assertEquals(srcText, result.get(0).source);
-        assertEquals(1, result.size());
+        assertEquals(2, result.size());
+        // match normal
         assertEquals("TM", result.get(0).comesFrom.name());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
+        assertEquals("test/data/tmx/penalty-010/segment_1.tmx", result.get(0).projs[0]);
+        // match segmented, with penalty, no reference file
+        assertEquals("TM", result.get(1).comesFrom.name());
+        assertEquals(90, result.get(1).scores[0].score);
+        assertEquals("", result.get(1).projs[0]);
     }
 
     @Test

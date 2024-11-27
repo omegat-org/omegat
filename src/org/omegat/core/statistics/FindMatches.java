@@ -165,12 +165,6 @@ public class FindMatches {
         this.fuzzyMatchThreshold = threshold;
     }
 
-    @Deprecated(since = "6.1.0")
-    public List<NearString> search(final String searchText, final boolean requiresTranslation,
-            final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
-        return search(searchText, fillSimilarityData, stop);
-    }
-
     /**
      * Search Translation memories.
      *
@@ -187,33 +181,19 @@ public class FindMatches {
      */
     public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
             throws StoppedException {
-        return search(searchText, fillSimilarityData, stop,
-                !project.getProjectProperties().isSentenceSegmentingEnabled(), true);
+        boolean runSeparateSegmentMatch = !project.getProjectProperties().isSentenceSegmentingEnabled();
+        return search(searchText, fillSimilarityData, stop, runSeparateSegmentMatch);
     }
 
     /**
-     * Search Translation memories.
-     * <p>
-     * Internal method to handle search conditions.
-     * It is accessible as package-private for testing.
-     *
-     * @param searchText
-     *        target segment or term to search.
-     * @param fillSimilarityData
-     *        fill similarity data into the result of NearString objects.
-     * @param stop
-     *        IStopped callback object to indicate cancel operation.
-     * @param runSeparateSegmentMatch
-     *        Also search with segmented terms search.
-     * @param travelExternal
-     *        Check also external TMX databases that are under tm/ folder.
-     * @return
-     *        List of NearString objects.
-     * @throws StoppedException
-     *        When stopped the process during search.
+     * Search translation memories without segmenting.
      */
-    List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop,
-                            boolean runSeparateSegmentMatch, boolean travelExternal) throws StoppedException {
+    private List<NearString> searchForSegmented(String searchSentence, IStopped stop) {
+        return search(searchSentence, false, stop, false);
+    }
+
+    private List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop,
+                            boolean runSeparateSegmentMatch) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
         srcText = searchText;
         removedText = "";
@@ -272,33 +252,30 @@ public class FindMatches {
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
-        // travel by external translation memories, when non-segmented search
-        // (see BUGS#1251)
-        if (travelExternal) {
-            for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
-                int penalty = 0;
-                Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
-                if (matcher.find()) {
-                    penalty = Integer.parseInt(matcher.group(1));
+        for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
+            int penalty = 0;
+            Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
+            if (matcher.find()) {
+                penalty = Integer.parseInt(matcher.group(1));
+            }
+            for (ITMXEntry tmen : en.getValue().getEntries()) {
+                checkStopped(stop);
+                if (tmen.getSourceText() == null) {
+                    // Not all TMX entries have a source; skip it in
+                    // the case, because of no meaningful.
+                    continue;
                 }
-                for (ITMXEntry tmen : en.getValue().getEntries()) {
-                    checkStopped(stop);
-                    if (tmen.getSourceText() == null) {
-                        // Not all TMX entries have a source; skip it in
-                        // the case, because of no meaningful.
-                        continue;
-                    }
-                    if (tmen.getTranslationText() == null) {
-                        continue;
-                    }
-                    int tmenPenalty = penalty;
-                    if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
-                        tmenPenalty += foreignPenalty;
-                    }
-                    processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
+                if (tmen.getTranslationText() == null) {
+                    continue;
                 }
+                int tmenPenalty = penalty;
+                if (tmen.hasPropValue(ExternalTMFactory.TMXLoader.PROP_FOREIGN_MATCH, "true")) {
+                    tmenPenalty += foreignPenalty;
+                }
+                processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
             }
         }
+
         // travel by all entries for check source file translations
         for (SourceTextEntry ste : project.getAllEntries()) {
             checkStopped(stop);
@@ -310,6 +287,7 @@ public class FindMatches {
                         ste.isSourceTranslationFuzzy(), 0);
             }
         }
+
         if (runSeparateSegmentMatch) {
             FindMatches separateSegmentMatcher = new FindMatches(project, segmenter, 1, true,
                     fuzzyMatchThreshold);
@@ -320,19 +298,21 @@ public class FindMatches {
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
             Language targetLang = project.getProjectProperties().getTargetLanguage();
             List<String> segments = segmenter.segment(sourceLang, srcText, spaces, brules);
+            int penalty = 0;
             if (segments.size() > 1) {
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
                 // multiple segments
                 for (String onesrc : segments) {
                     // find match for a separate segment.
-                    // WARN: the 5th argument should be
+                    // WARN: the 4th argument should be
                     // `false` to avoid an infinite-loop.
-                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, false, stop, false, false);
+                    List<NearString> segmentMatch = separateSegmentMatcher.searchForSegmented(onesrc, stop);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
                         ftrans.add(segmentMatch.get(0).translation);
+                        penalty = Math.max(penalty, segmentMatch.get(0).scores[0].penalty);
                     } else {
                         fsrc.add("");
                         ftrans.add("");
@@ -342,7 +322,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, 0);
+                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, penalty);
             }
         }
         // fill similarity data only for a result
@@ -444,7 +424,7 @@ public class FindMatches {
         }
 
         addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
-                simAdjusted), tmxName);
+                simAdjusted, penalty), tmxName);
     }
 
     /**
@@ -570,5 +550,12 @@ public class FindMatches {
      */
     @SuppressWarnings("serial")
     public static class StoppedException extends RuntimeException {
+    }
+
+    /**
+     * for unit test.
+     */
+    List<NearString> searchForTest(String searchSentence) {
+        return search(searchSentence, false, () -> false, false);
     }
 }

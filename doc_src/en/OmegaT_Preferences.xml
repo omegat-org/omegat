@@ -1476,6 +1476,15 @@ ${filePath}></programlisting></para>
 		  </table>
 		</listitem>
 	  </varlistentry>
+          <varlistentry id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx">
+		  <term id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title">
+			  <option>Paragraph from segment matches of segmented TMX on a non-segment project</option></term>
+            <listitem><para>Enable matches for paragraph, which is constructed from segment matches search on segmented
+		    TMX entries searched with sentences from a segmented source text, even when running on a
+		    non-segment(paragraph segmentation) project.</para>
+            </listitem>
+
+          </varlistentry>
 	</variablelist>
   </section>
 

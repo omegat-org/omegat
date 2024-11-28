@@ -181,7 +181,9 @@ public class FindMatches {
      */
     public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
             throws StoppedException {
-        boolean runSeparateSegmentMatch = !project.getProjectProperties().isSentenceSegmentingEnabled();
+        boolean runSeparateSegmentMatch =
+                Preferences.isPreferenceDefault(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, true) &&
+                        !project.getProjectProperties().isSentenceSegmentingEnabled();
         return search(searchText, fillSimilarityData, stop, runSeparateSegmentMatch);
     }
 

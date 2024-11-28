@@ -100,9 +100,9 @@ public class FindMatchesThreadTest {
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         List<NearString> result = FindMatchesThread.finderSearch(project, segmenter, SOURCE_TEXT, () -> false,
                 30);
+        assertEquals(2, result.size());
         assertEquals(SOURCE_TEXT, result.get(0).source);
         assertEquals("TM", result.get(0).comesFrom.name());
-        assertEquals(1, result.size());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
      }

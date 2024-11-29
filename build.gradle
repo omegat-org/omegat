@@ -1666,6 +1666,20 @@ def isCommandAvailable(command) {
     }.exitValue == 0
 }
 
+def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
+    outputs.upToDateWhen { return false } // always run
+    doLast {
+        def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
+        if (!display.isEmpty()) {
+            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
+            if (pid != null) {
+                stopX(pid)
+                ext.xfvgPid = null
+            }
+        }
+    }
+}
+
 tasks.register('testAcceptance', Test) {
     onlyIf {
         isCommandAvailable('Xvfb') || project.hasProperty("acceptanceTestLive")
@@ -1680,14 +1694,7 @@ tasks.register('testAcceptance', Test) {
             }
         }
     }
-    doLast {
-        if (!display.isEmpty()) {
-            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
-            if (pid != null) {
-                stopX(pid)
-            }
-        }
-    }
+    finalizedBy testAcceptanceFinally
 
     description = 'Run Acceptance GUI test'
     group = 'verification'

@@ -307,8 +307,6 @@ public class FindMatches {
                 // multiple segments
                 for (String onesrc : segments) {
                     // find match for a separate segment.
-                    // WARN: the 4th argument should be
-                    // `false` to avoid an infinite-loop.
                     List<NearString> segmentMatch = separateSegmentMatcher.searchForSegmented(onesrc, stop);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {

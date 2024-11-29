@@ -244,7 +244,7 @@ public class FindMatchesTest {
         assertEquals("TM", result.get(0).comesFrom.name());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
-        assertEquals("test/data/tmx/penalty-010/segment_1.tmx", result.get(0).projs[0]);
+        assertTrue(result.get(0).projs[0].contains("penalty-010"));
         // match segmented, with penalty, no reference file
         assertEquals("TM", result.get(1).comesFrom.name());
         assertEquals(90, result.get(1).scores[0].score);

@@ -101,10 +101,15 @@ public class FindMatchesThreadTest {
         List<NearString> result = FindMatchesThread.finderSearch(project, segmenter, SOURCE_TEXT, () -> false,
                 30);
         assertEquals(2, result.size());
+        //
         assertEquals(SOURCE_TEXT, result.get(0).source);
         assertEquals("TM", result.get(0).comesFrom.name());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
+        //
+        assertEquals(SOURCE_TEXT, result.get(1).source);
+        assertEquals("TM_SUBSEG", result.get(1).comesFrom.name());
+        assertEquals(90, result.get(1).scores[0].score);
      }
 
     static class TestProject extends NotLoadedProject implements IProject {

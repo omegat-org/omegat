@@ -300,7 +300,8 @@ public class FindMatches {
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
             Language targetLang = project.getProjectProperties().getTargetLanguage();
             List<String> segments = segmenter.segment(sourceLang, srcText, spaces, brules);
-            int penalty = 0;
+            int maxPenalty = 0;
+            String tmxName = null;
             if (segments.size() > 1) {
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
@@ -312,7 +313,15 @@ public class FindMatches {
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
                         ftrans.add(segmentMatch.get(0).translation);
-                        penalty = Math.max(penalty, segmentMatch.get(0).scores[0].penalty);
+                        if (tmxName == null) {
+                            tmxName = segmentMatch.get(0).projs[0];
+                        }
+                        if (segmentMatch.get(0).fuzzyMark) {
+                            if (maxPenalty < PENALTY_FOR_FUZZY) {
+                                maxPenalty = PENALTY_FOR_FUZZY;
+                            }
+                        }
+                        maxPenalty = Math.max(maxPenalty, segmentMatch.get(0).scores[0].penalty);
                     } else {
                         fsrc.add("");
                         ftrans.add("");
@@ -322,7 +331,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, penalty);
+                processEntry(null, entry, tmxName, NearString.MATCH_SOURCE.TM_SUBSEG, false, maxPenalty);
             }
         }
         // fill similarity data only for a result

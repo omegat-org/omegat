@@ -225,16 +225,16 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     private String expandMatchSource(String localTemplate, NearString.MATCH_SOURCE comesFrom) {
-        switch(comesFrom) {
+        switch (comesFrom) {
         case TM:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_COMES_FROM_TM") + " ");
         case FILES:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_COMES_FROM_FILES"));
         case MEMORY:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString( "MATCHES_COMES_FROM_MEMORY"));
+            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_COMES_FROM_MEMORY"));
         case TM_SUBSEG:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString(
-                    "MATCHES_COMES_FROM_TM_SUBSEG") + " ");
+            return localTemplate.replace(VAR_MATCH_SOURCE,
+                    OStrings.getString("MATCHES_COMES_FROM_TM_SUBSEG") + " ");
         default:
             return localTemplate.replace(VAR_MATCH_SOURCE, "");
         }
@@ -296,12 +296,14 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
         if (BiDiUtils.isMixedOrientationProject()) {
             if (BiDiUtils.isTargetLangRtl()) {
-                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, BiDiUtils.addRtlBidiAround(match.translation));
+                localTemplate = localTemplate.replace(VAR_TARGET_TEXT,
+                        BiDiUtils.addRtlBidiAround(match.translation));
             } else {
-                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, BiDiUtils.addLtrBidiAround(match.translation));
+                localTemplate = localTemplate.replace(VAR_TARGET_TEXT,
+                        BiDiUtils.addLtrBidiAround(match.translation));
             }
         } else {
-                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
+            localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
         }
 
         localTemplate = expandMatchSource(localTemplate, match.comesFrom);
@@ -310,8 +312,8 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     /**
-     * A sorted map that ensures styled replacements are performed in the
-     * order of appearance.
+     * A sorted map that ensures styled replacements are performed in the order
+     * of appearance.
      */
     private final Map<Integer, Replacer> styledComponents = new TreeMap<>();
 
@@ -338,7 +340,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
                 styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), LTR_SOURCE_TEXT_REPLACER);
             }
         } else {
-                styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+            styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
         }
         styledComponents.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
         styledComponents.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);

@@ -45,8 +45,9 @@
 
           <listitem>
             <para><guilabel>Spelling Issues</guilabel> (optional): detects
-            spelling mistakes. Only works if a spelling dictionary is
-            installed. See the <link linkend="dialog.preferences.spellchecker"
+            spelling mistakes. It works when there is a supported language module,
+            or a user local custom dictionary for the target language.
+            See the <link linkend="dialog.preferences.spellchecker"
             endterm="dialog.preferences.spellchecker.title"/> preferences for
             details.</para>
           </listitem>

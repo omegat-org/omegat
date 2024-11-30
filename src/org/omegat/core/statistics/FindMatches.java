@@ -235,8 +235,8 @@ public class FindMatches {
             for (ITMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
                 if (tmen.getSourceText() == null) {
-                    // Not all TMX entries have a source; in that case there can
-                    // be no meaningful match, so skip.
+                    // Not all TMX entries have a source; skip it in
+                    // the case, because of no meaningful.
                     continue;
                 }
                 if (requiresTranslation && tmen.getTranslationText() == null) {
@@ -249,6 +249,7 @@ public class FindMatches {
                 processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
             }
         }
+
         // travel by all entries for check source file translations
         for (SourceTextEntry ste : project.getAllEntries()) {
             checkStopped(stop);

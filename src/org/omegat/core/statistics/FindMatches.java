@@ -31,10 +31,12 @@ package org.omegat.core.statistics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -300,9 +302,9 @@ public class FindMatches {
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
             Language targetLang = project.getProjectProperties().getTargetLanguage();
             List<String> segments = segmenter.segment(sourceLang, srcText, spaces, brules);
-            int maxPenalty = 0;
-            String tmxName = null;
             if (segments.size() > 1) {
+                int maxPenalty = 0;
+                Set<String> tmxNames = new HashSet<>();
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
                 // multiple segments
@@ -313,9 +315,8 @@ public class FindMatches {
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
                         ftrans.add(segmentMatch.get(0).translation);
-                        if (tmxName == null) {
-                            tmxName = segmentMatch.get(0).projs[0];
-                        }
+                        segmentMatch.stream().filter(match -> !match.projs[0].isEmpty())
+                                .map(match -> match.projs[0]).forEach(tmxNames::add);
                         if (segmentMatch.get(0).fuzzyMark) {
                             if (maxPenalty < PENALTY_FOR_FUZZY) {
                                 maxPenalty = PENALTY_FOR_FUZZY;
@@ -331,7 +332,8 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, tmxName, NearString.MATCH_SOURCE.TM_SUBSEG, false, maxPenalty);
+                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.TM_SUBSEG,
+                        false, maxPenalty);
             }
         }
         // fill similarity data only for a result

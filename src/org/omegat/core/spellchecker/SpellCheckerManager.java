@@ -33,6 +33,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
@@ -80,6 +81,14 @@ public final class SpellCheckerManager {
 
     private static final Map<String, String> morfologikDictionaryProviders = new HashMap<>();
     private static final Map<String, String> hunspellDictionaryProviders = new HashMap<>();
+
+    public static Set<String> getMorfologikDictionaryLanguages() {
+        return morfologikDictionaryProviders.keySet();
+    }
+
+    public static Set<String> getHunspellDictionaryLanguages() {
+        return hunspellDictionaryProviders.keySet();
+    }
 
     /**
      * The entry point to register spell checker dictionary class.

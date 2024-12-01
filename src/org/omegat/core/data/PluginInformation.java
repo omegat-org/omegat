@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2020 Briac Pilpre
-               2021,2022 Hiroshi Miura
+               2021-2022 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

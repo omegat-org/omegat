@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk,
-                            Sandra Jean Chua, and Henry Pijffers
+               2000-2006 Sandra Jean Chua, and Henry Pijffers
                2007 Didier Briel
                2009 Alex Buloichik
                2015 Aaron Madlon-Kay

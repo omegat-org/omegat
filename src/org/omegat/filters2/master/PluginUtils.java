@@ -328,6 +328,10 @@ public final class PluginUtils {
         for (URL url : urlList) {
             try (JarInputStream jarStream = new JarInputStream(url.openStream())) {
                 Manifest mf = jarStream.getManifest();
+                if (mf == null) {
+                    // mf can be null when a jar file does not have a manifest.
+                    continue;
+                }
                 String pluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGINS);
                 String oldPluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGIN);
 

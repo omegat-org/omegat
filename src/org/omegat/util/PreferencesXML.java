@@ -9,11 +9,10 @@
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                2011 John Moran, Didier Briel
                2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
-                    Aaron Madlon-Kay
-               2013 Aaron Madlon-Kay, Zoltan Bartko
-               2014 Piotr Kulik, Aaron Madlon-Kay
-               2015 Aaron Madlon-Kay, Yu Tang, Didier Briel, Hiroshi Miura
-               2016 Aaron Madlon-Kay
+               2013 Zoltan Bartko
+               2014 Piotr Kulik
+               2015 Yu Tang, Didier Briel, Hiroshi Miura
+               2012-2016 Aaron Madlon-Kay
                2022-2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support

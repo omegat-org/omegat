@@ -681,16 +681,12 @@
 		  dictionaries. It is generally in the <link
 		  linkend="configuration.folder" endterm="configuration.folder.title"/>
 		  folder.</para>
-		  <para>When your project target language is supported by an OmegaT language module
-		  that provides a Hunspell dictionary, a spelling dictionary will automatically be
-		  installed into this folder when you enable spell checking. If the module provides
-		  a Morfologik dictionary, spellchecking will work without the plugin installing a
-		  dictionary in the folder.</para>
-		  <para>If you want to a custom spelling dictionary, or if your project target
-		  language is not covered by OmegaT provided language modules, you can put a
-		  dictionary in this folder.</para>
-		  <para>If you are interested in creating a language module plugin, please check
-		  the developer manual.</para>
+		  <para>If the OmegaT language module for your project target language provides
+		  a Hunspell dictionary, it will automatically install it in this folder when you
+		  enable spell checking. If the module provides a Morfologik dictionary,
+		  spellchecking works without having to install a dictionary in the folder.</para>
+		  <para>You can put a dictionary in this folder to a use custom spelling dictionary,
+		  or if your project target language is not covered by an OmegaT language module.</para>		  
 		</listitem>
 	  </varlistentry>
 	  

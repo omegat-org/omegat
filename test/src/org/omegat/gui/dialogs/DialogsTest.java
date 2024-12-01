@@ -65,11 +65,6 @@ public class DialogsTest extends TestCore {
     }
 
     @Test
-    public void testDictionaryInstallerDialog() {
-        new DictionaryInstallerDialog(null, null);
-    }
-
-    @Test
     public void testFileCollisionDialog() {
         new FileCollisionDialog((Frame) null);
     }

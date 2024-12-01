@@ -30,15 +30,10 @@
 package org.omegat.gui.preferences.view;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -47,7 +42,6 @@ import org.omegat.core.Core;
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
-import org.omegat.gui.dialogs.DictionaryInstallerDialog;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -63,14 +57,7 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class SpellcheckerConfigurationController extends BasePreferencesController {
 
-    public static final List<String> OLD_DICT_URLS = Collections.unmodifiableList(
-            Arrays.asList("http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/",
-                    "http://download.services.openoffice.org/files/contrib/dictionaries/"));
-    public static final String DICT_URL = "https://sourceforge.net/projects/openofficeorg.mirror/files/contrib/dictionaries/";
-
     private SpellcheckerConfigurationPanel panel;
-
-    private DictionaryManager dicMan;
 
     @Override
     public JComponent getGui() {
@@ -88,22 +75,6 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
 
     private void initGui() {
         panel = new SpellcheckerConfigurationPanel();
-
-        // localize GUI parts.
-        org.openide.awt.Mnemonics.setLocalizedText(panel.autoSpellcheckCheckBox,
-                OStrings.getString("GUI_SPELLCHECKER_AUTOSPELLCHECKCHECKBOX"));
-        org.openide.awt.Mnemonics.setLocalizedText(panel.directoryLabel,
-                OStrings.getString("GUI_SPELLCHECKER_DICTIONARYLABEL"));
-        org.openide.awt.Mnemonics.setLocalizedText(panel.directoryChooserButton,
-                OStrings.getString("GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON"));
-        org.openide.awt.Mnemonics.setLocalizedText(panel.contentLabel,
-                OStrings.getString("GUI_SPELLCHECKER_AVAILABLE_LABEL"));
-        org.openide.awt.Mnemonics.setLocalizedText(panel.uninstallButton,
-                OStrings.getString("GUI_SPELLCHECKER_UNINSTALLBUTTON"));
-        org.openide.awt.Mnemonics.setLocalizedText(panel.dictionaryUrlLabel,
-                OStrings.getString("GUI_SPELLCHECKER_URL_LABEL"));
-        org.openide.awt.Mnemonics.setLocalizedText(panel.installButton,
-                OStrings.getString("GUI_SPELLCHECKER_INSTALLBUTTON"));
 
         panel.autoSpellcheckCheckBox.addActionListener(e -> updateDetailPanel());
 
@@ -124,101 +95,11 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             }
         });
 
-        panel.dictionaryUrlTextField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                dictUrlChanged();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                dictUrlChanged();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                dictUrlChanged();
-            }
-        });
-
         panel.directoryTextField.addActionListener(e -> updateLanguageList());
 
         panel.directoryChooserButton.addActionListener(e -> chooseDirectory());
 
-        panel.languageList.addListSelectionListener(e -> listSelectionChanged());
         panel.languageList.setModel(new DefaultListModel<>());
-
-        panel.installButton.addActionListener(e -> doInstall());
-
-        panel.uninstallButton.addActionListener(e -> doUninstall());
-    }
-
-    private void doInstall() {
-        File dicDir = getDictDir();
-        if (dicDir == null) {
-            JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
-                    OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!dicDir.exists()) {
-            int doCreateDir = JOptionPane.showConfirmDialog(panel,
-                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT"),
-                    OStrings.getString("GUI_SPELLCHECKER_DIR_NOT_PRESENT_TITLE"),
-                    JOptionPane.OK_CANCEL_OPTION);
-            if (doCreateDir != JOptionPane.OK_OPTION) {
-                return;
-            }
-            if (!dicDir.mkdirs()) {
-                JOptionPane.showMessageDialog(panel,
-                        OStrings.getString("GUI_SPELLCHECKER_COULD_NOT_CREATE_DIR"),
-                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-
-        // Note: When we realize spellchecker dictionary as an extension plugin,
-        // We should remove the URL preference.
-        // See also SpellcheckerConfigurationController#initFromPrefs.
-        Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL,
-                panel.dictionaryUrlTextField.getText());
-
-        try {
-            DictionaryInstallerDialog installerDialog = new DictionaryInstallerDialog(
-                    SwingUtilities.getWindowAncestor(panel), dicMan);
-            installerDialog.setVisible(true);
-            updateLanguageList();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(panel, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"),
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void doUninstall() {
-        // any dictionary manager available
-        if (dicMan == null) {
-            return; // this should never happen - just in case it does
-        }
-        List<String> selection = panel.languageList.getSelectedValuesList();
-        for (String selectedItem : selection) {
-            String selectedLocaleName = selectedItem.substring(0, selectedItem.indexOf(" "));
-
-            if (selectedLocaleName.equals(getCurrentLanguage().getLocaleCode())) {
-                if (JOptionPane.showConfirmDialog(panel,
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
-                        JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-                    return;
-                }
-            }
-            if (!dicMan.uninstallDictionary(selectedLocaleName)) {
-                JOptionPane.showMessageDialog(panel, OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"),
-                        JOptionPane.ERROR_MESSAGE);
-            }
-            ((DefaultListModel<?>) panel.languageList.getModel())
-                    .remove(panel.languageList.getSelectedIndex());
-        }
     }
 
     private void chooseDirectory() {
@@ -231,11 +112,6 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             File file = fileChooser.getSelectedFile();
             panel.directoryTextField.setText(file.getAbsolutePath());
         }
-    }
-
-    private void listSelectionChanged() {
-        List<String> selection = panel.languageList.getSelectedValuesList();
-        panel.uninstallButton.setEnabled(!selection.isEmpty() && panel.autoSpellcheckCheckBox.isSelected());
     }
 
     private File getDictDir() {
@@ -254,7 +130,6 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
     }
 
     private void directoryChanged() {
-        dictUrlChanged();
         updateLanguageList();
     }
 
@@ -264,12 +139,6 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
     private void updateDetailPanel() {
         StaticUIUtils.setHierarchyEnabled(panel.detailPanel, panel.autoSpellcheckCheckBox.isSelected());
         directoryChanged();
-    }
-
-    private void dictUrlChanged() {
-        File dictDir = getDictDir();
-        panel.installButton.setEnabled(panel.autoSpellcheckCheckBox.isSelected() && dictDir != null
-                && dictDir.canWrite() && !panel.dictionaryUrlTextField.getText().isEmpty());
     }
 
     /**
@@ -286,7 +155,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
             return;
         }
 
-        dicMan = new DictionaryManager(dir);
+        DictionaryManager dicMan = new DictionaryManager(dir);
         dicMan.getLocalDictionaryNameList().stream().sorted().forEach(languageListModel::addElement);
     }
 
@@ -304,16 +173,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
                 .setSelected(Preferences.isPreferenceDefault(Preferences.ALLOW_AUTO_SPELLCHECKING, true));
         // initialize things from the preferences
         updateDetailPanel();
-        String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
-        if (dictionaryUrl.isEmpty() || // string below was default prior to
-        // 2.5.0 update 5, but is not working.
-        // Override with new default.
-                OLD_DICT_URLS.contains(dictionaryUrl.toLowerCase(Locale.ENGLISH))) {
-            dictionaryUrl = DICT_URL;
-        }
-        panel.dictionaryUrlTextField.setText(dictionaryUrl);
         directoryChanged();
-        listSelectionChanged();
 
         String dictDirPath = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 SpellCheckerManager.getDefaultDictionaryDir().getPath());
@@ -329,9 +189,7 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
     @Override
     public void restoreDefaults() {
         panel.autoSpellcheckCheckBox.setSelected(true);
-        panel.dictionaryUrlTextField.setText(DICT_URL);
         directoryChanged();
-        listSelectionChanged();
         File dictDir = SpellCheckerManager.getDefaultDictionaryDir();
         panel.directoryTextField.setText(dictDir.getPath());
         // Create dict dir if it doesn't exist, so user can install immediately
@@ -346,8 +204,6 @@ public class SpellcheckerConfigurationController extends BasePreferencesControll
         Preferences.setPreference(Preferences.ALLOW_AUTO_SPELLCHECKING, isNeedToSpell);
         Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 panel.directoryTextField.getText());
-        Preferences.setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL,
-                panel.dictionaryUrlTextField.getText());
         if (isNeedToSpell && Core.getProject().isProjectLoaded()) {
             ISpellChecker sc = Core.getSpellChecker();
             sc.destroy();

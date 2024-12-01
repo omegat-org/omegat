@@ -250,6 +250,7 @@ public class DictionaryManager {
      * @param langCode
      *            : the language code (xx_YY)
      */
+    @Deprecated
     public void installRemoteDictionary(String langCode) throws IOException {
         String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode + ".zip";
 

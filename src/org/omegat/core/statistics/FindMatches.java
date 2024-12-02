@@ -352,7 +352,7 @@ public class FindMatches {
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
                 processEntry(null, entry, first + " " + OStrings.getString("MATCHES_SUBSEGMENTS_HINT"), 
-                    NearString.MATCH_SOURCE.TM, false, maxPenalty);
+                    NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty);
             }
         }
         // fill similarity data only for a result

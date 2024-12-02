@@ -49,7 +49,26 @@ import org.omegat.util.TMXProp;
  */
 public class NearString {
     public enum MATCH_SOURCE {
-        MEMORY, TM, FILES
+        MEMORY(0x1F58A, '\u27BF'), 
+        TM(0x1F9A3,'\u270E'), 
+        FILES(0x1F4BF,'\u2707'), 
+        SUBSEGMENTS(0x1F52A,'\u2702');
+        
+        private String emoji;
+        private char dingbat;
+        
+        public String emoji() {
+            return this.emoji;            
+        }
+        
+        public char dingbat() {
+            return this.dingbat;
+        }
+        
+        MATCH_SOURCE(int emoji, char dingbat) {
+            this.emoji = new String(Character.toChars(emoji));
+            this.dingbat = dingbat;
+        }
     };
 
     public enum SORT_KEY {

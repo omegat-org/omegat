@@ -72,7 +72,11 @@ public final class EditorUtils {
      *         when there is no line found in the text component.
      */
     public static int getWordStart(JTextComponent c, int offs) throws BadLocationException {
-        int result = getWordBoundary(c, offs, false);
+        return getWordStart(c, offs, c.getLocale());
+    }
+
+    public static int getWordStart(JTextComponent c, int offs, Locale locale) throws BadLocationException {
+        int result = getWordBoundary(c, offs, locale, false);
         char ch = c.getDocument().getText(result, 1).charAt(0);
         if (isDirectionChar(ch)) {
             result++;
@@ -91,7 +95,11 @@ public final class EditorUtils {
      *         when there is no line found in the text component.
      */
     public static int getWordEnd(JTextComponent c, int offs) throws BadLocationException {
-        int result = getWordBoundary(c, offs, true);
+        return getWordEnd(c, offs, c.getLocale());
+    }
+
+    public static int getWordEnd(JTextComponent c, int offs, Locale locale) throws BadLocationException {
+        int result = getWordBoundary(c, offs, locale, true);
         if (result > 0) {
             char ch = c.getDocument().getText(result - 1, 1).charAt(0);
             if (isDirectionChar(ch)) {
@@ -101,7 +109,7 @@ public final class EditorUtils {
         return result;
     }
 
-    private static int getWordBoundary(JTextComponent c, int offs, boolean end) throws BadLocationException {
+    private static int getWordBoundary(JTextComponent c, int offs, Locale locale, boolean end) throws BadLocationException {
         int result = offs;
         Element line = Utilities.getParagraphElement(c, offs);
         if (line == null) {
@@ -112,18 +120,6 @@ public final class EditorUtils {
         int lineEnd = Math.min(line.getEndOffset(), doc.getLength());
         if  (lineEnd - lineStart > 0) {
             String lineString = doc.getText(lineStart, lineEnd - lineStart);
-            // Detection of target string locale.
-            // A default is UI component locale, and when OmegaT project
-            // is loaded, it uses a source or a target language as a
-            // processing locale.
-            Locale locale = c.getLocale();
-            if (c instanceof EditorTextArea3 && Core.getProject().isProjectLoaded()) {
-                if (((EditorTextArea3) c).isInActiveTranslation(offs)) {
-                    locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
-                } else {
-                    locale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
-                }
-            }
             result = lineStart + getWordBoundary(locale, lineString, offs - lineStart, end);
         }
         return result;

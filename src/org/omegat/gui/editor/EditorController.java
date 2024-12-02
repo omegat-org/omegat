@@ -704,9 +704,12 @@ public class EditorController implements IEditor {
 
         doc.setDocumentFilter(new DocumentFilter3());
 
-        // add locate for target language to editor
+        // add locales to editor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         editor.setLocale(targetLocale);
+        editor.setTargetLocale(targetLocale);
+        Locale sourceLocale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        editor.setSourceLocale(sourceLocale);
 
         editor.setDocument(doc);
 
@@ -1639,8 +1642,9 @@ public class EditorController implements IEditor {
         try {
             // no selection? make it the current word
             if (start == end) {
-                start = EditorUtils.getWordStart(editor, start);
-                end = EditorUtils.getWordEnd(editor, end);
+                Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+                start = EditorUtils.getWordStart(editor, start, locale);
+                end = EditorUtils.getWordEnd(editor, end, locale);
 
                 // adjust the bound again
                 if (start < translationStart && end <= translationEnd) {

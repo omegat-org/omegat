@@ -60,14 +60,14 @@ public class EditorUtilsTest {
     public static class EditorUtilsFirstStepsTest extends TestCoreGUI {
 
         @Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+        public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
 
         @Test
         public void testEditorUtilsGetWordFirstSteps() throws BadLocationException {
             int offs = 518;
             JTextComponent editPane = window.panel("First Steps").textBox("IntroPane").target();
-            int posStart = EditorUtils.getWordStart(editPane, offs);
-            int posEnd = EditorUtils.getWordEnd(editPane, offs);
+            int posStart = EditorUtils.getWordStart(editPane, offs, Locale.ENGLISH);
+            int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.ENGLISH);
             String word = editPane.getText(posStart, posEnd - posStart);
             assertEquals("translation", word);
             assertEquals(508, posStart);
@@ -107,14 +107,14 @@ public class EditorUtilsTest {
             final JTextComponent editPane = window.panel("Editor - source.txt").textBox().target();
             // select word from a source text
             int offs = 102;
-            int posStart = EditorUtils.getWordStart(editPane, offs);
-            int posEnd = EditorUtils.getWordEnd(editPane, offs);
+            int posStart = EditorUtils.getWordStart(editPane, offs, Locale.SIMPLIFIED_CHINESE);
+            int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.SIMPLIFIED_CHINESE);
             String word = editPane.getText(posStart, posEnd - posStart);
             assertEquals("太平寺", word);
             // select word from a translation
             offs = 109;
-            posStart = EditorUtils.getWordStart(editPane, offs);
-            posEnd = EditorUtils.getWordEnd(editPane, offs);
+            posStart = EditorUtils.getWordStart(editPane, offs, Locale.JAPANESE);
+            posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.JAPANESE);
             word = editPane.getText(posStart, posEnd - posStart);
             assertEquals("太平寺", word);
         }

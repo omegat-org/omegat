@@ -110,7 +110,7 @@ public class EditorUtilsTest {
             int posStart = EditorUtils.getWordStart(editPane, offs);
             int posEnd = EditorUtils.getWordEnd(editPane, offs);
             String word = editPane.getText(posStart, posEnd - posStart);
-            assertEquals("太平寺中的文笔塔", word);
+            assertEquals("太平寺", word);
             // select word from a translation
             offs = 109;
             posStart = EditorUtils.getWordStart(editPane, offs);

@@ -27,7 +27,6 @@
 
 package org.omegat.gui.editor;
 
-import java.text.BreakIterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,6 +35,8 @@ import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
+
+import com.ibm.icu.text.BreakIterator;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
@@ -111,29 +112,35 @@ public final class EditorUtils {
         int lineEnd = Math.min(line.getEndOffset(), doc.getLength());
         if  (lineEnd - lineStart > 0) {
             String lineString = doc.getText(lineStart, lineEnd - lineStart);
+            // Detection of target string locale.
+            // A default is UI component locale, and when OmegaT project
+            // is loaded, it uses a source or a target language as a
+            // processing locale.
             Locale locale = c.getLocale();
             if (c instanceof EditorTextArea3 && Core.getProject().isProjectLoaded()) {
                 if (((EditorTextArea3) c).isInActiveTranslation(offs)) {
                     locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
                 } else {
-                    locale =  Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+                    locale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
                 }
             }
-            BreakIterator words = BreakIterator.getWordInstance(locale);
-            words.setText(lineString);
-            int wordPosition = offs - lineStart;
-            if (wordPosition >= words.last()) {
-                wordPosition = words.last() - 1;
-            }
-            if (end) {
-                result = lineStart + words.following(wordPosition);
-            } else {
-                words.following(wordPosition);
-                result = lineStart + words.previous();
-            }
+            result = lineStart + getWordBoundary(locale, lineString, offs - lineStart, end);
         }
         return result;
     }
+
+    static int getWordBoundary(Locale locale, String lineString, int wordPosition, boolean end) {
+        BreakIterator words = com.ibm.icu.text.BreakIterator.getWordInstance(locale);
+        words.setText(lineString);
+        if (wordPosition >= words.last()) {
+            wordPosition = words.last() - 1;
+        }
+        if (end) {
+            return words.following(wordPosition);
+        }
+        words.following(wordPosition);
+        return words.previous();
+}
 
     /**
      * Check if char is direction char(u202A,u202B,u202C).

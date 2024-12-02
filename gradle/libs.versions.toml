@@ -65,7 +65,7 @@ commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.r
 commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "commons_text"}
 commons-validator = {group = "commons-validator", name = "commons-validator", version.ref = "commons_validator"}
 jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
-icj4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
+icu4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
 languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}

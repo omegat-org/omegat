@@ -44,9 +44,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -110,10 +108,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     private static final Logger LOGGER = Logger.getLogger(BaseMainWindowMenu.class.getName());
 
-    public static final String TOOLS_MENU = "tools_menu";
-    public static final String HELP_MENU = "help_menu";
-    public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
-
     /** MainWindow instance. */
     protected final IMainWindow mainWindow;
 
@@ -122,8 +116,6 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
     /** MainWindow menu handler instance. */
     protected final BaseMainWindowMenuHandler mainWindowMenuHandler;
-
-    private final Map<MenuExtender.MenuKey, JMenu> menus = new EnumMap<>(MenuExtender.MenuKey.class);
 
     public BaseMainWindowMenu(final IMainWindow mainWindow,
                               final BaseMainWindowMenuHandler mainWindowMenuHandler) {
@@ -201,20 +193,18 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     abstract void createMenuBar();
 
     protected void createComponents() {
-        projectMenu = createMenu("TF_MENU_FILE", MenuExtender.MenuKey.PROJECT);
-        editMenu = createMenu("TF_MENU_EDIT", MenuExtender.MenuKey.EDIT);
-        gotoMenu = createMenu("MW_GOTOMENU", MenuExtender.MenuKey.GOTO);
-        viewMenu = createMenu("MW_VIEW_MENU", MenuExtender.MenuKey.VIEW);
-        toolsMenu = createMenu("TF_MENU_TOOLS", MenuExtender.MenuKey.TOOLS);
-        toolsMenu.setName(TOOLS_MENU);
-        optionsMenu = createMenu("MW_OPTIONSMENU", MenuExtender.MenuKey.OPTIONS);
-        helpMenu = createMenu("TF_MENU_HELP", MenuExtender.MenuKey.HELP);
-        helpMenu.setName(HELP_MENU);
+        projectMenu = createMenu("TF_MENU_FILE", PROJECT_MENU);
+        editMenu = createMenu("TF_MENU_EDIT", EDIT_MENU);
+        gotoMenu = createMenu("MW_GOTOMENU", GOTO_MENU);
+        viewMenu = createMenu("MW_VIEW_MENU", VIEW_MENU);
+        toolsMenu = createMenu("TF_MENU_TOOLS", TOOLS_MENU);
+        optionsMenu = createMenu("MW_OPTIONSMENU", OPTIONS_MENU);
+        helpMenu = createMenu("TF_MENU_HELP", HELP_MENU);
 
         projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE");
         projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE");
         projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN");
-        projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT");
+        projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT", PROJECT_OPEN_RECENT_SUBMENU);
         projectClearRecentMenuItem = createMenuItem("TF_MENU_FILE_CLEAR_RECENT");
 
         projectReloadMenuItem = createMenuItem("TF_MENU_PROJECT_RELOAD");
@@ -229,7 +219,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT");
         viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN");
 
-        projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES");
+        projectAccessProjectFilesMenu = createMenu("TF_MENU_FILE_ACCESS_PROJECT_FILES",
+                PROJECT_ACCESS_PROJECT_FILES_SUBMENU);
         projectAccessRootMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_ROOT");
         projectAccessDictionaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_DICTIONARY");
         projectAccessGlossaryMenuItem = createMenuItem("TF_MENU_FILE_ACCESS_GLOSSARY");
@@ -274,8 +265,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND");
         editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE");
         editSearchDictionaryMenuItem = createMenuItem("TF_MENU_EDIT_SEARCH_DICTIONARY");
-        switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE");
-        selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE");
+        switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE", SWITCH_CASE_SUBMENU);
+        selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE", SELECT_FUZZY_SUBMENU);
 
         editSelectFuzzyPrevMenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_PREV");
         editSelectFuzzyNextMenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_NEXT");
@@ -285,7 +276,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         editSelectFuzzy4MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_4");
         editSelectFuzzy5MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_5");
 
-        insertCharsSubMenu = createMenu("TF_MENU_EDIT_INSERT_CHARS");
+        insertCharsSubMenu = createMenu("TF_MENU_EDIT_INSERT_CHARS", INSERT_CHARS_SUBMENU);
         insertCharsLRM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRM");
         insertCharsRLM = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_RLM");
         insertCharsLRE = createMenuItem("TF_MENU_EDIT_INSERT_CHARS_LRE");
@@ -313,7 +304,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE");
         gotoNextUniqueMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_UNIQUE");
         gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE");
-        gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU");
+        gotoXEntrySubmenu = createMenu("TF_MENU_GOTO_X_SUBMENU", GOTO_X_ENTRY_SUBMENU);
 
         gotoNextXAutoMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_XAUTO");
         gotoPrevXAutoMenuItem = createMenuItem("TF_MENU_GOTO_PREV_XAUTO");
@@ -344,7 +335,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         viewMarkGlossaryMatchesCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_GLOSSARY_MARK");
         viewMarkLanguageCheckerCheckBoxMenuItem = createCheckboxMenuItem("LT_OPTIONS_MENU_ENABLED");
         viewMarkFontFallbackCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_FONT_FALLBACK");
-        viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO");
+        viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO", VIEW_MODIFICATION_INFO_SUBMENU);
 
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(
@@ -392,18 +383,19 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
                 "TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE");
         optionsPreferencesMenuItem = createMenuItem("MW_OPTIONSMENU_PREFERENCES");
 
-        optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE");
+        optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE",
+                OPTIONS_MACHINE_TRANSLATE_SUBMENU);
 
         optionsMTAutoFetchCheckboxMenuItem = createCheckboxMenuItem("MT_AUTO_FETCH");
-        optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY");
+        optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY", OPTIONS_GLOSSARY_SUBMENU);
         optionsGlossaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem(
                 "TF_OPTIONSMENU_GLOSSARY_FUZZY");
 
-        optionsDictionaryMenu = createMenu("TF_OPTIONSMENU_DICTIONARY");
+        optionsDictionaryMenu = createMenu("TF_OPTIONSMENU_DICTIONARY", OPTIONS_DICTIONARY_SUBMENU);
         optionsDictionaryFuzzyMatchingCheckBoxMenuItem = createCheckboxMenuItem(
                 "TF_OPTIONSMENU_DICTIONARY_FUZZY");
 
-        optionsAutoCompleteMenu = createMenu("MW_OPTIONSMENU_AUTOCOMPLETE");
+        optionsAutoCompleteMenu = createMenu("MW_OPTIONSMENU_AUTOCOMPLETE", OPTIONS_AUTOCOMPLETE_SUBMENU);
         // add any autocomplete view configuration menu items below
         optionsAutoCompleteShowAutomaticallyItem = createCheckboxMenuItem(
                 "MW_OPTIONSMENU_AUTOCOMPLETE_SHOW_AUTOMATICALLY");
@@ -732,23 +724,25 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         }
     }
 
-    /**
-     * Create menu instance and set title.
-     *
-     * @param titleKey
-     *            title name key in resource bundle
-     * @return menu instance
-     */
     protected JMenu createMenu(String titleKey) {
         return createMenu(titleKey, null);
     }
 
-    protected JMenu createMenu(String titleKey, MenuExtender.MenuKey menuKey) {
+    /**
+     * Create menu instance and set title.
+     *
+     * @param titleKey
+     *            title name key in the resource bundle
+     * @param name
+     *            component name
+     * @return menu instance
+     */
+    protected JMenu createMenu(String titleKey, String name) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addMenuListener(this);
-        if (menuKey != null) {
-            menus.put(menuKey, result);
+        if (name != null) {
+            result.setName(name);
         }
         return result;
     }
@@ -989,7 +983,24 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     }
 
     public JMenu getMenu(MenuExtender.MenuKey marker) {
-        return menus.get(marker);
+        switch (marker) {
+        case PROJECT:
+            return projectMenu;
+        case EDIT:
+            return editMenu;
+        case VIEW:
+            return viewMenu;
+        case GOTO:
+            return gotoMenu;
+        case TOOLS:
+            return toolsMenu;
+        case OPTIONS:
+            return optionsMenu;
+        case HELP:
+            return helpMenu;
+        default:
+            return null;
+        }
     }
 
     JMenuItem cycleSwitchCaseMenuItem;
@@ -1130,4 +1141,24 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
     JCheckBoxMenuItem viewMarkUntranslatedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkParagraphStartCheckBoxMenuItem;
     JMenu viewMenu;
+
+    public static final String PROJECT_MENU = "project_menu";
+    public static final String EDIT_MENU = "edit_menu";
+    public static final String GOTO_MENU = "goto_menu";
+    public static final String VIEW_MENU = "view_menu";
+    public static final String TOOLS_MENU = "tools_menu";
+    public static final String OPTIONS_MENU = "options_menu";
+    public static final String HELP_MENU = "help_menu";
+    public static final String PROJECT_OPEN_RECENT_SUBMENU = "project_open_recent_submenu";
+    public static final String PROJECT_ACCESS_PROJECT_FILES_SUBMENU = "project_access_project_files_submenu";
+    public static final String SELECT_FUZZY_SUBMENU = "select_fuzzy_submenu";
+    public static final String INSERT_CHARS_SUBMENU = "insert_chars_submenu";
+    public static final String SWITCH_CASE_SUBMENU = "switch_case_submenu";
+    public static final String GOTO_X_ENTRY_SUBMENU = "goto_x_entry_submenu";
+    public static final String VIEW_MODIFICATION_INFO_SUBMENU = "view_modification_info_submenu";
+    public static final String OPTIONS_MACHINE_TRANSLATE_SUBMENU = "options_machine_translate_submenu";
+    public static final String OPTIONS_DICTIONARY_SUBMENU = "options_dictionary_submenu";
+    public static final String OPTIONS_GLOSSARY_SUBMENU = "options_glossary_submenu";
+    public static final String OPTIONS_AUTOCOMPLETE_SUBMENU = "options_autocomplete_submenu";
+    public static final String HELP_ABOUT_MENUITEM = "help_about_menuitem";
 }

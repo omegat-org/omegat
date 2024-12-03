@@ -31,8 +31,12 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
+
+import com.ibm.icu.text.BreakIterator;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
@@ -61,15 +65,30 @@ public final class EditorUtils {
      * Determines the start of a word for the given model location. This method
      * skips direction char.
      *
-     * TODO: change to use document's locale
-     *
-     * @param c
-     * @param offs
-     * @return
+     * @param c TextComponent of the editor area.
+     * @param offs offset of the text.
+     * @return position of word start on the text component.
      * @throws BadLocationException
+     *         when there is no line found in the text component.
      */
+    @Deprecated
     public static int getWordStart(JTextComponent c, int offs) throws BadLocationException {
-        int result = Utilities.getWordStart(c, offs);
+        return getWordStart(c, offs, c.getLocale());
+    }
+
+    /**
+     * Determines the start of a word for the given model location. This method
+     * skips direction char.
+     *
+     * @param c TextComponent of the editor area.
+     * @param offs offset of the text.
+     * @param locale locale of the text.
+     * @return position of word start on the text component.
+     * @throws BadLocationException
+     *         when there is no line found in the text component.
+     */
+    public static int getWordStart(JTextComponent c, int offs, Locale locale) throws BadLocationException {
+        int result = getWordBoundary(c, offs, locale, false);
         char ch = c.getDocument().getText(result, 1).charAt(0);
         if (isDirectionChar(ch)) {
             result++;
@@ -81,15 +100,30 @@ public final class EditorUtils {
      * Determines the end of a word for the given model location. This method
      * skips direction char.
      *
-     * TODO: change to use document's locale
-     *
-     * @param c
-     * @param offs
-     * @return
+     * @param c TextComponent of the editor area.
+     * @param offs offset of the text.
+     * @return position of the word end on the text component.
      * @throws BadLocationException
+     *         when there is no line found in the text component.
      */
+    @Deprecated
     public static int getWordEnd(JTextComponent c, int offs) throws BadLocationException {
-        int result = Utilities.getWordEnd(c, offs);
+        return getWordEnd(c, offs, c.getLocale());
+    }
+
+    /**
+     * Determines the end of a word for the given model location. This method
+     * skips direction char.
+     *
+     * @param c TextComponent of the editor area.
+     * @param offs offset of the text.
+     * @param locale locale of the text.
+     * @return position of the word end on the text component.
+     * @throws BadLocationException
+     *         when there is no line found in the text component.
+     */
+    public static int getWordEnd(JTextComponent c, int offs, Locale locale) throws BadLocationException {
+        int result = getWordBoundary(c, offs, locale, true);
         if (result > 0) {
             char ch = c.getDocument().getText(result - 1, 1).charAt(0);
             if (isDirectionChar(ch)) {
@@ -98,6 +132,46 @@ public final class EditorUtils {
         }
         return result;
     }
+
+    private static int getWordBoundary(JTextComponent c, int offs, Locale locale, boolean end) throws BadLocationException {
+        int result = offs;
+        Element line = Utilities.getParagraphElement(c, offs);
+        if (line == null) {
+            throw new BadLocationException("No word at " + offs, offs);
+        }
+        int lineStart = line.getStartOffset();
+        Document doc = c.getDocument();
+        int lineEnd = Math.min(line.getEndOffset(), doc.getLength());
+        if  (lineEnd - lineStart > 0) {
+            String lineString = doc.getText(lineStart, lineEnd - lineStart);
+            result = lineStart + getWordBoundary(locale, lineString, offs - lineStart, end);
+        }
+        return result;
+    }
+
+    /**
+     * Get word boundary.
+     * <p>
+     * When the end argument is true, return a word end.
+     * Otherwise, return a start of word.
+     * @param locale locale of the line string.
+     * @param lineString a string of the line.
+     * @param wordPosition target position of the line.
+     * @param end return end of word, otherwise start of word.
+     * @return index of the word boundary.
+     */
+    static int getWordBoundary(Locale locale, String lineString, int wordPosition, boolean end) {
+        BreakIterator words = com.ibm.icu.text.BreakIterator.getWordInstance(locale);
+        words.setText(lineString);
+        if (wordPosition >= words.last()) {
+            wordPosition = words.last() - 1;
+        }
+        if (end) {
+            return words.following(wordPosition);
+        }
+        words.following(wordPosition);
+        return words.previous();
+}
 
     /**
      * Check if char is direction char(u202A,u202B,u202C).
@@ -420,7 +494,7 @@ public final class EditorUtils {
         StringBuilder s = new StringBuilder(text.length() * 12 / 10);
         for (Tag t : tags) {
             if (pos < t.pos) {
-                s.append(text.substring(pos, t.pos));
+                s.append(text, pos, t.pos);
             }
             s.append(SegmentBuilder.BIDI_RLM_CHAR);
             s.append(SegmentBuilder.BIDI_LRM_CHAR);
@@ -437,11 +511,8 @@ public final class EditorUtils {
 
     public static boolean hasBidiAroundTag(String text, String tag, int pos) {
         try {
-            boolean has = true;
-            if (text.charAt(pos - 1) != SegmentBuilder.BIDI_LRM_CHAR
-                    || text.charAt(pos - 2) != SegmentBuilder.BIDI_RLM_CHAR) {
-                has = false;
-            }
+            boolean has = text.charAt(pos - 1) == SegmentBuilder.BIDI_LRM_CHAR
+                    && text.charAt(pos - 2) == SegmentBuilder.BIDI_RLM_CHAR;
             if (text.charAt(pos + tag.length()) != SegmentBuilder.BIDI_LRM_CHAR
                     || text.charAt(pos + tag.length() + 1) != SegmentBuilder.BIDI_RLM_CHAR) {
                 has = false;

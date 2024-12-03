@@ -29,14 +29,14 @@ dependencies {
             exclude module: 'commons-io'
         }
         compileOnly(libs.commons.lang3)
-        constraints {
-            implementation(libs.icj4j)
-        }
+        runtimeOnly(libs.icu4j)
+
         // jackson-databind-yaml is dependency of languagetool-core
         compileOnly(libs.jackson.yaml)
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    testRuntimeOnly(libs.icu4j)
 }
 
 jar {

@@ -25,7 +25,7 @@ dependencies {
             exclude module: 'icu4j'
         }
         implementation(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
-        implementation(libs.icj4j)
+        compileOnly(libs.icu4j)
     }
 
     testImplementation(libs.junit4)
@@ -43,7 +43,7 @@ dependencies {
         exclude module: 'icu4j'
     }
     testRuntimeOnly(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
-    testRuntimeOnly(libs.icj4j)
+    testRuntimeOnly(libs.icu4j)
 
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))

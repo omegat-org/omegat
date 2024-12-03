@@ -42,6 +42,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
@@ -141,6 +142,9 @@ public class EditorTextArea3 extends JEditorPane {
      */
     protected boolean overtypeMode = false;
 
+    private Locale targetLocale;
+    private Locale sourceLocale;
+
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
         setEditorKit(new StyledEditorKit() {
@@ -165,10 +169,16 @@ public class EditorTextArea3 extends JEditorPane {
         c.setBlinkRate(getCaret().getBlinkRate());
         setCaret(c);
 
+        sourceLocale = getLocale();
+        targetLocale = getLocale();
+
         addCaretListener(e -> {
             try {
-                int start = EditorUtils.getWordStart(EditorTextArea3.this, e.getMark());
-                int end = EditorUtils.getWordEnd(EditorTextArea3.this, e.getMark());
+                // Detection of target string locale.
+                // It uses a source or a target language as a processing locale.
+                Locale locale = isInActiveTranslation(e.getMark()) ? targetLocale : sourceLocale;
+                int start = EditorUtils.getWordStart(EditorTextArea3.this, e.getMark(), locale);
+                int end = EditorUtils.getWordEnd(EditorTextArea3.this, e.getMark(), locale);
                 if (end - start <= 0) {
                     // word not defined
                     return;
@@ -198,6 +208,14 @@ public class EditorTextArea3 extends JEditorPane {
         if (doc != null) {
             doc.setFont(font);
         }
+    }
+
+    void setTargetLocale(Locale targetLocale) {
+        this.targetLocale = targetLocale;
+    }
+
+    void setSourceLocale(Locale sourceLocale) {
+        this.sourceLocale = sourceLocale;
     }
 
     /**

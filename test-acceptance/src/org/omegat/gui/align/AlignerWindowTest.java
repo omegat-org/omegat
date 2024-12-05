@@ -145,6 +145,8 @@ public class AlignerWindowTest extends TestCoreGUI {
         //
         aligner.menuItem("align_menu_file").click();
         aligner.menuItem("align_menu_close_item").click();
+        //
+        closeProject();
      }
 
 }

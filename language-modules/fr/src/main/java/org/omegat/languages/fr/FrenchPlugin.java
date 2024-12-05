@@ -25,17 +25,24 @@
 
 package org.omegat.languages.fr;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class FrenchPlugin {
 
     private static final String FRENCH = "org.languagetool.language.French";
+    private static final String DICTIONARY_CLASS = "org.omegat.languages.fr.FrenchHunspellDictionary";
 
     private FrenchPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("fr", FRENCH);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("fr_FR", SpellCheckDictionaryType.HUNSPELL,
+                DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("fr", SpellCheckDictionaryType.HUNSPELL,
+                DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {

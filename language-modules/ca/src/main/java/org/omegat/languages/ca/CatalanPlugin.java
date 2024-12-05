@@ -25,17 +25,22 @@
 
 package org.omegat.languages.ca;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class CatalanPlugin {
 
     private static final String CATALAN = "org.languagetool.language.Catalan";
+    private static final String DICTIONARY = "org.omegat.languages.ca.CatalanHunspellDictionary";
 
     private CatalanPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ca", CATALAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ca", SpellCheckDictionaryType.HUNSPELL,
+                DICTIONARY);
     }
 
     public static void unloadPlugins() {

@@ -238,7 +238,7 @@
 	<varlistentry id="configuration.folder.extra.contents.spelling">
 	  <term id="configuration.folder.extra.contents.spelling.title">spelling/</term>
 	  <listitem>
-		<para>This folder contains your spelling dictionaries. See the <link
+		<para>This folder contains your custom spelling dictionaries. See the <link
 		linkend="dialog.preferences.spellchecker"
 		endterm="dialog.preferences.spellchecker.title"/> preferences for
 		details.</para>

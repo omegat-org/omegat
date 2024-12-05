@@ -25,17 +25,24 @@
 
 package org.omegat.languages.pl;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class PolishPlugin {
 
     private static final String POLISH = "org.languagetool.language.Polish";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.pl.PolishMorfologikDictionary";
 
     private PolishPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("pl-PL", POLISH);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("pl_PL",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("pl",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

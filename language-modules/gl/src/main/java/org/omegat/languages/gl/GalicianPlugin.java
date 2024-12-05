@@ -25,17 +25,22 @@
 
 package org.omegat.languages.gl;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class GalicianPlugin {
 
     private static final String GALICIAN = "org.languagetool.language.Galician";
+    private static final String DICTIONARY_CLASS = "org.omegat.languages.gl.GalicianHunspellDictionary";
 
     private GalicianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("gl-ES", GALICIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("gl",
+                SpellCheckDictionaryType.HUNSPELL, DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {

@@ -25,12 +25,15 @@
 
 package org.omegat.languages.es;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class SpanishPlugin {
 
     private static final String SPANISH = "org.languagetool.language.Spanish";
     private static final String SPANISH_VOSEO = "org.languagetool.language.SpanishVoseo";
+    private static final String DICTIONARY_CLASS = "org.omegat.languages.es.SpanishHunspellDictionary";
 
     private SpanishPlugin() {
     }
@@ -38,6 +41,12 @@ public final class SpanishPlugin {
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("es", SPANISH);
         LanguageManager.registerLTLanguage("es-AR", SPANISH_VOSEO);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("es",
+                SpellCheckDictionaryType.HUNSPELL, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("es_ES",
+                SpellCheckDictionaryType.HUNSPELL, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("es_AR",
+                SpellCheckDictionaryType.HUNSPELL, DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {

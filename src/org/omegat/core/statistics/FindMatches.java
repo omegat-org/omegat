@@ -38,7 +38,6 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMFactory;
 import org.omegat.core.data.ExternalTMX;
@@ -145,7 +144,7 @@ public class FindMatches {
      */
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
-        this(project, Core.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true,
+        this(project, project.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true,
                 Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
                         OConsts.FUZZY_MATCH_THRESHOLD));
     }

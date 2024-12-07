@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -283,11 +284,11 @@ public interface IProject {
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
     }
 
-    public interface DefaultTranslationsIterator {
+    interface DefaultTranslationsIterator {
         void iterate(String source, TMXEntry trans);
     }
 
-    public interface MultipleTranslationsIterator {
+    interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
     }
 
@@ -341,4 +342,16 @@ public interface IProject {
             return previous;
         }
     }
+
+    /**
+     * Set new segmenter for the current project.
+     * @param segmenter new segmenter.
+     */
+    void setSegmenter(Segmenter segmenter);
+
+    /**
+     * Get segmenter for the current project.
+     * @return segmenter currently used.
+     */
+    Segmenter getSegmenter();
 }

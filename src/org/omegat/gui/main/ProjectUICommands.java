@@ -61,7 +61,6 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.IRemoteRepository2;
@@ -835,7 +834,6 @@ public final class ProjectUICommands {
                 // Restore global prefs in case project had project-specific
                 // ones
                 Core.setFilterMaster(new FilterMaster(Preferences.getFilters()));
-                Core.setSegmenter(new Segmenter(Preferences.getSRX()));
             }
         }.execute();
     }

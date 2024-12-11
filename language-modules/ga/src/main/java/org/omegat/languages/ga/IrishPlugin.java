@@ -25,17 +25,22 @@
 
 package org.omegat.languages.ga;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class IrishPlugin {
 
     private static final String IRISH = "org.languagetool.language.Irish";
+    private static final String DICTIONARY_CLASS = "org.omegat.languages.ga.IrishHunspellDictionary";
 
     private IrishPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ga-IE", IRISH);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ga", SpellCheckDictionaryType.HUNSPELL,
+                DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {

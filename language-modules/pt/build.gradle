@@ -22,11 +22,19 @@ dependencies {
         implementation(libs.languagetool.pt) {
             exclude module: 'languagetool-core'
         }
+        compileOnly(libs.lucene.analyzers.common)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    testImplementation(libs.languagetool.core)
+    testImplementation project(":spellchecker:hunspell")
+}
+
+test {
+    dependsOn tasks.jar
+    dependsOn project(":spellchecker:hunspell").tasks.jar
 }
 
 jar {

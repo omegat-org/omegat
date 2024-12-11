@@ -25,17 +25,24 @@
 
 package org.omegat.languages.el;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class GreekPlugin {
 
     private static final String GREEK = "org.languagetool.language.Greek";
+    private static final String DICTIONARY_CLASS = "org.omegat.languages.el.GreekMorfologikDictionary";
 
     private GreekPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("el-GR", GREEK);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("el",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("el_GR",
+                SpellCheckDictionaryType.MORFOLOGIK, DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {

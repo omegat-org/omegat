@@ -374,7 +374,6 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
 
-    testImplementation(project(":language-modules"))
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
     }
@@ -1593,6 +1592,8 @@ test {
         systemProperty 'java.awt.headless', 'true'
     }
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    // some test case depends on modules from subproject
+    dependsOn subprojects.collect { it.tasks.named('jar') }
 }
 
 tasks.register('testIntegration', JavaExec) {
@@ -1667,6 +1668,20 @@ def isCommandAvailable(command) {
     }.exitValue == 0
 }
 
+def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
+    outputs.upToDateWhen { return false } // always run
+    doLast {
+        def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
+        if (!display.isEmpty()) {
+            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
+            if (pid != null) {
+                stopX(pid)
+                ext.xfvgPid = null
+            }
+        }
+    }
+}
+
 tasks.register('testAcceptance', Test) {
     onlyIf {
         isCommandAvailable('Xvfb') || project.hasProperty("acceptanceTestLive")
@@ -1681,14 +1696,7 @@ tasks.register('testAcceptance', Test) {
             }
         }
     }
-    doLast {
-        if (!display.isEmpty()) {
-            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
-            if (pid != null) {
-                stopX(pid)
-            }
-        }
-    }
+    finalizedBy testAcceptanceFinally
 
     description = 'Run Acceptance GUI test'
     group = 'verification'

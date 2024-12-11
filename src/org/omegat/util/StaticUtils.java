@@ -101,12 +101,6 @@ public final class StaticUtils {
     public static final String TAG_REPLACEMENT = "\b";
 
     /**
-     * Contains the location of the directory containing the configuration
-     * files.
-     */
-    private static String configDir = null;
-
-    /**
      * Contains the location of the script dir containing the exported text
      * files.
      */
@@ -239,11 +233,7 @@ public final class StaticUtils {
      *         configuration files, including trailing path separator.
      */
     public static String getConfigDir() {
-        // if the configuration directory has already been determined, return it
-        if (configDir != null) {
-            return configDir;
-        }
-
+        String configDir;
         String cd = RuntimePreferences.getConfigDir();
         if (cd != null) {
             // use the forced specified directory
@@ -279,7 +269,6 @@ public final class StaticUtils {
                     appData = appDataFile.getAbsolutePath();
                 }
             }
-
             if (!StringUtil.isEmpty(appData)) {
                 // if a valid application data dir has been found,
                 // append an OmegaT subdir to it
@@ -336,6 +325,7 @@ public final class StaticUtils {
         }
 
         // we should have a correct, existing config dir now
+        RuntimePreferences.setConfigDir(configDir);
         return configDir;
     }
 

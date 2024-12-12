@@ -300,6 +300,7 @@ dependencies {
         }
         runtimeOnly(libs.language.detector)
         runtimeOnly(libs.dumont.hunspell)
+        implementation(libs.icu4j)
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
@@ -1702,7 +1703,7 @@ tasks.register('testAcceptance', Test) {
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-
+    dependsOn firstStepsEn
     dependsOn ':aligner:jar'
 }
 

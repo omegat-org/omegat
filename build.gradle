@@ -1667,32 +1667,25 @@ def isCommandAvailable(command) {
     }.exitValue == 0
 }
 
+project.ext.xvfbPid = ""
+
 def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
     outputs.upToDateWhen { return false } // always run
     doLast {
-        def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
-        if (!display.isEmpty()) {
-            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
-            if (pid != null) {
-                stopX(pid)
-                ext.xfvgPid = null
-            }
+        if (!project.ext.xvfbPid.isEmpty()) {
+            stopX(project.ext.xvfbPid)
+            project.ext.xfvbPid = ""
         }
     }
 }
 
 tasks.register('testAcceptance', Test) {
-    onlyIf {
-        isCommandAvailable('Xvfb') || project.hasProperty("acceptanceTestLive")
-    }
     def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
-    doFirst {
-        if (!display.isEmpty()) {
-            def lockFile = new File("/tmp/.X${display}-lock")
-            if (!lockFile.exists()) {
-                ext.xvfbPid = startX(display)
-                environment 'DISPLAY', ":${display}"
-            }
+    if (!display.isEmpty()) {
+        def lockFile = new File("/tmp/.X${display}-lock")
+        if (!lockFile.exists()) {
+            project.ext.xvfbPid = startX(display)
+            environment 'DISPLAY', ":${display}"
         }
     }
     finalizedBy testAcceptanceFinally

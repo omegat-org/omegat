@@ -374,7 +374,6 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
 
-    testImplementation(project(":language-modules"))
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
     }
@@ -1593,6 +1592,8 @@ test {
         systemProperty 'java.awt.headless', 'true'
     }
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    // some test case depends on modules from subproject
+    dependsOn subprojects.collect { it.tasks.named('jar') }
 }
 
 tasks.register('testIntegration', JavaExec) {
@@ -1667,28 +1668,28 @@ def isCommandAvailable(command) {
     }.exitValue == 0
 }
 
-tasks.register('testAcceptance', Test) {
-    onlyIf {
-        isCommandAvailable('Xvfb') || project.hasProperty("acceptanceTestLive")
-    }
-    def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
-    doFirst {
-        if (!display.isEmpty()) {
-            def lockFile = new File("/tmp/.X${display}-lock")
-            if (!lockFile.exists()) {
-                ext.xvfbPid = startX(display)
-                environment 'DISPLAY', ":${display}"
-            }
-        }
-    }
+project.ext.xvfbPid = ""
+
+def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
+    outputs.upToDateWhen { return false } // always run
     doLast {
-        if (!display.isEmpty()) {
-            def pid = ext.has('xvfbPid') ? ext.xvfbPid : null
-            if (pid != null) {
-                stopX(pid)
-            }
+        if (!project.ext.xvfbPid.isEmpty()) {
+            stopX(project.ext.xvfbPid)
+            project.ext.xfvbPid = ""
         }
     }
+}
+
+tasks.register('testAcceptance', Test) {
+    def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
+    if (!display.isEmpty()) {
+        def lockFile = new File("/tmp/.X${display}-lock")
+        if (!lockFile.exists()) {
+            project.ext.xvfbPid = startX(display)
+            environment 'DISPLAY', ":${display}"
+        }
+    }
+    finalizedBy testAcceptanceFinally
 
     description = 'Run Acceptance GUI test'
     group = 'verification'

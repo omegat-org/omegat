@@ -55,6 +55,11 @@
 
 * [How to write an OmegaT script](51.HowToWriteScript.md)
 
+## Spellchecker dictionary
+
+* [How to publish spell checker dictionary as plugin](52.HowToSpellCheckDictionary.md)
+
+
 ## Details of features
 
 * [Editor pane Key assigns](80.EditorKeys.md)

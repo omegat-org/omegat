@@ -21,11 +21,19 @@ dependencies {
         implementation(libs.languagetool.pl) {
             exclude module: 'languagetool-core'
         }
+        compileOnly(libs.morfologik.stemming)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    testImplementation(libs.languagetool.core)
+    testImplementation project(":spellchecker:morfologik")
+}
+
+test {
+    dependsOn tasks.jar
+    dependsOn project(":spellchecker:morfologik").tasks.jar
 }
 
 jar {

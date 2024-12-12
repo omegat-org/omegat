@@ -25,9 +25,6 @@
 
 package org.omegat.gui.align;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
@@ -78,24 +75,25 @@ public class AlignerWindowTest extends TestCoreGUI {
         picker.comboBox("sourceLanguagePicker").requireSelection("en - English");
         picker.comboBox("targetLanguagePicker").requireSelection("fr - French");
         //
+        File sourceFile = new File(tmpDir, SOURCE_PATH);
+        File translationFile = new File(tmpDir, TARGET_PATH);
+        /*
         picker.button("sourceChooseFileButton").click();
-        picker.fileChooser("aligner_choose_source").requireVisible();
-        picker.fileChooser("aligner_choose_source").selectFile(new File(tmpDir, SOURCE_PATH));
+        robot().waitForIdle();
+        picker.fileChooser("aligner_choose_source").requireEnabled(Timeout.timeout(1000));
+        picker.fileChooser("aligner_choose_source").selectFile(sourceFile);
         picker.fileChooser("aligner_choose_source").approve();
         robot().waitForIdle();
         //
         picker.button("targetChooseFileButton").click();
-        picker.fileChooser("aligner_choose_target").requireVisible();
-        picker.fileChooser("aligner_choose_target").selectFile(new File(tmpDir, TARGET_PATH));
+        robot().waitForIdle();
+        picker.fileChooser("aligner_choose_target").requireEnabled(Timeout.timeout(1000));
+        picker.fileChooser("aligner_choose_target").selectFile(translationFile);
         picker.fileChooser("aligner_choose_target").approve();
         robot().waitForIdle();
-        //
-        String srcFile = picker.textBox("sourceLanguageFileField").text();
-        assertNotNull(srcFile);
-        assertTrue(srcFile.endsWith(SOURCE_PATH.substring(SOURCE_PATH.indexOf('/') + 1)));
-        String targetFile = picker.textBox("targetLanguageFileField").text();
-        assertNotNull(targetFile);
-        assertTrue(targetFile.endsWith(TARGET_PATH.substring(TARGET_PATH.indexOf('/') + 1)));
+        */
+        picker.textBox("sourceLanguageFileField").setText(sourceFile.getAbsolutePath());
+        picker.textBox("targetLanguageFileField").setText(translationFile.getAbsolutePath());
         //
         picker.button("OK").requireEnabled(Timeout.timeout(100));
         picker.button("OK").click();

@@ -309,7 +309,9 @@ public class FindMatchesTest {
             List<SourceTextEntry> ste = new ArrayList<>();
             ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
                     1, null, null, new ArrayList<>()));
-            ste.add(new SourceTextEntry(new EntryKey("source.txt", "地力の搾取と浪費が現われる。(1)", null, "", "", null),
+            ste.add(new SourceTextEntry(new EntryKey("source.txt",
+                    "\u5730\u529B\u306E\u643E\u53D6\u3068\u6D6A\u8CBB\u304C\u73FE\u308F\u308C\u308B\u3002(1)",
+                    null, "", "", null),
                     1, null, null, Collections.emptyList()));
             ste.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
                     "For installation on Linux.",

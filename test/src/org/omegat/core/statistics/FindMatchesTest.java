@@ -27,6 +27,8 @@ package org.omegat.core.statistics;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.apache.commons.io.FileUtils;
@@ -54,14 +57,19 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.LuceneCJKTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
+import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
@@ -71,6 +79,8 @@ public class FindMatchesTest {
 
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
+    private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
+    private static final File TMX_MULTI = new File("test/data/tmx/test-multiple-entries.tmx");
     private static Path tmpDir;
 
     /**
@@ -96,7 +106,7 @@ public class FindMatchesTest {
         prop.setTargetLanguage("cnr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        IProject project = new TestProject(prop, TMX_EN_US_SR);
+        IProject project = new TestProject(prop, null, TMX_EN_US_SR, new LuceneEnglishTokenizer(), new DefaultTokenizer());
         Core.setProject(project);
         Core.setSegmenter(new Segmenter(new SRX()));
         IStopped iStopped = () -> false;
@@ -131,7 +141,8 @@ public class FindMatchesTest {
         prop.setTargetLanguage("cnr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        IProject project = new TestProject(prop, TMX_EN_US_GB_SR);
+        IProject project = new TestProject(prop, null, TMX_EN_US_GB_SR, new LuceneEnglishTokenizer(),
+                new DefaultTokenizer());
         Core.setProject(project);
         Core.setSegmenter(new Segmenter(new SRX()));
         IStopped iStopped = () -> false;
@@ -145,6 +156,63 @@ public class FindMatchesTest {
         assertEquals("ZZZ", result.get(2).translation); // sr
         assertEquals(3, result.size());
     }
+
+    @Test
+    public void testSearchBUGS1251() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("ja");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        IProject project = new FindMatchesTest.TestProject(prop, null, TMX_SEGMENT, new LuceneCJKTokenizer(),
+                new LuceneFrenchTokenizer());
+        Core.setProject(project);
+        SourceTextEntry ste = project.getAllEntries().get(1);
+        Language sourceLanguage = prop.getSourceLanguage();
+        String srcText = ste.getSrcText();
+        List<StringBuilder> spaces = new ArrayList<>();
+        List<Rule> brules = new ArrayList<>();
+        List<String> segments = segmenter.segment(sourceLanguage, srcText, spaces, brules);
+        assertEquals(2, segments.size());
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, true, true);
+        List<NearString> result = finder.search(srcText, false, false, iStopped);
+        assertEquals(srcText, result.get(0).source);
+        assertEquals(2, result.size());
+        // match normal
+        assertEquals("TM", result.get(0).comesFrom.name());
+        assertEquals(90, result.get(0).scores[0].score);
+        assertEquals("weird behavior", result.get(0).translation);
+        assertTrue(result.get(0).projs[0].contains("penalty-010"));
+        // match segmented, with penalty
+        assertEquals("TM_SUBSEG", result.get(1).comesFrom.name());
+        assertEquals(90, result.get(1).scores[0].score);
+        assertTrue(result.get(1).projs[0].contains("penalty-010"));
+    }
+
+    @Test
+    public void testSearchMulti() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("en-US");
+        prop.setTargetLanguage("co");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(true);
+        IProject project = new TestProject(prop, TMX_MULTI, null, new LuceneEnglishTokenizer(),
+                new DefaultTokenizer());
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, OConsts.MAX_NEAR_STRINGS, true, true, true);
+        List<NearString> result = finder.search("Other", false, false, iStopped);
+        assertEquals(3, result.size());
+        assertEquals("Other", result.get(0).source);
+        assertEquals("Altre", result.get(0).translation); // default
+        assertNull(result.get(0).key);
+        assertEquals("Altri", result.get(1).translation); // alternative
+        assertNotNull(result.get(1).key);
+        assertEquals("website/download.html", result.get(1).key.file);
+        assertEquals("Other", result.get(2).translation); // source translation
+    }
+
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -161,15 +229,74 @@ public class FindMatchesTest {
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
         Core.registerTokenizerClass(DefaultTokenizer.class);
         Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
+        Core.registerTokenizerClass(LuceneFrenchTokenizer.class);
+        Core.registerTokenizerClass(LuceneCJKTokenizer.class);
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
     }
 
     static class TestProject extends NotLoadedProject implements IProject {
-        private ProjectProperties prop;
-        private File testTmx;
+        private final ProjectProperties prop;
+        private final File externalTmx;
+        private final ITokenizer sourceTokenizer;
+        private final ITokenizer targetTokenizer;
+        private ProjectTMXMock projectTMX;
 
-        public TestProject(final ProjectProperties prop, final File testTmx) {
+        public TestProject(ProjectProperties prop, File testTmx, File externalTmx,
+                           ITokenizer sourceTokenizer, ITokenizer targetTokenizer) {
             this.prop = prop;
-            this.testTmx = testTmx;
+            this.externalTmx = externalTmx;
+            this.sourceTokenizer = sourceTokenizer;
+            this.targetTokenizer = targetTokenizer;
+            if (testTmx != null) {
+                try {
+                    projectTMX = new ProjectTMXMock(prop.getSourceLanguage(), prop.getTargetLanguage(),
+                            prop.isSentenceSegmentingEnabled(), testTmx, checkOrphanedCallback);
+                } catch (Exception e) {
+                    Log.log(e);
+                }
+            }
+        }
+
+        final ProjectTMX.CheckOrphanedCallback checkOrphanedCallback = new ProjectTMX.CheckOrphanedCallback() {
+            public boolean existSourceInProject(String src) {
+                return false;
+            }
+            public boolean existEntryInProject(EntryKey key) {
+                return false;
+            }
+        };
+
+        public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
+            if (projectTMX == null) {
+                return;
+            }
+            Map.Entry<String, TMXEntry>[] entries;
+            synchronized (checkOrphanedCallback) {
+                entries = entrySetToArray(projectTMX.getDefaultsMap().entrySet());
+            }
+            for (Map.Entry<String, TMXEntry> en : entries) {
+                it.iterate(en.getKey(), en.getValue());
+            }
+        }
+
+        public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
+            if (projectTMX == null) {
+                return;
+            }
+            Map.Entry<EntryKey, TMXEntry>[] entries;
+            synchronized (checkOrphanedCallback) {
+                entries = entrySetToArray(projectTMX.getAlternativesMap().entrySet());
+            }
+            for (Map.Entry<EntryKey, TMXEntry> en : entries) {
+                it.iterate(en.getKey(), en.getValue());
+            }
+        }
+
+        @SuppressWarnings({ "unchecked", "rawtypes" })
+        private <K, V> Map.Entry<K, V>[] entrySetToArray(Set<Map.Entry<K, V>> set) {
+            // Assign to variable to facilitate suppressing the rawtypes warning
+            Map.Entry[] a = new Map.Entry[set.size()];
+            return set.toArray(a);
         }
 
         @Override
@@ -182,17 +309,23 @@ public class FindMatchesTest {
             List<SourceTextEntry> ste = new ArrayList<>();
             ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
                     1, null, null, new ArrayList<>()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", "地力の搾取と浪費が現われる。(1)", null, "", "", null),
+                    1, null, null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
+                    "For installation on Linux.",
+                    "For installation on other operating systems (such as FreeBSD and Solaris).&lt;br0/>",
+                    null), 1, null, "Other", Collections.emptyList()));
             return ste;
         }
 
         @Override
         public ITokenizer getSourceTokenizer() {
-            return new LuceneEnglishTokenizer();
+            return sourceTokenizer;
         };
 
         @Override
         public ITokenizer getTargetTokenizer() {
-            return new DefaultTokenizer();
+            return targetTokenizer;
         }
 
         @Override
@@ -204,8 +337,8 @@ public class FindMatchesTest {
         public Map<String, ExternalTMX> getTransMemories() {
             Map<String, ExternalTMX> transMemories = new TreeMap<>();
             try {
-                ExternalTMX newTMX = ExternalTMFactory.load(testTmx);
-                transMemories.put(testTmx.getPath(), newTMX);
+                ExternalTMX newTMX = ExternalTMFactory.load(externalTmx);
+                transMemories.put(externalTmx.getPath(), newTMX);
             } catch (Exception ignored) {
             }
             return Collections.unmodifiableMap(transMemories);
@@ -216,5 +349,22 @@ public class FindMatchesTest {
     public static void tearDown() throws IOException {
         FileUtils.deleteDirectory(tmpDir.toFile());
         assertFalse(tmpDir.toFile().exists());
+    }
+
+    public static class ProjectTMXMock extends ProjectTMX {
+
+        public ProjectTMXMock(Language sourceLanguage, Language targetLanguage,
+                           boolean isSentenceSegmentingEnabled,
+                          File file, CheckOrphanedCallback callback) throws Exception {
+            super(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback);
+        }
+
+        public Map<String, TMXEntry> getDefaultsMap() {
+            return defaults;
+        };
+
+        public Map<EntryKey, TMXEntry> getAlternativesMap() {
+            return alternatives;
+        }
     }
 }

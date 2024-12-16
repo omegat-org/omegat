@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
@@ -49,7 +50,6 @@ import org.omegat.core.KnownException;
 import org.omegat.core.team2.gui.PassphraseDialog;
 import org.omegat.core.team2.gui.UserPassDialog;
 import org.omegat.core.team2.impl.TeamUtils.Credentials;
-import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
@@ -281,8 +281,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private void askYesNoGUI(CredentialItem item, String promptText, URIish uri, String promptedFingerprint) {
-        IMainWindow mw = Core.getMainWindow();
-        int choice = mw.showConfirmDialog(promptText, null, JOptionPane.YES_NO_OPTION,
+        int choice = Core.getMainWindow().showConfirmDialog(promptText, null, JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
         if (choice == JOptionPane.YES_OPTION) {
             ((CredentialItem.YesNoType) item).setValue(true);
@@ -325,10 +324,10 @@ public class GITCredentialsProvider extends CredentialsProvider {
      */
     private Credentials askCredentialsGUI(URIish uri, Credentials credentials, boolean passwordOnly,
             String msg) {
-        IMainWindow mw = Core.getMainWindow();
+        JFrame parent = Core.getMainWindow().getApplicationFrame();
         if (passwordOnly) {
-            PassphraseDialog passphraseDialog = new PassphraseDialog(mw.getApplicationFrame());
-            passphraseDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+            PassphraseDialog passphraseDialog = new PassphraseDialog(parent);
+            passphraseDialog.setLocationRelativeTo(parent);
             if (uri.getScheme() == null) {
                 // asked passphrase
                 passphraseDialog.setTitleDesc(OStrings.getString(
@@ -347,8 +346,8 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 return credentials;
             }
         } else {
-            UserPassDialog userPassDialog = new UserPassDialog(mw.getApplicationFrame());
-            userPassDialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+            UserPassDialog userPassDialog = new UserPassDialog(parent);
+            userPassDialog.setLocationRelativeTo(parent);
             userPassDialog.setDescription(OStrings.getString(
                     credentials.username == null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG",
                     uri.getHumanishName()));

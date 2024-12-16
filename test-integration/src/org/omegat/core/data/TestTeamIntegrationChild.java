@@ -29,7 +29,6 @@ package org.omegat.core.data;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.HeadlessException;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -44,7 +43,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 
 import org.madlonkay.supertmxmerge.StmProperties;
@@ -70,6 +68,7 @@ import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.gui.glossary.IGlossaries;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
@@ -81,7 +80,6 @@ import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.MenuExtender.MenuKey;
 
 import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockingDesktop;
 import gen.core.project.RepositoryDefinition;
 
 /**
@@ -595,37 +593,20 @@ public final class TestTeamIntegrationChild {
         }
     };
 
-    static IMainWindow mainWindow = new IMainWindow() {
+    static IMainWindow mainWindow = new ConsoleWindow() {
+        @Override
         public void unlockUI() {
         }
 
-        public void showStatusMessageRB(String messageKey, Object... params) {
-        }
-
-        public void showTimedStatusMessageRB(String messageKey, Object... params) {
-        }
-
+        @Override
         public void showProgressMessage(String messageText) {
         }
 
-        public void showMessageDialog(String message) {
-        }
-
+        @Override
         public void showLengthMessage(String messageText) {
         }
 
-        public void showErrorDialogRB(String title, String message, Object... args) {
-            System.err.println(message);
-        }
-
-        public int showConfirmDialog(Object message, String title, int optionType, int messageType)
-                throws HeadlessException {
-            return 0;
-        }
-
-        public void setCursor(Cursor cursor) {
-        }
-
+        @Override
         public void lockUI() {
         }
 
@@ -673,20 +654,7 @@ public final class TestTeamIntegrationChild {
             return menu;
         }
 
-        @Override
-        public DockingDesktop getDesktop() {
-            return null;
-        }
-
-        @Override
-        public void resetDesktopLayout() {
-        }
-
         public Cursor getCursor() {
-            return null;
-        }
-
-        public JFrame getApplicationFrame() {
             return null;
         }
 
@@ -708,9 +676,6 @@ public final class TestTeamIntegrationChild {
         }
 
         public void addDockable(Dockable pane) {
-        }
-
-        public void showLockInsertMessage(String messageText, String toolTip) {
         }
     };
 

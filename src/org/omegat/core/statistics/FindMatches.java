@@ -30,10 +30,12 @@ package org.omegat.core.statistics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -273,6 +275,8 @@ public class FindMatches {
         if (separateSegmentMatcher != null) {
             // split paragraph even when segmentation disabled, then find
             // matches for every segment
+            int maxPenalty = 0;
+            Set<String> tmxNames = new HashSet<>();
             List<StringBuilder> spaces = new ArrayList<StringBuilder>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = project.getProjectProperties().getSourceLanguage();
@@ -292,6 +296,14 @@ public class FindMatches {
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
                         ftrans.add(segmentMatch.get(0).translation);
+                        segmentMatch.stream().filter(match -> !match.projs[0].isEmpty())
+                                .map(match -> match.projs[0]).forEach(tmxNames::add);
+                        if (segmentMatch.get(0).fuzzyMark) {
+                            if (maxPenalty < PENALTY_FOR_FUZZY) {
+                                maxPenalty = PENALTY_FOR_FUZZY;
+                            }
+                        }
+                        maxPenalty = Math.max(maxPenalty, segmentMatch.get(0).scores[0].penalty);
                     } else {
                         fsrc.add("");
                         ftrans.add("");
@@ -301,8 +313,8 @@ public class FindMatches {
                 String foundSrc = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 // glue found translations
                 String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
-                        0, null);
+                processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM_SUBSEG, false, maxPenalty,
+                        String.join(",", tmxNames), "", 0, "", 0, null);
             }
         }
 
@@ -421,8 +433,9 @@ public class FindMatches {
             return;
         }
 
-        addNearString(key, source, translation, comesFrom, fuzzy, similarityStem, similarityNoStem,
-                simAdjusted, null, tmxName, creator, creationDate, changer, changedDate, props);
+        addNearString(key, source, translation, comesFrom, fuzzy, new NearString.Scores(similarityStem,
+                similarityNoStem, simAdjusted, penalty),
+                null, tmxName, creator, creationDate, changer, changedDate, props);
     }
 
     /**
@@ -457,8 +470,7 @@ public class FindMatches {
      * "similarity,simAdjusted"
      */
     protected void addNearString(final EntryKey key, final String source, final String translation,
-            NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int similarity,
-            final int similarityNoStem, final int simAdjusted, final byte[] similarityData,
+            NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, NearString.Scores scores, final byte[] similarityData,
             final String tmxName, final String creator, final long creationDate, final String changer,
             final long changedDate, final List<TMXProp> tuProperties) {
         // find position for new data
@@ -470,25 +482,25 @@ public class FindMatches {
                 // single NearString with
                 // multiple project entries.
                 result.set(i,
-                        NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity,
-                                similarityNoStem, simAdjusted, similarityData, tmxName, creator, creationDate,
+                        NearString.merge(st, key, source, translation, comesFrom, fuzzy,
+                                scores, similarityData, tmxName, creator, creationDate,
                                 changer, changedDate, tuProperties));
                 return;
             }
-            if (st.scores[0].score < similarity) {
+            if (st.scores[0].score < scores.score) {
                 break;
             }
-            if (st.scores[0].score == similarity) {
-                if (st.scores[0].scoreNoStem < similarityNoStem) {
+            if (st.scores[0].score == scores.score) {
+                if (st.scores[0].scoreNoStem < scores.scoreNoStem) {
                     break;
                 }
-                if (st.scores[0].scoreNoStem == similarityNoStem) {
-                    if (st.scores[0].adjustedScore < simAdjusted) {
+                if (st.scores[0].scoreNoStem == scores.scoreNoStem) {
+                    if (st.scores[0].adjustedScore < scores.adjustedScore) {
                         break;
                     }
                     // Patch contributed by Antonio Vilei
                     // text with the same case has precedence
-                    if (similarity == 100 && !st.source.equals(srcText) && source.equals(srcText)) {
+                    if (scores.score == 100 && !st.source.equals(srcText) && source.equals(srcText)) {
                         break;
                     }
                 }
@@ -497,9 +509,8 @@ public class FindMatches {
         }
 
         result.add(pos,
-                new NearString(key, source, translation, comesFrom, fuzzy, similarity, similarityNoStem,
-                        simAdjusted, similarityData, tmxName, creator, creationDate, changer, changedDate,
-                        tuProperties));
+                new NearString(key, source, translation, comesFrom, fuzzy, scores, similarityData, tmxName, creator,
+                        creationDate, changer, changedDate, tuProperties));
         if (result.size() > maxCount) {
             result.remove(result.size() - 1);
         }
@@ -508,9 +519,9 @@ public class FindMatches {
     /*
      * Methods for tokenize strings with caching.
      */
-    Map<String, Token[]> tokenizeStemCache = new HashMap<String, Token[]>();
-    Map<String, Token[]> tokenizeNoStemCache = new HashMap<String, Token[]>();
-    Map<String, Token[]> tokenizeAllCache = new HashMap<String, Token[]>();
+    Map<String, Token[]> tokenizeStemCache = new HashMap<>();
+    Map<String, Token[]> tokenizeNoStemCache = new HashMap<>();
+    Map<String, Token[]> tokenizeAllCache = new HashMap<>();
 
     public Token[] tokenizeStem(String str) {
         Token[] tokens = tokenizeStemCache.get(str);

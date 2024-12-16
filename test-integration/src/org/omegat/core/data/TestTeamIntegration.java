@@ -432,6 +432,7 @@ public final class TestTeamIntegration {
                     + dir.getAbsolutePath() + " " + repo + " " + delay + " " + SEG_COUNT);
             ProcessBuilder pb = new ProcessBuilder(cmd);
             pb.inheritIO();
+            pb.redirectErrorStream(true);
             p = pb.start();
         }
 

@@ -133,6 +133,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     /** Creates new form MatchGlossaryPane */
     public MatchesTextArea(IMainWindow mw) {
         super(true);
+        setName("matches_pane");
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
         scrollPane = new DockableScrollPane("MATCHES", title, this, true);

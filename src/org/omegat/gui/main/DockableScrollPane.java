@@ -63,6 +63,14 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
         dockKey.setName(name);
     }
 
+    @Override
+    public String getName() {
+        if (dockKey == null) {
+            return null;
+        }
+        return dockKey.getName();
+    }
+
     /** Creates a new instance of DockableScrollBox */
     public DockableScrollPane(String key, String name, Component view, boolean detouchable) {
         super(view);

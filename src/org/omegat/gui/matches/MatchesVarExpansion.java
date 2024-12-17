@@ -225,13 +225,13 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     private String expandMatchSource(String localTemplate, NearString.MATCH_SOURCE comesFrom) {
-        switch(comesFrom) {
+        switch (comesFrom) {
         case TM:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_COMES_FROM_TM") + " ");
         case FILES:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_COMES_FROM_FILES"));
         case MEMORY:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString( "MATCHES_COMES_FROM_MEMORY"));
+            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_COMES_FROM_MEMORY"));
         case TM_SUBSEG:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString(
                     "MATCHES_COMES_FROM_TM_SUBSEG") + " ");

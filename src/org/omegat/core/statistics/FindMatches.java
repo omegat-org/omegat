@@ -63,20 +63,19 @@ import org.omegat.util.Token;
 
 /**
  * Class to find matches by specified criteria.
- *
+ * <p>
  * Since we can use stemmers to prepare tokens, we should use 3-pass comparison
  * of similarity. Similarity will be calculated in 3 steps:
- *
- * 1. Split original segment into word-only tokens using stemmer (with stop
- * words list), then compare tokens.
- *
- * 2. Split original segment into word-only tokens without stemmer, then compare
- * tokens.
- *
- * 3. Split original segment into not-only-words tokens (including numbers and
- * tags) without stemmer, then compare tokens.
- *
- * This class is not thread safe ! Must be used in the one thread only.
+ * <ol>
+ * <li>Split the original segment into word-only tokens using stemmer (with stop
+ * words list), then compare tokens.</li>
+ * <li>Split the original segment into word-only tokens without a stemmer,
+ * then compare tokens.</li>
+ * <li>Split the original segment into not-only-words tokens (including numbers
+ * and tags) without a stemmer, then compare tokens.</li>
+ * </ol>
+ * <p>
+ * This class is not thread safe! Must be used in the one thread only.
  *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -150,6 +149,23 @@ public class FindMatches {
                         OConsts.FUZZY_MATCH_THRESHOLD));
     }
 
+    /**
+     * FindMatches find fuzzy matched translation memories.
+     *
+     * @param project
+     *            OmegaT project.
+     * @param segmenter
+     *            used when running a segmentation search.
+     * @param maxCount
+     *            limit the maximum count of the results.
+     * @param searchExactlyTheSame
+     *            allows searching similarities with the same text as a source
+     *            segment. This mode is used only for separate sentence match
+     *            in a paragraph project, i.e., where a source is just part of
+     *            the current source.
+     * @param threshold
+     *            threshold to use.
+     */
     public FindMatches(IProject project, Segmenter segmenter, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame, boolean applyThreshold, int threshold) {
         this.project = project;
@@ -165,6 +181,20 @@ public class FindMatches {
         this.applyThreshold = applyThreshold;
     }
 
+    /**
+     * Search Translation memories.
+     *
+     * @param searchText
+     *        target segment or term to search.
+     * @param fillSimilarityData
+     *        fill similarity data into the result of NearString objects.
+     * @param stop
+     *        IStopped callback object to indicate cancel operation.
+     * @return
+     *        List of NearString objects, which hold matched translation entry.
+     * @throws StoppedException
+     *        raised when stopped during a search process.
+     */
     public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
             IStopped stop) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);

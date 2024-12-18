@@ -15,6 +15,7 @@
                2018 Enrique Estevez Fernandez
                2019 Thomas Cordonnier
                2020 Briac Pilpre
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -166,11 +167,14 @@ public class RealProject implements IProject {
 
     private final StatisticsInfo hotStat = new StatisticsInfo();
 
-    private final ITokenizer sourceTokenizer, targetTokenizer;
+    private final ITokenizer sourceTokenizer;
+    private final ITokenizer targetTokenizer;
 
     private DirectoryMonitor tmMonitor;
 
     private DirectoryMonitor tmOtherLanguagesMonitor;
+
+    private Segmenter segmenter;
 
     /**
      * Indicates when there is an ongoing save event. Saving might take a while
@@ -302,7 +306,7 @@ public class RealProject implements IProject {
             // Set project specific segmentation rules if they exist, or
             // defaults otherwise.
             SRX srx = config.getProjectSRX();
-            Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
+            segmenter = new Segmenter(srx == null ? Preferences.getSRX() : srx);
 
             loadTranslations();
             setProjectModified(true);
@@ -475,12 +479,12 @@ public class RealProject implements IProject {
      * options
      */
     private void loadSegmentationSettings() {
-        // Set project specific segmentation rules if they exist, or defaults
+        // Set project-specific segmentation rules if they exist, or defaults
         // otherwise.
         // This MUST happen before calling loadTranslations(), because
         // projectTMX needs a segmenter.
         SRX srx = Optional.ofNullable(config.getProjectSRX()).orElse(Preferences.getSRX());
-        Core.setSegmenter(new Segmenter(srx));
+        segmenter = new Segmenter(srx);
     }
 
     /**
@@ -493,7 +497,7 @@ public class RealProject implements IProject {
         File root = new File(config.getSourceRoot());
         List<File> srcFileList = FileUtil.buildFileList(root, true);
 
-        AlignFilesCallback alignFilesCallback = new AlignFilesCallback(props);
+        AlignFilesCallback alignFilesCallback = new AlignFilesCallback(props, segmenter);
 
         String srcRoot = config.getSourceRoot();
         for (File file : srcFileList) {
@@ -1238,7 +1242,6 @@ public class RealProject implements IProject {
      */
     private void loadSourceFiles() throws IOException {
         long st = System.currentTimeMillis();
-        FilterMaster fm = Core.getFilterMaster();
 
         File root = new File(config.getSourceRoot());
         List<String> srcPathList = FileUtil
@@ -1259,7 +1262,8 @@ public class RealProject implements IProject {
 
             try {
                 loadFilesCallback.setCurrentFile(fi);
-                IFilter filter = fm.loadFile(config.getSourceRoot() + filepath, new FilterContext(config),
+                IFilter filter = Core.getFilterMaster().loadFile(config.getSourceRoot() + filepath,
+                        new FilterContext(config),
                         loadFilesCallback);
                 loadFilesCallback.fileFinished();
 
@@ -1410,7 +1414,7 @@ public class RealProject implements IProject {
             newTransMemories.putAll(transMemories);
             if (file.exists()) {
                 try {
-                    ExternalTMX newTMX = ExternalTMFactory.load(file);
+                    ExternalTMX newTMX = ExternalTMFactory.load(file, config, segmenter);
                     newTransMemories.put(file.getPath(), newTMX);
 
                     // Please note the use of "/". FileUtil.computeRelativePath
@@ -1716,16 +1720,12 @@ public class RealProject implements IProject {
         return Collections.unmodifiableMap(otherTargetLangTMs);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public ITokenizer getSourceTokenizer() {
         return sourceTokenizer;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public ITokenizer getTargetTokenizer() {
         return targetTokenizer;
     }
@@ -1763,9 +1763,7 @@ public class RealProject implements IProject {
         return new DefaultTokenizer();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public List<FileInfo> getProjectFiles() {
         return Collections.unmodifiableList(projectFilesList);
     }
@@ -1876,9 +1874,7 @@ public class RealProject implements IProject {
             tmBuilder = null;
         }
 
-        /**
-         * {@inheritDoc}
-         */
+        @Override
         protected void addSegment(String id, short segmentIndex, String segmentSource,
                 List<ProtectedPart> protectedParts, String segmentTranslation,
                 boolean segmentTranslationFuzzy, String[] props, String prevSegment, String nextSegment,
@@ -1951,13 +1947,15 @@ public class RealProject implements IProject {
     }
 
     static class AlignFilesCallback implements IAlignCallback {
-        AlignFilesCallback(ProjectProperties props) {
+        AlignFilesCallback(ProjectProperties props, Segmenter segmenter) {
             super();
             this.config = props;
+            this.segmenter = segmenter;
         }
 
         Map<EntryKey, ITMXEntry> data = new TreeMap<>();
         private final ProjectProperties config;
+        private final Segmenter segmenter;
         List<String> sources = new ArrayList<>();
 
         @Override
@@ -1978,9 +1976,9 @@ public class RealProject implements IProject {
 
                 PrepareTMXEntry tr = new PrepareTMXEntry();
                 if (config.isSentenceSegmentingEnabled()) {
-                    List<String> segmentsSource = Core.getSegmenter().segment(config.getSourceLanguage(),
+                    List<String> segmentsSource = segmenter.segment(config.getSourceLanguage(),
                             sourceS, null, null);
-                    List<String> segmentsTranslation = Core.getSegmenter().segment(config.getTargetLanguage(),
+                    List<String> segmentsTranslation = segmenter.segment(config.getTargetLanguage(),
                             transS, null, null);
                     if (segmentsTranslation.size() != segmentsSource.size()) {
                         if (isFuzzy) {
@@ -2063,5 +2061,15 @@ public class RealProject implements IProject {
                 throw new IOException(OStrings.getString("TF_COMMIT_ERROR") + "\n" + e.getMessage(), e);
             }
         }
+    }
+
+    @Override
+    public void setSegmenter(Segmenter segmenter) {
+        this.segmenter = segmenter;
+    }
+
+    @Override
+    public Segmenter getSegmenter() {
+        return segmenter;
     }
 }

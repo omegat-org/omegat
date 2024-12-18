@@ -294,7 +294,7 @@ public class CalcMatchStatisticsTest {
                     try {
                         ExternalTMX newTMX;
                         Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
-                        newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter, null);
+                        newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter);
                         transMemories.put(testTmx.toString(), newTMX);
                     } catch (Exception e) {
                         throw new RuntimeException(e);

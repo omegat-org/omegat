@@ -252,6 +252,7 @@ public class Aligner {
         } else {
             counterType = CounterType.WORD;
         }
+        segmenter = new Segmenter(SRX.getDefault());
     }
 
     /**
@@ -412,7 +413,7 @@ public class Aligner {
 
     /**
      * Write string pair entries as TMX file.
-     * 
+     *
      * @param outFile
      *            target output.
      * @param pairs

@@ -350,7 +350,7 @@ public class FindMatchesTest {
 
             Map<String, ExternalTMX> transMemories = new TreeMap<>();
             try {
-                ExternalTMX newTMX = ExternalTMFactory.load(externalTmx, prop, segmenter, null);
+                ExternalTMX newTMX = ExternalTMFactory.load(externalTmx, prop, segmenter);
                 transMemories.put(externalTmx.getPath(), newTMX);
             } catch (Exception ignored) {
             }

@@ -51,6 +51,7 @@ import org.omegat.core.threads.LongProcessInterruptedException;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.TextUtil;
@@ -107,15 +108,18 @@ public class CalcMatchStatistics extends LongProcessThread {
     private final IProject project;
 
     public CalcMatchStatistics(IStatsConsumer callback, boolean perFile) {
-        this(Core.getProject(), Core.getSegmenter(), callback, perFile);
+        this(Core.getProject(), Core.getSegmenter(), callback, perFile,
+                Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
+                        OConsts.FUZZY_MATCH_THRESHOLD));
     }
 
-    public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback, boolean perFile) {
+    public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback,
+                               boolean perFile, int threshold) {
         this.project = project;
         this.callback = callback;
         this.perFile = perFile;
         finder = ThreadLocal.withInitial(
-                () -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, -1));
+                () -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, threshold));
     }
 
     @Override

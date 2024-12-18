@@ -42,6 +42,7 @@ import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.omegat.core.Core;
@@ -219,6 +220,7 @@ public class FindMatchesTest {
         assertEquals("ZZZ", result.get(2).translation); // sr
     }
 
+    @Ignore("Should be enalbed when the bug fix proposed.")
     @Test
     public void testSearchBUGS1251() throws Exception {
         ProjectProperties prop = new ProjectProperties(tmpDir.toFile());

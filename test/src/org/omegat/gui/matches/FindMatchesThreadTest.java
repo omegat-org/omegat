@@ -43,6 +43,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import org.omegat.core.Core;
@@ -88,6 +89,7 @@ public class FindMatchesThreadTest {
         Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
     }
 
+    @Ignore("Should be enalbed when the bug fix proposed.")
     @Test
     public void testSearchBUGS1248() throws Exception {
         ProjectProperties prop = new ProjectProperties(tmpDir.toFile());

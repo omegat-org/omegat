@@ -48,6 +48,7 @@ import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
@@ -68,7 +69,7 @@ public class CalcMatchStatisticsTest {
     public void testCalcMatchStatics() throws Exception {
         TestProject project = new TestProject(new ProjectPropertiesTest());
         IStatsConsumer callback = new TestStatsConsumer();
-        Segmenter segmenter = new Segmenter(Preferences.getSRX());
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
         CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter,
                 callback, 30);
         calcMatchStatistics.start();
@@ -123,7 +124,7 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
 
         // change threshold
-        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, 70);
+        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, -1);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();

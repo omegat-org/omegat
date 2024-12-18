@@ -8,9 +8,9 @@
                2008 Martin Fleurke
                2009 Alex Buloichik
                2011 Didier Briel
-               2013-1014 Alex Buloichik, Enrique Estevez
+               2013-2014 Alex Buloichik, Enrique Estevez
                2017 Didier Briel
-               2023 Hiroshi Miura
+               2023-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -313,7 +313,10 @@ public class PoFilter extends AbstractFilter {
     }
 
     private StringBuilder[] sources, targets;
-    private StringBuilder translatorComments, extractedComments, references, sourceFuzzyTrue;
+    private StringBuilder translatorComments;
+    private StringBuilder extractedComments;
+    private StringBuilder references;
+    private StringBuilder sourceFuzzyTrue;
     private int plurals = 2;
     private String path;
     private boolean nowrap, fuzzy, fuzzyTrue;
@@ -610,33 +613,39 @@ public class PoFilter extends AbstractFilter {
 
     protected void parseOrAlign(int pair) {
         String pathSuffix;
-        String s;
-        String c = "";
+        String source;
+        StringBuilder sb = new StringBuilder();
         if (pair > 0) {
-            s = unescape(sources[1].toString());
+            source = unescape(sources[1].toString());
             pathSuffix = "[" + pair + "]";
-            c += StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), pair) + "\n";
+            sb.append(StringUtil.format(OStrings.getString("POFILTER_PLURAL_FORM_COMMENT"), pair)).append("\n");
         } else {
-            s = unescape(sources[pair].toString());
+            source = unescape(sources[0].toString());
             pathSuffix = "";
+            String s1 = unescape(sources[1].toString());
+            if (!StringUtil.isEmpty(s1)) {
+                sb.append(OStrings.getString("POFILTER_SINGULAR_COMMENT")).append("\n").append(s1).append("\n\n");
+            }
         }
-        String t = unescape(targets[pair].toString());
+        String translate = unescape(targets[pair].toString());
 
         if (translatorComments.length() > 0) {
-            c += OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n"
-                    + unescape(translatorComments.toString() + "\n");
+            sb.append(OStrings.getString("POFILTER_TRANSLATOR_COMMENTS")).append("\n").append(unescape(
+                    translatorComments.toString())).append("\n");
         }
         if (extractedComments.length() > 0) {
-            c += OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n"
-                    + unescape(extractedComments.toString() + "\n");
+            sb.append(OStrings.getString("POFILTER_EXTRACTED_COMMENTS")).append("\n").append(unescape(
+                    extractedComments.toString())).append("\n");
         }
         if (references.length() > 0) {
-            c += OStrings.getString("POFILTER_REFERENCES") + "\n" + unescape(references.toString() + "\n");
+            sb.append(OStrings.getString("POFILTER_REFERENCES")).append("\n").append(unescape(references
+                            .toString())).append("\n");
         }
-        if (c.isEmpty()) {
-            c = null;
+        String comments = sb.toString();
+        if (comments.isEmpty()) {
+            comments = null;
         }
-        parseOrAlign(s, t, c, pathSuffix);
+        parseOrAlign(source, translate, comments, pathSuffix);
     }
 
     /**

@@ -124,7 +124,7 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
 
         // change threshold
-        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, 70);
+        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, -1);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();

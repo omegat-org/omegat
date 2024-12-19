@@ -7,7 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2024 Hiroshi Miura
+               2024 Hiroshi Miura, Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -301,6 +301,7 @@ public class FindMatches {
             if (segments.size() > 1) {
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
+                int maxPenalty = 0;
                 // multiple segments
                 for (String onesrc : segments) {
                     // find match for a separate segment
@@ -310,6 +311,18 @@ public class FindMatches {
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
                         ftrans.add(segmentMatch.get(0).translation);
+                        if (segmentMatch.get(0).fuzzyMark) {
+                            if (maxPenalty < PENALTY_FOR_FUZZY) {
+                                maxPenalty = PENALTY_FOR_FUZZY;
+                            }
+                        }
+                        Matcher matcher = SEARCH_FOR_PENALTY.matcher(segmentMatch.get(0).projs[0]);
+                        if (matcher.find()) {
+                            int penalty = Integer.parseInt(matcher.group(1));
+                            if (penalty > maxPenalty) {
+                                maxPenalty = penalty;
+                            }
+                        }
                     } else {
                         fsrc.add("");
                         ftrans.add("");
@@ -319,7 +332,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, 0);
+                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, maxPenalty);
             }
         }
         // fill similarity data only for a result

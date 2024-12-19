@@ -186,7 +186,7 @@ dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
 
 [plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.0.26"}
+spotbugs = {id = "com.github.spotbugs", version = "6.0.27"}
 spotless = {id = "com.diffplug.spotless", version = "7.0.0.BETA4"}
 launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
 versions = {id = "com.github.ben-manes.versions", version = "0.51.0"}

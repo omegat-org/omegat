@@ -45,6 +45,7 @@ import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
@@ -208,7 +209,7 @@ public class MatchesVarExpansionTest {
         entry.changeDate = 20020523;
         entry.otherProperties = testProps;
         NearString.Scores scores = new NearString.Scores(20, 40, 60);
-        return new NearString(null, entry, null, false, scores, null, "mock testing project");
+        return new NearString(null, entry, MATCH_SOURCE.TM, false, scores, null, "mock testing project");
     };
 
     private void setupProject(Language sourceLanguage, Language targetLanguage) {

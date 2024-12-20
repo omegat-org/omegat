@@ -29,6 +29,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
@@ -59,7 +60,6 @@ public class AlignerWindowTest extends TestCoreGUI {
 
     @Test
     public void testAligner() throws Exception {
-        // Start aligner
         picker.requireTitle("Align Files");
         picker.panel("align_picker_panel").requireEnabled();
         List<Language> languages = Language.getLanguages();
@@ -139,15 +139,16 @@ public class AlignerWindowTest extends TestCoreGUI {
         File projSrc = new File(PROJECT_PATH);
         FileUtils.copyDirectory(projSrc, tmpDir);
         FileUtils.forceDeleteOnExit(tmpDir);
-        JFrame pickerFrame = GuiActionRunner.execute(() -> {
+        // Start aligner
+        JFrame frame = GuiActionRunner.execute(() -> {
             AlignFilePickerController picker = new AlignFilePickerController();
             picker.setSourceDefaultDir(tmpDir.toPath().resolve("source").toString());
             picker.setDefaultSaveDir(tmpDir.toPath().resolve("tm").toString());
             picker.setSourceLanguage(new Language("en"));
             picker.setTargetLanguage(new Language("fr"));
-            return picker.show(null);
+            return picker.initGUI();
         });
-        picker = new FrameFixture(robot(), pickerFrame);
+        picker = new FrameFixture(robot(), Objects.requireNonNull(frame));
         picker.show();
     }
 }

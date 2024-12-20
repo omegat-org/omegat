@@ -96,6 +96,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     @Override
     protected void onSetUp() throws Exception {
-        window = TestCoreGUIInitializer.getInstance().initialize();
+        window = TestCoreGUIInitializer.getInstance().initialize(robot());
     }
 }

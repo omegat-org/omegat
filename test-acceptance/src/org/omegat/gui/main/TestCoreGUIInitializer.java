@@ -33,6 +33,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.apache.commons.io.FileUtils;
+import org.assertj.swing.core.Robot;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
 
@@ -63,7 +64,7 @@ public final class TestCoreGUIInitializer {
         return initializer;
     }
 
-    public synchronized FrameFixture initialize() throws IOException {
+    public synchronized FrameFixture initialize(Robot robot) throws IOException {
         if (frame == null) {
             Path tmp = Files.createTempDirectory("omegat");
             FileUtils.forceDeleteOnExit(tmp.toFile());
@@ -91,7 +92,7 @@ public final class TestCoreGUIInitializer {
                 });
                 return mw.getApplicationFrame();
             });
-            mainWindow = new FrameFixture(frame);
+            mainWindow = new FrameFixture(robot, frame);
             mainWindow.show();
         }
         return mainWindow;

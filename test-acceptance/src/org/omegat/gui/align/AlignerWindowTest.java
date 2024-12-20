@@ -146,7 +146,7 @@ public class AlignerWindowTest extends TestCoreGUI {
             picker.setDefaultSaveDir(tmpDir.toPath().resolve("tm").toString());
             picker.setSourceLanguage(new Language("en"));
             picker.setTargetLanguage(new Language("fr"));
-            return picker.initGUI();
+            return picker.initGUI(window.target());
         });
         picker = new FrameFixture(robot(), Objects.requireNonNull(frame));
         picker.show();

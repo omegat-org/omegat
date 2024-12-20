@@ -58,8 +58,8 @@ import org.omegat.util.gui.UIDesignManager;
 public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     protected FrameFixture window;
-    protected TestMainWindow mainWindow;
     protected JFrame frame;
+    private TestMainWindow mainWindow;
 
     protected File tmpDir;
 

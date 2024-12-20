@@ -158,20 +158,21 @@ public class AlignFilePickerController {
      *            Parent window of file picker and align window
      */
     public void show(final Component parent) {
-        JFrame frame = initGUI();
+        JFrame frame = initGUI(parent);
         frame.setLocationRelativeTo(parent);
         frame.setVisible(true);
     }
 
     // public for test only
     @SuppressWarnings("serial")
-    public JFrame initGUI() {
+    public JFrame initGUI(Component parent) {
         final JFrame frame = new JFrame(BUNDLE.getString("ALIGNER_FILEPICKER"));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         StaticUIUtils.setEscapeClosable(frame);
         frame.setName("ALIGNER_FILEPICKER");
-        AlignFilePicker picker = initializeFilePicker();
-        addListeners(picker, frame);
+        final AlignFilePicker picker = new AlignFilePicker();
+        initializeFilePicker(picker);
+        addListeners(picker, frame, parent);
         frame.getRootPane().setDefaultButton(picker.okButton);
         updatePicker(picker);
         frame.add(picker);
@@ -183,8 +184,7 @@ public class AlignFilePickerController {
      * Initialize FilePicker.
      * @return FilePicker frame.
      */
-    private AlignFilePicker initializeFilePicker() {
-        final AlignFilePicker picker = new AlignFilePicker();
+    private void initializeFilePicker(AlignFilePicker picker) {
         picker.setName("align_picker_panel");
         picker.sourceLanguagePicker
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
@@ -211,8 +211,6 @@ public class AlignFilePickerController {
 
         picker.okButton.setName("OK");
         picker.cancelButton.setName("Cancel");
-
-        return picker;
     }
 
     private final TransferHandler transferHandler = new TransferHandler() {
@@ -243,7 +241,7 @@ public class AlignFilePickerController {
         }
     };
 
-    private void addListeners(AlignFilePicker picker, JFrame frame) {
+    private void addListeners(AlignFilePicker picker, JFrame frame, Component parent) {
         picker.sourceLanguagePicker.addItemListener(e -> {
             if (e.getStateChange() != ItemEvent.SELECTED) {
                 return;

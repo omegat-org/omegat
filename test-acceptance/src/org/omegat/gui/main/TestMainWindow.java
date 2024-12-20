@@ -80,7 +80,7 @@ class TestMainWindow implements IMainWindow {
         try {
             BaseMainWindowMenuHandler handler = mainWindowMenuHandler
                     .getDeclaredConstructor(IMainWindow.class).newInstance(this);
-            menu = new TestCoreGUI.TestMainWindowMenu(this, handler);
+            menu = new TestMainWindowMenu(this, handler);
         } catch (Exception e) {
             throw new RuntimeException();
         }

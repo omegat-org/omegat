@@ -158,7 +158,7 @@ public class AlignFilePickerController {
      *            Parent window of file picker and align window
      */
     @SuppressWarnings("serial")
-    public void show(final Component parent) {
+    public JFrame show(final Component parent) {
         final JFrame frame = new JFrame(BUNDLE.getString("ALIGNER_FILEPICKER"));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         StaticUIUtils.setEscapeClosable(frame);
@@ -397,8 +397,13 @@ public class AlignFilePickerController {
 
         frame.add(picker);
         frame.pack();
+        if (parent == null) {
+            // for test
+            return frame;
+        }
         frame.setLocationRelativeTo(parent);
         frame.setVisible(true);
+        return frame;
     }
 
     private void updatePicker(final AlignFilePicker picker) {

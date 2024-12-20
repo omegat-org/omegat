@@ -26,23 +26,29 @@
 package org.omegat.gui.align;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import javax.swing.JFrame;
+
+import org.apache.commons.io.FileUtils;
 import org.assertj.swing.data.TableCell;
+import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.timing.Timeout;
 import org.junit.Rule;
 import org.junit.Test;
 
-import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.Language;
 import org.omegat.util.LocaleRule;
 
 public class AlignerWindowTest extends TestCoreGUI {
+
+    private FrameFixture picker;
 
     private static final String PROJECT_PATH = "test-acceptance/data/project/";
     private static final String SOURCE_PATH = "source/parseSource.txt";
@@ -53,13 +59,7 @@ public class AlignerWindowTest extends TestCoreGUI {
 
     @Test
     public void testAligner() throws Exception {
-        // load project
-        openSampleProject(PROJECT_PATH);
         // Start aligner
-        window.menuItem(BaseMainWindowMenu.TOOLS_MENU).click();
-        window.menuItem("aligner").click();
-        // find a file picker frame
-        FrameFixture picker = WindowFinder.findFrame("ALIGNER_FILEPICKER").withTimeout(1000).using(robot());
         picker.requireTitle("Align Files");
         picker.panel("align_picker_panel").requireEnabled();
         List<Language> languages = Language.getLanguages();
@@ -77,21 +77,7 @@ public class AlignerWindowTest extends TestCoreGUI {
         //
         File sourceFile = new File(tmpDir, SOURCE_PATH);
         File translationFile = new File(tmpDir, TARGET_PATH);
-        /*
-        picker.button("sourceChooseFileButton").click();
-        robot().waitForIdle();
-        picker.fileChooser("aligner_choose_source").requireEnabled(Timeout.timeout(1000));
-        picker.fileChooser("aligner_choose_source").selectFile(sourceFile);
-        picker.fileChooser("aligner_choose_source").approve();
-        robot().waitForIdle();
-        //
-        picker.button("targetChooseFileButton").click();
-        robot().waitForIdle();
-        picker.fileChooser("aligner_choose_target").requireEnabled(Timeout.timeout(1000));
-        picker.fileChooser("aligner_choose_target").selectFile(translationFile);
-        picker.fileChooser("aligner_choose_target").approve();
-        robot().waitForIdle();
-        */
+
         picker.textBox("sourceLanguageFileField").setText(sourceFile.getAbsolutePath());
         picker.textBox("targetLanguageFileField").setText(translationFile.getAbsolutePath());
         //
@@ -144,7 +130,24 @@ public class AlignerWindowTest extends TestCoreGUI {
         aligner.menuItem("align_menu_file").click();
         aligner.menuItem("align_menu_close_item").click();
         //
-        closeProject();
      }
 
+    @Override
+    protected void onSetUp() throws Exception {
+        super.onSetUp();
+        tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
+        File projSrc = new File(PROJECT_PATH);
+        FileUtils.copyDirectory(projSrc, tmpDir);
+        FileUtils.forceDeleteOnExit(tmpDir);
+        JFrame pickerFrame = GuiActionRunner.execute(() -> {
+            AlignFilePickerController picker = new AlignFilePickerController();
+            picker.setSourceDefaultDir(tmpDir.toPath().resolve("source").toString());
+            picker.setDefaultSaveDir(tmpDir.toPath().resolve("tm").toString());
+            picker.setSourceLanguage(new Language("en"));
+            picker.setTargetLanguage(new Language("fr"));
+            return picker.show(null);
+        });
+        picker = new FrameFixture(robot(), pickerFrame);
+        picker.show();
+    }
 }

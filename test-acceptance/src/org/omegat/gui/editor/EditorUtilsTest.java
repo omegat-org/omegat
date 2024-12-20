@@ -106,7 +106,7 @@ public class EditorUtilsTest {
             //
             final JTextComponent editPane = window.panel("Editor - source.txt").textBox().target();
             // select word from a source text
-            int offs = 102;
+            int offs = 100;
             int posStart = EditorUtils.getWordStart(editPane, offs, Locale.SIMPLIFIED_CHINESE);
             int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.SIMPLIFIED_CHINESE);
             String word = editPane.getText(posStart, posEnd - posStart);

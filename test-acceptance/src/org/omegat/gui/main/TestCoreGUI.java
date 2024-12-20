@@ -31,6 +31,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -57,6 +58,7 @@ import org.omegat.util.gui.UIDesignManager;
 public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     protected FrameFixture window;
+    protected TestMainWindow mainWindow;
     protected JFrame frame;
 
     protected File tmpDir;
@@ -105,40 +107,50 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     @Override
     protected void onTearDown() throws Exception {
+        Core.setProject(new NotLoadedProject());
+        TestCoreInitializer.initMainWindow(null);
+        mainWindow.getApplicationFrame().setVisible(false);
         window.cleanUp();
     }
 
+    private static boolean initialized = false;
+
     @Override
     protected void onSetUp() throws Exception {
-        Path tmp = Files.createTempDirectory("omegat");
-        FileUtils.forceDeleteOnExit(tmp.toFile());
-        RuntimePreferences.setConfigDir(tmp.toString());
-        TestMainInitializer.initClassloader();
-        // same order as Main.main
-        Preferences.init();
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-        Preferences.initFilters();
-        Preferences.initSegmentation();
-        //
-        frame = GuiActionRunner.execute(() -> {
-            Core.setProject(new NotLoadedProject());
-            UIDesignManager.initialize();
+        initialize();
+        mainWindow = GuiActionRunner.execute(() -> {
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
             TestCoreInitializer.initMainWindow(mw);
-            TestCoreInitializer.initAutoSave(autoSave);
-
             CoreEvents.fireApplicationStartup();
             SwingUtilities.invokeLater(() -> {
                 // setVisible can't be executed directly, because we need to
                 // call all application startup listeners for initialize UI
-                Core.getMainWindow().getApplicationFrame().setVisible(true);
+                mw.getApplicationFrame().setVisible(true);
             });
-            return mw.getApplicationFrame();
+            return mw;
         });
-
+        frame = Objects.requireNonNull(mainWindow).getApplicationFrame();
         window = new FrameFixture(robot(), frame);
         window.show();
+    }
+
+    protected void initialize() throws Exception {
+        if (!initialized) {
+            Path tmp = Files.createTempDirectory("omegat");
+            FileUtils.forceDeleteOnExit(tmp.toFile());
+            RuntimePreferences.setConfigDir(tmp.toString());
+            TestMainInitializer.initClassloader();
+            // same order as Main.main
+            Preferences.init();
+            PluginUtils.loadPlugins(Collections.emptyMap());
+            FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+            Preferences.initFilters();
+            Preferences.initSegmentation();
+            TestCoreInitializer.initAutoSave(autoSave);
+            UIDesignManager.initialize();
+            Core.setProject(new NotLoadedProject());
+            initialized = true;
+        }
     }
 
     static IAutoSave autoSave = new IAutoSave() {

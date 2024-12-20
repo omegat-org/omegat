@@ -112,7 +112,7 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class ScriptingWindow {
 
-    static ScriptingWindow window;
+    public static ScriptingWindow window;
 
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
@@ -580,6 +580,7 @@ public class ScriptingWindow {
             } catch (ExecutionException e) {
                 logResultRB(e, "SCW_SCRIPT_ERROR");
             }
+            inEventsLoop--;
         }
     }
 
@@ -594,6 +595,8 @@ public class ScriptingWindow {
     public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings, boolean cancelQueue) {
         executeScripts(Arrays.asList(scriptItem), bindings, cancelQueue);
     }
+    
+    public int inEventsLoop = 0;
 
     /**
      * Execute scripts sequentially to make sure they don't interrupt each
@@ -616,6 +619,7 @@ public class ScriptingWindow {
             try {
                 String scriptString = scriptItem.getText();
                 queuedWorkers.add(createScriptWorker(scriptString, scriptItem, bindings));
+                inEventsLoop++;
             } catch (IOException e) {
                 // TODO: Do we really want to handle the exception here, like
                 // this?

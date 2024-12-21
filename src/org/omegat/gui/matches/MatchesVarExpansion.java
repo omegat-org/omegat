@@ -90,11 +90,15 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final String VAR_DIFF_REVERSED = "${diffReversed}";
     public static final String VAR_SOURCE_LANGUAGE = "${sourceLanguage}";
     public static final String VAR_TARGET_LANGUAGE = "${targetLanguage}";
+    public static final String VAR_MATCH_SOURCE = "${matchSource}";
+    public static final String VAR_MATCH_SOURCE_DINGBAT = "${matchSource-dingbat}";
+    public static final String VAR_MATCH_SOURCE_EMOJI = "${matchSource-emoji}";    
 
     private static final String[] MATCHES_VARIABLES = { VAR_ID, VAR_SOURCE_TEXT, VAR_DIFF, VAR_DIFF_REVERSED,
             VAR_TARGET_TEXT, VAR_SCORE_BASE, VAR_SCORE_NOSTEM, VAR_SCORE_ADJUSTED, VAR_FILE_NAME_ONLY,
             VAR_FILE_PATH, VAR_FILE_SHORT_PATH, VAR_INITIAL_CREATION_ID, VAR_INITIAL_CREATION_DATE,
-            VAR_CHANGED_ID, VAR_CHANGED_DATE, VAR_FUZZY_FLAG, VAR_SOURCE_LANGUAGE, VAR_TARGET_LANGUAGE };
+            VAR_CHANGED_ID, VAR_CHANGED_DATE, VAR_FUZZY_FLAG, VAR_SOURCE_LANGUAGE, VAR_TARGET_LANGUAGE,
+            VAR_MATCH_SOURCE, VAR_MATCH_SOURCE_DINGBAT, VAR_MATCH_SOURCE_EMOJI };
 
     public static List<String> getMatchesVariables() {
         return Collections.unmodifiableList(Arrays.asList(MATCHES_VARIABLES));
@@ -285,6 +289,11 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         } else {
                 localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
         }
+        
+        localTemplate = localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_COMES_FROM_" + match.comesFrom));
+        localTemplate = localTemplate.replace(VAR_MATCH_SOURCE_DINGBAT, Character.toString(match.comesFrom.dingbat()));
+        localTemplate = localTemplate.replace(VAR_MATCH_SOURCE_EMOJI, match.comesFrom.emoji());
+        
         return localTemplate;
     }
 

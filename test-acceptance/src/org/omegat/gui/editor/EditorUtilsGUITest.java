@@ -55,7 +55,7 @@ import org.omegat.util.Preferences;
  * @author Hiroshi Miura
  */
 @RunWith(Enclosed.class)
-public class EditorUtilsTest {
+public class EditorUtilsGUITest {
 
     public static class EditorUtilsFirstStepsTest extends TestCoreGUI {
 
@@ -105,6 +105,16 @@ public class EditorUtilsTest {
             }
             //
             final JTextComponent editPane = window.panel("Editor - source.txt").textBox().target();
+            int length = editPane.getDocument().getLength();
+            assertTrue(length > 0);
+            /* Edit pane shows a first entry like as follows
+            #  ---------9---------9---------9---------9---------9
+            44 Translated by Hiroshi Miura in 2024/11/07 21:26:21<br/>
+            98 太平寺中的文笔塔<br/>
+                  ^
+           109 太平寺の中心的なペン塔<b>&lt;Segment 0001></b>
+                ^
+             */
             // select word from a source text
             int offs = 100;
             int posStart = EditorUtils.getWordStart(editPane, offs, Locale.SIMPLIFIED_CHINESE);

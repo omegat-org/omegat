@@ -77,6 +77,7 @@ public class FindMatchesTest {
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
     private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
+    private static final File TMX_SEGMENT_2 = new File("test/data/tmx/segment_2.tmx");
     private static final File TMX_MULTI = new File("test/data/tmx/test-multiple-entries.tmx");
     private static Path tmpDir;
 
@@ -229,7 +230,6 @@ public class FindMatchesTest {
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         IProject project = new TestProject(prop, null, TMX_SEGMENT, new LuceneCJKTokenizer(),
                 new LuceneFrenchTokenizer(), segmenter);
-        Core.setProject(project);
         SourceTextEntry ste = project.getAllEntries().get(1);
         Language sourceLanguage = prop.getSourceLanguage();
         String srcText = ste.getSrcText();
@@ -248,10 +248,62 @@ public class FindMatchesTest {
         assertEquals("weird behavior", result.get(0).translation);
         assertTrue(result.get(0).projs[0].contains("penalty-010"));
         // match segmented, with penalty
-        assertEquals("TM_SUBSEG", result.get(1).comesFrom.name());
+        assertEquals("TM", result.get(1).comesFrom.name());
         assertEquals(90, result.get(1).scores[0].score);
+        assertEquals(10, result.get(1).scores[0].penalty);
         // FIXME
         //assertTrue(result.get(1).projs[0].contains("penalty-010"));
+    }
+
+    @Test
+    public void testSearchForeign() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("ja");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        // external TMX is ja-en
+        IProject project = new TestProject(prop, null, TMX_SEGMENT_2, new LuceneCJKTokenizer(),
+                new LuceneFrenchTokenizer(), segmenter);
+        SourceTextEntry ste = project.getAllEntries().get(1);
+        String srcText = ste.getSrcText();
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search(srcText, false, iStopped);
+        assertEquals(1, result.size());
+        assertEquals(srcText, result.get(0).source);
+        int foreignPenalty = Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT;
+        assertEquals(foreignPenalty, result.get(0).scores[0].penalty);
+    }
+
+    @Test
+    public void testSearchForeignSegmented() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("en");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        IProject project = new TestProject(prop, null, TMX_MATCH_EN_CA, new LuceneEnglishTokenizer(),
+                new DefaultTokenizer(), segmenter);
+        IStopped iStopped = () -> false;
+        String srcText = "This badge is granted when you’ve invited 5 people who subsequently spent enough "
+                + "time on the site to become full members. "
+                + "Wow! "
+                + "Thanks for expanding the diversity of our community with new members!";
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search(srcText, false, iStopped);
+        assertEquals(2, result.size());
+        assertEquals("Hit with segmented tmx record", 35, result.get(0).scores[0].score);
+        assertEquals(35, result.get(0).scores[0].score);
+        assertEquals(32, result.get(0).scores[0].scoreNoStem);
+        assertEquals(32, result.get(0).scores[0].adjustedScore);
+        // a foreign and segmented match
+        assertEquals(21, result.get(1).scores[0].scoreNoStem);
+        assertEquals(35, result.get(1).scores[0].adjustedScore);
+        int foreignPenalty = Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT;
+        assertEquals(foreignPenalty, result.get(1).scores[0].penalty);
     }
 
     @Test

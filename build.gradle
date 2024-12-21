@@ -392,6 +392,7 @@ dependencies {
     testAcceptanceImplementation(testFixtures(project.rootProject))
     testAcceptanceImplementation(libs.assertj.swing.junit)
     testAcceptanceImplementation(libs.bundles.jackson)
+    testAcceptanceImplementation(project(':aligner'))
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))

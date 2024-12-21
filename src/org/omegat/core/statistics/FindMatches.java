@@ -333,13 +333,7 @@ public class FindMatches {
                                 maxPenalty = PENALTY_FOR_FUZZY;
                             }
                         }
-                        Matcher matcher = SEARCH_FOR_PENALTY.matcher(segmentMatch.get(0).projs[0]);
-                        if (matcher.find()) {
-                            int penalty = Integer.parseInt(matcher.group(1));
-                            if (penalty > maxPenalty) {
-                                maxPenalty = penalty;
-                            }
-                        }
+                        maxPenalty = Math.max(maxPenalty, segmentMatch.get(0).scores[0].penalty);
                     } else {
                         fsrc.add("");
                         ftrans.add("");
@@ -451,7 +445,7 @@ public class FindMatches {
         }
 
         addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
-                simAdjusted), tmxName);
+                simAdjusted, penalty), tmxName);
     }
 
     /**

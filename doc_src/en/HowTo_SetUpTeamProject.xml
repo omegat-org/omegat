@@ -50,8 +50,9 @@
 		</note>
 
 		<para>The local repository is used to add the initial project to the
-		server, and can also be used for maintenance tasks, such as deleting
-		files, that cannot be performed directly within OmegaT.</para>
+		server, as well as for certain maintenance tasks. See the
+		<link linkend="how.to.manage.team.project"
+		endterm="how.to.manage.team.project.title"/> section for details.</para>
 		<para>We recommend that you avoid using that folder for translation
 		tasks. If you need to perform translation or review tasks on that
 		project, use OmegaT to download a separate copy of the team project and
@@ -102,7 +103,7 @@
 			to the repository. Use <link endterm="menus.project.title"
 			linkend="menus.project"/><link
 			linkend="menus.project.commit.source.files"
-			endterm="menus.project.commit.source.files.title"/> to add files
+			endterm="menus.project.commit.source.files.title"/> to add source files
 			from OmegaT.</para>
 
 			<para>You must use your SVN or Git client, or the command line, to
@@ -127,7 +128,7 @@
           linkend="menus.project.commit.target.files"
           endterm="menus.project.commit.target.files.title"/>.</para>
 
-          <para>The team project administrator must use the local VCS to
+          <para>The team project manager must use the local VCS to
           <emphasis role="bold">modify</emphasis> or <emphasis
           role="bold">delete</emphasis> those files. Some plugins can make this
           task easier. See the <link linkend="dialogs.preferences.plugins"
@@ -164,7 +165,7 @@
 		</note>
 
 		<para>After the project is ready and has been uploaded to the server,
-		the team project administrator has to set up access for the translators.
+		the team project manager has to set up access for the translators.
 		Accessing a team project requires the following information:</para>
 
 		<orderedlist>
@@ -173,9 +174,9 @@
 
 			<para>The translators will have to create an account for the
 			service, and send their user name to the team project
-			administrator.</para>
+			manager.</para>
 
-			<para>The administrator will then grant write access to the
+			<para>The manager will then grant write access to the
 			repository to those accounts.</para>
           </listitem>
 
@@ -184,10 +185,10 @@
 
 			<para>If the server is self-hosted and does not have a provision
 			for translators to register an account themselves, the team project
-			administrator must create accounts with write access for the
+			manager must create accounts with write access for the
 			translators.</para>
 
-			<para>After creating the accounts, the administrator must send the
+			<para>After creating the accounts, the project manager must send the
 			translators their individual credentials.</para>
           </listitem>
 		</orderedlist>	  
@@ -197,7 +198,7 @@
 		<para id="how.to.setup.team.project.have.members.download.title">Have
 		everybody download the project from OmegaT</para>
 
-		<para>Administrators have two options for sending the location of the
+		<para>Project managers have two options for sending the location of the
 		project to the translators:</para>
 
 		<orderedlist>
@@ -219,10 +220,10 @@
           </listitem>
 		</orderedlist>
 
-		<para>After the team project administrator confirms that a translator
+		<para>After the team project manager confirms that a translator
 		has been able to open the team project, it is a good idea to make sure
 		that the <link linkend="menus.tools.statistics">project
-		statistics</link> are the same for both the administrator (on the
+		statistics</link> are the same for both the project manager (on the
 		server) and the translator (locally).</para>
 
 		<para>If they do not match, make sure the
@@ -241,6 +242,46 @@
 		work on the project with the team</para>
 	  </listitem>
 	</orderedlist>
+  </section>
+
+  <section id="how.to.manage.team.project">
+  <title id="how.to.manage.team.project.title">Manage a team project</title>
+
+  <para>Team projects involve a number of management tasks not directly related
+  to translation. Project managers may find it advantageous—or even necessary—to
+  handle such tasks directly from the VCS repository, particularly in cases where
+  the project manager only acts as a coordinator and is not involved in the translation
+  process itself.</para>
+    <variablelist>
+	  <varlistentry>
+	    <term>Deleting files</term>
+	    <listitem>
+		  <para>OmegaT does not provide a mechanism to delete files from a team project.
+		  If any shared team project files have become unnecessary, the project manager
+		  <emphasis>must</emphasis> delete them from the VCS repository.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Adding files</term>
+		<listitem>
+		  <para>Although OmegaT provides a mechanism for adding translation source and
+		  target files to the repository, the project manager must add any other files,
+		  such as dictionaries, glossaries or reference translation memories, from the
+		  VCS repository.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Checking project statistics</term>
+		<listitem>
+		  <para>This only applies to workflows that ask translators to commit the translated
+		  target files to the repository as deliverables.</para>
+		  <para>When OmegaT commits the target files, it also commits the project statistics
+		  in <filename>.txt</filename> and <filename>.json</filename> format. This enable the
+		  project manager to consult the statistics, and possibly automate their processing,
+		  without the need to open OmegaT.</para>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
   </section>
 
   <section id="how.to.setup.team.project.mapping.parameters">
@@ -405,7 +446,7 @@
 	sharing</title>
 
 	<para>The above process describes the most common scenario, in which the
-	team project administrator has full control of the project and all files
+	team project manager has full control of the project and all files
 	(and statistics) are identical in all instances of the project, both on the
 	server and the local systems of the translators.</para>
 
@@ -414,7 +455,7 @@
 	subset of the other files.</para>
 
 	<para>The basic procedure is essentially the same, except that the team
-	project administrator does not add every file to the version-controlled
+	project manager does not add every file to the version-controlled
 	project on the server. The remaining files are either copied by the
 	translators themselves, or mappings that synchronize files from other
 	locations are defined.</para>

@@ -167,20 +167,21 @@
 	  </listitem>
 
           <listitem>
-            <para>When you ever run projects which use <link
+            <para>If you switch to paragraph segmentation in a project that originally used <link
 			    linkend="dialogs.project.properties.options.segmentation"
 			    endterm="dialogs.project.properties.options.segmentation.title"/>,
-		    and the current project is switched to the paragraph segmentation, you can enable a preference
-		    option <link
+		    you can have OmegaT present matches assembled from existing segments by enabling the
+		    <link
 	    linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx"
-	    endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"/> that allow OmegaT matches
-		    in special way. In addition to normal fuzzy matches, OmegaT try to segment source text into
-		    sentences, and conduct fuzzy match on the segmented TMX entries, then construct paragraph from
-		    the result. A suggested paragraph can be one that is not in the translation memories. It is why
-		    an origin of TM is shown as empty.
-		    Please refer <link linkend="dialog.preferences.segmentation.setup.type"
-				    endterm="dialog.preferences.segmentation.setup.type.title"/> to know pros and
-		    cons of segmentation configuration.
+	    endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"/> option in addition to
+			showing regular fuzzy matches.</para>
+			<para> OmegaT will try to segment the source text into sentences,
+			apply fuzzy matching on the segmented memory entries, and then assemble a paragraph from those matches.
+		    No origin is shown for the match because the assembled paragraph may not exist in the
+			translation memories.</para>
+		    <para>Refer to the <link linkend="dialog.preferences.segmentation.setup.type"
+			endterm="dialog.preferences.segmentation.setup.type.title"/> section for more information on
+		    the benefits and drawbacks of the different types of segmentation.
             </para>
           </listitem>
 	</itemizedlist>

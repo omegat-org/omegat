@@ -63,7 +63,12 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     protected File tmpDir;
 
-    protected void closeProject() throws Exception {
+    /**
+     * Close the project.
+     * <p>
+     *     block until the close action finished.
+     */
+    protected void closeProject() {
         CountDownLatch latch = new CountDownLatch(1);
         Core.getProject().closeProject();
         CoreEvents.registerProjectChangeListener(event -> {
@@ -78,6 +83,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         assertFalse("Project should not be loaded.", Core.getProject().isProjectLoaded());
     }
 
+    /**
+     * Open project from the specified path.
+     * @param projectPath project root path.
+     * @throws Exception when error occurred.
+     */
     protected void openSampleProject(String projectPath) throws Exception {
         // 0. Prepare project folder
         tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
@@ -105,6 +115,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         assertTrue("Sample project should be loaded.", Core.getProject().isProjectLoaded());
     }
 
+    /**
+     * Clean up OmegaT main window.
+     * @throws Exception
+     */
     @Override
     protected void onTearDown() throws Exception {
         Core.setProject(new NotLoadedProject());
@@ -115,6 +129,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     private static boolean initialized = false;
 
+    /**
+     * set up OmegaT main window.
+     * @throws Exception
+     */
     @Override
     protected void onSetUp() throws Exception {
         initialize();
@@ -134,6 +152,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         window.show();
     }
 
+    /**
+     * Initialize OmegaT Core startup only once.
+     * @throws Exception when error occurred.
+     */
     protected void initialize() throws Exception {
         if (!initialized) {
             Path tmp = Files.createTempDirectory("omegat");

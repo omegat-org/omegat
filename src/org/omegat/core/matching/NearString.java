@@ -204,11 +204,18 @@ public class NearString {
         public final int scoreNoStem;
         /** adjusted similarity score for match including all tokens */
         public final int adjustedScore;
+        /** penalty of the match */
+        public final int penalty;
 
         public Scores(int score, int scoreNoStem, int adjustedScore) {
+            this(score, scoreNoStem, adjustedScore, 0);
+        }
+
+        public Scores(int score, int scoreNoStem, int adjustedScore, int penalty) {
             this.score = score;
             this.scoreNoStem = scoreNoStem;
             this.adjustedScore = adjustedScore;
+            this.penalty = penalty;
         }
 
         public String toString() {

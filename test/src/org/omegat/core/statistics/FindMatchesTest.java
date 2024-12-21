@@ -42,7 +42,6 @@ import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import org.omegat.core.Core;
@@ -220,7 +219,6 @@ public class FindMatchesTest {
         assertEquals("ZZZ", result.get(2).translation); // sr
     }
 
-    @Ignore("Should be enalbed when the bug fix proposed.")
     @Test
     public void testSearchBUGS1251() throws Exception {
         ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
@@ -243,10 +241,17 @@ public class FindMatchesTest {
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         List<NearString> result = finder.search(srcText, false, iStopped);
         assertEquals(srcText, result.get(0).source);
-        assertEquals(1, result.size());
+        assertEquals(2, result.size());
+        // match normal
         assertEquals("TM", result.get(0).comesFrom.name());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
+        assertTrue(result.get(0).projs[0].contains("penalty-010"));
+        // match segmented, with penalty
+        assertEquals("TM_SUBSEG", result.get(1).comesFrom.name());
+        assertEquals(90, result.get(1).scores[0].score);
+        // FIXME
+        //assertTrue(result.get(1).projs[0].contains("penalty-010"));
     }
 
     @Test

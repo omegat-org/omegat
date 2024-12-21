@@ -300,7 +300,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = ste.getSrcText();
                 entry.translation = ste.getSourceTranslation();
-                processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.MEMORY,
+                processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.FILES,
                         ste.isSourceTranslationFuzzy(), 0);
             }
         }

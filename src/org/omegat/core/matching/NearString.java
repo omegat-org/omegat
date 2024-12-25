@@ -53,10 +53,10 @@ public class NearString {
         MEMORY,
         /** From external TM in project tm/ folder */
         TM,
-        /** From files */
+        /** From source files */
         FILES,
         /** From sub-segmented match */
-        TM_SUBSEG
+        SUBSEGMENTS
     }
 
     public enum SORT_KEY {

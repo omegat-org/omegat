@@ -177,7 +177,7 @@
 			showing regular fuzzy matches.</para>
 			<para> OmegaT will try to segment the source text into sentences,
 			apply fuzzy matching on the segmented memory entries, and then assemble a paragraph from those matches.
-		    No origin is shown for the match because the assembled paragraph may not exist in the
+		    The origins of the matches can be multiple files or memories because the assembled paragraph may not exist in the
 			translation memories.</para>
 		    <para>Refer to the <link linkend="dialog.preferences.segmentation.setup.type"
 			endterm="dialog.preferences.segmentation.setup.type.title"/> section for more information on

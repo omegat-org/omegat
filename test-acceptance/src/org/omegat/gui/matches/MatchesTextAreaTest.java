@@ -53,7 +53,8 @@ public class MatchesTextAreaTest extends TestCoreGUI {
         window.textBox("matches_pane").requireNotEditable();
         Pattern pattern = Pattern.compile("1. Error while reading MT results\\n"
                 + "Erreur lors de la lecture des résultats de TA\\n"
-                + "<\\d+/\\d+/\\d+%\\s*>");
+                + "<\\d+/\\d+/\\d+%\\s*" + OStrings.getString(
+                        "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY") + "\\s*>");
         window.textBox("matches_pane").requireText(pattern);
         closeProject();
     }

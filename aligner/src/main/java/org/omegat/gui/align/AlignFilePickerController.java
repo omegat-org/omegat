@@ -523,7 +523,9 @@ public class AlignFilePickerController {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
         Preferences.init();
+        Core.initializeGUI(Collections.emptyMap());
         PluginUtils.loadPlugins(Collections.emptyMap());
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         AlignFilePickerController picker = new AlignFilePickerController();

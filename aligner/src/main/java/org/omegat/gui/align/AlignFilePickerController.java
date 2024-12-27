@@ -31,7 +31,6 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -50,13 +49,9 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
-import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
-import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
@@ -504,35 +499,5 @@ public class AlignFilePickerController {
                 return false;
             }
         }
-    }
-
-    /**
-     * Entry point for debugging or standalone use. Optionally accepts four
-     * arguments to pre-fill the picker:
-     * <ol>
-     * <li>Source language
-     * <li>Source file path
-     * <li>Target language
-     * <li>Target file path
-     * </ol>
-     *
-     * @param args command arguments.
-     * @throws Exception when failed to ininitalize OmegaT core.
-     */
-    public static void main(String[] args) throws Exception {
-        System.setProperty("apple.laf.useScreenMenuBar", "true");
-
-        Preferences.init();
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        AlignFilePickerController picker = new AlignFilePickerController();
-        if (args.length == 4) {
-            picker.sourceLanguage = new Language(args[0]);
-            picker.sourceFile = args[1];
-            picker.targetLanguage = new Language(args[2]);
-            picker.targetFile = args[3];
-        }
-        picker.show(null);
     }
 }

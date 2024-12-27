@@ -376,6 +376,7 @@ dependencies {
 
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
+        exclude module: "hunspell"
     }
     testRuntimeOnly(libs.slf4j.jdk14)
 

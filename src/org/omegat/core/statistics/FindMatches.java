@@ -318,6 +318,7 @@ public class FindMatches {
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
                 int maxPenalty = 0;
+                String first = OStrings.getString("MATCHES_THIS_PROJECT");
                 // multiple segments
                 for (String onesrc : segments) {
                     // find match for a separate segment.
@@ -334,6 +335,13 @@ public class FindMatches {
                             }
                         }
                         maxPenalty = Math.max(maxPenalty, segmentMatch.get(0).scores[0].penalty);
+                        if ((segmentMatch.get(0).projs != null) && (segmentMatch.get(0).projs[0] != null)) {
+                            if (segmentMatch.get(0).projs[0].length() > 0) {
+                                first = segmentMatch.get(0).projs[0];
+                            } else {
+                                first = OStrings.getString("MATCHES_THIS_PROJECT");
+                            }
+                        }
                     } else {
                         fsrc.add("");
                         ftrans.add("");
@@ -343,7 +351,8 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, maxPenalty);
+                processEntry(null, entry, first + " " + OStrings.getString("MATCHES_SUBSEGMENTS_HINT"), 
+                    NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty);
             }
         }
         // fill similarity data only for a result

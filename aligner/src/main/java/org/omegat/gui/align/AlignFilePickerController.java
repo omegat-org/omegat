@@ -60,6 +60,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.StaticUIUtils;
+import org.omegat.util.gui.UIDesignManager;
 
 /**
  * Controller for align file picker UI
@@ -523,7 +524,7 @@ public class AlignFilePickerController {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
 
         Preferences.init();
-        Core.initializeGUI(Collections.emptyMap());
+        UIDesignManager.initialize();
         PluginUtils.loadPlugins(Collections.emptyMap());
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));

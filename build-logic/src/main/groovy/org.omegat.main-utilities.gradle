@@ -1,0 +1,47 @@
+plugins {
+    id 'org.omegat.common-utilities'
+}
+
+tasks.register('changedOnBranch') {
+    description = 'List files that have been modified on this git branch.'
+    doLast {
+        def branch = providers.exec {commandLine("git", "name-rev", "--name-only", "HEAD")}
+                .standardOutput.asText.get().trim()
+        def exe = providers.exec {
+            ignoreExitValue = true
+            commandLine("git", "config", "branch.${branch}.pushRemote")
+        }
+        def remote = exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
+        if (remote.empty) {
+            exe = providers.exec {
+                ignoreExitValue = true
+                commandLine("git", "config", "branch.${branch}.remote")
+            }
+            remote = exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
+        }
+        if (remote.empty) {
+            logger.warn("Could not detect git remote name. Assuming 'origin'.")
+            remote = 'origin'
+        }
+        def splitPoint = providers.exec {
+            commandLine("git", "merge-base", "HEAD", "$remote/master")
+        }.standardOutput.asText.get().trim()
+        def gitModifiedFiles = providers.exec {
+            commandLine("git", "diff", "--name-only", "HEAD", "$splitPoint")
+        }.standardOutput.asText.get().trim().tokenize()
+        ext.files = project.files(gitModifiedFiles)
+        files.each { println(it) }
+    }
+}
+
+tasks.register('spotlessChangedApply') {
+    description = 'Apply code formatting to files that have been changed on the current branch.'
+    group = 'omegat workflow'
+    finalizedBy 'spotlessApply'
+    dependsOn changedOnBranch
+    doFirst {
+        spotlessJava.target = changedOnBranch.files.findAll {
+            it.path.endsWith('.java')
+        }
+    }
+}

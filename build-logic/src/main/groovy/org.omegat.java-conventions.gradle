@@ -1,0 +1,146 @@
+import com.github.spotbugs.snom.Confidence
+
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'com.github.ben-manes.versions'
+    id 'com.diffplug.spotless'
+    id 'com.github.spotbugs'
+    id 'org.omegat.common-utilities'
+}
+
+// Definition of OmegaT versioning
+def localPropsFile = file('local.properties')
+
+// Define target Java version to compatible.
+def javaVersion = 11;
+
+// Flag to detect CI/CD environment
+def envIsCi = project.hasProperty('envIsCi') as Boolean
+
+ext {
+    if (localPropsFile.file) {
+        loadProperties(localPropsFile).each { k, v ->
+            if (!findProperty(k)) {
+                set(k, v)
+            }
+        }
+    }
+    providedCoreLibsDir = file('lib/provided/core')
+    providedModuleLibsDir = file('lib/provided/module')
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+}
+
+tasks.withType(Test).configureEach {
+    workingDir project.rootProject.projectDir
+}
+
+javadoc {
+    failOnError = false
+    options {
+        jFlags('-Duser.language=en')
+        addStringOption('locale', 'en_US')
+        addStringOption('bottom', '<span>Copyright 2000-2023, OmegaT project and contributors</span>')
+        addStringOption('encoding', 'UTF-8')
+        addBooleanOption("Xdoclint:none", true)
+        addBooleanOption('html5', true)
+        addBooleanOption('frames', false)
+        addBooleanOption('public', true)
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.compilerArgs.addAll '-Xlint', '-Werror'
+}
+
+spotbugs {
+    reportLevel = Confidence.valueOf('HIGH')
+}
+
+tasks.register('spotbugsMainReport') {
+    def reportFile = file("build/reports/spotbugs/main.txt")
+    doLast {
+        if (reportFile.exists()) {
+            println()
+            reportFile.readLines().forEach {
+                println(it)
+            }
+        }
+    }
+    group = 'verification'
+}
+
+tasks.register('spotbugsTestReport') {
+    def reportFile = file("build/reports/spotbugs/test.txt")
+    doLast {
+        if (reportFile.exists()) {
+            println()
+            reportFile.readLines().forEach {
+                println(it)
+            }
+        }
+    }
+    group = 'verification'
+}
+
+spotbugsMain {
+    if (envIsCi) {
+        extraArgs = ['-longBugCodes']
+        jvmArgs = ['-Duser.language=en']
+    }
+    reports {
+        text.required = envIsCi
+        html.required = !envIsCi
+    }
+    finalizedBy(spotbugsMainReport)
+}
+
+spotbugsTest {
+    if (envIsCi) {
+        extraArgs = ['-longBugCodes']
+        jvmArgs = ['-Duser.language=en']
+    }
+    reports {
+        text.required = envIsCi
+        html.required = !envIsCi
+    }
+    finalizedBy(spotbugsTestReport)
+}
+
+checkstyle {
+    toolVersion = libs.versions.checkstyle.get()
+}
+checkstyleMain.exclude '**/gen/**'
+
+spotless {
+    enforceCheck = false
+    java {
+        targetExclude 'src/gen/**'
+        eclipse().configFile file("${rootDir}/config/spotless/eclipse-formatting.xml")
+        removeUnusedImports()
+    }
+}
+
+tasks.withType(Copy).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+tasks.withType(Sync).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+tasks.withType(Zip).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}

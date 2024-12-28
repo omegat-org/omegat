@@ -1,0 +1,21 @@
+plugins {
+    id 'org.omegat.common-utilities'
+}
+
+ext {
+    omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
+
+    getUpdateSuffix = { update ->
+        if (!update || update == '0') {
+            return ''
+        }
+        if (update.length() == 1) {
+            return "_0${update}"
+        }
+        "_${update}"
+    }
+}
+
+tasks.register('printVersion') {
+    println project.version
+}

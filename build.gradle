@@ -31,7 +31,7 @@ application {
 // Force Java runtime for Gradle on Java 17
 def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 tasks.named('updateDaemonJvm') {
-    jvmVersion = JavaVersion.VERSION_17
+    jvmVersion = JavaLanguageVersion.of(17)
 }
 
 // Define target Java version to compatible.

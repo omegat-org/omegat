@@ -3,6 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 import java.nio.file.Paths
 
+def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 def omegatJarFilename = jar.archiveFileName.get()
 
 // clean work folder for jpackage
@@ -100,11 +101,11 @@ tasks.register('jpackage', Exec) {
             '--app-version', version,
             '--description', distDescription,
             '--icon', icon,
-            '--name', application.applicationName,
+            '--name', appName,
             '--dest', file(layout.buildDirectory.file("jpackage/app-image")),
             '--vendor', distAppVendor,
             '--input', file(layout.buildDirectory.file('jars')),
-            '--main-class', application.mainClass.get(),
+            '--main-class', mainClassName,
             '--main-jar', omegatJarFilename,
             '--java-options', "-Xmx1024M",
             '--java-options', "--add-opens",

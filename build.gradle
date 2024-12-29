@@ -19,12 +19,11 @@ plugins {
 }
 
 application {
-    applicationName = 'OmegaT'
-    mainClass = 'org.omegat.Main'
+    applicationName = appName
+    mainClass = mainClassName
 }
 
 // Force Java runtime for Gradle on Java 17
-def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
 tasks.named('updateDaemonJvm') {
     jvmVersion = JavaLanguageVersion.of(17)
 }
@@ -759,6 +758,163 @@ tasks.register('win') {
     description = 'Build the Windows distributions.'
     group = 'omegat distribution'
 }
+
+ext.makeWinTask = { args ->
+    def fullVersion = project.version + omtVersion.beta
+    def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
+    def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
+    def signedWinExe = base.distsDirectory.file("${installerBasename}_Signed.exe")
+    def prepDistsTaskName = "${args.name}Prep"
+    def genDistsTaskName = "${args.name}Gen"
+    def distsTaskName = "${args.name}"
+    def signedTaskName = "${args.name}Signed"
+    def signedTaskCommandArgs = { arg2 ->
+        def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode').toString()
+        def commandArgs = [exe, 'sign']
+        if (project.hasProperty('pkcs11module')) {
+            commandArgs.addAll('-pkcs11module', project.property('pkcs11module'))
+        }
+        if (project.hasProperty('winCodesignCert')) {
+            commandArgs.addAll('-certs', project.property('winCodesignCert'))
+        }
+        if (project.hasProperty('pkcs11cert')) {
+            commandArgs.addAll('-pkcs11cert', project.property('pkcs11cert'))
+        }
+        if (project.hasProperty('winCodesignPassword')) {
+            commandArgs.addAll('-pass', project.property('winCodesignPassword'))
+        }
+        if (project.hasProperty('winCodesignDevice')) {
+            envVars['USBDEV'] = project.property('winCodesignDevice')
+        }
+        commandArgs.addAll(
+                '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl') :
+                'http://time.certum.pl/',
+                '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
+                '-in', installerWinExe.get().asFile,
+                '-out', signedWinExe.get().asFile
+        )
+        return commandArgs
+    }
+
+    tasks.register(prepDistsTaskName, Sync) {
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
+        }
+        doFirst {
+            delete "$destinationDir/jre"
+            delete installerWinExe
+        }
+        with distributions.main.contents
+        destinationDir = file(layout.buildDirectory.file("innosetup/${args.name}"))
+        outputs.upToDateWhen {
+            // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
+            def f1 = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar").get().asFile
+            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
+            f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
+        }
+        from('release/win32-specific') {
+            include 'OmegaT.l4J.ini'
+            include 'OmegaT.iss'
+            filter(ReplaceTokens, tokens: [
+                    VERSION_NUMBER_SUBST : fullVersion,
+                    OUTPUT_BASENAME_SUBST: installerBasename.toString(),
+                    CUSTOM_MESSAGES_SUBST: getInnoSetupCustomMessages(),
+                    ARCHITECTURE_SUBST   : args.arch ?: ''
+            ])
+            filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+            filteringCharset = 'UTF-8'
+        }
+        from('build/launch4j') {
+            include '*.exe'
+        }
+        if (args.jrePath && !args.jrePath.empty) {
+            from(zipTree(args.jrePath.singleFile)) {
+                includeEmptyDirs = false
+                eachFile {
+                    replaceRelativePathSegment(it, /jdk.*-jre/, 'jre')
+                }
+            }
+        }
+        dependsOn createAllExecutables
+    }
+
+    tasks.register(genDistsTaskName, Exec) {
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
+        }
+        dependsOn prepDistsTaskName
+        inputs.files(
+                layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar"),
+                layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss"),
+                layout.buildDirectory.file("innosetup/${args.name}/OmegaT.l4j.ini"),
+        )
+        // You'd think we could just set the PATH, but there be dragons here
+        // https://github.com/palantir/gradle-docker/issues/162
+        def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
+        def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
+        logging.captureStandardOutput LogLevel.INFO
+        commandLine exe, '/Qp', iss
+        outputs.file layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
+        doLast {
+            println ""
+            def f3 = layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe").get().asFile
+            logger.info('Built ' + f3.toString() + "(" + f3.length() + ")")
+        }
+    }
+
+    tasks.register(distsTaskName, Copy) {
+        description = "Create a Windows installer for ${args.name} distro. " +
+                'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
+        onlyIf {
+            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                     'InnoSetup or Docker not installed'])
+        }
+        from layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
+        into base.distsDirectory
+        outputs.file installerWinExe
+        dependsOn genDistsTaskName
+    }
+
+    tasks.register(signedTaskName, Exec) {
+        group = 'omegat distribution'
+        inputs.file installerWinExe skipWhenEmpty()
+        outputs.file signedWinExe
+        // Starting from Nov 2022, certification provider force to use HSM to
+        // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
+        // standards will require private keys for standard code signing
+        // certificates to be stored on hardware certified as FIPS 140 Level 2,
+        // Common Criteria EAL 4+, or equivalent.
+        // #1179 build/release: Windows binary signature with PKCS#11 HSM
+        // https://sourceforge.net/p/omegat/bugs/1179/
+        // requires osslsigncode version 2.5 or later.
+        onlyIf {
+            // Set these in e.g. local.properties
+            def props = ['pkcs11module', 'winCodesignPassword']
+            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
+                    [exePresent('osslsigncode'), 'osslsigncode is not installed'])
+            // note: container image amake/innosetup has osslsigntool 1.7 which don't work.
+            // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
+            // 'neither osslsigncode or docker/nerdctl is not installed'])
+        }
+        doFirst {
+            delete signedWinExe
+        }
+        def envVars = [:]
+        commandLine(signedTaskCommandArgs())
+        environment(envVars)
+        dependsOn distsTaskName
+    }
+    assemble.dependsOn args.name, signedTaskName
+    win.dependsOn args.name, signedTaskName
+}
+makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
+makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }

@@ -451,11 +451,6 @@ tasks.register('hunspellSignedJar', Jar) {
     archiveFileName.set(hunspellJar.name)
 }
 
-tasks.register('mac') {
-    description = 'Build the Mac distributions.'
-    group = 'omegat distribution'
-}
-
 ext.makeMacTask = { args ->
     def installTaskName = 'install' + args.name.capitalize()  + "Dist"
     def signedInstallTaskName = 'install' + args.name.capitalize() + "SignedDist"
@@ -511,7 +506,6 @@ ext.makeMacTask = { args ->
         }
         group = 'omegat distribution'
     }
-    mac.dependsOn distZipTaskName
     assemble.dependsOn distZipTaskName
 
     tasks.register(installTaskName, Sync) {
@@ -708,6 +702,12 @@ ext.makeLinuxTask = { args ->
 }
 makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE)
 makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE)
+tasks.register('mac') {
+    description = 'Build the Mac distributions.'
+    group = 'omegat distribution'
+    dependsOn macX64DistZip
+    dependsOn macArmDistZip
+}
 
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false

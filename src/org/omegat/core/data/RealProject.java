@@ -39,12 +39,10 @@ package org.omegat.core.data;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.UncheckedIOException;
 import java.io.Writer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystemLoopException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -58,7 +56,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -68,6 +65,8 @@ import javax.xml.stream.XMLStreamException;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
@@ -91,6 +90,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -135,7 +135,7 @@ import gen.core.filters.Filters;
  * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
-    private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
+    private final ILogger logger;
 
     protected final ProjectProperties config;
     protected final RemoteRepositoryProvider remoteRepositoryProvider;
@@ -249,10 +249,11 @@ public class RealProject implements IProject {
 
         sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE),
                 props.getSourceTokenizer());
-        Log.log("Source tokenizer: " + sourceTokenizer.getClass().getName());
+        Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
         targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET),
                 props.getTargetTokenizer());
-        Log.log("Target tokenizer: " + targetTokenizer.getClass().getName());
+        Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
+        logger = LoggerFactory.getLogger(RealProject.class, OStrings.getResourceBundle());
     }
 
     public void saveProjectProperties() throws Exception {
@@ -410,15 +411,14 @@ public class RealProject implements IProject {
             // build word count
             StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
             stat.updateStatisticsInfo(hotStat);
-            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData());
+            Statistics.writeStat(config.getProjectInternal(), stat);
 
             loaded = true;
 
             // Project Loaded...
             Core.getMainWindow().showStatusMessageRB(null);
 
-            setProjectModified(false);
+            setProjectModified(importHandler.didAnyChange);
         } catch (OutOfMemoryError oome) {
             // Fix for bug 1571944 @author Henry Pijffers
             // (henry.pijffers@saxnot.com)
@@ -710,7 +710,8 @@ public class RealProject implements IProject {
         }
 
         // COMPILE event is fired before committing translated files to remote
-        // repository to be able to modify the resulting files before sending them to
+        // repository to be able to modify the resulting files before sending
+        // them to
         // the repository (BUGS#1176)
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
@@ -718,7 +719,15 @@ public class RealProject implements IProject {
                 && isOnlineMode) {
             tmxPrepared = null;
             glossaryPrepared = null;
-            // commit translations
+            // Ticket 1690 - build project statistics files
+            // so that contents of these files is up to date with target files
+            // sent at same moment
+            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+            stat.updateStatisticsInfo(hotStat);
+            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
+            Statistics.writeStat(fn, stat.getTextData());
+            Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
+            // commit translations and statistics
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
                 remoteRepositoryProvider.switchAllToLatest();
@@ -726,6 +735,13 @@ public class RealProject implements IProject {
                         null);
                 remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(),
                         "Project translation");
+                // Convert stats file name to relative
+                ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+                path.setRelativeOrAbsolute(fn);
+                fn = path.getUnderRoot();
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
+                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
+                remoteRepositoryProvider.commitFiles(fn, "Statistics");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
             } catch (Exception e) {
                 Log.logErrorRB("TF_COMMIT_TARGET_ERROR");
@@ -769,7 +785,7 @@ public class RealProject implements IProject {
 
         CommandVarExpansion expander = new CommandVarExpansion(command);
         command = expander.expandVariables(config);
-        Log.log("Executing command: " + command);
+        Log.logInfoRB("EXECUTING_COMMAND", command);
         try {
             Process p = Runtime.getRuntime().exec(StaticUtils.parseCLICommand(command));
             processCache.push(p);
@@ -858,8 +874,7 @@ public class RealProject implements IProject {
                 // update statistics
                 StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
                 stat.updateStatisticsInfo(hotStat);
-                String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-                Statistics.writeStat(fn, stat.getTextData());
+                Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {
                 Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }
@@ -883,7 +898,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
             return;
         }
-        LOGGER.fine("Prepare team sync");
+        logger.atDebug().log("Prepare team sync");
         tmxPrepared = null;
         glossaryPrepared = null;
         remoteRepositoryProvider.cleanPrepared();
@@ -917,7 +932,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.PREPARED) {
             return;
         }
-        LOGGER.fine("Rebase team sync");
+        logger.atDebug().log("Rebase team sync");
         try {
             preparedStatus = PreparedStatus.PREPARED2;
             synchronized (RealProject.this) {
@@ -933,7 +948,7 @@ public class RealProject implements IProject {
                         if (preparedStatus != PreparedStatus.REBASED) {
                             return;
                         }
-                        LOGGER.fine("Commit team sync");
+                        logger.atDebug().log("Commit team sync");
                         try {
                             String newVersion = RebaseAndCommit.commitPrepared(tmxPrepared,
                                     remoteRepositoryProvider, null);
@@ -1028,16 +1043,19 @@ public class RealProject implements IProject {
                         }
 
                         @Override
-                        public void rebaseAndSave(File out) throws Exception {
-                            mergeTMX(baseTMX, headTMX, commitDetails);
+                        public void rebaseAndSave(File tempOut) throws Exception {
+                            // Rebase-merge and immediately save mergedTMX
+                            // to tempOut.
+                            // It shall not save it as the projectTMX here.
+                            ProjectTMX mergedTMX = mergeTMX(baseTMX, headTMX, commitDetails);
+                            mergedTMX.exportTMX(config, tempOut, false, false, true);
+                        }
 
+                        @Override
+                        public void reload(File file) throws Exception {
                             ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(),
-                                    new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION), null);
+                                    config.isSentenceSegmentingEnabled(), file, null);
                             projectTMX.replaceContent(newTMX);
-
-                            projectTMX.exportTMX(config, out, false, false, true);
-
                         }
 
                         @Override
@@ -1059,6 +1077,8 @@ public class RealProject implements IProject {
                 final List<GlossaryEntry> glossaryEntries;
                 if (glossaryFile.exists()) {
                     glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+                    logger.atDebug().setMessage("Read {0} glossaries from {1}").addArgument(glossaryEntries.size())
+                            .addArgument(glossaryFile).log();
                 } else {
                     glossaryEntries = Collections.emptyList();
                 }
@@ -1070,6 +1090,9 @@ public class RealProject implements IProject {
                             public void parseBaseFile(File file) throws Exception {
                                 if (file.exists()) {
                                     baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                                    logger.atDebug().setMessage("read {0} entries from local glossary.txt")
+                                            .addArgument(baseGlossaryEntries.size())
+                                            .log();
                                 } else {
                                     baseGlossaryEntries = new ArrayList<>();
                                 }
@@ -1079,6 +1102,10 @@ public class RealProject implements IProject {
                             public void parseHeadFile(File file) throws Exception {
                                 if (file.exists()) {
                                     headGlossaryEntries = GlossaryReaderTSV.read(file, true);
+                                    logger.atDebug()
+                                            .setMessage("read {0} entries from remote glossaries")
+                                            .addArgument(headGlossaryEntries.size())
+                                            .log();
                                 } else {
                                     headGlossaryEntries = new ArrayList<>();
                                 }
@@ -1095,9 +1122,17 @@ public class RealProject implements IProject {
                                 headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
                                 headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
 
+                                logger.atDebug().setMessage("Update and write glossary.txt with {0} entries.")
+                                        .addArgument(headGlossaryEntries.size()).log();
                                 for (GlossaryEntry ge : headGlossaryEntries) {
                                     GlossaryReaderTSV.append(out, ge);
                                 }
+                            }
+
+                            @Override
+                            public void reload(final File file) {
+                                logger.atDebug().setMessage("Reloading glossary file {0}").addArgument(file).log();
+                                notifyGlossaryManagerFileChanged(file);
                             }
 
                             @Override
@@ -1126,7 +1161,8 @@ public class RealProject implements IProject {
      *
      * File 2: headTMX (theirs)
      */
-    protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+    protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+        ProjectTMX mergedTMX;
         StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                 .setParentWindow(Core.getMainWindow().getApplicationFrame())
                 // More than this number of conflicts will trigger List View by
@@ -1134,14 +1170,14 @@ public class RealProject implements IProject {
                 .setListViewThreshold(5);
         String srcLang = config.getSourceLanguage().getLanguage();
         String trgLang = config.getTargetLanguage().getLanguage();
-        ProjectTMX mergedTMX = SuperTmxMerge.merge(
+        mergedTMX = SuperTmxMerge.merge(
                 new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-        projectTMX.replaceContent(mergedTMX);
-        Log.logDebug(LOGGER, "Merge report: {0}", props.getReport());
+        logger.atDebug().setMessage("Merge report: {0}").addArgument(props::getReport).log();
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
+        return mergedTMX;
     }
 
     /**
@@ -1184,7 +1220,7 @@ public class RealProject implements IProject {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
         } catch (Exception ex) {
-            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(), Log.getLogLocation());
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING");
             throw ex;
         }
         if (file.exists()) {
@@ -1228,24 +1264,13 @@ public class RealProject implements IProject {
                 loadFilesCallback.fileFinished();
 
                 if (filter != null && !fi.entries.isEmpty()) {
-                    fi.filterClass = filter.getClass(); // Don't store the
-                                                        // instance, because
-                                                        // every file gets an
-                                                        // instance and
-                                                        // then we consume a lot
-                                                        // of memory for all
-                                                        // instances.
-                                                        // See also IFilter
-                                                        // "TODO: each filter
-                                                        // should be stateless"
+                    fi.filterClass = filter.getClass();
+                    // Don't store the instance, because
+                    // every file gets an instance and
+                    // then we consume a lot of memory for all
+                    // instances. See also IFilter
                     fi.filterFileFormatName = filter.getFileFormatName();
-                    try {
-                        fi.fileEncoding = filter.getInEncodingLastParsedFile();
-                    } catch (Error e) { // In case a filter doesn't have
-                                        // getInEncodingLastParsedFile() (e.g.,
-                                        // Okapi plugin)
-                        fi.fileEncoding = "";
-                    }
+                    fi.fileEncoding = filter.getInEncodingLastParsedFile();
                     projectFilesList.add(fi);
                 }
             } catch (TranslationException e) {
@@ -1264,7 +1289,7 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         }
         long en = System.currentTimeMillis();
-        Log.log("Load project source files: " + (en - st) + "ms");
+        Log.logInfoRB("CT_LOAD_SRC_FILES", en - st);
     }
 
     protected void findNonUniqueSegments() {
@@ -1807,6 +1832,13 @@ public class RealProject implements IProject {
             fn = fn.replaceAll(f, t);
         }
         return StringUtil.removeXMLInvalidChars(fn);
+    }
+
+    protected void notifyGlossaryManagerFileChanged(File file) {
+        GlossaryManager gm = Core.getGlossaryManager();
+        if (gm != null) {
+            gm.fileChanged(file);
+        }
     }
 
     protected class LoadFilesCallback extends ParseEntry {

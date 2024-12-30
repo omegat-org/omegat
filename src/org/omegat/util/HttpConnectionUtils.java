@@ -36,6 +36,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -44,9 +46,14 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.EncoderException;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.io.IOUtils;
-
+import org.apache.commons.validator.routines.UrlValidator;
 
 /**
  * Utility collection for http connections.
@@ -70,16 +77,54 @@ public final class HttpConnectionUtils {
      */
     private static final int TIMEOUT_MS = 10_000;
 
+    // Regular Expression for URL validation
+    // From https://gist.github.com/dperini/729294
+    // and https://github.com/JetBrains/intellij-community
+    // See lib/licenses/Licenses.txt
+    private static final String REGEX_URL = "(?:https?|ftp)://" // protocol
+            + "(?:\\S+(?::\\S*)?@)?(?:(?!" // user:pass (optional)
+            + "(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\."
+            + "(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\."
+            + "(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))"
+            // IP addresses
+            + "|" + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
+            + "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*"
+            + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)" // domain host
+            + "(?::\\d{2,5})?" // port (optional)
+            + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?"; // resources
+
+    /**
+     * Regular Expression for https and ftp URL validation.
+     * <p>
+     * You are recommended to use commons-validator instead of hand-crafted
+     * here. We leave it as is for keeping compatibility.
+     */
+    public static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+",
+            Pattern.CASE_INSENSITIVE);
+
+    /**
+     * Regular Expression for file URL validation.
+     */
+    public static final Pattern FILE_URL_PATTERN = Pattern
+            .compile("\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
+    private static final URLCodec codec = new URLCodec(StandardCharsets.UTF_8.name());
+
     /**
      * Don't instantiate util class.
      */
-    private HttpConnectionUtils() {}
+    private HttpConnectionUtils() {
+    }
 
     /**
      * Get resource from URL with default timeout.
-     * @param url resource URL.
+     * 
+     * @param url
+     *            resource URL.
      * @return string returned from server.
-     * @throws IOException raises when connection is failed.
+     * @throws IOException
+     *             raises when connection is failed.
      */
     public static String getURL(URL url) throws IOException {
         return getURL(url, TIMEOUT_MS);
@@ -88,10 +133,13 @@ public final class HttpConnectionUtils {
     /**
      * Download a file to memory.
      *
-     * @param url resource URL to download
-     * @param timeout timeout to connect and read.
+     * @param url
+     *            resource URL to download
+     * @param timeout
+     *            timeout to connect and read.
      * @return returned string
-     * @throws IOException when connection and read method error.
+     * @throws IOException
+     *             when connection and read method error.
      */
     public static String getURL(URL url, int timeout) throws IOException {
         URLConnection urlConn = url.openConnection();
@@ -105,12 +153,18 @@ public final class HttpConnectionUtils {
     /**
      * Download Zip file from remote site and extract it to specified directory.
      *
-     * @param url URL of zip file resource to download.
-     * @param dir target directory to extract
-     * @param expectedFiles filter extract file names
-     * @throws IOException raises when extraction is failed, maybe flaky download happened.
+     * @param url
+     *            URL of zip file resource to download.
+     * @param dir
+     *            target directory to extract
+     * @param expectedFiles
+     *            filter extract file names
+     * @throws IOException
+     *             raises when extraction is failed, maybe flaky download
+     *             happened.
      */
-    public static void downloadZipFileAndExtract(URL url, File dir, List<String> expectedFiles) throws IOException {
+    public static void downloadZipFileAndExtract(URL url, File dir, List<String> expectedFiles)
+            throws IOException {
         URLConnection conn = url.openConnection();
         conn.setConnectTimeout(TIMEOUT_MS);
         conn.setReadTimeout(TIMEOUT_MS);
@@ -127,17 +181,26 @@ public final class HttpConnectionUtils {
 
     /**
      * Downloads a binary file from a URL.
-     * @param fileURL HTTP URL of the file to be downloaded
-     * @param headers Additional HTTP headers
-     * @param expectedMime Mime type expected and check against such as ["application/octet-stream",
-     *                    "application/jar-archive"]. If getting type is differed, return false.
-     * @param saveFilePath path of the file
+     * 
+     * @param fileURL
+     *            HTTP URL of the file to be downloaded
+     * @param headers
+     *            Additional HTTP headers
+     * @param expectedMime
+     *            Mime type expected and check against such as
+     *            ["application/octet-stream", "application/jar-archive"]. If
+     *            getting type is differed, return false.
+     * @param saveFilePath
+     *            path of the file
      * @return true when succeeded, otherwise false.
-     * @throws IOException raise when connection and file write failed.
-     * @throws FlakyDownloadException raise when downloaded file length differs from expected content length.
+     * @throws IOException
+     *             raise when connection and file write failed.
+     * @throws FlakyDownloadException
+     *             raise when downloaded file length differs from expected
+     *             content length.
      */
     public static boolean downloadBinaryFile(final URL fileURL, final Map<String, String> headers,
-                                             final Set<String> expectedMime, final File saveFilePath)
+            final Set<String> expectedMime, final File saveFilePath)
             throws IOException, FlakyDownloadException {
         HttpURLConnection httpURLConnection = (HttpURLConnection) fileURL.openConnection();
         headers.forEach(httpURLConnection::setRequestProperty);
@@ -178,7 +241,8 @@ public final class HttpConnectionUtils {
      * @param target
      *            String representation of well-formed URL.
      * @return byte array or null if status is not 200 OK
-     * @throws IOException raise when connection failed.
+     * @throws IOException
+     *             raise when connection failed.
      */
     public static byte[] getURLasByteArray(String target) throws IOException {
         URL url = new URL(target);
@@ -196,10 +260,13 @@ public final class HttpConnectionUtils {
     /**
      * Method call without additional headers for possible calls from plugins.
      *
-     * @param address URL to post
-     * @param params post parameters in Map
+     * @param address
+     *            URL to post
+     * @param params
+     *            post parameters in Map
      * @return result string returned from server.
-     * @throws IOException raises when connection failed.
+     * @throws IOException
+     *             raises when connection failed.
      */
     public static String post(String address, Map<String, String> params) throws IOException {
         return post(address, params, null);
@@ -338,8 +405,8 @@ public final class HttpConnectionUtils {
      *            additional headers for request, can be null
      * @return Server output
      */
-    public static String postJSON(String address, String json,
-            Map<String, String> additionalHeaders) throws IOException {
+    public static String postJSON(String address, String json, Map<String, String> additionalHeaders)
+            throws IOException {
         URL url = new URL(address);
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -402,6 +469,115 @@ public final class HttpConnectionUtils {
         try (InputStream in = conn.getInputStream()) {
             return IOUtils.toString(in, charset);
         }
+    }
+
+    public static String encodeHttpURLs(String text) {
+        UrlValidator urlValidator = new UrlValidator();
+        StringBuilder result = new StringBuilder();
+        Matcher m = HTTP_URL_PATTERN.matcher(text);
+        int lastIndex = 0;
+        while (m.find()) {
+            final String url = m.group();
+            if (!urlValidator.isValid(url)) {
+                try {
+                    URI uri = new URI(url);
+                    String encodedPath = encodePath(uri.getRawPath());
+                    String encodedQuery = encodeQuery(uri.getRawQuery());
+                    result.append(text, lastIndex, m.start());
+                    result.append(uri.getScheme()).append("://").append(uri.getAuthority());
+                    if (uri.getRawUserInfo() != null) {
+                        result.append(uri.getRawUserInfo()).append("@");
+                    }
+                    if (!StringUtil.isEmpty(encodedPath)) {
+                        result.append(encodedPath);
+                    }
+                    if (!StringUtil.isEmpty(encodedQuery)) {
+                        result.append("?").append(encodedQuery);
+                    }
+                    if (uri.getRawFragment() != null) {
+                        result.append("#").append(uri.getRawFragment());
+                    }
+                } catch (EncoderException | URISyntaxException ex) {
+                    result.append(url);
+                }
+                lastIndex = m.end();
+            }
+        }
+        result.append(text.substring(lastIndex));
+        return result.toString();
+    }
+
+    public static String encodeURIComponent(String component) throws EncoderException {
+        if (component == null) {
+            return null;
+        }
+        return codec.encode(component);
+    }
+
+    public static String encodePath(String path) throws EncoderException {
+        String[] pathSegments = path.split("/");
+        StringBuilder encodedPath = new StringBuilder();
+        for (String segment : pathSegments) {
+            if (!segment.isEmpty()) {
+                encodedPath.append("/").append(codec.encode(segment));
+            }
+        }
+        return encodedPath.toString();
+    }
+
+    public static String encodeQuery(String query) throws EncoderException {
+        if (query == null) {
+            return null;
+        }
+        String[] querySegments = query.split("&");
+        StringBuilder encodedQuery = new StringBuilder();
+        for (int i = 0; i < querySegments.length; i++) {
+            final String segment = querySegments[i];
+            if (!segment.isEmpty()) {
+                if (i != 0) {
+                    encodedQuery.append("&");
+                }
+                String[] exp = segment.split("=");
+                encodedQuery.append(codec.encode(exp[0])).append("=").append(codec.encode(exp[1]));
+            }
+        }
+        return encodedQuery.toString();
+    }
+
+    public static String decodeHttpURLs(String text) {
+        UrlValidator urlValidator = new UrlValidator();
+        StringBuilder result = new StringBuilder();
+        Matcher m = HTTP_URL_PATTERN.matcher(text);
+        int lastIndex = 0;
+        while (m.find()) {
+            final String uri = m.group();
+            if (urlValidator.isValid(uri)) {
+                result.append(text, lastIndex, m.start());
+                try {
+                    result.append(codec.decode(uri));
+                } catch (DecoderException ex) {
+                    result.append(uri);
+                }
+                lastIndex = m.end();
+            }
+        }
+        result.append(text.substring(lastIndex));
+        return result.toString();
+    }
+
+    /**
+     * Validate URL string.
+     * 
+     * @param remoteUrl
+     *            URL candidate string.
+     * @return true when valid, otherwise false.
+     */
+    public static boolean checkUrl(String remoteUrl) {
+        if (remoteUrl.isEmpty()) {
+            return false;
+        }
+        UrlValidator urlValidator = new UrlValidator();
+        return urlValidator.isValid(remoteUrl);
     }
 
     /**

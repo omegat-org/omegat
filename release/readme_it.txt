@@ -1,4 +1,5 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2021
+La versione italiana di OmegaT è stata tradotta da:
+Valter Mura
 
 
 Che cosa è OmegaT?
@@ -67,21 +68,6 @@ essere avviato.
 
 
 
-Uso di Java Web Start per l'installazione di OmegaT (tutte le piattaforme)
-==========================================================================
-
-Se Java è già installato sul proprio sistema, un metodo per installare OmegaT
-è usare Java Web Start.
-
-A questo proposito, scaricare ed eseguire il file seguente:
-
-  https://omegat.sourceforge.net/webstart/OmegaT.jnlp
-
-Esso installerà l'ambiente corretto per il proprio computer e l'applicazione
-per il primo avvio. Non è necessario eseguire online le chiamate successive.
-
-
-
 Avvio di OmegaT (Windows)
 =========================
 
@@ -147,17 +133,18 @@ Contributi
 
 OmegaT è un lavoro originale di Keith Godfrey.
 
-Aaron Madlon-Kay è il responsabile del progetto OmegaT.
+Jean-Christophe Helary è il responsabile del progetto OmegaT.
 
 Team attuale:
 (ordine alfabetico)
 
-- Vincent Bidaux (responsabile della documentazione)
 - Marco Cevoli (responsabile della comunità Telegram)
 - Jean-Christophe Helary (responsabile della comunità Twitter)
-- Kos Ivantsof (responsabile della localizzazione)
+- Kos Ivantsov (responsabile della localizzazione)
 - Concepción Martin (responsabile della comunità Facebook)
+- Hiroshi Miura (sviluppatore principale)
 - Briac Pilpré (webmaster)
+- Philippe Tourigny (responsabile della documentazione)
 - Lucie Vecerova (responsabile della comunità Facebook)
 
 I contributi al codice sono documentati in /docs/contributors.txt.
@@ -165,11 +152,12 @@ I contributi al codice sono documentati in /docs/contributors.txt.
 Elenco dei contributi precedenti (in ordine alfabetico)
 
 - Anthony Baldwin (responsabile della localizzazione)
+- Vincent Bidaux (responsabile della documentazione)
 - Didier Briel (responsabile del progetto)
 - Alex Buloichik (sviluppatore principale)
 - Sabine Cretella
 - Dmitri Gabinski
-- Jean-Christophe Helary (titolare del gruppo di supporto, responsabile della localizzazione)
+- Aaron Madlon-Kay (responsabile del progetto)
 - Maxym Mykhalchuk (sviluppatore principale)
 - Samuel Murray
 - Henry Pijffers (responsabile dei rilasci)
@@ -201,3 +189,7 @@ Richieste di miglioramenti (in Inglese), nel sito SourceForge:
 Segnalazione errori (in Inglese), nel sito SourceForge:
 
   https://sourceforge.net/p/omegat/bugs/
+
+OmegaT Contribution Guide
+
+  https://omegat.readthedocs.io/en/latest/

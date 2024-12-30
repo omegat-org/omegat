@@ -3,7 +3,7 @@
 #           with fuzzy matching, translation memory, keyword search,
 #           glossaries, and translation leveraging into updated projects.
 #
-#  Copyright (C) 2022,2023 Hiroshi Miura
+#  Copyright (C) 2022-2024 Hiroshi Miura
 #                Home page: https://www.omegat.org/
 #                Support center: https://omegat.org/support
 #
@@ -24,17 +24,25 @@
 #  **************************************************************************/
 #
 
-FROM debian:bullseye-slim
-RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools \
-    curl subversion unzip
-RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh \
-    && touch /home/omegat/.ssh/known_hosts && chmod 600 /home/omegat/.ssh/known_hosts
-COPY ssh_config /home/omegat/.ssh/config
+FROM debian:bookworm-slim
+ARG CAVER=1.0.3-1
+ARG JAVA=17
+ARG JDKVER=jdk_17.0.9.0.0+9
+ARG GRADLE=8.8
+RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git inotify-tools curl subversion unzip rsync  \
+ java-common libasound2 libfontconfig1 libfreetype6 libxi6 libxrender1 libxtst6 p11-kit
+RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh
+RUN chown -R omegat.omegat /home/omegat
+COPY --chown=omegat ssh_config /home/omegat/.ssh/config
+COPY --chown=omegat gitconfig /home/omegat/.gitconfig
 COPY entrypoint.sh /usr/local/bin/
-RUN chown -R omegat /home/omegat && chmod 755 /usr/local/bin/entrypoint.sh && chmod 700 /home/omegat/.ssh \
-    && chmod 600 /home/omegat/.ssh/config
-RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-7.5.1-bin.zip  \
-    && unzip -q gradle-7.5.1-bin.zip && rm -f gradle-7.5.1-bin.zip)
+RUN chmod 755 /usr/local/bin/entrypoint.sh && chmod 700 /home/omegat/.ssh && chmod 600 /home/omegat/.ssh/config
+RUN curl -LO https://packages.adoptium.net/artifactory/deb/pool/main/a/adoptium-ca-certificates/adoptium-ca-certificates_${CAVER}_all.deb \
+    && curl -LO https://packages.adoptium.net/artifactory/deb/pool/main/t/temurin-${JAVA}/temurin-${JAVA}-${JDKVER}_amd64.deb \
+    && dpkg -i adoptium-ca-certificates_${CAVER}_all.deb temurin-${JAVA}-${JDKVER}_amd64.deb \
+    && rm -f adoptium-ca-certificates_${CAVER}_all.deb temurin-${JAVA}-${JDKVER}_amd64.deb
+RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-${GRADLE}-bin.zip \
+    && unzip -q gradle-${GRADLE}-bin.zip && rm -f gradle-${GRADLE}-bin.zip) && mv /opt/gradle-${GRADLE} /opt/gradle
 
 USER omegat
 

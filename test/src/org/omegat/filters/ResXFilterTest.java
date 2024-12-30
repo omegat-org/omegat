@@ -25,11 +25,23 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+import java.util.List;
+
 import org.junit.Test;
+
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.resx.ResXFilter;
 
 public class ResXFilterTest extends TestFilterBase {
+    @Test
+    public void testParseSimple() throws Exception {
+        List<String> lines = parse(new ResXFilter(), "test/data/filters/ResX/Simple.resx");
+        assertEquals(1, lines.size());
+        assertEquals("\"Hocht\u00FCddel\"", lines.get(0));
+    }
 
     @Test
     public void testLoad() throws Exception {
@@ -41,5 +53,17 @@ public class ResXFilterTest extends TestFilterBase {
                 "This is a comment. It should not be displayed to the translator.");
         checkMulti("One more text", "InfoExperimentStoppingMessage2", null, null, null, "Second comment");
         checkMultiEnd();
+    }
+
+    @Test
+    public void testParse() throws Exception {
+        List<String> lines = parse(new ResXFilter(), "test/data/filters/ResX/Resources.resx");
+        assertEquals(2, lines.size());
+    }
+
+    @Test
+    public void testTranslateXMLIdentical() throws Exception {
+        translate(new ResXFilter(), "test/data/filters/ResX/Resources.resx");
+        compareXML(new File("test/data/filters/ResX/Resources.resx"), outFile);
     }
 }

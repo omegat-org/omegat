@@ -75,6 +75,27 @@
 
 		<para>Utilitzeu els menús de navegació de <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.auto.populated.segments" endterm="menus.goto.auto.populated.segments.title"/> per a navegar a un segment inserit automàticament.</para>
 	  </listitem>
+
+	  <listitem>
+		<para>Com a traduccions de referència, l'OmegaT també admet fitxers bilingües que no són fitxers TMX. Els formats de fitxer admesos per l'OmegaT són tots els formats bilingües que s'accepten com a fitxers d'origen:</para>
+
+		<itemizedlist>
+		  <listitem>
+			<para>Fitxers PO</para>
+		  </listitem>
+		  <listitem>
+			<para>Fitxers TXML</para>
+		  </listitem>
+		  <listitem>
+			<para>Fitxers XLIFF</para>
+		  </listitem>
+		  <listitem>
+			<para>Fitxers SDLXLIFF</para>
+		  </listitem>
+		</itemizedlist>
+
+	  <para>Podeu afegir aquests fitxers a la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> del projecte o una de les subcarpetes i les dades traduïdes estaran disponibles immediatament com a coincidències.</para>
+	  </listitem>
 	</itemizedlist>
 	
     <section id="how.to.tm.read.and.write">
@@ -162,54 +183,70 @@
 	</varlistentry>
   </variablelist>
   <warning>
-	<para>Be cautious when you put a whole project in a file-sharing system like
-	DropBox, OneCloud and the likes.</para>
-	<para><emphasis>Such systems are not designed to keep track of the internal
-	modifications of a given file.</emphasis></para>
-	<para>An OmegaT project is a complex set of files. Such systems will not
-	always be able to provide you with the most recent version of your data, may
-	even lock some files for no obvious reasons and can even corrupt team
-	project related files.</para>
-	<para>Make sure that you have properly tested your project layout and set up
-	a separate data backup before sharing data in such a system.</para>
+	<para>Aneu amb compte quan copieu un projecte sencer en un sistema d'ús compartit de fitxers com Dropbox, OneCloud i similars.</para>
+	<para><emphasis>Aquests sistemes no estan preparats per a seguir les modificacions internes dels fitxers.</emphasis></para>
+	<para>Un projecte de l'OmegaT és un conjunt complex de fitxers. Aquests sistemes no sempre podran proporcionar-vos la versió més recent de les dades, poden blocar alguns fitxers sense raons aparents i, fins i tot, poden malmetre fitxers relacionats amb els projectes en equip.</para>
+	<para>Assegureu-vos de provar a fons l'estructura del projecte i prepareu una còpia de seguretat de les dades a banda abans de compartir dades en un d'aquests sistemes.</para>
   </warning>
 </section>
 
 <section id="how.to.tm.bridge.two.languages">
   <title id="how.to.tm.bridge.two.languages.title">Traduccions de referència</title>
 
-  <para>L'OmegaT mostra les coincidències parcials en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Per defecte, aquestes coincidències es limiten a les llengües d'origen i de destinació definides en el quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, però també podeu afegir coincidències en llengües que no siguin la llengua de destinació. Consulteu la preferència <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> per a conèixer més detalls.</para>
+  <para>L'OmegaT mostra les coincidències parcials en la subfinestra <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Per defecte, aquestes coincidències es limiten a les llengües d'origen i de destinació definides en el quadre de diàleg <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
 
-  <para>Amb l'OmegaT, també podeu mostrar una tercera llengua <emphasis>just a sota</emphasis> del segment d'origen per a utilitzar-la com a referència alternativa per al text d'origen.</para>
+  <para>Podeu afegir coincidències en llengües que no siguin la llengua de destinació. Consulteu les preferències de <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> per a conèixer més detalls.</para>
 
-  <example id="bridge.english.and.french.with.japanese">
-	<title id="replace.with.allemand.title">Traducció de l'anglès al francès amb referència en japonès</title>
-	<para>
-	  <programlisting>— ¶ —————————————————————
-<token>A whitespace character: [ \t\n\x0B\f\r]
-fr-ZB: Un caractère d'espacement (espace, tabulation, etc.) :  [ \t\n\x0B\f\r]
-ja-RV: 空白文字：[ \t\n\x0B\f\r]</token>
-Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
-— ¶ —————————————————————</programlisting></para>
-<para>La primera línia és el text original en anglès, la segona és una versió anterior en francès amb un codi de llengua arbitrari, la tercera és la versió en japonès amb un altre codi de llengua arbitrari i la quarta és la traducció actual al francès.</para>
-  </example>
-  
-    <para>Per a aconseguir això:</para>
+  <para>Si teniu un fitxer TMX corresponent al fitxer d'origen que conté la traducció a una llengua diferent, també podeu mostrar la llengua <emphasis>just a sota</emphasis> del segment d'origen com a referència en una altra llengua.</para>
+
+  <para>Per a aconseguir això:</para>
 
 	<orderedlist>
 	  <listitem>
-		<para>Creeu una carpeta anomenada <filename class="directory">tmx2source</filename> en la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
+		<para>Copieu la memòria de traducció que conté la referència en una altra llengua en una carpeta amb el nom <filename class="directory">tmx2source</filename> en la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
 	  </listitem>
 
 	  <listitem>
-		<para>Copieu-hi la memòria de traducció entre la llengua d'origen del projecte i la llengua de referència.</para>
-	  </listitem>
-
-	  <listitem>
-		<para>Canvieu el nom de la memòria a <filename>LL_CC.tmx</filename> o <filename>LL-CC.tmx</filename>. <emphasis>LL</emphasis> és el codi de llengua intern que voleu mostrar com a referència i <emphasis>CC</emphasis> és un codi arbitrari de dues lletres.</para>
+		<para>Canvieu el nom del fitxer de la memòria a una de les opcions següents:<itemizedlist>
+		  <listitem>
+			<para>
+			  <filename>LL_CC.tmx</filename></para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL-CC.tmx</filename></para>
+		  </listitem>
+		  <listitem>
+			<para>
+			  <filename>LL.tmx</filename></para>
+		  </listitem>
+		</itemizedlist><emphasis>LL</emphasis> és el codi de llengua intern de la llengua que voleu mostrar com a referència i <emphasis>CC</emphasis> és un codi arbitrari de dues lletres.</para>
+		<warning>
+		  <itemizedlist>
+			<listitem>
+			  <para>Totes les lletres han d'anar en majúscula.</para>
+			</listitem>
+			<listitem>
+			  <para>Només es mostren els segments que són una coincidència <emphasis role="bold">exacta</emphasis> amb el text d'origen.</para>
+			</listitem>
+		  </itemizedlist>
+		</warning>
 	  </listitem>
 	</orderedlist>
-	
+
+  <example id="bridge.english.and.french.with.japanese">
+	<title id="replace.with.allemand.title">Ús d'una referència en japonès sota el text d'origen en anglès</title>
+	<para>Si teniu un fitxer TMX que conté una traducció al japonès d'un fitxer en anglès que traduïu al francès, podeu utilitzar la traducció en japonès com a referència exacta alternativa mostrant-la sota el text en anglès que voleu traduir.</para>
+	<para>Només cal que copieu el fitxer anglès-japonès a la carpeta <filename class="directory">tm/tmx2source</filename> amb el nom <filename>JA-JP.tmx</filename>. L'OmegaT ara us mostrarà el text en japonès corresponent al segment d'origen en anglès:</para>
+	<para>
+	  <programlisting>— ¶ —————————————————————
+<token>A whitespace character: [ \t\n\x0B\f\r]
+ja-JP: 空白文字：[ \t\n\x0B\f\r]</token>
+Un caractère d'espacement : [ \t\n\r\f\x0B]<token>&lt;segment 3075 ¶&gt;</token>
+— ¶ —————————————————————</programlisting></para>
+<para>La primera línia és el text original en anglès, la segona és la llengua de referència que penseu que us pot resultar útil per a la traducció i la tercera és la traducció actual al francès.</para>
+  </example>
+  
     <note>
 	  <para>Podeu utilitzar qualsevol nombre de fitxers TMX en tants parells de llengües diferents com vulgueu com a llengües de «referència».</para>	  
 	</note>

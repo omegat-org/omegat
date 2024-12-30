@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<section id="windows.source.files.list">
+  <title id="windows.source.files.list.title"><guilabel>File di partenza</guilabel></title>
+
+  <para>This window is displayed automatically when OmegaT loads a project, and
+  can be called at any time using <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.source.files.list" endterm="menus.project.source.files.list.title"/>.</para>
+
+  <para>The window displays the following information:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>In the window title: the total number of translatable files in the
+      project.</para>
+
+	  <para>These are the files present in the <link linkend="project.folder.source" endterm="project.folder.source.title"/>
+	  folder in a format that OmegaT is able to recognize.</para>
+    </listitem>
+
+    <listitem>
+      <para>As a list: all translatable files in the project.</para>
+
+	  <para>Clicking on any file will open it in the <link linkend="panes.editor" endterm="panes.editor.title"/> pane for
+	  translation.</para>
+    </listitem>
+
+    <listitem>
+      <para>Each file entry lists its name, file filter type, 
+      encoding, and the number of segments it contains</para>
+    </listitem>
+
+    <listitem>
+      <para>The total number of segments, the number of unique segments in the
+      whole project, and the number of unique segments already translated are
+      shown at the bottom.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Typing any text opens a <guilabel>Filter</guilabel> field at the
+  bottom of the window where parts of filenames can be entered. You can use
+  arrows to select a file, and press <keycap>Enter</keycap> to open it for 
+  translation.</para>
+
+  <note>
+	<para>Filenames (the first column) can be sorted alphabetically by
+	clicking the header. You can change the position of a file by selecting it
+	and clicking one of the <guibutton>Move...</guibutton> buttons
+  on the right.</para>
+  </note>
+
+  <para>Right-clicking a filename brings up a popup menu that lets you open the
+  source file or the target file (if it exists).</para>
+
+  <para>The number of <emphasis role="bold">Unique</emphasis> segments is
+  calculated by removing the number of repeated segments from the total
+  number of segments.</para>
+
+  <para>La differenza fra il “Numero dei segmenti” e il “Numero dei segmenti univoci” potrà fornire un quadro approssimativo del numero delle ripetizioni contenute nel testo. Use <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> to obtain more information.</para>
+
+  <para>Modifying the segmentation rules may alter the number of segments/unique segments. This, however, should generally be avoided after you have started translating the project. Vedere l'appendice <link linkend="app.segmentation" endterm="app.segmentation.title"/>per i dettagli.</para>
+
+  <para>The buttons at the bottom of the window can be used to add files to your project:</para>
+  
+  <variablelist>
+	<varlistentry id="windows.source.files.list.copy.files">
+	  <term id="windows.source.files.list.copy.files.title"><guibutton>Aggiungi file...</guibutton></term>
+	<listitem>
+	  <para>Copia i file selezionati nella cartella <link linkend="project.folder.source" endterm="project.folder.source.title"/> e ricarica il progetto per prendere in considerazione i nuovi file.</para>
+	</listitem>
+	</varlistentry>
+	
+	<varlistentry id="windows.source.files.list.download.page">
+	  <term id="windows.source.files.list.download.page.title"><guibutton>Aggiungi pagina MediaWiki...</guibutton></term>
+	  <listitem>
+		<para>Asks for the URL of the page and downloads it into the <link linkend="project.folder.source" endterm="project.folder.source.title"/>
+		folder.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+  
+  <para>The two actions are equivalent to using the <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.copy.files.to.source.folder" endterm="menus.project.copy.files.to.source.folder.title"/> and <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.download.mediawiki.page" endterm="menus.project.download.mediawiki.page.title"/> menu items.</para>
+  
+  <note>
+	<para>You can manually edit the <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/>
+	configuration file to prevent the Source Files list window from opening
+  automatically when a project is loaded.</para>
+  </note>
+</section>

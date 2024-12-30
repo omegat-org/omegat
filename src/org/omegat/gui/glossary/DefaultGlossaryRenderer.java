@@ -55,12 +55,7 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
         StringBuilder commentsBuf = new StringBuilder();
         for (int i = 0, commentIndex = 0; i < targets.length; i++) {
             if (i > 0 && targets[i].equals(targets[i - 1])) {
-                if (!comments[i].equals("")) {
-                    commentsBuf.append("\n");
-                    commentsBuf.append(commentIndex);
-                    commentsBuf.append(". ");
-                    commentsBuf.append(comments[i]);
-                }
+                appendCommentsBuf(commentsBuf, commentIndex, comments[i]);
                 continue;
             }
             SimpleAttributeSet attrs = new SimpleAttributeSet(TARGET_ATTRIBUTES);
@@ -74,21 +69,24 @@ public class DefaultGlossaryRenderer implements IGlossaryRenderer {
             trg.append(bracketEntry(targets[i]), attrs);
 
             commentIndex++;
-            if (!comments[i].equals("")) {
-                commentsBuf.append("\n");
-                commentsBuf.append(commentIndex);
-                commentsBuf.append(". ");
-                commentsBuf.append(comments[i]);
-            }
+            appendCommentsBuf(commentsBuf, commentIndex, comments[i]);
         }
-
         trg.append(commentsBuf.toString(), NOTES_ATTRIBUTES);
     }
 
+    private void appendCommentsBuf(StringBuilder commentsBuf, int commentIndex, String comment) {
+        if (!comment.isEmpty()) {
+            commentsBuf.append("\n");
+            commentsBuf.append(commentIndex);
+            commentsBuf.append(". ");
+            commentsBuf.append(comment);
+        }
+    }
+
     /**
-     * If a combined glossary entry contains ',', it needs to be bracketed by quotes, to prevent confusion
-     * when entries are combined. However, if the entry contains ';' or '"', it will automatically be
-     * bracketed by quotes.
+     * If a combined glossary entry contains ',', it needs to be bracketed by
+     * quotes, to prevent confusion when entries are combined. However, if the
+     * entry contains ';' or '"', it will automatically be bracketed by quotes.
      *
      * @param entry
      *            A glossary text entry

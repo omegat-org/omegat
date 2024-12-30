@@ -42,8 +42,8 @@ import org.omegat.gui.editor.UnderlineFactory.Underliner;
  * @author Martin Fleurke
  */
 public class TransparentHighlightPainter extends Underliner {
-    private Color color;
-    private AlphaComposite alphaComposite;
+    private final Color color;
+    private final AlphaComposite alphaComposite;
 
     /**
      *

@@ -33,12 +33,13 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.xml.sax.InputSource;
+
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
-import org.xml.sax.InputSource;
 
 /**
  * This class specifies XHTML dialect of XML.
@@ -113,7 +114,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
 
         defineIntactTags(new String[] { "style", "script", "object", "embed", });
 
-        defineTranslatableAttributes(new String[] { "abbr", "alt", "content", "dir", "summary", "title", "placeholder"});
+        defineTranslatableAttributes(new String[] {"abbr", "alt", "content", "dir", "summary", "title", "placeholder"});
 
         if (options.getTranslateHref()) {
             defineTranslatableAttribute("href");

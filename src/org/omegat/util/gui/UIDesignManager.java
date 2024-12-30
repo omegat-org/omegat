@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
-                         Benjamin Siband, and Kim Bruning
+               2000-2006 Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009-2010 Alex Buloichik
@@ -36,6 +36,8 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPopupMenu;
@@ -43,12 +45,14 @@ import javax.swing.JSeparator;
 import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
-import javax.swing.plaf.ColorUIResource;
 
+import org.omegat.gui.main.BaseMainWindowMenu;
+import org.omegat.gui.preferences.IMenuPreferece;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
+import org.omegat.util.gui.laf.SystemDarkThemeDetector;
 
 import com.vlsolutions.swing.docking.AutoHidePolicy;
 import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
@@ -59,6 +63,7 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 /**
  * UI Design Manager.
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -73,108 +78,146 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
  */
 public final class UIDesignManager {
 
+    public static final String menuClassID = "OmegaTMainWindowMenu";
+    public static final String toolbarClassID = "OmegaTMainWindowToolbar";
+
+    private static final List<IMenuPreferece> menuPreferences = new ArrayList<>();
+    public static final String THEME_FOLLOW_OS_COLOR_DEFAULT = "default";
+    public static final String DARK_CLASS_NAME_DEFAULT = "org.omegat.gui.theme.DefaultFlatDarkTheme";
+    public static final String LIGHT_CLASS_NAME_DEFAULT = "org.omegat.gui.theme.DefaultFlatTheme";
+
     private UIDesignManager() {
     }
 
+    public static void addMenuUIPreference(IMenuPreferece menuUIPreference) {
+        menuPreferences.add(menuUIPreference);
+    }
+
+    public static List<IMenuPreferece> getMenuUIPreferences() {
+        return menuPreferences;
+    }
+
+    private static void setMenuUI(String menuUIPrefClassName) {
+        if (StringUtil.isEmpty(menuUIPrefClassName)) {
+            return;
+        }
+        try {
+            ClassLoader classLoader = getClassLoader();
+            Class<?> prefClazz = classLoader.loadClass(menuUIPrefClassName);
+            if (prefClazz != null) {
+                Object o = prefClazz.getDeclaredConstructor().newInstance();
+                if (o instanceof IMenuPreferece) {
+                    IMenuPreferece pref = (IMenuPreferece) o;
+                    String menuUIClassName = pref.getMenuUIClassName();
+                    Class<?> clazz = classLoader.loadClass(menuUIClassName);
+                    if (BaseMainWindowMenu.class.isAssignableFrom(clazz)) {
+                        UIManager.put(menuClassID, clazz);
+                    }
+                    String toolbarClassName = pref.getToolbarClassName();
+                    if (toolbarClassName != null) {
+                        Class<?> toolclazz = classLoader.loadClass(toolbarClassName);
+                        UIManager.put(toolbarClassID, toolclazz);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.log(e);
+        }
+    }
+
+    /**
+     * Load and set theme.
+     * 
+     * @param lafClassName
+     *            LookAndFeel full qualified class name.
+     * @param classLoader
+     *            class loader to use.
+     */
     public static void setTheme(String lafClassName, ClassLoader classLoader) {
         try {
             Class<?> clazz = classLoader.loadClass(lafClassName);
             UIManager.setLookAndFeel((LookAndFeel) clazz.getDeclaredConstructor().newInstance());
         } catch (Exception e) {
             Log.log(e);
-            if (!lafClassName.equals(Preferences.THEME_CLASS_NAME_DEFAULT)) {
-                setTheme(Preferences.THEME_CLASS_NAME_DEFAULT, classLoader);
+            if (!lafClassName.equals(LIGHT_CLASS_NAME_DEFAULT)) {
+                setTheme(LIGHT_CLASS_NAME_DEFAULT);
             }
         }
     }
 
     /**
-     * Initialize docking subsystem.
+     * Load and set theme.
+     * 
+     * @param lafClassName
+     *            LookAndFeel full qualified class name.
      */
-    public static void initialize(ClassLoader mainClassLoader) throws IOException {
+    public static void setTheme(String lafClassName) {
+        setTheme(lafClassName, getClassLoader());
+    }
+
+    private static ClassLoader getClassLoader() {
+        ClassLoader classLoader = null;
+        Object o = UIManager.get("ClassLoader");
+        if (o instanceof ClassLoader) {
+            classLoader = (ClassLoader) o;
+        }
+        if (classLoader == null) {
+            classLoader = Thread.currentThread().getContextClassLoader();
+        }
+        if (classLoader == null) {
+            classLoader = ClassLoader.getSystemClassLoader();
+        }
+        return classLoader;
+    }
+
+    /**
+     * Initialize a docking subsystem.
+     */
+    public static void initialize() throws IOException {
         // Install VLDocking defaults
-        DockingUISettings.getInstance().installUI();
+        DockingUISettings.setInstance(new CustomDockingUISettings());
         DockableContainerFactory.setFactory(new CustomContainerFactory());
 
         // Set Look And Feel
-        String theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, Preferences.THEME_CLASS_NAME_DEFAULT);
-        setTheme(theme, mainClassLoader);
+        String themeMode = Preferences.getPreferenceDefault(Preferences.THEME_COLOR_MODE,
+                THEME_FOLLOW_OS_COLOR_DEFAULT);
+        String theme;
+        if (themeMode.equals("sync")) {
+            SystemDarkThemeDetector detector = SystemDarkThemeDetector.createDetector();
+            if (detector.detectionSupported() && detector.isDark()) {
+                theme = Preferences.getPreferenceDefault(Preferences.THEME_DARK_CLASS_NAME,
+                        DARK_CLASS_NAME_DEFAULT);
+            } else {
+                theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME,
+                        LIGHT_CLASS_NAME_DEFAULT);
+            }
+        } else if (themeMode.equals("dark")) {
+            theme = Preferences.getPreferenceDefault(Preferences.THEME_DARK_CLASS_NAME,
+                    DARK_CLASS_NAME_DEFAULT);
+        } else {
+            theme = Preferences.getPreferenceDefault(Preferences.THEME_CLASS_NAME, LIGHT_CLASS_NAME_DEFAULT);
+        }
+        setTheme(theme);
+
+        setMenuUI(Preferences.getPreference(Preferences.MENUUI_CLASS_NAME));
 
         if (UIManager.getColor("OmegaT.source") == null) {
-            // Theme apparently did not load default colors so we do so now
+            // Theme apparently did not load default colors, so we do so now
             loadDefaultColors(UIManager.getDefaults());
         }
 
         // Enable animated popup when mousing over minimized tab
         AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);
 
-        // UI strings
-        UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
-        UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
-        UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
-        UIManager.put("DockViewTitleBar.attachButtonText", OStrings.getString("DOCKING_HINT_DOCK"));
-        UIManager.put("DockViewTitleBar.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
-        UIManager.put("DockViewTitleBar.closeButtonText", "");
-        UIManager.put("DockTabbedPane.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
-        UIManager.put("DockTabbedPane.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
-        UIManager.put("DockTabbedPane.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
-        UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
-        UIManager.put("DockTabbedPane.closeButtonText", "");
-
         // Fonts
         Font defaultFont = UIManager.getFont("Label.font");
-        UIManager.put("DockViewTitleBar.titleFont", defaultFont);
         UIManager.put("JTabbedPaneSmartIcon.font", defaultFont);
         UIManager.put("AutoHideButton.font", defaultFont);
-
-        // UI settings
-        UIManager.put("DockViewTitleBar.isCloseButtonDisplayed", false);
-        UIManager.put("DockingDesktop.closeActionAccelerator", null);
-        UIManager.put("DockingDesktop.maximizeActionAccelerator", null);
-        UIManager.put("DockingDesktop.dockActionAccelerator", null);
-        UIManager.put("DockingDesktop.floatActionAccelerator", null);
-
-        // Disused icons
-        UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
-        UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
-
-        // Panel notification (blinking tabs/headers) settings
-        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
-
-        ensureTitlebarReadability();
-    }
-
-    private static void ensureTitlebarReadability() {
-        // to ensure DockViewTitleBar title readability
-        Color textColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
-        Color backColor = UIManager.getColor("Panel.background");
-        if (textColor != null && backColor != null) { // One of these could be null
-            if (textColor.equals(backColor)) {
-                float[] hsb = Color.RGBtoHSB(textColor.getRed(),
-                        textColor.getGreen(), textColor.getBlue(), null);
-                float brightness = hsb[2]; // darkest 0.0f <--> 1.0f brightest
-                if (brightness >= 0.5f) {
-                    brightness -= 0.5f; // to darker
-                } else {
-                    brightness += 0.5f; // to brighter
-                }
-                int rgb = Color.HSBtoRGB(hsb[0], hsb[1], brightness);
-                ColorUIResource res = new ColorUIResource(rgb);
-                UIManager.put("InternalFrame.inactiveTitleForeground", res);
-            }
-        }
-
-        UIManager.put("DockingDesktop.notificationBlinkCount", 2);
-        UIManager.put("DockingDesktop.notificationColor", Styles.EditorColor.COLOR_NOTIFICATION_MAX.getColor());
     }
 
     /**
      * Load icon from classpath.
-     *
+     * 
      * @param iconName
      *            icon file name
      * @return icon instance
@@ -198,7 +241,8 @@ public final class UIDesignManager {
             menu.remove(menu.getComponentCount() - 1);
         }
         for (int i = 0; i < menu.getComponentCount() - 1; i++) {
-            if (menu.getComponent(i) instanceof JSeparator && menu.getComponent(i + 1) instanceof JSeparator) {
+            if (menu.getComponent(i) instanceof JSeparator
+                    && menu.getComponent(i + 1) instanceof JSeparator) {
                 // remove duplicate separators
                 menu.remove(i);
             }
@@ -236,10 +280,11 @@ public final class UIDesignManager {
     /**
      * Heuristic detection of dark theme.
      * <p>
-     *     isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * isDarkTheme method derived from NetBeans licensed by Apache-2.0
+     * 
      * @return true when dark theme, otherwise false.
      */
-    private static boolean isDarkTheme(UIDefaults uiDefaults) {
+    public static boolean isDarkTheme(UIDefaults uiDefaults) {
         // Based on tests with different LAFs and color combinations, a light
         // theme can be reliably detected by observing the brightness value of
         // the HSB Values of Table.background and Table.foreground
@@ -262,65 +307,68 @@ public final class UIDesignManager {
         // Windows HighContrast Black (dark) / 1.0 / 0
         Color foreground = uiDefaults.getColor("Table.foreground");
         Color background = uiDefaults.getColor("Table.background");
-        float foreground_brightness = Color.RGBtoHSB(
-                foreground.getRed(),
-                foreground.getGreen(),
-                foreground.getBlue(),
-                null)[2];
-        float background_brightness = Color.RGBtoHSB(
-                background.getRed(),
-                background.getGreen(),
-                background.getBlue(),
-                null)[2];
-        return background_brightness < foreground_brightness;
+        float foregroundBrightness = Color.RGBtoHSB(foreground.getRed(), foreground.getGreen(),
+                foreground.getBlue(), null)[2];
+        float backgroundBrightness = Color.RGBtoHSB(background.getRed(), background.getGreen(),
+                background.getBlue(), null)[2];
+        return backgroundBrightness < foregroundBrightness;
     }
 
-    private static void loadColors(UIDefaults defaults, final String scheme) throws IOException {
-        ResourcesUtil.getBundleColorProperties(scheme).forEach((k, v) -> {
-            if (v.toString().charAt(0) != '#') {
-                throw new RuntimeException("Invalid color value for key " + k + ": " + v);
+    private static void loadColors(UIDefaults defaults, String k, String v) {
+        if (v.charAt(0) != '#') {
+            throw new RuntimeException("Invalid color value for key " + k + ": " + v);
+        }
+        try {
+            String hex = v.substring(1);
+            Color color;
+            if (hex.length() <= 6) {
+                color = new Color(Integer.parseInt(hex, 16)); // int(rgb)
+            } else {
+                long val = Long.parseLong(hex, 16);
+                int a = (int) (val & 0xFF);
+                int b = (int) (val >> 8 & 0xFF);
+                int g = (int) (val >> 16 & 0xFF);
+                int r = (int) (val >> 24 & 0xFF);
+                color = new Color(r, g, b, a); // hasAlpha
             }
-            try {
-                String hex = v.toString().substring(1);
-                Color color;
-                if (hex.length() <= 6) {
-                    color = new Color(Integer.parseInt(hex, 16)); // int(rgb)
-                } else {
-                    long val = Long.parseLong(hex, 16);
-                    int a = (int) (val & 0xFF);
-                    int b = (int) (val >> 8 & 0xFF);
-                    int g = (int) (val >> 16 & 0xFF);
-                    int r = (int) (val >> 24 & 0xFF);
-                    color = new Color(r, g, b, a); // hasAlpha
-                }
-                defaults.put(k.toString(), color);
-            } catch (NumberFormatException ex) {
-                throw new RuntimeException("Invalid color value for key '" + k + "': " + v, ex);
-            }
-        });
+            defaults.put(k, color);
+        } catch (NumberFormatException ex) {
+            throw new RuntimeException("Invalid color value for key '" + k + "': " + v, ex);
+        }
     }
 
     /**
      * Load application default colors
      */
     public static void loadDefaultColors(UIDefaults uiDefaults) throws IOException {
-        Color hilite;
         if (isDarkTheme(uiDefaults)) {
-            loadColors(uiDefaults, "dark");
-            hilite = uiDefaults.getColor("TextArea.background").brighter();  // NOI18N
-            // Hack for JDK GTKLookAndFeel bug.
-            // TextPane.background is always white but should be a text_background of GTK.
-            // List.background is as same color as text_background.
-            if (Platform.isLinux() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
-                uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
-            }
-            uiDefaults.put("OmegaT.theme.dark", true);
+            loadDefaultAppDarkColors(uiDefaults);
         } else {
-            loadColors(uiDefaults, "light");
-            Color bg = uiDefaults.getColor("TextArea.background").darker();  // NOI18N
-            hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
-            uiDefaults.put("OmegaT.theme.dark", false);
+            loadDefaultAppLightColors(uiDefaults);
+        }
+    }
+
+    public static void loadDefaultAppDarkColors(UIDefaults uiDefaults) throws IOException {
+        ResourcesUtil.getBundleColorProperties("dark")
+                .forEach((k, v) -> loadColors(uiDefaults, k.toString(), v.toString()));
+        Color hilite = uiDefaults.getColor("TextArea.background").brighter(); // NOI18N
+        // Hack for JDK GTKLookAndFeel bug.
+        // TextPane.background is always white but should be a
+        // text_background of GTK.
+        // List.background is as same color as text_background.
+        if (Platform.isUnixLike() && Color.WHITE.equals(uiDefaults.getColor("TextPane.background"))) {
+            uiDefaults.put("TextPane.background", uiDefaults.getColor("List.background"));
         }
         uiDefaults.put("OmegaT.alternatingHilite", hilite);
+        uiDefaults.put("OmegaT.theme.dark", true);
+    }
+
+    public static void loadDefaultAppLightColors(UIDefaults uiDefaults) throws IOException {
+        ResourcesUtil.getBundleColorProperties("light")
+                .forEach((k, v) -> loadColors(uiDefaults, k.toString(), v.toString()));
+        Color bg = uiDefaults.getColor("TextArea.background").darker(); // NOI18N
+        Color hilite = new Color(bg.getRed(), bg.getBlue(), bg.getGreen(), 32);
+        uiDefaults.put("OmegaT.alternatingHilite", hilite);
+        uiDefaults.put("OmegaT.theme.dark", false);
     }
 }

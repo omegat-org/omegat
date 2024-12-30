@@ -206,14 +206,14 @@
 		  
 		  <variablelist>
 			<varlistentry>
-			  <term>Memòria</term>
+			  <term>Memòria principal</term>
 			  <listitem>
 				<para>Inclou la memòria del projecte (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>)</para>
 			  </listitem>
 			</varlistentry>
 
 			<varlistentry>
-			  <term>Memòries de traducció</term>
+			  <term>Memòries de referència</term>
 			  <listitem>
 				<para>Inclou les memòries de traducció de la carpeta <link linkend="project.folder.tm" endterm="project.folder.tm.title"/>.</para>
 			  </listitem>
@@ -241,9 +241,13 @@
 	  </varlistentry>
 
 	  <varlistentry>
-		<term><guibutton>Mostra les opcions avançades</guibutton></term>
+		<term><guibutton>Opcions de cerca en la memòria de traducció</guibutton></term>
 		<listitem>
 		  <para>Seleccioneu criteris addicionals, com ara la persona que ha traduït o modificat un segment, la data i l'hora de la traducció (modificació), o si s'han d'excloure els segments orfes.</para>
+
+		  <warning>
+			<para>Les opcions de cerca en la memòria de traducció només s'apliquen a la memòria principal i no a les memòries de referència.</para>
+		  </warning>
 
 		  <variablelist>
 			<varlistentry>

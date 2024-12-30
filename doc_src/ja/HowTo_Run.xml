@@ -32,7 +32,7 @@
 
 	<para>OmegaT の実行は、起動オプションを記述したスクリプトを使ってコマンドラインから可能です。詳細は<link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/>項をご覧ください。</para>
 
-	<para><filename>.jar</filename>拡張子がシステムJavaランチャーに関連付けられている場合は、<filename>OmegaT.jar</filename>をクリックして直接起動することもできます。</para>
+	<para><filename>.jar</filename>拡張子がシステムJavaランチャーに関連付けられている場合は、<filename>OmegaT.jar</filename>をダブルクリックして直接起動することもできます。</para>
 
 	<para>このパッケージには、KDEユーザーに役立つ<filename>OmegaT.kaptn</filename>Kaptainスクリプトと、OmegaTを実行するために適切な<application>java</application>コマンドを自動的に起動する<filename>OmegaT</filename>bashスクリプトも用意されています。</para>
   </section>
@@ -274,7 +274,7 @@
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.remote.project.">
 				<term id="launch.with.command.line.remote.project.title"><option>--remote-project</option>
-				<emphasis>&lt;path-to-omegat-project-file&gt;</emphasis></term>
+				<userinput>&lt;path-to-omegat-project-file&gt;</userinput></term>
 				<listitem>
 				  <para><emphasis>&lt;path-to-OmegaT-project-file&gt;</emphasis>で指定したURLからOmegaTプロジェクトをダウンロードし、読み込みします。</para>
 				</listitem>
@@ -287,8 +287,8 @@
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.team.init">
 				<term id="launch.with.command.line.team.init.title"><option>team
-				init <emphasis>SL</emphasis>
-				<emphasis>TL</emphasis></option></term>
+				init</option> <userinput>SL</userinput>
+				<userinput>TL</userinput></term>
 				<listitem>
 				  <para>原文と訳文言語の2文字の言語コードとして、それぞれ<emphasis>SL</emphasis>と<emphasis>TL</emphasis>を使用してチームプロジェクトを初期化します。</para>
 				</listitem>
@@ -308,21 +308,21 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.itokenizer.lt.classname.gt.">
-				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=&lt;クラス名&gt;</option></term>
-				<term><option>--ITokenizerTarget=&lt;クラス名&gt;</option></term>
+				<term id="launch.with.command.line.itokenizer.lt.classname.gt.title"><option>--ITokenizer=</option><userinput>&lt;classname&gt;</userinput></term>
+				<term><option>--ITokenizerTarget=</option><userinput>&lt;classname&gt;</userinput></term>
 				<listitem>
 				  <para>原文言語または訳文言語のトークナイザーを指定します(この設定を使用すると、プロジェクトの設定が上書きされます)。有効な値の一覧は OmegaT.jar/META-INF/
 		MANIFEST.MF を参照してください。</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.config.dir.">
-				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=<emphasis>&lt;path&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.config.dir.title"><option>--config-dir=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>OmegaT の各種設定ファイルを入出力するフォルダーです。詳細については-<link endterm="configuration.folder.title" linkend="configuration.folder"/>を参照してください。</para>
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.config.file.">
-				<term id="launch.with.command.line.config.file.title"><option>--config-file=<emphasis>&lt;path&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.config.file.title"><option>--config-file=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>一連のコマンドライン引数が Java:properties 書式で指定されたファイル。</para>
 
@@ -341,7 +341,7 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 			  </varlistentry>
 
 			  <varlistentry id="launch.with.command.line.resource.bundle.">
-				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=<emphasis>&lt;path&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.resource.bundle.title"><option>--resource-bundle=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>UIの地域化に使用されるJava .propertiesファイルです。</para>
 				</listitem>
@@ -349,13 +349,13 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 
 			  <varlistentry id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.">
 				<term id="launch.with.command.line.mode.console.translate.console.pseudotranslatetmx.console.align.title"><option>--mode=[console
-				mode name]</option></term>
+				mode name]</option> <userinput>&lt;project path&gt;</userinput> <userinput>&lt;mode option&gt;</userinput></term>
 				<listitem>
 				  <para>GUI標準以外のモードを指定してください。以下のオプションを利用できます：</para>
 
 				  <variablelist>
 					<varlistentry id="launch.with.command.line.mode.console.translate">
-					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option></term>
+					  <term id="launch.with.command.line.mode.console.translate.title"><option>--mode=console-translate</option> <userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<para>このモードでは、原文フォルダーのファイルを、既にある翻訳メモリを使って翻訳しようとします。</para>
 
@@ -363,9 +363,9 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 						  
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt.">
-							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=&lt;パターン&gt;</option></term>
+							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
 							<listitem>
-							  <para>処理する原文ファイルを定義する正規表現のホワイトリスト。正規表現では、ピリオドとバックスラッシュ文字(<code>\.</code>と<code>\\</code>)をエスケープする必要があります。</para>
+							  <para>処理する原文ファイルを定義する正規表現の許可リスト。正規表現では、ピリオドとバックスラッシュ文字(<code>\.</code>と<code>\\</code>)をエスケープする必要があります。</para>
 
 							  <para>次に、典型的な例をいくつか示します。</para>
 							  
@@ -399,7 +399,8 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 					</varlistentry>
 
 					<varlistentry id="launch.with.command.line.mode.console.pseudotranslatetmx">
-					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option></term>
+					  <term id="launch.with.command.line.mode.console.pseudotranslatetmx.title"><option>--mode=console-createpseudotranslatetmx</option>
+							<userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<para>このモードでは、原文ファイルのみを元にして、プロジェクト全体を対象にした翻訳メモリを生成します。</para>
 						
@@ -407,7 +408,7 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 						
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
-							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=<emphasis>&lt;path&gt;</emphasis></option></term>
+							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;path&gt;</userinput></term>
 							<listitem>
 							  <para>疑似翻訳した TMX ファイルを出力します。</para>
 							</listitem>
@@ -424,26 +425,33 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 					</varlistentry>
 					
 					<varlistentry id="launch.with.command.line.mode.console.align">
-					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align
-					  <emphasis>--alignDir=&lt;path&gt;</emphasis></option></term>
-					  <listitem>
+					  <term id="launch.with.command.line.mode.console.align.title"><option>--mode=console-align</option> 
+					  <userinput>&lt;project path&gt;</userinput></term>
+						<listitem>
 						<para>このモードでは、OmegTは、プロジェクトの /source フォルダにあるファイルを、<emphasis>--alignDir</emphasis>引数で指定された場所にあるコンテンツで対訳集の整合をします。</para>
+						
+						<variablelist>
+							<varlistentry>
+								<term><option>--alignDir=</option><userinput>&lt;project path&gt;</userinput></term>
+								<listitem>
+									<para>訳文言語に翻訳されたファイルを含むパス。</para>
 
-						<para>作成されたTMXファイルは、/omegatフォルダーにalign.tmxとして保存されます。整合できるファイルタイプは、整合がフィルターでサポートされているかどうかによって異なります。サポートされているフィルタには、ILIAS言語ファイル、Java(TM)リソースバンドル、キー=値テキスト、Magento CEロケールCSV、MoodlePHP、Mozilla DTD、Mozilla FTL、PO、RC、SubRip Subtitles、およびWindowsリソースがあります。</para>
+									<para>そのフォルダーには、プロジェクトの訳文言語の翻訳が含まれている必要があります。たとえば、プロジェクトがEN-to-FRの場合、フォルダーには_frで終わるバンドルが含まれている必要があります。</para>
+								</listitem>
+							</varlistentry>							
+						</variablelist>
 
-						<para><emphasis>--alignDir</emphasis>引数は、訳文言語内のデータの場所を指定するために使用されます。フォルダーは、翻訳されたファイルを含む言語である必要があります。</para>
-
-						<para>そのフォルダーには、プロジェクトの訳文言語の翻訳が含まれている必要があります。たとえば、プロジェクトがEN-to-FRの場合、フォルダーには_frで終わるバンドルが含まれている必要があります。作成されたTMXファイルは、/omegatフォルダーにalign.tmxとして保存されます。</para>
+						<para>作成されたTMXファイルは、<filename role="directory">OmegaT/</filename>フォルダーに<filename>align.tmx</filename>ファイルとして保存されます。整合できるファイルの種類は、ファイルフィルターでサポートされているかどうかに依存します。サポートされているフィルタには、ILIAS言語ファイル、Java(TM)リソースバンドル、キー=値テキスト、Magento CEロケールCSV、MoodlePHP、Mozilla DTD、Mozilla FTL、PO、RC、SubRip Subtitles、およびWindowsリソースがあります。</para>
 					  </listitem>
 					</varlistentry>
 
 					<varlistentry id="launch.with.command.line.mode.console.stats">
-					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats
-					  <emphasis>&lt;path&gt;</emphasis></option></term>
+					  <term id="launch.with.command.line.mode.console.stats.title"><option>--mode=console-stats</option> 
+					  <userinput>&lt;project path&gt;</userinput></term>
 					  <listitem>
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.console.stats.output.file">
-							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=[stats-output-file]</option></term>
+							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[stats-output-file]</userinput></term>
 							<listitem>
 							  <para>そのファイルに出力するか、存在しない場合は標準出力に出力します。<emphasis>--stats-type</emphasis>がないと、ファイル拡張子から形式を検出します。出力のデフォルトはxmlです。</para>
 							</listitem>
@@ -479,7 +487,7 @@ config-dir=&quot;path/to/new/configdir&quot;</programlisting>
 			  </varlistentry>
 				
 			  <varlistentry id="launch.with.command.line.script.">
-				<term id="launch.with.command.line.script.title"><option>--script=<emphasis>&lt;path&gt;</emphasis></option></term>
+				<term id="launch.with.command.line.script.title"><option>--script=</option><userinput>&lt;path&gt;</userinput></term>
 				<listitem>
 				  <para>プロジェクトイベントがトリガーされたときに実行するスクリプトファイル。</para>
 				</listitem>

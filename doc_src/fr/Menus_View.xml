@@ -73,7 +73,7 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.auto.populated.segments">
-      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Surligner les segments auto-traduits</guimenuitem></term>
+      <term id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Surligner les segments autotraduits</guimenuitem></term>
       <listitem>
         <para>Surligne les segments traduits automatiquement en différentes couleurs.</para>
 
@@ -84,7 +84,7 @@
     <varlistentry id="menus.view.mark.glossary.matches">
       <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Souligner les correspondances de glossaire</guimenuitem></term>
       <listitem>
-        <para>Souligne les termes source qui ont une correspondance dans les glossaires. Passer le curseur de la souris sur un terme souligné permet d’afficher le terme cible correspondant. Faire un clic-droit sur un terme souligné affiche le terme cible correspondant, qui peut être sélectionné et inséré a la position du curseur dans le texte cible.</para>
+        <para>Souligne les termes source qui ont une correspondance dans les glossaires. Passer le curseur de la souris sur un terme souligné permet d’afficher le terme cible correspondant. Faire un clic droit sur un terme souligné affiche le terme cible correspondant, qui peut être sélectionné et inséré à la position du curseur dans le texte cible.</para>
 	  </listitem>
     </varlistentry>
 

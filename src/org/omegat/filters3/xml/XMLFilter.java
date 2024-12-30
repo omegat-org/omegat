@@ -102,6 +102,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             // as well, per Timothy Morgan's 2014 paper: "XML Schema, DTD, and
             // Entity Attacks"
             parserFactory.setXIncludeAware(false);
+            // Support namespaces and xmlns:prefixes
+            parserFactory.setFeature("http://xml.org/sax/features/namespaces", true);
+            parserFactory.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
         } catch (ParserConfigurationException | SAXNotRecognizedException | SAXNotSupportedException ex) {
             Log.logErrorRB(ex, "XML_FILTER_ERROR", ex.getMessage());
         }

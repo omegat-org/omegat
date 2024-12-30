@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -66,6 +67,16 @@ public class MozillaFTLFilter extends AbstractFilter {
      * If true, will remove non-translated segments in the target files
      */
     private boolean removeStringsUntranslated = false;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(MozillaFTLFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public String getFileFormatName() {
         return OStrings.getString("MOZFTL_FILTER_NAME");
@@ -114,8 +125,8 @@ public class MozillaFTLFilter extends AbstractFilter {
         String comments = null;
         int identation = 1;
         String key = null;
-        String k = null;
-        String key_attr = "";
+        StringBuilder k = null;
+        String keyAttr = "";
         String value = null;
         boolean multiline = false;
 
@@ -177,17 +188,17 @@ public class MozillaFTLFilter extends AbstractFilter {
                 if (identation == 1) {
                     identation = ide;
                 } else {
-                    identation = (identation < ide ? identation : ide);
+                    identation = Math.min(identation, ide);
                 }
                 // writing out everything before = (and = itself)
             } else {
                 // outfile.write(str.substring(0, afterEqualsPos));
                 if (k == null) {
-                    k = "";
+                    k = new StringBuilder();
                 } else {
-                    k += "\n";
+                    k.append(lbpr.getLinebreak());
                 }
-                k += str.substring(0, afterEqualsPos);
+                k.append(str, 0, afterEqualsPos);
                 v = str.substring(afterEqualsPos);
             }
             if (value == null) {
@@ -197,7 +208,7 @@ public class MozillaFTLFilter extends AbstractFilter {
                 value = aux;
             }
             if (!multiline) {
-                key = (Objects.equals(key, key_attr) ? key : key_attr + key);
+                key = (Objects.equals(key, keyAttr) ? key : keyAttr + key);
             }
             str = lbpr.readLine();
             if (str != null && !str.isEmpty()) {
@@ -207,17 +218,17 @@ public class MozillaFTLFilter extends AbstractFilter {
                     continue;
                 }
                 if (cp == ' ') {
-                    key_attr = (Objects.equals(key_attr, "") ? key : key_attr);
+                    keyAttr = (Objects.equals(keyAttr, "") ? key : keyAttr);
                     if (value.isEmpty()) {
                         value = null;
                         // outfile.write(lbpr.getLinebreak());
                         continue;
                     }
                 } else {
-                    key_attr = "";
+                    keyAttr = "";
                 }
             } else {
-                key_attr = "";
+                keyAttr = "";
             }
             if (entryAlignCallback != null) {
                 align.put(key, value);
@@ -228,11 +239,16 @@ public class MozillaFTLFilter extends AbstractFilter {
                 if (trans == null) {
                     trans = value;
                     translatedSegment = false;
+                } else {
+                    // align to original linebreak chars when it has
+                    trans = trans.replaceAll("\n", lbpr.getLinebreak());
                 }
                 // Non-translated segments are written based on the
                 // filter options
                 if (translatedSegment || !removeStringsUntranslated) {
-                    outfile.write(k);
+                    if (k != null) {
+                        outfile.write(k.toString());
+                    }
                     outfile.write(trans);
                     outfile.write(lbpr.getLinebreak());
                 }

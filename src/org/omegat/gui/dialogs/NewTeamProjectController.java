@@ -23,7 +23,7 @@
 
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *************************************************************************/
+**************************************************************************/
 
 package org.omegat.gui.dialogs;
 
@@ -32,6 +32,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.File;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
@@ -52,7 +53,7 @@ import gen.core.project.RepositoryDefinition;
 
 public class NewTeamProjectController {
 
-    final private IMainWindow mw;
+    private final IMainWindow mw;
     private NewTeamProject dialog;
     private RepoTypeWorker repoTypeWorker = null;
     private String repoType;
@@ -276,10 +277,10 @@ public class NewTeamProjectController {
             try {
                 type = get();
                 resultText = getMessageForRepoType(type);
-            } catch (CancellationException ex) {
+            } catch (CancellationException | InterruptedException ex) {
                 type = null;
                 resultText = " ";
-            } catch (Throwable ex) {
+            } catch (ExecutionException ex) {
                 type = null;
                 // Error strings are project-file-specific because
                 // RemoteRepositoryFactory.detectRepositoryType() doesn't throw

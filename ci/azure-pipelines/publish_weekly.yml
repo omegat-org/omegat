@@ -1,16 +1,20 @@
 parameters:
   - name: omegatVersion
     default: ''
+  - name: condition
+    default: false
 
 steps:
   - task: Bash@3
     displayName: 📂 SCP upload to sourceforge file management
+    condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |
         echo "Push OmegaT ${{ parameters.omegatVersion }} files to SourceForge file manager"
         srcdir=$(system.defaultworkingdirectory)/build/distributions/
+        ls -l $srcdir/*        
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -v $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -v -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir
+        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir

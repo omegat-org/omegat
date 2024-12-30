@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -66,10 +65,13 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialsProvider;
+import org.eclipse.jgit.transport.HttpTransport;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
 import org.eclipse.jgit.transport.RemoteRefUpdate.Status;
 import org.eclipse.jgit.transport.SshSessionFactory;
+import org.eclipse.jgit.transport.http.HttpConnectionFactory;
+import org.eclipse.jgit.transport.http.apache.HttpClientConnectionFactory;
 import org.eclipse.jgit.transport.sshd.JGitKeyCache;
 import org.eclipse.jgit.transport.sshd.SshdSessionFactory;
 import org.eclipse.jgit.transport.sshd.SshdSessionFactoryBuilder;
@@ -77,10 +79,13 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.eclipse.jgit.util.FS;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
-import org.omegat.util.Log;
+import org.omegat.core.team2.RemoteRepositoryFactory;
+import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
@@ -92,7 +97,9 @@ import gen.core.project.RepositoryDefinition;
  * @author Aaron Madlon-Kay
  */
 public class GITRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository2.class.getName());
+    private final ILogger logger;
+    private static final String GIT_START_MSG = "Git '{0}' execution start";
+    private static final String GIT_NO_CHANGES_MSG = "Git '{0}' did nothing because there were no changes";
 
     // allow override default remote name and branch name.
     protected static final String DEFAULT_LOCAL_BRANCH = "master";
@@ -100,6 +107,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     // allow override timeout.
     protected static final int TIMEOUT = 30; // seconds
+    protected static final int CLONE_DEPTH = 1; // clone depth
 
     String repositoryURL;
     String branch;
@@ -110,9 +118,23 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
 
     ProjectTeamSettings projectTeamSettings;
 
-    static {
+    /**
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        RemoteRepositoryFactory.addRepositoryConnector("git", GITRemoteRepository2.class);
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
+    }
+
+    public GITRemoteRepository2() {
         installSshSessionFactory();
         GITCredentialsProvider.install();
+        logger = LoggerFactory.getLogger(GITRemoteRepository2.class, OStrings.getResourceBundle());
     }
 
     private static void installSshSessionFactory() {
@@ -124,6 +146,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 .setHomeDirectory(FS.detect().userHome())
                 .setSshDirectory(new File(FS.detect().userHome(), ".ssh")).build(new JGitKeyCache());
         SshSessionFactory.setInstance(sshdSessionFactory);
+        String useApache = System.getProperty("omegat.apache.http");
+        if (useApache != null && useApache.equalsIgnoreCase("true")) {
+            HttpConnectionFactory httpConnectionFactory = new HttpClientConnectionFactory();
+            HttpTransport.setConnectionFactory(httpConnectionFactory);
+        }
     }
 
     /**
@@ -163,11 +190,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
             } else {
-                Log.logInfoRB("GIT_START", "clone");
+                logger.atDebug().setMessage(GIT_START_MSG).addArgument("clone").log();
                 CloneCommand c = Git.cloneRepository();
                 c.setURI(repositoryURL);
                 c.setDirectory(localDirectory);
                 c.setTimeout(TIMEOUT);
+                c.setDepth(CLONE_DEPTH);
                 try {
                     c.call();
                 } catch (InvalidRemoteException e) {
@@ -188,7 +216,8 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     git.submoduleUpdate().setTimeout(TIMEOUT).call();
                 }
                 configRepo();
-                Log.logInfoRB("GIT_FINISH", "clone");
+                logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone")
+                        .log();
             }
 
             // cleanup repository
@@ -196,7 +225,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 git.reset().setMode(ResetType.HARD).call();
             }
             configRepo();
-            Log.logInfoRB("GIT_FINISH", "clone");
+            logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone").log();
         } finally {
             client.stop();
         }
@@ -288,7 +317,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 // TODO fetch
                 git.fetch().setRemote(REMOTE).setTimeout(TIMEOUT).call();
             }
-            Log.logDebug(LOGGER, "GIT switchToVersion {0} ", version);
+            logger.atTrace().log("GIT switchToVersion {} ", version);
             git.reset().setMode(ResetType.HARD).call();
             git.checkout().setName(version).call();
             git.branchDelete().setForce(true).setBranchNames(defaultBranch).call();
@@ -309,12 +338,12 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForCommit(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForCommit");
+        logger.atDebug().setMessage(GIT_START_MSG).addArgument("addForCommit").log();
         try (Git git = new Git(repository)) {
             git.add().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForCommit");
+            logger.atInfo().setMessageRB("GIT_FINISH").addArgument("addForCommit").log();
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForCommit", ex.getMessage());
+            logger.atError().logRB("GIT_ERROR", "addForCommit", ex.getMessage());
             throw ex;
         }
     }
@@ -330,12 +359,13 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     @Override
     public void addForDeletion(String path) throws Exception {
-        Log.logInfoRB("GIT_START", "addForDelete");
+        logger.atDebug().setMessage(GIT_START_MSG).addArgument("addForDelete").log();
         try (Git git = new Git(repository)) {
             git.rm().addFilepattern(path).call();
-            Log.logInfoRB("GIT_FINISH", "addForDelete");
+            logger.atInfo().setMessageRB("GIT_FINISH").addArgument("addForDelete")
+                    .log();
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "addForDelete", ex.getMessage());
+            logger.atError().logRB("GIT_ERROR", "addForDelete", ex.getMessage());
             throw ex;
         }
     }
@@ -447,10 +477,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         }
         if (indexIsEmpty(DirCache.read(repository))) {
             // Nothing was actually added to the index so we can just return.
-            Log.logInfoRB("GIT_NO_CHANGES", "upload");
+            logger.atDebug().setMessage(GIT_NO_CHANGES_MSG).addArgument("upload").log();
             return null;
         }
-        Log.logInfoRB("GIT_START", "upload");
+        logger.atDebug().setMessage(GIT_START_MSG).addArgument("upload").log();
         try (Git git = new Git(repository)) {
             CommitCommand commitCommand = git.commit();
             commitCommand.setMessage(comment);
@@ -463,16 +493,17 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     .collect(Collectors.toList());
             String result;
             if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
-                Log.logWarningRB("GIT_CONFLICT");
+                logger.atWarn().setMessageRB("GIT_CONFLICT").log();
                 result = null;
             } else {
                 result = commit.getName();
             }
-            Log.logDebug(LOGGER, "GIT committed into new version {0} ", result);
-            Log.logInfoRB("GIT_FINISH", "upload");
+            logger.atTrace().log("GIT committed into new version {} ", result);
+            logger.atInfo().setMessageRB("GIT_FINISH").addArgument("upload").log();
             return result;
         } catch (Exception ex) {
-            Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
+            logger.atError().setMessageRB("GIT_ERROR").addArgument("upload")
+                    .addArgument(ex.getMessage()).log();
             if (ex instanceof TransportException) {
                 throw new NetworkException(ex);
             } else {

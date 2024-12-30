@@ -9,11 +9,10 @@
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                2011 John Moran, Didier Briel
                2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
-                    Aaron Madlon-Kay
-               2013 Aaron Madlon-Kay, Zoltan Bartko
-               2014 Piotr Kulik, Aaron Madlon-Kay
-               2015 Aaron Madlon-Kay, Yu Tang, Didier Briel, Hiroshi Miura
-               2016 Aaron Madlon-Kay
+               2013 Zoltan Bartko
+               2014 Piotr Kulik
+               2015 Yu Tang, Didier Briel, Hiroshi Miura
+               2012-2016 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -115,7 +114,6 @@ public final class Preferences {
     public static final String DICTIONARY_USE_FONT = "dictionary_use_font";
     public static final String TF_DICTIONARY_FONT_SIZE = "dictionary_font_size";
 
-    public static final String MAINWINDOW_GEOMETRY_PREFIX = "screen";
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
 
     // Project files window size and position
@@ -173,23 +171,6 @@ public final class Preferences {
     /** Always confirm Quit, even if the project is saved */
     public static final String ALWAYS_CONFIRM_QUIT = "always_confirm_quit";
 
-    public static final String ALLOW_GOOGLE2_TRANSLATE = "allow_google2_translate";
-
-    public static final String ALLOW_BELAZAR_TRANSLATE = "allow_belazar_translate";
-
-    public static final String ALLOW_DEEPL_TRANSLATE = "allow_deepl_translate";
-
-    public static final String ALLOW_IBMWATSON_TRANSLATE = "allow_ibmwatson_translate";
-
-    public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
-
-    public static final String ALLOW_MICROSOFT_TRANSLATOR_AZURE = "allow_microsoft_translator_azure";
-
-    public static final String ALLOW_MYMEMORY_HUMAN_TRANSLATE = "allow_mymemory_human_translate";
-    public static final String ALLOW_MYMEMORY_MACHINE_TRANSLATE = "allow_mymemory_machine_translate";
-
-    public static final String ALLOW_YANDEX_CLOUD_TRANSLATE = "allow_yandex_cloud_translate";
-
     /**
      * Mark glossary matches. This feature used to be called "TransTips", and
      * the prefs key remains unchanged for backwards-compatibility.
@@ -205,6 +186,8 @@ public final class Preferences {
     public static final String MARK_WHITESPACE = "mark_whitespace";
     /** Mark Bidi controls as symbols */
     public static final String MARK_BIDI = "mark_bidi";
+    /** Mark alternative translations */
+    public static final String MARK_ALT_TRANSLATIONS = "mark_alt_translations";
     /** Do aggressive font fallback */
     public static final String FONT_FALLBACK = "font_fallback";
 
@@ -313,6 +296,8 @@ public final class Preferences {
     public static final String LANGUAGETOOL_REMOTE_URL = "lt_remoteURL";
     /** Local path to LanguageTool server jar file */
     public static final String LANGUAGETOOL_LOCAL_SERVER_JAR_PATH = "lt_localServerJarPath";
+    /** Local path to LanguageTool ngram model files */
+    public static final String LANGUAGETOOL_LANGUAGE_MODEL_PATH = "lt_languageModelPath";
     /** Disabled categories */
     public static final String LANGUAGETOOL_DISABLED_CATEGORIES_PREFIX = "lt_disabledCategories";
     /** Disabled rules prefix */
@@ -496,8 +481,9 @@ public final class Preferences {
     public static final String PROPERTY_SRX = "srx";
     public static final String PROPERTY_FILTERS = "filters";
 
-    /** Statistics dialog */
+    /** Statistics settings */
     public static final String STATISTICS_WINDOW_GEOMETRY_PREFIX = "stat_window";
+    public static final String STATS_OUTPUT_FORMAT = "stat_format";
 
     /** Issues */
     public static final String ISSUES_WINDOW_GEOMETRY_PREFIX = "issues_window";
@@ -513,9 +499,11 @@ public final class Preferences {
     public static final boolean VERSION_CHECK_AUTOMATIC_DEFAULT = true;
 
     public static final String THEME_CLASS_NAME = "theme_class_name";
-    public static final String THEME_CLASS_NAME_DEFAULT = "org.omegat.gui.theme.DefaultFlatTheme";
+    public static final String THEME_DARK_CLASS_NAME = "theme_dark_class_name";
+    public static final String THEME_COLOR_MODE = "theme_color_mode";
+    public static final String GLOSSARY_SORT_BY_SRC_LENGTH = "glossary_sort_by_src_length";
     public static final String GLOSSARY_SORT_BY_LENGTH = "glossary_sort_by_length";
-    public static final String APPLY_BURGER_SELECTOR_UI = "ui_use_burger_selector_menu";
+    public static final String MENUUI_CLASS_NAME = "menuui_class_name";
 
     /** Private constructor, because this file is singleton */
     private Preferences() {

@@ -62,17 +62,17 @@
       <para>Le script vérifie si la même version d’OmegaT est déjà installée dans le dossier <filename>/opt/omegat/</filename> et, dans le cas contraire, installe le programme dans <filename>/opt/omegat/OmegaT_6.1.0</filename> en le définissant comme version par défaut (dans <filename>/opt/omegat/OmegaT-default</filename>).</para>
 	</note>
 
-    <para>Une fois la décompression ou l’installation terminée, vous pouvez supprimer le fichier téléchargé car il n’est plus utile.</para>
+    <para>Une fois la décompression ou l’installation terminée, vous pouvez supprimer le fichier téléchargé, car il n’est plus utile.</para>
   </section>
 
   <section id="Installing.omegat.macos">
     <title id="Installing.omegat.macos.title">Sur macOS</title>
 
-    <para>Double-cliquez sur le paquet que vous avez téléchargé pour le décompresser. Un dossier nommé <filename>OmegaT</filename> va être créé. Il contient deux fichiers : <filename>index.html</filename> (le fichier d’entrée du manuel d’utilisation) et <filename>OmegaT.app</filename> (l’application). Copiez le dossier dans un emplacement approprié (ex : <filename>Applications</filename>).</para>
+    <para>Double-cliquez sur le paquet que vous avez téléchargé pour le décompresser. Un dossier nommé <filename>OmegaT</filename> va être créé. Il contient deux fichiers : <filename>index.html</filename> (le fichier d’entrée du manuel d’utilisation) et <filename>OmegaT.app</filename> (l’application). Copiez le dossier dans un emplacement approprié (ex .: <filename>Applications</filename>).</para>
 
     <para>Si vous le souhaitez, vous pouvez faire glisser l’application <filename>OmegaT.app</filename> et la déposer dans le Dock pour un accès plus facile.</para>
 
-	<para>Quand vous avez terminé, vous pouvez supprimer le paquet téléchargé car il n’est plus utile.</para>
+	<para>Quand vous avez terminé, vous pouvez supprimer le paquet téléchargé, car il n’est plus utile.</para>
   </section>
 
   <section id="installing.omegat.other.systems">
@@ -103,7 +103,7 @@
 		</listitem>
 
 		<listitem>
-		  <para>Les projets que vous avez créés auparavant ou que vous utilisez actuellement ne seront <emphasis>ni modifiés, ni supprimés</emphasis>, car ils <emphasis>ne sont pas</emphasis> stockés à l’intérieur d’OmegaT. Ce sont des objets distincts qui n’ont pas de lien physique avec l’application OmegaT en elle-même.</para>
+		  <para>Les projets que vous avez créés auparavant ou que vous utilisez actuellement ne seront <emphasis>ni modifiés ni supprimés</emphasis>, car ils <emphasis>ne sont pas</emphasis> stockés à l’intérieur d’OmegaT. Ce sont des objets distincts qui n’ont pas de lien physique avec l’application OmegaT en elle-même.</para>
 		</listitem>
 
 		<listitem>

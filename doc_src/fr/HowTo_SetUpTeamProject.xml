@@ -3,7 +3,7 @@
 <section id="how.to.setup.team.project">
   <title id="how.to.setup.team.project.title">Préparation d’un projet en équipe</title>
 
-  <para>La gestion d’un projet en équipe demande une certaine maîtrise de l’un ou l’autre des logiciels de gestion de version : <emphasis>SVN</emphasis> ou <emphasis>Git</emphasis>.</para>
+  <para>La gestion d’un projet en équipe demande une certaine maitrise de l’un ou l’autre des logiciels de gestion de version : <emphasis>SVN</emphasis> ou <emphasis>Git</emphasis>.</para>
 
   <para>Étant donné que les informations sur ces sujets sont faciles à trouver, ce manuel se limite à décrire leur utilisation dans le contexte d’un projet en équipe OmegaT.</para>
 
@@ -47,7 +47,7 @@
 		  <listitem>
 			<para>Choisissez les paramètres appropriés</para>
 
-			<para>Apportez les changements nécessaires aux propriétés du projet à ce stade, filtres de fichiers locaux et paramètres de segmentation inclus. Voir la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour en savoir plus.</para>
+			<para>Apportez les changements nécessaires aux propriétés du projet à ce stade, filtres de fichiers locaux et paramètres de segmentation inclus. Voir la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/> pour en savoir plus.</para>
 		  </listitem>
 
 		  <listitem>
@@ -103,9 +103,9 @@
           </listitem>
 
           <listitem>
-			<para>Projets sur un serveur auto-hébergé</para>
+			<para>Projets sur un serveur autohébergé</para>
 
-			<para>Si le serveur est auto-hébergé et ne permet pas aux membres de l’équipe d’ouvrir un compte directement, l’administrateur du projet en équipe devra créer des comptes avec un accès en écriture pour les membres.</para>
+			<para>Si le serveur est autohébergé et ne permet pas aux membres de l’équipe d’ouvrir un compte directement, l’administrateur du projet en équipe devra créer des comptes avec un accès en écriture pour les membres.</para>
 
 			<para>Après avoir créé les comptes, l’administrateur doit envoyer aux membres leurs identifiants individuels.</para>
           </listitem>
@@ -127,13 +127,13 @@
           </listitem>
 		</orderedlist>
 
-		<para>Une fois que l’administrateur du projet en équipe a confirmé que les membres ont réussi à ouvrir le projet en équipe, il est préférable de veiller à ce que les <link linkend="menus.tools.statistics">statistiques du projet</link> sont les mêmes pour l’administrateur (sur le serveur) et pour les membres (localement).</para>
+		<para>Une fois que l’administrateur du projet en équipe a confirmé que les membres ont réussi à ouvrir le projet en équipe, il est préférable de veiller à ce que les <link linkend="menus.tools.statistics">statistiques du projet</link> soient les mêmes pour l’administrateur (sur le serveur) et pour les membres (localement).</para>
 
 		<para>Si elles ne correspondent pas, vérifiez que les fichiers <filename>filters.xml</filename> et <filename>segmentation.conf</filename> sont partagés correctement.</para>
 	  </listitem>
 
 	  <listitem id="how.to.setup.team.project.download.if.needed">
-		<para id="how.to.setup.team.project.download.if.needed.title">Si vous devez aussi travailler sur le projet, téléchargez le projet vous-même dans un emplacement local différent de celui du projet en équipe local.</para>
+		<para id="how.to.setup.team.project.download.if.needed.title">Si vous devez aussi travailler sur le projet, téléchargez le projet à cet usage à un emplacement local différent de celui du projet en équipe local.</para>
 	  </listitem>
 
 	  <listitem id="how.to.setup.team.project.translate">
@@ -145,7 +145,7 @@
   <section id="how.to.setup.team.project.mapping.parameters">
 	<title id="how.to.setup.team.project.mapping.parameters.title">Mise en correspondance des dépôts</title>
 
-	<para>Il est possible de mettre en correspondance différents emplacements distants avec des fichiers locaux via l’interface d’OmegaT en utilisant l’élément <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> dans la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, ou en modifiant le fichier <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>. Bien que la fonctionnalité de mise en correspondance soit d’abord conçue pour rassembler les fichiers source provenant de différents emplacements, elle peut aussi être utilisée pour d’autres types de fichiers.</para>
+	<para>Il est possible de mettre en correspondance différents emplacements distants avec des fichiers locaux via l’interface d’OmegaT en utilisant l’élément <link linkend="dialogs.project.properties.repository.mapping.title" endterm="dialogs.project.properties.repository.mapping.title"/> dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, ou en modifiant le fichier <link linkend="project.folder.omegat.project.file.title" endterm="project.folder.omegat.project.file.title"/>. Bien que la fonctionnalité de mise en correspondance soit d’abord conçue pour rassembler les fichiers source provenant de différents emplacements, elle peut aussi être utilisée pour d’autres types de fichiers.</para>
 
 	<para>Une liste des paramètres de mise en correspondance est présentée ci-dessous, avec des exemples de leur utilisation dans la section suivante.</para>
 

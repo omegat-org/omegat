@@ -97,7 +97,7 @@
   </section>
   
   <section id="post.processing.commands.user.defined.scripts">
-    <title id="post.processing.commands.user.defined.scripts.title">Scripts definits per l'usuari</title>
+    <title id="post.processing.commands.user.defined.scripts.title">Scripts locals</title>
     <para>A més d'una ordre normal, es pot executar un script. No executeu mai scripts de postprocessament de fonts no fiables. Per raons de seguretat, les ordres de postprocessament locals estan inhabilitades per defecte.</para>
     <para>Les variables de plantilla es poden utilitzar amb ordres normals i scripts personalitzats. És possible que hàgiu d'utilitzar un camí absolut per a l'script. És possible que el valor PATH que utilitza l'OmegaT no sigui el mateix que el de l'usuari actual.</para>
     <para>STDOUT i STDERR s'escriuen en el fitxer <link linkend="configuration.folder.default.contents.logs.title">omegat.log</link>. El codi de sortida i STDERR o el darrer STDOUT apareixeran en la barra d'estat.</para>

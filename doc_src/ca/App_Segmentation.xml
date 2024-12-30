@@ -8,7 +8,7 @@
 	
 	<para>Les eines de traducció assistida per ordinador funcionen amb unitats textuals anomenades segments. Quan s'introdueix una traducció, el segment que conté el text d'origen s'emmagatzema en la memòria del projecte, juntament amb la traducció i, posteriorment, s'utilitza per a les coincidències amb altres segments d'origen del projecte.</para>
 
-	<para>Utilitzeu la propietat del projecte <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/> per a seleccionar el tipus de segmentació.</para>
+	<para>Per a especificar el tipus de segmentació, utilitzeu la propietat del projecte <link linkend="dialogs.project.properties.options.segmentation" endterm="dialogs.project.properties.options.segmentation.title"/>.</para>
 
 	<para>Per defecte, els segments són <emphasis role="bold">paràgrafs</emphasis> definits pel format del fitxer.</para>
 	

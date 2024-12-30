@@ -27,7 +27,7 @@
       <term id="menus.goto.next.translated.segment.title"><guimenuitem>Segment traduit suivant</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
-        <para>Se déplace au prochain segment déjà traduit, ignorant les segments non traduits.</para>
+        <para>Passe au prochain segment déjà traduit, ignorant les segments non traduits.</para>
       </listitem>
     </varlistentry>
 
@@ -62,7 +62,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.segment.number">
-      <term id="menus.goto.segment.number.title"><guimenuitem>Segment numéro...</guimenuitem> <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+      <term id="menus.goto.segment.number.title"><guimenuitem>Segment numéro…</guimenuitem> <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
         <para>Se rend au segment dont le numéro ou le raccourci est entré.</para>
       </listitem>
@@ -92,12 +92,12 @@
     <varlistentry id="menus.goto.source.of.selected.match">
       <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Source de la correspondance sélectionnée</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
-        <para>Passe au segment qui correspond a la correspondance sélectionnée dans le volet <guilabel>Correspondances</guilabel>.</para>
+        <para>Passe au segment qui correspond à la correspondance sélectionnée dans le volet <guilabel>Correspondances</guilabel>.</para>
       </listitem>
     </varlistentry>
 
 	<varlistentry id="menus.goto.auto.populated.segments">
-	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Segments auto-traduits</guisubmenu></term>
+	  <term id="menus.goto.auto.populated.segments.title"><guisubmenu>Segments autotraduits</guisubmenu></term>
 	  <listitem>
         <para>Navigue entre les segments automatiquement remplis par des correspondances exactes provenant des sous-dossiers <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> et <link linkend="project.folder.tm.enforce.title" endterm="project.folder.tm.enforce.title"/>.</para>
 

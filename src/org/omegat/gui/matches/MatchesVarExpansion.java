@@ -6,6 +6,7 @@
  Copyright (C) 2012 Thomas Cordonnier, Aaron Madlon-Kay
                2013-2014 Aaron Madlon-Kay
                2014 Alex Buloichik
+               2023 Damien Rembert
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -46,6 +47,7 @@ import org.omegat.core.matching.DiffDriver;
 import org.omegat.core.matching.DiffDriver.Render;
 import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.NearString;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.OStrings;
 import org.omegat.util.TMXProp;
 import org.omegat.util.VarExpansion;
@@ -123,6 +125,16 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         }
     };
 
+    private static final Replacer RTL_SOURCE_TEXT_REPLACER = (r, match) -> {
+        r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+        r.text = r.text.replace(VAR_SOURCE_TEXT, BiDiUtils.addRtlBidiAround(match.source));
+    };
+
+    private static final Replacer LTR_SOURCE_TEXT_REPLACER = (r, match) -> {
+        r.sourcePos = r.text.indexOf(VAR_SOURCE_TEXT);
+        r.text = r.text.replace(VAR_SOURCE_TEXT, BiDiUtils.addLtrBidiAround(match.source));
+    };
+
     private static final Replacer DIFF_REVERSED_REPLACER = (r, match) -> {
         int diffPos = r.text.indexOf(VAR_DIFF_REVERSED);
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
@@ -154,12 +166,6 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
     // ------------------------------ non-static part -------------------
 
-    /**
-     * A sorted map that ensures styled replacements are performed in the order
-     * of appearance.
-     */
-    private Map<Integer, Replacer> styledComponents = new TreeMap<>();
-
     public MatchesVarExpansion(String template) {
         super(template);
 
@@ -173,7 +179,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
      * return all properties matching the 1st pattern, as key=value pairs where
      * = is replaced by separator1 and use separator2 between entries.<br>
      * Expression \n for new line is accepted in separators.
-     * 
+     *
      * @param localTemplate
      *            Initial template
      * @param props
@@ -249,7 +255,6 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
                 Integer.toString(match.scores[0].scoreNoStem));
         localTemplate = localTemplate.replace(VAR_SCORE_ADJUSTED,
                 Integer.toString(match.scores[0].adjustedScore));
-        localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
         localTemplate = localTemplate.replace(VAR_FUZZY_FLAG,
                 match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
 
@@ -270,15 +275,31 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         if (props != null) {
             localTemplate = expandFileNames(localTemplate, match.projs, props.getTMRoot());
         }
+
+        if (BiDiUtils.isMixedOrientationProject()) {
+            if (BiDiUtils.isTargetLangRtl()) {
+                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, BiDiUtils.addRtlBidiAround(match.translation));
+            } else {
+                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, BiDiUtils.addLtrBidiAround(match.translation));
+            }
+        } else {
+                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
+        }
         return localTemplate;
     }
+
+    /**
+     * A sorted map that ensures styled replacements are performed in the
+     * order of appearance.
+     */
+    private final Map<Integer, Replacer> styledComponents = new TreeMap<>();
 
     public Result apply(NearString match, int id) {
         Result result = new Result();
         styledComponents.clear();
 
         // Variables
-        result.text = this.expandVariables(match);
+        result.text = expandVariables(match);
         result.text = result.text.replace(VAR_ID, Integer.toString(id));
 
         // Properties (<prop type='xxx'>value</prop>)
@@ -289,7 +310,15 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             result.text = result.text.replaceAll(PATTERN_PROPERTY_GROUP.pattern(), "");
         }
 
-        styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+        if (BiDiUtils.isMixedOrientationProject()) {
+            if (BiDiUtils.isSourceLangRtl()) {
+                styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), RTL_SOURCE_TEXT_REPLACER);
+            } else {
+                styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), LTR_SOURCE_TEXT_REPLACER);
+            }
+        } else {
+                styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+        }
         styledComponents.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
         styledComponents.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);
 

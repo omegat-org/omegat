@@ -12,5 +12,45 @@ bindpaths() {
     done
 }
 
-umask a+w
-exec docker run --rm -i -v "$PWD":/work $(bindpaths "$@") amake/innosetup:innosetup6 $(relpaths "$@")
+# set TMPDIR for context creation
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+TMPDIR=$( dirname ${SCRIPT_DIR} )/build/tmp
+
+# workaround for build failure on CI env.
+# see https://sourceforge.net/p/omegat/bugs/1228/
+PUID=`id -u`
+PGID=`id -g`
+IMAGE=omegatorg/innosetup:innosetup6
+CONTEXT=${TMPDIR}/iscc
+mkdir -p $CONTEXT
+
+cat << __EOF__  > $CONTEXT/Dockerfile
+FROM docker.io/amake/innosetup:innosetup6-buster
+USER root
+RUN usermod -u $PUID -o xclient && groupmod -g $PGID -o xusers
+RUN chown -R $PUID:$PGID /home/xclient /work
+USER xclient
+ENV HOME /home/xclient
+ENV WINEPREFIX /home/xclient/.wine
+ENV WINEARCH win32
+WORKDIR /work
+ENTRYPOINT ["iscc"]
+__EOF__
+
+CMD="$(type -p docker)" && $CMD info >/dev/null 2>&1 || CMD="$(type -p nerdctl)" && $CMD info > /dev/null || false
+echo Select container CLI: $CMD
+
+IMAGEID=$($CMD images -q $IMAGE)
+if [[ -z "$IMAGEID" ]]; then
+  echo Now build custom image
+  if ! $CMD build -t $IMAGE $CONTEXT ; then
+    echo Container build error for ISCC, abort...
+    exit 1
+  fi
+fi
+exec $CMD run -i --rm  \
+   -u `id -u`:`id -g` \
+   -v "$PWD":/work \
+   $(bindpaths "$@") \
+   $IMAGE \
+   $(relpaths "$@")

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
-                         Benjamin Siband, and Kim Bruning
+               2000-2006 Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009-2010 Alex Buloichik
@@ -42,6 +42,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import org.omegat.swing.extra.ExtraLocales;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
@@ -98,6 +99,9 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
      * @return the modified {@link UIDefaults} object
      */
     public static UIDefaults setDefaults(UIDefaults defaults, String lafId) {
+        // load extra locales
+        ExtraLocales.setDefaults(defaults);
+
         // Colors
         // #EEEEEE on Metal & OS X LAF
         Color standardBgColor = defaults.getColor("Panel.background");
@@ -119,23 +123,19 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         }
 
         // General highlight & shadow used in a lot of places
-        //
-        // FIXME: VLDocking values have to be set to the "developer defaults"
-        // not the "LAF defaults" because that's where
-        // DockingUISettings#installUI puts them
-        UIManager.put("VLDocking.highlight", activeTitleBgColor);
-        UIManager.put("VLDocking.shadow", statusAreaColor);
+        defaults.put("VLDocking.highlight", activeTitleBgColor);
+        defaults.put("VLDocking.shadow", statusAreaColor);
 
         // Main window main area
         int outside = 5;
-        UIManager.put("DockingDesktop.border", new EmptyBorder(outside, outside, outside, outside));
+        defaults.put("DockingDesktop.border", new EmptyBorder(outside, outside, outside, outside));
 
         // Docked, visible panels get two borders if we're not careful:
         // 1. Drawn by VLDocking. Surrounds panel content AND header. Set this to empty margin instead.
         int panel = 2;
-        UIManager.put("DockView.singleDockableBorder", new EmptyBorder(panel, panel, panel, panel));
+        defaults.put("DockView.singleDockableBorder", new EmptyBorder(panel, panel, panel, panel));
         int maxPanel = outside + panel;
-        UIManager.put("DockView.maximizedDockableBorder", new EmptyBorder(maxPanel, maxPanel, maxPanel, maxPanel));
+        defaults.put("DockView.maximizedDockableBorder", new EmptyBorder(maxPanel, maxPanel, maxPanel, maxPanel));
         // 2. Drawn by OmegaT-defined Dockables. Make this a 1px line.
         defaults.put("OmegaTDockablePanel.border", new MatteBorder(1, 1, 1, 1, borderColor));
 
@@ -148,11 +148,11 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         // Tabbed docked, visible panels are surrounded by LAF-specific chrome, but the surrounding
         // colors don't appear to be available through the API. These values are from visual inspection.
         if (Platform.isMacOSX()) {
-            UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
+            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(0, 5, 5, 5, new Color(0xE6E6E6)));
         } else if (isWindowsLAF(lafId) && !isWindowsClassicLAF(lafId)) {
-            UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.WHITE));
+            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(2, 5, 5, 5, Color.WHITE));
         } else {
-            UIManager.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
+            defaults.put("DockView.tabbedDockableBorder", new MatteBorder(5, 5, 5, 5, standardBgColor));
         }
 
         // Windows 8+ is very square.
@@ -162,7 +162,7 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         Color activeTitleText = defaults.getColor("Label.foreground");
         // #000000 -> #808080; GTK+ has Color.WHITE for Label.disabledForeground
         Color inactiveTitleText = adjustRGB(activeTitleText, 0x80);
-        UIManager.put("DockViewTitleBar.border",
+        defaults.put("DockViewTitleBar.border",
                 new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_TOP));
         // Windows 7 "Classic" has Color.WHITE for this
         defaults.put("InternalFrame.activeTitleForeground", activeTitleText);
@@ -170,18 +170,18 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         defaults.put("InternalFrame.inactiveTitleForeground", inactiveTitleText);
         defaults.put("InternalFrame.inactiveTitleBackground", standardBgColor);
         // Disable gradient on pane title bars
-        UIManager.put("DockViewTitleBar.disableCustomPaint", true);
+        defaults.put("DockViewTitleBar.disableCustomPaint", true);
 
         // Main window bottom area
 
         // AutoHideButtonPanel is where minimized panel tabs go. Use compound border to give left/right margins.
-        UIManager.put("AutoHideButtonPanel.bottomBorder", new CompoundBorder(
+        defaults.put("AutoHideButtonPanel.bottomBorder", new CompoundBorder(
                 new MatteBorder(1, 0, 0, 0, borderColor),
                 new EmptyBorder(0, 2 * outside, 0, 2 * outside)));
-        UIManager.put("AutoHideButtonPanel.background", bottomAreaBgColor);
-        UIManager.put("AutoHideButton.expandBorderBottom",
+        defaults.put("AutoHideButtonPanel.background", bottomAreaBgColor);
+        defaults.put("AutoHideButton.expandBorderBottom",
                 new RoundedCornerBorder(cornerRadius, borderColor, RoundedCornerBorder.SIDE_BOTTOM));
-        UIManager.put("AutoHideButton.background", standardBgColor);
+        defaults.put("AutoHideButton.background", standardBgColor);
         // OmegaT-defined status box in lower right
         defaults.put("OmegaTStatusArea.border", new MatteBorder(1, 1, 1, 1, statusAreaColor));
         // Lowermost section margins
@@ -196,60 +196,60 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
         defaults.put("inactiveCaptionBorder", borderColor);
 
         // Icons
-        UIManager.put("DockViewTitleBar.maximize", getIcon("appbar.app.tall.inactive.png"));
-        UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.app.tall.png"));
-        UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.app.tall.pressed.png"));
-        UIManager.put("DockViewTitleBar.restore", getIcon("appbar.window.restore.inactive.png"));
-        UIManager.put("DockViewTitleBar.restore.rollover", getIcon("appbar.window.restore.png"));
-        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("appbar.window.restore.pressed.png"));
-        UIManager.put("DockViewTitleBar.hide", getIcon("appbar.hide.inactive.png"));
-        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("appbar.hide.png"));
-        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("appbar.hide.pressed.png"));
-        UIManager.put("DockViewTitleBar.float", getIcon("appbar.fullscreen.inactive.png"));
-        UIManager.put("DockViewTitleBar.float.rollover", getIcon("appbar.fullscreen.png"));
-        UIManager.put("DockViewTitleBar.float.pressed", getIcon("appbar.fullscreen.pressed.png"));
-        UIManager.put("DockViewTitleBar.dock", getIcon("appbar.window.restore.inactive.png"));
-        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("appbar.window.restore.png"));
-        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("appbar.window.restore.pressed.png"));
-        UIManager.put("DockViewTitleBar.attach", getIcon("appbar.dock.window.inactive.png"));
-        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("appbar.dock.window.png"));
-        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("appbar.dock.window.pressed.png"));
+        defaults.put("DockViewTitleBar.maximize", getIcon("appbar.app.tall.inactive.png"));
+        defaults.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.app.tall.png"));
+        defaults.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.app.tall.pressed.png"));
+        defaults.put("DockViewTitleBar.restore", getIcon("appbar.window.restore.inactive.png"));
+        defaults.put("DockViewTitleBar.restore.rollover", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.restore.pressed", getIcon("appbar.window.restore.pressed.png"));
+        defaults.put("DockViewTitleBar.hide", getIcon("appbar.hide.inactive.png"));
+        defaults.put("DockViewTitleBar.hide.rollover", getIcon("appbar.hide.png"));
+        defaults.put("DockViewTitleBar.hide.pressed", getIcon("appbar.hide.pressed.png"));
+        defaults.put("DockViewTitleBar.float", getIcon("appbar.fullscreen.inactive.png"));
+        defaults.put("DockViewTitleBar.float.rollover", getIcon("appbar.fullscreen.png"));
+        defaults.put("DockViewTitleBar.float.pressed", getIcon("appbar.fullscreen.pressed.png"));
+        defaults.put("DockViewTitleBar.dock", getIcon("appbar.window.restore.inactive.png"));
+        defaults.put("DockViewTitleBar.dock.rollover", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.dock.pressed", getIcon("appbar.window.restore.pressed.png"));
+        defaults.put("DockViewTitleBar.attach", getIcon("appbar.dock.window.inactive.png"));
+        defaults.put("DockViewTitleBar.attach.rollover", getIcon("appbar.dock.window.png"));
+        defaults.put("DockViewTitleBar.attach.pressed", getIcon("appbar.dock.window.pressed.png"));
 
-        UIManager.put("DockViewTitleBar.menu.hide", getIcon("appbar.hide.png"));
-        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("appbar.app.tall.png"));
-        UIManager.put("DockViewTitleBar.menu.restore", getIcon("appbar.window.restore.png"));
-        UIManager.put("DockViewTitleBar.menu.dock", getIcon("appbar.window.restore.png"));
-        UIManager.put("DockViewTitleBar.menu.float", getIcon("appbar.fullscreen.png"));
-        UIManager.put("DockViewTitleBar.menu.attach", getIcon("appbar.dock.window.png"));
+        defaults.put("DockViewTitleBar.menu.hide", getIcon("appbar.hide.png"));
+        defaults.put("DockViewTitleBar.menu.maximize", getIcon("appbar.app.tall.png"));
+        defaults.put("DockViewTitleBar.menu.restore", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.menu.dock", getIcon("appbar.window.restore.png"));
+        defaults.put("DockViewTitleBar.menu.float", getIcon("appbar.fullscreen.png"));
+        defaults.put("DockViewTitleBar.menu.attach", getIcon("appbar.dock.window.png"));
 
-        UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.hide.png"));
-        UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.app.tall.png"));
-        UIManager.put("DockTabbedPane.menu.float", getIcon("appbar.fullscreen.png"));
+        defaults.put("DockTabbedPane.menu.hide", getIcon("appbar.hide.png"));
+        defaults.put("DockTabbedPane.menu.maximize", getIcon("appbar.app.tall.png"));
+        defaults.put("DockTabbedPane.menu.float", getIcon("appbar.fullscreen.png"));
 
         // Windows only accepts a 32x32 cursor image with no semitransparency, so you basically
         // need a special image just for that.
-        UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.cursor32x32.png"));
+        defaults.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.cursor32x32.png"));
 
         // Use more native-looking icons on OS X
         if (Platform.isMacOSX()) {
-            UIManager.put("DockViewTitleBar.maximize", getIcon("appbar.fullscreen.corners.inactive.png"));
-            UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.fullscreen.corners.png"));
-            UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.fullscreen.corners.pressed.png"));
-            UIManager.put("DockViewTitleBar.restore", getIcon("appbar.restore.corners.inactive.png"));
-            UIManager.put("DockViewTitleBar.restore.rollover", getIcon("appbar.restore.corners.png"));
-            UIManager.put("DockViewTitleBar.restore.pressed", getIcon("appbar.restore.corners.pressed.png"));
-            UIManager.put("DockViewTitleBar.hide", getIcon("appbar.minus.inactive.png"));
-            UIManager.put("DockViewTitleBar.hide.rollover", getIcon("appbar.minus.png"));
-            UIManager.put("DockViewTitleBar.hide.pressed", getIcon("appbar.minus.pressed.png"));
+            defaults.put("DockViewTitleBar.maximize", getIcon("appbar.fullscreen.corners.inactive.png"));
+            defaults.put("DockViewTitleBar.maximize.rollover", getIcon("appbar.fullscreen.corners.png"));
+            defaults.put("DockViewTitleBar.maximize.pressed", getIcon("appbar.fullscreen.corners.pressed.png"));
+            defaults.put("DockViewTitleBar.restore", getIcon("appbar.restore.corners.inactive.png"));
+            defaults.put("DockViewTitleBar.restore.rollover", getIcon("appbar.restore.corners.png"));
+            defaults.put("DockViewTitleBar.restore.pressed", getIcon("appbar.restore.corners.pressed.png"));
+            defaults.put("DockViewTitleBar.hide", getIcon("appbar.minus.inactive.png"));
+            defaults.put("DockViewTitleBar.hide.rollover", getIcon("appbar.minus.png"));
+            defaults.put("DockViewTitleBar.hide.pressed", getIcon("appbar.minus.pressed.png"));
 
-            UIManager.put("DockViewTitleBar.menu.hide", getIcon("appbar.minus.png"));
-            UIManager.put("DockViewTitleBar.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
-            UIManager.put("DockViewTitleBar.menu.restore", getIcon("appbar.restore.corners.png"));
+            defaults.put("DockViewTitleBar.menu.hide", getIcon("appbar.minus.png"));
+            defaults.put("DockViewTitleBar.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
+            defaults.put("DockViewTitleBar.menu.restore", getIcon("appbar.restore.corners.png"));
 
-            UIManager.put("DockTabbedPane.menu.hide", getIcon("appbar.minus.png"));
-            UIManager.put("DockTabbedPane.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
+            defaults.put("DockTabbedPane.menu.hide", getIcon("appbar.minus.png"));
+            defaults.put("DockTabbedPane.menu.maximize", getIcon("appbar.fullscreen.corners.png"));
 
-            UIManager.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.png"));
+            defaults.put("DragControler.detachCursor", ResourcesUtil.getBundledImage("appbar.fullscreen.png"));
         }
 
         // Main window newUI icons
@@ -276,7 +276,7 @@ public class DefaultFlatTheme extends DelegatingLookAndFeel {
      * Adjust a color by adding some constant to its RGB values, clamping to the
      * range 0-255.
      */
-    private static Color adjustRGB(Color color, int adjustment) {
+    public static Color adjustRGB(Color color, int adjustment) {
         Color result = new Color(Math.max(0, Math.min(255, color.getRed() + adjustment)),
                 Math.max(0, Math.min(255, color.getGreen() + adjustment)),
                 Math.max(0, Math.min(255, color.getBlue() + adjustment)));

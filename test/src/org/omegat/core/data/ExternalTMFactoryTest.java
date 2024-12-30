@@ -42,6 +42,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
+import org.omegat.filters4.xml.xliff.Xliff1Filter;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
@@ -54,7 +55,7 @@ public class ExternalTMFactoryTest extends TestCore {
     @Before
     public final void setUp() {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        FilterMaster.setFilterClasses(Arrays.asList(PoFilter.class, MozillaLangFilter.class));
+        FilterMaster.setFilterClasses(Arrays.asList(PoFilter.class, MozillaLangFilter.class, Xliff1Filter.class));
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         ProjectProperties props = new ProjectProperties() {
             public Language getSourceLanguage() {
@@ -134,6 +135,25 @@ public class ExternalTMFactoryTest extends TestCore {
         assertEquals("Laden Sie %s in Ihrer Sprache herunter", tmx.getEntries().get(1).getTranslationText());
     }
 
+    @Test
+    public void testLoadXliff() throws Exception {
+        File tmxFile = new File("test/data/filters/xliff/filters4-xliff1/en-ca.xlf");
+
+        sourceLang = new Language("en");
+        targetLang = new Language("ca");
+
+        assertTrue(ExternalTMFactory.isSupported(tmxFile));
+
+        ExternalTMX tmx = ExternalTMFactory.load(tmxFile);
+        assertEquals(3, tmx.getEntries().size());
+        assertEquals("This is a test", tmx.getEntries().get(0).getSourceText());
+        assertEquals("Això és una prova", tmx.getEntries().get(0).getTranslationText());
+        assertEquals("This is another test", tmx.getEntries().get(1).getSourceText());
+        assertEquals("Això és una altra prova", tmx.getEntries().get(1).getTranslationText());
+        assertEquals("This is a house", tmx.getEntries().get(2).getSourceText());
+        assertEquals("Això és una casa", tmx.getEntries().get(2).getTranslationText());
+    }
+
     /**
      * Test for RFE #1452
      *
@@ -159,7 +179,7 @@ public class ExternalTMFactoryTest extends TestCore {
         List<ITMXEntry> matchingEntries = tmx.getEntries().stream().filter(t -> t.getSourceText().equals("Hello World!"))
                 .collect(Collectors.toList());
         assertEquals(3, matchingEntries.size());
-        
+
         // Set the EXT_TMX_KEEP_FOREIGN_MATCH prop
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
         tmx = ExternalTMFactory.load(tmxFile);

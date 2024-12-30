@@ -44,15 +44,19 @@ import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -63,6 +67,10 @@ import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import org.apache.commons.lang3.StringUtils;
+import org.languagetool.JLanguageTool;
+import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
@@ -75,6 +83,7 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
+import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.TeamTool;
@@ -84,6 +93,8 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.languagetools.LanguageClassBroker;
+import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -92,6 +103,7 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
@@ -114,7 +126,7 @@ public final class Main {
     private Main() {
     }
 
-    /** Project location for load on startup. */
+    /** Project location for a load on startup. */
     protected static File projectLocation = null;
 
     /** Remote project location. */
@@ -127,10 +139,10 @@ public final class Main {
     protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
-        if (args.length > 0 && (CLIParameters.HELP_SHORT.equals(args[0])
-                || CLIParameters.HELP.equals(args[0]))) {
-            System.out.println(StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"),
-                    OStrings.getNameAndVersion()));
+        if (args.length > 0
+                && (CLIParameters.HELP_SHORT.equals(args[0]) || CLIParameters.HELP.equals(args[0]))) {
+            System.out.println(
+                    StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"), OStrings.getNameAndVersion()));
             System.exit(0);
         }
 
@@ -138,9 +150,9 @@ public final class Main {
             TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
         }
 
-        // Workaround for bug #812. Remove this when appropriate; see
-        // https://sourceforge.net/p/omegat/bugs/812/
-        System.setProperty("jna.encoding", Charset.defaultCharset().name());
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
 
         PARAMS.putAll(CLIParameters.parseArgs(args));
 
@@ -176,17 +188,26 @@ public final class Main {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
 
-        Log.log("\n" + "===================================================================" + "\n"
-                + OStrings.getNameAndVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());
+        // initialize logging backend and loading configuration.
+        ILogger logger = Log.getLogger(Main.class);
 
-        Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System.getProperty("java.version"),
-                System.getProperty("java.home"));
+        logger.atInfo().setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
+                .addArgument(StringUtils.repeat('=', 120)).addArgument(OStrings.getNameAndVersion())
+                .addArgument(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now()))
+                .addArgument(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()))
+                .addArgument(Locale.getDefault().toLanguageTag()).log();
+        logger.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+                System.getProperty("java.version"), System.getProperty("java.home"));
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
         // Do migration and load various settings. The order is important!
         ConvertConfigs.convert();
         Preferences.init();
+        // broker should be loaded before module loading
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
         PluginUtils.loadPlugins(PARAMS);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
@@ -229,20 +250,34 @@ public final class Main {
     }
 
     public static void restartGUI(String projectDir) {
-        Log.log("===         Restart OmegaT           ===");
-        String javaBin = String.join(File.separator, System.getProperty("java.home"), "bin", "java");
-        // Build command: java -cp ... org.omegat.Main
+        // Check we have `java` command in java.home
+        Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
         List<String> command = new ArrayList<>();
-        command.add(javaBin);
-        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-        command.addAll(runtimeMxBean.getInputArguments()); // JVM args
-        command.add("-cp");
-        command.add(runtimeMxBean.getClassPath());
-        command.add(Main.class.getName());
-        command.addAll(CLIParameters.unparseArgs(PARAMS));
+        if (javaBin.toFile().exists()) {
+            // Build command: java -cp ... org.omegat.Main
+            command.add(javaBin.toString());
+            RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+            command.addAll(runtimeMxBean.getInputArguments()); // JVM args
+            command.add("-cp");
+            command.add(runtimeMxBean.getClassPath());
+            command.add(Main.class.getName());
+            command.addAll(CLIParameters.unparseArgs(PARAMS));
+        } else {
+            // assumes jpackage
+            javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
+            if (!javaBin.toFile().exists()) {
+                // abort restart
+                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                return;
+            }
+            command.add(javaBin.toString());
+            command.addAll(CLIParameters.unparseArgs(PARAMS));
+        }
         if (projectDir != null) {
             command.add(projectDir);
         }
+        // Now ready to restart.
+        Log.log("===         Restart OmegaT           ===");
         ProcessBuilder builder = new ProcessBuilder(command);
         try {
             builder.start();
@@ -271,7 +306,8 @@ public final class Main {
         System.out.println("Reading config from " + path);
         try (FileInputStream in = new FileInputStream(configFile)) {
             PropertyResourceBundle config = new PropertyResourceBundle(in);
-            // Put config properties into System properties and into OmegaT params.
+            // Put config properties into System properties and into OmegaT
+            // params.
             for (String key : config.keySet()) {
                 String value = config.getString(key);
                 System.setProperty(key, value);
@@ -299,18 +335,14 @@ public final class Main {
      * Execute standard GUI.
      */
     protected static int runGUI() {
-        ClassLoader cl = ClassLoader.getSystemClassLoader();
-        MainClassLoader mainClassLoader = (cl instanceof MainClassLoader) ? (MainClassLoader) cl : new MainClassLoader(cl);
-        PluginUtils.getThemePluginJars().forEach(mainClassLoader::add);
-        UIManager.put("ClassLoader", mainClassLoader);
+        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
         }
 
-        Log.log("Docking Framework version: " + DockingDesktop.getDockingFrameworkVersion());
-        Log.log("");
+        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
 
         // Set X11 application class name to make some desktop user interfaces
         // (like Gnome Shell) recognize OmegaT
@@ -328,7 +360,7 @@ public final class Main {
 
         System.setProperty("swing.aatext", "true");
         try {
-            Core.initializeGUI(mainClassLoader, PARAMS);
+            Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);
@@ -361,8 +393,7 @@ public final class Main {
      * Execute in console mode for translate.
      */
     protected static int runConsoleTranslate() throws Exception {
-        Log.log("Console translation mode");
-        Log.log("");
+        Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(PARAMS);
@@ -394,15 +425,14 @@ public final class Main {
     /**
      * Displays or writes project statistics.
      * <p>
-     *     takes two optional arguments
+     * takes two optional arguments
      * <code>[--output-file=(file path) [--stats-type=[XML|JSON|TEXT]]]</code>
-     * when omitted, display stats text(localized).
-     * When file I/O error occurred, especially when parent directory does not exist
-     * warns it and return 1.
+     * when omitted, display stats text(localized). When file I/O error
+     * occurred, especially when parent directory does not exist warns it and
+     * return 1.
      */
     private static int runConsoleStats() throws Exception {
-        Log.log("Console project stats mode");
-        Log.log("");
+        Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
 
         Core.initializeConsole(PARAMS);
 
@@ -417,36 +447,42 @@ public final class Main {
         }
 
         String outputFilename = PARAMS.get(CLIParameters.STATS_OUTPUT);
-        String statsMode;
+        StatOutputFormat statsMode;
         if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
-            statsMode = PARAMS.get(CLIParameters.STATS_MODE);
+            statsMode = StatOutputFormat.parse(PARAMS.get(CLIParameters.STATS_MODE));
         } else {
-            // when no stats type specified, try to detect from file extension, otherwise XML.
-            if (outputFilename.endsWith(".json") || outputFilename.endsWith(".JSON")) {
-                statsMode = "JSON";
-            } else if (outputFilename.endsWith(".xml") || outputFilename.endsWith(".XML")) {
-                statsMode = "XML";
-            } else if (outputFilename.endsWith(".txt") || outputFilename.endsWith(".TXT")) {
-                statsMode = "TXT";
+            // when no stats type specified, try to detect from file extension,
+            // otherwise XML.
+            if (outputFilename.toLowerCase().endsWith(StatOutputFormat.JSON.getFileExtension())) {
+                statsMode = StatOutputFormat.JSON;
+            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.XML.getFileExtension())) {
+                statsMode = StatOutputFormat.XML;
+            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.TEXT.getFileExtension())) {
+                statsMode = StatOutputFormat.TEXT;
             } else {
-                statsMode = "XML";
+                statsMode = StatOutputFormat.XML;
             }
         }
         try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)),
-                        CREATE, TRUNCATE_EXISTING, WRITE),
+                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), CREATE,
+                        TRUNCATE_EXISTING, WRITE),
                 StandardCharsets.UTF_8)) {
-            if ("TXT".equalsIgnoreCase(statsMode) || "text".equalsIgnoreCase(statsMode)) {
+            switch (statsMode) {
+            case TEXT:
                 writer.write(projectStats.getTextData());
-            } else if ("JSON".equalsIgnoreCase(statsMode)) {
+                break;
+            case JSON:
                 writer.write(projectStats.getJsonData());
-            } else if ("XML".equalsIgnoreCase(statsMode)){
+                break;
+            case XML:
                 writer.write(projectStats.getXmlData());
-            } else {
-                Log.log("Specified UNKNOWN file type for statistics. aborted.");
+                break;
+            default:
+                Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
+                break;
             }
         } catch (NoSuchFileException nsfe) {
-            Log.log("Got directory/file open error. Does specified directory exist?");
+            Log.logErrorRB("CONSOLE_STATS_FILE_OPEN_ERROR");
             return 1;
         } finally {
             p.closeProject();
@@ -487,7 +523,7 @@ public final class Main {
             }
             break;
         default:
-            //do not validate tags = default
+            // do not validate tags = default
         }
     }
 
@@ -495,8 +531,7 @@ public final class Main {
      * Execute in console mode for translate.
      */
     protected static int runCreatePseudoTranslateTMX() throws Exception {
-        Log.log("Console pseudo-translate mode");
-        Log.log("");
+        Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(PARAMS);
@@ -525,16 +560,19 @@ public final class Main {
         }
 
         // Write OmegaT-project-compatible TMX:
-        try (TMXWriter2 wr = new TMXWriter2(new File(fname), config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), false, false)) {
+        try (TMXWriter2 wr = new TMXWriter2(new File(fname), config.getSourceLanguage(),
+                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), false, false)) {
             for (SourceTextEntry ste : entries) {
                 switch (pseudoTranslateType) {
-                    case EQUAL:
-                        wr.writeEntry(ste.getSrcText(), ste.getSrcText(), null, null, 0, null, 0, null);
-                        break;
-                    case EMPTY:
-                        wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
-                        break;
+                case EQUAL:
+                    wr.writeEntry(ste.getSrcText(), ste.getSrcText(), null, null, 0, null, 0, null);
+                    break;
+                case EMPTY:
+                    wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
+                    break;
+                default:
+                    // should not come here
+                    throw new IllegalArgumentException();
                 }
             }
         } catch (IOException e) {
@@ -548,8 +586,7 @@ public final class Main {
     }
 
     public static int runConsoleAlign() throws Exception {
-        Log.log("Console alignment mode");
-        Log.log("");
+        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
 
         if (projectLocation == null) {
             System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
@@ -573,8 +610,8 @@ public final class Main {
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
         boolean alt = !config.isSupportDefaultTranslations();
-        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(), config.getTargetLanguage(),
-                config.isSentenceSegmentingEnabled(), alt, alt)) {
+        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
+                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
             wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(dir))), alt);
         }
         p.closeProject();
@@ -620,14 +657,14 @@ public final class Main {
     }
 
     /**
-     * Execute script as PROJECT_CHANGE events. We can't use the regular project
-     * listener because the SwingUtilities.invokeLater method used in CoreEvents
-     * doesn't stop the project processing in console mode.
+     * Execute a script as PROJECT_CHANGE events. We can't use the regular
+     * project listener because the SwingUtilities.invokeLater method used in
+     * CoreEvents doesn't stop the project processing in console mode.
      */
     private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
         if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
-            File script = new File(PARAMS.get("script").toString());
-            Log.log(OStrings.getString("CONSOLE_EXECUTE_SCRIPT", script, eventType));
+            File script = new File(PARAMS.get("script"));
+            Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
             if (script.isFile()) {
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("eventType", eventType);
@@ -644,7 +681,7 @@ public final class Main {
                     Log.log(ex);
                 }
             } else {
-                Log.log(OStrings.getString("SCW_SCRIPT_LOAD_ERROR", "the script is not a file"));
+                Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
             }
         }
     }

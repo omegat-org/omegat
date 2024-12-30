@@ -36,10 +36,11 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 
 import org.apache.commons.io.FilenameUtils;
+
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.HttpConnectionUtils;
 
 /**
  * Dictionary manager. Spell checking dictionaries' utility functions.
@@ -48,7 +49,6 @@ import org.omegat.util.HttpConnectionUtils;
  * @author Didier Briel
  */
 public class DictionaryManager {
-
 
     /** the directory string */
     private final File dir;
@@ -75,7 +75,7 @@ public class DictionaryManager {
      * returns a list of full names of dictionaries from a dictionary code list
      */
     public List<String> getDictionaryNameList(List<String> aList) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         for (String dic : aList) {
             String[] parts = dic.split("_");
@@ -103,6 +103,17 @@ public class DictionaryManager {
      */
     public List<String> getLocalDictionaryCodeList() {
         List<String> result = new ArrayList<>();
+        for (SpellingDictionaryEntry entry : getLocalDictionaryEntries()) {
+            result.add(entry.languageCode);
+        }
+        return result;
+    }
+
+    /**
+     * returns a list of available dictionaries.
+     */
+    public List<SpellingDictionaryEntry> getLocalDictionaryEntries() {
+        List<SpellingDictionaryEntry> result = new ArrayList<>();
 
         // get all affix files
         String[] affixFiles = dir.list((d, name) -> name.endsWith(OConsts.SC_AFFIX_EXTENSION));
@@ -134,9 +145,25 @@ public class DictionaryManager {
                 }
 
                 if (match) {
-                    result.add(affixName);
+                    result.add(new SpellingDictionaryEntry(affixName, SpellCheckDictionaryType.HUNSPELL,
+                                    true));
                 }
             }
+        }
+
+        String[] morfologikFiles = dir.list((d, name) -> name.endsWith(OConsts.SC_MORFOLOGIK_EXTENSION));
+        if (morfologikFiles != null) {
+            for (String morfologikFile : morfologikFiles) {
+                String baseName = FilenameUtils.getBaseName(morfologikFile);
+                result.add(new SpellingDictionaryEntry(baseName, SpellCheckDictionaryType.MORFOLOGIK, true));
+            }
+        }
+
+        for (String language: SpellCheckerManager.getHunspellDictionaryLanguages()) {
+            result.add(new SpellingDictionaryEntry(language, SpellCheckDictionaryType.HUNSPELL, false));
+        }
+        for (String language: SpellCheckerManager.getMorfologikDictionaryLanguages()) {
+            result.add(new SpellingDictionaryEntry(language, SpellCheckDictionaryType.MORFOLOGIK, false));
         }
 
         return result;
@@ -147,24 +174,29 @@ public class DictionaryManager {
      *
      * @param lang
      *            : the language code (xx_YY) of the dictionary to be deleted
-     * @returns true upon success, otherwise false
+     * @return true upon success, otherwise false
      */
+    @Deprecated
     public boolean uninstallDictionary(String lang) {
         if (lang == null || lang.isEmpty()) {
             return false;
         }
-
-        String base = getDirectory() + File.separator + lang;
-
-        File affFile = new File(base + OConsts.SC_AFFIX_EXTENSION);
-
-        if (!affFile.delete()) {
-            return false;
+        var target = getLocalDictionaryEntries().stream().filter(it -> it.languageCode.equals(lang)).findFirst();
+        if (target.isPresent()) {
+            String base = getDirectory() + File.separator + lang;
+            if (target.get().type.equals(SpellCheckDictionaryType.HUNSPELL)) {
+                File affFile = new File(base + OConsts.SC_AFFIX_EXTENSION);
+                if (!affFile.delete()) {
+                    return false;
+                }
+                File dicFile = new File(base + OConsts.SC_DICTIONARY_EXTENSION);
+                return dicFile.delete();
+            } else {
+                File dictFile = new File(base + OConsts.SC_MORFOLOGIK_EXTENSION);
+                return dictFile.delete();
+            }
         }
-
-        File dicFile = new File(base + OConsts.SC_DICTIONARY_EXTENSION);
-
-        return dicFile.delete();
+        return false;
     }
 
     /**
@@ -183,7 +215,7 @@ public class DictionaryManager {
 
         List<String> remoteDicList = getRemoteDictionaryCodeList();
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         // compare the two lists
         for (String dicCode : remoteDicList) {
@@ -199,7 +231,7 @@ public class DictionaryManager {
      * downloads the list of available dictionaries from the net
      */
     private List<String> getRemoteDictionaryCodeList() throws IOException {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         // download the file
         URL url = new URL(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
@@ -227,6 +259,7 @@ public class DictionaryManager {
      * @param langCode
      *            : the language code (xx_YY)
      */
+    @Deprecated
     public void installRemoteDictionary(String langCode) throws IOException {
         String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode + ".zip";
 
@@ -240,6 +273,18 @@ public class DictionaryManager {
         List<String> expectedFiles = Arrays.asList(langCode + OConsts.SC_AFFIX_EXTENSION,
                 langCode + OConsts.SC_DICTIONARY_EXTENSION);
         HttpConnectionUtils.downloadZipFileAndExtract(new URL(from), dir, expectedFiles);
+    }
+
+    public static class SpellingDictionaryEntry {
+        public String languageCode;
+        public SpellCheckDictionaryType type;
+        public boolean custom;
+
+        public SpellingDictionaryEntry(String languageCode, SpellCheckDictionaryType type, boolean custom) {
+            this.languageCode = languageCode;
+            this.type = type;
+            this.custom = custom;
+        }
     }
 
 }

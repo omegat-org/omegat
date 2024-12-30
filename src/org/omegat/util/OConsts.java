@@ -64,7 +64,9 @@ public final class OConsts {
     public static final String HELP_HOME = "index.html";
     public static final String HELP_FIRST_STEPS = "first_steps.html";
     public static final String HELP_DIR = "docs";
-    public static final String HELP_LANG_INDEX = "languageIndex.html";
+    public static final String HELP_FIRST_STEPS_PREFIX = "greetings";
+    public static final String HELP_MANUALS = "manuals";
+    public static final String BUILD_DIR = "build"; // for development
 
     // licenses
     public static final String LICENSE_FILE = "OmegaT-license.txt";
@@ -132,9 +134,10 @@ public final class OConsts {
     public static final String EXT_TBX = ".tbx";
 
     /**
-     * The name of the file with project statistics: segments, words, chars count.
+     * The name of the file with project statistics: segments, words, chars count. The extension
+     * is added with the appropriate output format.
      */
-    public static final String STATS_FILENAME = "project_stats.txt";
+    public static final String STATS_FILENAME = "project_stats";
 
     /** The name of the file with project match statistics. */
     public static final String STATS_MATCH_FILENAME = "project_stats_match.txt";
@@ -156,6 +159,11 @@ public final class OConsts {
 
     /** dictionary file extension */
     public static final String SC_DICTIONARY_EXTENSION = ".dic";
+
+    /**
+     * morfologik dictionary file extension
+     */
+    public static final String SC_MORFOLOGIK_EXTENSION = ".dict";
 
     /** jar file extension */
     public static final String JAR_EXTENSION = ".jar";

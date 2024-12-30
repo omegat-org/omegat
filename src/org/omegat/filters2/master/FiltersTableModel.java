@@ -151,7 +151,7 @@ public class FiltersTableModel extends AbstractTableModel {
         public String filterName;
         public Filter filter;
 
-        public FilterData(final String className, final String filterName, final Filter filter) {
+        FilterData(final String className, final String filterName, final Filter filter) {
             this.className = className;
             this.filterName = filterName;
             this.filter = filter;

@@ -33,6 +33,7 @@ import javax.swing.JTextPane;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.gui.FontFallbackListener;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
@@ -91,6 +92,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
         UIThreadsUtil.mustBeSwingThread();
         setText(null);
         scrollRectToVisible(new Rectangle());
+        setComponentOrientation(BiDiUtils.getInitialOrientation());
     }
 
     protected void onProjectOpen() {

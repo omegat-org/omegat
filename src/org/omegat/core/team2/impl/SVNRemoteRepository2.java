@@ -31,7 +31,6 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
 
@@ -54,9 +53,12 @@ import org.tmatesoft.svn.core.wc.SVNInfo;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 import org.tmatesoft.svn.core.wc2.SvnOperationFactory;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
+import org.omegat.core.team2.RemoteRepositoryFactory;
 import org.omegat.util.Log;
 
 import gen.core.project.RepositoryDefinition;
@@ -69,10 +71,13 @@ import gen.core.project.RepositoryDefinition;
  * @author Martin Fleurke
  */
 public class SVNRemoteRepository2 implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository2.class.getName());
+    private static final ILogger LOGGER = LoggerFactory.getLogger(SVNRemoteRepository2.class);
+    private static final String SVN_START_MSG = "SVN '{}' execution start";
+    private static final String SVN_FINISH_MSG = "SVN '{}' execution finished successfully";
 
     // System property to indicate backend.
-    // {@see https://support.tmatesoft.com/t/replacing-trilead-ssh2-with-apache-sshd/2778/3}
+    // {@see
+    // https://support.tmatesoft.com/t/replacing-trilead-ssh2-with-apache-sshd/2778/3}
     private static final String SVNKIT_SSH_CLIENT = "svnkit.ssh.client";
     private static final String APACHE = "apache";
 
@@ -87,6 +92,19 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
     public SVNRemoteRepository2() {
         // Specify MINA-SSHD for transport.
         System.setProperty(SVNKIT_SSH_CLIENT, APACHE);
+    }
+
+    /*
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        RemoteRepositoryFactory.addRepositoryConnector("svn", SVNRemoteRepository2.class);
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
     }
 
     @Override
@@ -122,16 +140,17 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         if (!f.exists()) {
             return null;
         }
-        SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
-        Log.logDebug(LOGGER, "SVN committed revision for file {0} is {1}", file,
-                info.getCommittedRevision().getNumber());
+        final SVNInfo info = ourClientManager.getWCClient().doInfo(f, SVNRevision.BASE);
+        LOGGER.atTrace().setMessage("SVN committed revision for file {} is {}").addArgument(file)
+                .addArgument(() -> info.getCommittedRevision().getNumber()).log();
 
         return Long.toString(info.getCommittedRevision().getNumber());
     }
 
     @Override
     public void switchToVersion(String version) throws Exception {
-        Log.logInfoRB("SVN_START", "checkout to " + version);
+        LOGGER.atDebug().log(SVN_START_MSG, "switchToVersion");
+        LOGGER.atTrace().log("checkout {}", version);
 
         SVNURL url = SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(config.getUrl()));
         SVNRevision toRev;
@@ -144,7 +163,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         try {
             ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD, toRev,
                     SVNDepth.INFINITY, false);
-            Log.logInfoRB("SVN_FINISH", "checkout");
+            LOGGER.atDebug().log(SVN_FINISH_MSG, "checkout");
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "checkout", ex.getMessage());
             checkNetworkException(ex);
@@ -187,28 +206,45 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
         final String repoPath = info.getPath();
         try {
+            // When user specified a URL such as
+            // `https://server/user/repo/trunk/_i18n/en/`
+            // then repoPath is `trunk/_i18n/en/`.
+            // `changedPath` contains a `filePath` that is
+            // out of a `repoPath`, eg. `trunk/_i18n/ca`
+            // see https://sourceforge.net/p/omegat/bugs/1232/
+
             ourClientManager.getLogClient().doLog(new File[] { baseDirectory }, sinceRevision,
                     currentRevision, false, true,
                     // to get the list of files changed/deleted
                     1000000, new ISVNLogEntryHandler() {
-                        public void handleLogEntry(SVNLogEntry en) throws SVNException {
+                        @Override
+                        public void handleLogEntry(final SVNLogEntry en) throws SVNException {
                             if (en.getRevision() == sinceRevision.getNumber()) {
                                 return;
                             }
                             Map<String, SVNLogEntryPath> changedPaths = en.getChangedPaths();
+
+                            // eg /remotedir/my/file;
+                            // repoPath = remotedir. To strip /remotedir/,
+                            // add 2 for the slashes.
+                            // But if remoteDir is empty, then only
+                            // 1 slash to be removed.
+                            //
+                            // eg /rmeotedir/other/file;
+                            // and repoPath = remotedir/my/
+                            // then skip
+                            String prefix = '/' + repoPath + '/';
+                            int prefixSize = prefix.length();
                             for (Map.Entry<String, SVNLogEntryPath> entry : changedPaths.entrySet()) {
                                 SVNLogEntryPath path = entry.getValue();
-
                                 String filePath = path.getPath();
-                                // eg /remotedir/my/file;
-                                // repoPath = remotedir. To strip /remotedir/,
-                                // add 2 for the slashes.
-                                // But if remoteDir is empty, then only
-                                // 1 slash to be removed.
+
                                 if ("".equals(repoPath)) {
                                     filePath = filePath.substring(1);
+                                } else if (!filePath.startsWith(prefix)) {
+                                    continue;
                                 } else {
-                                    filePath = filePath.substring(repoPath.length() + 2);
+                                    filePath = filePath.substring(prefixSize);
                                 }
                                 filePath = filePath.replace('/', File.separatorChar);
                                 // filepath is always using '/', but on windows
@@ -236,35 +272,35 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
 
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
-        Log.logInfoRB("SVN_START", "commit");
+        LOGGER.atDebug().log(SVN_START_MSG, "commit");
         File[] forCommit = new File[] { baseDirectory };
 
         try {
             SVNCommitInfo info = ourClientManager.getCommitClient().doCommit(forCommit, false, comment, null,
                     null, false, false, SVNDepth.INFINITY);
-            Log.logDebug(LOGGER, "SVN committed into new revision {0}", info.getNewRevision());
+            LOGGER.atTrace().log("SVN committed into new revision {}", info.getNewRevision());
             if (info.getNewRevision() < 0) {
                 // empty commit - file was not changed
                 info = new SVNCommitInfo(Long.parseLong(getFileVersion("")), null, null, null);
             }
-            Log.logInfoRB("SVN_FINISH", "commit");
+            LOGGER.atDebug().log(SVN_FINISH_MSG, "commit");
             return Long.toString(info.getNewRevision());
         } catch (SVNException ex) {
             if (Arrays.asList(SVNErrorCode.FS_TXN_OUT_OF_DATE, SVNErrorCode.WC_NOT_UP_TO_DATE,
                     SVNErrorCode.FS_CONFLICT).contains(ex.getErrorMessage().getErrorCode())) {
                 // Somebody else committed changes - it's normal. Will upload on
                 // next save.
-                Log.logWarningRB("SVN_CONFLICT");
+                LOGGER.atWarn().setMessageRB("SVN_CONFLICT").log();
                 ourClientManager.getWCClient().doRevert(new File[] { baseDirectory },
                         SVNDepth.fromRecurse(true), null);
                 return null;
             } else {
-                Log.logErrorRB("SVN_ERROR", "commit", ex.getMessage());
+                LOGGER.atError().logRB("SVN_ERROR", "commit", ex.getMessage());
                 checkNetworkException(ex);
             }
             throw ex;
         } catch (Exception ex) {
-            Log.logErrorRB("SVN_ERROR", "commit", ex.getMessage());
+            LOGGER.atError().logRB("SVN_ERROR", "commit", ex.getMessage());
             throw ex;
         }
     }

@@ -68,7 +68,7 @@ public class StaticUtilsTest {
 
         assertTrue(installDir.isDirectory());
 
-        for (String dir : new String[] { "src", "docs", "lib" }) {
+        for (String dir : new String[] { "src", "lib", "test", "release" }) {
             assertTrue(new File(installDir, dir).isDirectory());
         }
     }

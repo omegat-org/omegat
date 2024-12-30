@@ -68,7 +68,7 @@
     <varlistentry id="menus.project.save">
       <term id="menus.project.save.title"><guimenuitem>Desa</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap></keycombo></term>
       <listitem>
-        <para>Desa la memòria de traducció del projecte (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>).</para>
+        <para>Desa la memòria de traducció del projecte (<link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>) i sincronitza els projectes en equip.</para>
 		<para>L'OmegaT desa automàticament les traduccions cada tres minuts i quan tanqueu el projecte o sortiu del programa. Consulteu les preferències de <link linkend="dialog.preferences.saving.and.output.interval" endterm="dialog.preferences.saving.and.output.interval.title"/> per a conèixer més detalls.</para>
       </listitem>
     </varlistentry>
@@ -81,7 +81,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.download.mediawiki.page">
-      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Afegeix una pàgina del MediaWiki en línia...</guimenuitem></term>
+      <term id="menus.project.download.mediawiki.page.title"><guimenuitem>Baixa una pàgina del MediaWiki...</guimenuitem></term>
       <listitem>
 		<para>Obre un quadre de diàleg on podeu enganxar l'URL de la pàgina del MediaWiki que voleu traduir. Les dades originals de la pàgina es copiaran a la carpeta <link linkend="project.folder.source" endterm="project.folder.source.title"/>, com a fitxer de text amb l'extensió <filename>.utf8</filename>.</para>
       </listitem>
@@ -108,6 +108,7 @@
       <listitem>
         <para>Crea els fitxers de destinació a partir de la traducció. Els fitxers de destinació es creen en la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
 		<note><para>Podeu impedir la creació dels fitxers de destinació si hi ha errors d'etiquetes. Consulteu les preferències de <link linkend="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues" endterm="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"/> per a conèixer més detalls.</para></note>
+		<para>Cada vegada que creeu els fitxers traduïts, l'OmegaT desa el projecte (consulteu l'element del menú <link linkend="menus.project.save" endterm="menus.project.save.title"/> anterior) i crea memòries de traducció de referència, que inclouen els segments traduïts del conjunt de fitxers d'origen actual.</para>
       </listitem>
     </varlistentry>
 
@@ -115,8 +116,7 @@
       <term id="menus.project.create.current.translated.document.title"><guimenuitem>Crea el fitxer traduït actual</guimenuitem> <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>D</keycap></keycombo></term>
       <listitem>
         <para>Crea el fitxer de destinació corresponent al fitxer d'origen que s'està traduint. El fitxer resultant es crea en la carpeta <link linkend="project.folder.target" endterm="project.folder.target.title"/>.</para>
-		<para>
-		</para>				
+		<para>Cada vegada que creeu el fitxer traduït actual, l'OmegaT desa el projecte (consulteu l'element del menú <link linkend="menus.project.save" endterm="menus.project.save.title"/> anterior) i crea memòries de traducció de referència, que inclouen els segments traduïts del conjunt de fitxers d'origen actual.</para>
       </listitem>
     </varlistentry>
 

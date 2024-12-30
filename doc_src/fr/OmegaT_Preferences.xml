@@ -7,14 +7,14 @@
 <chapter id="chapter.dialogs.preferences">
   <title id="chapter.dialogs.preferences.title"><guilabel>Préférences</guilabel></title>
 
-  <para>Utilisez <link endterm="menus.options.title" linkend="menus.options"/><link endterm="menus.options.preferences.title" linkend="menus.options.preferences"/> pour accéder à cette boîte de dialogue (le menu <literal>OmegaT</literal> sur macOS).</para>
+  <para>Utilisez <link endterm="menus.options.title" linkend="menus.options"/><link endterm="menus.options.preferences.title" linkend="menus.options.preferences"/> pour accéder à cette boite de dialogue (le menu <literal>OmegaT</literal> sur macOS).</para>
 
   <para>Utilisez le champ de recherche en haut de la liste des préférences pour rechercher des éléments spécifiques.</para>
   
-  <para>Les préférences définies dans cette boîte de dialogue sont enregistrées dans le <link linkend="configuration.folder">dossier de configuration</link> par défaut et s’appliquent à tous les projets de traduction, sauf si vous avez spécifié un dossier de configuration différent.</para>
+  <para>Les préférences définies dans cette boite de dialogue sont enregistrées dans le <link linkend="configuration.folder">dossier de configuration</link> par défaut et s’appliquent à tous les projets de traduction, sauf si vous avez spécifié un dossier de configuration différent.</para>
 
   <note>
-    <para>Il est possible de demander à OmegaT d’utiliser un dossier de configuration différent pour définir des configurations spécifiques à un projet. Voir la section <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> pour en savoir plus. Si vous sélectionnez un tel dossier de configuration, toutes les modifications effectuées dans cette boîte de dialogue y seront stockées.</para>
+    <para>Il est possible de demander à OmegaT d’utiliser un dossier de configuration différent pour définir des configurations spécifiques à un projet. Voir la section <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> pour en savoir plus. Si vous sélectionnez un tel dossier de configuration, toutes les modifications effectuées dans cette boite de dialogue y seront stockées.</para>
   </note>
 
   <section id="dialogs.preferences.general">
@@ -69,7 +69,7 @@
         <term id="dialogs.preferences.mt.untranslated.segments.only.title"><option>Uniquement les segments non traduits</option></term>
 
         <listitem>
-          <para>Cochez cette case pour envoyer seulement des segments non-traduits aux services de traduction automatique.</para>
+          <para>Cochez cette case pour envoyer seulement des segments non traduits aux services de traduction automatique.</para>
         </listitem>
       </varlistentry>
 
@@ -147,7 +147,7 @@
         <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>Afficher la description du contexte des glossaires TBX (TBX 2)</option></term>
 
         <listitem>
-          <para>Décochez cette option si le la description du contexte donné pour chaque entrée de glossaire est non-nécessaire ou trop longue.</para>
+          <para>Décochez cette option si la description du contexte donné pour chaque entrée de glossaire est inutile ou trop longue.</para>
         </listitem>
       </varlistentry>
 
@@ -320,9 +320,9 @@
   <section id="dialogs.preferences.file.filters">
 	<title id="dialogs.preferences.file.filters.title"><guilabel>Filtres de fichiers généraux</guilabel></title>
 
-	<para>Cette boîte de dialogue répertorie les filtres de fichiers disponibles pour les projets qui n’utilisent pas de filtres de fichiers locaux.</para>
+	<para>Cette boite de dialogue répertorie les filtres de fichiers disponibles pour les projets qui n’utilisent pas de filtres de fichiers locaux.</para>
 
-	<para>Le contenu de cette préférence est identique au contenu de la boîte de dialogue <link linkend="dialogs.project.properties.filters">filtres de fichiers locaux</link>. Voir l’annexe <link linkend="file.filters" endterm="file.filters.title"/> pour en savoir plus.</para>
+	<para>Le contenu de cette préférence est identique au contenu de la boite de dialogue <link linkend="dialogs.project.properties.filters">filtres de fichiers locaux</link>. Voir l’annexe <link linkend="file.filters" endterm="file.filters.title"/> pour en savoir plus.</para>
 
 	<note>
 	  <para>Si des filtres de fichiers locaux sont utilisés, la modification des filtres de fichiers généraux n’aura aucun effet sur le projet.</para>
@@ -336,7 +336,7 @@
 	<para>Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour une explication générale de la segmentation (globale ou locale, paragraphe ou phrase, etc.)</para>
 
 	<warning>
-	  <para>Cette boîte de dialogue ne permet d’accéder qu’aux règles de segmentation globales. Si vous avez défini des règles locales dans la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, les modifications apportées ici ne seront pas prises en compte.</para>
+	  <para>Cette boite de dialogue ne permet d’accéder qu’aux règles de segmentation globales. Si vous avez défini des règles locales dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, les modifications apportées ici ne seront pas prises en compte.</para>
 	</warning>
 	
 	<section id="dialogs.preferences.segmentation.setup.scope">
@@ -349,7 +349,7 @@
 		<para>Dans le cas d’une traduction à partir du japonais, <emphasis>seuls</emphasis> l’ensemble de règles associé au masque <code>JA.*</code> et les ensembles de règles génériques associés au motif <code>.*</code> seront pris en compte.</para>
 	  </example>
 
-	  <para>Lorsque vous cliquez sur un masque de langue dans la partie supérieure de la boîte de dialogue, une liste de règles associées s’affiche dans la partie inférieure de la boîte de dialogue. </para>
+	  <para>Lorsque vous cliquez sur un masque de langue dans la partie supérieure de la boite de dialogue, une liste de règles associées s’affiche dans la partie inférieure de la boite de dialogue. </para>
 
 	  <para>Tous les ensembles de règles de segmentation pour un modèle de langue correspondant sont actifs et sont appliqués dans l’ordre. Les règles pour des langues spécifiques doivent être plus élevées que les règles par défaut.</para>
 
@@ -363,7 +363,7 @@
 	  <para>Pour créer un nouvel ensemble de règles :</para>
 	  <orderedlist>
 		<listitem>
-		  <para>Cliquez sur <guibutton>ajouter</guibutton>. Une ligne vide apparaît en bas du tableau.</para>
+		  <para>Cliquez sur <guibutton>ajouter</guibutton>. Une ligne vide apparait en bas du tableau.</para>
 		</listitem>
 		
 		<listitem>
@@ -433,7 +433,7 @@
 
 	<para>Cliquez sur <guilabel>Table de caractères</guilabel> pour définir les options de la table de caractères de la saisie automatique.</para>
 
-	<para>Cliquez sur <guilabel>Activer la saisie historique</guilabel> ou <guilabel>Activer la prédiction de l’historique</guilabel> pour définir des saisies basés sur l’historique.</para>
+	<para>Cliquez sur <guilabel>Activer la saisie historique</guilabel> ou <guilabel>Activer la prédiction de l’historique</guilabel> pour définir des saisies basées sur l’historique.</para>
 
 	<note>
 	  <para>Aucune de vos données (historique, etc.) n’est <emphasis>jamais</emphasis> envoyée par OmegaT à un serveur externe pour y être traitée. Tous les résultats de prédiction/saisie sont traités localement.</para>
@@ -445,7 +445,7 @@
   <section id="dialog.preferences.spellchecker">
 	<title id="dialog.preferences.spellchecker.title"><guilabel>Vérificateur orthographique</guilabel></title>
 
-	<para>OmegaT dispose d’un vérificateur d’orthographe intégré mais nécessite l’installation de dictionnaires de vérification orthographique basés sur les langues cibles.</para>
+	<para>OmegaT dispose d’un vérificateur d’orthographe intégré, mais nécessite l’installation de dictionnaires de vérification orthographique basés sur les langues cibles.</para>
 
 	<warning>
 	  <para>OmegaT utilisera le dictionnaire de langue qui porte le même nom que le code de la langue cible défini dans la propriété de projet <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>. Un dictionnaire <emphasis>FR-FR</emphasis> ne vérifiera pas l’orthographe des segments cibles <emphasis>FR</emphasis>. Si nécessaire, modifiez le nom du dictionnaire ou changez les paramètres linguistiques de votre projet.</para>
@@ -485,7 +485,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialog.preferences.spellchecker.install.new">
-		<term id="dialog.preferences.spellchecker.install.new.title"><guibutton>Installer un nouveau dictionnaire...</guibutton></term>
+		<term id="dialog.preferences.spellchecker.install.new.title"><guibutton>Installer un nouveau dictionnaire…</guibutton></term>
 		<listitem>
 		  <para>Affiche la liste des dictionnaires disponibles à partir de l’URL ci-dessus.</para>
 
@@ -525,7 +525,7 @@
 
   <section id="dialogs.preferences.external.searches">
 	<title id="dialogs.preferences.external.searches.title"><guilabel>Recherches externes globales</guilabel></title>
-	<para>Les recherches externes sont des recherches sur le web ou des commandes locales qui prennent comme paramètre la chaîne de caractères sélectionnée dans l’Éditeur. Les recherches sur le web sont ouvertes dans le navigateur par défaut et les commandes sont équivalentes aux éléments lancés sur la ligne de commande.</para>
+	<para>Les recherches externes sont des recherches sur le web ou des commandes locales qui prennent comme paramètre la chaine de caractères sélectionnée dans l’Éditeur. Les recherches sur le web sont ouvertes dans le navigateur par défaut et les commandes sont équivalentes aux éléments lancés sur la ligne de commande.</para>
 
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
@@ -557,11 +557,11 @@
 		<listitem>
 		  <para>Chaque configuration représente un groupe de recherches sur le web ou de commandes locales lancées simultanément.</para>
 
-		  <para>Chaque configuration doit être nommée. Le nom apparaîtra à la fin du menu <link linkend="menus.tools" endterm="menus.tools.title"/>.</para>
+		  <para>Chaque configuration doit être nommée. Le nom apparaitra à la fin du menu <link linkend="menus.tools" endterm="menus.tools.title"/>.</para>
 
-		  <para>Si vous cochez la case <guilabel>Afficher dans le menu contextuel de l’Éditeur</guilabel>, le nom de la configuration sera également affiché dans le <link linkend="panes.editor.context.menu">menu contextuel</link> si une chaîne de caractères est sélectionnée.</para>
+		  <para>Si vous cochez la case <guilabel>Afficher dans le menu contextuel de l’Éditeur</guilabel>, le nom de la configuration sera également affiché dans le <link linkend="panes.editor.context.menu">menu contextuel</link> si une chaine de caractères est sélectionnée.</para>
 
-		  <para>Les recherches par URL ainsi que les commandes doivent contenir la chaîne <literal>{target}</literal> pour être acceptées. Le caractère générique <literal>{target}</literal> sera remplacé par la chaîne sélectionnée dans l’Éditeur.</para>
+		  <para>Les recherches par URL ainsi que les commandes doivent contenir la chaine <literal>{target}</literal> pour être acceptées. Le caractère générique <literal>{target}</literal> sera remplacé par la chaine sélectionnée dans l’Éditeur.</para>
 
 		  <para>Les URL sont ouvertes avec le navigateur web par défaut, un par onglet.</para>
 
@@ -608,7 +608,7 @@
 		<term id="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"><option>Insérer la meilleure correspondance partielle</option></term>
 
 		<listitem>
-		  <para>OmegaT insère la traduction dont le pourcentage de correspondance est le plus élevé par rapport à la valeur définie dans cette boîte de dialogue.</para>
+		  <para>OmegaT insère la traduction dont le pourcentage de correspondance est le plus élevé par rapport à la valeur définie dans cette boite de dialogue.</para>
 
 		  <para>Le préfixe identifie les traductions insérées en tant que correspondances partielles. Vous pouvez également enregistrer le préfixe dans la préférence <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> pour l’inclure dans le processus de vérification des balises et vous assurer de ne pas l’oublier dans votre traduction.</para>
 		</listitem>
@@ -711,7 +711,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.save.auto-populated.status">
-		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>Enregistrer l’état auto-traduit</option></term>
+		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>Enregistrer l’état autotraduit</option></term>
 
 		<listitem>
 		  <para>Les mémoires de traduction situées dans <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> et <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> peuvent alimenter automatiquement la mémoire du projet.
@@ -781,7 +781,7 @@
 			<varlistentry>
 			  <term><option>Toutes les variables (par exemple, %s, %-s)</option></term>
 			  <listitem>
-				<para>Cela peut entraîner des faux positifs dans certains fichiers.</para>
+				<para>Cela peut entrainer des faux positifs dans certains fichiers.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>
@@ -799,14 +799,14 @@
 	  <varlistentry id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order">
 		<term id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title"><option>Autoriser un ordre différent pour les balises traduites</option></term>
 		<listitem>
-		  <para>Les balises dont l’ordre est différent de celui de la source n’apparaîtront pas dans la liste des questions relatives aux balises. Voir le menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour plus de détails.</para>
+		  <para>Les balises dont l’ordre est différent de celui de la source n’apparaitront pas dans la liste des questions relatives aux balises. Voir le menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour plus de détails.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
 		<term id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"><option>Bloquer la création de fichiers traduits avec des problèmes de balises</option></term>
 		<listitem>
-		  <para>Si vous essayez de créer les fichiers traduits, OmegaT affichera la boîte de dialogue des problèmes jusqu’à ce qu’aucun problème ne soit trouvé. Voir le menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour plus de détails.</para>
+		  <para>Si vous essayez de créer les fichiers traduits, OmegaT affichera la boite de dialogue des problèmes jusqu’à ce qu’aucun problème ne soit trouvé. Voir le menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> pour plus de détails.</para>
 		</listitem>
 	  </varlistentry>
 
@@ -948,7 +948,7 @@ ${filePath}&gt;</programlisting></para>
 				  <entry>
 					<literal>${diff}</literal>
 				  </entry>
-				  <entry>Chaîne de caractères indiquant les différences entre la source et la correspondance.</entry>
+				  <entry>chaine de caractères indiquant les différences entre la source et la correspondance.</entry>
 				</row>
 
 				<row>
@@ -1004,7 +1004,7 @@ ${filePath}&gt;</programlisting></para>
 				  <entry>
 					<literal>${fileShortPath}</literal>
 				  </entry>
-				  <entry>Le chemin d’accès relatif au fichier de mémoire de tarduction.</entry>
+				  <entry>Le chemin d’accès relatif au fichier de mémoire de traduction.</entry>
 				</row>
 
 				<row>
@@ -1206,9 +1206,9 @@ ${filePath}&gt;</programlisting></para>
   <section id="dialogs.preferences.plugins">
 	<title id="dialogs.preferences.plugins.title"><guilabel>Modules d’extension</guilabel></title>
 
-	<para>Affiche la liste de tous les plugins installés.</para>
+	<para>Affiche la liste de tous les plug-ins installés.</para>
 
-	<para>Les plugins sont installés par défaut dans le dossier <link linkend="configuration.folder">configuration</link>, mais peuvent également être installés dans le dossier <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> sous le dossier <link linkend="application.folder">application</link>.</para>
+	<para>Les plug-ins sont installés par défaut dans le dossier <link linkend="configuration.folder">configuration</link>, mais peuvent également être installés dans le dossier <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> sous le dossier <link linkend="application.folder">application</link>.</para>
 
 	<para>Des modules d’extension supplémentaires sont disponibles sur le <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">site de développement d’OmegaT</ulink>.</para>
   </section>

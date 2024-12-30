@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="how.to.installing.omegat">
+  <title id="how.to.installing.omegat.title">Installeren van OmegaT</title>
+
+  <para>OmegaT heeft twee uitgaven:</para>
+
+  <variablelist>
+	<varlistentry>
+	  <term>Standaard: OmegaT 6.1.0</term>
+	  <listitem>
+		<para>Deze uitgave wordt aanbevolen voor elke dag-gebruik.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Ontwikkelversie: OmegaT Nightly</term>
+	  <listitem>
+		<para>Deze uitgave wordt automatisch gemaakt, elke keer als er nieuwe code wordt toegevoegd aan OmegaT. Het wordt gebruikt om te testen.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <para>De bestanden zijn direct te downloaden vanaf <ulink url="https://omegat.org/download">https://omegat.org</ulink>.</para>
+
+  <note>
+	<para>OmegaT 6.1.0 vereist een Java 11 Runtime Environment (JRE) om te kunnen worden uitgevoerd.</para>
+
+	<para>Pakketten van OmegaT zijn zowel beschikbaar in versies die zijn gebundeld met Java, en versies zonder. Pakketten zonder Java vertrouwen erop dat een Java 11 Runtime Environment systeembreed is geïnstalleerd.</para>
+
+	<para>OmegaT 5.8.0 en later kunnen ook worden uitgevoerd met Java 11 Runtime Environment op elk platform.</para>
+
+	<para>In verband met overwegingen met betrekking tot de licentie beveelt het team van OmegaT de Eclipse Temurin Java runtime aan, verschaft door het Eclipse Foundation's Adoptium Project, maar elke Java 8 compatibele runtime environment zou moeten werken. Bekijk <ulink url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse Temurin™ project</ulink>.</para>
+
+	<para>IBM levert JRE's voor Linux PowerPC op <ulink url="https://developer.ibm.com/languages/java/semeru-runtimes/downloads/"/></para>
+  </note>
+
+  <section id="installing.omegat.windows">
+    <title id="installing.omegat.windows.title">Op Windows</title>
+
+    <para>Dubbelklik op het pakket dat u hebt gedownload.</para>
+
+    <para>U kunt de taal selecteren die moet worden gebruikt gedurende de installatie en de taal die moet worden gebruikt door OmegaT. U kunt dit later ook wijzigen door het bestand <filename>OmegaT.l4J.ini</filename> te bewerken.</para>
+  </section>
+
+  <section id="installing.omegat.linux.intel">
+    <title id="installing.omegat.linux.intel.title">Op Linux</title>
+
+	<para>Sommige distributies van Linux bieden OmegaT aan in hun bestandsbeheerder. De hier gegeven instructies zijn van toepassing op mensen die het pakket downloaden van de pagina <ulink url="https://omegat.org/download">https://omegat.org</ulink> en het handmatig installeren.</para>
+
+
+    <para>Uitpakken/untarren van het door u gedownloade bestand. Dit maakt een nieuwe map die is genaamd zoals het door u gedownloade pakket. Die map bevat alle bestanden die nodig zijn voor het uitvoeren van OmegaT.</para>
+
+    <note>
+	  <para>Hoewel u OmegaT direct kunt uitvoeren vanuit de beschikbare bestanden, kunt u ook het script <filename>linux-install.sh</filename> uitvoeren dat daar staat om OmegaT geïnstalleerd te krijgen op meer toepasselijke locaties.</para>
+
+      <para>Uitvoeren van het script zal u vragen naar uw wachtwoord voor <filename>sudo</filename>.</para>
+
+      <para>Het script controleert op een bestaande installatie van dezelfde versie van OmegaT in <filename>/opt/omegat/</filename>. Als er geen is installeert het het programma in <filename>/opt/omegat/OmegaT_6.1.0</filename> en stelt het in als de standaard versie (in <filename>/opt/omegat/OmegaT-default</filename>).</para>
+	</note>
+
+    <para>Als het uitpakken of installeren is voltooid kunt u het gedownloade bestand verwijderen omdat het niet langer nodig is.</para>
+  </section>
+
+  <section id="Installing.omegat.macos">
+    <title id="Installing.omegat.macos.title">Op macOS</title>
+
+    <para>Dubbelklik op het pakket dat u hebt gedownload om het uit te pakken. Dit zal een map maken die <filename>OmegaT</filename> heet. De map bevat twee bestanden: <filename>index.html</filename> (de startpagina van de gebruikershandleiding) en <filename>OmegaT.app</filename> (het programma). Kopieer de map naar een toepasselijke map (bijv. <filename>Toepassingen</filename>).</para>
+
+    <para>Indien gewenst, sleep en zet <filename>OmegaT.app</filename> neer op het Dock voor eenvoudiger toegang.</para>
+
+	<para>Als u dit heeft gedaan, kunt u het gedownloade pakket verwijderen omdat het niet langer nodig is.</para>
+  </section>
+
+  <section id="installing.omegat.other.systems">
+    <title id="installing.omegat.other.systems.title">Op andere platforms</title>
+
+    <para>Deze informatie is van toepassing voor elk systeem waar een versie van Java die compatibel is met Java 11 Runtime Environment beschikbaar is. Dat omvat ook de hierboven vermelde platforms, als ook platforms waarvoor geen specifiek pakket van OmegaT wordt verschaft.</para>
+
+    <para>Download de versie <emphasis>Cross-platform without JRE</emphasis>.</para>
+
+    <para>Pak het door u gedownloade bestand uit. Dit maakt een map met alle benodigde bestanden om OmegaT uit te voeren.</para>
+
+    <para>Volg de instructies voor uw systeem om sneltoetsen voor OmegaT op handige plaatsen te installeren.</para>
+  </section>
+
+  <section id="update.and.delete.omegat">
+	<title id="update.and.delete.omegat.title">Bijwerken</title>
+
+	<para>OmegaT kan u zeggen wanneer een nieuwe versie beschikbaar is. Bekijk de <link endterm="dialogs.preferences.updates.title" linkend="dialogs.preferences.updates"/> voorkeur voor details.</para>
+
+	<para>De wijzigingen tussen uw versie en de huidige versie zijn gedocumenteerd in het bestand<ulink url="https://sourceforge.net/p/omegat/code/ci/master/tree/release/changes.txt">changes.txt</ulink> op de pagina's voor ontwikkelaars.</para>
+
+	<note>
+	  <para>Als u besluit een nieuwe versie te installeren, denk dan aan het volgende:</para>
+
+	  <itemizedlist>
+		<listitem>
+		  <para>De voorkeuren voor OmegaT worden opgeslagen in de configuratiemap en zullen <emphasis>niet</emphasis> worden aangepast door de nieuwe versie. Bekijk het hoofdstuk <link endterm="configuration.folder.title" linkend="configuration.folder"/> voor details.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Projecten die u in het verleden heeft gemaakt of momenteel gebruikt zullen <emphasis>niet</emphasis> worden aangepast of verwijderd. Projecten van OmegaT worden <emphasis>niet</emphasis> opgeslagen binnen OmegaT. Zij zijn afzonderlijke objecten die geen fysieke verbinding met het programma OmegaT zelf hebben.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Parameterbestanden die zijn opgenomen in het gedownloade pakket van OmegaT (speciaal de bestanden <filename>OmegaT.l4J.ini</filename> voor <link linkend="running.omegat.on.windows">Windows</link>- en <filename>Configuration.properties</filename> en <filename>Info.plist</filename> voor <link linkend="running.omegat.on.macos">macOS</link>-pakketten) zouden kunnen worden overschreven of verwijderd, dus u zou een back-up willen maken voor het upgraden, als u deze bestanden hebt gebruikt om de parameters voor het starten van OmegaT aan te passen.</para>
+		</listitem>
+
+		<listitem>
+		  <para>De mappen <filename>plugins</filename> en <filename>scripts</filename> zouden overschreven kunnen worden, dus u zou misschien een back-up willen maken voor het upgraden.</para>
+		</listitem>
+	  </itemizedlist>
+	</note>
+
+	<variablelist>
+	  <varlistentry id="update.and.delete.omegat.over.existing.package">
+		<term id="update.and.delete.omegat.over.existing.package.title">Over een bestaande versie</term>
+
+		<listitem>
+		  <para>Selecteer, om dit te doen, eenvoudigweg dezelfde installatiemap als de bestaande installatie bij het installeren van de nieuw versie. De &quot;oude&quot; versie van OmegaT zal worden overschreven, maar instellingen die zijn gemaakt vanuit de interface van OmegaT zullen worden behouden in de verschillende configuratiemappen (zie boven).</para>
+		</listitem>
+	  </varlistentry>
+	  
+	<varlistentry id="update.and.delete.omegat.along.existing.package">
+	  <term id="update.and.delete.omegat.along.existing.package.title">Naast een bestaande versie</term>
+
+	  <listitem>
+		<para>Hiermee kunt u elk aantal versies naast elkaar inschakelen, wat u zou kunnen doen totdat u zich op uw gemak voelt met de nieuwe versie.</para>
+
+	  <para>Alle parameters die zijn geplaatst in de configuratiemap van OmegaT  zullen worden gedeeld, tenzij u een andere configuratiemap specificeert met de optie <literal>--config-dir=&lt;path&gt;</literal> op de opdrachtregel. Bekijk het gedeelte <link endterm="launch.with.command.line.omegat.options.title" linkend="launch.with.command.line.omegat.options"/>.</para>
+
+	  <para>Alle parameters die zijn geplaatst in een <link linkend="chapter.project.folder">projectmap</link> zullen van toepassing zijn voor dat project, ongeacht welke versie van OmegaT het opent.</para>
+	  </listitem>
+	</varlistentry>
+	</variablelist>
+  </section>
+  
+	<section id="update.and.delete.omegat.delete">
+	  <title id="update.and.delete.omegat.delete.title">OmegaT verwijderen</title>
+
+	  <para>Gebruik de standaard procedure voor uw besturingssysteem om OmegaT te verwijderen. Als u OmegaT volledig wilt verwijderen, dient u ook de configuratiemap te verwijderen.</para>
+
+	  <para>Indien u een handmatige installatie op Linux uitvoerde, zult u handmatig de mappen van OmegaT in <filename>opt/</filename> moeten verwijderen, als ook de symlinks die zijn geplaatst in <filename>/usr/local/bin/</filename> door het script voor de installatie.</para>
+	</section>
+
+  <section id="build.omegat.from.source">
+	<title id="build.omegat.from.source.title">OmegaT bouwen</title>
+
+	<para>De broncode voor de huidige versie kan ofwel direct worden gedownload vanaf de <ulink url="https://omegat.org/download">download page</ulink> van OmegaT of worden gekloond vanuit de opslagplaatsen van <ulink url="https://git.code.sf.net/p/omegat/code">Sourceforge</ulink> of <ulink url="https://github.com/omegat-org/omegat.git">GitHub</ulink>.</para>
+	<para>Als de code eenmaal is gedownload, open een terminal in de bronmap (<filename>omegat-code/</filename> als u kloonde vanuit Sourceforge, of <filename>/omegat</filename> als u kloonde vanuit GitHub) en typ:</para>
+
+	<programlisting>./gradlew installDist</programlisting>
+
+	<para>Dit zal een volledige, direct te gebruiken, distributie van OmegaT maken in de map <filename>build\install\OmegaT</filename>.</para>
+
+	<para>U kunt ook de toepassing direct uitvoeren met de volgende opdracht:</para>
+
+	<programlisting>./gradlew run</programlisting>
+
+	<para>U kunt een lijst met alle beschikbare taken verkrijgen door te typen:</para>
+
+	<programlisting>./gradlew tasks</programlisting>
+
+	<para>Gedetailleerde instructies voor het bouwen van OmegaT zijn te vinden in het bestand <ulink url="https://sourceforge.net/p/omegat/svn/HEAD/tree/trunk/docs_devel/README.txt">README.txt</ulink> dat is geplaatst in de submap <filename class="directory">docs_devel</filename>.</para>
+  </section>
+</section>

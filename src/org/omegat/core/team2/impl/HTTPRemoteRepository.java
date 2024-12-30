@@ -33,17 +33,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.util.Formatter;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.util.OStrings;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
+
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.ProjectTeamSettings;
-import org.omegat.util.Log;
+import org.omegat.core.team2.RemoteRepositoryFactory;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
@@ -51,21 +54,38 @@ import gen.core.project.RepositoryMapping;
 /**
  * HTTP/HTTPS repository connection implementation.
  *
- * It can be used as read-only repository for retrieve sources, external TMX, glossaries, etc. Since HTTP
- * protocol doesn't support multiple files, each URL should be mapped to separate file, i.e. directory mapping
- * is not supported.
+ * It can be used as read-only repository for retrieve sources, external TMX,
+ * glossaries, etc. Since HTTP protocol doesn't support multiple files, each URL
+ * should be mapped to separate file, i.e. directory mapping is not supported.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class HTTPRemoteRepository implements IRemoteRepository2 {
-    private static final Logger LOGGER = Logger.getLogger(HTTPRemoteRepository.class.getName());
+    private final ILogger logger;
 
     private RepositoryDefinition config;
     private File baseDirectory;
 
+    public HTTPRemoteRepository() {
+        logger = LoggerFactory.getLogger(HTTPRemoteRepository.class, OStrings.getResourceBundle());
+    }
+
+    /**
+     * Plugin loader.
+     */
+    public static void loadPlugins() {
+        RemoteRepositoryFactory.addRepositoryConnector("http", HTTPRemoteRepository.class);
+    }
+
+    /**
+     * Plugin unloader.
+     */
+    public static void unloadPlugins() {
+    }
+
     @Override
     public void init(RepositoryDefinition repo, File dir, ProjectTeamSettings teamSettings) throws Exception {
-        Log.logDebug(LOGGER, "Initialize HTTP remote repository");
+        logger.atDebug().log("Initialize HTTP remote repository");
         config = repo;
         baseDirectory = dir;
     }
@@ -94,14 +114,11 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         }
 
         // out as hex
-        Formatter formatter = new Formatter();
-        try {
+        try (Formatter formatter = new Formatter()) {
             for (byte b : sha1.digest()) {
                 formatter.format("%02x", b);
             }
             return formatter.toString();
-        } finally {
-            formatter.close();
         }
     }
 
@@ -111,7 +128,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
             throw new RuntimeException("Not supported");
         }
 
-        Log.logDebug(LOGGER, "Update to latest");
+        logger.atDebug().log("Update to latest");
         // retrieve all mapped files
         Properties etags = loadETags();
         for (RepositoryMapping m : config.getMapping()) {
@@ -124,14 +141,14 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
     @Override
     public void addForCommit(String path) throws Exception {
-        Log.logDebug(LOGGER,
-                String.format("Cannot add files for commit for HTTP repositories. Skipping \"%s\".", path));
+        logger.atDebug().setMessage("Cannot add files for commit for HTTP repositories. Skipping \"{0}\".")
+                .addArgument(path).log();
     }
 
     @Override
     public void addForDeletion(String path) throws Exception {
-        Log.logDebug(LOGGER,
-                String.format("Cannot add files for deletion for HTTP repositories. Skipping \"%s\".", path));
+        logger.atDebug().setMessage("Cannot add files for deletion for HTTP repositories. Skipping \"{0}\".")
+                .addArgument(path).log();
     }
 
     @Override
@@ -146,7 +163,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
     @Override
     public String commit(String[] onVersions, String comment) throws Exception {
-        Log.logDebug(LOGGER, "Commit not supported for HTTP repositories.");
+        logger.atDebug().log("Commit not supported for HTTP repositories.");
 
         return null;
     }
@@ -158,11 +175,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         Properties props = new Properties();
         File f = new File(baseDirectory, ".etags");
         if (f.exists()) {
-            FileInputStream in = new FileInputStream(f);
-            try {
+            try (FileInputStream in = new FileInputStream(f)) {
                 props.load(in);
-            } finally {
-                in.close();
             }
         }
         return props;
@@ -172,21 +186,19 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
      * Save all ETags.
      */
     protected void saveETags(Properties props) throws Exception {
-        FileOutputStream out = new FileOutputStream(new File(baseDirectory, ".etags"));
-        try {
+        try (FileOutputStream out = new FileOutputStream(new File(baseDirectory, ".etags"))) {
             props.store(out, null);
-        } finally {
-            out.close();
         }
     }
 
     /**
-     * Retrieve remote URL with non-modified checking by ETag. If server doesn't support ETag, file will be
-     * always retrieved.
+     * Retrieve remote URL with non-modified checking by ETag. If server doesn't
+     * support ETag, file will be always retrieved.
      */
-    protected void retrieve(Properties etags, String file, String url, File out) throws Exception {
+    protected void retrieve(Properties etags, String file, String url, final File out) throws Exception {
         String etag = etags.getProperty(file);
-        Log.logDebug(LOGGER, "Retrieve " + url + " into " + out.getAbsolutePath() + " with ETag=" + etag);
+        logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}").addArgument(url)
+                .addArgument(out::getAbsolutePath).addArgument(etag).log();
 
         out.getParentFile().mkdirs();
         HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
@@ -196,25 +208,22 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 conn.setRequestProperty("If-None-Match", etag);
             }
             switch (conn.getResponseCode()) {
-                case HttpURLConnection.HTTP_OK:
-                    etag = conn.getHeaderField("ETag");
-                    Log.logDebug(LOGGER, "Retrieve " + url + ": 200 with ETag=" + etag);
-                    break;
-                case HttpURLConnection.HTTP_NOT_MODIFIED:
-                    // not modified - just return
-                    Log.logDebug(LOGGER, "Retrieve " + url + ": not modified");
-                    return;
-                default:
-                    throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
+            case HttpURLConnection.HTTP_OK:
+                etag = conn.getHeaderField("ETag");
+                logger.atDebug().setMessage("Retrieve {0}: 200 with ETag={1}").addArgument(url).addArgument(etag).log();
+                break;
+            case HttpURLConnection.HTTP_NOT_MODIFIED:
+                // not modified - just return
+                logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(url).log();
+                return;
+            default:
+                throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
             }
 
             // load into .tmp file
             File temp = new File(out.getAbsolutePath() + ".tmp");
-            InputStream in = conn.getInputStream();
-            try {
+            try (InputStream in = conn.getInputStream()) {
                 FileUtils.copyInputStreamToFile(in, temp);
-            } finally {
-                in.close();
             }
 
             // rename into file
@@ -236,7 +245,6 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         } finally {
             conn.disconnect();
         }
-
-        Log.logDebug(LOGGER, "Retrieve " + url + " finished");
+        logger.atDebug().setMessage("Retrieve {0} finished").addArgument(url).log();
     }
 }

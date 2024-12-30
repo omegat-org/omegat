@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
-                         Benjamin Siband, and Kim Bruning
+               2000-2006 Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel
@@ -105,11 +105,16 @@ import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromMTMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.DockablePanel;
-import org.omegat.gui.main.MainWindow;
-import org.omegat.gui.main.MainWindowUI;
+import org.omegat.gui.main.IMainMenu;
+import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainWindowStatusBar;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.gui.notes.INotes;
+import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.help.Help;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -178,7 +183,7 @@ public class EditorController implements IEditor {
     private String emptyProjectPaneTitle;
     private JTextPane introPane;
     private JTextPane emptyProjectPane;
-    protected final MainWindow mw;
+    protected final IMainWindow mw;
 
     /** Currently displayed segments info. */
     protected SegmentBuilder[] m_docSegList;
@@ -207,7 +212,7 @@ public class EditorController implements IEditor {
         INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE
     };
 
-    Document3.ORIENTATION currentOrientation;
+    BiDiUtils.ORIENTATION currentOrientation;
     protected boolean sourceLangIsRTL;
     protected boolean targetLangIsRTL;
 
@@ -224,7 +229,7 @@ public class EditorController implements IEditor {
      */
     private IProject.AllTranslations previousTranslations;
 
-    public EditorController(final MainWindow mainWindow) {
+    public EditorController(final IMainWindow mainWindow) {
         this.mw = mainWindow;
 
         segmentExportImport = new SegmentExportImport(this);
@@ -368,7 +373,7 @@ public class EditorController implements IEditor {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().addAdjustmentListener(scrollListener);
-
+        scrollPane.setName("EditorScrollPane");
         pane.setLayout(new BorderLayout());
         pane.add(scrollPane, BorderLayout.CENTER);
 
@@ -569,55 +574,20 @@ public class EditorController implements IEditor {
      * Decide what document orientation should be default for source/target languages.
      */
     private void setInitialOrientation() {
-        String sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
-        String targetLang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
-
-        sourceLangIsRTL = Language.isRTL(sourceLang);
-        targetLangIsRTL = Language.isRTL(targetLang);
-
-        if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != Language.localeIsRTL()) {
-            currentOrientation = Document3.ORIENTATION.DIFFER;
-        } else {
-            if (sourceLangIsRTL) {
-                currentOrientation = Document3.ORIENTATION.ALL_RTL;
-            } else {
-                currentOrientation = Document3.ORIENTATION.ALL_LTR;
-            }
-        }
-        applyOrientationToEditor();
+        sourceLangIsRTL = BiDiUtils.isSourceLangRtl();
+        targetLangIsRTL = BiDiUtils.isTargetLangRtl();
+        currentOrientation = BiDiUtils.getOrientationType();
+        // Define editor's orientation by target language orientation.
+        editor.setComponentOrientation(BiDiUtils.getOrientation(currentOrientation));
     }
 
     /**
-     * Define editor's orientation by target language orientation.
+     * The orientation of the document is all LtR.
+     * @return true when the orientation is all RtL. otherwise false.
      */
-    private void applyOrientationToEditor() {
-        ComponentOrientation targetOrientation = null;
-        switch (currentOrientation) {
-        case ALL_LTR:
-            targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
-            break;
-        case ALL_RTL:
-            targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
-            break;
-        case DIFFER:
-            if (targetLangIsRTL) { //using target lang direction gives better result when user starts editing.
-                targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
-            } else {
-                targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
-            }
-        }
-        // set editor's orientation by target language
-        editor.setComponentOrientation(targetOrientation);
-    }
-
-    /**
-     * returns the orientation of the document
-     * (so we can decide what way of tag colouring we need;
-     * if that has been fixed in an other way, this method can be removed again.).
-     * @return
-     */
-    public Document3.ORIENTATION getOrientation() {
-        return currentOrientation;
+    @Override
+    public boolean isOrientationAllLtr() {
+        return currentOrientation.equals(BiDiUtils.ORIENTATION.ALL_LTR);
     }
 
     /**
@@ -694,11 +664,11 @@ public class EditorController implements IEditor {
         }
 
         // check if RTL support required for document
-        boolean hasRTL = sourceLangIsRTL || targetLangIsRTL || Language.localeIsRTL()
-                || currentOrientation != Document3.ORIENTATION.ALL_LTR;
+        boolean hasRTL = sourceLangIsRTL || targetLangIsRTL || BiDiUtils.isLocaleRtl()
+                || currentOrientation != BiDiUtils.ORIENTATION.ALL_LTR;
         Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
         for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
-            hasRTL = hasRTL || Language.isRTL(entry.getKey().getLanguageCode().toLowerCase(Locale.ENGLISH));
+            hasRTL = hasRTL || BiDiUtils.isRtl(entry.getKey().getLanguageCode().toLowerCase(Locale.ENGLISH));
         }
 
         Document3 doc = new Document3(this);
@@ -734,9 +704,12 @@ public class EditorController implements IEditor {
 
         doc.setDocumentFilter(new DocumentFilter3());
 
-        // add locate for target language to editor
+        // add locales to editor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         editor.setLocale(targetLocale);
+        editor.setTargetLocale(targetLocale);
+        Locale sourceLocale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        editor.setSourceLocale(sourceLocale);
 
         editor.setDocument(doc);
 
@@ -832,7 +805,12 @@ public class EditorController implements IEditor {
         // forget about old marks
         builder.createSegmentElement(true, currentTranslation);
 
-        Core.getNotes().setNoteText(currentTranslation.note);
+        INotes notes = Core.getNotes();
+        notes.setNoteText(currentTranslation.note);
+        if (notes instanceof NotesTextArea) {
+            // clear undo history.
+            ((NotesTextArea) notes).clearHistory();
+        }
 
         // then add new marks
         markerController.reprocessImmediately(builder);
@@ -884,10 +862,14 @@ public class EditorController implements IEditor {
 
     private void setMenuEnabled() {
         // update history menu items
-        mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
-        mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
-        mw.menu.editMultipleDefault.setEnabled(!m_docSegList[displayedEntryIndex].isDefaultTranslation());
-        mw.menu.editMultipleAlternate.setEnabled(m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        IMainMenu menu = Core.getMainWindow().getMainMenu();
+        if (menu instanceof BaseMainWindowMenu) {
+            BaseMainWindowMenu mainMenu = (BaseMainWindowMenu) menu;
+            mainMenu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
+            mainMenu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
+            mainMenu.editMultipleDefault.setEnabled(!m_docSegList[displayedEntryIndex].isDefaultTranslation());
+            mainMenu.editMultipleAlternate.setEnabled(m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        }
     }
 
     /**
@@ -989,12 +971,11 @@ public class EditorController implements IEditor {
         }
 
         StatisticsInfo stat = project.getStatistics();
-
-        final MainWindowUI.StatusBarMode progressMode =
+        final MainWindowStatusBar.StatusBarMode progressMode =
                 Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                        MainWindowUI.StatusBarMode.DEFAULT);
+                        MainWindowStatusBar.StatusBarMode.DEFAULT);
 
-        if (progressMode == MainWindowUI.StatusBarMode.DEFAULT) {
+        if (progressMode == MainWindowStatusBar.StatusBarMode.DEFAULT) {
             StringBuilder pMsg = new StringBuilder(1024).append(" ");
             pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")
                     .append(stat.numberOfTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)
@@ -1200,22 +1181,24 @@ public class EditorController implements IEditor {
                 Core.getProject().getTranslationInfo(m_docSegList[displayedEntryIndex].ste), defaultTranslation);
 
         // find all identical sources and redraw them
-        for (int i = 0; i < m_docSegList.length; i++) {
-            if (i == displayedEntryIndex) {
-                // current entry, skip
-                continue;
-            }
-            SegmentBuilder builder = m_docSegList[i];
-            if (!builder.hasBeenCreated()) {
-                // Skip because segment has not been drawn yet
-                continue;
-            }
-            if (builder.ste.getSrcText().equals(entry.getSrcText())) {
-                // the same source text - need to update
-                builder.createSegmentElement(false,
-                        Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
-                // then add new marks
-                markerController.reprocessImmediately(builder);
+        if (translationChanged || noteChanged) {
+            for (int i = 0; i < m_docSegList.length; i++) {
+                if (i == displayedEntryIndex) {
+                    // current entry, skip
+                    continue;
+                }
+                SegmentBuilder builder = m_docSegList[i];
+                if (!builder.hasBeenCreated()) {
+                    // Skip because segment has not been drawn yet
+                    continue;
+                }
+                if (builder.ste.getSrcText().equals(entry.getSrcText())) {
+                    // the same source text - need to update
+                    builder.createSegmentElement(false,
+                            Core.getProject().getTranslationInfo(builder.ste), !defaultTranslation);
+                    // then add new marks
+                    markerController.reprocessImmediately(builder);
+                }
             }
         }
 
@@ -1659,8 +1642,9 @@ public class EditorController implements IEditor {
         try {
             // no selection? make it the current word
             if (start == end) {
-                start = EditorUtils.getWordStart(editor, start);
-                end = EditorUtils.getWordEnd(editor, end);
+                Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+                start = EditorUtils.getWordStart(editor, start, locale);
+                end = EditorUtils.getWordEnd(editor, end, locale);
 
                 // adjust the bound again
                 if (start < translationStart && end <= translationEnd) {
@@ -1691,8 +1675,7 @@ public class EditorController implements IEditor {
             editor.setSelectionEnd(end);
         } catch (BadLocationException ble) {
             // highly improbable
-            Log.log("bad location exception when changing case");
-            Log.log(ble);
+            Log.logErrorRB(ble, "EDITOR_CONTROLLER_EXCEPTION");
         }
     }
 
@@ -1965,11 +1948,12 @@ public class EditorController implements IEditor {
             String language = detectFirstStepsLanguage();
             introPane = new JTextPane();
             introPane
-                    .setComponentOrientation(Language.isRTL(language) ? ComponentOrientation.RIGHT_TO_LEFT
+                    .setComponentOrientation(BiDiUtils.isRtl(language) ? ComponentOrientation.RIGHT_TO_LEFT
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
+            introPane.setName("IntroPane");
             DragTargetOverlay.apply(introPane, dropInfo);
-            URI uri = Help.getHelpFileURI(language, OConsts.HELP_FIRST_STEPS);
+            URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS);
             if (uri != null) {
                 introPane.setPage(uri.toURL());
             }
@@ -1979,6 +1963,7 @@ public class EditorController implements IEditor {
         emptyProjectPaneTitle = OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
         emptyProjectPane = new JTextPane();
         emptyProjectPane.setEditable(false);
+        emptyProjectPane.setName("EmptyProjectPane");
         emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
         emptyProjectPane.setFont(mw.getApplicationFont());
         DragTargetOverlay.apply(emptyProjectPane, dropInfo);
@@ -1996,12 +1981,12 @@ public class EditorController implements IEditor {
         String country = Language.getUpperCaseCountryFromLocale();
 
         // Check if there's a translation for the full locale (lang + country)
-        if (Help.getHelpFileURI(language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {
+        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {
             return language + "_" + country;
         }
 
         // Check if there's a translation for the language only
-        if (Help.getHelpFileURI(language, OConsts.HELP_FIRST_STEPS) != null) {
+        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS) != null) {
             return language;
         }
         // Default to English, if no translation exists
@@ -2165,6 +2150,35 @@ public class EditorController implements IEditor {
     @Override
     public void windowDeactivated() {
         editor.autoCompleter.setVisible(false);
+    }
+
+    @Override
+    public CaretPosition getCurrentPositionInEntryTranslationInEditor() {
+        int selectionEnd = getCurrentPositionInEntryTranslation();
+        String selection = getSelectedText();
+        String translation = getCurrentTranslation();
+
+        if (StringUtil.isEmpty(translation) || StringUtil.isEmpty(selection)) {
+            // no translation or no selection
+            return new CaretPosition(selectionEnd);
+        } else {
+            // get selected range
+            int selectionStart = selectionEnd;
+            int pos = 0;
+            do {
+                pos = translation.indexOf(selection, pos);
+                if (pos == selectionEnd) {
+                    selectionStart = pos;
+                    selectionEnd = pos + selection.length();
+                    break;
+                } else if ((pos + selection.length()) == selectionEnd) {
+                    selectionStart = pos;
+                    break;
+                }
+                pos++;
+            } while (pos > 0);
+            return new CaretPosition(selectionStart, selectionEnd);
+        }
     }
 
     /**

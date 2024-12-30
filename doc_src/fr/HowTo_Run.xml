@@ -34,7 +34,7 @@
 
 	<para>Vous pouvez aussi double-cliquer sur <filename>OmegaT.jar</filename> pour le lancer directement, si l’extension <filename>.jar</filename> est associée au programme de lancement Java du système.</para>
 
-	<para>Le paquet vous fournit le script Kaptain <filename>omegat.kaptn</filename>, que vous trouverez sûrement utile si vous êtes sous KDE, ainsi qu’un script bash <filename>OmegaT</filename> qui lance automatiquement la commande <application>java</application> requise pour le fonctionnement d’OmegaT.</para>
+	<para>Le paquet vous fournit le script Kaptain <filename>omegat.kaptn</filename>, que vous trouverez surement utile si vous êtes sous KDE, ainsi qu’un script bash <filename>OmegaT</filename> qui lance automatiquement la commande <application>java</application> requise pour le fonctionnement d’OmegaT.</para>
   </section>
 
   <section id="running.omegat.on.macos">
@@ -224,7 +224,7 @@
 		  <listitem>
 			<para><option>-XmxTAILLE</option></para>
 
-			<para>Remplacez <code>TAILLE</code> par un nombre qui consiste d’un multiple de 1024 suivi d’un <code>k</code> pour kilo-octets, d’un <code>m</code> pour mégaoctets, ou d’un <code>g</code> pour gigaoctets. Le nombre doit correspondre à au moins 2 Mo.</para>
+			<para>Remplacez <code>TAILLE</code> par un nombre qui consiste d’un multiple de 1024 suivi d’un <code>k</code> pour kilooctets, d’un <code>m</code> pour mégaoctets, ou d’un <code>g</code> pour gigaoctets. Le nombre doit correspondre à au moins 2 Mo.</para>
 		  </listitem>
 		</varlistentry>
 
@@ -403,14 +403,14 @@ config-dir=&quot;chemin/vers/nouveau/configdir&quot;</programlisting>
 						  <varlistentry id="launch.with.command.line.pseudotranslatetmx.">
 							<term id="launch.with.command.line.pseudotranslatetmx.title"><option>--pseudotranslatetmx=</option><userinput>&lt;chemin&gt;</userinput></term>
 							<listitem>
-							  <para>Le fichier TMX pseudo-traduit produit.</para>
+							  <para>Le fichier TMX pseudotraduit produit.</para>
 							</listitem>
 						  </varlistentry>
 
 						  <varlistentry id="launch.with.command.line.pseudotranslatetype.equal.empty.">
 							<term id="launch.with.command.line.pseudotranslatetype.equal.empty.title"><option>--pseudotranslatetype=[equal|empty]</option></term>
 							<listitem>
-							  <para>Le contenu à inclure dans la TMX pseudo-traduite.</para>
+							  <para>Le contenu à inclure dans la TMX pseudotraduite.</para>
 							</listitem>
 						  </varlistentry>
 						</variablelist>

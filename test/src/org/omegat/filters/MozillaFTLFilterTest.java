@@ -26,6 +26,7 @@
 package org.omegat.filters;
 
 import org.junit.Test;
+
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.mozftl.MozillaFTLFilter;
 

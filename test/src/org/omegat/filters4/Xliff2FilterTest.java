@@ -49,8 +49,8 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
 
     @Test
     public void testBilingual() throws Exception {
-        Map<String,String> result = new HashMap<String,String>();
-        Map<String,String> legacy = new HashMap<String,String>();
+        Map<String, String> result = new HashMap<>();
+        Map<String, String> legacy = new HashMap<>();
 
         parse2(new Xliff2Filter(), "test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf", result, legacy);
         assertEquals("<t0>Oiseaux de haute altitude", result.get("<t0>High Altitude Birds"));
@@ -82,7 +82,7 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
                     }
 
                     public String getTranslation(String id, String source) {
-                        return getTranslation(id,source,"");
+                        return getTranslation(id, source, "");
                     }
 
                     public void linkPrevNextSegments() {
@@ -99,5 +99,11 @@ public class Xliff2FilterTest extends org.omegat.filters.TestFilterBase {
         // entry translated in the callback, not in the source file
         assertEquals("Oiseaux en Oregon", entries.get(0).translation); 
     }
-    
+
+    @Test
+    public void testTranslation_glossary_14_5() throws Exception {
+        Xliff2Filter filter = new Xliff2Filter();
+        String source = "test/data/filters/xliff/filters4-xliff2/ex.14.5.xlf";
+        translateXML(filter, source);
+    }
 }

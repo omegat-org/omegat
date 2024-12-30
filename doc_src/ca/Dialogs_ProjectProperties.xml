@@ -13,13 +13,9 @@
   <section id="dialogs.project.properties.languages">
     <title id="dialogs.project.properties.languages.title"><guilabel>Llengües</guilabel></title>
 
-    <para>Select the source and target languages from the drop-down list,
-    or enter them manually.</para>
+    <para>Seleccioneu les llengües d'origen i de destinació en la llista desplegable o indiqueu-les manualment.</para>
 
-	<para>OmegaT provides a convenient short list of two-letter language
-	codes, but you can type any code that conforms to <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>
-	(including the three-letter language codes) into the appropriate
-	field.</para>
+	<para>L'OmegaT proporciona una breu llista pràctica de codis de llengua de dues lletres, però podeu indicar qualsevol codi que s'ajusti al <ulink url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink> (incloent-hi codis de llengua de tres lletres) en el camp corresponent.</para>
 	
 	<para>Els codis de llengua s'utilitzen en diverses parts de l'OmegaT amb diverses finalitats:</para>
 	
@@ -44,11 +40,7 @@
 	  <para>Altres funcions.</para>
 
 	<warning>
-	  <para>Make sure you enter the correct language codes and that
-	  all other locations requiring such a code match the one you
-	  assign here exactly. Functions that depend on a language either
-	  fail or produce incorrect results if there is a mismatch between
-	  the language codes.</para>
+	  <para>Assegureu-vos que indiqueu els codis de llengua correctes i que els codis que indiqueu en qualsevol altre lloc coincideixin exactament amb els que indiqueu aquí. Les funcions que depenen d'una llengua poden no funcionar o produir resultats incorrectes si els codis de llengua no coincideixen.</para>
 	</warning>
 
 	  
@@ -125,30 +117,23 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.hide.tags">
-        <term id="dialogs.project.properties.hide.tags.title"><option>Hide
-        tags</option></term>
+        <term id="dialogs.project.properties.hide.tags.title"><option>Amaga les etiquetes</option></term>
 
 		<listitem>
           <para>Les etiquetes són útils generalment per a reproduir disposicions o característiques específiques del text d'origen en el text traduït.</para>
 
-		  <para>Activating this function hides the tags in the source
-		  segments, freeing you from the need to handle them manually.</para>
+		  <para>Si habiliteu aquesta funció, s'amaguen les etiquetes dels segments d'origen, la qual cosa us permet no haver de tractar-les manualment.</para>
 		  
 		  <para>Això és especialment útil per a tractar textos on la formatació en línia no és gaire útil (per exemple, fitxers PDF amb OCR, o fitxers .odt o .docx mal convertits).</para>
 
 		  <note>
-			<para>Hidden tags are simply stacked at the end of the segment. Although
-			this does not normally prevent the translated file from opening, keep the
-			following points in mind when using this function:</para>
+			<para>Les etiquetes amagades senzillament s'acumulen al final del segment. Tot i que això normalment no impedeix l'obertura del fitxer traduït, tingueu present el següent quan utilitzeu aquesta funció:</para>
 			<itemizedlist>
 				<listitem>
-					<para>You will have to manually apply bold, italics, or other text
-					decorations in the translated file.</para>
+					<para>Haureu d'aplicar manualment la negreta, la cursiva i altres opcions de format del text en el fitxer traduït.</para>
 				</listitem>
 				<listitem>
-					<para>If you simply want to reduce the number of tags in a
-					<application>Microsoft Word</application> (2007 and later) document,
-					you can use the <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
+					<para>Si només voleu reduir el nombre d'etiquetes en un document del <application>Microsoft Word</application> (2007 o posterior), podeu utilitzar l'script <link linkend="windows.scripts.distribution.tagwipe" endterm="windows.scripts.distribution.tagwipe.title"/>.</para>
 					<para>Consulteu la secció <link linkend="windows.scripts" endterm="windows.scripts.title"/> per a conèixer més detalls.</para>
 				</listitem>
 			</itemizedlist>

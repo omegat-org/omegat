@@ -5,7 +5,7 @@
 
  Copyright (C) 2017-2019 Thomas Cordonnier
                Home page: https://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -38,6 +38,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
 /**
@@ -46,7 +47,18 @@ import org.omegat.util.OStrings;
  * @author Thomas Cordonnier
  */
 public class Xliff2Filter extends AbstractXliffFilter {
-    private Pattern intPattern = Pattern.compile("-?\\d+");
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(Xliff2Filter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
+    private final Pattern intPattern = Pattern.compile("-?\\d+");
 
     // --------------------------- IFilter API ----------------------------
 
@@ -62,7 +74,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
     // ------------------- AbstractXmlFilter part -------------------------
 
     @Override
-    protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             // XLIFF 2 has no "body", so we must start on another
             // markup
@@ -77,6 +89,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 }
             }
         }
+        return isEventMode;
     }
 
     /** Current translation unit **/
@@ -143,10 +156,9 @@ public class Xliff2Filter extends AbstractXliffFilter {
         default:
             if (currentBuffer != null) {
                 currentBuffer.add(startElement);
-            }
-            // <target> must be before any other-namespace markup
-            else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
+            } else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (segId != null))
                     && (!startElement.getName().getNamespaceURI().equals(namespace))) {
+                // <target> must be before any other-namespace markup
                 flushTranslations(writer);
             }
         }
@@ -263,12 +275,11 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 case "ec":
                     break; // Should be empty!!!
                 case "pc":
-                default: {
+                default:
                     String pop = tagStack.pop();
                     tagsMap.put("/" + pop, Collections.singletonList(ev));
                     res.append("</").append(pop).append(">");
                     break;
-                }
                 }
             }
         }

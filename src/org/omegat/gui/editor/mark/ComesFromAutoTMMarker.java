@@ -42,14 +42,21 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromAutoTMMarker implements IMarker {
-    protected static final HighlightPainter PAINTER_XICE = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getColor(), 0.5F);
-    protected static final HighlightPainter PAINTER_X100PC = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
-    protected static final HighlightPainter PAINTER_XAUTO = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
-    protected static final HighlightPainter PAINTER_XENFORCED = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
+    private final HighlightPainter painterXice;
+    private final HighlightPainter painterX100Pc;
+    private final HighlightPainter painterXauto;
+    private final HighlightPainter painterXenforced;
+
+    public ComesFromAutoTMMarker() {
+        painterXice = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XICE.getColor(), 0.5F);
+        painterX100Pc = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_X100PC.getColor(), 0.5F);
+        painterXauto = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor(), 0.5F);
+        painterXenforced = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XENFORCED.getColor(), 0.5F);
+    }
 
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
@@ -58,22 +65,22 @@ public class ComesFromAutoTMMarker implements IMarker {
             return null;
         }
         TMXEntry e = Core.getProject().getTranslationInfo(ste);
-        if (e.linked == null) {
+        if (e == null || e.linked == null) {
             return null;
         }
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
         switch (e.linked) {
         case xICE:
-            m.painter = PAINTER_XICE;
+            m.painter = painterXice;
             break;
         case x100PC:
-            m.painter = PAINTER_X100PC;
+            m.painter = painterX100Pc;
             break;
         case xAUTO:
-            m.painter = PAINTER_XAUTO;
+            m.painter = painterXauto;
             break;
         case xENFORCED:
-            m.painter = PAINTER_XENFORCED;
+            m.painter = painterXenforced;
         }
         return Collections.singletonList(m);
     }

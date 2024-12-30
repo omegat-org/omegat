@@ -44,6 +44,13 @@ import org.omegat.util.Language;
  */
 public class NotLoadedProject implements IProject {
 
+    protected static final TMXEntry EMPTY_TRANSLATION;
+    static {
+        PrepareTMXEntry empty = new PrepareTMXEntry();
+        empty.source = "";
+        EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
+    }
+
     @Override
     public void compileProject(String sourcePattern) throws IOException, TranslationException {
     }

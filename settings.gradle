@@ -1,3 +1,14 @@
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.9.0'
+    id 'com.gradle.develocity' version '3.19'
+}
+develocity {
+    buildScan {
+        publishing.onlyIf { "true".equals(System.getProperty("envIsCi")) }
+        termsOfUseUrl = "https://gradle.com/terms-of-service"
+        termsOfUseAgree = "yes"
+    }
+}
 rootProject.name = 'OmegaT'
 include("machinetranslators:apertium",
         "machinetranslators:belazar",
@@ -6,4 +17,39 @@ include("machinetranslators:apertium",
         "machinetranslators:ibmwatson",
         "machinetranslators:mymemory",
         "machinetranslators:yandex",
+        "machinetranslators:dummy",
+        "language-modules:ar",
+        "language-modules:ast",
+        "language-modules:be",
+        "language-modules:br",
+        "language-modules:ca",
+        "language-modules:da",
+        "language-modules:de",
+        "language-modules:el",
+        "language-modules:en",
+        "language-modules:eo",
+        "language-modules:es",
+        "language-modules:fa",
+        "language-modules:fr",
+        "language-modules:ga",
+        "language-modules:gl",
+        "language-modules:it",
+        "language-modules:ja",
+        "language-modules:km",
+        "language-modules:nl",
+        "language-modules:pl",
+        "language-modules:pt",
+        "language-modules:ro",
+        "language-modules:ru",
+        "language-modules:sk",
+        "language-modules:sl",
+        "language-modules:sv",
+        "language-modules:ta",
+        "language-modules:tl",
+        "language-modules:uk",
+        "language-modules:zh",
+        "aligner",
+        "theme",
+        "spellchecker:hunspell",
+        "spellchecker:morfologik",
         "tipoftheday")

@@ -29,6 +29,7 @@ package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Tag;
+import org.omegat.util.BiDiUtils;
 import org.omegat.util.Language;
 
 /**
@@ -57,7 +58,7 @@ public class XMLTag extends Tag {
     public String toOriginal() {
         StringBuilder buf = new StringBuilder();
 
-        boolean isRtl = Language.isRTL(targetLanguage.getLanguageCode());
+        boolean isRtl = BiDiUtils.isRtl(targetLanguage.getLanguageCode());
         boolean differentDir = isDifferentDirection(isRtl);
         boolean isSpecialDocxTagLTR = isSpecialDocxBidiTag(false);
         boolean isSpecialDocxTagRTL = isSpecialDocxBidiTag(true);
@@ -135,7 +136,7 @@ public class XMLTag extends Tag {
             return false;
         }
 
-        return isRtl != Language.isRTL(sourceLanguage.getLanguageCode());
+        return isRtl != BiDiUtils.isRtl(sourceLanguage.getLanguageCode());
     }
 
     private boolean isSpecialDocxBidiTag(boolean complex) {

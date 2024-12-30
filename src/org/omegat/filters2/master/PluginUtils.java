@@ -35,7 +35,6 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -57,6 +56,7 @@ import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 import org.omegat.CLIParameters;
+import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.tokenizer.DefaultTokenizer;
@@ -80,6 +80,12 @@ public final class PluginUtils {
 
     public static final String PLUGINS_LIST_FILE = "Plugins.properties";
 
+    private static final String PLUGIN_CATEGORY = "Plugin-Category";
+    private static final String MAIN_CLASS = "Main-Class";
+    private static final String MANIFEST_MF = "META-INF/MANIFEST.MF";
+    private static final String OMEGAT_PLUGINS = "OmegaT-Plugins";
+    private static final String OMEGAT_PLUGIN = "OmegaT-Plugin";
+
     /**
      * Plugin type definitions.
      */
@@ -99,7 +105,9 @@ public final class PluginUtils {
         MACHINETRANSLATOR("machinetranslator"),
         /** A plugin that change base of OmegaT system, not recommended. */
         BASE("base"),
-        /** Glosary, that provide IGlossary API. */
+        /**
+         * Glosary, that provide IGlossary API.
+         */
         GLOSSARY("glossary"),
         /**
          * Dictionary files/services connectors, that provide IDictionary and/or
@@ -107,13 +115,30 @@ public final class PluginUtils {
          */
         DICTIONARY("dictionary"),
         /**
-         * theme, that register Swing Look-and-Feel with OmegaT properties into
+         * theme, that register Swing-Look-and-Feel with OmegaT properties into
          * UIManager.
          */
         THEME("theme"),
-        /** Misc plugins, such as GUI extension like web browser spport. */
+        /**
+         * team repository version control system connector plugins.
+         */
+        REPOSITORY("repository"),
+        /**
+         * Misc plugins, such as a GUI extension like web browser support.
+         */
         MISCELLANEOUS("miscellaneous"),
-        /** When plugin does not define any of above. */
+        /**
+         * Spellchecker plugins.
+         */
+        SPELLCHECK("spellcheck"),
+        /**
+         * language plugin that bundles LanguageTool-language module and
+         * spell-check dictionaries.
+         */
+        LANGUAGE("language"),
+        /**
+         * When plugin does not define any of the above.
+         */
         UNKNOWN("Undefined");
 
         private final String typeValue;
@@ -175,6 +200,15 @@ public final class PluginUtils {
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
+    private static final MainClassLoader THEME_CLASSLOADER;
+    private static final MainClassLoader LANGUAGE_CLASSLOADER;
+
+    static {
+        ClassLoader cl = PluginUtils.class.getClassLoader();
+        THEME_CLASSLOADER = new MainClassLoader(cl);
+        LANGUAGE_CLASSLOADER = new MainClassLoader(cl);
+    }
+
     /** Private constructor to disallow creation */
     private PluginUtils() {
     }
@@ -205,35 +239,41 @@ public final class PluginUtils {
 
         boolean foundMain = false;
         // look on all manifests
-        URLClassLoader pluginsClassLoader = new URLClassLoader(urlList.toArray(new URL[0]),
-                PluginUtils.class.getClassLoader());
+        ClassLoader cl = PluginUtils.class.getClassLoader();
+        MainClassLoader pluginsClassLoader = new MainClassLoader(urlList.toArray(new URL[0]), cl);
         try {
-            Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF");
+            Enumeration<URL> mlist = pluginsClassLoader.getResources(MANIFEST_MF);
             while (mlist.hasMoreElements()) {
                 URL mu = mlist.nextElement();
                 try (InputStream in = mu.openStream()) {
                     Manifest m = new Manifest(in);
-                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
-                        // found main manifest - not in development mode
+                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue(MAIN_CLASS))) {
+                        // found a main manifest - not in development mode
                         foundMain = true;
-                        loadFromManifest(m, pluginsClassLoader, null);
-                    } else {
-                        loadFromManifest(m, pluginsClassLoader, mu);
                     }
-                    if ("theme".equals(m.getMainAttributes().getValue("Plugin-Category"))) {
+                    if ("theme".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
                         String target = mu.toString();
                         for (URL url : urlList) {
                             if (target.contains(url.toString())) {
-                                THEME_PLUGIN_JARS.add(url);
+                                THEME_CLASSLOADER.addJarToClasspath(url);
+                                loadFromManifest(m, THEME_CLASSLOADER, mu);
                             }
                         }
+                    } else if ("language".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
+                        String target = mu.toString();
+                        for (URL url : urlList) {
+                            if (target.contains(url.toString())) {
+                                LANGUAGE_CLASSLOADER.addJarToClasspath(url);
+                                loadFromManifest(m, LANGUAGE_CLASSLOADER, mu);
+                            }
+                        }
+                    } else {
+                        loadFromManifest(m, pluginsClassLoader, mu);
                     }
                 } catch (ClassNotFoundException e) {
                     Log.log(e);
                 } catch (UnsupportedClassVersionError e) {
-                    JarURLConnection connection = (JarURLConnection) mu.openConnection();
-                    URL url = connection.getJarFileURL();
-                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", url);
+                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
                 }
             }
         } catch (IOException ex) {
@@ -250,7 +290,7 @@ public final class PluginUtils {
                         }
                     }
                 } else {
-                    // load from "Plugins.properties"
+                    // load from `Plugins.properties` file
                     Properties props = new Properties();
                     try (FileInputStream fis = new FileInputStream(PLUGINS_LIST_FILE)) {
                         props.load(fis);
@@ -273,12 +313,27 @@ public final class PluginUtils {
     }
 
     /**
-     * This method create a list of plugins to load. It tries to onky take the
-     * most recent version of plugins. To differenciate between different
+     * Load plugin for test.
+     * <p>
+     * WARN: don't use it for general purpose.
+     * 
+     * @param props
+     *            properties that have "plugin=(classes...)"
+     * @throws ClassNotFoundException
+     *             when specified plugin is not found.
+     */
+    public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
+        ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
+        loadFromProperties(props, pluginsClassLoader);
+    }
+
+    /**
+     * This method creates a list of plugins to load. It tries to only take the
+     * most recent version of plugins. To differentiate between different
      * versions, the plugins must have the same name, have the same number of
      * version components (we can't compare <code>x.y.z</code> with
-     * <code>y.z</code>). Also the qualifier (ie. anything after the "-" in the
-     * version number) is discarded for the comparison.
+     * <code>y.z</code>). Also, the qualifier (i.e., anything after the "-" in
+     * the version number) is discarded for the comparison.
      *
      * @param pluginsDirs
      *            List of directories where plugins can be loaded
@@ -293,7 +348,7 @@ public final class PluginUtils {
             try {
                 URL url = f.toURI().toURL();
                 urlList.add(url);
-                Log.logInfoRB("PLUGIN_LOAD_JAR", url.toString());
+                Log.logInfoRB("PLUGIN_LOAD_JAR", url);
             } catch (IOException ex) {
                 Log.log(ex);
             }
@@ -307,8 +362,12 @@ public final class PluginUtils {
         for (URL url : urlList) {
             try (JarInputStream jarStream = new JarInputStream(url.openStream())) {
                 Manifest mf = jarStream.getManifest();
-                String pluginClass = mf.getMainAttributes().getValue("OmegaT-Plugins");
-                String oldPluginClass = mf.getMainAttributes().getValue("OmegaT-Plugin");
+                if (mf == null) {
+                    // mf can be null when a jar file does not have a manifest.
+                    continue;
+                }
+                String pluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGINS);
+                String oldPluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGIN);
 
                 // if the jar doesn't look like an OmegaT plugin (it doesn't
                 // contain any "Omegat-Plugins?" attribute, we don't need to
@@ -352,7 +411,7 @@ public final class PluginUtils {
                     pluginVersions.put(pluginName, pluginInfo);
                 }
 
-            } catch (IOException ex) {
+            } catch (IOException | NumberFormatException ex) {
                 Log.log(ex);
             }
         }
@@ -373,6 +432,15 @@ public final class PluginUtils {
         return TOKENIZER_CLASSES;
     }
 
+    /**
+     * Reterun registered plugin classes for spellchecker category.
+     * 
+     * @return list of classes.
+     */
+    public static List<Class<?>> getSpellCheckClasses() {
+        return SPELLCHECK_CLASSES;
+    }
+
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
         if (lang == null) {
             return DefaultTokenizer.class;
@@ -384,7 +452,7 @@ public final class PluginUtils {
             return exactResult;
         }
 
-        // Otherwise return a match for the language only (XX).
+        // Otherwise, return a match for the language only (XX).
         Class<?> generalResult = searchForTokenizer(lang.getLanguageCode());
         if (isDefault(generalResult)) {
             return generalResult;
@@ -412,7 +480,7 @@ public final class PluginUtils {
 
         lang = lang.toLowerCase(Locale.ENGLISH);
 
-        // Choose first relevant tokenizer as fallback if no
+        // Choose the first relevant tokenizer as fallback if no
         // "default" tokenizer is found.
         Class<?> fallback = null;
 
@@ -456,8 +524,12 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
-    public static List<URL> getThemePluginJars() {
-        return THEME_PLUGIN_JARS;
+    public static ClassLoader getThemeClassLoader() {
+        return THEME_CLASSLOADER;
+    }
+
+    public static ClassLoader getLanguageClassLoader() {
+        return LANGUAGE_CLASSLOADER;
     }
 
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
@@ -466,13 +538,13 @@ public final class PluginUtils {
 
     private static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
 
+    private static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
+
     private static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
-
-    private static final List<URL> THEME_PLUGIN_JARS = new ArrayList<>();
 
     /**
      * Parse one manifest file.
@@ -482,7 +554,7 @@ public final class PluginUtils {
      * @param classLoader
      *            classloader
      * @throws ClassNotFoundException
-     *             when plugin class not found.
+     *             when plugin class is not found.
      */
     private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
             throws ClassNotFoundException {
@@ -626,5 +698,10 @@ public final class PluginUtils {
 
     public static Collection<PluginInformation> getPluginInformations() {
         return Collections.unmodifiableSet(PLUGIN_INFORMATIONS);
+    }
+
+    public static URL getJarFileUrlFromResourceUrl(URL url) throws IOException {
+        JarURLConnection connection = (JarURLConnection) url.openConnection();
+        return connection.getJarFileURL();
     }
 }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
-/**************************************************************************
- OmegaT - Java based Computer Assisted Translation (CAT) tool
+ OmegaT - Computer Assisted Translation (CAT) tool
+
  Copyright (C) 2011-2012 Didier Briel
                2014-2015 Didier Briel
                2019 Aaron Madlon-Kay
-
-               Home page: http://www.omegat.org/
+               Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
  This file is part of OmegaT.
@@ -23,8 +21,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-**************************************************************************/
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <project name="OmegaT documentation" default="all">
 
@@ -41,16 +38,16 @@
     </target>
 
     <!-- The fonts must be available in the system -->
-    <condition property="font.family" value="IPAPGothic">
+    <condition property="font.family" value="Noto Sans CJK JP">
         <equals arg1="${language}" arg2="ja"/>
     </condition>
-    <condition property="monospace.font.family" value="IPAGothic">
+    <condition property="monospace.font.family" value="Noto Sans CJK JP">
         <equals arg1="${language}" arg2="ja"/>
     </condition>
-    <condition property="font.family" value="WenQuanYi Micro Hei">
+    <condition property="font.family" value="Noto Sans CJK SC">
         <equals arg1="${language}" arg2="zh_CN"/>
     </condition>
-    <condition property="monospace.font.family" value="WenQuanYi Micro Hei">
+    <condition property="monospace.font.family" value="Noto Sans CJK SC">
         <equals arg1="${language}" arg2="zh_CN"/>
     </condition>
     <property name="font.family" value="DejaVu Sans"/>
@@ -63,7 +60,7 @@
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="${language}/pdf/OmegaT_documentation.fo" />
+            <arg value="${target}/OmegaT_documentation_${language}.fo" />
             <arg value="${language}/index.xml" />
             <arg value="${dbk}/fo/docbook.xsl" />
             <arg value="paper.type=A4" />
@@ -98,16 +95,15 @@
                 <include name="*.jar"/>
             </fileset>
             <fileset dir="${fop.home.build}">
-                <include name="fop.jar"/>
-                <include name="fop-hyph.jar" />
+                <include name="fop*.jar"/>
              </fileset>
         </classpath>
     </taskdef>
 
     <target name="pdf" depends="fo">
         <fop format="application/pdf"
-             fofile="${language}/pdf/OmegaT_documentation.fo"
-             outfile="${language}/pdf/OmegaT_documentation_${language}.PDF"
+             fofile="${target}/OmegaT_documentation_${language}.fo"
+             outfile="${target}/OmegaT_documentation_${language}.PDF"
              basedir="${language}/"
              userconfig="fop.xconf"
              force="true" />
@@ -151,8 +147,6 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="${language}/${version.properties.filename}"
-              tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
     <target name="check-first-steps">
@@ -171,35 +165,29 @@
 
     <target name="old-css" depends="check-first-steps" unless="${FirstSteps.exists}">
         <copy file="OmegaT_old.css"
-              tofile="../docs/${language}/OmegaT.css"
+              tofile="${target}/OmegaT.css"
               force="true"/>
     </target>
 
     <target name="new-css" depends="check-first-steps" if="${FirstSteps.exists}">
         <copy file="OmegaT_new.css"
-              tofile="../docs/${language}/OmegaT.css"
+              tofile="${target}/OmegaT.css"
               force="true"/>
     </target>
 
     <target name="css" depends="old-css,new-css"/>
 
-    <target name="copy-index-from-first-step" depends="check-manual-exist,generate-instant-start"
-            unless="${ManualContents.exists}">
-        <copy file="../docs/${language}/first_steps.html"
-              tofile="../docs/${language}/index.html" />
-    </target>
-
-    <target name="generate-instant-start" depends="check-first-steps, old-css, pictures" unless="${FirstSteps.exists}">
+    <target name="generate-instant-start" depends="check-first-steps, old-css, instant-start-pictures" unless="${FirstSteps.exists}">
         <java dir="."
               fork="true"
               failonerror="true"
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/first_steps.html" />
+            <arg value="${target}/first_steps.html" />
             <arg value="${language}/InstantStartGuide.xml" />
             <arg value="../../docbook-utf8.xsl" />
-            <arg value="base.dir=../docs/${language}/" />
+            <arg value="base.dir=${target}/" />
             <arg value="chunk.section.depth=0" />
             <arg value="chunk.first.sections=0" />
             <arg value="use.extensions=1" />
@@ -215,11 +203,9 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="${language}/${version.properties.filename}"
-              tofile="../docs/${language}/${version.properties.filename}" />
     </target>
 
-    <target name="instant-start" depends="generate-instant-start, copy-index-from-first-step"/>
+    <target name="instant-start" depends="generate-instant-start"/>
 
     <target name="first-steps" depends="check-first-steps, new-css" if="${FirstSteps.exists}">
         <java dir="."
@@ -228,10 +214,10 @@
               maxmemory="128m"
               classname="com.icl.saxon.StyleSheet" >
             <arg value="-o" />
-            <arg value="../docs/${language}/first_steps.html" />
+            <arg value="${target}/first_steps.html" />
             <arg value="${language}/First_Steps.xml" />
             <arg value="../../docbook-utf8.xsl" />
-            <arg value="base.dir=../docs/${language}/" />
+            <arg value="base.dir=${target}/" />
             <arg value="chunk.section.depth=0" />
             <arg value="chunk.first.sections=0" />
             <arg value="use.extensions=1" />
@@ -250,8 +236,16 @@
     </target>
 
     <target name="pictures">
-        <copy todir="../docs/${language}/images">
+        <copy todir="${target}/images">
             <fileset dir="${language}/images" />
+        </copy>
+    </target>
+
+    <target name="instant-start-pictures">
+        <copy todir="${target}/images">
+            <fileset dir="${language}/images">
+                <include name="InstantGuide*.png"/>
+            </fileset>
         </copy>
     </target>
 
@@ -308,7 +302,7 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
-        <copy file="../images/OmegaT.svg" tofile="../docs/${language}/images/omegat.svg"/>
+        <copy file="../images/OmegaT.svg" tofile="${target}/images/omegat.svg"/>
     </target>
 
     <target name="whc" depends="whc-toc,whc-header,whc-index">
@@ -330,7 +324,7 @@
             <arg value="${language}/xhtml5/toc.xml"/>
             <arg value="-index"/>
             <arg value="${language}/xhtml5/index.html"/>
-            <arg value="../docs/${language}"/>
+            <arg value="${target}"/>
             <arg line="${prop.dist.contents}"/>
         </java>
         <delete file="${language}/xhtml5/index_.html"/>

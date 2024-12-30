@@ -45,7 +45,7 @@ public class MoodlePHPFilterTest extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(new MoodlePHPFilter(), f);
 
         checkMultiStart(fi, f);
-        checkMulti("Accessibility","access", null, null, null, null);
+        checkMulti("Accessibility", "access", null, null, null, null);
         checkMulti("Accessibility help", "accesshelp", null, null, null, null);
         checkMulti("Unrecognised options:\n" +
                 "  {$a}\n" +

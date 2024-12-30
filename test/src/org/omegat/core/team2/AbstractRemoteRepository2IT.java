@@ -57,10 +57,11 @@ public abstract class AbstractRemoteRepository2IT {
     public void setUp() throws Exception {
 
         tempRepoDir = Files.createTempDirectory("omegat-team-repo");
-        prepareLocalRepo();
-
         tempDir = Files.createTempDirectory("omegat-team-it");
+
+        // Should create instance before preparing local repository.
         rr2 = getRr2();
+        prepareLocalRepo();
         repositoryDefinition = new RepositoryDefinition();
         configureRepositoryDefinition();
 
@@ -84,8 +85,8 @@ public abstract class AbstractRemoteRepository2IT {
 
     @After
     public void tearDown() throws IOException {
-        FileUtils.deleteDirectory(tempDir.toFile());
-        FileUtils.deleteDirectory(tempRepoDir.toFile());
+        FileUtils.forceDeleteOnExit(tempDir.toFile());
+        FileUtils.forceDeleteOnExit(tempRepoDir.toFile());
     }
 
 

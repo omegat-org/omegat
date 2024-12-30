@@ -34,17 +34,18 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import javax.swing.text.StyleConstants;
 
+import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.gui.Styles;
 
 public interface IGlossaryRenderer {
     AttributeSet NO_ATTRIBUTES = Styles.createAttributeSet(null, null, false, null);
     AttributeSet PRIORITY_ATTRIBUTES = Styles.createAttributeSet(null, null, true, null);
-    AttributeSet SOURCE_ATTRIBUTES = Styles.createAttributeSet(
-            Styles.EditorColor.COLOR_GLOSSARY_SOURCE.getColor(), null, null, null);
-    AttributeSet TARGET_ATTRIBUTES = Styles.createAttributeSet(
-            Styles.EditorColor.COLOR_GLOSSARY_TARGET.getColor(), null, null, null);
-    AttributeSet NOTES_ATTRIBUTES = Styles.createAttributeSet(
-            Styles.EditorColor.COLOR_GLOSSARY_NOTE.getColor(), null, null, null);
+    AttributeSet SOURCE_ATTRIBUTES = Styles
+            .createAttributeSet(Styles.EditorColor.COLOR_GLOSSARY_SOURCE.getColor(), null, null, null);
+    AttributeSet TARGET_ATTRIBUTES = Styles
+            .createAttributeSet(Styles.EditorColor.COLOR_GLOSSARY_TARGET.getColor(), null, null, null);
+    AttributeSet NOTES_ATTRIBUTES = Styles
+            .createAttributeSet(Styles.EditorColor.COLOR_GLOSSARY_NOTE.getColor(), null, null, null);
 
     interface IRenderTarget<T> {
         void append(String str);
@@ -110,12 +111,13 @@ public interface IGlossaryRenderer {
                 }
                 Color attrColor = StyleConstants.getForeground(attr);
                 if (attrColor != Color.black) {
-                    String colorString = String.format("%02x%02x%02x",
-                            attrColor.getRed(), attrColor.getGreen(), attrColor.getBlue());
-                    buf.append("<font color=#" + colorString + ">");
+                    String colorString = String.format("%02x%02x%02x", attrColor.getRed(),
+                            attrColor.getGreen(), attrColor.getBlue());
+                    buf.append("<font color=#").append(colorString).append(">");
                 }
             }
-            buf.append(str);
+            String doc = HttpConnectionUtils.decodeHttpURLs(str);
+            buf.append(doc);
             if (attr != null) {
                 Color attrColor = StyleConstants.getForeground(attr);
                 if (attrColor != Color.black) {
@@ -146,7 +148,10 @@ public interface IGlossaryRenderer {
     /** Name to be displayed in the drop box. Can be language-dependent **/
     String getName();
 
-    /** String to be stored in config file. Must be language-independent, and unique **/
+    /**
+     * String to be stored in config file. Must be language-independent, and
+     * unique
+     **/
     String getId();
 
     // --------------- Rendering methods -----------------

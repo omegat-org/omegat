@@ -1,0 +1,18 @@
+steps:
+  - task: Cache@2
+    displayName: 'Cache Gradle'
+    inputs:
+      key: 'gradle | "$(Agent.OS)" | **/build.gradle'
+      restoreKeys: |
+        gradle | "$(Agent.OS)"
+        gradle
+      path: '$(GRADLE_USER_HOME)'
+  - task: Gradle@3
+    inputs:
+      tasks: 'testOnJava17'
+      options: '--build-cache -PenvIsCi'
+      jdkVersionOption: '1.17'
+  - script: |
+      # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
+      ./gradlew --stop
+    displayName: Gradlew stop

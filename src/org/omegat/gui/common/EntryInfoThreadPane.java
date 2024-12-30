@@ -78,7 +78,7 @@ public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements
      * @param newEntry
      *            new entry for find
      */
-    protected abstract void startSearchThread(final SourceTextEntry newEntry);
+    protected abstract void startSearchThread(SourceTextEntry newEntry);
 
     /**
      * Callback from search thread.

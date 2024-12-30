@@ -1,0 +1,38 @@
+services:
+  server:
+    build: test-integration/docker/server
+    volumes:
+      - type: volume
+        source: keygen
+        target: /keys
+    tmpfs:
+      - /tmp
+    ports:
+      - "10022:22"
+      - "10080:80"
+      - "10443:443"
+  client:
+    build:
+      context: test-integration/docker/client
+      args:
+        JAVA: 17
+        JDKVER: jdk_17.0.11.0.0+9
+        GRADLE: 8.8
+    depends_on:
+      - server
+    volumes:
+      - type: bind
+        source: .
+        target: /code
+      - type: volume
+        source: keygen
+        target: /keys
+        volume: {}
+    tmpfs:
+      - /tmp
+      - /workdir
+    environment:
+      DURATION: ${DURATION:-2400}
+      TYPE: ${TYPE:-GIT}
+volumes:
+  keygen:

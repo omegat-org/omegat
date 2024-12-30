@@ -1,0 +1,3 @@
+# Code owners for the OmegaT project
+
+/src/org/omegat/Bundle*.properties    @kazephil @brandelune @kosivantsov

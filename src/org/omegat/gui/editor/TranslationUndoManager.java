@@ -81,7 +81,8 @@ public class TranslationUndoManager implements UndoableEditListener {
             if (currentState != null) {
                 redos.add(currentState);
             }
-            ch = currentState = undos.remove(undos.size() - 1);
+            ch = undos.remove(undos.size() - 1);
+            currentState = ch;
         }
         if (ch != null) {
             // apply
@@ -100,7 +101,8 @@ public class TranslationUndoManager implements UndoableEditListener {
             if (currentState != null) {
                 undos.add(currentState);
             }
-            ch = currentState = redos.remove(redos.size() - 1);
+            ch = redos.remove(redos.size() - 1);
+            currentState = ch;
         }
         if (ch != null) {
             // apply

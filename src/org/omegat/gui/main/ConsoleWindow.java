@@ -115,7 +115,7 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     public JFrame getApplicationFrame() {
-        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+        return null;
     }
 
     public void lockUI() {
@@ -149,13 +149,13 @@ public class ConsoleWindow implements IMainWindow {
     public void setCursor(Cursor cursor) {
     }
 
-    public int showConfirmDialog(Object message, String title, int optionType,
-            int messageType) throws HeadlessException {
+    public int showConfirmDialog(Object message, String title, int optionType, int messageType)
+            throws HeadlessException {
 
         System.out.println(title);
         System.out.println(message);
         System.out.println(OStrings.getString("TF_CHOSEN_YES"));
-        return 0; //JOptionPane.YES_OPTION
+        return 0; // JOptionPane.YES_OPTION
     }
 
     public void showMessageDialog(String message) {

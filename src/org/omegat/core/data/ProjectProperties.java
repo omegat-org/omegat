@@ -48,7 +48,6 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
 import org.omegat.util.StringUtil;
 
 import gen.core.filters.Filters;
@@ -69,18 +68,10 @@ import gen.core.project.RepositoryMapping;
  */
 public class ProjectProperties {
 
-    private static final String[] DEFAULT_EXCLUDES = {
-            "**/.svn/**",
-            "**/CVS/**",
-            "**/.cvs/**",
-            "**/.git/**",
-            "**/.hg/**",
-            "**/.repositories/**",
-            "**/desktop.ini",
-            "**/Thumbs.db",
-            "**/.DS_Store",
+    private static final String[] DEFAULT_EXCLUDES = { "**/.svn/**", "**/CVS/**", "**/.cvs/**", "**/.git/**",
+            "**/.hg/**", "**/.repositories/**", "**/desktop.ini", "**/Thumbs.db", "**/.DS_Store",
             "**/~$*" // MS Office owner file; see https://superuser.com/a/405258/93651
-            };
+    };
 
     public static List<String> getDefaultExcludes() {
         return Collections.unmodifiableList(Arrays.asList(DEFAULT_EXCLUDES));
@@ -103,7 +94,8 @@ public class ProjectProperties {
         sourceRootExcludes.addAll(Arrays.asList(DEFAULT_EXCLUDES));
         setTargetRoot(getProjectRoot() + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(getProjectRoot() + OConsts.DEFAULT_GLOSSARY + File.separator);
-        setWriteableGlossary(getProjectRoot() + OConsts.DEFAULT_GLOSSARY + File.separator + OConsts.DEFAULT_W_GLOSSARY);
+        setWriteableGlossary(
+                getProjectRoot() + OConsts.DEFAULT_GLOSSARY + File.separator + OConsts.DEFAULT_W_GLOSSARY);
         setTMRoot(getProjectRoot() + OConsts.DEFAULT_TM + File.separator);
         setExportTMRoot(getProjectRoot() + File.separator);
         setDictRoot(getProjectRoot() + OConsts.DEFAULT_DICT + File.separator);
@@ -155,6 +147,7 @@ public class ProjectProperties {
     public ProjectPath getWritableGlossaryFile() {
         return writableGlossaryFile;
     }
+
     /** Returns The Glossary File Location */
     public String getWriteableGlossary() {
         return writableGlossaryFile.getAsString();
@@ -178,8 +171,8 @@ public class ProjectProperties {
 
     public String computeDefaultWriteableGlossaryFile() {
         // Default glossary file name depends on where glossaryDir is:
-        //  - Inside project folder: glossary.txt
-        //  - Outside project folder: ${projectName}-glossary.txt
+        // - Inside project folder: glossary.txt
+        // - Outside project folder: ${projectName}-glossary.txt
         String glossaryDir = getGlossaryRoot();
         if (glossaryDir.startsWith(getProjectRoot())) {
             return glossaryDir + OConsts.DEFAULT_W_GLOSSARY;
@@ -212,31 +205,46 @@ public class ProjectProperties {
         exportTMDir.setRelativeOrAbsolute(exportTMRoot);
     }
 
-    /** Returns The Translation Memory (TMX) with translations to other languages Files Directory */
+    /**
+     * Returns The Translation Memory (TMX) with translations to other languages
+     * Files Directory
+     */
     public String getTMOtherLangRoot() {
         return tmDir.getAsString() + OConsts.DEFAULT_OTHERLANG + '/';
     }
 
-    /** Returns The Translation Memory (TMX) Files Directory for automatically applied files. */
+    /**
+     * Returns The Translation Memory (TMX) Files Directory for automatically
+     * applied files.
+     */
     public String getTMAutoRoot() {
         return tmDir.getAsString() + OConsts.AUTO_TM + '/';
     }
-    
-    /** Returns The Translation Memory (TMX) Files Directory for automatically enforced files. */
+
+    /**
+     * Returns The Translation Memory (TMX) Files Directory for automatically
+     * enforced files.
+     */
     public String getTMEnforceRoot() {
         return tmDir.getAsString() + OConsts.AUTO_ENFORCE_TM + '/';
     }
-    
-    /** Returns The Translation Memory (TMX) Files Directory for machine translation files. */
+
+    /**
+     * Returns The Translation Memory (TMX) Files Directory for machine
+     * translation files.
+     */
     public String getTMMTRoot() {
         return tmDir.getAsString() + OConsts.MT_TM + '/';
     }
-    
-    /** Returns The Translation Memory (TMX) Files Directory for files with penalties. */
+
+    /**
+     * Returns The Translation Memory (TMX) Files Directory for files with
+     * penalties.
+     */
     public String getTMPenaltyRoot() {
         return tmDir.getAsString() + OConsts.PENALTY_TM + '/';
     }
-    
+
     public ProjectPath getDictDir() {
         return dictDir;
     }
@@ -324,32 +332,39 @@ public class ProjectProperties {
         return sourceLanguage;
     }
 
-    /** Sets The Source Language (language of the source files) of the Project */
+    /**
+     * Sets The Source Language (language of the source files) of the Project
+     */
     public void setSourceLanguage(Language sourceLanguage) {
         this.sourceLanguage = sourceLanguage;
     }
 
-    /** Sets The Source Language (language of the source files) of the Project */
+    /**
+     * Sets The Source Language (language of the source files) of the Project
+     */
     public void setSourceLanguage(String sourceLanguage) {
         this.sourceLanguage = new Language(sourceLanguage);
     }
 
     /**
-     * Returns The Target Language (language of the translated files) of the Project
+     * Returns The Target Language (language of the translated files) of the
+     * Project
      */
     public Language getTargetLanguage() {
         return targetLanguage;
     }
 
     /**
-     * Sets The Target Language (language of the translated files) of the Project
+     * Sets The Target Language (language of the translated files) of the
+     * Project
      */
     public void setTargetLanguage(Language targetLanguage) {
         this.targetLanguage = targetLanguage;
     }
 
     /**
-     * Sets The Target Language (language of the translated files) of the Project
+     * Sets The Target Language (language of the translated files) of the
+     * Project
      */
     public void setTargetLanguage(String targetLanguage) {
         this.targetLanguage = new Language(targetLanguage);
@@ -388,7 +403,8 @@ public class ProjectProperties {
     }
 
     /**
-     * Returns whether The Sentence Segmenting is Enabled for this Project. Default, Yes.
+     * Returns whether The Sentence Segmenting is Enabled for this Project.
+     * Default, Yes.
      */
     public boolean isSentenceSegmentingEnabled() {
         return sentenceSegmentingEnabled;
@@ -400,27 +416,31 @@ public class ProjectProperties {
     }
 
     /**
-     * Sets level(s) of TMs to be exported by project.
-     * Accepts three booleans as arguments, corresponding to
-     * OmegaT, Level 1 and Level 2
+     * Sets level(s) of TMs to be exported by project. Accepts three booleans as
+     * arguments, corresponding to OmegaT, Level 1 and Level 2
      */
     public void setExportTmLevels(boolean omT, boolean level1, boolean level2) {
         List<String> exportTmLevels = new ArrayList<>();
-        if (omT) exportTmLevels.add("omegat");
-        if (level1) exportTmLevels.add("level1");
-        if (level2) exportTmLevels.add("level2");
+        if (omT) {
+            exportTmLevels.add("omegat");
+        }
+        if (level1) {
+            exportTmLevels.add("level1");
+        }
+        if (level2) {
+            exportTmLevels.add("level2");
+        }
         this.exportTmLevels = exportTmLevels;
     }
 
     /**
-     * Sets level(s) of TMs to be exported by project.
-     * Accepts list of levels
+     * Sets level(s) of TMs to be exported by project. Accepts list of levels
      */
     public void setExportTmLevels(List<String> levels) {
         boolean omegat = false;
         boolean level1 = false;
         boolean level2 = false;
-        for (String level: levels) {
+        for (String level : levels) {
             if ("omegat".equalsIgnoreCase(level)) {
                 omegat = true;
                 continue;
@@ -473,8 +493,8 @@ public class ProjectProperties {
         if (repositories == null) {
             return false;
         }
-        for (RepositoryDefinition repositoryDefinition: repositories) {
-            for (RepositoryMapping repositoryMapping: repositoryDefinition.getMapping()) {
+        for (RepositoryDefinition repositoryDefinition : repositories) {
+            for (RepositoryMapping repositoryMapping : repositoryDefinition.getMapping()) {
                 if ("".equals(repositoryMapping.getLocal()) || "/".equals(repositoryMapping.getLocal())) {
                     return true;
                 }
@@ -512,6 +532,7 @@ public class ProjectProperties {
 
     /**
      * Loads filters.xml if found in the /omegat filter of the project
+     * 
      * @throws IOException
      */
     public void loadProjectFilters() throws IOException {
@@ -547,19 +568,22 @@ public class ProjectProperties {
         String srcDir = getSourceRoot();
         File src = new File(srcDir);
         if (!src.exists()) {
-            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_SOURCE_FOLDER"), srcDir));
+            throw new ProjectException(
+                    StringUtil.format(OStrings.getString("PROJECT_SOURCE_FOLDER"), srcDir));
         }
         //
         String tgtDir = getTargetRoot();
         File tgt = new File(tgtDir);
         if (!tgt.exists()) {
-            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_TARGET_FOLDER"), tgtDir));
+            throw new ProjectException(
+                    StringUtil.format(OStrings.getString("PROJECT_TARGET_FOLDER"), tgtDir));
         }
         //
         String glsDir = getGlossaryRoot();
         File gls = new File(glsDir);
         if (!gls.exists()) {
-            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_GLOSSARY_FOLDER"), glsDir));
+            throw new ProjectException(
+                    StringUtil.format(OStrings.getString("PROJECT_GLOSSARY_FOLDER"), glsDir));
         }
         String wGlsDir = getWriteableGlossaryDir();
         if (!wGlsDir.contains(getGlossaryRoot())) {
@@ -576,12 +600,15 @@ public class ProjectProperties {
         String exportTMXDir = getExportTMRoot();
         File exportTMX = new File(exportTMXDir);
         if (!exportTMX.exists()) {
-            throw new ProjectException(StringUtil.format(OStrings.getString("PROJECT_EXPORT_TM_FOLDER"), exportTMXDir));
+            throw new ProjectException(
+                    StringUtil.format(OStrings.getString("PROJECT_EXPORT_TM_FOLDER"), exportTMXDir));
         }
 
-        // Dictionary folder is always created automatically when it does not exist, for ascending
+        // Dictionary folder is always created automatically when it does not
+        // exist, for ascending
         // compatibility reasons.
-        // There is no exception handling when a failure occurs during folder creation.
+        // There is no exception handling when a failure occurs during folder
+        // creation.
         //
         File dict = new File(getDictRoot());
         if (!dict.exists()) {
@@ -648,17 +675,20 @@ public class ProjectProperties {
 
         /**
          * @param isDirectory
-         *            true if directory(i.e. should be ended by '/'), false if file
+         *            true if directory(i.e. should be ended by '/'), false if
+         *            file
          */
         public ProjectPath(boolean isDirectory) {
             this.isDirectory = isDirectory;
         }
 
         /**
-         * path is directory(or file) as declared in the omegat.project, but not __DEFAULT__. I.e. caller can
-         * send something like "/some/project/source", or "source", or "source/".
+         * path is directory(or file) as declared in the omegat.project, but not
+         * __DEFAULT__. I.e. caller can send something like
+         * "/some/project/source", or "source", or "source/".
          *
-         * Absolute paths from Windows will be treated as relative on Linux/MacOS, and vice versa.
+         * Absolute paths from Windows will be treated as relative on
+         * Linux/MacOS, and vice versa.
          */
         public void setRelativeOrAbsolute(String path) {
             underRoot = null;
@@ -705,8 +735,8 @@ public class ProjectProperties {
         }
 
         /**
-         * Returns path relative to project root with '/' at the end for directories, or null if directory outside
-         * of project.
+         * Returns path relative to project root with '/' at the end for
+         * directories, or null if directory outside of project.
          */
         public String getUnderRoot() {
             return underRoot;

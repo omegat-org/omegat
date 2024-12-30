@@ -5,6 +5,7 @@
 
  Copyright (C) 2010-2013 Alex Buloichik
                2014 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -39,6 +40,7 @@ import javax.swing.text.Position;
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.editor.mark.AltTranslationsMarker;
 import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.ComesFromAutoTMMarker;
@@ -51,7 +53,6 @@ import org.omegat.gui.editor.mark.NBSPMarker;
 import org.omegat.gui.editor.mark.ProtectedPartsMarker;
 import org.omegat.gui.editor.mark.RemoveTagMarker;
 import org.omegat.gui.editor.mark.ReplaceMarker;
-import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
 import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.util.Log;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -77,7 +78,6 @@ public class MarkerController {
     private final Highlighter highlighter;
 
     public static void init() throws Exception {
-        WhitespaceMarkerFactory.init();
         Core.registerMarker(new ProtectedPartsMarker());
         Core.registerMarker(new RemoveTagMarker());
         Core.registerMarker(new NBSPMarker());
@@ -88,6 +88,7 @@ public class MarkerController {
         Core.registerMarker(new ComesFromMTMarker());
         Core.registerMarker(new FontFallbackMarker());
         Core.registerMarker(new SpellCheckerMarker());
+        Core.registerMarker(new AltTranslationsMarker());
     }
 
 
@@ -136,9 +137,6 @@ public class MarkerController {
 
     /**
      * Remove all marks for all entries.
-     *
-     * @param newEntriesCount
-     *            count of newly displayed entries
      */
     void removeAll() {
         UIThreadsUtil.mustBeSwingThread();

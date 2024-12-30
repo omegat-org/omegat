@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<section id="file.filters">
+  <title id="file.filters.title">Filtri dei file</title>
+
+  <warning>
+	<para>I filtri dei file possono essere locali e specifici di un dato progetto oppure globali e disponibili a tutti i progetti che condividono una cartella di configurazione.</para>
+
+	<para>Per i dettagli, si veda:</para>
+	<itemizedlist>
+	  <listitem>
+		<para><link linkend="dialogs.project.properties.filters" endterm="dialogs.project.properties.filters.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para><link linkend="configuration.folder" endterm="configuration.folder.title"/></para>
+	  </listitem>
+	</itemizedlist>
+  </warning>
+  
+  <para>I filtri evidenziati in grassetto sono utilizzati nel progetto corrente.</para>
+
+  <para>Se si preferisce non tradurre i file associati a un determinato filtro, disabilitare quest'ultimo togliendo la spunta alla relativa casella. Il loro contenuto non verrà mostrato per la traduzione.</para>
+
+  <note>
+	<para>È possibile ordinare i filtri per nome o per attivazione. Fare clic sulla intestazione pertinente per ordinarli in senso crescente o decrescente.</para>
+  </note>
+
+  <para>Per modificare le estensioni, il nome del file di arrivo e le codifiche del file associate a un filtro, selezionare dall'elenco il filtro fare clic sul pulsante <guibutton>Modifica...</guibutton>.</para>
+
+  <para>Alcuni filtri sono dotati di un pulsante <guibutton>Opzioni...</guibutton> che permette l'accesso a un'ulteriore personalizzazione delle loro impostazioni.</para>
+	
+  <para>Fare clic sul pulsante <guibutton>Ripristina predefiniti</guibutton> per riportare i filtri dei file alle loro impostazioni predefinite.</para>
+
+  <para>Le preferenze modificate dei filtri dei file globali sono salvati in <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, nella cartella di configurazione. Vedere <link linkend="configuration.folder" endterm="configuration.folder.title"/> per i dettagli. Eliminare quel file ripristina anche le preferenze dei filtri.</para>
+
+  <para>I filtri dei file locali modificati sono salvati nel file <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, che si trova nella cartella del progetto. Vedere il capitolo <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> per i dettagli. Eliminare quel file ripristina anche le preferenze dei filtri e riporta il progetto ai filtri dei file globali.</para>
+
+  <section id="file.filters.general">
+	<title id="file.filters.general.title">Preferenze comuni</title>
+	  
+	<variablelist>
+	  <varlistentry>
+		<term>Nascondi i tag di inizio e fine</term>
+		<listitem>
+		  <para>I tag di inizio e fino sono in generale richiesti da OmegaT per ricreare in maniera corretta il segmento tradotto. Nasconderli dal contenuto da tradurre assicura che non verranno cancellati o eliminati per errore durante il processo di traduzione.</para>
+
+		  <para>Se si decide di mantenere i tag di inizio e fine, assicurarsi di includerli anche nel testo tradotto.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Rimuovi lo spazio vuoto di inizio e fine nei progetti non segmentati</term>
+		<listitem>
+		  <para>Per impostazione predefinita, OmegaT rimuove dal contenuto da tradurre qualsiasi spazio vuoto di inizio e fine. Nei progetti non segmentati, disabilitare questa opzione per rendere modificabile lo spazio vuoto di inizio e fine nella traduzione.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Preserva gli spazi per tutti i tag</term>
+		<listitem>
+		  <para>Se il documento di partenza contiene dello spazio vuoto utilizzato per controllare l'aspetto, tale spazio dovrà essere mantenuto nel documento tradotto.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>Non usare il nome file per identificare le traduzioni alternative</term>
+		<listitem>
+		  <para>Il nome file di partenza è uno degli elementi che definiscono una traduzione alternativa. Se questa opzione è attivata, per definire una traduzione alternativa verranno utilizzati solo i segmenti precedenti/successivi o un identificatore del segmento.</para>
+
+		  <para>I segmenti che presentano le stesse caratteristiche e si trovano in altri file verranno tradotti allo stesso modo.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+	
+  <section id="edit.filter.dialog">
+    <title id="edit.filter.dialog.title">Modifica</title>
+	
+    <para>Fare doppio clic sui campi modificabili per apportare modifiche semplici, oppure fare clic sul pulsante <guibutton>Modifica...</guibutton> per accedere alla finestra di dialogo di modifica.</para>
+
+	<para>Per aggiungere un modello di filtro, fare clic su <guibutton>Aggiungi...</guibutton> per aprire una finestra di dialogo simile.</para>
+
+	<para>Entrambe le finestre di dialogo di consentono di personalizzare i modelli di nome file sia per i file di partenza, sia per quelli di arrivo associati a questo filtro, e selezionare la loro rispettiva codifica.</para>
+
+	<para>Usare il menu a discesa <guilabel>Variabili nome file</guilabel> per personalizzare il nome del file di arrivo.</para>
+
+    <section id="source.filetype.and.filename.pattern">
+	  <title id="source.filetype.and.filename.pattern.title">Modello del nome del file sorgente</title>
+
+	  <para>Per associare un filtro a un file, OmegaT verifica la sua estensione e tenta di abbinarlo a un modello di nome file di partenza in un filtro.</para>
+
+	  <para>Per esempio, il modello <literal>.xhtml</literal> registrato nel filtro XHTML è associato ai file con estensione <filename>xhtml</filename>. Se un file di questo tipo viene trovato nella cartella <link linkend="project.folder.source" endterm="project.folder.source.title"/>, esso sarà gestito dal filtro XHTML.</para>
+
+	  <para>È possibile modificare o aggiungere modelli di nome del file per associare file diversi a un filtro.</para>
+		
+	  <warning>
+		<para>L'associazione di un'estensione di file a un filtro non è sufficiente affinché quest'ultimo gestisca correttamente il file. Anche la struttura del file deve essere compatibile col filtro: se si dovesse associare l'estensione <literal>.odt</literal> al filtro XHMTL, questo non sarà in grado di interpretare il contenuto di un file di LibreOffice Writer.</para>
+	  </warning>
+		
+		
+	  <para> modelli di nome del file di partenza usano i caratteri jolly: il carattere <literal>*</literal> corrisponde a zero caratteri o più caratteri consecutivi, mentre il carattere <literal>?</literal> corrisponde esattamente a un carattere.</para>
+
+	  <para>Per esempio, usare il modello <literal>leggi*</literal> se si vuole utilizzare il filtro di testo per la gestione dei file &quot;leggimi&quot; (<literal>leggimi, leggi.mi</literal> o <literal>leggimi.txt</literal>).</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+	  <title id="source.and.target.files.encoding.title">Codifica dei file di partenza e dei file tradotti</title>
+
+	  <para>La maggior parte dei formati di file permette l'uso di vari tipi di codifica. Per impostazione predefinita, la codifica del file tradotto è la stessa di quella del file di partenza.</para>
+
+	  <para>I campi di codifica del file di partenza e di quello di arrivo utilizzano i menu a tendina che elencano tutte le codifiche riconosciute. Lasciare l'opzione <guilabel>&lt;auto&gt;</guilabel> permette a OmegaT di scegliere la codifica, basandosi su criteri seguenti:</para>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>OmegaT usa la dichiarazione di codifica nel file di partenza, se presente, per identificare la codifica (file basati su HTML o XML).</para>
+        </listitem>
+	  </itemizedlist>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>OmegaT è impostato per utilizzare una codifica obbligatoria per alcuni formati di file (Java properties, per esempio).</para>
+        </listitem>
+	  </itemizedlist>
+
+	  <itemizedlist>
+        <listitem>
+		  <para>OmegaT utilizza la codifica predefinita adottata dal sistema operativo per i file di solo testo.</para>
+        </listitem>
+	  </itemizedlist>
+    </section>
+
+    <section id="target.name">
+	  <title id="target.name.title">Nome del file tradotto</title>
+	  
+	  <para>I file presenti nella cartella <link linkend="project.folder.target" endterm="project.folder.target.title"/> sono sovrascritti ogni volta che vengono creati, se creati con lo stesso nome.</para>
+
+	  <para>OmegaT è in grado di creare automaticamente nuovi nomi di file, per i file creati, aggiungendo un codice linguistico o una data, per esempio.</para>
+
+	  <para>Il modello del nome del file di arrivo fa uso di una sintassi speciale. Il metodo più semplice per modificarlo è utilizzare la finestra di dialogo <guilabel>Modifica modello</guilabel>. La finestra contiene varie opzioni:</para>
+
+	  <variablelist>
+        <varlistentry>
+          <term>${filename}</term>
+          <listitem>
+			<para>È il modello predefinito. Rappresenta il nome del file completo del file di partenza, compresa l'estensione. L'uso di questo modello assegna al file tradotto lo stesso identico nome del file di partenza.</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${nameOnly}</term>
+          <listitem>
+			<para>nome del file di partenza, senza l'estensione</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${extension} </term>
+          <listitem>
+			<para>estensione del file originale</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLocale}</term>
+          <listitem>
+			<para>lingua di arrivo+codice regionale (xx_YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLanguage}</term>
+          <listitem>
+			<para>lingua di arrivo+regione (xx-YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLanguageCode}</term>
+          <listitem>
+			<para>codice della lingua di arrivo (xx)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetCountryCode}</term>
+          <listitem>
+			<para>codice regionale di arrivo (YY)</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${timestamp-????}</term>
+          <listitem>
+			<para>data e ora di sistema di creazione del file</para>
+
+			<para>Per esempi, vedere la <ulink url="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/text/SimpleDateFormat.html">documentazione Oracle</ulink>.</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-os-name}</term>
+          <listitem>
+			<para>nome del sistema operativo</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-user-name}</term>
+          <listitem>
+			<para>nome di accesso dell'utente</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${system-host-name}</term>
+          <listitem>
+			<para>nome host nel sistema</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${file-source-encoding}</term>
+          <listitem>
+			<para>codifica del file di partenza</para>
+		  </listitem>
+		</varlistentry>
+		  
+        <varlistentry>
+          <term>${file-target-encoding}</term>
+          <listitem>
+			<para>codifica del file di arrivo</para>
+          </listitem>
+		</varlistentry>
+
+        <varlistentry>
+          <term>${targetLocaleLCID}</term>
+          <listitem>
+			<para>impostazione locale di destinazione Microsoft</para>
+          </listitem>
+		</varlistentry>
+	  </variablelist>
+		
+	  <para>Per <literal>${nameOnly}</literal> e <literal>${extension}</literal> sono disponibili varianti aggiuntive.</para>
+		
+	  <para>Se l'uso di più punti rende ambigui il nome file e l'estensione, è possibile usare le variabili della forma <literal>${nameOnly-</literal><emphasis>numero</emphasis>} o <literal>${extension-</literal><emphasis>numero} </emphasis> per specificare quali porzioni sono parte del nome e quali dell'estensione, come mostrato nell'esempio sotto riportato.</para>
+
+	  <example id="target.name.example">
+		<title id="target.name.example.title">Nomi dei file di arrivo</title>
+		<para>Per un file di partenza chiamato Documento.xx.docx, l'uso delle varianti di variabile sotto indicate produrrà i risultati seguenti:</para>
+
+		<itemizedlist>
+          <listitem>
+			<para><literal>${nameOnly-0}</literal>: <filename>Documento</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${nameOnly-1}</literal>: <filename>Documento.xx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${nameOnly-2}</literal>: <filename>Documento.xx.docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-0}</literal>: <filename>docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-1}</literal>: <filename>xx.docx</filename></para>
+          </listitem>
+
+          <listitem>
+			<para><literal>${extension-2}</literal>: <filename>Documento.xx.docx</filename></para>
+          </listitem>
+		</itemizedlist>
+	  </example>
+    </section>
+  </section>
+	
+  <section id="filters.options">
+    <title id="filters.options.title">Opzioni</title>
+
+    <para>Vari filtri contengono delle opzioni. Selezionare il filtro nell'elenco e fare clic su <guibutton>Opzioni...</guibutton> per modificarli.</para>
+
+	<para>Le opzioni disponibili sono:</para>
+
+	<variablelist>
+	  <varlistentry id="file.filters.text">
+		<term id="file.filters.text.title">File di testo</term>
+		<listitem>
+		  <para>
+			<variablelist>
+			  <varlistentry>
+				<term>Crea paragrafi su:</term>
+				<listitem>
+				  <para>I file di testo non possiedono dei marcatori di paragrafo generici. Scegliere qui il modo in cui OmegaT crea i paragrafi nei file di testo.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Lunghezza riga nei file di arrivo (0 = nessun limite)</term>
+				<listitem>
+				  <para>
+					<variablelist>
+					  <varlistentry>
+						<term>Lunghezza riga</term>
+						<listitem>
+						  <para>specifica il numero massimo di caratteri prima di interrompere una riga lunga. Il valore 0 imposta a una lunghezza illimitata.</para>
+						</listitem>
+					  </varlistentry>
+
+					  <varlistentry>
+						<term>Lunghezza massima della riga</term>
+						<listitem>
+						  <para>specifica il numero massimo di caratteri prima di tagliare una riga e ignorare il resto. Il valore 0 imposta a una lunghezza illimitata.</para>
+						</listitem>
+					  </varlistentry>
+					</variablelist>
+				  </para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		</listitem>
+	  </varlistentry>
+		
+	  <varlistentry id="file.filter.microsoft">
+		<term id="file.filter.microsoft.title">File Microsoft Office Open XML</term>
+		<listitem>
+		  <warning>
+			<para><code>Microsoft Office Open XML (filtro obsoleto)</code> è il filtro OmegaT originale. Deve essere utilizzato solo nel caso in cui si lavori con progetti precedenti che contengono file gestiti con quel filtro, in modo da evitare problemi di compatibilità.</para>
+		  </warning>
+
+		  <para>È possibile scegliere gli elementi del documento aggiuntivi da tradurre. Essi appariranno come segmenti separati nell'editor.</para>
+		  <variablelist>
+			<varlistentry>
+			  <term>Word</term>
+			  <listitem>
+				<para>Testo di istruzioni non visibile, commenti, note a piè pagina, note a fine documento, piè di pagina, testo duplicato alternativo e proprietà del documento.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Excel</term>
+			  <listitem>
+				<para>Commenti, nomi dei fogli.</para>
+			  </listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>PowerPoint</term>
+				<listitem>
+				  <para>Commenti, diapositive master e layout della presentazione.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Globale</term>
+				<listitem>
+				  <para>Collegamenti esterni, grafici, diagrammi, disegni e WordArt.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Altre opzioni:</term>
+				<listitem>
+				  <variablelist>
+					<varlistentry>
+					  <term>Tag complessivi</term>
+					  <listitem>
+						<para>I tag che non racchiudono del testo traducibile verranno aggregati in un singolo tag.</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry>
+					  <term>Preserva gli spazi per tutti i tag</term>
+					  <listitem>
+						<para>Lo &quot;spazio vuoto&quot; (ossia gli spazi e le nuove righe) sarà preservato, anche se questa opzione non è definita all'interno del documento.</para>
+					  </listitem>
+					</varlistentry>
+
+					<varlistentry>
+					  <term>Inizia un nuovo paragrafo col ritorno a capo automatico</term>
+					  <listitem>
+						<para>Abilitare questa opzione se si intende utilizzare i ritorni a capo automatici come inizio di paragrafo.</para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>
+				</listitem>
+			  </varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.xhtml">
+		<term id="file.filters.xhtml.title">File XHTML</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Traduci i seguenti attributi</term>
+			  <listitem>
+				<para>Gli attributi selezionati appariranno come segmenti traducibili nel pannello dell'<guilabel>Editor</guilabel>.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Inizia un nuovo paragrafo con</term>
+			  <listitem>
+				<para>Il tag HTML &lt;br&gt; costituirà un'interruzione di paragrafo per scopi di segmentazione.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Paragrafi ignorati (espressione regolare)</term>
+			  <listitem>
+				  <para>Qualsiasi paragrafo che durante il caricamento corrisponda all'espressione regolare specificata viene ignorato e non sarà visualizzato ai fini della traduzione..</para>
+
+				  <para>Questa opzione è utile per gestire parti HTML che contengono solo testo non traducibile.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Attributo &quot;content&quot; dei tag &lt;meta&gt; ignorato</term>
+			  <listitem>
+				<para>Definisce i valori di attributo del tag &lt;meta&gt; per il quale l'attributo &quot;content&quot; associato non sarà tradotto.</para>
+
+				<para>Non aggiungere virgolette doppie e separare i valori con una virgola.</para>
+				
+				<example id="file.filters.xhtml.example">
+				  <title id="file.filters.xhtml.example.title">Ignora la parte del contenuto di &lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</title>
+				  <para>Per ignorare questo contenuto:</para>
+
+				  <para><code>&lt;meta name=&quot;robots&quot; content=&quot;index,
+				  follow&quot;&gt;</code></para>
+
+				  <para>usare:</para>
+
+				  <para><literal>name=robots</literal></para>					
+				</example>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Tag ignorati (attributo=valore)</term>
+			  <listitem>
+				<para>Definisce i valori di attributo che rendono non traducibile un tag</para>
+
+				<para>Non aggiungere virgolette doppie e separare i valori con una virgola.</para>
+
+				<example id="file.filters.xhtml.ignore.translate.no">
+				  <title id="file.filters.xhtml.ignore.translate.no.title">Ignora i tag che contengono translate=&quot;no&quot;</title>
+				  <para>Per ignorare questo contenuto:</para>
+
+				  <para><code>&lt;span translate=&quot;no&quot;&gt;Questo contenuto non è traducibile&lt;/span&gt;</code></para>
+
+				  <para>usare: <literal>translate=no</literal>.</para>
+
+				  <para>Tutti i tag che vengono contrassegnati con <code>translate=&quot;no&quot;</code> saranno ignorati.</para>
+				</example>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>File HTML e XHTML</term>
+		<listitem>
+		  <para>Qui saranno illustrate solamente le opzioni che non sono disponibili nel filtro del file XHTML (vedere sopra).</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>Modifica la dichiarazione di codifica</term>
+			  <listitem>
+				<para>La codifica di un documento HTML è in genere dichiarata all'interno di un elemento &lt;meta&gt; che si trova nell'elemento &lt;head&gt;.</para>
+
+				<para>I file di partenza e di arrivo a volte necessitano di una codifica differente.</para>
+
+				<para>Qui è possibile decidere se aggiungere o modificare la dichiarazione del file di arrivo</para>
+				
+				<itemizedlist>
+				  <listitem>
+					<para>sempre, basata sulle impostazioni del filtro dei file,</para>
+				  </listitem>
+
+				  <listitem>
+					<para>solo se il file contiene già un tag &lt;head&gt;,</para>
+				  </listitem>
+
+				  <listitem>
+					<para>solo se il file contiene già una dichiarazione,</para>
+				  </listitem>
+
+				  <listitem>
+					<para>oppure mai e salva solo il file di partenza nella codifica specificata all'interno delle impostazioni del filtro dei file.</para>
+				  </listitem>
+				</itemizedlist>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term>Comprimi lo spazio vuoto nel file tradotto</term>
+			  <listitem>
+				<para>Nel codice HTML/XHTML gli spazi vuoti al di fuori dei tag vengono considerati non significanti.</para>
+
+				<para>Questa opzione converte tali caratteri di spazio vuoto continui e multipli in uno spazio singolo all'interno documento tradotto.</para>
+			  </listitem>
+			</varlistentry>
+			<varlistentry>
+			  <term>Rimuovi i commenti HTML</term>
+			  <listitem>
+				<para>I commenti in un file HTML sono in genere indirizzati agli sviluppatori. Usare questa opzione per rimuoverli. Se disattivata, i commenti vengono visualizzati come tag.</para>
+
+				<para>Il testo nei commenti HTML (racchiuso tra <literal>&lt;!--</literal> e <literal>--&gt;</literal>) non viene copiato all'interno del documento tradotto.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.mozilla.ftl">
+		<term id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Rimuovi le stringhe non tradotte nei file di destinazione</term>
+			  <listitem>
+				<para>La presenza di contenuto non tradotto all'interno dei file tradotti a volte crea problemi di compatibilità.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.mozilla.dtd">
+		<term id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Rimuovi le stringhe non tradotte nei file di destinazione</term>
+			  <listitem>
+				  <para>La presenza di contenuto non tradotto all'interno dei file tradotti a volte crea problemi di compatibilità.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.po">
+		<term id="file.filters.po.title">File PO</term>
+		<listitem>
+			<para>Per impostazione predefinita, il filtro controlla le variabili printf ('%s', ecc.). Vedere la preferenza <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> per i dettagli.</para>
+
+			<variablelist>
+			  <varlistentry>
+				<term>Consenti segmenti di arrivo vuoti</term>
+				<listitem>
+				  <para>OmegaT riproduce sempre il contenuto di partenza quando non viene proposto un segmento. Usare questa opzione per lasciare vuoto un segmento non tradotto.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Traduci segmenti di partenza vuoti</term>
+				<listitem>
+				  <para>I segmenti di partenza vuoti a volte agiscono come segnaposto per parti che non esistono nella lingua di partenza ma sono necessari in quella di arrivo. Usare questa opzione per fornire una traduzione basata sui commenti associati.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Ignora intestazione PO</term>
+				<listitem>
+				  <para>L'intestazione PO non verrà mostrata per la traduzione.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Sostituisci automaticamente la specificazione del plurale</term>
+				<listitem>
+				  <para>Non tiene conto della specifica del plurale nell'intestazione e utilizza l'impostazione predefinita della lingua di destinazione.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Formato:</term>
+				<listitem>
+				  <variablelist>
+					<varlistentry>
+					  <term>Standard</term>
+					  <listitem>
+						<para>I file PO che usano <literal>msgid</literal> come contenitore sorgente e si aspettano che la traduzione sia inserita in <literal>msgstr</literal></para>
+					  </listitem>
+					</varlistentry>
+					
+					<varlistentry>
+					  <term>Monolingue</term>
+					  <listitem>
+						<para>I file PO che usano <literal>msgid</literal> come codice ID, usano <literal>msgstr</literal> come contenitore sorgente e si aspettano che la traduzione sovrascriva <literal>msgstr</literal></para>
+					  </listitem>
+					</varlistentry>
+				  </variablelist>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.moodle.php">
+		<term id="file.filters.moodle.php.title">Moodle PHP</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Rimuovi le stringhe non tradotte nei file di destinazione</term>
+			  <listitem>
+				<para>La presenza di contenuto non tradotto all'interno dei file tradotti a volte crea problemi di compatibilità.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filter.java.bundle">
+		<term id="file.filter.java.bundle.title">Java Resource Bundle</term>
+		<listitem>
+			<para>Il filtro controlla i modelli Java MessageFormat (per es. \{0\}) per impostazione predefinita. Vedere la preferenza <link linkend="dialogs.preferences.tag.processing.programming.variables" endterm="dialogs.preferences.tag.processing.programming.variables.title"/> per i dettagli.</para>
+
+			<variablelist>
+			  <varlistentry>
+				<term>Forza la compatibilità dei letterali Unicode con Java 8</term>
+				<listitem>
+				  <para>Java 8 richiede la codifica ISO-8859-1 e usa i letterali Unicode per i caratteri al di fuori di quel set di caratteri. Java 9, e versioni successive, richiede la codifica UTF-8. Questa opzione forza la compatibilità con Java 8.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Rimuovi le stringhe non tradotte nei file di destinazione</term>
+				<listitem>
+				  <para>La presenza di contenuto non tradotto all'interno dei file tradotti a volte crea problemi di compatibilità.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Mantieni letterali Unicode (\\uXXXX)</term>
+				<listitem>
+				  <para>Alcune applicazioni richiedono il mantenimento di alcuni letterali Unicode. Questa opzione permette di farlo.</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.odf">
+		<term id="file.filters.odf.title">File Open Document Format (ODF)</term>
+		<listitem>
+		  <variablelist>
+			<varlistentry>
+			  <term>Traduce i seguenti elementi</term>
+			  <listitem>
+				<para>Voci di indici, segnalibri, collegamenti a segnalibri, note, commenti, note di presentazione, collegamenti (URL) e nomi dei fogli.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="file.filters.xliff">
+		<term id="file.filters.xliff.title">XLIFF (filtro obsoleto)</term>
+		<listitem>
+		  <warning>
+			<para>Questo è filtro XLIFF OmegaT originale. Deve essere utilizzato solo nel caso in cui si lavori con progetti precedenti che contengono file gestiti con quel filtro, in modo da evitare problemi di compatibilità.</para>
+		  </warning>
+		  
+		  <para>
+			<variablelist>
+			  <varlistentry>
+				<term>Compatibilità con OmegaT 2.6</term>
+				<listitem>
+				  <para>Abilitare questa opzione se si ha la necessità di lavorare con file XLIFF creati con OmegaT 2.6.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Identificatore usato per le traduzioni alternative</term>
+				<listitem>
+				  <para>L'utente può scegliere da tre opzioni: paragrafi precedenti e successivi, ID &lt;trans unit&gt;, o attributo resname &lt;trans-unit&gt; se disponibile; se non disponibile, l'ID verrà usato come riserva.</para>
+				</listitem>
+			  </varlistentry>
+			  
+			  <varlistentry>
+				<term>Scorciatoie per tag</term>
+				<listitem>
+				  <para>Queste opzioni specificano il modo in cui OmegaT crea i tag dal contenuto XLIFF.</para>
+				</listitem>
+			  </varlistentry>
+
+			  <varlistentry>
+				<term>Stato del segmento di arrivo</term>
+				<listitem>
+				  <para>Se attivata, OmegaT cambia lo stato del segmento di arrivo XLIFF in “needs-review-translation” (&quot;necessita revisione traduzione&quot;) anziché “translated” (&quot;tradotto&quot;).</para>
+				</listitem>
+			  </varlistentry>
+			</variablelist>
+		  </para>
+		</listitem>
+	  </varlistentry>
+
+	</variablelist>
+  </section>
+</section>

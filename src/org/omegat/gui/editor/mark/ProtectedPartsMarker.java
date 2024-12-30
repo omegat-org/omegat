@@ -34,11 +34,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.apache.commons.text.StringEscapeUtils;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.Document3;
-import org.omegat.gui.editor.EditorController;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
@@ -50,22 +49,27 @@ import org.omegat.util.gui.Styles;
  * @author Aaron Madlon-Kay
  */
 public class ProtectedPartsMarker implements IMarker {
-    protected static final HighlightPainter PAINTER_RTL = new TransparentHighlightPainter(
-            Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), 0.2F);
-    protected static final AttributeSet ATTRIBUTES_LTR = Styles
-            .createAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), null, null, null);
+    private final HighlightPainter painterRtl;
+    private final AttributeSet attributesLtr;
+
+    public ProtectedPartsMarker() {
+        painterRtl = new TransparentHighlightPainter(
+                Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), 0.2F);
+        attributesLtr = Styles
+                .createAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), null, null, null);
+    }
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
         HighlightPainter painter;
         AttributeSet attrs;
-        if (((EditorController) Core.getEditor()).getOrientation() == Document3.ORIENTATION.ALL_LTR) {
-            attrs = ATTRIBUTES_LTR;
+        if (Core.getEditor().isOrientationAllLtr()) {
+            attrs = attributesLtr;
             painter = null;
         } else {
             attrs = null;
-            painter = PAINTER_RTL;
+            painter = painterRtl;
         }
 
         if (ste.getProtectedParts().length == 0) {

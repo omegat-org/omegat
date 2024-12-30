@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021-2022 Hiroshi Miura
+ Copyright (C) 2021-2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,6 +25,8 @@
 
 package org.omegat.util;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,6 +36,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
@@ -41,13 +44,20 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.table.AbstractTableModel;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,8 +66,6 @@ import org.apache.commons.io.FileUtils;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.preferences.view.PluginsPreferencesController;
-
 
 /**
  * Plugin installer singleton class.
@@ -66,8 +74,6 @@ import org.omegat.gui.preferences.view.PluginsPreferencesController;
  */
 public final class PluginInstaller {
 
-    private static final String PLUGIN_NAME = "Plugin-Name";
-    private static final String PLUGIN_VERSION = "Plugin-Version";
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
     private static final String LIST_URL = "https://omegat.sourceforge.io/plugins/plugins.json";
     private final ObjectMapper mapper = new ObjectMapper();
@@ -87,7 +93,7 @@ public final class PluginInstaller {
 
     public boolean install(File pluginFile, boolean background) {
         Path pluginJarFile;
-        PluginInformation info;
+        Set<PluginInformation> infoSet;
         try {
             // unpack or copy jar to temporary directory
             Path tmporaryDir = Files.createTempDirectory("omegat");
@@ -100,10 +106,14 @@ public final class PluginInstaller {
             return false;
         }
 
-        // check manifest
+        // check a manifest and retrieve a set of plugin information
         try {
-            info = parsePluginJarFileManifest(pluginJarFile.toFile()).stream().findFirst()
-                    .orElseThrow(() -> new IOException(OStrings.getString("PREFS_PLUGINS_UNKNOWN_ARCHIVE")));
+            infoSet = parsePluginJarFileManifest(pluginJarFile.toFile());
+            if (infoSet.isEmpty()) {
+                Log.logWarningRB("PREFS_PLUGINS_UNKNOWN_ARCHIVE");
+                Core.getMainWindow().displayWarningRB("PREFS_PLUGINS_UNKNOWN_ARCHIVE");
+                return false;
+            }
         } catch (IOException e) {
             // it is not a plugin jar file.
             Log.logErrorRB("PREFS_PLUGINS_INSTALLATION_FAILED", e.getLocalizedMessage());
@@ -112,16 +122,29 @@ public final class PluginInstaller {
             return false;
         }
 
-        // Get plugin name and version to be installed.
+        Map<String, PluginInformation> installed = getInstalledPlugins();
+        Set<PluginInformation> currentSet = infoSet.stream().map(PluginInformation::getClassName)
+                .map(installed::get).filter(Objects::nonNull).collect(Collectors.toSet());
+        PluginInformation info = infoSet.iterator().next();
+        // Get a plugin name and version to be installed.
         String pluginName = info.getName();
         String version = info.getVersion();
         // detect current installation
-        PluginInformation currentInfo = getInstalledPlugins().getOrDefault(info.getClassName(), null);
+        PluginInformation currentInfo = installed.getOrDefault(info.getClassName(), null);
+        String title = "";
         String message;
         if (currentInfo != null) {
-            message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
-                    currentInfo.getVersion(), version);
+            if (currentInfo.getVersion().equals(version)) {
+                title = OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION");
+                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_OVERWRITE"), pluginName,
+                        currentInfo.getVersion(), version);
+            } else {
+                title = OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_UPGRADE");
+                message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_UPGRADE"), pluginName,
+                        currentInfo.getVersion(), version);
+            }
         } else {
+            title = OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION");
             message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_INSTALL"), pluginName,
                     version);
         }
@@ -129,18 +152,40 @@ public final class PluginInstaller {
         if (background) {
             return doInstall(currentInfo, pluginJarFile.toFile());
         }
+
+        JPanel confirmPanel = new JPanel();
+        confirmPanel.setLayout(new BorderLayout());
+        JTextArea msg = new JTextArea(message);
+        msg.setEditable(false);
+        if (Math.max(installed.size(), currentSet.size()) > 1) {
+            String[] titles = {OStrings.getString("PREFS_PLUGINS_TITLE_NAME"),
+                OStrings.getString("PREFS_PLUGINS_TITLE_CURRENT_VERSION"),
+                OStrings.getString("PREFS_PLUGINS_TITLE_TARGET_VERSION")
+            };
+            JTable compareTable = new JTable();
+            compareTable.setModel(new PluginInstallerTableModel(titles, currentSet,
+                    infoSet));
+            confirmPanel.setPreferredSize(new Dimension(400, 200));
+            confirmPanel.add(compareTable.getTableHeader(), BorderLayout.NORTH);
+            confirmPanel.add(new JScrollPane(compareTable), BorderLayout.CENTER);
+            confirmPanel.add(msg, BorderLayout.SOUTH);
+        } else {
+            confirmPanel.add(msg, BorderLayout.CENTER);
+        }
+
         // confirm installation
-        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                    message,
-                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE)) {
+        if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(
+                Core.getMainWindow().getApplicationFrame(), confirmPanel, title, JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.INFORMATION_MESSAGE)) {
             if (doInstall(currentInfo, pluginJarFile.toFile())) {
+                JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
+                        OStrings.getString("PREFS_PLUGINS_INSTALLATION_SUCCEED"));
                 return true;
             }
             JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("PREFS_PLUGINS_INSTALLATION_FAILED"),
-                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"),
-                    JOptionPane.YES_OPTION, JOptionPane.ERROR_MESSAGE);
+                    OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION"), JOptionPane.YES_OPTION,
+                    JOptionPane.ERROR_MESSAGE);
         }
         return false;
     }
@@ -149,14 +194,19 @@ public final class PluginInstaller {
         try {
             if (currentInfo != null) {
                 URL url = currentInfo.getUrl();
-                File jarFile = new File(url.getPath().substring(5, url.getPath().indexOf("!")));
-                if (jarFile.getName().equals(file.getName())) {
-                    // try to override?
-                    File bakFile = new File(jarFile.getPath() + ".bak");
-                    FileUtils.moveFile(jarFile, bakFile);
-                    FileUtils.forceDeleteOnExit(bakFile);
-                } else {
-                    FileUtils.forceDeleteOnExit(jarFile);
+                if (url != null) {
+                    File jarFile = new File(url.getPath().substring(5, url.getPath().indexOf("!")));
+                    if (!jarFileInInstallDir(jarFile)) {
+                        // plugin file may be in ~/.omegat/plugins/
+                        if (jarFile.getName().equals(file.getName())) {
+                            // try to override?
+                            File bakFile = new File(jarFile.getPath() + ".bak");
+                            FileUtils.moveFile(jarFile, bakFile);
+                            FileUtils.forceDeleteOnExit(bakFile);
+                        } else {
+                            FileUtils.forceDeleteOnExit(jarFile);
+                        }
+                    }
                 }
             }
             File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
@@ -202,11 +252,29 @@ public final class PluginInstaller {
 
     /**
      * Unpack plugin file when necessary and copy it.
+     * Check if jarFile is placed in OmegaT installed system directory.
      *
-     * @param sourceFile plugin soure file to be installed (jar or zip)
-     * @param targetPath target path to be installed.
-     * @return installed plugin jar file path.
-     * @throws IOException when source file is corrupted.
+     * @param jarFile
+     *            a file determine.
+     * @return true when a file is under installed directory, otherwise return
+     *         false.
+     */
+    private static boolean jarFileInInstallDir(File jarFile) {
+        Path installDir = Paths.get(StaticUtils.installDir()).normalize();
+        Path jarPath = jarFile.toPath().normalize();
+        return jarPath.startsWith(installDir);
+    }
+
+    /**
+     * Unpack a plugin file when necessary and copy it.
+     *
+     * @param sourceFile
+     *            plugin source file to be installed (jar or zip)
+     * @param targetPath
+     *            target path to be installed.
+     * @return jar file path of installed plugin.
+     * @throws IOException
+     *             when source file is corrupted.
      */
     static Path unpackPlugin(File sourceFile, Path targetPath) throws IOException {
         Path target;
@@ -216,8 +284,9 @@ public final class PluginInstaller {
         } else if (sourceFile.getName().endsWith(".zip")) {
             try (InputStream inputStream = Files.newInputStream(sourceFile.toPath())) {
                 Predicate<String> expected = f -> f.endsWith(OConsts.JAR_EXTENSION);
-                List<String> extracted = StaticUtils.extractFromZip(inputStream, targetPath.toFile(), expected);
-                if (extracted.size() == 0) {
+                List<String> extracted = StaticUtils.extractFromZip(inputStream, targetPath.toFile(),
+                        expected);
+                if (extracted.isEmpty()) {
                     throw new FileNotFoundException("Could not extract a jar file from zip");
                 }
                 target = targetPath.resolve(extracted.get(0));
@@ -232,19 +301,24 @@ public final class PluginInstaller {
 
     /**
      * Parse Manifest from plugin jar file.
-     * @param pluginJarFile plugin jar file
+     *
+     * @param pluginJarFile
+     *            plugin jar file
      * @return PluginInformation
      */
     static Set<PluginInformation> parsePluginJarFileManifest(File pluginJarFile) throws IOException {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         URL[] urls = new URL[1];
         urls[0] = pluginJarFile.toURI().toURL();
-        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls,
-                PluginsPreferencesController.class.getClassLoader())) {
+        ClassLoader cl = ClassLoader.getSystemClassLoader();
+        try (URLClassLoader pluginsClassLoader = new URLClassLoader(urls, cl)) {
             for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
-                    .hasMoreElements(); ) {
+                    .hasMoreElements();) {
                 URL mu = mlist.nextElement();
-                pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                if (Files.isSameFile(pluginJarFile.toPath(),
+                        Paths.get(PluginUtils.getJarFileUrlFromResourceUrl(mu).getFile()))) {
+                    pluginInfo.addAll(parsePluginJarFileManifest(mu));
+                }
             }
         }
         return pluginInfo;
@@ -252,14 +326,14 @@ public final class PluginInstaller {
 
     /**
      *
-     * @param manifestUrl URL of MANIFEST.MF file
+     * @param manifestUrl
+     *            URL of MANIFEST.MF file
      * @return plugin information
      */
     static Set<PluginInformation> parsePluginJarFileManifest(URL manifestUrl) throws IOException {
         Set<PluginInformation> pluginInfo = new HashSet<>();
         try (InputStream in = manifestUrl.openStream()) {
             Manifest m = new Manifest(in);
-            Attributes mainAttrs = m.getMainAttributes();
             String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
             if (pluginClasses != null) {
                 for (String clazz : pluginClasses.split("\\s+")) {
@@ -290,7 +364,8 @@ public final class PluginInstaller {
 
     /**
      * Return installed plugins.
-     * @return Set of PluginInformation
+     *
+     * @return Map of PluginInformation
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {
         Map<String, PluginInformation> installedPlugins = new TreeMap<>();
@@ -332,5 +407,67 @@ public final class PluginInstaller {
 
     private int compareVersion(String a, String b) {
         return Version.parse(a).compareTo(Version.parse(b));
+    }
+      
+    @SuppressWarnings("serial")
+    static class PluginInstallerTableModel extends AbstractTableModel {
+
+        private final List<PluginInformation> current = new ArrayList<>();
+        private final List<PluginInformation> installer = new ArrayList<>();
+        private final List<String> classes = new ArrayList<>();
+        private final String[] titles;
+
+        PluginInstallerTableModel(String[] titles, Set<PluginInformation> current,
+                Set<PluginInformation> installer) {
+            this.titles = titles;
+            this.current.addAll(current);
+            this.installer.addAll(installer);
+            classes.addAll(
+                    current.stream().map(PluginInformation::getClassName).collect(Collectors.toList()));
+            classes.addAll(installer.stream().map(PluginInformation::getClassName)
+                    .filter(className -> current.stream().noneMatch(j -> j.getClassName().equals(className)))
+                    .collect(Collectors.toList()));
+        }
+
+        @Override
+        public String getColumnName(int index) {
+            return titles[index];
+        }
+
+        @Override
+        public int getRowCount() {
+            return classes.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return 3;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            if (rowIndex < 0) {
+                return null;
+            }
+            String target = classes.get(rowIndex);
+            if (columnIndex == 0) {
+                return installer.stream().filter(i -> i.getClassName().equals(target)).findFirst()
+                        .map(PluginInformation::getName).orElse("");
+            }
+            if (columnIndex == 1) {
+                var currentPlugin = current.stream().filter(i -> i.getClassName().equals(target)).findFirst();
+                if (currentPlugin.isPresent()) {
+                    return currentPlugin.map(PluginInformation::getVersion).filter(v -> !v.isEmpty())
+                            .orElse("N.A.");
+                } else {
+                    return "-";
+                }
+            }
+            if (columnIndex == 2) {
+                return installer.stream().filter(i -> i.getClassName().equals(target)).findFirst()
+                        .map(PluginInformation::getVersion).filter(v -> !v.isEmpty()).orElse("N.A.");
+            }
+            return null;
+        }
     }
 }

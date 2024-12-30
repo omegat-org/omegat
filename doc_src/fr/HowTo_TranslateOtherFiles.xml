@@ -28,7 +28,7 @@
 
 	  <para>Les filtres de fichiers sont associés à une liste d’extensions de fichiers. Si le format que vous souhaitez traduire est structurellement proche d’un format déjà pris en charge, il suffit d’ajouter son extension de fichier à la liste des extensions de format prises en charge ou de modifier l’extension de fichier pour qu’elle soit acceptée par le filtre de fichiers que vous souhaitez utiliser. Voir le chapitre <link linkend="file.filters" endterm="file.filters.title"/> pour en savoir plus.</para>
 		
-	  <para>Vous pouvez également utiliser la fonction de balise personnalisée d’OmegaT pour enregistrer des chaînes de caractères spécifiques à un format et faire en sorte qu’OmegaT les traite comme s’il s’agissait de balises normales. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> pour en savoir plus.</para>
+	  <para>Vous pouvez également utiliser la fonction de balise personnalisée d’OmegaT pour enregistrer des chaines de caractères spécifiques à un format et faire en sorte qu’OmegaT les traite comme s’il s’agissait de balises normales. Voir le paramètre <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/> pour en savoir plus.</para>
 	</section>
 	
 	<section id="how.to.translate.other.files.convert">

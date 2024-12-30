@@ -49,11 +49,17 @@ public class LicenseDialog extends javax.swing.JDialog {
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
+    public static final String DIALOG_NAME = "license_dialog";
+    public static final String OK_BUTTON_NAME = "license_dialog_ok_button";
+    public static final String LICENSE_TEXT_PANE_NAME = "license_dialog_license_text_pane";
 
     /** Creates new form LicenseDialog */
     public LicenseDialog(java.awt.Dialog parent) {
         super(parent, true);
         initComponents();
+        setName(DIALOG_NAME);
+        okButton.setName(OK_BUTTON_NAME);
+        licenseTextPane.setName(LICENSE_TEXT_PANE_NAME);
         setLocationRelativeTo(parent);
         licenseTextPane.setCaretPosition(0);
     }
@@ -94,7 +100,6 @@ public class LicenseDialog extends javax.swing.JDialog {
                 okButtonActionPerformed(evt);
             }
         });
-
         buttonPanel.add(okButton);
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);

@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2008 Alex Buloichik
                2013 Didier Briel
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,13 +34,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZonedDateTime;
 import java.util.Properties;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerDecorator;
+import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.util.logging.OmegaTFileHandler;
 
@@ -48,25 +54,65 @@ import org.omegat.util.logging.OmegaTFileHandler;
  *
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  */
 public final class Log {
+
+    private static final ILogger LOGGER;
+
+    // Line mark is day-of-the-year and five-character random number
+    private static final String SESSION_ID;
+    private static final ZonedDateTime SESSION_START_DATETIME;
 
     private Log() {
     }
 
-    private static final Logger LOGGER;
-
     static {
-        LOGGER = Logger.getLogger("global");
+        SESSION_ID = String.format("%05d", ThreadLocalRandom.current().nextInt(100000));
+        SESSION_START_DATETIME = ZonedDateTime.now();
+        LOGGER = LoggerFactory.getLogger(ILogger.ROOT_LOGGER_NAME,
+                OStrings.getResourceBundle());
+        init();
+    }
 
+    public static String getSessionId() {
+        return SESSION_ID;
+    }
+
+    public static ZonedDateTime getSessionStartDateTime() {
+        return SESSION_START_DATETIME;
+    }
+
+    private static void init() {
         boolean loaded = false;
-        File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
-        if (usersLogSettings.isFile() && usersLogSettings.canRead()) {
+
+        // Ask slf4j-format-jdk14 to append (KEY) to log message.
+        // When you switch to backend other than slf4j-jdk14(aka. JUL),
+        // you should set to false. Otherwise, you may get duplicated key
+        // in a message.
+        System.setProperty(LoggerDecorator.LOCALISATION_KEY_APPENDER, "true");
+
+        String customLogConfig = System.getProperty("java.util.logging.config.file");
+        if (customLogConfig != null) {
+            File customLogSettings = new File(customLogConfig);
+            if (customLogSettings.isFile() && customLogSettings.canRead()) {
+                // try to load logger settings from custom file
+                try (InputStream in = new FileInputStream(customLogSettings)) {
+                    init(in);
+                    loaded = true;
+                } catch (Exception ignored) {
+                }
+            }
+        }
+        if (!loaded) {
             // try to load logger settings from user home dir
-            try (InputStream in = new FileInputStream(usersLogSettings)) {
-                init(in);
-                loaded = true;
-            } catch (Exception e) {
+            File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
+            if (usersLogSettings.isFile() && usersLogSettings.canRead()) {
+                try (InputStream in = new FileInputStream(usersLogSettings)) {
+                    init(in);
+                    loaded = true;
+                } catch (Exception ignored) {
+                }
             }
         }
         if (!loaded) {
@@ -74,7 +120,7 @@ public final class Log {
             try (InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties")) {
                 init(in);
             } catch (IOException ex) {
-                LOGGER.log(Level.SEVERE, "Can't open file for logging", ex);
+                LOGGER.atError().setMessage("Can't open file for logging").setCause(ex).log();
             }
         }
     }
@@ -85,7 +131,7 @@ public final class Log {
      * @param in
      *            settings
      */
-    protected static void init(InputStream in) throws IOException {
+    private static void init(InputStream in) throws IOException {
         Properties props = new Properties();
         props.load(in);
         String handlers = props.getProperty("handlers");
@@ -95,8 +141,7 @@ public final class Log {
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             props.store(b, null);
             LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
-
-            Logger rootLogger = LogManager.getLogManager().getLogger("");
+            java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
 
             // remove initialized handlers
             for (Handler h : rootLogger.getHandlers()) {
@@ -135,22 +180,24 @@ public final class Log {
     }
 
     /**
-     * Compute the filename of the log file
+     * Compute the filename of the log file.
+     *
      * @return the filename of the log, or an empty string
      */
     public static String getLogFileName() {
-        Handler[] hand = LOGGER.getParent().getHandlers();
-        if (hand[1] instanceof OmegaTFileHandler) {
-            OmegaTFileHandler omegatLog = (OmegaTFileHandler) hand[1];
-            return omegatLog.getOmegaTLogFileName() + ".log";
-        } else {
-            return "";
+        java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
+        for (Handler handler : rootLogger.getHandlers()) {
+            if (handler instanceof OmegaTFileHandler) {
+                OmegaTFileHandler omegatLog = (OmegaTFileHandler) handler;
+                return omegatLog.getLogFileName();
+            }
         }
-
+        return "";
     }
 
     /**
-     * Compute the full path of the log file
+     * Compute the full path of the log file.
+     *
      * @return the full path of the log file
      */
     public static String getLogFilePath() {
@@ -166,14 +213,25 @@ public final class Log {
      *            The new level
      */
     public static void setLevel(Level level) {
-        LOGGER.setLevel(level);
+        org.slf4j.ILoggerFactory loggerFactory = org.slf4j.LoggerFactory.getILoggerFactory();
+        Class<? extends org.slf4j.ILoggerFactory> loggerFactoryClass = loggerFactory.getClass();
+        String loggerName = loggerFactoryClass.getName();
+        if (loggerName.equals("org.slf4j.jul.JDK14LoggerFactory")) {
+            // when slf4j-jdk14
+            java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
+            rootLogger.setLevel(level);
+        }
+    }
+
+    public static ILogger getLogger(final Class<?> clazz) {
+        return LoggerDecorator.deco(org.slf4j.LoggerFactory.getLogger(clazz), OStrings.getResourceBundle());
     }
 
     /**
      * Logs what otherwise would go to System.out
      */
     public static void log(String s) {
-        LOGGER.info(s);
+        LOGGER.atInfo().setMessage(s).log();
     }
 
     /**
@@ -186,26 +244,18 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.atInfo().logRB(key, parameters);
     }
 
     /**
-     * Logs an Exception or Error.
-     *
-     * To the log are written: - The class name of the Exception or Error - The
-     * message, if any - The stack trace
+     * Logs an Exception or Error. To the log are written: - The class name of
+     * the Exception or Error - The message, if any - The stack trace
      *
      * @param throwable
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LOGGER.log(Level.SEVERE, "", throwable);
+        LOGGER.atError().setMessage("").setCause(throwable).log();
     }
 
     /**
@@ -223,18 +273,12 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logWarningRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.WARNING)) {
-            LogRecord rec = new LogRecord(Level.WARNING, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.atWarn().logRB(key, parameters);
     }
 
     /**
      * Writes an info message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the info message can be localized, the info key is also logged, so
      * developers can determine what info was given by looking at the error key,
@@ -247,14 +291,8 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logInfoRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.INFO)) {
-            LogRecord rec = new LogRecord(Level.INFO, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-            }
-        }
+        LOGGER.atInfo().logRB(key, parameters);
+    }
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
@@ -271,18 +309,12 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            LOGGER.log(rec);
-        }
+        LOGGER.atError().logRB(key, parameters);
     }
 
     /**
      * Writes an error message to the log (to be retrieved from the resource
-     * bundle)
+     * bundle).
      * <p>
      * While the error message can be localized, the error key is also logged,
      * so developers can determine what error was given by looking at the error
@@ -297,18 +329,11 @@ public final class Log {
      *            StaticUtils.format.
      */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
-        if (LOGGER.isLoggable(Level.SEVERE)) {
-            LogRecord rec = new LogRecord(Level.SEVERE, key);
-            rec.setResourceBundle(OStrings.getResourceBundle());
-            rec.setParameters(parameters);
-            rec.setLoggerName(LOGGER.getName());
-            rec.setThrown(ex);
-            LOGGER.log(rec);
-        }
+        LOGGER.atError().setCause(ex).logRB(key, parameters);
     }
 
     /**
-     * Writes debug message to log (without localization)
+     * Writes a debug message to log (without localization).
      *
      * @param message
      *            message text
@@ -316,12 +341,58 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logDebug(Logger logger, String message, Object... parameters) {
+    @Deprecated
+    public static void logDebug(java.util.logging.Logger logger, String message, Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);
             rec.setParameters(parameters);
             rec.setLoggerName(logger.getName());
             logger.log(rec);
         }
+    }
+
+    /**
+     * Writes an info message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameter
+     *            Parameter for the error message.
+     */
+    public static void logInfoRB(String key, Object parameter) {
+        LOGGER.atInfo().setMessageRB(key).addArgument(parameter).log();
+    }
+
+    /**
+     * Writes an info message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     */
+    public static void logInfoRB(String key) {
+        LOGGER.atInfo().setMessageRB(key).log();
+    }
+
+    /**
+     * Writes a warning message to the log (to be retrieved from the resource
+     * bundle).
+     *
+     * @param key
+     *            The key of the error message in the resource bundle
+     * @param parameter
+     *            Parameter for the error message.
+     */
+    public static void logWarningRB(String key, Object parameter) {
+        LOGGER.atWarn().setMessageRB(key).addArgument(parameter).log();
+    }
+
+    /**
+     * Writes an error message to the log (to be retrieved from the resource
+     * bundle).
+     */
+    public static void logErrorRB(String key, Object parameter) {
+        LOGGER.atError().setMessageRB(key).addArgument(parameter).log();
     }
 }

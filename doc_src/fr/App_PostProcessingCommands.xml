@@ -10,7 +10,7 @@
 
   <section id="post.processing.commands.template.variables">
     <title id="post.processing.commands.template.variables.title">Variables de modèle  </title>
-    <para>La commande est transmise à l’exécution Java sous la forme d’une chaîne de caractères avec les valeurs du modèle développées. Tous les arguments doivent être cités, par exemple <literal>« ${fileName}  »</literal>.</para>
+    <para>La commande est transmise à l’exécution Java sous la forme d’une chaine de caractères avec les valeurs du modèle développées. Tous les arguments doivent être cités, par exemple <literal>« ${fileName}  »</literal>.</para>
 
     <para>Les variables suivantes sont toujours disponibles. Les autres éléments de la liste des modèles sont des variables d’environnement de votre système.</para>
 	
@@ -105,7 +105,7 @@
 
   <section id="post.processing.commands.linux.and.macos">
     <title id="post.processing.commands.linux.and.macos.title">Linux et macOS</title>
-    <para>Vous devez utiliser un shebang, par exemple <literal># ! /bin/bash</literal> ou <literal>#! /usr/bin/env python3</literal>. Le script doit être exécutable. Enchaîner des commandes avec <literal>&amp;&amp;</literal> ou <literal>||</literal> ou des barres verticales <literal>|</literal> ne fonctionnera pas ici.</para>
+    <para>Vous devez utiliser un shebang, par exemple <literal># ! /bin/bash</literal> ou <literal>#! /usr/bin/env python3</literal>. Le script doit être exécutable. Enchainer des commandes avec <literal>&amp;&amp;</literal> ou <literal>||</literal> ou des barres verticales <literal>|</literal> ne fonctionnera pas ici.</para>
   </section>
   
   <example id="post.processing.commands.example">

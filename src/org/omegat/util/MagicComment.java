@@ -26,7 +26,6 @@ package org.omegat.util;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -60,19 +59,20 @@ public class MagicComment {
      *  key and value: ? string w/ alphabet, number, underscore, hyphen ? ;
      * </pre>
      */
-    private static final Pattern MAGIC_COMMENT_PATTERN = Pattern.compile("(?<key>[\\w-]+)\\s*:\\s*(?<value>[\\w-]+)(?:\\s*;)?");
+    private static final Pattern MAGIC_COMMENT_PATTERN = Pattern
+            .compile("(?<key>[\\w-]+)\\s*:\\s*(?<value>[\\w-]+)(?:\\s*;)?");
 
     /**
      * Extract the first line of the file and parse with {@code #parse(String)}
      *
-     * @param file
-     * @return
-     * @throws IOException
+     * @param file target file.
+     * @return Map with magic comment database.
+     * @throws IOException when I/O error happened.
      */
-    public static Map<String, String> parse(File file) throws IOException  {
+    public static Map<String, String> parse(File file) throws IOException {
         String line;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                new BOMInputStream(new FileInputStream(file)), StandardCharsets.US_ASCII))) {
+                BOMInputStream.builder().setFile(file).get(), StandardCharsets.US_ASCII))) {
             line = reader.readLine();
         }
         if (line != null && line.startsWith("#")) {
@@ -85,11 +85,13 @@ public class MagicComment {
     /**
      * Parse magic comment
      *
-     * @param str input string.
+     * @param str
+     *            input string.
      * @return Key-Value map of String.
      */
     public static Map<String, String> parse(final String str) {
-        if (str == null || str.length() < 11) {  // minimum = "-*- a:b -*-".length()
+        // minimum = "-*- a:b -*-".length()
+        if (str == null || str.length() < 11) {
             return Collections.emptyMap();
         }
         int startMarker = str.indexOf("-*- ");

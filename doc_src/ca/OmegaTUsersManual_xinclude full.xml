@@ -6,17 +6,28 @@
 ]>
 <book lang="ca" id="book.user.manual">
   <bookinfo>
-    <title id="book.user.manual.title">OmegaT 5.8.0 - Manual d'usuari</title>
-    <pubdate>@timestamp@</pubdate>
+    <title id="book.user.manual.title">OmegaT 6.1.0 - Manual d'usuari</title>
+
+	<!-- Copyright 2002-2023
+		 - Vincent Bidaux
+		 - Didier Briel
+		 - Jean-Christophe Helary
+		 - Aaron Madlon-Kay
+		 - Maxym Mychalchuk
+		 - Marc Prior
+		 - Vito Smolej
+		 - Kerry Swatridge
+		 - Philippe Tourigny
+	-->
+
+    <!-- <pubdate>@timestamp@</pubdate> -->
 	<!-- TODO automate date insertion -->
     <abstract>
       <para>Aquest document és el manual d'usuari oficial de l'OmegaT, l'eina lliure de traducció assistida per ordinador.</para>
 
-	  <para>OmegaT's main purpose is to help you create a good translation the
-	  fastest possible by giving you access to your translation ressources in
-	  the most reliable way possible.</para>
+	  <para>La finalitat principal de l'OmegaT és ajudar-vos a crear una bona traducció el més ràpid possible donant-vos accés als vostres recursos de traducció de la manera més fiable.</para>
 
-	  <para>OmegaT is distributed under the terms of the <emphasis>GNU General Public License, version 3.0</emphasis>. La llicència us concedeix les llibertats següents:<itemizedlist id="freedoms.list">
+	  <para>L'OmegaT es distribueix sota els termes de la <emphasis>Llicència Pública General GNU, versió 3.0</emphasis>. La llicència us concedeix les llibertats següents:<itemizedlist id="freedoms.list">
 		<listitem>
 		  <para>Llibertat d'executar l'OmegaT amb qualsevol finalitat</para>
 		</listitem>
@@ -40,18 +51,18 @@
   
   <xi:include href="Introduction.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_HowTo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_EditorsPanes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Menus.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_WindowsAndDialogs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_ProjectFolder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="OmegaT5_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="OmegaT_Appendices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	           
 </book>

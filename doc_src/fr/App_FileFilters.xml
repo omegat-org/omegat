@@ -29,18 +29,18 @@
   <para>Désactivez un filtre en décochant sa case si vous préférez ne pas traduire les fichiers qui lui sont associés. Leur contenu ne sera pas affiché pour la traduction.</para>
 
   <note>
-	<para>Vous pouvez trier les filtres selon leur nom ou selon qu’ils soient activés ou non. Cliquez sur l’en-tête approprié afin de les trier par ordre croissant ou décroissant.</para>
+	<para>Vous pouvez trier les filtres selon leur nom ou selon qu’ils soient activés ou non. Cliquez sur l’entête approprié afin de les trier par ordre croissant ou décroissant.</para>
   </note>
 
-  <para>Afin de modifier les extensions de fichiers, le nom du fichier cible et les encodages liés a un filtre, sélectionnez-le dans la liste et cliquez sur le bouton <guibutton>Modifier...</guibutton>.</para>
+  <para>Afin de modifier les extensions de fichiers, le nom du fichier cible et les encodages liés a un filtre, sélectionnez-le dans la liste et cliquez sur le bouton <guibutton>Modifier…</guibutton>.</para>
 
-  <para>Certains filtres proposent un bouton <guibutton>Options...</guibutton> afin d’approfondir la personnalisation des paramètres.</para>
+  <para>Certains filtres proposent un bouton <guibutton>Options…</guibutton> afin d’approfondir la personnalisation des paramètres.</para>
 	
   <para>Cliquez sur le bouton <guibutton>Rétablir par défaut</guibutton> afin de réinitialiser les filtres de fichiers à leurs paramètres initiaux.</para>
 
   <para>Les modifications des préférences globales de filtres de fichier sont enregistrées dans <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, dans le dossier de configuration. Voir <link linkend="configuration.folder" endterm="configuration.folder.title"/> pour en savoir plus. La suppression de ce fichier réinitialise aussi les préférences de filtre.</para>
 
-  <para>Les modifications des filtres de fichiers locaux sont enregistrées dans le fichier <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/> , situé dans le dossier du projet. Voir le chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus. La suppression de ce fichier réinitialise aussi les préférences de filtre et ramène le projet aux filtres de fichiers globaux.</para>
+  <para>Les modifications des filtres de fichiers locaux sont enregistrées dans le fichier <link linkend="configuration.folder.extra.contents.filters" endterm="configuration.folder.extra.contents.filters.title"/>, situé dans le dossier du projet. Voir le chapitre <link linkend="chapter.project.folder" endterm="chapter.project.folder.title"/> pour en savoir plus. La suppression de ce fichier réinitialise aussi les préférences de filtre et ramène le projet aux filtres de fichiers globaux.</para>
 
   <section id="file.filters.general">
 	<title id="file.filters.general.title">Préférences communes</title>
@@ -82,11 +82,11 @@
   <section id="edit.filter.dialog">
     <title id="edit.filter.dialog.title">Édition</title>
 	
-    <para>Double-cliquez sur les champs modifiables afin d’effectuer des modifications simples ou cliquez sur le bouton <guibutton>Modifier...</guibutton> afin d’accéder à la boîte de dialogue de modification.</para>
+    <para>Double-cliquez sur les champs modifiables afin d’effectuer des modifications simples ou cliquez sur le bouton <guibutton>Modifier…</guibutton> afin d’accéder à la boite de dialogue de modification.</para>
 
-	<para>Afin d’ajouter un modèle de filtre, cliquez sur <guibutton>Ajouter...</guibutton> pour ouvrir une boîte de dialogue similaire.</para>
+	<para>Afin d’ajouter un modèle de filtre, cliquez sur <guibutton>Ajouter…</guibutton> pour ouvrir une boite de dialogue similaire.</para>
 
-	<para>Les deux boîtes de dialogue vous permettent de personnaliser les modèles de nom de fichier pour les fichiers source et cible associés à ce filtre, et de sélectionner leur encodage respectif.</para>
+	<para>Les deux boites de dialogue vous permettent de personnaliser les modèles de nom de fichier pour les fichiers source et cible associés à ce filtre, et de sélectionner leur encodage respectif.</para>
 
 	<para>Utilisez le menu déroulant <guilabel>Variables du nom de fichier</guilabel> afin de personnaliser le nom du fichier cible.</para>
 
@@ -142,7 +142,7 @@
 
 	  <para>OmegaT peut automatiquement créer de nouveaux noms pour les fichiers que vous créez, en y ajoutant un code de langue ou une date, par exemple.</para>
 
-	  <para>Le masque de nom de fichier cible utilise une syntaxe spéciale. La façon la plus simple de le modifier est d’utiliser la boîte de dialogue <guilabel>Modifier le Masque</guilabel>. La boîte de dialogue propose plusieurs options :</para>
+	  <para>Le masque de nom de fichier cible utilise une syntaxe spéciale. La façon la plus simple de le modifier est d’utiliser la boite de dialogue <guilabel>Modifier le Masque</guilabel>. La boite de dialogue propose plusieurs options :</para>
 
 	  <variablelist>
         <varlistentry>
@@ -286,7 +286,7 @@
   <section id="filters.options">
     <title id="filters.options.title">Options</title>
 
-    <para>Plusieurs filtres proposent des options. Sélectionnez le filtre dans la liste et cliquez sur <guibutton>Options...</guibutton> pour le modifier.</para>
+    <para>Plusieurs filtres proposent des options. Sélectionnez le filtre dans la liste et cliquez sur <guibutton>Options…</guibutton> pour le modifier.</para>
 
 	<para>Les options disponibles sont :</para>
 
@@ -337,12 +337,12 @@
 			<para>Le <code>Microsoft Office Open XML (filtre obsolète)</code> est le filtre OmegaT originel. Ne l’utilisez que pour éviter les problèmes de compatibilité avec les projets précédents contenant les fichiers que vous avez traités avec ce filtre.</para>
 		  </warning>
 
-		  <para>Vous pouvez choisir des éléments de documents supplémentaire à traduire. Ils apparaîtront en segments séparés dans l’éditeur.</para>
+		  <para>Vous pouvez choisir des éléments de documents supplémentaire à traduire. Ils apparaitront en segments séparés dans l’éditeur.</para>
 		  <variablelist>
 			<varlistentry>
 			  <term>Word</term>
 			  <listitem>
-				<para>Textes d’instruction non-visibles, commentaires, notes de bas de pages, notes de fin de document, pieds de page, texte de remplacement en double, et propriétés du document.</para>
+				<para>Textes d’instruction non visibles, commentaires, notes de bas de pages, notes de fin de document, pieds de page, texte de remplacement en double et propriétés du document.</para>
 			  </listitem>
 			</varlistentry>
 
@@ -405,7 +405,7 @@
 			<varlistentry>
 			  <term>Traduire les attributs suivants</term>
 			  <listitem>
-				<para>Les attributs sélectionnés apparaîtront en tant que segments dans l’<guilabel>Éditeur</guilabel>.</para>
+				<para>Les attributs sélectionnés apparaitront en tant que segments dans l’<guilabel>Éditeur</guilabel>.</para>
 			  </listitem>
 			</varlistentry>
 			<varlistentry>
@@ -527,7 +527,7 @@
 		<listitem>
 		  <variablelist>
 			<varlistentry>
-			  <term>Supprimer les chaînes non traduites dans les fichiers cibles</term>
+			  <term>Supprimer les chaines non traduites dans les fichiers cibles</term>
 			  <listitem>
 				<para>La présence de contenus non traduits dans les fichiers traduits crée parfois des problèmes de compatibilité.</para>
 			  </listitem>
@@ -541,7 +541,7 @@
 		<listitem>
 		  <variablelist>
 			<varlistentry>
-			  <term>Supprimer les chaînes non traduites dans les fichiers cibles</term>
+			  <term>Supprimer les chaines non traduites dans les fichiers cibles</term>
 			  <listitem>
 				  <para>La présence de contenus non traduits dans les fichiers traduits crée parfois des problèmes de compatibilité.</para>
 			  </listitem>
@@ -571,16 +571,16 @@
 			  </varlistentry>
 			  
 			  <varlistentry>
-				<term>Ignorer l’en-tête des fichiers PO</term>
+				<term>Ignorer l’entête des fichiers PO</term>
 				<listitem>
-				  <para>L’en-tête du PO ne sera pas affiché pour la traduction.</para>
+				  <para>L’entête du PO ne sera pas affiché pour la traduction.</para>
 				</listitem>
 			  </varlistentry>
 
 			  <varlistentry>
 				<term>Remplacement automatique de la spécification du pluriel.</term>
 				<listitem>
-				  <para>Remplace la spécification du pluriel dans l’en-tête et utilise la langue cible par défaut.</para>
+				  <para>Remplace la spécification du pluriel dans l’entête et utilise la langue cible par défaut.</para>
 				</listitem>
 			  </varlistentry>
 
@@ -613,7 +613,7 @@
 		<listitem>
 		  <variablelist>
 			<varlistentry>
-			  <term>Supprimer les chaînes non traduites dans les fichiers cibles</term>
+			  <term>Supprimer les chaines non traduites dans les fichiers cibles</term>
 			  <listitem>
 				<para>La présence de contenus non traduits dans les fichiers traduits crée parfois des problèmes de compatibilité.</para>
 			  </listitem>
@@ -636,7 +636,7 @@
 			  </varlistentry>
 
 			  <varlistentry>
-				<term>Supprimer les chaînes non traduites dans les fichiers cibles</term>
+				<term>Supprimer les chaines non traduites dans les fichiers cibles</term>
 				<listitem>
 				  <para>La présence de contenus non traduits dans les fichiers traduits crée parfois des problèmes de compatibilité.</para>
 				</listitem>

@@ -674,14 +674,14 @@ public class Searcher {
                                 start = end = find;
                                 while (end < origText.length()) {
                                     end++;
-                                    if (StringUtil.normalizeWidth(origText.substring(start,end)).equals(foundText)) {
+                                    if (StringUtil.normalizeWidth(origText.substring(start, end)).equals(foundText)) {
                                         found = true;
                                         break IN_LOOP;
                                     }
                                 }
                             }
                         }
-                        if (! found) {
+                        if (!found) {
                             // No way, we cannot find the match at all. Do not highlight but return true
                             break OUT_LOOP;
                         }

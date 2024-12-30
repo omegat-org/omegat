@@ -491,4 +491,20 @@ public interface IEditor {
      * Access the AutoCompleter
      */
     IAutoCompleter getAutoCompleter();
+
+    /**
+     * Ask the editor whether all LtR or not.
+     * @return true when all characters are LtR, otherwise false.
+     */
+    default boolean isOrientationAllLtr() {
+        return true;
+    }
+
+    /**
+     * Get the current position in the entity translation in the editor
+     * @return caret position.
+     */
+    default CaretPosition getCurrentPositionInEntryTranslationInEditor() {
+        return CaretPosition.startOfEntry();
+    }
 }

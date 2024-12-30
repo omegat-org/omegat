@@ -28,6 +28,7 @@
 
 package org.omegat.core.statistics;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
@@ -37,7 +38,9 @@ import java.util.Date;
 
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -130,6 +133,51 @@ public final class Statistics {
                 StandardCharsets.UTF_8)) {
             out.write(DateFormat.getInstance().format(new Date()) + "\n");
             out.write(text);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+    }
+
+    /**
+     * Write statistics to a file with the format set in the preferences.
+     *
+     * @param filename
+     * @param result
+     */
+    public static void writeStat(String dir, StatsResult result) {
+        int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
+                StatOutputFormat.getDefaultFormats());
+        for (StatOutputFormat format : StatOutputFormat.values()) {
+            if (format.isSelected(outputFormats)) {
+                writeStat(dir, result, format);
+            }
+        }
+    }
+
+    /**
+     * Write statistics to a file in specified format.
+     *
+     * @param filename
+     * @param result
+     * @param format
+     */
+    public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
+        File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+        try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile),
+                StandardCharsets.UTF_8)) {
+            switch (format) {
+            case TEXT:
+                out.write(DateFormat.getInstance().format(new Date()) + "\n");
+                out.write(result.getTextData());
+                break;
+            case XML:
+                out.write(result.getXmlData());
+                break;
+            case JSON:
+            default:
+                out.write(result.getJsonData());
+                break;
+            }
         } catch (Exception ex) {
             Log.log(ex);
         }

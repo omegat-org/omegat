@@ -5,7 +5,6 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Didier Briel
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -29,11 +28,13 @@ package org.omegat.filters3.xml.wix;
 
 import java.util.List;
 
+import org.xml.sax.Attributes;
+
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
-import org.xml.sax.Attributes;
 
 /**
  * Filter for WiX resources.
@@ -42,6 +43,16 @@ import org.xml.sax.Attributes;
  */
 public class WiXFilter extends XMLFilter {
     private String id;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(WiXFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public WiXFilter() {
         super(new WiXDialect());

@@ -1,92 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.options">
-  <title>Opzioni</title>
+  <title id="menus.options.title"><guimenu>Opzioni</guimenu></title>
 
+  <para>Questo menu permette l'accesso alle preferenze usate meno frequentemente.</para>
+  
   <variablelist>
-    <varlistentry>
-      <term>Preferenze...</term>
-
+    <varlistentry id="menus.options.preferences">
+      <term id="menus.options.preferences.title"><guimenuitem>Preferenze...</guimenuitem></term>
       <listitem>
-        <para>Apre la finestra di dialogo delle <link linkend="dialogs.preferences">Preferenxe</link>.</para>
+        <para>Apre la finestra di dialogo <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
+
+		<note>
+		  <para>In macOS, questa voce di menu si trova nel menu di <guimenu>OmegaT</guimenu>.</para>
+		</note>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Traduzione automatica</term>
-
+    <varlistentry id="menus.options.mt">
+      <term id="menus.options.mt.title"><guisubmenu>Traduzione automatica</guisubmenu></term>
       <listitem>
-        <para>Permette di attivare/disattivare gli strumenti di Traduzione automatica offerti.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.mt.automatically.fetch.translations" endterm="dialogs.preferences.mt.automatically.fetch.translations.title"/></para>
+		  </listitem>
+		</itemizedlist>
 
-        <para>Se sono selezionati più motori di traduzione automatica, viene utilizzata anche la combinazione di tasti <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> per passare da un motore all'altro e inserire l'ultima traduzione selezionata.</para>
+		<para>Permette di attivare o disattivare i motori di traduzione automatica disponibili.</para>
+
+        <para>e sono selezionati più motori di traduzione automatica, è possibile utilizzare anche la combinazione di tasti <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo> per passare da un motore all'altro e inserire l'ultima traduzione selezionata. Vedere le preferenze <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Glossario</term>
-
+    <varlistentry id="menus.options.glossary">
+      <term id="menus.options.glossary.title"><guisubmenu>Glossario</guisubmenu></term>
       <listitem>
-        <para>Selezionare <guimenuitem>Ricerca terminologica TaaS</guimenuitem> per attivare questa ricerca.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Permette di attivare o disattivare le concordanze parziali per le voci di glossario.</para>
+
+		<para>Vedere le preferenze <link linkend="dialogs.preferences.glossary" endterm="dialogs.preferences.glossary.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Dizionario</term>
-
+    <varlistentry id="menus.options.dictionary">
+      <term id="menus.options.dictionary.title"><guisubmenu>Dizionario</guisubmenu></term>
       <listitem>
-        <para>Attivare l'opzione <guimenuitem>Usa la concordanza parziale per le voci di dizionario</guimenuitem> se si desidera che i dizionari mostrino le parole contenenti la medesima radice.</para>
+		<itemizedlist>
+		  <listitem>
+			<para><link linkend="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries" endterm="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"/></para>
+		  </listitem>
+		</itemizedlist>
+
+        <para>Permette di attivare o disattivare le concordanze parziali per le voci di dizionario.</para>
+
+		<para>Vedere le preferenze <link linkend="dialogs.preferences.dictionary" endterm="dialogs.preferences.dictionary.title"/> per i dettagli.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Completamento automatico</term>
-
+    <varlistentry id="menus.options.autocompletion">
+      <term id="menus.options.autocompletion.title"><guisubmenu>Completamento automatico</guisubmenu></term>
       <listitem>
-        <para>Se l'opzione <guimenuitem>Mostra automaticamente i suggerimenti pertinenti</guimenuitem> è attivata, il completamento automatico viene avviato automaticamente digitando le prime lettere della voce di glossario tradotta, o digitando &quot;&lt;&quot; nel caso di tag.</para>
+		<para>Scelta delle varie opzioni per arrivarlo o disattivarlo. Vedere le preferenze <link linkend="dialog.preferences.auto.completion" endterm="dialog.preferences.auto.completion.title"/> per i dettagli.</para>
+	  </listitem>
+    </varlistentry>
 
-        <para>Attivare l'opzione <guimenuitem>Abilita il completamento cronologia</guimenuitem> per visualizzare le parole suggerite durante la digitazione delle loro prime lettere.</para>
+    <varlistentry id="menus.options.file.filters">
+      <term id="menus.options.file.filters.title"><guimenuitem>Filtri dei file globali...</guimenuitem></term>
+      <listitem>
+        <para>Apre le preferenze <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
 
-        <para>Attivare l'opzione <guimenuitem>Abilita la predizione cronologia</guimenuitem> per visualizzare le parole suggerite che seguono comunemente la parola che è stata appena digitata.</para>
+        <para>Usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per accedere alle preferenze del filtro dei file locale.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Filtri dei file...</term>
-
+    <varlistentry id="menus.options.segmentation">
+      <term id="menus.options.segmentation.title"><guimenuitem>Regole di segmentazione globali...</guimenuitem></term>
       <listitem>
-        <para>Apre la finestra di dialogo <link linkend="dialogs.preferences.filefilters">Filtri dei file</link> all'interno delle Preferenze.</para>
+        <para>Apre le preferenze <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
 
-        <para>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</para>
+        <para>Usare <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> per accedere alle preferenze delle regole di segmentazione locale.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Segmentazione...</term>
-
+    <varlistentry id="menus.options.editor">
+      <term id="menus.options.editor.title"><guimenuitem>Editor...</guimenuitem></term>
       <listitem>
-        <para>Apre le opzioni <link linkend="dialogs.preferences.segmentationsetup">Configura la segmentazione</link> all'interno della finestra di dialogo delle Preferenze.</para>
-
-        <para>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</para>
-
+        <para>Apre le preferenze <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Editor...</term>
-
+    <varlistentry id="menus.options.access.configuration.folder">
+      <term id="menus.options.access.configuration.folder.title"><guimenuitem>Accedi alla cartella di configurazione</guimenuitem></term>
       <listitem>
-        <para>Apre le opzioni <link linkend="dialogs.preferences.editor">Editor</link> all'interno della finestra di dialogo delle Preferenze.</para>
+        <para>Apre la cartella locale in cui sono memorizzati i file di configurazione di OmegaT.</para>
 
-        <para>Queste impostazioni si applicano al livello generale di OmegaT, ossia coinvolgono tutti i progetti.</para>
-
-      </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Accedi alla cartella di configurazione</term>
-
-      <listitem>
-        <para>Apre la cartella locale in cui sono memorizzati i file di configurazione di OmegaT (dipende dal sistema operativo utilizzato).</para>
+		<note>
+		  <para>La posizione dipende dal sistema operativo in uso e dalle opzioni di avvio. Vedere l'appendice <link linkend="configuration.folder" endterm="configuration.folder.title"/>per i dettagli.</para>
+		</note>
       </listitem>
     </varlistentry>
   </variablelist>

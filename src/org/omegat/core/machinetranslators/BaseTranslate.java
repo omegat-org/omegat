@@ -5,7 +5,7 @@
 
  Copyright (C) 2010-2015 Alex Buloichik
                2013 Didier Briel
-               2022,2023 Hiroshi Miura
+               2022-2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -183,7 +183,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      *            source text.
      * @return translated text if exists in cache, otherwise null.
      */
-    @Deprecated(since="6.1")
+    @Deprecated(since = "6.1")
     protected String getFromCache(Language sLang, Language tLang, String text) {
         return null;
     }
@@ -209,7 +209,7 @@ public abstract class BaseTranslate implements IMachineTranslation {
      *            translation.
      * @return given translation.
      */
-    @Deprecated(since="6.1")
+    @Deprecated(since = "6.1")
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
         return result;
     }

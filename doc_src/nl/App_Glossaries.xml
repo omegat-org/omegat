@@ -1,129 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.glossaries">
-  <title>Woordenlijsten</title>
+<section id="app.glossaries">
+  <title id="app.glossaries.title">Woordenlijsten</title>
 
-  <para>Woordenlijsten zijn bestanden voor terminologie. Zij kunnen handmatig worden gemaakt en bijgewerkt, of geïmporteerd vanuit andere projecten.</para>
+  <para>Woordenlijsten zijn bestanden voor terminologie, opgeslagen in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>.</para>
 
-  <para>En bepaald project mag elk aantal woordenboeken voor verwijzing hebben, maar naar slechts één woordenlijst, de standaard woordenlijst voor het project,  kan direct worden geschreven van de gebruikersinterface van OmegaT.</para>
+  <para>Elke term in een segment die een overeenkomst heeft in <emphasis>enige</emphasis> woordenlijst, wordt weergegeven in het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
 
-  <para>Ongeacht het aantal woordenlijsten in een project, zal elke term in een segment die een overeenkomst heeft in een woordenlijst, worden weergegeven in het venster Woordenlijst.</para>
+  <para>Brontermen mogen uitdrukkingen met meerdere woorden zijn.</para>
 
-  <section>
-    <title>Standaard woordenlijst</title>
+  <para>Er zijn 2 soorten woordenlijsten:</para>
 
-    <para>De standaard woordenlijst is geplaatst in de projectmap <filename>/glossary</filename> en is genaamd <filename>glossary.txt</filename>.</para>
+  <variablelist>
+	<varlistentry>
+	  <term>De woordenlijst voor het project</term>
+	  <listitem>
+		<para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> om nieuwe termen in de woordenlijst op te nemen. Het wordt om deze reden de <emphasis>beschrijfbare</emphasis> woordenlijst genoemd.</para>
+		
+		<para>Gebruik <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.access.project.contents.title" endterm="menus.project.access.project.contents.title"/> voor directe toegang ertoe. U kunt het dan openen in een tekstbewerker en het aanpassen.</para>
 
-    <para>Zijn naam en locatie kunnen worden aangepast in het dialoogvenster Projecteigenschappen, maar de extensie ervan moet zijn <filename>.txt</filename> of <filename>.utf8</filename> en de locatie ervan moet zijn opgenomen in de projectmap <filename>/glossary</filename>.</para>
+		<para>U hoeft het bestand niet vooraf voor te bereiden.</para>
 
-    <para>Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt bij het toevoegen van het eerste item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en codering UTF-8 zijn.</para>
+		<para>Het zal worden gemaakt als u voor de eerste keer een item aan de woordenlijst toevoegt.</para>
+
+		<note>
+          <para>Als u ervoor kiest een bestaand bestand als de standaard woordenlijst te gebruiken, zullen alle nieuwe items standaard worden opgenomen in de indeling tab-gescheiden en opgeslagen in UTF-8.</para>
+
+		  <para>Als u een andere codering wilt specificeren, kunt u dat doen door een “magische” opmerking in de volgende vorm op te nemen:</para>
+
+		  <simplelist>
+            <member>
+              <code># -*- coding: &lt;charset&gt; -*-</code>,
+            </member>
+          </simplelist>
+		  
+          <para>waar <parameter>&lt;charset&gt;</parameter> gewoonlijk een van de lijsten is die is vermeld in de <ulink url="https://www.iana.org/assignments/character-sets/character-sets.xhtml">IANA Charset Registry</ulink>.</para>
+		</note>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term>Woordenlijst voor verwijzingen</term>
+	  <listitem>
+		<para>Zij zijn terminologie-bestanden in een indeling die wordt herkend door OmegaT. U kunt ze niet aanpassen vanuit de interface van OmegaT zoals de woordenlijst voor het project, maar u kunt dat doen in een tekstbewerker.</para>
+	  </listitem>
+	</varlistentry>
+  </variablelist>
+
+  <note>
+	<para>Aanpassingen in een woordenlijst worden onmiddellijk herkend door OmegaT en weergegeven in het venster <link linkend="panes.glossary" endterm="panes.glossary.title"/>.</para>
+  </note>
+
+  <section id="glossaries.glossary.folder">
+    <title id="glossaries.glossary.folder.title">De map voor woordenlijsten</title>
+
+    <para>Standaard bevat elk project een map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> om de beschrijfbare woordenlijst in te plaatsen en andere woordenlijsten voor verwijzing die u wilt toevoegen aan het project. Bekijk de projecteigenschap <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> voor details.</para>
+
+    <para>Alle woordenlijst moeten zijn geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>. Woordenlijsten die zijn geplaatst in geneste mappen worden ook herkend.</para>
+
+    <para>Binnen die map voor woordenlijsten ter verwijzing kunt u meerdere submappen voor terminologie maken, gerangschikt op onderwerp, cliënt of elke andere categorie die geschikt is voor uw werkstroom.</para>
+    <para>Gebruik de <link linkend="dialogs.project.properties.file.locations.glossaries" endterm="dialogs.project.properties.file.locations.glossaries.title"/> projecteigenschap om de locatie van de map voor woordenlijsten in te stellen. Deze map mag buiten het project worden ingesteld, wat u in staat stelt het te gebruiken, of een van de specifieke submappen, in andere projecten.</para>
   </section>
 
-  <section>
-    <title>Gebruik</title>
+  <section id="glossaries.default.glossary">
+    <title id="glossaries.default.glossary.title">De woordenlijst voor het project</title>
 
-    <para>Plaats een bestaande woordenlijst eenvoudigweg in de map <filename>/glossary</filename>, na het maken van het project, om die te gebruiken. <application>OmegaT</application> detecteert automatisch woordenlijstbestanden in deze map als een project wordt geopend.</para>
+    <para>De beschrijfbare woordenlijst is standaard geplaatst in de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> en is genaamd <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>.</para>
 
-    <para>Gebruik <guimenuitem>Bewerken</guimenuitem> &gt; <guimenuitem>Item voor woordenlijst maken</guimenuitem> (<keycap>Ctrl+Shift+G</keycap>) om een nieuwe term toe te voegen aan de beschrijfbare woordenlijst. Nieuw toegevoegde termen zullen onmiddellijk worden herkend. Bewerk, om nieuwe termen toe te voegen aan woordenlijsten voor verwijzing, ze in een externe tekstbewerker. Nieuw toegevoegde termen worden herkend zodra de wijzigingen zijn opgeslagen.</para>
-
-    <para>De bronterm mag een term met meerdere woorden zijn.</para>
-
-    <para>De functie Woordenlijst gebruikt stemmen om overeenkomsten te zoeken. Deactiveer <guimenuitem>Stemmen voor Items van woordenlijst gebruiken</guimenuitem> in de globale voorkeuren voor OmegaT om alleen exacte overeenkomsten te zoeken voor een term.</para>
-
-    <para>De bronterm wordt weergegeven voor het teken &quot; = &quot; en de doeltermen erachter. Opmerkingen worden weergegeven met een nummer en elk op een afzonderlijke regel. Termen uit de beschrijfbare woordenlijst voor het project worden vet weergegeven. Termen uit de woordenlijsten voor verwijzingen worden normaal weergegeven.</para>
-
-    <para>Druk op de van het besturingssysteem afhankelijke toets (<keycap>Escape</keycap> voor macOS, <keycap>Ctrl+Spatie</keycap> voor de andere platformen) om het contextmenu voor <guimenuitem>Auto-aanvullen</guimenuitem> voor de overeenkomsten van de woordenlijst weer te geven.</para>
-
-    <para>Gebruik, om overeenkomende termen in het brongedeelte van het segment te onderstrepen, <guimenuitem>Weergave</guimenuitem> &gt; <guimenuitem>Overeenkomsten woordenlijst markeren</guimenuitem>. Klik met rechts op de onderstreepte term en selecteer een doelterm om die in te voegen op de locatie van de cursor in het doelgedeelte van het segment.</para>
+    <para>U kunt de naam en de locatie ervan wijzigen in het dialoogvenster <link linkend="dialogs.project.properties.file.locations.writable.glossary" endterm="dialogs.project.properties.file.locations.writable.glossary.title"/>, maar u moet het een extensie <filename>.txt</filename> of <filename>.utf8</filename> geven, en het opslaan binnen de map <link linkend="project.folder.glossary" endterm="project.folder.glossary.title"/> of in één van diens submappen.</para>
   </section>
 
-  <section>
-    <title>Bestandsindeling</title>
+  <section id="glossaries.fileformat">
+    <title id="glossaries.fileformat.title">Bestandsindeling</title>
 
     <para>Bestanden voor woordenlijsten in OmegaT zijn eenvoudige platte tekst lijsten met drie kolommen, met de bronterm in de eerste kolom, een optionele doelterm in de tweede kolom en een optionele opmerking in de derde kolom.</para>
 
-    <para>Platte tekst-woordenlijsten mogen &quot;tab gescheiden waarden&quot; (TSV)-bestanden of &quot;komma gescheiden waarden&quot; (CSV)-bestanden zijn. Een derde mogelijk indeling is de &quot;TBX&quot; (TermBase eXchange) ISO-standaard.</para>
+    <para>Woordenlijsten mogen &quot;tab gescheiden waarden&quot; (TSV)-bestanden of &quot;komma gescheiden waarden&quot; (CSV)-bestanden zijn of mogen de indeling TermBase eXchange (TBX 2) gebruiken.</para>
 
-    <para>D standaard beschrijfbare woordenlijst voor het project is altijd een TSV-bestand, opgeslagen in codering UTF-8.</para>
+    <para>Een beschrijfbare woordenlijst die is gemaakt voor het project door OmegaT zal altijd een TSV-bestand zijn dat is opgeslagen in UTF-8. Door gebruikers gemaakte bestanden die alleen Latijns tekens bevatten kunnen worden herkend en behandeld als ISO-8859-1 als zij geen niet-ASCII-tekens bevatten of andere tekens die worden geïnterpreteerd als UTF-8.</para>
 
-    <para>Woordenlijsten worden gelezen in een codering die afhankelijk is van de bestandsextensie:</para>
+    <para>De codering die wordt gebruikt voor het lezen van woordenlijsten voor verwijzing is afhankelijk van hun bestandsextensie:</para>
 
-    <table xml:id="glossary.extensions">
-      <caption>Indeling, extensies en verwachte codering</caption>
-
+    <table id="glossary.extensions">
+      <title>Indeling, extensies en verwachte codering</title>
+	  <tgroup cols="3">
       <thead>
-        <tr>
-          <td>Indeling</td> <td>Extensie</td> <td>Codering</td>
-        </tr>
+        <row>
+          <entry>Indeling</entry>
+
+          <entry>Extensie</entry>
+
+          <entry>Codering</entry>
+        </row>
       </thead>
 
       <tbody>
-        <tr> <td>TSV</td> <td> <filename>.txt</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.utf8</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TSV</td> <td> <filename>.tab</filename> </td> <td>standaard codering besturingssysteem</td> </tr> <tr> <td>TSV</td> <td> <filename>.tsv</filename> </td> <td>standaard codering besturingssysteemg</td> </tr> <tr> <td>CSV</td> <td> <filename>.csv</filename> </td> <td>UTF-8</td> </tr> <tr> <td>TBX</td> <td> <filename>.tbx</filename> </td> <td>UTF-8</td> </tr>
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.txt</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.utf8</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tab</filename>
+          </entry>
+
+          <entry>standaard codering besturingssysteem</entry>
+        </row>
+
+        <row>
+          <entry>TSV</entry>
+
+          <entry>
+            <filename>.tsv</filename>
+          </entry>
+
+          <entry>standaard codering besturingssysteem</entry>
+        </row>
+
+        <row>
+          <entry>CSV</entry>
+
+          <entry>
+            <filename>.csv</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
+
+        <row>
+          <entry>TBX</entry>
+
+          <entry>
+            <filename>.tbx</filename>
+          </entry>
+
+          <entry>UTF-8</entry>
+        </row>
       </tbody>
+      </tgroup>
     </table>
-
-    <para>Woordenlijsten moeten zijn geplaatst in de projectmap <filename>/glossary</filename>. Woordenlijsten die zijn geplaatst in geneste mappen worden ook herkend.</para>
   </section>
-
-  <section>
-    <title>Algemene problemen met woordenlijsten</title>
-
-    <para><emphasis role="bold">Probleem: Er worden geen items van de woordenlijst weergegeven - mogelijke oorzaken:</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Geen bestand met woordenlijst gevonden in de map &quot;glossary&quot;.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Het bestand met de woordenlijst is leeg.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>De items worden niet gescheiden door een TAB-teken.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Het bestand met de woordenlijst heeft niet de juiste extensie (.tab, .utf8 of .txt).</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Er bestaat geen EXACTE overeenkomst tussen het item in de woordenlijst en de brontekst in uw document - bijvoorbeeld als het item meervoud is.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Het bestand met de woordenlijst heeft niet de juiste codering.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Er staan in het huidige segment geen termen die overeenkomen met enige term in de woordenlijst.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Eén of meer van bovenstaande problemen kan zijn gerepareerd, maar het project werd nog niet herladen.</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">Probleem: In het venster Woordenlijst worden sommige tekens niet juist weergegeven</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>...maar dezelfde tekens worden wel goed weergegeven in het venster Bewerken: de extensie en de codering van het bestand komen niet overeen.</para>
-      </listitem>
-    </itemizedlist>
-  </section>
-</appendix>
+</section>

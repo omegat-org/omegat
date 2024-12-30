@@ -40,8 +40,8 @@ import org.omegat.util.Language;
 
 public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
 
-    private final static String TEST_DATA1 = "test/data/filters/openXML/file-OpenXMLFilter.docx";
-    private final static String TEST_DATA2 = "test/data/filters/openXML/file-OpenXMLFilter-tables.docx";
+    private static final String TEST_DATA1 = "test/data/filters/openXML/file-OpenXMLFilter.docx";
+    private static final String TEST_DATA2 = "test/data/filters/openXML/file-OpenXMLFilter-tables.docx";
 
     @Test
     public void testParse() throws Exception {

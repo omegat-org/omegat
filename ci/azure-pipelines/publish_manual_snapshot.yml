@@ -1,0 +1,16 @@
+parameters:
+  condition: false
+
+steps:
+  - task: Bash@3
+    displayName: 📂 SCP upload to sourceforge file management
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "Push manuals to sourceforge project web"
+        srcdir=$(system.defaultworkingdirectory)/build/docs/manual/
+        dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
+        destdir=/home/project-web/omegat/htdocs/manual-snapshot/
+        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
+        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -r -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir

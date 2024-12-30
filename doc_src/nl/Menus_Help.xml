@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.help">
-  <title>Help</title>
+  <title id="menus.help.title"><guimenu>Help</guimenu></title>
+
+  <para>Dit menu geeft u toegang tot informatie die u kan helpen het beste uit OmegaT te halen.</para>
 
   <variablelist>
-    <varlistentry>
-      <term>Gebruikershandleiding…</term>
-
+    <varlistentry id="menus.help.user.manual">
+      <term id="menus.help.user.manual.title"><guimenuitem>Gebruikershandleiding…</guimenuitem> <keycombo><keycap>F1</keycap></keycombo></term>
       <listitem>
-        <para>Opent de standaard browser met deze handleiding.</para>
-      </listitem>
+        <para>Opent de handleiding in de standaard browser.</para>
+    </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Over…</term>
-
+    <varlistentry id="menus.help.about">
+      <term id="menus.help.about.title"><guimenuitem>Over…</guimenuitem></term>
       <listitem>
         <para>Geeft auteursrechten, dankwoorden en licentie-informatie weer.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Laatste wijzigingen…</term>
-
+    <varlistentry id="menus.help.last.changes">
+      <term id="menus.help.last.changes.title"><guimenuitem>Laatste wijzigingen…</guimenuitem></term>
       <listitem>
         <para>Geeft de lijst met nieuwe functionaliteiten, verbeteringen en opgeloste problemen weer voor elke nieuwe uitgave.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Log…</term>
-
+    <varlistentry id="menus.help.log">
+      <term id="menus.help.log.title"><guimenuitem>Log…</guimenuitem></term>
       <listitem>
-        <para>Geeft het huidige logbestand weer. De titel van het dialoogvenster reflecteert het feitelijk gebruikte bestand (wat afhankelijk is van hoeveel instanties van OmegaT tegelijkertijd worden uitgevoerd).</para>
+        <para>Geeft het huidige logbestand weer. De titel van het dialoogvenster reflecteert het momenteel in gebruik zijnde bestand (wat afhankelijk is van hoeveel instanties van OmegaT tegelijkertijd worden uitgevoerd).</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Controleren op updates…</term>
-
+    <varlistentry id="menus.help.check.for.updates">
+      <term id="menus.help.check.for.updates.title"><guimenuitem>Controleren op updates…</guimenuitem></term>
       <listitem>
-        <para>Controleert of er een meer recente versie van <application>OmegaT</application> is uitgegeven.</para>
+        <para>Controleert of er een nieuwere versie van OmegaT beschikbaar is.</para>
       </listitem>
     </varlistentry>
   </variablelist>

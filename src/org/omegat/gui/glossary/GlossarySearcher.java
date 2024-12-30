@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,6 +26,7 @@
 
 package org.omegat.gui.glossary;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -49,15 +51,23 @@ import org.omegat.util.Token;
  * A class encapsulating glossary matching logic.
  *
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  */
 public class GlossarySearcher {
     private final ITokenizer tok;
-    private final Language lang;
+    private final Language srcLang;
+    private final Language targetLang;
     private final boolean mergeAltDefinitions;
 
-    public GlossarySearcher(ITokenizer tok, Language lang, boolean mergeAltDefinitions) {
+    public GlossarySearcher(ITokenizer tok, Language srcLang, boolean mergeAltDefinitions) {
+        this(tok, srcLang, Core.getProject().getProjectProperties().getTargetLanguage(), mergeAltDefinitions);
+    }
+
+    public GlossarySearcher(ITokenizer tok, Language srcLang, Language targetLang,
+            boolean mergeAltDefinitions) {
         this.tok = tok;
-        this.lang = lang;
+        this.srcLang = srcLang;
+        this.targetLang = targetLang;
         this.mergeAltDefinitions = mergeAltDefinitions;
     }
 
@@ -66,7 +76,8 @@ public class GlossarySearcher {
         List<GlossaryEntry> result = new ArrayList<>();
 
         // Compute source entry tokens
-        Token[] strTokens = tokenize(ste.getSrcText(), TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
+        Token[] strTokens = tokenize(ste.getSrcText(),
+                TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
 
         for (GlossaryEntry glosEntry : entries) {
             checkCancelled();
@@ -79,17 +90,21 @@ public class GlossarySearcher {
         // After the matched entries have been tokenized and listed,
         // we reorder entries as
         // 1) by priority
-        // 2) by alphabet of source term
-        // 3) by length of localized term (optional)
-        // 4) by alphabet of localized term
+        // 2) by length of source text if one contains another (optional)
+        // 3) by alphabet of source term
+        // 4) by length of localized term (optional)
+        // 5) by alphabet of localized term
         // Then remove the duplicates and combine the synonyms.
-        sortGlossaryEntries(result);
+        final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
+        final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
+        sortGlossaryEntries(srcLangCollator, targetLangCollator, result);
         return filterGlossary(result, mergeAltDefinitions);
     }
 
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
         // Compute source entry tokens
-        Token[] strTokens = tokenize(ste.getSrcText(), TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
+        Token[] strTokens = tokenize(ste.getSrcText(),
+                TagUtil.buildTagList(ste.getSrcText(), ste.getProtectedParts()));
 
         List<Token[]> toks = getMatchingTokens(strTokens, ste.getSrcText(), entry.getSrcText());
         if (toks.isEmpty()) {
@@ -116,7 +131,8 @@ public class GlossarySearcher {
     }
 
     /**
-     * Override this to throw an exception (that you will catch) to abort matching.
+     * Override this to throw an exception (that you will catch) to abort
+     * matching.
      */
     protected void checkCancelled() {
     }
@@ -150,7 +166,7 @@ public class GlossarySearcher {
 
     private static boolean rawMatch(Token[] tokens, String srcTxt, String term) {
         for (Token token : tokens) {
-            if (token.getTextFromString(srcTxt).equals(term.substring(token.getLength()))) {
+            if (term.contains(token.getTextFromString(srcTxt))) {
                 return true;
             }
         }
@@ -158,7 +174,8 @@ public class GlossarySearcher {
     }
 
     private static boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {
-        // Filter out matches where the glossary entry is all caps but the source-text match is not.
+        // Filter out matches where the glossary entry is all caps but the
+        // source-text match is not.
         if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
                 Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT) && StringUtil.isUpperCase(locTxt)) {
             for (Token tok : tokens) {
@@ -172,18 +189,20 @@ public class GlossarySearcher {
     }
 
     protected static boolean isCjkMatch(String fullText, String term) {
-        // This is a CJK word and our source language is not space-delimited, so include if
-        // word appears anywhere in source string.
+        // This is a CJK word and our source language is not space-delimited, so
+        // include if word appears anywhere in source string.
         IProject project = Core.getProject();
-        return project.isProjectLoaded() && !project.getProjectProperties().getSourceLanguage().isSpaceDelimited()
+        return project.isProjectLoaded()
+                && !project.getProjectProperties().getSourceLanguage().isSpaceDelimited()
                 && StringUtil.isCJK(term) && fullText.contains(term);
     }
 
     private static List<Token[]> getCjkMatchingTokens(String fullText, String term) {
-        // This is a CJK word and our source language is not space-delimited, so include if
-        // word appears anywhere in source string.
+        // This is a CJK word and our source language is not space-delimited, so
+        // include if word appears anywhere in source string.
         IProject project = Core.getProject();
-        if (!project.isProjectLoaded() || project.getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
+        if (!project.isProjectLoaded()
+                || project.getProjectProperties().getSourceLanguage().isSpaceDelimited()) {
             return Collections.emptyList();
         }
         if (!StringUtil.isCJK(term)) {
@@ -203,8 +222,9 @@ public class GlossarySearcher {
 
     private Token[] tokenize(String str) {
         // Make comparison case-insensitive
-        String strLower = str.toLowerCase(lang.getLocale());
-        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING, Preferences.GLOSSARY_STEMMING_DEFAULT)) {
+        String strLower = str.toLowerCase(srcLang.getLocale());
+        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
+                Preferences.GLOSSARY_STEMMING_DEFAULT)) {
             return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
         } else {
             return tok.tokenizeVerbatim(strLower);
@@ -227,36 +247,80 @@ public class GlossarySearcher {
 
     private static boolean tokenInTag(Token tok, List<Tag> tags) {
         for (Tag tag : tags) {
-            if (tok.getOffset() >= tag.pos && tok.getOffset() + tok.getLength() <= tag.pos + tag.tag.length()) {
+            if (tok.getOffset() >= tag.pos
+                    && tok.getOffset() + tok.getLength() <= tag.pos + tag.tag.length()) {
                 return true;
             }
         }
         return false;
     }
 
-    static void sortGlossaryEntries(List<GlossaryEntry> entries) {
+    /**
+     * sort glossary entries for test.
+     * 
+     * @param entries
+     */
+    void sortGlossaryEntries(List<GlossaryEntry> entries) {
+        final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
+        final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
+        sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
+    }
+
+    private void sortGlossaryEntries(Collator srcLangCollator, Collator targetLangCollator,
+            List<GlossaryEntry> entries) {
         entries.sort((o1, o2) -> {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
-            if (c == 0) {
-                c = o1.getSrcText().compareToIgnoreCase(o2.getSrcText());
+            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false)
+                    && (o2.getSrcText().startsWith(o1.getSrcText())
+                            || o1.getSrcText().startsWith(o2.getSrcText()))) {
+                // longer is better if one source term starts with another
+                c = o2.getSrcText().length() - o1.getSrcText().length();
             }
+            // sort source text alphabetically.
+            // Notion of alphabetical order is language-dependent
             if (c == 0) {
-                c = o1.getSrcText().compareTo(o2.getSrcText());
+                c = compareLanguageDependent(srcLangCollator, o1.getSrcText(), o2.getSrcText());
             }
-            if (c == 0 && Preferences.isPreferenceDefault(
-                    Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
+            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
                 c = o2.getLocText().length() - o1.getLocText().length();
             }
             if (c == 0) {
-                c = o1.getLocText().compareToIgnoreCase(o2.getLocText());
+                c = compareLanguageDependent(targetLangCollator, o1.getLocText(), o2.getLocText());
             }
             return c;
         });
     }
 
-    private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result, boolean mergeAltDefinitions) {
+    private int compareLanguageDependent(Collator langCollator, String s1, String s2) {
+        // Use primary criteria - for most languages written with latin
+        // alphabet, PRIMARY means case-insensitive
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+        langCollator.setStrength(Collator.PRIMARY);
+        int c = langCollator.compare(s1, s2);
+        if (c != 0) {
+            return c;
+        }
+        // Use secondary criteria - for most languages written with latin
+        // alphabet, SECONDARY means ignore accents
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+        langCollator.setStrength(Collator.SECONDARY);
+        c = langCollator.compare(s1, s2);
+        if (c != 0) {
+            return c;
+        }
+        // Use tertiary criteria - language-dependent
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#TERTIARY)
+        langCollator.setStrength(Collator.TERTIARY);
+        return langCollator.compare(s1, s2);
+    }
+
+    private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result,
+            boolean mergeAltDefinitions) {
         // First check that entries exist in the list.
         if (result.isEmpty()) {
             return result;
@@ -389,9 +453,9 @@ public class GlossarySearcher {
                 priorities[j] = prios.get(j);
             }
 
-            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxts.toArray(new String[locTxts.size()]),
-                    comTxts.toArray(new String[comTxts.size()]), priorities,
-                    origins.toArray(new String[origins.size()]));
+            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt,
+                    locTxts.toArray(new String[locTxts.size()]), comTxts.toArray(new String[comTxts.size()]),
+                    priorities, origins.toArray(new String[origins.size()]));
             returnList.add(combineEntry);
         }
         return returnList;

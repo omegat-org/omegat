@@ -29,6 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.xmlunit.assertj3.XmlAssert.assertThat;
 
 import java.io.File;
 import java.net.URL;
@@ -40,12 +41,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.custommonkey.xmlunit.XMLAssert;
-import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.InputSource;
 
 import org.omegat.core.data.ProjectException;
 import org.omegat.core.data.ProjectProperties;
@@ -55,6 +53,11 @@ import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import gen.core.project.Omegat;
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
+import org.xmlunit.diff.DefaultNodeMatcher;
+import org.xmlunit.diff.ElementSelectors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 public class ProjectFileStorageTest {
 
@@ -68,9 +71,6 @@ public class ProjectFileStorageTest {
         tempDir = Files.createTempDirectory("omegat").toFile().getAbsoluteFile();
         assertTrue(tempDir.isDirectory());
         TestPreferencesInitializer.init(tempDir.getPath());
-        XMLUnit.setIgnoreWhitespace(true);
-        XMLUnit.setIgnoreAttributeOrder(true);
-        XMLUnit.setIgnoreComments(true);
 
     }
 
@@ -499,8 +499,16 @@ public class ProjectFileStorageTest {
     protected void compareXML(File f1, File f2) throws Exception {
         compareXML(f1.toURI().toURL(), f2.toURI().toURL());
     }
-
     protected void compareXML(URL f1, URL f2) throws Exception {
-        XMLAssert.assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        var doc1 = builder.parse(f1.toExternalForm());
+        var doc2 = builder.parse(f2.toExternalForm());
+        assertThat(doc1).and(doc2)
+                .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+                .ignoreWhitespace()
+                .ignoreComments()
+                .ignoreChildNodesOrder()
+                .areIdentical();
     }
 }

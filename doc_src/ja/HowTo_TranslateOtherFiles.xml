@@ -28,7 +28,7 @@
 
 	  <para>ファイルフィルターは、それぞれ関連付けるファイル拡張子のリストを持っています。翻訳したいファイル形式がサポートのあるファイル形式に構造的に近い場合は、対応するファイルフィルターの拡張子のリストにそのファイル拡張子を追加するか、そのファイルフィルターで受け入れられる拡張子に変更します。詳細については-<link linkend="file.filters" endterm="file.filters.title"/>を参照してください。</para>
 		
-	  <para>また、OmegaTのカスタムタグ機能を使用して書式固有の文字列を登録し、OmegaTに通常のタグと同じように処理させることもできます。詳細については、設定-<link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>を参照してください。</para>
+	  <para>また、OmegaTのカスタムタグ機能を使用して書式固有の文字列を登録し、OmegaTに通常のタグと同じように処理させることもできます。詳細については、<link linkend="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags" endterm="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"/>環境設定を参照してください。</para>
 	</section>
 	
 	<section id="how.to.translate.other.files.convert">

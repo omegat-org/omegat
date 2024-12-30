@@ -38,12 +38,8 @@
     </listitem>
 
     <listitem>
-        <para><guibutton>Show replacements</guibutton> filters the entries in
-        the Editor and highlight the parts that will be replaced.</para>
-		<para>Click the <guibutton>Replace and Find Next</guibutton> or
-		<guibutton>Find Next</guibutton> button, and click the
-		<guibutton>Finish</guibutton> button to end the replacement
-		operation.</para>
+        <para><guibutton>Mostra les substitucions</guibutton> filtra les entrades en la subfinestra «Editor» i ressalta les parts que se substituiran.</para>
+		<para>Feu clic en el botó <guibutton>Substitueix i cerca el següent</guibutton> o <guibutton>Cerca el següent</guibutton> i feu clic en el botó <guibutton>Finalitza</guibutton> per a finalitzar l'operació de substitució.</para>
     </listitem>
   </itemizedlist>
 

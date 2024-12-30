@@ -241,7 +241,7 @@
 			</listitem>
 			
 			<listitem>
-			  <para>Sélectionnez <guilabel>M’avertir lorsqu’un segment comporte des...</guilabel> (où ... varie en fonction du volet pour lequel vous activez les notifications).</para>
+			  <para>Sélectionnez <guilabel>M’avertir lorsqu’un segment comporte des…</guilabel> (où … varie en fonction du volet pour lequel vous activez les notifications).</para>
 			</listitem>
 		  </itemizedlist>
 
@@ -277,9 +277,9 @@
 
 			  <para>Le volet <guilabel>Propriétés du segment</guilabel> permet de définir les paramètres de notification pour chacun de ses éléments.</para>
 
-			  <para>Dans <guilabel>Affichage tabulaire</guilabel>, faites un clic droit sur l’élément et sélectionnez <guilabel>M’avertir lorsq’un segment comporte...</guilabel> (où ... varie en fonction de la notification choisie).</para>
+			  <para>Dans <guilabel>Affichage tabulaire</guilabel>, faites un clic droit sur l’élément et sélectionnez <guilabel>M’avertir lorsq’un segment comporte…</guilabel> (où … varie en fonction de la notification choisie).</para>
 
-			  <para>Dans <guilabel>Affichage liste</guilabel>, faites un clic droit sur le widget <guilabel>Actions et paramètres</guilabel> à droite de la ligne de propriété choisie et sélectionnez <guilabel>M’avertir lorsqu’un segment comporte...</guilabel> (où ... varie en fonction de la notification choisie). </para>
+			  <para>Dans <guilabel>Affichage liste</guilabel>, faites un clic droit sur le widget <guilabel>Actions et paramètres</guilabel> à droite de la ligne de propriété choisie et sélectionnez <guilabel>M’avertir lorsqu’un segment comporte…</guilabel> (où … varie en fonction de la notification choisie). </para>
 			</listitem>
 		  </itemizedlist>
 		</listitem>
@@ -486,7 +486,7 @@ Lorsque cette option est activée, toutes les mises en forme des segments source
 			</listitem>
           </itemizedlist>
 
-		  <para>Vous pouvez également faire apparaître le menu en cliquant avec le bouton droit de la souris (<keycap>C</keycap> + <keycap>clic</keycap> sur macOS).</para>
+		  <para>Vous pouvez également faire apparaitre le menu en cliquant avec le bouton droit de la souris (<keycap>C</keycap> + <keycap>clic</keycap> sur macOS).</para>
 
           <para>Le menu contextuel du volet éditeur offre diverses fonctions disponibles à partir du menu <link endterm="menus.edit.title" linkend="menus.edit"/>, notamment :</para>
 
@@ -658,7 +658,7 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>Le champ de commentaire d’une entrée peut contenir des hyperliens sur lesquels il est possible de cliquer pour obtenir des références supplémentaires.</para>
 
-	<para>Les liens vers des fichiers locaux (<filename>file:///PATH/filename</filename>) s’ouvrent dans le programme associé. Les adresses Web (<filename>https://...</filename>) s’ouvrent dans le navigateur par défaut.</para>
+	<para>Les liens vers des fichiers locaux (<filename>file:///PATH/filename</filename>) s’ouvrent dans le programme associé. Les adresses Web (<filename>https://…</filename>) s’ouvrent dans le navigateur par défaut.</para>
 
     <para>Vous pouvez sélectionner un terme dans le panneau des glossaires et cliquer dessus avec le bouton droit de la souris pour l’insérer dans la traduction.</para>
 
@@ -684,11 +684,11 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>Traductions automatiques</guilabel></title>
 
-    <para>Ce volet, lorsqu’il est ouvert, affiche les suggestions pour le segment en cours produites par chaque moteur de traduction activé. Lorsque des suggestions provenant de plusieurs moteurs sont disponibles, le nom du moteur apparaît après le texte traduit,</para>
+    <para>Ce volet, lorsqu’il est ouvert, affiche les suggestions pour le segment en cours produites par chaque moteur de traduction activé. Lorsque des suggestions provenant de plusieurs moteurs sont disponibles, le nom du moteur apparait après le texte traduit,</para>
 	
     <itemizedlist>
       <listitem>
-        <para>le nom du moteur apparaît après le texte traduit,</para>
+        <para>le nom du moteur apparait après le texte traduit,</para>
       </listitem>
 
       <listitem>
@@ -714,7 +714,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.multipletranslations">
     <title id="panes.multipletranslations.title"><guilabel>Traductions multiples</guilabel></title>
 
-    <para>Un segment source qui apparaît à plusieurs endroits dans le projet peut nécessiter plusieurs traductions différentes en fonction du contexte.</para>
+    <para>Un segment source qui apparait à plusieurs endroits dans le projet peut nécessiter plusieurs traductions différentes en fonction du contexte.</para>
 
 	<para>Utilisez <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.alternative.translation.title" linkend="menus.edit.create.alternative.translation"/> pour enregistrer une traduction alternative si la traduction actuelle du segment ne convient pas. La traduction saisie sera alors traitée comme une traduction alternative du segment source.</para>
 
@@ -741,7 +741,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.comments">
     <title id="panes.comments.title"><guilabel>Commentaires</guilabel></title>
 
-    <para>Certains formats de fichiers, comme le format PO, peuvent contenir des commentaires qui vous permettront permettant de considérer le contexte de la traduction. Ces commentaires sont affichés ici.</para>
+    <para>Certains formats de fichiers, comme le format PO, peuvent contenir des commentaires qui vous permettront de mieux comprendre le contexte de la traduction. Ces commentaires sont affichés ici.</para>
 
     <note>
       <para>Le volet <guilabel>Commentaires</guilabel> n’est <emphasis>pas</emphasis> modifiable. Il affiche uniquement les informations contenues dans le fichier.</para>
@@ -789,7 +789,7 @@ Folder = <token>Dossier</token></programlisting>
 
 	  <para>→ OmegaT ouvre un projet d’équipe et se synchronise avec le dépôt distant.</para>
 
-	  <para><literal>Déplacement vers le dernier segment modifié...</literal></para>
+	  <para><literal>Déplacement vers le dernier segment modifié…</literal></para>
 
 	  <para>→ OmegaT ouvre le dernier segment modifié de la dernière session.</para>
 

@@ -29,6 +29,7 @@ import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Core initializer for unit tests.
@@ -48,8 +49,12 @@ public final class TestCoreInitializer {
         Core.saveThread = autoSave;
     }
 
-    public static void initMainWindow(IMainWindow mainWindow) {
+    public static void initMainWindow(IMainWindow mainWindow) throws Exception {
         Core.setMainWindow(mainWindow);
+
+        if (StaticUIUtils.isGUI()) {
+            Core.initializeGUIimpl(mainWindow);
+        }
     }
 
     public static void initGlossary(IGlossaries glossaries) {

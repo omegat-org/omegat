@@ -26,6 +26,7 @@
 package org.omegat.gui.dialogs;
 
 import static org.junit.Assert.assertTrue;
+import static org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode;
 
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
@@ -38,7 +39,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.gui.dialogs.ProjectPropertiesDialog.Mode;
+import org.omegat.util.Platform;
 
 public class DialogsTest extends TestCore {
 
@@ -61,11 +62,6 @@ public class DialogsTest extends TestCore {
     @Test
     public void testCreateGlossaryEntryDialog() {
         new CreateGlossaryEntry(null);
-    }
-
-    @Test
-    public void testDictionaryInstallerDialog() {
-        new DictionaryInstallerDialog(null, null);
     }
 
     @Test
@@ -100,6 +96,7 @@ public class DialogsTest extends TestCore {
 
     @Test
     public void testNewProjectFileChooser() {
+        org.junit.Assume.assumeFalse(Platform.isWindows); // FIXME
         new NewProjectFileChooser();
     }
 

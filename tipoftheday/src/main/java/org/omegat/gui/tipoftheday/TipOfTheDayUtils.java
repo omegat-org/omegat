@@ -38,7 +38,11 @@ import java.util.Locale;
 
 import org.omegat.util.StaticUtils;
 
-public class TipOfTheDayUtils {
+public final class TipOfTheDayUtils {
+
+    private TipOfTheDayUtils() {
+    }
+
     static URI getTipsFileURI(String filename) {
         return getTipsFileURI(filename, getLocale());
     }

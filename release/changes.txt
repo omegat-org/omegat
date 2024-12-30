@@ -1,12 +1,81 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  12 Enhancement
-  18 Bug fixes
+  53 Enhancement
+  84 Bug fixes
+   5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - HunspellTokenizer to support stopwords
+  https://sourceforge.net/p/omegat/feature-requests/1767/
+
+  - Localize UI for genuine dialogs in various languages
+  https://sourceforge.net/p/omegat/feature-requests/1763/
+
+  - Log filename to be date-time based
+  https://sourceforge.net/p/omegat/feature-requests/1753/
+
+  - Support Morfologik spell checker and use LT bundled dictionary
+  https://sourceforge.net/p/omegat/feature-requests/1748/
+
+  - Support U*ix variants
+  https://sourceforge.net/p/omegat/feature-requests/1746
+
+  - Alternative translation highlight
+  https://sourceforge.net/p/omegat/feature-requests/1736/
+
+  - Add timestamp to log
+  https://sourceforge.net/p/omegat/feature-requests/1734/
+
+  - Apertium MT now sends whole locale code to server instead of only the language code
+
+  - Support for Stardict's Pango content type
+  https://sourceforge.net/p/omegat/feature-requests/1727/
+
+  - AbstractFilter should handle BOM when create reader
+  https://sourceforge.net/p/omegat/feature-requests/1726/
+
+  -Trim authentication details in team projects
+  https://sourceforge.net/p/omegat/feature-requests/1725/
+
+  - Provide package "deb" and "rpm" as distribution format for linux
+  https://sourceforge.net/p/omegat/feature-requests/1721/
+
+  - Download team project with a shallow history
+  https://sourceforge.net/p/omegat/feature-requests/1720/
+
+  - Give a selection of perHost/PerRespo credentials treatment
+  https://sourceforge.net/p/omegat/feature-requests/1719/
+
+  - Enforce checkstyles and suppress it for auto-generated files
+  https://sourceforge.net/p/omegat/feature-requests/1717/
+
+  - ResourceBundle Filter: default not to escape Unicode character
+  https://sourceforge.net/p/omegat/feature-requests/1716/
+
+  -	Make repository connectors as plugin
+  https://sourceforge.net/p/omegat/feature-requests/1715/
+
+  - Make language libraries in LanguageTools as module
+  https://sourceforge.net/p/omegat/feature-requests/1714/
+
+  - ResourceBundle filter: "Don't translate NOI18N comment" feature optional
+  https://sourceforge.net/p/omegat/feature-requests/1713/
+
+  - Use SLF4J as logging facade framework
+  https://sourceforge.net/p/omegat/feature-requests/1710/
+
+  - SVN/Team project should respect access URL specified
+  https://sourceforge.net/p/omegat/feature-requests/1707/
+
+  - team: apache HttpClient for git connection
+  https://sourceforge.net/p/omegat/feature-requests/1706/
+
+  - Request to add new API to allow plugins/modules to add menu item in requested place
+  https://sourceforge.net/p/omegat/feature-requests/1703/
 
   - Team: SVN support svn+ssh protocol with key authentication
   https://sourceforge.net/p/omegat/feature-requests/1700/
@@ -14,11 +83,44 @@
   - Team: SVN: Replacing trilead-ssh2 with Apache sshd
   https://sourceforge.net/p/omegat/feature-requests/1699/
 
+  - Ensure that OmegaT functions properly under Java 21
+  https://sourceforge.net/p/omegat/feature-requests/1697/
+
   - Better error message for omegat.project failure
   https://sourceforge.net/p/omegat/feature-requests/1696/
 
-  - Build System: update gradle verison to 7.5.1
+  - Generate JSON format stastics file when save
+  https://sourceforge.net/p/omegat/feature-requests/1695/
+
+  - Build System: update gradle version to 7.5.1
   https://sourceforge.net/p/omegat/feature-requests/1691/
+
+  - Generate and compile TXT and JSON file when committing target files
+  https://sourceforge.net/p/omegat/feature-requests/1690/
+
+  -	Ensure that OmegaT functions properly under Java 17
+  https://sourceforge.net/p/omegat/feature-requests/1682/
+
+  - MT: IBM watson accept 50KB text
+  https://sourceforge.net/p/omegat/feature-requests/1676/
+
+  - GUI: automatically adapt colour scheme to OS colour preference on Windows and macOS
+  https://sourceforge.net/p/omegat/feature-requests/1675/
+
+  - Update LanguageTool to latest version (6.1)
+  https://sourceforge.net/p/omegat/feature-requests/1637/
+
+  - Visual confirmation that dictionary was searched
+  https://sourceforge.net/p/omegat/feature-requests/1633/
+
+  - Remove TaaS terminology lookup
+  https://sourceforge.net/p/omegat/feature-requests/1627/
+
+  -	Update to Gradle 7.3.3 or later
+  https://sourceforge.net/p/omegat/feature-requests/1625/
+
+  -	Clarify requirements for DeepL API key
+  https://sourceforge.net/p/omegat/feature-requests/1612/
 
   - Team feature: SSH support id_ecdsa and id_ed25519 for default key
   https://sourceforge.net/p/omegat/feature-requests/1598/
@@ -28,6 +130,15 @@
 
   - Add nashorn javascript engine[Java 17 compatibility]
   https://sourceforge.net/p/omegat/feature-requests/1525/
+
+  - If multiple versions of the same plugin are present, only the latest is loaded
+  https://sourceforge.net/p/omegat/feature-requests/1519/
+
+  - Add Spell checker as a type of plugin
+  https://sourceforge.net/p/omegat/feature-requests/1490/
+
+  -	[fuzzy] option in "Check issues"
+  https://sourceforge.net/p/omegat/feature-requests/1451/
 
   - Use repository mappings in a local project
   https://sourceforge.net/p/omegat/feature-requests/1448/
@@ -42,12 +153,169 @@
   https://sourceforge.net/p/omegat/feature-requests/1268/
 
   - Support SRX format
+  https://sourceforge.net/p/omegat/feature-requests/98/
 
+  - Support M1/M2 Mac natively and distribute with Arm64 JRE.
 
-  - If multiple versions of the same plugin are present, only the latest is loaded
-  https://sourceforge.net/p/omegat/feature-requests/1519/
+  - Distribution with Linux aarch64 JRE
+
 
   Bug fixes:
+
+  - aligner average distance can be {0} which expected a numeric value
+  https://sourceforge.net/p/omegat/bugs/1275/
+
+  - fix: Glossary sort order: Change src length sort condition and use Language Dependent sorter
+
+  - Preferences/CutomColorSelector don't show notification immediately when modifying color
+  https://sourceforge.net/p/omegat/bugs/1273/
+
+  - Speller: morfologik: LT bundled dictionary not found in Dutch
+  https://sourceforge.net/p/omegat/bugs/1271/
+
+  - Console-stats command failed with error
+  https://sourceforge.net/p/omegat/bugs/1267/
+
+  - Removal of MED package save/load feature
+  https://sourceforge.net/p/omegat/bugs/1266/
+
+  - Failed to load "en-AU" LT language by IllegalArgumentException
+    https://sourceforge.net/p/omegat/bugs/1265/
+
+  - filter: bundle: when charsert configuration is US_ASCII, force unicode escape
+  https://sourceforge.net/p/omegat/bugs/1264/
+
+  - OmegaT 6.1 does not write startup message in log file
+  https://sourceforge.net/p/omegat/bugs/1262/
+
+  - Color customize UI label for marker come from tm/mt/ folder
+    https://sourceforge.net/p/omegat/bugs/1261/
+
+  - Fix behaviour where git repos would be recognised as SVN
+  https://sourceforge.net/p/omegat/bugs/1258/
+
+  - OmegaT does not show entreis of stardict-JMDict dictionary
+  https://sourceforge.net/p/omegat/bugs/1255/
+
+  - Links with ending parens in glossary panes
+  https://sourceforge.net/p/omegat/bugs/1253/
+
+  - Short glossary items are not recognized with Korean source
+  https://sourceforge.net/p/omegat/bugs/1250/
+
+  - Debug log in some classes are broken
+  https://sourceforge.net/p/omegat/bugs/1249/
+
+  - XLIFF1 filter produce broken trasnalated file
+  https://sourceforge.net/p/omegat/bugs/1247/
+
+  - sdlxliff filter does not display (some) comments
+  https://sourceforge.net/p/omegat/bugs/1244/
+
+  - When restart GUI on deb/rpm packaged OmegaT, it failed with java not found
+  https://sourceforge.net/p/omegat/bugs/1243/
+
+  - Preference to enable "Project specific External Command" is lost
+  https://sourceforge.net/p/omegat/bugs/1242/
+
+  - Windows launcher does not launch when witout_JRE installer used
+  https://sourceforge.net/p/omegat/bugs/1240/
+
+  - Glossary popups behavior changed unintended way
+  https://sourceforge.net/p/omegat/bugs/1239/
+
+  - OmegaT does not use cached MT result for translated segments
+  https://sourceforge.net/p/omegat/bugs/1238/
+
+  - Match statistics are affected by fuzzy match threshold
+  https://sourceforge.net/p/omegat/bugs/1236/
+
+  - PluginInstaller throws NPE in certain condition
+  https://sourceforge.net/p/omegat/bugs/1235/
+
+  - Issue window cause exception
+  https://sourceforge.net/p/omegat/bugs/1234/
+
+  - java.nio.charset.UnmappableCharacterException: Input length = 1
+  https://sourceforge.net/p/omegat/bugs/1233/
+
+  - Repository mapping with SVN cause error
+  https://sourceforge.net/p/omegat/bugs/1232/
+
+  -OmegaT 6.1 macos-arm version does not launch on macOS arm machine
+  https://sourceforge.net/p/omegat/bugs/1231/
+
+  - OmegaT 6.1 macos-arm version does not launch on macOS arm machine
+  https://sourceforge.net/p/omegat/bugs/1231/
+
+  - distribution for macOS only run on Java runtime 11
+  https://sourceforge.net/p/omegat/bugs/1230/
+
+  - Links that contain non ascii characters are not properly handled in glossary dialog
+  https://sourceforge.net/p/omegat/bugs/1229/
+
+  - CI: weekly release failed with permission error inside docker image
+  https://sourceforge.net/p/omegat/bugs/1228/
+
+  - OmegaT failed to start in specific case
+  https://sourceforge.net/p/omegat/bugs/1224/
+
+  - Unit tests failed on Windows
+  https://sourceforge.net/p/omegat/bugs/1223/
+
+  - OmegaT creates xlf file that other CAT tools cannot read ("MESSAGE: There are multiple root elements. Line 375,
+ position 2.")
+  https://sourceforge.net/p/omegat/bugs/1221/
+
+  - Unable to use XLIFF file as TM
+  https://sourceforge.net/p/omegat/bugs/1220/
+
+  - OmegaT does not handle line breaks correctly on Windows
+  https://sourceforge.net/p/omegat/bugs/1219/
+
+  - OmegaT 6.1 with JRE does not work out of the box on Windows
+  https://sourceforge.net/p/omegat/bugs/1218/
+
+  - Broken gradle tasks on Debian
+  https://sourceforge.net/p/omegat/bugs/1217/
+
+  - Selection of match for pre-translation varies through different OS's
+  https://sourceforge.net/p/omegat/bugs/1213/
+
+  - Critical errors are logged, but no longer shown to the user
+  https://sourceforge.net/p/omegat/bugs/1207/
+
+  - Google2 Translate MT connector failed to parse response
+  https://sourceforge.net/p/omegat/bugs/1206/
+
+  - linux-install.sh script not aware of its location
+  https://sourceforge.net/p/omegat/bugs/1205/
+
+  - Incompatible among LanguageTool@6 and lucene-gosen@5 from omegat-org
+  https://sourceforge.net/p/omegat/bugs/1204/
+
+  - Error 403 when accessing different repo with different creds in same domain
+  https://sourceforge.net/p/omegat/bugs/1202/
+
+  - Integration test(docker) failure with 503
+  https://sourceforge.net/p/omegat/bugs/1199/
+
+  - Option-arrow not working in arm macOS
+  https://sourceforge.net/p/omegat/bugs/1197/
+
+  - Regular expression for custom tags
+  https://sourceforge.net/p/omegat/bugs/1194/
+  https://sourceforge.net/p/omegat/bugs/1193/
+
+  - Content of notes elements are not displayed correctly with Xliff filter
+  https://sourceforge.net/p/omegat/bugs/1192/
+
+  - ProjectFile has unwanted XML element otherAttributes
+  https://sourceforge.net/p/omegat/bugs/1191/
+
+  - If project memory is updated during load via tm/auto or tm/enforce, set project as modified
+    so that save also updates project_save.tmx
+  https://sourceforge.net/p/omegat/bugs/1185/
 
   - Languagetool crashes when reloading the project
   https://sourceforge.net/p/omegat/bugs/1182/
@@ -55,14 +323,11 @@
   - Stardict dictionary displays apostrophe as html entity code
   https://sourceforge.net/p/omegat/bugs/1181/
 
-  - #1180 Font does not scale on HiDPI display on Linux
+  - Font does not scale on HiDPI display on Linux
   https://sourceforge.net/p/omegat/bugs/1180/
 
   - build/release: Windows binary signature with PKCS#11 HSM
   https://sourceforge.net/p/omegat/bugs/1179/
-
-  - Team project failed to merge changes with TMXMerge
-  https://sourceforge.net/p/omegat/bugs/1170/
 
   - Team(git): when connecting new server, connection failed
   https://sourceforge.net/p/omegat/bugs/1177/
@@ -70,17 +335,35 @@
   - The COMPILE event is fired after the target commit
   https://sourceforge.net/p/omegat/bugs/1176/
 
+  - Passphrase for SSH key is stored with key= null://null:-1
+  https://sourceforge.net/p/omegat/bugs/1174/
+
+  - OmegaT ask passphrase to connect git+ssh server but dialog label is user/pass
+  https://sourceforge.net/p/omegat/bugs/1173/
+
+  - TipOfTheDay dialog do not close with enter/escape
+  https://sourceforge.net/p/omegat/bugs/1172/
+
+  - Team project failed to merge changes with TMXMerge
+  https://sourceforge.net/p/omegat/bugs/1170/
+
   - Useless warning log from CSS parser library
   https://sourceforge.net/p/omegat/bugs/1169/
 
   - OmegaT cannot load a project and error dialog with FileSystemLoopException
   https://sourceforge.net/p/omegat/bugs/1168/
 
+  - Default filters settings don't initialize options
+  https://sourceforge.net/p/omegat/bugs/1167/
+
   - Error when trying to backup the project file on Windows
   https://sourceforge.net/p/omegat/bugs/1166/
 
   - Docker setup of Integration test is not working for Subversion
   https://sourceforge.net/p/omegat/bugs/1165/
+
+  - Translation memories are not correctly reloaded after team synchronization
+  https://sourceforge.net/p/omegat/bugs/1164/
 
   - Project not loaded if it contains DTD internal entities
   https://sourceforge.net/p/omegat/bugs/1163/
@@ -97,14 +380,52 @@
   - MT engines show JSON parser error as translated text
   https://sourceforge.net/p/omegat/bugs/1141/
 
+  - Very slow segment switching with a lot of duplicates
+  https://sourceforge.net/p/omegat/bugs/1131/
+
+  - Duplication of some files in the distributed packages
+  https://sourceforge.net/p/omegat/bugs/1123/
+
   - OpenSSH new key format and ECDSA/ED25519 keys
   https://sourceforge.net/p/omegat/bugs/1107/
+
+  - Fails to load TM using tags
+  https://sourceforge.net/p/omegat/bugs/1090
+
+  - Ctrl+Z incorrectly erases contents of segment Note
+  https://sourceforge.net/p/omegat/bugs/903/
+
+  - Manually assigned shortcuts open parent folders instead of files
+  https://sourceforge.net/p/omegat/bugs/858/
+
+  - Team projects not saving properly or stopping synchronization
+  https://sourceforge.net/p/omegat/bugs/847/
 
   - Lucene 5.2 does not work under WebStart
   https://sourceforge.net/p/omegat/bugs/813/
 
-  - Content of notes elements are not displayed correctly with Xliff filter
-  https://sourceforge.net/p/omegat/bugs/1192/
+  - JNA encoding issue on non-UTF-8 platforms
+  https://sourceforge.net/p/omegat/bugs/812/
+
+  - The LaTeX filter should use \item as a delimiter
+  https://sourceforge.net/p/omegat/bugs/743/
+
+  - Incorrect display of RTL segments in the Fuzzy Matches pane
+  https://sourceforge.net/p/omegat/bugs/558/
+
+  - Print Exception with Invalid URL in "Import From MediaWiki..
+  https://sourceforge.net/p/omegat/bugs/459/
+
+  - First session message in log not localised
+  https://sourceforge.net/p/omegat/bugs/272/
+
+  Localization Updates:
+
+  - Catalan localization updated to 6.1 (UI, readme, documentation)
+  - Dutch localization updated to 6.1 (UI, readme, documentation)
+  - French localization updated to 6.1 (UI, documentation)
+  - Italian localization updated to 6.1 (UI, readme, documentation)
+  - Japanese localization updated to 6.1 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 6.0.0 (2023-06-19)
@@ -142,8 +463,8 @@
  OmegaT 5.8.0 (2023-06-19)
 ----------------------------------------------------------------------
    4 Removed features
-  41 Enhancements
-  49 Bug fixes
+  42 Enhancements
+  45 Bug fixes
   12 Localization updates
 ----------------------------------------------------------------------
 5.8.0 vs 5.7.1
@@ -156,11 +477,11 @@
 
   - Removal of TaaS access
   The TaaS service does not exist anymore.
-  https://github.com/omegat-org/omegat/pull/302
+  https://github.com/omegat-org/omegat/pull/302/
 
   - Removal of the Moses MT connector
   The connector uses a library that shows critical vulnerabilities
-  https://github.com/omegat-org/omegat/pull/321
+  https://github.com/omegat-org/omegat/pull/321/
   See Moses Plugin project: https://github.com/omegat-org/moses-plugin
 
   - Removal of the Microsoft Azure Translator MT connector
@@ -179,7 +500,7 @@
   https://sourceforge.net/p/omegat/feature-requests/1680/
 
   - Share authentication between Git or SVN repositories on the same server
-  https://sourceforge.net/p/omegat/feature-requests/1670
+  https://sourceforge.net/p/omegat/feature-requests/1670/
 
   - Add filter filtres list sorting
   https://sourceforge.net/p/omegat/feature-requests/1667/
@@ -273,11 +594,14 @@
   - Machine translation results sorting
   https://sourceforge.net/p/omegat/feature-requests/1467/
 
+  - Change label for Comments and Notes
+  https://sourceforge.net/p/omegat/feature-requests/1442/
+
   - In mode=console-align, generate tmx with mutiples translations
   https://sourceforge.net/p/omegat/feature-requests/1408/
 
   - Font settings in Aligner
-  https://sourceforge.net/p/omegat/feature-requests/1360
+  https://sourceforge.net/p/omegat/feature-requests/1360/
 
   - Sorting terms alphabetically in glossary pane
   https://sourceforge.net/p/omegat/feature-requests/1241/
@@ -299,14 +623,20 @@
 
   Bug fixes:
 
+  - Option "Insert the source text" enabled on its own
+  https://sourceforge.net/p/omegat/bugs/1155/
+
+  - Searches on "reference TMs" are not properly labeled in the search results
+  https://sourceforge.net/p/omegat/bugs/1154/
+
   - Change key to explicit offline mode cause
-  https://sourceforge.net/p/omegat/bugs/1153
+  https://sourceforge.net/p/omegat/bugs/1153/
 
   - Wrap long lines in error messages
-  https://sourceforge.net/p/omegat/bugs/1145
+  https://sourceforge.net/p/omegat/bugs/1145/
 
   - Color the fuzzy matches from /tm/mt
-  https://sourceforge.net/p/omegat/bugs/1144
+  https://sourceforge.net/p/omegat/bugs/1144/
 
   - BidiMarker does not respect disable menu action
   https://sourceforge.net/p/omegat/bugs/1143/
@@ -323,6 +653,9 @@
   - Error displayed when opening a project on Windows 10
   https://sourceforge.net/p/omegat/bugs/1136/
 
+  - Ampersands in the context menu
+  https://sourceforge.net/p/omegat/bugs/1135/
+
   - Font Rendering issue in OmegaT (Santali)
   https://sourceforge.net/p/omegat/bugs/1133/
 
@@ -334,24 +667,6 @@
 
   - MainMenuShortcuts.properties not up to date
   https://sourceforge.net/p/omegat/bugs/1121/
-
-  - When converting git local-managed project, OmegaT raise NPE
-  https://sourceforge.net/p/omegat/bugs/1118/
-
-  - URL linkifier raise exception when opening resource property file
-  https://sourceforge.net/p/omegat/bugs/1117/
-
-  - BundleProperties filter should accept UTF-8 properties file
-  https://sourceforge.net/p/omegat/bugs/1116/
-
-  - doc_src/docgen docker container should handle UID/GID properly
-  https://sourceforge.net/p/omegat/bugs/1112/
-
-  - Unable to check-out or open/save team projects
-  https://sourceforge.net/p/omegat/bugs/1075/
-
-  - OmegaT --no-team does not complete 3.6 team project conversion
-  https://sourceforge.net/p/omegat/bugs/1063/
 
   - GUI: Comment is shown on both Comment and Segment Properties pane
   https://sourceforge.net/p/omegat/bugs/1119/
@@ -417,6 +732,9 @@
   - OmegaT --no-team does not complete 3.6 team project conversion
   https://sourceforge.net/p/omegat/bugs/1063/
 
+  - Duplicated mnemonics for Project->Restart and Reload
+  https://sourceforge.net/p/omegat/bugs/1054/
+
   - HTML segmentation dropping whole tags
   https://sourceforge.net/p/omegat/bugs/873/
 
@@ -436,7 +754,7 @@
   https://sourceforge.net/p/omegat/bugs/205/
 
   - Highlight found text even if normalized text differs from original
-  https://github.com/omegat-org/omegat/pull/234
+  https://github.com/omegat-org/omegat/pull/234/
 
   Localization Updates:
 
@@ -707,7 +1025,7 @@ OmegaT 5.7.1 (2022-03-19)
  OmegaT 5.4.0 (2020-12-12)
 ----------------------------------------------------------------------
   7 Enhancements
-  8 Bug fixes
+  9 Bug fixes
   10 Localization updates
 ----------------------------------------------------------------------
 5.4.0 vs 5.3.0
@@ -755,6 +1073,9 @@ OmegaT 5.7.1 (2022-03-19)
 
   - Wrong background colour in dark mode on Linux Mint
   https://sourceforge.net/p/omegat/bugs/1013/
+
+  - Matches ignored if the two locales have the same language subtag
+  https://sourceforge.net/p/omegat/bugs/1015/
 
   - Project Files table does not respect LAF colours
   https://sourceforge.net/p/omegat/bugs/1016/
@@ -1792,7 +2113,7 @@ encountering certain malformed header lines
  OmegaT 4.0.1 (2016-10-03)
 ----------------------------------------------------------------------
   7 Enhancements
-  2 Bug fixes
+  3 Bug fixes
   1 Localization update
 ----------------------------------------------------------------------
 4.0.1 vs 4.0.0 update 1
@@ -1822,6 +2143,9 @@ encountering certain malformed header lines
   - Update LanguageTool to 3.5
 
   Bug fixes:
+
+  - Check on valid path for dictionary missing
+  https://sourceforge.net/p/omegat/bugs/506/
 
   - Relative project paths not normalized
   https://sourceforge.net/p/omegat/bugs/837/

@@ -109,7 +109,7 @@
 	<section id="how.to.use.tm.store.your.tm">
 	  <title id="how.to.use.tm.store.your.tm.title">Gérer vos MT</title>
 
-	  <para>Vous pouvez conserver les mémoires de traduction dans des dossiers distincts, par client ou par domaine de spécialisation, afin de pouvoir les réutiliser rapidement si nécessaire. Tout dossier modifiable peut être utilisé à la place du dossier <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> du projet. Voir la section <link linkend="dialogs.project.properties.file.locations" endterm="dialogs.project.properties.file.locations.title"/> de la boîte de dialogue des propriétés du projet.</para>
+	  <para>Vous pouvez conserver les mémoires de traduction dans des dossiers distincts, par client ou par domaine de spécialisation, afin de pouvoir les réutiliser rapidement si nécessaire. Tout dossier modifiable peut être utilisé à la place du dossier <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> du projet. Voir la section <link linkend="dialogs.project.properties.file.locations" endterm="dialogs.project.properties.file.locations.title"/> de la boite de dialogue des propriétés du projet.</para>
 	</section>
   
 	<section id="how.to.tm.creating.a.tm.for.selected.documents">
@@ -135,7 +135,7 @@
 		</listitem>
 
 		<listitem>
-		  <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> pour créer les fichiers TMX correspondant au contenu actuel.</para>
+		  <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> pour créer les fichiers TMX correspondants au contenu actuel.</para>
 		</listitem>
       </itemizedlist>
 
@@ -161,7 +161,7 @@
 
 		<para>Réciproquement, vous pouvez demander à votre collègue d’écrire les fichiers TMX du projet dans un dossier sur un disque partagé que vous désignerez comme votre dossier <link linkend="project.folder.tm" endterm="project.folder.tm.title"/> pour la traduction en cours.</para>
 
-		<para>OmegaT reconnaît instantanément les modifications apportées aux fichiers TMX. Par conséquent, chaque fois qu’une personne crée ou modifie une TMX en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, l’autre personne n’a rien à faire pour que cette TMX soit reconnue localement.</para>
+		<para>OmegaT reconnait instantanément les modifications apportées aux fichiers TMX. Par conséquent, chaque fois qu’une personne crée ou modifie une TMX en utilisant <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/>, l’autre personne n’a rien à faire pour que cette TMX soit reconnue localement.</para>
 
 		<para>Cette méthode fonctionne également pour le partage de glossaires lorsque le glossaire modifiable du projet (avec un nom différent de celui par défaut pour éviter d’écraser le fichier) est situé dans un dossier de glossaire partagé. Voir l’annexe <link linkend="app.glossaries" endterm="app.glossaries.title"/> pour en savoir plus.</para>
 
@@ -183,7 +183,7 @@
 	</varlistentry>
   </variablelist>
   <warning>
-	<para>Faites preuve de prudence lorsque vous placez un projet entier dans un système de partage de fichiers tel que DropBox, OneCloud et autres.</para>
+	<para>Faites preuve de prudence lorsque vous placez un projet entier dans un système de partage de fichiers tel que DropBox, OneCloud et autre.</para>
 	<para><emphasis>Ces systèmes ne sont pas conçus pour suivre les modifications internes d’un fichier donné.</emphasis></para>
 	<para>Un projet OmegaT est un ensemble complexe de fichiers. De tels systèmes ne sont pas toujours en mesure de fournir la version la plus récente de vos données, et peuvent même bloquer certains fichiers sans raison apparente, voire corrompre des fichiers liés à des projets d’équipe.</para>
 	<para>Assurez-vous d’avoir correctement testé l’agencement de votre projet et réalisé une sauvegarde séparées de vos données avant de les partager dans ce type de système.</para>
@@ -193,7 +193,7 @@
 <section id="how.to.tm.bridge.two.languages">
   <title id="how.to.tm.bridge.two.languages.title">Faire le lien entre deux langues</title>
 
-  <para>OmegaT affiche les correspondances partielles dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Par défaut, ces correspondances sont limitées aux langues source et cible définies dans la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
+  <para>OmegaT affiche les correspondances partielles dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>. Par défaut, ces correspondances sont limitées aux langues source et cible définies dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>.</para>
 
   <para>Vous pouvez ajouter des correspondances dans des langues qui ne sont pas la langue cible. Voir le paramètre <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> pour en savoir plus.</para>
 

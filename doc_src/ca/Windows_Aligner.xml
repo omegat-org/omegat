@@ -139,16 +139,16 @@
     <variablelist>
 	  <title>Opcions</title>
       <varlistentry>
-        <term>Segment</term>
+        <term>Segmenta</term>
         <listitem>
           <para>L'alineador utilitza la segmentació per frases per defecte. Desmarqueu la casella per a utilitzar la segmentació per paràgrafs. Consulteu les preferències de <link endterm="dialogs.preferences.segmentation.setup.title" linkend="dialogs.preferences.segmentation.setup"/>.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Amaga les etiquetes</term>
+        <term>Suprimeix les etiquetes</term>
         <listitem>
-          <para>L'alineador inclou les etiquetes dels segments per defecte. Desmarqueu la casella per a aplicar l'opció <link endterm="dialogs.project.properties.hide.tags.title" linkend="dialogs.project.properties.hide.tags"/>.</para>
+          <para>L'alineador inclou les etiquetes dels segments per defecte. No marqueu la casella per a suprimir totes les etiquetes de l'alineació i del fitxer TMX resultant.</para>
         </listitem>
       </varlistentry>
 

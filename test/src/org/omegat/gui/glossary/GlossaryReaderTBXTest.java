@@ -42,6 +42,10 @@ import org.omegat.util.Language;
 public class GlossaryReaderTBXTest extends TestCore {
     @Test
     public void testRead() throws Exception {
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
         Core.setProject(new NotLoadedProject() {
             public ProjectProperties getProjectProperties() {
                 try {

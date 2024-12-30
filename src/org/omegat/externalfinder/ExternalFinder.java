@@ -37,7 +37,6 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -57,6 +56,7 @@ import org.omegat.externalfinder.item.ExternalFinderXMLWriter;
 import org.omegat.externalfinder.item.IExternalFinderItemLoader;
 import org.omegat.externalfinder.item.IExternalFinderItemMenuGenerator;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.MenuItemPager;
 
 /**
@@ -96,18 +96,18 @@ public final class ExternalFinder {
 
     private static IProjectEventListener generateIProjectEventListener() {
         return new IProjectEventListener() {
-            private final List<Component> menuItems = new ArrayList<Component>();
+            private final List<Component> menuItems = new ArrayList<>();
 
             @Override
             public void onProjectChanged(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
                 switch (eventType) {
-                    case LOAD:
-                        onLoad();
-                        break;
-                    case CLOSE:
-                        onClose();
-                        break;
-                    default:
+                case LOAD:
+                    onLoad();
+                    break;
+                case CLOSE:
+                    onClose();
+                    break;
+                default:
                     // ignore
                 }
             }
@@ -117,31 +117,24 @@ public final class ExternalFinder {
                 menuItems.clear();
 
                 // add finder items to menuItems
-                IExternalFinderItemMenuGenerator generator
-                        = new ExternalFinderItemMenuGenerator(ExternalFinderItem.TARGET.BOTH, false);
+                IExternalFinderItemMenuGenerator generator = new ExternalFinderItemMenuGenerator(
+                        ExternalFinderItem.TARGET.BOTH, false);
                 List<JMenuItem> newMenuItems = generator.generate();
-
-                JMenu toolsMenu = Core.getMainWindow().getMainMenu().getToolsMenu();
-
                 // Separator
                 Component separator = new JPopupMenu.Separator();
-                toolsMenu.add(separator);
+                MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, separator);
                 menuItems.add(separator);
 
                 // add menuItems to menu
-                MenuItemPager pager = new MenuItemPager(toolsMenu);
-                for (JMenuItem component : newMenuItems) {
-                    pager.add(component);
-                }
+                MenuItemPager pager = new MenuItemPager(MenuExtender.MenuKey.TOOLS);
+                newMenuItems.forEach(pager::add);
                 menuItems.addAll(pager.getFirstPage());
             }
 
             private void onClose() {
                 // remove menu items
-                final JMenu menu = Core.getMainWindow().getMainMenu().getToolsMenu();
-                menuItems.forEach(menu::remove);
+                MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS, menuItems);
                 menuItems.clear();
-
                 projectConfig = null;
             }
         };
@@ -178,7 +171,8 @@ public final class ExternalFinder {
         if (globalConfig == null) {
             try {
                 File globalFile = getGlobalConfigFile();
-                IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLLoader(globalFile, SCOPE.GLOBAL);
+                IExternalFinderItemLoader userItemLoader = new ExternalFinderXMLLoader(globalFile,
+                        SCOPE.GLOBAL);
                 globalConfig = userItemLoader.load();
             } catch (FileNotFoundException e) {
                 // Ignore
@@ -225,7 +219,8 @@ public final class ExternalFinder {
         if (projectConfig == null) {
             // load project's xml file
             File projectFile = getProjectFile(currentProject);
-            IExternalFinderItemLoader projectItemLoader = new ExternalFinderXMLLoader(projectFile, SCOPE.PROJECT);
+            IExternalFinderItemLoader projectItemLoader = new ExternalFinderXMLLoader(projectFile,
+                    SCOPE.PROJECT);
             try {
                 projectConfig = projectItemLoader.load();
             } catch (FileNotFoundException e) {

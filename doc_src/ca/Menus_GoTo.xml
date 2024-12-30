@@ -69,18 +69,14 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.note">
-      <term id="menus.goto.next.note.title"><guimenuitem>Next
-      Note</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <term id="menus.goto.next.note.title"><guimenuitem>Nota següent</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
 		<para>Es desplaça al segment amb una nota següent.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.note">
-      <term id="menus.goto.previous.note.title"><guimenuitem>Previous
-      Note</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
+      <term id="menus.goto.previous.note.title"><guimenuitem>Nota anterior</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
 		<para>Es desplaça segment amb una nota anterior.</para>
       </listitem>
@@ -127,7 +123,7 @@
 		  </listitem>
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
-			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Segment de tm/enforce/ anterior</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
+			<para id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Segment de tm/enforce/ anterior</guimenuitem> <keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
 
 			<para>Es desplaça al segment inserit des de <filename>tm/enforce/</filename> anterior.</para>
 		  </listitem>
@@ -153,11 +149,9 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.notes.pane">
-      <term id="menus.goto.notes.pane.title"><guimenuitem>Notepad</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+      <term id="menus.goto.notes.pane.title"><guimenuitem>Bloc de notes</guimenuitem> <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
-        <para>Enter the <link linkend="panes.notes" endterm="panes.notes.title"/> to write or modify a note associated
-        to the current segment.</para>
+        <para>Accediu a la subfinestra <link linkend="panes.notes" endterm="panes.notes.title"/> per a escriure o modificar una nota associada al segment actual.</para>
       </listitem>
     </varlistentry>
 
@@ -165,7 +159,7 @@
       <term id="menus.goto.editor.pane.title"><guimenuitem>Editor</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
-        <para>Enter the <link linkend="panes.editor" endterm="panes.editor.title"/> to proceed with your translation.</para>
+        <para>Obriu l'<link linkend="panes.editor" endterm="panes.editor.title"/> per a continuar la traducció.</para>
       </listitem>
     </varlistentry>
   </variablelist>

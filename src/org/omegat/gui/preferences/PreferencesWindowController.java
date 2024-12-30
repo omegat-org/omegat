@@ -388,12 +388,14 @@ public class PreferencesWindowController implements FurtherActionListener {
         root.add(new HideableNode(new SecureStoreController()));
         HideableNode pluginsNode = new HideableNode(new PluginsPreferencesController());
         root.add(pluginsNode);
-        root.add(new HideableNode(new VersionCheckPreferencesController()));
         PreferencesControllers.getSuppliers().forEach(s -> placePluginView(root, s.get()));
+        root.add(new HideableNode(new VersionCheckPreferencesController()));
         return root;
     }
 
     private static void placePluginView(HideableNode root, IPreferencesController view) {
+        root.add(new HideableNode(view));
+        /*
         Class<? extends IPreferencesController> parentClass = view.getParentViewClass();
         Class<? extends IPreferencesController> effectiveParentClass = parentClass == null
                 ? PluginsPreferencesController.class : parentClass;
@@ -403,6 +405,7 @@ public class PreferencesWindowController implements FurtherActionListener {
                 node.add(new HideableNode(view));
             }
         });
+        */
     }
 
     @Override

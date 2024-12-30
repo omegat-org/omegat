@@ -25,18 +25,24 @@
 
 package org.omegat.core.data;
 
+
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.HeadlessException;
+import java.awt.Frame;
 import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 
 import org.madlonkay.supertmxmerge.StmProperties;
@@ -48,26 +54,32 @@ import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
-import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.GlossaryManager;
+import org.omegat.gui.glossary.GlossaryReaderTSV;
+import org.omegat.gui.glossary.IGlossaries;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
+import org.omegat.util.gui.MenuExtender.MenuKey;
 
 import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockingDesktop;
 import gen.core.project.RepositoryDefinition;
 
 /**
@@ -79,6 +91,8 @@ public final class TestTeamIntegrationChild {
 
     private TestTeamIntegrationChild() {
     }
+
+    public static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
 
     static final String CONCURRENT_NAME = "concurrent";
 
@@ -94,13 +108,17 @@ public final class TestTeamIntegrationChild {
     static SourceTextEntry steC;
     static long num = 0;
     static long[] v;
-    static Map<String, Long> values = new HashMap<String, Long>();
+    static Map<String, Long> values = new HashMap<>();
+    static Set<String> glossaries = new HashSet<>();
+    static long glossaryIndex = 0;
+    static GlossaryManager glossaryManager;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 6) {
             System.err.println("Wrong arguments count");
             System.exit(1);
         }
+        Thread.currentThread().setName(args[0]);
         try {
             source = args[0];
             long time = Long.parseLong(args[1]);
@@ -111,6 +129,11 @@ public final class TestTeamIntegrationChild {
 
             finishTime = System.currentTimeMillis() + time;
 
+            Properties props = new Properties();
+            try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+                props.load(fis);
+                PluginUtils.loadPluginFromProperties(props);
+            }
             TestPreferencesInitializer.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);
 
@@ -123,26 +146,21 @@ public final class TestTeamIntegrationChild {
             TestCoreInitializer.initEditor(editor);
 
             ProjectProperties config = TestTeamIntegration.createConfig(repo, new File(dir));
-            new RemoteRepositoryProvider(config.getProjectRootDir(), config.getRepositories(), config);
+            RemoteRepositoryProvider remoteRepositoryProvider = new RemoteRepositoryProvider(
+                    config.getProjectRootDir(), config.getRepositories(), config);
+            remoteRepositoryProvider.switchToVersion(OConsts.FILE_PROJECT, null);
+            remoteRepositoryProvider.copyFilesFromReposToProject(OConsts.FILE_PROJECT, "", false);
 
-            // load project
+            // Prepare project
             ProjectProperties projectProperties = ProjectFileStorage.loadProjectProperties(new File(dir));
-            projectProperties.autocreateDirectories();
             String remoteRepoUrl = getRootGitRepositoryMapping(projectProperties.getRepositories());
             if (!repo.equals(remoteRepoUrl)) {
                 setRootGitRepositoryMapping(projectProperties.getRepositories(), repo);
             }
-
-            Core.getAutoSave().disable();
-            RealProject p = new TestRealProject(projectProperties);
-            Core.setProject(p);
-            p.loadProject(true);
-            if (p.isProjectLoaded()) {
-                Core.getAutoSave().enable();
-                CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-            } else {
-                throw new Exception("Project can't be loaded");
-            }
+            projectProperties.autocreateDirectories();
+            Core.setProject(new NotLoadedProject());
+            glossaryManager = new GlossaryManager(new TestGlossaryTextArea());
+            loadProject(projectProperties);
 
             key = new EntryKey[segCount];
             ste = new SourceTextEntry[segCount];
@@ -165,16 +183,26 @@ public final class TestTeamIntegrationChild {
                     Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(0);
 
+                    updateGlossary();
+
                     // change /1..N segment
                     Thread.sleep(ThreadLocalRandom.current().nextInt(maxDelaySeconds * 1000) + 10);
                     checksavecheck(c);
+
+                    checkGlossaryEntries();
                 }
             }
-            Core.getProject().closeProject();
+            // do closeProject as same way as OmegaT close
+            Core.executeExclusively(true, () -> {
+                Core.getProject().saveProject(true);
+                ProjectFactory.closeProject();
+            });
 
             // load again and check
-            ProjectFactory.loadProject(projectProperties, true);
+            loadProject(projectProperties);
             checkAll();
+
+            checkGlossaryEntries();
 
             // check projectProperties
             checkRepoUrl(projectProperties);
@@ -183,6 +211,25 @@ public final class TestTeamIntegrationChild {
         } catch (Throwable ex) {
             ex.printStackTrace();
             System.exit(1);
+        }
+    }
+
+    /**
+     * replacement of ProjectFactory.loadProject for test.
+     * @param projectProperties
+     * @throws Exception
+     */
+    static void loadProject(ProjectProperties projectProperties) throws Exception {
+        Core.getAutoSave().disable();
+        RealProject p = new TestRealProject(projectProperties);
+        Core.setProject(p);
+        // load project
+        p.loadProject(true);
+        if (p.isProjectLoaded()) {
+            Core.getAutoSave().enable();
+            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        } else {
+            throw new Exception("Project can't be loaded");
         }
     }
 
@@ -247,7 +294,7 @@ public final class TestTeamIntegrationChild {
             checkTranslationFromFile(tmx, c);
         }
 
-        Core.getProject().iterateByDefaultTranslations(new DefaultTranslationsIterator() {
+        Core.getProject().iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
             public void iterate(String source, TMXEntry trans) {
                 Long prev = values.get(source);
                 if (prev == null) {
@@ -260,6 +307,35 @@ public final class TestTeamIntegrationChild {
                 }
             }
         });
+    }
+
+    static void checkGlossaryEntries() {
+        List<GlossaryEntry> entries = glossaryManager.getLocalEntries();
+        for (String s: glossaries) {
+            boolean found = false;
+            for (GlossaryEntry entry: entries) {
+                if (entry.getSrcText().equals(s)) {
+                    final long index = getGlossaryIndex(s);
+                    final String loc = getGlossaryLoc(index);
+                    final String com = getGlossaryCom(index);
+                    if (!loc.equals(entry.getLocText()))  {
+                        throw new RuntimeException("Glossary error : " + entry.getSrcText()
+                                + " should have loc: " + loc + " but it is " + entry.getLocText());
+                    }
+                    if (!com.equals(entry.getCommentText())) {
+                        throw new RuntimeException("Glossary error : " + entry.getSrcText()
+                                + " should have comment: " + com + " but it is " + entry.getCommentText());
+                    }
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                throw new RuntimeException("Glossary error : glossary entry missing! \"" + s + "\"");
+            }
+        }
+        Log.log("Checked my added" + glossaries.size() + " entries in total " + entries.size()
+                + " writable glossary entries.");
     }
 
     static void checkTranslation(int index) {
@@ -297,6 +373,30 @@ public final class TestTeamIntegrationChild {
         Core.getProject().setTranslation(ste, prep, true, null);
         Log.log("Wrote: " + prep.source + "=" + prep.translation);
         Core.getProject().saveProject(true);
+    }
+
+    static long getGlossaryIndex(String term) {
+        return Long.parseLong(term.substring(term.lastIndexOf('/') + 1));
+    }
+    static String getGlossaryTerm(long index) {
+        return "term/" + source + "/" + index;
+    }
+    static String getGlossaryLoc(long index) {
+        return "loc/" + source + "/" + index;
+    }
+    static String getGlossaryCom(long index) {
+        return "com/" + source + "/" + index;
+    }
+
+    static void updateGlossary() throws Exception {
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        final File out = new File(props.getWriteableGlossary());
+        final String src = getGlossaryTerm(glossaryIndex);
+        final String loc = getGlossaryLoc(glossaryIndex);
+        final String com = getGlossaryCom(glossaryIndex);
+        GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true, out.getPath()));
+        Log.log("Add glossary entry " + src);
+        glossaryIndex++;
     }
 
     static IAutoSave autoSave = new IAutoSave() {
@@ -486,43 +586,31 @@ public final class TestTeamIntegrationChild {
         @Override
         public void insertTextAndMark(String text) {
         }
+
+        @Override
+        public boolean isOrientationAllLtr() {
+            return true;
+        }
     };
 
-    static IMainWindow mainWindow = new IMainWindow() {
+    static IMainWindow mainWindow = new ConsoleWindow() {
+        @Override
         public void unlockUI() {
         }
 
-        public void showStatusMessageRB(String messageKey, Object... params) {
-        }
-
-        public void showTimedStatusMessageRB(String messageKey, Object... params) {
-        }
-
+        @Override
         public void showProgressMessage(String messageText) {
         }
 
-        public void showMessageDialog(String message) {
-        }
-
+        @Override
         public void showLengthMessage(String messageText) {
         }
 
-        public void showErrorDialogRB(String title, String message, Object... args) {
-            System.err.println(message);
-        }
-
-        public int showConfirmDialog(Object message, String title, int optionType, int messageType)
-                throws HeadlessException {
-            return 0;
-        }
-
-        public void setCursor(Cursor cursor) {
-        }
-
+        @Override
         public void lockUI() {
         }
 
-        IMainMenu menu = new IMainMenu() {
+        final IMainMenu menu = new IMainMenu() {
 
             public JMenu getToolsMenu() {
                 return null;
@@ -553,6 +641,11 @@ public final class TestTeamIntegrationChild {
                 return null;
             }
 
+            @Override
+            public JMenu getMenu(MenuKey marker) {
+                return null;
+            }
+
             public void invokeAction(String action, int modifiers) {
             }
         };
@@ -561,16 +654,7 @@ public final class TestTeamIntegrationChild {
             return menu;
         }
 
-        @Override
-        public DockingDesktop getDesktop() {
-            return null;
-        }
-
         public Cursor getCursor() {
-            return null;
-        }
-
-        public JFrame getApplicationFrame() {
             return null;
         }
 
@@ -593,9 +677,6 @@ public final class TestTeamIntegrationChild {
 
         public void addDockable(Dockable pane) {
         }
-
-        public void showLockInsertMessage(String messageText, String toolTip) {
-        }
     };
 
     /**
@@ -606,12 +687,8 @@ public final class TestTeamIntegrationChild {
             super(props);
         }
 
-        ProjectTMX mergedTMX;
-        ProjectTMX baseTMX;
-        ProjectTMX headTMX;
-
         @Override
-        protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+        protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
             Log.log("Base:   " + baseTMX);
             Log.log("Mine:   " + projectTMX);
             Log.log("Theirs: " + headTMX);
@@ -660,20 +737,18 @@ public final class TestTeamIntegrationChild {
                     });
             String srcLang = config.getSourceLanguage().getLanguage();
             String trgLang = config.getTargetLanguage().getLanguage();
-            synchronized (projectTMX) {
-                ProjectTMX mergedTMX = SuperTmxMerge.merge(
-                        new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                        new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                        new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-                Log.log("Merged: " + mergedTMX);
-                if (!checkMergeInput(baseTMX, mergedTMX)) {
-                    Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
-                    System.exit(1);
-                }
-                projectTMX.replaceContent(mergedTMX);
+            ProjectTMX mergedTMX = SuperTmxMerge.merge(
+                    new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
+                    new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
+                    new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
+            Log.log("Merged: " + mergedTMX);
+            if (!checkMergeInput(baseTMX, mergedTMX)) {
+                Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
+                System.exit(1);
             }
             commitDetails.append('\n');
             commitDetails.append(props.getReport().toString());
+            return mergedTMX;
         }
 
         /**
@@ -691,57 +766,6 @@ public final class TestTeamIntegrationChild {
         boolean checkMergeInput(ProjectTMX base, ProjectTMX other) {
             return base.defaults.keySet().stream().allMatch(other.defaults::containsKey)
                     && base.alternatives.keySet().stream().allMatch(other.alternatives::containsKey);
-        }
-
-        protected void mergeTMXOld(ProjectTMX baseTMX, ProjectTMX headTMX) {
-            mergedTMX = new ProjectTMX();
-            this.baseTMX = baseTMX;
-            this.headTMX = headTMX;
-            String s = "info";
-            for (TMXEntry e : baseTMX.getDefaults()) {
-                use(e);
-            }
-            for (TMXEntry e : headTMX.getDefaults()) {
-                TMXEntry eb = baseTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
-                    if (v(eb) > v(e)) {
-                        throw new RuntimeException("Rebase HEAD: wrong concurrent" + s);
-                    }
-                    use(e);
-                } else if (e.source.startsWith(source + "/")) { // my segments
-                    if (v(eb) != v(e)) {
-                        throw new RuntimeException("Rebase HEAD: not equals for current project" + s);
-                    }
-                } else { // other segments
-                    if (v(eb) > v(e)) {
-                        throw new RuntimeException("Rebase HEAD: less value" + s);
-                    }
-                    use(e);
-                }
-            }
-            for (TMXEntry e : projectTMX.getDefaults()) {
-                TMXEntry em = mergedTMX.getDefaultTranslation(e.source);
-                if (CONCURRENT_NAME.equals(e.source)) { // concurrent
-                    if (v(e) > v(em)) {
-                        use(e);
-                    }
-                } else if (e.source.startsWith(source + "/")) { // my segments
-                    if (v(e) < v(em)) {
-                        throw new RuntimeException("Rebase me: less value" + s);
-                    }
-                    use(e);
-                } else { // other segments
-                    use(em);
-                }
-            }
-
-            projectTMX.replaceContent(mergedTMX);
-        }
-
-        void use(TMXEntry en) {
-            EntryKey k = new EntryKey("file", en.source, null, null, null, null);
-            SourceTextEntry ste = new SourceTextEntry(k, 0, null, en.source, Collections.emptyList());
-            mergedTMX.setTranslation(ste, en, true);
         }
 
         long v(TMXEntry e) {
@@ -768,13 +792,24 @@ public final class TestTeamIntegrationChild {
             }
         }
 
-        String trans(ProjectTMX tmx, TMXEntry e) {
-            TMXEntry en = tmx.getDefaultTranslation(e.source);
-            if (en == null) {
-                return "null";
-            } else {
-                return en.translation;
-            }
+        @Override
+        protected void notifyGlossaryManagerFileChanged(File file) {
+            glossaryManager.fileChanged(file);
+        }
+    }
+
+    private static class TestGlossaryTextArea implements IGlossaries {
+        @Override
+        public List<GlossaryEntry> getDisplayedEntries() {
+            return null;
+        }
+
+        @Override
+        public void showCreateGlossaryEntryDialog(final Frame parent) {
+        }
+
+        @Override
+        public void refresh() {
         }
     }
 }

@@ -29,17 +29,10 @@ package svn;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CodingErrorAction;
-import java.nio.charset.MalformedInputException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.Locale;
@@ -47,23 +40,17 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.UUID;
-import java.util.function.BiConsumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import org.junit.Test;
 
-import org.omegat.Main;
-import org.omegat.util.EncodingDetector;
-import org.omegat.util.Language;
+import org.omegat.util.CommonVerifications;
 import org.omegat.util.OStrings;
 
 /**
  *
  * @author Aaron Madlon-Kay
  */
-public class BundleTest {
+public class BundleTest extends CommonVerifications {
 
     /**
      * Ensure that all UI string bundles have either US-ASCII encoding or
@@ -76,41 +63,12 @@ public class BundleTest {
      */
     @Test
     public void testBundleEncodings() throws Exception {
-        // Test English bundle separately as its name corresponds to the
-        // empty locale, and will not be resolved otherwise.
-        assertEncoding("Bundle.properties");
-        for (Language lang : Language.getLanguages()) {
-            String bundle = "Bundle_" + lang.getLocaleCode() + ".properties";
-            assertEncoding(bundle);
-        }
-    }
-
-    private void assertEncoding(String bundle) throws IOException {
-        try (InputStream stream = Main.class.getResourceAsStream(bundle)) {
-            if (stream == null) {
-                return;
-            }
-            String encoding = EncodingDetector.detectEncoding(stream);
-            System.out.println(bundle + ": " + encoding);
-            // The detector will give Windows-1252 for ISO-8859-1; yes, this is
-            // not technically correct, but it's close enough. See:
-            // http://www.i18nqa.com/debug/table-iso8859-1-vs-windows-1252.html
-            assertTrue("US-ASCII".equals(encoding) || "WINDOWS-1252".equals(encoding));
-        }
+        assertBundle("Bundle");
     }
 
     @Test
     public void testBundleLoading() {
-        // We must set the default locale to English first because we provide
-        // our English bundle as the empty-locale default. If we don't do so,
-        // the English bundle will never be tested in the case that the
-        // "default" is a language we provide a bundle for.
-        Locale.setDefault(Locale.ENGLISH);
-
-        for (Language lang : Language.getLanguages()) {
-            ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle", lang.getLocale());
-            assertTrue(bundle.getKeys().hasMoreElements());
-        }
+        assertBundleLoading("org/omegat/Bundle");
     }
 
     @Test
@@ -156,14 +114,8 @@ public class BundleTest {
      */
     @Test
     public void testUndefinedStrings() throws Exception {
-        Locale.setDefault(Locale.ENGLISH);
-        Pattern pattern = Pattern.compile("OStrings\\.getString\\(\\s*\"([^\"]+)\"\\s*[,\\)]");
-        processSourceContent((path, chars) -> {
-            Matcher m = pattern.matcher(chars);
-            while (m.find()) {
-                OStrings.getString(m.group(1));
-            }
-        });
+        assertBundleHasAllKeys(new String[] { "src", "test", "test-integration", "tipoftheday" },
+                OStrings.getResourceBundle());
     }
 
     /**
@@ -196,59 +148,4 @@ public class BundleTest {
         }
     }
 
-    /**
-     * Process the text content of all .java files under /src. Also check
-     * DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE for security reasons.
-     * And check invisible space character.
-     *
-     * @param consumer
-     *            A function that accepts the file path and content
-     * @throws IOException
-     *             from Files.find()
-     */
-    public static void processSourceContent(BiConsumer<Path, CharSequence> consumer) throws IOException {
-        CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
-        decoder.onMalformedInput(CodingErrorAction.REPORT);
-        decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
-        for (String root : new String[] { "src", "test", "test-integration" }) {
-            Path rootPath = Paths.get(".", root);
-            assertTrue(rootPath.toFile().isDirectory());
-            try (Stream<Path> files = Files.find(rootPath, 100,
-                    (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))) {
-                files.forEach(p -> {
-                    try {
-                        checkFileContent(p, decoder, consumer);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            }
-        }
-    }
-
-    public static void checkFileContent(Path p, CharsetDecoder decoder,
-            BiConsumer<Path, CharSequence> consumer) throws Exception {
-        try {
-            byte[] bytes = Files.readAllBytes(p);
-            CharBuffer chars = decoder.decode(ByteBuffer.wrap(bytes));
-            for (int i = 0; i < chars.limit(); i++) {
-                int c = chars.charAt(i);
-                if (c == 0x202e) {
-                    // found Right-to-left-override: unicode 202e
-                    throw new Exception("File contains Right-to-Left-Override (RLTO) character: " + p);
-                }
-                if (c == 0x0009 || c == 0x00a0 || c == 0x00ad || c == 0x034f || c == 0x061c
-                        || c >= 0x2000 && c < 0x200b || c == 0x2028 || c >= 0x205f && c <= 0x206f
-                        || c == 0x2800 || c == 0x3000 || c == 0x3164) {
-                    throw new Exception("File contains invisible character: " + p);
-                }
-            }
-            chars.clear();
-            consumer.accept(p, chars);
-        } catch (MalformedInputException ex) {
-            throw new Exception("File contains a bad character sequence for UTF-8: " + p, ex);
-        } catch (IOException ex) {
-            throw new Exception(p.toString(), ex);
-        }
-    }
 }

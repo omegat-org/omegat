@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd"
+[
+<!ENTITY % manualvariables SYSTEM "manualvariables.mod">
+%manualvariables;
+]>
+<chapter id="chapter.dialogs.preferences">
+  <title id="chapter.dialogs.preferences.title"><guilabel>Preferenze</guilabel></title>
+
+  <para>Usare <link endterm="menus.options.title" linkend="menus.options"/><link endterm="menus.options.preferences.title" linkend="menus.options.preferences"/> per accedere a questa finestra di dialogo (il menu <literal>OmegaT</literal> su macOS).</para>
+
+  <para>Usare il campo di ricerca in alto nell'elenco delle preferenze per ricercare elementi specifici.</para>
+  
+  <para>Le preferenze impostate in questa finestra di dialogo vengono salvate nella <link linkend="configuration.folder">cartella di configurazione</link> predefinita e applicate a tutti i progetti di traduzione, a meno che non sia stata specificata una cartella di configurazione diversa..</para>
+
+  <note>
+    <para>È possibile fare in modo che OmegaT utilizzi una cartella di configurazione differente per definire configurazioni specifiche dei progetti. Vedere la sezione <link endterm="launch.with.command.line.title" linkend="launch.with.command.line"/> per i dettagli. Se si specifica una cartella di configurazione in tal senso, tutte le modifiche apportate in questa finestra di dialogo saranno memorizzate lì.</para>
+  </note>
+
+  <section id="dialogs.preferences.general">
+    <title id="dialogs.preferences.general.title"><guilabel>Generale</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.general.use.tab.to.advance">
+        <term id="dialogs.preferences.general.use.tab.to.advance.title"><option>Avanza col tasto TAB</option></term>
+
+        <listitem>
+		  <para>Il tasto predefinito per convalidare e passare a un altro segmento è <keycap>Invio</keycap>.</para>
+          <para>Questa opzione imposta invece il tasto <keycap>Tab</keycap> come convalida del segmento.</para>
+
+		  <para>Questa opzione potrebbe risultare utile con i sistemi di input di caratteri cinesi, giapponesi o coreani.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.general.always.confirm.quit">
+        <term id="dialogs.preferences.general.always.confirm.quit.title"><option>Conferma sempre l'uscita</option></term>
+
+        <listitem>
+          <para>Il programma chiederà sempre la conferma dell'uscita prima di chiudersi.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.general.access.configuration.folder">
+        <term id="dialogs.preferences.general.access.configuration.folder.title"><option>Accedi alla cartella di configurazione</option></term>
+		<listitem>
+          <para>Apre la cartella locale in cui sono memorizzati i file di configurazione di OmegaT.</para>
+		  <note>
+			<para>La posizione dipende dal sistema operativo in uso e dalle opzioni di avvio. Vedere l'appendice <link linkend="configuration.folder" endterm="configuration.folder.title"/>per i dettagli.</para>
+		  </note>
+		</listitem>
+      </varlistentry>
+
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.mt">
+    <title id="dialogs.preferences.mt.title"><guilabel>Traduzione automatica</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.mt.automatically.fetch.translations">
+        <term id="dialogs.preferences.mt.automatically.fetch.translations.title"><option>Recupera automaticamente le traduzioni</option></term>
+
+        <listitem>
+          <para>Disabilitando questa opzione, le traduzioni automatiche saranno recuperate solo quando si usa <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt" endterm="menus.edit.replace.with.mt.title"/> nel segmento attivo. Si dovrà poi premere una seconda volta quella combinazione per inserire il suggerimento.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.mt.untranslated.segments.only">
+        <term id="dialogs.preferences.mt.untranslated.segments.only.title"><option>Solo segmenti non tradotti</option></term>
+
+        <listitem>
+          <para>Selezionare questa casella se si intendono inviare ai servizi di traduzione automatica solo i segmenti non tradotti.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.mt.provider.list">
+        <term id="dialogs.preferences.mt.provider.list.title"><option>Elenco dei fornitori</option></term>
+
+        <listitem>
+          <para>Nell'elenco della traduzione automatica disponibile in OmegaT, spuntare la casella <guilabel>Abilitato</guilabel> per ciascun fornitore cui si vuole accedere. Usare il pulsante <guibutton>Configura</guibutton> per gestire le credenziali di autenticazione per il fornitore specificato.</para>
+
+		  <note>
+			<para>La maggior parte dei fornitori, per utilizzare i propri servizi, richiede una qualche forma di registrazione. Accertarsi di essere in possesso delle credenziali corrette prima di utilizzare questa funzione.</para>
+		  </note>
+
+		  <table id="dialogs.preferences.mt.provider.list.configuration">
+			<title id="dialogs.preferences.mt.provider.list.configuration.title"><option>Credenziali richieste</option></title>
+
+			<tgroup align="left" cols="3" rowsep="1">
+			  <colspec align="left" colnum="1"/>
+			  <thead>
+				<row>
+				  <entry>Motore</entry>
+				  <entry>Credenziali richieste</entry>
+				  <entry>Collegamento</entry>
+				</row>
+			  </thead>
+			  <tbody>
+				<row>
+				  <entry>Belazar</entry>
+				  <entry/>
+				  <entry/>
+				</row>
+				<row>
+				  <entry>DeepL</entry>
+				  <entry>Richiede un piano &quot;Deepl Pro Advanced&quot; disponibile solo in alcuni paesi</entry>
+				  <entry><ulink url="https://www.deepl.com/it/pro">https://www.deepl.com/it/pro</ulink></entry>
+				</row>
+				<row>
+				  <entry>MyMemory (traduzione automatica)</entry>
+				  <entry/>
+				  <entry><ulink url="https://mymemory.translated.net/doc/cat.php">https://mymemory.translated.net/</ulink></entry>
+				</row>
+				<row>
+				  <entry>Apertium</entry>
+				  <entry>URL, chiave</entry>
+				  <entry><ulink url="http://www.apertium.org">http://www.apertium.org</ulink></entry>
+				</row>
+				<row>
+				  <entry>MyMemory (traduzione umana)</entry>
+				  <entry/>
+				  <entry/>
+				</row>
+				<row>
+				  <entry>IBM Watson</entry>
+				  <entry>URL, ID modello, ID accesso, Password</entry>
+				  <entry><ulink url="https://www.ibm.com/watson">https://www.ibm.com/watson</ulink></entry>
+				</row>
+				<row>
+				  <entry>Google Translate v2</entry>
+				  <entry>Chiave API</entry>
+				  <entry><ulink url="https://cloud.google.com/translate/docs/reference/rest/">https://cloud.google.com/translate/</ulink></entry>
+				</row>
+			  </tbody>
+			</tgroup>
+		  </table>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.glossary">
+    <title id="dialogs.preferences.glossary.title"><guilabel>Glossari</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries">
+        <term id="dialogs.preferences.glossary.display.context.description.for.tbx.glossaries.title"><option>Mostra la descrizione del contesto dei glossari TBX (TBX 2)</option></term>
+
+        <listitem>
+          <para>Deselezionare questa opzione se la descrizione del contesto mostrata per ciascuna voce del glossario non è necessaria o è eccessivamente lunga.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text">
+        <term id="dialogs.preferences.glossary.use.terms.appearing.separately.in.the.source.text.title"><option>Concorda i gruppi di termini anche se i termini appaiono per separato</option></term>
+
+        <listitem>
+          <para>Quando il termine del glossario è una parola composta, il termine concorderà anche se le parole appaiono separate nel testo di partenza.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.use.stemming.for.glossary.entries">
+        <term id="dialogs.preferences.glossary.use.stemming.for.glossary.entries.title"><option>Usa il riconoscimento della radice</option></term>
+
+        <listitem>
+          <para>OmegaT utilizzerà il tokenizer associato per trovare delle corrispondenze.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text">
+        <term id="dialogs.preferences.glossary.replace.glossary.hits.when.inserting.source.text.title"><option>Sostituisci le concordanze quando inserisci il testo di partenza</option></term>
+        <listitem>
+          <para>Quando si utilizza</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.source" endterm="menus.edit.replace.with.source.title"/>,</para>
+			</listitem>
+
+			<listitem>
+			  <para><link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.insert.source" endterm="menus.edit.insert.source.title"/>oppure</para>
+			</listitem>
+
+			<listitem>
+			  <para>la preferenza <link linkend="dialogs.preferences.editor.insert.the.source.text" endterm="dialogs.preferences.editor.insert.the.source.text.title"/>, ecc.</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>per inserire il contenuto di partenza nel segmento di destinazione, le parole con una voce di glossario saranno sostituite automaticamente dalla loro traduzione.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.ignore.hits.with.very.different.case">
+        <term id="dialogs.preferences.glossary.ignore.hits.with.very.different.case.title"><option>Ignora concordanze con grandi differenze di maiuscole e minuscole (es. UTENTE vs utente)</option></term>
+
+        <listitem>
+          <para>Le concordanze con grandi differenze di maiuscole e minuscole non vengono visualizzate.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.glossary.layout">
+        <term id="dialogs.preferences.glossary.glossary.layout.title"><option>Aspetto</option></term>
+
+        <listitem>
+          <para>Seleziona una disposizione per il contenuto del pannello dei glossari. È possibile aggiungere ulteriori disposizioni come plugin.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term">
+        <term id="dialogs.preferences.glossary.merge.alternate.definitions.for.the.same.term.title"><option>Unisci definizioni alternative dello stesso termine</option></term>
+
+        <listitem>
+          <para>Se un termine del glossario contiene più definizioni, le stesse saranno proposte sulla stessa riga.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.dictionary">
+    <title id="dialogs.preferences.dictionary.title"><guilabel>Dizionari</guilabel></title>
+
+	<para>Le preferenze qui definiscono come debba essere visualizzato il contenuto della cartella <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> nel pannello <link linkend="panes.dictionary" endterm="panes.dictionary.title"/>.</para>
+	
+    <variablelist>
+      <varlistentry id="dialogs.preferences.dictionary.automatically.search.segment">
+        <term id="dialogs.preferences.dictionary.automatically.search.segment.title"><option>Cerca automaticamente</option></term>
+
+        <listitem>
+          <para>Con l'opzione disattivata, usare <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.dictionaries" endterm="menus.edit.search.dictionaries.title"/> per ricercare le concordanze della selezione o di tutti i termini nel segmento di partenza.</para>
+		  <para>Con l'opzione attivata, OmegaT cerca automaticamente in tutti i dizionari le concordanze dei termini che identifica nel segmento, in quanto entra nel segmento.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries">
+        <term id="dialogs.preferences.dictionary.use.fuzzy.matching.for.dictionary.entries.title"><option>Usa concordanze parziali</option></term>
+
+        <listitem>
+          <para>OmegaT utilizzerà il tokenizer associato per trovare delle corrispondenze.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.dictionary.use.condensed.view">
+        <term id="dialogs.preferences.dictionary.use.condensed.view.title"><option>Usa la vista compatta</option></term>
+
+        <listitem>
+          <para>Alcuni driver di dizionario forniti come plugin non supportano questa funzionalità.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="dialogs.preferences.appearance">
+    <title id="dialogs.preferences.appearance.title"><guilabel>Aspetto</guilabel></title>
+
+    <variablelist>
+      <varlistentry id="dialogs.preferences.appearance.theme">
+        <term id="dialogs.preferences.appearance.theme.title"><option>Tema</option></term>
+
+        <listitem>
+          <para>Seleziona un tema per l'interfaccia utente di OmegaT.</para>
+
+          <para>È possibile aggiungere temi aggiuntivi come plugin. I temi forniscono anche un set predefinito di colori predefiniti.</para>
+
+		  <para>Non tutti i temi Java forniti in modo nativo sono compatibili con le operazioni di OmegaT.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="dialogs.preferences.appearance.restore.main.window">
+        <term id="dialogs.preferences.appearance.restore.main.window.title"><option>Ripristina finestra principale</option></term>
+
+        <listitem>
+          <para>Riporta i pannelli della finestra di OmegaT alla loro disposizione predefinita.</para>
+
+		  <para>Usare questa funzionalità quando non è possibile ripristinare la disposizione desiderata dopo aver staccato, spostato o nascosto uno o più pannelli. È possibile utilizzarla anche quando i pannelli non appaiono come ci si aspetta dopo un aggiornamento di OmegaT.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+	
+	<section id="dialogs.preferences.fonts">
+      <title id="dialogs.preferences.fonts.title"><guilabel>Tipo di carattere</guilabel></title>
+
+      <para>Seleziona il tipo e la dimensione del carattere utilizzato per visualizzare il testo nei pannelli della finestra principale.</para>
+
+	  <note>
+		<para>OmegaT usa lo stesso tipo di carattere sia per lingua di partenza, sia per quella di destinazione. Se si lavora con una coppia linguistica che utilizza sistemi di scrittura differenti, accertarsi di scegliere un tipo di carattere che visualizzi correttamente entrambe le lingue. I caratteri non supportati appariranno come quadrati.</para>
+	  </note>
+
+	  <variablelist>
+		<varlistentry>
+		  <term><option>Applica questo carattere ai dati tabellari (file di progetto, statistiche, ecc.)</option></term>
+		  <listitem>
+			<para>I dati tabellari sono visualizzati per impostazione predefinita con un tipo di carattere a spaziatura fissa che mantiene le colonne allineate correttamente. L'uso di un tipo di carattere proporzionale danneggerebbe l'impaginazione.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term><option>Applica una dimensione diversa al pannello del dizionario</option></term>
+		  <listitem>
+			<para>Per impostazione predefinita, il pannello del dizionario usa la stessa dimensione del carattere dei pannelli della finestra principale.</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</section>
+
+	<section id="dialogs.preferences.colours">
+      <title id="dialogs.preferences.colours.title"><guilabel>Colori</guilabel></title>
+
+      <para>È possibile assegnare colori diversi alle varie parti dell'interfaccia utente.</para>
+
+      <para>È possibile utilizzare degli script per impostare temi predefiniti. OmegaT incorpora uno script chiamato <link linkend="windows.scripts.distribution.switch.colour.theme" endterm="windows.scripts.distribution.switch.colour.theme.title"/> che fornisce il tema predefinito scuro. Vedere la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/> per i dettagli.</para>
+
+	  <note>
+		<para>Il rilevamento automatico del tema scura è disponibile nei sistemi Linux con aspetto Gnome/GTK per gli utenti che eseguono OmegaT su OpenJDK. Questa funzionalità dipende da una funzionalità Java che non è ancora disponibile su altre piattaforme.</para>
+	  </note>
+	</section>
+  </section>
+
+  <section id="dialogs.preferences.file.filters">
+	<title id="dialogs.preferences.file.filters.title"><guilabel>Filtri dei file globali</guilabel></title>
+
+	<para>Questa finestra contiene un elenco dei filtri dei file disponibili nei progetti che non utilizzano filtri dei file locali.</para>
+
+	<para>Il contenuto di questa preferenza è uguale a quello della finestra di dialogo dei <link linkend="dialogs.project.properties.filters">filtri dei file locali</link>. Vedere l'appendice <link linkend="file.filters" endterm="file.filters.title"/> per i dettagli.</para>
+
+	<note>
+	  <para>Se sono utilizzati i filtri dei file locali, la modifica dei filtri dei globali non avranno effetto sul progetto.</para>
+	</note>
+  </section>
+
+
+  <section id="dialogs.preferences.segmentation.setup">
+	<title id="dialogs.preferences.segmentation.setup.title"><guilabel>Regole globali di segmentazione</guilabel></title>
+
+	<para>Si veda l'appendice <link linkend="app.segmentation" endterm="app.segmentation.title"/> per una spiegazione generale della segmentazione (globale o locale, a livello di paragrafo o di frase, ecc.)</para>
+
+	<warning>
+	  <para>Questa finestra di dialogo dà accesso soltanto alle regole di segmentazione globali. Se sono state impostate regole locali nella finestra di dialogo <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, le modifiche qui apportate non verranno prese in considerazione.</para>
+	</warning>
+	
+	<section id="dialogs.preferences.segmentation.setup.scope">
+	  <title id="dialogs.preferences.segmentation.setup.scope.title">Gruppi di lingua</title>
+
+	  <para>Saranno applicate solo le regole associate agli schemi linguistici che corrispondono alla lingua di partenza del proprio progetto. Vedere le proprietà del progetto <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>.</para>
+
+	  <example id="dialogs.preferences.segmentation.setup.scope.example">
+		<title id="dialogs.preferences.segmentation.setup.scope.example.title">Regole per il giapponese</title>
+		<para>Per una traduzione dal giapponese verranno prese in considerazione <emphasis>soltanto</emphasis> la serie di regole associate al modello <code>JA.*</code> e le serie di regole generiche associate a <code>.*</code>.</para>
+	  </example>
+
+	  <para>Facendo clic su uno schema linguistico nella metà superiore della finestra di dialogo, nella parte inferiore della finestra di dialogo verrà visualizzato l'elenco delle regole ad esso associate.</para>
+
+	  <para>Tutte le serie delle regole di segmentazione per un corrispondente schema linguistico sono attive e vengono applicate in ordine. Le regole per aree linguistiche specifiche dovranno precedere quelle predefinite.</para>
+
+	  <example id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example">
+		<title id="dialogs.preferences.segmentation.setup.scope.cascading.proprieties.example.title">Priorità a cascata</title>
+		<para>Le regole per <emphasis>FR-CA</emphasis> dovranno precedere quelle per <emphasis>FR.*</emphasis>, che a sua volta dovrà precedere la serie generica <emphasis>.*</emphasis>.</para>
+
+		<para>Ossia, quando si traduce dal francese del Canada, le regole relative, se presenti, dovranno essere applicate per prime, seguite da quelle per il francese comune e, infine, da quelle generiche.</para>
+	  </example>
+	  
+	  <para>Per creare una nuova serie di regole:</para>
+	  <orderedlist>
+		<listitem>
+		  <para>Fare clic su <guibutton>Aggiungi</guibutton>. Verrà creata una riga vuota nel fondo della tabella.</para>
+		</listitem>
+		
+		<listitem>
+		  <para>Cambiare il nome della serie di regole e dello schema linguistico nello schema corrispondente e con l'etichetta desiderata. Lo schema linguistico è un'espressione regolare.</para>
+		</listitem>
+
+		<listitem>
+		  <para>Usare il pulsante <guibutton>Sposta in alto</guibutton> per impostare la priorità della serie di regole.</para>
+		</listitem>
+	  </orderedlist>
+	</section>
+
+	<section id="segmentation.rules">
+	  <title id="segmentation.rules.title"><guilabel>Contenuto della serie</guilabel></title>
+	  <warning>
+		<para>Le regole di eccezione devono essere elencate <emphasis>sopra</emphasis> le regole di interruzione.</para>
+
+		<para>Quando OmegaT legge i file, inserisce un marcatore di &quot;non interruzione&quot; in ciascuna posizione di eccezione. Alle posizioni senza tali marcatori e che corrispondono a una regola di interruzione verranno applicate interruzioni.</para>
+	  </warning>
+	  
+	  <variablelist>
+		<varlistentry id="segmentation.rules.exceptionrule">
+		  <term id="segmentation.rules.exceptionrule.title"><option>Eccezioni</option></term>
+
+		  <listitem>
+			<para>Per definire una regola d'interruzione, lasciare disattivata la casella di controllo <guilabel>Interruzione/Eccezione</guilabel>.</para>
+
+			<para>Specificare combinazioni di testo che rappresentano un'eccezione a una regola di interruzione. Per esempio, <emphasis>Sig. Rossi</emphasis> non dovrebbe essere separato in due segmenti nonostante sia presente un <emphasis>punto seguito da uno spazio</emphasis>, che in genere rappresenta una regola di interruzione che definisce una (la fine di una) frase.</para>
+			
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="segmentation.rules.breakrule">
+		  <term id="segmentation.rules.breakrule.title"><option>Interruzioni</option></term>
+
+		  <listitem>
+			<para>Per definire una regola d'interruzione, spuntare la casella di controllo <guilabel>Interruzione/Eccezione</guilabel>.</para>
+
+			<para>Separa il testo di origine in segmenti. Per esempio, il <emphasis>punto seguito da uno spazio</emphasis> in genere definisce la fine di una frase sia in inglese, sia in italiano.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry id="creating.new.rule">
+		  <term id="creating.new.rule.title"><guibutton>Aggiungi</guibutton></term>
+		  <listitem>
+			<para>Lo schema <emphasis role="bold">Prima</emphasis> identifica le parti che si trovano prima del punto di interruzione o di eccezione.</para>
+
+			<para>Lo schema <emphasis role="bold">Dopo</emphasis> identifica le parti che si trovano dopo il punto di interruzione o di eccezione.</para>
+
+			<para>Gli schemi <emphasis role="bold">Prima</emphasis> e <emphasis role="bold">Dopo</emphasis> sono espressioni regolari. Vedere l'appendice <link linkend="app.regex" endterm="app.regex.title"/> per i dettagli.</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	  
+	  <para>Le regole esistenti rappresentano sempre un buon punto di partenza.</para>
+	</section>
+  </section>
+
+  <section id="dialog.preferences.auto.completion">
+	<title id="dialog.preferences.auto.completion.title"><guilabel>Completamento automatico</guilabel></title>
+
+	<para>Il menu relativo al completamento automatico si trova nel pannello <link linkend="panes.editor" endterm="panes.editor.title"/>. Vedere la sezione <link linkend="panes.editor.auto.completion.menu" endterm="panes.editor.auto.completion.menu.title"/> per i dettagli.</para>
+	
+	<para>Fare clic su <guilabel>Glossario</guilabel> per configurare la vista del glossario per il completamento automatico.</para>
+
+	<para>Fare clic su <guilabel>Testo automatico</guilabel> per configurare le opzioni del testo automatico e aggiungere o rimuovere le voci.</para>
+
+	<para>Fare clic su <guilabel>Tabella caratteri</guilabel> per impostare le opzioni di completamento automatico relativo alla tabella dei caratteri.</para>
+
+	<para>Fare clic su <guilabel>Abilita completamento cronologia</guilabel> o <guilabel>Abilita predizione cronologia</guilabel> per impostare i completamenti basati sulla cronologia.</para>
+
+	<note>
+	  <para>Nessun dato (cronologia, ecc.) sarà <emphasis>mai</emphasis> inviato da OmegaT a un server esterno durante l'elaborazione. Tutte le predizioni e i completamenti sono calcolati in locale.</para>
+	</note>
+
+	<para>Se l'opzione <guilabel>Mostra automaticamente i suggerimenti pertinenti</guilabel> è attivata, digitando la prima lettera di una voce di glossario tradotto, o <literal>&lt;</literal> per un tag, si avvierà il completamento automatico.</para>
+  </section>
+
+  <section id="dialog.preferences.spellchecker">
+	<title id="dialog.preferences.spellchecker.title"><guilabel>Correttore ortografico</guilabel></title>
+
+	<para>OmegaT incorpora un correttore ortografico ma necessita l'installazione dei dizionari di correzione ortografica relativi alle lingue di destinazione.</para>
+
+	<warning>
+	  <para>OmegaT utilizzerà il dizionario avente lo stesso nome del codice della lingua di destinazione impostato nelle proprietà del progetto <link linkend="dialogs.project.properties.languages" endterm="dialogs.project.properties.languages.title"/>. Un dizionario <emphasis>IT-it</emphasis> non funzionerà con segmenti di arrivo <emphasis>IT</emphasis>. Modificare, se necessario, il nome del dizionario, oppure cambiare le impostazioni linguistiche del proprio progetto.</para>
+	</warning>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.spellchecker.automatic.check">
+		<term id="dialog.preferences.spellchecker.automatic.check.title"><option>Eseguire la correzione ortografica della traduzione</option></term>
+		<listitem>
+		  <para>Abilitare dopo aver installato un dizionario di correzione ortografica. OmegaT sottolineerà con una riga ondulata rossa gli errori di ortografia.</para>
+		  <para>Usare il <link linkend="panes.editor.context.menu">menu contestuale dell'editor</link> per correggere gli errori, <guimenuitem>ignorarli tutti</guimenuitem> o <guimenuitem>aggiungerli al dizionario</guimenuitem>. Vedere i <link linkend="project.folder.omegat.spellcheck">file di correzione ortografica</link> per i dettagli.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.dictionary.folder">
+		<term id="dialog.preferences.spellchecker.dictionary.folder.title"><option>Posizione dei dizionari ortografici</option></term>
+		<listitem>
+		  <para>La cartella in cui OmegaT installa e ricerca i dizionari ortografici. È in genere la cartella <link linkend="configuration.folder" endterm="configuration.folder.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.already.installed">
+		<term id="dialog.preferences.spellchecker.already.installed.title"><option>Lingue disponibili</option></term>
+		<listitem>
+		  <para>L'elenco dei dizionari presenti nella cartella sopra nominata.</para>
+
+		  <para>Se non è possibile visualizzarne neanche una, ciò significa o che non è stato ancora installato un dizionario ortografico, oppure che il proprio progetto utilizza una specifica cartella di configurazione che non contiene ancora un dizionario ortografico.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.spellchecker.url">
+		<term id="dialog.preferences.spellchecker.url.title"><option>URL dei dizionari ortografici scaricabili</option></term>
+		<listitem>
+		  <para>L'URL predefinito in cui OmegaT cercherà i dizionari da installare.</para>
+
+		  <para>È possibile anche scaricare i dizionari da altri indirizzi o copiare dizionari installati localmente.</para></listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.spellchecker.install.new">
+		<term id="dialog.preferences.spellchecker.install.new.title"><guibutton>Installa una nuova lingua...</guibutton></term>
+		<listitem>
+		  <para>Visualizza l'elenco dei dizionari disponibili dall'URL sopraccitato.</para>
+
+		  <warning>
+			<para>Questa azione richiede una connessione internet</para>
+		  </warning>
+
+		  <para>Selezionare i dizionari da installare e fare clic su <guibutton>Installa</guibutton>. A seconda del tipo di connessione, l'installazione del dizionario potrebbe richiedere del tempo.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+  
+  <section id="dialog.preferences.languagetool.plugin">
+	<title id="dialog.preferences.languagetool.plugin.title"><guilabel>LanguageTool</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.languagetool.plugin.servicetype">
+		<term id="dialog.preferences.languagetool.plugin.servicetype.title"><option>Tipo di servizio</option></term>
+
+		<listitem>
+		  <para>Selezionare la posizione del verificatore linguistico.</para>
+
+		  <para>L'uso, sulla propria macchina, di un verificatore linguistico diverso da quello fornito con OmegaT consente di personalizzare le regole di verifica.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.languagetool.plugin.rules">
+		<term id="dialog.preferences.languagetool.plugin.rules.title"><option>Regole</option></term>
+
+		<listitem>
+		  <para>Selezionare le regole a seconda che esse siano o no rilevanti per il tipo di testo che si sta traducendo.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.external.searches">
+	<title id="dialogs.preferences.external.searches.title"><guilabel>Ricerche esterne globali</guilabel></title>
+	<para>Le ricerche esterne possono essere sia ricerche web, sia comandi locali che prendono la stringa selezionata nell'Editor come parametro. Le ricerche web sono aperte nel browser predefinito, i comandi equivalgono a elementi avviati nella riga di comando.</para>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
+		<term id="dialogs.preferences.external.search.enable.project.specific.commands.title"><option>Consenti comandi di ricerca esterna locale</option></term>
+
+		<listitem>
+		  <warning>
+			<para>Per ragioni di sicurezza, le <link linkend="dialogs.project.properties.external.searches">ricerche esterne locali</link> sono disabilita in modo predefinito.</para>
+		  </warning>
+
+		  <para>I comandi delle ricerche esterne locali sono salvati nel file <link linkend="project.folder.omegat.filters" endterm="project.folder.omegat.filters.title"/>. Attivare questa opzione solo se l'origine di quel file è affidabile.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.external.search.context.menu.priority">
+		<term id="dialogs.preferences.external.search.context.menu.priority.title"><option>Priorità menu contestuale</option></term>
+
+		<listitem>
+		  <para>Questa opzione abilita a cambiare l'ordine dei comandi nel <link linkend="panes.editor.context.menu">menu contestuale</link> del pannello dell'Editor. Impostando il valore intorno a 100 i comandi saranno visualizzati in cima, mentre se si imposta intorno a 900 saranno visualizzati in fondo al menu.</para>
+
+		  <warning>
+			<para>Riavvia OmegaT per applicare questa modifica.</para>
+		  </warning>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.external.search.items">
+		<term id="dialogs.preferences.external.search.items.title"><option>Impostazioni</option></term>
+		<listitem>
+		  <para>Ciascun gruppo rappresenta un gruppo di ricerche web o comandi locali che vengono avviati simultaneamente.</para>
+
+		  <para>A ogni gruppo deve essere attribuito un nome. Il nome sarà visualizzato sotto il menu <link linkend="menus.tools" endterm="menus.tools.title"/>.</para>
+
+		  <para>Se si attiva l'opzione <guilabel>Mostra nel menu contestuale dell'Editor</guilabel>, il nome impostato sarà visualizzato anche nel <link linkend="panes.editor.context.menu">menu contestuale</link>, se viene selezionata una stringa.</para>
+
+		  <para>Le ricerche per URL, così come i comandi, per essere accettate devono contenere la stringa <literal>{target}</literal>. Il segnaposto <literal>{target}</literal> verrà sostituito dalla stringa che era stata selezionata in precedenza nell'Editor.</para>
+
+		  <para>Gli URL si apriranno nel browser web predefinito, uno per scheda.</para>
+
+		  <example id="dialogs.preferences.external.search.items.url.search.example">
+			<title id="dialogs.preferences.external.search.items.url.search.example.title">Esempio di ricerca per URL</title>
+			<programlisting>https://duckduckgo.com/?q=%22{target}%22+site%3A.fr+-linguee</programlisting>
+
+			<para>Questa stringa apre una ricerca per il termine {target} in DuckDuckGo con determinati parametri di ricerca.</para></example>
+
+			<para>I comandi sono aperti nella riga di comando. Il <guilabel>Delimitatore</guilabel> definisce il delimitatore tra i parametri del comando. Il delimitatore predefinito è <code>|</code>.</para>
+
+		  <example id="dialogs.preferences.external.search.items.command.example">
+			<title id="dialogs.preferences.external.search.items.command.example.title">Esempio di comando</title>
+			<programlisting>/usr/bin/open|dict://{target}</programlisting>
+
+			<para>Questo comando apre l'applicazione del dizionario che implementa il protocollo <code>dict</code> nel computer e cerca il termine {target}.</para></example>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.editor">
+	<title id="dialogs.preferences.editor.title"><guilabel>Editor</guilabel></title>
+
+	<para>All'attivazione di un segmento vuoto:</para>
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.editor.insert.the.source.text">
+		<term id="dialogs.preferences.editor.insert.the.source.text.title"><option>Inserisci il testo di partenza</option></term>
+
+		<listitem>
+		  <para>Usare temporaneamente questa opzione per parti della traduzione che non richiedono particolari modifiche.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.leave.the.segment.empty">
+		<term id="dialogs.preferences.editor.leave.the.segment.empty.title"><option>Lascia il segmento vuoto</option></term>
+
+		<listitem>
+		  <para>È possibile inserire subito una traduzione.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.insert.the.best.fuzzy.match">
+		<term id="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"><option>Inserisci la concordanza parziale migliore</option></term>
+
+		<listitem>
+		  <para>OmegaT inserirà la traduzione con la più alta percentuale di concordanza sopra il valore impostato in questa finestra di dialogo.</para>
+
+		  <para>Il prefisso identifica le traduzioni inserite come concordanze parziali. È possibile anche registrare il prefisso nella preferenza <link linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation" endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"/> per includerlo nell'operazione di verifica dei problemi con i tag e accertarsi di non dimenticarlo all'interno della propria traduzione.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+	
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match">
+		<term id="dialogs.preferences.editor.attempt.to.replace.numbers.when.inserting.a.fuzzy.match.title"><option>Tenta di sostituire i numeri di una concordanza parziale (fuzzy)</option></term>
+
+		<listitem>
+		  <para>Quando viene inserita una concordanza parziale, OmegaT tenta di sostituirvi i numeri con quelli presenti nel testo di partenza.</para>
+
+		  <note>
+			<para>Sono considerati solo gli interi e le virgole mobili semplici (per es., 5.4).</para>
+		  </note>
+
+		  <example id="convert.match.numbers">
+			<title>Conversione dei numeri della concordanza parziale</title>
+			<para><token>2001</token> nel testo di partenza:</para>
+			<para>
+			  <programlisting>[[<token>2001</token>年]]、ドイツの永住権を取得。</programlisting></para>
+			
+			<para><token>2003</token> nella concordanza parziale:</para>
+			<para><programlisting>[[<token>2003</token>年]]、ドイツの永住権を取得。
+[[<token>2003</token>]], ha ottenuto la nazionalità tedesca.</programlisting></para>
+
+			<para>Quando la concordanza viene inserita, OmegaT convertirà <token>2003</token> in <token>2001</token>:</para>
+
+			<para><programlisting>[[<token>2001</token>]], ha ottenuto la nazionalità tedesca.</programlisting></para>
+		  </example>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source">
+		<term id="dialogs.preferences.editor.allow.translation.to.be.equal.to.source.title"><option>Permetti traduzione uguale all'originale</option></term>
+
+		<listitem>
+		  <para>Una traduzione identica al testo di partenza per impostazione predefinita non viene riconosciuta come una traduzione. OmegaT la cancellerà e conterà il segmento come segmento non tradotto.</para>
+
+		  <para>Usare questa opzione per forzare OmegaT a registrare queste voci e conteggiarle come tradotte.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
+		<term id="dialogs.preferences.editor.export.the.segment.to.text.files.title"><option>Esporta il segmento in file di testo</option></term>
+
+		<listitem>
+		  <para>Quando OmegaT attiva un segmento,</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>il contenuto della parte di partenza viene copiato nel file <link linkend="configuration.folder.default.contents.script.source" endterm="configuration.folder.default.contents.script.source.title"/>,</para>
+			</listitem>
+			<listitem>
+			  <para>mentre il contenuto della parte di arrivo (se presente) viene copiato nel file <link linkend="configuration.folder.default.contents.script.target" endterm="configuration.folder.default.contents.script.target.title"/>,</para>
+			</listitem>
+		  </itemizedlist>
+		  
+		  <para>ed entrambi sono situati nella <link linkend="windows.scripts.folder">cartella degli script</link>.</para>
+		  
+		  <note>
+			<para>Questa funzione non è in relazione con la funzione <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
+		  </note>
+
+		  <para>I file vengono sovrascritti quando OmegaT passa a un nuovo segmento.</para>
+
+		  <para>Lo script <link linkend="windows.scripts.distribution.extract.text.content" endterm="windows.scripts.distribution.extract.text.content.title"/> fa qualcosa di simile ma per l'intero progetto all'istante. Vedere la finestra <link linkend="windows.scripts" endterm="windows.scripts.title"/>.</para>
+
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation">
+		<term id="dialogs.preferences.editor.go.to.next.untranslated.segment.stops.where.there.is.at.least.one.alternative.translation.title"><option>Fermati alle traduzioni non tradotte e alternative</option></term>
+
+		<listitem>
+		  <para><link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.next.untranslated.segment" endterm="menus.goto.next.untranslated.segment.title"/>Si ferma anche ai segmenti che presentano traduzioni alternative.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.allow.tag.editing">
+		<term id="dialogs.preferences.editor.allow.tag.editing.title"><option>Consenti la modifica dei tag</option></term>
+
+		<listitem>
+		  <para>In generale, i tag non vanno modificati, ma quando questa opzione è attivata è possibile farlo.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment">
+		<term id="dialogs.preferences.editor.validate.tags.when.leaving.a.segment.title"><option>Prima di lasciare un segmento controlla eventuali problemi</option></term>
+
+		<listitem>
+		  <para>OmegaT esegue un controllo dei problemi prima di passare a un altro segmento. L'opzione è uguale all'uso di <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.save.auto-populated.status">
+		<term id="dialogs.preferences.editor.save.auto-populated.status.title"><option>Salva lo stato di popolazione automatica</option></term>
+
+		<listitem>
+		  <para>Le memorie di traduzione che si trovano in <link linkend="project.folder.tm.auto" endterm="project.folder.tm.auto.title"/> e <link linkend="project.folder.tm.enforce" endterm="project.folder.tm.enforce.title"/> possono popolare automaticamente la memoria del progetto. I segmenti che ricevono la traduzione automatica possono quindi essere contrassegnati nel pannello dell'<guilabel>Editor</guilabel> utilizzando <link linkend="menus.view" endterm="menus.view.title"/>.<link linkend="menus.view.mark.auto.populated.segments" endterm="menus.view.mark.auto.populated.segments.title"/>.</para>
+
+		  <para>Vedere la guida all'uso <link linkend="how.to.use.tm.reuse.tm" endterm="how.to.use.tm.reuse.tm.title"/> per i dettagli.</para>
+		</listitem>
+	  </varlistentry>
+
+      <varlistentry id="dialogs.preferences.editor.save.orgin.of.translation">
+		<term id="dialogs.preferences.editor.save.orgin.of.translation.title"><option>Salva origine della traduzione</option></term>
+
+		<listitem>
+          <para>Quando è attivata la traduzione automatica, OmegaT registra il nome del motore utilizzato per popolare un determinato segmento.</para>
+		</listitem>
+      </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.initially.load.this.many.segments">
+		<term id="dialogs.preferences.editor.initially.load.this.many.segments.title"><option>Numero iniziale di segmenti caricati</option></term>
+
+		<listitem>
+		  <para>L'editor inizialmente carica e mostra duemila segmenti, caricando progressivamente gli altri allo scorrere in alto o in basso della pagina. Cambiare questo numero in base alle capacità del proprio computer.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.editor.paragraph.delimitation.format">
+		<term id="dialogs.preferences.editor.paragraph.delimitation.format.title"><option>Formato delimitazione paragrafi</option></term>
+
+		<listitem>
+		  <para>Usare <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.paragraph.delimitations" endterm="menus.view.mark.paragraph.delimitations.title"/> per identificare i segmenti che appartengono allo stesso paragrafo.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.tag.processing">
+	<title id="dialogs.preferences.tag.processing.title"><guilabel>Elaborazione dei tag</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialogs.preferences.tag.processing.programming.variables">
+		<term id="dialogs.preferences.tag.processing.programming.variables.title"><option>Controlla le variabili della funzione printf</option></term>
+		<listitem>
+		  <para>Controlla le variabili printf nei formati dei file diversi dal formato PO. Il filtro PO gestisce di già le variabili contrassegnate con <literal>%</literal>.</para>
+
+		  <para>È possibile selezionare</para>
+		  
+		  <variablelist>
+			<varlistentry>
+			  <term><option>Nessuna</option></term>
+			  <listitem>
+				<para>Non viene controllato alcuno schema di variabili.</para>
+			  </listitem>
+			</varlistentry>
+			
+			<varlistentry>
+			  <term><option>Variabili semplici (es. %s, %d)</option></term>
+			  <listitem>
+				<para>Vengono controllati solamente gli schemi delle variabili semplici.</para>
+			  </listitem>
+			</varlistentry>
+
+			<varlistentry>
+			  <term><option>Tutte le variabili (es. %s, %-s)</option></term>
+			  <listitem>
+				<para>Questa opzione può produrre dei falsi positivi in alcuni file.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.tag.processing.simple.java.messageformat">
+		<term id="dialogs.preferences.tag.processing.simple.java.messageformat.title"><option>Controlla i segnaposto MessageFormat Java semplici</option></term>
+		<listitem>
+		  <para>Controlla i segnaposto Java MessageFormat nei formati di file diversi dal formato Java Bundles. Il filtro Java Bundles gestisce di già i segnaposto contrassegnati con <literal>{#}</literal>, dove <literal>#</literal> rappresenta un numero.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order">
+		<term id="dialogs.preferences.tag.processing.allow.translated.tags.to.be.in.a.different.order.title"><option>Permetti un ordine diverso dei tag tradotti</option></term>
+		<listitem>
+		  <para>I tags in un ordine diverso da quello di partenza non comparirà nell'elenco dei problemi dei tag. Vedere il menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per i dettagli.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues">
+		<term id="dialogs.preferences.tag.processing.do.not.allow.creating.translated.documents.with.tag.issues.title"><option>Blocca la creazione di documenti di arrivo con problemi di tag</option></term>
+		<listitem>
+		  <para>Se si tenta di creare i file tradotti, OmegaT visualizzerà la finestra di dialogo dei problemi fino a quando questi non sono risolti. Vedere il menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per i dettagli.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics">
+		<term id="dialogs.preferences.tag.processing.count.protected.text.and.custom.tags.in.statistics.title"><option>Conteggia il testo con flag e i tag personalizzati nelle statistiche</option></term>
+		<listitem>
+		  <para>A differenza dei tag di OmegaT, il testo con flag e i tag personalizzati vengono conteggiati, per impostazione predefinita, nelle statistiche. Vedere il menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.statistics" endterm="menus.tools.statistics.title"/> per i dettagli.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags">
+		<term id="dialogs.preferences.tag.processing.regular.expressions.for.custom.tags.title"><option>Tag personalizzati</option></term>
+		<listitem>
+		  <para>Utilizzare le espressioni regolari per definire i tag personalizzati. Per definire un elenco di tag, raggrupparli tra parentesi e separare i gruppi con <literal>|</literal> (che equivale a &quot;O&quot; nelle espressioni regolari).</para>
+
+		  <para>Per esempio, usare <userinput>\d+</userinput> per considerare tutti i numeri come tag, permettendo così la verifica che essi non siano stati modificati per sbaglio durante la traduzione.</para>
+
+		  <para>In modo simile, l'espressione <userinput>&lt;/?[^&gt;]+&gt;</userinput> permetterà di accertarsi che i tag HTML (o simili) inseriti nel testo di partenza siano preservati senza modifiche nella traduzione.</para>
+
+		  <para>Usare le parentesi e <literal>|</literal> affinché OmegaT consideri i due tag: <userinput>(\d+)|(&lt;/?[^&gt;]+&gt;)</userinput>.</para>
+
+		  <para>Vedere l'appendice <link linkend="app.regex" endterm="app.regex.title"/>per i dettagli.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation">
+		<term id="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title"><option>Testo contrassegnato</option></term>
+		<listitem>
+		  <para>Il testo nel segmento di arrivo che corrisponde a questa espressione è contrassegnato in rosso e identificato come un tag estraneo a scopo di controllo dei problemi. Vedere il menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.check.issues" endterm="menus.tools.check.issues.title"/> per i dettagli.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.team">
+	<title id="dialog.preferences.team.title"><guilabel>Squadra...</guilabel></title>
+
+	<para>Il nome inserito qui verrà allegato a tutti i segmenti che si traducono.</para>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.team.title.repository.credentials">
+		<term id="dialog.preferences.team.title.repository.credentials.title"><option>Credenziali del deposito</option></term>
+		<listitem>
+		  <para>Elenco dei progetti i cui dettagli di accesso sono stati memorizzati in OmegaT. Rimuovere un progetto da questo elenco se si vuole che OmegaT ne richieda le credenziali ogni volta che si accede al progetto.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.tm.matches">
+	<title id="dialog.preferences.tm.matches.title"><option>Concordanze TM</option></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.tm.matches.sort.fuzzy.matches.by">
+		<term id="dialog.preferences.tm.matches.sort.fuzzy.matches.by.title"><option>Ordina le concordanze parziali per:</option></term>
+
+		<listitem>
+		  <para>Per impostazione predefinita, le concordanze più vicine visualizzate nel pannello <guilabel>Concordanze parziali</guilabel> sono determinate tramite l'uso del riconoscimento della radice.</para>
+
+		  <para>Per ottenere concordanze più letterali e vicine al 100%, selezionare l'opzione <guilabel>Testo completo, incluso tag e numeri</guilabel>.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.minimum.threshold">
+		<term id="dialog.preferences.tm.matches.minimum.threshold.title"><option>Soglia minima per visualizzare una concordanza parziale</option></term>
+		<listitem>
+		  <para>Per impostazione predefinita, OmegaT mostra le prime cinque migliori concordanze parziali sopra il 30%. È possibile cambiare qui il valore della soglia.</para>
+			<note>
+				<para>Per determinare se una concordanza debba essere mostrata nel pannello <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> vengono presi in considerazione tutti e tre i tipi di percentuale di concordanza. Se le tre percentuali si trovano sotto la soglia, le concordanze potenziali sono respinte.</para>
+			</note>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs">
+		<term id="dialog.preferences.tm.matches.displaying.tags.in.non-omegat.tmxs.title"><option>Seleziona il tipo di visualizzazione per i tag delle TMX non appartenenti a OmegaT</option></term>
+
+		<listitem>
+		  <para>Determina come gestire i tag nei file TMX generati da altri strumenti.</para>
+
+		  <para>È possibile scegliere se visualizzarli e se utilizzare la notazione XML standard per i singoli tag (per es. &lt;i/&gt;).</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.tm.matches.other.languages">
+		<term id="dialog.preferences.tm.matches.other.languages.title"><option>Includi le concordanze da altre lingue</option></term>
+		<listitem>
+		  <para>Nel pannello <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/> è possibile visualizzare anche i segmenti che presentano concordanze in lingue di arrivo diverse. A tali concordanze è possibile applicare una penalità.</para>
+		</listitem>
+	  </varlistentry>
+
+	  
+	  <varlistentry id="dialog.preferences.tm.matches.match.display.template">
+		<term id="dialog.preferences.tm.matches.match.display.template.title"><option>Modello visualizzazione concordanza</option></term>
+
+		<listitem>
+		  <para>È possibile modificare il tipo di visualizzazione delle concordanze parziali, tramite l'uso di variabili preconfigurate:</para>
+
+		  <para>Il valore predefinito è:</para>
+		  
+		  <para><programlisting>${id}. ${fuzzyFlag}${sourceText} ${targetText}
+&lt;${score}/${noStemScore}/${adjustedScore}%
+${filePath}&gt;</programlisting></para>
+
+		  <para>Ecco una possibile alternativa:</para>
+
+		  <para>
+			<programlisting>⥤ ${id}. &lt;${score}/${noStemScore}/${adjustedScore}%&gt; ${fuzzyFlag} ${fileNameOnly}
+[NUOVO]▷ ${diff}
+			
+[VECCHIO]◀ ${diffReversed}
+◀ ${targetText}</programlisting></para>
+
+
+		  <para>Le variabili dei modelli sono disponibili anche da un menu a tendina e possono essere inseriti con un pulsante.</para>
+
+		  <table id="table.match.pane.setup" colsep="0" rowsep="0">
+			<title id="table.match.pane.setup.title">Variabili del modello delle concordanze</title>
+
+			<tgroup cols="2" colsep="1" rowsep="1">
+			  <colspec align="left"/>
+			  <colspec align="left"/>
+			  <tbody>
+				<row>
+				  <entry>
+					<literal>${id}</literal>
+				  </entry>
+				  <entry>Numero della concordanza da 1 a 5</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${sourceText}</literal>
+				  </entry>
+				  <entry>Il testo di origine della concordanza</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${diff}</literal>
+				  </entry>
+				  <entry>Una stringa che mostra le differenze tra l'origine e la concordanza.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${diffReversed}</literal>
+				  </entry>
+				  <entry>Uguale a ${diff}, ma con le differenze (quello che va inserito ed eliminato) invertite.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${targetText}</literal>
+				  </entry>
+				  <entry>Il testo di destinazione della concordanza</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${score}</literal>
+				  </entry>
+				  <entry>Percentuale calcolata con l'opzione <guilabel>Elaborazione della radice, nessun tag e nessun numero</guilabel>.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${noStemScore}</literal>
+				  </entry>
+				  <entry>Percentuale calcolata con l'opzione <guilabel>Nessun tag e nessun numero</guilabel>.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${adjustedScore}</literal>
+				  </entry>
+				  <entry>Percentuale calcolata con l'opzione <guilabel>Testo completo, incluso tag e numeri</guilabel>.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fileNameOnly}</literal>
+				  </entry>
+				  <entry>Il nome file della TM, senza l'estensione.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${filePath}</literal>
+				  </entry>
+				  <entry>Il percorso completo del file della TM.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fileShortPath}</literal>
+				  </entry>
+				  <entry>Il percorso relativo del file della TM.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${initialCreationID}</literal>
+				  </entry>
+				  <entry>L'identificativo del traduttore che ha creato il segmento.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${initialCreationDate}</literal>
+				  </entry>
+				  <entry>La data di creazione del segmento.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${changeID}</literal>
+				  </entry>
+				  <entry>L'identificativo dell'ultimo traduttore che ha modificato il segmento.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${changeDate}</literal>
+				  </entry>
+				  <entry>La data dell'ultima modifica del segmento.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${fuzzyFlag}</literal>
+				  </entry>
+				  <entry>Indica che questa concordanza è parziale (attualmente funziona solo per le traduzioni dai file PO con marcatore #fuzzy).</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${sourceLanguage}</literal>
+				  </entry>
+				  <entry>La lingua di partenza del segmento.</entry>
+				</row>
+
+				<row>
+				  <entry>
+					<literal>${targetLanguage}</literal>
+				  </entry>
+				  <entry>La lingua di arrivo del segmento.</entry>
+				</row>
+
+			  </tbody>
+			</tgroup>
+		  </table>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialog.preferences.view">
+	<title id="dialog.preferences.view.title"><guilabel>Vista</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.view.display.all.source.segments.in.bold">
+		<term id="dialog.preferences.view.display.all.source.segments.in.bold.title"><option>Mostra i segmenti di partenza in grassetto</option></term>
+		<listitem>
+		  <para>Per impostazione predefinita, viene visualizzato in grassetto solo il segmento attivo.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.display.active.source.segment.in.bold">
+		<term id="dialog.preferences.view.display.active.source.segment.in.bold.title"><option>Mostra il segmento di partenza attivo in grassetto</option></term>
+		<listitem>
+		  <para>Se i segmenti di partenza sono visualizzati con carattere normale, è possibile usare questa opzione per visualizzare in grassetto soltanto il segmento di partenza attivo.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments">
+		<term id="dialog.preferences.view.include.the.first.non-unique.segment.when.marking.non.unique.segments.title"><option>Evidenzia tutti i segmenti ripetuti</option></term>
+		<listitem>
+		  <para>Usare <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.mark.non.unique.segments" endterm="menus.view.mark.non.unique.segments.title"/> per contrassegnare la seconda copia e quelle successive dei segmenti ripetuti. Usare questa opzione per contrassegnare anche la prima copia del segmento.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.simplify.tooltip.on.protected.parts">
+		<term id="dialog.preferences.view.simplify.tooltip.on.protected.parts.title"><option>Semplifica i suggerimenti sui tag</option></term>
+		<listitem>
+		  <para>I tag di OmegaT sono protetti e rappresentano tag di formato specifico all'interno del documento di partenza. Se si passa il mouse sopra un tag di OmegaT, il programma visualizza un suggerimento indicante il contenuto originale del tag. Se in origine il contenuto era racchiuso tra una coppia di tag, questi possono essere rimossi dal suggerimento per una migliore leggibilità.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.use.custom.templates.for.modification.info">
+		<term id="dialog.preferences.view.use.custom.templates.for.modification.info.title"><option>Personalizza le informazioni di modifica dei segmenti</option></term>
+		<listitem>
+		  <para>Le informazioni sulla modifica del segmento è visualizzata sul segmento. L'impostazione predefinita mostra chi ha modificato la traduzione e la data di modifica:</para>
+
+		  <example id="dialog.preferences.view.use.custom.templates.for.modification.info.example">
+			<title id="dialog.preferences.view.use.custom.templates.for.modification.info.example.title">Visualizzazione predefinita</title>
+			<para>
+			  <programlisting>Ultima modifica alla traduzione di suzume il 6-ott-2022 alle 14:18:27
+[[チューリッヒ大学]]大学院博士課程修了。
+[[Université de Zurich]] Ha terminato la sua tesi di dottorato.&lt;segmento 0178&gt;</programlisting>
+			</para>
+		  </example>
+
+		  <para>Usare <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.modification.info" endterm="menus.view.modification.info.title"/> per visualizzare le informazioni sulla modifica dei segmenti.</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry id="dialog.preferences.view.modification.info.template">
+		<term id="dialog.preferences.view.modification.info.template.title"><option>Modello standard</option></term>
+		<listitem>
+		  <para>Usare le variabili di modello per adattare questo modello alle proprie esigenze.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialog.preferences.view.modification.info.template.for.segments.without.date">
+		<term id="dialog.preferences.view.modification.info.template.for.segments.without.date.title"><option>Modello per i segmenti senza data</option></term>
+		<listitem>
+		  <para>Usare le variabili di modello per adattare questo modello alle proprie esigenze.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.saving.and.output">
+	<title id="dialogs.preferences.saving.and.output.title"><guilabel>Salvataggio e risultato</guilabel></title>
+
+	<variablelist>
+	  <varlistentry id="dialog.preferences.saving.and.output.interval">
+		<term id="dialog.preferences.saving.and.output.interval.title"><option>Intervallo di salvataggio dei dati del progetto</option></term>
+		<listitem>
+		  <para>Permette all'utente di selezionare l'intervallo tra un salvataggio automatico del progetto e l'altro. Vedere la sezione <link linkend="how.to.restore.your.data.automatic.backup" endterm="how.to.restore.your.data.automatic.backup.title"/> per i dettagli.</para>
+
+		  <para>Cambiare l'intervallo predefinito (3 minuti) a seconda delle esigenze per il progetto:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Intervalli brevi (minimo 10 secondi) per i progetti sincronizzati in un server interno.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Intervalli più lunghi per progetti in collaborazione ospitati in server esterni.</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.saving.and.output.external.post-processing.command">
+		<term id="dialogs.preferences.saving.and.output.external.post-processing.command.title"><option>Comandi globali di post-elaborazione</option></term>
+
+		<listitem>
+		  <para>OmegaT può eseguire automaticamente comandi dopo aver usato <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> o <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>. È possibile definire tali comandi qui.</para>
+
+		  <para>I comandi specificati qui sono disponibili per tutti i progetti che utilizzano la stessa cartella di configurazione. Sono salvati nel file <link linkend="configuration.folder.default.contents.omegat.prefs" endterm="configuration.folder.default.contents.omegat.prefs.title"/>.</para>
+
+		  <para>L'elenco delle variabili dei modelli fornisce accesso ai dati dei vari progetti e alle variabili di sistema. Vedere la sezione <link linkend="post.processing.commands.template.variables" endterm="post.processing.commands.template.variables.title"/> per i dettagli.</para>
+		  
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
+		<term id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Consenti comandi locali di post-elaborazione</option></term>
+
+		<listitem>
+		  <warning>
+			<para>Per ragioni di sicurezza i <link linkend="dialogs.project.properties.external.processing.command">comandi di post-elaborazione locali</link> sono disabilitati per impostazione predefinita.</para>
+		  </warning>
+
+		  <para>È anche possibile definire comandi di post-elaborazione locale disponibili solamente per un dato progetto. Tali comando sono definiti nella finestra <link linkend="dialogs.project.properties.external.processing.command" endterm="dialogs.project.properties.external.processing.command.title"/>.</para>
+
+		  <para>I comandi di post-elaborazione locale sono salvati nel file <link linkend="project.folder.omegat.project.file" endterm="project.folder.omegat.project.file.title"/>. Attivare questa opzione solo se l'origine di quel file è affidabile.</para>
+
+	  	  <note>
+			<para>I comandi locali vengono eseguiti prima dei comandi globali.</para>
+		  </note>
+
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="dialogs.preferences.proxy.login">
+	<title id="dialogs.preferences.proxy.login.title"><guilabel>Accesso proxy</guilabel></title>
+
+	<para>Se, per accedere a Internet, si utilizza un server proxy autenticato, inserire qui le proprie credenziali.</para>
+  </section>
+
+  <section id="dialogs.preferences.secure.store">
+	<title id="dialogs.preferences.secure.store.title"><guilabel>Memorizzazione sicura</guilabel></title>
+
+	<para>Definire o azzerare la password principale utilizzata per proteggere sia le credenziali di autenticazione, sia le chiavi di accesso per i servizi di traduzione automatica.</para>
+
+	<para>Prima di azzerare la password principale, eseguire sempre una copia di sicurezza di quelle informazioni, in quanto saranno eliminate e dovranno essere reimpostate.</para>
+  </section>
+
+  <section id="dialogs.preferences.plugins">
+	<title id="dialogs.preferences.plugins.title"><guilabel>Plugin</guilabel></title>
+
+	<para>Mostra l'elenco dei plugin installati.</para>
+
+	<para>Per impostazione predefinita, i plugin sono installati nella <link linkend="configuration.folder">cartella di configurazione</link>, ma è possibile installarli nella cartella <link linkend="application.folder.plugins" endterm="application.folder.plugins.title"/> all'interno della cartella dell'<link linkend="application.folder">applicazione</link>.</para>
+
+	<para>I plugin aggiuntivi si trovano nel <ulink url="https://sourceforge.net/p/omegat/wiki/Plugins/">sito dello sviluppo di OmegaT</ulink>.</para>
+  </section>
+
+  <section id="dialogs.preferences.updates">
+	<title id="dialogs.preferences.updates.title"><guilabel>Aggiornamenti</guilabel></title>
+
+	<para>Usare questa opzione per scegliere se il programma debba notificare in automatico la presenza di aggiornamenti.</para>
+
+	<para>Se OmegaT rileva un aggiornamento, mostrerà un collegamento alla pagina di scaricamento. Vedere la sezione <link linkend="update.and.delete.omegat" endterm="update.and.delete.omegat.title"/> per i dettagli.</para>
+  </section>
+</chapter>

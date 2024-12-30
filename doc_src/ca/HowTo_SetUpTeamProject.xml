@@ -88,8 +88,7 @@
 		<para id="how.to.setup.team.project.give.access.rights.title">Activació dels drets d'accés de l'equip</para>
 
 		<note>
-		  <para>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</para>
+		  <para>Si utilitzeu diversos projectes en el mateix servidor, només es demanaran les credencials del servidor una vegada.</para>
 		</note>
 
 		<para>Quan el projecte estigui a punt i s'hagi pujat al servidor, l'administrador del projecte en equip ha de configurar l'accés per als traductors. L'accés a un projecte en equip requereix la informació següent:</para>

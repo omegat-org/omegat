@@ -24,8 +24,10 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+rm -f /keys/*
 ssh-keygen -q -t rsa -m PEM -b 4096 -N '' -f /tmp/id_rsa && ssh-keygen -A
 install -m 666 /tmp/id_rsa /tmp/id_rsa.pub /keys/
 cat /keys/id_rsa.pub >> /home/git/.ssh/authorized_keys
+rm -rf /var/run/apache2/* || true
 echo "start servers"
 exec /usr/bin/supervisord -c /root/supervisord.conf

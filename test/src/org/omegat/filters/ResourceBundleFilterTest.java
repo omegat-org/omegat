@@ -31,6 +31,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 
@@ -50,8 +51,10 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     @Test
     public void testTranslate() throws Exception {
+        Map<String, String> options = new TreeMap<>();
+        options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, "true");
         translateText(new ResourceBundleFilter(),
-                "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties");
+                "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties", options);
     }
 
     @Test
@@ -105,6 +108,48 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
         checkMultiStart(fi, f);
         checkMulti("a\nb\\u0020\\ad", "MU", null, null, null, "# \\u00ad");
+        checkMultiEnd();
+
+        translateText(filter, f, options);
+    }
+
+    /**
+     * Test Unicode case.
+     * @throws Exception when error occurred.
+     */
+    @Test
+    public void testNonEscapeUnicode() throws Exception {
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeUTF8.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        context.setOutEncoding("UTF-8");
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("\u30E6\u30CB\u30B3\u30FC\u30C9", "Unicode", null, null, null, "#");
+        checkMultiEnd();
+
+        translateText(filter, f);
+    }
+
+    /**
+     * Test Unicode case, when the filter configured not to force escape
+     * and output encoding context is US-ASCII.
+     * Check loaded Unicode literals are in code points out of ASCII,
+     * then check the output file is escaped.
+     * @throws Exception when error occurred.
+     */
+    @Test
+    public void testEscapeUnicodeWhenASCII() throws Exception {
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeEscaped.properties";
+        ResourceBundleFilter filter = new ResourceBundleFilter();
+        context.setOutEncoding("US-ASCII");
+        Map<String, String> options = new HashMap<>();
+        options.put(ResourceBundleFilter.OPTION_DONT_UNESCAPE_U_LITERALS, "false");
+        options.put(ResourceBundleFilter.OPTION_FORCE_JAVA8_LITERALS_ESCAPE, "false");
+        IProject.FileInfo fi = loadSourceFiles(filter, f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("\u30E6\u30CB\u30B3\u30FC\u30C9", "Unicode", null, null, null, "#");
         checkMultiEnd();
 
         translateText(filter, f, options);
@@ -220,7 +265,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMulti("Pack and delete project...", "omt.menu.export.delete", null, null, null, null);
         checkMulti("The project already has an ongoing translation.\nDo you want to overwrite it with the translation from the package ?",
                 "omt.dialog.overwrite_project_save", null, null, null, null);
-        checkMulti("Deleting project..." ,"omt.status.delete_project", null, null, null, null);
+        checkMulti("Deleting project...", "omt.status.delete_project", null, null, null, null);
         checkMultiEnd();
 
         translateText(filter, f, config);

@@ -66,7 +66,7 @@ public final class ScriptRunner {
     public static final String VAR_PROJECT = "project";
     public static final String VAR_RESOURCES = "res";
 
-    public static final ScriptEngineManager MANAGER = new ScriptEngineManager(ScriptRunner.class.getClassLoader());
+    private static ScriptEngineManager manager;
 
     /**
      * Execute as read from the file associated with the supplied
@@ -74,11 +74,18 @@ public final class ScriptRunner {
      * {@link #executeScript(String, ScriptItem, Map)}.
      *
      * @param item
+     *            The associated {@link ScriptItem}. Must not be null. If
+     *            <code>script</code> is null, the script content will be read
+     *            from the associated file. The script engine will be resolved
+     *            from the filename. The resource bundle associated with the
+     *            <code>item</code> will be included in the bindings as
+     *            {@link #VAR_RESOURCES}.
      * @param additionalBindings
-     * @return
-     * @throws ScriptException
-     * @throws IOException
-     * @throws Exception
+     *            A map of bindings that will be included along with other
+     *            bindings
+     * @return result string.
+     * @throws IOException when I/O error occurred.
+     * @throws ScriptException when script engine raises error.
      */
     public static String executeScript(ScriptItem item, Map<String, Object> additionalBindings)
             throws IOException, ScriptException {
@@ -106,13 +113,13 @@ public final class ScriptRunner {
      * @param additionalBindings
      *            A map of bindings that will be included along with other
      *            bindings
-     * @return
-     * @throws IOException
-     * @throws ScriptException
+     * @return result string.
+     * @throws IOException when I/O error occurred.
+     * @throws ScriptException when script engine raises error.
      */
     public static String executeScript(String script, ScriptItem item, Map<String, Object> additionalBindings)
             throws IOException, ScriptException {
-        Map<String, Object> bindings = new HashMap<String, Object>();
+        Map<String, Object> bindings = new HashMap<>();
         if (additionalBindings != null) {
             bindings.putAll(additionalBindings);
         }
@@ -121,9 +128,9 @@ public final class ScriptRunner {
         if (item.getFile() != null) {
             extension = FilenameUtils.getExtension(item.getFileName());
         }
-        ScriptEngine engine = MANAGER.getEngineByExtension(extension);
+        ScriptEngine engine = getManager().getEngineByExtension(extension);
         if (engine == null) {
-            engine = MANAGER.getEngineByName(DEFAULT_SCRIPT);
+            engine = getManager().getEngineByName(DEFAULT_SCRIPT);
         }
         if (StringUtil.isEmpty(script)) {
             script = item.getText();
@@ -133,9 +140,16 @@ public final class ScriptRunner {
         Object eval = executeScript(script, engine, bindings);
         if (eval != null) {
             result.append(OStrings.getString("SCW_SCRIPT_RESULT")).append('\n');
-            result.append(eval.toString()).append('\n');
+            result.append(eval).append('\n');
         }
         return result.toString();
+    }
+
+    public static ScriptEngineManager getManager() {
+        if (manager == null) {
+            manager = new ScriptEngineManager(ScriptRunner.class.getClassLoader());
+        }
+        return manager;
     }
 
     /**
@@ -151,8 +165,8 @@ public final class ScriptRunner {
      * @return The evaluation result
      * @throws ScriptException
      */
-    public static Object executeScript(String script, ScriptEngine engine, Map<String, Object> additionalBindings)
-            throws ScriptException {
+    public static Object executeScript(String script, ScriptEngine engine,
+            Map<String, Object> additionalBindings) throws ScriptException {
         // logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"),
         // engine.getFactory().getEngineName()));
         Bindings bindings = engine.createBindings();
@@ -202,7 +216,7 @@ public final class ScriptRunner {
     }
 
     public static List<String> getAvailableScriptExtensions() {
-        return MANAGER.getEngineFactories().stream().flatMap(factory -> factory.getExtensions().stream())
+        return getManager().getEngineFactories().stream().flatMap(factory -> factory.getExtensions().stream())
                 .collect(Collectors.toList());
     }
 }

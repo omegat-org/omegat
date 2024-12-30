@@ -1,68 +1,382 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.scripts">
-  <title>Scripts</title>
+  <title id="windows.scripts.title"><guilabel>Scripten</guilabel></title>
 
-  <para>Dit venster is toegankelijk door te selecteren <menuchoice> <guimenuitem>Extra</guimenuitem> <guimenuitem>Scripten…</guimenuitem> </menuchoice></para>
+  <para>Scripts zijn korte programma's (soortgelijk aan macro's in kantoortoepassingen) die kunnen worden gebruikt om taken te automatiseren, als ook om functionaliteit van OmegaT uit te breiden of aan te passen. Zij mogen door gebruikers worden geschreven in elke taal die wordt begrepen door de onderliggende virtuele machine van Java.</para>
 
-  <section>
-    <title>Gebruiken</title>
 
-    <para>Het dialoogvenster Scripten maakt het voor u mogelijk om een bestaand script in het tekstgebied te laden en het uit te voeren tegen het huidige geopende project. Doe het volgende om de mogelijkheid voor scripten aan te passen:</para>
+  <para>Het venster Scripten stelt u in staat een bestaand script te laden en het uit te voeren in het huidige project.</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>Laad een script in het bewerkingsvenster door op de naam te klikken in de lijst in het venster links.</para>
+  <para>Gebruik <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.scripting.title" linkend="menus.tools.scripting"/> om toegang te krijgen tot het venster.</para>
+
+  <section id="windows.scripts.folder">
+  <title id="windows.scripts.folder.title">De map scripts</title>
+
+  <para>Standaard worden scripts opgeslagen in de map <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/> van de map voor de toepassing OmegaT .</para>
+
+  <para>Daar toegevoegde nieuwe scripts zullen verschijnen in de lijst met beschikbare scripts in het paneel aan de linkerkant van het venster.</para>
+
+  <warning>
+    <para>Als er geen lijst met scripts wordt weergegeven aan de linkerkant van het venster Script bewerken, gebruik dan het menu in het venster Scripten <guimenu>Bestand</guimenu> &gt; <guimenuitem>Map voor scripts instellen…</guimenuitem> om de locatie voor de scripts in te stellen.</para>
+  </warning>
+
+  <para>Aanvullende scripts zijn hier te vinden: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink>. Kopieer de bestanden eenvoudigweg naar de map <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/></para>
+
+  <para>Sommige scripts zijn gebaseerd op <emphasis>gebeurtenissen</emphasis>. De map waarin de scripts zijn geplaatst bevat submappen die corresponderen met de beschikbare gebeurtenissen. U kunt automatisch activeren door ze te plaatsen in de toepasselijke submap:</para>
+
+  <variablelist>
+	<varlistentry id="application.folder.scripts.application.shutdown">
+	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
+	  <listitem><para>Scripts in deze map worden gestart voordat OmegaT afsluit.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.application.startup">
+	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
+	  <listitem><para>Scripts in deze map worden geactiveerd zodra het programma voor scripten beschikbaar is, kort nadat OmegaT is gestart.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.entry.activated">
+	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
+	  <listitem><para>Scripts in deze map worden gestart bij het bewerken van een nieuw segment. Het segment staat in de binding <code>newEntry&gt;</code>.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.file">
+	  <term id="application.folder.scripts.new.file.title">new_file</term>
+	  <listitem><para>Scripts in deze map worden gestart als de bewerker schakelt naar het volgende bestand in het project. De nieuw bestandsnaam staat in de binding <code>activeFileName</code>.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.new.word">
+	  <term id="application.folder.scripts.new.word.title">new_word</term>
+	  <listitem><para>Scripts in deze map worden gestart als een nieuw woord wordt bewerkt in het venster Bewerken. Het nieuwe woord is beschikbaar in de binding <code>newWord</code>.</para></listitem>
+	</varlistentry>
+	<varlistentry id="application.folder.scripts.project.changed">
+	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
+	  <listitem><para>Scripts in deze map worden gestart als de status van het project wijzigt. Een object <code>eventType</code> wordt gebonden en kan de volgende waarden aannemen: CLOSE, COMPILE, CREATE, LOAD, of SAVE.</para></listitem>
+	</varlistentry>
+  </variablelist>
+
+  <para>Deze submappen zijn al gemaakt in de map voor scripts die in de distributie staat.</para>
+  
+  <warning>
+	<para>Scripts kunnen ook worden gestart wanneer u andere scripts uitvoert. Vervolgens wordt, in een groot project, een script <code>entry_activated</code> regelmatig aangeroepen als een script van het type zoeken/vervangen dat alle segmenten doorloopt, gebruikt, wat de weergave van de toepassing onbruikbaar maakt.</para>
+  </warning>
+  </section>
+  
+  <section id="windows.scripts.usage">
+	<title id="windows.scripts.usage.title">Gebruik</title>
+
+	<itemizedlist>
+    <listitem>
+		<para>Klik op de naam van een script in de list in het paneel aan de linkerkant. Het script wordt geladen in de bewerker.</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
-        <para>Klik met rechts op een knop van <guilabel>&lt;1&gt;</guilabel> tot en met <guilabel>&lt;12&gt;</guilabel> in het onderste venster en selecteer <guilabel>Script toevoegen</guilabel>.</para>
+		<para>Klik op de knop <guibutton>Uitvoeren</guibutton> aan de onderzijde van het venster, of druk op <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo> om het script onmiddellijk te starten.</para>
       </listitem>
-    </itemizedlist>
 
-    <itemizedlist>
       <listitem>
-        <para>Als u met links klikt op het cijfer zal het geselecteerde script worden uitgevoerd. U kunt de geselecteerde macro's ook starten vanuit het hoofdmenu door hun items te gebruiken in het menu <guisubmenu>Extra </guisubmenu> of door te drukken op<keycap> Ctrl+Alt+F#</keycap> (# 1 tot en met 12).</para>
+		<para>Klik met rechts, om een sneltoets te maken voor een script dat u frequent gebruikt, op een van de knoppen <guibutton>&lt;1&gt;</guibutton> tot en met <guibutton>&lt;12&gt;</guibutton> aan de onderzijde van het venster en selecteer <guilabel>Script toevoegen</guilabel> om het script aan dat nummer toe te wijzen.</para>
+
+		<para>Als u het script los wilt maken van de sneltoets, klik dan met rechts op deze knop en selecteer <guilabel>Script verwijderen</guilabel></para>
       </listitem>
-    </itemizedlist>
 
-    <para>Standaard worden scripts opgeslagen in de map <filename>scripts</filename> die zich bevindt in de installatiemap van OmegaT (de map waarin het bestand <filename>OmegaT.jar</filename> staat).e</para>
+      <listitem>
+		<para>U kunt dan op het nummer klikken om  het toegewezen script uit te voeren. U kunt het script ook uitvoeren vanuit het menu <link linkend="menus.tools" endterm="menus.tools.title"/><link linkend="menus.tools.scripting" endterm="menus.tools.scripting.title"/> door het van toepassing zijnde menu-item te selecteren of door te drukken op de geassocieerde sneltoets (<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>F1 tot en met F12</keycap></keycombo>).</para>
+      </listitem>
+	</itemizedlist>
 
-    <para>U kunt daar nieuwe scripts toevoegen, zodat ze zullen verschijnen in de lijst met beschikbare scripts in het venster <guilabel>Scripten</guilabel>.</para>
+	<warning>
+      <para>Gebruikers van Linux: afhankelijk van de configuratie van uw besturingssysteem zou u geen rechten kunnen hebben om naar de standaard locatie van de scripts te schrijven.</para>
 
-    <para>Enkele aanvullende scripts zijn hier te vinden: <ulink url="https://sourceforge.net/projects/omegatscripts/">OmegaT Scripts</ulink></para>
+      <para>In dergelijke gevallen zult u de map voor de scripts moeten kopiëren of verplaatsen naar een locatie waarvoor u wel schrijfrechten heeft, zoals de <link linkend="configuration.folder.location">configuratiemap</link>, als u uw eigen scripts wilt schrijven, nieuwe wilt toevoegen, of bestaande wilt aanpassen.</para>
+
+      <para>Als u wel rechten heeft om te schrijven naar de standaard map, zorg er dan voor dat u de naam wijzigt, of een back-up maakt, van scripts die u aanpast, omdat ze zullen worden overschreven als OmegaT wordt bijgewerkt.</para>
+	</warning>
   </section>
 
-  <section>
-    <title>Scripttalen</title>
+  <section id="windows.scripts.distribution">
+    <title id="windows.scripts.distribution.title">Gedistribueerde scripts</title>
 
-    <para>De volgende scripttalen zijn geïmplementeerd:</para>
+    <para>OmegaT bevat een aantal scripts die zijn ontwikkeld door deelnemers van OmegaT. Gebruik de script-bewerker om ze te openen, uit te voeren, of scripts direct aan te passen, of om nieuwe scripts voor uw eigen gebruik te schrijven.</para>
 
-    <para><itemizedlist>
+	<note>
+	  <para>De scripts die worden gedistribueerd met OmegaT zijn voor uw gemak opgenomen, maar worden niet ondersteund door het ontwikkelingsteam van OmegaT.</para>
+	</note>
+	
+	<para>Volg de instructies die worden verschaft in het script zelf.</para>
+
+    <variablelist>
+      <varlistentry id="windows.scripts.distribution.adapt.standard.tags">
+        <term id="windows.scripts.distribution.adapt.standard.tags.title">Standaard tags aanpassen</term>
+
         <listitem>
-          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): een dynamische taal voor de Java Virtual machine. Het bouwt op de sterke punten van Java maar heeft aanvullende krachtige mogelijkheden, geïnspireerd op talen als Python, Ruby en Smalltalk.</para>
+          <para>Pas standaard tags aan als de opdracht Vervangen door overeenkomst wordt uitgevoerd.</para>
         </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">JavaScript</emphasis> (soms afgekort tot JS, niet te verwarren met Java): een op prototype gebaseerde scripttaal die dynamisch is, zwak getypeerd en eersteklas functies heeft. Het is een taal met meerdere paradigma's, ondersteund object-georiënteerde, imperatieve en functionele programmeerstijlen. Omdat het de taal is achter de populaire software zoals Firefox is het bekend en voorkeursgereedschap om te programmeren in het domein van open-source.</para>
-        </listitem>
-      </itemizedlist>Alle talen hebben toegang tot het objectmodel van OmegaT, met het project als het hoogste object. De volgende code in Groovy scant bijvoorbeeld door alle segmenten in alle bestanden in het huidige project en drukt, als de vertaling bestaat, de bron en het doel van het segment af:</para>
+      </varlistentry>
 
-    <programlisting>    files = project.projectFiles;
+      <varlistentry id="windows.scripts.distribution.auto.open.last.project">
+        <term id="windows.scripts.distribution.auto.open.last.project.title">Open automatisch laatste project</term>
+
+        <listitem>
+          <para>Open automatisch het laatst gebruikte project van OmegaT.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.check.same.segment">
+        <term id="windows.scripts.distribution.check.same.segment.title">Controleer op hetzelfde Segment</term>
+
+        <listitem>
+          <para>Controleer op identieke segmenten (hoofdlettergevoelig).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.currency.translator">
+        <term id="windows.scripts.distribution.currency.translator.title">Valuta vertaler</term>
+
+        <listitem>
+          <para>Vertaalt de weergave van valuta overeenkomstig de locale voor de bron en het doel.</para>
+
+          <para>Dit zal, bijvoorbeeld, een tekenreeks zoals “$123,399.99” vertalen naar “123 399,99 USD”.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.gui.scripting">
+        <term id="windows.scripts.distribution.example.gui.scripting.title">Voorbeeld - scripten voor de GUI</term>
+
+        <listitem>
+          <para>Voorbeeld van scripten voor de gebruikersinterface.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.key.binding">
+        <term id="windows.scripts.distribution.example.key.binding.title">Voorbeeld - Binden van een toets</term>
+
+        <listitem>
+          <para>Voorbeeld van het gebruiken van een gebeurtenis voor het binden van een toets.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.modify.segment">
+        <term id="windows.scripts.distribution.example.modify.segment.title">Voorbeeld - Segment aanpassen</term>
+
+        <listitem>
+          <para>Voorbeeld dat weergeeft hoe een segment aan te passen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.example.search.and.replace">
+        <term id="windows.scripts.distribution.example.search.and.replace.title">Voorbeeld - Zoeken en vervangen</term>
+
+        <listitem>
+          <para>Script voor eenvoudig zoeken en vervangen</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.external.spellcheck">
+        <term id="windows.scripts.distribution.external.spellcheck.title">Externe spellingscontrole</term>
+
+        <listitem>
+          <para>Schrijft alle segmenten naar een bestand, genaamd <filename>[project_name].doc</filename>, en opent het in de standaard tekstbewerker voor het systeem. Onthoud dat het bestand een normaal tekstbestand is. De extensie <filename>.doc</filename> zorgt er eenvoudigweg voor dat het opent in de tekstbewerker.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.extract.text.content">
+        <term id="windows.scripts.distribution.extract.text.content.title">Tekstinhoud uitnemen</term>
+
+        <listitem>
+          <para>Neemt de inhoud van het project uit naar één enkel tekstbestand (één regel per segment). Bekijk <ulink url="https://sourceforge.net/p/omegat/feature-requests/182/">RFE#182 Extracts the content of the projects to text file</ulink>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.non.breaking.space">
+        <term id="windows.scripts.distribution.non.breaking.space.title">Niet-afbreekbare spatie</term>
+
+        <listitem>
+          <para>Spaties vervangen door niet-afbreekbare spaties waar toepasselijk voor Frans.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.current.file">
+        <term id="windows.scripts.distribution.open.current.file.title">Open huidig bestand</term>
+
+        <listitem>
+          <para>Open het huidige bronbestand.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.glossary">
+        <term id="windows.scripts.distribution.open.glossary.title">Open woordenlijst</term>
+
+        <listitem>
+          <para>Open de beschrijfbare woordenlijst in een bewerker.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.project.folder">
+        <term id="windows.scripts.distribution.open.project.folder.title">Open projectmap</term>
+
+        <listitem>
+          <para>Open de projectmap in de standaard bestandsbeheerder.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.tm.folder">
+        <term id="windows.scripts.distribution.open.tm.folder.title">Open map TM</term>
+
+        <listitem>
+          <para>Open de map <filename class="directory">/tm</filename>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.open.project.save.tmx">
+        <term id="windows.scripts.distribution.open.project.save.tmx.title">Open
+        project_save.tmx.</term>
+
+        <listitem>
+          <para>Open project_save.tmx in een tekstbewerker.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.qa.check.rules">
+        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Regels controleren</term>
+
+        <listitem>
+          <para>QA script.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.qa.identical.segments">
+        <term id="windows.scripts.distribution.qa.identical.segments.title">QA - Identieke segmenten</term>
+
+        <listitem>
+          <para>Controleer op identieke segmenten (hoofdlettergevoelig).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.svn.cleanup.recursive">
+        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN - Opschonen (recursief)</term>
+
+        <listitem>
+          <para>Voer een opschoonactie uit voor SVN op het huidige project of enige map (recursief).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.show.same.segments">
+        <term id="windows.scripts.distribution.show.same.segments.title">Dezelfde segmenten weergeven</term>
+
+        <listitem>
+          <para>Geef een lijst weer met segmenten waar de bron en het doel identieke inhoud hebben.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.spellcheck">
+        <term id="windows.scripts.distribution.spellcheck.title">Spellingscontrole</term>
+
+        <listitem>
+          <para>Globale spellingscontrole</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.strip.bidi.marks">
+        <term id="windows.scripts.distribution.strip.bidi.marks.title">BiDi-markeringen verwijderen</term>
+
+        <listitem>
+          <para>Verwijder bidi-markeringen in het huidige doel of in de selectie.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.strip.tags">
+        <term id="windows.scripts.distribution.strip.tags.title">Tags verwijderen</term>
+
+        <listitem>
+          <para>Verwijder tags uit het huidige doel of selectie.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.switch.colour.theme">
+        <term id="windows.scripts.distribution.switch.colour.theme.title">Kleur thema wijzigen</term>
+
+        <listitem>
+          <para>Schakel met de kleur die wordt gebruikt in de bewerker.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.tag.free.match">
+        <term id="windows.scripts.distribution.tag.free.match.title">Tag-vrije overeenkomst</term>
+
+        <listitem>
+          <para>Vervang het huidige doel door een tag-vrije overeenkomst.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.tagwipe">
+        <term id="windows.scripts.distribution.tagwipe.title">Tags verwijderen</term>
+
+        <listitem>
+          <para>Verwijder extra tags uit docx-documenten</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
+        <term id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
+
+        <listitem>
+          <para>(geen beschrijving)</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.scripts.distribution.toolbar.groovy">
+        <term id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
+        <listitem>
+          <para>(geen beschrijving)</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="windows.scripts.references">
+    <title id="windows.scripts.references.title">Verwijzingen</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>OmegaT Javadoc</term>
+
+        <listitem>
+          <para>De documentatie voor de <ulink url="https://omegat.sourceforge.io/javadoc-latest/">OmegaT API</ulink>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Groovy</term>
+
+        <listitem>
+          <para>Een dynamische taal voor de Java Virtual machine. Het bouwt op de sterke punten van Java, en voegt krachtige mogelijkheden toe, geïnspireerd op talen als Python, Ruby en Smalltalk. Bekijk <ulink url="https://groovy-lang.org/documentation.html">Apache Groovy</ulink> voor details.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>JavaScript</term>
+
+        <listitem>
+          <para>Een op prototype gebaseerde scripttaal die dynamisch is, zwak getypeerd en eersteklas functies heeft. Het is een taal met meerdere paradigma's die object-georiënteerde, imperatieve en functionele programmeerstijlen ondersteunt. Bekijk <ulink url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, en Nashorn</ulink> en <ulink url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1 Language Specification</ulink>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Alle talen hebben toegang tot het objectmodel van OmegaT, met het project als het hoogste object. De volgende code in Groovy scant bijvoorbeeld door alle segmenten in elk bestand in het huidige project en drukt de bron en het doel van het segment, die een vertaling bevatten, af,:</para>
+
+    <programlisting>files = project.projectFiles;
     for (i in 0 ..&lt; files.size())
-    {
-        for (j in 0 ..&lt; files[i].entries.size())
-        {
-            currSegment = files[i].entries[j];
-            if (project.getTranslationInfo(currSegment))
+{
+             for (j in 0 ..&lt; files[i].entries.size())
             {
-                source = currSegment.getSrcText();
-                target = project.getTranslationInfo(currSegment).translation;
-                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
-            }     
-        }
-    }</programlisting>
+
+                       currSegment = files[i].entries[j];
+                       if (project.getTranslationInfo(currSegment))
+                       {
+                                source = currSegment.getSrcText();
+                                target = project.getTranslationInfo(currSegment).translation;
+                                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+                        }     
+
+             }
+}</programlisting>
   </section>
 </section>

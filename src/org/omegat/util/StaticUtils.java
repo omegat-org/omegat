@@ -10,6 +10,7 @@
                2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel, Alex Buloichik
                2014 Aaron Madlon-Kay, Alex Buloichik
                2015 Aaron Madlon-Kay
+               2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -92,19 +93,12 @@ public final class StaticUtils {
 
     /**
      * Char which should be used instead protected parts. It should be
-     * non-letter char, to be able to have correct words counter.
-     *
-     * This char can be placed around protected text for separate words inside
-     * protected text and words outside if there are no spaces between they.
+     * non-letter char, to be able to have correct words counter. This char can
+     * be placed around protected text for separate words inside protected text
+     * and words outside if there are no spaces between they.
      */
     public static final char TAG_REPLACEMENT_CHAR = '\b';
     public static final String TAG_REPLACEMENT = "\b";
-
-    /**
-     * Contains the location of the directory containing the configuration
-     * files.
-     */
-    private static String configDir = null;
 
     /**
      * Contains the location of the script dir containing the exported text
@@ -123,6 +117,7 @@ public final class StaticUtils {
      *            required modifiers
      * @return true if checked key pressed
      */
+    @SuppressWarnings("unused")
     public static boolean isKey(KeyEvent e, int code, int modifiers) {
         return e.getKeyCode() == code && e.getModifiersEx() == modifiers;
     }
@@ -140,7 +135,13 @@ public final class StaticUtils {
     private static String installDir = null;
 
     /**
-     * Returns OmegaT installation directory.
+     * Returns OmegaT installation directory. When running from an IDE or build
+     * tool; use CWD. Sometimes running from build/libs/OmegaT.jar on IDE. When
+     * running from Java WebStart; use CWD. If running from a JAR, get the
+     * enclosing folder (the JAR is assumed to be at the installation root, and
+     * there is also "modules" folder). When running from linux installation
+     * from package built with jpackage, the JAR is assumed to be at the
+     * "lib/app/", and "modules" and "scripts" are in "lib" folder.
      */
     public static String installDir() {
         if (installDir == null) {
@@ -149,20 +150,58 @@ public final class StaticUtils {
                 URI sourceUri = StaticUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI();
                 if (sourceUri.getScheme().equals("file")) {
                     File uriFile = Paths.get(sourceUri).toFile();
-                    // If running from a JAR, get the enclosing folder
-                    // (the JAR is assumed to be at the installation root,
-                    //  and there is also "readme.txt" file).
-                    if (uriFile.getName().endsWith(".jar") && new File(uriFile.getParentFile(),
-                            "readme.txt").exists()) {
-                        file = uriFile.getParentFile();
-                    } else {
-                        // Running from an IDE or build tool; use CWD.
-                        // Sometimes running from build/libs/OmegaT.jar
+                    // If running from a JAR, there are two cases.
+                    // a. When starting from IDE or Gradle build tool, folder
+                    // hierarchy becomes
+                    //
+                    // root/build/libs/OmegaT.jar
+                    // ........../classes
+                    // ...../gradle
+                    // ...../scripts
+                    // ...../src
+                    //
+                    // b. When starting from a standard installation folder,
+                    //
+                    // root/OmegaT.jar
+                    // ..../modules
+                    // ..../docs
+                    // ..../scripts
+                    //
+                    // c. When starting from jpackage installation folder.
+                    //
+                    // root/bin/Launcher
+                    // ..../lib/app/OmegaT.jar
+                    // ......../modules
+                    // ......../docs
+                    // ......../scripts
+                    //
+                    // We detect the environment with the following procedure
+                    // 1. Get the enclosing folder
+                    // 2. Is enclosing folder 'libs'?
+                    // If so, also check the existence of "modules" in an
+                    // enclosing folder; case a.
+                    // 3. Check the existence of "modules" folder
+                    // the JAR is assumed to be at the installation root,
+                    // and there is also "modules" directory; it is case b
+                    // 4. Get the parent folder of the enclosing folder.
+                    // 5. Check the existence of "modules" folder on it.
+                    // If it exists, it is case c.
+                    // 6. When failed above attempts, return CWD;
+                    if (uriFile.getName().endsWith(".jar")) {
+                        if ("libs".equals(uriFile.getParentFile().getName())
+                                && new File(uriFile.getParentFile().getParentFile(), "classes").exists()) {
+                            // a. assumes developer launch
+                            file = uriFile.getParentFile().getParentFile().getParentFile();
+                        } else if (new File(uriFile.getParentFile(), "modules").exists()) {
+                            // b. assumes standard installation
+                            file = uriFile.getParentFile();
+                        } else if (new File(uriFile.getParentFile().getParentFile(), "modules").exists()) {
+                            // c. assumes jpackage installation
+                            file = uriFile.getParentFile().getParentFile();
+                        }
                     }
-                } else {
-                    // Running from Java WebStart; use CWD.
                 }
-            } catch (URISyntaxException e) {
+            } catch (URISyntaxException ignored) {
             }
             if (file == null) {
                 file = Paths.get(".").toFile();
@@ -194,11 +233,7 @@ public final class StaticUtils {
      *         configuration files, including trailing path separator.
      */
     public static String getConfigDir() {
-        // if the configuration directory has already been determined, return it
-        if (configDir != null) {
-            return configDir;
-        }
-
+        String configDir;
         String cd = RuntimePreferences.getConfigDir();
         if (cd != null) {
             // use the forced specified directory
@@ -206,27 +241,7 @@ public final class StaticUtils {
             return configDir;
         }
 
-        String home; // user home directory
-
-        // get os and user home properties
-        try {
-            // get the user's home directory
-            home = System.getProperty("user.home");
-        } catch (SecurityException e) {
-            // access to the os/user home properties is restricted,
-            // the location of the config dir cannot be determined,
-            // set the config dir to the current working dir
-            configDir = new File(".").getAbsolutePath() + File.separator;
-
-            // log the exception, only do this after the config dir
-            // has been set to the current working dir, otherwise
-            // the log method will probably fail
-            Log.logErrorRB("SU_USERHOME_PROP_ACCESS_ERROR");
-            Log.log(e.toString());
-
-            return configDir;
-        }
-
+        String home = getHomeDir();
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
         if (StringUtil.isEmpty(home)) {
@@ -254,7 +269,6 @@ public final class StaticUtils {
                     appData = appDataFile.getAbsolutePath();
                 }
             }
-
             if (!StringUtil.isEmpty(appData)) {
                 // if a valid application data dir has been found,
                 // append an OmegaT subdir to it
@@ -267,7 +281,7 @@ public final class StaticUtils {
             }
             // Check for UNIX varieties
             // Solaris is generally detected as SunOS
-        } else if (Platform.isLinux()) {
+        } else if (Platform.isUnixLike()) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
             configDir = home + UNIX_CONFIG_DIR;
@@ -311,7 +325,25 @@ public final class StaticUtils {
         }
 
         // we should have a correct, existing config dir now
+        RuntimePreferences.setConfigDir(configDir);
         return configDir;
+    }
+
+    public static String getHomeDir() {
+        String home; // user home directory
+        // get os and user home properties
+        try {
+            // get the user's home directory
+            home = System.getProperty("user.home");
+        } catch (SecurityException e) {
+            // log the exception, only do this after the config dir
+            // has been set to the current working dir, otherwise
+            // the log method will probably fail
+            Log.logErrorRB("SU_USERHOME_PROP_ACCESS_ERROR");
+            Log.log(e.toString());
+            return null;
+        }
+        return home;
     }
 
     public static String getScriptDir() {
@@ -348,10 +380,19 @@ public final class StaticUtils {
     }
 
     /**
+     * Returns the path to the log file.
+     */
+    @SuppressWarnings("unused")
+    public static String getLogLocation() {
+        return StaticUtils.getConfigDir() + "/logs";
+    }
+
+    /**
      * Encodes the array of bytes to store them in a plain text file.
      */
+    @SuppressWarnings("unused")
     public static String uuencode(byte[] buf) {
-        if (buf.length <= 0) {
+        if (buf.length == 0) {
             return "";
         }
         StringBuilder res = new StringBuilder();
@@ -448,10 +489,8 @@ public final class StaticUtils {
     }
 
     /**
-     * Download a file to memory.
-     * 
-     * @Deprecated This method is replaced to HttpConnectionUtils.getURL(url,
-     *             timeout)
+     * Download a file to memory. This method is replaced to
+     * HttpConnectionUtils.getURL(url, timeout)
      */
     @Deprecated
     public static String downloadFileToString(URL url, int timeout) throws IOException {
@@ -471,6 +510,7 @@ public final class StaticUtils {
      *            entry
      * @return List of extracted entry names
      * @throws IOException
+     *             when I/O error occurred.
      */
     public static List<String> extractFromZip(InputStream in, File destination,
             Predicate<String> filenameFilter) throws IOException {
@@ -513,7 +553,7 @@ public final class StaticUtils {
         }
 
         StringBuilder arg = new StringBuilder();
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
 
         final char noQuote = '\0';
         char currentQuote = noQuote;
@@ -539,8 +579,6 @@ public final class StaticUtils {
                     if (arg.length() > 0) {
                         result.add(arg.toString());
                         arg = new StringBuilder();
-                    } else {
-                        // Discard
                     }
                 } else {
                     arg.appendCodePoint(cp);
@@ -551,7 +589,7 @@ public final class StaticUtils {
         if (arg.length() > 0) {
             result.add(arg.toString());
         }
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     public static boolean isProjectDir(File f) {

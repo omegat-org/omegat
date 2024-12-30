@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,10 +26,15 @@
 
 package org.omegat.tokenizer;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,9 +44,45 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.ar.ArabicAnalyzer;
+import org.apache.lucene.analysis.bg.BulgarianAnalyzer;
+import org.apache.lucene.analysis.br.BrazilianAnalyzer;
+import org.apache.lucene.analysis.ca.CatalanAnalyzer;
+import org.apache.lucene.analysis.core.StopFilter;
+import org.apache.lucene.analysis.cz.CzechAnalyzer;
+import org.apache.lucene.analysis.da.DanishAnalyzer;
+import org.apache.lucene.analysis.de.GermanAnalyzer;
+import org.apache.lucene.analysis.el.GreekAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.es.SpanishAnalyzer;
+import org.apache.lucene.analysis.eu.BasqueAnalyzer;
+import org.apache.lucene.analysis.fa.PersianAnalyzer;
+import org.apache.lucene.analysis.fi.FinnishAnalyzer;
+import org.apache.lucene.analysis.fr.FrenchAnalyzer;
+import org.apache.lucene.analysis.ga.IrishAnalyzer;
+import org.apache.lucene.analysis.gl.GalicianAnalyzer;
+import org.apache.lucene.analysis.hi.HindiAnalyzer;
+import org.apache.lucene.analysis.hu.HungarianAnalyzer;
 import org.apache.lucene.analysis.hunspell.Dictionary;
 import org.apache.lucene.analysis.hunspell.HunspellStemFilter;
+import org.apache.lucene.analysis.hy.ArmenianAnalyzer;
+import org.apache.lucene.analysis.id.IndonesianAnalyzer;
+import org.apache.lucene.analysis.it.ItalianAnalyzer;
+import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
+import org.apache.lucene.analysis.lv.LatvianAnalyzer;
+import org.apache.lucene.analysis.nl.DutchAnalyzer;
+import org.apache.lucene.analysis.no.NorwegianAnalyzer;
+import org.apache.lucene.analysis.pl.PolishAnalyzer;
+import org.apache.lucene.analysis.pt.PortugueseAnalyzer;
+import org.apache.lucene.analysis.ro.RomanianAnalyzer;
+import org.apache.lucene.analysis.ru.RussianAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.sv.SwedishAnalyzer;
+import org.apache.lucene.analysis.th.ThaiAnalyzer;
+import org.apache.lucene.analysis.tr.TurkishAnalyzer;
+import org.apache.lucene.analysis.util.CharArraySet;
+import org.apache.lucene.analysis.util.WordlistLoader;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
@@ -65,7 +107,7 @@ public class HunspellTokenizer extends BaseTokenizer {
     private volatile Dictionary dict;
     private volatile boolean failedToLoadDict;
 
-    private Dictionary getDict() {
+    protected Dictionary getDict() {
         if (failedToLoadDict) {
             return null;
         }
@@ -74,7 +116,8 @@ public class HunspellTokenizer extends BaseTokenizer {
             synchronized (this) {
                 result = dict;
                 if (result == null) {
-                    result = dict = initDict(getEffectiveLanguage());
+                    result = initDict(getEffectiveLanguage());
+                    dict = result;
                     if (result == null) {
                         failedToLoadDict = true;
                     }
@@ -94,10 +137,13 @@ public class HunspellTokenizer extends BaseTokenizer {
             if (dictionary == null) {
                 return tokenizer;
             }
-
-            return new HunspellStemFilter(tokenizer, dictionary);
-
-            /// TODO: implement stop words checks
+            CharArraySet stopWords;
+            if (stopWordsAllowed) {
+                stopWords = getEffectiveStopWordSet();
+            } else {
+                stopWords = CharArraySet.EMPTY_SET;
+            }
+            return new StopFilter(new HunspellStemFilter(tokenizer, dictionary), stopWords);
         } else {
             return tokenizer;
         }
@@ -126,14 +172,20 @@ public class HunspellTokenizer extends BaseTokenizer {
             return;
         }
 
-        for (File file : dictionaryDir.listFiles()) {
+        var fileList = dictionaryDir.listFiles();
+        if (fileList == null) {
+            return;
+        }
+
+        for (File file : fileList) {
             String name = file.getName();
             if (name.endsWith(OConsts.SC_AFFIX_EXTENSION)) {
                 Language lang = new Language(name.substring(0, name.lastIndexOf(OConsts.SC_AFFIX_EXTENSION)));
                 affixFiles.put(lang, file);
                 affixFiles.put(new Language(lang.getLanguageCode()), file);
             } else if (name.endsWith(OConsts.SC_DICTIONARY_EXTENSION)) {
-                Language lang = new Language(name.substring(0, name.lastIndexOf(OConsts.SC_DICTIONARY_EXTENSION)));
+                Language lang = new Language(
+                        name.substring(0, name.lastIndexOf(OConsts.SC_DICTIONARY_EXTENSION)));
                 dictionaryFiles.put(lang, file);
                 dictionaryFiles.put(new Language(lang.getLanguageCode()), file);
             }
@@ -172,7 +224,7 @@ public class HunspellTokenizer extends BaseTokenizer {
             result.add(lang.getLanguage().toLowerCase(Locale.ENGLISH));
             result.add(lang.getLanguageCode().toLowerCase(Locale.ENGLISH));
         }
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     private static synchronized void reset() {
@@ -191,5 +243,97 @@ public class HunspellTokenizer extends BaseTokenizer {
     }
 
     public static void unloadPlugins() {
+    }
+
+    private static final String STOPWORDS_COMMENT = "#";
+    private static final String STOPWORDS_BASE_DIR = "stopwords/";
+
+    private CharArraySet getEffectiveStopWordSet() {
+        String language = getEffectiveLanguage().getLanguageCode();
+        String country = getEffectiveLanguage().getCountryCode();
+        switch (language) {
+        case "ar":
+            return ArabicAnalyzer.getDefaultStopSet();
+        case "hy":
+            return ArmenianAnalyzer.getDefaultStopSet();
+        case "eu":
+            return BasqueAnalyzer.getDefaultStopSet();
+        case "es":
+            if (country.equals("BR")) {
+                return BrazilianAnalyzer.getDefaultStopSet();
+            } else {
+                return SpanishAnalyzer.getDefaultStopSet();
+            }
+        case "bg":
+            return BulgarianAnalyzer.getDefaultStopSet();
+        case "ca":
+            return CatalanAnalyzer.getDefaultStopSet();
+        case "cs":
+            return CzechAnalyzer.getDefaultStopSet();
+        case "da":
+            return DanishAnalyzer.getDefaultStopSet();
+        case "nl":
+            return DutchAnalyzer.getDefaultStopSet();
+        case "en":
+            return EnglishAnalyzer.getDefaultStopSet();
+        case "fi":
+            return FinnishAnalyzer.getDefaultStopSet();
+        case "fr":
+            return FrenchAnalyzer.getDefaultStopSet();
+        case "gl":
+            return GalicianAnalyzer.getDefaultStopSet();
+        case "de":
+            return GermanAnalyzer.getDefaultStopSet();
+        case "el":
+            return GreekAnalyzer.getDefaultStopSet();
+        case "hi":
+            return HindiAnalyzer.getDefaultStopSet();
+        case "hu":
+            return HungarianAnalyzer.getDefaultStopSet();
+        case "id":
+            return IndonesianAnalyzer.getDefaultStopSet();
+        case "ga":
+            return IrishAnalyzer.getDefaultStopSet();
+        case "it":
+            return ItalianAnalyzer.getDefaultStopSet();
+        case "lv":
+            return LatvianAnalyzer.getDefaultStopSet();
+        case "nb":
+            return NorwegianAnalyzer.getDefaultStopSet();
+        case "fa":
+            return PersianAnalyzer.getDefaultStopSet();
+        case "pl":
+            return PolishAnalyzer.getDefaultStopSet();
+        case "pt":
+            return PortugueseAnalyzer.getDefaultStopSet();
+        case "ro":
+            return RomanianAnalyzer.getDefaultStopSet();
+        case "ru":
+            return RussianAnalyzer.getDefaultStopSet();
+        case "sv":
+            return SwedishAnalyzer.getDefaultStopSet();
+        case "th":
+            return ThaiAnalyzer.getDefaultStopSet();
+        case "tr":
+            return TurkishAnalyzer.getDefaultStopSet();
+        case "ja":
+            return JapaneseAnalyzer.getDefaultStopSet();
+        default:
+            return loadStopwordSet(STOPWORDS_BASE_DIR + language + "/stopwords-" + language + ".txt"
+            );
+        }
+    }
+
+    private CharArraySet loadStopwordSet(String resource) {
+        try (InputStream is = HunspellTokenizer.class.getResourceAsStream(resource)) {
+            if (is != null) {
+                try (Reader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                    return WordlistLoader.getWordSet(reader, STOPWORDS_COMMENT, new CharArraySet(16, true));
+                } catch (IOException ignored) {
+                }
+            }
+        } catch (IOException ignored) {
+        }
+        return CharArraySet.EMPTY_SET;
     }
 }

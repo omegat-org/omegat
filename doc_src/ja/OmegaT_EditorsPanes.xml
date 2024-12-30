@@ -8,8 +8,8 @@
 
 	<para>OmegaTを初めて開始するとき、メインウィンドウには次の標準レイアウトが表示されます。</para>
 
-		<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Mac OSでのデフォルトOmeaTレイアウト</title>
+		<figure id="default.omegat.layout.macos">
+      <title id="default.omegat.layout.macos.title">Mac OSでのデフォルトOmeaTレイアウト</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -555,7 +555,7 @@
 
     <para>参考訳文は、プロジェクトの翻訳メモリ時にリアルタイムで作成された内部プロジェクト翻訳と、以前のプロジェクトからインポートした外部メモリまたはサードパーティから受け取った外部メモリの全てから取得されます。詳細については、 <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/>を参照してください。</para>
 
-    <para>次の分節に移動すると、最初の参考訳文（最も一致率の高いもの）が自動的に選択されます。別の参考訳文を選択するには、<keycombo><keycap>C</keycap><keycap>2、3、4、または5</keycap></keycombo>を押すか、<link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/>を使用します。</para>
+    <para>次の分節に移動すると、最初の参考訳文（最も一致率の高いもの）が自動的に選択されます。特定の参考訳文を選択するには、<keycombo><keycap>C</keycap><keycap>2、3、4、または 5</keycap> </keycombo> を押すか、<keycombo><keycap>C</keycap><keycap>↑ または ↓</keycap></keycombo> (macOS では <keycombo><keycap>A</keycap><keycap>↑ または ↓</keycap></keycombo>) を使用して使用する候補を切り替えることができます。または、<link linkend="menus.edit" endterm="menus.edit.title"/> <link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/> を使用して別の参考訳文を選択することもできます。</para>
 
 	<example id="the.first.match">
 	  <title id="the.first.match.title">空の分節と最初の2つのマッチ</title>
@@ -631,7 +631,7 @@ Dossier de configuration
       </listitem>
     </itemizedlist>
   
-    <para>一致の表示または並べ替えの方法を変更できます。詳細については、設定-<link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/>を参照してください。</para>
+    <para>一致の表示または並べ替えの方法を変更できます。詳細については、<link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/>環境設定を参照してください。</para>
 
     <para><link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/>を使用して、訳文領域を参考訳文に置き換えます。または<link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/>を使用して、カーソル位置に挿入します。</para>
   </section>
@@ -665,7 +665,7 @@ Folder = <token>Dossier</token></programlisting>
 
 	<para>次に、原文分節の下線付きの単語を右クリックすると、用語集で使用可能な翻訳を一覧表示するポップアップメニューが開きます。いずれかを選択して、分節の現在のカーソル位置に挿入します。</para>
 
-    <para>用語集の環境設定を使用して、用語集の表示方法を微調整できます。詳細については、設定-<link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/>を参照してください。</para>
+    <para>用語集の環境設定を使用して、用語集の表示方法を微調整できます。詳細については、<link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/>環境設定を参照してください。</para>
 
     <para>用語集フォルダーの用語集ファイルに対する変更は、OmegaTによって即座に認識され、用語集ウィンドウに表示されます。</para>
 
@@ -683,7 +683,7 @@ Folder = <token>Dossier</token></programlisting>
   <section id="panes.machinetranslation">
     <title id="panes.machinetranslation.title"><guilabel>機械翻訳</guilabel></title>
 
-    <para>このウィンドウを開くと、有効になっている各機械翻訳エンジンによって生成された分節の訳文候補が表示されます。複数のエンジンからの訳文の提案が利用可能な場合</para>
+    <para>機械翻訳エンジンを有効にして構成している場合、このウィンドウには有効にしたエンジンが生成した分節の訳文が表示されます。複数の翻訳エンジンからの提案が利用可能な場合、</para>
 	
     <itemizedlist>
       <listitem>
@@ -707,7 +707,7 @@ Folder = <token>Dossier</token></programlisting>
 
     <para>サービスが有効になっていて、資格情報が正しく入力されていることを確認します。必要に応じて、サービスプロバイダに問い合わせてサポートを受ける必要があるかもしれません。。同様に、<literal>翻訳サービス応答を解析できません</literal>などのエラーは、システムとプロバイダのサーバとの間に通信の問題がある可能性を示唆しています。</para>
 
-	<para>詳細については、設定-<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>を参照してください。</para>
+	<para>詳細については、<link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/>環境設定を参照してください。</para>
   </section>
 
   <section id="panes.multipletranslations">

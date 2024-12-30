@@ -58,7 +58,7 @@
 	<para>La création d’un projet lui confère une hiérarchie de base, mais sa structure finale n’est pas figée. Vous pouvez à tout moment supprimer ou ajouter des fichiers et des dossiers au projet.</para>
 
 	<note>
-	  <para>Vous pouvez également créer des projets OmegaT manuellement ou à l’aide de scripts en copiant un ensemble de fichiers pré-écrits dans un nouveau dossier :</para>
+	  <para>Vous pouvez également créer des projets OmegaT manuellement ou à l’aide de scripts en copiant un ensemble de fichiers existants dans un nouveau dossier :</para>
 	  
 	  <itemizedlist>
 		<listitem>
@@ -68,7 +68,7 @@
 		<listitem>
 		  <para>Si le dossier est un dépôt vide et que le fichier <filename>omegat.project</filename> contient des informations sur le dépôt distant, le projet sera reconnu par OmegaT comme un projet d’équipe :</para>
 		  
-		  <programlisting>...
+		  <programlisting>…
     &lt;external_command&gt;&lt;/external_command&gt;
     &lt;repositories&gt;
         &lt;repository type=&quot;git&quot; url=&quot;https://URL/DU/DÉPÔT/DU/PROJET/À/DISTANCE&quot;&gt;
@@ -124,7 +124,7 @@
 
 	<para>Vous pouvez ajouter des dossiers ou supprimer des fichiers à l’aide de votre gestionnaire de fichiers.</para>
 
-	<para>Si votre projet de traduction comporte plusieurs dossiers et que vous souhaitez travailler sur un dossier à la fois, utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour accéder aux propriétés du projet et modifiez le <link linkend="dialogs.project.properties.file.locations.source.files">dossier source</link> associé comme vous le souhaitez.</para>
+	<para>Si votre projet de traduction comporte plusieurs dossiers et que vous souhaitez travailler sur un dossier à la fois, utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour accéder aux propriétés du projet et modifier le <link linkend="dialogs.project.properties.file.locations.source.files">dossier source</link> associé comme vous le souhaitez.</para>
   </section>
 
   <section id="project.folder.target">
@@ -133,7 +133,7 @@
 
 	<para>Il sera alimenté par les fichiers traduits chaque fois que vous utiliserez <link linkend="menus.project.create.translated.documents" endterm="menus.project.create.translated.documents.title"/> ou <link linkend="menus.project.create.current.translated.document" endterm="menus.project.create.current.translated.document.title"/>.</para>
 
-	<para>Les fichiers traduits correspondant au contenu du dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>, qu’ils soient entièrement traduits ou non, sont alors créés ici, en utilisant la même hiérarchie que dans le dossier source.</para>
+	<para>Les fichiers traduits correspondants au contenu du dossier <link linkend="project.folder.source" endterm="project.folder.source.title"/>, qu’ils soient entièrement traduits ou non, sont alors créés ici, en utilisant la même hiérarchie que dans le dossier source.</para>
 
 	<para>Les fichiers créés ici reflètent l’état actuel de la traduction. Les segments non traduits resteront dans la langue source.</para>
   </section>
@@ -146,7 +146,7 @@
 	
     <para>Les correspondances provenant des mémoires de référence sont affichées dans le volet <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, tout comme les correspondances provenant de <link linkend="project.folder.project.save.tmx" endterm="project.folder.project.save.tmx.title"/>, la mémoire de traduction du projet.</para>
 
-	<para>Ces correspondances sont par défaut limitées aux langues source et cible définies dans la boîte de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, mais vous pouvez également ajouter des correspondances dans des langues autres que la langue cible. Voir les préférences <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> pour en savoir plus.</para>
+	<para>Ces correspondances sont par défaut limitées aux langues source et cible définies dans la boite de dialogue <link linkend="dialogs.project.properties" endterm="dialogs.project.properties.title"/>, mais vous pouvez également ajouter des correspondances dans des langues autres que la langue cible. Voir les préférences <link linkend="dialog.preferences.tm.matches.other.languages" endterm="dialog.preferences.tm.matches.other.languages.title"/> pour en savoir plus.</para>
 
 	<para>Le dossier peut contenir un nombre illimité de sous-dossiers, dont certains ont des fonctions spéciales :</para>
 
@@ -267,7 +267,7 @@
 
 	<note>
 	  <para>Vous pouvez combiner des dossiers pour créer de nouvelles fonctions.
- Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <filename>tm/mt/penalty-010</filename> ne générerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</para>
+ Par exemple, un dossier de pénalité de 10 % dans le dossier de traduction automatique : <filename>tm/mt/penalty-010</filename> ne génèrerait jamais de correspondances à 100 % qui pourraient autrement être insérées automatiquement par OmegaT, et placerait toujours un arrière-plan rouge sur la correspondance chaque fois qu’elle est insérée.</para>
 	</note>
   </section>
 

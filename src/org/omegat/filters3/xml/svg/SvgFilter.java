@@ -5,7 +5,6 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Didier Briel
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,6 +26,7 @@
 
 package org.omegat.filters3.xml.svg;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -37,6 +37,16 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class SvgFilter extends XMLFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(SvgFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public SvgFilter() {
         super(new SvgDialect());

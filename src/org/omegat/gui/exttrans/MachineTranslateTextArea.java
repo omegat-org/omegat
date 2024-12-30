@@ -50,7 +50,6 @@ import javax.swing.text.html.StyleSheet;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;
@@ -87,8 +86,9 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
     /**
-     *  List displayed hold entries. An index shall be as same as ID attribute value of HTML.
-     *  Actual displayed entries are sorted, and the order is different from the List.
+     * List displayed hold entries. An index shall be as same as ID attribute
+     * value of HTML. Actual displayed entries are sorted, and the order is
+     * different from the List.
      */
     protected List<MachineTranslationInfo> displayed = new CopyOnWriteArrayList<>();
 
@@ -128,16 +128,16 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     private void initDocument() {
         StyleSheet baseStyleSheet = new StyleSheet();
         HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
-        baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet()); // Add default styles
+        // Add default styles
+        baseStyleSheet.addStyleSheet(htmlEditorKit.getStyleSheet());
         Font font = getFont();
-        baseStyleSheet.addRule("body { font-family: " + font.getName() + "; "
-                + " font-size: " + font.getSize() + "; "
-                + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal") + "; "
-                + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + "; "
-                + " color: " + Styles.EditorColor.COLOR_FOREGROUND.toHex() + "; "
-                + " background: " + Styles.EditorColor.COLOR_BACKGROUND.toHex() + ";} "
-                + ".engine {font-style: italic; text-align: right;}"
-                );
+        baseStyleSheet
+                .addRule("body { font-family: " + font.getName() + "; " + " font-size: " + font.getSize()
+                        + "; " + " font-style: " + (font.getStyle() == Font.ITALIC ? "italic" : "normal")
+                        + "; " + " font-weight: " + (font.getStyle() == Font.BOLD ? "bold" : "normal") + "; "
+                        + " color: " + Styles.EditorColor.COLOR_FOREGROUND.toHex() + "; " + " background: "
+                        + Styles.EditorColor.COLOR_BACKGROUND.toHex() + ";} "
+                        + ".engine {font-style: italic; text-align: right;}");
         htmlEditorKit.setStyleSheet(baseStyleSheet);
         setEditorKit(htmlEditorKit);
     }
@@ -162,7 +162,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         if (rootElement == null) {
             return;
         }
-        Element el = doc.getElement(rootElement, HTML.Attribute.ID,  String.valueOf(selectedIndex));
+        Element el = doc.getElement(rootElement, HTML.Attribute.ID, String.valueOf(selectedIndex));
         if (el == null) {
             return;
         }
@@ -236,7 +236,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         private final String src;
         private final boolean force;
 
-        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry, boolean force) {
+        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry,
+                boolean force) {
             super(MachineTranslateTextArea.this, newEntry);
             this.translator = translator;
             src = newEntry.getSrcText();
@@ -248,10 +249,10 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             Language source = null;
             Language target = null;
             ProjectProperties pp = Core.getProject().getProjectProperties();
-            if (pp != null){
-                 source = pp.getSourceLanguage();
-                 target = pp.getTargetLanguage();
-             }
+            if (pp != null) {
+                source = pp.getSourceLanguage();
+                target = pp.getTargetLanguage();
+            }
             if (source == null || target == null) {
                 return null;
             }
@@ -262,22 +263,20 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         private String getTranslation(Language source, Language target) {
             if (!force) {
-                if (!Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, true)) {
-                    return translator.getCachedTranslation(source, target, src);
-                }
-                if (Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)) {
-                    TMXEntry entry = Core.getProject().getTranslationInfo(currentlyProcessedEntry);
-                    if (entry.isTranslated()) {
-                        return translator.getCachedTranslation(source, target, src);
-                    }
+                String cached = translator.getCachedTranslation(source, target, src);
+                if (cached != null || !Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, false)
+                        || Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)
+                        && Core.getProject().getTranslationInfo(currentlyProcessedEntry).isTranslated()) {
+                    return cached;
                 }
             }
+            // Ask MT engine when forced, or visiting an untranslated entry.
             try {
                 return translator.getTranslation(source, target, src);
             } catch (MachineTranslateError e) {
                 Log.log(e);
-                Core.getMainWindow()
-                        .showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(), e.getLocalizedMessage());
+                Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
+                        e.getLocalizedMessage());
                 return null;
             } catch (Exception e) {
                 Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");

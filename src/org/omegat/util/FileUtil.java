@@ -59,7 +59,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.function.BiPredicate;
-import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -248,9 +247,16 @@ public final class FileUtil {
      * @return list of filtered found files
      */
     public static List<File> findFiles(final File dir, final FileFilter filter) {
-        final List<File> result = new ArrayList<File>();
-        Set<String> knownDirs = new HashSet<String>();
+        return findFiles(dir, filter, null);
+    }
+
+    public static List<File> findFiles(final File dir, final FileFilter filter, final Comparator<File> comp) {
+        final List<File> result = new ArrayList<>();
+        Set<String> knownDirs = new HashSet<>();
         findFiles(dir, filter, result, knownDirs);
+        if (comp != null) {
+            result.sort(comp);
+        }
         return result;
     }
 
@@ -491,7 +497,7 @@ public final class FileUtil {
                 if (ioe instanceof FileSystemLoopException) {
                     // source file folder has a looped symbolic links
                     String p = ((FileSystemLoopException) ioe).getFile();
-                    Core.getMainWindow().displayWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION",null, p);
+                    Core.getMainWindow().displayWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION", null, p);
                     Log.logWarningRB("TF_LOAD_WARN_SOURCE_LOOP_EXCEPTION", p);
                 } else if (ioe instanceof AccessDeniedException) {
                     String p = ((AccessDeniedException) ioe).getFile();
@@ -686,4 +692,5 @@ public final class FileUtil {
             return c;
         }
     }
+
 }

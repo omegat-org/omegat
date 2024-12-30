@@ -5,7 +5,7 @@
 
  Copyright (C) 2017-2020 Thomas Cordonnier
                Home page: https://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -59,6 +59,16 @@ import org.omegat.util.Preferences;
  */
 public class SdlXliff extends Xliff1Filter {
 
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(SdlXliff.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     private final SimpleDateFormat TRADOS_DATE_FORMAT = new SimpleDateFormat("M/d/y H:m:s");
 
     // ---------------------------- IFilter API ----------------------------
@@ -106,12 +116,11 @@ public class SdlXliff extends Xliff1Filter {
     private boolean mid_has_modifier = false;
     private boolean mid_has_modif_date = false;
 
-
     /**
      * Also starts on cmt-defs or tag-defs, else like in standard XLIFF.
      */
     @Override
-    protected void checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
+    protected boolean checkCurrentCursorPosition(javax.xml.stream.XMLStreamReader reader, boolean doWrite) {
         if (reader.getEventType() == StartElement.START_ELEMENT) {
             String name = reader.getLocalName();
             if (name.equals("cmt-defs")) {
@@ -122,6 +131,7 @@ public class SdlXliff extends Xliff1Filter {
             }
         }
         super.checkCurrentCursorPosition(reader, doWrite);
+        return isEventMode;
     }
 
     @Override
@@ -352,7 +362,7 @@ public class SdlXliff extends Xliff1Filter {
     @Override
     protected boolean processCharacters(Characters event, XMLStreamWriter writer) throws XMLStreamException {
         if (commentBuf != null) {
-            commentBuf.append(event.toString());
+            commentBuf.append(event.getData());
             if ((writer != null) && isCurrentSegmentTranslated(currentMid)) {
                 if ("last_modified_by".equals(currentProp)) {
                     writer.writeCharacters(Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
@@ -425,13 +435,14 @@ public class SdlXliff extends Xliff1Filter {
                     }
                 } catch (XMLStreamException xe) {
                     try {
-                        for (XMLEvent ev : saved)
+                        for (XMLEvent ev : saved) {
                             if (ev.isEndElement()) {
                                 writer.write("</" + ev.asEndElement().getName().getPrefix() + ":"
                                         + ev.asEndElement().getName().getLocalPart() + ">");
                             } else {
                                 writer.write(ev.toString());
                             }
+                        }
                     } catch (Exception ignored) {
                     }
                 }

@@ -34,6 +34,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
 import org.omegat.core.data.CommandVarExpansion;
+import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -64,8 +65,8 @@ public class SaveOptionsController extends BasePreferencesController {
     private void initGui() {
         panel = new SaveOptionsPanel();
 
-        panel.insertButton.addActionListener(
-                e -> panel.externalCommandTextArea.replaceSelection(panel.variablesList.getSelectedItem().toString()));
+        panel.insertButton.addActionListener(e -> panel.externalCommandTextArea
+                .replaceSelection(panel.variablesList.getSelectedItem().toString()));
     }
 
     @Override
@@ -77,10 +78,17 @@ public class SaveOptionsController extends BasePreferencesController {
         panel.secondsSpinner.setValue(saveInterval % 60);
 
         panel.externalCommandTextArea.setText(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
-        panel.allowProjectCmdCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
+        panel.allowProjectCmdCheckBox
+                .setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
 
-        panel.variablesList
-                .setModel(new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
+        panel.variablesList.setModel(
+                new DefaultComboBoxModel<>(new Vector<>(CommandVarExpansion.getCommandVariables())));
+
+        int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
+                StatOutputFormat.JSON.getId() | StatOutputFormat.TEXT.getId());
+        panel.textOutputCheckBox.setSelected(StatOutputFormat.TEXT.isSelected(outputFormats));
+        panel.jsonOutputCheckBox.setSelected(StatOutputFormat.JSON.isSelected(outputFormats));
+        panel.xmlOutputCheckBox.setSelected(StatOutputFormat.XML.isSelected(outputFormats));
     }
 
     @Override
@@ -90,6 +98,11 @@ public class SaveOptionsController extends BasePreferencesController {
 
         panel.externalCommandTextArea.setText("");
         panel.allowProjectCmdCheckBox.setSelected(false);
+
+        int outputFormats = StatOutputFormat.getDefaultFormats();
+        panel.textOutputCheckBox.setSelected(StatOutputFormat.TEXT.isSelected(outputFormats));
+        panel.jsonOutputCheckBox.setSelected(StatOutputFormat.JSON.isSelected(outputFormats));
+        panel.xmlOutputCheckBox.setSelected(StatOutputFormat.XML.isSelected(outputFormats));
     }
 
     @Override
@@ -118,6 +131,13 @@ public class SaveOptionsController extends BasePreferencesController {
         Preferences.setPreference(Preferences.AUTO_SAVE_INTERVAL, saveInterval);
 
         Preferences.setPreference(Preferences.EXTERNAL_COMMAND, panel.externalCommandTextArea.getText());
-        Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD, panel.allowProjectCmdCheckBox.isSelected());
+        Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD,
+                panel.allowProjectCmdCheckBox.isSelected());
+
+        int outputFormats = 0;
+        outputFormats |= panel.textOutputCheckBox.isSelected() ? StatOutputFormat.TEXT.getId() : 0;
+        outputFormats |= panel.jsonOutputCheckBox.isSelected() ? StatOutputFormat.JSON.getId() : 0;
+        outputFormats |= panel.xmlOutputCheckBox.isSelected() ? StatOutputFormat.XML.getId() : 0;
+        Preferences.setPreference(Preferences.STATS_OUTPUT_FORMAT, outputFormats);
     }
 }

@@ -8,22 +8,23 @@ Het najen van de documentatie veriest een aantal programma's:
 
 - DocBook XSL Stylesheets 1.75.2 ("dbk")
 - DocBook XML 4.5
-- fop 0.95
+- fop 1.1
 - libxml2 2-2.7.7
 - Saxon 6-5-5
+- XMLmind Web Help Compiler ("whc")
 - Ant 1.7.1 of hoger
 
-Om redenen van effici�ntie is het pad naar de DTD in de bestanden van DocBook (bijv., AboutOmegaT.xml) is gewijzigd naar een lokaal pad (../../../docbook-xml-4.5/docbookx.dtd in plaats van een http://-verwijzing). Afhankelijk van de actuele configuratie kan die worden gewijzigd naar een standaard verwijzing ("http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd") of naar een andere lokale verwijzing.
+Om redenen van efficiï¿½ntie is het pad naar de DTD in de bestanden van DocBook (bijv., AboutOmegaT.xml) is gewijzigd naar een lokaal pad (../../../docbook-xml-4.5/docbookx.dtd in plaats van een http://-verwijzing). Afhankelijk van de actuele configuratie kan die worden gewijzigd naar een standaard verwijzing ("http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd") of naar een andere lokale verwijzing.
 
 ***Windows***
 
-dbk moet zijn ge�nstalleerd in de root van c:\
+dbk moet zijn geï¿½nstalleerd in de root van c:\
 
 c:\dbk\common
 c:\dbk\docsrc
 etc.
 
-Docbook-xml-4.5 moet zijn ge�nstalleerd op hetzelfde niveau als de map van uw OmegaT ontwikkeling.
+Docbook-xml-4.5 moet zijn geï¿½nstalleerd op hetzelfde niveau als de map van uw OmegaT ontwikkeling.
 
 Dus als u hebt 
 
@@ -38,14 +39,14 @@ c:\dev\docbook-xml-4.5\ent
 c:\dev\docbook-xml-4.5\calstblx.dtd
 etc.
 
-libxml2-2.7.7 en apache-ant moeten zijn ge�nstalleerd waar zij door een pad kunnen worden gevonden, normala gesproken in Program Files.
+libxml2-2.7.7 en apache-ant moeten zijn geï¿½nstalleerd waar zij door een pad kunnen worden gevonden, normala gesproken in Program Files.
 C:\Program Files\libxml2-2.7.7.win32
 C:\Program Files\apache-ant
 
 Overeenkomende pad:
 path=C:\Program Files\libxml2-2.7.7.win32\bin;C:\Program Files\apache-ant\bin
 
-fop-0.95 kan overal worden ge�nstalleerd, normaal gesproken in Program Files.
+fop-0.95 kan overal worden geï¿½nstalleerd, normaal gesproken in Program Files.
 C:\Program Files\fop-0.95
 
 De lokatie van fop-0.95, dbk en Saxon moet worden ingesteld in doc_src_paths.xml, in de overenkomend eeigenschappen:
@@ -65,7 +66,7 @@ Die welke beschikbaar zijn in doc_src zijn alleen ter verwijzing.
 
 ***Mac OSX***
 
-Alle afhankelijkheden kunnen worden ge�nstalleerd via Macports behalve Saxon 6-5-5
+Alle afhankelijkheden kunnen worden geï¿½nstalleerd via Macports behalve Saxon 6-5-5
 
 Macports:
 http://www.macports.org/

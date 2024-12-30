@@ -15,10 +15,10 @@
 
   <para>Par défaut, les scripts sont stockés dans le dossier <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/> dans le dossier de l’application d’OmegaT.</para>
 
-  <para>Les nouveaux scripts ajoutés ici apparaîtront dans la liste des scripts disponibles dans le panneau gauche de la fenêtre des scripts.</para>
+  <para>Les nouveaux scripts ajoutés ici apparaitront dans la liste des scripts disponibles dans le panneau gauche de la fenêtre des scripts.</para>
 
   <warning>
-    <para>Si aucune liste de scripts n’est affichée dans la partie gauche de la fenêtre d’édition de scripts, utilisez le menu <guimenu>Fichier</guimenu> &gt; <guimenuitem>Définir le dossier des scripts...</guimenuitem> de la fenêtre de scripts pour définir l’emplacement des scripts.</para>
+    <para>Si aucune liste de scripts n’est affichée dans la partie gauche de la fenêtre d’édition de scripts, utilisez le menu <guimenu>Fichier</guimenu> &gt; <guimenuitem>Définir le dossier des scripts…</guimenuitem> de la fenêtre de scripts pour définir l’emplacement des scripts.</para>
   </warning>
 
   <para>Des scripts supplémentaires sont disponibles ici : <ulink url="https://sourceforge.net/projects/omegatscripts/">Scripts OmegaT</ulink>. Il suffit de copier le fichier dans le dossier <link linkend="application.folder.scripts" endterm="application.folder.scripts.title"/>.</para>
@@ -72,9 +72,9 @@
       </listitem>
 
       <listitem>
-		<para>Pour créer un raccourci à un script que vous utilisez fréquemment, faites un clic-droit sur l’un des boutons de <guibutton>&lt;1&gt;</guibutton> à <guibutton>&lt;12&gt;</guibutton> en bas de la fenêtre et sélectionnez <guilabel>Ajouter le script</guilabel> pour assigner le script à ce numéro.</para>
+		<para>Pour créer un raccourci à un script que vous utilisez fréquemment, faites un clic droit sur l’un des boutons de <guibutton>&lt;1&gt;</guibutton> à <guibutton>&lt;12&gt;</guibutton> en bas de la fenêtre et sélectionnez <guilabel>Ajouter le script</guilabel> pour assigner le script à ce numéro.</para>
 
-		<para>Si vous souhaitez détacher le script du raccourci, faites un clic-droit sur le bouton et sélectionnez <guilabel>Supprimer le script</guilabel>.</para>
+		<para>Si vous souhaitez détacher le script du raccourci, faites un clic droit sur le bouton et sélectionnez <guilabel>Supprimer le script</guilabel>.</para>
       </listitem>
 
       <listitem>
@@ -133,7 +133,7 @@
         <listitem>
           <para>Traduit la représentation des devises selon la source et la cible.</para>
 
-          <para>Une chaîne de caractères comme “$123,399.99” sera traduite en “123 399,99 USD&quot; par exemple.</para>
+          <para>Une chaine de caractères comme “$123,399.99” sera traduite en “123 399,99 USD&quot; par exemple.</para>
         </listitem>
       </varlistentry>
 
@@ -354,7 +354,7 @@
         <term>JavaScript</term>
 
         <listitem>
-          <para>Un langage de script à prototype qui est dynamique, à typage faible, et avec des fonctions de première classe. C’est un langage multi-paradigme qui prend en charge les styles de programmation orientés objet, impératifs et fonctionnels. Voir <ulink url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</ulink> et <ulink url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1 Language Specification</ulink>.</para>
+          <para>Un langage de script à prototype qui est dynamique, à typage faible, et avec des fonctions de première classe. C’est un langage multiparadigme qui prend en charge les styles de programmation orientés objet, impératifs et fonctionnels. Voir <ulink url="https://developer.oracle.com/databases/nashorn-javascript-part1.html">Practical Nashorn, Part 1: Introducing JavaScript, ECMAScript, and Nashorn</ulink> et <ulink url="https://www.ecma-international.org/ecma-262/5.1/">ECMAScript® 5.1 Language Specification</ulink>.</para>
         </listitem>
       </varlistentry>
     </variablelist>

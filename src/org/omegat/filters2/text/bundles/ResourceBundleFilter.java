@@ -9,6 +9,7 @@
                2013-2014 Enrique Estevez, Didier Briel
                2015 Aaron Madlon-Kay, Enrique Estevez
                2016 Aaron Madlon-Kay
+               2023-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,18 +34,15 @@ package org.omegat.filters2.text.bundles;
 import java.awt.Window;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -69,6 +67,7 @@ import org.omegat.util.TagUtil;
  * @author Enrique Estevez (keko.gl@gmail.com)
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  *
  *         Option to remove untranslated segments in the target files Code
  *         adapted from the file: MozillaDTDFilter.java Support for encoding
@@ -89,31 +88,32 @@ public class ResourceBundleFilter extends AbstractFilter {
     /**
      * Key=value pairs with a preceding comment containing this string are not
      * translated, and are output verbatim.
-     * <p>
-     * TODO: Make this optional
      */
     public static final String DO_NOT_TRANSLATE_COMMENT = "NOI18N";
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
     public static final String OPTION_DONT_UNESCAPE_U_LITERALS = "dontUnescapeULiterals";
     public static final String OPTION_FORCE_JAVA8_LITERALS_ESCAPE = "forceJava8LiteralsEscape";
+    public static final String OPTION_DONT_TRANSLATE_COMMENT = "dontTargetCommentValue";
     public static final String DEFAULT_SOURCE_ENCODING = StandardCharsets.UTF_8.name();
     public static final String DEFAULT_TARGET_ENCODING = StandardCharsets.UTF_8.name();
 
     protected Map<String, String> align;
 
-    private String targetEncoding = DEFAULT_TARGET_ENCODING;
-    private Boolean forceTargetEscape = true;
-
-    /**
-     * If true, will remove non-translated segments in the target files
-     */
-    private boolean removeStringsUntranslated = false;
-
     /**
      * If true, will not convert characters into \\uXXXX notation
      */
     private boolean dontUnescapeULiterals = false;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(ResourceBundleFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     public String getFileFormatName() {
@@ -150,50 +150,6 @@ public class ResourceBundleFilter extends AbstractFilter {
                 TFP_NAMEONLY + "_" + TFP_TARGET_LOCALE + "." + TFP_EXTENSION) };
     }
 
-    /**
-     * Creates a reader of an input file.
-     * <p>
-     * Override because of keep buggy behavior in OmegaT 5.7.1 or before. It set
-     * default encoding US-ASCII but Java standard InputStreamReader class
-     * wrongly accept non-ASCII characters as-is.
-     * </p>
-     *
-     * @param inFile
-     *            The source file.
-     * @param inEncoding
-     *            Encoding of the input file, if the filter supports it.
-     *            Otherwise null.
-     * @return The reader for the source file
-     * @throws IOException
-     *             If any I/O Error occurs upon reader creation
-     */
-    @Override
-    public BufferedReader createReader(File inFile, String inEncoding) throws IOException {
-        Charset charset;
-        if (inEncoding != null) {
-            charset = Charset.forName(inEncoding);
-        } else {
-            charset = Charset.defaultCharset();
-        }
-        return new BufferedReader(new InputStreamReader(Files.newInputStream(inFile.toPath()), charset));
-    }
-
-    /**
-     * Creating an output stream to save a localized resource bundle.
-     * <p>
-     * NOTE: the name of localized resource bundle is different from the name of
-     * original one. e.g. "Bundle.properties" -&gt; Russian =
-     * "Bundle_ru.properties"
-     */
-    @Override
-    public BufferedWriter createWriter(File outfile, String encoding) throws IOException {
-        if (encoding != null) {
-            targetEncoding = encoding;
-        }
-        Charset charset = Charset.forName(targetEncoding);
-        return new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(outfile.toPath()), charset));
-    }
-
     @Override
     protected String getOutputEncoding(FilterContext fc) {
         String encoding = fc.getOutEncoding();
@@ -210,15 +166,19 @@ public class ResourceBundleFilter extends AbstractFilter {
      * or non-key-value-breaking equals).
      * <ul>
      */
-    protected String normalizeInputLine(String line) throws IOException, TranslationException {
+    protected String normalizeInputLine(String line) throws TranslationException {
 
         // Whitespace at the beginning of lines is ignored
         boolean strippingWhitespace = true;
         StringBuilder result = new StringBuilder(line.length());
         for (int cp, len = line.length(), i = 0; i < len; i += Character.charCount(cp)) {
             cp = line.codePointAt(i);
-            if (strippingWhitespace && (strippingWhitespace = Character.isWhitespace(cp))) {
-                continue;
+            if (strippingWhitespace) {
+                if (Character.isWhitespace(cp)) {
+                    continue;
+                } else {
+                    strippingWhitespace = false;
+                }
             }
             if (cp == '\\' && line.codePointCount(i, len) > 1) {
                 i += Character.charCount(cp);
@@ -263,6 +223,15 @@ public class ResourceBundleFilter extends AbstractFilter {
         return result.toString();
     }
 
+    private int skipWhiteSpace(String line) {
+        int index = 0;
+        int cp = line.codePointAt(index);
+        while (Character.isWhitespace(cp)) {
+            index += 1;
+        }
+        return index;
+    }
+
     private enum EscapeMode {
         KEY, VALUE, COMMENT
     }
@@ -276,8 +245,8 @@ public class ResourceBundleFilter extends AbstractFilter {
      *            Is the string part of a key, a value or a comment?
      * @return The ascii string
      */
-    private String toAscii(String text, EscapeMode mode) {
-        CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
+    private String toAscii(String text, EscapeMode mode, CharsetEncoder charsetEncoder,
+            boolean forceTargetEscape) {
 
         StringBuilder result = new StringBuilder();
 
@@ -307,18 +276,16 @@ public class ResourceBundleFilter extends AbstractFilter {
                     && charsetEncoder.canEncode(text.substring(i, i + Character.charCount(cp)))) {
                 result.appendCodePoint(cp);
             } else {
-                for (char c : Character.toChars(cp)) {
-                    String code = Integer.toString(c, 16);
-                    while (code.codePointCount(0, code.length()) < 4) {
-                        code = '0' + code;
-                    }
-                    result.append("\\u").append(code);
+                char[] chars = Character.toChars(cp); // optimized for speed
+                for (int j = 0, charsLength = chars.length; j < charsLength; j++) {
+                    String code = Integer.toString(chars[j], 16).toUpperCase();
+                    result.append("\\u")
+                            .append("0".repeat(Math.max(0, 4 - code.codePointCount(0, code.length()))))
+                            .append(code);
                 }
             }
         }
-
         return result.toString();
-
     }
 
     private static boolean containsUEscapeAt(String text, int offset) {
@@ -348,22 +315,27 @@ public class ResourceBundleFilter extends AbstractFilter {
      */
     private String removeExtraSlashes(String string) {
         StringBuilder result = new StringBuilder(string.length());
-        for (int cp, len = string.length(), i = 0; i < len; i += Character.charCount(cp)) {
+        int cp;
+        int len = string.length();
+        int i = 0;
+        while (i < len) {
             cp = string.codePointAt(i);
             if (cp == '\\') {
-                if (dontUnescapeULiterals && containsUEscapeAt(string, i)) {
-                    // Don't remove \ before \\uXXXX if we are not unescaping
-                } else if (string.codePointCount(i, len) > 1) {
-                    // Fix for [ 1812183 ] Properties: space before "="
-                    // shouldn't
-                    // be part of the key, contributed by Arno Peters
-                    i += Character.charCount(cp);
-                    cp = string.codePointAt(i);
-                } else {
-                    cp = ' ';
+                // Don't remove \ before \\uXXXX if we are not unescape
+                if (!dontUnescapeULiterals || !containsUEscapeAt(string, i)) {
+                    if (string.codePointCount(i, len) > 1) {
+                        // Fix for [ 1812183 ] Properties: space before "="
+                        // shouldn't
+                        // be part of the key, contributed by Arno Peters
+                        i += Character.charCount(cp);
+                        cp = string.codePointAt(i);
+                    } else {
+                        cp = ' ';
+                    }
                 }
             }
             result.appendCodePoint(cp);
+            i += Character.charCount(cp);
         }
         return result.toString();
     }
@@ -374,19 +346,24 @@ public class ResourceBundleFilter extends AbstractFilter {
     @Override
     public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
             throws IOException, TranslationException {
-        // Parameter in the options of filter to customize the target file
-        removeStringsUntranslated = processOptions != null
+        // Parameter in the options of filter to customize the target file.
+
+        // If true, will remove non-translated segments in the target files.
+        boolean removeStringsUntranslated = processOptions != null
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED));
 
         // Parameter in the options of filter to customize the behavior of the
-        // filter
+        // filter.
         dontUnescapeULiterals = processOptions != null
                 && "true".equalsIgnoreCase(processOptions.get(OPTION_DONT_UNESCAPE_U_LITERALS));
 
-        if (processOptions != null) {
-            forceTargetEscape = !"false"
-                    .equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
-        }
+        // BUGS#1264
+        boolean forceTargetEscape = processOptions != null
+                && "true".equalsIgnoreCase(processOptions.get(OPTION_FORCE_JAVA8_LITERALS_ESCAPE));
+        CharsetEncoder charsetEncoder = Charset.forName(getOutputEncoding(fc)).newEncoder();
+
+        boolean dontTranslateComment = processOptions != null
+                && !"false".equalsIgnoreCase(processOptions.get(OPTION_DONT_TRANSLATE_COMMENT));
 
         String raw;
         boolean noi18n = false;
@@ -419,7 +396,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                 // skipping comments
                 int firstCp = trimmed.codePointAt(0);
                 if (firstCp == '#' || firstCp == '!') {
-                    outfile.write(toAscii(raw, EscapeMode.COMMENT));
+                    outfile.write(toAscii(raw, EscapeMode.COMMENT, charsetEncoder, forceTargetEscape));
                     outfile.write(lbpr.getLinebreak());
                     // Save the comments
                     comments = (comments == null ? processed : comments + "\n" + processed);
@@ -475,11 +452,11 @@ public class ResourceBundleFilter extends AbstractFilter {
                         value = "";
                     }
 
-                    if (noi18n) {
+                    if (noi18n && dontTranslateComment) {
                         // if we don't need to internationalize
-                        outfile.write(toAscii(key, EscapeMode.KEY));
+                        outfile.write(toAscii(key, EscapeMode.KEY, charsetEncoder, forceTargetEscape));
                         outfile.write(equals);
-                        outfile.write(toAscii(value, EscapeMode.VALUE));
+                        outfile.write(toAscii(value, EscapeMode.VALUE, charsetEncoder, forceTargetEscape));
                         outfile.write(lbpr.getLinebreak());
                         noi18n = false;
                     } else {
@@ -495,14 +472,14 @@ public class ResourceBundleFilter extends AbstractFilter {
                             trans = value;
                         }
                         trans = trans.replaceAll("\\n\\s\\n", "\n\n");
-                        trans = toAscii(trans, EscapeMode.VALUE);
+                        trans = toAscii(trans, EscapeMode.VALUE, charsetEncoder, forceTargetEscape);
                         if (!trans.isEmpty() && trans.codePointAt(0) == ' ') {
                             trans = '\\' + trans;
                         }
                         // Non-translated segments are written based on the
                         // filter options
                         if (translatedSegment || !removeStringsUntranslated) {
-                            outfile.write(toAscii(key, EscapeMode.KEY));
+                            outfile.write(toAscii(key, EscapeMode.KEY, charsetEncoder, forceTargetEscape));
                             outfile.write(equals);
                             outfile.write(trans);
                             outfile.write(lbpr.getLinebreak()); // fix for bug

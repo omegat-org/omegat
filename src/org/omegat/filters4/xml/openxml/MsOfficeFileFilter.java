@@ -4,8 +4,11 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2018 Thomas Cordonnier
+               2007-2013 Didier Briel
+               2015-2016 Didier Briel
+               2019 Didier Briel
                Home page: https://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -32,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.openxml.EditOpenXMLOptionsDialog;
@@ -44,6 +48,7 @@ import org.omegat.util.OStrings;
  * Filter for Microsoft Open XML.
  *
  * @author Thomas Cordonnier
+ * @author Didier Briel
  */
 public class MsOfficeFileFilter extends AbstractZipFilter {
     private String DOCUMENTS;
@@ -51,18 +56,28 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");
 
     /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(MsOfficeFileFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
+    /**
      * Defines the documents to read according to options
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
-         * Complete string when all options are enabled.
-         * Word: "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)
-         * |(header\\d+\\.xml)| (footer\\d+\\.xml)"
-         * Excel: "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
-         * PowerPoint: "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|
-         * (notesSlide\\d+\\.xml)"
-         * Global: "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         * Excel: "|(workbook\\.xml)" Visio: "|(page\\d+\\.xml)
+         * Complete string when all options are enabled. Word:
+         * "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)
+         * |(header\\d+\\.xml)| (footer\\d+\\.xml)" Excel:
+         * "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" PowerPoint:
+         * "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|
+         * (notesSlide\\d+\\.xml)" Global:
+         * "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)" Excel:
+         * "|(workbook\\.xml)" Visio: "|(page\\d+\\.xml)
          */
 
         DOCUMENTS = "(document\\d?\\.xml)";
@@ -211,9 +226,9 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 // Specific case for Excel
                 // because "comments" is present twice in DOCUMENTS
                 if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
-                    if (shortname2.indexOf("sharedStrings") >= 0)
+                    if (shortname2.indexOf("sharedStrings") >= 0) {
                         return 1; // sharedStrings must be first
-                    else {
+                    } else {
                         return -1;
                     }
                 }

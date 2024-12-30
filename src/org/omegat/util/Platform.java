@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+ Copyright (C) 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2011 Alex Buloichik
                2019 FormDev Software GmbH
                2023 Hiroshi Miura
@@ -53,6 +53,9 @@ public final class Platform {
         WIN64,
         // os.arch=x86, os.name=Windows 7, os.version=6.1
         WIN32,
+        // BSD variants
+        BSD64,
+        BSD32,
         // unknown system
         OTHER
     }
@@ -61,6 +64,8 @@ public final class Platform {
     public static final boolean isWindows;
     public static final boolean isMacOS;
     public static final boolean isLinux;
+    public static final boolean isBSD;
+    public static final boolean isUnixLike;
     // OS versions
     public static final long osVersion;
     public static final boolean isWindows_10_orLater;
@@ -87,6 +92,8 @@ public final class Platform {
         isWindows = osName.startsWith("windows");
         isMacOS = osName.startsWith("mac");
         isLinux = osName.startsWith("linux");
+        isBSD = osName.endsWith("bsd");
+        isUnixLike = isLinux || isBSD;
 
         // OS versions
         osVersion = scanVersion(System.getProperty("os.version"));
@@ -107,7 +114,7 @@ public final class Platform {
         isJava_17_orLater = (javaVersion >= toVersion(17, 0, 0, 0));
 
         // UI toolkits
-        isKDE = (isLinux && System.getenv("KDE_FULL_SESSION") != null);
+        isKDE = (isUnixLike && System.getenv("KDE_FULL_SESSION") != null);
 
         // Windows 11 detection is implemented in Java 8u321, 11.0.14, 17.0.2
         // and 18 (or later).
@@ -120,6 +127,8 @@ public final class Platform {
             osType = is64Bit() ? OsType.MAC64 : OsType.MAC32;
         } else if (isWindows) {
             osType = is64Bit() ? OsType.WIN64 : OsType.WIN32;
+        } else if (isBSD) {
+            osType = is64Bit() ? OsType.BSD64 : OsType.BSD32;
         }
     }
 
@@ -142,6 +151,20 @@ public final class Platform {
      */
     public static boolean isLinux() {
         return isLinux;
+    }
+
+    /**
+     * Returns true if running on BSD variants
+     */
+    public static boolean isBSD() {
+        return isBSD;
+    }
+
+    /**
+     * Returns true if running on Unix variants
+     */
+    public static boolean isUnixLike() {
+        return isUnixLike;
     }
 
     /**

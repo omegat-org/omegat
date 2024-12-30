@@ -1,33 +1,221 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="windows.textreplace">
-  <title>Tekst vervangen</title>
+<section id="windows.text.replace">
+  <title id="windows.text.replace.title"><guilabel>Tekst vervangen</guilabel></title>
 
-  <para>Open het venster Zoeken en vervangen met <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> en voer het woord of de uitdrukking die/dat u wilt vervangen in in het vak <emphasis>Zoeken naar</emphasis>.</para>
+  <para>Gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/> om een nieuw venster Vervangen te openen en voer in het zoekveld het woord of de frase in waarnaar u wilt zoeken.</para>
+  
+  <para>Als alternatief, selecteer een woord of frase in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>, <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>, of <link linkend="panes.glossary" endterm="panes.glossary.title"/> en gebruik <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.search.and.replace" endterm="menus.edit.search.and.replace.title"/>. De selectie wordt automatisch ingevoerd in het zoekveld.</para>
 
-  <para>Klik dan op de knop <emphasis>Zoeken</emphasis> om alle overeenkomende items weer te geven.</para>
+  <para>U kunt meerdere vensters Vervangen tegelijkertijd geopend hebben.</para>
 
-  <para>Voer het nieuwe woord of uitdrukking (reguliere uitdrukkingen worden niet ondersteund) in in het vak <emphasis>Vervangen door</emphasis>, en klik dan op één van de volgende opties:<itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Alles vervangen:</emphasis> voert de vervanging uit voor alle items (na het weergeven van een bevestigingsvenster waarin het aantal vervangingen wordt weergegeven).</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Vervangen:</emphasis> voert een &quot;één op één&quot;-vervanging uit, door middel van de knoppen in de <emphasis role="bold">kop van het venster Bewerken</emphasis>. Klik op <emphasis>Volgende vervangen</emphasis> of <emphasis>Overslaan</emphasis>, en beëindig de sessie van het vervangen met <emphasis>Voltooien</emphasis>.</para>
-      </listitem>
-    </itemizedlist><itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Sluiten:</emphasis> sluit het venster zonder enige wijziging.</para>
-      </listitem>
-    </itemizedlist></para>
+  <para>Klik op de pijl naar beneden van de velden <guilabel>Zoeken naar:</guilabel> of <guilabel>Vervangen door:</guilabel> om toegang te krijgen tot de tien laatste zoekacties.</para>
 
-  <section>
-    <title>Zoekopties</title>
+  <para>Voer de tekenreeks die u wilt invoegen om uw zoekterm te vervangen in in het veld <guilabel>Vervangen door:</guilabel> en klik op <guibutton>Zoeken</guibutton>, of druk op <keycap>Enter</keycap> als de cursor nog steeds in het veld staat.</para>
 
-    <para>Zoekopties zijn soortgelijk aan die welke worden weergegeven in het <link linkend="windows.textsearch">venster Zoeken</link>.</para>
+  <para>Overeenkomsten  voor het zoeken worden weergegeven in vette blauwe tekens, en de aangepaste tekenreeksen worden weergegeven in oranje om het resultaat van het vervangen weer te geven.</para>
 
-    <para>Uitgezonderd één: selecteer <emphasis role="bold">Niet-vertaald</emphasis> om Zoeken en vervangen ook uit te voeren op segmenten die nog niet zijn vertaald.</para>
 
-    <para>OmegaT zal het bronsegment kopiëren naar het doelsegment vóór de vervanging wordt uitgevoerd, om dat mogelijk te maken (hoewel Zoeken en vervangen alleen op het geheugen wordt uitgevoerd). Indien er geen vervanging wordt uitgevoerd voor een bepaald segment, zal het doelsegment “leeg gemaakt” worden, d.i. het zal niet-vertaald blijven.</para>
+  <example id="replace.with.allemand">
+	<title id="replace.with.allemand.title">Een term vervangen</title>
+	<para>
+	  <programlisting>多和田葉子.UTF8
+-- 148&gt; | language = [[日本語]]・[[ドイツ語]]
+&lt;- | language = [[Japonais]]・[[<token>Alllemand</token>]]
+-&gt; | language = [[Japonais]]・[[<token>Allemand</token>]]
+---------</programlisting></para>
+  </example>
+  
+  <note>
+	<para>In dit stadium zijn nog geen vervangingen gemaakt.</para>
+  </note>
+
+  <para>Klik op een van de volgende opties:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Alles vervangen:</guibutton> vervangt elk voorkomen (na het weergeven van een bevestigingsvenster waarin het aantal voorkomens wordt weergegeven).</para>
+    </listitem>
+
+    <listitem>
+        <para><guibutton>Vervangingen weergeven</guibutton> filtert de items in de bewerker en accentueert de delen die zullen worden vervangen.</para>
+		<para>Klik op de knop <guibutton>Vervangen en volgende zoeken</guibutton> of <guibutton>Volgende zoeken</guibutton>, en klik op de knop <guibutton>Sluiten</guibutton> om de bewerking voor vervangen te beëindigen.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>Sluiten</guibutton>: sluit het venster zonder wijzigingen te maken.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Het venster Vervangen heeft zijn eigen menu's:</para>
+ 
+  <itemizedlist>
+    <listitem>
+      <para><guimenu>Bestand</guimenu> &gt; <guimenuitem>Zoeken naar selectie</guimenuitem> (<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>): de huidige selectie wordt ingevoerd in het zoekveld.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bestand</guimenu> &gt; <guimenuitem>Sluiten</guimenuitem> (<keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>): sluit het venster Vervangen.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bewerken</guimenu> &gt; <guimenuitem>Bron invoegen</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>): voeg de inhoud van het huidige bronsegment in.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bewerken</guimenu> &gt; <guimenuitem>Vervangen door bron</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>): vervang de inhoud van het zoekveld door die van het huidige bronsegment.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Edit</guimenu> &gt; <guimenuitem>Item voor woordenlijst maken</guimenuitem> (<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>): een nieuw item voor de woordenlijst toevoegen. Bekijk <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.create.glossary.entry" endterm="menus.edit.create.glossary.entry.title"/> voor de details.</para>
+    </listitem>
+
+    <listitem>
+      <para><guimenu>Bewerken</guimenu> &gt; <guimenuitem>Opties herstellen</guimenuitem>: de opties voor het zoekvenster herstellen.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.text.replace.methods">
+    <title id="windows.text.replace.methods.title">Type zoekactie</title>
+
+    <para>Gebruik de radioknoppen om het type zoekactie te selecteren.</para>
+
+	<para>De volgende zoekacties zijn beschikbaar:</para>
+
+    <variablelist>
+      <varlistentry id="windows.text.replace.methods.exact">
+        <term id="windows.text.replace.methods.exact.title">Exact zoeken</term>
+        <listitem>
+          <para>Exact zoeken naar de tekenreeks zoals die is ingevoerd in het zoekveld.</para>
+
+		  <para>Het is equivalent aan een zoekactie op het web, omsloten door aanhalingstekens.</para>
+
+		  <note>
+			<para>De jokertekens <code>*</code> en <code>?</code> kunnen worden gebruikt in Exact zoeken:</para>
+
+			<itemizedlist>
+			  <listitem>
+				<para>'*' komt overeen met nul of meer tekens, vanaf de huidige positie tot het einde van een woord. De zoekterm <literal>'run*'</literal> komt, bijvoorbeeld, overeen met <literal>'run</literal>, <literal>'runs'</literal>' en <literal>'running'</literal>.</para>
+			  </listitem>
+
+			  <listitem>
+				<para>'?' komt overeen met één teken. <literal>'run?'</literal> komt, bijvoorbeeld, overeen met <literal>'runs'</literal>', als ook het gedeelte <literal>'runn'</literal>' in het woord <literal>'running'</literal> of <literal>'runner'</literal>.</para>
+			  </listitem>
+			</itemizedlist>
+		  </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.text.replace.methods.regex">
+        <term id="windows.text.replace.methods.regex.title">Reguliere uitdrukkingen</term>
+        <listitem>
+          <para>Behandelt de tekenreeks voor het zoeken als een reguliere expressie.</para>
+
+		  <para>Reguliere uitdrukkingen zijn een zeer krachtige manier om naar algemene of complexe patronen te zoeken in plaats van exacte tekenreeksen. Bekijk de appendix <link linkend="app.regex" endterm="app.regex.title"/> voor details.</para>
+
+		  <note>
+			<para>De tekenreeks voor vervanging ondersteunt verwijzingen naar groepen die zijn gedefinieerd in de zoekterm. Gebruik <code>$n</code> (waar <code>n</code> een getal is van 1 tot en met 9) in het veld Vervangen door om te verwijzen naar de <code>n-e</code>groep in het zoekveld.</para>
+		  </note>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="windows.text.replace.options">
+	<title id="windows.text.replace.options.title">Opties</title>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Hoofd-/kleine letters.</term>
+		<listitem>
+		  <para>Geeft alleen resultaten terug waarin de hoofd-/kleine letters hetzelfde zijn als in de zoektermen.</para>
+		</listitem>
+	  </varlistentry>
+	
+	  <varlistentry>
+		<term>Spatie komt overeen met nbsp</term>
+		<listitem>
+		  <para>Tekens voor spaties in zoektermen zullen overeenkomen met zowel een normale spatie als een teken voor een niet-afbreekbare spatie (\u00A).</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term>Niet-vertaald</term>
+		<listitem>
+		  <para>Ook in niet-vertaalde segmenten zoeken.</para>
+		</listitem>
+	  </varlistentry>
+ 
+	  <varlistentry>
+		<term><guibutton>Gevorderde opties weergeven</guibutton></term>
+		<listitem>
+		  <para>Selecteer aanvullende criteria, zoals de persoon die de vertaling heeft geschreven of gewijzigd, de datum en tijd van de vertaling (aanpassing), of dat Wezen-segmenten moeten worden uitgesloten.</para>
+
+		  <variablelist>
+			<varlistentry>
+			  <term>Volledige/Halve breedte tekens ongevoelig</term>
+			  <listitem>
+				<para>Geeft resultaten terug die overeenkomen met zowel de volledige als de halve breedte vormen (CJK-tekens) van de tekens in de zoektermen.</para>
+			  </listitem>
+			</varlistentry>
+		  </variablelist>
+		  <para>Gebruik de knop <guibutton>Gevorderde opties verbergen</guibutton> om het weergeven van de geavanceerde opties te stoppen.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+  </section>
+
+  <section id="windows.text.replace.result.display">
+    <title id="windows.text.replace.result.display.title">Weergave resultaten</title>
+
+    <para>Overeenkomsten worden weergegeven in hun volgorde van verschijnen in het project. Voor vertaalde segmenten zal de originele tekst worden weergegeven boven de vertaalde tekst. Voor niet-vertaalde segmenten wordt alleen de brontekst weergegeven.</para>
+
+	<para>Dubbelklik op een segment om het te openen in het venster <link linkend="panes.editor" endterm="panes.editor.title"/>.</para>
+
+    <para>U kunt de volgende sneltoetsen gebruiken in de resultaten van de zoekactie:</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+		<listitem>
+		  <para>Verplaatst naar het volgende segment.</para>
+		</listitem>
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+		<listitem>
+		  <para>Verplaatst naar het vorige segment.</para>
+		</listitem>
+
+	  </varlistentry>
+
+	  <varlistentry>
+		<term><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+		<listitem>
+		  <para>Springt naar het huidige segment in de bewerker.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+	<para>Het geselecteerde segment wordt in groen geaccentueerd.</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>Automatisch synchroniseren met venster Bewerken</term>
+		<listitem>
+		  <para>Het venster <link linkend="panes.editor" endterm="panes.editor.title"/> synchroniseert zijn weergave met de selectie in de resultaten van het zoeken</para>
+		</listitem>
+	  </varlistentry>
+	  
+	  <varlistentry>
+		<term>Terug naar initiële segment bij sluiten</term>
+		<listitem>
+		  <para>Wanneer u het venster voor zoeken sluit gaat het venster <link linkend="panes.editor" endterm="panes.editor.title"/> automatisch terug naar het segment dat werd weergegeven voordat de zoekactie begon</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
   </section>
 </section>

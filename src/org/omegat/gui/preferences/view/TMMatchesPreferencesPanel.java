@@ -28,8 +28,6 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.awt.GridBagConstraints;
-
 import javax.swing.JPanel;
 
 import org.omegat.core.matching.NearString.SORT_KEY;

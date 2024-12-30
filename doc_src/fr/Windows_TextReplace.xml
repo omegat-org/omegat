@@ -11,9 +11,9 @@
 
   <para>Cliquez sur les flèches du menu déroulant des champs <guilabel>Rechercher :</guilabel> ou <guilabel>Remplacer par :</guilabel> pour accéder aux dix dernières saisies.</para>
 
-  <para>Saisissez la chaîne de caractères que vous souhaitez insérer pour remplacer votre terme de recherche dans le champ <guilabel>Remplacer par :</guilabel> et cliquez sur <guibutton>Recherche</guibutton>, ou appuyez sur <keycap>Entrée</keycap> si le curseur se trouve toujours dans le champ.</para>
+  <para>Saisissez la chaine de caractères que vous souhaitez insérer pour remplacer votre terme de recherche dans le champ <guilabel>Remplacer par :</guilabel> et cliquez sur <guibutton>Recherche</guibutton>, ou appuyez sur <keycap>Entrée</keycap> si le curseur se trouve toujours dans le champ.</para>
 
-  <para>Les résultats de la recherche sont affichés en caractères bleus gras et les chaînes modifiées sont affichées en orange pour indiquer le résultat du remplacement.</para>
+  <para>Les résultats de la recherche sont affichés en caractères bleus gras et les chaines modifiées sont affichées en orange pour indiquer le résultat du remplacement.</para>
 
 
   <example id="replace.with.allemand">
@@ -88,7 +88,7 @@
       <varlistentry id="windows.text.replace.methods.exact">
         <term id="windows.text.replace.methods.exact.title">Recherche exacte</term>
         <listitem>
-          <para>Recherche la chaîne de caractères telle qu’elle a été saisie dans le champ de recherche.</para>
+          <para>Recherche la chaine de caractères telle qu’elle a été saisie dans le champ de recherche.</para>
 
 		  <para>Il s’agit de l’équivalent d’une recherche web entre guillemets.</para>
 
@@ -111,12 +111,12 @@
       <varlistentry id="windows.text.replace.methods.regex">
         <term id="windows.text.replace.methods.regex.title">Expressions régulières</term>
         <listitem>
-          <para>Considérez la chaîne de caractères recherchée comme une expression régulière.</para>
+          <para>Considérez la chaine de caractères recherchée comme une expression régulière.</para>
 
-		  <para>Les expressions régulières sont un moyen très efficace de rechercher des motifs généraux ou complexes plutôt que des chaînes de caractères exactes. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
+		  <para>Les expressions régulières sont un moyen très efficace de rechercher des motifs généraux ou complexes plutôt que des chaines de caractères exactes. Voir l’annexe <link linkend="app.regex" endterm="app.regex.title"/> pour en savoir plus.</para>
 
 		  <note>
-			<para>La chaîne de caractères de remplacement prend en charge les références aux groupes définis dans la chaîne de caractères de recherche. Utilisez <code>$n</code> (où <code>n</code> est un chiffre de 1 à 9) dans le champ de remplacement pour faire référence au <code>nième</code> groupe dans le champ de recherche.</para>
+			<para>La chaine de caractères de remplacement prend en charge les références aux groupes définis dans la chaine de caractères de recherche. Utilisez <code>$n</code> (où <code>n</code> est un chiffre de 1 à 9) dans le champ de remplacement pour faire référence au <code>nième</code> groupe dans le champ de recherche.</para>
 		  </note>
         </listitem>
       </varlistentry>

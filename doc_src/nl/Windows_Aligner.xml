@@ -1,55 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title>Uitlijnen</title>
+  <title id="windows.aligner.title"><guilabel>Bestanden uitlijnen</guilabel></title>
 
-  <para>Uitlijnen omvat het maken van een tweetalig vertaalgeheugen vanuit ééntalige documenten die al zijn vertaald.</para>
+  <para>Gebruik <link endterm="menus.tools.title" linkend="menus.tools"/><link endterm="menus.tools.align.files.title" linkend="menus.tools.align.files"/> om toegang te krijgen tot dit gereedschap.</para>
 
-  <para>Selecteer <menuchoice> <guimenuitem>Extra</guimenuitem> <guimenuitem>Bestanden uitlijnen…</guimenuitem> </menuchoice> om toegang te krijgen tot dit venster.</para>
+  <para>OmegaT biedt ook een op de opdrachtregel gebaseerde uitlijning voor op toetsen gebaseerde indelingen. Bekijk de optie <link linkend="launch.with.command.line.mode.console.align" endterm="launch.with.command.line.mode.console.align.title"/> voor details.</para>
 
-  <section>
-    <title>Stap 1: Parameters voor uitlijnen aanpassen</title>
+  <warning>
+    <para>De uitlijner staat u niet toe dat u uw werk tijdens een uitlijning opslaat. Daarom wordt aanbevolen dat u de bestanden verdeelt om ze uit te lijnen in kleinere bestanden die u comfortabel uit kunt lijnen in één enkele sessie. Door dat te doen heeft het het toegevoegde voordeel van het verkleinen van verkeerde overeenkomsten in de initiële automatische uitlijning, wat het  handmatig corrigeren een stuk soepeler maakt.</para>
+  </warning>
 
-    <para>Probeer de parameters te wijzigen als het uitlijnen eruit ziet alsof het kan worden verbeterd. In de meeste gevallen geldt: hoe lager de <guilabel>Gemiddelde score</guilabel> is, hoe beter de uitlijning zal zijn.</para>
 
-    <para>In modus <guilabel>Heap-gewijze</guilabel> worden de teksten globaal geëvalueerd. In modus <guilabel>Parse-gewijze</guilabel> worden zij segment na segment geëvalueerd. De optie verschijnt alleen als een dergelijke selectie mogelijk is.</para>
+  <para>Uitlijnen is het proces van het maken van een tweetalig vertaalgeheugen vanuit een paar al vertaalde eentalige documenten. Uitlijnen van de inhoud van de bestanden is een proces met vier stappen:</para>
 
-    <para>Gebruik modus <guilabel>ID vergelijking</guilabel> om teksten met Sleutel=Waarde uit te lijnen. Dit werkt zelfs als de sleutels niet in dezelfde volgorde in de twee bestanden staan en/of als de twee bestanden niet dezelfde hoeveelheid informatie bevatten. Deze optie verschijnt alleen als beide geselecteerde bestanden worden herkend als bestanden met Sleutel=Waarde.</para>
+  <orderedlist>
+	<listitem>
+	  <para>Specificeer de bron- en doeltalen en selecteer de twee bestanden die u wilt uitlijnen.</para>
+	</listitem>
 
-    <para>De algoritmen <guilabel>Viterbi</guilabel> en <guilabel>Vooruit-Terug</guilabel> zijn twee verschillende methoden voor berekenen. Kies die welke de beste resultaten geeft.</para>
+	<listitem>
+	  <para>De uitlijner leest de bestanden en probeert overeenkomsten te vinden tussen de segmenten die corresponderen met elkaar in de originele en vertaalde teksten.</para>
+	</listitem>
 
-    <para>Klik op <guibutton>Doorgaan</guibutton> om naar de volgende stap te gaan.</para>
+	<listitem>
+	  <para>Kijk de resultaten na en maak de noodzakelijk handmatige aanpassingen.</para>
+	</listitem>
+
+	<listitem>
+	  <para>Sla het resultaat op in een TMX-bestand.</para>
+	</listitem>
+  </orderedlist>
+
+  <para>De uitlijner kan alle indelingen lezen die worden ondersteund door OmegaT.</para>
+  
+  <note>
+    <para>Als u een vertaalproject hebt geopend, zal de uitlijner automatisch de talen uit dat project gebruiken, als ook, indien aanwezig, de project-specifieke segmentatieregels.</para>
+  </note>
+
+  <para>Klik, na het selecteren van de taal en bestanden, op de knop <guibutton>OK</guibutton> om het venster <guilabel>Uitlijnen</guilabel> top te roepen, dat de resultaten van het automatisch uitlijnen weergeeft.</para>
+
+  <para>Het hoofdgedeelte van het venster is opgedeeld in drie kolommen:</para>
+  
+  <itemizedlist>
+    <listitem>
+      <para><guilabel>Behouden</guilabel>: De segmentparen in rijen die dit vak geselecteerd hebben worden opgeslagen naar het bestand van het vertaalgeheugen. Niet geselecteerde rijen worden genegeerd.</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>Bron</guilabel>: De segmenten uit de originele tekst.</para>
+    </listitem>
+
+    <listitem>
+      <para><guilabel>Doel</guilabel>: De segmenten uit de vertaalde tekst.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="windows.aligner.adjust">
+    <title id="windows.aligner.adjust.title">Instellingen</title>
+
+    <para>In deze stap geeft het onderste gedeelte van het venster verschillende parameters en opties weer die u kunt wijzigen als het eruit ziet alsof de initiële uitlijning kan worden verbeterd. Het geeft ook een resultaat <guilabel>Gemiddelde score</guilabel> voor de uitlijning weer. Als een vuistregel: hoe lager die score, hoe meer nauwkeuriger de uitlijning. Wijzigen van een parameter berekent onmiddellijk de uitlijning opnieuw, wat u in staat stelt snel verschillende combinaties te proberen om de beste resultaten te krijgen.</para>
+
+    <para>De beschikbare parameters en opties zijn:</para>
+
+    <variablelist>
+	  <title>Parameters</title>
+	  <varlistentry>
+        <term>Modus voor vergelijken</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Heap-gewijze</guilabel>: Deze modus vergelijkt de documenten globaal.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Parse-gewijze</guilabel>: Deze modus vergelijkt de documenten segment per segment. Het wordt alleen weergegeven als het beschikbaar is voor de bestanden die worden uitgelijnd.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>ID</guilabel>: Deze modus is van toepassing op bestanden die bestaan uit items <literal>sleutel = waarde</literal>. Dit werkt zelfs als de sleutels niet in dezelfde volgorde in elk bestand staan en als de bestanden een verschillend aantal items bevatten. Het wordt alleen weergegeven als beide geselecteerde bestanden worden herkend als bestanden met Sleutel=Waarde.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Algoritme:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Viterbi</guilabel>: Het standaard algoritme, gebruikt om de documenten uit te lijnen.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Vooruit-Terug</guilabel>: Een alternatief algoritme dat kan worden gebruikt om de documenten uit te lijnen.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Er is geen harde-en-snelle regel over welk algoritme u zou moeten kiezen. Probeer ze allebei en gebruik die welke het betere resultaat oplevert voor uw bestanden.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Calculator:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Normaal</guilabel>: De standaard statistische verdeling, gebruikt om de documenten uit te lijnen.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Poisson</guilabel>: Een alternatieve statistische verdeling die kan worden gebruikt om de documenten uit te lijnen.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Net als met de algoritmes is er geen harde-en-snelle regel over welke statistische verdeling u zou moeten kiezen. Probeer ze allebei en gebruik die welke het betere resultaat oplevert voor uw bestanden.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Aantal:</term>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para><guilabel>Teken</guilabel>: De gebruikte basiseenheid om de grootte van segmenten te bepalen in talen die geen spatie gebruiken om woorden te scheiden.</para>
+            </listitem>
+
+            <listitem>
+              <para><guilabel>Woord</guilabel>: De gebruikte basiseenheid om de grootte van segmenten te bepalen in talen die een spatie gebruiken om woorden te scheiden.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>De uitlijner selecteert automatisch de telling, gebaseerd op de bron- en de doeltaal, van de uit te lijnen bestanden. Het staat standaard op <guilabel>Teken</guilabel> als tenminste één van de betrokken talen geen woorden scheidt door spaties, en anders op <guilabel>Woord</guilabel>. Als u werkt met van elk één, kunt u proberen te schakelen tussen de twee om te zien welke de betere resultaten oplevert.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+	  <title>Opties</title>
+      <varlistentry>
+        <term>Segment</term>
+        <listitem>
+          <para>De uitlijner gebruikt standaard zinsegmentatie. Deselecteer het keuzevak om alineasegmentatie te gebruiken. Bekijk de voorkeuren <link endterm="dialogs.preferences.segmentation.setup.title" linkend="dialogs.preferences.segmentation.setup"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Tags verwijderen</term>
+        <listitem>
+          <para>De uitlijner neemt standaard tags op in de segmenten. Deselecteer het keuzevak om alle tags uit de uitlijning en de resulterende TMX te verwijderen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="windows.aligner.adjust.highlight">
+        <term id="windows.aligner.adjust.highlight.title">Accentueren</term>
+        <listitem>
+		  <para>Deselecteer het keuzevak om accentuering uit te schakelen.</para>
+
+          <para>De uitlijner gebruikt de reguliere expressie <code>\d+</code> om alle getallen in de bron- en doelsegmenten te accentueren.</para>
+		  <para>U kunt de reguliere expressie aanpassen om geaccentueerde delen toe te voegen. Bekijk het hoofdstuk <link linkend="app.regex" endterm="app.regex.title"/> voor details.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Regels…</term>
+        <listitem>
+          <para>Klikken op deze knop laat u de segmentatieregels bewerken die van toepassing zijn op dit project. Bekijk de appendix <link linkend="app.segmentation" endterm="app.segmentation.title"/> voor details.</para>
+
+          <warning>
+            <para>Als u de segmentatieregels aanpast, zult u worden gevraagd of u die wijzigingen op wilt slaan als u de uitlijner afsluit. De standaard keuze is <guibutton>Ja</guibutton>, wat niet zou kunnen zijn wat u wilt als u de globale segmentatieregels van OmegaT bewerkte.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Filters…</term>
+        <listitem>
+          <para>Klikken op deze knop laat u de bestandsfilters bewerken die van toepassing zijn op dit project. Bekijk de voorkeuren <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> voor details.</para>
+
+          <warning>
+            <para>Als u de bestandsfilters aanpast, zult u worden gevraagd of u die wijzigingen op wilt slaan als u de uitlijner afsluit. De standaard keuze is <guibutton>Ja</guibutton>, wat niet zou kunnen zijn wat u wilt als u de globale segmentatieregels van OmegaT bewerkte.</para>
+          </warning>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Patroon…</term>
+        <listitem>
+          <para>Deze optie laat u een reguliere expressie invoeren om het patroon te definiëren dat moet worden gebruikt om tekst in de bron- en doelsegmenten te accentueren. Standaard gebruikt de uitlijner <literal>\d+</literal> om getallen te accentueren. Als uw teksten andere elementen bevatten waarvan het nuttig zou zijn om ze te accentueren, pas de reguliere expressie dan aan om die elementen op te nemen, met het symbool <literal>|</literal> om elk afzonderlijk element te scheiden.</para>
+        </listitem>
+      </varlistentry>      
+    </variablelist>
+
+    <para>U kunt ook naar de optie <guilabel>Accentueren</guilabel> gaan en het dialoogvenster openen om het patroon aan te passen vanuit het menu <guimenu>Weergave</guimenu>, en de andere opties vanuit het menu <guimenu>Opties</guimenu>.</para>
+
+    <para>In aanvulling daarop verschaft het menu <guimenu>Bestand</guimenu> de volgende opdrachten:</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para><guimenuitem>TMX opslaan…</guimenuitem>: Dit item is uitgegrijsd totdat de volgende stap is voltooid.</para>
+      </listitem>
+	  
+      <listitem>
+        <para><guimenuitem>Herstellen</guimenuitem>: Deze opdracht herstelt alle parameters naar hun standaardwaarde. Het kan ook worden opgeroepen door te klikken op de knop <guibutton>Herstellen</guibutton> aan de rechter onderkant van het venster of door te drukken op <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo></para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>Herladen</guimenuitem>: Deze opdracht herlaadt het bestand vanaf de schijf. U kunt deze opdracht gebruiken om de bestanden opnieuw te parsen en uit te lijnen als u hun inhoud moest aanpassen.</para>
+      </listitem>
+
+      <listitem>
+        <para><guimenuitem>Sluiten</guimenuitem>: Dit sluit het dialoogvenster <guilabel>Uitlijnen</guilabel>. Door dit te doen in deze stap wordt de uitlijning geannuleerd zonder dat enige gegevens worden opgeslagen naar een bestand van een vertaalgeheugen. U kunt deze opdracht ook aanroepen door te drukken op <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Het menu <guimenu>Bewerken</guimenu> is in deze stap uitgegrijsd.</para>
+
+    <para>Wanneer u tevreden bent met de resultaten van deze stap, klik dan op de knop <guibutton>Doorgaan</guibutton> om door te gaan naar de volgende.</para>
   </section>
 
-  <section>
-    <title>Stap 2: Handmatige correcties maken</title>
+  <section id="windows.aligner.manual.corrections">
+    <title id="windows.aligner.manual.corrections.title">Correcties</title>
 
-    <para>Na de automatische verwerking vereist de uitlijning van de twee bestanden meestal nog handmatige correcties.</para>
+    <para>Handmatige aanpassingen zijn over het algemeen nodig na het initiële automatische proces van uitlijnen. Dit betreft over het algemeen het verplaatsen van segmenten naar boven of naar beneden om ze uit te lijnen met de correcte segmenten in de andere taal, als ook het splitsen of samenvoegen van segmenten. De uitlijner stelt u ook in staat de inhoud van een segment te bewerken, wat nuttig kan zijn als u fouten opmerkt, zoals een spelfout in een segment.</para>
 
-    <para>Vertaaleenheden zijn geplaatst in cellen in de twee laatste kolommen.</para>
+    <para>Alle beschikbare acties kunnen worden bereikt vanuit het menu <guimenu>Bewerken</guimenu> of door te drukken op de corresponderende sneltoets. De meest voorkomende acties zijn ook toegankelijk met de knoppen aan de rechterkant van het hoofdvenster.</para>
 
-    <para>Twee segmenten op dezelfde regel uitlijnen:</para>
+    <note>
+      <para>De sneltoetsen zijn het waard om te worden onthouden als u de uitlijner vaak gebruikt of werkt met grote documenten, omdat zij u in staat stellen om acties zeer snel uit te voeren.</para>
+    </note>
 
-    <orderedlist>
-      <listitem>
-        <para>Selecteer het eerste segment.</para>
-      </listitem>
+    <para>Selecteer, om een actie uit te voeren, het toepasselijke segment of blok van opeenvolgende segmenten. Individuele segmenten kunnen worden geselecteerd met de muis of de pijltjestoetsen. Blokken van segmenten kunnen worden geselecteerd met de muis door op het eerste segment te klikken, en de <keycap>Shift</keycap>-toets ingedrukt te houden bij het klikken op het laatste segment.</para>
 
-      <listitem>
-        <para>Druk op de spatiebalk (sneltoets voor <menuchoice> <guimenuitem>Bewerken</guimenuitem> <guimenuitem>Pinpoint uitlijnen beginnen</guimenuitem> </menuchoice>).</para>
-      </listitem>
+	<para>Als alternatief kunt u op de pijltjes toetsen drukken terwijl u <keycap>Shift</keycap> ingedrukt houdt om opeenvolgende segmenten te selecteren. De beschikbare acties worden hieronder weergegeven.</para>
 
-      <listitem>
-        <para>Klik in de andere kolom op de vertaling die overeenkomt met het eerste segment.</para>
-      </listitem>
-    </orderedlist>
+    <variablelist>
+      <varlistentry>
+        <term>Naar boven (<keycap>U</keycap>)</term>
+        <listitem>
+          <para>Verplaatst het geselecteerde segment, of blok van opeenvolgende segmenten, één rij naar boven.</para>
+          <para>Deze opdracht is ook beschikbaar met de knop aan de rechterkant van het hoofdvenster.</para>
+        </listitem>
+      </varlistentry>
 
-    <para>Selecteer, na verscheidene van deze bewerkingen, <menuchoice> <guimenuitem>Bewerken</guimenuitem> <guimenuitem>Wachten op opnieuw uitlijnen</guimenuitem> </menuchoice> om het uitlijnen van de andere segmenten bij te werken.</para>
+      <varlistentry>
+        <term>Naar beneden (<keycap>D</keycap>)</term>
+        <listitem>
+          <para>Verplaatst het geselecteerde segment, of blok van opeenvolgende segmenten, één rij naar beneden.</para>
 
-    <para>Selecteer de/het segment(en) en druk op <userinput>U</userinput> (<guilabel>Naar boven</guilabel>) of <userinput>D</userinput> (<guilabel>Naar beneden</guilabel>) om de positie van een of meer segmenten individueel aan te passen.</para>
+          <para>Deze opdracht is ook beschikbaar met de knop aan de rechterkant van het hoofdvenster.</para>
+        </listitem>
+      </varlistentry>
 
-    <para>Alleen rijen waarvan het vak <guilabel>Behouden</guilabel> in de eerste kolom is geselecteerd zullen worden opgenomen als het vertaalgeheugen wordt gemaakt.</para>
+      <varlistentry>
+        <term>Splitsen (<keycap>S</keycap>)</term>
+        <listitem>
+          <para>Deze opdracht opent het dialoogvenster <guilabel>Tekst splitsen</guilabel> als één enkel segment is geselecteerd. Gebruik de muis of de pijltjestoetsen om de cursor te plaatsen op de locatie waar u de tekst wilt splitsen en klik op de knop <guibutton>OK</guibutton> of druk op <keycap>Enter</keycap>.</para>
 
-    <para>Klik op <guibutton>TMX opslaan…</guibutton> om het resulterende vertaalgeheugen te maken als de twee kolommen voldoende zijn uitgelijnd.</para>
+          <para>Als twee of meer segmenten meerdere cellen vullen op dezelfde rij (multi-cel segmenten bevatten regels zonder een keuzevak <guilabel>Behouden</guilabel>) zijn geselecteerd, zal deze opdracht de geselecteerde cellen terug splitsen naar afzonderlijke rijen (met een keuzevak <guilabel>Behouden</guilabel>).</para>
+
+		  <para>Deze opdracht is ook beschikbaar met de knop aan de rechterkant van het hoofdvenster.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Samenvoegen (<keycap>M</keycap>)</term>
+        <listitem>
+          <para>Als er slechts één segment geselecteerd is, zal de uitlijner het samenvoegen met het volgende segment. Als twee of meer segmenten zijn geselecteerd, zullen zij allemaal worden samengevoegd, maar blijven in afzonderlijke cellen. Één of meer keer aanroepen van de opdracht op dezelfde selectie voegt de inhoud van alle geselecteerde cellen samen in één enkele cel.</para>
+
+		  <para>Deze opdracht is ook beschikbaar met de knop aan de rechterkant van het hoofdvenster.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Bewerken (<keycap>E</keycap>)</term>
+        <listitem>
+          <para>Deze opdracht kan alleen worden uitgevoerd op één enkel segment. Aanroepen van deze opdracht opent het dialoogvenster <guilabel>Tekst bewerken</guilabel>, dat u in staat stelt wijzigingen te maken in de tekst van het segment. Gebruik de knop <guibutton>OK</guibutton> om het dialoogvenster te sluiten als u klaar bent. In dit dialoogvenster voegt <keycap>Enter</keycap> een regeleinde in de tekst in.</para>
+
+		  <para>Gebruik <keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo> om het te sluiten zonder de muis te gebruiken.</para>
+
+		  <para>Deze opdracht is ook beschikbaar met de knop aan de rechterkant van het hoofdvenster.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Geaccepteerde markeren (<keycap>A</keycap>)</term>
+        <listitem>
+          <para>Gebruik deze opdracht om te bevestigen dat de uitlijning van de segmenten de geselecteerde rij of blok rijen correct is. Dit accentueert de corresponderende kolom <guilabel>Behouden</guilabel> in groen.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Werk nodig markeren (<keycap>R</keycap>)</term>
+        <listitem>
+          <para>Gebruik deze opdracht om een rij of blok rijen te identificeren waarvan u twijfelt aan de uitlijning van de segmenten. Dit accentueert de corresponderende kolom <guilabel>Behouden</guilabel> in rood.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Markering verwijderen (<keycap>C</keycap>)</term>
+        <listitem>
+          <para>Gebruik deze opdracht om één of meer markeringen, ingesteld door de opdrachten <guilabel>Geaccepteerde markeren</guilabel> of <guilabel>Werk nodig markeren</guilabel>, te verwijderen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Wachten op nieuw uitlijnen (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
+        <listitem>
+          <para>Als er rijen zijn die zijn gemarkeerd als geaccepteerd, gebruik dan deze opdracht om de uitlijning voor de resterende rijen bij te werken.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Alles behouden</term>
+        <listitem>
+          <para>Gebruik deze opdracht om het vak <guilabel>Behouden</guilabel> te selecteren voor alle rijen.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Niets behouden</term>
+        <listitem>
+          <para>Gebruik deze opdracht om het vak <guilabel>Behouden</guilabel> te deselecteren voor alle rijen.</para>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry>
+        <term>Geselecteerde schakelen (<keycap>K</keycap>)</term>
+        <listitem>
+          <para>Gebruik deze opdrachten om te schakelen met het keuzevak <guilabel>Behouden</guilabel> van de geselecteerde rij of blok rijen van geselecteerd naar niet geselecteerd, of vice versa.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pinpoint uitlijnen beginnen (<keycap>Spatie</keycap>)</term>
+        <listitem>
+          <para>Als de corresponderende segmenten en rijen apart van elkaar staan en u wilt ze snel uitlijnen, gebruik dan deze opdracht om het eerste segment te selecteren en klik dan op het corresponderende segment in de andere kolom.</para>
+		  
+		  <para>U kunt ook de pijltjestoetsen gebruiken en drukken op <keycap>Spatie</keycap> in het corresponderende segment.</para>
+		  
+          <para>De met deze methode uitgelijnde segmenten met deze methode worden automatisch gemarkeerd als geaccepteerd.</para>
+
+		  <para>Het kan nuttig zijn de opdracht <guimenuitem>Wachten op nieuw uitlijnen</guimenuitem> uit te voeren nadat de opdracht voor pinpoint uitlijnen een aantal keren is gebruikt.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Klik op de knop <guibutton>TMX opslaan…</guibutton> om het vertaalgeheugen te maken nadat u het uitlijnen van de twee kolommen hebt voltooid.</para>
+
+    <note>
+      <para>Alleen rijen waarvan het vak <guilabel>Behouden</guilabel> in de eerste kolom is geselecteerd worden opgeslagen in het vertaalgeheugen.</para>
+    </note>
+
+
+    <para>In aanvulling op de knop <guibutton>TMX opslaan…</guibutton> heeft het onderste gedeelte van het venster <guilabel>Uitlijnen</guilabel> in de stap voor handmatige correcties hetzelfde keuzevak  <guilabel>Accentueren</guilabel> en knop <guibutton>Patroon…</guibutton> als in de eerste stap. Deze optie is ook toegankelijk vanuit het menu <guimenu>Weergave</guimenu>.</para>
+
+    <warning>
+      <para>Er is ook een knop <guibutton>Herstellen</guibutton> aan de onderzijde van het venster. <emphasis role="bold">Wees voorzichtig met het gebruiken daarvan!</emphasis> Klikken op deze knop zal al uw wijzigingen verwijderen en u terugbrengen naar de eerste stap.</para>
+    </warning>    
+    
   </section>
 </section>

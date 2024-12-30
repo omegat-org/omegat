@@ -10,9 +10,15 @@ bin
 local.properties
 
 .idea
+.fleet
+.run
+out
 
 # Docs
 .fop
+docs/
+doc_src/*/index.xml
+doc_src/*/xhtml5
 
 # emacs backup files
 *~

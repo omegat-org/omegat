@@ -7,9 +7,9 @@
   
   <variablelist>
     <varlistentry id="menus.options.preferences">
-      <term id="menus.options.preferences.title"><guimenuitem>Préférences...</guimenuitem></term>
+      <term id="menus.options.preferences.title"><guimenuitem>Préférences…</guimenuitem></term>
       <listitem>
-        <para>Ouvre la boîte de dialogue <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
+        <para>Ouvre la boite de dialogue <link linkend="chapter.dialogs.preferences" endterm="chapter.dialogs.preferences.title"/>.</para>
 
 		<note>
 		  <para>Sur macOS, cet élément de menu se trouve dans le menu <guimenu>OmegaT</guimenu>.</para>
@@ -70,7 +70,7 @@
     </varlistentry>
 
     <varlistentry id="menus.options.file.filters">
-      <term id="menus.options.file.filters.title"><guimenuitem>Filtres de fichiers généraux...</guimenuitem></term>
+      <term id="menus.options.file.filters.title"><guimenuitem>Filtres de fichiers généraux…</guimenuitem></term>
       <listitem>
         <para>Ouvre les préférences de <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
 
@@ -79,7 +79,7 @@
     </varlistentry>
 
     <varlistentry id="menus.options.segmentation">
-      <term id="menus.options.segmentation.title"><guimenuitem>Règles de segmentation générales...</guimenuitem></term>
+      <term id="menus.options.segmentation.title"><guimenuitem>Règles de segmentation générales…</guimenuitem></term>
       <listitem>
         <para>Ouvre les préférences de <link linkend="dialogs.preferences.segmentation.setup" endterm="dialogs.preferences.segmentation.setup.title"/>.</para>
 
@@ -88,7 +88,7 @@
     </varlistentry>
 
     <varlistentry id="menus.options.editor">
-      <term id="menus.options.editor.title"><guimenuitem>Éditeur...</guimenuitem></term>
+      <term id="menus.options.editor.title"><guimenuitem>Éditeur…</guimenuitem></term>
       <listitem>
         <para>Ouvre les préférences de <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/>.</para>
       </listitem>

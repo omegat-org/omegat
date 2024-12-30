@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -42,13 +43,23 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 /**
- * Filter to support Files for Magento CE locale. The files are a kind of CSV that looks like
- * "string in code","string to display in a locale"
+ * Filter to support Files for Magento CE locale. The files are a kind of CSV
+ * that looks like "string in code", "string to display in a locale"
  *
  * @author Michael Zakharov <trapman.hunt@gmail.com>
  */
 public class MagentoFilter extends AbstractFilter {
     protected Map<String, String> align;
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(MagentoFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public String getFileFormatName() {
         return OStrings.getString("MAGENTOFILTER_FILTER_NAME");
@@ -68,11 +79,13 @@ public class MagentoFilter extends AbstractFilter {
 
     /**
      * Doing the processing of the file...
+     * 
      * @param reader
      * @param outfile
      */
     @Override
-    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
+            throws IOException {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
                                                                                 // for
                                                                                 // bug
@@ -81,21 +94,19 @@ public class MagentoFilter extends AbstractFilter {
         /*
          * Magento CSV looks like "string in the code","translation to display"
          * The pattern below successfully handles cases like:
-         * "Use "",""",""","" will be used"
-         * The string will be displayed as: Use ","
-         * or, after translation: "," will be used
-         * The pattern splits it like
-         * "Use "",""" (key for translation) and ""","" will be used" (value for translation)
+         * "Use "",""",""","" will be used" The string will be displayed as: Use
+         * "," or, after translation: "," will be used The pattern splits it
+         * like "Use "",""" (key for translation) and ""","" will be used"
+         * (value for translation)
          */
         Pattern splitter = Pattern.compile(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
         while ((line = lbpr.readLine()) != null) {
 
             /**
-             * Some lines in Magento locale CSV may look like:
-             * "first, second
-             * third","first, second, third"
-             * It is unknown, if these lines are valid or not, so I inserted a quick workaround.
+             * Some lines in Magento locale CSV may look like: "first, second
+             * third","first, second, third" It is unknown, if these lines are
+             * valid or not, so I inserted a quick workaround.
              */
             String contLine;
             // Continue reading until the line ends with ", or end of file
@@ -160,7 +171,7 @@ public class MagentoFilter extends AbstractFilter {
      */
     private String process(String key, String value) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(key, value, null, false, null, this);
+            entryParseCallback.addEntry(key, value, null, false, null, null, this, null);
             return value;
         } else if (entryTranslateCallback != null) {
             String trans = entryTranslateCallback.getTranslation(key, value);

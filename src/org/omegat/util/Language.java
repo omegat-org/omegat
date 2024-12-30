@@ -111,11 +111,6 @@ public class Language implements Comparable<Object> {
         }
     }
 
-    private final static String ZA_IN_ZH = "\u58EE\u8BED";
-    private final static String SD_IN_ZH = "\u4FE1\u5FB7\u6587";
-    private final static String SD_IN_IN_ZH = "\u4FE1\u5FB7\u6587(\u5370\u5EA6)";
-    private final static String SD_PK_IN_ZH = "\u4FE1\u5FB7\u6587(\u5DF4\u57FA\u65AF\u5766)";
-
     /**
      * Returns a name for the language that is appropriate for display to the
      * user.
@@ -747,7 +742,7 @@ public class Language implements Comparable<Object> {
     /**
      * Returns true if two languages have the same language and country (eg.
      * fr-FR / fr-FR).
-     * 
+     *
      * Note that it is slightly different than <code>Language.equals()</code>
      * because of the possible use of BCP47 tags (eg. en-GB-x-ulster /
      * en-GB-x-scotland)
@@ -761,30 +756,6 @@ public class Language implements Comparable<Object> {
 
     public boolean isSameCountryLanguage(String target) {
         return isSameCountryLanguage(new Language(target));
-    }
-
-    /**
-     * Check if locale is Right-To-Left oriented.
-     * 
-     * @return true if locale is Right-To-Left oriented.
-     */
-    public static boolean localeIsRTL() {
-        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
-        return isRTL(language);
-    }
-
-    /**
-     * Check if language is Right-To-Left oriented.
-     *
-     * @param language
-     *            ISO-639-2 language code
-     * @return true if language is RTL
-     */
-    public static boolean isRTL(final String language) {
-        return "ar".equalsIgnoreCase(language) || "iw".equalsIgnoreCase(language)
-                || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
-                || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
-                || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
     }
 
     public static String getLowerCaseLanguageFromLocale() {

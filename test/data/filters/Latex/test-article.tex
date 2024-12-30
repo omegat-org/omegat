@@ -1,0 +1,300 @@
+% arara: pdflatex
+% arara: bibtex
+% arara: pdflatex
+% arara: pdflatex
+\documentclass{article}
+
+\usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{pifont}
+\usepackage{textcase}
+\usepackage[cbgreek]{bpchem}
+\usepackage{mhchem}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{tipa}
+\usepackage{mfirstuc-english}
+\usepackage[colorlinks]{hyperref}
+
+\title{Sample Article}
+\author{Nicola Talbot\thanks{Some attribution}}
+
+\newcommand*{\pfrac}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand*{\dpfrac}[3]{\frac{\partial^2#1}{\partial#2\partial#3}}
+
+\renewcommand*{\vec}[1]{\boldsymbol{#1}}
+\newtoks\mytoks
+\mytoks={token register contents}
+
+\long\def\longfoo#1{Foo
+
+#1
+
+bar}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\begin{abstract}
+\lipsum[1]
+\end{abstract}
+
+Token register contents: \the\mytoks.
+\longfoo{test}.\marginpar{A marginal note.}
+
+\section*{An Unnumbered Section}
+\addcontentsline{toc}{section}{An Unnumbered Section}
+
+Chars: \symbol{98}, \texttt{\char98}, \texttt{\char`b}, \texttt{\char'142},
+\texttt{\char"62}, \texttt{\char`\b}, \texttt{\char`\\ foo}.
+
+Normal Text.
+\rotatebox{45}{Rotated Text}
+\scalebox{2}{Scaled Text}
+
+\lipsum[4-5]
+
+Subscript\textsubscript{subscript} and
+Superscript\textsuperscript{superscript}.
+
+From the bpchem manual:
+\BPChem{C\_2H\_5OH} or \BPChem{SO\_4\^{2-}}.
+
+\bpalpha \bpbeta \bpDelta
+\HNMR \CNMR \cis \trans \hapto{1234}
+
+From the siunitx manual:
+\si{\kilo\gram\metre\per\square\second}.
+
+\si{kg.m.s^{-2}}
+
+cubic metre per kilogram:
+\si{\cubic\metre\per\kilogram}.
+
+\si{m^{3}.kg^{-1}}
+
+per cubic metre: \si{\per\cubic\metre}
+
+square metre: \si{\square\metre}
+
+metre squared: \si{\metre\squared}
+
+metre cubed: \si{\metre\cubed}.
+
+From the mhchem manual:
+
+\ce{CO2 + C -> 2 CO}
+
+\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+
+\ce{Y^99+}
+
+\ce{Fe^{II}Fe^{III}204}
+
+\ce{1/2H2O}
+
+\ce{\mu-Cl}
+
+\ce{$n$H2O}
+
+\ce{{(+)}_589{-}[Co(en)3]Cl3}
+
+textcomp: \texttwosuperior\ \texteuro
+
+\section{Introduction}
+\label{sec:intro}
+
+This is an example section. An unnumbered equation:
+\[
+  f(\vec{a}; x) = \sum_{i=1}^n a_i x^i
+\]
+
+In-line maths: $y = \text{some text} - \pi$.
+
+A numbered equation:
+\begin{equation}
+y = m x + c
+\label{eq:mx+c}
+\end{equation}
+
+Another numbered equation:
+\begin{equation}\label{eq:dp}
+ \dpfrac{L}{\eta_j}{w_k}
+ = \dpfrac{L}{w_k}{\eta_j}
+ = \sum_{i=1}^n \pfrac{g(z_i)}{z_i}
+   \phi_k(\vec{x}_i)\pfrac{z_i}{\eta_j}
+ + (\hat{y}_i - y_i)\pfrac{\phi_k(\vec{x}_i)}{\eta_j}
+\end{equation}
+
+Oh, no! It's an \texttt{eqnarray}:
+\begin{eqnarray}
+f(x) &=& ax^2 +b\label{eq:f}\\
+f'(x) &=& 2ax\label{eq:df}
+\end{eqnarray}
+and an \texttt{eqnarray*}:
+\begin{eqnarray*}
+\mathcal{I} & = & \int_0^\infty f(x)\,dx\\
+g(x) & = & \prod_i h_i(x)
+\end{eqnarray*}
+
+Some \textbf{bold text}, \textit{italic text}, 
+\textsf{sans-serif text}, \textsc{small caps}.
+Here's a footnote.\footnote{Here's the footnote text.}
+
+\section{Case-Changing}
+\label{sec:casechange}
+
+\TeX\ case-change: \uppercase{upper \lowercase{LOWER} MiXeD $\alpha \neq a$.}
+\LaTeX\ case-change: \MakeUppercase{abc\ae\ \protect\( a = b
+\protect\) and $\alpha \neq a$}.
+
+{abc\ae\ \protect\( a = b
+\protect\) and $\alpha \neq a$}
+
+\texttt{textcase.sty} case-change: \MakeTextUppercase{abc\ae\ \( a = b \) and 
+$\alpha \neq a$ \NoCaseChange{No Case-Change}}.
+
+\newcommand{\foo}{fooa}
+\newcommand{\FOO}{foob}
+Upper: \uppercase{\foo}. Lower: \lowercase{\FOO}.
+TC: Upper: \MakeTextUppercase{\foo}. Lower:
+\MakeTextLowercase{\FOO}.
+
+\makefirstuc{first letter upper}.
+\makefirstuc{\textbf{first} letter upper}.
+\capitalisewords{the book of words}.
+\capitalisewords{the book of the silliest words}.
+\capitalisewords{the \emph{book} of words}.
+\capitalisewords{\textbf{the \emph{book} of words}}.
+\capitalisefmtwords{\textbf{the \emph{book} of words}}.
+\makefirstuc{\MFUskippunc{`}first letter upper'}.
+\capitalisewords{the book of words\MFUwordbreak{\slash}phrases}.
+
+\section{Another Section}
+
+Some cross-references: section~\ref{sec:intro},
+equation~\ref{eq:mx+c} and some
+citations~\cite{article-full,incollection-full}
+and~\cite[some text]{inproceedings-full}.
+
+Some more references: equations~\ref{eq:f} and~\ref{eq:df}.
+
+\lipsum[2-3]
+
+\subsection{A Subsection}
+
+\lipsum[6-7]
+
+\section*{Another Unnumbered Section}
+\addcontentsline{toc}{section}{Another Unnumbered Section}
+
+Some symbols: \ding{67}, \ding{118}, \ding{161}. \$1,000 not to be
+confused with the math mode shift \verb|$|.
+
+\lipsum[8-9]
+
+\section{Floats}
+\label{sec:floats}
+
+Table~\ref{tab:sample} isn't very interesting.
+Figure~\ref{fig:sample} uses an image provided with the 
+\texttt{mwe} package.
+
+\begin{table}[htbp]
+\caption{A Sample Table}
+\label{tab:sample}
+\centering
+\begin{tabular}{clrl}
+Centred Column & Left Aligned & Right Aligned & Left Aligned\\
+One & Two & Three & Four\\
+A & B & C & D\\
+\multicolumn{2}{|c|}{Centre Span} & R & L
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+ \includegraphics{example-image}
+ \caption{An Example Image}
+ \label{fig:sample}
+\end{figure}
+
+\section{IPA}\label{sec:ipa}
+\textipa{@"A\AA \char 197} \AA \char 197
+\textschwa
+
+\section{Loops}
+
+\newcount\myctr
+\loop
+ \advance\myctr by 1\relax
+ \the\myctr.
+\ifnum\myctr<10
+\repeat
+
+\makeatletter
+\@for\tmp:=Foo,Bar,Baz\do{\tmp. }
+
+\def\tmplist{Foo,Bar,Baz}
+\@for\tmp:=\tmplist\do{\tmp. }
+\makeatother
+
+\section{If-Case}
+
+\myctr=3\relax
+In or:
+\ifcase\myctr
+ One%
+ \or 
+ Two%
+ \or
+ Three%
+ \or
+ Four%
+ \else
+ Other%
+\fi
+
+In else:
+\ifcase\myctr
+ One%
+ \or 
+ Two%
+ \else
+ Other%
+\fi
+
+No else:
+\ifcase\myctr
+ One%
+ \or 
+ Two%
+\fi
+
+\section{Counters}
+
+\newcounter{mycounter}
+Counter value: \themycounter.
+
+Add 10.
+\addtocounter{mycounter}{10}
+Counter value: \themycounter.
+Roman: \Roman{mycounter}; lowercase: \roman{mycounter}.
+Alph: \Alph{mycounter}; lowercase: \alph{mycounter}.
+
+Number=10? \ifnum\value{mycounter}=10 true\else false\fi
+
+Subtract 6.
+\addtocounter{mycounter}{-6}
+New value: \arabic{mycounter}.
+Fn: \fnsymbol{mycounter}.
+
+Number=10? \ifnum\value{mycounter}=10 true\else false\fi
+
+\bibliographystyle{plain}
+\bibliography{xampl}
+
+\end{document}

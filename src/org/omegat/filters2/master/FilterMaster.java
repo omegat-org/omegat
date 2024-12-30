@@ -13,7 +13,6 @@
                2011 Alex Buloichik, Didier Briel
                2012 Guido Leenders, Thomas Cordonnier
                2013 Alex Buloichik
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -37,6 +36,8 @@ package org.omegat.filters2.master;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -183,8 +185,7 @@ public class FilterMaster {
                 try {
                     return (IFilter) f.getDeclaredConstructor().newInstance();
                 } catch (Exception ex) {
-                    Log.log("Failed to instantiate filter: " + classname);
-                    Log.log(ex);
+                    Log.logErrorRB(ex, "FILTERMASTER_ERROR_INSTANTIATE", classname);
                 }
             }
         }
@@ -270,6 +271,9 @@ public class FilterMaster {
         IFilter filterObject = lookup.filterObject;
         try {
             filterObject.translateFile(inFile, outFile, lookup.config, fc, translateCallback);
+        } catch (UnsupportedEncodingException | CharacterCodingException ex) {
+            Log.logErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
+            Core.getMainWindow().displayErrorRB(ex, "FILTERMASTER_ERROR_UNKNOWN_ENCODING");
         } catch (Exception ex) {
             Log.log(ex);
         }

@@ -3,9 +3,9 @@
 <section id="dialogs.project.properties">
   <title id="dialogs.project.properties.title"><guilabel>Propriétés du projet</guilabel></title>
 
-  <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour ouvrir la boîte de dialogue.</para>
+  <para>Utilisez <link linkend="menus.project" endterm="menus.project.title"/><link linkend="menus.project.properties" endterm="menus.project.properties.title"/> pour ouvrir la boite de dialogue.</para>
   
-  <para>Cette boîte de dialogue permet de définir les propriétés initiales du projet lors de la création d’un nouveau projet ou de les modifier ultérieurement, après la création du projet.</para>
+  <para>Cette boite de dialogue permet de définir les propriétés initiales du projet lors de la création d’un nouveau projet ou de les modifier ultérieurement, après la création du projet.</para>
 
   <para>Voir le chapitre <link linkend="introduction.create.and.open.new.project" endterm="introduction.create.and.open.new.project.title"/> pour en savoir plus.</para>
   
@@ -40,7 +40,7 @@
 	  <para>et ainsi de suite.</para>
 
 	<warning>
-	  <para>Veillez à saisir les codes de langue corrects et à ce que tous les autres emplacements nécessitant un tel code correspondent exactement à celui que vous attribuez ici. Les fonctions qui dépendent d’une langue échouent ou produisent des résultats incorrects en cas de non-concordance des codes de langue.</para>
+	  <para>Veillez à saisir les codes de langue corrects et à vérifier que tous les autres emplacements nécessitant un tel code utilisent exactement les codes que vous saisissez ici. Les fonctions qui dépendent d’une langue échouent ou produisent des résultats incorrects en cas de non-concordance des codes de langue.</para>
 	</warning>
 
 	  
@@ -82,7 +82,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.local.segmentation">
-        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>Règles locales de segmentation...</guibutton></term>
+        <term id="dialogs.project.properties.local.segmentation.title"><guibutton>Règles locales de segmentation…</guibutton></term>
 
 		<listitem>
 		  <para>Par défaut, les règles de segmentation sont globales et s’appliquent à tous les projets.</para>
@@ -172,7 +172,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.filters">
-        <term id="dialogs.project.properties.filters.title"><guibutton>Filtres de fichiers locaux...</guibutton></term>
+        <term id="dialogs.project.properties.filters.title"><guibutton>Filtres de fichiers locaux…</guibutton></term>
 
         <listitem>
           <para>Par défaut, les paramètres de filtrage des fichiers sont globaux et partagés par tous les projets. Ils sont dans les préférences <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/>.</para>
@@ -190,7 +190,7 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.repository.mapping">
-        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>Mise en correspondance des dépôts...</guibutton></term>
+        <term id="dialogs.project.properties.repository.mapping.title"><guibutton>Mise en correspondance des dépôts…</guibutton></term>
 
         <listitem>
           <para>Lorsque vous travaillez sur un projet en équipe, cette fenêtre vous permet de définir la correspondance entre les dossiers distants et les dossiers locaux.</para>
@@ -203,7 +203,7 @@
         <term id="dialogs.project.properties.external.searches.title"><guibutton>Recherches externes locales</guibutton></term>
 
         <listitem>
-          <para>Par défaut, les recherches externes sont globaux, et partagés par tous les projets. Elles sont définies dans les préférences <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
+          <para>Par défaut, les recherches externes sont globales et partagées par tous les projets. Elles sont définies dans les préférences <link linkend="dialogs.preferences.external.searches" endterm="dialogs.preferences.external.searches.title"/>.</para>
 
 		  <para>Utilisez ce bouton pour créer des recherches externes locales spécifiques à votre projet et ajustez les paramètres selon vos besoins.</para>
 
@@ -263,10 +263,10 @@
 
 		  <variablelist>
 			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
-			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions...</guibutton></term>
+			  <term id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions…</guibutton></term>
 
 			  <listitem>
-				<para>Cliquez sur le bouton <guibutton>Exclusions...</guibutton> pour spécifier les fichiers ou dossiers qui doivent être ignorés par OmegaT. Un fichier ou un dossier ignoré est :</para>
+				<para>Cliquez sur le bouton <guibutton>Exclusions…</guibutton> pour spécifier les fichiers ou dossiers qui doivent être ignorés par OmegaT. Un fichier ou un dossier ignoré est :</para>
 		  
 				<itemizedlist>
 				  <listitem>
@@ -282,7 +282,7 @@
 				  </listitem>
 				</itemizedlist>
 
-				<para>La boîte de dialogue des motifs d’exclusion vous permet d’ajouter ou de supprimer un motif, ou d’en modifier un en double-cliquant dessus ou en le sélectionnant et en appuyant sur <keycap>F2</keycap>. Utilisez l’<ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant syntaxe</ulink> pour définir les exclusions.</para>
+				<para>La boite de dialogue des motifs d’exclusion vous permet d’ajouter ou de supprimer un motif, ou d’en modifier un en double-cliquant dessus ou en le sélectionnant et en appuyant sur <keycap>F2</keycap>. Utilisez la syntaxe <ulink url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache ant</ulink> pour définir les exclusions.</para>
 			  </listitem>
 			</varlistentry>
 		  </variablelist>

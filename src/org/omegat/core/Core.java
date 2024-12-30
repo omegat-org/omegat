@@ -39,7 +39,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.core.spellchecker.SpellChecker;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
@@ -58,6 +58,8 @@ import org.omegat.gui.editor.MarkerController;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
+import org.omegat.gui.filelist.IProjectFilesList;
+import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.glossary.IGlossaries;
@@ -102,8 +104,8 @@ public final class Core {
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
-    private static ISpellChecker spellChecker;
     private static FilterMaster filterMaster;
+    private static IProjectFilesList projWin;
 
     protected static IAutoSave saveThread;
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
@@ -161,7 +163,7 @@ public final class Core {
 
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
-        return spellChecker;
+        return SpellCheckerManager.getCurrentSpellChecker();
     }
 
     public static FilterMaster getFilterMaster() {
@@ -171,6 +173,10 @@ public final class Core {
     public static void setFilterMaster(FilterMaster newFilterMaster) {
         filterMaster = newFilterMaster;
         EntryKey.setIgnoreFileContext(newFilterMaster.getConfig().isIgnoreFileContext());
+    }
+
+    public static IProjectFilesList getProjectFilesList() {
+        return projWin;
     }
 
     public static MachineTranslateTextArea getMachineTranslatePane() {
@@ -217,21 +223,48 @@ public final class Core {
     }
 
     /**
+     * initialize GUI.
+     * <p>
+     * An interface that was introduced in v5.6.0 when supporting theme plugin.
+     *
+     * @param cl class loader.
+     * @param params CLI parameters.
+     * @throws Exception when error occurred.
+     */
+    @Deprecated(since = "6.1.0")
+    public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
+        initializeGUI(params);
+    }
+
+    /**
      * Initialize application components.
      */
-    public static void initializeGUI(ClassLoader classLoader, final Map<String, String> params) throws Exception {
+    public static void initializeGUI(final Map<String, String> params) throws Exception {
         cmdLineParams = params;
 
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
         // 2. Initialize theme
-        UIDesignManager.initialize(classLoader);
+        UIDesignManager.initialize();
 
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
 
+        initializeGUIimpl(me);
+
+        SaveThread th = new SaveThread();
+        saveThread = th;
+        th.start();
+        new VersionCheckThread(10).start();
+    }
+
+    /**
+     * initialize GUI body.
+     * @throws Exception
+     */
+    static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 
@@ -241,7 +274,7 @@ public final class Core {
         // 4. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);
         tagValidation = new TagValidationTool();
-        issuesWindow = new IssuesPanelController(me);
+        issuesWindow = new IssuesPanelController(me.getApplicationFrame());
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         glossary = glossaryArea;
@@ -250,15 +283,9 @@ public final class Core {
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
-        spellChecker = new SpellChecker();
         multiple = new MultipleTransPane(me);
         new SegmentPropertiesArea(me);
-
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
-
-        new VersionCheckThread(10).start();
+        projWin = new ProjectFilesListController();
     }
 
     /**
@@ -321,6 +348,14 @@ public final class Core {
 
     public static void registerTokenizerClass(Class<? extends ITokenizer> clazz) {
         PluginUtils.getTokenizerClasses().add(clazz);
+    }
+
+    /**
+     * Register spellchecker plugin.
+     * @param clazz spellchecker class.
+     */
+    public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
+        PluginUtils.getSpellCheckClasses().add(clazz);
     }
 
     /**

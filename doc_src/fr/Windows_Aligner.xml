@@ -38,7 +38,7 @@
     <para>Si vous avez un projet de traduction ouvert, l’aligneur utilisera automatiquement les langues de ce projet, ainsi que les règles de segmentation spécifiques au projet, le cas échéant.</para>
   </note>
 
-  <para>Après avoir sélectionné la langue et les fichiers, cliquez sur le bouton <guibutton>OK</guibutton> pour faire apparaître la fenêtre <guilabel>Aligner</guilabel>, qui montre les résultats de l’alignement automatique.</para>
+  <para>Après avoir sélectionné la langue et les fichiers, cliquez sur le bouton <guibutton>OK</guibutton> pour faire apparaitre la fenêtre <guilabel>Aligner</guilabel>, qui montre les résultats de l’alignement automatique.</para>
 
   <para>La partie principale de la fenêtre est divisée en trois colonnes :</para>
   
@@ -78,7 +78,7 @@
             </listitem>
 
             <listitem>
-              <para><guilabel>Identifiant</guilabel> : ce mode s’applique aux fichiers constitués d’entrées <literal>clé = valeur</literal>. Ce mode fonctionne même si l’ordre des clés diffère dans chaque fichier et si les fichiers ont un nombre différent d’entrées. Il n’apparaît que lorsque les deux fichiers sélectionnés sont reconnus comme des fichiers clé=valeur.</para>
+              <para><guilabel>Identifiant</guilabel> : ce mode s’applique aux fichiers constitués d’entrées <literal>clé = valeur</literal>. Ce mode fonctionne même si l’ordre des clés diffère dans chaque fichier et si les fichiers ont un nombre différent d’entrées. Il n’apparait que lorsque les deux fichiers sélectionnés sont reconnus comme des fichiers clé=valeur.</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -163,42 +163,42 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Règles...</term>
+        <term>Règles…</term>
         <listitem>
           <para>En cliquant sur ce bouton, vous pouvez modifier les règles de segmentation qui s’appliquent à ce projet. Voir l’annexe <link linkend="app.segmentation" endterm="app.segmentation.title"/> pour en savoir plus.</para>
 
           <warning>
-            <para>Si vous modifiez les règles de segmentation, il vous sera demandé si vous souhaitez enregistrer ces modifications lorsque vous quitterez l’aligneur. Le choix par défaut est <guibutton>Oui</guibutton>, qui n’est peut-être pas celui que vous souhaitez si vous avez modifié les règles globales de segmentation d'OmegaT.</para>
+            <para>Si vous modifiez les règles de segmentation, il vous sera demandé si vous souhaitez enregistrer ces modifications lorsque vous quitterez l’aligneur. Le choix par défaut est <guibutton>Oui</guibutton>, qui n’est peut-être pas celui que vous souhaitez si vous avez modifié les règles globales de segmentation d’OmegaT.</para>
           </warning>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Filtres...</term>
+        <term>Filtres…</term>
         <listitem>
           <para>En cliquant sur ce bouton, vous pouvez modifier les filtres de fichiers qui s’appliquent à ce projet. Voir le paramètre <link linkend="dialogs.preferences.file.filters" endterm="dialogs.preferences.file.filters.title"/> pour en savoir plus.</para>
 
           <warning>
-            <para>Si vous modifiez les filtres du fichier, il vous sera demandé si vous souhaitez enregistrer ces modifications lorsque vous quitterez l’aligneur. Le choix par défaut est <guibutton>Oui</guibutton>, qui n’est peut-être pas celui que vous souhaitez si vous avez modifié les règles globales de segmentation d'OmegaT.</para>
+            <para>Si vous modifiez les filtres du fichier, il vous sera demandé si vous souhaitez enregistrer ces modifications lorsque vous quitterez l’aligneur. Le choix par défaut est <guibutton>Oui</guibutton>, qui n’est peut-être pas celui que vous souhaitez si vous avez modifié les règles globales de segmentation d’OmegaT.</para>
           </warning>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Masques...</term>
+        <term>Masques…</term>
         <listitem>
           <para>Cette option vous permet de saisir une expression régulière pour définir le masque utilisé pour mettre en évidence le texte dans les segments source et cible. Par défaut, l’aligneur utilise <literal>\d+</literal> pour mettre en évidence les chiffres. Si vos textes comportent d’autres éléments qu’il serait utile de mettre en évidence, modifiez l’expression régulière pour inclure ces éléments, en utilisant le symbole <literal>|</literal> pour séparer chaque élément.</para>
         </listitem>
       </varlistentry>      
     </variablelist>
 
-    <para>Vous pouvez également accéder à l’option <guilabel>Mise en évidence</guilabel> et à la boîte de dialogue permettant de modifier le masque à partir du menu <guimenu>Affichage</guimenu>, et aux autres options à partir du menu <guimenu>Options</guimenu>.</para>
+    <para>Vous pouvez également accéder à l’option <guilabel>Mise en évidence</guilabel> et à la boite de dialogue permettant de modifier le masque à partir du menu <guimenu>Affichage</guimenu>, et aux autres options à partir du menu <guimenu>Options</guimenu>.</para>
 
     <para>De plus, le menu <guimenu>Fichier</guimenu> propose les commandes suivantes :</para>
 	
     <itemizedlist>
       <listitem>
-        <para><guimenuitem>Enregistrer la TMX...</guimenuitem> : Cet élément est grisé jusqu’à ce que l’étape suivante soit terminée.</para>
+        <para><guimenuitem>Enregistrer la TMX…</guimenuitem> : Cet élément est grisé jusqu’à ce que l’étape suivante soit terminée.</para>
       </listitem>
 	  
       <listitem>
@@ -210,7 +210,7 @@
       </listitem>
 
       <listitem>
-        <para><guimenuitem>Fermer</guimenuitem> : Cette option permet de fermer la boîte de dialogue <guilabel>Aligner</guilabel>. Cette étape annule l’alignement sans enregistrer de données dans un fichier de mémoire de traduction. Cette commande peut également être exécutée en appuyant sur <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
+        <para><guimenuitem>Fermer</guimenuitem> : Cette option permet de fermer la boite de dialogue <guilabel>Aligner</guilabel>. Cette étape annule l’alignement sans enregistrer de données dans un fichier de mémoire de traduction. Cette commande peut également être exécutée en appuyant sur <keycombo><keycap>C</keycap><keycap>W</keycap></keycombo>.</para>
       </listitem>
     </itemizedlist>
 
@@ -255,7 +255,7 @@
       <varlistentry>
         <term>Fractionner (<keycap>S</keycap>)</term>
         <listitem>
-          <para>Si un seul segment est sélectionné, cette commande ouvre la boîte de dialogue <guilabel>Fractionner le texte</guilabel>. Utilisez la souris ou les touches fléchées pour placer le curseur à l’endroit où vous souhaitez diviser le texte, et cliquez sur le bouton <guibutton>OK</guibutton> ou appuyez sur <keycap>Entrée</keycap>.</para>
+          <para>Si un seul segment est sélectionné, cette commande ouvre la boite de dialogue <guilabel>Fractionner le texte</guilabel>. Utilisez la souris ou les touches fléchées pour placer le curseur à l’endroit où vous souhaitez diviser le texte, et cliquez sur le bouton <guibutton>OK</guibutton> ou appuyez sur <keycap>Entrée</keycap>.</para>
 
           <para>Si deux segments ou plus occupant des lignes séparées dans la même colonne (segments de plusieurs lignes contenant des lignes où la case <guilabel>Conserver</guilabel> n’est pas cochée) sont sélectionnés, cette commande fractionnera à nouveau les lignes sélectionnées en lignes séparées (en cochant la case <guilabel>Conserver</guilabel>).</para>
 
@@ -275,7 +275,7 @@
       <varlistentry>
         <term>Modifier (<keycap>E</keycap>)</term>
         <listitem>
-          <para>Cette commande ne peut être exécutée que sur un seul segment. La commande ouvre la boîte de dialogue <guilabel>Modifier le texte</guilabel>, qui vous permet d’apporter des modifications au texte du segment. Utilisez le bouton <guibutton>OK</guibutton> pour fermer la boîte de dialogue une fois que vous avez terminé. Dans cette boîte de dialogue, la touche <keycap>Entrée</keycap> insère un saut de ligne dans le texte.</para>
+          <para>Cette commande ne peut être exécutée que sur un seul segment. La commande ouvre la boite de dialogue <guilabel>Modifier le texte</guilabel>, qui vous permet d’apporter des modifications au texte du segment. Utilisez le bouton <guibutton>OK</guibutton> pour fermer la boite de dialogue une fois que vous avez terminé. Dans cette boite de dialogue, la touche <keycap>Entrée</keycap> insère un saut de ligne dans le texte.</para>
 
 		  <para>utilisez <keycombo><keycap>C</keycap><keycap>Entrée</keycap></keycombo> pour la fermer sans utiliser la souris.</para>
 
@@ -286,14 +286,14 @@
 	  <varlistentry>
         <term>Marquer accepté (<keycap>A</keycap>)</term>
         <listitem>
-          <para>Cette commande permet de confirmer que l’alignement des segments de la ligne ou du bloc de lignes sélectionné est correct. La colonne <guilabel>Conserver</guilabel> apparaît en vert.</para>
+          <para>Cette commande permet de confirmer que l’alignement des segments de la ligne ou du bloc de lignes sélectionné est correct. La colonne <guilabel>Conserver</guilabel> apparait en vert.</para>
         </listitem>
       </varlistentry>
 
 	  <varlistentry>
         <term>Marquer à vérifier (<keycap>R</keycap>)</term>
         <listitem>
-          <para>Cette commande permet d’identifier une ligne ou un bloc de lignes dont l’alignement des segments est incertain. La colonne <guilabel>Conserver</guilabel> apparaît en rouge.</para>
+          <para>Cette commande permet d’identifier une ligne ou un bloc de lignes dont l’alignement des segments est incertain. La colonne <guilabel>Conserver</guilabel> apparait en rouge.</para>
         </listitem>
       </varlistentry>
 
@@ -346,14 +346,14 @@
       </varlistentry>
     </variablelist>
 
-    <para>Une fois terminé l’alignement des deux colonnes, cliquez sur le bouton <guibutton>Enregistrer la TMX...</guibutton> pour créer la mémoire de traduction.</para>
+    <para>Une fois terminé l’alignement des deux colonnes, cliquez sur le bouton <guibutton>Enregistrer la TMX…</guibutton> pour créer la mémoire de traduction.</para>
 
     <note>
       <para>Seules les lignes dont la case <guilabel>Conserver</guilabel> est cochée dans la première colonne sont enregistrées dans la mémoire de traduction.</para>
     </note>
 
 
-    <para>En plus du bouton <guibutton>Enregistrer la TMX...</guibutton>, la partie inférieure de la fenêtre <guilabel>Aligner</guilabel> de l’étape de correction manuelle comporte la même case à cocher <guilabel>Mettre en évidence</guilabel> et le même bouton <guibutton>Masques...</guibutton> que dans la première étape. Cette option est également accessible à partir du menu <guimenu>Affichage</guimenu>.</para>
+    <para>En plus du bouton <guibutton>Enregistrer la TMX…</guibutton>, la partie inférieure de la fenêtre <guilabel>Aligner</guilabel> de l’étape de correction manuelle comporte la même case à cocher <guilabel>Mettre en évidence</guilabel> et le même bouton <guibutton>Masques…</guibutton> que dans la première étape. Cette option est également accessible à partir du menu <guimenu>Affichage</guimenu>.</para>
 
     <warning>
       <para>Il existe également un bouton <guibutton>Réinitialiser</guibutton> situé en bas de la fenêtre. <emphasis role="bold">Utilisez-le avec précaution !</emphasis> En cliquant sur ce bouton, vous annulez toutes vos modifications et vous revenez à la première étape.</para>

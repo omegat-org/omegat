@@ -270,26 +270,26 @@
 
           <tbody>
             <row>
-              <entry>Nouveau...</entry>
+              <entry>Nouveau…</entry>
               <entry>projectNewMenuItem</entry>
               <entry>ctrl shift N</entry>
               <entry>meta shift N</entry>
             </row>
 
             <row>
-              <entry>Télécharger projet en équipe...</entry>
+              <entry>Télécharger projet en équipe…</entry>
               <entry>projectTeamNewMenuItem</entry>
             </row>
 
             <row>
-              <entry>Ouvrir...</entry>
+              <entry>Ouvrir…</entry>
               <entry>projectOpenMenuItem</entry>
               <entry>ctrl O</entry>
               <entry>meta O</entry>
             </row>
 
             <row>
-              <entry>Ouvert récemment...</entry>
+              <entry>Ouvert récemment…</entry>
               <entry>projectOpenRecentMenuItem</entry>
             </row>
 
@@ -314,12 +314,12 @@
             </row>
 
             <row>
-              <entry>Ajouter des fichiers...</entry>
+              <entry>Ajouter des fichiers…</entry>
               <entry>projectImportMenuItem</entry>
             </row>
 
             <row>
-              <entry>Ajouter une page MediaWiki...</entry>
+              <entry>Ajouter une page MediaWiki…</entry>
               <entry>projectWikiImportMenuItem</entry>
             </row>
 
@@ -348,7 +348,7 @@
             </row>
 
             <row>
-              <entry>Ouvrir un projet MED...</entry>
+              <entry>Ouvrir un projet MED…</entry>
               <entry>projectMedOpenMenuItem</entry>
             </row>
 
@@ -358,14 +358,14 @@
             </row>
 
             <row>
-              <entry>Propriétés...</entry>
+              <entry>Propriétés…</entry>
               <entry>projectEditMenuItem</entry>
               <entry>ctrl E</entry>
               <entry>meta E</entry>
             </row>
 
             <row>
-              <entry>Fichiers sources...</entry>
+              <entry>Fichiers sources…</entry>
               <entry>viewFileListMenuItem</entry>
               <entry>ctrl L</entry>
               <entry>meta L</entry>
@@ -540,7 +540,7 @@
             </row>
 
             <row>
-              <entry>Rechercher...</entry>
+              <entry>Rechercher…</entry>
               <entry>editFindInProjectMenuItem</entry>
               <entry>ctrl F</entry>
               <entry>meta F</entry>
@@ -554,7 +554,7 @@
             </row>
 
             <row>
-              <entry>Remplacer...</entry>
+              <entry>Remplacer…</entry>
               <entry>editReplaceInProjectMenuItem</entry>
               <entry>ctrl K</entry>
               <entry>meta K</entry>
@@ -746,7 +746,7 @@
             </row>
 
             <row>
-              <entry>Segment numéro...</entry>
+              <entry>Segment numéro…</entry>
               <entry>gotoSegmentMenuItem</entry>
               <entry>ctrl J</entry>
               <entry>meta J</entry>
@@ -781,28 +781,28 @@
             </row>
 
             <row>
-              <entry>Segments auto-traduits/Segment suivant venant de tm/auto/</entry>
+              <entry>Segments autotraduits/Segment suivant venant de tm/auto/</entry>
               <entry>gotoNextXAutoMenuItem</entry>
               <entry>ctrl alt COMMA</entry>
               <entry>meta alt COMMA</entry>
             </row>
 
             <row>
-              <entry>Segments auto-traduits/Segment précédent venant de tm/auto/</entry>
+              <entry>Segments autotraduits/Segment précédent venant de tm/auto/</entry>
               <entry>gotoPrevXAutoMenuItem</entry>
               <entry>ctrl alt shift COMMA</entry>
               <entry>meta alt shift COMMA</entry>
             </row>
 
             <row>
-              <entry>Segments auto-traduits/Segment suivant venant de tm/enforce/</entry>
+              <entry>Segments autotraduits/Segment suivant venant de tm/enforce/</entry>
               <entry>gotoNextXEnforcedMenuItem</entry>
               <entry>ctrl alt PERIOD</entry>
               <entry>meta alt PERIOD</entry>
             </row>
 
             <row>
-              <entry>Segments auto-traduits/Segment précédent venant de tm/enforce/</entry>
+              <entry>Segments autotraduits/Segment précédent venant de tm/enforce/</entry>
               <entry>gotoPrevXEnforcedMenuItem</entry>
               <entry>ctrl alt shift PERIOD</entry>
               <entry>meta alt shift PERIOD</entry>
@@ -905,7 +905,7 @@
             </row>
 
             <row>
-              <entry>Surligner les segments auto-traduits</entry>
+              <entry>Surligner les segments autotraduits</entry>
               <entry>viewMarkAutoPopulatedCheckBoxMenuItem</entry>
             </row>
 
@@ -967,7 +967,7 @@
 
           <tbody>
             <row>
-              <entry>Afficher les erreurs...</entry>
+              <entry>Afficher les erreurs…</entry>
               <entry>toolsCheckIssuesMenuItem</entry>
               <entry>ctrl shift V</entry>
               <entry>meta shift V</entry>
@@ -1062,17 +1062,17 @@
             </row>
 
             <row>
-              <entry>Filtres de fichiers généraux...</entry>
+              <entry>Filtres de fichiers généraux…</entry>
               <entry>optionsSetupFileFiltersMenuItem</entry>
             </row>
 
             <row>
-              <entry>Règles de segmentation générales...</entry>
+              <entry>Règles de segmentation générales…</entry>
               <entry>optionsSentsegMenuItem</entry>
             </row>
 
             <row>
-              <entry>Éditeur...</entry>
+              <entry>Éditeur…</entry>
               <entry>optionsWorkflowMenuItem</entry>
             </row>
 
@@ -1104,28 +1104,28 @@
 
           <tbody>
             <row>
-              <entry>Manuel d’utilisation...</entry>
+              <entry>Manuel d’utilisation…</entry>
               <entry>helpContentsMenuItem</entry>
               <entry namest="3" nameend="4">F1</entry>
             </row>
 
             <row>
-              <entry>À propos...</entry>
+              <entry>À propos…</entry>
               <entry>helpAboutMenuItem</entry>
             </row>
 
             <row>
-              <entry>Dernières modifications...</entry>
+              <entry>Dernières modifications…</entry>
               <entry>helpLastChangesMenuItem</entry>
             </row>
 
             <row>
-              <entry>Journal...</entry>
+              <entry>Journal…</entry>
               <entry>helpLogMenuItem</entry>
             </row>
 
             <row>
-              <entry>Rechercher des mises à jour...</entry>
+              <entry>Rechercher des mises à jour…</entry>
               <entry>helpUpdateCheckMenuItem</entry>
             </row>
           </tbody>
@@ -1152,7 +1152,7 @@
 
           <tbody>
             <row>
-              <entry>Atteindre le segment numéro...</entry>
+              <entry>Atteindre le segment numéro…</entry>
               <entry>jumpToEntryInEditor</entry>
               <entry>ctrl J</entry>
               <entry>meta J</entry>

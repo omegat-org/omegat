@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.panes">
+  <title id="chapter.panes.title">Pannelli</title>
+
+  <section id="panes.default.layout">
+	<title id="panes.default.layout.title">Disposizione predefinita</title>
+
+	<para>La prima volta che si utilizza OmegaT, la finestra principale mostra la seguente disposizione predefinita:</para>
+
+		<figure id="default.omegat.layout">
+      <title id="default.omegat.layout.title">Disposizione predefinita di OmegaT in macOS</title>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/defaultOmegaTLayout.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/defaultOmegaTLayout.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+	<orderedlist>
+	  <listitem>
+		<para>Il pannello <link linkend="panes.editor" endterm="panes.editor.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Il pannello <link linkend="panes.notes" endterm="panes.notes.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Il pannello <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Il pannello <link linkend="panes.glossary" endterm="panes.glossary.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Il pannello <link linkend="panes.segment.properties" endterm="panes.segment.properties.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Il pannello <link linkend="panes.comments" endterm="panes.comments.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>Il pannello <link linkend="panes.multipletranslations" endterm="panes.multipletranslations.title"/></para>
+	  </listitem>
+	  <listitem>
+		<para>I pannelli <link linkend="panes.dictionary" endterm="panes.dictionary.title"/> e <link linkend="panes.machinetranslation" endterm="panes.machinetranslation.title"/> sono agganciati</para>
+	  </listitem>
+	  <listitem>
+		<para>La <link linkend="panes.statusbar" endterm="panes.statusbar.title"/> (sulla destra), che contiene le informazioni sul progetto</para>
+	  </listitem>
+	</orderedlist>
+	
+	<para>Usa le varie opzioni nel menu <link linkend="menus.view" endterm="menus.view.title"/> e sposta i <link linkend="chapter.panes">pannelli</link> per ottenere la disposizione che si adatta meglio alle tue esigenze di lavoro.</para>
+
+	<warning>
+	  <para>Usare <link linkend="menus.view" endterm="menus.view.title"/><link linkend="menus.view.restore.main.window" endterm="menus.view.restore.main.window.title"/> se si verificano problemi durante la disposizione della finestra.</para>
+	</warning>
+  </section>
+
+  <section id="panes.principles">
+    <title id="panes.principles.title">Principi</title>
+
+    <variablelist>
+      <varlistentry id="panes.manipulation">
+        <term id="panes.manipulation.title">Manipolazione</term>
+
+        <listitem>
+          <para>La finestra principale di OmegaT è composta da vari pannelli, qui descritti, menu, descritti nel capitolo <link linkend="chapter.menus" endterm="chapter.menus.title"/> e una barra di stato, descritta <link linkend="panes.statusbar">sotto</link>. È possibile tenere premuto il nome di un pannello e trascinarlo in una nuova posizione, oppure sganciarlo come finestra separata.</para>
+
+          <para>L'angolo superiore destro di ciascun pannello mostra icone diverse in base al tipo di pannello e il suo stato attuale:</para>
+
+          <table id="table.pane.widgets">
+            <title id="table.pane.widgets.title">Widget del pannello</title>
+
+            <tgroup cols="2">
+              <tbody>
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Settings.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Settings.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry>Elenca varia <emphasis role="bold">azioni</emphasis> aggiuntive disponibili nel pannello.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Minimize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Minimize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Minimizza</emphasis> il pannello in una scheda nella parte inferiore della finestra.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Maximize.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Maximize.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Massimizza</emphasis> il pannello</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Restore.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Restore.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Ripristina</emphasis> una pannello che è stato massimizzato al suo stato precedente.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Undock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Undock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Sgancia</emphasis> il pannello dalla finestra principale.</entry>
+                </row>
+
+                <row>
+                  <entry><inlinemediaobject>
+                      <imageobject role="html">
+                        <imagedata fileref="images/Dock.png" width="60%"/>
+                      </imageobject>
+
+                      <imageobject role="fo">
+                        <imagedata fileref="images/Dock.png" width="40%"/>
+                      </imageobject>
+                    </inlinemediaobject></entry>
+
+                  <entry><emphasis role="bold">Riporta</emphasis> il pannello nella finestra principale.</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+
+          <para>È possibile raggruppare i pannelli nella stessa area della finestra. Questa azione mostra una scheda col nome del pannello in cima al gruppo. I pannelli possono essere ridimensionati trascinando i loro separatori.</para>
+
+          <note>
+            <para>Usare <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.restore.main.window.title" linkend="menus.view.restore.main.window"/> per tornare alla disposizione predefinita nel caso si perda traccia delle modifiche apportate all'interfaccia utente e non si riescano più a vedere determinati pannelli.</para>
+          </note>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.context.menus">
+        <term id="panes.context.menus.title">Menu contestuali</term>
+
+        <listitem>
+          <para>Alcuni pannelli possiedono un menu contestuale. È possibile richiamare questo menu utilizzando il metodo standard del proprio sistema operativo o mediante le scorciatoie definite in OmegaT:<itemizedlist>
+              <listitem>
+                <para>In Windows e Linux: <keycap>Menu</keycap></para>
+              </listitem>
+
+              <listitem>
+                <para>In macOS: <keycombo> <keycap>S</keycap> <keycap>Esc</keycap> </keycombo></para>
+              </listitem>
+            </itemizedlist></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.drag.and.drop">
+        <term id="panes.drag.and.drop.title">Trascinamento e rilascio</term>
+
+        <listitem>
+          <para>I file possono essere trascinati e rilasciati in certi pannelli, ottenendo i seguenti risultati:</para>
+
+          <variablelist>
+            <varlistentry>
+              <term>Finestra dell'Editor</term>
+
+              <listitem>
+                <para>Rilasciare qui un file di progetto OmegaT (<filename>omegat.project</filename>) o un intero progetto aprirà il progetto corrispondente dopo aver chiuso il progetto attualmente aperto, se presente.</para>
+
+                <para>Rilasciare qui altri file li copierà nella cartella <filename class="directory">source</filename>. Questo vale anche per la finestra <link endterm="windows.source.files.list.title" linkend="windows.source.files.list"/>.</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>Pannello delle concordanze parziali</term>
+
+              <listitem>
+                <para>Rilasciare qui file <filename>.tmx</filename> li copierà nella cartella <filename class="directory">tm</filename>.</para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>Pannello dei glossari</term>
+
+              <listitem>
+                <para>Rilasciare qui file con un'estensione di glossario riconosciuta (<filename>.txt</filename>, <filename>.tab</filename>, ecc.) li copierà nella cartella <filename class="directory">glossary</filename>.</para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </listitem>
+      </varlistentry>
+
+	  <varlistentry id="panes.notifications">
+        <term id="panes.notifications.title">Notifiche</term>
+		
+        <listitem>
+          <para>Se un pannello è chiuso ma ha del contenuto da visualizzare, OmegaT può evidenziare temporaneamente la linguetta del pannello in arancione quando si passa al segmento.</para>
+		  
+		  <para>Per impostazione predefinita, le notifiche dei pannelli <guilabel>Commenti</guilabel> e <guilabel>Note</guilabel> sono attivate.</para>
+		  
+		  <para>Per attivare o disattivare le notifiche:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+			  <para>Entrare nel pannello.</para>
+			</listitem>
+
+			<listitem>
+			  <para>Fare clic sul widget <guilabel>Azione</guilabel> che si trova in alto a destra.</para>
+			</listitem>
+			
+			<listitem>
+			  <para>Selezionare <guilabel>Notifica quando un segmento ha...</guilabel> (dove ... varia in base al pannello per cui si stanno attivando le notifiche.</para>
+			</listitem>
+		  </itemizedlist>
+
+		  <para>Possono fornire notifiche i pannelli seguenti:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Commenti</para>
+			</listitem>
+
+			<listitem>
+			  <para>Dizionari</para>
+			</listitem>
+
+			<listitem>
+			  <para>Concordanze parziali (fuzzy)</para>
+			</listitem>
+
+			<listitem>
+			  <para>Glossari</para>
+			</listitem>
+
+			<listitem>
+			  <para>Traduzioni multiple</para>
+			</listitem>
+
+			<listitem>
+			  <para>Blocco note</para>
+			</listitem>
+
+			<listitem>
+			  <para>Proprietà segmento</para>
+
+			  <para>Il pannello <guilabel>Proprietà segmento</guilabel> consente di impostare le notifiche per ciascuno dei suoi elementi.</para>
+
+			  <para>Nella <guilabel>Vista tabella</guilabel>, fare clic col destro sull'elemento e selezionare <guilabel>Notifica quando un segmento ha...</guilabel> (dove ... varia in base alla notifica desiderata).</para>
+
+			  <para>Nella <guilabel>Vista elenco</guilabel>, fare clic col destro sul widget <guilabel>Azione</guilabel> all'estrema destra della riga della proprietà selezionata e selezionare <guilabel>Notifica quando un segmento ha...</guilabel> (dove ... varia in base alla notifica desiderata).</para>
+			</listitem>
+		  </itemizedlist>
+		</listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.editor">
+    <title id="panes.editor.title"><guilabel>Editor</guilabel></title>
+
+    <para>Questo è luogo in cui scrivere e modificare le traduzioni.</para>
+
+    <para>Il testo è diviso in segmenti numerati. È possibile scorrere il documento e fare doppio clic su ogni singolo segmento per aprirlo e modificarlo.</para>
+
+	<example id="panes.editor.default.editor.writing.space">
+	  <title id="panes.editor.default.editor.writing.space.title">Area di scrittura predefinita dell'editor</title>
+	  <para>
+		<programlisting>— ¶ —————————————————————
+
+<token>Hide Tags</token>
+|Nascondi i tag<token>&lt;segmento 2148 ¶&gt;</token>
+
+— ¶ —————————————————————
+
+Se attivata, tutte le formattazioni nei segmenti di partenza vengono nascoste.</programlisting></para>
+	</example>
+
+    <itemizedlist>
+      <listitem>
+        <para>La prima riga, in grassetto e con sfondo verde, è il testo originale da tradurre.</para>
+      </listitem>
+
+      <listitem>
+        <para>La seconda riga è l'<emphasis role="bold">area di traduzione</emphasis>, che si trova tra il bordo sinistro e il marcatore del segmento sulla destra. L'<emphasis role="bold">area di traduzione</emphasis> è il luogo in cui si inserisce la traduzione.</para>
+      </listitem>
+
+      <listitem>
+        <para>Il marcatore di segmenti è <literal>&lt;segmento 2148 ¶&gt;</literal>.</para>
+
+        <para><literal>2148</literal> è il numero del segmento nel progetto e il simbolo <literal>¶</literal> indica che il segmento è il primo segmento in un paragrafo.</para>
+      </listitem>
+
+      <listitem>
+        <para>Per impostazione predefinita, il cursore viene bloccato all'interno dell'area di traduzione.</para>
+
+        <para>Usare <keycap>F2</keycap> per sbloccarlo e muoverlo liberamente avanti e indietro tra l'area di traduzione e altre parti del pannello.</para>
+      </listitem>
+
+      <listitem>
+        <para>La riga sotto l'area di traduzione è un segmento diverso.</para>
+      </listitem>
+
+      <listitem>
+        <para>Utilizzare <link linkend="menus.goto" endterm="menus.goto.title"/><link endterm="menus.goto.next.untranslated.segment.title" linkend="menus.goto.next.untranslated.segment"/> o gli altri comandi di navigazione per:</para>
+
+		<itemizedlist>
+          <listitem>
+            <para>registrare il contenuto dell'area di traduzione all'interno della memoria di traduzione del progetto, e</para>
+          </listitem>
+
+          <listitem>
+            <para>passare al segmento successivo da tradurre.</para>
+          </listitem>
+        </itemizedlist>
+
+		<para>Vedere il menu <link endterm="menus.goto.title" linkend="menus.goto"/> per i dettagli.</para>
+      </listitem>
+    </itemizedlist>
+
+    <note>
+      <para>Modificare la vista dell'Editor in base alle proprie esigenze.</para>
+
+	  <!--   <example id="panes.editor.modified.editor.target.field"> -->
+	  <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
+	  <!--         editor writing space</title> -->
+	  <!-- 	<para> -->
+	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
+
+	  <!-- Translation last modified by Didier on Sep 4, 2012 at 9:16:52 PM -->
+	  <!-- <token>Hide Ta&amp;gs</token> -->
+	  <!-- <token>Dissi&amp;muler les balises</token> -->
+
+	  <!-- — ¶ ————————————————————— -->
+
+	  <!-- <token>External Post-processing Command:</token> -->
+	  <!-- <token>[fuzzy]</token>Commande de post-traitement externe<token>&lt;segment 3644 ¶></token> -->
+
+	  <!-- — ¶ —————————————————————</programlisting></para> -->
+	  <!--   </example> -->
+
+	  <para>Le modifiche possono includere:</para>
+	  
+	  <itemizedlist>
+		<listitem>
+		  <para>cambiare il tipo di carattere, come descritto nella preferenza <link endterm="dialogs.preferences.fonts.title" linkend="dialogs.preferences.fonts"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>mostrare o nascondere le delimitazioni dei paragrafi utilizzando <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.paragraph.delimitations.title" linkend="menus.view.mark.paragraph.delimitations"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>cambiare la delimitazione del formato del paragrafo, definito nella preferenza <link endterm="dialogs.preferences.editor.paragraph.delimitation.format.title" linkend="dialogs.preferences.editor.paragraph.delimitation.format"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>mostrare le informazioni di modifica dei segmenti utilizzando <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.modification.info.title" linkend="menus.view.modification.info"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>mostrare o nascondere i segmenti di partenza utilizzando <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.display.source.segments.title" linkend="menus.view.display.source.segments"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>evidenziare i segmenti &amp;tradotti utilizzando <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.translated.segments.title" linkend="menus.view.mark.translated.segments"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>inserire automaticamente il testo di partenza nell'area di traduzione disattivando la preferenza <link endterm="dialogs.preferences.editor.leave.the.segment.empty.title" linkend="dialogs.preferences.editor.leave.the.segment.empty"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>inserire la concordanza parziale migliore sopra la soglia definita nella preferenza <link endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title" linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>;</para>
+		</listitem>
+
+		<listitem>
+		  <para>definire il testo da escludere dalla traduzione, abilitato nella preferenza <link endterm="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation.title" linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"/>.</para>
+		</listitem>
+	  </itemizedlist>
+
+	  <para>Vedere le preferenze <link linkend="dialogs.preferences.editor" endterm="dialogs.preferences.editor.title"/> e il menu <link endterm="menus.view.title" linkend="menus.view"/> per i dettagli.</para>
+    </note>
+
+    <variablelist>
+      <varlistentry>
+        <term>Traduzioni vuote</term>
+
+        <listitem>
+          <para>Se si lascia l'area di traduzione vuota, OmegaT considererà non tradotto il segmento  e lo manterrà nella lingua originale quando creerà i documenti di arrivo.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Traduzioni uguali agli originali</term>
+
+        <listitem>
+          <para>OmegaT è in grado di memorizzare traduzioni che risultano identiche al testo di partenza. Si tratta di una funzione che risulta particolarmente utile quando i documenti contengono marchi di fabbrica, nomi o altri nomi propri, oppure sezioni che devono rimanere nella lingua originaria e non richiedono traduzione.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Trascinamento di testo</term>
+
+        <listitem>
+          <para>È possibile trascinare del testo da qualsiasi punto all'interno della finestra principale e rilasciarlo all'interno dell'area di traduzione. Il testo trascinato dall'esterno dell'area di traduzione viene copiato, mentre quello trascinato dal suo interno viene spostato.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.overwriting">
+        <term id="panes.editor.overwriting.title">Sovrascrittura</term>
+
+        <listitem>
+          <para>Secondo le impostazioni predefinite, il testo digitato si inserisce dopo il cursore, seguendo la direzione di digitazione. Per sovrascrivere il testo esistente, usare i tasti seguenti:</para>
+
+		  <itemizedlist>
+            <listitem>
+              <para>In Windows e Linux: <keycombo> <keycap>INS</keycap> </keycombo></para>
+            </listitem>
+
+            <listitem>
+              <para>In macOS: <keycap>F3</keycap></para>
+            </listitem>
+          </itemizedlist>
+
+          <para>La modalità di scrittura (sovrascrittura - <guilabel>SSC</guilabel> o inserimento - <guilabel>INS</guilabel>) è indicata alla destra della <link linkend="panes.statusbar">barra di stato</link>. Pigiare lo stesso tasto per alternare tra le modalità.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.cursor.lock">
+        <term id="panes.editor.cursor.lock.title">Blocco cursore</term>
+
+        <listitem>
+          <para>Secondo le impostazioni predefinite, il cursore viene bloccato all'interno dell'area di traduzione e non è possibile utilizzare i tasti freccia per spostarsi nel testo di partenza.</para>
+
+          <para>Premendo il tasto <keycap>F2</keycap> si sblocca il cursore e si rende possibile l'uso dei tasti  freccia nel testo di partenza o in qualsiasi altra parte dell'editor. Questa azione consente la selezione del testo tramite la tastiera.</para>
+
+          <para>Lo stato del cursore (bloccato - <guilabel>BLC</guilabel> o sbloccato - <guilabel>SBC</guilabel>) è indicata alla destra della <link linkend="panes.statusbar">barra di stato</link>. Pigiare lo stesso tasto per alternare tra le modalità di blocco e sblocco del cursore.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.context.menu">
+        <term id="panes.editor.context.menu.title">Menu contestuale</term>
+
+        <listitem>
+          <para>Scorciatoia predefinita:</para>
+
+		  <itemizedlist>
+			<listitem>
+              <para>In Windows e Linux: <keycap>Menu</keycap></para>
+			</listitem>
+
+			<listitem>
+              <para>In macOS: <keycombo><keycap>S</keycap><keycap>Esc</keycap></keycombo></para>
+			</listitem>
+          </itemizedlist>
+
+		  <para>È possibile richiamare il menu facendo clic col pulsante destro del mouse (<keycap>C</keycap> + <keycap>clic</keycap> in macOS).</para>
+
+          <para>Il menu contestuale del pannello dell'Editor offre diverse funzioni, disponibili dal menu <link endterm="menus.edit.title" linkend="menus.edit"/>, in particolare:</para>
+
+		  <itemizedlist>
+			<listitem>
+			  <para>Gli elementi dei glossari corrispondenti, con commenti, se presenti, presentati come suggerimento. Usare <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> per attivare questa funzionalità.</para>
+			</listitem>
+
+			<listitem>
+        <para>Funzioni di <guilabel>Taglia</guilabel>, <guilabel>Copia</guilabel>, <guilabel>Incolla</guilabel>,</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Vai al segmento</guilabel> (per passare al segmento che si trova sotto il puntatore).</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Cerca dizionari</guilabel> (per ricercare il termine selezionato all'interno di un dizionario installato).</para>
+      </listitem>
+
+      <listitem>
+        <para><guilabel>Aggiungi voce di glossario</guilabel> (che è equivalente all'utilizzo di <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/>).</para>
+      </listitem>
+
+      </itemizedlist>
+
+          <para>Se è stato selezionato del testo e definite delle voci nelle preferenze <link endterm="dialogs.preferences.external.searches.title" linkend="dialogs.preferences.external.searches"/>, esse saranno mostrate in questo menu (in quanto ricerca locale).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.auto.completion.menu">
+        <term id="panes.editor.auto.completion.menu.title">Menu di completamento automatico</term>
+
+        <listitem>
+          <para>Scorciatoia predefinita:</para>
+		  
+		  <itemizedlist>
+			<listitem>
+              <para>In Windows e Linux: <keycombo><keycap>C</keycap><keycap>Barra spaziatrice</keycap></keycombo></para>
+			</listitem>
+
+			<listitem>
+              <para>In macOS: <keycap>Esc</keycap></para>
+			</listitem>
+          </itemizedlist>
+		  			
+          <para>Questo menu propone le opzioni di completamento automatico impostate nelle preferenze <link endterm="dialog.preferences.auto.completion.title" linkend="dialog.preferences.auto.completion"/>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry id="panes.editor.navigation">
+        <term id="panes.editor.navigation.title">Navigazione</term>
+        <listitem>
+		  <para>Usare <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> accedere al pannello e aggiungere o modificare una nota.</para>
+
+		  <para>Usare <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> per tornare all'Editor.</para>
+        </listitem>
+	  </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="panes.fuzzy.matches">
+    <title id="panes.fuzzy.matches.title"><guilabel>Concordanze parziali (fuzzy)</guilabel></title>
+
+    <para>Il pannello delle concordanze parziali mostra i segmenti contenuti nelle memorie di traduzione che risultano più simili al segmento in fase di traduzione.</para>
+
+    <para>Le concordanze vengono ricavate sia dalla memoria di traduzione interna del progetto, creata in tempo reale durante la traduzione, sia dalle memorie esterne importate da progetti precedenti o ricevute da fonti esterne. Vedere la guida all'uso <link endterm="how.to.use.tm.title" linkend="how.to.use.tm"/> per i dettagli.</para>
+
+    <para>Quando si accede a un segmento, la prima concordanza parziale, ossia quella con la percentuale di concordanza più alta, viene selezionata automaticamente. È possibile premere <keycombo><keycap>C</keycap><keycap>2, 3, 4, o 5</keycap> </keycombo>, oppure utilizzare <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/>, per selezionare una concordanza diversa.</para>
+
+	<example id="the.first.match">
+	  <title id="the.first.match.title">Un segmento vuoto e le sue due prime concordanze</title>
+      <para>
+		<informaltable id="table.pane.matches">
+          <tgroup cols="2">
+            <tbody>
+              <row>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>— ¶ —————————————————————
+
+<token>Application Folder</token>
+|<token>&lt;segmento 1879 ¶&gt;</token>
+
+— ¶ —————————————————————
+</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+                <entry><para>
+				  <informaltable>
+					<tgroup cols="1">
+					  <tbody>
+						<row>
+						  <entry>
+							<programlisting>1. <token>Top</token> Folder
+Cartella in alto
+&lt;50/50/66% Segmenti orfani (+1 altro)&gt;</programlisting>
+<programlisting>2. Configuration Folder
+Cartella di configurazione
+&lt;50/50/66% &gt;</programlisting></entry>
+						</row>
+					  </tbody>
+					</tgroup>
+				  </informaltable>
+				</para>
+				</entry>
+			  </row>
+			</tbody>
+		  </tgroup>
+		</informaltable>
+	  </para>
+	</example>
+
+    <para>La concordanza parziale selezionata è evidenziata in <emphasis role="bold">grassetto</emphasis>. Le parti mancanti dal segmento in fase di traduzione sono mostrate in <emphasis role="bold">blu</emphasis>, mentre le parti adiacenti in <emphasis role="bold">verde</emphasis> (se la parte adiacente è uno spazio, come mostrato sopra, non viene colorata).</para>
+
+    <para>La concordanza riporta anche tre indicatori di percentuale.</para>
+
+    <para>Questi hanno il seguente significato, nell'ordine:</para>
+
+	<itemizedlist>
+      <listitem>
+        <para>La percentuale calcolata <emphasis role="bold">senza l'analisi della radice</emphasis> basata sul tokenizer della lingua di partenza, e <emphasis role="bold">ignorando i tag e i numeri</emphasis> (generalmente la più alta).</para>
+      </listitem>
+
+      <listitem>
+        <para>La percentuale calcolata <emphasis role="bold">senza l'analisi della radice</emphasis>, sempre <emphasis role="bold">ignorando i tag e i numeri</emphasis> (in genere leggermente più bassa).</para>
+      </listitem>
+
+      <listitem>
+        <para>La percentuale calcolata sull'<emphasis role="bold">intero testo, inclusi i tag e i numeri</emphasis> (in genere la più bassa).</para>
+		<note>
+		  <para>Se il segmento contiene solo numeri o simboli, questa percentuale risulterà la più alta.</para>
+		</note>
+      </listitem>
+    </itemizedlist>
+  
+    <para>È possibile modificare la visualizzazione o l'ordine delle concordanze. Vedere le preferenze <link endterm="dialog.preferences.tm.matches.title" linkend="dialog.preferences.tm.matches"/> per i dettagli.</para>
+
+    <para>Usare <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.replace.with.match.or.selection.title" linkend="menus.edit.replace.with.match.or.selection"/> per sostituire il testo da tradurre con la concordanza, oppure <link linkend="menus.edit" endterm="menus.edit.title"/><link endterm="menus.edit.insert.match.or.selection.title" linkend="menus.edit.insert.match.or.selection"/> per inserirla alla posizione del cursore.</para>
+  </section>
+
+  <section id="panes.glossary">
+    <title id="panes.glossary.title"><guilabel>Glossari</guilabel></title>
+
+    <para>Questo pannello mostra i termini contenuti nei propri file di glossario che corrispondono ai termini presenti nel segmento attivo. I file dei glossari sono memorizzati nella cartella <link endterm="project.folder.glossary.title" linkend="project.folder.glossary"/> del progetto.</para>
+
+    <para>Il termine di partenza viene visualizzato prima del segno &quot; = &quot;, mentre quello di arrivo dopo. Se la voce contiene dei commenti, questi sono numerati e mostrati sotto i termini, in righe separate. I termini rinvenuti nel glossario modificabile sono mostrati in grassetto, mentre quelli provenienti da altri glossari in testo semplice.</para>
+
+	<example id="glossary.matches">
+	  <title id="glossary.matches.title">Concordanze del glossario</title>
+	  <para>
+		<programlisting>Project = <token>Progetto</token>
+1. Progetto di traduzione
+
+Folder = <token>Cartella</token></programlisting>
+	  </para>
+	</example>
+
+    <para>Il nome del file del glossario compare come suggerimento quando si passa sopra il mouse su un termine.</para>
+
+    <para>Il campo del commento di una voce può contenere collegamenti ipertestuali, che si possono avviare con un clic per ulteriori informazioni.</para>
+
+	<para>I collegamenti ai file locali (<filename>file:///PERCORSO/nome_file</filename>) si aprono nel programma associato. Gli indirizzi web (<filename>https://...</filename>) si aprono nel browser predefinito.</para>
+
+    <para>È possibile selezionare un termine nel pannello e fare clic col pulsante destro del mouse per inserirlo nella traduzione.</para>
+
+    <para>Usare <link endterm="menus.view.title" linkend="menus.view"/><link endterm="menus.view.mark.glossary.matches.title" linkend="menus.view.mark.glossary.matches"/> per sottolineare le concordanze del glossario.</para>
+
+	<para>È quindi possibile fare clic col pulsante destro del mouse sulla parola sottolineata nel segmento di partenza per aprire un menu che elenca le traduzioni disponibili nei glossari. Selezionarne una per inserirla all'interno del segmento, alla posizione attuale del cursore.</para>
+
+    <para>È possibile utilizzare le preferenze del glossario per regolare nel dettagli la loro visualizzazione. Vedere le preferenze <link endterm="dialogs.preferences.glossary.title" linkend="dialogs.preferences.glossary"/> per i dettagli.</para>
+
+    <para>Le modifiche apportate a qualsiasi file di glossario sono immediatamente riconosciute da OmegaT e visualizzate nel pannello dei glossari.</para>
+
+    <para>OmegaT include un file di glossario scrivibile per progetto. Usare <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.glossary.entry.title" linkend="menus.edit.create.glossary.entry"/> per aggiungere termine a quel file.</para>
+
+	<para>Vedere l'appendice <link linkend="app.glossaries" endterm="app.glossaries.title"/>per i dettagli.</para>
+  </section>
+
+  <section id="panes.dictionary">
+    <title id="panes.dictionary.title"><guilabel>Dizionari</guilabel></title>
+
+	<para>Questo pannello mostra i termini contenuti nei propri file di dizionario che corrispondono ai termini presenti nel segmento attivo. I file dei dizionari sono memorizzati nella cartella <link linkend="project.folder.dictionary" endterm="project.folder.dictionary.title"/> del progetto. Vedere le preferenze <link endterm="dialogs.preferences.dictionary.title" linkend="dialogs.preferences.dictionary"/> per i dettagli.</para>
+  </section>
+  
+  <section id="panes.machinetranslation">
+    <title id="panes.machinetranslation.title"><guilabel>Traduzioni automatiche</guilabel></title>
+
+    <para>Questo pannello, una volta aperto, mostra i suggerimenti, da ciascun motore di traduzione abilitato, per il segmento attivo. Se sono disponibili suggerimenti da più di un motore,</para>
+	
+    <itemizedlist>
+      <listitem>
+        <para>il nome del motore compare dopo il testo tradotto,</para>
+      </listitem>
+
+      <listitem>
+        <para>i risultati sono ordinati alfabeticamente in base al nome del motore e</para>
+      </listitem>
+
+      <listitem>
+        <para>viene evidenziata la traduzione attualmente selezionata.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Usare <link linkend="menus.edit" endterm="menus.edit.title"/><link linkend="menus.edit.replace.with.mt.title" endterm="menus.edit.replace.with.mt.title"/> per sostituire la traduzione del segmento attivo con quella del motore di traduzione selezionato.</para>
+
+    <para>Il nome del motore selezionato viene assegnato alla proprietà <parameter>Origine</parameter> del segmento attivo.</para>
+
+	<para>Se si verifica un errore di connessione o di autenticazione con un motore di traduzione automatica, la barra di stato, nella parte inferiore della finestra, mostrerà un messaggio di stato.</para>
+
+    <para>Assicurarsi di aver abilitato il servizio e inserito le credenziali corrette. Nel caso siano correttamente inserite, potrebbe essere necessario dover contattare il fornitore del servizio per ottenere assistenza. Analogamente, un errore tipo <literal>Impossibile analizzare la risposta del servizio di traduzione</literal> suggerisce che potrebbe esserci un problema di comunicazione tra il proprio sistema e il server del fornitore.</para>
+
+	<para>Vedere le preferenze <link linkend="dialogs.preferences.mt" endterm="dialogs.preferences.mt.title"/> per i dettagli.</para>
+  </section>
+
+  <section id="panes.multipletranslations">
+    <title id="panes.multipletranslations.title"><guilabel>Traduzioni multiple</guilabel></title>
+
+    <para>Un segmento di partenza che compare in più punti all'interno del progetto potrebbe necessitare traduzioni diverse a seconda del contesto.</para>
+
+	<para>Usare <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.create.alternative.translation.title" linkend="menus.edit.create.alternative.translation"/> per registrare una traduzione alternativa, se la traduzione attuale del segmento non è adatta. La traduzione inserita verrà quindi considerata come traduzione alternativa del segmento di partenza.</para>
+
+    <para>Usare <link endterm="menus.edit.title" linkend="menus.edit"/><link endterm="menus.edit.use.as.default.translation.title" linkend="menus.edit.use.as.default.translation"/> per definire una delle alternative (per esempio la più comune o la più probabile) come traduzione predefinita.</para>
+  </section>
+
+  <section id="panes.notes">
+    <title id="panes.notes.title"><guilabel>Blocco note</guilabel></title>
+
+    <para>Questo pannello è uno spazio <emphasis>modificabile</emphasis> in cui è possibile aggiungere delle note al segmento attivo.</para>
+
+	<para>Le note sono utili, per esempio, per ritornare sulla traduzione in un secondo momento, verificare la correttezza delle traduzioni alternative o, in progetti condivisi, chiedere un parere ai colleghi.</para>
+
+	<para>Usare <link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.next.note.title" linkend="menus.goto.next.note"/> e <link endterm="menus.goto.title" linkend="menus.goto"/><link endterm="menus.goto.previous.note.title" linkend="menus.goto.previous.note"/> per navigare tra le note.</para>
+
+	<para>Usare <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.notes.pane" endterm="menus.goto.notes.pane.title"/> accedere al pannello e aggiungere o modificare una nota.</para>
+	<para>Usare <link linkend="menus.goto" endterm="menus.goto.title"/><link linkend="menus.goto.editor.pane" endterm="menus.goto.editor.pane.title"/> per tornare all'Editor.</para>
+
+	<note>
+	  <para>Le note vengono memorizzate nella memoria di traduzione del progetto. <emphasis>Non</emphasis> vengono memorizzate nei file tradotti.</para>
+	</note>
+  </section>
+
+  <section id="panes.comments">
+    <title id="panes.comments.title"><guilabel>Commenti</guilabel></title>
+
+    <para>Alcuni formati di file, come il formato PO, possono contenere commenti, rivolti ai traduttori, relativi al contesto della traduzione. Questi commenti vengono visualizzati qui.</para>
+
+    <note>
+      <para>Il pannello <guilabel>Commenti</guilabel> <emphasis>non</emphasis> è modificabile. Mostra solo le informazioni contenute nel file.</para>
+
+	  <para>Usare il pannello <link endterm="panes.notes.title" linkend="panes.notes"/> per aggiungere i propri commenti riguardo una traduzione.</para>
+    </note>
+  </section>
+
+  <section id="panes.segment.properties">
+    <title id="panes.segment.properties.title"><guilabel>Proprietà segmento</guilabel></title>
+
+    <para>Tutti i segmenti possiedono delle proprietà. Esse sono visualizzate questo pannello.</para>
+	<para>Le proprietà comuni includono:</para>
+	
+	<variablelist>
+	  <varlistentry>
+		<term>È una ripetizione</term>
+		<listitem>
+		  <para>Indica che un segmento è una ripetizione e specifica se si tratta della PRIMA istanza.</para>
+		</listitem>
+	  </varlistentry>
+	  <varlistentry>
+		<term>File</term>
+		<listitem>
+		  <para>Indica in quale file è contenuto il segmento.</para>
+		</listitem>
+	  </varlistentry>
+	</variablelist>
+
+    <note>
+      <para>Il pannello delle proprietà <emphasis>non</emphasis> è modificabile. Mostra solo le informazioni relative al segmento.</para>
+    </note>
+  </section>
+
+  <section id="panes.statusbar">
+    <title id="panes.statusbar.title"><guilabel>Barra di stato</guilabel></title>
+
+    <para>La parte inferiore della finestra ospita la barra di stato.</para>
+
+	<para>La sua parte sinistra mostra informazioni sulle azioni nel progetto o messaggi di errore.</para>
+
+	<example id="panes.statusbar.messages">
+      <title id="panes.statusbar.messages.title">Esempi di messaggi nella barra di stato</title>
+	  <para><literal>Sincronizzazione dei depositi</literal></para>
+
+	  <para>→ OmegaT sta aprendo un progetto in collaborazione e sincronizza col deposito remoto.</para>
+
+	  <para><literal>Sto passando all'ultimo segmento modificato...</literal></para>
+
+	  <para>→ OmegaT apre l'ultimo segmento modificato nell'ultima sessione.</para>
+
+	  <para><literal>Progetto salvato automaticamente alle 10:48</literal></para>
+
+	  <para>→ OmegaT ha appena salvato il progetto.</para>
+
+	  <para><literal>I file tradotti sono stati creati</literal></para>
+
+	  <para>→ I file che sono stati creati dall'utente.</para>
+	</example>
+
+    <para>La sua parte destra indica se il cursore è bloccato all'interno del segmento (vedere l'impostazione <link endterm="panes.editor.cursor.lock.title" linkend="panes.editor.cursor.lock"/>) e se è in modalità di sovrascrittura (vedere l'impostazione <link linkend="panes.editor.overwriting" endterm="panes.editor.overwriting.title"/>). Mostra anche informazioni sull'avanzamento della traduzione.</para>
+
+    <para>Fare clic sulle cifre per alternare la visualizzazione tra numeri o percentuali.</para>
+
+	<example id="panes.statusbar.widgets">
+      <title id="panes.statusbar.widgets.title">Informazioni sulla barra di stato</title>
+	  <para><literal>BLC | SSC <token>257/271 (12292/154896, 177692)</token><token> 35/0 </token></literal></para>
+
+	  <variablelist>
+		<varlistentry>
+		  <term>Stato del cursore</term>
+		  <listitem>
+			<para><literal>BLC</literal> indica che il cursore è bloccato all'interno del segmento.</para>
+
+			<para><literal>SSC</literal> indica che il cursore sovrascrive il testo esistente.</para>
+		  </listitem>
+		</varlistentry>
+		
+		<varlistentry>
+		  <term>Nel file</term>
+		  <listitem>
+			<para><emphasis role="bold">257</emphasis> = numero di segmenti tradotti / <emphasis role="bold">271</emphasis> = numero totale di segmenti</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Nel progetto</term>
+		  <listitem>
+			<para><emphasis role="bold">12292</emphasis> = numero di segmenti univoci tradotti / <emphasis role="bold">154896</emphasis> = numero totale di segmenti univoci, <emphasis role="bold">(177692)</emphasis> = numero totale di segmenti</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Nel segmento</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis> = numero di caratteri nell'originale / <emphasis role="bold">0</emphasis> = numero di caratteri nell'area di arrivo fino a ora</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+	
+	<example id="panes.statusbar.widgets.percentage">
+      <title id="panes.statusbar.widgets.percentage.title">Informazioni sulla barra di stato, modalità percentuale</title>
+	  <para><literal>SBC | INS <token>94.8% (14 restanti) / 7.9% (142,604 restanti), 177,692</token> <token>35/0</token></literal></para>
+	  <variablelist>
+		<varlistentry>
+		  <term>Stato del cursore</term>
+		  <listitem>
+			<para><literal>SBC</literal> indica che il cursore non è bloccato all'interno del segmento e si può navigare nella finestra dell'editor con i comandi di navigazione standard.</para>
+
+			<para><literal>INS</literal> indica che il cursore inserisce il testo.</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Nel file</term>
+		  <listitem>
+			<para><emphasis role="bold">94.8%</emphasis> = % di segmenti tradotti / <emphasis role="bold">14</emphasis> = numero di segmenti non tradotti</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Nel progetto</term>
+		  <listitem>
+			<para><emphasis role="bold">7.9%</emphasis> = % di segmenti tradotti / <emphasis role="bold">142,604</emphasis> = numero di segmenti non tradotti, <emphasis role="bold">(177,692)</emphasis> = numero totale di segmenti</para>
+		  </listitem>
+		</varlistentry>
+
+		<varlistentry>
+		  <term>Nel segmento</term>
+		  <listitem>
+			<para><emphasis role="bold">35</emphasis> = numero di caratteri nell'originale / <emphasis role="bold">0</emphasis> = numero di caratteri nell'area di arrivo fino a ora</para>
+		  </listitem>
+		</varlistentry>
+	  </variablelist>
+	</example>
+  </section>
+</chapter>

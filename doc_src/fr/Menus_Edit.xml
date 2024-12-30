@@ -115,7 +115,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.create.glossary.entry">
-      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Créer une entrée de glossaire...</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>G</keycap></keycombo>
+      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Créer une entrée de glossaire…</guimenuitem> <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>G</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Permet de créer une entrée dans le glossaire modifiable du projet (le fichier <link linkend="project.folder.glossary.txt" endterm="project.folder.glossary.txt.title"/>).</para>
@@ -124,15 +124,15 @@
 
 		<itemizedlist>
 		  <listitem>
-			<para>La première consiste à ouvrir la boîte de dialogue et ensuite manuellement remplir les différents champs.</para>
+			<para>La première consiste à ouvrir la boite de dialogue et ensuite manuellement remplir les différents champs.</para>
 		  </listitem>
 
 		  <listitem>
-			<para>La seconde consiste à sélectionner les termes dans un des volets d’OmegaT et ensuite lancer la boîte de dialogue après chaque sélection pour qu’OmegaT les entre automatiquement dans les différents champs :</para>
+			<para>La seconde consiste à sélectionner les termes dans un des volets d’OmegaT et ensuite lancer la boite de dialogue après chaque sélection pour qu’OmegaT les entre automatiquement dans les différents champs :</para>
 			
 			<orderedlist>
 			  <listitem>
-				<para>Sélectionnez une chaîne de texte dans n’importe quel volet</para>
+				<para>Sélectionnez une chaine de texte dans n’importe quel volet</para>
 			  </listitem>
 
 			  <listitem>
@@ -142,7 +142,7 @@
 			  </listitem>
 
 			  <listitem>
-				<para>Sélectionnez une chaîne de texte dans n’importe quel volet</para>
+				<para>Sélectionnez une chaine de texte dans n’importe quel volet</para>
 			  </listitem>
 
 			  <listitem>
@@ -152,7 +152,7 @@
 			  </listitem>
 
 			  <listitem>
-				<para>[Facultatif] Sélectionnez une chaîne de texte dans n’importe quel volet</para>
+				<para>[Facultatif] Sélectionnez une chaine de texte dans n’importe quel volet</para>
 			  </listitem>
 
 			  <listitem>
@@ -171,24 +171,24 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.project">
-      <term id="menus.edit.search.project.title"><guimenuitem>Rechercher...</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+      <term id="menus.edit.search.project.title"><guimenuitem>Rechercher…</guimenuitem> <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Ouvre une nouvelle fenêtre de <link linkend="windows.text.search" endterm="windows.text.search.title"/>.</para>
 
-        <para>Si vous sélectionnez une chaîne de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <guilabel>Rechercher :</guilabel>.</para>
+        <para>Si vous sélectionnez une chaine de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <guilabel>Rechercher :</guilabel>.</para>
 
 		<para>La combinaison de touches <keycombo><keycap>C</keycap><keycap>Maj</keycap><keycap>F</keycap></keycombo> réutilise la fenêtre de recherche la plus récente encore ouverte au lieu d’en ouvrir une nouvelle.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.edit.search.and.replace">
-      <term id="menus.edit.search.and.replace.title"><guimenuitem>Remplacer...</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+      <term id="menus.edit.search.and.replace.title"><guimenuitem>Remplacer…</guimenuitem> <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Ouvre une nouvelle fenêtre de <link linkend="windows.text.replace" endterm="windows.text.replace.title"/>.</para>
 
-        <para>Si vous sélectionnez une chaîne de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <guilabel>Rechercher :</guilabel>.</para>
+        <para>Si vous sélectionnez une chaine de texte (dans n’importe quel volet) avant d’ouvrir la fenêtre, le texte sera inséré par défaut dans le champ <guilabel>Rechercher :</guilabel>.</para>
       </listitem>
     </varlistentry>
 
@@ -317,6 +317,10 @@
       <term id="menus.edit.create.alternative.translation.title"><guimenuitem>Créer une traduction alternative</guimenuitem></term>
       <listitem>
 		<para>Deux segments parfaitement identiques peuvent, en fonction du contexte, avoir deux traductions différentes. Si la traduction actuelle ne convient pas, sélectionnez cet élément de menu et entrez la traduction alternative.</para>
+		<warning>
+		<para>Pour faire la différence entre des segments identiques, OmegaT utilise soit un identificateur interne fourni par le type de fichier, soit les segments précédents et suivants. Dans ce cas, une traduction alternative nécessite que des segments identiques aient des segments précédents et suivants différents. Si des segments identiques ont également des segments précédents et suivants identiques, il ne vous sera pas possible de les traduire différemment et de faire de l'un d'entre eux une traduction alternative dans OmegaT.</para>
+		<para>Pour éviter ce problème, vous pouvez introduire une petite modification dans le segment qui précède ou dans celui qui suit, dans le fichier source, pour établir une distinction entre les différentes répétitions d'un ensemble de segments précédents et suivants.</para>
+		</warning>
       </listitem>
 	</varlistentry>
 

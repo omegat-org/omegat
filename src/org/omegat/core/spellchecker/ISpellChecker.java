@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
-                         Benjamin Siband, and Kim Bruning
+               2000-2006 Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2008 Didier Briel
@@ -34,55 +34,55 @@ import java.util.List;
 import org.omegat.util.Token;
 
 /**
- * Interface for access to spell checker.
+ * Interface for access to a spell checker.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
 public interface ISpellChecker {
 
-    /** Initialize spell checker for current project. */
-    void initialize();
+    /** Initialize a spell checker for a current project. */
+    boolean initialize();
 
     /** Destroy internal cache and free memory. */
     void destroy();
 
-    /** Save the word lists to disk */
+    /** Save the word lists to disk. */
     void saveWordLists();
 
     /**
      * Check the word. If it is ignored or learned (valid), returns true.
-     * Otherwise false.
+     * Otherwise, false.
      */
     boolean isCorrect(String word);
 
     /**
-     * return a list of strings as suggestions
+     * return a list of strings as suggestions.
      */
     List<String> suggest(String word);
 
     /**
-     * Add a word to the list of correct words
+     * Add a word to the list of correct words.
      */
     void learnWord(String word);
 
     /**
-     * Add a word to the list of ignored words
+     * Add a word to the list of ignored words.
      */
     void ignoreWord(String word);
 
     /**
-     * Get a list of misspelled tokens from the given text
+     * Get a list of misspelled tokens from the given text.
      */
     List<Token> getMisspelledTokens(String text);
 
     /**
-     * Determine if the given word is on the ignored list
+     * Determine if the given word is on the ignored list.
      */
     boolean isIgnoredWord(String word);
 
     /**
-     * Determine if the given word is on the learned list
+     * Determine if the given word is on the learned list.
      */
     boolean isLearnedWord(String word);
 

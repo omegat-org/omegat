@@ -10,8 +10,8 @@
 	<para>The first time you start OmegaT, the main window displays the
 	following default layout:</para>
 
-		<figure id="default.omegat.layout">
-      <title id="default.omegat.layout.title">Default OmegaT layout on
+		<figure id="default.omegat.layout.macos">
+      <title id="default.omegat.layout.macos.title">Default OmegaT layout on
       macOS</title>
       <mediaobject>
         <imageobject role="html">
@@ -730,10 +730,12 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
     <para>When you enter a segment, the first fuzzy match (the one with the
     highest match percentage) is automatically selected. You can press
     <keycombo><keycap>C</keycap><keycap>2, 3, 4, or 5</keycap>
-    </keycombo>, or use <link linkend="menus.edit"
-    endterm="menus.edit.title"/><link linkend="menus.edit.select.match"
-    endterm="menus.edit.select.match.title"/>, to select
-    a different match .</para>
+    </keycombo> to select a specific match, or cycle through the available matches with
+    <keycombo><keycap>C</keycap><keycap>↑ or ↓</keycap></keycombo>
+    (<keycombo><keycap>A</keycap><keycap>↑ or ↓</keycap></keycombo> on macOS).
+    Alternatively, you can use <link linkend="menus.edit" endterm="menus.edit.title"/>
+    <link linkend="menus.edit.select.match" endterm="menus.edit.select.match.title"/>
+    to select a different match.</para>
 
 	<example id="the.first.match">
 	  <title id="the.first.match.title">An empty segment and its first two matches</title>
@@ -913,9 +915,10 @@ Folder = <token>Dossier</token></programlisting>
     <title id="panes.machinetranslation.title"><guilabel>Machine
     Translations</guilabel></title>
 
-    <para>This pane, when opened, shows the suggestions
-    for the current segment produced by each enabled translation
-    engine . When suggestions from more than one engine are available,</para>
+    <para>If you have enabled and configured at least one machine translation
+      engine this pane shows the suggestions for the current segment produced
+      by the available engines. When suggestions from more than one translation
+      engine are available,</para>
 	
     <itemizedlist>
       <listitem>

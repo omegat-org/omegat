@@ -35,6 +35,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
 /**
@@ -55,9 +56,11 @@ public class MenuItemPager {
     public static final int DEFAULT_ITEMS_PER_PAGE = 10;
 
     private Container menu;
+    private boolean isManagedMenuExtenderAPI = false;
+    private MenuExtender.MenuKey targetKey = null;
     private int count;
     private int itemsPerPage;
-    private List<JMenuItem> firstPage;
+    private final List<JMenuItem> firstPage;
 
     public MenuItemPager(JPopupMenu menu) {
         this((Container) menu);
@@ -65,6 +68,12 @@ public class MenuItemPager {
 
     public MenuItemPager(JMenu menu) {
         this((Container) menu);
+    }
+
+    public MenuItemPager(MenuExtender.MenuKey target) {
+        this((Container) Core.getMainWindow().getMainMenu().getMenu(target));
+        targetKey = target;
+        isManagedMenuExtenderAPI = true;
     }
 
     private MenuItemPager(Container menu) {
@@ -98,6 +107,8 @@ public class MenuItemPager {
     public JMenuItem add(JMenuItem newItem) {
         if (count > 0 && count % itemsPerPage == 0) {
             newPage();
+            // hack for second page
+            isManagedMenuExtenderAPI = false;
         }
         addImpl(newItem);
         count++;
@@ -113,7 +124,11 @@ public class MenuItemPager {
         if (firstPage.size() < itemsPerPage + 1) {
             firstPage.add(item);
         }
-        menu.add(item);
+        if (isManagedMenuExtenderAPI) {
+            MenuExtender.addMenuItem(targetKey, item);
+        } else {
+            menu.add(item);
+        }
         return item;
     }
 

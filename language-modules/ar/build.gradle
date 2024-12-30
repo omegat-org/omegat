@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'org.omegat.java-conventions'
 }
 
 dependencies {
@@ -33,7 +33,7 @@ dependencies {
 
 test {
     dependsOn jar
-    dependsOn project(":spellchecker:hunspell").tasks.jar
+    dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
 }
 
 jar {

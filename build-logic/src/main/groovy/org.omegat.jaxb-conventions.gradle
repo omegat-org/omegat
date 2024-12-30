@@ -1,0 +1,39 @@
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    jaxb
+}
+
+dependencies {
+    jaxb(libs.jaxb.xjc)
+}
+
+tasks.register('genJAXB') {
+    description = 'Generate classes for loading and manipulating XML formats'
+    group = 'jaxb'
+}
+
+ext.makeJaxbTask = { args ->
+    def taskName = "gen${args.name.capitalize()}"
+    tasks.register(taskName, JavaExec) {
+        classpath = configurations.jaxb
+        mainClass = 'com.sun.tools.xjc.XJCFacade'
+        delegate.args args.args
+        outputs.dir args.outdir
+        group = 'jaxb'
+    }
+    genJAXB.dependsOn taskName
+}
+
+makeJaxbTask(name: 'segmentation', outdir: 'src/gen/core/segmentation',
+        args: ['-no-header', '-d', 'src', '-p', 'gen.core.segmentation', 'src/schemas/srx20.xsd'])
+makeJaxbTask(name: 'filters', outdir: 'src/gen/core/filters',
+        args: ['-no-header', '-d', 'src', '-p', 'gen.core.filters', 'src/schemas/filters.xsd'])
+makeJaxbTask(name: 'tbx', outdir: 'src/gen/core/tbx',
+        args: ['-no-header', '-d', 'src', '-p', 'gen.core.tbx', 'src/schemas/tbx.xsd'])
+makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',
+        args: ['-no-header', '-d', 'src', '-p', 'gen.core.project', 'src/schemas/project_properties.xsd'])
+makeJaxbTask(name: 'tmx14', outdir: 'src/gen/core/tmx14',
+        args: ['-no-header', '-d', 'src', '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])

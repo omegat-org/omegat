@@ -1,0 +1,52 @@
+plugins {
+    id 'edu.sc.seis.launch4j'
+    id 'org.omegat.version-conventions'
+}
+
+// Read in all our custom messages and massage them for inclusion in the .iss
+ext.getInnoSetupCustomMessages = {
+    // Don't include languages that InnoSetup doesn't have strings for
+    def blacklist = ['cy', 'ia', 'mfe']
+    // Sort files to ensure English comes first, to set fallback
+    fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini')
+            .sort()
+            .collect { file ->
+                def match = file.name =~ /CustomMessages_?([^\.]*).ini/
+                if (match) {
+                    def capture = match.group(1)
+                    def lang = capture.empty ? 'en' : capture
+                    if (!blacklist.contains(lang)) {
+                        file.text.replaceAll(/(?m)^([^=]+)/) { "$lang.${it[0]}" }
+                    }
+                }
+            }.findAll()
+            .join(System.lineSeparator())
+}
+
+/*
+ * Configuration of launch4j java launcher.
+ * OmegaT uses it as launcher for windows.
+ */
+launch4j {
+    libraryDir = "." // assume OmegaT.jar is located as same folder as OmegaT.exe
+    dontWrapJar = true
+    downloadUrl = 'https://adoptium.net/'
+    supportUrl = 'https://omegat.org/support'
+    icon = "${projectDir}/images/OmegaT.ico"
+    errTitle = 'OmegaT'
+    headerType = 'gui'
+    jreMinVersion = '11.0'
+    jreMaxVersion = '21.1'
+    copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
+    // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
+    bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
+    requires64Bit = false  // support 32bit distribution
+    copyright = "The GNU General Public License, Version 3.0"
+    version = omtVersion.version
+    textVersion = omtVersion.version
+    companyName = distAppVendor
+    fileDescription = shortDescription
+    restartOnCrash = false
+    stayAlive = false
+    priority = 'normal'
+}

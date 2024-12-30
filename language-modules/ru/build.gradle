@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'org.omegat.java-conventions'
 }
 
 dependencies {
@@ -34,7 +34,7 @@ dependencies {
 
 test {
     dependsOn tasks.jar
-    dependsOn project(":spellchecker:morfologik").tasks.jar
+    dependsOn project(":spellchecker:morfologik").tasks.withType(Jar)
 }
 
 jar {

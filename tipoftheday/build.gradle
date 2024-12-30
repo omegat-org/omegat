@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id 'java-library'
+    id 'org.omegat.java-conventions'
 }
 
 sourceSets {

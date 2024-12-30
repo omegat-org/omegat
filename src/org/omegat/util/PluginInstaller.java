@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.module.ModuleDescriptor.Version;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
@@ -39,6 +40,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +59,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.AbstractTableModel;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 
 import org.omegat.core.Core;
@@ -64,18 +68,30 @@ import org.omegat.core.data.PluginInformation;
 import org.omegat.filters2.master.PluginUtils;
 
 /**
- * Plugin installer utility class.
+ * Plugin installer singleton class.
  *
  * @author Hiroshi Miura
  */
 public final class PluginInstaller {
 
     private static final String PLUGIN_TYPE = "OmegaT-Plugin";
+    private static final String LIST_URL = "https://omegat.sourceforge.io/plugins/plugins.json";
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    private List<PluginInformation> pluginInformationList;
+
+    private static class SingletonHelper {
+        private static final PluginInstaller INSTANCE = new PluginInstaller();
+    }
+
+    public static PluginInstaller getInstance() {
+        return SingletonHelper.INSTANCE;
+    }
 
     private PluginInstaller() {
     }
 
-    public static boolean install(final File pluginFile) {
+    public boolean install(File pluginFile, boolean background) {
         Path pluginJarFile;
         Set<PluginInformation> infoSet;
         try {
@@ -105,6 +121,7 @@ public final class PluginInstaller {
                     e.getLocalizedMessage());
             return false;
         }
+
         Map<String, PluginInformation> installed = getInstalledPlugins();
         Set<PluginInformation> currentSet = infoSet.stream().map(PluginInformation::getClassName)
                 .map(installed::get).filter(Objects::nonNull).collect(Collectors.toSet());
@@ -130,6 +147,10 @@ public final class PluginInstaller {
             title = OStrings.getString("PREFS_PLUGINS_TITLE_CONFIRM_INSTALLATION");
             message = StringUtil.format(OStrings.getString("PREFS_PLUGINS_CONFIRM_INSTALL"), pluginName,
                     version);
+        }
+
+        if (background) {
+            return doInstall(currentInfo, pluginJarFile.toFile());
         }
 
         JPanel confirmPanel = new JPanel();
@@ -199,6 +220,38 @@ public final class PluginInstaller {
     }
 
     /**
+     * Return known available plugins.
+     * It can has plugins that has already installed.
+     * @return Map of PluginInformation
+     */
+    public List<PluginInformation> getPluginList() {
+        if (pluginInformationList != null) {
+            return pluginInformationList;
+        }
+        Map<String, PluginInformation> listPlugins = getInstalledPlugins();
+        getPluginsList().stream()
+                .sorted(Comparator.comparing(PluginInformation::getClassName))
+                .map(info -> {
+                    String key = info.getClassName();
+                    PluginInformation.Status status;
+                    String version = info.getVersion();
+                    PluginInformation installed = listPlugins.get(key);
+                    if (installed == null) {
+                        status = PluginInformation.Status.UNINSTALLED;
+                    } else if (!installed.getVersion().equals(info.getVersion())) {
+                        status = PluginInformation.Status.UPDATABLE;
+                    } else {
+                        status = PluginInformation.Status.INSTALLED;
+                    }
+                    return PluginInformation.Builder.copy(info, status);
+                })
+                .forEach(info -> listPlugins.put(info.getClassName(), info));
+        pluginInformationList = new ArrayList<>(listPlugins.values());
+        return pluginInformationList;
+    }
+
+    /**
+     * Unpack plugin file when necessary and copy it.
      * Check if jarFile is placed in OmegaT installed system directory.
      *
      * @param jarFile
@@ -323,6 +376,40 @@ public final class PluginInstaller {
         return installedPlugins;
     }
 
+    /**
+     * Download the plugin database from GitHub repository.
+     * @return set of PluginInformation
+     */
+    private List<PluginInformation> getPluginsList() {
+        Map<String, Map<String, String>> tmp = new HashMap<>();
+        try {
+            List<Map<String, String>> db = mapper.readValue(new URL(LIST_URL), new TypeReference<>() {
+            });
+            for (Map<String, String> record : db) {
+                String id = record.get("ID");
+                if (!tmp.containsKey(id)) {
+                    tmp.put(id, record);
+                } else {
+                    if (compareVersion(record.get("Version"), tmp.get(id).get("Version")) > 0) {
+                        tmp.put(id, record);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        List<PluginInformation> pluginInfo = new ArrayList<>();
+        for (Map.Entry<String, Map<String, String>> entry: tmp.entrySet()) {
+            PluginInformation info = PluginInformation.Builder.fromMap(entry.getValue());
+            pluginInfo.add(info);
+        }
+        return pluginInfo;
+    }
+
+    private int compareVersion(String a, String b) {
+        return Version.parse(a).compareTo(Version.parse(b));
+    }
+      
     @SuppressWarnings("serial")
     static class PluginInstallerTableModel extends AbstractTableModel {
 

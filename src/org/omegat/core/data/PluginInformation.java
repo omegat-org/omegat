@@ -49,7 +49,7 @@ public final class PluginInformation {
         INSTALLED("installed"),
         BUNDLED("bundled"),
         NEW("new"),
-        UPGRADABLE("upgradable"),
+        UPDATABLE("updatable"),
         UNINSTALLED("uninstalled");
 
         private String value;
@@ -62,8 +62,8 @@ public final class PluginInformation {
             switch(this) {
                 case UNINSTALLED:
                     return OStrings.getString("PLUGIN_STATUS_UNINSTALLED");
-                case UPGRADABLE:
-                    return OStrings.getString("PLUGIN_STATUS_UPGRADABLE");
+                case UPDATABLE:
+                    return OStrings.getString("PLUGIN_STATUS_UPDATABLE");
                 case BUNDLED:
                     return OStrings.getString("PLUGIN_STATUS_BUNDLED");
                 case NEW:

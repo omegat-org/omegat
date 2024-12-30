@@ -239,7 +239,7 @@ public final class PluginInstaller {
                     if (installed == null) {
                         status = PluginInformation.Status.UNINSTALLED;
                     } else if (!installed.getVersion().equals(info.getVersion())) {
-                        status = PluginInformation.Status.UPGRADABLE;
+                        status = PluginInformation.Status.UPDATABLE;
                     } else {
                         status = PluginInformation.Status.INSTALLED;
                     }

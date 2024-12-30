@@ -112,8 +112,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
             panel.installButton.setEnabled(true);
             if (info.getStatus().equals(PluginInformation.Status.UNINSTALLED)) {
                 panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_INSTALL"));
-            } else if (info.getStatus().equals(PluginInformation.Status.UPGRADABLE)) {
-                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPGRADE"));
+            } else if (info.getStatus().equals(PluginInformation.Status.UPDATABLE)) {
+                panel.installButton.setText(OStrings.getString("PREFS_PLUGINS_UPDATE"));
             } else {
                 panel.installButton.setText("-");
                 panel.installButton.setEnabled(false);

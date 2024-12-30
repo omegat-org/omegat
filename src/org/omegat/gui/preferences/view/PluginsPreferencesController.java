@@ -106,7 +106,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             int index = panel.tablePluginsInfo.convertRowIndexToModel(rowIndex);
             PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
             PluginInformation info = model.getItemAt(index);
-            for(ActionListener act : panel.installButton.getActionListeners()) {
+            for (ActionListener act : panel.installButton.getActionListeners()) {
                 panel.installButton.removeActionListener(act);
             }
             panel.installButton.setEnabled(true);

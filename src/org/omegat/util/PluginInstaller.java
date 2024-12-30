@@ -383,7 +383,8 @@ public final class PluginInstaller {
     private List<PluginInformation> getPluginsList() {
         Map<String, Map<String, String>> tmp = new HashMap<>();
         try {
-            List<Map<String, String>> db = mapper.readValue(new URL(LIST_URL), new TypeReference<>(){});
+            List<Map<String, String>> db = mapper.readValue(new URL(LIST_URL), new TypeReference<>() {
+            });
             for (Map<String, String> record : db) {
                 String id = record.get("ID");
                 if (!tmp.containsKey(id)) {

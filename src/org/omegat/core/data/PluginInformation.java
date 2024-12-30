@@ -59,19 +59,19 @@ public final class PluginInformation {
         }
 
         public String getLocalizedValue() {
-            switch(this) {
-                case UNINSTALLED:
-                    return OStrings.getString("PLUGIN_STATUS_UNINSTALLED");
-                case UPDATABLE:
-                    return OStrings.getString("PLUGIN_STATUS_UPDATABLE");
-                case BUNDLED:
-                    return OStrings.getString("PLUGIN_STATUS_BUNDLED");
-                case NEW:
-                    return OStrings.getString("PLUGIN_STATUS_NEW");
-                case INSTALLED:
-                    return OStrings.getString("PLUGIN_STATUS_INSTALLED");
-                default:
-                    return "Unknown";
+            switch (this) {
+            case UNINSTALLED:
+                return OStrings.getString("PLUGIN_STATUS_UNINSTALLED");
+            case UPDATABLE:
+                return OStrings.getString("PLUGIN_STATUS_UPDATABLE");
+            case BUNDLED:
+                return OStrings.getString("PLUGIN_STATUS_BUNDLED");
+            case NEW:
+                return OStrings.getString("PLUGIN_STATUS_NEW");
+            case INSTALLED:
+                return OStrings.getString("PLUGIN_STATUS_INSTALLED");
+            default:
+                return "Unknown";
             }
 
         }
@@ -79,37 +79,38 @@ public final class PluginInformation {
         public static Comparator<Status> ascComparator = (s1, s2) -> s1.value.compareTo(s2.value);
     }
 
-    private final String className;
-    private final String name;
-    private final String version;
-    private final String author;
-    private final String description;
-    private final PluginUtils.PluginType category;
-    private final String link;
-    private final URL url;
-    private final Status status;
+    private String className;
+    private String name;
+    private String version;
+    private String author;
+    private String description;
+    private PluginUtils.PluginType category;
+    private String link;
+    private URL url;
+    private Status status;
     // for manage and install
-    private final String remoteJarFileUrl;
-    private final String jarFilename;
-    private final String sha256Sum;
+    private String remoteJarFileUrl = null;
+    private String jarFilename = null;
+    private String sha256Sum = null;
 
 
-    /* The class is recommend to build from builder. */
-    private PluginInformation(String className, String name, String version, String author,
-            String description, PluginUtils.PluginType category, String link, URL url, Status status,
-            String remoteJarFileUrl, String jarFilename, String sha256Sum) {
-        this.className = className;
-        this.name = name;
-        this.version = version;
-        this.author = author;
-        this.description = description;
-        this.category = category;
-        this.link = link;
-        this.url = url;
+    /* The class is recommended to build from builder. */
+    private PluginInformation() {
+    }
+
+    private PluginInformation(PluginInformation info, Status status) {
+        this.className = info.getClassName();
+        this.name = info.getName();
+        this.version = info.getVersion();
+        this.author = info.getAuthor();
+        this.description = info.getDescription();
+        this.category = info.getCategory();
+        this.link = info.getLink();
+        this.url = info.getUrl();
         this.status = status;
-        this.remoteJarFileUrl = remoteJarFileUrl;
-        this.jarFilename = jarFilename;
-        this.sha256Sum = sha256Sum;
+        this.remoteJarFileUrl = info.getRemoteJarFileUrl();
+        this.jarFilename = info.getJarFilename();
+        this.sha256Sum = info.getSha256Sum();
     }
 
     /**
@@ -226,34 +227,42 @@ public final class PluginInformation {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PluginInformation other = (PluginInformation) obj;
         if (author == null) {
-            if (other.author != null)
+            if (other.author != null) {
                 return false;
-        } else if (!author.equals(other.author))
+            }
+        } else if (!author.equals(other.author)) {
             return false;
+        }
         if (className == null) {
-            if (other.className != null)
+            if (other.className != null) {
                 return false;
-        } else if (!className.equals(other.className))
+            }
+        } else if (!className.equals(other.className)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (version == null) {
-            if (other.version != null)
-                return false;
-        } else if (!version.equals(other.version))
-            return false;
-        return true;
+            return other.version == null;
+        } else {
+            return version.equals(other.version);
+        }
     }
 
     /**
@@ -285,11 +294,8 @@ public final class PluginInformation {
         }
 
         public static PluginInformation copy(final PluginInformation info, final Status status) {
-            return new PluginInformation(info.getClassName(), info.getName(), info.getVersion(),
-                    info.getAuthor(), info.getDescription(), info.getCategory(), info.getLink(),
-                    info.getUrl(), status, info.getRemoteJarFileUrl(), info.getJarFilename(),
-                    info.getSha256Sum());
-        }
+            return new PluginInformation(info, status);
+       }
 
         /**
          * Build PluginInformation from Manifest attributes.
@@ -324,16 +330,20 @@ public final class PluginInformation {
                 targetAttrs.putAll(attrs);
             }
             String remoteJarFileUrl = targetAttrs.getValue(PLUGIN_JAR_URL);
-            return new PluginInformation(className,
-                    findName(className, targetAttrs),
-                    findVersion(targetAttrs),
-                    findAuthor(targetAttrs),
-                    lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION),
-                    findCategory(targetAttrs),
-                    lookupAttribute(targetAttrs, PLUGIN_LINK), mu, status,
-                    remoteJarFileUrl,
-                    getJarFilename(targetAttrs, remoteJarFileUrl),
-                    targetAttrs.getValue(PLUGIN_SHA256SUM));
+            PluginInformation result = new PluginInformation();
+            result.className = className;
+            result.name = findName(className, targetAttrs);
+            result.version = findVersion(targetAttrs);
+            result.author = findAuthor(targetAttrs);
+            result.description = lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION);
+            result.category = findCategory(targetAttrs);
+            result.link = lookupAttribute(targetAttrs, PLUGIN_LINK);
+            result.url = mu;
+            result.status = status;
+            result.remoteJarFileUrl = remoteJarFileUrl;
+            result.jarFilename = getJarFilename(targetAttrs, remoteJarFileUrl);
+            result.sha256Sum = targetAttrs.getValue(PLUGIN_SHA256SUM);
+            return result;
         }
 
         private static String getJarFilename(Attributes attrs, String remoteJarFileUrl) {
@@ -378,10 +388,17 @@ public final class PluginInformation {
          */
         public static PluginInformation fromProperties(String className, Properties props, final String key,
                 final URL mu, final Status status) {
-            return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
-                    props.getProperty(String.format("plugin.desc.%s", key)),
-                    PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status,
-                    null, null, null);
+            PluginInformation result = new PluginInformation();
+            result.className = className;
+            result.name = key;
+            result.version = OStrings.getSimpleVersion();
+            result.author = AUTHOR;
+            result.description = props.getProperty(String.format("plugin.desc.%s", key));
+            result.category = PluginUtils.PluginType.getTypeByValue(key);
+            result.link = LINK;
+            result.url = mu;
+            result.status = status;
+            return result;
         }
 
         private static PluginUtils.PluginType findCategory(Attributes attrs) {
@@ -435,12 +452,20 @@ public final class PluginInformation {
 
         public static PluginInformation fromMap(Map<String, String> attr) {
             PluginUtils.PluginType cate = PluginUtils.PluginType.getTypeByValue(attr.get("Category"));
-            return new PluginInformation(attr.get("Class-Name"), attr.get("Name"), attr.get("Version"),
-                    attr.get("Author"), attr.getOrDefault("Description", ""), cate,
-                    attr.getOrDefault("Link", ""), null, Status.UNINSTALLED,
-                    attr.get("Plugin-Download-Url"), attr.get("Plugin-Jar-Filename"),
-                    attr.get("Plugin-Sha256Sum"));
-
+            PluginInformation result = new PluginInformation();
+            result.className = attr.get("Class-Name");
+            result.name = attr.get("Name");
+            result.version = attr.get("Version");
+            result.author = attr.get("Author");
+            result.description = attr.getOrDefault("Description", "");
+            result.category = cate;
+            result.link = attr.getOrDefault("Link", "");
+            result.url = null;
+            result.status = Status.UNINSTALLED;
+            result.remoteJarFileUrl = attr.get("Plugin-Download-Url");
+            result.jarFilename = attr.get("Plugin-Jar-Filename");
+            result.sha256Sum = attr.get("Plugin-Sha256Sum");
+            return result;
         }
     }
 }

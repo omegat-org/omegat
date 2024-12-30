@@ -1,0 +1,52 @@
+plugins {
+    id 'jacoco'
+    id 'jacoco-report-aggregation'
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    group = 'verification'
+    reports {
+        xml.required = true  // coveralls plugin depends on xml format report
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ["gen/core/**/*", "org/omegat/util/gui/*", "org/omegat/gui/dialogs/*",
+                              "org/omegat/externalfinder/gui/*", "org/omegat/gui/filters2/*", "org/omegat/core/team2/gui/*",
+                              "org/omegat/gui/properties", "org/omegat/gui/exttrans/*", "org/omegat/gui/theme",
+                              "org/omegat/gui/comments/*", "org/omegat/gui/editor/chartable/*",
+                              "org/omegat/gui/segmentation/*", "org/omegat/util/xml/*", "org/omegat/gui/preferences/*",
+                              "org/omegat/**/data/*", "org/omegat/**/datamodels/*"])
+        }))
+    }
+}
+
+// check.dependsOn jacocoTestCoverageVerification
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.test)
+    violationRules {
+        rule {
+            element = 'CLASS'
+            includes = ['org.omegat.core.machinetranslators.*', 'org.omegat.core.dictionaries.*']
+            excludes = ['**.*.1', '**.*.2', '**.*.3',  // ignore inner classes
+                        'org.omegat.core.machinetranslators.MachineTranslators']  // simple plugin reg.
+            limit { minimum = 0.20 }
+        }
+        rule {
+            element = 'PACKAGE'
+            includes = ['org.omegat.filters?.*',
+                        'org.omegat.externalfinder', 'org.omegat.languagetools', 'org.omegat.util',
+                        'org.omegat.core.events', 'org.omegat.core.matching', 'org.omegat.core.search',
+                        'org.omegat.core.segmentation', 'org.omegat.core.spellchecker', 'org.omegat.core.statistics',
+                        'org.omegat.core.tagvalidation', 'org.omegat.core.team2.*']
+            excludes = ['org.omegat.core.team2.gui', 'org.omegat.util.xml.*']
+            limit { minimum = 0.60 }
+        }
+    }
+}

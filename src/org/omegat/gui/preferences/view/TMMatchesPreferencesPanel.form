@@ -34,8 +34,8 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="sortMatchesLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_SORT_KEY" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="OStrings.getString(&quot;EXT_TMX_SORT_KEY&quot;)" type="code"/>
             </Property>
           </Properties>
           <Constraints>
@@ -57,8 +57,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="fuzzyThresholdLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_FUZZY_THRESHOLD_KEY" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="OStrings.getString(&quot;EXT_TMX_FUZZY_THRESHOLD_KEY&quot;)" type="code"/>
             </Property>
           </Properties>
           <Constraints>
@@ -108,16 +108,16 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="tagHandlingLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_DESCRIPTION" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="OStrings.getString(&quot;EXT_TMX_DESCRIPTION&quot;)" type="code"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="displayLevel2Tags">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_SHOW_LEVEL2" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="OStrings.getString(&quot;EXT_TMX_SHOW_LEVEL2&quot;)" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -127,8 +127,8 @@
         <Component class="javax.swing.JCheckBox" name="useSlash">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_USE_XML" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="OStrings.getString(&quot;EXT_TMX_USE_XML&quot;)" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -162,8 +162,8 @@
         <Component class="javax.swing.JCheckBox" name="keepForeignMatches">
           <Properties>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_KEEP_FOREIGN_MATCHES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="OStrings.getString(&quot;EXT_TMX_KEEP_FOREIGN_MATCHES&quot;)" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -182,8 +182,8 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="foreignPenaltyLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_PENALTY_FOR_FOREIGN_MATCHES" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="OStrings.getString(&quot;EXT_TMX_PENALTY_FOR_FOREIGN_MATCHES&quot;)" type="code"/>
                 </Property>
               </Properties>
             </Component>
@@ -220,6 +220,16 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JCheckBox" name="paragraphMatchesFromSegmentedTmxCB">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="OStrings.getString(&quot;PARAGRAPH_MATCH_FROM_SEGMENT_TMX&quot;)" type="code"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+      </AuxValues>
+    </Component>
     <Component class="javax.swing.Box$Filler" name="filler4">
       <Properties>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -245,8 +255,8 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="templateLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_MATCHES_TEMPLATE" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="OStrings.getString(&quot;EXT_TMX_MATCHES_TEMPLATE&quot;)" type="code"/>
             </Property>
           </Properties>
           <Constraints>
@@ -297,8 +307,8 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="variablesLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="EXT_TMX_MATCHES_TEMPLATE_VARIABLES" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="OStrings.getString(&quot;EXT_TMX_MATCHES_TEMPLATE_VARIABLES&quot;)" type="code"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -321,8 +331,8 @@
             </Component>
             <Component class="javax.swing.JButton" name="insertButton">
               <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/omegat/Bundle.properties" key="BUTTON_INSERT" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="OStrings.getString(&quot;BUTTON_INSERT&quot;)" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>

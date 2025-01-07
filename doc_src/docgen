@@ -24,7 +24,7 @@ chmod -R a+rw $TARGET 2&> /dev/null
 
 CMD="$(type -p docker)" || [[ -e $CMD ]] && $CMD info >/dev/null 2>1 || CMD="$(type -p nerdctl)"
 echo select container CLI: $CMD
-$CMD info || false
+$CMD info > /dev/null || false
 
 [[ "$@" =~ (^|[[:space:]])pdf($|[[:space:]]) ]] && TAG=pdfgen || TAG=alpine
 

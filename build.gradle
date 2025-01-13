@@ -12,12 +12,12 @@ plugins {
     id 'org.omegat.mac-conventions'
     id 'org.omegat.linux-conventions'
     id 'org.omegat.jpkg-conventions'
+    id 'org.omegat.publish-conventions'
     id 'application'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
     id 'maven-publish'
     id 'signing'
-    alias(libs.plugins.ssh)
 }
 
 application {
@@ -713,52 +713,8 @@ remotes {
     }
 }
 
-ext.htdocs = '/home/project-web/omegat/htdocs'
-
-ext.publishAtomically = { args ->
-    tasks.register("publish${args.name.capitalize()}", Exec) {
-        description = "Copy ${args.name} to SourceForge web."
-        dependsOn args.sourceTask
-        group = 'omegat release'
-        doLast {
-            ssh.run {
-                session(remotes.sourceforgeWeb) {
-                    def timestamp = new Date().format('yyyyMMddHHmmss')
-                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
-                    def tempDir = "${targetDir}-temp-${timestamp}"
-                    sftp {
-                        cd htdocs
-                        mkdir tempDir
-                    }
-                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
-                    sftp {
-                        cd htdocs
-                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
-                        catch (ignored) {}
-                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
-                        rmdir tempDir
-                    }
-                }
-            }
-        }
-    }
-}
-
 publishAtomically(name: 'manual', sourceTask: webManual)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)
-
-tasks.register('publishVersion') {
-    description = 'Update the version considered current by the version check.'
-    group = 'omegat release'
-    doLast {
-        ssh.run {
-            session(remotes.sourceforgeWeb) {
-                def target = "${htdocs}/Version-${omtFlavor}.properties"
-                put from: file('src/org/omegat/Version.properties'), into: target
-            }
-        }
-    }
-}
 
 tasks.withType(JavaExec).configureEach {
     // Allow setting the max heap size for the run task from the command line, e.g.

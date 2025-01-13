@@ -184,7 +184,3 @@ lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji",
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
-
-[plugins]
-launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
-ssh = {id = "org.hidetake.ssh", version = "2.11.2"}

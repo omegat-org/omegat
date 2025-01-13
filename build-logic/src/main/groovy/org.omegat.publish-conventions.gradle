@@ -1,0 +1,48 @@
+
+plugins {
+    id 'org.hidetake.ssh'
+}
+
+ext.htdocs = '/home/project-web/omegat/htdocs'
+
+ext.publishAtomically = { args ->
+    tasks.register("publish${args.name.capitalize()}", Exec) {
+        description = "Copy ${args.name} to SourceForge web."
+        dependsOn args.sourceTask
+        group = 'omegat release'
+        doLast {
+            ssh.run {
+                session(remotes.sourceforgeWeb) {
+                    def timestamp = new Date().format('yyyyMMddHHmmss')
+                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
+                    def tempDir = "${targetDir}-temp-${timestamp}"
+                    sftp {
+                        cd htdocs
+                        mkdir tempDir
+                    }
+                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
+                    sftp {
+                        cd htdocs
+                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
+                        catch (ignored) {}
+                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
+                        rmdir tempDir
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.register('publishVersion') {
+    description = 'Update the version considered current by the version check.'
+    group = 'omegat release'
+    doLast {
+        ssh.run {
+            session(remotes.sourceforgeWeb) {
+                def target = "${htdocs}/Version-${omtFlavor}.properties"
+                put from: file('src/org/omegat/Version.properties'), into: target
+            }
+        }
+    }
+}

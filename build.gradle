@@ -651,8 +651,6 @@ tasks.register('testAcceptance', Test) {
     dependsOn ':aligner:jar'
 }
 
-ext.mavenStyleVersion = version.replace('_', '-')
-
 publishing {
     publications {
         mavenJava(MavenPublication) { publication ->

@@ -35,8 +35,6 @@ tasks.withType(Wrapper.class).configureEach {
     gradleVersion = "8.12" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
-def omtFlavor = omtVersion.beta.empty ? 'standard' : 'latest'
-
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
 
 // Definition of bundled JRE file names
@@ -514,11 +512,11 @@ processResources {
     }
 }
 
-tasks.getByName("run") {
+tasks.named("run") {
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
 }
 
-tasks.register('debug', JavaExec) {
+tasks.register('runDebugger', JavaExec) {
     description = 'Launch app for debugging.' // Special debug task for NetBeans
     group = 'application'
     mainClass = application.mainClass
@@ -647,7 +645,7 @@ tasks.register('testAcceptance', Test) {
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperties = System.properties
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    dependsOn tasks.findByName('firstStepsEn')
+    dependsOn tasks.named('firstStepsEn')
     dependsOn ':aligner:jar'
 }
 
@@ -705,8 +703,8 @@ signing {
 remotes {
     sourceforgeWeb {
         host = 'web.sourceforge.net'
-        user = findProperty('sourceforgeWebUser')
-        password = findProperty('sourceforgeWebPassword')
+        user = hasProperty('sourceforgeWebUser') ? getProperty('sourceforgeWebUser') : ''
+        password = hasProperty('sourceforgeWebPassword') ? getProperty('sourceforgeWebPassword') : ''
         agent = true
     }
 }

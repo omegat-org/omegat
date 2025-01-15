@@ -1,0 +1,74 @@
+plugins {
+    id 'org.omegat.java-conventions'
+    id 'org.omegat.version-conventions'
+    id 'maven-publish'
+}
+
+ext.makeModuleTask = { args ->
+    def moduleProp = loadProperties(args.prop)
+    def packageName = moduleProp.pacakgeName
+    def module = tasks.register('module', Jar) {
+        archiveFileName.set("${packageName}.${archiveExtension.get()}")
+        destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
+        from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        from sourceSets.main.output
+        manifest {
+            attributes('License': 'GNU Public License version 3 or later',
+                    'Implementation-Version': moduleProp.Version,
+                    'OmegaT-Plugins': moduleProp.Class,
+                    'Plugin-Author': moduleProp.Author,
+                    'Plugin-Version': moduleProp.Version,
+                    'Plugin-Name': moduleProp.Name,
+                    'Plugin-Category': moduleProp.Category,
+                    'Plugin-Description': moduleProp.Description
+            )
+        }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+    assemble.dependsOn module
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) { publication ->
+                groupId = 'org.omegat'
+                artifactId = packageName
+                version = moduleProp.Version
+                from components.java
+
+                pom {
+                    name = moduleProp.Name
+                    description = moduleProp.Description
+                    url = 'https://omegat.org'
+                    scm {
+                        connection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                        developerConnection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                        url = "https://sourceforge.net/p/omegat/code/"
+                    }
+                    licenses {
+                        license {
+                            name = 'The GNU General Public License, Version 3.0'
+                            url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'omegat'
+                            name = 'OmegaT Developers'
+                            email = 'info@omegat.org'
+                        }
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+                credentials(PasswordCredentials) {
+                    username = findProperty('ossrhUsername')
+                    password = findProperty('ossrhPassword')
+                }
+            }
+        }
+    }
+
+}

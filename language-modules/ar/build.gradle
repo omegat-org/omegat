@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.java-conventions'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -31,27 +31,10 @@ dependencies {
     testRuntimeOnly(libs.commons.io)
 }
 
-test {
-    dependsOn jar
-    dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
-}
+makeModuleTask(lang: "ar", prop: file('plugin.properties'))
+jar.finalizedBy tasks.named('module')
 
-jar {
-    archiveFileName.set("omegat-language-ar.${archiveExtension.get()}")
-    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+test {
+    dependsOn tasks.named('module')
+    dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
 }

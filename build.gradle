@@ -263,16 +263,6 @@ dependencies {
     jacocoAggregation project(":machinetranslators:yandex")
 }
 
-test {
-    // Test in headless mode with ./gradlew test -Pheadless
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    // some test case depends on modules from subproject
-    dependsOn subprojects.collect { it.tasks.withType(Jar) }
-}
-
 jar {
     def omtPlugins = loadProperties(file('Plugins.properties'))
     manifest {
@@ -310,19 +300,24 @@ jar {
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
         pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
-    // Don't include extra stuff like version number in JAR name
-    archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
+    archiveFileName.set(omegatJarFilename)
 }
 
-def omegatJarFilename = jar.archiveFileName.get()
-project(":machinetranslators") {jar.enabled = false}
-project(":spellchecker") {jar.enabled = false}
-project(":language-modules") {jar.enabled = false}
 def modulesTask = tasks.register('modules') {
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
     group = 'build'
 }
 assemble.dependsOn modulesTask
+
+test {
+    // Test in headless mode with ./gradlew test -Pheadless
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    // some test case depends on modules from subproject
+    dependsOn modulesTask
+}
 
 distributions {
     main {

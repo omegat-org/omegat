@@ -13,6 +13,13 @@ ext.loadProperties = { propFile ->
     config
 }
 
+// platform detection
+ext {
+    isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+    isWindows11 = isWindows && System.getProperty('os.version').contains('10.0') // Windows 11 has version 10.0.x
+    isArm64 = System.getProperty('os.arch').toLowerCase().contains('aarch64')
+}
+
 ext {
     exePresent = { exe ->
         ["where $exe", "which $exe"].any {

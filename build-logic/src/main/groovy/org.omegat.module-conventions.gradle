@@ -5,7 +5,7 @@ plugins {
 }
 
 ext.makeModuleTask = { moduleProp ->
-    tasks.register('module', Jar) {
+    jar {
         archiveFileName = moduleProp.packageName + '.jar'
         destinationDirectory = rootProject.layout.buildDirectory.dir("modules")
         outputs.file(destinationDirectory.get().file(archiveFileName.get()))
@@ -24,7 +24,6 @@ ext.makeModuleTask = { moduleProp ->
         }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
-    assemble.dependsOn tasks.named('module')
 
     publishing {
         publications {

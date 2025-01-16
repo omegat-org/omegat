@@ -303,12 +303,6 @@ jar {
     archiveFileName.set(omegatJarFilename)
 }
 
-def modulesTask = tasks.register('modules') {
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
-    group = 'build'
-}
-assemble.dependsOn modulesTask
-
 test {
     // Test in headless mode with ./gradlew test -Pheadless
     if (project.hasProperty('headless')) {
@@ -316,7 +310,7 @@ test {
     }
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     // some test case depends on modules from subproject
-    dependsOn modulesTask
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 distributions {
@@ -380,7 +374,7 @@ distributions {
             }
             // system core plugins into modules
             into('modules') {
-                from(subprojects.collect {it.tasks.withType(Jar)})
+                from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
                 from('releases/modules-specific')
             }
             eachFile {

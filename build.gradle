@@ -312,12 +312,17 @@ jar {
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 def omegatJarFilename = jar.archiveFileName.get()
 project(":machinetranslators") {jar.enabled = false}
 project(":spellchecker") {jar.enabled = false}
+project(":language-modules") {jar.enabled = false}
+def modulesTask = tasks.register('modules') {
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    group = 'build'
+}
+assemble.dependsOn modulesTask
 
 distributions {
     main {

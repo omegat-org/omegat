@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.java-conventions'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -33,21 +33,9 @@ dependencies {
     testRuntimeOnly(libs.languagetool.de)
 }
 
-jar {
-    archiveAppendix.set("spellchecker")
-    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+makeModuleTask(loadProperties(file('plugin.properties')))
+
+test {
+    dependsOn project(':language-modules:en').tasks.withType(Jar)
+    dependsOn project(':language-modules:de').tasks.withType(Jar)
 }

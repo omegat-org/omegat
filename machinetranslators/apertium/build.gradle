@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id 'org.omegat.java-conventions'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -24,21 +24,4 @@ dependencies {
     testImplementation(libs.jackson.databind)
 }
 
-jar {
-    archiveAppendix.set("connector")
-    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description,
-                'Automatic-Module-Name': pluginProp.ModuleName
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-}
+makeModuleTask(loadProperties(file('plugin.properties')))

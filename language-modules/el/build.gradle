@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.java-conventions'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -32,28 +32,10 @@ dependencies {
     testImplementation project(":spellchecker:hunspell")
 }
 
+makeModuleTask(loadProperties(file('plugin.properties')))
+
 test {
-    dependsOn tasks.jar
+    dependsOn tasks.withType(Jar)
     dependsOn project(":spellchecker:morfologik").tasks.withType(Jar)
     dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
-}
-
-jar {
-    archiveFileName.set("omegat-language-el.${archiveExtension.get()}")
-    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

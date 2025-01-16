@@ -31,7 +31,7 @@ dependencies {
     testRuntimeOnly(libs.commons.io)
 }
 
-makeModuleTask(lang: "ca", prop: file('plugin.properties'))
+makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn tasks.withType(Jar)

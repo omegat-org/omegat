@@ -4,8 +4,7 @@ plugins {
     id 'maven-publish'
 }
 
-ext.makeModuleTask = { args ->
-    def moduleProp = loadProperties(args.prop)
+ext.makeModuleTask = { moduleProp ->
     tasks.register('module', Jar) {
         archiveFileName = moduleProp.packageName + '.jar'
         destinationDirectory = rootProject.layout.buildDirectory.dir("modules")

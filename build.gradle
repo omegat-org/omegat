@@ -312,6 +312,7 @@ jar {
     }
     // Don't include extra stuff like version number in JAR name
     archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 def omegatJarFilename = jar.archiveFileName.get()

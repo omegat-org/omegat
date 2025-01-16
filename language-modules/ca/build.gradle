@@ -32,9 +32,8 @@ dependencies {
 }
 
 makeModuleTask(lang: "ca", prop: file('plugin.properties'))
-jar.finalizedBy tasks.named('module')
 
 test {
-    dependsOn tasks.named('module')
+    dependsOn tasks.withType(Jar)
     dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
 }

@@ -9,7 +9,7 @@ ext.makeModuleTask = { args ->
     tasks.register('module', Jar) {
         archiveFileName = moduleProp.packageName + '.jar'
         destinationDirectory = rootProject.layout.buildDirectory.dir("modules")
-        outputs.file(rootProject.layout.buildDirectory.file("modules/${archiveFileName}"))
+        outputs.file(destinationDirectory.get().file(archiveFileName.get()))
         from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
         from sourceSets.main.output
         manifest {

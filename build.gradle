@@ -480,9 +480,18 @@ makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: '
 makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32, parentTask: 'win')
 
 // Disable .tar distributions for everyone but Linux
-tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }
+tasks.withType(Tar).configureEach {
+    if (!name.contains('linux')) {
+        enabled = false
+    }
+}
+
 // Disable .zip distributions for Linux
-tasks.findAll { it.name =~ /[dD]istZip$/ && it.name.contains('linux') }.each { it.enabled = false }
+tasks.withType(Zip).configureEach {
+    if (name.contains('linux')) {
+        enabled = false
+    }
+}
 
 def provided = findProperty('repoRevision') ?: ''
 def gitArchival = loadProperties(file('.git-archival.properties')).getProperty('node')

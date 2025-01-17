@@ -189,12 +189,11 @@ tasks.register('testAcceptance', Test) {
     description = 'Run Acceptance GUI test'
     group = 'verification'
     javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
     }
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
              "--add-opens", "java.base/java.util=ALL-UNNAMED"])
-    testClassesDirs = sourceSets.testAcceptance.output.classesDirs // FIXME: deprecated in Gradle 9.0
     classpath = sourceSets.testAcceptance.runtimeClasspath
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     dependsOn tasks.named('firstStepsEn')

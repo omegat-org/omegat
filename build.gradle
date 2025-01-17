@@ -250,14 +250,8 @@ dependencies {
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
-    jacocoAggregation project(':aligner')
-    jacocoAggregation project(":machinetranslators:apertium")
-    jacocoAggregation project(":machinetranslators:belazar")
-    jacocoAggregation project(":machinetranslators:deepl")
-    jacocoAggregation project(":machinetranslators:google")
-    jacocoAggregation project(":machinetranslators:ibmwatson")
-    jacocoAggregation project(":machinetranslators:mymemory")
-    jacocoAggregation project(":machinetranslators:yandex")
+    subprojects.findAll { it.getSubprojects().isEmpty()}.collect {jacocoAggregation it}
+
 }
 
 jar {
@@ -455,6 +449,7 @@ def git = file('.git').directory ? providers.exec {commandLine("git", "rev-parse
 def revision = [provided, gitArchival, omtVersion.revision, git, 'unknown'].find {
     !it.empty && it != '@dev@' && it != '$Format:%H$'
 }
+
 processResources {
     /*
      Set the revision number included in version strings. The value is

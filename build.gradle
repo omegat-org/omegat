@@ -6,14 +6,13 @@ plugins {
     id 'org.omegat.document-conventions'
     id 'org.omegat.main-utilities'
     id 'org.omegat.java-conventions'
-    id 'org.omegat.coverage-conventions'
     id 'org.omegat.jaxb-conventions'
     id 'org.omegat.windows-conventions'
     id 'org.omegat.mac-conventions'
     id 'org.omegat.linux-conventions'
     id 'org.omegat.jpkg-conventions'
     id 'org.omegat.publish-conventions'
-    id 'application'
+    id 'org.omegat.verification-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
     id 'maven-publish'
@@ -303,16 +302,6 @@ jar {
     archiveFileName.set(omegatJarFilename)
 }
 
-test {
-    // Test in headless mode with ./gradlew test -Pheadless
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    // some test case depends on modules from subproject
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
-}
-
 distributions {
     main {
         contents {
@@ -485,193 +474,8 @@ processResources {
     }
 }
 
-tasks.named("run") {
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
-}
-
-tasks.register('runDebugger', JavaExec) {
-    description = 'Launch app for debugging.' // Special debug task for NetBeans
-    group = 'application'
-    mainClass = application.mainClass
-    classpath = sourceSets.main.runtimeClasspath
-    jvmArgs(["--illegal-access=warn"])
-    debug = true
-}
-
-tasks.register('runOnJava17', JavaExec) {
-    description = 'Launch app on Java 17'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    mainClass.set application.mainClass
-    classpath = sourceSets.main.runtimeClasspath
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
-    group = 'application'
-}
-
-tasks.register('runOnJava21', JavaExec) {
-    description = 'Launch app on Java 21'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    mainClass.set application.mainClass
-    classpath = sourceSets.main.runtimeClasspath
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
-    group = 'application'
-}
-
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
-
-tasks.register('testIntegration', JavaExec) {
-    description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    group = 'omegat workflow'
-    mainClass = 'org.omegat.core.data.TestTeamIntegration'
-    classpath = sourceSets.testIntegration.runtimeClasspath
-    systemProperties = System.properties
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-}
-
-tasks.register('testOnJava17', Test) {
-    description = 'Run test cases on Java 17'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    systemProperties = System.properties
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    group = 'verification'
-}
-
-tasks.register('testOnJava21', Test) {
-    description = 'Run test cases on Java 21'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    systemProperties = System.properties
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    group = 'verification'
-}
-
-project.ext.xvfbPid = ""
-
-def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
-    outputs.upToDateWhen { return false } // always run
-    doLast {
-        if (!project.ext.xvfbPid.isEmpty()) {
-            println "Stopping virtual X server..."
-            def outputStream = new ByteArrayOutputStream()
-            def injected = project.objects.newInstance(InjectedExecOps)
-            def pid = project.ext.xvfbPid
-            injected.execOps.exec {
-                commandLine 'sh', '-c', "kill ${pid} &"
-                standardOutput = outputStream
-                errorOutput = outputStream
-            }
-            project.ext.xfvbPid = ""
-        }
-    }
-}
-
-tasks.register('testAcceptance', Test) {
-    def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
-    if (!display.isEmpty()) {
-        def lockFile = new File("/tmp/.X${display}-lock")
-        if (!lockFile.exists()) {
-            def outputStream = new ByteArrayOutputStream()
-            def injected = project.objects.newInstance(InjectedExecOps)
-            def res = injected.execOps.exec {
-                commandLine 'sh', '-c', "Xvfb :${display} -screen 0 1280x1024x24 >>/dev/null 2>&1 & echo \$!"
-                standardOutput = outputStream
-            }.exitValue
-            if (res == 0) {
-                def xvfbPid = outputStream.toString().trim()
-                environment 'DISPLAY', ":${display}"
-                println "Virtual X server is started with DISPLAY :${display} and PID: ${xvfbPid}"
-            }
-        }
-    }
-    finalizedBy testAcceptanceFinally
-
-    description = 'Run Acceptance GUI test'
-    group = 'verification'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
-             "--add-opens", "java.base/java.util=ALL-UNNAMED"])
-    testClassesDirs = sourceSets.testAcceptance.output.classesDirs
-    classpath = sourceSets.testAcceptance.runtimeClasspath
-    systemProperties = System.properties
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    dependsOn tasks.named('firstStepsEn')
-    dependsOn ':aligner:jar'
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) { publication ->
-            groupId = 'org.omegat'
-            artifactId = 'omegat'
-            version = mavenStyleVersion
-            from components.java
-
-            pom {
-                name = 'OmegaT'
-                description = distDescription
-                url = 'https://omegat.org'
-                scm {
-                    connection = "scm:git:https://git.code.sf.net/p/omegat/code"
-                    developerConnection = "scm:git:https://git.code.sf.net/p/omegat/code"
-                    url = "https://sourceforge.net/p/omegat/code/"
-                }
-                licenses {
-                    license {
-                        name = 'The GNU General Public License, Version 3.0'
-                        url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'omegat'
-                        name = 'OmegaT Developers'
-                        email = 'info@omegat.org'
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials(PasswordCredentials) {
-                username = findProperty('ossrhUsername')
-                password = findProperty('ossrhPassword')
-            }
-        }
-    }
-}
-
-signing {
-    sign publishing.publications.mavenJava
-    if (!findProperty("signing.keyId")) {
-        useGpgCmd()
-    }
-}
 
 remotes {
     sourceforgeWeb {
@@ -681,15 +485,5 @@ remotes {
         agent = true
     }
 }
-
 publishAtomically(name: 'manual', sourceTask: webManual)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)
-
-tasks.withType(JavaExec).configureEach {
-    // Allow setting the max heap size for the run task from the command line, e.g.
-    // `gradle -PrunMaxHeapSize=1024M run`
-    maxHeapSize = findProperty('runMaxHeapSize')
-    // Ask modules to be up-to-date before run task executed
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
-    dependsOn tasks.named('firstSteps')
-}

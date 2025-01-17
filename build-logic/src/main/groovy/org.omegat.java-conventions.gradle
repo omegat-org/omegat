@@ -1,5 +1,3 @@
-import com.github.spotbugs.snom.Confidence
-
 plugins {
     id 'java-library'
     id 'eclipse'
@@ -14,7 +12,7 @@ plugins {
 def localPropsFile = file('local.properties')
 
 // Define target Java version to compatible.
-def javaVersion = 11;
+def javaVersion = 11
 
 // Flag to detect CI/CD environment
 def envIsCi = project.hasProperty('envIsCi') as Boolean
@@ -75,7 +73,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 spotbugs {
-    reportLevel = Confidence.valueOf('HIGH')
+    reportLevel = com.github.spotbugs.snom.Confidence.valueOf('HIGH')
 }
 
 tasks.register('spotbugsMainReport') {

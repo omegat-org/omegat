@@ -8,14 +8,23 @@ jacoco {
     toolVersion = "0.8.12"
 }
 
-test {
-    // Test in headless mode with ./gradlew test -Pheadless
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
+sourceSets {
+    testAcceptance {
+        java {
+            srcDir 'test-acceptance/src'
+        }
     }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    // some test case depends on modules from subproject
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    testIntegration {
+        java {
+            srcDir 'test-integration/src'
+        }
+    }
+}
+
+configurations {
+    testIntegrationImplementation.extendsFrom implementation
+    testAcceptanceImplementation.extendsFrom testImplementation
+    testAcceptanceRuntime.extendsFrom testRuntime
 }
 
 tasks.jacocoTestReport {
@@ -108,7 +117,6 @@ tasks.register('testIntegration', JavaExec) {
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
-    systemProperties = System.properties
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
@@ -118,7 +126,6 @@ tasks.register('testOnJava17', Test) {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
     }
-    systemProperties = System.properties
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
@@ -132,7 +139,6 @@ tasks.register('testOnJava21', Test) {
         languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
     }
-    systemProperties = System.properties
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
@@ -188,9 +194,8 @@ tasks.register('testAcceptance', Test) {
     }
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
              "--add-opens", "java.base/java.util=ALL-UNNAMED"])
-    testClassesDirs = sourceSets.testAcceptance.output.classesDirs
+    testClassesDirs = sourceSets.testAcceptance.output.classesDirs // FIXME: deprecated in Gradle 9.0
     classpath = sourceSets.testAcceptance.runtimeClasspath
-    systemProperties = System.properties
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     dependsOn tasks.named('firstStepsEn')
     dependsOn ':aligner:jar'

@@ -75,26 +75,12 @@ sourceSets {
             srcDir 'test/fixtures'
         }
     }
-    testAcceptance {
-        java {
-            srcDir 'test-acceptance/src'
-        }
-    }
-    testIntegration {
-        java {
-            srcDir 'test-integration/src'
-        }
-    }
 }
 
 configurations {
     all
     [testRuntime, testCompile]*.exclude group: 'org.languagetool', module: 'language-all'
-    testIntegrationImplementation.extendsFrom implementation
-    testAcceptanceImplementation.extendsFrom testImplementation
-    testAcceptanceRuntime.extendsFrom testRuntime
 }
-
 
 dependencies {
     // Libs are provided in the "source" distribution only
@@ -292,6 +278,11 @@ jar {
         pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
     archiveFileName.set(omegatJarFilename)
+}
+
+test {
+    // some test case depends on modules from subproject
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 distributions {

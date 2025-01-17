@@ -48,6 +48,11 @@ if (!(isWindows11 && isArm64)) {
 tasks.named("test", Test) {
     useJUnit()
     workingDir project.rootProject.projectDir
+    // Test in headless mode with ./gradlew test -Pheadless
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
 }
 
 javadoc {

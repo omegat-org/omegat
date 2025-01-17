@@ -48,6 +48,39 @@ tasks.register('genMac') {
     }
 }
 
+ext.makeHunspellSignTask = {
+    def hunspellJar = configurations.runtimeClasspath.files.find {
+        it.name.startsWith('hunspell')
+    }
+    tasks.register('hunspellJarSignedContents', Sync) {
+        onlyIf {
+            // Set this in e.g. local.properties
+            conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],
+                    [exePresent('codesign'), 'codesign command is not present in system.'])
+        }
+        from zipTree(hunspellJar)
+
+        destinationDir = file(layout.buildDirectory.file("hunspell"))
+        doLast {
+            def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
+            def injected = project.objects.newInstance(InjectedExecOps)
+            injected.execOps.exec {
+                commandLine('codesign', '--deep', '--force',
+                        '--sign', project.property('macCodesignIdentity'),
+                        '--timestamp',
+                        '--options', 'runtime',
+                        '--entitlements', file('release/mac-specific/java.entitlements'),
+                        *dylibs.toList())
+            }
+        }
+    }
+
+    tasks.register('hunspellSignedJar', Jar) {
+        from hunspellJarSignedContents.outputs
+        archiveFileName.set(hunspellJar.name)
+    }
+}
+
 ext.makeMacTask = { args ->
     def installTaskName = 'install' + args.name.capitalize()  + "Dist"
     def signedInstallTaskName = 'install' + args.name.capitalize() + "SignedDist"

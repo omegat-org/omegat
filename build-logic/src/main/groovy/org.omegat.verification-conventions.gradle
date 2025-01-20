@@ -167,7 +167,7 @@ def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
     }
 }
 
-tasks.register('testAcceptance', Test) {
+tasks.register('testAcceptance', JavaExec) {
     def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
     if (!display.isEmpty()) {
         def lockFile = new File("/tmp/.X${display}-lock")

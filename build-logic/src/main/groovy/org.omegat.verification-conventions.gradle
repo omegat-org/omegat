@@ -155,7 +155,6 @@ def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
         if (!project.ext.xvfbPid.isEmpty()) {
             println "Stopping virtual X server..."
             def outputStream = new ByteArrayOutputStream()
-            def injected = project.objects.newInstance(InjectedExecOps)
             def pid = project.ext.xvfbPid
             injected.execOps.exec {
                 commandLine 'sh', '-c', "kill ${pid} &"
@@ -167,7 +166,7 @@ def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
     }
 }
 
-tasks.register('testAcceptance', JavaExec) {
+tasks.register('testAcceptance', Test) {
     def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
     if (!display.isEmpty()) {
         def lockFile = new File("/tmp/.X${display}-lock")
@@ -189,12 +188,13 @@ tasks.register('testAcceptance', JavaExec) {
     description = 'Run Acceptance GUI test'
     group = 'verification'
     javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
     }
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
              "--add-opens", "java.base/java.util=ALL-UNNAMED"])
     classpath = sourceSets.testAcceptance.runtimeClasspath
+    testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     dependsOn tasks.named('firstStepsEn')
     dependsOn ':aligner:jar'

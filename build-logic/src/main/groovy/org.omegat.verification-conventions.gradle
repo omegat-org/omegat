@@ -173,7 +173,6 @@ tasks.register('testAcceptance', Test) {
         def lockFile = new File("/tmp/.X${display}-lock")
         if (!lockFile.exists()) {
             def outputStream = new ByteArrayOutputStream()
-            def injected = project.objects.newInstance(InjectedExecOps)
             def res = injected.execOps.exec {
                 commandLine 'sh', '-c', "Xvfb :${display} -screen 0 1280x1024x24 >>/dev/null 2>&1 & echo \$!"
                 standardOutput = outputStream

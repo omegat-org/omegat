@@ -63,7 +63,6 @@ ext.makeHunspellSignTask = {
         destinationDir = file(layout.buildDirectory.file("hunspell"))
         doLast {
             def dylibs = fileTree(dir: destinationDir, include: '**/*.dylib').files
-            def injected = project.objects.newInstance(InjectedExecOps)
             injected.execOps.exec {
                 commandLine('codesign', '--deep', '--force',
                         '--sign', project.property('macCodesignIdentity'),
@@ -208,7 +207,6 @@ ext.makeMacTask = { args ->
             delete "$destinationDir/OmegaT.app/Contents/PlugIns/jre.bundle"
         }
         doLast {
-            def injected = project.objects.newInstance(InjectedExecOps)
             injected.execOps.exec {
                 commandLine 'codesign', '--deep', '--force',
                         '--sign', project.property('macCodesignIdentity'),
@@ -238,7 +236,6 @@ ext.makeMacTask = { args ->
         }
         inputs.files signedZipTask.get().archiveFile
         doLast {
-            def injected = project.objects.newInstance(InjectedExecOps)
             injected.execOps.exec {
                 // Assuming setup per instructions at
                 // https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/customizing_the_notarization_workflow#3087734
@@ -260,7 +257,6 @@ ext.makeMacTask = { args ->
             condition(exePresent('xcrun'), 'XCode is not present in system.')
         }
         doFirst {
-            def injected = project.objects.newInstance(InjectedExecOps)
             if (args.name.equals("mac")) {
                 injected.execOps.exec {
                     commandLine 'xcrun', 'stapler', 'staple', "${macInstallSignedDist.destinationDir}/OmegaT.app"

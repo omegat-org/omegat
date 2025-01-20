@@ -5,6 +5,8 @@ interface InjectedExecOps {
     ExecOperations getExecOps()
 }
 
+ext.injected = project.objects.newInstance(InjectedExecOps)
+
 ext.loadProperties = { propFile ->
     def config = new Properties()
     if (propFile.canRead()) {

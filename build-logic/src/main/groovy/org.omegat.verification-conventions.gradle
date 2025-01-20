@@ -1,4 +1,5 @@
 plugins {
+    id 'org.omegat.common-utilities'
     id 'application'
     id 'jacoco'
     id 'jacoco-report-aggregation'

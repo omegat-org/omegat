@@ -1,10 +1,25 @@
 ----------------------------------------------------------------------
  OmegaT 6.0.2
 ----------------------------------------------------------------------
-  0 Enhancement
+  1 Enhancement
   4 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
+
+  Implemented requests:
+
+  - Various small documentation updates
+      - add translation conflict resolution section
+      https://sourceforge.net/p/omegat/documentation/429/
+      - Reference to temporary access tokens
+      https://sourceforge.net/p/omegat/documentation/423/
+      - Add information about language codes, and format reference.
+      https://sourceforge.net/p/omegat/documentation/421/
+      - Segmentation rules file name is now segmentation.srx
+      https://sourceforge.net/p/omegat/documentation/428/
+      - Add warning about creating a project on a network drive
+      https://sourceforge.net/p/omegat/documentation/418/
+      - Remove "temporarily" from Editor > Enter new segment option.
 
   Bug fixes:
 

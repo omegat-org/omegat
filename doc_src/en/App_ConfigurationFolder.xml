@@ -207,10 +207,11 @@
 	</varlistentry>
 
 	<varlistentry id="configuration.folder.extra.contents.segmentation">
-	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.conf</term>
+	  <term id="configuration.folder.extra.contents.segmentation.title">segmentation.srx</term>
 	  <listitem>
-		<para>This parameter file contains customized segmentation
-		parameters. See the <link
+		<para>This parameter file contains customized segmentation parameters in
+		the <ulink url="https://www.gala-global.org/srx-20-april-7-2008">SRX
+		2.0</ulink> format. See the <link
 		linkend="dialogs.preferences.segmentation.setup"
 		endterm="dialogs.preferences.segmentation.setup.title"/> preferences for
 		details.</para>

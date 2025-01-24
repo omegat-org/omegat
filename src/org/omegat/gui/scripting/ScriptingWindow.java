@@ -621,11 +621,10 @@ public class ScriptingWindow {
                 queuedWorkers.add(createScriptWorker(scriptString, scriptItem, bindings));
                 inEventsLoop++;
             } catch (IOException e) {
-                // TODO: Do we really want to handle the exception here, like
-                // this?
-                // This method can be called in instances when the Scripting
-                // Window is not visible, so it might make more sense to let the
-                // caller handle the exception.
+                // Catch loading exception for each script individually:
+                // failure in loading one script should not prevent from loading the other ones.
+                // No matter whenever we are running in scripting window or not,
+                // the error is sent to the log file, not to the scripting window.
                 logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", scriptItem.getFileName());
             }
         }

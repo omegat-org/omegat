@@ -27,6 +27,66 @@
 
     <include file="../../doc_src_paths.xml"/>
 
+    <!-- Check DocBook XSL Stylesheets -->
+    <property name="libxml2.version" value="2.12.4" />
+    <target name="check-docbook-stylesheets">
+        <condition property="docbook.stylesheets.available">
+            <and>
+                <available file="${dbk}/docbook.xsl" />
+                <available file="${dbk}/fo/docbook.xsl" />
+                <greater
+                    arg1="1.79.2"
+                    arg2="1.79.2" />
+            </and>
+        </condition>
+        <fail message="DocBook XSL Stylesheets not found or incorrect version. Please install v1.79.2 or above."
+              unless="docbook.stylesheets.available" />
+    </target>
+
+    <!-- Check DocBook XML -->
+    <target name="check-docbook-xml">
+        <condition property="docbook.xml.available">
+            <available file="../../docbook-utf8.xsl" />
+        </condition>
+        <fail message="DocBook XML 4.5 not found at ${docbook.xml.dir}. Please ensure it is installed."
+              unless="docbook.xml.available" />
+    </target>
+
+    <!-- Check libxml2 -->
+    <target name="check-libxml2">
+        <exec executable="xml2-config" outputproperty="libxml2.detected.version">
+            <arg value="--version" />
+        </exec>
+        <condition property="libxml2.version.correct">
+            <greater arg1="${libxml2.detected.version}" arg2="${libxml2.version}" />
+        </condition>
+        <fail message="libxml2 version ${libxml2.version} or higher is required. Detected: ${libxml2.detected.version}"
+              unless="libxml2.version.correct" />
+    </target>
+
+    <!-- Check Saxon -->
+    <target name="check-saxon">
+        <condition property="saxon.available">
+            <available file="${saxon}" />
+        </condition>
+        <fail message="Saxon 6-5-5 not found in ${saxon}. Please ensure it is installed."
+              unless="saxon.available" />
+    </target>
+
+    <!-- Check XMLmind Web Help Compiler -->
+    <target name="check-whc">
+        <condition property="whc.available">
+            <available file="${whc}" />
+        </condition>
+        <fail message="XMLmind Web Help Compiler 3.5_1 not found at ${whc}. Please ensure it is installed."
+              unless="whc.available" />
+    </target>
+
+    <!-- Composite check for all dependencies -->
+    <target name="check-dependencies" depends="check-docbook-stylesheets, check-docbook-xml, check-libxml2, check-saxon, check-whc">
+        <echo message="All dependencies are satisfied." />
+    </target>
+
     <target name="include">
         <exec executable="xmllint"
               dir="." >

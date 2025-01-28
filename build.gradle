@@ -531,6 +531,12 @@ tasks.register('webManual', Sync) {
     }
 }
 
+providers.exec {
+    ignoreExitValue = true
+    commandLine ["doc_src/detect_build_method"]
+}
+def docMethod = exe.result.get() == 0 ? exe.standardOutput.asText.get().trim() : ''
+
 ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
 manualIndexXmls.each { xml ->
     def lang = xml.parentFile.name
@@ -539,10 +545,7 @@ manualIndexXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
                 excludes: ['xhtml5/*', 'index.xml'])
         outputs.files layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf {project.hasProperty('publish') || !project.hasProperty('forceSkipDocumentBuild')}
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
         doLast {

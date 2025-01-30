@@ -34,9 +34,6 @@ tasks.named('updateDaemonJvm') {
     jvmVersion = JavaVersion.VERSION_17
 }
 
-// Define target Java version to compatible.
-def javaVersion = 11;
-
 // OmegaT distribution package meta data.
 def shortDescription = 'The free translation memory tool'
 def distDescription = 'OmegaT is a free and open source multiplatform Computer Assisted Translation tool with' +
@@ -74,11 +71,7 @@ def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.ta
 def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
 def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
 def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
-
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
+def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
 
 allprojects {
     apply plugin: 'checkstyle'
@@ -89,10 +82,10 @@ allprojects {
     apply plugin: 'jacoco'
 
     java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(javaVersion)
-            vendor = JvmVendorSpec.ADOPTIUM
-        }
+        withSourcesJar()
+        withJavadocJar()
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     javadoc {
@@ -397,6 +390,8 @@ dependencies {
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
+
+    // launch4jBin('org.omegat:launch4j:3.52')
 
     jacocoAggregation project(':aligner')
     jacocoAggregation project(":machinetranslators:apertium")
@@ -1291,7 +1286,7 @@ ext.makeWinTask = { args ->
     tasks.register(prepDistsTaskName, Sync) {
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
+                    [exePresent('iscc') || exePresent('d/ocker') || exePresent('nerdctl'),
                      'InnoSetup or Docker not installed'])
         }
         doFirst {
@@ -1407,6 +1402,7 @@ ext.makeWinTask = { args ->
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
 makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
 makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
+makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE)
 
 // Disable .tar distributions for everyone but Linux
 tasks.findAll { it.name =~ /[dD]istTar$/ && !it.name.contains('linux') }.each { it.enabled = false }

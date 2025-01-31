@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.versions)
     alias(libs.plugins.launch4j)
     alias(libs.plugins.ssh)
+    id("com.google.osdetector") version "1.7.3"
 }
 
 apply from: 'gradle/utils.gradle'
@@ -33,6 +34,11 @@ def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.V
 tasks.named('updateDaemonJvm') {
     jvmVersion = JavaVersion.VERSION_17
 }
+def os = osdetector.os
+def osArch = osdetector.classifier
+
+// Define target Java version to compatible.
+def javaVersion = 11;
 
 // OmegaT distribution package meta data.
 def shortDescription = 'The free translation memory tool'
@@ -391,6 +397,16 @@ dependencies {
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
+
+    if ("linux-aarch_64".equals(osArch)) {
+        launch4jBin 'org.omegat:launch4j:3.52:workdir-linux'
+    } else if ("linux-x86_64".equals(osArch)) {
+        launch4jBin 'org.omegat:launch4j:3.52:workdir-linux64'
+    } else if ("windows".equals(os)) {
+        launch4jBin 'org.omegat:launch4j:3.52:workdir-win32'
+    } else if ("osx".equals(os)) {
+        launch4jBin 'org.omegat:launch4j:3.52:workdir-macosx-x86'
+    }
 
     jacocoAggregation project(':aligner')
     jacocoAggregation project(":machinetranslators:apertium")

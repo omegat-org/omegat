@@ -26,6 +26,7 @@ application {
 tasks.named('updateDaemonJvm') {
     jvmVersion = JavaLanguageVersion.of(17)
 }
+
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
@@ -42,15 +43,19 @@ def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.ta
 def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
 def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
 def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
-
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
+def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
 
 sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
+
+/*    java {
+        withSourcesJar()
+        withJavadocJar()
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+*/
 
 sourceSets {
     main {
@@ -218,6 +223,7 @@ dependencies {
     testImplementation(libs.slf4j.api)
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
+        exclude module: "hunspell"
     }
     testRuntimeOnly(libs.bundles.groovy)
     testRuntimeOnly(libs.nashorn.core)
@@ -419,6 +425,7 @@ tasks.register('win') {
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE', parentTask: 'win')
 makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64', parentTask: 'win')
 makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32, parentTask: 'win')
+makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE, parentTask: 'win')
 
 // Disable .tar distributions for everyone but Linux
 tasks.withType(Tar).configureEach {

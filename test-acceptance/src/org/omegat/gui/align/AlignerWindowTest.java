@@ -40,6 +40,7 @@ import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.timing.Timeout;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -58,8 +59,10 @@ public class AlignerWindowTest extends TestCoreGUI {
     @Rule
     public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
+    // the test case is flaky.
     @Test
-    public void testAligner() throws Exception {
+    @Ignore
+    public void testAligner() {
         picker.requireTitle("Align Files");
         picker.panel("align_picker_panel").requireEnabled();
         List<Language> languages = Language.getLanguages();

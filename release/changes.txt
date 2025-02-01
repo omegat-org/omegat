@@ -1,13 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  53 Enhancement
+  55 Enhancement
   84 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Word selection according to the language of Source/Target by clicking in the editor pane
+  https://sourceforge.net/p/omegat/feature-requests/1770/
+
+  - Spell checker dictionary as a language module
+  https://sourceforge.net/p/omegat/feature-requests/1769/
 
   - HunspellTokenizer to support stopwords
   https://sourceforge.net/p/omegat/feature-requests/1767/

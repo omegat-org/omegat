@@ -1250,6 +1250,7 @@ ext.makeWinTask = { args ->
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
     def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
     def signedWinExe = base.distsDirectory.file("${installerBasename}_Signed.exe")
+    def prepDirTaskName = "${args.name}PrepDir"
     def prepDistsTaskName = "${args.name}Prep"
     def genDistsTaskName = "${args.name}Gen"
     def distsTaskName = "${args.name}"
@@ -1281,7 +1282,13 @@ ext.makeWinTask = { args ->
         )
         return commandArgs
     }
-
+    tasks.register(prepDirTaskName) {
+        doLast {
+            File target = file(layout.buildDirectory.file("innosetup/${args.name}"))
+            target.mkdirs()
+            target.setWritable(true, false)
+        }
+    }
     tasks.register(prepDistsTaskName, Sync) {
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
@@ -1323,6 +1330,7 @@ ext.makeWinTask = { args ->
                 }
             }
         }
+        dependsOn prepDirTaskName
         dependsOn createAllExecutables
     }
 

@@ -391,8 +391,6 @@ dependencies {
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
-    // launch4jBin('org.omegat:launch4j:3.52')
-
     jacocoAggregation project(':aligner')
     jacocoAggregation project(":machinetranslators:apertium")
     jacocoAggregation project(":machinetranslators:belazar")
@@ -1286,7 +1284,7 @@ ext.makeWinTask = { args ->
     tasks.register(prepDistsTaskName, Sync) {
         onlyIf {
             conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('d/ocker') || exePresent('nerdctl'),
+                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
                      'InnoSetup or Docker not installed'])
         }
         doFirst {

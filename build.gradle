@@ -398,14 +398,17 @@ dependencies {
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
-    if ("linux-aarch_64".equals(osArch)) {
-        launch4jBin 'org.omegat:launch4j:3.52:workdir-linux'
-    } else if ("linux-x86_64".equals(osArch)) {
-        launch4jBin 'org.omegat:launch4j:3.52:workdir-linux64'
-    } else if ("windows".equals(os)) {
-        launch4jBin 'org.omegat:launch4j:3.52:workdir-win32'
+    // workdir classifiers are hard-coded in gralde-launch4j plugin
+    if ("windows".equals(os)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-win32'
     } else if ("osx".equals(os)) {
-        launch4jBin 'org.omegat:launch4j:3.52:workdir-macosx-x86'
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-mac'
+    } else if ("linux-x86_64".equals(osArch)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-linux64'
+    } else if ("linux-aarch_64".equals(osArch)) {
+        // gradle-launch4j plugin use the classifier
+        // for architectures other than x86_64 on linux
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
     }
 
     jacocoAggregation project(':aligner')

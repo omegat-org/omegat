@@ -34,8 +34,13 @@ repositories {
     mavenLocal()
 }
 
-if (!(isWindows11 && isArm64)) {
-    java {
+java {
+    withSourcesJar()
+    withJavadocJar()
+    if (isWindows11 && isArm64) {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    } else {
         toolchain {
             languageVersion = JavaLanguageVersion.of(javaVersion)
             vendor = JvmVendorSpec.ADOPTIUM

@@ -6,7 +6,25 @@ parameters:
 
 steps:
   - task: Bash@3
-    displayName: 📂 SCP upload to sourceforge file management
+    displayName: install lftp
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: |
+        apt-get update
+        apt-get install -y lftp
+  - task: Bash@3
+    displayName: "Disable strict host key checking"
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: |
+         mkdir -p ~/.ssh
+         echo "StrictHostKeyChecking no" >> ~/.ssh/config
+         echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+         chmod 600 ~/.ssh/config
+  - task: Bash@3
+    displayName: 📂upload to sourceforge file management via SCP/SFTP
     condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
@@ -16,5 +34,10 @@ steps:
         ls -l $srcdir/*        
         dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir
+        lftp -u "$(SOURCEFORGE_FILE_USER),$(SOURCEFORGE_FILE_PASS)" sftp://frs.sourceforge.net <<__EOF__
+        mkdir -p $destdir
+        lcd $srcdir
+        cd $destdir
+        mirror -R --verbose
+        bye
+        __EOF__

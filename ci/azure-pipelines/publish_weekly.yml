@@ -11,18 +11,18 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        apt-get update
-        apt-get install -y lftp
+        sudo apt-get update
+        sudo apt-get install -y lftp
   - task: Bash@3
     displayName: "Disable strict host key checking"
     condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |
-         mkdir -p ~/.ssh
-         echo "StrictHostKeyChecking no" >> ~/.ssh/config
-         echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-         chmod 600 ~/.ssh/config
+        mkdir -p ~/.ssh
+        echo "StrictHostKeyChecking no" >> ~/.ssh/config
+        echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+        chmod 600 ~/.ssh/config
   - task: Bash@3
     displayName: 📂upload to sourceforge file management via SCP/SFTP
     condition: ${{ parameters.condition }}

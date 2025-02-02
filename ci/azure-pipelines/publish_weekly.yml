@@ -31,13 +31,8 @@ steps:
       script: |
         echo "Push OmegaT ${{ parameters.omegatVersion }} files to SourceForge file manager"
         srcdir=$(system.defaultworkingdirectory)/build/distributions/
-        ls -l $srcdir/*        
-        dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
+        ls -l $srcdir/*
+        dest=sftp://$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
-        lftp -u "$(SOURCEFORGE_FILE_USER),$(SOURCEFORGE_FILE_PASS)" sftp://frs.sourceforge.net <<__EOF__
-        mkdir -p $destdir
-        lcd $srcdir
-        cd $destdir
-        mirror -R --verbose
-        bye
-        __EOF__
+        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -R -v ; bye"
+        env LFTP_PASSWORD=$(SOURCEFORGE_FILE_PASS) lftp -e "$cmd" --env-password $dest

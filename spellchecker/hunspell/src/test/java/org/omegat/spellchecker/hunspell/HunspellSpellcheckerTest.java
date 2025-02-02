@@ -153,7 +153,7 @@ public class HunspellSpellcheckerTest {
 
     }
 
-    static class HunSpellCheckerMock extends HunSpellChecker {
+    public static class HunSpellCheckerMock extends HunSpellChecker {
         private int counter = 0;
         public HunSpellCheckerMock() {
             super();

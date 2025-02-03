@@ -34,6 +34,18 @@ tasks.named('updateDaemonJvm') {
     jvmVersion = JavaVersion.VERSION_17
 }
 
+def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
+def execWinDistTask = (exePresent('iscc') || execContainerTasks)
+// Starting from Nov 2022, certification provider force to use HSM to
+// store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
+// standards will require private keys for standard code signing
+// certificates to be stored on hardware certified as FIPS 140 Level 2,
+// Common Criteria EAL 4+, or equivalent.
+// #1179 build/release: Windows binary signature with PKCS#11 HSM
+// https://sourceforge.net/p/omegat/bugs/1179/
+// requires osslsigncode version 2.5 or later.
+def execWinSignTask = ['pkcs11module', 'winCodesignPassword'].every { project.hasProperty(it) } && exePresent('osslsigncode')
+
 // OmegaT distribution package meta data.
 def shortDescription = 'The free translation memory tool'
 def distDescription = 'OmegaT is a free and open source multiplatform Computer Assisted Translation tool with' +
@@ -533,10 +545,7 @@ manualIndexXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
                 excludes: ['xhtml5/*', 'index.xml'])
         outputs.files layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
         doLast {
@@ -551,10 +560,7 @@ manualIndexXmls.each { xml ->
                 excludes: ['xhtml5/*', 'index.xml'])
         outputs.files fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}/"),
                 includes: ['*.html', 'OmegaT.css', 'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
     }
@@ -594,10 +600,7 @@ firstStepsXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'first-steps'
     }
@@ -613,10 +616,7 @@ instantStartXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['InstantStartGuide.xml', '**/InstantGuide*png'])
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'instant-start'
     }
@@ -1250,10 +1250,12 @@ ext.makeWinTask = { args ->
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
     def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
     def signedWinExe = base.distsDirectory.file("${installerBasename}_Signed.exe")
+    def prepDirTaskName = "${args.name}PrepDir"
     def prepDistsTaskName = "${args.name}Prep"
     def genDistsTaskName = "${args.name}Gen"
     def distsTaskName = "${args.name}"
     def signedTaskName = "${args.name}Signed"
+    boolean execWinTasks = execWinDistTask && args.jrePath != null && !args.jrePath.empty
     def signedTaskCommandArgs = { arg2 ->
         def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode').toString()
         def commandArgs = [exe, 'sign']
@@ -1281,13 +1283,15 @@ ext.makeWinTask = { args ->
         )
         return commandArgs
     }
-
-    tasks.register(prepDistsTaskName, Sync) {
-        onlyIf {
-            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
-                     'InnoSetup or Docker not installed'])
+    tasks.register(prepDirTaskName) {
+        doLast {
+            File target = file(layout.buildDirectory.file("innosetup/${args.name}"))
+            target.mkdirs()
+            target.setWritable(true, false)
         }
+    }
+    tasks.register(prepDistsTaskName, Sync) {
+        onlyIf { execWinTasks }
         doFirst {
             delete "$destinationDir/jre"
             delete installerWinExe
@@ -1323,15 +1327,12 @@ ext.makeWinTask = { args ->
                 }
             }
         }
+        dependsOn prepDirTaskName
         dependsOn createAllExecutables
     }
 
     tasks.register(genDistsTaskName, Exec) {
-        onlyIf {
-            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
-                     'InnoSetup or Docker not installed'])
-        }
+        onlyIf { execWinTasks }
         dependsOn prepDistsTaskName
         inputs.files(
                 layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar"),
@@ -1355,11 +1356,7 @@ ext.makeWinTask = { args ->
     tasks.register(distsTaskName, Copy) {
         description = "Create a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        onlyIf {
-            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
-                     'InnoSetup or Docker not installed'])
-        }
+        onlyIf { execWinTasks }
         from layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
         into base.distsDirectory
         outputs.file installerWinExe
@@ -1370,23 +1367,7 @@ ext.makeWinTask = { args ->
         group = 'omegat distribution'
         inputs.file installerWinExe skipWhenEmpty()
         outputs.file signedWinExe
-        // Starting from Nov 2022, certification provider force to use HSM to
-        // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
-        // standards will require private keys for standard code signing
-        // certificates to be stored on hardware certified as FIPS 140 Level 2,
-        // Common Criteria EAL 4+, or equivalent.
-        // #1179 build/release: Windows binary signature with PKCS#11 HSM
-        // https://sourceforge.net/p/omegat/bugs/1179/
-        // requires osslsigncode version 2.5 or later.
-        onlyIf {
-            // Set these in e.g. local.properties
-            def props = ['pkcs11module', 'winCodesignPassword']
-            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
-                    [exePresent('osslsigncode'), 'osslsigncode is not installed'])
-                    // note: container image amake/innosetup has osslsigntool 1.7 which don't work.
-                    // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
-                    // 'neither osslsigncode or docker/nerdctl is not installed'])
-        }
+        onlyIf { execWinSignTask }
         doFirst {
             delete signedWinExe
         }

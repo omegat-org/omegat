@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+## RESULT
+METHOD="container"
+
+## Detect container runtime and cli
+CMD="$(type -p docker)" && $CMD info >/dev/null 2>&1 || CMD="$(type -p nerdctl)"
+if [ "$CMD" == "" ]; then
+  METHOD="ant"
+else
+  $CMD info > /dev/null 2>&1 || METHOD="ant"
+fi
+
+## Detect ant, and dependencies
+if [ "$METHOD" == "ant" ]; then
+  CMD="$(type -p ant)"
+  if [ "$CMD" != "" ]; then
+    $CMD check-dependencies >> /dev/null 2>&1 || METHOD=""
+  fi
+fi
+echo $METHOD

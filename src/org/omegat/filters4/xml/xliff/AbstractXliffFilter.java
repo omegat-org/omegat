@@ -107,6 +107,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
     protected List<XMLEvent> source = new LinkedList<>();
     protected List<XMLEvent> target = null;
     protected List<XMLEvent> note = new LinkedList<>();
+    protected boolean isFinalState;
 
     protected void cleanBuffers() {
         source.clear();
@@ -144,7 +145,7 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
 
     /** Add one unit to OmegaT, or more in case of <mrk mtype="seg"> **/
     protected void registerCurrentTransUnit(String entryId, List<XMLEvent> unitSource,
-            List<XMLEvent> unitTarget, String notePattern) {
+            List<XMLEvent> unitTarget, String notePattern, boolean isFinalState) {
         String src = buildTags(unitSource, false);
         String tra = null;
         if (unitTarget != null && !unitTarget.isEmpty()) {
@@ -180,8 +181,17 @@ abstract class AbstractXliffFilter extends AbstractXmlFilter {
                 }
                 noteStr = subNoteBuf;
             }
-            entryParseCallback.addEntry(entryId, src, tra, false,
-                    noteStr == null ? null : noteStr.toString(), path, this, buildProtectedParts(src));
+            if (isFinalState) {
+                entryParseCallback.addEntryWithProperties(entryId, src, tra, false,
+                    noteStr == null ? new String[] { "LOCKED", "xliff final" } 
+                        : new String[] { "LOCKED", "xliff final", org.omegat.core.data.SegmentProperties.COMMENT, noteStr.toString() },
+                    path, this, buildProtectedParts(src));
+            
+            } else {
+                entryParseCallback.addEntryWithProperties(entryId, src, tra, false,
+                    noteStr == null ? null : new String[] { org.omegat.core.data.SegmentProperties.COMMENT, noteStr.toString() },
+                    path, this, buildProtectedParts(src));
+            }
         }
         if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(entryId, src, tra, false, path, this);

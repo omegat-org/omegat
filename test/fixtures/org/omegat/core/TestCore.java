@@ -690,6 +690,10 @@ public abstract class TestCore {
             public boolean isOrientationAllLtr() {
                 return true;
             }
+            
+            @Override
+            public void unlockSegment() {
+            }
         });
     }
 

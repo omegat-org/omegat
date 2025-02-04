@@ -473,6 +473,10 @@ public class MatchesVarExpansionTest {
         public boolean isOrientationAllLtr() {
             return true;
         }
+            
+        @Override
+        public void unlockSegment() {
+        }        
     };
 
 }

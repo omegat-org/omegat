@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -50,26 +50,8 @@ dependencies {
     testImplementation(libs.commons.io)
 }
 
+makeModuleTask(loadProperties(file('plugin.properties')))
+
 test {
     useJUnit()
-}
-
-jar {
-    archiveFileName.set("omegat-language-ja.${archiveExtension.get()}")
-    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

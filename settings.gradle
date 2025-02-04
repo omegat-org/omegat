@@ -51,5 +51,6 @@ include("machinetranslators:apertium",
         "aligner",
         "theme",
         "spellchecker:hunspell",
+        "spellchecker:lucene",
         "spellchecker:morfologik",
         "tipoftheday")

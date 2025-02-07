@@ -23,6 +23,9 @@
   - pt-BR bundle typos
   https://sourceforge.net/p/omegat/bugs/1282/
 
+  - macOS notarization fails with junixsocket libraries
+  https://sourceforge.net/p/omegat/bugs/1283/
+
 ----------------------------------------------------------------------
  OmegaT 6.0.1 (2024-08-17)
 ----------------------------------------------------------------------

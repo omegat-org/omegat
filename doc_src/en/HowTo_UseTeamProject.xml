@@ -22,11 +22,6 @@
   endterm="dialog.preferences.team.title.repository.credentials.title"/>
   preferences.</para>
 
-  <para>Since synchronization takes place by default every three minutes, 
-  project members will sometime translate or modify a segment that has already
-  been translated by another member but not synchronized yet. When that happens,
-  members have to select the appropriate translation.</para>
-
   <para>Members can take turns translating and reviewing the files. The Search
   function allows them to filter the Editor pane on contents translated by a
   given person, or on contents translated after or before a given time,
@@ -78,6 +73,11 @@
 		  endterm="dialog.preferences.team.title.repository.credentials.title"/>
 		  preferences for details.</para>
 
+		  <para>To enhance security, some servers require temporary access
+		  tokens for access from external processes instead of a password. If
+		  your password does not seem to work, make sure that you check the
+		  server documentation.</para>
+		  
 		  <para>If the server uses SSH authentication, make sure you update your
 		  SSH configuration to include that server before attempting to download
 		  the project, otherwise you will get an authentication error and the
@@ -118,9 +118,68 @@
         endterm="dialog.preferences.saving.and.output.interval.title"
         linkend="dialog.preferences.saving.and.output.interval"/>
         preference.</para>
+
+        <warning>
+          <para>Since synchronization does not take place at the same time for
+          each member, there will be cases when a segment has a local
+          translation but a different translation has already been synchronized
+          for sharing. When synchronization time comes, the local version will
+          be matched against the modified version and OmegaT will ask the author
+          of the local version to make a choice to solve that translation
+          conflict.</para>
+        </warning>
       </listitem>
     </varlistentry>
 
+    <varlistentry>
+      <term>Solving translation conflicts</term>
+
+      <listitem>
+        <para>When OmegaT cannot automatically solve a difference between a
+        local translation and the remote memory, it displays a
+        <guilabel>Merge</guilabel> dialog.</para>
+
+        <para>The dialog offers the choice between three versions of the
+        translated segment:
+        <variablelist>
+          <varlistentry>
+            <term><guilabel>Mine</guilabel></term>
+            <listitem><para>This is “my” local version, not yet sent to the
+            server for sharing.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>Server (original)</guilabel></term>
+            <listitem><para>This is the “base” version from which various
+            versions were created.</para></listitem>
+          </varlistentry>
+          <varlistentry>
+            <term><guilabel>Server (updated)</guilabel></term>
+            <listitem><para>This is the version that was shared with other
+            members while I was working.</para></listitem>
+          </varlistentry>
+        </variablelist>
+        </para>
+
+        <para>It is possible to select the appropriate translations one by one
+        by clicking on them for each displayed segment. It is also possible to
+        select “all” the translations of a given version.</para>
+
+        <para><guibutton>List View</guibutton> and <guibutton>Detail
+        View</guibutton> offer alternative views of a segment either hiding or
+        displaying various segment properties.</para>
+
+        <para>Once the translations have been selected, clicking on
+        <guibutton>Done</guibutton> will save the selected translations to the
+        server for sharing with other team members.</para>
+
+        <note>
+          <para>To reduce the chances of having translation conflicts, make sure
+          that team members work on different parts of a translation at any
+          given time.</para>
+        </note>
+      </listitem>
+    </varlistentry>
+    
     <varlistentry>
       <term>Team project configuration</term>
 

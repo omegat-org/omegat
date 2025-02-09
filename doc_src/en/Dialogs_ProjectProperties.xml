@@ -25,12 +25,17 @@
     <para>Select the source and target languages from the drop-down list,
     or enter them manually.</para>
 
-	<para>OmegaT provides a convenient short list of two-letter language
-	codes, but you can type any code that conforms to <ulink
-	url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>
-	(including the three-letter language codes) into the appropriate
-	field.</para>
-	
+	<para>OmegaT provides a convenient short list of two-letter language codes,
+	but you can type any code into the appropriate field.</para>
+
+	<warning>
+	  <para>OmegaT does not check the validity of the language codes that you
+	  enter. Make sure that the two language codes are
+	  <emphasis>different</emphasis>, that they are appropriate for your use
+	  of OmegaT, and that all other locations requiring a language code
+	  match the codes you assign here.</para>
+	</warning>
+
 	<para>Language codes are used in various places in OmegaT to:</para>
 	
 	<itemizedlist>
@@ -58,16 +63,21 @@
 		endterm="dialog.preferences.languagetool.plugin.title"/>
 		preferences,</para>
 	  </listitem>
+
+	  <listitem>
+		<para>specify the languages used in the TMX files that are created by
+		the project (to be compliant, a TMX must use <ulink
+		url="https://www.ietf.org/rfc/rfc3066.txt">RFC 3066</ulink> language
+		codes),</para>
+	  </listitem>
+
 	</itemizedlist>
 
 	  <para>and so on.</para>
 
 	<warning>
-	  <para>Make sure you enter the correct language codes and that
-	  all other locations requiring such a code match the one you
-	  assign here exactly. Functions that depend on a language either
-	  fail or produce incorrect results if there is a mismatch between
-	  the language codes.</para>
+	  <para>Functions that depend on a language either fail or produce incorrect
+	  results if there is a mismatch between the language codes.</para>
 	</warning>
 
 	  

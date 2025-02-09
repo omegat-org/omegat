@@ -869,8 +869,8 @@
 		source text</option></term>
 
 		<listitem>
-		  <para>Use this option temporarily for parts of the translation that do
-		  not require much transformation.</para>
+		  <para>Use this option for parts of the translation that do not require
+		  much transformation.</para>
 		</listitem>
 	  </varlistentry>
 

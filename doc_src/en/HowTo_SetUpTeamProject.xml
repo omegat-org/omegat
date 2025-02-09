@@ -227,7 +227,7 @@
 
 		<para>If they do not match, make sure the
 		<filename>filters.xml</filename> and
-		<filename>segmentation.conf</filename> files are properly shared.</para>
+		<filename>segmentation.srx</filename> files are properly shared.</para>
 	  </listitem>
 
 	  <listitem id="how.to.setup.team.project.download.if.needed">

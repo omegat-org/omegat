@@ -157,7 +157,8 @@
 		</thead>
 		<tbody>
 		  <row>
-			<entry>Exception rule, box unchecked, higher in the list</entry>
+			<entry>Exception rule, <guilabel>Break</guilabel> box unchecked,
+			higher in the list</entry>
 			<entry>Do not segment after Ms.</entry>
 			<entry align="center">Ms\.</entry>
 			<entry align="center">\s</entry>
@@ -165,7 +166,8 @@
 			whitespace.</entry>
 		  </row>
 		  <row>
-			<entry>Exception rule, box unchecked, higher in the list</entry>
+			<entry>Exception rule, <guilabel>Break</guilabel> box unchecked,
+			higher in the list</entry>
 			<entry>Excel cells with lines breaks that do not represent
 			segments</entry>
 			<entry align="center">\n</entry>
@@ -173,7 +175,8 @@
 			<entry>Line break, followed by anything.</entry>
 		  </row>
 		  <row>
-			<entry>Break rule, box checked, lower in the list</entry>
+			<entry>Break rule, <guilabel>Break</guilabel> box checked, lower in
+			the list</entry>
 			<entry>Start a new segment after a period followed by a
 			space, tab, or other whitespace.</entry>
 			<entry align="center">\.</entry>
@@ -181,7 +184,8 @@
 			<entry>A period followed by a whitespace</entry>
 		  </row>
 		  <row>
-			<entry>Break rule, box checked, lower in the list</entry>
+			<entry>Break rule, <guilabel>Break</guilabel> box checked, lower in
+			the list</entry>
 			<entry>Start a new segment after “。” (Japanese period).</entry>
 			<entry align="center">。</entry>
 			<entry align="center"/>

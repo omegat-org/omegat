@@ -1,10 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 6.0.2
 ----------------------------------------------------------------------
-  0 Enhancement
+  1 Enhancement
   5 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
+
+  Implemented request:
+
+  - Change the "break/exception" checkbox label
+  https://sourceforge.net/p/omegat/feature-requests/484/
 
   Bug fixes:
 

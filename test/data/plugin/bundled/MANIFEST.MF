@@ -59,8 +59,8 @@ Class-Path: lib/vldocking-3.0.5.jar lib/slf4j-jdk14-1.7.32.jar lib/org.e
  ib/morfologik-polish-2.0.0.jar lib/morfologik-stemming-2.1.0.jar lib/mo
  rfologik-fsa-2.1.0.jar lib/hppc-0.7.1.jar lib/annotations-12.0.jar lib/
  lucene-backward-codecs-5.2.1.jar lib/berkeleylm-1.1.2.jar lib/JavaEWAH-
- 1.1.13.jar lib/jzlib-1.1.1.jar lib/junixsocket-native-common-2.4.0.jar 
- lib/junixsocket-common-2.4.0.jar lib/eddsa-0.3.0.jar lib/sequence-libra
+ 1.1.13.jar lib/jzlib-1.1.1.jar lib/junixsocket-native-common-2.10.1.jar 
+ lib/junixsocket-common-2.10.1.jar lib/eddsa-0.3.0.jar lib/sequence-libra
  ry-1.0.4.jar lib/sqljet-1.1.15.jar lib/jsch.agentproxy.svnkit-trilead-s
  sh2-0.0.7.jar lib/trilead-ssh2-1.0.0-build222.jar lib/lz4-java-1.4.1.ja
  r lib/beansbinding-1.2.1.jar lib/diffutils-1.2.1.jar lib/groovy-ant-3.0

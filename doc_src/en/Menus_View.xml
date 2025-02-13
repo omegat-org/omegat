@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
-  <title id="menus.view.title"><guimenu>View</guimenu></title>
+  <title id="menus.view.title">
+  <guimenu>View</guimenu></title>
 
   <para>This menu allows you to select the information you want to OmegaT to
   display.</para>
 
   <para>All the colours indicated in the descriptions can be modified in the
   <link linkend="dialogs.preferences.colours"
-  endterm="dialogs.preferences.colours.title"/> preference.</para>
+		endterm="dialogs.preferences.colours.title"/> preference.</para>
 
   <variablelist>
     <varlistentry id="menus.view.mark.translated.segments">
-      <term
-      id="menus.view.mark.translated.segments.title"><guimenuitem>Highlight
+	  <term
+		  id="menus.view.mark.translated.segments.title">
+		<guimenuitem>Highlight
       Translated Segments</guimenuitem></term>
       <listitem>
         <para>If checked, translated segments are highlighted in yellow.</para>
@@ -21,8 +23,9 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.untranslated.segments">
-      <term
-      id="menus.view.mark.untranslated.segments.title"><guimenuitem>Highlight
+	  <term
+		  id="menus.view.mark.untranslated.segments.title">
+		<guimenuitem>Highlight
       Untranslated Segments</guimenuitem></term>
       <listitem>
         <para>If checked, untranslated segments are highlighted in violet.</para>
@@ -30,8 +33,9 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.paragraph.delimitations">
-      <term
-      id="menus.view.mark.paragraph.delimitations.title"><guimenuitem>Display
+	  <term
+		  id="menus.view.mark.paragraph.delimitations.title">
+		<guimenuitem>Display
       Paragraph Delimitations</guimenuitem></term>
       <listitem>
         <para>If checked, separations between paragraphs in the source document
@@ -44,7 +48,8 @@
     </varlistentry>
 
     <varlistentry id="menus.view.display.source.segments">
-      <term id="menus.view.display.source.segments.title"><guimenuitem>Display
+	  <term id="menus.view.display.source.segments.title">
+		<guimenuitem>Display
       Source Segments</guimenuitem></term>
       <listitem>
         <para>If checked, all the source segments are shown and highlighted
@@ -54,8 +59,9 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.non.unique.segments">
-      <term
-      id="menus.view.mark.non.unique.segments.title"><guimenuitem>Highlight
+	  <term
+		  id="menus.view.mark.non.unique.segments.title">
+		<guimenuitem>Highlight
       Repeated Segments</guimenuitem></term>
       <listitem>
         <para>If checked, repeated segments are highlighted in pale
@@ -64,8 +70,9 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.segments.with.notes">
-      <term
-      id="menus.view.mark.segments.with.notes.title"><guimenuitem>Highlight
+	  <term
+		  id="menus.view.mark.segments.with.notes.title">
+		<guimenuitem>Highlight
       Segments with Notes</guimenuitem></term>
       <listitem>
         <para>If checked, segments with notes are highlighted in cyan. This
@@ -76,7 +83,8 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.non.breakable.space">
-      <term id="menus.view.mark.non.breakable.space.title"><guimenuitem>Display
+	  <term id="menus.view.mark.non.breakable.space.title">
+		<guimenuitem>Display
       Non-Breakable Spaces</guimenuitem></term>
       <listitem>
         <para>If checked, non-breakable spaces are displayed with a gray
@@ -85,7 +93,8 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.white.space">
-      <term id="menus.view.mark.white.space.title"><guimenuitem>Display
+	  <term id="menus.view.mark.white.space.title">
+		<guimenuitem>Display
       Whitespace</guimenuitem></term>
       <listitem>
         <para>If checked, white spaces are displayed as a small
@@ -94,8 +103,9 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.bidirectional.algorithm.control.character">
-      <term
-      id="menus.view.mark.bidirectional.algorithm.control.character.title"><guimenuitem>Display
+	  <term
+		  id="menus.view.mark.bidirectional.algorithm.control.character.title">
+		<guimenuitem>Display
       Bidi Control Characters</guimenuitem></term>
       <listitem>
         <para>This option displays Unicode directional formatting characters. See <ulink
@@ -110,8 +120,9 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.auto.populated.segments">
-      <term
-      id="menus.view.mark.auto.populated.segments.title"><guimenuitem>Highlight
+	  <term
+		  id="menus.view.mark.auto.populated.segments.title">
+		<guimenuitem>Highlight
       Auto-Populated Segments</guimenuitem></term>
       <listitem>
         <para>If checked, segments that have been auto-populated are
@@ -125,7 +136,8 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.glossary.matches">
-      <term id="menus.view.mark.glossary.matches.title"><guimenuitem>Mark
+	  <term id="menus.view.mark.glossary.matches.title">
+		<guimenuitem>Mark
       Glossary Matches</guimenuitem></term>
       <listitem>
         <para>Underlines source terms that have a match in the
@@ -137,7 +149,8 @@
     </varlistentry>
 
     <varlistentry id="menus.view.mark.language.checker">
-      <term id="menus.view.mark.language.checker.title"><guimenuitem>Mark
+	  <term id="menus.view.mark.language.checker.title">
+		<guimenuitem>Mark
       Language Checker Issues</guimenuitem></term>
       <listitem>
         <para>Underlines parts of the target where LanguageTool has found
@@ -148,7 +161,8 @@
     </varlistentry>
 	
     <varlistentry id="menus.view.aggressive.font.fallback">
-      <term id="menus.view.aggressive.font.fallback.title"><guimenuitem>Use
+	  <term id="menus.view.aggressive.font.fallback.title">
+		<guimenuitem>Use
       Aggressive Font Fallback</guimenuitem></term>
       <listitem>
         <para>Check this option if OmegaT does not display certain glyphs
@@ -164,7 +178,8 @@
     </varlistentry>
 
     <varlistentry id="menus.view.modification.info">
-      <term id="menus.view.modification.info.title"><guisubmenu>Display
+	  <term id="menus.view.modification.info.title">
+		<guisubmenu>Display
       Modification Info</guisubmenu></term>
       <listitem>
         <para>Displays the time and the author of the last change made to a
@@ -182,7 +197,8 @@
     </varlistentry>
 	
 	<varlistentry id="menus.view.restore.main.window">
-      <term id="menus.view.restore.main.window.title"><guimenuitem>Restore OmegaT
+	  <term id="menus.view.restore.main.window.title">
+		<guimenuitem>Restore OmegaT
       Window</guimenuitem></term>
       <listitem>
         <para>Restores the OmegaT window layout to its default

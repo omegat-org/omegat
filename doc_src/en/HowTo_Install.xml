@@ -5,23 +5,25 @@
 %manualvariables;
 ]>
 <section id="how.to.installing.omegat">
-  <title id="how.to.installing.omegat.title">Install
+  <title id="how.to.installing.omegat.title">
+    Install
   OmegaT</title>
 
   <para>OmegaT comes in two editions:</para>
 
   <variablelist>
-	<varlistentry>
-	  <term>Standard: OmegaT &vernb;</term>
+	<varlistentry id="how.to.installing.omegat.standard">
+	  <term id="how.to.installing.omegat.standard.title">
+      Standard</term>
 	  <listitem>
 		<para>This edition is recommended for everyday use.</para>
 	  </listitem>
 	</varlistentry>
-	<varlistentry>
-	  <term>Developer: OmegaT Weekly</term>
+	<varlistentry id="how.to.installing.omegat.weekly">
+	  <term id="how.to.installing.omegatweekly.title">OmegaT Weekly</term>
 	  <listitem>
 		<para>This is the edition of OmegaT in active development. It is automatically generated every week,
-			and serves as a beta version for testing purposes.</para>
+		and serves as a beta version for testing purposes.</para>
 	  </listitem>
 	</varlistentry>
   </variablelist>
@@ -41,7 +43,7 @@
 
 	<para>Due to licensing considerations, the OmegaT team recommends the Eclipse
 	Temurin Java runtime provided by the &preferedopenjdk;, but any Java 11 compatible runtime environment should work.
-		See <ulink
+	See <ulink
 	url="https://projects.eclipse.org/projects/adoptium.temurin">The Eclipse
 	Temurin™ project</ulink>.</para>
 
@@ -50,7 +52,8 @@
   </note>
 
   <section id="installing.omegat.windows">
-    <title id="installing.omegat.windows.title">On Windows</title>
+	<title id="installing.omegat.windows.title">
+    On Windows</title>
 
     <para>Double-click on the package you downloaded.</para>
 
@@ -60,7 +63,8 @@
   </section>
 
   <section id="installing.omegat.linux.intel">
-    <title id="installing.omegat.linux.intel.title">On Linux</title>
+	<title id="installing.omegat.linux.intel.title">
+    On Linux</title>
 
 	<para>Some Linux distributions offer OmegaT in their package manager. The
 	instructions given here apply to people who download the package from the
@@ -92,7 +96,8 @@
   </section>
 
   <section id="Installing.omegat.macos">
-    <title id="Installing.omegat.macos.title">On macOS</title>
+	<title id="Installing.omegat.macos.title">
+    On macOS</title>
 
     <para>Double click on the package you downloaded to unpack it.  This creates
     a folder called <filename>OmegaT</filename>. The folder contains two files:
@@ -108,12 +113,13 @@
   </section>
 
   <section id="installing.omegat.other.systems">
-    <title id="installing.omegat.other.systems.title">On other platforms</title>
+	<title id="installing.omegat.other.systems.title">
+    On other platforms</title>
 
     <para>This information applies to any system for a Java version
     compatible with &javaversionlong; is available. That includes the platforms
-		described above, as well as platforms for which no specific OmegaT package
-		is provided.</para>
+	described above, as well as platforms for which no specific OmegaT package
+	is provided.</para>
 
     <para>Download the <emphasis>Cross-platform without JRE</emphasis>
     version.</para>
@@ -126,7 +132,8 @@
   </section>
 
   <section id="update.and.delete.omegat">
-	<title id="update.and.delete.omegat.title">Upgrade</title>
+	<title id="update.and.delete.omegat.title">
+    Upgrade</title>
 
 	<para>OmegaT can tell you when a new version is available. See the <link
 	endterm="dialogs.preferences.updates.title"
@@ -146,7 +153,7 @@
 		  <para>OmegaT’s preferences are stored in the configuration folder and
 		  will <emphasis>not</emphasis> be modified by the new version.  See the
 		  <link endterm="configuration.folder.title"
-		  linkend="configuration.folder"/> chapter for details.</para>
+				linkend="configuration.folder"/> chapter for details.</para>
 		</listitem>
 
 		<listitem>
@@ -164,9 +171,9 @@
 		  <filename>Configuration.properties</filename> and
 		  <filename>Info.plist</filename> files for <link
 		  linkend="running.omegat.on.macos">macOS</link> packages) might be
-			overwritten or deleted, so you may want to create a backup before
-			upgrading, if you have been using these files to modify OmegaT’s
-			launch parameters.</para>
+		  overwritten or deleted, so you may want to create a backup before
+		  upgrading, if you have been using these files to modify OmegaT’s
+		  launch parameters.</para>
 		</listitem>
 
 		<listitem>
@@ -179,7 +186,8 @@
 
 	<variablelist>
 	  <varlistentry id="update.and.delete.omegat.over.existing.package">
-		<term id="update.and.delete.omegat.over.existing.package.title">Over an existing version</term>
+		<term id="update.and.delete.omegat.over.existing.package.title">
+		Over an existing version</term>
 
 		<listitem>
 		  <para>To do this, simply select the same installation folder as the
@@ -190,44 +198,47 @@
 		</listitem>
 	  </varlistentry>
 	  
-	<varlistentry id="update.and.delete.omegat.along.existing.package">
-	  <term  id="update.and.delete.omegat.along.existing.package.title">Alongside an existing version</term>
+	  <varlistentry id="update.and.delete.omegat.along.existing.package">
+		<term  id="update.and.delete.omegat.along.existing.package.title">
+		Alongside an existing version</term>
 
-	  <listitem>
-		<para>This will enable you to keep any number of versions side-by-side,
-		which you may wish to do until you feel comfortable with the new
-		version.</para>
+		<listitem>
+		  <para>This will enable you to keep any number of versions side-by-side,
+		  which you may wish to do until you feel comfortable with the new
+		  version.</para>
 
-	  <para>All the parameters located in the OmegaT configuration folder will
-	  be shared unless you specify a different configuration folder with the
-	  <literal>--config-dir=&lt;path&gt;</literal> option on the command
-	  line. See the <link
-	  endterm="launch.with.command.line.omegat.options.title"
-	  linkend="launch.with.command.line.omegat.options"/> section.</para>
+		  <para>All the parameters located in the OmegaT configuration folder will
+		  be shared unless you specify a different configuration folder with the
+		  <literal>--config-dir=&lt;path&gt;</literal> option on the command
+		  line. See the <link
+		  endterm="launch.with.command.line.omegat.options.title"
+		  linkend="launch.with.command.line.omegat.options"/> section.</para>
 
-	  <para>All the parameters located in a <link
-	  linkend="chapter.project.folder">project folder</link> will apply to that
-	  project regardless of which version of OmegaT opens it.</para>
-	  </listitem>
-	</varlistentry>
+		  <para>All the parameters located in a <link
+		  linkend="chapter.project.folder">project folder</link> will apply to that
+		  project regardless of which version of OmegaT opens it.</para>
+		</listitem>
+	  </varlistentry>
 	</variablelist>
   </section>
   
-	<section id="update.and.delete.omegat.delete">
-	  <title id="update.and.delete.omegat.delete.title">Delete OmegaT</title>
+  <section id="update.and.delete.omegat.delete">
+	<title id="update.and.delete.omegat.delete.title">
+    Delete OmegaT</title>
 
-	  <para>Use your operating system’s standard procedure to remove OmegaT.  If
-	  you want to remove OmegaT completely, you will also have to delete the
-	  configuration folder.</para>
+	<para>Use your operating system’s standard procedure to remove OmegaT.  If
+	you want to remove OmegaT completely, you will also have to delete the
+	configuration folder.</para>
 
-	  <para>If you performed a manual installation on Linux, you will have to
-	  manually delete the OmegaT folders in <filename>opt/</filename>, as well
-	  as the symlinks placed in <filename>/usr/local/bin/</filename> by the
-	  installation script.</para>
-	</section>
+	<para>If you performed a manual installation on Linux, you will have to
+	manually delete the OmegaT folders in <filename>opt/</filename>, as well
+	as the symlinks placed in <filename>/usr/local/bin/</filename> by the
+	installation script.</para>
+  </section>
 
   <section id="build.omegat.from.source">
-	<title id="build.omegat.from.source.title">Build OmegaT</title>
+	<title id="build.omegat.from.source.title">
+    Build OmegaT</title>
 
 	<para>The source code for the current version can either be downloaded
 	directly from the OmegaT <ulink url="https://omegat.org/download">download

@@ -2,7 +2,8 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="app.bidi">
-  <title id="app.bidi.title">Directional Formatting Characters</title>
+  <title id="app.bidi.title">
+  Directional Formatting Characters</title>
 
   <para>Bidi control characters are available from <link
   linkend="menus.edit" endterm="menus.edit.title"/><link
@@ -29,7 +30,8 @@
   show a visual indication of their position.</para>
 
   <section id="app.bidi.marks">
-	<title id="app.bidi.marks.title">Marks</title>
+	<title id="app.bidi.marks.title">
+    Marks</title>
 
 	<para>To change the position of a character with weak or neutral
 	directionality (like punctuation symbols), insert an LRM or RLM character
@@ -50,7 +52,8 @@
   </section>
 
   <section id="app.bidi.embeddings">
-	<title id="app.bidi.embeddings.title">Embeddings</title>
+	<title id="app.bidi.embeddings.title">
+    Embeddings</title>
 
 	<para>Embeddings can be used to create a longer section of text (containing
 	several words and spaces) that must flow in the direction opposite that of
@@ -66,8 +69,8 @@
 	  </listitem>
 	  <listitem>
 		<para>To create a
-  right-to-left embedding in a left-to-right segment, insert a
-  right-to-left embedding (RLE) character, type or insert the right-to-left
+		right-to-left embedding in a left-to-right segment, insert a
+		right-to-left embedding (RLE) character, type or insert the right-to-left
 		text, and then insert the PDF character.</para>
 	  </listitem>
 	</itemizedlist>

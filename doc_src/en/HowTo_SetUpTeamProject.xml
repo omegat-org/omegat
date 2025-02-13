@@ -2,7 +2,8 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.setup.team.project">
-  <title id="how.to.setup.team.project.title">Set up a team project</title>
+  <title id="how.to.setup.team.project.title">
+  Set up a team project</title>
 
   <para>Managing a team project calls for some knowledge of either the
   <emphasis>SVN</emphasis> or <emphasis>Git</emphasis> version control system
@@ -15,7 +16,7 @@
   <note>
 	<para>An OmegaT team projects synchronizes the project translation memory
 	<link linkend="project.folder.project.save.tmx"
-	endterm="project.folder.project.save.tmx.title"/> and the project writable
+		  endterm="project.folder.project.save.tmx.title"/> and the project writable
 	glossary <link linkend="project.folder.glossary.txt"
 	endterm="project.folder.glossary.txt.title"/> between the hosting server and
 	all the participating team members, and manages all possible conflicts
@@ -23,15 +24,16 @@
   </note>
 
   <section id="how.to.setup.team.project.prepare.the.repository">
-    <title
-    id="how.to.setup.team.project.prepare.the.repository.title">Preparations</title>
+	<title
+		id="how.to.setup.team.project.prepare.the.repository.title">
+    Preparations</title>
 
 	<para>Here are the steps to set up a team project:</para>
 
 	<orderedlist>
       <listitem id="how.to.setup.team.project.create.empty.repository">
 		<para
-		id="how.to.setup.team.project.create.empty.repository.title">Create an
+			id="how.to.setup.team.project.create.empty.repository.title">Create an
 		empty repository on your VCS hosting server</para>
 
 		<para>This can normally be done through a web interface, a graphical
@@ -90,7 +92,7 @@
 
 			<para>Similarly add any relevant lists of spellchecker files you
 			want to make available to everyone working on the project. See <link
-			linkend="project.folder.omegat.spellcheck">spellchecker files</link>
+			linkend="project.folder.omegat.ignored.words">spellchecker files</link>
 			for details.</para>
 
 			<para>If you are converting an existing project, make sure you
@@ -244,7 +246,8 @@
   </section>
 
   <section id="how.to.setup.team.project.mapping.parameters">
-	<title id="how.to.setup.team.project.mapping.parameters.title">Repository
+	<title id="how.to.setup.team.project.mapping.parameters.title">
+      Repository
 	mappings</title>
 
 	<para>It is possible to map various remote locations to local files via the
@@ -262,8 +265,9 @@
 	use are provided in the next section.</para>
 
 	<variablelist>
-      <varlistentry>
-		<term>repository type</term>
+      <varlistentry id="how.to.setup.team.project.mapping.parameters.repository.type">
+		<term id="how.to.setup.team.project.mapping.parameters.repository.type.title">
+		repository type</term>
 		<listitem>
           <para>This can be either <emphasis>http</emphasis> (which includes
           https), <emphasis>svn</emphasis>, <emphasis>git</emphasis>, or
@@ -271,31 +275,35 @@
 		</listitem>
       </varlistentry>
 
-      <varlistentry>
-		<term>repository url</term>
+      <varlistentry id="how.to.setup.team.project.mapping.parameters.repository.url">
+		<term id="how.to.setup.team.project.mapping.parameters.repository.url.title">
+		repository url</term>
 		<listitem>
           <para>Remote location or folder of the files to translate.</para>
 		</listitem>
       </varlistentry>
 
-      <varlistentry>
-		<term>mapping local</term>
+      <varlistentry id="how.to.setup.team.project.mapping.parameters.mapping.local">
+		<term id="how.to.setup.team.project.mapping.parameters.mapping.local.title">
+		mapping local</term>
 		<listitem>
           <para>Name of the local folder or file, relative to the root of the
           OmegaT project.</para>
 		</listitem>
       </varlistentry>
 
-      <varlistentry>
-		<term>mapping repository</term>
+      <varlistentry id="how.to.setup.team.project.mapping.parameters.mapping.repository">
+		<term id="how.to.setup.team.project.mapping.parameters.mapping.repository.title">
+		mapping repository</term>
 		<listitem>
           <para>Name of the remote folder or file, relative to the repository
           url.</para>
 		</listitem>
       </varlistentry>
 
-      <varlistentry>
-		<term>excludes</term>
+      <varlistentry id="how.to.setup.team.project.mapping.parameters.excludes">
+		<term id="how.to.setup.team.project.mapping.parameters.excludes.title">
+		excludes</term>
 		<listitem>
           <para>Use wildcards (following the Apache Ant style: *, ?, **) to add
           patterns for files that should not be part of the mapping. Use a
@@ -306,8 +314,9 @@
 		</listitem>
       </varlistentry>
 
-      <varlistentry>
-		<term>includes</term>
+      <varlistentry id="how.to.setup.team.project.mapping.parameters.includes">
+		<term id="how.to.setup.team.project.mapping.parameters.includes.title">
+		includes</term>
 		<listitem>
           <para>As above, but for files that should be part of the mapping.
           Since files are included by default unless specifically excluded, this
@@ -322,7 +331,8 @@
   </section>
 
   <section id="how.to.setup.team.project.example.mappings">
-	<title id="how.to.setup.team.project.example.mappings.title">Example
+	<title id="how.to.setup.team.project.example.mappings.title">
+      Example
 	mappings</title>
 
 	<para>Default project mapping:
@@ -347,8 +357,8 @@
 	filters:
 	<programlisting>&lt;repository type="svn" url="https://repo_for_All_OmegaT_team_project_sources"&gt;
 	&lt;mapping local="source/subdir" repository=""&gt;
-	    &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
-    	&lt;includes&gt;readme.bak&lt;/includes&gt;
+		&lt;excludes&gt;**/*.bak&lt;/excludes&gt;
+		&lt;includes&gt;readme.bak&lt;/includes&gt;
 	&lt;/mapping&gt;
 &lt;/repository&gt;</programlisting></para>
 
@@ -401,7 +411,8 @@
 
   </section>
   <section id="how.to.setup.team.project.selective.sharing">
-	<title id="how.to.setup.team.project.selective.sharing.title">Selective
+	<title id="how.to.setup.team.project.selective.sharing.title">
+      Selective
 	sharing</title>
 
 	<para>The above process describes the most common scenario, in which the

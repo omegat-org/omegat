@@ -2,12 +2,14 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
-  <title id="menus.edit.title"><guimenu>Edit</guimenu></title>
+  <title id="menus.edit.title">
+  <guimenu>Edit</guimenu></title>
 
   <para>This menu gives you access to segment edition commands.</para>
 
   <example id="example.undo.last.action">
-	<title id="example.undo.last.action.title">Shortcut description example</title>
+	<title id="example.undo.last.action.title">
+    Shortcut description example</title>
 	<para>On Windows and Linux:
 	<keycombo><keycap>Control</keycap><keycap>Z</keycap></keycombo></para>
 
@@ -20,7 +22,8 @@
 
   <variablelist>
     <varlistentry id="menus.edit.undo.last.action">
-      <term id="menus.edit.undo.last.action.title"><guimenuitem>Undo</guimenuitem>
+	  <term id="menus.edit.undo.last.action.title">
+		<guimenuitem>Undo</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>Z</keycap></keycombo></term>
       <listitem>
         <para>Cancels modifications made to the segment while it is
@@ -29,8 +32,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.redo.last.action">
-      <term id="menus.edit.redo.last.action.title"><guimenuitem>Redo</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
+	  <term id="menus.edit.redo.last.action.title">
+		<guimenuitem>Redo</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>Y</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Reapplies modifications that were cancelled while the segment
@@ -39,8 +43,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.replace.with.match.or.selection">
-      <term id="menus.edit.replace.with.match.or.selection.title"><guimenuitem>Replace With Match or Selection</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
+	  <term id="menus.edit.replace.with.match.or.selection.title">
+		<guimenuitem>Replace With Match or Selection</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Replaces the target segment with the currently selected fuzzy
@@ -57,8 +62,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.match.or.selection">
-      <term id="menus.edit.insert.match.or.selection.title"><guimenuitem>Insert
-      Match or Selection</guimenuitem>
+	  <term id="menus.edit.insert.match.or.selection.title">
+		<guimenuitem>Insert
+		Match or Selection</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>I</keycap></keycombo></term>
       <listitem>
         <para>Inserts the currently selected fuzzy match or the text selected in
@@ -76,8 +82,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.replace.with.source">
-      <term id="menus.edit.replace.with.source.title"><guimenuitem>Replace with Source</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
+	  <term id="menus.edit.replace.with.source.title">
+		<guimenuitem>Replace with Source</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>R</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Replaces the entire target segment with the segment source.</para>
@@ -85,8 +92,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.source">
-      <term id="menus.edit.insert.source.title"><guimenuitem>Insert Source</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
+	  <term id="menus.edit.insert.source.title">
+		<guimenuitem>Insert Source</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>I</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserts the segment source at the cursor position. If a part of
@@ -96,8 +104,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.select.source.text">
-      <term id="menus.edit.select.source.text.title"><guimenuitem>Select Source Text</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
+	  <term id="menus.edit.select.source.text.title">
+		<guimenuitem>Select Source Text</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>A</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Selects the source text.</para>
@@ -113,8 +122,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.replace.with.mt">
-      <term id="menus.edit.replace.with.mt.title"><guimenuitem>Replace with Machine Translation</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
+	  <term id="menus.edit.replace.with.mt.title">
+		<guimenuitem>Replace with Machine Translation</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>M</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Replaces the target segment with the translation provided by the
@@ -135,8 +145,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.missing.source.tag">
-      <term id="menus.edit.insert.missing.source.tag.title"><guimenuitem>Insert Missing Tags</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
+	  <term id="menus.edit.insert.missing.source.tag.title">
+		<guimenuitem>Insert Missing Tags</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserts the remaining missing source tags at the cursor
@@ -145,8 +156,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.insert.next.missing.tag">
-      <term id="menus.edit.insert.next.missing.tag.title"><guimenuitem>Insert Next Missing Tag</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
+	  <term id="menus.edit.insert.next.missing.tag.title">
+		<guimenuitem>Insert Next Missing Tag</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>T</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Inserts the next missing tag at the cursor position.</para>
@@ -154,8 +166,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.export.selection">
-      <term id="menus.edit.export.selection.title"><guimenuitem>Export Selection</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
+	  <term id="menus.edit.export.selection.title">
+		<guimenuitem>Export Selection</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>C</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Exports the current selection to a text file for processing. If no
@@ -171,8 +184,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.create.glossary.entry">
-      <term id="menus.edit.create.glossary.entry.title"><guimenuitem>Create Glossary Entry...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
+	  <term id="menus.edit.create.glossary.entry.title">
+		<guimenuitem>Create Glossary Entry...</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>G</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Allows the user to create an entry in the project writable
@@ -240,8 +254,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.project">
-      <term id="menus.edit.search.project.title"><guimenuitem>Search...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
+	  <term id="menus.edit.search.project.title">
+		<guimenuitem>Search...</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>F</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Opens a new <link linkend="windows.text.search"
@@ -258,8 +273,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.and.replace">
-      <term id="menus.edit.search.and.replace.title"><guimenuitem>Replace...</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
+	  <term id="menus.edit.search.and.replace.title">
+		<guimenuitem>Replace...</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>K</keycap></keycombo>
 	  </term>
       <listitem>
         <para>Opens a new <link linkend="windows.text.replace"
@@ -272,8 +288,9 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.search.dictionaries">
-      <term id="menus.edit.search.dictionaries.title"><guimenuitem>Search Dictionaries</guimenuitem>
-	  <keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
+	  <term id="menus.edit.search.dictionaries.title">
+		<guimenuitem>Search Dictionaries</guimenuitem>
+		<keycombo><keycap>A</keycap><keycap>S</keycap><keycap>D</keycap></keycombo>
 	  </term>
       <listitem>
         <para>If the <link
@@ -285,7 +302,8 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.switch.case">
-      <term id="menus.edit.switch.case.title"><guisubmenu>Switch case to</guisubmenu></term>
+	  <term id="menus.edit.switch.case.title">
+      <guisubmenu>Switch case to</guisubmenu></term>
       <listitem>
         <para>Changes the case of the selected text in the target segment to the
         selected option, or cycles through the options. If no text is selected,
@@ -331,7 +349,8 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.select.match">
-      <term id="menus.edit.select.match.title"><guisubmenu>Select Match</guisubmenu></term>
+	  <term id="menus.edit.select.match.title">
+      <guisubmenu>Select Match</guisubmenu></term>
       <listitem>
 		<para>Selects the previous, next or <varname>n</varname>th fuzzy match
 		displayed in the fuzzy match pane to replace or insert it to the
@@ -378,19 +397,20 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.insert.unicode.control.character">
-      <term id="menus.edit.insert.unicode.control.character.title"><guisubmenu>Insert
+	  <term id="menus.edit.insert.unicode.control.character.title">
+		<guisubmenu>Insert
       Bidi Control Character</guisubmenu></term>
 	  <listitem>
 		<para>Inserts the selected Unicode directional formatting character. See
 		<ulink
-		url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode
+			url="https://www.unicode.org/reports/tr9/#Directional_Formatting_Characters">Unicode
 		Bidirectional Algorithm</ulink> for details.</para>
 
 		<itemizedlist>
 		  <listitem>
 			<para><guimenuitem>Left-to-Right Mark (LRM U+200E)</guimenuitem></para>
 		  </listitem>
-		
+		  
 		  <listitem>
 			<para><guimenuitem>Right-to-Left Mark (RLM U+200F)</guimenuitem></para>
 		  </listitem>
@@ -417,7 +437,8 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.use.as.default.translation">
-      <term id="menus.edit.use.as.default.translation.title"><guimenuitem>Use as Default
+	  <term id="menus.edit.use.as.default.translation.title">
+		<guimenuitem>Use as Default
       Translation</guimenuitem></term>
       <listitem>
 		<para>If several alternative translations are available for the active
@@ -428,8 +449,9 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.create.alternative.translation">
-      <term
-      id="menus.edit.create.alternative.translation.title"><guimenuitem>Create
+	  <term
+		  id="menus.edit.create.alternative.translation.title">
+		<guimenuitem>Create
       Alternative Translation</guimenuitem></term>
       <listitem>
 		<para>Segments that are one and the same segment may, depending on the
@@ -437,14 +459,14 @@
 		not apply, select this menu item and enter the alternative
 		translation.</para>
 		<warning>
-		<para>OmegaT differentiates between identical segments using either
+		  <para>OmegaT differentiates between identical segments using either
 		  an internal identifier provided by the file type, or by referring to
 		  their preceding and following segments. In such cases, alternative
 		  translations relies on the identical segments having different preceding
 		  or following segments. If the identical segments also have identical
 		  preceding and following segments, you will not be able to translate them
 		  differently and make one of them an alternative translation in OmegaT.</para>
-		<para>You can work around this issue by introducing a small change to one
+		  <para>You can work around this issue by introducing a small change to one
 		  of the preceding or following segments in the source file to distinguish
 		  between the various instances of the same preceding or following segment.</para>
 		</warning>
@@ -452,7 +474,8 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.remove.translation">
-      <term id="menus.edit.remove.translation.title"><guimenuitem>Remove
+	  <term id="menus.edit.remove.translation.title">
+		<guimenuitem>Remove
       Translation</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>X</keycap></keycombo></term>
       <listitem>
 		<para>Deletes the current translation and sets the segment as
@@ -461,7 +484,8 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.set.empty.translation">
-      <term id="menus.edit.set.empty.translation.title"><guimenuitem>Set Empty
+	  <term id="menus.edit.set.empty.translation.title">
+		<guimenuitem>Set Empty
       Translation</guimenuitem></term>
       <listitem>
 		<para>Define the translation as empty. The target document contains nothing
@@ -471,8 +495,9 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.register.identical.translation">
-      <term id="menus.edit.register.identical.translation.title"><guimenuitem>Register Identical Translation</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
+	  <term id="menus.edit.register.identical.translation.title">
+		<guimenuitem>Register Identical Translation</guimenuitem>
+		<keycombo><keycap>C</keycap><keycap>S</keycap><keycap>S</keycap></keycombo>
 	  </term>
       <listitem>
 		<para>Use this command to register a translation as identical to the

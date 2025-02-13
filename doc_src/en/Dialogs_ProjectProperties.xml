@@ -2,7 +2,8 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="dialogs.project.properties">
-  <title id="dialogs.project.properties.title"><guilabel>Project
+  <title id="dialogs.project.properties.title">
+    <guilabel>Project
   Properties</guilabel></title>
 
   <para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
@@ -19,8 +20,9 @@
   
 
   <section id="dialogs.project.properties.languages">
-    <title
-    id="dialogs.project.properties.languages.title"><guilabel>Languages</guilabel></title>
+	<title
+		id="dialogs.project.properties.languages.title">
+    <guilabel>Languages</guilabel></title>
 
     <para>Select the source and target languages from the drop-down list,
     or enter them manually.</para>
@@ -49,7 +51,7 @@
 	  <listitem>
 		<para>find spelling mistakes from the dictionaries installed in the
 		<link linkend="dialog.preferences.spellchecker"
-		endterm="dialog.preferences.spellchecker.title"/> preferences,</para>
+			  endterm="dialog.preferences.spellchecker.title"/> preferences,</para>
 	  </listitem>
 
 	  <listitem>
@@ -60,7 +62,7 @@
 	  </listitem>
 	</itemizedlist>
 
-	  <para>and so on.</para>
+	<para>and so on.</para>
 
 	<warning>
 	  <para>Make sure you enter the correct language codes and that
@@ -70,26 +72,28 @@
 	  the language codes.</para>
 	</warning>
 
-	  
-      <para>OmegaT automatically selects the tokenizers that correspond to the
+	
+    <para>OmegaT automatically selects the tokenizers that correspond to the
     source and target languages but you can manually modify those
     settings. Tokenizers allow OmegaT to provide better matches.</para>
   </section>
 
   <section id="dialogs.project.properties.options">
-    <title
-    id="dialogs.project.properties.options.title"><guilabel>Options</guilabel></title>
+	<title
+		id="dialogs.project.properties.options.title">
+    <guilabel>Options</guilabel></title>
 
     <variablelist>
       <varlistentry id="dialogs.project.properties.options.segmentation">
-        <term
-        id="dialogs.project.properties.options.segmentation.title"><option>Sentence-level
+		<term
+			id="dialogs.project.properties.options.segmentation.title">
+		  <option>Sentence-level
         segmenting</option></term>
 
 		<listitem>		  
           <para>Sentence-level segmentation splits paragraphs or other text
           blocks in the source file into segments based on segmentation
-					rules.</para>
+		  rules.</para>
 
 		  <para>Disable this option if you prefer not to further segment the
 		  paragraphs.</para>
@@ -143,22 +147,23 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.local.segmentation">
-        <term
-        id="dialogs.project.properties.local.segmentation.title"><guibutton>Local
+		<term
+			id="dialogs.project.properties.local.segmentation.title">
+		  <guibutton>Local
         Segmentation Rules...</guibutton></term>
 
 		<listitem>
 		  <para>By default, segmentation rules are global and apply to all
 		  projects.</para>
 		  
-			<para>The segmentation rules presented when you open the <link
-			linkend="dialogs.preferences.segmentation.setup"
-			endterm="dialogs.preferences.segmentation.setup.title"/> preferences
-			(using <link linkend="menus.options"
-			endterm="menus.options.title"/><link
-			linkend="menus.options.segmentation"
-			endterm="menus.options.segmentation.title"/>) are the global
-			rules.</para>
+		  <para>The segmentation rules presented when you open the <link
+		  linkend="dialogs.preferences.segmentation.setup"
+		  endterm="dialogs.preferences.segmentation.setup.title"/> preferences
+		  (using <link linkend="menus.options"
+		  endterm="menus.options.title"/><link
+		  linkend="menus.options.segmentation"
+		  endterm="menus.options.segmentation.title"/>) are the global
+		  rules.</para>
 
 		  <para>Use this button to create local rules specific to your
 		  project. Check the <option>Use local segmentation rules</option>
@@ -188,8 +193,9 @@
 	  
 	  
       <varlistentry id="dialogs.project.properties.auto.propagation">
-        <term
-        id="dialogs.project.properties.auto.propagation.title"><option>Auto-propagation
+		<term
+			id="dialogs.project.properties.auto.propagation.title">
+		  <option>Auto-propagation
         of translations</option></term>
 
 		<listitem>
@@ -211,7 +217,8 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.hide.tags">
-        <term id="dialogs.project.properties.hide.tags.title"><option>Hide
+		<term id="dialogs.project.properties.hide.tags.title">
+		  <option>Hide
         tags</option></term>
 
 		<listitem>
@@ -230,27 +237,28 @@
 			this does not normally prevent the translated file from opening, keep the
 			following points in mind when using this function:</para>
 			<itemizedlist>
-				<listitem>
-					<para>You will have to manually apply bold, italics, or other text
-					decorations in the translated file.</para>
-				</listitem>
-				<listitem>
-					<para>If you simply want to reduce the number of tags in a
-					<application>Microsoft Word</application> (2007 and later) document,
-					you can use the <link
-					linkend="windows.scripts.distribution.tagwipe"
-					endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
-					<para>See the <link linkend="windows.scripts"
-						endterm="windows.scripts.title"/> section for details.</para>
-				</listitem>
+			  <listitem>
+				<para>You will have to manually apply bold, italics, or other text
+				decorations in the translated file.</para>
+			  </listitem>
+			  <listitem>
+				<para>If you simply want to reduce the number of tags in a
+				<application>Microsoft Word</application> (2007 and later) document,
+				you can use the <link
+				linkend="windows.scripts.distribution.tagwipe"
+				endterm="windows.scripts.distribution.tagwipe.title"/> script.</para>
+				<para>See the <link linkend="windows.scripts"
+				endterm="windows.scripts.title"/> section for details.</para>
+			  </listitem>
 			</itemizedlist>
-			</note>
-      </listitem>
+		  </note>
+		</listitem>
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.processing.command">
-        <term
-        id="dialogs.project.properties.external.processing.command.title"><option>Local
+		<term
+			id="dialogs.project.properties.external.processing.command.title">
+		  <option>Local
         post-processing commands</option></term>
 
 		<listitem>
@@ -283,7 +291,7 @@
 		  endterm="project.folder.omegat.project.file.title"/> file. Only enable
 		  local post-processing commands if you trust the source of that
 		  file.</para>
-		
+		  
 		  <para>The template variables list gives you access to various project
 		  data and system variables.</para>
 
@@ -305,7 +313,8 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.filters">
-        <term id="dialogs.project.properties.filters.title"><guibutton>Local
+		<term id="dialogs.project.properties.filters.title">
+		  <guibutton>Local
         File Filters...</guibutton></term>
 
         <listitem>
@@ -322,7 +331,7 @@
 		  linkend="project.folder.omegat.filters"
 		  endterm="project.folder.omegat.filters.title"/> file located in its
 		  <link linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder. These settings will supersede the global file filter
+				endterm="project.folder.omegat.folder.title"/> folder. These settings will supersede the global file filter
 		  settings.</para>
 
 		  <note>
@@ -336,8 +345,9 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.repository.mapping">
-        <term
-        id="dialogs.project.properties.repository.mapping.title"><guibutton>Repository
+		<term
+			id="dialogs.project.properties.repository.mapping.title">
+		  <guibutton>Repository
         Mapping...</guibutton></term>
 
         <listitem>
@@ -353,8 +363,9 @@
       </varlistentry>
 
       <varlistentry id="dialogs.project.properties.external.searches">
-        <term
-        id="dialogs.project.properties.external.searches.title"><guibutton>Local
+		<term
+			id="dialogs.project.properties.external.searches.title">
+		  <guibutton>Local
         External Searches</guibutton></term>
 
         <listitem>
@@ -369,9 +380,9 @@
 
 		  <para>The project will store the new set of external searches in the
 		  <link linkend="project.folder.omegat.finder"
-		  endterm="project.folder.omegat.finder.title"/> file located in its
+				endterm="project.folder.omegat.finder.title"/> file located in its
 		  <link linkend="project.folder.omegat.folder"
-		  endterm="project.folder.omegat.folder.title"/> folder. These
+				endterm="project.folder.omegat.folder.title"/> folder. These
 		  settings will supersede the global external searches settings.</para>
 
 		  <para>To delete project specific external searches, click on the
@@ -396,7 +407,8 @@
   </section>
 
   <section id="dialogs.project.properties.file.locations">
-    <title id="dialogs.project.properties.file.locations.title"><guilabel>File
+	<title id="dialogs.project.properties.file.locations.title">
+      <guilabel>File
     locations</guilabel></title>
 
 	<para>An OmegaT translation project consists of a number of resources in
@@ -424,7 +436,8 @@
 	<variablelist>
 	  <varlistentry id="dialogs.project.properties.file.locations.browse">
 		<term
-		id="dialogs.project.properties.file.locations.browse.title"><guibutton>Browse</guibutton></term>
+			id="dialogs.project.properties.file.locations.browse.title">
+		<guibutton>Browse</guibutton></term>
 
 		<listitem>
 		  <para>The <guibutton>Browse</guibutton> button is available for all
@@ -443,7 +456,8 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.source.files">
 		<term
-		id="dialogs.project.properties.file.locations.source.files.title"><option>Source
+			id="dialogs.project.properties.file.locations.source.files.title">
+		  <option>Source
 		files folder</option></term>
 
 		<listitem>
@@ -461,13 +475,14 @@
 		  <variablelist>
 			<varlistentry id="dialogs.project.properties.file.locations.exclusions">
 			  <term
-			  id="dialogs.project.properties.file.locations.exclusions.title"><guibutton>Exclusions...</guibutton></term>
+				  id="dialogs.project.properties.file.locations.exclusions.title">
+			  <guibutton>Exclusions...</guibutton></term>
 
 			  <listitem>
 				<para>Click the <guibutton>Exclusions...</guibutton> button to specify 
 				files or folders that should be ignored by OmegaT. An ignored file
 				or folder is:</para>
-		  
+				
 				<itemizedlist>
 				  <listitem>
 					<para>not displayed in the <link linkend="panes.editor"
@@ -494,7 +509,7 @@
 				a pattern, or edit one either by double-clicking it or selecting it
 				and pressing <keycap>F2</keycap>. Use the
 				<ulink
-				url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache
+					url="https://ant.apache.org/manual/dirtasks.html#patterns">Apache
 				ant syntax</ulink> to define exclusions.</para>
 			  </listitem>
 			</varlistentry>
@@ -504,7 +519,8 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translation.memories">
 		<term
-		id="dialogs.project.properties.file.locations.translation.memories.title"><option>Translation
+			id="dialogs.project.properties.file.locations.translation.memories.title">
+		  <option>Translation
 		memories folder</option></term>
 		<listitem>
 		  <para>This folder contains the files that you want to use as reference
@@ -522,13 +538,14 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.glossaries">
 		<term
-		id="dialogs.project.properties.file.locations.glossaries.title"><option>Glossary
+			id="dialogs.project.properties.file.locations.glossaries.title">
+		  <option>Glossary
 		files folder</option></term>
 
 		<listitem>
 		  <para>This folder contains the files that you want to use as reference
 		  glossaries. OmegaT tries to read all the files at once, and compares
-			their contents to the segment you are translating.</para>
+		  their contents to the segment you are translating.</para>
 
 		  <para>See the <link linkend="project.folder.glossary"
 		  endterm="project.folder.glossary.title"/> section for details.</para>
@@ -543,7 +560,8 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.writable.glossary">
 		<term
-		id="dialogs.project.properties.file.locations.writable.glossary.title"><option>Writable
+			id="dialogs.project.properties.file.locations.writable.glossary.title">
+		  <option>Writable
 		Glossary File</option></term>
 
 		<listitem>
@@ -568,7 +586,8 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.dictionaries">
 		<term
-		id="dialogs.project.properties.file.locations.dictionaries.title"><option>Dictionaries
+			id="dialogs.project.properties.file.locations.dictionaries.title">
+		  <option>Dictionaries
 		folder</option></term>
 
 		<listitem>
@@ -588,7 +607,8 @@
 	  
 	  <varlistentry id="dialogs.project.properties.file.locations.translated.files">
 		<term
-		id="dialogs.project.properties.file.locations.translated.files.title"><option>Translated
+			id="dialogs.project.properties.file.locations.translated.files.title">
+		  <option>Translated
 		files folder</option></term>
 
 		<listitem>
@@ -602,10 +622,10 @@
 		  <para>Segments that have been translated are replaced by their
 		  translation and untranslated segments remain in the source
 		  language.</para>
-		
+		  
 		  <para>The folder structure mirrors that of the
-			<link linkend="project.folder.source"
-		  endterm="project.folder.source.title"/> folder. Files that
+		  <link linkend="project.folder.source"
+				endterm="project.folder.source.title"/> folder. Files that
 		  are not supported by OmegaT’s file filters are copied without
 		  modification.</para>
 
@@ -617,12 +637,13 @@
 
 		  <para>See the <link linkend="project.folder.target"
 		  endterm="project.folder.target.title"/> section for
-		  details.</para></listitem>
+		details.</para></listitem>
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.project.properties.file.locations.exported.tms">
 		<term
-		id="dialogs.project.properties.file.locations.exported.tms.title"><option>Exported
+			id="dialogs.project.properties.file.locations.exported.tms.title">
+		  <option>Exported
 		translation memories folder</option></term>
 
 		<listitem>
@@ -639,9 +660,9 @@
 			endterm="how.to.tm.share.translation.memories.title"/> how-to for
 			details.</para>
 		  </note>
-		
+		  
 		  <para>The TMX files contain only the segments from the files currently
-			stored in the <link linkend="project.folder.source"
+		  stored in the <link linkend="project.folder.source"
 		  endterm="project.folder.source.title"/> folder.</para>
 
 		  <para>Use <link linkend="menus.project.create.translated.documents"
@@ -653,7 +674,8 @@
 		  <variablelist>
 			<varlistentry id="dialogs.project.properties.file.locations.tms.to.export">
 			  <term
-			  id="dialogs.project.properties.file.locations.tms.to.export.title"><option>Translation
+				  id="dialogs.project.properties.file.locations.tms.to.export.title">
+				<option>Translation
 			  memories to export</option></term>
 			  <listitem>
 				<para>This checkbox lets you choose the formats in which you want
@@ -661,27 +683,30 @@
 
 				<para>See the <link linkend="how.to.use.tm"
 				endterm="how.to.use.tm.title"/> how-to for details.</para>
-		
+				
 				<variablelist>
-				  <varlistentry>
-					<term><option>OmegaT</option></term>
+				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.omegat">
+					<term id="dialogs.project.properties.file.locations.tms.to.export.omegat.title">
+					<option>OmegaT</option></term>
 					<listitem>
 					  <para>An “OmegaT” TMX contains the tags created by OmegaT
-						in a form that can only be used properly by an
+					  in a form that can only be used properly by an
 					  OmegaT project.</para>
 					</listitem>
 				  </varlistentry>
-		  
-				  <varlistentry>
-					<term><option>TMX Level 1</option></term>
+				  
+				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.level1">
+					<term id="dialogs.project.properties.file.locations.tms.to.export.level1.title">
+					<option>TMX Level 1</option></term>
 					<listitem>
 					  <para>A “level 1” TMX removes all tag information and contains only
-						textual data.</para>
+					  textual data.</para>
 					</listitem>
 				  </varlistentry>
-				
-				  <varlistentry>
-					<term><option>TMX Level 2</option></term>
+				  
+				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.level2">
+					<term id="dialogs.project.properties.file.locations.tms.to.export.level2.title">
+					<option>TMX Level 2</option></term>
 					<listitem>
 					  <para>A “level 2” TMX contains textual data along with
 					  tags encapsulated in a form compatible with other

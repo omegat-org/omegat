@@ -7,15 +7,17 @@
   <title id="chapter.instant.start.guide.title">Introduction to OmegaT</title>
   
   <section id="introduction.omegat.principles">
-	<title id="introduction.omegat.principles.title">Principles</title>
+	<title id="introduction.omegat.principles.title">
+    Principles</title>
 
     <para>Welcome to OmegaT, a computer-assisted translation (CAT) tool that
     offers great flexibility, performance and robustness, as well as features
     beyond those of commercial offerings, even for beginning translators.</para>
 
 	<section id="introduction.omegat.principles.translation.project">
-      <title
-      id="introduction.omegat.principles.translation.project.title">Translation
+	  <title
+		  id="introduction.omegat.principles.translation.project.title">
+		Translation
       project</title>
 
       <para>An OmegaT translation project consists of a number of resources
@@ -39,8 +41,9 @@
     </section>
 
 	<section id="introduction.omegat.principles.translation.memories">
-      <title
-      id="introduction.omegat.principles.translation.memories.title">Translation
+	  <title
+		  id="introduction.omegat.principles.translation.memories.title">
+		Translation
       memories</title>
 
       <para>Translators do not have to <emphasis>create</emphasis> a translation
@@ -61,8 +64,9 @@
 	</section>
 
 	<section id="introduction.omegat.principles.collaboration">
-      <title
-      id="introduction.omegat.principles.collaboration.title">Collaboration</title>
+	  <title
+		  id="introduction.omegat.principles.collaboration.title">
+      Collaboration</title>
 
       <para>Simple settings enable translators to easily share resources and
       work together on a project.</para>
@@ -78,7 +82,8 @@
 	</section>
 
 	<section id="introduction.omegat.principles.made.for.translators">
-      <title id="introduction.omegat.principles.made.for.translators.title">Made
+	  <title id="introduction.omegat.principles.made.for.translators.title">
+		Made
       for translators</title>
 
 	  <para>OmegaT is designed not only to facilitate the translation process,
@@ -116,7 +121,8 @@
   </section>
 
   <section id="introduction.how.to.use.the.manual">
-	<title id="introduction.how.to.use.the.manual.title">Conventions used in
+	<title id="introduction.how.to.use.the.manual.title">
+      Conventions used in
 	this manual</title>
 	<para>This section presents the conventions used to distinguish the elements
 	of the OmegaT user interface in this manual. They are displayed in a way
@@ -204,7 +210,8 @@
 		  details.</para>
 
 		  <example id="example.introduction.note.on.shortcuts">
-			<title id="example.introduction.note.on.shortcuts.title">Key
+			<title id="example.introduction.note.on.shortcuts.title">
+			  Key
 			modifiers are identified by a single letter.</title>
 
 			<para>On Windows and Linux:
@@ -222,7 +229,8 @@
   </section>
 
   <section id="introduction.create.and.open.new.project">
-    <title id="introduction.create.and.open.new.project.title">Create a new
+	<title id="introduction.create.and.open.new.project.title">
+      Create a new
     project</title>
 
 	<warning>
@@ -307,7 +315,8 @@
   </section>
 
   <section id="introduction.install.spellchecker.dictionary">
-	<title id="introduction.install.spellchecker.dictionary.title">Spellchecking
+	<title id="introduction.install.spellchecker.dictionary.title">
+      Spellchecking
 	dictionaries</title>
 
 	<para>Omegat provides a spellchecking system, but does not come with the
@@ -317,7 +326,7 @@
 	<para>Use the <link linkend="dialog.preferences.spellchecker"
 	endterm="dialog.preferences.spellchecker.title"/> section in the general
 	<link linkend="chapter.dialogs.preferences"
-	endterm="chapter.dialogs.preferences.title"/> dialog to access the
+		  endterm="chapter.dialogs.preferences.title"/> dialog to access the
 	spellchecking preferences.</para>
 
 	<orderedlist>
@@ -347,8 +356,9 @@
 	  <para>OmegaT does not recognize languages automatically, and only uses
 	  a dictionary if its name matches the target language code.</para>
 
-	  <example>
-		<title>Project target language code and spellchecking dictionary
+	  <example id="introduction.install.spellchecker.dictionary.warning">
+		<title id="introduction.install.spellchecker.dictionary.warning.title">
+		  Project target language code and spellchecking dictionary
 		name</title>
 		<para>If the project target language is <emphasis
 		role="bold">fr</emphasis> and the dictionary name is <emphasis
@@ -378,7 +388,8 @@
   </section>
 
   <section id="introduction.manage.your.segments">
-    <title id="introduction.manage.your.segments.title">Manage your
+	<title id="introduction.manage.your.segments.title">
+      Manage your
     segments</title>
 
 	<para>The default setting for a translation project is to create
@@ -430,7 +441,8 @@
   </section>
 
   <section id="introduction.make.it.look.good">
-	<title id="introduction.make.it.look.good.title">Make it look good!</title>
+	<title id="introduction.make.it.look.good.title">
+    Make it look good!</title>
 	<para>Once all that is done, the source files appear in OmegaT in a layout
 	that looks like this:</para>
 
@@ -497,7 +509,8 @@
   </section>
 
   <section id="introduction.translate.the.segments.one.by.one">
-    <title id="introduction.translate.the.segments.one.by.one.title">Translate
+	<title id="introduction.translate.the.segments.one.by.one.title">
+      Translate
     your files</title>
 
     <para>The <link linkend="panes.editor" endterm="panes.editor.title"/> pane
@@ -601,9 +614,9 @@
 	translate, and go back to annotated segments with <link
 	linkend="menus.goto.next.note" endterm="menus.goto.next.note.title"/> or
 	<link linkend="menus.goto.previous.note"
-	endterm="menus.goto.previous.note.title"/> in the <link linkend="menus.goto"
-	endterm="menus.goto.title"/> menu, or from the <link
-	linkend="windows.text.search" endterm="windows.text.search.title"/>
+		  endterm="menus.goto.previous.note.title"/> in the <link linkend="menus.goto"
+		  endterm="menus.goto.title"/> menu, or from the <link
+		  linkend="windows.text.search" endterm="windows.text.search.title"/>
 	window.</para>
 
 	<para>The <link linkend="panes.editor.context.menu"
@@ -615,7 +628,8 @@
   </section>
   
   <section id="introduction.manage.your.tags">
-    <title id="introduction.manage.your.tags.title">Manage your tags</title>
+	<title id="introduction.manage.your.tags.title">
+    Manage your tags</title>
 
     <para>If the documents you translate use bold, italics, or other decorative
     elements, OmegaT will convert those elements into tags that enclose the
@@ -627,7 +641,8 @@
 	<para>A sentence might look like this in its original application:</para>
     
 	<example id="example.source.segment.with.decorations">
-	  <title id="example.source.segment.with.decorations.title">Sentence with
+	  <title id="example.source.segment.with.decorations.title">
+		Sentence with
 	  decorative formatting</title>
 	  <para>OmegaT is an <emphasis role="bold">easy-to-use</emphasis> program
 	  for <emphasis>eager</emphasis> translators</para>
@@ -637,7 +652,8 @@
     sentence in a fashion similar to this one:</para>
 
 	<example id="example.how.decorations.are.displayed">
-	  <title id="example.how.decorations.are.displayed.title">How decorations
+	  <title id="example.how.decorations.are.displayed.title">
+		How decorations
 	  are displayed in OmegaT</title>
 	  <para>OmegaT is an <code role="tag">&lt;t0/&gt;</code>easy to use<code
 	  role="tag">&lt;t1/&gt;</code> program for <code
@@ -677,9 +693,9 @@
 	<para>Use
     <link linkend="menus.edit" endterm="menus.edit.title"/>
     <link linkend="menus.edit.insert.missing.source.tag"
-    endterm="menus.edit.insert.missing.source.tag.title"/> and <link
-    linkend="menus.edit.insert.next.missing.tag"
-    endterm="menus.edit.insert.next.missing.tag.title"/> to insert the tags at
+		  endterm="menus.edit.insert.missing.source.tag.title"/> and <link
+		  linkend="menus.edit.insert.next.missing.tag"
+		  endterm="menus.edit.insert.next.missing.tag.title"/> to insert the tags at
     the cursor location.</para>
 
 	<para>You can define custom tags that will be managed in the same
@@ -709,7 +725,8 @@
   </section>
 
   <section id="introduction.review.the.translation">
-    <title id="introduction.review.the.translation.title">Review your
+	<title id="introduction.review.the.translation.title">
+      Review your
     translation</title>
 
 	<para>Feel free to modify the <link linkend="chapter.panes"
@@ -722,7 +739,8 @@
   </section>
   
   <section id="introduction.generate.the.translated.file">
-    <title id="introduction.generate.the.translated.file.title">Create the
+	<title id="introduction.generate.the.translated.file.title">
+      Create the
     translated files</title>
 
 	<para>Whenever you want to see what your translation will look like in its
@@ -737,10 +755,10 @@
 	  prevent from being overwritten after you create them. You can
 	  automate file name changes using the <link linkend="edit.filter.dialog"
 	  endterm="edit.filter.dialog.title"/> option for the file filter.</para>
-	
+	  
 	  <para>Your translations are <emphasis>always</emphasis> stored in the
 	  <link linkend="project.folder.project.save.tmx"
-	  endterm="project.folder.project.save.tmx.title"/> file, which is the
+			endterm="project.folder.project.save.tmx.title"/> file, which is the
 	  project translation memory, located in the <link
 	  linkend="project.folder.omegat" endterm="project.folder.omegat.title"/>
 	  folder of your project.</para>
@@ -771,7 +789,8 @@
   </section>
 
   <section id="introduction.one.more.thing">
-    <title id="introduction.one.more.thing.title">Manage your projects</title>
+	<title id="introduction.one.more.thing.title">
+    Manage your projects</title>
 
     <itemizedlist>
       <listitem>
@@ -808,7 +827,8 @@
   </section>
 
   <section id="app.shortcuts.streamline.workflow">
-    <title id="app.shortcuts.streamline.workflow.title">A shortcut based
+	<title id="app.shortcuts.streamline.workflow.title">
+      A shortcut based
     workflow</title>
 
     <para>Remembering the main editing and navigation shortcuts (or <link
@@ -817,13 +837,14 @@
     <para>This is best illustrated with an example:</para>
 
     <example id="example.shortcuts.streamline.workflow">
-      <title id="example.shortcuts.streamline.workflow.title">Using shortcuts to
+	  <title id="example.shortcuts.streamline.workflow.title">
+		Using shortcuts to
       streamline the translation process</title>
 
       <para>Picture yourself tasked with translating an updated version of a
       manual from a previous job. See the <link linkend="how.to.use.tm.reuse.tm"
       endterm="how.to.use.tm.reuse.tm.title"/> how-to for details.</para>
-        
+      
       <para>Since the first few pages have not changed, your are greeted with a
       screenful of already translated segments from the previous job's memory
       upon opening the project.</para>
@@ -852,7 +873,7 @@
 	  automatically display not only history predictions, but also glossary
 	  terms, and pre-defined short strings, which can be entered with simple
 	  arrow navigation.</para>
-		
+	  
       <para>You then reach a revised section of the text where the
       <link linkend="panes.fuzzy.matches" endterm="panes.fuzzy.matches.title"/>
       pane shows a number of similar segments from the previous job.</para>
@@ -898,7 +919,7 @@
 	  <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo> to navigate the
 	  results. OmegaT synchronizes the Editor contents with the selected result,
 	  so you can edit the segments right away.</para>
-        
+      
       <para>Time for a break. As you savour your coffee, you reflect
       on how much more smoothly you were able to use the various OmegaT functions
       compared to when you had just gotten started and spent a lot of time
@@ -906,7 +927,7 @@
 
       <para>The smoother workfow, in turn, allowed you to better focus on the
       translation itself.</para>
-        
+      
       <para>At the same time, you realize that during you session,
       you used the <link linkend="menus.edit" endterm="menus.edit.title"/><link
       linkend="menus.edit.create.alternative.translation"

@@ -2,13 +2,15 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
-  <title id="menus.tools.title"><guimenu>Tools</guimenu></title>
+  <title id="menus.tools.title">
+  <guimenu>Tools</guimenu></title>
 
   <para>This menu gives you access to a number of tools, including QA
   validation, match reports, an aligner, and scripting.</para>
 
   <example id="example.check.issues">
-	<title id="example.check.issues.title">Shortcut description example</title>
+	<title id="example.check.issues.title">
+    Shortcut description example</title>
 	<para>On Windows and Linux:
 	<keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo></para>
 
@@ -21,8 +23,9 @@
 
   <variablelist>
     <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>Check
-      Issues...</guimenuitem>
+	  <term id="menus.tools.check.issues.title">
+		<guimenuitem>Check
+		Issues...</guimenuitem>
       <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>This quality assurance tool carries out all automatic checks in
@@ -56,7 +59,7 @@
             <para><guilabel>Terminology Issues</guilabel> (optional): detects
             all the glossary items that are not properly translated. See the
             <link linkend="dialogs.preferences.glossary"
-            endterm="dialogs.preferences.glossary.title"/> preferences for
+				  endterm="dialogs.preferences.glossary.title"/> preferences for
             details.</para>
           </listitem>
 
@@ -105,8 +108,9 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term
-      id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Check
+	  <term
+		  id="menus.tools.check.issues.for.current.document.title">
+		<guimenuitem>Check
       Issues for Current File</guimenuitem></term>
       <listitem>
         <para>As above, but only for the document currently displayed in the
@@ -115,8 +119,9 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.statistics">
-      <term
-      id="menus.tools.statistics.title"><guimenuitem>Statistics</guimenuitem></term>
+	  <term
+		  id="menus.tools.statistics.title">
+      <guimenuitem>Statistics</guimenuitem></term>
       <listitem>
         <para>Opens a new window and displays project statistics such as the
         overall project word count or segment totals, and totals for every file
@@ -172,7 +177,8 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.match.statistics">
-      <term id="menus.tools.match.statistics.title"><guimenuitem>Match
+	  <term id="menus.tools.match.statistics.title">
+		<guimenuitem>Match
       Statistics</guimenuitem></term>
       <listitem>
         <para>Displays the match statistics for the project, which consist of 
@@ -189,7 +195,8 @@
     </varlistentry>
 	
     <varlistentry id="menus.tools.match.statistics.per.file">
-      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Match
+	  <term id="menus.tools.match.statistics.per.file.title">
+		<guimenuitem>Match
       Statistics per File</guimenuitem></term>
       <listitem>
         <para>Displays the individual match statistics, which consist of the
@@ -206,7 +213,8 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.align.files">
-      <term id="menus.tools.align.files.title"><guimenuitem>Align
+	  <term id="menus.tools.align.files.title">
+		<guimenuitem>Align
       Files...</guimenuitem></term>
       <listitem>
         <para>Select the two files to align (the source file and its
@@ -224,8 +232,9 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.scripting">
-      <term
-      id="menus.tools.scripting.title"><guimenuitem>Scripting...</guimenuitem></term>
+	  <term
+		  id="menus.tools.scripting.title">
+      <guimenuitem>Scripting...</guimenuitem></term>
       <listitem>
         <para>Opens the <link linkend="windows.scripts"
         endterm="windows.scripts.title"/> window, which allows you to set the
@@ -257,7 +266,8 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">External search
+	  <term id="menus.tools.external.search.commands.title">
+		External search
       commands</term>
       <listitem>
         <para>If you have defined external searches in the <link

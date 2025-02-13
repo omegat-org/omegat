@@ -2,7 +2,8 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">Troubleshoot issues</title>
+  <title id="how.to.restore.your.data.title">
+  Troubleshoot issues</title>
 
   <warning>
 	<para>OmegaT is a robust and trustworthy application, but even so, it is
@@ -11,7 +12,8 @@
   </warning>
 
   <section id="how.to.restore.your.data.automatic.backup">
-	<title id="how.to.restore.your.data.automatic.backup.title">Automatic
+	<title id="how.to.restore.your.data.automatic.backup.title">
+      Automatic
 	backups</title>
 
 	<para>OmegaT creates backups of your project settings to ensure it can
@@ -19,10 +21,10 @@
 	linkend="project.folder.omegat.project.file"
 	endterm="project.folder.omegat.project.file.title"/> section for
 	details.</para>
-	  
+	
 	<para>OmegaT regularly and automatically stores all your progress in the
 	<link linkend="project.folder.project.save.tmx"
-	endterm="project.folder.project.save.tmx.title"/> file located in the
+		  endterm="project.folder.project.save.tmx.title"/> file located in the
 	project’s <link linkend="project.folder.omegat"
 	endterm="project.folder.omegat.title"/> folder. OmegaT also creates regular
 	backups of that file.</para>
@@ -89,7 +91,8 @@
   </section>
 
   <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">You lost your
+	<title id="how.to.restore.your.data.lost.in.translation.title">
+      You lost your
 	translation?</title>
 
 	<para>Even if you fear you might have lost translation data, it is probably
@@ -134,13 +137,14 @@
 	  <para>Exercise caution with changes made to files in the source folder,
 	  the segmentation rules, or the file filters, partway through a
 	  project. Modifying any of those after you have started your translation
-		could result in some segments disapparing or new segments appearing
-		unexpectedly.</para>
+	  could result in some segments disapparing or new segments appearing
+	  unexpectedly.</para>
 	</note>
   </section>
 
   <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">Your project is
+	<title id="how.to.restore.your.data.project.locked.title">
+      Your project is
 	locked?</title>
 
 	<para>In the rare case where your computer freezes and OmegaT does not have
@@ -185,7 +189,8 @@
   </section>
   
   <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">Your project
+	<title id="how.to.restore.your.data.project.wont.open.title">
+      Your project
 	won’t open?</title>
 
 	<para>In the rare case where your computer freezes and OmegaT does not have
@@ -230,7 +235,8 @@
   </section>
 
   <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">Your
+	<title id="how.to.restore.your.data.translated.file.broken.title">
+      Your
 	translated file won’t open?</title>
 
 	<para>Very often, office suite files contain tags that must be copied into
@@ -274,7 +280,8 @@
   </section>
 
   <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">OmegaT won’t
+	<title id="how.to.restore.your.data.omegat.wont.behave.title">
+      OmegaT won’t
 	behave?</title>
 
 	<para>Something has happened and OmegaT won’t behave anymore. Whatever you
@@ -343,7 +350,8 @@
   </section>
 
   <section id="how.to.restore.your.data.summary">
-	<title id="how.to.restore.your.data.summary.title">Summary</title>
+	<title id="how.to.restore.your.data.summary.title">
+    Summary</title>
 
 	<itemizedlist>
       <listitem>

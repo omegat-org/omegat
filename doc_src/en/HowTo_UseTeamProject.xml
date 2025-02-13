@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.use.team.project">
-  <title id="how.to.use.team.project.title">Use a team project</title>
+  <title id="how.to.use.team.project.title"><link linkend="how.to.use.team.project"> </link>Use a team project</title>
 
   <para>Team projects use synchronization mechanisms between project members.</para>
 
@@ -33,8 +33,8 @@
   for example.</para>
   
   <variablelist>
-    <varlistentry>
-      <term>Downloading the project</term>
+    <varlistentry id="how.to.use.team.project.download">
+	  <term id="how.to.use.team.project.download.title"><link linkend="how.to.use.team.project.download"> </link>Downloading the project</term>
       <listitem>
 		<orderedlist>
 		  <listitem>
@@ -89,8 +89,8 @@
 	  </listitem>
 	</varlistentry>
 
-    <varlistentry>
-      <term>Synchronization</term>
+    <varlistentry id="how.to.use.team.project.synchronization">
+	  <term id="how.to.use.team.project.synchronization.title"><link linkend="how.to.use.team.project.synchronization"> </link>Synchronization</term>
 
       <listitem>
         <para>Synchronizing the project adds translations made by all team
@@ -121,8 +121,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Team project configuration</term>
+    <varlistentry id="how.to.use.team.project.configuration">
+	  <term id="how.to.use.team.project.configuration.title"><link linkend="how.to.use.team.project.configuration"> </link>Team project configuration</term>
 
       <listitem>
         <para>As in regular local projects, the configuration of the team
@@ -203,8 +203,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Source files</term>
+    <varlistentry id="how.to.use.team.project.source.files">
+	  <term id="how.to.use.team.project.source.files.title"><link linkend="how.to.use.team.project.source.files"> </link>Source files</term>
 
       <listitem>
         <warning>
@@ -216,21 +216,21 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Target files</term>
+    <varlistentry id="how.to.use.team.project.target.files">
+	  <term id="how.to.use.team.project.target.files.title"><link linkend="how.to.use.team.project.target.files"> </link>Target files</term>
 
       <listitem>
         <para>After you generate the target files use
         <link endterm="menus.project.title"
-        linkend="menus.project"/><link
-        endterm="menus.project.commit.target.files.title"
-        linkend="menus.project.commit.target.files"/> to add them to the
+			  linkend="menus.project"/><link
+			  endterm="menus.project.commit.target.files.title"
+			  linkend="menus.project.commit.target.files"/> to add them to the
         server, if the project administrator has requested you to do so.</para>
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Deleting files</term>
+    <varlistentry id="how.to.use.team.project.deleting.files">
+	  <term id="how.to.use.team.project.deleting.files.title"><link linkend="how.to.use.team.project.deleting.files"> </link>Deleting files</term>
 
       <listitem>
         <para>Files in a team project cannot be deleted from OmegaT or the local
@@ -240,8 +240,8 @@
       </listitem>
     </varlistentry>
 
-    <varlistentry>
-      <term>Working offline</term>
+    <varlistentry id="how.to.use.team.project.working.offline">
+	  <term id="how.to.use.team.project.working.offline.title"><link linkend="how.to.use.team.project.working.offline"> </link>Working offline</term>
 
       <listitem>
         <para>You can open a team project and work on it offline. All changes

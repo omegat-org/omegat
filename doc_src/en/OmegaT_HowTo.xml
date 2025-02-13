@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.how.to">
-  <title id="chapter.how.to.title">How To...</title>
+  <title id="chapter.how.to.title"><link linkend="chapter.how.to"> </link>How To...</title>
 
   <xi:include href="HowTo_RestoreYourData.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

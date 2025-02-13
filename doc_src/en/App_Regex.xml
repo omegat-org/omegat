@@ -4,7 +4,7 @@
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 
 <section id="app.regex">
-  <title id="app.regex.title">Regular expressions</title>
+  <title id="app.regex.title"><link linkend="app.regex"> </link>Regular expressions</title>
 
   <para>This appendix is intended for users interested in exploring a powerful
   way to boost their productivity. Although seen as daunting and complex, even
@@ -29,13 +29,13 @@
   
   <variablelist>
     <varlistentry id="app.regex.digit">
-	  <term id="app.regex.digit.title">[0-9]</term>
+	  <term id="app.regex.digit.title"><link linkend="app.regex.digit"> </link>[0-9]</term>
       <listitem><para>Any single digit from 0 to 9.</para>
       </listitem>
     </varlistentry>
 
 	<varlistentry id="app.regex.word">
-	  <term id="app.regex.word.title">\w+</term>
+	  <term id="app.regex.word.title"><link linkend="app.regex.word"> </link>\w+</term>
       <listitem><para>Represents one or more “word characters”, namely
       the letters of the alphabet, digits, and
       underscore symbols.</para>
@@ -43,7 +43,7 @@
     </varlistentry>
 
 	<varlistentry id="app.regex.horizontal.space">
-	  <term id="app.regex.horizontal.space.title">\h?</term>
+	  <term id="app.regex.horizontal.space.title"><link linkend="app.regex.horizontal.space"> </link>\h?</term>
       <listitem><para>Represents zero or one horizontal whitespace
       character (this includes regular and non-breaking spaces as well as
       tabs, but not line break characters, which belong to the “vertical
@@ -57,7 +57,7 @@
 
   <variablelist>
     <varlistentry id="app.regex.searches">
-	  <term id="app.regex.searches.title">Searches</term>
+	  <term id="app.regex.searches.title"><link linkend="app.regex.searches"> </link>Searches</term>
       <listitem>
         <para>Searches include a <link
         linkend="windows.text.search.methods.regex"
@@ -72,7 +72,7 @@
     </varlistentry>
 
     <varlistentry id="app.regex.custom.tags">
-	  <term id="app.regex.custom.tags.title">Custom tags</term>
+	  <term id="app.regex.custom.tags.title"><link linkend="app.regex.custom.tags"> </link>Custom tags</term>
       <listitem>
         <para>Custom tags are tags defined with regular expressions that are
         handled exactly like native OmegaT tags. See the <link
@@ -86,7 +86,7 @@
     </varlistentry>
 
     <varlistentry id="app.regex.flagged.text">
-	  <term id="app.regex.flagged.text.title">Flagged text</term>
+	  <term id="app.regex.flagged.text.title"><link linkend="app.regex.flagged.text"> </link>Flagged text</term>
       <listitem>
         <para>The <link
         linkend="dialogs.preferences.tag.processing.regular.expressions.for.fragments.that.should.be.removed.from.translation"
@@ -100,7 +100,7 @@
     </varlistentry>
 
     <varlistentry id="app.regex.alignment">
-	  <term id="app.regex.alignment.title">Text highlighting in alignments</term>
+	  <term id="app.regex.alignment.title"><link linkend="app.regex.alignment"> </link>Text highlighting in alignments</term>
       <listitem>
         <para>Visual cues can help verifying that your alignment is correct. The
         <link linkend="windows.aligner.adjust.highlight"
@@ -114,7 +114,7 @@
     </varlistentry>	
 
     <varlistentry id="app.regex.segmentation">
-	  <term id="app.regex.segmentation.title">Segmentation</term>
+	  <term id="app.regex.segmentation.title"><link linkend="app.regex.segmentation"> </link>Segmentation</term>
       <listitem>
         <para>Segmentation rules and language patterns are defined with regular
         expressions. You can modify them freely to improve the segmentation of a
@@ -136,7 +136,7 @@
   </variablelist>
 
   <section id="app.regex.four.rules">
-	<title id="app.regex.four.rules.title">The 4 rules</title>
+	<title id="app.regex.four.rules.title"><link linkend="app.regex.four.rules"> </link>The 4 rules</title>
 
     <para>Regular expressions are used to find text, including characters that
     are not visible on the screen or when printed out, such as spaces, tabs, or
@@ -159,7 +159,7 @@
 
     <variablelist>
       <varlistentry id="app.regex.four.rules.match.self">
-		<term id="app.regex.four.rules.match.self.title">Most characters simply match themselves</term>
+		<term id="app.regex.four.rules.match.self.title"><link linkend="app.regex.four.rules.match.self"> </link>Most characters simply match themselves</term>
         <listitem>
           <para>The majority of characters in a regular expression simply
           <emphasis>look for themselves</emphasis> in the text
@@ -173,9 +173,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.four.rules.backslash.special.meaning">
-		<term id="app.regex.four.rules.backslash.special.meaning.title">
-		  Digits and letters of the alphabet preceded by a backslash
-        (<literal>\</literal>) take on a special meaning</term>
+		<term id="app.regex.four.rules.backslash.special.meaning.title"><link linkend="app.regex.four.rules.backslash.special.meaning"> </link>Digits and letters of the alphabet preceded by a backslash (<literal>\</literal>) take on a special meaning</term>
         <listitem>
           <para>Unlike a letter on its own, which simply represents itself as
           noted above, a letter preceded by a <literal>\</literal> has a special
@@ -203,7 +201,7 @@
       </varlistentry>
       
       <varlistentry id="app.regex.four.rules.twelve.characters">
-		<term id="app.regex.four.rules.twelve.characters.title">Twelve characters have a special meaning by default</term>
+		<term id="app.regex.four.rules.twelve.characters.title"><link linkend="app.regex.four.rules.twelve.characters"> </link>Twelve characters have a special meaning by default</term>
         <listitem>
           <para>That special meaning has to be cancelled by another character to
           match the character itself.</para>
@@ -220,9 +218,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.four.rules.backslash">
-		<term id="app.regex.four.rules.backslash.title">
-		  The <literal>\</literal> character is a very special
-        character</term>
+		<term id="app.regex.four.rules.backslash.title"><link linkend="app.regex.four.rules.backslash"> </link>The <literal>\</literal> character is a very special character</term>
         <listitem>
           <para>As stated above, the <literal>\</literal> character has the
           default special meaning of either cancelling or activating the special
@@ -239,7 +235,7 @@
   </section>
 
   <section id="app.regex.twelve.characters">
-	<title id="app.regex.twelve.characters.title">The 12 characters</title>
+	<title id="app.regex.twelve.characters.title"><link linkend="app.regex.twelve.characters"> </link>The 12 characters</title>
 	
     <para>The twelve special characters are the <emphasis>backslash</emphasis>
     <literal>\</literal>, the <emphasis>caret</emphasis> <literal>^</literal>,
@@ -262,7 +258,7 @@
     
     <variablelist>
       <varlistentry id="app.regex.twelve.characters.backslash">
-		<term id="app.regex.twelve.characters.backslash.title">The BACKSLASH: <literal>\</literal></term>
+		<term id="app.regex.twelve.characters.backslash.title"><link linkend="app.regex.twelve.characters.backslash"> </link>The BACKSLASH: <literal>\</literal></term>
         <listitem>
           <para>This character either cancels or activates the special meaning of the following character.</para>
           
@@ -309,7 +305,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.caret">
-		<term id="app.regex.twelve.characters.caret.title">The CARET: <literal>^</literal></term>
+		<term id="app.regex.twelve.characters.caret.title"><link linkend="app.regex.twelve.characters.caret"> </link>The CARET: <literal>^</literal></term>
         <listitem>
           <para>When it is the first character in the expression, the
           <emphasis>caret</emphasis> character matches the beginning of a
@@ -383,7 +379,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.dollar">
-		<term id="app.regex.twelve.characters.dollar.title">The DOLLAR sign: <literal>$</literal></term>
+		<term id="app.regex.twelve.characters.dollar.title"><link linkend="app.regex.twelve.characters.dollar"> </link>The DOLLAR sign: <literal>$</literal></term>
         <listitem>
           <para>When it is the last character in an expression, the
           <emphasis>dollar</emphasis> sign matches the end of a line.</para>
@@ -422,7 +418,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.period">
-		<term id="app.regex.twelve.characters.period.title">The PERIOD: <literal>.</literal></term>
+		<term id="app.regex.twelve.characters.period.title"><link linkend="app.regex.twelve.characters.period"> </link>The PERIOD: <literal>.</literal></term>
         <listitem>
           <para>Matches any single character.</para>
 
@@ -472,7 +468,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.vertical.bar">
-		<term id="app.regex.twelve.characters.vertical.bar.title">The VERTICAL BAR: <literal>|</literal></term>
+		<term id="app.regex.twelve.characters.vertical.bar.title"><link linkend="app.regex.twelve.characters.vertical.bar"> </link>The VERTICAL BAR: <literal>|</literal></term>
         <listitem>
           <para>This character functions as an “OR” and matches either
           of the expressions that precede or follow it.</para>
@@ -520,7 +516,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.question.mark">
-		<term id="app.regex.twelve.characters.question.mark.title">The QUESTION MARK: <literal>?</literal></term>
+		<term id="app.regex.twelve.characters.question.mark.title"><link linkend="app.regex.twelve.characters.question.mark"> </link>The QUESTION MARK: <literal>?</literal></term>
         <listitem>
           <para>This character specifies that either zero or one
           instance of the preceding character or expression should be
@@ -575,7 +571,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.asterisk">
-		<term id="app.regex.twelve.characters.asterisk.title">The ASTERISK: <literal>*</literal></term>
+		<term id="app.regex.twelve.characters.asterisk.title"><link linkend="app.regex.twelve.characters.asterisk"> </link>The ASTERISK: <literal>*</literal></term>
         <listitem>
           <para>This character specifies that zero or more instances of the
           preceding character or expression should be matched.</para>
@@ -620,7 +616,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.plus">
-		<term id="app.regex.twelve.characters.plus.title">The PLUS sign: <literal>+</literal></term>
+		<term id="app.regex.twelve.characters.plus.title"><link linkend="app.regex.twelve.characters.plus"> </link>The PLUS sign: <literal>+</literal></term>
         <listitem>
           <para>This character specifies that one or more instances of
           the preceding character or expression should be matched.</para>
@@ -660,7 +656,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.open.parens">
-		<term id="app.regex.twelve.characters.open.parens.title">The OPENING PARENTHESIS: <literal>(</literal></term>
+		<term id="app.regex.twelve.characters.open.parens.title"><link linkend="app.regex.twelve.characters.open.parens"> </link>The OPENING PARENTHESIS: <literal>(</literal></term>
 
         <listitem>
           <para>This character starts a <emphasis>group</emphasis>, which is a
@@ -719,7 +715,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.close.parens">
-		<term id="app.regex.twelve.characters.close.parens.title">The CLOSING PARENTHESIS: <literal>)</literal></term>
+		<term id="app.regex.twelve.characters.close.parens.title"><link linkend="app.regex.twelve.characters.close.parens"> </link>The CLOSING PARENTHESIS: <literal>)</literal></term>
 
         <listitem>
           <para>This character closes a group. It is special because it can
@@ -772,7 +768,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.open.bracket">
-		<term id="app.regex.twelve.characters.open.bracket.title">The OPENING SQUARE BRACKET: <literal>[</literal></term>
+		<term id="app.regex.twelve.characters.open.bracket.title"><link linkend="app.regex.twelve.characters.open.bracket"> </link>The OPENING SQUARE BRACKET: <literal>[</literal></term>
 
         <listitem>
           <para>This character must be paired with the closing square bracket
@@ -819,7 +815,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.twelve.characters.open.brace">
-		<term id="app.regex.twelve.characters.open.brace.title">The OPENING CURLY BRACE: <literal>{</literal></term>
+		<term id="app.regex.twelve.characters.open.brace.title"><link linkend="app.regex.twelve.characters.open.brace"> </link>The OPENING CURLY BRACE: <literal>{</literal></term>
 
         <listitem>
           <para>This character must be paired with the closing curly
@@ -877,9 +873,7 @@
   </section>
 
   <section id="app.regex.types.of.expressions">
-	<title id="app.regex.types.of.expressions.title">
-      Lots of
-    expressions</title>
+	<title id="app.regex.types.of.expressions.title"><link linkend="app.regex.types.of.expressions"> </link>Lots of expressions</title>
 
     <para>This section presents various types of regular expression, ranging
     from the simple to the complex.</para>
@@ -892,16 +886,13 @@
     </note>
 
     <section id="app.regex.types.of.expressions.simple.expressions">
-	  <title id="app.regex.types.of.expressions.simple.expressions.title">
-		
-        Simple expressions
-      </title>
+	  <title id="app.regex.types.of.expressions.simple.expressions.title"><link linkend="app.regex.types.of.expressions.simple.expressions"> </link>Simple expressions </title>
       <para>The simplest regular expression consist of a single character,
       or combination of a <literal>\</literal> and a character constituting a
       unit with a single meaning.</para>
       
       <table id="app.regex.characters">
-		<title id="app.regex.characters.title">Characters</title>
+		<title id="app.regex.characters.title"><link linkend="app.regex.characters"> </link>Characters</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -948,7 +939,7 @@
     </section>
 
     <section id="app.regex.types.of.expressions.case">
-	  <title id="app.regex.types.of.expressions.case.title">Case</title>
+	  <title id="app.regex.types.of.expressions.case.title"><link linkend="app.regex.types.of.expressions.case"> </link>Case</title>
 
       
       <para>Ordinary OmegaT searches are case insensitive by default: they match
@@ -964,14 +955,14 @@
 
       <variablelist>
         <varlistentry id="app.regex.twelve.characters.case.insensitive">
-		  <term id="app.regex.twelve.characters.case.insensitive.title"><literal>(?i)</literal></term>
+		  <term id="app.regex.twelve.characters.case.insensitive.title"><link linkend="app.regex.twelve.characters.case.insensitive"> </link><literal>(?i)</literal></term>
           <listitem>
             <para>Makes the part of the expression to the right of the modifier
             case insensitive.</para>
           </listitem>
         </varlistentry>
         <varlistentry id="app.regex.twelve.characters.case.sensitive">
-		  <term id="app.regex.twelve.characters.case.sensitive.title"><literal>(?-i)</literal></term>
+		  <term id="app.regex.twelve.characters.case.sensitive.title"><link linkend="app.regex.twelve.characters.case.sensitive"> </link><literal>(?-i)</literal></term>
           <listitem>
             <para>Makes the part of the expression to the right of the modifier
             case sensitive.</para>
@@ -989,7 +980,7 @@
     </section>
 
     <section id="app.regex.types.of.expressions.classes">
-	  <title id="app.regex.types.of.expressions.classes.title">Classes</title>
+	  <title id="app.regex.types.of.expressions.classes.title"><link linkend="app.regex.types.of.expressions.classes"> </link>Classes</title>
 
       <para>Regular expressions allow you to create sets of characters—known as
       <emphasis>classes</emphasis>. Searches will match any of the characters in
@@ -1029,7 +1020,7 @@
       shorthand.</para>
       
       <table id="app.regex.classes">
-		<title id="app.regex.classes.title">Examples of classes</title>
+		<title id="app.regex.classes.title"><link linkend="app.regex.classes"> </link>Examples of classes</title>
 
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -1137,9 +1128,7 @@
       expressions.</para>
 
       <table id="app.regex.unicode.blocks">
-		<title id="app.regex.unicode.blocks.title">
-		  Unicode blocks, scripts and
-        categories</title>
+		<title id="app.regex.unicode.blocks.title"><link linkend="app.regex.unicode.blocks"> </link>Unicode blocks, scripts and categories</title>
         
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -1197,9 +1186,7 @@
     </section>
 
     <section id="app.regex.more.advanced.expressions">
-	  <title id="app.regex.more.advanced.expressions.title">
-		More advanced
-      expressions</title>
+	  <title id="app.regex.more.advanced.expressions.title"><link linkend="app.regex.more.advanced.expressions"> </link>More advanced expressions</title>
       
       <para>Some expressions specify a position rather than a character. They
       indicate where in the text to look for the match, but do not include any
@@ -1208,7 +1195,7 @@
       endterm="app.regex.tools.title" /> section for more information.</para>
 
       <table id="app.regex.boundary.matchers">
-		<title id="app.regex.boundary.matchers.title">Expressions that mark a position</title>
+		<title id="app.regex.boundary.matchers.title"><link linkend="app.regex.boundary.matchers"> </link>Expressions that mark a position</title>
 		
         <tgroup align="left" cols="2" rowsep="1">
           <colspec align="left" colnum="1"/>
@@ -1304,16 +1291,14 @@
   </section>
 
   <section id="app.regex.more.examples">
-	<title id="app.regex.more.examples.title">More examples</title>
+	<title id="app.regex.more.examples.title"><link linkend="app.regex.more.examples"> </link>More examples</title>
 
     <para>This section presents a few examples demonstrating how the various
     expressions described above can be combined to perform powerful searches in
     OmegaT.</para>
     
     <table id="regex.examples">
-	  <title id="regex.examples.title">
-		Examples of regular expressions that use
-      the above expressions</title>
+	  <title id="regex.examples.title"><link linkend="regex.examples"> </link>Examples of regular expressions that use the above expressions</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1"/>
@@ -1426,7 +1411,7 @@
   </section>
 
   <section id="app.regex.tools">
-	<title id="app.regex.tools.title">References</title>
+	<title id="app.regex.tools.title"><link linkend="app.regex.tools"> </link>References</title>
 
     <para>Although OmegaT does not offer fancy colouring for your regular
     expressions, you can get a lot of practice by using the <link
@@ -1439,9 +1424,7 @@
 
     <variablelist>
       <varlistentry id="app.regex.java">
-		<term id="app.regex.java.title">
-		  <ulink url="&javaregex;">Java Regex
-        documentation</ulink></term>
+		<term id="app.regex.java.title"><ulink url="&javaregex;">Java Regex documentation</ulink></term>
         <listitem>
           <para>The official reference for regular expressions used in
           Java.</para>
@@ -1454,9 +1437,7 @@
 
     <variablelist>
       <varlistentry id="app.regex.tools.regex101">
-		<term id="app.regex.tools.regex101.title">
-		  <ulink
-			  url="https://regex101.com">https://regex101.com</ulink></term>
+		<term id="app.regex.tools.regex101.title"><ulink url="https://regex101.com">https://regex101.com</ulink></term>
           <listitem>
             <para>An online regular expression matcher that lets you enter the
             text you want to search and the regular expressions you want to
@@ -1465,9 +1446,7 @@
       </varlistentry>
 
       <varlistentry id="app.regex.tools.regular.expression.info">
-		<term id="app.regex.tools.regular.expression.info.title">
-		  <ulink
-			  url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
+		<term id="app.regex.tools.regular.expression.info.title"><ulink url="https://www.regular-expressions.info">https://www.regular-expressions.info</ulink></term>
           <listitem>
             <para>One of the most thorough regular expression tutorial and
             reference on the web.</para>

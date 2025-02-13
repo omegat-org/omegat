@@ -2,10 +2,10 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="app.shortcuts">
-  <title id="app.shortcuts.title">OmegaT Shortcuts</title>
+  <title id="app.shortcuts.title"><link linkend="app.shortcuts"> </link>OmegaT Shortcuts</title>
 
   <section id="app.shortcuts.description">
-	<title id="app.shortcuts.description.title">Description</title>
+	<title id="app.shortcuts.description.title"><link linkend="app.shortcuts.description"> </link>Description</title>
 
     <para>The OmegaT interface generally does not rely on buttons to give access
     to its functions. Instead, they are called from the menus or, for the
@@ -27,7 +27,7 @@
     keys:</para>
 	
     <table id="app.shortcut.description">
-	  <title id="app.shortcut.description.title">Modifier key identifiers</title>
+	  <title id="app.shortcut.description.title"><link linkend="app.shortcut.description"> </link>Modifier key identifiers</title>
 
       <tgroup cols="3">
         <thead>
@@ -71,9 +71,7 @@
     to avoid listing multiple notations for every shortcut.</para>
 
     <example id="example.avoid.listing.multiple.notations">
-	  <title id="example.avoid.listing.multiple.notations.title">
-		How we avoid
-	  listing multiple notations:</title>
+	  <title id="example.avoid.listing.multiple.notations.title"><link linkend="example.avoid.listing.multiple.notations"> </link>How we avoid listing multiple notations:</title>
 	  <para>On Windows and Linux:
 	  <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>N</keycap></keycombo></para>
 
@@ -86,7 +84,7 @@
   </section>
   
   <section id="app.shortcuts.customization">
-	<title id="app.shortcuts.customization.title">Customization</title>
+	<title id="app.shortcuts.customization.title"><link linkend="app.shortcuts.customization"> </link>Customization</title>
 
     <para>OmegaT assigns shortcuts to most of the functions available in the
     <link linkend="menus.project" endterm="menus.project.title"/>, <link
@@ -105,7 +103,7 @@
 
 	<variablelist>
       <varlistentry id="app.shortcuts.customization.MainMenuShortcuts.properties">
-		<term id="app.shortcuts.customization.MainMenuShortcuts.properties.title">MainMenuShortcuts.properties</term>
+		<term id="app.shortcuts.customization.MainMenuShortcuts.properties.title"><link linkend="app.shortcuts.customization.MainMenuShortcuts.properties"> </link>MainMenuShortcuts.properties</term>
         <listitem>
           <para>The shortcut definition file for the menus and a few other
           items.</para>
@@ -113,7 +111,7 @@
       </varlistentry>
 
 	  <varlistentry id="app.shortcuts.customization.EditorShortcuts.properties">
-		<term id="app.shortcuts.customization.EditorShortcuts.properties.title">EditorShortcuts.properties</term>
+		<term id="app.shortcuts.customization.EditorShortcuts.properties.title"><link linkend="app.shortcuts.customization.EditorShortcuts.properties"> </link>EditorShortcuts.properties</term>
         <listitem><para>The shortcut definition file for the editor.</para>
         </listitem>
       </varlistentry>
@@ -176,7 +174,7 @@
   </section>
 
   <section id="app.shortcuts.syntax">
-	<title id="app.shortcuts.syntax.title">Syntax</title>
+	<title id="app.shortcuts.syntax.title"><link linkend="app.shortcuts.syntax"> </link>Syntax</title>
 
     <para>The basic syntax of the shortcut definitions files is simply:</para>
 
@@ -244,9 +242,7 @@
     folder</link>, as noted above, and make the changes you want there.</para>
     
     <example id="example.shortcut.modification">
-	  <title id="example.shortcut.modification.title">
-		Modifying a
-      shortcut</title>
+	  <title id="example.shortcut.modification.title"><link linkend="example.shortcut.modification"> </link>Modifying a shortcut</title>
 
       <para>The default shortcut for <link linkend="menus.project.close">closing
       a project</link> is defined on Windows and Linux as:</para>
@@ -275,7 +271,7 @@
     </example>
 
     <example id="example.shortcut.addition">
-	  <title id="example.shortcut.addition.title">Adding a shortcut</title>
+	  <title id="example.shortcut.addition.title"><link linkend="example.shortcut.addition"> </link>Adding a shortcut</title>
 
       <para>If your language pair calls for the frequent use of <link
       linkend="menus.edit.create.alternative.translation">alternative
@@ -340,11 +336,9 @@
   
 
   <section id="app.shortcuts.lists">
-	<title id="app.shortcuts.lists.title">Lists of functions and codes</title>
+	<title id="app.shortcuts.lists.title"><link linkend="app.shortcuts.lists"> </link>Lists of functions and codes</title>
     <section id="app.shortcuts.lists.function.codes.menus">
-	  <title id="app.shortcuts.lists.function.codes.menus.title">
-		Menu
-      functions</title>
+	  <title id="app.shortcuts.lists.function.codes.menus.title"><link linkend="app.shortcuts.lists.function.codes.menus"> </link>Menu functions</title>
 
       <para>The functions that can be modified in the
       <filename>MainMenuShortcuts.properties</filename> file, along with their
@@ -1134,7 +1128,7 @@
       </note>
 
       <table id="app.shortcuts.lists.function.codes.options.menu.table">
-		<title id="app.shortcuts.lists.function.codes.options.menu.table.title">Options Menu</title>
+		<title id="app.shortcuts.lists.function.codes.options.menu.table.title"><link linkend="app.shortcuts.lists.function.codes.options.menu.table"> </link>Options Menu</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>
@@ -1296,16 +1290,14 @@
     </section>
 	
     <section id="app.shortcuts.lists.function.codes.windows">
-	  <title id="app.shortcuts.lists.function.codes.windows.title">
-		Editor
-      functions</title>
+	  <title id="app.shortcuts.lists.function.codes.windows.title"><link linkend="app.shortcuts.lists.function.codes.windows"> </link>Editor functions</title>
 
       <para>The shortcuts that can be modified in the
       <filename>EditorShortcuts.properties</filename> file, along with their
       default values, are presented in the table below</para>
 
       <table id="app.shortcuts.lists.function.codes.editor.table">
-		<title id="app.shortcuts.lists.function.codes.editor.table.title">Editor</title>
+		<title id="app.shortcuts.lists.function.codes.editor.table.title"><link linkend="app.shortcuts.lists.function.codes.editor.table"> </link>Editor</title>
 
         <tgroup cols="4" colsep="1">
           <colspec align="left" colname="1" colnum="1"/>

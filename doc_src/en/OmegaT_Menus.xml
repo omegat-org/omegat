@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.menus">
-  <title id="chapter.menus.title">Menus</title>
+  <title id="chapter.menus.title"><link linkend="chapter.menus"> </link>Menus</title>
 
   <para>OmegaT has very few buttons and looks a bit stern, if not outright
   unfriendly, to people who are used to button-based interfaces. Most of
@@ -23,7 +23,7 @@
 
   <note><para>Key shortcut description reminder:
   <table id="menus.shortcut.description">
-    <title id="menus.shortcut.description.title">Modifier key identifiers</title>
+    <title id="menus.shortcut.description.title"><link linkend="menus.shortcut.description"> </link>Modifier key identifiers</title>
 
     <tgroup cols="3">
       <thead>

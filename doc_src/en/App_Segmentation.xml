@@ -2,12 +2,10 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="app.segmentation">
-  <title id="app.segmentation.title">Segmentation</title>
+  <title id="app.segmentation.title"><link linkend="app.segmentation"> </link>Segmentation</title>
 
   <section id="dialog.preferences.segmentation.setup.type">
-	<title id="dialog.preferences.segmentation.setup.type.title">
-      Paragraph or
-	sentence?</title>
+	<title id="dialog.preferences.segmentation.setup.type.title"><link linkend="dialog.preferences.segmentation.setup.type"> </link>Paragraph or sentence?</title>
 	
 	<para>Translation memory tools work with textual units called segments. When
 	a translation is entered, the segment containing the source text is stored
@@ -41,10 +39,7 @@
 
 	<variablelist>
 	  <varlistentry id="dialogs.preferences.segmentation.setup.structure.level.segmentation">
-		<term
-			id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title">
-		  Paragraph-Level
-		segmentation</term>
+		<term id="dialogs.preferences.segmentation.setup.structure.level.segmentation.title"><link linkend="dialogs.preferences.segmentation.setup.structure.level.segmentation"> </link>Paragraph-Level segmentation</term>
 
 		<listitem>
 		  <para>OmegaT first parses the text for paragraph-level
@@ -60,10 +55,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="dialogs.preferences.segmentation.rules.sentence.level.segmentation">
-		<term
-			id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title">
-		  Sentence-level
-        segmentation</term>
+		<term id="dialogs.preferences.segmentation.rules.sentence.level.segmentation.title"><link linkend="dialogs.preferences.segmentation.rules.sentence.level.segmentation"> </link>Sentence-level segmentation</term>
 
         <listitem>
 		  <para>After dividing the source file into structural units, OmegaT
@@ -97,9 +89,7 @@
   </section>
   
   <section id="dialog.preferences.segmentation.setup.scope">
-	<title id="dialog.preferences.segmentation.setup.scope.title">
-      Global or
-	local?</title>
+	<title id="dialog.preferences.segmentation.setup.scope.title"><link linkend="dialog.preferences.segmentation.setup.scope"> </link>Global or local?</title>
 
 	<note>
 	  <para>The same mechanisms and dialogs are used to define global and local
@@ -124,7 +114,7 @@
 
 
   <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
-	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules</title>
+	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title"><link linkend="dialog.preferences.segmentation.setup.rules.based.segmentation"> </link>Rules</title>
 	<para>OmegaT provides predefined segmentation rules, and the translator can
 	use regular expressions to modify them. See the <link linkend="app.regex"
 	endterm="app.regex.title"/> appendix for details.</para>
@@ -143,7 +133,7 @@
 	</warning>
 
 	<table id="segmentation.simple.examples">
-	  <title id="segmentation.simple.examples.title">A few simple examples</title>
+	  <title id="segmentation.simple.examples.title"><link linkend="segmentation.simple.examples"> </link>A few simple examples</title>
       <tgroup cols="5">
 		<colspec align="left" colnum="1"/>
 		<colspec align="left" colnum="2"/>

@@ -5,21 +5,19 @@
 %manualvariables;
 ]>
 <section id="how.to.installing.omegat">
-  <title id="how.to.installing.omegat.title">
-    Install
-  OmegaT</title>
+  <title id="how.to.installing.omegat.title"><link linkend="how.to.installing.omegat"> </link>Install OmegaT</title>
 
   <para>OmegaT comes in two editions:</para>
 
   <variablelist>
 	<varlistentry id="how.to.installing.omegat.standard">
-	  <term id="how.to.installing.omegat.standard.title">Standard</term>
+	  <term id="how.to.installing.omegat.standard.title"><link linkend="how.to.installing.omegat.standard"> </link>Standard</term>
 	  <listitem>
 		<para>This edition is recommended for everyday use.</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry id="how.to.installing.omegat.weekly">
-	  <term id="how.to.installing.omegatweekly.title">OmegaT Weekly</term>
+	  <term id="how.to.installing.omegat.weekly.title"><link linkend="how.to.installing.omegat.weekly"> </link>OmegaT Weekly</term>
 	  <listitem>
 		<para>This is the edition of OmegaT in active development. It is automatically generated every week,
 		and serves as a beta version for testing purposes.</para>
@@ -51,7 +49,7 @@
   </note>
 
   <section id="installing.omegat.windows">
-	<title id="installing.omegat.windows.title">On Windows</title>
+	<title id="installing.omegat.windows.title"><link linkend="installing.omegat.windows"> </link>On Windows</title>
 
     <para>Double-click on the package you downloaded.</para>
 
@@ -61,7 +59,7 @@
   </section>
 
   <section id="installing.omegat.linux.intel">
-	<title id="installing.omegat.linux.intel.title">On Linux</title>
+	<title id="installing.omegat.linux.intel.title"><link linkend="installing.omegat.linux.intel"> </link>On Linux</title>
 
 	<para>Some Linux distributions offer OmegaT in their package manager. The
 	instructions given here apply to people who download the package from the
@@ -93,7 +91,7 @@
   </section>
 
   <section id="Installing.omegat.macos">
-	<title id="Installing.omegat.macos.title">On macOS</title>
+	<title id="Installing.omegat.macos.title"><link linkend="Installing.omegat.macos"> </link>On macOS</title>
 
     <para>Double click on the package you downloaded to unpack it.  This creates
     a folder called <filename>OmegaT</filename>. The folder contains two files:
@@ -109,7 +107,7 @@
   </section>
 
   <section id="installing.omegat.other.systems">
-	<title id="installing.omegat.other.systems.title">On other platforms</title>
+	<title id="installing.omegat.other.systems.title"><link linkend="installing.omegat.other.systems"> </link>On other platforms</title>
 
     <para>This information applies to any system for a Java version
     compatible with &javaversionlong; is available. That includes the platforms
@@ -127,7 +125,7 @@
   </section>
 
   <section id="update.and.delete.omegat">
-	<title id="update.and.delete.omegat.title">Upgrade</title>
+	<title id="update.and.delete.omegat.title"><link linkend="update.and.delete.omegat"> </link>Upgrade</title>
 
 	<para>OmegaT can tell you when a new version is available. See the <link
 	endterm="dialogs.preferences.updates.title"
@@ -180,7 +178,7 @@
 
 	<variablelist>
 	  <varlistentry id="update.and.delete.omegat.over.existing.package">
-		<term id="update.and.delete.omegat.over.existing.package.title">Over an existing version</term>
+		<term id="update.and.delete.omegat.over.existing.package.title"><link linkend="update.and.delete.omegat.over.existing.package"> </link>Over an existing version</term>
 
 		<listitem>
 		  <para>To do this, simply select the same installation folder as the
@@ -192,8 +190,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="update.and.delete.omegat.along.existing.package">
-		<term  id="update.and.delete.omegat.along.existing.package.title">
-		Alongside an existing version</term>
+		<term  id="update.and.delete.omegat.along.existing.package.title"><link linkend="update.and.delete.omegat.along.existing.package"> </link>Alongside an existing version</term>
 
 		<listitem>
 		  <para>This will enable you to keep any number of versions side-by-side,
@@ -216,7 +213,7 @@
   </section>
   
   <section id="update.and.delete.omegat.delete">
-	<title id="update.and.delete.omegat.delete.title">Delete OmegaT</title>
+	<title id="update.and.delete.omegat.delete.title"><link linkend="update.and.delete.omegat.delete"> </link>Delete OmegaT</title>
 
 	<para>Use your operating system’s standard procedure to remove OmegaT.  If
 	you want to remove OmegaT completely, you will also have to delete the
@@ -229,7 +226,7 @@
   </section>
 
   <section id="build.omegat.from.source">
-	<title id="build.omegat.from.source.title">Build OmegaT</title>
+	<title id="build.omegat.from.source.title"><link linkend="build.omegat.from.source"> </link>Build OmegaT</title>
 
 	<para>The source code for the current version can either be downloaded
 	directly from the OmegaT <ulink url="https://omegat.org/download">download

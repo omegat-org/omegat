@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.use.tm">
-  <title id="how.to.use.tm.title">Use translation memories</title>
+  <title id="how.to.use.tm.title"><link linkend="how.to.use.tm"> </link>Use translation memories</title>
 
   <para>When a project is initially created, it comes with its own empty project
   translation memory, the <link linkend="project.folder.project.save.tmx.title"
@@ -37,7 +37,7 @@
   </itemizedlist>
 
   <section id="how.to.use.tm.create.your.tm">
-	<title id="how.to.use.tm.create.your.tm.title">Create your own TMs</title>
+	<title id="how.to.use.tm.create.your.tm.title"><link linkend="how.to.use.tm.create.your.tm"> </link>Create your own TMs</title>
 	
 	<para>When you use <link linkend="menus.project"
 	endterm="menus.project.title"/><link
@@ -63,7 +63,7 @@
   </section>
 
   <section id="how.to.use.tm.reuse.tm">
-	<title id="how.to.use.tm.reuse.tm.title">Reuse TMs</title>
+	<title id="how.to.use.tm.reuse.tm.title"><link linkend="how.to.use.tm.reuse.tm"> </link>Reuse TMs</title>
 	
 	<para>To reuse translation memories from a previous project you have two
 	options:</para>
@@ -168,9 +168,7 @@
 	</itemizedlist>
 	
     <section id="how.to.tm.read.and.write">
-	  <title id="how.to.tm.read.and.write.title">
-		Reading TMs from other
-      tools</title>
+	  <title id="how.to.tm.read.and.write.title"><link linkend="how.to.tm.read.and.write"> </link>Reading TMs from other tools</title>
 
       <para>OmegaT can read TMX-standard compliant memories produced by other
       tools.</para>
@@ -184,7 +182,7 @@
 	</section>
 
 	<section id="how.to.use.tm.store.your.tm">
-	  <title id="how.to.use.tm.store.your.tm.title">Managing your TMs</title>
+	  <title id="how.to.use.tm.store.your.tm.title"><link linkend="how.to.use.tm.store.your.tm"> </link>Managing your TMs</title>
 
 	  <para>You may want to store translation memories in separate folders, by
 	  client or area of specialty so you can reuse them quickly when the need
@@ -196,9 +194,7 @@
 	</section>
 	
 	<section id="how.to.tm.creating.a.tm.for.selected.documents">
-	  <title id="how.to.tm.creating.a.tm.for.selected.documents.title">
-		Creating
-      a TM specific to selected documents</title>
+	  <title id="how.to.tm.creating.a.tm.for.selected.documents.title"><link linkend="how.to.tm.creating.a.tm.for.selected.documents"> </link>Creating a TM specific to selected documents</title>
 
       <para>In situations where you need to share a TMX that contain only the
       text from certain specific files and excludes other content, follow the
@@ -247,7 +243,7 @@
   </section>
 
   <section id="how.to.tm.share.translation.memories">
-	<title id="how.to.tm.share.translation.memories.title">Share TMs</title>
+	<title id="how.to.tm.share.translation.memories.title"><link linkend="how.to.tm.share.translation.memories"> </link>Share TMs</title>
 
 	<para>For large jobs involving a team of translators, it is easier for
 	everyone involved in sharing common translation memories rather than pass
@@ -257,7 +253,7 @@
 
 	<variablelist>
 	  <varlistentry id="how.to.tm.share.translation.memories.good.enough.way">
-		<term id="how.to.tm.share.translation.memories.good.enough.way.title">The good enough way</term>
+		<term id="how.to.tm.share.translation.memories.good.enough.way.title"><link linkend="how.to.tm.share.translation.memories.good.enough.way"> </link>The good enough way</term>
 		<listitem>
 		  
 		  <para>See the <link linkend="how.to.use.tm.create.your.tm"
@@ -298,7 +294,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="how.to.tm.share.translation.memories.technical.approach">
-		<term id="how.to.tm.share.translation.memories.technical.approach.title">The technical approach</term>
+		<term id="how.to.tm.share.translation.memories.technical.approach.title"><link linkend="how.to.tm.share.translation.memories.technical.approach"> </link>The technical approach</term>
 		<listitem>
 		  <para>OmegaT uses collaborative version control systems to share
 		  data.</para>
@@ -327,7 +323,7 @@
   </section>
 
   <section id="how.to.tm.bridge.two.languages">
-	<title id="how.to.tm.bridge.two.languages.title">Bridge two languages</title>
+	<title id="how.to.tm.bridge.two.languages.title"><link linkend="how.to.tm.bridge.two.languages"> </link>Bridge two languages</title>
 
 	<para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
 	endterm="panes.fuzzy.matches.title"/> pane. By default, those matches are limited to the source and target languages defined in the <link
@@ -390,9 +386,7 @@
 	</orderedlist>
 
 	<example id="bridge.english.and.french.with.japanese">
-	  <title id="bridge.english.and.french.with.japanese.title">
-		Using a Japanese reference under the
-	  English source</title>
+	  <title id="bridge.english.and.french.with.japanese.title"><link linkend="bridge.english.and.french.with.japanese"> </link>Using a Japanese reference under the English source</title>
 	  <para>If you have a TMX that contains the Japanese translation of an
 	  English document you are translating to French, you can use the Japanese
 	  translation as an alternative exact reference by displaying it under the

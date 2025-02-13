@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.translate.other.files">
-  <title id="how.to.translate.other.files.title">Support other formats</title>
+  <title id="how.to.translate.other.files.title"><link linkend="how.to.translate.other.files"> </link>Support other formats</title>
 
   <para>OmegaT's file filters provide a wide range of support for common and
   less common file formats. If you need to support formats that are not covered
@@ -27,7 +27,7 @@
   </itemizedlist>
   
   <section id="how.to.translate.other.files.associate">
-	<title id="how.to.translate.other.files.associate.title">Association</title>
+	<title id="how.to.translate.other.files.associate.title"><link linkend="how.to.translate.other.files.associate"> </link>Association</title>
 
 	<para>File filters have a list of file extensions that are associated to
 	them. If the format you want to translate is structurally close to an
@@ -46,7 +46,7 @@
   </section>
   
   <section id="how.to.translate.other.files.convert">
-	<title id="how.to.translate.other.files.convert.title">Conversion</title>
+	<title id="how.to.translate.other.files.convert.title"><link linkend="how.to.translate.other.files.convert"> </link>Conversion</title>
 
 	<para>To ensure that all the properties of a format are properly taken
 	into account, it is sometimes preferable to convert the file to a
@@ -131,9 +131,7 @@
   </section>
 
   <section id="how.to.translate.other.files.third.party.plugins">
-	<title id="how.to.translate.other.files.third.party.plugins.title">
-      Third-party
-	plugins</title>
+	<title id="how.to.translate.other.files.third.party.plugins.title"><link linkend="how.to.translate.other.files.third.party.plugins"> </link>Third-party plugins</title>
 
 	<itemizedlist>
 	  <listitem>
@@ -160,7 +158,7 @@
   </section>
 
   <section id="how.to.translate.other.files.develop">
-	<title id="how.to.translate.other.files.develop.title">Development</title>
+	<title id="how.to.translate.other.files.develop.title"><link linkend="how.to.translate.other.files.develop"> </link>Development</title>
 
 	<para>OmegaT provides developers with thorough documentation to create
 	file filter plugins. See <ulink

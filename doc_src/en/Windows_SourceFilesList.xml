@@ -2,9 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.source.files.list">
-  <title id="windows.source.files.list.title">
-    <guilabel>Source
-  Files</guilabel></title>
+  <title id="windows.source.files.list.title"><link linkend="windows.source.files.list"> </link><guilabel>Source Files</guilabel></title>
 
   <para>This window is displayed automatically when OmegaT loads a project, and
   can be called at any time using <link linkend="menus.project"
@@ -77,9 +75,7 @@
   
   <variablelist>
 	<varlistentry id="windows.source.files.list.copy.files">
-      <term id="windows.source.files.list.copy.files.title">
-		<guibutton>Add
-	  Files...</guibutton></term>
+      <term id="windows.source.files.list.copy.files.title"><link linkend="windows.source.files.list.copy.files"> </link><guibutton>Add Files...</guibutton></term>
 	  <listitem>
 		<para>Copies the selected files to the <link
 		linkend="project.folder.source" endterm="project.folder.source.title"/>
@@ -88,9 +84,7 @@
 	</varlistentry>
 	
 	<varlistentry id="windows.source.files.list.download.page">
-      <term id="windows.source.files.list.download.page.title">
-		<guibutton>Add
-	  MediaWiki Page...</guibutton></term>
+      <term id="windows.source.files.list.download.page.title"><link linkend="windows.source.files.list.download.page"> </link><guibutton>Add MediaWiki Page...</guibutton></term>
 	  <listitem>
 		<para>Asks for the URL of the page and downloads it into the <link
 		linkend="project.folder.source" endterm="project.folder.source.title"/>

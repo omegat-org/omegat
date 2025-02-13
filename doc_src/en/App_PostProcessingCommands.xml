@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="post.processing.commands">
-  <title id="post.processing.commands.title">Post-Processing Commands</title>
+  <title id="post.processing.commands.title"><link linkend="post.processing.commands"> </link>Post-Processing Commands</title>
 
   <para>See the <link
   linkend="dialogs.project.properties.external.processing.command"
@@ -15,7 +15,7 @@
   
 
   <section id="post.processing.commands.template.variables">
-	<title id="post.processing.commands.template.variables.title">Template Variables</title>
+	<title id="post.processing.commands.template.variables.title"><link linkend="post.processing.commands.template.variables"> </link>Template Variables</title>
     <para>The command is passed to Java runtime exec as a string with the
     template values expanded. All the arguments should be quoted,
     e.g. <literal>&quot;${fileName}&quot;</literal>.</para>
@@ -112,9 +112,7 @@
   </section>
   
   <section id="post.processing.commands.user.defined.scripts">
-	<title id="post.processing.commands.user.defined.scripts.title">
-      Local
-    Scripts</title>
+	<title id="post.processing.commands.user.defined.scripts.title"><link linkend="post.processing.commands.user.defined.scripts"> </link>Local Scripts</title>
     <para>
       In addition to a regular command, you can call a script. Never run
       post-processing scripts from untrusted sources. For security reasons,
@@ -134,9 +132,7 @@
   </section>
 
   <section id="post.processing.commands.linux.and.macos">
-	<title id="post.processing.commands.linux.and.macos.title">
-      Linux and
-    macOS</title>
+	<title id="post.processing.commands.linux.and.macos.title"><link linkend="post.processing.commands.linux.and.macos"> </link>Linux and macOS</title>
     <para>
       You should use a shebang, e.g. <literal>#! /bin/bash</literal> or
       <literal>#! /usr/bin/env python3</literal>. And the script must be
@@ -146,9 +142,7 @@
   </section>
   
   <example id="post.processing.commands.example">
-	<title id="post.processing.commands.example.title">
-      Simple example of a
-	post-processing commands:</title>
+	<title id="post.processing.commands.example.title"><link linkend="post.processing.commands.example"> </link>Simple example of a post-processing commands:</title>
 	<variablelist>
 	  <varlistentry>
 		<term>Open the target folder in Linux</term>

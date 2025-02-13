@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.setup.team.project">
-  <title id="how.to.setup.team.project.title">Set up a team project</title>
+  <title id="how.to.setup.team.project.title"><link linkend="how.to.setup.team.project"> </link>Set up a team project</title>
 
   <para>Managing a team project calls for some knowledge of either the
   <emphasis>SVN</emphasis> or <emphasis>Git</emphasis> version control system
@@ -245,9 +245,7 @@
   </section>
 
   <section id="how.to.setup.team.project.mapping.parameters">
-	<title id="how.to.setup.team.project.mapping.parameters.title">
-      Repository
-	mappings</title>
+	<title id="how.to.setup.team.project.mapping.parameters.title"><link linkend="how.to.setup.team.project.mapping.parameters"> </link>Repository mappings</title>
 
 	<para>It is possible to map various remote locations to local files via the
 	OmegaT user interface using <link
@@ -265,7 +263,7 @@
 
 	<variablelist>
       <varlistentry id="how.to.setup.team.project.mapping.parameters.repository.type">
-		<term id="how.to.setup.team.project.mapping.parameters.repository.type.title">repository type</term>
+		<term id="how.to.setup.team.project.mapping.parameters.repository.type.title"><link linkend="how.to.setup.team.project.mapping.parameters.repository.type"> </link>repository type</term>
 		<listitem>
           <para>This can be either <emphasis>http</emphasis> (which includes
           https), <emphasis>svn</emphasis>, <emphasis>git</emphasis>, or
@@ -274,14 +272,14 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.repository.url">
-		<term id="how.to.setup.team.project.mapping.parameters.repository.url.title">repository url</term>
+		<term id="how.to.setup.team.project.mapping.parameters.repository.url.title"><link linkend="how.to.setup.team.project.mapping.parameters.repository.url"> </link>repository url</term>
 		<listitem>
           <para>Remote location or folder of the files to translate.</para>
 		</listitem>
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.mapping.local">
-		<term id="how.to.setup.team.project.mapping.parameters.mapping.local.title">mapping local</term>
+		<term id="how.to.setup.team.project.mapping.parameters.mapping.local.title"><link linkend="how.to.setup.team.project.mapping.parameters.mapping.local"> </link>mapping local</term>
 		<listitem>
           <para>Name of the local folder or file, relative to the root of the
           OmegaT project.</para>
@@ -289,7 +287,7 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.mapping.repository">
-		<term id="how.to.setup.team.project.mapping.parameters.mapping.repository.title">mapping repository</term>
+		<term id="how.to.setup.team.project.mapping.parameters.mapping.repository.title"><link linkend="how.to.setup.team.project.mapping.parameters.mapping.repository"> </link>mapping repository</term>
 		<listitem>
           <para>Name of the remote folder or file, relative to the repository
           url.</para>
@@ -297,7 +295,7 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.excludes">
-		<term id="how.to.setup.team.project.mapping.parameters.excludes.title">excludes</term>
+		<term id="how.to.setup.team.project.mapping.parameters.excludes.title"><link linkend="how.to.setup.team.project.mapping.parameters.excludes"> </link>excludes</term>
 		<listitem>
           <para>Use wildcards (following the Apache Ant style: *, ?, **) to add
           patterns for files that should not be part of the mapping. Use a
@@ -309,7 +307,7 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.includes">
-		<term id="how.to.setup.team.project.mapping.parameters.includes.title">includes</term>
+		<term id="how.to.setup.team.project.mapping.parameters.includes.title"><link linkend="how.to.setup.team.project.mapping.parameters.includes"> </link>includes</term>
 		<listitem>
           <para>As above, but for files that should be part of the mapping.
           Since files are included by default unless specifically excluded, this
@@ -324,9 +322,7 @@
   </section>
 
   <section id="how.to.setup.team.project.example.mappings">
-	<title id="how.to.setup.team.project.example.mappings.title">
-      Example
-	mappings</title>
+	<title id="how.to.setup.team.project.example.mappings.title"><link linkend="how.to.setup.team.project.example.mappings"> </link>Example mappings</title>
 
 	<para>Default project mapping:
 	<programlisting>&lt;repository type="svn" url="https://repo_for_OmegaT_team_project"&gt;
@@ -404,9 +400,7 @@
 
   </section>
   <section id="how.to.setup.team.project.selective.sharing">
-	<title id="how.to.setup.team.project.selective.sharing.title">
-      Selective
-	sharing</title>
+	<title id="how.to.setup.team.project.selective.sharing.title"><link linkend="how.to.setup.team.project.selective.sharing"> </link>Selective sharing</title>
 
 	<para>The above process describes the most common scenario, in which the
 	team project administrator has full control of the project and all files

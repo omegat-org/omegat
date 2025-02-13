@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">Troubleshoot issues</title>
+  <title id="how.to.restore.your.data.title"><link linkend="how.to.restore.your.data"> </link>Troubleshoot issues</title>
 
   <warning>
 	<para>OmegaT is a robust and trustworthy application, but even so, it is
@@ -11,9 +11,7 @@
   </warning>
 
   <section id="how.to.restore.your.data.automatic.backup">
-	<title id="how.to.restore.your.data.automatic.backup.title">
-      Automatic
-	backups</title>
+	<title id="how.to.restore.your.data.automatic.backup.title"><link linkend="how.to.restore.your.data.automatic.backup"> </link>Automatic backups</title>
 
 	<para>OmegaT creates backups of your project settings to ensure it can
 	retrieve them in case of problem. See the <link
@@ -90,9 +88,7 @@
   </section>
 
   <section id="how.to.restore.your.data.lost.in.translation">
-	<title id="how.to.restore.your.data.lost.in.translation.title">
-      You lost your
-	translation?</title>
+	<title id="how.to.restore.your.data.lost.in.translation.title"><link linkend="how.to.restore.your.data.lost.in.translation"> </link>You lost your translation?</title>
 
 	<para>Even if you fear you might have lost translation data, it is probably
 	safely stored in your most recent backup memory, which is usually less than
@@ -142,9 +138,7 @@
   </section>
 
   <section id="how.to.restore.your.data.project.locked">
-	<title id="how.to.restore.your.data.project.locked.title">
-      Your project is
-	locked?</title>
+	<title id="how.to.restore.your.data.project.locked.title"><link linkend="how.to.restore.your.data.project.locked"> </link>Your project is locked?</title>
 
 	<para>In the rare case where your computer freezes and OmegaT does not have
 	time to close properly, the <filename>omegat.project</filename> file can be
@@ -188,9 +182,7 @@
   </section>
   
   <section id="how.to.restore.your.data.project.wont.open">
-	<title id="how.to.restore.your.data.project.wont.open.title">
-      Your project
-	won’t open?</title>
+	<title id="how.to.restore.your.data.project.wont.open.title"><link linkend="how.to.restore.your.data.project.wont.open"> </link>Your project won’t open?</title>
 
 	<para>In the rare case where your computer freezes and OmegaT does not have
 	time to close properly, some important files can be corrupted and keep your
@@ -234,9 +226,7 @@
   </section>
 
   <section id="how.to.restore.your.data.translated.file.broken">
-	<title id="how.to.restore.your.data.translated.file.broken.title">
-      Your
-	translated file won’t open?</title>
+	<title id="how.to.restore.your.data.translated.file.broken.title"><link linkend="how.to.restore.your.data.translated.file.broken"> </link>Your translated file won’t open?</title>
 
 	<para>Very often, office suite files contain tags that must be copied into
 	the translation to ensure that the translated file can be opened in the
@@ -279,9 +269,7 @@
   </section>
 
   <section id="how.to.restore.your.data.omegat.wont.behave">
-	<title id="how.to.restore.your.data.omegat.wont.behave.title">
-      OmegaT won’t
-	behave?</title>
+	<title id="how.to.restore.your.data.omegat.wont.behave.title"><link linkend="how.to.restore.your.data.omegat.wont.behave"> </link>OmegaT won’t behave?</title>
 
 	<para>Something has happened and OmegaT won’t behave anymore. Whatever you
 	try, you can’t seem to be able to fix it. You want to try one last thing
@@ -349,7 +337,7 @@
   </section>
 
   <section id="how.to.restore.your.data.summary">
-	<title id="how.to.restore.your.data.summary.title">Summary</title>
+	<title id="how.to.restore.your.data.summary.title"><link linkend="how.to.restore.your.data.summary"> </link>Summary</title>
 
 	<itemizedlist>
       <listitem>

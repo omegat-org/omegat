@@ -2,7 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="app.bidi">
-  <title id="app.bidi.title">Directional Formatting Characters</title>
+  <title id="app.bidi.title"><link linkend="app.bidi"> </link>Directional Formatting Characters</title>
 
   <para>Bidi control characters are available from <link
   linkend="menus.edit" endterm="menus.edit.title"/><link
@@ -29,7 +29,7 @@
   show a visual indication of their position.</para>
 
   <section id="app.bidi.marks">
-	<title id="app.bidi.marks.title">Marks</title>
+	<title id="app.bidi.marks.title"><link linkend="app.bidi.marks"> </link>Marks</title>
 
 	<para>To change the position of a character with weak or neutral
 	directionality (like punctuation symbols), insert an LRM or RLM character
@@ -50,7 +50,7 @@
   </section>
 
   <section id="app.bidi.embeddings">
-	<title id="app.bidi.embeddings.title">Embeddings</title>
+	<title id="app.bidi.embeddings.title"><link linkend="app.bidi.embeddings"> </link>Embeddings</title>
 
 	<para>Embeddings can be used to create a longer section of text (containing
 	several words and spaces) that must flow in the direction opposite that of

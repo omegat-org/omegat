@@ -2,8 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.project">
-  <title id="menus.project.title">
-  <guimenu>Project</guimenu></title>
+  <title id="menus.project.title"><guimenu>Project</guimenu></title>
   <para>This menu gives you access to project management commands.</para>
 
   <example id="example.new.project.shortcut">
@@ -345,8 +344,7 @@
 		  </varlistentry>
 
 		  <varlistentry id="menus.project.access.project.contents.current.source.file">
-			<term id="menus.project.access.project.contents.current.source.file.title">
-			<guimenuitem>Current Source File</guimenuitem></term>
+			<term id="menus.project.access.project.contents.current.source.file.title"><guimenuitem>Current Source File</guimenuitem></term>
 			<listitem>
 			  <para>The current source file is located in the <link
 			  linkend="project.folder.source"
@@ -374,8 +372,7 @@
 		  </varlistentry>
 
 		  <varlistentry id="menus.project.access.project.contents.writable.glossary">
-			<term id="menus.project.access.project.contents.writable.glossary.title">
-			<guimenuitem>Writable Glossary</guimenuitem></term>
+			<term id="menus.project.access.project.contents.writable.glossary.title"><guimenuitem>Writable Glossary</guimenuitem></term>
 			<listitem>
 			  <para>The writable glossary is located in the <link
 			  linkend="project.folder.glossary"
@@ -392,8 +389,7 @@
     </varlistentry>
 
     <varlistentry id="menus.project.restart">
-	  <term id="menus.project.restart.title">
-      <guimenuitem>Restart</guimenuitem></term>
+	  <term id="menus.project.restart.title"><guimenuitem>Restart</guimenuitem></term>
       <listitem>
         <para>Saves the project and restarts OmegaT. You are asked to confirm
         that you really want to quit if you have not yet saved the

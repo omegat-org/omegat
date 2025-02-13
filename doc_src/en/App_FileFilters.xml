@@ -3,8 +3,7 @@
 [<!ENTITY % manualvariables SYSTEM "manualvariables.mod"> %manualvariables;]>
 
 <section id="file.filters">
-  <title id="file.filters.title">
-  File Filters</title>
+  <title id="file.filters.title">File Filters</title>
 
   <warning>
 	<para>File filters are either local and specific to a given project, or
@@ -62,13 +61,11 @@
   filters.</para>
 
   <section id="file.filters.general">
-	<title id="file.filters.general.title">
-    Common preferences</title>
+	<title id="file.filters.general.title">Common preferences</title>
 	
 	<variablelist>
 	  <varlistentry id="file.filters.general.hide">
-		<term id="file.filters.general.hide.title">
-		Hide leading and trailing tags</term>
+		<term id="file.filters.general.hide.title">Hide leading and trailing tags</term>
 		<listitem>
 		  <para>Leading and trailing tags are generally required by OmegaT to
 		  properly recreate the translated segment. Hiding them from the
@@ -93,8 +90,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.general.preserve">
-		<term id="file.filters.general.preserve.title">
-		Preserve spaces for all tags</term>
+		<term id="file.filters.general.preserve.title">Preserve spaces for all tags</term>
 		<listitem>
 		  <para>If the source documents contain whitespace used to control the
 		  layout, the whitespace that must be will retained in the translated
@@ -103,8 +99,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="file.filters.general.do.not.use.name">
-		<term id="file.filters.general.do.not.use.name.title">
-		Do not use the file name to identify alternate translations</term>
+		<term id="file.filters.general.do.not.use.name.title">Do not use the file name to identify alternate translations</term>
 		<listitem>
 		  <para>The source file name is one of the elements that characterize an
 		  alternative translation. If this option is checked, only the
@@ -119,8 +114,7 @@
   </section>
   
   <section id="edit.filter.dialog">
-	<title id="edit.filter.dialog.title">
-    Edit</title>
+	<title id="edit.filter.dialog.title">Edit</title>
 	
     <para>Double-click the editable fields to make simple modifications or click
     on the <guibutton>Edit...</guibutton> button to access the modification
@@ -209,8 +203,7 @@
     </section>
 
     <section id="target.name">
-	  <title id="target.name.title">
-      Translated filename</title>
+	  <title id="target.name.title">Translated filename</title>
 	  
 	  <para>Files in the <link linkend="project.folder.target"
 	  endterm="project.folder.target.title"/> folder are overwritten every time
@@ -225,8 +218,7 @@
 
 	  <variablelist>
         <varlistentry id="target.name.filename">
-		  <term id="target.name.filename.title">
-		  ${filename}</term>
+		  <term id="target.name.filename.title">${filename}</term>
           <listitem>
 			<para>The default pattern. It represents the complete filename of
 			the source file, including the extension. Using this pattern assigns
@@ -235,56 +227,49 @@
 		</varlistentry>
 
         <varlistentry id="target.name.nameonly">
-		  <term id="target.name.nameonly.title">
-		  ${nameOnly}</term>
+		  <term id="target.name.nameonly.title">${nameOnly}</term>
           <listitem>
 			<para>name of the source file, without the extension</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.extension">
-		  <term id="target.name.extension.title">
-		  ${extension} </term>
+		  <term id="target.name.extension.title">${extension} </term>
           <listitem>
 			<para>original file extension</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.targetlocale">
-		  <term id="target.name.targetlocale.title">
-		  ${targetLocale}</term>
+		  <term id="target.name.targetlocale.title">${targetLocale}</term>
           <listitem>
 			<para>target language+region code (xx_YY)</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.target.language">
-		  <term id="target.name.target.language.title">
-		  ${targetLanguage}</term>
+		  <term id="target.name.target.language.title">${targetLanguage}</term>
           <listitem>
 			<para>target language+region (xx-YY)</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.target.language.code">
-		  <term id="target.name.target.language.code.title">
-		  ${targetLanguageCode}</term>
+		  <term id="target.name.target.language.code.title">${targetLanguageCode}</term>
           <listitem>
 			<para>target language code (xx)</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.target.country.code">
-		  <term id="target.name.target.country.code.title">
-		  ${targetCountryCode}</term>
+		  <term id="target.name.target.country.code.title">${targetCountryCode}</term>
           <listitem>
 			<para>target region code (YY)</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.timestamp">
-		  <term id="target.name.timestamp.title">
-		  ${timestamp-????}</term>
+		  <term id="target.name.timestamp.title">${timestamp-????}</term>
           <listitem>
 			<para>system time when the file was created</para>
 
@@ -294,48 +279,42 @@
 		</varlistentry>
 
         <varlistentry id="target.name.os.name">
-		  <term id="target.name.os.name.title">
-		  ${system-os-name}</term>
+		  <term id="target.name.os.name.title">${system-os-name}</term>
           <listitem>
 			<para>name of the operating system</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.user.name">
-		  <term id="target.name.user.name.title">
-		  ${system-user-name}</term>
+		  <term id="target.name.user.name.title">${system-user-name}</term>
           <listitem>
 			<para>user’s login name</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.host.name">
-		  <term id="target.name.host.name.title">
-		  ${system-host-name}</term>
+		  <term id="target.name.host.name.title">${system-host-name}</term>
           <listitem>
 			<para>host name on the system</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.source.encoding">
-		  <term id="target.name.source.encoding.title">
-		  ${file-source-encoding}</term>
+		  <term id="target.name.source.encoding.title">${file-source-encoding}</term>
           <listitem>
 			<para>encoding of the source file</para>
 		  </listitem>
 		</varlistentry>
 		
         <varlistentry id="target.name.target.encoding">
-		  <term id="target.name.target.encoding.title">
-		  ${file-target-encoding}</term>
+		  <term id="target.name.target.encoding.title">${file-target-encoding}</term>
           <listitem>
 			<para>encoding of the target file</para>
           </listitem>
 		</varlistentry>
 
         <varlistentry id="target.name.target.locale">
-		  <term id="target.name.target.locale.title">
-		  ${targetLocaleLCID}</term>
+		  <term id="target.name.target.locale.title">${targetLocaleLCID}</term>
           <listitem>
 			<para>Microsoft target locale</para>
           </listitem>
@@ -353,8 +332,7 @@
 	  example below.</para>
 
 	  <example id="target.name.example">
-		<title id="target.name.example.title">
-		Target file names</title>
+		<title id="target.name.example.title">Target file names</title>
 		<para>For a source file named Document.xx.docx, using the variable
 		variants below will produce the following results:</para>
 
@@ -388,8 +366,7 @@
   </section>
   
   <section id="filters.options">
-	<title id="filters.options.title">
-    Options</title>
+	<title id="filters.options.title">Options</title>
 
     <para>Several filters offer options. Select the filter in the list and click
     <guibutton>Options...</guibutton> to modify them. </para>
@@ -398,8 +375,7 @@
 
 	<variablelist>
 	  <varlistentry id="file.filters.text">
-		<term id="file.filters.text.title">
-		Text files</term>
+		<term id="file.filters.text.title">Text files</term>
 		<listitem>
 		  <para>
 			<variablelist>
@@ -444,8 +420,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="file.filter.microsoft">
-		<term id="file.filter.microsoft.title">
-		Microsoft Office Open XML files</term>
+		<term id="file.filter.microsoft.title">Microsoft Office Open XML files</term>
 		<listitem>
 		  <warning>
 			<para>The <code>Microsoft Office Open XML (legacy filter)</code> is
@@ -524,8 +499,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.xhtml">
-		<term id="file.filters.xhtml.title">
-		XHTML Files</term>
+		<term id="file.filters.xhtml.title">XHTML Files</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -610,8 +584,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.html.xhtml">
-		<term id="file.filters.html.xhtml.title">
-		HTML and XHTML files</term>
+		<term id="file.filters.html.xhtml.title">HTML and XHTML files</term>
 		<listitem>
 		  <para>Only the options not available under the XHTML files filter (see
 		  above) are described here.</para>
@@ -678,8 +651,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.mozilla.ftl">
-		<term id="file.filters.mozilla.ftl.title">
-		Mozilla FTL</term>
+		<term id="file.filters.mozilla.ftl.title">Mozilla FTL</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -694,8 +666,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.mozilla.dtd">
-		<term id="file.filters.mozilla.dtd.title">
-		Mozilla DTD</term>
+		<term id="file.filters.mozilla.dtd.title">Mozilla DTD</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -710,8 +681,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.po">
-		<term id="file.filters.po.title">
-		PO files</term>
+		<term id="file.filters.po.title">PO files</term>
 		<listitem>
 		  <para>The filter checks printf variables ('%s', etc.) by
 		  default. See the <link
@@ -784,8 +754,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.moodle.php">
-		<term id="file.filters.moodle.php.title">
-		Moodle PHP</term>
+		<term id="file.filters.moodle.php.title">Moodle PHP</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -801,8 +770,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filter.java.bundle">
-		<term id="file.filter.java.bundle.title">
-		Java Resource bundle</term>
+		<term id="file.filter.java.bundle.title">Java Resource bundle</term>
 		<listitem>
 		  <para>The filter checks Java MessageFormat patterns (e.g. \{0\}) by
 		  default. See the <link
@@ -841,8 +809,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.odf">
-		<term id="file.filters.odf.title">
-		Open Document Format (ODF) files</term>
+		<term id="file.filters.odf.title">Open Document Format (ODF) files</term>
 		<listitem>
 		  <variablelist>
 			<varlistentry>
@@ -858,8 +825,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="file.filters.xliff">
-		<term id="file.filters.xliff.title">
-		XLIFF (legacy filter)</term>
+		<term id="file.filters.xliff.title">XLIFF (legacy filter)</term>
 		<listitem>
 		  <warning>
 			<para>This filter is the original OmegaT XLIFF filter. You should

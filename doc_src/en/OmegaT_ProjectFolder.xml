@@ -123,8 +123,7 @@
 	
 	<variablelist>
 	  <varlistentry id="project.folder.omegat">
-        <term id="project.folder.omegat.title">
-		omegat</term>
+        <term id="project.folder.omegat.title">omegat</term>
 		<listitem>
 		  <para>This is the project folder that always contains <link
 		  linkend="project.folder.project.save.tmx"
@@ -141,8 +140,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="project.folder.omegat.project.file">
-        <term id="project.folder.omegat.project.file.title">
-		omegat.project</term>
+        <term id="project.folder.omegat.project.file.title">omegat.project</term>
 		<listitem>
 		  <para>This file contains the project parameters defined in the <link
 		  linkend="dialogs.project.properties">project properties</link>, such as
@@ -161,8 +159,7 @@
   </section>
   
   <section id="project.folder.source">
-	<title id="project.folder.source.title">
-    source</title>
+	<title id="project.folder.source.title">source</title>
     <para>The source folder contains the files to translate.</para>
 
 	<para>Use <link linkend="menus.project" endterm="menus.project.title"/><link
@@ -187,8 +184,7 @@
   </section>
 
   <section id="project.folder.target">
-	<title id="project.folder.target.title">
-    target</title>
+	<title id="project.folder.target.title">target</title>
     <para>This folder is initially empty.</para>
 
 	<para>It will be populated with the translated files every time you use
@@ -208,8 +204,7 @@
   </section>
 
   <section id="project.folder.tm">
-	<title id="project.folder.tm.title">
-    tm</title>
+	<title id="project.folder.tm.title">tm</title>
     <para>This folder can contain any number of bilingual reference documents
     (TMX files, but also any file in a bilingual format supported by OmegaT,
     including PO files, etc.) and the TMX files can also be compressed in the
@@ -241,8 +236,7 @@
 
 	<variablelist>
       <varlistentry id="project.folder.tm.auto">
-        <term id="project.folder.tm.auto.title">
-		tm/auto</term>
+        <term id="project.folder.tm.auto.title">tm/auto</term>
 		<listitem>
 		  <para>This folder is intended for reliable references files that can
 		  automatically fill exactly matching and not yet translated
@@ -300,8 +294,7 @@
 	  </varlistentry>
 
       <varlistentry id="project.folder.tm.enforce">
-        <term id="project.folder.tm.enforce.title">
-		tm/enforce</term>
+        <term id="project.folder.tm.enforce.title">tm/enforce</term>
 		<listitem>
 		  <para>This folder is made for reliable references files that are also
 		  meant to automatically overwrite previously translated contents.</para>
@@ -381,8 +374,7 @@
 	  </varlistentry>
 
       <varlistentry id="project.folder.tm.mt">
-        <term id="project.folder.tm.mt.title">
-		tm/mt</term>
+        <term id="project.folder.tm.mt.title">tm/mt</term>
 		<listitem>
 		  <para>When a match is inserted from a TMX contained in this folder, the
 		  background colour of the active segment changes to red.</para>
@@ -393,8 +385,7 @@
 	  </varlistentry>
 	  
       <varlistentry id="project.folder.tm.penalty">
-        <term id="project.folder.tm.penalty.title">
-		tm/penalty-xxx</term>
+        <term id="project.folder.tm.penalty.title">tm/penalty-xxx</term>
 		<listitem>
 		  <para><literal>xxx</literal> is a number from 0 to 100 that will act as
 		  a penalty subtracted from the match percentage of segments coming from
@@ -408,8 +399,7 @@
 	  </varlistentry>
 
       <varlistentry id="project.folder.tm.tmx2source">
-        <term id="project.folder.tm.tmx2source.title">
-		tm/tmx2source</term>
+        <term id="project.folder.tm.tmx2source.title">tm/tmx2source</term>
 		<listitem>
 		  <para>You can display a third language <emphasis>right
 		  under</emphasis> the source segment to use as a third language
@@ -430,8 +420,7 @@
   </section>
 
   <section id="project.folder.exported.tm">
-	<title id="project.folder.exported.tm.title">
-    exported tms folder</title>
+	<title id="project.folder.exported.tm.title">exported tms folder</title>
 	<para>By default, that folder is the project folder itself but you can
 	change its location to make it more practical to share exported TM
 	files. See the <link linkend="how.to.tm.share.translation.memories"
@@ -440,8 +429,7 @@
   </section>
 
   <section id="project.folder.dictionary">
-	<title id="project.folder.dictionary.title">
-    dictionary</title>
+	<title id="project.folder.dictionary.title">dictionary</title>
     <para>This folder is initially empty, and is used to store any dictionaries
     you add to the project.</para>
 
@@ -478,8 +466,7 @@
   </section>
 
   <section id="project.folder.glossary">
-	<title id="project.folder.glossary.title">
-    glossary</title>
+	<title id="project.folder.glossary.title">glossary</title>
     <para>This folder is initially empty. It is used to store the default
     writable glossary and any other glossaries you use in the project.</para>
 
@@ -490,8 +477,7 @@
 
 	<variablelist>
       <varlistentry id="project.folder.glossary.txt">
-        <term id="project.folder.glossary.txt.title">
-		glossary.txt</term>
+        <term id="project.folder.glossary.txt.title">glossary.txt</term>
         <listitem>
           <para>This is the project writable glossary. It is created the first
           time you use <link linkend="menus.edit.create.glossary.entry"
@@ -508,8 +494,7 @@
   </section>
 
   <section id="project.folder.omegat.folder">
-	<title id="project.folder.omegat.folder.title">
-    omegat</title>
+	<title id="project.folder.omegat.folder.title">omegat</title>
     <para>The <filename class="directory">omegat</filename> folder contains, at
     a minimum, the <link linkend="project.folder.project.save.tmx"
     endterm="project.folder.project.save.tmx.title"/> and <link
@@ -519,8 +504,7 @@
 
     <variablelist>
       <varlistentry id="project.folder.project.save.tmx">
-        <term id="project.folder.project.save.tmx.title">
-		project_save.tmx</term>
+        <term id="project.folder.project.save.tmx.title">project_save.tmx</term>
         <listitem>
           <para>This is the most important file in the project. When you create
           a new project, the file is empty and is gradually filled with the
@@ -538,8 +522,7 @@
       </varlistentry>
 	  
 	  <varlistentry id="project.folder.project.save.tmx.bak">
-        <term id="project.folder.project.save.tmx.bak.title">
-		project_save.tmx.bak</term>
+        <term id="project.folder.project.save.tmx.bak.title">project_save.tmx.bak</term>
 		<listitem>
 		  <para>This file is a backup of <filename>project_save.tmx</filename>
 		  and is automatically recreated every time
@@ -555,8 +538,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="project.folder.project.save.tmx.timestamp.bak">
-        <term id="project.folder.project.save.tmx.timestamp.bak.title">
-		project_save.tmx.timestamp.bak</term>
+        <term id="project.folder.project.save.tmx.timestamp.bak.title">project_save.tmx.timestamp.bak</term>
 		<listitem>
 		  <para>Every time a project is loaded, OmegaT creates a backup of
 		  <filename>project_save.tmx</filename> with the name
@@ -566,8 +548,7 @@
 	  </varlistentry>
 
       <varlistentry id="project.folder.project.stats">
-        <term id="project.folder.project.stats.title">
-		project_stats.txt</term>
+        <term id="project.folder.project.stats.title">project_stats.txt</term>
         <listitem>
           <para>This is the statistics file for the whole project. It is updated
           each time the project is reloaded.</para>
@@ -579,8 +560,7 @@
       </varlistentry>
 	  
       <varlistentry id="project.folder.omegat.project.stats.match">
-        <term id="project.folder.omegat.project.stats.match.title">
-		project_stats_match.txt</term>
+        <term id="project.folder.omegat.project.stats.match.title">project_stats_match.txt</term>
         <listitem>
           <para>This file contains the latest project match statistics. Use
           <link linkend="menus.tools" endterm="menus.tools.title"/><link
@@ -603,8 +583,7 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.ignored.words">
-        <term id="project.folder.omegat.ignored.words.title">
-		ignored_words.txt</term>
+        <term id="project.folder.omegat.ignored.words.title">ignored_words.txt</term>
         <term id="project.folder.omegat.learned.words">learned_words.txt</term>
         <listitem>
           <para>These files are created and used by the spellchecker. You can
@@ -629,8 +608,7 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">
-		segmentation.conf</term>
+        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
         <listitem>
           <para>This file contains the project-specific segmentation
           rules.</para>
@@ -638,32 +616,28 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.filters">
-        <term id="project.folder.omegat.filters.title">
-		filters.xml</term>
+        <term id="project.folder.omegat.filters.title">filters.xml</term>
         <listitem>
           <para>This file contains the project-specific file filters.</para>
         </listitem>
       </varlistentry>
 	  
       <varlistentry id="project.folder.omegat.uiLayout">
-        <term id="project.folder.omegat.uiLayout.title">
-		uiLayout.xml</term>
+        <term id="project.folder.omegat.uiLayout.title">uiLayout.xml</term>
         <listitem>
           <para>This file contains the project-specific GUI settings.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.finder">
-        <term id="project.folder.omegat.finder.title">
-		finder.xml</term>
+        <term id="project.folder.omegat.finder.title">finder.xml</term>
         <listitem>
           <para>This file contains the project-specific external searches.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.file.order">
-        <term id="project.folder.omegat.file.order.title">
-		files_order.txt</term>
+        <term id="project.folder.omegat.file.order.title">files_order.txt</term>
         <listitem>
           <para>This file is created if you manually change the order of the
           files in the <link linkend="windows.source.files.list"
@@ -672,8 +646,7 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.last.entry">
-        <term id="project.folder.omegat.last.entry.title">
-		last_entry.properties</term>
+        <term id="project.folder.omegat.last.entry.title">last_entry.properties</term>
         <listitem>
           <para>This file keeps a record of the last segment you visited,
           including its number, its source contents, the file name and the date,
@@ -685,8 +658,7 @@
   </section>
 
   <section id="project.folder.repositories">
-	<title id="project.folder.repositories.title">
-    .repositories</title>
+	<title id="project.folder.repositories.title">.repositories</title>
     <para>In a team project, this folder contains a versioned copy of the
     project tree structure linked directly to the remote server.</para>
 

@@ -2,8 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.text.search">
-  <title id="windows.text.search.title">
-  <guilabel>Text Search</guilabel></title>
+  <title id="windows.text.search.title"><guilabel>Text Search</guilabel></title>
 
   <para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
   linkend="menus.edit.search.project"
@@ -33,8 +32,7 @@
   <para>Matches will be displayed in bold blue characters.</para>
 
   <example id="search.for.doitsu">
-	<title id="search.for.doitsu.title">
-    Search for ドイツ</title>
+	<title id="search.for.doitsu.title">Search for ドイツ</title>
 	<para>
 	  <programlisting>-- 148> | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
@@ -91,8 +89,7 @@
   </itemizedlist>
 
   <section id="windows.text.search.methods">
-    <title id="windows.text.search.methods.title">
-    Search type</title>
+    <title id="windows.text.search.methods.title">Search type</title>
 
     <para>Use the radio buttons to select the type of search.</para>
 
@@ -100,8 +97,7 @@
 
     <variablelist>
       <varlistentry id="windows.text.search.methods.exact">
-        <term id="windows.text.search.methods.exact.title">
-        Exact search</term>
+        <term id="windows.text.search.methods.exact.title">Exact search</term>
         <listitem>
           <para>Search for the string exactly as entered in the search
           field.</para>
@@ -111,8 +107,7 @@
       </varlistentry>
 
       <varlistentry id="windows.text.search.methods.keyword">
-        <term id="windows.text.search.methods.keyword.title">
-        Keyword search</term>
+        <term id="windows.text.search.methods.keyword.title">Keyword search</term>
         <listitem>
           <para>Search for segments containing each of the search terms
           separated by a space.</para>
@@ -151,8 +146,7 @@
 
 	<variablelist>
       <varlistentry id="windows.text.search.methods.regex">
-        <term id="windows.text.search.methods.regex.title">
-        Regular expressions</term>
+        <term id="windows.text.search.methods.regex.title">Regular expressions</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
 		  <para>Regular expressions are a very powerful way to search for
@@ -171,13 +165,11 @@
   </section>
 
   <section id="windows.text.search.options">
-    <title id="windows.text.search.options.title">
-    Options</title>
+    <title id="windows.text.search.options.title">Options</title>
 	
 	<variablelist>
 	  <varlistentry id="windows.text.search.options.case.sensitive">
-        <term id="windows.text.search.options.case.sensitive.title">
-        Case sensitive</term>
+        <term id="windows.text.search.options.case.sensitive.title">Case sensitive</term>
 		<listitem>
 		  <para>Only returns results with the same letter case as the search
 		  terms.</para>
@@ -185,8 +177,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="windows.text.search.options.space.matches.nbsp">
-        <term id="windows.text.search.options.space.matches.nbsp.title">
-        Space matches nbsp</term>
+        <term id="windows.text.search.options.space.matches.nbsp.title">Space matches nbsp</term>
 		<listitem>
 		  <para>Space characters in search terms will match both a normal space
 		  and a non-breaking space (\u00A)
@@ -195,64 +186,56 @@
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.in.source">
-        <term id="windows.text.search.options.in.source.title">
-        In source</term>
+        <term id="windows.text.search.options.in.source.title">In source</term>
 		<listitem>
 		  <para>Search in the source segments.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.in.translation">
-        <term id="windows.text.search.options.in.translation.title">
-        In translation</term>
+        <term id="windows.text.search.options.in.translation.title">In translation</term>
 		<listitem>
 		  <para>Search in the target segments.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.in.notes">
-        <term id="windows.text.search.options.in.notes.title">
-        In notes</term>
+        <term id="windows.text.search.options.in.notes.title">In notes</term>
 		<listitem>
 		  <para>Search in notes attached to segments.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.in.comments">
-        <term id="windows.text.search.options.in.comments.title">
-        In comments</term>
+        <term id="windows.text.search.options.in.comments.title">In comments</term>
 		<listitem>
 		  <para>Search in comments attached to segments.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.translated.or.untranslated">
-        <term id="windows.text.search.options.translated.or.untranslated.title">
-        Translated or untranslated</term>
+        <term id="windows.text.search.options.translated.or.untranslated.title">Translated or untranslated</term>
 		<listitem>
 		  <para>Search in both translated and untranslated segments.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.translated">
-        <term id="windows.text.search.options.translated.title">
-        Translated</term>
+        <term id="windows.text.search.options.translated.title">Translated</term>
 		<listitem>
 		  <para>Search only in translated segments.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.untranslated">
-        <term id="windows.text.search.options.untranslated.title">
-        Untranslated</term>
+        <term id="windows.text.search.options.untranslated.title">Untranslated</term>
 		<listitem>
 		  <para>Search only in untranslated segments.</para>
 		</listitem>
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.display.all">
-        <term id="windows.text.search.options.display.all.title">
-        Display: all matching segments</term>
+        <term id="windows.text.search.options.display.all.title">Display: all matching segments</term>
 		<listitem>
 		  <para>Every segment is displayed individually, even if it is a
 		  repetition found in either the same document or a different document in
@@ -261,8 +244,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.display.file.names">
-        <term id="windows.text.search.options.display.file.names.title">
-        Display: file names</term>
+        <term id="windows.text.search.options.display.file.names.title">Display: file names</term>
 		<listitem>
 		  <para>The name of the file where the segment is found is
 		  displayed above each result.</para>
@@ -270,8 +252,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.search.in.project">
-        <term id="windows.text.search.options.search.in.project.title">
-        Search in: Project</term>
+        <term id="windows.text.search.options.search.in.project.title">Search in: Project</term>
 		<listitem>
 		  <para>Search in the various bilingual resources of the project.</para>
 
@@ -279,8 +260,7 @@
 		  
 		  <variablelist>
 			<varlistentry id="windows.text.search.options.main.memory">
-              <term id="windows.text.search.options.main.memory.title">
-              Main Memory</term>
+              <term id="windows.text.search.options.main.memory.title">Main Memory</term>
 			  <listitem>
 				<para>Include the project memory (<link
 				linkend="project.folder.project.save.tmx"
@@ -289,8 +269,7 @@
 			</varlistentry>
 
 			<varlistentry id="windows.text.search.options.reference.tm">
-              <term id="windows.text.search.options.reference.tm.title">
-              Reference TMs</term>
+              <term id="windows.text.search.options.reference.tm.title">Reference TMs</term>
 			  <listitem>
 				<para>Include the translation memories located in the <link
 				linkend="project.folder.tm" endterm="project.folder.tm.title"/>
@@ -299,8 +278,7 @@
 			</varlistentry>
 
 			<varlistentry id="windows.text.search.options.glossaries">
-              <term id="windows.text.search.options.glossaries.title">
-              Glossaries</term>
+              <term id="windows.text.search.options.glossaries.title">Glossaries</term>
 			  <listitem>
 				<para>Include the glossaries located in the <link
 				linkend="project.folder.glossary"
@@ -312,8 +290,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="windows.text.search.options.search.in.files">
-        <term id="windows.text.search.options.search.in.files.title">
-        Search in: Files</term>
+        <term id="windows.text.search.options.search.in.files.title">Search in: Files</term>
 		<listitem>
 		  <para>Search in reference files not included in the project
 		  resources.</para>
@@ -329,8 +306,7 @@
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.search.options.tm.search.options">
-        <term id="windows.text.search.options.tm.search.options.title">
-        <guibutton>TM Search Options</guibutton></term>
+        <term id="windows.text.search.options.tm.search.options.title"><guibutton>TM Search Options</guibutton></term>
 		<listitem>
 		  <para>Select additional criteria such as the person who authored or
 		  changed the translation, the date and time of translation
@@ -343,8 +319,7 @@
 
 		  <variablelist>
 			<varlistentry id="windows.text.search.options.full.half.width">
-              <term id="windows.text.search.options.full.half.width.title">
-              Full/Half-width char insensitive</term>
+              <term id="windows.text.search.options.full.half.width.title">Full/Half-width char insensitive</term>
 			  <listitem>
 				<para>Returns results that match both the full- and half-width
 				forms (CJK characters) of the characters in the search
@@ -353,8 +328,7 @@
 			</varlistentry>
 
 			<varlistentry id="windows.text.search.options.number.of.matching.segments">
-              <term id="windows.text.search.options.number.of.matching.segments.title">
-              Number of matching segments</term>
+              <term id="windows.text.search.options.number.of.matching.segments.title">Number of matching segments</term>
 			  <listitem>
 				<para>Sets the maximum number of matches displayed in the search
 				result area.</para>
@@ -370,8 +344,7 @@
   </section>
 
   <section id="windows.text.search.result.display">
-    <title id="windows.text.search.result.display.title">
-    Results display</title>
+    <title id="windows.text.search.result.display.title">Results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For
     translated segments, the original text is displayed above the translated
@@ -407,8 +380,7 @@
 	<para>The selected segment is highlighted in green:</para>
 
   	<example id="select.second.match">
-	  <title id="select.second.match.title">
-      Select the second match</title>
+	  <title id="select.second.match.title">Select the second match</title>
 	  <para>
 		<programlisting>-- 148> | language = [[日本語]]・[[<token>ドイツ</token>語]]
 ---------
@@ -419,8 +391,7 @@
 
 	<variablelist>
 	  <varlistentry id="windows.text.search.result.display.auto.sync">
-        <term id="windows.text.search.result.display.auto.sync.title">
-        Auto-sync with editor</term>
+        <term id="windows.text.search.result.display.auto.sync.title">Auto-sync with editor</term>
 		<listitem>
 		  <para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
 		  pane synchronizes its display with the selection in the search
@@ -428,8 +399,7 @@
 		</listitem>
 	  </varlistentry>
 	  <varlistentry id="windows.text.search.result.display.back.to.initial.segment">
-        <term id="windows.text.search.result.display.back.to.initial.segment.title">
-        Back to the initial segment on close</term>
+        <term id="windows.text.search.result.display.back.to.initial.segment.title">Back to the initial segment on close</term>
 		<listitem>
 		  <para>When you close the search windows, the <link
 		  linkend="panes.editor" endterm="panes.editor.title"/> pane
@@ -441,8 +411,7 @@
   </section>
   
   <section id="windows.text.search.filter">
-    <title id="windows.text.search.filter.title">
-    Filter</title>
+    <title id="windows.text.search.filter.title">Filter</title>
 
 	<para>Click on the <guibutton>Filter</guibutton> button to show only the 
 	matching search result segments in the <link linkend="panes.editor"

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="post.processing.commands">
-  <title id="post.processing.commands.title">
-  Post-Processing Commands</title>
+  <title id="post.processing.commands.title">Post-Processing Commands</title>
 
   <para>See the <link
   linkend="dialogs.project.properties.external.processing.command"
@@ -16,8 +15,7 @@
   
 
   <section id="post.processing.commands.template.variables">
-	<title id="post.processing.commands.template.variables.title">
-    Template Variables</title>
+	<title id="post.processing.commands.template.variables.title">Template Variables</title>
     <para>The command is passed to Java runtime exec as a string with the
     template values expanded. All the arguments should be quoted,
     e.g. <literal>&quot;${fileName}&quot;</literal>.</para>

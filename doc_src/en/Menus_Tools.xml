@@ -2,15 +2,13 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
-  <title id="menus.tools.title">
-  <guimenu>Tools</guimenu></title>
+  <title id="menus.tools.title"><guimenu>Tools</guimenu></title>
 
   <para>This menu gives you access to a number of tools, including QA
   validation, match reports, an aligner, and scripting.</para>
 
   <example id="example.check.issues">
-	<title id="example.check.issues.title">
-    Shortcut description example</title>
+	<title id="example.check.issues.title">Shortcut description example</title>
 	<para>On Windows and Linux:
 	<keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo></para>
 

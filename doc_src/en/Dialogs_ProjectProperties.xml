@@ -686,8 +686,7 @@
 				
 				<variablelist>
 				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.omegat">
-					<term id="dialogs.project.properties.file.locations.tms.to.export.omegat.title">
-					<option>OmegaT</option></term>
+					<term id="dialogs.project.properties.file.locations.tms.to.export.omegat.title"><option>OmegaT</option></term>
 					<listitem>
 					  <para>An “OmegaT” TMX contains the tags created by OmegaT
 					  in a form that can only be used properly by an
@@ -696,8 +695,7 @@
 				  </varlistentry>
 				  
 				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.level1">
-					<term id="dialogs.project.properties.file.locations.tms.to.export.level1.title">
-					<option>TMX Level 1</option></term>
+					<term id="dialogs.project.properties.file.locations.tms.to.export.level1.title"><option>TMX Level 1</option></term>
 					<listitem>
 					  <para>A “level 1” TMX removes all tag information and contains only
 					  textual data.</para>
@@ -705,8 +703,7 @@
 				  </varlistentry>
 				  
 				  <varlistentry id="dialogs.project.properties.file.locations.tms.to.export.level2">
-					<term id="dialogs.project.properties.file.locations.tms.to.export.level2.title">
-					<option>TMX Level 2</option></term>
+					<term id="dialogs.project.properties.file.locations.tms.to.export.level2.title"><option>TMX Level 2</option></term>
 					<listitem>
 					  <para>A “level 2” TMX contains textual data along with
 					  tags encapsulated in a form compatible with other

@@ -2,14 +2,12 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.edit">
-  <title id="menus.edit.title">
-  <guimenu>Edit</guimenu></title>
+  <title id="menus.edit.title"><guimenu>Edit</guimenu></title>
 
   <para>This menu gives you access to segment edition commands.</para>
 
   <example id="example.undo.last.action">
-	<title id="example.undo.last.action.title">
-    Shortcut description example</title>
+	<title id="example.undo.last.action.title">Shortcut description example</title>
 	<para>On Windows and Linux:
 	<keycombo><keycap>Control</keycap><keycap>Z</keycap></keycombo></para>
 
@@ -302,8 +300,7 @@
     </varlistentry>
 
     <varlistentry id="menus.edit.switch.case">
-	  <term id="menus.edit.switch.case.title">
-      <guisubmenu>Switch case to</guisubmenu></term>
+	  <term id="menus.edit.switch.case.title"><guisubmenu>Switch case to</guisubmenu></term>
       <listitem>
         <para>Changes the case of the selected text in the target segment to the
         selected option, or cycles through the options. If no text is selected,
@@ -349,8 +346,7 @@
 	</varlistentry>
 
 	<varlistentry id="menus.edit.select.match">
-	  <term id="menus.edit.select.match.title">
-      <guisubmenu>Select Match</guisubmenu></term>
+	  <term id="menus.edit.select.match.title"><guisubmenu>Select Match</guisubmenu></term>
       <listitem>
 		<para>Selects the previous, next or <varname>n</varname>th fuzzy match
 		displayed in the fuzzy match pane to replace or insert it to the

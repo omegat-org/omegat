@@ -36,8 +36,7 @@
 
 
   <example id="replace.with.allemand">
-    <title id="replace.with.allemand.title">
-      Replace a term</title>
+    <title id="replace.with.allemand.title">Replace a term</title>
 	<para>
 	  <programlisting>多和田葉子.UTF8
 -- 148> | language = [[日本語]]・[[ドイツ語]]
@@ -124,8 +123,7 @@
   </itemizedlist>
 
   <section id="windows.text.replace.methods">
-    <title id="windows.text.replace.methods.title">
-      Search type</title>
+    <title id="windows.text.replace.methods.title">Search type</title>
 
     <para>Use the radio buttons to select the type of search.</para>
 
@@ -133,8 +131,7 @@
 
     <variablelist>
       <varlistentry id="windows.text.replace.methods.exact">
-        <term id="windows.text.replace.methods.exact.title">
-      Exact search</term>
+        <term id="windows.text.replace.methods.exact.title">Exact search</term>
         <listitem>
           <para>Search for the string exactly as entered in the search
           field.</para>
@@ -167,8 +164,7 @@
       </varlistentry>
 
       <varlistentry id="windows.text.replace.methods.regex">
-        <term id="windows.text.replace.methods.regex.title">
-      Regular expressions</term>
+        <term id="windows.text.replace.methods.regex.title">Regular expressions</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
 
@@ -189,13 +185,11 @@
   </section>
 
   <section id="windows.text.replace.options">
-    <title id="windows.text.replace.options.title">
-      Options</title>
+    <title id="windows.text.replace.options.title">Options</title>
 	
 	<variablelist>
 	  <varlistentry id="windows.text.replace.options.case.sensitive">
-        <term id="windows.text.replace.options.case.sensitive.title">
-      Case sensitive</term>
+        <term id="windows.text.replace.options.case.sensitive.title">Case sensitive</term>
 		<listitem>
 		  <para>Only returns results with the same letter case as the search
 		  terms.</para>
@@ -203,8 +197,7 @@
 	  </varlistentry>
 	
 	  <varlistentry id="windows.text.replace.options.space.matches.nbsp">
-        <term id="windows.text.replace.options.space.matches.nbsp.title">
-      Space matches nbsp</term>
+        <term id="windows.text.replace.options.space.matches.nbsp.title">Space matches nbsp</term>
 		<listitem>
 		  <para>Space characters in search terms will match both a normal space
 		  and a non-breaking space (\u00A) character.</para>
@@ -212,16 +205,14 @@
 	  </varlistentry>
 
 	  <varlistentry id="windows.text.replace.options.untranslated">
-        <term id="windows.text.replace.options.untranslated.title">
-      Untranslated</term>
+        <term id="windows.text.replace.options.untranslated.title">Untranslated</term>
 		<listitem>
 		  <para>Also search in untranslated segments.</para>
 		</listitem>
 	  </varlistentry>
  
 	  <varlistentry id="windows.text.replace.options.advanced.options">
-        <term id="windows.text.replace.options.advanced.options.title">
-      <guibutton>Show Advanced Options</guibutton></term>
+        <term id="windows.text.replace.options.advanced.options.title"><guibutton>Show Advanced Options</guibutton></term>
 		<listitem>
 		  <para>Select additional criteria such as the person who authored or
 		  changed the translation, the date and time of translation
@@ -229,8 +220,7 @@
 
 		  <variablelist>
 			<varlistentry id="windows.text.replace.options.full.half.width">
-              <term id="windows.text.replace.options.full.half.width.title">
-      Full/Half-width char insensitive</term>
+              <term id="windows.text.replace.options.full.half.width.title">Full/Half-width char insensitive</term>
 			  <listitem>
 				<para>Returns results that match both the full- and half-width
 				forms (CJK characters) of the characters in the search
@@ -246,8 +236,7 @@
   </section>
 
   <section id="windows.text.replace.result.display">
-    <title id="windows.text.replace.result.display.title">
-      Results display</title>
+    <title id="windows.text.replace.result.display.title">Results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For
     translated segments, the original text is displayed above the translated
@@ -286,8 +275,7 @@
 	
 	<variablelist>
 	  <varlistentry id="windows.text.replace.result.display.auto.sync">
-        <term id="windows.text.replace.result.display.auto.sync.title">
-      Auto-sync with editor</term>
+        <term id="windows.text.replace.result.display.auto.sync.title">Auto-sync with editor</term>
 		<listitem>
 		  <para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
 		  pane synchronizes its display with the selection in the search
@@ -296,8 +284,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="windows.text.replace.result.display.back.to.initial.segment">
-        <term id="windows.text.replace.result.display.back.to.initial.segment.title">
-      Back to the initial segment on close</term>
+        <term id="windows.text.replace.result.display.back.to.initial.segment.title">Back to the initial segment on close</term>
 		<listitem>
 		  <para>When you close the search windows, the <link
 		  linkend="panes.editor" endterm="panes.editor.title"/> pane

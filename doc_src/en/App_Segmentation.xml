@@ -2,8 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="app.segmentation">
-  <title id="app.segmentation.title">
-  Segmentation</title>
+  <title id="app.segmentation.title">Segmentation</title>
 
   <section id="dialog.preferences.segmentation.setup.type">
 	<title id="dialog.preferences.segmentation.setup.type.title">
@@ -125,8 +124,7 @@
 
 
   <section id="dialog.preferences.segmentation.setup.rules.based.segmentation">
-	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">
-    Rules</title>
+	<title id="dialog.preferences.segmentation.setup.rules.based.segmentation.title">Rules</title>
 	<para>OmegaT provides predefined segmentation rules, and the translator can
 	use regular expressions to modify them. See the <link linkend="app.regex"
 	endterm="app.regex.title"/> appendix for details.</para>
@@ -145,8 +143,7 @@
 	</warning>
 
 	<table id="segmentation.simple.examples">
-	  <title id="segmentation.simple.examples.title">
-      A few simple examples</title>
+	  <title id="segmentation.simple.examples.title">A few simple examples</title>
       <tgroup cols="5">
 		<colspec align="left" colnum="1"/>
 		<colspec align="left" colnum="2"/>

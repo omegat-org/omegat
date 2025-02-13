@@ -7,8 +7,7 @@
   <title id="chapter.instant.start.guide.title">Introduction to OmegaT</title>
   
   <section id="introduction.omegat.principles">
-	<title id="introduction.omegat.principles.title">
-    Principles</title>
+	<title id="introduction.omegat.principles.title">Principles</title>
 
     <para>Welcome to OmegaT, a computer-assisted translation (CAT) tool that
     offers great flexibility, performance and robustness, as well as features
@@ -441,8 +440,7 @@
   </section>
 
   <section id="introduction.make.it.look.good">
-	<title id="introduction.make.it.look.good.title">
-    Make it look good!</title>
+	<title id="introduction.make.it.look.good.title">Make it look good!</title>
 	<para>Once all that is done, the source files appear in OmegaT in a layout
 	that looks like this:</para>
 
@@ -628,8 +626,7 @@
   </section>
   
   <section id="introduction.manage.your.tags">
-	<title id="introduction.manage.your.tags.title">
-    Manage your tags</title>
+	<title id="introduction.manage.your.tags.title">Manage your tags</title>
 
     <para>If the documents you translate use bold, italics, or other decorative
     elements, OmegaT will convert those elements into tags that enclose the
@@ -789,8 +786,7 @@
   </section>
 
   <section id="introduction.one.more.thing">
-	<title id="introduction.one.more.thing.title">
-    Manage your projects</title>
+	<title id="introduction.one.more.thing.title">Manage your projects</title>
 
     <itemizedlist>
       <listitem>

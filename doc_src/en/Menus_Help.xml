@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.help"><title id="menus.help.title">
-  <guimenu>Help</guimenu></title>
+<section id="menus.help"><title id="menus.help.title"><guimenu>Help</guimenu></title>
 
   <para>This menu gives you access to information that will help you make the
   best of OmegaT.</para>
@@ -37,8 +36,7 @@
     </varlistentry>
 
     <varlistentry id="menus.help.log">
-	  <term id="menus.help.log.title">
-      <guimenuitem>Log...</guimenuitem></term>
+	  <term id="menus.help.log.title"><guimenuitem>Log...</guimenuitem></term>
       <listitem>
         <para>Displays the current log file. The title of the dialog reflects
         the file currently in use (which depends on the number of concurrently

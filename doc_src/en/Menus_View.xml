@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.view">
-  <title id="menus.view.title">
-  <guimenu>View</guimenu></title>
+  <title id="menus.view.title"><guimenu>View</guimenu></title>
 
   <para>This menu allows you to select the information you want to OmegaT to
   display.</para>

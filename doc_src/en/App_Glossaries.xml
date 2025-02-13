@@ -2,8 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="app.glossaries">
-  <title id="app.glossaries.title">
-  Glossaries</title>
+  <title id="app.glossaries.title">Glossaries</title>
 
   <para>Glossaries are terminology files stored in the <link
   linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
@@ -19,8 +18,7 @@
 
   <variablelist>
 	<varlistentry id="app.glossaries.project.glossary">
-	  <term id="app.glossaries.project.glossary.title">
-      The project glossary</term>
+	  <term id="app.glossaries.project.glossary.title">The project glossary</term>
 	  <listitem>
 		<para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
 		linkend="menus.edit.create.glossary.entry"
@@ -62,8 +60,7 @@
 	</varlistentry>
 	
 	<varlistentry id="app.glossaries.reference.glossaries">
-	  <term id="app.glossaries.reference.glossaries.title">
-      Reference glossaries</term>
+	  <term id="app.glossaries.reference.glossaries.title">Reference glossaries</term>
 	  <listitem>
 		<para>They are terminology files in a format recognized by OmegaT. You
 		cannot modify them from the OmegaT interface like the project glossary,
@@ -79,8 +76,7 @@
   </note>
 
   <section id="glossaries.glossary.folder">
-	<title id="glossaries.glossary.folder.title">
-    The glossaries folder</title>
+	<title id="glossaries.glossary.folder.title">The glossaries folder</title>
 
     <para>By default, each project contains a <link
     linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
@@ -106,8 +102,7 @@
   </section>
 
   <section id="glossaries.default.glossary">
-	<title id="glossaries.default.glossary.title">
-    Project glossary</title>
+	<title id="glossaries.default.glossary.title">Project glossary</title>
 
     <para>The writable project glossary is located in the <link
     linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
@@ -124,8 +119,7 @@
   </section>
 
   <section id="glossaries.fileformat">
-	<title id="glossaries.fileformat.title">
-    File format</title>
+	<title id="glossaries.fileformat.title">File format</title>
 
     <para>OmegaT glossary files are simple plain text files containing
     three-column lists, with the source term in the first column, an optional
@@ -145,8 +139,7 @@
     their file extension:</para>
 
     <table id="glossaries.fileformat.extensions">
-	  <title id="glossaries.fileformat.extensions.title">
-      Format, extensions and expected encoding</title>
+	  <title id="glossaries.fileformat.extensions.title">Format, extensions and expected encoding</title>
 	  <tgroup cols="3">
 		<thead>
           <row>

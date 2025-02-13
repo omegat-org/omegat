@@ -5,12 +5,10 @@
 %manualvariables;
 ]>
 <section id="how.to.running.omegat">
-  <title id="how.to.running.omegat.title">
-  Run OmegaT</title>
+  <title id="how.to.running.omegat.title">Run OmegaT</title>
 
   <section id="running.omegat.on.windows">
-	<title id="running.omegat.on.windows.title">
-    On Windows</title>
+	<title id="running.omegat.on.windows.title">On Windows</title>
 	
 	<para>The simplest way to launch OmegaT is to execute the
 	<filename>OmegaT.exe</filename> program. The options for the program
@@ -37,8 +35,7 @@
   </section>
 
   <section id="running.omegat.on.linux">
-	<title id="running.omegat.on.linux.title">
-    On Linux</title>
+	<title id="running.omegat.on.linux.title">On Linux</title>
 
 	<para>You can launch OmegaT from the command line with a script that
 	includes start-up options. See the <link
@@ -56,8 +53,7 @@
   </section>
 
   <section id="running.omegat.on.macos">
-	<title id="running.omegat.on.macos.title">
-    On macOS</title>
+	<title id="running.omegat.on.macos.title">On macOS</title>
 
 	<para>Double-click on <filename>OmegaT.app</filename> or click on its
 	location in the Dock.</para>
@@ -99,8 +95,7 @@
 
 	<variablelist>
 	  <varlistentry id="running.omegat.on.macos.configuration.properties">
-		<term id="running.omegat.on.macos.configuration.properties.title">
-		Configuration.properties</term>
+		<term id="running.omegat.on.macos.configuration.properties.title">Configuration.properties</term>
 
 		<listitem>
 		  <para>For predefined options, remove the <literal>#</literal> symbol 
@@ -135,8 +130,7 @@
   </section>
 
   <section id="running.omegat.on.other.systems">
-	<title id="running.omegat.on.other.systems.title">
-    On other platforms</title>
+	<title id="running.omegat.on.other.systems.title">On other platforms</title>
 
 	<para>Methods vary from one system to another, but in general, once OmegaT
 	is installed, you can launch it directly from the command line.  See the <link
@@ -153,8 +147,7 @@
   </section>
   
   <section id="launch.with.command.line">
-	<title id="launch.with.command.line.title">
-    Command line launch</title>
+	<title id="launch.with.command.line.title">Command line launch</title>
 
 	<para>Using the command line allows you to set various options that control
 	or modify the behaviour of the application. You can also define and save sets
@@ -205,22 +198,19 @@
 		
 		<variablelist>
 		  <varlistentry id="launch.with.command.line.windows">
-			<term id="launch.with.command.line.windows.title">
-			Windows</term>
+			<term id="launch.with.command.line.windows.title">Windows</term>
 			<listitem>
 			  <para><filename>C:\Program Files\OmegaT\OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.macos">
-			<term id="launch.with.command.line.macos.title">
-			Macos</term>
+			<term id="launch.with.command.line.macos.title">Macos</term>
 			<listitem>
 			  <para><filename>/Applications/OmegaT.app/Contents/Java/OmegaT.jar</filename></para>
 			</listitem>
 		  </varlistentry>
 		  <varlistentry id="launch.with.command.line.linux">
-			<term id="launch.with.command.line.linux.title">
-			Linux</term>
+			<term id="launch.with.command.line.linux.title">Linux</term>
 			<listitem>
 			  <para><filename>/opt/omegat/OmegaT.jar</filename></para>
 
@@ -255,8 +245,7 @@
 
 	  <variablelist>
 		<varlistentry id="launch.with.command.line.java.jar">
-		  <term id="launch.with.command.line.java.jar.title">
-		  <option>java -jar</option></term>
+		  <term id="launch.with.command.line.java.jar.title"><option>java -jar</option></term>
 		  <listitem>
 			<para>This command tells the Java Virtual Machine to run a Jar
 			package.</para>
@@ -433,8 +422,7 @@
 				</listitem>
 			  </varlistentry>
 			  <varlistentry id="launch.with.command.line.no.team">
-				<term id="launch.with.command.line.no.team.title">
-				<option>--no-team</option></term>
+				<term id="launch.with.command.line.no.team.title"><option>--no-team</option></term>
 				<listitem>
 				  <para>Disable team project functionality. Use this option if
 				  you want to prevent OmegaT from synchronizing the project
@@ -550,8 +538,7 @@ config-dir="path/to/new/configdir"</programlisting>
 						
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.source.pattern.lt.pattern.gt">
-							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title">
-							<option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
+							<term id="launch.with.command.line.source.pattern.lt.pattern.gt.title"><option>--source-pattern=</option><userinput>&lt;pattern&gt;</userinput></term>
 							<listitem>
 							  <para>An allowlist of regular expressions defining
 							  the source files to process. Remember that in
@@ -563,15 +550,13 @@ config-dir="path/to/new/configdir"</programlisting>
 							  
 							  <variablelist>
 								<varlistentry id="launch.with.command.line.html">
-								  <term id="launch.with.command.line.html.title">
-								  <option>.*\.html</option></term>
+								  <term id="launch.with.command.line.html.title"><option>.*\.html</option></term>
 								  <listitem>
 									<para>Translate all HTML files.</para>
 								  </listitem>
 								</varlistentry>
 								<varlistentry id="launch.with.command.line.test.html">
-								  <term id="launch.with.command.line.test.html.title">
-								  <option>test\.html</option></term>
+								  <term id="launch.with.command.line.test.html.title"><option>test\.html</option></term>
 								  <listitem>
 									<para>Only translate
 									<filename>test.html</filename> file in the
@@ -647,8 +632,7 @@ config-dir="path/to/new/configdir"</programlisting>
 						
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.align.dir">
-							<term id="launch.with.command.line.align.dir.title">
-							<option>--alignDir=</option><userinput>&lt;project path&gt;</userinput></term>
+							<term id="launch.with.command.line.align.dir.title"><option>--alignDir=</option><userinput>&lt;project path&gt;</userinput></term>
 							<listitem>
 							  <para>The path containing the files translated in the target language.</para>
 
@@ -675,8 +659,7 @@ config-dir="path/to/new/configdir"</programlisting>
 					  <listitem>
 						<variablelist>
 						  <varlistentry id="launch.with.command.line.console.stats.output.file">
-							<term id="launch.with.command.line.console.stats.output.file.title">
-							<option>--output-file=</option><userinput>[stats-output-file]</userinput></term>
+							<term id="launch.with.command.line.console.stats.output.file.title"><option>--output-file=</option><userinput>[stats-output-file]</userinput></term>
 							<listitem>
 							  <para>Prints to that file, or to standard output
 							  if absent. Without
@@ -687,8 +670,7 @@ config-dir="path/to/new/configdir"</programlisting>
 						  </varlistentry>
 						  
 						  <varlistentry id="launch.with.command.line.console.stats.output.format">
-							<term id="launch.with.command.line.console.stats.output.format.title">
-							<option>--stats-type=[xml|text][txt][json]]]</option></term>
+							<term id="launch.with.command.line.console.stats.output.format.title"><option>--stats-type=[xml|text][txt][json]]]</option></term>
 							<listitem>
 							  <para>Requires
 							  <emphasis>--output-file</emphasis>. Specifies the
@@ -717,8 +699,7 @@ config-dir="path/to/new/configdir"</programlisting>
 		  <listitem>
 			<variablelist>
 			  <varlistentry id="launch.with.command.line.quiet">
-				<term id="launch.with.command.line.quiet.title">
-				<option>--quiet</option></term>
+				<term id="launch.with.command.line.quiet.title"><option>--quiet</option></term>
 				<listitem>
 				  <para>Minimize the output shown on the command line.</para>
 				</listitem>

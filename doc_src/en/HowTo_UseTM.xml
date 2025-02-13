@@ -2,8 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.use.tm">
-  <title id="how.to.use.tm.title">
-  Use translation memories</title>
+  <title id="how.to.use.tm.title">Use translation memories</title>
 
   <para>When a project is initially created, it comes with its own empty project
   translation memory, the <link linkend="project.folder.project.save.tmx.title"
@@ -38,8 +37,7 @@
   </itemizedlist>
 
   <section id="how.to.use.tm.create.your.tm">
-	<title id="how.to.use.tm.create.your.tm.title">
-    Create your own TMs</title>
+	<title id="how.to.use.tm.create.your.tm.title">Create your own TMs</title>
 	
 	<para>When you use <link linkend="menus.project"
 	endterm="menus.project.title"/><link
@@ -65,8 +63,7 @@
   </section>
 
   <section id="how.to.use.tm.reuse.tm">
-	<title id="how.to.use.tm.reuse.tm.title">
-    Reuse TMs</title>
+	<title id="how.to.use.tm.reuse.tm.title">Reuse TMs</title>
 	
 	<para>To reuse translation memories from a previous project you have two
 	options:</para>
@@ -187,8 +184,7 @@
 	</section>
 
 	<section id="how.to.use.tm.store.your.tm">
-	  <title id="how.to.use.tm.store.your.tm.title">
-      Managing your TMs</title>
+	  <title id="how.to.use.tm.store.your.tm.title">Managing your TMs</title>
 
 	  <para>You may want to store translation memories in separate folders, by
 	  client or area of specialty so you can reuse them quickly when the need
@@ -251,8 +247,7 @@
   </section>
 
   <section id="how.to.tm.share.translation.memories">
-	<title id="how.to.tm.share.translation.memories.title">
-    Share TMs</title>
+	<title id="how.to.tm.share.translation.memories.title">Share TMs</title>
 
 	<para>For large jobs involving a team of translators, it is easier for
 	everyone involved in sharing common translation memories rather than pass
@@ -262,8 +257,7 @@
 
 	<variablelist>
 	  <varlistentry id="how.to.tm.share.translation.memories.good.enough.way">
-		<term id="how.to.tm.share.translation.memories.good.enough.way.title">
-		The good enough way</term>
+		<term id="how.to.tm.share.translation.memories.good.enough.way.title">The good enough way</term>
 		<listitem>
 		  
 		  <para>See the <link linkend="how.to.use.tm.create.your.tm"
@@ -304,8 +298,7 @@
 	  </varlistentry>
 	  
 	  <varlistentry id="how.to.tm.share.translation.memories.technical.approach">
-		<term id="how.to.tm.share.translation.memories.technical.approach.title">
-		The technical approach</term>
+		<term id="how.to.tm.share.translation.memories.technical.approach.title">The technical approach</term>
 		<listitem>
 		  <para>OmegaT uses collaborative version control systems to share
 		  data.</para>
@@ -334,8 +327,7 @@
   </section>
 
   <section id="how.to.tm.bridge.two.languages">
-	<title id="how.to.tm.bridge.two.languages.title">
-    Bridge two languages</title>
+	<title id="how.to.tm.bridge.two.languages.title">Bridge two languages</title>
 
 	<para>OmegaT displays fuzzy matches in the <link linkend="panes.fuzzy.matches"
 	endterm="panes.fuzzy.matches.title"/> pane. By default, those matches are limited to the source and target languages defined in the <link

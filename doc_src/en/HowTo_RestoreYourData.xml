@@ -2,8 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.restore.your.data">
-  <title id="how.to.restore.your.data.title">
-  Troubleshoot issues</title>
+  <title id="how.to.restore.your.data.title">Troubleshoot issues</title>
 
   <warning>
 	<para>OmegaT is a robust and trustworthy application, but even so, it is
@@ -350,8 +349,7 @@
   </section>
 
   <section id="how.to.restore.your.data.summary">
-	<title id="how.to.restore.your.data.summary.title">
-    Summary</title>
+	<title id="how.to.restore.your.data.summary.title">Summary</title>
 
 	<itemizedlist>
       <listitem>

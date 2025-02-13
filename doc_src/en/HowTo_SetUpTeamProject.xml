@@ -2,8 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="how.to.setup.team.project">
-  <title id="how.to.setup.team.project.title">
-  Set up a team project</title>
+  <title id="how.to.setup.team.project.title">Set up a team project</title>
 
   <para>Managing a team project calls for some knowledge of either the
   <emphasis>SVN</emphasis> or <emphasis>Git</emphasis> version control system
@@ -266,8 +265,7 @@
 
 	<variablelist>
       <varlistentry id="how.to.setup.team.project.mapping.parameters.repository.type">
-		<term id="how.to.setup.team.project.mapping.parameters.repository.type.title">
-		repository type</term>
+		<term id="how.to.setup.team.project.mapping.parameters.repository.type.title">repository type</term>
 		<listitem>
           <para>This can be either <emphasis>http</emphasis> (which includes
           https), <emphasis>svn</emphasis>, <emphasis>git</emphasis>, or
@@ -276,16 +274,14 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.repository.url">
-		<term id="how.to.setup.team.project.mapping.parameters.repository.url.title">
-		repository url</term>
+		<term id="how.to.setup.team.project.mapping.parameters.repository.url.title">repository url</term>
 		<listitem>
           <para>Remote location or folder of the files to translate.</para>
 		</listitem>
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.mapping.local">
-		<term id="how.to.setup.team.project.mapping.parameters.mapping.local.title">
-		mapping local</term>
+		<term id="how.to.setup.team.project.mapping.parameters.mapping.local.title">mapping local</term>
 		<listitem>
           <para>Name of the local folder or file, relative to the root of the
           OmegaT project.</para>
@@ -293,8 +289,7 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.mapping.repository">
-		<term id="how.to.setup.team.project.mapping.parameters.mapping.repository.title">
-		mapping repository</term>
+		<term id="how.to.setup.team.project.mapping.parameters.mapping.repository.title">mapping repository</term>
 		<listitem>
           <para>Name of the remote folder or file, relative to the repository
           url.</para>
@@ -302,8 +297,7 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.excludes">
-		<term id="how.to.setup.team.project.mapping.parameters.excludes.title">
-		excludes</term>
+		<term id="how.to.setup.team.project.mapping.parameters.excludes.title">excludes</term>
 		<listitem>
           <para>Use wildcards (following the Apache Ant style: *, ?, **) to add
           patterns for files that should not be part of the mapping. Use a
@@ -315,8 +309,7 @@
       </varlistentry>
 
       <varlistentry id="how.to.setup.team.project.mapping.parameters.includes">
-		<term id="how.to.setup.team.project.mapping.parameters.includes.title">
-		includes</term>
+		<term id="how.to.setup.team.project.mapping.parameters.includes.title">includes</term>
 		<listitem>
           <para>As above, but for files that should be part of the mapping.
           Since files are included by default unless specifically excluded, this

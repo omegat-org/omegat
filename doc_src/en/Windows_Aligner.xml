@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.aligner">
-  <title id="windows.aligner.title"><guilabel>Align Files</guilabel></title>
+  <title id="windows.aligner.title"><link linkend="windows.aligner"> </link><guilabel>Align Files</guilabel></title>
 
   <para>Use <link endterm="menus.tools.title"
   linkend="menus.tools"/><link endterm="menus.tools.align.files.title"
@@ -81,7 +81,7 @@
   </itemizedlist>
 
   <section id="windows.aligner.adjust">
-    <title id="windows.aligner.adjust.title">Settings</title>
+	<title id="windows.aligner.adjust.title"><link linkend="windows.aligner.adjust"> </link>Settings</title>
 
     <para>In this step, the bottom part of the window presents various
     parameters and options you can change if the initial alignment looks like it
@@ -95,8 +95,8 @@
 
     <variablelist>
 	  <title>Parameters</title>
-	  <varlistentry>
-        <term>Comparison mode</term>
+	  <varlistentry id="windows.aligner.adjust.comparison">
+        <term id="windows.aligner.adjust.comparison.title"><link linkend="windows.aligner.adjust.comparison"> </link>Comparison mode</term>
         <listitem>
           <itemizedlist>
             <listitem>
@@ -121,8 +121,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Algorithm:</term>
+      <varlistentry id="windows.aligner.adjust.algorithm">
+        <term id="windows.aligner.adjust.algorithm.title"><link linkend="windows.aligner.adjust.algorithm"> </link>Algorithm:</term>
         <listitem>
           <itemizedlist>
             <listitem>
@@ -142,8 +142,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Calculator:</term>
+      <varlistentry id="windows.aligner.adjust.calculator">
+        <term id="windows.aligner.adjust.calculator.title"><link linkend="windows.aligner.adjust.calculator"> </link>Calculator:</term>
         <listitem>
           <itemizedlist>
             <listitem>
@@ -163,8 +163,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Counter:</term>
+      <varlistentry id="windows.aligner.adjust.counter">
+        <term id="windows.aligner.adjust.counter.title"><link linkend="windows.aligner.adjust.counter"> </link>Counter:</term>
         <listitem>
           <itemizedlist>
             <listitem>
@@ -193,8 +193,8 @@
 
     <variablelist>
 	  <title>Options</title>
-      <varlistentry>
-        <term>Segment</term>
+      <varlistentry id="windows.aligner.adjust.segment">
+        <term id="windows.aligner.adjust.segment.title"><link linkend="windows.aligner.adjust.segment"> </link>Segment</term>
         <listitem>
           <para>The aligner uses sentence segmentation by default. Uncheck the
           check box to use paragraph segmentation. See the <link
@@ -203,17 +203,17 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Remove Tags</term>
+      <varlistentry id="windows.aligner.adjust.remove.tags">
+        <term id="windows.aligner.adjust.remove.tags.title"><link linkend="windows.aligner.adjust.remove.tags"> </link>Remove Tags</term>
         <listitem>
           <para>The aligner includes tags in the segments by default. Uncheck
           the check box to remove all tags from the alignment and the resulting
-	  TMX.</para>
+		  TMX.</para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="windows.aligner.adjust.highlight">
-        <term id="windows.aligner.adjust.highlight.title">Highlight</term>
+        <term id="windows.aligner.adjust.highlight.title"><link linkend="windows.aligner.adjust.highlight"> </link>Highlight</term>
         <listitem>
 		  <para>Uncheck the check box to turn off highlighting.</para>
 
@@ -225,8 +225,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Rules...</term>
+      <varlistentry id="windows.aligner.adjust.rules">
+        <term id="windows.aligner.adjust.rules.title"><link linkend="windows.aligner.adjust.rules"> </link>Rules...</term>
         <listitem>
           <para>Clicking this button lets you edit the segmentation rules that
           apply to this project. See the <link linkend="app.segmentation"
@@ -241,8 +241,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Filters...</term>
+      <varlistentry id="windows.aligner.adjust.filters">
+        <term id="windows.aligner.adjust.filters.title"><link linkend="windows.aligner.adjust.filters"> </link>Filters...</term>
         <listitem>
           <para>Clicking this button lets you edit the file filters that apply
           to this project. See the <link
@@ -259,8 +259,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Pattern...</term>
+      <varlistentry id="windows.aligner.adjust.pattern">
+        <term id="windows.aligner.adjust.pattern.title"><link linkend="windows.aligner.adjust.pattern"> </link>Pattern...</term>
         <listitem>
           <para>This option lets you enter a regular expression to define the
           pattern used to highlight text in the source and target
@@ -316,7 +316,7 @@
   </section>
 
   <section id="windows.aligner.manual.corrections">
-    <title id="windows.aligner.manual.corrections.title">Corrections</title>
+	<title id="windows.aligner.manual.corrections.title"><link linkend="windows.aligner.manual.corrections"> </link>Corrections</title>
 
     <para>Manual adjustments are generally required after the initial automatic
     alignment process. This generally involves moving segments up or down to
@@ -346,8 +346,8 @@
 	are presented below.</para>
 
     <variablelist>
-      <varlistentry>
-        <term>Move Up (<keycap>U</keycap>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.up">
+        <term id="windows.aligner.manual.corrections.up.title"><link linkend="windows.aligner.manual.corrections.up"> </link>Move Up (<keycap>U</keycap>)</term>
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments, up
           one row.</para>
@@ -356,8 +356,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Move Down (<keycap>D</keycap>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.down">
+        <term id="windows.aligner.manual.corrections.down.title"><link linkend="windows.aligner.manual.corrections.down"> </link>Move Down (<keycap>D</keycap>)</term>
         <listitem>
           <para>Moves the selected segment, or block of consecutive segments,
           down one row.</para>
@@ -367,8 +367,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Split (<keycap>S</keycap>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.split">
+        <term id="windows.aligner.manual.corrections.split.title"><link linkend="windows.aligner.manual.corrections.split"> </link>Split (<keycap>S</keycap>)</term>
         <listitem>
           <para>If a single segment is selected, this command opens the
           <guilabel>Split Text</guilabel> dialog. Use the mouse or arrow keys to
@@ -386,8 +386,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Merge (<keycap>M</keycap>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.merge">
+        <term id="windows.aligner.manual.corrections.merge.title"><link linkend="windows.aligner.manual.corrections.merge"> </link>Merge (<keycap>M</keycap>)</term>
         <listitem>
           <para>If only one segment is selected, the aligner will merge it with
           the following segment. If two or more segments are selected, they will
@@ -400,8 +400,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Edit (<keycap>E</keycap>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.edit">
+        <term id="windows.aligner.manual.corrections.edit.title"><link linkend="windows.aligner.manual.corrections.edit"> </link>Edit (<keycap>E</keycap>)</term>
         <listitem>
           <para>This command can only be performed on a single segment. Calling
           this command opens the <guilabel>Edit Text</guilabel> dialog, which
@@ -419,8 +419,8 @@
         </listitem>
       </varlistentry>
 
-	  <varlistentry>
-        <term>Mark Accepted (<keycap>A</keycap>)</term>
+	  <varlistentry id="windows.aligner.manual.corrections.accepted">
+        <term id="windows.aligner.manual.corrections.accepted.title"><link linkend="windows.aligner.manual.corrections.accepted"> </link>Mark Accepted (<keycap>A</keycap>)</term>
         <listitem>
           <para>Use this command to confirm that the alignment of the segments
           in the selected row or block of rows is correct. This highlights the
@@ -428,8 +428,8 @@
         </listitem>
       </varlistentry>
 
-	  <varlistentry>
-        <term>Mark Needs Review (<keycap>R</keycap>)</term>
+	  <varlistentry id="windows.aligner.manual.corrections.needs.review">
+        <term id="windows.aligner.manual.corrections.needs.review.title"><link linkend="windows.aligner.manual.corrections.needs.review"> </link>Mark Needs Review (<keycap>R</keycap>)</term>
         <listitem>
           <para>Use this command to identify a row or block of rows for which
           the alignment of the segments is in doubt. This highlights the
@@ -437,8 +437,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Clear Mark (<keycap>C</keycap>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.clear">
+        <term id="windows.aligner.manual.corrections.clear.title"><link linkend="windows.aligner.manual.corrections.clear"> </link>Clear Mark (<keycap>C</keycap>)</term>
         <listitem>
           <para>Use this command to remove one or more marks set by the
           <guilabel>Mark Accepted</guilabel> or <guilabel>Mark Needs
@@ -446,33 +446,32 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Realign Pending
-        (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.realign.pending">
+        <term id="windows.aligner.manual.corrections.realign.pending.title"><link linkend="windows.aligner.manual.corrections.realign.pending"> </link>Realign Pending (<keycombo><keycap>C</keycap><keycap>R</keycap></keycombo>)</term>
         <listitem>
           <para>If any rows have been marked as accepted, use this command to
           update the alignment for the remaining rows.</para>
         </listitem>
       </varlistentry>
 
-	  <varlistentry>
-        <term>Keep All</term>
+	  <varlistentry id="windows.aligner.manual.corrections.keep.all">
+        <term id="windows.aligner.manual.corrections.keep.all.title"><link linkend="windows.aligner.manual.corrections.keep.all"> </link>Keep All</term>
         <listitem>
           <para>Use this command to check the <guilabel>Keep</guilabel> box for
           all rows.</para>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Keep None</term>
+      <varlistentry id="windows.aligner.manual.corrections.keep.none">
+        <term id="windows.aligner.manual.corrections.keep.none.title"><link linkend="windows.aligner.manual.corrections.keep.none"> </link>Keep None</term>
         <listitem>
           <para>Use this command to uncheck the <guilabel>Keep</guilabel> check
           box for all rows.</para>
         </listitem>
       </varlistentry>
 
-	  <varlistentry>
-        <term>Toggle Selected (<keycap>K</keycap>)</term>
+	  <varlistentry id="windows.aligner.manual.corrections.toggle.selected">
+        <term id="windows.aligner.manual.corrections.toggle.selected.title"><link linkend="windows.aligner.manual.corrections.toggle.selected"> </link>Toggle Selected (<keycap>K</keycap>)</term>
         <listitem>
           <para>Use this command to switch the <guilabel>Keep</guilabel> check
           box of the selected row or block of rows from checked to unchecked, or
@@ -480,8 +479,8 @@
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Start Pinpoint Align (<keycap>Space</keycap>)</term>
+      <varlistentry id="windows.aligner.manual.corrections.start.pinpoint">
+        <term id="windows.aligner.manual.corrections.start.pinpoint.title"><link linkend="windows.aligner.manual.corrections.start.pinpoint"> </link>Start Pinpoint Align (<keycap>Space</keycap>)</term>
         <listitem>
           <para>If the corresponding segments are several rows apart and you
           want to quickly align them, use this command to select the first 

@@ -2,7 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.scripts">
-  <title id="windows.scripts.title"><guilabel>Scripting</guilabel></title>
+  <title id="windows.scripts.title"><link linkend="windows.scripts"> </link><guilabel>Scripting</guilabel></title>
 
   <para>Scripts are short programs (similar to macros in office applications)
   that can be used to automate tasks as well as to extend or customize OmegaT
@@ -18,77 +18,77 @@
   access the window.</para>
 
   <section id="windows.scripts.folder">
-  <title id="windows.scripts.folder.title">The script folder</title>
+	<title id="windows.scripts.folder.title"><link linkend="windows.scripts.folder"> </link>The script folder</title>
 
-  <para>By default, scripts are stored in the <link
-  linkend="application.folder.scripts"
-  endterm="application.folder.scripts.title"/> folder of the OmegaT
-  application folder.</para>
+	<para>By default, scripts are stored in the <link
+	linkend="application.folder.scripts"
+	endterm="application.folder.scripts.title"/> folder of the OmegaT
+	application folder.</para>
 
-  <para>New scripts added there will appear in the list of available scripts
-  in the left-hand panel of the window.</para>
+	<para>New scripts added there will appear in the list of available scripts
+	in the left-hand panel of the window.</para>
 
-  <warning>
-    <para>If no list of scripts is displayed on the left side of 
-    the script editor window, use the Scripting window <guimenu>File</guimenu> >
-    <guimenuitem>Set Scripts Folder...</guimenuitem> menu to set 
-    the location of the scripts.</para>
-  </warning>
+	<warning>
+      <para>If no list of scripts is displayed on the left side of 
+      the script editor window, use the Scripting window <guimenu>File</guimenu> >
+      <guimenuitem>Set Scripts Folder...</guimenuitem> menu to set 
+      the location of the scripts.</para>
+	</warning>
 
-  <para>Additional scripts can be found here: <ulink
-  url="https://sourceforge.net/projects/omegatscripts/">OmegaT
-  Scripts</ulink>. Just copy the file to the <link
-  linkend="application.folder.scripts"
-  endterm="application.folder.scripts.title"/> folder.</para>
+	<para>Additional scripts can be found here: <ulink
+	url="https://sourceforge.net/projects/omegatscripts/">OmegaT
+	Scripts</ulink>. Just copy the file to the <link
+	linkend="application.folder.scripts"
+	endterm="application.folder.scripts.title"/> folder.</para>
 
-  <para>Some scripts are <emphasis>event</emphasis>-based. The folder containing
-  the scripts includes subfolders corresponding to the available events. You can
-  trigger scripts automatically by placing them in the appropriate subfolder:</para>
+	<para>Some scripts are <emphasis>event</emphasis>-based. The folder containing
+	the scripts includes subfolders corresponding to the available events. You can
+	trigger scripts automatically by placing them in the appropriate subfolder:</para>
 
-  <variablelist>
-	<varlistentry id="application.folder.scripts.application.shutdown">
-	  <term id="application.folder.scripts.application.shutdown.title">application_shutdown</term>
-	  <listitem><para>Scripts in this folder are launched before OmegaT shuts down.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.application.startup">
-	  <term id="application.folder.scripts.application.startup.title">application_startup</term>
-	  <listitem><para>Scripts in this folder are launched as soon as the scripting engine is available, shortly after OmegaT starts.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.entry.activated">
-	  <term id="application.folder.scripts.entry.activated.title">entry_activated</term>
-	  <listitem><para>Scripts in this folder are launched when editing a new segment. The segment is in the <code>newEntry></code> binding.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.file">
-	  <term id="application.folder.scripts.new.file.title">new_file</term>
-	  <listitem><para>Scripts in this folder are launched when the editor switches to the next file in the project. The new filename is in the <code>activeFileName</code> binding.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.new.word">
-	  <term id="application.folder.scripts.new.word.title">new_word</term>
-	  <listitem><para>Scripts in this folder are launched when a new word is edited in the Editor window. The new word is available from the <code>newWord</code> binding.</para></listitem>
-	</varlistentry>
-	<varlistentry id="application.folder.scripts.project.changed">
-	  <term id="application.folder.scripts.project.changed.title">project_changed</term>
-	  <listitem><para>Scripts in this folder are launched when the state of the project changes. An <code>eventType</code> object is bound and can take the following values: CLOSE, COMPILE, CREATE, LOAD, or SAVE.</para></listitem>
-	</varlistentry>
-  </variablelist>
+	<variablelist>
+	  <varlistentry id="application.folder.scripts.application.shutdown">
+		<term id="application.folder.scripts.application.shutdown.title"><link linkend="application.folder.scripts.application.shutdown"> </link>application_shutdown</term>
+		<listitem><para>Scripts in this folder are launched before OmegaT shuts down.</para></listitem>
+	  </varlistentry>
+	  <varlistentry id="application.folder.scripts.application.startup">
+		<term id="application.folder.scripts.application.startup.title"><link linkend="application.folder.scripts.application.startup"> </link>application_startup</term>
+		<listitem><para>Scripts in this folder are launched as soon as the scripting engine is available, shortly after OmegaT starts.</para></listitem>
+	  </varlistentry>
+	  <varlistentry id="application.folder.scripts.entry.activated">
+		<term id="application.folder.scripts.entry.activated.title"><link linkend="application.folder.scripts.entry.activated"> </link>entry_activated</term>
+		<listitem><para>Scripts in this folder are launched when editing a new segment. The segment is in the <code>newEntry></code> binding.</para></listitem>
+	  </varlistentry>
+	  <varlistentry id="application.folder.scripts.new.file">
+		<term id="application.folder.scripts.new.file.title"><link linkend="application.folder.scripts.new.file"> </link>new_file</term>
+		<listitem><para>Scripts in this folder are launched when the editor switches to the next file in the project. The new filename is in the <code>activeFileName</code> binding.</para></listitem>
+	  </varlistentry>
+	  <varlistentry id="application.folder.scripts.new.word">
+		<term id="application.folder.scripts.new.word.title"><link linkend="application.folder.scripts.new.word"> </link>new_word</term>
+		<listitem><para>Scripts in this folder are launched when a new word is edited in the Editor window. The new word is available from the <code>newWord</code> binding.</para></listitem>
+	  </varlistentry>
+	  <varlistentry id="application.folder.scripts.project.changed">
+		<term id="application.folder.scripts.project.changed.title"><link linkend="application.folder.scripts.project.changed"> </link>project_changed</term>
+		<listitem><para>Scripts in this folder are launched when the state of the project changes. An <code>eventType</code> object is bound and can take the following values: CLOSE, COMPILE, CREATE, LOAD, or SAVE.</para></listitem>
+	  </varlistentry>
+	</variablelist>
 
-  <para>These subfolders are already created in the script folder that comes with the
-  distribution.</para>
-  
-  <warning>
-	<para>Scripts are also launched when you are executing other scripts. 
-	Consequently, in a large project, an <code>entry_activated</code> script is
-  called frequently when a search/replace type of script that
-  loops through all segments is used, rendering the application
-  unresponsive.</para>
-  </warning>
+	<para>These subfolders are already created in the script folder that comes with the
+	distribution.</para>
+	
+	<warning>
+	  <para>Scripts are also launched when you are executing other scripts. 
+	  Consequently, in a large project, an <code>entry_activated</code> script is
+	  called frequently when a search/replace type of script that
+	  loops through all segments is used, rendering the application
+	  unresponsive.</para>
+	</warning>
   </section>
   
   <section id="windows.scripts.usage">
-	<title id="windows.scripts.usage.title">Usage</title>
+	<title id="windows.scripts.usage.title"><link linkend="windows.scripts.usage"> </link>Usage</title>
 
 	<itemizedlist>
-    <listitem>
+      <listitem>
 		<para>Click the name of a script in the list in the left-hand panel. The
 		script is loaded in the editor.</para>
       </listitem>
@@ -139,7 +139,7 @@
   </section>
 
   <section id="windows.scripts.distribution">
-    <title id="windows.scripts.distribution.title">Distributed scripts</title>
+    <title id="windows.scripts.distribution.title"><link linkend="windows.scripts.distribution"> </link>Distributed scripts</title>
 
     <para>OmegaT comes with a number of scripts developed by OmegaT
     contributors. Use the script editor to open, run, or modify scripts
@@ -154,8 +154,7 @@
 
     <variablelist>
       <varlistentry id="windows.scripts.distribution.adapt.standard.tags">
-        <term id="windows.scripts.distribution.adapt.standard.tags.title">Adapt
-        standard tags</term>
+        <term id="windows.scripts.distribution.adapt.standard.tags.title"><link linkend="windows.scripts.distribution.adapt.standard.tags"> </link>Adapt standard tags</term>
 
         <listitem>
           <para>Adapt standard tags when the Replace with Match command
@@ -164,9 +163,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.auto.open.last.project">
-        <term
-        id="windows.scripts.distribution.auto.open.last.project.title">Auto Open
-        Last Project</term>
+        <term id="windows.scripts.distribution.auto.open.last.project.title"><link linkend="windows.scripts.distribution.auto.open.last.project"> </link>Auto Open Last Project</term>
 
         <listitem>
           <para>Automatically open the last used OmegaT project.</para>
@@ -174,8 +171,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.check.same.segment">
-        <term id="windows.scripts.distribution.check.same.segment.title">Check
-        Same Segment</term>
+        <term id="windows.scripts.distribution.check.same.segment.title"><link linkend="windows.scripts.distribution.check.same.segment"> </link>Check Same Segment</term>
 
         <listitem>
           <para>Check for identical segments (case sensitive).</para>
@@ -183,9 +179,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.currency.translator">
-        <term
-        id="windows.scripts.distribution.currency.translator.title">Currency
-        Translator</term>
+        <term id="windows.scripts.distribution.currency.translator.title"><link linkend="windows.scripts.distribution.currency.translator"> </link>Currency Translator</term>
 
         <listitem>
           <para>Translate currencies representation according to the source and
@@ -197,9 +191,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.gui.scripting">
-        <term
-        id="windows.scripts.distribution.example.gui.scripting.title">Example -
-        GUI Scripting</term>
+        <term id="windows.scripts.distribution.example.gui.scripting.title"><link linkend="windows.scripts.distribution.example.gui.scripting"> </link>Example - GUI Scripting</term>
 
         <listitem>
           <para>Example of GUI scripting.</para>
@@ -207,9 +199,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.key.binding">
-        <term
-        id="windows.scripts.distribution.example.key.binding.title">Example -
-        Key Binding</term>
+        <term id="windows.scripts.distribution.example.key.binding.title"><link linkend="windows.scripts.distribution.example.key.binding"> </link>Example - Key Binding</term>
 
         <listitem>
           <para>Example of using a keybinding event.</para>
@@ -217,9 +207,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.modify.segment">
-        <term
-        id="windows.scripts.distribution.example.modify.segment.title">Example -
-        Modify Segment</term>
+        <term id="windows.scripts.distribution.example.modify.segment.title"><link linkend="windows.scripts.distribution.example.modify.segment"> </link>Example - Modify Segment</term>
 
         <listitem>
           <para>Example that shows how to modify a segment.</para>
@@ -227,9 +215,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.example.search.and.replace">
-        <term
-        id="windows.scripts.distribution.example.search.and.replace.title">Example
-        - Search and Replace</term>
+        <term id="windows.scripts.distribution.example.search.and.replace.title"><link linkend="windows.scripts.distribution.example.search.and.replace"> </link>Example - Search and Replace</term>
 
         <listitem>
           <para>A simple search and replace script.</para>
@@ -237,9 +223,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.external.spellcheck">
-        <term
-        id="windows.scripts.distribution.external.spellcheck.title">External
-        spellcheck</term>
+        <term id="windows.scripts.distribution.external.spellcheck.title"><link linkend="windows.scripts.distribution.external.spellcheck"> </link>External spellcheck</term>
 
         <listitem>
           <para>Writes all segments to a file named
@@ -251,9 +235,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.extract.text.content">
-        <term
-        id="windows.scripts.distribution.extract.text.content.title">Extract
-        Text Content</term>
+        <term id="windows.scripts.distribution.extract.text.content.title"><link linkend="windows.scripts.distribution.extract.text.content"> </link>Extract Text Content</term>
 
         <listitem>
           <para>Extracts the content of the project to a single text file (one
@@ -264,9 +246,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.non.breaking.space">
-        <term
-        id="windows.scripts.distribution.non.breaking.space.title">Non-breaking
-        space</term>
+        <term id="windows.scripts.distribution.non.breaking.space.title"><link linkend="windows.scripts.distribution.non.breaking.space"> </link>Non-breaking space</term>
 
         <listitem>
           <para>Replace spaces with non-breakable spaces where appropriate in
@@ -275,8 +255,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.current.file">
-        <term id="windows.scripts.distribution.open.current.file.title">Open
-        Current File</term>
+        <term id="windows.scripts.distribution.open.current.file.title"><link linkend="windows.scripts.distribution.open.current.file"> </link>Open Current File</term>
 
         <listitem>
           <para>Open the current source file.</para>
@@ -284,8 +263,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.glossary">
-        <term id="windows.scripts.distribution.open.glossary.title">Open
-        Glossary</term>
+        <term id="windows.scripts.distribution.open.glossary.title"><link linkend="windows.scripts.distribution.open.glossary"> </link>Open Glossary</term>
 
         <listitem>
           <para>Open the writable glossary in an editor.</para>
@@ -293,8 +271,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.project.folder">
-        <term id="windows.scripts.distribution.open.project.folder.title">Open
-        Project Folder</term>
+        <term id="windows.scripts.distribution.open.project.folder.title"><link linkend="windows.scripts.distribution.open.project.folder"> </link>Open Project Folder</term>
 
         <listitem>
           <para>Open the project folder in the default file manager.</para>
@@ -302,8 +279,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.tm.folder">
-        <term id="windows.scripts.distribution.open.tm.folder.title">Open TM
-        Folder</term>
+        <term id="windows.scripts.distribution.open.tm.folder.title"><link linkend="windows.scripts.distribution.open.tm.folder"> </link>Open TM Folder</term>
 
         <listitem>
           <para>Open the <filename class="directory">/tm</filename> folder.</para>
@@ -311,8 +287,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.open.project.save.tmx">
-        <term id="windows.scripts.distribution.open.project.save.tmx.title">Open
-        project_save.tmx.</term>
+        <term id="windows.scripts.distribution.open.project.save.tmx.title"><link linkend="windows.scripts.distribution.open.project.save.tmx"> </link>Open project_save.tmx.</term>
 
         <listitem>
           <para>Open project_save.tmx in a text editor.</para>
@@ -320,8 +295,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.qa.check.rules">
-        <term id="windows.scripts.distribution.qa.check.rules.title">QA - Check
-        Rules</term>
+        <term id="windows.scripts.distribution.qa.check.rules.title"><link linkend="windows.scripts.distribution.qa.check.rules"> </link>QA - Check Rules</term>
 
         <listitem>
           <para>QA script.</para>
@@ -329,8 +303,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.qa.identical.segments">
-        <term id="windows.scripts.distribution.qa.identical.segments.title">QA -
-        Identical Segments</term>
+        <term id="windows.scripts.distribution.qa.identical.segments.title"><link linkend="windows.scripts.distribution.qa.identical.segments"> </link>QA - Identical Segments</term>
 
         <listitem>
           <para>Check for identical segments (case sensitive).</para>
@@ -338,8 +311,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.svn.cleanup.recursive">
-        <term id="windows.scripts.distribution.svn.cleanup.recursive.title">SVN
-        - Cleanup (recursive)</term>
+        <term id="windows.scripts.distribution.svn.cleanup.recursive.title"><link linkend="windows.scripts.distribution.svn.cleanup.recursive"> </link>SVN - Cleanup (recursive)</term>
 
         <listitem>
           <para>Perform SVN cleanup on current project or any folder (recursively).</para>
@@ -347,8 +319,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.show.same.segments">
-        <term id="windows.scripts.distribution.show.same.segments.title">Show
-        Same Segments</term>
+        <term id="windows.scripts.distribution.show.same.segments.title"><link linkend="windows.scripts.distribution.show.same.segments"> </link>Show Same Segments</term>
 
         <listitem>
           <para>Display a list of segments where the source and target have
@@ -357,8 +328,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.spellcheck">
-        <term
-        id="windows.scripts.distribution.spellcheck.title">Spellcheck</term>
+        <term id="windows.scripts.distribution.spellcheck.title"><link linkend="windows.scripts.distribution.spellcheck"> </link>Spellcheck</term>
 
         <listitem>
           <para>Global spell checking.</para>
@@ -366,8 +336,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.strip.bidi.marks">
-        <term id="windows.scripts.distribution.strip.bidi.marks.title">Strip
-        Bidi Marks</term>
+        <term id="windows.scripts.distribution.strip.bidi.marks.title"><link linkend="windows.scripts.distribution.strip.bidi.marks"> </link>Strip Bidi Marks</term>
 
         <listitem>
           <para>Remove bidi mark in the current target or in selection.</para>
@@ -375,8 +344,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.strip.tags">
-        <term id="windows.scripts.distribution.strip.tags.title">Strip
-        tags</term>
+        <term id="windows.scripts.distribution.strip.tags.title"><link linkend="windows.scripts.distribution.strip.tags"> </link>Strip tags</term>
 
         <listitem>
           <para>Remove tags in the current target or selection.</para>
@@ -384,8 +352,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.switch.colour.theme">
-        <term id="windows.scripts.distribution.switch.colour.theme.title">Switch
-        Colour Theme</term>
+        <term id="windows.scripts.distribution.switch.colour.theme.title"><link linkend="windows.scripts.distribution.switch.colour.theme"> </link>Switch Colour Theme</term>
 
         <listitem>
           <para>Switch the colour theme used in the editor.</para>
@@ -393,8 +360,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.tag.free.match">
-        <term id="windows.scripts.distribution.tag.free.match.title">Tag-Free
-        Match</term>
+        <term id="windows.scripts.distribution.tag.free.match.title"><link linkend="windows.scripts.distribution.tag.free.match"> </link>Tag-Free Match</term>
 
         <listitem>
           <para>Replace current target with a tag-free match.</para>
@@ -402,7 +368,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.tagwipe">
-        <term id="windows.scripts.distribution.tagwipe.title">Tagwipe</term>
+        <term id="windows.scripts.distribution.tagwipe.title"><link linkend="windows.scripts.distribution.tagwipe"> </link>Tagwipe</term>
 
         <listitem>
           <para>Remove extraneous tags from docx documents.</para>
@@ -410,8 +376,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.issue.provider.sample.groovy">
-        <term
-        id="windows.scripts.distribution.issue.provider.sample.groovy.title">issue_provider_sample.groovy</term>
+        <term id="windows.scripts.distribution.issue.provider.sample.groovy.title"><link linkend="windows.scripts.distribution.issue.provider.sample.groovy"> </link>issue_provider_sample.groovy</term>
 
         <listitem>
           <para>(no description)</para>
@@ -419,8 +384,7 @@
       </varlistentry>
 
       <varlistentry id="windows.scripts.distribution.toolbar.groovy">
-        <term
-        id="windows.scripts.distribution.toolbar.groovy.title">toolbar.groovy</term>
+        <term id="windows.scripts.distribution.toolbar.groovy.title"><link linkend="windows.scripts.distribution.toolbar.groovy"> </link>toolbar.groovy</term>
         <listitem>
           <para>(no description)</para>
         </listitem>
@@ -429,7 +393,7 @@
   </section>
 
   <section id="windows.scripts.references">
-    <title id="windows.scripts.references.title">References</title>
+    <title id="windows.scripts.references.title"><link linkend="windows.scripts.references"> </link>References</title>
 
     <variablelist>
       <varlistentry>
@@ -478,17 +442,17 @@
 
     <programlisting>files = project.projectFiles;
 for (i in 0 ..&lt; files.size())
-{
-	for (j in 0 ..&lt; files[i].entries.size())
 	{
-		currSegment = files[i].entries[j];
-		if (project.getTranslationInfo(currSegment))
-		{
-			source = currSegment.getSrcText();
-			target = project.getTranslationInfo(currSegment).translation;
-			console.println(source + " >>>> " + target);
-		}     
-	}
-}</programlisting>
+		for (j in 0 ..&lt; files[i].entries.size())
+			{
+				currSegment = files[i].entries[j];
+				if (project.getTranslationInfo(currSegment))
+					{
+						source = currSegment.getSrcText();
+						target = project.getTranslationInfo(currSegment).translation;
+						console.println(source + " >>>> " + target);
+				}     
+			}
+	}</programlisting>
   </section>
 </section>

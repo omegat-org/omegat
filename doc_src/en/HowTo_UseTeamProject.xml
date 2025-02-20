@@ -6,7 +6,7 @@
 
   <para>Team projects use synchronization mechanisms between project members.</para>
 
-  <para>Once a OmegaT team project is installed on a server, the administrator
+  <para>Once a OmegaT team project is installed on a server, the project manager
   sends members the information they need to access it: a URL indicating the
   location of the project, or an <filename>omegat.project</filename>
   file.</para>
@@ -46,11 +46,11 @@
 			linkend="menus.project.download.team.project"/> to bring up the
 			<guilabel>Download Team Project</guilabel> dialog.</para>
 
-			<para>Enter the URL provided by the team project administrator in the
+			<para>Enter the URL provided by the team project manager in the
 			<guilabel>Repository URL:</guilabel> field at the top of the dialog,
 			and specify a folder for the project in the <guilabel>New Local
 			Project Folder:</guilabel> field. Leave the <guilabel>Default
-			branch</guilabel> option checked unless the project administrator
+			branch</guilabel> option checked unless the project manager
 			has provided instructions for using a custom branch.</para>
 		  </listitem>
 
@@ -141,7 +141,7 @@
 
 			<para>In a team project, the basic configuration parameters of the
 			local project are always overridden by the configuration on the
-			server originally set by the project administrator.</para>
+			server originally set by the project manager.</para>
           </listitem>
 
           <listitem>
@@ -179,7 +179,7 @@
               <listitem>
                 <para>If you first download the remote project using an
                 <filename>omegat.project</filename> file provided by the project
-                administrator, OmegaT will use the mappings in that file, if
+                manager, OmegaT will use the mappings in that file, if
                 any.</para>
               </listitem>
 
@@ -208,7 +208,7 @@
 
       <listitem>
         <warning>
-		  <para>Only the project administrator should use <link
+		  <para>Only the project manager should use <link
 		  endterm="menus.project.title" linkend="menus.project"/><link
 		  endterm="menus.project.commit.source.files.title"
 		  linkend="menus.project.commit.source.files"/>.</para>
@@ -225,7 +225,8 @@
         linkend="menus.project"/><link
         endterm="menus.project.commit.target.files.title"
         linkend="menus.project.commit.target.files"/> to add them to the
-        server, if the project administrator has requested you to do so.</para>
+        server, if the project manager has requested you to do so.
+        Committing the target files also uploads the statistics files to the server.</para>
       </listitem>
     </varlistentry>
 
@@ -236,7 +237,7 @@
         <para>Files in a team project cannot be deleted from OmegaT or the local
         file system. They will be restored the next time the project is
         synchronized. This task is normally performed by the project
-        administrator.</para>
+        manager.</para>
       </listitem>
     </varlistentry>
 

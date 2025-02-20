@@ -98,6 +98,28 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     private Path learnedFilePath;
 
     public AbstractSpellChecker() {
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            switch (eventType) {
+                case LOAD:
+                case CREATE:
+                    initialize();
+                    break;
+                case CLOSE:
+                    destroy();
+                    break;
+                default:
+                    // Nothing
+            }
+            resetCache();
+        });
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
+            public void onNewFile(String activeFileName) {
+                resetCache();
+            }
+
+            public void onEntryActivated(SourceTextEntry newEntry) {
+            }
+        });
     }
 
     /**
@@ -117,31 +139,8 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
         if (checker == null) {
             LOGGER.atInfo().logRB("SPELLCHECKER_LANGUAGE_NOT_FOUND", targetLanguage);
             return false;
-        } else {
-            loadWordLists();
-            CoreEvents.registerProjectChangeListener(eventType -> {
-                switch (eventType) {
-                    case LOAD:
-                    case CREATE:
-                        initialize();
-                        break;
-                    case CLOSE:
-                        destroy();
-                        break;
-                    default:
-                        // Nothing
-                }
-                resetCache();
-            });
-            CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-                public void onNewFile(String activeFileName) {
-                    resetCache();
-                }
-
-                public void onEntryActivated(SourceTextEntry newEntry) {
-                }
-            });
         }
+        loadWordLists();
         return true;
     }
 

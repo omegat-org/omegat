@@ -41,8 +41,10 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
@@ -124,6 +126,23 @@ public class HunspellSpellcheckerTest {
         assertThat(checker.suggest("Erruer")).as("Get suggestion").contains("Erreur", "Errer");
     }
 
+    @Test
+    public void testReinitializeWhenProjectChanged() throws Exception {
+        ProjectProperties props = new ProjectProperties(tmpDir.toFile());
+        props.setTargetLanguage(new Language("fr_FR"));
+        Core.setProject(new NotLoadedProject() {
+            @Override
+            public ProjectProperties getProjectProperties() {
+                return props;
+            }
+        });
+        HunSpellCheckerMock checker = new HunSpellCheckerMock();
+        assertThat(checker.initialize()).as("Success initialize").isTrue();
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        assertThat(checker.getCounter()).as("Hunspell Checker initialized once").isEqualTo(3);
+    }
+
     private static void copyFile(String target) throws IOException {
         try (InputStream is = HunspellSpellcheckerTest.class.getResourceAsStream(DICTIONARY_PATH + target)) {
             if (is == null) {
@@ -132,5 +151,22 @@ public class HunspellSpellcheckerTest {
             Files.copy(is, configDir.resolve("spelling/" + target));
         }
 
+    }
+
+    public static class HunSpellCheckerMock extends HunSpellChecker {
+        private int counter = 0;
+        public HunSpellCheckerMock() {
+            super();
+        }
+
+        @Override
+        public boolean initialize() {
+            counter++;
+            return super.initialize();
+        }
+
+        public int getCounter() {
+            return counter;
+        }
     }
 }

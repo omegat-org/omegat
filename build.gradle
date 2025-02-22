@@ -37,8 +37,6 @@ tasks.named('updateDaemonJvm') {
 def os = osdetector.os
 def osArch = osdetector.classifier
 
-// Define target Java version to compatible.
-def javaVersion = 11;
 
 // OmegaT distribution package meta data.
 def shortDescription = 'The free translation memory tool'

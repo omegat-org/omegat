@@ -324,7 +324,9 @@
 			  linkend="project.folder.source"
 			  endterm="project.folder.source.title"/> folder.</para>
 
-			  <para>Opens the file in the associated application.</para>
+              <para>Opens the file in the associated application if the file exists.</para>
+              <note><para>Holding down the <keycap>Alt</keycap> key while selecting this menu
+              item opens the containing folder instead.</para></note>
 			</listitem>
 		  </varlistentry>
 
@@ -335,7 +337,9 @@
 			  linkend="project.folder.target"
 			  endterm="project.folder.target.title"/> folder.</para>
 
-			  <para>Opens the file in the associated application if the file exists.</para>
+              <para>Opens the file in the associated application if the file exists.</para>
+              <note><para>Holding down the <keycap>Alt</keycap> key while selecting this menu
+              item opens the containing folder instead.</para></note>
 			</listitem>
 		  </varlistentry>
 
@@ -346,7 +350,9 @@
 			  linkend="project.folder.glossary"
 			  endterm="project.folder.glossary.title"/> folder.</para>
 
-			  <para>Opens the file in the associated application if the file exists.</para>
+              <para>Opens the file in the associated application if the file exists.</para>
+              <note><para>Holding down the <keycap>Alt</keycap> key while selecting this menu
+              item opens the containing folder instead.</para></note>
 			</listitem>
 		  </varlistentry>
 		</variablelist>

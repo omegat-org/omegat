@@ -622,8 +622,9 @@
 	<para>Click on <guilabel>Character Table</guilabel> to set the Character
 	table auto-completer options.</para>
 
-	<para>Click on <guilabel>Enable history completion</guilabel> or
-	<guilabel>Enable history prediction</guilabel> to set history based
+	<para>Click on <guilabel>Enable word completion based on translation
+	history</guilabel> or <guilabel>Enable word sequence prediction based on
+	translation history</guilabel> to enable translation history based
 	completions.</para>
 
 	<note>
@@ -773,7 +774,7 @@
 	  <varlistentry id="dialogs.preferences.external.search.enable.project.specific.commands">
 		<term
 		id="dialogs.preferences.external.search.enable.project.specific.commands.title"><option>Allow
-		local external search commands</option></term>
+		locally-defined external search commands</option></term>
 
 		<listitem>
 		  <warning>
@@ -1645,7 +1646,7 @@ ${filePath}></programlisting></para>
 	  <varlistentry id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands">
 		<term
 		id="dialogs.preferences.saving.and.output.also.allow.per.project.external.commands.title"><option>Allow
-		local post-processing commands</option></term>
+		locally-defined post-processing commands</option></term>
 
 		<listitem>
 		  <warning>

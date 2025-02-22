@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.versions)
     alias(libs.plugins.launch4j)
     alias(libs.plugins.ssh)
+    id("com.google.osdetector") version "1.7.3"
 }
 
 apply from: 'gradle/utils.gradle'
@@ -33,6 +34,9 @@ def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.V
 tasks.named('updateDaemonJvm') {
     jvmVersion = JavaVersion.VERSION_17
 }
+def os = osdetector.os
+def osArch = osdetector.classifier
+
 
 def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
 def execWinDistTask = (exePresent('iscc') || execContainerTasks)
@@ -403,6 +407,19 @@ dependencies {
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
+
+    // workdir classifiers are hard-coded in gralde-launch4j plugin
+    if ("windows".equals(os)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-win32'
+    } else if ("osx".equals(os)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-mac'
+    } else if ("linux-x86_64".equals(osArch)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-linux64'
+    } else if ("linux-aarch_64".equals(osArch)) {
+        // gradle-launch4j plugin use the classifier
+        // for architectures other than x86_64 on linux
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
+    }
 
     jacocoAggregation project(':aligner')
     jacocoAggregation project(":machinetranslators:apertium")

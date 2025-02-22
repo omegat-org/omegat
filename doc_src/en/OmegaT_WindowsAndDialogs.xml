@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.windows.and.dialogs">
-  <title id="chapter.windows.and.dialogs.title">Windows and Dialogs</title>
+  <title id="chapter.windows.and.dialogs.title"><link linkend="chapter.windows.and.dialogs"> </link>Windows and Dialogs</title>
   
   <para>A <emphasis>window</emphasis> can be kept open next to the editor and
   lets you interact with both.</para>

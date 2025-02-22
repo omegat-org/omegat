@@ -2,17 +2,16 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.panes">
-  <title id="chapter.panes.title">Panes</title>
+  <title id="chapter.panes.title"><link linkend="chapter.panes"> </link>Panes</title>
 
   <section id="panes.default.layout">
-	<title id="panes.default.layout.title">Default layout</title>
+    <title id="panes.default.layout.title"><link linkend="panes.default.layout"> </link>Default layout</title>
 
 	<para>The first time you start OmegaT, the main window displays the
 	following default layout:</para>
 
-		<figure id="default.omegat.layout.macos">
-      <title id="default.omegat.layout.macos.title">Default OmegaT layout on
-      macOS</title>
+	<figure id="default.omegat.layout.macos">
+      <title id="default.omegat.layout.macos.title"><link linkend="default.omegat.layout.macos"> </link>Default OmegaT layout on macOS</title>
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/defaultOmegaTLayout.png"/>
@@ -79,11 +78,11 @@
   </section>
 
   <section id="panes.principles">
-    <title id="panes.principles.title">Principles</title>
+    <title id="panes.principles.title"><link linkend="panes.principles"> </link>Principles</title>
 
     <variablelist>
       <varlistentry id="panes.manipulation">
-        <term id="panes.manipulation.title">Manipulation</term>
+		<term id="panes.manipulation.title"><link linkend="panes.manipulation"> </link>Manipulation</term>
 
         <listitem>
           <para>The main window consists of several panes, described here, menus,
@@ -97,20 +96,20 @@
           depending on the type of pane and its current status:</para>
 
           <table id="table.pane.widgets">
-            <title id="table.pane.widgets.title">Pane widgets</title>
+            <title id="table.pane.widgets.title"><link linkend="table.pane.widgets"> </link>Pane widgets</title>
 
             <tgroup cols="2">
               <tbody>
                 <row>
                   <entry><inlinemediaobject>
-                      <imageobject role="html">
-                        <imagedata fileref="images/Settings.png" width="60%"/>
-                      </imageobject>
+                    <imageobject role="html">
+                      <imagedata fileref="images/Settings.png" width="60%"/>
+                    </imageobject>
 
-                      <imageobject role="fo">
-                        <imagedata fileref="images/Settings.png" width="40%"/>
-                      </imageobject>
-                    </inlinemediaobject></entry>
+                    <imageobject role="fo">
+                      <imagedata fileref="images/Settings.png" width="40%"/>
+                    </imageobject>
+                  </inlinemediaobject></entry>
 
                   <entry>Lists the various extra <emphasis
                   role="bold">actions</emphasis> available in the pane.</entry>
@@ -118,14 +117,14 @@
 
                 <row>
                   <entry><inlinemediaobject>
-                      <imageobject role="html">
-                        <imagedata fileref="images/Minimize.png" width="60%"/>
-                      </imageobject>
+                    <imageobject role="html">
+                      <imagedata fileref="images/Minimize.png" width="60%"/>
+                    </imageobject>
 
-                      <imageobject role="fo">
-                        <imagedata fileref="images/Minimize.png" width="40%"/>
-                      </imageobject>
-                    </inlinemediaobject></entry>
+                    <imageobject role="fo">
+                      <imagedata fileref="images/Minimize.png" width="40%"/>
+                    </imageobject>
+                  </inlinemediaobject></entry>
 
                   <entry><emphasis role="bold">Minimizes</emphasis> the
                   pane to a tab at the bottom of the window.</entry>
@@ -133,28 +132,28 @@
 
                 <row>
                   <entry><inlinemediaobject>
-                      <imageobject role="html">
-                        <imagedata fileref="images/Maximize.png" width="60%"/>
-                      </imageobject>
+                    <imageobject role="html">
+                      <imagedata fileref="images/Maximize.png" width="60%"/>
+                    </imageobject>
 
-                      <imageobject role="fo">
-                        <imagedata fileref="images/Maximize.png" width="40%"/>
-                      </imageobject>
-                    </inlinemediaobject></entry>
+                    <imageobject role="fo">
+                      <imagedata fileref="images/Maximize.png" width="40%"/>
+                    </imageobject>
+                  </inlinemediaobject></entry>
 
                   <entry><emphasis role="bold">Maximizes</emphasis> the pane</entry>
                 </row>
 
                 <row>
                   <entry><inlinemediaobject>
-                      <imageobject role="html">
-                        <imagedata fileref="images/Restore.png" width="60%"/>
-                      </imageobject>
+                    <imageobject role="html">
+                      <imagedata fileref="images/Restore.png" width="60%"/>
+                    </imageobject>
 
-                      <imageobject role="fo">
-                        <imagedata fileref="images/Restore.png" width="40%"/>
-                      </imageobject>
-                    </inlinemediaobject></entry>
+                    <imageobject role="fo">
+                      <imagedata fileref="images/Restore.png" width="40%"/>
+                    </imageobject>
+                  </inlinemediaobject></entry>
 
                   <entry><emphasis role="bold">Restores</emphasis> a maximized
                   pane to its previous layout.</entry>
@@ -162,14 +161,14 @@
 
                 <row>
                   <entry><inlinemediaobject>
-                      <imageobject role="html">
-                        <imagedata fileref="images/Undock.png" width="60%"/>
-                      </imageobject>
+                    <imageobject role="html">
+                      <imagedata fileref="images/Undock.png" width="60%"/>
+                    </imageobject>
 
-                      <imageobject role="fo">
-                        <imagedata fileref="images/Undock.png" width="40%"/>
-                      </imageobject>
-                    </inlinemediaobject></entry>
+                    <imageobject role="fo">
+                      <imagedata fileref="images/Undock.png" width="40%"/>
+                    </imageobject>
+                  </inlinemediaobject></entry>
 
                   <entry><emphasis role="bold">Undocks</emphasis> the pane from
                   the main window.</entry>
@@ -177,14 +176,14 @@
 
                 <row>
                   <entry><inlinemediaobject>
-                      <imageobject role="html">
-                        <imagedata fileref="images/Dock.png" width="60%"/>
-                      </imageobject>
+                    <imageobject role="html">
+                      <imagedata fileref="images/Dock.png" width="60%"/>
+                    </imageobject>
 
-                      <imageobject role="fo">
-                        <imagedata fileref="images/Dock.png" width="40%"/>
-                      </imageobject>
-                    </inlinemediaobject></entry>
+                    <imageobject role="fo">
+                      <imagedata fileref="images/Dock.png" width="40%"/>
+                    </imageobject>
+                  </inlinemediaobject></entry>
 
                   <entry><emphasis role="bold">Returns</emphasis> the pane to
                   the main window.</entry>
@@ -209,37 +208,37 @@
       </varlistentry>
 
       <varlistentry id="panes.context.menus">
-        <term id="panes.context.menus.title">Context menus</term>
+		<term id="panes.context.menus.title"><link linkend="panes.context.menus"> </link>Context menus</term>
 
         <listitem>
           <para>Some panes have a context menu. You can call that menu using
           the standard method for your OS, or with the OmegaT defined
           shortcuts: <itemizedlist>
-              <listitem>
-                <para>On Windows and Linux: <keycap>Menu</keycap></para>
-              </listitem>
+          <listitem>
+            <para>On Windows and Linux: <keycap>Menu</keycap></para>
+          </listitem>
 
-              <listitem>
-                <para>On macOS: <keycombo>
-                    <keycap>S</keycap>
+          <listitem>
+            <para>On macOS: <keycombo>
+            <keycap>S</keycap>
 
-                    <keycap>Esc</keycap>
-                  </keycombo></para>
-              </listitem>
-            </itemizedlist></para>
+            <keycap>Esc</keycap>
+            </keycombo></para>
+          </listitem>
+          </itemizedlist></para>
         </listitem>
       </varlistentry>
 
       <varlistentry id="panes.drag.and.drop">
-        <term id="panes.drag.and.drop.title">Dragging and dropping</term>
+		<term id="panes.drag.and.drop.title"><link linkend="panes.drag.and.drop"> </link>Dragging and dropping</term>
 
         <listitem>
           <para>Files can be dragged and dropped on certain panes, with the
           following results:</para>
 
           <variablelist>
-            <varlistentry>
-              <term>Editor pane</term>
+            <varlistentry id="panes.drag.and.drop.editor">
+			  <term id="panes.drag.and.drop.editor.title"><link linkend="panes.drag.and.drop.editor"> </link>Editor pane</term>
 
               <listitem>
                 <para>Dropping an OmegaT project file
@@ -254,8 +253,8 @@
               </listitem>
             </varlistentry>
 
-            <varlistentry>
-              <term>Fuzzy Matches pane</term>
+            <varlistentry id="panes.drag.and.drop.fuzzies">
+			  <term id="panes.drag.and.drop.fuzzies.title"><link linkend="panes.drag.and.drop.fuzzies"> </link>Fuzzy Matches pane</term>
 
               <listitem>
                 <para>Dropping <filename>.tmx</filename> files here will copy
@@ -264,8 +263,8 @@
               </listitem>
             </varlistentry>
 
-            <varlistentry>
-              <term>Glossaries pane</term>
+            <varlistentry id="panes.drag.and.drop.glossaries">
+			  <term id="panes.drag.and.drop.glossaries.title"><link linkend="panes.drag.and.drop.glossaries"> </link>Glossaries pane</term>
 
               <listitem>
                 <para>Dropping files with a recognized glossary extension
@@ -279,7 +278,7 @@
       </varlistentry>
 
 	  <varlistentry id="panes.notifications">
-        <term id="panes.notifications.title">Notifications</term>
+		<term id="panes.notifications.title"><link linkend="panes.notifications"> </link>Notifications</term>
 		
         <listitem>
           <para>If a pane is closed but has contents to display, OmegaT can
@@ -357,7 +356,7 @@
   </section>
 
   <section id="panes.editor">
-    <title id="panes.editor.title"><guilabel>Editor</guilabel></title>
+    <title id="panes.editor.title"><link linkend="panes.editor"> </link><guilabel>Editor</guilabel></title>
 
     <para>This is where you type and edit your translations.</para>
 
@@ -365,11 +364,9 @@
     document and double-click on any segment to open and edit it.</para>
 
 	<example id="panes.editor.default.editor.writing.space">
-	  <title id="panes.editor.default.editor.writing.space.title">Default editor
-	  writing space</title>
+      <title id="panes.editor.default.editor.writing.space.title"><link linkend="panes.editor.default.editor.writing.space"> </link>Default editor writing space</title>
 	  <para>
 		<programlisting>— ¶ —————————————————————
-
 <token>Hide Tags</token>
 |Dissimuler les balises<token>&lt;segment 2148 ¶></token>
 
@@ -440,8 +437,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       <para>Modify the Editor display to suit your workflow.</para>
 
 	  <!--   <example id="panes.editor.modified.editor.target.field"> -->
-	  <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified -->
-	  <!--         editor writing space</title> -->
+	  <!-- 	<title id="panes.editor.modified.editor.target.field.title">Example of modified --> <!--         editor writing space</title> -->
 	  <!-- 	<para> -->
 	  <!-- 	  <programlisting>— ¶ ————————————————————— -->
 
@@ -503,7 +499,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 
 		<listitem>
 		  <para>Automatically inserting the source text in the translation
-      field by disabling the <link
+          field by disabling the <link
 		  endterm="dialogs.preferences.editor.leave.the.segment.empty.title"
 		  linkend="dialogs.preferences.editor.leave.the.segment.empty"/>
 		  preference.</para>
@@ -512,8 +508,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 		<listitem>
 		  <para>Inserting the best fuzzy match above the threshold defined in
 		  <link
-		  endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"
-		  linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>
+		      endterm="dialogs.preferences.editor.insert.the.best.fuzzy.match.title"
+		      linkend="dialogs.preferences.editor.insert.the.best.fuzzy.match"/>
 		  preference.</para>
 		</listitem>
 
@@ -533,8 +529,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
     </note>
 
     <variablelist>
-      <varlistentry>
-        <term>Empty translations</term>
+      <varlistentry id="panes.editor.empty">
+		<term id="panes.editor.empty.title"><link linkend="panes.editor.empty"> </link>Empty translations</term>
 
         <listitem>
           <para>If you leave the translation field empty, OmegaT will treat the
@@ -543,8 +539,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Translations equal to the source</term>
+      <varlistentry id="panes.editor.equal">
+        <term id="panes.editor.equal.title"><link linkend="panes.editor.equal"> </link>Translations equal to the source</term>
 
         <listitem>
           <para>OmegaT can store translations that are identical to the source
@@ -554,8 +550,8 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
         </listitem>
       </varlistentry>
 
-      <varlistentry>
-        <term>Dragging text</term>
+      <varlistentry id="panes.editor.drag">
+		<term id="panes.editor.drag.title"><link linkend="panes.editor.drag"> </link>Dragging text</term>
 
         <listitem>
           <para>It is possible to drag text from anywhere in the main window and
@@ -566,7 +562,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       </varlistentry>
 
       <varlistentry id="panes.editor.overwriting">
-        <term id="panes.editor.overwriting.title">Overwriting</term>
+		<term id="panes.editor.overwriting.title"><link linkend="panes.editor.overwriting"> </link>Overwriting</term>
 
         <listitem>
           <para>By default, typing text inserts the new text after the cursor in
@@ -592,7 +588,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       </varlistentry>
 
       <varlistentry id="panes.editor.cursor.lock">
-        <term id="panes.editor.cursor.lock.title">Cursor lock</term>
+		<term id="panes.editor.cursor.lock.title"><link linkend="panes.editor.cursor.lock"> </link>Cursor lock</term>
 
         <listitem>
           <para>By default, the cursor is locked in the translation field, and
@@ -611,7 +607,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       </varlistentry>
 
       <varlistentry id="panes.editor.context.menu">
-        <term id="panes.editor.context.menu.title">Context menu</term>
+		<term id="panes.editor.context.menu.title"><link linkend="panes.editor.context.menu"> </link>Context menu</term>
 
         <listitem>
           <para>Default shortcut:</para>
@@ -637,7 +633,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 		  <itemizedlist>
 			<listitem>
 			  <para>Matched glossary items, with comments, if any presented as a
-        tooltip. Use <link endterm="menus.view.title"
+              tooltip. Use <link endterm="menus.view.title"
 			  linkend="menus.view"/><link
 			  endterm="menus.view.mark.glossary.matches.title"
 			  linkend="menus.view.mark.glossary.matches"/> to enable this
@@ -645,28 +641,28 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 			</listitem>
 
 			<listitem>
-        <para><guilabel>Cut</guilabel>, <guilabel>Copy</guilabel>,
-        <guilabel>Paste</guilabel> functions,</para>
-      </listitem>
+              <para><guilabel>Cut</guilabel>, <guilabel>Copy</guilabel>,
+              <guilabel>Paste</guilabel> functions,</para>
+            </listitem>
 
-      <listitem>
-        <para><guilabel>Go To Segment</guilabel> (to jump to the segment
-        under the pointer).</para>
-      </listitem>
+            <listitem>
+              <para><guilabel>Go To Segment</guilabel> (to jump to the segment
+              under the pointer).</para>
+            </listitem>
 
-      <listitem>
-        <para><guilabel>Search Dictionaries</guilabel> (to search for the
-        selected term in an installed dictionary).</para>
-      </listitem>
+            <listitem>
+              <para><guilabel>Search Dictionaries</guilabel> (to search for the
+              selected term in an installed dictionary).</para>
+            </listitem>
 
-      <listitem>
-        <para><guilabel>Add Glossary Entry</guilabel> (equivalent to using
-        <link endterm="menus.edit.title" linkend="menus.edit"/><link
-        endterm="menus.edit.create.glossary.entry.title"
-        linkend="menus.edit.create.glossary.entry"/>).</para>
-      </listitem>
+            <listitem>
+              <para><guilabel>Add Glossary Entry</guilabel> (equivalent to using
+              <link endterm="menus.edit.title" linkend="menus.edit"/><link
+              endterm="menus.edit.create.glossary.entry.title"
+              linkend="menus.edit.create.glossary.entry"/>).</para>
+            </listitem>
 
-      </itemizedlist>
+          </itemizedlist>
 
           <para>If you have selected text and defined entries in the <link
           endterm="dialogs.preferences.external.searches.title"
@@ -676,8 +672,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       </varlistentry>
 
       <varlistentry id="panes.editor.auto.completion.menu">
-        <term id="panes.editor.auto.completion.menu.title">Auto-completion
-        menu</term>
+		<term id="panes.editor.auto.completion.menu.title"><link linkend="panes.editor.auto.completion.menu"> </link>Auto-completion menu</term>
 
         <listitem>
           <para>Default shortcut:</para>
@@ -692,7 +687,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
               <para>On macOS: <keycap>Esc</keycap></para>
 			</listitem>
           </itemizedlist>
-		  			
+		  
           <para>This menu offers the auto-completion options set in the <link
           endterm="dialog.preferences.auto.completion.title"
           linkend="dialog.preferences.auto.completion"/> preferences.</para>
@@ -700,7 +695,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
       </varlistentry>
 
       <varlistentry id="panes.editor.navigation">
-        <term id="panes.editor.navigation.title">Navigation</term>
+		<term id="panes.editor.navigation.title"><link linkend="panes.editor.navigation"> </link>Navigation</term>
         <listitem>
 		  <para>Use <link linkend="menus.goto" endterm="menus.goto.title"/><link
 		  linkend="menus.goto.notes.pane"
@@ -717,7 +712,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
   </section>
 
   <section id="panes.fuzzy.matches">
-    <title id="panes.fuzzy.matches.title"><guilabel>Fuzzy Matches</guilabel></title>
+    <title id="panes.fuzzy.matches.title"><link linkend="panes.fuzzy.matches"> </link><guilabel>Fuzzy Matches</guilabel></title>
 
     <para>The match viewer shows the segments from your translation memories that
     are most similar to the segment you are currently translating.</para>
@@ -738,7 +733,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
     to select a different match.</para>
 
 	<example id="the.first.match">
-	  <title id="the.first.match.title">An empty segment and its first two matches</title>
+      <title id="the.first.match.title"><link linkend="the.first.match"> </link>An empty segment and its first two matches</title>
       <para>
 		<informaltable id="table.pane.matches">
           <tgroup cols="2">
@@ -772,7 +767,7 @@ When enabled, all formatting in the source segments are hidden.</programlisting>
 							<programlisting>1. <token>Top</token> Folder
 Dossier racine
 &lt;50/50/66% Orphan segments (+1 more)&gt;</programlisting>
-<programlisting>2. Configuration Folder
+                            <programlisting>2. Configuration Folder
 Dossier de configuration
 &lt;50/50/66% &gt;</programlisting></entry>
 						</row>
@@ -821,7 +816,7 @@ Dossier de configuration
 		</note>
       </listitem>
     </itemizedlist>
-  
+    
     <para>You can change how matches are displayed or sorted. See the <link
     endterm="dialog.preferences.tm.matches.title"
     linkend="dialog.preferences.tm.matches"/> preferences for details.</para>
@@ -837,7 +832,7 @@ Dossier de configuration
   </section>
 
   <section id="panes.glossary">
-    <title id="panes.glossary.title"><guilabel>Glossaries</guilabel></title>
+    <title id="panes.glossary.title"><link linkend="panes.glossary"> </link><guilabel>Glossaries</guilabel></title>
 
     <para>This pane shows terms from your glossary files that correspond
     to terms in the current segment. The glossary files are located in the
@@ -851,7 +846,7 @@ Dossier de configuration
     text.</para>
 
 	<example id="glossary.matches">
-	  <title id="glossary.matches.title">Glossary matches</title>
+      <title id="glossary.matches.title"><link linkend="glossary.matches"> </link>Glossary matches</title>
 	  <para>
 		<programlisting>Project = <token>Projet</token>
 1. Projet de traduction
@@ -901,7 +896,7 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.dictionary">
-    <title id="panes.dictionary.title"><guilabel>Dictionaries</guilabel></title>
+    <title id="panes.dictionary.title"><link linkend="panes.dictionary"> </link><guilabel>Dictionaries</guilabel></title>
 
 	<para>This pane shows terms from your dictionary files that
 	correspond to terms in the current segment. The dictionary files are located
@@ -912,13 +907,12 @@ Folder = <token>Dossier</token></programlisting>
   </section>
   
   <section id="panes.machinetranslation">
-    <title id="panes.machinetranslation.title"><guilabel>Machine
-    Translations</guilabel></title>
+    <title id="panes.machinetranslation.title"><link linkend="panes.machinetranslation"> </link><guilabel>Machine Translations</guilabel></title>
 
     <para>If you have enabled and configured at least one machine translation
-      engine this pane shows the suggestions for the current segment produced
-      by the available engines. When suggestions from more than one translation
-      engine are available,</para>
+    engine this pane shows the suggestions for the current segment produced
+    by the available engines. When suggestions from more than one translation
+    engine are available,</para>
 	
     <itemizedlist>
       <listitem>
@@ -957,8 +951,7 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.multipletranslations">
-    <title id="panes.multipletranslations.title"><guilabel>Multiple
-    Translations</guilabel></title>
+    <title id="panes.multipletranslations.title"><link linkend="panes.multipletranslations"> </link><guilabel>Multiple Translations</guilabel></title>
 
     <para>A source segment that appears in multiple locations in the project may
     require several different translations depending on context.</para>
@@ -978,7 +971,7 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.notes">
-    <title id="panes.notes.title"><guilabel>Notepad</guilabel></title>
+    <title id="panes.notes.title"><link linkend="panes.notes"> </link><guilabel>Notepad</guilabel></title>
 
     <para>This pane is an <emphasis>editable</emphasis> space where you can
     add notes to the currently active segment.</para>
@@ -1007,7 +1000,7 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.comments">
-    <title id="panes.comments.title"><guilabel>Comments</guilabel></title>
+    <title id="panes.comments.title"><link linkend="panes.comments"> </link><guilabel>Comments</guilabel></title>
 
     <para>Some file formats, such as the PO format, can contain comments
     for the translator to add context to the translation. Such comments
@@ -1023,23 +1016,23 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.segment.properties">
-    <title id="panes.segment.properties.title"><guilabel>Segment
-    properties</guilabel></title>
+    <title id="panes.segment.properties.title"><link linkend="panes.segment.properties"> </link><guilabel>Segment properties</guilabel></title>
 
     <para>All segments have properties. The properties are displayed in this
     pane.</para>
 	<para>Common properties include:</para>
 	
 	<variablelist>
-	  <varlistentry>
-		<term>Is repetition</term>
+	  <varlistentry id="panes.segment.properties.repetition">
+		<term id="panes.segment.properties.repetition.title"><link linkend="panes.segment.properties.repetition"> </link>Is repetition</term>
 		<listitem>
 		  <para>Indicates that a segment is a repetition and specifies whether
 		  it is the FIRST instance.</para>
 		</listitem>
 	  </varlistentry>
-	  <varlistentry>
-		<term>File</term>
+	  
+	  <varlistentry id="panes.segment.properties.file">
+		<term id="panes.segment.properties.file.title"><link linkend="panes.segment.properties.file"> </link>File</term>
 		<listitem>
 		  <para>Indicates which file contains the segment.</para>
 		</listitem>
@@ -1053,7 +1046,7 @@ Folder = <token>Dossier</token></programlisting>
   </section>
 
   <section id="panes.statusbar">
-    <title id="panes.statusbar.title"><guilabel>Status bar</guilabel></title>
+    <title id="panes.statusbar.title"><link linkend="panes.statusbar"> </link><guilabel>Status bar</guilabel></title>
 
     <para>The bottom of the main window is the status bar.</para>
 
@@ -1061,8 +1054,7 @@ Folder = <token>Dossier</token></programlisting>
 	actions or error messages.</para>
 
 	<example id="panes.statusbar.messages">
-      <title id="panes.statusbar.messages.title">Status bar messages
-      examples</title>
+      <title id="panes.statusbar.messages.title"><link linkend="panes.statusbar.messages"> </link>Status bar messages examples</title>
 	  <para><literal>Synchronization of repositories</literal></para>
 
 	  <para>→ OmegaT is opening a team project and synchronizes with the remote
@@ -1093,7 +1085,7 @@ Folder = <token>Dossier</token></programlisting>
     percentages.</para>
 
 	<example id="panes.statusbar.widgets">
-      <title id="panes.statusbar.widgets.title">Status bar information</title>
+      <title id="panes.statusbar.widgets.title"><link linkend="panes.statusbar.widgets"> </link>Status bar information</title>
 	  <para><literal>LCK | OVR <token>257/271 (12292/154896,
 	  177692)</token><token> 35/0 </token></literal></para>
 
@@ -1141,8 +1133,7 @@ Folder = <token>Dossier</token></programlisting>
 	</example>
 	
 	<example id="panes.statusbar.widgets.percentage">
-      <title id="panes.statusbar.widgets.percentage.title">Status bar
-      information, percentage mode</title>
+      <title id="panes.statusbar.widgets.percentage.title"><link linkend="panes.statusbar.widgets.percentage"> </link>Status bar information, percentage mode</title>
 	  <para><literal>UNL | INS <token>94.8% (14 left) / 7.9% (142,604 left),
 	  177,692</token> <token>35/0</token></literal></para>
 	  <variablelist>

@@ -15,6 +15,7 @@ plugins {
     id 'org.omegat.verification-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
+    id("com.google.osdetector") version "1.7.3"
 }
 
 application {
@@ -26,6 +27,9 @@ application {
 tasks.named('updateDaemonJvm') {
     jvmVersion = JavaLanguageVersion.of(17)
 }
+def os = osdetector.os
+def osArch = osdetector.classifier
+
 
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
@@ -234,8 +238,20 @@ dependencies {
     testIntegrationImplementation(testFixtures(project.rootProject))
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
-    subprojects.findAll { it.getSubprojects().isEmpty()}.collect {jacocoAggregation it}
+    // workdir classifiers are hard-coded in gralde-launch4j plugin
+    if ("windows".equals(os)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-win32'
+    } else if ("osx".equals(os)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-mac'
+    } else if ("linux-x86_64".equals(osArch)) {
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-linux64'
+    } else if ("linux-aarch_64".equals(osArch)) {
+        // gradle-launch4j plugin use the classifier
+        // for architectures other than x86_64 on linux
+        launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
+    }
 
+    subprojects.findAll { it.getSubprojects().isEmpty()}.collect {jacocoAggregation it}
 }
 
 jar {

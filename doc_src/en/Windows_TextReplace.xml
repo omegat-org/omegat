@@ -2,8 +2,7 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="windows.text.replace">
-  <title id="windows.text.replace.title"><guilabel>Text
-  Replace</guilabel></title>
+  <title id="windows.text.replace.title"><link linkend="windows.text.replace"> </link><guilabel>Text Replace</guilabel></title>
 
   <para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
   linkend="menus.edit.search.and.replace"
@@ -35,7 +34,7 @@
 
 
   <example id="replace.with.allemand">
-	<title id="replace.with.allemand.title">Replace a term</title>
+    <title id="replace.with.allemand.title"><link linkend="replace.with.allemand"> </link>Replace a term</title>
 	<para>
 	  <programlisting>多和田葉子.UTF8
 -- 148> | language = [[日本語]]・[[ドイツ語]]
@@ -122,7 +121,7 @@
   </itemizedlist>
 
   <section id="windows.text.replace.methods">
-    <title id="windows.text.replace.methods.title">Search type</title>
+    <title id="windows.text.replace.methods.title"><link linkend="windows.text.replace.methods"> </link>Search type</title>
 
     <para>Use the radio buttons to select the type of search.</para>
 
@@ -130,7 +129,7 @@
 
     <variablelist>
       <varlistentry id="windows.text.replace.methods.exact">
-        <term id="windows.text.replace.methods.exact.title">Exact search</term>
+        <term id="windows.text.replace.methods.exact.title"><link linkend="windows.text.replace.methods.exact"> </link>Exact search</term>
         <listitem>
           <para>Search for the string exactly as entered in the search
           field.</para>
@@ -163,7 +162,7 @@
       </varlistentry>
 
       <varlistentry id="windows.text.replace.methods.regex">
-        <term id="windows.text.replace.methods.regex.title">Regular expressions</term>
+        <term id="windows.text.replace.methods.regex.title"><link linkend="windows.text.replace.methods.regex"> </link>Regular expressions</term>
         <listitem>
           <para>Treat the search string as a regular expression.</para>
 
@@ -184,42 +183,42 @@
   </section>
 
   <section id="windows.text.replace.options">
-	<title id="windows.text.replace.options.title">Options</title>
+    <title id="windows.text.replace.options.title"><link linkend="windows.text.replace.options"> </link>Options</title>
 	
 	<variablelist>
-	  <varlistentry>
-		<term>Case sensitive</term>
+	  <varlistentry id="windows.text.replace.options.case.sensitive">
+        <term id="windows.text.replace.options.case.sensitive.title"><link linkend="windows.text.replace.options.case.sensitive"> </link>Case sensitive</term>
 		<listitem>
 		  <para>Only returns results with the same letter case as the search
 		  terms.</para>
 		</listitem>
 	  </varlistentry>
 	
-	  <varlistentry>
-		<term>Space matches nbsp</term>
+	  <varlistentry id="windows.text.replace.options.space.matches.nbsp">
+        <term id="windows.text.replace.options.space.matches.nbsp.title"><link linkend="windows.text.replace.options.space.matches.nbsp"> </link>Space matches nbsp</term>
 		<listitem>
 		  <para>Space characters in search terms will match both a normal space
 		  and a non-breaking space (\u00A) character.</para>
 		</listitem>
 	  </varlistentry>
 
-	  <varlistentry>
-		<term>Untranslated</term>
+	  <varlistentry id="windows.text.replace.options.untranslated">
+        <term id="windows.text.replace.options.untranslated.title"><link linkend="windows.text.replace.options.untranslated"> </link>Untranslated</term>
 		<listitem>
 		  <para>Also search in untranslated segments.</para>
 		</listitem>
 	  </varlistentry>
  
-	  <varlistentry>
-		<term><guibutton>Show Advanced Options</guibutton></term>
+	  <varlistentry id="windows.text.replace.options.advanced.options">
+        <term id="windows.text.replace.options.advanced.options.title"><link linkend="windows.text.replace.options.advanced.options"> </link><guibutton>Show Advanced Options</guibutton></term>
 		<listitem>
 		  <para>Select additional criteria such as the person who authored or
 		  changed the translation, the date and time of translation
 		  (modification), or whether to exclude orphan segments.</para>
 
 		  <variablelist>
-			<varlistentry>
-			  <term>Full/Half-width char insensitive</term>
+			<varlistentry id="windows.text.replace.options.full.half.width">
+              <term id="windows.text.replace.options.full.half.width.title"><link linkend="windows.text.replace.options.full.half.width"> </link>Full/Half-width char insensitive</term>
 			  <listitem>
 				<para>Returns results that match both the full- and half-width
 				forms (CJK characters) of the characters in the search
@@ -235,7 +234,7 @@
   </section>
 
   <section id="windows.text.replace.result.display">
-    <title id="windows.text.replace.result.display.title">Results display</title>
+    <title id="windows.text.replace.result.display.title"><link linkend="windows.text.replace.result.display"> </link>Results display</title>
 
     <para>Matches are displayed in their order of appearance in the project. For
     translated segments, the original text is displayed above the translated
@@ -273,8 +272,8 @@
 	<para>The selected segment is highlighted in green.</para>
 	
 	<variablelist>
-	  <varlistentry>
-		<term>Auto-sync with editor</term>
+	  <varlistentry id="windows.text.replace.result.display.auto.sync">
+        <term id="windows.text.replace.result.display.auto.sync.title"><link linkend="windows.text.replace.result.display.auto.sync"> </link>Auto-sync with editor</term>
 		<listitem>
 		  <para>The <link linkend="panes.editor" endterm="panes.editor.title"/>
 		  pane synchronizes its display with the selection in the search
@@ -282,8 +281,8 @@
 		</listitem>
 	  </varlistentry>
 	  
-	  <varlistentry>
-		<term>Back to the initial segment on close</term>
+	  <varlistentry id="windows.text.replace.result.display.back.to.initial.segment">
+        <term id="windows.text.replace.result.display.back.to.initial.segment.title"><link linkend="windows.text.replace.result.display.back.to.initial.segment"> </link>Back to the initial segment on close</term>
 		<listitem>
 		  <para>When you close the search windows, the <link
 		  linkend="panes.editor" endterm="panes.editor.title"/> pane

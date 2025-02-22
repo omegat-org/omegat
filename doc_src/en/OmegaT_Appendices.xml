@@ -2,7 +2,7 @@
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.appendices">
-  <title id="chapter.appendices.title">Appendices</title>
+  <title id="chapter.appendices.title"><link linkend="chapter.appendices"> </link>Appendices</title>
 
   <xi:include href="App_FileFilters.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

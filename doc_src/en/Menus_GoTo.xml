@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<section id="menus.goto">
-  <title id="menus.goto.title"><guimenu>Go To</guimenu></title>
+<section id="menus.goto"><title id="menus.goto.title"><link linkend="menus.goto"> </link><guimenu>Go To</guimenu></title>
 
   <para>This menu gives you access to the segment and pane navigation commands.</para>
 
   <example id="example.next.untranslated.segment">
-	<title id="example.next.untranslated.segment.title">Shortcut description
-	example</title>
+	<title id="example.next.untranslated.segment.title"><link linkend="example.next.untranslated.segment"> </link>Shortcut description example</title>
 	<para>On Windows and Linux:
 	<keycombo><keycap>Control</keycap><keycap>U</keycap></keycombo></para>
 
@@ -21,9 +19,7 @@
 
   <variablelist>
     <varlistentry id="menus.goto.next.untranslated.segment">
-      <term id="menus.goto.next.untranslated.segment.title"><guimenuitem>Next
-      Untranslated Segment</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
+	  <term id="menus.goto.next.untranslated.segment.title"><link linkend="menus.goto.next.untranslated.segment"> </link><guimenuitem>Next Untranslated Segment</guimenuitem><keycombo><keycap>C</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>Moves to the next segment with no target language entry in the
@@ -32,9 +28,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.translated.segment">
-      <term id="menus.goto.next.translated.segment.title"><guimenuitem>Next
-      Translated Segment</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
+	  <term id="menus.goto.next.translated.segment.title"><link linkend="menus.goto.next.translated.segment"> </link><guimenuitem>Next Translated Segment</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>U</keycap></keycombo></term>
 
       <listitem>
         <para>Moves to the next already translated segment, ignoring
@@ -43,9 +37,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.next.segment">
-      <term id="menus.goto.next.segment.title"><guimenuitem>Next
-      Segment</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
+	  <term id="menus.goto.next.segment.title"><link linkend="menus.goto.next.segment"> </link><guimenuitem>Next Segment</guimenuitem><keycombo><keycap>C</keycap><keycap>N</keycap></keycombo></term>
 
       <listitem>
 		<para>Also: <keycombo><keycap>Enter</keycap></keycombo></para>
@@ -57,18 +49,16 @@
 		  <para>You can use <keycap>TAB</keycap> as an alternative shortcut by
 		  enabling the
 		  <link linkend="dialogs.preferences.general.use.tab.to.advance"
-		  endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
+				endterm="dialogs.preferences.general.use.tab.to.advance.title"/>
 		  preference.</para>
 		  
 		  <para>This is useful with character entry systems that use
-		  <keycap>Enter</keycap> to validate input.</para></note>
+		<keycap>Enter</keycap> to validate input.</para></note>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.segment">
-      <term id="menus.goto.previous.segment.title"><guimenuitem>Previous
-      Segment</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
+	  <term id="menus.goto.previous.segment.title"><link linkend="menus.goto.previous.segment"> </link><guimenuitem>Previous Segment</guimenuitem><keycombo><keycap>C</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
 		<para>Also:
 		<keycombo><keycap>C</keycap><keycap>Enter</keycap></keycombo></para>
@@ -91,45 +81,35 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.segment.number">
-      <term id="menus.goto.segment.number.title"><guimenuitem>Segment
-      number...</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
+	  <term id="menus.goto.segment.number.title"><link linkend="menus.goto.segment.number"> </link><guimenuitem>Segment number...</guimenuitem><keycombo><keycap>C</keycap><keycap>J</keycap></keycombo></term>
       <listitem>
         <para>Jumps to the segment whose call-out or number is entered.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.note">
-      <term id="menus.goto.next.note.title"><guimenuitem>Next
-      Note</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+	  <term id="menus.goto.next.note.title"><link linkend="menus.goto.next.note"> </link><guimenuitem>Next Note</guimenuitem>     <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
 		<para>Moves to the next segment with a note.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.previous.note">
-      <term id="menus.goto.previous.note.title"><guimenuitem>Previous
-      Note</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
+	  <term id="menus.goto.previous.note.title"><link linkend="menus.goto.previous.note"> </link><guimenuitem>Previous Note</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
 		<para>Moves to the previous segment with a note.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.next.unique.segment">
-      <term id="menus.goto.next.unique.segment.title"><guimenuitem>Next Unique
-      Segment</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
+	  <term id="menus.goto.next.unique.segment.title"><link linkend="menus.goto.next.unique.segment"> </link><guimenuitem>Next Unique Segment</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>K</keycap></keycombo></term>
       <listitem>
         <para>Moves to the next unique segment.</para>
       </listitem>
     </varlistentry>
 
     <varlistentry id="menus.goto.source.of.selected.match">
-      <term id="menus.goto.source.of.selected.match.title"><guimenuitem>Source
-      of Selected Match</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
+	  <term id="menus.goto.source.of.selected.match.title"><link linkend="menus.goto.source.of.selected.match"> </link><guimenuitem>Source of Selected Match</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>M</keycap></keycombo></term>
       <listitem>
         <para>Moves to the segment that corresponds to the currently
         selected match in the <guilabel>Fuzzy matches</guilabel> pane.</para>
@@ -137,9 +117,7 @@
     </varlistentry>
 
 	<varlistentry id="menus.goto.auto.populated.segments">
-	  <term
-	  id="menus.goto.auto.populated.segments.title"><guisubmenu>Auto-Populated
-	  Segments</guisubmenu></term>
+	  <term id="menus.goto.auto.populated.segments.title"><link linkend="menus.goto.auto.populated.segments"> </link><guisubmenu>Auto-Populated Segments</guisubmenu></term>
 	  <listitem>
         <para>Navigate between segments that were automatically populated by
         exact matches from the <link linkend="project.folder.tm.auto"
@@ -153,7 +131,7 @@
 		<itemizedlist>
 		  <listitem id="menus.goto.auto.populated.segments.next.auto">
 			<para
-			id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Next
+				id="menus.goto.auto.populated.segments.next.auto.title"><guimenuitem>Next
 			Segment from tm/auto/</guimenuitem>
 			<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
 
@@ -163,7 +141,7 @@
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.auto">
 			<para
-			id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Previous
+				id="menus.goto.auto.populated.segments.prev.auto.title"><guimenuitem>Previous
 			Segment from tm/auto/</guimenuitem>
 			<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>,</keycap></keycombo></para>
 
@@ -173,7 +151,7 @@
 
 		  <listitem id="menus.goto.auto.populated.segments.next.enforce">
 			<para
-			id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Next
+				id="menus.goto.auto.populated.segments.next.enforce.title"><guimenuitem>Next
 			Segment from tm/enforce/</guimenuitem>
 			<keycombo><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
 
@@ -183,7 +161,7 @@
 
 		  <listitem id="menus.goto.auto.populated.segments.prev.enforce">
 			<para
-			id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Previous
+				id="menus.goto.auto.populated.segments.prev.enforce.title"><guimenuitem>Previous
 			Segment from tm/enforce/</guimenuitem>
 			<keycombo><keycap>S</keycap><keycap>C</keycap><keycap>A</keycap><keycap>.</keycap></keycombo></para>
 
@@ -195,9 +173,7 @@
 	</varlistentry>
 
     <varlistentry id="menus.goto.back.in.history">
-      <term id="menus.goto.back.in.history.title"><guimenuitem>Back in
-      History</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
+	  <term id="menus.goto.back.in.history.title"><link linkend="menus.goto.back.in.history"> </link><guimenuitem>Back in History</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>P</keycap></keycombo></term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
         <para>This command allows you to move backward one segment at a time to
@@ -206,9 +182,7 @@
     </varlistentry>
     
     <varlistentry id="menus.goto.forward.in.history">
-      <term id="menus.goto.forward.in.history.title"><guimenuitem>Forward in
-      History</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
+	  <term id="menus.goto.forward.in.history.title"><link linkend="menus.goto.forward.in.history"> </link><guimenuitem>Forward in History</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
         <para>OmegaT remembers your segment navigation history.</para>
 
@@ -222,8 +196,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.notes.pane">
-      <term id="menus.goto.notes.pane.title"><guimenuitem>Notepad</guimenuitem>
-	  <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
+	  <term id="menus.goto.notes.pane.title"><link linkend="menus.goto.notes.pane"> </link><guimenuitem>Notepad</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>N</keycap></keycombo></term>
       <listitem>
         <para>Enter the <link linkend="panes.notes"
         endterm="panes.notes.title"/> to write or modify a note associated
@@ -232,8 +205,7 @@
     </varlistentry>
 
     <varlistentry id="menus.goto.editor.pane">
-      <term id="menus.goto.editor.pane.title"><guimenuitem>Editor</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
+	  <term id="menus.goto.editor.pane.title"><link linkend="menus.goto.editor.pane"> </link><guimenuitem>Editor</guimenuitem><keycombo><keycap>C</keycap><keycap>A</keycap><keycap>E</keycap></keycombo></term>
       <listitem>
         <para>Enter the <link linkend="panes.editor"
         endterm="panes.editor.title"/> to proceed with your translation.</para>

@@ -1,7 +1,7 @@
 plugins {
     id 'org.omegat.common-utilities'
 }
-
+def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
 tasks.register('manualZips') {
     description = 'Build ZIP manuals to bundle into application. Requires container runtime.'
     group = 'documentation'
@@ -60,10 +60,7 @@ manualIndexXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
                 excludes: ['xhtml5/*', 'index.xml'])
         outputs.files layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
         doLast {
@@ -78,10 +75,7 @@ manualIndexXmls.each { xml ->
                 excludes: ['xhtml5/*', 'index.xml'])
         outputs.files fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}/"),
                 includes: ['*.html', 'OmegaT.css', 'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
     }
@@ -121,10 +115,7 @@ firstStepsXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'first-steps'
     }
@@ -140,10 +131,7 @@ instantStartXmls.each { xml ->
         inputs.files fileTree(dir: "doc_src/${lang}", includes: ['InstantStartGuide.xml', '**/InstantGuide*png'])
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
-        onlyIf {
-            conditions([exePresent('docker') || exePresent('nerdctl'), 'Docker or nerdctl is not installed'],
-                    [!project.hasProperty('forceSkipDocumentBuild'), 'Specified forceSkipDocumentBuild property'])
-        }
+        onlyIf { execContainerTasks }
         workingDir = 'doc_src'
         commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'instant-start'
     }

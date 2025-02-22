@@ -6,15 +6,33 @@ parameters:
 
 steps:
   - task: Bash@3
-    displayName: 📂 SCP upload to sourceforge file management
+    displayName: install lftp
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: |
+        sudo apt-get update
+        sudo apt-get install -y lftp
+  - task: Bash@3
+    displayName: "Disable strict host key checking"
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: |
+        mkdir -p ~/.ssh
+        echo "StrictHostKeyChecking no" >> ~/.ssh/config
+        echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+        chmod 600 ~/.ssh/config
+  - task: Bash@3
+    displayName: 📂upload to sourceforge file management via SCP/SFTP
     condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |
         echo "Push OmegaT ${{ parameters.omegatVersion }} files to SourceForge file manager"
         srcdir=$(system.defaultworkingdirectory)/build/distributions/
-        ls -l $srcdir/*        
-        dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
+        ls -l $srcdir/*
+        dest=sftp://$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir
+        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -R -v ; bye"
+        env LFTP_PASSWORD=$(SOURCEFORGE_FILE_PASS) lftp -e "$cmd" --env-password $dest

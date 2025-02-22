@@ -5,6 +5,17 @@ plugins {
     id 'edu.sc.seis.launch4j'
     id 'org.omegat.version-conventions'
 }
+def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
+def execWinDistTask = (exePresent('iscc') || execContainerTasks)
+// Starting from Nov 2022, certification provider force to use HSM to
+// store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
+// standards will require private keys for standard code signing
+// certificates to be stored on hardware certified as FIPS 140 Level 2,
+// Common Criteria EAL 4+, or equivalent.
+// #1179 build/release: Windows binary signature with PKCS#11 HSM
+// https://sourceforge.net/p/omegat/bugs/1179/
+// requires osslsigncode version 2.5 or later.
+def execWinSignTask = ['pkcs11module', 'winCodesignPassword'].every { project.hasProperty(it) } && exePresent('osslsigncode')
 
 // Read in all our custom messages and massage them for inclusion in the .iss
 ext.getInnoSetupCustomMessages = {
@@ -63,6 +74,7 @@ ext.makeWinTask = { args ->
     def genDistsTaskName = "${args.name}Gen"
     def distsTaskName = "${args.name}"
     def signedTaskName = "${args.name}Signed"
+    boolean execWinTasks = execWinDistTask && args.jrePath != null && !args.jrePath.empty
     def parentTask = tasks.getByName("${args.parentTask}")
     def signedTaskCommandArgs = { arg2 ->
         def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode').toString()
@@ -93,11 +105,7 @@ ext.makeWinTask = { args ->
     }
 
     tasks.register(prepDistsTaskName, Sync) {
-        onlyIf {
-            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
-                     'InnoSetup or Docker not installed'])
-        }
+        onlyIf { execWinTasks }
         doFirst {
             delete "$destinationDir/jre"
             delete installerWinExe
@@ -137,11 +145,7 @@ ext.makeWinTask = { args ->
     }
 
     tasks.register(genDistsTaskName, Exec) {
-        onlyIf {
-            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
-                     'InnoSetup or Docker not installed'])
-        }
+        onlyIf { execWinTasks }
         dependsOn prepDistsTaskName
         inputs.files(
                 layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar"),
@@ -165,11 +169,7 @@ ext.makeWinTask = { args ->
     tasks.register(distsTaskName, Copy) {
         description = "Create a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        onlyIf {
-            conditions([!args.jrePath || !args.jrePath.empty, 'JRE not found'],
-                    [exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'),
-                     'InnoSetup or Docker not installed'])
-        }
+        onlyIf { execWinTasks }
         from layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
         into base.distsDirectory
         outputs.file installerWinExe
@@ -188,15 +188,7 @@ ext.makeWinTask = { args ->
         // #1179 build/release: Windows binary signature with PKCS#11 HSM
         // https://sourceforge.net/p/omegat/bugs/1179/
         // requires osslsigncode version 2.5 or later.
-        onlyIf {
-            // Set these in e.g. local.properties
-            def props = ['pkcs11module', 'winCodesignPassword']
-            conditions([props.every { project.hasProperty(it) }, 'Code signing properties not set'],
-                    [exePresent('osslsigncode'), 'osslsigncode is not installed'])
-            // note: container image amake/innosetup has osslsigntool 1.7 which don't work.
-            // [exePresent('osslsigncode') || exePresent('docker') || exePresent('nerdctl'),
-            // 'neither osslsigncode or docker/nerdctl is not installed'])
-        }
+        onlyIf { execWinSignTask }
         doFirst {
             delete signedWinExe
         }

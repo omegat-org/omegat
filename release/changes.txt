@@ -1,10 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 6.0.2
 ----------------------------------------------------------------------
-  0 Enhancement
-  5 Bug fixes
+  1 Enhancement
+  6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
+
+  Implemented request:
+
+  - Change the "break/exception" checkbox label
+  https://sourceforge.net/p/omegat/feature-requests/484/
 
   Bug fixes:
 
@@ -22,6 +27,9 @@
 
   - pt-BR bundle typos
   https://sourceforge.net/p/omegat/bugs/1282/
+
+  - macOS notarization fails with junixsocket libraries
+  https://sourceforge.net/p/omegat/bugs/1283/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.1 (2024-08-17)

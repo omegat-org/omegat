@@ -2,7 +2,7 @@
  OmegaT 6.0.2
 ----------------------------------------------------------------------
   1 Enhancement
-  5 Bug fixes
+  6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 
@@ -24,6 +24,9 @@
 
   - Translation memories are not correctly reloaded after team synchronization
   https://sourceforge.net/p/omegat/bugs/1164/
+
+  - pt-BR bundle typos
+  https://sourceforge.net/p/omegat/bugs/1282/
 
   - macOS notarization fails with junixsocket libraries
   https://sourceforge.net/p/omegat/bugs/1283/

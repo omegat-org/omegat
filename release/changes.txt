@@ -6,6 +6,11 @@
   0 Localisation updates
 ----------------------------------------------------------------------
 
+  Implemented request:
+
+  - Change the "break/exception" checkbox label
+  https://sourceforge.net/p/omegat/feature-requests/484/
+
   Bug fixes:
 
   - Preferences/CutomColorSelector don't show notification immediately when modifying color

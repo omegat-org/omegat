@@ -142,7 +142,7 @@
           <varlistentry>
             <term><guilabel>Mine</guilabel></term>
             <listitem><para>This is your local version, which has not yet
-            sent to the server for sharing.</para></listitem>
+            been sent to the server for sharing.</para></listitem>
           </varlistentry>
           <varlistentry>
             <term><guilabel>Server (original)</guilabel></term>

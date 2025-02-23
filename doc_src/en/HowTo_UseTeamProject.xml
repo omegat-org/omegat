@@ -73,18 +73,16 @@
 		  endterm="dialog.preferences.team.title.repository.credentials.title"/>
 		  preferences for details.</para>
 
-		  <para>To enhance security, some servers require temporary access
-		  tokens for access from external processes instead of a password. If
-		  your password does not seem to work, make sure that you check the
-		  server documentation.</para>
-		  
+		  <para>To enhance security, some servers require external processes
+		  to connect using a separate access token instead of a password. Check
+          the server documentation if your password does not work.</para>
 		  <para>If the server uses SSH authentication, make sure you update your
 		  SSH configuration to include that server before attempting to download
 		  the project, otherwise you will get an authentication error and the
 		  project will fail to load.</para>
 
-		  <para>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</para>
+		  <para>If you use multiple projects on the same server, you will only be
+          asked for your credentials once for that server.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -120,13 +118,12 @@
         preference.</para>
 
         <warning>
-          <para>Since synchronization does not take place at the same time for
-          each member, there will be cases when a segment has a local
-          translation but a different translation has already been synchronized
-          for sharing. When synchronization time comes, the local version will
-          be matched against the modified version and OmegaT will ask the author
-          of the local version to make a choice to solve that translation
-          conflict.</para>
+          <para>Since members do not necessarily synchronize their projects
+          at the same time, a segment with a local translation will occasionally
+          also have a different translation from another member available on the
+          server. When you synchronize the project, OmegaT will match the local
+          and modified versions, and ask you to choose which version of the
+          translation to keep.</para>
         </warning>
       </listitem>
     </varlistentry>
@@ -144,8 +141,8 @@
         <variablelist>
           <varlistentry>
             <term><guilabel>Mine</guilabel></term>
-            <listitem><para>This is “my” local version, not yet sent to the
-            server for sharing.</para></listitem>
+            <listitem><para>This is your local version, which has not yet
+            sent to the server for sharing.</para></listitem>
           </varlistentry>
           <varlistentry>
             <term><guilabel>Server (original)</guilabel></term>
@@ -155,7 +152,7 @@
           <varlistentry>
             <term><guilabel>Server (updated)</guilabel></term>
             <listitem><para>This is the version that was shared with other
-            members while I was working.</para></listitem>
+            members since you last worked on the project.</para></listitem>
           </varlistentry>
         </variablelist>
         </para>
@@ -173,9 +170,8 @@
         server for sharing with other team members.</para>
 
         <note>
-          <para>To reduce the chances of having translation conflicts, make sure
-          that team members work on different parts of a translation at any
-          given time.</para>
+          <para>Have team members work on different parts of a translation at any
+          given time to reduce the chances of having translation conflicts.</para>
         </note>
       </listitem>
     </varlistentry>

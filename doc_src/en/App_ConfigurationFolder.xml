@@ -214,7 +214,11 @@
 		2.0</ulink> format. See the <link
 		linkend="dialogs.preferences.segmentation.setup"
 		endterm="dialogs.preferences.segmentation.setup.title"/> preferences for
-		details.</para>
+		details.
+		  <note><para>If there is an existing <filename>segmentation.conf</filename>
+		  file from earlier versions, OmegaT converts it automatically.</para>
+		  </note>
+		</para>
 	  </listitem>
 	</varlistentry>
 	

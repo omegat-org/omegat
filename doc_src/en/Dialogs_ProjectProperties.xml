@@ -52,13 +52,13 @@
 	  </listitem>
 
 	  <listitem>
-		<para>find spelling mistakes from the dictionaries installed in the
+		<para>find spelling mistakes using the dictionaries installed in the
 		<link linkend="dialog.preferences.spellchecker"
 		endterm="dialog.preferences.spellchecker.title"/> preferences,</para>
 	  </listitem>
 
 	  <listitem>
-		<para>find grammatical and typographical mistakes from the rules set
+		<para>find grammatical and typographical mistakes using the rules set
 		in the <link linkend="dialog.preferences.languagetool.plugin"
 		endterm="dialog.preferences.languagetool.plugin.title"/>
 		preferences,</para>

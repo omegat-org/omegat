@@ -12,7 +12,7 @@
   - Various small documentation updates
       - add translation conflict resolution section
       https://sourceforge.net/p/omegat/documentation/429/
-      - Reference to temporary access tokens
+      - Reference to access tokens
       https://sourceforge.net/p/omegat/documentation/423/
       - Add information about language codes, and format reference.
       https://sourceforge.net/p/omegat/documentation/421/
@@ -27,7 +27,7 @@
 
   Bug fixes:
 
-  - Preferences/CutomColorSelector don't show notification immediately when modifying color
+  - Preferences/CustomColorSelector don't show notification immediately when modifying color
   https://sourceforge.net/p/omegat/bugs/1273/
 
   - [Revert regression] List of issues stays hidden in the background

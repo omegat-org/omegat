@@ -8,7 +8,7 @@
                2007 Didier Briel
                2009 Alex Buloichik
                2015 Aaron Madlon-Kay
-               2023 Hiroshi Miura
+               2023-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -89,7 +89,8 @@ public final class Help {
     /**
      * Shows help in the system browser.
      *
-     * @throws IOException when URI creation failed.
+     * @throws IOException
+     *             when URI creation failed.
      */
     public static void showHelp() throws IOException {
         String lang = detectHelpLanguage();

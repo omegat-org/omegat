@@ -234,7 +234,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY"));
         case SUBSEGMENTS:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString(
-                    "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM_SUBSEG") + " ");
+                    "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_SUBSEGMENTS") + " ");
         default:
             return localTemplate.replace(VAR_MATCH_SOURCE, "");
         }

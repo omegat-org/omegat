@@ -243,6 +243,13 @@
 	linkend="menus.project.new" endterm="menus.project.new.title"/>, and select
 	an empty folder or create a new one with the name of your project.</para>
 
+	<warning>
+	  <para>OmegaT needs to be able to modify the folder within which you create
+	  the project. If you want to install your project on a shared drive, do not
+	  install it at the top of the drive, but rather create a folder in which
+	  you will install the project.</para>
+	</warning>
+
     <para>An OmegaT project is simply a set of folders that holds
     all your default resources.</para>
 
@@ -254,16 +261,16 @@
 	translated files, set the various options, and click on <guibutton>OK</guibutton>
 	to continue.</para>
 
-	<para>OmegaT provides a convenient short list of two-letter language
-	codes, but you can type any code that conforms to <ulink
-	url="https://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP-47</ulink>
-	(including the three-letter language codes) into the appropriate
-	field.</para>
+	<para>OmegaT provides a convenient short list of two-letter language codes,
+	but you can type any code into the appropriate field.</para>
 
 	<warning>
-	  <para>Make sure that you enter the correct languages and that all other
-	  locations requiring a language code match the code you assign here. See
-	  the <link linkend="dialogs.project.properties.languages"
+	  <para>OmegaT does not check the validity of the language codes that you
+	  enter. Make sure that the two language codes are
+	  <emphasis>different</emphasis>, that they are appropriate for your use
+	  of OmegaT, and that all other locations requiring a language code
+	  match the codes you assign here. See the <link
+	  linkend="dialogs.project.properties.languages"
 	  endterm="dialogs.project.properties.languages.title"/> section for
 	  details.</para>
 	</warning>

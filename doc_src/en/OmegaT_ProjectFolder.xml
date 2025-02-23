@@ -609,10 +609,15 @@
       </varlistentry>
 
       <varlistentry id="project.folder.omegat.segmentation">
-        <term id="project.folder.omegat.segmentation.title">segmentation.conf</term>
+        <term id="project.folder.omegat.segmentation.title">segmentation.srx</term>
         <listitem>
           <para>This file contains the project-specific segmentation
-          rules.</para>
+          rules in the <ulink
+    url="https://www.gala-global.org/srx-20-april-7-2008">SRX 2.0</ulink> format.
+			<note><para>If there is an existing <filename>segmentation.conf</filename>
+			file from earlier versions, OmegaT converts it automatically.</para>
+			</note>
+		  </para>
         </listitem>
       </varlistentry>
 

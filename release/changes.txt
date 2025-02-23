@@ -1,19 +1,23 @@
 ----------------------------------------------------------------------
  OmegaT 6.0.2
 ----------------------------------------------------------------------
-  1 Enhancement
+
+  2 Enhancement
   6 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 
-  Implemented request:
+  Implemented requests:
+
+  - Various small documentation updates
+  https://sourceforge.net/p/omegat/documentation/443/
 
   - Change the "break/exception" checkbox label
   https://sourceforge.net/p/omegat/feature-requests/484/
 
   Bug fixes:
 
-  - Preferences/CutomColorSelector don't show notification immediately when modifying color
+  - Preferences/CustomColorSelector don't show notification immediately when modifying color
   https://sourceforge.net/p/omegat/bugs/1273/
 
   - [Revert regression] List of issues stays hidden in the background

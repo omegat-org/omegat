@@ -48,6 +48,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -88,7 +89,7 @@ public final class Help {
     /**
      * Shows help in the system browser.
      *
-     * @throws IOException
+     * @throws IOException when URI creation failed.
      */
     public static void showHelp() throws IOException {
         String lang = detectHelpLanguage();
@@ -125,7 +126,11 @@ public final class Help {
             return null;
         }
         try {
-            Path destinationDir = Files.createTempDirectory("omegat-" + OStrings.VERSION + "-help-" + lang);
+            Path destinationDir = Paths.get(StaticUtils.getConfigDir(), "manual", OStrings.VERSION, lang);
+            if (destinationDir.resolve("index.html").toFile().exists()) {
+                // already have manual
+                return destinationDir.toUri();
+            }
             return extractZip(zipFile, destinationDir).toURI();
         } catch (IOException ignored) {
         }
@@ -148,7 +153,7 @@ public final class Help {
             try {
                 cleanUp(destinationDir);
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.log(e);
             }
         }));
         return destinationDir.resolve(OConsts.HELP_HOME).toFile();
@@ -223,7 +228,7 @@ public final class Help {
 
     /**
      * Detects the documentation language to use.
-     *
+     * <p>
      * If the latest manual is not available in the system locale language, it
      * returns null, i.e. show a language selection screen.
      */

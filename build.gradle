@@ -1525,6 +1525,7 @@ tasks.jacocoTestCoverageVerification {
 
 tasks.getByName("run") {
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    dependsOn manualZips
 }
 
 tasks.register('debug', JavaExec) {
@@ -1545,6 +1546,7 @@ tasks.register('runOnJava17', JavaExec) {
     mainClass.set application.mainClass
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    dependsOn manualZips
     group = 'application'
 }
 
@@ -1557,6 +1559,7 @@ tasks.register('runOnJava21', JavaExec) {
     mainClass.set application.mainClass
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    dependsOn manualZips
     group = 'application'
 }
 

@@ -127,10 +127,11 @@ public final class Help {
             return null;
         }
         try {
-            Path destinationDir = Paths.get(StaticUtils.getConfigDir(), "manual", OStrings.VERSION, lang);
-            if (destinationDir.resolve("index.html").toFile().exists()) {
+            Path destinationDir = Paths.get(StaticUtils.getApplicationDataDir(), "manual", OStrings.VERSION, lang);
+            Path indexPath = destinationDir.resolve("index.html");
+            if (indexPath.toFile().exists()) {
                 // already have manual
-                return destinationDir.toUri();
+                return indexPath.toUri();
             }
             return extractZip(zipFile, destinationDir).toURI();
         } catch (IOException ignored) {

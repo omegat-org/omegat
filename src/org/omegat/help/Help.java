@@ -151,27 +151,7 @@ public final class Help {
                 zipInputStream.closeEntry();
             }
         }
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                cleanUp(destinationDir);
-            } catch (IOException e) {
-                Log.log(e);
-            }
-        }));
         return destinationDir.resolve(OConsts.HELP_HOME).toFile();
-    }
-
-    private static void cleanUp(Path destinationDir) throws IOException {
-        if (Files.exists(destinationDir)) {
-            try (Stream<Path> walk = Files.walk(destinationDir)) {
-                walk.sorted(Comparator.reverseOrder()).forEachOrdered(file -> {
-                    try {
-                        Files.delete(file);
-                    } catch (IOException ignored) {
-                    }
-                });
-            }
-        }
     }
 
     public static URI getHelpFileURI(String filename) {

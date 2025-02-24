@@ -72,17 +72,17 @@ public final class StaticUtils {
     /**
      * Configuration directory on Windows platforms
      */
-    private static final String WINDOWS_CONFIG_DIR = "\\OmegaT\\";
+    private static final String WINDOWS_CONFIG_DIR = "\\CapStan-OmegaT\\";
 
     /**
      * Configuration directory on UNIX platforms
      */
-    private static final String UNIX_CONFIG_DIR = "/.omegat/";
+    private static final String UNIX_CONFIG_DIR = "/.capstan-omegat/";
 
     /**
      * Configuration directory on Mac OS X
      */
-    private static final String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";
+    private static final String OSX_CONFIG_DIR = "/Library/Preferences/CapStan-OmegaT/";
 
     /**
      * Script directory

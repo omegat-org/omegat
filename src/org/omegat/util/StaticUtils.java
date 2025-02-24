@@ -360,7 +360,7 @@ public final class StaticUtils {
 
         if (Platform.isWindows) {
             String appData = null;
-            File appDataFile = new File(home, "AppData\\Roaming");
+            File appDataFile = new File(home, "AppData\\Local");
             if (appDataFile.exists()) {
                 appData = appDataFile.getAbsolutePath();
             }

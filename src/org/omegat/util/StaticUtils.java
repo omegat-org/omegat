@@ -74,6 +74,7 @@ public final class StaticUtils {
     /**
      * Configuration directory on Windows platforms.
      */
+    private static final String WINDOWS_ROAMING_DATA_DIR = "AppData\\Roaming";
     private static final String WINDOWS_CONFIG_DIR = "\\OmegaT\\";
 
     /**
@@ -89,6 +90,7 @@ public final class StaticUtils {
     /**
      * Application data directory on Windows platforms.
      */
+    private static final String WINDOWS_LOCAL_DATA_DIR = "AppData\\Local";
     private static final String WINDOWS_DATA_DIR = "\\OmegaT\\";
 
     /**
@@ -273,7 +275,7 @@ public final class StaticUtils {
             // Trying first Vista/7, because "Application Data" exists also as
             // virtual folder,
             // so we would not be able to differentiate with 2000/XP otherwise
-            File appDataFile = new File(home, "AppData\\Roaming");
+            File appDataFile = new File(home, WINDOWS_ROAMING_DATA_DIR);
             if (appDataFile.exists()) {
                 appData = appDataFile.getAbsolutePath();
             } else {
@@ -359,8 +361,7 @@ public final class StaticUtils {
         }
 
         if (Platform.isWindows) {
-            String appData = null;
-            File appDataFile = new File(home, "AppData\\Local");
+            File appDataFile = new File(home, WINDOWS_LOCAL_DATA_DIR);
             if (appDataFile.exists()) {
                 appData = appDataFile.getAbsolutePath();
             }

@@ -351,7 +351,7 @@ public final class StaticUtils {
      * @return directory path to store application data.
      */
     public static String getApplicationDataDir() {
-        String dataDir;
+        String dataDir = null;
         String home = getHomeDir();
         // if os or user home is null or empty, we cannot reliably determine
         // the data dir, so we use the current working dir (= empty string)
@@ -363,9 +363,8 @@ public final class StaticUtils {
         if (Platform.isWindows) {
             File appDataFile = new File(home, WINDOWS_LOCAL_DATA_DIR);
             if (appDataFile.exists()) {
-                appData = appDataFile.getAbsolutePath();
+                dataDir = appDataFile.getAbsolutePath() + WINDOWS_DATA_DIR;
             }
-            dataDir = appData + WINDOWS_DATA_DIR;
         } else if (Platform.isUnixLike()) {
             dataDir = home + UNIX_DATA_DIR;
         } else if (Platform.isMacOSX()) {
@@ -375,23 +374,24 @@ public final class StaticUtils {
             // use the user's home directory by default
             dataDir = home + File.separator;
         }
-        if (!dataDir.isEmpty()) {
-            try {
-                // check if the dir exists
-                File dir = new File(dataDir);
-                if (!dir.exists()) {
-                    // create the dir
-                    boolean created = dir.mkdirs();
-                    if (!created) {
-                        Log.logErrorRB("SU_DATA_DIR_CREATE_ERROR");
-                        dataDir = new File(".").getAbsolutePath() + File.separator;
-                    }
+        if (dataDir == null || dataDir.isEmpty()) {
+            return new File(".").getAbsolutePath() + File.separator;
+        }
+        try {
+            // check if the dir exists
+            File dir = new File(dataDir);
+            if (!dir.exists()) {
+                // create the dir
+                boolean created = dir.mkdirs();
+                if (!created) {
+                    Log.logErrorRB("SU_DATA_DIR_CREATE_ERROR");
+                    dataDir = new File(".").getAbsolutePath() + File.separator;
                 }
-            } catch (SecurityException e) {
-                // the system doesn't want us to write where we want to write
-                dataDir = new File(".").getAbsolutePath() + File.separator;
-                Log.log(e.toString());
             }
+        } catch (SecurityException e) {
+            // the system doesn't want us to write where we want to write
+            dataDir = new File(".").getAbsolutePath() + File.separator;
+            Log.log(e.toString());
         }
         return dataDir;
     }

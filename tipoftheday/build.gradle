@@ -47,10 +47,10 @@ jar {
     def pluginProp = loadProperties(file('plugin.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': project.version,
+                'Implementation-Version': pluginProp.Version,
                 'OmegaT-Plugins': pluginProp.Class,
                 'Plugin-Author': pluginProp.Author,
-                'Plugin-Link': pluginProp.Link,
+                'Plugin-Link': 'https://omegat.org',
                 'Plugin-Version': pluginProp.Version,
                 'Plugin-Name': pluginProp.Name,
                 'Plugin-Category': pluginProp.Category,

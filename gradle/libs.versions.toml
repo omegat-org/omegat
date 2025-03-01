@@ -184,10 +184,3 @@ lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji",
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
-
-[plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.1.6"}
-spotless = {id = "com.diffplug.spotless", version = "7.0.2"}
-launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
-versions = {id = "com.github.ben-manes.versions", version = "0.52.0"}
-ssh = {id = "org.hidetake.ssh", version = "2.11.2"}

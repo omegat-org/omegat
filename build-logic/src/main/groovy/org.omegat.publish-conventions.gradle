@@ -1,0 +1,101 @@
+
+plugins {
+    id 'maven-publish'
+    id 'signing'
+    id 'org.hidetake.ssh'
+}
+
+ext.htdocs = '/home/project-web/omegat/htdocs'
+
+ext.publishAtomically = { args ->
+    tasks.register("publish${args.name.capitalize()}", Exec) {
+        description = "Copy ${args.name} to SourceForge web."
+        dependsOn args.sourceTask
+        group = 'omegat release'
+        doLast {
+            ssh.run {
+                session(remotes.sourceforgeWeb) {
+                    def timestamp = new Date().format('yyyyMMddHHmmss')
+                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
+                    def tempDir = "${targetDir}-temp-${timestamp}"
+                    sftp {
+                        cd htdocs
+                        mkdir tempDir
+                    }
+                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
+                    sftp {
+                        cd htdocs
+                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
+                        catch (ignored) {}
+                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
+                        rmdir tempDir
+                    }
+                }
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) { publication ->
+            groupId = 'org.omegat'
+            artifactId = 'omegat'
+            version = mavenStyleVersion
+            from components.java
+
+            pom {
+                name = 'OmegaT'
+                description = distDescription
+                url = 'https://omegat.org'
+                scm {
+                    connection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                    developerConnection = "scm:git:https://git.code.sf.net/p/omegat/code"
+                    url = "https://sourceforge.net/p/omegat/code/"
+                }
+                licenses {
+                    license {
+                        name = 'The GNU General Public License, Version 3.0'
+                        url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'omegat'
+                        name = 'OmegaT Developers'
+                        email = 'info@omegat.org'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials(PasswordCredentials) {
+                username = findProperty('ossrhUsername')
+                password = findProperty('ossrhPassword')
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+    if (!findProperty("signing.keyId")) {
+        useGpgCmd()
+    }
+}
+
+tasks.register('publishVersion') {
+    description = 'Update the version considered current by the version check.'
+    group = 'omegat release'
+    doLast {
+        ssh.run {
+            session(remotes.sourceforgeWeb) {
+                def target = "${htdocs}/Version-${omtFlavor}.properties"
+                put from: file('src/org/omegat/Version.properties'), into: target
+            }
+        }
+    }
+}

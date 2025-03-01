@@ -1,0 +1,139 @@
+plugins {
+    id 'org.omegat.common-utilities'
+}
+def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
+tasks.register('manualZips') {
+    description = 'Build ZIP manuals to bundle into application. Requires container runtime.'
+    group = 'documentation'
+}
+
+tasks.register('manualPdfs') {
+    description = 'Build PDF manuals for all languages. Requires container runtime.'
+    group = 'documentation'
+}
+
+tasks.register('manualHtmls') {
+    description = 'Build HTML manuals and zip for all languages. Requires container runtime.'
+    group = 'documentation'
+}
+
+tasks.register('genDocIndex', Copy) {
+    def docPropsFiles = fileTree(dir: 'doc_src', include: '*/version*.properties').findAll {
+        file("${it.parent}/OmegaTUsersManual_xinclude full.xml").file }
+    def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
+    def langInfos = docPropsFiles.toSorted{ it.parentFile.name }.collect { props ->
+        def docVersion = loadProperties(props).version
+        ['code': props.parentFile.name, 'nomanual': false, 'version': docVersion,
+         'name': langNameExceptions[props.parentFile.name] ?:
+                 Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
+         'status': docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'] }
+    def inputTemplate = file('doc_src/index_template.html')
+    def outputIndex = layout.buildDirectory.file("docs/manual/index.html").get().asFile
+    description = 'Generate the docs index file'
+    inputs.files docPropsFiles, inputTemplate
+    outputs.files file(outputIndex)
+    from inputTemplate
+    into outputIndex.parent
+    rename('index_template.html', 'index.html')
+    expand('languages': langInfos)
+    filteringCharset = 'UTF-8'
+    dependsOn manualHtmls
+    group = 'documentation'
+}
+
+tasks.register('webManual', Sync) {
+    group = 'documentation'
+    description = 'Sync the HTML manual files'
+    dependsOn manualHtmls, genDocIndex
+    destinationDir = file(layout.buildDirectory.file("docs/htdocs"))
+    from file(layout.buildDirectory.file("docs/manual"))
+    from('release') {
+        include 'doc-license.txt'
+    }
+}
+
+ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
+manualIndexXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def pdfTaskName = "manualPdf${lang.capitalize()}"
+    tasks.register(pdfTaskName, Exec) {
+        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
+                excludes: ['xhtml5/*', 'index.xml'])
+        outputs.files layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
+        onlyIf { execContainerTasks }
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
+        doLast {
+            delete fileTree(dir: "doc_src/${lang}", includes: ['pdf/*', 'index.xml'])
+        }
+    }
+    manualPdfs.dependsOn pdfTaskName
+
+    def htmlTaskName = "manualHtml${lang.capitalize()}"
+    tasks.register(htmlTaskName, Exec) {
+        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
+                excludes: ['xhtml5/*', 'index.xml'])
+        outputs.files fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}/"),
+                includes: ['*.html', 'OmegaT.css', 'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
+        onlyIf { execContainerTasks }
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
+    }
+    manualHtmls.dependsOn htmlTaskName
+
+    def zipTaskName="manualZip${lang.capitalize()}"
+    def versionProperties = loadProperties(file("doc_src/${lang}/version_${lang}.properties"))
+    if (lang.equals("en") || versionProperties.version.equals(omtVersion.version)) {
+        tasks.register(zipTaskName, Zip) {
+            from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
+            exclude 'docs/manual/index.html'
+            from fileTree(dir: "doc_src/${lang}", include: '**/version*.properties')
+            archiveFileName = "${lang}.zip"
+            destinationDirectory = file("${buildDir}/docs/manuals/")
+        }
+        manualZips.dependsOn zipTaskName
+        tasks.getByName(zipTaskName).dependsOn htmlTaskName
+    }
+}
+
+tasks.register('firstSteps') {
+    description = 'Build First pages for all languages at docs/greetings/. Requires Docker.'
+    group = 'documentation'
+}
+
+tasks.register('updateManuals') {
+    group = 'documentation'
+    description = 'Update Instant Start guides and HTML manuals.'
+    dependsOn manualHtmls, firstSteps, genDocIndex
+}
+
+ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
+firstStepsXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "firstSteps${lang.capitalize()}"
+    tasks.register(taskName, Exec) {
+        inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
+        outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
+                includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
+        onlyIf { execContainerTasks }
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'first-steps'
+    }
+
+    firstSteps.dependsOn taskName
+}
+
+ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')
+instantStartXmls.each { xml ->
+    def lang = xml.parentFile.name
+    def taskName = "instantStartGuide${lang.capitalize()}"
+    tasks.register(taskName, Exec) {
+        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['InstantStartGuide.xml', '**/InstantGuide*png'])
+        outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
+                includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
+        onlyIf { execContainerTasks }
+        workingDir = 'doc_src'
+        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'instant-start'
+    }
+    firstSteps.dependsOn taskName
+}

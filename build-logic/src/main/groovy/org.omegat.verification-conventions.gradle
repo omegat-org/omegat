@@ -118,7 +118,10 @@ tasks.register('testIntegration', JavaExec) {
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    if (!System.hasProperty('java.util.logging.config.file')) {
+        System.setProperty('java.util.logging.config.file', "${rootDir}/config/test/logger.properties")
+    }
+    systemProperties = System.properties
 }
 
 tasks.register('testOnJava17', Test) {
@@ -196,7 +199,7 @@ tasks.register('testAcceptance', Test) {
     classpath = sourceSets.testAcceptance.runtimeClasspath
     testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    dependsOn tasks.named('firstStepsEn')
+    dependsOn firstSteps
     dependsOn ':aligner:jar'
 }
 
@@ -206,5 +209,4 @@ tasks.withType(JavaExec).configureEach {
     maxHeapSize = findProperty('runMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
-    dependsOn tasks.named('firstSteps')
 }

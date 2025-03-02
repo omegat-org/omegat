@@ -23,10 +23,6 @@ application {
     mainClass = mainClassName
 }
 
-// Force Java runtime for Gradle on Java 17
-tasks.named('updateDaemonJvm') {
-    jvmVersion = JavaLanguageVersion.of(17)
-}
 def os = osdetector.os
 def osArch = osdetector.classifier
 

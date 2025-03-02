@@ -13,8 +13,13 @@ steps:
       script: |
         sudo apt-get update
         sudo apt-get install -y lftp
+  - task: DownloadSecureFile@1
+    displayName: "Download SSH private key"
+    condition: ${{ parameters.condition }}
+    inputs:
+      secureFile: omegat-ci-rsa
   - task: Bash@3
-    displayName: "Disable strict host key checking"
+    displayName: "Configure SSH to disable host key checking and store private key"
     condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
@@ -23,6 +28,8 @@ steps:
         echo "StrictHostKeyChecking no" >> ~/.ssh/config
         echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
         chmod 600 ~/.ssh/config
+        cp $(Agent.TempDirectory)/omegat-ci-rsa ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
   - task: Bash@3
     displayName: 📂upload to sourceforge file management via SCP/SFTP
     condition: ${{ parameters.condition }}
@@ -35,4 +42,4 @@ steps:
         dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
         cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -R -v ; bye"
-        env LFTP_PASSWORD=$(SOURCEFORGE_CI_PASS) lftp -e "$cmd" --env-password $dest
+        ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; lftp -e \"$cmd\" $dest"

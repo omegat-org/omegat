@@ -295,6 +295,7 @@ public class FindMatches {
                 processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
             }
         }
+
         // travel by all entries for check source file translations
         for (SourceTextEntry ste : project.getAllEntries()) {
             checkStopped(stop);

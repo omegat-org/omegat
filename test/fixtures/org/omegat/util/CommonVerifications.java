@@ -46,8 +46,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import org.omegat.Main;
-
 public class CommonVerifications {
 
     /**
@@ -67,7 +65,7 @@ public class CommonVerifications {
     }
 
     protected void assertEncoding(String bundle) throws IOException {
-        try (InputStream stream = Main.class.getResourceAsStream(bundle)) {
+        try (InputStream stream = getClass().getResourceAsStream(bundle)) {
             if (stream == null) {
                 return;
             }

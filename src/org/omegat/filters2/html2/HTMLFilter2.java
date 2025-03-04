@@ -200,7 +200,7 @@ public class HTMLFilter2 extends AbstractFilter {
         Parser parser = new Parser();
         try {
             parser.setInputHTML(all.toString());
-            parser.visitAllNodesWith(new FilterVisitor(this, outfile, options));
+            parser.visitAllNodesWith(new FilterVisitor(this, outfile, options, fc));
         } catch (ParserException pe) {
             Log.logErrorRB(pe, "HTML_EXCEPTION_PARSER");
         } catch (StringIndexOutOfBoundsException se) {

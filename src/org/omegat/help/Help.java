@@ -8,7 +8,7 @@
                2007 Didier Briel
                2009 Alex Buloichik
                2015 Aaron Madlon-Kay
-               2023 Hiroshi Miura
+               2023-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -40,10 +40,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Comparator;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -89,6 +87,7 @@ public final class Help {
      * Shows help in the system browser.
      *
      * @throws IOException
+     *             when URI creation failed.
      */
     public static void showHelp() throws IOException {
         String lang = detectHelpLanguage();
@@ -125,7 +124,12 @@ public final class Help {
             return null;
         }
         try {
-            Path destinationDir = Files.createTempDirectory("omegat-" + OStrings.VERSION + "-help-" + lang);
+            Path destinationDir = Paths.get(StaticUtils.getApplicationDataDir(), "manual", OStrings.VERSION, lang);
+            Path indexPath = destinationDir.resolve("index.html");
+            if (indexPath.toFile().exists()) {
+                // already have manual
+                return indexPath.toUri();
+            }
             return extractZip(zipFile, destinationDir).toURI();
         } catch (IOException ignored) {
         }
@@ -144,27 +148,7 @@ public final class Help {
                 zipInputStream.closeEntry();
             }
         }
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                cleanUp(destinationDir);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }));
         return destinationDir.resolve(OConsts.HELP_HOME).toFile();
-    }
-
-    private static void cleanUp(Path destinationDir) throws IOException {
-        if (Files.exists(destinationDir)) {
-            try (Stream<Path> walk = Files.walk(destinationDir)) {
-                walk.sorted(Comparator.reverseOrder()).forEachOrdered(file -> {
-                    try {
-                        Files.delete(file);
-                    } catch (IOException ignored) {
-                    }
-                });
-            }
-        }
     }
 
     public static URI getHelpFileURI(String filename) {
@@ -223,7 +207,7 @@ public final class Help {
 
     /**
      * Detects the documentation language to use.
-     *
+     * <p>
      * If the latest manual is not available in the system locale language, it
      * returns null, i.e. show a language selection screen.
      */

@@ -165,6 +165,25 @@
 		one of its subfolders and the translated data will be immediately be
 		available for matching purposes.</para>
 	  </listitem>
+
+          <listitem>
+            <para>If you switch to paragraph segmentation in a project that originally used <link
+			    linkend="dialogs.project.properties.options.segmentation"
+			    endterm="dialogs.project.properties.options.segmentation.title"/>,
+		    you can have OmegaT present matches assembled from existing segments by enabling the
+		    <link
+	    linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx"
+	    endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"/> option in addition to
+			showing regular fuzzy matches.</para>
+			<para> OmegaT will try to segment the source text into sentences,
+			apply fuzzy matching on the segmented memory entries, and then assemble a paragraph from those matches.
+		    The origins of the matches can be multiple files or memories because the assembled paragraph may not exist in the
+			translation memories.</para>
+		    <para>Refer to the <link linkend="dialog.preferences.segmentation.setup.type"
+			endterm="dialog.preferences.segmentation.setup.type.title"/> section for more information on
+		    the benefits and drawbacks of the different types of segmentation.
+            </para>
+          </listitem>
 	</itemizedlist>
 	
     <section id="how.to.tm.read.and.write">

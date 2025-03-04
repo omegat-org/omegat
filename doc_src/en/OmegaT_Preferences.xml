@@ -1376,6 +1376,13 @@ ${filePath}></programlisting></para>
 		  </table>
 		</listitem>
 	  </varlistentry>
+          <varlistentry id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx">
+		  <term id="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title">
+			  <option>Show matches assembled from multiple segments</option></term>
+            <listitem><para>Enable matches for paragraphs assembled from matches found in segmented
+		    memory entries from a segmented source text in a project that uses paragraph segmentation.</para>
+            </listitem>
+          </varlistentry>
 	</variablelist>
   </section>
 

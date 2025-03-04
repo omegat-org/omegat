@@ -2,18 +2,17 @@ parameters:
   - name: omegatVersion
     default: ''
   - name: condition
-    type: bool
     default: false
 
 steps:
   - task: DownloadSecureFile@1
     displayName: "Download SSH private key"
-    condition: ${{ if eq(parameters.condition, true) }}
+    condition: ${{ parameters.condition }}
     inputs:
       secureFile: omegat-ci-rsa
   - task: Bash@3
     displayName: Configure SSH to disable host key checking and store private key
-    condition: ${{ if eq(parameters.condition, true) }}
+    condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |
@@ -25,7 +24,7 @@ steps:
         chmod 600 ~/.ssh/id_rsa
   - task: Bash@3
     displayName: 📂upload to sourceforge file management via SCP/SFTP
-    condition: ${{ if eq(parameters.condition, true) }}
+    condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |

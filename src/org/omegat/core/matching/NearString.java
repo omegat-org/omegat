@@ -49,37 +49,81 @@ import org.omegat.util.TMXProp;
  */
 public class NearString {
     public enum MATCH_SOURCE {
-        MEMORY, TM, FILES
-    };
-
-    public enum SORT_KEY {
-        SCORE, SCORE_NO_STEM, ADJUSTED_SCORE
+        /** From project memory */
+        MEMORY,
+        /** From external TM in project tm/ folder */
+        TM,
+        /** From source files */
+        FILES,
+        /** From sub-segmented match */
+        SUBSEGMENTS
     }
 
-    public NearString(EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom, boolean fuzzyMark,
-                      Scores scores, byte[] nearData, String projName) {
-        this(key, entry.getSourceText(), entry.getTranslationText(), comesFrom, fuzzyMark, scores,
-                nearData, projName, entry.getCreator(), entry.getCreationDate(), entry.getChanger(),
+    public enum SORT_KEY {
+        /** normal score */
+        SCORE,
+        /** score without stemming */
+        SCORE_NO_STEM,
+        /** adjusted score */
+        ADJUSTED_SCORE
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param key
+     *            entry key
+     * @param entry
+     *            the TMX entry that has source text, translation text, creator,
+     *            creation date, changer, change date and properties.
+     * @param comesFrom
+     *            origin
+     * @param fuzzyMark
+     *            fuzzy or not
+     * @param scores
+     *            score values
+     * @param nearData
+     *            similarity data.
+     * @param projName
+     *            project name.
+     */
+    public NearString(EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom, boolean fuzzyMark, Scores scores,
+            byte[] nearData, String projName) {
+        this(key, entry.getSourceText(), entry.getTranslationText(), comesFrom, fuzzyMark, scores, nearData,
+                projName, entry.getCreator(), entry.getCreationDate(), entry.getChanger(),
                 entry.getChangeDate(), entry.getProperties());
     }
 
     /**
      * Constructor, backward compatible.
-     * @param key entry key
-     * @param source source text
-     * @param translation translation text
-     * @param comesFrom origin
-     * @param fuzzyMark fuzzy or not
+     *
+     * @param key
+     *            entry key
+     * @param source
+     *            source text
+     * @param translation
+     *            translation text
+     * @param comesFrom
+     *            origin
+     * @param fuzzyMark
+     *            fuzzy or not
      * @param nearScore
      * @param nearScoreNoStem
      * @param adjustedScore
-     * @param nearData similarity data.
-     * @param projName project name.
-     * @param creator creator name
-     * @param creationDate creation date
-     * @param changer changer name
-     * @param changedDate changer date
-     * @param props properties of entry.
+     * @param nearData
+     *            similarity data.
+     * @param projName
+     *            project name.
+     * @param creator
+     *            creator name
+     * @param creationDate
+     *            creation date
+     * @param changer
+     *            changer name
+     * @param changedDate
+     *            changer date
+     * @param props
+     *            properties of entry.
      */
     @Deprecated
     public NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
@@ -110,14 +154,23 @@ public class NearString {
 
     /**
      * Merge NearString object.
-     * @param ns NearString to merge.
-     * @param key entry key.
-     * @param entry TMXEntry entry
-     * @param comesFrom origin
-     * @param fuzzyMark fuzzy or not
-     * @param scores similarity score
-     * @param nearData similarity data
-     * @param projName project name
+     *
+     * @param ns
+     *            NearString to merge.
+     * @param key
+     *            entry key.
+     * @param entry
+     *            TMXEntry entry
+     * @param comesFrom
+     *            origin
+     * @param fuzzyMark
+     *            fuzzy or not
+     * @param scores
+     *            similarity score
+     * @param nearData
+     *            similarity data
+     * @param projName
+     *            project name
      * @return NearString merged.
      */
     public static NearString merge(NearString ns, EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom,
@@ -204,11 +257,18 @@ public class NearString {
         public final int scoreNoStem;
         /** adjusted similarity score for match including all tokens */
         public final int adjustedScore;
+        /** penalty of the match */
+        public final int penalty;
 
         public Scores(int score, int scoreNoStem, int adjustedScore) {
+            this(score, scoreNoStem, adjustedScore, 0);
+        }
+
+        public Scores(int score, int scoreNoStem, int adjustedScore, int penalty) {
             this.score = score;
             this.scoreNoStem = scoreNoStem;
             this.adjustedScore = adjustedScore;
+            this.penalty = penalty;
         }
 
         public String toString() {

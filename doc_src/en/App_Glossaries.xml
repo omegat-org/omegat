@@ -2,7 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="app.glossaries">
-  <title id="app.glossaries.title">Glossaries</title>
+  <title id="app.glossaries.title"><link linkend="app.glossaries"> </link>Glossaries</title>
 
   <para>Glossaries are terminology files stored in the <link
   linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
@@ -17,8 +17,8 @@
   <para>There are 2 kinds of glossary files:</para>
 
   <variablelist>
-	<varlistentry>
-	  <term>The project glossary</term>
+	<varlistentry id="app.glossaries.project.glossary">
+	  <term id="app.glossaries.project.glossary.title"><link linkend="app.glossaries.project.glossary"> </link>The project glossary</term>
 	  <listitem>
 		<para>Use <link linkend="menus.edit" endterm="menus.edit.title"/><link
 		linkend="menus.edit.create.glossary.entry"
@@ -59,8 +59,8 @@
 	  </listitem>
 	</varlistentry>
 	
-	<varlistentry>
-	  <term>Reference glossaries</term>
+	<varlistentry id="app.glossaries.reference.glossaries">
+	  <term id="app.glossaries.reference.glossaries.title"><link linkend="app.glossaries.reference.glossaries"> </link>Reference glossaries</term>
 	  <listitem>
 		<para>They are terminology files in a format recognized by OmegaT. You
 		cannot modify them from the OmegaT interface like the project glossary,
@@ -76,7 +76,7 @@
   </note>
 
   <section id="glossaries.glossary.folder">
-    <title id="glossaries.glossary.folder.title">The glossaries folder</title>
+	<title id="glossaries.glossary.folder.title"><link linkend="glossaries.glossary.folder"> </link>The glossaries folder</title>
 
     <para>By default, each project contains a <link
     linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
@@ -102,7 +102,7 @@
   </section>
 
   <section id="glossaries.default.glossary">
-    <title id="glossaries.default.glossary.title">Project glossary</title>
+	<title id="glossaries.default.glossary.title"><link linkend="glossaries.default.glossary"> </link>Project glossary</title>
 
     <para>The writable project glossary is located in the <link
     linkend="project.folder.glossary" endterm="project.folder.glossary.title"/>
@@ -119,7 +119,7 @@
   </section>
 
   <section id="glossaries.fileformat">
-    <title id="glossaries.fileformat.title">File format</title>
+	<title id="glossaries.fileformat.title"><link linkend="glossaries.fileformat"> </link>File format</title>
 
     <para>OmegaT glossary files are simple plain text files containing
     three-column lists, with the source term in the first column, an optional
@@ -138,80 +138,80 @@
     <para>The encoding used to read reference glossaries depends on
     their file extension:</para>
 
-    <table id="glossary.extensions">
-      <title>Format, extensions and expected encoding</title>
+    <table id="glossaries.fileformat.extensions">
+	  <title id="glossaries.fileformat.extensions.title"><link linkend="glossaries.fileformat.extensions"> </link>Format, extensions and expected encoding</title>
 	  <tgroup cols="3">
-      <thead>
-        <row>
-          <entry>Format</entry>
+		<thead>
+          <row>
+			<entry>Format</entry>
 
-          <entry>Extension</entry>
+			<entry>Extension</entry>
 
-          <entry>Encoding</entry>
-        </row>
-      </thead>
+			<entry>Encoding</entry>
+          </row>
+		</thead>
 
-      <tbody>
-        <row>
-          <entry>TSV</entry>
+		<tbody>
+          <row>
+			<entry>TSV</entry>
 
-          <entry>
-            <filename>.txt</filename>
-          </entry>
+			<entry>
+              <filename>.txt</filename>
+			</entry>
 
-          <entry>UTF-8</entry>
-        </row>
+			<entry>UTF-8</entry>
+          </row>
 
-        <row>
-          <entry>TSV</entry>
+          <row>
+			<entry>TSV</entry>
 
-          <entry>
-            <filename>.utf8</filename>
-          </entry>
+			<entry>
+              <filename>.utf8</filename>
+			</entry>
 
-          <entry>UTF-8</entry>
-        </row>
+			<entry>UTF-8</entry>
+          </row>
 
-        <row>
-          <entry>TSV</entry>
+          <row>
+			<entry>TSV</entry>
 
-          <entry>
-            <filename>.tab</filename>
-          </entry>
+			<entry>
+              <filename>.tab</filename>
+			</entry>
 
-          <entry>OS default encoding</entry>
-        </row>
+			<entry>OS default encoding</entry>
+          </row>
 
-        <row>
-          <entry>TSV</entry>
+          <row>
+			<entry>TSV</entry>
 
-          <entry>
-            <filename>.tsv</filename>
-          </entry>
+			<entry>
+              <filename>.tsv</filename>
+			</entry>
 
-          <entry>OS default encoding</entry>
-        </row>
+			<entry>OS default encoding</entry>
+          </row>
 
-        <row>
-          <entry>CSV</entry>
+          <row>
+			<entry>CSV</entry>
 
-          <entry>
-            <filename>.csv</filename>
-          </entry>
+			<entry>
+              <filename>.csv</filename>
+			</entry>
 
-          <entry>UTF-8</entry>
-        </row>
+			<entry>UTF-8</entry>
+          </row>
 
-        <row>
-          <entry>TBX</entry>
+          <row>
+			<entry>TBX</entry>
 
-          <entry>
-            <filename>.tbx</filename>
-          </entry>
+			<entry>
+              <filename>.tbx</filename>
+			</entry>
 
-          <entry>UTF-8</entry>
-        </row>
-      </tbody>
+			<entry>UTF-8</entry>
+          </row>
+		</tbody>
       </tgroup>
     </table>
   </section>

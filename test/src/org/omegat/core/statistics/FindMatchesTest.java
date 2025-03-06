@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura
+ Copyright (C) 2021-2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -26,6 +26,8 @@
 package org.omegat.core.statistics;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -55,10 +57,13 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.Rule;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.LuceneCJKTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
+import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -71,6 +76,9 @@ public class FindMatchesTest {
     private static final File TMX_MATCH_EN_CA = new File("test/data/tmx/test-match-stat-en-ca.tmx");
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
+    private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
+    private static final File TMX_SEGMENT_2 = new File("test/data/tmx/segment_2.tmx");
+    private static final File TMX_MULTI = new File("test/data/tmx/test-multiple-entries.tmx");
     private static Path tmpDir;
 
 
@@ -107,22 +115,22 @@ public class FindMatchesTest {
                 + "han passat prou temps al lloc web per a convertir-se en usuaris bàsics."
                 + " Una comunitat vibrant necessita una entrada regular de nouvinguts que hi participen habitualment"
                 + " i aporten veus noves a les converses.\n";
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, false,
-                true, 30);
-        List<NearString> result = finder.search(srcText, true, true, iStopped);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        // search without a separated segment match.
+        List<NearString> result = finder.search(srcText, true, iStopped, false);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals(65, result.get(0).scores[0].score);
         assertEquals(62, result.get(0).scores[0].scoreNoStem);
         assertEquals(62, result.get(0).scores[0].adjustedScore);
         assertEquals(expectFirst, result.get(0).translation);
         assertEquals(expectNear, result.get(1).translation);
-        //
+        // search with a segmented match.
         List<StringBuilder> spaces = new ArrayList<>();
         List<Rule> brules = new ArrayList<>();
         List<String> segments = segmenter.segment(prop.getSourceLanguage(), srcText, spaces, brules);
         assertEquals(3, segments.size());
-        finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false, true, 30);
-        result = finder.search(srcText, true, true, iStopped);
+        finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        result = finder.search(srcText, false, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
         assertEquals(100, result.get(0).scores[0].scoreNoStem);
@@ -163,9 +171,8 @@ public class FindMatchesTest {
         IProject project = new TestProject(prop, null, TMX_EN_US_SR, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
-                true, 30);
-        List<NearString> result = finder.search("XXX", true, true, iStopped);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search("XXX", false, iStopped);
         // Without the fix, the result has two entries, but it should one.
         assertEquals(1, result.size());
         assertEquals("XXX", result.get(0).source);
@@ -202,10 +209,9 @@ public class FindMatchesTest {
         IProject project = new TestProject(prop, null, TMX_EN_US_GB_SR, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
-        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, false,
-                true, 30);
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         // Search source "XXx" in en-US
-        List<NearString> result = finder.search("XXX", true, true, iStopped);
+        List<NearString> result = finder.search("XXX", false, iStopped);
         // There should be three entries.
         assertEquals(3, result.size());
         assertEquals("XXx", result.get(0).source); // should be en-US.
@@ -213,6 +219,116 @@ public class FindMatchesTest {
         assertEquals("YYY", result.get(1).translation); // fr
         assertEquals("ZZZ", result.get(2).translation); // sr
     }
+
+    @Test
+    public void testSearchBUGS1251() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("ja");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        IProject project = new TestProject(prop, null, TMX_SEGMENT, new LuceneCJKTokenizer(),
+                new LuceneFrenchTokenizer(), segmenter);
+        SourceTextEntry ste = project.getAllEntries().get(1);
+        Language sourceLanguage = prop.getSourceLanguage();
+        String srcText = ste.getSrcText();
+        List<StringBuilder> spaces = new ArrayList<>();
+        List<Rule> brules = new ArrayList<>();
+        List<String> segments = segmenter.segment(sourceLanguage, srcText, spaces, brules);
+        assertEquals(2, segments.size());
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search(srcText, false, iStopped);
+        assertEquals(srcText, result.get(0).source);
+        assertEquals(2, result.size());
+        // match normal
+        assertEquals("TM", result.get(0).comesFrom.name());
+        assertEquals(90, result.get(0).scores[0].score);
+        assertEquals("weird behavior", result.get(0).translation);
+        assertTrue(result.get(0).projs[0].contains("penalty-010"));
+        // match segmented, with penalty
+        assertEquals("TM", result.get(1).comesFrom.name());
+        assertEquals(90, result.get(1).scores[0].score);
+        assertEquals(10, result.get(1).scores[0].penalty);
+        // FIXME
+        //assertTrue(result.get(1).projs[0].contains("penalty-010"));
+    }
+
+    @Test
+    public void testSearchForeign() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("ja");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        // external TMX is ja-en
+        IProject project = new TestProject(prop, null, TMX_SEGMENT_2, new LuceneCJKTokenizer(),
+                new LuceneFrenchTokenizer(), segmenter);
+        SourceTextEntry ste = project.getAllEntries().get(1);
+        String srcText = ste.getSrcText();
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search(srcText, false, iStopped);
+        assertEquals(1, result.size());
+        assertEquals(srcText, result.get(0).source);
+        int foreignPenalty = Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT;
+        assertEquals(foreignPenalty, result.get(0).scores[0].penalty);
+    }
+
+    @Test
+    public void testSearchForeignSegmented() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("en");
+        prop.setTargetLanguage("fr");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(false);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        IProject project = new TestProject(prop, null, TMX_MATCH_EN_CA, new LuceneEnglishTokenizer(),
+                new DefaultTokenizer(), segmenter);
+        IStopped iStopped = () -> false;
+        String srcText = "This badge is granted when you’ve invited 5 people who subsequently spent enough "
+                + "time on the site to become full members. "
+                + "Wow! "
+                + "Thanks for expanding the diversity of our community with new members!";
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
+        List<NearString> result = finder.search(srcText, false, iStopped);
+        assertEquals(2, result.size());
+        assertEquals("Hit with segmented tmx record", 35, result.get(0).scores[0].score);
+        assertEquals(35, result.get(0).scores[0].score);
+        assertEquals(32, result.get(0).scores[0].scoreNoStem);
+        assertEquals(32, result.get(0).scores[0].adjustedScore);
+        // a foreign and segmented match
+        assertEquals(21, result.get(1).scores[0].scoreNoStem);
+        assertEquals(35, result.get(1).scores[0].adjustedScore);
+        int foreignPenalty = Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT;
+        assertEquals(foreignPenalty, result.get(1).scores[0].penalty);
+    }
+
+    @Test
+    public void testSearchMulti() throws Exception {
+        ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
+        prop.setSourceLanguage("en-US");
+        prop.setTargetLanguage("co");
+        prop.setSupportDefaultTranslations(true);
+        prop.setSentenceSegmentingEnabled(true);
+        Segmenter segmenter = new Segmenter(SRX.getDefault());
+        IProject project = new TestProject(prop, TMX_MULTI, null, new LuceneEnglishTokenizer(),
+                new DefaultTokenizer(), segmenter);
+        IStopped iStopped = () -> false;
+        FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, 85);
+        List<NearString> result = finder.search("Other", false, iStopped);
+        assertEquals(3, result.size());
+        assertEquals("Other", result.get(0).source);
+        assertEquals("Altre", result.get(0).translation); // default
+        assertNull(result.get(0).key);
+        assertEquals("Altri", result.get(1).translation); // alternative
+        assertNotNull(result.get(1).key);
+        assertEquals("website/download.html", result.get(1).key.file);
+        assertEquals("Other", result.get(2).translation); // source translation
+    }
+
 
     @BeforeClass
     public static void setUpClass() throws Exception {
@@ -309,6 +425,12 @@ public class FindMatchesTest {
             List<SourceTextEntry> ste = new ArrayList<>();
             ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
                     1, null, null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", "地力の搾取と浪費が現われる。(1)", null, "", "", null),
+                    1, null, null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
+                    "For installation on Linux.",
+                    "For installation on other operating systems (such as FreeBSD and Solaris).&lt;br0/>",
+                    null), 1, null, "Other", Collections.emptyList()));
             return ste;
         }
 

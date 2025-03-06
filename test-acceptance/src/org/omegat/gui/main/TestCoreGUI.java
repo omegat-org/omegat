@@ -31,6 +31,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -58,9 +59,35 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     protected FrameFixture window;
     protected JFrame frame;
+    private TestMainWindow mainWindow;
 
     protected File tmpDir;
 
+    /**
+     * Close the project.
+     * <p>
+     *     block until the close action finished.
+     */
+    protected void closeProject() {
+        CountDownLatch latch = new CountDownLatch(1);
+        Core.getProject().closeProject();
+        CoreEvents.registerProjectChangeListener(event -> {
+            if (!Core.getProject().isProjectLoaded()) {
+                latch.countDown();
+            }
+        });
+        try {
+            latch.await(5, TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {
+        }
+        assertFalse("Project should not be loaded.", Core.getProject().isProjectLoaded());
+    }
+
+    /**
+     * Open project from the specified path.
+     * @param projectPath project root path.
+     * @throws Exception when error occurred.
+     */
     protected void openSampleProject(String projectPath) throws Exception {
         // 0. Prepare project folder
         tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
@@ -88,37 +115,64 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         assertTrue("Sample project should be loaded.", Core.getProject().isProjectLoaded());
     }
 
+    /**
+     * Clean up OmegaT main window.
+     * @throws Exception
+     */
+    @Override
+    protected void onTearDown() throws Exception {
+        Core.setProject(new NotLoadedProject());
+        TestCoreInitializer.initMainWindow(null);
+        mainWindow.getApplicationFrame().setVisible(false);
+        window.cleanUp();
+    }
+
+    private static boolean initialized = false;
+
+    /**
+     * set up OmegaT main window.
+     * @throws Exception
+     */
     @Override
     protected void onSetUp() throws Exception {
-        Path tmp = Files.createTempDirectory("omegat");
-        FileUtils.forceDeleteOnExit(tmp.toFile());
-        RuntimePreferences.setConfigDir(tmp.toString());
-        TestMainInitializer.initClassloader();
-        // same order as Main.main
-        Preferences.init();
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-        Preferences.initFilters();
-        Preferences.initSegmentation();
-        //
-        frame = GuiActionRunner.execute(() -> {
-            Core.setProject(new NotLoadedProject());
-            UIDesignManager.initialize();
+        initialize();
+        mainWindow = GuiActionRunner.execute(() -> {
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
             TestCoreInitializer.initMainWindow(mw);
-            TestCoreInitializer.initAutoSave(autoSave);
-
             CoreEvents.fireApplicationStartup();
             SwingUtilities.invokeLater(() -> {
                 // setVisible can't be executed directly, because we need to
                 // call all application startup listeners for initialize UI
-                Core.getMainWindow().getApplicationFrame().setVisible(true);
+                mw.getApplicationFrame().setVisible(true);
             });
-            return mw.getApplicationFrame();
+            return mw;
         });
-
+        frame = Objects.requireNonNull(mainWindow).getApplicationFrame();
         window = new FrameFixture(robot(), frame);
         window.show();
+    }
+
+    /**
+     * Initialize OmegaT Core startup only once.
+     * @throws Exception when error occurred.
+     */
+    protected void initialize() throws Exception {
+        if (!initialized) {
+            Path tmp = Files.createTempDirectory("omegat");
+            FileUtils.forceDeleteOnExit(tmp.toFile());
+            RuntimePreferences.setConfigDir(tmp.toString());
+            TestMainInitializer.initClassloader();
+            // same order as Main.main
+            Preferences.init();
+            PluginUtils.loadPlugins(Collections.emptyMap());
+            FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+            Preferences.initFilters();
+            Preferences.initSegmentation();
+            TestCoreInitializer.initAutoSave(autoSave);
+            UIDesignManager.initialize();
+            Core.setProject(new NotLoadedProject());
+            initialized = true;
+        }
     }
 
     static IAutoSave autoSave = new IAutoSave() {

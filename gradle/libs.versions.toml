@@ -1,13 +1,13 @@
 [versions]
 slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
 slf4j-format = "0.5.1"
-groovy = "4.0.23"
+groovy = "4.0.26"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.16.1"
 commons_text = "1.11.0"
 commons_validator = "1.9.0"
-jsoup = "1.18.2"
+jsoup = "1.18.3"
 icu4j = { require = "[71.1,76.1[", prefer = "74.2" }
 stax2api = "4.2.2"
 woodstox = "6.5.0"
@@ -20,12 +20,12 @@ guava = "32.1.2-jre"
 annotations = "23.0.0"
 jgit = "6.10.0.202406032230-r"
 svnkit = "1.10.11"
-ivy = "2.5.2"
+ivy = "2.5.3"
 jackson = "2.16.1"
 bc = "1.78.1"
-nashorn = "15.4"
-caffeine = "3.1.8"
-wiremock = "3.10.0"
+nashorn = "15.6"
+caffeine = "3.2.0"
+wiremock = "3.12.0"
 vldocking = "3.1.1"
 xmlunit = "2.10.0"
 assertj = "3.26.0"
@@ -37,7 +37,7 @@ htmlparser = "1.6-20230203"
 gnudiff = "1.15"
 desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
-pdfbox = "3.0.3"
+pdfbox = "3.0.4"
 maligna = "3.0.1"
 trie4j = "0.9.10_1"
 dsl4j = "1.0.0"
@@ -53,7 +53,7 @@ flatlaf="3.5.4"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
-swing_extra_locales = "0.3.2"
+swing_extra_locales = "0.3.3"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -131,10 +131,10 @@ bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
-fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.5.3"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.5.4"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.1"}
 fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
-fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.1"}
+fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.2"}
 caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.ref = "caffeine"}
 caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}
 wiremock = {group = "org.wiremock", name = "wiremock", version.ref = "wiremock"}
@@ -184,10 +184,3 @@ lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji",
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
-
-[plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.0.26"}
-spotless = {id = "com.diffplug.spotless", version = "7.0.0.BETA4"}
-launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
-versions = {id = "com.github.ben-manes.versions", version = "0.51.0"}
-ssh = {id = "org.hidetake.ssh", version = "2.11.2"}

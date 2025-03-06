@@ -7,7 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2024 Hiroshi Miura
+               2024 Hiroshi Miura, Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -63,20 +63,19 @@ import org.omegat.util.Token;
 
 /**
  * Class to find matches by specified criteria.
- *
+ * <p>
  * Since we can use stemmers to prepare tokens, we should use 3-pass comparison
  * of similarity. Similarity will be calculated in 3 steps:
- *
- * 1. Split original segment into word-only tokens using stemmer (with stop
- * words list), then compare tokens.
- *
- * 2. Split original segment into word-only tokens without stemmer, then compare
- * tokens.
- *
- * 3. Split original segment into not-only-words tokens (including numbers and
- * tags) without stemmer, then compare tokens.
- *
- * This class is not thread safe ! Must be used in the one thread only.
+ * <ol>
+ * <li>Split the original segment into word-only tokens using stemmer (with stop
+ * words list), then compare tokens.</li>
+ * <li>Split the original segment into word-only tokens without a stemmer,
+ * then compare tokens.</li>
+ * <li>Split the original segment into not-only-words tokens (including numbers
+ * and tags) without a stemmer, then compare tokens.</li>
+ * </ol>
+ * <p>
+ * This class is not thread safe! Must be used in the one thread only.
  *
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -127,46 +126,92 @@ public class FindMatches {
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
-    // This finder used for search separate segment matches
-    private FindMatches separateSegmentMatcher;
-
     private final int fuzzyMatchThreshold;
-
-    private final boolean applyThreshold;
 
     private final Segmenter segmenter;
 
-    /**
-     * @param searchExactlyTheSame
-     *            allows to search similarities with the same text as source
-     *            segment. This mode used only for separate sentence match in
-     *            paragraph project, i.e. where source is just part of current
-     *            source.
-     */
+    @Deprecated(since = "6.1.0")
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
-        this(project, Core.getSegmenter(), maxCount, allowSeparateSegmentMatch, searchExactlyTheSame, true,
-                Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                        OConsts.FUZZY_MATCH_THRESHOLD));
+        this(project, Core.getSegmenter(), maxCount, searchExactlyTheSame, Preferences.getPreferenceDefault(
+                Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, OConsts.FUZZY_MATCH_THRESHOLD));
     }
 
-    public FindMatches(IProject project, Segmenter segmenter, int maxCount, boolean allowSeparateSegmentMatch,
-            boolean searchExactlyTheSame, boolean applyThreshold, int threshold) {
+    /**
+     * FindMatches find fuzzy matched translation memories.
+     *
+     * @param project
+     *            OmegaT project.
+     * @param segmenter
+     *            used when running a segmentation search.
+     * @param maxCount
+     *            limit the maximum count of the results.
+     * @param searchExactlyTheSame
+     *            allows searching similarities with the same text as a source
+     *            segment. This mode is used only for separate sentence match
+     *            in a paragraph project, i.e., where a source is just part of
+     *            the current source.
+     * @param threshold
+     *            threshold to use.
+     */
+    public FindMatches(IProject project, Segmenter segmenter, int maxCount,
+            boolean searchExactlyTheSame, int threshold) {
         this.project = project;
         this.segmenter = segmenter;
         this.tok = project.getSourceTokenizer();
         this.srcLocale = project.getProjectProperties().getSourceLanguage().getLocale();
         this.maxCount = maxCount;
         this.searchExactlyTheSame = searchExactlyTheSame;
-        if (allowSeparateSegmentMatch && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
-            separateSegmentMatcher = new FindMatches(project, segmenter, 1, false, true, true, threshold);
-        }
         this.fuzzyMatchThreshold = threshold;
-        this.applyThreshold = applyThreshold;
     }
 
-    public List<NearString> search(String searchText, boolean requiresTranslation, boolean fillSimilarityData,
-            IStopped stop) throws StoppedException {
+    @Deprecated(since = "6.1.0")
+    public List<NearString> search(final String searchText, final boolean requiresTranslation,
+            final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
+        return search(searchText, fillSimilarityData, stop);
+    }
+
+    /**
+     * Search Translation memories.
+     *
+     * @param searchText
+     *        target segment or term to search.
+     * @param fillSimilarityData
+     *        fill similarity data into the result of NearString objects.
+     * @param stop
+     *        IStopped callback object to indicate cancel operation.
+     * @return
+     *        List of NearString objects, which hold matched translation entry.
+     * @throws StoppedException
+     *        raised when stopped during a search process.
+     */
+    public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
+            throws StoppedException {
+        return search(searchText, fillSimilarityData, stop,
+                !project.getProjectProperties().isSentenceSegmentingEnabled());
+    }
+
+    /**
+     * Search Translation memories.
+     * <p>
+     * Internal method to handle search conditions.
+     * It is accessible as package-private for testing.
+     *
+     * @param searchText
+     *        target segment or term to search.
+     * @param fillSimilarityData
+     *        fill similarity data into the result of NearString objects.
+     * @param stop
+     *        IStopped callback object to indicate cancel operation.
+     * @param runSeparateSegmentMatch
+     *        Also search with segmented terms search.
+     * @return
+     *        List of NearString objects.
+     * @throws StoppedException
+     *        When stopped the process during search.
+     */
+    List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop,
+                            boolean runSeparateSegmentMatch) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
         srcText = searchText;
         removedText = "";
@@ -196,7 +241,7 @@ public class FindMatches {
                     // skip original==original entry comparison
                     return;
                 }
-                if (requiresTranslation && trans.translation == null) {
+                if (trans.translation == null) {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
@@ -211,7 +256,7 @@ public class FindMatches {
                 // skip original==original entry comparison
                 return;
             }
-            if (requiresTranslation && trans.translation == null) {
+            if (trans.translation == null) {
                 return;
             }
             String fileName = project.isOrphaned(source) ? ORPHANED_FILE_NAME : null;
@@ -225,7 +270,6 @@ public class FindMatches {
          */
         int foreignPenalty = Preferences.getPreferenceDefault(Preferences.PENALTY_FOR_FOREIGN_MATCHES,
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
-        // travel by translation memories
         for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
             int penalty = 0;
             Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
@@ -235,11 +279,11 @@ public class FindMatches {
             for (ITMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
                 if (tmen.getSourceText() == null) {
-                    // Not all TMX entries have a source; in that case there can
-                    // be no meaningful match, so skip.
+                    // Not all TMX entries have a source; skip it in
+                    // the case, because of no meaningful.
                     continue;
                 }
-                if (requiresTranslation && tmen.getTranslationText() == null) {
+                if (tmen.getTranslationText() == null) {
                     continue;
                 }
                 int tmenPenalty = penalty;
@@ -249,6 +293,7 @@ public class FindMatches {
                 processEntry(null, tmen, en.getKey(), NearString.MATCH_SOURCE.TM, false, tmenPenalty);
             }
         }
+
         // travel by all entries for check source file translations
         for (SourceTextEntry ste : project.getAllEntries()) {
             checkStopped(stop);
@@ -256,11 +301,13 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = ste.getSrcText();
                 entry.translation = ste.getSourceTranslation();
-                processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.MEMORY,
+                processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.FILES,
                         ste.isSourceTranslationFuzzy(), 0);
             }
         }
-        if (separateSegmentMatcher != null) {
+        if (runSeparateSegmentMatch) {
+            FindMatches separateSegmentMatcher = new FindMatches(project, segmenter, 1, true,
+                    fuzzyMatchThreshold);
             // split paragraph even when segmentation disabled, then find
             // matches for every segment
             List<StringBuilder> spaces = new ArrayList<>();
@@ -271,15 +318,23 @@ public class FindMatches {
             if (segments.size() > 1) {
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
+                int maxPenalty = 0;
                 // multiple segments
                 for (String onesrc : segments) {
-                    // find match for a separate segment
-                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, requiresTranslation,
-                            false, stop);
+                    // find match for a separate segment.
+                    // WARN: the 5th argument should be
+                    // `false` to avoid an infinite-loop.
+                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, false, stop, false);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
                         ftrans.add(segmentMatch.get(0).translation);
+                        if (segmentMatch.get(0).fuzzyMark) {
+                            if (maxPenalty < PENALTY_FOR_FUZZY) {
+                                maxPenalty = PENALTY_FOR_FUZZY;
+                            }
+                        }
+                        maxPenalty = Math.max(maxPenalty, segmentMatch.get(0).scores[0].penalty);
                     } else {
                         fsrc.add("");
                         ftrans.add("");
@@ -289,7 +344,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, 0);
+                processEntry(null, entry, "", NearString.MATCH_SOURCE.TM, false, maxPenalty);
             }
         }
         // fill similarity data only for a result
@@ -385,13 +440,13 @@ public class FindMatches {
         }
 
         // BUGS#1236 - stat display does not use threshold config check
-        if (applyThreshold && similarityStem < fuzzyMatchThreshold
+        if (fuzzyMatchThreshold > 0 && similarityStem < fuzzyMatchThreshold
                 && similarityNoStem < fuzzyMatchThreshold && simAdjusted < fuzzyMatchThreshold) {
             return;
         }
 
         addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
-                simAdjusted), tmxName);
+                simAdjusted, penalty), tmxName);
     }
 
     /**

@@ -1,0 +1,212 @@
+plugins {
+    id 'org.omegat.common-utilities'
+    id 'application'
+    id 'jacoco'
+    id 'jacoco-report-aggregation'
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+sourceSets {
+    testAcceptance {
+        java {
+            srcDir 'test-acceptance/src'
+        }
+    }
+    testIntegration {
+        java {
+            srcDir 'test-integration/src'
+        }
+    }
+}
+
+configurations {
+    testIntegrationImplementation.extendsFrom implementation
+    testAcceptanceImplementation.extendsFrom testImplementation
+    testAcceptanceRuntime.extendsFrom testRuntime
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    group = 'verification'
+    reports {
+        xml.required = true  // coveralls plugin depends on xml format report
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ["gen/core/**/*", "org/omegat/util/gui/*", "org/omegat/gui/dialogs/*",
+                              "org/omegat/externalfinder/gui/*", "org/omegat/gui/filters2/*", "org/omegat/core/team2/gui/*",
+                              "org/omegat/gui/properties", "org/omegat/gui/exttrans/*", "org/omegat/gui/theme",
+                              "org/omegat/gui/comments/*", "org/omegat/gui/editor/chartable/*",
+                              "org/omegat/gui/segmentation/*", "org/omegat/util/xml/*", "org/omegat/gui/preferences/*",
+                              "org/omegat/**/data/*", "org/omegat/**/datamodels/*"])
+        }))
+    }
+}
+
+// check.dependsOn jacocoTestCoverageVerification
+tasks.jacocoTestCoverageVerification {
+    dependsOn(tasks.test)
+    violationRules {
+        rule {
+            element = 'CLASS'
+            includes = ['org.omegat.core.machinetranslators.*', 'org.omegat.core.dictionaries.*']
+            excludes = ['**.*.1', '**.*.2', '**.*.3',  // ignore inner classes
+                        'org.omegat.core.machinetranslators.MachineTranslators']  // simple plugin reg.
+            limit { minimum = 0.20 }
+        }
+        rule {
+            element = 'PACKAGE'
+            includes = ['org.omegat.filters?.*',
+                        'org.omegat.externalfinder', 'org.omegat.languagetools', 'org.omegat.util',
+                        'org.omegat.core.events', 'org.omegat.core.matching', 'org.omegat.core.search',
+                        'org.omegat.core.segmentation', 'org.omegat.core.spellchecker', 'org.omegat.core.statistics',
+                        'org.omegat.core.tagvalidation', 'org.omegat.core.team2.*']
+            excludes = ['org.omegat.core.team2.gui', 'org.omegat.util.xml.*']
+            limit { minimum = 0.60 }
+        }
+    }
+}
+
+tasks.named("run") {
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+}
+
+tasks.register('runDebugger', JavaExec) {
+    description = 'Launch app for debugging.' // Special debug task for NetBeans
+    group = 'application'
+    mainClass = application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs(["--illegal-access=warn"])
+    debug = true
+}
+
+tasks.register('runOnJava17', JavaExec) {
+    description = 'Launch app on Java 17'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    mainClass.set application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    group = 'application'
+}
+
+tasks.register('runOnJava21', JavaExec) {
+    description = 'Launch app on Java 21'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    mainClass.set application.mainClass
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    group = 'application'
+}
+
+tasks.register('testIntegration', JavaExec) {
+    description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    group = 'omegat workflow'
+    mainClass = 'org.omegat.core.data.TestTeamIntegration'
+    classpath = sourceSets.testIntegration.runtimeClasspath
+    if (!System.hasProperty('java.util.logging.config.file')) {
+        System.setProperty('java.util.logging.config.file', "${rootDir}/config/test/logger.properties")
+    }
+    systemProperties = System.properties
+}
+
+tasks.register('testOnJava17', Test) {
+    description = 'Run test cases on Java 17'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    group = 'verification'
+}
+
+tasks.register('testOnJava21', Test) {
+    description = 'Run test cases on Java 21'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(21)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    group = 'verification'
+}
+
+project.ext.xvfbPid = ""
+
+def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {
+    outputs.upToDateWhen { return false } // always run
+    doLast {
+        if (!project.ext.xvfbPid.isEmpty()) {
+            println "Stopping virtual X server..."
+            def outputStream = new ByteArrayOutputStream()
+            def pid = project.ext.xvfbPid
+            injected.execOps.exec {
+                commandLine 'sh', '-c', "kill ${pid} &"
+                standardOutput = outputStream
+                errorOutput = outputStream
+            }
+            project.ext.xfvbPid = ""
+        }
+    }
+}
+
+tasks.register('testAcceptance', Test) {
+    def display = project.hasProperty("testDisplay") ? project.getProperty("testDisplay") : ""
+    if (!display.isEmpty()) {
+        def lockFile = new File("/tmp/.X${display}-lock")
+        if (!lockFile.exists()) {
+            def outputStream = new ByteArrayOutputStream()
+            def res = injected.execOps.exec {
+                commandLine 'sh', '-c', "Xvfb :${display} -screen 0 1280x1024x24 >>/dev/null 2>&1 & echo \$!"
+                standardOutput = outputStream
+            }.exitValue
+            if (res == 0) {
+                def xvfbPid = outputStream.toString().trim()
+                environment 'DISPLAY', ":${display}"
+                println "Virtual X server is started with DISPLAY :${display} and PID: ${xvfbPid}"
+            }
+        }
+    }
+    finalizedBy testAcceptanceFinally
+
+    description = 'Run Acceptance GUI test'
+    group = 'verification'
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.ADOPTIUM
+    }
+    jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED",
+             "--add-opens", "java.base/java.util=ALL-UNNAMED"])
+    classpath = sourceSets.testAcceptance.runtimeClasspath
+    testClassesDirs = sourceSets.testAcceptance.output.classesDirs
+    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    dependsOn firstSteps
+    dependsOn ':aligner:jar'
+}
+
+tasks.withType(JavaExec).configureEach {
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+}

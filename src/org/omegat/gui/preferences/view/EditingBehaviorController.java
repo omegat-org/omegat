@@ -100,6 +100,7 @@ public class EditingBehaviorController extends BasePreferencesController {
                 Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT, Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT));
         panel.paraMarkText.setText(Preferences.getPreferenceDefault(
                 Preferences.MARK_PARA_TEXT, Preferences.MARK_PARA_TEXT_DEFAULT));
+        panel.cbSupportLockedSegments.setSelected(Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true));
         updateEnabledness();
     }
 
@@ -120,6 +121,7 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.tagValidateOnLeave.setSelected(false);
         panel.cbSaveAutoStatus.setSelected(false);
         panel.cbSaveOrigin.setSelected(false);
+        panel.cbSupportLockedSegments.setSelected(true);
         panel.initialSegCountSpinner.setValue(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT_DEFAULT);
         panel.paraMarkText.setText(Preferences.MARK_PARA_TEXT_DEFAULT);
 
@@ -154,6 +156,7 @@ public class EditingBehaviorController extends BasePreferencesController {
         Preferences.setPreference(Preferences.TAG_VALIDATE_ON_LEAVE, panel.tagValidateOnLeave.isSelected());
         Preferences.setPreference(Preferences.SAVE_AUTO_STATUS, panel.cbSaveAutoStatus.isSelected());
         Preferences.setPreference(Preferences.SAVE_ORIGIN, panel.cbSaveOrigin.isSelected());
+        Preferences.setPreference(Preferences.SUPPORT_LOCKED_SEGMENTS, panel.cbSupportLockedSegments.isSelected());
 
         int segCount = Math.max(0, (Integer) panel.initialSegCountSpinner.getValue());
         Preferences.setPreference(Preferences.EDITOR_INITIAL_SEGMENT_LOAD_COUNT, segCount);

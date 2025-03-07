@@ -313,7 +313,7 @@ public class FindMatches {
                 String foundSrc = Core.getSegmenter().glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 // glue found translations
                 String foundTrans = Core.getSegmenter().glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM_SUBSEG, false, maxPenalty,
+                processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty,
                         String.join(",", tmxNames), "", 0, "", 0, null);
             }
         }

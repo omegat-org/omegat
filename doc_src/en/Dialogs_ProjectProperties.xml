@@ -120,9 +120,13 @@
 		  <para>Switching from <emphasis role="bold">sentence</emphasis> to
 		  <emphasis role="bold">paragraph</emphasis> segmentation
 		  mid-translation may force OmegaT to upgrade old translation memories
-		  that did not use sentence segmentation, but not vice versa. However,
-		  OmegaT will attempt to create fuzzy matches for paragraphs by
-		  combining existing sentence translations.</para>
+		  that did not use sentence segmentation, but not vice versa.</para>
+		  <para>OmegaT can also optionally attempt to create fuzzy matches for paragraphs
+		  by assembling existing sentence translations. See <link
+		  linkend="dialog.preferences.tm.matches.paragraph.from.segmented.tmx"
+		  endterm="dialog.preferences.tm.matches.paragraph.from.segmented.tmx.title"/> to enable
+		  that feature.
+		  </para>
 
 		  <para>If you change the segmentation while translating, you will have
 		  to reload the project for the new segmentation to take effect. This

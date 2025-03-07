@@ -56,7 +56,7 @@ public class NearString {
         /** From files */
         FILES,
         /** From sub-segmented match */
-        TM_SUBSEG;
+        TM_SUBSEG
     }
 
     public enum SORT_KEY {

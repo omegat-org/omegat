@@ -69,9 +69,14 @@ public class TMMatchesPreferencesPanel extends JPanel {
         jPanel5 = new javax.swing.JPanel();
         keepForeignMatches = new javax.swing.JCheckBox();
         foreignPenaltyPanel = new javax.swing.JPanel();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0));
         foreignPenaltyLabel = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         foreignPenaltySpinner = new javax.swing.JSpinner();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+        jPanel2 = new javax.swing.JPanel();
+        segmentedMatchesLabel = new javax.swing.JLabel();
+        paragraphMatchesFromSegmentedTmxCB = new javax.swing.JCheckBox();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         jPanel3 = new javax.swing.JPanel();
         templateLabel = new javax.swing.JLabel();
@@ -88,7 +93,7 @@ public class TMMatchesPreferencesPanel extends JPanel {
         jPanel1.setAlignmentX(0.0F);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(sortMatchesLabel, OStrings.getString("EXT_TMX_SORT_KEY")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sortMatchesLabel, OStrings.getString("EXT_TMX_SORT_KEY"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -101,7 +106,7 @@ public class TMMatchesPreferencesPanel extends JPanel {
         gridBagConstraints.weightx = 1.0;
         jPanel1.add(sortMatchesList, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(fuzzyThresholdLabel, OStrings.getString("EXT_TMX_FUZZY_THRESHOLD_KEY")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(fuzzyThresholdLabel, OStrings.getString("EXT_TMX_FUZZY_THRESHOLD_KEY"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -123,15 +128,15 @@ public class TMMatchesPreferencesPanel extends JPanel {
 
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.Y_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(tagHandlingLabel, OStrings.getString("EXT_TMX_DESCRIPTION")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(tagHandlingLabel, OStrings.getString("EXT_TMX_DESCRIPTION"));
         jPanel7.add(tagHandlingLabel);
 
         displayLevel2Tags.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(displayLevel2Tags, OStrings.getString("EXT_TMX_SHOW_LEVEL2")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(displayLevel2Tags, OStrings.getString("EXT_TMX_SHOW_LEVEL2"));
         jPanel7.add(displayLevel2Tags);
 
         useSlash.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML"));
         jPanel7.add(useSlash);
 
         add(jPanel7);
@@ -140,13 +145,14 @@ public class TMMatchesPreferencesPanel extends JPanel {
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
 
         keepForeignMatches.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(keepForeignMatches, OStrings.getString("EXT_TMX_KEEP_FOREIGN_MATCHES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(keepForeignMatches, OStrings.getString("EXT_TMX_KEEP_FOREIGN_MATCHES"));
         jPanel5.add(keepForeignMatches);
 
         foreignPenaltyPanel.setAlignmentX(0.0F);
         foreignPenaltyPanel.setLayout(new javax.swing.BoxLayout(foreignPenaltyPanel, javax.swing.BoxLayout.LINE_AXIS));
+        foreignPenaltyPanel.add(filler6);
 
-        org.openide.awt.Mnemonics.setLocalizedText(foreignPenaltyLabel, OStrings.getString("EXT_TMX_PENALTY_FOR_FOREIGN_MATCHES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(foreignPenaltyLabel, OStrings.getString("EXT_TMX_PENALTY_FOR_FOREIGN_MATCHES"));
         foreignPenaltyPanel.add(foreignPenaltyLabel);
         foreignPenaltyPanel.add(filler1);
 
@@ -157,13 +163,23 @@ public class TMMatchesPreferencesPanel extends JPanel {
         jPanel5.add(foreignPenaltyPanel);
 
         add(jPanel5);
+        add(filler5);
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+
+        org.openide.awt.Mnemonics.setLocalizedText(segmentedMatchesLabel, OStrings.getString("EXT_SEGMENTED_DESCRIPTION"));
+        jPanel2.add(segmentedMatchesLabel);
+
+        org.openide.awt.Mnemonics.setLocalizedText(paragraphMatchesFromSegmentedTmxCB, OStrings.getString("PARAGRAPH_MATCH_FROM_SEGMENT_TMX"));
+        jPanel2.add(paragraphMatchesFromSegmentedTmxCB);
+
+        add(jPanel2);
         add(filler4);
 
         jPanel3.setAlignmentX(0.0F);
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(templateLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(templateLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE"));
         jPanel3.add(templateLabel, java.awt.BorderLayout.NORTH);
 
         jScrollPane1.setMinimumSize(new java.awt.Dimension(525, 25));
@@ -177,11 +193,11 @@ public class TMMatchesPreferencesPanel extends JPanel {
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
         jPanel4.add(variablesLabel, java.awt.BorderLayout.WEST);
         jPanel4.add(variablesList, java.awt.BorderLayout.CENTER);
 
-        org.openide.awt.Mnemonics.setLocalizedText(insertButton, bundle.getString("BUTTON_INSERT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
         jPanel4.add(insertButton, java.awt.BorderLayout.EAST);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.PAGE_END);
@@ -195,6 +211,8 @@ public class TMMatchesPreferencesPanel extends JPanel {
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
     private javax.swing.JLabel foreignPenaltyLabel;
     javax.swing.JPanel foreignPenaltyPanel;
     javax.swing.JSpinner foreignPenaltySpinner;
@@ -202,6 +220,7 @@ public class TMMatchesPreferencesPanel extends JPanel {
     private javax.swing.JLabel fuzzyThresholdLabel;
     javax.swing.JButton insertButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -209,6 +228,8 @@ public class TMMatchesPreferencesPanel extends JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     javax.swing.JCheckBox keepForeignMatches;
     javax.swing.JTextArea matchesTemplate;
+    javax.swing.JCheckBox paragraphMatchesFromSegmentedTmxCB;
+    private javax.swing.JLabel segmentedMatchesLabel;
     private javax.swing.JLabel sortMatchesLabel;
     javax.swing.JComboBox<SORT_KEY> sortMatchesList;
     private javax.swing.JLabel tagHandlingLabel;

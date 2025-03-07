@@ -558,7 +558,7 @@
 		  <term id="segmentation.rules.exceptionrule.title"><option>Exceptions</option></term>
 
 		  <listitem>
-			<para>To define an exception rule, leave the <guilabel>Break/Exception
+			<para>To define an exception rule, leave the <guilabel>Break
 			</guilabel>check box unchecked.</para>
 
 			<para>Specify text combinations that are exceptions to a break
@@ -574,7 +574,7 @@
 
 		  <listitem>
 			<para>To define a break rule, check the
-			<guilabel>Break/Exception</guilabel> box.</para>
+			<guilabel>Break</guilabel> box.</para>
 
 			<para>Separates the source text into segments. For example,
 			<emphasis>period followed by a space</emphasis> generally defines a
@@ -869,8 +869,8 @@
 		source text</option></term>
 
 		<listitem>
-		  <para>Use this option temporarily for parts of the translation that do
-		  not require much transformation.</para>
+		  <para>Use this option for parts of the translation that do not require
+		  much transformation.</para>
 		</listitem>
 	  </varlistentry>
 

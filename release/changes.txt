@@ -1,14 +1,23 @@
 ----------------------------------------------------------------------
  OmegaT 6.0.2
 ----------------------------------------------------------------------
-  0 Enhancement
-  5 Bug fixes
+
+  2 Enhancement
+  7 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 
+  Implemented requests:
+
+  - Various small documentation updates
+  https://sourceforge.net/p/omegat/documentation/443/
+
+  - Change the "break/exception" checkbox label
+  https://sourceforge.net/p/omegat/feature-requests/484/
+
   Bug fixes:
 
-  - Preferences/CutomColorSelector don't show notification immediately when modifying color
+  - Preferences/CustomColorSelector don't show notification immediately when modifying color
   https://sourceforge.net/p/omegat/bugs/1273/
 
   - tm/penalty-nnn value is not respected
@@ -24,6 +33,12 @@
 
   - Translation memories are not correctly reloaded after team synchronization
   https://sourceforge.net/p/omegat/bugs/1164/
+
+  - pt-BR bundle typos
+  https://sourceforge.net/p/omegat/bugs/1282/
+
+  - macOS notarization fails with junixsocket libraries
+  https://sourceforge.net/p/omegat/bugs/1283/
 
 ----------------------------------------------------------------------
  OmegaT 6.0.1 (2024-08-17)

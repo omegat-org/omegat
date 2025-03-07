@@ -15,7 +15,7 @@ plugins {
     id 'org.omegat.verification-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
-    id("com.google.osdetector") version "1.7.3"
+    id 'com.google.osdetector' version '1.7.3'
 }
 
 application {
@@ -469,6 +469,18 @@ processResources {
     }
 }
 
+def manualIndexXmls = fileTree(dir: 'src_docs/manual', include: '**/OmegaTUsersManual_xinclude_full.xml')
+manualIndexXmls.each { xml ->
+    def lang = xml.parentFile.name
+    makeDocumentationTasks(lang)
+}
+
+tasks.register('updateManuals') {
+    group = 'documentation'
+    description = 'Update first pages and HTML manuals.'
+    dependsOn manualHtmls, firstSteps
+}
+
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
@@ -480,5 +492,5 @@ remotes {
         agent = true
     }
 }
-publishAtomically(name: 'manual', sourceTask: webManual)
+publishAtomically(name: 'manual', sourceTask: manualHtmls)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)

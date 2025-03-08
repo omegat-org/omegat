@@ -59,10 +59,6 @@ class Docbook extends AbstractTransformationTask {
     @Input
     final SetProperty<String> imageExcludes = project.objects.setProperty(String)
 
-    @Input
-    @Optional
-    final Property<FileCollection> extraFilesToOutput = project.objects.property(FileCollection)
-
     @OutputFile
     final Provider<RegularFile> mainOutputFile = project.objects.fileProperty()
 

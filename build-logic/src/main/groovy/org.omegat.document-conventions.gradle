@@ -198,10 +198,16 @@ firstStepsXmls.each { xml ->
         language.set(lang)
         inputFile.set(file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
         mainOutputFile.set(outputRoot.get().file("greetings/${language.get()}/first_steps.html"))
-        styleSheetFile.set(styleDir.file("xhtml.xsl"))
+        styleSheetFile.set(styleDir.file("html.xsl"))
         inputs.files fileTree(dir: "src_docs/greeting/${lang}", include: 'First_Steps.xml')
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/omegat.css"])
+        doLast {
+            copy {
+                from layout.projectDirectory.file('src_docs/style/omegat.css')
+                into outputRoot.get().file("greetings/${language.get()}")
+            }
+        }
     }
     firstSteps.dependsOn firstStepsHtml
 }

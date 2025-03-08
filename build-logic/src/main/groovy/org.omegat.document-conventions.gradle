@@ -44,7 +44,7 @@ tasks.register('genDocIndex', Copy) {
 
 tasks.register('manualZips') {
     description = 'Build ZIP manuals to bundle into application.'
-    group = 'documentation'
+    group = 'other'
 }
 
 tasks.register('manualHtmls') {
@@ -112,7 +112,7 @@ ext.makeDocumentationTasks = { lang ->
         dependsOn(copyCss, docbookInclude)
     }
 
-    def buildDocumentTask = tasks.register("buildDocument${lang.capitalize()}", WhcTask) {
+    def buildDocumentTask = tasks.register("manual${lang.capitalize()}", WhcTask) {
         description 'Build whc contents'
         tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))

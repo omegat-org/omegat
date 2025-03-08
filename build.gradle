@@ -267,12 +267,13 @@ jar {
             attributes('Plugin-Name': name, 'Plugin-Category': category, 'Plugin-Description': description, path)
         }
         def desc = [:]
-        omtPlugins.each { key, val ->
-            if (key.startsWith('plugin.desc')) {
-                desc[key.split('\\.').last()] = val
-            } else if (key != 'plugin') {
-                val.tokenize().each { cls ->
-                    attributes('OmegaT-Plugin': key, cls)
+        omtPlugins.each { pluginKey, pluginValue ->
+            if (pluginKey.startsWith('plugin.desc')) {
+                def descriptionKey = pluginKey.split('\\.').last()
+                desc[descriptionKey] = pluginValue
+            } else if (pluginKey != 'plugin') {
+                pluginValue.tokenize().each { className ->
+                    attributes('OmegaT-Plugin': pluginKey, className)
                 }
             }
         }
@@ -475,12 +476,6 @@ manualIndexXmls.each { xml ->
     makeDocumentationTasks(lang)
 }
 
-tasks.register('updateManuals') {
-    group = 'documentation'
-    description = 'Update first pages and HTML manuals.'
-    dependsOn manualHtmls, firstSteps
-}
-
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
@@ -492,5 +487,5 @@ remotes {
         agent = true
     }
 }
-publishAtomically(name: 'manual', sourceTask: manualHtmls)
+publishAtomically(name: 'webManual', sourceTask: manualHtmls)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)

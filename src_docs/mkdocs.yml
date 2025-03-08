@@ -1,4 +1,5 @@
 site_name: OmegaT developer Documentaion
+docs_dir: developer
 markdown_extensions:
   - tables
   - def_list

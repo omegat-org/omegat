@@ -68,7 +68,6 @@ jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
 icu4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
-languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}
 languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
 languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
 languagetool-ar = {group = "org.languagetool", name = "language-ar", version.ref = "languagetool"}
@@ -129,6 +128,7 @@ jgit-bc = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.gpg.bc", version
 bc-prov = {group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bc"}
 bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
+bc-util-jdk18on = {group = "org.bouncycastle", name = "bcutil-jdk18on", version.ref = "bc" }
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
 fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.5.4"}
@@ -175,11 +175,9 @@ swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", vers
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
 jackson = ["jackson-core", "jackson-databind", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
-ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "eddsa"]
+ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "bc-util-jdk18on", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]
-languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr", "languagetool-en",
-    "languagetool-ja", "languagetool-pl"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]

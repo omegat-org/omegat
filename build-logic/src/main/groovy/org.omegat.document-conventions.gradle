@@ -1,7 +1,4 @@
-import org.omegat.documentation.DocbookHtml
-import org.omegat.documentation.StylesheetTask
-import org.omegat.documentation.WhcTask
-import org.omegat.documentation.XIncludeTask
+import org.omegat.documentation.*
 
 plugins {
     id 'org.omegat.documentation'

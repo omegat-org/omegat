@@ -46,7 +46,8 @@ dependencies {
     implementation 'xml-resolver:xml-resolver:1.2'
     implementation 'net.sf.docbook:docbook-xsl:1.79.1:resources@zip'
     implementation 'tokyo.northside:whc:3.6.0'
-    implementation 'xalan:xalan:2.7.2'
+    implementation 'xalan:xalan:2.7.3'
+    implementation 'xalan:serializer:2.7.3'
 
     // dependencies not on Maven
     // https://docbook.org/xml/4.5/docbook-xml-4.5.zip

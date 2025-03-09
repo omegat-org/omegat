@@ -100,21 +100,20 @@ ext.makeDocumentationTasks = { lang ->
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
         dependsOn(copyCss, docbookInclude)
     }
-
     def buildDocumentTask = tasks.register("manual${lang.capitalize()}", WhcTask) {
         description 'Build whc contents'
         tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
-        outputDirectory.set(outputRoot.get().dir("manual/${lang}"))
+        headerFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
+        documentLayout.set('simple')
+        localJQuery.set(true)
         parameterList.set([
-                'layout', 'simple',
-                // 'user-header', "${lang}/xhtml5/_header.xhtml",
                 '--navigation-background-color', '#FDFDFD',
                 '--field-background-color', '#FDFDFD',
                 '--panel-background-color', '#FDFDFD',
-                'local-jquery', 'yes'
         ])
         contentFiles.set(fileTree(dir: layout.buildDirectory.dir("tmp/manual/${lang}/xhtml5"), include: '*.html', exclude: '_*'))
+        outputDirectory.set(outputRoot.get().dir("manual/${lang}"))
         dependsOn(whcHeader, whcToc, whcIndex)
         group('documentation')
     }

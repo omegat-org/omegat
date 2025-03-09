@@ -18,7 +18,7 @@
                     <a href="https://omegat.org/">
                         <img alt="OmegaT"
                              height="50" width="100"
-                             src="images/omegat.svg"
+                             src="images/OmegaT.svg"
                              style="border-style: none;"  />
                     </a>
                 </div>

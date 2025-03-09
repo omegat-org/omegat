@@ -51,8 +51,9 @@ tasks.register('manualHtmls') {
 }
 
 ext.makeDocumentationTasks = { lang ->
-    def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", XIncludeTask) {
+    def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
         styleSheetFile.set(styleDir.file('passthrough.xsl'))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
         inputFile.set(layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
         outputs.files layout.buildDirectory.dir("tmp/manual/${lang}/xhtml5/_index.xml")
     }
@@ -69,38 +70,34 @@ ext.makeDocumentationTasks = { lang ->
         from new File(documentRootDir, "manual/${lang}/images/")
     }
 
-    def docbookHtml = tasks.register("docbookHtml${lang.capitalize()}", DocbookHtml) {
+    def docbookHtml = tasks.register("docbookHtml${lang.capitalize()}", DocbookHtmlTask) {
         description 'Generate chunked HTML documentation'
-        language.set(lang)
         inputFile.set(file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
-        mainOutputFile.set(layout.buildDirectory.file("tmp/manual/${language.get()}/xhtml5/_index.html"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         styleSheetFile.set(styleDir.file("xhtml.xsl"))
         inputs.dir(documentRootDir)
-        outputs.files(layout.buildDirectory.file("tmp/${language.get()}/xhtml5/_index.html"))
+        outputs.files(layout.buildDirectory.file("tmp/${lang}/xhtml5/_index.html"))
         dependsOn(docbookInclude, copyImages, copyCss)
     }
 
-    def whcToc = tasks.register("whcToc${lang.capitalize()}", StylesheetTask) {
+    def whcToc = tasks.register("whcToc${lang.capitalize()}", TransformationTask) {
         description 'Generate whc header and index'
-        language.set(lang)
         styleSheetFile.set(styleDir.file('whc-toc.xsl'))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
         dependsOn(docbookHtml)
     }
 
-    def whcIndex = tasks.register("whcIndex${lang.capitalize()}", StylesheetTask) {
+    def whcIndex = tasks.register("whcIndex${lang.capitalize()}", TransformationTask) {
         description 'Generate whc header and index'
-        language.set(lang)
         styleSheetFile.set(styleDir.file('whc-index.xsl'))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
         dependsOn(docbookHtml, whcToc)
     }
 
-    def whcHeader = tasks.register("whcHeader${lang.capitalize()}", StylesheetTask) {
+    def whcHeader = tasks.register("whcHeader${lang.capitalize()}", TransformationTask) {
         description 'Generate whc header and index'
-        language.set(lang)
         styleSheetFile.set(styleDir.file('whc-header.xsl'))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
@@ -116,7 +113,7 @@ ext.makeDocumentationTasks = { lang ->
         outputDirectory.set(outputRoot.get().dir("manual/${lang}"))
         parameterList.set([
                 'layout', 'simple',
-                // 'user-header', "${language.get()}/xhtml5/_header.xhtml",
+                // 'user-header', "${lang}/xhtml5/_header.xhtml",
                 '--navigation-background-color', '#FDFDFD',
                 '--field-background-color', '#FDFDFD',
                 '--panel-background-color', '#FDFDFD',
@@ -193,21 +190,19 @@ assemble.dependsOn firstSteps
 ext.firstStepsXmls = fileTree(dir: 'src_docs/greeting', include: '**/First_Steps.xml')
 firstStepsXmls.each { xml ->
     def lang = xml.parentFile.name
-    def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtml) {
+    def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
+        from layout.projectDirectory.file("src_docs/style/omegat.css")
+        into layout.buildDirectory.dir("docs/greetings/${lang}/")
+    }
+    def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtmlTask) {
         description 'Generate chunked HTML documentation'
-        language.set(lang)
         inputFile.set(file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
-        mainOutputFile.set(outputRoot.get().file("greetings/${language.get()}/first_steps.html"))
+        outputFile.set(outputRoot.get().file("greetings/${lang}/first_steps.html"))
         styleSheetFile.set(styleDir.file("html.xsl"))
         inputs.files fileTree(dir: "src_docs/greeting/${lang}", include: 'First_Steps.xml')
         outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
                 includes: ["${lang}/first_steps.html", "${lang}/omegat.css"])
-        doLast {
-            copy {
-                from layout.projectDirectory.file('src_docs/style/omegat.css')
-                into outputRoot.get().file("greetings/${language.get()}")
-            }
-        }
+        finalizedBy firstStepsHtmlFinally
     }
     firstSteps.dependsOn firstStepsHtml
 }

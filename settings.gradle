@@ -1,4 +1,21 @@
 pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        // 'repository' for getting docbook xsd
+        ivy {
+            url = 'https://docbook.org/xml'
+            patternLayout {
+                artifact '[revision]/[module]-[revision].[ext]'
+            }
+            content {
+                includeGroup 'docbook'
+            }
+            metadataSources {
+                artifact()
+            }
+        }
+    }
     // Include 'plugins build' to define convention plugins.
     includeBuild("build-logic")
 }

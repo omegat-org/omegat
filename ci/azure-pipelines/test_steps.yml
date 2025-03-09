@@ -4,12 +4,11 @@ steps:
     inputs:
       key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
       path: '$(GRADLE_USER_HOME)'
-  - script: |
-      umask a+w
-      mkdir -p build
-      chmod -R a+w doc_src
-      $(Build.SourcesDirectory)/gradlew --build-cache -PenvIsCi clean test
-    displayName: 'Run Gradle clean, test and test on Java17'
+  - task: Gradle@3
+    inputs:
+      tasks: 'test'
+      options: '--build-cache -PenvIsCi'
+      jdkVersionOption: '1.11'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/test-results/**/TEST-*.xml'
     condition: always()

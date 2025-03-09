@@ -55,7 +55,8 @@ ext.makeDocumentationTasks = { lang ->
         styleSheetFile.set(styleDir.file('passthrough.xsl'))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
         inputFile.set(layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
-        outputs.files layout.buildDirectory.dir("tmp/manual/${lang}/xhtml5/_index.xml")
+        inputs.files layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml")
+        outputs.files layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml")
     }
 
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
@@ -76,7 +77,7 @@ ext.makeDocumentationTasks = { lang ->
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         styleSheetFile.set(styleDir.file("xhtml.xsl"))
         inputs.dir(documentRootDir)
-        outputs.files(layout.buildDirectory.file("tmp/${lang}/xhtml5/_index.html"))
+        outputs.files(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         dependsOn(docbookInclude, copyImages, copyCss)
     }
 

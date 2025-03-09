@@ -55,8 +55,6 @@ ext.makeDocumentationTasks = { lang ->
         styleSheetFile.set(styleDir.file('passthrough.xsl'))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
         inputFile.set(layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
-        inputs.files layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml")
-        outputs.files layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml")
     }
 
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
@@ -76,8 +74,6 @@ ext.makeDocumentationTasks = { lang ->
         inputFile.set(file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         styleSheetFile.set(styleDir.file("xhtml.xsl"))
-        inputs.dir(documentRootDir)
-        outputs.files(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         dependsOn(docbookInclude, copyImages, copyCss)
     }
 
@@ -102,8 +98,6 @@ ext.makeDocumentationTasks = { lang ->
         styleSheetFile.set(styleDir.file('whc-header.xsl'))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
-        inputs.files(styleDir.file('whc-header.xsl'), layout.buildDirectory.file("manual/${lang}/xhtml5/_index.xml"))
-        outputs.file(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
         dependsOn(copyCss, docbookInclude)
     }
 
@@ -200,9 +194,6 @@ firstStepsXmls.each { xml ->
         inputFile.set(file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
         outputFile.set(outputRoot.get().file("greetings/${lang}/first_steps.html"))
         styleSheetFile.set(styleDir.file("html.xsl"))
-        inputs.files fileTree(dir: "src_docs/greeting/${lang}", include: 'First_Steps.xml')
-        outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
-                includes: ["${lang}/first_steps.html", "${lang}/omegat.css"])
         finalizedBy firstStepsHtmlFinally
     }
     firstSteps.dependsOn firstStepsHtml

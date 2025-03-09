@@ -7,19 +7,22 @@ import javax.xml.transform.Transformer
 @CompileStatic
 class DocbookHtmlTask extends TransformationTask {
 
+    private static final char EXTENSION_DELIMITER = '.'
+
+    private static String extractRootName(File file) {
+        String fileName = file.getName()
+        int extensionIndex = fileName.lastIndexOf(EXTENSION_DELIMITER)
+        if (extensionIndex <= 0) {
+            return fileName
+        }
+        return fileName.substring(0, extensionIndex)
+    }
+
     @Override
-    protected void preTransform(Transformer transformer, File sourceFile, File output) {
-        def rootName = outputFile.map { file ->
-            String filename = file.asFile.getName()
-            int extensionIndex = filename.lastIndexOf('.')
-            if (extensionIndex > 0) {
-                filename.substring(0, extensionIndex)
-            } else {
-                filename
-            }
-        }.get()
-        transformer.setParameter("root.filename", rootName)
-        transformer.setParameter("base.dir", outputFile.get().asFile.parent + File.separator)
+    protected void preTransform(Transformer transformer, File source, File target) {
+        String baseDir = outputFile.get().asFile.parent + File.separator
+        transformer.setParameter("root.filename", extractRootName(target))
+        transformer.setParameter("base.dir", baseDir)
         transformer.setParameter("use.id.as.filename", 1)
         transformer.setParameter("html.ext", ".html")
         transformer.setParameter("chunk.section.depth", 0)

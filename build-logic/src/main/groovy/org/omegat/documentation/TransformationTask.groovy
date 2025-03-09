@@ -39,24 +39,25 @@ class TransformationTask extends AbstractTransformationTask {
     final void transform() {
         configureLogging()
 
-        File outputFile = outputFile.get().asFile
+        File input = inputFile.get().asFile
+        File output = outputFile.get().asFile
 
-        InputSource inputSource = new InputSource(inputFile.get().asFile.getAbsolutePath())
-        StreamResult outputResult = new StreamResult(outputFile)
+        InputSource inputSource = new InputSource(input.getAbsolutePath())
+        StreamResult outputResult = new StreamResult(output)
 
         CatalogResolver resolver = new CatalogResolver(XsltHelper.createCatalogManager())
         XMLReader xmlReader = initializeXmlReader(resolver)
         Transformer transformer = initializeTransformer(resolver, styleSheetFile.get().asFile)
 
-        preTransform(transformer, inputFile.get().asFile, outputFile)
+        preTransform(transformer, input, output)
         transformer.transform(new SAXSource(xmlReader, inputSource), outputResult)
-        postTransform(outputFile)
+        postTransform(output)
     }
 
-    protected void preTransform(Transformer transformer, File sourceFile, File outputFile) {
+    protected void preTransform(Transformer transformer, File source, File target) {
     }
 
-    protected void postTransform(File outputFile) {
+    protected void postTransform(File output) {
     }
 
 }

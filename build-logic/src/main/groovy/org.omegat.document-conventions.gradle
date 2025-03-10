@@ -194,4 +194,5 @@ ext.makeFirstStepTask = { lang ->
         finalizedBy(firstStepsHtmlFinally)
     }
     firstSteps.dependsOn(firstStepsHtml)
+    firstSteps.dependsOn(firstStepsHtmlFinally)
 }

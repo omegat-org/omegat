@@ -507,4 +507,7 @@ public interface IEditor {
     default CaretPosition getCurrentPositionInEntryTranslationInEditor() {
         return CaretPosition.startOfEntry();
     }
+    
+    /** Enable to edit a segment which was locked **/
+    void unlockSegment();
 }

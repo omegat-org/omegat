@@ -25,10 +25,6 @@ steps:
         gradle | "$(Agent.OS)"
         gradle
       path: '$(GRADLE_USER_HOME)'
-  - script: |
-      umask a+w
-      chmod -R a+w doc_src
-    displayName: 'Preparation for build'
   - task: Gradle@3
     inputs:
       tasks: 'clean sourceDistZip distZip mac linux win'

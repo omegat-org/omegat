@@ -15,7 +15,7 @@ plugins {
     id 'org.omegat.verification-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
-    id("com.google.osdetector") version "1.7.3"
+    id 'com.google.osdetector' version '1.7.3'
 }
 
 application {
@@ -267,12 +267,13 @@ jar {
             attributes('Plugin-Name': name, 'Plugin-Category': category, 'Plugin-Description': description, path)
         }
         def desc = [:]
-        omtPlugins.each { key, val ->
-            if (key.startsWith('plugin.desc')) {
-                desc[key.split('\\.').last()] = val
-            } else if (key != 'plugin') {
-                val.tokenize().each { cls ->
-                    attributes('OmegaT-Plugin': key, cls)
+        omtPlugins.each { pluginKey, pluginValue ->
+            if (pluginKey.startsWith('plugin.desc')) {
+                def descriptionKey = pluginKey.split('\\.').last()
+                desc[descriptionKey] = pluginValue
+            } else if (pluginKey != 'plugin') {
+                pluginValue.tokenize().each { className ->
+                    attributes('OmegaT-Plugin': pluginKey, className)
                 }
             }
         }
@@ -469,6 +470,16 @@ processResources {
     }
 }
 
+def manualLangs = project.property("manualLangs").split(',')
+manualLangs.each { lang ->
+    makeDocumentationTasks(lang)
+}
+
+def firstStepLangs = project.property("firstStepLangs").split(',')
+firstStepLangs.each { lang ->
+    makeFirstStepTask(lang)
+}
+
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
@@ -480,5 +491,5 @@ remotes {
         agent = true
     }
 }
-publishAtomically(name: 'manual', sourceTask: webManual)
+publishAtomically(name: 'webManual', sourceTask: manualHtmls)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)

@@ -109,7 +109,7 @@ public class FindMatchesThreadTest {
         assertEquals("weird behavior", result.get(0).translation);
         //
         assertEquals(SOURCE_TEXT, result.get(1).source);
-        assertEquals("TM_SUBSEG", result.get(1).comesFrom.name());
+        assertEquals("SUBSEGMENTS", result.get(1).comesFrom.name());
         assertEquals(90, result.get(1).scores[0].score);
     }
 
@@ -138,8 +138,8 @@ public class FindMatchesThreadTest {
         @Override
         public List<SourceTextEntry> getAllEntries() {
             List<SourceTextEntry> ste = new ArrayList<>();
-            ste.add(new SourceTextEntry(new EntryKey("source.txt", SOURCE_TEXT, null, "", "", null), 1, null,
-                    null, Collections.emptyList()));
+            ste.add(new SourceTextEntry(new EntryKey("source.txt", SOURCE_TEXT, null, "", "", null),
+                    1, null, null, Collections.emptyList()));
             return ste;
         }
 

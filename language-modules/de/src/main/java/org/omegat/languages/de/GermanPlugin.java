@@ -25,6 +25,8 @@
 
 package org.omegat.languages.de;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class GermanPlugin {
@@ -32,6 +34,8 @@ public final class GermanPlugin {
     private static final String AUSTRARIAN_GERMAN = "org.languagetool.language.AustrianGerman";
     private static final String GERMANY_GERMAN = "org.languagetool.language.GermanyGerman";
     private static final String SWISS_GERMAN = "org.languagetool.language.SwissGerman";
+    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.de.GermanHunspellDictionary";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.de.GermanMorfologikDictionary";
 
     private GermanPlugin() {
     }
@@ -40,6 +44,22 @@ public final class GermanPlugin {
         LanguageManager.registerLTLanguage("de-AT", AUSTRARIAN_GERMAN);
         LanguageManager.registerLTLanguage("de-DE", GERMANY_GERMAN);
         LanguageManager.registerLTLanguage("de-CH", SWISS_GERMAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_AT", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_DE", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_CH", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_AT",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_DE",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de_CH",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("de", SpellCheckDictionaryType.MORFOLOGIK,
+                MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

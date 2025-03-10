@@ -704,9 +704,12 @@ public class EditorController implements IEditor {
 
         doc.setDocumentFilter(new DocumentFilter3());
 
-        // add locate for target language to editor
+        // add locales to editor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         editor.setLocale(targetLocale);
+        editor.setTargetLocale(targetLocale);
+        Locale sourceLocale = Core.getProject().getProjectProperties().getSourceLanguage().getLocale();
+        editor.setSourceLocale(sourceLocale);
 
         editor.setDocument(doc);
 
@@ -1639,8 +1642,9 @@ public class EditorController implements IEditor {
         try {
             // no selection? make it the current word
             if (start == end) {
-                start = EditorUtils.getWordStart(editor, start);
-                end = EditorUtils.getWordEnd(editor, end);
+                Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
+                start = EditorUtils.getWordStart(editor, start, locale);
+                end = EditorUtils.getWordEnd(editor, end, locale);
 
                 // adjust the bound again
                 if (start < translationStart && end <= translationEnd) {
@@ -1947,6 +1951,7 @@ public class EditorController implements IEditor {
                     .setComponentOrientation(BiDiUtils.isRtl(language) ? ComponentOrientation.RIGHT_TO_LEFT
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
+            introPane.setName("IntroPane");
             DragTargetOverlay.apply(introPane, dropInfo);
             URI uri = Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language, OConsts.HELP_FIRST_STEPS);
             if (uri != null) {
@@ -1958,6 +1963,7 @@ public class EditorController implements IEditor {
         emptyProjectPaneTitle = OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
         emptyProjectPane = new JTextPane();
         emptyProjectPane.setEditable(false);
+        emptyProjectPane.setName("EmptyProjectPane");
         emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
         emptyProjectPane.setFont(mw.getApplicationFont());
         DragTargetOverlay.apply(emptyProjectPane, dropInfo);

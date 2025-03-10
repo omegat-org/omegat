@@ -12,6 +12,13 @@ section (online), which is also in the code distribution at docs_devel/docs/40.C
 
 # Manual build guide
 
+## Build using Container
+
 The [OmegaT contribution guide](https://omegat.readthedocs.io/en/latest/) has a
-[How to build the HTML manuals from source](https://omegat.readthedocs.io/en/latest/07.ManualContainerTaskBuild/)
-section (online), which is also in the code distribution at docs_devel/docs/07.ManualContainerTaskBuild.md.
+[ How to build the HTML manuals from source using a container to build the documentation](https://omegat.readthedocs.io/en/latest/07.ManualBuildUsingContainer.md)
+section (online), which is also in the code distribution at docs_devel/docs/07.ManualBuildUsingContainer.md.
+
+## Build manually
+
+The [OmegaT contribution guide](https://omegat.readthedocs.io/en/latest/) has a
+[Building the documentation manually](08.ManuallyBuildDocumentation.md) section (online).

@@ -26,11 +26,11 @@
 
 FROM debian:bookworm-slim
 ARG CAVER=1.0.3-1
-ARG JAVA=11
-ARG JDKVER=jdk_11.0.23.0.0+9
+ARG JAVA=17
+ARG JDKVER=jdk_17.0.9.0.0+9
 ARG GRADLE=8.8
 RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git inotify-tools curl subversion unzip rsync  \
- java-common libasound2 libfontconfig1 libfreetype6 libxi6 libxrender1 libxtst6 p11-kit openjdk-17-jdk
+ java-common libasound2 libfontconfig1 libfreetype6 libxi6 libxrender1 libxtst6 p11-kit
 RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh
 RUN chown -R omegat.omegat /home/omegat
 COPY --chown=omegat ssh_config /home/omegat/.ssh/config

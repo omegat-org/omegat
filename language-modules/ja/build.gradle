@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -25,7 +25,7 @@ dependencies {
             exclude module: 'icu4j'
         }
         implementation(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
-        implementation(libs.icj4j)
+        compileOnly(libs.icu4j)
     }
 
     testImplementation(libs.junit4)
@@ -43,33 +43,15 @@ dependencies {
         exclude module: 'icu4j'
     }
     testRuntimeOnly(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
-    testRuntimeOnly(libs.icj4j)
+    testRuntimeOnly(libs.icu4j)
 
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
 }
 
+makeModuleTask(loadProperties(file('plugin.properties')))
+
 test {
     useJUnit()
-}
-
-jar {
-    archiveFileName.set("omegat-language-ja.${archiveExtension.get()}")
-    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

@@ -145,7 +145,7 @@
 
     <!-- Aligner, AlignFilePickerController, AlignPanelController -->
     <suppress files="Aligner\.java" checks="ParameterNumber"/>
-    <suppress files="AlignFilePickerController\.java|AlignPanelController\.java" checks="MethodLength|FileLength"/>
+    <suppress files="AlignPanelController\.java" checks="MethodLength|FileLength"/>
 
     <!-- machinetranslators -->
     <suppress checks="(DesignForExtension|MagicNumber|MemberName|HideUtilityClassConstructor)"

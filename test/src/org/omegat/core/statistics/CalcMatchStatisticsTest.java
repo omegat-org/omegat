@@ -77,7 +77,8 @@ public class CalcMatchStatisticsTest {
         TestProject project = new TestProject(new ProjectPropertiesTest());
         IStatsConsumer callback = new TestStatsConsumer();
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
+        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter,
+                callback, 30);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -130,8 +131,7 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
 
         // change threshold
-        Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, 70);
-        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
+        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, -1);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -370,7 +370,8 @@ public class CalcMatchStatisticsTest {
         private MatchStatCounts result;
         private final IStatsConsumer callback;
 
-        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback) {
+        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback,
+                                int threshold) {
             super(project, segmenter, callback, false);
             this.project = project;
             this.callback = callback;

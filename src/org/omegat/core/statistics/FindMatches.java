@@ -7,7 +7,7 @@
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2024 Hiroshi Miura
+               2024 Hiroshi Miura, Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -167,6 +167,12 @@ public class FindMatches {
         this.fuzzyMatchThreshold = threshold;
     }
 
+    @Deprecated(since = "6.1.0")
+    public List<NearString> search(final String searchText, final boolean requiresTranslation,
+            final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
+        return search(searchText, fillSimilarityData, stop);
+    }
+
     /**
      * Search Translation memories.
      *
@@ -183,20 +189,30 @@ public class FindMatches {
      */
     public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
             throws StoppedException {
-        boolean runSeparateSegmentMatch =
-                Preferences.isPreferenceDefault(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, true) &&
-                        !project.getProjectProperties().isSentenceSegmentingEnabled();
-        return search(searchText, fillSimilarityData, stop, runSeparateSegmentMatch);
+        return search(searchText, fillSimilarityData, stop,
+                !project.getProjectProperties().isSentenceSegmentingEnabled());
     }
 
     /**
-     * Search translation memories without segmenting.
+     * Search Translation memories.
+     * <p>
+     * Internal method to handle search conditions.
+     * It is accessible as package-private for testing.
+     *
+     * @param searchText
+     *        target segment or term to search.
+     * @param fillSimilarityData
+     *        fill similarity data into the result of NearString objects.
+     * @param stop
+     *        IStopped callback object to indicate cancel operation.
+     * @param runSeparateSegmentMatch
+     *        Also search with segmented terms search.
+     * @return
+     *        List of NearString objects.
+     * @throws StoppedException
+     *        When stopped the process during search.
      */
-    private List<NearString> searchForSegmented(String searchSentence, IStopped stop) {
-        return search(searchSentence, false, stop, false);
-    }
-
-    private List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop,
+    List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop,
                             boolean runSeparateSegmentMatch) throws StoppedException {
         result = new ArrayList<>(OConsts.MAX_NEAR_STRINGS + 1);
         srcText = searchText;
@@ -287,11 +303,10 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = ste.getSrcText();
                 entry.translation = ste.getSourceTranslation();
-                processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.MEMORY,
+                processEntry(ste.getKey(), entry, ste.getKey().file, NearString.MATCH_SOURCE.FILES,
                         ste.isSourceTranslationFuzzy(), 0);
             }
         }
-
         if (runSeparateSegmentMatch) {
             FindMatches separateSegmentMatcher = new FindMatches(project, segmenter, 1, true,
                     fuzzyMatchThreshold);
@@ -303,14 +318,16 @@ public class FindMatches {
             Language targetLang = project.getProjectProperties().getTargetLanguage();
             List<String> segments = segmenter.segment(sourceLang, srcText, spaces, brules);
             if (segments.size() > 1) {
-                int maxPenalty = 0;
                 Set<String> tmxNames = new HashSet<>();
                 List<String> fsrc = new ArrayList<>(segments.size());
                 List<String> ftrans = new ArrayList<>(segments.size());
+                int maxPenalty = 0;
                 // multiple segments
                 for (String onesrc : segments) {
                     // find match for a separate segment.
-                    List<NearString> segmentMatch = separateSegmentMatcher.searchForSegmented(onesrc, stop);
+                    // WARN: the 5th argument should be
+                    // `false` to avoid an infinite-loop.
+                    List<NearString> segmentMatch = separateSegmentMatcher.search(onesrc, false, stop, false);
                     if (!segmentMatch.isEmpty()
                             && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
@@ -332,8 +349,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.TM_SUBSEG,
-                        false, maxPenalty);
+                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty);
             }
         }
         // fill similarity data only for a result

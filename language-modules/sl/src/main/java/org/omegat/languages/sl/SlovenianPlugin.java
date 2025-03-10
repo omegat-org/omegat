@@ -25,17 +25,24 @@
 
 package org.omegat.languages.sl;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class SlovenianPlugin {
 
     private static final String SLOVENIAN = "org.languagetool.language.Slovenian";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.sl.SlovenianMorfologikDictionary";
 
     private SlovenianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("sl-SI", SLOVENIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("sl_SL",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("sl",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

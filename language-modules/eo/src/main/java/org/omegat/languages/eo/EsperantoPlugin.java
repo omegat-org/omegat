@@ -25,17 +25,22 @@
 
 package org.omegat.languages.eo;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class EsperantoPlugin {
 
     private static final String ESPERANTO = "org.languagetool.language.Esperanto";
+    private static final String DICTIONARY = "org.omegat.languages.eo.EsperantoHunspellDictionary";
 
     private EsperantoPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("eo", ESPERANTO);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("eo",
+                SpellCheckDictionaryType.HUNSPELL, DICTIONARY);
     }
 
     public static void unloadPlugins() {

@@ -49,9 +49,9 @@ import org.omegat.core.KnownException;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.gui.UserPassDialog;
 import org.omegat.core.team2.impl.TeamUtils.Credentials;
-import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 import gen.core.project.RepositoryDefinition;
 
@@ -194,11 +194,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             return getAuthenticatorInstance(kind, url, credentials);
         }
 
-        if (Core.getMainWindow() == null || Core.getMainWindow() instanceof ConsoleWindow) {
+        if (StaticUIUtils.isGUI()) {
+            return ask(kind, url, OStrings.getString("TEAM_USERPASS_FIRST", url.getPath()));
+        } else {
             // run on headless.
             return askCUI(kind, url, OStrings.getString("TEAM_USERPASS_FIRST", url.getPath()));
-        } else {
-            return ask(kind, url, OStrings.getString("TEAM_USERPASS_FIRST", url.getPath()));
         }
     }
 
@@ -207,11 +207,11 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         if (predefinedUser != null && predefinedPass != null) {
             throw new KnownException("TEAM_PREDEFINED_CREDENTIALS_ERROR");
         }
-        if (Core.getMainWindow() == null) {
+        if (StaticUIUtils.isGUI()) {
+            return ask(kind, url, OStrings.getString("TEAM_USERPASS_WRONG", url.getPath()));
+        } else {
             // run on headless.
             return askCUI(kind, url, OStrings.getString("TEAM_USERPASS_WRONG", url.getPath()));
-        } else {
-            return ask(kind, url, OStrings.getString("TEAM_USERPASS_WRONG", url.getPath()));
         }
     }
 

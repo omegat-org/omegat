@@ -85,7 +85,7 @@ public class HHCFilter2 extends HTMLFilter2 {
         Parser parser = new Parser();
         try {
             parser.setInputHTML(all.toString());
-            parser.visitAllNodesWith(new HHCFilterVisitor(this, outfile));
+            parser.visitAllNodesWith(new HHCFilterVisitor(this, outfile, fc));
         } catch (ParserException pe) {
             System.out.println(pe);
         }

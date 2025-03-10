@@ -53,10 +53,10 @@ public class NearString {
         MEMORY,
         /** From external TM in project tm/ folder */
         TM,
-        /** From files */
+        /** From source files */
         FILES,
         /** From sub-segmented match */
-        TM_SUBSEG
+        SUBSEGMENTS
     }
 
     public enum SORT_KEY {
@@ -70,7 +70,7 @@ public class NearString {
 
     /**
      * Constructor.
-     * 
+     *
      * @param key
      *            entry key
      * @param entry
@@ -96,7 +96,7 @@ public class NearString {
 
     /**
      * Constructor, backward compatible.
-     * 
+     *
      * @param key
      *            entry key
      * @param source
@@ -155,7 +155,7 @@ public class NearString {
 
     /**
      * Merge NearString object.
-     * 
+     *
      * @param ns
      *            NearString to merge.
      * @param key
@@ -259,6 +259,7 @@ public class NearString {
         public final int scoreNoStem;
         /** adjusted similarity score for match including all tokens */
         public final int adjustedScore;
+        /** penalty of the match */
         public final int penalty;
 
         public Scores(int score, int scoreNoStem, int adjustedScore) {

@@ -29,6 +29,8 @@ package org.omegat.filters2.hhc;
 import java.io.BufferedWriter;
 
 import org.htmlparser.Tag;
+
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.FilterVisitor;
 import org.omegat.util.HTMLUtils;
 
@@ -40,8 +42,8 @@ import org.omegat.util.HTMLUtils;
  * @author Didier Briel
  */
 class HHCFilterVisitor extends FilterVisitor {
-    HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter) {
-        super(hhcfilter, bufwriter, null);
+    HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter, FilterContext fc) {
+        super(hhcfilter, bufwriter, null, fc);
     }
 
     // ///////////////////////////////////////////////////////////////////////

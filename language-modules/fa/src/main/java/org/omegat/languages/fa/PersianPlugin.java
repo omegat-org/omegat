@@ -25,11 +25,14 @@
 
 package org.omegat.languages.fa;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class PersianPlugin {
 
     private static final String PERSIAN = "org.languagetool.language.Persian";
+    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.fa.PersianHunspellDictionary";
 
     private PersianPlugin() {
     }
@@ -37,6 +40,8 @@ public final class PersianPlugin {
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("fa-IR", PERSIAN);
         LanguageManager.registerLTLanguage("fa-AF", PERSIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("fa", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
     }
 
     public static void unloadPlugins() {

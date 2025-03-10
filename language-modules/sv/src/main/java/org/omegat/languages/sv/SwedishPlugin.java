@@ -25,11 +25,14 @@
 
 package org.omegat.languages.sv;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class SwedishPlugin {
 
     private static final String SWEDISH = "org.languagetool.language.Swedish";
+    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.sv.SwedishHunspellDictionary";
 
     private SwedishPlugin() {
     }
@@ -37,6 +40,10 @@ public final class SwedishPlugin {
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("sv-SE", SWEDISH);
         LanguageManager.registerLTLanguage("sv-FI", SWEDISH);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("sv_SE", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("sv", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
     }
 
     public static void unloadPlugins() {

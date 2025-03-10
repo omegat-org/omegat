@@ -2,13 +2,13 @@
 <!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
 <section id="menus.tools">
-  <title id="menus.tools.title"><guimenu>Tools</guimenu></title>
+  <title id="menus.tools.title"><link linkend="menus.tools"> </link><guimenu>Tools</guimenu></title>
 
   <para>This menu gives you access to a number of tools, including QA
   validation, match reports, an aligner, and scripting.</para>
 
   <example id="example.check.issues">
-	<title id="example.check.issues.title">Shortcut description example</title>
+	<title id="example.check.issues.title"><link linkend="example.check.issues"> </link>Shortcut description example</title>
 	<para>On Windows and Linux:
 	<keycombo><keycap>Control</keycap><keycap>Shift</keycap><keycap>V</keycap></keycombo></para>
 
@@ -21,9 +21,7 @@
 
   <variablelist>
     <varlistentry id="menus.tools.check.issues">
-      <term id="menus.tools.check.issues.title"><guimenuitem>Check
-      Issues...</guimenuitem>
-      <keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
+	  <term id="menus.tools.check.issues.title"><link linkend="menus.tools.check.issues"> </link><guimenuitem>Check Issues...</guimenuitem><keycombo><keycap>C</keycap><keycap>S</keycap><keycap>V</keycap></keycombo></term>
       <listitem>
         <para>This quality assurance tool carries out all automatic checks in
         one go and displays the results in a window.</para>
@@ -45,8 +43,9 @@
 
           <listitem>
             <para><guilabel>Spelling Issues</guilabel> (optional): detects
-            spelling mistakes. Only works if a spelling dictionary is
-            installed. See the <link linkend="dialog.preferences.spellchecker"
+            spelling mistakes. It works when there is a supported language module,
+            or a user local custom dictionary for the target language.
+            See the <link linkend="dialog.preferences.spellchecker"
             endterm="dialog.preferences.spellchecker.title"/> preferences for
             details.</para>
           </listitem>
@@ -55,7 +54,7 @@
             <para><guilabel>Terminology Issues</guilabel> (optional): detects
             all the glossary items that are not properly translated. See the
             <link linkend="dialogs.preferences.glossary"
-            endterm="dialogs.preferences.glossary.title"/> preferences for
+				  endterm="dialogs.preferences.glossary.title"/> preferences for
             details.</para>
           </listitem>
 
@@ -104,9 +103,7 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.check.issues.for.current.document">
-      <term
-      id="menus.tools.check.issues.for.current.document.title"><guimenuitem>Check
-      Issues for Current File</guimenuitem></term>
+	  <term id="menus.tools.check.issues.for.current.document.title"><link linkend="menus.tools.check.issues.for.current.document"> </link><guimenuitem>Check Issues for Current File</guimenuitem></term>
       <listitem>
         <para>As above, but only for the document currently displayed in the
         Editor pane.</para>
@@ -114,8 +111,7 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.statistics">
-      <term
-      id="menus.tools.statistics.title"><guimenuitem>Statistics</guimenuitem></term>
+	  <term id="menus.tools.statistics.title"><link linkend="menus.tools.statistics"> </link><guimenuitem>Statistics</guimenuitem></term>
       <listitem>
         <para>Opens a new window and displays project statistics such as the
         overall project word count or segment totals, and totals for every file
@@ -171,8 +167,7 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.match.statistics">
-      <term id="menus.tools.match.statistics.title"><guimenuitem>Match
-      Statistics</guimenuitem></term>
+	  <term id="menus.tools.match.statistics.title"><link linkend="menus.tools.match.statistics"> </link><guimenuitem>Match Statistics</guimenuitem></term>
       <listitem>
         <para>Displays the match statistics for the project, which consist of 
         the number of repetitions, exact matches, fuzzy matches and no-matches 
@@ -188,8 +183,7 @@
     </varlistentry>
 	
     <varlistentry id="menus.tools.match.statistics.per.file">
-      <term id="menus.tools.match.statistics.per.file.title"><guimenuitem>Match
-      Statistics per File</guimenuitem></term>
+	  <term id="menus.tools.match.statistics.per.file.title"><link linkend="menus.tools.match.statistics.per.file"> </link><guimenuitem>Match Statistics per File</guimenuitem></term>
       <listitem>
         <para>Displays the individual match statistics, which consist of the
         number of repetitions, exact matches, fuzzy matches and no-matches for
@@ -205,8 +199,7 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.align.files">
-      <term id="menus.tools.align.files.title"><guimenuitem>Align
-      Files...</guimenuitem></term>
+	  <term id="menus.tools.align.files.title"><link linkend="menus.tools.align.files"> </link><guimenuitem>Align Files...</guimenuitem></term>
       <listitem>
         <para>Select the two files to align (the source file and its
         translation) and click <guibutton>OK</guibutton> to open the <link
@@ -223,8 +216,7 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.scripting">
-      <term
-      id="menus.tools.scripting.title"><guimenuitem>Scripting...</guimenuitem></term>
+	  <term id="menus.tools.scripting.title"><link linkend="menus.tools.scripting"> </link><guimenuitem>Scripting...</guimenuitem></term>
       <listitem>
         <para>Opens the <link linkend="windows.scripts"
         endterm="windows.scripts.title"/> window, which allows you to set the
@@ -256,8 +248,7 @@
     </varlistentry>
 
     <varlistentry id="menus.tools.external.search.commands">
-      <term id="menus.tools.external.search.commands.title">External search
-      commands</term>
+	  <term id="menus.tools.external.search.commands.title"><link linkend="menus.tools.external.search.commands"> </link>External search commands</term>
       <listitem>
         <para>If you have defined external searches in the <link
         linkend="dialogs.preferences.external.searches"

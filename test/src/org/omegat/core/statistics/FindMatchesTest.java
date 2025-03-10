@@ -186,7 +186,7 @@ public class FindMatchesTest {
         assertEquals("weird behavior", result.get(0).translation);
         assertTrue(result.get(0).projs[0].contains("penalty-010"));
         // match segmented, with penalty
-        assertEquals("TM_SUBSEG", result.get(1).comesFrom.name());
+        assertEquals("SUBSEGMENTS", result.get(1).comesFrom.name());
         assertEquals(90, result.get(1).scores[0].score);
         assertTrue(result.get(1).projs[0].contains("penalty-010"));
     }

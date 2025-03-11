@@ -1,15 +1,55 @@
 plugins {
+    id 'groovy'
     id 'groovy-gradle-plugin'
 }
 
+gradlePlugin {
+    plugins {
+        documentationPlugin {
+            id = 'org.omegat.documentation'
+            implementationClass = 'org.omegat.documentation.DocumentationPlugin'
+        }
+    }
+}
+
 repositories {
+    mavenCentral()
+    // 'repository' for getting docbook xsd
+    ivy {
+        url = 'https://docbook.org/xml'
+        patternLayout {
+            artifact '[revision]/[module]-[revision].[ext]'
+        }
+        content {
+            includeGroup 'docbook'
+        }
+        metadataSources {
+            artifact()
+        }
+    }
     gradlePluginPortal()
 }
 
 dependencies {
+    compileOnly gradleApi()
+    compileOnly localGroovy()
+
+    // 3rd party gradle plugin
     implementation 'com.github.ben-manes:gradle-versions-plugin:0.52.0'
     implementation 'com.github.spotbugs.snom:spotbugs-gradle-plugin:6.1.5'
     implementation 'com.diffplug.spotless:spotless-plugin-gradle:7.0.2'
     implementation 'edu.sc.seis.launch4j:launch4j:3.0.6'
     implementation 'org.hidetake.ssh:org.hidetake.ssh.gradle.plugin:2.11.2'
+
+    // dependencies on Maven
+    implementation 'xerces:xercesImpl:2.12.2'
+    implementation 'xml-resolver:xml-resolver:1.2'
+    implementation 'net.sf.docbook:docbook-xsl:1.79.1:resources@zip'
+    implementation 'tokyo.northside:whc:3.6.0'
+    implementation 'xalan:xalan:2.7.3'
+    implementation 'xalan:serializer:2.7.3'
+
+    // dependencies not on Maven
+    // https://docbook.org/xml/4.5/docbook-xml-4.5.zip
+    implementation 'docbook:docbook-xml:4.5:resources@zip'
 }

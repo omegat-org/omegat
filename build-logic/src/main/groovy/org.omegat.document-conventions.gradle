@@ -64,15 +64,16 @@ ext.makeDocumentationTasks = { lang ->
     }
 
     def copyImages = tasks.register("copyImages${lang.capitalize()}", Copy) {
-        description = 'Copy Images and CSS file to target'
+        description 'Copy Images and CSS file to target'
         into layout.buildDirectory.dir("docs/manual/${lang}/images/")
-        from new File(documentRootDir, "manual/${lang}/images/")
+        from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
+        from layout.projectDirectory.file("images/OmegaT.svg")
     }
 
     def docbookHtml = tasks.register("docbookHtml${lang.capitalize()}", DocbookHtmlTask) {
         description = 'Generate chunked HTML documentation'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/xhtml.xsl"))
-        inputFile.set(file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
+        inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         dependsOn(docbookInclude, copyImages, copyCss)
     }

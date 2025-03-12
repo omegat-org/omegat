@@ -1,5 +1,5 @@
 [versions]
-slf4j = "2.0.7"
+slf4j = "2.0.17"
 slf4j-format = "0.5.1"
 groovy = "4.0.26"
 junit = "4.13.2"

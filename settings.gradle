@@ -34,7 +34,6 @@ develocity {
 rootProject.name = 'OmegaT'
 include("machinetranslators:apertium",
         "machinetranslators:belazar",
-        "machinetranslators:deepl",
         "machinetranslators:google",
         "machinetranslators:ibmwatson",
         "machinetranslators:mymemory",

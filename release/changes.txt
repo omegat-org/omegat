@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  55 Enhancement
+  56 Enhancement
   84 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Support Windows 11 and Linux on ARM64 for development environment
+    https://sourceforge.net/p/omegat/feature-requests/1773/
 
   - Word selection according to the language of Source/Target by clicking in the editor pane
   https://sourceforge.net/p/omegat/feature-requests/1770/

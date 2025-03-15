@@ -25,8 +25,8 @@ ext {
             }
         }
     }
-    providedCoreLibsDir = file('lib/provided/core')
-    providedModuleLibsDir = file('lib/provided/module')
+    providedCoreLibsDir = file(layout.settingsDirectory.dir('lib/provided/core'))
+    providedModuleLibsDir = file(layout.settingsDirectory.dir('lib/provided/module'))
 }
 
 repositories {
@@ -55,7 +55,7 @@ tasks.named("test", Test) {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    systemProperty 'java.util.logging.config.file', layout.settingsDirectory.file("config/test/logger.properties").asFile
 }
 
 javadoc {
@@ -82,7 +82,7 @@ spotbugs {
 }
 
 tasks.register('spotbugsMainReport') {
-    def reportFile = file("build/reports/spotbugs/main.txt")
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/main.txt").get().asFile
     doLast {
         if (reportFile.exists()) {
             println()
@@ -95,7 +95,7 @@ tasks.register('spotbugsMainReport') {
 }
 
 tasks.register('spotbugsTestReport') {
-    def reportFile = file("build/reports/spotbugs/test.txt")
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/test.txt").get().asFile
     doLast {
         if (reportFile.exists()) {
             println()
@@ -140,7 +140,7 @@ spotless {
     enforceCheck = false
     java {
         targetExclude 'src/gen/**'
-        eclipse().configFile file("${rootDir}/config/spotless/eclipse-formatting.xml")
+        eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
         removeUnusedImports()
     }
 }

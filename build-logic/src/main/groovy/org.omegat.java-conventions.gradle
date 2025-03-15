@@ -9,7 +9,7 @@ plugins {
 }
 
 // Definition of OmegaT versioning
-def localPropsFile = file('local.properties')
+def localPropsFile = layout.settingsDirectory.file('local.properties')
 
 // Define target Java version to compatible.
 def javaVersion = 11
@@ -25,8 +25,8 @@ ext {
             }
         }
     }
-    providedCoreLibsDir = file('lib/provided/core')
-    providedModuleLibsDir = file('lib/provided/module')
+    providedCoreLibsDir = file(layout.settingsDirectory.dir('lib/provided/core'))
+    providedModuleLibsDir = file(layout.settingsDirectory.dir('lib/provided/module'))
 }
 
 repositories {
@@ -82,7 +82,7 @@ spotbugs {
 }
 
 tasks.register('spotbugsMainReport') {
-    def reportFile = file("build/reports/spotbugs/main.txt")
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/main.txt")
     doLast {
         if (reportFile.exists()) {
             println()
@@ -95,7 +95,7 @@ tasks.register('spotbugsMainReport') {
 }
 
 tasks.register('spotbugsTestReport') {
-    def reportFile = file("build/reports/spotbugs/test.txt")
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/test.txt")
     doLast {
         if (reportFile.exists()) {
             println()
@@ -140,7 +140,7 @@ spotless {
     enforceCheck = false
     java {
         targetExclude 'src/gen/**'
-        eclipse().configFile file("${rootDir}/config/spotless/eclipse-formatting.xml")
+        eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
         removeUnusedImports()
     }
 }

@@ -30,7 +30,7 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "8.12" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
@@ -251,7 +251,8 @@ dependencies {
 }
 
 jar {
-    def omtPlugins = loadProperties(file('Plugins.properties'))
+    def pluginProperties = layout.settingsDirectory.file('Plugins.properties')
+    def omtPlugins = loadProperties(pluginProperties.asFile)
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
@@ -303,12 +304,12 @@ distributions {
             // /docs
             // ...../greetings/<lang>/first_steps.html
             // ...../manuals/<lang>.zip
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 into 'docs'
                 include 'doc-license.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 // ** Caution!! **
                 // 'readme*.txt' and 'changes.txt' are expected
                 // in releases/win32-specific/OmegaT.iss
@@ -328,16 +329,16 @@ distributions {
             project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
                 from(it.outputs) { into 'docs/manuals' }
             }
-            from('scripts') {
+            from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'
             }
-            from('images') {
+            from(layout.settingsDirectory.dir('images')) {
                 into 'images'
             }
-            from('release/plugins-specific') {
+            from(layout.settingsDirectory.dir('release/plugins-specific')) {
                 into 'plugins'
             }
-            from('release/linux-specific') {
+            from(layout.settingsDirectory.dir('release/linux-specific')) {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
                         JAR_SUBST           : omegatJarFilename
@@ -346,19 +347,19 @@ distributions {
                     unix(0755)
                 }
             }
-            from('release/win32-specific') {
+            from(layout.settingsDirectory.dir('release/win32-specific')) {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
                         JAR_SUBST           : omegatJarFilename
                 ])
             }
-            from('lib/licenses') {
+            from(layout.settingsDirectory.dir('lib/licenses')) {
                 into 'lib'
             }
             // system core plugins into modules
             into('modules') {
                 from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
-                from('releases/modules-specific')
+                from(layout.settingsDirectory.dir('releases/modules-specific'))
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -384,10 +385,10 @@ distributions {
             from(processResources) {
                 into('src')
             }
-            into('lib/provided/core') {
+            into(layout.settingsDirectory.dir('lib/provided/core')) {
                 from configurations.runtimeClasspath
             }
-            into('lib/provided/module') {
+            into(layout.settingsDirectory.dir('lib/provided/module')) {
                 // collect project runtime dependencies in all subprojects and sourceSets
                 from {subprojects.findAll { it.getSubprojects().isEmpty()}
                         .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')

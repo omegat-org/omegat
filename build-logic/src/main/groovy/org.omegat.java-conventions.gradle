@@ -9,7 +9,7 @@ plugins {
 }
 
 // Definition of OmegaT versioning
-def localPropsFile = layout.settingsDirectory.file('local.properties')
+def localPropsFile = file('local.properties')
 
 // Define target Java version to compatible.
 def javaVersion = 11
@@ -55,7 +55,7 @@ tasks.named("test", Test) {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    systemProperty 'java.util.logging.config.file', layout.settingsDirectory.file("config/test/logger.properties").asFile
 }
 
 javadoc {
@@ -82,7 +82,7 @@ spotbugs {
 }
 
 tasks.register('spotbugsMainReport') {
-    def reportFile = layout.buildDirectory.file("reports/spotbugs/main.txt")
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/main.txt").get().asFile
     doLast {
         if (reportFile.exists()) {
             println()
@@ -95,7 +95,7 @@ tasks.register('spotbugsMainReport') {
 }
 
 tasks.register('spotbugsTestReport') {
-    def reportFile = layout.buildDirectory.file("reports/spotbugs/test.txt")
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/test.txt").get().asFile
     doLast {
         if (reportFile.exists()) {
             println()

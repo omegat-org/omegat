@@ -7,14 +7,7 @@ plugins {
     id 'signing'
 }
 
-def documentRootDir = file('src_docs')
-def styleRootDir = file('src_docs/xsl')
-
-docConfig {
-    styleDir.set(styleRootDir)
-    docRoot.set(documentRootDir)
-    outputRoot.set(layout.buildDirectory.dir('docs'))
-}
+def documentRootDir = 'src_docs'
 
 tasks.register('genDocIndex', Copy) {
     def inputTemplate = layout.projectDirectory.file('src_docs/template/index.html')
@@ -60,13 +53,13 @@ ext.makeDocumentationTasks = { lang ->
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
         description = 'Copy Images and CSS file to target'
         into layout.buildDirectory.dir("docs/manual/${lang}")
-        from new File(documentRootDir, 'style/omegat.css')
+        from layout.projectDirectory.file("${documentRootDir}/style/omegat.css")
     }
 
     def copyImages = tasks.register("copyImages${lang.capitalize()}", Copy) {
-        description 'Copy Images and CSS file to target'
+        description = 'Copy Images and CSS file to target'
         into layout.buildDirectory.dir("docs/manual/${lang}/images/")
-        from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
+        from fileTree(dir: layout.projectDirectory.dir("${documentRootDir}/manual/${lang}/images/"), include: "*.png")
         from layout.projectDirectory.file("images/OmegaT.svg")
     }
 
@@ -123,8 +116,7 @@ ext.makeDocumentationTasks = { lang ->
 
     def zipTask= tasks.register("manualZip${lang.capitalize()}", Zip) {
         from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
-        exclude 'docs/manual/index.html'
-        from fileTree(dir: "src_docs/${lang}", include: '**/version*.properties')
+        from fileTree(dir: "${documentRootDir}/manual/${lang}", include: '**/version*.properties')
         archiveFileName = "${lang}.zip"
         destinationDirectory = file(layout.buildDirectory.dir("docs/manuals/"))
         dependsOn buildDocumentTask
@@ -184,7 +176,7 @@ assemble.dependsOn(firstSteps)
 
 ext.makeFirstStepTask = { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
-        from layout.projectDirectory.file("src_docs/style/omegat.css")
+        from layout.projectDirectory.file("${documentRootDir}/style/omegat.css")
         into layout.buildDirectory.dir("docs/greetings/${lang}/")
     }
     def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtmlTask) {

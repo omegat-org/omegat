@@ -811,7 +811,7 @@ public class EditorController implements IEditor {
             // clear undo history.
             ((NotesTextArea) notes).clearHistory();
         }
-
+        
         // then add new marks
         markerController.reprocessImmediately(builder);
 
@@ -2253,4 +2253,9 @@ public class EditorController implements IEditor {
     public IAutoCompleter getAutoCompleter() {
         return editor.autoCompleter;
     }
+    
+    public void unlockSegment() {
+        editor.unlockSegment();
+    }
+
 }

@@ -110,6 +110,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
                     miMultiple.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             Core.getEditor().setAlternateTranslationForCurrentEntry(true);
+                            Core.getEditor().unlockSegment();
                         }
                     });
                 }

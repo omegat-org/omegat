@@ -95,17 +95,23 @@ public class FindMatchesThreadTest {
         prop.setTargetLanguage("fr");
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
-        IProject project = new TestProject(prop, TMX_SEGMENT, new LuceneCJKTokenizer(), new LuceneFrenchTokenizer());
+        IProject project = new TestProject(prop, TMX_SEGMENT, new LuceneCJKTokenizer(),
+                new LuceneFrenchTokenizer());
         Core.setProject(project);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         List<NearString> result = FindMatchesThread.finderSearch(project, segmenter, SOURCE_TEXT, () -> false,
                 30);
         assertEquals(2, result.size());
+        //
         assertEquals(SOURCE_TEXT, result.get(0).source);
         assertEquals("TM", result.get(0).comesFrom.name());
         assertEquals(90, result.get(0).scores[0].score);
         assertEquals("weird behavior", result.get(0).translation);
-     }
+        //
+        assertEquals(SOURCE_TEXT, result.get(1).source);
+        assertEquals("SUBSEGMENTS", result.get(1).comesFrom.name());
+        assertEquals(90, result.get(1).scores[0].score);
+    }
 
     static class TestProject extends NotLoadedProject implements IProject {
         private final ProjectProperties prop;

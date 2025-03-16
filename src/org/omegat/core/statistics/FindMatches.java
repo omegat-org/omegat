@@ -349,7 +349,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.TM, false, maxPenalty);
+                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty);
             }
         }
         // fill similarity data only for a result
@@ -577,5 +577,12 @@ public class FindMatches {
      */
     @SuppressWarnings("serial")
     public static class StoppedException extends RuntimeException {
+    }
+
+    /**
+     * for unit test.
+     */
+    List<NearString> searchForTest(String searchSentence) {
+        return search(searchSentence, false, () -> false, false);
     }
 }

@@ -132,7 +132,7 @@ public class FindMatchesTest {
         finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         result = finder.search(srcText, false, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
-        assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
+        assertEquals("Hit segmented tmx records", 100, result.get(0).scores[0].score);
         assertEquals(100, result.get(0).scores[0].scoreNoStem);
         assertEquals(100, result.get(0).scores[0].adjustedScore);
         assertEquals(expectWhole, result.get(0).translation);
@@ -248,7 +248,7 @@ public class FindMatchesTest {
         assertEquals("weird behavior", result.get(0).translation);
         assertTrue(result.get(0).projs[0].contains("penalty-010"));
         // match segmented, with penalty
-        assertEquals("TM", result.get(1).comesFrom.name());
+        assertEquals("SUBSEGMENTS", result.get(1).comesFrom.name());
         assertEquals(90, result.get(1).scores[0].score);
         assertEquals(10, result.get(1).scores[0].penalty);
         // FIXME

@@ -85,17 +85,18 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
             return;
         }
         try {
-            boolean ignored = tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
+            tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
         } catch (IOException e) {
             Log.logWarningRB("TIPOFTHEDAY_FILE_LOAD_EXCEPTION", e);
         }
     }
 
     public static class Records {
-        private List<TipRecord> tips;
+        public List<TipRecord> tips;
 
         /**
          * Return list of TipRecord object.
+         * 
          * @return list of TipRecord object.
          */
         public List<TipRecord> getTips() {
@@ -104,7 +105,9 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
         /**
          * Set list of TipRecord object.
-         * @param tips list of TipRecord object to set.
+         * 
+         * @param tips
+         *            list of TipRecord object to set.
          */
         public void setTips(final List<TipRecord> tips) {
             this.tips = tips;
@@ -117,6 +120,7 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
         /**
          * Get a name of Tip record.
+         * 
          * @return name.
          */
         public String getName() {
@@ -125,7 +129,9 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
         /**
          * Set a name of Tip record.
-         * @param name to set.
+         * 
+         * @param name
+         *            to set.
          */
         public void setName(final String name) {
             this.name = name;
@@ -133,6 +139,7 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
         /**
          * Get a HTML file.
+         * 
          * @return a HTML file.
          */
         public String getFile() {
@@ -141,7 +148,9 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
 
         /**
          * set a HTML file.
-         * @param file to set.
+         * 
+         * @param file
+         *            to set.
          */
         public void setFile(final String file) {
             this.file = file;

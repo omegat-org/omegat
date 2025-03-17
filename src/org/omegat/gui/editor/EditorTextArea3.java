@@ -237,8 +237,12 @@ public class EditorTextArea3 extends JEditorPane {
      * @return
      */
     public boolean isInActiveTranslation(int position) {
-        return (position >= getOmDocument().getTranslationStart()
-                && position <= getOmDocument().getTranslationEnd());
+        Document3  doc = getOmDocument();
+        if (doc == null) {
+            return false;
+        }
+        return (position >= doc.getTranslationStart()
+                && position <= doc.getTranslationEnd());
     }
 
     protected final transient MouseListener mouseListener = new MouseAdapter() {

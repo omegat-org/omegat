@@ -1032,8 +1032,9 @@ public class RealProject implements IProject {
 
                         @Override
                         public void parseBaseFile(File file) throws Exception {
-                            baseTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, null);
+                            baseTMX = new ProjectTMX();
+                            baseTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
                         }
 
                         @Override
@@ -1214,8 +1215,9 @@ public class RealProject implements IProject {
         File file = new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                    config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
+            projectTMX = new ProjectTMX(checkOrphanedCallback);
+            projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
         } catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;

@@ -77,10 +77,6 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.addAll '-Xlint', '-Werror'
 }
 
-spotbugs {
-    reportLevel = com.github.spotbugs.snom.Confidence.valueOf('HIGH')
-}
-
 tasks.register('spotbugsMainReport') {
     def reportFile = file("build/reports/spotbugs/main.txt")
     doLast {

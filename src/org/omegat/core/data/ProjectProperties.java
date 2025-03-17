@@ -87,7 +87,7 @@ public class ProjectProperties {
      * Default constructor to initialize fields (to get no NPEs). Real values
      * should be applied after creation.
      */
-    public ProjectProperties(File projectDir) throws Exception {
+    public ProjectProperties(File projectDir) {
         projectRootDir = projectDir;
         projectName = projectDir.getName();
         setSourceRoot(getProjectRoot() + OConsts.DEFAULT_SOURCE + File.separator);
@@ -110,7 +110,11 @@ public class ProjectProperties {
         setTargetLanguage("UK-UA");
 
         loadProjectSRX();
-        loadProjectFilters();
+        try {
+            loadProjectFilters();
+        } catch (IOException ignored) {
+            projectFilters = new Filters();
+        }
 
         setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
         setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
@@ -490,13 +494,12 @@ public class ProjectProperties {
     }
 
     public boolean isTeamProject() {
-        if (repositories == null) {
-            return false;
-        }
-        for (RepositoryDefinition repositoryDefinition : repositories) {
-            for (RepositoryMapping repositoryMapping : repositoryDefinition.getMapping()) {
-                if ("".equals(repositoryMapping.getLocal()) || "/".equals(repositoryMapping.getLocal())) {
-                    return true;
+        if (hasRepositories()) {
+            for (RepositoryDefinition repositoryDefinition : repositories) {
+                for (RepositoryMapping repositoryMapping : repositoryDefinition.getMapping()) {
+                    if ("".equals(repositoryMapping.getLocal()) || "/".equals(repositoryMapping.getLocal())) {
+                        return true;
+                    }
                 }
             }
         }
@@ -636,7 +639,7 @@ public class ProjectProperties {
     }
 
     private String projectName;
-    private final List<String> sourceRootExcludes = new ArrayList<String>();
+    private final List<String> sourceRootExcludes = new ArrayList<>();
     private List<RepositoryDefinition> repositories;
 
     private Language sourceLanguage;

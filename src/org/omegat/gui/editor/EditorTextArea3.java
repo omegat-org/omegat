@@ -61,6 +61,7 @@ import javax.swing.text.Utilities;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
@@ -225,7 +226,7 @@ public class EditorTextArea3 extends JEditorPane {
      * initialized with OmDocument, it will contain another Document
      * implementation. In this case, we don't need it.
      */
-    public Document3 getOmDocument() {
+    public @Nullable Document3 getOmDocument() {
         try {
             return (Document3) getDocument();
         } catch (ClassCastException ex) {
@@ -243,6 +244,9 @@ public class EditorTextArea3 extends JEditorPane {
     public boolean isInActiveTranslation(int position) {
         Document3 doc = getOmDocument();
         if (doc == null) {
+            return false;
+        }
+        if (!doc.isEditMode()) {
             return false;
         }
         return (position >= doc.getTranslationStart() && position <= doc.getTranslationEnd());

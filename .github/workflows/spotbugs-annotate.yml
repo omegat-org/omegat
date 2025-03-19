@@ -23,5 +23,7 @@ jobs:
     - name: run spotbugs
       run: ./gradlew --continue -PenvIsCi spotbugsMain spotbugsTest
     - name: run spotbugsReport
-      if: github.event_name == 'pull_request' && failure()
-      run: ./gradlew --scan -PenvIsCi spotbugsReport
+      if: failure()
+      run: |
+        ./gradlew --scan -PenvIsCi spotbugsReport
+        exit 1

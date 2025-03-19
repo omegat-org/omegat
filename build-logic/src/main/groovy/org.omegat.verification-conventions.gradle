@@ -217,17 +217,15 @@ tasks.register('spotbugsReport') {
         ["main", "test"].each { target ->
             def reportFile = project.file("build/reports/spotbugs/${target}.txt")
             if (reportFile.exists()) {
+                def sep = "-".repeat(40)
                 def ppath = project.path
                 if (ppath.equals(":")) {
                     ppath = "OmegaT root project"
                 }
-                println("Report from project: ${ppath} for ${target} code") // Use full project path
-                println("-".repeat(40)) // Separator for better readability
+                println(sep + " Report from project: ${ppath} for ${target} code" + sep) // Use full project path
                 reportFile.eachLine { line ->
                     println(line)
                 }
-                println("-".repeat(40)) // End separator
-                println()
             }
         }
     }

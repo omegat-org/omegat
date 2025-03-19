@@ -5,6 +5,9 @@ plugins {
     id 'jacoco-report-aggregation'
 }
 
+// Flag to detect CI/CD environment
+def envIsCi = project.hasProperty('envIsCi') as Boolean
+
 jacoco {
     toolVersion = "0.8.12"
 }
@@ -209,4 +212,41 @@ tasks.withType(JavaExec).configureEach {
     maxHeapSize = findProperty('runMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
+}
+
+
+spotbugs {
+    reportLevel = com.github.spotbugs.snom.Confidence.valueOf("DEFAULT")
+    extraArgs = ['-longBugCodes']
+    jvmArgs = ['-Duser.language=en']
+    // onlyAnalyze <classes/packages>  only analyze given classes and packages;
+    // end with .* to indicate classes in a package, .- to indicate a package prefix
+    onlyAnalyze = ['org.omegat.-']
+}
+
+tasks.register('spotbugsMainReport') {
+    def reportFile = file("build/reports/spotbugs/main.txt")
+    doLast {
+        if (reportFile.exists()) {
+            println()
+            reportFile.readLines().forEach {
+                println(it)
+            }
+        }
+    }
+    group = 'verification'
+}
+
+spotbugsMain {
+    reports {
+        text.required = true
+        html.required = true
+    }
+}
+
+spotbugsTest {
+    reports {
+        text.required = true
+        html.required = true
+    }
 }

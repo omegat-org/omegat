@@ -74,6 +74,30 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs.addAll '-Xlint', '-Werror'
 }
 
+spotbugs {
+    reportLevel = com.github.spotbugs.snom.Confidence.valueOf("DEFAULT")
+    extraArgs = ['-longBugCodes']
+    jvmArgs = ['-Duser.language=en']
+    // onlyAnalyze <classes/packages>  only analyze given classes and packages;
+    // end with .* to indicate classes in a package, .- to indicate a package prefix
+    onlyAnalyze = ['org.omegat.-']
+    runOnCheck = false
+}
+
+spotbugsMain {
+    reports {
+        text.required = true
+        html.required = true
+    }
+}
+
+spotbugsTest {
+    reports {
+        text.required = true
+        html.required = true
+    }
+}
+
 checkstyle {
     toolVersion = libs.versions.checkstyle.get()
 }

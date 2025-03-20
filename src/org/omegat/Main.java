@@ -127,16 +127,16 @@ public final class Main {
     }
 
     /** Project location for a load on startup. */
-    protected static File projectLocation = null;
+    private static File projectLocation = null;
 
     /** Remote project location. */
-    protected static String remoteProject = null;
+    private static String remoteProject = null;
 
     /** Execution command line parameters. */
-    protected static final Map<String, String> PARAMS = new TreeMap<>();
+    private static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
-    protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
         if (args.length > 0
@@ -334,7 +334,7 @@ public final class Main {
     /**
      * Execute standard GUI.
      */
-    protected static int runGUI() {
+    private static int runGUI() {
         UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
 
         // macOS-specific - they must be set BEFORE any GUI calls
@@ -392,7 +392,7 @@ public final class Main {
     /**
      * Execute in console mode for translate.
      */
-    protected static int runConsoleTranslate() throws Exception {
+    private static int runConsoleTranslate() throws Exception {
         Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
@@ -530,7 +530,7 @@ public final class Main {
     /**
      * Execute in console mode for translate.
      */
-    protected static int runCreatePseudoTranslateTMX() throws Exception {
+    private static int runCreatePseudoTranslateTMX() throws Exception {
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));

@@ -264,14 +264,19 @@ public final class Main {
             command.addAll(CLIParameters.unparseArgs(PARAMS));
         } else {
             // assumes jpackage
-            javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
-            if (!javaBin.toFile().exists()) {
-                // abort restart
-                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+            var installDir = StaticUtils.installDir();
+            if (installDir == null) {
                 return;
+            } else {
+                javaBin = Paths.get(installDir).getParent().resolve("bin/OmegaT");
+                if (javaBin.toFile().exists()) {
+                    // abort restart
+                    Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                    return;
+                }
+                command.add(javaBin.toString());
+                command.addAll(CLIParameters.unparseArgs(PARAMS));
             }
-            command.add(javaBin.toString());
-            command.addAll(CLIParameters.unparseArgs(PARAMS));
         }
         if (projectDir != null) {
             command.add(projectDir);
@@ -283,7 +288,8 @@ public final class Main {
             builder.start();
             System.exit(0);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.log(e);
+            System.exit(1);
         }
     }
 

@@ -349,27 +349,12 @@ public final class Main {
         }
 
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-
-        // Set X11 application class name to make some desktop user interfaces
-        // (like Gnome Shell) recognize OmegaT
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Class<?> cls = toolkit.getClass();
-        try {
-            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
-                Field field = cls.getDeclaredField("awtAppClassName");
-                if (field.trySetAccessible()) {
-                    field.set(toolkit, "OmegaT");
-                }
-            }
-        } catch (Exception ignored) {
-        }
-
+        tweakX11AppName();
         System.setProperty("swing.aatext", "true");
         try {
             Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
-            showError(ex);
             return 1;
         }
 
@@ -393,6 +378,22 @@ public final class Main {
             }
         });
         return 0;
+    }
+
+    private static void tweakX11AppName() {
+        try {
+            // Set X11 application class name to make some desktop user interfaces
+            // (like Gnome Shell) recognize OmegaT
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Class<?> cls = toolkit.getClass();
+            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
+                Field field = cls.getDeclaredField("awtAppClassName");
+                if (field.trySetAccessible()) {
+                    field.set(toolkit, "OmegaT");
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        }
     }
 
     /**

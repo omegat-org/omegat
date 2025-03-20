@@ -41,6 +41,11 @@
             <Bug code="PA" />
         </Not>
     </Match>
+    <!-- Skip Core class warnings caused by application class design issue -->
+    <Match>
+        <Class name="org\.omegat\.core\.Core"/>
+        <Bug code="MS_EXPOSE_REP"/>
+    </Match>
     <!-- All bugs in test classes, except for JUnit-specific bugs -->
     <Match>
         <Class name="~.*\.*Test" />

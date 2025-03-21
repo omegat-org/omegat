@@ -38,13 +38,25 @@
             <Class name="~.*\.gui\.preferences\.view\.*Panel" />
         </Or>
         <Not>
-            <Bug code="PA" />
+            <Bug pattern="PA" />
         </Not>
     </Match>
-    <!-- Skip Core class warnings caused by application class design issue -->
+    <!-- Skip Core class warnings caused by application class design issue.
+       Core class is designed to store application status as static fields
+       and expose it around the application.
+       This is not thread safe, test unfriendly, and possible problems.
+     -->
     <Match>
-        <Class name="org\.omegat\.core\.Core"/>
-        <Bug code="MS_EXPOSE_REP"/>
+        <Class name="org.omegat.core.Core"/>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,MS_EXPOSE_REP"/>
+    </Match>
+    <!-- Skip EI and EI2 warnings on core packages that are caused by application design issue -->
+    <Match>
+        <Or>
+            <Class name="org.omegat.core.data.ProjectProperties" />
+            <Class name="org.omegat.core.data.RealProject" />
+        </Or>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
     <!-- All bugs in test classes, except for JUnit-specific bugs -->
     <Match>

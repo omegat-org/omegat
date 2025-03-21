@@ -81,6 +81,7 @@ spotbugs {
     // onlyAnalyze <classes/packages>  only analyze given classes and packages;
     // end with .* to indicate classes in a package, .- to indicate a package prefix
     onlyAnalyze = ['org.omegat.-']
+    excludeFilter = file("config/spotbugs/exclude.xml")
     runOnCheck = false
 }
 

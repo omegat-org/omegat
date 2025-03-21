@@ -100,17 +100,17 @@ public final class Core {
 
     private static IProject currentProject;
     private static IMainWindow mainWindow;
-    protected static IEditor editor;
+    static IEditor editor;
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
 
-    protected static IAutoSave saveThread;
+    static IAutoSave saveThread;
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
 
-    protected static IGlossaries glossary;
+    static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;

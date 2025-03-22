@@ -83,7 +83,6 @@ public class ConflictDialog extends javax.swing.JDialog {
         lblExplanation.setLineWrap(true);
         lblExplanation.setText(OStrings.getString("CONFLICT_DIALOG_TEXT")); // NOI18N
         lblExplanation.setWrapStyleWord(true);
-        lblExplanation.setDragEnabled(false);
         lblExplanation.setFocusable(false);
         lblExplanation.setOpaque(false);
         jPanel5.add(lblExplanation, java.awt.BorderLayout.NORTH);
@@ -156,25 +155,25 @@ public class ConflictDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnMine;
-    public javax.swing.JButton btnTheirs;
-    public javax.swing.ButtonGroup buttonGroup1;
+    javax.swing.JButton btnMine;
+    javax.swing.JButton btnTheirs;
+    javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton3;
-    public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel2;
-    public javax.swing.JLabel jLabel4;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JPanel jPanel5;
-    public javax.swing.JPanel jPanel6;
-    public javax.swing.JPanel jPanel7;
-    public javax.swing.JPanel jPanel9;
-    public javax.swing.JScrollPane jScrollPane4;
-    public javax.swing.JScrollPane jScrollPane5;
-    public javax.swing.JScrollPane jScrollPane6;
-    public javax.swing.JTextArea lblExplanation;
-    public javax.swing.JTextArea textCenter;
-    public javax.swing.JTextArea textLeft;
-    public javax.swing.JTextArea textRight;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel9;
+    javax.swing.JScrollPane jScrollPane4;
+    javax.swing.JScrollPane jScrollPane5;
+    javax.swing.JScrollPane jScrollPane6;
+    javax.swing.JTextArea lblExplanation;
+    javax.swing.JTextArea textCenter;
+    javax.swing.JTextArea textLeft;
+    javax.swing.JTextArea textRight;
     // End of variables declaration//GEN-END:variables
 }

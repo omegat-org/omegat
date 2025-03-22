@@ -24,7 +24,6 @@
  **************************************************************************/
 package org.omegat.core;
 
-import org.jspecify.annotations.Nullable;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 

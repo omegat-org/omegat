@@ -27,6 +27,8 @@ package org.omegat.core;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
+import java.util.Arrays;
+
 /**
  * Know exception for some problems.
  *
@@ -47,7 +49,7 @@ public class KnownException extends RuntimeException {
     }
 
     public Object[] getParams() {
-        return params;
+        return Arrays.copyOf(params, params.length, Object[].class);
     }
 
     @Override

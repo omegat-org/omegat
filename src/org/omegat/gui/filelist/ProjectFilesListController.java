@@ -112,7 +112,14 @@ import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.UIThreadsUtil;
 
-import static org.omegat.util.gui.DataTableStyling.*;
+import static org.omegat.util.gui.DataTableStyling.AlternatingHighlightRenderer;
+import static org.omegat.util.gui.DataTableStyling.COLOR_ALTERNATING_HILITE;
+import static org.omegat.util.gui.DataTableStyling.PatternHighlightRenderer;
+import static org.omegat.util.gui.DataTableStyling.applyColors;
+import static org.omegat.util.gui.DataTableStyling.applyFont;
+import static org.omegat.util.gui.DataTableStyling.getNumberCellRenderer;
+import static org.omegat.util.gui.DataTableStyling.getPatternHighlightRenderer;
+import static org.omegat.util.gui.DataTableStyling.getTextCellRenderer;
 
 /**
  * Controller for showing all the files of the project.

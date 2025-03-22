@@ -53,7 +53,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -1030,16 +1029,10 @@ public class ProjectFilesListController implements IProjectFilesList {
             List<String> filenames = files.stream().map(fi -> fi.filePath)
                     .sorted(StreamUtil.comparatorByList(Core.getProject().getSourceFilesOrder()))
                     .collect(Collectors.toList());
-            Collections.sort(viewToModel, (o1, o2) -> {
+            viewToModel.sort((o1, o2) -> {
                 int pos1 = filenames.indexOf(files.get(o1).filePath);
                 int pos2 = filenames.indexOf(files.get(o2).filePath);
-                if (pos1 < pos2) {
-                    return -1;
-                } else if (pos1 > pos2) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+                return Integer.compare(pos1, pos2);
             });
 
             recalc();
@@ -1090,7 +1083,7 @@ public class ProjectFilesListController implements IProjectFilesList {
 
         @Override
         public List<? extends SortKey> getSortKeys() {
-            return Arrays.asList(sortKey);
+            return Collections.singletonList(sortKey);
         }
 
         @Override
@@ -1125,32 +1118,32 @@ public class ProjectFilesListController implements IProjectFilesList {
                 return;
             }
             final StatisticsInfo stat = Core.getProject().getStatistics();
-            Collections.sort(viewToModel, (o1, o2) -> {
-                IProject.FileInfo f1 = files.get(o1);
-                IProject.FileInfo f2 = files.get(o2);
+            viewToModel.sort((o1, o2) -> {
+                FileInfo f1 = files.get(o1);
+                FileInfo f2 = files.get(o2);
                 int c = 0;
                 switch (sortKey.getColumn()) {
-                case 0:
-                    c = f1.filePath.compareToIgnoreCase(f2.filePath);
-                    break;
-                case 1:
-                    c = f1.filterFileFormatName.compareToIgnoreCase(f2.filterFileFormatName);
-                    break;
-                case 2:
-                    String fe1 = f1.fileEncoding == null ? "" : f1.fileEncoding;
-                    String fe2 = f2.fileEncoding == null ? "" : f2.fileEncoding;
-                    c = fe1.compareToIgnoreCase(fe2);
-                    break;
-                case 3:
-                    int m1 = f1.entries.size();
-                    int m2 = f2.entries.size();
-                    c = m1 > m2 ? 1 : m1 < m2 ? -1 : 0;
-                    break;
-                case 4:
-                    int n1 = stat.uniqueCountsByFile.get(f1.filePath);
-                    int n2 = stat.uniqueCountsByFile.get(f2.filePath);
-                    c = n1 > n2 ? 1 : n1 < n2 ? -1 : 0;
-                    break;
+                    case 0:
+                        c = f1.filePath.compareToIgnoreCase(f2.filePath);
+                        break;
+                    case 1:
+                        c = f1.filterFileFormatName.compareToIgnoreCase(f2.filterFileFormatName);
+                        break;
+                    case 2:
+                        String fe1 = f1.fileEncoding == null ? "" : f1.fileEncoding;
+                        String fe2 = f2.fileEncoding == null ? "" : f2.fileEncoding;
+                        c = fe1.compareToIgnoreCase(fe2);
+                        break;
+                    case 3:
+                        int m1 = f1.entries.size();
+                        int m2 = f2.entries.size();
+                        c = m1 > m2 ? 1 : m1 < m2 ? -1 : 0;
+                        break;
+                    case 4:
+                        int n1 = stat.uniqueCountsByFile.get(f1.filePath);
+                        int n2 = stat.uniqueCountsByFile.get(f2.filePath);
+                        c = Integer.compare(n1, n2);
+                        break;
                 }
                 if (sortKey.getSortOrder() == SortOrder.DESCENDING) {
                     c = -c;

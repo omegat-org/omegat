@@ -95,7 +95,6 @@ import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.Log;
@@ -105,7 +104,6 @@ import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.DragTargetOverlay;
 import org.omegat.util.gui.DragTargetOverlay.FileDropInfo;
@@ -113,6 +111,8 @@ import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 import org.omegat.util.gui.UIThreadsUtil;
+
+import static org.omegat.util.gui.DataTableStyling.*;
 
 /**
  * Controller for showing all the files of the project.
@@ -139,10 +139,6 @@ public class ProjectFilesListController implements IProjectFilesList {
     private TableFilterPanel filterPanel;
 
     private final Font defaultFont;
-
-    public ProjectFilesListController(MainWindow parent) {
-        this();
-    }
 
     public ProjectFilesListController() {
 
@@ -329,6 +325,21 @@ public class ProjectFilesListController implements IProjectFilesList {
             }
         });
         list.tableFiles.getSelectionModel().addListSelectionListener(e -> updateButtonState());
+        KeyListener filterTrigger = new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if ((e.getModifiersEx() == 0 || e.getModifiersEx() == KeyEvent.SHIFT_DOWN_MASK)
+                        && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
+                    if (isFiltering()) {
+                        resumeFilter(e.getKeyChar());
+                    } else {
+                        startFilter(e.getKeyChar());
+                    }
+                    e.consume();
+                }
+            }
+        };
         list.tableFiles.addKeyListener(filterTrigger);
         list.tableTotal.addKeyListener(filterTrigger);
         list.btnUp.addKeyListener(filterTrigger);
@@ -445,22 +456,6 @@ public class ProjectFilesListController implements IProjectFilesList {
             }
         });
     }
-
-    private final KeyListener filterTrigger = new KeyAdapter() {
-        @Override
-        public void keyTyped(KeyEvent e) {
-            char c = e.getKeyChar();
-            if ((e.getModifiersEx() == 0 || e.getModifiersEx() == KeyEvent.SHIFT_DOWN_MASK)
-                    && !Character.isWhitespace(c) && !Character.isISOControl(c)) {
-                if (isFiltering()) {
-                    resumeFilter(e.getKeyChar());
-                } else {
-                    startFilter(e.getKeyChar());
-                }
-                e.consume();
-            }
-        }
-    };
 
     private void startFilter(char c) {
         if (isFiltering()) {
@@ -678,7 +673,7 @@ public class ProjectFilesListController implements IProjectFilesList {
     }
 
     private void createTableFiles() {
-        DataTableStyling.applyColors(list.tableFiles);
+        applyColors(list.tableFiles);
         list.tableFiles.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     }
 
@@ -696,17 +691,56 @@ public class ProjectFilesListController implements IProjectFilesList {
         }
     }
 
+    /**
+     * Defines the columns for the project files table used in the UI. Each
+     * column represents a specific attribute of files in the project, such as
+     * file name, filter name, encoding, number of segments, and number of
+     * unique segments.
+     * <p>
+     * This enumeration encapsulates properties for each column, including its
+     * index, localized label, data type, and a renderer for custom display
+     * behavior within the table. Additionally, some columns support
+     * pattern-based highlights for enhanced interactivity or visualization.
+     * <p>
+     * Columns:
+     * <ul>
+     * <li>FILE_NAME: Name of the file.</li>
+     * <li>FILTER: Filter type applied.</li>
+     * <li>ENCODING: Character encoding used.</li>
+     * <li>SEGMENTS: Total number of segments in the file.</li>
+     * <li>UNIQUE_SEGMENTS: Number of unique segments in the file.</li>
+     * </ul>
+     */
     enum FilesTableColumn {
-        FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class,
-                new DataTableStyling.PatternHighlightRenderer(false)), FILTER(1,
-                        OStrings.getString("PF_FILTERNAME"), String.class,
-                        DataTableStyling.getTextCellRenderer()), ENCODING(2,
-                                OStrings.getString("PF_ENCODING"), String.class,
-                                DataTableStyling.getTextCellRenderer()), SEGMENTS(3,
-                                        OStrings.getString("PF_NUM_SEGMENTS"), Integer.class,
-                                        DataTableStyling.getNumberCellRenderer()), UNIQUE_SEGMENTS(4,
-                                                OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"), Integer.class,
-                                                DataTableStyling.getNumberCellRenderer());
+        /**
+         * Represents the file name column in the FilesTableColumn enumeration.
+         * It holds metadata for the column, including its index, label, data
+         * type, and the renderer for displaying the column's content.
+         */
+        FILE_NAME(0, OStrings.getString("PF_FILENAME"), String.class, getPatternHighlightRenderer(false)),
+        /**
+         * Represents the filter name column in the FilesTableColumn
+         * enumeration. This column is designated to display filter-related data
+         * and metadata.
+         */
+        FILTER(1, OStrings.getString("PF_FILTERNAME"), String.class, getTextCellRenderer()),
+        /**
+         * Represents the encoding column in the FilesTableColumn enumeration.
+         * This column is designed to display encoding-related information and
+         * metadata.
+         */
+        ENCODING(2, OStrings.getString("PF_ENCODING"), String.class, getTextCellRenderer()),
+        /**
+         * Represents the segments column in the FilesTableColumn enumeration.
+         * This column is used to display segment-related data within the table.
+         */
+        SEGMENTS(3, OStrings.getString("PF_NUM_SEGMENTS"), Integer.class, getNumberCellRenderer()),
+        /**
+         * Represents a predefined constant for the number of unique segments in
+         * a particular context.
+         */
+        UNIQUE_SEGMENTS(4, OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"), Integer.class,
+                getNumberCellRenderer());
 
         private final int index;
         private final String label;
@@ -725,8 +759,8 @@ public class ProjectFilesListController implements IProjectFilesList {
         }
 
         private void setHighlightPattern(Pattern pattern) {
-            if (renderer instanceof DataTableStyling.PatternHighlightRenderer) {
-                ((DataTableStyling.PatternHighlightRenderer) renderer).setPattern(pattern);
+            if (renderer instanceof PatternHighlightRenderer) {
+                ((PatternHighlightRenderer) renderer).setPattern(pattern);
             } else {
                 throw new UnsupportedOperationException(
                         "Column " + label + " doesn't support pattern highlights");
@@ -771,7 +805,7 @@ public class ProjectFilesListController implements IProjectFilesList {
     }
 
     enum TotalsTableColumn {
-        LABEL(0, String.class, DataTableStyling.getTextCellRenderer()) {
+        LABEL(0, String.class, getTextCellRenderer()) {
             @Override
             protected Object getValue(int row) {
                 switch (row) {
@@ -786,10 +820,9 @@ public class ProjectFilesListController implements IProjectFilesList {
                 }
             }
         },
-        EMPTY_1(1, String.class, DataTableStyling.getTextCellRenderer()), EMPTY_2(2, String.class,
-                DataTableStyling.getTextCellRenderer()), EMPTY_3(3, Integer.class,
-                        DataTableStyling.getNumberCellRenderer()), VALUE(4, Integer.class,
-                                DataTableStyling.getNumberCellRenderer()) {
+        EMPTY_1(1, String.class, getTextCellRenderer()), EMPTY_2(2, String.class,
+                getTextCellRenderer()), EMPTY_3(3, Integer.class,
+                        getNumberCellRenderer()), VALUE(4, Integer.class, getNumberCellRenderer()) {
                             @Override
                             protected Object getValue(int row) {
                                 if (!Core.getProject().isProjectLoaded()) {
@@ -808,7 +841,7 @@ public class ProjectFilesListController implements IProjectFilesList {
                                 }
                             }
                         },
-        MARGIN(5, String.class, new DataTableStyling.AlternatingHighlightRenderer().setDoHighlight(false));
+        MARGIN(5, String.class, new AlternatingHighlightRenderer().setDoHighlight(false));
 
         private final int index;
         private final Class<?> clazz;
@@ -830,8 +863,8 @@ public class ProjectFilesListController implements IProjectFilesList {
     }
 
     private void createTableTotal() {
-        DataTableStyling.applyColors(list.tableTotal);
-        list.tableTotal.setBorder(new MatteBorder(1, 0, 0, 0, DataTableStyling.COLOR_ALTERNATING_HILITE));
+        applyColors(list.tableTotal);
+        list.tableTotal.setBorder(new MatteBorder(1, 0, 0, 0, COLOR_ALTERNATING_HILITE));
 
         modelTotal = new AbstractTableModel() {
             @Override
@@ -948,8 +981,8 @@ public class ProjectFilesListController implements IProjectFilesList {
     }
 
     private void setFont(Font font) {
-        DataTableStyling.applyFont(list.tableFiles, font);
-        DataTableStyling.applyFont(list.tableTotal, font.deriveFont(Font.BOLD));
+        applyFont(list.tableFiles, font);
+        applyFont(list.tableTotal, font.deriveFont(Font.BOLD));
         list.statLabel.setFont(font);
     }
 
@@ -1157,7 +1190,7 @@ public class ProjectFilesListController implements IProjectFilesList {
                 case 3:
                     int m1 = f1.entries.size();
                     int m2 = f2.entries.size();
-                    c = m1 > m2 ? 1 : m1 < m2 ? -1 : 0;
+                    c = Integer.compare(m1, m2);
                     break;
                 case 4:
                     int n1 = stat.uniqueCountsByFile.get(f1.filePath);
@@ -1203,7 +1236,7 @@ public class ProjectFilesListController implements IProjectFilesList {
         }
 
         private void save() {
-            List<String> filenames = new ArrayList<String>();
+            List<String> filenames = new ArrayList<>();
             for (Integer i : viewToModel) {
                 String fn = files.get(i).filePath;
                 filenames.add(fn);

@@ -41,6 +41,10 @@
             <Bug pattern="PA" />
         </Not>
     </Match>
+    <!-- Skip deprecated classes -->
+    <Match>
+        <Class name="org.omegat.util.xml.XMLReader" />
+    </Match>
     <!-- Skip Core class warnings caused by application class design issue.
        Core class is designed to store application status as static fields
        and expose it around the application.

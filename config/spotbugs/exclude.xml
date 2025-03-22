@@ -62,9 +62,29 @@
         </Or>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
+    <!-- Plugin manager exposes lists of classes in design. suppress until design reconstruction -->
+    <Match>
+        <Class name="org.omegat.filters2.master.PluginUtils" />
+        <Bug pattern="MS_EXPOSE_REP" />
+    </Match>
+    <!-- filters3 XML classes expose in original design -->
+    <Match>
+        <Or>
+            <Class name="org.omegat.filters3.xml.DefaultXMLDialect" />
+            <Class name="org.omegat.filters3.xml.Handler" />
+            <Class name="org.omegat.filters3.xml.XMLEntityText" />
+        </Or>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2" />
+    </Match>
+    <!-- Preferences/view classes getGui() method expose object in API design -->
+    <Match>
+        <Class name="~org\.omegat\.gui\.preferences\.view\..*Controller" />
+        <Method name="getGui" />
+        <Bug pattern="EI_EXPOSE_REP" />
+    </Match>
     <!-- All bugs in test classes, except for JUnit-specific bugs -->
     <Match>
-        <Class name="~.*\.*Test" />
+        <Class name="~.*\..*Test" />
         <Not>
             <Bug code="IJU" />
         </Not>

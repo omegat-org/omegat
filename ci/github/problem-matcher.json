@@ -5,7 +5,7 @@
       "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\s(?:Dereferenced at|Method invoked at|At)\\s+([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\s(?:Obligation to clean up resource created at|Redundant null check at|Dereferenced at|Method invoked at|At)\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
           "file": 3,
           "line": 4,
           "message": 2,

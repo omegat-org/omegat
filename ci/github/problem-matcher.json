@@ -5,7 +5,7 @@
       "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+((?:[A-Z0-9_]+\\s+)?(?:[A-Za-z0-9]+)):\\s+(.*)\\s\\s(?:a|A)t\\s+([A-Za-z0-9_]+\\.java):\\[line(?:s)? (\\d+(?:-\\d+))\\]$",
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\s(?:Dereferenced at|At)\\s+([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
           "file": 3,
           "line": 4,
           "message": 2,
@@ -17,7 +17,7 @@
       "owner": "spotbugs-OBL",
       "pattern": [
         {
-          "regexp": "^.*M X ((?:[A-Z0-9_]+\\s+)?(?:[A-Za-z0-9]+)):\\s+((?:.*)\\s\\s(?:a|A)t\\s+([A-Za-z0-9_]+\\.java):\\[line (\\d+)\\] is not discharged)$",
+          "regexp": "^.*M X ([A-Z0-9_]+)\\s[A-Z0-9]+:\\s+((?:.*)\\s\\sAt\\s+([A-Za-z0-9_]+\\.java):\\[line (\\d+)\\] is not discharged)",
           "file": 3,
           "line": 4,
           "message": 2,
@@ -29,7 +29,7 @@
       "owner": "spotbugs-no-line-number",
       "pattern": [
         {
-          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+((?:[A-Z0-9_]+\\s+)?(?:[A-Za-z0-9]+)):\\s+(.*)\\s+In\\s+([A-Za-z0-9_]+\\.java)$",
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Za-z0-9_]+)\\s+[A-Za-z0-9]+:\\s+(.*)\\s+In\\s+([A-Za-z0-9_]+\\.java)",
           "file": 3,
           "message": 2,
           "code": 1

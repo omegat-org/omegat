@@ -5,7 +5,33 @@
       "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\s(?:Obligation to clean up resource created at|Redundant null check at|Dereferenced at|Method invoked at|At)\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\s(?:Redundant null check at|Dereferenced at|At)\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "file": 3,
+          "line": 4,
+          "message": 2,
+          "code": 1
+        }
+      ]
+    },
+    {
+      "owner": "spotbugs-npe",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "^.*(?:H|M)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\sMethod invoked at\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "file": 3,
+          "line": 4,
+          "message": 2,
+          "code": 1
+        }
+      ]
+    },
+    {
+      "owner": "spotbugs-resource-cleanup",
+      "severity": "warning",
+      "pattern": [
+        {
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*\\s\\sObligation to clean up resource created)\\sat\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
           "file": 3,
           "line": 4,
           "message": 2,
@@ -26,11 +52,25 @@
       ]
     },
     {
-      "owner": "spotbugs-no-line-number",
+      "owner": "spotbugs-uuf",
+      "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Za-z0-9_]+)\\s+[A-Za-z0-9]+:\\s+(.*)\\s+In\\s+([A-Za-z0-9_]+\\.java)",
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Za-z0-9_]+)\\s+[A-Za-z0-9]+:\\s+(.*)\\s\\sIn\\s([A-Za-z0-9_]+\\.java)",
           "file": 3,
+          "message": 2,
+          "code": 1
+        }
+      ]
+    },
+    {
+      "owner": "spotbugs-unsynchronized-access",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\sUnsynchronized access at\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "file": 3,
+          "line": 4,
           "message": 2,
           "code": 1
         }

@@ -49,24 +49,61 @@ public final class ExternalFinderItem {
 
     public enum TARGET {
 
-        // default BOTH for URL and command
-        ASCII_ONLY, NON_ASCII_ONLY, BOTH;
+        /**
+         * search ascii only.
+         */
+        ASCII_ONLY(OStrings.getString("EXTERNALFINDER_TARGET_ASCII_ONLY")),
+        /**
+         * Search non ascii only.
+         */
+        NON_ASCII_ONLY(OStrings.getString("EXTERNALFINDER_TARGET_NON_ASCII_ONLY")),
+        /**
+         * Search BOTH.
+         * <p>
+         * It is default for URL and command lookups.
+         */
+        BOTH(OStrings.getString("EXTERNALFINDER_TARGET_BOTH"));
+
+        TARGET(String value) {
+            this.value = value;
+        }
+
+        private final String value;
 
         @Override
         public String toString() {
-            return OStrings.getString("EXTERNALFINDER_TARGET_" + name());
+            return value;
         }
     }
 
     public enum ENCODING {
 
-        // default DEFAULT for URL
-        // default NONE for command
-        DEFAULT, ESCAPE, NONE;
+        /**
+         * Default encoding.
+         * <p>
+         * It is a default for URL.
+         */
+        DEFAULT(OStrings.getString("EXTERNALFINDER_ENCODING_DEFAULT")),
+        /**
+         * Escape encoding.
+         */
+        ESCAPE(OStrings.getString("EXTERNALFINDER_ENCODING_ESCAPE")),
+        /**
+         * No encoding.
+         * <p>
+         * It is a default for command.
+         */
+        NONE(OStrings.getString("EXTERNALFINDER_ENCODING_NONE"));
+
+        ENCODING(String value) {
+            this.value = value;
+        }
+
+        private final String value;
 
         @Override
         public String toString() {
-            return OStrings.getString("EXTERNALFINDER_ENCODING_" + name());
+            return value;
         }
     }
 

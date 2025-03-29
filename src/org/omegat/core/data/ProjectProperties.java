@@ -87,7 +87,7 @@ public class ProjectProperties {
      * Default constructor to initialize fields (to get no NPEs). Real values
      * should be applied after creation.
      */
-    public ProjectProperties(File projectDir) throws Exception {
+    public ProjectProperties(File projectDir) {
         projectRootDir = projectDir;
         projectName = projectDir.getName();
         setSourceRoot(getProjectRoot() + OConsts.DEFAULT_SOURCE + File.separator);
@@ -110,7 +110,7 @@ public class ProjectProperties {
         setTargetLanguage("UK-UA");
 
         loadProjectSRX();
-        loadProjectFilters();
+        loadProjectFiltersOrDefaults();
 
         setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
         setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
@@ -245,6 +245,7 @@ public class ProjectProperties {
         return tmDir.getAsString() + OConsts.PENALTY_TM + '/';
     }
 
+    @SuppressWarnings("unused")
     public ProjectPath getDictDir() {
         return dictDir;
     }
@@ -259,6 +260,7 @@ public class ProjectProperties {
         dictDir.setRelativeOrAbsolute(dictRoot);
     }
 
+    @SuppressWarnings("unused")
     public String getDictRootRelative() {
         return dictDir.getAsString();
     }
@@ -311,6 +313,7 @@ public class ProjectProperties {
         }
     }
 
+    @SuppressWarnings("unused")
     public void setSourceRootRelative(String sourceRootRelative) {
         if (!StringUtil.isEmpty(sourceRootRelative)) {
             sourceDir.setRelativeOrAbsolute(sourceRootRelative);
@@ -489,14 +492,21 @@ public class ProjectProperties {
         return repositories;
     }
 
+    /**
+     * Determines if the project is a team project. A project is considered a team project
+     * if it has repositories defined, and at least one repository mapping has either
+     * a local path set to an empty string or a single forward slash to specify OmegaT
+     * project root.
+     *
+     * @return true if the project is a team project, false otherwise
+     */
     public boolean isTeamProject() {
-        if (repositories == null) {
-            return false;
-        }
-        for (RepositoryDefinition repositoryDefinition : repositories) {
-            for (RepositoryMapping repositoryMapping : repositoryDefinition.getMapping()) {
-                if ("".equals(repositoryMapping.getLocal()) || "/".equals(repositoryMapping.getLocal())) {
-                    return true;
+        if (hasRepositories()) {
+            for (RepositoryDefinition repositoryDefinition : repositories) {
+                for (RepositoryMapping repositoryMapping : repositoryDefinition.getMapping()) {
+                    if ("".equals(repositoryMapping.getLocal()) || "/".equals(repositoryMapping.getLocal())) {
+                        return true;
+                    }
                 }
             }
         }
@@ -516,7 +526,7 @@ public class ProjectProperties {
     }
 
     /**
-     * Loads segmentation.conf if found in the /omegat folder of the project
+     * Loads segmentation.conf if found in the /omegat folder of the project.
      */
     public void loadProjectSRX() {
         this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
@@ -534,9 +544,28 @@ public class ProjectProperties {
      * Loads filters.xml if found in the /omegat filter of the project
      * 
      * @throws IOException
+     *             if filters.xml is not found or corrupted.
      */
     public void loadProjectFilters() throws IOException {
         projectFilters = FilterMaster.loadConfig(new File(getProjectInternal(), FilterMaster.FILE_FILTERS));
+    }
+
+    /**
+     * Loads the project-specific filters or falls back to default filters if
+     * the project filters cannot be loaded due to an exception.
+     * <p>
+     * Attempts to load the filters defined in the project's configuration by
+     * invoking the {@code loadProjectFilters()} method. If the method throws an
+     * {@link IOException}, the {@code projectFilters} field is initialized with
+     * default filter settings using a new {@code Filters} instance.
+     */
+    public void loadProjectFiltersOrDefaults() {
+        try {
+            loadProjectFilters();
+        } catch (IOException ignored) {
+            Log.logErrorRB("CT_PROJECT_FILTERS_LOAD_ERROR", getProjectName());
+            projectFilters = new Filters();
+        }
     }
 
     public String getExternalCommand() {
@@ -611,11 +640,10 @@ public class ProjectProperties {
         // creation.
         //
         File dict = new File(getDictRoot());
-        if (!dict.exists()) {
-            if (getDictRoot().equals(getProjectRoot() + OConsts.DEFAULT_DICT + '/')) {
-                dict.mkdirs();
-            }
+        if (!dict.exists() && getDictRoot().equals(getProjectRoot() + OConsts.DEFAULT_DICT + '/')) {
+            dict.mkdirs();
         }
+
     }
 
     public void autocreateDirectories() {
@@ -636,7 +664,7 @@ public class ProjectProperties {
     }
 
     private String projectName;
-    private final List<String> sourceRootExcludes = new ArrayList<String>();
+    private final List<String> sourceRootExcludes = new ArrayList<>();
     private List<RepositoryDefinition> repositories;
 
     private Language sourceLanguage;
@@ -684,9 +712,11 @@ public class ProjectProperties {
 
         /**
          * path is directory(or file) as declared in the omegat.project, but not
-         * __DEFAULT__. I.e. caller can send something like
+         * __DEFAULT__.
+         * <p>
+         * i.e. caller can send something like
          * "/some/project/source", or "source", or "source/".
-         *
+         * <p>
          * Absolute paths from Windows will be treated as relative on
          * Linux/MacOS, and vice versa.
          */

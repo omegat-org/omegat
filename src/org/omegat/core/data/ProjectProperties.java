@@ -245,6 +245,7 @@ public class ProjectProperties {
         return tmDir.getAsString() + OConsts.PENALTY_TM + '/';
     }
 
+    @SuppressWarnings("unused")
     public ProjectPath getDictDir() {
         return dictDir;
     }
@@ -259,6 +260,7 @@ public class ProjectProperties {
         dictDir.setRelativeOrAbsolute(dictRoot);
     }
 
+    @SuppressWarnings("unused")
     public String getDictRootRelative() {
         return dictDir.getAsString();
     }
@@ -311,6 +313,7 @@ public class ProjectProperties {
         }
     }
 
+    @SuppressWarnings("unused")
     public void setSourceRootRelative(String sourceRootRelative) {
         if (!StringUtil.isEmpty(sourceRootRelative)) {
             sourceDir.setRelativeOrAbsolute(sourceRootRelative);
@@ -489,6 +492,14 @@ public class ProjectProperties {
         return repositories;
     }
 
+    /**
+     * Determines if the project is a team project. A project is considered a team project
+     * if it has repositories defined, and at least one repository mapping has either
+     * a local path set to an empty string or a single forward slash to specify OmegaT
+     * project root.
+     *
+     * @return true if the project is a team project, false otherwise
+     */
     public boolean isTeamProject() {
         if (hasRepositories()) {
             for (RepositoryDefinition repositoryDefinition : repositories) {
@@ -629,11 +640,10 @@ public class ProjectProperties {
         // creation.
         //
         File dict = new File(getDictRoot());
-        if (!dict.exists()) {
-            if (getDictRoot().equals(getProjectRoot() + OConsts.DEFAULT_DICT + '/')) {
-                dict.mkdirs();
-            }
+        if (!dict.exists() && getDictRoot().equals(getProjectRoot() + OConsts.DEFAULT_DICT + '/')) {
+            dict.mkdirs();
         }
+
     }
 
     public void autocreateDirectories() {
@@ -702,9 +712,11 @@ public class ProjectProperties {
 
         /**
          * path is directory(or file) as declared in the omegat.project, but not
-         * __DEFAULT__. I.e. caller can send something like
+         * __DEFAULT__.
+         * <p>
+         * i.e. caller can send something like
          * "/some/project/source", or "source", or "source/".
-         *
+         * <p>
          * Absolute paths from Windows will be treated as relative on
          * Linux/MacOS, and vice versa.
          */

@@ -116,7 +116,7 @@ public class ScriptingWindow {
 
     private static final Logger LOGGER = Logger.getLogger(ScriptingWindow.class.getName());
 
-    static ScriptingWindow window;
+    static public ScriptingWindow window;
 
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
@@ -585,6 +585,7 @@ public class ScriptingWindow {
             } catch (ExecutionException e) {
                 logResult(OStrings.getString("SCW_SCRIPT_ERROR"), e);
             }
+            inEventsLoop--;
         }
     }
 
@@ -599,6 +600,8 @@ public class ScriptingWindow {
     public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings, boolean cancelQueue) {
         executeScripts(Arrays.asList(scriptItem), bindings, cancelQueue);
     }
+    
+    public int inEventsLoop = 0;
 
     /**
      * Execute scripts sequentially to make sure they don't interrupt each
@@ -621,12 +624,12 @@ public class ScriptingWindow {
             try {
                 String scriptString = scriptItem.getText();
                 queuedWorkers.add(createScriptWorker(scriptString, scriptItem, bindings));
+                inEventsLoop++;
             } catch (IOException e) {
-                // TODO: Do we really want to handle the exception here, like
-                // this?
-                // This method can be called in instances when the Scripting
-                // Window is not visible, so it might make more sense to let the
-                // caller handle the exception.
+                // Catch loading exception for each script individually:
+                // failure in loading one script should not prevent from loading the other ones.
+                // No matter whenever we are running in scripting window or not,
+                // the error is sent to the log file, not to the scripting window.
                 logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"),
                         scriptItem.getFileName()), e);
             }

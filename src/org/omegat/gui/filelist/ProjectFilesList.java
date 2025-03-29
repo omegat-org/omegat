@@ -170,27 +170,27 @@ public class ProjectFilesList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnDown;
-    public javax.swing.JButton btnFirst;
-    public javax.swing.JButton btnLast;
-    public javax.swing.JButton btnUp;
-    public javax.swing.Box.Filler filler1;
-    public javax.swing.Box.Filler filler2;
-    public javax.swing.Box.Filler filler3;
-    public javax.swing.Box.Filler filler5;
-    public javax.swing.Box.Filler filler6;
-    public javax.swing.JPanel jPanel1;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JButton m_addNewFileButton;
-    public javax.swing.JButton m_closeButton;
-    public javax.swing.JButton m_wikiImportButton;
-    public javax.swing.JScrollPane scrollFiles;
-    public javax.swing.JTextArea statLabel;
-    public javax.swing.JTable tableFiles;
-    public javax.swing.JTable tableTotal;
-    public javax.swing.JPanel tablesInnerPanel;
-    public javax.swing.JPanel tablesOuterPanel;
+    javax.swing.JButton btnDown;
+    javax.swing.JButton btnFirst;
+    javax.swing.JButton btnLast;
+    javax.swing.JButton btnUp;
+    javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.JPanel jPanel1;
+    javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    javax.swing.JButton m_addNewFileButton;
+    javax.swing.JButton m_closeButton;
+    javax.swing.JButton m_wikiImportButton;
+    javax.swing.JScrollPane scrollFiles;
+    javax.swing.JTextArea statLabel;
+    javax.swing.JTable tableFiles;
+    javax.swing.JTable tableTotal;
+    javax.swing.JPanel tablesInnerPanel;
+    javax.swing.JPanel tablesOuterPanel;
     // End of variables declaration//GEN-END:variables
 }

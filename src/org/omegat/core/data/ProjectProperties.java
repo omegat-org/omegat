@@ -110,11 +110,7 @@ public class ProjectProperties {
         setTargetLanguage("UK-UA");
 
         loadProjectSRX();
-        try {
-            loadProjectFilters();
-        } catch (IOException ignored) {
-            projectFilters = new Filters();
-        }
+        loadProjectFiltersOrDefaults();
 
         setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
         setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
@@ -519,7 +515,7 @@ public class ProjectProperties {
     }
 
     /**
-     * Loads segmentation.conf if found in the /omegat folder of the project
+     * Loads segmentation.conf if found in the /omegat folder of the project.
      */
     public void loadProjectSRX() {
         this.projectSRX = SRX.loadFromDir(new File(getProjectInternal()));
@@ -537,9 +533,28 @@ public class ProjectProperties {
      * Loads filters.xml if found in the /omegat filter of the project
      * 
      * @throws IOException
+     *             if filters.xml is not found or corrupted.
      */
     public void loadProjectFilters() throws IOException {
         projectFilters = FilterMaster.loadConfig(new File(getProjectInternal(), FilterMaster.FILE_FILTERS));
+    }
+
+    /**
+     * Loads the project-specific filters or falls back to default filters if
+     * the project filters cannot be loaded due to an exception.
+     * <p>
+     * Attempts to load the filters defined in the project's configuration by
+     * invoking the {@code loadProjectFilters()} method. If the method throws an
+     * {@link IOException}, the {@code projectFilters} field is initialized with
+     * default filter settings using a new {@code Filters} instance.
+     */
+    public void loadProjectFiltersOrDefaults() {
+        try {
+            loadProjectFilters();
+        } catch (IOException ignored) {
+            Log.logErrorRB("CT_PROJECT_FILTERS_LOAD_ERROR", getProjectName());
+            projectFilters = new Filters();
+        }
     }
 
     public String getExternalCommand() {

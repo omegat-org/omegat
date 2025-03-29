@@ -6,38 +6,16 @@ plugins {
     id 'org.omegat.module-conventions'
 }
 
-sourceSets {
-    java {
-        main {
-            resources {
-                srcDirs=['docs', 'src/main/resources']
-            }
-        }
-    }
-}
-
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-lang3-*.jar', '**/jackson*.jar',
-                                                                  '**/icu4j-*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar','**/cssbox-*.jar',
+                                                                       '**/jstyleparser-*.jar'])
     } else {
-        // runtime dependencies should be in main project
-        implementation(libs.tipoftheday) {
-            exclude module: 'commons-lang3'
-            exclude module: 'commons-io'
-        }
-        implementation(libs.slf4j.api)
-        compileOnly(libs.commons.lang3)
-        runtimeOnly(libs.icu4j)
-
-        // jackson-databind-yaml is dependency of languagetool-core
+        implementation(libs.tipoftheday)
         compileOnly(libs.jackson.yaml)
     }
-    testImplementation(testFixtures(project.rootProject))
-    testImplementation(libs.commons.io)
-    testRuntimeOnly(libs.icu4j)
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

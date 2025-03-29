@@ -63,7 +63,7 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
     }
 
     private void initTips() {
-        try (InputStream is = TipOfTheDayUtils.getIndexStream(TipOfTheDayController.INDEX_YAML)) {
+        try (InputStream is = TipOfTheDayUtils.getIndexStream()) {
             if (is == null) {
                 return;
             }

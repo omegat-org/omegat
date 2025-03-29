@@ -6,16 +6,6 @@ plugins {
     id 'org.omegat.module-conventions'
 }
 
-sourceSets {
-    java {
-        main {
-            resources {
-                srcDirs=['docs', 'src/main/resources']
-            }
-        }
-    }
-}
-
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {

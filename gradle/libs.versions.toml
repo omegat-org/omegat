@@ -91,6 +91,7 @@ languagetool-km = {group = "org.languagetool", name = "language-km", version.ref
 languagetool-nl = {group = "org.languagetool", name = "language-nl", version.ref = "languagetool"}
 languagetool-pl = {group = "org.languagetool", name = "language-pl", version.ref = "languagetool"}
 languagetool-pt = {group = "org.languagetool", name = "language-pt", version.ref = "languagetool"}
+languagetool-pt-pos-dictionary = {group = "org.languagetool", name = "portuguese-pos-dict", version = "1.2.0"}
 languagetool-ro = {group = "org.languagetool", name = "language-ro", version.ref = "languagetool"}
 languagetool-ru = {group = "org.languagetool", name = "language-ru", version.ref = "languagetool"}
 languagetool-sk = {group = "org.languagetool", name = "language-sk", version.ref = "languagetool"}

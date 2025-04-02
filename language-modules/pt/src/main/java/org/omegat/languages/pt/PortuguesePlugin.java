@@ -36,7 +36,7 @@ public final class PortuguesePlugin {
     private static final String BRAZILIAN_PORTUGUESE = "org.languagetool.language.BrazilianPortuguese";
     private static final String ANGOLA_PORTUGUESE = "org.languagetool.language.AngolaPortuguese";
     private static final String MOZAMBIQUE_PORTUGUESE = "org.languagetool.language.MozambiquePortuguese";
-    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.pt.PortugueseHunspellDictionary";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.pt.PortugueseMorfologikDictionary";
 
     private PortuguesePlugin() {
     }
@@ -47,16 +47,8 @@ public final class PortuguesePlugin {
         LanguageManager.registerLTLanguage("pt-BR", BRAZILIAN_PORTUGUESE);
         LanguageManager.registerLTLanguage("pt-AO", ANGOLA_PORTUGUESE);
         LanguageManager.registerLTLanguage("pt-MZ", MOZAMBIQUE_PORTUGUESE);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("pt_AO",
-                SpellCheckDictionaryType.HUNSPELL, HUNSPELL_DICTIONARY);
         SpellCheckerManager.registerSpellCheckerDictionaryProvider("pt_BR",
-                SpellCheckDictionaryType.HUNSPELL, HUNSPELL_DICTIONARY);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("pt_MZ",
-                SpellCheckDictionaryType.HUNSPELL, HUNSPELL_DICTIONARY);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("pt_PT",
-                SpellCheckDictionaryType.HUNSPELL, HUNSPELL_DICTIONARY);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("pt",
-                SpellCheckDictionaryType.HUNSPELL, HUNSPELL_DICTIONARY);
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

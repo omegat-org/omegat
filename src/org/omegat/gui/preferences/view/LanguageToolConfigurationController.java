@@ -68,6 +68,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.languagetool.AnalyzedSentence;
 import org.languagetool.JLanguageTool;
+import org.languagetool.LtBuildInfo;
 import org.languagetool.rules.Category;
 import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
@@ -115,7 +116,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
     private void initGui() {
         panel = new LanguageToolConfigurationPanel();
         org.openide.awt.Mnemonics.setLocalizedText(panel.bridgeNativeRadioButton,
-                StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), JLanguageTool.VERSION));
+                StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), LtBuildInfo.OS.getVersion()));
         panel.bridgeNativeRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.NATIVE));
         panel.bridgeLocalRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.LOCAL_INSTALLATION));
         panel.bridgeRemoteRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.REMOTE_URL));
@@ -681,7 +682,7 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
     @SuppressWarnings("serial")
     static class RuleNode extends DefaultMutableTreeNode {
 
-        private final Rule rule;
+        private final transient Rule rule;
         private boolean enabled;
 
         RuleNode(Rule rule, boolean enabled) {

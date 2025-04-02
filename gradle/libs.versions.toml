@@ -79,6 +79,7 @@ languagetool-da = {group = "org.languagetool", name = "language-da", version.ref
 languagetool-de = {group = "org.languagetool", name = "language-de", version.ref = "languagetool"}
 languagetool-el = {group = "org.languagetool", name = "language-el", version.ref = "languagetool"}
 languagetool-en = {group = "org.languagetool", name = "language-en", version.ref = "languagetool"}
+languagetool-en-pos-dictionary = {group = "org.languagetool", name = "english-pos-dict", version = "0.6"}
 languagetool-eo = {group = "org.languagetool", name = "language-eo", version.ref = "languagetool"}
 languagetool-es = {group = "org.languagetool", name = "language-es", version.ref = "languagetool"}
 languagetool-fa = {group = "org.languagetool", name = "language-fa", version.ref = "languagetool"}

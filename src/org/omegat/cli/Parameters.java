@@ -1,0 +1,218 @@
+/**************************************************************************
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2015 Aaron Madlon-Kay
+               2025 Hiroshi Miura
+               Home page: https://www.omegat.org/
+               Support center: https://omegat.org/support
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ **************************************************************************/
+package org.omegat.cli;
+
+import org.omegat.util.RuntimePreferences;
+import picocli.CommandLine;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
+
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Option;
+
+@Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1")
+public class Parameters implements Runnable {
+
+    private static final ILogger LOGGER = LoggerFactory.getLogger(Parameters.class);
+
+    // Hide deprecated old command syntax in help message.
+    // We can set false for test purpose.
+    private static final boolean HIDE_DEPRECATED_OPTIONS = true;
+
+    @Option(names = {"-V", "--version"}, versionHelp = true)
+    boolean versionInfoRequested;
+
+    @Option(names = {"-h", "--help"}, usageHelp = true)
+    boolean usageHelpRequested;
+
+    // All modes
+    public static final String MODE = "--mode";
+    @Option(names = {MODE}, paramLabel = "<console-mode-name>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "MODE")
+    String consoleMode;
+
+    public static final String CONFIG_FILE = "--config-file";
+    @Option(names = {CONFIG_FILE}, paramLabel = "<path>", descriptionKey = "CONFIG_FILE")
+    String configFile;
+
+    public static final String RESOURCE_BUNDLE = "--resource-bundle";
+    @Option(names = {RESOURCE_BUNDLE}, paramLabel = "<bundle>", descriptionKey = "RESOURCE_BUNDLE")
+    String resourceBundle;
+
+    public static final String CONFIG_DIR = "--config-dir";
+    @Option(names = {CONFIG_DIR}, paramLabel = "<path>", descriptionKey = "CONFIG_DIR")
+    String configDir;
+
+    public static final String DISABLE_PROJECT_LOCKING = "--disable-project-locking";
+    @Option(names = {DISABLE_PROJECT_LOCKING}, descriptionKey = "DISABLE_PROJECT_LOCKING")
+    boolean disableProjectLocking;
+
+    public static final String DISABLE_LOCATION_SAVE = "--disable-location-save";
+    @Option(names = {DISABLE_LOCATION_SAVE}, descriptionKey = "DISABLE_LOCATION_SAVE")
+    boolean disableLocationSave;
+
+    /**
+     * CLI parameter to disable team functionality (treat as local project)
+     */
+    public static final String NO_TEAM = "--no-team";
+    @Option(names = {NO_TEAM}, descriptionKey = "NO_TEAM")
+    boolean noTeam;
+
+    /**
+     * CLI parameter to specify source tokenizer
+     */
+    public static final String TOKENIZER_SOURCE = "--ITokenizer";
+    @Option(names = {TOKENIZER_SOURCE}, descriptionKey = "TOKENIZER_SOURCE")
+    String tokenizerSource;
+    /**
+     * CLI parameter to specify target tokenizer
+     */
+    public static final String TOKENIZER_TARGET = "--ITokenizerTarget";
+    @Option(names = {TOKENIZER_TARGET}, descriptionKey = "TOKENIZER_TARGET")
+    String tokenizerTarget;
+
+    // Non-GUI modes only
+    public static final String QUIET = "--quiet";
+    @Option(names = {QUIET}, descriptionKey = "QUIET")
+    boolean isQuiet;
+
+    public static final String SCRIPT = "--script";
+    @Option(names = {SCRIPT}, paramLabel = "<path>", descriptionKey = "SCRIPT")
+    String scriptName;
+
+    public static final String TAG_VALIDATION = "--tag-validation";
+    @Option(names = {TAG_VALIDATION}, descriptionKey = "TAG_VALIDATION")
+    String tagValidation;
+
+    // CONSOLE_TRANSLATE mode
+    public static final String SOURCE_PATTERN = "--source-pattern";
+    @Option(names = {SOURCE_PATTERN}, hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "SOURCE_PATTERN")
+    String sourcePattern;
+
+    // CONSOLE_CREATEPSEUDOTRANSLATETMX mode
+    public static final String PSEUDOTRANSLATETMX = "--pseudotranslatetmx";
+    @Option(names = {PSEUDOTRANSLATETMX}, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS,
+            descriptionKey = "PSEUDO_TRANSLATE_TMX")
+    String pseudoTranslateTmxPath;
+
+    public static final String PSEUDOTRANSLATETYPE = "--pseudotranslatetype";
+    @Option(names = {PSEUDOTRANSLATETYPE}, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS,
+            descriptionKey = "PSEUDO_TRANSLATE_TYPE")
+    String pseudoTranslateTypeName;
+
+    // CONSOLE_ALIGN mode
+    public static final String ALIGNDIR = "--alignDir";
+    @Option(names = {ALIGNDIR}, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "ALIGN_DIR")
+    String alignDirPath;
+
+    // CONSOLE_STATS mode
+    public static final String STATS_OUTPUT = "--output-file";
+    public static final String STATS_MODE = "--stats-type";
+    @Option(names = {STATS_OUTPUT}, paramLabel = "<stats-output-file>", hidden = true, descriptionKey = "OUTPUT_FILE")
+    String statsOutput;
+    @Option(names = {STATS_MODE}, paramLabel = "<xml_or_text_or_json", hidden = true, descriptionKey = "STATS_TYPE")
+    String statsType;
+
+    // Development
+    public static final String DEV_MANIFESTS = "dev-manifests";
+
+    String projectLocation;
+
+    /**
+     * Start sub-command entry.
+     *
+     * @param project project folder string.
+     */
+    @Command(name = "start")
+    public void start(@CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
+                      String project) {
+        projectLocation = project;
+        if (noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
+        runGUI();
+    }
+
+    @Command(name = "translate")
+    public void translate(@CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
+                              String project) {
+        if (project != null) {
+            projectLocation = project;
+        } else {
+            projectLocation = ".";
+        }
+        if (noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
+        runTranslate();
+    }
+
+    /**
+     * Default method when launch.
+     */
+    @Override
+    public void run() {
+        // Check for old console=mode option
+        if (consoleMode == null) {
+            start(null);
+        } else if ("console-translate".equals(consoleMode)) {
+            runTranslate();
+        } else if ("console-align".equals(consoleMode)) {
+            System.out.println("console align!");
+            if (alignDirPath != null) {
+                LOGGER.atInfo().setMessage("alingDir specified to: {0}").addArgument(alignDirPath).log();
+            }
+        } else if ("console-stats".equals(consoleMode)) {
+            LOGGER.atInfo().setMessage("console stats").log();
+            if (statsType != null) {
+                LOGGER.atInfo().setMessage("stats type is: {0}").addArgument(statsType).log();
+            }
+        } else if ("console-createpseudotranslatetmx".equals(consoleMode)) {
+            LOGGER.atInfo().setMessage("createpseudotranslatetmx").log();
+            if (pseudoTranslateTmxPath != null) {
+                LOGGER.atInfo().setMessage("pseudo translate tmx path: " + pseudoTranslateTmxPath).log();
+            }
+            if (pseudoTranslateTypeName != null) {
+                LOGGER.atInfo().setMessage("pseudo translate type: " + pseudoTranslateTypeName).log();
+            }
+        }
+    }
+
+    private void runGUI() {
+        StandardCommand command = new StandardCommand(this);
+        int result = command.runGUI();
+        if (result != 0) {
+            System.exit(result);
+        }
+    }
+
+    private void runTranslate() {
+        StandardCommand command = new StandardCommand(this);
+        int status = command.runConsoleTranslate();
+        if (status != 0) {
+            System.exit(status);
+        }
+    }
+}

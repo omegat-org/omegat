@@ -62,9 +62,11 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import com.sun.xml.bind.v2.model.runtime.RuntimePropertyInfo;
+import org.omegat.util.RuntimePreferences;
 import org.openide.awt.Mnemonics;
 
-import org.omegat.CLIParameters;
+import org.omegat.cli.Parameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
@@ -287,7 +289,7 @@ public class ProjectPropertiesDialog extends JDialog {
         sourceTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
         bT.add(sourceTokenizerField);
 
-        String cliTokSrc = Core.getParams().get(CLIParameters.TOKENIZER_SOURCE);
+        String cliTokSrc = RuntimePreferences.getTokenizerSource();
         if (cliTokSrc != null) {
             try {
                 Class<?> srcTokClass = Class.forName(cliTokSrc);
@@ -318,7 +320,7 @@ public class ProjectPropertiesDialog extends JDialog {
         targetTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
         bT.add(targetTokenizerField);
 
-        String cliTokTrg = Core.getParams().get(CLIParameters.TOKENIZER_TARGET);
+        String cliTokTrg = RuntimePreferences.getTokenizerTarget();
         if (cliTokTrg != null) {
             try {
                 Class<?> trgTokClass = Class.forName(cliTokTrg);

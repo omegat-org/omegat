@@ -51,7 +51,6 @@ import javax.swing.SwingWorker;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import org.omegat.CLIParameters;
 import org.omegat.Main;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;
@@ -83,6 +82,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
@@ -434,7 +434,7 @@ public final class ProjectUICommands {
                  * this does not seem to be the intention of the current mapping
                  * usage.
                  */
-                if (!Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+                if (!RuntimePreferences.isNoTeam()) {
                     ProjectProperties localProps = props;
                     List<RepositoryDefinition> localRepos = props.getRepositories();
                     mainWindow.showStatusMessageRB("TEAM_OPEN");
@@ -1279,7 +1279,7 @@ public final class ProjectUICommands {
         chooser.setDialogTitle(OStrings.getString("TF_FILE_IMPORT_TITLE"));
 
         int result = chooser.showOpenDialog(Core.getMainWindow().getApplicationFrame());
-        if (result == OmegaTFileChooser.APPROVE_OPTION) {
+        if (result == JFileChooser.APPROVE_OPTION) {
             File[] selFiles = chooser.getSelectedFiles();
             projectImportFiles(Core.getProject().getProjectProperties().getSourceRoot(), selFiles);
         }

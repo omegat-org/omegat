@@ -45,13 +45,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.StyleConstants;
 import java.lang.reflect.InvocationTargetException;
-import java.util.TreeMap;
 
 public class DocumentFilter3Test {
 
     @Before
     public final void setUp() throws Exception {
-        Core.initializeConsole(new TreeMap<>());
+        Core.initializeConsole();
         TestPreferencesInitializer.init();
         Preferences.setPreference(Preferences.ALLOW_TAG_EDITING, true);
     }

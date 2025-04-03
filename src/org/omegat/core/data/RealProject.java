@@ -68,7 +68,6 @@ import org.xml.sax.SAXParseException;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
-import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
@@ -235,7 +234,7 @@ public class RealProject implements IProject {
      */
     public RealProject(final ProjectProperties props) {
         config = props;
-        if (config.getRepositories() != null && !Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+        if (config.getRepositories() != null && !RuntimePreferences.isNoTeam()) {
             try {
                 remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
                         config.getRepositories(), config);
@@ -247,10 +246,10 @@ public class RealProject implements IProject {
             remoteRepositoryProvider = null;
         }
 
-        sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE),
+        sourceTokenizer = createTokenizer(RuntimePreferences.getTokenizerSource(),
                 props.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
-        targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET),
+        targetTokenizer = createTokenizer(RuntimePreferences.getTokenizerTarget(),
                 props.getTargetTokenizer());
         Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
         logger = LoggerFactory.getLogger(RealProject.class, OStrings.getResourceBundle());
@@ -544,18 +543,18 @@ public class RealProject implements IProject {
             raFile = new RandomAccessFile(lockFile, "rw");
             lockChannel = raFile.getChannel();
             lock = lockChannel.tryLock();
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             Log.log(ex);
         }
         if (lock == null) {
             try {
                 lockChannel.close();
-            } catch (Throwable ignored) {
+            } catch (Exception ignored) {
             }
             lockChannel = null;
             try {
                 raFile.close();
-            } catch (Throwable ignored) {
+            } catch (Exception ignored) {
             }
             raFile = null;
             return false;
@@ -586,11 +585,11 @@ public class RealProject implements IProject {
         } finally {
             try {
                 lockChannel.close();
-            } catch (Throwable ignored) {
+            } catch (Exception ignored) {
             }
             try {
                 raFile.close();
-            } catch (Throwable ignored) {
+            } catch (Exception ignored) {
             }
         }
     }
@@ -1754,13 +1753,13 @@ public class RealProject implements IProject {
                         .getDeclaredConstructor().newInstance();
             } catch (ClassNotFoundException e) {
                 Log.log(e.toString());
-            } catch (Throwable e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
         try {
             return (ITokenizer) projectPref.getDeclaredConstructor().newInstance();
-        } catch (Throwable e) {
+        } catch (Exception e) {
             Log.log(e);
         }
 
@@ -1829,12 +1828,14 @@ public class RealProject implements IProject {
      * @return normalized filename
      */
     protected String patchFileNameForEntryKey(String filename) {
+        String fn = filename.replace('\\', '/');
+        /* FIXME:
         String f = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_FROM);
         String t = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_TO);
-        String fn = filename.replace('\\', '/');
         if (f != null && t != null) {
             fn = fn.replaceAll(f, t);
         }
+        */
         return StringUtil.removeXMLInvalidChars(fn);
     }
 
@@ -1863,12 +1864,14 @@ public class RealProject implements IProject {
             this.externalTms = externalTms;
         }
 
+        @Override
         public void setCurrentFile(FileInfo fi) {
             fileInfo = fi;
             super.setCurrentFile(fi);
             entryKeyFilename = patchFileNameForEntryKey(fileInfo.filePath);
         }
 
+        @Override
         public void fileFinished() {
             super.fileFinished();
 

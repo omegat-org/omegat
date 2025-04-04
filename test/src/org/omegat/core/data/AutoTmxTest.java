@@ -65,7 +65,7 @@ public class AutoTmxTest {
         checkListValues(e2, ProjectTMX.PROP_XICE, "12");
         checkListValues(e2, ProjectTMX.PROP_X100PC, "10");
 
-        Core.initializeConsole(new HashMap<String, String>());
+        Core.initializeConsole();
 
         SourceTextEntry ste10, ste11, ste12;
         p.allProjectEntries.add(ste10 = createSTE("10", "Edit"));
@@ -131,7 +131,7 @@ public class AutoTmxTest {
         props.setTargetLanguage("fr");
         props.setTargetTokenizer(LuceneFrenchTokenizer.class);
 
-        Core.initializeConsole(new HashMap<String, String>());
+        Core.initializeConsole();
 
         p = new RealProject(props);
         p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false, projectFile,

@@ -64,6 +64,7 @@ public final class RuntimePreferences {
     public static void setTokenizerSource(String v) {
         tokenizerSource = v;
     }
+
     public static String getTokenizerSource() {
         return tokenizerSource;
     }

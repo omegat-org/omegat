@@ -209,7 +209,8 @@ public final class StandardCommand {
 
         validateTagsConsoleMode();
 
-        System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), params.alignDirPath));
+        System.out
+                .println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), params.alignDirPath));
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
@@ -238,7 +239,8 @@ public final class StandardCommand {
         // check if project okay
         ProjectProperties projectProperties = null;
         try {
-            projectProperties = ProjectFileStorage.loadProjectProperties(Paths.get(params.projectLocation).toFile());
+            projectProperties = ProjectFileStorage
+                    .loadProjectProperties(Paths.get(params.projectLocation).toFile());
             projectProperties.verifyProject();
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -359,7 +361,6 @@ public final class StandardCommand {
         RealProject p = selectProjectConsoleMode(true);
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
 
-
         if (params.statsOutput == null) {
             // no output file specified, print to console.
             System.out.println(projectStats.getTextData());
@@ -391,23 +392,22 @@ public final class StandardCommand {
             statsMode = StatOutputFormat.XML;
         }
 
-        try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), StandardOpenOption.CREATE,
-                        StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE),
-                StandardCharsets.UTF_8)) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(
+                Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), StandardOpenOption.CREATE,
+                StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE), StandardCharsets.UTF_8)) {
             switch (statsMode) {
-                case TEXT:
-                    writer.write(projectStats.getTextData());
-                    break;
-                case JSON:
-                    writer.write(projectStats.getJsonData());
-                    break;
-                case XML:
-                    writer.write(projectStats.getXmlData());
-                    break;
-                default:
-                    Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
-                    break;
+            case TEXT:
+                writer.write(projectStats.getTextData());
+                break;
+            case JSON:
+                writer.write(projectStats.getJsonData());
+                break;
+            case XML:
+                writer.write(projectStats.getXmlData());
+                break;
+            default:
+                Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
+                break;
             }
         } catch (NoSuchFileException nsfe) {
             Log.logErrorRB("CONSOLE_STATS_FILE_OPEN_ERROR");
@@ -476,7 +476,8 @@ public final class StandardCommand {
     }
 
     private boolean isProjectRemote(String project) {
-        return project != null && project.startsWith("http://") || project != null && project.startsWith("https://");
+        return project != null && project.startsWith("http://")
+                || project != null && project.startsWith("https://");
     }
 
     private void showError(Throwable ex) {

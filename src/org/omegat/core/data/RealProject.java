@@ -68,7 +68,6 @@ import org.xml.sax.SAXParseException;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
-import org.omegat.cli.Parameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;

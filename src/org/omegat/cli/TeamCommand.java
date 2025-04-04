@@ -28,9 +28,7 @@ package org.omegat.cli;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StringUtil;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -49,14 +47,17 @@ public class TeamCommand implements Runnable {
     @CommandLine.Command(name = "init")
     @SuppressWarnings("unused")
     void init(@CommandLine.Parameters(index = "0", paramLabel = "<source>") String sLang,
-              @CommandLine.Parameters(index = "1", paramLabel = "<target>") String tLang) {
+            @CommandLine.Parameters(index = "1", paramLabel = "<target>") String tLang) {
         executeInit(sLang, tLang);
     }
 
     /**
      * Function method called from command entry.
-     * @param sLang source language.
-     * @param tLang target language.
+     * 
+     * @param sLang
+     *            source language.
+     * @param tLang
+     *            target language.
      */
     private void executeInit(String sLang, String tLang) {
         Log.setLevel(Level.WARNING);

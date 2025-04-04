@@ -51,7 +51,6 @@ import javax.swing.SwingWorker;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
-import org.omegat.cli.Parameters;
 import org.omegat.Main;
 import org.omegat.convert.ConvertProject;
 import org.omegat.core.Core;

@@ -70,7 +70,7 @@ icu4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
 languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
-languagetool-server = {group = "org.languagCLIParametersetool", name = "languagetool-server", version.ref = "languagetool"}
+languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
 languagetool-ar = {group = "org.languagetool", name = "language-ar", version.ref = "languagetool"}
 languagetool-ast = {group = "org.languagetool", name = "language-ast", version.ref = "languagetool"}
 languagetool-be = {group = "org.languagetool", name = "language-be", version.ref = "languagetool"}

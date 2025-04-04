@@ -62,12 +62,9 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import com.sun.xml.bind.v2.model.runtime.RuntimePropertyInfo;
 import org.omegat.util.RuntimePreferences;
 import org.openide.awt.Mnemonics;
 
-import org.omegat.cli.Parameters;
-import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.master.PluginUtils;

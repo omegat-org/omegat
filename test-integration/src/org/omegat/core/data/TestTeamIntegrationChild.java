@@ -140,7 +140,7 @@ public final class TestTeamIntegrationChild {
             // Init UI stubs. In a CI environment, errors can occur when
             // initializing the RemoteRepositoryProvider, so we need to make
             // sure the "main window" is available for logging first.
-            Core.initializeConsole(Collections.emptyMap());
+            Core.initializeConsole();
             TestCoreInitializer.initMainWindow(mainWindow);
             TestCoreInitializer.initAutoSave(autoSave);
             TestCoreInitializer.initEditor(editor);

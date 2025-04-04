@@ -30,6 +30,9 @@ import picocli.CommandLine;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Option;
 
@@ -214,5 +217,36 @@ public class Parameters implements Runnable {
         if (status != 0) {
             System.exit(status);
         }
+    }
+
+    public List<String> constructGuiArgs() {
+        List<String> result = new ArrayList<>();
+        if (noTeam) {
+            result.add(NO_TEAM);
+        }
+        if (isQuiet) {
+            result.add(QUIET);
+        }
+        if (tokenizerSource != null) {
+            result.add(TOKENIZER_SOURCE);
+            result.add(tokenizerSource);
+        }
+        if (tokenizerTarget != null) {
+            result.add(TOKENIZER_TARGET);
+            result.add(tokenizerTarget);
+        }
+        if (configDir != null) {
+            result.add(CONFIG_DIR);
+            result.add(configDir);
+        }
+        if (resourceBundle != null) {
+            result.add(RESOURCE_BUNDLE);
+            result.add(resourceBundle);
+        }
+        if (scriptName != null) {
+            result.add(SCRIPT);
+            result.add(scriptName);
+        }
+        return result;
     }
 }

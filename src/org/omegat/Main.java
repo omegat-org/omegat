@@ -79,9 +79,12 @@ public final class Main {
     private Main() {
     }
 
+    private static Parameters parameters;
+
     public static void main(String[] args) {
         // construct parser and execute
-        CommandLine commandLine = new CommandLine(new Parameters());
+        parameters = new Parameters();
+        CommandLine commandLine = new CommandLine(parameters);
         commandLine.addSubcommand("team", new TeamCommand());
         ResourceBundle resourceBundle = ResourceBundle.getBundle("org.omegat.cli.Parameters");
         commandLine.setResourceBundle(resourceBundle);
@@ -129,7 +132,7 @@ public final class Main {
             command.add("-cp");
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
-            // XXX command.addAll(CLIParameters.unparseArgs(PARAMS));
+            command.addAll(parameters.constructGuiArgs());
         } else {
             // assumes jpackage
             javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
@@ -139,7 +142,7 @@ public final class Main {
                 return;
             }
             command.add(javaBin.toString());
-            // XXX command.addAll(CLIParameters.unparseArgs(PARAMS));
+            command.addAll(parameters.constructGuiArgs());
         }
         if (projectDir != null) {
             command.add(projectDir);
@@ -154,4 +157,5 @@ public final class Main {
             e.printStackTrace();
         }
     }
+
 }

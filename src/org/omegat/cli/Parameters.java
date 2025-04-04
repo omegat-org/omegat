@@ -182,9 +182,20 @@ public class Parameters implements Runnable {
      */
     @Override
     public void run() {
+        run(null);
+    }
+
+    public void run(
+        @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE) String project) {
+        if (project != null) {
+            projectLocation = project;
+        }
+        if (noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
         // Check for old console=mode option
         if (consoleMode == null) {
-            start(null);
+            start(projectLocation);
         } else if ("console-translate".equals(consoleMode)) {
             runTranslate();
         } else if ("console-align".equals(consoleMode)) {
@@ -254,4 +265,5 @@ public class Parameters implements Runnable {
         }
         return result;
     }
+
 }

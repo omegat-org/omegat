@@ -62,8 +62,31 @@ public class MainTest {
     }
 
     @Test
-    public void testConsoleTranslate() throws Exception {
+    public void testConsoleTranslateOld() throws Exception {
+        String fileName = "old.txt";
+        testConsoleTranslatePrep(fileName);
 
+        Main.main(new String[] {String.format("--config-dir=%s", configDir), "--mode=console-translate",
+                tmpDir.toString() });
+
+        Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
+        assertTrue(trgFile.toFile().isFile());
+        assertEquals(Arrays.asList("Foo"), Files.readAllLines(trgFile));
+    }
+
+    @Test
+    public void testConsoleTranslate() throws Exception {
+        String fileName = "foo.txt";
+        testConsoleTranslatePrep(fileName);
+
+        Main.main(new String[] {"--config-dir", configDir, "translate", tmpDir.toString() });
+
+        Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
+        assertTrue(trgFile.toFile().isFile());
+        assertEquals(Arrays.asList("Foo"), Files.readAllLines(trgFile));
+    }
+
+    private void testConsoleTranslatePrep(String fileName) throws Exception {
         // Create project properties
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         // Create project internal directories
@@ -72,17 +95,10 @@ public class MainTest {
         props.getWritableGlossaryFile().getAsFile().createNewFile();
         ProjectFileStorage.writeProjectFile(props);
 
-        String fileName = "foo.txt";
         List<String> fileContent = Arrays.asList("Foo");
 
         Path srcFile = tmpDir.resolve(OConsts.DEFAULT_SOURCE).resolve(fileName);
         Files.write(srcFile, fileContent);
 
-        Main.main(new String[] {String.format("--config-dir=%s", configDir), "--mode=console-translate",
-                tmpDir.toString() });
-
-        Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
-        assertTrue(trgFile.toFile().isFile());
-        assertEquals(fileContent, Files.readAllLines(trgFile));
     }
 }

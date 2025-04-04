@@ -139,7 +139,7 @@ public class Parameters implements Runnable {
             STATS_OUTPUT }, paramLabel = "<stats-output-file>", hidden = true, descriptionKey = "OUTPUT_FILE")
     String statsOutput;
     @Option(names = {
-            STATS_MODE }, paramLabel = "<xml_or_text_or_json", hidden = true, descriptionKey = "STATS_TYPE")
+            STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = true, descriptionKey = "STATS_TYPE")
     String statsType;
 
     // Development
@@ -149,9 +149,6 @@ public class Parameters implements Runnable {
 
     /**
      * Start sub-command entry.
-     *
-     * @param project
-     *            project folder string.
      */
     @Command(name = "start")
     public void start(
@@ -177,45 +174,51 @@ public class Parameters implements Runnable {
         runTranslate();
     }
 
+    @Command(name = "align")
+    public void align(
+            @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
+            String project) throws Exception {
+        if (project != null) {
+            projectLocation = project;
+        } else {
+            projectLocation = ".";
+        }
+        runAlign();
+    }
+
+    @Command(name = "stats")
+    public void stats(
+            @CommandLine.Option(names = { "type" }, paramLabel = "<xml_or_text_or_json>", defaultValue = "xml",
+                    descriptionKey = "STATS_TYPE") String format,
+            @CommandLine.Option(names = { "output" }, paramLabel = "<stats-output-file>",
+                    descriptionKey = "OUTPUT_FILE") String output) throws Exception {
+        statsOutput = output;
+        statsType = format;
+        runStats();
+    }
+
     /**
      * Default method when launch.
      */
     @Override
     public void run() {
-        run(null);
+        start(null);
     }
 
     public void run(
-        @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE) String project) {
-        if (project != null) {
-            projectLocation = project;
-        }
-        if (noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
+        @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE) String project)
+            throws Exception {
         // Check for old console=mode option
         if (consoleMode == null) {
-            start(projectLocation);
+            start(project);
         } else if ("console-translate".equals(consoleMode)) {
-            runTranslate();
+            translate(project);
         } else if ("console-align".equals(consoleMode)) {
-            System.out.println("console align!");
-            if (alignDirPath != null) {
-                LOGGER.atInfo().setMessage("alingDir specified to: {0}").addArgument(alignDirPath).log();
-            }
+            align(project);
         } else if ("console-stats".equals(consoleMode)) {
-            LOGGER.atInfo().setMessage("console stats").log();
-            if (statsType != null) {
-                LOGGER.atInfo().setMessage("stats type is: {0}").addArgument(statsType).log();
-            }
+            stats(statsType, statsOutput);
         } else if ("console-createpseudotranslatetmx".equals(consoleMode)) {
-            LOGGER.atInfo().setMessage("createpseudotranslatetmx").log();
-            if (pseudoTranslateTmxPath != null) {
-                LOGGER.atInfo().setMessage("pseudo translate tmx path: " + pseudoTranslateTmxPath).log();
-            }
-            if (pseudoTranslateTypeName != null) {
-                LOGGER.atInfo().setMessage("pseudo translate type: " + pseudoTranslateTypeName).log();
-            }
+            runTmx();
         }
     }
 
@@ -230,6 +233,30 @@ public class Parameters implements Runnable {
     private void runTranslate() {
         StandardCommand command = new StandardCommand(this);
         int status = command.runConsoleTranslate();
+        if (status != 0) {
+            System.exit(status);
+        }
+    }
+
+    private void runAlign() throws Exception {
+        StandardCommand command = new StandardCommand(this);
+        int status = command.runConsoleAlign();
+        if (status != 0) {
+            System.exit(status);
+        }
+    }
+
+    private void runStats() throws Exception {
+        StandardCommand command = new StandardCommand(this);
+        int status = command.runConsoleStats();
+        if (status != 0) {
+            System.exit(status);
+        }
+    }
+
+    private void runTmx() throws Exception {
+        StandardCommand command = new StandardCommand(this);
+        int status = command.runCreatePseudoTranslateTMX();
         if (status != 0) {
             System.exit(status);
         }

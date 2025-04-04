@@ -142,7 +142,7 @@ public final class StandardCommand {
     /**
      * Execute in console mode for translate.
      */
-    private int runCreatePseudoTranslateTMX() throws Exception {
+    public int runCreatePseudoTranslateTMX() throws Exception {
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
@@ -353,7 +353,7 @@ public final class StandardCommand {
      * occurred, especially when parent directory does not exist warns it and
      * return 1.
      */
-    private int runConsoleStats() throws Exception {
+    public int runConsoleStats() throws Exception {
         Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
 
         Core.initializeConsole();

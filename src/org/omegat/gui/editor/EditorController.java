@@ -162,7 +162,23 @@ public class EditorController implements IEditor {
 
     /** Some predefined translations that OmegaT can assign by popup. */
     enum ForceTranslation {
-        UNTRANSLATED, EMPTY, EQUALS_TO_SOURCE;
+        /**
+         * Represents a state where a segment is not translated. It indicates that the
+         * segment is left untranslated, possibly intentionally, or hasn't been
+         * processed yet.
+         */
+        UNTRANSLATED,
+        /**
+         * Represents a state where a segment is empty. It indicates that the segment
+         * has no content, implying it does not contain any translatable or source text.
+         */
+        EMPTY,
+        /**
+         * Represents a state where a segment's translation is identical to its source text.
+         * It indicates that the segment's translation has been manually or automatically
+         * set to match the original source content.
+         */
+        EQUALS_TO_SOURCE;
     }
 
     /** Dockable pane for editor. */
@@ -210,7 +226,7 @@ public class EditorController implements IEditor {
 
     private enum SHOW_TYPE {
         INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE
-    };
+    }
 
     BiDiUtils.ORIENTATION currentOrientation;
     protected boolean sourceLangIsRTL;
@@ -421,7 +437,7 @@ public class EditorController implements IEditor {
         lastLoaded = loadTo;
         SegmentBuilder[] loaded = Arrays.copyOfRange(m_docSegList, loadFrom, loadTo + 1);
         markerController.process(loaded);
-    };
+    }
 
     private synchronized void loadUp(int count) {
         if (firstLoaded <= 0 || firstLoaded >= m_docSegList.length) {
@@ -441,7 +457,7 @@ public class EditorController implements IEditor {
             insertStartParagraphMark(editor.getOmDocument(), builder, 0);
         }
         firstLoaded = loadTo;
-    };
+    }
 
     private void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
@@ -590,16 +606,10 @@ public class EditorController implements IEditor {
         return currentOrientation.equals(BiDiUtils.ORIENTATION.ALL_LTR);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void requestFocus() {
         scrollPane.getViewport().getView().requestFocusInWindow();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public SourceTextEntry getCurrentEntry() {
         SegmentBuilder builder = getCurrentSegmentBuilder();
         return builder == null ? null : builder.ste;
@@ -613,9 +623,6 @@ public class EditorController implements IEditor {
         return m_docSegList[displayedEntryIndex];
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public String getCurrentFile() {
         IProject proj = Core.getProject();
         if (proj == null || !proj.isProjectLoaded()) {
@@ -1260,9 +1267,6 @@ public class EditorController implements IEditor {
         resetOrigin();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void commitAndLeave() {
         if (Core.getProject().getAllEntries().isEmpty()) {
             return; // empty project
@@ -1679,17 +1683,11 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void replaceEditText(final String text) {
         replaceEditText(text, null);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void replaceEditText(String text, final String origin) {
         UIThreadsUtil.mustBeSwingThread();
@@ -1727,18 +1725,13 @@ public class EditorController implements IEditor {
         editor.select(start + off, end + off);
         editor.replaceSelection(text);
     }
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public void replaceEditTextAndMark(final String text, final String origin) {
         replaceEditText(text, origin);
         markAsComesFromMT(text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void replaceEditTextAndMark(String text) {
         replaceEditTextAndMark(text, null);
@@ -1808,9 +1801,6 @@ public class EditorController implements IEditor {
         editor.checkAndFixCaret();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void insertText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1824,18 +1814,12 @@ public class EditorController implements IEditor {
         editor.replaceSelection(text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void insertTextAndMark(String text) {
         insertText(text);
         markAsComesFromMT(text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void insertTag(final String tag) {
         UIThreadsUtil.mustBeSwingThread();
@@ -1854,9 +1838,6 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void selectSourceText() {
         UIThreadsUtil.mustBeSwingThread();
@@ -1869,9 +1850,6 @@ public class EditorController implements IEditor {
         editor.setSelectionEnd(end);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void gotoHistoryBack() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1881,9 +1859,6 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void gotoHistoryForward() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1893,34 +1868,22 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public EditorSettings getSettings() {
         return settings;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void undo() {
         UIThreadsUtil.mustBeSwingThread();
 
         editor.undoManager.undo();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void redo() {
         UIThreadsUtil.mustBeSwingThread();
 
         editor.undoManager.redo();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public String getSelectedText() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1993,17 +1956,11 @@ public class EditorController implements IEditor {
         return "en";
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void remarkOneMarker(final String markerClassName) {
         int mi = markerController.getMarkerIndex(markerClassName);
         markerController.reprocess(m_docSegList, mi);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void markActiveEntrySource(final SourceTextEntry requiredActiveEntry, final List<Mark> marks,
             final String markerClassName) {
         UIThreadsUtil.mustBeSwingThread();
@@ -2107,9 +2064,6 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setAlternateTranslationForCurrentEntry(boolean alternate) {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
 

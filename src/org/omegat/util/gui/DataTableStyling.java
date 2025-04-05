@@ -101,6 +101,10 @@ public final class DataTableStyling {
         table.setRowHeight(font.getSize() + DataTableStyling.LINE_SPACING);
     }
 
+    public static PatternHighlightRenderer getPatternHighlightRenderer(boolean lineWrapEnabled) {
+        return new PatternHighlightRenderer(lineWrapEnabled);
+    }
+
     public static TableCellRenderer getNumberCellRenderer() {
         return new AlternatingHighlightRenderer().setAlignment(SwingConstants.RIGHT).setNumberFormat(NUMBER_FORMAT);
     }

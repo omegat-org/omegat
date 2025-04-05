@@ -28,15 +28,19 @@ import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
 
+import java.awt.GraphicsEnvironment;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assume.assumeFalse;
 
 public class EditorControllerTest extends TestCore {
 
     private EditorController editorController;
 
     @Test
-    public void testEditorController() throws Exception {
+    public void testEditorController() {
+        assumeFalse(GraphicsEnvironment.isHeadless());
         assertNotNull(editorController);
         assertNotNull(editorController.editor);
         assertEquals(0, editorController.displayedFileIndex);

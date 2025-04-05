@@ -184,22 +184,22 @@ public abstract class TestCore {
             @Override
             public JMenu getMenu(final MenuExtender.MenuKey marker) {
                 switch (marker) {
-                    case PROJECT:
-                        return getProjectMenu();
-                    case HELP:
-                        return getHelpMenu();
-                    case OPTIONS:
-                        return getOptionsMenu();
-                    case GOTO:
-                        return getGotoMenu();
-                    case TOOLS:
-                        return getToolsMenu();
-                    case EDIT:
-                        return new JMenu();
-                    case VIEW:
-                        return new JMenu();
-                    default:
-                        return new JMenu();
+                case PROJECT:
+                    return getProjectMenu();
+                case HELP:
+                    return getHelpMenu();
+                case OPTIONS:
+                    return getOptionsMenu();
+                case GOTO:
+                    return getGotoMenu();
+                case TOOLS:
+                    return getToolsMenu();
+                case EDIT:
+                    return new JMenu();
+                case VIEW:
+                    return new JMenu();
+                default:
+                    return new JMenu();
                 }
             }
 
@@ -593,7 +593,7 @@ public abstract class TestCore {
 
             @Override
             public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-                                              String markerClassName) {
+                    String markerClassName) {
             }
 
             @Override

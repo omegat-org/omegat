@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -65,13 +66,19 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  */
 public abstract class TestCore {
     protected File configDir;
+    protected IMainWindow mainWindow;
 
     @Before
     public final void setUpCore() throws Exception {
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
+        initMainWindow();
+        Core.setCurrentProject(new NotLoadedProject());
+        initEditor();
+    }
 
-        final IMainMenu mainMenu = new IMainMenu() {
+    protected IMainMenu getMainMenu() {
+        return new IMainMenu() {
             private final JMenu projectMenu = new JMenu("Project");
             private final JMenu toolsMenu = new JMenu("Tools");
             private final JMenu gotoMenu = new JMenu("Goto");
@@ -177,22 +184,22 @@ public abstract class TestCore {
             @Override
             public JMenu getMenu(final MenuExtender.MenuKey marker) {
                 switch (marker) {
-                case PROJECT:
-                    return getProjectMenu();
-                case HELP:
-                    return getHelpMenu();
-                case OPTIONS:
-                    return getOptionsMenu();
-                case GOTO:
-                    return getGotoMenu();
-                case TOOLS:
-                    return getToolsMenu();
-                case EDIT:
-                    return new JMenu();
-                case VIEW:
-                    return new JMenu();
-                default:
-                    return new JMenu();
+                    case PROJECT:
+                        return getProjectMenu();
+                    case HELP:
+                        return getHelpMenu();
+                    case OPTIONS:
+                        return getOptionsMenu();
+                    case GOTO:
+                        return getGotoMenu();
+                    case TOOLS:
+                        return getToolsMenu();
+                    case EDIT:
+                        return new JMenu();
+                    case VIEW:
+                        return new JMenu();
+                    default:
+                        return new JMenu();
                 }
             }
 
@@ -222,8 +229,11 @@ public abstract class TestCore {
             public void invokeAction(String action, int modifiers) {
             }
         };
+    }
 
-        Core.setMainWindow(new IMainWindow() {
+    protected IMainWindow getMainWindow() {
+        final IMainMenu mainMenu = getMainMenu();
+        return new IMainWindow() {
             public void addDockable(Dockable pane) {
             }
 
@@ -291,10 +301,16 @@ public abstract class TestCore {
 
             public void showLockInsertMessage(String messageText, String toolTip) {
             }
-        });
-        Core.setCurrentProject(new NotLoadedProject());
+        };
+    }
 
-        final IEditorSettings editorSettings = new IEditorSettings() {
+    protected void initMainWindow() {
+        mainWindow = getMainWindow();
+        Core.setMainWindow(getMainWindow());
+    }
+
+    protected IEditorSettings getEditorSettings() {
+        return new IEditorSettings() {
 
             @Override
             public boolean isUseTabForAdvance() {
@@ -457,6 +473,10 @@ public abstract class TestCore {
                 return false;
             }
         };
+    }
+
+    protected void initEditor() {
+        final IEditorSettings editorSettings = getEditorSettings();
         TestCoreInitializer.initEditor(new IEditor() {
 
             @Override
@@ -573,7 +593,7 @@ public abstract class TestCore {
 
             @Override
             public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-                    String markerClassName) {
+                                              String markerClassName) {
             }
 
             @Override

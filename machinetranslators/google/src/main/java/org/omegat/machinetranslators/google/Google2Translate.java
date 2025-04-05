@@ -30,13 +30,13 @@
 package org.omegat.machinetranslators.google;
 
 import java.awt.Window;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import javax.swing.JCheckBox;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
@@ -81,7 +81,6 @@ public class Google2Translate extends BaseCachedTranslate {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(BUNDLE_BASENAME);
     private static final ILogger LOGGER = LoggerFactory.getLogger(Google2Translate.class, BUNDLE);
 
-
     /**
      * Register plugins into OmegaT.
      */
@@ -98,8 +97,11 @@ public class Google2Translate extends BaseCachedTranslate {
 
     /**
      * Constructor for test.
-     * @param baseUrl custom url.
-     * @param key temprary key.
+     * 
+     * @param baseUrl
+     *            custom url.
+     * @param key
+     *            temprary key.
      */
     public Google2Translate(String baseUrl, String key) {
         googleTranslateUrl = baseUrl + GT_PATH;
@@ -204,10 +206,12 @@ public class Google2Translate extends BaseCachedTranslate {
     protected String getJsonResults(String json) throws MachineTranslateError {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            Response response = mapper.readValue(json, Response.class);
-            List<Translation> translations = response.getData().getTranslations();
-            if (translations.size() > 0) {
-                return translations.get(0).getTranslatedText();
+            JsonNode root = mapper.readTree(json);
+            if (root != null && root.get("error") == null) {
+                var translations = root.get("data").get("translations");
+                if (translations != null && !translations.isEmpty()) {
+                    return translations.get(0).get("translatedText").asText();
+                }
             }
         } catch (Exception e) {
             LOGGER.atError().setCause(e).setMessageRB("MT_JSON_ERROR").log();
@@ -274,86 +278,5 @@ public class Google2Translate extends BaseCachedTranslate {
         dialog.panel.itemsPanel.add(premiumCheckBox);
 
         dialog.show();
-    }
-
-    /**
-     * Data schema class for Google2 translate API response.
-     */
-    public static final class Response {
-        private Data data;
-
-        public Data getData() {
-            return data;
-        }
-
-        public void setData(Data data) {
-            this.data = data;
-        }
-
-        @Override
-        public String toString() {
-            return "Response{" + "data=" + data + '}';
-        }
-    }
-
-    /**
-     * Data schema class.
-     */
-    public static final class Data {
-        private List<Translation> translations;
-
-        public List<Translation> getTranslations() {
-            return translations;
-        }
-
-        public void setTranslations(List<Translation> translations) {
-            this.translations = translations;
-        }
-
-        @Override
-        public String toString() {
-            return "Data{" + "translations=" + translations + '}';
-        }
-    }
-
-    /**
-     * Data schema class.
-     */
-    public static final class Translation {
-        private String translatedText;
-        private String detectedSourceLanguage;
-        private String model;
-
-        public String getTranslatedText() {
-            return translatedText;
-        }
-
-        public void setTranslatedText(String translatedText) {
-            this.translatedText = translatedText;
-        }
-
-        public String getDetectedSourceLanguage() {
-            return detectedSourceLanguage;
-        }
-
-        public void setDetectedSourceLanguage(String detectedSourceLanguage) {
-            this.detectedSourceLanguage = detectedSourceLanguage;
-        }
-
-        public String getModel() {
-            return model;
-        }
-
-        public void setModel(final String model) {
-            this.model = model;
-        }
-
-        @Override
-        public String toString() {
-            return "Translation{"
-                    + "translatedText='" + translatedText + '\''
-                    + ", detectedSourceLanguage='" + detectedSourceLanguage + '\''
-                    + ", model='" + model + '\'' + '}';
-        }
     }
 }

@@ -8,7 +8,7 @@ steps:
     inputs:
       tasks: 'test'
       options: '--build-cache -PenvIsCi'
-      jdkVersionOption: '1.11'
+      jdkVersionOption: '1.21'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/test-results/**/TEST-*.xml'
     condition: always()

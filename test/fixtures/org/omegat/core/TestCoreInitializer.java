@@ -25,6 +25,8 @@
 
 package org.omegat.core;
 
+import org.omegat.core.tagvalidation.ITagValidation;
+import org.omegat.core.tagvalidation.TagValidation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
@@ -42,11 +44,15 @@ public final class TestCoreInitializer {
     }
 
     public static void initEditor(IEditor editor) {
-        Core.editor = editor;
+        Core.setEditor(editor);
+    }
+
+    public static void initTagValidation(ITagValidation tagValidation) {
+        Core.setTagValidation(tagValidation);
     }
 
     public static void initAutoSave(IAutoSave autoSave) {
-        Core.saveThread = autoSave;
+        Core.setSaveThread(autoSave);
     }
 
     public static void initMainWindow(IMainWindow mainWindow) throws Exception {
@@ -58,6 +64,6 @@ public final class TestCoreInitializer {
     }
 
     public static void initGlossary(IGlossaries glossaries) {
-        Core.glossary = glossaries;
+        Core.setGlossary(glossaries);
     }
 }

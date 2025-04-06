@@ -100,17 +100,14 @@ public final class Core {
 
     private static IProject currentProject;
     private static IMainWindow mainWindow;
-    protected static IEditor editor;
+    private static IEditor editor;
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
-
-    protected static IAutoSave saveThread;
-    private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
-
-    protected static IGlossaries glossary;
+    private static IAutoSave saveThread;
+    private static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
@@ -122,10 +119,9 @@ public final class Core {
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
-    private static final List<String> PLUGINS_LOADING_ERRORS = Collections
-            .synchronizedList(new ArrayList<String>());
-
-    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
+    private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
+    private static final List<String> PLUGINS_LOADING_ERRORS = Collections.synchronizedList(new ArrayList<>());
+    private static final List<IMarker> MARKERS = new ArrayList<>();
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -410,4 +406,22 @@ public final class Core {
     public interface RunnableWithException {
         void run() throws Exception;
     }
+
+    /* methods for unit test */
+    static void setEditor(IEditor newEditor) {
+        editor = newEditor;
+    }
+
+    static void setTagValidation(ITagValidation newTagValidation) {
+        tagValidation = newTagValidation;
+    }
+
+    static void setSaveThread(IAutoSave newSewAutoSave) {
+        saveThread = newSewAutoSave;
+    }
+
+    static void setGlossary(IGlossaries newGlossary) {
+        glossary = newGlossary;
+    }
+
 }

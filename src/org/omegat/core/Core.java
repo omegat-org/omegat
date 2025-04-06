@@ -114,8 +114,6 @@ public final class Core {
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
-    @SuppressWarnings("unused")
-    private static MultipleTransPane multiple;
     private static INotes notes;
     private static IComments comments;
     private static Segmenter segmenter;
@@ -283,7 +281,9 @@ public final class Core {
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
-        multiple = new MultipleTransPane(me);
+        // Create an independent instance updated from SearchThead.
+        new MultipleTransPane(me);
+        // Create an independent instance updated by events.
         new SegmentPropertiesArea(me);
         projWin = new ProjectFilesListController();
     }

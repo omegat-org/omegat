@@ -68,6 +68,15 @@ public abstract class TestCore {
     protected File configDir;
     protected IMainWindow mainWindow;
 
+    /**
+     * Set-up OmegaT Core properties for unit and functional test.
+     * <p>
+     * Create a temporary directory for user configuration.
+     * This keeps developers' omegat configuration folder clean and
+     * provides stable test conditions.
+     * It also initializes a main window and editor with modular functions.
+     * @throws Exception if file I/O failed.
+     */
     @Before
     public final void setUpCore() throws Exception {
         configDir = Files.createTempDirectory("omegat").toFile();
@@ -77,6 +86,10 @@ public abstract class TestCore {
         initEditor();
     }
 
+    /**
+     * Create a mock of the main menu object.
+     * @return Main menu object which implement IMainMenu.
+     */
     protected IMainMenu getMainMenu() {
         return new IMainMenu() {
             private final JMenu projectMenu = new JMenu("Project");
@@ -231,6 +244,10 @@ public abstract class TestCore {
         };
     }
 
+    /**
+     * Create a main Window object.
+     * @return Object which implements IMainWindow.
+     */
     protected IMainWindow getMainWindow() {
         final IMainMenu mainMenu = getMainMenu();
         return new IMainWindow() {
@@ -304,11 +321,18 @@ public abstract class TestCore {
         };
     }
 
+    /**
+     * Initialize main window and store it in mainWindow field and Core.
+     */
     protected void initMainWindow() {
         mainWindow = getMainWindow();
         Core.setMainWindow(getMainWindow());
     }
 
+    /**
+     * Create an implementation of IEditorSettings.
+     * @return object which implements IEditorSettings as empty methods.
+     */
     protected IEditorSettings getEditorSettings() {
         return new IEditorSettings() {
 
@@ -475,6 +499,9 @@ public abstract class TestCore {
         };
     }
 
+    /**
+     * Initialize editor and store it with TestInitializer.initEditor function.
+     */
     protected void initEditor() {
         final IEditorSettings editorSettings = getEditorSettings();
         TestCoreInitializer.initEditor(new IEditor() {
@@ -713,6 +740,10 @@ public abstract class TestCore {
         });
     }
 
+    /**
+     * Clean up a temporary directory for configuration.
+     * @throws Exception
+     */
     @After
     public final void tearDownCore() throws Exception {
         FileUtils.forceDeleteOnExit(configDir);

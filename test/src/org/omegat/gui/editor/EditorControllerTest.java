@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.gui.editor;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
@@ -38,9 +39,14 @@ public class EditorControllerTest extends TestCore {
 
     private EditorController editorController;
 
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        assumeFalse("Skipping test: headless environment",
+                GraphicsEnvironment.isHeadless());
+    }
+
     @Test
     public void testEditorController() {
-        assumeFalse(GraphicsEnvironment.isHeadless());
         assertNotNull(editorController);
         assertNotNull(editorController.editor);
         assertEquals(0, editorController.displayedFileIndex);

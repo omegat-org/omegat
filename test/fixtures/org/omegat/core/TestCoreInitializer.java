@@ -26,7 +26,6 @@
 package org.omegat.core;
 
 import org.omegat.core.tagvalidation.ITagValidation;
-import org.omegat.core.tagvalidation.TagValidation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;

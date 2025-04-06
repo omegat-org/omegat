@@ -17,6 +17,9 @@ dependencies {
             exclude group: 'com.google.android'
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
+            exclude module: 'commons-lang3'
+            exclude module: 'commons-text'
+            exclude module: 'commons-logging'
         }
         implementation(libs.languagetool.ta) {
             exclude module: 'languagetool-core'

@@ -374,7 +374,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                include 'build-logic/**', 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
                         'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
                         'docs_devel/**', 'scripts/**',
                         'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',

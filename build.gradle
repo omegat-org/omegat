@@ -385,10 +385,10 @@ distributions {
             from(processResources) {
                 into('src')
             }
-            into(layout.settingsDirectory.dir('lib/provided/core')) {
+            into('lib/provided/core') {
                 from configurations.runtimeClasspath
             }
-            into(layout.settingsDirectory.dir('lib/provided/module')) {
+            into('lib/provided/module') {
                 // collect project runtime dependencies in all subprojects and sourceSets
                 from {subprojects.findAll { it.getSubprojects().isEmpty()}
                         .collect { it.configurations.matching { it.name.endsWith('untimeClasspath')

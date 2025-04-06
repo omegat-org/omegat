@@ -100,6 +100,7 @@ public final class Core {
 
     private static IProject currentProject;
     private static IMainWindow mainWindow;
+    // package-private for test fixture TestCoreInitializer
     static IEditor editor;
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
@@ -107,9 +108,11 @@ public final class Core {
     private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
 
+    // package-private for test fixture TestCoreInitializer
     static IAutoSave saveThread;
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
 
+    // package-private for test fixture TestCoreInitializer
     static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;

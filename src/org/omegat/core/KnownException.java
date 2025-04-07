@@ -27,6 +27,9 @@ package org.omegat.core;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Know exception for some problems.
  *
@@ -34,24 +37,28 @@ import org.omegat.util.StringUtil;
  */
 @SuppressWarnings("serial")
 public class KnownException extends RuntimeException {
-    protected final Object[] params;
+    protected final List<Object> parameters = new ArrayList<>(0);
 
     public KnownException(String errorCode, Object... params) {
         super(errorCode);
-        this.params = params;
+        if (params != null) {
+            this.parameters.addAll(List.of(params));
+        }
     }
 
     public KnownException(Throwable ex, String errorCode, Object... params) {
         super(errorCode, ex);
-        this.params = params;
+        if (params != null) {
+            this.parameters.addAll(List.of(params));
+        }
     }
 
     public Object[] getParams() {
-        return params;
+        return parameters.toArray();
     }
 
     @Override
     public String getLocalizedMessage() {
-        return StringUtil.format(OStrings.getString(getMessage()), params);
+        return StringUtil.format(OStrings.getString(getMessage()), parameters);
     }
 }

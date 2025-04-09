@@ -30,6 +30,7 @@ import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.notes.INotes;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -64,5 +65,9 @@ public final class TestCoreInitializer {
 
     public static void initGlossary(IGlossaries glossaries) {
         Core.setGlossary(glossaries);
+    }
+
+    public static void initNotes(INotes notes) {
+        Core.setNotes(notes);
     }
 }

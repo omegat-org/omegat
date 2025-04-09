@@ -32,10 +32,14 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.ExternalTMX;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
+import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -43,14 +47,21 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
+import org.omegat.gui.notes.INotes;
+import org.omegat.gui.notes.NotesTextArea;
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.ITokenizer;
+import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
-import javax.swing.JComponent;
+import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -70,8 +81,8 @@ public class EditorControllerTest extends TestCore {
     private EditorController editorController;
     private File projectRootDir;
 
-    private Language sourceLang = new Language("en");
-    private Language targetLang = new Language("pl");
+    private final Language sourceLang = new Language("en");
+    private final Language targetLang = new Language("pl");
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -106,40 +117,10 @@ public class EditorControllerTest extends TestCore {
     private void setSimpleProject() {
         TestProjectProperties props = new TestProjectProperties();
         props.setProjectRoot(projectRootDir.getAbsolutePath());
-        Core.setProject(new NotLoadedProject() {
-            @Override
-            public ProjectProperties getProjectProperties() {
-                return props;
-            }
-
-            @Override
-            public List<FileInfo> getProjectFiles() {
-                List<FileInfo> files = new ArrayList<>();
-                FileInfo file1 = new FileInfo();
-                file1.filePath = "source.txt";
-                files.add(file1);
-                FileInfo file2 = new FileInfo();
-                file2.filePath = "website/download.html";
-                return files;
-            }
-
-            @Override
-            public List<SourceTextEntry> getAllEntries() {
-                List<SourceTextEntry> ste = new ArrayList<>();
-                ste.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
-                        1, null, null, Collections.emptyList()));
-                ste.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
-                        "For installation on Linux.",
-                        "For installation on other operating systems (such as FreeBSD and Solaris).&lt;br0/>",
-                        null), 1, null, "Other", Collections.emptyList()));
-                return ste;
-            }
-
-            @Override
-            public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
-                return Collections.emptyMap();
-            }
-        });
+        props.setSupportDefaultTranslations(false);
+        props.setTargetTokenizer(DefaultTokenizer.class);
+        TestCoreInitializer.initNotes(new MyNotes());
+        Core.setProject(new RealProjectWithTMX(props));
     }
 
     @Test
@@ -158,23 +139,25 @@ public class EditorControllerTest extends TestCore {
     }
 
     @Test
-    public void testEditorControllerLoadSimpleProject() {
+    public void testEditorControllerLoadSimpleProject() throws Exception {
         setSimpleProject();
         fireLoadProjectEvent();
-        assertTrue(editorController.isOrientationAllLtr());
         assertNotNull(editorController.editor.getOmDocument());
-        assertEquals(0, editorController.getCurrentEntryNumber());
+        assertTrue(editorController.isOrientationAllLtr());
+        assertNotNull(editorController.getCurrentFile());
+        assertEquals(1, editorController.getCurrentEntryNumber());
         assertEquals(0, editorController.editor.getOmDocument().getTranslationEnd());
         assertEquals(0, editorController.editor.getOmDocument().getTranslationStart());
     }
 
     @Test
-    public void testEditorControllerLoadSimpleProjectWithCarretEvent() {
+    public void testEditorControllerLoadSimpleProjectWithCaretEvent() throws Exception {
         setSimpleProject();
         fireLoadProjectEvent();
-        assertNotNull(editorController.editor.getOmDocument());
-        editorController.lastLoaded = 2;
-        fireCarretEvent(editorController.editor, 1);
+        Document doc = editorController.editor.getOmDocument();
+        assertNotNull(doc);
+        assertTrue(doc.getLength() > 0);
+        fireCaretEvent(editorController.editor, 0);
         assertEquals(0, editorController.editor.getOmDocument().getTranslationEnd());
         assertEquals(0, editorController.editor.getOmDocument().getTranslationStart());
     }
@@ -193,7 +176,7 @@ public class EditorControllerTest extends TestCore {
         }
     }
 
-    private void fireCarretEvent(JTextComponent component, int position) {
+    private void fireCaretEvent(JTextComponent component, int position) {
         CountDownLatch latch = new CountDownLatch(1);
         component.addCaretListener(e -> {
             latch.countDown();
@@ -211,7 +194,8 @@ public class EditorControllerTest extends TestCore {
         TestCoreInitializer.initEditor(editorController);
     }
 
-    private class TestProjectProperties extends ProjectProperties {
+    class TestProjectProperties extends ProjectProperties {
+
         @Override
         public void setProjectRoot(String projectRoot) {
             this.projectRootDir = new File(projectRoot);
@@ -230,6 +214,100 @@ public class EditorControllerTest extends TestCore {
         @Override
         public boolean isSentenceSegmentingEnabled() {
             return true;
+        }
+    }
+
+    protected static class RealProjectWithTMX extends RealProject {
+        public RealProjectWithTMX(ProjectProperties props) {
+            super(props);
+            projectTMX = new ProjectTMX();
+            files = new ArrayList<>();
+            FileInfo file1 = new FileInfo();
+            file1.filePath = "source.txt";
+            file1.entries = new ArrayList<>();
+            file1.entries.add(new SourceTextEntry(new EntryKey("source.txt", "XXX", null, "", "", null),
+                    1, null, null, Collections.emptyList()));
+            files.add(file1);
+            FileInfo file2 = new FileInfo();
+            file2.filePath = "website/download.html";
+            file2.entries = new ArrayList<>();
+            file2.entries.add(new SourceTextEntry(new EntryKey("website/download.html", "Other", "id",
+                    "For installation on Linux.",
+                    "For installation on other operating systems (such as FreeBSD and Solaris).&lt;br0/>",
+                    null), 1, null, "Other", Collections.emptyList()));
+            files.add(file2);
+        }
+
+        @Override
+        public ITokenizer getSourceTokenizer() {
+            return new LuceneEnglishTokenizer();
+        };
+
+        @Override
+        public ITokenizer getTargetTokenizer() {
+            return new DefaultTokenizer();
+        }
+
+        @Override
+        public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
+            return Collections.emptyMap();
+        }
+
+        public ProjectTMX getTMX() {
+            return projectTMX;
+        }
+
+        private final List<FileInfo> files;
+
+        @Override
+        public List<FileInfo> getProjectFiles() {
+            return files;
+        }
+
+        @Override
+        public List<SourceTextEntry> getAllEntries() {
+            List<SourceTextEntry> ste = new ArrayList<>();
+            ste.add(files.get(0).entries.get(0));
+            ste.add(files.get(1).entries.get(0));
+            return ste;
+        }
+
+        @Override
+        public boolean isProjectLoaded() {
+            return true;
+        }
+    }
+
+    static class MyNotes implements INotes {
+        private String note;
+        @Override
+        public String getNoteText() {
+            return note;
+        }
+
+        @Override
+        public void setNoteText(String note) {
+            this.note = note;
+        }
+
+        @Override
+        public void clear() {
+            note = null;
+        }
+
+        @Override
+        public void undo() {
+            // do nothing
+        }
+
+        @Override
+        public void redo() {
+            // do nothing
+        }
+
+        @Override
+        public void requestFocus() {
+            // do nothing
         }
     }
 }

@@ -425,4 +425,8 @@ public final class Core {
         glossary = newGlossary;
     }
 
+    static void setNotes(INotes newNotes) {
+        notes = newNotes;
+    }
+
 }

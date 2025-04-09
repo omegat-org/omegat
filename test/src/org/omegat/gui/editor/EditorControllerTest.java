@@ -32,14 +32,11 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
-import org.omegat.core.data.ExternalTMX;
-import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -48,12 +45,10 @@ import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
 import org.omegat.gui.notes.INotes;
-import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.util.Language;
-import org.omegat.util.Preferences;
 
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
@@ -61,7 +56,6 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -139,7 +133,7 @@ public class EditorControllerTest extends TestCore {
     }
 
     @Test
-    public void testEditorControllerLoadSimpleProject() throws Exception {
+    public void testEditorControllerLoadSimpleProject() {
         setSimpleProject();
         fireLoadProjectEvent();
         assertNotNull(editorController.editor.getOmDocument());
@@ -151,7 +145,7 @@ public class EditorControllerTest extends TestCore {
     }
 
     @Test
-    public void testEditorControllerLoadSimpleProjectWithCaretEvent() throws Exception {
+    public void testEditorControllerLoadSimpleProjectWithCaretEvent() {
         setSimpleProject();
         fireLoadProjectEvent();
         Document doc = editorController.editor.getOmDocument();

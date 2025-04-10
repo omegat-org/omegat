@@ -140,8 +140,8 @@ public class EditorControllerTest extends TestCore {
         assertTrue(editorController.isOrientationAllLtr());
         assertNotNull(editorController.getCurrentFile());
         assertEquals(1, editorController.getCurrentEntryNumber());
-        assertEquals(0, editorController.editor.getOmDocument().getTranslationEnd());
-        assertEquals(0, editorController.editor.getOmDocument().getTranslationStart());
+        assertEquals(31, editorController.editor.getOmDocument().getTranslationEnd());
+        assertEquals(31, editorController.editor.getOmDocument().getTranslationStart());
     }
 
     @Test
@@ -152,14 +152,14 @@ public class EditorControllerTest extends TestCore {
         assertNotNull(doc);
         assertTrue(doc.getLength() > 0);
         fireCaretEvent(editorController.editor, 0);
-        assertEquals(0, editorController.editor.getOmDocument().getTranslationEnd());
-        assertEquals(0, editorController.editor.getOmDocument().getTranslationStart());
+        assertEquals(31, editorController.editor.getOmDocument().getTranslationEnd());
+        assertEquals(31, editorController.editor.getOmDocument().getTranslationStart());
     }
 
     private void fireLoadProjectEvent() {
         CountDownLatch latch = new CountDownLatch(1);
-        CoreEvents.registerProjectChangeListener(event -> {
-            if (Core.getProject().isProjectLoaded()) {
+        editorController.editor.addPropertyChangeListener("model", evt -> {
+            if (editorController.editor.getOmDocument() != null) {
                 latch.countDown();
             }
         });
@@ -167,6 +167,7 @@ public class EditorControllerTest extends TestCore {
         try {
             latch.await(5, TimeUnit.SECONDS);
         } catch (InterruptedException ignored) {
+            // Pass through when timeout, allow opportunistic test.
         }
     }
 
@@ -179,6 +180,7 @@ public class EditorControllerTest extends TestCore {
         try {
             latch.await(5, TimeUnit.SECONDS);
         } catch (InterruptedException ignored) {
+            // Pass through when timeout, allow opportunistic test.
         }
     }
 
@@ -235,7 +237,7 @@ public class EditorControllerTest extends TestCore {
         @Override
         public ITokenizer getSourceTokenizer() {
             return new LuceneEnglishTokenizer();
-        };
+        }
 
         @Override
         public ITokenizer getTargetTokenizer() {

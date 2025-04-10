@@ -25,6 +25,7 @@
 
 package org.omegat.core.statistics;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.util.TreeMap;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.omegat.core.Core;
@@ -64,6 +66,11 @@ import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 public class CalcMatchStatisticsTest {
+
+    @BeforeClass
+    public static void setup() throws IOException {
+        TestPreferencesInitializer.init();
+    }
 
     @Test
     public void testCalcMatchStatics() throws Exception {
@@ -365,7 +372,7 @@ public class CalcMatchStatisticsTest {
 
         CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback,
                                 int threshold) {
-            super(project, segmenter, callback, false, threshold);
+            super(project, segmenter, callback, false);
             this.project = project;
             this.callback = callback;
         }

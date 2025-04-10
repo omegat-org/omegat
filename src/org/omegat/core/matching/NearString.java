@@ -127,16 +127,17 @@ public class NearString {
      */
     @Deprecated
     public NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
-            boolean fuzzyMark, int nearScore, int nearScoreNoStem, int adjustedScore,
-            byte[] nearData, String projName, String creator, long creationDate,
-            String changer, long changedDate, List<TMXProp> props) {
-        this(key, source, translation, comesFrom, fuzzyMark, new Scores(nearScore, nearScoreNoStem,
-                adjustedScore), nearData, projName, creator, creationDate, changer, changedDate, props);
+            boolean fuzzyMark, int nearScore, int nearScoreNoStem, int adjustedScore, byte[] nearData,
+            String projName, String creator, long creationDate, String changer, long changedDate,
+            List<TMXProp> props) {
+        this(key, source, translation, comesFrom, fuzzyMark,
+                new Scores(nearScore, nearScoreNoStem, adjustedScore), nearData, projName, creator,
+                creationDate, changer, changedDate, props);
     }
 
     private NearString(EntryKey key, String source, String translation, MATCH_SOURCE comesFrom,
-                      boolean fuzzyMark, Scores scores, byte[] nearData, String projName, String creator,
-                      long creationDate, String changer, long changedDate, List<TMXProp> props) {
+            boolean fuzzyMark, Scores scores, byte[] nearData, String projName, String creator,
+            long creationDate, String changer, long changedDate, List<TMXProp> props) {
         this.key = key;
         this.source = source;
         this.translation = translation;
@@ -174,7 +175,7 @@ public class NearString {
      * @return NearString merged.
      */
     public static NearString merge(NearString ns, EntryKey key, ITMXEntry entry, MATCH_SOURCE comesFrom,
-                                   boolean fuzzyMark, Scores scores, byte[] nearData, String projName) {
+            boolean fuzzyMark, Scores scores, byte[] nearData, String projName) {
 
         List<String> projs = new ArrayList<>();
         List<Scores> mergedScores = new ArrayList<>();
@@ -187,9 +188,8 @@ public class NearString {
             projs.add(0, projName);
             mergedScores.add(0, merged.scores[0]);
         } else {
-            merged = new NearString(ns.key, ns.source, ns.translation, ns.comesFrom, ns.fuzzyMark,
-                    scores, ns.attr, null, ns.creator, ns.creationDate, ns.changer,
-                    ns.changedDate, ns.props);
+            merged = new NearString(ns.key, ns.source, ns.translation, ns.comesFrom, ns.fuzzyMark, scores,
+                    ns.attr, null, ns.creator, ns.creationDate, ns.changer, ns.changedDate, ns.props);
             projs.add(projName);
             mergedScores.add(merged.scores[0]);
         }
@@ -199,10 +199,11 @@ public class NearString {
     }
 
     @Deprecated
-    public static NearString merge(NearString ns, final EntryKey key, final String source, final String translation,
-            MATCH_SOURCE comesFrom, final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem,
-            final int adjustedScore, final byte[] nearData, final String projName, final String creator,
-            final long creationDate, final String changer, final long changedDate, final List<TMXProp> props) {
+    public static NearString merge(NearString ns, final EntryKey key, final String source,
+            final String translation, MATCH_SOURCE comesFrom, final boolean fuzzyMark, final int nearScore,
+            final int nearScoreNoStem, final int adjustedScore, final byte[] nearData, final String projName,
+            final String creator, final long creationDate, final String changer, final long changedDate,
+            final List<TMXProp> props) {
 
         List<String> projs = new ArrayList<>();
         List<Scores> mergedScores = new ArrayList<>();
@@ -212,7 +213,8 @@ public class NearString {
         NearString merged;
         if (nearScore > ns.scores[0].score) {
             merged = new NearString(key, source, translation, comesFrom, fuzzyMark, nearScore,
-                    nearScoreNoStem, adjustedScore, nearData, null, creator, creationDate, changer, changedDate, props);
+                    nearScoreNoStem, adjustedScore, nearData, null, creator, creationDate, changer,
+                    changedDate, props);
             projs.add(0, projName);
             mergedScores.add(0, merged.scores[0]);
         } else {

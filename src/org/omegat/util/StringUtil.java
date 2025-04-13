@@ -408,9 +408,9 @@ public final class StringUtil {
      * Returns first non-zero object from list, or zero if all values is null.
      */
     public static long nvlLong(long... values) {
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] != 0) {
-                return values[i];
+        for (long value : values) {
+            if (value != 0) {
+                return value;
             }
         }
         return 0;
@@ -582,9 +582,12 @@ public final class StringUtil {
     public static String makeValidXML(String plaintext) {
         StringBuilder out = new StringBuilder();
         String text = removeXMLInvalidChars(plaintext);
-        for (int cp, i = 0; i < text.length(); i += Character.charCount(cp)) {
+        int cp;
+        int i = 0;
+        while (i < text.length()) {
             cp = text.codePointAt(i);
             out.append(escapeXMLChars(cp));
+            i += Character.charCount(cp);
         }
         return out.toString();
     }
@@ -710,25 +713,29 @@ public final class StringUtil {
         StringBuilder sb = new StringBuilder(text);
 
         int ch;
-        for ( int i=0; i<sb.length(); i++ ) {
+        int i = 0;
+        while (i < sb.length()) {
             ch = sb.charAt(i);
             // ASCII
-            if (( ch >= 0xFF01 ) && ( ch <= 0xFF5E )) {
-                sb.setCharAt(i, (char)(ch-0xFEE0));
+            if ((ch >= 0xFF01) && (ch <= 0xFF5E)) {
+                sb.setCharAt(i, (char) (ch - 0xFEE0));
+                i++;
                 continue;
             }
-            if ( ch == 0x3000 ) {
+            if (ch == 0x3000) {
                 sb.setCharAt(i, ' ');
             }
             i = processKatakana(ch, sb, i);
             // Hangul
-            if (( ch > 0xFFA1 ) && ( ch <= 0xFFBE )) {
-                sb.setCharAt(i, (char)(ch-0xCE70));
+            if ((ch > 0xFFA1) && (ch <= 0xFFBE)) {
+                sb.setCharAt(i, (char) (ch - 0xCE70));
+                i++;
                 continue;
             }
             i = processHungle(ch, sb, i);
             i = processLetterLikeSymbol(ch, sb, i);
             i = replaceSquaredLatinAbbreviations(ch, sb, i);
+            i++;
         }
 
         String result = sb.toString();
@@ -1576,8 +1583,10 @@ public final class StringUtil {
      * @param text
      * @return text with trailing whitespace removed
      */
-    public static String rstrip(String text) {
-        for (int cp, i = text.length(); i >= 0; i -= Character.charCount(cp)) {
+    public static String rstrip(@NotNull String text) {
+        int cp;
+        int i = text.length();
+        while (i >= 0) {
             if (i == 0) {
                 return "";
             }
@@ -1585,6 +1594,7 @@ public final class StringUtil {
             if (!Character.isWhitespace(cp)) {
                 return text.substring(0, i);
             }
+            i -= Character.charCount(cp);
         }
         return text;
     }

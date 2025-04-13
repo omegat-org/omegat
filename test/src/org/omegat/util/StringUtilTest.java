@@ -362,11 +362,11 @@ public class StringUtilTest {
         assertEquals("\u30a2\u30a2\u30ac\u30ac ", StringUtil.normalizeWidth(test));
     }
 
+    // U+00A0 NO-BREAK SPACE
+    private static final String ALPHA_WITH_NOBREAK_SPACE = "ABC\u00a0";
+
     @Test
     public void testRstrip() {
-        // U+00A0 NO-BREAK SPACE
-        final String ALPHA_WITH_NOBREAK_SPACE = "ABC\u00a0";
-
         assertEquals("", StringUtil.rstrip(""));
         assertEquals("", StringUtil.rstrip(" "));
         assertEquals("ABC", StringUtil.rstrip("ABC"));

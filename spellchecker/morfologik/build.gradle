@@ -7,7 +7,6 @@ dependencies {
     if (providedModuleLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/languagetool-core-*.jar',
                                        '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar', '**/morfologik-*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/morfologik-*.jar'])
     } else {
         // morfologik stemming and speller are dependency of languagetool-core
         compileOnly(libs.morfologik.stemming)
@@ -23,6 +22,9 @@ dependencies {
             exclude group: 'com.google.android'
             exclude group: 'org.jetbrains'
             exclude module: 'morfologik-fsa'
+            exclude module: 'commons-lang3'
+            exclude module: 'commons-text'
+            exclude module: 'commons-logging'
         }
     }
     testImplementation(libs.junit4)

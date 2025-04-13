@@ -1,3 +1,1487 @@
 # Code owners for the OmegaT project
 
+# Bundle resources
 /src/org/omegat/Bundle*.properties    @kazephil @brandelune @kosivantsov
+aligner/src/main/resources/org/omegat/gui/align/Bundle*.properties     @kazephil @brandelune @kosivantsov
+machinetranslators/apertium/src/main/resources/org/omegat/machinetranslators/apertium/Bundle*.properties @kazephil @brandelune @kosivantsov
+machinetranslators/belazar/src/main/resources/org/omegat/machinetranslators/belazar/Bundle*.properties @kazephil @brandelune @kosivantsov
+machinetranslators/google/src/main/resources/org/omegat/machinetranslators/google/Bundle*.properties @kazephil @brandelune @kosivantsov
+machinetranslators/ibmwatson/src/main/resources/org/omegat/machinetranslators/ibmwatson/Bundle*.properties  @kazephil @brandelune @kosivantsov
+machinetranslators/mymemory/src/main/resources/org/omegat/machinetranslators/mymemory/Bundle*.properties   @kazephil @brandelune @kosivantsov
+machinetranslators/yandex/src/main/resources/org/omegat/machinetranslators/yandex/Bundle*.properties    @kazephil @brandelune @kosivantsov
+spellchecker/hunspell/src/main/resources/org/omegat/spellchecker/hunspell/Bundle*.properties    @kazephil @brandelune @kosivantsov
+tipoftheday/src/main/resources/org/omegat/gui/tipoftheday/Bundle*.properties    @kazephil @brandelune @kosivantsov miurahr@linux.com mihmax@gmail.com
+
+# Tips of the day
+tipoftheday/src/main/resources/tips/*/*.html miurahr@linux.com @kazephil @brandelune @kosivantsov
+
+# Greeting page
+src_docs/greeting/ca/First_Steps.xml marc.riera.irigoyen@gmail.com
+
+# Developer manuals
+src_docs/developer/*.md miurahr@linux.com aaron@madlon-kay.com martin.fleurke@portavita.nl @brandelune
+src_docs/developer/assets/eclipse-formatting.xml alex73mail@gmail.com
+src_docs/developer/assets/intellij-Project.xml miurahr@linux.com
+src_docs/mkdocs.yml miurahr@linux.com
+src_docs/requirements.txt miurahr@linux.com
+
+# User manuals
+src_docs/manual/**/version*.properties @brandelune miurahr@linux.com
+src_docs/manual/*/manualvariables.mod @brandelune
+src_docs/manual/ca/*.xml @brandelune marc.riera.irigoyen@gmail.com
+src_docs/manual/de/*.xml 1332321+ragnar-f@users.noreply.github.com @brandelune kos@truetranslation.org
+src_docs/manual/en/*.xml @brandelune d.briel@free.fr kos@truetranslation.org
+src_docs/manual/fr/*.xml @brandelune kos@truetranslation.org
+src_docs/manual/it/*.xml @brandelune kos@truetranslation.org
+src_docs/manual/ja/*.xml @brandelune @miurahr
+src_docs/manual/nl/*.xml @brandelune
+
+# document processing
+src_docs/style/omegat.css miurahr@linux.com
+src_docs/template/index.html damien.rembert@gmail.com
+src_docs/xsl/*.xsl miurahr@linux.com stephane@exselt.com
+
+# CI/CD, Code quality and build tool
+.checkstyle aaron@madlon-kay.com
+.git-archival.properties miurahr@linux.com
+.gitattributes miurahr@linux.com
+.github/CODEOWNERS briacp@gmail.com miurahr@linux.com
+.github/FUNDING.yml aaron@madlon-kay.com
+.github/dependabot.yml miurahr@linux.com
+.github/pull_request_template.md miurahr@linux.com
+.github/workflows/*.yml miurahr@linux.com
+.gitignore aaron@madlon-kay.com
+.nb-gradle-properties aaron@madlon-kay.com
+.readthedocs.yaml miurahr@linux.com
+azure-pipelines.yml miurahr@linux.com
+ci/azure-pipelines/*.yml miurahr@linux.com
+ci/github/* miurahr@linux.com
+ci/* miurahr@linux.com
+config/checkstyle/checkstyle.xml aaron@madlon-kay.com miurahr@linux.com
+config/checkstyle/java.header miurahr@linux.com
+config/checkstyle/properties.header miurahr@linux.com
+config/checkstyle/suppressions.xml miurahr@linux.com
+config/git/udiff.sh miurahr@linux.com
+config/spotless/eclipse-formatting.xml alex73mail@gmail.com
+config/test/logger.properties miurahr@linux.com alex73mail@gmail.com
+
+# Build.gradle
+**/*.gradle miurahr@linux.com
+**/gradle.properties miurahr@linux.com
+**/plugin.properties miurahr@linux.com
+Plugins.properties miurahr@linux.com
+gradle/gradle-daemon-jvm.properties miurahr@linux.com
+gradle/libs.versions.toml miurahr@linux.com
+build-logic/src/main/groovy/org/omegat/documentation/*.groovy miurahr@linux.com
+
+
+# aligner
+aligner/src/main/java/org/omegat/gui/align/*.form aaron@madlon-kay.com miurahr@linux.com alex73mail@gmail.com
+aligner/src/main/java/org/omegat/gui/align/*.java aaron@madlon-kay.com miurahr@linux.com alex73mail@gmail.com
+aligner/src/test/resources/data/align/*.txt aaron@madlon-kay.com
+aligner/src/test/resources/data/align/*.properties aaron@madlon-kay.com
+
+# language-modules
+language-modules/**/*.java miurahr@linux.com
+
+# machine translator connectors
+machinetranslators/**/*.java miurahr@linux.com marc.riera.irigoyen@gmail.com alex73mail@gmail.com lev.abashkin@gmail.com
+
+# other modules
+theme/src/main/java/org/omegat/gui/theme/*.java miurahr@linux.com
+tipoftheday/src/main/java/org/omegat/gui/tipoftheday/*.java miurahr@linux.com
+
+# lib/licenses
+lib/licenses/*.txt alex73mail@gmail.com aaron@madlon-kay.com briacp@gmail.com miurahr@linux.com d.briel@free.fr mihmax@gmail.com
+
+# release files
+release/OmegaT-license.txt d.briel@free.fr
+release/changes.txt d.briel@free.fr
+release/contributors.txt aaron@madlon-kay.com @brandelune
+release/doc-license.txt d.briel@free.fr
+release/index.html mihmax@gmail.com
+release/join.html mihmax@gmail.com
+release/jpackage-specific/linux/OmegaT.desktop florianaurich@posteo.net miurahr@linux.com
+release/jpackage-specific/linux/OmegaT.spec miurahr@linux.com
+release/jpackage-specific/linux/postinst miurahr@linux.com
+release/jpackage-specific/linux/prerm miurahr@linux.com
+release/l10n-project/omegat.project mihmax@gmail.com
+release/libraries.txt miurahr@linux.com
+release/linux-specific/OmegaT aaron@madlon-kay.com d.briel@free.fr
+release/linux-specific/linux-install.sh d.briel@free.fr
+release/linux-specific/omegat.desktop florianaurich@posteo.net
+release/linux-specific/omegat.kaptn d.briel@free.fr
+release/mac-specific/OmegaT.app/Contents/Resources/Configuration.properties aaron@madlon-kay.com d.briel@free.fr
+release/mac-specific/OmegaT.app/Contents/Resources/Mac-Licenses.txt aaron@madlon-kay.com
+release/mac-specific/OmegaT.app/Contents/Resources/ca.lproj/Localizable.strings kos@truetranslation.org
+release/mac-specific/OmegaT.app/Contents/Resources/co.lproj/Localizable.strings kos@truetranslation.org
+release/mac-specific/OmegaT.app/Contents/Resources/en.lproj/Localizable.strings aaron@madlon-kay.com
+release/mac-specific/OmegaT.app/Contents/Resources/es.lproj/Localizable.strings briacp@gmail.com
+release/mac-specific/OmegaT.app/Contents/Resources/fi.lproj/Localizable.strings aaron@madlon-kay.com
+release/mac-specific/OmegaT.app/Contents/Resources/it.lproj/Localizable.strings miurahr@linux.com
+release/mac-specific/OmegaT.app/Contents/Resources/ja.lproj/Localizable.strings miurahr@linux.com
+release/mac-specific/OmegaT.app/Contents/Resources/nl.lproj/Localizable.strings miurahr@linux.com
+release/mac-specific/OmegaT.app/Contents/Resources/pt.lproj/Localizable.strings kos@truetranslation.org
+release/mac-specific/OmegaT.app/Contents/Resources/tr.lproj/Localizable.strings kos@truetranslation.org
+release/mac-specific/OmegaT.app/Contents/Resources/uk.lproj/Localizable.strings kos@truetranslation.org
+release/mac-specific/OmegaT.app/Contents/Resources/zh_CN.lproj/Localizable.strings kos@truetranslation.org
+release/mac-specific/index.html aaron@madlon-kay.com d.briel@free.fr
+release/mac-specific/java.entitlements aaron@madlon-kay.com
+release/modules-specific/Readme-modules.txt miurahr@linux.com
+release/plugins-specific/Readme-plugins.txt d.briel@free.fr
+release/readme.txt vbidaux@diptik.fr
+release/readme_ar.txt d.briel@free.fr
+release/readme_be.txt kos@truetranslation.org
+release/readme_ca.txt kos@truetranslation.org
+release/readme_co.txt kos@truetranslation.org
+release/readme_cs.txt kos@truetranslation.org d.briel@free.fr
+release/readme_cy.txt @brandelune d.briel@free.fr
+release/readme_da.txt d.briel@free.fr
+release/readme_de.txt kos@truetranslation.org
+release/readme_es.txt kos@truetranslation.org @brandelune
+release/readme_eu.txt kos@truetranslation.org
+release/readme_fi.txt kos@truetranslation.org
+release/readme_fr.txt d.briel@free.fr
+release/readme_gl.txt @brandelune d.briel@free.fr
+release/readme_hr.txt kos@truetranslation.org
+release/readme_hu.txt d.briel@free.fr
+release/readme_ia.txt kos@truetranslation.org
+release/readme_it.txt @brandelune
+release/readme_ja.txt kos@truetranslation.org
+release/readme_ko.txt @brandelune
+release/readme_mfe.txt kos@truetranslation.org
+release/readme_nl.txt kos@truetranslation.org
+release/readme_no.txt @brandelune
+release/readme_pl.txt d.briel@free.fr
+release/readme_pt.txt kos@truetranslation.org
+release/readme_pt_BR.txt kos@truetranslation.org
+release/readme_ru.txt kos@truetranslation.org
+release/readme_sh.txt d.briel@free.fr henry.pijffers@gmail.com
+release/readme_sk.txt mihmax@gmail.com d.briel@free.fr
+release/readme_sl.txt d.briel@free.fr henry.pijffers@gmail.com
+release/readme_sq.txt d.briel@free.fr henry.pijffers@gmail.com
+release/readme_sv.txt kos@truetranslation.org d.briel@free.fr
+release/readme_tr.txt kos@truetranslation.org d.briel@free.fr
+release/readme_uk.txt kos@truetranslation.org
+release/readme_zh_CN.txt kos@truetranslation.org
+release/readme_zh_TW.txt d.briel@free.fr
+release/win32-specific/CustomMessages.ini d.briel@free.fr
+release/win32-specific/CustomMessages_be.ini @brandelune
+release/win32-specific/CustomMessages_ca.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_co.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_cs.ini @brandelune
+release/win32-specific/CustomMessages_cy.ini @brandelune
+release/win32-specific/CustomMessages_de.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_es.ini briacp@gmail.com
+release/win32-specific/CustomMessages_eu.ini @brandelune
+release/win32-specific/CustomMessages_fi.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_fr.ini @brandelune
+release/win32-specific/CustomMessages_gl.ini @brandelune
+release/win32-specific/CustomMessages_hr.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_hu.ini @brandelune
+release/win32-specific/CustomMessages_ia.ini kos@truetranslation.org @brandelune
+release/win32-specific/CustomMessages_it.ini d.briel@free.fr
+release/win32-specific/CustomMessages_ja.ini @brandelune
+release/win32-specific/CustomMessages_ko.ini aaron@madlon-kay.com
+release/win32-specific/CustomMessages_mfe.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_nl.ini @brandelune
+release/win32-specific/CustomMessages_no.ini @brandelune
+release/win32-specific/CustomMessages_pl.ini d.briel@free.fr
+release/win32-specific/CustomMessages_pt.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_pt_BR.ini @brandelune
+release/win32-specific/CustomMessages_ru.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_sl.ini @brandelune
+release/win32-specific/CustomMessages_sv.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_tr.ini @brandelune
+release/win32-specific/CustomMessages_uk.ini kos@truetranslation.org
+release/win32-specific/CustomMessages_zh_CN.ini kos@truetranslation.org
+release/win32-specific/OmegaT.bat aaron@madlon-kay.com mihmax@gmail.com
+release/win32-specific/OmegaT.iss d.briel@free.fr
+release/win32-specific/OmegaT.l4J.ini d.briel@free.fr
+scripts/**/readme.txt kazephil@gmail.com
+scripts/*.groovy d.briel@free.fr alex73mail@gmail.com briacp@gmail.com aaron@madlon-kay.com
+scripts/*.js d.briel@free.fr alex73mail@gmail.com
+
+scripts/properties/auto_open_last_project_ja.properties 0011solo@gmail.com
+scripts/properties/check_rules.properties d.briel@free.fr
+scripts/properties/check_rules_be.properties @brandelune
+scripts/properties/check_rules_ca.properties kos@truetranslation.org
+scripts/properties/check_rules_co.properties kos@truetranslation.org
+scripts/properties/check_rules_cs.properties @brandelune
+scripts/properties/check_rules_de.properties kos@truetranslation.org
+scripts/properties/check_rules_eu.properties @brandelune
+scripts/properties/check_rules_fi.properties kos@truetranslation.org
+scripts/properties/check_rules_fr.properties d.briel@free.fr
+scripts/properties/check_rules_hr.properties kos@truetranslation.org
+scripts/properties/check_rules_ia.properties d.briel@free.fr kos@truetranslation.org
+scripts/properties/check_rules_it.properties d.briel@free.fr
+scripts/properties/check_rules_ja.properties miurahr@linux.com
+scripts/properties/check_rules_mfe.properties kos@truetranslation.org
+scripts/properties/check_rules_nl.properties @brandelune
+scripts/properties/check_rules_no.properties @brandelune
+scripts/properties/check_rules_pl.properties d.briel@free.fr
+scripts/properties/check_rules_pt.properties kos@truetranslation.org
+scripts/properties/check_rules_pt_BR.properties @brandelune
+scripts/properties/check_rules_ru.properties d.briel@free.fr
+scripts/properties/check_rules_sv.properties kos@truetranslation.org
+scripts/properties/check_rules_tr.properties kos@truetranslation.org
+scripts/properties/check_rules_uk.properties kos@truetranslation.org
+scripts/properties/check_rules_zh_CN.properties kos@truetranslation.org
+scripts/properties/currency_translate_ja.properties 0011solo@gmail.com
+scripts/properties/extract_text_content.properties briacp@gmail.com
+scripts/properties/extract_text_content_eu.properties kos@truetranslation.org
+scripts/properties/extract_text_content_fr.properties @brandelune briacp@gmail.com
+scripts/properties/extract_text_content_mfe.properties kos@truetranslation.org
+scripts/properties/extract_text_content_tr.properties kos@truetranslation.org
+scripts/properties/gui_scripting_ja.properties 0011solo@gmail.com
+scripts/properties/issue_provider_sample.properties aaron@madlon-kay.com
+scripts/properties/keybinding_ja.properties 0011solo@gmail.com
+scripts/properties/modify_segment_ja.properties 0011solo@gmail.com
+scripts/properties/nbsp.properties aaron@madlon-kay.com d.briel@free.fr
+scripts/properties/nbsp_be.properties @brandelune
+scripts/properties/nbsp_ca.properties kos@truetranslation.org marc.riera.irigoyen@gmail.com
+scripts/properties/nbsp_co.properties kos@truetranslation.org
+scripts/properties/nbsp_cs.properties @brandelune
+scripts/properties/nbsp_de.properties kos@truetranslation.org
+scripts/properties/nbsp_eu.properties kos@truetranslation.org
+scripts/properties/nbsp_fi.properties kos@truetranslation.org
+scripts/properties/nbsp_fr.properties d.briel@free.fr
+scripts/properties/nbsp_hr.properties kos@truetranslation.org
+scripts/properties/nbsp_ia.properties @brandelune
+scripts/properties/nbsp_it.properties @brandelune
+scripts/properties/nbsp_ja.properties miurahr@linux.com
+scripts/properties/nbsp_mfe.properties kos@truetranslation.org
+scripts/properties/nbsp_nl.properties @brandelune
+scripts/properties/nbsp_no.properties @brandelune
+scripts/properties/nbsp_pl.properties d.briel@free.fr
+scripts/properties/nbsp_pt.properties kos@truetranslation.org
+scripts/properties/nbsp_pt_BR.properties @brandelune
+scripts/properties/nbsp_sv.properties kos@truetranslation.org
+scripts/properties/nbsp_tr.properties kos@truetranslation.org
+scripts/properties/nbsp_uk.properties kos@truetranslation.org
+scripts/properties/nbsp_zh_CN.properties kos@truetranslation.org wynn.chen.cn@gmail.com
+scripts/properties/open_current_file_ja.properties 0011solo@gmail.com
+scripts/properties/open_folder_ja.properties 0011solo@gmail.com
+scripts/properties/open_glossary_ja.properties 0011solo@gmail.com
+scripts/properties/open_project_save_ja.properties 0011solo@gmail.com
+scripts/properties/open_tm_folder_ja.properties 0011solo@gmail.com
+scripts/properties/replace_strip_tags.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_be.properties @brandelune
+scripts/properties/replace_strip_tags_ca.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_co.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_cs.properties @brandelune
+scripts/properties/replace_strip_tags_de.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_eu.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_fi.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_fr.properties d.briel@free.fr
+scripts/properties/replace_strip_tags_hr.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_ia.properties @brandelune
+scripts/properties/replace_strip_tags_it.properties @brandelune
+scripts/properties/replace_strip_tags_ja.properties miurahr@linux.com
+scripts/properties/replace_strip_tags_mfe.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_nl.properties @brandelune
+scripts/properties/replace_strip_tags_no.properties @brandelune
+scripts/properties/replace_strip_tags_pl.properties d.briel@free.fr
+scripts/properties/replace_strip_tags_pt.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_pt_BR.properties @brandelune
+scripts/properties/replace_strip_tags_ru.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_sv.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_tr.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_uk.properties kos@truetranslation.org
+scripts/properties/replace_strip_tags_zh_CN.properties kos@truetranslation.org
+scripts/properties/replace_with_match_no_tags_ja.properties 0011solo@gmail.com
+scripts/properties/search_replace.properties briacp@gmail.com
+scripts/properties/search_replace_be.properties @brandelune
+scripts/properties/search_replace_ca.properties marc.riera.irigoyen@gmail.com kos@truetranslation.org
+scripts/properties/search_replace_co.properties kos@truetranslation.org
+scripts/properties/search_replace_cs.properties @brandelune
+scripts/properties/search_replace_de.properties kos@truetranslation.org
+scripts/properties/search_replace_eu.properties @brandelune
+scripts/properties/search_replace_fi.properties kos@truetranslation.org
+scripts/properties/search_replace_fr.properties briacp@gmail.com
+scripts/properties/search_replace_hr.properties kos@truetranslation.org
+scripts/properties/search_replace_ia.properties kos@truetranslation.org
+scripts/properties/search_replace_it.properties d.briel@free.fr
+scripts/properties/search_replace_ja.properties miurahr@linux.com
+scripts/properties/search_replace_mfe.properties kos@truetranslation.org
+scripts/properties/search_replace_nl.properties @brandelune
+scripts/properties/search_replace_no.properties @brandelune
+scripts/properties/search_replace_pl.properties d.briel@free.fr
+scripts/properties/search_replace_pt.properties kos@truetranslation.org
+scripts/properties/search_replace_pt_BR.properties @brandelune
+scripts/properties/search_replace_ru.properties kos@truetranslation.org
+scripts/properties/search_replace_sv.properties kos@truetranslation.org
+scripts/properties/search_replace_tr.properties kos@truetranslation.org
+scripts/properties/search_replace_uk.properties kos@truetranslation.org
+scripts/properties/search_replace_zh_CN.properties wynn.chen.cn@gmail.com kos@truetranslation.org
+scripts/properties/show_same_segments_ja.properties 0011solo@gmail.com
+scripts/properties/spellcheck.properties cienislaw@users.sourceforge.net
+scripts/properties/spellcheck_be.properties @brandelune
+scripts/properties/spellcheck_ca.properties kos@truetranslation.org
+scripts/properties/spellcheck_co.properties kos@truetranslation.org
+scripts/properties/spellcheck_cs.properties @brandelune
+scripts/properties/spellcheck_de.properties kos@truetranslation.org
+scripts/properties/spellcheck_eu.properties @brandelune
+scripts/properties/spellcheck_fi.properties kos@truetranslation.org
+scripts/properties/spellcheck_fr.properties d.briel@free.fr
+scripts/properties/spellcheck_hr.properties kos@truetranslation.org
+scripts/properties/spellcheck_ia.properties kos@truetranslation.org d.briel@free.fr
+scripts/properties/spellcheck_it.properties d.briel@free.fr
+scripts/properties/spellcheck_ja.properties miurahr@linux.com
+scripts/properties/spellcheck_mfe.properties kos@truetranslation.org
+scripts/properties/spellcheck_nl.properties @brandelune
+scripts/properties/spellcheck_no.properties @brandelune
+scripts/properties/spellcheck_pl.properties d.briel@free.fr
+scripts/properties/spellcheck_pt.properties @brandelune kos@truetranslation.org
+scripts/properties/spellcheck_pt_BR.properties @brandelune
+scripts/properties/spellcheck_ru.properties kos@truetranslation.org
+scripts/properties/spellcheck_sv.properties kos@truetranslation.org
+scripts/properties/spellcheck_tr.properties kos@truetranslation.org
+scripts/properties/spellcheck_uk.properties kos@truetranslation.org
+scripts/properties/spellcheck_zh_CN.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks.properties d.briel@free.fr
+scripts/properties/strip_bidi_marks_be.properties @brandelune
+scripts/properties/strip_bidi_marks_ca.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_co.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_cs.properties @brandelune
+scripts/properties/strip_bidi_marks_de.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_eu.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_fi.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_fr.properties d.briel@free.fr
+scripts/properties/strip_bidi_marks_hr.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_ia.properties @brandelune
+scripts/properties/strip_bidi_marks_it.properties @brandelune
+scripts/properties/strip_bidi_marks_ja.properties miurahr@linux.com
+scripts/properties/strip_bidi_marks_mfe.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_nl.properties @brandelune
+scripts/properties/strip_bidi_marks_no.properties @brandelune
+scripts/properties/strip_bidi_marks_pl.properties d.briel@free.fr
+scripts/properties/strip_bidi_marks_pt.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_pt_BR.properties @brandelune
+scripts/properties/strip_bidi_marks_sv.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_tr.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_uk.properties kos@truetranslation.org
+scripts/properties/strip_bidi_marks_zh_CN.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected.properties kos@truetranslation.org 0011solo@gmail.com
+scripts/properties/svn_cleanup_selected_be.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_ca.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_co.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_cs.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_de.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_eu.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_fi.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_fr.properties d.briel@free.fr @brandelune
+scripts/properties/svn_cleanup_selected_hr.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_ia.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_it.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_ja.properties miurahr@linux.com
+scripts/properties/svn_cleanup_selected_mfe.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_nl.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_pt.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_pt_BR.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_ru.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_sv.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_tr.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_uk.properties kos@truetranslation.org
+scripts/properties/svn_cleanup_selected_zh_CN.properties kos@truetranslation.org
+scripts/properties/tagwipe.properties d.briel@free.fr
+scripts/properties/tagwipe_be.properties kos@truetranslation.org
+scripts/properties/tagwipe_ca.properties kos@truetranslation.org
+scripts/properties/tagwipe_co.properties kos@truetranslation.org
+scripts/properties/tagwipe_cs.properties kos@truetranslation.org
+scripts/properties/tagwipe_de.properties kos@truetranslation.org
+scripts/properties/tagwipe_eu.properties kos@truetranslation.org
+scripts/properties/tagwipe_fi.properties kos@truetranslation.org
+scripts/properties/tagwipe_fr.properties d.briel@free.fr @brandelune
+scripts/properties/tagwipe_ia.properties kos@truetranslation.org
+scripts/properties/tagwipe_it.properties kos@truetranslation.org
+scripts/properties/tagwipe_ja.properties miurahr@linux.com
+scripts/properties/tagwipe_mfe.properties kos@truetranslation.org
+scripts/properties/tagwipe_nl.properties kos@truetranslation.org
+scripts/properties/tagwipe_pt.properties kos@truetranslation.org
+scripts/properties/tagwipe_pt_BR.properties kos@truetranslation.org
+scripts/properties/tagwipe_ru.properties kos@truetranslation.org
+scripts/properties/tagwipe_tr.properties kos@truetranslation.org
+scripts/properties/tagwipe_uk.properties kos@truetranslation.org
+scripts/properties/tagwipe_zh_CN.properties kos@truetranslation.org
+scripts/properties/toolbar_ja.properties 0011solo@gmail.com
+scripts/readme.txt aaron@madlon-kay.com @brandelune
+scripts/replace_strip_tags.groovy d.briel@free.fr kos@truetranslation.org
+scripts/replace_with_match_no_tags.groovy d.briel@free.fr alex73mail@gmail.com
+scripts/search_replace.groovy briacp@gmail.com
+scripts/show_same_segments.groovy alex73mail@gmail.com
+scripts/spellcheck.groovy cienislaw@users.sourceforge.net
+scripts/strip_bidi_marks.groovy d.briel@free.fr kos@truetranslation.org
+scripts/svn_cleanup_selected.groovy kos@truetranslation.org 0011solo@gmail.com
+scripts/switch_colour_theme.js d.briel@free.fr
+scripts/tagwipe.groovy d.briel@free.fr
+scripts/toolbar.groovy briacp@gmail.com alex73mail@gmail.com
+spellchecker/hunspell/build.gradle miurahr@linux.com
+spellchecker/hunspell/plugin.properties miurahr@linux.com mihmax@gmail.com
+spellchecker/hunspell/src/main/java/org/omegat/spellchecker/hunspell/HunSpellChecker.java miurahr@linux.com
+spellchecker/hunspell/src/test/java/org/omegat/spellchecker/hunspell/HunspellSpellcheckerTest.java miurahr@linux.com
+spellchecker/hunspell/src/test/resources/org/omegat/spellchecker/hunspell/es_MX.aff miurahr@linux.com
+spellchecker/hunspell/src/test/resources/org/omegat/spellchecker/hunspell/es_MX.dic miurahr@linux.com
+spellchecker/morfologik/build.gradle miurahr@linux.com
+spellchecker/morfologik/plugin.properties miurahr@linux.com mihmax@gmail.com
+spellchecker/morfologik/src/main/java/org/omegat/spellchecker/morfologik/MorfologikSpellchecker.java miurahr@linux.com
+spellchecker/morfologik/src/test/java/org/omegat/spellchecker/morfologik/MorfologikSpellcheckerTest.java miurahr@linux.com
+spellchecker/morfologik/src/test/resources/org/omegat/spellchecker/morfologik/de_DE.README miurahr@linux.com
+spellchecker/morfologik/src/test/resources/org/omegat/spellchecker/morfologik/de_DE.dict 
+spellchecker/morfologik/src/test/resources/org/omegat/spellchecker/morfologik/de_DE.info miurahr@linux.com
+
+# main sources
+src/gen/core/**/*.java alex73mail@gmail.com
+src/org/omegat/CLIParameters.java aaron@madlon-kay.com
+src/org/omegat/ColorScheme_*.properties miurahr@linux.com
+src/org/omegat/MainClassLoader.java miurahr@linux.com
+src/org/omegat/convert/*.java alex73mail@gmail.com
+src/org/omegat/convert/v20to21/data/*.java d.briel@free.fr alex73mail@gmail.com
+src/org/omegat/core/Core.java alex73mail@gmail.com
+src/org/omegat/core/CoreEvents.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/core/KnownException.java alex73mail@gmail.com
+src/org/omegat/core/data/CommandVarExpansion.java d.briel@free.fr
+src/org/omegat/core/data/DataUtils.java alex73mail@gmail.com briacp@gmail.com
+src/org/omegat/core/data/EntryKey.java alex73mail@gmail.com
+src/org/omegat/core/data/ExternalTMFactory.java aaron@madlon-kay.com
+src/org/omegat/core/data/ExternalTMX.java alex73mail@gmail.com
+src/org/omegat/core/data/IProject.java alex73mail@gmail.com
+src/org/omegat/core/data/ITMXEntry.java t_cordonnier@yahoo.fr alex73mail@gmail.com
+src/org/omegat/core/data/ITranslationEntry.java t_cordonnier@yahoo.fr alex73mail@gmail.com
+src/org/omegat/core/data/ImportFromAutoTMX.java alex73mail@gmail.com
+src/org/omegat/core/data/LastSegmentManager.java briacp@gmail.com
+src/org/omegat/core/data/NotLoadedProject.java alex73mail@gmail.com
+src/org/omegat/core/data/ParseEntry.java alex73mail@gmail.com
+src/org/omegat/core/data/PluginInformation.java miurahr@linux.com briacp@gmail.com
+src/org/omegat/core/data/PrepareTMXEntry.java alex73mail@gmail.com
+src/org/omegat/core/data/ProjectException.java d.briel@free.fr alex73mail@gmail.com
+src/org/omegat/core/data/ProjectFactory.java alex73mail@gmail.com
+src/org/omegat/core/data/ProjectProperties.java alex73mail@gmail.com
+src/org/omegat/core/data/ProjectTMX.java alex73mail@gmail.com
+src/org/omegat/core/data/ProtectedPart.java alex73mail@gmail.com
+src/org/omegat/core/data/RealProject.java alex73mail@gmail.com
+src/org/omegat/core/data/SegmentProperties.java aaron@madlon-kay.com
+src/org/omegat/core/data/SourceTextEntry.java alex73mail@gmail.com
+src/org/omegat/core/data/StringData.java mihmax@gmail.com
+src/org/omegat/core/data/StringEntry.java mihmax@gmail.com
+src/org/omegat/core/data/SyncTMX.java aaron@madlon-kay.com
+src/org/omegat/core/data/TranslateEntry.java alex73mail@gmail.com
+src/org/omegat/core/data/package.html mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/core/dictionaries/DictionariesManager.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/core/dictionaries/DictionaryData.java aaron@madlon-kay.com
+src/org/omegat/core/dictionaries/DictionaryEntry.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/core/dictionaries/IDictionary.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/core/dictionaries/IDictionaryFactory.java aaron@madlon-kay.com
+src/org/omegat/core/dictionaries/LingvoDSL.java miurahr@linux.com
+src/org/omegat/core/dictionaries/StarDict.java miurahr@linux.com
+src/org/omegat/core/events/IApplicationEventListener.java alex73mail@gmail.com
+src/org/omegat/core/events/IEditorEventListener.java alex73mail@gmail.com
+src/org/omegat/core/events/IEntryEventListener.java alex73mail@gmail.com
+src/org/omegat/core/events/IFontChangedEventListener.java alex73mail@gmail.com
+src/org/omegat/core/events/IProjectEventListener.java alex73mail@gmail.com
+src/org/omegat/core/events/IStopped.java alex73mail@gmail.com
+src/org/omegat/core/glossaries/IGlossary.java alex73mail@gmail.com
+src/org/omegat/core/machinetranslators/*.java aaron@madlon-kay.com alex73mail@gmail.com miurahr@linux.com
+src/org/omegat/core/matching/DiffDriver.java d.briel@free.fr aaron@madlon-kay.com
+src/org/omegat/core/matching/FuzzyMatcher.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/core/matching/ISimilarityCalculator.java alex73mail@gmail.com
+src/org/omegat/core/matching/LevenshteinDistance.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/core/matching/NearString.java miurahr@linux.com aaron@madlon-kay.com
+src/org/omegat/core/package.html mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/core/search/SearchExpression.java alex73mail@gmail.com
+src/org/omegat/core/search/SearchMatch.java alex73mail@gmail.com
+src/org/omegat/core/search/SearchMode.java alex73mail@gmail.com
+src/org/omegat/core/search/SearchResultEntry.java alex73mail@gmail.com
+src/org/omegat/core/search/Searcher.java alex73mail@gmail.com
+src/org/omegat/core/segmentation/LanguageCodes.java miurahr@linux.com
+src/org/omegat/core/segmentation/MapRule.java miurahr@linux.com mihmax@gmail.com
+src/org/omegat/core/segmentation/Rule.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/core/segmentation/SRX.java mihmax@gmail.com
+src/org/omegat/core/segmentation/Segmenter.java mihmax@gmail.com
+src/org/omegat/core/segmentation/datamodels/MappingRulesModel.java mihmax@gmail.com
+src/org/omegat/core/segmentation/datamodels/SRXOptionsModel.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/core/segmentation/datamodels/SegmentationRulesModel.java mihmax@gmail.com
+src/org/omegat/core/segmentation/defaultRules.srx alex73mail@gmail.com d.briel@free.fr
+src/org/omegat/core/spellchecker/AbstractHunspellDictionary.java miurahr@linux.com
+src/org/omegat/core/spellchecker/AbstractMorfologikDictionary.java miurahr@linux.com
+src/org/omegat/core/spellchecker/AbstractSpellChecker.java miurahr@linux.com
+src/org/omegat/core/spellchecker/DictionaryManager.java d.briel@free.fr
+src/org/omegat/core/spellchecker/ISpellChecker.java alex73mail@gmail.com
+src/org/omegat/core/spellchecker/ISpellCheckerDictionary.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/core/spellchecker/ISpellCheckerProvider.java alex73mail@gmail.com
+src/org/omegat/core/spellchecker/SpellCheckDictionaryType.java alex73mail@gmail.com miurahr@linux.com
+src/org/omegat/core/spellchecker/SpellCheckerDummy.java miurahr@linux.com
+src/org/omegat/core/spellchecker/SpellCheckerManager.java miurahr@linux.com
+src/org/omegat/core/spellchecker/SpellCheckerMarker.java alex73mail@gmail.com
+src/org/omegat/core/statistics/CalcMatchStatistics.java alex73mail@gmail.com
+src/org/omegat/core/statistics/CalcStandardStatistics.java alex73mail@gmail.com
+src/org/omegat/core/statistics/FileData.java alex73mail@gmail.com
+src/org/omegat/core/statistics/FindMatches.java alex73mail@gmail.com miurahr@linux.com
+src/org/omegat/core/statistics/IStatsConsumer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/core/statistics/MatchStatCounts.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/core/statistics/StatCount.java alex73mail@gmail.com
+src/org/omegat/core/statistics/StatOutputFormat.java briacp@gmail.com
+src/org/omegat/core/statistics/StatProjectProperties.java miurahr@linux.com
+src/org/omegat/core/statistics/Statistics.java alex73mail@gmail.com
+src/org/omegat/core/statistics/StatisticsInfo.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/core/statistics/StatisticsSettings.java alex73mail@gmail.com
+src/org/omegat/core/statistics/StatsResult.java miurahr@linux.com
+src/org/omegat/core/tagvalidation/ErrorReport.java alex73mail@gmail.com
+src/org/omegat/core/tagvalidation/ITagValidation.java alex73mail@gmail.com
+src/org/omegat/core/tagvalidation/TagRepair.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/core/tagvalidation/TagValidation.java aaron@madlon-kay.com
+src/org/omegat/core/tagvalidation/TagValidationTool.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/core/team2/IRemoteRepository2.java alex73mail@gmail.com
+src/org/omegat/core/team2/ProjectTeamSettings.java alex73mail@gmail.com
+src/org/omegat/core/team2/RebaseAndCommit.java alex73mail@gmail.com
+src/org/omegat/core/team2/RemoteRepositoryFactory.java alex73mail@gmail.com
+src/org/omegat/core/team2/RemoteRepositoryProvider.java alex73mail@gmail.com
+src/org/omegat/core/team2/TeamSettings.java alex73mail@gmail.com
+src/org/omegat/core/team2/TeamTool.java aaron@madlon-kay.com
+src/org/omegat/core/team2/gui/PassphraseDialog.java miurahr@linux.com
+src/org/omegat/core/team2/gui/RepositoriesCredentialsController.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/core/team2/gui/RepositoriesCredentialsPanel.form alex73mail@gmail.com
+src/org/omegat/core/team2/gui/RepositoriesCredentialsPanel.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/core/team2/gui/UserPassDialog.java miurahr@linux.com
+src/org/omegat/core/team2/impl/FileRepository.java alex73mail@gmail.com
+src/org/omegat/core/team2/impl/GITCredentialsProvider.java miurahr@linux.com
+src/org/omegat/core/team2/impl/GITExternalGpgSigner.java miurahr@linux.com
+src/org/omegat/core/team2/impl/GITRemoteRepository2.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/core/team2/impl/HTTPRemoteRepository.java alex73mail@gmail.com
+src/org/omegat/core/team2/impl/SVNAuthenticationManager.java alex73mail@gmail.com miurahr@linux.com
+src/org/omegat/core/team2/impl/SVNRemoteRepository2.java alex73mail@gmail.com miurahr@linux.com
+src/org/omegat/core/team2/impl/TeamUtils.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/core/threads/CommandMonitor.java d.briel@free.fr
+src/org/omegat/core/threads/IAutoSave.java alex73mail@gmail.com
+src/org/omegat/core/threads/LongProcessInterruptedException.java alex73mail@gmail.com
+src/org/omegat/core/threads/LongProcessThread.java alex73mail@gmail.com
+src/org/omegat/core/threads/SaveThread.java alex73mail@gmail.com
+src/org/omegat/core/threads/SearchThread.java alex73mail@gmail.com
+src/org/omegat/core/threads/VersionCheckThread.java aaron@madlon-kay.com
+
+# external finder
+src/org/omegat/externalfinder/**/*.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/externalfinder/**/*.form aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/externalfinder/package.html aaron@madlon-kay.com
+
+# filters2
+src/org/omegat/filters2/*.java alex73mail@gmail.com aaron@madlon-kay.com mihmax@gmail.com
+src/org/omegat/filters2/hhc/*.java henry.pijffers@gmail.com
+src/org/omegat/filters2/html2/*.form mihmax@gmail.com d.briel@free.fr
+src/org/omegat/filters2/html2/*.java mihmax@gmail.com d.briel@free.fr
+src/org/omegat/filters2/latex/LatexFilter.java d.briel@free.fr
+src/org/omegat/filters2/master/*.java alex73mail@gmail.com mihmax@gmail.com aaron@madlon-kay.com miurahr@linux.com
+src/org/omegat/filters2/moodlephp/*.java alex73mail@gmail.com mihmax@gmail.com
+src/org/omegat/filters2/mozdtd/*.form alex73mail@gmail.com mihmax@gmail.com
+src/org/omegat/filters2/mozdtd/*.java mihmax@gmail.com d.briel@free.fr
+src/org/omegat/filters2/mozlang/*.java d.briel@free.fr
+src/org/omegat/filters2/pdf/*.java d.briel@free.fr
+src/org/omegat/filters2/po/*.form alex73mail@gmail.com
+src/org/omegat/filters2/po/*.java alex73mail@gmail.com
+src/org/omegat/filters2/rc/RcFilter.java alex73mail@gmail.com
+src/org/omegat/filters2/subtitles/SbvFilter.java briacp@gmail.com
+src/org/omegat/filters2/subtitles/SrtFilter.java alex73mail@gmail.com
+src/org/omegat/filters2/subtitles/WebVttFilter.java briacp@gmail.com
+src/org/omegat/filters2/text/LineLengthLimitWriter.java alex73mail@gmail.com
+src/org/omegat/filters2/text/TextFilter.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/filters2/text/TextOptionsDialog.form mihmax@gmail.com
+src/org/omegat/filters2/text/TextOptionsDialog.java alex73mail@gmail.com mihmax@gmail.com
+src/org/omegat/filters2/text/bundles/ResourceBundleFilter.java aaron@madlon-kay.com
+src/org/omegat/filters2/text/bundles/ResourceBundleOptionsDialog.form mihmax@gmail.com
+src/org/omegat/filters2/text/bundles/ResourceBundleOptionsDialog.java mihmax@gmail.com
+src/org/omegat/filters2/text/dokuwiki/DokuWikiFilter.java d.briel@free.fr
+src/org/omegat/filters2/text/ilias/ILIASFilter.java d.briel@free.fr
+src/org/omegat/filters2/text/ini/INIFilter.java miurahr@linux.com
+src/org/omegat/filters2/text/magento/MagentoFilter.java d.briel@free.fr
+src/org/omegat/filters2/text/mozftl/MozillaFTLFilter.java keko.gl@gmail.com
+src/org/omegat/filters2/text/mozftl/MozillaFTLOptionsDialog.form mihmax@gmail.com
+src/org/omegat/filters2/text/mozftl/MozillaFTLOptionsDialog.java mihmax@gmail.com
+src/org/omegat/filters2/xtagqxp/Xtag.java d.briel@free.fr
+src/org/omegat/filters2/xtagqxp/XtagFilter.java d.briel@free.fr
+
+# filters3
+src/org/omegat/filters3/*.java d.briel@free.fr alex73mail@gmail.com mihmax@gmail.com
+src/org/omegat/filters3/xml/*.java alex73mail@gmail.com mihmax@gmail.com d.briel@free.fr
+src/org/omegat/filters3/xml/android/*.java alex73mail@gmail.com
+src/org/omegat/filters3/xml/camtasiawindows/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/docbook/*.java mihmax@gmail.com
+src/org/omegat/filters3/xml/flash/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/helpandmanual/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/infix/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/l10nmgr/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/opendoc/*.form d.briel@free.fr
+src/org/omegat/filters3/xml/opendoc/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/openxml/*.form d.briel@free.fr
+src/org/omegat/filters3/xml/openxml/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/properties/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/relaxng/*.java aaron@madlon-kay.com
+src/org/omegat/filters3/xml/resx/*.java d.briel@free.fr alex73mail@gmail.com
+src/org/omegat/filters3/xml/schematron/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/scribus/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/svg/*.java alex73mail@gmail.com d.briel@free.fr
+src/org/omegat/filters3/xml/txml/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/typo3/*.java d.briel@free.fr alex73mail@gmail.com
+src/org/omegat/filters3/xml/visio/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/wix/*.java alex73mail@gmail.com d.briel@free.fr
+src/org/omegat/filters3/xml/wordpress/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/xhtml/*.form d.briel@free.fr
+src/org/omegat/filters3/xml/xhtml/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd alex73mail@gmail.com mihmax@gmail.com
+src/org/omegat/filters3/xml/xliff/*.form mihmax@gmail.com d.briel@free.fr
+src/org/omegat/filters3/xml/xliff/*.java d.briel@free.fr
+src/org/omegat/filters3/xml/xliff/*.java alex73mail@gmail.com d.briel@free.fr
+src/org/omegat/filters3/xml/xmlspreadsheet/*.java d.briel@free.fr
+src/org/omegat/filters4/**/*.java t_cordonnier@yahoo.fr
+
+# gui sources
+src/org/omegat/gui/accesstool/AccessTools.java miurahr@linux.com
+src/org/omegat/gui/accesstool/NameAndPathComboBoxRenderer.java miurahr@linux.com
+src/org/omegat/gui/accesstool/ProjectFileInformation.java miurahr@linux.com
+src/org/omegat/gui/accesstool/ProjectFileRenderer.java miurahr@linux.com
+src/org/omegat/gui/accesstool/QuickAccess.java miurahr@linux.com
+src/org/omegat/gui/accesstool/ToolbarComboboxUI.java miurahr@linux.com
+src/org/omegat/gui/comments/CommentsTextArea.java alex73mail@gmail.com
+src/org/omegat/gui/comments/ICommentProvider.java alex73mail@gmail.com
+src/org/omegat/gui/comments/IComments.java alex73mail@gmail.com
+src/org/omegat/gui/common/EntryInfoPane.java alex73mail@gmail.com
+src/org/omegat/gui/common/EntryInfoSearchThread.java alex73mail@gmail.com
+src/org/omegat/gui/common/EntryInfoThreadPane.java alex73mail@gmail.com
+src/org/omegat/gui/dialogs/AboutDialog.form mihmax@gmail.com
+src/org/omegat/gui/dialogs/AboutDialog.java mihmax@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/ChooseMedProject.java alex73mail@gmail.com
+src/org/omegat/gui/dialogs/ChoosePluginFile.java alex73mail@gmail.com miurahr@linux.com
+src/org/omegat/gui/dialogs/ConflictDialog.form alex73mail@gmail.com
+src/org/omegat/gui/dialogs/ConflictDialog.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/dialogs/ConflictDialogController.java alex73mail@gmail.com
+src/org/omegat/gui/dialogs/CreateGlossaryEntry.form mihmax@gmail.com d.briel@free.fr
+src/org/omegat/gui/dialogs/CreateGlossaryEntry.java d.briel@free.fr mihmax@gmail.com
+src/org/omegat/gui/dialogs/FileCollisionDialog.form aaron@madlon-kay.com mihmax@gmail.com
+src/org/omegat/gui/dialogs/FileCollisionDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/FilenamePatternsEditor.form alex73mail@gmail.com
+src/org/omegat/gui/dialogs/FilenamePatternsEditor.java alex73mail@gmail.com
+src/org/omegat/gui/dialogs/FilenamePatternsEditorController.java alex73mail@gmail.com
+src/org/omegat/gui/dialogs/GoToSegmentDialog.form aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/GoToSegmentDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/KeyStrokeEditorDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/KeyStrokeEditorPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/KeyStrokeEditorPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/dialogs/LastChangesDialog.java mihmax@gmail.com
+src/org/omegat/gui/dialogs/LicenseDialog.java mihmax@gmail.com
+src/org/omegat/gui/dialogs/LogDialog.form aaron@madlon-kay.com mihmax@gmail.com
+src/org/omegat/gui/dialogs/LogDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/LogDialogController.java miurahr@linux.com
+src/org/omegat/gui/dialogs/NewProjectFileChooser.java mihmax@gmail.com
+src/org/omegat/gui/dialogs/NewTeamProject.form alex73mail@gmail.com
+src/org/omegat/gui/dialogs/NewTeamProject.java alex73mail@gmail.com
+src/org/omegat/gui/dialogs/NewTeamProjectController.java miurahr@linux.com aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/PasswordEnterDialogController.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/PasswordSetDialogController.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/PasswordSetPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/PasswordSetPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/dialogs/PreferencesDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/ProjectPropertiesDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/ProjectPropertiesDialogController.java miurahr@linux.com
+src/org/omegat/gui/dialogs/RepositoriesMappingController.java alex73mail@gmail.com
+src/org/omegat/gui/dialogs/RepositoriesMappingDialog.form alex73mail@gmail.com
+src/org/omegat/gui/dialogs/RepositoriesMappingDialog.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/VersionCheckDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/VersionCheckPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/dialogs/VersionCheckPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/dictionaries/DictionariesTextArea.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/dictionaries/DictionaryPopup.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/dictionaries/IDictionaries.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/editor/AlphabeticalMarkers.java 0011solo@gmail.com
+src/org/omegat/gui/editor/Document3.java alex73mail@gmail.com
+src/org/omegat/gui/editor/DocumentFilter3.java alex73mail@gmail.com
+src/org/omegat/gui/editor/EditorController.java alex73mail@gmail.com
+src/org/omegat/gui/editor/EditorPopups.java alex73mail@gmail.com
+src/org/omegat/gui/editor/EditorSettings.java alex73mail@gmail.com
+src/org/omegat/gui/editor/EditorTextArea3.java alex73mail@gmail.com
+src/org/omegat/gui/editor/EditorUtils.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/editor/IEditor.java alex73mail@gmail.com
+src/org/omegat/gui/editor/IEditorFilter.java alex73mail@gmail.com
+src/org/omegat/gui/editor/IEditorSettings.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/IPopupMenuConstructor.java alex73mail@gmail.com
+src/org/omegat/gui/editor/MarkerController.java alex73mail@gmail.com
+src/org/omegat/gui/editor/ModificationInfoManager.java cienislaw@users.sourceforge.net
+src/org/omegat/gui/editor/SegmentBuilder.java alex73mail@gmail.com
+src/org/omegat/gui/editor/SegmentExportImport.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/editor/SegmentHistory.java d.briel@free.fr
+src/org/omegat/gui/editor/TagAutoCompleterView.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/TranslationUndoManager.java alex73mail@gmail.com
+src/org/omegat/gui/editor/UnderlineFactory.java alex73mail@gmail.com
+src/org/omegat/gui/editor/ViewLabel.java alex73mail@gmail.com
+src/org/omegat/gui/editor/ViewParagraph.java alex73mail@gmail.com
+src/org/omegat/gui/editor/autocompleter/AbstractAutoCompleterView.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autocompleter/AutoCompleter.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autocompleter/AutoCompleterItem.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autocompleter/AutoCompleterKeys.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autocompleter/AutoCompleterListView.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autocompleter/AutoCompleterTableView.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autocompleter/IAutoCompleter.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/editor/autotext/Autotext.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autotext/AutotextAutoCompleterView.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/autotext/AutotextTableModel.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/chartable/CharTableAutoCompleterView.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/chartable/CharTableModel.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/filter/FilterBarReplace.form alex73mail@gmail.com
+src/org/omegat/gui/editor/filter/FilterBarReplace.java alex73mail@gmail.com
+src/org/omegat/gui/editor/filter/FilterBarSearch.form alex73mail@gmail.com
+src/org/omegat/gui/editor/filter/FilterBarSearch.java alex73mail@gmail.com
+src/org/omegat/gui/editor/filter/ReplaceFilter.java alex73mail@gmail.com
+src/org/omegat/gui/editor/filter/SearchFilter.java alex73mail@gmail.com
+src/org/omegat/gui/editor/history/HistoryCompleter.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/history/HistoryPredictor.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/history/WordCompleter.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/editor/history/WordPredictor.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/mark/AbstractMarker.java alex73mail@gmail.com martin.fleurke@portavita.nl
+src/org/omegat/gui/editor/mark/AltTranslationsMarker.java miurahr@linux.com
+src/org/omegat/gui/editor/mark/BidiMarkers.java briacp@gmail.com
+src/org/omegat/gui/editor/mark/BidiPainter.java briacp@gmail.com
+src/org/omegat/gui/editor/mark/CalcMarkersThread.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/ComesFromAutoTMMarker.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/ComesFromMTMarker.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/EntryMarks.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/FontFallbackMarker.java aaron@madlon-kay.com
+src/org/omegat/gui/editor/mark/IMarker.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/Mark.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/NBSPMarker.java alex73mail@gmail.com martin.fleurke@portavita.nl
+src/org/omegat/gui/editor/mark/ProtectedPartsMarker.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/RemoveTagMarker.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/editor/mark/ReplaceMarker.java alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/SymbolPainter.java martin.fleurke@portavita.nl alex73mail@gmail.com
+src/org/omegat/gui/editor/mark/TransparentHighlightPainter.java martin.fleurke@portavita.nl
+src/org/omegat/gui/editor/mark/WhitespaceMarker.java miurahr@linux.com
+src/org/omegat/gui/exttrans/IMTGlossarySupplier.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/exttrans/IMachineTranslation.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/exttrans/MTConfigDialog.java aaron@madlon-kay.com
+src/org/omegat/gui/exttrans/MTConfigPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/exttrans/MTConfigPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/exttrans/MachineTranslateTextArea.java miurahr@linux.com
+src/org/omegat/gui/exttrans/MachineTranslationInfo.java alex73mail@gmail.com
+src/org/omegat/gui/filelist/IProjectFilesList.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/gui/filelist/ProjectFilesList.form alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/filelist/ProjectFilesList.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/filelist/ProjectFilesListController.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/filelist/TableFilterPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/filelist/TableFilterPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/filters2/FilterEditor.form mihmax@gmail.com
+src/org/omegat/gui/filters2/FilterEditor.java mihmax@gmail.com
+src/org/omegat/gui/filters2/FiltersCustomizer.java mihmax@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/filters2/FiltersCustomizerController.java aaron@madlon-kay.com
+src/org/omegat/gui/filters2/FiltersCustomizerPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/filters2/FiltersCustomizerPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/filters2/InstanceEditor.form mihmax@gmail.com
+src/org/omegat/gui/filters2/InstanceEditor.java mihmax@gmail.com
+src/org/omegat/gui/glossary/DefaultGlossaryRenderer.java aaron@madlon-kay.com
+src/org/omegat/gui/glossary/DictionaryGlossaryRenderer.java t_cordonnier@yahoo.fr
+src/org/omegat/gui/glossary/FindGlossaryThread.java alex73mail@gmail.com
+src/org/omegat/gui/glossary/GlossaryAutoCompleterView.java aaron@madlon-kay.com
+src/org/omegat/gui/glossary/GlossaryEntry.java aaron@madlon-kay.com
+src/org/omegat/gui/glossary/GlossaryManager.java alex73mail@gmail.com
+src/org/omegat/gui/glossary/GlossaryReaderCSV.java alex73mail@gmail.com
+src/org/omegat/gui/glossary/GlossaryReaderTBX.java alex73mail@gmail.com
+src/org/omegat/gui/glossary/GlossaryReaderTSV.java alex73mail@gmail.com
+src/org/omegat/gui/glossary/GlossaryRenderers.java t_cordonnier@yahoo.fr
+src/org/omegat/gui/glossary/GlossarySearcher.java aaron@madlon-kay.com
+src/org/omegat/gui/glossary/GlossaryTextArea.java aaron@madlon-kay.com
+src/org/omegat/gui/glossary/IGlossaries.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/glossary/IGlossaryRenderer.java aaron@madlon-kay.com
+src/org/omegat/gui/glossary/TransTipsMarker.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/glossary/TransTipsPopup.java alex73mail@gmail.com
+src/org/omegat/gui/issues/IIssue.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/issues/IIssueProvider.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/issues/IIssues.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/issues/IssueDetailSplitPanel.form aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/issues/IssueDetailSplitPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/issues/IssueProviders.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/IssueProvidersSelectorController.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/IssueProvidersSelectorPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/issues/IssueProvidersSelectorPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/IssuesPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/issues/IssuesPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/IssuesPanelController.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/SimpleColorIcon.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/issues/SimpleIssue.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/issues/SpellingIssueProvider.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/TagIssue.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/TerminologyIssueProvider.java aaron@madlon-kay.com
+src/org/omegat/gui/issues/TripleSplitButtonPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/issues/TripleSplitButtonPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/main/BaseMainWindowMenu.java miurahr@linux.com
+src/org/omegat/gui/main/BaseMainWindowMenuHandler.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/gui/main/ConsoleWindow.java martin.fleurke@portavita.nl alex73mail@gmail.com
+src/org/omegat/gui/main/DockablePanel.java alex73mail@gmail.com
+src/org/omegat/gui/main/DockableScrollPane.java mihmax@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/main/DockingDefaults.xml alex73mail@gmail.com @brandelune
+src/org/omegat/gui/main/EditorShortcuts.mac.properties aaron@madlon-kay.com
+src/org/omegat/gui/main/EditorShortcuts.properties aaron@madlon-kay.com
+src/org/omegat/gui/main/IMainMenu.java alex73mail@gmail.com
+src/org/omegat/gui/main/IMainWindow.java alex73mail@gmail.com
+src/org/omegat/gui/main/MainMenuIcons.java aaron@madlon-kay.com
+src/org/omegat/gui/main/MainMenuShortcuts.mac.properties kos@truetranslation.org
+src/org/omegat/gui/main/MainMenuShortcuts.properties kos@truetranslation.org
+src/org/omegat/gui/main/MainWindow.java 
+src/org/omegat/gui/main/MainWindowBurgerMenu.java miurahr@linux.com
+src/org/omegat/gui/main/MainWindowMenu.java alex73mail@gmail.com
+src/org/omegat/gui/main/MainWindowMenuHandler.java alex73mail@gmail.com
+src/org/omegat/gui/main/MainWindowStatusBar.java miurahr@linux.com
+src/org/omegat/gui/main/MainWindowUI.java aaron@madlon-kay.com
+src/org/omegat/gui/main/ProjectMedProcessing.java alex73mail@gmail.com
+src/org/omegat/gui/main/ProjectUICommands.java alex73mail@gmail.com
+src/org/omegat/gui/matches/FindMatchesThread.java alex73mail@gmail.com
+src/org/omegat/gui/matches/IMatcher.java alex73mail@gmail.com
+src/org/omegat/gui/matches/MatchesTextArea.java aaron@madlon-kay.com
+src/org/omegat/gui/matches/MatchesVarExpansion.java 
+src/org/omegat/gui/multtrans/MultipleTransFindThread.java alex73mail@gmail.com
+src/org/omegat/gui/multtrans/MultipleTransFoundEntry.java alex73mail@gmail.com mihmax@gmail.com
+src/org/omegat/gui/multtrans/MultipleTransPane.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/notes/INotes.java alex73mail@gmail.com
+src/org/omegat/gui/notes/NotesTextArea.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/BasePreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/IMenuPreferece.java miurahr@linux.com
+src/org/omegat/gui/preferences/IPreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/MainMenuUI.java miurahr@linux.com
+src/org/omegat/gui/preferences/PreferencePanel.form aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/preferences/PreferencePanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/PreferenceViewSelectorPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/PreferenceViewSelectorPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/PreferencesControllers.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/preferences/PreferencesWindowController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/AppearanceController.java miurahr@linux.com
+src/org/omegat/gui/preferences/view/AppearancePreferencesPanel.form miurahr@linux.com
+src/org/omegat/gui/preferences/view/AppearancePreferencesPanel.java miurahr@linux.com
+src/org/omegat/gui/preferences/view/AutoCompleterController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/AutoCompleterPreferencesPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/AutoCompleterPreferencesPanel.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/AutotextAutoCompleterOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/AutotextAutoCompleterOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/AutotextAutoCompleterOptionsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/CharTableAutoCompleterOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/CharTableAutoCompleterOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/CharTableAutoCompleterOptionsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/CustomColorSelectionController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/CustomColorSelectionPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/CustomColorSelectionPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/DictionaryPreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/DictionaryPreferencesPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/DictionaryPreferencesPanel.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/EditingBehaviorController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/EditingBehaviorPanel.form mihmax@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/EditingBehaviorPanel.java mihmax@gmail.com
+src/org/omegat/gui/preferences/view/FontSelectionController.java aaron@madlon-kay.com miurahr@linux.com
+src/org/omegat/gui/preferences/view/FontSelectionPanel.form mihmax@gmail.com
+src/org/omegat/gui/preferences/view/FontSelectionPanel.java mihmax@gmail.com
+src/org/omegat/gui/preferences/view/GeneralOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/GeneralOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/GeneralOptionsPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/preferences/view/GlossaryAutoCompleterOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/GlossaryAutoCompleterOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/GlossaryAutoCompleterOptionsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/GlossaryPreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/GlossaryPreferencesPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/GlossaryPreferencesPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/HistoryAutoCompleterOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/HistoryAutoCompleterOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/HistoryAutoCompleterOptionsPanel.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/LanguageToolConfigurationController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/LanguageToolConfigurationPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/LanguageToolConfigurationPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/MachineTranslationPreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/MachineTranslationPreferencesPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/MachineTranslationPreferencesPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/preferences/view/PluginInfoTableModel.java briacp@gmail.com
+src/org/omegat/gui/preferences/view/PluginsPreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/PluginsPreferencesPanel.form briacp@gmail.com
+src/org/omegat/gui/preferences/view/PluginsPreferencesPanel.java briacp@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/SaveOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/SaveOptionsPanel.form d.briel@free.fr
+src/org/omegat/gui/preferences/view/SaveOptionsPanel.java d.briel@free.fr miurahr@linux.com
+src/org/omegat/gui/preferences/view/SecureStoreController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/SecureStorePanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/SecureStorePanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/preferences/view/SpellcheckerConfigurationController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/SpellcheckerConfigurationPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/SpellcheckerConfigurationPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TMMatchesPreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TMMatchesPreferencesPanel.form aaron@madlon-kay.com d.briel@free.fr
+src/org/omegat/gui/preferences/view/TMMatchesPreferencesPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TagProcessingOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TagProcessingOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TagProcessingOptionsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TeamOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TeamOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/TeamOptionsPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/preferences/view/UserPassController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/UserPassPanel.form d.briel@free.fr
+src/org/omegat/gui/preferences/view/UserPassPanel.java mihmax@gmail.com
+src/org/omegat/gui/preferences/view/VersionCheckPreferencesController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/VersionCheckPreferencesPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/VersionCheckPreferencesPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/preferences/view/ViewOptionsController.java aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/ViewOptionsPanel.form aaron@madlon-kay.com
+src/org/omegat/gui/preferences/view/ViewOptionsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/properties/FlashColorInterpolator.java aaron@madlon-kay.com
+src/org/omegat/gui/properties/FlashingTextArea.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/properties/ForcedWrappingEditorKit.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/properties/ISegmentPropertiesView.java aaron@madlon-kay.com
+src/org/omegat/gui/properties/SegmentPropertiesArea.java aaron@madlon-kay.com
+src/org/omegat/gui/properties/SegmentPropertiesListCell.form aaron@madlon-kay.com
+src/org/omegat/gui/properties/SegmentPropertiesListCell.java aaron@madlon-kay.com
+src/org/omegat/gui/properties/SegmentPropertiesListView.java aaron@madlon-kay.com
+src/org/omegat/gui/properties/SegmentPropertiesTableView.java aaron@madlon-kay.com
+
+src/org/omegat/gui/scripting/AbstractScriptEditor.java briacp@gmail.com
+src/org/omegat/gui/scripting/ConsoleBindings.java briacp@gmail.com
+src/org/omegat/gui/scripting/IScriptLogger.java alex73mail@gmail.com
+src/org/omegat/gui/scripting/RichScriptEditor.java briacp@gmail.com
+src/org/omegat/gui/scripting/ScriptItem.java briacp@gmail.com
+src/org/omegat/gui/scripting/ScriptRunner.java aaron@madlon-kay.com
+src/org/omegat/gui/scripting/ScriptSet.java briacp@gmail.com
+src/org/omegat/gui/scripting/ScriptingWindow.java briacp@gmail.com
+src/org/omegat/gui/scripting/ScriptsMonitor.java briacp@gmail.com
+src/org/omegat/gui/scripting/StandardScriptEditor.java briacp@gmail.com
+src/org/omegat/gui/search/EntryListPane.java 0011solo@gmail.com
+src/org/omegat/gui/search/HistoryManager.java aaron@madlon-kay.com
+src/org/omegat/gui/search/MFindField.java alex73mail@gmail.com
+src/org/omegat/gui/search/SearchWindowController.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/search/SearchWindowForm.form alex73mail@gmail.com
+src/org/omegat/gui/search/SearchWindowForm.java alex73mail@gmail.com
+src/org/omegat/gui/search/SearchWindowManager.java miurahr@linux.com
+src/org/omegat/gui/search/SearchWindowMenu.java aaron@madlon-kay.com
+src/org/omegat/gui/segmentation/SegmentationCustomizer.java mihmax@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/segmentation/SegmentationCustomizerController.java aaron@madlon-kay.com
+src/org/omegat/gui/segmentation/SegmentationCustomizerPanel.form aaron@madlon-kay.com mihmax@gmail.com
+src/org/omegat/gui/segmentation/SegmentationCustomizerPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/shortcuts/PropertiesShortcuts.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/gui/stat/BaseMatchStatisticsPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/stat/BaseStatisticsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/stat/MatchStatisticsPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/stat/PerFileMatchStatisticsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/stat/StatisticsPanel.java aaron@madlon-kay.com
+src/org/omegat/gui/stat/StatisticsWindow.form aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/stat/StatisticsWindow.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/gui/stat/TitledTablePanel.form aaron@madlon-kay.com
+src/org/omegat/gui/stat/TitledTablePanel.java aaron@madlon-kay.com
+src/org/omegat/gui/theme/DefaultClassicTheme.java miurahr@linux.com
+src/org/omegat/gui/theme/DefaultFlatTheme.java miurahr@linux.com
+src/org/omegat/gui/theme/DelegatingLookAndFeel.java miurahr@linux.com
+src/org/omegat/help/Help.java aaron@madlon-kay.com miurahr@linux.com
+src/org/omegat/languagetools/BaseLanguageToolBridge.java aaron@madlon-kay.com
+src/org/omegat/languagetools/ILanguageToolBridge.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/languagetools/LanguageClassBroker.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/languagetools/LanguageDataBroker.java miurahr@linux.com
+src/org/omegat/languagetools/LanguageManager.java miurahr@linux.com
+src/org/omegat/languagetools/LanguageToolIssueProvider.java aaron@madlon-kay.com
+src/org/omegat/languagetools/LanguageToolNativeBridge.java aaron@madlon-kay.com
+src/org/omegat/languagetools/LanguageToolNetworkBridge.java aaron@madlon-kay.com
+src/org/omegat/languagetools/LanguageToolPrefs.java aaron@madlon-kay.com miurahr@linux.com
+src/org/omegat/languagetools/LanguageToolResult.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/languagetools/LanguageToolWrapper.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/logger.properties miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/tokenizer/BaseTokenizer.java aaron@madlon-kay.com
+src/org/omegat/tokenizer/DefaultTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/HunspellTokenizer.java aaron@madlon-kay.com miurahr@linux.com
+src/org/omegat/tokenizer/ITokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneArabicTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneArmenianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneBasqueTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneBrazilianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneBulgarianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneCJKTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneCatalanTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneCzechTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneDanishTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneDutchTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneEnglishTokenizer.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/tokenizer/LuceneFinnishTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneFrenchTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneGalicianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneGermanTokenizer.java aaron@madlon-kay.com
+src/org/omegat/tokenizer/LuceneGreekTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneHindiTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneHungarianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneIndonesianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneIrishTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneItalianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneJapaneseTokenizer.java aaron@madlon-kay.com
+src/org/omegat/tokenizer/LuceneLatvianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneNorwegianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LucenePersianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LucenePolishTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LucenePortugueseTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneRomanianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneRussianTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneSmartChineseTokenizer.java aaron@madlon-kay.com
+src/org/omegat/tokenizer/LuceneSpanishTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneSwedishTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneThaiTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/LuceneTurkishTokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/Tokenizer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/tokenizer/WordIterator.java mihmax@gmail.com
+src/org/omegat/tokenizer/**/stopwords-*.txt miurahr@linux.com
+src/org/omegat/util/BiDiUtils.java damien.rembert@gmail.com
+src/org/omegat/util/CredentialsManager.java aaron@madlon-kay.com
+src/org/omegat/util/DirectoryMonitor.java alex73mail@gmail.com
+src/org/omegat/util/EncodingDetector.java aaron@madlon-kay.com
+src/org/omegat/util/FileUtil.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/util/FunctionalAction.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/util/HTMLUtils.java aaron@madlon-kay.com
+src/org/omegat/util/HttpConnectionUtils.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/util/InlineTagHandler.java alex73mail@gmail.com
+src/org/omegat/util/Java8Compat.java aaron@madlon-kay.com
+src/org/omegat/util/JnaLoader.java miurahr@linux.com
+src/org/omegat/util/JsonParser.java briacp@gmail.com aaron@madlon-kay.com
+src/org/omegat/util/Language.java alex73mail@gmail.com
+src/org/omegat/util/LinebreakPreservingReader.java henry.pijffers@gmail.com
+src/org/omegat/util/Log.java alex73mail@gmail.com
+src/org/omegat/util/MagicComment.java miurahr@linux.com
+src/org/omegat/util/MemoryUtils.java alex73mail@gmail.com
+src/org/omegat/util/MixedEolHandlingReader.java aaron@madlon-kay.com
+src/org/omegat/util/MultiMap.java mihmax@gmail.com alex73mail@gmail.com
+src/org/omegat/util/NullBufferedWriter.java alex73mail@gmail.com
+src/org/omegat/util/NullWriter.java alex73mail@gmail.com
+src/org/omegat/util/OConsts.java 
+src/org/omegat/util/OStrings.java aaron@madlon-kay.com
+src/org/omegat/util/PatternConsts.java 
+src/org/omegat/util/Platform.java miurahr@linux.com
+src/org/omegat/util/PluginInstaller.java miurahr@linux.com
+src/org/omegat/util/Preferences.java aaron@madlon-kay.com
+src/org/omegat/util/PreferencesImpl.java aaron@madlon-kay.com
+src/org/omegat/util/PreferencesXML.java miurahr@linux.com
+src/org/omegat/util/ProjectFileStorage.java aaron@madlon-kay.com
+src/org/omegat/util/RecentProjects.java aaron@madlon-kay.com
+src/org/omegat/util/RuntimePreferences.java alex73mail@gmail.com
+src/org/omegat/util/StaticUtils.java aaron@madlon-kay.com
+src/org/omegat/util/StreamUtil.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/util/StringUtil.java aaron@madlon-kay.com
+src/org/omegat/util/TMXDateParser.java martin.fleurke@portavita.nl alex73mail@gmail.com
+src/org/omegat/util/TMXProp.java alex73mail@gmail.com
+src/org/omegat/util/TMXReader2.java alex73mail@gmail.com
+src/org/omegat/util/TMXWriter.java alex73mail@gmail.com
+src/org/omegat/util/TMXWriter2.java alex73mail@gmail.com
+src/org/omegat/util/TagUtil.java aaron@madlon-kay.com
+src/org/omegat/util/Token.java mihmax@gmail.com aaron@madlon-kay.com
+src/org/omegat/util/VarExpansion.java d.briel@free.fr
+src/org/omegat/util/VersionChecker.java aaron@madlon-kay.com
+src/org/omegat/util/WikiGet.java alex73mail@gmail.com
+src/org/omegat/util/gui/CharacterWrapEditorKit.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/util/gui/CustomContainerFactory.java aaron@madlon-kay.com
+src/org/omegat/util/gui/CustomDockingUISettings.java miurahr@linux.com
+src/org/omegat/util/gui/DataTableStyling.java aaron@madlon-kay.com
+src/org/omegat/util/gui/DelegatingComboBoxRenderer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/util/gui/DesktopWrapper.java lev.abashkin@gmail.com
+src/org/omegat/util/gui/DragTargetOverlay.java aaron@madlon-kay.com
+src/org/omegat/util/gui/ExternalBrowserLaunchingLinkListener.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/util/gui/FontFallbackListener.java aaron@madlon-kay.com
+src/org/omegat/util/gui/FontFallbackManager.java miurahr@linux.com aaron@madlon-kay.com
+src/org/omegat/util/gui/FontUtil.java miurahr@linux.com
+src/org/omegat/util/gui/HintTextField.java aaron@madlon-kay.com
+src/org/omegat/util/gui/HtmlMediaSupport.java miurahr@linux.com alex73mail@gmail.com
+src/org/omegat/util/gui/IPaneMenu.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/util/gui/JTextPaneLinkifier.java aaron@madlon-kay.com
+src/org/omegat/util/gui/LanguageComboBoxRenderer.java mihmax@gmail.com
+src/org/omegat/util/gui/MenuExtender.java miurahr@linux.com
+src/org/omegat/util/gui/MenuItemPager.java aaron@madlon-kay.com
+src/org/omegat/util/gui/NoWrapEditorKit.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/util/gui/OSXIntegration.java aaron@madlon-kay.com
+src/org/omegat/util/gui/OmegaTFileChooser.java mihmax@gmail.com
+src/org/omegat/util/gui/OpenProjectFileChooser.java mihmax@gmail.com
+src/org/omegat/util/gui/ReasonablySizedPanel.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/util/gui/ResourcesUtil.java alex73mail@gmail.com aaron@madlon-kay.com
+src/org/omegat/util/gui/RoundedCornerBorder.java aaron@madlon-kay.com
+src/org/omegat/util/gui/SoundActionListener.java miurahr@linux.com
+src/org/omegat/util/gui/StaticUIUtils.java aaron@madlon-kay.com
+src/org/omegat/util/gui/Styles.java miurahr@linux.com
+src/org/omegat/util/gui/TableColumnSizer.java aaron@madlon-kay.com
+src/org/omegat/util/gui/TextUtil.java alex73mail@gmail.com
+src/org/omegat/util/gui/TokenizerComboBoxRenderer.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/util/gui/TooltipAttribute.java aaron@madlon-kay.com alex73mail@gmail.com
+src/org/omegat/util/gui/UIDesignManager.java miurahr@linux.com
+src/org/omegat/util/gui/UIScale.java miurahr@linux.com
+src/org/omegat/util/gui/UIThreadsUtil.java alex73mail@gmail.com
+src/org/omegat/util/gui/laf/EmptyDarkThemeDetector.java miurahr@linux.com
+src/org/omegat/util/gui/laf/MacOSDarkThemeDetector.java miurahr@linux.com
+src/org/omegat/util/gui/laf/SystemDarkThemeDetector.java miurahr@linux.com
+src/org/omegat/util/gui/laf/WindowsDarkThemeDetector.java miurahr@linux.com
+src/org/omegat/util/logging/OmegaTFileHandler.java alex73mail@gmail.com miurahr@linux.com
+src/org/omegat/util/logging/OmegaTLogFormatter.java alex73mail@gmail.com
+src/org/omegat/util/xml/DefaultEntityFilter.java aaron@madlon-kay.com
+src/org/omegat/util/xml/XMLAttribute.java mihmax@gmail.com
+src/org/omegat/util/xml/XMLBlock.java aaron@madlon-kay.com
+src/org/omegat/util/xml/XMLReader.java mihmax@gmail.com
+src/org/omegat/util/xml/XMLStreamReader.java aaron@madlon-kay.com aquilonis@earthlink.net
+src/org/omegat/util/xml/package.html mihmax@gmail.com
+src/schemas/filters.xsd alex73mail@gmail.com
+src/schemas/project_properties.xsd alex73mail@gmail.com
+src/schemas/srx20.xsd alex73mail@gmail.com
+src/schemas/tbx.xsd alex73mail@gmail.com
+src/schemas/tmx11.dtd alex73mail@gmail.com
+src/schemas/tmx14.dtd alex73mail@gmail.com
+src/schemas/tmx14.xjb alex73mail@gmail.com
+src/schemas/tmx14.xsd alex73mail@gmail.com
+src/schemas/xml.xsd alex73mail@gmail.com
+
+# Acceptance test
+test-acceptance/**/* miurahr@linux.com
+
+# integration test
+compose.yml miurahr@linux.com
+test-integration/docker/**/* miurahr@linux.com
+test-integration/* miurahr@linux.com
+test-integration/src/org/omegat/core/data/TestTeamIntegration.java alex73mail@gmail.com
+test-integration/src/org/omegat/core/data/TestTeamIntegrationChild.java alex73mail@gmail.com
+test-integration/src/org/omegat/util/logging/TestLogFileHandler.java alex73mail@gmail.com miurahr@linux.com
+
+# unit and functional tests
+test/data/autotmx/auto1.tmx alex73mail@gmail.com
+test/data/autotmx/project1.tmx alex73mail@gmail.com
+test/data/dicts-lingvo-dz/License.txt aaron@madlon-kay.com
+test/data/dicts-lingvo-dz/test.dsl.dz 
+test/data/dicts-lingvo/License.txt aaron@madlon-kay.com
+test/data/dicts-lingvo/test.dsl 
+test/data/dicts-pango/README miurahr@linux.com
+test/data/dicts-pango/english-czech.dict.dz 
+test/data/dicts-pango/english-czech.idx 
+test/data/dicts-pango/english-czech.ifo miurahr@linux.com
+test/data/dicts-zipped/License.txt d.briel@free.fr
+test/data/dicts-zipped/latin-francais.dict.dz 
+test/data/dicts-zipped/latin-francais.idx.gz 
+test/data/dicts-zipped/latin-francais.ifo alex73mail@gmail.com
+test/data/dicts/License.txt d.briel@free.fr
+test/data/dicts/latin-francais.dict aaron@madlon-kay.com
+test/data/dicts/latin-francais.idx 
+test/data/dicts/latin-francais.ifo alex73mail@gmail.com
+test/data/dtd/xhtml-lat1.ent aaron@madlon-kay.com
+test/data/dtd/xhtml-special.ent aaron@madlon-kay.com
+test/data/dtd/xhtml-symbol.ent alex73mail@gmail.com
+test/data/dtd/xhtml1-strict.dtd aaron@madlon-kay.com
+test/data/enforcetmx/alternative.tmx briacp@gmail.com
+test/data/enforcetmx/enforce1.tmx alex73mail@gmail.com aaron@madlon-kay.com
+test/data/enforcetmx/project1.tmx alex73mail@gmail.com aaron@madlon-kay.com
+test/data/externalfinder/finder.xml miurahr@linux.com
+test/data/filters/Android/file-AndroidFilter.xml alex73mail@gmail.com
+test/data/filters/CamtasiaWindows/Test.camproj d.briel@free.fr
+test/data/filters/DTD/crashes.dtd d.briel@free.fr
+test/data/filters/Latex/file-latex-comments.tex miurahr@linux.com
+test/data/filters/Latex/file-latex-items-exp.tex miurahr@linux.com
+test/data/filters/Latex/file-latex-items.tex miurahr@linux.com
+test/data/filters/Latex/latexexample.tex alex73mail@gmail.com
+test/data/filters/Latex/test-article-exp.tex miurahr@linux.com
+test/data/filters/Latex/test-article.tex miurahr@linux.com
+test/data/filters/MoodlePHP/file.php aaron@madlon-kay.com
+test/data/filters/MoodlePHP/filesAlign.php aaron@madlon-kay.com
+test/data/filters/MoodlePHP/filesAlign_gl.php aaron@madlon-kay.com
+test/data/filters/MozillaDTD/file-be.dtd miurahr@linux.com
+test/data/filters/MozillaDTD/file.dtd alex73mail@gmail.com d.briel@free.fr
+test/data/filters/MozillaFTL/MozillaFTLFilter.ftl keko.gl@gmail.com
+test/data/filters/MozillaLang/file-MozillaLangFilter-de.lang aaron@madlon-kay.com
+test/data/filters/Rc/prog.rc alex73mail@gmail.com
+test/data/filters/Rc/prog_be.rc alex73mail@gmail.com
+test/data/filters/ResX/Resources.resx d.briel@free.fr
+test/data/filters/ResX/Simple.resx miurahr@linux.com
+test/data/filters/SVG/Neural_network_example.svg alex73mail@gmail.com
+test/data/filters/SVG/Readme.txt alex73mail@gmail.com
+test/data/filters/Scribus/Scribus.sla d.briel@free.fr
+test/data/filters/Wix/fr-fr.wxl d.briel@free.fr
+test/data/filters/XMLSpreadsheet/XMLSpreadsheet2003.xml d.briel@free.fr
+test/data/filters/docBook/Intro-Linux/abook.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/app1.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/app2.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/app3.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/app4.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/app5.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap1.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap10.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap11.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap2.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap3.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap4.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap5.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap6.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap7.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap8.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/chap9.xml alex73mail@gmail.com
+test/data/filters/docBook/Intro-Linux/gloss.xml alex73mail@gmail.com
+test/data/filters/docBook/file-DocBookFilter-extWriter.xml alex73mail@gmail.com
+test/data/filters/docBook/file-DocBookFilter-invalid.xml alex73mail@gmail.com
+test/data/filters/docBook/file-DocBookFilter-invalid2.xml @brandelune vbidaux@diptik.fr
+test/data/filters/docBook/file-DocBookFilter.xml alex73mail@gmail.com
+test/data/filters/docBook/globals.ent mdufour@audiokinetic.com
+test/data/filters/dokuwiki/dokuwiki-translate.txt d.briel@free.fr
+test/data/filters/dokuwiki/dokuwiki.txt d.briel@free.fr
+test/data/filters/helpandmanual/file-HelpAndManualFilter.xml d.briel@free.fr
+test/data/filters/hhc/file-HHCFilter2.hhc alex73mail@gmail.com
+test/data/filters/html/file-HTMLFilter2-HTML5-added-charset.html alex73mail@gmail.com martin.fleurke@portavita.nl
+test/data/filters/html/file-HTMLFilter2-HTML5-headerdifferentcharset.html alex73mail@gmail.com martin.fleurke@portavita.nl
+test/data/filters/html/file-HTMLFilter2-OmegaT.html damien.rembert@gmail.com
+test/data/filters/html/file-HTMLFilter2-SMP.html aaron@madlon-kay.com
+test/data/filters/html/file-HTMLFilter2-added-charset.html alex73mail@gmail.com martin.fleurke@portavita.nl
+test/data/filters/html/file-HTMLFilter2-all-block-elements.html damien.rembert@gmail.com
+test/data/filters/html/file-HTMLFilter2-headerdifferentcharset.html alex73mail@gmail.com martin.fleurke@portavita.nl
+test/data/filters/html/file-HTMLFilter2-headernocharset.html alex73mail@gmail.com martin.fleurke@portavita.nl
+test/data/filters/html/file-HTMLFilter2-ignored-comments-no-break-SF610.html damien.rembert@gmail.com
+test/data/filters/html/file-HTMLFilter2-layout-compressed.html martin.fleurke@portavita.nl
+test/data/filters/html/file-HTMLFilter2-layout.html martin.fleurke@portavita.nl
+test/data/filters/html/file-HTMLFilter2-recurse-bugfix-SF205.html damien.rembert@gmail.com
+test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF609.html damien.rembert@gmail.com
+test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF613.html damien.rembert@gmail.com
+test/data/filters/html/file-HTMLFilter2-tag-dropping-bugfix-SF873.html damien.rembert@gmail.com
+test/data/filters/html/file-HTMLFilter2-tags-optimization.html alex73mail@gmail.com
+test/data/filters/html/file-HTMLFilter2.html alex73mail@gmail.com
+test/data/filters/ilias/ILIASFilter.lang d.briel@free.fr
+test/data/filters/ilias/ILIASFilterAlign-tr.lang d.briel@free.fr
+test/data/filters/ilias/ILIASFilterAlign.lang d.briel@free.fr
+test/data/filters/ini/file-INIFilter.ini miurahr@linux.com
+test/data/filters/magento/MagentoFilter.csv d.briel@free.fr
+test/data/filters/magento/MagentoFilterAlign-tr.csv d.briel@free.fr
+test/data/filters/magento/MagentoFilterAlign.csv d.briel@free.fr
+test/data/filters/openDoc/file-OpenDocFilter.odt 
+test/data/filters/openXML/file-OpenXMLFilter-tables.docx 
+test/data/filters/openXML/file-OpenXMLFilter.docx 
+test/data/filters/pdf/file-PdfFilter-gold.txt aaron@madlon-kay.com
+test/data/filters/pdf/file-PdfFilter-password.pdf 
+test/data/filters/pdf/file-PdfFilter.pdf 
+test/data/filters/po/file-POFilter-Monolingual.po alex73mail@gmail.com
+test/data/filters/po/file-POFilter-be-expected.po miurahr@linux.com
+test/data/filters/po/file-POFilter-be-utf8.po aaron@madlon-kay.com
+test/data/filters/po/file-POFilter-be.po alex73mail@gmail.com
+test/data/filters/po/file-POFilter-fuzzyCtx-expected.po miurahr@linux.com
+test/data/filters/po/file-POFilter-fuzzyCtx-plural.po miurahr@linux.com
+test/data/filters/po/file-POFilter-fuzzyCtx.po miurahr@linux.com
+test/data/filters/po/file-POFilter-match-stat-en-ca.po miurahr@linux.com
+test/data/filters/po/file-POFilter-multiple.po alex73mail@gmail.com
+test/data/filters/po/file-POFilter-multiple2.po miurahr@linux.com
+test/data/filters/relaxng/relaxng-invalid-ns.rng aaron@madlon-kay.com
+test/data/filters/relaxng/relaxng-invalid.rng aaron@madlon-kay.com
+test/data/filters/relaxng/relaxng.rng aaron@madlon-kay.com
+test/data/filters/resourceBundle/.gitattributes miurahr@linux.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-BadLiteral1.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-BadLiteral2.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-BadLiteral3.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-Comments.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-NOI18N.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-NonASCIIComments.properties miurahr@linux.com mihmax@gmail.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-SMP.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeEscaped.properties miurahr@linux.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeLiterals.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-UnicodeUTF8.properties miurahr@linux.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace-gold.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter-WhiteSpace.properties aaron@madlon-kay.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter.properties alex73mail@gmail.com
+test/data/filters/resourceBundle/file-ResourceBundleFilter_be.properties alex73mail@gmail.com
+test/data/filters/srt/file-SrtFilter-mixedEol.srt alex73mail@gmail.com
+test/data/filters/srt/file-SrtFilter.srt alex73mail@gmail.com
+test/data/filters/text/file-TextFilter-SMP-gold.txt aaron@madlon-kay.com
+test/data/filters/text/file-TextFilter-SMP.txt aaron@madlon-kay.com
+test/data/filters/text/file-TextFilter-multiple.txt alex73mail@gmail.com
+test/data/filters/text/file-TextFilter-noemptylines.txt alex73mail@gmail.com
+test/data/filters/text/file-TextFilter.txt alex73mail@gmail.com
+test/data/filters/text/text1.txt alex73mail@gmail.com
+test/data/filters/wordpress/Wordpress.xml d.briel@free.fr
+test/data/filters/xhtml/file-XHTMLFilter-tags-optimization.html alex73mail@gmail.com
+test/data/filters/xhtml/file-XHTMLFilter.html alex73mail@gmail.com
+test/data/filters/xliff/filters3/README.txt t_cordonnier@yahoo.fr
+test/data/filters/xliff/filters3/file-XLIFFFilter-SMP.xlf alex73mail@gmail.com aaron@madlon-kay.com
+test/data/filters/xliff/filters3/file-XLIFFFilter-cdata-bugs418.xlf miurahr@linux.com
+test/data/filters/xliff/filters3/file-XLIFFFilter-invalid-content.xlf alex73mail@gmail.com aaron@madlon-kay.com
+test/data/filters/xliff/filters3/file-XLIFFFilter-properties.xlf aaron@madlon-kay.com alex73mail@gmail.com
+test/data/filters/xliff/filters3/file-XLIFFFilter-statcount.xlf alex73mail@gmail.com
+test/data/filters/xliff/filters3/file-XLIFFFilter-tags-optimization.xlf alex73mail@gmail.com
+test/data/filters/xliff/filters3/file-XLIFFFilter-tags.xlf alex73mail@gmail.com
+test/data/filters/xliff/filters3/file-XLIFFFilter.xlf alex73mail@gmail.com
+test/data/filters/xliff/filters3/file-xliff-BUGS1221.xlf miurahr@linux.com
+test/data/filters/xliff/filters3/file-xliff-RFE1506-translated-expectation.xliff miurahr@linux.com
+test/data/filters/xliff/filters3/file-xliff-RFE1506.xliff miurahr@linux.com
+test/data/filters/xliff/filters4-xliff1/en-ca.xlf miurahr@linux.com
+test/data/filters/xliff/filters4-xliff1/en-xx.xlf t_cordonnier@yahoo.fr
+test/data/filters/xliff/filters4-xliff1/file-XLIFFFilter1-multiple-file-tag.xlf miurahr@linux.com
+test/data/filters/xliff/filters4-xliff2/ex.14.5.xlf miurahr@linux.com
+test/data/filters/xliff/filters4-xliff2/ex.9.5.xlf t_cordonnier@yahoo.fr
+test/data/glossaries/sampleTBXfile.tbx alex73mail@gmail.com
+test/data/glossaries/test-magiccomment-bom.tab miurahr@linux.com
+test/data/glossaries/test-magiccomment.tab miurahr@linux.com
+test/data/glossaries/test.csv d.briel@free.fr
+test/data/glossaries/test.tab alex73mail@gmail.com miurahr@linux.com
+test/data/mark/alternative.tmx briacp@gmail.com
+test/data/plugin/**/MANIFEST.MF miurahr@linux.com
+test/data/preferences/omegat.prefs.xml miurahr@linux.com
+test/data/project/customglossarydir.project aaron@madlon-kay.com
+test/data/project/customglossarydirfile.project aaron@madlon-kay.com
+test/data/project/customglossaryfile.project aaron@madlon-kay.com
+test/data/project/defaultdirs.project aaron@madlon-kay.com
+test/data/project/entities.project aaron@madlon-kay.com
+test/data/project/missingdirs.project aaron@madlon-kay.com
+test/data/project/nondefaultexporttmoptions.project aaron@madlon-kay.com
+test/data/project/team.project aaron@madlon-kay.com miurahr@linux.com
+test/data/project/teamMapWithExclude.project aaron@madlon-kay.com miurahr@linux.com
+test/data/project/teamWithMap.project miurahr@linux.com aaron@madlon-kay.com
+test/data/segmentation/default/segmentation.srx alex73mail@gmail.com d.briel@free.fr
+test/data/segmentation/migrate/locale_de_54/segmentation.conf miurahr@linux.com
+test/data/segmentation/migrate/locale_en/segmentation.conf miurahr@linux.com
+test/data/segmentation/migrate/locale_ja/segmentation.conf miurahr@linux.com
+test/data/spelldicts/* miurahr@linux.com
+test/data/team-project/l10n-ja/omegat.project miurahr@linux.com
+test/data/team-project/svn/omegat.project aaron@madlon-kay.com miurahr@linux.com
+test/data/tmx/TMXComplianceKit/* d.briel@free.fr
+test/data/tmx/empty.tmx miurahr@linux.com alex73mail@gmail.com
+test/data/tmx/en-US_en-GB_fr_sr.tmx miurahr@linux.com
+test/data/tmx/en-US_sr.tmx miurahr@linux.com
+test/data/tmx/invalid.tmx alex73mail@gmail.com
+test/data/tmx/mt/mt1.tmx miurahr@linux.com alex73mail@gmail.com
+test/data/tmx/penalty-010/segment_1.tmx miurahr@linux.com
+test/data/tmx/resegmenting.tmx alex73mail@gmail.com
+test/data/tmx/segment_2.tmx miurahr@linux.com
+test/data/tmx/test-SMP.tmx alex73mail@gmail.com aaron@madlon-kay.com
+test/data/tmx/test-level1.tmx alex73mail@gmail.com
+test/data/tmx/test-level2.tmx alex73mail@gmail.com
+test/data/tmx/test-level2.tmx.gz 
+test/data/tmx/test-level2.tmx.zip 
+test/data/tmx/test-match-stat-en-ca.tmx miurahr@linux.com
+test/data/tmx/test-missingSource.tmx alex73mail@gmail.com
+test/data/tmx/test-multiple-entries.tmx miurahr@linux.com
+test/data/tmx/test-multiple-tuv.tmx briacp@gmail.com
+test/data/tmx/test-save-tmx14.tmx alex73mail@gmail.com
+test/data/xml/test-badDecimalEntity.xml aaron@madlon-kay.com
+test/data/xml/test-badHexEntity.xml aaron@madlon-kay.com
+test/data/xml/test.xml aaron@madlon-kay.com
+test/fixtures/org/omegat/core/TestCore.java aaron@madlon-kay.com
+test/fixtures/org/omegat/core/TestCoreInitializer.java alex73mail@gmail.com
+test/fixtures/org/omegat/core/TestCoreWireMock.java miurahr@linux.com
+test/fixtures/org/omegat/util/CommonVerifications.java miurahr@linux.com aaron@madlon-kay.com
+test/fixtures/org/omegat/util/LocaleRule.java miurahr@linux.com
+test/fixtures/org/omegat/util/TestPreferencesInitializer.java aaron@madlon-kay.com
+test/src/org/omegat/CLIParametersTest.java aaron@madlon-kay.com
+test/src/org/omegat/MainTest.java aaron@madlon-kay.com
+test/src/org/omegat/core/data/AutoTmxTest.java alex73mail@gmail.com
+test/src/org/omegat/core/data/ExternalTMFactoryTest.java aaron@madlon-kay.com
+test/src/org/omegat/core/data/MergeTest.java alex73mail@gmail.com
+test/src/org/omegat/core/data/PluginInformationTest.java miurahr@linux.com
+test/src/org/omegat/core/data/ProjectPropertiesTest.java miurahr@linux.com alex73mail@gmail.com
+test/src/org/omegat/core/data/RealProjectTest.java alex73mail@gmail.com
+test/src/org/omegat/core/data/TmxComplianceBase.java alex73mail@gmail.com
+test/src/org/omegat/core/data/TmxComplianceTests.java alex73mail@gmail.com
+test/src/org/omegat/core/data/TmxSegmentationTest.java alex73mail@gmail.com
+test/src/org/omegat/core/data/TokenTest.java miurahr@linux.com alex73mail@gmail.com
+test/src/org/omegat/core/dictionaries/DictionariesManagerTest.java aaron@madlon-kay.com
+test/src/org/omegat/core/dictionaries/DictionaryDataTest.java aaron@madlon-kay.com
+test/src/org/omegat/core/dictionaries/LingvoDSLTest.java miurahr@linux.com
+test/src/org/omegat/core/dictionaries/OnlineDictionaryTest.java miurahr@linux.com
+test/src/org/omegat/core/dictionaries/StarDictTest.java aaron@madlon-kay.com miurahr@linux.com
+test/src/org/omegat/core/search/SearcherTest.java miurahr@linux.com
+test/src/org/omegat/core/segmentation/SRXTest.java miurahr@linux.com
+test/src/org/omegat/core/segmentation/SegmenterTest.java mihmax@gmail.com aaron@madlon-kay.com
+test/src/org/omegat/core/statistics/CalcMatchStatisticsTest.java miurahr@linux.com
+test/src/org/omegat/core/statistics/FindMatchesTest.java miurahr@linux.com
+test/src/org/omegat/core/statistics/StatisticsTest.java alex73mail@gmail.com
+test/src/org/omegat/core/tagvalidation/TagRepairTest.java aaron@madlon-kay.com
+test/src/org/omegat/core/tagvalidation/TagValidationTest.java aaron@madlon-kay.com
+test/src/org/omegat/core/team2/AbstractRemoteRepository2IT.java martin.fleurke@portavita.nl
+test/src/org/omegat/core/team2/GitRemoteRepository2IT.java martin.fleurke@portavita.nl
+test/src/org/omegat/core/team2/RemoteRepositoryFactoryTest.java damien.rembert@gmail.com martin.fleurke@portavita.nl
+test/src/org/omegat/core/team2/RemoteRepositoryProviderTest.java miurahr@linux.com martin.fleurke@portavita.nl
+test/src/org/omegat/core/team2/RemoteRepositoryProviderTest2.java martin.fleurke@portavita.nl
+test/src/org/omegat/core/team2/SVNRemoteRepository2IT.java martin.fleurke@portavita.nl
+test/src/org/omegat/core/team2/impl/GITCredentialsProviderTest.java miurahr@linux.com
+test/src/org/omegat/externalfinder/ExternalFinderTest.java miurahr@linux.com
+test/src/org/omegat/filters/AndroidFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/DocBookFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/DokuWikiFilterTest.java d.briel@free.fr alex73mail@gmail.com
+test/src/org/omegat/filters/FiltersTest.java aaron@madlon-kay.com
+test/src/org/omegat/filters/HHCFilter2Test.java alex73mail@gmail.com
+test/src/org/omegat/filters/HTMLFilter2Test.java martin.fleurke@portavita.nl
+test/src/org/omegat/filters/ILIASFilterTest.java d.briel@free.fr alex73mail@gmail.com
+test/src/org/omegat/filters/INIFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/LatexFilterTest.java miurahr@linux.com alex73mail@gmail.com
+test/src/org/omegat/filters/MagentoFilterTest.java d.briel@free.fr
+test/src/org/omegat/filters/MoodlePHPFilterTest.java alex73mail@gmail.com aaron@madlon-kay.com
+test/src/org/omegat/filters/MozillaDTDFilterTest.java alex73mail@gmail.com miurahr@linux.com
+test/src/org/omegat/filters/MozillaFTLFilterTest.java keko.gl@gmail.com alex73mail@gmail.com
+test/src/org/omegat/filters/OpenDocFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/OpenXMLFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/POFilterTest.java miurahr@linux.com alex73mail@gmail.com
+test/src/org/omegat/filters/PdfFilterTest.java aaron@madlon-kay.com
+test/src/org/omegat/filters/RcFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/RelaxNGFilterTest.java aaron@madlon-kay.com
+test/src/org/omegat/filters/ResXFilterTest.java alex73mail@gmail.com miurahr@linux.com
+test/src/org/omegat/filters/ResourceBundleFilterTest.java aaron@madlon-kay.com alex73mail@gmail.com
+test/src/org/omegat/filters/Scribus.java d.briel@free.fr alex73mail@gmail.com
+test/src/org/omegat/filters/SrtFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/SvgFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/TestFilterBase.java alex73mail@gmail.com
+test/src/org/omegat/filters/TextFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/WiXFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/Wordpress.java d.briel@free.fr alex73mail@gmail.com
+test/src/org/omegat/filters/XHTMLFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters/XLIFFFilterTest.java miurahr@linux.com alex73mail@gmail.com
+test/src/org/omegat/filters/XMLSpreadsheetTest.java d.briel@free.fr
+test/src/org/omegat/filters2/master/FilterMasterTest.java briacp@gmail.com
+test/src/org/omegat/filters2/master/PluginUtilsTest.java briacp@gmail.com
+test/src/org/omegat/filters4/OpenXMLFilterTest.java alex73mail@gmail.com
+test/src/org/omegat/filters4/Xliff1FilterTest.java t_cordonnier@yahoo.fr miurahr@linux.com
+test/src/org/omegat/filters4/Xliff2FilterTest.java t_cordonnier@yahoo.fr alex73mail@gmail.com
+test/src/org/omegat/gui/dialogs/DialogsTest.java aaron@madlon-kay.com
+test/src/org/omegat/gui/editor/EditorUtilsTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/history/WordCompleterTest.java aaron@madlon-kay.com
+test/src/org/omegat/gui/editor/history/WordPredictorTest.java aaron@madlon-kay.com
+test/src/org/omegat/gui/editor/mark/AltTranslationsMarkerTest.java miurahr@linux.com alex73mail@gmail.com
+test/src/org/omegat/gui/editor/mark/BiDiMarkersTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/mark/ComesFromAutoTMMarkerTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/mark/ComesFromMTMarkerTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/mark/MarkerTestBase.java aaron@madlon-kay.com
+test/src/org/omegat/gui/editor/mark/NBSPMarkerTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/mark/ProtectedPartsMarkerTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/mark/RemoveTagMarkerTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/mark/ReplaceMarkerTest.java miurahr@linux.com
+test/src/org/omegat/gui/editor/mark/WhitespaceMarkerTest.java miurahr@linux.com
+test/src/org/omegat/gui/glossary/FindGlossaryThreadTest.java alex73mail@gmail.com
+test/src/org/omegat/gui/glossary/GlossaryAutoCompleterViewTest.java aaron@madlon-kay.com
+test/src/org/omegat/gui/glossary/GlossaryEntryTest.java aaron@madlon-kay.com martin.fleurke@portavita.nl
+test/src/org/omegat/gui/glossary/GlossaryReaderCSVTest.java alex73mail@gmail.com
+test/src/org/omegat/gui/glossary/GlossaryReaderTBXTest.java alex73mail@gmail.com
+test/src/org/omegat/gui/glossary/GlossaryReaderTSVTest.java alex73mail@gmail.com miurahr@linux.com
+test/src/org/omegat/gui/glossary/GlossarySearcherTest.java miurahr@linux.com
+test/src/org/omegat/gui/glossary/GlossaryTextAreaTest.java alex73mail@gmail.com
+test/src/org/omegat/gui/main/MainWindowMenuTest.java miurahr@linux.com
+test/src/org/omegat/gui/main/ProjectUICommandsTest.java miurahr@linux.com
+test/src/org/omegat/gui/matches/FindMatchesThreadTest.java miurahr@linux.com
+test/src/org/omegat/gui/matches/MatchesTextAreaTest.java aaron@madlon-kay.com
+test/src/org/omegat/gui/matches/MatchesVarExpansionTest.java aaron@madlon-kay.com damien.rembert@gmail.com
+test/src/org/omegat/gui/notes/NotesTextAreaTest.java aaron@madlon-kay.com
+test/src/org/omegat/gui/scripting/ScriptingTest.java aaron@madlon-kay.com
+test/src/org/omegat/gui/search/SearchWindowTest.java aaron@madlon-kay.com alex73mail@gmail.com
+test/src/org/omegat/gui/shortcuts/PropertiesShortcutsTest.java alex73mail@gmail.com
+test/src/org/omegat/gui/shortcuts/test.properties alex73mail@gmail.com
+test/src/org/omegat/gui/shortcuts/test.user.properties alex73mail@gmail.com
+test/src/org/omegat/languagetools/FalseFriendsTest.java alex73mail@gmail.com
+test/src/org/omegat/languagetools/LanguageToolTest.java miurahr@linux.com aaron@madlon-kay.com
+test/src/org/omegat/tokenizer/DefaultTokenizerTest.java aaron@madlon-kay.com
+test/src/org/omegat/tokenizer/HunspellTokenizerTest.java miurahr@linux.com
+test/src/org/omegat/tokenizer/TokenizerTest.java aaron@madlon-kay.com miurahr@linux.com
+test/src/org/omegat/tokenizer/TokenizerTestBase.java aaron@madlon-kay.com alex73mail@gmail.com
+test/src/org/omegat/util/BiDiUtilsTest.java damien.rembert@gmail.com
+test/src/org/omegat/util/FileUtilTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/HTMLUtilsTest.java martin.fleurke@portavita.nl miurahr@linux.com
+test/src/org/omegat/util/HttpConnectionUtilsTest.java miurahr@linux.com
+test/src/org/omegat/util/JsonParserTest.java aaron@madlon-kay.com alex73mail@gmail.com
+test/src/org/omegat/util/LanguageTest.java mihmax@gmail.com
+test/src/org/omegat/util/MagicCommentTest.java miurahr@linux.com
+test/src/org/omegat/util/MixedEolHandlingReaderTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/PatternConstsTest.java aaron@madlon-kay.com mihmax@gmail.com
+test/src/org/omegat/util/PluginInstallerTest.java miurahr@linux.com
+test/src/org/omegat/util/PreferencesTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/ProjectFileStorageTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/StaticUtilsTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/StringUtilTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/TMXDateParserTest.java martin.fleurke@portavita.nl
+test/src/org/omegat/util/TMXReaderTest.java alex73mail@gmail.com
+test/src/org/omegat/util/TMXWriterTest.java alex73mail@gmail.com
+test/src/org/omegat/util/TagUtilTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/VersionTest.java aaron@madlon-kay.com alex73mail@gmail.com
+test/src/org/omegat/util/XMLStreamReaderTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/editor/EditorUtilsTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/gui/StaticUIUtilsTest.java aaron@madlon-kay.com
+test/src/org/omegat/util/gui/StylesTest.java aaron@madlon-kay.com alex73mail@gmail.com
+test/src/svn/BundleTest.java aaron@madlon-kay.com
+test/src/svn/CopyrightTest.java alex73mail@gmail.com
+test/src/svn/PluginsTest.java aaron@madlon-kay.com

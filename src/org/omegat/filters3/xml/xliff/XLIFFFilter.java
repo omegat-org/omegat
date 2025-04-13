@@ -219,6 +219,11 @@ public class XLIFFFilter extends XMLFilter {
         if ("/xliff/file/header".equals(path)) {
             ignored = true;
         }
+        if (path.endsWith("/target")) {
+            if ("final".equals(atts.getValue("state"))) {
+                addProperty("LOCKED", "xliff final");
+            }
+        }
         text.setLength(0);
     }
 

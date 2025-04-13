@@ -338,7 +338,7 @@ public class FindMatchesTest {
 
     @Before
     public void setUp() throws Exception {
-        Core.initializeConsole(new TreeMap<>());
+        Core.initializeConsole();
         Core.registerTokenizerClass(DefaultTokenizer.class);
         Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
         // initialize Preferences and segmentation

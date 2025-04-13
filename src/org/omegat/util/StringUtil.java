@@ -235,64 +235,82 @@ public final class StringUtil {
      * <li>backslash u + backslash L = uppercase next letter then lowercase all until backslash E
      * <li>backslash l + backslash U = lowercase next letter then uppercase all until backslash E
      * </ul>
-     * Warning: this method works with the string you give to it; if you want to do other substitutions, such as
-     * variable conversions, they must be done before the call to replaceCase, else this method will not apply to the
-     * non-yet converted parts!
-     **/
-    public static String replaceCase(@NotNull String txt, Locale lang) {
-        if (!txt.startsWith("\\")) {
-            int idx = txt.indexOf("\\");
-            if (idx == -1) {
-                return txt;
-            } else {
-                return txt.substring(0, idx) + replaceCase(txt.substring(idx), lang);
+     * <p>
+     * Warning: This method works directly with the input string. Perform other substitutions (e.g., variable conversion)
+     * before calling this method; otherwise, unconverted substitutions will not receive proper case handling.
+     */
+    public static String replaceCase(@NotNull String input, Locale locale) {
+        if (!input.startsWith("\\")) {
+            int firstBackslashIndex = input.indexOf("\\");
+            if (firstBackslashIndex == -1) {
+                return input; // No special formatting required
             }
+            // Handle prefix before the backslash and process the rest recursively
+            return input.substring(0, firstBackslashIndex) + replaceCase(input.substring(firstBackslashIndex), locale);
         }
         // Double symbols are longer, so they must be treated first
-        if (txt.startsWith("\\u\\L")) {
-            return txt.substring(4, 5).toUpperCase(lang) + replaceCase("\\L" + txt.substring(5), lang);
+        if (input.startsWith("\\u\\L")) {
+            return input.substring(4, 5).toUpperCase(locale) + replaceCase("\\L" + input.substring(5), locale);
         }
-        if (txt.startsWith("\\l\\U")) {
-            return txt.substring(4, 5).toLowerCase(lang) + replaceCase("\\U" + txt.substring(5), lang);
+        if (input.startsWith("\\l\\U")) {
+            return input.substring(4, 5).toLowerCase(locale) + replaceCase("\\U" + input.substring(5), locale);
         }
-        // Simple symbols without delimiters
-        if (txt.startsWith("\\u")) {
-            return txt.substring(2, 3).toUpperCase(lang) + replaceCase(txt.substring(3), lang);
+        // Handle specific escape sequences and transformations
+        if (input.startsWith("\\\\")) {
+            return "\\" + replaceCase(input.substring(2), locale); // Escaped backslash
         }
-        if (txt.startsWith("\\l")) {
-            return txt.substring(2, 3).toLowerCase(lang) + replaceCase(txt.substring(3), lang);
-        }
-        // Simple symbols with \E as delimiter
-        if (txt.startsWith("\\E")) {
-            return replaceCase(txt.substring(2), lang);
-        }
-        if (txt.startsWith("\\U")) { // Upper until \E or \L
-            txt = txt.substring(2).replace("\\L", "\\E\\L").replace("\\U", "\\E\\U");
-            int idx = txt.indexOf("\\E");
-            if (idx == -1) {
-                return txt.toUpperCase(lang);
-            } else {
-                return txt.substring(0, idx).toUpperCase(lang) + replaceCase(txt.substring(idx + 2), lang);
-            }
-        }
-        if (txt.startsWith("\\L")) { // Lower until \E or \U
-            txt = txt.substring(2).replace("\\L", "\\E\\L").replace("\\U", "\\E\\U");
-            int idx = txt.indexOf("\\E");
-            if (idx == -1) {
-                return txt.toLowerCase(lang);
-            } else {
-                return txt.substring(0, idx).toLowerCase(lang) + replaceCase(txt.substring(idx + 2), lang);
-            }
+        if (input.startsWith("\\$")) {
+            return "$" + replaceCase(input.substring(2), locale); // Escaped dollar sign
         }
 
-        if (txt.startsWith("\\\\")) { // literal backslash
-            return "\\" + replaceCase(txt.substring(2), lang);
+        // Handle case transformations
+        if (input.startsWith("\\U") || input.startsWith("\\L")) {
+            return extractTransformedText(input, locale);
         }
-        if (txt.startsWith("\\$")) { // protected $
-            return "$" + replaceCase(txt.substring(2), lang);
+        if (input.startsWith("\\u") || input.startsWith("\\l")) {
+            return handleCapitalizationReplacement(input, locale);
         }
-        // for all other cases, don't consider \ as an escape character
-        return "\\" + replaceCase(txt.substring(1), lang);
+
+        // For unrecognized escape sequences, preserve the slash
+        return "\\" + replaceCase(input.substring(1), locale);
+    }
+
+    /**
+     * Handles single-letter capitalization transformations: \\u and \l.
+     */
+    private static String handleCapitalizationReplacement(String input, Locale locale) {
+        String firstLetter = input.substring(2, 3);
+        String remainingText = input.substring(3);
+
+        if (input.startsWith("\\u")) {
+            return firstLetter.toUpperCase(locale) + replaceCase(remainingText, locale);
+        }
+        if (input.startsWith("\\l")) {
+            return firstLetter.toLowerCase(locale) + replaceCase(remainingText, locale);
+        }
+        return input;
+    }
+
+    /**
+     * Handles multi-character transformations up to delimiters: \U...\E and \L...\E.
+     */
+    private static String extractTransformedText(String input, Locale locale) {
+        boolean toUpperCase = input.startsWith("\\U");
+        String transformedText;
+        if (input.contains("\\E")) {
+            transformedText = input.substring(2);
+        } else {
+            transformedText = input.substring(2).replace("\\L", "\\E\\L").replace("\\U", "\\E\\U");
+        }
+
+        int delimiterIndex = transformedText.indexOf("\\E");
+        if (delimiterIndex == -1) {
+            return toUpperCase ? transformedText.toUpperCase(locale) : transformedText.toLowerCase(locale);
+        }
+
+        String prefix = transformedText.substring(0, delimiterIndex);
+        String suffix = transformedText.substring(delimiterIndex + 2);
+        return (toUpperCase ? prefix.toUpperCase(locale) : prefix.toLowerCase(locale)) + replaceCase(suffix, locale);
     }
 
     public static String matchCapitalization(String text, String matchTo, Locale locale) {

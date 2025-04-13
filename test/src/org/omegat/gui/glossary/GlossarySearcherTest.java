@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2021 Hiroshi Miura
+ Copyright (C) 2021-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -40,6 +40,7 @@ import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -62,8 +63,7 @@ public class GlossarySearcherTest extends TestCore {
         Language srcLang = new Language("en");
         Language trLang = new Language("de");
         setupProject(srcLang);
-        List<GlossaryEntry> entries = Arrays
-                .asList(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
+        List<GlossaryEntry> entries = List.of(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, srcLang, trLang, entries);
         assertEquals(1, result.size());
         assertEquals(sourceText, result.get(0).getSrcText());
@@ -85,7 +85,6 @@ public class GlossarySearcherTest extends TestCore {
     public void testGlossarySearcherKorean() {
         String segmentText = "열 손가락 깨물어 안 아픈 손가락이 없다";
         String sourceText = "손가락";
-        assertTrue(segmentText.contains(sourceText));
         String translationText = "Korean term";
         String commentText = "comment";
         ITokenizer tok = new LuceneCJKTokenizer();
@@ -107,8 +106,7 @@ public class GlossarySearcherTest extends TestCore {
         Language language = new Language("ja");
         Language trLang = new Language("en");
         setupProject(language);
-        List<GlossaryEntry> entries = Arrays
-                .asList(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
+        List<GlossaryEntry> entries = List.of(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, trLang, entries);
         assertEquals(1, result.size());
         assertEquals(sourceText, result.get(0).getSrcText());
@@ -118,15 +116,150 @@ public class GlossarySearcherTest extends TestCore {
 
     @Test
     public void testGlossarySearcherJapanese2() {
-        String sourceText = "\u5834\u6240";
+        String sourceText = "場所";
         Language language = new Language("ja");
         Language trLang = new Language("en");
         setupProject(language);
         ITokenizer tok = new LuceneJapaneseTokenizer();
-        List<GlossaryEntry> entries = Arrays
-                .asList(new GlossaryEntry("\u5857\u5E03", "wrong", "", true, "origin"));
+        List<GlossaryEntry> entries = List.of(new GlossaryEntry("塗布", "wrong", "", true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, trLang, entries);
         assertEquals(0, result.size());
+    }
+
+    @Test
+    public void testSearchSourceMatchesEmptyEntries() {
+        String sourceText = "source text";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("es");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        List<GlossaryEntry> entries = Collections.emptyList();
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", sourceText, "id", null, null, null), 1,
+                null, sourceText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testSearchSourceMatchesWithTags() {
+        String srcText = "source text";
+        String translation = "translated text";
+        ProtectedPart tag = new ProtectedPart();
+        tag.setTextInSourceSegment("<b>");
+        ProtectedPart closeTag = new ProtectedPart();
+        closeTag.setTextInSourceSegment("</b>");
+
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("fr");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", "<b>source</b> text", "id", null, null, null),
+                1,
+                null,
+                "<b>source</b> text",
+                Arrays.asList(tag, closeTag));
+
+        List<GlossaryEntry> entries = Collections.singletonList(
+                new GlossaryEntry(srcText, translation, "comment", true, null)
+        );
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertEquals(1, result.size());
+        assertEquals(srcText, result.get(0).getSrcText());
+        assertEquals(translation, result.get(0).getLocText());
+    }
+
+    @Test
+    public void testSearchSourceMatchesCaseInsensitive() {
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("de");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        String srcText = "CaseInsensitive";
+        String translation = "FallUnempfindlich";
+        String segmentText = "caseinsensitive";
+
+        List<GlossaryEntry> entries = Collections.singletonList(
+                new GlossaryEntry(srcText, translation, "", false, null)
+        );
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", segmentText, "id", null, null, null),
+                1,
+                null,
+                segmentText,
+                Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertEquals(1, result.size());
+        assertEquals(srcText, result.get(0).getSrcText());
+    }
+
+    @Test
+    public void testSearchSourceMatchesMerging() {
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("es");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry entry1 = new GlossaryEntry("apple", "manzana", "", true, null);
+        GlossaryEntry entry2 = new GlossaryEntry("apple", "apple fruit", "", true, null);
+
+        List<GlossaryEntry> entries = Arrays.asList(entry1, entry2);
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", "apple", "id", null, null, null),
+                1,
+                null,
+                "apple",
+                Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, true);
+
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertEquals(1, result.size());
+        assertEquals("apple", result.get(0).getSrcText());
+    }
+
+    @Test
+    public void testSearchSourceMatchesCJK() {
+        Language srcLang = new Language("ja");
+        Language trgLang = new Language("en");
+        String srcText = "場所";
+
+        String segmentText = "重要な場所です";
+        String translation = "place";
+
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry entry = new GlossaryEntry(srcText, translation, "comment", false, null);
+
+        List<GlossaryEntry> entries = Collections.singletonList(entry);
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", segmentText, "id", null, null, null),
+                1,
+                null,
+                segmentText,
+                Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertEquals(1, result.size());
+        assertEquals(srcText, result.get(0).getSrcText());
+        assertEquals(translation, result.get(0).getLocText());
     }
 
     @Test
@@ -136,11 +269,14 @@ public class GlossarySearcherTest extends TestCore {
         setupProject(language);
         ITokenizer tok = new LuceneJapaneseTokenizer();
         List<GlossaryEntry> entries = Arrays.asList(
-                new GlossaryEntry("\u307E\u3050\u308D", "tuna", "", true, ""),
-                new GlossaryEntry("\u7FFB\u8A33", "translation", "", true, ""),
-                new GlossaryEntry("\u591A\u8A00\u8A9E", "multi-languages", "", true, ""),
-                new GlossaryEntry("\u5730\u57DF\u5316", "localization", "", true, ""));
-        String sourceText = "OmegaT\u306E\u30E6\u30FC\u30B6\u30FC\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\u3084\u30D8\u30EB\u30D7\u30C6\u30AD\u30B9\u30C8\u3092\u3001\u3055\u307E\u3056\u307E\u306A\u8A00\u8A9E\u3078\u7FFB\u8A33\u3057\u3066\u304F\u3060\u3055\u3063\u305F\u65B9\u3005\u306B\u611F\u8B1D\u3057\u307E\u3059\u3002\u305D\u3057\u3066\u3001\u7FFB\u8A33\u304C\u306A\u3055\u308C\u3066\u3044\u306A\u3044\u8A00\u8A9E\u304C\u307E\u3060\u6570\u5343\u6B8B\u3063\u3066\u3044\u307E\u3059\uFF01OmegaT \u306E\u591A\u8A00\u8A9E\u3078\u306E\u5730\u57DF\u5316\u306F\u3001\u6301\u7D9A\u7684\u306A\u4F5C\u696D\u3067\u3082\u3042\u308A\u307E\u3059\u3002\u306A\u305C\u306A\u3089\u3001\u65B0\u3057\u3044\u6A5F\u80FD\u304C\u7D76\u3048\u305A\u8FFD\u52A0\u3055\u308C\u3066\u3044\u308B\u304B\u3089\u3067\u3059\u3002OmegaT\u306E\u30ED\u30FC\u30AB\u30E9\u30A4\u30BA/\u7FFB\u8A33\u306B\u95A2\u3059\u308B\u8A73\u7D30\u306B\u3064\u3044\u3066\u306F\u3001OmegaT\u30ED\u30FC\u30AB\u30EA\u30BC\u30FC\u30B7\u30E7\u30F3\u30B3\u30FC\u30C7\u30A3\u30CD\u30FC\u30BF\u30FC\u306B\u304A\u554F\u3044\u5408\u308F\u305B\u304F\u3060\u3055\u3044\u3002";
+                new GlossaryEntry("まぐろ", "tuna", "", true, ""),
+                new GlossaryEntry("翻訳", "translation", "", true, ""),
+                new GlossaryEntry("多言語", "multi-languages", "", true, ""),
+                new GlossaryEntry("地域化", "localization", "", true, ""));
+        String sourceText = "OmegaTのユーザーインターフェースやヘルプテキストを、さまざまな言語へ翻訳してくださった方々に感謝します。" +
+                "そして、翻訳がなされていない言語がまだ数千残っています！OmegaT の多言語への地域化は、持続的な作業でもあります。" +
+                "なぜなら、新しい機能が絶えず追加されているからです。OmegaTのローカライズ/翻訳に関する詳細については、" +
+                "OmegaTローカリゼーションコーディネーターにお問い合わせください。";
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, language, trLang, entries);
         assertEquals(3, result.size());
     }
@@ -265,5 +401,210 @@ public class GlossarySearcherTest extends TestCore {
         SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
         GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
         return searcher.searchSourceMatches(ste, entries);
+    }
+
+    @Test
+    public void testSearchSourceExactMatch() {
+        String sourceText = "exact match";
+        String translationText = "translation";
+        String comment = "comment";
+        Language srcLang = new Language("en");
+        Language trLang = new Language("fr");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        List<GlossaryEntry> entries = Collections.singletonList(
+                new GlossaryEntry(sourceText, translationText, comment, true, null));
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", sourceText, "id", null, null, null), 1,
+                null, sourceText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertEquals(1, result.size());
+        assertEquals(sourceText, result.get(0).getSrcText());
+        assertEquals(translationText, result.get(0).getLocText());
+    }
+
+    @Test
+    public void testSearchSourcePartialMatch() {
+        String sourceText = "partial";
+        String segmentText = "partial match example";
+        String translation = "translation";
+        String comment = "comment";
+        Language srcLang = new Language("en");
+        Language trLang = new Language("de");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        Preferences.setPreference(Preferences.GLOSSARY_NOT_EXACT_MATCH, true);
+
+        List<GlossaryEntry> entries = Collections.singletonList(
+                new GlossaryEntry(sourceText, translation, comment, true, null));
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", segmentText, "id", null, null, null), 1,
+                null, segmentText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertEquals(1, result.size());
+        assertEquals(sourceText, result.get(0).getSrcText());
+        Preferences.setPreference(Preferences.GLOSSARY_NOT_EXACT_MATCH, false);
+    }
+
+    @Test
+    public void testSearchSourceCaseSensitiveMatch() {
+        String sourceText = "CASE";
+        String segmentText = "This is a case.";
+        String translation = "translation";
+        String comment = "comment";
+        Language srcLang = new Language("en");
+        Language trLang = new Language("es");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, true);
+
+        List<GlossaryEntry> entries = Collections.singletonList(
+                new GlossaryEntry(sourceText, translation, comment, true, null));
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", segmentText, "id", null, null, null), 1,
+                null, segmentText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertTrue(result.isEmpty());
+        Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, false);
+    }
+
+    @Test
+    public void testSearchSourceCJKMatch() {
+        String sourceText = "場所";
+        String segmentText = "場所は重要です";
+        String translation = "Place";
+        String comment = "comment";
+        Language srcLang = new Language("ja");
+        Language trLang = new Language("en");
+        ITokenizer tok = new LuceneJapaneseTokenizer();
+        setupProject(srcLang);
+
+        List<GlossaryEntry> entries = Collections.singletonList(
+                new GlossaryEntry(sourceText, translation, comment, true, null));
+
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", segmentText, "id", null, null, null), 1,
+                null, segmentText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
+        List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
+
+        assertEquals(1, result.size());
+        assertEquals(sourceText, result.get(0).getSrcText());
+    }
+
+    @Test
+    public void testSearchTargetExactMatch() {
+        String targetText = "translated text";
+        String sourceText = "source";
+        String comment = "comment";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("fr");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry entry = new GlossaryEntry(sourceText, targetText, comment, true, null);
+        ProtectedPart[] protectedParts = {};
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+        List<String> result = searcher.searchTargetMatches(targetText, protectedParts, entry);
+
+        assertEquals(1, result.size());
+        assertTrue(result.contains(targetText));
+    }
+
+    @Test
+    public void testSearchTargetCaseInsensitiveMatch() {
+        String targetText = "Translated";
+        String normalizedTarget = "translated";
+        String sourceText = "source";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("de");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry entry = new GlossaryEntry(sourceText, targetText, "", false, null);
+        ProtectedPart[] protectedParts = {};
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+        List<String> result = searcher.searchTargetMatches(normalizedTarget, protectedParts, entry);
+
+        assertEquals(1, result.size());
+        assertTrue(result.contains(targetText));
+    }
+
+    @Test
+    public void testSearchTargetPartialMatch() {
+        String targetText = "translation example";
+        String partialText = "translation";
+        String sourceText = "source";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("es");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry entry = new GlossaryEntry(sourceText, targetText, "", true, null);
+        ProtectedPart[] protectedParts = {};
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+        List<String> result = searcher.searchTargetMatches(partialText, protectedParts, entry);
+
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void testSearchTargetWithTags() {
+        String targetText = "<b>translation</b> text";
+        String sourceText = "source";
+        String translateText = "translation";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("fr");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry entry = new GlossaryEntry(sourceText, translateText, "", true, null);
+
+        ProtectedPart protectedPart0 = new ProtectedPart();
+        protectedPart0.setTextInSourceSegment("<br>");
+        ProtectedPart protectedPart1 = new ProtectedPart();
+        protectedPart1.setTextInSourceSegment("</b>");
+        ProtectedPart[] protectedParts = { protectedPart0, protectedPart1 };
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+        List<String> result = searcher.searchTargetMatches(targetText, protectedParts, entry);
+
+        assertEquals(1, result.size());
+        assertTrue(result.contains(translateText));
+    }
+
+    @Test
+    public void testSearchTargetCJKMatch() {
+        String targetText = "場所";
+        String fullTargetText = "この場所は重要です";
+        String sourceText = "source";
+        Language srcLang = new Language("ja");
+        Language trgLang = new Language("en");
+        ITokenizer tok = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry entry = new GlossaryEntry(sourceText, targetText, "", true, null);
+        ProtectedPart[] protectedParts = {};
+
+        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trgLang, false);
+        List<String> result = searcher.searchTargetMatches(fullTargetText, protectedParts, entry);
+
+        assertEquals(1, result.size());
+        assertTrue(result.contains(targetText));
     }
 }

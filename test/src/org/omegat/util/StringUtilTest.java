@@ -151,19 +151,19 @@ public class StringUtilTest {
     public void testEmptyStringCase() {
         String test = null;
         try {
-            assertFalse(StringUtil.isUpperCase(test));
+            StringUtil.isUpperCase(test);
             fail("Should throw an NPE");
         } catch (NullPointerException ex) {
             // OK
         }
         try {
-            assertFalse(StringUtil.isLowerCase(test));
+            StringUtil.isLowerCase(test);
             fail("Should throw an NPE");
         } catch (NullPointerException ex) {
             // OK
         }
         try {
-            assertFalse(StringUtil.isTitleCase(test));
+            StringUtil.isTitleCase(test);
             fail("Should throw an NPE");
         } catch (NullPointerException ex) {
             // OK
@@ -185,7 +185,7 @@ public class StringUtilTest {
     @Test
     public void testIsWhiteSpace() {
         try {
-            assertFalse(StringUtil.isWhiteSpace(null));
+            StringUtil.isWhiteSpace(null);
             fail("Should throw an NPE");
         } catch (NullPointerException ex) {
             // OK

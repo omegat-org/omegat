@@ -28,15 +28,13 @@ package org.omegat.gui.multtrans;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.common.EntryInfoSearchThread;
 
 /**
  * Class for iterate by all translation and find entries for multiple translations pane.
- *
+ * <p>
  * There is no sense to store multiple translations into map with source text key, because full iterate is
  * enough fast since we just check strings for equals.
  *
@@ -55,19 +53,15 @@ public class MultipleTransFindThread extends EntryInfoSearchThread<List<Multiple
     }
 
     protected List<MultipleTransFoundEntry> search() throws Exception {
-        final List<MultipleTransFoundEntry> result = new ArrayList<MultipleTransFoundEntry>();
-        project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
-            public void iterate(String source, TMXEntry trans) {
-                if (sourceText.equals(source)) {
-                    result.add(new MultipleTransFoundEntry(source, trans));
-                }
+        final List<MultipleTransFoundEntry> result = new ArrayList<>();
+        project.iterateByDefaultTranslations((source, trans) -> {
+            if (sourceText.equals(source)) {
+                result.add(new MultipleTransFoundEntry(source, trans));
             }
         });
-        project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
-            public void iterate(EntryKey source, TMXEntry trans) {
-                if (sourceText.equals(source.sourceText)) {
-                    result.add(new MultipleTransFoundEntry(source, trans));
-                }
+        project.iterateByMultipleTranslations((source, trans) -> {
+            if (sourceText.equals(source.sourceText)) {
+                result.add(new MultipleTransFoundEntry(source, trans));
             }
         });
 

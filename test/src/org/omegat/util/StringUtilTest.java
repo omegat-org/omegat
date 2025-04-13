@@ -6,6 +6,7 @@
  Copyright (C) 2013 Alex Buloichik
                2016 Aaron Madlon-Kay
                2018 Thomas Cordonnier
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -29,6 +30,7 @@ package org.omegat.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -362,6 +364,10 @@ public class StringUtilTest {
         assertEquals(" ABC", StringUtil.rstrip(" ABC "));
         assertEquals("ABC", StringUtil.rstrip("ABC       "));
         assertEquals("ABC\u00a0", StringUtil.rstrip("ABC\u00a0")); // U+00A0 NO-BREAK SPACE
+        assertEquals("Test", StringUtil.rstrip("Test\n "));
+        assertEquals("Line1 Line2", StringUtil.rstrip("Line1 Line2   "));
+        assertEquals("  Trimmed", StringUtil.rstrip("  Trimmed  "));
+        assertEquals("MixedWhitespace", StringUtil.rstrip("MixedWhitespace\t\n "));
         try {
             StringUtil.rstrip(null);
             fail();
@@ -410,10 +416,104 @@ public class StringUtilTest {
     }
 
     @Test
+    public void testReplaceCaseBasicFunctionality() {
+        Locale locale = Locale.ENGLISH;
+        assertEquals("TEst", StringUtil.replaceCase("\\uTEst", locale));
+        assertEquals("tEST", StringUtil.replaceCase("\\lTEST", locale));
+        assertEquals("TESTING", StringUtil.replaceCase("\\UTestING", locale));
+        assertEquals("TESTIing test", StringUtil.replaceCase("\\UTesti\\Eing test", locale));
+        assertEquals("tEST ME", StringUtil.replaceCase("\\l\\UTest ME", locale));
+    }
+
+    @Test
+    public void testReplaceCaseEscapeSequences() {
+        Locale locale = Locale.ENGLISH;
+        // Test escape characters
+        assertEquals("\\Path\\To\\File", StringUtil.replaceCase("\\\\Path\\\\To\\\\File", locale));
+        assertEquals("$!", StringUtil.replaceCase("\\$!", locale));
+        assertEquals("$var", StringUtil.replaceCase("\\$var", locale));
+        assertEquals("D:\\\\FOLDER", StringUtil.replaceCase("\\UD:\\\\Folder", locale));
+    }
+
+    @Test
+    public void testReplaceCaseEdgeCases() {
+        Locale locale = Locale.ENGLISH;
+        // Test null and empty strings
+        try {
+            StringUtil.replaceCase(null, locale);
+            fail();
+        } catch (NullPointerException ex) {
+            // expected
+        }
+        assertEquals("", StringUtil.replaceCase("", locale));
+        // Test with no special sequences
+        assertEquals("Hello, World!", StringUtil.replaceCase("Hello, World!", locale));
+        assertEquals("HELLO", StringUtil.replaceCase("\\UHello", locale));
+    }
+
+    @Test
     public void testConvertToList() {
         assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat level1 level2"));
         assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("omegat  level1  level2"));
         assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("  omegat level1 level2  "));
         assertEquals(Arrays.asList("omegat", "level1", "level2"), StringUtil.convertToList("  omegat   level1  level2  "));
+    }
+
+    @Test
+    public void testNormalizeWidthConversion() {
+        assertEquals("ABC123", StringUtil.normalizeWidth("\uFF21\uFF22\uFF23\uFF11\uFF12\uFF13"));
+        assertEquals("abc123", StringUtil.normalizeWidth("\uFF41\uFF42\uFF43\uFF11\uFF12\uFF13"));
+        assertEquals("Test String", StringUtil.normalizeWidth("\uFF34\uFF45\uFF53\uFF54\u3000\uFF33\uFF54\uFF52\uFF49\uFF4E\uFF47"));
+    }
+
+    @Test
+    public void testNormalizeWidthSpecialCharacters() {
+        assertEquals("Hello, World!", StringUtil.normalizeWidth("\uFF28\uFF45\uFF4C\uFF4C\uFF4F\uFF0C\u3000\uFF37\uFF4F\uFF52\uFF4C\uFF44\uFF01"));
+        assertEquals("!?(){}", StringUtil.normalizeWidth("\uFF01\uFF1F\uFF08\uFF09\uFF5B\uFF5D"));
+        assertEquals(" ", StringUtil.normalizeWidth("\u3000"));
+    }
+
+    @Test
+    public void testNormalizeWidthEdgeCases() {
+        assertEquals("", StringUtil.normalizeWidth(""));
+        assertEquals("Already normalized", StringUtil.normalizeWidth("Already normalized"));
+        try {
+            StringUtil.normalizeWidth(null);
+            fail();
+        } catch (NullPointerException ignored) {
+            // expected
+        }
+    }
+
+    @Test
+    public void testWrapBasicFunctionality() {
+        // Test wrapping normal text into multiple lines
+        assertEquals("This is\na test", StringUtil.wrap("This is a test", 7));
+        assertEquals("Hello\nWorld", StringUtil.wrap("Hello World", 6));
+
+        // Test wrapping text with multiple spaces
+        assertEquals("This is a\ndemo", StringUtil.wrap("This is a demo", 10));
+
+        // Test no wrapping with long wrap length
+        assertEquals("Test string", StringUtil.wrap("Test string", 20));
+    }
+
+    @Test
+    public void testWrapEdgeCases() {
+        // Test empty string
+        assertEquals("", StringUtil.wrap("", 5));
+
+        // Test string shorter than wrap length
+        assertEquals("Short", StringUtil.wrap("Short", 10));
+
+        // Test single word longer than wrap length
+        assertEquals("Longword", StringUtil.wrap("Longword", 5));
+
+        try {
+            StringUtil.wrap(null, 5);
+            fail();
+        } catch (NullPointerException ignored) {
+            // expected
+        }
     }
 }

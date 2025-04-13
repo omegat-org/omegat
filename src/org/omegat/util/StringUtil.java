@@ -222,8 +222,8 @@ public final class StringUtil {
      * <ul>
      * <li>backslash u = uppercase next letter
      * <li>backslash l = lowercase next letter
-     * <li>backslash U = uppercase next letters until backslash E
-     * <li>backslash L = lowercase next letters until backslash E
+     * <li>backslash U = uppercase next letters until backslash E or end
+     * <li>backslash L = lowercase next letters until backslash E or end
      * <li>backslash u + backslash L = uppercase next letter then lowercase all until backslash E
      * <li>backslash l + backslash U = lowercase next letter then uppercase all until backslash E
      * </ul>
@@ -632,10 +632,10 @@ public final class StringUtil {
      * "https://bitbucket.org/okapiframework/okapi/src/52143104fcfc7eda204d04dfbbc273189f3a7f0f/okapi/steps/fullwidthconversion/src/main/java/net/sf/okapi/steps/fullwidthconversion/FullWidthConversionStep.java">
      * FullWidthConversionStep.java</a> in the Okapi Framework under GPLv2+.
      *
-     * @param text
+     * @param text source text to convert
      * @return Normalized-width text
      */
-    // CHECKSTYLE:OFF
+    // CHECKSTYLE: OFF
     public static String normalizeWidth(String text) {
         StringBuilder sb = new StringBuilder(text);
 

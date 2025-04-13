@@ -128,7 +128,9 @@ public final class StringUtil {
         }
         boolean hasUpper = false;
         boolean hasLower = false;
-        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+        int i = 0;
+        int cp;
+        while (i < input.length()) {
             cp = input.codePointAt(i);
             if (Character.isLetter(cp)) {
                 // Don't count the first cp as upper to allow for title case
@@ -141,6 +143,7 @@ public final class StringUtil {
                     return true;
                 }
             }
+            i += Character.charCount(cp);
         }
         return false;
     }
@@ -179,11 +182,14 @@ public final class StringUtil {
         if (input.isEmpty()) {
             return false;
         }
-        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+        int i = 0;
+        int cp;
+        while (i < input.length()) {
             cp = input.codePointAt(i);
             if (!isWhiteSpace(cp)) {
                 return false;
             }
+            i += Character.charCount(cp);
         }
         return true;
     }
@@ -204,13 +210,15 @@ public final class StringUtil {
         if (input.isEmpty()) {
             return false;
         }
-        for (int i = 0, cp; i < input.length(); i += Character.charCount(cp)) {
+        int i = 0;
+        int cp;
+        while (i < input.length()) {
             cp = input.codePointAt(i);
             // Anything less than CJK Radicals Supplement is "not CJK". Everything else is.
-            // TODO: Make this smarter?
             if (cp < '\u2E80') {
                 return false;
             }
+            i += Character.charCount(cp);
         }
         return true;
     }
@@ -348,11 +356,13 @@ public final class StringUtil {
             return text;
         }
         int firstLetterIndex = 0;
-        for (int cp; firstLetterIndex < text.length(); firstLetterIndex += Character.charCount(cp)) {
+        int cp;
+        while (firstLetterIndex < text.length()) {
             cp = text.codePointAt(firstLetterIndex);
             if (Character.isLetter(cp)) {
                 break;
             }
+            firstLetterIndex += Character.charCount(cp);
         }
         if (firstLetterIndex == text.length()) {
             return text;
@@ -444,11 +454,14 @@ public final class StringUtil {
             return 0;
         }
 
-        for (int cp, i = 0; i < s.length(); i += Character.charCount(cp)) {
+        int cp;
+        int i = 0;
+        while (i < s.length()) {
             cp = s.codePointAt(i);
             if (Character.isLetter(cp)) {
                 return Character.toLowerCase(cp);
             }
+            i += Character.charCount(cp);
         }
 
         return 0;
@@ -508,12 +521,15 @@ public final class StringUtil {
      */
     public static String removeXMLInvalidChars(String str) {
         StringBuilder sb = new StringBuilder(str.length());
-        for (int c, i = 0; i < str.length(); i += Character.charCount(c)) {
+        int c;
+        int i = 0;
+        while (i < str.length()) {
             c = str.codePointAt(i);
             if (!isValidXMLChar(c)) {
                 c = ' ';
             }
             sb.appendCodePoint(c);
+            i += Character.charCount(c);
         }
         return sb.toString();
     }

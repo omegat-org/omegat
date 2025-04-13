@@ -6,7 +6,7 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir,
                 includes: ['**/language-ta-*.jar'])
     } else {

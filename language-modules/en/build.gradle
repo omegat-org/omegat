@@ -22,6 +22,7 @@ dependencies {
         implementation(libs.languagetool.en) {
             exclude module: 'languagetool-core'
         }
+        implementation(libs.languagetool.en.pos.dictionary)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

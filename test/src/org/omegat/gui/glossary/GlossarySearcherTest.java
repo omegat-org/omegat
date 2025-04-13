@@ -49,6 +49,7 @@ import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneJapaneseTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
+import org.omegat.util.Token;
 
 /**
  * @author Hiroshi Miura
@@ -606,5 +607,102 @@ public class GlossarySearcherTest extends TestCore {
 
         assertEquals(1, result.size());
         assertTrue(result.contains(targetText));
+    }
+
+    @Test
+    public void testSearchSourceMatchTokensExactMatch() {
+        String sourceText = "This is a test.";
+        String glossaryText = "test";
+        String translation = "translation";
+        Language srcLang = new Language("en");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry glossaryEntry = new GlossaryEntry(glossaryText, translation, "", false, null);
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", sourceText, "id", null, null, null), 1, null, sourceText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tokenizer, srcLang, false);
+        List<Token[]> matchingTokens = searcher.searchSourceMatchTokens(ste, glossaryEntry);
+
+        assertEquals(1, matchingTokens.size());
+        assertEquals("test", matchingTokens.get(0)[0].getTextFromString(sourceText));
+    }
+
+    @Test
+    public void testSearchSourceMatchTokensCjkMatch() {
+        String sourceText = "重要な場所です";
+        String glossaryText = "場所";
+        String translation = "place";
+        Language srcLang = new Language("ja");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry glossaryEntry = new GlossaryEntry(glossaryText, translation, "", false, null);
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", sourceText, "id", null, null, null), 1, null, sourceText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tokenizer, srcLang, false);
+        List<Token[]> matchingTokens = searcher.searchSourceMatchTokens(ste, glossaryEntry);
+
+        assertEquals(1, matchingTokens.size());
+        assertEquals("場所", matchingTokens.get(0)[0].getTextFromString(sourceText));
+    }
+
+    @Test
+    public void testSearchSourceMatchTokensWithTags() {
+        String sourceText = "This is <b>a test</b> example.";
+        String glossaryText = "test";
+        String translation = "translation";
+        Language srcLang = new Language("en");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        ProtectedPart tag = new ProtectedPart();
+        tag.setTextInSourceSegment("<b>");
+        List<ProtectedPart> protectedParts = Collections.singletonList(tag);
+
+        GlossaryEntry glossaryEntry = new GlossaryEntry(glossaryText, translation, "", false, null);
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", sourceText, "id", null, null, null), 1, null, sourceText, protectedParts);
+
+        GlossarySearcher searcher = new GlossarySearcher(tokenizer, srcLang, false);
+        List<Token[]> matchingTokens = searcher.searchSourceMatchTokens(ste, glossaryEntry);
+
+        assertFalse(matchingTokens.isEmpty());
+        assertEquals("test", matchingTokens.get(0)[0].getTextFromString(sourceText));
+    }
+
+    @Test
+    public void testSearchSourceMatchTokensNoMatch() {
+        String sourceText = "This is a test.";
+        String glossaryText = "存在しない";
+        String translation = "translation";
+        Language srcLang = new Language("ja");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        setupProject(srcLang);
+
+        GlossaryEntry glossaryEntry = new GlossaryEntry(glossaryText, translation, "", false, null);
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", sourceText, "id", null, null, null), 1, null, sourceText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tokenizer, srcLang, false);
+        List<Token[]> matchingTokens = searcher.searchSourceMatchTokens(ste, glossaryEntry);
+
+        assertTrue(matchingTokens.isEmpty());
+    }
+
+    @Test
+    public void testSearchSourceMatchTokensMatchJapanese() {
+        String sourceText = "This is a 存在 test.";
+        String glossaryText = "存在";
+        String translation = "translation";
+        Language srcLang = new Language("ja");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        setupProject(srcLang);
+        GlossaryEntry glossaryEntry = new GlossaryEntry(glossaryText, translation, "", false, null);
+        SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", sourceText, "id", null, null, null), 1, null, sourceText, Collections.emptyList());
+
+        GlossarySearcher searcher = new GlossarySearcher(tokenizer, srcLang, false);
+        List<Token[]> matchingTokens = searcher.searchSourceMatchTokens(ste, glossaryEntry);
+
+        assertFalse(matchingTokens.isEmpty());
+        assertEquals("存在", matchingTokens.get(0)[0].getTextFromString(sourceText));
     }
 }

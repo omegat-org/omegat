@@ -518,20 +518,31 @@ public final class StringUtil {
         return sb.toString();
     }
 
+    private static final int MIN_ALLOWED_CONTROL_CHAR = 0x09;
+    private static final int MAX_BASIC_CHAR = 0xD7FF;
+    private static final int MIN_SUPPLEMENTARY_CHAR = 0xE000;
+    private static final int MAX_SUPPLEMENTARY_CHAR = 0xFFFD;
+    private static final int MIN_CODE_POINT = 0x10000;
+    private static final int MAX_CODE_POINT = 0x10FFFF;
+
+    /**
+     * Determines whether the provided code point is a valid XML character.
+     *
+     * @param codePoint the code point to validate
+     * @return true if the code point is a valid XML character, otherwise false
+     */
     public static boolean isValidXMLChar(int codePoint) {
         if (codePoint < 0x20) {
-            if (codePoint != 0x09 && codePoint != 0x0A && codePoint != 0x0D) {
-                return false;
-            }
-        } else if (codePoint >= 0x20 && codePoint <= 0xD7FF) {
-        } else if (codePoint >= 0xE000 && codePoint <= 0xFFFD) {
-        } else if (codePoint >= 0x10000 && codePoint <= 0x10FFFF) {
-        } else {
-            return false;
+            return isValidControlCharacter(codePoint);
         }
-        return true;
+        return (codePoint <= MAX_BASIC_CHAR) ||
+                (codePoint >= MIN_SUPPLEMENTARY_CHAR && codePoint <= MAX_SUPPLEMENTARY_CHAR) ||
+                (codePoint >= MIN_CODE_POINT && codePoint <= MAX_CODE_POINT);
     }
 
+    private static boolean isValidControlCharacter(int codePoint) {
+        return codePoint == MIN_ALLOWED_CONTROL_CHAR || codePoint == 0x0A || codePoint == 0x0D;
+    }
     /**
      * Converts a stream of plaintext into valid XML. Output stream must convert
      * stream to UTF-8 when saving to disk.

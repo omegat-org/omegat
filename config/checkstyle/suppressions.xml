@@ -109,7 +109,7 @@
     <suppress files="AutoCompleter\.java" checks="EmptyStatement"/>
     <suppress files="RepositoriesMappingController\.java" checks="MethodLength"/>
     <suppress files="InstanceEditor\.java" checks="ParameterNumber"/>
-    <suppress files="EditorController\.java" checks="(File|Method)Length"/>
+    <suppress files="EditorController\.java" checks="FileLength"/>
     <suppress files="ProjectUICommands\.java" checks="MethodLength"/>
     <suppress files="ProjectFilesListController\.java" checks="MethodLength"/>
     <suppress files="BaseMainWindowMenu\.java" checks="MethodLength"/>

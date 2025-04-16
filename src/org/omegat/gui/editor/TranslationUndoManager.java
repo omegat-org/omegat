@@ -152,7 +152,7 @@ public class TranslationUndoManager implements UndoableEditListener {
         if (inProgress || editor.getOmDocument().trustedChangesInProgress) {
             return;
         }
-        AbstractDocument.DefaultDocumentEvent event = extractEvent(e.getEdit());
+        AbstractDocument.DefaultDocumentEvent event = extractDefaultDocumentEvent(e.getEdit());
         if (event.getType() == DocumentEvent.EventType.CHANGE) {
             // attributes changed
             return;
@@ -165,28 +165,28 @@ public class TranslationUndoManager implements UndoableEditListener {
         remember(caretPos);
     }
 
-    private AbstractDocument.DefaultDocumentEvent extractEvent(UndoableEdit edit) {
-        if (edit instanceof AbstractDocument.DefaultDocumentEvent) {
-            // Java 8
-            return (AbstractDocument.DefaultDocumentEvent) edit;
-        } else if ("javax.swing.text.AbstractDocument.DefaultDocumentEventUndoableWrapper"
-                .equals(edit.getClass().getCanonicalName())) {
-            // Java 11
-            try {
-                return extractEventFromWrapper(edit);
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to extract DefaultDocumentEvent from UndoableEdit", e);
-            }
-        } else {
-            throw new RuntimeException("Failed to extract DefaultDocumentEvent from UndoableEdit; unknown class: "
-                    + edit.getClass().getName());
-        }
-    }
+    private static final String WRAPPER_CLASS_NAME =
+            "javax.swing.text.AbstractDocument.DefaultDocumentEventUndoableWrapper";
 
-    private AbstractDocument.DefaultDocumentEvent extractEventFromWrapper(UndoableEdit edit) throws Exception {
-        Field ddeField = edit.getClass().getDeclaredField("dde");
-        ddeField.setAccessible(true);
-        return (AbstractDocument.DefaultDocumentEvent) ddeField.get(edit);
+    private AbstractDocument.DefaultDocumentEvent extractDefaultDocumentEvent(UndoableEdit edit) {
+        if (edit instanceof AbstractDocument.DefaultDocumentEvent) {
+            return (AbstractDocument.DefaultDocumentEvent) edit; // Java 8
+        }
+        if (WRAPPER_CLASS_NAME.equals(edit.getClass().getCanonicalName())) {
+            return handleWrapperCase(edit); // Java 11
+        }
+        throw new RuntimeException("Unknown UndoableEdit class: " + edit.getClass().getName());
+    }
+    private static final String DEFAULT_DOCUMENT_EVENT_FIELD = "dde";
+
+    private AbstractDocument.DefaultDocumentEvent handleWrapperCase(UndoableEdit edit) {
+        try {
+            Field defaultDocumentEventField = edit.getClass().getDeclaredField(DEFAULT_DOCUMENT_EVENT_FIELD);
+            defaultDocumentEventField.setAccessible(true);
+            return (AbstractDocument.DefaultDocumentEvent) defaultDocumentEventField.get(edit);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to extract field '" + DEFAULT_DOCUMENT_EVENT_FIELD + "' from UndoableEdit wrapper", e);
+        }
     }
 
     protected static final class Change {

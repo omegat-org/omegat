@@ -307,7 +307,7 @@ public class MarkerController {
             return;
         }
         Document3 doc = ec.editor.getOmDocument();
-        doc.trustedChangesInProgress = true;
+        doc.setTrustedChangesInProgress(true);
         try {
             for (int i = 0; i < evs.size(); i++) {
                 EntryMarks ev = evs.get(i);
@@ -327,7 +327,7 @@ public class MarkerController {
                 }
             }
         } finally {
-            doc.trustedChangesInProgress = false;
+            doc.setTrustedChangesInProgress(false);
         }
     }
 

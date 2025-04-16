@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +63,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class ProjectFileStorageTest {
 
     private static final File PROJECT_DIR = new File("test/data/project");
-    private static final File SCHEMA_FILE = new File("src/schemas/project_properties.xsd");
 
     private File tempDir;
 
@@ -86,7 +86,8 @@ public class ProjectFileStorageTest {
         try {
             props.verifyProject();
             fail("Project props should fail verification when dirs don't exist yet");
-        } catch (ProjectException ex) {
+        } catch (ProjectException ignored) {
+            // expected.
         }
         props.autocreateDirectories();
         props.verifyProject();
@@ -117,12 +118,7 @@ public class ProjectFileStorageTest {
     @Test
     public void testSaveTeamProject() throws Exception {
         // create & write a project
-        ProjectProperties p = new ProjectProperties(tempDir);
-        p.setSourceLanguage("en-US");
-        p.setTargetLanguage("fr-FR");
-        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
-        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        p.setSentenceSegmentingEnabled(true);
+        ProjectProperties p = getProjectProperties();
         RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
         RepositoryMapping repositoryMapping = new RepositoryMapping();
         repositoryMapping.setRepository("");
@@ -140,12 +136,7 @@ public class ProjectFileStorageTest {
     @Test
     public void testSaveTeamProjectWithExclude() throws Exception {
         // create & write a project
-        ProjectProperties p = new ProjectProperties(tempDir);
-        p.setSourceLanguage("en-US");
-        p.setTargetLanguage("fr-FR");
-        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
-        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        p.setSentenceSegmentingEnabled(true);
+        ProjectProperties p = getProjectProperties();
         RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
         RepositoryMapping repositoryMapping = new RepositoryMapping();
         repositoryMapping.setRepository("");
@@ -165,12 +156,7 @@ public class ProjectFileStorageTest {
     @Test
     public void testSaveTeamProjectWithMapping() throws Exception {
         // create & write a project
-        ProjectProperties p = new ProjectProperties(tempDir);
-        p.setSourceLanguage("en-US");
-        p.setTargetLanguage("fr-FR");
-        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
-        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        p.setSentenceSegmentingEnabled(true);
+        ProjectProperties p = getProjectProperties();
         //
         List<RepositoryDefinition> repositories = new ArrayList<>();
         RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
@@ -203,31 +189,36 @@ public class ProjectFileStorageTest {
         compareXML(new File(PROJECT_DIR, "teamWithMap.project"), new File(tempDir, "omegat.project"));
     }
 
+    private @NotNull ProjectProperties getProjectProperties() throws Exception {
+        ProjectProperties p = new ProjectProperties(tempDir);
+        p.setSourceLanguage("en-US");
+        p.setTargetLanguage("fr-FR");
+        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
+        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
+        p.setSentenceSegmentingEnabled(true);
+        return p;
+    }
+
     @Test
     public void testLoadCustomGlossaryDir() throws Exception {
-        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
-                new File(PROJECT_DIR, "customglossarydir.project"));
-        props.autocreateDirectories();
-        props.verifyProject();
-        assertTrue(props.getWriteableGlossary().endsWith("foo/glossary.txt"));
+        loadPropertiesAndAssertGlossary("customglossarydir.project", "foo/glossary.txt");
     }
 
     @Test
     public void testLoadCustomGlossaryFile() throws Exception {
-        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
-                new File(PROJECT_DIR, "customglossaryfile.project"));
-        props.autocreateDirectories();
-        props.verifyProject();
-        assertTrue(props.getWriteableGlossary().endsWith("glossary/bar.txt"));
+        loadPropertiesAndAssertGlossary("customglossaryfile.project", "glossary/bar.txt");
     }
 
     @Test
     public void testLoadCustomGlossaryDirAndFile() throws Exception {
-        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
-                new File(PROJECT_DIR, "customglossarydirfile.project"));
+        loadPropertiesAndAssertGlossary("customglossarydirfile.project", "foo/bar.txt");
+    }
+
+    private void loadPropertiesAndAssertGlossary(String projectFileName, String expectedGlossaryPath) throws Exception {
+        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir, new File(PROJECT_DIR, projectFileName));
         props.autocreateDirectories();
         props.verifyProject();
-        assertTrue(props.getWriteableGlossary().endsWith("foo/bar.txt"));
+        assertTrue(props.getWriteableGlossary().endsWith(expectedGlossaryPath));
     }
 
     @Test
@@ -247,7 +238,7 @@ public class ProjectFileStorageTest {
                 new File(PROJECT_DIR, "defaultdirs.project"));
         props.autocreateDirectories();
         props.verifyProject();
-        props.setExportTmLevels(Arrays.asList("level1"));
+        props.setExportTmLevels(List.of("level1"));
 
         // Write the project file and read it again to verify that export TM
         // levels were set correctly
@@ -267,7 +258,7 @@ public class ProjectFileStorageTest {
 
             String prefix = repeat(i, "a/");
             File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
-            projRoot.mkdirs();
+            assertTrue(projRoot.mkdirs());
 
             // Set project folders to absolute paths
             File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -284,7 +275,8 @@ public class ProjectFileStorageTest {
             omt.getProject().setExportTmDir(exportTmDir.getPath());
 
             // Make all the actual folders
-            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)
+                    .forEach(dir -> assertTrue("Failed to create directory: " + dir.getAbsolutePath(), dir.mkdirs()));
 
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
@@ -501,6 +493,9 @@ public class ProjectFileStorageTest {
     }
     protected void compareXML(URL f1, URL f2) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        factory.setXIncludeAware(false);
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         DocumentBuilder builder = factory.newDocumentBuilder();
         var doc1 = builder.parse(f1.toExternalForm());
         var doc2 = builder.parse(f2.toExternalForm());

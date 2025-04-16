@@ -1319,63 +1319,75 @@ public class EditorController implements IEditor {
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
-        boolean looped = false;
+        boolean looped;
         while (true) {
             if (forward) {
-                displayedEntryIndex++;
-                if (displayedEntryIndex >= m_docSegList.length) {
-                    displayedFileIndex++;
-                    displayedEntryIndex = 0;
-                    if (displayedFileIndex >= files.size()) {
-                        displayedFileIndex = 0;
-                        looped = true;
-                    }
-                    loadDocument();
-                }
+                looped = moveForward(files);
             } else {
-                displayedEntryIndex--;
-                if (displayedEntryIndex < 0) {
-                    displayedFileIndex--;
-                    if (displayedFileIndex < 0) {
-                        displayedFileIndex = files.size() - 1;
-                        looped = true;
-                    }
-                    loadDocument();
-                    displayedEntryIndex = m_docSegList.length - 1;
-                }
+                looped = moveBackward(files);
             }
             ste = getCurrentEntry();
             if (ste != null && shouldStop.test(ste)) {
                 break;
             }
-            if (looped && displayedFileIndex == startFileIndex) {
-                if (forward && displayedEntryIndex >= startEntryIndex) {
-                    // We have looped forward to our starting point
-                    break;
-                } else if (!forward && displayedEntryIndex <= startEntryIndex) {
-                    // We have looped backwards to our starting point
-                    break;
-                }
-                if (m_docSegList.length == 0) {
-                    // We have looped back to our starting point
-                    // and there were no hits in any files
-                    break;
-                }
+
+            // We are starting point when looped forward to our starting point
+            // or backwards to our starting point.
+            // We also be a starting point, when there is no hits in any files.
+            boolean isAtStartingPoint = looped && displayedFileIndex == startFileIndex
+                    && ((forward && displayedEntryIndex >= startEntryIndex)
+                            || (!forward && displayedEntryIndex <= startEntryIndex));
+
+            if (isAtStartingPoint || m_docSegList.length == 0) {
+                break;
             }
+
         }
 
         activateEntry();
         editor.setCursor(oldCursor);
     }
 
+    private boolean moveForward(List<FileInfo> files) {
+        boolean looped = false;
+        displayedEntryIndex++;
+        if (displayedEntryIndex >= m_docSegList.length) {
+            displayedFileIndex++;
+            displayedEntryIndex = 0;
+            if (displayedFileIndex >= files.size()) {
+                displayedFileIndex = 0;
+                looped = true;
+            }
+            loadDocument();
+        }
+        return looped;
+    }
+
+    private boolean moveBackward(List<FileInfo> files) {
+        boolean looped = false;
+        displayedEntryIndex--;
+        if (displayedEntryIndex < 0) {
+            displayedFileIndex--;
+            if (displayedFileIndex < 0) {
+                displayedFileIndex = files.size() - 1;
+                looped = true;
+            }
+            loadDocument();
+            displayedEntryIndex = m_docSegList.length - 1;
+        }
+        return looped;
+    }
+
     private void anyEntry(boolean forwards) {
         iterateToEntry(forwards, ste -> true);
     }
 
+    @Override
     public void nextEntry() {
         anyEntry(true);
     }
 
+    @Override
     public void prevEntry() {
         anyEntry(false);
     }
@@ -1412,6 +1424,7 @@ public class EditorController implements IEditor {
     /**
      * Finds the next untranslated entry in the document.
      */
+    @Override
     public void nextUntranslatedEntry() {
         nextTranslatedEntry(false);
     }
@@ -1419,6 +1432,7 @@ public class EditorController implements IEditor {
     /**
      * Finds the next translated entry in the document.
      */
+    @Override
     public void nextTranslatedEntry() {
         nextTranslatedEntry(true);
     }
@@ -1433,10 +1447,12 @@ public class EditorController implements IEditor {
     /**
      * Finds the next/previous x-auto translated entry
      */
+    @Override
     public void nextXAutoEntry() {
         linkedEntry(true, "xAUTO");
     }
 
+    @Override
     public void prevXAutoEntry() {
         linkedEntry(false, "xAUTO");
     }
@@ -1444,10 +1460,12 @@ public class EditorController implements IEditor {
     /**
      * Finds the next/previous x-enforced translated entry
      */
+    @Override
     public void nextXEnforcedEntry() {
         linkedEntry(true, "xENFORCED");
     }
 
+    @Override
     public void prevXEnforcedEntry() {
         linkedEntry(false, "xENFORCED");
     }
@@ -1459,6 +1477,7 @@ public class EditorController implements IEditor {
     /**
      * Finds the next entry with a non-empty note.
      */
+    @Override
     public void nextEntryWithNote() {
         entryWithNote(true);
     }
@@ -1466,6 +1485,7 @@ public class EditorController implements IEditor {
     /**
      * Finds the previous entry with a non-empty note.
      */
+    @Override
     public void prevEntryWithNote() {
         entryWithNote(false);
     }
@@ -1473,21 +1493,18 @@ public class EditorController implements IEditor {
     /**
      * Find the next unique entry.
      */
+    @Override
     public void nextUniqueEntry() {
         iterateToEntry(true, ste -> ste.getDuplicate() != DUPLICATE.NEXT);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public int getCurrentEntryNumber() {
         SourceTextEntry e = getCurrentEntry();
         return e != null ? e.entryNum() : 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void gotoFile(int fileIndex) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1513,13 +1530,12 @@ public class EditorController implements IEditor {
         activateEntry();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void gotoEntry(final int entryNum) {
         gotoEntry(entryNum, CaretPosition.startOfEntry());
     }
 
+    @Override
     public void gotoEntry(final int entryNum, final CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1570,6 +1586,7 @@ public class EditorController implements IEditor {
         updateTitleCurrentFile();
     }
 
+    @Override
     public void gotoEntry(String srcString, EntryKey key) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1604,6 +1621,7 @@ public class EditorController implements IEditor {
         }
     }
 
+    @Override
     public void gotoEntryAfterFix(final int entryNum, final String fixedSource) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1616,6 +1634,7 @@ public class EditorController implements IEditor {
         gotoEntry(entryNum);
     }
 
+    @Override
     public void refreshViewAfterFix(List<Integer> fixedEntries) {
         // Don't commit the current translation text if we fixed this entry
         // or one of its duplicates (the fixed version will be clobbered).
@@ -1623,6 +1642,7 @@ public class EditorController implements IEditor {
         refreshView(doCommit);
     }
 
+    @Override
     public void refreshView(boolean doCommit) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1708,17 +1728,11 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void replaceEditText(final String text) {
         replaceEditText(text, null);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void replaceEditText(String text, final String origin) {
         UIThreadsUtil.mustBeSwingThread();
@@ -1757,18 +1771,12 @@ public class EditorController implements IEditor {
         editor.replaceSelection(text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void replaceEditTextAndMark(final String text, final String origin) {
         replaceEditText(text, origin);
         markAsComesFromMT(text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void replaceEditTextAndMark(String text) {
         replaceEditTextAndMark(text, null);
@@ -1838,9 +1846,7 @@ public class EditorController implements IEditor {
         editor.checkAndFixCaret();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void insertText(String text) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1854,18 +1860,12 @@ public class EditorController implements IEditor {
         editor.replaceSelection(text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void insertTextAndMark(String text) {
         insertText(text);
         markAsComesFromMT(text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void insertTag(final String tag) {
         UIThreadsUtil.mustBeSwingThread();
@@ -1884,9 +1884,6 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void selectSourceText() {
         UIThreadsUtil.mustBeSwingThread();
@@ -1899,9 +1896,7 @@ public class EditorController implements IEditor {
         editor.setSelectionEnd(end);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void gotoHistoryBack() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1911,9 +1906,7 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void gotoHistoryForward() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1923,34 +1916,26 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public EditorSettings getSettings() {
         return settings;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void undo() {
         UIThreadsUtil.mustBeSwingThread();
 
         editor.undoManager.undo();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void redo() {
         UIThreadsUtil.mustBeSwingThread();
 
         editor.undoManager.redo();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public String getSelectedText() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -2027,17 +2012,13 @@ public class EditorController implements IEditor {
         return "en";
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void remarkOneMarker(final String markerClassName) {
         int mi = markerController.getMarkerIndex(markerClassName);
         markerController.reprocess(m_docSegList, mi);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void markActiveEntrySource(final SourceTextEntry requiredActiveEntry, final List<Mark> marks,
             final String markerClassName) {
         UIThreadsUtil.mustBeSwingThread();
@@ -2060,6 +2041,7 @@ public class EditorController implements IEditor {
         markerController.queueMarksOutput(ev);
     }
 
+    @Override
     public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         editor.registerPopupMenuConstructors(priority, constructor);
     }
@@ -2073,6 +2055,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc} Document is reloaded to immediately have the filter being
      * effective.
      */
+    @Override
     public void setFilter(IEditorFilter filter) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -2114,6 +2097,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc} Document is reloaded if appropriate to immediately remove
      * the filter;
      */
+    @Override
     public void removeFilter() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -2142,9 +2126,7 @@ public class EditorController implements IEditor {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void setAlternateTranslationForCurrentEntry(boolean alternate) {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
 
@@ -2217,13 +2199,13 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Class for checking if alternative translation exist.
+     * Class for checking if alternative translation exists.
      */
-    protected static class HasMultipleTranslations implements IProject.MultipleTranslationsIterator {
+    static class HasMultipleTranslations implements IProject.MultipleTranslationsIterator {
         final String sourceEntryText;
         boolean found;
 
-        public HasMultipleTranslations(String sourceEntryText) {
+        HasMultipleTranslations(String sourceEntryText) {
             this.sourceEntryText = sourceEntryText;
         }
 

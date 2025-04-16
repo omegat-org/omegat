@@ -24,7 +24,6 @@
  **************************************************************************/
 package org.omegat.gui.editor;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;

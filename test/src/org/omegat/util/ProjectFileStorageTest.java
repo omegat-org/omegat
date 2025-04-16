@@ -255,10 +255,9 @@ public class ProjectFileStorageTest {
         Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
 
         for (int i = 0; i < OConsts.MAX_PARENT_DIRECTORIES_ABS2REL; i++) {
-
             String prefix = repeat(i, "a/");
             File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
-            assertTrue(projRoot.mkdirs());
+            assertTrue("Failed to create directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
             // Set project folders to absolute paths
             File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -275,8 +274,11 @@ public class ProjectFileStorageTest {
             omt.getProject().setExportTmDir(exportTmDir.getPath());
 
             // Make all the actual folders
-            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)
-                    .forEach(dir -> assertTrue("Failed to create directory: " + dir.getAbsolutePath(), dir.mkdirs()));
+            for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+                if (!file.exists()) {
+                    assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+                }
+            }
 
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
@@ -291,12 +293,12 @@ public class ProjectFileStorageTest {
             assertTrue(outProjFile.isFile());
             Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
             String relPrefix = repeat(i + 1, "../");
-            assertEquals(relPrefix + srcDir.getName(), outOmt.getProject().getSourceDir());
-            assertEquals(relPrefix + trgDir.getName(), outOmt.getProject().getTargetDir());
-            assertEquals(relPrefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
-            assertEquals(relPrefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
-            assertEquals(relPrefix + tmDir.getName(), outOmt.getProject().getTmDir());
-            assertEquals(relPrefix + exportTmDir.getName(), outOmt.getProject().getExportTmDir());
+            assertEquals(getDir(relPrefix, srcDir), outOmt.getProject().getSourceDir());
+            assertEquals(getDir(relPrefix, trgDir), outOmt.getProject().getTargetDir());
+            assertEquals(getDir(relPrefix, dictDir), outOmt.getProject().getDictionaryDir());
+            assertEquals(getDir(relPrefix, glosDir), outOmt.getProject().getGlossaryDir());
+            assertEquals(getDir(relPrefix, tmDir), outOmt.getProject().getTmDir());
+            assertEquals(getDir(relPrefix, exportTmDir), outOmt.getProject().getExportTmDir());
         }
     }
 
@@ -307,7 +309,7 @@ public class ProjectFileStorageTest {
 
         for (int i = 0; i < OConsts.MAX_PARENT_DIRECTORIES_ABS2REL; i++) {
             File projRoot = Paths.get(tempDir.getAbsolutePath(), repeat(i, "a/"), "root").toFile();
-            projRoot.mkdirs();
+            assertTrue("Failed to create project directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
             // Set project folders to relative paths
             File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -317,15 +319,19 @@ public class ProjectFileStorageTest {
             File tmDir = new File(tempDir, "tm").getAbsoluteFile();
             File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
             String prefix = repeat(i + 1, "../");
-            omt.getProject().setSourceDir(prefix + srcDir.getName());
-            omt.getProject().setTargetDir(prefix + trgDir.getName());
-            omt.getProject().setDictionaryDir(prefix + dictDir.getName());
-            omt.getProject().setGlossaryDir(prefix + glosDir.getName());
-            omt.getProject().setTmDir(prefix + tmDir.getName());
-            omt.getProject().setExportTmDir(prefix + exportTmDir.getName());
+            omt.getProject().setSourceDir(getDir(prefix, srcDir));
+            omt.getProject().setTargetDir(getDir(prefix, trgDir));
+            omt.getProject().setDictionaryDir(getDir(prefix, dictDir));
+            omt.getProject().setGlossaryDir(getDir(prefix, glosDir));
+            omt.getProject().setTmDir(getDir(prefix, tmDir));
+            omt.getProject().setExportTmDir(getDir(prefix, exportTmDir));
 
             // Make all the actual folders
-            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+            for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+                if (!file.exists()) {
+                    assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+                }
+            }
 
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
@@ -347,13 +353,17 @@ public class ProjectFileStorageTest {
             File outProjFile = new File(projRoot, OConsts.FILE_PROJECT);
             assertTrue(outProjFile.isFile());
             Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
-            assertEquals(prefix + srcDir.getName(), outOmt.getProject().getSourceDir());
-            assertEquals(prefix + trgDir.getName(), outOmt.getProject().getTargetDir());
-            assertEquals(prefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
-            assertEquals(prefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
-            assertEquals(prefix + tmDir.getName(), outOmt.getProject().getTmDir());
-            assertEquals(prefix + exportTmDir.getName(), outOmt.getProject().getExportTmDir());
+            assertEquals(getDir(prefix, srcDir), outOmt.getProject().getSourceDir());
+            assertEquals(getDir(prefix, trgDir), outOmt.getProject().getTargetDir());
+            assertEquals(getDir(prefix, dictDir), outOmt.getProject().getDictionaryDir());
+            assertEquals(getDir(prefix, glosDir), outOmt.getProject().getGlossaryDir());
+            assertEquals(getDir(prefix, tmDir), outOmt.getProject().getTmDir());
+            assertEquals(getDir(prefix, exportTmDir), outOmt.getProject().getExportTmDir());
         }
+    }
+
+    private static @NotNull String getDir(String prefix, File srcDir) {
+        return prefix + srcDir.getName();
     }
 
     @Test
@@ -363,7 +373,7 @@ public class ProjectFileStorageTest {
 
         String prefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL, "a/");
         File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
-        projRoot.mkdirs();
+        assertTrue("Failed to create project directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
         // Set project folders to absolute paths
         File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -380,7 +390,11 @@ public class ProjectFileStorageTest {
         omt.getProject().setExportTmDir(exportTmDir.getPath());
 
         // Make all the actual folders
-        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+        for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+            if (!file.exists()) {
+                assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+            }
+        }
 
         // Load the ProjectProperties and verify that the project folders
         // are resolved correctly
@@ -409,7 +423,7 @@ public class ProjectFileStorageTest {
 
         String prefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL, "a/");
         File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
-        projRoot.mkdirs();
+        assertTrue("Failed to create project directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
         // Set project folders to absolute paths
         File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -419,15 +433,19 @@ public class ProjectFileStorageTest {
         File tmDir = new File(tempDir, "tm").getAbsoluteFile();
         File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
         String relPrefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL + 1, "../");
-        omt.getProject().setSourceDir(relPrefix + srcDir.getName());
-        omt.getProject().setTargetDir(relPrefix + trgDir.getName());
-        omt.getProject().setDictionaryDir(relPrefix + dictDir.getName());
-        omt.getProject().setGlossaryDir(relPrefix + glosDir.getName());
-        omt.getProject().setTmDir(relPrefix + tmDir.getName());
-        omt.getProject().setExportTmDir(relPrefix + exportTmDir.getName());
+        omt.getProject().setSourceDir(getDir(relPrefix, srcDir));
+        omt.getProject().setTargetDir(getDir(relPrefix, trgDir));
+        omt.getProject().setDictionaryDir(getDir(relPrefix, dictDir));
+        omt.getProject().setGlossaryDir(getDir(relPrefix, glosDir));
+        omt.getProject().setTmDir(getDir(relPrefix, tmDir));
+        omt.getProject().setExportTmDir(getDir(relPrefix, exportTmDir));
 
         // Make all the actual folders
-        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+        for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+            if (!file.exists()) {
+                assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+            }
+        }
 
         // Load the ProjectProperties and verify that the project folders
         // are resolved correctly
@@ -481,11 +499,7 @@ public class ProjectFileStorageTest {
     }
 
     private static String repeat(int n, String s) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < n; i++) {
-            sb.append(s);
-        }
-        return sb.toString();
+        return String.valueOf(s).repeat(Math.max(0, n));
     }
 
     protected void compareXML(File f1, File f2) throws Exception {

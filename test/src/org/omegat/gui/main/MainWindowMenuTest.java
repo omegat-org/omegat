@@ -37,13 +37,17 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import org.junit.Test;
+import org.omegat.util.CommonVerifications;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -68,7 +72,7 @@ public class MainWindowMenuTest extends TestCore {
     public void testMenuActions() throws Exception {
         int count = 0;
 
-        Map<String, Method> existsMethods = new HashMap<String, Method>();
+        Map<String, Method> existsMethods = new HashMap<>();
 
         for (Method m : MainWindowMenuHandler.class.getDeclaredMethods()) {
             if (Modifier.isPublic(m.getModifiers()) && !Modifier.isStatic(m.getModifiers())) {
@@ -101,6 +105,30 @@ public class MainWindowMenuTest extends TestCore {
         assertTrue("menu items not found", count > 30);
         assertTrue("There is action handlers in MainWindow which doesn't used in menu: "
                 + existsMethods.keySet(), existsMethods.isEmpty());
+    }
+
+    @Test
+    public void testMenuActions_invokeActions() throws Exception {
+        Pattern pattern = Pattern.compile("getMainMenu\\(\\).invokeAction\\(\\s*\"([^\"]+)\"\\s*,");
+        final String[] target = {"src"};
+        CommonVerifications.processSourceContent(target, (path, chars) -> {
+            Matcher matcher = pattern.matcher(chars);
+            while (matcher.find()) {
+                String actionMethodName = matcher.group(1) + "ActionPerformed";
+                Method method = null;
+                try {
+                    method = MainWindowMenuHandler.class.getMethod(actionMethodName);
+                } catch (NoSuchMethodException ignore) {
+                    // See if the method accepts a modifier key argument.
+                    try {
+                        method = MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
+                    } catch (NoSuchMethodException ex) {
+                        assertNotNull("Action method \"" + actionMethodName + "\" not defined for invoked from " + path,
+                                method);
+                    }
+                }
+            }
+        });
     }
 
     @Test

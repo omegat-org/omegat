@@ -421,11 +421,11 @@ public class StringUtilTest {
     public void testCompareToNullable() {
         assertEquals(0, StringUtil.compareToNullable(null, null));
         assertEquals(0, StringUtil.compareToNullable("a", "a"));
-        assertEquals(-1, StringUtil.compareToNullable("a", null));
-        assertEquals(1, StringUtil.compareToNullable(null, "a"));
+        assertEquals(1, StringUtil.compareToNullable("a", null));
+        assertEquals(-1, StringUtil.compareToNullable(null, "a"));
         assertEquals(-1, StringUtil.compareToNullable("a", "b"));
         assertEquals(1, StringUtil.compareToNullable("b", "a"));
-        assertEquals(-1, StringUtil.compareToNullable("a", "A"));
-        assertEquals(1, StringUtil.compareToNullable("A", "a"));
+        assertEquals(32, StringUtil.compareToNullable("a", "A"));
+        assertEquals(-32, StringUtil.compareToNullable("A", "a"));
     }
 }

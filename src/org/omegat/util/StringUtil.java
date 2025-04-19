@@ -517,16 +517,10 @@ public final class StringUtil {
 
     public static boolean isValidXMLChar(int codePoint) {
         if (codePoint < 0x20) {
-            if (codePoint != 0x09 && codePoint != 0x0A && codePoint != 0x0D) {
-                return false;
-            }
-        } else if (codePoint >= 0x20 && codePoint <= 0xD7FF) {
-        } else if (codePoint >= 0xE000 && codePoint <= 0xFFFD) {
-        } else if (codePoint >= 0x10000 && codePoint <= 0x10FFFF) {
-        } else {
-            return false;
+            return codePoint == 0x09 || codePoint == 0x0A || codePoint == 0x0D;
         }
-        return true;
+        return codePoint <= 0xD7FF || codePoint >= 0xE000 && codePoint <= 0xFFFD
+                || codePoint >= 0x10000 && codePoint <= 0x10FFFF;
     }
 
     /**

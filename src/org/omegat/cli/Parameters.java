@@ -39,8 +39,6 @@ import static picocli.CommandLine.Option;
 @Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1")
 public class Parameters implements Runnable {
 
-    private static final ILogger LOGGER = LoggerFactory.getLogger(Parameters.class);
-
     // Hide deprecated old command syntax in help message.
     // We can set false for test purpose.
     private static final boolean HIDE_DEPRECATED_OPTIONS = true;

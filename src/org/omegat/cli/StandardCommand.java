@@ -115,8 +115,8 @@ public final class StandardCommand {
      * <code>--tag-validation=[abort|warn]</code>
      * <p>
      * On abort, the program is aborted when tag validation finds errors. On
-     * warn the errors are printed but the program continues. In all other cases
-     * no tag validation is done.
+     * warning, the errors are printed, but the program continues. In all other
+     * cases, no tag validation is done.
      */
     private void validateTagsConsoleMode() {
         List<ErrorReport> stes;
@@ -286,7 +286,6 @@ public final class StandardCommand {
             for (String key : config.keySet()) {
                 String value = config.getString(key);
                 System.setProperty(key, value);
-                // XXX PARAMS.put(key, value);
                 System.out.println("Read from config: " + key + "=" + value);
             }
             // Apply language preferences, if present.
@@ -421,7 +420,7 @@ public final class StandardCommand {
     /**
      * Execute standard GUI.
      */
-    protected int runGUI() {
+    int runGUI() {
         UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
 
         // macOS-specific - they must be set BEFORE any GUI calls

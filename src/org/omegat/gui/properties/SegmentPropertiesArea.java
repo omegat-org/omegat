@@ -60,7 +60,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.BiDiUtils;
@@ -109,24 +108,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
         scrollPane.setMenuProvider(this);
 
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-            @Override
-            public void onNewFile(String activeFileName) {
-            }
-
-            @Override
-            public void onEntryActivated(SourceTextEntry newEntry) {
-                scrollPane.stopNotifying();
-                isTargetRtl = BiDiUtils.isTargetLangRtl();
-                setProperties(newEntry);
-                doNotify(getKeysToNotify());
-            }
-        });
-        CoreEvents.registerProjectChangeListener(eventType -> {
-            if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
-                setProperties(null);
-            }
-        });
+        CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener());
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
 
         scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
@@ -269,22 +251,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
         Preferences.setPreference(Preferences.SEGPROPS_NOTIFY_PROPS, StringUtils.join(currentKeys, ", "));
     }
 
-    private void doNotify(List<String> keys) {
-        final List<Integer> notify = new ArrayList<>();
-        for (int i = 0; i < properties.size(); i += 2) {
-            String prop = properties.get(i);
-            if (keys.contains(prop)) {
-                notify.add(i);
-            }
-        }
-        if (notify.isEmpty()) {
-            return;
-        }
-        Collections.sort(notify);
-        scrollPane.notify(true);
-        SwingUtilities.invokeLater(() -> viewImpl.notifyUser(notify));
-    }
-
     private void setProperty(String key, String value) {
         if (value != null) {
             properties.add(key);
@@ -382,6 +348,40 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setProperty(KEY_ORIGIN, entry.getPropValue(PROP_ORIGIN));
         } else {
             setProperty(KEY_ORIGIN, OStrings.getString("SEGPROP_ORIGIN_UNKNOWN"));
+        }
+    }
+
+    private class SegmentPropertiesEntryEventListener implements IEntryEventListener {
+        @Override
+        public void onNewFile(String activeFileName) {
+            // nothing to do
+        }
+
+        @Override
+        public void onEntryActivated(SourceTextEntry newEntry) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            scrollPane.stopNotifying();
+            isTargetRtl = BiDiUtils.isTargetLangRtl();
+            setProperties(newEntry);
+            doNotify(getKeysToNotify());
+        }
+
+        private void doNotify(List<String> keys) {
+            final List<Integer> notify = new ArrayList<>();
+            for (int i = 0; i < properties.size(); i += 2) {
+                String prop = properties.get(i);
+                if (keys.contains(prop)) {
+                    notify.add(i);
+                }
+            }
+            if (notify.isEmpty()) {
+                return;
+            }
+            Collections.sort(notify);
+            scrollPane.notify(true);
+            SwingUtilities.invokeLater(() -> viewImpl.notifyUser(notify));
         }
     }
 }

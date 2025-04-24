@@ -65,8 +65,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.JComponent;
@@ -130,6 +128,8 @@ import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class for control all editor operations.
@@ -156,7 +156,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 public class EditorController implements IEditor {
 
     /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(EditorController.class);
 
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
 
@@ -225,7 +225,27 @@ public class EditorController implements IEditor {
     protected Font font;
 
     private enum SHOW_TYPE {
-        INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE
+        /**
+         * Represents the introductory state or type within the SHOW_TYPE enum.
+         * Used to signify the beginning or initial phase of a specific process or situation.
+         */
+        INTRO,
+        /**
+         * Denotes an empty or uninitialized project state within the context of the SHOW_TYPE enum.
+         * Can be used to represent scenarios where no project is currently active or defined.
+         */
+        EMPTY_PROJECT,
+        /**
+         * Represents the first entry state or type within the SHOW_TYPE enum.
+         * Used to specifically identify the initial point of entry or the first occurrence
+         * in a sequence of actions or events within the defined context.
+         */
+        FIRST_ENTRY,
+        /**
+         * Represents a state indicating no change within the context of the SHOW_TYPE enum.
+         * Used to signify that the current status or condition remains unaltered.
+         */
+        NO_CHANGE
     }
 
     BiDiUtils.ORIENTATION currentOrientation;
@@ -321,7 +341,7 @@ public class EditorController implements IEditor {
 
         // register Swing error logger
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
+            LOGGER.atError().setMessage("Uncatched exception in thread [{}]").addArgument(t.getName()).setCause(e).log();
         });
 
         EditorPopups.init(this);
@@ -477,7 +497,7 @@ public class EditorController implements IEditor {
         case FIRST_ENTRY:
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
-            updatedTitle = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            updatedTitle = OStrings.getString("GUI_SUBWINDOWTITLE_Editor", getCurrentFile());
             data = editor;
             SwingUtilities.invokeLater(() -> {
                 // need to run later because some other event listeners
@@ -488,7 +508,7 @@ public class EditorController implements IEditor {
             });
             break;
         case NO_CHANGE:
-            updatedTitle = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            updatedTitle = OStrings.getString("GUI_SUBWINDOWTITLE_Editor", getCurrentFile());
             data = editor;
             break;
         }
@@ -1231,7 +1251,7 @@ public class EditorController implements IEditor {
                             Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
                         }
                     } catch (InterruptedException | ExecutionException e) {
-                        LOGGER.log(Level.SEVERE, "Exception when validating tags on leave", e);
+                        LOGGER.atError().setMessage("Exception when validating tags on leave").setCause(e).log();
                     }
                 }
             }.execute();
@@ -1241,7 +1261,7 @@ public class EditorController implements IEditor {
         if (Core.getProject().isTeamSyncPrepared()) {
             try {
                 Core.executeExclusively(false, Core.getProject()::teamSync);
-            } catch (InterruptedException | TimeoutException ex) {
+            } catch (InterruptedException | TimeoutException ignored) {
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }

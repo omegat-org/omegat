@@ -376,7 +376,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
         private final SegmentPropertiesArea segmentPropertiesArea;
 
-        public SegmentPropertiesEntryEventListener(SegmentPropertiesArea segmentPropertiesArea) {
+        SegmentPropertiesEntryEventListener(SegmentPropertiesArea segmentPropertiesArea) {
             this.segmentPropertiesArea = segmentPropertiesArea;
         }
 

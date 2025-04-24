@@ -286,6 +286,23 @@ public class SegmentPropertiesArea implements IPaneMenu {
         }
     }
 
+    private String getBooleanValueVerb(String key, boolean value) {
+        try {
+            if (value) {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+            } else {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+            }
+        } catch (MissingResourceException ex) {
+            // fallback to default expression
+            if (value) {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "YES");
+            } else {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "NO");
+            }
+        }
+    }
+
     private void setProperties(SourceTextEntry ste) {
         properties.clear();
         if (ste == null) {
@@ -352,24 +369,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setProperty(KEY_ORIGIN, entry.getPropValue(PROP_ORIGIN));
         } else {
             setProperty(KEY_ORIGIN, OStrings.getString("SEGPROP_ORIGIN_UNKNOWN"));
-        }
-    }
-
-
-    private String getBooleanValueVerb(String key, boolean value) {
-        try {
-            if (value) {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
-            } else {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
-            }
-        } catch (MissingResourceException ex) {
-            // fallback to default expression
-            if (value) {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "YES");
-            } else {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "NO");
-            }
         }
     }
 

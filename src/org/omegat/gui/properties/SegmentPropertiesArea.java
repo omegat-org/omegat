@@ -40,8 +40,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
@@ -137,8 +135,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             Constructor<?> constructor = viewClass.getConstructor();
             newImpl = (ISegmentPropertiesView) constructor.newInstance();
-        } catch (Throwable e) {
-            Logger.getLogger(getClass().getName()).log(Level.FINE, e.getMessage());
+        } catch (Exception e) {
+            Log.log(e);
             return;
         }
         viewImpl = newImpl;
@@ -179,7 +177,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             menu.show(scrollPane, p.x, p.y);
         } catch (IllegalComponentStateException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 

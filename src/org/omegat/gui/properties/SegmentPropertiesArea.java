@@ -99,6 +99,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private ISegmentPropertiesView viewImpl;
     private boolean isTargetRtl;
 
+    void setTargetRtl(boolean targetRtl) {
+        isTargetRtl = targetRtl;
+    }
+
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
                 null, true);
@@ -106,7 +110,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
         scrollPane.setMenuProvider(this);
 
-        CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener());
+        CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener(this));
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
 
         scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
@@ -249,6 +253,22 @@ public class SegmentPropertiesArea implements IPaneMenu {
         Preferences.setPreference(Preferences.SEGPROPS_NOTIFY_PROPS, StringUtils.join(currentKeys, ", "));
     }
 
+    private void doNotify(List<String> keys) {
+        final List<Integer> notify = new ArrayList<>();
+        for (int i = 0; i < properties.size(); i += 2) {
+            String prop = properties.get(i);
+            if (keys.contains(prop)) {
+                notify.add(i);
+            }
+        }
+        if (notify.isEmpty()) {
+            return;
+        }
+        Collections.sort(notify);
+        scrollPane.notify(true);
+        SwingUtilities.invokeLater(() -> viewImpl.notifyUser(notify));
+    }
+
     private void setProperty(String key, String value) {
         if (value != null) {
             properties.add(key);
@@ -266,48 +286,34 @@ public class SegmentPropertiesArea implements IPaneMenu {
         }
     }
 
-    private String getBooleanValueVerb(String key, boolean value) {
-        try {
-            if (value) {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
-            } else {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
-            }
-        } catch (MissingResourceException ex) {
-            // fallback to default expression
-            if (value) {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "YES");
-            } else {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "NO");
-            }
-        }
-    }
-
     private void setProperties(SourceTextEntry ste) {
         properties.clear();
-        if (ste != null) {
-            if (ste.getComment() != null) {
-                setProperty(KEY_HASCOMMENT, true);
+        if (ste == null) {
+            viewImpl.update();
+            return;
+        }
+
+        if (ste.getComment() != null) {
+            setProperty(KEY_HASCOMMENT, true);
+        }
+        if (ste.getDuplicate() != DUPLICATE.NONE) {
+            setProperty(KEY_ISDUP, ste.getDuplicate());
+        }
+        if (ste.getSourceTranslation() != null) {
+            if (isTargetRtl) {
+                setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
+            } else {
+                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
             }
-            if (ste.getDuplicate() != DUPLICATE.NONE) {
-                setProperty(KEY_ISDUP, ste.getDuplicate());
+            if (ste.isSourceTranslationFuzzy()) {
+                setProperty(KEY_TRANSLATIONISFUZZY, true);
             }
-            if (ste.getSourceTranslation() != null) {
-                if (isTargetRtl) {
-                    setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
-                } else {
-                    setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
-                }
-                if (ste.isSourceTranslationFuzzy()) {
-                    setProperty(KEY_TRANSLATIONISFUZZY, true);
-                }
-            }
-            setKeyProperties(ste.getKey());
-            IProject project = Core.getProject();
-            if (project.isProjectLoaded()) {
-                TMXEntry trg = project.getTranslationInfo(ste);
-                setTranslationProperties(trg);
-            }
+        }
+        setKeyProperties(ste.getKey());
+        IProject project = Core.getProject();
+        if (project.isProjectLoaded()) {
+            TMXEntry trg = project.getTranslationInfo(ste);
+            setTranslationProperties(trg);
         }
         viewImpl.update();
     }
@@ -349,7 +355,32 @@ public class SegmentPropertiesArea implements IPaneMenu {
         }
     }
 
+
+    private String getBooleanValueVerb(String key, boolean value) {
+        try {
+            if (value) {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+            } else {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+            }
+        } catch (MissingResourceException ex) {
+            // fallback to default expression
+            if (value) {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "YES");
+            } else {
+                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + "NO");
+            }
+        }
+    }
+
     private class SegmentPropertiesEntryEventListener implements IEntryEventListener {
+
+        private final SegmentPropertiesArea segmentPropertiesArea;
+
+        public SegmentPropertiesEntryEventListener(SegmentPropertiesArea segmentPropertiesArea) {
+            this.segmentPropertiesArea = segmentPropertiesArea;
+        }
+
         @Override
         public void onNewFile(String activeFileName) {
             // nothing to do
@@ -360,26 +391,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
             if (!Core.getProject().isProjectLoaded()) {
                 return;
             }
-            scrollPane.stopNotifying();
-            isTargetRtl = BiDiUtils.isTargetLangRtl();
-            setProperties(newEntry);
-            doNotify(getKeysToNotify());
+            segmentPropertiesArea.scrollPane.stopNotifying();
+            segmentPropertiesArea.setTargetRtl(BiDiUtils.isTargetLangRtl());
+            segmentPropertiesArea.setProperties(newEntry);
+            segmentPropertiesArea.doNotify(getKeysToNotify());
         }
 
-        private void doNotify(List<String> keys) {
-            final List<Integer> notify = new ArrayList<>();
-            for (int i = 0; i < properties.size(); i += 2) {
-                String prop = properties.get(i);
-                if (keys.contains(prop)) {
-                    notify.add(i);
-                }
-            }
-            if (notify.isEmpty()) {
-                return;
-            }
-            Collections.sort(notify);
-            scrollPane.notify(true);
-            SwingUtilities.invokeLater(() -> viewImpl.notifyUser(notify));
-        }
     }
 }

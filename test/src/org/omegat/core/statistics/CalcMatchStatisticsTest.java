@@ -183,7 +183,7 @@ public class CalcMatchStatisticsTest {
 
     @Before
     public final void setUp() throws Exception {
-        Core.initializeConsole(Collections.emptyMap());
+        Core.initializeConsole();
         TestPreferencesInitializer.init();
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
     }

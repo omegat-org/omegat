@@ -52,6 +52,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
 import javax.swing.text.MutableAttributeSet;
@@ -227,11 +228,11 @@ public class EditorTextArea3 extends JEditorPane {
      * implementation. In this case, we don't need it.
      */
     public @Nullable Document3 getOmDocument() {
-        try {
-            return (Document3) getDocument();
-        } catch (ClassCastException ex) {
-            return null;
+        Document doc = getDocument();
+        if (doc instanceof Document3) {
+            return (Document3) doc;
         }
+        return null;
     }
 
     /**

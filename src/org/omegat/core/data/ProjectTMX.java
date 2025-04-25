@@ -119,8 +119,8 @@ public class ProjectTMX {
      * Constructor for TMX delta.
      */
     public ProjectTMX() {
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
+        alternatives = new HashMap<>();
+        defaults = new HashMap<>();
         checkOrphanedCallback = null;
     }
 

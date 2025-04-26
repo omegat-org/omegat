@@ -24,13 +24,18 @@
  **************************************************************************/
 package org.omegat.gui.properties;
 
-import org.assertj.swing.data.TableCellInSelectedRow;
+import org.assertj.swing.data.TableCell;
+import org.assertj.swing.fixture.JTableFixture;
 import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SegmentPropertiesAreaTest extends TestCoreGUI {
 
@@ -47,7 +52,28 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         // check a segment properties pane
         window.scrollPane("Segment Properties").requireEnabled();
         window.scrollPane("Segment Properties").requireVisible();
-        window.table("SegmentPropertiesTable").requireVisible();
+        // Check a table content
+        JTableFixture segmentPropertiesTable = window.table("SegmentPropertiesTable").requireVisible();
+        // Define expectations
+        int expectedRowCount = 7;
+        int expectedColumnCount = 3;
+        final Map<String, String> expectation = new HashMap<>();
+        expectation.put("ID", "APERTIUM_ERROR");
+        expectation.put("Changed on", "Nov 27, 2024 12:52:16 PM");
+        expectation.put("Changed by", "Hiroshi Miura");
+        expectation.put("Created on", "Nov 27, 2024 12:52:16 PM");
+        expectation.put("Created by", "Hiroshi Miura");
+        expectation.put("Origin", "Unknown/Manual");
+        expectation.put("File", "Bundle.properties");
+        // Check value of the table
+        segmentPropertiesTable.requireRowCount(expectedRowCount);
+        segmentPropertiesTable.requireColumnCount(expectedColumnCount);
+        for (int i = 0; i < expectedRowCount; i++) {
+            String key = segmentPropertiesTable.valueAt(TableCell.row(i).column(0));
+            String value = segmentPropertiesTable.valueAt(TableCell.row(i).column(1));
+            assertThat(key).isIn(expectation.keySet());
+            assertThat(value).isEqualTo(expectation.get(key));
+        }
     }
 
 }

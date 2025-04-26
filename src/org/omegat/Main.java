@@ -269,7 +269,7 @@ public final class Main {
                 return;
             } else {
                 javaBin = Paths.get(installDir).getParent().resolve("bin/OmegaT");
-                if (javaBin.toFile().exists()) {
+                if (!javaBin.toFile().exists()) {
                     // abort restart
                     Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
                     return;

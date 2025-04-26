@@ -27,8 +27,6 @@ package org.omegat.gui.properties;
 
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -71,21 +69,16 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
     public void update() {
         UIThreadsUtil.mustBeSwingThread();
         panel.removeAll();
-        for (int i = 0; i < parent.properties.size(); i += 2) {
+        for (int i = 0; i < parent.getProperties().size(); i += 2) {
             final SegmentPropertiesListCell cell = new SegmentPropertiesListCell();
-            String key = parent.properties.get(i);
+            String key = parent.getProperties().get(i);
             cell.key = key;
             cell.label.setText(getDisplayKey(key));
-            cell.value.setText(parent.properties.get(i + 1));
+            cell.value.setText(parent.getProperties().get(i + 1));
             cell.value.setFont(panel.getFont());
-            cell.settingsButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    parent.showContextMenu(
-                            SwingUtilities.convertPoint(cell, cell.settingsButton.getLocation(),
-                                    parent.scrollPane));
-                }
-            });
+            cell.settingsButton.addActionListener(e -> parent.showContextMenu(
+                    SwingUtilities.convertPoint(cell, cell.settingsButton.getLocation(),
+                            parent.scrollPane)));
             panel.add(cell);
         }
         panel.validate();

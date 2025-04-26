@@ -95,7 +95,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ORIGIN = "origin";
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
-    final List<String> properties = new ArrayList<>();
+    private final List<String> properties = new ArrayList<>();
 
     final DockableScrollPane scrollPane;
 
@@ -112,6 +112,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
+                // nothing to do
             }
 
             @Override
@@ -155,7 +156,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             Constructor<?> constructor = viewClass.getConstructor();
             newImpl = (ISegmentPropertiesView) constructor.newInstance();
-        } catch (Throwable e) {
+        } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.FINE, e.getMessage());
             return;
         }
@@ -199,6 +200,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
         } catch (IllegalComponentStateException e) {
             e.printStackTrace();
         }
+    }
+
+    List<String> getProperties() {
+        return properties;
     }
 
     private void populateLocalContextMenuOptions(JPopupMenu contextMenu, Point p) {
@@ -321,29 +326,31 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     private void setProperties(SourceTextEntry ste) {
         properties.clear();
-        if (ste != null) {
-            if (ste.getComment() != null) {
-                setProperty(KEY_HASCOMMENT, true);
+        if (ste == null) {
+            viewImpl.update();
+            return;
+        }
+        if (ste.getComment() != null) {
+            setProperty(KEY_HASCOMMENT, true);
+        }
+        if (ste.getDuplicate() != DUPLICATE.NONE) {
+            setProperty(KEY_ISDUP, ste.getDuplicate());
+        }
+        if (ste.getSourceTranslation() != null) {
+            if (isTargetRtl) {
+                setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
+            } else {
+                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
             }
-            if (ste.getDuplicate() != DUPLICATE.NONE) {
-                setProperty(KEY_ISDUP, ste.getDuplicate());
+            if (ste.isSourceTranslationFuzzy()) {
+                setProperty(KEY_TRANSLATIONISFUZZY, true);
             }
-            if (ste.getSourceTranslation() != null) {
-                if (isTargetRtl) {
-                    setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
-                } else {
-                    setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
-                }
-                if (ste.isSourceTranslationFuzzy()) {
-                    setProperty(KEY_TRANSLATIONISFUZZY, true);
-                }
-            }
-            setKeyProperties(ste.getKey());
-            IProject project = Core.getProject();
-            if (project.isProjectLoaded()) {
-                TMXEntry trg = project.getTranslationInfo(ste);
-                setTranslationProperties(trg);
-            }
+        }
+        setKeyProperties(ste.getKey());
+        IProject project = Core.getProject();
+        if (project.isProjectLoaded()) {
+            TMXEntry trg = project.getTranslationInfo(ste);
+            setTranslationProperties(trg);
         }
         viewImpl.update();
     }

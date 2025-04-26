@@ -62,7 +62,7 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setFont(Core.getMainWindow().getApplicationFont());
         panel.setOpaque(true);
-        parent.scrollPane.setViewportView(panel);
+        parent.getScrollPane().setViewportView(panel);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
             cell.value.setFont(panel.getFont());
             cell.settingsButton.addActionListener(e -> parent.showContextMenu(
                     SwingUtilities.convertPoint(cell, cell.settingsButton.getLocation(),
-                            parent.scrollPane)));
+                            parent.getScrollPane())));
             panel.add(cell);
         }
         panel.validate();

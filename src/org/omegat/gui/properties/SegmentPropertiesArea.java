@@ -25,12 +25,8 @@
 
 package org.omegat.gui.properties;
 
-import java.awt.Component;
 import java.awt.IllegalComponentStateException;
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -97,7 +93,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     private final List<String> properties = new ArrayList<>();
 
-    final DockableScrollPane scrollPane;
+    private final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
     private boolean isTargetRtl;
@@ -144,8 +140,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         installView(initModeClass);
-
-        scrollPane.addMouseListener(contextMenuListener);
     }
 
     private void installView(Class<?> viewClass) {
@@ -170,28 +164,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
         viewImpl.update();
     }
 
-    final MouseListener contextMenuListener = new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        private void doPopup(MouseEvent e) {
-            Point p = SwingUtilities.convertPoint((Component) e.getSource(), e.getPoint(),
-                    scrollPane);
-            showContextMenu(p);
-        }
-    };
-
     void showContextMenu(Point p) {
         JPopupMenu menu = new JPopupMenu();
         populateLocalContextMenuOptions(menu, p);
@@ -204,6 +176,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     List<String> getProperties() {
         return properties;
+    }
+
+    DockableScrollPane getScrollPane() {
+        return scrollPane;
     }
 
     private void populateLocalContextMenuOptions(JPopupMenu contextMenu, Point p) {

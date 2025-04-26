@@ -31,6 +31,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,9 +77,10 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
         model = new PropertiesTableModel(this);
         table = new FlashingTable(model);
         table.setName("SegmentPropertiesTable");
-        table.setForeground(parent.scrollPane.getForeground());
-        table.setBackground(parent.scrollPane.getBackground());
-        table.addMouseListener(parent.contextMenuListener);
+        table.setForeground(parent.getScrollPane().getForeground());
+        table.setBackground(parent.getScrollPane().getBackground());
+        final MouseListener contextMenuListener = new SegmentPropertiesMouseAdapter(parent);
+        table.addMouseListener(contextMenuListener);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setGridColor(Color.WHITE);
         table.setFillsViewportHeight(true);
@@ -90,14 +92,14 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
                 adjustRowHeights());
         table.addMouseListener(mouseAdapter);
         table.addMouseMotionListener(mouseAdapter);
-        parent.scrollPane.setViewportView(table);
+        parent.getScrollPane().setViewportView(table);
     }
 
     private final MouseAdapter mouseAdapter = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (mouseoverCol == 2) {
-                parent.showContextMenu(SwingUtilities.convertPoint(table, e.getPoint(), parent.scrollPane));
+                parent.showContextMenu(SwingUtilities.convertPoint(table, e.getPoint(), parent.getScrollPane()));
             }
         }
 
@@ -173,7 +175,7 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
 
     @Override
     public String getKeyAtPoint(Point p) {
-        int clickedRow = table.rowAtPoint(SwingUtilities.convertPoint(parent.scrollPane, p, table));
+        int clickedRow = table.rowAtPoint(SwingUtilities.convertPoint(parent.getScrollPane(), p, table));
         if (clickedRow == -1) {
             return null;
         }

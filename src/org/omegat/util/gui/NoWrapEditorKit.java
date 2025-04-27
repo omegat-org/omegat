@@ -36,6 +36,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * An editor kit that prevents line wrapping entirely.
@@ -46,31 +48,14 @@ import javax.swing.text.ViewFactory;
 @SuppressWarnings("serial")
 public class NoWrapEditorKit extends StyledEditorKit {
 
-    private static final ViewFactory FACTORY = elem -> {
-        String kind = elem.getName();
-        if (kind != null) {
-            if (kind.equals(AbstractDocument.ContentElementName)) {
-                return new LabelView(elem);
-            } else if (kind.equals(AbstractDocument.ParagraphElementName)) {
-                return new NoWrapParagraphView(elem);
-            } else if (kind.equals(AbstractDocument.SectionElementName)) {
-                return new BoxView(elem, View.Y_AXIS);
-            } else if (kind.equals(StyleConstants.ComponentElementName)) {
-                return new ComponentView(elem);
-            } else if (kind.equals(StyleConstants.IconElementName)) {
-                return new IconView(elem);
-            }
-        }
-        // default to text display
-        return new LabelView(elem);
-    };
+    private static final ViewFactory FACTORY = new MyViewFactory();
 
     @Override
     public ViewFactory getViewFactory() {
         return FACTORY;
     }
 
-    private static class NoWrapParagraphView extends ParagraphView {
+    static class NoWrapParagraphView extends ParagraphView {
 
         NoWrapParagraphView(Element elem) {
             super(elem);
@@ -79,6 +64,23 @@ public class NoWrapEditorKit extends StyledEditorKit {
         @Override
         protected void layout(int width, int height) {
             super.layout(Short.MAX_VALUE, height);
+        }
+    }
+
+    static class MyViewFactory implements ViewFactory {
+
+        private static final Map<String, Function<Element, View>> VIEW_CREATORS = Map.of(
+                AbstractDocument.ContentElementName, LabelView::new,
+                AbstractDocument.ParagraphElementName, NoWrapParagraphView::new,
+                AbstractDocument.SectionElementName, elem -> new BoxView(elem, View.Y_AXIS),
+                StyleConstants.ComponentElementName, ComponentView::new,
+                StyleConstants.IconElementName, IconView::new
+        );
+
+        @Override
+        public View create(Element elem) {
+            String elementName = elem.getName();
+            return VIEW_CREATORS.getOrDefault(elementName, LabelView::new).apply(elem);
         }
     }
 }

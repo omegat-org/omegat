@@ -122,11 +122,12 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.matchesTemplate.setText(MatchesVarExpansion.DEFAULT_TEMPLATE);
         panel.matchesTemplate.setCaretPosition(0);
         panel.fuzzyMatchThreshold.setValue(OConsts.FUZZY_MATCH_THRESHOLD);
+        panel.paragraphMatchesFromSegmentedTmxCB.setSelected(true);
     }
 
     @Override
     public void persist() {
-        Preferences.setPreference(Preferences.EXT_TMX_SORT_KEY, (SORT_KEY) panel.sortMatchesList.getSelectedItem());
+        Preferences.setPreference(Preferences.EXT_TMX_SORT_KEY, panel.sortMatchesList.getSelectedItem());
         Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, panel.displayLevel2Tags.isSelected());
         Preferences.setPreference(Preferences.EXT_TMX_USE_SLASH, panel.useSlash.isSelected());
         Preferences.setPreference(Preferences.EXT_TMX_MATCH_TEMPLATE, panel.matchesTemplate.getText());
@@ -137,5 +138,6 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, panel.keepForeignMatches.isSelected());
         Preferences.setPreference(Preferences.PENALTY_FOR_FOREIGN_MATCHES, panel.foreignPenaltySpinner.getValue());
         Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, panel.fuzzyMatchThreshold.getValue());
+        Preferences.setPreference(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, panel.paragraphMatchesFromSegmentedTmxCB);
     }
 }

@@ -99,6 +99,8 @@ import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 /**
  * A controller to orchestrate the {@link IssuesPanel}.
@@ -107,6 +109,8 @@ import org.omegat.util.gui.TableColumnSizer;
  *
  */
 public class IssuesPanelController implements IIssues {
+
+    private static final ILogger LOGGER = LoggerFactory.getLogger(IssuesPanelController.class);
 
     static final String ACTION_KEY_JUMP_TO_SELECTED_ISSUE = "jumpToSelectedIssue";
     static final String ACTION_KEY_FOCUS_ON_TYPES_LIST = "focusOnTypesList";
@@ -553,8 +557,8 @@ public class IssuesPanelController implements IIssues {
                     .filter(Objects::nonNull).flatMap(e -> providers.stream()
                             .flatMap(provider -> provider.getIssues(e.getKey(), e.getValue()).stream()));
             List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
-            Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST,
-                    () -> String.format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
+            LOGGER.atTrace().setMessage("Issue detection took {0} s")
+                    .addArgument(() -> (System.currentTimeMillis() - start) / 1000f).log();
             return result;
         }
 

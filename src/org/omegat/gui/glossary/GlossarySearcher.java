@@ -31,6 +31,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -87,8 +89,7 @@ public class GlossarySearcher {
         // 4) by length of localized term (optional)
         // 5) by alphabet of localized term
         // Then remove the duplicates and combine the synonyms.
-        sortGlossaryEntries(result);
-        return filterGlossary(result, mergeAltDefinitions);
+        return filterGlossary(sortGlossaryEntries(result), mergeAltDefinitions);
     }
 
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
@@ -245,14 +246,18 @@ public class GlossarySearcher {
         return false;
     }
 
-    static void sortGlossaryEntries(List<GlossaryEntry> entries) {
-        entries.sort((o1, o2) -> {
+    static List<GlossaryEntry> sortGlossaryEntries(List<GlossaryEntry> entries) {
+        if (entries == null) {
+            throw new IllegalArgumentException("entries must not be null");
+        }
+        boolean sortBySrcLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
+        boolean sortByLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+        return entries.stream().filter(Objects::nonNull).sorted((o1, o2) -> {
             int p1 = o1.getPriority() ? 1 : 2;
             int p2 = o2.getPriority() ? 1 : 2;
             int c = p1 - p2;
-            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true)
-                    && (o2.getSrcText().contains(o1.getSrcText())
-                            || o1.getSrcText().contains(o2.getSrcText()))) {
+            if (c == 0 && sortBySrcLength && (o2.getSrcText().contains(o1.getSrcText())
+                    || o1.getSrcText().contains(o2.getSrcText()))) {
                 // longer is better if one contains another
                 c = o2.getSrcText().length() - o1.getSrcText().length();
             }
@@ -264,14 +269,14 @@ public class GlossarySearcher {
             if (c == 0) {
                 c = o1.getSrcText().compareTo(o2.getSrcText());
             }
-            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
+            if (c == 0 && sortByLength) {
                 c = o2.getLocText().length() - o1.getLocText().length();
             }
             if (c == 0) {
                 c = o1.getLocText().compareToIgnoreCase(o2.getLocText());
             }
             return c;
-        });
+        }).collect(Collectors.toList());
     }
 
     private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result,

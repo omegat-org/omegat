@@ -1,139 +1,199 @@
+import org.omegat.documentation.*
+
 plugins {
+    id 'org.omegat.documentation'
     id 'org.omegat.common-utilities'
-}
-def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
-tasks.register('manualZips') {
-    description = 'Build ZIP manuals to bundle into application. Requires container runtime.'
-    group = 'documentation'
+    id 'maven-publish'
+    id 'signing'
 }
 
-tasks.register('manualPdfs') {
-    description = 'Build PDF manuals for all languages. Requires container runtime.'
-    group = 'documentation'
-}
+def documentRootDir = file('src_docs')
+def styleRootDir = file('src_docs/xsl')
 
-tasks.register('manualHtmls') {
-    description = 'Build HTML manuals and zip for all languages. Requires container runtime.'
-    group = 'documentation'
+docConfig {
+    styleDir.set(styleRootDir)
+    docRoot.set(documentRootDir)
+    outputRoot.set(layout.buildDirectory.dir('docs'))
 }
 
 tasks.register('genDocIndex', Copy) {
-    def docPropsFiles = fileTree(dir: 'doc_src', include: '*/version*.properties').findAll {
-        file("${it.parent}/OmegaTUsersManual_xinclude full.xml").file }
-    def langNameExceptions = loadProperties(file('doc_src/lang_exceptions.properties'))
-    def langInfos = docPropsFiles.toSorted{ it.parentFile.name }.collect { props ->
+    def inputTemplate = layout.projectDirectory.file('src_docs/template/index.html')
+    def docPropsFiles = fileTree(dir: 'src_docs/manual', include: '**/version*.properties')
+    def langInformation = docPropsFiles.collect { props ->
         def docVersion = loadProperties(props).version
-        ['code': props.parentFile.name, 'nomanual': false, 'version': docVersion,
-         'name': langNameExceptions[props.parentFile.name] ?:
-                 Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
-         'status': docVersion == omtVersion.version ? 'up-to-date' : 'out-of-date'] }
-    def inputTemplate = file('doc_src/index_template.html')
-    def outputIndex = layout.buildDirectory.file("docs/manual/index.html").get().asFile
+        ['code'  : props.parentFile.name, 'nomanual': false, 'version': docVersion,
+         'name'  : Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
+         'status': docVersion == version ? 'up-to-date' : 'out-of-date']
+    }
     description = 'Generate the docs index file'
     inputs.files docPropsFiles, inputTemplate
-    outputs.files file(outputIndex)
     from inputTemplate
-    into outputIndex.parent
-    rename('index_template.html', 'index.html')
-    expand('languages': langInfos)
+    into layout.buildDirectory.dir("tmp/manual/")
+    expand('languages': langInformation)
+    doLast {
+        copy {
+            from layout.buildDirectory.file("tmp/manual/index.html")
+            into layout.buildDirectory.dir("docs/manual")
+        }
+    }
     filteringCharset = 'UTF-8'
-    dependsOn manualHtmls
+}
+
+tasks.register('manualZips') {
+    description = 'Build ZIP manuals to bundle into application.'
+    group = 'other'
+}
+
+tasks.register('manualHtmls') {
+    description = 'Build HTML manuals and zip for all languages.'
+    finalizedBy(genDocIndex)
     group = 'documentation'
 }
 
-tasks.register('webManual', Sync) {
-    group = 'documentation'
-    description = 'Sync the HTML manual files'
-    dependsOn manualHtmls, genDocIndex
-    destinationDir = file(layout.buildDirectory.file("docs/htdocs"))
-    from file(layout.buildDirectory.file("docs/manual"))
-    from('release') {
-        include 'doc-license.txt'
+ext.makeDocumentationTasks = { lang ->
+    def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
+        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/passthrough.xsl"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
+        inputFile.set(layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
     }
-}
 
-ext.manualIndexXmls = fileTree(dir: 'doc_src', include: '**/OmegaTUsersManual_xinclude full.xml')
-manualIndexXmls.each { xml ->
-    def lang = xml.parentFile.name
-    def pdfTaskName = "manualPdf${lang.capitalize()}"
-    tasks.register(pdfTaskName, Exec) {
-        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
-                excludes: ['xhtml5/*', 'index.xml'])
-        outputs.files layout.buildDirectory.file("docs/pdfs/OmegaT_documentation_${lang}.PDF")
-        onlyIf { execContainerTasks }
-        workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/pdfs", 'pdf'
-        doLast {
-            delete fileTree(dir: "doc_src/${lang}", includes: ['pdf/*', 'index.xml'])
+    def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
+        description = 'Copy Images and CSS file to target'
+        into layout.buildDirectory.dir("docs/manual/${lang}")
+        from new File(documentRootDir, 'style/omegat.css')
+    }
+
+    def copyImages = tasks.register("copyImages${lang.capitalize()}", Copy) {
+        description 'Copy Images and CSS file to target'
+        into layout.buildDirectory.dir("docs/manual/${lang}/images/")
+        from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
+        from layout.projectDirectory.file("images/OmegaT.svg")
+    }
+
+    def docbookHtml = tasks.register("docbookHtml${lang.capitalize()}", DocbookHtmlTask) {
+        description = 'Generate chunked HTML documentation'
+        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/xhtml.xsl"))
+        inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
+        dependsOn(docbookInclude, copyImages, copyCss)
+    }
+
+    def whcToc = tasks.register("whcToc${lang.capitalize()}", TransformationTask) {
+        description = 'Generate whc header and index'
+        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-toc.xsl"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
+        dependsOn(docbookHtml)
+    }
+
+    def whcIndex = tasks.register("whcIndex${lang.capitalize()}", TransformationTask) {
+        description = 'Generate whc header and index'
+        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-index.xsl"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
+        dependsOn(docbookHtml, whcToc)
+    }
+
+    def whcHeader = tasks.register("whcHeader${lang.capitalize()}", TransformationTask) {
+        description = 'Generate whc header and index'
+        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-header.xsl"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
+        dependsOn(copyCss, docbookInclude)
+    }
+    def buildDocumentTask = tasks.register("manual${lang.capitalize()}", WhcTask) {
+        description = 'Build whc contents'
+        tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
+        headerFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
+        documentLayout.set('simple')
+        localJQuery.set(true)
+        parameterList.set([
+                '--navigation-background-color', '#FDFDFD',
+                '--field-background-color', '#FDFDFD',
+                '--panel-background-color', '#FDFDFD',
+        ])
+        contentFiles.set(fileTree(dir: layout.buildDirectory.dir("tmp/manual/${lang}/xhtml5"), include: '*.html', exclude: '_*'))
+        outputDirectory.set(layout.buildDirectory.dir("manual/${lang}"))
+        dependsOn(whcHeader, whcToc, whcIndex)
+        group('documentation')
+    }
+    assemble.dependsOn buildDocumentTask
+    manualHtmls.dependsOn buildDocumentTask
+
+    def zipTask= tasks.register("manualZip${lang.capitalize()}", Zip) {
+        from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
+        exclude 'docs/manual/index.html'
+        from fileTree(dir: "src_docs/${lang}", include: '**/version*.properties')
+        archiveFileName = "${lang}.zip"
+        destinationDirectory = file(layout.buildDirectory.dir("docs/manuals/"))
+        dependsOn buildDocumentTask
+    }
+    assemble.dependsOn(zipTask)
+    manualZips.dependsOn(zipTask)
+
+    def languageName = new Locale(lang).displayName
+
+    // Create a new publication for this language
+    def publication = publishing.publications.create("manual${lang.capitalize()}", MavenPublication) {
+        groupId = 'org.omegat'
+        artifactId = "omegat-manual-${lang}"
+        version = '6.1.0'
+
+        // Add the jar task to the publication
+        artifact(zipTask)
+
+        pom {
+            name = "OmegaT ${languageName} manual"
+            description = "OmegaT HTML manual for language ${languageName}"
+            url = 'https://omegat.org'
+            scm {
+                connection = "scm:git:https://github.com/omegat-org/omegat"
+                developerConnection = "scm:git:https://github.com/omegat-org/omegat"
+                url = "https://github.com/omegat-org/omegat"
+            }
+            licenses {
+                license {
+                    name = 'The GNU General Public License, Version 3.0'
+                    url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
+                }
+            }
+            developers {
+                developer {
+                    id = 'omegat'
+                    name = 'OmegaT Developers'
+                    email = 'info@omegat.org'
+                }
+            }
         }
     }
-    manualPdfs.dependsOn pdfTaskName
 
-    def htmlTaskName = "manualHtml${lang.capitalize()}"
-    tasks.register(htmlTaskName, Exec) {
-        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['**/*.xml', 'images/*.png'],
-                excludes: ['xhtml5/*', 'index.xml'])
-        outputs.files fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}/"),
-                includes: ['*.html', 'OmegaT.css', 'images/*.png', '_wh/**/*.js', '_wh/wh.css'])
-        onlyIf { execContainerTasks }
-        workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/manual/${lang}", 'html5'
-    }
-    manualHtmls.dependsOn htmlTaskName
-
-    def zipTaskName="manualZip${lang.capitalize()}"
-    def versionProperties = loadProperties(file("doc_src/${lang}/version_${lang}.properties"))
-    if (lang.equals("en") || versionProperties.version.equals(omtVersion.version)) {
-        tasks.register(zipTaskName, Zip) {
-            from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
-            exclude 'docs/manual/index.html'
-            from fileTree(dir: "doc_src/${lang}", include: '**/version*.properties')
-            archiveFileName = "${lang}.zip"
-            destinationDirectory = file("${buildDir}/docs/manuals/")
+    signing {
+        sign publication
+        if (!findProperty("signing.keyId")) {
+            useGpgCmd()
         }
-        manualZips.dependsOn zipTaskName
-        tasks.getByName(zipTaskName).dependsOn htmlTaskName
     }
 }
 
 tasks.register('firstSteps') {
-    description = 'Build First pages for all languages at docs/greetings/. Requires Docker.'
+    description = 'Build first pages for all languages at src/docs/greetings/.'
     group = 'documentation'
 }
+assemble.dependsOn(firstSteps)
 
-tasks.register('updateManuals') {
-    group = 'documentation'
-    description = 'Update Instant Start guides and HTML manuals.'
-    dependsOn manualHtmls, firstSteps, genDocIndex
-}
-
-ext.firstStepsXmls = fileTree(dir: 'doc_src', include: '**/First_Steps.xml')
-firstStepsXmls.each { xml ->
-    def lang = xml.parentFile.name
-    def taskName = "firstSteps${lang.capitalize()}"
-    tasks.register(taskName, Exec) {
-        inputs.files fileTree(dir: "doc_src/${lang}", include: 'First_Steps.xml')
-        outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
-                includes: ["${lang}/first_steps.html", "${lang}/OmegaT.css"])
-        onlyIf { execContainerTasks }
-        workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'first-steps'
+ext.makeFirstStepTask = { lang ->
+    def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
+        from layout.projectDirectory.file("src_docs/style/omegat.css")
+        into layout.buildDirectory.dir("docs/greetings/${lang}/")
     }
-
-    firstSteps.dependsOn taskName
-}
-
-ext.instantStartXmls = fileTree(dir: 'doc_src', include: '**/InstantStartGuide.xml')
-instantStartXmls.each { xml ->
-    def lang = xml.parentFile.name
-    def taskName = "instantStartGuide${lang.capitalize()}"
-    tasks.register(taskName, Exec) {
-        inputs.files fileTree(dir: "doc_src/${lang}", includes: ['InstantStartGuide.xml', '**/InstantGuide*png'])
-        outputs.files fileTree(dir: layout.buildDirectory.file('docs/greetings/'),
-                includes: ["${lang}/first_steps.html", "${lang}/images/InstantGuide*png", "${lang}/OmegaT.css"])
-        onlyIf { execContainerTasks }
-        workingDir = 'doc_src'
-        commandLine './docgen', "-Dlanguage=${lang}", "-Dtarget=../build/docs/greetings/${lang}", 'instant-start'
+    def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtmlTask) {
+        description = 'Generate chunked HTML documentation'
+        inputFile.set(layout.projectDirectory.file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
+        outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/first_steps.html"))
+        styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/html.xsl"))
+        finalizedBy(firstStepsHtmlFinally)
     }
-    firstSteps.dependsOn taskName
+    firstSteps.dependsOn(firstStepsHtml)
+    firstSteps.dependsOn(firstStepsHtmlFinally)
 }

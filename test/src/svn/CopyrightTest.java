@@ -63,7 +63,6 @@ public class CopyrightTest extends CommonVerifications {
         List<File> sourceFiles = new ArrayList<>();
         list(Paths.get("src").toFile(), sourceFiles);
         list(Paths.get("test").toFile(), sourceFiles);
-        list(Paths.get("doc_src").toFile(), sourceFiles);
         ByteArrayOutputStream fdata = new ByteArrayOutputStream();
         for (File f : sourceFiles) {
             FileUtils.copyFile(f, fdata);
@@ -86,9 +85,7 @@ public class CopyrightTest extends CommonVerifications {
     protected void list(File dir, List<File> files) {
         for (File f : dir.listFiles()) {
             String fn = f.getName();
-            if (fn.equals("build.xml")) {
-                files.add(f);
-            } else if (fn.endsWith(".properties")) {
+            if (fn.endsWith(".properties")) {
                 if (fn.startsWith("Version") || fn.startsWith("Bundle") || fn.startsWith("project")) {
                     files.add(f);
                 }

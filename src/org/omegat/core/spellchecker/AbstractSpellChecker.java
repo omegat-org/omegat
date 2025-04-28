@@ -225,6 +225,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * Save the word lists to disk
      */
     public void saveWordLists() {
+        if (ignoreFilePath == null || learnedFilePath == null) {
+            return;
+        }
         // Write the ignored and learned words to the disk
         try {
             Files.write(ignoreFilePath, ignoreList);

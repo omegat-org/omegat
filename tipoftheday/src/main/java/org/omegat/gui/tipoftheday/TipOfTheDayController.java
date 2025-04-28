@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura.
+ *  Copyright (C) 2023-2025 Hiroshi Miura.
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -25,106 +25,47 @@
 
 package org.omegat.gui.tipoftheday;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.ResourceBundle;
 
 import javax.swing.AbstractAction;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import tokyo.northside.tipoftheday.TipOfTheDay;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.MenuExtender;
-import org.omegat.util.gui.MenuExtender.MenuKey;
+
+import static org.omegat.gui.tipoftheday.TipOfTheDayModule.ENABLED;
 
 public final class TipOfTheDayController {
-    // FIXME: disabled for 6.1 release
-    private static final boolean ENABLED = false;
     private static final String TIPOFTHEDAY_SHOW_ON_STARTUP = "tipoftheday_show_on_start";
     private static final String TIPOFTHEDAY_CURRENT_TIP = "tipoftheday_current_tip";
-    static final String INDEX_YAML = "tips.yaml";
 
-    @SuppressWarnings("unused")
-    public static void loadPlugins() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-
-            private JMenuItem totdMenu;
-
-            @Override
-            public void onApplicationStartup() {
-                if (ENABLED && TipOfTheDayUtils.hasIndex()) {
-                    initUI();
-                    initMenu();
-                    SwingUtilities.invokeLater(() -> {
-                        TipOfTheDayController.start(false);
-                    });
-                }
-            }
-
-            private void initUI() {
-                ResourceBundle bundle = ResourceBundle.getBundle("org.omegat.gui.tipoftheday.Bundle");
-                for (Enumeration<String> keys = bundle.getKeys(); keys.hasMoreElements();) {
-                    String key = keys.nextElement();
-                    UIManager.getDefaults().put(key, bundle.getObject(key));
-                }
-            }
-
-            private void initMenu() {
-                totdMenu = new JMenuItem();
-                totdMenu.setText(UIManager.getDefaults().getString("TipOfTheDay.menuItemText"));
-                totdMenu.setToolTipText(UIManager.getDefaults().getString("TipOfTheDay.menuToolTipText"));
-                // show Tip of the Day dialog on startup.
-                totdMenu.addActionListener(actionEvent -> TipOfTheDayController.start(true));
-                MenuExtender.addMenuItem(MenuKey.HELP, totdMenu);
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-                if (ENABLED) {
-                    MenuExtender.removeMenuItems(MenuKey.HELP, Collections.singletonList(totdMenu));
-                }
-            }
-        });
-    }
-
-    public static void unloadPlugins() {
-    }
-
-    private TipOfTheDayController() {
-    }
-
-    public static void start(final boolean force) {
-        if (force) {
-            showComponent();
-        }
-        if (Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, ENABLED)) {
+    public void start(final boolean force) {
+        if (force || Preferences.isPreferenceDefault(TIPOFTHEDAY_SHOW_ON_STARTUP, ENABLED)) {
             showComponent();
         }
     }
 
-    public static void showComponent() {
+    public void showComponent() {
         TipOfTheDay totd = new TipOfTheDay(new OmegaTTipOfTheDayModel());
+        totd.setPreferredSize(new Dimension(900, 450));
         String current = Preferences.getPreference(TIPOFTHEDAY_CURRENT_TIP);
         int currentTip = 0;
         if (current != null) {
             try {
                 currentTip = (Integer.parseInt(current) + 1) % totd.getModel().getTipCount();
-            } catch (NumberFormatException ignored) {
+            } catch (NumberFormatException ex) {
+                Log.log(ex);
             }
         }
         totd.setCurrentTip(currentTip);
-
 
         JFrame mainFrame = Core.getMainWindow().getApplicationFrame();
         TipOfTheDayDialog dialog = new TipOfTheDayDialog(mainFrame,
@@ -135,7 +76,12 @@ public final class TipOfTheDayController {
         dialog.nextTipButton.addActionListener(e -> totd.nextTip());
         dialog.closeButton.addActionListener(actionEvent -> close(dialog));
 
-        totd.getActionMap().put("close", new CloseAction(dialog));
+        totd.getActionMap().put("close", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                close(dialog);
+            }
+        });
 
         // set keymap for actions of TipOfTheDay
         totd.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "previousTip");
@@ -148,23 +94,9 @@ public final class TipOfTheDayController {
         close(dialog);
     }
 
-    private static void close(JDialog dialog) {
+    public void close(JDialog dialog) {
         if (dialog.isDisplayable()) {
             dialog.dispose();
-        }
-    }
-
-    @SuppressWarnings("serial")
-    private static class CloseAction extends AbstractAction {
-        JDialog dialog;
-
-        CloseAction(JDialog dialog) {
-            this.dialog = dialog;
-        }
-
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            close(dialog);
         }
     }
 }

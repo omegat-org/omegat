@@ -15,7 +15,7 @@ plugins {
     id 'org.omegat.verification-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
-    id("com.google.osdetector") version "1.7.3"
+    id 'com.google.osdetector' version '1.7.3'
 }
 
 application {
@@ -30,7 +30,7 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "8.12" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
@@ -251,7 +251,8 @@ dependencies {
 }
 
 jar {
-    def omtPlugins = loadProperties(file('Plugins.properties'))
+    def pluginProperties = layout.settingsDirectory.file('Plugins.properties')
+    def omtPlugins = loadProperties(pluginProperties.asFile)
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
@@ -267,12 +268,13 @@ jar {
             attributes('Plugin-Name': name, 'Plugin-Category': category, 'Plugin-Description': description, path)
         }
         def desc = [:]
-        omtPlugins.each { key, val ->
-            if (key.startsWith('plugin.desc')) {
-                desc[key.split('\\.').last()] = val
-            } else if (key != 'plugin') {
-                val.tokenize().each { cls ->
-                    attributes('OmegaT-Plugin': key, cls)
+        omtPlugins.each { pluginKey, pluginValue ->
+            if (pluginKey.startsWith('plugin.desc')) {
+                def descriptionKey = pluginKey.split('\\.').last()
+                desc[descriptionKey] = pluginValue
+            } else if (pluginKey != 'plugin') {
+                pluginValue.tokenize().each { className ->
+                    attributes('OmegaT-Plugin': pluginKey, className)
                 }
             }
         }
@@ -302,12 +304,12 @@ distributions {
             // /docs
             // ...../greetings/<lang>/first_steps.html
             // ...../manuals/<lang>.zip
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 into 'docs'
                 include 'doc-license.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 // ** Caution!! **
                 // 'readme*.txt' and 'changes.txt' are expected
                 // in releases/win32-specific/OmegaT.iss
@@ -327,16 +329,16 @@ distributions {
             project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
                 from(it.outputs) { into 'docs/manuals' }
             }
-            from('scripts') {
+            from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'
             }
-            from('images') {
+            from(layout.settingsDirectory.dir('images')) {
                 into 'images'
             }
-            from('release/plugins-specific') {
+            from(layout.settingsDirectory.dir('release/plugins-specific')) {
                 into 'plugins'
             }
-            from('release/linux-specific') {
+            from(layout.settingsDirectory.dir('release/linux-specific')) {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
                         JAR_SUBST           : omegatJarFilename
@@ -345,19 +347,19 @@ distributions {
                     unix(0755)
                 }
             }
-            from('release/win32-specific') {
+            from(layout.settingsDirectory.dir('release/win32-specific')) {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
                         JAR_SUBST           : omegatJarFilename
                 ])
             }
-            from('lib/licenses') {
+            from(layout.settingsDirectory.dir('lib/licenses')) {
                 into 'lib'
             }
             // system core plugins into modules
             into('modules') {
                 from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
-                from('releases/modules-specific')
+                from(layout.settingsDirectory.dir('releases/modules-specific'))
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -469,6 +471,16 @@ processResources {
     }
 }
 
+def manualLangs = project.property("manualLangs").split(',')
+manualLangs.each { lang ->
+    makeDocumentationTasks(lang)
+}
+
+def firstStepLangs = project.property("firstStepLangs").split(',')
+firstStepLangs.each { lang ->
+    makeFirstStepTask(lang)
+}
+
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
@@ -480,5 +492,5 @@ remotes {
         agent = true
     }
 }
-publishAtomically(name: 'manual', sourceTask: webManual)
+publishAtomically(name: 'webManual', sourceTask: manualHtmls)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)

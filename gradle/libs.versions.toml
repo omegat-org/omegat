@@ -1,14 +1,14 @@
 [versions]
-slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
+slf4j = "2.0.17"
 slf4j-format = "0.5.1"
 groovy = "4.0.26"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.18.0"
-commons_text = "1.13.0"
+commons_text = "1.13.1"
 commons_validator = "1.9.0"
 jsoup = "1.19.1"
-icu4j = { require = "[71.1,76.1[", prefer = "74.2" }
+icu4j = "77.1"
 stax2api = "4.2.2"
 woodstox = "6.5.0"
 languagetool = "6.1"
@@ -16,7 +16,7 @@ languagedetector = "0.6-2"
 lucene = "5.5.5"
 lucene_gosen = "5.5.1"
 checkstyle = "8.45.1"
-guava = "32.1.2-jre"
+guava = "33.4.8-jre"
 annotations = "23.0.0"
 jgit = "6.10.0.202406032230-r"
 svnkit = "1.10.11"
@@ -25,7 +25,7 @@ jackson = "2.16.1"
 bc = "1.80"
 nashorn = "15.6"
 caffeine = "3.2.0"
-wiremock = "3.12.1"
+wiremock = "3.13.0"
 vldocking = "3.1.1"
 xmlunit = "2.10.0"
 assertj = "3.27.3"
@@ -48,8 +48,8 @@ hunspell = "2.1.2"
 xjc = "2.3.9"
 jna = "5.13.0"
 jfa = "1.2.0"
-tipoftheday = "0.4.4"
-flatlaf="3.5.4"
+tipoftheday = "0.5.0"
+flatlaf="3.6"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
@@ -68,7 +68,6 @@ jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
 icu4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
-languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}
 languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
 languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
 languagetool-ar = {group = "org.languagetool", name = "language-ar", version.ref = "languagetool"}
@@ -129,9 +128,10 @@ jgit-bc = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.gpg.bc", version
 bc-prov = {group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bc"}
 bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
+bc-util-jdk18on = {group = "org.bouncycastle", name = "bcutil-jdk18on", version.ref = "bc" }
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
-fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.5.4"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.6.0"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.1"}
 fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
 fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.2"}
@@ -175,11 +175,9 @@ swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", vers
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
 jackson = ["jackson-core", "jackson-databind", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
-ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "eddsa"]
+ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "bc-util-jdk18on", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]
-languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr", "languagetool-en",
-    "languagetool-ja", "languagetool-pl"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]

@@ -138,6 +138,6 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, panel.keepForeignMatches.isSelected());
         Preferences.setPreference(Preferences.PENALTY_FOR_FOREIGN_MATCHES, panel.foreignPenaltySpinner.getValue());
         Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, panel.fuzzyMatchThreshold.getValue());
-        Preferences.setPreference(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, panel.paragraphMatchesFromSegmentedTmxCB);
+        Preferences.setPreference(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, panel.paragraphMatchesFromSegmentedTmxCB.isSelected());
     }
 }

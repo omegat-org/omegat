@@ -29,6 +29,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -286,6 +287,8 @@ public class GlossarySearcherTest extends TestCore {
     public void testEntriesSortEn() {
         Language srcLang = new Language("en_US");
         Language targetLang = new Language("en_GB");
+        final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
+        final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
         ITokenizer tok = new DefaultTokenizer();
         GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, targetLang, false);
         List<GlossaryEntry> entries = new ArrayList<>();
@@ -296,7 +299,7 @@ public class GlossarySearcherTest extends TestCore {
         entries.add(new GlossaryEntry("horse", "catty", "chorse", false, null));
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false);
-        searcher.sortGlossaryEntries(entries);
+        entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
         assertEquals("mikeneko", entries.get(1).getLocText());
@@ -305,7 +308,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("dog", entries.get(3).getSrcText());
         assertEquals("horse", entries.get(4).getSrcText());
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
-        searcher.sortGlossaryEntries(entries);
+        entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
         assertEquals("catty", entries.get(1).getLocText());
@@ -314,7 +317,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("dog", entries.get(3).getSrcText());
         assertEquals("horse", entries.get(4).getSrcText());
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
-        searcher.sortGlossaryEntries(entries);
+        entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
         assertEquals("catty", entries.get(1).getLocText());
@@ -328,6 +331,8 @@ public class GlossarySearcherTest extends TestCore {
     public void testEntriesSortJA() {
         Language lang = new Language("ja_JP");
         Language targetLang = new Language("en_GB");
+        final Collator srcLangCollator = Collator.getInstance(lang.getLocale());
+        final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
         ITokenizer tok = new DefaultTokenizer();
         GlossarySearcher searcher = new GlossarySearcher(tok, lang, targetLang, false);
         List<GlossaryEntry> entries = new ArrayList<>();
@@ -340,7 +345,7 @@ public class GlossarySearcherTest extends TestCore {
         entries.add(new GlossaryEntry("さくら", "cherry blossom", "", false, null));
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false);
-        searcher.sortGlossaryEntries(entries);
+        entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("さくら", entries.get(0).getSrcText());
         assertEquals("トヨタ", entries.get(1).getSrcText());
         assertEquals("トヨタ自動車", entries.get(2).getSrcText());
@@ -349,7 +354,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("up to", entries.get(5).getLocText());
         assertEquals("on", entries.get(6).getLocText());
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
-        searcher.sortGlossaryEntries(entries);
+        entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("cherry blossom", entries.get(0).getLocText());
         assertEquals("toyota", entries.get(1).getLocText());
         assertEquals("toyota motors", entries.get(2).getLocText());
@@ -358,7 +363,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("on", entries.get(5).getLocText());
         assertEquals("up to", entries.get(6).getLocText());
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
-        searcher.sortGlossaryEntries(entries);
+        entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("toyota motors", entries.get(1).getLocText());
         assertEquals("toyota", entries.get(2).getLocText());
         assertEquals("enhance", entries.get(3).getLocText());

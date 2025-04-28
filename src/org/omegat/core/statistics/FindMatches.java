@@ -227,7 +227,8 @@ public class FindMatches {
     public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
             throws StoppedException {
         return search(searchText, fillSimilarityData, stop,
-                !project.getProjectProperties().isSentenceSegmentingEnabled());
+                Preferences.isPreferenceDefault(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, true)
+                        && !project.getProjectProperties().isSentenceSegmentingEnabled());
     }
 
     /**
@@ -487,8 +488,8 @@ public class FindMatches {
             return;
         }
 
-        addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
-                simAdjusted, penalty), tmxName);
+        addNearString(key, entry, comesFrom, fuzzy,
+                new NearString.Scores(similarityStem, similarityNoStem, simAdjusted, penalty), tmxName);
     }
 
     /**

@@ -128,8 +128,8 @@ import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 /**
  * Class for control all editor operations.
@@ -156,7 +156,7 @@ import org.slf4j.LoggerFactory;
 public class EditorController implements IEditor {
 
     /** Local logger. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditorController.class);
+    private static final ILogger LOGGER = LoggerFactory.getLogger(EditorController.class);
 
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
 
@@ -340,9 +340,8 @@ public class EditorController implements IEditor {
         });
 
         // register Swing error logger
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            LOGGER.atError().setMessage("Uncatched exception in thread [{}]").addArgument(t.getName()).setCause(e).log();
-        });
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> LOGGER.atError().setCause(e)
+                .setMessage("Uncatched exception in thread [{0}]").addArgument(t.getName()).log());
 
         EditorPopups.init(this);
 
@@ -1251,7 +1250,7 @@ public class EditorController implements IEditor {
                             Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
                         }
                     } catch (InterruptedException | ExecutionException e) {
-                        LOGGER.atError().setMessage("Exception when validating tags on leave").setCause(e).log();
+                        LOGGER.atError().setCause(e).setMessage("Exception when validating tags on leave").log();
                     }
                 }
             }.execute();

@@ -65,8 +65,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.JComponent;
@@ -130,6 +128,8 @@ import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 /**
  * Class for control all editor operations.
@@ -156,7 +156,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 public class EditorController implements IEditor {
 
     /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());
+    private static final ILogger LOGGER = LoggerFactory.getLogger(EditorController.class);
 
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
 
@@ -304,9 +304,8 @@ public class EditorController implements IEditor {
         });
 
         // register Swing error logger
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
-        });
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> LOGGER.atError().setCause(e)
+                .setMessage("Uncatched exception in thread [{0}]").addArgument(t.getName()).log());
 
         EditorPopups.init(this);
 
@@ -1224,7 +1223,7 @@ public class EditorController implements IEditor {
                             Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
                         }
                     } catch (InterruptedException | ExecutionException e) {
-                        LOGGER.log(Level.SEVERE, "Exception when validating tags on leave", e);
+                        LOGGER.atError().setCause(e).setMessage("Exception when validating tags on leave").log();
                     }
                 }
             }.execute();

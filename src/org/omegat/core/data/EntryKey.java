@@ -95,21 +95,21 @@ public class EntryKey implements Comparable<EntryKey> {
 
     @Override
     public int compareTo(EntryKey o) {
-        int c = ignoreFileContext ? 0 : StringUtil.compareToWithNulls(file, o.file);
+        int c = ignoreFileContext ? 0 : StringUtil.compareToNullable(file, o.file);
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(id, o.id);
+            c = StringUtil.compareToNullable(id, o.id);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(sourceText, o.sourceText);
+            c = StringUtil.compareToNullable(sourceText, o.sourceText);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(prev, o.prev);
+            c = StringUtil.compareToNullable(prev, o.prev);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(next, o.next);
+            c = StringUtil.compareToNullable(next, o.next);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(path, o.path);
+            c = StringUtil.compareToNullable(path, o.path);
         }
         return c;
     }

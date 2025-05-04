@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URI;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -131,8 +132,13 @@ public class SRX implements Serializable {
         File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
-            Files.delete(outFile.toPath());
-            Files.delete(outDir.toPath().resolve(CONF_SENTSEG));
+            if (outFile.exists()) {
+                Files.delete(outFile.toPath());
+            }
+            Path conf = outDir.toPath().resolve(CONF_SENTSEG);
+            if (conf.toFile().exists()) {
+                Files.delete(conf);
+            }
             return;
         }
 

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -28,8 +29,12 @@ package org.omegat.core.segmentation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
 
 /**
  * @author Aaron Madlon-Kay
@@ -53,5 +58,32 @@ public class SRXTest {
         Rule rule = clone.getMappingRules().get(0).getRules().get(0);
         rule.setAfterbreak(rule.getAfterbreak() + "foo");
         assertNotEquals(orig, clone);
+    }
+
+    @Test
+    public void testSRXLoaderSecureCVE_2024_51366() throws IOException {
+        var segmentConf = Files.createTempDirectory("omegat").resolve("segment.conf");
+        // prepare CVE-2024-51366 exploit code
+        String xmlContent = "<java>\n" +
+                "    <object class=\"java.lang.ProcessBuilder\">\n" +
+                "        <array class=\"java.lang.String\" length=\"1\" >\n" +
+                "            <void index=\"0\">\n" +
+                "                <string>gnome-calculator</string>\n" +
+                "            </void>\n" +
+                "        </array>\n" +
+                "        <void method=\"start\"/>\n" +
+                "    </object>\n" +
+                "</java>";
+        Files.writeString(segmentConf, xmlContent);
+        SRX srx = null;
+        try {
+            srx = SRX.loadSRX(segmentConf.toFile());
+        } catch (RuntimeException e) {
+            fail();
+        }
+        if (srx == null) {
+            fail();
+        }
+        assertEquals("\\s", srx.getMappingRules().get(0).getRules().get(0).getAfterbreak());
     }
 }

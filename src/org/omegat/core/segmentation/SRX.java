@@ -129,13 +129,16 @@ public class SRX implements Serializable {
      */
     public static void saveTo(SRX srx, File outFile) throws IOException {
         if (srx == null) {
-            try {
-                Files.delete(outFile.toPath());
-            } catch (IOException e) {
-                Log.logErrorRB(e, "CORE_SRX_ERROR_DELETING_FILE");
+            if (outFile.exists()) {
+                try {
+                    Files.delete(outFile.toPath());
+                } catch (IOException e) {
+                    Log.logErrorRB(e, "CORE_SRX_ERROR_DELETING_FILE");
+                }
             }
             return;
         }
+
         try {
             srx.setVersion(CURRENT_VERSION);
             XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(outFile));

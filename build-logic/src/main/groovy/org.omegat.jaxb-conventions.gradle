@@ -11,7 +11,7 @@ dependencies {
 }
 
 tasks.register('genJAXB') {
-    description = 'Generate classes for loading and manipulating XML formats'
+    description = 'Generates classes for loading and manipulating XML formats.'
     group = 'jaxb'
 }
 

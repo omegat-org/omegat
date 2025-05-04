@@ -25,7 +25,7 @@ tasks.register('genDocIndex', Copy) {
          'name'  : Locale.forLanguageTag(props.parentFile.name.replace('_', '-')).getDisplayName(),
          'status': docVersion == version ? 'up-to-date' : 'out-of-date']
     }
-    description = 'Generate the docs index file'
+    description = 'Generates the HTML docs index file.'
     inputs.files docPropsFiles, inputTemplate
     from inputTemplate
     into layout.buildDirectory.dir("tmp/manual/")
@@ -40,12 +40,12 @@ tasks.register('genDocIndex', Copy) {
 }
 
 tasks.register('manualZips') {
-    description = 'Build ZIP manuals to bundle into application.'
+    description = 'Builds the zipped manuals to bundle into the application.'
     group = 'other'
 }
 
 tasks.register('manualHtmls') {
-    description = 'Build HTML manuals and zip for all languages.'
+    description = 'Builds and zips the HTML manuals for all languages.'
     finalizedBy(genDocIndex)
     group = 'documentation'
 }
@@ -58,20 +58,20 @@ ext.makeDocumentationTasks = { lang ->
     }
 
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
-        description = 'Copy Images and CSS file to target'
+        description = 'Copies images and CSS files to target.'
         into layout.buildDirectory.dir("docs/manual/${lang}")
         from new File(documentRootDir, 'style/omegat.css')
     }
 
     def copyImages = tasks.register("copyImages${lang.capitalize()}", Copy) {
-        description 'Copy Images and CSS file to target'
+        description 'Copies images and CSS files to target.'
         into layout.buildDirectory.dir("docs/manual/${lang}/images/")
         from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
         from layout.projectDirectory.file("images/OmegaT.svg")
     }
 
     def docbookHtml = tasks.register("docbookHtml${lang.capitalize()}", DocbookHtmlTask) {
-        description = 'Generate chunked HTML documentation'
+        description = 'Generates a chunked HTML documentation.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/xhtml.xsl"))
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
@@ -79,7 +79,7 @@ ext.makeDocumentationTasks = { lang ->
     }
 
     def whcToc = tasks.register("whcToc${lang.capitalize()}", TransformationTask) {
-        description = 'Generate whc header and index'
+        description = 'Generates a whc header and index.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-toc.xsl"))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
@@ -87,7 +87,7 @@ ext.makeDocumentationTasks = { lang ->
     }
 
     def whcIndex = tasks.register("whcIndex${lang.capitalize()}", TransformationTask) {
-        description = 'Generate whc header and index'
+        description = 'Generates a whc header and index.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-index.xsl"))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
@@ -95,14 +95,14 @@ ext.makeDocumentationTasks = { lang ->
     }
 
     def whcHeader = tasks.register("whcHeader${lang.capitalize()}", TransformationTask) {
-        description = 'Generate whc header and index'
+        description = 'Generates a whc header and index.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-header.xsl"))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
         dependsOn(copyCss, docbookInclude)
     }
     def buildDocumentTask = tasks.register("manual${lang.capitalize()}", WhcTask) {
-        description = 'Build whc contents'
+        description = 'Builds the whc contents.'
         tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
         inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
         headerFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
@@ -177,7 +177,7 @@ ext.makeDocumentationTasks = { lang ->
 }
 
 tasks.register('firstSteps') {
-    description = 'Build first pages for all languages at src/docs/greetings/.'
+    description = 'Builds the introductory page for all languages at src/docs/greetings/.'
     group = 'documentation'
 }
 assemble.dependsOn(firstSteps)
@@ -188,7 +188,7 @@ ext.makeFirstStepTask = { lang ->
         into layout.buildDirectory.dir("docs/greetings/${lang}/")
     }
     def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtmlTask) {
-        description = 'Generate chunked HTML documentation'
+        description = 'Generates a chunked HTML documentation.'
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/greeting/${lang}/First_Steps.xml"))
         outputFile.set(layout.buildDirectory.file("docs/greetings/${lang}/first_steps.html"))
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/html.xsl"))

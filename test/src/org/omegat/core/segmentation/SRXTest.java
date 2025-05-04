@@ -76,14 +76,8 @@ public class SRXTest {
                 "</java>";
         Files.writeString(segmentConf, xmlContent);
         SRX srx = null;
-        try {
-            srx = SRX.loadSRX(segmentConf.toFile());
-        } catch (RuntimeException e) {
-            fail();
-        }
-        if (srx == null) {
-            fail();
-        }
+        srx = SRX.loadSRX(segmentConf.toFile());
+        assertNotNull(srx);
         assertEquals("\\s", srx.getMappingRules().get(0).getRules().get(0).getAfterbreak());
     }
 }

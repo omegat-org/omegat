@@ -28,10 +28,7 @@
 package org.omegat.core.segmentation;
 
 import java.beans.ExceptionListener;
-import java.beans.XMLDecoder;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +37,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -101,6 +99,7 @@ public class SRX implements Serializable {
      * Please do not call directly unless you know what you are doing.
      */
     public SRX() {
+        // should not use the default constructor.
     }
 
     public SRX copy() {
@@ -132,8 +131,8 @@ public class SRX implements Serializable {
         File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
-            outFile.delete();
-            new File(outDir, CONF_SENTSEG).delete();
+            Files.delete(outFile.toPath());
+            Files.delete(outDir.toPath().resolve(CONF_SENTSEG));
             return;
         }
 
@@ -192,13 +191,9 @@ public class SRX implements Serializable {
      * valid.
      **/
     public static SRX loadFromDir(File configDir) {
-        File inFile;
-        try {
-            inFile = new File(configDir, SRX_SENTSEG);
-            if (inFile.exists()) {
-                return loadSrxFile(inFile.toURI());
-            }
-        } catch (Exception ignored) {
+        File inFile = new File(configDir, SRX_SENTSEG);
+        if (inFile.exists()) {
+            return loadSrxFile(inFile.toURI());
         }
 
         // If file was not present or not readable
@@ -212,57 +207,70 @@ public class SRX implements Serializable {
         return null;
     }
 
+
     /**
      * Loads segmentation rules from an XML file. If there's an error loading a
-     * file, it calls <code>getDefault</code>.
+     * file, it calls <code>initDefaults</code>.
      * <p>
      * Since 1.6.0 RC8 it also checks if the version of segmentation rules saved
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    static SRX loadConfFile(File configFile, File configDir) {
-        SRX res;
-        try {
-            SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
-            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
-                res = (SRX) xmldec.readObject();
-            }
-
-            if (myel.isExceptionOccured()) {
-                StringBuilder sb = new StringBuilder();
-                for (Exception ex : myel.getExceptionsList()) {
-                    sb.append("    ");
-                    sb.append(ex);
-                    sb.append("\n");
-                }
-                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                res = SRX.getDefault();
-            } else {
-                // checking the version
-                if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-                    // yeap, the segmentation config file is of the older
-                    // version
-
-                    // initing defaults
-                    SRX defaults = SRX.getDefault();
-                    // and merging them into loaded rules
-                    res = merge(res, defaults);
-                }
-                Log.logInfoRB("SRX_RULE_FROM", configFile);
-            }
-        } catch (Exception e) {
-            // silently ignoring FNF
-            if (!(e instanceof FileNotFoundException)) {
-                Log.log(e);
-            }
-            res = SRX.getDefault();
+    public static SRX loadConfFile(File configFile, File configDir) {
+        SRX srx = loadRulesFromFile(configFile);
+        if (srx == null) {
+            srx = getDefault();
         }
         try {
-            saveToSrx(res, configDir);
-        } catch (Exception o3) {
-            Log.log(o3); // detail why conversion failed, but continue
+            saveToSrx(srx, configDir);
+        } catch (IOException e) {
+            Log.log(e);
         }
-        return res;
+        return srx;
+    }
+
+    /**
+     * Loads rules from the given XML file using the configured SAXParserFactory and Unmarshaller.
+     */
+    private static SRX loadRulesFromFile(File configFile) {
+        if (!configFile.exists()) {
+            return null;
+        }
+        XmlMapper mapper = new XmlMapper();
+        mapper.getFactory().getXMLInputFactory().setProperty(
+                javax.xml.stream.XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        mapper.getFactory().getXMLInputFactory().setProperty(
+                javax.xml.stream.XMLInputFactory.SUPPORT_DTD, false);
+        try {
+            SRX srx = mapper.readValue(configFile, SRX.class);
+            Log.logInfoRB("SRX_RULE_FROM", configFile.getAbsolutePath());
+            if (isOlderVersion(srx)) {
+                return mergeWithDefaults(srx);
+            }
+            return srx;
+        } catch (IOException ignored) {
+            // ignored
+        }
+        return null;
+
+    }
+
+    /**
+     * Checks if the loaded SRX version is older than the current version.
+     */
+    private static boolean isOlderVersion(SRX loadedRules) {
+        if (loadedRules.getVersion() == null) {
+            return false;
+        }
+        return CURRENT_VERSION.compareTo(loadedRules.getVersion()) > 0;
+    }
+
+    /**
+     * Merges an older version of SRX rules with the default rules.
+     */
+    private static SRX mergeWithDefaults(SRX loadedRules) {
+        SRX defaultRules = SRX.getDefault();
+        return merge(loadedRules, defaultRules);
     }
 
     private static SRX loadSrxFile(URI rulesUri) {
@@ -400,7 +408,7 @@ public class SRX implements Serializable {
                 return mr.getRules();
             }
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -601,7 +609,7 @@ public class SRX implements Serializable {
      * Correspondences between languages and their segmentation rules. Each
      * element is of class {@link MapRule}.
      */
-    private List<MapRule> mappingRules = new ArrayList<MapRule>();
+    private List<MapRule> mappingRules = new ArrayList<>();
 
     /**
      * Returns all mapping rules (of class {@link MapRule}) at once:

@@ -28,24 +28,6 @@
 
 package org.omegat.core.segmentation;
 
-import java.beans.ExceptionListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.xml.stream.XMLInputFactory;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -54,14 +36,27 @@ import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
-
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-
 import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
+import org.omegat.util.Language;
+import org.omegat.util.Log;
+
+import javax.xml.stream.XMLInputFactory;
+import java.beans.ExceptionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
@@ -85,7 +80,9 @@ public class SRX implements Serializable {
         // Modifying a global object leads breakage of SuperTMXMerge
         // library.
         // https://sourceforge.net/p/omegat/bugs/1170/
-        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        // prevent XXE attacks
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+        xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
         mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
@@ -200,7 +197,11 @@ public class SRX implements Serializable {
     public static SRX loadFromDir(File configDir) {
         File inFile = new File(configDir, SRX_SENTSEG);
         if (inFile.exists()) {
-            return loadSrxFile(inFile.toURI());
+            try (InputStream inputStream = Files.newInputStream(inFile.toPath())) {
+                return loadSrxInputStream(inputStream);
+            } catch (IOException e) {
+                Log.log(e);
+            }
         }
 
         // If file was not present or not readable
@@ -243,12 +244,7 @@ public class SRX implements Serializable {
         if (!configFile.exists()) {
             return null;
         }
-        XmlMapper mapper = new XmlMapper();
-        mapper.getFactory().getXMLInputFactory().setProperty(
-                javax.xml.stream.XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
-        mapper.getFactory().getXMLInputFactory().setProperty(
-                javax.xml.stream.XMLInputFactory.SUPPORT_DTD, false);
-        try {
+       try {
             SRX srx = mapper.readValue(configFile, SRX.class);
             Log.logInfoRB("SRX_RULE_FROM", configFile.getAbsolutePath());
             if (isOlderVersion(srx)) {
@@ -280,15 +276,6 @@ public class SRX implements Serializable {
         return merge(loadedRules, defaultRules);
     }
 
-    private static SRX loadSrxFile(URI rulesUri) {
-        try (InputStream inputStream = Files.newInputStream(Paths.get(rulesUri))) {
-            return loadSrxInputStream(inputStream);
-        } catch (Exception e) {
-            Log.log(e);
-        }
-        return null;
-    }
-
     private static SRX loadSrxInputStream(InputStream io) throws IOException {
         Srx srx = mapper.readValue(io, Srx.class);
         HashMap<String, List<Rule>> mapping = new HashMap<>();
@@ -297,15 +284,15 @@ public class SRX implements Serializable {
             mapping.put(languagerule.getLanguagerulename(),
                     languagerule.getRule().stream().map(Rule::new).collect(Collectors.toList()));
         }
-        SRX res = new SRX();
-        res.setSegmentSubflows(!"no".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
-        res.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
-        res.setVersion(srx.getVersion());
-        res.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
+        SRX srxObject = new SRX();
+        srxObject.setSegmentSubflows(!"no".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
+        srxObject.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
+        srxObject.setVersion(srx.getVersion());
+        srxObject.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
                 .map(languagemap -> new MapRule(languagemap.getLanguagerulename(),
                         languagemap.getLanguagepattern(), mapping.get(languagemap.getLanguagerulename())))
                 .collect(Collectors.toList()));
-        return res;
+        return srxObject;
     }
 
     /**
@@ -705,12 +692,7 @@ public class SRX implements Serializable {
             return false;
         }
         if (version == null) {
-            if (other.version != null) {
-                return false;
-            }
-        } else if (!version.equals(other.version)) {
-            return false;
-        }
-        return true;
+            return other.version == null;
+        } else return version.equals(other.version);
     }
 }

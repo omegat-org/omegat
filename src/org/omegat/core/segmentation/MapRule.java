@@ -194,7 +194,12 @@ public class MapRule implements Serializable {
     }
 
     /**
-     * Indicates whether some other MapRule is "equal to" this one.
+     * Compares this MapRule instance to the specified object for equality.
+     * Two MapRule objects are considered equal if their pattern, language,
+     * and list of rules are all equal.
+     *
+     * @param obj the object to be compared for equality with this MapRule
+     * @return true if the specified object is equal to this MapRule, false otherwise
      */
     public boolean equals(Object obj) {
         if (!(obj instanceof MapRule)) {

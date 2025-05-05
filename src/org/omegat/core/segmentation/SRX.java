@@ -647,6 +647,14 @@ public class SRX implements Serializable {
         version = value;
     }
 
+    /**
+     * Computes the hash code for the SRX object.
+     * <p>
+     * The hash code is calculated based on the state of the instance variables
+     * of the object.
+     *
+     * @return an integer value representing the hash code of this SRX object
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -660,15 +668,21 @@ public class SRX implements Serializable {
         return result;
     }
 
+    /**
+     * Compares this SRX object to the specified object.
+     * <p>
+     * The result is true if and only if the argument is an SRX object that
+     * represents the same data as this object.
+     *
+     * @param obj the reference object with which to compare
+     * @return {@code true} if this object is the same as the obj argument, {@code false} otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof SRX)) {
             return false;
         }
         SRX other = (SRX) obj;
@@ -693,6 +707,7 @@ public class SRX implements Serializable {
         }
         if (version == null) {
             return other.version == null;
-        } else return version.equals(other.version);
+        }
+        return version.equals(other.version);
     }
 }

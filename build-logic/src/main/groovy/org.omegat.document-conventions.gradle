@@ -114,7 +114,7 @@ ext.makeDocumentationTasks = { lang ->
                 '--panel-background-color', '#FDFDFD',
         ])
         contentFiles.set(fileTree(dir: layout.buildDirectory.dir("tmp/manual/${lang}/xhtml5"), include: '*.html', exclude: '_*'))
-        outputDirectory.set(layout.buildDirectory.dir("manual/${lang}"))
+        outputDirectory.set(layout.buildDirectory.dir("docs/manual/${lang}"))
         dependsOn(whcHeader, whcToc, whcIndex)
         group('documentation')
     }

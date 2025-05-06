@@ -305,7 +305,7 @@ public class MarkerController {
         if (doc == null) {
             return;
         }
-        doc.trustedChangesInProgress = true;
+        doc.setTrustedChangesInProgress(true);
         try {
             for (int i = 0; i < evs.size(); i++) {
                 EntryMarks ev = evs.get(i);
@@ -325,7 +325,7 @@ public class MarkerController {
                 }
             }
         } finally {
-            doc.trustedChangesInProgress = false;
+            doc.setTrustedChangesInProgress(false);
         }
     }
 

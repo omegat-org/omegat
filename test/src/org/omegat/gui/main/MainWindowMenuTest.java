@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -58,9 +59,24 @@ import org.omegat.core.TestCore;
  */
 public class MainWindowMenuTest extends TestCore {
     /**
-     * Check MainWindow for all menu items action handlers exist.
+     * Tests the actions defined in the main menu of the application to ensure
+     * that each menu item has a corresponding action handler method implemented
+     * in the `MainWindowMenuHandler` class.
+     * <p>
+     * It checks for the following:
+     * - Each menu item has an associated action method in the handler class
+     *   with the naming convention `<menuItemName>ActionPerformed`.
+     * - The action methods can optionally accept a single integer argument
+     *   representing a modifier key.
+     * - All public, non-static methods in the handler class are used by the
+     *   menu items, ensuring no unused action handlers exist.
+     * Verifies:
+     * - There are more than 30 menu items in the main menu.
+     * - All defined menu items have corresponding action handler methods.
+     * - There are no unused public action handler methods in the handler class.
      *
-     * @throws Exception
+     * @throws Exception if any menu item lacks a corresponding action handler
+     *                   method or any unexpected error occurs during the test.
      */
     @Test
     public void testMenuActions() throws Exception {
@@ -101,6 +117,24 @@ public class MainWindowMenuTest extends TestCore {
                 + existsMethods.keySet(), existsMethods.isEmpty());
     }
 
+    /**
+     * Tests that all menu actions referenced in the application's main menu have
+     * corresponding action handler methods implemented in the `MainWindowMenuHandler`
+     * class.
+     * <p>
+     * This test scans the source code for all invocations of menu actions and verifies:
+     * - Each menu action has a corresponding handler method with the naming convention
+     *   `<menuItemName>ActionPerformed`.
+     * - The handler methods may optionally accept a single integer argument, representing
+     *   a modifier key.
+     * - If no matching handler method is found, the test fails with an assertion error.
+     *
+     * The method uses a source code processing utility to locate method calls in all
+     * `.java` files under the `src` directory for validation.
+     *
+     * @throws Exception if the source code processing fails or any menu action lacks
+     *                   a corresponding handler method.
+     */
     @Test
     public void testMenuActions_invokeActions() throws Exception {
         Pattern pattern = Pattern.compile("getMainMenu\\(\\).invokeAction\\(\\s*\"([^\"]+)\"\\s*,");
@@ -126,9 +160,7 @@ public class MainWindowMenuTest extends TestCore {
     }
 
     /**
-     * Process the text content of all .java files under /src. Also check
-     * DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE for security reasons.
-     * And check invisible space character.
+     * Process the text content of all .java files under /src with the given consumer.
      *
      * @param consumer
      *            A function that accepts the file path and content

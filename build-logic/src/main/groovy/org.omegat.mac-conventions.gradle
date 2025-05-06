@@ -16,7 +16,7 @@ tasks.register('genMac') {
     def outDir = layout.buildDirectory.file("appbundler").get().toString()
     def appName = appName
     def appClass = mainClassName
-    description = 'Generate the Mac .app skeleton. Depends AppBundler (https://github.com/TheInfiniteKind/appbundler)'
+    description = 'Generates the macOS .app skeleton. Depends on AppBundler (https://github.com/TheInfiniteKind/appbundler).'
     outputs.dir layout.buildDirectory.file("appbundler")
     doLast {
         ant.taskdef(name: 'appbundler',
@@ -90,7 +90,7 @@ ext.makeMacTask = { args ->
     def parentTask = tasks.getByName(args.parentTaskName)
 
     def distZipTask = tasks.register(distZipTaskName, Zip) {
-        description = "Create Mac distribution for ${args.name}"
+        description = "Creates a macOS distribution for ${args.name}."
         // mac specific contents
         from(genMac.outputs) {
             exclude '**/MacOS/OmegaT', '**/Info.plist', '**/java.entitlements'
@@ -140,7 +140,7 @@ ext.makeMacTask = { args ->
     parentTask.dependsOn distZipTask
 
     def installTask = tasks.register(installTaskName, Sync) {
-        description = 'Build a Mac distribution.'
+        description = 'Builds the macOS distribution.'
         onlyIf {
             condition(!args.jrePath || !args.jrePath.empty, 'JRE not found')
         }
@@ -190,7 +190,7 @@ ext.makeMacTask = { args ->
     }
 
     def signedInstallTask = tasks.register(signedInstallTaskName, Sync) {
-        description = 'Build a signed Mac distribution. Requires an Apple Developer Account.'
+        description = 'Builds the signed macOS distribution. Requires an Apple Developer Account.'
         onlyIf {
             // Set this in e.g. local.properties
             conditions([project.hasProperty('macCodesignIdentity'), 'Code signing property not set'],

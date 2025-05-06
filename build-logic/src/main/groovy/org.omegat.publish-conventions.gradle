@@ -9,7 +9,7 @@ ext.htdocs = '/home/project-web/omegat/htdocs'
 
 ext.publishAtomically = { args ->
     tasks.register("publish${args.name.capitalize()}", Exec) {
-        description = "Copy ${args.name} to SourceForge web."
+        description = "Copies ${args.name} to SourceForge web."
         dependsOn args.sourceTask
         group = 'omegat release'
         doLast {
@@ -88,7 +88,7 @@ signing {
 }
 
 tasks.register('publishVersion') {
-    description = 'Update the version considered current by the version check.'
+    description = 'Updates the version considered current by the version check.'
     group = 'omegat release'
     doLast {
         ssh.run {

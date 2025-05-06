@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2022 miurahr.
+ *  Copyright (C) 2022-2025 Hiroshi Miura
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -26,6 +26,9 @@
 package org.omegat.core.search;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,6 +45,7 @@ import org.junit.Test;
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.RealProject;
@@ -74,41 +79,163 @@ public class SearcherTest {
     }
 
     @Test
+    public void testSearchStringExactMatch() throws Exception {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, false);
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("OmegaT is great"));
+        assertFalse(searcher.searchString("omegat is great")); // case-sensitive
+    }
+
+    @Test
+    public void testSearchStringKeywordMatch() throws Exception {
+        addSTE(fi, "id1", "OmegaT is great software", null);
+        SearchExpression s = createSearchExpression("great software", SearchExpression.SearchExpressionType.KEYWORD, false, false);
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("great software"));
+        assertTrue(searcher.searchString("OmegaT is great software"));
+        assertFalse(searcher.searchString("OmegaT is average software"));
+    }
+
+    @Test
+    public void testSearchStringRegexMatch() throws Exception {
+        addSTE(fi, "id1", "OmegaT version 4.3.2", null);
+        SearchExpression s = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpression.SearchExpressionType.REGEXP, false, false);
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("OmegaT version 4.3.2"));
+        assertFalse(searcher.searchString("OmegaT version 4.3")); // incomplete match
+    }
+
+    @Test
+    public void testSearchStringWidthInsensitive() throws Exception {
+        addSTE(fi, "id1", "OmegaT\u2009is\u2009great", null); // Using narrow no-break spaces
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, false, true); // width-insensitive
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("OmegaT is great")); // width-insensitive match
+    }
+
+    @Test
     public void testSearch() throws Exception {
-        addSTE(fi, "id1", "List of sections in %s", "Liste des sections de %s", false);
+        addSTE(fi, "id1", "List of sections in %s", "Liste des sections de %s");
+        SearchExpression s = createSearchExpression("list", SearchExpression.SearchExpressionType.KEYWORD, false, true);
+        Searcher searcher = startSearcher(s);
+        List<SearchResultEntry> result = searcher.getSearchResults();
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    public void testGetExpressionExactMatch() throws Exception {
+        SearchExpression expression = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, false);
+        Searcher searcher = startSearcher(expression);
+        assertSame(expression, searcher.getExpression());
+    }
+
+    @Test
+    public void testGetExpressionKeywordMatch() throws Exception {
+        SearchExpression expression = createSearchExpression("great software", SearchExpression.SearchExpressionType.KEYWORD, false, false);
+        Searcher searcher = startSearcher(expression);
+        assertSame(expression, searcher.getExpression());
+    }
+
+    @Test
+    public void testGetExpressionRegexMatch() throws Exception {
+        SearchExpression expression = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpression.SearchExpressionType.REGEXP, false, true);
+        Searcher searcher = startSearcher(expression);
+        assertSame(expression, searcher.getExpression());
+    }
+
+    @Test
+    public void testSearchStringEmptyInput() throws Exception {
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, false);
+        Searcher searcher = startSearcher(s);
+        assertFalse(searcher.searchString("")); // Should return false for empty input
+    }
+
+    @Test
+    public void testSearchStringNullInput() throws Exception {
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, false);
+        Searcher searcher = startSearcher(s);
+        assertFalse(searcher.searchString(null)); // Should return false for null input
+    }
+
+    @Test
+    public void testSearchStringNoMatch() throws Exception {
+        addSTE(fi, "id1", "OmegaT is fantastic", null);
+        SearchExpression s = createSearchExpression("awesome", SearchExpression.SearchExpressionType.EXACT, false, false);
+        Searcher searcher = startSearcher(s);
+        assertFalse(searcher.searchString("OmegaT is fantastic")); // No match expected
+    }
+
+    @Test
+    public void testSearchStringPartialRegexMatch() throws Exception {
+        addSTE(fi, "id1", "OmegaT version 4.3.2-beta", null);
+        SearchExpression s = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpression.SearchExpressionType.REGEXP, false, false);
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("OmegaT version 4.3.2-beta")); // Partial version match is valid
+    }
+
+    @Test
+    public void testSearchStringMultipleMatches() throws Exception {
+        addSTE(fi, "id1", "OmegaT is great, OmegaT helps you translate", null);
+        SearchExpression s = createSearchExpression("OmegaT", SearchExpression.SearchExpressionType.KEYWORD, false, false);
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("OmegaT is great, OmegaT helps you translate"));
+        assertEquals(2, searcher.getFoundMatches().size()); // Two matches expected
+    }
+
+    @Test
+    public void testSearchStringCollapseResults() throws Exception {
+        addSTE(fi, "id1", "OmegaT OmegaT OmegaT", null);
+        SearchExpression s = createSearchExpression("OmegaT", SearchExpression.SearchExpressionType.KEYWORD, false, false);
+        Searcher searcher = startSearcher(s);
+        assertTrue(searcher.searchString("OmegaT OmegaT OmegaT", true)); // Ensure collapseResults is true
+        assertEquals(3, searcher.getFoundMatches().size()); // All matches should collapse into one
+    }
+
+    private static @NotNull SearchExpression createSearchExpression(String text, SearchExpression.SearchExpressionType type, boolean caseSensitive, boolean widthInsensitive) {
         SearchExpression s = new SearchExpression();
-        s.text = "list";
-        s.searchExpressionType = SearchExpression.SearchExpressionType.KEYWORD;
+        s.text = text;
+        s.searchExpressionType = type;
         s.mode = SearchMode.SEARCH;
         s.glossary = false;
         s.memory = true;
         s.tm = true;
         s.allResults = true;
-        s.fileNames = false;
-        s.caseSensitive = false;
+        s.fileNames = true;
+        s.caseSensitive = caseSensitive;
         s.spaceMatchNbsp = false;
         s.searchSource = true;
         s.searchTarget = true;
         s.searchTranslated = true;
         s.searchUntranslated = true;
-        s.widthInsensitive = true;
+        s.widthInsensitive = widthInsensitive;
         s.excludeOrphans = false;
         s.replacement = null;
-        Searcher searcher = new Searcher(Core.getProject(), s);
-        searcher.setThread(new LongProcessThread());
-        searcher.search();
-        List<SearchResultEntry> result = searcher.getSearchResults();
-        assertEquals(1, result.size());
+        return s;
     }
 
-    private void addSTE(IProject.FileInfo fi, String id, String source, String translation,
-                          boolean translationFuzzy) {
+    private @NotNull Searcher startSearcher(SearchExpression s) throws Exception {
+        Searcher searcher = new Searcher(proj, s);
+        searcher.setThread(new SearchTestThread());
+        searcher.search();
+        return searcher;
+    }
+
+    private SourceTextEntry addSTE(IProject.FileInfo fi, String id, String source, String translation) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
                 new ArrayList<>());
-        ste.setSourceTranslationFuzzy(translationFuzzy);
+        ste.setSourceTranslationFuzzy(false);
         fi.entries.add(ste);
         proj.getAllEntries().add(ste);
+        return ste;
+    }
+
+    private void setTranslation(SourceTextEntry ste) {
+        PrepareTMXEntry prepareTMXEntry = new PrepareTMXEntry();
+        prepareTMXEntry.source = ste.getSrcText();
+        prepareTMXEntry.translation = ste.getSourceTranslation();
+        proj.setTranslation(ste, prepareTMXEntry, true, null);
     }
 
     protected static class RealProjectWithTMX extends RealProject {
@@ -123,6 +250,68 @@ public class SearcherTest {
 
         public List<FileInfo> getProjectFilesList() {
             return projectFilesList;
+        }
+    }
+
+    @Test
+    public void testGetSearchResultsEmpty() throws Exception {
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, false);
+        Searcher searcher = startSearcher(s);
+        List<SearchResultEntry> results = searcher.getSearchResults();
+        assertTrue(results.isEmpty()); // No search has been executed yet
+    }
+
+    @Test
+    public void testGetSearchResultsExactMatch() throws Exception {
+        setTranslation(addSTE(fi, "id1", "OmegaT is great", "OmegaT est génial"));
+        setTranslation(addSTE(fi, "id2", "OmegaT is useful", "OmegaT est utile"));
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, false);
+        Searcher searcher = startSearcher(s);
+
+        List<SearchResultEntry> results = searcher.getSearchResults();
+        assertEquals(2, results.size());
+        SearchResultEntry entry = results.get(0);
+        assertEquals("OmegaT is great", entry.getSrcText());
+        assertEquals("OmegaT est génial", entry.getTranslation());
+    }
+
+    @Test
+    public void testGetSearchResultsKeywordMatch() throws Exception {
+        setTranslation(addSTE(fi, "id1", "OmegaT is great software", "OmegaT est un génial logiciel"));
+        setTranslation(addSTE(fi, "id2", "Great tools are appreciated", "Les bons outils sont appréciés"));
+        SearchExpression s = createSearchExpression("great software", SearchExpression.SearchExpressionType.KEYWORD, false, false);
+        Searcher searcher = startSearcher(s);
+
+        List<SearchResultEntry> results = searcher.getSearchResults();
+        assertEquals(2, results.size());
+        SearchResultEntry entry = results.get(0);
+        assertEquals("OmegaT is great software", entry.getSrcText());
+        assertEquals("OmegaT est un génial logiciel", entry.getTranslation());
+    }
+
+    @Test
+    public void testGetSearchResultsAfterModification() throws Exception {
+        addSTE(fi, "id1", "OmegaT is great", "OmegaT est génial");
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, false);
+        Searcher searcher = startSearcher(s);
+
+        List<SearchResultEntry> initialResults = searcher.getSearchResults();
+        assertEquals(1, initialResults.size());
+
+        addSTE(fi, "id2", "OmegaT is fantastic", "OmegaT est fantastique");
+        searcher.search();
+
+        List<SearchResultEntry> updatedResults = searcher.getSearchResults();
+        assertEquals(1, updatedResults.size()); // Only matches "OmegaT is great"
+    }
+
+    static class SearchTestThread extends LongProcessThread {
+        @Override
+        public void run() {
+            try {
+                checkInterrupted();
+            } catch (Exception ignored) {
+            }
         }
     }
 }

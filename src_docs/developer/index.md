@@ -2,7 +2,11 @@
 
 # Table of contents
 
-* [Variety of Contribution](00.ContributingEcoSystem.md)
+## First steps
+
+* [About OmegaT](0.AboutOmegaT.md)
+* [Project Philosophy and policy](07.PhilosophyAndPolicy.md)
+* [How to contribute](00.ContributingEcoSystem.md)
 * [Guideline for welcoming beginners](06.GuidelineForWelcomingBeginners.md)
  
 ## How to build and contribute OmegaT
@@ -13,6 +17,7 @@
 * [Coding styles](30.CodingStyles.md)
 * [Source tree](04.SourceTree.md)
 * [Versioning](05.Versioning.md)
+* [Manner of the Pull Request](07.MannerOfThePullRequest.md)]
 
 ## How to create plugin
 

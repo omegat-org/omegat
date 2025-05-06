@@ -25,9 +25,12 @@
 
 package org.omegat.gui.matches;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -57,5 +60,14 @@ public class MatchesTextAreaTest extends TestCoreGUI {
                         "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY") + "\\s*>");
         window.textBox("matches_pane").requireText(pattern);
         closeProject();
+    }
+
+    @Override
+    protected void onSetUp() throws Exception {
+        super.onSetUp();
+        tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
+        File projSrc = new File(PROJECT_PATH);
+        FileUtils.copyDirectory(projSrc, tmpDir);
+        FileUtils.forceDeleteOnExit(tmpDir);
     }
 }

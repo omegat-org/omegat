@@ -56,8 +56,10 @@ public class Document3 extends DefaultStyledDocument {
     private final EditorController controller;
 
     /** Position of active translation in text. */
-    @Nullable Position activeTranslationBeginM1;
-    @Nullable Position activeTranslationEndP1;
+    @Nullable
+    Position activeTranslationBeginM1;
+    @Nullable
+    Position activeTranslationEndP1;
 
     /**
      * Flag for check internal changes of content, which should be always
@@ -177,7 +179,8 @@ public class Document3 extends DefaultStyledDocument {
      *
      * @return active translation text
      */
-    @Nullable String extractTranslation() {
+    @Nullable
+    String extractTranslation() {
         if (!isEditMode()) {
             return null;
         }

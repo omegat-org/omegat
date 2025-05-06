@@ -17,6 +17,7 @@
 * [Coding styles](30.CodingStyles.md)
 * [Source tree](04.SourceTree.md)
 * [Versioning](05.Versioning.md)
+* [Manner of the Pull Request](07.MannerOfThePullRequest.md)]
 
 ## How to create plugin
 

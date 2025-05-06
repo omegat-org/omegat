@@ -404,7 +404,7 @@ distributions {
 }
 
 tasks.register('mac') {
-    description = 'Build the Mac distributions.'
+    description = 'Builds the Mac distributions.'
     group = 'omegat distribution'
 }
 makeHunspellSignTask()
@@ -412,7 +412,7 @@ makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE, parentTaskName: 
 makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskName: 'mac')
 
 tasks.register('linux') {
-    description = 'Build the Linux distributions.'
+    description = 'Builds the Linux distributions.'
     group = 'omegat distribution'
     dependsOn linuxDebDist
     dependsOn linuxRpmDist
@@ -426,7 +426,7 @@ startScripts.enabled = false
 application.executableDir = ""
 
 tasks.register('win') {
-    description = 'Build the Windows distributions.'
+    description = 'Builds the Windows distributions.'
     group = 'omegat distribution'
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE', parentTask: 'win')

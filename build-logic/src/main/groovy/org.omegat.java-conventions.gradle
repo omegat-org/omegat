@@ -3,6 +3,7 @@ plugins {
     id 'eclipse'
     id 'checkstyle'
     id 'jacoco'
+    id 'pmd'
     id 'com.diffplug.spotless'
     id 'com.github.spotbugs'
     id 'org.omegat.common-utilities'
@@ -153,4 +154,13 @@ tasks.withType(Sync).configureEach {
 }
 tasks.withType(Zip).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+pmd {
+    toolVersion = '6.38.0'
+    ruleSetFiles = layout.settingsDirectory.files("config/pmd/ruleset.xml")
+}
+
+pmdMain {
+    exclude '**/gen/**'
 }

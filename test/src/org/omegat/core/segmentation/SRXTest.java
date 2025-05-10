@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               2024 Hiroshi Miura
+               2024-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,6 +27,7 @@
 package org.omegat.core.segmentation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
@@ -34,6 +35,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
@@ -163,7 +166,7 @@ public final class SRXTest {
      * a segmentation.conf file that is produced by OmegaT in English
      * environment and Japanese environment.
      */
-    public static void testSrxMigration(File segmentConf, File configDir) throws IOException {
+    public static void testSrxMigration(File segmentConf, File configDir) {
         File segmentSrx = new File(configDir, "segmentation.srx");
         // load from conf file
         SRX srxOrig = SRX.loadConfFile(segmentConf, configDir);
@@ -197,6 +200,37 @@ public final class SRXTest {
         assertEquals("2.0", srx1.getVersion());
         assertTrue(srx1.isCascade());
         assertTrue(srx1.isSegmentSubflows());
+    }
+
+    public static class SRXSecurityTest {
+
+        @org.junit.Rule
+        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+
+        @org.junit.Rule
+        public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
+
+        @Test
+        public void testSRXLoaderSecureCVE_2024_51366() throws IOException {
+            File tmpDir = folder.newFolder();
+            Path segmentConf = tmpDir.toPath().resolve("segmentation.conf");
+            // prepare CVE-2024-51366 exploit code
+            String xmlContent = "<java>\n" +
+                    "    <object class=\"java.lang.ProcessBuilder\">\n" +
+                    "        <array class=\"java.lang.String\" length=\"1\" >\n" +
+                    "            <void index=\"0\">\n" +
+                    "                <string>gnome-calculator</string>\n" +
+                    "            </void>\n" +
+                    "        </array>\n" +
+                    "        <void method=\"start\"/>\n" +
+                    "    </object>\n" +
+                    "</java>";
+            Files.writeString(segmentConf, xmlContent);
+            SRX srx = SRX.loadFromDir(segmentConf.getParent().toFile());
+            assertNotNull(srx);
+            assertFalse("Rule should not be empty", srx.getMappingRules().isEmpty());
+            assertEquals("\\s", srx.getMappingRules().get(0).getRules().get(0).getAfterbreak());
+        }
     }
 
     private SRXTest() {

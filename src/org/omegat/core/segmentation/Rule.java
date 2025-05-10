@@ -196,9 +196,20 @@ public class Rule implements Serializable {
         }
     }
 
-    /** Indicates whether some other Rule is "equal to" this one. */
+    /**
+     * Compares this Rule object with the specified object for equality.
+     * <p>
+     * The objects are considered equal if the following are true:
+     * 1. The specified object is of type Rule.
+     * 2. The breakRule field values of both objects are the same.
+     * 3. The regular expressions for text before and after segment breaks, as
+     *    retrieved by getBeforebreak() and getAfterbreak(), are equal.
+     *
+     * @param obj the object to compare for equality with this Rule instance
+     * @return true if the specified object is equal to this Rule instance, false otherwise
+     */
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof Rule)) {
+        if (!(obj instanceof Rule)) {
             return false;
         }
         Rule that = (Rule) obj;

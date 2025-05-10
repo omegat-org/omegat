@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
                2018 Thomas Cordonnier
+               2023-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,25 +28,6 @@
 
 package org.omegat.core.segmentation;
 
-import java.beans.ExceptionListener;
-import java.beans.XMLDecoder;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.xml.stream.XMLInputFactory;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -54,14 +36,27 @@ import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
-
-import org.omegat.util.Language;
-import org.omegat.util.Log;
-
 import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
+import org.omegat.util.Language;
+import org.omegat.util.Log;
+
+import javax.xml.stream.XMLInputFactory;
+import java.beans.ExceptionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
@@ -85,7 +80,9 @@ public class SRX implements Serializable {
         // Modifying a global object leads breakage of SuperTMXMerge
         // library.
         // https://sourceforge.net/p/omegat/bugs/1170/
-        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        // prevent XXE attacks
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+        xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
         mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
@@ -101,6 +98,7 @@ public class SRX implements Serializable {
      * Please do not call directly unless you know what you are doing.
      */
     public SRX() {
+        // should not use the default constructor.
     }
 
     public SRX copy() {
@@ -132,8 +130,13 @@ public class SRX implements Serializable {
         File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
-            outFile.delete();
-            new File(outDir, CONF_SENTSEG).delete();
+            if (outFile.exists()) {
+                Files.delete(outFile.toPath());
+            }
+            Path conf = outDir.toPath().resolve(CONF_SENTSEG);
+            if (conf.toFile().exists()) {
+                Files.delete(conf);
+            }
             return;
         }
 
@@ -192,13 +195,13 @@ public class SRX implements Serializable {
      * valid.
      **/
     public static SRX loadFromDir(File configDir) {
-        File inFile;
-        try {
-            inFile = new File(configDir, SRX_SENTSEG);
-            if (inFile.exists()) {
-                return loadSrxFile(inFile.toURI());
+        File inFile = new File(configDir, SRX_SENTSEG);
+        if (inFile.exists()) {
+            try (InputStream inputStream = Files.newInputStream(inFile.toPath())) {
+                return loadSrxInputStream(inputStream);
+            } catch (IOException e) {
+                Log.log(e);
             }
-        } catch (Exception ignored) {
         }
 
         // If file was not present or not readable
@@ -212,66 +215,65 @@ public class SRX implements Serializable {
         return null;
     }
 
+
     /**
      * Loads segmentation rules from an XML file. If there's an error loading a
-     * file, it calls <code>getDefault</code>.
+     * file, it calls <code>initDefaults</code>.
      * <p>
      * Since 1.6.0 RC8 it also checks if the version of segmentation rules saved
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    static SRX loadConfFile(File configFile, File configDir) {
-        SRX res;
-        try {
-            SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
-            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
-                res = (SRX) xmldec.readObject();
-            }
-
-            if (myel.isExceptionOccured()) {
-                StringBuilder sb = new StringBuilder();
-                for (Exception ex : myel.getExceptionsList()) {
-                    sb.append("    ");
-                    sb.append(ex);
-                    sb.append("\n");
-                }
-                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                res = SRX.getDefault();
-            } else {
-                // checking the version
-                if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-                    // yeap, the segmentation config file is of the older
-                    // version
-
-                    // initing defaults
-                    SRX defaults = SRX.getDefault();
-                    // and merging them into loaded rules
-                    res = merge(res, defaults);
-                }
-                Log.logInfoRB("SRX_RULE_FROM", configFile);
-            }
-        } catch (Exception e) {
-            // silently ignoring FNF
-            if (!(e instanceof FileNotFoundException)) {
-                Log.log(e);
-            }
-            res = SRX.getDefault();
+    public static SRX loadConfFile(File configFile, File configDir) {
+        SRX srx = loadRulesFromFile(configFile);
+        if (srx == null) {
+            srx = getDefault();
         }
         try {
-            saveToSrx(res, configDir);
-        } catch (Exception o3) {
-            Log.log(o3); // detail why conversion failed, but continue
-        }
-        return res;
-    }
-
-    private static SRX loadSrxFile(URI rulesUri) {
-        try (InputStream inputStream = Files.newInputStream(Paths.get(rulesUri))) {
-            return loadSrxInputStream(inputStream);
-        } catch (Exception e) {
+            saveToSrx(srx, configDir);
+        } catch (IOException e) {
             Log.log(e);
         }
+        return srx;
+    }
+
+    /**
+     * Loads rules from the given XML file using the configured SAXParserFactory and Unmarshaller.
+     */
+    private static SRX loadRulesFromFile(File configFile) {
+        if (!configFile.exists()) {
+            return null;
+        }
+       try {
+            SRX srx = mapper.readValue(configFile, SRX.class);
+            Log.logInfoRB("SRX_RULE_FROM", configFile.getAbsolutePath());
+            if (isOlderVersion(srx)) {
+                return mergeWithDefaults(srx);
+            }
+            return srx;
+        } catch (IOException ignored) {
+            // ignored
+        }
         return null;
+
+    }
+
+    /**
+     * Checks if the loaded SRX version is older than the current version.
+     */
+    private static boolean isOlderVersion(SRX loadedRules) {
+        if (loadedRules.getVersion() == null) {
+            return false;
+        }
+        return CURRENT_VERSION.compareTo(loadedRules.getVersion()) > 0;
+    }
+
+    /**
+     * Merges an older version of SRX rules with the default rules.
+     */
+    private static SRX mergeWithDefaults(SRX loadedRules) {
+        SRX defaultRules = SRX.getDefault();
+        return merge(loadedRules, defaultRules);
     }
 
     private static SRX loadSrxInputStream(InputStream io) throws IOException {
@@ -282,15 +284,15 @@ public class SRX implements Serializable {
             mapping.put(languagerule.getLanguagerulename(),
                     languagerule.getRule().stream().map(Rule::new).collect(Collectors.toList()));
         }
-        SRX res = new SRX();
-        res.setSegmentSubflows(!"no".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
-        res.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
-        res.setVersion(srx.getVersion());
-        res.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
+        SRX srxObject = new SRX();
+        srxObject.setSegmentSubflows(!"no".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
+        srxObject.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
+        srxObject.setVersion(srx.getVersion());
+        srxObject.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
                 .map(languagemap -> new MapRule(languagemap.getLanguagerulename(),
                         languagemap.getLanguagepattern(), mapping.get(languagemap.getLanguagerulename())))
                 .collect(Collectors.toList()));
-        return res;
+        return srxObject;
     }
 
     /**
@@ -400,7 +402,7 @@ public class SRX implements Serializable {
                 return mr.getRules();
             }
         }
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -601,7 +603,7 @@ public class SRX implements Serializable {
      * Correspondences between languages and their segmentation rules. Each
      * element is of class {@link MapRule}.
      */
-    private List<MapRule> mappingRules = new ArrayList<MapRule>();
+    private List<MapRule> mappingRules = new ArrayList<>();
 
     /**
      * Returns all mapping rules (of class {@link MapRule}) at once:
@@ -645,6 +647,14 @@ public class SRX implements Serializable {
         version = value;
     }
 
+    /**
+     * Computes the hash code for the SRX object.
+     * <p>
+     * The hash code is calculated based on the state of the instance variables
+     * of the object.
+     *
+     * @return an integer value representing the hash code of this SRX object
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -658,15 +668,21 @@ public class SRX implements Serializable {
         return result;
     }
 
+    /**
+     * Compares this SRX object to the specified object.
+     * <p>
+     * The result is true if and only if the argument is an SRX object that
+     * represents the same data as this object.
+     *
+     * @param obj the reference object with which to compare
+     * @return {@code true} if this object is the same as the obj argument, {@code false} otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof SRX)) {
             return false;
         }
         SRX other = (SRX) obj;
@@ -690,12 +706,8 @@ public class SRX implements Serializable {
             return false;
         }
         if (version == null) {
-            if (other.version != null) {
-                return false;
-            }
-        } else if (!version.equals(other.version)) {
-            return false;
+            return other.version == null;
         }
-        return true;
+        return version.equals(other.version);
     }
 }

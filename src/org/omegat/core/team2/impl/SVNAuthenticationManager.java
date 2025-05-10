@@ -71,28 +71,18 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SVNAuthenticationManager.class);
 
-    private final RepositoryDefinition repoDef;
     private final String predefinedUser;
     private final String predefinedPass;
-    private final ProjectTeamSettings teamSettings;
 
+    @SuppressWarnings("unused")
     public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass,
             ProjectTeamSettings teamSettings) {
-        this(getDef(repoUrl), predefinedUser, predefinedPass, teamSettings);
+        this(predefinedUser, predefinedPass);
     }
 
-    public SVNAuthenticationManager(RepositoryDefinition repoDef, String predefinedUser,
-            String predefinedPass, ProjectTeamSettings teamSettings) {
-        this.repoDef = repoDef;
+    public SVNAuthenticationManager(String predefinedUser, String predefinedPass) {
         this.predefinedUser = predefinedUser;
         this.predefinedPass = predefinedPass;
-        this.teamSettings = teamSettings;
-    }
-
-    private static RepositoryDefinition getDef(String repoUrl) {
-        RepositoryDefinition def = new RepositoryDefinition();
-        def.setUrl(repoUrl);
-        return def;
     }
 
     @Override

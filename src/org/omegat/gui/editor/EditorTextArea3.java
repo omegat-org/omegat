@@ -503,12 +503,14 @@ public class EditorTextArea3 extends JEditorPane {
     }
 
     private void updateLockInsertMessage() {
-        String lock = OStrings.getString("MW_STATUS_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
-        String ins = OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
-
-        String lockTip = OStrings
-                .getString("MW_STATUS_TIP_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
-        String insTip = OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
+        String lock = lockCursorToInputArea ? OStrings.getString("MW_STATUS_CURSOR_LOCK_ON") :
+                OStrings.getString("MW_STATUS_CURSOR_LOCK_OFF");
+        String ins = overtypeMode ? OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_ON") :
+                OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_OFF");
+        String lockTip = lockCursorToInputArea ? OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_ON") :
+                OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_OFF");
+        String insTip = overtypeMode ? OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_ON") :
+                OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_OFF");
         Core.getMainWindow().showLockInsertMessage(lock + " | " + ins, lockTip + " | " + insTip);
     }
 

@@ -517,6 +517,7 @@ public final class MainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     public void editMultipleAlternateActionPerformed() {
         Core.getEditor().setAlternateTranslationForCurrentEntry(true);
+        Core.getEditor().unlockSegment();
     }
 
     public void editRegisterUntranslatedMenuItemActionPerformed() {

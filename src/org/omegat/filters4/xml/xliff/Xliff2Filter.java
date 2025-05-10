@@ -131,6 +131,12 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 segId = "1";
             }
             flushedSegment = false;
+            isFinalState = false; 
+            try {
+                isFinalState = "final".equals(startElement.getAttributeByName(new QName("state")).getValue()); 
+            } catch (Exception e) {
+                // non mandatory
+            }
             break;
         case "source":
             currentBuffer = source;
@@ -185,7 +191,7 @@ public class Xliff2Filter extends AbstractXliffFilter {
                 flushTranslations(writer); // if there was no <target> at all
             }
             if (ignoreScope == null || ignoreScope.startsWith("!")) {
-                registerCurrentTransUnit(segId, source, target, ".*");
+                registerCurrentTransUnit(segId, source, target, ".*", isFinalState);
             }
             segId = null;
             cleanBuffers();

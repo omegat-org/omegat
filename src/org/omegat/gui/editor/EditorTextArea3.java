@@ -9,6 +9,7 @@
                2013 Zoltan Bartko
                2014 Aaron Madlon-Kay
                2015 Yu Tang
+               2023-2024 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -66,10 +67,13 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
+import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
@@ -166,6 +170,7 @@ public class EditorTextArea3 extends JEditorPane {
         });
 
         addMouseListener(mouseListener);
+        CoreEvents.registerEntryEventListener(lockListener);
 
         // Custom caret for overtype mode
         OvertypeCaret c = new OvertypeCaret();
@@ -332,6 +337,39 @@ public class EditorTextArea3 extends JEditorPane {
             Collections.sort(popupConstructors, (o1, o2) -> o1.priority - o2.priority);
         }
     }
+        
+    /** 
+     * On new entry, check if we are in a locked segment, in which case we lock the editor
+     * Using this method ensures that isLocked is set here and only here
+     **/
+    protected final class LockListener implements IEntryEventListener {
+        private String isLocked = null;
+        
+        public void onEntryActivated(SourceTextEntry newEntry) {
+            isLocked = null;
+            SourceTextEntry entry = controller.getCurrentEntry();
+            String[] props = entry.getRawProperties();
+            for (int i = 0; i < props.length; i++) {
+                if (props[i].equals("LOCKED")) {
+                    isLocked = props[i + 1];
+                    // Entries populated via a filter are always with context, as alternative
+                    controller.setAlternateTranslationForCurrentEntry(true);
+                }
+            }
+            if (isLocked == null) {
+                TMXEntry tmx = Core.getProject().getTranslationInfo(entry);
+                isLocked =  (tmx.linked == TMXEntry.ExternalLinked.xENFORCED) ? "tm/enforce" : null;
+            }
+        }
+        
+        public void onNewFile(String activeFileName) {
+        }
+    };
+    private final transient LockListener lockListener = new LockListener();
+    
+    public void unlockSegment() {
+        lockListener.isLocked = null;
+    }    
 
     /**
      * Redefine some keys behavior. We can't use key listeners, because we have
@@ -374,6 +412,9 @@ public class EditorTextArea3 extends JEditorPane {
             if (controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
+            } else if (lockListener.isLocked != null) {
+                // We should not accept any character, including TAB
+                processed = Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true);
             }
         } else if (s.equals(KEYSTROKE_PREV)) {
             // Go back when 'Use TAB to advance'
@@ -483,6 +524,15 @@ public class EditorTextArea3 extends JEditorPane {
                     // it's not a single 'shift' press or navigation key
                     // fix caret position prior to inserting character
                     checkAndFixCaret(true);
+                }
+            }
+            // Treat the case of enforced translations which should be locked - this case does not seem to be treated via replaceSelection        
+            if (lockListener.isLocked != null) {
+                if ((e.getKeyCode() == KeyEvent.VK_BACK_SPACE) || (e.getKeyCode() == KeyEvent.VK_DELETE)) {
+                    Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
+                    if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                        return;
+                    }
                 }
             }
             super.processKeyEvent(e);
@@ -842,6 +892,12 @@ public class EditorTextArea3 extends JEditorPane {
 
     @Override
     public void replaceSelection(String content) {
+        if (lockListener.isLocked != null) {
+            Core.getMainWindow().showStatusMessageRB("MW_SEGMENT_LOCKED", lockListener.isLocked);
+            if (Preferences.isPreferenceDefault(Preferences.SUPPORT_LOCKED_SEGMENTS, true)) {
+                return;
+            }
+        }
         // Overwrite current selection, and if at the end of the segment, allow
         // inserting new text.
         if (isEditable() && overtypeMode && getSelectionStart() == getSelectionEnd()

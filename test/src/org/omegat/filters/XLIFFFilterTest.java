@@ -96,6 +96,27 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMulti("tr2=test2", null, null, "tr1=This is test", "", null);
         checkMultiEnd();
     }
+    
+    @Test
+    public void testKeepProperties() throws Exception {
+        String f = "test/data/filters/xliff/file-XLIFFFilter-state-final.xlf";
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("tr1=This is test", null, null, "", "tr2=test2", null);
+        assertEquals(fi.entries.get(fiCount - 1).getRawProperties().length, 0);
+        checkMultiProps("tr2=test2", null, null, "tr1=This is test", "", "LOCKED", "xliff final");
+        checkMultiEnd();
+        
+        translate(filter, new File(f).getPath());
+        fi = loadSourceFiles(filter, outFile.toString());
+        
+        checkMultiStart(fi, outFile.toString());
+        checkMulti("tr1=This is test", null, null, "", "tr2=test2", null);
+        assertEquals(fi.entries.get(fiCount - 1).getRawProperties().length, 0);
+        checkMultiProps("tr2=test2", null, null, "tr1=This is test", "", "LOCKED", "xliff final");
+        checkMultiEnd();
+    }    
 
     @Test
     public void testTags() throws Exception {

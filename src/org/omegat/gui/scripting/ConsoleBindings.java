@@ -324,6 +324,11 @@ public class ConsoleBindings implements IGlossaries, IEditor, IScriptLogger {
     }
 
     @Override
+    public final void unlockSegment() {
+    
+    }
+
+    @Override
     public final List<GlossaryEntry> getDisplayedEntries() {
         return null;
     }

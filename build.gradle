@@ -53,6 +53,7 @@ sourceSets {
     main {
         java {
             srcDir 'src'
+            srcDir tasks.genJAXB.outputs
         }
         resources {
             srcDir 'src'

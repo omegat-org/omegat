@@ -204,7 +204,11 @@ public class SRX implements Serializable {
         // If file was not present or not readable
         inFile = new File(configDir, CONF_SENTSEG);
         if (inFile.exists()) {
-            return loadConfFile(inFile, configDir);
+            try {
+                return loadConfFile(inFile, configDir);
+            } catch (Exception ex) {
+                return SRX.getDefault();
+            }
         }
 
         // If none of the files (conf and srx) are present,
@@ -220,7 +224,7 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    static SRX loadConfFile(File configFile, File configDir) {
+    static SRX loadConfFile(File configFile, File configDir) throws Exception {
         SRX res;
         try {
             SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
@@ -251,12 +255,15 @@ public class SRX implements Serializable {
                 Log.logInfoRB("SRX_RULE_FROM", configFile);
             }
         } catch (Exception e) {
+            res = null;
             // silently ignoring FNF
             if (!(e instanceof FileNotFoundException)) {
                 Log.log(e);
+            } else {
+                throw e;
             }
-            res = SRX.getDefault();
         }
+        // save only if we could read the file correctly...
         try {
             saveToSrx(res, configDir);
         } catch (Exception o3) {

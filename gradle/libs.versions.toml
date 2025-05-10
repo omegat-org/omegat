@@ -11,7 +11,7 @@ jsoup = "1.19.1"
 icu4j = "77.1"
 stax2api = "4.2.2"
 woodstox = "6.5.0"
-languagetool = "6.1"
+languagetool = "6.6"
 languagedetector = "0.6-2"
 lucene = "5.5.5"
 lucene_gosen = "5.5.1"
@@ -81,6 +81,7 @@ languagetool-da = {group = "org.languagetool", name = "language-da", version.ref
 languagetool-de = {group = "org.languagetool", name = "language-de", version.ref = "languagetool"}
 languagetool-el = {group = "org.languagetool", name = "language-el", version.ref = "languagetool"}
 languagetool-en = {group = "org.languagetool", name = "language-en", version.ref = "languagetool"}
+languagetool-en-pos-dictionary = {group = "org.languagetool", name = "english-pos-dict", version = "0.6"}
 languagetool-eo = {group = "org.languagetool", name = "language-eo", version.ref = "languagetool"}
 languagetool-es = {group = "org.languagetool", name = "language-es", version.ref = "languagetool"}
 languagetool-fa = {group = "org.languagetool", name = "language-fa", version.ref = "languagetool"}
@@ -93,6 +94,7 @@ languagetool-km = {group = "org.languagetool", name = "language-km", version.ref
 languagetool-nl = {group = "org.languagetool", name = "language-nl", version.ref = "languagetool"}
 languagetool-pl = {group = "org.languagetool", name = "language-pl", version.ref = "languagetool"}
 languagetool-pt = {group = "org.languagetool", name = "language-pt", version.ref = "languagetool"}
+languagetool-pt-pos-dictionary = {group = "org.languagetool", name = "portuguese-pos-dict", version = "1.2.0"}
 languagetool-ro = {group = "org.languagetool", name = "language-ro", version.ref = "languagetool"}
 languagetool-ru = {group = "org.languagetool", name = "language-ru", version.ref = "languagetool"}
 languagetool-sk = {group = "org.languagetool", name = "language-sk", version.ref = "languagetool"}

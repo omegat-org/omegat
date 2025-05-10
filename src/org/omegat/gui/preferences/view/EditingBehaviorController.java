@@ -30,6 +30,8 @@
 
 package org.omegat.gui.preferences.view;
 
+import static org.openide.awt.Mnemonics.setLocalizedText;
+
 import javax.swing.JComponent;
 
 import org.omegat.gui.editor.SegmentBuilder;
@@ -63,6 +65,7 @@ public class EditingBehaviorController extends BasePreferencesController {
 
     private void initGui() {
         panel = new EditingBehaviorPanel();
+        initLabels();
         panel.insertFuzzyCheckBox.addActionListener(e -> {
             panel.similarityLabel.setEnabled(panel.insertFuzzyCheckBox.isSelected());
             panel.similaritySpinner.setEnabled(panel.insertFuzzyCheckBox.isSelected());
@@ -71,10 +74,40 @@ public class EditingBehaviorController extends BasePreferencesController {
         });
     }
 
+    /**
+     * Set localized labels from Bundle.
+     */
+    private void initLabels() {
+        panel.descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION"));
+        setLocalizedText(panel.defaultRadio, OStrings.getString("WF_OPTION_INSERT_SOURCE"));
+        setLocalizedText(panel.leaveEmptyRadio, OStrings.getString("WF_OPTION_INSERT_NOTHTHING"));
+        setLocalizedText(panel.insertFuzzyCheckBox, OStrings.getString("WF_OPTION_INSERT_FUZZY_MATCH"));
+        setLocalizedText(panel.similarityLabel,
+                OStrings.getString("GUI_WORKFLOW_OPTION_Minimal_Similarity"));
+        setLocalizedText(panel.prefixLabel, OStrings.getString("WF_OPTION_INSERT_FUZZY_PREFIX"));
+        setLocalizedText(panel.convertNumbers, OStrings.getString("WF_OPTION_REPLACE_NUMBERS"));
+        setLocalizedText(panel.allowTranslationEqualToSource, OStrings.getString(
+                "WF_OPTION_ALLOW_TRANS_EQ_TO_SRC"));
+        setLocalizedText(panel.exportCurrentSegment, OStrings.getString("WF_OPTION_EXPORT__CURRENT_SEGMENT"));
+        setLocalizedText(panel.stopOnAlternativeTranslation, OStrings.getString(
+                "WF_OPTION_GOTO_NEXT_UNTRANSLATED"));
+        setLocalizedText(panel.allowTagEditing, OStrings.getString("WF_TAG_EDITING"));
+        setLocalizedText(panel.tagValidateOnLeave, OStrings.getString("WG_TAG_VALIDATE_ON_LEAVE"));
+        setLocalizedText(panel.cbSaveAutoStatus, OStrings.getString("WG_SAVE_AUTO_STATUS"));
+        setLocalizedText(panel.cbSaveOrigin, OStrings.getString("WG_SAVE_ORIGIN"));
+        setLocalizedText(panel.initialSegCountLabel, OStrings.getString("WG_INITIAL_SEGMENT_LOAD_COUNT"));
+        panel.initialSegCountSpinner.setToolTipText(OStrings.getString(
+                "WG_INITIAL_SEGMENT_LOAD_COUNT_TOOLTIP"));
+        setLocalizedText(panel.paraMarkLabel, OStrings.getString("WG_PARA_MARK"));
+        setLocalizedText(panel.singleClickActivationCheckBox, OStrings.getString(
+                "WF_OPTION_ALLOW_SELECT_SINGLE_CLICK"));
+    }
+
     @Override
     protected void initFromPrefs() {
         // Double negation? then prefInsertSource is the contrary of Preferences.DONT_INSERT_SOURCE_TEXT 
-        boolean prefInsertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT, SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
+        boolean prefInsertSource = !Preferences.isPreferenceDefault(Preferences.DONT_INSERT_SOURCE_TEXT,
+                SegmentBuilder.DONT_INSERT_SOURCE_TEXT_DEFAULT);
         panel.defaultRadio.setSelected(prefInsertSource);
         panel.leaveEmptyRadio.setSelected(!prefInsertSource);
 
@@ -87,7 +120,10 @@ public class EditingBehaviorController extends BasePreferencesController {
             panel.prefixText.setText(Preferences.getPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT));
         }
 
-        panel.allowTranslationEqualToSource.setSelected(Preferences.isPreferenceDefault(Preferences.ALLOW_TRANS_EQUAL_TO_SRC, true));
+        panel.allowTranslationEqualToSource.setSelected(
+                Preferences.isPreferenceDefault(Preferences.ALLOW_TRANS_EQUAL_TO_SRC, true));
+        panel.singleClickActivationCheckBox.setSelected(
+                Preferences.isPreferenceDefault(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION, false));
         panel.exportCurrentSegment.setSelected(Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT));
         panel.stopOnAlternativeTranslation
                 .setSelected(Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
@@ -113,6 +149,7 @@ public class EditingBehaviorController extends BasePreferencesController {
         panel.prefixText.setText(OStrings.getString("WF_DEFAULT_PREFIX"));
 
         panel.allowTranslationEqualToSource.setSelected(true);
+        panel.singleClickActivationCheckBox.setSelected(false);
         panel.exportCurrentSegment.setSelected(false);
         panel.stopOnAlternativeTranslation.setSelected(false);
         panel.convertNumbers.setSelected(true);
@@ -147,6 +184,8 @@ public class EditingBehaviorController extends BasePreferencesController {
         Preferences.setPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC,
                 panel.allowTranslationEqualToSource.isSelected());
         Preferences.setPreference(Preferences.EXPORT_CURRENT_SEGMENT, panel.exportCurrentSegment.isSelected());
+        Preferences.setPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION,
+                panel.singleClickActivationCheckBox.isSelected());
         Preferences.setPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION,
                 panel.stopOnAlternativeTranslation.isSelected());
         Preferences.setPreference(Preferences.CONVERT_NUMBERS, panel.convertNumbers.isSelected());

@@ -59,10 +59,6 @@ public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpe
     public static void unloadPlugins() {
     }
 
-    public MorfologikSpellchecker() {
-        super();
-    }
-
     @Override
     protected Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // check that the dict exists

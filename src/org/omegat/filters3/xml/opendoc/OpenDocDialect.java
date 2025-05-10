@@ -36,10 +36,6 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  */
 public class OpenDocDialect extends DefaultXMLDialect {
 
-    /** Creates a new instance of OpenDocDialect */
-    public OpenDocDialect() {
-    }
-
     /**
      * Actually defines the dialect. It cannot be done during creation, because
      * options are not known at that step.

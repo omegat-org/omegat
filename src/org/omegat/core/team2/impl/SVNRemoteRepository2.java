@@ -120,8 +120,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
         }
 
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-        ISVNAuthenticationManager authManager = new SVNAuthenticationManager(repo, predefinedUser,
-                predefinedPass, teamSettings);
+        ISVNAuthenticationManager authManager = new SVNAuthenticationManager(predefinedUser, predefinedPass);
         SVNWCContext svnwcContext = new SVNWCContext(options, null);
         SvnOperationFactory svnOperationFactory = new SvnOperationFactory(svnwcContext);
         svnOperationFactory.setAuthenticationManager(authManager);

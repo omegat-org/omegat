@@ -80,7 +80,7 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
     }
 
     class ReplaceMarkerMockEditor extends MockEditor {
-        public ReplaceMarkerMockEditor() {
+        ReplaceMarkerMockEditor() {
             super(editorSettings);
         }
 

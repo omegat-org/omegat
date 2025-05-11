@@ -33,7 +33,6 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
@@ -114,7 +113,7 @@ public final class SRXTest {
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
-        public void testSrxMigration() throws IOException {
+        public void testSrxMigration() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_en", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
             SRXTest.testSrxMigration(segmentConf, configDir);
@@ -130,7 +129,7 @@ public final class SRXTest {
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
-        public void testSrxMigration() throws IOException {
+        public void testSrxMigration() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_ja", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
             SRXTest.testSrxMigration(segmentConf, configDir);
@@ -146,7 +145,7 @@ public final class SRXTest {
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
-        public void testSrxMigration() throws IOException {
+        public void testSrxMigration() throws Exception {
             File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_de_54", "segmentation.conf").toFile();
             File configDir = folder.newFolder();
             SRXTest.testSrxMigration(segmentConf, configDir);
@@ -163,7 +162,7 @@ public final class SRXTest {
      * a segmentation.conf file that is produced by OmegaT in English
      * environment and Japanese environment.
      */
-    public static void testSrxMigration(File segmentConf, File configDir) throws IOException {
+    public static void testSrxMigration(File segmentConf, File configDir) throws Exception {
         File segmentSrx = new File(configDir, "segmentation.srx");
         // load from conf file
         SRX srxOrig = SRX.loadConfFile(segmentConf, configDir);

@@ -3,6 +3,7 @@ plugins {
     id 'eclipse'
     id 'checkstyle'
     id 'jacoco'
+    id 'pmd'
     id 'com.diffplug.spotless'
     id 'com.github.spotbugs'
     id 'org.omegat.common-utilities'
@@ -153,4 +154,22 @@ tasks.withType(Sync).configureEach {
 }
 tasks.withType(Zip).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+pmd {
+    toolVersion = '6.38.0'
+    ruleSetFiles = layout.settingsDirectory.files("config/pmd/ruleset.xml")
+    consoleOutput = true
+}
+
+tasks.withType(Pmd).configureEach {
+    exclude '**/gen/**'
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+
+        // Consolidate reports in root project
+        xml.outputLocation.set(layout.settingsDirectory.file("build/reports/pmd/${project.name}-pmd.xml"))
+        html.outputLocation.set(layout.settingsDirectory.file("build/reports/pmd/${project.name}-pmd.html"))
+    }
 }

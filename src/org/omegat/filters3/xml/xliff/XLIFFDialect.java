@@ -68,9 +68,6 @@ public class XLIFFDialect extends DefaultXMLDialect {
      */
     protected ID_TYPE altTransIDType;
 
-    public XLIFFDialect() {
-    }
-
     /**
      * Actually defines the dialect. It cannot be done during creation, because
      * options are not known at that step.

@@ -4,18 +4,18 @@
 
 ## First steps
 
-* [About OmegaT](0.AboutOmegaT.md)
-* [Project Philosophy and policy](07.PhilosophyAndPolicy.md)
-* [How to contribute](00.ContributingEcoSystem.md)
-* [Guideline for welcoming beginners](06.GuidelineForWelcomingBeginners.md)
+* [About OmegaT](00.AboutOmegaT.md)
+* [Project Philosophy and policy](01.PhilosophyAndPolicy.md)
+* [How to contribute](02.ContributingEcoSystem.md)
+* [Guideline for welcoming beginners](03.GuidelineForWelcomingBeginners.md)
  
 ## How to build and contribute OmegaT
 
-* [Contributing to OmegaT development](01.ContributingOmegaT.md)
-* [How to build OmegaT](02.HowToBuild.md)
-* [Git workflow](03.GitWorkFlows.md)
+* [Contributing to OmegaT development](04.ContributingOmegaT.md)
+* [How to build OmegaT](08.HowToBuild.md)
+* [Git workflow](06.GitWorkFlows.md)
 * [Coding styles](30.CodingStyles.md)
-* [Source tree](04.SourceTree.md)
+* [Source tree](36.SourceTree.md)
 * [Versioning](05.Versioning.md)
 * [Manner of the Pull Request](07.MannerOfThePullRequest.md)]
 

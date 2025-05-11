@@ -37,9 +37,6 @@ import javax.swing.UIManager;
 
 public class ProjectFileRenderer implements ListCellRenderer<ProjectFileInformation> {
 
-    public ProjectFileRenderer() {
-    }
-
     @Override
     public Component getListCellRendererComponent(JList<? extends ProjectFileInformation> list, ProjectFileInformation value,
                                                   int index, boolean isSelected, boolean cellHasFocus) {

@@ -55,11 +55,7 @@ public class MarkerTestBase extends TestCore {
         private boolean markWhitespace;
         private boolean markParagraphDelimitations;
         private boolean markBidi;
-        private String displayModificationInfo;
         private boolean autoSpellChecking;
-        private boolean viewSourceBold;
-        private boolean viewActiveSourceBold;
-        private boolean markFirstNonUnique;
         private boolean markGlossaryMatches;
         private boolean markLanguageChecker;
         private boolean doFontFallback;

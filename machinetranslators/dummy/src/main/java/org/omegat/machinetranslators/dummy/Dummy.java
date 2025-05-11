@@ -43,10 +43,7 @@ public class Dummy extends BaseCachedTranslate {
     }
 
     public static void unloadPlugins() {
-    }
-
-    public Dummy() {
-        super();
+        // there is no way to remove plugin
     }
 
     @Override

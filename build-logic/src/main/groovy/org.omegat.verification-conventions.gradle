@@ -77,7 +77,7 @@ tasks.named("run") {
 }
 
 tasks.register('runDebugger', JavaExec) {
-    description = 'Launch app for debugging.' // Special debug task for NetBeans
+    description = 'Runs application for debugging.' // Special debug task for NetBeans
     group = 'application'
     mainClass = application.mainClass
     classpath = sourceSets.main.runtimeClasspath
@@ -86,7 +86,7 @@ tasks.register('runDebugger', JavaExec) {
 }
 
 tasks.register('runOnJava17', JavaExec) {
-    description = 'Launch app on Java 17'
+    description = 'Runs application on Java 17.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -98,7 +98,7 @@ tasks.register('runOnJava17', JavaExec) {
 }
 
 tasks.register('runOnJava21', JavaExec) {
-    description = 'Launch app on Java 21'
+    description = 'Runs application on Java 21.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -110,7 +110,7 @@ tasks.register('runOnJava21', JavaExec) {
 }
 
 tasks.register('testIntegration', JavaExec) {
-    description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    description = 'Runs integration tests. Pass repo URL as -Domegat.test.repo=<repo>.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -125,7 +125,7 @@ tasks.register('testIntegration', JavaExec) {
 }
 
 tasks.register('testOnJava17', Test) {
-    description = 'Run test cases on Java 17'
+    description = 'Runs test cases on Java 17.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -138,7 +138,7 @@ tasks.register('testOnJava17', Test) {
 }
 
 tasks.register('testOnJava21', Test) {
-    description = 'Run test cases on Java 21'
+    description = 'Runs test cases on Java 21.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -188,7 +188,7 @@ tasks.register('testAcceptance', Test) {
     }
     finalizedBy testAcceptanceFinally
 
-    description = 'Run Acceptance GUI test'
+    description = 'Runs acceptance GUI test.'
     group = 'verification'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)

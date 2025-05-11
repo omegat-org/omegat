@@ -63,9 +63,6 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  */
 public class HTMLFilter2 extends AbstractFilter {
-    /** Creates a new instance of HTMLFilter2 */
-    public HTMLFilter2() {
-    }
 
     /**
      * Register plugin into OmegaT.
@@ -75,6 +72,7 @@ public class HTMLFilter2 extends AbstractFilter {
     }
 
     public static void unloadPlugins() {
+        // there is no way to remove plugin
     }
 
     /** Stores the source encoding of HTML file. */
@@ -163,7 +161,6 @@ public class HTMLFilter2 extends AbstractFilter {
         } catch (OutOfMemoryError e) {
             // out of memory?
             all = null;
-            System.gc();
             throw new IOException(OStrings.getString("HTML__FILE_TOO_BIG"));
         }
 

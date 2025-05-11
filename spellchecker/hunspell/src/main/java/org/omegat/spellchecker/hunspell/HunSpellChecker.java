@@ -78,10 +78,7 @@ public class HunSpellChecker extends AbstractSpellChecker implements ISpellCheck
     }
 
     public static void unloadPlugins() {
-    }
-
-    public HunSpellChecker() {
-        super();
+        // there is no way to remove plugin
     }
 
     @Override

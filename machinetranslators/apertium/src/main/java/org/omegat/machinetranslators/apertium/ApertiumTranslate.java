@@ -87,10 +87,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
     }
 
     public static void unloadPlugins() {
-    }
-
-    public ApertiumTranslate() {
-        super();
+        // there is no way to remove
     }
 
     @Override

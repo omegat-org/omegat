@@ -60,7 +60,11 @@ import java.util.stream.Collectors;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
- * It loads and saves its data from/to SRX file.
+ * It loads and saves its data from/to the SRX file.
+ * <p>
+ * When creating an SRX object with the default constructor, you get an empty
+ * SRX without any rules. Please do not use default constructor, unless you
+ * know what you are doing.
  *
  * @author Maxym Mykhalchuk
  * @author Thomas Cordonnier
@@ -90,15 +94,6 @@ public class SRX implements Serializable {
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-    }
-
-    /**
-     * Creates an empty SRX, without any rules.
-     * <p>
-     * Please do not call directly unless you know what you are doing.
-     */
-    public SRX() {
-        // should not use the default constructor.
     }
 
     public SRX copy() {
@@ -207,7 +202,11 @@ public class SRX implements Serializable {
         // If file was not present or not readable
         inFile = new File(configDir, CONF_SENTSEG);
         if (inFile.exists()) {
-            return loadConfFile(inFile, configDir);
+            try {
+                return loadConfFile(inFile, configDir);
+            } catch (Exception ex) {
+                return SRX.getDefault();
+            }
         }
 
         // If none of the files (conf and srx) are present,
@@ -224,15 +223,24 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    public static SRX loadConfFile(File configFile, File configDir) {
-        SRX srx = loadRulesFromFile(configFile);
-        if (srx == null) {
-            srx = getDefault();
+    static SRX loadConfFile(File configFile, File configDir) throws Exception {
+        SRX srx;
+        try {
+            srx = loadRulesFromFile(configFile, configDir);
+        } catch (Exception e) {
+            srx = null;
+            // silently ignoring FNF
+            if (!(e instanceof FileNotFoundException)) {
+                Log.log(e);
+            } else {
+                throw e;
+            }
         }
+        // save only if we could read the file correctly...
         try {
             saveToSrx(srx, configDir);
-        } catch (IOException e) {
-            Log.log(e);
+        } catch (Exception e) {
+            Log.log(e); // detail why conversion failed, but continue
         }
         return srx;
     }
@@ -255,7 +263,6 @@ public class SRX implements Serializable {
             // ignored
         }
         return null;
-
     }
 
     /**

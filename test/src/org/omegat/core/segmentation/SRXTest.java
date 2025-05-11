@@ -33,7 +33,6 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;

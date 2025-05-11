@@ -43,15 +43,16 @@ import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
+import org.omegat.gui.editor.MockEditor;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 
 /**
  * @author Hiroshi Miura
  */
 public class ReplaceMarkerTest extends MarkerTestBase  {
-    String sourceText = "source text";
-    String replaceText = "text";
-    SourceTextEntry ste;
+    final String sourceText = "source text";
+    final String replaceText = "text";
+    private SourceTextEntry ste;
 
     @Before
     public void preUp() {
@@ -79,17 +80,26 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
     }
 
     class ReplaceMarkerMockEditor extends MockEditor {
+        public ReplaceMarkerMockEditor() {
+            super(editorSettings);
+        }
+
         @Override
         public IEditorFilter getFilter() {
             SearchExpression s = new SearchExpression();
             s.searchExpressionType = SearchExpression.SearchExpressionType.KEYWORD;
-            return new ReplaceFilter(Collections.emptyList(), new MockSearcher());
+            return new ReplaceFilter(Collections.emptyList(), new MockSearcher(sourceText, replaceText));
         }
     }
 
-    class MockSearcher extends Searcher {
-        MockSearcher() {
+    static class MockSearcher extends Searcher {
+        private final String sourceText;
+        private final String replaceText;
+
+        MockSearcher(String sourceText, String replaceText) {
             super(null, null);
+            this.sourceText = sourceText;
+            this.replaceText = replaceText;
         }
 
         @Override

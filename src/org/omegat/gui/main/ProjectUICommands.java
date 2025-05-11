@@ -212,7 +212,7 @@ public final class ProjectUICommands {
                 remoteRepositoryProvider.switchAllToLatest();
                 for (String file : new String[] { OConsts.FILE_PROJECT,
                         OConsts.DEFAULT_INTERNAL + '/' + FilterMaster.FILE_FILTERS,
-                        OConsts.DEFAULT_INTERNAL + '/' + SRX.CONF_SENTSEG }) {
+                        OConsts.DEFAULT_INTERNAL + '/' + SRX.SRX_SENTSEG }) {
                     remoteRepositoryProvider.copyFilesFromReposToProject(file);
                 }
 

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
-               2024 Hiroshi Miura
+               2024-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,171 +33,65 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.nio.file.Paths;
+import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.rules.TemporaryFolder;
-import org.junit.runner.RunWith;
 
-import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
 /**
  * @author Aaron Madlon-Kay
  * @author Hiroshi Miura
  */
-@RunWith(Enclosed.class)
 public final class SRXTest {
 
-    private static final File SEGMENT_DEFAULT = new File("test/data/segmentation/default/");
-    private static final String SEGMENT_CONF_BASE = "test/data/segmentation/migrate/";
+    private static final File SEGMENT_DEFAULT = new File("test/data/segmentation/default/segmentation.srx");
 
-    public static class DefultSRXTest {
+    @Test
+    public void testSrxComparison() {
+        SRX orig = SRX.getDefault();
+        SRX clone = orig.copy();
+        assertNotSame(orig, clone);
+        assertEquals(orig, clone);
+        assertEquals(orig.hashCode(), clone.hashCode());
 
-        @Test
-        public void testSrxComparison() {
-            SRX orig = SRX.getDefault();
-            SRX clone = orig.copy();
-            assertNotSame(orig, clone);
-            assertEquals(orig, clone);
-            assertEquals(orig.hashCode(), clone.hashCode());
+        // Shallow change
+        clone.setIncludeEndingTags(!clone.isIncludeEndingTags());
+        assertNotEquals(orig, clone);
 
-            // Shallow change
-            clone.setIncludeEndingTags(!clone.isIncludeEndingTags());
-            assertNotEquals(orig, clone);
-
-            // Deep change
-            clone = orig.copy();
-            org.omegat.core.segmentation.Rule rule = clone.getMappingRules().get(0).getRules().get(0);
-            rule.setAfterbreak(rule.getAfterbreak() + "foo");
-            assertNotEquals(orig, clone);
-        }
-
-        /**
-         * Test SRX#loadFromDir produce SRX object properly.
-         * <p>
-         * MapRule#getLanguageCode should return Language Code defined in
-         * LanguageCode class. MapRule#getLanguage should return a localized
-         * name of language. The test here check both values. OmegaT 6.0 and
-         * before,
-         */
-        @Test
-        public void testSrxReaderDefault() {
-            assertTrue(SEGMENT_DEFAULT.exists());
-            SRX srx = SRX.loadFromDir(SEGMENT_DEFAULT);
-            assertNotNull(srx);
-            assertTrue(srx.isCascade());
-            List<MapRule> mapRuleList = srx.getMappingRules();
-            assertNotNull(mapRuleList);
-            assertEquals(18, mapRuleList.size());
-            for (MapRule mapRule : mapRuleList) {
-                if (mapRule.getPattern().equals("JA.*")) {
-                    assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
-                    assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
-                }
-            }
-            assertEquals("2.0", srx.getVersion());
-            assertTrue(srx.isSegmentSubflows());
-        }
-    }
-
-    public static class SRXMigrateTest {
-
-        @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
-
-        @org.junit.Rule
-        public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
-
-        @Test
-        public void testSrxMigration() throws Exception {
-            File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_en", "segmentation.conf").toFile();
-            File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
-        }
-    }
-
-    public static class SRXMigrateJaTest {
-
-        @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("ja"));
-
-        @org.junit.Rule
-        public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
-
-        @Test
-        public void testSrxMigration() throws Exception {
-            File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_ja", "segmentation.conf").toFile();
-            File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
-        }
-    }
-
-    public static class SRXMigrateOldDeTest {
-
-        @org.junit.Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("de"));
-
-        @org.junit.Rule
-        public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
-
-        @Test
-        public void testSrxMigration() throws Exception {
-            File segmentConf = Paths.get(SEGMENT_CONF_BASE, "locale_de_54", "segmentation.conf").toFile();
-            File configDir = folder.newFolder();
-            SRXTest.testSrxMigration(segmentConf, configDir);
-        }
+        // Deep change
+        clone = orig.copy();
+        org.omegat.core.segmentation.Rule rule = clone.getMappingRules().get(0).getRules().get(0);
+        rule.setAfterbreak(rule.getAfterbreak() + "foo");
+        assertNotEquals(orig, clone);
     }
 
     /**
-     * Test SRX writer/reader.
+     * Test SRX#loadFromDir produce SRX object properly.
      * <p>
-     * Previous versions have a bug when saving segmentation.conf file. It is
-     * better to save language property using language code defined in
-     * LanguageCode class. Unfortunately, OmegaT 6.0 and before produce a
-     * localized language name for the property. The test case here trys reading
-     * a segmentation.conf file that is produced by OmegaT in English
-     * environment and Japanese environment.
+     * MapRule#getLanguageCode should return Language Code defined in
+     * LanguageCode class. MapRule#getLanguage should return a localized
+     * name of language. The test here check both values. OmegaT 6.0 and
+     * before,
      */
-    public static void testSrxMigration(File segmentConf, File configDir) throws Exception {
-        File segmentSrx = new File(configDir, "segmentation.srx");
-        // load from conf file
-        SRX srxOrig = SRX.loadConfFile(segmentConf, configDir);
-        assertNotNull(srxOrig);
-        List<MapRule> mapRuleList = srxOrig.getMappingRules();
+    @Test
+    public void testSrxReaderDefault() throws IOException {
+        assertTrue(SEGMENT_DEFAULT.exists());
+        assertTrue(SEGMENT_DEFAULT.isFile());
+        SRX srx = SRX.loadSrxFile(SEGMENT_DEFAULT.toURI());
+        assertNotNull(srx);
+        assertTrue(srx.isCascade());
+        List<MapRule> mapRuleList = srx.getMappingRules();
         assertNotNull(mapRuleList);
         assertEquals(18, mapRuleList.size());
         for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
                 assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
                 assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
-            } else if (mapRule.getLanguage().equals("Text")) {
-                assertEquals(OStrings.getString(LanguageCodes.F_TEXT_KEY), mapRule.getLanguageName());
             }
         }
-        // load from srx file
-        assertTrue(segmentSrx.exists());
-        SRX srx1 = SRX.loadFromDir(configDir);
-        assertNotNull(srx1);
-        mapRuleList = srx1.getMappingRules();
-        assertNotNull(mapRuleList);
-        assertEquals(18, mapRuleList.size());
-        for (MapRule mapRule : mapRuleList) {
-            if (mapRule.getPattern().equals("JA.*")) {
-                assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
-                assertEquals(OStrings.getString(LanguageCodes.JAPANESE_KEY), mapRule.getLanguageName());
-            } else if (mapRule.getLanguage().equals("Text")) {
-                assertEquals(OStrings.getString(LanguageCodes.F_TEXT_KEY), mapRule.getLanguageName());
-            }
-        }
-        assertEquals("2.0", srx1.getVersion());
-        assertTrue(srx1.isCascade());
-        assertTrue(srx1.isSegmentSubflows());
-    }
-
-    private SRXTest() {
+        assertEquals("2.0", srx.getVersion());
+        assertTrue(srx.isSegmentSubflows());
     }
 }

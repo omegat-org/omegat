@@ -80,6 +80,7 @@ public abstract class AbstractZipFilter extends AbstractFilter {
                 }
             }
         } catch (IOException ignored) {
+            // always considered non-supported
         }
         return false;
     }
@@ -135,13 +136,11 @@ public abstract class AbstractZipFilter extends AbstractFilter {
                 } else {
                     toTranslate.add(ze); // need sort before treatment
                 }
-            } else if (!mustDeleteInternalFile(ze, zipout != null, fc)) {
-                if (zipout != null) {
+            } else if (!mustDeleteInternalFile(ze, zipout != null, fc) && zipout != null) {
                     ZipEntry outEntry = new ZipEntry(ze.getName());
                     zipout.putNextEntry(outEntry);
                     org.apache.commons.io.IOUtils.copy(zf.getInputStream(ze), zipout);
                     zipout.closeEntry();
-                }
             }
         }
         if (cmp != null) {
@@ -153,9 +152,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     }
 
     private void translateEntry(ZipFile zf, ZipOutputStream zipout, FilterContext fc, ZipEntry ze) {
-        try {
+        try (XMLReader xReader = new XMLReader(zf.getInputStream(ze))) {
             AbstractXmlFilter xmlfilter = getFilter(ze);
-            XMLReader xReader = new XMLReader(zf.getInputStream(ze));
             BufferedReader reader = new BufferedReader(xReader);
             if (zipout == null) {
                 xmlfilter.processFile(reader, null, fc);

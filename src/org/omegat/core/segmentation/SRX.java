@@ -45,7 +45,6 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 
 import javax.xml.stream.XMLInputFactory;
-import java.beans.ExceptionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -76,6 +75,8 @@ public class SRX implements Serializable {
 
     public static final String CONF_SENTSEG = "segmentation.conf";
     public static final String SRX_SENTSEG = "segmentation.srx";
+    private static final String YES = "yes";
+    private static final String NO = "no";
     private static final XmlMapper mapper;
 
     static {
@@ -112,9 +113,6 @@ public class SRX implements Serializable {
         return result;
     }
 
-    private static final String YES = "yes";
-    private static final String NO = "no";
-
     /**
      * Saves segmentation rules into specified directory.
      *
@@ -125,7 +123,7 @@ public class SRX implements Serializable {
      *            where to put the file. The file name is forced to
      *            {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
-    public static void saveToSrx(@NotNull SRX srx, @NotNull File outDir) throws IOException {
+    public static void saveToSrx(SRX srx, File outDir) throws IOException {
         ObjectFactory objectFactory = new ObjectFactory();
         Srx jaxbSrxObject = createJaxbSrxObject(objectFactory, srx);
         try (FileOutputStream fos = new FileOutputStream(outDir.toPath().resolve(SRX_SENTSEG).toFile())) {
@@ -136,7 +134,7 @@ public class SRX implements Serializable {
         }
     }
 
-    private static Srx createJaxbSrxObject(ObjectFactory objectFactory, @NotNull SRX sourceSrx) {
+    private static Srx createJaxbSrxObject(@NotNull ObjectFactory objectFactory, @NotNull SRX sourceSrx) {
         Srx jaxbObject = objectFactory.createSrx();
         jaxbObject.setVersion("2.0");
         jaxbObject.setHeader(objectFactory.createHeader());
@@ -382,16 +380,14 @@ public class SRX implements Serializable {
     private static SRX upgrade(SRX current, SRX defaults) {
         // renaming "Default (English)" to "Default"
         // and removing English/Text/HTML-specific rules from there
-        if (OT160RC9_VERSION.equals(CURRENT_VERSION)) {
-            String def = "Default (English)";
-            for (int i = 0; i < current.getMappingRules().size(); i++) {
-                MapRule maprule = current.getMappingRules().get(i);
-                if (def.equals(maprule.getLanguage())) {
-                    maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
-                }
+        final String def = "Default (English)";
+        for (int i = 0; i < current.getMappingRules().size(); i++) {
+            MapRule maprule = current.getMappingRules().get(i);
+            if (def.equals(maprule.getLanguage())) {
+                maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
+                maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
+                maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
+                maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
             }
         }
         return current;
@@ -413,34 +409,6 @@ public class SRX implements Serializable {
             }
         }
         return Collections.emptyList();
-    }
-
-    /**
-     * My Own Class to listen to exceptions, occured while loading filters
-     * configuration.
-     */
-    static class MyExceptionListener implements ExceptionListener {
-        private final List<Exception> exceptionsList = new ArrayList<>();
-        private boolean exceptionOccured = false;
-
-        public void exceptionThrown(Exception e) {
-            exceptionOccured = true;
-            exceptionsList.add(e);
-        }
-
-        /**
-         * Returns whether any exceptions occured.
-         */
-        public boolean isExceptionOccured() {
-            return exceptionOccured;
-        }
-
-        /**
-         * Returns the list of occured exceptions.
-         */
-        public List<Exception> getExceptionsList() {
-            return exceptionsList;
-        }
     }
 
     // Patterns
@@ -635,10 +603,6 @@ public class SRX implements Serializable {
     // Versioning properties to detect version upgrades
     // and possibly do something if required
 
-    /** Initial version of segmentation support (1.4.6 beta 4 -- 1.6.0 RC7). */
-    public static final String INITIAL_VERSION = "0.2";
-    /** Segmentation support of 1.6.0 RC8 (a bit more rules added). */
-    public static final String OT160RC8_VERSION = "0.2.1";
     /** Segmentation support of 1.6.0 RC9 (rules separated). */
     public static final String OT160RC9_VERSION = "0.2.2";
     /** Currently supported segmentation support version. */

@@ -43,9 +43,24 @@ import gen.core.segmentation.Srx;
 import org.jetbrains.annotations.NotNull;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+import org.xml.sax.XMLReader;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.transform.sax.SAXSource;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -79,6 +94,9 @@ public class SRX implements Serializable {
     private static final String NO = "no";
     private static final XmlMapper mapper;
 
+    /** Context for JAXB rules processing. */
+    protected static final JAXBContext SRX_JAXB_CONTEXT;
+
     static {
         final XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         // You should NOT use XMLInputFactor.getXMLInputFactory
@@ -96,6 +114,19 @@ public class SRX implements Serializable {
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        try {
+            SRX_JAXB_CONTEXT = JAXBContext.newInstance(Srx.class);
+        } catch (JAXBException ex) {
+            if (ex.getMessage() != null) {
+                throw new ExceptionInInitializerError(ex.getMessage());
+            }
+            if (ex.getCause() != null) {
+                throw new ExceptionInInitializerError(ex.getCause().getClass().getName() + ": "
+                        + ex.getCause().getMessage());
+            }
+            throw new ExceptionInInitializerError(ex.getClass().getName());
+        }
     }
 
     public SRX copy() {
@@ -241,7 +272,8 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    static SRX loadConfFile(File configFile, File configDir) throws IOException {
+    static SRX loadConfFile(File configFile, File configDir) throws IOException, JAXBException,
+            ParserConfigurationException, SAXException {
         if (!configFile.exists()) {
             Path outFilePath = configDir.toPath().resolve(SRX_SENTSEG);
             if (outFilePath.toFile().exists()) {
@@ -255,6 +287,7 @@ public class SRX implements Serializable {
         }
 
         SRX srx = loadRulesFromFile(configFile);
+
         // save when no exception when we read the file correctly,
         // or there is no file specified.
         try {
@@ -268,13 +301,36 @@ public class SRX implements Serializable {
     /**
      * Loads rules from the given XML file using the configured SAXParserFactory and Unmarshaller.
      */
-    private static SRX loadRulesFromFile(File configFile) throws IOException {
-        SRX srx = mapper.readValue(configFile, SRX.class);
+    private static SRX loadRulesFromFile(File configFile) throws SAXException,
+            ParserConfigurationException, JAXBException, IOException {
+        SAXParserFactory saxParserFactory = createSecureSAXParserFactory();
+        Unmarshaller unmarshaller = SRX_JAXB_CONTEXT.createUnmarshaller();
+        SRX srx;
+        try (InputStream inputStream = new FileInputStream(configFile)) {
+            InputSource inputSource = new InputSource(inputStream);
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            XMLReader xmlReader = saxParser.getXMLReader();
+            SAXSource saxSource = new SAXSource(xmlReader, inputSource);
+            srx = (SRX) unmarshaller.unmarshal(saxSource);
+        }
         Log.logInfoRB("SRX_RULE_FROM", configFile.getAbsolutePath());
         if (isOlderVersion(srx)) {
             return mergeWithDefaults(srx);
         }
         return srx;
+    }
+
+    /**
+     * Creates and configures a secure SAXParserFactory to prevent XXE attacks.
+     */
+    private static SAXParserFactory createSecureSAXParserFactory() throws SAXNotSupportedException,
+            SAXNotRecognizedException, ParserConfigurationException {
+        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        saxParserFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        saxParserFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        saxParserFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        saxParserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        return saxParserFactory;
     }
 
     /**

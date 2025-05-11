@@ -40,6 +40,7 @@ import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
+import org.jetbrains.annotations.NotNull;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 
@@ -111,6 +112,9 @@ public class SRX implements Serializable {
         return result;
     }
 
+    private static final String YES = "yes";
+    private static final String NO = "no";
+
     /**
      * Saves segmentation rules into specified directory.
      *
@@ -121,67 +125,83 @@ public class SRX implements Serializable {
      *            where to put the file. The file name is forced to
      *            {@link #SRX_SENTSEG} and will be in standard SRX format.
      */
-    public static void saveToSrx(SRX srx, File outDir) throws IOException {
-        File outFile = new File(outDir, SRX_SENTSEG);
-
-        if (srx == null) {
-            if (outFile.exists()) {
-                Files.delete(outFile.toPath());
-            }
-            Path conf = outDir.toPath().resolve(CONF_SENTSEG);
-            if (conf.toFile().exists()) {
-                Files.delete(conf);
-            }
-            return;
-        }
-
-        ObjectFactory factory = new ObjectFactory();
-        Srx jaxbObject = factory.createSrx();
-        jaxbObject.setVersion("2.0");
-        jaxbObject.setHeader(factory.createHeader());
-        jaxbObject.getHeader().setSegmentsubflows(srx.segmentSubflows ? "yes" : "no");
-        jaxbObject.getHeader().setCascade(srx.cascade ? "yes" : "no");
-        jaxbObject.setBody(factory.createBody());
-        jaxbObject.getBody().setMaprules(factory.createMaprules());
-        jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
-        for (MapRule mr : srx.getMappingRules()) {
-            Languagemap map = new Languagemap();
-            String pattern = mr.getPattern();
-            // we use standard name
-            String language = LanguageCodes.getLanguageCodeByPattern(pattern);
-            if (language == null) {
-                language = LanguageCodes.getLanguageCodeByName(mr.getLanguage());
-            }
-            if (language == null) {
-                language = mr.getLanguage();
-            }
-            map.setLanguagerulename(language);
-            map.setLanguagepattern(pattern);
-            jaxbObject.getBody().getMaprules().getLanguagemap().add(map);
-            Languagerule lr = new Languagerule();
-            lr.setLanguagerulename(language);
-            jaxbObject.getBody().getLanguagerules().getLanguagerule().add(lr);
-            for (Rule rule : mr.getRules()) {
-                gen.core.segmentation.Rule jaxbRule = factory.createRule();
-                lr.getRule().add(jaxbRule);
-                jaxbRule.setBreak(rule.isBreakRule() ? "yes" : "no");
-                if (rule.getBeforebreak() != null) {
-                    jaxbRule.setBeforebreak(factory.createBeforebreak());
-                    jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());
-                }
-                if (rule.getAfterbreak() != null) {
-                    jaxbRule.setAfterbreak(factory.createAfterbreak());
-                    jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
-                }
-            }
-        }
-
-        try (FileOutputStream fos = new FileOutputStream(outFile)) {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbObject);
+    public static void saveToSrx(@NotNull SRX srx, @NotNull File outDir) throws IOException {
+        ObjectFactory objectFactory = new ObjectFactory();
+        Srx jaxbSrxObject = createJaxbSrxObject(objectFactory, srx);
+        try (FileOutputStream fos = new FileOutputStream(outDir.toPath().resolve(SRX_SENTSEG).toFile())) {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(fos, jaxbSrxObject);
         } catch (DatabindException e) {
             Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
             throw new IOException(e);
         }
+    }
+
+    private static Srx createJaxbSrxObject(ObjectFactory objectFactory, @NotNull SRX sourceSrx) {
+        Srx jaxbObject = objectFactory.createSrx();
+        jaxbObject.setVersion("2.0");
+        jaxbObject.setHeader(objectFactory.createHeader());
+        jaxbObject.getHeader().setSegmentsubflows(sourceSrx.segmentSubflows ? YES : NO);
+        jaxbObject.getHeader().setCascade(sourceSrx.cascade ? YES : NO);
+        jaxbObject.setBody(objectFactory.createBody());
+        jaxbObject.getBody().setMaprules(objectFactory.createMaprules());
+        jaxbObject.getBody().setLanguagerules(objectFactory.createLanguagerules());
+        for (MapRule mappingRule : sourceSrx.getMappingRules()) {
+            String pattern = mappingRule.getPattern();
+            String languageName = resolveLanguageName(mappingRule, pattern);
+
+            Languagemap languageMap = createLanguageMap(languageName, pattern);
+            jaxbObject.getBody().getMaprules().getLanguagemap().add(languageMap);
+
+            Languagerule languageRule = createLanguageRule(languageName);
+            jaxbObject.getBody().getLanguagerules().getLanguagerule().add(languageRule);
+
+            for (Rule rule : mappingRule.getRules()) {
+                gen.core.segmentation.Rule jaxbRule = createJaxbRule(objectFactory, rule);
+                languageRule.getRule().add(jaxbRule);
+            }
+        }
+        return jaxbObject;
+    }
+
+    private static String resolveLanguageName(MapRule mappingRule, String pattern) {
+        String language = LanguageCodes.getLanguageCodeByPattern(pattern);
+        if (language == null) {
+            language = LanguageCodes.getLanguageCodeByName(mappingRule.getLanguage());
+        }
+        if (language == null) {
+            language = mappingRule.getLanguage();
+        }
+        return language;
+    }
+
+    private static Languagemap createLanguageMap(String languageName, String pattern) {
+        Languagemap languageMap = new Languagemap();
+        languageMap.setLanguagerulename(languageName);
+        languageMap.setLanguagepattern(pattern);
+        return languageMap;
+    }
+
+    private static Languagerule createLanguageRule(String languageName) {
+        Languagerule languageRule = new Languagerule();
+        languageRule.setLanguagerulename(languageName);
+        return languageRule;
+    }
+
+    private static gen.core.segmentation.Rule createJaxbRule(ObjectFactory factory, Rule rule) {
+        gen.core.segmentation.Rule jaxbRule = factory.createRule();
+        jaxbRule.setBreak(rule.isBreakRule() ? YES : NO);
+
+        if (rule.getBeforebreak() != null) {
+            jaxbRule.setBeforebreak(factory.createBeforebreak());
+            jaxbRule.getBeforebreak().setContent(rule.getBeforebreak());
+        }
+
+        if (rule.getAfterbreak() != null) {
+            jaxbRule.setAfterbreak(factory.createAfterbreak());
+            jaxbRule.getAfterbreak().setContent(rule.getAfterbreak());
+        }
+
+        return jaxbRule;
     }
 
     /**
@@ -223,20 +243,22 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    static SRX loadConfFile(File configFile, File configDir) throws Exception {
-        SRX srx;
-        try {
-            srx = loadRulesFromFile(configFile, configDir);
-        } catch (Exception e) {
-            srx = null;
-            // silently ignoring FNF
-            if (!(e instanceof FileNotFoundException)) {
-                Log.log(e);
-            } else {
-                throw e;
+    static SRX loadConfFile(File configFile, File configDir) throws IOException {
+        if (!configFile.exists()) {
+            Path outFilePath = configDir.toPath().resolve(SRX_SENTSEG);
+            if (outFilePath.toFile().exists()) {
+                Files.delete(outFilePath);
             }
+            Path conf = configDir.toPath().resolve(CONF_SENTSEG);
+            if (conf.toFile().exists()) {
+                Files.delete(conf);
+            }
+            return null;
         }
-        // save only if we could read the file correctly...
+
+        SRX srx = loadRulesFromFile(configFile);
+        // save when no exception when we read the file correctly,
+        // or there is no file specified.
         try {
             saveToSrx(srx, configDir);
         } catch (Exception e) {
@@ -248,21 +270,13 @@ public class SRX implements Serializable {
     /**
      * Loads rules from the given XML file using the configured SAXParserFactory and Unmarshaller.
      */
-    private static SRX loadRulesFromFile(File configFile) {
-        if (!configFile.exists()) {
-            return null;
+    private static SRX loadRulesFromFile(File configFile) throws IOException {
+        SRX srx = mapper.readValue(configFile, SRX.class);
+        Log.logInfoRB("SRX_RULE_FROM", configFile.getAbsolutePath());
+        if (isOlderVersion(srx)) {
+            return mergeWithDefaults(srx);
         }
-       try {
-            SRX srx = mapper.readValue(configFile, SRX.class);
-            Log.logInfoRB("SRX_RULE_FROM", configFile.getAbsolutePath());
-            if (isOlderVersion(srx)) {
-                return mergeWithDefaults(srx);
-            }
-            return srx;
-        } catch (IOException ignored) {
-            // ignored
-        }
-        return null;
+        return srx;
     }
 
     /**
@@ -292,25 +306,14 @@ public class SRX implements Serializable {
                     languagerule.getRule().stream().map(Rule::new).collect(Collectors.toList()));
         }
         SRX srxObject = new SRX();
-        srxObject.setSegmentSubflows(!"no".equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
-        srxObject.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
+        srxObject.setSegmentSubflows(!NO.equalsIgnoreCase(srx.getHeader().getSegmentsubflows()));
+        srxObject.setCascade(!NO.equalsIgnoreCase(srx.getHeader().getCascade()));
         srxObject.setVersion(srx.getVersion());
         srxObject.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
                 .map(languagemap -> new MapRule(languagemap.getLanguagerulename(),
                         languagemap.getLanguagepattern(), mapping.get(languagemap.getLanguagerulename())))
                 .collect(Collectors.toList()));
         return srxObject;
-    }
-
-    /**
-     * Does a config file already exists for the project at the given location?
-     *
-     * @param configDir
-     *            the project directory for storage of settings file
-     */
-    public static boolean projectConfigFileExists(String configDir) {
-        File configFile = new File(configDir + CONF_SENTSEG);
-        return configFile.exists();
     }
 
     /** Merges two sets of segmentation rules together. */

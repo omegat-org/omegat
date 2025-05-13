@@ -151,6 +151,24 @@ public final class SRXTest {
             SRXTest.testSrxMigration(segmentConf, configDir);
         }
     }
+    
+    /** Check compatibilty with a conf file which is not at all based on standard OmegaT rules **/
+    public static class SRXMigrateExtDeTest {
+
+        @org.junit.Rule
+        public final LocaleRule localeRule = new LocaleRule(new Locale("de"));
+
+        @org.junit.Rule
+        public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
+
+        @Test
+        public void testSrxMigration() throws Exception {
+            File segmentConf = Paths.get(SEGMENT_CONF_BASE, "ext", "segmentation.conf").toFile();
+            File configDir = folder.newFolder();
+            SRXTest.testSrxMigration(segmentConf, configDir);
+        }
+    }
+    
 
     /**
      * Test SRX writer/reader.

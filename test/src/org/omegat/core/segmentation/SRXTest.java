@@ -33,6 +33,9 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
@@ -215,7 +218,40 @@ public final class SRXTest {
         assertTrue(srx1.isCascade());
         assertTrue(srx1.isSegmentSubflows());
     }
+    
+   public static class SRXSecurityTest {
 
+        @org.junit.Rule
+        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+
+        @org.junit.Rule
+        public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
+
+        
+        @Test
+        public void testSRXLoaderSecureCVE_2024_51366() throws IOException {
+            File tmpDir = folder.newFolder();
+            Path segmentConf = tmpDir.toPath().resolve("segmentation.conf");
+            // prepare CVE-2024-51366 exploit code
+            String xmlContent = "<java>\n" +
+                    "    <object class=\"java.lang.ProcessBuilder\">\n" +
+                    "        <array class=\"java.lang.String\" length=\"2\" >\n" +
+                    "            <void index=\"0\">\n" +
+                    "                <string>touch</string>\n" +
+                    "            </void>\n" +
+                    "            <void index=\"1\">\n" +
+                    "                <string>" + tmpDir.toString() + "/test-file</string>\n" +
+                    "            </void>\n" +
+                    "        </array>\n" +
+                    "        <void method=\"start\"/>\n" +
+                    "    </object>\n" +
+                    "</java>";
+            Files.writeString(segmentConf, xmlContent);
+            SRX srx = SRX.loadFromDir(segmentConf.getParent().toFile());
+            assertTrue(new File(tmpDir, "test-file").exists());
+        }
+    }
+    
     private SRXTest() {
     }
 }

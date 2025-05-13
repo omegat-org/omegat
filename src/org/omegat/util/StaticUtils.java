@@ -284,9 +284,16 @@ public final class StaticUtils {
                 // check if the dir exists
                 File dir = new File(configDir);
                 if (!dir.exists()) {
-                    dir.mkdirs();
+                    // create the dir
+                    // if the dir could not be created,
+                    // set the config dir to the current working dir
+                    if (!dir.mkdirs()) {
+                        Log.logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
+                        configDir = new File(".").getAbsolutePath() + File.separator;
+                    }
+                
                     // If the directory for standard OmegaT exists we can import from it
-                    File copyOmegat = new File(dir.getParentFile(), dir.getName().toLowerCase().replace("capstan-",""));
+                    File copyOmegat = new File(dir.getParentFile(), dir.getName().replace("_capstan","").replace("_cApStAn",""));
                     if (copyOmegat.exists()) {
                         try {
                             for (File conf: FileUtil.buildFileList(copyOmegat, true)) {
@@ -297,24 +304,27 @@ public final class StaticUtils {
                                 if (conf.getName().toLowerCase().startsWith("pisa")) {
                                     Log.log("Import " + conf + " from standard OmegaT configuration (MOVE)");
                                     Files.move(conf.toPath(), new File(configDir + File.separator + confRel.toString()).toPath());
+                                } else if (conf.getName().equals("omegat.prefs")) {
+                                    PreferencesXML xml = new PreferencesXML(conf, new File(configDir + File.separator + confRel.toString()));
+                                    List<String> keys = new ArrayList<>(), values = new ArrayList<>(); xml.load(keys, values);
+                                    keys.add("omegat_vendor"); values.add("cApStAn");
+                                    Log.log("Import " + conf + " from standard OmegaT configuration (COPY+CHANGE)");
+                                    xml.save(keys, values);
                                 } else {
                                     Log.log("Import " + conf + " from standard OmegaT configuration (COPY)");
                                     Files.copy(conf.toPath(), new File(configDir + File.separator + confRel.toString()).toPath());
                                 }
                             }
-                        } catch (IOException io) {
+                        } catch (Exception io) {
                             Log.log(io);
                         }
-                    } else {
-                        // create the dir
-                        boolean created = dir.mkdirs();
-
-                        // if the dir could not be created,
-                        // set the config dir to the current working dir
-                        if (!created) {
-                            Log.logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
-                            configDir = new File(".").getAbsolutePath() + File.separator;
-                        }
+                    }
+                    // Create empty file
+                    try {
+                        File tmpFile = new File(dir, "cApStAn.txt"); 
+                        if (! tmpFile.exists()) try (java.io.FileOutputStream fos = new java.io.FileOutputStream(tmpFile)) { fos.write(new byte[0]); }
+                    } catch (Exception ex) {
+                        Log.log(ex);
                     }
                 }
             } catch (SecurityException e) {

@@ -169,7 +169,7 @@ public final class SRXTest {
         assertNotNull(srxOrig);
         List<MapRule> mapRuleList = srxOrig.getMappingRules();
         assertNotNull(mapRuleList);
-        assertEquals(18, mapRuleList.size());
+        assertEquals(17, mapRuleList.size()); // samples have 17 rules, while default had 18
         for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
                 assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());
@@ -184,7 +184,7 @@ public final class SRXTest {
         assertNotNull(srx1);
         mapRuleList = srx1.getMappingRules();
         assertNotNull(mapRuleList);
-        assertEquals(18, mapRuleList.size());
+        assertEquals(17, mapRuleList.size());
         for (MapRule mapRule : mapRuleList) {
             if (mapRule.getPattern().equals("JA.*")) {
                 assertEquals(LanguageCodes.JAPANESE_CODE, mapRule.getLanguage());

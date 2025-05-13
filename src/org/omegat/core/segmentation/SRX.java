@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
-               2018 Thomas Cordonnier
+               2018,2025 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,8 +27,6 @@
 
 package org.omegat.core.segmentation;
 
-import java.beans.ExceptionListener;
-import java.beans.XMLDecoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,6 +43,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -222,51 +224,28 @@ public class SRX implements Serializable {
      * of rules.
      */
     static SRX loadConfFile(File configFile, File configDir) throws Exception {
-        SRX res;
         try {
-            SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
-            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
-                res = (SRX) xmldec.readObject();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            // add XSLT in Transformer
+            Transformer transformer = transformerFactory.newTransformer(new StreamSource(
+                SRX.class.getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
+            File dest = new File(configDir, SRX_SENTSEG);
+            try (FileOutputStream fos = new FileOutputStream(dest)) { 
+                transformer.transform(new StreamSource(configFile), new StreamResult(fos));
             }
-
-            if (myel.isExceptionOccured()) {
-                StringBuilder sb = new StringBuilder();
-                for (Exception ex : myel.getExceptionsList()) {
-                    sb.append("    ");
-                    sb.append(ex);
-                    sb.append("\n");
-                }
-                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                res = SRX.getDefault();
-            } else {
-                // checking the version
-                if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-                    // yeap, the segmentation config file is of the older
-                    // version
-
-                    // initing defaults
-                    SRX defaults = SRX.getDefault();
-                    // and merging them into loaded rules
-                    res = merge(res, defaults);
-                }
-                Log.logInfoRB("SRX_RULE_FROM", configFile);
+            configFile.delete();
+            try (FileInputStream fis = new FileInputStream(dest)) {
+                return loadSrxInputStream(fis);
             }
         } catch (Exception e) {
-            res = null;
             // silently ignoring FNF
             if (!(e instanceof FileNotFoundException)) {
                 Log.log(e);
+                return null;
             } else {
                 throw e;
             }
-        }
-        // save only if we could read the file correctly...
-        try {
-            saveToSrx(res, configDir);
-        } catch (Exception o3) {
-            Log.log(o3); // detail why conversion failed, but continue
-        }
-        return res;
+        }        
     }
 
     private static SRX loadSrxFile(URI rulesUri) {
@@ -405,34 +384,6 @@ public class SRX implements Serializable {
             }
         }
         return null;
-    }
-
-    /**
-     * My Own Class to listen to exceptions, occured while loading filters
-     * configuration.
-     */
-    static class MyExceptionListener implements ExceptionListener {
-        private final List<Exception> exceptionsList = new ArrayList<>();
-        private boolean exceptionOccured = false;
-
-        public void exceptionThrown(Exception e) {
-            exceptionOccured = true;
-            exceptionsList.add(e);
-        }
-
-        /**
-         * Returns whether any exceptions occured.
-         */
-        public boolean isExceptionOccured() {
-            return exceptionOccured;
-        }
-
-        /**
-         * Returns the list of occured exceptions.
-         */
-        public List<Exception> getExceptionsList() {
-            return exceptionsList;
-        }
     }
 
     // Patterns

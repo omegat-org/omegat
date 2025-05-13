@@ -5,6 +5,7 @@
 
  Copyright (C) 2016 Aaron Madlon-Kay
                2024 Hiroshi Miura
+               2025 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -26,6 +27,7 @@
 
 package org.omegat.core.segmentation;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -248,7 +250,7 @@ public final class SRXTest {
                     "</java>";
             Files.writeString(segmentConf, xmlContent);
             SRX srx = SRX.loadFromDir(segmentConf.getParent().toFile());
-            assertTrue(new File(tmpDir, "test-file").exists());
+            assertFalse(new File(tmpDir, "test-file").exists()); // true would mean that the vulnerability is still here!
         }
     }
     

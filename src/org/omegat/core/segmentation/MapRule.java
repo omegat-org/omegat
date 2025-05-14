@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,13 +26,14 @@
 
 package org.omegat.core.segmentation;
 
+import org.omegat.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
-import org.omegat.util.StringUtil;
 
 /**
  * A class representing the language rules and their mapping to the segmentation
@@ -43,40 +45,98 @@ public class MapRule implements Serializable {
 
     private static final long serialVersionUID = -5868132953113679291L;
 
-    /** creates a new empty MapRule */
-    public MapRule() {
-    }
-
-    /** creates an initialized MapRule */
-    public MapRule(String language, String pattern, List<Rule> rules) {
-        this.setLanguage(language);
-        this.setPattern(pattern);
-        this.setRules(rules);
-    }
+    private static final Logger LOGGER = Logger.getLogger(MapRule.class.getName());
 
     /** Language Name */
     private String languageCode;
 
+    /**
+     * Creates a new empty MapRule.
+     * <p>
+     * When SRX.loadSrxFile loads segmentation.conf, java.beans.XMLDecoder
+     * create an empty object, then calls setLanguage and setPattern methods.
+     * </p>
+     */
+    public MapRule() {
+    }
+
+    /**
+     * Create initialized MapRule object.
+     * 
+     * @param language
+     *            localized language name (from segmentation.conf), or language
+     *            code (from SRX)
+     * @param pattern
+     *            language pattern such as "EN.*" or ".*"
+     * @param rules
+     *            segmentation rules.
+     */
+    public MapRule(String language, String pattern, List<Rule> rules) {
+        String code = LanguageCodes.getLanguageCodeByPattern(pattern);
+        this.setLanguage(code != null ? code : language);
+        this.setPattern(pattern);
+        this.setRules(rules);
+    }
+
     /** Returns Language Name (to display it in a dialog). */
-    public String getLanguage() {
+    public String getLanguageName() {
+        /*
+         * When there has already migrated a SRX file store, languageCode fields
+         * has a name defined as "LanguageCodes.*_CODE". Otherwise, MapRule
+         * object is created from "segmentation.conf" java beans file, so it is
+         * localized name of language. We first assume the latter. If res is
+         * empty, the object is created from a SRX file, then return
+         * languageCode itself.
+         */
         String res = LanguageCodes.getLanguageName(languageCode);
-        return StringUtil.isEmpty(res) ? languageCode : res;
+        if (res == null || res.isEmpty()) {
+            res = languageCode;
+        }
+        return res;
     }
 
-    /** Sets Language Name */
-    public void setLanguage(String language) {
-        this.languageCode = language;
+    /** Sets Language Code */
+    public void setLanguage(String code) {
+        /*
+         * setLanguage method is called from XmlDecoder of a Java beans library
+         * when migrating from "segmentation.conf" beans file. An argument will
+         * be localized name of language. When the object is created from a
+         * standard SRX file, the argument will be standard language name,
+         * defined as "LanguageCodes.*_CODE". The behavior was changed in OmegaT
+         * 6.0.0 release in 2023. We first detect whether the argument is
+         * standard code. If the code is not a standard code, then try to find a
+         * localized name of the language name. When you believe all the OmegaT
+         * 4.x and 5.x users are migrated to OmegaT 6.x or later, you may want
+         * to remove the workaround here.
+         */
+        if (!LanguageCodes.isLanguageCodeKnown(code)) {
+            String alt = LanguageCodes.getLanguageCodeByName(code);
+            if (alt != null) {
+                languageCode = alt;
+                return;
+            } else {
+                Log.logDebug(LOGGER, "Unknown languagerulename '{0}'", code);
+            }
+        }
+        languageCode = code;
     }
 
-    /** Returns Language Code for programmatic usage. */
-    public String getLanguageCode() {
+    /**
+     * Returns Language Code for programmatic usage.
+     */
+    public String getLanguage() {
         return languageCode;
     }
 
-    /** Pattern for the language/country ISO code (of a form LL-CC). */
+    /*
+     * Pattern for the language/country ISO code (of a form LL-CC). It is like
+     * "EN.*".
+     */
     private Pattern pattern;
 
-    /** Returns Pattern for the language/country ISO code (of a form LL-CC). */
+    /**
+     * Returns Pattern for the language/country ISO code (of a form LL-CC).
+     */
     public String getPattern() {
         if (pattern != null) {
             return pattern.pattern();
@@ -93,14 +153,24 @@ public class MapRule implements Serializable {
         return pattern;
     }
 
-    /** Sets Pattern for the language/country ISO code (of a form LL-CC). */
+    /**
+     * Sets Pattern for the language/country ISO code (of a form LL-CC).
+     * 
+     * @param pattern
+     *            pattern string such as "EN.*"
+     */
     public void setPattern(String pattern) throws PatternSyntaxException {
         // Fix for bug [1643500]
-        // language code in segmentation rule is case sensitive
+        // language code in segmentation rule is a case-sensitive
         // Correction contributed by Tiago Saboga.
         this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
     }
 
+    /**
+     * Deep copy of the object, mandatory for java beans.
+     * 
+     * @return new MapRule object
+     */
     public MapRule copy() {
         MapRule result = new MapRule();
         result.languageCode = languageCode;
@@ -125,23 +195,28 @@ public class MapRule implements Serializable {
         this.rules = rules;
     }
 
-    /** Indicates whether some other MapRule is "equal to" this one. */
+    /**
+     * Indicates whether some other MapRule is "equal to" this one.
+     */
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof MapRule)) {
+        if (!(obj instanceof MapRule)) {
             return false;
         }
         MapRule that = (MapRule) obj;
-        return this.getPattern().equals(that.getPattern())
-                && this.getLanguage().equals(that.getLanguage())
+        return this.getPattern().equals(that.getPattern()) && this.getLanguage().equals(that.getLanguage())
                 && this.getRules().equals(that.getRules());
     }
 
-    /** Returns a hash code value for the object. */
+    /**
+     * Returns a hash code value for the object.
+     */
     public int hashCode() {
         return this.getPattern().hashCode() + this.getLanguage().hashCode() + this.getRules().hashCode();
     }
 
-    /** Returns a string representation of the MapRule for debugging purposes. */
+    /**
+     * Returns a string representation of the MapRule for debugging purposes.
+     */
     public String toString() {
         return getLanguage() + " (" + getPattern() + ") " + getRules().toString();
     }

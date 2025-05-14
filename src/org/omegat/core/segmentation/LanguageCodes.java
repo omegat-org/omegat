@@ -26,10 +26,10 @@
 
 package org.omegat.core.segmentation;
 
+import org.omegat.util.OStrings;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import org.omegat.util.OStrings;
 
 /**
  * Code-Key mappings for segmentation code.
@@ -43,7 +43,7 @@ public final class LanguageCodes {
     private LanguageCodes() {
     }
 
-    // Language Codes
+    // Codes of "languagerulename".
     public static final String CATALAN_CODE = "Catalan";
     public static final String CZECH_CODE = "Czech";
     public static final String GERMAN_CODE = "German";
@@ -84,7 +84,25 @@ public final class LanguageCodes {
     public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";
 
     /** A Map from language codes to language keys. */
-    private static Map<String, String> codeKeyHash = new HashMap<String, String>();
+    private static final Map<String, String> codeKeyHash = new HashMap<>();
+
+    private static final String CATALAN_PATTERN = "CA.*";
+    private static final String CZECH_PATTERN = "CS.*";
+    private static final String GERMAN_PATTERN = "DE.*";
+    private static final String ENGLISH_PATTERN = "EN.*";
+    private static final String SPANISH_PATTERN = "ES.*";
+    private static final String FINNISH_PATTERN = "FI.*";
+    private static final String FRENCH_PATTERN = "FR.*";
+    private static final String ITALIAN_PATTERN = "IT.*";
+    private static final String JAPANESE_PATTERN = "JA.*";
+    private static final String DUTCH_PATTERN = "NL.*";
+    private static final String POLISH_PATTERN = "PL.*";
+    private static final String RUSSIAN_PATTERN = "RU.*";
+    private static final String SWEDISH_PATTERN = "SV.*";
+    private static final String SLOVAK_PATTERN = "SK.*";
+    private static final String CHINESE_PATTERN = "ZH.*";
+
+    private static final Map<String, String> patternHash = new HashMap<>();
 
     static {
         codeKeyHash.put(CATALAN_CODE, CATALAN_KEY);
@@ -105,6 +123,21 @@ public final class LanguageCodes {
         codeKeyHash.put(DEFAULT_CODE, DEFAULT_KEY);
         codeKeyHash.put(F_TEXT_CODE, F_TEXT_KEY);
         codeKeyHash.put(F_HTML_CODE, F_HTML_KEY);
+        patternHash.put(CATALAN_PATTERN, CATALAN_CODE);
+        patternHash.put(CZECH_PATTERN, CZECH_CODE);
+        patternHash.put(GERMAN_PATTERN, GERMAN_CODE);
+        patternHash.put(ENGLISH_PATTERN, ENGLISH_CODE);
+        patternHash.put(SPANISH_PATTERN, SPANISH_CODE);
+        patternHash.put(FINNISH_PATTERN, FINNISH_CODE);
+        patternHash.put(FRENCH_PATTERN, FRENCH_CODE);
+        patternHash.put(ITALIAN_PATTERN, ITALIAN_CODE);
+        patternHash.put(JAPANESE_PATTERN, JAPANESE_CODE);
+        patternHash.put(DUTCH_PATTERN, DUTCH_CODE);
+        patternHash.put(POLISH_PATTERN, POLISH_CODE);
+        patternHash.put(RUSSIAN_PATTERN, RUSSIAN_CODE);
+        patternHash.put(SWEDISH_PATTERN, SWEDISH_CODE);
+        patternHash.put(SLOVAK_PATTERN, SLOVAK_CODE);
+        patternHash.put(CHINESE_PATTERN, CHINESE_CODE);
     }
 
     /**
@@ -119,5 +152,31 @@ public final class LanguageCodes {
         }
         String key = codeKeyHash.get(code);
         return OStrings.getString(key);
+    }
+
+    public static boolean isLanguageCodeKnown(String code) {
+        return codeKeyHash.containsKey(code);
+    }
+
+    public static String getLanguageCodeByName(String name) {
+        if (name == null) {
+            return null;
+        }
+        for (Map.Entry<String, String> entry : codeKeyHash.entrySet()) {
+            if (OStrings.getString(entry.getValue()).equals(name)) {
+                return entry.getKey();
+            }
+        }
+        // migration heuristics: Germany translation changed in v5.5.
+        // See:
+        // https://github.com/omegat-org/omegat/pull/1158#issuecomment-2448788253
+        if (name.contains("Textdateien")) {
+            return LanguageCodes.F_TEXT_CODE;
+        }
+        return null;
+    }
+
+    public static String getLanguageCodeByPattern(String pattern) {
+        return patternHash.get(pattern);
     }
 }

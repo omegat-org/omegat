@@ -39,6 +39,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import org.omegat.core.segmentation.SRX;
@@ -675,9 +676,8 @@ public final class Preferences {
         SRX oldValue = srx;
         srx = newSrx;
 
-        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
         try {
-            SRX.saveTo(srx, srxFile);
+            SRX.saveToSrx(srx, Paths.get(StaticUtils.getConfigDir()).toFile());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -764,8 +764,8 @@ public final class Preferences {
         }
         didInitSegmentation = true;
 
-        File srxFile = new File(StaticUtils.getConfigDir(), SRX.CONF_SENTSEG);
-        SRX s = SRX.loadSRX(srxFile);
+        File srxDir = new File(StaticUtils.getConfigDir());
+        SRX s = SRX.loadFromDir(srxDir);
         if (s == null) {
             s = SRX.getDefault();
         }

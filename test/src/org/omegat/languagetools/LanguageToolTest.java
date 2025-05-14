@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010-2013 Alex Buloichik
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,10 +28,13 @@ package org.omegat.languagetools;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -48,6 +52,8 @@ import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
 import org.languagetool.server.HTTPServer;
+import org.languagetool.server.HTTPServerConfig;
+
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
@@ -95,23 +101,36 @@ public class LanguageToolTest {
         assertEquals(0, matches.size());
     }
 
+    private static final int[] FREE_PORT_RANGE = {8081, 10080, 10081, 10082, 10083, 10084, 10085, 10086};
+
+    private int getFreePort() {
+        for (int p : FREE_PORT_RANGE) {
+            try (ServerSocket serverSocket = new ServerSocket(p)) {
+                return serverSocket.getLocalPort();
+            } catch (IOException ignored) {
+                // skip to next candiates
+            }
+        }
+        return -1;
+    }
+
     @Test
     public void testRemoteServer() throws Exception {
-        HTTPServer server = new HTTPServer();
+        int port = getFreePort();
+        assertNotEquals("Port has been already used.", -1, port);
+        HTTPServerConfig config = new HTTPServerConfig(port);
+        HTTPServer server = new HTTPServer(config);
         try {
             server.run();
 
-            try {
-                new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, "http://localhost:8081");
-                fail("URL not specifying API v2 should fail due to XML response instead of JSON");
-                // TODO: LanguageTool will drop XML entirely in version 3.6; this
-                // test might need to be adjusted then.
-            } catch (Exception e) {
-                // OK
-            }
+            String urlBase = "http://localhost:" + port;
+
+            assertThrows("URL not specifying API actions should fail due to missing argument.",
+                    java.lang.Exception.class,
+                    () -> new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG, urlBase));
 
             ILanguageToolBridge bridge = new LanguageToolNetworkBridge(SOURCE_LANG, TARGET_LANG,
-                    "http://localhost:8081/v2/check");
+                    urlBase + "/v2/check");
 
             // Set some rules to prevent the server from looking at config files.
             // User config files can specify languages we aren't providing at test
@@ -130,7 +149,7 @@ public class LanguageToolTest {
     }
 
     @Test
-    public void testNativeBridge() throws Exception {
+    public void testNativeBridge() {
         ILanguageToolBridge bridge = new LanguageToolNativeBridge(SOURCE_LANG, TARGET_LANG);
 
         // We don't care about the actual content of the results as long as
@@ -141,7 +160,7 @@ public class LanguageToolTest {
     }
 
     @Test
-    public void testWrapperInit() throws Exception {
+    public void testWrapperInit() {
         // Defaults: Local implementation
         ILanguageToolBridge bridge = LanguageToolWrapper.createBridgeFromPrefs(SOURCE_LANG, TARGET_LANG);
         assertTrue(bridge instanceof LanguageToolNativeBridge);

@@ -25,6 +25,10 @@
 
 package org.omegat.filters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
@@ -48,6 +52,9 @@ import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
@@ -69,11 +76,6 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.TMXReader2;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
-
-import static org.junit.Assert.*;
 
 /**
  * Base class for testing filter parsing.
@@ -324,8 +326,8 @@ public abstract class TestFilterBase extends TestCore {
 
     protected void align(IFilter filter, String in, String out, IAlignCallback callback) throws Exception {
         File inFile = new File("test/data/filters/" + in);
-        File outFile = new File("test/data/filters/" + out);
-        filter.alignFile(inFile, outFile, Collections.emptyMap(), context, callback);
+        File aOutFile = new File("test/data/filters/" + out);
+        filter.alignFile(inFile, aOutFile, Collections.emptyMap(), context, callback);
     }
 
     /**
@@ -391,6 +393,11 @@ public abstract class TestFilterBase extends TestCore {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
+        factory.setValidating(false);
+        factory.setFeature("http://xml.org/sax/features/namespaces", true);
+        factory.setFeature("http://xml.org/sax/features/validation", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
 
@@ -419,7 +426,17 @@ public abstract class TestFilterBase extends TestCore {
     }
 
     protected void compareXML(URL f1, URL f2) throws Exception {
-        XMLAssert.assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        factory.setValidating(false);
+        factory.setFeature("http://xml.org/sax/features/namespaces", false);
+        factory.setFeature("http://xml.org/sax/features/validation", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        var doc1 = builder.parse(f1.toExternalForm());
+        var doc2 = builder.parse(f2.toExternalForm());
+        XMLAssert.assertXMLEqual(doc1, doc2);
     }
 
     protected static class ParsedEntry {
@@ -525,20 +542,20 @@ public abstract class TestFilterBase extends TestCore {
 
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys, transMemories);
 
-            TestFileInfo fi = new TestFileInfo();
-            fi.filePath = file;
+            TestFileInfo testFileInfo = new TestFileInfo();
+            testFileInfo.filePath = file;
 
-            loadFilesCallback.setCurrentFile(fi);
+            loadFilesCallback.setCurrentFile(testFileInfo);
 
             filter.parseFile(new File(file), filterOptions, context, loadFilesCallback);
 
             loadFilesCallback.fileFinished();
 
             if (!transMemories.isEmpty()) {
-                fi.referenceEntries = transMemories.values().iterator().next();
+                testFileInfo.referenceEntries = transMemories.values().iterator().next();
             }
 
-            return fi;
+            return testFileInfo;
         }
     }
 

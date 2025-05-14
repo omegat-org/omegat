@@ -49,6 +49,7 @@ import org.omegat.util.OStrings;
 import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.Srx;
+import org.omegat.util.ValidationResult;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
@@ -141,9 +142,19 @@ public class SRX implements Serializable {
         if (!configFile.exists()) {
             return null;
         }
-        SRX res;
-        try {
 
+        SRX res;
+        // checking the config file for validity with allowed lists
+        SegmentationConfValidator validator = new SegmentationConfValidator(configFile.toPath());
+        ValidationResult result = validator.validate();
+        if (!result.isValid()) {
+            Log.logErrorRB("CORE_SRX_ERROR_LOADING_SEGMENTATION_CONFIG" + result.getErrorMessage());
+            res = new SRX();
+            res.initDefaults();
+            return res;
+        }
+
+        try {
             MyExceptionListener myel = new MyExceptionListener();
             XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel);
             res = (SRX) xmldec.readObject();

@@ -66,7 +66,8 @@ public class SegmentationConfMigrator {
         if (!configPath.toFile().exists()) {
             return ValidationResult.failure("File " + SRX.CONF_SENTSEG + " is not found!");
         }
-        return ValidationResult.success();
+        SegmentationConfValidator validator = new SegmentationConfValidator(configPath);
+        return validator.validate();
     }
 
     static SRX convertToSrx(Path configPath, Path srxFilePath) {

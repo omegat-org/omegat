@@ -40,8 +40,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
@@ -82,8 +80,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ID = "id";
     private static final String KEY_TRANSLATION = "translation";
     private static final String KEY_TRANSLATIONISFUZZY = "translationIsFuzzy";
-    // private static final String KEY_NEXT = "next";
-    // private static final String KEY_PREV = "prev";
     private static final String KEY_PATH = "path";
     private static final String KEY_HASNOTE = "hasNote";
     private static final String KEY_HASCOMMENT = "hasComment";
@@ -112,10 +108,14 @@ public class SegmentPropertiesArea implements IPaneMenu {
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
+                // nothing to do
             }
 
             @Override
             public void onEntryActivated(SourceTextEntry newEntry) {
+                if (!Core.getProject().isProjectLoaded()) {
+                    return;
+                }
                 scrollPane.stopNotifying();
                 setProperties(newEntry);
                 doNotify(getKeysToNotify());
@@ -154,8 +154,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             Constructor<?> constructor = viewClass.getConstructor();
             newImpl = (ISegmentPropertiesView) constructor.newInstance();
-        } catch (Throwable e) {
-            Logger.getLogger(getClass().getName()).log(Level.FINE, e.getMessage());
+        } catch (Exception e) {
+            Log.log(e);
             return;
         }
         viewImpl = newImpl;
@@ -193,11 +193,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
     void showContextMenu(Point p) {
         JPopupMenu menu = new JPopupMenu();
         populateLocalContextMenuOptions(menu, p);
-        // populateGlobalContextMenuOptions(menu);
         try {
             menu.show(scrollPane, p.x, p.y);
         } catch (IllegalComponentStateException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 
@@ -321,25 +320,28 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     private void setProperties(SourceTextEntry ste) {
         properties.clear();
-        if (ste != null) {
-            if (ste.getComment() != null) {
-                setProperty(KEY_HASCOMMENT, true);
+        if (ste == null) {
+            viewImpl.update();
+            return;
+        }
+
+        if (ste.getComment() != null) {
+            setProperty(KEY_HASCOMMENT, true);
+        }
+        if (ste.getDuplicate() != DUPLICATE.NONE) {
+            setProperty(KEY_ISDUP, ste.getDuplicate());
+        }
+        if (ste.getSourceTranslation() != null) {
+            setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
+            if (ste.isSourceTranslationFuzzy()) {
+                setProperty(KEY_TRANSLATIONISFUZZY, true);
             }
-            if (ste.getDuplicate() != DUPLICATE.NONE) {
-                setProperty(KEY_ISDUP, ste.getDuplicate());
-            }
-            if (ste.getSourceTranslation() != null) {
-                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
-                if (ste.isSourceTranslationFuzzy()) {
-                    setProperty(KEY_TRANSLATIONISFUZZY, true);
-                }
-            }
-            setKeyProperties(ste.getKey());
-            IProject project = Core.getProject();
-            if (project.isProjectLoaded()) {
-                TMXEntry trg = project.getTranslationInfo(ste);
-                setTranslationProperties(trg);
-            }
+        }
+        setKeyProperties(ste.getKey());
+        IProject project = Core.getProject();
+        if (project.isProjectLoaded()) {
+            TMXEntry trg = project.getTranslationInfo(ste);
+            setTranslationProperties(trg);
         }
         viewImpl.update();
     }
@@ -347,8 +349,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private void setKeyProperties(EntryKey key) {
         setProperty(KEY_FILE, key.file);
         setProperty(KEY_ID, key.id);
-        // setProperty(KEY_NEXT, key.next);
-        // setProperty(KEY_PREV, key.prev);
         setProperty(KEY_PATH, key.path);
     }
 

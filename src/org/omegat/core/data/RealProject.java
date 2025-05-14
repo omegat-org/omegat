@@ -256,7 +256,7 @@ public class RealProject implements IProject {
     public void saveProjectProperties() throws Exception {
         unlockProject();
         try {
-            SRX.saveTo(config.getProjectSRX(), new File(config.getProjectInternal(), SRX.CONF_SENTSEG));
+            SRX.saveToSrx(config.getProjectSRX(), Paths.get(config.getProjectInternal()).toFile());
             FilterMaster.saveConfig(config.getProjectFilters(),
                     new File(config.getProjectInternal(), FilterMaster.FILE_FILTERS));
             ProjectFileStorage.writeProjectFile(config);

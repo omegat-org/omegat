@@ -140,7 +140,6 @@ checkstyleMain.exclude '**/gen/**'
 spotless {
     enforceCheck = false
     java {
-        targetExclude 'src/gen/**'
         eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
         removeUnusedImports()
     }

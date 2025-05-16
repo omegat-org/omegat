@@ -217,7 +217,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(url).log();
                 return;
             default:
-                throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
+                throw new NetworkException(String.format("HTTP connection %s response with code: %d", url,
+                        conn.getResponseCode()));
             }
 
             // load into .tmp file

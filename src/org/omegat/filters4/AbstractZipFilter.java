@@ -154,16 +154,18 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     private void translateEntry(ZipFile zf, ZipOutputStream zipout, FilterContext fc, ZipEntry ze) {
         try (XMLReader xReader = new XMLReader(zf.getInputStream(ze))) {
             AbstractXmlFilter xmlfilter = getFilter(ze);
-            BufferedReader reader = new BufferedReader(xReader);
-            if (zipout == null) {
-                xmlfilter.processFile(reader, null, fc);
-            } else {
-                ZipEntry outEntry = new ZipEntry(ze.getName());
-                zipout.putNextEntry(outEntry);
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(zipout, xReader.getEncoding()));
-                xmlfilter.processFile(reader, writer, fc);
-                zipout.closeEntry();
+            try (BufferedReader reader = new BufferedReader(xReader)) {
+                if (zipout == null) {
+                    xmlfilter.processFile(reader, null, fc);
+                } else {
+                    ZipEntry outEntry = new ZipEntry(ze.getName());
+                    zipout.putNextEntry(outEntry);
+                    try (BufferedWriter writer = new BufferedWriter(
+                            new OutputStreamWriter(zipout, xReader.getEncoding()))) {
+                        xmlfilter.processFile(reader, writer, fc);
+                    }
+                    zipout.closeEntry();
+                }
             }
         } catch (Exception e) {
             Log.log(e);

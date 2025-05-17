@@ -36,6 +36,7 @@ import java.net.SocketException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
+import java.text.MessageFormat;
 import java.util.Formatter;
 import java.util.Properties;
 
@@ -216,6 +217,12 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 // not modified - just return
                 logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(url).log();
                 return;
+            case HttpURLConnection.HTTP_FORBIDDEN:
+                throw new NetworkException(MessageFormat.format("Access to {0} is forbidden.", url));
+            case HttpURLConnection.HTTP_UNAUTHORIZED:
+                throw new NetworkException(MessageFormat.format("Access to {0} is rejected by authentication error.", url));
+            case HttpURLConnection.HTTP_NOT_FOUND:
+                throw new NetworkException(MessageFormat.format("Contents at {0} is not found.", url));
             default:
                 throw new NetworkException(String.format("HTTP connection %s response with code: %d", url,
                         conn.getResponseCode()));

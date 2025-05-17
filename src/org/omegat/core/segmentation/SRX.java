@@ -234,7 +234,6 @@ public class SRX implements Serializable {
             try (FileOutputStream fos = new FileOutputStream(dest)) { 
                 transformer.transform(new StreamSource(configFile), new StreamResult(fos));
             }
-            configFile.delete();
             try (FileInputStream fis = new FileInputStream(dest)) {
                 return loadSrxInputStream(fis);
             }

@@ -160,10 +160,8 @@ public abstract class AbstractZipFilter extends AbstractFilter {
                 } else {
                     ZipEntry outEntry = new ZipEntry(ze.getName());
                     zipout.putNextEntry(outEntry);
-                    try (BufferedWriter writer = new BufferedWriter(
-                            new OutputStreamWriter(zipout, xReader.getEncoding()))) {
-                        xmlfilter.processFile(reader, writer, fc);
-                    }
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(zipout, xReader.getEncoding()));
+                    xmlfilter.processFile(reader, writer, fc);
                     zipout.closeEntry();
                 }
             }

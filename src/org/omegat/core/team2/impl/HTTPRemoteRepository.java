@@ -218,14 +218,13 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(url).log();
                 return;
             case HttpURLConnection.HTTP_FORBIDDEN:
-                throw new NetworkException(MessageFormat.format("Access to {0} is forbidden.", url));
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_FORBIDDEN", url));
             case HttpURLConnection.HTTP_UNAUTHORIZED:
-                throw new NetworkException(MessageFormat.format("Access to {0} is rejected by authentication error.", url));
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_UNAUTHORIZED", url));
             case HttpURLConnection.HTTP_NOT_FOUND:
-                throw new NetworkException(MessageFormat.format("Contents at {0} is not found.", url));
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_NOT_FOUND", url));
             default:
-                throw new NetworkException(String.format("HTTP connection %s response with code: %d", url,
-                        conn.getResponseCode()));
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_OTHER_ERRORS", url, conn.getResponseCode()));
             }
 
             // load into .tmp file

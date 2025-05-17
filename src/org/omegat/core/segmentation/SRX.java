@@ -42,8 +42,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.xml.XMLConstants;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -224,28 +226,19 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    static SRX loadConfFile(File configFile, File configDir) throws Exception {
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            // add XSLT in Transformer
-            Transformer transformer = transformerFactory.newTransformer(new StreamSource(
+    static SRX loadConfFile(File configFile, File configDir) throws IOException, TransformerException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        // add XSLT in Transformer
+        Transformer transformer = transformerFactory.newTransformer(new StreamSource(
                 SRX.class.getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
-            File dest = new File(configDir, SRX_SENTSEG);
-            try (FileOutputStream fos = new FileOutputStream(dest)) { 
-                transformer.transform(new StreamSource(configFile), new StreamResult(fos));
-            }
+        File dest = new File(configDir, SRX_SENTSEG);
+        try (FileOutputStream fos = new FileOutputStream(dest)) {
+            transformer.transform(new StreamSource(configFile), new StreamResult(fos));
             try (FileInputStream fis = new FileInputStream(dest)) {
                 return loadSrxInputStream(fis);
             }
-        } catch (Exception e) {
-            // silently ignoring FNF
-            if (!(e instanceof FileNotFoundException)) {
-                Log.log(e);
-                return null;
-            } else {
-                throw e;
-            }
-        }        
+        }
     }
 
     private static SRX loadSrxFile(URI rulesUri) {
@@ -443,7 +436,7 @@ public class SRX implements Serializable {
      * Correspondences between languages and their segmentation rules. Each
      * element is of class {@link MapRule}.
      */
-    private List<MapRule> mappingRules = new ArrayList<MapRule>();
+    private List<MapRule> mappingRules = new ArrayList<>();
 
     /**
      * Returns all mapping rules (of class {@link MapRule}) at once:

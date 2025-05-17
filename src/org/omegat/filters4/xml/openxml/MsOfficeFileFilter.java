@@ -29,6 +29,7 @@
 package org.omegat.filters4.xml.openxml;
 
 import java.awt.Window;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -63,6 +64,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
     }
 
     public static void unloadPlugins() {
+        // there is no way to remove the filter.
     }
 
     /**
@@ -134,15 +136,15 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
     }
 
     public MsOfficeFileFilter() {
-        super();
-        defineDOCUMENTSOptions(new HashMap<String, String>()); // Define the
-                                                               // documents to
-                                                               // read
+        super(StandardCharsets.UTF_8);
+        // Define the documents to read
+        defineDOCUMENTSOptions(new HashMap<>());
     }
 
     @Override
     public boolean isFileSupported(java.io.File inFile, Map<String, String> config, FilterContext context) {
-        defineDOCUMENTSOptions(config); // Define the documents to read
+        // Define the documents to read
+        defineDOCUMENTSOptions(config);
         return super.isFileSupported(inFile, config, context);
     }
 
@@ -177,6 +179,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
      * If comments are not selected, their references are removed in document so
      * better remove the file
      **/
+    @Override
     protected boolean mustDeleteInternalFile(ZipEntry entry, boolean writeMode, FilterContext context) {
         if (entry.getName().endsWith("comments.xml")) {
             return !DOCUMENTS.contains("comments");
@@ -199,12 +202,15 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
     protected java.util.Comparator<ZipEntry> getEntryComparator() {
         /** Same order as in Filter3 **/
         return (ZipEntry z1, ZipEntry z2) -> {
-            String s1 = z1.getName(), s2 = z2.getName();
-            String[] words1 = s1.split("\\d+\\."), words2 = s2.split("\\d+\\.");
+            String s1 = z1.getName();
+            String s2 = z2.getName();
+            String[] words1 = s1.split("\\d+\\.");
+            String[] words2 = s2.split("\\d+\\.");
             // Digits at the end and same text
             if ((words1.length > 1 && words2.length > 1) && // Digits
             (words1[0].equals(words2[0]))) { // Same text
-                int number1 = 0, number2 = 0;
+                int number1 = 0;
+                int number2 = 0;
                 Matcher getDigits = DIGITS.matcher(s1);
                 if (getDigits.find()) {
                     number1 = Integer.parseInt(getDigits.group(1));
@@ -221,7 +227,8 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                     return 0;
                 }
             } else {
-                String shortname1 = removePath(words1[0]), shortname2 = removePath(words2[0]);
+                String shortname1 = removePath(words1[0]);
+                String shortname2 = removePath(words2[0]);
 
                 // Specific case for Excel
                 // because "comments" is present twice in DOCUMENTS
@@ -239,14 +246,16 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 if (shortname2.endsWith(".xml")) {
                     shortname2 = shortname2.substring(0, shortname2.lastIndexOf('.'));
                 }
-                int index1 = DOCUMENTS.indexOf(shortname1), index2 = DOCUMENTS.indexOf(shortname2);
+                int index1 = DOCUMENTS.indexOf(shortname1);
+                int index2 = DOCUMENTS.indexOf(shortname2);
                 if (index1 > index2) {
                     return 1;
                 } else if (index1 < index2) {
                     return -1;
                 } else {
-                    return s1.compareTo(s2); // Documents were not in DOCUMENTS,
-                                             // we keep the normal order
+                    // Documents were not in DOCUMENTS,
+                    // we keep the normal order
+                    return s1.compareTo(s2);
                 }
             }
         };
@@ -258,6 +267,7 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
                 new Instance("*.ppt?"), new Instance("*.vsdx") };
     }
 
+    @Override
     public boolean hasOptions() {
         return true;
     }
@@ -277,14 +287,11 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
             dialog.setVisible(true);
             if (EditOpenXMLOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions().getOptionsMap();
-            } else {
-                return null;
             }
         } catch (Exception e) {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
-            Log.log(e);
-            return null;
         }
+        return null;
     }
 
     @Override

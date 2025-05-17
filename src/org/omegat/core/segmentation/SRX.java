@@ -29,7 +29,6 @@ package org.omegat.core.segmentation;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,8 +41,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.xml.XMLConstants;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -131,8 +132,9 @@ public class SRX implements Serializable {
         File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
-            outFile.delete();
-            new File(outDir, CONF_SENTSEG).delete();
+            if (outFile.exists()) {
+                Files.delete(outFile.toPath());
+            }
             return;
         }
 
@@ -223,29 +225,19 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    static SRX loadConfFile(File configFile, File configDir) throws Exception {
-        try {
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            // add XSLT in Transformer
-            Transformer transformer = transformerFactory.newTransformer(new StreamSource(
+    static SRX loadConfFile(File configFile, File configDir) throws IOException, TransformerException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+        // add XSLT in Transformer
+        Transformer transformer = transformerFactory.newTransformer(new StreamSource(
                 SRX.class.getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
-            File dest = new File(configDir, SRX_SENTSEG);
-            try (FileOutputStream fos = new FileOutputStream(dest)) { 
-                transformer.transform(new StreamSource(configFile), new StreamResult(fos));
-            }
-            configFile.delete();
+        File dest = new File(configDir, SRX_SENTSEG);
+        try (FileOutputStream fos = new FileOutputStream(dest)) {
+            transformer.transform(new StreamSource(configFile), new StreamResult(fos));
             try (FileInputStream fis = new FileInputStream(dest)) {
                 return loadSrxInputStream(fis);
             }
-        } catch (Exception e) {
-            // silently ignoring FNF
-            if (!(e instanceof FileNotFoundException)) {
-                Log.log(e);
-                return null;
-            } else {
-                throw e;
-            }
-        }        
+        }
     }
 
     private static SRX loadSrxFile(URI rulesUri) {
@@ -275,119 +267,6 @@ public class SRX implements Serializable {
                 .collect(Collectors.toList()));
         return res;
     }
-
-    /**
-     * Does a config file already exists for the project at the given location?
-     *
-     * @param configDir
-     *            the project directory for storage of settings file
-     */
-    public static boolean projectConfigFileExists(String configDir) {
-        File configFile = new File(configDir + CONF_SENTSEG);
-        return configFile.exists();
-    }
-
-    /** Merges two sets of segmentation rules together. */
-    private static SRX merge(final SRX current, final SRX defaults) {
-        SRX merged = upgrade(current, defaults);
-
-        int defaultMapRulesN = defaults.getMappingRules().size();
-        for (int i = 0; i < defaultMapRulesN; i++) {
-            MapRule dmaprule = defaults.getMappingRules().get(i);
-            String dcode = dmaprule.getLanguage();
-            // trying to find
-            boolean found = false;
-            int currentMapRulesN = merged.getMappingRules().size();
-            MapRule cmaprule = null;
-            for (int j = 0; j < currentMapRulesN; j++) {
-                cmaprule = merged.getMappingRules().get(j);
-                String ccode = cmaprule.getLanguage();
-                if (dcode.equals(ccode)) {
-                    found = true;
-                    break;
-                }
-            }
-
-            if (found) {
-                // merging -- adding those rules not there in a current list
-                List<Rule> crules = cmaprule.getRules();
-                List<Rule> drules = dmaprule.getRules();
-                for (Rule drule : drules) {
-                    if (!crules.contains(drule)) {
-                        if (drule.isBreakRule()) {
-                            // breaks go to the end
-                            crules.add(drule);
-                        } else {
-                            // exceptions go before the first break rule
-                            int currentRulesN = crules.size();
-                            int firstBreakRuleN = currentRulesN;
-                            for (int k = 0; k < currentRulesN; k++) {
-                                Rule crule = crules.get(k);
-                                if (crule.isBreakRule()) {
-                                    firstBreakRuleN = k;
-                                    break;
-                                }
-                            }
-                            crules.add(firstBreakRuleN, drule);
-                        }
-                    }
-                }
-            } else {
-                // just adding before the default rules
-                int englishN = currentMapRulesN;
-                for (int j = 0; j < currentMapRulesN; j++) {
-                    cmaprule = merged.getMappingRules().get(j);
-                    String cpattern = cmaprule.getPattern();
-                    if (DEFAULT_RULES_PATTERN.equals(cpattern)) {
-                        englishN = j;
-                        break;
-                    }
-                }
-                merged.getMappingRules().add(englishN, dmaprule);
-            }
-        }
-        return merged;
-    }
-
-    /** Implements some upgrade heuristics. */
-    private static SRX upgrade(SRX current, SRX defaults) {
-        // renaming "Default (English)" to "Default"
-        // and removing English/Text/HTML-specific rules from there
-        if (OT160RC9_VERSION.equals(CURRENT_VERSION)) {
-            String def = "Default (English)";
-            for (int i = 0; i < current.getMappingRules().size(); i++) {
-                MapRule maprule = current.getMappingRules().get(i);
-                if (def.equals(maprule.getLanguage())) {
-                    maprule.setLanguage(LanguageCodes.DEFAULT_CODE);
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.ENGLISH_CODE));
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_TEXT_CODE));
-                    maprule.getRules().removeAll(getRulesForLanguage(defaults, LanguageCodes.F_HTML_CODE));
-                }
-            }
-        }
-        return current;
-    }
-
-    /**
-     * Find rules for specific language.
-     *
-     * @param source
-     *            rules list
-     * @param langName
-     *            language name
-     * @return list of rules
-     */
-    private static List<Rule> getRulesForLanguage(final SRX source, String langName) {
-        for (MapRule mr : source.getMappingRules()) {
-            if (langName.equals(mr.getLanguage())) {
-                return mr.getRules();
-            }
-        }
-        return null;
-    }
-
-    // Patterns
-    private static final String DEFAULT_RULES_PATTERN = ".*";
 
     public static SRX getDefault() {
         try {
@@ -556,7 +435,7 @@ public class SRX implements Serializable {
      * Correspondences between languages and their segmentation rules. Each
      * element is of class {@link MapRule}.
      */
-    private List<MapRule> mappingRules = new ArrayList<MapRule>();
+    private List<MapRule> mappingRules = new ArrayList<>();
 
     /**
      * Returns all mapping rules (of class {@link MapRule}) at once:

@@ -122,7 +122,8 @@ public class OpenDocFilter extends AbstractFilter {
         try (ZipFile zipFile = new ZipFile(inFile);
              ZipOutputStream zipOut = outFile != null ? new ZipOutputStream(new FileOutputStream(outFile)) : null) {
 
-            for (Enumeration<? extends ZipEntry> entries = zipFile.entries(); entries.hasMoreElements(); ) {
+            Enumeration<? extends ZipEntry> entries = zipFile.entries();
+            while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
                 processZipEntry(zipFile, entry, zipOut, fc, inFile);
             }

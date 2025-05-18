@@ -1,0 +1,33 @@
+name: Quality checks
+
+on:
+  push:
+    branches:
+      - master
+      - releases/*
+  pull_request:
+
+jobs:
+  gradle:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: 'temurin'
+    - uses: gradle/actions/setup-gradle@v4
+      name: Setup Gradle
+      id: setup-gradle
+    - name: Run gradle build
+      run: ./gradlew -PenvIsCi=true -Pheadless=true check
+      id: gradle
+    - name: Check git repository clean
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "❌ Git repository is not clean after the build and checks."
+          git status
+          exit 1
+        else
+          echo "✅ Git repository is clean."
+        fi

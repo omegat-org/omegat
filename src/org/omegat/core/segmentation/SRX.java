@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URI;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +65,7 @@ import gen.core.segmentation.Languagemap;
 import gen.core.segmentation.Languagerule;
 import gen.core.segmentation.ObjectFactory;
 import gen.core.segmentation.Srx;
+import org.omegat.util.Preferences;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
@@ -131,8 +133,7 @@ public class SRX implements Serializable {
         File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
-            outFile.delete();
-            new File(outDir, CONF_SENTSEG).delete();
+            Files.delete(outFile.toPath());
             return;
         }
 
@@ -204,7 +205,9 @@ public class SRX implements Serializable {
         inFile = new File(configDir, CONF_SENTSEG);
         if (inFile.exists()) {
             try {
-                return loadConfFile(inFile, configDir);
+                SRX srx = loadConfFile(inFile, configDir);
+                removeOldConfFile(inFile.toPath());
+                return srx;
             } catch (Exception ex) {
                 return SRX.getDefault();
             }
@@ -233,7 +236,6 @@ public class SRX implements Serializable {
             try (FileOutputStream fos = new FileOutputStream(dest)) { 
                 transformer.transform(new StreamSource(configFile), new StreamResult(fos));
             }
-            configFile.delete();
             try (FileInputStream fis = new FileInputStream(dest)) {
                 return loadSrxInputStream(fis);
             }
@@ -274,6 +276,16 @@ public class SRX implements Serializable {
                         languagemap.getLanguagepattern(), mapping.get(languagemap.getLanguagerulename())))
                 .collect(Collectors.toList()));
         return res;
+    }
+
+    private static void removeOldConfFile(Path configFile) {
+        if (Preferences.isPreferenceDefault(Preferences.REMOVE_OLD_SEGMENTATION_CONF, false)) {
+            try {
+                Files.delete(configFile);
+            } catch (IOException e) {
+                configFile.toFile().deleteOnExit();
+            }
+        }
     }
 
     /**

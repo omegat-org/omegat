@@ -50,6 +50,7 @@ public class GeneralOptionsPanel extends JPanel {
 
         tabAdvanceCheckBox = new javax.swing.JCheckBox();
         confirmQuitCheckBox = new javax.swing.JCheckBox();
+        removeSegmentationConfAfterConvertCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
         accessConfigDirButton = new javax.swing.JButton();
 
@@ -62,6 +63,9 @@ public class GeneralOptionsPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(confirmQuitCheckBox, OStrings.getString("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT")); // NOI18N
         add(confirmQuitCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(removeSegmentationConfAfterConvertCheckBox, OStrings.getString("MW_OPTIONSMENU_REMOVE_OLD_CONF"));
+        add(removeSegmentationConfAfterConvertCheckBox);
         add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(accessConfigDirButton, OStrings.getString("MW_OPTIONSMENU_ACCESS_CONFIG_DIR")); // NOI18N
@@ -72,6 +76,7 @@ public class GeneralOptionsPanel extends JPanel {
     javax.swing.JButton accessConfigDirButton;
     javax.swing.JCheckBox confirmQuitCheckBox;
     private javax.swing.Box.Filler filler1;
+    javax.swing.JCheckBox removeSegmentationConfAfterConvertCheckBox;
     javax.swing.JCheckBox tabAdvanceCheckBox;
     // End of variables declaration//GEN-END:variables
 }

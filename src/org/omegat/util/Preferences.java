@@ -170,6 +170,8 @@ public final class Preferences {
     public static final String USE_TAB_TO_ADVANCE = "tab_advance";
     /** Always confirm Quit, even if the project is saved */
     public static final String ALWAYS_CONFIRM_QUIT = "always_confirm_quit";
+    /** Remove old segmentation.conf after convert to segmentation.srx */
+    public static final String REMOVE_OLD_SEGMENTATION_CONF = "remove_old_segmentation_conf";
 
     /**
      * Mark glossary matches. This feature used to be called "TransTips", and

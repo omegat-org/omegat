@@ -85,17 +85,22 @@ public class GeneralOptionsController extends BasePreferencesController {
     protected void initFromPrefs() {
         panel.tabAdvanceCheckBox.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
         panel.confirmQuitCheckBox.setSelected(Preferences.isPreferenceDefault(Preferences.ALWAYS_CONFIRM_QUIT, true));
+        panel.removeSegmentationConfAfterConvertCheckBox.setSelected(Preferences.isPreferenceDefault(
+                Preferences.REMOVE_OLD_SEGMENTATION_CONF, false));
     }
 
     @Override
     public void restoreDefaults() {
         panel.tabAdvanceCheckBox.setSelected(false);
         panel.confirmQuitCheckBox.setSelected(true);
+        panel.removeSegmentationConfAfterConvertCheckBox.setSelected(false);
     }
 
     @Override
     public void persist() {
         Core.getEditor().getSettings().setUseTabForAdvance(panel.tabAdvanceCheckBox.isSelected());
         Preferences.setPreference(Preferences.ALWAYS_CONFIRM_QUIT, panel.confirmQuitCheckBox.isSelected());
+        Preferences.setPreference(Preferences.REMOVE_OLD_SEGMENTATION_CONF,
+                panel.removeSegmentationConfAfterConvertCheckBox.isSelected());
     }
 }

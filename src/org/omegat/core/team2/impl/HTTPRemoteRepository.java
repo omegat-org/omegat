@@ -190,11 +190,12 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         }
     }
 
+    private static final String HEADER_ETAG = "ETag";
+    private static final String HEADER_IF_NONE_MATCH = "If-None-Match";
+
     protected void retrieve(Properties etags, String fileName, String fileUrl, final File outputFile)
             throws IOException, NetworkException {
 
-        final String HEADER_ETAG = "ETag";
-        final String HEADER_IF_NONE_MATCH = "If-None-Match";
         String currentEtag = etags.getProperty(fileName);
 
         logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}")

@@ -30,20 +30,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import javax.swing.KeyStroke;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.omegat.externalfinder.item.ExternalFinderItem.SCOPE;
+import org.omegat.util.Log;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
-
-    private static final Logger LOGGER = Logger.getLogger(ExternalFinderXMLLoader.class.getName());
 
     private final File file;
     private final SCOPE scope;
@@ -72,7 +70,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
             try {
                 finderItems.add(generateFinderItem(nodeList.item(i)));
             } catch (ExternalFinderValidationException ex) {
-                LOGGER.warning("ExternalFinder: " + ex.getMessage());
+                Log.logWarningRB("EXTERNALFINDER_ERROR_VALIDATION_EXCEPTION", ex.getMessage());
             }
         }
 
@@ -139,13 +137,13 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
                 try {
                     builder.addURL(generateFinderURL(childNode));
                 } catch (ExternalFinderValidationException ex) {
-                    LOGGER.warning("ExternalFinder: " + ex.getMessage());
+                    Log.logWarningRB("EXTERNALFINDER_ERROR_VALIDATION_EXCEPTION", ex.getMessage());
                 }
             } else if (nodeName.equals("command")) {
                 try {
                     builder.addCommand(generateFinderCommand(childNode));
                 } catch (ExternalFinderValidationException ex) {
-                    LOGGER.warning("ExternalFinder: " + ex.getMessage());
+                    Log.logWarningRB("EXTERNALFINDER_ERROR_VALIDATION_EXCEPTION", ex.getMessage());
                 }
             } else if (nodeName.equals("keystroke")) {
                 KeyStroke keyStroke = KeyStroke.getKeyStroke(childNode.getTextContent());

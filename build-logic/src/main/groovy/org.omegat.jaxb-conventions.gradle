@@ -10,10 +10,15 @@ dependencies {
     jaxb(libs.jaxb.xjc)
 }
 
-tasks.register('genJAXB') {
-    description = 'Generates classes for loading and manipulating XML formats.'
+def genjaxb = tasks.register('genJAXB') {
+    description = 'Generate classes for loading and manipulating XML formats'
+    outputs.dir layout.buildDirectory.dir('generated/sources/jaxb/main/java')
     group = 'jaxb'
+    doFirst {
+        mkdir layout.buildDirectory.dir('generated/sources/jaxb/main/java').get().asFile
+    }
 }
+compileJava.dependsOn(genjaxb)
 
 ext.makeJaxbTask = { args ->
     def taskName = "gen${args.name.capitalize()}"
@@ -27,13 +32,18 @@ ext.makeJaxbTask = { args ->
     genJAXB.dependsOn taskName
 }
 
-makeJaxbTask(name: 'segmentation', outdir: 'src/gen/core/segmentation',
-        args: ['-no-header', '-d', 'src', '-p', 'gen.core.segmentation', 'src/schemas/srx20.xsd'])
-makeJaxbTask(name: 'filters', outdir: 'src/gen/core/filters',
-        args: ['-no-header', '-d', 'src', '-p', 'gen.core.filters', 'src/schemas/filters.xsd'])
-makeJaxbTask(name: 'tbx', outdir: 'src/gen/core/tbx',
-        args: ['-no-header', '-d', 'src', '-p', 'gen.core.tbx', 'src/schemas/tbx.xsd'])
-makeJaxbTask(name: 'project', outdir: 'src/gen/core/project',
-        args: ['-no-header', '-d', 'src', '-p', 'gen.core.project', 'src/schemas/project_properties.xsd'])
-makeJaxbTask(name: 'tmx14', outdir: 'src/gen/core/tmx14',
-        args: ['-no-header', '-d', 'src', '-p', 'gen.core.tmx14', '-b', 'src/schemas/tmx14.xjb', 'src/schemas/tmx14.xsd'])
+def schemaSourcePath = 'src/schemas/'
+def generatedSourcePath = 'build/generated/sources/jaxb/main/java/'
+makeJaxbTask(name: 'segmentation', outdir: generatedSourcePath + 'gen/core/segmentation',
+        args: ['-no-header', '-npa', '-d', generatedSourcePath, '-p', 'gen.core.segmentation',
+               schemaSourcePath + 'srx20.xsd'])
+makeJaxbTask(name: 'filters', outdir: generatedSourcePath + 'gen/core/filters',
+        args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.filters', schemaSourcePath + 'filters.xsd'])
+makeJaxbTask(name: 'tbx', outdir: generatedSourcePath + 'gen/core/tbx',
+        args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.tbx', schemaSourcePath + 'tbx.xsd'])
+makeJaxbTask(name: 'project', outdir: generatedSourcePath + 'gen/core/project',
+        args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.project',
+               schemaSourcePath + 'project_properties.xsd'])
+makeJaxbTask(name: 'tmx14', outdir: generatedSourcePath + 'gen/core/tmx14',
+        args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.tmx14', '-b', schemaSourcePath + 'tmx14.xjb',
+               schemaSourcePath + 'tmx14.xsd'])

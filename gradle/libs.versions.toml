@@ -54,7 +54,7 @@ assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
-json_java = "20250107"
+json_java = "20250517"
 protobuf_java = "3.25.5"
 
 [libraries]

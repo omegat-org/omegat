@@ -186,7 +186,9 @@ public final class SRXTest {
      * environment and Japanese environment.
      */
     public static void testSrxMigration(File segmentConf, File configDir) throws Exception {
-        File segmentSrx = new File(configDir, "segmentation.srx");
+        // ensures the full test runs in temp directory
+        Files.copy(segmentConf.toPath(), Paths.get(configDir.getAbsolutePath(), segmentConf.getName()));
+        segmentConf = new File(configDir, segmentConf.getName());
         // load from conf file
         SRX srxOrig = SRX.loadConfFile(segmentConf, configDir);
         assertNotNull(srxOrig);
@@ -202,6 +204,7 @@ public final class SRXTest {
             }
         }
         // load from srx file
+        File segmentSrx = new File(configDir, "segmentation.srx");
         assertTrue(segmentSrx.exists());
         SRX srx1 = SRX.loadFromDir(configDir);
         assertNotNull(srx1);

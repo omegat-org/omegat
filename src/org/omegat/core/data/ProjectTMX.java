@@ -74,14 +74,14 @@ public class ProjectTMX {
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    Map<String, TMXEntry> defaults;
+    protected Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    Map<EntryKey, TMXEntry> alternatives;
+    protected Map<EntryKey, TMXEntry> alternatives;
 
     final CheckOrphanedCallback checkOrphanedCallback;
 

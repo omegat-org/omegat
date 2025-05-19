@@ -60,7 +60,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
         int priority = -1;
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        documentBuilderFactory.setFeature( "http://apache.org/xml/features/disallow-doctype-decl",  true);
+        documentBuilderFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
 
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         Document document = documentBuilder.parse(file);

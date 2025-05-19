@@ -54,7 +54,7 @@ public class ExternalFinderXMLWriter {
     public void write(ExternalFinderConfiguration config) throws Exception {
         Document doc = createDocument(config);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        transformerFactory.setFeature( "http://apache.org/xml/features/disallow-doctype-decl",  true);
+        transformerFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
@@ -65,7 +65,7 @@ public class ExternalFinderXMLWriter {
 
     private Document createDocument(ExternalFinderConfiguration config) throws Exception {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        docFactory.setFeature( "http://apache.org/xml/features/disallow-doctype-decl",  true);
+        docFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
 

@@ -43,6 +43,12 @@ import org.w3c.dom.NodeList;
 
 public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
 
+    private static final String NODE_NAME = "name";
+    private static final String NODE_URL = "url";
+    private static final String NODE_COMMAND = "command";
+    private static final String NODE_KEYSTROKE = "keystroke";
+    private static final String LOG_VALIDATION_EXCEPTION = "EXTERNALFINDER_ERROR_VALIDATION_EXCEPTION";
+
     private final File file;
     private final SCOPE scope;
 
@@ -70,7 +76,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
             try {
                 finderItems.add(generateFinderItem(nodeList.item(i)));
             } catch (ExternalFinderValidationException ex) {
-                Log.logWarningRB("EXTERNALFINDER_ERROR_VALIDATION_EXCEPTION", ex.getMessage());
+                Log.logWarningRB(LOG_VALIDATION_EXCEPTION, ex.getMessage());
             }
         }
 
@@ -129,26 +135,7 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
 
         for (int i = 0, n = childNodes.getLength(); i < n; i++) {
             final Node childNode = childNodes.item(i);
-
-            final String nodeName = childNode.getNodeName();
-            if (nodeName.equals("name")) {
-                builder.setName(childNode.getTextContent());
-            } else if (nodeName.equals("url")) {
-                try {
-                    builder.addURL(generateFinderURL(childNode));
-                } catch (ExternalFinderValidationException ex) {
-                    Log.logWarningRB("EXTERNALFINDER_ERROR_VALIDATION_EXCEPTION", ex.getMessage());
-                }
-            } else if (nodeName.equals("command")) {
-                try {
-                    builder.addCommand(generateFinderCommand(childNode));
-                } catch (ExternalFinderValidationException ex) {
-                    Log.logWarningRB("EXTERNALFINDER_ERROR_VALIDATION_EXCEPTION", ex.getMessage());
-                }
-            } else if (nodeName.equals("keystroke")) {
-                KeyStroke keyStroke = KeyStroke.getKeyStroke(childNode.getTextContent());
-                builder.setKeyStroke(keyStroke);
-            }
+            handleChildNode(childNode, builder);
         }
 
         return builder.build();
@@ -217,5 +204,47 @@ public class ExternalFinderXMLLoader implements IExternalFinderItemLoader {
         }
 
         return builder.build();
+    }
+
+    private void handleChildNode(Node childNode, ExternalFinderItem.Builder builder) {
+        final String nodeName = childNode.getNodeName();
+        switch (nodeName) {
+            case NODE_NAME:
+                builder.setName(childNode.getTextContent());
+                break;
+            case NODE_URL:
+                handleURLNode(childNode, builder);
+                break;
+            case NODE_COMMAND:
+                handleCommandNode(childNode, builder);
+                break;
+            case NODE_KEYSTROKE:
+                handleKeystrokeNode(childNode, builder);
+                break;
+            default:
+                // ignore other nodes
+                break;
+        }
+    }
+
+    private void handleURLNode(Node urlNode, ExternalFinderItem.Builder builder) {
+        try {
+            builder.addURL(generateFinderURL(urlNode));
+        } catch (ExternalFinderValidationException ex) {
+            Log.logWarningRB(LOG_VALIDATION_EXCEPTION, ex.getMessage());
+        }
+    }
+
+    private void handleCommandNode(Node commandNode, ExternalFinderItem.Builder builder) {
+        try {
+            builder.addCommand(generateFinderCommand(commandNode));
+        } catch (ExternalFinderValidationException ex) {
+            Log.logWarningRB(LOG_VALIDATION_EXCEPTION, ex.getMessage());
+        }
+    }
+
+    private void handleKeystrokeNode(Node keystrokeNode, ExternalFinderItem.Builder builder) {
+        KeyStroke keyStroke = KeyStroke.getKeyStroke(keystrokeNode.getTextContent());
+        builder.setKeyStroke(keyStroke);
     }
 }

@@ -133,7 +133,9 @@ public class SRX implements Serializable {
         File outFile = new File(outDir, SRX_SENTSEG);
 
         if (srx == null) {
-            Files.delete(outFile.toPath());
+            if (outFile.exists()) {
+                Files.delete(outFile.toPath());
+            }
             return;
         }
 

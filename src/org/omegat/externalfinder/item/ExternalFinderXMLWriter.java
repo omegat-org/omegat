@@ -64,6 +64,7 @@ public class ExternalFinderXMLWriter {
 
     private Document createDocument(ExternalFinderConfiguration config) throws Exception {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        docFactory.setFeature( "http://apache.org/xml/features/disallow-doctype-decl",  true);
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
 

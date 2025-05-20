@@ -24,28 +24,29 @@
  ******************************************************************************/
 package org.omegat.languages.pt;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.io.FileUtils;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.languagetool.JLanguageTool;
+import org.omegat.core.Core;
+import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.languagetools.LanguageDataBroker;
+import org.omegat.spellchecker.morfologik.MorfologikSpellchecker;
+import org.omegat.util.Language;
+import org.omegat.util.TestPreferencesInitializer;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import org.omegat.core.Core;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.spellchecker.hunspell.HunSpellChecker;
-import org.omegat.util.Language;
-import org.omegat.util.TestPreferencesInitializer;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class HunspellTest {
+public class MorfologikTest {
 
     private static final String LANGUAGE = "pt_BR";
     private static final String GOOD = "Identificar";
@@ -53,6 +54,7 @@ public class HunspellTest {
 
     @BeforeClass
     public static void setUpClass() throws IOException {
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
         PluginUtils.loadPlugins(Collections.emptyMap());
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();
@@ -72,7 +74,7 @@ public class HunspellTest {
                 return props;
             }
         });
-        ISpellChecker checker = new HunSpellChecker();
+        ISpellChecker checker = new MorfologikSpellchecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect(GOOD)).as("Spell check for correct word").isTrue();
     }

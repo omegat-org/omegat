@@ -24,24 +24,30 @@
  */
 package org.omegat.languages.pt;
 
-import java.io.InputStream;
-
 import org.languagetool.JLanguageTool;
+import org.omegat.core.spellchecker.AbstractMorfologikDictionary;
 
-import org.omegat.core.spellchecker.AbstractHunspellDictionary;
+import java.io.InputStream;
+import java.util.Arrays;
 
-public class PortugueseHunspellDictionary extends AbstractHunspellDictionary {
+public class PortugueseMorfologikDictionary extends AbstractMorfologikDictionary {
 
-    private static final String DICTIONARY_BASE = "/org/languagetool/resource/pt/hunspell/";
-    private static final String[] HUNSPELL = { "pt_PT", "pt_BR", "pt_MZ", "pt_AO" };
+    private static final String DICTIONARY_PATH = "/org/languagetool/resource/pt/spelling/";
+    private static final String[] SUPPORTED = { "pt-BR" };
 
     @Override
     protected String[] getDictionaries() {
-        return HUNSPELL;
+        return SUPPORTED;
+    }
+
+    @Override
+    protected String getDictionary(String language) {
+        String target = language.replace("_", "-");
+        return Arrays.stream(getDictionaries()).filter(lang -> lang.startsWith(target)).findFirst().orElse(null);
     }
 
     @Override
     protected InputStream getResourceAsStream(final String resource) {
-        return JLanguageTool.getDataBroker().getAsStream(DICTIONARY_BASE + resource);
+        return JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + resource);
     }
 }

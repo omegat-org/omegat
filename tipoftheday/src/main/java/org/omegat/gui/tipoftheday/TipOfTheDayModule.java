@@ -58,13 +58,12 @@ public final class TipOfTheDayModule {
 
     public static class TipOfTheDayModuleListener implements IApplicationEventListener {
 
-        private TipOfTheDayController controller;
+        private final TipOfTheDayController controller = new TipOfTheDayController();
         private JMenuItem totdMenu;
 
         @Override
         public void onApplicationStartup() {
             if (ENABLED && TipOfTheDayUtils.hasIndex()) {
-                controller = new TipOfTheDayController();
                 initUI();
                 initMenu();
                 SwingUtilities.invokeLater(() -> controller.start(false));

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,19 +26,12 @@
 
 package org.omegat.util.gui;
 
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.BoxView;
-import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
-import javax.swing.text.IconView;
 import javax.swing.text.LabelView;
 import javax.swing.text.ParagraphView;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * An editor kit that allows wrapping at character boundaries rather than word boundaries.
@@ -48,7 +42,10 @@ import java.util.function.Function;
 @SuppressWarnings("serial")
 public class CharacterWrapEditorKit extends StyledEditorKit {
 
-    private static final ViewFactory FACTORY = new MyViewFactory();
+    private static final ViewFactory FACTORY = new ViewFactoryHelper(
+            ViewFactoryHelper.getDefaultMappings(CharacterWrapLabelView::new, ParagraphView::new),
+            CharacterWrapLabelView::new // Default fallback to CharacterWrapLabelView
+    );
 
     @Override
     public ViewFactory getViewFactory() {
@@ -71,22 +68,6 @@ public class CharacterWrapEditorKit extends StyledEditorKit {
             default:
                 throw new IllegalArgumentException("Invalid axis: " + axis);
             }
-        }
-    }
-
-    static class MyViewFactory implements ViewFactory {
-        private static final Map<String, Function<Element, View>> VIEW_CREATORS = Map.of(
-                AbstractDocument.ContentElementName, CharacterWrapLabelView::new,
-                AbstractDocument.ParagraphElementName, ParagraphView::new,
-                AbstractDocument.SectionElementName, elem -> new BoxView(elem, View.Y_AXIS),
-                StyleConstants.ComponentElementName, ComponentView::new,
-                StyleConstants.IconElementName, IconView::new
-        );
-
-        @Override
-        public View create(Element elem) {
-            String kind = elem.getName();
-            return VIEW_CREATORS.getOrDefault(kind, CharacterWrapLabelView::new).apply(elem);
         }
     }
 }

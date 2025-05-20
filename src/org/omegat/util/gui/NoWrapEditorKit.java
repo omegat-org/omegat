@@ -25,19 +25,11 @@
 
 package org.omegat.util.gui;
 
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.BoxView;
-import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
-import javax.swing.text.IconView;
 import javax.swing.text.LabelView;
 import javax.swing.text.ParagraphView;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
-import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
  * An editor kit that prevents line wrapping entirely.
@@ -47,8 +39,10 @@ import java.util.function.Function;
  */
 @SuppressWarnings("serial")
 public class NoWrapEditorKit extends StyledEditorKit {
-
-    private static final ViewFactory FACTORY = new MyViewFactory();
+    private static final ViewFactory FACTORY = new ViewFactoryHelper(
+        ViewFactoryHelper.getDefaultMappings(LabelView::new, NoWrapParagraphView::new),
+        LabelView::new // Default fallback to LabelView
+    );
 
     @Override
     public ViewFactory getViewFactory() {
@@ -64,23 +58,6 @@ public class NoWrapEditorKit extends StyledEditorKit {
         @Override
         protected void layout(int width, int height) {
             super.layout(Short.MAX_VALUE, height);
-        }
-    }
-
-    static class MyViewFactory implements ViewFactory {
-
-        private static final Map<String, Function<Element, View>> VIEW_CREATORS = Map.of(
-                AbstractDocument.ContentElementName, LabelView::new,
-                AbstractDocument.ParagraphElementName, NoWrapParagraphView::new,
-                AbstractDocument.SectionElementName, elem -> new BoxView(elem, View.Y_AXIS),
-                StyleConstants.ComponentElementName, ComponentView::new,
-                StyleConstants.IconElementName, IconView::new
-        );
-
-        @Override
-        public View create(Element elem) {
-            String elementName = elem.getName();
-            return VIEW_CREATORS.getOrDefault(elementName, LabelView::new).apply(elem);
         }
     }
 }

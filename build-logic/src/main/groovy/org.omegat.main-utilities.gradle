@@ -3,7 +3,7 @@ plugins {
 }
 
 tasks.register('changedOnBranch') {
-    description = 'List files that have been modified on this git branch.'
+    description = 'Lists files that have been modified on this git branch.'
     doLast {
         def branch = providers.exec {commandLine("git", "name-rev", "--name-only", "HEAD")}
                 .standardOutput.asText.get().trim()
@@ -35,7 +35,7 @@ tasks.register('changedOnBranch') {
 }
 
 tasks.register('spotlessChangedApply') {
-    description = 'Apply code formatting to files that have been changed on the current branch.'
+    description = 'Applies code formatting to files that have been changed on the current branch.'
     group = 'omegat workflow'
     finalizedBy 'spotlessApply'
     dependsOn changedOnBranch
@@ -48,7 +48,7 @@ tasks.register('spotlessChangedApply') {
 
 tasks.register('checksums') {
     def algos = ['SHA-512']
-    description = "Generate ${algos.join(', ')} checksums for distribution files"
+    description = "Generates ${algos.join(', ')} checksums for distribution files."
     inputs.files fileTree(dir: base.distsDirectory, exclude: 'checksums')
     outputs.dir base.distsDirectory.dir('checksums')
     onlyIf {

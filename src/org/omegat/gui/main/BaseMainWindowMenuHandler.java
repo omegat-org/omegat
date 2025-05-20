@@ -36,18 +36,13 @@
 package org.omegat.gui.main;
 
 /**
+ * Common base class for menu handler.
+ * <p>
+ * There should be mandatory methods for mandatory commands.
+ *
  * @author Hiroshi Miura
  */
 public abstract class BaseMainWindowMenuHandler {
-
-    /**
-     * Common base class for menu handler.
-     * <p>
-     * There should be a mandatory methods for mandatory
-     * commands.
-     */
-    public BaseMainWindowMenuHandler() {
-    }
 
     public void projectExitMenuItemActionPerformed() {
         System.exit(0);

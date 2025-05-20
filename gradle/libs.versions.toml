@@ -27,7 +27,7 @@ nashorn = "15.6"
 caffeine = "3.2.0"
 wiremock = "3.13.0"
 vldocking = "3.1.1"
-xmlunit = "2.10.0"
+xmlunit = "2.10.1"
 assertj = "3.27.3"
 appbundler = "1.2.1"
 supertmxmerge = "2.0.3"
@@ -37,7 +37,7 @@ htmlparser = "1.6-20230203"
 gnudiff = "1.15"
 desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
-pdfbox = "3.0.4"
+pdfbox = "3.0.5"
 maligna = "3.0.1"
 trie4j = "0.9.10_1"
 dsl4j = "1.0.0"
@@ -54,6 +54,8 @@ assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
+json_java = "20250517"
+protobuf_java = "3.25.5"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -168,9 +170,11 @@ jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
 flatlaf = {group = "com.formdev", name = "flatlaf", version.ref = "flatlaf"}
 language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
 assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", version.ref = "assertj_swing_junit"}
-morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
-morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
-swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+morfologik-stemming = {group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
+morfologik-speller = {group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
+swing-extra-locales = {group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+json = {group = "org.json", name = "json", version.ref = "json_java"}
+protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]

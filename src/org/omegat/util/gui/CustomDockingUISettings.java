@@ -39,10 +39,6 @@ import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 public class CustomDockingUISettings extends DockingUISettings {
 
-    public CustomDockingUISettings() {
-        super();
-    }
-
     @Override
     protected UIDefaults getDefaults(UIDefaults config) {
         // UI strings

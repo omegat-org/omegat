@@ -78,7 +78,6 @@ public class RemoteRepositoryProvider {
      * copying files from repo to project.
      */
     private String[] forceExcludes = {};
-    private List<Mapping> mappingsWithFileListSnapshot;
 
     public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions,
             ProjectProperties props) throws Exception {

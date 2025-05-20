@@ -2,7 +2,7 @@
  OmegaT 6.1.0
 ----------------------------------------------------------------------
   56 Enhancement
-  84 Bug fixes
+  88 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
@@ -170,6 +170,18 @@
 
 
   Bug fixes:
+
+  - Sometimes called SegmentProperties.onEntryActivated after closed a project
+  https://sourceforge.net/p/omegat/bugs/1291/
+
+  - Mismatch in method name causes exception when selecting "Open Writable Glossary File"
+  https://sourceforge.net/p/omegat/bugs/1290/
+
+  - Spellchecker raised NPE when writing word list file
+  https://sourceforge.net/p/omegat/bugs/1288/
+
+  - Uncaught exception in weekly build (2025-01-18)
+  https://sourceforge.net/p/omegat/bugs/1280/
 
   - aligner average distance can be {0} which expected a numeric value
   https://sourceforge.net/p/omegat/bugs/1275/

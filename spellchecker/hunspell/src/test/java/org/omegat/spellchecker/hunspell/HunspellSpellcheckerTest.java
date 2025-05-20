@@ -165,9 +165,6 @@ public class HunspellSpellcheckerTest {
 
     public static class HunSpellCheckerMock extends HunSpellChecker {
         private int initializeCounter = 0;
-        public HunSpellCheckerMock() {
-            super();
-        }
 
         @Override
         public boolean initialize() {

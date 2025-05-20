@@ -3,6 +3,7 @@ plugins {
     id 'eclipse'
     id 'checkstyle'
     id 'jacoco'
+    id 'pmd'
     id 'com.diffplug.spotless'
     id 'com.github.spotbugs'
     id 'org.omegat.common-utilities'
@@ -22,8 +23,8 @@ ext {
             }
         }
     }
-    providedCoreLibsDir = file('lib/provided/core')
-    providedModuleLibsDir = file('lib/provided/module')
+    providedCoreLibsDir = file(layout.settingsDirectory.dir('lib/provided/core'))
+    providedModuleLibsDir = file(layout.settingsDirectory.dir('lib/provided/module'))
 }
 
 repositories {
@@ -52,7 +53,7 @@ tasks.named("test", Test) {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    systemProperty 'java.util.logging.config.file', layout.settingsDirectory.file("config/test/logger.properties").asFile
 }
 
 javadoc {
@@ -107,8 +108,7 @@ checkstyleMain.exclude '**/gen/**'
 spotless {
     enforceCheck = false
     java {
-        targetExclude 'src/gen/**'
-        eclipse().configFile file("${rootDir}/config/spotless/eclipse-formatting.xml")
+        eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
         removeUnusedImports()
     }
 }
@@ -121,4 +121,22 @@ tasks.withType(Sync).configureEach {
 }
 tasks.withType(Zip).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+pmd {
+    toolVersion = '6.38.0'
+    ruleSetFiles = layout.settingsDirectory.files("config/pmd/ruleset.xml")
+    consoleOutput = true
+}
+
+tasks.withType(Pmd).configureEach {
+    exclude '**/gen/**'
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+
+        // Consolidate reports in root project
+        xml.outputLocation.set(layout.settingsDirectory.file("build/reports/pmd/${project.name}-pmd.xml"))
+        html.outputLocation.set(layout.settingsDirectory.file("build/reports/pmd/${project.name}-pmd.html"))
+    }
 }

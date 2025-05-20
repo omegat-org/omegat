@@ -90,6 +90,19 @@
           "code": 6
         }
       ]
+    },
+    {
+      "owner": "pmd",
+      "severity": "warning",
+      "pattern": [
+        {
+          "regexp": "^.*([A-Za-z0-9_]+\\\\.java):(\\\\d+):\\s+(\\w+):\\s+(.+)$",
+          "file": 1,
+          "line": 2,
+          "code": 3,
+          "message": 4
+        }
+      ]
     }
   ]
 }

@@ -6,7 +6,7 @@ dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir,
-                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar', '**/morfologik-stemming-*.jar'])
         implementation fileTree(dir: providedCoreLibsDir, includes: ['**/language-ast-*.jar'])
     } else {
         compileOnly(libs.commons.io)
@@ -16,6 +16,10 @@ dependencies {
             exclude group: 'com.google.android'
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
+            exclude module: 'commons-lang3'
+            exclude module: 'commons-text'
+            exclude module: 'commons-logging'
+            exclude module: 'json'
         }
         implementation(libs.languagetool.ast) {
             exclude module: 'languagetool-core'

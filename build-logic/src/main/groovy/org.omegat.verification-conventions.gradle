@@ -227,3 +227,29 @@ tasks.register('testAcceptance', Test) {
     dependsOn firstSteps
     dependsOn ':aligner:jar'
 }
+
+tasks.register('spotbugsReport') {
+    // Reusable function to check and print the report for a given project
+    def printReport = { project ->
+        ["main", "test"].each { target ->
+            def reportFile = project.file("build/reports/spotbugs/${target}.txt")
+            if (reportFile.exists()) {
+                def sep = "-".repeat(40)
+                def ppath = project.path
+                if (ppath.equals(":")) {
+                    ppath = "OmegaT root project"
+                }
+                println(sep + " Report from project: ${ppath} for ${target} code" + sep) // Use full project path
+                reportFile.eachLine { line ->
+                    println(line)
+                }
+            }
+        }
+    }
+    doLast {
+        printReport(rootProject)
+        subprojects.each { p ->
+            printReport(p)
+        }
+    }
+}

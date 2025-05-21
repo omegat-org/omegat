@@ -25,8 +25,9 @@
 
 package org.omegat.gui.matches;
 
-import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -40,7 +41,7 @@ import org.omegat.util.OStrings;
 
 public class MatchesTextAreaTest extends TestCoreGUI {
 
-    private static final String PROJECT_PATH = "test-acceptance/data/project/";
+    private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
 
     @Rule
     public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
@@ -48,7 +49,7 @@ public class MatchesTextAreaTest extends TestCoreGUI {
     @Test
     public void testFuzzyMatches() throws Exception {
         // load project
-        openSampleProject(PROJECT_PATH);
+        openSampleProjectWaitMatches(PROJECT_PATH);
         robot().waitForIdle();
         // check a fuzzy match pane
         window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
@@ -66,8 +67,7 @@ public class MatchesTextAreaTest extends TestCoreGUI {
     protected void onSetUp() throws Exception {
         super.onSetUp();
         tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
-        File projSrc = new File(PROJECT_PATH);
-        FileUtils.copyDirectory(projSrc, tmpDir);
+        FileUtils.copyDirectory(PROJECT_PATH.toFile(), tmpDir);
         FileUtils.forceDeleteOnExit(tmpDir);
     }
 }

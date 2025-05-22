@@ -297,16 +297,16 @@ public class AlignPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel advancedPanel;
-    public javax.swing.JComboBox<AlgorithmClass> algorithmComboBox;
-    public javax.swing.JLabel averageDistanceLabel;
-    public javax.swing.JComboBox<CalculatorType> calculatorComboBox;
-    public javax.swing.JComboBox<ComparisonMode> comparisonComboBox;
-    public javax.swing.JButton continueButton;
-    public javax.swing.JPanel controlsPanel;
-    public javax.swing.JComboBox<CounterType> counterComboBox;
-    public javax.swing.JButton editButton;
-    public javax.swing.JButton fileFilterSettingsButton;
+    javax.swing.JPanel advancedPanel;
+    javax.swing.JComboBox<AlgorithmClass> algorithmComboBox;
+    javax.swing.JLabel averageDistanceLabel;
+    javax.swing.JComboBox<CalculatorType> calculatorComboBox;
+    javax.swing.JComboBox<ComparisonMode> comparisonComboBox;
+    javax.swing.JButton continueButton;
+    javax.swing.JPanel controlsPanel;
+    javax.swing.JComboBox<CounterType> counterComboBox;
+    javax.swing.JButton editButton;
+    javax.swing.JButton fileFilterSettingsButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
@@ -314,10 +314,10 @@ public class AlignPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler5;
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
-    public javax.swing.JPanel filteringControlsPanel;
-    public javax.swing.JCheckBox highlightCheckBox;
-    public javax.swing.JButton highlightPatternButton;
-    public javax.swing.JLabel instructionsLabel;
+    javax.swing.JPanel filteringControlsPanel;
+    javax.swing.JCheckBox highlightCheckBox;
+    javax.swing.JButton highlightPatternButton;
+    javax.swing.JLabel instructionsLabel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -333,18 +333,18 @@ public class AlignPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    public javax.swing.JButton mergeButton;
-    public javax.swing.JButton moveDownButton;
-    public javax.swing.JButton moveUpButton;
-    public javax.swing.JProgressBar progressBar;
-    public javax.swing.JCheckBox removeTagsCheckBox;
-    public javax.swing.JButton resetButton;
-    public javax.swing.JButton saveButton;
-    public javax.swing.JScrollPane scrollPane;
-    public javax.swing.JPanel segmentationControlsPanel;
-    public javax.swing.JCheckBox segmentingCheckBox;
-    public javax.swing.JButton segmentingRulesButton;
-    public javax.swing.JButton splitButton;
-    public javax.swing.JTable table;
+    javax.swing.JButton mergeButton;
+    javax.swing.JButton moveDownButton;
+    javax.swing.JButton moveUpButton;
+    javax.swing.JProgressBar progressBar;
+    javax.swing.JCheckBox removeTagsCheckBox;
+    javax.swing.JButton resetButton;
+    javax.swing.JButton saveButton;
+    javax.swing.JScrollPane scrollPane;
+    javax.swing.JPanel segmentationControlsPanel;
+    javax.swing.JCheckBox segmentingCheckBox;
+    javax.swing.JButton segmentingRulesButton;
+    javax.swing.JButton splitButton;
+    javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

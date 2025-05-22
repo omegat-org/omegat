@@ -367,13 +367,36 @@ public final class StringUtil {
     }
 
     /**
-     * Compare two values, which could be null.
+     * Compares two objects of type T that may be null.
+     *
+     * @param <T> the type of objects to be compared, which must implement Comparable
+     * @param v1 the first object to compare, which may be null
+     * @param v2 the second object to compare, which may be null
+     * @return a negative integer, zero, or a positive integer as the first argument
+     *         is less than, equal to, or greater than the second
+     * @deprecated
      */
+    @Deprecated
     public static <T extends Comparable<T>> int compareToWithNulls(T v1, T v2) {
-        if (v1 == v2) {
-            return 0;
-        } else if (v1 == null) {
-            return -1;
+        return compareToNullable(v1, v2);
+    }
+
+    /**
+     * Compares two objects of type T that may be null.
+     * <p>
+     * Compares two nullable values of a type that extends {@code Comparable}.
+     * Handles {@code null} values by considering {@code null} as less than any non-null value.
+     * If both values are {@code null}, they are considered equal.
+     *
+     * @param <T> The type of the values being compared, which must implement {@link Comparable}.
+     * @param v1 The first value to compare. May be {@code null}.
+     * @param v2 The second value to compare. May be {@code null}.
+     * @return A negative integer, zero, or a positive integer if {@code v1} is less than,
+     *         equal to, or greater than {@code v2}, respectively.
+     */
+    public static <T extends Comparable<T>> int compareToNullable(T v1, T v2) {
+        if (v1 == null) {
+            return v2 == null ? 0 : -1;
         } else if (v2 == null) {
             return 1;
         } else {
@@ -494,16 +517,10 @@ public final class StringUtil {
 
     public static boolean isValidXMLChar(int codePoint) {
         if (codePoint < 0x20) {
-            if (codePoint != 0x09 && codePoint != 0x0A && codePoint != 0x0D) {
-                return false;
-            }
-        } else if (codePoint >= 0x20 && codePoint <= 0xD7FF) {
-        } else if (codePoint >= 0xE000 && codePoint <= 0xFFFD) {
-        } else if (codePoint >= 0x10000 && codePoint <= 0x10FFFF) {
-        } else {
-            return false;
+            return codePoint == 0x09 || codePoint == 0x0A || codePoint == 0x0D;
         }
-        return true;
+        return codePoint <= 0xD7FF || codePoint >= 0xE000 && codePoint <= 0xFFFD
+                || codePoint >= 0x10000 && codePoint <= 0x10FFFF;
     }
 
     /**

@@ -145,7 +145,7 @@ public final class TestTeamIntegration {
 
     static final String[] THREADS = new String[] { "s1", "s2", "s3" };
 
-    static Team repo;
+    static Team repository;
 
     public static void main(String[] args) throws Exception {
         String logConfig = System.getProperty("java.util.logging.config.file", null);
@@ -193,8 +193,8 @@ public final class TestTeamIntegration {
             Thread.sleep(500);
         } while (alive);
 
-        repo = createRepo2(REPO.get(0), new File(DIR, "repo"));
-        repo.update();
+        TestTeamIntegration.repository = createRepo2(REPO.get(0), new File(DIR, "repo"));
+        TestTeamIntegration.repository.update();
 
         System.err.println("Check repo");
 
@@ -226,12 +226,11 @@ public final class TestTeamIntegration {
 
         ProjectTMX tmx = null;
         int tmxCount = 0;
-        for (String rev : repo.listRevisions(startVersion)) {
-            repo.checkout(rev);
+        for (String rev : repository.listRevisions(startVersion)) {
+            repository.checkout(rev);
             tmx = new ProjectTMX(checkOrphanedCallback);
             tmx.load(SRC_LANG, TRG_LANG, false,
-                    new File(repo.getDir(), "omegat/project_save.tmx"), Core.getSegmenter());
-
+                    new File(repository.getDir(), "omegat/project_save.tmx"), Core.getSegmenter());
             for (String th : data.keySet()) {
                 TMXEntry en = tmx.getDefaultTranslation(th);
                 long value = en == null ? 0 : Long.parseLong(en.translation);
@@ -531,15 +530,14 @@ public final class TestTeamIntegration {
             String predefinedUser = def.getOtherAttributes().get(new QName("svnUsername"));
             String predefinedPass = def.getOtherAttributes().get(new QName("svnPassword"));
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(def, predefinedUser,
-                    predefinedPass, null);
+            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(predefinedUser, predefinedPass);
             ourClientManager = SVNClientManager.newInstance(options, authManager);
         }
 
         public List<String> listRevisions(String from) throws Exception {
             final List<String> result = new ArrayList<String>();
             ourClientManager.getLogClient().doLog(
-                    new File[] { new File(repo.getDir(), "omegat/project_save.tmx") },
+                    new File[] { new File(repository.getDir(), "omegat/project_save.tmx") },
                     SVNRevision.create(Long.parseLong(from)), SVNRevision.HEAD, false, false,
                     Integer.MAX_VALUE, new ISVNLogEntryHandler() {
                         public void handleLogEntry(SVNLogEntry en) throws SVNException {

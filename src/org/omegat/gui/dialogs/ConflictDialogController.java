@@ -25,10 +25,7 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import org.omegat.core.Core;
+import javax.swing.JFrame;
 
 /**
  * Show conflict dialog.
@@ -37,35 +34,41 @@ import org.omegat.core.Core;
  */
 public class ConflictDialogController {
     private static final int MAX_CODEPOINTS = 100;
-
+    private final JFrame parent;
     private volatile String result;
 
-    public String show(String baseText, String remoteText, String localText) {
-        final ConflictDialog dialog = new ConflictDialog(Core.getMainWindow().getApplicationFrame(), true);
+    public ConflictDialogController(JFrame parent) {
+        this.parent = parent;
+    }
+
+    public boolean show(String baseText, String remoteText, String localText) {
+        final ConflictDialog dialog = new ConflictDialog(parent, true);
 
         dialog.textLeft.setText(prepareText(baseText));
         dialog.textCenter.setText(prepareText(localText));
         dialog.textRight.setText(prepareText(remoteText));
 
-        dialog.btnMine.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        dialog.btnMine.addActionListener(e -> {
+            synchronized (this) {
                 result = localText;
-                dialog.dispose();
             }
+            dialog.dispose();
         });
-        dialog.btnTheirs.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        dialog.btnTheirs.addActionListener(e -> {
+            synchronized (this) {
                 result = remoteText;
-                dialog.dispose();
             }
+            dialog.dispose();
         });
 
-        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame());
+        dialog.setLocationRelativeTo(parent);
         dialog.pack();
         dialog.setVisible(true);
 
+        return true;
+    }
+
+    public String getResult() {
         return result;
     }
 

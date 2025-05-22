@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2024 Hiroshi Miura
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,23 +23,18 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.matches;
+package org.omegat.gui.glossary;
 
-import java.nio.file.Files;
+import org.junit.Rule;
+import org.junit.Test;
+import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.util.LocaleRule;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
-import org.omegat.util.OStrings;
-
-public class MatchesTextAreaTest extends TestCoreGUI {
+public class GlossaryTextTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
 
@@ -47,27 +42,12 @@ public class MatchesTextAreaTest extends TestCoreGUI {
     public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
-    public void testFuzzyMatches() throws Exception {
+    public void testGlossarySearch() throws Exception {
         // load project
-        openSampleProjectWaitMatches(PROJECT_PATH);
+        openSampleProjectWaitGlossary(PROJECT_PATH);
         robot().waitForIdle();
-        // check a fuzzy match pane
-        window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
-        window.textBox("matches_pane").requireVisible();
-        window.textBox("matches_pane").requireNotEditable();
-        Pattern pattern = Pattern.compile("1. Error while reading MT results\\n"
-                + "Erreur lors de la lecture des résultats de TA\\n"
-                + "<\\d+/\\d+/\\d+%\\s*" + OStrings.getString(
-                        "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY") + "\\s*>");
-        window.textBox("matches_pane").requireText(pattern);
-        closeProject();
-    }
-
-    @Override
-    protected void onSetUp() throws Exception {
-        super.onSetUp();
-        tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
-        FileUtils.copyDirectory(PROJECT_PATH.toFile(), tmpDir);
-        FileUtils.forceDeleteOnExit(tmpDir);
+        window.textBox("glossary_text_area").requireVisible();
+        window.textBox("glossary_text_area").requireNotEditable();
+        window.textBox("glossary_text_area").requireText("Error = エラー\n\n");
     }
 }

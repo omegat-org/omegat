@@ -167,7 +167,7 @@ ext.makeWinTask = { args ->
     }
 
     tasks.register(distsTaskName, Copy) {
-        description = "Create a Windows installer for ${args.name} distro. " +
+        description = "Creates a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
         onlyIf { execWinTasks }
         from layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")

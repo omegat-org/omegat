@@ -1039,8 +1039,9 @@ public class RealProject implements IProject {
 
                         @Override
                         public void parseHeadFile(File file) throws Exception {
-                            headTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, null);
+                            headTMX = new ProjectTMX();
+                            headTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
                         }
 
                         @Override
@@ -1054,8 +1055,9 @@ public class RealProject implements IProject {
 
                         @Override
                         public void reload(File file) throws Exception {
-                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, null);
+                            ProjectTMX newTMX = new ProjectTMX();
+                            newTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
                             projectTMX.replaceContent(newTMX);
                         }
 

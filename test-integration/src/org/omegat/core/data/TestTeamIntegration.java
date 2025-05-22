@@ -228,8 +228,9 @@ public final class TestTeamIntegration {
         int tmxCount = 0;
         for (String rev : repo.listRevisions(startVersion)) {
             repo.checkout(rev);
-            tmx = new ProjectTMX(SRC_LANG, TRG_LANG, false,
-                    new File(repo.getDir(), "omegat/project_save.tmx"), checkOrphanedCallback);
+            tmx = new ProjectTMX(checkOrphanedCallback);
+            tmx.load(SRC_LANG, TRG_LANG, false,
+                    new File(repo.getDir(), "omegat/project_save.tmx"), Core.getSegmenter());
 
             for (String th : data.keySet()) {
                 TMXEntry en = tmx.getDefaultTranslation(th);

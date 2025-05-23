@@ -46,6 +46,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -216,6 +217,11 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     protected void setFoundResult(SourceTextEntry en, List<GlossaryEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
 
+        List<GlossaryEntry> oldEntries = null;
+        if (processedEntry != null) {
+            oldEntries = new ArrayList<>(nowEntries);
+        }
+
         clear();
 
         if (entries == null) {
@@ -238,6 +244,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         for (GlossaryEntry entry : entries) {
             entryRenderer.render(entry, getStyledDocument());
         }
+
+        firePropertyChange("entries", oldEntries, entries);
     }
 
     @Override

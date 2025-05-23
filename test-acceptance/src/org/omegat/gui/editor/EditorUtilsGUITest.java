@@ -28,34 +28,29 @@ package org.omegat.gui.editor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
+import java.nio.file.Paths;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
-import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
-import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
-import org.omegat.util.Preferences;
 
 /**
  * @author Hiroshi Miura
  */
 @RunWith(Enclosed.class)
-public class EditorUtilsGUITest {
+public final class EditorUtilsGUITest {
+
+    private EditorUtilsGUITest() {
+    }
 
     public static class EditorUtilsFirstStepsTest extends TestCoreGUI {
 
@@ -85,25 +80,7 @@ public class EditorUtilsGUITest {
 
         @Test
         public void testEditorUtilsGetWordLoadedProject() throws Exception {
-            // Prepare a sample project
-            File tmpDir = folder.newFolder("omegat-sample-project-");
-            File projSrc = new File("test-acceptance/data/project_CN_JP/");
-            FileUtils.copyDirectory(projSrc, tmpDir);
-            FileUtils.forceDeleteOnExit(tmpDir);
-            Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
-            // Load the project and wait a completion
-            CountDownLatch latch = new CountDownLatch(1);
-            CoreEvents.registerProjectChangeListener(eventType -> {
-                if (Core.getProject().isProjectLoaded()) {
-                    latch.countDown();
-                }
-            });
-            SwingUtilities.invokeAndWait(() -> ProjectUICommands.projectOpen(tmpDir, true));
-            try {
-                assertTrue(latch.await(5, TimeUnit.SECONDS));
-            } catch (InterruptedException ignored) {
-            }
-            //
+            openSampleProject(Paths.get("test-acceptance/data/project_CN_JP/"));
             final JTextComponent editPane = window.panel("Editor - source.txt").textBox().target();
             int length = editPane.getDocument().getLength();
             assertTrue(length > 0);

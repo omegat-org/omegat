@@ -287,8 +287,9 @@ public final class TestTeamIntegrationChild {
      * Check in memory and in file.
      */
     static void checkAll() throws Exception {
-        ProjectTMX tmx = new ProjectTMX(TestTeamIntegration.SRC_LANG, TestTeamIntegration.TRG_LANG, false,
-                new File(dir + "/omegat/project_save.tmx"), TestTeamIntegration.checkOrphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(TestTeamIntegration.checkOrphanedCallback);
+        tmx.load(TestTeamIntegration.SRC_LANG, TestTeamIntegration.TRG_LANG, false,
+                new File(dir + "/omegat/project_save.tmx"), Core.getSegmenter());
         for (int c = 0; c < segCount; c++) {
             checkTranslation(c);
             checkTranslationFromFile(tmx, c);

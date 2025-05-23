@@ -228,9 +228,9 @@ public final class TestTeamIntegration {
         int tmxCount = 0;
         for (String rev : repository.listRevisions(startVersion)) {
             repository.checkout(rev);
-            tmx = new ProjectTMX(SRC_LANG, TRG_LANG, false,
-                    new File(repository.getDir(), "omegat/project_save.tmx"), checkOrphanedCallback);
-
+            tmx = new ProjectTMX(checkOrphanedCallback);
+            tmx.load(SRC_LANG, TRG_LANG, false,
+                    new File(repository.getDir(), "omegat/project_save.tmx"), Core.getSegmenter());
             for (String th : data.keySet()) {
                 TMXEntry en = tmx.getDefaultTranslation(th);
                 long value = en == null ? 0 : Long.parseLong(en.translation);

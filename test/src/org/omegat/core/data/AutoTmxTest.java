@@ -131,10 +131,10 @@ public class AutoTmxTest {
         props.setTargetLanguage("fr");
         props.setTargetTokenizer(LuceneFrenchTokenizer.class);
 
-        Core.initializeConsole(new HashMap<String, String>());
+        Core.initializeConsole(new HashMap<>());
 
         p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), false, projectFile,
+        p.projectTMX = new ProjectTMX(
                 new ProjectTMX.CheckOrphanedCallback() {
                     @Override
                     public boolean existSourceInProject(String src) {
@@ -146,6 +146,8 @@ public class AutoTmxTest {
                         return true;
                     }
                 });
+        p.projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), false, projectFile,
+                Core.getSegmenter());
 
         return new ExternalTMFactory.TMXLoader(tmxFile).setDoSegmenting(props.isSentenceSegmentingEnabled())
                 .load(props.getSourceLanguage(), props.getTargetLanguage());

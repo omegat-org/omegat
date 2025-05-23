@@ -36,8 +36,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
@@ -56,7 +54,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.BiDiUtils;
@@ -98,27 +95,18 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private ISegmentPropertiesView viewImpl;
     private boolean isTargetRtl;
 
+    void setTargetRtl(boolean targetRtl) {
+        isTargetRtl = targetRtl;
+    }
+
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
                 null, true);
         mw.addDockable(scrollPane);
 
         scrollPane.setMenuProvider(this);
-
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-            @Override
-            public void onNewFile(String activeFileName) {
-                // nothing to do
-            }
-
-            @Override
-            public void onEntryActivated(SourceTextEntry newEntry) {
-                scrollPane.stopNotifying();
-                isTargetRtl = BiDiUtils.isTargetLangRtl();
-                setProperties(newEntry);
-                doNotify(getKeysToNotify());
-            }
-        });
+  
+        CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener(this));
         CoreEvents.registerProjectChangeListener(eventType -> {
             if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
                 setProperties(null);
@@ -151,7 +139,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             Constructor<?> constructor = viewClass.getConstructor();
             newImpl = (ISegmentPropertiesView) constructor.newInstance();
         } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.FINE, e.getMessage());
+            Log.log(e);
             return;
         }
         viewImpl = newImpl;
@@ -170,7 +158,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             menu.show(scrollPane, p.x, p.y);
         } catch (IllegalComponentStateException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 
@@ -306,6 +294,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             viewImpl.update();
             return;
         }
+
         if (ste.getComment() != null) {
             setProperty(KEY_HASCOMMENT, true);
         }
@@ -366,5 +355,31 @@ public class SegmentPropertiesArea implements IPaneMenu {
         } else {
             setProperty(KEY_ORIGIN, OStrings.getString("SEGPROP_ORIGIN_UNKNOWN"));
         }
+    }
+
+    private class SegmentPropertiesEntryEventListener implements IEntryEventListener {
+
+        private final SegmentPropertiesArea segmentPropertiesArea;
+
+        SegmentPropertiesEntryEventListener(SegmentPropertiesArea segmentPropertiesArea) {
+            this.segmentPropertiesArea = segmentPropertiesArea;
+        }
+
+        @Override
+        public void onNewFile(String activeFileName) {
+            // nothing to do
+        }
+
+        @Override
+        public void onEntryActivated(SourceTextEntry newEntry) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            segmentPropertiesArea.scrollPane.stopNotifying();
+            segmentPropertiesArea.setTargetRtl(BiDiUtils.isTargetLangRtl());
+            segmentPropertiesArea.setProperties(newEntry);
+            segmentPropertiesArea.doNotify(getKeysToNotify());
+        }
+
     }
 }

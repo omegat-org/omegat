@@ -74,19 +74,29 @@ tasks.jacocoTestCoverageVerification {
 
 tasks.named("run") {
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('runDebugger', JavaExec) {
-    description = 'Launch app for debugging.' // Special debug task for NetBeans
+    description = 'Runs application for debugging.' // Special debug task for NetBeans
     group = 'application'
     mainClass = application.mainClass
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--illegal-access=warn"])
     debug = true
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('runOnJava17', JavaExec) {
-    description = 'Launch app on Java 17'
+    description = 'Runs application on Java 17.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -95,10 +105,15 @@ tasks.register('runOnJava17', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('runOnJava21', JavaExec) {
-    description = 'Launch app on Java 21'
+    description = 'Runs application on Java 21.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -107,10 +122,15 @@ tasks.register('runOnJava21', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('testIntegration', JavaExec) {
-    description = 'Run integration tests. Pass repo URL as -Domegat.test.repo=<repo>'
+    description = 'Runs integration tests. Pass repo URL as -Domegat.test.repo=<repo>.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -121,11 +141,16 @@ tasks.register('testIntegration', JavaExec) {
     if (!System.hasProperty('java.util.logging.config.file')) {
         System.setProperty('java.util.logging.config.file', "${rootDir}/config/test/logger.properties")
     }
-    systemProperties = System.properties
+    systemProperties = System.properties.getProperties()
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('testOnJava17', Test) {
-    description = 'Run test cases on Java 17'
+    description = 'Runs test cases on Java 17.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -138,7 +163,7 @@ tasks.register('testOnJava17', Test) {
 }
 
 tasks.register('testOnJava21', Test) {
-    description = 'Run test cases on Java 21'
+    description = 'Runs test cases on Java 21.'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(21)
         vendor = JvmVendorSpec.ADOPTIUM
@@ -188,7 +213,7 @@ tasks.register('testAcceptance', Test) {
     }
     finalizedBy testAcceptanceFinally
 
-    description = 'Run Acceptance GUI test'
+    description = 'Runs acceptance GUI test.'
     group = 'verification'
     javaLauncher = javaToolchains.launcherFor {
         languageVersion = JavaLanguageVersion.of(17)
@@ -201,12 +226,4 @@ tasks.register('testAcceptance', Test) {
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     dependsOn firstSteps
     dependsOn ':aligner:jar'
-}
-
-tasks.withType(JavaExec).configureEach {
-    // Allow setting the max heap size for the run task from the command line, e.g.
-    // `gradle -PrunMaxHeapSize=1024M run`
-    maxHeapSize = findProperty('runMaxHeapSize')
-    // Ask modules to be up-to-date before run task executed
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }

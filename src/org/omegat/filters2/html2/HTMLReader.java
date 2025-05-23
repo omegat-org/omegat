@@ -33,7 +33,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
@@ -71,102 +73,75 @@ public class HTMLReader extends Reader implements AutoCloseable {
         reader = new BufferedReader(createReader(fileName, encoding));
     }
 
-    private String encoding = null;
+    private Charset encoding = null;
 
     /**
      * Returns encoding that was used to read the HTML file.
      */
     public String getEncoding() {
-        return encoding;
+        return encoding.name();
     }
 
-    /**
-     * Returns the reader of the underlying file in the correct encoding.
-     *
-     * <p>
-     * We can detect the following:
-     * <ul>
-     * <li>UTF-16 with BOM (byte order mark)
-     * <li>UTF-8 with BOM (byte order mark)
-     * <li>Any other encoding with 8-bit Latin symbols (e.g. Windows-1251, UTF-8
-     * etc), if it is specified using XML/HTML-style encoding declarations.
-     * </ul>
-     * <p>
-     * Note that we cannot detect UTF-16 encoding, if there's no BOM!
-     */
     private Reader createReader(String fileName, String defaultEncoding) throws IOException {
-        // BOM detection
-        BufferedInputStream is = new BufferedInputStream(new FileInputStream(fileName));
 
-        is.mark(OConsts.READ_AHEAD_LIMIT);
+        try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(fileName))) {
+            encoding = detectBOM(inputStream);
+            if (encoding == null) {
+                encoding = detectEncodingFromContent(inputStream, defaultEncoding);
+            }
+            return new InputStreamReader(inputStream, encoding != null ? encoding : Charset.defaultCharset());
+        }
+    }
 
-        int char1 = is.read();
-        int char2 = is.read();
-        int char3 = is.read();
-        if (char1 == 0xFE && char2 == 0xFF) {
-            encoding = "UTF-16BE";
+    private Charset detectBOM(BufferedInputStream inputStream) throws IOException {
+        inputStream.mark(OConsts.READ_AHEAD_LIMIT);
+        int firstByte = inputStream.read();
+        int secondByte = inputStream.read();
+        int thirdByte = inputStream.read();
+        inputStream.reset();
+
+        if (firstByte == 0xFE && secondByte == 0xFF) {
+            return StandardCharsets.UTF_16BE;
+        } else if (firstByte == 0xFF && secondByte == 0xFE) {
+            return StandardCharsets.UTF_16LE;
+        } else if (firstByte == 0xEF && secondByte == 0xBB && thirdByte == 0xBF) {
+            return StandardCharsets.UTF_8;
         }
-        if (char1 == 0xFF && char2 == 0xFE) {
-            encoding = "UTF-16LE";
-        }
-        if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF) {
-            encoding = "UTF-8";
-        }
-        is.reset();
-        if (encoding != null) {
-            return new InputStreamReader(is, encoding);
+        return null;
+    }
+
+    private Charset detectEncodingFromContent(BufferedInputStream inputStream, String defaultEncoding) throws IOException {
+        inputStream.mark(OConsts.READ_AHEAD_LIMIT);
+
+        byte[] buffer = new byte[OConsts.READ_AHEAD_LIMIT];
+        int length = inputStream.read(buffer);
+        inputStream.reset();
+
+        if (length <= 0) {
+            return null;
         }
 
-        is.mark(OConsts.READ_AHEAD_LIMIT);
-        byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
-        int len = is.read(buf);
-        if (len > 0) {
-            String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
-                    : new String(buf, 0, len, defaultEncoding);
+        String content = defaultEncoding == null
+            ? new String(buffer, 0, length, Charset.defaultCharset())
+            : new String(buffer, 0, length, defaultEncoding);
 
-            Matcher matcherHtml = PatternConsts.HTML_ENCODING.matcher(buffer);
-            if (matcherHtml.find()) {
-                encoding = matcherHtml.group(1);
-            } else if (encoding == null) {
-                Matcher matcherHtml5 = PatternConsts.HTML5_ENCODING.matcher(buffer);
-                if (matcherHtml5.find()) {
-                    encoding = matcherHtml5.group(1);
-                } else if (encoding == null) {
-                    Matcher matcherXml = PatternConsts.XML_ENCODING.matcher(buffer);
-                    if (matcherXml.find()) {
-                        encoding = matcherXml.group(1);
-                    }
+        // Extracted helper method to detect charset
+        return detectCharset(content, PatternConsts.HTML_ENCODING, PatternConsts.HTML5_ENCODING, PatternConsts.XML_ENCODING);
+    }
+
+    // Helper method to handle repetitive charset detection
+    private Charset detectCharset(String content, Pattern... patterns) {
+        for (Pattern pattern : patterns) {
+            Matcher matcher = pattern.matcher(content);
+            if (matcher.find()) {
+                try {
+                    return Charset.forName(matcher.group(1));
+                } catch (Exception ignored) {
+                    // ignore and try next.
                 }
             }
         }
-
-        // reset the inputstream to its start
-        is.reset();
-
-        // create an inputstream reader
-        InputStreamReader isr = null;
-
-        // try the encoding specified in the file first
-        if (encoding != null) {
-            try {
-                isr = new InputStreamReader(is, encoding);
-            } catch (Exception e) {
-            }
-        }
-        // if there's no reader yet, try the default encoding
-        if (isr == null) {
-            try {
-                isr = new InputStreamReader(is, defaultEncoding);
-                encoding = defaultEncoding;
-            } catch (Exception e) {
-            }
-        }
-        // just create one without an encoding and cross fingers
-        if (isr == null) {
-            isr = new InputStreamReader(is, Charset.defaultCharset());
-            encoding = Charset.defaultCharset().name();
-        }
-        return isr;
+        return null;
     }
 
     public void close() throws IOException {
@@ -187,5 +162,4 @@ public class HTMLReader extends Reader implements AutoCloseable {
         }
         return reader.read(cbuf, off, len);
     }
-
 }

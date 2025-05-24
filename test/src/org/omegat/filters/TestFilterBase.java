@@ -33,6 +33,7 @@ import static org.xmlunit.assertj3.XmlAssert.assertThat;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -371,8 +372,8 @@ public abstract class TestFilterBase extends TestCore {
 
     protected void align(IFilter filter, String in, String out, IAlignCallback callback) throws Exception {
         File inFile = new File("test/data/filters/" + in);
-        File outFile = new File("test/data/filters/" + out);
-        filter.alignFile(inFile, outFile, Collections.emptyMap(), context, callback);
+        File outputFile = new File("test/data/filters/" + out);
+        filter.alignFile(inFile, outputFile, Collections.emptyMap(), context, callback);
     }
 
     /**
@@ -433,11 +434,11 @@ public abstract class TestFilterBase extends TestCore {
         ByteArrayOutputStream d2 = new ByteArrayOutputStream();
         FileUtils.copyFile(f2, d2);
 
-        assertEquals(d1.size(), d2.size());
+        assertEquals("There is difference in file size", d1.size(), d2.size());
         byte[] a1 = d1.toByteArray();
         byte[] a2 = d2.toByteArray();
         for (int i = 0; i < d1.size(); i++) {
-            assertEquals(a1[i], a2[i]);
+            assertEquals(MessageFormat.format("There is difference in the contents at location {0}", i), a1[i], a2[i]);
         }
     }
 
@@ -580,27 +581,27 @@ public abstract class TestFilterBase extends TestCore {
                 throws Exception {
             Core.setProject(this);
 
-            Set<String> existSource = new HashSet<String>();
-            Set<EntryKey> existKeys = new HashSet<EntryKey>();
+            Set<String> existSource = new HashSet<>();
+            Set<EntryKey> existKeys = new HashSet<>();
             Map<String, ExternalTMX> transMemories = new HashMap<>();
 
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
                     transMemories);
 
-            TestFileInfo fi = new TestFileInfo();
-            fi.filePath = file;
+            TestFileInfo testFileInfo = new TestFileInfo();
+            testFileInfo.filePath = file;
 
-            loadFilesCallback.setCurrentFile(fi);
+            loadFilesCallback.setCurrentFile(testFileInfo);
 
             filter.parseFile(new File(file), filterOptions, context, loadFilesCallback);
 
             loadFilesCallback.fileFinished();
 
             if (!transMemories.isEmpty()) {
-                fi.referenceEntries = transMemories.values().iterator().next();
+                testFileInfo.referenceEntries = transMemories.values().iterator().next();
             }
 
-            return fi;
+            return testFileInfo;
         }
     }
 

@@ -120,7 +120,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
 
-        assertEquals("UTF-8", filter.getInEncodingLastParsedFile());
+        assertEquals("Expect the encoding detection", "UTF-8", filter.getInEncodingLastParsedFile());
 
         f = "test/data/filters/html/file-HTMLFilter2-SMP.html";
         fi = loadSourceFiles(filter, f);

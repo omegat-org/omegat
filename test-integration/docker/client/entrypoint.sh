@@ -28,10 +28,19 @@ rsync -rlD --exclude='.git' --exclude='.gradle' --exclude='build' --exclude='doc
 
 [ -f /keys/id_rsa ] || inotifywait -e attrib /keys
 
+# Validate TYPE
+if [[ -z "${TYPE}" ]]; then
+  echo "TYPE is unset or empty. Defaulting to GIT."
+  TYPE="GIT"
+elif [[ "${TYPE}" != "SVN" && "${TYPE}" != "GIT" ]]; then
+  echo "Invalid TYPE value '${TYPE}'. Expected 'SVN' or 'GIT'. Defaulting to GIT."
+  TYPE="GIT"
+fi
+
 if [[ "${TYPE}" == "SVN" ]]; then
   export REPO=http://svn:svnpass@server/svn/omegat-test.svn
   export REPO2=svn+ssh://svn:svnpass@server/omegat-test.svn
-elif [[ "${TYPE}" == "GIT" ]]; then
+else
   export REPO=git@server:omegat-test.git
   export REPO2=https://git:gitpass@server/omegat-test.git
 fi

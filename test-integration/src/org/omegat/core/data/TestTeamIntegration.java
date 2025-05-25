@@ -26,6 +26,7 @@
 package org.omegat.core.data;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
@@ -45,12 +46,12 @@ import java.util.stream.Stream;
 
 import javax.xml.namespace.QName;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.jetbrains.annotations.NotNull;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
@@ -128,8 +129,6 @@ public final class TestTeamIntegration {
     private static final Pattern URL_PATTERN = Pattern
             .compile("(http(s)?|svn(\\+ssh)?)" + "://(?<username>.+?)(:(?<password>.+?))?@.+");
 
-    static final String DIR = "/tmp/teamtest";
-    static final List<String> REPO = new ArrayList<>();
     static final int MAX_DELAY_SECONDS = 15;
     static final int SEG_COUNT = 4;
 
@@ -144,6 +143,8 @@ public final class TestTeamIntegration {
 
     // test with 3 threads.
     static final String[] THREADS = new String[] { "s1", "s2", "s3" };
+
+    private static final String ERROR_CREATE_TEST_DIR = "Impossible to create test dir";
 
     public static void main(String[] args) throws Exception {
         String logConfig = System.getProperty("java.util.logging.config.file", null);
@@ -181,11 +182,14 @@ public final class TestTeamIntegration {
             System.out.println("Map file: " + mapFile);
         }
 
-        String startVersion = prepareRepo(repositoryUrls.get(0));
+        Path tempDir = Files.createTempDirectory("teamtest");
+        System.out.println("Test runner directory is: " + tempDir);
+        String startVersion = prepareRepo(repositoryUrls.get(0), tempDir);
 
         Run[] runs = new Run[THREADS.length];
         for (int i = 0; i < THREADS.length; i++) {
-            runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS,
+            Path runnerDir = setupRunnerDirectory(tempDir, i);
+            runs[i] = new Run(THREADS[i], runnerDir.toFile(), MAX_DELAY_SECONDS,
                     repositoryUrls.get(i % repositoryUrls.size()), logConfig);
         }
         for (int i = 0; i < THREADS.length; i++) {
@@ -210,7 +214,7 @@ public final class TestTeamIntegration {
             Thread.sleep(500);
         } while (alive);
 
-        final Team teamRepository = createRepo2(repositoryUrls.get(0), new File(DIR, "repo"));
+        final Team teamRepository = createRepo2(repositoryUrls.get(0), tempDir.resolve("repo").toFile());
         teamRepository.update();
 
         System.err.println("Check repo");
@@ -220,6 +224,15 @@ public final class TestTeamIntegration {
         checkRepo(teamRepository, startVersion);
 
         System.err.println("Processed successfully");
+    }
+
+    private static @NotNull Path setupRunnerDirectory(Path tempDir, int i) throws IOException {
+        Path runnerDir = tempDir.resolve(THREADS[i]);
+        Files.copy(tempDir.resolve("/repo/omegat.project"), runnerDir.resolve("omegat.project"));
+        if (!runnerDir.resolve("omegat").toFile().mkdirs()) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
+        }
+        return runnerDir;
     }
 
     /**
@@ -291,31 +304,34 @@ public final class TestTeamIntegration {
     }
 
     /**
-     * Prepare repository.
+     * Prepares a repository for testing purposes by creating a test directory,
+     * setting up repository configurations, and committing initial files.
+     *
+     * @param repo the repository URL to prepare for testing
+     * @return the version identifier of the committed "omegat/project_save.tmx" file
+     * @throws Exception if there is an issue creating or deleting directories,
+     *                   initializing repository configurations, or committing files
      */
-    static String prepareRepo(String repo) throws Exception {
-        File tmp = new File(DIR);
-        FileUtils.deleteDirectory(tmp);
-        if (tmp.exists()) {
-            throw new Exception("Impossible to delete test dir");
-        }
-        if (!tmp.mkdirs()) {
-            throw new Exception("Impossible to create test dir");
-        }
-        File origDir = new File(tmp, "repo");
-        if (!origDir.mkdir()) {
-            throw new Exception("Impossible to create test dir");
+    static String prepareRepo(String repo, Path tempDir) throws Exception {
+        Path origDir = tempDir.resolve("repo");
+        if (!origDir.toFile().mkdir()) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
         }
 
-        ProjectProperties config = createConfig(repo, origDir);
+        ProjectProperties config = createConfig(repo, origDir.toFile());
 
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(),
                 config.getRepositories(), config);
         remote.switchAllToLatest();
 
-        new File(origDir, "omegat").mkdirs();
-        File f = new File(origDir, "omegat/project_save.tmx");
-        TMXWriter2 wr = new TMXWriter2(f, SRC_LANG, TRG_LANG, true, false, true);
+        Path omegatDir = origDir.resolve("omegat");
+        boolean result = omegatDir.toFile().mkdirs();
+        if (!result) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
+        }
+
+        Path f = origDir.resolve("omegat/project_save.tmx");
+        TMXWriter2 wr = new TMXWriter2(f.toFile(), SRC_LANG, TRG_LANG, true, false, true);
         wr.close();
         ProjectFileStorage.writeProjectFile(config);
 
@@ -330,6 +346,13 @@ public final class TestTeamIntegration {
         return remote.getVersion("omegat/project_save.tmx");
     }
 
+    /**
+     * Creates a configuration for a project based on the given repository URL and directory.
+     *
+     * @param repoUrl the repository URL to be used for the project configuration
+     * @param dir the directory where the project resides
+     * @return a {@link ProjectProperties} instance containing the configuration details for the project
+     */
     static ProjectProperties createConfig(String repoUrl, File dir) {
         ProjectProperties config = new ProjectProperties(dir);
         config.setSourceLanguage(SRC_LANG);
@@ -422,11 +445,7 @@ public final class TestTeamIntegration {
         Run(String source, File dir, int delay, final String repo, final String logConfig) throws Exception {
             this.source = source;
             String cp = ManagementFactory.getRuntimeMXBean().getClassPath();
-            FileUtils.copyFile(new File(DIR + "/repo/omegat.project"),
-                    new File(DIR + "/" + source + "/omegat.project"));
-            if (!new File(DIR + "/" + source + "/omegat/").mkdirs()) {
-                throw new Exception("Impossible to create test dir");
-            }
+
             // Get `java` command path from java.home
             Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
             List<String> cmd = new ArrayList<>();

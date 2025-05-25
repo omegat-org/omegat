@@ -124,7 +124,7 @@ public final class TestTeamIntegration {
     private TestTeamIntegration() {
     }
 
-    public static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
+    private static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
     private static final Pattern URL_PATTERN = Pattern
             .compile("(http(s)?|svn(\\+ssh)?)" + "://(?<username>.+?)(:(?<password>.+?))?@.+");
 
@@ -138,12 +138,12 @@ public final class TestTeamIntegration {
     static String mapFile;
     static int processSeconds;
 
+    // referenced from TestTeamIntegrationChild class
     static final Language SRC_LANG = new Language("en");
     static final Language TRG_LANG = new Language("be");
 
+    // test with 3 threads.
     static final String[] THREADS = new String[] { "s1", "s2", "s3" };
-
-    static Team repository;
 
     public static void main(String[] args) throws Exception {
         String logConfig = System.getProperty("java.util.logging.config.file", null);
@@ -157,10 +157,11 @@ public final class TestTeamIntegration {
             props.load(fis);
             PluginUtils.loadPluginFromProperties(props);
         }
-        REPO.add(propRepo);
+        final List<String> repositoryUrls = new ArrayList<>();
+        repositoryUrls.add(propRepo);
         String altRepo = System.getProperty("omegat.test.repo.alt", null);
         if (altRepo != null) {
-            REPO.add(altRepo);
+            repositoryUrls.add(altRepo);
         }
         mapRepo = System.getProperty("omegat.test.map.repo", null);
         mapRepoType = System.getProperty("omegat.test.map.type", "http");
@@ -180,12 +181,12 @@ public final class TestTeamIntegration {
             System.out.println("Map file: " + mapFile);
         }
 
-        String startVersion = prepareRepo();
+        String startVersion = prepareRepo(repositoryUrls.get(0));
 
         Run[] runs = new Run[THREADS.length];
         for (int i = 0; i < THREADS.length; i++) {
             runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS,
-                    REPO.get(i % REPO.size()), logConfig);
+                    repositoryUrls.get(i % repositoryUrls.size()), logConfig);
         }
         for (int i = 0; i < THREADS.length; i++) {
             runs[i].start();
@@ -209,14 +210,14 @@ public final class TestTeamIntegration {
             Thread.sleep(500);
         } while (alive);
 
-        repository = createRepo2(REPO.get(0), new File(DIR, "repo"));
-        repository.update();
+        final Team teamRepository = createRepo2(repositoryUrls.get(0), new File(DIR, "repo"));
+        teamRepository.update();
 
         System.err.println("Check repo");
 
         TestPreferencesInitializer.init();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        checkRepo(startVersion);
+        checkRepo(teamRepository, startVersion);
 
         System.err.println("Processed successfully");
     }
@@ -224,8 +225,8 @@ public final class TestTeamIntegration {
     /**
      * Check repository after children processed.
      */
-    static void checkRepo(String startVersion) throws Exception {
-        List<String> segments = new ArrayList<String>();
+    static void checkRepo(Team teamRepository, String startVersion) throws Exception {
+        List<String> segments = new ArrayList<>();
         for (String th : THREADS) {
             for (int c = 0; c < SEG_COUNT; c++) {
                 segments.add(th + "/" + c);
@@ -234,7 +235,7 @@ public final class TestTeamIntegration {
 
         Map<String, List<Long>> data = new TreeMap<String, List<Long>>();
         for (String th : segments) {
-            data.put(th, new ArrayList<Long>());
+            data.put(th, new ArrayList<>());
             data.get(th).add(0L);
         }
         data.put(TestTeamIntegrationChild.CONCURRENT_NAME, new ArrayList<>());
@@ -242,11 +243,11 @@ public final class TestTeamIntegration {
 
         ProjectTMX tmx;
         int tmxCount = 0;
-        for (String rev : repository.listRevisions(startVersion)) {
-            repository.checkout(rev);
+        for (String rev : teamRepository.listRevisions(startVersion)) {
+            teamRepository.checkout(rev);
             tmx = new ProjectTMX(checkOrphanedCallback);
-            tmx.load(SRC_LANG, TRG_LANG, false, new File(repository.getDir(), "omegat/project_save.tmx"),
-                    Core.getSegmenter());
+            tmx.load(SRC_LANG, TRG_LANG, false,
+                    new File(teamRepository.getDir(), "omegat/project_save.tmx"), Core.getSegmenter());
             for (String th : data.keySet()) {
                 TMXEntry en = tmx.getDefaultTranslation(th);
                 long value = en == null ? 0 : Long.parseLong(en.translation);
@@ -292,7 +293,7 @@ public final class TestTeamIntegration {
     /**
      * Prepare repository.
      */
-    static String prepareRepo() throws Exception {
+    static String prepareRepo(String repo) throws Exception {
         File tmp = new File(DIR);
         FileUtils.deleteDirectory(tmp);
         if (tmp.exists()) {
@@ -306,7 +307,7 @@ public final class TestTeamIntegration {
             throw new Exception("Impossible to create test dir");
         }
 
-        ProjectProperties config = createConfig(REPO.get(0), origDir);
+        ProjectProperties config = createConfig(repo, origDir);
 
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(),
                 config.getRepositories(), config);
@@ -329,7 +330,7 @@ public final class TestTeamIntegration {
         return remote.getVersion("omegat/project_save.tmx");
     }
 
-    static ProjectProperties createConfig(String repoUrl, File dir) throws Exception {
+    static ProjectProperties createConfig(String repoUrl, File dir) {
         ProjectProperties config = new ProjectProperties(dir);
         config.setSourceLanguage(SRC_LANG);
         config.setTargetLanguage(TRG_LANG);
@@ -506,7 +507,7 @@ public final class TestTeamIntegration {
         public List<String> listRevisions(String from) throws Exception {
             try (Git git = new Git(repository)) {
                 LogCommand cmd = git.log();
-                List<String> result = new ArrayList<String>();
+                List<String> result = new ArrayList<>();
                 for (RevCommit commit : cmd.call()) {
                     if (commit.getName().equals(from)) {
                         break;
@@ -552,9 +553,9 @@ public final class TestTeamIntegration {
         }
 
         public List<String> listRevisions(String from) throws Exception {
-            final List<String> result = new ArrayList<String>();
+            final List<String> result = new ArrayList<>();
             ourClientManager.getLogClient().doLog(
-                    new File[] { new File(repository.getDir(), "omegat/project_save.tmx") },
+                    new File[] { new File(dir, "omegat/project_save.tmx") },
                     SVNRevision.create(Long.parseLong(from)), SVNRevision.HEAD, false, false,
                     Integer.MAX_VALUE, new ISVNLogEntryHandler() {
                         public void handleLogEntry(SVNLogEntry en) throws SVNException {

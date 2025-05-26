@@ -15,6 +15,7 @@
                2015 Aaron Madlon-Kay, Yu Tang
                2016 Didier Briel
                2019 Thomas Cordonnier, Briac Pilpre
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -65,8 +66,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Predicate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.JComponent;
@@ -156,14 +155,11 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  */
 public class EditorController implements IEditor {
 
-    /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());
-
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
 
     /** Some predefined translations that OmegaT can assign by popup. */
     enum ForceTranslation {
-        UNTRANSLATED, EMPTY, EQUALS_TO_SOURCE;
+        UNTRANSLATED, EMPTY, EQUALS_TO_SOURCE
     }
 
     /** Dockable pane for editor. */
@@ -211,7 +207,7 @@ public class EditorController implements IEditor {
 
     private enum SHOW_TYPE {
         INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE
-    };
+    }
 
     BiDiUtils.ORIENTATION currentOrientation;
     protected boolean sourceLangIsRTL;
@@ -305,9 +301,8 @@ public class EditorController implements IEditor {
         });
 
         // register Swing error logger
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
-        });
+        Thread.setDefaultUncaughtExceptionHandler((t, e) ->
+               Log.logErrorRB(e, "LOG_ERROR_UNCAUGHT_EXCEPTION", t.getName()));
 
         EditorPopups.init(this);
 
@@ -422,7 +417,7 @@ public class EditorController implements IEditor {
         lastLoaded = loadTo;
         SegmentBuilder[] loaded = Arrays.copyOfRange(m_docSegList, loadFrom, loadTo + 1);
         markerController.process(loaded);
-    };
+    }
 
     private synchronized void loadUp(int count) {
         if (firstLoaded <= 0 || firstLoaded >= m_docSegList.length) {
@@ -442,14 +437,14 @@ public class EditorController implements IEditor {
             insertStartParagraphMark(editor.getOmDocument(), builder, 0);
         }
         firstLoaded = loadTo;
-    };
+    }
 
     private void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
 
-        JComponent data = null;
+        JComponent data;
 
-        String updatedTitle = null;
+        String updatedTitle;
         switch (showType) {
         case INTRO:
             data = introPane;
@@ -462,7 +457,7 @@ public class EditorController implements IEditor {
         case FIRST_ENTRY:
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
-            updatedTitle = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            updatedTitle = OStrings.getString("GUI_SUBWINDOWTITLE_Editor", getCurrentFile());
             data = editor;
             SwingUtilities.invokeLater(() -> {
                 // need to run later because some other event listeners
@@ -473,11 +468,11 @@ public class EditorController implements IEditor {
             });
             break;
         case NO_CHANGE:
-            updatedTitle = StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            updatedTitle = OStrings.getString("GUI_SUBWINDOWTITLE_Editor", getCurrentFile());
             data = editor;
             break;
         default:
-            throw new AssertionError();
+            return;
         }
 
         updateTitle(updatedTitle);
@@ -1182,7 +1177,7 @@ public class EditorController implements IEditor {
                             Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
                         }
                     } catch (InterruptedException | ExecutionException e) {
-                        LOGGER.log(Level.SEVERE, "Exception when validating tags on leave", e);
+                        Log.logErrorRB(e, "LOG_ERROR_TAG_VALIDATION_FAILED");
                     }
                 }
             }.execute();
@@ -1236,7 +1231,7 @@ public class EditorController implements IEditor {
 
     private void storeTranslation(SourceTextEntry entry, PrepareTMXEntry newen, boolean defaultTranslation) {
         while (true) {
-            // iterate until optimistic locking will be resolved
+            // iterate until optimistic locking is resolved
             try {
                 Core.getProject().setTranslation(entry, newen, defaultTranslation, null,
                         previousTranslations);

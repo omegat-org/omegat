@@ -239,12 +239,12 @@ public class GlossarySearcher {
             return tokens;
         }
         List<Token> result = new ArrayList<>(tokens.length);
-        for (Token tok : tokens) {
-            if (!tokenInTag(tok, tags)) {
-                result.add(tok);
+        for (Token token : tokens) {
+            if (!tokenInTag(token, tags)) {
+                result.add(token);
             }
         }
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     private static boolean tokenInTag(Token tok, List<Tag> tags) {
@@ -347,14 +347,14 @@ public class GlossarySearcher {
         for (int i = 0; i < result.size(); i++) {
             GlossaryEntry nowEntry = result.get(i);
 
-            if (nowEntry.getSrcText().equals("")) {
+            if (nowEntry.getSrcText().isEmpty()) {
                 continue;
             }
 
             for (int j = i + 1; j < result.size(); j++) {
                 GlossaryEntry thenEntry = result.get(j);
 
-                if (thenEntry.getSrcText().equals("")) {
+                if (thenEntry.getSrcText().isEmpty()) {
                     continue;
                 }
 
@@ -371,11 +371,11 @@ public class GlossarySearcher {
         // Remove the blank entries from the list
         if (removedDuplicate) {
             Iterator<GlossaryEntry> myIter = result.iterator();
-            List<GlossaryEntry> newList = new LinkedList<GlossaryEntry>();
+            List<GlossaryEntry> newList = new LinkedList<>();
 
             while (myIter.hasNext()) {
                 GlossaryEntry checkEntry = myIter.next();
-                if (checkEntry.getSrcText().equals("") || checkEntry.getLocText().equals("")) {
+                if (checkEntry.getSrcText().isEmpty() || checkEntry.getLocText().isEmpty()) {
                     myIter.remove();
                 } else {
                     newList.add(checkEntry);
@@ -389,14 +389,14 @@ public class GlossarySearcher {
             return result;
         }
 
-        List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
+        List<GlossaryEntry> returnList = new LinkedList<>();
 
         // Group items with same scrTxt
         for (int i = 0; i < result.size(); i++) {
-            List<GlossaryEntry> srcList = new LinkedList<GlossaryEntry>();
+            List<GlossaryEntry> srcList = new LinkedList<>();
             GlossaryEntry nowEntry = result.get(i);
 
-            if (nowEntry.getSrcText().equals("")) {
+            if (nowEntry.getSrcText().isEmpty()) {
                 continue;
             }
             srcList.add(nowEntry);
@@ -405,7 +405,7 @@ public class GlossarySearcher {
                 GlossaryEntry thenEntry = result.get(j);
 
                 // Double check, needed?
-                if (thenEntry.getSrcText().equals("")) {
+                if (thenEntry.getSrcText().isEmpty()) {
                     continue;
                 }
                 if (nowEntry.getSrcText().equals(thenEntry.getSrcText())) {
@@ -415,12 +415,12 @@ public class GlossarySearcher {
             }
 
             // Sort items with same locTxt
-            List<GlossaryEntry> sortList = new LinkedList<GlossaryEntry>();
+            List<GlossaryEntry> sortList = new LinkedList<>();
             if (srcList.size() > 1) {
                 for (int k = 0; k < srcList.size(); k++) {
                     GlossaryEntry srcNow = srcList.get(k);
 
-                    if (srcNow.getSrcText().equals("")) {
+                    if (srcNow.getSrcText().isEmpty()) {
                         continue;
                     }
                     sortList.add(srcNow);
@@ -428,7 +428,7 @@ public class GlossarySearcher {
                     for (int l = k + 1; l < srcList.size(); l++) {
                         GlossaryEntry srcThen = srcList.get(l);
 
-                        if (srcThen.getSrcText().equals("")) {
+                        if (srcThen.getSrcText().isEmpty()) {
                             continue;
                         }
                         if (srcNow.getLocText().equals(srcThen.getLocText())) {

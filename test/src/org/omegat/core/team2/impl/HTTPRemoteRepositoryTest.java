@@ -57,21 +57,18 @@ public class HTTPRemoteRepositoryTest extends TestCoreWireMock {
         etags.setProperty("file.txt", "TestETag");
         File outputFile = tempDir.resolve("file.txt").toFile();
 
-        WireMock.stubFor(WireMock.head(WireMock.anyUrl())
-                .willReturn(WireMock.aResponse().withStatus(200)
-                        .withHeader("ETag", "TestETag")
-                        .withHeader("Content-Type", "text/plain")));
+        WireMock.stubFor(WireMock.head(WireMock.anyUrl()).willReturn(WireMock.aResponse().withStatus(200)
+                .withHeader("ETag", "TestETag").withHeader("Content-Type", "text/plain")));
         WireMock.stubFor(WireMock.get(WireMock.anyUrl())
-                .willReturn(WireMock.aResponse().withStatus(200)
-                        .withHeader("Content-Type", "text/plain")
-                        .withHeader("ETag", "TestETag")
-                        .withBody("Test file contents")));
+                .willReturn(WireMock.aResponse().withStatus(200).withHeader("Content-Type", "text/plain")
+                        .withHeader("ETag", "TestETag").withBody("Test file contents")));
 
         // Mock URL connection for successful retrieval
         repository.retrieve(etags, "file.txt", url + "file.txt", outputFile);
 
         assertTrue("File should exist after retrieve", outputFile.exists());
-        assertEquals("File contents should match", "Test file contents", Files.readString(outputFile.toPath()));
+        assertEquals("File contents should match", "Test file contents",
+                Files.readString(outputFile.toPath()));
     }
 
     @Test
@@ -114,19 +111,17 @@ public class HTTPRemoteRepositoryTest extends TestCoreWireMock {
         Path tempDir = Files.createTempDirectory("omegat");
         repository.init(mockConfig, tempDir.toFile(), null);
 
-        WireMock.stubFor(WireMock.head(WireMock.anyUrl())
-                        .willReturn(WireMock.aResponse().withStatus(200)));
-        WireMock.stubFor(WireMock.get(WireMock.anyUrl())
-                .willReturn(WireMock.aResponse().withStatus(200)
-                        .withHeader("Content-Type", "text/plain")
-                        .withBody("Test file contents")));
+        WireMock.stubFor(WireMock.head(WireMock.anyUrl()).willReturn(WireMock.aResponse().withStatus(200)));
+        WireMock.stubFor(WireMock.get(WireMock.anyUrl()).willReturn(WireMock.aResponse().withStatus(200)
+                .withHeader("Content-Type", "text/plain").withBody("Test file contents")));
 
         // Simulate calling switchToVersion
         repository.switchToVersion(null);
 
         File outputFile = tempDir.resolve("file.txt").toFile();
         assertTrue("File should exist after retrieve", outputFile.exists());
-        assertEquals("File contents should match", "Test file contents", Files.readString(outputFile.toPath()));
+        assertEquals("File contents should match", "Test file contents",
+                Files.readString(outputFile.toPath()));
     }
 
     @Test
@@ -145,15 +140,14 @@ public class HTTPRemoteRepositoryTest extends TestCoreWireMock {
         Files.writeString(outputFile.toPath(), "Existing content");
 
         WireMock.stubFor(WireMock.head(WireMock.anyUrl())
-                .willReturn(WireMock.aResponse().withStatus(304)
-                        .withHeader("ETag", "TestETag")));
+                .willReturn(WireMock.aResponse().withStatus(304).withHeader("ETag", "TestETag")));
         WireMock.stubFor(WireMock.get(WireMock.anyUrl())
-                .willReturn(WireMock.aResponse().withStatus(304)
-                        .withHeader("ETag", "TestETag")));
+                .willReturn(WireMock.aResponse().withStatus(304).withHeader("ETag", "TestETag")));
 
         repository.retrieve(etags, "file.txt", url + "file.txt", outputFile);
 
         assertTrue("File should exist after retrieve", outputFile.exists());
-        assertEquals("File contents should not change", "Existing content", Files.readString(outputFile.toPath()));
+        assertEquals("File contents should not change", "Existing content",
+                Files.readString(outputFile.toPath()));
     }
 }

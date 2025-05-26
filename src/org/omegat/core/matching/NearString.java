@@ -47,7 +47,7 @@ import org.omegat.util.TMXProp;
  */
 public class NearString {
     public enum MATCH_SOURCE {
-        MEMORY, TM, FILES
+        MEMORY, TM, FILES, SUBSEGMENTS
     };
 
     public enum SORT_KEY {
@@ -55,15 +55,23 @@ public class NearString {
     }
 
     public NearString(final EntryKey key, final String source, final String translation, MATCH_SOURCE comesFrom,
-            final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem, final int adjustedScore,
-            final byte[] nearData, final String projName, final String creator, final long creationDate,
+                      final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem, final int adjustedScore,
+                      final byte[] nearData, final String projName, final String creator, final long creationDate,
+                      final String changer, final long changedDate, final List<TMXProp> props) {
+        this(key, source, translation, comesFrom, fuzzyMark, new Scores(nearScore, nearScoreNoStem,
+                adjustedScore, 0), nearData, projName, creator, creationDate, changer, changedDate, props);
+    }
+
+    public NearString(final EntryKey key, final String source, final String translation, MATCH_SOURCE comesFrom,
+            final boolean fuzzyMark, final Scores scores, final byte[] nearData, final String projName,
+                      final String creator, final long creationDate,
             final String changer, final long changedDate, final List<TMXProp> props) {
         this.key = key;
         this.source = source;
         this.translation = translation;
         this.comesFrom = comesFrom;
         this.fuzzyMark = fuzzyMark;
-        this.scores = new Scores[] { new Scores(nearScore, nearScoreNoStem, adjustedScore) };
+        this.scores = new Scores[] { scores };
         this.attr = nearData;
         this.projs = new String[] { projName == null ? "" : projName };
         this.props = props;
@@ -77,27 +85,35 @@ public class NearString {
             MATCH_SOURCE comesFrom, final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem,
             final int adjustedScore, final byte[] nearData, final String projName, final String creator,
             final long creationDate, final String changer, final long changedDate, final List<TMXProp> props) {
+        return merge(ns, key, source, translation, comesFrom, fuzzyMark, new Scores(nearScore,
+                nearScoreNoStem, adjustedScore, 0), nearData, projName, creator, creationDate, changer,
+                changedDate, props);
+    }
+
+    public static NearString merge(NearString ns, final EntryKey key, final String source, final String translation,
+                                   MATCH_SOURCE comesFrom, final boolean fuzzyMark, final Scores scores,
+                                   final byte[] nearData, final String projName, final String creator,
+                                   final long creationDate, final String changer, final long changedDate, final List<TMXProp> props) {
 
         List<String> projs = new ArrayList<>();
-        List<Scores> scores = new ArrayList<>();
+        List<Scores> mergedScores = new ArrayList<>();
         projs.addAll(Arrays.asList(ns.projs));
-        scores.addAll(Arrays.asList(ns.scores));
+        mergedScores.addAll(Arrays.asList(ns.scores));
 
         NearString merged;
-        if (nearScore > ns.scores[0].score) {
-            merged = new NearString(key, source, translation, comesFrom, fuzzyMark, nearScore,
-                    nearScoreNoStem, adjustedScore, nearData, null, creator, creationDate, changer, changedDate, props);
+        if (scores.score > ns.scores[0].score) {
+            merged = new NearString(key, source, translation, comesFrom, fuzzyMark, scores,
+                    nearData, null, creator, creationDate, changer, changedDate, props);
             projs.add(0, projName);
-            scores.add(0, merged.scores[0]);
+            mergedScores.add(0, merged.scores[0]);
         } else {
-            merged = new NearString(ns.key, ns.source, ns.translation, ns.comesFrom, ns.fuzzyMark, nearScore,
-                    nearScoreNoStem, adjustedScore, ns.attr, null, ns.creator, ns.creationDate, ns.changer,
-                    ns.changedDate, ns.props);
+            merged = new NearString(ns.key, ns.source, ns.translation, ns.comesFrom, ns.fuzzyMark, scores,
+                    ns.attr, null, ns.creator, ns.creationDate, ns.changer, ns.changedDate, ns.props);
             projs.add(projName);
-            scores.add(merged.scores[0]);
+            mergedScores.add(merged.scores[0]);
         }
         merged.projs = projs.toArray(new String[projs.size()]);
-        merged.scores = scores.toArray(new Scores[scores.size()]);
+        merged.scores = mergedScores.toArray(new Scores[mergedScores.size()]);
         return merged;
     }
 
@@ -130,11 +146,13 @@ public class NearString {
         public final int scoreNoStem;
         /** adjusted similarity score for match including all tokens */
         public final int adjustedScore;
+        public final int penalty;
 
-        public Scores(int score, int scoreNoStem, int adjustedScore) {
+        public Scores(int score, int scoreNoStem, int adjustedScore, int penalty) {
             this.score = score;
             this.scoreNoStem = scoreNoStem;
             this.adjustedScore = adjustedScore;
+            this.penalty = penalty;
         }
 
         public String toString() {

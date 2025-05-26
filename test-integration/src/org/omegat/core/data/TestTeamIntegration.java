@@ -37,7 +37,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -115,10 +114,9 @@ import gen.core.project.RepositoryMapping;
  * git config receive.autogc false
  * }
  * </pre>
- * <p>
- * TODO: "svn: E160028: Commit failed" during commit
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  *
  */
 public final class TestTeamIntegration {
@@ -135,10 +133,10 @@ public final class TestTeamIntegration {
     static final int MAX_DELAY_SECONDS = 15;
     static final int SEG_COUNT = 4;
 
-    static String MAP_REPO;
-    static String MAP_REPO_TYPE;
-    static String MAP_FILE;
-    static int PROCESS_SECONDS;
+    static String mapRepo;
+    static String mapRepoType;
+    static String mapFile;
+    static int processSeconds;
 
     static final Language SRC_LANG = new Language("en");
     static final Language TRG_LANG = new Language("be");
@@ -164,22 +162,22 @@ public final class TestTeamIntegration {
         if (altRepo != null) {
             REPO.add(altRepo);
         }
-        MAP_REPO = System.getProperty("omegat.test.map.repo", null);
-        MAP_REPO_TYPE = System.getProperty("omegat.test.map.type", "http");
-        MAP_FILE = System.getProperty("omegat.test.map.file", null);
+        mapRepo = System.getProperty("omegat.test.map.repo", null);
+        mapRepoType = System.getProperty("omegat.test.map.type", "http");
+        mapFile = System.getProperty("omegat.test.map.file", null);
         try {
             String propDuration = System.getProperty("omegat.test.duration");
-            PROCESS_SECONDS = propDuration != null ? Integer.parseInt(propDuration) : 4 * 60 * 60;
+            processSeconds = propDuration != null ? Integer.parseInt(propDuration) : 4 * 60 * 60;
         } catch (NumberFormatException ignored) {
-            PROCESS_SECONDS = 4 * 60 * 60;
+            processSeconds = 4 * 60 * 60;
         }
 
         System.out.println("Target repository: " + propRepo);
-        System.out.println("Process duration: " + PROCESS_SECONDS + " seconds");
-        if (MAP_REPO != null) {
-            System.out.println("Map repository: " + MAP_REPO);
-            System.out.println("Map repository type: " + MAP_REPO_TYPE);
-            System.out.println("Map file: " + MAP_FILE);
+        System.out.println("Process duration: " + processSeconds + " seconds");
+        if (mapRepo != null) {
+            System.out.println("Map repository: " + mapRepo);
+            System.out.println("Map repository type: " + mapRepoType);
+            System.out.println("Map file: " + mapFile);
         }
 
         String startVersion = prepareRepo();
@@ -239,7 +237,7 @@ public final class TestTeamIntegration {
             data.put(th, new ArrayList<Long>());
             data.get(th).add(0L);
         }
-        data.put(TestTeamIntegrationChild.CONCURRENT_NAME, new ArrayList<Long>());
+        data.put(TestTeamIntegrationChild.CONCURRENT_NAME, new ArrayList<>());
         data.get(TestTeamIntegrationChild.CONCURRENT_NAME).add(0L);
 
         ProjectTMX tmx;
@@ -247,8 +245,8 @@ public final class TestTeamIntegration {
         for (String rev : repository.listRevisions(startVersion)) {
             repository.checkout(rev);
             tmx = new ProjectTMX(checkOrphanedCallback);
-            tmx.load(SRC_LANG, TRG_LANG, false,
-                    new File(repository.getDir(), "omegat/project_save.tmx"), Core.getSegmenter());
+            tmx.load(SRC_LANG, TRG_LANG, false, new File(repository.getDir(), "omegat/project_save.tmx"),
+                    Core.getSegmenter());
             for (String th : data.keySet()) {
                 TMXEntry en = tmx.getDefaultTranslation(th);
                 long value = en == null ? 0 : Long.parseLong(en.translation);
@@ -336,11 +334,11 @@ public final class TestTeamIntegration {
         config.setSourceLanguage(SRC_LANG);
         config.setTargetLanguage(TRG_LANG);
         config.setRepositories(new ArrayList<>());
-        if (MAP_REPO == null || MAP_FILE == null) {
+        if (mapRepo == null || mapFile == null) {
             config.getRepositories().add(getDef(repoUrl, predictMainType(repoUrl), "", ""));
         } else {
             config.getRepositories().add(getDef(repoUrl, predictMainType(repoUrl), "/", "/"));
-            config.getRepositories().add(getDef(MAP_REPO, MAP_REPO_TYPE, MAP_FILE, "source/" + MAP_FILE));
+            config.getRepositories().add(getDef(mapRepo, mapRepoType, mapFile, "source/" + mapFile));
         }
         config.setWriteableGlossary("glossary/glossary.txt");
         config.setGlossaryRoot("glossary");
@@ -440,13 +438,13 @@ public final class TestTeamIntegration {
             cmd.add(cp);
             cmd.add(TestTeamIntegrationChild.class.getName());
             cmd.add(source);
-            cmd.add(Long.toString(PROCESS_SECONDS * 1000L));
+            cmd.add(Long.toString(processSeconds * 1000L));
             cmd.add(dir.getAbsolutePath());
             cmd.add(repo);
             cmd.add(Integer.toString(delay));
             cmd.add(Integer.toString(SEG_COUNT));
 
-            System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
+            System.err.println("Execute: " + source + " " + (processSeconds * 1000) + " "
                     + dir.getAbsolutePath() + " " + repo + " " + delay + " " + SEG_COUNT);
             ProcessBuilder pb = new ProcessBuilder(cmd);
             pb.inheritIO();
@@ -548,7 +546,8 @@ public final class TestTeamIntegration {
             String predefinedUser = def.getOtherAttributes().get(new QName("svnUsername"));
             String predefinedPass = def.getOtherAttributes().get(new QName("svnPassword"));
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(predefinedUser, predefinedPass);
+            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(predefinedUser,
+                    predefinedPass);
             ourClientManager = SVNClientManager.newInstance(options, authManager);
         }
 

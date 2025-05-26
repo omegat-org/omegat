@@ -99,7 +99,8 @@ public class GlossarySearcher {
         // Then remove the duplicates and combine the synonyms.
         final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
         final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
-        return filterGlossary(sortGlossaryEntries(srcLangCollator, targetLangCollator, result), mergeAltDefinitions);
+        return filterGlossary(sortGlossaryEntries(srcLangCollator, targetLangCollator, result),
+                mergeAltDefinitions);
     }
 
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
@@ -257,45 +258,52 @@ public class GlossarySearcher {
     }
 
     /**
-     * Sorts a list of glossary entries based on various criteria, including priority,
-     * source text length, source text alphabetical order, target text length, and
-     * target text alphabetical order.
+     * Sorts a list of glossary entries based on various criteria, including
+     * priority, source text length, source text alphabetical order, target text
+     * length, and target text alphabetical order.
      *
-     * @param srcLangCollator Collator used for sorting source texts language-dependently.
-     * @param targetLangCollator Collator used for sorting target texts language-dependently.
-     * @param entries The list of glossary entries to be sorted.
+     * @param srcLangCollator
+     *            Collator used for sorting source texts language-dependently.
+     * @param targetLangCollator
+     *            Collator used for sorting target texts language-dependently.
+     * @param entries
+     *            The list of glossary entries to be sorted.
      * @return A sorted list of glossary entries.
-     * @throws IllegalArgumentException If the entries list is null.
+     * @throws IllegalArgumentException
+     *             If the entries list is null.
      */
     List<GlossaryEntry> sortGlossaryEntries(Collator srcLangCollator, Collator targetLangCollator,
             List<GlossaryEntry> entries) throws IllegalArgumentException {
         if (entries == null) {
             throw new IllegalArgumentException("entries must not be null");
         }
-        boolean sortBySrcLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
+        return entries
+                .stream().filter(Objects::nonNull).sorted((o1, o2) -> compareGlossaryEntries(o1, o2,
+                        srcLangCollator, targetLangCollator)).collect(Collectors.toList());
+    }
+
+    private int compareGlossaryEntries(GlossaryEntry o1, GlossaryEntry o2, Collator srcLangCollator,
+            Collator targetLangCollator) {
+        int p1 = o1.getPriority() ? 1 : 2;
+        int p2 = o2.getPriority() ? 1 : 2;
+        boolean sortBySrcLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH,
+                true);
         boolean sortByLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
-        return entries.stream().filter(Objects::nonNull).sorted((o1, o2) -> {
-            int p1 = o1.getPriority() ? 1 : 2;
-            int p2 = o2.getPriority() ? 1 : 2;
-            int c = p1 - p2;
-            if (c == 0 && sortBySrcLength && (o2.getSrcText().startsWith(o1.getSrcText())
-                            || o1.getSrcText().startsWith(o2.getSrcText()))) {
-                // longer is better if one source term starts with another
-                c = o2.getSrcText().length() - o1.getSrcText().length();
-            }
-            // sort source text alphabetically.
-            // Notion of alphabetical order is language-dependent
-            if (c == 0) {
-                c = compareLanguageDependent(srcLangCollator, o1.getSrcText(), o2.getSrcText());
-            }
-            if (c == 0 && sortByLength) {
-                c = o2.getLocText().length() - o1.getLocText().length();
-            }
-            if (c == 0) {
-                c = compareLanguageDependent(targetLangCollator, o1.getLocText(), o2.getLocText());
-            }
-            return c;
-        }).collect(Collectors.toList());
+        int c = p1 - p2;
+        if (c == 0 && sortBySrcLength && (o2.getSrcText().startsWith(o1.getSrcText())
+                || o1.getSrcText().startsWith(o2.getSrcText()))) {
+            c = o2.getSrcText().length() - o1.getSrcText().length();
+        }
+        if (c == 0) {
+            c = compareLanguageDependent(srcLangCollator, o1.getSrcText(), o2.getSrcText());
+        }
+        if (c == 0 && sortByLength) {
+            c = o2.getLocText().length() - o1.getLocText().length();
+        }
+        if (c == 0) {
+            c = compareLanguageDependent(targetLangCollator, o1.getLocText(), o2.getLocText());
+        }
+        return c;
     }
 
     private int compareLanguageDependent(Collator langCollator, String s1, String s2) {

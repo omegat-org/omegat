@@ -54,7 +54,7 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * HTTP/HTTPS repository connection implementation.
- *
+ * <p>
  * It can be used as read-only repository for retrieve sources, external TMX,
  * glossaries, etc. Since HTTP protocol doesn't support multiple files, each URL
  * should be mapped to separate file, i.e. directory mapping is not supported.
@@ -156,7 +156,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public String[] getRecentlyDeletedFiles() throws Exception {
+    public String[] getRecentlyDeletedFiles() {
         return new String[0];
     }
 
@@ -203,7 +203,9 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 .addArgument(outputFile::getAbsolutePath)
                 .addArgument(currentEtag).log();
 
-        outputFile.getParentFile().mkdirs();
+        if (!outputFile.getParentFile().mkdirs()) {
+            throw new IOException("Failed to create directory " + outputFile.getParentFile());
+        }
 
         HttpURLConnection connection = (HttpURLConnection) new URL(fileUrl).openConnection();
         try {

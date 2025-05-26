@@ -32,9 +32,6 @@
 
     <!-- Permanently suppress errors/warnings -->
     
-    <!-- ignore -->
-    <suppress files="gen.core.*+" checks="RegexpHeader"/>
-
     <!-- tests -->
     <suppress files="TestCore\.java" checks="MethodLength"/>
     <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>
@@ -84,7 +81,6 @@
     <!-- util/xml -->
     <suppress checks="(EmptyBlock|MethodLength)" files="XMLStreamReader\.java"/>
     <!-- util -->
-    <suppress files="StringUtil\.java" checks="EmptyBlock" lines="500,501,502"/>
     <suppress checks="InnerAssignment" files="TagUtil\.java"/>
     <suppress checks="InnerAssignment" files="VarExpansion\.java" lines="108"/>
     <suppress checks="ConstantName" files="UIDesignManager\.java" lines="83,85,336,338"/>

@@ -77,10 +77,10 @@ public class RepositoriesCredentialsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnRemove;
-    public javax.swing.Box.Filler filler1;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JTable list;
+    javax.swing.JButton btnRemove;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JPanel jPanel2;
+    javax.swing.JScrollPane jScrollPane2;
+    javax.swing.JTable list;
     // End of variables declaration//GEN-END:variables
 }

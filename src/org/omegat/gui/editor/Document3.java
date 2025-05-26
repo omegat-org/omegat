@@ -40,6 +40,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -55,7 +56,9 @@ public class Document3 extends DefaultStyledDocument {
     protected final EditorController controller;
 
     /** Position of active translation in text. */
+    @Nullable
     Position activeTranslationBeginM1;
+    @Nullable
     Position activeTranslationEndP1;
 
     /**
@@ -123,6 +126,9 @@ public class Document3 extends DefaultStyledDocument {
      * Calculate the position of the start of the current translation
      */
     public int getTranslationStart() {
+        if (activeTranslationBeginM1 == null) {
+            return 0;
+        }
         return activeTranslationBeginM1.getOffset() + 1;
     }
 
@@ -130,6 +136,9 @@ public class Document3 extends DefaultStyledDocument {
      * Calculate the position of the end of the current translation
      */
     protected int getTranslationEnd() {
+        if (activeTranslationEndP1 == null) {
+            return 0;
+        }
         return activeTranslationEndP1.getOffset() - 1;
     }
 
@@ -154,6 +163,7 @@ public class Document3 extends DefaultStyledDocument {
      *
      * @return active translation text
      */
+    @Nullable
     String extractTranslation() {
         if (!isEditMode()) {
             return null;

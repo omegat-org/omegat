@@ -128,4 +128,32 @@ public class HTTPRemoteRepositoryTest extends TestCoreWireMock {
         assertTrue("File should exist after retrieve", outputFile.exists());
         assertEquals("File contents should match", "Test file contents", Files.readString(outputFile.toPath()));
     }
+
+    @Test
+    public void testRetrieveHandlesNotModifiedResponse() throws Exception {
+        HTTPRemoteRepository repository = new HTTPRemoteRepository();
+        RepositoryDefinition mockConfig = new RepositoryDefinition();
+        int port = wireMockRule.port();
+        String url = String.format("http://localhost:%d/repository/", port);
+        mockConfig.setUrl(url);
+
+        Path tempDir = Files.createTempDirectory("omegat");
+        repository.init(mockConfig, tempDir.toFile(), null);
+        Properties etags = new Properties();
+        etags.setProperty("file.txt", "TestETag");
+        File outputFile = tempDir.resolve("file.txt").toFile();
+        Files.writeString(outputFile.toPath(), "Existing content");
+
+        WireMock.stubFor(WireMock.head(WireMock.anyUrl())
+                .willReturn(WireMock.aResponse().withStatus(304)
+                        .withHeader("ETag", "TestETag")));
+        WireMock.stubFor(WireMock.get(WireMock.anyUrl())
+                .willReturn(WireMock.aResponse().withStatus(304)
+                        .withHeader("ETag", "TestETag")));
+
+        repository.retrieve(etags, "file.txt", url + "file.txt", outputFile);
+
+        assertTrue("File should exist after retrieve", outputFile.exists());
+        assertEquals("File contents should not change", "Existing content", Files.readString(outputFile.toPath()));
+    }
 }

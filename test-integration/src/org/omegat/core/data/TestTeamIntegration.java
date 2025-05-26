@@ -132,13 +132,13 @@ public final class TestTeamIntegration {
 
     static final String DIR = "/tmp/teamtest";
     static final List<String> REPO = new ArrayList<>();
-    static final String MAP_REPO = System.getProperty("omegat.test.map.repo", null);
-    static final String MAP_REPO_TYPE = System.getProperty("omegat.test.map.type", "http");
-    static final String MAP_FILE = System.getProperty("omegat.test.map.file", null);
-    static final int PROCESS_SECONDS = Optional.ofNullable(System.getProperty("omegat.test.duration"))
-            .map(Integer::parseInt).orElse(4 * 60 * 60);
     static final int MAX_DELAY_SECONDS = 15;
     static final int SEG_COUNT = 4;
+
+    static String MAP_REPO;
+    static String MAP_REPO_TYPE;
+    static String MAP_FILE;
+    static int PROCESS_SECONDS;
 
     static final Language SRC_LANG = new Language("en");
     static final Language TRG_LANG = new Language("be");
@@ -149,8 +149,8 @@ public final class TestTeamIntegration {
 
     public static void main(String[] args) throws Exception {
         String logConfig = System.getProperty("java.util.logging.config.file", null);
-        String repository = System.getProperty("omegat.test.repo", null);
-        if (repository == null) {
+        String propRepo = System.getProperty("omegat.test.repo", null);
+        if (propRepo == null) {
             System.err.println("Property omegat.test.repo is mandatory.");
             System.exit(1);
         }
@@ -159,11 +159,29 @@ public final class TestTeamIntegration {
             props.load(fis);
             PluginUtils.loadPluginFromProperties(props);
         }
-        REPO.add(repository);
+        REPO.add(propRepo);
         String altRepo = System.getProperty("omegat.test.repo.alt", null);
         if (altRepo != null) {
             REPO.add(altRepo);
         }
+        MAP_REPO = System.getProperty("omegat.test.map.repo", null);
+        MAP_REPO_TYPE = System.getProperty("omegat.test.map.type", "http");
+        MAP_FILE = System.getProperty("omegat.test.map.file", null);
+        try {
+            String propDuration = System.getProperty("omegat.test.duration");
+            PROCESS_SECONDS = propDuration != null ? Integer.parseInt(propDuration) : 4 * 60 * 60;
+        } catch (NumberFormatException ignored) {
+            PROCESS_SECONDS = 4 * 60 * 60;
+        }
+
+        System.out.println("Target repository: " + propRepo);
+        System.out.println("Process duration: " + PROCESS_SECONDS + " seconds");
+        if (MAP_REPO != null) {
+            System.out.println("Map repository: " + MAP_REPO);
+            System.out.println("Map repository type: " + MAP_REPO_TYPE);
+            System.out.println("Map file: " + MAP_FILE);
+        }
+
         String startVersion = prepareRepo();
 
         Run[] runs = new Run[THREADS.length];
@@ -193,8 +211,8 @@ public final class TestTeamIntegration {
             Thread.sleep(500);
         } while (alive);
 
-        TestTeamIntegration.repository = createRepo2(REPO.get(0), new File(DIR, "repo"));
-        TestTeamIntegration.repository.update();
+        repository = createRepo2(REPO.get(0), new File(DIR, "repo"));
+        repository.update();
 
         System.err.println("Check repo");
 
@@ -224,7 +242,7 @@ public final class TestTeamIntegration {
         data.put(TestTeamIntegrationChild.CONCURRENT_NAME, new ArrayList<Long>());
         data.get(TestTeamIntegrationChild.CONCURRENT_NAME).add(0L);
 
-        ProjectTMX tmx = null;
+        ProjectTMX tmx;
         int tmxCount = 0;
         for (String rev : repository.listRevisions(startVersion)) {
             repository.checkout(rev);

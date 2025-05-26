@@ -146,7 +146,7 @@ tasks.register('testIntegration', JavaExec) {
     systemProperty 'omegat.test.duration', System.getProperty('omegat.test.duration')
     systemProperty 'omegat.test.repo', System.getProperty('omegat.test.repo')
     systemProperty 'omegat.test.repo.alt', System.getProperty('omegat.test.repo.alt')
-    systemProperty 'omegat.test.map.repo', System.getProperty('oemgat.test.map.repo')
+    systemProperty 'omegat.test.map.repo', System.getProperty('omegat.test.map.repo')
     systemProperty 'omegat.test.map.file', System.getProperty('omegat.test.map.file')
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`

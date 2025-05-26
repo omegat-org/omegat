@@ -201,7 +201,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
         logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}").addArgument(fileUrl)
                 .addArgument(outputFile::getAbsolutePath).addArgument(currentEtag).log();
 
-        if (!outputFile.getParentFile().mkdirs()) {
+        // When parent directory doesn't exist, create it.
+        if (!outputFile.getParentFile().exists() && !outputFile.getParentFile().mkdirs()) {
             throw new IOException("Failed to create directory " + outputFile.getParentFile());
         }
 

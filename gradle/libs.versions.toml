@@ -1,7 +1,7 @@
 [versions]
 slf4j = "2.0.17"
 slf4j-format = "0.5.1"
-groovy = "4.0.26"
+groovy = "4.0.27"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.18.0"

@@ -32,6 +32,7 @@ import org.omegat.util.LocaleRule;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +45,7 @@ public class ConflictDialogTest extends TestCoreGUI {
     public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
-    public void testConflictDialogLocal() {
+    public void testConflictDialogLocal() throws IOException {
         final String baseText = "base text";
         final String remoteText = "remote text";
         final String localText = "local text";
@@ -56,6 +57,7 @@ public class ConflictDialogTest extends TestCoreGUI {
         CountDownLatch latch = new CountDownLatch(1);
         window.dialog().requireVisible();
         window.dialog().requireModal();
+        takeScreenshot(ConflictDialogTest.class.getName(), "testConflictDialogLocal.png");
         //
         window.dialog().textBox("textLeft").requireText(baseText);
         window.dialog().textBox("textCenter").requireText(localText);
@@ -77,7 +79,7 @@ public class ConflictDialogTest extends TestCoreGUI {
 
 
     @Test
-    public void testConflictDialogRemote() {
+    public void testConflictDialogRemote() throws IOException {
         final String baseText = "base text";
         final String remoteText = "remote text";
         final String localText = "local text";
@@ -89,6 +91,8 @@ public class ConflictDialogTest extends TestCoreGUI {
         CountDownLatch latch = new CountDownLatch(1);
         window.dialog().requireVisible();
         window.dialog().requireModal();
+        takeScreenshot(ConflictDialogTest.class.getName(), "testConflictDialogRemote.png");
+        //
         window.dialog().button("btnTheirs").click();
         robot().waitForIdle();
         SwingUtilities.invokeLater(() ->  {

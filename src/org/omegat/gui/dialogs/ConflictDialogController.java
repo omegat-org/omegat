@@ -43,10 +43,15 @@ public class ConflictDialogController {
 
     public boolean show(String baseText, String remoteText, String localText) {
         final ConflictDialog dialog = new ConflictDialog(parent, true);
+        dialog.btnMine.setName("btnMine");
+        dialog.btnTheirs.setName("btnTheirs");
 
         dialog.textLeft.setText(prepareText(baseText));
         dialog.textCenter.setText(prepareText(localText));
         dialog.textRight.setText(prepareText(remoteText));
+        dialog.textLeft.setName("textLeft");
+        dialog.textCenter.setName("textCenter");
+        dialog.textRight.setName("textRight");
 
         dialog.btnMine.addActionListener(e -> {
             synchronized (this) {

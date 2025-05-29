@@ -34,6 +34,8 @@ package org.omegat.util;
 
 import com.google.re2j.Pattern;
 
+import java.util.List;
+
 /**
  * Constant patterns, used in different other classes.
  *
@@ -62,7 +64,7 @@ public final class PatternConsts {
     /**
      * Regex for parse GIT credential messages.
      */
-    public static final Pattern[] FINGER_PRINT_REGEX = new Pattern[] {
+    private static final Pattern[] FINGER_PRINT_REGEX = new Pattern[] {
             Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
             /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
             /* key fprint */ "(?<fingerprint>([0-9a-f]{2}:){15}[0-9a-f]{2})" + "\\.\\n"
@@ -75,7 +77,7 @@ public final class PatternConsts {
                     + "The EC key's fingerprints are:\\n"
                     + "MD5:([0-9a-f]{2}:){15}[0-9a-f]{2}\\nSHA256:(?<fingerprint>[0-9a-zA-Z/+]+)\\n"
                     + "Accept and store this key, and continue connecting\\?") };
-    public static final Pattern[] PASSPHRASE_REGEX = new Pattern[] {
+    private static final Pattern[] PASSPHRASE_REGEX = new Pattern[] {
             Pattern.compile("Key '" + /* key file path */ ".*" + "'"
                     + " is encrypted\\. Enter the passphrase to decrypt it\\.\\n?"),
             Pattern.compile("Encrypted key " + /* key file path */ "'.*'"
@@ -345,5 +347,13 @@ public final class PatternConsts {
      */
     public static void updateCustomTagPattern() {
         customTags = null;
+    }
+
+    public static List<Pattern> getFingerprintRegex() {
+        return List.of(FINGER_PRINT_REGEX);
+    }
+
+    public static List<Pattern> getPassphraseRegex() {
+        return List.of(PASSPHRASE_REGEX);
     }
 }

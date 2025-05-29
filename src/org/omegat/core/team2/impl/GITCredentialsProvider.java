@@ -426,7 +426,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
      */
     protected static String extractFingerprint(String text) {
         Matcher fingerprintMatcher;
-        for (Pattern p : PatternConsts.FINGER_PRINT_REGEX) {
+        for (Pattern p : PatternConsts.getFingerprintRegex()) {
             fingerprintMatcher = p.matcher(text);
             if (fingerprintMatcher.find()) {
                 int start = fingerprintMatcher.start("fingerprint");
@@ -439,7 +439,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     private boolean isPassphraseQuery(String promptText) {
         Matcher passphraseMatcher;
-        for (Pattern p : PatternConsts.PASSPHRASE_REGEX) {
+        for (Pattern p : PatternConsts.getPassphraseRegex()) {
             passphraseMatcher = p.matcher(promptText);
             if (passphraseMatcher.find()) {
                 return true;

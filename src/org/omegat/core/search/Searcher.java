@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -676,7 +677,10 @@ public class Searcher {
                     }
                 }
                 if (searchExpression.mode == SearchMode.REPLACE) {
-                    if (searchReplaceImpl(matcher, end, start)) break;
+                    if (searchReplaceImpl(searchExpression, foundMatches, matcher, end, start,
+                            m_project.getProjectProperties().getTargetLanguage().getLocale())) {
+                        break;
+                    }
                 } else if (end > start) {
                     // Add a match only if the matched region is not empty.
                     // We still return true so the hit will still be recorded.
@@ -732,7 +736,23 @@ public class Searcher {
         }
     }
 
-    boolean searchReplaceImpl(Matcher matcher, int end, int start) {
+    /**
+     * Implements the logic for searching and replacing based on a given search expression.
+     * Handles both regular expression-based replacements and simple replacements, adding
+     * matches to the found matches list.
+     *
+     * @param searchExpression The search expression containing the search criteria and replacement text.
+     * @param foundMatches A list to which all found matches, including their start, end positions, and replacements, are added.
+     * @param matcher The matcher object used for searching and extracting matches based on the search expression.
+     * @param end The end position of the match in the text being searched.
+     * @param start The start position of the match in the text being searched.
+     * @param targetLocale The locale used for formatting or case-sensitive replacement if applicable.
+     * @return Always returns false after completing the replacement process.
+     * @throws IndexOutOfBoundsException Throws this exception if a replacement group in the search expression
+     *         refers to a matcher group that does not exist.
+     */
+    boolean searchReplaceImpl(SearchExpression searchExpression, List<SearchMatch> foundMatches, Matcher matcher,
+                              int end, int start, Locale targetLocale) {
         if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
             if ((end == start) && (start > 0)) {
                 return true;
@@ -753,18 +773,23 @@ public class Searcher {
                     substitution = "";
                 }
                 substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
-                repl = repl.substring(0, replaceMatcher.start()) + replaceMatcher.group(1) + substitution
-                        + repl.substring(replaceMatcher.end());
+                repl = repl.substring(0, replaceMatcher.start()) + substitution + repl.substring(replaceMatcher.end());
                 replaceMatcher.reset(repl);
             }
-            foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl,
-                    m_project.getProjectProperties().getTargetLanguage().getLocale())));
+            foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl, targetLocale)));
+
         } else {
             foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
         }
         return false;
     }
 
+    /**
+     * Retrieves a list of matches found during the search operation.
+     *
+     * @return a list of {@link SearchMatch} objects, where each object provides information
+     *         about the match's start and end positions, and any associated replacement text.
+     */
     public List<SearchMatch> getFoundMatches() {
         return foundMatches;
     }

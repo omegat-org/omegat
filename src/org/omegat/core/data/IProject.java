@@ -81,7 +81,7 @@ public interface IProject {
     void compileProject(String sourcePattern) throws Exception;
 
     default void compileProject(Pattern filePattern, boolean doPostProcessing) throws Exception {
-        compileProjectAndCommit(filePattern.pattern(), doPostProcessing, false );
+        compileProjectAndCommit(filePattern.pattern(), doPostProcessing, false);
     }
 
     /**

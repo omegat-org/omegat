@@ -33,8 +33,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
-import java.util.regex.Matcher;
 
+import com.google.re2j.Matcher;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 

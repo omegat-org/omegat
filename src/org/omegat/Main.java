@@ -68,8 +68,10 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.google.re2j.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
+import org.omegat.util.PatternConsts;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -413,9 +415,10 @@ public final class Main {
 
         String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
         if (sourceMask != null) {
-            p.compileProject(sourceMask, false);
+            Pattern sourceMaskPattern = Pattern.compile(sourceMask);
+            p.compileProjectAndCommit(sourceMaskPattern, false, false);
         } else {
-            p.compileProject(".*", false);
+            p.compileProjectAndCommit(PatternConsts.MATCH_ALL, false, false);
         }
 
         // Called *after* executing post processing command (unlike the

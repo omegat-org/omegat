@@ -80,6 +80,7 @@ import org.omegat.util.HttpConnectionUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
@@ -911,7 +912,7 @@ public final class ProjectUICommands {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
                     try {
-                        Core.getProject().compileProject(".*");
+                        Core.getProject().compileProjectAndCommit(PatternConsts.MATCH_ALL, true, false);
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -945,7 +946,7 @@ public final class ProjectUICommands {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(false);
                     try {
-                        Core.getProject().compileProject(sourcePattern);
+                        Core.getProject().compileProjectAndCommit(sourcePattern, true, false);
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -979,7 +980,7 @@ public final class ProjectUICommands {
                 Core.executeExclusively(true, () -> {
                     Core.getProject().saveProject(true);
                     try {
-                        Core.getProject().compileProjectAndCommit(".*", true, true);
+                        Core.getProject().compileProjectAndCommit(PatternConsts.MATCH_ALL, true, true);
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }

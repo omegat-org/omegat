@@ -96,6 +96,7 @@ dependencies {
         api(libs.slf4j.api)
         implementation(libs.slf4j.format.jdk14)
         runtimeOnly(libs.slf4j.jdk14)
+        implementation(libs.re2j)
 
         // jaxb gen compilation
         implementation(libs.jaxb.api)
@@ -229,6 +230,7 @@ dependencies {
     testRuntimeOnly(libs.bundles.groovy)
     testRuntimeOnly(libs.nashorn.core)
     testRuntimeOnly(libs.slf4j.jdk14)
+    testImplementation(libs.re2j)
 
     testAcceptanceImplementation sourceSets.main.output
     testAcceptanceImplementation(libs.commons.io)

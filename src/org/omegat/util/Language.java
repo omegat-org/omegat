@@ -31,11 +31,12 @@
 
 package org.omegat.util;
 
+import com.google.re2j.Matcher;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Matcher;
 
 /**
  * This class is here, because the Locale has hard-coded '_' inside, and we must

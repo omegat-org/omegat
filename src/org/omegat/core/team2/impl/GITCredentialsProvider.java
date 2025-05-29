@@ -34,12 +34,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.transport.CredentialItem;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -52,6 +52,7 @@ import org.omegat.core.team2.gui.UserPassDialog;
 import org.omegat.core.team2.impl.TeamUtils.Credentials;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -81,26 +82,6 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 
 public class GITCredentialsProvider extends CredentialsProvider {
-
-    private static final Pattern[] fingerPrintRegex = new Pattern[] {
-            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
-            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
-            /* key fprint */ "(?<fingerprint>([0-9a-f]{2}:){15}[0-9a-f]{2})" + "\\.\\n"
-                    + "Are you sure you want to continue connecting\\?"),
-            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
-            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
-            /* key fprint */"SHA256:(?<fingerprint>[0-9a-zA-Z/+]+)" + "\\.\\n"
-                    + "Are you sure you want to continue connecting\\?"),
-            Pattern.compile("The authenticity of host '.*' cannot be established\\.\\n"
-                    + "The EC key's fingerprints are:\\n"
-                    + "MD5:([0-9a-f]{2}:){15}[0-9a-f]{2}\\nSHA256:(?<fingerprint>[0-9a-zA-Z/+]+)\\n"
-                    + "Accept and store this key, and continue connecting\\?") };
-
-    private static final Pattern[] PASSPHRASE_REGEX = new Pattern[] {
-            Pattern.compile("Key '" + /* key file path */ ".*" + "'"
-                    + " is encrypted\\. Enter the passphrase to decrypt it\\.\\n?"),
-            Pattern.compile("Encrypted key " + /* key file path */ "'.*'"
-                    + " could not be decrypted\\. Enter the passphrase again\\.\\n?") };
 
     private static final String PASSWORD_PROMPT = "Password: ";
 
@@ -445,7 +426,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
      */
     protected static String extractFingerprint(String text) {
         Matcher fingerprintMatcher;
-        for (Pattern p : fingerPrintRegex) {
+        for (Pattern p : PatternConsts.FINGER_PRINT_REGEX) {
             fingerprintMatcher = p.matcher(text);
             if (fingerprintMatcher.find()) {
                 int start = fingerprintMatcher.start("fingerprint");
@@ -458,7 +439,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
 
     private boolean isPassphraseQuery(String promptText) {
         Matcher passphraseMatcher;
-        for (Pattern p : PASSPHRASE_REGEX) {
+        for (Pattern p : PatternConsts.PASSPHRASE_REGEX) {
             passphraseMatcher = p.matcher(promptText);
             if (passphraseMatcher.find()) {
                 return true;

@@ -37,9 +37,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMFactory;
@@ -94,8 +94,6 @@ public class FindMatches {
     static final int PENALTY_FOR_FUZZY = 40;
     private static final int PENALTY_FOR_REMOVED = 5;
     private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
-
-    private static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
 
     private static final String ORPHANED_FILE_NAME = OStrings.getString("CT_ORPHAN_STRINGS");
 
@@ -274,7 +272,7 @@ public class FindMatches {
                 Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT);
         for (Map.Entry<String, ExternalTMX> en : project.getTransMemories().entrySet()) {
             int penalty = 0;
-            Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
+            Matcher matcher = PatternConsts.SEARCH_FOR_PENALTY.matcher(en.getKey());
             if (matcher.find()) {
                 penalty = Integer.parseInt(matcher.group(1));
             }

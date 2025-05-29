@@ -46,9 +46,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import com.google.re2j.Matcher;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.net.URLCodec;
@@ -77,38 +76,6 @@ public final class HttpConnectionUtils {
      */
     private static final int TIMEOUT_MS = 10_000;
 
-    // Regular Expression for URL validation
-    // From https://gist.github.com/dperini/729294
-    // and https://github.com/JetBrains/intellij-community
-    // See lib/licenses/Licenses.txt
-    private static final String REGEX_URL = "(?:https?|ftp)://" // protocol
-            + "(?:\\S+(?::\\S*)?@)?(?:(?!" // user:pass (optional)
-            + "(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\."
-            + "(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\."
-            + "(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))"
-            // IP addresses
-            + "|" + "(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+"
-            + "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*"
-            + "\\.[a-z\\u00a1-\\uffff]{2,}\\.?)" // domain host
-            + "(?::\\d{2,5})?" // port (optional)
-            + "(?:[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|])?"; // resources
-
-    /**
-     * Regular Expression for https and ftp URL validation.
-     * <p>
-     * You are recommended to use commons-validator instead of hand-crafted
-     * here. We leave it as is for keeping compatibility.
-     */
-    public static final Pattern URL_PATTERN = Pattern.compile(REGEX_URL, Pattern.CASE_INSENSITIVE);
-
-    private static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+",
-            Pattern.CASE_INSENSITIVE);
-
-    /**
-     * Regular Expression for file URL validation.
-     */
-    public static final Pattern FILE_URL_PATTERN = Pattern
-            .compile("\\bfile://[-A-Za-z0-9+$&@#/%?=~_|!:,.;]*[-A-Za-z0-9+$&@#/%=~_|]");
     private static final URLCodec codec = new URLCodec(StandardCharsets.UTF_8.name());
 
     /**
@@ -474,7 +441,7 @@ public final class HttpConnectionUtils {
     public static String encodeHttpURLs(String text) {
         UrlValidator urlValidator = new UrlValidator();
         StringBuilder result = new StringBuilder();
-        Matcher m = HTTP_URL_PATTERN.matcher(text);
+        Matcher m = PatternConsts.HTTP_URL_PATTERN.matcher(text);
         int lastIndex = 0;
         while (m.find()) {
             final String url = m.group();
@@ -547,7 +514,7 @@ public final class HttpConnectionUtils {
     public static String decodeHttpURLs(String text) {
         UrlValidator urlValidator = new UrlValidator();
         StringBuilder result = new StringBuilder();
-        Matcher m = HTTP_URL_PATTERN.matcher(text);
+        Matcher m = PatternConsts.HTTP_URL_PATTERN.matcher(text);
         int lastIndex = 0;
         while (m.find()) {
             final String uri = m.group();

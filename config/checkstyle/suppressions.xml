@@ -132,7 +132,7 @@
     <!-- Searcher -->
     <suppress files="Searcher\.java"
               checks="(LineLength|MemberName|ParameterNumber|MissingSwitchDefault|InnerAssignment)"
-         lines="90,91,92,96,100,104,105,107,264,275,276,284,286,293,294,308,309,359,361,449,495,605,674,710"/>
+         lines="90,91,92,96,100,104,105,107,267,278,279,287,289,296,297,311,312,359,361,449,495,605,674,710"/>
 
     <!-- matching -->
     <suppress files="NearString\.java" checks="TypeName" lines="50-70"/>

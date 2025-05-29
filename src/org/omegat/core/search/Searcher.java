@@ -42,9 +42,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
@@ -199,7 +200,7 @@ public class Searcher {
         m_matchers = new ArrayList<>();
 
         // determine pattern matching flags
-        int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
+        int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE;
 
         // Normalize width of search string if width insensitivity is requested.
         // Then, instead of modifying the regex, we also normalize the
@@ -225,10 +226,11 @@ public class Searcher {
         case KEYWORD:
             // break the search string into keywords,
             // each of which is a separate search string
-            Pattern.compile(" ").splitAsStream(text.trim()).filter(word -> !word.isEmpty()).map(word -> {
-                String glob = StaticUtils.globToRegex(word, false);
-                return Pattern.compile(glob, flags).matcher("");
-            }).forEach(m_matchers::add);
+            Stream.of(text.trim().split(" ")).filter(word -> !word.isEmpty())
+                    .map(word -> {
+                        String glob = StaticUtils.globToRegex(word, false);
+                        return Pattern.compile(glob, flags).matcher("");
+                    }).forEach(m_matchers::add);
             break;
         case REGEXP:
             // space match nbsp (\u00a0)

@@ -33,8 +33,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Matcher;
 
+import com.google.re2j.Matcher;
 import org.apache.commons.io.FilenameUtils;
 
 import org.omegat.util.HttpConnectionUtils;

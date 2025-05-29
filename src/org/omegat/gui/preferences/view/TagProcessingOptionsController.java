@@ -28,14 +28,13 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
-
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.google.re2j.Pattern;
+import com.google.re2j.PatternSyntaxException;
 import org.omegat.core.Core;
 import org.omegat.core.statistics.StatisticsSettings;
 import org.omegat.gui.preferences.BasePreferencesController;

@@ -31,7 +31,8 @@
 
 package org.omegat.util;
 
-import java.util.regex.Pattern;
+
+import com.google.re2j.Pattern;
 
 /**
  * Constant patterns, used in different other classes.
@@ -50,6 +51,40 @@ public final class PatternConsts {
     private static final String RE_PRINTF_VARS = "%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_PRINTF_VARS = "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = "\\{([0-9])+\\}";
+
+    public static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+",
+            java.util.regex.Pattern.CASE_INSENSITIVE);
+
+    /**
+     * Regexp for parse parameters.
+     */
+    public static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
+
+    /**
+     * Regex for parse GIT credential messages.
+     */
+    public static final Pattern[] FINGER_PRINT_REGEX = new Pattern[] {
+            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
+            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
+            /* key fprint */ "(?<fingerprint>([0-9a-f]{2}:){15}[0-9a-f]{2})" + "\\.\\n"
+                    + "Are you sure you want to continue connecting\\?"),
+            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
+            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
+            /* key fprint */"SHA256:(?<fingerprint>[0-9a-zA-Z/+]+)" + "\\.\\n"
+                    + "Are you sure you want to continue connecting\\?"),
+            Pattern.compile("The authenticity of host '.*' cannot be established\\.\\n"
+                    + "The EC key's fingerprints are:\\n"
+                    + "MD5:([0-9a-f]{2}:){15}[0-9a-f]{2}\\nSHA256:(?<fingerprint>[0-9a-zA-Z/+]+)\\n"
+                    + "Accept and store this key, and continue connecting\\?") };
+    public static final Pattern[] PASSPHRASE_REGEX = new Pattern[] {
+            Pattern.compile("Key '" + /* key file path */ ".*" + "'"
+                    + " is encrypted\\. Enter the passphrase to decrypt it\\.\\n?"),
+            Pattern.compile("Encrypted key " + /* key file path */ "'.*'"
+                    + " could not be decrypted\\. Enter the passphrase again\\.\\n?") };
+
+    public static final Pattern MATCH_ALL = Pattern.compile(".*");
+
+    public static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
 
     /** Tag Validation Option: check user defined tags according to regexp.*/
     public static final String CHECK_CUSTOM_PATTERN_DEFAULT = "\\d+";

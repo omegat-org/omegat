@@ -34,8 +34,8 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.Charset;
-import java.util.regex.Matcher;
 
+import com.google.re2j.Matcher;
 import org.jetbrains.annotations.NotNull;
 import org.omegat.util.PatternConsts;
 

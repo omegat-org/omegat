@@ -41,10 +41,10 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
+import com.google.re2j.Pattern;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;

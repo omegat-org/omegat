@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.re2j.Pattern;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -79,6 +80,10 @@ public interface IProject {
      */
     void compileProject(String sourcePattern) throws Exception;
 
+    default void compileProject(Pattern filePattern, boolean doPostProcessing) throws Exception {
+        compileProjectAndCommit(filePattern.pattern(), doPostProcessing, false );
+    }
+
     /**
      * Builds translated files corresponding to sourcePattern and creates fresh TM files.
      *
@@ -92,6 +97,11 @@ public interface IProject {
      */
     void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
             throws Exception;
+
+    default void compileProjectAndCommit(Pattern sourcePattern, boolean doPostProcessing, boolean commitTargetFiles)
+            throws Exception {
+        compileProjectAndCommit(sourcePattern.pattern(), doPostProcessing, commitTargetFiles);
+    }
 
     /**
      * Tells whether a project is a team project

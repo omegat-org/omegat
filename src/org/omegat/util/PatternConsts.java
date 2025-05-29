@@ -52,8 +52,7 @@ public final class PatternConsts {
     private static final String RE_SIMPLE_PRINTF_VARS = "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = "\\{([0-9])+\\}";
 
-    public static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+",
-            java.util.regex.Pattern.CASE_INSENSITIVE);
+    public static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+", Pattern.CASE_INSENSITIVE);
 
     /**
      * Regexp for parse parameters.
@@ -214,7 +213,7 @@ public final class PatternConsts {
     public static final Pattern SPACE_TAB = Pattern.compile("( |\t)+");
 
     /** Pattern for regular expression variable : $n, where n is a number, but should not be preceded by backslash */
-    public static final Pattern REGEX_VARIABLE = Pattern.compile("(?<!\\\\)((?:\\\\\\\\)*)\\$(\\d+)");
+    public static final Pattern REGEX_VARIABLE = Pattern.compile("(?:^|[^\\\\])\\$(\\d+)");
 
     /** compiled pattern to match line ending win/mac/linux */
     public static final Pattern LINE_ENDING = Pattern.compile("\r?\n|\r[^\n]");
@@ -240,8 +239,8 @@ public final class PatternConsts {
      * is implicit (first in sequence is first in order) Example in code:
      * <code>echo printf(gettext("%s is very %s"), "OmegaT", "great");</code>
      */
-    public static final Pattern PRINTF_VARS = Pattern
-            .compile(RE_PRINTF_VARS);
+    public static final Pattern PRINTF_VARS = Pattern.compile(RE_PRINTF_VARS);
+
     /**
      * Pattern for detecting the placeholders in a printf-function string. It
      * detects only simple placeholders, without SIGN-, PADDING-, ALIGNMENT- and

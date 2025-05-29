@@ -660,7 +660,8 @@ public class Searcher {
                         IN_LOOP:
                         for (find = 0; find < origText.length(); find++) {
                             if (StringUtil.normalizeWidth(origText.substring(find)).startsWith(foundText)) {
-                                start = end = find;
+                                start = find;
+                                end = find;
                                 while (end < origText.length()) {
                                     end++;
                                     if (StringUtil.normalizeWidth(origText.substring(start, end)).equals(foundText)) {

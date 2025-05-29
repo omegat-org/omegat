@@ -25,23 +25,11 @@
 
 package org.omegat.core.search;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -53,6 +41,17 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.TestPreferencesInitializer;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class SearcherTest {
 
@@ -95,6 +94,46 @@ public class SearcherTest {
         assertTrue(searcher.searchString("great software"));
         assertTrue(searcher.searchString("OmegaT is great software"));
         assertFalse(searcher.searchString("OmegaT is average software"));
+    }
+
+    @Test
+    public void testSearchReplaceExactMatch() throws Exception {
+        SearchExpression s = createSearchExpression("great", SearchExpression.SearchExpressionType.EXACT, false, false);
+        s.mode = SearchMode.REPLACE;
+        s.replacement = "awesome";
+        List<SearchMatch> matches = executeSearchReplace("Great things are great indeed.", s);
+        assertEquals(2, matches.size());
+        assertEquals("awesome", matches.get(0).getReplacement());
+        assertEquals("awesome", matches.get(1).getReplacement());
+    }
+
+    @Test
+    public void testSearchReplaceRegexMatch() throws Exception {
+        SearchExpression s = createSearchExpression("(\\d+) apples", SearchExpression.SearchExpressionType.REGEXP,
+                false, false);
+        s.mode = SearchMode.REPLACE;
+        s.replacement = "$1 bananas";
+        List<SearchMatch> matches = executeSearchReplace("I have 5 apples and 10 apples.", s);
+        assertEquals(2, matches.size());
+        assertEquals("5 bananas", matches.get(0).getReplacement());
+        assertEquals("10 bananas", matches.get(1).getReplacement());
+    }
+
+    @Test
+    public void testSearchReplaceKeywordNotSupported() throws Exception {
+        SearchExpression s = createSearchExpression("great", SearchExpression.SearchExpressionType.KEYWORD, false, false);
+        s.mode = SearchMode.REPLACE;
+        s.replacement = "awesome";
+        List<SearchMatch> matches = executeSearchReplace("Great things are great indeed.", s);
+        assertEquals(2, matches.size());
+    }
+
+    private List<SearchMatch> executeSearchReplace(String inputText, SearchExpression s) throws Exception {
+        Searcher searcher = new Searcher(proj, s);
+        searcher.setThread(new SearchTestThread());
+        searcher.search();
+        searcher.searchString(inputText);
+        return searcher.getFoundMatches();
     }
 
     @Test

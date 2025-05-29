@@ -235,8 +235,8 @@ public class Searcher {
         case REGEXP:
             // space match nbsp (\u00a0)
             if (searchExpression.spaceMatchNbsp) {
-                text = text.replaceAll(" ", "( |\u00A0)");
-                text = text.replaceAll("\\\\s", "(\\\\s|\u00A0)");
+                text = text.replace(" ", "( |\u00A0)");
+                text = text.replace("\\\\s", "(\\\\s|\u00A0)");
             }
 
             // create a matcher for the search string
@@ -626,24 +626,12 @@ public class Searcher {
         return searchString(origText, true);
     }
 
-    /**
-     * Looks for an occurrence of the search string(s) in the supplied text string.
-     * IF matches are found, they are added to this.foundMatches.
-     *
-     * @param origText
-     *            The text string to search in
-     * @param collapseResults
-     *            True if the adjacent results should be collapsed. This can happen on search, but not on replace.
-     *
-     * @return True if the text string contains all search strings
-     */
     public boolean searchString(String origText, boolean collapseResults) {
         if (origText == null || m_matchers == null || m_matchers.isEmpty()) {
             return false;
         }
 
-        String text = searchExpression.widthInsensitive ? StringUtil.normalizeWidth(origText) : origText;
-
+        String normalizedText = normalizeText(origText);
         foundMatches.clear();
         // check the text against all matchers
         OUT_LOOP:
@@ -651,7 +639,7 @@ public class Searcher {
             // check the text against the current matcher
             // if one of the search strings is not found, don't
             // bother looking for the rest of the search strings
-            matcher.reset(text);
+            matcher.reset(normalizedText);
             if (!matcher.find()) {
                 return false;
             }
@@ -659,9 +647,9 @@ public class Searcher {
             while (true) {
                 int start = matcher.start();
                 int end = matcher.end();
-                if (!text.substring(start, end).equals(origText.substring(start, end))) {
+                if (!normalizedText.substring(start, end).equals(origText.substring(start, end))) {
                     // In case of normalization, check whenever the string to search is still present but shifted
-                    int find = origText.indexOf(text.substring(start, end));
+                    int find = origText.indexOf(normalizedText.substring(start, end));
                     if (find >= 0) {
                         end = find + (end - start);
                         start = find;
@@ -669,7 +657,7 @@ public class Searcher {
                         // If the string to search contains normalized characters, then we cannot find this match
                         // Try to find it using normalization of substrings
                         boolean found = false;
-                        String foundText = text.substring(start, end);
+                        String foundText = normalizedText.substring(start, end);
                         IN_LOOP:
                         for (find = 0; find < origText.length(); find++) {
                             if (StringUtil.normalizeWidth(origText.substring(find)).startsWith(foundText)) {
@@ -690,41 +678,13 @@ public class Searcher {
                     }
                 }
                 if (searchExpression.mode == SearchMode.REPLACE) {
-                    if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
-                        if ((end == start) && (start > 0)) {
-                            break; // do not replace the last occurrence of (.*)
-                        }
-                        String repl = searchExpression.replacement;
-                        Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
-                        while (replaceMatcher.find()) {
-                            int varId = Integer.parseInt(replaceMatcher.group(2));
-                            if (varId > matcher.groupCount()) {
-                                // Group wasn't even present in search regex.
-                                throw new IndexOutOfBoundsException(
-                                        OStrings.getString("ST_REGEXP_REPLACEGROUP_ERROR", varId));
-                            }
-                            String substitution = matcher.group(varId); // yes, from source matcher!
-                            if (substitution == null) {
-                                // If group was present in search regex but didn't match anything,
-                                // replace with empty string.
-                                substitution = "";
-                            }
-                            substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
-                            repl = repl.substring(0, replaceMatcher.start()) + replaceMatcher.group(1) + substitution
-                                    + repl.substring(replaceMatcher.end());
-                            replaceMatcher.reset(repl);
-                        }
-                        foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl,
-                                m_project.getProjectProperties().getTargetLanguage().getLocale())));
-                    } else {
-                        foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
-                    }
+                    if (searchReplaceImpl(matcher, end, start)) break;
                 } else if (end > start) {
                     // Add a match only if the matched region is not empty.
                     // We still return true so the hit will still be recorded.
                     foundMatches.add(new SearchMatch(start, end));
                 }
-                if (start >= text.length()) {
+                if (start >= normalizedText.length()) {
                     // Reached the end of the text
                     break;
                 }
@@ -748,22 +708,63 @@ public class Searcher {
         // We should not collapse results when doing a search/replace
         // see https://sourceforge.net/p/omegat/bugs/675/
         if (collapseResults) {
-            for (int i = 1; i < foundMatches.size();) {
-                SearchMatch pr = foundMatches.get(i - 1);
-                SearchMatch cu = foundMatches.get(i);
-                // check for overlapped
-                if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
-                    int end = Math.max(cu.getEnd(), pr.getEnd());
-                    // leave only one region
-                    pr = new SearchMatch(pr.getStart(), end, pr.getReplacement());
-                    foundMatches.set(i - 1, pr);
-                    foundMatches.remove(i);
-                } else {
-                    i++;
-                }
-            }
+            ollapseFoundMatches();
         }
         return true;
+    }
+
+    private String normalizeText(String text) {
+        return searchExpression.widthInsensitive ? StringUtil.normalizeWidth(text) : text;
+    }
+
+    private void ollapseFoundMatches() {
+        for (int i = 1; i < foundMatches.size();) {
+            SearchMatch pr = foundMatches.get(i - 1);
+            SearchMatch cu = foundMatches.get(i);
+            // check for overlapped
+            if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
+                int end = Math.max(cu.getEnd(), pr.getEnd());
+                // leave only one region
+                pr = new SearchMatch(pr.getStart(), end, pr.getReplacement());
+                foundMatches.set(i - 1, pr);
+                foundMatches.remove(i);
+            } else {
+                i++;
+            }
+        }
+    }
+
+    boolean searchReplaceImpl(Matcher matcher, int end, int start) {
+        if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
+            if ((end == start) && (start > 0)) {
+                return true;
+            }
+            String repl = searchExpression.replacement;
+            Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
+            while (replaceMatcher.find()) {
+                int varId = Integer.parseInt(replaceMatcher.group(2));
+                if (varId > matcher.groupCount()) {
+                    // Group wasn't even present in search regex.
+                    throw new IndexOutOfBoundsException(
+                            OStrings.getString("ST_REGEXP_REPLACEGROUP_ERROR", varId));
+                }
+                String substitution = matcher.group(varId); // yes, from source matcher!
+                if (substitution == null) {
+                    // If group was present in search regex but didn't match anything,
+                    // replace with empty string.
+                    substitution = "";
+                }
+                substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
+                repl = repl.substring(0, replaceMatcher.start()) + replaceMatcher.group(1) + substitution
+                        + repl.substring(replaceMatcher.end());
+                replaceMatcher.reset(repl);
+            }
+            foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl,
+                    m_project.getProjectProperties().getTargetLanguage().getLocale())));
+        } else {
+            foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
+        }
+        return false;
     }
 
     public List<SearchMatch> getFoundMatches() {

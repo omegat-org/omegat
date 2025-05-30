@@ -344,6 +344,24 @@ public class SearcherTest {
         assertEquals(1, updatedResults.size()); // Only matches "OmegaT is great"
     }
 
+    @Test
+    public void testFindMatchUsingNormalizationSuccessfulMatch() {
+        Searcher searcher = new Searcher(proj, createSearchExpression("OmegaT、is、awesome", SearchExpression.SearchExpressionType.EXACT, false, true));
+        assertTrue(searcher.findMatchUsingNormalization("OmegaT､is､awesome", "OmegaT、is、awesome"));
+    }
+
+    @Test
+    public void testFindMatchUsingNormalizationNoMatch() {
+        Searcher searcher = new Searcher(proj, createSearchExpression("OmegaT is great", SearchExpression.SearchExpressionType.EXACT, true, true));
+        assertFalse(searcher.findMatchUsingNormalization("OmegaT is okay", "OmegaT is great"));
+    }
+
+    @Test
+    public void testFindMatchUsingNormalizationPartialMatch() {
+        Searcher searcher = new Searcher(proj, createSearchExpression("OmegaT is", SearchExpression.SearchExpressionType.EXACT, false, true));
+        assertTrue(searcher.findMatchUsingNormalization("OmegaT\u2009is great", "OmegaT is"));
+    }
+
     static class SearchTestThread extends LongProcessThread {
         @Override
         public void run() {

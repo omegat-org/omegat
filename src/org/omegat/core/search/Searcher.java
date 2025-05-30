@@ -659,7 +659,7 @@ public class Searcher {
                         // If the string to search contains normalized characters, then we cannot find this match
                         // Try to find it using normalization of substrings
                         String foundText = normalizedText.substring(start, end);
-                        if (!findMatchUsingNormalization(origText, foundText, 0)) {
+                        if (!findMatchUsingNormalization(origText, foundText)) {
                             // No way, we cannot find the match at all. Do not highlight but return true
                             break OUT_LOOP;
                         }
@@ -703,11 +703,10 @@ public class Searcher {
      *
      * @param origText The original text in which to search for the substring.
      * @param foundText The substring to match within the original text.
-     * @param startIndex The starting index in the original text from which the search begins.
      * @return True if the normalized version of the substring is found within the original text, false otherwise.
      */
-    private boolean findMatchUsingNormalization(String origText, String foundText, int startIndex) {
-        for (int currentIndex = startIndex; currentIndex < origText.length(); currentIndex++) {
+    boolean findMatchUsingNormalization(String origText, String foundText) {
+        for (int currentIndex = 0; currentIndex < origText.length(); currentIndex++) {
             if (StringUtil.normalizeWidth(origText.substring(currentIndex)).startsWith(foundText)) {
                 int end = currentIndex;
                 while (end < origText.length()) {

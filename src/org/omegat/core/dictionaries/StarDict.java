@@ -30,6 +30,7 @@ package org.omegat.core.dictionaries;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -116,18 +117,23 @@ public class StarDict implements IDictionaryFactory {
     }
 
     static class StarDictDict implements IDictionary {
-
-        protected final StarDictDictionary dictionary;
+        protected final File dictionaryFile;
+        protected StarDictDictionary dictionary;
         protected final Language language;
 
-        StarDictDict(final File file, Language language) throws Exception {
-            dictionary = StarDictDictionary.loadDictionary(file, 1_000, Duration.ofMinutes(30));
+        StarDictDict(final File file, Language language) {
+            dictionaryFile = file;
             // Max cache size to 1,000 items and expiry to 30 min.
             this.language = language;
         }
 
         @Override
-        public List<DictionaryEntry> readArticles(String word) throws Exception {
+        public List<DictionaryEntry> readArticles(String word) {
+            try {
+                loadDictionary();
+            } catch (Exception e) {
+                return Collections.emptyList();
+            }
             List<StarDictDictionary.Entry> result = dictionary.readArticles(word);
             if (result.isEmpty()) {
                 result = dictionary.readArticles(word.toLowerCase(language.getLocale()));
@@ -136,11 +142,19 @@ public class StarDict implements IDictionaryFactory {
                     .collect(Collectors.toList());
         }
 
-        /**
-         * {@inheritDoc}
-         */
+        private void loadDictionary() throws Exception {
+            dictionary = StarDictDictionary.loadDictionary(dictionaryFile, 1_000, Duration.ofMinutes(30));
+        }
+
         @Override
         public List<DictionaryEntry> readArticlesPredictive(String word) {
+            if (dictionary == null) {
+                try {
+                    loadDictionary();
+                } catch (Exception e) {
+                    return Collections.emptyList();
+                }
+            }
             List<StarDictDictionary.Entry> result = dictionary.readArticlesPredictive(word);
             if (result.isEmpty()) {
                 result = dictionary.readArticlesPredictive(word.toLowerCase(language.getLocale()));
@@ -267,7 +281,7 @@ public class StarDict implements IDictionaryFactory {
                     Cleaner cleaner = new Cleaner(safelist);
                     document = cleaner.clean(document);
                     Elements definitionElements = document.select("def");
-                    if (definitionElements.size() > 0) {
+                    if (!definitionElements.isEmpty()) {
                         for (int i = 0; i < definitionElements.size(); i++) {
                             if (i > 0) {
                                 sb.append(CONDENSED_SPAN);

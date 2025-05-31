@@ -175,25 +175,25 @@ public class StarDict implements IDictionaryFactory {
 
         private static DictionaryEntry convertEntry(StarDictDictionary.Entry entry) {
             boolean condensed = Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false);
-            String result ;
+            String result;
             switch (entry.getType()) {
-                case MEAN:
-                    result = processMeanEntry(entry, condensed);
-                    break;
-                case PHONETIC:
-                    result = processPhoneticEntry(entry);
-                    break;
-                case HTML:
-                    result = processHtmlEntry(entry);
-                    break;
-                case PANGO:
-                    result = processPangoEntry(entry);
-                    break;
-                case XDXF:
-                    result = processXdxfEntry(entry, condensed);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unsupported EntryType: " + entry.getType());
+            case MEAN:
+                result = processMeanEntry(entry, condensed);
+                break;
+            case PHONETIC:
+                result = processPhoneticEntry(entry);
+                break;
+            case HTML:
+                result = processHtmlEntry(entry);
+                break;
+            case PANGO:
+                result = processPangoEntry(entry);
+                break;
+            case XDXF:
+                result = processXdxfEntry(entry, condensed);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported EntryType: " + entry.getType());
             }
 
             return new DictionaryEntry(entry.getWord(), result);
@@ -232,8 +232,8 @@ public class StarDict implements IDictionaryFactory {
 
         private static String processPangoEntry(StarDictDictionary.Entry entry) {
             Document document = Jsoup.parse(entry.getArticle());
-            Cleaner cleaner = new Cleaner(new Safelist()
-                    .addTags("sup", "sub", "i", "b", "u", "tt", "big", "small", "span"));
+            Cleaner cleaner = new Cleaner(
+                    new Safelist().addTags("sup", "sub", "i", "b", "u", "tt", "big", "small", "span"));
             document = cleaner.clean(document);
             return document.body().html();
         }
@@ -271,18 +271,19 @@ public class StarDict implements IDictionaryFactory {
             String resource = e.attr("lctn");
             e.removeAttr("lctn");
             switch (type.split("/")[0]) {
-                case "audio":
-                    e.tagName("a").attr("href", resource).text("Play").removeAttr("start").removeAttr("size");
-                    break;
-                case "image":
-                    e.tagName("img").attr("src", resource);
-                    break;
-                case "video":
-                    e.tagName("video").appendChild(new Element("source").attr("src", resource).attr("type", type)).removeAttr("type");
-                    break;
-                default:
-                    e.remove();
-                    break;
+            case "audio":
+                e.tagName("a").attr("href", resource).text("Play").removeAttr("start").removeAttr("size");
+                break;
+            case "image":
+                e.tagName("img").attr("src", resource);
+                break;
+            case "video":
+                e.tagName("video").appendChild(new Element("source").attr("src", resource).attr("type", type))
+                        .removeAttr("type");
+                break;
+            default:
+                e.remove();
+                break;
             }
         }
 
@@ -307,7 +308,8 @@ public class StarDict implements IDictionaryFactory {
             if (definitionElements.isEmpty()) {
                 contentBuilder.append("<div>").append(document.body().html()).append("</div>");
             } else {
-                definitionElements.forEach(e -> contentBuilder.append("<div>").append(e.html()).append("</div>"));
+                definitionElements
+                        .forEach(e -> contentBuilder.append("<div>").append(e.html()).append("</div>"));
             }
             return contentBuilder.toString();
         }

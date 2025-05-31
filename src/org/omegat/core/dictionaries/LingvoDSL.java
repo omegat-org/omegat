@@ -281,8 +281,8 @@ public class LingvoDSL implements IDictionaryFactory {
                         sb.append("<span class=\"lang_").append(LANG_CODE.get(i)).append("\">");
                         return;
                     }
-                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name") &&
-                    LANG_NAME.containsKey(tag.getAttribute().getValue())) {
+                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")
+                        && LANG_NAME.containsKey(tag.getAttribute().getValue())) {
                     sb.append("<span class=\"lang_").append(LANG_NAME.get(tag.getAttribute().getValue()))
                             .append("\">");
                     return;

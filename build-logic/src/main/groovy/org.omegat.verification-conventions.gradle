@@ -138,10 +138,16 @@ tasks.register('testIntegration', JavaExec) {
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
-    if (!System.hasProperty('java.util.logging.config.file')) {
-        System.setProperty('java.util.logging.config.file', "${rootDir}/config/test/logger.properties")
+    if (System.hasProperty('java.util.logging.config.file')) {
+        systemProperty 'java.util.logging.config.file', System.getProperty('java.util.logging.config.file')
+    } else {
+        systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     }
-    systemProperties = System.properties.getProperties()
+    systemProperty 'omegat.test.duration', System.getProperty('omegat.test.duration')
+    systemProperty 'omegat.test.repo', System.getProperty('omegat.test.repo')
+    systemProperty 'omegat.test.repo.alt', System.getProperty('omegat.test.repo.alt')
+    systemProperty 'omegat.test.map.repo', System.getProperty('omegat.test.map.repo')
+    systemProperty 'omegat.test.map.file', System.getProperty('omegat.test.map.file')
     // Allow setting the max heap size for the run task from the command line, e.g.
     // `gradle -PrunMaxHeapSize=1024M run`
     maxHeapSize = findProperty('runMaxHeapSize')

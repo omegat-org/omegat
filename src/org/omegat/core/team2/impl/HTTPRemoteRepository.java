@@ -54,7 +54,7 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * HTTP/HTTPS repository connection implementation.
- *
+ * <p>
  * It can be used as read-only repository for retrieve sources, external TMX,
  * glossaries, etc. Since HTTP protocol doesn't support multiple files, each URL
  * should be mapped to separate file, i.e. directory mapping is not supported.
@@ -156,7 +156,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public String[] getRecentlyDeletedFiles() throws Exception {
+    public String[] getRecentlyDeletedFiles() {
         return new String[0];
     }
 
@@ -198,12 +198,13 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
         String currentEtag = etags.getProperty(fileName);
 
-        logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}")
-                .addArgument(fileUrl)
-                .addArgument(outputFile::getAbsolutePath)
-                .addArgument(currentEtag).log();
+        logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}").addArgument(fileUrl)
+                .addArgument(outputFile::getAbsolutePath).addArgument(currentEtag).log();
 
-        outputFile.getParentFile().mkdirs();
+        // When parent directory doesn't exist, create it.
+        if (!outputFile.getParentFile().exists() && !outputFile.getParentFile().mkdirs()) {
+            throw new IOException("Failed to create directory " + outputFile.getParentFile());
+        }
 
         HttpURLConnection connection = (HttpURLConnection) new URL(fileUrl).openConnection();
         try {
@@ -212,7 +213,26 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 connection.setRequestProperty(HEADER_IF_NONE_MATCH, currentEtag);
             }
 
-            handleHttpResponse(connection, fileUrl);
+            // Handles the HTTP response code and performs necessary actions
+            // based on the code.
+            switch (connection.getResponseCode()) {
+            case HttpURLConnection.HTTP_OK:
+                logger.atDebug().setMessage("Retrieve {0}: 200 OK").addArgument(fileUrl).log();
+                break;
+            case HttpURLConnection.HTTP_NOT_MODIFIED:
+                // not modified - just return
+                logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(fileUrl).log();
+                return;
+            case HttpURLConnection.HTTP_FORBIDDEN:
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_FORBIDDEN", fileUrl));
+            case HttpURLConnection.HTTP_UNAUTHORIZED:
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_UNAUTHORIZED", fileUrl));
+            case HttpURLConnection.HTTP_NOT_FOUND:
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_NOT_FOUND", fileUrl));
+            default:
+                throw new NetworkException(
+                        OStrings.getString("TEAM_HTTP_OTHER_ERRORS", fileUrl, connection.getResponseCode()));
+            }
 
             // Load into .tmp file
             File tempFile = new File(outputFile.getAbsolutePath() + ".tmp");
@@ -239,29 +259,8 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     /**
-     * Handles the HTTP response code and performs necessary actions based on the code.
-     */
-    private void handleHttpResponse(HttpURLConnection connection, String fileUrl) throws IOException, NetworkException {
-        switch (connection.getResponseCode()) {
-            case HttpURLConnection.HTTP_OK:
-                logger.atDebug().setMessage("Retrieve {0}: 200 OK").addArgument(fileUrl).log();
-                break;
-            case HttpURLConnection.HTTP_NOT_MODIFIED:
-                logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(fileUrl).log();
-                throw new IOException("File not modified");
-            case HttpURLConnection.HTTP_FORBIDDEN:
-                throw new NetworkException(OStrings.getString("TEAM_HTTP_FORBIDDEN", fileUrl));
-            case HttpURLConnection.HTTP_UNAUTHORIZED:
-                throw new NetworkException(OStrings.getString("TEAM_HTTP_UNAUTHORIZED", fileUrl));
-            case HttpURLConnection.HTTP_NOT_FOUND:
-                throw new NetworkException(OStrings.getString("TEAM_HTTP_NOT_FOUND", fileUrl));
-            default:
-                throw new NetworkException(OStrings.getString("TEAM_HTTP_OTHER_ERRORS", fileUrl, connection.getResponseCode()));
-        }
-    }
-
-    /**
-     * Safely renames the temporary file to the output file, ensuring no remnants of old files.
+     * Safely renames the temporary file to the output file, ensuring no
+     * remnants of old files.
      */
     private void safelyRenameFile(File tempFile, File outputFile) throws IOException {
         if (outputFile.exists()) {

@@ -123,7 +123,8 @@ public class FindMatches {
     private String removedText;
 
     /** Tokens for original string, with and without stems. */
-    private Token[] strTokensStem, strTokensNoStem;
+    private Token[] strTokensStem;
+    private Token[] strTokensNoStem;
 
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
@@ -132,6 +133,21 @@ public class FindMatches {
 
     private final Segmenter segmenter;
 
+    /**
+     * Constructs a FindMatches instance for finding fuzzy matched translation memories.
+     *
+     * @param project
+     *        OmegaT project.
+     * @param maxCount
+     *        Limits the maximum count of the results.
+     * @param allowSeparateSegmentMatch
+     *        Specifies whether to allow separate segment matching.
+     * @param searchExactlyTheSame
+     *        Allows searching for similarities with the exact same text as the source segment.
+     *        This mode is used specifically for separate sentence match in paragraph-based projects,
+     *        where the source is part of the current segment.
+     * @deprecated
+     */
     @Deprecated(since = "6.1.0")
     public FindMatches(IProject project, int maxCount, boolean allowSeparateSegmentMatch,
             boolean searchExactlyTheSame) {
@@ -167,6 +183,26 @@ public class FindMatches {
         this.fuzzyMatchThreshold = threshold;
     }
 
+    /**
+     * Searches for translation matches in the translation memory.
+     *
+     * @param searchText
+     *        The target segment or term to search for.
+     * @param requiresTranslation
+     *        Indicates whether only translations are required during the search.
+     * @param fillSimilarityData
+     *        Specifies whether similarity data should be included in the resulting
+     *        NearString objects.
+     * @param stop
+     *        The IStopped callback object to handle cancellation of the search
+     *        process.
+     * @return
+     *        A list of NearString objects representing the matched translation
+     *        entries.
+     * @throws StoppedException
+     *        Thrown if the search process is stopped by the IStopped callback.
+     * @deprecated
+     */
     @Deprecated(since = "6.1.0")
     public List<NearString> search(final String searchText, final boolean requiresTranslation,
             final boolean fillSimilarityData, final IStopped stop) throws StoppedException {
@@ -177,9 +213,10 @@ public class FindMatches {
      * Search Translation memories.
      *
      * @param searchText
-     *        target segment or term to search.
+     *        The target segment or term to search for.
      * @param fillSimilarityData
-     *        fill similarity data into the result of NearString objects.
+     *        Specifies whether similarity data should be filled into the result
+     *        of NearString objects.
      * @param stop
      *        IStopped callback object to indicate cancel operation.
      * @return
@@ -190,7 +227,8 @@ public class FindMatches {
     public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
             throws StoppedException {
         return search(searchText, fillSimilarityData, stop,
-                !project.getProjectProperties().isSentenceSegmentingEnabled());
+                Preferences.isPreferenceDefault(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, true)
+                        && !project.getProjectProperties().isSentenceSegmentingEnabled());
     }
 
     /**
@@ -349,7 +387,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.TM, false, maxPenalty);
+                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty);
             }
         }
         // fill similarity data only for a result
@@ -450,8 +488,8 @@ public class FindMatches {
             return;
         }
 
-        addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
-                simAdjusted, penalty), tmxName);
+        addNearString(key, entry, comesFrom, fuzzy,
+                new NearString.Scores(similarityStem, similarityNoStem, simAdjusted, penalty), tmxName);
     }
 
     /**

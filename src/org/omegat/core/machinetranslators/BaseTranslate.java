@@ -28,10 +28,10 @@
 package org.omegat.core.machinetranslators;
 
 import java.nio.charset.StandardCharsets;
-import java.util.regex.Matcher;
 
 import javax.swing.JCheckBoxMenuItem;
 
+import com.google.re2j.Matcher;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;

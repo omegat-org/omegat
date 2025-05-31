@@ -28,11 +28,11 @@ package org.omegat.gui.editor.mark;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import com.google.re2j.Matcher;
 import org.apache.commons.text.StringEscapeUtils;
 
 import org.omegat.core.Core;

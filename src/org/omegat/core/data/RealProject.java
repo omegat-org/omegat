@@ -56,12 +56,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.xml.stream.XMLStreamException;
 
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
@@ -602,7 +602,6 @@ public class RealProject implements IProject {
      *
      * @param sourcePattern
      *            The regexp of files to create
-     * @throws Exception
      */
     public void compileProject(String sourcePattern) throws Exception {
         compileProject(sourcePattern, true);
@@ -617,7 +616,6 @@ public class RealProject implements IProject {
      *            The regexp of files to create
      * @param doPostProcessing
      *            Whether or not we should perform external post-processing.
-     * @throws Exception
      */
     public void compileProject(String sourcePattern, boolean doPostProcessing) throws Exception {
         compileProjectAndCommit(sourcePattern, doPostProcessing, false);
@@ -633,15 +631,31 @@ public class RealProject implements IProject {
      *            Whether or not we should perform external post-processing.
      * @param commitTargetFiles
      *            Whether or not we should commit target files
-     * @throws Exception
      */
     @Override
     public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing,
+                                        boolean commitTargetFiles) throws Exception {
+        compileProjectAndCommit(Pattern.compile(sourcePattern), doPostProcessing, commitTargetFiles);
+
+    }
+
+    /**
+     * Builds translated files corresponding to sourcePattern and creates fresh
+     * TM files.
+     *
+     * @param filePattern
+     *            The regexp of files to create
+     * @param doPostProcessing
+     *            Whether or not we should perform external post-processing.
+     * @param commitTargetFiles
+     *            Whether or not we should commit target files
+     */
+    @Override
+    public void compileProjectAndCommit(Pattern filePattern, boolean doPostProcessing,
             boolean commitTargetFiles) throws Exception {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
-        Pattern filePattern = Pattern.compile(sourcePattern);
         String fname;
 
         // Build TMX files specified as output TMXs in the config file

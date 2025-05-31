@@ -30,11 +30,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import com.google.re2j.Matcher;
 import org.omegat.util.OConsts;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -49,11 +49,6 @@ public final class CLIParameters {
 
     private CLIParameters() {
     }
-
-    /**
-     * Regexp for parse parameters.
-     */
-    protected static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
 
     // Help
     public static final String HELP_SHORT = "-h";
@@ -180,7 +175,7 @@ public final class CLIParameters {
             // Normalize Unicode here because e.g. OS X filesystem is NFD while
             // in Java land things are NFC
             arg = StringUtil.normalizeUnicode(arg);
-            Matcher m = PARAM.matcher(arg);
+            Matcher m = PatternConsts.PARAM.matcher(arg);
             if (m.matches()) {
                 params.put(m.group(1), m.group(3));
             } else if (arg.startsWith(RESOURCE_BUNDLE + "=")) {

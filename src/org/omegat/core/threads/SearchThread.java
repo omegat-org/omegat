@@ -30,8 +30,7 @@
 
 package org.omegat.core.threads;
 
-import java.util.regex.PatternSyntaxException;
-
+import com.google.re2j.PatternSyntaxException;
 import org.omegat.core.Core;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.search.SearchWindowController;

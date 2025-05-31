@@ -56,6 +56,7 @@ jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
 json_java = "20250517"
 protobuf_java = "3.25.5"
+re2j = "1.8"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -175,6 +176,7 @@ morfologik-speller = {group = "org.carrot2", name = "morfologik-speller", versio
 swing-extra-locales = {group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
 json = {group = "org.json", name = "json", version.ref = "json_java"}
 protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}
+re2j = { group = "com.google.re2j", name = "re2j", version.ref="re2j"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]

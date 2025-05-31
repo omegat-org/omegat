@@ -68,7 +68,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -96,6 +95,7 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import com.google.re2j.Pattern;
 import org.omegat.core.Core;
 import org.omegat.core.team2.gui.RepositoriesCredentialsController;
 import org.omegat.externalfinder.gui.ExternalFinderPreferencesController;
@@ -561,8 +561,8 @@ public class PreferencesWindowController implements FurtherActionListener {
             return;
         }
         Pattern pattern = Pattern.compile(".*" + Pattern.quote(query) + ".*",
-                Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
-        List<GuiSearchResult> results = searchTree(root, pattern.asPredicate());
+                Pattern.CASE_INSENSITIVE);
+        List<GuiSearchResult> results = searchTree(root, pattern::matches);
         if (filterTree) {
             setTreeVisible(root, false);
         }

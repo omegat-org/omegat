@@ -28,8 +28,8 @@ package org.omegat.gui.editor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
+import com.google.re2j.Pattern;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.gui.editor.autocompleter.AutoCompleterItem;

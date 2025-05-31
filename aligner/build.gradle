@@ -23,6 +23,7 @@ dependencies {
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    testImplementation(libs.re2j)
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

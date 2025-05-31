@@ -31,7 +31,10 @@
 
 package org.omegat.util;
 
-import java.util.regex.Pattern;
+
+import com.google.re2j.Pattern;
+
+import java.util.List;
 
 /**
  * Constant patterns, used in different other classes.
@@ -50,6 +53,39 @@ public final class PatternConsts {
     private static final String RE_PRINTF_VARS = "%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_PRINTF_VARS = "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = "\\{([0-9])+\\}";
+
+    public static final Pattern HTTP_URL_PATTERN = Pattern.compile("\\bhttps?://\\S+", Pattern.CASE_INSENSITIVE);
+
+    /**
+     * Regexp for parse parameters.
+     */
+    public static final Pattern PARAM = Pattern.compile("\\-\\-([A-Za-z\\-]+)(=(.+))?");
+
+    /**
+     * Regex for parse GIT credential messages.
+     */
+    private static final Pattern[] FINGER_PRINT_REGEX = new Pattern[] {
+            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
+            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
+            /* key fprint */ "(?<fingerprint>([0-9a-f]{2}:){15}[0-9a-f]{2})" + "\\.\\n"
+                    + "Are you sure you want to continue connecting\\?"),
+            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
+            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
+            /* key fprint */"SHA256:(?<fingerprint>[0-9a-zA-Z/+]+)" + "\\.\\n"
+                    + "Are you sure you want to continue connecting\\?"),
+            Pattern.compile("The authenticity of host '.*' cannot be established\\.\\n"
+                    + "The EC key's fingerprints are:\\n"
+                    + "MD5:([0-9a-f]{2}:){15}[0-9a-f]{2}\\nSHA256:(?<fingerprint>[0-9a-zA-Z/+]+)\\n"
+                    + "Accept and store this key, and continue connecting\\?") };
+    private static final Pattern[] PASSPHRASE_REGEX = new Pattern[] {
+            Pattern.compile("Key '" + /* key file path */ ".*" + "'"
+                    + " is encrypted\\. Enter the passphrase to decrypt it\\.\\n?"),
+            Pattern.compile("Encrypted key " + /* key file path */ "'.*'"
+                    + " could not be decrypted\\. Enter the passphrase again\\.\\n?") };
+
+    public static final Pattern MATCH_ALL = Pattern.compile(".*");
+
+    public static final Pattern SEARCH_FOR_PENALTY = Pattern.compile("penalty-(\\d+)");
 
     /** Tag Validation Option: check user defined tags according to regexp.*/
     public static final String CHECK_CUSTOM_PATTERN_DEFAULT = "\\d+";
@@ -179,7 +215,7 @@ public final class PatternConsts {
     public static final Pattern SPACE_TAB = Pattern.compile("( |\t)+");
 
     /** Pattern for regular expression variable : $n, where n is a number, but should not be preceded by backslash */
-    public static final Pattern REGEX_VARIABLE = Pattern.compile("(?<!\\\\)((?:\\\\\\\\)*)\\$(\\d+)");
+    public static final Pattern REGEX_VARIABLE = Pattern.compile("(?:^|[^\\\\])\\$(\\d+)");
 
     /** compiled pattern to match line ending win/mac/linux */
     public static final Pattern LINE_ENDING = Pattern.compile("\r?\n|\r[^\n]");
@@ -205,8 +241,8 @@ public final class PatternConsts {
      * is implicit (first in sequence is first in order) Example in code:
      * <code>echo printf(gettext("%s is very %s"), "OmegaT", "great");</code>
      */
-    public static final Pattern PRINTF_VARS = Pattern
-            .compile(RE_PRINTF_VARS);
+    public static final Pattern PRINTF_VARS = Pattern.compile(RE_PRINTF_VARS);
+
     /**
      * Pattern for detecting the placeholders in a printf-function string. It
      * detects only simple placeholders, without SIGN-, PADDING-, ALIGNMENT- and
@@ -311,5 +347,13 @@ public final class PatternConsts {
      */
     public static void updateCustomTagPattern() {
         customTags = null;
+    }
+
+    public static List<Pattern> getFingerprintRegex() {
+        return List.of(FINGER_PRINT_REGEX);
+    }
+
+    public static List<Pattern> getPassphraseRegex() {
+        return List.of(PASSPHRASE_REGEX);
     }
 }

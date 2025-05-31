@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -104,11 +105,15 @@ public class LingvoDSL implements IDictionaryFactory {
     }
 
     static class LingvoDSLDict implements IDictionary {
-        protected final DslDictionary data;
-        private final HtmlVisitor htmlVisitor;
+        private final Path dictPath;
+        private final Path indexPath;
+        private final boolean validateIndexAbsPath;
+
+        private DslDictionary data;
+        private HtmlVisitor htmlVisitor;
 
         /**
-         * Constructor of LingvoDSL Dictionary driver.
+         * Initialize LingvoDSL Dictionary driver.
          * 
          * @param dictPath
          *            *.dsl file object.
@@ -117,8 +122,13 @@ public class LingvoDSL implements IDictionaryFactory {
          * @throws Exception
          *             when loading dictionary failed.
          */
-        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath)
-                throws Exception {
+        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath) {
+            this.dictPath = dictPath;
+            this.indexPath = indexPath;
+            this.validateIndexAbsPath = validateIndexAbsPath;
+        }
+
+        private void loadDictionary() throws IOException {
             data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
                     Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
@@ -134,7 +144,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticles(final String word) throws IOException {
-            return readEntries(word, data.lookup(word));
+            return readEntries(word, lookup(word));
         }
 
         /**
@@ -147,7 +157,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticlesPredictive(final String word) throws IOException {
-            return readEntries(word, data.lookupPredictive(word));
+            return readEntries(word, lookupPredictive(word));
         }
 
         private List<DictionaryEntry> readEntries(final String word, final DslResult dslResult) {
@@ -157,6 +167,28 @@ public class LingvoDSL implements IDictionaryFactory {
                 list.add(dictionaryEntry);
             }
             return list;
+        }
+
+        DslResult lookup(final String word) throws IOException {
+            if (data == null) {
+                try {
+                    loadDictionary();
+                } catch (Exception e) {
+                    return new DslResult(Collections.emptyList());
+                }
+            }
+            return data.lookup(word);
+        }
+
+        DslResult lookupPredictive(final String word) throws IOException {
+            if (data == null) {
+                try {
+                    loadDictionary();
+                } catch (Exception e) {
+                    return new DslResult(Collections.emptyList());
+                }
+            }
+            return data.lookupPredictive(word);
         }
     }
 
@@ -257,12 +289,11 @@ public class LingvoDSL implements IDictionaryFactory {
                         sb.append("<span class=\"lang_").append(LANG_CODE.get(i)).append("\">");
                         return;
                     }
-                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")) {
-                    if (LANG_NAME.containsKey(tag.getAttribute().getValue())) {
-                        sb.append("<span class=\"lang_").append(LANG_NAME.get(tag.getAttribute().getValue()))
-                                .append("\">");
-                        return;
-                    }
+                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")
+                        && LANG_NAME.containsKey(tag.getAttribute().getValue())) {
+                    sb.append("<span class=\"lang_").append(LANG_NAME.get(tag.getAttribute().getValue()))
+                            .append("\">");
+                    return;
                 }
                 sb.append("<span>");
             } else if (tag.isTagName("*")) {
@@ -392,7 +423,7 @@ public class LingvoDSL implements IDictionaryFactory {
         public String getObject() {
             if (sb == null) {
                 // should not happened, but check null to avoid findbugs error.
-                throw new RuntimeException();
+                throw new IllegalStateException("sb is null in getObject() method!");
             }
             return sb.toString();
         }

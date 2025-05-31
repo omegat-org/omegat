@@ -26,19 +26,20 @@
 
 package org.omegat.filters4;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
-import java.util.List;
-
 import org.junit.Test;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters4.xml.openxml.MsOfficeFileFilter;
 import org.omegat.util.Language;
 
-public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
+import java.io.File;
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class MsOfficeFileFilterTest extends org.omegat.filters.TestFilterBase {
 
     private static final String TEST_DATA1 = "test/data/filters/openXML/file-OpenXMLFilter.docx";
     private static final String TEST_DATA2 = "test/data/filters/openXML/file-OpenXMLFilter-tables.docx";
@@ -96,5 +97,10 @@ public class OpenXMLFilterTest extends org.omegat.filters.TestFilterBase {
         checkMulti("This is first line.", null, null, "", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
+    }
+
+    @Test
+    public void testIsFileSupported() {
+        assertTrue(new MsOfficeFileFilter().isFileSupported(new File(TEST_DATA1), Collections.emptyMap(), null));
     }
 }

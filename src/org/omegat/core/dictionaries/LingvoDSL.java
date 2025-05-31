@@ -109,7 +109,7 @@ public class LingvoDSL implements IDictionaryFactory {
         private final Path indexPath;
         private final boolean validateIndexAbsPath;
 
-        protected DslDictionary data;
+        private DslDictionary data;
         private HtmlVisitor htmlVisitor;
 
         /**
@@ -144,14 +144,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticles(final String word) throws IOException {
-            if (data == null) {
-                try {
-                    loadDictionary();
-                } catch (Exception e) {
-                    return Collections.emptyList();
-                }
-            }
-            return readEntries(word, data.lookup(word));
+            return readEntries(word, lookup(word));
         }
 
         /**
@@ -164,14 +157,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticlesPredictive(final String word) throws IOException {
-            if (data == null) {
-                try {
-                    loadDictionary();
-                } catch (Exception e) {
-                    return Collections.emptyList();
-                }
-            }
-            return readEntries(word, data.lookupPredictive(word));
+            return readEntries(word, lookupPredictive(word));
         }
 
         private List<DictionaryEntry> readEntries(final String word, final DslResult dslResult) {
@@ -181,6 +167,28 @@ public class LingvoDSL implements IDictionaryFactory {
                 list.add(dictionaryEntry);
             }
             return list;
+        }
+
+        DslResult lookup(final String word) throws IOException {
+            if (data == null) {
+                try {
+                    loadDictionary();
+                } catch (Exception e) {
+                    return new DslResult(Collections.emptyList());
+                }
+            }
+            return data.lookup(word);
+        }
+
+        DslResult lookupPredictive(final String word) throws IOException {
+            if (data == null) {
+                try {
+                    loadDictionary();
+                } catch (Exception e) {
+                    return new DslResult(Collections.emptyList());
+                }
+            }
+            return data.lookupPredictive(word);
         }
     }
 

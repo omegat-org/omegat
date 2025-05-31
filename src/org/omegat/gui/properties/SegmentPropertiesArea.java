@@ -25,12 +25,8 @@
 
 package org.omegat.gui.properties;
 
-import java.awt.Component;
 import java.awt.IllegalComponentStateException;
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -58,6 +54,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.BiDiUtils;
@@ -92,9 +89,9 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ORIGIN = "origin";
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
-    final List<String> properties = new ArrayList<>();
+    private final List<String> properties = new ArrayList<>();
 
-    final DockableScrollPane scrollPane;
+    private final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
     private boolean isTargetRtl;
@@ -109,8 +106,13 @@ public class SegmentPropertiesArea implements IPaneMenu {
         mw.addDockable(scrollPane);
 
         scrollPane.setMenuProvider(this);
-
+  
         CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener(this));
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
+                setProperties(null);
+            }
+        });
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
 
         scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
@@ -127,8 +129,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         installView(initModeClass);
-
-        scrollPane.addMouseListener(contextMenuListener);
     }
 
     private void installView(Class<?> viewClass) {
@@ -153,28 +153,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
         viewImpl.update();
     }
 
-    final MouseListener contextMenuListener = new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        private void doPopup(MouseEvent e) {
-            Point p = SwingUtilities.convertPoint((Component) e.getSource(), e.getPoint(),
-                    scrollPane);
-            showContextMenu(p);
-        }
-    };
-
     void showContextMenu(Point p) {
         JPopupMenu menu = new JPopupMenu();
         populateLocalContextMenuOptions(menu, p);
@@ -183,6 +161,14 @@ public class SegmentPropertiesArea implements IPaneMenu {
         } catch (IllegalComponentStateException e) {
             Log.log(e);
         }
+    }
+
+    List<String> getProperties() {
+        return properties;
+    }
+
+    DockableScrollPane getScrollPane() {
+        return scrollPane;
     }
 
     private void populateLocalContextMenuOptions(JPopupMenu contextMenu, Point p) {

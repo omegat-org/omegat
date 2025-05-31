@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
@@ -55,25 +54,17 @@ import org.omegat.util.PatternConsts;
  *
  * @author Maxym Mykhalchuk
  */
-public class HTMLWriter extends Writer {
+public class HTMLWriter extends BufferedWriter implements AutoCloseable {
     /** Internal Buffer to collect the output */
-    private StringWriter writer;
-
-    /** real writer to a file */
-    private BufferedWriter realWriter;
-
-    /** Replacement string for HTML content-type META */
-    private String htmlMeta;
-    /** Replacement string for XML (XHTML) header */
-    private String xmlHeader;
+    private final StringWriter writer;
 
     /**
      * Encoding to write this file in. null value means no encoding declaration.
      */
-    private String encoding;
+    private final String encoding;
 
     /** HTML filter options. */
-    private HTMLOptions options;
+    private final HTMLOptions options;
 
     /**
      * Creates new HTMLWriter.
@@ -86,20 +77,11 @@ public class HTMLWriter extends Writer {
      */
     public HTMLWriter(String fileName, String encoding, HTMLOptions options)
             throws FileNotFoundException, UnsupportedEncodingException {
+        super(new OutputStreamWriter(new FileOutputStream(fileName),
+                encoding != null ? encoding : Charset.defaultCharset().name()));
         this.encoding = encoding;
-
         this.options = options;
-
-        writer = new StringWriter();
-        FileOutputStream fos = new FileOutputStream(fileName);
-
-        OutputStreamWriter osw;
-        if (encoding != null) {
-            osw = new OutputStreamWriter(fos, encoding);
-        } else {
-            osw = new OutputStreamWriter(fos, Charset.defaultCharset());
-        }
-        realWriter = new BufferedWriter(osw);
+        this.writer = new StringWriter();
     }
 
     /**
@@ -126,23 +108,27 @@ public class HTMLWriter extends Writer {
      * Flushes the writer (which does the real write-out of data) and closes the
      * real writer.
      */
+    @Override
     public void close() throws IOException {
         signalClosing = true;
         flush();
-        realWriter.close();
+        super.close();
     }
 
     /**
      * Does the real write-out of the data, first adding/replacing encoding
      * statement.
      */
+    @Override
     public void flush() throws IOException {
+        String htmlMeta;
+        String xmlHeader;
         StringBuffer buffer = writer.getBuffer();
         if (signalAlreadyFlushed || encoding == null) {
             // already flushed, i.e. already wrote out the headers stuff
             // or we don't add any metas (encoding is null)
 
-            realWriter.write(buffer.toString());
+            super.write(buffer.toString());
             buffer.setLength(0);
         } else if (signalClosing || buffer.length() >= MIN_HEADERED_BUFFER_SIZE) {
             // else if we're closing or the buffer is big enough
@@ -197,7 +183,8 @@ public class HTMLWriter extends Writer {
                 }
             }
 
-            realWriter.write(contents);
+            super.write(contents);
+            super.flush();
             buffer.setLength(0);
         }
     }
@@ -216,6 +203,7 @@ public class HTMLWriter extends Writer {
      * @throws IOException
      *             - If an I/O error occurs
      */
+    @Override
     public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {

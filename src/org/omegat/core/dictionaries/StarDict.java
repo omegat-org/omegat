@@ -175,127 +175,159 @@ public class StarDict implements IDictionaryFactory {
 
         private static DictionaryEntry convertEntry(StarDictDictionary.Entry entry) {
             boolean condensed = Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false);
-            StringBuilder sb = new StringBuilder();
-            if (entry.getType().equals(StarDictDictionary.EntryType.MEAN)) {
-                String[] lines = entry.getArticle().split("\n");
-                if (condensed) {
-                    for (int i = 0; i < lines.length; i++) {
-                        if (i > 0) {
-                            sb.append(CONDENSED_SPAN);
-                        } else {
-                            sb.append("<span>");
-                        }
-                        sb.append(lines[i]).append("</span>");
-                    }
-                } else {
-                    for (String line : lines) {
-                        sb.append("<div>").append(line).append("</div>");
-                    }
-                }
-            } else if (entry.getType().equals(StarDictDictionary.EntryType.PHONETIC)) {
-                sb.append("<span>(").append(entry.getArticle()).append(")</span>");
-            } else if (entry.getType().equals(StarDictDictionary.EntryType.HTML)) {
-                Document document = Jsoup.parse(entry.getArticle());
-                Safelist safelist = Safelist.relaxed();
-                Cleaner cleaner = new Cleaner(safelist);
-                document = cleaner.clean(document);
-                sb.append(document.body().html());
-            } else if (entry.getType().equals(StarDictDictionary.EntryType.PANGO)) {
-                Document document = Jsoup.parse(entry.getArticle());
-                Safelist safelist = new Safelist()
-                        .addTags("sup", "sub", "i", "b", "u", "tt", "big", "small", "span");
-                 Cleaner cleaner = new Cleaner(safelist);
-                 document = cleaner.clean(document);
-                 sb.append(document.body().html());
-            } else if (entry.getType().equals(StarDictDictionary.EntryType.XDXF)) {
-                Document document = Jsoup.parse(entry.getArticle());
-                // Process XDXF specific tags
-                document.select("k").remove();
-                Elements c = document.select("c");
-                for (Element e : c) {
-                    String color = e.attr("c");
-                    e.tagName("span");
-                    e.removeAttr("c");
-                    e.attr("style", "color: " + color + ";");
-                }
-                Elements su = document.select("su");
-                su.tagName("div");
-                su.attr("class", "details");
-                Elements ex = document.select("ex");
-                ex.tagName("span");
-                ex.attr("style", "color: blue;");
-                Elements co = document.select("co");
-                co.tagName("span");
-                co.attr("style", "color: gray;");
-                Safelist safelist = new Safelist()
-                        .addTags("sup", "sub", "i", "b", "tt", "big", "small", "span");
-                safelist.addAttributes("span", "style");
-                Elements kref = document.select("kref");
-                kref.tagName("span");
-                kref.attr("style", "font-style: italic;");
-                kref.removeAttr("idref");
-                Elements iref = document.select("iref");
-                iref.tagName("a");
-                Elements rref = document.select("rref");
-                for (Element e: rref) {
-                    String type = e.attr("type");
-                    if (type.isEmpty()) {
-                        e.remove();
-                        continue;
-                    }
-                    String resource = e.attr("lctn");
-                    e.removeAttr("lctn");
-                    if (type.startsWith("audio")) {
-                        e.tagName("a");
-                        e.removeAttr("start");
-                        e.removeAttr("size");
-                        e.attr("href", resource);
-                        e.text("Play");
-                    } else if (type.startsWith("image")) {
-                        e.tagName("img");
-                        e.attr("src", resource);
-                    } else if (type.startsWith("video")) {
-                        e.tagName("video");
-                        e.appendChild(new Element("source").attr("src", resource).attr("type", type));
-                        e.removeAttr("type");
+            String result ;
+            switch (entry.getType()) {
+                case MEAN:
+                    result = processMeanEntry(entry, condensed);
+                    break;
+                case PHONETIC:
+                    result = processPhoneticEntry(entry);
+                    break;
+                case HTML:
+                    result = processHtmlEntry(entry);
+                    break;
+                case PANGO:
+                    result = processPangoEntry(entry);
+                    break;
+                case XDXF:
+                    result = processXdxfEntry(entry, condensed);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported EntryType: " + entry.getType());
+            }
+
+            return new DictionaryEntry(entry.getWord(), result);
+        }
+
+        private static String processMeanEntry(StarDictDictionary.Entry entry, boolean condensed) {
+            StringBuilder contentBuilder = new StringBuilder();
+            String[] lines = entry.getArticle().split("\n");
+            if (condensed) {
+                for (int i = 0; i < lines.length; i++) {
+                    if (i > 0) {
+                        contentBuilder.append(CONDENSED_SPAN);
                     } else {
-                        e.remove();
+                        contentBuilder.append("<span>");
                     }
+                    contentBuilder.append(lines[i]).append("</span>");
                 }
-                if (!condensed) {
-                    safelist.addTags("blockquote");
-                    Cleaner cleaner = new Cleaner(safelist);
-                    document = cleaner.clean(document);
-                    Elements q = document.select("blockquote");
-                    q.attr("style", "display: block;margin-left: 20px;");
-                    Elements definitionElements = document.select("def");
-                    if (definitionElements.size() > 0) {
-                        definitionElements.forEach(
-                                e -> sb.append("<div>").append(e.html()).append("</div>"));
-                    } else {
-                        sb.append("<div>").append(document.body().html()).append("</div>");
-                    }
-                } else {
-                    document.select("k").remove();
-                    document.select("su").remove();
-                    Cleaner cleaner = new Cleaner(safelist);
-                    document = cleaner.clean(document);
-                    Elements definitionElements = document.select("def");
-                    if (!definitionElements.isEmpty()) {
-                        for (int i = 0; i < definitionElements.size(); i++) {
-                            if (i > 0) {
-                                sb.append(CONDENSED_SPAN);
-                            } else {
-                                sb.append("<span>");
-                            }
-                            sb.append(definitionElements.get(i).html()).append("</span>");
-                        }
-                    } else {
-                        sb.append("<span>").append(document.body().html()).append("</span>");
-                    }
+            } else {
+                for (String line : lines) {
+                    contentBuilder.append("<div>").append(line).append("</div>");
                 }
             }
-            return new DictionaryEntry(entry.getWord(), sb.toString());
+            return contentBuilder.toString();
+        }
+
+        private static String processPhoneticEntry(StarDictDictionary.Entry entry) {
+            return "<span>(" + entry.getArticle() + ")</span>";
+        }
+
+        private static String processHtmlEntry(StarDictDictionary.Entry entry) {
+            Document document = Jsoup.parse(entry.getArticle());
+            Cleaner cleaner = new Cleaner(Safelist.relaxed());
+            document = cleaner.clean(document);
+            return document.body().html();
+        }
+
+        private static String processPangoEntry(StarDictDictionary.Entry entry) {
+            Document document = Jsoup.parse(entry.getArticle());
+            Cleaner cleaner = new Cleaner(new Safelist()
+                    .addTags("sup", "sub", "i", "b", "u", "tt", "big", "small", "span"));
+            document = cleaner.clean(document);
+            return document.body().html();
+        }
+
+        private static String processXdxfEntry(StarDictDictionary.Entry entry, boolean condensed) {
+            Document document = Jsoup.parse(entry.getArticle());
+            cleanXdxfSpecificTags(document);
+
+            Safelist safelist = new Safelist().addTags("sup", "sub", "i", "b", "tt", "big", "small", "span")
+                    .addAttributes("span", "style");
+
+            if (!condensed) {
+                return handleExpandedXdxf(document, safelist);
+            } else {
+                return handleCondensedXdxf(document, safelist);
+            }
+        }
+
+        private static void cleanXdxfSpecificTags(Document document) {
+            document.select("k").remove();
+            document.select("c").forEach(e -> {
+                String color = e.attr("c");
+                e.tagName("span").removeAttr("c").attr("style", "color: " + color + ";");
+            });
+            document.select("su").tagName("div").attr("class", "details");
+            document.select("ex").tagName("span").attr("style", "color: blue;");
+            document.select("co").tagName("span").attr("style", "color: gray;");
+            document.select("kref").tagName("span").attr("style", "font-style: italic;").removeAttr("idref");
+            document.select("iref").tagName("a");
+            document.select("rref").forEach(StarDictDict::processRrefTag);
+        }
+
+        private static void processRrefTag(Element e) {
+            String type = e.attr("type");
+            String resource = e.attr("lctn");
+            e.removeAttr("lctn");
+            switch (type.split("/")[0]) {
+                case "audio":
+                    e.tagName("a").attr("href", resource).text("Play").removeAttr("start").removeAttr("size");
+                    break;
+                case "image":
+                    e.tagName("img").attr("src", resource);
+                    break;
+                case "video":
+                    e.tagName("video").appendChild(new Element("source").attr("src", resource).attr("type", type)).removeAttr("type");
+                    break;
+                default:
+                    e.remove();
+                    break;
+            }
+        }
+
+        private static String handleExpandedXdxf(Document document, Safelist safelist) {
+            safelist.addTags("blockquote");
+            Cleaner cleaner = new Cleaner(safelist);
+            document = cleaner.clean(document);
+            document.select("blockquote").attr("style", "display: block;margin-left: 20px;");
+            return processDefinitionElements(document);
+        }
+
+        private static String handleCondensedXdxf(Document document, Safelist safelist) {
+            document.select("k, su").remove();
+            Cleaner cleaner = new Cleaner(safelist);
+            document = cleaner.clean(document);
+            return processDefinitionElementsCondensed(document);
+        }
+
+        private static String processDefinitionElements(Document document) {
+            StringBuilder contentBuilder = new StringBuilder();
+            Elements definitionElements = document.select("def");
+            if (definitionElements.isEmpty()) {
+                contentBuilder.append("<div>").append(document.body().html()).append("</div>");
+            } else {
+                definitionElements.forEach(e -> contentBuilder.append("<div>").append(e.html()).append("</div>"));
+            }
+            return contentBuilder.toString();
+        }
+
+        private static String processDefinitionElementsCondensed(Document document) {
+            StringBuilder contentBuilder = new StringBuilder();
+            Elements definitionElements = document.select("def");
+            if (definitionElements.isEmpty()) {
+                contentBuilder.append("<span>").append(document.body().html()).append("</span>");
+            } else {
+                for (int i = 0; i < definitionElements.size(); i++) {
+                    if (i > 0) {
+                        contentBuilder.append(CONDENSED_SPAN);
+                    } else {
+                        contentBuilder.append("<span>");
+                    }
+                    contentBuilder.append(definitionElements.get(i).html()).append("</span>");
+                }
+            }
+            return contentBuilder.toString();
         }
     }
 }

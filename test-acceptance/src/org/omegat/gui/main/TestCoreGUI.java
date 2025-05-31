@@ -29,8 +29,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
@@ -42,6 +44,7 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.io.FileUtils;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.image.ScreenshotTaker;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
 import org.omegat.TestMainInitializer;
@@ -270,5 +273,28 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             mainMenu.add(optionsMenu);
             mainMenu.add(helpMenu);
         }
+    }
+
+    private static final String IMAGE_PARENT = "build/test-results/testAcceptance/";
+
+    /**
+     * Captures a screenshot of the current desktop and saves it as a PNG file
+     * in a directory structure based on the provided class name.
+     *
+     * @param className the name of the class used to determine the directory structure
+     *                  where the screenshot will be saved
+     * @param name      the name of the screenshot file
+     * @throws IOException if an I/O error occurs during directory creation,
+     *                     file deletion, or saving the screenshot
+     */
+    protected void takeScreenshot(String className, String name) throws IOException {
+        Path imageDir = Paths.get(IMAGE_PARENT).resolve(className);
+        if (!Files.exists(imageDir)) {
+            Files.createDirectories(imageDir);
+        }
+        ScreenshotTaker screenShotTaker = new ScreenshotTaker();
+        Path image = imageDir.resolve(name);
+        Files.deleteIfExists(image);
+        screenShotTaker.saveDesktopAsPng(image.toString());
     }
 }

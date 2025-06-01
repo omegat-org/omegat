@@ -247,7 +247,7 @@ public class LingvoDSLTest {
     public void testReadFileDictDz() throws Exception {
         LingvoDSLDict dict = (LingvoDSLDict) new LingvoDSL().loadDict(TEST_DICT_DZ);
         String word = "space";
-        DslResult data = dict.data.lookup(word);
+        DslResult data = dict.lookup(word);
         assertNotNull(data);
     }
 }

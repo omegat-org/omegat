@@ -1,11 +1,11 @@
 [versions]
-slf4j = "2.0.7"
+slf4j = "2.0.17"
 slf4j-format = "0.5.1"
-groovy = "4.0.26"
+groovy = "4.0.27"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
 commons_io = "2.18.0"
-commons_text = "1.13.0"
+commons_text = "1.13.1"
 commons_validator = "1.9.0"
 jsoup = "1.19.1"
 icu4j = "77.1"
@@ -16,7 +16,7 @@ languagedetector = "0.6-2"
 lucene = "5.5.5"
 lucene_gosen = "5.5.1"
 checkstyle = "8.45.1"
-guava = "33.4.0-jre"
+guava = "33.4.8-jre"
 annotations = "23.0.0"
 jgit = "6.10.0.202406032230-r"
 svnkit = "1.10.11"
@@ -25,9 +25,9 @@ jackson = "2.16.1"
 bc = "1.80"
 nashorn = "15.6"
 caffeine = "3.2.0"
-wiremock = "3.12.1"
+wiremock = "3.13.0"
 vldocking = "3.1.1"
-xmlunit = "2.10.0"
+xmlunit = "2.10.2"
 assertj = "3.27.3"
 appbundler = "1.2.1"
 supertmxmerge = "2.0.3"
@@ -37,7 +37,7 @@ htmlparser = "1.6-20230203"
 gnudiff = "1.15"
 desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
-pdfbox = "3.0.4"
+pdfbox = "3.0.5"
 maligna = "3.0.1"
 trie4j = "0.9.10_1"
 dsl4j = "1.0.0"
@@ -49,11 +49,13 @@ xjc = "2.3.9"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.5.0"
-flatlaf="3.5.4"
+flatlaf="3.6"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
+json_java = "20250517"
+protobuf_java = "3.25.5"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -168,9 +170,11 @@ jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
 flatlaf = {group = "com.formdev", name = "flatlaf", version.ref = "flatlaf"}
 language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
 assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", version.ref = "assertj_swing_junit"}
-morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
-morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
-swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+morfologik-stemming = {group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
+morfologik-speller = {group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
+swing-extra-locales = {group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+json = {group = "org.json", name = "json", version.ref = "json_java"}
+protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]

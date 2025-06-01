@@ -37,6 +37,7 @@ import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -589,5 +590,30 @@ public class StringUtilTest {
         assertEquals("\u25CB", StringUtil.normalizeWidth("\uFFEE"));
         // Hangul character in range with no replacement
         assertEquals("\uFFDD", StringUtil.normalizeWidth("\uFFDD"));
+    }
+
+    @Test
+    public void testStripFromEnd() {
+        // Test removing a single suffix
+        assertEquals("Hello World", StringUtil.stripFromEnd("Hello World!!!", "!!!"));
+        assertEquals("Hello", StringUtil.stripFromEnd("Hello..", ".."));
+
+        // Test removing multiple suffixes
+        assertEquals("Hello World", StringUtil.stripFromEnd("Hello World!!!", "!!!", "...", "??"));
+        assertEquals("Hello", StringUtil.stripFromEnd("Hello..!!", "!!", ".."));
+
+        // Test no match
+        assertEquals("Hello World", StringUtil.stripFromEnd("Hello World", "!!!"));
+        assertEquals("SampleText", StringUtil.stripFromEnd("SampleText", "Suffix"));
+
+        // Test empty suffix
+        assertEquals("TestString", StringUtil.stripFromEnd("TestString", ""));
+
+        // Test null inputs
+        assertNull(StringUtil.stripFromEnd(null, "suffix"));
+        assertEquals("String", StringUtil.stripFromEnd("String", (String[]) null));
+
+        // Test empty string
+        assertEquals("", StringUtil.stripFromEnd("", "suffix"));
     }
 }

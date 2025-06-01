@@ -581,7 +581,7 @@ public class StringUtilTest {
     }
 
     @Test
-    public void testProcessHungle() {
+    public void testProcessHangul() {
         // Test valid Hangul compatibility characters
         assertEquals("\u3164", StringUtil.normalizeWidth("\uFFA0")); // Ensure it's replaced correctly
         // First valid Hangul char in the range

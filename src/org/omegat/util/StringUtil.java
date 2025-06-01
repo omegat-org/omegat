@@ -785,13 +785,14 @@ public final class StringUtil {
         }
     }
 
-    private static final int[] HUNGLE_DATA = { /* Hungle */ 0x3161, 0x3162, 0x3163, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, /* Others */ 0x2502, 0x2190, 0x2191, 0x2192, 0x2193, 0x25A0, 0x25CB };
+    private static final int[] HUNGLE_DATA = { /* Hungle from 0xFFDA */ 0x3161, 0x3162, 0x3163,
+            /* no conversion from 0xFFDD to 0xFFE7 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            /* Others from 0xFFE8 */ 0x2502, 0x2190, 0x2191, 0x2192, 0x2193, 0x25A0, 0x25CB };
 
     static void processHungle(int ch, StringBuilder sb, int i) {
         if (ch == 0xFFA0) {
             sb.setCharAt(i, (char) 0x3164);
-        } else if (ch >= 0xFFDA && ch <= 0xFFE8 && HUNGLE_DATA[ch - 0xFFDA] != 0) {
+        } else if (ch >= 0xFFDA && ch <= 0xFFEE && HUNGLE_DATA[ch - 0xFFDA] != 0) {
             sb.setCharAt(i, (char) (HUNGLE_DATA[ch - 0xFFDA]));
         }
     }

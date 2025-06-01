@@ -654,7 +654,7 @@ public class StringUtilTest {
         assertEquals("\u3161", sb.toString()); // Valid replacement
 
         sb = new StringBuilder();
-        sb.append('\uFFE8'); // Last valid Hangul char in the range
+        sb.append('\uFFEE'); // Last valid Hangul char in the range
         StringUtil.processHungle(sb.charAt(0), sb, 0);
         assertEquals("\u25CB", sb.toString()); // Valid replacement
     }
@@ -669,8 +669,8 @@ public class StringUtilTest {
         assertEquals("A", sb.toString()); // No replacement
 
         sb = new StringBuilder();
-        sb.append('\uFFDC'); // Hangul character in range with 0 replacement
+        sb.append('\uFFDD'); // Hangul character in range with no replacement
         StringUtil.processHungle(sb.charAt(0), sb, 0);
-        assertEquals("\uFFDC", sb.toString()); // No replacement
+        assertEquals("\uFFDD", sb.toString()); // No replacement
     }
 }

@@ -5,7 +5,7 @@ ext.makeLinuxTask = { args ->
     def parentTask = tasks.getByName(args.parentTaskName)
     tasks.register(distTaskName, Sync) {
         group = 'distribution'
-        description = "Create a linux installDist for ${args.name}. "
+        description = "Creates a linux installDist for ${args.name}."
         with distributions.main.contents
         destinationDir = file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
         onlyIf {
@@ -24,7 +24,7 @@ ext.makeLinuxTask = { args ->
         }
     }
     tasks.register(tarTaskName, Tar) {
-        description = "Create a Linux distribution for ${args.name}. "
+        description = "Creates a Linux distribution for ${args.name}."
         with distributions.main.contents
         onlyIf {
             condition(!args.jrePath.empty, 'JRE not found')

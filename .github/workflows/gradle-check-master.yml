@@ -22,6 +22,15 @@ jobs:
     - name: Run gradle build
       run: ./gradlew -PenvIsCi=true -Pheadless=true --scan check
       id: gradle
+    - name: Check git repository clean
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "❌ Git repository is not clean after the build and checks."
+          git status
+          exit 1
+        else
+          echo "✅ Git repository is clean."
+        fi
     - name: "Add Build Scan URL as PR comment"
       uses: actions/github-script@v7
       if: github.event_name == 'pull_request' && failure()

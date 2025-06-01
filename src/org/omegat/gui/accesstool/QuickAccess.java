@@ -31,16 +31,15 @@ import org.omegat.gui.preferences.IMenuPreferece;
 import org.omegat.util.Platform;
 import org.omegat.util.gui.UIDesignManager;
 
+@SuppressWarnings("unused")
 public final class QuickAccess implements IMenuPreferece {
-
-    public QuickAccess() {
-    }
 
     public static void loadPlugins() {
         UIDesignManager.addMenuUIPreference(new QuickAccess());
     }
 
     public static void unloadPlugins() {
+        // no way to remove
     }
 
     @Override

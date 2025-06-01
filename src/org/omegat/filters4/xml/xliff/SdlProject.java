@@ -25,6 +25,7 @@
 
 package org.omegat.filters4.xml.xliff;
 
+import java.nio.charset.StandardCharsets;
 import java.util.zip.ZipEntry;
 
 import org.omegat.core.Core;
@@ -48,6 +49,11 @@ public class SdlProject extends AbstractZipFilter {
     }
 
     public static void unloadPlugins() {
+        // there is no way to remove the filter.
+    }
+
+    public SdlProject() {
+        super(StandardCharsets.UTF_8);
     }
 
     @Override

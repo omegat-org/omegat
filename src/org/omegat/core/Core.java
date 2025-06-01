@@ -100,19 +100,23 @@ public final class Core {
 
     private static IProject currentProject;
     private static IMainWindow mainWindow;
-    private static IEditor editor;
+    // package-private for test fixture TestCoreInitializer
+    static IEditor editor;
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
-    private static IAutoSave saveThread;
-    private static IGlossaries glossary;
+
+    // package-private for test fixture TestCoreInitializer
+    static IAutoSave saveThread;
+    private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
+
+    // package-private for test fixture TestCoreInitializer
+    static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
-    @SuppressWarnings("unused")
-    private static MultipleTransPane multiple;
     private static INotes notes;
     private static IComments comments;
     private static Segmenter segmenter;
@@ -280,7 +284,9 @@ public final class Core {
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
-        multiple = new MultipleTransPane(me);
+        // Create an independent instance updated from SearchThead.
+        new MultipleTransPane(me);
+        // Create an independent instance updated by events.
         new SegmentPropertiesArea(me);
         projWin = new ProjectFilesListController();
     }

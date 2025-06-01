@@ -485,7 +485,8 @@ public class FindMatchesTest {
         public ProjectTMXMock(Language sourceLanguage, Language targetLanguage,
                            boolean isSentenceSegmentingEnabled,
                           File file, CheckOrphanedCallback callback, Segmenter segmenter) throws Exception {
-            super(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback, segmenter);
+            super(callback);
+            load(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, segmenter);
         }
 
         public Map<String, TMXEntry> getDefaultsMap() {

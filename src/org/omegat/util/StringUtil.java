@@ -40,8 +40,10 @@ import java.text.MessageFormat;
 import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -767,839 +769,100 @@ public final class StringUtil {
         return normalizeUnicode(result);
     }
 
-    // CHECKSTYLE:OFF
+    private static final int[] KATAKANA_DATA = { /* 0xFF61 */ 0x3002, 0x300C, 0x300D, 0x3001, 0x30FB, 0x30F2,
+            0x30A1, /* 0xFF68 */ 0x30A3, 0x30A5, 0x30A7, 0x30A9, 0x30E3, 0x30E5, 0x30E7, 0x30C3,
+            /* 0xFF70 */ 0x30FC, 0x30A2, 0x30A4, 0x30A6, 0x30A8, 0x30AA, 0x30AB, 0x30AD,
+            /* 0xFF78 */ 0x30AF, 0x30B1, 0x30B3, 0x30B5, 0x30B7, 0x30B9, 0x30BB, 0x30BD,
+            /* 0xFF80 */ 0x30BF, 0x30C1, 0x30C4, 0x30C6, 0x30C8, 0x30CA, 0x30CB, 0x30CC,
+            /* 0xFF88 */ 0x30CD, 0x30CE, 0x30CF, 0x30D2, 0x30D5, 0x30D8, 0x30DB, 0x30DE,
+            /* 0xFF90 */ 0x30DF, 0x30E0, 0x30E1, 0x30E2, 0x30E4, 0x30E6, 0x30E8, 0x30E9,
+            /* 0xFF98 */ 0x30EA, 0x30EB, 0x30EC, 0x30ED, 0x30EF, 0x30F3, 0x3099, 0x309A };
+
     private static void processKatakana(int ch, StringBuilder sb, int i) {
-        switch (ch) {
-        // Katakana
-        case 0xFF61:
-            sb.setCharAt(i, (char) 0x3002);
-            break;
-        case 0xFF62:
-            sb.setCharAt(i, (char) 0x300C);
-            break;
-        case 0xFF63:
-            sb.setCharAt(i, (char) 0x300D);
-            break;
-        case 0xFF64:
-            sb.setCharAt(i, (char) 0x3001);
-            break;
-        case 0xFF65:
-            sb.setCharAt(i, (char) 0x30FB);
-            break;
-        case 0xFF66:
-            sb.setCharAt(i, (char) 0x30F2);
-            break;
-        case 0xFF67:
-            sb.setCharAt(i, (char) 0x30A1);
-            break;
-        case 0xFF68:
-            sb.setCharAt(i, (char) 0x30A3);
-            break;
-        case 0xFF69:
-            sb.setCharAt(i, (char) 0x30A5);
-            break;
-        case 0xFF6A:
-            sb.setCharAt(i, (char) 0x30A7);
-            break;
-        case 0xFF6B:
-            sb.setCharAt(i, (char) 0x30A9);
-            break;
-        case 0xFF6C:
-            sb.setCharAt(i, (char) 0x30E3);
-            break;
-        case 0xFF6D:
-            sb.setCharAt(i, (char) 0x30E5);
-            break;
-        case 0xFF6E:
-            sb.setCharAt(i, (char) 0x30E7);
-            break;
-        case 0xFF6F:
-            sb.setCharAt(i, (char) 0x30C3);
-            break;
-        case 0xFF70:
-            sb.setCharAt(i, (char) 0x30FC);
-            break;
-        case 0xFF71:
-            sb.setCharAt(i, (char) 0x30A2);
-            break;
-        case 0xFF72:
-            sb.setCharAt(i, (char) 0x30A4);
-            break;
-        case 0xFF73:
-            sb.setCharAt(i, (char) 0x30A6);
-            break;
-        case 0xFF74:
-            sb.setCharAt(i, (char) 0x30A8);
-            break;
-        case 0xFF75:
-            sb.setCharAt(i, (char) 0x30AA);
-            break;
-        case 0xFF76:
-            sb.setCharAt(i, (char) 0x30AB);
-            break;
-        case 0xFF77:
-            sb.setCharAt(i, (char) 0x30AD);
-            break;
-        case 0xFF78:
-            sb.setCharAt(i, (char) 0x30AF);
-            break;
-        case 0xFF79:
-            sb.setCharAt(i, (char) 0x30B1);
-            break;
-        case 0xFF7A:
-            sb.setCharAt(i, (char) 0x30B3);
-            break;
-        case 0xFF7B:
-            sb.setCharAt(i, (char) 0x30B5);
-            break;
-        case 0xFF7C:
-            sb.setCharAt(i, (char) 0x30B7);
-            break;
-        case 0xFF7D:
-            sb.setCharAt(i, (char) 0x30B9);
-            break;
-        case 0xFF7E:
-            sb.setCharAt(i, (char) 0x30BB);
-            break;
-        case 0xFF7F:
-            sb.setCharAt(i, (char) 0x30BD);
-            break;
-        case 0xFF80:
-            sb.setCharAt(i, (char) 0x30BF);
-            break;
-        case 0xFF81:
-            sb.setCharAt(i, (char) 0x30C1);
-            break;
-        case 0xFF82:
-            sb.setCharAt(i, (char) 0x30C4);
-            break;
-        case 0xFF83:
-            sb.setCharAt(i, (char) 0x30C6);
-            break;
-        case 0xFF84:
-            sb.setCharAt(i, (char) 0x30C8);
-            break;
-        case 0xFF85:
-            sb.setCharAt(i, (char) 0x30CA);
-            break;
-        case 0xFF86:
-            sb.setCharAt(i, (char) 0x30CB);
-            break;
-        case 0xFF87:
-            sb.setCharAt(i, (char) 0x30CC);
-            break;
-        case 0xFF88:
-            sb.setCharAt(i, (char) 0x30CD);
-            break;
-        case 0xFF89:
-            sb.setCharAt(i, (char) 0x30CE);
-            break;
-        case 0xFF8A:
-            sb.setCharAt(i, (char) 0x30CF);
-            break;
-        case 0xFF8B:
-            sb.setCharAt(i, (char) 0x30D2);
-            break;
-        case 0xFF8C:
-            sb.setCharAt(i, (char) 0x30D5);
-            break;
-        case 0xFF8D:
-            sb.setCharAt(i, (char) 0x30D8);
-            break;
-        case 0xFF8E:
-            sb.setCharAt(i, (char) 0x30DB);
-            break;
-        case 0xFF8F:
-            sb.setCharAt(i, (char) 0x30DE);
-            break;
-        case 0xFF90:
-            sb.setCharAt(i, (char) 0x30DF);
-            break;
-        case 0xFF91:
-            sb.setCharAt(i, (char) 0x30E0);
-            break;
-        case 0xFF92:
-            sb.setCharAt(i, (char) 0x30E1);
-            break;
-        case 0xFF93:
-            sb.setCharAt(i, (char) 0x30E2);
-            break;
-        case 0xFF94:
-            sb.setCharAt(i, (char) 0x30E4);
-            break;
-        case 0xFF95:
-            sb.setCharAt(i, (char) 0x30E6);
-            break;
-        case 0xFF96:
-            sb.setCharAt(i, (char) 0x30E8);
-            break;
-        case 0xFF97:
-            sb.setCharAt(i, (char) 0x30E9);
-            break;
-        case 0xFF98:
-            sb.setCharAt(i, (char) 0x30EA);
-            break;
-        case 0xFF99:
-            sb.setCharAt(i, (char) 0x30EB);
-            break;
-        case 0xFF9A:
-            sb.setCharAt(i, (char) 0x30EC);
-            break;
-        case 0xFF9B:
-            sb.setCharAt(i, (char) 0x30ED);
-            break;
-        case 0xFF9C:
-            sb.setCharAt(i, (char) 0x30EF);
-            break;
-        case 0xFF9D:
-            sb.setCharAt(i, (char) 0x30F3);
-            break;
-        case 0xFF9E:
-            sb.setCharAt(i, (char) 0x3099);
-            break;
-        case 0xFF9F:
-            sb.setCharAt(i, (char) 0x309A);
-            break;
-        default:
-            // nothing
+        if (ch >= 0xFF61 && ch <= 0xFF9F) {
+            sb.setCharAt(i, (char) KATAKANA_DATA[ch - 0xFF61]);
         }
     }
 
+    private static final int[] HUNGLE_DATA = { /* Hungle */ 0x3161, 0x3162, 0x3163, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, /* Others */ 0x2502, 0x2190, 0x2191, 0x2192, 0x2193, 0x25A0, 0x25CB };
+
     private static void processHungle(int ch, StringBuilder sb, int i) {
-        switch (ch) {
-        // Hangul
-        case 0xFFA0:
+        if (ch == 0xFFA0) {
             sb.setCharAt(i, (char) 0x3164);
-            break;
-        case 0xFFDA:
-            sb.setCharAt(i, (char) 0x3161);
-            break;
-        case 0xFFDB:
-            sb.setCharAt(i, (char) 0x3162);
-            break;
-        case 0xFFDC:
-            sb.setCharAt(i, (char) 0x3163);
-            break;
-        // Others
-        case 0xFFE8:
-            sb.setCharAt(i, (char) 0x2502);
-            break;
-        case 0xFFE9:
-            sb.setCharAt(i, (char) 0x2190);
-            break;
-        case 0xFFEA:
-            sb.setCharAt(i, (char) 0x2191);
-            break;
-        case 0xFFEB:
-            sb.setCharAt(i, (char) 0x2192);
-            break;
-        case 0xFFEC:
-            sb.setCharAt(i, (char) 0x2193);
-            break;
-        case 0xFFED:
-            sb.setCharAt(i, (char) 0x25A0);
-            break;
-        case 0xFFEE:
-            sb.setCharAt(i, (char) 0x25CB);
-            break;
-        default:
-            // nothing
+        } else if (ch >= 0xFFDA && ch <= 0xFFE8 && HUNGLE_DATA[ch - 0xFFDA] != 0) {
+            sb.setCharAt(i, (char) (HUNGLE_DATA[ch - 0xFFDA]));
         }
+    }
+
+    private static final Map<Integer, String> LETTER_LIKE_SYMBOL_DATA = new HashMap<>();
+
+    private static void initLetterLikeSymbolData() {
+        LETTER_LIKE_SYMBOL_DATA.put(0x2100, "a/c");
+        LETTER_LIKE_SYMBOL_DATA.put(0x2101, "a/s");
+        LETTER_LIKE_SYMBOL_DATA.put(0x2105, "c/o");
+        LETTER_LIKE_SYMBOL_DATA.put(0x2103, "°C");
+        LETTER_LIKE_SYMBOL_DATA.put(0x2109, "°F");
+        LETTER_LIKE_SYMBOL_DATA.put(0x2116, "No");
+        LETTER_LIKE_SYMBOL_DATA.put(0x212A, "K");
+        LETTER_LIKE_SYMBOL_DATA.put(0x212B, "Å");
     }
 
     private static int processLetterLikeSymbol(int ch, StringBuilder sb, int i) {
+        if (LETTER_LIKE_SYMBOL_DATA.isEmpty()) {
+            initLetterLikeSymbolData();
+        }
         int increment = 0;
-        // Process letter-like symbols
-        switch (ch) {
-        case 0x2100:
-            sb.setCharAt(i, 'a');
-            sb.insert(i + 1, "/c");
-            increment += 2;
-            break;
-        case 0x2101:
-            sb.setCharAt(i, 'a');
-            sb.insert(i + 1, "/s");
-            increment += 2;
-            break;
-        case 0x2105:
-            sb.setCharAt(i, 'c');
-            sb.insert(i + 1, "/o");
-            increment += 2;
-            break;
-        case 0x2103:
-            sb.setCharAt(i, (char) 0x00B0);
-            sb.insert(i + 1, "C");
-            increment++;
-            break;
-        case 0x2109:
-            sb.setCharAt(i, (char) 0x00B0);
-            sb.insert(i + 1, "F");
-            increment++;
-            break;
-        case 0x2116:
-            sb.setCharAt(i, 'N');
-            sb.insert(i + 1, "o");
-            increment++;
-            break;
-        case 0x212A:
-            sb.setCharAt(i, 'K');
-            break;
-        case 0x212B:
-            sb.setCharAt(i, (char) 0x00C5);
-            break;
-        default:
-            // nothing
+        if (LETTER_LIKE_SYMBOL_DATA.containsKey(ch)) {
+            sb.setCharAt(i, LETTER_LIKE_SYMBOL_DATA.get(ch).charAt(0));
+            for (int j = 1; j < LETTER_LIKE_SYMBOL_DATA.get(ch).length(); j++) {
+                sb.insert(i + j, LETTER_LIKE_SYMBOL_DATA.get(ch).charAt(j));
+                increment++;
+            }
         }
         return increment;
     }
 
+    private static final int MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR = 0x3371;
+    private static final int MAX_SQUARED_LATIN_ABBREVIATIONS2_CHAR = 0x33DF;
+
     private static int replaceSquaredLatinAbbreviations(int ch, StringBuilder sb, int i) {
         int increment = 0;
-        switch (ch) {
-        // Squared Latin Abbreviations 1
-        case 0x3371:
-            sb.setCharAt(i, 'h');
-            sb.insert(i + 1, "Pa");
-            increment += 2;
-            break;
-        case 0x3372:
-            sb.setCharAt(i, 'd');
-            sb.insert(i + 1, "a");
-            increment++;
-            break;
-        case 0x3373:
-            sb.setCharAt(i, 'A');
-            sb.insert(i + 1, "U");
-            increment++;
-            break;
-        case 0x3374:
-            sb.setCharAt(i, 'b');
-            sb.insert(i + 1, "ar");
-            increment += 2;
-            break;
-        case 0x3375:
-            sb.setCharAt(i, 'o');
-            sb.insert(i + 1, "V");
-            increment++;
-            break;
-        case 0x3376:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, "c");
-            increment++;
-            break;
-        case 0x3377:
-            sb.setCharAt(i, 'd');
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x3378:
-            sb.setCharAt(i, 'd');
-            sb.insert(i + 1, SQUARE_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x3379:
-            sb.setCharAt(i, 'd');
-            sb.insert(i + 1, CUBIC_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x337A:
-            sb.setCharAt(i, 'I');
-            sb.insert(i + 1, "U");
-            increment++;
-            break;
-        // Squared Latin Abbreviations 2
-        case 0x3380:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, "A");
-            increment++;
-            break;
-        case 0x3381:
-            sb.setCharAt(i, 'n');
-            sb.insert(i + 1, "A");
-            increment++;
-            break;
-        case 0x3382:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, "A");
-            increment++;
-            break;
-        case 0x3383:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "A");
-            increment++;
-            break;
-        case 0x3384:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "A");
-            increment++;
-            break;
-        case 0x3385:
-            sb.setCharAt(i, 'K');
-            sb.insert(i + 1, "B");
-            increment++;
-            break;
-        case 0x3386:
-            sb.setCharAt(i, 'M');
-            sb.insert(i + 1, "B");
-            increment++;
-            break;
-        case 0x3387:
-            sb.setCharAt(i, 'G');
-            sb.insert(i + 1, "B");
-            increment++;
-            break;
-        case 0x3388:
-            sb.setCharAt(i, 'c');
-            sb.insert(i + 1, "al");
-            increment += 2;
-            break;
-        case 0x3389:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "cal");
-            increment += 3;
-            break;
-        case 0x338A:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, "F");
-            increment++;
-            break;
-        case 0x338B:
-            sb.setCharAt(i, 'n');
-            sb.insert(i + 1, "F");
-            increment++;
-            break;
-        case 0x338C:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, "F");
-            increment++;
-            break;
-        case 0x338D:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, "g");
-            increment++;
-            break;
-        case 0x338E:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "g");
-            increment++;
-            break;
-        case 0x338F:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "g");
-            increment++;
-            break;
-        case 0x3390:
-            sb.setCharAt(i, 'H');
-            sb.insert(i + 1, "z");
-            increment++;
-            break;
-        case 0x3391:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "Hz");
-            increment += 2;
-            break;
-        case 0x3392:
-            sb.setCharAt(i, 'M');
-            sb.insert(i + 1, "Hz");
-            increment += 2;
-            break;
-        case 0x3393:
-            sb.setCharAt(i, 'G');
-            sb.insert(i + 1, "Hz");
-            increment += 2;
-            break;
-        case 0x3394:
-            sb.setCharAt(i, 'T');
-            sb.insert(i + 1, "Hz");
-            increment += 2;
-            break;
-        case 0x3395:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, LITER_SYMBOL);
-            increment++;
-            break;
-        case 0x3396:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, LITER_SYMBOL);
-            increment++;
-            break;
-        case 0x3397:
-            sb.setCharAt(i, 'd');
-            sb.insert(i + 1, LITER_SYMBOL);
-            increment++;
-            break;
-        case 0x3398:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, LITER_SYMBOL);
-            increment++;
-            break;
-        case 0x3399:
-            sb.setCharAt(i, 'f');
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x339A:
-            sb.setCharAt(i, 'n');
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x339B:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x339C:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x339D:
-            sb.setCharAt(i, 'c');
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x339E:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x339F:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, SQUARE_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x33A0:
-            sb.setCharAt(i, 'c');
-            sb.insert(i + 1, SQUARE_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x33A1:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "\u00B2");
-            increment++;
-            break;
-        case 0x33A2:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, SQUARE_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x33A3:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, CUBIC_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x33A4:
-            sb.setCharAt(i, 'c');
-            sb.insert(i + 1, CUBIC_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x33A5:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "\u00B3");
-            increment++;
-            break;
-        case 0x33A6:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, CUBIC_METER_SYMBOL);
-            increment += 2;
-            break;
-        case 0x33A7:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "/s");
-            increment += 2;
-            break;
-        case 0x33A8:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "/s\u00B2");
-            increment += 3;
-            break;
-        case 0x33A9:
-            sb.setCharAt(i, 'P');
-            sb.insert(i + 1, "a");
-            increment++;
-            break;
-        case 0x33AA:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "Pa");
-            increment += 2;
-            break;
-        case 0x33AB:
-            sb.setCharAt(i, 'M');
-            sb.insert(i + 1, "Pa");
-            increment += 2;
-            break;
-        case 0x33AC:
-            sb.setCharAt(i, 'G');
-            sb.insert(i + 1, "Pa");
-            increment += 2;
-            break;
-        case 0x33AD:
-            sb.setCharAt(i, 'r');
-            sb.insert(i + 1, "ad");
-            increment += 2;
-            break;
-        case 0x33AE:
-            sb.setCharAt(i, 'r');
-            sb.insert(i + 1, "ad/s");
-            increment += 4;
-            break;
-        case 0x33AF:
-            sb.setCharAt(i, 'r');
-            sb.insert(i + 1, "ad/s\u00B2");
-            increment += 5;
-            break;
-        case 0x33B0:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, "s");
-            increment++;
-            break;
-        case 0x33B1:
-            sb.setCharAt(i, 'n');
-            sb.insert(i + 1, "s");
-            increment++;
-            break;
-        case 0x33B2:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, "s");
-            increment++;
-            break;
-        case 0x33B3:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "s");
-            increment++;
-            break;
-        case 0x33B4:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, "V");
-            increment++;
-            break;
-        case 0x33B5:
-            sb.setCharAt(i, 'n');
-            sb.insert(i + 1, "V");
-            increment++;
-            break;
-        case 0x33B6:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, "V");
-            increment++;
-            break;
-        case 0x33B7:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "V");
-            increment++;
-            break;
-        case 0x33B8:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "V");
-            increment++;
-            break;
-        case 0x33B9:
-            sb.setCharAt(i, 'M');
-            sb.insert(i + 1, "V");
-            increment++;
-            break;
-        case 0x33BA:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, "W");
-            increment++;
-            break;
-        case 0x33BB:
-            sb.setCharAt(i, 'n');
-            sb.insert(i + 1, "W");
-            increment++;
-            break;
-        case 0x33BC:
-            sb.setCharAt(i, (char) 0x03BC);
-            sb.insert(i + 1, "W");
-            increment++;
-            break;
-        case 0x33BD:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "W");
-            increment++;
-            break;
-        case 0x33BE:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "W");
-            increment++;
-            break;
-        case 0x33BF:
-            sb.setCharAt(i, 'M');
-            sb.insert(i + 1, "W");
-            increment++;
-            break;
-        case 0x33C0:
-            sb.setCharAt(i, 'k');
-            sb.insert(i + 1, "\u03A9");
-            increment++;
-            break;
-        case 0x33C1:
-            sb.setCharAt(i, 'M');
-            sb.insert(i + 1, "\u03A9");
-            increment++;
-            break;
-        case 0x33C2:
-            sb.setCharAt(i, 'a');
-            sb.insert(i + 1, ".m.");
-            increment += 3;
-            break;
-        case 0x33C3:
-            sb.setCharAt(i, 'B');
-            sb.insert(i + 1, "q");
-            increment++;
-            break;
-        case 0x33C4:
-            sb.setCharAt(i, 'c');
-            sb.insert(i + 1, "c");
-            increment++;
-            break;
-        case 0x33C5:
-            sb.setCharAt(i, 'c');
-            sb.insert(i + 1, "d");
-            increment++;
-            break;
-        case 0x33C6:
-            sb.setCharAt(i, 'C');
-            sb.insert(i + 1, "/kg");
-            increment += 3;
-            break;
-        case 0x33C7:
-            sb.setCharAt(i, 'C');
-            sb.insert(i + 1, "o.");
-            increment += 2;
-            break;
-        case 0x33C8:
-            sb.setCharAt(i, 'd');
-            sb.insert(i + 1, "B");
-            increment++;
-            break;
-        case 0x33C9:
-            sb.setCharAt(i, 'G');
-            sb.insert(i + 1, "y");
-            increment++;
-            break;
-        case 0x33CA:
-            sb.setCharAt(i, 'h');
-            sb.insert(i + 1, "a");
-            increment++;
-            break;
-        case 0x33CB:
-            sb.setCharAt(i, 'H');
-            sb.insert(i + 1, "P");
-            increment++;
-            break;
-        case 0x33CC:
-            sb.setCharAt(i, 'i');
-            sb.insert(i + 1, "n");
-            increment++;
-            break;
-        case 0x33CD:
-            sb.setCharAt(i, 'K');
-            sb.insert(i + 1, "K");
-            increment++;
-            break;
-        case 0x33CE:
-            sb.setCharAt(i, 'K');
-            sb.insert(i + 1, "M");
-            increment++;
-            break;
-        case 0x33CF:
-            sb.setCharAt(i, 'K');
-            sb.insert(i + 1, "t");
-            increment++;
-            break;
-        case 0x33D0:
-            sb.setCharAt(i, 'l');
-            sb.insert(i + 1, "m");
-            increment++;
-            break;
-        case 0x33D1:
-            sb.setCharAt(i, 'l');
-            sb.insert(i + 1, "n");
-            increment++;
-            break;
-        case 0x33D2:
-            sb.setCharAt(i, 'l');
-            sb.insert(i + 1, "og");
-            increment += 2;
-            break;
-        case 0x33D3:
-            sb.setCharAt(i, 'l');
-            sb.insert(i + 1, "x");
-            increment++;
-            break;
-        case 0x33D4:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "b");
-            increment++;
-            break;
-        case 0x33D5:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "il");
-            increment += 2;
-            break;
-        case 0x33D6:
-            sb.setCharAt(i, 'm');
-            sb.insert(i + 1, "ol");
-            increment += 2;
-            break;
-        case 0x33D7:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, "H");
-            increment++;
-            break;
-        case 0x33D8:
-            sb.setCharAt(i, 'p');
-            sb.insert(i + 1, ".m.");
-            increment += 3;
-            break;
-        case 0x33D9:
-            sb.setCharAt(i, 'P');
-            sb.insert(i + 1, "PM");
-            increment += 2;
-            break;
-        case 0x33DA:
-            sb.setCharAt(i, 'P');
-            sb.insert(i + 1, "R");
-            increment++;
-            break;
-        case 0x33DB:
-            sb.setCharAt(i, 's');
-            sb.insert(i + 1, "r");
-            increment++;
-            break;
-        case 0x33DC:
-            sb.setCharAt(i, 'S');
-            sb.insert(i + 1, "v");
-            increment++;
-            break;
-        case 0x33DD:
-            sb.setCharAt(i, 'W');
-            sb.insert(i + 1, "b");
-            increment++;
-            break;
-        case 0x33DE:
-            sb.setCharAt(i, 'v');
-            sb.insert(i + 1, "/m");
-            increment += 2;
-            break;
-        case 0x33DF:
-            sb.setCharAt(i, 'a');
-            sb.insert(i + 1, "/m");
-            increment += 2;
-            break;
+        final String[] SQUARD_LATIN_ABBREVIATION_DATA = new String[] {
+                /* 0x3371 */ "hPa", "da", "AU", "bar", "oV", "pc", "dm", "d" + SQUARE_METER_SYMBOL,
+                /* 0x3378 */ "d" + CUBIC_METER_SYMBOL, "IU", null, null, null, null, null,
+                /* 0x3380 */ "pA", "nA", "μA", "mA", "kA", "KB", "MB", "GB",
+                /* 0x3388 */ "cal", "kcal", "pF", "nF", "μF", "μg", "mg", "kg",
+                /* 0x3390 */ "Hz", "kHz", "MHz", "GHz", "THz", "μ" + LITER_SYMBOL, "m" + LITER_SYMBOL,
+                "d" + LITER_SYMBOL, /* 0x3398 */ "k" + LITER_SYMBOL, "fm", "nm", "μm", "mm", "cm", "km",
+                "m" + SQUARE_METER_SYMBOL, /* 0x33A0 */ "c" + SQUARE_METER_SYMBOL, "m²",
+                "k" + SQUARE_METER_SYMBOL, "m" + CUBIC_METER_SYMBOL, "c" + CUBIC_METER_SYMBOL, "m³",
+                "k" + CUBIC_METER_SYMBOL, "m/s", /* 0x33A8 */ "m/s²", "Pa", "kPa", "MPa", "GPa", "rad",
+                "rad/s", "rad/s²", /* 0x33B0 */ "Ps", "ns", "μs", "ms", "pV", "nV", "μV", "mV",
+                /* 0x33B8 */ "kV", "MV", "pW", "nW", "μW", "mW", "kW", "MW",
+                /* 0x33C0 */ "kΩ", "MΩ", "a.m.", "Bq", "cc", "cd", "C/kg", "Co.",
+                /* 0x33C8 */ "dB", "Gy", "ha", "HP", "in", "KK", "KM", "Kt",
+                /* 0x33D0 */ "lm", "ln", "log", "lx", "mb", "mil", "mol", "pH",
+                /* 0x33D8 */ "p.m.", "PPM", "PR", "sr", "Sv", "Wb", "v/m", "a/m" };
+        // Squared Latin Abbreviations 1 and 2
+        if (ch >= MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR && ch <= MAX_SQUARED_LATIN_ABBREVIATIONS2_CHAR) {
+            String repl = SQUARD_LATIN_ABBREVIATION_DATA[ch - MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR];
+            if (repl != null) {
+                sb.setCharAt(i, repl.charAt(0));
+                for (int j = 1; j < repl.length(); j++) {
+                    sb.insert(i + j, repl.charAt(j));
+                    increment++;
+                }
+            }
+        }
         // Squared Latin Abbreviations 3
-        case 0x33FF:
+        if (ch == 0x33FF) {
             sb.setCharAt(i, 'g');
             sb.insert(i + 1, "al");
             increment += 2;
-            break;
-        default:
-            // nothing
         }
         return increment;
     }
-    // CHECKSTYLE:ON
 
     /**
      * Strip whitespace from the end of a string. Uses

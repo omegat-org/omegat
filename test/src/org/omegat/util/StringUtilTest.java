@@ -638,4 +638,39 @@ public class StringUtilTest {
         StringUtil.processKatakana(sb.charAt(0), sb, 0);
         assertEquals("\u3000", sb.toString()); // No conversion
     }
+
+    @Test
+    public void testProcessHungle() {
+        StringBuilder sb = new StringBuilder();
+
+        // Test valid Hangul compatibility characters
+        sb.append('\uFFA0'); // Compatibility filler
+        StringUtil.processHungle(sb.charAt(0), sb, 0);
+        assertEquals("\u3164", sb.toString()); // Ensure it's replaced correctly
+
+        sb = new StringBuilder();
+        sb.append('\uFFDA'); // First valid Hangul char in the range
+        StringUtil.processHungle(sb.charAt(0), sb, 0);
+        assertEquals("\u3161", sb.toString()); // Valid replacement
+
+        sb = new StringBuilder();
+        sb.append('\uFFE8'); // Last valid Hangul char in the range
+        StringUtil.processHungle(sb.charAt(0), sb, 0);
+        assertEquals("\u25CB", sb.toString()); // Valid replacement
+    }
+
+    @Test
+    public void testProcessHungleInvalidChars() {
+        StringBuilder sb = new StringBuilder();
+
+        // Test invalid character (outside the Hangul range)
+        sb.append('\u0041'); // 'A'
+        StringUtil.processHungle(sb.charAt(0), sb, 0);
+        assertEquals("A", sb.toString()); // No replacement
+
+        sb = new StringBuilder();
+        sb.append('\uFFDC'); // Hangul character in range with 0 replacement
+        StringUtil.processHungle(sb.charAt(0), sb, 0);
+        assertEquals("\uFFDC", sb.toString()); // No replacement
+    }
 }

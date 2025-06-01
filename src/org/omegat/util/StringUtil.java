@@ -40,6 +40,7 @@ import java.text.MessageFormat;
 import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -825,43 +826,51 @@ public final class StringUtil {
 
     private static final int MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR = 0x3371;
     private static final int MAX_SQUARED_LATIN_ABBREVIATIONS2_CHAR = 0x33DF;
+    private static final int SPECIAL_SQUARED_LATIN_ABBREVIATION_CHAR = 0x33FF;
+
+    private static final List<String> SQUARED_LATIN_ABBREVIATION_DATA = Collections.unmodifiableList(Arrays.asList(
+            /* 0x3371 */ "hPa", "da", "AU", "bar", "oV", "pc", "dm", "d" + SQUARE_METER_SYMBOL,
+            /* 0x3378 */ "d" + CUBIC_METER_SYMBOL, "IU", null, null, null, null, null,
+            /* 0x3380 */ "pA", "nA", "μA", "mA", "kA", "KB", "MB", "GB",
+            /* 0x3388 */ "cal", "kcal", "pF", "nF", "μF", "μg", "mg", "kg",
+            /* 0x3390 */ "Hz", "kHz", "MHz", "GHz", "THz", "μ" + LITER_SYMBOL, "m" + LITER_SYMBOL,
+            "d" + LITER_SYMBOL, /* 0x3398 */ "k" + LITER_SYMBOL, "fm", "nm", "μm", "mm", "cm", "km",
+            "m" + SQUARE_METER_SYMBOL, /* 0x33A0 */ "c" + SQUARE_METER_SYMBOL, "m²",
+            "k" + SQUARE_METER_SYMBOL, "m" + CUBIC_METER_SYMBOL, "c" + CUBIC_METER_SYMBOL, "m³",
+            "k" + CUBIC_METER_SYMBOL, "m/s", /* 0x33A8 */ "m/s²", "Pa", "kPa", "MPa", "GPa", "rad",
+            "rad/s", "rad/s²", /* 0x33B0 */ "Ps", "ns", "μs", "ms", "pV", "nV", "μV", "mV",
+            /* 0x33B8 */ "kV", "MV", "pW", "nW", "μW", "mW", "kW", "MW",
+            /* 0x33C0 */ "kΩ", "MΩ", "a.m.", "Bq", "cc", "cd", "C/kg", "Co.",
+            /* 0x33C8 */ "dB", "Gy", "ha", "HP", "in", "KK", "KM", "Kt",
+            /* 0x33D0 */ "lm", "ln", "log", "lx", "mb", "mil", "mol", "pH",
+            /* 0x33D8 */ "p.m.", "PPM", "PR", "sr", "Sv", "Wb", "v/m", "a/m"
+    ));
 
     private static int replaceSquaredLatinAbbreviations(int ch, StringBuilder sb, int i) {
-        int increment = 0;
-        final String[] SQUARD_LATIN_ABBREVIATION_DATA = new String[] {
-                /* 0x3371 */ "hPa", "da", "AU", "bar", "oV", "pc", "dm", "d" + SQUARE_METER_SYMBOL,
-                /* 0x3378 */ "d" + CUBIC_METER_SYMBOL, "IU", null, null, null, null, null,
-                /* 0x3380 */ "pA", "nA", "μA", "mA", "kA", "KB", "MB", "GB",
-                /* 0x3388 */ "cal", "kcal", "pF", "nF", "μF", "μg", "mg", "kg",
-                /* 0x3390 */ "Hz", "kHz", "MHz", "GHz", "THz", "μ" + LITER_SYMBOL, "m" + LITER_SYMBOL,
-                "d" + LITER_SYMBOL, /* 0x3398 */ "k" + LITER_SYMBOL, "fm", "nm", "μm", "mm", "cm", "km",
-                "m" + SQUARE_METER_SYMBOL, /* 0x33A0 */ "c" + SQUARE_METER_SYMBOL, "m²",
-                "k" + SQUARE_METER_SYMBOL, "m" + CUBIC_METER_SYMBOL, "c" + CUBIC_METER_SYMBOL, "m³",
-                "k" + CUBIC_METER_SYMBOL, "m/s", /* 0x33A8 */ "m/s²", "Pa", "kPa", "MPa", "GPa", "rad",
-                "rad/s", "rad/s²", /* 0x33B0 */ "Ps", "ns", "μs", "ms", "pV", "nV", "μV", "mV",
-                /* 0x33B8 */ "kV", "MV", "pW", "nW", "μW", "mW", "kW", "MW",
-                /* 0x33C0 */ "kΩ", "MΩ", "a.m.", "Bq", "cc", "cd", "C/kg", "Co.",
-                /* 0x33C8 */ "dB", "Gy", "ha", "HP", "in", "KK", "KM", "Kt",
-                /* 0x33D0 */ "lm", "ln", "log", "lx", "mb", "mil", "mol", "pH",
-                /* 0x33D8 */ "p.m.", "PPM", "PR", "sr", "Sv", "Wb", "v/m", "a/m" };
         // Squared Latin Abbreviations 1 and 2
         if (ch >= MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR && ch <= MAX_SQUARED_LATIN_ABBREVIATIONS2_CHAR) {
-            String repl = SQUARD_LATIN_ABBREVIATION_DATA[ch - MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR];
-            if (repl != null) {
-                sb.setCharAt(i, repl.charAt(0));
-                for (int j = 1; j < repl.length(); j++) {
-                    sb.insert(i + j, repl.charAt(j));
-                    increment++;
-                }
-            }
+            return processLatinAbbreviationRange(ch, sb, i);
         }
         // Squared Latin Abbreviations 3
-        if (ch == 0x33FF) {
+        if (ch == SPECIAL_SQUARED_LATIN_ABBREVIATION_CHAR) {
             sb.setCharAt(i, 'g');
             sb.insert(i + 1, "al");
-            increment += 2;
+            return 2;
         }
-        return increment;
+        return 0;
+    }
+
+    private static int processLatinAbbreviationRange(int ch, StringBuilder sb, int i) {
+        String replacement = SQUARED_LATIN_ABBREVIATION_DATA.get(ch - MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR);
+        if (replacement == null) {
+            return 0;
+        }
+
+        sb.setCharAt(i, replacement.charAt(0));
+        for (int j = 1; j < replacement.length(); j++) {
+            sb.insert(i + j, replacement.charAt(j));
+        }
+        return replacement.length() - 1;
     }
 
     /**

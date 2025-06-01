@@ -779,7 +779,7 @@ public final class StringUtil {
             /* 0xFF90 */ 0x30DF, 0x30E0, 0x30E1, 0x30E2, 0x30E4, 0x30E6, 0x30E8, 0x30E9,
             /* 0xFF98 */ 0x30EA, 0x30EB, 0x30EC, 0x30ED, 0x30EF, 0x30F3, 0x3099, 0x309A };
 
-    private static void processKatakana(int ch, StringBuilder sb, int i) {
+    static void processKatakana(int ch, StringBuilder sb, int i) {
         if (ch >= 0xFF61 && ch <= 0xFF9F) {
             sb.setCharAt(i, (char) KATAKANA_DATA[ch - 0xFF61]);
         }
@@ -846,7 +846,7 @@ public final class StringUtil {
             /* 0x33D8 */ "p.m.", "PPM", "PR", "sr", "Sv", "Wb", "v/m", "a/m"
     ));
 
-    private static int replaceSquaredLatinAbbreviations(int ch, StringBuilder sb, int i) {
+    static int replaceSquaredLatinAbbreviations(int ch, StringBuilder sb, int i) {
         // Squared Latin Abbreviations 1 and 2
         if (ch >= MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR && ch <= MAX_SQUARED_LATIN_ABBREVIATIONS2_CHAR) {
             return processLatinAbbreviationRange(ch, sb, i);

@@ -28,17 +28,17 @@
 
 package org.omegat.util;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import org.junit.Test;
 
 /**
  * Tests for (some) static utility methods.
@@ -555,5 +555,87 @@ public class StringUtilTest {
         assertEquals(1, StringUtil.compareToNullable("b", "a"));
         assertEquals(32, StringUtil.compareToNullable("a", "A"));
         assertEquals(-32, StringUtil.compareToNullable("A", "a"));
+    }
+
+    @Test
+    public void testReplaceSquaredLatinAbbreviations() {
+        StringBuilder sb = new StringBuilder();
+
+        // Test valid squared Latin abbreviations
+        sb.append('\u3371'); // hPa
+        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
+        assertEquals("hPa", sb.toString());
+
+        sb = new StringBuilder();
+        sb.append('\u33FF'); // gal
+        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
+        assertEquals("gal", sb.toString());
+
+        // Test valid squared Latin abbreviations with multiple replacements
+        sb = new StringBuilder();
+        sb.append('㎤'); // cm3
+        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
+        assertEquals("cm³", sb.toString());
+
+        // Test valid squared Latin abbreviations in edge case
+        sb = new StringBuilder();
+        sb.append('㏟'); // 0x33DF
+        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
+        assertEquals("a/m", sb.toString());
+
+        // Test non-squared Latin abbreviations (no replacement)
+        sb = new StringBuilder("A");
+        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
+        assertEquals("A", sb.toString());
+
+        // Test invalid code point outside range (no replacement)
+        sb = new StringBuilder(Character.toString((char) 0x3360)); // Outside abbreviation range
+        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
+        assertEquals(Character.toString((char) 0x3360), sb.toString());
+
+        // Test null handling
+        try {
+            StringUtil.replaceSquaredLatinAbbreviations(0x3372, null, 0);
+            fail("Expected NullPointerException");
+        } catch (NullPointerException ex) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testProcessKatakana() {
+        StringBuilder sb = new StringBuilder();
+
+        // Test valid Half-width Katakana
+        sb.append('\uFF76'); // Half-width "Ka"
+        StringUtil.processKatakana(sb.charAt(0), sb, 0);
+        assertEquals("\u30AB", sb.toString()); // Full-width "Ka"
+
+        sb = new StringBuilder();
+        sb.append('\uFF9E'); // Half-width "Voicing mark"
+        StringUtil.processKatakana(sb.charAt(0), sb, 0);
+        assertEquals("\u3099", sb.toString()); // Full-width "Voicing mark"
+
+        sb = new StringBuilder();
+        // Combine Katakana and symbols
+        sb.append('\uFF76').append('\uFF9E'); // Half-width "Ka" + "Voicing mark" -> "Ga"
+        StringUtil.processKatakana(sb.charAt(0), sb, 0);
+        StringUtil.processKatakana(sb.charAt(1), sb, 1);
+        assertEquals("\u30AB\u3099", sb.toString()); // Full-width "Ga"
+    }
+
+    @Test
+    public void testProcessKatakanaInvalidChars() {
+        StringBuilder sb = new StringBuilder();
+
+        // Test invalid character (outside Half-width Katakana range)
+        sb.append('\u0041'); // 'A'
+        StringUtil.processKatakana(sb.charAt(0), sb, 0);
+        assertEquals("A", sb.toString()); // No conversion
+
+        sb = new StringBuilder();
+        sb.append('\u3000'); // Full-width space
+        StringUtil.processKatakana(sb.charAt(0), sb, 0);
+        assertEquals("\u3000", sb.toString()); // No conversion
     }
 }

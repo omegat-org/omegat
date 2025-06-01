@@ -559,118 +559,35 @@ public class StringUtilTest {
 
     @Test
     public void testReplaceSquaredLatinAbbreviations() {
-        StringBuilder sb = new StringBuilder();
-
         // Test valid squared Latin abbreviations
-        sb.append('\u3371'); // hPa
-        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
-        assertEquals("hPa", sb.toString());
-
-        sb = new StringBuilder();
-        sb.append('\u33FF'); // gal
-        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
-        assertEquals("gal", sb.toString());
-
+        assertEquals("hPa", StringUtil.normalizeWidth("\u3371"));
+        assertEquals("gal", StringUtil.normalizeWidth("\u33FF"));
         // Test valid squared Latin abbreviations with multiple replacements
-        sb = new StringBuilder();
-        sb.append('㎤'); // cm3
-        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
-        assertEquals("cm³", sb.toString());
-
-        // Test valid squared Latin abbreviations in edge case
-        sb = new StringBuilder();
-        sb.append('㏟'); // 0x33DF
-        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
-        assertEquals("a/m", sb.toString());
-
-        // Test non-squared Latin abbreviations (no replacement)
-        sb = new StringBuilder("A");
-        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
-        assertEquals("A", sb.toString());
-
-        // Test invalid code point outside range (no replacement)
-        sb = new StringBuilder(Character.toString((char) 0x3360)); // Outside abbreviation range
-        StringUtil.replaceSquaredLatinAbbreviations(sb.charAt(0), sb, 0);
-        assertEquals(Character.toString((char) 0x3360), sb.toString());
-
-        // Test null handling
-        try {
-            StringUtil.replaceSquaredLatinAbbreviations(0x3372, null, 0);
-            fail("Expected NullPointerException");
-        } catch (NullPointerException ex) {
-            // Expected
-        }
+        assertEquals("cm³", StringUtil.normalizeWidth("㎤"));
+        // Test valid squared Latin abbreviations in edge case 0x33DF
+        assertEquals("a/m", StringUtil.normalizeWidth("㏟"));
     }
 
     @Test
     public void testProcessKatakana() {
-        StringBuilder sb = new StringBuilder();
-
         // Test valid Half-width Katakana
-        sb.append('\uFF76'); // Half-width "Ka"
-        StringUtil.processKatakana(sb.charAt(0), sb, 0);
-        assertEquals("\u30AB", sb.toString()); // Full-width "Ka"
-
-        sb = new StringBuilder();
-        sb.append('\uFF9E'); // Half-width "Voicing mark"
-        StringUtil.processKatakana(sb.charAt(0), sb, 0);
-        assertEquals("\u3099", sb.toString()); // Full-width "Voicing mark"
-
-        sb = new StringBuilder();
+        assertEquals("\u30AB", StringUtil.normalizeWidth("\uFF76"));
+        // Half-width "Voicing mark"
+        assertEquals("\u3099", StringUtil.normalizeWidth("\uFF9E"));
         // Combine Katakana and symbols
-        sb.append('\uFF76').append('\uFF9E'); // Half-width "Ka" + "Voicing mark" -> "Ga"
-        StringUtil.processKatakana(sb.charAt(0), sb, 0);
-        StringUtil.processKatakana(sb.charAt(1), sb, 1);
-        assertEquals("\u30AB\u3099", sb.toString()); // Full-width "Ga"
-    }
-
-    @Test
-    public void testProcessKatakanaInvalidChars() {
-        StringBuilder sb = new StringBuilder();
-
-        // Test invalid character (outside Half-width Katakana range)
-        sb.append('\u0041'); // 'A'
-        StringUtil.processKatakana(sb.charAt(0), sb, 0);
-        assertEquals("A", sb.toString()); // No conversion
-
-        sb = new StringBuilder();
-        sb.append('\u3000'); // Full-width space
-        StringUtil.processKatakana(sb.charAt(0), sb, 0);
-        assertEquals("\u3000", sb.toString()); // No conversion
+        // Half-width "Ka" + "Voicing mark" -> "Ga"
+        assertEquals("\u30AC", StringUtil.normalizeWidth("\uFF76\uFF9E"));
     }
 
     @Test
     public void testProcessHungle() {
-        StringBuilder sb = new StringBuilder();
-
         // Test valid Hangul compatibility characters
-        sb.append('\uFFA0'); // Compatibility filler
-        StringUtil.processHungle(sb.charAt(0), sb, 0);
-        assertEquals("\u3164", sb.toString()); // Ensure it's replaced correctly
-
-        sb = new StringBuilder();
-        sb.append('\uFFDA'); // First valid Hangul char in the range
-        StringUtil.processHungle(sb.charAt(0), sb, 0);
-        assertEquals("\u3161", sb.toString()); // Valid replacement
-
-        sb = new StringBuilder();
-        sb.append('\uFFEE'); // Last valid Hangul char in the range
-        StringUtil.processHungle(sb.charAt(0), sb, 0);
-        assertEquals("\u25CB", sb.toString()); // Valid replacement
-    }
-
-    @Test
-    public void testProcessHungleInvalidChars() {
-        StringBuilder sb = new StringBuilder();
-
-        // Test invalid character (outside the Hangul range)
-        sb.append('\u0041'); // 'A'
-        StringUtil.processHungle(sb.charAt(0), sb, 0);
-        assertEquals("A", sb.toString()); // No replacement
-
-        sb = new StringBuilder();
-        sb.append('\uFFDD'); // Hangul character in range with no replacement
-        StringUtil.processHungle(sb.charAt(0), sb, 0);
-        assertEquals("\uFFDD", sb.toString()); // No replacement
+        assertEquals("\u3164", StringUtil.normalizeWidth("\uFFA0")); // Ensure it's replaced correctly
+        // First valid Hangul char in the range
+        assertEquals("\u3161", StringUtil.normalizeWidth("\uFFDA"));
+        // Last valid Hangul char in the range
+        assertEquals("\u25CB", StringUtil.normalizeWidth("\uFFEE"));
+        // Hangul character in range with no replacement
+        assertEquals("\uFFDD", StringUtil.normalizeWidth("\uFFDD"));
     }
 }

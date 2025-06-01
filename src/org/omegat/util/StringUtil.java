@@ -753,7 +753,7 @@ public final class StringUtil {
                 i++;
                 continue;
             }
-            processHungle(ch, sb, i);
+            processHangle(ch, sb, i);
             i += processLetterLikeSymbol(ch, sb, i);
             i += replaceSquaredLatinAbbreviations(ch, sb, i);
             i++;
@@ -789,7 +789,7 @@ public final class StringUtil {
             /* no conversion from 0xFFDD to 0xFFE7 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             /* Others from 0xFFE8 */ 0x2502, 0x2190, 0x2191, 0x2192, 0x2193, 0x25A0, 0x25CB };
 
-    static void processHungle(int ch, StringBuilder sb, int i) {
+    private static void processHangle(int ch, StringBuilder sb, int i) {
         if (ch == 0xFFA0) {
             sb.setCharAt(i, (char) 0x3164);
         } else if (ch >= 0xFFDA && ch <= 0xFFEE && HUNGLE_DATA[ch - 0xFFDA] != 0) {
@@ -847,7 +847,7 @@ public final class StringUtil {
             /* 0x33D8 */ "p.m.", "PPM", "PR", "sr", "Sv", "Wb", "v/m", "a/m"
     ));
 
-    static int replaceSquaredLatinAbbreviations(int ch, StringBuilder sb, int i) {
+    private static int replaceSquaredLatinAbbreviations(int ch, StringBuilder sb, int i) {
         // Squared Latin Abbreviations 1 and 2
         if (ch >= MIN_SQUARED_LATIN_ABBREVIATIONS_CHAR && ch <= MAX_SQUARED_LATIN_ABBREVIATIONS2_CHAR) {
             return processLatinAbbreviationRange(ch, sb, i);

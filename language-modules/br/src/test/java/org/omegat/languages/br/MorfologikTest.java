@@ -50,7 +50,6 @@ import org.omegat.util.TestPreferencesInitializer;
 public class MorfologikTest {
 
     private static final String LANGUAGE = "br_FR";
-    private static final String GOOD = "Salud deoc'h";
     private static Path tmpDir;
 
     @BeforeClass
@@ -77,8 +76,7 @@ public class MorfologikTest {
         });
         ISpellChecker checker = new MorfologikSpellchecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
-        // FIXME
-        // assertThat(checker.isCorrect(GOOD)).as("Spell check for correct word").isTrue();
+        assertThat(checker.isCorrect("Breizh")).as("Spell check for correct word").isTrue();
     }
 
 }

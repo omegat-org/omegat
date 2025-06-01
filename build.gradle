@@ -53,6 +53,7 @@ sourceSets {
     main {
         java {
             srcDir 'src'
+            srcDir tasks.genJAXB.outputs
         }
         resources {
             srcDir 'src'
@@ -134,9 +135,13 @@ dependencies {
             exclude module: 'language-detector'
             exclude group: 'com.google.android'
             exclude module: 'hunspell'
+            exclude module: 'json'
+            exclude module: 'protobuf-java'
         }
         runtimeOnly(libs.language.detector)
         runtimeOnly(libs.dumont.hunspell)
+        runtimeOnly(libs.json)
+        runtimeOnly(libs.protobuf)
         implementation(libs.icu4j)
 
         // Lucene for tokenizers
@@ -217,7 +222,11 @@ dependencies {
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
         exclude module: "hunspell"
+        exclude module: "json"
+        exclude module: "protobuf"
     }
+    testRuntimeOnly(libs.json)
+    testRuntimeOnly(libs.protobuf)
     testRuntimeOnly(libs.bundles.groovy)
     testRuntimeOnly(libs.nashorn.core)
     testRuntimeOnly(libs.slf4j.jdk14)
@@ -233,6 +242,7 @@ dependencies {
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
+    testIntegrationImplementation(libs.slf4j.api)
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
     // workdir classifiers are hard-coded in gralde-launch4j plugin
@@ -375,7 +385,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                include 'build-logic/**', 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
                         'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
                         'docs_devel/**', 'scripts/**',
                         'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
@@ -404,7 +414,7 @@ distributions {
 }
 
 tasks.register('mac') {
-    description = 'Build the Mac distributions.'
+    description = 'Builds the Mac distributions.'
     group = 'omegat distribution'
 }
 makeHunspellSignTask()
@@ -412,7 +422,7 @@ makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE, parentTaskName: 
 makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskName: 'mac')
 
 tasks.register('linux') {
-    description = 'Build the Linux distributions.'
+    description = 'Builds the Linux distributions.'
     group = 'omegat distribution'
     dependsOn linuxDebDist
     dependsOn linuxRpmDist
@@ -426,7 +436,7 @@ startScripts.enabled = false
 application.executableDir = ""
 
 tasks.register('win') {
-    description = 'Build the Windows distributions.'
+    description = 'Builds the Windows distributions.'
     group = 'omegat distribution'
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE', parentTask: 'win')

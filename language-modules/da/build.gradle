@@ -17,6 +17,11 @@ dependencies {
             exclude group: 'com.google.android'
             exclude module: 'jackson-databind'
             exclude group: 'org.jetbrains'
+            exclude module: 'commons-lang3'
+            exclude module: 'commons-text'
+            exclude module: 'commons-logging'
+            exclude module: 'json'
+            exclude module: 'protobuf-java'
         }
         implementation(libs.languagetool.da) {
             exclude module: 'languagetool-core'
@@ -26,7 +31,12 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
-    testImplementation(libs.languagetool.core)
+    testImplementation(libs.languagetool.core) {
+        exclude module: 'json'
+        exclude module: 'protobuf-java'
+    }
+    testRuntimeOnly(libs.json)
+    testRuntimeOnly(libs.protobuf)
     testImplementation(project(":spellchecker:hunspell"))
     testRuntimeOnly(libs.commons.io)
 }

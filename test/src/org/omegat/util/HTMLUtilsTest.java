@@ -27,7 +27,10 @@ package org.omegat.util;
 
 import org.junit.Test;
 
+import java.nio.charset.Charset;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class HTMLUtilsTest {
 
@@ -83,14 +86,14 @@ public class HTMLUtilsTest {
 
     @Test
     public void getSpacePostfix() {
-//no whitespace prefix
+        //no whitespace prefix
         assertEquals("", HTMLUtils.getSpacePostfix("a", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u0301", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u00A0", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u2007", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u202F", true));
 
-//all sorts of whitespace characters
+        //all sorts of whitespace characters
         assertEquals("\n", HTMLUtils.getSpacePostfix("a\n", true));
         assertEquals("\r", HTMLUtils.getSpacePostfix("a\r", true));
         assertEquals("\u2028", HTMLUtils.getSpacePostfix("a\u2028", true)); //line separator
@@ -111,6 +114,28 @@ public class HTMLUtilsTest {
         assertEquals("multiple different space types compress to the first whitespace character", "\n", HTMLUtils.getSpacePostfix("a\u0065\u0301" + allWhite, true));
         assertEquals("multiple different whtiespace characters stay that uncompressed", allWhite, HTMLUtils.getSpacePostfix("a\u0065\u0301" + allWhite, false));
 
+    }
+
+    @Test
+    public void testDetectEncoding() throws Exception {
+        // Test with UTF-8
+        String utf8File = "test/data/util/file-HTMLUtils-utf8.html";
+        assertEquals("UTF-8", HTMLUtils.detectEncoding(utf8File, null).name());
+
+        // Test with UTF-16 BE BOM
+        String utf16BEFile = "test/data/util/file-HTMLUtils-utf16_be_with_bom.html";
+        assertEquals("UTF-16BE", HTMLUtils.detectEncoding(utf16BEFile, null).name());
+
+        // Test with UTF-16 LE BOM
+        String utf16LEFile = "test/data/util/file-HTMLUtils-utf16_le_with_bom.html";
+        assertEquals("UTF-16LE", HTMLUtils.detectEncoding(utf16LEFile, null).name());
+
+        // Test with no BOM and default encoding provided
+        String noBomFile = "test/data/util/file-HTMLUtils-no_header_no_bom.html";
+        assertEquals("ISO-8859-1", HTMLUtils.detectEncoding(noBomFile, "ISO-8859-1").name());
+
+        // Test with no BOM and no default encoding
+        assertEquals(Charset.defaultCharset().name(), HTMLUtils.detectEncoding(noBomFile, null).name());
     }
 
 }

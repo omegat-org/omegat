@@ -429,7 +429,7 @@ public final class StringUtil {
      *         is less than, equal to, or greater than the second
      * @deprecated
      */
-    @Deprecated
+    @Deprecated(since = "6.1")
     public static <T extends Comparable<T>> int compareToWithNulls(T v1, T v2) {
         return compareToNullable(v1, v2);
     }
@@ -712,23 +712,30 @@ public final class StringUtil {
     }
 
     /**
-     * Normalize the
-     * <a href="https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms">
-     * width</a> of characters in the supplied text. Specifically:
+     * Normalizes the width of characters in the given text to ensure consistency
+     * in character forms.
+     * <p>
+     * The normalization applies specific transformations based on character types:
      * <ul>
-     * <li>ASCII characters will become halfwidth
-     * <li>Katakana characters will become fullwidth
-     * <li>Hangul will become fullwidth
-     * <li>Letter-like symbols and squared Latin abbreviations will be
-     * decomposed to ASCII
+     *   <li>ASCII characters are converted to their halfwidth forms.</li>
+     *   <li>Katakana characters are converted to their fullwidth forms.</li>
+     *   <li>Hangul characters are converted to their fullwidth forms.</li>
+     *   <li>Letter-like symbols and squared Latin abbreviations are decomposed
+     *       into their ASCII equivalents.</li>
      * </ul>
-     * This method was adapted from <a href=
-     * "https://bitbucket.org/okapiframework/okapi/src/52143104fcfc7eda204d04dfbbc273189f3a7f0f/okapi/steps/fullwidthconversion/src/main/java/net/sf/okapi/steps/fullwidthconversion/FullWidthConversionStep.java">
-     * FullWidthConversionStep.java</a> in the Okapi Framework under GPLv2+.
+     * The concept of halfwidth and fullwidth forms is explained in more detail in the
+     * <a href="https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms">Wikipedia article</a>.
+     * <p>
+     * This method improves modularity and efficiency by replacing the large
+     * switch-case structure used in the original implementation with a table-based
+     * look-up approach.
+     * <p>
+     * Originally adapted from <a href=
+     * "https://gitlab.com/okapiframework/Okapi/-/blob/main/okapi/steps/fullwidthconversion/src/main/java/net/sf/okapi/steps/fullwidthconversion/FullWidthConversionStep.java?ref_type=heads">
+     * FullWidthConversionStep.java</a> in the Okapi Framework licensed under GPLv2+.
      *
-     * @param text
-     *            source text to convert
-     * @return Normalized-width text
+     * @param text the input text to normalize
+     * @return the text with normalized-width characters
      */
     public static String normalizeWidth(String text) {
         StringBuilder sb = new StringBuilder(text);
@@ -737,23 +744,9 @@ public final class StringUtil {
         int i = 0;
         while (i < sb.length()) {
             ch = sb.charAt(i);
-            // ASCII
-            if ((ch >= 0xFF01) && (ch <= 0xFF5E)) {
-                sb.setCharAt(i, (char) (ch - 0xFEE0));
-                i++;
-                continue;
-            }
-            if (ch == 0x00A0 ||  ch == 0x2007 || ch == 0x2008 || ch == 0x2009 || ch == 0x202F || ch == 0x3000 ) {
-                sb.setCharAt(i, ' ');
-            }
+            processAsciiAndSpace(ch, sb, i);
             processKatakana(ch, sb, i);
-            // Hangul
-            if ((ch > 0xFFA1) && (ch <= 0xFFBE)) {
-                sb.setCharAt(i, (char) (ch - 0xCE70));
-                i++;
-                continue;
-            }
-            processHangle(ch, sb, i);
+            processHangul(ch, sb, i);
             i += processLetterLikeSymbol(ch, sb, i);
             i += replaceSquaredLatinAbbreviations(ch, sb, i);
             i++;
@@ -768,6 +761,14 @@ public final class StringUtil {
         }
 
         return normalizeUnicode(result);
+    }
+
+    private static void processAsciiAndSpace(int ch, StringBuilder sb, int i) {
+        if ((ch >= 0xFF01) && (ch <= 0xFF5E)) {
+            sb.setCharAt(i, (char) (ch - 0xFEE0));
+        } else if (ch == 0x00A0 ||  ch == 0x2007 || ch == 0x2008 || ch == 0x2009 || ch == 0x202F || ch == 0x3000 ) {
+                sb.setCharAt(i, ' ');
+        }
     }
 
     private static final int[] KATAKANA_DATA = { /* 0xFF61 */ 0x3002, 0x300C, 0x300D, 0x3001, 0x30FB, 0x30F2,
@@ -785,15 +786,17 @@ public final class StringUtil {
         }
     }
 
-    private static final int[] HUNGLE_DATA = { /* Hungle from 0xFFDA */ 0x3161, 0x3162, 0x3163,
+    private static final int[] HANGUL_DATA = { /* Hangul from 0xFFDA */ 0x3161, 0x3162, 0x3163,
             /* no conversion from 0xFFDD to 0xFFE7 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             /* Others from 0xFFE8 */ 0x2502, 0x2190, 0x2191, 0x2192, 0x2193, 0x25A0, 0x25CB };
 
-    private static void processHangle(int ch, StringBuilder sb, int i) {
+    private static void processHangul(int ch, StringBuilder sb, int i) {
         if (ch == 0xFFA0) {
             sb.setCharAt(i, (char) 0x3164);
-        } else if (ch >= 0xFFDA && ch <= 0xFFEE && HUNGLE_DATA[ch - 0xFFDA] != 0) {
-            sb.setCharAt(i, (char) (HUNGLE_DATA[ch - 0xFFDA]));
+        } else if ((ch > 0xFFA1) && (ch <= 0xFFBE)) {
+            sb.setCharAt(i, (char) (ch - 0xCE70));
+        } else if (ch >= 0xFFDA && ch <= 0xFFEE && HANGUL_DATA[ch - 0xFFDA] != 0) {
+            sb.setCharAt(i, (char) (HANGUL_DATA[ch - 0xFFDA]));
         }
     }
 

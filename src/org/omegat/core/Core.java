@@ -81,11 +81,11 @@ import org.omegat.util.gui.UIDesignManager;
 
 /**
  * Class which contains all components instances.
- *
+ * <p>
  * Note about threads synchronization: each component must have only local
  * synchronization. It mustn't synchronize around other components or some other
  * objects.
- *
+ * <p>
  * Components which works in Swing UI thread can have other synchronization
  * idea: it can not be synchronized to access to some data which changed only in
  * UI thread.
@@ -123,10 +123,9 @@ public final class Core {
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
-    private static final List<String> PLUGINS_LOADING_ERRORS = Collections
-            .synchronizedList(new ArrayList<String>());
-
-    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
+    private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
+    private static final List<String> PLUGINS_LOADING_ERRORS = Collections.synchronizedList(new ArrayList<>());
+    private static final List<IMarker> MARKERS = new ArrayList<>();
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -231,6 +230,7 @@ public final class Core {
      * @param cl class loader.
      * @param params CLI parameters.
      * @throws Exception when error occurred.
+     * @deprecated
      */
     @Deprecated(since = "6.1.0")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
@@ -263,7 +263,7 @@ public final class Core {
 
     /**
      * initialize GUI body.
-     * @throws Exception
+     * @throws Exception when unexpected error happened.
      */
     static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
@@ -294,7 +294,7 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) throws Exception {
+    public static void initializeConsole(final Map<String, String> params) {
         cmdLineParams = params;
         tagValidation = new TagValidationTool();
         currentProject = new NotLoadedProject();
@@ -304,7 +304,7 @@ public final class Core {
     /**
      * Set main window instance for unit tests.
      *
-     * @param mainWindow
+     * @param mainWindow main window object to hold.
      */
     protected static void setMainWindow(IMainWindow mainWindow) {
         Core.mainWindow = mainWindow;
@@ -313,7 +313,7 @@ public final class Core {
     /**
      * Set project instance for unit tests.
      *
-     * @param currentProject
+     * @param currentProject project object to hold.
      */
     protected static void setCurrentProject(IProject currentProject) {
         Core.currentProject = currentProject;
@@ -413,4 +413,26 @@ public final class Core {
     public interface RunnableWithException {
         void run() throws Exception;
     }
+
+    /* methods for unit test */
+    static void setEditor(IEditor newEditor) {
+        editor = newEditor;
+    }
+
+    static void setTagValidation(ITagValidation newTagValidation) {
+        tagValidation = newTagValidation;
+    }
+
+    static void setSaveThread(IAutoSave newSewAutoSave) {
+        saveThread = newSewAutoSave;
+    }
+
+    static void setGlossary(IGlossaries newGlossary) {
+        glossary = newGlossary;
+    }
+
+    static void setNotes(INotes newNotes) {
+        notes = newNotes;
+    }
+
 }

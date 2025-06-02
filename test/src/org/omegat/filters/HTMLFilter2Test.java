@@ -28,7 +28,7 @@ package org.omegat.filters;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -119,7 +119,7 @@ public class HTMLFilter2Test extends TestFilterBase {
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
 
-        assertEquals("Expect the encoding detection", Charset.defaultCharset().name(),
+        assertEquals("Expect the encoding detection", StandardCharsets.UTF_8.name(),
                 filter.getInEncodingLastParsedFile());
 
         f = "test/data/filters/html/file-HTMLFilter2-SMP.html";

@@ -98,6 +98,46 @@ public class SearcherTest {
     }
 
     @Test
+    public void testSearchReplaceExactMatch() throws Exception {
+        SearchExpression s = createSearchExpression("great", SearchExpression.SearchExpressionType.EXACT, false, false);
+        s.mode = SearchMode.REPLACE;
+        s.replacement = "awesome";
+        List<SearchMatch> matches = executeSearchReplace("Great things are great indeed.", s);
+        assertEquals(2, matches.size());
+        assertEquals("awesome", matches.get(0).getReplacement());
+        assertEquals("awesome", matches.get(1).getReplacement());
+    }
+
+    @Test
+    public void testSearchReplaceRegexMatch() throws Exception {
+        SearchExpression s = createSearchExpression("(\\d+) apples", SearchExpression.SearchExpressionType.REGEXP,
+                false, false);
+        s.mode = SearchMode.REPLACE;
+        s.replacement = "$1 bananas";
+        List<SearchMatch> matches = executeSearchReplace("I have 5 apples and 10 apples.", s);
+        assertEquals(2, matches.size());
+        assertEquals("5 bananas", matches.get(0).getReplacement());
+        assertEquals("10 bananas", matches.get(1).getReplacement());
+    }
+
+    @Test
+    public void testSearchReplaceKeywordNotSupported() throws Exception {
+        SearchExpression s = createSearchExpression("great", SearchExpression.SearchExpressionType.KEYWORD, false, false);
+        s.mode = SearchMode.REPLACE;
+        s.replacement = "awesome";
+        List<SearchMatch> matches = executeSearchReplace("Great things are great indeed.", s);
+        assertEquals(2, matches.size());
+    }
+
+    private List<SearchMatch> executeSearchReplace(String inputText, SearchExpression s) throws Exception {
+        Searcher searcher = new Searcher(proj, s);
+        searcher.setThread(new SearchTestThread());
+        searcher.search();
+        searcher.searchString(inputText);
+        return searcher.getFoundMatches();
+    }
+
+    @Test
     public void testSearchStringRegexMatch() throws Exception {
         addSTE(fi, "id1", "OmegaT version 4.3.2", null);
         SearchExpression s = createSearchExpression("version \\d+\\.\\d+\\.\\d+", SearchExpression.SearchExpressionType.REGEXP, false, false);

@@ -259,13 +259,7 @@ public class Searcher {
     // ////////////////////////////////////////////////////////////
     // internal functions
 
-    private void addEntry(int num, String preamble, String srcPrefix, String src, String target, String note,
-            String property, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch,
-            SearchMatch[] propertyMatch) {
-        SearchResultEntry entry = SearchResultEntry.builder().entryNum(num).preambleText(preamble)
-                .srcPrefix(srcPrefix).sourceText(src).targetText(target).note(note).propertiesString(property)
-                .srcMatch(srcMatch).targetMatch(targetMatch).noteMatch(noteMatch)
-                .propertiesMatch(propertyMatch).build();
+    private void addEntry(SearchResultEntry entry) {
         searchResults.add(entry);
         numFinds++;
     }
@@ -286,16 +280,18 @@ public class Searcher {
         } else if (entryNum == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
             addTranslationMemoryEntry(entryNum, intro, src, target, note, property, srcMatches, targetMatches, noteMatches, propertyMatches, key);
         } else {
-            addEntry(entryNum, intro, null, src, target, note, property,
-                    srcMatches, targetMatches, noteMatches, propertyMatches);
+            addEntry(SearchResultEntry.builder().entryNum(entryNum).preambleText(intro).srcPrefix(null).sourceText(src)
+                    .targetText(target).note(note).propertiesString(property).srcMatch(srcMatches)
+                    .targetMatch(targetMatches).noteMatch(noteMatches).propertiesMatch(propertyMatches).build());
         }
     }
 
     private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, String property,
                                            SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches, String key) {
         if (!tmxMap.containsKey(key) || searchExpression.allResults) {
-            addEntry(entryNum, intro, null, src, target, note, property,
-                    srcMatches, targetMatches, noteMatches, propertyMatches);
+            addEntry(SearchResultEntry.builder().entryNum(entryNum).preambleText(intro).srcPrefix(null).sourceText(src)
+                    .targetText(target).note(note).propertiesString(property).srcMatch(srcMatches).targetMatch(targetMatches)
+                    .noteMatch(noteMatches).propertiesMatch(propertyMatches).build());
             if (!searchExpression.allResults) {
                 // first occurrence
                 tmxMap.put(key, 0);
@@ -312,8 +308,10 @@ public class Searcher {
             // HP, duplicate entry prevention
             // entries are referenced at offset 1 but stored at offset 0
             String file = searchExpression.fileNames ? getFileForEntry(entryNum + 1) : null;
-            addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
-                    note, property, srcMatches, targetMatches, noteMatches, propertyMatches);
+            addEntry(SearchResultEntry.builder().entryNum(entryNum + 1).preambleText(file).srcPrefix((entryNum + 1) + "> ")
+                    .sourceText(src).targetText(target).note(note).propertiesString(property)
+                    .srcMatch(srcMatches).targetMatch(targetMatches).noteMatch(noteMatches)
+                    .propertiesMatch(propertyMatches).build());
             if (!searchExpression.allResults) { // If we filter results
                 entryMap.put(key, 0); // HP
             }

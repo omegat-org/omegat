@@ -259,10 +259,13 @@ public class Searcher {
     // ////////////////////////////////////////////////////////////
     // internal functions
 
-    private void addEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, String property, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertyMatch) {
-        SearchResultEntry entry = new SearchResultEntry(num, preamble, srcPrefix,
-                src, target, note, property, srcMatch, targetMatch, noteMatch, propertyMatch);
+    private void addEntry(int num, String preamble, String srcPrefix, String src, String target, String note,
+            String property, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch,
+            SearchMatch[] propertyMatch) {
+        SearchResultEntry entry = SearchResultEntry.builder().entryNum(num).preambleText(preamble)
+                .srcPrefix(srcPrefix).sourceText(src).targetText(target).note(note).propertiesString(property)
+                .srcMatch(srcMatch).targetMatch(targetMatch).noteMatch(noteMatch)
+                .propertiesMatch(propertyMatch).build();
         searchResults.add(entry);
         numFinds++;
     }

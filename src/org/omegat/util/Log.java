@@ -351,6 +351,14 @@ public final class Log {
         }
     }
 
+    public static boolean isDebugEnabled() {
+        return LOGGER.isDebugEnabled();
+    }
+
+    public static void logDebug(String message, Object... parameters) {
+        LOGGER.atDebug().setMessage(message).addArgument(parameters).log();
+    }
+
     /**
      * Writes an info message to the log (to be retrieved from the resource
      * bundle).

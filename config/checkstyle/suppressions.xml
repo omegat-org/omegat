@@ -130,7 +130,7 @@
     <suppress files="GITExternalGpgSigner\.java" checks="ConstantName" lines="74-84"/>
 
     <!-- Searcher -->
-    <suppress files="Searcher\.java" checks="(LineLength|ParameterNumber|MissingSwitchDefault|InnerAssignment)"/>
+    <suppress files="Searcher\.java" checks="ParameterNumber"/>
 
     <!-- matching -->
     <suppress files="NearString\.java" checks="TypeName" lines="50-70"/>

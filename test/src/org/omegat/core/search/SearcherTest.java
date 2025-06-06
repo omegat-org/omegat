@@ -45,7 +45,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;

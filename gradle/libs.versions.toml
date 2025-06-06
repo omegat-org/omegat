@@ -55,7 +55,7 @@ morfologik = "2.1.9"
 jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
 json_java = "20250517"
-protobuf_java = "3.25.5"
+protobuf_java = "4.31.1"
 mockito = "5.17.0"
 
 [libraries]

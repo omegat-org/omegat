@@ -40,12 +40,9 @@ import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
 
-public final class SpellCheckerManager {
+public class SpellCheckerManager {
 
-    private static ISpellChecker spellChecker;
-
-    private SpellCheckerManager() {
-    }
+    private ISpellChecker spellChecker;
 
     public static File getDefaultDictionaryDir() {
         return new File(StaticUtils.getConfigDir(), OConsts.SPELLING_DICT_DIR);
@@ -56,7 +53,7 @@ public final class SpellCheckerManager {
      * 
      * @return spell checker engine.
      */
-    public static ISpellChecker getCurrentSpellChecker() {
+    public ISpellChecker getCurrentSpellChecker() {
         if (spellChecker != null) {
             return spellChecker;
         }

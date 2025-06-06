@@ -54,6 +54,7 @@ assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
+mockito = "5.17.0"
 json_java = "20250517"
 protobuf_java = "3.25.5"
 mockito = "5.17.0"
@@ -171,9 +172,10 @@ jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
 flatlaf = {group = "com.formdev", name = "flatlaf", version.ref = "flatlaf"}
 language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
 assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", version.ref = "assertj_swing_junit"}
-morfologik-stemming = {group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
-morfologik-speller = {group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
-swing-extra-locales = {group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
+morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
+swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 json = {group = "org.json", name = "json", version.ref = "json_java"}
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}

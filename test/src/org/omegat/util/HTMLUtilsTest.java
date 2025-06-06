@@ -66,7 +66,7 @@ public class HTMLUtilsTest {
         assertEquals("\r", HTMLUtils.getSpacePrefix("\ra", true));
         assertEquals("\u2028", HTMLUtils.getSpacePrefix("\u2028a", true)); //line separator
         assertEquals("\u2029", HTMLUtils.getSpacePrefix("\u2029a", true)); //paragraph separator
-        assertEquals("\t", HTMLUtils.getSpacePrefix("\u0009a", true)); //h tab
+        assertEquals("\t", HTMLUtils.getSpacePrefix("\ta", true)); //h tab
         assertEquals("\u000B", HTMLUtils.getSpacePrefix("\u000Ba", true)); //v tab
         assertEquals("\f", HTMLUtils.getSpacePrefix("\fa", true)); //form feed
         assertEquals("\u001C", HTMLUtils.getSpacePrefix("\u001Ca", true)); //file separator
@@ -74,7 +74,7 @@ public class HTMLUtilsTest {
         assertEquals("\u001E", HTMLUtils.getSpacePrefix("\u001Ea", true)); //record separator
         assertEquals("\u001F", HTMLUtils.getSpacePrefix("\u001Fa", true)); //unit separator
 
-        //\u0301 is an accent, in a multi-code point character.
+        // u0301 is an accent, in a multi-code point character.
         assertEquals("one space is one space", " ", HTMLUtils.getSpacePrefix(" ́a", true));
         assertEquals("multiple spaces is compressed to one", " ", HTMLUtils.getSpacePrefix("  ́a", true));
         assertEquals("multiple spaces stay multiple spaces uncompressed", "    ",
@@ -108,8 +108,8 @@ public class HTMLUtilsTest {
         assertEquals("\u001E", HTMLUtils.getSpacePostfix("a\u001E", true)); //record separator
         assertEquals("\u001F", HTMLUtils.getSpacePostfix("a\u001F", true)); //unit separator
 
-        //\u0301 is an accent, in a multi-code point character.
-        assertEquals("one space is one space", " ", HTMLUtils.getSpacePostfix("a\u0065\u0301 ", true));
+        // u0301 is an accent, in a multi-code point character.
+        assertEquals("one space is one space", " ", HTMLUtils.getSpacePostfix("aé ", true));
         assertEquals("multiple spaces is compressed to one", " ", HTMLUtils.getSpacePostfix("aé  ", true));
         assertEquals("multiple spaces stay multiple spaces uncompressed", "    ",
                 HTMLUtils.getSpacePostfix("aé    ", false));

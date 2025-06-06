@@ -767,7 +767,7 @@ public class EditorController implements IEditor {
     private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb, int startOffset) {
         if (Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS, false)) {
             if (sb.getSourceTextEntry().isParagraphStart()) {
-                doc.trustedChangesInProgress = true;
+                doc.setTrustedChangesInProgress(true);
                 StaticUIUtils.setCaretUpdateEnabled(editor, false);
                 try {
                     doc.insertString(startOffset, Preferences.getPreferenceDefault(
@@ -776,7 +776,7 @@ public class EditorController implements IEditor {
                 } catch (BadLocationException ex) {
                     throw new RuntimeException(ex);
                 } finally {
-                    doc.trustedChangesInProgress = false;
+                    doc.setTrustedChangesInProgress(false);
                     StaticUIUtils.setCaretUpdateEnabled(editor, true);
                 }
             }
@@ -915,7 +915,7 @@ public class EditorController implements IEditor {
      */
     void onTextChanged() {
         Document3 doc = editor.getOmDocument();
-        if (doc.trustedChangesInProgress || doc.textBeingComposed) {
+        if (doc.getTrustedChangesInProgress() || doc.getTextBeingComposed()) {
             return;
         }
         if (doc.isEditMode()) {

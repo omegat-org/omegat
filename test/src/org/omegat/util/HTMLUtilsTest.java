@@ -116,7 +116,7 @@ public class HTMLUtilsTest {
         String allWhite = "\n\r\u2028\u2029\t\n\u000B\f\n\u001C\u001D\u001E\u001F ";
         assertEquals("multiple different space types compress to the first whitespace character", "\n",
                 HTMLUtils.getSpacePostfix("aé" + allWhite, true));
-        assertEquals("multiple different whtiespace characters stay that uncompressed", allWhite,
+        assertEquals("multiple different whitespace characters stay that uncompressed", allWhite,
                 HTMLUtils.getSpacePostfix("aé" + allWhite, false));
 
     }

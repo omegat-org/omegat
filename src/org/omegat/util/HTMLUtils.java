@@ -46,11 +46,17 @@ import java.util.regex.Pattern;
 
 public final class HTMLUtils {
 
+    public static final int PARSE_ERROR = -1;
+
     private HTMLUtils() {
     }
 
     /** Named HTML Entities and corresponding numeric character references */
-    private static final Object[][] ENTITIES = { { "quot", 34 }, { "amp", 38 }, { "apos", 39 }, { "lt", 60 },
+    private static final Object[][] ENTITIES = {
+            { "quot", 34 },
+            { "amp", 38 },
+            { "apos", 39 },
+            { "lt", 60 },
             { "gt", 62 },
 
             // Latin Extended-A
@@ -98,185 +104,212 @@ public final class HTMLUtils {
                                 // standardized
             { "euro", 8364 }, // euro sign, U+20AC NEW
 
-            { "nbsp", 160 }, { "iexcl", 161 }, { "cent", 162 }, { "pound", 163 }, { "curren", 164 },
-            { "yen", 165 }, { "brvbar", 166 }, { "sect", 167 }, { "uml", 168 }, { "copy", 169 },
-            { "ordf", 170 }, { "laquo", 171 }, { "not", 172 }, { "shy", 173 }, { "reg", 174 },
-            { "macr", 175 }, { "deg", 176 }, { "plusmn", 177 }, { "sup2", 178 }, { "sup3", 179 },
-            { "acute", 180 }, { "micro", 181 }, { "para", 182 }, { "middot", 183 }, { "cedil", 184 },
-            { "sup1", 185 }, { "ordm", 186 }, { "raquo", 187 }, { "frac14", 188 }, { "frac12", 189 },
-            { "frac34", 190 }, { "iquest", 191 }, { "Agrave", 192 }, { "Aacute", 193 }, { "Acirc", 194 },
-            { "Atilde", 195 }, { "Auml", 196 }, { "Aring", 197 }, { "AElig", 198 }, { "Ccedil", 199 },
-            { "Egrave", 200 }, { "Eacute", 201 }, { "Ecirc", 202 }, { "Euml", 203 }, { "Igrave", 204 },
-            { "Iacute", 205 }, { "Icirc", 206 }, { "Iuml", 207 }, { "ETH", 208 }, { "Ntilde", 209 },
-            { "Ograve", 210 }, { "Oacute", 211 }, { "Ocirc", 212 }, { "Otilde", 213 }, { "Ouml", 214 },
-            { "times", 215 }, { "Oslash", 216 }, { "Ugrave", 217 }, { "Uacute", 218 }, { "Ucirc", 219 },
-            { "Uuml", 220 }, { "Yacute", 221 }, { "THORN", 222 }, { "szlig", 223 }, { "agrave", 224 },
-            { "aacute", 225 }, { "acirc", 226 }, { "atilde", 227 }, { "auml", 228 }, { "aring", 229 },
-            { "aelig", 230 }, { "ccedil", 231 }, { "egrave", 232 }, { "eacute", 233 }, { "ecirc", 234 },
-            { "euml", 235 }, { "igrave", 236 }, { "iacute", 237 }, { "icirc", 238 }, { "iuml", 239 },
-            { "eth", 240 }, { "ntilde", 241 }, { "ograve", 242 }, { "oacute", 243 }, { "ocirc", 244 },
-            { "otilde", 245 }, { "ouml", 246 }, { "divide", 247 }, { "oslash", 248 }, { "ugrave", 249 },
-            { "uacute", 250 }, { "ucirc", 251 }, { "uuml", 252 }, { "yacute", 253 }, { "thorn", 254 },
-            { "yuml", 255 },
+            { "nbsp", 160 }, { "iexcl", 161 }, { "cent", 162 },
+            { "pound", 163 }, { "curren", 164 }, { "yen", 165 },
+            { "brvbar", 166 }, { "sect", 167 }, { "uml", 168 },
+            { "copy", 169 }, { "ordf", 170 }, { "laquo", 171 },
+            { "not", 172 }, { "shy", 173 }, { "reg", 174 },
+            { "macr", 175 }, { "deg", 176 }, { "plusmn", 177 },
+            { "sup2", 178 }, { "sup3", 179 }, { "acute", 180 },
+            { "micro", 181 }, { "para", 182 }, { "middot", 183 },
+            { "cedil", 184 }, { "sup1", 185 }, { "ordm", 186 },
+            { "raquo", 187 }, { "frac14", 188 }, { "frac12", 189 },
+            { "frac34", 190 }, { "iquest", 191 }, { "Agrave", 192 },
+            { "Aacute", 193 }, { "Acirc", 194 }, { "Atilde", 195 },
+            { "Auml", 196 }, { "Aring", 197 }, { "AElig", 198 },
+            { "Ccedil", 199 }, { "Egrave", 200 }, { "Eacute", 201 },
+            { "Ecirc", 202 }, { "Euml", 203 }, { "Igrave", 204 },
+            { "Iacute", 205 }, { "Icirc", 206 }, { "Iuml", 207 },
+            { "ETH", 208 }, { "Ntilde", 209 }, { "Ograve", 210 },
+            { "Oacute", 211 }, { "Ocirc", 212 }, { "Otilde", 213 },
+            { "Ouml", 214 }, { "times", 215 }, { "Oslash", 216 },
+            { "Ugrave", 217 }, { "Uacute", 218 }, { "Ucirc", 219 },
+            { "Uuml", 220 }, { "Yacute", 221 }, { "THORN", 222 },
+            { "szlig", 223 }, { "agrave", 224 }, { "aacute", 225 },
+            { "acirc", 226 }, { "atilde", 227 }, { "auml", 228 },
+            { "aring", 229 }, { "aelig", 230 }, { "ccedil", 231 },
+            { "egrave", 232 }, { "eacute", 233 }, { "ecirc", 234 },
+            { "euml", 235 }, { "igrave", 236 }, { "iacute", 237 },
+            { "icirc", 238 }, { "iuml", 239 }, { "eth", 240 },
+            { "ntilde", 241 }, { "ograve", 242 }, { "oacute", 243 },
+            { "ocirc", 244 }, { "otilde", 245 }, { "ouml", 246 },
+            { "divide", 247 }, { "oslash", 248 }, { "ugrave", 249 },
+            { "uacute", 250 }, { "ucirc", 251 }, { "uuml", 252 },
+            { "yacute", 253 }, { "thorn", 254 }, { "yuml", 255 },
 
             { "fnof", 402 },
 
-            { "Alpha", 913 }, { "Beta", 914 }, { "Gamma", 915 }, { "Delta", 916 }, { "Epsilon", 917 },
-            { "Zeta", 918 }, { "Eta", 919 }, { "Theta", 920 }, { "Iota", 921 }, { "Kappa", 922 },
-            { "Lambda", 923 }, { "Mu", 924 }, { "Nu", 925 }, { "Xi", 926 }, { "Omicron", 927 }, { "Pi", 928 },
-            { "Rho", 929 }, { "Sigma", 931 }, { "Tau", 932 }, { "Upsilon", 933 }, { "Phi", 934 },
-            { "Chi", 935 }, { "Psi", 936 }, { "Omega", 937 }, { "alpha", 945 }, { "beta", 946 },
-            { "gamma", 947 }, { "delta", 948 }, { "epsilon", 949 }, { "zeta", 950 }, { "eta", 951 },
-            { "theta", 952 }, { "iota", 953 }, { "kappa", 954 }, { "lambda", 955 }, { "mu", 956 },
-            { "nu", 957 }, { "xi", 958 }, { "omicron", 959 }, { "pi", 960 }, { "rho", 961 },
-            { "sigmaf", 962 }, { "sigma", 963 }, { "tau", 964 }, { "upsilon", 965 }, { "phi", 966 },
-            { "chi", 967 }, { "psi", 968 }, { "omega", 969 }, { "thetasym", 977 }, { "upsih", 978 },
+            { "Alpha", 913 }, { "Beta", 914 }, { "Gamma", 915 },
+            { "Delta", 916 }, { "Epsilon", 917 }, { "Zeta", 918 },
+            { "Eta", 919 }, { "Theta", 920 }, { "Iota", 921 },
+            { "Kappa", 922 }, { "Lambda", 923 }, { "Mu", 924 },
+            { "Nu", 925 }, { "Xi", 926 }, { "Omicron", 927 },
+            { "Pi", 928 }, { "Rho", 929 }, { "Sigma", 931 },
+            { "Tau", 932 }, { "Upsilon", 933 }, { "Phi", 934 },
+            { "Chi", 935 }, { "Psi", 936 }, { "Omega", 937 },
+            { "alpha", 945 }, { "beta", 946 }, { "gamma", 947 },
+            { "delta", 948 }, { "epsilon", 949 }, { "zeta", 950 },
+            { "eta", 951 }, { "theta", 952 }, { "iota", 953 },
+            { "kappa", 954 }, { "lambda", 955 }, { "mu", 956 },
+            { "nu", 957 }, { "xi", 958 }, { "omicron", 959 },
+            { "pi", 960 }, { "rho", 961 }, { "sigmaf", 962 },
+            { "sigma", 963 }, { "tau", 964 }, { "upsilon", 965 },
+            { "phi", 966 }, { "chi", 967 }, { "psi", 968 },
+            { "omega", 969 }, { "thetasym", 977 }, { "upsih", 978 },
             { "piv", 982 },
 
-            { "bull", 8226 }, { "hellip", 8230 }, { "prime", 8242 }, { "Prime", 8243 }, { "oline", 8254 },
-            { "frasl", 8260 },
+            { "bull", 8226 }, { "hellip", 8230 }, { "prime", 8242 },
+            { "Prime", 8243 }, { "oline", 8254 }, { "frasl", 8260 },
 
-            { "weierp", 8472 }, { "image", 8465 }, { "real", 8476 }, { "trade", 8482 }, { "alefsym", 8501 },
+            { "weierp", 8472 }, { "image", 8465 }, { "real", 8476 },
+            { "trade", 8482 }, { "alefsym", 8501 },
 
-            { "larr", 8592 }, { "uarr", 8593 }, { "rarr", 8594 }, { "darr", 8595 }, { "harr", 8596 },
-            { "crarr", 8629 }, { "lArr", 8656 }, { "uArr", 8657 }, { "rArr", 8658 }, { "dArr", 8659 },
-            { "hArr", 8660 },
+            { "larr", 8592 }, { "uarr", 8593 }, { "rarr", 8594 },
+            { "darr", 8595 }, { "harr", 8596 }, { "crarr", 8629 },
+            { "lArr", 8656 }, { "uArr", 8657 }, { "rArr", 8658 },
+            { "dArr", 8659 }, { "hArr", 8660 },
 
-            { "forall", 8704 }, { "part", 8706 }, { "exist", 8707 }, { "empty", 8709 }, { "nabla", 8711 },
-            { "isin", 8712 }, { "notin", 8713 }, { "ni", 8715 }, { "prod", 8719 }, { "sum", 8722 },
-            { "minus", 8722 }, { "lowast", 8727 }, { "radic", 8730 }, { "prop", 8733 }, { "infin", 8734 },
-            { "ang", 8736 }, { "and", 8869 }, { "or", 8870 }, { "cap", 8745 }, { "cup", 8746 },
-            { "int", 8747 }, { "there4", 8756 }, { "sim", 8764 }, { "cong", 8773 }, { "asymp", 8773 },
-            { "ne", 8800 }, { "equiv", 8801 }, { "le", 8804 }, { "ge", 8805 }, { "sub", 8834 },
-            { "sup", 8835 }, { "nsub", 8836 }, { "sube", 8838 }, { "supe", 8839 }, { "oplus", 8853 },
-            { "otimes", 8855 }, { "perp", 8869 }, { "sdot", 8901 },
+            { "forall", 8704 }, { "part", 8706 }, { "exist", 8707 },
+            { "empty", 8709 }, { "nabla", 8711 }, { "isin", 8712 },
+            { "notin", 8713 }, { "ni", 8715 }, { "prod", 8719 },
+            { "sum", 8722 }, { "minus", 8722 }, { "lowast", 8727 },
+            { "radic", 8730 }, { "prop", 8733 }, { "infin", 8734 },
+            { "ang", 8736 }, { "and", 8869 }, { "or", 8870 },
+            { "cap", 8745 }, { "cup", 8746 }, { "int", 8747 },
+            { "there4", 8756 }, { "sim", 8764 }, { "cong", 8773 },
+            { "asymp", 8773 }, { "ne", 8800 }, { "equiv", 8801 },
+            { "le", 8804 }, { "ge", 8805 }, { "sub", 8834 },
+            { "sup", 8835 }, { "nsub", 8836 }, { "sube", 8838 },
+            { "supe", 8839 }, { "oplus", 8853 }, { "otimes", 8855 },
+            { "perp", 8869 }, { "sdot", 8901 },
 
-            { "lceil", 8968 }, { "rceil", 8969 }, { "lfloor", 8970 }, { "rfloor", 8971 }, { "lang", 9001 },
-            { "rang", 9002 },
+            { "lceil", 8968 }, { "rceil", 8969 }, { "lfloor", 8970 },
+            { "rfloor", 8971 }, { "lang", 9001 }, { "rang", 9002 },
 
             { "loz", 9674 },
 
-            { "spades", 9824 }, { "clubs", 9827 }, { "hearts", 9829 }, { "diams", 9830 } };
+            { "spades", 9824 }, { "clubs", 9827 }, { "hearts", 9829 },
+            { "diams", 9830 } };
 
-    /** Converts HTML entities to normal characters */
-    public static String entitiesToChars(String str) {
-        int strlen = str.length();
-        StringBuilder res = new StringBuilder(strlen);
-        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
-            cp = str.codePointAt(i);
-            switch (cp) {
-            case '&':
-                int cp1;
+    /**
+     * Converts HTML entities in the given input string to their corresponding characters.
+     * This handles numeric and named entities, resolving them to their appropriate Unicode representations.
+     * If an entity is unresolvable or malformed, it is left unchanged in the output string.
+     *
+     * @param input the input string that may contain HTML entities to be converted
+     * @return a string with HTML entities replaced by their corresponding characters
+     */
+    public static String entitiesToChars(String input) {
+        int inputLength = input.length();
+        StringBuilder result = new StringBuilder(inputLength);
+        for (int cp, i = 0; i < inputLength; i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            if (cp == '&') {
                 // if there's one more symbol, reading it,
                 // otherwise it's a dangling '&'
-                if (str.codePointCount(i, strlen) < 2) {
-                    res.appendCodePoint(cp);
-                    break;
-                } else {
-                    cp1 = str.codePointAt(str.offsetByCodePoints(i, 1));
+                if (input.codePointCount(i, inputLength) < 2) {
+                    result.appendCodePoint(cp);
+                    continue;
                 }
-                if (cp1 == '#') {
+                int nextCodePoint;
+                nextCodePoint = input.codePointAt(input.offsetByCodePoints(i, 1));
+                if (nextCodePoint == '#') {
                     // numeric entity
-                    int cp2 = str.codePointAt(str.offsetByCodePoints(i, 2));
-                    if (cp2 == 'x' || cp2 == 'X') {
-                        // hex numeric entity
-                        int hexStart = str.offsetByCodePoints(i, 3);
-                        int hexEnd = hexStart;
-                        while (hexEnd < strlen) {
-                            int hexCp = str.codePointAt(hexEnd);
-                            if (!isHexDigit(hexCp)) {
-                                break;
-                            }
-                            hexEnd += Character.charCount(hexCp);
-                        }
-                        String sEntity = str.substring(hexStart, hexEnd);
-                        try {
-                            int nEntity = Integer.parseInt(sEntity, 16);
-                            if (nEntity > 0 && nEntity <= 0x10FFFF) {
-                                res.appendCodePoint(nEntity);
-                                if (hexEnd < strlen && str.codePointAt(hexEnd) == ';') {
-                                    i = hexEnd;
-                                } else {
-                                    i = str.offsetByCodePoints(hexEnd, -1);
-                                }
-                            } else {
-                                // too big number
-                                // dangling '&'
-                                res.appendCodePoint(cp);
-                            }
-                        } catch (NumberFormatException nfe) {
-                            // do nothing
-                            // dangling '&'
-                            res.appendCodePoint(cp);
-                        }
-                    } else {
-                        // decimal entity
-                        int decStart = str.offsetByCodePoints(i, 2);
-                        int decEnd = decStart;
-                        while (decEnd < strlen) {
-                            int decCp = str.codePointAt(decEnd);
-                            if (!isDecimalDigit(decCp)) {
-                                break;
-                            }
-                            decEnd += Character.charCount(decCp);
-                        }
-                        String sEntity = str.substring(decStart, decEnd);
-                        try {
-                            int nEntity = Integer.parseInt(sEntity, 10);
-                            if (nEntity > 0 && nEntity <= 0x10FFFF) {
-                                res.appendCodePoint(nEntity);
-                                if (decEnd < strlen && str.codePointAt(decEnd) == ';') {
-                                    i = decEnd;
-                                } else {
-                                    i = str.offsetByCodePoints(decEnd, -1);
-                                }
-                            } else {
-                                // too big number
-                                // dangling '&'
-                                res.appendCodePoint(cp);
-                            }
-                        } catch (NumberFormatException nfe) {
-                            // do nothing
-                            // dangling '&'
-                            res.appendCodePoint(cp);
-                        }
-                    }
-                } else if (isLatinLetter(cp1)) {
-                    // named entity?
-                    int entStart = str.offsetByCodePoints(i, 1);
-                    int entEnd = entStart;
-                    while (entEnd < strlen) {
-                        int entCp = str.codePointAt(entEnd);
-                        // Some entities contain numbers, e.g. frac12
-                        if (!isLatinLetter(entCp) && !isDecimalDigit(entCp)) {
-                            break;
-                        }
-                        entEnd += Character.charCount(entCp);
-                    }
-                    String sEntity = str.substring(entStart, entEnd);
-                    int nEntity = lookupEntity(sEntity);
-                    if (nEntity > 0 && nEntity <= 65535) {
-                        res.append((char) nEntity);
-                        if (entEnd < strlen && str.codePointAt(entEnd) == ';') {
-                            i = entEnd;
-                        } else {
-                            i = str.offsetByCodePoints(entEnd, -1);
-                        }
-                    } else {
-                        // too big number
-                        // dangling '&'
-                        res.appendCodePoint(cp);
-                    }
+                    i = handleNumericEntity(input, i, inputLength, result);
+                } else if (isLatinLetter(nextCodePoint)) {
+                    i = handleNamedEntity(input, i, inputLength, result);
                 } else {
                     // dangling '&'
-                    res.appendCodePoint(cp);
+                    result.appendCodePoint(cp);
                 }
-                break;
-            default:
-                res.appendCodePoint(cp);
+            } else {
+                result.appendCodePoint(cp);
             }
         }
-        return res.toString();
+        return result.toString();
+    }
+
+    private static int handleNumericEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int thirdCodePoint = input.codePointAt(input.offsetByCodePoints(startIndex, 2));
+        if (thirdCodePoint == 'x' || thirdCodePoint == 'X') {
+            return handleHexEntity(input, startIndex, inputLength, result);
+        } else {
+            return handleDecimalEntity(input, startIndex, inputLength, result);
+        }
+    }
+
+    private static int handleHexEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int startOffset = input.offsetByCodePoints(startIndex, 3);
+        int endOffset = findEndOfDigits(input, startOffset, inputLength, HTMLUtils::isHexDigit);
+
+        String hexValue = input.substring(startOffset, endOffset);
+        int parsedValue = parseEntity(hexValue, 16);
+        return processParsedEntity(input, startIndex, inputLength, result, endOffset, parsedValue);
+    }
+
+    private static int handleDecimalEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int startOffset = input.offsetByCodePoints(startIndex, 2);
+        int endOffset = findEndOfDigits(input, startOffset, inputLength, HTMLUtils::isDecimalDigit);
+
+        String decimalValue = input.substring(startOffset, endOffset);
+        int parsedValue = parseEntity(decimalValue, 10);
+        return processParsedEntity(input, startIndex, inputLength, result, endOffset, parsedValue);
+    }
+
+    private static int handleNamedEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int startOffset = input.offsetByCodePoints(startIndex, 1);
+        int endOffset = findEndOfDigits(input, startOffset, inputLength, ch -> isLatinLetter(ch) || isDecimalDigit(ch));
+
+        String entityName = input.substring(startOffset, endOffset);
+        int parsedValue = lookupEntity(entityName);
+        if (parsedValue > 0 && parsedValue <= 65535) {
+            result.append((char) parsedValue);
+            if (endOffset < inputLength && input.codePointAt(endOffset) == ';') {
+                return endOffset;
+            }
+            return input.offsetByCodePoints(endOffset, -1);
+        }
+
+        // Invalid named entity
+        result.appendCodePoint(input.codePointAt(startIndex));
+        return startIndex;
+    }
+
+    private static int processParsedEntity(String input, int startIndex, int inputLength, StringBuilder result, int endOffset, int parsedValue) {
+        // check if parsedValue is PARSE_ERROR or invalid unicode code point.
+        if (parsedValue <= 0 || parsedValue > 0x10FFFF) {
+            // invalid char code
+            result.appendCodePoint(input.codePointAt(startIndex));
+            return startIndex;
+        }
+
+        result.appendCodePoint(parsedValue);
+        if (endOffset < inputLength && input.codePointAt(endOffset) == ';') {
+            return endOffset;
+        }
+        return input.offsetByCodePoints(endOffset, -1);
+    }
+
+    private static int findEndOfDigits(String input, int startOffset, int inputLength, java.util.function.IntPredicate isDigit) {
+        int currentOffset = startOffset;
+        while (currentOffset < inputLength) {
+            int currentCodePoint = input.codePointAt(currentOffset);
+            if (!isDigit.test(currentCodePoint)) {
+                break;
+            }
+            currentOffset += Character.charCount(currentCodePoint);
+        }
+        return currentOffset;
+    }
+
+    private static int parseEntity(String entityValue, int radix) {
+        try {
+            return Integer.parseInt(entityValue, radix);
+        } catch (NumberFormatException e) {
+            // return out of char range that is recognized in processParsedEntity method
+            // as to ignore parsedValue and return the original character.
+            return PARSE_ERROR;
+        }
     }
 
     /** Returns true if a char is a latin letter */
@@ -299,10 +332,9 @@ public final class HTMLUtils {
      * entity
      */
     private static int lookupEntity(String entity) {
-        for (int i = 0; i < ENTITIES.length; i++) {
-            Object[] onent = ENTITIES[i];
+        for (Object[] onent : ENTITIES) {
             if (entity.equals(onent[0])) {
-                return ((Integer) onent[1]).intValue();
+                return (Integer) onent[1];
             }
         }
         return -1;
@@ -392,7 +424,7 @@ public final class HTMLUtils {
         if (encoding != null) {
             CharsetEncoder charsetEncoder = Charset.forName(encoding).newEncoder();
             int i = 0;
-            while (true) {
+            do {
                 String substring;
                 for (int cp; i < contents.length(); i += substring.length()) {
                     cp = contents.codePointAt(i);
@@ -403,10 +435,7 @@ public final class HTMLUtils {
                         break;
                     }
                 }
-                if (i == contents.length()) {
-                    break;
-                }
-            }
+            } while (i != contents.length());
         }
         return contents;
     }
@@ -425,13 +454,20 @@ public final class HTMLUtils {
 
     public static String getSpacePostfix(String input, boolean compressWhitespace) {
         int size = input.length();
-        for (int cp, i = size; i > 0; i -= Character.charCount(cp)) {
-            cp = input.codePointBefore(i);
+        int i = size;
+        while (i > 0) {
+            int cp = input.codePointBefore(i);
             if (!Character.isWhitespace(cp)) {
-                return i == size ? ""
-                        : input.substring(i,
-                                compressWhitespace ? Math.min(input.offsetByCodePoints(i, 1), size) : size);
+                if (i == size) {
+                    return "";
+                } else {
+                    if (compressWhitespace) {
+                        return input.substring(i, Math.min(input.offsetByCodePoints(i, 1), size));
+                    }
+                    return input.substring(i, size);
+                }
             }
+            i -= Character.charCount(cp);
         }
         return "";
     }

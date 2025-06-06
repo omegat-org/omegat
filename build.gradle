@@ -218,6 +218,7 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
     testImplementation(libs.slf4j.api)
+    testImplementation(libs.mockito.core)
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
         exclude module: "hunspell"

@@ -88,14 +88,14 @@ public class HTMLUtilsTest {
 
     @Test
     public void getSpacePostfix() {
-        //no whitespace prefix
+        // no whitespace prefix
         assertEquals("", HTMLUtils.getSpacePostfix("a", true));
         assertEquals("", HTMLUtils.getSpacePostfix("á", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u00A0", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u2007", true));
         assertEquals("", HTMLUtils.getSpacePostfix("a\u202F", true));
 
-        //all sorts of whitespace characters
+        // all sorts of whitespace characters
         assertEquals("\n", HTMLUtils.getSpacePostfix("a\n", true));
         assertEquals("\r", HTMLUtils.getSpacePostfix("a\r", true));
         assertEquals("\u2028", HTMLUtils.getSpacePostfix("a\u2028", true)); //line separator

@@ -174,7 +174,6 @@ assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", 
 morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
 morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
 swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
-mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 json = {group = "org.json", name = "json", version.ref = "json_java"}
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}

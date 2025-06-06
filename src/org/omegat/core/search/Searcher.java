@@ -87,24 +87,24 @@ import org.omegat.util.StringUtil;
  */
 public class Searcher {
 
-    private volatile List<SearchResultEntry> m_searchResults;
-    private boolean m_preprocessResults;
-    private final IProject m_project;
+    private volatile List<SearchResultEntry> searchResults;
+    private boolean preprocessResults;
+    private final IProject project;
     /**
      * keeps track of previous results not from project memory
      */
-    private Map<String, Integer> m_tmxMap;
+    private Map<String, Integer> tmxMap;
     /**
      * HP: keeps track of previous results, to avoid duplicate entries
      */
-    private Map<String, Integer> m_entryMap;
+    private Map<String, Integer> entryMap;
     /**
      * HP: contains a matcher for each search string (multiple if keyword search)
      */
-    private List<Matcher> m_matchers;
-    private Matcher m_author;
+    private List<Matcher> matchers;
+    private Matcher author;
 
-    private int m_numFinds;
+    private int numFinds;
 
     private final SearchExpression searchExpression;
     private LongProcessThread checkStop;
@@ -126,7 +126,7 @@ public class Searcher {
      *            Current project
      */
     public Searcher(final IProject project, final SearchExpression searchExpression) {
-        this.m_project = project;
+        this.project = project;
         this.searchExpression = searchExpression;
     }
 
@@ -145,27 +145,27 @@ public class Searcher {
      * Returns list of search results
      */
     public List<SearchResultEntry> getSearchResults() {
-        if (m_preprocessResults) {
+        if (preprocessResults) {
             // function can be called multiple times after search
             // results preprocess should occur only one time
-            m_preprocessResults = false;
+            preprocessResults = false;
             if (!searchExpression.allResults) {
-                for (SearchResultEntry entry : m_searchResults) {
+                for (SearchResultEntry entry : searchResults) {
                     String key = entry.getSrcText() + entry.getTranslation();
                     if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
-                        if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
-                            entry.setPreamble(updatePreamble(entry, m_tmxMap.get(key)));
+                        if (tmxMap.containsKey(key) && (tmxMap.get(key) > 0)) {
+                            entry.setPreamble(updatePreamble(entry, tmxMap.get(key)));
                         }
                     } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
                         // at this stage each PM entry num is increased by 1
-                        if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
-                            entry.setPreamble(updatePreamble(entry, m_entryMap.get(key)));
+                        if (entryMap.containsKey(key) && (entryMap.get(key) > 0)) {
+                            entry.setPreamble(updatePreamble(entry, entryMap.get(key)));
                         }
                     }
                 }
             }
         }
-        return m_searchResults;
+        return searchResults;
     }
 
     private String updatePreamble(SearchResultEntry entry, int matchNumber) {
@@ -181,22 +181,20 @@ public class Searcher {
      * @throws Exception when searching files goes wrong
      */
     public void search() throws Exception {
-        String text = searchExpression.text;
-        String author = searchExpression.author;
+        String searchTextExpression = searchExpression.text;
+        String authorSearchExpression = searchExpression.author;
 
-        m_searchResults = new ArrayList<>();
-        m_numFinds = 0;
+        searchResults = new ArrayList<>();
+        numFinds = 0;
         // ensures that results will be preprocessed only one time
-        m_preprocessResults = true;
+        preprocessResults = true;
 
-        m_entryMap = null; // HP
+        entryMap = new HashMap<>(); // HP
 
-        m_entryMap = new HashMap<>(); // HP
-
-        m_tmxMap = new HashMap<>();
+        tmxMap = new HashMap<>();
 
         // create a list of matchers
-        m_matchers = new ArrayList<>();
+        matchers = new ArrayList<>();
 
         // determine pattern matching flags
         int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
@@ -205,7 +203,7 @@ public class Searcher {
         // Then, instead of modifying the regex, we also normalize the
         // comparison strings later on.
         if (searchExpression.widthInsensitive) {
-            text = StringUtil.normalizeWidth(text);
+            searchTextExpression = StringUtil.normalizeWidth(searchTextExpression);
         }
 
         // if exact search, just use the entire search string as a single
@@ -217,36 +215,36 @@ public class Searcher {
         default:
             // escape the search string, it's not supposed to be a regular
             // expression
-            text = StaticUtils.globToRegex(text, searchExpression.spaceMatchNbsp);
+            searchTextExpression = StaticUtils.globToRegex(searchTextExpression, searchExpression.spaceMatchNbsp);
 
             // create a matcher for the search string
-            m_matchers.add(Pattern.compile(text, flags).matcher(""));
+            matchers.add(Pattern.compile(searchTextExpression, flags).matcher(""));
             break;
         case KEYWORD:
             // break the search string into keywords,
             // each of which is a separate search string
-            Pattern.compile(" ").splitAsStream(text.trim()).filter(word -> !word.isEmpty()).map(word -> {
+            Pattern.compile(" ").splitAsStream(searchTextExpression.trim()).filter(word -> !word.isEmpty()).map(word -> {
                 String glob = StaticUtils.globToRegex(word, false);
                 return Pattern.compile(glob, flags).matcher("");
-            }).forEach(m_matchers::add);
+            }).forEach(matchers::add);
             break;
         case REGEXP:
             // space match nbsp (\u00a0)
             if (searchExpression.spaceMatchNbsp) {
-                text = text.replaceAll(" ", "( |\u00A0)");
-                text = text.replaceAll("\\\\s", "(\\\\s|\u00A0)");
+                searchTextExpression = searchTextExpression.replaceAll(" ", "( |\u00A0)");
+                searchTextExpression = searchTextExpression.replaceAll("\\\\s", "(\\\\s|\u00A0)");
             }
 
             // create a matcher for the search string
-            m_matchers.add(Pattern.compile(text, flags).matcher(""));
+            matchers.add(Pattern.compile(searchTextExpression, flags).matcher(""));
             break;
         }
         // create a matcher for the author search string
         if (searchExpression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
-            author = StaticUtils.globToRegex(author, searchExpression.spaceMatchNbsp);
+            authorSearchExpression = StaticUtils.globToRegex(authorSearchExpression, searchExpression.spaceMatchNbsp);
         }
 
-        m_author = Pattern.compile(author, flags).matcher("");
+        this.author = Pattern.compile(authorSearchExpression, flags).matcher("");
 
 
         if (searchExpression.rootDir == null) {
@@ -261,12 +259,9 @@ public class Searcher {
     // ////////////////////////////////////////////////////////////
     // internal functions
 
-    private void addEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, String property, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertyMatch) {
-        SearchResultEntry entry = new SearchResultEntry(num, preamble, srcPrefix,
-                src, target, note, property, srcMatch, targetMatch, noteMatch, propertyMatch);
-        m_searchResults.add(entry);
-        m_numFinds++;
+    private void addEntry(SearchResultEntry entry) {
+        searchResults.add(entry);
+        numFinds++;
     }
 
     /**
@@ -274,7 +269,7 @@ public class Searcher {
      */
     private void foundString(int entryNum, String intro, String src, String target, String note, String property,
             SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches) {
-        if (m_numFinds >= searchExpression.numberOfResults) {
+        if (numFinds >= searchExpression.numberOfResults) {
             return;
         }
 
@@ -285,45 +280,49 @@ public class Searcher {
         } else if (entryNum == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
             addTranslationMemoryEntry(entryNum, intro, src, target, note, property, srcMatches, targetMatches, noteMatches, propertyMatches, key);
         } else {
-            addEntry(entryNum, intro, null, src, target, note, property,
-                    srcMatches, targetMatches, noteMatches, propertyMatches);
+            addEntry(SearchResultEntry.builder().entryNum(entryNum).preambleText(intro).srcPrefix(null).sourceText(src)
+                    .targetText(target).note(note).propertiesString(property).srcMatch(srcMatches)
+                    .targetMatch(targetMatches).noteMatch(noteMatches).propertiesMatch(propertyMatches).build());
         }
     }
 
     private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, String property,
                                            SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches, String key) {
-        if (!m_tmxMap.containsKey(key) || searchExpression.allResults) {
-            addEntry(entryNum, intro, null, src, target, note, property,
-                    srcMatches, targetMatches, noteMatches, propertyMatches);
+        if (!tmxMap.containsKey(key) || searchExpression.allResults) {
+            addEntry(SearchResultEntry.builder().entryNum(entryNum).preambleText(intro).srcPrefix(null).sourceText(src)
+                    .targetText(target).note(note).propertiesString(property).srcMatch(srcMatches).targetMatch(targetMatches)
+                    .noteMatch(noteMatches).propertiesMatch(propertyMatches).build());
             if (!searchExpression.allResults) {
                 // first occurrence
-                m_tmxMap.put(key, 0);
+                tmxMap.put(key, 0);
             }
         } else {
             // next occurrence
-            m_tmxMap.put(key, m_tmxMap.get(key) + 1);
+            tmxMap.put(key, tmxMap.get(key) + 1);
         }
     }
 
     private void addProjectMemoryEntry(int entryNum, String src, String target, String note, String property,
                                        SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches, String key) {
-        if (!m_entryMap.containsKey(key) || searchExpression.allResults) {
+        if (!entryMap.containsKey(key) || searchExpression.allResults) {
             // HP, duplicate entry prevention
             // entries are referenced at offset 1 but stored at offset 0
             String file = searchExpression.fileNames ? getFileForEntry(entryNum + 1) : null;
-            addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
-                    note, property, srcMatches, targetMatches, noteMatches, propertyMatches);
+            addEntry(SearchResultEntry.builder().entryNum(entryNum + 1).preambleText(file).srcPrefix((entryNum + 1) + "> ")
+                    .sourceText(src).targetText(target).note(note).propertiesString(property)
+                    .srcMatch(srcMatches).targetMatch(targetMatches).noteMatch(noteMatches)
+                    .propertiesMatch(propertyMatches).build());
             if (!searchExpression.allResults) { // If we filter results
-                m_entryMap.put(key, 0); // HP
+                entryMap.put(key, 0); // HP
             }
         } else {
-            m_entryMap.put(key, m_entryMap.get(key) + 1);
+            entryMap.put(key, entryMap.get(key) + 1);
         }
     }
 
     private void searchProject() {
         // reset the number of search hits
-        m_numFinds = 0;
+        numFinds = 0;
 
         try {
             searchMemory();
@@ -341,7 +340,7 @@ public class Searcher {
             for (GlossaryEntry en : entries) {
                 checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
                 // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= searchExpression.numberOfResults) {
+                if (numFinds >= searchExpression.numberOfResults) {
                     throw new SearchLimitReachedException();
                 }
                 checkStop.checkInterrupted();
@@ -355,14 +354,14 @@ public class Searcher {
             // Search TM entries, unless we search for date or author.
             // They are not loaded from external TM, so skip the search in
             // that case.
-            Path projectRoot = Paths.get(m_project.getProjectProperties().getProjectRoot());
+            Path projectRoot = Paths.get(project.getProjectProperties().getProjectRoot());
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
-                for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
+                for (Map.Entry<String, ExternalTMX> tmEn : project.getTransMemories().entrySet()) {
                     final String fileTM = searchExpression.fileNames ? projectRoot.relativize(Paths.get(tmEn.getKey())).toString() : null;
                     searchEntries(tmEn.getValue().getEntries(), ENTRY_ORIGIN_TRANSLATION_MEMORY, fileTM);
                     checkStop.checkInterrupted();
                 }
-                for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
+                for (Map.Entry<Language, ProjectTMX> tmEn : project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
                     searchEntries(tmEn.getValue().getDefaults(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
                     searchEntries(tmEn.getValue().getAlternatives(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
@@ -376,15 +375,15 @@ public class Searcher {
         // search the Memory, if requested
         if (searchExpression.memory) {
             // search through all project entries
-            List<SourceTextEntry> allEntries = m_project.getAllEntries();
+            List<SourceTextEntry> allEntries = project.getAllEntries();
             for (int i = 0; i < allEntries.size(); i++) {
                 // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= searchExpression.numberOfResults) {
+                if (numFinds >= searchExpression.numberOfResults) {
                     throw new SearchLimitReachedException();
                 }
                 // get the source and translation of the next entry
                 SourceTextEntry ste = allEntries.get(i);
-                TMXEntry te = m_project.getTranslationInfo(ste);
+                TMXEntry te = project.getTranslationInfo(ste);
 
                 checkEntry(ste.getSrcText(), te.translation, te.note, ste.getRawProperties(), te, i, null);
                 checkStop.checkInterrupted();
@@ -392,31 +391,31 @@ public class Searcher {
 
             // search in orphaned
             if (!searchExpression.excludeOrphans) {
-                m_project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
+                project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
                     final String file = OStrings.getString("CT_ORPHAN_STRINGS");
 
                     public void iterate(String source, TMXEntry en) {
                         // stop searching if the max. nr of hits has been reached
-                        if (m_numFinds >= searchExpression.numberOfResults) {
+                        if (numFinds >= searchExpression.numberOfResults) {
                             return;
                         }
                         checkStop.checkInterrupted();
-                        if (m_project.isOrphaned(source)) {
+                        if (project.isOrphaned(source)) {
                             checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
                 });
-                m_project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
+                project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
                     final String file = OStrings.getString("CT_ORPHAN_STRINGS");
 
                     public void iterate(EntryKey source, TMXEntry en) {
                         // stop searching if the max. nr of hits has been
                         // reached
-                        if (m_numFinds >= searchExpression.numberOfResults) {
+                        if (numFinds >= searchExpression.numberOfResults) {
                             return;
                         }
                         checkStop.checkInterrupted();
-                        if (m_project.isOrphaned(source)) {
+                        if (project.isOrphaned(source)) {
                             checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
@@ -449,7 +448,7 @@ public class Searcher {
     private void searchEntries(Iterable<? extends ITMXEntry> tmEn, int origin, final String tmxID) throws SearchLimitReachedException {
         for (ITMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= searchExpression.numberOfResults) {
+            if (numFinds >= searchExpression.numberOfResults) {
                 throw new SearchLimitReachedException();
             }
 
@@ -562,7 +561,7 @@ public class Searcher {
 
         FilterMaster fm = Core.getFilterMaster();
 
-        final SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
+        final SearchCallback searchCallback = new SearchCallback(project.getProjectProperties());
 
         int depth = searchExpression.recursive ? Integer.MAX_VALUE : 0;
         Files.walk(root, depth, FileVisitOption.FOLLOW_LINKS).forEach(path -> {
@@ -573,7 +572,7 @@ public class Searcher {
 
             searchCallback.setCurrentFile(fi);
             try {
-                fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), searchCallback);
+                fm.loadFile(filename, new FilterContext(project.getProjectProperties()), searchCallback);
             } catch (TranslationException | IOException ex) {
                 Log.log(ex);
             }
@@ -636,7 +635,7 @@ public class Searcher {
      * @return True if the text string contains all search strings
      */
     public boolean searchString(String origText, boolean collapseResults) {
-        if (origText == null || m_matchers == null || m_matchers.isEmpty()) {
+        if (origText == null || matchers == null || matchers.isEmpty()) {
             return false;
         }
 
@@ -645,7 +644,7 @@ public class Searcher {
         foundMatches.clear();
         // check the text against all matchers
         OUT_LOOP:
-        for (Matcher matcher : m_matchers) {
+        for (Matcher matcher : matchers) {
             // check the text against the current matcher
             // if one of the search strings is not found, don't
             // bother looking for the rest of the search strings
@@ -713,7 +712,7 @@ public class Searcher {
                             replaceMatcher.reset(repl);
                         }
                         foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl,
-                                m_project.getProjectProperties().getTargetLanguage().getLocale())));
+                                project.getProjectProperties().getTargetLanguage().getLocale())));
                     } else {
                         foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
                     }
@@ -777,25 +776,25 @@ public class Searcher {
      * @return True if the text string contains the search string
      */
     private boolean searchAuthor(TMXEntry te) {
-        if (te == null || m_author == null) {
+        if (te == null || author == null) {
             return false;
         }
 
-        if (m_author.pattern().pattern().equals("")) {
+        if (author.pattern().pattern().equals("")) {
             // Handle search for null author.
             return te.changer == null && te.creator == null;
         }
 
         if (te.changer != null) {
-            m_author.reset(te.changer);
-            if (m_author.find()) {
+            author.reset(te.changer);
+            if (author.find()) {
                 return true;
             }
         }
 
         if (te.creator != null) {
-            m_author.reset(te.creator);
-            if (m_author.find()) {
+            author.reset(te.creator);
+            if (author.find()) {
                 return true;
             }
         }
@@ -808,7 +807,7 @@ public class Searcher {
 
     public void searchText(String seg, String translation, String filename) {
         // don't look further if the max. nr of hits has been reached
-        if (m_numFinds >= searchExpression.numberOfResults) {
+        if (numFinds >= searchExpression.numberOfResults) {
             return;
         }
 

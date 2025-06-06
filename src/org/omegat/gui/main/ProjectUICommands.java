@@ -130,7 +130,7 @@ public final class ProjectUICommands {
         }
 
         new SwingWorker<Void, Void>() {
-            protected Void doInBackground() throws Exception {
+            protected Void doInBackground() {
 
                 // ask about new project properties
                 ProjectProperties props = new ProjectProperties(dir);

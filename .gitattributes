@@ -4,7 +4,7 @@
 # Linux start script should use lf
 /gradlew        text eol=lf
 # These are Windows script files and should use crlf
-*.bat           text eol=crlf
+/gradlew.bat           text eol=crlf
 # Test data
 test/data/filters/pdf/file-PdfFilter-gold.txt text eol=lf
 # archive version

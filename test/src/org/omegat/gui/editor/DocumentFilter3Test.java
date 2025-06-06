@@ -179,8 +179,7 @@ public class DocumentFilter3Test {
     }
 
     @Test
-    public void testReplace_SetsTextBeingComposed()
-            throws BadLocationException, InterruptedException, InvocationTargetException {
+    public void testReplace_SetsTextBeingComposed() throws BadLocationException, InterruptedException, InvocationTargetException {
         // Arrange
         DocumentFilter3 filter = spy(new DocumentFilter3());
         DocumentFilter.FilterBypass bypassMock = mock(DocumentFilter.FilterBypass.class);

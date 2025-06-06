@@ -74,6 +74,11 @@ tasks.jacocoTestCoverageVerification {
 
 tasks.named("run") {
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('runDebugger', JavaExec) {
@@ -83,6 +88,11 @@ tasks.register('runDebugger', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--illegal-access=warn"])
     debug = true
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('runOnJava17', JavaExec) {
@@ -95,6 +105,11 @@ tasks.register('runOnJava17', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('runOnJava21', JavaExec) {
@@ -107,6 +122,11 @@ tasks.register('runOnJava21', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     jvmArgs(["--add-opens", "java.desktop/sun.awt.X11=ALL-UNNAMED"])
     group = 'application'
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('testIntegration', JavaExec) {
@@ -118,10 +138,21 @@ tasks.register('testIntegration', JavaExec) {
     group = 'omegat workflow'
     mainClass = 'org.omegat.core.data.TestTeamIntegration'
     classpath = sourceSets.testIntegration.runtimeClasspath
-    if (!System.hasProperty('java.util.logging.config.file')) {
-        System.setProperty('java.util.logging.config.file', "${rootDir}/config/test/logger.properties")
+    if (System.hasProperty('java.util.logging.config.file')) {
+        systemProperty 'java.util.logging.config.file', System.getProperty('java.util.logging.config.file')
+    } else {
+        systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     }
-    systemProperties = System.properties
+    systemProperty 'omegat.test.duration', System.getProperty('omegat.test.duration')
+    systemProperty 'omegat.test.repo', System.getProperty('omegat.test.repo')
+    systemProperty 'omegat.test.repo.alt', System.getProperty('omegat.test.repo.alt')
+    systemProperty 'omegat.test.map.repo', System.getProperty('omegat.test.map.repo')
+    systemProperty 'omegat.test.map.file', System.getProperty('omegat.test.map.file')
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PrunMaxHeapSize=1024M run`
+    maxHeapSize = findProperty('runMaxHeapSize')
+    // Ask modules to be up-to-date before run task executed
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
 tasks.register('testOnJava17', Test) {
@@ -201,12 +232,4 @@ tasks.register('testAcceptance', Test) {
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
     dependsOn firstSteps
     dependsOn ':aligner:jar'
-}
-
-tasks.withType(JavaExec).configureEach {
-    // Allow setting the max heap size for the run task from the command line, e.g.
-    // `gradle -PrunMaxHeapSize=1024M run`
-    maxHeapSize = findProperty('runMaxHeapSize')
-    // Ask modules to be up-to-date before run task executed
-    dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }

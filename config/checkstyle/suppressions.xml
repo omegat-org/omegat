@@ -32,9 +32,6 @@
 
     <!-- Permanently suppress errors/warnings -->
     
-    <!-- ignore -->
-    <suppress files="gen.core.*+" checks="RegexpHeader"/>
-
     <!-- tests -->
     <suppress files="TestCore\.java" checks="MethodLength"/>
     <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>
@@ -108,7 +105,7 @@
     <suppress files="AutoCompleter\.java" checks="EmptyStatement"/>
     <suppress files="RepositoriesMappingController\.java" checks="MethodLength"/>
     <suppress files="InstanceEditor\.java" checks="ParameterNumber"/>
-    <suppress files="EditorController\.java" checks="(File|Method)Length"/>
+    <suppress files="EditorController\.java" checks="FileLength"/>
     <suppress files="ProjectUICommands\.java" checks="MethodLength"/>
     <suppress files="ProjectFilesListController\.java" checks="MethodLength"/>
     <suppress files="BaseMainWindowMenu\.java" checks="MethodLength"/>
@@ -133,9 +130,7 @@
     <suppress files="GITExternalGpgSigner\.java" checks="ConstantName" lines="74-84"/>
 
     <!-- Searcher -->
-    <suppress files="Searcher\.java"
-              checks="(LineLength|MemberName|ParameterNumber|MissingSwitchDefault|InnerAssignment)"
-         lines="90,91,92,96,100,104,105,107,264,275,276,284,286,293,294,308,309,359,361,449,495,605,674,710"/>
+    <suppress files="Searcher\.java" checks="ParameterNumber"/>
 
     <!-- matching -->
     <suppress files="NearString\.java" checks="TypeName" lines="50-70"/>

@@ -80,6 +80,7 @@ public class EditingBehaviorPanel extends JPanel {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         paraMarkLabel = new javax.swing.JLabel();
         paraMarkText = new javax.swing.JTextField();
+        singleClickActivationCheckBox = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.GridBagLayout());
@@ -87,7 +88,8 @@ public class EditingBehaviorPanel extends JPanel {
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(prefixLabel.getFont());
         descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION")); // NOI18N
+        descriptionTextArea.setText("descriptionTextArea"); // NOI18N
+        descriptionTextArea.setToolTipText("");
         descriptionTextArea.setWrapStyleWord(true);
         descriptionTextArea.setFocusable(false);
         descriptionTextArea.setOpaque(false);
@@ -102,7 +104,7 @@ public class EditingBehaviorPanel extends JPanel {
 
         ourButtonGroup.add(defaultRadio);
         defaultRadio.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(defaultRadio, OStrings.getString("WF_OPTION_INSERT_SOURCE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(defaultRadio, "defaultRadio"); // NOI18N
         defaultRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         defaultRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +121,7 @@ public class EditingBehaviorPanel extends JPanel {
         add(defaultRadio, gridBagConstraints);
 
         ourButtonGroup.add(leaveEmptyRadio);
-        org.openide.awt.Mnemonics.setLocalizedText(leaveEmptyRadio, OStrings.getString("WF_OPTION_INSERT_NOTHTHING")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(leaveEmptyRadio, "leaveEmptyRadio"); // NOI18N
         leaveEmptyRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -130,12 +132,7 @@ public class EditingBehaviorPanel extends JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         add(leaveEmptyRadio, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(insertFuzzyCheckBox, OStrings.getString("WF_OPTION_INSERT_FUZZY_MATCH")); // NOI18N
-        insertFuzzyCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radiosActionPerformed(evt);
-            }
-        });
+        org.openide.awt.Mnemonics.setLocalizedText(insertFuzzyCheckBox, "insertFuzzyCheckBox"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -146,7 +143,7 @@ public class EditingBehaviorPanel extends JPanel {
         add(insertFuzzyCheckBox, gridBagConstraints);
 
         similarityLabel.setLabelFor(similaritySpinner);
-        org.openide.awt.Mnemonics.setLocalizedText(similarityLabel, OStrings.getString("GUI_WORKFLOW_OPTION_Minimal_Similarity")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(similarityLabel, "similarityLabel"); // NOI18N
         similarityLabel.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -307,6 +304,14 @@ public class EditingBehaviorPanel extends JPanel {
         gridBagConstraints.ipadx = 250;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(paraMarkText, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(singleClickActivationCheckBox, "jCheckBox1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(singleClickActivationCheckBox, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void radiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiosActionPerformed
@@ -320,10 +325,10 @@ public class EditingBehaviorPanel extends JPanel {
     javax.swing.JCheckBox cbSaveOrigin;
     javax.swing.JCheckBox convertNumbers;
     javax.swing.JRadioButton defaultRadio;
-    private javax.swing.JTextArea descriptionTextArea;
+    javax.swing.JTextArea descriptionTextArea;
     javax.swing.JCheckBox exportCurrentSegment;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel initialSegCountLabel;
+    javax.swing.JLabel initialSegCountLabel;
     javax.swing.JSpinner initialSegCountSpinner;
     javax.swing.JCheckBox insertFuzzyCheckBox;
     javax.swing.JRadioButton leaveEmptyRadio;
@@ -334,6 +339,7 @@ public class EditingBehaviorPanel extends JPanel {
     javax.swing.JTextField prefixText;
     javax.swing.JLabel similarityLabel;
     javax.swing.JSpinner similaritySpinner;
+    javax.swing.JCheckBox singleClickActivationCheckBox;
     javax.swing.JCheckBox stopOnAlternativeTranslation;
     javax.swing.JCheckBox tagValidateOnLeave;
     // End of variables declaration//GEN-END:variables

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Alex Buloichik
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,9 +23,21 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.glossary;
+package org.omegat.filters4.xml.openxml;
 
-import org.omegat.core.TestCore;
+import static org.junit.Assert.assertTrue;
 
-public class FindGlossaryThreadTest extends TestCore {
+import java.io.File;
+import java.util.Collections;
+
+import org.junit.Test;
+
+public class OpenXmlFilterTest extends org.omegat.filters.TestFilterBase {
+
+    private static final String TEST_DATA = "test/data/filters/openXML/document.xml";
+
+    @Test
+    public void testOpenXmlFilterIsFileSupported() {
+        assertTrue(new OpenXmlFilter(false).isFileSupported(new File(TEST_DATA), Collections.emptyMap(), null));
+    }
 }

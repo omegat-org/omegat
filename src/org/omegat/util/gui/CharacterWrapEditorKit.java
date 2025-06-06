@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,14 +26,9 @@
 
 package org.omegat.util.gui;
 
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.BoxView;
-import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
-import javax.swing.text.IconView;
 import javax.swing.text.LabelView;
 import javax.swing.text.ParagraphView;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
@@ -46,31 +42,17 @@ import javax.swing.text.ViewFactory;
 @SuppressWarnings("serial")
 public class CharacterWrapEditorKit extends StyledEditorKit {
 
-    private static final ViewFactory FACTORY = elem -> {
-        String kind = elem.getName();
-        if (kind != null) {
-            if (kind.equals(AbstractDocument.ContentElementName)) {
-                return new CharacterWrapLabelView(elem);
-            } else if (kind.equals(AbstractDocument.ParagraphElementName)) {
-                return new ParagraphView(elem);
-            } else if (kind.equals(AbstractDocument.SectionElementName)) {
-                return new BoxView(elem, View.Y_AXIS);
-            } else if (kind.equals(StyleConstants.ComponentElementName)) {
-                return new ComponentView(elem);
-            } else if (kind.equals(StyleConstants.IconElementName)) {
-                return new IconView(elem);
-            }
-        }
-        // default to text display
-        return new CharacterWrapLabelView(elem);
-    };
+    private static final ViewFactory FACTORY = new ViewFactoryHelper(
+            ViewFactoryHelper.getDefaultMappings(CharacterWrapLabelView::new, ParagraphView::new),
+            CharacterWrapLabelView::new // Default fallback to CharacterWrapLabelView
+    );
 
     @Override
     public ViewFactory getViewFactory() {
         return FACTORY;
     }
 
-    private static class CharacterWrapLabelView extends LabelView {
+    static class CharacterWrapLabelView extends LabelView {
 
         CharacterWrapLabelView(Element elem) {
             super(elem);

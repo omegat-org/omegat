@@ -57,7 +57,6 @@ swing_extra_locales = "0.3.3"
 mockito = "5.17.0"
 json_java = "20250517"
 protobuf_java = "3.25.5"
-mockito = "5.17.0"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -175,7 +174,6 @@ assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", 
 morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
 morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
 swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
-mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 json = {group = "org.json", name = "json", version.ref = "json_java"}
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}

@@ -38,6 +38,8 @@ import java.util.regex.Pattern;
 
 public final class HTMLUtils {
 
+    public static final int PARSE_ERROR = -1;
+
     private HTMLUtils() {
     }
 
@@ -174,125 +176,125 @@ public final class HTMLUtils {
             { "spades", 9824 }, { "clubs", 9827 }, { "hearts", 9829 },
             { "diams", 9830 } };
 
-    /** Converts HTML entities to normal characters */
-    public static String entitiesToChars(String str) {
-        int strlen = str.length();
-        StringBuilder res = new StringBuilder(strlen);
-        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
-            cp = str.codePointAt(i);
-            switch (cp) {
-            case '&':
-                int cp1;
+    /**
+     * Converts HTML entities in the given input string to their corresponding characters.
+     * This handles numeric and named entities, resolving them to their appropriate Unicode representations.
+     * If an entity is unresolvable or malformed, it is left unchanged in the output string.
+     *
+     * @param input the input string that may contain HTML entities to be converted
+     * @return a string with HTML entities replaced by their corresponding characters
+     */
+    public static String entitiesToChars(String input) {
+        int inputLength = input.length();
+        StringBuilder result = new StringBuilder(inputLength);
+        for (int cp, i = 0; i < inputLength; i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            if (cp == '&') {
                 // if there's one more symbol, reading it,
                 // otherwise it's a dangling '&'
-                if (str.codePointCount(i, strlen) < 2) {
-                    res.appendCodePoint(cp);
-                    break;
-                } else {
-                    cp1 = str.codePointAt(str.offsetByCodePoints(i, 1));
+                if (input.codePointCount(i, inputLength) < 2) {
+                    result.appendCodePoint(cp);
+                    continue;
                 }
-                if (cp1 == '#') {
+                int nextCodePoint;
+                nextCodePoint = input.codePointAt(input.offsetByCodePoints(i, 1));
+                if (nextCodePoint == '#') {
                     // numeric entity
-                    int cp2 = str.codePointAt(str.offsetByCodePoints(i, 2));
-                    if (cp2 == 'x' || cp2 == 'X') {
-                        // hex numeric entity
-                        int hexStart = str.offsetByCodePoints(i, 3);
-                        int hexEnd = hexStart;
-                        while (hexEnd < strlen) {
-                            int hexCp = str.codePointAt(hexEnd);
-                            if (!isHexDigit(hexCp)) {
-                                break;
-                            }
-                            hexEnd += Character.charCount(hexCp);
-                        }
-                        String sEntity = str.substring(hexStart, hexEnd);
-                        try {
-                            int nEntity = Integer.parseInt(sEntity, 16);
-                            if (nEntity > 0 && nEntity <= 0x10FFFF) {
-                                res.appendCodePoint(nEntity);
-                                if (hexEnd < strlen && str.codePointAt(hexEnd) == ';') {
-                                    i = hexEnd;
-                                } else {
-                                    i = str.offsetByCodePoints(hexEnd, -1);
-                                }
-                            } else {
-                                // too big number
-                                // dangling '&'
-                                res.appendCodePoint(cp);
-                            }
-                        } catch (NumberFormatException nfe) {
-                            // do nothing
-                            // dangling '&'
-                            res.appendCodePoint(cp);
-                        }
-                    } else {
-                        // decimal entity
-                        int decStart = str.offsetByCodePoints(i, 2);
-                        int decEnd = decStart;
-                        while (decEnd < strlen) {
-                            int decCp = str.codePointAt(decEnd);
-                            if (!isDecimalDigit(decCp)) {
-                                break;
-                            }
-                            decEnd += Character.charCount(decCp);
-                        }
-                        String sEntity = str.substring(decStart, decEnd);
-                        try {
-                            int nEntity = Integer.parseInt(sEntity, 10);
-                            if (nEntity > 0 && nEntity <= 0x10FFFF) {
-                                res.appendCodePoint(nEntity);
-                                if (decEnd < strlen && str.codePointAt(decEnd) == ';') {
-                                    i = decEnd;
-                                } else {
-                                    i = str.offsetByCodePoints(decEnd, -1);
-                                }
-                            } else {
-                                // too big number
-                                // dangling '&'
-                                res.appendCodePoint(cp);
-                            }
-                        } catch (NumberFormatException nfe) {
-                            // do nothing
-                            // dangling '&'
-                            res.appendCodePoint(cp);
-                        }
-                    }
-                } else if (isLatinLetter(cp1)) {
-                    // named entity?
-                    int entStart = str.offsetByCodePoints(i, 1);
-                    int entEnd = entStart;
-                    while (entEnd < strlen) {
-                        int entCp = str.codePointAt(entEnd);
-                        // Some entities contain numbers, e.g. frac12
-                        if (!isLatinLetter(entCp) && !isDecimalDigit(entCp)) {
-                            break;
-                        }
-                        entEnd += Character.charCount(entCp);
-                    }
-                    String sEntity = str.substring(entStart, entEnd);
-                    int nEntity = lookupEntity(sEntity);
-                    if (nEntity > 0 && nEntity <= 65535) {
-                        res.append((char) nEntity);
-                        if (entEnd < strlen && str.codePointAt(entEnd) == ';') {
-                            i = entEnd;
-                        } else {
-                            i = str.offsetByCodePoints(entEnd, -1);
-                        }
-                    } else {
-                        // too big number
-                        // dangling '&'
-                        res.appendCodePoint(cp);
-                    }
+                    i = handleNumericEntity(input, i, inputLength, result);
+                } else if (isLatinLetter(nextCodePoint)) {
+                    i = handleNamedEntity(input, i, inputLength, result);
                 } else {
                     // dangling '&'
-                    res.appendCodePoint(cp);
+                    result.appendCodePoint(cp);
                 }
-                break;
-            default:
-                res.appendCodePoint(cp);
+            } else {
+                result.appendCodePoint(cp);
             }
         }
-        return res.toString();
+        return result.toString();
+    }
+
+    private static int handleNumericEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int thirdCodePoint = input.codePointAt(input.offsetByCodePoints(startIndex, 2));
+        if (thirdCodePoint == 'x' || thirdCodePoint == 'X') {
+            return handleHexEntity(input, startIndex, inputLength, result);
+        } else {
+            return handleDecimalEntity(input, startIndex, inputLength, result);
+        }
+    }
+
+    private static int handleHexEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int startOffset = input.offsetByCodePoints(startIndex, 3);
+        int endOffset = findEndOfDigits(input, startOffset, inputLength, HTMLUtils::isHexDigit);
+
+        String hexValue = input.substring(startOffset, endOffset);
+        int parsedValue = parseEntity(hexValue, 16);
+        return processParsedEntity(input, startIndex, inputLength, result, endOffset, parsedValue);
+    }
+
+    private static int handleDecimalEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int startOffset = input.offsetByCodePoints(startIndex, 2);
+        int endOffset = findEndOfDigits(input, startOffset, inputLength, HTMLUtils::isDecimalDigit);
+
+        String decimalValue = input.substring(startOffset, endOffset);
+        int parsedValue = parseEntity(decimalValue, 10);
+        return processParsedEntity(input, startIndex, inputLength, result, endOffset, parsedValue);
+    }
+
+    private static int handleNamedEntity(String input, int startIndex, int inputLength, StringBuilder result) {
+        int startOffset = input.offsetByCodePoints(startIndex, 1);
+        int endOffset = findEndOfDigits(input, startOffset, inputLength, ch -> isLatinLetter(ch) || isDecimalDigit(ch));
+
+        String entityName = input.substring(startOffset, endOffset);
+        int parsedValue = lookupEntity(entityName);
+        if (parsedValue > 0 && parsedValue <= 65535) {
+            result.append((char) parsedValue);
+            if (endOffset < inputLength && input.codePointAt(endOffset) == ';') {
+                return endOffset;
+            }
+            return input.offsetByCodePoints(endOffset, -1);
+        }
+
+        // Invalid named entity
+        result.appendCodePoint(input.codePointAt(startIndex));
+        return startIndex;
+    }
+
+    private static int processParsedEntity(String input, int startIndex, int inputLength, StringBuilder result, int endOffset, int parsedValue) {
+        // check if parsedValue is PARSE_ERROR or invalid unicode code point.
+        if (parsedValue <= 0 || parsedValue > 0x10FFFF) {
+            // invalid char code
+            result.appendCodePoint(input.codePointAt(startIndex));
+            return startIndex;
+        }
+
+        result.appendCodePoint(parsedValue);
+        if (endOffset < inputLength && input.codePointAt(endOffset) == ';') {
+            return endOffset;
+        }
+        return input.offsetByCodePoints(endOffset, -1);
+    }
+
+    private static int findEndOfDigits(String input, int startOffset, int inputLength, java.util.function.IntPredicate isDigit) {
+        int currentOffset = startOffset;
+        while (currentOffset < inputLength) {
+            int currentCodePoint = input.codePointAt(currentOffset);
+            if (!isDigit.test(currentCodePoint)) {
+                break;
+            }
+            currentOffset += Character.charCount(currentCodePoint);
+        }
+        return currentOffset;
+    }
+
+    private static int parseEntity(String entityValue, int radix) {
+        try {
+            return Integer.parseInt(entityValue, radix);
+        } catch (NumberFormatException e) {
+            // return out of char range that is recognized in processParsedEntity method
+            // as to ignore parsedValue and return the original character.
+            return PARSE_ERROR;
+        }
     }
 
     /** Returns true if a char is a latin letter */
@@ -314,10 +316,9 @@ public final class HTMLUtils {
      * returns a character for HTML entity, or -1 if the passed string is not an entity
      */
     private static int lookupEntity(String entity) {
-        for (int i = 0; i < ENTITIES.length; i++) {
-            Object[] onent = ENTITIES[i];
+        for (Object[] onent : ENTITIES) {
             if (entity.equals(onent[0])) {
-                return ((Integer) onent[1]).intValue();
+                return (Integer) onent[1];
             }
         }
         return -1;
@@ -405,7 +406,7 @@ public final class HTMLUtils {
         if (encoding != null) {
             CharsetEncoder charsetEncoder = Charset.forName(encoding).newEncoder();
             int i = 0;
-            while (true) {
+            do {
                 String substring;
                 for (int cp; i < contents.length(); i += substring.length()) {
                     cp = contents.codePointAt(i);
@@ -416,10 +417,7 @@ public final class HTMLUtils {
                         break;
                     }
                 }
-                if (i == contents.length()) {
-                    break;
-                }
-            }
+            } while (i != contents.length());
         }
         return contents;
     }
@@ -438,13 +436,20 @@ public final class HTMLUtils {
 
     public static String getSpacePostfix(String input, boolean compressWhitespace) {
         int size = input.length();
-        for (int cp, i = size; i > 0; i -= Character.charCount(cp)) {
-            cp = input.codePointBefore(i);
+        int i = size;
+        while (i > 0) {
+            int cp = input.codePointBefore(i);
             if (!Character.isWhitespace(cp)) {
-                return i == size ? ""
-                        : input.substring(i, compressWhitespace
-                        ? Math.min(input.offsetByCodePoints(i, 1), size) : size);
+                if (i == size) {
+                    return "";
+                } else {
+                    if (compressWhitespace) {
+                        return input.substring(i, Math.min(input.offsetByCodePoints(i, 1), size));
+                    }
+                    return input.substring(i, size);
+                }
             }
+            i -= Character.charCount(cp);
         }
         return "";
     }

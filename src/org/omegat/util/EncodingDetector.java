@@ -31,7 +31,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
@@ -115,7 +114,7 @@ public final class EncodingDetector {
         if (encoding != null) {
             return encoding;
         }
-        return defaultEncoding != null ? Charset.forName(defaultEncoding) : StandardCharsets.UTF_8;
+        return defaultEncoding != null ? Charset.forName(defaultEncoding) : Charset.defaultCharset();
     }
 
     /**

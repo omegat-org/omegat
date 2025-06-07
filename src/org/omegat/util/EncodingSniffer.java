@@ -449,6 +449,8 @@ public final class EncodingSniffer {
         return toCharset(charsetName);
     }
 
+    private static final String ENCODING_ATTRIBUTE = "encoding";
+
     /**
      * Searches the specified XML content for an XML declaration and returns the
      * encoding if found, otherwise returns {@code null}.
@@ -462,38 +464,62 @@ public final class EncodingSniffer {
      */
     public static Charset sniffEncodingFromXmlDeclaration(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_XML_CONTENT_SNIFFED);
-        Charset encoding = null;
-        if (bytes.length > 5 && XML_DECLARATION_PREFIX[0] == bytes[0] && XML_DECLARATION_PREFIX[1] == bytes[1]
-                && XML_DECLARATION_PREFIX[2] == bytes[2] && XML_DECLARATION_PREFIX[3] == bytes[3]
-                && XML_DECLARATION_PREFIX[4] == bytes[4] && XML_DECLARATION_PREFIX[5] == bytes[5]) {
-            final int index = ArrayUtils.indexOf(bytes, (byte) '?', 2);
-            if (index + 1 < bytes.length && bytes[index + 1] == '>') {
-                final String declaration = new String(bytes, 0, index + 2, US_ASCII);
-                int start = declaration.indexOf("encoding");
-                if (start != -1) {
-                    start += 8;
-                    final char delimiter;
-                    outer: while (true) {
-                        switch (declaration.charAt(start)) {
-                        case '"':
-                        case '\'':
-                            delimiter = declaration.charAt(start);
-                            start = start + 1;
-                            break outer;
+        if (!startsWithXmlDeclaration(bytes)) {
+            return null;
+        }
 
-                        default:
-                            start++;
-                        }
-                    }
-                    final int end = declaration.indexOf(delimiter, start);
-                    encoding = toCharset(declaration.substring(start, end));
-                }
+        final int declarationEndIndex = ArrayUtils.indexOf(bytes, (byte) '?', 2);
+        if (declarationEndIndex + 1 >= bytes.length || bytes[declarationEndIndex + 1] != '>') {
+            return null;
+        }
+
+        final String declaration = new String(bytes, 0, declarationEndIndex + 2, US_ASCII);
+        final Charset charset = extractEncodingFromDeclaration(declaration);
+
+        if (charset != null && Log.isDebugEnabled()) {
+            Log.logDebug("Encoding found in XML declaration: '{}'", charset);
+        }
+        return charset;
+    }
+
+    private static boolean startsWithXmlDeclaration(final byte[] bytes) {
+        return bytes.length > 5 &&
+                XML_DECLARATION_PREFIX[0] == bytes[0] &&
+                XML_DECLARATION_PREFIX[1] == bytes[1] &&
+                XML_DECLARATION_PREFIX[2] == bytes[2] &&
+                XML_DECLARATION_PREFIX[3] == bytes[3] &&
+                XML_DECLARATION_PREFIX[4] == bytes[4] &&
+                XML_DECLARATION_PREFIX[5] == bytes[5];
+    }
+
+    private static Charset extractEncodingFromDeclaration(final String declaration) {
+        int encodingStart = declaration.indexOf(ENCODING_ATTRIBUTE);
+        if (encodingStart == -1) {
+            return null;
+        }
+
+        encodingStart += ENCODING_ATTRIBUTE.length();
+        while (encodingStart < declaration.length()) {
+            char currentChar = declaration.charAt(encodingStart);
+            if (currentChar == '"' || currentChar == '\'') {
+                break;
             }
+            encodingStart++;
         }
-        if (encoding != null && Log.isDebugEnabled()) {
-            Log.logDebug("Encoding found in XML declaration: '{}'", encoding);
+
+        if (encodingStart >= declaration.length()) {
+            return null;
         }
-        return encoding;
+
+        final char delimiter = declaration.charAt(encodingStart);
+        encodingStart++;
+
+        final int encodingEnd = declaration.indexOf(delimiter, encodingStart);
+        if (encodingEnd == -1) {
+            return null;
+        }
+
+        return toCharset(declaration.substring(encodingStart, encodingEnd));
     }
 
     /**

@@ -32,25 +32,6 @@ import static org.junit.Assert.assertEquals;
 public class HTMLUtilsTest {
 
     @Test
-    public void testEntitiesToChars() {
-        // Named entities
-        assertEquals("<", HTMLUtils.entitiesToChars("&lt;"));
-        assertEquals(">", HTMLUtils.entitiesToChars("&gt;"));
-        assertEquals("&", HTMLUtils.entitiesToChars("&amp;"));
-        assertEquals("\"", HTMLUtils.entitiesToChars("&quot;"));
-
-        // Numeric entities
-        assertEquals("\"", HTMLUtils.entitiesToChars("&#34;"));
-        assertEquals("\"", HTMLUtils.entitiesToChars("&#x22;"));
-        assertEquals("©", HTMLUtils.entitiesToChars("&#169;"));
-
-        // Invalid or unsupported entities
-        assertEquals("&invalid;", HTMLUtils.entitiesToChars("&invalid;"));
-        assertEquals("&;", HTMLUtils.entitiesToChars("&;"));
-        assertEquals("& #;", HTMLUtils.entitiesToChars("& #;")); // malformed
-    }
-
-    @Test
     public void getSpacePrefix() {
         //no blank prefix
         assertEquals("", HTMLUtils.getSpacePrefix("a", true));

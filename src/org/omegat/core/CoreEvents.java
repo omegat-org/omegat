@@ -111,9 +111,12 @@ public final class CoreEvents {
     public static void unregisterEditorEventListener(final IEditorEventListener listener) {
         EDITOR_EVENT_LISTENERS.remove(listener);
     }
+    
+    public static boolean isInProjectEventLoop = false;
 
     /** Fire event. */
     public static void fireProjectChange(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
+        isInProjectEventLoop = true; // done by the calling thread, not by UI thread (inside invokeLater) !
         SwingUtilities.invokeLater(() -> {
             Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
             for (IProjectEventListener listener : PROJECT_EVENT_LISTENERS) {
@@ -123,6 +126,7 @@ public final class CoreEvents {
                     log("ERROR_EVENT_PROJECT_CHANGE", t);
                 }
             }
+            isInProjectEventLoop = false;
         });
     }
 

@@ -270,7 +270,8 @@ public class EntityUtil {
 
     private String rewriteUnencodableCharacters(String contents, String encoding) {
         CharsetEncoder charsetEncoder = Charset.forName(encoding).newEncoder();
-        for (int i = 0; i < contents.length(); ) {
+        int i = 0;
+        while (i < contents.length()) {
             int codePoint = contents.codePointAt(i);
             String charAsString = new String(Character.toChars(codePoint));
             if (!charsetEncoder.canEncode(charAsString)) {
@@ -392,5 +393,4 @@ public class EntityUtil {
         }
         return -1;
     }
-
 }

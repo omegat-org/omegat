@@ -26,17 +26,12 @@
 
 package org.omegat.filters2.html2;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.nio.charset.Charset;
-import java.util.regex.Matcher;
+import org.omegat.util.BufferedFileReader;
 
-import org.omegat.util.OConsts;
-import org.omegat.util.PatternConsts;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import static org.omegat.util.EncodingDetector.detectHtmlEncoding;
 
 /**
  * This class automatically detects encoding of an inner HTML file and
@@ -52,9 +47,7 @@ import org.omegat.util.PatternConsts;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
-public class HTMLReader extends Reader implements AutoCloseable {
-    /** Inner reader */
-    private final BufferedReader reader;
+public class HTMLReader extends BufferedFileReader implements AutoCloseable {
 
     /**
      * Creates a new instance of HTMLReader. If encoding cannot be detected,
@@ -64,128 +57,45 @@ public class HTMLReader extends Reader implements AutoCloseable {
      *
      * @param fileName
      *            The file to read.
-     * @param encoding
+     * @param defaultEncoding
      *            The encoding to use if we can't autodetect.
      */
-    public HTMLReader(String fileName, String encoding) throws IOException {
-        reader = new BufferedReader(createReader(fileName, encoding));
-    }
-
-    private String encoding = null;
-
-    /**
-     * Returns encoding that was used to read the HTML file.
-     */
-    public String getEncoding() {
-        return encoding;
-    }
-
-    /**
-     * Returns the reader of the underlying file in the correct encoding.
-     *
-     * <p>
-     * We can detect the following:
-     * <ul>
-     * <li>UTF-16 with BOM (byte order mark)
-     * <li>UTF-8 with BOM (byte order mark)
-     * <li>Any other encoding with 8-bit Latin symbols (e.g. Windows-1251, UTF-8
-     * etc), if it is specified using XML/HTML-style encoding declarations.
-     * </ul>
-     * <p>
-     * Note that we cannot detect UTF-16 encoding, if there's no BOM!
-     */
-    private Reader createReader(String fileName, String defaultEncoding) throws IOException {
-        // BOM detection
-        BufferedInputStream is = new BufferedInputStream(new FileInputStream(fileName));
-
-        is.mark(OConsts.READ_AHEAD_LIMIT);
-
-        int char1 = is.read();
-        int char2 = is.read();
-        int char3 = is.read();
-        if (char1 == 0xFE && char2 == 0xFF) {
-            encoding = "UTF-16BE";
-        }
-        if (char1 == 0xFF && char2 == 0xFE) {
-            encoding = "UTF-16LE";
-        }
-        if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF) {
-            encoding = "UTF-8";
-        }
-        is.reset();
-        if (encoding != null) {
-            return new InputStreamReader(is, encoding);
-        }
-
-        is.mark(OConsts.READ_AHEAD_LIMIT);
-        byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
-        int len = is.read(buf);
-        if (len > 0) {
-            String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
-                    : new String(buf, 0, len, defaultEncoding);
-
-            Matcher matcherHtml = PatternConsts.HTML_ENCODING.matcher(buffer);
-            if (matcherHtml.find()) {
-                encoding = matcherHtml.group(1);
-            } else if (encoding == null) {
-                Matcher matcherHtml5 = PatternConsts.HTML5_ENCODING.matcher(buffer);
-                if (matcherHtml5.find()) {
-                    encoding = matcherHtml5.group(1);
-                } else if (encoding == null) {
-                    Matcher matcherXml = PatternConsts.XML_ENCODING.matcher(buffer);
-                    if (matcherXml.find()) {
-                        encoding = matcherXml.group(1);
-                    }
-                }
-            }
-        }
-
-        // reset the inputstream to its start
-        is.reset();
-
-        // create an inputstream reader
-        InputStreamReader isr = null;
-
-        // try the encoding specified in the file first
-        if (encoding != null) {
-            try {
-                isr = new InputStreamReader(is, encoding);
-            } catch (Exception e) {
-            }
-        }
-        // if there's no reader yet, try the default encoding
-        if (isr == null) {
-            try {
-                isr = new InputStreamReader(is, defaultEncoding);
-                encoding = defaultEncoding;
-            } catch (Exception e) {
-            }
-        }
-        // just create one without an encoding and cross fingers
-        if (isr == null) {
-            isr = new InputStreamReader(is, Charset.defaultCharset());
-            encoding = Charset.defaultCharset().name();
-        }
-        return isr;
-    }
-
-    public void close() throws IOException {
-        reader.close();
+    public HTMLReader(String fileName, String defaultEncoding) throws FileNotFoundException {
+        super(fileName, detectHtmlEncoding(fileName, defaultEncoding));
     }
 
     boolean readFirstTime = true;
 
+    /**
+     * Reads characters into a portion of an array. If this is the first time
+     * the method is invoked, it ensures that the Byte Order Mark (BOM) is
+     * handled correctly by resetting the stream if a BOM is not present.
+     * Subsequent reads proceed as normal.
+     *
+     * @param cbuf
+     *            the destination buffer to hold the characters read from the
+     *            stream
+     * @param off
+     *            the start offset in the buffer where characters are written
+     * @param len
+     *            the maximum number of characters to read
+     * @return the number of characters read into the buffer or -1 if the end of
+     *         the stream has been reached
+     * @throws IOException
+     *             if an I/O error occurs
+     */
+    @Override
     public int read(char[] cbuf, int off, int len) throws IOException {
         // BOM (byte order mark) bugfix
         if (readFirstTime) {
             readFirstTime = false;
-            reader.mark(1);
-            int ch = reader.read();
+            super.mark(1);
+            int ch = super.read();
             if (ch != 0xFEFF) {
-                reader.reset();
+                super.reset();
             }
         }
-        return reader.read(cbuf, off, len);
+        return super.read(cbuf, off, len);
     }
 
 }

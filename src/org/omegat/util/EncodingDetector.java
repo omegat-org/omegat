@@ -32,8 +32,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
@@ -108,12 +106,15 @@ public final class EncodingDetector {
         try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(fileName))) {
             encoding = detectBOM(inputStream);
             if (encoding == null) {
-                encoding = detectEncodingFromContent(inputStream, defaultEncoding);
+                encoding = detectEncodingFromContent(inputStream);
             }
         } catch (IOException ignored) {
             // ignore exceptions
         }
-        return encoding != null ? encoding : Charset.defaultCharset();
+        if (encoding != null) {
+            return encoding;
+        }
+        return defaultEncoding != null ? Charset.forName(defaultEncoding) : StandardCharsets.UTF_8;
     }
 
     /**
@@ -133,19 +134,12 @@ public final class EncodingDetector {
      */
     private static Charset detectBOM(BufferedInputStream inputStream) throws IOException {
         inputStream.mark(OConsts.READ_AHEAD_LIMIT);
-        int firstByte = inputStream.read();
-        int secondByte = inputStream.read();
-        int thirdByte = inputStream.read();
+        byte[] cbuf = new byte[3];
+        cbuf[0] = (byte) inputStream.read();
+        cbuf[1] = (byte) inputStream.read();
+        cbuf[2] = (byte) inputStream.read();
         inputStream.reset();
-
-        if (firstByte == 0xFE && secondByte == 0xFF) {
-            return StandardCharsets.UTF_16BE;
-        } else if (firstByte == 0xFF && secondByte == 0xFE) {
-            return StandardCharsets.UTF_16LE;
-        } else if (firstByte == 0xEF && secondByte == 0xBB && thirdByte == 0xBF) {
-            return StandardCharsets.UTF_8;
-        }
-        return null;
+        return EncodingSniffer.sniffEncodingFromUnicodeBom(cbuf);
     }
 
     /**
@@ -154,63 +148,24 @@ public final class EncodingDetector {
      * @param inputStream
      *            the BufferedInputStream to read and detect the encoding from.
      *            The stream's position will be reset after detection.
-     * @param defaultEncoding
-     *            the default encoding to use if no encoding is specified in the
-     *            HTML file.
      * @return the Charset corresponding to the detected encoding, or null if no
      *         encoding is found.
      * @throws IOException
      *             if an I/O error occurs while reading from the stream.
      */
-    private static Charset detectEncodingFromContent(BufferedInputStream inputStream, String defaultEncoding)
+    private static Charset detectEncodingFromContent(BufferedInputStream inputStream)
             throws IOException {
+        Charset detectedEncoding;
         inputStream.mark(OConsts.READ_AHEAD_LIMIT);
-
-        byte[] buffer = new byte[OConsts.READ_AHEAD_LIMIT];
-        int length = inputStream.read(buffer);
+        detectedEncoding = EncodingSniffer.sniffEncodingFromXmlDeclaration(inputStream);
         inputStream.reset();
 
-        if (length <= 0) {
-            return null;
+        if (detectedEncoding != null) {
+            return detectedEncoding;
         }
-
-        String content = defaultEncoding == null ? new String(buffer, 0, length, Charset.defaultCharset())
-                : new String(buffer, 0, length, defaultEncoding);
-
-        // Extracted helper method to detect charset
-        return detectCharset(content, PatternConsts.HTML_ENCODING, PatternConsts.HTML5_ENCODING,
-                PatternConsts.XML_ENCODING);
-    }
-
-    /**
-     * Detects the character encoding of a given content by matching it against
-     * a series of patterns.
-     * <p>
-     * Each pattern is used to search for an encoding declaration in the
-     * content, and if found, the corresponding charset is returned. If none of
-     * the patterns match or an invalid charset is encountered, null is
-     * returned.
-     *
-     * @param content
-     *            the content in which the character encoding is to be detected
-     * @param patterns
-     *            an array of regular expression patterns used to identify the
-     *            character encoding declaration
-     * @return the detected Charset if a matching pattern is found and a valid
-     *         encoding is identified, or null if no match or valid encoding is
-     *         found
-     */
-    private static Charset detectCharset(String content, Pattern... patterns) {
-        for (Pattern pattern : patterns) {
-            Matcher matcher = pattern.matcher(content);
-            if (matcher.find()) {
-                try {
-                    return Charset.forName(matcher.group(1));
-                } catch (Exception ignored) {
-                    // ignore and try next.
-                }
-            }
-        }
-        return null;
+        inputStream.mark(OConsts.READ_AHEAD_LIMIT);
+        detectedEncoding = EncodingSniffer.sniffEncodingFromMetaTag(inputStream);
+        inputStream.reset();
+        return detectedEncoding;
     }
 }

@@ -41,8 +41,8 @@ public final class EncodingDetector {
     }
 
     /**
-     * Detect the encoding of the supplied file.
-     * Convenience method for {@link #detectEncoding(java.io.InputStream)}.
+     * Detect the encoding of the supplied file. Convenience method for
+     * {@link #detectEncoding(java.io.InputStream)}.
      */
     public static String detectEncoding(File inFile) throws IOException {
         try (FileInputStream stream = new FileInputStream(inFile)) {
@@ -51,7 +51,8 @@ public final class EncodingDetector {
     }
 
     /**
-     * Detect the encoding of the supplied file. The caller is responsible for closing the stream.
+     * Detect the encoding of the supplied file. The caller is responsible for
+     * closing the stream.
      *
      * @see <a href="https://code.google.com/p/juniversalchardet/">Original</a>
      * @see <a href="https://github.com/amake/juniversalchardet">Fork</a>
@@ -74,8 +75,8 @@ public final class EncodingDetector {
     }
 
     /**
-     * Detect the encoding of the supplied file. If detection fails, return the supplied
-     * default encoding.
+     * Detect the encoding of the supplied file. If detection fails, return the
+     * supplied default encoding.
      */
     public static String detectEncodingDefault(File inFile, String defaultEncoding) {
         String detected = null;
@@ -118,7 +119,8 @@ public final class EncodingDetector {
     }
 
     /**
-     * Detects the Byte Order Mark (BOM) to determine the corresponding character encoding.
+     * Detects the Byte Order Mark (BOM) to determine the corresponding
+     * character encoding.
      * <p>
      * This method identifies the following BOM types: UTF-16BE (Big Endian),
      * UTF-16LE (Little Endian), and UTF-8. If no BOM is detected, it returns
@@ -153,8 +155,7 @@ public final class EncodingDetector {
      * @throws IOException
      *             if an I/O error occurs while reading from the stream.
      */
-    private static Charset detectEncodingFromContent(BufferedInputStream inputStream)
-            throws IOException {
+    private static Charset detectEncodingFromContent(BufferedInputStream inputStream) throws IOException {
         Charset detectedEncoding;
         inputStream.mark(OConsts.READ_AHEAD_LIMIT);
         detectedEncoding = EncodingSniffer.sniffEncodingFromXmlDeclaration(inputStream);

@@ -95,6 +95,7 @@ public final class EncodingSniffer {
             new byte[] { 'e', 'E' }, new byte[] { 't', 'T' } };
 
     private static final byte[] WHITESPACE = { 0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E };
+    private static final byte[] TAG_CLOSE_DELIMITER = { 0x3E };
     private static final byte[] COMMENT_END = { '-', '-', '>' };
 
     private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes(US_ASCII);
@@ -183,51 +184,72 @@ public final class EncodingSniffer {
      */
     public static Charset sniffEncodingFromMetaTag(final InputStream is) throws IOException {
         final byte[] bytes = read(is, SIZE_OF_HTML_CONTENT_SNIFFED);
-        for (int i = 0; i < bytes.length; i++) {
+        int i = 0;
+
+        while (i < bytes.length) {
             if (matches(bytes, i, COMMENT_START)) {
-                i = indexOfSubArray(bytes, COMMENT_END, i);
-                if (i == -1) {
-                    break;
-                }
-                i += 2;
+                i = skipToEndOfComment(bytes, i);
             } else if (matches(bytes, i, META_START)) {
-                i += META_START.length;
-                for (Attribute att = getAttribute(bytes, i); att != null; att = getAttribute(bytes, i)) {
-                    i = att.getUpdatedIndex();
-                    Charset charset = processMetaAttributes(att);
-                    if (charset != null) {
-                        return charset;
-                    }
+                i = processMetaTag(bytes, i);
+                Charset charset = extractCharsetFromMeta(bytes, i);
+                if (charset != null) {
+                    return charset;
                 }
-            } else if (i + 1 < bytes.length && bytes[i] == '<' && Character.isLetter(bytes[i + 1])) {
-                i = skipToAnyOf(bytes, i, WHITESPACE);
-                if (i == -1) {
-                    break;
-                }
-                Attribute att = getAttribute(bytes, i);
-                while (att != null) {
-                    i = att.getUpdatedIndex();
-                    att = getAttribute(bytes, i);
-                }
-            } else if (i + 2 < bytes.length && bytes[i] == '<' && bytes[i + 1] == '/'
-                    && Character.isLetter(bytes[i + 2])) {
-                i = skipToAnyOf(bytes, i, new byte[] { 0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E });
-                if (i == -1) {
-                    break;
-                }
-                Attribute attribute = getAttribute(bytes, i);
-                while (attribute != null) {
-                    i = attribute.getUpdatedIndex();
-                    attribute = getAttribute(bytes, i);
-                }
+            } else if (matchesOpeningTag(bytes, i)) {
+                i = skipAttributes(bytes, i, WHITESPACE);
+            } else if (matchesClosingTag(bytes, i)) {
+                i = skipAttributes(bytes, i, WHITESPACE);
             } else if (matches(bytes, i, OTHER_START)) {
-                i = skipToAnyOf(bytes, i, new byte[] { 0x3E });
-                if (i == -1) {
-                    break;
-                }
+                i = skipToAnyOf(bytes, i, TAG_CLOSE_DELIMITER);
+            } else {
+                i++;
+            }
+
+            if (i == -1) {
+                break;
             }
         }
         return null;
+    }
+
+    private static int skipToEndOfComment(byte[] bytes, int index) {
+        index = indexOfSubArray(bytes, COMMENT_END, index);
+        return (index == -1) ? -1 : index + COMMENT_END.length;
+    }
+
+    private static int processMetaTag(byte[] bytes, int index) {
+        return index + META_START.length;
+    }
+
+    private static Charset extractCharsetFromMeta(byte[] bytes, int index) {
+        for (Attribute currentAttribute = getAttribute(bytes, index); currentAttribute != null; currentAttribute = getAttribute(bytes, index)) {
+            index = currentAttribute.getUpdatedIndex();
+            Charset charset = processMetaAttributes(currentAttribute);
+            if (charset != null) {
+                return charset;
+            }
+        }
+        return null;
+    }
+
+    private static boolean matchesOpeningTag(byte[] bytes, int index) {
+        return index + 1 < bytes.length && bytes[index] == '<' && Character.isLetter(bytes[index + 1]);
+    }
+
+    private static boolean matchesClosingTag(byte[] bytes, int index) {
+        return index + 2 < bytes.length && bytes[index] == '<' && bytes[index + 1] == '/' && Character.isLetter(bytes[index + 2]);
+    }
+
+    private static int skipAttributes(byte[] bytes, int index, byte[] delimiters) {
+        index = skipToAnyOf(bytes, index, delimiters);
+        while (index != -1) {
+            Attribute currentAttribute = getAttribute(bytes, index);
+            if (currentAttribute == null) {
+                break;
+            }
+            index = currentAttribute.getUpdatedIndex();
+        }
+        return index;
     }
 
     private static @Nullable Charset processMetaAttributes(Attribute att) {

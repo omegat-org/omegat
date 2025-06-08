@@ -114,7 +114,13 @@ public final class EncodingDetector {
         if (encoding != null) {
             return encoding;
         }
-        return defaultEncoding != null ? Charset.forName(defaultEncoding) : Charset.defaultCharset();
+        if (defaultEncoding != null) {
+            encoding = EncodingSniffer.toCharset(defaultEncoding);
+        }
+        if (encoding != null) {
+            return encoding;
+        }
+        return Charset.defaultCharset();
     }
 
     /**

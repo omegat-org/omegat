@@ -27,6 +27,10 @@ package org.omegat.util.html;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class EntityUtilTest {
@@ -38,22 +42,53 @@ public class EntityUtilTest {
     }
 
     @Test
-    public void testEntitiesToChars() {
+    public void testEntitiesToCharsNamedEntities() {
         // Named entities
         assertEquals("<", entityUtil.entitiesToChars("&lt;"));
         assertEquals(">", entityUtil.entitiesToChars("&gt;"));
         assertEquals("&", entityUtil.entitiesToChars("&amp;"));
         assertEquals("\"", entityUtil.entitiesToChars("&quot;"));
+    }
 
-        // Numeric entities
+    @Test
+    public void testEntitiesToCharsSpecialCharacters() {
+        // Latin Extended-A
+        assertEquals("Œ", entityUtil.entitiesToChars("&OElig;"));
+        assertEquals("œ", entityUtil.entitiesToChars("&oelig;"));
+        assertEquals("Š", entityUtil.entitiesToChars("&Scaron;"));
+        assertEquals("š", entityUtil.entitiesToChars("&scaron;"));
+        assertEquals("Ÿ", entityUtil.entitiesToChars("&Yuml;"));
+    }
+
+    @Test
+    public void testEntitiesToCharsNumericEntities() {
         assertEquals("\"", entityUtil.entitiesToChars("&#34;"));
         assertEquals("\"", entityUtil.entitiesToChars("&#x22;"));
         assertEquals("©", entityUtil.entitiesToChars("&#169;"));
+    }
 
+    @Test
+    public void testEntitiesToCharsInvalid() {
         // Invalid or unsupported entities
         assertEquals("&invalid;", entityUtil.entitiesToChars("&invalid;"));
         assertEquals("&;", entityUtil.entitiesToChars("&;"));
         assertEquals("& #;", entityUtil.entitiesToChars("& #;")); // malformed
+    }
+
+    @Test
+    public void testCharsToEntitiesBasicEntities () {
+        assertEquals("&lt;", entityUtil.charsToEntities("<", "UTF-8", Collections.emptyList()));
+        assertEquals("&gt;", entityUtil.charsToEntities(">", "UTF-8", Collections.emptyList()));
+        assertEquals("&amp;", entityUtil.charsToEntities("&", "UTF-8", Collections.emptyList()));
+        assertEquals("&nbsp;", entityUtil.charsToEntities("\u00A0", "UTF-8", Collections.emptyList()));
+    }
+
+    @Test
+    public void testCharsToEntitiesProtectedEntities() {
+        List<String> protectedEntities = new ArrayList<>();
+        protectedEntities.add("<c>");
+        protectedEntities.add("</c>");
+        assertEquals("<c>test</c>", entityUtil.charsToEntities("<c>test</c>", "UTF-8", protectedEntities));
     }
 
 }

@@ -216,58 +216,79 @@ public class EntityUtil {
     }
 
     public String charsToEntities(String input, String encoding, Collection<String> shortcuts) {
-        int stringLength = input.length();
-        StringBuilder resultBuilder = new StringBuilder(stringLength * 5);
-
-        for (int codePoint, i = 0; i < stringLength; i += Character.charCount(codePoint)) {
-            codePoint = input.codePointAt(i);
-            switch (codePoint) {
-            case '\u00A0':
-                resultBuilder.append(NBSP);
-                break;
-            case '&':
-                resultBuilder.append(AMP);
-                break;
-            case '>':
-                if (i > 0 && input.codePointBefore(i) == '?') {
-                    resultBuilder.append(">");
-                } else {
-                    resultBuilder.append(GT);
-                }
-                break;
-            case '<':
-                handleLessThan(input, shortcuts, resultBuilder, i);
-                break;
-            default:
-                resultBuilder.appendCodePoint(codePoint);
+        int strlen = input.length();
+        StringBuilder res = new StringBuilder(strlen * 5);
+        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
+            cp = input.codePointAt(i);
+            switch (cp) {
+                case '\u00A0':
+                    res.append(NBSP);
+                    break;
+                case '&':
+                    res.append(AMP);
+                    break;
+                case '>':
+                    // If it's the end of a processing instruction
+                    if ((i > 0) && input.codePointBefore(i) == '?') {
+                        res.append(">");
+                    } else {
+                        res.append(GT);
+                    }
+                    break;
+                case '<':
+                    int questionMarkPos = input.indexOf('?', i);
+                    // If it's the beginning of a processing instruction
+                    if (questionMarkPos == input.offsetByCodePoints(i, 1)) {
+                        res.append("<");
+                        break;
+                    }
+                    int greaterThanPos = input.indexOf('>', i);
+                    if (greaterThanPos >= 0) {
+                        String maybeShortcut = input.substring(i, input.offsetByCodePoints(greaterThanPos, 1));
+                        boolean foundShortcut = false; // here because it's
+                        // impossible to step out of
+                        // two loops at once
+                        for (String currShortcut : shortcuts) {
+                            if (maybeShortcut.equals(currShortcut)) {
+                                // skipping the conversion of < into &lt;
+                                // because it's a part of the tag
+                                foundShortcut = true;
+                                break;
+                            }
+                        }
+                        if (foundShortcut) {
+                            res.append(maybeShortcut);
+                            i = greaterThanPos;
+                            continue;
+                        } else {
+                            // dangling <
+                            res.append(LT);
+                        }
+                    } else {
+                        // dangling <
+                        res.append(LT);
+                    }
+                    break;
+                default:
+                    res.appendCodePoint(cp);
             }
         }
-
-        String result = resultBuilder.toString();
-        if (encoding != null) {
-            result = rewriteUnencodableCharacters(result, encoding);
+        String contents = res.toString();
+       if (encoding != null) {
+            contents = rewriteUnencodableCharacters(contents, encoding);
         }
-        return result;
+        return contents;
     }
 
-    private void handleLessThan(String input, Collection<String> shortcuts, StringBuilder resultBuilder, int startIndex) {
-        int questionMarkPos = input.indexOf('?', startIndex);
-        if (questionMarkPos == input.offsetByCodePoints(startIndex, 1)) {
-            resultBuilder.append("<");
-            return;
-        }
-
-        int greaterThanPos = input.indexOf('>', startIndex);
-        if (greaterThanPos >= 0) {
-            String possibleShortcut = input.substring(startIndex, input.offsetByCodePoints(greaterThanPos, 1));
-            if (shortcuts.contains(possibleShortcut)) {
-                resultBuilder.append(possibleShortcut);
-                return;
-            }
-        }
-        resultBuilder.append(LT);
-    }
-
+    // Rewrite characters that cannot be encoded to html character strings.
+    // Each character in the contents-string is checked. If a character
+    // can't be encoded, all its occurrences are replaced with the
+    // html-equivalent string.
+    // Then, the next character is checked.
+    // (The loop over the contents-string is restarted for the modified
+    // content, but the starting-position will be the position where the
+    // last unencodable character was found)
+    // [1802000] HTML filter loses html-encoded characters if not supported
     private String rewriteUnencodableCharacters(String contents, String encoding) {
         CharsetEncoder charsetEncoder = Charset.forName(encoding).newEncoder();
         int i = 0;

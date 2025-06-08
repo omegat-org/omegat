@@ -232,7 +232,10 @@ public final class TestTeamIntegration {
 
     private static @NotNull Path setupRunnerDirectory(Path tempDir, int i) throws IOException {
         Path runnerDir = tempDir.resolve(THREADS[i]);
-        Files.copy(tempDir.resolve("/repo/omegat.project"), runnerDir.resolve("omegat.project"));
+        if (!runnerDir.toFile().mkdirs()) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
+        }
+        Files.copy(tempDir.resolve("repo/omegat.project"), runnerDir.resolve("omegat.project"));
         if (!runnerDir.resolve("omegat").toFile().mkdirs()) {
             throw new IOException(ERROR_CREATE_TEST_DIR);
         }

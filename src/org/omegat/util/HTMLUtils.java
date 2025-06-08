@@ -37,7 +37,7 @@ import java.util.Collection;
 
 public final class HTMLUtils {
 
-    private static  final EntityUtil ENTITY_UTIL = new EntityUtil();
+    private static final EntityUtil ENTITY_UTIL = new EntityUtil();
 
     private HTMLUtils() {
     }
@@ -58,12 +58,16 @@ public final class HTMLUtils {
     }
 
     /**
-     * Converts HTML entities in the given input string to their corresponding characters.
-     * This handles numeric and named entities, resolving them to their appropriate Unicode representations.
-     * If an entity is unresolvable or malformed, it is left unchanged in the output string.
+     * Converts HTML entities in the given input string to their corresponding
+     * characters. This handles numeric and named entities, resolving them to
+     * their appropriate Unicode representations. If an entity is unresolvable
+     * or malformed, it is left unchanged in the output string.
      *
-     * @param input the input string that may contain HTML entities to be converted
-     * @return a string with HTML entities replaced by their corresponding characters
+     * @param input
+     *            the input string that may contain HTML entities to be
+     *            converted
+     * @return a string with HTML entities replaced by their corresponding
+     *         characters
      */
     public static String entitiesToChars(String input) {
         return ENTITY_UTIL.entitiesToChars(input);

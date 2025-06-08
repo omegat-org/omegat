@@ -237,7 +237,7 @@ public class EntityUtil {
             i += Character.charCount(cp);
         }
         String contents = res.toString();
-       if (encoding != null) {
+        if (encoding != null) {
             contents = rewriteUnencodableCharacters(contents, encoding);
         }
         return contents;
@@ -345,7 +345,8 @@ public class EntityUtil {
 
     private int handleNamedEntity(String input, int startIndex, int inputLength, StringBuilder result) {
         int startOffset = input.offsetByCodePoints(startIndex, 1);
-        int endOffset = findEndOfDigits(input, startOffset, inputLength, ch -> isLatinLetter(ch) || isDecimalDigit(ch));
+        int endOffset = findEndOfDigits(input, startOffset, inputLength,
+                ch -> isLatinLetter(ch) || isDecimalDigit(ch));
 
         String entityName = input.substring(startOffset, endOffset);
         int parsedValue = lookupEntity(entityName);
@@ -362,7 +363,8 @@ public class EntityUtil {
         return startIndex;
     }
 
-    private int processParsedEntity(String input, int startIndex, int inputLength, StringBuilder result, int endOffset, int parsedValue) {
+    private int processParsedEntity(String input, int startIndex, int inputLength, StringBuilder result,
+            int endOffset, int parsedValue) {
         // check if parsedValue is PARSE_ERROR or invalid unicode code point.
         if (parsedValue <= 0 || parsedValue > 0x10FFFF) {
             // invalid char code
@@ -377,7 +379,8 @@ public class EntityUtil {
         return input.offsetByCodePoints(endOffset, -1);
     }
 
-    private int findEndOfDigits(String input, int startOffset, int inputLength, java.util.function.IntPredicate isDigit) {
+    private int findEndOfDigits(String input, int startOffset, int inputLength,
+            java.util.function.IntPredicate isDigit) {
         int currentOffset = startOffset;
         while (currentOffset < inputLength) {
             int currentCodePoint = input.codePointAt(currentOffset);
@@ -393,7 +396,8 @@ public class EntityUtil {
         try {
             return Integer.parseInt(entityValue, radix);
         } catch (NumberFormatException e) {
-            // return out of char range that is recognized in processParsedEntity method
+            // return out of char range that is recognized in
+            // processParsedEntity method
             // as to ignore parsedValue and return the original character.
             return PARSE_ERROR;
         }

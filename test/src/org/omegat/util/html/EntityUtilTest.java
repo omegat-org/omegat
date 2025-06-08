@@ -27,7 +27,7 @@ package org.omegat.util.html;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class EntityUtilTest {
     }
 
     @Test
-    public void testCharsToEntitiesBasicEntities () {
+    public void testCharsToEntitiesBasicEntities() {
         assertEquals("&lt;", entityUtil.charsToEntities("<", "UTF-8", Collections.emptyList()));
         assertEquals("&gt;", entityUtil.charsToEntities(">", "UTF-8", Collections.emptyList()));
         assertEquals("&amp;", entityUtil.charsToEntities("&", "UTF-8", Collections.emptyList()));
@@ -85,10 +85,9 @@ public class EntityUtilTest {
 
     @Test
     public void testCharsToEntitiesProtectedEntities() {
-        List<String> protectedEntities = new ArrayList<>();
-        protectedEntities.add("<c>");
-        protectedEntities.add("</c>");
-        assertEquals("<c>test</c>", entityUtil.charsToEntities("<c>test</c>", "UTF-8", protectedEntities));
+        List<String> protectedEntities = Arrays.asList("<b0>", "</b0>", "<c>", "</c>", "<u1>", "</u1>");
+        assertEquals("Le gros <u1>chat</u1> <c>test</c> &amp; <b0>noir</b0> dors", entityUtil.charsToEntities(
+                "Le gros <u1>chat</u1> <c>test</c> & <b0>noir</b0> dors", "UTF-8", protectedEntities));
     }
 
 }

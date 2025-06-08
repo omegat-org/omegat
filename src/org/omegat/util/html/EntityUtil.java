@@ -218,7 +218,9 @@ public class EntityUtil {
     public String charsToEntities(String input, String encoding, Collection<String> shortcuts) {
         int strlen = input.length();
         StringBuilder res = new StringBuilder(strlen * 5);
-        for (int cp, i = 0; i < strlen; i += Character.charCount(cp)) {
+        int i = 0;
+        while (i < strlen) {
+            int cp;
             cp = input.codePointAt(i);
             switch (cp) {
                 case '\u00A0':
@@ -259,7 +261,6 @@ public class EntityUtil {
                         if (foundShortcut) {
                             res.append(maybeShortcut);
                             i = greaterThanPos;
-                            continue;
                         } else {
                             // dangling <
                             res.append(LT);
@@ -272,6 +273,7 @@ public class EntityUtil {
                 default:
                     res.appendCodePoint(cp);
             }
+            i += Character.charCount(cp);
         }
         String contents = res.toString();
        if (encoding != null) {

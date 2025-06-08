@@ -223,55 +223,20 @@ public class EntityUtil {
             int cp;
             cp = input.codePointAt(i);
             switch (cp) {
-                case '\u00A0':
-                    res.append(NBSP);
-                    break;
-                case '&':
-                    res.append(AMP);
-                    break;
-                case '>':
-                    // If it's the end of a processing instruction
-                    if ((i > 0) && input.codePointBefore(i) == '?') {
-                        res.append(">");
-                    } else {
-                        res.append(GT);
-                    }
-                    break;
-                case '<':
-                    int questionMarkPos = input.indexOf('?', i);
-                    // If it's the beginning of a processing instruction
-                    if (questionMarkPos == input.offsetByCodePoints(i, 1)) {
-                        res.append("<");
-                        break;
-                    }
-                    int greaterThanPos = input.indexOf('>', i);
-                    if (greaterThanPos >= 0) {
-                        String maybeShortcut = input.substring(i, input.offsetByCodePoints(greaterThanPos, 1));
-                        boolean foundShortcut = false; // here because it's
-                        // impossible to step out of
-                        // two loops at once
-                        for (String currShortcut : shortcuts) {
-                            if (maybeShortcut.equals(currShortcut)) {
-                                // skipping the conversion of < into &lt;
-                                // because it's a part of the tag
-                                foundShortcut = true;
-                                break;
-                            }
-                        }
-                        if (foundShortcut) {
-                            res.append(maybeShortcut);
-                            i = greaterThanPos;
-                        } else {
-                            // dangling <
-                            res.append(LT);
-                        }
-                    } else {
-                        // dangling <
-                        res.append(LT);
-                    }
-                    break;
-                default:
-                    res.appendCodePoint(cp);
+            case '\u00A0':
+                res.append(NBSP);
+                break;
+            case '&':
+                res.append(AMP);
+                break;
+            case '>':
+                handleGT(input, i, res, shortcuts);
+                break;
+            case '<':
+                i = handleLT(input, i, res, shortcuts);
+                break;
+            default:
+                res.appendCodePoint(cp);
             }
             i += Character.charCount(cp);
         }
@@ -280,6 +245,55 @@ public class EntityUtil {
             contents = rewriteUnencodableCharacters(contents, encoding);
         }
         return contents;
+    }
+
+    private static void handleGT(String input, int i, StringBuilder res, Collection<String> shortcuts) {
+        // If it's the end of a processing instruction
+        // When visit ">", we don't need to look shortcuts
+        if ((i > 0) && input.codePointBefore(i) == '?') {
+            res.append(">");
+        } else {
+            res.append(GT);
+        }
+    }
+
+    private static int handleLT(String input, int i, StringBuilder res, Collection<String> shortcuts) {
+        int questionMarkPos = input.indexOf('?', i);
+        // If it's the beginning of a processing instruction
+        if (questionMarkPos == input.offsetByCodePoints(i, 1)) {
+            res.append("<");
+            return i;
+        }
+        int greaterThanPos = input.indexOf('>', i);
+        if (greaterThanPos >= 0) {
+            String maybeShortcut = input.substring(i, input.offsetByCodePoints(greaterThanPos, 1));
+            // here because it's impossible to step out of
+            // two loops at once
+            if (foundShortcut(shortcuts, maybeShortcut)) {
+                res.append(maybeShortcut);
+                i = greaterThanPos;
+            } else {
+                // dangling "<"
+                res.append(LT);
+            }
+        } else {
+            // dangling "<"
+            res.append(LT);
+        }
+        return i;
+    }
+
+    private static boolean foundShortcut(Collection<String> shortcuts, String maybeShortcut) {
+        boolean foundShortcut = false;
+        for (String currShortcut : shortcuts) {
+            if (maybeShortcut.equals(currShortcut)) {
+                // skipping the conversion of "<" into "&lt;"
+                // because it's a part of the tag
+                foundShortcut = true;
+                break;
+            }
+        }
+        return foundShortcut;
     }
 
     // Rewrite characters that cannot be encoded to html character strings.

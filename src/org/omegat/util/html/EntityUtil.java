@@ -188,17 +188,13 @@ public class EntityUtil {
     public String entitiesToChars(String input) {
         int inputLength = input.length();
         StringBuilder result = new StringBuilder(inputLength);
-        for (int cp, i = 0; i < inputLength; i += Character.charCount(cp)) {
-            cp = input.codePointAt(i);
-            if (cp == '&') {
-                // if there's one more symbol, reading it,
-                // otherwise it's a dangling '&'
-                if (input.codePointCount(i, inputLength) < 2) {
-                    result.appendCodePoint(cp);
-                    continue;
-                }
-                int nextCodePoint;
-                nextCodePoint = input.codePointAt(input.offsetByCodePoints(i, 1));
+        int i = 0;
+        while (i < inputLength) {
+            int cp = input.codePointAt(i);
+            // if there's one more symbol, reading it,
+            // otherwise it's a dangling '&'
+            if (cp == '&' && input.codePointCount(i, inputLength) >= 2) {
+                int nextCodePoint = input.codePointAt(input.offsetByCodePoints(i, 1));
                 if (nextCodePoint == '#') {
                     // numeric entity
                     i = handleNumericEntity(input, i, inputLength, result);
@@ -211,17 +207,17 @@ public class EntityUtil {
             } else {
                 result.appendCodePoint(cp);
             }
+            i += Character.charCount(cp);
         }
         return result.toString();
     }
 
     public String charsToEntities(String input, String encoding, Collection<String> shortcuts) {
-        int strlen = input.length();
-        StringBuilder res = new StringBuilder(strlen * 5);
+        int inputLength = input.length();
+        StringBuilder res = new StringBuilder(inputLength * 5);
         int i = 0;
-        while (i < strlen) {
-            int cp;
-            cp = input.codePointAt(i);
+        while (i < inputLength) {
+            int cp = input.codePointAt(i);
             switch (cp) {
             case '\u00A0':
                 res.append(NBSP);
@@ -230,7 +226,7 @@ public class EntityUtil {
                 res.append(AMP);
                 break;
             case '>':
-                handleGT(input, i, res, shortcuts);
+                handleGT(input, i, res);
                 break;
             case '<':
                 i = handleLT(input, i, res, shortcuts);
@@ -247,7 +243,7 @@ public class EntityUtil {
         return contents;
     }
 
-    private static void handleGT(String input, int i, StringBuilder res, Collection<String> shortcuts) {
+    private static void handleGT(String input, int i, StringBuilder res) {
         // If it's the end of a processing instruction
         // When visit ">", we don't need to look shortcuts
         if ((i > 0) && input.codePointBefore(i) == '?') {

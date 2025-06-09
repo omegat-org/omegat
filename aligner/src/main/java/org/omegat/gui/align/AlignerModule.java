@@ -118,6 +118,10 @@ public final class AlignerModule implements IApplicationEventListener {
         }
     }
 
+    public static void showAligner(String srcRoot) {
+        (new AlignerModule()).showAligner(null, null, null, null, srcRoot, null);
+    }
+
     public void showAligner(String sourceLanguage, String sourceFile, String targetLanguage, String targetFile) {
         Language srcLang = null;
         Language trgLang = null;
@@ -144,8 +148,12 @@ public final class AlignerModule implements IApplicationEventListener {
         if (defaultSaveDir != null && !defaultSaveDir.isEmpty()) {
             picker.setDefaultSaveDir(defaultSaveDir);
         }
-        picker.setSourceFile(sourceFile);
-        picker.setTargetFile(targetFile);
+        if (sourceFile != null && !sourceFile.isEmpty()) {
+            picker.setSourceFile(sourceFile);
+        }
+        if (targetFile != null && !targetFile.isEmpty()) {
+            picker.setTargetFile(targetFile);
+        }
         picker.show(mainWindow);
     }
 }

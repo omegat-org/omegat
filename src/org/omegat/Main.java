@@ -44,6 +44,9 @@ import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -70,6 +73,9 @@ import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
+import org.omegat.util.gui.UIDesignManager;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -235,6 +241,9 @@ public final class Main {
             case CONSOLE_STATS:
                 result = runConsoleStats();
                 PluginUtils.unloadPlugins();
+                break;
+            case GUI_ALIGN:    
+                result = runGUIAlign();
                 break;
             default:
                 result = 1;
@@ -690,6 +699,24 @@ public final class Main {
             } else {
                 Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
             }
+        }
+    }
+    
+    public static int runGUIAlign() throws IOException {
+        String dir = PARAMS.get(CLIParameters.ALIGNDIR);
+        UIDesignManager.initialize();
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        try {
+            ClassLoader cl = PluginUtils.getPluginClassLoader();
+            Class<?> alignClass = cl.loadClass("org.omegat.gui.align.AlignerModule");
+            Method method = alignClass.getMethod("showAligner", String.class);
+            method.invoke(null, dir);
+            return 0;
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
+                | InvocationTargetException e) {
+            Log.log(e);
+            return 1;
         }
     }
 

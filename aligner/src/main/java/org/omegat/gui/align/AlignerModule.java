@@ -26,12 +26,18 @@
 package org.omegat.gui.align;
 
 import java.awt.Component;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
+import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.gui.UIDesignManager;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -43,7 +49,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.MenuExtender;
 
-public final class AlignerModule {
+public final class AlignerModule implements IApplicationEventListener {
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
     private static IApplicationEventListener alignerListener;
@@ -55,59 +61,7 @@ public final class AlignerModule {
      * Register plugins into OmegaT.
      */
     public static void loadPlugins() {
-        alignerListener = new IApplicationEventListener() {
-            private JMenuItem alignerMenu;
-
-            @Override
-            public void onApplicationStartup() {
-                SwingUtilities.invokeLater(this::registerMenu);
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-                unregisterMenu();
-            }
-
-            private void unregisterMenu() {
-                MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS,
-                        Collections.singletonList(alignerMenu));
-            }
-
-            private void registerMenu() {
-                alignerMenu = new JMenuItem();
-                alignerMenu.setName("aligner");
-                Mnemonics.setLocalizedText(alignerMenu, BUNDLE.getString("TF_MENU_TOOLS_ALIGN_FILES"));
-                alignerMenu.addActionListener(actionEvent -> alignerShow());
-                MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, alignerMenu);
-            }
-
-            public void alignerShow() {
-                Component mainWindow = Core.getMainWindow().getApplicationFrame();
-                AlignFilePickerController picker = new AlignFilePickerController();
-                if (Core.getProject().isProjectLoaded()) {
-                    ProjectProperties props = Core.getProject().getProjectProperties();
-                    String srcRoot = props.getSourceRoot();
-                    String curFile = Core.getEditor().getCurrentFile();
-                    if (curFile != null) {
-                        picker.setSourceFile(srcRoot + curFile);
-                    }
-                    picker.setSourceDefaultDir(srcRoot);
-                    picker.setDefaultSaveDir(props.getTMRoot());
-                    picker.setSourceLanguage(props.getSourceLanguage());
-                    picker.setTargetLanguage(props.getTargetLanguage());
-                } else {
-                    String srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
-                    if (!StringUtil.isEmpty(srcLang)) {
-                        picker.setSourceLanguage(new Language(srcLang));
-                    }
-                    String trgLang = Preferences.getPreference(Preferences.TARGET_LOCALE);
-                    if (!StringUtil.isEmpty(trgLang)) {
-                        picker.setTargetLanguage(new Language(trgLang));
-                    }
-                }
-                picker.show(mainWindow);
-            }
-        };
+        alignerListener = new AlignerModule();
         CoreEvents.registerApplicationEventListener(alignerListener);
     }
 
@@ -115,5 +69,83 @@ public final class AlignerModule {
         if (alignerListener != null) {
             CoreEvents.unregisterApplicationEventListener(alignerListener);
         }
+    }
+
+    private JMenuItem alignerMenu;
+    private Component mainWindow = null;
+
+    @Override
+    public void onApplicationStartup() {
+        mainWindow = Core.getMainWindow().getApplicationFrame();
+        SwingUtilities.invokeLater(this::registerMenu);
+    }
+
+    @Override
+    public void onApplicationShutdown() {
+        unregisterMenu();
+        mainWindow = null;
+    }
+
+    private void unregisterMenu() {
+        MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS,
+                Collections.singletonList(alignerMenu));
+    }
+
+    private void registerMenu() {
+        alignerMenu = new JMenuItem();
+        alignerMenu.setName("aligner");
+        Mnemonics.setLocalizedText(alignerMenu, BUNDLE.getString("TF_MENU_TOOLS_ALIGN_FILES"));
+        alignerMenu.addActionListener(actionEvent -> alignerShow());
+        MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, alignerMenu);
+    }
+
+    public void alignerShow() {
+        if (Core.getProject().isProjectLoaded()) {
+            ProjectProperties props = Core.getProject().getProjectProperties();
+            String srcRoot = props.getSourceRoot();
+            String curFile = Core.getEditor().getCurrentFile();
+            Language sourceLanguage = props.getSourceLanguage();
+            Language targetlanguage = props.getTargetLanguage();
+            String sourceFile = null;
+            if (curFile != null) {
+                sourceFile = srcRoot + curFile;
+            }
+            showAligner(sourceLanguage, sourceFile, targetlanguage, null, srcRoot, props.getTMRoot());
+        } else {
+            String srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
+            String trgLang = Preferences.getPreference(Preferences.TARGET_LOCALE);
+            showAligner(srcLang, null, trgLang, null);
+        }
+    }
+
+    public void showAligner(String sourceLanguage, String sourceFile, String targetLanguage, String targetFile) {
+        Language srcLang = null;
+        Language trgLang = null;
+        if (sourceLanguage != null && !sourceLanguage.isEmpty()) {
+            srcLang = new Language(sourceLanguage);
+        }
+        if (targetLanguage != null && !targetLanguage.isEmpty()) {
+            trgLang = new Language(targetLanguage);
+        }
+        showAligner(srcLang, sourceFile, trgLang, targetFile, null, null);
+    }
+
+    public void showAligner(Language sourceLanguage, String sourceFile, Language targetLanguage, String targetFile, String defaultDir, String defaultSaveDir) {
+        AlignFilePickerController picker = new AlignFilePickerController();
+        if (sourceLanguage != null) {
+            picker.setSourceLanguage(sourceLanguage);
+        }
+        if (targetLanguage != null) {
+            picker.setTargetLanguage(targetLanguage);
+        }
+        if (defaultDir != null && !defaultDir.isEmpty()) {
+            picker.setSourceDefaultDir(defaultDir);
+        }
+        if (defaultSaveDir != null && !defaultSaveDir.isEmpty()) {
+            picker.setDefaultSaveDir(defaultSaveDir);
+        }
+        picker.setSourceFile(sourceFile);
+        picker.setTargetFile(targetFile);
+        picker.show(mainWindow);
     }
 }

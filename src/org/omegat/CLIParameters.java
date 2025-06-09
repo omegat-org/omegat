@@ -117,7 +117,7 @@ public final class CLIParameters {
      * Application execution mode. Value of {@link #MODE}.
      */
     enum RUN_MODE {
-        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN, CONSOLE_STATS;
+        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN, CONSOLE_STATS, GUI_ALIGN;
 
         public static RUN_MODE parse(String s) {
             try {

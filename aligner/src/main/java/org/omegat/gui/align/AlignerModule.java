@@ -26,18 +26,13 @@
 package org.omegat.gui.align;
 
 import java.awt.Component;
-import java.io.IOException;
+import java.awt.event.ActionEvent;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-import org.omegat.core.segmentation.SRX;
-import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.util.gui.UIDesignManager;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -46,7 +41,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
-import org.omegat.util.StringUtil;
 import org.omegat.util.gui.MenuExtender;
 
 public final class AlignerModule implements IApplicationEventListener {
@@ -87,19 +81,18 @@ public final class AlignerModule implements IApplicationEventListener {
     }
 
     private void unregisterMenu() {
-        MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS,
-                Collections.singletonList(alignerMenu));
+        MenuExtender.removeMenuItems(MenuExtender.MenuKey.TOOLS, Collections.singletonList(alignerMenu));
     }
 
     private void registerMenu() {
         alignerMenu = new JMenuItem();
         alignerMenu.setName("aligner");
         Mnemonics.setLocalizedText(alignerMenu, BUNDLE.getString("TF_MENU_TOOLS_ALIGN_FILES"));
-        alignerMenu.addActionListener(actionEvent -> alignerShow());
+        alignerMenu.addActionListener(this::showAlignerDialog);
         MenuExtender.addMenuItem(MenuExtender.MenuKey.TOOLS, alignerMenu);
     }
 
-    public void alignerShow() {
+    private void showAlignerDialog(ActionEvent actionEvent) {
         if (Core.getProject().isProjectLoaded()) {
             ProjectProperties props = Core.getProject().getProjectProperties();
             String srcRoot = props.getSourceRoot();
@@ -110,19 +103,29 @@ public final class AlignerModule implements IApplicationEventListener {
             if (curFile != null) {
                 sourceFile = srcRoot + curFile;
             }
-            showAligner(sourceLanguage, sourceFile, targetlanguage, null, srcRoot, props.getTMRoot());
+            alignerShow(sourceLanguage, sourceFile, targetlanguage, null, srcRoot, props.getTMRoot());
         } else {
             String srcLang = Preferences.getPreference(Preferences.SOURCE_LOCALE);
             String trgLang = Preferences.getPreference(Preferences.TARGET_LOCALE);
-            showAligner(srcLang, null, trgLang, null);
+            alignerShow(srcLang, null, trgLang, null);
         }
     }
 
-    public static void showAligner(String srcRoot) {
-        (new AlignerModule()).showAligner(null, null, null, null, srcRoot, null);
-    }
-
-    public void showAligner(String sourceLanguage, String sourceFile, String targetLanguage, String targetFile) {
+    /**
+     * Displays the Aligner dialog for the provided source and target language
+     * files.
+     *
+     * @param sourceLanguage
+     *            The language code of the source file (e.g., "en").
+     * @param sourceFile
+     *            The path to the source file to be aligned.
+     * @param targetLanguage
+     *            The language code of the target file (e.g., "fr").
+     * @param targetFile
+     *            The path to the target file to be aligned.
+     */
+    public void alignerShow(String sourceLanguage, String sourceFile, String targetLanguage,
+            String targetFile) {
         Language srcLang = null;
         Language trgLang = null;
         if (sourceLanguage != null && !sourceLanguage.isEmpty()) {
@@ -131,10 +134,28 @@ public final class AlignerModule implements IApplicationEventListener {
         if (targetLanguage != null && !targetLanguage.isEmpty()) {
             trgLang = new Language(targetLanguage);
         }
-        showAligner(srcLang, sourceFile, trgLang, targetFile, null, null);
+        alignerShow(srcLang, sourceFile, trgLang, targetFile, null, null);
     }
 
-    public void showAligner(Language sourceLanguage, String sourceFile, Language targetLanguage, String targetFile, String defaultDir, String defaultSaveDir) {
+    /**
+     * Displays the Aligner dialog for the provided source and target language
+     * files. Configures default source and save directories if provided.
+     *
+     * @param sourceLanguage
+     *            The source language for the alignment process.
+     * @param sourceFile
+     *            The path to the source file to be aligned.
+     * @param targetLanguage
+     *            The target language for the alignment process.
+     * @param targetFile
+     *            The path to the target file to be aligned.
+     * @param defaultDir
+     *            The default directory used for selecting source files.
+     * @param defaultSaveDir
+     *            The default directory used for saving aligned files.
+     */
+    public void alignerShow(Language sourceLanguage, String sourceFile, Language targetLanguage,
+            String targetFile, String defaultDir, String defaultSaveDir) {
         AlignFilePickerController picker = new AlignFilePickerController();
         if (sourceLanguage != null) {
             picker.setSourceLanguage(sourceLanguage);
@@ -155,5 +176,31 @@ public final class AlignerModule implements IApplicationEventListener {
             picker.setTargetFile(targetFile);
         }
         picker.show(mainWindow);
+    }
+
+    /**
+     * Displays the Aligner dialog by invoking the `alignerShow` method from the
+     * `AlignerModule` class with default parameters set to null.
+     * <p>
+     * The method initializes an instance of `AlignerModule` and calls its
+     * `alignerShow` method, which is responsible for configuring and presenting
+     * the file alignment interface to the user.
+     */
+    public static void alignerShow() {
+        (new AlignerModule()).alignerShow(null, null, null, null, null, null);
+    }
+
+    /**
+     * Displays the Aligner dialog by invoking the `alignerShow` method from the
+     * `AlignerModule` class. This method initializes an instance of
+     * `AlignerModule` and calls its `alignerShow` method with default
+     * parameters, enabling configuration and presentation of the file alignment
+     * interface.
+     *
+     * @param srcRoot
+     *            The root directory containing the source files to be aligned.
+     */
+    public static void alignerShow(String srcRoot) {
+        (new AlignerModule()).alignerShow(null, null, null, null, srcRoot, null);
     }
 }

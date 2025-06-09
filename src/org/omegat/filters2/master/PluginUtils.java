@@ -169,6 +169,8 @@ public final class PluginUtils {
     private static final MainClassLoader THEME_CLASSLOADER;
     private static final MainClassLoader LANGUAGE_CLASSLOADER;
 
+    private static MainClassLoader pluginsClassLoader;
+
     static {
         ClassLoader cl = PluginUtils.class.getClassLoader();
         THEME_CLASSLOADER = new MainClassLoader(cl);
@@ -206,7 +208,7 @@ public final class PluginUtils {
         boolean foundMain = false;
         // look on all manifests
         ClassLoader cl = PluginUtils.class.getClassLoader();
-        MainClassLoader pluginsClassLoader = new MainClassLoader(urlList.toArray(new URL[0]), cl);
+        pluginsClassLoader = new MainClassLoader(urlList.toArray(new URL[0]), cl);
         try {
             Enumeration<URL> mlist = pluginsClassLoader.getResources(MANIFEST_MF);
             while (mlist.hasMoreElements()) {
@@ -496,6 +498,10 @@ public final class PluginUtils {
 
     public static ClassLoader getLanguageClassLoader() {
         return LANGUAGE_CLASSLOADER;
+    }
+
+    public static ClassLoader getPluginsClassLoader() {
+        return pluginsClassLoader;
     }
 
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();

@@ -58,7 +58,7 @@ import org.omegat.util.PatternConsts;
  */
 public class XMLReader extends Reader {
     /** Inner reader */
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
     /** Inner encoding. */
     private String encoding;
@@ -84,7 +84,7 @@ public class XMLReader extends Reader {
      *            the InputStream instance to read
      */
     public XMLReader(InputStream is) throws IOException {
-        reader = createReader(is, encoding);
+        reader = createReader(is, null);
     }
 
     /**

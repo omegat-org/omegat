@@ -45,9 +45,10 @@ import org.omegat.util.gui.UIThreadsUtil;
 /**
  * A list-based view of key=value properties of the current segment.
  * <p>
- * This is not a JList but instead a collection of distinct instances of {@link SegmentPropertiesListCell}.
- * This is because the initial JList-based implementation had rendering issues when trying to make the gear
- * menu icons appear interactive.
+ * This is not a JList but instead a collection of distinct instances of
+ * {@link SegmentPropertiesListCell}. This is because the initial JList-based
+ * implementation had rendering issues when trying to make the gear menu icons
+ * appear interactive.
  *
  * @author Aaron Madlon-Kay
  */
@@ -76,9 +77,8 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
             cell.label.setText(getDisplayKey(key));
             cell.value.setText(parent.getProperties().get(i + 1));
             cell.value.setFont(panel.getFont());
-            cell.settingsButton.addActionListener(e -> parent.showContextMenu(
-                    SwingUtilities.convertPoint(cell, cell.settingsButton.getLocation(),
-                            parent.getScrollPane())));
+            cell.settingsButton.addActionListener(e -> parent.showContextMenu(SwingUtilities
+                    .convertPoint(cell, cell.settingsButton.getLocation(), parent.getScrollPane())));
             panel.add(cell);
         }
         panel.validate();

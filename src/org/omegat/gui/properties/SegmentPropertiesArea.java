@@ -106,7 +106,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         mw.addDockable(scrollPane);
 
         scrollPane.setMenuProvider(this);
-  
+
         CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener(this));
         CoreEvents.registerProjectChangeListener(eventType -> {
             if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
@@ -179,8 +179,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         String displayKey = key;
         if (!Preferences.isPreference(Preferences.SEGPROPS_SHOW_RAW_KEYS)) {
             try {
-                displayKey = OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
+                displayKey = OStrings.getString(
+                        ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
             } catch (MissingResourceException ignore) {
                 // If this is not a known key then we can't translate it,
                 // so use the "raw" key instead.
@@ -275,9 +275,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private String getBooleanValueVerb(String key, boolean value) {
         try {
             if (value) {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+                return OStrings
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
             } else {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+                return OStrings
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
             }
         } catch (MissingResourceException ex) {
             // fallback to default expression

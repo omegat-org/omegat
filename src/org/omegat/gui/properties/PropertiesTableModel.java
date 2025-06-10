@@ -35,7 +35,7 @@ class PropertiesTableModel extends AbstractTableModel {
 
     private final transient SegmentPropertiesTableView segmentPropertiesTableView;
 
-    public PropertiesTableModel(SegmentPropertiesTableView segmentPropertiesTableView) {
+    PropertiesTableModel(SegmentPropertiesTableView segmentPropertiesTableView) {
         this.segmentPropertiesTableView = segmentPropertiesTableView;
     }
 
@@ -47,14 +47,14 @@ class PropertiesTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
-            case 0:
-                return OStrings.getString("SEGPROP_TABLE_HEADER_KEY");
-            case 1:
-                return OStrings.getString("SEGPROP_TABLE_HEADER_VALUE");
-            case 2:
-                return "";
-            default:
-                return null;
+        case 0:
+            return OStrings.getString("SEGPROP_TABLE_HEADER_KEY");
+        case 1:
+            return OStrings.getString("SEGPROP_TABLE_HEADER_VALUE");
+        case 2:
+            return "";
+        default:
+            return null;
         }
     }
 
@@ -69,7 +69,9 @@ class PropertiesTableModel extends AbstractTableModel {
             return null;
         }
         Icon rowIndex1 = getIcon(rowIndex, columnIndex);
-        if (rowIndex1 != null) return rowIndex1;
+        if (rowIndex1 != null) {
+            return rowIndex1;
+        }
         int realIndex = rowIndex * 2 + columnIndex;
         if (realIndex >= segmentPropertiesTableView.getParent().getProperties().size()) {
             return null;
@@ -79,8 +81,8 @@ class PropertiesTableModel extends AbstractTableModel {
 
     private @Nullable Icon getIcon(int rowIndex, int columnIndex) {
         if (columnIndex == 2) {
-            if (rowIndex == segmentPropertiesTableView.getMouseoverRow() && columnIndex ==
-                    segmentPropertiesTableView.getMouseoverCol()) {
+            if (rowIndex == segmentPropertiesTableView.getMouseoverRow()
+                    && columnIndex == segmentPropertiesTableView.getMouseoverCol()) {
                 return ISegmentPropertiesView.SETTINGS_ICON;
             } else {
                 if (rowIndex == segmentPropertiesTableView.getMouseoverRow())
@@ -94,13 +96,13 @@ class PropertiesTableModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
-            case 0:
-            case 1:
-                return String.class;
-            case 2:
-                return Icon.class;
-            default:
-                return null;
+        case 0:
+        case 1:
+            return String.class;
+        case 2:
+            return Icon.class;
+        default:
+            return null;
         }
     }
 

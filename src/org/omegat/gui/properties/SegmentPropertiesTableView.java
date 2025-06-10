@@ -88,8 +88,7 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
         table.getColumnModel().getColumn(1).setCellRenderer(new MultilineCellRenderer());
         table.getColumnModel().getColumn(2).setCellRenderer(new SingleLineCellRenderer());
         DataTableStyling.applyFont(table, Core.getMainWindow().getApplicationFont());
-        TableColumnSizer.autoSize(table, 1, true).addColumnAdjustmentListener(e ->
-                adjustRowHeights());
+        TableColumnSizer.autoSize(table, 1, true).addColumnAdjustmentListener(e -> adjustRowHeights());
         table.addMouseListener(mouseAdapter);
         table.addMouseMotionListener(mouseAdapter);
         parent.getScrollPane().setViewportView(table);
@@ -99,7 +98,8 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (mouseoverCol == 2) {
-                parent.showContextMenu(SwingUtilities.convertPoint(table, e.getPoint(), parent.getScrollPane()));
+                parent.showContextMenu(
+                        SwingUtilities.convertPoint(table, e.getPoint(), parent.getScrollPane()));
             }
         }
 

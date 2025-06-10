@@ -43,13 +43,13 @@ import java.util.MissingResourceException;
 @SuppressWarnings("serial")
 class SingleLineCellRenderer extends DefaultTableCellRenderer {
 
-    private final Border noFocusBorder = new EmptyBorder(ISegmentPropertiesView.FOCUS_BORDER.getBorderInsets(this));
+    private final Border noFocusBorder = new EmptyBorder(
+            ISegmentPropertiesView.FOCUS_BORDER.getBorderInsets(this));
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                                                   boolean hasFocus, int row, int column) {
-        Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row,
-                column);
+            boolean hasFocus, int row, int column) {
+        Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (!(comp instanceof JLabel)) {
             return comp;
         }
@@ -95,7 +95,8 @@ class SingleLineCellRenderer extends DefaultTableCellRenderer {
             return value.toString();
         }
         try {
-            return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + value.toString().toUpperCase());
+            return OStrings.getString(
+                    ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + value.toString().toUpperCase());
         } catch (MissingResourceException ex) {
             return value.toString();
         }

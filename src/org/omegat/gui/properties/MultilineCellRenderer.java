@@ -39,7 +39,8 @@ import java.awt.Component;
 @SuppressWarnings("serial")
 class MultilineCellRenderer extends JTextArea implements TableCellRenderer {
 
-    private final Border noFocusBorder = new EmptyBorder(ISegmentPropertiesView.FOCUS_BORDER.getBorderInsets(this));
+    private final Border noFocusBorder = new EmptyBorder(
+            ISegmentPropertiesView.FOCUS_BORDER.getBorderInsets(this));
 
     MultilineCellRenderer() {
         setLineWrap(true);
@@ -49,7 +50,7 @@ class MultilineCellRenderer extends JTextArea implements TableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                                                   boolean hasFocus, int row, int column) {
+            boolean hasFocus, int row, int column) {
         if (isSelected) {
             setBackground(table.getSelectionBackground());
             setForeground(table.getSelectionForeground());

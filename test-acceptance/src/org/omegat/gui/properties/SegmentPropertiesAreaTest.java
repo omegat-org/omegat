@@ -31,6 +31,8 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -54,18 +56,13 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         window.scrollPane("Segment Properties").requireVisible();
         // Check a table content
         JTableFixture segmentPropertiesTable = window.table("SegmentPropertiesTable").requireVisible();
+
         // Define expectations
         int expectedRowCount = 7;
         int expectedColumnCount = 3;
-        final Map<String, String> expectation = new HashMap<>();
-        expectation.put("ID", "APERTIUM_ERROR");
-        expectation.put("Changed on", "Nov 27, 2024 12:52:16 PM");
-        expectation.put("Changed by", "Hiroshi Miura");
-        expectation.put("Created on", "Nov 27, 2024 12:52:16 PM");
-        expectation.put("Created by", "Hiroshi Miura");
-        expectation.put("Origin", "Unknown/Manual");
-        expectation.put("File", "Bundle.properties");
-        // Check value of the table
+        final Map<String, String> expectation = getExpectedMap();
+
+        // Check values of the table
         segmentPropertiesTable.requireRowCount(expectedRowCount);
         segmentPropertiesTable.requireColumnCount(expectedColumnCount);
         for (int i = 0; i < expectedRowCount; i++) {
@@ -74,6 +71,25 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
             assertThat(key).isIn(expectation.keySet());
             assertThat(value).isEqualTo(expectation.get(key));
         }
+    }
+
+    private Map<String, String> getExpectedMap() {
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmssX");
+        ZonedDateTime utcDateTime = ZonedDateTime.parse("20241127T035216Z", customFormatter);
+        ZonedDateTime expectedDateTime = utcDateTime.withZoneSameInstant(java.time.ZoneId.systemDefault());
+        final String expected = expectedDateTime
+                .format(DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm:ss a", Locale.getDefault()));
+        final String translator = "Hiroshi Miura";
+        //
+        final Map<String, String> expectation = new HashMap<>();
+        expectation.put("ID", "APERTIUM_ERROR");
+        expectation.put("Changed by", translator);
+        expectation.put("Changed on", expected);
+        expectation.put("Created on", expected);
+        expectation.put("Created by", translator);
+        expectation.put("Origin", "Unknown/Manual");
+        expectation.put("File", "Bundle.properties");
+        return expectation;
     }
 
 }

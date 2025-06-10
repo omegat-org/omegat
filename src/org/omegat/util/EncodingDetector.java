@@ -26,11 +26,15 @@
 package org.omegat.util;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
@@ -117,8 +121,20 @@ public final class EncodingDetector {
         if (defaultEncoding != null) {
             encoding = EncodingSniffer.toCharset(defaultEncoding);
         }
-        if (encoding != null) {
-            return encoding;
+        return checkEncodingOrDefault(fileName, encoding);
+    }
+
+    private static final int STANDARD_READ_LIMIT = 8192;
+
+    private static Charset checkEncodingOrDefault(String fileName, Charset encoding) {
+        Charset detectedEncoding = encoding == null ? StandardCharsets.UTF_8 : encoding;
+        try (BufferedReader bufferedFileReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName),
+                detectedEncoding))) {
+            char[] chars = new char[STANDARD_READ_LIMIT];
+            bufferedFileReader.read(chars, 0, STANDARD_READ_LIMIT);
+            return detectedEncoding;
+        } catch (IOException ignored) {
+            // just fallback to default charset
         }
         return Charset.defaultCharset();
     }

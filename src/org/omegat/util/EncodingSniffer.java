@@ -222,7 +222,8 @@ public final class EncodingSniffer {
     }
 
     private static Charset extractCharsetFromMeta(byte[] bytes, int index) {
-        for (Attribute currentAttribute = getAttribute(bytes, index); currentAttribute != null; currentAttribute = getAttribute(bytes, index)) {
+        for (Attribute currentAttribute = getAttribute(bytes,
+                index); currentAttribute != null; currentAttribute = getAttribute(bytes, index)) {
             index = currentAttribute.getUpdatedIndex();
             Charset charset = processMetaAttributes(currentAttribute);
             if (charset != null) {
@@ -237,7 +238,8 @@ public final class EncodingSniffer {
     }
 
     private static boolean matchesClosingTag(byte[] bytes, int index) {
-        return index + 2 < bytes.length && bytes[index] == '<' && bytes[index + 1] == '/' && Character.isLetter(bytes[index + 2]);
+        return index + 2 < bytes.length && bytes[index] == '<' && bytes[index + 1] == '/'
+                && Character.isLetter(bytes[index + 2]);
     }
 
     private static int skipAttributes(byte[] bytes, int index, byte[] delimiters) {
@@ -505,13 +507,10 @@ public final class EncodingSniffer {
     }
 
     private static boolean startsWithXmlDeclaration(final byte[] bytes) {
-        return bytes.length > 5 &&
-                XML_DECLARATION_PREFIX[0] == bytes[0] &&
-                XML_DECLARATION_PREFIX[1] == bytes[1] &&
-                XML_DECLARATION_PREFIX[2] == bytes[2] &&
-                XML_DECLARATION_PREFIX[3] == bytes[3] &&
-                XML_DECLARATION_PREFIX[4] == bytes[4] &&
-                XML_DECLARATION_PREFIX[5] == bytes[5];
+        return bytes.length > 5 && XML_DECLARATION_PREFIX[0] == bytes[0]
+                && XML_DECLARATION_PREFIX[1] == bytes[1] && XML_DECLARATION_PREFIX[2] == bytes[2]
+                && XML_DECLARATION_PREFIX[3] == bytes[3] && XML_DECLARATION_PREFIX[4] == bytes[4]
+                && XML_DECLARATION_PREFIX[5] == bytes[5];
     }
 
     private static Charset extractEncodingFromDeclaration(final String declaration) {

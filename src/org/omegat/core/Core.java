@@ -162,9 +162,11 @@ public final class Core {
         return matcher;
     }
 
+    private static SpellCheckerManager spellCheckerManager;
+
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
-        return SpellCheckerManager.getCurrentSpellChecker();
+        return spellCheckerManager.getCurrentSpellChecker();
     }
 
     public static FilterMaster getFilterMaster() {
@@ -231,6 +233,7 @@ public final class Core {
      * @param cl class loader.
      * @param params CLI parameters.
      * @throws Exception when error occurred.
+     * @deprecated since 6.1.0
      */
     @Deprecated(since = "6.1.0")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
@@ -284,6 +287,7 @@ public final class Core {
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
+        spellCheckerManager = new SpellCheckerManager();
         // Create an independent instance updated from SearchThead.
         new MultipleTransPane(me);
         // Create an independent instance updated by events.
@@ -294,7 +298,7 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) throws Exception {
+    public static void initializeConsole(final Map<String, String> params) {
         cmdLineParams = params;
         tagValidation = new TagValidationTool();
         currentProject = new NotLoadedProject();

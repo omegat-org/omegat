@@ -1,10 +1,10 @@
 [versions]
 slf4j = "2.0.17"
 slf4j-format = "0.5.1"
-groovy = "4.0.26"
+groovy = "4.0.27"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
-commons_io = "2.18.0"
+commons_io = "2.19.0"
 commons_text = "1.13.1"
 commons_validator = "1.9.0"
 jsoup = "1.19.1"
@@ -22,12 +22,12 @@ jgit = "6.10.0.202406032230-r"
 svnkit = "1.10.11"
 ivy = "2.5.3"
 jackson = "2.16.1"
-bc = "1.80"
+bc = "1.81"
 nashorn = "15.6"
-caffeine = "3.2.0"
+caffeine = "3.2.1"
 wiremock = "3.13.0"
 vldocking = "3.1.1"
-xmlunit = "2.10.1"
+xmlunit = "2.10.2"
 assertj = "3.27.3"
 appbundler = "1.2.1"
 supertmxmerge = "2.0.3"
@@ -40,7 +40,7 @@ protocolhandler = "0.1.4"
 pdfbox = "3.0.5"
 maligna = "3.0.1"
 trie4j = "0.9.10_1"
-dsl4j = "1.0.0"
+dsl4j = "1.1.0"
 stardict4j = "1.1.0"
 juniversalchardet = "2.5.0"
 mnemonics = "1.2"
@@ -54,6 +54,7 @@ assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
+mockito = "5.18.0"
 json_java = "20250517"
 protobuf_java = "3.25.5"
 
@@ -170,10 +171,11 @@ jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
 flatlaf = {group = "com.formdev", name = "flatlaf", version.ref = "flatlaf"}
 language-detector = {group = "org.omegat", name = "language-detector", version.ref = "languagedetector"}
 assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", version.ref = "assertj_swing_junit"}
-morfologik-stemming = {group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
-morfologik-speller = {group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
-swing-extra-locales = {group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
+morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
+swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
 json = {group = "org.json", name = "json", version.ref = "json_java"}
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
 protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}
 
 [bundles]

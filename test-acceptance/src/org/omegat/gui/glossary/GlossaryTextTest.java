@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Alex Buloichik
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,7 +25,29 @@
 
 package org.omegat.gui.glossary;
 
-import org.omegat.core.TestCore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.util.LocaleRule;
 
-public class FindGlossaryThreadTest extends TestCore {
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Locale;
+
+public class GlossaryTextTest extends TestCoreGUI {
+
+    private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
+
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+
+    @Test
+    public void testGlossarySearch() throws Exception {
+        // load project
+        openSampleProjectWaitGlossary(PROJECT_PATH);
+        robot().waitForIdle();
+        window.textBox("glossary_text_area").requireVisible();
+        window.textBox("glossary_text_area").requireNotEditable();
+        window.textBox("glossary_text_area").requireText("Error = エラー\n\n");
+    }
 }

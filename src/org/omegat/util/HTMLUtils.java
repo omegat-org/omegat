@@ -10,6 +10,7 @@
                2012 Didier Briel, Martin Fleurke
                2013 Didier Briel, Alex Buloichik
                2017 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -37,24 +38,31 @@ import java.util.Collection;
 
 public final class HTMLUtils {
 
-    private static final EntityUtil ENTITY_UTIL = new EntityUtil();
+    private static EntityUtil entityUtil = null;
+
+    private static EntityUtil getEntityUtil() {
+        if (entityUtil == null) {
+            entityUtil = new EntityUtil();
+        }
+        return entityUtil;
+    }
 
     private HTMLUtils() {
     }
 
     /** Returns true if a char is a latin letter */
     public static boolean isLatinLetter(int ch) {
-        return ENTITY_UTIL.isLatinLetter(ch);
+        return getEntityUtil().isLatinLetter(ch);
     }
 
     /** Returns true if a char is a decimal digit */
     public static boolean isDecimalDigit(int ch) {
-        return ENTITY_UTIL.isDecimalDigit(ch);
+        return getEntityUtil().isDecimalDigit(ch);
     }
 
     /** Returns true if a char is a hex digit */
     public static boolean isHexDigit(int ch) {
-        return ENTITY_UTIL.isHexDigit(ch);
+        return getEntityUtil().isHexDigit(ch);
     }
 
     /**
@@ -70,7 +78,7 @@ public final class HTMLUtils {
      *         characters
      */
     public static String entitiesToChars(String input) {
-        return ENTITY_UTIL.entitiesToChars(input);
+        return getEntityUtil().entitiesToChars(input);
     }
 
     /**
@@ -87,7 +95,7 @@ public final class HTMLUtils {
      *            "protected", i.e. they will not be escaped as entities.
      */
     public static String charsToEntities(String str, String encoding, Collection<String> shortcuts) {
-        return ENTITY_UTIL.charsToEntities(str, encoding, shortcuts);
+        return getEntityUtil().charsToEntities(str, encoding, shortcuts);
     }
 
     public static String getSpacePrefix(String input, boolean compressWhitespace) {

@@ -198,8 +198,6 @@ public class LingvoDSL implements IDictionaryFactory {
     public static class HtmlVisitor extends DslVisitor<String> {
 
         private static final String[] IMAGE_EXTS = new String[] { "png", "jpg", "PNG", "JPG" };
-        private static final LanguageCode LANG_CODE = new LanguageCode();
-        private static final LanguageName LANG_NAME = new LanguageName();
 
         private final boolean condensedView;
         private final File basePath;
@@ -285,13 +283,13 @@ public class LingvoDSL implements IDictionaryFactory {
             } else if (tag.isTagName("lang")) {
                 if (tag.hasAttribute() && tag.getAttribute().getKey().equals("id")) {
                     int i = Integer.parseInt(tag.getAttribute().getValue());
-                    if (LANG_CODE.containsKey(i)) {
-                        sb.append("<span class=\"lang_").append(LANG_CODE.get(i)).append("\">");
+                    if (LanguageCode.containsCode(i)) {
+                        sb.append("<span class=\"lang_").append(LanguageCode.getLanguageCode(i)).append("\">");
                         return;
                     }
                 } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")
-                        && LANG_NAME.containsKey(tag.getAttribute().getValue())) {
-                    sb.append("<span class=\"lang_").append(LANG_NAME.get(tag.getAttribute().getValue()))
+                        && LanguageName.containsLanguage(tag.getAttribute().getValue())) {
+                    sb.append("<span class=\"lang_").append(LanguageName.getLanguageCode(tag.getAttribute().getValue()))
                             .append("\">");
                     return;
                 }

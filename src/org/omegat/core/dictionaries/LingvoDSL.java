@@ -356,42 +356,47 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Visit an EndTag.
          *
-         * @param endTag
-         *            to visit.
+         * @param tag to visit.
          */
         @Override
-        public void visit(final DslArticle.EndTag endTag) {
-            if (endTag.isTagName("*")) {
+        public void visit(final DslArticle.EndTag tag) {
+            if (!handleDetailsEnd(tag) && !handleDelayedText(tag)) {
+                appendFormattingTags(tag);
+            }
+        }
+
+        private boolean handleDetailsEnd(final DslArticle.EndTag tag) {
+            if (tag.isTagName("*")) {
                 inDetails = false;
                 if (!condensedView) {
                     sb.append("</span>");
                 }
-                return;
+                return true;
             }
-            if (inDetails && condensedView) {
-                return;
+            return inDetails && condensedView;
+        }
+
+        private boolean handleDelayedText(final DslArticle.EndTag tag) {
+            if (!delayText || previousText == null) {
+                return false;
             }
-            if (delayText) {
-                if (previousText == null) {
-                    return;
+            if (tag.isTagName("video")) {
+                appendLink(getMediaUrl(), previousText);
+            } else if (tag.isTagName("s")) {
+                if (isMediaImage()) {
+                    sb.append("<img src=\"").append(getMediaUrl()).append("\" />");
+                } else {
+                    appendLink(getMediaUrl(), previousText);
                 }
-                if (endTag.isTagName("video")) {
-                    sb.append("<a href=\"").append(getMediaUrl()).append("\">").append(previousText)
-                            .append("</a>");
-                } else if (endTag.isTagName("s")) {
-                    if (isMediaImage()) {
-                        sb.append("<img src=\"").append(getMediaUrl()).append("\" />");
-                    } else { // sound and unknown files
-                        sb.append("<a href=\"").append(getMediaUrl()).append("\" >").append(previousText)
-                                .append("</a>");
-                    }
-                } else if (endTag.isTagName("url")) {
-                    sb.append("<a href=\"").append(previousText).append("\">").append(previousText)
-                            .append("</a>");
-                }
-                delayText = false;
-                previousText = null;
+            } else if (tag.isTagName("url")) {
+                appendLink(previousText, previousText);
             }
+            delayText = false;
+            previousText = null;
+            return true;
+        }
+
+        private void appendFormattingTags(final DslArticle.EndTag endTag) {
             if (endTag.isTagName("b")) {
                 sb.append("</strong>");
             } else if (endTag.isTagName("u") || endTag.isTagName("i") || endTag.isTagName("c")
@@ -409,6 +414,14 @@ public class LingvoDSL implements IDictionaryFactory {
                 } else {
                     sb.append("</div>");
                 }
+            }
+        }
+
+        private void appendLink(final String url, final String text) {
+            if (isMediaImage()) {
+                sb.append("<img src=\"").append(url).append("\" />");
+            } else {
+                sb.append("<a href=\"").append(url).append("\">").append(text).append("</a>");
             }
         }
 

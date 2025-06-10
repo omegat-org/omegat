@@ -123,19 +123,36 @@ public final class EncodingDetector {
         return checkEncodingOrDefault(fileName, encoding);
     }
 
-    private static final int STANDARD_READ_LIMIT = 8192;
+    private static final int READ_LIMIT = 8192;
+    private static final char REPLACEMENT_CHARACTER = 65533; // Represents a failed character decoding
+    private static final char END_OF_STREAM_CHARACTER = 0; // Signals end of stream
 
     private static Charset checkEncodingOrDefault(String fileName, Charset encoding) {
-        Charset detectedEncoding = encoding == null ? StandardCharsets.UTF_8 : encoding;
-        try (BufferedReader bufferedFileReader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(fileName), detectedEncoding))) {
-            char[] chars = new char[STANDARD_READ_LIMIT];
-            bufferedFileReader.read(chars, 0, STANDARD_READ_LIMIT);
-            return detectedEncoding;
-        } catch (IOException ignored) {
-            // just fallback to default charset
+        Charset selectedEncoding = (encoding == null) ? StandardCharsets.UTF_8 : encoding;
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(fileName), selectedEncoding))) {
+            if (containsInvalidCharacters(bufferedReader)) {
+                return Charset.defaultCharset(); // Fallback to default if invalid characters are found
+            }
+            return selectedEncoding;
+        } catch (IOException e) {
+            // Fallback to the default charset in case of any exceptions while reading
+            return Charset.defaultCharset();
         }
-        return Charset.defaultCharset();
+    }
+
+    private static boolean containsInvalidCharacters(BufferedReader reader) throws IOException {
+        char[] buffer = new char[READ_LIMIT];
+        reader.read(buffer, 0, READ_LIMIT);
+        for (char c : buffer) {
+            if (c == REPLACEMENT_CHARACTER) {
+                return true; // Invalid character detected
+            }
+            if (c == END_OF_STREAM_CHARACTER) {
+                break; // Reached end of stream
+            }
+        }
+        return false;
     }
 
     /**

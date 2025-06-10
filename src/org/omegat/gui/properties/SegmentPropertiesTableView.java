@@ -53,14 +53,14 @@ import org.omegat.util.gui.UIThreadsUtil;
 @SuppressWarnings("serial")
 public class SegmentPropertiesTableView implements ISegmentPropertiesView {
 
-    private SegmentPropertiesArea parent;
+    private SegmentPropertiesArea propertiesArea;
     private FlashingTable table;
     private PropertiesTableModel model;
     private int mouseoverRow = -1;
     private int mouseoverCol = -1;
 
     public SegmentPropertiesArea getParent() {
-        return parent;
+        return propertiesArea;
     }
 
     public int getMouseoverRow() {
@@ -73,7 +73,7 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
 
     @Override
     public void install(final SegmentPropertiesArea parent) {
-        this.parent = parent;
+        propertiesArea = parent;
         model = new PropertiesTableModel(this);
         table = new FlashingTable(model);
         table.setName("SegmentPropertiesTable");
@@ -98,8 +98,8 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (mouseoverCol == 2) {
-                parent.showContextMenu(
-                        SwingUtilities.convertPoint(table, e.getPoint(), parent.getScrollPane()));
+                propertiesArea.showContextMenu(
+                        SwingUtilities.convertPoint(table, e.getPoint(), propertiesArea.getScrollPane()));
             }
         }
 
@@ -175,7 +175,7 @@ public class SegmentPropertiesTableView implements ISegmentPropertiesView {
 
     @Override
     public String getKeyAtPoint(Point p) {
-        int clickedRow = table.rowAtPoint(SwingUtilities.convertPoint(parent.getScrollPane(), p, table));
+        int clickedRow = table.rowAtPoint(SwingUtilities.convertPoint(propertiesArea.getScrollPane(), p, table));
         if (clickedRow == -1) {
             return null;
         }

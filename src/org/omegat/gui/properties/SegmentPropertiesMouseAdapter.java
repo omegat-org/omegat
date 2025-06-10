@@ -33,7 +33,7 @@ import java.awt.event.MouseEvent;
 class SegmentPropertiesMouseAdapter extends MouseAdapter {
     private final SegmentPropertiesArea segmentPropertiesArea;
 
-    public SegmentPropertiesMouseAdapter(SegmentPropertiesArea segmentPropertiesArea) {
+    SegmentPropertiesMouseAdapter(SegmentPropertiesArea segmentPropertiesArea) {
         this.segmentPropertiesArea = segmentPropertiesArea;
     }
 

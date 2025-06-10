@@ -85,8 +85,9 @@ class PropertiesTableModel extends AbstractTableModel {
                     && columnIndex == segmentPropertiesTableView.getMouseoverCol()) {
                 return ISegmentPropertiesView.SETTINGS_ICON;
             } else {
-                if (rowIndex == segmentPropertiesTableView.getMouseoverRow())
+                if (rowIndex == segmentPropertiesTableView.getMouseoverRow()) {
                     return ISegmentPropertiesView.SETTINGS_ICON_INACTIVE;
+                }
                 return ISegmentPropertiesView.SETTINGS_ICON_INVISIBLE;
             }
         }

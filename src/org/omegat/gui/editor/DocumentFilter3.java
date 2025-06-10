@@ -58,8 +58,8 @@ public class DocumentFilter3 extends DocumentFilter {
         UIThreadsUtil.mustBeSwingThread();
 
         if (attr != null) {
-            ((Document3) fb.getDocument()).textBeingComposed = attr
-                    .isDefined(StyleConstants.ComposedTextAttribute);
+            ((Document3) fb.getDocument()).setTextBeingComposed(attr
+                    .isDefined(StyleConstants.ComposedTextAttribute));
         }
 
         if (isPossible(fb.getDocument(), offset, 0)) {
@@ -73,8 +73,8 @@ public class DocumentFilter3 extends DocumentFilter {
         UIThreadsUtil.mustBeSwingThread();
 
         if (attrs != null) {
-            ((Document3) fb.getDocument()).textBeingComposed = attrs
-                    .isDefined(StyleConstants.ComposedTextAttribute);
+            ((Document3) fb.getDocument()).setTextBeingComposed(attrs
+                    .isDefined(StyleConstants.ComposedTextAttribute));
         }
 
         if (isPossible(fb.getDocument(), offset, length)) {
@@ -82,9 +82,9 @@ public class DocumentFilter3 extends DocumentFilter {
         }
     }
 
-    private boolean isPossible(Document d, int offset, int length) throws BadLocationException {
+    boolean isPossible(Document d, int offset, int length) throws BadLocationException {
         Document3 doc = (Document3) d;
-        if (doc.trustedChangesInProgress) {
+        if (doc.getTrustedChangesInProgress()) {
             // this call created by internal changes
             return true;
         }
@@ -101,7 +101,7 @@ public class DocumentFilter3 extends DocumentFilter {
 
         // check protected parts
         if (!Preferences.isPreference(Preferences.ALLOW_TAG_EDITING)) {
-            SegmentBuilder sb = doc.controller.getCurrentSegmentBuilder();
+            SegmentBuilder sb = doc.getController().getCurrentSegmentBuilder();
             if (sb == null) {
                 // there is no current active entry
                 return false;
@@ -114,7 +114,7 @@ public class DocumentFilter3 extends DocumentFilter {
                 while ((pos = text.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
                     int checkPos = pos;
                     int checkLen = pp.getTextInSourceSegment().length();
-                    if (sb.hasRTL && doc.controller.targetLangIsRTL) {
+                    if (sb.hasRTL && doc.getController().targetLangIsRTL) {
                         // should be bidi-chars around tags
                         if (EditorUtils.hasBidiAroundTag(text, pp.getTextInSourceSegment(), pos)) {
                             checkPos -= 2;

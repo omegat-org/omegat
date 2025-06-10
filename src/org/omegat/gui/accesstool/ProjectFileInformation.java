@@ -33,8 +33,6 @@ import org.omegat.core.data.IProject;
 
 class ProjectFileInformation {
 
-    private static final int FILE_SELECTOR_WIDTH = 48;
-
     private final String filePath;
     private final int segments;
 

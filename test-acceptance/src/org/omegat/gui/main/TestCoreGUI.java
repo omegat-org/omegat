@@ -26,10 +26,13 @@ package org.omegat.gui.main;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
@@ -41,6 +44,7 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.io.FileUtils;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.image.ScreenshotTaker;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
 import org.omegat.TestMainInitializer;
@@ -51,6 +55,9 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.dictionaries.DictionariesTextArea;
+import org.omegat.gui.glossary.GlossaryTextArea;
+import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -84,15 +91,81 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
+     * Open project from the specified path and wait until the dictionary is loaded.
+     * @param projectPath
+     * @throws Exception
+     */
+    protected void openSampleProjectWaitDictionary(Path projectPath) throws Exception {
+        DictionariesTextArea dictionariesTextArea = (DictionariesTextArea) Core.getDictionaries();
+        CountDownLatch latch = new CountDownLatch(1);
+        dictionariesTextArea.addPropertyChangeListener("displayWords", evt -> {
+            latch.countDown();
+        });
+        openSampleProject(projectPath);
+        try {
+            boolean result = latch.await(5, TimeUnit.SECONDS);
+            if (!result) {
+                fail("Dictionary is not loaded.");
+            }
+        } catch (InterruptedException ignored) {
+            fail("Interrupted for dictionary entry loading.");
+        }
+    }
+
+    /**
+     * Open project from the specified path and wait until the glossary is loaded.
+     * @param projectPath project root path.
+     * @throws Exception when error occurred.
+     */
+    protected void openSampleProjectWaitGlossary(Path projectPath) throws Exception {
+        GlossaryTextArea glossaryTextArea = (GlossaryTextArea) Core.getGlossary();
+        CountDownLatch latch = new CountDownLatch(1);
+        glossaryTextArea.addPropertyChangeListener("entries", evt -> latch.countDown());
+        openSampleProject(projectPath);
+        try {
+            boolean result = latch.await(5, TimeUnit.SECONDS);
+            if (!result) {
+                fail("Glossary is not loaded.");
+            }
+        } catch (InterruptedException ignored) {
+            // Ignore and check in assertion.
+        }
+        assertTrue("Glossary should be loaded.", !glossaryTextArea.getDisplayedEntries().isEmpty());
+    }
+
+    /**
+     * Open project from the specified path and wait until the active match is set.
+     * @param projectPath
+     * @throws Exception
+     */
+    protected void openSampleProjectWaitMatches(Path projectPath) throws Exception {
+        MatchesTextArea matchesTextArea = (MatchesTextArea) Core.getMatcher();
+        CountDownLatch latch = new CountDownLatch(1);
+        matchesTextArea.addPropertyChangeListener("matches", evt -> SwingUtilities.invokeLater(() -> {
+            if (matchesTextArea.getActiveMatch() != null) {
+                latch.countDown();
+            }
+        }));
+        openSampleProject(projectPath);
+        try {
+            boolean result = latch.await(5, TimeUnit.SECONDS);
+            if (!result) {
+                fail("Active match is not set.");
+            }
+        } catch (InterruptedException ignored) {
+            fail("Waiting for active match interrupted.");
+        }
+    }
+
+    /**
      * Open project from the specified path.
      * @param projectPath project root path.
      * @throws Exception when error occurred.
      */
-    protected void openSampleProject(String projectPath) throws Exception {
+    protected void openSampleProject(Path projectPath) throws Exception {
         // 0. Prepare project folder
         tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
-        File projSrc = new File(projectPath);
-        FileUtils.copyDirectory(projSrc, tmpDir);
+        FileUtils.copyDirectory(projectPath.toFile(), tmpDir);
         FileUtils.forceDeleteOnExit(tmpDir);
         // 1. Prepare preference for the test;
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
@@ -200,5 +273,28 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             mainMenu.add(optionsMenu);
             mainMenu.add(helpMenu);
         }
+    }
+
+    private static final String IMAGE_PARENT = "build/test-results/testAcceptance/";
+
+    /**
+     * Captures a screenshot of the current desktop and saves it as a PNG file
+     * in a directory structure based on the provided class name.
+     *
+     * @param className the name of the class used to determine the directory structure
+     *                  where the screenshot will be saved
+     * @param name      the name of the screenshot file
+     * @throws IOException if an I/O error occurs during directory creation,
+     *                     file deletion, or saving the screenshot
+     */
+    protected void takeScreenshot(String className, String name) throws IOException {
+        Path imageDir = Paths.get(IMAGE_PARENT).resolve(className);
+        if (!Files.exists(imageDir)) {
+            Files.createDirectories(imageDir);
+        }
+        ScreenshotTaker screenShotTaker = new ScreenshotTaker();
+        Path image = imageDir.resolve(name);
+        Files.deleteIfExists(image);
+        screenShotTaker.saveDesktopAsPng(image.toString());
     }
 }

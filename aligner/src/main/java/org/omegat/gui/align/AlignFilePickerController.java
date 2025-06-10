@@ -190,7 +190,7 @@ public class AlignFilePickerController {
                 protected void done() {
                     try {
                         Aligner aligner = get();
-                        new AlignPanelController(aligner, defaultSaveDir).show(parent);
+                        new AlignPanelController(defaultSaveDir).show(parent, aligner);
                     } catch (CancellationException e) {
                         // Ignore
                     } catch (Exception e) {

@@ -40,6 +40,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -52,10 +53,12 @@ import org.omegat.util.gui.Styles;
 @SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
 
-    protected final EditorController controller;
+    private final EditorController controller;
 
     /** Position of active translation in text. */
+    @Nullable
     Position activeTranslationBeginM1;
+    @Nullable
     Position activeTranslationEndP1;
 
     /**
@@ -89,13 +92,29 @@ public class Document3 extends DefaultStyledDocument {
      * @see <a href="https://sourceforge.net/p/omegat/bugs/529/">Later, more
      *      specific ticket</a>
      */
-    protected boolean trustedChangesInProgress = false;
+    private boolean trustedChangesInProgress = false;
 
     /**
      * Flag to indicate that text is currently being composed (should not be
      * considered to have been input yet) by an IME.
      */
-    protected boolean textBeingComposed = false;
+    private boolean textBeingComposed = false;
+
+    boolean getTrustedChangesInProgress() {
+        return trustedChangesInProgress;
+    }
+
+    void setTrustedChangesInProgress(boolean trustedChangesInProgress) {
+        this.trustedChangesInProgress = trustedChangesInProgress;
+    }
+
+    boolean getTextBeingComposed() {
+        return textBeingComposed;
+    }
+
+    void setTextBeingComposed(boolean textBeingComposed) {
+        this.textBeingComposed = textBeingComposed;
+    }
 
     public Document3(final EditorController controller) {
         this.controller = controller;
@@ -123,6 +142,9 @@ public class Document3 extends DefaultStyledDocument {
      * Calculate the position of the start of the current translation
      */
     public int getTranslationStart() {
+        if (activeTranslationBeginM1 == null) {
+            return 0;
+        }
         return activeTranslationBeginM1.getOffset() + 1;
     }
 
@@ -130,6 +152,9 @@ public class Document3 extends DefaultStyledDocument {
      * Calculate the position of the end of the current translation
      */
     protected int getTranslationEnd() {
+        if (activeTranslationEndP1 == null) {
+            return 0;
+        }
         return activeTranslationEndP1.getOffset() - 1;
     }
 
@@ -154,6 +179,7 @@ public class Document3 extends DefaultStyledDocument {
      *
      * @return active translation text
      */
+    @Nullable
     String extractTranslation() {
         if (!isEditMode()) {
             return null;
@@ -199,5 +225,9 @@ public class Document3 extends DefaultStyledDocument {
         } finally {
             writeUnlock();
         }
+    }
+
+    protected EditorController getController() {
+        return controller;
     }
 }

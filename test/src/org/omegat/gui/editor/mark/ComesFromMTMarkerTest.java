@@ -62,9 +62,11 @@ public class ComesFromMTMarkerTest extends MarkerTestBase {
         tmroot = Paths.get("test/data/tmx/");
         project = tmroot.resolve("mt/mt1.tmx"); // should under 'mt'
         TestCoreInitializer.initEditor(editor);
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        projectTMX = new ProjectTMX(new Language("en"), new Language("fr"), true,
-                project.toFile(), null);
+        Segmenter segmenter =  new Segmenter(SRX.getDefault());
+        Core.setSegmenter(segmenter);
+        projectTMX = new ProjectTMX();
+        projectTMX.load(new Language("en"), new Language("fr"), true,
+                project.toFile(), segmenter);
         Core.setProject(new NotLoadedProject() {
             @Override
             public boolean isProjectLoaded() {

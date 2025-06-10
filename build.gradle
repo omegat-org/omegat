@@ -15,7 +15,7 @@ plugins {
     id 'org.omegat.verification-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
-    id("com.google.osdetector") version "1.7.3"
+    id 'com.google.osdetector' version '1.7.3'
 }
 
 application {
@@ -30,7 +30,7 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "8.12" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
@@ -53,6 +53,7 @@ sourceSets {
     main {
         java {
             srcDir 'src'
+            srcDir tasks.genJAXB.outputs
         }
         resources {
             srcDir 'src'
@@ -134,9 +135,13 @@ dependencies {
             exclude module: 'language-detector'
             exclude group: 'com.google.android'
             exclude module: 'hunspell'
+            exclude module: 'json'
+            exclude module: 'protobuf-java'
         }
         runtimeOnly(libs.language.detector)
         runtimeOnly(libs.dumont.hunspell)
+        runtimeOnly(libs.json)
+        runtimeOnly(libs.protobuf)
         implementation(libs.icu4j)
 
         // Lucene for tokenizers
@@ -213,10 +218,15 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
     testImplementation(libs.slf4j.api)
+    testImplementation(libs.mockito.core)
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
         exclude module: "hunspell"
+        exclude module: "json"
+        exclude module: "protobuf"
     }
+    testRuntimeOnly(libs.json)
+    testRuntimeOnly(libs.protobuf)
     testRuntimeOnly(libs.bundles.groovy)
     testRuntimeOnly(libs.nashorn.core)
     testRuntimeOnly(libs.slf4j.jdk14)
@@ -232,6 +242,7 @@ dependencies {
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
+    testIntegrationImplementation(libs.slf4j.api)
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
     // workdir classifiers are hard-coded in gralde-launch4j plugin
@@ -251,7 +262,8 @@ dependencies {
 }
 
 jar {
-    def omtPlugins = loadProperties(file('Plugins.properties'))
+    def pluginProperties = layout.settingsDirectory.file('Plugins.properties')
+    def omtPlugins = loadProperties(pluginProperties.asFile)
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
@@ -267,12 +279,13 @@ jar {
             attributes('Plugin-Name': name, 'Plugin-Category': category, 'Plugin-Description': description, path)
         }
         def desc = [:]
-        omtPlugins.each { key, val ->
-            if (key.startsWith('plugin.desc')) {
-                desc[key.split('\\.').last()] = val
-            } else if (key != 'plugin') {
-                val.tokenize().each { cls ->
-                    attributes('OmegaT-Plugin': key, cls)
+        omtPlugins.each { pluginKey, pluginValue ->
+            if (pluginKey.startsWith('plugin.desc')) {
+                def descriptionKey = pluginKey.split('\\.').last()
+                desc[descriptionKey] = pluginValue
+            } else if (pluginKey != 'plugin') {
+                pluginValue.tokenize().each { className ->
+                    attributes('OmegaT-Plugin': pluginKey, className)
                 }
             }
         }
@@ -302,12 +315,12 @@ distributions {
             // /docs
             // ...../greetings/<lang>/first_steps.html
             // ...../manuals/<lang>.zip
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 into 'docs'
                 include 'doc-license.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 // ** Caution!! **
                 // 'readme*.txt' and 'changes.txt' are expected
                 // in releases/win32-specific/OmegaT.iss
@@ -327,16 +340,16 @@ distributions {
             project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
                 from(it.outputs) { into 'docs/manuals' }
             }
-            from('scripts') {
+            from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'
             }
-            from('images') {
+            from(layout.settingsDirectory.dir('images')) {
                 into 'images'
             }
-            from('release/plugins-specific') {
+            from(layout.settingsDirectory.dir('release/plugins-specific')) {
                 into 'plugins'
             }
-            from('release/linux-specific') {
+            from(layout.settingsDirectory.dir('release/linux-specific')) {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
                         JAR_SUBST           : omegatJarFilename
@@ -345,19 +358,19 @@ distributions {
                     unix(0755)
                 }
             }
-            from('release/win32-specific') {
+            from(layout.settingsDirectory.dir('release/win32-specific')) {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
                         JAR_SUBST           : omegatJarFilename
                 ])
             }
-            from('lib/licenses') {
+            from(layout.settingsDirectory.dir('lib/licenses')) {
                 into 'lib'
             }
             // system core plugins into modules
             into('modules') {
                 from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
-                from('releases/modules-specific')
+                from(layout.settingsDirectory.dir('releases/modules-specific'))
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -372,7 +385,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                include 'build-logic/**', 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
                         'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
                         'docs_devel/**', 'scripts/**',
                         'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',
@@ -401,7 +414,7 @@ distributions {
 }
 
 tasks.register('mac') {
-    description = 'Build the Mac distributions.'
+    description = 'Builds the Mac distributions.'
     group = 'omegat distribution'
 }
 makeHunspellSignTask()
@@ -409,7 +422,7 @@ makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE, parentTaskName: 
 makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskName: 'mac')
 
 tasks.register('linux') {
-    description = 'Build the Linux distributions.'
+    description = 'Builds the Linux distributions.'
     group = 'omegat distribution'
     dependsOn linuxDebDist
     dependsOn linuxRpmDist
@@ -423,7 +436,7 @@ startScripts.enabled = false
 application.executableDir = ""
 
 tasks.register('win') {
-    description = 'Build the Windows distributions.'
+    description = 'Builds the Windows distributions.'
     group = 'omegat distribution'
 }
 makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE', parentTask: 'win')
@@ -469,6 +482,16 @@ processResources {
     }
 }
 
+def manualLangs = project.property("manualLangs").split(',')
+manualLangs.each { lang ->
+    makeDocumentationTasks(lang)
+}
+
+def firstStepLangs = project.property("firstStepLangs").split(',')
+firstStepLangs.each { lang ->
+    makeFirstStepTask(lang)
+}
+
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
@@ -480,5 +503,5 @@ remotes {
         agent = true
     }
 }
-publishAtomically(name: 'manual', sourceTask: webManual)
+publishAtomically(name: 'webManual', sourceTask: manualHtmls)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)

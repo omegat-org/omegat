@@ -29,6 +29,7 @@ import org.junit.Test;
 import java.nio.charset.Charset;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assume.assumeTrue;
 import static org.omegat.util.EncodingDetector.detectHtmlEncoding;
 
 public class EncodingDetectorTest {
@@ -51,16 +52,16 @@ public class EncodingDetectorTest {
         String utf8BomFile = "test/data/util/file-HTMLUtils-utf8_with_bom.html";
         assertEquals("UTF-8", detectHtmlEncoding(utf8BomFile, null).name());
 
-        // Test with no BOM and default encoding provided
-        String noBomFile = "test/data/util/file-HTMLUtils-no_header_no_bom.html";
-        assertEquals("ISO-8859-1", detectHtmlEncoding(noBomFile, "ISO-8859-1").name());
-
         // Test with UTF-8 xml declaration.
         String utf8XmlFile = "test/data/util/file-HTMLUtils-utf8-xml-declaration.html";
         assertEquals("UTF-8", detectHtmlEncoding(utf8XmlFile, null).name());
 
+        // Test with no BOM and default encoding provided
+        String noBomFile = "test/data/util/file-HTMLUtils-no_header_no_bom.html";
+        assertEquals("ISO-8859-1", detectHtmlEncoding(noBomFile, "ISO-8859-1").name());
+
         // Test with no BOM and no default encoding
-        assertEquals(Charset.defaultCharset().name(), detectHtmlEncoding(noBomFile, null).name());
+        assertEquals("UTF-8", detectHtmlEncoding(noBomFile, null).name());
     }
 
     @Test
@@ -76,5 +77,17 @@ public class EncodingDetectorTest {
         // Test with content="UTF16-BE"
         String utf16BE2File = "test/data/util/file-HTMLUtils-utf16_be-charset.html";
         assertEquals("UTF-8", detectHtmlEncoding(utf16BE2File, null).name());
+
+        String windows1252File = "test/data/util/file-HTMLUtils-windows-1252.html";
+        assertEquals("windows-1252", detectHtmlEncoding(windows1252File, "windows-1252").name());
+    }
+
+    @Test
+    public void testDetectHTMLEncodingWindows1252() {
+        assumeTrue(System.getProperty("os.name").toLowerCase().contains("windows"));
+        assumeTrue(Charset.defaultCharset().name().equalsIgnoreCase("windows-1252"));
+
+        String windows1252File = "test/data/util/file-HTMLUtils-windows-1252.html";
+        assertEquals(Charset.defaultCharset().name(), detectHtmlEncoding(windows1252File, null).name());
     }
 }

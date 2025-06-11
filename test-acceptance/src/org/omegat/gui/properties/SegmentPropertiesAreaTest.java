@@ -80,7 +80,7 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         ZonedDateTime utcDateTime = ZonedDateTime.parse("20241127T035216Z", customFormatter);
         ZonedDateTime expectedDateTime = utcDateTime.withZoneSameInstant(java.time.ZoneId.systemDefault());
         final String expected = expectedDateTime
-                .format(DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm:ss a", Locale.getDefault()));
+                .format(DateTimeFormatter.ofPattern("MMM dd, yyyy h:m:s a", Locale.getDefault()));
         final String translator = "Hiroshi Miura";
         //
         final Map<String, String> expectation = new HashMap<>();

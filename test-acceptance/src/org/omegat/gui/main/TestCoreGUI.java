@@ -85,13 +85,24 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     /**
      * Open project from the specified path.
+     *
      * @param projectPath project root path.
      * @throws Exception when error occurred.
      */
     protected void openSampleProject(String projectPath) throws Exception {
-        // 0. Prepare project folder
+        openSampleProject(Path.of(projectPath));
+    }
+
+    /**
+     * Opens a sample project from the specified path for testing purposes.
+     *
+     * @param projectPath the path to the sample project to be opened
+     * @throws Exception if an error occurs while opening the project
+     */
+    protected void openSampleProject(Path projectPath) throws Exception {
+       // 0. Prepare project folder
         tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
-        File projSrc = new File(projectPath);
+        File projSrc = projectPath.toFile();
         FileUtils.copyDirectory(projSrc, tmpDir);
         FileUtils.forceDeleteOnExit(tmpDir);
         // 1. Prepare preference for the test;

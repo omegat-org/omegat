@@ -58,6 +58,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
+import org.omegat.gui.properties.SegmentPropertiesArea;
 import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -90,6 +91,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         assertFalse("Project should not be loaded.", Core.getProject().isProjectLoaded());
     }
 
+    protected void openSampleProjectWaitPropertyPane(Path projectPath) throws Exception {
+        SegmentPropertiesArea segmentPropertiesArea = Core.getSegmentPropertiesArea();
+        CountDownLatch latch = new CountDownLatch(1);
+        segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
+        openSampleProject(projectPath);
+        try {
+            boolean result = latch.await(5, TimeUnit.SECONDS);
+            if (!result) {
+                fail("Segment properties are not loaded.");
+            }
+        } catch (InterruptedException ignored) {
+            fail("Waiting for segment properties interrupted.");
+        }
+    }
+
     /**
      * Open project from the specified path and wait until the dictionary is loaded.
      * @param projectPath
@@ -98,9 +114,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     protected void openSampleProjectWaitDictionary(Path projectPath) throws Exception {
         DictionariesTextArea dictionariesTextArea = (DictionariesTextArea) Core.getDictionaries();
         CountDownLatch latch = new CountDownLatch(1);
-        dictionariesTextArea.addPropertyChangeListener("displayWords", evt -> {
-            latch.countDown();
-        });
+        dictionariesTextArea.addPropertyChangeListener("displayWords", evt -> latch.countDown());
         openSampleProject(projectPath);
         try {
             boolean result = latch.await(5, TimeUnit.SECONDS);
@@ -155,16 +169,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         } catch (InterruptedException ignored) {
             fail("Waiting for active match interrupted.");
         }
-    }
-
-    /**
-     * Open project from the specified path.
-     *
-     * @param projectPath project root path.
-     * @throws Exception when error occurred.
-     */
-    protected void openSampleProject(String projectPath) throws Exception {
-        openSampleProject(Path.of(projectPath));
     }
 
     /**

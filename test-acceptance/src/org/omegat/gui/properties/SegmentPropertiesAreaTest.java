@@ -31,6 +31,8 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -41,7 +43,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SegmentPropertiesAreaTest extends TestCoreGUI {
 
-    private static final String PROJECT_PATH = "test-acceptance/data/project/";
+    private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
 
     @Rule
     public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
@@ -49,7 +51,7 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
     @Test
     public void testSegmentPropertiesPaneExist() throws Exception {
         // load project
-        openSampleProject(PROJECT_PATH);
+        openSampleProjectWaitPropertyPane(PROJECT_PATH);
         robot().waitForIdle();
         // check a segment properties pane
         window.scrollPane("Segment Properties").requireEnabled();

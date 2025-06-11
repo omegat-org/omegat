@@ -27,6 +27,8 @@ package org.omegat.gui.properties;
 
 import java.awt.IllegalComponentStateException;
 import java.awt.Point;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -90,7 +92,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
     private final List<String> properties = new ArrayList<>();
-
+    private final PropertyChangeSupport changes = new PropertyChangeSupport(this);
     private final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
@@ -129,6 +131,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         installView(initModeClass);
+    }
+
+    public void addPropertyChangeListener(String key, PropertyChangeListener l) {
+        changes.addPropertyChangeListener(key, l);
     }
 
     private void installView(Class<?> viewClass) {
@@ -292,6 +298,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     }
 
     private void setProperties(SourceTextEntry ste) {
+        var oldProperties = new ArrayList<>(properties);
         properties.clear();
         if (ste == null) {
             viewImpl.update();
@@ -321,6 +328,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setTranslationProperties(trg);
         }
         viewImpl.update();
+        changes.firePropertyChange("properties", oldProperties, properties);
     }
 
     private void setKeyProperties(EntryKey key) {

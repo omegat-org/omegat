@@ -26,6 +26,7 @@
 package org.omegat.core.data;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
@@ -37,7 +38,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -46,12 +46,14 @@ import java.util.stream.Stream;
 
 import javax.xml.namespace.QName;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
@@ -115,10 +117,9 @@ import gen.core.project.RepositoryMapping;
  * git config receive.autogc false
  * }
  * </pre>
- * <p>
- * TODO: "svn: E160028: Commit failed" during commit
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Hiroshi Miura
  *
  */
 public final class TestTeamIntegration {
@@ -126,32 +127,34 @@ public final class TestTeamIntegration {
     private TestTeamIntegration() {
     }
 
-    public static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
+    private static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
     private static final Pattern URL_PATTERN = Pattern
             .compile("(http(s)?|svn(\\+ssh)?)" + "://(?<username>.+?)(:(?<password>.+?))?@.+");
+    private static final String PROJECT_SAVE_PATH = "omegat/project_save.tmx";
 
-    static final String DIR = "/tmp/teamtest";
-    static final List<String> REPO = new ArrayList<>();
-    static final String MAP_REPO = System.getProperty("omegat.test.map.repo", null);
-    static final String MAP_REPO_TYPE = System.getProperty("omegat.test.map.type", "http");
-    static final String MAP_FILE = System.getProperty("omegat.test.map.file", null);
-    static final int PROCESS_SECONDS = Optional.ofNullable(System.getProperty("omegat.test.duration"))
-            .map(Integer::parseInt).orElse(4 * 60 * 60);
     static final int MAX_DELAY_SECONDS = 15;
     static final int SEG_COUNT = 4;
 
+    static String mapRepo;
+    static String mapRepoType;
+    static String mapFile;
+    static int processSeconds;
+
+    // referenced from TestTeamIntegrationChild class
     static final Language SRC_LANG = new Language("en");
     static final Language TRG_LANG = new Language("be");
 
+    // test with 3 threads.
     static final String[] THREADS = new String[] { "s1", "s2", "s3" };
 
-    static Team repository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestTeamIntegration.class);
+    private static final String ERROR_CREATE_TEST_DIR = "Impossible to create test dir";
 
     public static void main(String[] args) throws Exception {
         String logConfig = System.getProperty("java.util.logging.config.file", null);
-        String repository = System.getProperty("omegat.test.repo", null);
-        if (repository == null) {
-            System.err.println("Property omegat.test.repo is mandatory.");
+        String repositoryProperty = System.getProperty("omegat.test.repo", null);
+        if (repositoryProperty == null) {
+            LOGGER.atError().log("Property omegat.test.repo is mandatory.");
             System.exit(1);
         }
         Properties props = new Properties();
@@ -159,17 +162,39 @@ public final class TestTeamIntegration {
             props.load(fis);
             PluginUtils.loadPluginFromProperties(props);
         }
-        REPO.add(repository);
+        final List<String> repositoryUrls = new ArrayList<>();
+        repositoryUrls.add(repositoryProperty);
         String altRepo = System.getProperty("omegat.test.repo.alt", null);
         if (altRepo != null) {
-            REPO.add(altRepo);
+            repositoryUrls.add(altRepo);
         }
-        String startVersion = prepareRepo();
+        mapRepo = System.getProperty("omegat.test.map.repo", null);
+        mapRepoType = System.getProperty("omegat.test.map.type", "http");
+        mapFile = System.getProperty("omegat.test.map.file", null);
+        try {
+            String propDuration = System.getProperty("omegat.test.duration");
+            processSeconds = propDuration != null ? Integer.parseInt(propDuration) : 4 * 60 * 60;
+        } catch (NumberFormatException ignored) {
+            processSeconds = 4 * 60 * 60;
+        }
+
+        System.out.println("Target repository: " + repositoryProperty);
+        System.out.println("Process duration: " + processSeconds + " seconds");
+        if (mapRepo != null) {
+            System.out.println("Map repository: " + mapRepo);
+            System.out.println("Map repository type: " + mapRepoType);
+            System.out.println("Map file: " + mapFile);
+        }
+
+        Path tempDir = Files.createTempDirectory("teamtest");
+        LOGGER.atInfo().log("Test runner directory is: " + tempDir);
+        String startVersion = prepareRepo(repositoryUrls.get(0), tempDir);
 
         Run[] runs = new Run[THREADS.length];
         for (int i = 0; i < THREADS.length; i++) {
-            runs[i] = new Run(THREADS[i], new File(DIR, THREADS[i]), MAX_DELAY_SECONDS,
-                    REPO.get(i % REPO.size()), logConfig);
+            Path runnerDir = setupRunnerDirectory(tempDir, i);
+            runs[i] = new Run(THREADS[i], runnerDir.toFile(), MAX_DELAY_SECONDS,
+                    repositoryUrls.get(i % repositoryUrls.size()), logConfig);
         }
         for (int i = 0; i < THREADS.length; i++) {
             runs[i].start();
@@ -183,7 +208,7 @@ public final class TestTeamIntegration {
                         for (Run r : runs) {
                             r.end();
                         }
-                        System.err.println("==================== EXIT BY ERROR ====================");
+                        LOGGER.atError().log("==================== EXIT BY ERROR ====================");
                         System.exit(1);
                     }
                 } else {
@@ -193,112 +218,166 @@ public final class TestTeamIntegration {
             Thread.sleep(500);
         } while (alive);
 
-        TestTeamIntegration.repository = createRepo2(REPO.get(0), new File(DIR, "repo"));
-        TestTeamIntegration.repository.update();
+        final Team teamRepository = createRepo2(repositoryUrls.get(0), tempDir.resolve("repo").toFile());
+        teamRepository.update();
 
-        System.err.println("Check repo");
+        LOGGER.atInfo().log("Check repo");
 
         TestPreferencesInitializer.init();
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        checkRepo(startVersion);
+        checkRepo(teamRepository, startVersion);
 
-        System.err.println("Processed successfully");
+        LOGGER.atInfo().log("Processed successfully");
+    }
+
+    private static @NotNull Path setupRunnerDirectory(Path tempDir, int i) throws IOException {
+        Path runnerDir = tempDir.resolve(THREADS[i]);
+        if (!runnerDir.toFile().mkdirs()) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
+        }
+        Files.copy(tempDir.resolve("repo/omegat.project"), runnerDir.resolve("omegat.project"));
+        if (!runnerDir.resolve("omegat").toFile().mkdirs()) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
+        }
+        return runnerDir;
     }
 
     /**
      * Check repository after children processed.
      */
-    static void checkRepo(String startVersion) throws Exception {
-        List<String> segments = new ArrayList<String>();
-        for (String th : THREADS) {
-            for (int c = 0; c < SEG_COUNT; c++) {
-                segments.add(th + "/" + c);
+    static void checkRepo(Team teamRepository, String startVersion) throws Exception {
+        List<String> segments = buildSegmentsList();
+        Map<String, List<Long>> data = initializeDataMap(segments);
+
+        int tmxCount = processRevisions(teamRepository, startVersion, data);
+
+        logSegmentValues(segments, data);
+        logRevisionData(tmxCount, segments, data);
+        checkCommitOrder(data);
+    }
+
+    private static List<String> buildSegmentsList() {
+        List<String> segments = new ArrayList<>();
+        for (String thread : THREADS) {
+            for (int segmentIndex = 0; segmentIndex < SEG_COUNT; segmentIndex++) {
+                segments.add(thread + "/" + segmentIndex);
             }
         }
+        return segments;
+    }
 
-        Map<String, List<Long>> data = new TreeMap<String, List<Long>>();
-        for (String th : segments) {
-            data.put(th, new ArrayList<Long>());
-            data.get(th).add(0L);
+    private static Map<String, List<Long>> initializeDataMap(List<String> segments) {
+        Map<String, List<Long>> dataMap = new TreeMap<>();
+        for (String segment : segments) {
+            dataMap.put(segment, List.of(0L));
         }
-        data.put(TestTeamIntegrationChild.CONCURRENT_NAME, new ArrayList<Long>());
-        data.get(TestTeamIntegrationChild.CONCURRENT_NAME).add(0L);
+        dataMap.put(TestTeamIntegrationChild.CONCURRENT_NAME, List.of(0L));
+        return dataMap;
+    }
 
-        ProjectTMX tmx = null;
+    private static int processRevisions(Team teamRepository, String startVersion, Map<String, List<Long>> data) throws Exception {
         int tmxCount = 0;
-        for (String rev : repository.listRevisions(startVersion)) {
-            repository.checkout(rev);
-            tmx = new ProjectTMX(checkOrphanedCallback);
-            tmx.load(SRC_LANG, TRG_LANG, false,
-                    new File(repository.getDir(), "omegat/project_save.tmx"), Core.getSegmenter());
-            for (String th : data.keySet()) {
-                TMXEntry en = tmx.getDefaultTranslation(th);
-                long value = en == null ? 0 : Long.parseLong(en.translation);
-                data.get(th).add(value);
+        for (String revision : teamRepository.listRevisions(startVersion)) {
+            teamRepository.checkout(revision);
+            ProjectTMX projectTMX = loadProjectTmx(teamRepository);
+            for (String segment : data.keySet()) {
+                TMXEntry entry = projectTMX.getDefaultTranslation(segment);
+                long value = (entry == null) ? 0 : Long.parseLong(entry.translation);
+                data.get(segment).add(value);
             }
             tmxCount++;
         }
+        return tmxCount;
+    }
 
-        System.err.println("Values :");
-        for (String th : segments) {
-            out(th);
-        }
-        System.err.println();
-        for (int i = 0; i < tmxCount; i++) {
-            for (String th : segments) {
-                out(data.get(th).get(i));
+    private static ProjectTMX loadProjectTmx(Team teamRepository) throws Exception {
+        ProjectTMX projectTMX = new ProjectTMX(checkOrphanedCallback);
+        File projectFile = new File(teamRepository.getDir(), PROJECT_SAVE_PATH);
+        projectTMX.load(SRC_LANG, TRG_LANG, false, projectFile, Core.getSegmenter());
+        return projectTMX;
+    }
+
+    private static void logSegmentValues(List<String> segments, Map<String, List<Long>> data) {
+        LOGGER.atInfo().log(() -> {
+            StringBuilder logBuilder = new StringBuilder();
+            logBuilder.append("Values :");
+            for (String segment : segments) {
+                logBuilder.append(getPadding(segment.length())).append(segment).append(" ");
             }
-            System.err.println();
-        }
-        boolean ok = true;
-        for (String th : data.keySet()) {
-            long prev = 0;
-            for (long v : data.get(th)) {
-                if (v < prev) {
-                    System.err.println("Wrong order in " + th);
-                    ok = false;
+            logBuilder.append("\n");
+            return logBuilder.toString();
+        });
+    }
+
+    private static void logRevisionData(int tmxCount, List<String> segments, Map<String, List<Long>> data) {
+        LOGGER.atInfo().log(() -> {
+            StringBuilder logBuilder = new StringBuilder();
+            for (int i = 0; i < tmxCount; i++) {
+                for (String segment : segments) {
+                    String valueString = data.get(segment).get(i).toString();
+                    logBuilder.append(getPadding(valueString.length())).append(valueString).append(" ");
+                }
+                logBuilder.append("\n");
+            }
+            return logBuilder.toString();
+        });
+    }
+
+    private static void checkCommitOrder(Map<String, List<Long>> data) {
+        boolean allCommitsOrdered = true;
+        for (Map.Entry<String, List<Long>> entry : data.entrySet()) {
+            long previousValue = 0;
+            for (long value : entry.getValue()) {
+                if (value < previousValue) {
+                    LOGGER.atError().log("Wrong order in {}", entry.getKey());
+                    allCommitsOrdered = false;
                     break;
                 } else {
-                    prev = v;
+                    previousValue = value;
                 }
             }
         }
-        if (ok) {
-            System.err.println("All commits look good");
+        if (allCommitsOrdered) {
+            LOGGER.atInfo().log("All commits look good");
         }
     }
 
-    static void out(Object v) {
-        String s = v.toString();
-        System.err.print("                  ".substring(0, 14 - s.length()) + s + " ");
+    private static final String EMPTY_PADDING_SPACES = "                  ";
+    private static final int SEGMENT_PADDING_SIZE = 14;
+
+    private static String getPadding(int length) {
+        return EMPTY_PADDING_SPACES.substring(0, SEGMENT_PADDING_SIZE - length);
     }
 
     /**
-     * Prepare repository.
+     * Prepares a repository for testing purposes by creating a test directory,
+     * setting up repository configurations, and committing initial files.
+     *
+     * @param repo the repository URL to prepare for testing
+     * @return the version identifier of the committed "omegat/project_save.tmx" file
+     * @throws Exception if there is an issue creating or deleting directories,
+     *                   initializing repository configurations, or committing files
      */
-    static String prepareRepo() throws Exception {
-        File tmp = new File(DIR);
-        FileUtils.deleteDirectory(tmp);
-        if (tmp.exists()) {
-            throw new Exception("Impossible to delete test dir");
-        }
-        if (!tmp.mkdirs()) {
-            throw new Exception("Impossible to create test dir");
-        }
-        File origDir = new File(tmp, "repo");
-        if (!origDir.mkdir()) {
-            throw new Exception("Impossible to create test dir");
+    static String prepareRepo(String repo, Path tempDir) throws Exception {
+        Path origDir = tempDir.resolve("repo");
+        if (!origDir.toFile().mkdir()) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
         }
 
-        ProjectProperties config = createConfig(REPO.get(0), origDir);
+        ProjectProperties config = createConfig(repo, origDir.toFile());
 
         RemoteRepositoryProvider remote = new RemoteRepositoryProvider(config.getProjectRootDir(),
                 config.getRepositories(), config);
         remote.switchAllToLatest();
 
-        new File(origDir, "omegat").mkdirs();
-        File f = new File(origDir, "omegat/project_save.tmx");
-        TMXWriter2 wr = new TMXWriter2(f, SRC_LANG, TRG_LANG, true, false, true);
+        Path omegatDir = origDir.resolve("omegat");
+        boolean result = omegatDir.toFile().mkdirs();
+        if (!result) {
+            throw new IOException(ERROR_CREATE_TEST_DIR);
+        }
+
+        Path f = origDir.resolve("omegat/project_save.tmx");
+        TMXWriter2 wr = new TMXWriter2(f.toFile(), SRC_LANG, TRG_LANG, true, false, true);
         wr.close();
         ProjectFileStorage.writeProjectFile(config);
 
@@ -313,16 +392,23 @@ public final class TestTeamIntegration {
         return remote.getVersion("omegat/project_save.tmx");
     }
 
-    static ProjectProperties createConfig(String repoUrl, File dir) throws Exception {
+    /**
+     * Creates a configuration for a project based on the given repository URL and directory.
+     *
+     * @param repoUrl the repository URL to be used for the project configuration
+     * @param dir the directory where the project resides
+     * @return a {@link ProjectProperties} instance containing the configuration details for the project
+     */
+    static ProjectProperties createConfig(String repoUrl, File dir) {
         ProjectProperties config = new ProjectProperties(dir);
         config.setSourceLanguage(SRC_LANG);
         config.setTargetLanguage(TRG_LANG);
         config.setRepositories(new ArrayList<>());
-        if (MAP_REPO == null || MAP_FILE == null) {
+        if (mapRepo == null || mapFile == null) {
             config.getRepositories().add(getDef(repoUrl, predictMainType(repoUrl), "", ""));
         } else {
             config.getRepositories().add(getDef(repoUrl, predictMainType(repoUrl), "/", "/"));
-            config.getRepositories().add(getDef(MAP_REPO, MAP_REPO_TYPE, MAP_FILE, "source/" + MAP_FILE));
+            config.getRepositories().add(getDef(mapRepo, mapRepoType, mapFile, "source/" + mapFile));
         }
         config.setWriteableGlossary("glossary/glossary.txt");
         config.setGlossaryRoot("glossary");
@@ -405,11 +491,7 @@ public final class TestTeamIntegration {
         Run(String source, File dir, int delay, final String repo, final String logConfig) throws Exception {
             this.source = source;
             String cp = ManagementFactory.getRuntimeMXBean().getClassPath();
-            FileUtils.copyFile(new File(DIR + "/repo/omegat.project"),
-                    new File(DIR + "/" + source + "/omegat.project"));
-            if (!new File(DIR + "/" + source + "/omegat/").mkdirs()) {
-                throw new Exception("Impossible to create test dir");
-            }
+
             // Get `java` command path from java.home
             Path javaBin = Paths.get(System.getProperty("java.home")).resolve("bin/java");
             List<String> cmd = new ArrayList<>();
@@ -422,14 +504,13 @@ public final class TestTeamIntegration {
             cmd.add(cp);
             cmd.add(TestTeamIntegrationChild.class.getName());
             cmd.add(source);
-            cmd.add(Long.toString(PROCESS_SECONDS * 1000L));
+            cmd.add(Long.toString(processSeconds * 1000L));
             cmd.add(dir.getAbsolutePath());
             cmd.add(repo);
             cmd.add(Integer.toString(delay));
             cmd.add(Integer.toString(SEG_COUNT));
 
-            System.err.println("Execute: " + source + " " + (PROCESS_SECONDS * 1000) + " "
-                    + dir.getAbsolutePath() + " " + repo + " " + delay + " " + SEG_COUNT);
+            LOGGER.atInfo().log("Execute: " + source + " " + processSeconds * 1000 + " " + dir.getAbsolutePath() + " " + repo + " " + delay + " " + SEG_COUNT);
             ProcessBuilder pb = new ProcessBuilder(cmd);
             pb.inheritIO();
             pb.redirectErrorStream(true);
@@ -444,9 +525,9 @@ public final class TestTeamIntegration {
                 result = -1;
             }
             if (result != 200) {
-                System.err.println("Error result from " + source);
+                LOGGER.atError().log("Error result from " + source);
             } else {
-                System.err.println("==================== " + source + " finished OK ====================");
+                LOGGER.atInfo().log("==================== " + source + " finished OK ====================");
             }
             finished = true;
         }
@@ -490,7 +571,7 @@ public final class TestTeamIntegration {
         public List<String> listRevisions(String from) throws Exception {
             try (Git git = new Git(repository)) {
                 LogCommand cmd = git.log();
-                List<String> result = new ArrayList<String>();
+                List<String> result = new ArrayList<>();
                 for (RevCommit commit : cmd.call()) {
                     if (commit.getName().equals(from)) {
                         break;
@@ -530,14 +611,15 @@ public final class TestTeamIntegration {
             String predefinedUser = def.getOtherAttributes().get(new QName("svnUsername"));
             String predefinedPass = def.getOtherAttributes().get(new QName("svnPassword"));
             ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(predefinedUser, predefinedPass);
+            ISVNAuthenticationManager authManager = new SVNAuthenticationManager(predefinedUser,
+                    predefinedPass);
             ourClientManager = SVNClientManager.newInstance(options, authManager);
         }
 
         public List<String> listRevisions(String from) throws Exception {
-            final List<String> result = new ArrayList<String>();
+            final List<String> result = new ArrayList<>();
             ourClientManager.getLogClient().doLog(
-                    new File[] { new File(repository.getDir(), "omegat/project_save.tmx") },
+                    new File[] { new File(dir, "omegat/project_save.tmx") },
                     SVNRevision.create(Long.parseLong(from)), SVNRevision.HEAD, false, false,
                     Integer.MAX_VALUE, new ISVNLogEntryHandler() {
                         public void handleLogEntry(SVNLogEntry en) throws SVNException {

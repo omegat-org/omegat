@@ -91,6 +91,61 @@ public final class EncodingDetector {
     }
 
     /**
+     * Detects the character encoding of an XML document from the provided input
+     * stream. The method first attempts to determine the encoding using a Byte
+     * Order Mark (BOM). If no BOM is found, it then examines the XML content
+     * for an encoding declaration. If both attempts fail, the XML standard
+     * default encoding(UTF-8) is used.
+     *
+     * @param inputStream
+     *            the BufferedInputStream to detect the encoding from. The
+     *            caller must ensure the stream supports marking and can be
+     *            reset after reading.
+     * @param defaultEncoding
+     *            the default encoding to return if no encoding is detected.
+     * @return the detected Charset, or the default encoding if no specific
+     *         encoding can be determined.
+     */
+    public static Charset detectXmlEncoding(BufferedInputStream inputStream, String defaultEncoding) {
+        try {
+            Charset encoding = detectBOM(inputStream);
+            if (encoding == null) {
+                encoding = detectEncodingFromXmlContent(inputStream);
+            }
+            if (encoding == null) {
+                encoding = StandardCharsets.UTF_8;
+            }
+            return encoding;
+        } catch (IOException ignored) {
+            return StandardCharsets.UTF_8;
+        }
+    }
+
+    /**
+     * Detects the character encoding from the content of an XML document. This
+     * method checks the XML declaration within the given input stream to
+     * identify the character encoding. The stream's position is reset after
+     * detection to ensure it can be reused.
+     *
+     * @param inputStream
+     *            the BufferedInputStream to analyze and detect the encoding
+     *            from. The caller is responsible for marking the stream before
+     *            this method is called and ensuring that the stream can be
+     *            reset.
+     * @return the Charset corresponding to the detected encoding, or null if no
+     *         encoding is detected within the XML content.
+     * @throws IOException
+     *             if an I/O error occurs while reading from the stream.
+     */
+    private static Charset detectEncodingFromXmlContent(BufferedInputStream inputStream) throws IOException {
+        Charset detectedEncoding;
+        inputStream.mark(OConsts.READ_AHEAD_LIMIT);
+        detectedEncoding = EncodingSniffer.sniffEncodingFromXmlDeclaration(inputStream);
+        inputStream.reset();
+        return detectedEncoding;
+    }
+
+    /**
      * Returns the reader of the underlying file in the correct encoding.
      *
      * <p>

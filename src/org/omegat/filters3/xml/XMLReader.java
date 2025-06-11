@@ -36,10 +36,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.regex.Matcher;
 
+import org.omegat.util.EncodingDetector;
 import org.omegat.util.OConsts;
-import org.omegat.util.PatternConsts;
 
 /**
  * This class automatically detects encoding of an inner XML file and constructs
@@ -58,7 +57,7 @@ import org.omegat.util.PatternConsts;
  */
 public class XMLReader extends Reader {
     /** Inner reader */
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
     /** Inner encoding. */
     private String encoding;
@@ -84,7 +83,7 @@ public class XMLReader extends Reader {
      *            the InputStream instance to read
      */
     public XMLReader(InputStream is) throws IOException {
-        reader = createReader(is, encoding);
+        reader = createReader(is, null);
     }
 
     /**
@@ -130,56 +129,13 @@ public class XMLReader extends Reader {
     private BufferedReader createReader(InputStream in, String defaultEncoding) throws IOException {
         // BOM detection
         BufferedInputStream is = new BufferedInputStream(in);
-
-        is.mark(OConsts.READ_AHEAD_LIMIT);
-
-        int char1 = is.read();
-        int char2 = is.read();
-        int char3 = is.read();
-        encoding = null;
-        if (char1 == 0xFE && char2 == 0xFF) {
-            encoding = "UTF-16BE";
-        }
-        if (char1 == 0xFF && char2 == 0xFE) {
-            encoding = "UTF-16LE";
-        }
-        if (char1 == 0xEF && char2 == 0xBB && char3 == 0xBF) {
-            encoding = "UTF-8";
-        }
-        is.reset();
-        if (encoding != null) {
-            return createReaderAndDetectEOL(is, encoding);
-        }
-
-        is.mark(OConsts.READ_AHEAD_LIMIT);
-        byte[] buf = new byte[OConsts.READ_AHEAD_LIMIT];
-        int len = is.read(buf);
-        if (len > 0) {
-            String buffer = defaultEncoding == null ? new String(buf, 0, len, Charset.defaultCharset())
-                    : new String(buf, 0, len, defaultEncoding);
-
-            Matcher matcherXml = PatternConsts.XML_ENCODING.matcher(buffer);
-            if (matcherXml.find()) {
-                encoding = matcherXml.group(1);
-            }
-        }
-
-        is.reset();
-        if (encoding != null) {
-            return createReaderAndDetectEOL(is, encoding);
-        }
-
-        // UTF-8 if we couldn't detect it ourselves
-        try {
-            return createReaderAndDetectEOL(is, StandardCharsets.UTF_8.name());
-        } catch (Exception e) {
-            return createReaderAndDetectEOL(is, null);
-        }
+        Charset detectedEncoding = EncodingDetector.detectXmlEncoding(is, defaultEncoding);
+        encoding = detectedEncoding.name();
+        return createReaderAndDetectEOL(is, detectedEncoding);
     }
 
-    private BufferedReader createReaderAndDetectEOL(InputStream is, String encoding) throws IOException {
-        InputStreamReader isr = encoding == null ? new InputStreamReader(is, Charset.defaultCharset())
-                : new InputStreamReader(is, encoding);
+    private BufferedReader createReaderAndDetectEOL(InputStream is, Charset encoding) throws IOException {
+        InputStreamReader isr = new InputStreamReader(is, encoding);
         BufferedReader rd = new BufferedReader(isr, OConsts.READ_AHEAD_LIMIT);
         rd.mark(OConsts.READ_AHEAD_LIMIT);
 

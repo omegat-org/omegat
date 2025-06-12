@@ -42,6 +42,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.omegat.core.data.IProject;
 import org.omegat.util.Log;
 
 import org.omegat.core.Core;
@@ -88,6 +89,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
                 case LOAD:
                 case CREATE:
                     initialize();
+                    break;
+                case SAVE:
+                    saveWordLists();
                     break;
                 case CLOSE:
                     destroy();
@@ -199,7 +203,6 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      */
     public void destroy() {
         if (checker != null) {
-            saveWordLists();
             checker.destroy();
             checker = null;
         }
@@ -217,6 +220,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      */
     public void saveWordLists() {
         // find out the internal project directory
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
         String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
 
         // Write the ignored and learned words to the disk

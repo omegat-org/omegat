@@ -66,10 +66,9 @@ import org.omegat.util.StringUtil;
  */
 public class FilterVisitor extends NodeVisitor {
     protected HTMLFilter2 filter;
-    private BufferedWriter writer;
-    private HTMLOptions options;
+    private final BufferedWriter writer;
+    private final HTMLOptions options;
     @SuppressWarnings("unused")
-    private FilterContext filterContext;
 
     public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts,
                          FilterContext fc) {
@@ -83,7 +82,6 @@ public class FilterVisitor extends NodeVisitor {
             this.options = new HTMLOptions(new TreeMap<>());
         }
         this.writer = bufwriter;
-        filterContext = fc;
     }
 
     // ///////////////////////////////////////////////////////////////////////

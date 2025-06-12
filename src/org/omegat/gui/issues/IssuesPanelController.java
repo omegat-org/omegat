@@ -796,7 +796,7 @@ public class IssuesPanelController implements IIssues {
         }
     }
 
-    static final String ALL_TYPES = new String(OStrings.getString("ISSUES_TYPE_ALL"));
+    static final String ALL_TYPES = OStrings.getString("ISSUES_TYPE_ALL");
 
     @SuppressWarnings("serial")
     static class TypeListModel extends AbstractListModel<String> {
@@ -812,8 +812,7 @@ public class IssuesPanelController implements IIssues {
                     .map(IIssue::getTypeName)
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
             List<Map.Entry<String, Long>> result = new ArrayList<>();
-            result.add(new AbstractMap.SimpleImmutableEntry<String, Long>(ALL_TYPES,
-                    (long) issues.size()));
+            result.add(new AbstractMap.SimpleImmutableEntry<>(ALL_TYPES, (long) issues.size()));
             counts.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).forEach(result::add);
             return result;
         }

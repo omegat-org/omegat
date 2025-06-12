@@ -42,7 +42,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.omegat.core.data.IProject;
 import org.omegat.util.Log;
 
 import org.omegat.core.Core;

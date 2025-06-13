@@ -29,8 +29,6 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 
-import javax.accessibility.AccessibleContext;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import java.awt.Window;
 import java.nio.file.Path;
@@ -82,7 +80,7 @@ public class IssuesPanelTest extends TestCoreGUI {
         assertEquals("Terminology", issuesPanelController.panel.table.getModel().getValueAt(1, 2));
     }
 
-    static class IssuesPanelControllerMock extends IssuesPanelController {
+    public static class IssuesPanelControllerMock extends IssuesPanelController {
 
         public IssuesPanelControllerMock(Window parent) {
             super(parent);

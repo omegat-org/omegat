@@ -666,6 +666,7 @@ public class IssuesPanelController implements IIssues {
                         .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
+            super.firePropertyChange("table", null, null);
         }
     }
 

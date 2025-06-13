@@ -39,6 +39,7 @@ import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class IssuesPanelTest extends TestCoreGUI {
@@ -55,29 +56,30 @@ public class IssuesPanelTest extends TestCoreGUI {
         robot().waitForIdle();
         //
         IssuesPanelControllerMock issuesPanelController = new IssuesPanelControllerMock(window.target());
-        CountDownLatch latch = new CountDownLatch(1);
+        CountDownLatch latch = new CountDownLatch(2);
+        // watch for panel visible
         issuesPanelController.addPropertyChangeListener(evt -> {
             if (evt.getPropertyName().equals("panel")) {
                 latch.countDown();
             }
         });
-        SwingUtilities.invokeLater(issuesPanelController::showAll);
-        try {
-            latch.await(5, TimeUnit.SECONDS);
-        } catch (InterruptedException ignored) {
-        }
-        assertTrue(issuesPanelController.panel.isVisible());
-        JTable table = issuesPanelController.panel.table;
-        CountDownLatch latch2 = new CountDownLatch(1);
-        table.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals(AccessibleContext.ACCESSIBLE_TABLE_MODEL_CHANGED)) {
-                latch2.countDown();
+        // watch for table update
+        issuesPanelController.addPropertyChangeListener(evt -> {
+            if (evt.getPropertyName().equals("table")) {
+                latch.countDown();
             }
         });
+
+        SwingUtilities.invokeLater(issuesPanelController::showAll);
+
         try {
-            latch.await(5, TimeUnit.SECONDS);
+            latch.await(10, TimeUnit.SECONDS);
         } catch (InterruptedException ignored) {
         }
+
+        assertTrue(issuesPanelController.panel.isVisible());
+        assertEquals(2, issuesPanelController.panel.table.getModel().getValueAt(1, 0));
+        assertEquals("Terminology", issuesPanelController.panel.table.getModel().getValueAt(1, 2));
     }
 
     static class IssuesPanelControllerMock extends IssuesPanelController {

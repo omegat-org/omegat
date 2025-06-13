@@ -102,6 +102,12 @@ class TerminologyIssueProvider implements IIssueProvider {
             ERROR_STYLE = attr;
         }
 
+        private final String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_DELIMITER");
+        private final String iDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_ORIGIN_INDEX_DELIMITER");
+        private final String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
+        private final String oDelim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
+        private final String glossariesDir = Core.getProject().getProjectProperties().getGlossaryDir().getAsString();
+
         private final SourceTextEntry ste;
         private final TMXEntry tmxEntry;
         private final GlossaryEntry glossaryEntry;
@@ -133,13 +139,11 @@ class TerminologyIssueProvider implements IIssueProvider {
             String[] origins = glossaryEntry.getOrigins(false);
             String[] targetTerms = glossaryEntry.getLocTerms(false);
             if (targetTerms.length == 1) {
-                String origin = FileUtil.getUniqueNames(Arrays.asList(origins[0])).get(0);
+                String origin = FileUtil.getUniqueNames(Collections.singletonList(origins[0])).get(0);
                 return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION", origin, glossaryEntry.getSrcText(),
                         targetTerms[0]);
             }
 
-            String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
-            String oDelim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DELIMITER");
             String[] uniqueOrigins = glossaryEntry.getOrigins(true);
             String[] uniqueTerms = glossaryEntry.getLocTerms(true);
             // Multiple origins, but just one term
@@ -152,14 +156,13 @@ class TerminologyIssueProvider implements IIssueProvider {
             if (uniqueOrigins.length == 1) {
                 List<String> formattedTerms = Arrays.asList(uniqueTerms);
                 formattedTerms.replaceAll(t -> OStrings.getString("ISSUES_TERMINOLOGY_TERM_TEMPLATE", t));
-                String origin = FileUtil.getUniqueNames(Arrays.asList(uniqueOrigins[0])).get(0);
+                String origin = FileUtil.getUniqueNames(Collections.singletonList(uniqueOrigins[0])).get(0);
                 return OStrings.getString("ISSUES_TERMINOLOGY_DESCRIPTION_MULTI", origin, glossaryEntry.getSrcText(),
                         String.join(tDelim, formattedTerms));
             }
 
             // Multiple terms with multiple origins
             List<String> uniqueOriginsList = Arrays.asList(uniqueOrigins);
-            String iDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_ORIGIN_INDEX_DELIMITER");
             String originStr = String.join(oDelim, FileUtil.getUniqueNames(uniqueOriginsList));
             List<String> formattedTerms = new ArrayList<>(uniqueTerms.length);
             for (int i = 0; i < uniqueTerms.length; i++) {
@@ -214,49 +217,51 @@ class TerminologyIssueProvider implements IIssueProvider {
         }
 
         private Component getOriginLabel() {
-            String delim = OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_DELIMITER");
-            String tDelim = OStrings.getString("ISSUES_TERMINOLOGY_TERM_DELIMITER");
+            JLabel originLabel = new JLabel();
             String[] origins = glossaryEntry.getOrigins(true);
-            String glossariesDir = Core.getProject().getProjectProperties().getGlossaryDir().getAsString();
-            String originDesc;
-            if (origins.length == 1) {
-                String origin = trimPrefix(normalizePath(origins[0]), glossariesDir);
-                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", glossaryEntry.getSrcText(),
-                        OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", 1, origin,
-                                String.join(tDelim, glossaryEntry.getLocTerms(true))));
-            } else {
-                List<String> formattedOrigins = new ArrayList<>(origins.length);
-                String[] allOrigins = glossaryEntry.getOrigins(false);
-                String[] allTerms = glossaryEntry.getLocTerms(false);
-                for (int i = 0; i < origins.length; i++) {
-                    List<String> termsFromThisOrigin = new ArrayList<>();
-                    // This should always be the case, but being cautious
-                    if (allOrigins.length == allTerms.length) {
-                        for (int j = 0; j < allOrigins.length; j++) {
-                            if (allOrigins[j].equals(origins[i]) && !termsFromThisOrigin.contains(allTerms[j])) {
-                                termsFromThisOrigin.add(allTerms[j]);
-                            }
-                        }
-                    }
-                    String origin = trimPrefix(normalizePath(origins[i]), glossariesDir);
-                    formattedOrigins.add(OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", i + 1, origin,
-                            String.join(tDelim, termsFromThisOrigin)));
-                }
-                originDesc = OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", glossaryEntry.getSrcText(),
-                        String.join(delim, formattedOrigins));
-            }
-            JLabel originLabel = new JLabel(originDesc);
+            String originDescription = origins.length == 1
+                    ? generateOriginDescSingle(origins)
+                    : generateOriginDescMulti(origins);
+            originLabel.setText(OStrings.getString("ISSUES_TERMINOLOGY_ORIGINS", glossaryEntry.getSrcText(),
+                    originDescription));
             originLabel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5),
                     originLabel.getBorder()));
             return originLabel;
         }
-    }
 
-    private static String normalizePath(String path) {
-        return path.replace('\\', '/');
-    }
+        private String generateOriginDescSingle(String[] origins) {
+            String origin = trimPrefix(normalizePath(origins[0]), glossariesDir);
+            return OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", 1, origin,
+                    String.join(tDelim, glossaryEntry.getLocTerms(true)));
+        }
 
-    private static String trimPrefix(String str, String prefix) {
-        return str.startsWith(prefix) ? str.substring(prefix.length()) : str;
+        private String generateOriginDescMulti(String[] origins) {
+            List<String> formattedOrigins = new ArrayList<>(origins.length);
+            String[] allOrigins = glossaryEntry.getOrigins(false);
+            String[] allTerms = glossaryEntry.getLocTerms(false);
+            for (int i = 0; i < origins.length; i++) {
+                List<String> termsFromThisOrigin = new ArrayList<>();
+                // This should always be the case, but being cautious
+                if (allOrigins.length == allTerms.length) {
+                    for (int j = 0; j < allOrigins.length; j++) {
+                        if (allOrigins[j].equals(origins[i]) && !termsFromThisOrigin.contains(allTerms[j])) {
+                            termsFromThisOrigin.add(allTerms[j]);
+                        }
+                    }
+                }
+                String origin = trimPrefix(normalizePath(origins[i]), glossariesDir);
+                formattedOrigins.add(OStrings.getString("ISSUES_TERMINOLOGY_ORIGIN_DETAIL_TEMPLATE", i + 1, origin,
+                        String.join(tDelim, termsFromThisOrigin)));
+            }
+            return String.join(delim, formattedOrigins);
+        }
+
+        private static String normalizePath(String path) {
+            return path.replace('\\', '/');
+        }
+
+        private static String trimPrefix(String str, String prefix) {
+            return str.startsWith(prefix) ? str.substring(prefix.length()) : str;
+        }
     }
 }

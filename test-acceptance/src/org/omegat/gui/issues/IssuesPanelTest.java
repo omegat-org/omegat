@@ -29,6 +29,8 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 
+import javax.accessibility.AccessibleContext;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import java.awt.Window;
 import java.nio.file.Path;
@@ -64,18 +66,24 @@ public class IssuesPanelTest extends TestCoreGUI {
             latch.await(5, TimeUnit.SECONDS);
         } catch (InterruptedException ignored) {
         }
-        assertTrue(issuesPanelController.getIssuePanel().isVisible());
-
+        assertTrue(issuesPanelController.panel.isVisible());
+        JTable table = issuesPanelController.panel.table;
+        CountDownLatch latch2 = new CountDownLatch(1);
+        table.addPropertyChangeListener(evt -> {
+            if (evt.getPropertyName().equals(AccessibleContext.ACCESSIBLE_TABLE_MODEL_CHANGED)) {
+                latch2.countDown();
+            }
+        });
+        try {
+            latch.await(5, TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {
+        }
     }
 
     static class IssuesPanelControllerMock extends IssuesPanelController {
 
         public IssuesPanelControllerMock(Window parent) {
             super(parent);
-        }
-
-        IssuesPanel getIssuePanel() {
-            return panel;
         }
     }
 }

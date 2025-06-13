@@ -93,7 +93,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StreamUtil;
-import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.ResourcesUtil;
@@ -124,6 +123,7 @@ public class IssuesPanelController implements IIssues {
     static final Icon SETTINGS_ICON_INVISIBLE = new Icon() {
         @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
+            // do nothing to hide an icon
         }
 
         @Override

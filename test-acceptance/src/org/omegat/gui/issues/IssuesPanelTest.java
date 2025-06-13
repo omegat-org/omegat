@@ -29,9 +29,15 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 
+import javax.swing.SwingUtilities;
+import java.awt.Window;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertTrue;
 
 public class IssuesPanelTest extends TestCoreGUI {
 
@@ -45,7 +51,31 @@ public class IssuesPanelTest extends TestCoreGUI {
         // load project
         openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
+        //
+        IssuesPanelControllerMock issuesPanelController = new IssuesPanelControllerMock(window.target());
+        CountDownLatch latch = new CountDownLatch(1);
+        issuesPanelController.addPropertyChangeListener(evt -> {
+            if (evt.getPropertyName().equals("panel")) {
+                latch.countDown();
+            }
+        });
+        SwingUtilities.invokeLater(issuesPanelController::showAll);
+        try {
+            latch.await(5, TimeUnit.SECONDS);
+        } catch (InterruptedException ignored) {
+        }
+        assertTrue(issuesPanelController.getIssuePanel().isVisible());
+
     }
 
+    static class IssuesPanelControllerMock extends IssuesPanelController {
 
+        public IssuesPanelControllerMock(Window parent) {
+            super(parent);
+        }
+
+        IssuesPanel getIssuePanel() {
+            return panel;
+        }
+    }
 }

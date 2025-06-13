@@ -74,14 +74,14 @@ class TerminologyIssueProvider implements IIssueProvider {
 
     @Override
     public List<IIssue> getIssues(SourceTextEntry sourceEntry, TMXEntry tmxEntry) {
-        List<GlossaryEntry> entries = Core.getGlossaryManager().searchSourceMatches(sourceEntry);
-        if (entries.isEmpty()) {
+        List<GlossaryEntry> glossaryEntries = Core.getGlossaryManager().searchSourceMatches(sourceEntry);
+        if (glossaryEntries.isEmpty()) {
             return Collections.emptyList();
         }
-        return entries.stream().map(e -> {
+        return glossaryEntries.stream().map(glossaryEntry -> {
             List<String> trgTerms = Core.getGlossaryManager().searchTargetMatches(tmxEntry.translation,
-                    sourceEntry.getProtectedParts(), e);
-            return trgTerms.isEmpty() ? new TerminologyIssue(sourceEntry, tmxEntry, e) : null;
+                    sourceEntry.getProtectedParts(), glossaryEntry);
+            return trgTerms.isEmpty() ? new TerminologyIssue(sourceEntry, tmxEntry, glossaryEntry) : null;
         }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 

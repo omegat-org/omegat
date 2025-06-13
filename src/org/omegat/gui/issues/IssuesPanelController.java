@@ -38,6 +38,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -156,6 +158,18 @@ public class IssuesPanelController implements IIssues {
         this.parent = parent;
     }
 
+    private static final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
+    }
+    private void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        pcs.firePropertyChange(propertyName, oldValue, newValue);
+    }
+
     @SuppressWarnings("serial")
     synchronized void init() {
         if (frame != null) {
@@ -171,6 +185,7 @@ public class IssuesPanelController implements IIssues {
             OSXIntegration.enableFullScreen(frame);
         }
         panel = new IssuesPanel();
+        panel.setName("issues_panel");
         frame.add(panel);
 
         frame.setJMenuBar(generateMenuBar());
@@ -321,6 +336,8 @@ public class IssuesPanelController implements IIssues {
             setFont(f);
             viewSelectedIssueDetail();
         });
+
+        firePropertyChange("panel", null, panel);
     }
 
     JMenuBar generateMenuBar() {

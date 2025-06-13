@@ -341,9 +341,7 @@ public class IssuesPanelController implements IIssues {
         Set<String> disabledProviders = IssueProviders.getDisabledProviderIds();
         IssueProviders.getIssueProviders().stream().sorted(Comparator.comparing(IIssueProvider::getId))
                 .forEach(provider -> {
-                    String label = StringUtil.format(
-                            OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER"),
-                            provider.getName());
+                    String label = OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER", provider.getName());
                     JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
                     item.addActionListener(e -> {
                         IssueProviders.setProviderEnabled(provider.getId(), item.isSelected());
@@ -680,21 +678,20 @@ public class IssuesPanelController implements IIssues {
 
     void updateTitle(int totalItems) {
         if (isShowingAllFiles()) {
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE"), totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE", totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE"),
-                    FilenameUtils.getName(filePath), totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE", FilenameUtils.getName(filePath),
+                    totalItems));
         }
     }
 
     void updateTitle(int shownItems, int totalItems) {
         if (isShowingAllFiles()) {
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE"), shownItems,
-                    totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE"),
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE",
                     FilenameUtils.getName(filePath), shownItems, totalItems));
         }
     }
@@ -747,7 +744,7 @@ public class IssuesPanelController implements IIssues {
     @SuppressWarnings("serial")
     class IssuesTableModel extends AbstractTableModel {
 
-        private final List<IIssue> issues;
+        private final transient List<IIssue> issues;
 
         IssuesTableModel(List<IIssue> issues) {
             this.issues = issues;
@@ -801,7 +798,7 @@ public class IssuesPanelController implements IIssues {
     @SuppressWarnings("serial")
     static class TypeListModel extends AbstractListModel<String> {
 
-        private final List<Map.Entry<String, Long>> types;
+        private final transient List<Map.Entry<String, Long>> types;
 
         TypeListModel(List<IIssue> issues) {
             this.types = calculateData(issues);
@@ -825,8 +822,7 @@ public class IssuesPanelController implements IIssues {
         @Override
         public String getElementAt(int index) {
             Map.Entry<String, Long> entry = types.get(index);
-            return StringUtil.format(OStrings.getString("ISSUES_TYPE_SUMMARY_TEMPLATE"), entry.getKey(),
-                    entry.getValue());
+            return OStrings.getString("ISSUES_TYPE_SUMMARY_TEMPLATE", entry.getKey(), entry.getValue());
         }
 
         List<String> getTypesAt(int[] indicies) {

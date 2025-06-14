@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -252,9 +253,9 @@ public class ProjectPropertiesDialogController {
         OmegaTFileChooser browser = new OmegaTFileChooser();
         browser.setDialogTitle(title);
         if (fileMode) {
-            browser.setFileSelectionMode(OmegaTFileChooser.FILES_ONLY);
+            browser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         } else {
-            browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
+            browser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         }
 
         // check if the current directory as specified by the field exists
@@ -264,7 +265,7 @@ public class ProjectPropertiesDialogController {
         int action = browser.showOpenDialog(dialog);
 
         // check if the selection has been approved
-        if (action != javax.swing.JFileChooser.APPROVE_OPTION) {
+        if (action != JFileChooser.APPROVE_OPTION) {
             return;
         }
 
@@ -327,6 +328,10 @@ public class ProjectPropertiesDialogController {
         // if all fails, get last used dir from preferences
         if (!curDirCheck.exists() || !curDirCheck.isDirectory()) {
             curDir = getDirFromPreference(browseTarget);
+        }
+
+        if (curDir == null) {
+            curDir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER, ".");
         }
 
         if (fileMode) {

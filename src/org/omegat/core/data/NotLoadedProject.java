@@ -31,10 +31,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.omegat.core.data.TMXEntry.ExternalLinked;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
 
 /**
  * Project implementation when project not really loaded.
@@ -50,6 +52,8 @@ public class NotLoadedProject implements IProject {
         empty.source = "";
         EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
     }
+
+    protected Segmenter segmenter = new Segmenter(Preferences.getSRX());
 
     @Override
     public void compileProject(String sourcePattern) throws IOException, TranslationException {
@@ -170,6 +174,15 @@ public class NotLoadedProject implements IProject {
     }
 
     public void setSourceFilesOrder(List<String> filesList) {
+    }
+
+    @Override
+    public void setSegmenter(final Segmenter segmenter) {
+    }
+
+    @Override
+    public Segmenter getSegmenter() {
+        return segmenter;
     }
 
     @Override

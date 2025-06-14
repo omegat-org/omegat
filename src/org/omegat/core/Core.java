@@ -98,6 +98,10 @@ public final class Core {
     private Core() {
     }
 
+    static {
+        currentProject = new NotLoadedProject();
+    }
+
     private static IProject currentProject;
     private static IMainWindow mainWindow;
     // package-private for test fixture TestCoreInitializer
@@ -119,7 +123,6 @@ public final class Core {
     private static DictionariesTextArea dictionaries;
     private static INotes notes;
     private static IComments comments;
-    private static Segmenter segmenter;
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
@@ -218,11 +221,11 @@ public final class Core {
     }
 
     public static Segmenter getSegmenter() {
-        return segmenter;
+        return currentProject.getSegmenter();
     }
 
     public static void setSegmenter(Segmenter newSegmenter) {
-        segmenter = newSegmenter;
+        currentProject.setSegmenter(newSegmenter);
     }
 
     /**
@@ -272,7 +275,6 @@ public final class Core {
         MarkerController.init();
         LanguageToolWrapper.init();
 
-        segmenter = new Segmenter(Preferences.getSRX());
         filterMaster = new FilterMaster(Preferences.getFilters());
 
         // 4. Initialize other components. They add themselves to the main window.

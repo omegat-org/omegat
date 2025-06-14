@@ -24,19 +24,20 @@
  **************************************************************************/
 package org.omegat.gui.dialogs;
 
+import org.assertj.swing.core.GenericTypeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
-import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.openide.awt.Mnemonics;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
@@ -49,7 +50,7 @@ public class ProjectPropertiesDialogTest extends TestCoreGUI {
     public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
-    public void testProjectPropertiesDialog() throws Exception {
+    public void testProjectPropertiesDialogShowAndOk() throws Exception {
         openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
         //
@@ -78,7 +79,31 @@ public class ProjectPropertiesDialogTest extends TestCoreGUI {
                 .requireText(Mnemonics.removeMnemonics(OStrings.getString("PP_SENTENCE_SEGMENTING")));
         window.dialog(ProjectPropertiesDialog.DIALOG_NAME).checkBox(ProjectPropertiesDialog.SENTENCE_SEGMENTING_CB_NAME)
                 .requireNotSelected();
-        // click cancel and close project
+        // click Ok
+        window.dialog(ProjectPropertiesDialog.DIALOG_NAME).button(ProjectPropertiesDialog.OK_BUTTON_NAME).click();
+        // Click No for restart dialog
+        robot().waitForIdle();
+        window.dialog().button(new GenericTypeMatcher<>(JButton.class, true) {
+            @Override
+            protected boolean isMatching(JButton btn) {
+                return btn.getText().equals("No");
+            }
+        }).click();
+        closeProject();
+    }
+
+    @Test
+    public void testProjectPropertiesDialogShowAndCancel() throws Exception {
+        openSampleProject(PROJECT_PATH);
+        robot().waitForIdle();
+        //
+        window.menuItem(BaseMainWindowMenu.PROJECT_MENU).click();
+        window.menuItem(BaseMainWindowMenu.PROJECT_EDIT_MENUITEM).click();
+        robot().waitForIdle();
+        // Project Properties dialog is modal and visible
+        window.dialog(ProjectPropertiesDialog.DIALOG_NAME).requireModal();
+        window.dialog(ProjectPropertiesDialog.DIALOG_NAME).requireVisible();
+        // click cancel and close the project
         window.dialog(ProjectPropertiesDialog.DIALOG_NAME).button(ProjectPropertiesDialog.CANCEL_BUTTON_NAME).click();
         closeProject();
     }

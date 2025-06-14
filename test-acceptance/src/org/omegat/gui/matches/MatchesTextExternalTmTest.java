@@ -52,14 +52,14 @@ public class MatchesTextExternalTmTest extends TestCoreGUI {
         robot().waitForIdle();
         // check a fuzzy match pane
         window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
-        final String MATCHES_PANE = "matches_pane";
-        window.textBox(MATCHES_PANE).requireVisible();
-        window.textBox(MATCHES_PANE).requireNotEditable();
+        final String matchesPane = "matches_pane";
+        window.textBox(matchesPane).requireVisible();
+        window.textBox(matchesPane).requireNotEditable();
         Pattern pattern = Pattern.compile("1\\. Connect to custom server instead of apertium\\.org\\n"
                 + "Se connecter à un serveur personnalisé au lieu d'apertium\\.org\\n"
                 + "<\\d+/\\d+/\\d+%.*" + OStrings.getString(
                         "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM") + ".*tm/en-fr\\.tmx>");
-        window.textBox(MATCHES_PANE).requireText(pattern);
+        window.textBox(matchesPane).requireText(pattern);
         closeProject();
     }
 

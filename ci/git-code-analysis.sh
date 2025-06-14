@@ -44,6 +44,17 @@ TEST_PATHS=(
   "spellchecker/morfologik/src/test"
 )
 
+DOCS_PATHS=(
+  "doc_src"
+  "src_docs"
+  "release"
+)
+
+BUILD_PATHS=(
+  "build-logic/src"
+  "ci"
+)
+
 function join_paths() {
   local arr=("$@")
   echo "--" "${arr[@]}"
@@ -86,3 +97,9 @@ analyze_contributions "${MAIN_PATHS[@]}"
 echo
 echo "== Per-author contribution in TEST code =="
 analyze_contributions "${TEST_PATHS[@]}"
+echo
+echo "== Per-author contribution in BUILD code =="
+analyze_contributions "${BUILD_PATHS[@]}"
+echo
+echo "== Per-author contribution in Documentation =="
+analyze_contributions "${DOCS_PATHS[@]}"

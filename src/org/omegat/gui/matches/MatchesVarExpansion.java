@@ -104,7 +104,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
     public static final String DEFAULT_TEMPLATE = VAR_ID + ". " + VAR_FUZZY_FLAG + VAR_SOURCE_TEXT + "\n"
             + VAR_TARGET_TEXT + "\n" + "<" + VAR_SCORE_BASE + "/" + VAR_SCORE_NOSTEM + "/"
-            + VAR_SCORE_ADJUSTED + "%" + VAR_MATCH_SOURCE + VAR_FILE_PATH + ">";
+            + VAR_SCORE_ADJUSTED + "%" + " " + VAR_MATCH_SOURCE + " " + VAR_FILE_PATH + ">";
 
     public static final Pattern PATTERN_SINGLE_PROPERTY = Pattern.compile("@\\{(.+?)\\}");
     public static final Pattern PATTERN_PROPERTY_GROUP = Pattern

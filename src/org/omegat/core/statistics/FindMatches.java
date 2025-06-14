@@ -123,7 +123,8 @@ public class FindMatches {
     private String removedText;
 
     /** Tokens for original string, with and without stems. */
-    private Token[] strTokensStem, strTokensNoStem;
+    private Token[] strTokensStem;
+    private Token[] strTokensNoStem;
 
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
@@ -226,7 +227,8 @@ public class FindMatches {
     public List<NearString> search(String searchText, boolean fillSimilarityData, IStopped stop)
             throws StoppedException {
         return search(searchText, fillSimilarityData, stop,
-                !project.getProjectProperties().isSentenceSegmentingEnabled());
+                Preferences.isPreferenceDefault(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, true)
+                        && !project.getProjectProperties().isSentenceSegmentingEnabled());
     }
 
     /**
@@ -385,7 +387,7 @@ public class FindMatches {
                 PrepareTMXEntry entry = new PrepareTMXEntry();
                 entry.source = segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
                 entry.translation = segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
-                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.TM, false, maxPenalty);
+                processEntry(null, entry, String.join(",", tmxNames), NearString.MATCH_SOURCE.SUBSEGMENTS, false, maxPenalty);
             }
         }
         // fill similarity data only for a result
@@ -486,8 +488,8 @@ public class FindMatches {
             return;
         }
 
-        addNearString(key, entry, comesFrom, fuzzy, new NearString.Scores(similarityStem, similarityNoStem,
-                simAdjusted, penalty), tmxName);
+        addNearString(key, entry, comesFrom, fuzzy,
+                new NearString.Scores(similarityStem, similarityNoStem, simAdjusted, penalty), tmxName);
     }
 
     /**

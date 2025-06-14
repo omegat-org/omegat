@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx PUBLIC "-//LISA OSCAR:1998//DTD for Translation Memory eXchange//EN" "tmx14.dtd">
+
+<tmx version="1.4">
+    <header creationtoolversion="0.1" adminlang="en" segtype="paragraph" creationdate="20230930T155211Z" datatype="unknown" srclang="ja" creationtool="txt2tmx" o-tmf="TextEdit"></header>
+    <body>
+        <tu>
+            <tuv xml:lang="fr">
+                <seg>weird behavior</seg>
+            </tuv>
+            <tuv xml:lang="ja">
+                <seg>地力の搾取と浪費が現われる。(weird)</seg>
+            </tuv>
+        </tu>
+    </body>
+</tmx>

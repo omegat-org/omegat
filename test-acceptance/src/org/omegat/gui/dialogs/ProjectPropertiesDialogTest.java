@@ -37,7 +37,6 @@ import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;

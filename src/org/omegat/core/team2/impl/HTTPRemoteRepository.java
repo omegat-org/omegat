@@ -35,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.SocketException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.util.Formatter;
 import java.util.Properties;
@@ -53,7 +54,7 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * HTTP/HTTPS repository connection implementation.
- *
+ * <p>
  * It can be used as read-only repository for retrieve sources, external TMX,
  * glossaries, etc. Since HTTP protocol doesn't support multiple files, each URL
  * should be mapped to separate file, i.e. directory mapping is not supported.
@@ -81,6 +82,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
      * Plugin unloader.
      */
     public static void unloadPlugins() {
+        // there is no way to remove the connector.
     }
 
     @Override
@@ -91,7 +93,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     /**
-     * Use SHA-1 as file version.
+     * Use SHA-1 as a file version.
      */
     @Override
     public String getFileVersion(String file) throws Exception {
@@ -100,8 +102,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
 
         // calculate SHA-1
         byte[] buffer = new byte[8192];
-        InputStream in = new BufferedInputStream(new FileInputStream(file));
-        try {
+        try (InputStream in = new BufferedInputStream(new FileInputStream(file))) {
             while (true) {
                 int len = in.read(buffer);
                 if (len < 0) {
@@ -109,8 +110,6 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
                 }
                 sha1.update(buffer, 0, len);
             }
-        } finally {
-            in.close();
         }
 
         // out as hex
@@ -157,7 +156,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     }
 
     @Override
-    public String[] getRecentlyDeletedFiles() throws Exception {
+    public String[] getRecentlyDeletedFiles() {
         return new String[0];
     }
 
@@ -171,7 +170,7 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     /**
      * Load all ETags.
      */
-    protected Properties loadETags() throws Exception {
+    protected Properties loadETags() throws IOException {
         Properties props = new Properties();
         File f = new File(baseDirectory, ".etags");
         if (f.exists()) {
@@ -185,66 +184,90 @@ public class HTTPRemoteRepository implements IRemoteRepository2 {
     /**
      * Save all ETags.
      */
-    protected void saveETags(Properties props) throws Exception {
+    protected void saveETags(Properties props) throws IOException {
         try (FileOutputStream out = new FileOutputStream(new File(baseDirectory, ".etags"))) {
             props.store(out, null);
         }
     }
 
-    /**
-     * Retrieve remote URL with non-modified checking by ETag. If server doesn't
-     * support ETag, file will be always retrieved.
-     */
-    protected void retrieve(Properties etags, String file, String url, final File out) throws Exception {
-        String etag = etags.getProperty(file);
-        logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}").addArgument(url)
-                .addArgument(out::getAbsolutePath).addArgument(etag).log();
+    private static final String HEADER_ETAG = "ETag";
+    private static final String HEADER_IF_NONE_MATCH = "If-None-Match";
 
-        out.getParentFile().mkdirs();
-        HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+    protected void retrieve(Properties etags, String fileName, String fileUrl, final File outputFile)
+            throws IOException, NetworkException {
+
+        String currentEtag = etags.getProperty(fileName);
+
+        logger.atDebug().setMessage("Retrieve {0} into {1} with ETag={2}").addArgument(fileUrl)
+                .addArgument(outputFile::getAbsolutePath).addArgument(currentEtag).log();
+
+        // When parent directory doesn't exist, create it.
+        if (!outputFile.getParentFile().exists() && !outputFile.getParentFile().mkdirs()) {
+            throw new IOException("Failed to create directory " + outputFile.getParentFile());
+        }
+
+        HttpURLConnection connection = (HttpURLConnection) new URL(fileUrl).openConnection();
         try {
-            if (etag != null) {
-                // use ETag if we know it
-                conn.setRequestProperty("If-None-Match", etag);
+            // Set ETag if available
+            if (currentEtag != null) {
+                connection.setRequestProperty(HEADER_IF_NONE_MATCH, currentEtag);
             }
-            switch (conn.getResponseCode()) {
+
+            // Handles the HTTP response code and performs necessary actions
+            // based on the code.
+            switch (connection.getResponseCode()) {
             case HttpURLConnection.HTTP_OK:
-                etag = conn.getHeaderField("ETag");
-                logger.atDebug().setMessage("Retrieve {0}: 200 with ETag={1}").addArgument(url).addArgument(etag).log();
+                logger.atDebug().setMessage("Retrieve {0}: 200 OK").addArgument(fileUrl).log();
                 break;
             case HttpURLConnection.HTTP_NOT_MODIFIED:
                 // not modified - just return
-                logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(url).log();
+                logger.atDebug().setMessage("Retrieve {0}: not modified").addArgument(fileUrl).log();
                 return;
+            case HttpURLConnection.HTTP_FORBIDDEN:
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_FORBIDDEN", fileUrl));
+            case HttpURLConnection.HTTP_UNAUTHORIZED:
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_UNAUTHORIZED", fileUrl));
+            case HttpURLConnection.HTTP_NOT_FOUND:
+                throw new NetworkException(OStrings.getString("TEAM_HTTP_NOT_FOUND", fileUrl));
             default:
-                throw new RuntimeException("HTTP response code: " + conn.getResponseCode());
+                throw new NetworkException(
+                        OStrings.getString("TEAM_HTTP_OTHER_ERRORS", fileUrl, connection.getResponseCode()));
             }
 
-            // load into .tmp file
-            File temp = new File(out.getAbsolutePath() + ".tmp");
-            try (InputStream in = conn.getInputStream()) {
-                FileUtils.copyInputStreamToFile(in, temp);
+            // Load into .tmp file
+            File tempFile = new File(outputFile.getAbsolutePath() + ".tmp");
+            try (InputStream inputStream = connection.getInputStream()) {
+                FileUtils.copyInputStreamToFile(inputStream, tempFile);
             }
 
-            // rename into file
-            if (out.exists()) {
-                if (!out.delete()) {
-                    throw new IOException();
-                }
+            // Safely rename temporary file to output file
+            safelyRenameFile(tempFile, outputFile);
+
+            // Store new ETag if provided
+            String newEtag = connection.getHeaderField(HEADER_ETAG);
+            if (newEtag != null) {
+                etags.setProperty(fileName, newEtag);
             }
-            if (!temp.renameTo(out)) {
-                throw new IOException();
-            }
-            try {
-                etags.setProperty(file, etag);
-            } catch (Exception ex) {
-                // Etags are optionnal, we eat the exception is there is none
-            }
+
         } catch (UnknownHostException | SocketException e) {
             throw new NetworkException(e);
         } finally {
-            conn.disconnect();
+            connection.disconnect();
         }
-        logger.atDebug().setMessage("Retrieve {0} finished").addArgument(url).log();
+
+        logger.atDebug().setMessage("Retrieve {0} finished").addArgument(fileUrl).log();
+    }
+
+    /**
+     * Safely renames the temporary file to the output file, ensuring no
+     * remnants of old files.
+     */
+    private void safelyRenameFile(File tempFile, File outputFile) throws IOException {
+        if (outputFile.exists()) {
+            Files.delete(outputFile.toPath());
+        }
+        if (!tempFile.renameTo(outputFile)) {
+            throw new IOException("Failed to rename temporary file to output file");
+        }
     }
 }

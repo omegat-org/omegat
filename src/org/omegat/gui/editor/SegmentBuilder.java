@@ -214,7 +214,7 @@ public class SegmentBuilder {
         displayVersion = globalVersions.incrementAndGet();
         this.active = isActive;
 
-        doc.trustedChangesInProgress = true;
+        doc.setTrustedChangesInProgress(true);
         StaticUIUtils.setCaretUpdateEnabled(controller.editor, false);
         try {
             try {
@@ -250,7 +250,7 @@ public class SegmentBuilder {
                 throw new RuntimeException(ex);
             }
         } finally {
-            doc.trustedChangesInProgress = false;
+            doc.setTrustedChangesInProgress(false);
             StaticUIUtils.setCaretUpdateEnabled(controller.editor, true);
         }
     }
@@ -271,7 +271,7 @@ public class SegmentBuilder {
     }
 
     public void addSegmentSeparator(int index) {
-        doc.trustedChangesInProgress = true;
+        doc.setTrustedChangesInProgress(true);
         StaticUIUtils.setCaretUpdateEnabled(controller.editor, false);
         try {
             try {
@@ -280,7 +280,7 @@ public class SegmentBuilder {
                 throw new RuntimeException(ex);
             }
         } finally {
-            doc.trustedChangesInProgress = false;
+            doc.setTrustedChangesInProgress(false);
             StaticUIUtils.setCaretUpdateEnabled(controller.editor, true);
         }
     }
@@ -726,7 +726,7 @@ public class SegmentBuilder {
     }
 
     public void resetTextAttributes() {
-        doc.trustedChangesInProgress = true;
+        doc.setTrustedChangesInProgress(true);
         try {
             if (posSourceBeg != null) {
                 int sBeg = posSourceBeg.getOffset();
@@ -748,7 +748,7 @@ public class SegmentBuilder {
                 }
             }
         } finally {
-            doc.trustedChangesInProgress = false;
+            doc.setTrustedChangesInProgress(false);
         }
     }
 

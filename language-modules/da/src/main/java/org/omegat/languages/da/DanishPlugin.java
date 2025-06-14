@@ -25,17 +25,24 @@
 
 package org.omegat.languages.da;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class DanishPlugin {
 
     private static final String DANISH = "org.languagetool.language.Danish";
+    private static final String DICTIONARY = "org.omegat.languages.da.DanishHunspellDictionary";
 
     private DanishPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("da", DANISH);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("da_DK", SpellCheckDictionaryType.HUNSPELL,
+                DICTIONARY);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("da", SpellCheckDictionaryType.HUNSPELL,
+                DICTIONARY);
     }
 
     public static void unloadPlugins() {

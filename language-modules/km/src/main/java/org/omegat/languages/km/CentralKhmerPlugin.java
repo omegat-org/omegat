@@ -25,17 +25,22 @@
 
 package org.omegat.languages.km;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class CentralKhmerPlugin {
 
     private static final String KHMER = "org.languagetool.language.Khmer";
+    private static final String HUNSPELL_DICTIONARY = "org.omegat.languages.km.CentralKhmerHunspellDictionary";
 
     private CentralKhmerPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("km-KH", KHMER);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("km_KH", SpellCheckDictionaryType.HUNSPELL,
+                HUNSPELL_DICTIONARY);
     }
 
     public static void unloadPlugins() {

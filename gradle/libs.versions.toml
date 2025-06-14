@@ -1,14 +1,14 @@
 [versions]
-slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
+slf4j = "2.0.17"
 slf4j-format = "0.5.1"
-groovy = "4.0.23"
+groovy = "4.0.27"
 junit = "4.13.2"
 commons_lang3 = "3.14.0"
-commons_io = "2.16.1"
-commons_text = "1.11.0"
+commons_io = "2.19.0"
+commons_text = "1.13.1"
 commons_validator = "1.9.0"
-jsoup = "1.18.2"
-icu4j = { require = "[70,73.2[", prefer = "72.1" }
+jsoup = "1.19.1"
+icu4j = "77.1"
 stax2api = "4.2.2"
 woodstox = "6.5.0"
 languagetool = "6.1"
@@ -16,19 +16,19 @@ languagedetector = "0.6-2"
 lucene = "5.5.5"
 lucene_gosen = "5.5.1"
 checkstyle = "8.45.1"
-guava = "32.1.2-jre"
+guava = "33.4.8-jre"
 annotations = "23.0.0"
 jgit = "6.10.0.202406032230-r"
 svnkit = "1.10.11"
-ivy = "2.5.2"
+ivy = "2.5.3"
 jackson = "2.16.1"
-bc = "1.78.1"
-nashorn = "15.4"
-caffeine = "3.1.8"
-wiremock = "3.9.2"
+bc = "1.81"
+nashorn = "15.6"
+caffeine = "3.2.1"
+wiremock = "3.13.1"
 vldocking = "3.1.1"
-xmlunit = "2.10.0"
-assertj = "3.26.0"
+xmlunit = "2.10.2"
+assertj = "3.27.3"
 appbundler = "1.2.1"
 supertmxmerge = "2.0.3"
 jasypt = "1.9.3"
@@ -37,10 +37,10 @@ htmlparser = "1.6-20230203"
 gnudiff = "1.15"
 desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
-pdfbox = "3.0.3"
+pdfbox = "3.0.5"
 maligna = "3.0.1"
 trie4j = "0.9.10_1"
-dsl4j = "1.0.0"
+dsl4j = "1.1.0"
 stardict4j = "1.1.0"
 juniversalchardet = "2.5.0"
 mnemonics = "1.2"
@@ -48,12 +48,15 @@ hunspell = "2.1.2"
 xjc = "2.3.9"
 jna = "5.13.0"
 jfa = "1.2.0"
-tipoftheday = "0.4.4"
-flatlaf="3.5.2"
+tipoftheday = "0.5.0"
+flatlaf="3.6"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
 jaxb = "2.3.0"
-swing_extra_locales = "0.3.2"
+swing_extra_locales = "0.3.3"
+mockito = "5.18.0"
+json_java = "20250517"
+protobuf_java = "3.25.5"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -65,10 +68,9 @@ commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.r
 commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "commons_text"}
 commons-validator = {group = "commons-validator", name = "commons-validator", version.ref = "commons_validator"}
 jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
-icj4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
+icu4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
-languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}
 languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
 languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
 languagetool-ar = {group = "org.languagetool", name = "language-ar", version.ref = "languagetool"}
@@ -129,12 +131,13 @@ jgit-bc = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.gpg.bc", version
 bc-prov = {group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bc"}
 bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
+bc-util-jdk18on = {group = "org.bouncycastle", name = "bcutil-jdk18on", version.ref = "bc" }
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
-fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.5.2"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.6.0"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.1"}
 fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
-fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.1"}
+fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.2"}
 caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.ref = "caffeine"}
 caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}
 wiremock = {group = "org.wiremock", name = "wiremock", version.ref = "wiremock"}
@@ -171,23 +174,17 @@ assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", 
 morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
 morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
 swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+json = {group = "org.json", name = "json", version.ref = "json_java"}
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
 jackson = ["jackson-core", "jackson-databind", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
-ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "eddsa"]
+ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "bc-util-jdk18on", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]
-languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr", "languagetool-en",
-    "languagetool-ja", "languagetool-pl"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
-
-[plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.0.26"}
-spotless = {id = "com.diffplug.spotless", version = "7.0.0.BETA4"}
-launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
-versions = {id = "com.github.ben-manes.versions", version = "0.51.0"}
-ssh = {id = "org.hidetake.ssh", version = "2.11.2"}

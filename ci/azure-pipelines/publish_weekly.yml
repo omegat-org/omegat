@@ -5,16 +5,35 @@ parameters:
     default: false
 
 steps:
+  - task: DownloadSecureFile@1
+    displayName: "Download SSH private key"
+    condition: ${{ parameters.condition }}
+    inputs:
+      secureFile: omegat-ci-rsa
   - task: Bash@3
-    displayName: 📂 SCP upload to sourceforge file management
+    displayName: Configure SSH to disable host key checking and store private key
     condition: ${{ parameters.condition }}
     inputs:
       targetType: 'inline'
       script: |
-        echo "Push OmegaT ${{ parameters.omegatVersion }} files to SourceForge file manager"
+        mkdir -p ~/.ssh
+        echo "StrictHostKeyChecking no" >> ~/.ssh/config
+        echo "UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+        cp $(Agent.TempDirectory)/omegat-ci-rsa ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/config
+        chmod 600 ~/.ssh/id_rsa
+  - task: Bash@3
+    displayName: 📂upload to sourceforge file management via SCP/SFTP
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: |
+        sudo apt-get update
+        sudo apt-get install -y lftp
+        echo "Push OmegaT files to SourceForge file manager"
         srcdir=$(system.defaultworkingdirectory)/build/distributions/
-        ls -l $srcdir/*        
-        dest=$(SOURCEFORGE_FILE_USER)@frs.sourceforge.net
+        ls -l $srcdir/*
+        dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
         destdir=/home/frs/project/omegat/Weekly
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
-        SSHPASS=$(SOURCEFORGE_FILE_PASS) sshpass -e scp -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir
+        cmd="mkdir -p $destdir ; lcd $srcdir ; cd $destdir ; mirror -R -v ; bye"
+        ssh-agent bash -c "ssh-add ~/.ssh/id_rsa; env LFTP_PASSWORD=$(SOURCEFORGE_KEY_PASS) lftp --env-password -e \"$cmd\" $dest"

@@ -25,46 +25,56 @@
 
 package org.omegat.spellchecker.hunspell;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.omegat.core.Core;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.util.Language;
-import org.omegat.util.TestPreferencesInitializer;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.concurrent.CountDownLatch;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.io.FileUtils;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.TestCoreInitializer;
+import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.main.ConsoleWindow;
+import org.omegat.util.Language;
+import org.omegat.util.TestPreferencesInitializer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HunspellSpellcheckerTest {
     private static final String DICTIONARY_PATH = "/org/omegat/spellchecker/hunspell/";
 
-    private Path tmpDir;
-    private Path configDir;
+    private static Path tmpDir;
+    private static Path configDir;
 
-    @Before
-    public final void setUp() throws Exception {
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        PluginUtils.loadPlugins(Collections.emptyMap());
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();
         configDir = Files.createDirectory(tmpDir.resolve(".omegat"));
         TestPreferencesInitializer.init(configDir.toString());
+        TestCoreInitializer.initMainWindow(new ConsoleWindow());
         Files.createDirectory(configDir.resolve("spelling"));
         copyFile("es_MX.aff");
         copyFile("es_MX.dic");
     }
 
-    @After
-    public final void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDownClass() throws Exception {
         FileUtils.forceDeleteOnExit(tmpDir.toFile());
     }
 
@@ -99,9 +109,8 @@ public class HunspellSpellcheckerTest {
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hallo")).as("Spell check for correct word").isTrue();
         assertThat(checker.isCorrect("Hello")).as("Spell check for wrong word").isFalse();
-        assertThat(checker.suggest("Hello")).as("Get suggestion")
-                .hasSize(8)
-                .contains("Holle", "Hella", "Cello", "Hell", "Helle", "Hallo", "Hellt", "Helot");
+        assertThat(checker.suggest("Hello")).as("Get suggestion").hasSize(8).contains("Holle", "Hella",
+                "Cello", "Hell", "Helle", "Hallo", "Hellt", "Helot");
     }
 
     @Test
@@ -118,11 +127,33 @@ public class HunspellSpellcheckerTest {
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Bonjour")).as("Spell check for correct word").isTrue();
         assertThat(checker.isCorrect("Erruer")).as("Spell check for wrong word").isFalse();
-        assertThat(checker.suggest("Erruer")).as("Get suggestion")
-                .contains("Erreur", "Errer");
-     }
+        assertThat(checker.suggest("Erruer")).as("Get suggestion").contains("Erreur", "Errer");
+    }
 
-    private void copyFile(String target) throws IOException {
+    @Test
+    public void testReinitializeWhenProjectChanged() throws Exception {
+        ProjectProperties props = new ProjectProperties(tmpDir.toFile());
+        props.setTargetLanguage(new Language("fr_FR"));
+        Core.setProject(new NotLoadedProject() {
+            @Override
+            public ProjectProperties getProjectProperties() {
+                return props;
+            }
+        });
+        HunSpellCheckerMock checker = new HunSpellCheckerMock();
+        assertThat(checker.initialize()).as("Success initialize").isTrue();
+        assertThat(checker.getInitializeCounter()).as("Hunspell Checker initialized once").isEqualTo(1);
+        // Fire project change events twice
+        final CountDownLatch latch = new CountDownLatch(2);
+        CoreEvents.registerProjectChangeListener(eventType -> latch.countDown());
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        latch.await();
+        //
+        assertThat(checker.getInitializeCounter()).as("Hunspell Checker loaded 3rd times").isEqualTo(3);
+    }
+
+    private static void copyFile(String target) throws IOException {
         try (InputStream is = HunspellSpellcheckerTest.class.getResourceAsStream(DICTIONARY_PATH + target)) {
             if (is == null) {
                 throw new IOException("Target resource not found");
@@ -130,5 +161,19 @@ public class HunspellSpellcheckerTest {
             Files.copy(is, configDir.resolve("spelling/" + target));
         }
 
+    }
+
+    public static class HunSpellCheckerMock extends HunSpellChecker {
+        private int initializeCounter = 0;
+
+        @Override
+        public boolean initialize() {
+            initializeCounter++;
+            return super.initialize();
+        }
+
+        public int getInitializeCounter() {
+            return initializeCounter;
+        }
     }
 }

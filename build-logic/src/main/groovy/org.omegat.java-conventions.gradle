@@ -1,0 +1,174 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'pmd'
+    id 'com.diffplug.spotless'
+    id 'com.github.spotbugs'
+    id 'org.omegat.common-utilities'
+}
+
+// Definition of OmegaT versioning
+def localPropsFile = file('local.properties')
+
+// Define target Java version to compatible.
+def javaVersion = 11
+
+// Flag to detect CI/CD environment
+def envIsCi = project.hasProperty('envIsCi') as Boolean
+
+ext {
+    if (localPropsFile.file) {
+        loadProperties(localPropsFile).each { k, v ->
+            if (!findProperty(k)) {
+                set(k, v)
+            }
+        }
+    }
+    providedCoreLibsDir = file(layout.settingsDirectory.dir('lib/provided/core'))
+    providedModuleLibsDir = file(layout.settingsDirectory.dir('lib/provided/module'))
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+    if (isWindows11 && isArm64) {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    } else {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(javaVersion)
+            vendor = JvmVendorSpec.ADOPTIUM
+        }
+    }
+}
+
+tasks.named("test", Test) {
+    useJUnit()
+    workingDir project.rootProject.projectDir
+    // Test in headless mode with ./gradlew test -Pheadless
+    if (project.hasProperty('headless')) {
+        systemProperty 'java.awt.headless', 'true'
+    }
+    systemProperty 'java.util.logging.config.file', layout.settingsDirectory.file("config/test/logger.properties").asFile
+}
+
+javadoc {
+    failOnError = false
+    options {
+        jFlags('-Duser.language=en')
+        addStringOption('locale', 'en_US')
+        addStringOption('bottom', '<span>Copyright 2000-2023, OmegaT project and contributors</span>')
+        addStringOption('encoding', 'UTF-8')
+        addBooleanOption("Xdoclint:none", true)
+        addBooleanOption('html5', true)
+        addBooleanOption('frames', false)
+        addBooleanOption('public', true)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+    options.compilerArgs.addAll '-Xlint', '-Werror'
+}
+
+spotbugs {
+    reportLevel = com.github.spotbugs.snom.Confidence.valueOf('HIGH')
+}
+
+tasks.register('spotbugsMainReport') {
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/main.txt").get().asFile
+    doLast {
+        if (reportFile.exists()) {
+            println()
+            reportFile.readLines().forEach {
+                println(it)
+            }
+        }
+    }
+    group = 'verification'
+}
+
+tasks.register('spotbugsTestReport') {
+    def reportFile = layout.buildDirectory.file("reports/spotbugs/test.txt").get().asFile
+    doLast {
+        if (reportFile.exists()) {
+            println()
+            reportFile.readLines().forEach {
+                println(it)
+            }
+        }
+    }
+    group = 'verification'
+}
+
+spotbugsMain {
+    if (envIsCi) {
+        extraArgs = ['-longBugCodes']
+        jvmArgs = ['-Duser.language=en']
+    }
+    reports {
+        text.required = envIsCi
+        html.required = !envIsCi
+    }
+    finalizedBy(spotbugsMainReport)
+}
+
+spotbugsTest {
+    if (envIsCi) {
+        extraArgs = ['-longBugCodes']
+        jvmArgs = ['-Duser.language=en']
+    }
+    reports {
+        text.required = envIsCi
+        html.required = !envIsCi
+    }
+    finalizedBy(spotbugsTestReport)
+}
+
+checkstyle {
+    toolVersion = libs.versions.checkstyle.get()
+}
+checkstyleMain.exclude '**/gen/**'
+
+spotless {
+    enforceCheck = false
+    java {
+        eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
+        removeUnusedImports()
+    }
+}
+
+tasks.withType(Copy).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+tasks.withType(Sync).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+tasks.withType(Zip).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+pmd {
+    toolVersion = '6.38.0'
+    ruleSetFiles = layout.settingsDirectory.files("config/pmd/ruleset.xml")
+    consoleOutput = true
+}
+
+tasks.withType(Pmd).configureEach {
+    exclude '**/gen/**'
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+
+        // Consolidate reports in root project
+        xml.outputLocation.set(layout.settingsDirectory.file("build/reports/pmd/${project.name}-pmd.xml"))
+        html.outputLocation.set(layout.settingsDirectory.file("build/reports/pmd/${project.name}-pmd.html"))
+    }
+}

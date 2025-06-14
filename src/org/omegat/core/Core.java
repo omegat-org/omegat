@@ -104,22 +104,23 @@ public final class Core {
 
     private static IProject currentProject;
     private static IMainWindow mainWindow;
-    protected static IEditor editor;
+    // package-private for test fixture TestCoreInitializer
+    static IEditor editor;
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
 
-    protected static IAutoSave saveThread;
+    // package-private for test fixture TestCoreInitializer
+    static IAutoSave saveThread;
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
 
-    protected static IGlossaries glossary;
+    // package-private for test fixture TestCoreInitializer
+    static IGlossaries glossary;
     private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
-    @SuppressWarnings("unused")
-    private static MultipleTransPane multiple;
     private static INotes notes;
     private static IComments comments;
 
@@ -164,9 +165,11 @@ public final class Core {
         return matcher;
     }
 
+    private static SpellCheckerManager spellCheckerManager;
+
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
-        return SpellCheckerManager.getCurrentSpellChecker();
+        return spellCheckerManager.getCurrentSpellChecker();
     }
 
     public static FilterMaster getFilterMaster() {
@@ -233,6 +236,7 @@ public final class Core {
      * @param cl class loader.
      * @param params CLI parameters.
      * @throws Exception when error occurred.
+     * @deprecated since 6.1.0
      */
     @Deprecated(since = "6.1.0")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
@@ -285,7 +289,10 @@ public final class Core {
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
-        multiple = new MultipleTransPane(me);
+        spellCheckerManager = new SpellCheckerManager();
+        // Create an independent instance updated from SearchThead.
+        new MultipleTransPane(me);
+        // Create an independent instance updated by events.
         new SegmentPropertiesArea(me);
         projWin = new ProjectFilesListController();
     }
@@ -293,7 +300,7 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) throws Exception {
+    public static void initializeConsole(final Map<String, String> params) {
         cmdLineParams = params;
         tagValidation = new TagValidationTool();
         currentProject = new NotLoadedProject();

@@ -110,7 +110,7 @@ public class CalcMatchStatistics extends LongProcessThread {
     public CalcMatchStatistics(IStatsConsumer callback, boolean perFile) {
         this(Core.getProject(), Core.getSegmenter(), callback, perFile,
                 Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
-                OConsts.FUZZY_MATCH_THRESHOLD));
+                        OConsts.FUZZY_MATCH_THRESHOLD));
     }
 
     public CalcMatchStatistics(IProject project, Segmenter segmenter, IStatsConsumer callback,
@@ -119,8 +119,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         this.callback = callback;
         this.perFile = perFile;
         finder = ThreadLocal.withInitial(
-                () -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true,
-                        false, false, threshold));
+                () -> new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, threshold));
     }
 
     @Override
@@ -313,7 +312,7 @@ public class CalcMatchStatistics extends LongProcessThread {
     int calcMaxSimilarity(SourceTextEntry ste) {
         String srcNoXmlTags = removeXmlTags(ste);
         FindMatches localFinder = finder.get();
-        List<NearString> nears = localFinder.search(srcNoXmlTags, true, false, this::isInterrupted);
+        List<NearString> nears = localFinder.search(srcNoXmlTags, false, this::isInterrupted);
         final Token[] strTokensStem = localFinder.tokenizeAll(ste.getSrcText());
         int maxSimilarity = 0;
         CACHE: for (NearString near : nears) {

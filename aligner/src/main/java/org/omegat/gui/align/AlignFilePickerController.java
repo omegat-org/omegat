@@ -157,20 +157,122 @@ public class AlignFilePickerController {
      * @param parent
      *            Parent window of file picker and align window
      */
-    @SuppressWarnings("serial")
     public void show(final Component parent) {
+        JFrame frame = initGUI(parent);
+        frame.setLocationRelativeTo(parent);
+        frame.setVisible(true);
+    }
+
+    // public for test only
+    @SuppressWarnings("serial")
+    public JFrame initGUI(Component parent) {
         final JFrame frame = new JFrame(BUNDLE.getString("ALIGNER_FILEPICKER"));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         StaticUIUtils.setEscapeClosable(frame);
         frame.setName("ALIGNER_FILEPICKER");
+        //
+        AlignFilePicker picker = new AlignFilePicker();
+        initializeFilePicker(picker);
+        // add the main listener.
+        picker.okButton.addActionListener(e -> {
+            picker.bottomPanel.remove(picker.messageTextArea);
+            picker.bottomPanel.add(picker.progressBar, BorderLayout.CENTER);
+            picker.bottomPanel.revalidate();
+            new SwingWorker<Aligner, Void>() {
+                @Override
+                protected Aligner doInBackground() throws Exception {
+                    Aligner aligner = new Aligner(sourceFile, sourceLanguage, targetFile, targetLanguage);
+                    aligner.loadFiles();
+                    return aligner;
+                }
 
-        final AlignFilePicker picker = new AlignFilePicker();
+                @Override
+                protected void done() {
+                    try {
+                        Aligner aligner = get();
+                        new AlignPanelController(defaultSaveDir).show(parent, aligner);
+                    } catch (CancellationException e) {
+                        // Ignore
+                    } catch (Exception e) {
+                        Log.log(e);
+                        JOptionPane.showMessageDialog(frame, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
+                                BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                    }
+                    frame.dispose();
+                }
+            }.execute();
+        });
+        picker.cancelButton.addActionListener(e -> frame.dispose());
+        addListeners(picker, frame);
+        frame.getRootPane().setDefaultButton(picker.okButton);
+        updatePicker(picker);
+        frame.add(picker);
+        frame.pack();
+        return frame;
+    }
+
+    /**
+     * Initialize FilePicker.
+     * @return FilePicker frame.
+     */
+    private void initializeFilePicker(AlignFilePicker picker) {
         picker.setName("align_picker_panel");
         picker.sourceLanguagePicker
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
         picker.sourceLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
         picker.sourceLanguagePicker.setSelectedItem(sourceLanguage);
         picker.sourceLanguagePicker.setName("sourceLanguagePicker");
+
+        picker.targetLanguagePicker
+                .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
+        picker.targetLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
+        picker.targetLanguagePicker.setSelectedItem(targetLanguage);
+        picker.targetLanguagePicker.setName("targetLanguagePicker");
+
+        picker.sourceChooseFileButton.setName("sourceChooseFileButton");
+        picker.targetChooseFileButton.setName("targetChooseFileButton");
+        picker.sourceLanguageFileField.setText(sourceFile);
+        picker.sourceLanguageFileField.setName("sourceLanguageFileField");
+
+        picker.targetLanguageFileField.setText(targetFile);
+        picker.targetLanguageFileField.setName("targetLanguageFileField");
+
+        picker.sourceLanguageFileField.setTransferHandler(languageFileFieldTransferHandler);
+        picker.targetLanguageFileField.setTransferHandler(languageFileFieldTransferHandler);
+
+        picker.okButton.setName("OK");
+        picker.cancelButton.setName("Cancel");
+    }
+
+    private final TransferHandler languageFileFieldTransferHandler = new TransferHandler() {
+        @Override
+        public boolean canImport(TransferSupport support) {
+            return support.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
+        }
+
+        @Override
+        public boolean importData(TransferSupport support) {
+            if (!canImport(support)) {
+                return false;
+            }
+            try {
+                List<?> list = (List<?>) support.getTransferable()
+                        .getTransferData(DataFlavor.javaFileListFlavor);
+                List<File> files = getSupportedFiles(list);
+                if (files.isEmpty()) {
+                    return false;
+                }
+                JTextComponent field = (JTextComponent) support.getComponent();
+                field.setText(files.get(0).getAbsolutePath());
+                return true;
+            } catch (Exception e) {
+                Log.log(e);
+                return false;
+            }
+        }
+    };
+
+    private void addListeners(AlignFilePicker picker, JFrame frame) {
         picker.sourceLanguagePicker.addItemListener(e -> {
             if (e.getStateChange() != ItemEvent.SELECTED) {
                 return;
@@ -194,11 +296,7 @@ public class AlignFilePickerController {
             }
             updatePicker(picker);
         });
-        picker.targetLanguagePicker
-                .setModel(new DefaultComboBoxModel<>(new Vector<>(Language.getLanguages())));
-        picker.targetLanguagePicker.setRenderer(new LanguageComboBoxRenderer());
-        picker.targetLanguagePicker.setSelectedItem(targetLanguage);
-        picker.targetLanguagePicker.setName("targetLanguagePicker");
+
         picker.targetLanguagePicker.addItemListener(e -> {
             if (e.getStateChange() != ItemEvent.SELECTED) {
                 return;
@@ -244,161 +342,16 @@ public class AlignFilePickerController {
                 targetFile = file.getAbsolutePath();
             }
         });
-        picker.sourceChooseFileButton.setName("sourceChooseFileButton");
-        picker.targetChooseFileButton.setName("targetChooseFileButton");
-        picker.sourceLanguageFileField.setText(sourceFile);
-        picker.sourceLanguageFileField.setName("sourceLanguageFileField");
-        picker.sourceLanguageFileField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                update();
-            }
 
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                update();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                update();
-            }
-
-            private void update() {
-                sourceFile = picker.sourceLanguageFileField.getText();
-                updatePicker(picker);
-            }
-        });
-        picker.targetLanguageFileField.setText(targetFile);
-        picker.targetLanguageFileField.setName("targetLanguageFileField");
-        picker.targetLanguageFileField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                update();
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                update();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                update();
-            }
-
-            private void update() {
-                targetFile = picker.targetLanguageFileField.getText();
-                updatePicker(picker);
-            }
-        });
-
-        TransferHandler transferHandler = new TransferHandler() {
-            @Override
-            public boolean canImport(TransferSupport support) {
-                return support.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
-            }
-
-            @Override
-            public boolean importData(TransferSupport support) {
-                if (!canImport(support)) {
-                    return false;
-                }
-                try {
-                    List<?> list = (List<?>) support.getTransferable()
-                            .getTransferData(DataFlavor.javaFileListFlavor);
-                    List<File> files = getSupportedFiles(list);
-                    if (files.isEmpty()) {
-                        return false;
-                    }
-                    JTextComponent field = (JTextComponent) support.getComponent();
-                    field.setText(files.get(0).getAbsolutePath());
-                    return true;
-                } catch (Exception e) {
-                    Log.log(e);
-                    return false;
-                }
-            }
-        };
-        picker.sourceLanguageFileField.setTransferHandler(transferHandler);
-        picker.targetLanguageFileField.setTransferHandler(transferHandler);
-
-        picker.setTransferHandler(new TransferHandler() {
-            @Override
-            public boolean canImport(TransferSupport support) {
-                return support.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
-            }
-
-            @Override
-            public boolean importData(TransferSupport support) {
-                if (!canImport(support)) {
-                    return false;
-                }
-                try {
-                    List<?> list = (List<?>) support.getTransferable()
-                            .getTransferData(DataFlavor.javaFileListFlavor);
-                    List<File> files = getSupportedFiles(list);
-                    if (files.isEmpty()) {
-                        return false;
-                    } else if (files.size() == 1) {
-                        JTextComponent insertTarget = picker.sourceLanguageFileField;
-                        if (picker.sourceLanguageFileField.getDocument().getLength() != 0
-                                && picker.targetLanguageFileField.getDocument().getLength() == 0) {
-                            insertTarget = picker.targetLanguageFileField;
-                        }
-                        insertTarget.setText(files.get(0).getAbsolutePath());
-                    } else {
-                        picker.sourceLanguageFileField.setText(files.get(0).getAbsolutePath());
-                        picker.targetLanguageFileField.setText(files.get(1).getAbsolutePath());
-                    }
-                    return true;
-                } catch (Exception e) {
-                    Log.log(e);
-                    return false;
-                }
-            }
-        });
-
-        picker.okButton.addActionListener(e -> {
-            picker.bottomPanel.remove(picker.messageTextArea);
-            picker.bottomPanel.add(picker.progressBar, BorderLayout.CENTER);
-            picker.bottomPanel.revalidate();
-            new SwingWorker<Aligner, Void>() {
-                @Override
-                protected Aligner doInBackground() throws Exception {
-                    Aligner aligner = new Aligner(sourceFile, sourceLanguage, targetFile, targetLanguage);
-                    aligner.loadFiles();
-                    return aligner;
-                }
-
-                @Override
-                protected void done() {
-                    try {
-                        Aligner aligner = get();
-                        new AlignPanelController(aligner, defaultSaveDir).show(parent);
-                    } catch (CancellationException e) {
-                        // Ignore
-                    } catch (Exception e) {
-                        Log.log(e);
-                        JOptionPane.showMessageDialog(frame, BUNDLE.getString("ALIGNER_ERROR_LOADING"),
-                                BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-                    }
-                    frame.dispose();
-                }
-            }.execute();
-        });
-        picker.cancelButton.addActionListener(e -> frame.dispose());
-        picker.okButton.setName("OK");
-        picker.cancelButton.setName("Cancel");
-
-        frame.getRootPane().setDefaultButton(picker.okButton);
-
-        updatePicker(picker);
-
-        frame.add(picker);
-        frame.pack();
-        frame.setLocationRelativeTo(parent);
-        frame.setVisible(true);
+        picker.sourceLanguageFileField.getDocument().addDocumentListener(new AlignFilePickerDocumentListener(() -> {
+            sourceFile = picker.sourceLanguageFileField.getText();
+            updatePicker(picker);
+        }));
+        picker.targetLanguageFileField.getDocument().addDocumentListener(new AlignFilePickerDocumentListener(() -> {
+            targetFile = picker.targetLanguageFileField.getText();
+            updatePicker(picker);
+        }));
+        picker.setTransferHandler(new PickerTransferHandler(picker));
     }
 
     private void updatePicker(final AlignFilePicker picker) {
@@ -483,6 +436,76 @@ public class AlignFilePickerController {
         return null;
     }
 
+    private static class AlignFilePickerDocumentListener implements DocumentListener {
+        private final Runnable runnable;
+
+        AlignFilePickerDocumentListener(Runnable runnable) {
+            this.runnable = runnable;
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            update();
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            update();
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            update();
+        }
+
+        private void update() {
+            runnable.run();
+        }
+    }
+
+    @SuppressWarnings("serial")
+    private static class PickerTransferHandler extends TransferHandler {
+        private final AlignFilePicker picker;
+
+        PickerTransferHandler(final AlignFilePicker picker) {
+            this.picker = picker;
+        }
+
+        @Override
+        public boolean canImport(TransferSupport support) {
+            return support.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
+        }
+
+        @Override
+        public boolean importData(TransferSupport support) {
+            if (!canImport(support)) {
+                return false;
+            }
+            try {
+                List<?> list = (List<?>) support.getTransferable()
+                        .getTransferData(DataFlavor.javaFileListFlavor);
+                List<File> files = getSupportedFiles(list);
+                if (files.isEmpty()) {
+                    return false;
+                } else if (files.size() == 1) {
+                    JTextComponent insertTarget = picker.sourceLanguageFileField;
+                    if (picker.sourceLanguageFileField.getDocument().getLength() != 0
+                            && picker.targetLanguageFileField.getDocument().getLength() == 0) {
+                        insertTarget = picker.targetLanguageFileField;
+                    }
+                    insertTarget.setText(files.get(0).getAbsolutePath());
+                } else {
+                    picker.sourceLanguageFileField.setText(files.get(0).getAbsolutePath());
+                    picker.targetLanguageFileField.setText(files.get(1).getAbsolutePath());
+                }
+                return true;
+            } catch (Exception e) {
+                Log.log(e);
+                return false;
+            }
+        }
+    }
+
     /**
      * Entry point for debugging or standalone use. Optionally accepts four
      * arguments to pre-fill the picker:
@@ -494,7 +517,7 @@ public class AlignFilePickerController {
      * </ol>
      *
      * @param args command arguments.
-     * @throws Exception when failed to ininitalize OmegaT core. 
+     * @throws Exception when failed to ininitalize OmegaT core.
      */
     public static void main(String[] args) throws Exception {
         System.setProperty("apple.laf.useScreenMenuBar", "true");

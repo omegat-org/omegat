@@ -1,4 +1,4 @@
-name: Chec greetings build
+name: Check greetings build
 
 on:
   push:

@@ -25,21 +25,26 @@
 
 package org.omegat.languages.uk;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class UkrainianPlugin {
 
     private static final String UKRAINIAN = "org.languagetool.language.Ukrainian";
-    private static final String UKRAINIAN1992 = "org.languagetool.language.Ukrainian1992";
+    private static final String DICTIONARY_CLASS = "org.omegat.languages.uk.UkrainianHunspellDictionary";
 
     private UkrainianPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("uk-UA", UKRAINIAN);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("uk",
+                SpellCheckDictionaryType.HUNSPELL, DICTIONARY_CLASS);
     }
 
     public static void unloadPlugins() {
+        // there is no way to remove plugin
     }
 
 }

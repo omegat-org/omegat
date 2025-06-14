@@ -478,7 +478,7 @@ public abstract class TestFilterBase extends TestCore {
         DocumentBuilder builder = factory.newDocumentBuilder();
         var doc1 = builder.parse(f1.toExternalForm());
         var doc2 = builder.parse(f2.toExternalForm());
-        assertThat(doc1).and(doc2).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+        assertThat(doc2).and(doc1).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
                 .areIdentical();
     }
 

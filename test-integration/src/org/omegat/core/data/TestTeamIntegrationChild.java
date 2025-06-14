@@ -25,11 +25,9 @@
 
 package org.omegat.core.data;
 
-
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.HeadlessException;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -44,7 +42,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 
 import org.madlonkay.supertmxmerge.StmProperties;
@@ -70,6 +67,7 @@ import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.gui.glossary.IGlossaries;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Log;
@@ -81,7 +79,6 @@ import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.MenuExtender.MenuKey;
 
 import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockingDesktop;
 import gen.core.project.RepositoryDefinition;
 
 /**
@@ -218,6 +215,7 @@ public final class TestTeamIntegrationChild {
 
     /**
      * replacement of ProjectFactory.loadProject for test.
+     * 
      * @param projectProperties
      * @throws Exception
      */
@@ -241,14 +239,16 @@ public final class TestTeamIntegrationChild {
                 return;
             }
         }
-        throw new RuntimeException("Wrong url in repository. expected: " + repo
-                + ": actual: " + prop.getRepositories().get(0).getUrl());
+        throw new RuntimeException("Wrong url in repository. expected: " + repo + ": actual: "
+                + prop.getRepositories().get(0).getUrl());
     }
 
     private static String getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
         String repoUrl = null;
         for (RepositoryDefinition definition : repos) {
-            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
+            if (definition.getMapping().get(0).getLocal().equals("/")
+                    && definition.getMapping().get(0).getRepository().equals("/")
+                    && definition.getType().equals("git")) {
                 repoUrl = definition.getUrl();
                 break;
             }
@@ -258,14 +258,15 @@ public final class TestTeamIntegrationChild {
 
     private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos, String repoUrl) {
         for (RepositoryDefinition definition : repos) {
-            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
+            if (definition.getMapping().get(0).getLocal().equals("/")
+                    && definition.getMapping().get(0).getRepository().equals("/")
+                    && definition.getType().equals("git")) {
                 definition.setUrl(repoUrl);
                 repos.set(0, definition);
                 break;
             }
         }
     }
-
 
     static void changeConcurrent() throws Exception {
         checkAll();
@@ -289,8 +290,9 @@ public final class TestTeamIntegrationChild {
      * Check in memory and in file.
      */
     static void checkAll() throws Exception {
-        ProjectTMX tmx = new ProjectTMX(TestTeamIntegration.SRC_LANG, TestTeamIntegration.TRG_LANG, false,
-                new File(dir + "/omegat/project_save.tmx"), TestTeamIntegration.checkOrphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(TestTeamIntegration.checkOrphanedCallback);
+        tmx.load(TestTeamIntegration.SRC_LANG, TestTeamIntegration.TRG_LANG, false,
+                new File(dir + "/omegat/project_save.tmx"), Core.getSegmenter());
         for (int c = 0; c < segCount; c++) {
             checkTranslation(c);
             checkTranslationFromFile(tmx, c);
@@ -313,14 +315,14 @@ public final class TestTeamIntegrationChild {
 
     static void checkGlossaryEntries() {
         List<GlossaryEntry> entries = glossaryManager.getLocalEntries();
-        for (String s: glossaries) {
+        for (String s : glossaries) {
             boolean found = false;
-            for (GlossaryEntry entry: entries) {
+            for (GlossaryEntry entry : entries) {
                 if (entry.getSrcText().equals(s)) {
                     final long index = getGlossaryIndex(s);
                     final String loc = getGlossaryLoc(index);
                     final String com = getGlossaryCom(index);
-                    if (!loc.equals(entry.getLocText()))  {
+                    if (!loc.equals(entry.getLocText())) {
                         throw new RuntimeException("Glossary error : " + entry.getSrcText()
                                 + " should have loc: " + loc + " but it is " + entry.getLocText());
                     }
@@ -380,12 +382,15 @@ public final class TestTeamIntegrationChild {
     static long getGlossaryIndex(String term) {
         return Long.parseLong(term.substring(term.lastIndexOf('/') + 1));
     }
+
     static String getGlossaryTerm(long index) {
         return "term/" + source + "/" + index;
     }
+
     static String getGlossaryLoc(long index) {
         return "loc/" + source + "/" + index;
     }
+
     static String getGlossaryCom(long index) {
         return "com/" + source + "/" + index;
     }
@@ -595,37 +600,20 @@ public final class TestTeamIntegrationChild {
         }
     };
 
-    static IMainWindow mainWindow = new IMainWindow() {
+    static IMainWindow mainWindow = new ConsoleWindow() {
+        @Override
         public void unlockUI() {
         }
 
-        public void showStatusMessageRB(String messageKey, Object... params) {
-        }
-
-        public void showTimedStatusMessageRB(String messageKey, Object... params) {
-        }
-
+        @Override
         public void showProgressMessage(String messageText) {
         }
 
-        public void showMessageDialog(String message) {
-        }
-
+        @Override
         public void showLengthMessage(String messageText) {
         }
 
-        public void showErrorDialogRB(String title, String message, Object... args) {
-            System.err.println(message);
-        }
-
-        public int showConfirmDialog(Object message, String title, int optionType, int messageType)
-                throws HeadlessException {
-            return 0;
-        }
-
-        public void setCursor(Cursor cursor) {
-        }
-
+        @Override
         public void lockUI() {
         }
 
@@ -673,20 +661,7 @@ public final class TestTeamIntegrationChild {
             return menu;
         }
 
-        @Override
-        public DockingDesktop getDesktop() {
-            return null;
-        }
-
-        @Override
-        public void resetDesktopLayout() {
-        }
-
         public Cursor getCursor() {
-            return null;
-        }
-
-        public JFrame getApplicationFrame() {
             return null;
         }
 
@@ -708,9 +683,6 @@ public final class TestTeamIntegrationChild {
         }
 
         public void addDockable(Dockable pane) {
-        }
-
-        public void showLockInsertMessage(String messageText, String toolTip) {
         }
     };
 
@@ -738,17 +710,19 @@ public final class TestTeamIntegrationChild {
                 Log.log("'Theirs' TM is not a valid derivative of 'Base' TM");
                 System.exit(1);
             }
-            StmProperties props = new StmProperties()
-                    .setLanguageResource(OStrings.getResourceBundle())
+            StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                     .setResolutionStrategy(new ResolutionStrategy() {
                         @Override
                         public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
-                            TMXEntry enBase = baseTuv != null ? (TMXEntry) baseTuv
-                                    .getUnderlyingRepresentation() : null;
-                            TMXEntry enProject = projectTuv != null ? (TMXEntry) projectTuv
-                                    .getUnderlyingRepresentation() : null;
-                            TMXEntry enHead = headTuv != null ? (TMXEntry) headTuv
-                                    .getUnderlyingRepresentation() : null;
+                            TMXEntry enBase = baseTuv != null
+                                    ? (TMXEntry) baseTuv.getUnderlyingRepresentation()
+                                    : null;
+                            TMXEntry enProject = projectTuv != null
+                                    ? (TMXEntry) projectTuv.getUnderlyingRepresentation()
+                                    : null;
+                            TMXEntry enHead = headTuv != null
+                                    ? (TMXEntry) headTuv.getUnderlyingRepresentation()
+                                    : null;
                             String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
                                     + tr(enHead) + " project=" + tr(enProject);
                             if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {

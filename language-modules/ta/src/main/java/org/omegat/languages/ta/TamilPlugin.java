@@ -25,17 +25,22 @@
 
 package org.omegat.languages.ta;
 
+import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.languagetools.LanguageManager;
 
 public final class TamilPlugin {
 
     private static final String TAMIL = "org.languagetool.language.Tamil";
+    private static final String MORFOLOGIK_DICTIONARY = "org.omegat.languages.ta.TamilMorfologikDictionary";
 
     private TamilPlugin() {
     }
 
     public static void loadPlugins() {
         LanguageManager.registerLTLanguage("ta-IN", TAMIL);
+        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ta",
+                SpellCheckDictionaryType.MORFOLOGIK, MORFOLOGIK_DICTIONARY);
     }
 
     public static void unloadPlugins() {

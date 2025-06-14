@@ -26,17 +26,13 @@
 package org.omegat.spellchecker.morfologik;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import morfologik.speller.Speller;
 import morfologik.stemming.Dictionary;
-import org.apache.commons.io.IOUtils;
-import org.languagetool.JLanguageTool;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -45,7 +41,6 @@ import org.omegat.core.spellchecker.AbstractSpellChecker;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.ISpellCheckerProvider;
 import org.omegat.core.spellchecker.SpellCheckerManager;
-import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 
 public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpellChecker {
@@ -64,71 +59,28 @@ public class MorfologikSpellchecker extends AbstractSpellChecker implements ISpe
     public static void unloadPlugins() {
     }
 
-    public MorfologikSpellchecker() {
-        super();
-    }
-
     @Override
-    protected Optional<ISpellCheckerProvider> initializeWithLanguage(final String language) {
+    protected Optional<ISpellCheckerProvider> initializeWithLanguage(String language) {
         // check that the dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
-                SpellCheckerManager.DEFAULT_DICTIONARY_DIR.getPath());
-        File dictionaryFile = new File(dictionaryDir, language + ".dict");
-        File infoFile = new File(dictionaryDir, language + ".info");
-        if (!dictionaryFile.exists()) {
-            // Try installing from LanguageTool bundled resources
-            installLTBundledDictionary(dictionaryDir, language);
-        }
+                SpellCheckerManager.getDefaultDictionaryDir().getPath());
+        File dictionaryFile = new File(dictionaryDir, language + SC_DICT_EXTENSION);
+        File infoFile = new File(dictionaryDir, language + SC_INFO_EXTENSION);
+        Dictionary dictionary;
         if (dictionaryFile.exists() && infoFile.exists()) {
-            Dictionary dictionary;
             try {
                 dictionary = Dictionary.read(dictionaryFile.toPath());
+                return Optional.of(new MorfologikSpellCheckerProvider(dictionary));
             } catch (IOException e) {
                 LOGGER.atWarn().setCause(e).log();
-                return Optional.empty();
-            }
-            ISpellCheckerProvider provider = new MorfologikSpellCheckerProvider(dictionary);
-            return Optional.of(provider);
-        }
-        return Optional.empty();
-    }
-
-    private String findDictionaryFolderInLTJar(String language) {
-        final String[] folders = new String[] {"/hunspell/", "/spelling/"};
-        for (String folder : folders) {
-            String path = "/" + new Language(language).getLanguageCode() + folder + language;
-            if (JLanguageTool.getDataBroker().resourceExists(path + SC_DICT_EXTENSION)) {
-                return path;
             }
         }
-        return null;
-    }
-
-    /**
-     * If there is a Morfologik dictionary for the current target language
-     * bundled with LanguageTool, install it.
-     */
-    private void installLTBundledDictionary(String dictionaryDir, String language) {
-        String path = findDictionaryFolderInLTJar(language);
-        if (path == null) {
-            return;
+        // Try LanguageTool bundled resources
+        dictionary = SpellCheckerManager.getMorfologikDictionary(language);
+        if (dictionary == null) {
+            return Optional.empty();
         }
-        String resPath = path + SC_DICT_EXTENSION;
-        String infoPath = path + SC_INFO_EXTENSION;
-        try {
-            try (InputStream dictStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(resPath);
-                 FileOutputStream fos = new FileOutputStream(
-                         new File(dictionaryDir, language + SC_DICT_EXTENSION))) {
-                IOUtils.copy(dictStream, fos);
-            }
-            try (InputStream dictStream = JLanguageTool.getDataBroker().getFromResourceDirAsStream(infoPath);
-                 FileOutputStream fos = new FileOutputStream(
-                         new File(dictionaryDir, language + SC_INFO_EXTENSION))) {
-                IOUtils.copy(dictStream, fos);
-            }
-        } catch (Exception ex) {
-            LOGGER.atWarn().setCause(ex).log();
-        }
+        return Optional.of(new MorfologikSpellCheckerProvider(dictionary));
     }
 
     public static class MorfologikSpellCheckerProvider implements ISpellCheckerProvider {

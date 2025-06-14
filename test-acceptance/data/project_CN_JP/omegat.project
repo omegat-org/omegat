@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<omegat>
+  <project version="1.0">
+    <source_dir>source</source_dir>
+    <source_dir_excludes>
+      <mask>**/.svn/**</mask>
+      <mask>**/CVS/**</mask>
+      <mask>**/.cvs/**</mask>
+      <mask>**/.git/**</mask>
+      <mask>**/.hg/**</mask>
+      <mask>**/.repositories/**</mask>
+      <mask>**/desktop.ini</mask>
+      <mask>**/Thumbs.db</mask>
+      <mask>**/.DS_Store</mask>
+      <mask>**/~$*</mask>
+    </source_dir_excludes>
+    <target_dir>target</target_dir>
+    <tm_dir>tm</tm_dir>
+    <glossary_dir>glossary</glossary_dir>
+    <glossary_file>.-glossary.txt</glossary_file>
+    <dictionary_dir>dictionary</dictionary_dir>
+    <export_tm_dir></export_tm_dir>
+    <export_tm_levels></export_tm_levels>
+    <source_lang>zh-CN</source_lang>
+    <target_lang>ja-JP</target_lang>
+    <source_tok>org.omegat.tokenizer.LuceneSmartChineseTokenizer</source_tok>
+    <target_tok>org.omegat.tokenizer.LuceneJapaneseTokenizer</target_tok>
+    <sentence_seg>true</sentence_seg>
+    <support_default_translations>true</support_default_translations>
+    <remove_tags>true</remove_tags>
+    <external_command></external_command>
+  </project>
+</omegat>

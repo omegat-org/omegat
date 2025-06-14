@@ -53,7 +53,7 @@ import org.omegat.util.gui.Styles;
 @SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
 
-    protected final EditorController controller;
+    private final EditorController controller;
 
     /** Position of active translation in text. */
     @Nullable
@@ -92,13 +92,29 @@ public class Document3 extends DefaultStyledDocument {
      * @see <a href="https://sourceforge.net/p/omegat/bugs/529/">Later, more
      *      specific ticket</a>
      */
-    protected boolean trustedChangesInProgress = false;
+    private boolean trustedChangesInProgress = false;
 
     /**
      * Flag to indicate that text is currently being composed (should not be
      * considered to have been input yet) by an IME.
      */
-    protected boolean textBeingComposed = false;
+    private boolean textBeingComposed = false;
+
+    boolean getTrustedChangesInProgress() {
+        return trustedChangesInProgress;
+    }
+
+    void setTrustedChangesInProgress(boolean trustedChangesInProgress) {
+        this.trustedChangesInProgress = trustedChangesInProgress;
+    }
+
+    boolean getTextBeingComposed() {
+        return textBeingComposed;
+    }
+
+    void setTextBeingComposed(boolean textBeingComposed) {
+        this.textBeingComposed = textBeingComposed;
+    }
 
     public Document3(final EditorController controller) {
         this.controller = controller;
@@ -209,5 +225,9 @@ public class Document3 extends DefaultStyledDocument {
         } finally {
             writeUnlock();
         }
+    }
+
+    protected EditorController getController() {
+        return controller;
     }
 }

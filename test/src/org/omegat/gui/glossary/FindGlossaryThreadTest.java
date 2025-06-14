@@ -28,5 +28,4 @@ package org.omegat.gui.glossary;
 import org.omegat.core.TestCore;
 
 public class FindGlossaryThreadTest extends TestCore {
-
 }

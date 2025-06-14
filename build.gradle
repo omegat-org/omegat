@@ -218,6 +218,7 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.bundles.xmlunit)
     testImplementation(libs.slf4j.api)
+    testImplementation(libs.mockito.core)
     testImplementation(libs.languagetool.server) {
         exclude module: "logback-classic"
         exclude module: "hunspell"
@@ -241,6 +242,7 @@ dependencies {
 
     testIntegrationImplementation sourceSets.main.output, sourceSets.test.output
     testIntegrationImplementation(testFixtures(project.rootProject))
+    testIntegrationImplementation(libs.slf4j.api)
     testIntegrationRuntimeOnly(libs.slf4j.jdk14)
 
     // workdir classifiers are hard-coded in gralde-launch4j plugin

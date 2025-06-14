@@ -149,7 +149,7 @@ public class TranslationUndoManager implements UndoableEditListener {
     public void undoableEditHappened(UndoableEditEvent e) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (inProgress || editor.getOmDocument().trustedChangesInProgress) {
+        if (inProgress || editor.getOmDocument().getTrustedChangesInProgress()) {
             return;
         }
         AbstractDocument.DefaultDocumentEvent event = extractDefaultDocumentEvent(e.getEdit());

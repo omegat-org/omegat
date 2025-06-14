@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.NotNull;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +63,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class ProjectFileStorageTest {
 
     private static final File PROJECT_DIR = new File("test/data/project");
-    private static final File SCHEMA_FILE = new File("src/schemas/project_properties.xsd");
 
     private File tempDir;
 
@@ -86,7 +86,8 @@ public class ProjectFileStorageTest {
         try {
             props.verifyProject();
             fail("Project props should fail verification when dirs don't exist yet");
-        } catch (ProjectException ex) {
+        } catch (ProjectException ignored) {
+            // expected.
         }
         props.autocreateDirectories();
         props.verifyProject();
@@ -117,12 +118,7 @@ public class ProjectFileStorageTest {
     @Test
     public void testSaveTeamProject() throws Exception {
         // create & write a project
-        ProjectProperties p = new ProjectProperties(tempDir);
-        p.setSourceLanguage("en-US");
-        p.setTargetLanguage("fr-FR");
-        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
-        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        p.setSentenceSegmentingEnabled(true);
+        ProjectProperties p = getProjectProperties();
         RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
         RepositoryMapping repositoryMapping = new RepositoryMapping();
         repositoryMapping.setRepository("");
@@ -140,12 +136,7 @@ public class ProjectFileStorageTest {
     @Test
     public void testSaveTeamProjectWithExclude() throws Exception {
         // create & write a project
-        ProjectProperties p = new ProjectProperties(tempDir);
-        p.setSourceLanguage("en-US");
-        p.setTargetLanguage("fr-FR");
-        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
-        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        p.setSentenceSegmentingEnabled(true);
+        ProjectProperties p = getProjectProperties();
         RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
         RepositoryMapping repositoryMapping = new RepositoryMapping();
         repositoryMapping.setRepository("");
@@ -165,12 +156,7 @@ public class ProjectFileStorageTest {
     @Test
     public void testSaveTeamProjectWithMapping() throws Exception {
         // create & write a project
-        ProjectProperties p = new ProjectProperties(tempDir);
-        p.setSourceLanguage("en-US");
-        p.setTargetLanguage("fr-FR");
-        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
-        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
-        p.setSentenceSegmentingEnabled(true);
+        ProjectProperties p = getProjectProperties();
         //
         List<RepositoryDefinition> repositories = new ArrayList<>();
         RepositoryDefinition repositoryDefinition = new RepositoryDefinition();
@@ -203,31 +189,36 @@ public class ProjectFileStorageTest {
         compareXML(new File(PROJECT_DIR, "teamWithMap.project"), new File(tempDir, "omegat.project"));
     }
 
+    private @NotNull ProjectProperties getProjectProperties() throws Exception {
+        ProjectProperties p = new ProjectProperties(tempDir);
+        p.setSourceLanguage("en-US");
+        p.setTargetLanguage("fr-FR");
+        p.setSourceTokenizer(LuceneEnglishTokenizer.class);
+        p.setTargetTokenizer(LuceneFrenchTokenizer.class);
+        p.setSentenceSegmentingEnabled(true);
+        return p;
+    }
+
     @Test
     public void testLoadCustomGlossaryDir() throws Exception {
-        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
-                new File(PROJECT_DIR, "customglossarydir.project"));
-        props.autocreateDirectories();
-        props.verifyProject();
-        assertTrue(props.getWriteableGlossary().endsWith("foo/glossary.txt"));
+        loadPropertiesAndAssertGlossary("customglossarydir.project", "foo/glossary.txt");
     }
 
     @Test
     public void testLoadCustomGlossaryFile() throws Exception {
-        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
-                new File(PROJECT_DIR, "customglossaryfile.project"));
-        props.autocreateDirectories();
-        props.verifyProject();
-        assertTrue(props.getWriteableGlossary().endsWith("glossary/bar.txt"));
+        loadPropertiesAndAssertGlossary("customglossaryfile.project", "glossary/bar.txt");
     }
 
     @Test
     public void testLoadCustomGlossaryDirAndFile() throws Exception {
-        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir,
-                new File(PROJECT_DIR, "customglossarydirfile.project"));
+        loadPropertiesAndAssertGlossary("customglossarydirfile.project", "foo/bar.txt");
+    }
+
+    private void loadPropertiesAndAssertGlossary(String projectFileName, String expectedGlossaryPath) throws Exception {
+        ProjectProperties props = ProjectFileStorage.loadPropertiesFile(tempDir, new File(PROJECT_DIR, projectFileName));
         props.autocreateDirectories();
         props.verifyProject();
-        assertTrue(props.getWriteableGlossary().endsWith("foo/bar.txt"));
+        assertTrue(props.getWriteableGlossary().endsWith(expectedGlossaryPath));
     }
 
     @Test
@@ -247,7 +238,7 @@ public class ProjectFileStorageTest {
                 new File(PROJECT_DIR, "defaultdirs.project"));
         props.autocreateDirectories();
         props.verifyProject();
-        props.setExportTmLevels(Arrays.asList("level1"));
+        props.setExportTmLevels(List.of("level1"));
 
         // Write the project file and read it again to verify that export TM
         // levels were set correctly
@@ -264,10 +255,9 @@ public class ProjectFileStorageTest {
         Omegat omt = ProjectFileStorage.parseProjectFile(projFile);
 
         for (int i = 0; i < OConsts.MAX_PARENT_DIRECTORIES_ABS2REL; i++) {
-
             String prefix = repeat(i, "a/");
             File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
-            projRoot.mkdirs();
+            assertTrue("Failed to create directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
             // Set project folders to absolute paths
             File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -284,7 +274,11 @@ public class ProjectFileStorageTest {
             omt.getProject().setExportTmDir(exportTmDir.getPath());
 
             // Make all the actual folders
-            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+            for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+                if (!file.exists()) {
+                    assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+                }
+            }
 
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
@@ -299,12 +293,12 @@ public class ProjectFileStorageTest {
             assertTrue(outProjFile.isFile());
             Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
             String relPrefix = repeat(i + 1, "../");
-            assertEquals(relPrefix + srcDir.getName(), outOmt.getProject().getSourceDir());
-            assertEquals(relPrefix + trgDir.getName(), outOmt.getProject().getTargetDir());
-            assertEquals(relPrefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
-            assertEquals(relPrefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
-            assertEquals(relPrefix + tmDir.getName(), outOmt.getProject().getTmDir());
-            assertEquals(relPrefix + exportTmDir.getName(), outOmt.getProject().getExportTmDir());
+            assertEquals(getDir(relPrefix, srcDir), outOmt.getProject().getSourceDir());
+            assertEquals(getDir(relPrefix, trgDir), outOmt.getProject().getTargetDir());
+            assertEquals(getDir(relPrefix, dictDir), outOmt.getProject().getDictionaryDir());
+            assertEquals(getDir(relPrefix, glosDir), outOmt.getProject().getGlossaryDir());
+            assertEquals(getDir(relPrefix, tmDir), outOmt.getProject().getTmDir());
+            assertEquals(getDir(relPrefix, exportTmDir), outOmt.getProject().getExportTmDir());
         }
     }
 
@@ -315,7 +309,7 @@ public class ProjectFileStorageTest {
 
         for (int i = 0; i < OConsts.MAX_PARENT_DIRECTORIES_ABS2REL; i++) {
             File projRoot = Paths.get(tempDir.getAbsolutePath(), repeat(i, "a/"), "root").toFile();
-            projRoot.mkdirs();
+            assertTrue("Failed to create project directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
             // Set project folders to relative paths
             File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -325,15 +319,19 @@ public class ProjectFileStorageTest {
             File tmDir = new File(tempDir, "tm").getAbsoluteFile();
             File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
             String prefix = repeat(i + 1, "../");
-            omt.getProject().setSourceDir(prefix + srcDir.getName());
-            omt.getProject().setTargetDir(prefix + trgDir.getName());
-            omt.getProject().setDictionaryDir(prefix + dictDir.getName());
-            omt.getProject().setGlossaryDir(prefix + glosDir.getName());
-            omt.getProject().setTmDir(prefix + tmDir.getName());
-            omt.getProject().setExportTmDir(prefix + exportTmDir.getName());
+            omt.getProject().setSourceDir(getDir(prefix, srcDir));
+            omt.getProject().setTargetDir(getDir(prefix, trgDir));
+            omt.getProject().setDictionaryDir(getDir(prefix, dictDir));
+            omt.getProject().setGlossaryDir(getDir(prefix, glosDir));
+            omt.getProject().setTmDir(getDir(prefix, tmDir));
+            omt.getProject().setExportTmDir(getDir(prefix, exportTmDir));
 
             // Make all the actual folders
-            Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+            for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+                if (!file.exists()) {
+                    assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+                }
+            }
 
             // Load the ProjectProperties and verify that the project folders
             // are resolved correctly
@@ -355,13 +353,17 @@ public class ProjectFileStorageTest {
             File outProjFile = new File(projRoot, OConsts.FILE_PROJECT);
             assertTrue(outProjFile.isFile());
             Omegat outOmt = ProjectFileStorage.parseProjectFile(outProjFile);
-            assertEquals(prefix + srcDir.getName(), outOmt.getProject().getSourceDir());
-            assertEquals(prefix + trgDir.getName(), outOmt.getProject().getTargetDir());
-            assertEquals(prefix + dictDir.getName(), outOmt.getProject().getDictionaryDir());
-            assertEquals(prefix + glosDir.getName(), outOmt.getProject().getGlossaryDir());
-            assertEquals(prefix + tmDir.getName(), outOmt.getProject().getTmDir());
-            assertEquals(prefix + exportTmDir.getName(), outOmt.getProject().getExportTmDir());
+            assertEquals(getDir(prefix, srcDir), outOmt.getProject().getSourceDir());
+            assertEquals(getDir(prefix, trgDir), outOmt.getProject().getTargetDir());
+            assertEquals(getDir(prefix, dictDir), outOmt.getProject().getDictionaryDir());
+            assertEquals(getDir(prefix, glosDir), outOmt.getProject().getGlossaryDir());
+            assertEquals(getDir(prefix, tmDir), outOmt.getProject().getTmDir());
+            assertEquals(getDir(prefix, exportTmDir), outOmt.getProject().getExportTmDir());
         }
+    }
+
+    private static @NotNull String getDir(String prefix, File srcDir) {
+        return prefix + srcDir.getName();
     }
 
     @Test
@@ -371,7 +373,7 @@ public class ProjectFileStorageTest {
 
         String prefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL, "a/");
         File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
-        projRoot.mkdirs();
+        assertTrue("Failed to create project directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
         // Set project folders to absolute paths
         File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -388,7 +390,11 @@ public class ProjectFileStorageTest {
         omt.getProject().setExportTmDir(exportTmDir.getPath());
 
         // Make all the actual folders
-        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+        for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+            if (!file.exists()) {
+                assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+            }
+        }
 
         // Load the ProjectProperties and verify that the project folders
         // are resolved correctly
@@ -417,7 +423,7 @@ public class ProjectFileStorageTest {
 
         String prefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL, "a/");
         File projRoot = Paths.get(tempDir.getAbsolutePath(), prefix, "root").toFile();
-        projRoot.mkdirs();
+        assertTrue("Failed to create project directory: " + projRoot.getAbsolutePath(), projRoot.mkdirs());
 
         // Set project folders to absolute paths
         File srcDir = new File(tempDir, "source").getAbsoluteFile();
@@ -427,15 +433,19 @@ public class ProjectFileStorageTest {
         File tmDir = new File(tempDir, "tm").getAbsoluteFile();
         File exportTmDir = new File(tempDir, "export_tm").getAbsoluteFile();
         String relPrefix = repeat(OConsts.MAX_PARENT_DIRECTORIES_ABS2REL + 1, "../");
-        omt.getProject().setSourceDir(relPrefix + srcDir.getName());
-        omt.getProject().setTargetDir(relPrefix + trgDir.getName());
-        omt.getProject().setDictionaryDir(relPrefix + dictDir.getName());
-        omt.getProject().setGlossaryDir(relPrefix + glosDir.getName());
-        omt.getProject().setTmDir(relPrefix + tmDir.getName());
-        omt.getProject().setExportTmDir(relPrefix + exportTmDir.getName());
+        omt.getProject().setSourceDir(getDir(relPrefix, srcDir));
+        omt.getProject().setTargetDir(getDir(relPrefix, trgDir));
+        omt.getProject().setDictionaryDir(getDir(relPrefix, dictDir));
+        omt.getProject().setGlossaryDir(getDir(relPrefix, glosDir));
+        omt.getProject().setTmDir(getDir(relPrefix, tmDir));
+        omt.getProject().setExportTmDir(getDir(relPrefix, exportTmDir));
 
         // Make all the actual folders
-        Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir).forEach(File::mkdirs);
+        for (File file : Arrays.asList(srcDir, trgDir, dictDir, glosDir, tmDir, exportTmDir)) {
+            if (!file.exists()) {
+                assertTrue("Failed to create project directory: " + file.getAbsolutePath(), file.mkdir());
+            }
+        }
 
         // Load the ProjectProperties and verify that the project folders
         // are resolved correctly
@@ -489,11 +499,7 @@ public class ProjectFileStorageTest {
     }
 
     private static String repeat(int n, String s) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < n; i++) {
-            sb.append(s);
-        }
-        return sb.toString();
+        return String.valueOf(s).repeat(Math.max(0, n));
     }
 
     protected void compareXML(File f1, File f2) throws Exception {
@@ -501,6 +507,9 @@ public class ProjectFileStorageTest {
     }
     protected void compareXML(URL f1, URL f2) throws Exception {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        factory.setXIncludeAware(false);
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         DocumentBuilder builder = factory.newDocumentBuilder();
         var doc1 = builder.parse(f1.toExternalForm());
         var doc2 = builder.parse(f2.toExternalForm());

@@ -70,8 +70,6 @@ import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
-import org.omegat.languagetools.LanguageClassBroker;
-import org.omegat.languagetools.LanguageDataBroker;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -95,6 +93,8 @@ import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.languagetools.LanguageClassBroker;
+import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -127,16 +127,16 @@ public final class Main {
     }
 
     /** Project location for a load on startup. */
-    protected static File projectLocation = null;
+    private static File projectLocation = null;
 
     /** Remote project location. */
-    protected static String remoteProject = null;
+    private static String remoteProject = null;
 
     /** Execution command line parameters. */
-    protected static final Map<String, String> PARAMS = new TreeMap<>();
+    private static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
-    protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
         if (args.length > 0
@@ -264,14 +264,19 @@ public final class Main {
             command.addAll(CLIParameters.unparseArgs(PARAMS));
         } else {
             // assumes jpackage
-            javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
-            if (!javaBin.toFile().exists()) {
-                // abort restart
-                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+            var installDir = StaticUtils.installDir();
+            if (installDir == null) {
                 return;
+            } else {
+                javaBin = Paths.get(installDir).getParent().resolve("bin/OmegaT");
+                if (!javaBin.toFile().exists()) {
+                    // abort restart
+                    Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                    return;
+                }
+                command.add(javaBin.toString());
+                command.addAll(CLIParameters.unparseArgs(PARAMS));
             }
-            command.add(javaBin.toString());
-            command.addAll(CLIParameters.unparseArgs(PARAMS));
         }
         if (projectDir != null) {
             command.add(projectDir);
@@ -283,7 +288,8 @@ public final class Main {
             builder.start();
             System.exit(0);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.log(e);
+            System.exit(1);
         }
     }
 
@@ -334,7 +340,7 @@ public final class Main {
     /**
      * Execute standard GUI.
      */
-    protected static int runGUI() {
+    private static int runGUI() {
         UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
 
         // macOS-specific - they must be set BEFORE any GUI calls
@@ -343,27 +349,12 @@ public final class Main {
         }
 
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-
-        // Set X11 application class name to make some desktop user interfaces
-        // (like Gnome Shell) recognize OmegaT
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Class<?> cls = toolkit.getClass();
-        try {
-            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
-                Field field = cls.getDeclaredField("awtAppClassName");
-                if (field.trySetAccessible()) {
-                    field.set(toolkit, "OmegaT");
-                }
-            }
-        } catch (Exception ignored) {
-        }
-
+        tweakX11AppName();
         System.setProperty("swing.aatext", "true");
         try {
             Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
-            showError(ex);
             return 1;
         }
 
@@ -389,10 +380,26 @@ public final class Main {
         return 0;
     }
 
+    private static void tweakX11AppName() {
+        try {
+            // Set X11 application class name to make some desktop user interfaces
+            // (like Gnome Shell) recognize OmegaT
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Class<?> cls = toolkit.getClass();
+            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
+                Field field = cls.getDeclaredField("awtAppClassName");
+                if (field.trySetAccessible()) {
+                    field.set(toolkit, "OmegaT");
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        }
+    }
+
     /**
      * Execute in console mode for translate.
      */
-    protected static int runConsoleTranslate() throws Exception {
+    private static int runConsoleTranslate() throws Exception {
         Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
@@ -530,7 +537,7 @@ public final class Main {
     /**
      * Execute in console mode for translate.
      */
-    protected static int runCreatePseudoTranslateTMX() throws Exception {
+    private static int runCreatePseudoTranslateTMX() throws Exception {
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));

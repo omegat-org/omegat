@@ -123,16 +123,17 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
 
     private final DockableScrollPane scrollPane;
-    private final List<NearString> matches = new ArrayList<NearString>();
+    private final List<NearString> matches = new ArrayList<>();
 
-    private final List<Integer> delimiters = new ArrayList<Integer>();
-    private final List<Integer> sourcePos = new ArrayList<Integer>();
-    private final List<Map<Integer, List<TextRun>>> diffInfos = new ArrayList<Map<Integer, List<TextRun>>>();
+    private final List<Integer> delimiters = new ArrayList<>();
+    private final List<Integer> sourcePos = new ArrayList<>();
+    private final List<Map<Integer, List<TextRun>>> diffInfos = new ArrayList<>();
     private int activeMatch = -1;
 
     /** Creates new form MatchGlossaryPane */
     public MatchesTextArea(IMainWindow mw) {
         super(true);
+        setName("matches_pane");
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
         scrollPane = new DockableScrollPane("MATCHES", title, this, true);
@@ -192,9 +193,12 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
 
+        List<NearString> oldMatches = new ArrayList<>(matches);
+
         clear();
 
         if (newMatches == null) {
+            firePropertyChange("matches", oldMatches, newMatches);
             return;
         }
 
@@ -228,6 +232,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         setText(displayBuffer.toString());
         setActiveMatch(0);
+        firePropertyChange("matches", oldMatches, newMatches);
 
         checkForReplaceTranslation();
     }
@@ -429,6 +434,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             return;
         }
 
+        final int oldActiveMatch = this.activeMatch;
         this.activeMatch = activeMatch;
 
         StyledDocument doc = (StyledDocument) getDocument();
@@ -502,6 +508,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                 setCaretPosition(fstart);
             }
         });
+
+        firePropertyChange("activeMatch", oldActiveMatch, activeMatch);
     }
 
     /** Clears up the pane. */

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Aaron Madlon-Kay
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -33,6 +34,7 @@ import java.util.Locale;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
@@ -48,6 +50,7 @@ import org.omegat.util.TMXReader2;
  * Common utility class for external TMs.
  *
  * @author Aaron Madlon-Kay
+ * @author Hiroshi Miura
  *
  */
 public final class ExternalTMFactory {
@@ -60,17 +63,22 @@ public final class ExternalTMFactory {
     }
 
     public static ExternalTMX load(File file) throws Exception {
-        ProjectProperties props = Core.getProject().getProjectProperties();
+        return load(file, Core.getProject().getProjectProperties(), Core.getSegmenter(),
+                Core.getFilterMaster());
+    }
+
+    public static ExternalTMX load(File file, ProjectProperties props, Segmenter segmenter,
+                                   FilterMaster filterMaster) throws Exception {
         if (TMXLoader.isSupported(file)) {
-            return new TMXLoader(file)
+            return new TMXLoader(file, segmenter)
                     .setExtTmxLevel2(Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2))
                     .setUseSlash(Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
                     .setKeepForeignMatches(Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH))
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
-        } else if (BifileLoader.isSupported(file)) {
-            return new BifileLoader(file).setRemoveTags(props.isRemoveTags())
-                    .setRemoveSpaces(Core.getFilterMaster().getConfig().isRemoveSpacesNonseg())
+        } else if (BifileLoader.isSupported(file, filterMaster)) {
+            return new BifileLoader(file, segmenter, filterMaster).setRemoveTags(props.isRemoveTags())
+                    .setRemoveSpaces(filterMaster.getConfig().isRemoveSpacesNonseg())
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
         } else {
@@ -94,9 +102,15 @@ public final class ExternalTMFactory {
         private boolean useSlash;
         private boolean doSegmenting;
         private boolean keepForeignMatches;
+        private final Segmenter segmenter;
 
         public TMXLoader(File file) {
+            this(file, Core.getSegmenter());
+        }
+
+        public TMXLoader(File file, Segmenter segmenter) {
             this.file = file;
+            this.segmenter = segmenter;
         }
 
         public TMXLoader setExtTmxLevel2(boolean extTmxLevel2) {
@@ -167,7 +181,7 @@ public final class ExternalTMFactory {
 
                     List<String> sources = new ArrayList<String>();
                     List<String> targets = new ArrayList<String>();
-                    Core.getSegmenter().segmentEntries(doSegmenting && isParagraphSegtype, sourceLang,
+                    segmenter.segmentEntries(doSegmenting && isParagraphSegtype, sourceLang,
                             tuvSource.text, targetLang, tuvTarget.text, sources, targets);
 
                     for (int i = 0; i < sources.size(); i++) {
@@ -199,8 +213,13 @@ public final class ExternalTMFactory {
     }
 
     public static final class BifileLoader {
+
         public static boolean isSupported(File file) {
             FilterMaster fm = Core.getFilterMaster();
+            return isSupported(file, fm);
+        }
+
+        public static boolean isSupported(File file, FilterMaster fm) {
             try {
                 return fm.isFileSupported(file, true) && fm.isBilingualFile(file);
             } catch (Exception e) {
@@ -212,9 +231,17 @@ public final class ExternalTMFactory {
         private boolean removeTags;
         private boolean removeSpaces;
         private boolean doSegmenting;
+        private final Segmenter segmenter;
+        private final FilterMaster filterMaster;
 
         public BifileLoader(File file) {
+            this(file, Core.getSegmenter(), Core.getFilterMaster());
+        }
+
+        public BifileLoader(File file, Segmenter segmenter, FilterMaster filterMaster) {
             this.file = file;
+            this.segmenter = segmenter;
+            this.filterMaster = filterMaster;
         }
 
         public BifileLoader setRemoveTags(boolean removeTags) {
@@ -239,17 +266,11 @@ public final class ExternalTMFactory {
         private List<PrepareTMXEntry> loadImpl(Language sourceLang, Language targetLang) throws Exception {
             List<PrepareTMXEntry> entries = new ArrayList<>();
             ParseEntryResult throwaway = new ParseEntryResult();
-            Core.getFilterMaster().loadFile(file.getPath(),
+            filterMaster.loadFile(file.getPath(),
                     new FilterContext(sourceLang, targetLang, true).setRemoveAllTags(removeTags),
                     new IParseCallback() {
                         @Override
                         public void linkPrevNextSegments() {
-                        }
-
-                        @Override
-                        public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                                String comment, IFilter filter) {
-                            process(source, translation, id, comment, null, null);
                         }
 
                         @Override
@@ -279,7 +300,7 @@ public final class ExternalTMFactory {
 
                             List<String> sources = new ArrayList<>();
                             List<String> targets = new ArrayList<>();
-                            Core.getSegmenter().segmentEntries(doSegmenting, sourceLang, source, targetLang,
+                            segmenter.segmentEntries(doSegmenting, sourceLang, source, targetLang,
                                     target, sources, targets);
 
                             if (sources.size() == targets.size()) {

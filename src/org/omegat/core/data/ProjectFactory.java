@@ -4,8 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2008      Alex Buloichik
- Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2008 Alex Buloichik
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -34,8 +34,6 @@ import org.omegat.core.events.IProjectEventListener;
 /**
  * Factory for load project, create project, and create "not-loaded" project.
  *
- * TODO: change exception handling
- *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public final class ProjectFactory {
@@ -48,7 +46,7 @@ public final class ProjectFactory {
     }
 
     /**
-     * Create new project.
+     * Create a new project.
      */
     public static void createProject(ProjectProperties newProps) {
         RealProject p = new RealProject(newProps);

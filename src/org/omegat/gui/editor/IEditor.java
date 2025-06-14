@@ -510,4 +510,12 @@ public interface IEditor {
     default boolean isOrientationAllLtr() {
         return true;
     }
+
+    /**
+     * Get the current position in the entity translation in the editor
+     * @return caret position.
+     */
+    default CaretPosition getCurrentPositionInEntryTranslationInEditor() {
+        return CaretPosition.startOfEntry();
+    }
 }

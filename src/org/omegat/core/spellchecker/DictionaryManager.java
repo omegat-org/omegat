@@ -103,7 +103,7 @@ public class DictionaryManager {
      */
     public List<String> getLocalDictionaryCodeList() {
         List<String> result = new ArrayList<>();
-        for (DictionaryEntry entry : getLocalDictionaryEntries()) {
+        for (SpellingDictionaryEntry entry : getLocalDictionaryEntries()) {
             result.add(entry.languageCode);
         }
         return result;
@@ -112,8 +112,8 @@ public class DictionaryManager {
     /**
      * returns a list of available dictionaries.
      */
-    public List<DictionaryEntry> getLocalDictionaryEntries() {
-        List<DictionaryEntry> result = new ArrayList<>();
+    public List<SpellingDictionaryEntry> getLocalDictionaryEntries() {
+        List<SpellingDictionaryEntry> result = new ArrayList<>();
 
         // get all affix files
         String[] affixFiles = dir.list((d, name) -> name.endsWith(OConsts.SC_AFFIX_EXTENSION));
@@ -145,7 +145,8 @@ public class DictionaryManager {
                 }
 
                 if (match) {
-                    result.add(new DictionaryEntry(affixName, SpellCheckDictionaryType.HUNSPELL));
+                    result.add(new SpellingDictionaryEntry(affixName, SpellCheckDictionaryType.HUNSPELL,
+                                    true));
                 }
             }
         }
@@ -154,8 +155,15 @@ public class DictionaryManager {
         if (morfologikFiles != null) {
             for (String morfologikFile : morfologikFiles) {
                 String baseName = FilenameUtils.getBaseName(morfologikFile);
-                result.add(new DictionaryEntry(baseName, SpellCheckDictionaryType.MORFOLOGIK));
+                result.add(new SpellingDictionaryEntry(baseName, SpellCheckDictionaryType.MORFOLOGIK, true));
             }
+        }
+
+        for (String language: SpellCheckerManager.getHunspellDictionaryLanguages()) {
+            result.add(new SpellingDictionaryEntry(language, SpellCheckDictionaryType.HUNSPELL, false));
+        }
+        for (String language: SpellCheckerManager.getMorfologikDictionaryLanguages()) {
+            result.add(new SpellingDictionaryEntry(language, SpellCheckDictionaryType.MORFOLOGIK, false));
         }
 
         return result;
@@ -168,6 +176,7 @@ public class DictionaryManager {
      *            : the language code (xx_YY) of the dictionary to be deleted
      * @return true upon success, otherwise false
      */
+    @Deprecated
     public boolean uninstallDictionary(String lang) {
         if (lang == null || lang.isEmpty()) {
             return false;
@@ -250,6 +259,7 @@ public class DictionaryManager {
      * @param langCode
      *            : the language code (xx_YY)
      */
+    @Deprecated
     public void installRemoteDictionary(String langCode) throws IOException {
         String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) + "/" + langCode + ".zip";
 
@@ -265,13 +275,15 @@ public class DictionaryManager {
         HttpConnectionUtils.downloadZipFileAndExtract(new URL(from), dir, expectedFiles);
     }
 
-    public static class DictionaryEntry {
+    public static class SpellingDictionaryEntry {
         public String languageCode;
         public SpellCheckDictionaryType type;
+        public boolean custom;
 
-        public DictionaryEntry(String languageCode, SpellCheckDictionaryType type) {
+        public SpellingDictionaryEntry(String languageCode, SpellCheckDictionaryType type, boolean custom) {
             this.languageCode = languageCode;
             this.type = type;
+            this.custom = custom;
         }
     }
 

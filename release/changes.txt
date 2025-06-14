@@ -1,13 +1,28 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  51 Enhancement
-  81 Bug fixes
+  56 Enhancement
+  88 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
+
+  - Support Windows 11 and Linux on ARM64 for development environment
+    https://sourceforge.net/p/omegat/feature-requests/1773/
+
+  - Word selection according to the language of Source/Target by clicking in the editor pane
+  https://sourceforge.net/p/omegat/feature-requests/1770/
+
+  - Spell checker dictionary as a language module
+  https://sourceforge.net/p/omegat/feature-requests/1769/
+
+  - HunspellTokenizer to support stopwords
+  https://sourceforge.net/p/omegat/feature-requests/1767/
+
+  - Localize UI for genuine dialogs in various languages
+  https://sourceforge.net/p/omegat/feature-requests/1763/
 
   - Log filename to be date-time based
   https://sourceforge.net/p/omegat/feature-requests/1753/
@@ -155,6 +170,26 @@
 
 
   Bug fixes:
+
+  - Sometimes called SegmentProperties.onEntryActivated after closed a project
+  https://sourceforge.net/p/omegat/bugs/1291/
+
+  - Mismatch in method name causes exception when selecting "Open Writable Glossary File"
+  https://sourceforge.net/p/omegat/bugs/1290/
+
+  - Spellchecker raised NPE when writing word list file
+  https://sourceforge.net/p/omegat/bugs/1288/
+
+  - Uncaught exception in weekly build (2025-01-18)
+  https://sourceforge.net/p/omegat/bugs/1280/
+
+  - aligner average distance can be {0} which expected a numeric value
+  https://sourceforge.net/p/omegat/bugs/1275/
+
+  - fix: Glossary sort order: Change src length sort condition and use Language Dependent sorter
+
+  - Preferences/CutomColorSelector don't show notification immediately when modifying color
+  https://sourceforge.net/p/omegat/bugs/1273/
 
   - Speller: morfologik: LT bundled dictionary not found in Dutch
   https://sourceforge.net/p/omegat/bugs/1271/

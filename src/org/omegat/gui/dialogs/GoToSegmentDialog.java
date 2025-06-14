@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Henry Pijffers
-               2008, 2010 Alex Buloichik
+               2008-2010 Alex Buloichik
                2014 Aaron Madlon-Kay
                2015 Yu Tang, Aaron Madlon-Kay
                Home page: https://www.omegat.org/

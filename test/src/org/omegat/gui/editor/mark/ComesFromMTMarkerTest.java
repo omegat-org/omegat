@@ -41,6 +41,7 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.DataUtils;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -61,9 +62,11 @@ public class ComesFromMTMarkerTest extends MarkerTestBase {
         tmroot = Paths.get("test/data/tmx/");
         project = tmroot.resolve("mt/mt1.tmx"); // should under 'mt'
         TestCoreInitializer.initEditor(editor);
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        projectTMX = new ProjectTMX(new Language("en"), new Language("fr"), true,
-                project.toFile(), null);
+        Segmenter segmenter =  new Segmenter(SRX.getDefault());
+        Core.setSegmenter(segmenter);
+        projectTMX = new ProjectTMX();
+        projectTMX.load(new Language("en"), new Language("fr"), true,
+                project.toFile(), segmenter);
         Core.setProject(new NotLoadedProject() {
             @Override
             public boolean isProjectLoaded() {
@@ -147,15 +150,18 @@ public class ComesFromMTMarkerTest extends MarkerTestBase {
 
     @Test
     public void testNearString() {
-        final String sourceText = "source";
-        final String targetText = "target";
-        final String user = "translator";
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = "source";
+        entry.translation = "target";
+        entry.changer = "translator";
+        entry.creator = "translator";
+        entry.changeDate = 10000L;
+        entry.creationDate = 10000L;
         final int score = 75;
         final byte[] nearData = null;
-        final long date = 10000L;
-        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
-        NearString near = new NearString(key, sourceText, targetText, NearString.MATCH_SOURCE.TM, false,
-                score, score, score, nearData, project.toString(), user, date, user, date, Collections.emptyList());
+        EntryKey key = new EntryKey("file", entry.getSourceText(), "id", "prev", "next", "path");
+        NearString near = new NearString(key, entry, NearString.MATCH_SOURCE.TM, false,
+                new NearString.Scores(score, score, score), nearData, project.toString());
         assertThat(DataUtils.isFromMTMemory(near)).isTrue();
     }
 }

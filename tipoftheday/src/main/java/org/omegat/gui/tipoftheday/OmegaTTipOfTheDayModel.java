@@ -31,6 +31,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import tokyo.northside.tipoftheday.data.HtmlTipData;
@@ -63,88 +64,27 @@ public final class OmegaTTipOfTheDayModel implements TipOfTheDayModel {
     }
 
     private void initTips() {
-        try (InputStream is = TipOfTheDayUtils.getIndexStream(TipOfTheDayController.INDEX_YAML)) {
+        try (InputStream is = TipOfTheDayUtils.getIndexStream()) {
             if (is == null) {
                 return;
             }
-            Records data = mapper.readValue(is, Records.class);
+            JsonNode data = mapper.readTree(is);
             if (data != null) {
-                data.tips.forEach(this::addIfExist);
+                data.get("tips").forEach(this::addIfExist);
             }
         } catch (IOException e) {
             Log.log(e);
         }
     }
 
-    private void addIfExist(TipRecord tip) {
-        String title = tip.name;
-        String filename = tip.file;
+    private void addIfExist(JsonNode tip) {
+        String title = tip.get("name").asText();
+        String filename = tip.get("file").asText();
         URI uri = TipOfTheDayUtils.getTipsFileURI(filename);
         if (uri == null) {
             Log.logWarningRB("TIPOFTHEDAY_FILE_NOT_FOUND", filename);
             return;
         }
-        try {
-            boolean ignored = tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
-        } catch (IOException e) {
-            Log.logWarningRB("TIPOFTHEDAY_FILE_LOAD_EXCEPTION", e);
-        }
-    }
-
-    public static class Records {
-        private List<TipRecord> tips;
-
-        /**
-         * Return list of TipRecord object.
-         * @return list of TipRecord object.
-         */
-        public List<TipRecord> getTips() {
-            return tips;
-        }
-
-        /**
-         * Set list of TipRecord object.
-         * @param tips list of TipRecord object to set.
-         */
-        public void setTips(final List<TipRecord> tips) {
-            this.tips = tips;
-        }
-    }
-
-    public static class TipRecord {
-        private String name;
-        private String file;
-
-        /**
-         * Get a name of Tip record.
-         * @return name.
-         */
-        public String getName() {
-            return name;
-        }
-
-        /**
-         * Set a name of Tip record.
-         * @param name to set.
-         */
-        public void setName(final String name) {
-            this.name = name;
-        }
-
-        /**
-         * Get a HTML file.
-         * @return a HTML file.
-         */
-        public String getFile() {
-            return file;
-        }
-
-        /**
-         * set a HTML file.
-         * @param file to set.
-         */
-        public void setFile(final String file) {
-            this.file = file;
-        }
+        tips.add(DefaultTip.of(title, HtmlTipData.from(uri)));
     }
 }

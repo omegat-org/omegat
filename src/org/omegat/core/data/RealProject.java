@@ -1032,14 +1032,16 @@ public class RealProject implements IProject {
 
                         @Override
                         public void parseBaseFile(File file) throws Exception {
-                            baseTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, null);
+                            baseTMX = new ProjectTMX();
+                            baseTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
                         }
 
                         @Override
                         public void parseHeadFile(File file) throws Exception {
-                            headTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, null);
+                            headTMX = new ProjectTMX();
+                            headTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
                         }
 
                         @Override
@@ -1053,8 +1055,9 @@ public class RealProject implements IProject {
 
                         @Override
                         public void reload(File file) throws Exception {
-                            ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, null);
+                            ProjectTMX newTMX = new ProjectTMX();
+                            newTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
                             projectTMX.replaceContent(newTMX);
                         }
 
@@ -1214,8 +1217,9 @@ public class RealProject implements IProject {
         File file = new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
-                    config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
+            projectTMX = new ProjectTMX(checkOrphanedCallback);
+            projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
         } catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
@@ -1264,24 +1268,13 @@ public class RealProject implements IProject {
                 loadFilesCallback.fileFinished();
 
                 if (filter != null && !fi.entries.isEmpty()) {
-                    fi.filterClass = filter.getClass(); // Don't store the
-                                                        // instance, because
-                                                        // every file gets an
-                                                        // instance and
-                                                        // then we consume a lot
-                                                        // of memory for all
-                                                        // instances.
-                                                        // See also IFilter
-                                                        // "TODO: each filter
-                                                        // should be stateless"
+                    fi.filterClass = filter.getClass();
+                    // Don't store the instance, because
+                    // every file gets an instance and
+                    // then we consume a lot of memory for all
+                    // instances. See also IFilter
                     fi.filterFileFormatName = filter.getFileFormatName();
-                    try {
-                        fi.fileEncoding = filter.getInEncodingLastParsedFile();
-                    } catch (Error e) { // In case a filter doesn't have
-                                        // getInEncodingLastParsedFile() (e.g.,
-                                        // Okapi plugin)
-                        fi.fileEncoding = "";
-                    }
+                    fi.fileEncoding = filter.getInEncodingLastParsedFile();
                     projectFilesList.add(fi);
                 }
             } catch (TranslationException e) {

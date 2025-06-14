@@ -42,8 +42,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
+import org.omegat.util.Log;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -52,16 +51,12 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 import org.omegat.util.Token;
 
 /**
  * Abstract spell checker with method to handle ISpellCheckerProvider.
  */
 public abstract class AbstractSpellChecker implements ISpellChecker {
-
-    private static final ILogger LOGGER = LoggerFactory.getLogger(AbstractSpellChecker.class,
-            OStrings.getResourceBundle());
 
     /**
      * The spell checking provider.
@@ -87,17 +82,29 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      */
     private final Set<String> incorrectWordsCache = new HashSet<>();
 
-    /**
-     * the file name with the ignored words
-     */
-    private Path ignoreFilePath;
-
-    /**
-     * the file name with the learned words
-     */
-    private Path learnedFilePath;
-
     public AbstractSpellChecker() {
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            switch (eventType) {
+                case LOAD:
+                case CREATE:
+                    initialize();
+                    break;
+                case CLOSE:
+                    destroy();
+                    break;
+                default:
+                    // Nothing
+            }
+            resetCache();
+        });
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
+            public void onNewFile(String activeFileName) {
+                resetCache();
+            }
+
+            public void onEntryActivated(SourceTextEntry newEntry) {
+            }
+        });
     }
 
     /**
@@ -115,34 +122,11 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
                 .orElseGet(Optional::empty).orElse(null);
 
         if (checker == null) {
-            LOGGER.atInfo().logRB("SPELLCHECKER_LANGUAGE_NOT_FOUND", targetLanguage);
+            Log.logWarningRB("SPELLCHECKER_LANGUAGE_NOT_FOUND", targetLanguage);
             return false;
         } else {
-            loadWordLists();
-            CoreEvents.registerProjectChangeListener(eventType -> {
-                switch (eventType) {
-                    case LOAD:
-                    case CREATE:
-                        initialize();
-                        break;
-                    case CLOSE:
-                        destroy();
-                        break;
-                    default:
-                        // Nothing
-                }
-                resetCache();
-            });
-            CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-                public void onNewFile(String activeFileName) {
-                    resetCache();
-                }
-
-                public void onEntryActivated(SourceTextEntry newEntry) {
-                }
-            });
+            return loadWordLists();
         }
-        return true;
     }
 
     protected abstract Optional<ISpellCheckerProvider> initializeWithLanguage(String language);
@@ -153,63 +137,69 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
                 return true;
             }
             if (!file.isFile()) {
-                LOGGER.atWarn().logRB("SPELLCHECKER_DICTIONARY_NOT_FILE", file.getPath());
+                Log.logWarningRB("SPELLCHECKER_DICTIONARY_NOT_FILE", file.getPath());
                 return true;
             }
             if (!file.canRead()) {
-                LOGGER.atWarn().logRB("SPELLCHECKER_DICTIONARY_NOT_READ", file.getPath());
+                Log.logWarningRB("SPELLCHECKER_DICTIONARY_NOT_READ", file.getPath());
                 return true;
             }
             if (file.length() == 0L) {
                 // On OS X, attempting to load Hunspell with a zero-length .dic
                 // file causes
                 // a native exception that crashes the whole program.
-                LOGGER.atWarn().logRB("SPELLCHECKER_DICTIONARY_EMPTY", file.getPath());
+                Log.logWarningRB("SPELLCHECKER_DICTIONARY_EMPTY", file.getPath());
                 return true;
             }
             return false;
         } catch (Throwable ex) {
-            LOGGER.atWarn().setCause(ex).log();
+            Log.logWarningRB("SPELLCHECKER_DICTIONARY_FAILED_ACCESS", file.getPath(), ex.getLocalizedMessage());
             return true;
         }
     }
 
-    protected void loadWordLists() {
+    /**
+     * Loading word list files into ignoreList and learnedList collections.
+     * @return true when succeeded, otherwise false.
+     */
+    protected boolean loadWordLists() {
         // find out the internal project directory
         String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
 
         // load the ignored word list
-        ignoreFilePath = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME);
-
         ignoreList.clear();
-        if (ignoreFilePath.toFile().isFile()) {
+        Path ignoreFilePath = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME);
+        if (ignoreFilePath.toFile().exists() && ignoreFilePath.toFile().isFile() && ignoreFilePath.toFile().canRead()) {
             try {
                 ignoreList.addAll(Files.readAllLines(ignoreFilePath, StandardCharsets.UTF_8));
             } catch (Exception ex) {
-                LOGGER.atWarn().setCause(ex).log();
+                Log.logWarningRB("SPELLCHECKER_IGNORE_FILE_READ_ERROR", ex.getLocalizedMessage());
+                return false;
             }
         }
 
         // now the correct words
-        learnedFilePath = Paths.get(projectDir, OConsts.LEARNED_WORD_LIST_FILE_NAME);
-
         learnedList.clear();
-        if (learnedFilePath.toFile().isFile()) {
+        Path learnedFilePath = Paths.get(projectDir, OConsts.LEARNED_WORD_LIST_FILE_NAME);
+        if (learnedFilePath.toFile().exists() && learnedFilePath.toFile().isFile()
+                && learnedFilePath.toFile().canRead()) {
             try {
                 learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
                 learnedList.forEach(word -> checker.learnWord(word));
             } catch (Exception ex) {
-                LOGGER.atWarn().setCause(ex).log();
+                Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_READ_ERROR", ex.getLocalizedMessage());
+                return false;
             }
         }
+        return true;
     }
 
     /**
      * destroy the library
      */
     public void destroy() {
-        saveWordLists();
         if (checker != null) {
+            saveWordLists();
             checker.destroy();
             checker = null;
         }
@@ -226,16 +216,27 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * Save the word lists to disk
      */
     public void saveWordLists() {
+        // find out the internal project directory
+        String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
+
         // Write the ignored and learned words to the disk
-        try {
-            Files.write(ignoreFilePath, ignoreList);
-        } catch (IOException ex) {
-            LOGGER.atWarn().setCause(ex).log();
+        Path ignoreFilePath = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME);
+        if (ignoreFilePath.toFile().exists() && ignoreFilePath.toFile().isFile()
+                && ignoreFilePath.toFile().canWrite()) {
+            try {
+                Files.write(ignoreFilePath, ignoreList);
+            } catch (IOException ex) {
+                Log.logWarningRB("SPELLCHECKER_IGNORE_FILE_WRITE_ERROR", ex.getLocalizedMessage());
+            }
         }
-        try {
-            Files.write(learnedFilePath, learnedList);
-        } catch (IOException ex) {
-            LOGGER.atWarn().setCause(ex).log();
+        Path learnedFilePath = Paths.get(projectDir, OConsts.LEARNED_WORD_LIST_FILE_NAME);
+        if (learnedFilePath.toFile().exists() && learnedFilePath.toFile().isFile()
+                && learnedFilePath.toFile().canWrite()) {
+            try {
+                Files.write(learnedFilePath, learnedList);
+            } catch (IOException ex) {
+                Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_WRITE_ERROR", ex.getLocalizedMessage());
+            }
         }
     }
 
@@ -285,6 +286,11 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * return a list of strings as suggestions
      */
     public List<String> suggest(String word) {
+        // Check if a spellchecker is already initialized.
+        // If not, skip checking to prevent nullPointerErrors.
+        if (checker == null) {
+            return Collections.emptyList();
+        }
         if (isCorrect(word)) {
             return Collections.emptyList();
         }

@@ -1,0 +1,3 @@
+# Glossary in tab-separated format -*- coding: utf-8 -*-
+介绍      紹介
+中的      中心的な

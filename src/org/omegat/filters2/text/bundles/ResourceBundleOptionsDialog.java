@@ -1,9 +1,9 @@
 /**************************************************************************
-OmegaT - Computer Assisted Translation (CAT) tool
+ OmegaT - Computer Assisted Translation (CAT) tool
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013, 2015 Enrique Estevez
+ Copyright (C) 2013-2015 Enrique Estevez
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

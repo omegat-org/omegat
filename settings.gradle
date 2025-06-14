@@ -1,6 +1,28 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        // 'repository' for getting docbook xsd
+        ivy {
+            url = 'https://docbook.org/xml'
+            patternLayout {
+                artifact '[revision]/[module]-[revision].[ext]'
+            }
+            content {
+                includeGroup 'docbook'
+            }
+            metadataSources {
+                artifact()
+            }
+        }
+    }
+    // Include 'plugins build' to define convention plugins.
+    includeBuild("build-logic")
+}
+
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
-    id 'com.gradle.develocity' version '3.18.1'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+    id 'com.gradle.develocity' version '4.0.2'
 }
 develocity {
     buildScan {
@@ -12,13 +34,41 @@ develocity {
 rootProject.name = 'OmegaT'
 include("machinetranslators:apertium",
         "machinetranslators:belazar",
-        "machinetranslators:deepl",
         "machinetranslators:google",
         "machinetranslators:ibmwatson",
         "machinetranslators:mymemory",
         "machinetranslators:yandex",
         "machinetranslators:dummy",
-        "language-modules",
+        "language-modules:ar",
+        "language-modules:ast",
+        "language-modules:be",
+        "language-modules:br",
+        "language-modules:ca",
+        "language-modules:da",
+        "language-modules:de",
+        "language-modules:el",
+        "language-modules:en",
+        "language-modules:eo",
+        "language-modules:es",
+        "language-modules:fa",
+        "language-modules:fr",
+        "language-modules:ga",
+        "language-modules:gl",
+        "language-modules:it",
+        "language-modules:ja",
+        "language-modules:km",
+        "language-modules:nl",
+        "language-modules:pl",
+        "language-modules:pt",
+        "language-modules:ro",
+        "language-modules:ru",
+        "language-modules:sk",
+        "language-modules:sl",
+        "language-modules:sv",
+        "language-modules:ta",
+        "language-modules:tl",
+        "language-modules:uk",
+        "language-modules:zh",
         "aligner",
         "theme",
         "spellchecker:hunspell",

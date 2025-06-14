@@ -36,13 +36,16 @@ import java.util.Locale;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
@@ -197,9 +200,16 @@ public class MatchesVarExpansionTest {
         List<TMXProp> testProps = new ArrayList<>();
         testProps.add(new TMXProp("sourceLanguage", "mock source language"));
         testProps.add(new TMXProp("targetLanguage", "mock target language"));
-
-        return new NearString(null, "mock source text", "mock target text", null, false, 20, 40, 60, null,
-                "mock testing project", "mock creator", 20020523, "mock modifier", 20020523, testProps);
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = "mock source text";
+        entry.translation = "mock target text";
+        entry.creator = "mock creator";
+        entry.creationDate = 20020523;
+        entry.changer = "mock modifier";
+        entry.changeDate = 20020523;
+        entry.otherProperties = testProps;
+        NearString.Scores scores = new NearString.Scores(20, 40, 60);
+        return new NearString(null, entry, MATCH_SOURCE.TM, false, scores, null, "mock testing project");
     };
 
     private void setupProject(Language sourceLanguage, Language targetLanguage) {

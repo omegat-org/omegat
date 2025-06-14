@@ -48,6 +48,7 @@ import org.htmlparser.Text;
 import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
 import org.omegat.core.Core;
+import org.omegat.filters2.FilterContext;
 import org.omegat.util.HTMLUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -67,8 +68,11 @@ public class FilterVisitor extends NodeVisitor {
     protected HTMLFilter2 filter;
     private BufferedWriter writer;
     private HTMLOptions options;
+    @SuppressWarnings("unused")
+    private FilterContext filterContext;
 
-    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts) {
+    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts,
+                         FilterContext fc) {
         this.filter = htmlfilter;
         // HHC filter has no options
         if (opts != null) {
@@ -79,6 +83,7 @@ public class FilterVisitor extends NodeVisitor {
             this.options = new HTMLOptions(new TreeMap<>());
         }
         this.writer = bufwriter;
+        filterContext = fc;
     }
 
     // ///////////////////////////////////////////////////////////////////////

@@ -104,7 +104,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
     public static final String DEFAULT_TEMPLATE = VAR_ID + ". " + VAR_FUZZY_FLAG + VAR_SOURCE_TEXT + "\n"
             + VAR_TARGET_TEXT + "\n" + "<" + VAR_SCORE_BASE + "/" + VAR_SCORE_NOSTEM + "/"
-            + VAR_SCORE_ADJUSTED + "%" + VAR_MATCH_SOURCE + VAR_FILE_PATH + ">";
+            + VAR_SCORE_ADJUSTED + "%" + " " + VAR_MATCH_SOURCE + " " + VAR_FILE_PATH + ">";
 
     public static final Pattern PATTERN_SINGLE_PROPERTY = Pattern.compile("@\\{(.+?)\\}");
     public static final Pattern PATTERN_PROPERTY_GROUP = Pattern
@@ -227,14 +227,13 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     private String expandMatchSource(String localTemplate, NearString.MATCH_SOURCE comesFrom) {
         switch (comesFrom) {
         case TM:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM") + " ");
+            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM"));
         case FILES:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_FILES"));
         case MEMORY:
             return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY"));
         case SUBSEGMENTS:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString(
-                    "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_SUBSEGMENTS") + " ");
+            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_SUBSEGMENTS"));
         default:
             return localTemplate.replace(VAR_MATCH_SOURCE, "");
         }

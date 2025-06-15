@@ -220,7 +220,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             });
             return mw;
         });
-        frame = Objects.requireNonNull(mainWindow).getApplicationFrame();
+        if (mainWindow == null) {
+            throw new IllegalStateException("Main window is null.");
+        }
+        frame = mainWindow.getApplicationFrame();
         window = new FrameFixture(robot(), frame);
         window.show();
     }

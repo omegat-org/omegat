@@ -259,8 +259,6 @@ public abstract class TestFilterBase extends TestCore {
                 e.id = id;
                 e.source = source;
                 e.translation = translation;
-                e.isFuzzy = isFuzzy;
-                e.props = props;
                 e.path = path;
                 result.add(e);
             }
@@ -486,8 +484,6 @@ public abstract class TestFilterBase extends TestCore {
         public String id;
         public String source;
         public String translation;
-        public boolean isFuzzy;
-        public String[] props;
         public String path;
     }
 

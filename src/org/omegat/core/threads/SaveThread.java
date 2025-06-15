@@ -55,11 +55,13 @@ public class SaveThread extends Thread implements IAutoSave {
     private int waitDuration;
     private boolean needToSaveNow;
     private boolean enabled;
+    private boolean running;
 
     public SaveThread() {
         setName("Save thread");
         setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
                 Preferences.AUTO_SAVE_DEFAULT));
+        running = true;
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
             setWaitDuration((Integer) evt.getNewValue());
             synchronized (lock) {
@@ -81,14 +83,16 @@ public class SaveThread extends Thread implements IAutoSave {
         Log.logDebug("Enable autosave");
         enabled = true;
         needToSaveNow = false;
-        lock.notifyAll();
+        synchronized (lock) {
+            lock.notifyAll();
+        }
     }
 
     @Override
     public void run() {
         try {
-            while (true) {
-                synchronized (this) {
+            while (running) {
+                synchronized (lock) {
                     // Set the flag for saving. Clear the flag if the timer is
                     // reset.
                     needToSaveNow = true;
@@ -132,6 +136,19 @@ public class SaveThread extends Thread implements IAutoSave {
             System.exit(1);
         } catch (Exception ex) {
             Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
+        }
+    }
+
+    @Override
+    public void fin() {
+        running = false;
+        synchronized (lock) {
+            lock.notifyAll();
+       }
+       try {
+            join((long) waitDuration * 2);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
         }
     }
 }

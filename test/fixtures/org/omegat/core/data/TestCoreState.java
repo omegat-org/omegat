@@ -29,6 +29,8 @@ import org.omegat.core.threads.IAutoSave;
 public class TestCoreState extends CoreState {
 
     public static void resetState() {
+        CoreState.getInstance().setMainWindow(null);
+        CoreState.getInstance().setSaveThread(null);
         setTestInstance(new TestCoreState());
     }
 

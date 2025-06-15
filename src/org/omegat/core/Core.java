@@ -44,7 +44,6 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -110,7 +109,6 @@ public final class Core {
 
     // package-private for test fixture TestCoreInitializer
     static IGlossaries glossary;
-    private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
     private static INotes notes;
@@ -181,7 +179,7 @@ public final class Core {
     }
 
     public static IAutoSave getAutoSave() {
-        return saveThread;
+        return CoreState.getInstance().getAutoSave();
     }
 
     /** Get glossary instance. */
@@ -190,7 +188,7 @@ public final class Core {
     }
 
     public static GlossaryManager getGlossaryManager() {
-        return glossaryManager;
+        return CoreState.getInstance().getGlossaryManager();
     }
 
     /** Get notes instance. */
@@ -252,7 +250,8 @@ public final class Core {
 
         initializeGUIimpl(me);
 
-        new VersionCheckThread(10).start();
+        CoreState.getInstance().initializeSaveThread();
+        CoreState.getInstance().initializeVersionCheckThread();
     }
 
     /**
@@ -273,7 +272,7 @@ public final class Core {
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         glossary = glossaryArea;
-        glossaryManager = new GlossaryManager(glossaryArea);
+        CoreState.getInstance().setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
         notes = new NotesTextArea(me);
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);

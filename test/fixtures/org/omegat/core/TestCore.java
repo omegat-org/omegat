@@ -44,6 +44,7 @@ import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TestCoreState;
+import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
@@ -77,6 +78,16 @@ public abstract class TestCore {
         TestCoreState.getInstance().setProject(new NotLoadedProject());
 
         TestCoreInitializer.initEditor(createTestEditor());
+        TestCoreInitializer.initAutoSave(new IAutoSave() {
+            public void enable() {
+                // ignore all
+            }
+
+            public void disable() {
+                // ignore all
+            }
+        });
+
     }
 
     @After

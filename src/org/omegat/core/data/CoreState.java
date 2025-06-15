@@ -28,7 +28,9 @@ package org.omegat.core.data;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
+import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.main.IMainWindow;
 
 import java.util.Collections;
@@ -41,13 +43,22 @@ public class CoreState {
     private IAutoSave saveThread;
 
     protected CoreState() {
-        initializeSaveThread();
+        project = new NotLoadedProject();
     }
 
-    private void initializeSaveThread() {
+    public void initializeSaveThread() {
         SaveThread th = new SaveThread();
         saveThread = th;
         th.start();
+    }
+
+    public void initializeVersionCheckThread() {
+        VersionCheckThread th = new VersionCheckThread(10);
+        th.start();
+    }
+
+    public IAutoSave getAutoSave() {
+        return saveThread;
     }
 
     // For testing purposes
@@ -72,6 +83,7 @@ public class CoreState {
     private IProject project;
     private IMainWindow mainWindow;
     private IEditor editor;
+    private GlossaryManager glossaryManager;
 
     public boolean isProjectLoaded() {
         if (project == null) {
@@ -110,5 +122,13 @@ public class CoreState {
 
     public void setEditor(IEditor editor) {
         this.editor = editor;
+    }
+
+    public GlossaryManager getGlossaryManager() {
+        return glossaryManager;
+    }
+
+    public void setGlossaryManager(GlossaryManager glossaryManager) {
+        this.glossaryManager = glossaryManager;
     }
 }

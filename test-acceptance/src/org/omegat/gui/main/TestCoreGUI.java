@@ -171,10 +171,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
         assertFalse(Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true));
         // 2. Open a sample project.
+        final CoreState coreState = TestCoreState.getInstance();
         SwingUtilities.invokeAndWait(() -> {
             CountDownLatch latch = new CountDownLatch(1);
             CoreEvents.registerProjectChangeListener(event -> {
-                if (Core.getProject().isProjectLoaded()) {
+                if (coreState.getProject().isProjectLoaded()) {
                     latch.countDown();
                 }
             });
@@ -194,13 +195,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      */
     @Override
     protected void onTearDown() throws Exception {
-        Core.setProject(new NotLoadedProject());
+        TestCoreState.resetState();
         TestCoreInitializer.initMainWindow(null);
         mainWindow.getApplicationFrame().setVisible(false);
         window.cleanUp();
     }
-
-    private static boolean initialized = false;
 
     /**
      * set up OmegaT main window.
@@ -208,6 +207,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      */
     @Override
     protected void onSetUp() throws Exception {
+        TestCoreState.resetState();
         initialize();
         mainWindow = GuiActionRunner.execute(() -> {
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
@@ -227,34 +227,29 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     /**
      * Initialize OmegaT Core startup only once.
-     * @throws Exception when error occurred.
+     * @throws Exception when the error occurred.
      */
     protected void initialize() throws Exception {
-        if (!initialized) {
             Path tmp = Files.createTempDirectory("omegat");
-            FileUtils.forceDeleteOnExit(tmp.toFile());
-            RuntimePreferences.setConfigDir(tmp.toString());
-            TestMainInitializer.initClassloader();
-            // same order as Main.main
-            Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
-            FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-            Preferences.initFilters();
-            Preferences.initSegmentation();
-            TestCoreInitializer.initAutoSave(autoSave);
-            UIDesignManager.initialize();
-            Core.setProject(new NotLoadedProject());
-            initialized = true;
-        }
+        FileUtils.forceDeleteOnExit(tmp.toFile());
+        RuntimePreferences.setConfigDir(tmp.toString());
+        TestMainInitializer.initClassloader();
+        // same order as Main.main
+        Preferences.init();
+        TestCoreState.getInstance().setProject(new NotLoadedProject());
+        PluginUtils.loadPlugins(Collections.emptyMap());
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        Preferences.initFilters();
+        Preferences.initSegmentation();
+        TestCoreInitializer.initAutoSave(new IAutoSave() {
+            public void enable() {
+            }
+
+            public void disable() {
+            }
+        });
+        UIDesignManager.initialize();
     }
-
-    static IAutoSave autoSave = new IAutoSave() {
-        public void enable() {
-        }
-
-        public void disable() {
-        }
-    };
 
     static class TestMainWindowMenu extends BaseMainWindowMenu {
 

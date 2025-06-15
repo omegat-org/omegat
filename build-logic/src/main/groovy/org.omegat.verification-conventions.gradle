@@ -234,6 +234,28 @@ tasks.register('testAcceptance', Test) {
     dependsOn ':aligner:jar'
 }
 
+tasks.register('jacocoAcceptanceReport', JacocoReport) {
+    dependsOn(tasks.testAcceptance)
+    executionData(tasks.testAcceptance)
+    sourceSets(sourceSets.main)
+    group = 'verification'
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+tasks.register('jacocoIntegrationReport', JacocoReport) {
+    dependsOn(tasks.testIntegration)
+    executionData(tasks.testIntegration)
+    sourceSets(sourceSets.main)
+    group = 'verification'
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
 tasks.register('spotbugsReport') {
     // Reusable function to check and print the report for a given project
     def printReport = { project ->

@@ -128,7 +128,7 @@ public class ProjectPropertiesDialog extends JDialog {
      */
     private final Mode dialogType;
 
-    private final ProjectPropertiesDialogController controller;
+    private final transient ProjectPropertiesDialogController controller;
 
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
@@ -197,10 +197,10 @@ public class ProjectPropertiesDialog extends JDialog {
         getContentPane().add(scrollPane, "Center");
 
         Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
-        setName(OK_BUTTON_NAME);
+        okButton.setName(OK_BUTTON_NAME);
         getRootPane().setDefaultButton(okButton);
         Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
-        setName(CANCEL_BUTTON_NAME);
+        cancelButton.setName(CANCEL_BUTTON_NAME);
 
         Box southBox = Box.createHorizontalBox();
         southBox.setBorder(new EmptyBorder(5, 5, 5, 5));

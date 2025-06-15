@@ -70,6 +70,11 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
         mainWindow.getApplicationFrame().setEnabled(false);
     }
 
+    /** Edits project's properties */
+    public void projectEditMenuItemActionPerformed() {
+        ProjectUICommands.projectEditProperties();
+    }
+
     public void viewFileListMenuItemActionPerformed() {
         IProjectFilesList projWin = Core.getProjectFilesList();
         if (projWin == null) {

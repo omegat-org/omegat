@@ -32,6 +32,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,17 +74,14 @@ class TestMainWindow implements IMainWindow {
      */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException {
+    TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException,
+            NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         applicationFrame = new JFrame();
         applicationFrame.setPreferredSize(new Dimension(1920, 1040));
         font = FontUtil.getScaledFont();
-        try {
-            BaseMainWindowMenuHandler handler = mainWindowMenuHandler
-                    .getDeclaredConstructor(IMainWindow.class).newInstance(this);
-            menu = new TestCoreGUI.TestMainWindowMenu(this, handler);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        BaseMainWindowMenuHandler handler = mainWindowMenuHandler
+                .getDeclaredConstructor(IMainWindow.class).newInstance(this);
+        menu = new TestCoreGUI.TestMainWindowMenu(this, handler);
         applicationFrame.setJMenuBar(menu.mainMenu);
         applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 

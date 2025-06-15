@@ -41,6 +41,7 @@ import org.omegat.gui.editor.SegmentExportImport;
 import org.omegat.gui.exttrans.MachineTranslationInfo;
 import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.filters2.FiltersCustomizerController;
+import org.omegat.gui.notes.INotes;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.EditingBehaviorController;
 import org.omegat.gui.segmentation.SegmentationCustomizerController;
@@ -85,7 +86,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     public void editUndoMenuItemActionPerformed() {
         Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focused == Core.getNotes()) {
+        if (focused instanceof INotes) {
             Core.getNotes().undo();
         } else {
             Core.getEditor().undo();
@@ -94,7 +95,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
 
     public void editRedoMenuItemActionPerformed() {
         Component focused = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-        if (focused == Core.getNotes()) {
+        if (focused instanceof INotes) {
             Core.getNotes().redo();
         } else {
             Core.getEditor().redo();

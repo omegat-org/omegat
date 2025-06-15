@@ -75,7 +75,7 @@ public class NotesTextAreaTest extends TestCore {
         assertNull(holder.result);
     }
 
-    private class ResultHolder<T> {
+    private static class ResultHolder<T> {
         public T result;
     }
 

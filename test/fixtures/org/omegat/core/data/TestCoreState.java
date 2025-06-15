@@ -22,43 +22,22 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+package org.omegat.core.data;
 
-package org.omegat.core;
-
-import org.omegat.core.data.TestCoreState;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.glossary.IGlossaries;
-import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.gui.StaticUIUtils;
 
-/**
- * Core initializer for unit tests.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public final class TestCoreInitializer {
+public class TestCoreState extends CoreState {
 
-    private TestCoreInitializer() {
+    public static void resetState() {
+        setTestInstance(new TestCoreState());
     }
 
-    public static void initEditor(IEditor editor) {
-        TestCoreState.getInstance().setEditor(editor);
+    private static void setTestInstance(TestCoreState instance) {
+        CoreState.setInstance(instance);
     }
 
     public static void initAutoSave(IAutoSave autoSave) {
-        TestCoreState.initAutoSave(autoSave);
+        CoreState.getInstance().setSaveThread(autoSave);
     }
 
-    public static void initMainWindow(IMainWindow mainWindow) throws Exception {
-        TestCoreState.getInstance().setMainWindow(mainWindow);
-
-        if (StaticUIUtils.isGUI()) {
-            Core.initializeGUIimpl(mainWindow);
-        }
-    }
-
-    public static void initGlossary(IGlossaries glossaries) {
-        Core.glossary = glossaries;
-    }
 }

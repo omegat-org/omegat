@@ -43,6 +43,7 @@ import org.junit.Before;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
@@ -68,10 +69,24 @@ public abstract class TestCore {
 
     @Before
     public final void setUpCore() throws Exception {
+        TestCoreState.resetState();
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
 
-        final IMainMenu mainMenu = new IMainMenu() {
+        TestCoreState.getInstance().setMainWindow(createTestMainWindow());
+        TestCoreState.getInstance().setProject(new NotLoadedProject());
+
+        TestCoreInitializer.initEditor(createTestEditor());
+    }
+
+    @After
+    public final void tearDownCore() throws Exception {
+        TestCoreState.resetState();
+        FileUtils.forceDeleteOnExit(configDir);
+    }
+
+    private IMainMenu createTestMainMenu() {
+        return new IMainMenu() {
             private final JMenu projectMenu = new JMenu("Project");
             private final JMenu toolsMenu = new JMenu("Tools");
             private final JMenu gotoMenu = new JMenu("Goto");
@@ -177,22 +192,22 @@ public abstract class TestCore {
             @Override
             public JMenu getMenu(final MenuExtender.MenuKey marker) {
                 switch (marker) {
-                case PROJECT:
-                    return getProjectMenu();
-                case HELP:
-                    return getHelpMenu();
-                case OPTIONS:
-                    return getOptionsMenu();
-                case GOTO:
-                    return getGotoMenu();
-                case TOOLS:
-                    return getToolsMenu();
-                case EDIT:
-                    return new JMenu();
-                case VIEW:
-                    return new JMenu();
-                default:
-                    return new JMenu();
+                    case PROJECT:
+                        return getProjectMenu();
+                    case HELP:
+                        return getHelpMenu();
+                    case OPTIONS:
+                        return getOptionsMenu();
+                    case GOTO:
+                        return getGotoMenu();
+                    case TOOLS:
+                        return getToolsMenu();
+                    case EDIT:
+                        return new JMenu();
+                    case VIEW:
+                        return new JMenu();
+                    default:
+                        return new JMenu();
                 }
             }
 
@@ -222,8 +237,11 @@ public abstract class TestCore {
             public void invokeAction(String action, int modifiers) {
             }
         };
+    }
 
-        Core.setMainWindow(new IMainWindow() {
+    private IMainWindow createTestMainWindow() {
+        final IMainMenu mainMenu = createTestMainMenu();
+        return new IMainWindow() {
             public void addDockable(Dockable pane) {
             }
 
@@ -291,10 +309,11 @@ public abstract class TestCore {
 
             public void showLockInsertMessage(String messageText, String toolTip) {
             }
-        });
-        Core.setCurrentProject(new NotLoadedProject());
+        };
+    }
 
-        final IEditorSettings editorSettings = new IEditorSettings() {
+    private IEditorSettings createTestEditorSettings() {
+        return new IEditorSettings() {
 
             @Override
             public boolean isUseTabForAdvance() {
@@ -457,7 +476,11 @@ public abstract class TestCore {
                 return false;
             }
         };
-        TestCoreInitializer.initEditor(new IEditor() {
+    }
+
+    private IEditor createTestEditor() {
+        final IEditorSettings editorSettings = createTestEditorSettings();
+        return new IEditor() {
 
             @Override
             public void windowDeactivated() {
@@ -573,7 +596,7 @@ public abstract class TestCore {
 
             @Override
             public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-                    String markerClassName) {
+                                              String markerClassName) {
             }
 
             @Override
@@ -690,11 +713,6 @@ public abstract class TestCore {
             public boolean isOrientationAllLtr() {
                 return true;
             }
-        });
-    }
-
-    @After
-    public final void tearDownCore() throws Exception {
-        FileUtils.forceDeleteOnExit(configDir);
+        };
     }
 }

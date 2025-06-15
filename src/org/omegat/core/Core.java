@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
@@ -43,7 +44,6 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
@@ -98,10 +98,6 @@ public final class Core {
     private Core() {
     }
 
-    private static IProject currentProject;
-    private static IMainWindow mainWindow;
-    // package-private for test fixture TestCoreInitializer
-    static IEditor editor;
     private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
@@ -121,31 +117,29 @@ public final class Core {
     private static IComments comments;
     private static Segmenter segmenter;
 
-    private static Map<String, String> cmdLineParams = Collections.emptyMap();
-
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections
             .synchronizedList(new ArrayList<String>());
 
-    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
+    private static final List<IMarker> MARKERS = new ArrayList<>();
 
     /** Get project instance. */
     public static IProject getProject() {
-        return currentProject;
+        return CoreState.getInstance().getProject();
     }
 
     /** Set new current project. */
     public static void setProject(final IProject newCurrentProject) {
-        currentProject = newCurrentProject;
+        CoreState.getInstance().setProject(newCurrentProject);
     }
 
     /** Get main window instance. */
     public static IMainWindow getMainWindow() {
-        return mainWindow;
+        return CoreState.getInstance().getMainWindow();
     }
 
     /** Get editor instance. */
     public static IEditor getEditor() {
-        return editor;
+        return CoreState.getInstance().getEditor();
     }
 
     /** Get tag validation component instance. */
@@ -235,7 +229,7 @@ public final class Core {
      * @throws Exception when error occurred.
      * @deprecated since 6.1.0
      */
-    @Deprecated(since = "6.1.0")
+    @Deprecated(since = "6.1.0", forRemoval = true)
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
         initializeGUI(params);
     }
@@ -244,23 +238,20 @@ public final class Core {
      * Initialize application components.
      */
     public static void initializeGUI(final Map<String, String> params) throws Exception {
-        cmdLineParams = params;
+        CoreState.getInstance().setCmdLineParams(params);
 
         // 1. Initialize project
-        currentProject = new NotLoadedProject();
+        CoreState.getInstance().setProject(new NotLoadedProject());
 
         // 2. Initialize theme
         UIDesignManager.initialize();
 
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
-        mainWindow = me;
+        CoreState.getInstance().setMainWindow(me);
 
         initializeGUIimpl(me);
 
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
         new VersionCheckThread(10).start();
     }
 
@@ -276,7 +267,7 @@ public final class Core {
         filterMaster = new FilterMaster(Preferences.getFilters());
 
         // 4. Initialize other components. They add themselves to the main window.
-        editor = new EditorController(me);
+        CoreState.getInstance().setEditor(new EditorController(me));
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me.getApplicationFrame());
         matcher = new MatchesTextArea(me);
@@ -299,10 +290,10 @@ public final class Core {
      * Initialize application components.
      */
     public static void initializeConsole(final Map<String, String> params) {
-        cmdLineParams = params;
+        CoreState.getInstance().setCmdLineParams(params);
         tagValidation = new TagValidationTool();
-        currentProject = new NotLoadedProject();
-        mainWindow = new ConsoleWindow();
+        CoreState.getInstance().setProject(new NotLoadedProject());
+        CoreState.getInstance().setMainWindow(new ConsoleWindow());
     }
 
     /**
@@ -311,16 +302,7 @@ public final class Core {
      * @param mainWindow
      */
     protected static void setMainWindow(IMainWindow mainWindow) {
-        Core.mainWindow = mainWindow;
-    }
-
-    /**
-     * Set project instance for unit tests.
-     *
-     * @param currentProject
-     */
-    protected static void setCurrentProject(IProject currentProject) {
-        Core.currentProject = currentProject;
+        CoreState.getInstance().setMainWindow(mainWindow);
     }
 
     /**
@@ -338,7 +320,7 @@ public final class Core {
     }
 
     public static Map<String, String> getParams() {
-        return cmdLineParams;
+        return CoreState.getInstance().getCmdLineParams();
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {

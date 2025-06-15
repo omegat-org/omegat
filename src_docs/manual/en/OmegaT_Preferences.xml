@@ -890,16 +890,11 @@
 		</listitem>
 	  </varlistentry>
 
-		<varlistentry>
-			<term>Activate segment with single click</term>
+		<varlistentry id="dialogs.preferences.editor.activate.segment.with.single.click">
+			<term id="dialogs.preferences.editor.activate.segment.with.single.click.title"><link linkend="dialogs.preferences.editor.activate.segment.with.single.click"> </link><option>Activate segment with single click</option></term>
 			<listitem>
-				<para>For some people, double-clicking can cause a strain on the fingers, wrist and elbow if it needs to be done too often. In OmegaT, the way to move to another segment far away from the active segment is by double-clicking it. There is no other way to move directly to another segment (e.g. right-click menu). </para>
-				<para>When enables this option, OmegaT change the behavior;
-					1. single clicking any segment causes OmegaT to make that segment the active segment
-					2. F2 temporarily disables it (i.e. F2 does what it always does, i.e. it allows the cursor to move to other segments, but now it also allows you to click in other segments without moving there).
-					3. When this option is active, and F2 is active, double-clicking a word should select it (i.e. not move to the segment).
-				</para>
-				<para>The feature is only active while the cursor is locked.</para>
+				<para>By default, OmegaT requires a double-click to enter the segment under the cursor. Use this option if you prefer to enter segments with a single-click.</para>
+				<note><para>This functionality is temporarily disabled while the cursor is unlocked using F2.</para></note>
 			</listitem>
 		</varlistentry>
 

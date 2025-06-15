@@ -45,5 +45,6 @@ public interface IAutoSave {
     /**
      * finish thread.
      */
-    default void fin() {}
+    default void fin() {
+    }
 }

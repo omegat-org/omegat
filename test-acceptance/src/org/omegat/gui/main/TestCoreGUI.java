@@ -232,7 +232,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      * @throws Exception when the error occurred.
      */
     protected void initialize() throws Exception {
-            Path tmp = Files.createTempDirectory("omegat");
+        Path tmp = Files.createTempDirectory("omegat");
         FileUtils.forceDeleteOnExit(tmp.toFile());
         RuntimePreferences.setConfigDir(tmp.toString());
         TestMainInitializer.initClassloader();

@@ -256,6 +256,7 @@ public final class Core {
 
     /**
      * initialize GUI body.
+     * 
      * @throws Exception
      */
     static void initializeGUIimpl(IMainWindow me) throws Exception {
@@ -265,14 +266,16 @@ public final class Core {
         segmenter = new Segmenter(Preferences.getSRX());
         filterMaster = new FilterMaster(Preferences.getFilters());
 
-        // 4. Initialize other components. They add themselves to the main window.
+        // 4. Initialize other components. They add themselves to the main
+        // window.
         CoreState.getInstance().setEditor(new EditorController(me));
         tagValidation = new TagValidationTool();
         issuesWindow = new IssuesPanelController(me.getApplicationFrame());
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         glossary = glossaryArea;
-        CoreState.getInstance().setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
+        CoreState.getInstance()
+                .setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
         notes = new NotesTextArea(me);
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);

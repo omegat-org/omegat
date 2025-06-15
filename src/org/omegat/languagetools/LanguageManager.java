@@ -65,7 +65,7 @@ public final class LanguageManager {
             return null;
         }
         // search for language-country code.
-        String fqcn = LT_LANGUAGE_CLASSES.get(lang.getLanguage());
+        String fqcn = LT_LANGUAGE_CLASSES.get(lang.getLanguage().replace("_", "-"));
         if (fqcn != null) {
             result = Languages.getOrAddLanguageByClassName(fqcn);
         }

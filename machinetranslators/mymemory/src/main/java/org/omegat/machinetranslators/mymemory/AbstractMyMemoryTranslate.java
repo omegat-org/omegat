@@ -1,10 +1,9 @@
 /*******************************************************************************
-
   OmegaT - Computer Assisted Translation (CAT) tool
            with fuzzy matching, translation memory, keyword search,
            glossaries, and translation leveraging into updated projects.
 
-  Copyright (c) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
+  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                 2013 Martin Wunderlich
                 2014 Manfred Martin
                 2015 Didier Briel

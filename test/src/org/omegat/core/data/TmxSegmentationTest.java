@@ -52,8 +52,7 @@ public class TmxSegmentationTest {
         props.setSourceLanguage(new Language("en"));
         props.setTargetLanguage(new Language("fr"));
         props.setSentenceSegmentingEnabled(true);
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/resegmenting.tmx"),
-                new ProjectTMX.CheckOrphanedCallback() {
+        ProjectTMX tmx = new ProjectTMX(new ProjectTMX.CheckOrphanedCallback() {
                     public boolean existSourceInProject(String src) {
                         return true;
                     }
@@ -62,7 +61,8 @@ public class TmxSegmentationTest {
                         return true;
                     }
                 });
-
+        tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
+                new File("test/data/tmx/resegmenting.tmx"), Core.getSegmenter());
         assertEquals(2, tmx.defaults.size());
         assertEquals("Ceci est un test.", tmx.defaults.get("This is test.").getTranslationText());
         assertEquals("Juste un test.", tmx.defaults.get("Just a test.").getTranslationText());

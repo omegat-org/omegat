@@ -7,7 +7,6 @@
                2009 Didier Briel
                2011 Guido Leenders, Didier Briel
                2012 Guido Leenders
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

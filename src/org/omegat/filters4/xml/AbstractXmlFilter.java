@@ -6,7 +6,7 @@
  Copyright (C) 2017 Thomas Cordonnier
                2024 Hiroshi Miura
                Home page: https://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 

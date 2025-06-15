@@ -6,7 +6,6 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Didier Briel
                2017 Didier Briel
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

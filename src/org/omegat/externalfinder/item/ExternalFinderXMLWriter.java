@@ -54,6 +54,7 @@ public class ExternalFinderXMLWriter {
     public void write(ExternalFinderConfiguration config) throws Exception {
         Document doc = createDocument(config);
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        transformerFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
@@ -64,6 +65,7 @@ public class ExternalFinderXMLWriter {
 
     private Document createDocument(ExternalFinderConfiguration config) throws Exception {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        docFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl",  true);
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
 
@@ -91,12 +93,12 @@ public class ExternalFinderXMLWriter {
         if (i.isNopopup()) {
             item.setAttribute("nopopup", Boolean.TRUE.toString());
         }
-        {
-            // name
-            Element name = doc.createElement("name");
-            name.setTextContent(i.getName());
-            item.appendChild(name);
-        }
+
+        // name
+        Element name = doc.createElement("name");
+        name.setTextContent(i.getName());
+        item.appendChild(name);
+
         for (ExternalFinderItemURL u : i.getURLs()) {
             // url
             item.appendChild(createUrl(doc, u));
@@ -105,13 +107,12 @@ public class ExternalFinderXMLWriter {
             // command
             item.appendChild(createCommand(doc, c));
         }
-        {
-            // keystroke
-            if (i.getKeystroke() != null) {
-                Element keystroke = doc.createElement("keystroke");
-                keystroke.setTextContent(i.getKeystroke().toString());
-                item.appendChild(keystroke);
-            }
+
+        // keystroke
+        if (i.getKeystroke() != null) {
+            Element keystroke = doc.createElement("keystroke");
+            keystroke.setTextContent(i.getKeystroke().toString());
+            item.appendChild(keystroke);
         }
 
         return item;

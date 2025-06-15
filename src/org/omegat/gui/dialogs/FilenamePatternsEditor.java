@@ -126,17 +126,17 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnAdd;
-    public javax.swing.JButton btnCancel;
-    public javax.swing.JButton btnOk;
-    public javax.swing.JButton btnRemove;
-    public javax.swing.JPanel jPanel1;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JPanel jPanel5;
-    public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JLabel labelHelp;
-    public javax.swing.JTable table;
+    javax.swing.JButton btnAdd;
+    javax.swing.JButton btnCancel;
+    javax.swing.JButton btnOk;
+    javax.swing.JButton btnRemove;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelHelp;
+    javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

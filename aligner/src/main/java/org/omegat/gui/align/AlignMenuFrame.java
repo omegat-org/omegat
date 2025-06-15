@@ -91,7 +91,6 @@ public class AlignMenuFrame extends javax.swing.JFrame {
         fileFilterSettingsItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(fileMenu, BUNDLE.getString("ALIGNER_MENU_FILE")); // NOI18N
 
@@ -208,38 +207,38 @@ public class AlignMenuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JMenuItem clearMarkItem;
-    public javax.swing.JMenuItem closeItem;
-    public javax.swing.JMenuItem editItem;
-    public javax.swing.JMenu editMenu;
-    public javax.swing.JMenuItem fileFilterSettingsItem;
-    public javax.swing.JMenu fileMenu;
-    public javax.swing.JCheckBoxMenuItem highlightItem;
-    public javax.swing.JMenuItem highlightPatternItem;
+    javax.swing.JMenuItem clearMarkItem;
+    javax.swing.JMenuItem closeItem;
+    javax.swing.JMenuItem editItem;
+    javax.swing.JMenu editMenu;
+    javax.swing.JMenuItem fileFilterSettingsItem;
+    javax.swing.JMenu fileMenu;
+    javax.swing.JCheckBoxMenuItem highlightItem;
+    javax.swing.JMenuItem highlightPatternItem;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    public javax.swing.JMenuItem keepAllItem;
-    public javax.swing.JMenuItem keepNoneItem;
-    public javax.swing.JMenuItem markAcceptedItem;
-    public javax.swing.JMenuItem markNeedsReviewItem;
+    javax.swing.JMenuItem keepAllItem;
+    javax.swing.JMenuItem keepNoneItem;
+    javax.swing.JMenuItem markAcceptedItem;
+    javax.swing.JMenuItem markNeedsReviewItem;
     private javax.swing.JMenuBar menuBar;
-    public javax.swing.JMenuItem mergeItem;
-    public javax.swing.JMenuItem moveDownItem;
-    public javax.swing.JMenuItem moveUpItem;
-    public javax.swing.JMenu optionsMenu;
-    public javax.swing.JMenuItem pinpointAlignCancelItem;
-    public javax.swing.JMenuItem pinpointAlignEndItem;
-    public javax.swing.JMenuItem pinpointAlignStartItem;
-    public javax.swing.JMenuItem realignPendingItem;
-    public javax.swing.JMenuItem reloadItem;
-    public javax.swing.JCheckBoxMenuItem removeTagsItem;
-    public javax.swing.JMenuItem resetItem;
-    public javax.swing.JMenuItem saveItem;
-    public javax.swing.JCheckBoxMenuItem segmentingItem;
-    public javax.swing.JMenuItem segmentingRulesItem;
-    public javax.swing.JMenuItem splitItem;
-    public javax.swing.JMenuItem toggleSelectedItem;
-    public javax.swing.JMenu viewMenu;
+    javax.swing.JMenuItem mergeItem;
+    javax.swing.JMenuItem moveDownItem;
+    javax.swing.JMenuItem moveUpItem;
+    javax.swing.JMenu optionsMenu;
+    javax.swing.JMenuItem pinpointAlignCancelItem;
+    javax.swing.JMenuItem pinpointAlignEndItem;
+    javax.swing.JMenuItem pinpointAlignStartItem;
+    javax.swing.JMenuItem realignPendingItem;
+    javax.swing.JMenuItem reloadItem;
+    javax.swing.JCheckBoxMenuItem removeTagsItem;
+    javax.swing.JMenuItem resetItem;
+    javax.swing.JMenuItem saveItem;
+    javax.swing.JCheckBoxMenuItem segmentingItem;
+    javax.swing.JMenuItem segmentingRulesItem;
+    javax.swing.JMenuItem splitItem;
+    javax.swing.JMenuItem toggleSelectedItem;
+    javax.swing.JMenu viewMenu;
     // End of variables declaration//GEN-END:variables
 }

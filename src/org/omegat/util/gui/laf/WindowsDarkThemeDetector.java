@@ -41,9 +41,6 @@ public class WindowsDarkThemeDetector extends SystemDarkThemeDetector {
             + "\\Personalize";
     private static final String REGISTRY_VALUE = "AppsUseLightTheme";
 
-    public WindowsDarkThemeDetector() {
-    }
-
     @Override
     public boolean isDark() {
         try {

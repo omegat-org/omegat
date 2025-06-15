@@ -94,13 +94,13 @@ public class EditingPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton cancelButton;
-    public javax.swing.JEditorPane editorPane;
-    public javax.swing.JLabel helpText;
+    javax.swing.JButton cancelButton;
+    javax.swing.JEditorPane editorPane;
+    javax.swing.JLabel helpText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    public javax.swing.JButton okButton;
-    public javax.swing.JScrollPane scrollPane;
+    javax.swing.JButton okButton;
+    javax.swing.JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }

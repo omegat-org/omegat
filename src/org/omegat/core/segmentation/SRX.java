@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
-               2018 Thomas Cordonnier
+               2018,2025 Thomas Cordonnier
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,8 +27,6 @@
 
 package org.omegat.core.segmentation;
 
-import java.beans.ExceptionListener;
-import java.beans.XMLDecoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,6 +43,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DatabindException;
@@ -65,7 +67,11 @@ import gen.core.segmentation.Srx;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
- * It loads and saves its data from/to SRX file.
+ * It loads and saves its data from/to the SRX file.
+ * <p>
+ * When creating an SRX object with the default constructor, you get an empty
+ * SRX without any rules. Please do not use default constructor, unless you
+ * know what you are doing.
  *
  * @author Maxym Mykhalchuk
  * @author Thomas Cordonnier
@@ -95,13 +101,6 @@ public class SRX implements Serializable {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
-    /**
-     * Creates an empty SRX, without any rules.
-     * <p>
-     * Please do not call directly unless you know what you are doing.
-     */
-    public SRX() {
-    }
 
     public SRX copy() {
         SRX result = new SRX();
@@ -148,11 +147,20 @@ public class SRX implements Serializable {
         jaxbObject.getBody().setLanguagerules(factory.createLanguagerules());
         for (MapRule mr : srx.getMappingRules()) {
             Languagemap map = new Languagemap();
-            map.setLanguagerulename(mr.getLanguage());
-            map.setLanguagepattern(mr.getPattern());
+            String pattern = mr.getPattern();
+            // we use standard name
+            String language = LanguageCodes.getLanguageCodeByPattern(pattern);
+            if (language == null) {
+                language = LanguageCodes.getLanguageCodeByName(mr.getLanguage());
+            }
+            if (language == null) {
+                language = mr.getLanguage();
+            }
+            map.setLanguagerulename(language);
+            map.setLanguagepattern(pattern);
             jaxbObject.getBody().getMaprules().getLanguagemap().add(map);
             Languagerule lr = new Languagerule();
-            lr.setLanguagerulename(mr.getLanguage());
+            lr.setLanguagerulename(language);
             jaxbObject.getBody().getLanguagerules().getLanguagerule().add(lr);
             for (Rule rule : mr.getRules()) {
                 gen.core.segmentation.Rule jaxbRule = factory.createRule();
@@ -195,13 +203,11 @@ public class SRX implements Serializable {
         // If file was not present or not readable
         inFile = new File(configDir, CONF_SENTSEG);
         if (inFile.exists()) {
-            SRX srx = loadConfFile(inFile);
             try {
-                saveToSrx(srx, configDir);
-            } catch (Exception o3) {
-                Log.log(o3); // detail why conversion failed, but continue
+                return loadConfFile(inFile, configDir);
+            } catch (Exception ex) {
+                return SRX.getDefault();
             }
-            return srx;
         }
 
         // If none of the files (conf and srx) are present,
@@ -217,43 +223,29 @@ public class SRX implements Serializable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    private static SRX loadConfFile(File configFile) {
-        SRX res;
+    static SRX loadConfFile(File configFile, File configDir) throws Exception {
         try {
-            SRX.MyExceptionListener myel = new SRX.MyExceptionListener();
-            try (XMLDecoder xmldec = new XMLDecoder(new FileInputStream(configFile), null, myel)) {
-                res = (SRX) xmldec.readObject();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            // add XSLT in Transformer
+            Transformer transformer = transformerFactory.newTransformer(new StreamSource(
+                SRX.class.getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));
+            File dest = new File(configDir, SRX_SENTSEG);
+            try (FileOutputStream fos = new FileOutputStream(dest)) { 
+                transformer.transform(new StreamSource(configFile), new StreamResult(fos));
             }
-
-            if (myel.isExceptionOccured()) {
-                StringBuilder sb = new StringBuilder();
-                for (Exception ex : myel.getExceptionsList()) {
-                    sb.append("    ");
-                    sb.append(ex);
-                    sb.append("\n");
-                }
-                Log.logErrorRB("CORE_SRX_EXC_LOADING_SEG_RULES", sb.toString());
-                return SRX.getDefault();
+            configFile.delete();
+            try (FileInputStream fis = new FileInputStream(dest)) {
+                return loadSrxInputStream(fis);
             }
-
-            // checking the version
-            if (CURRENT_VERSION.compareTo(res.getVersion()) > 0) {
-                // yeap, the segmentation config file is of the older version
-
-                // initing defaults
-                SRX defaults = SRX.getDefault();
-                // and merging them into loaded rules
-                res = merge(res, defaults);
-            }
-            Log.logInfoRB("SRX_RULE_FROM", configFile);
         } catch (Exception e) {
             // silently ignoring FNF
             if (!(e instanceof FileNotFoundException)) {
                 Log.log(e);
+                return null;
+            } else {
+                throw e;
             }
-            res = SRX.getDefault();
-        }
-        return res;
+        }        
     }
 
     private static SRX loadSrxFile(URI rulesUri) {
@@ -278,7 +270,9 @@ public class SRX implements Serializable {
         res.setCascade(!"no".equalsIgnoreCase(srx.getHeader().getCascade()));
         res.setVersion(srx.getVersion());
         res.setMappingRules(srx.getBody().getMaprules().getLanguagemap().stream()
-                .map(s -> new MapRule(s, mapping.get(s.getLanguagerulename()))).collect(Collectors.toList()));
+                .map(languagemap -> new MapRule(languagemap.getLanguagerulename(),
+                        languagemap.getLanguagepattern(), mapping.get(languagemap.getLanguagerulename())))
+                .collect(Collectors.toList()));
         return res;
     }
 
@@ -390,34 +384,6 @@ public class SRX implements Serializable {
             }
         }
         return null;
-    }
-
-    /**
-     * My Own Class to listen to exceptions, occured while loading filters
-     * configuration.
-     */
-    static class MyExceptionListener implements ExceptionListener {
-        private List<Exception> exceptionsList = new ArrayList<Exception>();
-        private boolean exceptionOccured = false;
-
-        public void exceptionThrown(Exception e) {
-            exceptionOccured = true;
-            exceptionsList.add(e);
-        }
-
-        /**
-         * Returns whether any exceptions occured.
-         */
-        public boolean isExceptionOccured() {
-            return exceptionOccured;
-        }
-
-        /**
-         * Returns the list of occured exceptions.
-         */
-        public List<Exception> getExceptionsList() {
-            return exceptionsList;
-        }
     }
 
     // Patterns

@@ -34,6 +34,7 @@ import java.util.TreeMap;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.html2.HTMLOptions;
@@ -142,8 +143,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1J() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
-        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"),
-                orphanedCallback);
+        final ProjectTMX tmx = new ProjectTMX(orphanedCallback);
+        tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
+                new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), Core.getSegmenter());
         tmx.exportTMX(props, outFile, false, false, false);
         // TODO validate via TMXCheck
     }
@@ -155,8 +157,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1K() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
-        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"),
-                orphanedCallback);
+        final ProjectTMX tmx = new ProjectTMX(orphanedCallback);
+        tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
+                new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"), Core.getSegmenter());
         assertEquals(0, tmx.defaults.size());
     }
 
@@ -377,7 +380,9 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
         assertEquals(sources.size(), translations.size());
 
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(orphanedCallback);
+        tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile,
+                Core.getSegmenter());
 
         for (int i = 0; i < sources.size(); i++) {
             tmx.defaults.put(sources.get(i), createTMXEntry(sources.get(i), translations.get(i), true));

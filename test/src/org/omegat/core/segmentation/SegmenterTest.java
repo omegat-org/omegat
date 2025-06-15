@@ -40,7 +40,7 @@ import org.omegat.util.Language;
  */
 public class SegmenterTest {
 
-    private Segmenter segmenter = new Segmenter(SRX.getDefault());
+    private final Segmenter segmenter = new Segmenter(SRX.getDefault());
 
     /**
      * Test of segment method, of class org.omegat.core.segmentation.Segmenter.

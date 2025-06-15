@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
- Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2009 Alex Buloichik
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support

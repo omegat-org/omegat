@@ -55,8 +55,9 @@ public class ComesFromAutoTMMarkerTest extends MarkerTestBase {
     public void preUp() throws Exception {
         TestCoreInitializer.initEditor(editor);
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        projectTMX = new ProjectTMX(new Language("en"), new Language("fr"), true,
-                    Paths.get("test/data/autotmx/auto1.tmx").toFile(), null);
+        projectTMX = new ProjectTMX();
+        projectTMX.load(new Language("en"), new Language("fr"), true,
+                    Paths.get("test/data/autotmx/auto1.tmx").toFile(), Core.getSegmenter());
         Core.setProject(new NotLoadedProject() {
             @Override
             public boolean isProjectLoaded() {

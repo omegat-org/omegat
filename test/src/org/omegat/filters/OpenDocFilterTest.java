@@ -26,6 +26,7 @@
 package org.omegat.filters;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.net.URL;
@@ -64,5 +65,11 @@ public class OpenDocFilterTest extends TestFilterBase {
         checkMulti("This is first line.", null, null, "", "This is second line.", null);
         checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
+    }
+
+    @Test
+    public void testIsFileSupported() throws Exception {
+        File target = new File("test/data/filters/openDoc/file-OpenDocFilter.odt");
+        assertTrue(new OpenDocFilter().isFileSupported(target, null, null));
     }
 }

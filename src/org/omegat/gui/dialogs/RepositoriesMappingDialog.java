@@ -109,6 +109,11 @@ public class RepositoriesMappingDialog extends javax.swing.JDialog {
 
         org.openide.awt.Mnemonics.setLocalizedText(btnRepoRemove, OStrings.getString("RMD_BTN_REMOVE")); // NOI18N
         btnRepoRemove.setEnabled(false);
+        btnRepoRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRepoRemoveActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -185,27 +190,31 @@ public class RepositoriesMappingDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRepoRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepoRemoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRepoRemoveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnMappingAdd;
-    public javax.swing.JButton btnMappingRemove;
-    public javax.swing.JButton btnRepoAdd;
-    public javax.swing.JButton btnRepoRemove;
-    public javax.swing.JButton cancelButton;
-    public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel2;
-    public javax.swing.JPanel jPanel1;
-    public javax.swing.JPanel jPanel2;
-    public javax.swing.JPanel jPanel3;
-    public javax.swing.JPanel jPanel4;
-    public javax.swing.JPanel jPanel5;
-    public javax.swing.JPanel jPanel6;
-    public javax.swing.JPanel jPanel7;
-    public javax.swing.JPanel jPanel8;
-    public javax.swing.JPanel jPanel9;
-    public javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JButton okButton;
-    public javax.swing.JTable tableMapping;
-    public javax.swing.JTable tableRepositories;
+    javax.swing.JButton btnMappingAdd;
+    javax.swing.JButton btnMappingRemove;
+    javax.swing.JButton btnRepoAdd;
+    javax.swing.JButton btnRepoRemove;
+    javax.swing.JButton cancelButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    javax.swing.JScrollPane jScrollPane1;
+    javax.swing.JScrollPane jScrollPane2;
+    javax.swing.JButton okButton;
+    javax.swing.JTable tableMapping;
+    javax.swing.JTable tableRepositories;
     // End of variables declaration//GEN-END:variables
 }

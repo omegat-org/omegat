@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -104,11 +105,15 @@ public class LingvoDSL implements IDictionaryFactory {
     }
 
     static class LingvoDSLDict implements IDictionary {
-        protected final DslDictionary data;
-        private final HtmlVisitor htmlVisitor;
+        private final Path dictPath;
+        private final Path indexPath;
+        private final boolean validateIndexAbsPath;
+
+        private DslDictionary data;
+        private HtmlVisitor htmlVisitor;
 
         /**
-         * Constructor of LingvoDSL Dictionary driver.
+         * Initialize LingvoDSL Dictionary driver.
          * 
          * @param dictPath
          *            *.dsl file object.
@@ -117,8 +122,13 @@ public class LingvoDSL implements IDictionaryFactory {
          * @throws Exception
          *             when loading dictionary failed.
          */
-        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath)
-                throws Exception {
+        LingvoDSLDict(final Path dictPath, final Path indexPath, final boolean validateIndexAbsPath) {
+            this.dictPath = dictPath;
+            this.indexPath = indexPath;
+            this.validateIndexAbsPath = validateIndexAbsPath;
+        }
+
+        private void loadDictionary() throws IOException {
             data = DslDictionary.loadDictionary(dictPath, indexPath, validateIndexAbsPath);
             htmlVisitor = new HtmlVisitor(dictPath.getParent().toString(),
                     Preferences.isPreferenceDefault(Preferences.DICTIONARY_CONDENSED_VIEW, false));
@@ -134,7 +144,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticles(final String word) throws IOException {
-            return readEntries(word, data.lookup(word));
+            return readEntries(word, lookup(word));
         }
 
         /**
@@ -147,7 +157,7 @@ public class LingvoDSL implements IDictionaryFactory {
          */
         @Override
         public List<DictionaryEntry> readArticlesPredictive(final String word) throws IOException {
-            return readEntries(word, data.lookupPredictive(word));
+            return readEntries(word, lookupPredictive(word));
         }
 
         private List<DictionaryEntry> readEntries(final String word, final DslResult dslResult) {
@@ -158,6 +168,28 @@ public class LingvoDSL implements IDictionaryFactory {
             }
             return list;
         }
+
+        DslResult lookup(final String word) throws IOException {
+            if (data == null) {
+                try {
+                    loadDictionary();
+                } catch (Exception e) {
+                    return new DslResult(Collections.emptyList());
+                }
+            }
+            return data.lookup(word);
+        }
+
+        DslResult lookupPredictive(final String word) throws IOException {
+            if (data == null) {
+                try {
+                    loadDictionary();
+                } catch (Exception e) {
+                    return new DslResult(Collections.emptyList());
+                }
+            }
+            return data.lookupPredictive(word);
+        }
     }
 
     /**
@@ -166,8 +198,6 @@ public class LingvoDSL implements IDictionaryFactory {
     public static class HtmlVisitor extends DslVisitor<String> {
 
         private static final String[] IMAGE_EXTS = new String[] { "png", "jpg", "PNG", "JPG" };
-        private static final LanguageCode LANG_CODE = new LanguageCode();
-        private static final LanguageName LANG_NAME = new LanguageName();
 
         private final boolean condensedView;
         private final File basePath;
@@ -253,16 +283,15 @@ public class LingvoDSL implements IDictionaryFactory {
             } else if (tag.isTagName("lang")) {
                 if (tag.hasAttribute() && tag.getAttribute().getKey().equals("id")) {
                     int i = Integer.parseInt(tag.getAttribute().getValue());
-                    if (LANG_CODE.containsKey(i)) {
-                        sb.append("<span class=\"lang_").append(LANG_CODE.get(i)).append("\">");
+                    if (LanguageCode.containsCode(i)) {
+                        sb.append("<span class=\"lang_").append(LanguageCode.getLanguageCode(i)).append("\">");
                         return;
                     }
-                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")) {
-                    if (LANG_NAME.containsKey(tag.getAttribute().getValue())) {
-                        sb.append("<span class=\"lang_").append(LANG_NAME.get(tag.getAttribute().getValue()))
-                                .append("\">");
-                        return;
-                    }
+                } else if (tag.hasAttribute() && tag.getAttribute().getKey().equals("name")
+                        && LanguageName.containsLanguage(tag.getAttribute().getValue())) {
+                    sb.append("<span class=\"lang_").append(LanguageName.getLanguageCode(tag.getAttribute().getValue()))
+                            .append("\">");
+                    return;
                 }
                 sb.append("<span>");
             } else if (tag.isTagName("*")) {
@@ -327,42 +356,47 @@ public class LingvoDSL implements IDictionaryFactory {
         /**
          * Visit an EndTag.
          *
-         * @param endTag
-         *            to visit.
+         * @param tag to visit.
          */
         @Override
-        public void visit(final DslArticle.EndTag endTag) {
-            if (endTag.isTagName("*")) {
+        public void visit(final DslArticle.EndTag tag) {
+            if (!handleDetailsEnd(tag) && !handleDelayedText(tag)) {
+                appendFormattingTags(tag);
+            }
+        }
+
+        private boolean handleDetailsEnd(final DslArticle.EndTag tag) {
+            if (tag.isTagName("*")) {
                 inDetails = false;
                 if (!condensedView) {
                     sb.append("</span>");
                 }
-                return;
+                return true;
             }
-            if (inDetails && condensedView) {
-                return;
+            return inDetails && condensedView;
+        }
+
+        private boolean handleDelayedText(final DslArticle.EndTag tag) {
+            if (!delayText || previousText == null) {
+                return false;
             }
-            if (delayText) {
-                if (previousText == null) {
-                    return;
+            if (tag.isTagName("video")) {
+                appendLink(getMediaUrl(), previousText);
+            } else if (tag.isTagName("s")) {
+                if (isMediaImage()) {
+                    sb.append("<img src=\"").append(getMediaUrl()).append("\" />");
+                } else {
+                    appendLink(getMediaUrl(), previousText);
                 }
-                if (endTag.isTagName("video")) {
-                    sb.append("<a href=\"").append(getMediaUrl()).append("\">").append(previousText)
-                            .append("</a>");
-                } else if (endTag.isTagName("s")) {
-                    if (isMediaImage()) {
-                        sb.append("<img src=\"").append(getMediaUrl()).append("\" />");
-                    } else { // sound and unknown files
-                        sb.append("<a href=\"").append(getMediaUrl()).append("\" >").append(previousText)
-                                .append("</a>");
-                    }
-                } else if (endTag.isTagName("url")) {
-                    sb.append("<a href=\"").append(previousText).append("\">").append(previousText)
-                            .append("</a>");
-                }
-                delayText = false;
-                previousText = null;
+            } else if (tag.isTagName("url")) {
+                appendLink(previousText, previousText);
             }
+            delayText = false;
+            previousText = null;
+            return true;
+        }
+
+        private void appendFormattingTags(final DslArticle.EndTag endTag) {
             if (endTag.isTagName("b")) {
                 sb.append("</strong>");
             } else if (endTag.isTagName("u") || endTag.isTagName("i") || endTag.isTagName("c")
@@ -383,6 +417,14 @@ public class LingvoDSL implements IDictionaryFactory {
             }
         }
 
+        private void appendLink(final String url, final String text) {
+            if (isMediaImage()) {
+                sb.append("<img src=\"").append(url).append("\" />");
+            } else {
+                sb.append("<a href=\"").append(url).append("\">").append(text).append("</a>");
+            }
+        }
+
         /**
          * Return result.
          *
@@ -392,7 +434,7 @@ public class LingvoDSL implements IDictionaryFactory {
         public String getObject() {
             if (sb == null) {
                 // should not happened, but check null to avoid findbugs error.
-                throw new RuntimeException();
+                throw new IllegalStateException("sb is null in getObject() method!");
             }
             return sb.toString();
         }

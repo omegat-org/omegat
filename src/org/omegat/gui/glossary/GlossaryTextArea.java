@@ -37,8 +37,6 @@ import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -48,6 +46,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -109,7 +108,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
      * Currently processed entry. Used to detect if user moved into new entry.
      * In this case, new find should be started.
      */
-    protected StringEntry processedEntry;
+    protected transient StringEntry processedEntry;
 
     /**
      * Holds the current GlossaryEntries for the TransTips
@@ -134,7 +133,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         setMinimumSize(new Dimension(100, 50));
         setName(TEXTPANE_NAME);
 
-        addMouseListener(mouseListener);
+        addMouseListener(myMouseListener);
 
         Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
 
@@ -218,6 +217,11 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     protected void setFoundResult(SourceTextEntry en, List<GlossaryEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
 
+        List<GlossaryEntry> oldEntries = null;
+        if (processedEntry != null) {
+            oldEntries = new ArrayList<>(nowEntries);
+        }
+
         clear();
 
         if (entries == null) {
@@ -240,6 +244,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         for (GlossaryEntry entry : entries) {
             entryRenderer.render(entry, getStyledDocument());
         }
+
+        firePropertyChange("entries", oldEntries, entries);
     }
 
     @Override
@@ -270,7 +276,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
     /**
      * MouseListener for the GlossaryTextArea.
      */
-    protected final transient MouseListener mouseListener = new MouseAdapter() {
+    protected final transient MouseListener myMouseListener = new MouseAdapter() {
         @Override
         public void mousePressed(MouseEvent e) {
             if (e.isPopupTrigger()) {
@@ -298,12 +304,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         final String selection = getSelectedText();
         JMenuItem item = popup.add(OStrings.getString("GUI_GLOSSARYWINDOW_insertselection"));
         item.setEnabled(projectLoaded && !StringUtil.isEmpty(selection));
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Core.getEditor().insertText(selection);
-            }
-        });
+        item.addActionListener(e -> Core.getEditor().insertText(selection));
         item = popup.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
         item.setEnabled(projectLoaded);
         item.addActionListener(
@@ -344,6 +345,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         dialog.addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowLostFocus(WindowEvent e) {
+                // nothing to do
             }
 
             @Override
@@ -411,13 +413,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         populateContextMenu(menu);
         menu.addSeparator();
         final JMenuItem openFile = new JMenuItem(OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_OPEN_FILE"));
-        openFile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Core.getMainWindow().getMainMenu().invokeAction("projectAccessWritableGlossaryMenuItem",
-                        e.getModifiers());
-            }
-        });
+        openFile.addActionListener(e -> Core.getMainWindow().getMainMenu().invokeAction("projectAccessWriteableGlossaryMenuItem",
+                e.getModifiers()));
         openFile.setEnabled(false);
         if (Core.getProject().isProjectLoaded()) {
             String glossaryPath = Core.getProject().getProjectProperties().getWriteableGlossary();
@@ -428,12 +425,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>>
         final JMenuItem notify = new JCheckBoxMenuItem(
                 OStrings.getString("GUI_GLOSSARYWINDOW_SETTINGS_NOTIFICATIONS"));
         notify.setSelected(Preferences.isPreference(Preferences.NOTIFY_GLOSSARY_HITS));
-        notify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Preferences.setPreference(Preferences.NOTIFY_GLOSSARY_HITS, notify.isSelected());
-            }
-        });
+        notify.addActionListener(e -> Preferences.setPreference(Preferences.NOTIFY_GLOSSARY_HITS, notify.isSelected()));
         menu.add(notify);
         menu.addSeparator();
         final JMenuItem sortOrderSrcLength = new JCheckBoxMenuItem(

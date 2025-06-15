@@ -135,9 +135,9 @@ public abstract class TmxComplianceBase {
     protected void translateUsingTmx(IFilter filter, Map<String, String> config, final String fileTextIn,
             String inCharset, String fileTMX, String outCharset, ProjectProperties props,
             Map<String, TMXEntry> tmxPatch) throws Exception {
-        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
-                orphanedCallback);
+        final ProjectTMX tmx = new ProjectTMX(orphanedCallback);
+               tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
+                       new File("test/data/tmx/TMXComplianceKit/" + fileTMX), Core.getSegmenter());
         if (tmxPatch != null) {
             tmx.defaults.putAll(tmxPatch);
         }
@@ -153,6 +153,7 @@ public abstract class TmxComplianceBase {
                 assertNotNull(e);
                 return e.translation;
             }
+
             @Override
             String getCurrentFile() {
                 return fileTextIn;
@@ -168,20 +169,16 @@ public abstract class TmxComplianceBase {
         final List<String> result = new ArrayList<String>();
 
         IParseCallback callback = new IParseCallback() {
+            @Override
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, IFilter filter) {
-            }
-
-            public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, List<ProtectedPart> protectedParts) {
+                    String comment, String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 String[] props = comment == null ? null : new String[] { SegmentProperties.COMMENT, comment };
                 addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
             }
 
             @Override
-            public void addEntryWithProperties(String id, String source, String translation,
-                    boolean isFuzzy, String[] props, String path,
-                    IFilter filter, List<ProtectedPart> protectedParts) {
+            public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
+                    String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 result.addAll(Core.getSegmenter().segment(context.getSourceLang(), source, null, null));
             }
 
@@ -204,8 +201,9 @@ public abstract class TmxComplianceBase {
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(orphanedCallback);
+        tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile,
+                Core.getSegmenter());
 
         for (Map.Entry<EntryKey, ITMXEntry> en : callback.data.entrySet()) {
             if (en.getValue() instanceof TMXEntry) {

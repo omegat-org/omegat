@@ -34,6 +34,7 @@ import java.util.Collections;
 import java.util.logging.Level;
 
 import org.eclipse.jgit.api.Git;
+import org.omegat.core.Core;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNPropertyValue;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
@@ -103,8 +104,9 @@ public final class TeamTool {
         ProjectFileStorage.writeProjectFile(props);
 
         // Create empty project TM
-        new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null,
-                null).save(props, new File(props.getProjectInternal(), OConsts.STATUS_EXTENSION).getPath(), false);
+        ProjectTMX projectTMX = new ProjectTMX();
+        projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null, Core.getSegmenter());
+        projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false);
 
         // If the supplied dir is under version control, add everything we made
         // and set EOL handling correctly for cross-platform work

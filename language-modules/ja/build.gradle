@@ -1,0 +1,69 @@
+plugins {
+    id 'org.omegat.module-conventions'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir,
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir,
+                includes: ['**/language-ja-*.jar', '**/lucene-gosen-*.jar', '**/icu4j-*.jar'])
+    } else {
+        compileOnly(libs.commons.io)
+        compileOnly(libs.languagetool.core) {
+            exclude module: 'guava'
+            exclude module: 'language-detector'
+            exclude group: 'com.google.android'
+            exclude module: 'jackson-databind'
+            exclude group: 'org.jetbrains'
+            exclude module: 'commons-lang3'
+            exclude module: 'commons-text'
+            exclude module: 'commons-logging'
+            exclude module: 'json'
+            exclude module: 'protobuf-java'
+        }
+        implementation(libs.languagetool.ja) {
+            // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+            exclude module: 'languagetool-core'
+            exclude module: 'lucene-gosen'
+            exclude module: 'languagetool-core'
+            exclude module: 'icu4j'
+        }
+        testImplementation(libs.languagetool.core) {
+            exclude module: 'json'
+            exclude module: 'protobuf-java'
+        }
+        testRuntimeOnly(libs.json)
+        testRuntimeOnly(libs.protobuf)
+        implementation(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+        compileOnly(libs.icu4j)
+    }
+
+    testImplementation(libs.junit4)
+    testRuntimeOnly(libs.slf4j.jdk14)
+    testImplementation(project.rootProject)
+
+    testCompileOnly(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+    testImplementation(libs.languagetool.core) {
+        exclude module: 'language-all'
+    }
+    testRuntimeOnly(libs.languagetool.ja) {
+        // Temporary exclusion; see https://sourceforge.net/p/omegat/bugs/814/
+        exclude module: 'lucene-gosen'
+        exclude module: 'languagetool-core'
+        exclude module: 'icu4j'
+    }
+    testRuntimeOnly(dependencies.variantOf(libs.lucene.gosen) { classifier("ipadic") })
+    testRuntimeOnly(libs.icu4j)
+
+    testImplementation(libs.assertj)
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.commons.io)
+}
+
+makeModuleTask(loadProperties(file('plugin.properties')))
+
+test {
+    useJUnit()
+}

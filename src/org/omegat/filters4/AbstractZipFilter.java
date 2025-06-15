@@ -4,8 +4,9 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2017 Thomas Cordonnier
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -31,13 +32,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import org.omegat.filters2.AbstractFilter;
@@ -54,6 +60,16 @@ import org.omegat.util.Log;
  */
 public abstract class AbstractZipFilter extends AbstractFilter {
 
+    private static final Pattern ENCODING_PATTERN = Pattern.compile("<\\?xml.*encoding=['\"](.*?)['\"]");
+
+    protected AbstractZipFilter() {
+        this(StandardCharsets.UTF_8);
+    }
+
+    protected AbstractZipFilter(Charset encoding) {
+        internalEncoding = encoding;
+    }
+
     @Override
     public boolean isSourceEncodingVariable() {
         return true;
@@ -69,6 +85,21 @@ public abstract class AbstractZipFilter extends AbstractFilter {
      **/
     protected abstract boolean acceptInternalFile(ZipEntry entry, FilterContext context);
 
+    protected Charset internalEncoding;
+
+    protected Charset detectInternalEncoding(ZipFile zipfFle, ZipEntry entry) throws IOException {
+        try (ZipInputStream zis = new ZipInputStream(zipfFle.getInputStream(entry))) {
+            String xmlContent = readZipEntryContent(zis);
+            Matcher matcher = ENCODING_PATTERN.matcher(xmlContent);
+            if (matcher.find()) {
+                return Charset.forName(matcher.group(1));
+            }
+        } catch (Exception ignored) {
+            // when failed to detect, we fall back to UTF-8
+        }
+        return StandardCharsets.UTF_8;
+    }
+
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
         try (ZipFile file = new ZipFile(inFile)) {
@@ -76,10 +107,12 @@ public abstract class AbstractZipFilter extends AbstractFilter {
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
                 if (acceptInternalFile(entry, context)) {
+                    internalEncoding = detectInternalEncoding(file, entry);
                     return true;
                 }
             }
         } catch (IOException ignored) {
+            // always considered non-supported
         }
         return false;
     }
@@ -112,58 +145,106 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     @Override
     public void processFile(File inFile, File outFile, FilterContext fc)
             throws IOException, TranslationException {
-        try (ZipFile zf = new ZipFile(inFile)) {
-            if (outFile != null) {
-                try (ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outFile))) {
-                    processFileImpl(zf, zipout, fc);
+        List<ZipEntry> translatableEntries = new LinkedList<>();
+        Comparator<ZipEntry> entryComparator = getEntryComparator();
+
+        try (ZipFile zipFile = new ZipFile(inFile);
+             ZipOutputStream zipOutputStream = createZipOutputStream(outFile);
+             BufferedWriter writer = createWriter(zipOutputStream)) {
+
+            Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
+
+            while (zipEntries.hasMoreElements()) {
+                ZipEntry zipEntry = zipEntries.nextElement();
+
+                if (mustTranslateInternalFile(zipEntry, zipOutputStream != null, fc)) {
+                    processTranslatableEntry(zipFile, zipOutputStream, writer, fc, translatableEntries, entryComparator, zipEntry);
+                } else if (!mustDeleteInternalFile(zipEntry, zipOutputStream != null, fc) && zipOutputStream != null) {
+                    copyUnchangedEntry(zipFile, zipOutputStream, zipEntry);
                 }
-            } else {
-                processFileImpl(zf, null, fc);
+            }
+
+            finalizeProcessing(zipFile, zipOutputStream, writer, fc, translatableEntries, entryComparator);
+        }
+    }
+
+    /**
+     * Creates a ZipOutputStream for the specified output file.
+     *
+     * @param outFile the file to which the ZIP output will be written;
+     *                passing null will result in a null return.
+     * @return a ZipOutputStream for writing to the specified file,
+     *         or null if the outFile is null.
+     * @throws IOException if an I/O error occurs while creating the output stream.
+     */
+    private ZipOutputStream createZipOutputStream(File outFile) throws IOException {
+        return outFile == null ? null : new ZipOutputStream(new FileOutputStream(outFile));
+    }
+
+    /**
+     * Creates a BufferedWriter for the provided ZipOutputStream, using the specified
+     * internal encoding. If the ZipOutputStream is null, the method returns null.
+     *
+     * @param zipOutputStream the ZipOutputStream for which the BufferedWriter will be created;
+     *                        passing null will result in a null return.
+     * @return a BufferedWriter wrapping the given ZipOutputStream, or null if the ZipOutputStream is null.
+     */
+    private BufferedWriter createWriter(ZipOutputStream zipOutputStream) {
+        return (zipOutputStream == null) ? null : new BufferedWriter(new OutputStreamWriter(zipOutputStream,
+                internalEncoding));
+    }
+
+    private void processTranslatableEntry(ZipFile zipFile, ZipOutputStream zipOutputStream, BufferedWriter writer,
+                                          FilterContext filterContext, List<ZipEntry> translatableEntries,
+                                          Comparator<ZipEntry> entryComparator, ZipEntry zipEntry) {
+        if (entryComparator == null || zipOutputStream != null) {
+            translateEntry(zipFile, zipOutputStream, writer, filterContext, zipEntry);
+        } else {
+            translatableEntries.add(zipEntry);
+        }
+    }
+
+    private void copyUnchangedEntry(ZipFile zipFile, ZipOutputStream zipOutputStream, ZipEntry zipEntry) throws IOException {
+        ZipEntry outputEntry = new ZipEntry(zipEntry.getName());
+        zipOutputStream.putNextEntry(outputEntry);
+        org.apache.commons.io.IOUtils.copy(zipFile.getInputStream(zipEntry), zipOutputStream);
+        zipOutputStream.closeEntry();
+    }
+
+    private void finalizeProcessing(ZipFile zipFile, ZipOutputStream zipOutputStream, BufferedWriter writer,
+                                    FilterContext filterContext, List<ZipEntry> translatableEntries,
+                                    Comparator<ZipEntry> entryComparator) {
+        if (entryComparator != null) {
+            translatableEntries.sort(entryComparator);
+        }
+        if (zipOutputStream == null) {
+            translateEntries(zipFile, filterContext, translatableEntries);
+        } else {
+            for (ZipEntry zipEntry : translatableEntries) {
+                translateEntry(zipFile, zipOutputStream, writer, filterContext, zipEntry);
             }
         }
     }
 
-    private void processFileImpl(ZipFile zf, ZipOutputStream zipout, FilterContext fc) throws IOException {
-        Enumeration<? extends ZipEntry> zipcontents = zf.entries();
-        List<ZipEntry> toTranslate = new LinkedList<>();
-        Comparator<ZipEntry> cmp = getEntryComparator();
-        while (zipcontents.hasMoreElements()) {
-            ZipEntry ze = zipcontents.nextElement();
-            if (mustTranslateInternalFile(ze, zipout != null, fc)) {
-                if ((cmp == null) || (zipout != null)) {
-                    translateEntry(zf, zipout, fc, ze);
-                } else {
-                    toTranslate.add(ze); // need sort before treatment
-                }
-            } else if (!mustDeleteInternalFile(ze, zipout != null, fc)) {
-                if (zipout != null) {
-                    ZipEntry outEntry = new ZipEntry(ze.getName());
-                    zipout.putNextEntry(outEntry);
-                    org.apache.commons.io.IOUtils.copy(zf.getInputStream(ze), zipout);
-                    zipout.closeEntry();
-                }
-            }
-        }
-        if (cmp != null) {
-            toTranslate.sort(cmp);
-        }
+    private void translateEntries(ZipFile zf, FilterContext fc, List<ZipEntry> toTranslate) {
         for (ZipEntry ze : toTranslate) {
-            translateEntry(zf, zipout, fc, ze);
+            try (XMLReader xReader = new XMLReader(zf.getInputStream(ze))) {
+                AbstractXmlFilter xmlfilter = getFilter(ze);
+                try (BufferedReader reader = new BufferedReader(xReader)) {
+                    xmlfilter.processFile(reader, null, fc);
+                }
+            } catch (Exception e) {
+                Log.log(e);
+            }
         }
     }
 
-    private void translateEntry(ZipFile zf, ZipOutputStream zipout, FilterContext fc, ZipEntry ze) {
-        try {
+    private void translateEntry(ZipFile zf, ZipOutputStream zipout, BufferedWriter writer, FilterContext fc, ZipEntry ze) {
+        try (XMLReader xReader = new XMLReader(zf.getInputStream(ze))) {
             AbstractXmlFilter xmlfilter = getFilter(ze);
-            XMLReader xReader = new XMLReader(zf.getInputStream(ze));
-            BufferedReader reader = new BufferedReader(xReader);
-            if (zipout == null) {
-                xmlfilter.processFile(reader, null, fc);
-            } else {
+            try (BufferedReader reader = new BufferedReader(xReader)) {
                 ZipEntry outEntry = new ZipEntry(ze.getName());
                 zipout.putNextEntry(outEntry);
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(zipout, xReader.getEncoding()));
                 xmlfilter.processFile(reader, writer, fc);
                 zipout.closeEntry();
             }
@@ -177,6 +258,28 @@ public abstract class AbstractZipFilter extends AbstractFilter {
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
             throws IOException, TranslationException {
         throw new IOException("Not implemented");
+    }
+
+    /**
+     * Read the content of the entry from the ZipInputStream as a string.
+     *
+     * @param zipInputStream The ZipInputStream to read from.
+     * @return The content of the input stream as a string.
+     */
+    public static String readZipEntryContent(ZipInputStream zipInputStream) throws IOException {
+        byte[] buffer = new byte[1024];
+        StringBuilder stringBuilder = new StringBuilder();
+        int bytesRead;
+
+        while ((bytesRead = zipInputStream.read(buffer)) != -1) {
+            stringBuilder.append(new String(buffer, 0, bytesRead, StandardCharsets.UTF_8));
+            // Reading only a limited portion to detect encoding
+            if (stringBuilder.length() > 500) {
+                break;
+            }
+        }
+
+        return stringBuilder.toString();
     }
 
 }

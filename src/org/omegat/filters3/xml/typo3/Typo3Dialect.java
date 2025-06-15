@@ -4,8 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2009 Didier Briel
-
+               2009 Didier Briel
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

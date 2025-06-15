@@ -340,8 +340,9 @@ public final class Log {
      * @param parameters
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
+     * @deprecated
      */
-    @Deprecated
+    @Deprecated(since = "6.1.0", forRemoval = true)
     public static void logDebug(java.util.logging.Logger logger, String message, Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);
@@ -349,6 +350,28 @@ public final class Log {
             rec.setLoggerName(logger.getName());
             logger.log(rec);
         }
+    }
+
+    /**
+     * Checks whether debug-level logging is currently enabled.
+     *
+     * @return true if debug-level logging is enabled, false otherwise
+     */
+    public static boolean isDebugEnabled() {
+        return LOGGER.isDebugEnabled();
+    }
+
+    /**
+     * Logs a debug message with optional parameters. This method uses
+     * the debug logging level to record the provided message and arguments.
+     *
+     * @param message   The message template to be logged. It may include placeholders
+     *                  for arguments.
+     * @param parameters Optional arguments to be inserted into the placeholders of
+     *                   the message template.
+     */
+    public static void logDebug(String message, Object... parameters) {
+        LOGGER.atDebug().setMessage(message).addArgument(parameters).log();
     }
 
     /**

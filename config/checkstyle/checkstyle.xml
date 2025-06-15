@@ -52,6 +52,18 @@
         <property name="file" value="${config_loc}/suppressions.xml"/>
     </module>
 
+    <module name="RegexpHeader">
+        <property name="headerFile" value="${config_loc}/java.header"/>
+        <property name="multiLines" value="6"/>
+        <property name="fileExtensions" value="java"/>
+    </module>
+
+    <module name="RegexpHeader">
+        <property name="headerFile" value="${config_loc}/properties.header"/>
+        <property name="multiLines" value="6"/>
+        <property name="fileExtensions" value="properties"/>
+    </module>
+
     <!-- Checks for Size Violations.                    -->
     <!-- See https://checkstyle.org/checks/sizes/index.html -->
     <module name="FileLength"/>

@@ -58,6 +58,7 @@ import org.omegat.externalfinder.item.IExternalFinderItemMenuGenerator;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.MenuExtender;
 import org.omegat.util.gui.MenuItemPager;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Entry point for ExternalFinder functionality.
@@ -89,9 +90,11 @@ public final class ExternalFinder {
      * OmegaT will call this method when loading.
      */
     public static void loadPlugins() {
-        // register listeners
-        CoreEvents.registerApplicationEventListener(generateIApplicationEventListener());
-        CoreEvents.registerProjectChangeListener(generateIProjectEventListener());
+        // register listeners when GUI environment
+        if (StaticUIUtils.isGUI()) {
+            CoreEvents.registerApplicationEventListener(generateIApplicationEventListener());
+            CoreEvents.registerProjectChangeListener(generateIProjectEventListener());
+        }
     }
 
     private static IProjectEventListener generateIProjectEventListener() {

@@ -103,15 +103,15 @@ public class ILIASFilter extends AbstractFilter {
      * @param outfile
      */
     @Override
-    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
-                                                                                // for
-                                                                                // bug
-                                                                                // 1462566
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
+            throws IOException {
+        // fix for bug 1462566
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader);
         String line;
         /*
-         * ILIAS strings look like module_name#:#identifier#:#string to translate
-         * The file usually begins from some text that does not match the pattern
+         * ILIAS strings look like module_name#:#identifier#:#string to
+         * translate The file usually begins from some text that does not match
+         * the pattern
          */
 
         while ((line = lbpr.readLine()) != null) {
@@ -132,7 +132,8 @@ public class ILIASFilter extends AbstractFilter {
             String key = mat.group(1) + "#:#" + mat.group(2);
             String value = mat.group(3);
 
-            if (value.isEmpty()) { // If original text is empty, the translated is empty too
+            if (value.isEmpty()) { // If original text is empty, the translated
+                                   // is empty too
                 outfile.write(line + lbpr.getLinebreak());
                 continue;
             }
@@ -207,7 +208,7 @@ public class ILIASFilter extends AbstractFilter {
      */
     private String process(String key, String value) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(key, value, null, false, null, this);
+            entryParseCallback.addEntry(key, value, null, false, null, null, this, null);
             return value;
         } else if (entryTranslateCallback != null) {
             String trans = entryTranslateCallback.getTranslation(key, value);

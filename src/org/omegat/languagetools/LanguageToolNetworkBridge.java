@@ -24,18 +24,27 @@
  **************************************************************************/
 package org.omegat.languagetools;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -46,11 +55,16 @@ import java.util.stream.StreamSupport;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
+
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
+
+    private static final ILogger LOGGER = LoggerFactory.getLogger(LanguageToolNetworkBridge.class);
 
     /* Constants */
     private static final String CHECK_PATH = "/v2/check";
@@ -94,8 +108,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      * @return new LanguageToolNetworkBridge instance
      * @throws java.lang.Exception
      */
-    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port)
-            throws Exception {
+    public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port,
+                                     String languageModel) throws Exception {
         // Remember port
         localPort = port;
 
@@ -114,22 +128,71 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             Log.logWarningRB("LT_BAD_SOCKET");
             throw new Exception();
         }
+
+        List<String> commands = serverCommands(serverJar.getAbsolutePath(), Integer.toString(port));
+        Path languageModelPath = Paths.get(languageModel);
+        boolean useModel = LanguageToolPrefs.getLanguageModelPath() != null && Files.exists(languageModelPath) &&
+                        Files.isDirectory(languageModelPath.resolve(targetLang.getLanguageCode()));
+        if (useModel) {
+            commands.add("--config");
+            commands.add(prepareConfig().toString());
+        }
+        commands.add("--allow-origin");
+
         // Run the server
-        ProcessBuilder pb = new ProcessBuilder("java", "-cp", serverJar.getAbsolutePath(), SERVER_CLASS_NAME,
-                "--port", Integer.toString(port));
+        ProcessBuilder pb = new ProcessBuilder(commands);
         pb.redirectErrorStream(true);
         server = pb.start();
+        startServer(port);
 
+        try {
+            init(sourceLang, targetLang);
+        } catch (Exception ex) {
+            stop();
+            throw ex;
+        }
+    }
+
+    private List<String> serverCommands(String classPath, String port) {
+        List<String> commands = new ArrayList<>();
+        commands.add("java");
+        commands.add("-Xms256m");
+        commands.add("-Xmx768m");
+        commands.add("-cp");
+        commands.add(classPath);
+        commands.add(SERVER_CLASS_NAME);
+        commands.add("--port");
+        commands.add(port);
+        commands.add("--public");
+        return commands;
+    }
+
+    private Path prepareConfig() throws IOException {
+        Path tmpDir = Files.createTempDirectory("omegat");
+        Path config = tmpDir.resolve("languagetool.cfg");
+        try (BufferedWriter writer = Files.newBufferedWriter(config, StandardCharsets.UTF_8)) {
+            writer.write("languageModel=" + LanguageToolPrefs.getLanguageModelPath() + "\n");
+        }
+        tmpDir.toFile().deleteOnExit();
+        return config;
+    }
+
+    private void startServer(int port) throws Exception {
         // Create thread to consume server output
         new Thread(() -> {
-            try (InputStream is = server.getInputStream()) {
-                @SuppressWarnings("unused")
-                int b;
-                while ((b = is.read()) != -1) {
-                    // Discard
+            try (BufferedReader r = new BufferedReader(new InputStreamReader(server.getInputStream(),
+                    Charset.defaultCharset()))) {
+                String line;
+                while ((line = r.readLine()) != null) {
+                    if (line.contains("OutOfMemoryError")) {
+                        Log.logWarningRB("LT_SERVER_LOG", line);
+                    } else if (line.contains("Starting LanguageTool")) {
+                        Log.logInfoRB("LT_SERVER_LOG", line);
+                    } else {
+                        LOGGER.atDebug().setMessage(line).log();
+                    }
                 }
-            } catch (IOException e) {
-                // Do nothing
+            } catch (IOException ignored) {
             }
         }).start();
 
@@ -143,7 +206,7 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             try {
                 new Socket("localhost", port).close();
                 break;
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
             if (timeWaiting >= timeout) {
                 Log.logWarningRB("LT_SERVER_START_TIMEOUT");
@@ -151,15 +214,8 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                 throw new Exception();
             }
         }
-
         serverUrl = "http://localhost:" + port + CHECK_PATH;
         Log.logInfoRB("LT_SERVER_STARTED");
-        try {
-            init(sourceLang, targetLang);
-        } catch (Exception ex) {
-            stop();
-            throw ex;
-        }
     }
 
     /**
@@ -170,6 +226,9 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      */
     private void init(Language sourceLang, Language targetLang) throws Exception {
         JsonNode serverLanguages = getSupportedLanguages();
+        if (serverLanguages == null) {
+            return;
+        }
         this.sourceLang = negotiateLanguage(serverLanguages, sourceLang);
         this.targetLang = negotiateLanguage(serverLanguages, targetLang);
         Log.logInfoRB("LANGUAGE_TOOL_SOURCE_NEGOTIATED", this.sourceLang);
@@ -225,7 +284,9 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
             writer.flush();
         }
 
-        checkHttpError(conn);
+        if (!checkHttpError(conn)) {
+            return Collections.emptyList();
+        }
 
         String json = "";
         try (InputStream in = conn.getInputStream()) {
@@ -264,8 +325,9 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
         conn.setRequestProperty("User-Agent", OStrings.getNameAndVersion());
         conn.setDoOutput(true);
 
-        checkHttpError(conn);
-
+        if (!checkHttpError(conn)) {
+            return null;
+        }
         String json = "";
         try (InputStream in = conn.getInputStream()) {
             json = IOUtils.toString(in, StandardCharsets.UTF_8);
@@ -273,18 +335,26 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readTree(json);
+
     }
 
-    static void checkHttpError(URLConnection conn) throws Exception {
+    static boolean checkHttpError(URLConnection conn) throws Exception {
         if (conn instanceof HttpURLConnection) {
             HttpURLConnection httpConn = (HttpURLConnection) conn;
-            if (httpConn.getResponseCode() != 200) {
-                try (InputStream err = httpConn.getErrorStream()) {
-                    String errMsg = IOUtils.toString(err, StandardCharsets.UTF_8);
-                    throw new Exception(errMsg);
+            try {
+                if (httpConn.getResponseCode() != 200) {
+                    try (InputStream err = httpConn.getErrorStream()) {
+                        String errMsg = IOUtils.toString(err, StandardCharsets.UTF_8);
+                        LOGGER.atDebug().setMessage(errMsg).log();
+                        return false;
+                    }
                 }
+            } catch (SocketException ignored) {
+                return false;
             }
+            return true;
         }
+        return false;
     }
 
     /**
@@ -344,7 +414,10 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
                 writer.write(buildPostData(null, "en-US", null, "Test", "FOO", null, null));
                 writer.flush();
             }
-            checkHttpError(conn);
+            if (!checkHttpError(conn)) {
+                return false;
+            }
+
             try (InputStream in = conn.getInputStream()) {
                 String response = IOUtils.toString(in, StandardCharsets.UTF_8);
                 if (response.contains("<?xml")) {

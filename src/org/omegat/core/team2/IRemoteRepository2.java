@@ -125,5 +125,9 @@ public interface IRemoteRepository2 {
         public NetworkException(Throwable ex) {
             super(ex);
         }
+
+        public NetworkException(String message) {
+            super(message);
+        }
     }
 }

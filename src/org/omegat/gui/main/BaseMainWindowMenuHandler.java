@@ -1,22 +1,22 @@
 /**************************************************************************
  OmegaT - Computer Assisted Translation (CAT) tool
- with fuzzy matching, translation memory, keyword search,
- glossaries, and translation leveraging into updated projects.
+          with fuzzy matching, translation memory, keyword search,
+          glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
- Benjamin Siband, and Kim Bruning
- 2007 Zoltan Bartko
- 2008 Andrzej Sawula, Alex Buloichik
- 2009 Didier Briel, Alex Buloichik
- 2010 Wildrich Fourie, Didier Briel
- 2012 Wildrich Fourie, Guido Leenders, Didier Briel
- 2013 Zoltan Bartko, Didier Briel, Yu Tang
- 2014 Aaron Madlon-Kay
- 2015 Yu Tang, Aaron Madlon-Kay, Didier Briel
- 2017 Didier Briel
- 2019 Thomas Cordonnier
- Home page: https://www.omegat.org/
- Support center: https://omegat.org/support
+               2000-2006 Benjamin Siband, and Kim Bruning
+               2007 Zoltan Bartko
+               2008 Andrzej Sawula, Alex Buloichik
+               2009 Didier Briel, Alex Buloichik
+               2010 Wildrich Fourie, Didier Briel
+               2012 Wildrich Fourie, Guido Leenders, Didier Briel
+               2013 Zoltan Bartko, Didier Briel, Yu Tang
+               2014 Aaron Madlon-Kay
+               2015 Yu Tang, Aaron Madlon-Kay, Didier Briel
+               2017 Didier Briel
+               2019 Thomas Cordonnier
+               Home page: https://www.omegat.org/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -36,18 +36,13 @@
 package org.omegat.gui.main;
 
 /**
+ * Common base class for menu handler.
+ * <p>
+ * There should be mandatory methods for mandatory commands.
+ *
  * @author Hiroshi Miura
  */
 public abstract class BaseMainWindowMenuHandler {
-
-    /**
-     * Common base class for menu handler.
-     * <p>
-     * There should be a mandatory methods for mandatory
-     * commands.
-     */
-    public BaseMainWindowMenuHandler() {
-    }
 
     public void projectExitMenuItemActionPerformed() {
         System.exit(0);

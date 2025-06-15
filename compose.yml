@@ -16,8 +16,8 @@ services:
       context: test-integration/docker/client
       args:
         JAVA: 17
-        JDKVER: jdk_17.0.11.0.0+9
-        GRADLE: 8.8
+        JDKVER: jdk_17.0.14.0.0+7-1
+        GRADLE: 8.13
     depends_on:
       - server
     volumes:
@@ -27,7 +27,6 @@ services:
       - type: volume
         source: keygen
         target: /keys
-        volume: {}
     tmpfs:
       - /tmp
       - /workdir

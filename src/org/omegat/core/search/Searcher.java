@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -87,24 +88,24 @@ import org.omegat.util.StringUtil;
  */
 public class Searcher {
 
-    private volatile List<SearchResultEntry> m_searchResults;
-    private boolean m_preprocessResults;
-    private final IProject m_project;
+    private volatile List<SearchResultEntry> searchResults;
+    private boolean preprocessResults;
+    private final IProject project;
     /**
      * keeps track of previous results not from project memory
      */
-    private Map<String, Integer> m_tmxMap;
+    private Map<String, Integer> tmxMap;
     /**
      * HP: keeps track of previous results, to avoid duplicate entries
      */
-    private Map<String, Integer> m_entryMap;
+    private Map<String, Integer> entryMap;
     /**
      * HP: contains a matcher for each search string (multiple if keyword search)
      */
-    private List<Matcher> m_matchers;
-    private Matcher m_author;
+    private List<Matcher> matchers;
+    private Matcher author;
 
-    private int m_numFinds;
+    private int numFinds;
 
     private final SearchExpression searchExpression;
     private LongProcessThread checkStop;
@@ -126,7 +127,7 @@ public class Searcher {
      *            Current project
      */
     public Searcher(final IProject project, final SearchExpression searchExpression) {
-        this.m_project = project;
+        this.project = project;
         this.searchExpression = searchExpression;
     }
 
@@ -145,27 +146,32 @@ public class Searcher {
      * Returns list of search results
      */
     public List<SearchResultEntry> getSearchResults() {
-        if (m_preprocessResults) {
-            // function can be called multiple times after search
-            // results preprocess should occur only one time
-            m_preprocessResults = false;
-            if (!searchExpression.allResults) {
-                for (SearchResultEntry entry : m_searchResults) {
-                    String key = entry.getSrcText() + entry.getTranslation();
-                    if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
-                        if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
-                            entry.setPreamble(updatePreamble(entry, m_tmxMap.get(key)));
-                        }
-                    } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
-                        // at this stage each PM entry num is increased by 1
-                        if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
-                            entry.setPreamble(updatePreamble(entry, m_entryMap.get(key)));
-                        }
-                    }
+        if (!preprocessResults) {
+            return searchResults;
+        }
+
+        // function can be called multiple times after search
+        // results preprocess should occur only one time
+        preprocessResults = false;
+        if (searchExpression.allResults) {
+            return searchResults;
+        }
+
+
+        for (SearchResultEntry entry : searchResults) {
+            String key = entry.getSrcText() + entry.getTranslation();
+            if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
+                if (tmxMap.containsKey(key) && (tmxMap.get(key) > 0)) {
+                    entry.setPreamble(updatePreamble(entry, tmxMap.get(key)));
+                }
+            } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
+                // at this stage each PM entry num is increased by 1
+                if (entryMap.containsKey(key) && (entryMap.get(key) > 0)) {
+                    entry.setPreamble(updatePreamble(entry, entryMap.get(key)));
                 }
             }
         }
-        return m_searchResults;
+        return searchResults;
     }
 
     private String updatePreamble(SearchResultEntry entry, int matchNumber) {
@@ -180,23 +186,20 @@ public class Searcher {
      *
      * @throws Exception when searching files goes wrong
      */
-    public void search() throws Exception {
-        String text = searchExpression.text;
-        String author = searchExpression.author;
+    public void search() throws IOException {
+        String textSearchExpression = searchExpression.text;
+        String authorSearchExpression = searchExpression.author;
 
-        m_searchResults = new ArrayList<>();
-        m_numFinds = 0;
+        searchResults = new ArrayList<>();
+        numFinds = 0;
         // ensures that results will be preprocessed only one time
-        m_preprocessResults = true;
+        preprocessResults = true;
+        entryMap = new HashMap<>();
 
-        m_entryMap = null; // HP
-
-        m_entryMap = new HashMap<>(); // HP
-
-        m_tmxMap = new HashMap<>();
+        tmxMap = new HashMap<>();
 
         // create a list of matchers
-        m_matchers = new ArrayList<>();
+        matchers = new ArrayList<>();
 
         // determine pattern matching flags
         int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
@@ -205,7 +208,7 @@ public class Searcher {
         // Then, instead of modifying the regex, we also normalize the
         // comparison strings later on.
         if (searchExpression.widthInsensitive) {
-            text = StringUtil.normalizeWidth(text);
+            textSearchExpression = StringUtil.normalizeWidth(textSearchExpression);
         }
 
         // if exact search, just use the entire search string as a single
@@ -214,40 +217,40 @@ public class Searcher {
 
         switch (searchExpression.searchExpressionType) {
         case EXACT:
-        default:
             // escape the search string, it's not supposed to be a regular
             // expression
-            text = StaticUtils.globToRegex(text, searchExpression.spaceMatchNbsp);
+            textSearchExpression = StaticUtils.globToRegex(textSearchExpression, searchExpression.spaceMatchNbsp);
 
             // create a matcher for the search string
-            m_matchers.add(Pattern.compile(text, flags).matcher(""));
+            matchers.add(Pattern.compile(textSearchExpression, flags).matcher(""));
             break;
         case KEYWORD:
             // break the search string into keywords,
             // each of which is a separate search string
-            Pattern.compile(" ").splitAsStream(text.trim()).filter(word -> !word.isEmpty()).map(word -> {
+            Pattern.compile(" ").splitAsStream(textSearchExpression.trim()).filter(word -> !word.isEmpty()).map(word -> {
                 String glob = StaticUtils.globToRegex(word, false);
                 return Pattern.compile(glob, flags).matcher("");
-            }).forEach(m_matchers::add);
+            }).forEach(matchers::add);
             break;
         case REGEXP:
             // space match nbsp (\u00a0)
             if (searchExpression.spaceMatchNbsp) {
-                text = text.replaceAll(" ", "( |\u00A0)");
-                text = text.replaceAll("\\\\s", "(\\\\s|\u00A0)");
+                textSearchExpression = textSearchExpression.replace(" ", "( |\u00A0)");
+                textSearchExpression = textSearchExpression.replace("\\\\s", "(\\\\s|\u00A0)");
             }
 
             // create a matcher for the search string
-            m_matchers.add(Pattern.compile(text, flags).matcher(""));
+            matchers.add(Pattern.compile(textSearchExpression, flags).matcher(""));
             break;
+        default:
+            throw new IllegalStateException("Unknown search expression type");
         }
         // create a matcher for the author search string
         if (searchExpression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
-            author = StaticUtils.globToRegex(author, searchExpression.spaceMatchNbsp);
+            authorSearchExpression = StaticUtils.globToRegex(authorSearchExpression, searchExpression.spaceMatchNbsp);
         }
 
-        m_author = Pattern.compile(author, flags).matcher("");
-
+        this.author = Pattern.compile(authorSearchExpression, flags).matcher("");
 
         if (searchExpression.rootDir == null) {
             // if no search directory specified, then we are
@@ -261,12 +264,9 @@ public class Searcher {
     // ////////////////////////////////////////////////////////////
     // internal functions
 
-    private void addEntry(int num, String preamble, String srcPrefix, String src, String target,
-            String note, String property, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch, SearchMatch[] propertyMatch) {
-        SearchResultEntry entry = new SearchResultEntry(num, preamble, srcPrefix,
-                src, target, note, property, srcMatch, targetMatch, noteMatch, propertyMatch);
-        m_searchResults.add(entry);
-        m_numFinds++;
+    private void addEntry(SearchResultEntry entry) {
+        searchResults.add(entry);
+        numFinds++;
     }
 
     /**
@@ -274,7 +274,7 @@ public class Searcher {
      */
     private void foundString(int entryNum, String intro, String src, String target, String note, String property,
             SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches) {
-        if (m_numFinds >= searchExpression.numberOfResults) {
+        if (numFinds >= searchExpression.numberOfResults) {
             return;
         }
 
@@ -285,45 +285,49 @@ public class Searcher {
         } else if (entryNum == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
             addTranslationMemoryEntry(entryNum, intro, src, target, note, property, srcMatches, targetMatches, noteMatches, propertyMatches, key);
         } else {
-            addEntry(entryNum, intro, null, src, target, note, property,
-                    srcMatches, targetMatches, noteMatches, propertyMatches);
+            addEntry(SearchResultEntry.builder().entryNum(entryNum).preambleText(intro).srcPrefix(null).sourceText(src)
+                    .targetText(target).note(note).propertiesString(property).srcMatch(srcMatches)
+                    .targetMatch(targetMatches).noteMatch(noteMatches).propertiesMatch(propertyMatches).build());
         }
     }
 
     private void addTranslationMemoryEntry(int entryNum, String intro, String src, String target, String note, String property,
                                            SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches, String key) {
-        if (!m_tmxMap.containsKey(key) || searchExpression.allResults) {
-            addEntry(entryNum, intro, null, src, target, note, property,
-                    srcMatches, targetMatches, noteMatches, propertyMatches);
+        if (!tmxMap.containsKey(key) || searchExpression.allResults) {
+            addEntry(SearchResultEntry.builder().entryNum(entryNum).preambleText(intro).srcPrefix(null).sourceText(src)
+                    .targetText(target).note(note).propertiesString(property).srcMatch(srcMatches).targetMatch(targetMatches)
+                    .noteMatch(noteMatches).propertiesMatch(propertyMatches).build());
             if (!searchExpression.allResults) {
                 // first occurrence
-                m_tmxMap.put(key, 0);
+                tmxMap.put(key, 0);
             }
         } else {
             // next occurrence
-            m_tmxMap.put(key, m_tmxMap.get(key) + 1);
+            tmxMap.put(key, tmxMap.get(key) + 1);
         }
     }
 
     private void addProjectMemoryEntry(int entryNum, String src, String target, String note, String property,
                                        SearchMatch[] srcMatches, SearchMatch[] targetMatches, SearchMatch[] noteMatches, SearchMatch[] propertyMatches, String key) {
-        if (!m_entryMap.containsKey(key) || searchExpression.allResults) {
+        if (!entryMap.containsKey(key) || searchExpression.allResults) {
             // HP, duplicate entry prevention
             // entries are referenced at offset 1 but stored at offset 0
             String file = searchExpression.fileNames ? getFileForEntry(entryNum + 1) : null;
-            addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
-                    note, property, srcMatches, targetMatches, noteMatches, propertyMatches);
+            addEntry(SearchResultEntry.builder().entryNum(entryNum + 1).preambleText(file).srcPrefix((entryNum + 1) + "> ")
+                    .sourceText(src).targetText(target).note(note).propertiesString(property)
+                    .srcMatch(srcMatches).targetMatch(targetMatches).noteMatch(noteMatches)
+                    .propertiesMatch(propertyMatches).build());
             if (!searchExpression.allResults) { // If we filter results
-                m_entryMap.put(key, 0); // HP
+                entryMap.put(key, 0); // HP
             }
         } else {
-            m_entryMap.put(key, m_entryMap.get(key) + 1);
+            entryMap.put(key, entryMap.get(key) + 1);
         }
     }
 
     private void searchProject() {
         // reset the number of search hits
-        m_numFinds = 0;
+        numFinds = 0;
 
         try {
             searchMemory();
@@ -341,7 +345,7 @@ public class Searcher {
             for (GlossaryEntry en : entries) {
                 checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
                 // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= searchExpression.numberOfResults) {
+                if (numFinds >= searchExpression.numberOfResults) {
                     throw new SearchLimitReachedException();
                 }
                 checkStop.checkInterrupted();
@@ -355,14 +359,14 @@ public class Searcher {
             // Search TM entries, unless we search for date or author.
             // They are not loaded from external TM, so skip the search in
             // that case.
-            Path projectRoot = Paths.get(m_project.getProjectProperties().getProjectRoot());
+            Path projectRoot = Paths.get(project.getProjectProperties().getProjectRoot());
             if (!searchExpression.searchAuthor && !searchExpression.searchDateAfter && !searchExpression.searchDateBefore) {
-                for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
+                for (Map.Entry<String, ExternalTMX> tmEn : project.getTransMemories().entrySet()) {
                     final String fileTM = searchExpression.fileNames ? projectRoot.relativize(Paths.get(tmEn.getKey())).toString() : null;
                     searchEntries(tmEn.getValue().getEntries(), ENTRY_ORIGIN_TRANSLATION_MEMORY, fileTM);
                     checkStop.checkInterrupted();
                 }
-                for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
+                for (Map.Entry<Language, ProjectTMX> tmEn : project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
                     searchEntries(tmEn.getValue().getDefaults(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
                     searchEntries(tmEn.getValue().getAlternatives(), ENTRY_ORIGIN_ALTERNATIVE, langTM.getLanguage());
@@ -376,15 +380,15 @@ public class Searcher {
         // search the Memory, if requested
         if (searchExpression.memory) {
             // search through all project entries
-            List<SourceTextEntry> allEntries = m_project.getAllEntries();
+            List<SourceTextEntry> allEntries = project.getAllEntries();
             for (int i = 0; i < allEntries.size(); i++) {
                 // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= searchExpression.numberOfResults) {
+                if (numFinds >= searchExpression.numberOfResults) {
                     throw new SearchLimitReachedException();
                 }
                 // get the source and translation of the next entry
                 SourceTextEntry ste = allEntries.get(i);
-                TMXEntry te = m_project.getTranslationInfo(ste);
+                TMXEntry te = project.getTranslationInfo(ste);
 
                 checkEntry(ste.getSrcText(), te.translation, te.note, ste.getRawProperties(), te, i, null);
                 checkStop.checkInterrupted();
@@ -392,31 +396,31 @@ public class Searcher {
 
             // search in orphaned
             if (!searchExpression.excludeOrphans) {
-                m_project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
+                project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
                     final String file = OStrings.getString("CT_ORPHAN_STRINGS");
 
                     public void iterate(String source, TMXEntry en) {
                         // stop searching if the max. nr of hits has been reached
-                        if (m_numFinds >= searchExpression.numberOfResults) {
+                        if (numFinds >= searchExpression.numberOfResults) {
                             return;
                         }
                         checkStop.checkInterrupted();
-                        if (m_project.isOrphaned(source)) {
+                        if (project.isOrphaned(source)) {
                             checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
                 });
-                m_project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
+                project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
                     final String file = OStrings.getString("CT_ORPHAN_STRINGS");
 
                     public void iterate(EntryKey source, TMXEntry en) {
                         // stop searching if the max. nr of hits has been
                         // reached
-                        if (m_numFinds >= searchExpression.numberOfResults) {
+                        if (numFinds >= searchExpression.numberOfResults) {
                             return;
                         }
                         checkStop.checkInterrupted();
-                        if (m_project.isOrphaned(source)) {
+                        if (project.isOrphaned(source)) {
                             checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
                         }
                     }
@@ -449,7 +453,7 @@ public class Searcher {
     private void searchEntries(Iterable<? extends ITMXEntry> tmEn, int origin, final String tmxID) throws SearchLimitReachedException {
         for (ITMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= searchExpression.numberOfResults) {
+            if (numFinds >= searchExpression.numberOfResults) {
                 throw new SearchLimitReachedException();
             }
 
@@ -562,7 +566,7 @@ public class Searcher {
 
         FilterMaster fm = Core.getFilterMaster();
 
-        final SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
+        final SearchCallback searchCallback = new SearchCallback(project.getProjectProperties());
 
         int depth = searchExpression.recursive ? Integer.MAX_VALUE : 0;
         Files.walk(root, depth, FileVisitOption.FOLLOW_LINKS).forEach(path -> {
@@ -573,7 +577,7 @@ public class Searcher {
 
             searchCallback.setCurrentFile(fi);
             try {
-                fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), searchCallback);
+                fm.loadFile(filename, new FilterContext(project.getProjectProperties()), searchCallback);
             } catch (TranslationException | IOException ex) {
                 Log.log(ex);
             }
@@ -624,32 +628,20 @@ public class Searcher {
         return searchString(origText, true);
     }
 
-    /**
-     * Looks for an occurrence of the search string(s) in the supplied text string.
-     * IF matches are found, they are added to this.foundMatches.
-     *
-     * @param origText
-     *            The text string to search in
-     * @param collapseResults
-     *            True if the adjacent results should be collapsed. This can happen on search, but not on replace.
-     *
-     * @return True if the text string contains all search strings
-     */
     public boolean searchString(String origText, boolean collapseResults) {
-        if (origText == null || m_matchers == null || m_matchers.isEmpty()) {
+        if (origText == null || matchers == null || matchers.isEmpty()) {
             return false;
         }
 
-        String text = searchExpression.widthInsensitive ? StringUtil.normalizeWidth(origText) : origText;
-
+        String normalizedText = normalizeText(origText);
         foundMatches.clear();
         // check the text against all matchers
         OUT_LOOP:
-        for (Matcher matcher : m_matchers) {
+        for (Matcher matcher : matchers) {
             // check the text against the current matcher
             // if one of the search strings is not found, don't
             // bother looking for the rest of the search strings
-            matcher.reset(text);
+            matcher.reset(normalizedText);
             if (!matcher.find()) {
                 return false;
             }
@@ -657,72 +649,26 @@ public class Searcher {
             while (true) {
                 int start = matcher.start();
                 int end = matcher.end();
-                if (!text.substring(start, end).equals(origText.substring(start, end))) {
+                if (!normalizedText.substring(start, end).equals(origText.substring(start, end))) {
                     // In case of normalization, check whenever the string to search is still present but shifted
-                    int find = origText.indexOf(text.substring(start, end));
+                    int find = origText.indexOf(normalizedText.substring(start, end));
                     if (find >= 0) {
                         end = find + (end - start);
                         start = find;
                     } else {
                         // If the string to search contains normalized characters, then we cannot find this match
                         // Try to find it using normalization of substrings
-                        boolean found = false;
-                        String foundText = text.substring(start, end);
-                        IN_LOOP:
-                        for (find = 0; find < origText.length(); find++) {
-                            if (StringUtil.normalizeWidth(origText.substring(find)).startsWith(foundText)) {
-                                start = end = find;
-                                while (end < origText.length()) {
-                                    end++;
-                                    if (StringUtil.normalizeWidth(origText.substring(start, end)).equals(foundText)) {
-                                        found = true;
-                                        break IN_LOOP;
-                                    }
-                                }
-                            }
-                        }
-                        if (!found) {
+                        String foundText = normalizedText.substring(start, end);
+                        if (!findMatchUsingNormalization(origText, foundText)) {
                             // No way, we cannot find the match at all. Do not highlight but return true
                             break OUT_LOOP;
                         }
                     }
                 }
-                if (searchExpression.mode == SearchMode.REPLACE) {
-                    if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
-                        if ((end == start) && (start > 0)) {
-                            break; // do not replace the last occurrence of (.*)
-                        }
-                        String repl = searchExpression.replacement;
-                        Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
-                        while (replaceMatcher.find()) {
-                            int varId = Integer.parseInt(replaceMatcher.group(2));
-                            if (varId > matcher.groupCount()) {
-                                // Group wasn't even present in search regex.
-                                throw new IndexOutOfBoundsException(
-                                        OStrings.getString("ST_REGEXP_REPLACEGROUP_ERROR", varId));
-                            }
-                            String substitution = matcher.group(varId); // yes, from source matcher!
-                            if (substitution == null) {
-                                // If group was present in search regex but didn't match anything,
-                                // replace with empty string.
-                                substitution = "";
-                            }
-                            substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
-                            repl = repl.substring(0, replaceMatcher.start()) + replaceMatcher.group(1) + substitution
-                                    + repl.substring(replaceMatcher.end());
-                            replaceMatcher.reset(repl);
-                        }
-                        foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl,
-                                m_project.getProjectProperties().getTargetLanguage().getLocale())));
-                    } else {
-                        foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
-                    }
-                } else if (end > start) {
-                    // Add a match only if the matched region is not empty.
-                    // We still return true so the hit will still be recorded.
-                    foundMatches.add(new SearchMatch(start, end));
+                if (processMatch(matcher, end, start)) {
+                    break;
                 }
-                if (start >= text.length()) {
+                if (start >= normalizedText.length()) {
                     // Reached the end of the text
                     break;
                 }
@@ -746,24 +692,135 @@ public class Searcher {
         // We should not collapse results when doing a search/replace
         // see https://sourceforge.net/p/omegat/bugs/675/
         if (collapseResults) {
-            for (int i = 1; i < foundMatches.size();) {
-                SearchMatch pr = foundMatches.get(i - 1);
-                SearchMatch cu = foundMatches.get(i);
-                // check for overlapped
-                if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
-                    int end = Math.max(cu.getEnd(), pr.getEnd());
-                    // leave only one region
-                    pr = new SearchMatch(pr.getStart(), end, pr.getReplacement());
-                    foundMatches.set(i - 1, pr);
-                    foundMatches.remove(i);
-                } else {
-                    i++;
-                }
-            }
+            ollapseFoundMatches();
         }
         return true;
     }
 
+    /**
+     * Searches for a substring within a given string, starting from a specified index.
+     * The method uses normalization to ensure width equivalency during the search process.
+     *
+     * @param origText The original text in which to search for the substring.
+     * @param foundText The substring to match within the original text.
+     * @return True if the normalized version of the substring is found within the original text, false otherwise.
+     */
+    boolean findMatchUsingNormalization(String origText, String foundText) {
+        for (int currentIndex = 0; currentIndex < origText.length(); currentIndex++) {
+            if (StringUtil.normalizeWidth(origText.substring(currentIndex)).startsWith(foundText)) {
+                int end = currentIndex;
+                while (end < origText.length()) {
+                    end++;
+                    if (StringUtil.normalizeWidth(origText.substring(currentIndex, end)).equals(foundText)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private String normalizeText(String text) {
+        return searchExpression.widthInsensitive ? StringUtil.normalizeWidth(text) : text;
+    }
+
+    private void ollapseFoundMatches() {
+        for (int i = 1; i < foundMatches.size();) {
+            SearchMatch pr = foundMatches.get(i - 1);
+            SearchMatch cu = foundMatches.get(i);
+            // check for overlapped
+            if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
+                int end = Math.max(cu.getEnd(), pr.getEnd());
+                // leave only one region
+                pr = new SearchMatch(pr.getStart(), end, pr.getReplacement());
+                foundMatches.set(i - 1, pr);
+                foundMatches.remove(i);
+            } else {
+                i++;
+            }
+        }
+    }
+
+    /**
+     * Processes a match found during a search operation. This method handles both search-only and
+     * search-and-replace modes. In search-and-replace mode, it applies the replacement logic through
+     * another helper method. In search-only mode, it adds the match to the list of found matches if
+     * the matched region is not empty.
+     *
+     * @param matcher The Matcher object used for finding matches in the text.
+     * @param end The end position of the match in the text being searched.
+     * @param start The start position of the match in the text being searched.
+     * @return true if the match requires further processing or if a replacement was applied;
+     *         false otherwise.
+     */
+    private boolean processMatch(Matcher matcher, int end, int start) {
+        if (searchExpression.mode == SearchMode.REPLACE) {
+            if (searchReplaceImpl(searchExpression, foundMatches, matcher, end, start,
+                    project.getProjectProperties().getTargetLanguage().getLocale())) {
+                return true;
+            }
+        } else if (end > start) {
+            // Add a match only if the matched region is not empty.
+            // We still return true so the hit will still be recorded.
+            foundMatches.add(new SearchMatch(start, end));
+        }
+        return false;
+    }
+
+    /**
+     * Implements the logic for searching and replacing based on a given search expression.
+     * Handles both regular expression-based replacements and simple replacements, adding
+     * matches to the found matches list.
+     *
+     * @param searchExpression The search expression containing the search criteria and replacement text.
+     * @param foundMatches A list to which all found matches, including their start, end positions, and replacements, are added.
+     * @param matcher The matcher object used for searching and extracting matches based on the search expression.
+     * @param end The end position of the match in the text being searched.
+     * @param start The start position of the match in the text being searched.
+     * @param targetLocale The locale used for formatting or case-sensitive replacement if applicable.
+     * @return Always returns false after completing the replacement process.
+     * @throws IndexOutOfBoundsException Throws this exception if a replacement group in the search expression
+     *         refers to a matcher group that does not exist.
+     */
+    boolean searchReplaceImpl(SearchExpression searchExpression, List<SearchMatch> foundMatches, Matcher matcher,
+                              int end, int start, Locale targetLocale) {
+        if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
+            if ((end == start) && (start > 0)) {
+                return true;
+            }
+            String repl = searchExpression.replacement;
+            Matcher replaceMatcher = PatternConsts.REGEX_VARIABLE.matcher(repl);
+            while (replaceMatcher.find()) {
+                int varId = Integer.parseInt(replaceMatcher.group(2));
+                if (varId > matcher.groupCount()) {
+                    // Group wasn't even present in search regex.
+                    throw new IndexOutOfBoundsException(
+                            OStrings.getString("ST_REGEXP_REPLACEGROUP_ERROR", varId));
+                }
+                String substitution = matcher.group(varId); // yes, from source matcher!
+                if (substitution == null) {
+                    // If group was present in search regex but didn't match anything,
+                    // replace with empty string.
+                    substitution = "";
+                }
+                substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
+                repl = repl.substring(0, replaceMatcher.start()) + substitution + repl.substring(replaceMatcher.end());
+                replaceMatcher.reset(repl);
+            }
+            foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl, targetLocale)));
+
+        } else {
+            foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
+        }
+        return false;
+    }
+
+    /**
+     * Retrieves a list of matches found during the search operation.
+     *
+     * @return a list of {@link SearchMatch} objects, where each object provides information
+     *         about the match's start and end positions, and any associated replacement text.
+     */
     public List<SearchMatch> getFoundMatches() {
         return foundMatches;
     }
@@ -777,25 +834,25 @@ public class Searcher {
      * @return True if the text string contains the search string
      */
     private boolean searchAuthor(TMXEntry te) {
-        if (te == null || m_author == null) {
+        if (te == null || author == null) {
             return false;
         }
 
-        if (m_author.pattern().pattern().equals("")) {
+        if (author.pattern().pattern().equals("")) {
             // Handle search for null author.
             return te.changer == null && te.creator == null;
         }
 
         if (te.changer != null) {
-            m_author.reset(te.changer);
-            if (m_author.find()) {
+            author.reset(te.changer);
+            if (author.find()) {
                 return true;
             }
         }
 
         if (te.creator != null) {
-            m_author.reset(te.creator);
-            if (m_author.find()) {
+            author.reset(te.creator);
+            if (author.find()) {
                 return true;
             }
         }
@@ -808,7 +865,7 @@ public class Searcher {
 
     public void searchText(String seg, String translation, String filename) {
         // don't look further if the max. nr of hits has been reached
-        if (m_numFinds >= searchExpression.numberOfResults) {
+        if (numFinds >= searchExpression.numberOfResults) {
             return;
         }
 

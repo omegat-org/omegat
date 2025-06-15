@@ -1,0 +1,50 @@
+plugins {
+    id 'org.omegat.module-conventions'
+}
+
+dependencies {
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir,
+                includes: ['**/languagetool-core-*.jar', '**/commons-io-*.jar'])
+        implementation fileTree(dir: providedCoreLibsDir,
+                includes: ['**/language-ca-*.jar'])
+        runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/catalan-pos-dict-*.jar')
+    } else {
+        compileOnly(libs.commons.io)
+        compileOnly(libs.languagetool.core) {
+            exclude module: 'guava'
+            exclude module: 'language-detector'
+            exclude group: 'com.google.android'
+            exclude module: 'jackson-databind'
+            exclude group: 'org.jetbrains'
+            exclude module: 'commons-lang3'
+            exclude module: 'commons-text'
+            exclude module: 'commons-logging'
+            exclude module: 'json'
+            exclude module: 'protobuf-java'
+        }
+        implementation(libs.languagetool.ca) {
+            exclude module: 'languagetool-core'
+        }
+        compileOnly(libs.lucene.analyzers.common)
+    }
+    testImplementation(libs.junit4)
+    testImplementation(libs.assertj)
+    testImplementation(testFixtures(project.rootProject))
+    testImplementation(project(":spellchecker:hunspell"))
+    testImplementation(libs.languagetool.core) {
+        exclude module: 'json'
+        exclude module: 'protobuf-java'
+    }
+    testRuntimeOnly(libs.json)
+    testRuntimeOnly(libs.protobuf)
+    testRuntimeOnly(libs.commons.io)
+}
+
+makeModuleTask(loadProperties(file('plugin.properties')))
+
+test {
+    dependsOn tasks.withType(Jar)
+    dependsOn project(":spellchecker:hunspell").tasks.withType(Jar)
+}

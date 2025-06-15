@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Alex Buloichik
                2013-2014 Aaron Madlon-Kay, Alex Buloichik
+               2024 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -38,6 +39,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.omegat.core.Core;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -46,6 +48,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
+import org.xml.sax.SAXParseException;
 
 /**
  * Class for store data from project_save.tmx.
@@ -74,46 +77,57 @@ public class ProjectTMX {
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    Map<String, TMXEntry> defaults;
+    protected Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    Map<EntryKey, TMXEntry> alternatives;
+    protected Map<EntryKey, TMXEntry> alternatives;
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
     public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
-            File file, CheckOrphanedCallback callback) throws Exception {
-        this.checkOrphanedCallback = callback;
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
+            File file, CheckOrphanedCallback callback) {
+        this(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback,
+                Core.getSegmenter());
+    }
 
-        if (file == null || !file.exists()) {
-            // file not exist - new project
-            return;
+    public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
+            File file, CheckOrphanedCallback callback, Segmenter segmenter) {
+        this(callback);
+        try {
+            load(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, segmenter);
+        } catch (SAXParseException ex) {
+            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
+        } catch (Exception e) {
+            Log.logErrorRB(e, "LOG_DATAENGINE_LOAD_ERROR", file.getAbsolutePath());
         }
+    }
 
-        new TMXReader2().readTMX(
-                file,
-                sourceLanguage,
-                targetLanguage,
-                isSentenceSegmentingEnabled,
-                false,
-                true,
-                Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
-                new Loader(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled));
+    public ProjectTMX(CheckOrphanedCallback callback) {
+        this.checkOrphanedCallback = callback;
+        alternatives = new HashMap<>();
+        defaults = new HashMap<>();
     }
 
     /**
      * Constructor for TMX delta.
      */
     public ProjectTMX() {
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
-        checkOrphanedCallback = null;
+        this(null);
+    }
+
+    public void load(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
+            File file, Segmenter segmenter) throws Exception {
+        if (file == null || !file.exists()) {
+            // file not exist - new project
+            return;
+        }
+        new TMXReader2().readTMX(file, sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, false,
+                true, Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
+                new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled));
     }
 
     /**
@@ -285,11 +299,14 @@ public class ProjectTMX {
     private class Loader implements TMXReader2.LoadCallback {
         private final Language sourceLang;
         private final Language targetLang;
+        private final Segmenter segmenter;
         private final boolean sentenceSegmentingEnabled;
 
-        Loader(Language sourceLang, Language targetLang, boolean sentenceSegmentingEnabled) {
+        Loader(Language sourceLang, Language targetLang, Segmenter segmenter,
+                boolean sentenceSegmentingEnabled) {
             this.sourceLang = sourceLang;
             this.targetLang = targetLang;
+            this.segmenter = segmenter;
             this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
         }
 
@@ -311,13 +328,13 @@ public class ProjectTMX {
                 changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                         tu.creationid);
                 changed = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
-                    tu.creationdate);
+                        tu.creationdate);
                 translation = tuvTarget.text;
             }
 
             List<String> sources = new ArrayList<String>();
             List<String> targets = new ArrayList<String>();
-            Core.getSegmenter().segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
+            segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
                     tuvSource.text, targetLang, translation, sources, targets);
 
             synchronized (this) {
@@ -342,8 +359,8 @@ public class ProjectTMX {
                         id = te.getPropValue(ATTR_TUID);
                     }
 
-                    EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
-                            id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
+                    EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source, id,
+                            te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
                             te.getPropValue(PROP_PATH));
 
                     TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
@@ -390,8 +407,11 @@ public class ProjectTMX {
     public Collection<TMXEntry> getDefaults() {
         return defaults.values();
     }
+
     /**
-     * Returns the collection of TMX entries that have an alternative translation
+     * Returns the collection of TMX entries that have an alternative
+     * translation
+     * 
      * @return
      */
     public Collection<TMXEntry> getAlternatives() {

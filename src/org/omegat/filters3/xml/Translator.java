@@ -33,9 +33,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.xml.sax.Attributes;
+
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.util.Language;
-import org.xml.sax.Attributes;
 
 /**
  * The interface to specify the method a Handler can use to translate text.
@@ -44,7 +45,7 @@ import org.xml.sax.Attributes;
  * @author Didier Briel
  * @author Alex Buloichik
  */
-interface Translator {
+public interface Translator {
     /**
      * The method the Handler would call to pass translatable content to OmegaT
      * core and receive translation.
@@ -56,15 +57,15 @@ interface Translator {
      *
      * @param inFile
      *            The source file.
-     * @param outEncoding
+     * @param inEncoding
      *            Encoding of the source file, if the filter supports it.
-     *            Otherwise null.
+     *            Otherwise, it should be null.
      * @return The reader of the source file.
      *
      * @throws UnsupportedEncodingException
      *             Thrown if JVM doesn't support the specified inEncoding.
      * @throws IOException
-     *             If any I/O Error occurs upon reader creation.
+     *             If I/O Error occurs upon reader creation.
      */
     BufferedReader createReader(File inFile, String inEncoding) throws UnsupportedEncodingException,
             IOException;
@@ -76,7 +77,7 @@ interface Translator {
      *            The target file.
      * @param outEncoding
      *            Encoding of the target file, if the filter supports it.
-     *            Otherwise null.
+     *            Otherwise, it should be null.
      * @return The writer for the target file.
      *
      * @throws UnsupportedEncodingException
@@ -116,7 +117,7 @@ interface Translator {
     void text(String text);
 
     /**
-     * Returns true if current section should be ignored by parser.
+     * Returns true if the current section should be ignored by parser.
      */
     boolean isInIgnored();
 

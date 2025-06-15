@@ -23,18 +23,17 @@ PGID=`id -g`
 IMAGE=omegatorg/innosetup:innosetup6
 CONTEXT=${TMPDIR}/iscc
 mkdir -p $CONTEXT
+cp -p ci/iscc-entrypoint.sh $CONTEXT/
 
 cat << __EOF__  > $CONTEXT/Dockerfile
 FROM docker.io/amake/innosetup:innosetup6-buster
 USER root
 RUN usermod -u $PUID -o xclient && groupmod -g $PGID -o xusers
 RUN chown -R $PUID:$PGID /home/xclient /work
+COPY iscc-entrypoint.sh /home/xclient
 USER xclient
-ENV HOME /home/xclient
-ENV WINEPREFIX /home/xclient/.wine
-ENV WINEARCH win32
 WORKDIR /work
-ENTRYPOINT ["iscc"]
+ENTRYPOINT ["/home/xclient/iscc-entrypoint.sh"]
 __EOF__
 
 CMD="$(type -p docker)" && $CMD info >/dev/null 2>&1 || CMD="$(type -p nerdctl)" && $CMD info > /dev/null || false
@@ -48,9 +47,10 @@ if [[ -z "$IMAGEID" ]]; then
     exit 1
   fi
 fi
+
 exec $CMD run -i --rm  \
-   -u `id -u`:`id -g` \
-   -v "$PWD":/work \
+   --user `id -u`:`id -g` \
+   --mount type=bind,source="$PWD",target=/work \
    $(bindpaths "$@") \
    $IMAGE \
    $(relpaths "$@")

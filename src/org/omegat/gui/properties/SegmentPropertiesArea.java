@@ -40,8 +40,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
@@ -60,7 +58,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
-import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.BiDiUtils;
@@ -102,6 +99,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private ISegmentPropertiesView viewImpl;
     private boolean isTargetRtl;
 
+    void setTargetRtl(boolean targetRtl) {
+        isTargetRtl = targetRtl;
+    }
+
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
                 null, true);
@@ -109,24 +110,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
         scrollPane.setMenuProvider(this);
 
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-            @Override
-            public void onNewFile(String activeFileName) {
-            }
-
-            @Override
-            public void onEntryActivated(SourceTextEntry newEntry) {
-                scrollPane.stopNotifying();
-                isTargetRtl = BiDiUtils.isTargetLangRtl();
-                setProperties(newEntry);
-                doNotify(getKeysToNotify());
-            }
-        });
-        CoreEvents.registerProjectChangeListener(eventType -> {
-            if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
-                setProperties(null);
-            }
-        });
+        CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener(this));
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
 
         scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
@@ -155,8 +139,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             Constructor<?> constructor = viewClass.getConstructor();
             newImpl = (ISegmentPropertiesView) constructor.newInstance();
-        } catch (Throwable e) {
-            Logger.getLogger(getClass().getName()).log(Level.FINE, e.getMessage());
+        } catch (Exception e) {
+            Log.log(e);
             return;
         }
         viewImpl = newImpl;
@@ -197,7 +181,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             menu.show(scrollPane, p.x, p.y);
         } catch (IllegalComponentStateException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 
@@ -321,29 +305,32 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
     private void setProperties(SourceTextEntry ste) {
         properties.clear();
-        if (ste != null) {
-            if (ste.getComment() != null) {
-                setProperty(KEY_HASCOMMENT, true);
+        if (ste == null) {
+            viewImpl.update();
+            return;
+        }
+
+        if (ste.getComment() != null) {
+            setProperty(KEY_HASCOMMENT, true);
+        }
+        if (ste.getDuplicate() != DUPLICATE.NONE) {
+            setProperty(KEY_ISDUP, ste.getDuplicate());
+        }
+        if (ste.getSourceTranslation() != null) {
+            if (isTargetRtl) {
+                setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
+            } else {
+                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
             }
-            if (ste.getDuplicate() != DUPLICATE.NONE) {
-                setProperty(KEY_ISDUP, ste.getDuplicate());
+            if (ste.isSourceTranslationFuzzy()) {
+                setProperty(KEY_TRANSLATIONISFUZZY, true);
             }
-            if (ste.getSourceTranslation() != null) {
-                if (isTargetRtl) {
-                    setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
-                } else {
-                    setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
-                }
-                if (ste.isSourceTranslationFuzzy()) {
-                    setProperty(KEY_TRANSLATIONISFUZZY, true);
-                }
-            }
-            setKeyProperties(ste.getKey());
-            IProject project = Core.getProject();
-            if (project.isProjectLoaded()) {
-                TMXEntry trg = project.getTranslationInfo(ste);
-                setTranslationProperties(trg);
-            }
+        }
+        setKeyProperties(ste.getKey());
+        IProject project = Core.getProject();
+        if (project.isProjectLoaded()) {
+            TMXEntry trg = project.getTranslationInfo(ste);
+            setTranslationProperties(trg);
         }
         viewImpl.update();
     }
@@ -383,5 +370,31 @@ public class SegmentPropertiesArea implements IPaneMenu {
         } else {
             setProperty(KEY_ORIGIN, OStrings.getString("SEGPROP_ORIGIN_UNKNOWN"));
         }
+    }
+
+    private class SegmentPropertiesEntryEventListener implements IEntryEventListener {
+
+        private final SegmentPropertiesArea segmentPropertiesArea;
+
+        SegmentPropertiesEntryEventListener(SegmentPropertiesArea segmentPropertiesArea) {
+            this.segmentPropertiesArea = segmentPropertiesArea;
+        }
+
+        @Override
+        public void onNewFile(String activeFileName) {
+            // nothing to do
+        }
+
+        @Override
+        public void onEntryActivated(SourceTextEntry newEntry) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            segmentPropertiesArea.scrollPane.stopNotifying();
+            segmentPropertiesArea.setTargetRtl(BiDiUtils.isTargetLangRtl());
+            segmentPropertiesArea.setProperties(newEntry);
+            segmentPropertiesArea.doNotify(getKeysToNotify());
+        }
+
     }
 }

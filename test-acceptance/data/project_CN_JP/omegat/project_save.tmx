@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE tmx SYSTEM "tmx11.dtd">
+<tmx version="1.1">
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="6.1.0_0_50ff299ad" segtype="sentence" srclang="zh-CN"/>
+  <body>
+<!-- Default translations -->
+    <tu>
+      <tuv lang="zh-CN">
+        <seg>太平寺中的文笔塔</seg>
+      </tuv>
+      <tuv lang="ja-JP" changeid="Hiroshi Miura" changedate="20241107T122621Z" creationid="Hiroshi Miura" creationdate="20241107T122621Z">
+        <seg>太平寺の中心的なペン塔</seg>
+      </tuv>
+    </tu>
+<!-- Alternative translations -->
+  </body>
+</tmx>

@@ -1,0 +1,179 @@
+import org.apache.tools.ant.filters.FixCrLfFilter
+import org.apache.tools.ant.filters.ReplaceTokens
+
+import java.nio.file.Paths
+
+def gradleOnJava17OrLater = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
+def omegatJarFilename = jar.archiveFileName.get()
+
+// clean work folder for jpackage
+def jpackageWorkdir = layout.buildDirectory.file('jpackage')
+tasks.register('cleanJpkgWorkdir', Delete) {
+    delete jpackageWorkdir
+}
+
+tasks.register('jars', Sync) {
+    from configurations.runtimeClasspath
+    from(tasks.jar) { include omegatJarFilename }
+    into file(layout.buildDirectory.file('jars'))
+    dependsOn tasks.jar
+}
+
+// prepare japckage contents
+tasks.register('jpackageAppContentGreetings', Sync) {
+    dependsOn jpackage
+    dependsOn tasks.findByName('firstSteps')
+
+    from layout.buildDirectory.file('docs/greetings')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/greetings")
+}
+
+tasks.register('jpackageAppContentManuals', Sync) {
+    dependsOn jpackage
+    dependsOn tasks.findByName("manualZips")
+
+    from layout.buildDirectory.file('docs/manuals')
+    include '*.zip'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs/manuals")
+}
+
+tasks.register('jpackageAppContentDocs', Copy) {
+    dependsOn jpackage
+
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/docs")
+    from("release") {
+        include 'doc-license.txt'
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+    from("release") {
+        exclude 'doc-license.txt'
+        include '*.txt', '*.html'
+        filter(ReplaceTokens, tokens: [
+                TRANSLATION_NOTICE: ''
+        ])
+        filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
+    }
+}
+tasks.register('jpackageAppContentScripts', Sync) {
+    from 'scripts'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/scripts")
+    dependsOn jpackage
+}
+tasks.register('jpackageAppContentImages', Sync) {
+    from 'images'
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/images")
+    dependsOn jpackage
+}
+tasks.register('jpackageAppContentModules', Sync) {
+    from layout.buildDirectory.file('modules')
+    into layout.buildDirectory.file("jpackage/app-image/${application.applicationName}/lib/modules")
+    dependsOn subprojects.collect {it.tasks.withType(Jar)}
+    dependsOn jpackage
+}
+tasks.register('jpackageAppContent') {
+    dependsOn jpackageAppContentGreetings
+    dependsOn jpackageAppContentManuals
+    dependsOn jpackageAppContentDocs
+    dependsOn jpackageAppContentImages
+    dependsOn jpackageAppContentModules
+    dependsOn jpackageAppContentScripts
+}
+
+// construct package contents in standard file tree
+tasks.register('jpackage', Exec) {
+    dependsOn cleanJpkgWorkdir
+    dependsOn jars
+    group = 'other'
+
+    inputs.files file(layout.buildDirectory.file('jars'))
+    outputs.files file(layout.buildDirectory.file("jpackage/app-image"))
+    onlyIf { gradleOnJava17OrLater }
+
+    def osName = System.getProperty('os.name').toLowerCase()
+    def icon = 'images/OmegaT.png'
+    if (osName.contains('windows')) {
+        icon = "images/OmegaT.ico"
+    } else if (osName.contains('mac')) {
+        icon = "images/OmegaT.icns"
+    }
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'app-image',
+            '--app-version', version,
+            '--description', distDescription,
+            '--icon', icon,
+            '--name', appName,
+            '--dest', file(layout.buildDirectory.file("jpackage/app-image")),
+            '--vendor', distAppVendor,
+            '--input', file(layout.buildDirectory.file('jars')),
+            '--main-class', mainClassName,
+            '--main-jar', omegatJarFilename,
+            '--java-options', "-Xmx1024M",
+            '--java-options', "--add-opens",
+            '--java-options', "java.desktop/sun.awt.X11=ALL-UNNAMED",
+            '--resource-dir', file("release/jpackage-specific/linux/"))
+}
+
+// generate DEB package
+tasks.register("linuxDebDist", Exec) {
+    dependsOn jpackage
+    dependsOn jpackageAppContent
+    group = 'distribution'
+    def debVersion = '3'
+    inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
+    outputs.files file(layout.buildDirectory
+            .file("distributions/${application.applicationName}_${version}-${debVersion}_amd64.deb"))
+    onlyIf { gradleOnJava17OrLater && exePresent('dpkg-deb') }
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'deb',
+            '--app-version', version,
+            '--description', distDescription,
+            '--icon', file(layout.projectDirectory.file("images/OmegaT.png")),
+            '--name', application.applicationName,
+            '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")),
+            '--dest', file(layout.buildDirectory.file('distributions')),
+            '--vendor', distAppVendor,
+            '--resource-dir', file("release/jpackage-specific/linux/"),
+            '--about-url', "https://omegat.org/",
+            '--license-file', file(layout.projectDirectory.file("LICENSE")),
+            '--install-dir', '/opt/omegat-org',
+            '--linux-app-category', 'editors',
+            '--linux-app-release', debVersion,
+            '--linux-deb-maintainer', 'info@omegat.org',
+            '--linux-menu-group', 'Office',
+            '--linux-package-name', 'omegat',
+            '--linux-shortcut')
+    assemble.dependsOn linuxDebDist
+}
+
+// generate RPM package
+tasks.register("linuxRpmDist", Exec) {
+    dependsOn jpackage
+    dependsOn jpackageAppContent
+    group = 'distribution'
+    def rpmVersion = '3'
+    inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
+    outputs.files file(layout.buildDirectory
+            .file("distributions/${application.applicationName}-${version}-${rpmVersion}.x86_64.rpm"))
+    onlyIf { gradleOnJava17OrLater && exePresent('rpm') }
+
+    commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
+            '--type', 'rpm',
+            '--app-version', version,
+            '--description', distDescription,
+            '--icon', file(layout.projectDirectory.file("images/OmegaT.png")),
+            '--name', application.applicationName,
+            '--app-image', file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}")),
+            '--dest', file(layout.buildDirectory.file('distributions')),
+            '--vendor', distAppVendor,
+            '--about-url', "https://omegat.org/",
+            '--license-file', file(layout.projectDirectory.file("LICENSE")),
+            '--install-dir', '/opt/omegat-org',
+            '--linux-app-category', 'Application/Editors',
+            '--linux-app-release', rpmVersion,
+            '--linux-menu-group', 'Office',
+            '--linux-package-name', 'omegat',
+            '--linux-rpm-license-type', 'GPLv3+',
+            '--linux-shortcut')
+    assemble.dependsOn linuxRpmDist
+}

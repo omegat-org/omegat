@@ -4,7 +4,6 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2021-2024 Hiroshi Miura, Thomas Wolf and others.
-               This is ported from EGit (Apache-2.0)
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -59,6 +58,10 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 
+/**
+ * This is ported from EGit (Apache-2.0)
+ * @author Hiroshi Miura
+ */
 public class GITExternalGpgSigner extends GpgSigner {
 
     private static final ILogger LOGGER = Log.getLogger(GITExternalGpgSigner.class);

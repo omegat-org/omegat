@@ -5,7 +5,7 @@
 
  Copyright (C) 2010-2015 Alex Buloichik
                2013 Didier Briel
-               2022,2023 Hiroshi Miura
+               2022-2023 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

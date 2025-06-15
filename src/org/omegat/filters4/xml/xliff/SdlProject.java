@@ -5,7 +5,7 @@
 
  Copyright (C) 2017-2020 Thomas Cordonnier
                Home page: https://www.omegat.org/
-               Support center: http://groups.yahoo.com/group/OmegaT/
+               Support center: https://omegat.org/support
 
  This file is part of OmegaT.
 
@@ -25,6 +25,7 @@
 
 package org.omegat.filters4.xml.xliff;
 
+import java.nio.charset.StandardCharsets;
 import java.util.zip.ZipEntry;
 
 import org.omegat.core.Core;
@@ -48,6 +49,11 @@ public class SdlProject extends AbstractZipFilter {
     }
 
     public static void unloadPlugins() {
+        // there is no way to remove the filter.
+    }
+
+    public SdlProject() {
+        super(StandardCharsets.UTF_8);
     }
 
     @Override

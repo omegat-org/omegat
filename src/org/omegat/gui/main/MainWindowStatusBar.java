@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers,
-                         Benjamin Siband, and Kim Bruning
+               2000-2006 Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2014 Piotr Kulik
@@ -83,14 +83,17 @@ public class MainWindowStatusBar extends JPanel {
         final StatusBarMode progressMode = Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
                 StatusBarMode.DEFAULT);
 
-        String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-        String tooltipText = "MW_PROGRESS_TOOLTIP";
+        String statusText;
+        String tooltipText;
         if (progressMode == StatusBarMode.PERCENTAGE) {
             statusText = OStrings.getProgressBarDefaultPrecentageText();
-            tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
+            tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP_PERCENTAGE");
+        } else {
+            statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
+            tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP");
         }
         Mnemonics.setLocalizedText(progressLabel, statusText);
-        progressLabel.setToolTipText(OStrings.getString(tooltipText));
+        progressLabel.setToolTipText(tooltipText);
 
         progressLabel.setBorder(border);
         progressLabel.addMouseListener(new MouseAdapter() {
@@ -103,11 +106,14 @@ public class MainWindowStatusBar extends JPanel {
 
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
 
-                String statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
-                String tooltipText = "MW_PROGRESS_TOOLTIP";
+                String statusText;
+                String tooltipText;
                 if (progressMode == StatusBarMode.PERCENTAGE) {
                     statusText = OStrings.getProgressBarDefaultPrecentageText();
-                    tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
+                    tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP_PERCENTAGE");
+                } else {
+                    statusText = OStrings.getString("MW_PROGRESS_DEFAULT");
+                    tooltipText = OStrings.getString("MW_PROGRESS_TOOLTIP");
                 }
 
                 if (Core.getProject().isProjectLoaded()) {
@@ -115,7 +121,7 @@ public class MainWindowStatusBar extends JPanel {
                 } else {
                     Core.getMainWindow().showProgressMessage(statusText);
                 }
-                ((MainWindow) Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
+                ((MainWindow) Core.getMainWindow()).setProgressToolTipText(tooltipText);
             }
         });
 

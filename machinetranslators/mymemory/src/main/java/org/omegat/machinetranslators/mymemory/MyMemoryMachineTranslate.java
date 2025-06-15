@@ -7,7 +7,7 @@
                 2013 Martin Wunderlich, Didier Briel
                 2015 Didier Briel
                 2017 Briac Pilpre
-                2021,2023 Hiroshi Miura
+                2021-2023 Hiroshi Miura
                 Home page: https://www.omegat.org/
                 Support center: https://omegat.org/support
 

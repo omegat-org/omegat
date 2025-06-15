@@ -26,11 +26,14 @@
 
 package org.omegat.gui.glossary;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -54,12 +57,19 @@ import org.omegat.util.Token;
  */
 public class GlossarySearcher {
     private final ITokenizer tok;
-    private final Language lang;
+    private final Language srcLang;
+    private final Language targetLang;
     private final boolean mergeAltDefinitions;
 
-    public GlossarySearcher(ITokenizer tok, Language lang, boolean mergeAltDefinitions) {
+    public GlossarySearcher(ITokenizer tok, Language srcLang, boolean mergeAltDefinitions) {
+        this(tok, srcLang, Core.getProject().getProjectProperties().getTargetLanguage(), mergeAltDefinitions);
+    }
+
+    public GlossarySearcher(ITokenizer tok, Language srcLang, Language targetLang,
+            boolean mergeAltDefinitions) {
         this.tok = tok;
-        this.lang = lang;
+        this.srcLang = srcLang;
+        this.targetLang = targetLang;
         this.mergeAltDefinitions = mergeAltDefinitions;
     }
 
@@ -87,8 +97,10 @@ public class GlossarySearcher {
         // 4) by length of localized term (optional)
         // 5) by alphabet of localized term
         // Then remove the duplicates and combine the synonyms.
-        sortGlossaryEntries(result);
-        return filterGlossary(result, mergeAltDefinitions);
+        final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
+        final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
+        return filterGlossary(sortGlossaryEntries(srcLangCollator, targetLangCollator, result),
+                mergeAltDefinitions);
     }
 
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
@@ -212,7 +224,7 @@ public class GlossarySearcher {
 
     private Token[] tokenize(String str) {
         // Make comparison case-insensitive
-        String strLower = str.toLowerCase(lang.getLocale());
+        String strLower = str.toLowerCase(srcLang.getLocale());
         if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
                 Preferences.GLOSSARY_STEMMING_DEFAULT)) {
             return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
@@ -227,12 +239,12 @@ public class GlossarySearcher {
             return tokens;
         }
         List<Token> result = new ArrayList<>(tokens.length);
-        for (Token tok : tokens) {
-            if (!tokenInTag(tok, tags)) {
-                result.add(tok);
+        for (Token token : tokens) {
+            if (!tokenInTag(token, tags)) {
+                result.add(token);
             }
         }
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     private static boolean tokenInTag(Token tok, List<Tag> tags) {
@@ -245,33 +257,79 @@ public class GlossarySearcher {
         return false;
     }
 
-    static void sortGlossaryEntries(List<GlossaryEntry> entries) {
-        entries.sort((o1, o2) -> {
-            int p1 = o1.getPriority() ? 1 : 2;
-            int p2 = o2.getPriority() ? 1 : 2;
-            int c = p1 - p2;
-            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true)
-                    && (o2.getSrcText().contains(o1.getSrcText())
-                            || o1.getSrcText().contains(o2.getSrcText()))) {
-                // longer is better if one contains another
-                c = o2.getSrcText().length() - o1.getSrcText().length();
-            }
-            // sort source text alphabetically, first ignore a case, then
-            // consider a case
-            if (c == 0) {
-                c = o1.getSrcText().compareToIgnoreCase(o2.getSrcText());
-            }
-            if (c == 0) {
-                c = o1.getSrcText().compareTo(o2.getSrcText());
-            }
-            if (c == 0 && Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false)) {
-                c = o2.getLocText().length() - o1.getLocText().length();
-            }
-            if (c == 0) {
-                c = o1.getLocText().compareToIgnoreCase(o2.getLocText());
-            }
+    /**
+     * Sorts a list of glossary entries based on various criteria, including
+     * priority, source text length, source text alphabetical order, target text
+     * length, and target text alphabetical order.
+     *
+     * @param srcLangCollator
+     *            Collator used for sorting source texts language-dependently.
+     * @param targetLangCollator
+     *            Collator used for sorting target texts language-dependently.
+     * @param entries
+     *            The list of glossary entries to be sorted.
+     * @return A sorted list of glossary entries.
+     * @throws IllegalArgumentException
+     *             If the entries list is null.
+     */
+    List<GlossaryEntry> sortGlossaryEntries(Collator srcLangCollator, Collator targetLangCollator,
+            List<GlossaryEntry> entries) throws IllegalArgumentException {
+        if (entries == null) {
+            throw new IllegalArgumentException("entries must not be null");
+        }
+        return entries
+                .stream().filter(Objects::nonNull).sorted((o1, o2) -> compareGlossaryEntries(o1, o2,
+                        srcLangCollator, targetLangCollator)).collect(Collectors.toList());
+    }
+
+    private int compareGlossaryEntries(GlossaryEntry o1, GlossaryEntry o2, Collator srcLangCollator,
+            Collator targetLangCollator) {
+        int p1 = o1.getPriority() ? 1 : 2;
+        int p2 = o2.getPriority() ? 1 : 2;
+        boolean sortBySrcLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH,
+                true);
+        boolean sortByLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+        int c = p1 - p2;
+        if (c == 0 && sortBySrcLength && (o2.getSrcText().startsWith(o1.getSrcText())
+                || o1.getSrcText().startsWith(o2.getSrcText()))) {
+            c = o2.getSrcText().length() - o1.getSrcText().length();
+        }
+        if (c == 0) {
+            c = compareLanguageDependent(srcLangCollator, o1.getSrcText(), o2.getSrcText());
+        }
+        if (c == 0 && sortByLength) {
+            c = o2.getLocText().length() - o1.getLocText().length();
+        }
+        if (c == 0) {
+            c = compareLanguageDependent(targetLangCollator, o1.getLocText(), o2.getLocText());
+        }
+        return c;
+    }
+
+    private int compareLanguageDependent(Collator langCollator, String s1, String s2) {
+        // Use primary criteria - for most languages written with latin
+        // alphabet, PRIMARY means case-insensitive
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+        langCollator.setStrength(Collator.PRIMARY);
+        int c = langCollator.compare(s1, s2);
+        if (c != 0) {
             return c;
-        });
+        }
+        // Use secondary criteria - for most languages written with latin
+        // alphabet, SECONDARY means ignore accents
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#PRIMARY)
+        langCollator.setStrength(Collator.SECONDARY);
+        c = langCollator.compare(s1, s2);
+        if (c != 0) {
+            return c;
+        }
+        // Use tertiary criteria - language-dependent
+        // (see
+        // https://docs.oracle.com/javase/8/docs/api/java/text/Collator.html#TERTIARY)
+        langCollator.setStrength(Collator.TERTIARY);
+        return langCollator.compare(s1, s2);
     }
 
     private static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result,
@@ -289,14 +347,14 @@ public class GlossarySearcher {
         for (int i = 0; i < result.size(); i++) {
             GlossaryEntry nowEntry = result.get(i);
 
-            if (nowEntry.getSrcText().equals("")) {
+            if (nowEntry.getSrcText().isEmpty()) {
                 continue;
             }
 
             for (int j = i + 1; j < result.size(); j++) {
                 GlossaryEntry thenEntry = result.get(j);
 
-                if (thenEntry.getSrcText().equals("")) {
+                if (thenEntry.getSrcText().isEmpty()) {
                     continue;
                 }
 
@@ -313,11 +371,11 @@ public class GlossarySearcher {
         // Remove the blank entries from the list
         if (removedDuplicate) {
             Iterator<GlossaryEntry> myIter = result.iterator();
-            List<GlossaryEntry> newList = new LinkedList<GlossaryEntry>();
+            List<GlossaryEntry> newList = new LinkedList<>();
 
             while (myIter.hasNext()) {
                 GlossaryEntry checkEntry = myIter.next();
-                if (checkEntry.getSrcText().equals("") || checkEntry.getLocText().equals("")) {
+                if (checkEntry.getSrcText().isEmpty() || checkEntry.getLocText().isEmpty()) {
                     myIter.remove();
                 } else {
                     newList.add(checkEntry);
@@ -331,14 +389,14 @@ public class GlossarySearcher {
             return result;
         }
 
-        List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
+        List<GlossaryEntry> returnList = new LinkedList<>();
 
         // Group items with same scrTxt
         for (int i = 0; i < result.size(); i++) {
-            List<GlossaryEntry> srcList = new LinkedList<GlossaryEntry>();
+            List<GlossaryEntry> srcList = new LinkedList<>();
             GlossaryEntry nowEntry = result.get(i);
 
-            if (nowEntry.getSrcText().equals("")) {
+            if (nowEntry.getSrcText().isEmpty()) {
                 continue;
             }
             srcList.add(nowEntry);
@@ -347,7 +405,7 @@ public class GlossarySearcher {
                 GlossaryEntry thenEntry = result.get(j);
 
                 // Double check, needed?
-                if (thenEntry.getSrcText().equals("")) {
+                if (thenEntry.getSrcText().isEmpty()) {
                     continue;
                 }
                 if (nowEntry.getSrcText().equals(thenEntry.getSrcText())) {
@@ -357,12 +415,12 @@ public class GlossarySearcher {
             }
 
             // Sort items with same locTxt
-            List<GlossaryEntry> sortList = new LinkedList<GlossaryEntry>();
+            List<GlossaryEntry> sortList = new LinkedList<>();
             if (srcList.size() > 1) {
                 for (int k = 0; k < srcList.size(); k++) {
                     GlossaryEntry srcNow = srcList.get(k);
 
-                    if (srcNow.getSrcText().equals("")) {
+                    if (srcNow.getSrcText().isEmpty()) {
                         continue;
                     }
                     sortList.add(srcNow);
@@ -370,7 +428,7 @@ public class GlossarySearcher {
                     for (int l = k + 1; l < srcList.size(); l++) {
                         GlossaryEntry srcThen = srcList.get(l);
 
-                        if (srcThen.getSrcText().equals("")) {
+                        if (srcThen.getSrcText().isEmpty()) {
                             continue;
                         }
                         if (srcNow.getLocText().equals(srcThen.getLocText())) {

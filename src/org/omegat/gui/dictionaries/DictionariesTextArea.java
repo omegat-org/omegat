@@ -279,6 +279,8 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected void setFoundResult(final SourceTextEntry se, final List<DictionaryEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
+        List<String> oldDisplayWords = new ArrayList<>(displayedWords);
+
         clear();
 
         if (data == null) {
@@ -312,6 +314,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             i++;
         }
         txt.append("</html>");
+        firePropertyChange("displayWords", oldDisplayWords, displayedWords);
         fastReplaceContent(txt.toString());
     }
 

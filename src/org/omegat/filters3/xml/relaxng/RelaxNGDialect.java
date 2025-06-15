@@ -7,7 +7,6 @@
                2009 Didier Briel, Guido Leenders
                2012 Guido Leenders
                2015 Tony Graham
-
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 

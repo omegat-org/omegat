@@ -17,9 +17,7 @@ pr:
       - standard
   paths:
     exclude:
-      - docs
-      - doc_src
-      - docs_devel
+      - src_docs
       - README.md
 
 schedules:
@@ -58,7 +56,7 @@ stages:
             files=$(git diff-tree --no-commit-id --name-only -r origin/master..HEAD)
           fi
           for file in $files; do
-            if [[ $file =~ ^doc_src ]]; then
+            if [[ $file =~ ^src_docs ]]; then
               echo "##vso[task.setvariable variable=changeDoc;]True"
               exit 0
             fi
@@ -144,7 +142,7 @@ stages:
       - script: echo "##vso[task.setvariable variable=result;]false"
         condition: failed()
       - script: |
-          version=$(./gradlew -qq printVersion | head -n -1 )
+          version=$(./gradlew -qq printVersion | head -n 1)
           echo "##vso[task.setvariable variable=version]$version"
           # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
           ./gradlew --stop
@@ -182,7 +180,7 @@ stages:
       - script: echo "##vso[task.setvariable variable=result;]false"
         condition: failed()
       - script: |
-          version=$(./gradlew -qq printVersion | head -n -1 )
+          version=$(./gradlew -qq printVersion | head -n 1)
           echo "##vso[task.setvariable variable=version]$version"
           # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)
           ./gradlew --stop

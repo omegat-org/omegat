@@ -66,13 +66,6 @@ public class SpellcheckerConfigurationPanel extends javax.swing.JPanel {
         contentLabel = new javax.swing.JLabel();
         languageScrollPane = new javax.swing.JScrollPane();
         languageList = new javax.swing.JList<>();
-        jPanel4 = new javax.swing.JPanel();
-        uninstallButton = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        dictionaryUrlLabel = new javax.swing.JLabel();
-        dictionaryUrlTextField = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        installButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
@@ -88,7 +81,7 @@ public class SpellcheckerConfigurationPanel extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 5, 10));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(directoryLabel, OStrings.getString("GUI_SPELLCHECKER_DICTIONARYLABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(directoryLabel, OStrings.getString("GUI_SPELLCHECKER_DICTIONARYLABEL"));
         jPanel1.add(directoryLabel, java.awt.BorderLayout.NORTH);
 
         directoryTextField.setColumns(25);
@@ -97,7 +90,7 @@ public class SpellcheckerConfigurationPanel extends javax.swing.JPanel {
         jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
 
-        org.openide.awt.Mnemonics.setLocalizedText(directoryChooserButton, OStrings.getString("GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(directoryChooserButton, OStrings.getString("GUI_SPELLCHECKER_DIRECTORYCHOOSERBUTTON"));
         jPanel8.add(directoryChooserButton);
 
         jPanel1.add(jPanel8, java.awt.BorderLayout.EAST);
@@ -107,62 +100,30 @@ public class SpellcheckerConfigurationPanel extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(contentLabel, OStrings.getString("GUI_SPELLCHECKER_AVAILABLE_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(contentLabel, OStrings.getString("GUI_SPELLCHECKER_AVAILABLE_LABEL"));
         jPanel3.add(contentLabel, java.awt.BorderLayout.NORTH);
 
         languageScrollPane.setViewportView(languageList);
 
         jPanel3.add(languageScrollPane, java.awt.BorderLayout.CENTER);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
-        jPanel4.setLayout(new java.awt.BorderLayout());
-
-        org.openide.awt.Mnemonics.setLocalizedText(uninstallButton, OStrings.getString("GUI_SPELLCHECKER_UNINSTALLBUTTON")); // NOI18N
-        jPanel4.add(uninstallButton, java.awt.BorderLayout.NORTH);
-
-        jPanel3.add(jPanel4, java.awt.BorderLayout.EAST);
-
         detailPanel.add(jPanel3, java.awt.BorderLayout.CENTER);
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 10, 10));
-        jPanel5.setLayout(new java.awt.BorderLayout());
-
-        org.openide.awt.Mnemonics.setLocalizedText(dictionaryUrlLabel, OStrings.getString("GUI_SPELLCHECKER_URL_LABEL")); // NOI18N
-        jPanel5.add(dictionaryUrlLabel, java.awt.BorderLayout.NORTH);
-        jPanel5.add(dictionaryUrlTextField, java.awt.BorderLayout.CENTER);
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
-        jPanel6.setLayout(new java.awt.BorderLayout());
-
-        org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("GUI_SPELLCHECKER_INSTALLBUTTON")); // NOI18N
-        jPanel6.add(installButton, java.awt.BorderLayout.WEST);
-
-        jPanel5.add(jPanel6, java.awt.BorderLayout.SOUTH);
-
-        detailPanel.add(jPanel5, java.awt.BorderLayout.SOUTH);
 
         add(detailPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JCheckBox autoSpellcheckCheckBox;
-    javax.swing.JLabel contentLabel;
+    private javax.swing.JLabel contentLabel;
     javax.swing.JPanel detailPanel;
-    javax.swing.JLabel dictionaryUrlLabel;
-    javax.swing.JTextField dictionaryUrlTextField;
     javax.swing.JButton directoryChooserButton;
-    javax.swing.JLabel directoryLabel;
+    private javax.swing.JLabel directoryLabel;
     javax.swing.JTextField directoryTextField;
-    javax.swing.JButton installButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     javax.swing.JList<String> languageList;
     private javax.swing.JScrollPane languageScrollPane;
-    javax.swing.JButton uninstallButton;
     // End of variables declaration//GEN-END:variables
 
 }

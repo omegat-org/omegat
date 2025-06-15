@@ -10,6 +10,7 @@ bin
 local.properties
 
 .idea
+.fleet
 .run
 out
 

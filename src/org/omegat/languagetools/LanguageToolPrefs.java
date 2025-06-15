@@ -25,12 +25,17 @@
 
 package org.omegat.languagetools;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
+import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Manage LanguageTool preferences from one place
@@ -42,6 +47,8 @@ public final class LanguageToolPrefs {
     public static final String DEFAULT_DISABLED_CATEGORIES = "SPELL,TYPOS";
     public static final String DEFAULT_DISABLED_RULES = "SAME_TRANSLATION,TRANSLATION_LENGTH,DIFFERENT_PUNCTUATION";
     public static final BridgeType DEFAULT_BRIDGE_TYPE = BridgeType.NATIVE;
+    private static final String VENDOR_ID = "languagetool.org";
+    private static final String APPLICATION_ID = "LanguageTool";
 
     private LanguageToolPrefs() {
     }
@@ -86,6 +93,14 @@ public final class LanguageToolPrefs {
 
     public static String getLocalServerJarPath() {
         return Preferences.getPreference(Preferences.LANGUAGETOOL_LOCAL_SERVER_JAR_PATH);
+    }
+
+    public static void setLanguageModelPath(String path) {
+        Preferences.setPreference(Preferences.LANGUAGETOOL_LANGUAGE_MODEL_PATH, path);
+    }
+
+    public static String getLanguageModelPath() {
+        return Preferences.getPreference(Preferences.LANGUAGETOOL_LANGUAGE_MODEL_PATH);
     }
 
     public static void setDisabledRules(Set<String> rules, String languageCode) {
@@ -146,5 +161,63 @@ public final class LanguageToolPrefs {
     private static void setLanguageSpecificPreference(Set<String> data,
             String namePrefix, String languageCode) {
         Preferences.setPreference(namePrefix + "_" + languageCode, String.join(",", data));
+    }
+
+    public static String getLanguageModelDefaultPath() {
+        Path directory;
+        String userHome = StaticUtils.getHomeDir();
+        if (userHome == null) {
+            userHome = Paths.get(".").toAbsolutePath().toString();
+        }
+        if (Platform.isWindows_10_orLater) {
+            // Path:
+            // \\user\<YourUserName>\AppData\Roaming\languagetool.org\LanguageTool\ngrams
+            Path appDataDir = null;
+            try {
+                String appData = System.getenv("APPDATA");
+                if (!StringUtil.isEmpty(appData)) {
+                    appDataDir = Paths.get(appData);
+                }
+            } catch (SecurityException ignored) {
+            }
+            if (appDataDir != null && appDataDir.toFile().isDirectory()) {
+                String path = VENDOR_ID + "\\" + APPLICATION_ID + "\\";
+                directory = appDataDir.resolve(path);
+            } else {
+                String path = "Application Data\\" + VENDOR_ID + "\\" + APPLICATION_ID + "\\";
+                directory = Paths.get(userHome).resolve(path);
+            }
+        } else if (Platform.isMacOSX()) {
+            //  "Library/Application Support/LanguageTool/ngrams"
+            String path = "Library/Application Support/" + APPLICATION_ID;
+            directory = Paths.get(userHome).resolve(path);
+        } else if (Platform.isLinux()) {
+            // Path: /home/<YourUserName>/.local/share/LanguageTool/ngrams
+            Path appDataDir = null;
+            try {
+                String xdgConfigHome = System.getenv("XDG_CONFIG_HOME");
+                if (!StringUtil.isEmpty(xdgConfigHome)) {
+                    appDataDir = Paths.get(xdgConfigHome);
+                    if (!appDataDir.isAbsolute()) {
+                        appDataDir = null;
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+            if (appDataDir != null && appDataDir.toFile().isDirectory()) {
+                String path = APPLICATION_ID + "/ngrams";
+                directory = appDataDir.resolve(path);
+            } else {
+                String path = ".local/share/" + APPLICATION_ID + "/ngrams";
+                directory = Paths.get(userHome).resolve(path);
+            }
+        } else {
+            String path = "." + APPLICATION_ID + "/ngrams";
+            directory = Paths.get(userHome).resolve(path);
+        }
+        if (!directory.toFile().exists()) {
+            directory.toFile().mkdirs();
+        }
+        return directory.toString();
     }
 }

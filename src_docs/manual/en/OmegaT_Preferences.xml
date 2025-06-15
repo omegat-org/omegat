@@ -894,7 +894,7 @@
 			<term id="dialogs.preferences.editor.activate.segment.with.single.click.title"><link linkend="dialogs.preferences.editor.activate.segment.with.single.click"> </link><option>Activate segment with single click</option></term>
 			<listitem>
 				<para>By default, OmegaT requires a double-click to enter the segment under the cursor. Use this option if you prefer to enter segments with a single-click.</para>
-				<note><para>This functionality is temporarily disabled while the cursor is unlocked using F2.</para></note>
+				<note><para>When the cursor is unlocked, single-click just like double-click do not function. See the <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"/> setting.</para></note>
 			</listitem>
 		</varlistentry>
 

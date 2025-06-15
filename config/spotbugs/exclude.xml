@@ -89,4 +89,16 @@
             <Bug code="IJU" />
         </Not>
     </Match>
+    <!-- All EI/EI2 are ignored for the first step -->
+    <Match>
+        <Bug pattern="CT_CONSTRUCTOR_THROW,EI_EXPOSE_REP,EI_EXPOSE_REP2,EI_EXPOSE_STATIC_REP2,RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />
+    </Match>
+    <!-- PA is ignored for the first step -->
+    <Match>
+        <Bug pattern="PA_PUBLIC_PRIMITIVE_ATTRIBUTE"/>
+    </Match>
+    <!-- SF_SWITCH_NO_DEFAULT is ignored for the first step -->
+    <Match>
+        <Bug pattern="SF_SWITCH_NO_DEFAULT"/>
+    </Match>
 </FindBugsFilter>

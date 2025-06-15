@@ -102,15 +102,15 @@ public class TripleSplitButtonPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton firstButton;
     javax.swing.JPanel firstPanel;
-    public javax.swing.JTextPane firstTextPane;
+    javax.swing.JTextPane firstTextPane;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     javax.swing.JButton lastButton;
     javax.swing.JPanel lastPanel;
-    public javax.swing.JTextPane lastTextPane;
+    javax.swing.JTextPane lastTextPane;
     javax.swing.JButton middleButton;
     javax.swing.JPanel middlePanel;
-    public javax.swing.JTextPane middleTextPane;
+    javax.swing.JTextPane middleTextPane;
     // End of variables declaration//GEN-END:variables
 }

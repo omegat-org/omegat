@@ -475,6 +475,7 @@ public class FindMatchesTest {
                 ExternalTMX newTMX = ExternalTMFactory.load(externalTmx, prop, segmenter, null);
                 transMemories.put(externalTmx.getPath(), newTMX);
             } catch (Exception ignored) {
+                return Collections.emptyMap();
             }
             return Collections.unmodifiableMap(transMemories);
         }

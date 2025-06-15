@@ -86,8 +86,6 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
 
         @Override
         public IEditorFilter getFilter() {
-            SearchExpression s = new SearchExpression();
-            s.searchExpressionType = SearchExpression.SearchExpressionType.KEYWORD;
             return new ReplaceFilter(Collections.emptyList(), new MockSearcher(sourceText, replaceText));
         }
     }

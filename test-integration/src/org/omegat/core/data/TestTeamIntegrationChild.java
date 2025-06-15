@@ -110,7 +110,6 @@ public final class TestTeamIntegrationChild {
     static Map<String, Long> values = new HashMap<>();
     static Set<String> glossaries = new HashSet<>();
     static long glossaryIndex = 0;
-    static GlossaryManager glossaryManager;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 6) {
@@ -158,7 +157,7 @@ public final class TestTeamIntegrationChild {
             }
             projectProperties.autocreateDirectories();
             Core.setProject(new NotLoadedProject());
-            glossaryManager = new GlossaryManager(new TestGlossaryTextArea());
+            TestCoreState.getInstance().setGlossaryManager(new GlossaryManager(new TestGlossaryTextArea()));
             loadProject(projectProperties);
 
             key = new EntryKey[segCount];
@@ -314,7 +313,7 @@ public final class TestTeamIntegrationChild {
     }
 
     static void checkGlossaryEntries() {
-        List<GlossaryEntry> entries = glossaryManager.getLocalEntries();
+        List<GlossaryEntry> entries = TestCoreState.getInstance().getGlossaryManager().getLocalEntries();
         for (String s : glossaries) {
             boolean found = false;
             for (GlossaryEntry entry : entries) {
@@ -803,7 +802,7 @@ public final class TestTeamIntegrationChild {
 
         @Override
         protected void notifyGlossaryManagerFileChanged(File file) {
-            glossaryManager.fileChanged(file);
+            TestCoreState.getInstance().getGlossaryManager().fileChanged(file);
         }
     }
 

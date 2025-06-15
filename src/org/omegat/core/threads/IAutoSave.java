@@ -41,4 +41,10 @@ public interface IAutoSave {
      * Enable autosaving.
      */
     void enable();
+
+    /**
+     * finish thread.
+     */
+    default void fin() {
+    }
 }

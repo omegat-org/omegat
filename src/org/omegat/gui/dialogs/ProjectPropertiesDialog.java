@@ -185,6 +185,11 @@ public class ProjectPropertiesDialog extends JDialog {
         JPanel optionsBox = createOptionsBox();
         centerBox.add(optionsBox, BorderLayout.WEST);
 
+        // external postprocessing commands
+        centerBox.add(Box.createVerticalStrut(5));
+        Box externalCommandBox = createExternalCommandBox();
+        centerBox.add(externalCommandBox);
+
         // directories
         centerBox.add(Box.createVerticalStrut(5));
         Box dirsBox = createDirsBox();
@@ -223,6 +228,7 @@ public class ProjectPropertiesDialog extends JDialog {
         // Languages box
         Box bL = Box.createVerticalBox();
         localesBox.add(bL);
+        localesBox.add(Box.createRigidArea(new Dimension(5, 0)));
 
         // Source language label
         JLabel sourceLocaleLabel = new JLabel();
@@ -346,14 +352,16 @@ public class ProjectPropertiesDialog extends JDialog {
         sentenceSegmentingCheckBox.setName(SENTENCE_SEGMENTING_CB_NAME);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.weightx = 1.0;
         optionsBox.add(sentenceSegmentingCheckBox, gbc);
 
         Mnemonics.setLocalizedText(sentenceSegmentingButton, OStrings.getString("MW_OPTIONSMENU_LOCAL_SENTSEG"));
         sentenceSegmentingButton.setName(SENTENCE_SEGMENTING_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.EAST;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        gbc.weightx = 1.0;
         optionsBox.add(sentenceSegmentingButton, gbc);
 
         // File Filters
@@ -361,7 +369,7 @@ public class ProjectPropertiesDialog extends JDialog {
         fileFiltersButton.setName(FILE_FILTER_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.EAST;
+        gbc.anchor = GridBagConstraints.LINE_END;
         optionsBox.add(fileFiltersButton, gbc);
 
         // Repositories mapping
@@ -369,7 +377,7 @@ public class ProjectPropertiesDialog extends JDialog {
         repositoriesButton.setName(REPOSITORIES_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.EAST;
+        gbc.anchor = GridBagConstraints.LINE_END;
         optionsBox.add(repositoriesButton, gbc);
 
         // Repositories mapping
@@ -377,7 +385,7 @@ public class ProjectPropertiesDialog extends JDialog {
         externalFinderButton.setName(EXTERNAL_FINDER_BUTTON_NAME);
         gbc.gridx = 1;
         gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.EAST;
+        gbc.anchor = GridBagConstraints.LINE_END;
         optionsBox.add(externalFinderButton, gbc);
 
         // multiple translations
@@ -385,7 +393,7 @@ public class ProjectPropertiesDialog extends JDialog {
         allowDefaultsCheckBox.setName(ALLOW_DEFAULTS_CB_NAME);
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(allowDefaultsCheckBox, gbc);
 
         // Remove Tags
@@ -393,36 +401,31 @@ public class ProjectPropertiesDialog extends JDialog {
         removeTagsCheckBox.setName(REMOVE_TAGS_CB_NAME);
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.LINE_START;
         optionsBox.add(removeTagsCheckBox, gbc);
 
-        // Post-processing
-        JLabel externalCommandLabel = new JLabel();
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.WEST;
-        optionsBox.add(externalCommandLabel, gbc);
-        externalCommandTextArea.setRows(2);
+        return optionsBox;
+    }
+    
+    // Post-processing command
+    private Box createExternalCommandBox() {
+        Box externalCommandBox = Box.createVerticalBox();
+        externalCommandBox.setBorder(new EtchedBorder());
+        externalCommandTextArea.setRows(3);
         externalCommandTextArea.setLineWrap(true);
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-            Mnemonics.setLocalizedText(externalCommandLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
+            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                OStrings.getString("PP_EXTERNAL_COMMAND")));
         } else {
-            Mnemonics.setLocalizedText(externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
             externalCommandTextArea.setEditable(false);
             externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
-            externalCommandLabel.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
-            externalCommandTextArea.setBackground(getBackground());
+            externalCommandBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
+                OStrings.getString("PP_EXTERN_CMD_DISABLED")));
         }
         externalCommandTextArea.setName(EXTERNAL_COMMAND_TEXTAREA_NAME);
         final JScrollPane externalCommandScrollPane = new JScrollPane();
         externalCommandScrollPane.setViewportView(externalCommandTextArea);
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.weightx = 1;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        optionsBox.add(externalCommandScrollPane, gbc);
+        externalCommandBox.add(externalCommandScrollPane);
         variablesList = new JComboBox<>(new Vector<>(CommandVarExpansion.getCommandVariables()));
         variablesList.setName(VARIABLE_LIST_NAME);
         // Add variable insertion controls only if project external commands are
@@ -434,6 +437,7 @@ public class ProjectPropertiesDialog extends JDialog {
             Mnemonics.setLocalizedText(variablesLabel,
                     OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
             bIC.add(variablesLabel);
+            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
             bIC.add(variablesList);
             Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
             insertButton.addActionListener(new java.awt.event.ActionListener() {
@@ -442,17 +446,11 @@ public class ProjectPropertiesDialog extends JDialog {
                     externalCommandTextArea.replaceSelection(variablesList.getSelectedItem().toString());
                 }
             });
+            bIC.add(Box.createRigidArea(new Dimension(5, 0)));
             bIC.add(insertButton);
-            bIC.add(Box.createHorizontalGlue());
-            gbc.gridx = 0;
-            gbc.gridy = 5;
-            gbc.weightx = 1;
-            gbc.gridwidth = 2;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            optionsBox.add(bIC, gbc);
+            externalCommandBox.add(bIC);
         }
-        return optionsBox;
+        return externalCommandBox;
     }
 
     private Box createDirsBox() {
@@ -463,86 +461,114 @@ public class ProjectPropertiesDialog extends JDialog {
 
         JLabel srcRootLabel = new JLabel();
         Mnemonics.setLocalizedText(srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
+        Box bSrcRootLabel = Box.createHorizontalBox();
+        bSrcRootLabel.add(srcRootLabel);
+        bSrcRootLabel.add(Box.createHorizontalGlue());
         Box bSrc = Box.createHorizontalBox();
         bSrc.setBorder(emptyBorder);
-        bSrc.add(srcRootLabel);
-        bSrc.add(Box.createHorizontalGlue());
+        bSrc.add(srcRootField);
         Mnemonics.setLocalizedText(srcExcludesBtn, OStrings.getString("PP_BUTTON_BROWSE_SRC_EXCLUDES"));
         srcExcludesBtn.setName(SRC_EXCLUDES_BUTTON_NAME);
+        bSrc.add(Box.createRigidArea(new Dimension(5, 0)));
         bSrc.add(srcExcludesBtn);
-        Mnemonics.setLocalizedText(srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
+        bSrc.add(Box.createRigidArea(new Dimension(5, 0)));
         bSrc.add(srcBrowse);
+        Mnemonics.setLocalizedText(srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bSrcRootLabel);
         dirsBox.add(bSrc);
-        dirsBox.add(srcRootField);
 
         JLabel tmRootLabel = new JLabel();
         Mnemonics.setLocalizedText(tmRootLabel, OStrings.getString("PP_TM_ROOT"));
+        Box bTmRootLabel = Box.createHorizontalBox();
+        bTmRootLabel.add(tmRootLabel);
+        bTmRootLabel.add(Box.createHorizontalGlue());
         Box bTM = Box.createHorizontalBox();
         bTM.setBorder(emptyBorder);
-        bTM.add(tmRootLabel);
-        bTM.add(Box.createHorizontalGlue());
+        bTM.add(tmRootField);
         Mnemonics.setLocalizedText(tmBrowse, OStrings.getString("PP_BUTTON_BROWSE_TM"));
         tmBrowse.setName(TM_BROWSE_BUTTON_NAME);
+        bTM.add(Box.createRigidArea(new Dimension(5, 0)));
         bTM.add(tmBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bTmRootLabel);
         dirsBox.add(bTM);
-        dirsBox.add(tmRootField);
 
         JLabel glosRootLabel = new JLabel();
         Mnemonics.setLocalizedText(glosRootLabel, OStrings.getString("PP_GLOS_ROOT"));
+        Box bGlosRootLabel = Box.createHorizontalBox();
+        bGlosRootLabel.add(glosRootLabel);
+        bGlosRootLabel.add(Box.createHorizontalGlue());
         Box bGlos = Box.createHorizontalBox();
         bGlos.setBorder(emptyBorder);
-        bGlos.add(glosRootLabel);
-        bGlos.add(Box.createHorizontalGlue());
+        bGlos.add(glosRootField);
         Mnemonics.setLocalizedText(glosBrowse, OStrings.getString("PP_BUTTON_BROWSE_GL"));
         glosBrowse.setName(GLOSSARY_BROWSE_BUTTON_NAME);
+        bGlos.add(Box.createRigidArea(new Dimension(5, 0)));
         bGlos.add(glosBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bGlosRootLabel);
         dirsBox.add(bGlos);
-        dirsBox.add(glosRootField);
 
         JLabel writeableGlosLabel = new JLabel();
         Mnemonics.setLocalizedText(writeableGlosLabel, OStrings.getString("PP_WRITEABLE_GLOS"));
+        Box bWriteableGlosLabel = Box.createHorizontalBox();
+        bWriteableGlosLabel.add(writeableGlosLabel);
+        bWriteableGlosLabel.add(Box.createHorizontalGlue());
         Box bwGlos = Box.createHorizontalBox();
         bwGlos.setBorder(emptyBorder);
-        bwGlos.add(writeableGlosLabel);
-        bwGlos.add(Box.createHorizontalGlue());
+        bwGlos.add(writeableGlosField);
         Mnemonics.setLocalizedText(wGlosBrowse, OStrings.getString("PP_BUTTON_BROWSE_WG"));
         wGlosBrowse.setName(WRITABLE_GLOSSARY_BROWSE_BUTTON_NAME);
+        bwGlos.add(Box.createRigidArea(new Dimension(5, 0)));
         bwGlos.add(wGlosBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bWriteableGlosLabel);
         dirsBox.add(bwGlos);
-        dirsBox.add(writeableGlosField);
 
         JLabel locDictLabel = new JLabel();
         Mnemonics.setLocalizedText(locDictLabel, OStrings.getString("PP_DICT_ROOT"));
+        Box bLocDictLabel = Box.createHorizontalBox();
+        bLocDictLabel.add(locDictLabel);
+        bLocDictLabel.add(Box.createHorizontalGlue());
         Box bDict = Box.createHorizontalBox();
         bDict.setBorder(emptyBorder);
-        bDict.add(locDictLabel);
-        bDict.add(Box.createHorizontalGlue());
+        bDict.add(dictRootField);
         Mnemonics.setLocalizedText(dictBrowse, OStrings.getString("PP_BUTTON_BROWSE_DICT"));
         dictBrowse.setName(DICTIONARY_BROWSE_BUTTON_NAME);
+        bDict.add(Box.createRigidArea(new Dimension(5, 0)));
         bDict.add(dictBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bLocDictLabel);
         dirsBox.add(bDict);
-        dirsBox.add(dictRootField);
 
         JLabel locRootLabel = new JLabel();
         Mnemonics.setLocalizedText(locRootLabel, OStrings.getString("PP_LOC_ROOT"));
+        Box bLocRootLabel = Box.createHorizontalBox();
+        bLocRootLabel.add(locRootLabel);
+        bLocRootLabel.add(Box.createHorizontalGlue());
         Box bLoc = Box.createHorizontalBox();
         bLoc.setBorder(emptyBorder);
-        bLoc.add(locRootLabel);
-        bLoc.add(Box.createHorizontalGlue());
+        bLoc.add(locRootField);
         Mnemonics.setLocalizedText(locBrowse, OStrings.getString("PP_BUTTON_BROWSE_TAR"));
         locBrowse.setName(LOC_BROWSE_BUTTON_NAME);
+        bLoc.add(Box.createRigidArea(new Dimension(5, 0)));
         bLoc.add(locBrowse);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bLocRootLabel);
         dirsBox.add(bLoc);
-        dirsBox.add(locRootField);
 
         JLabel exportTMRootLabel = new JLabel();
         Mnemonics.setLocalizedText(exportTMRootLabel, OStrings.getString("PP_EXPORT_TM_ROOT"));
+        Box bExportTMRootLabel = Box.createHorizontalBox();
+        bExportTMRootLabel.add(exportTMRootLabel);
+        bExportTMRootLabel.add(Box.createHorizontalGlue());
         Box bExpTM = Box.createHorizontalBox();
         bExpTM.setBorder(emptyBorder);
-        bExpTM.add(exportTMRootLabel);
-        bExpTM.add(Box.createHorizontalGlue());
+        bExpTM.add(exportTMRootField);
         Mnemonics.setLocalizedText(exportTMBrowse, OStrings.getString("PP_BUTTON_BROWSE_EXP_TM"));
         exportTMBrowse.setName(EXPORT_TM_BROWSE_BUTTON_NAME);
+        bExpTM.add(Box.createRigidArea(new Dimension(5, 0)));
         bExpTM.add(exportTMBrowse);
         // Supply check boxes to choose which TM formats to export
         exportTMOmegaTCheckBox = new JCheckBox(OStrings.getString("PP_EXPORT_TM_OMEGAT"));
@@ -555,13 +581,15 @@ public class ProjectPropertiesDialog extends JDialog {
         JPanel exportTMPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
         JLabel cbExportLabel = new JLabel(OStrings.getString("PP_EXPORT_TM_LEVELS"));
 
-        dirsBox.add(bExpTM);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
+        dirsBox.add(bExportTMRootLabel);
         exportTMRootField.setName(EXPORT_TM_ROOT_FIELD_NAME);
-        dirsBox.add(exportTMRootField);
+        dirsBox.add(bExpTM);
         exportTMPanel.add(cbExportLabel);
         exportTMPanel.add(exportTMOmegaTCheckBox);
         exportTMPanel.add(exportTMLevel1CheckBox);
         exportTMPanel.add(exportTMLevel2CheckBox);
+        dirsBox.add(Box.createRigidArea(new Dimension(0, 5)));
         dirsBox.add(exportTMPanel);
 
         return dirsBox;

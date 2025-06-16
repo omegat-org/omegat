@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx11.dtd">
+<tmx version="1.1">
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="4.2.1_0_dev" segtype="sentence" srclang="EN-US"/>
+  <body>
+    <tu>
+      <tuv lang="en">
+        <seg>Connect to custom server instead of apertium.org</seg>
+      </tuv>
+      <tuv lang="fr" changeid="Hiroshi Miura" changedate="20241127T035216Z" creationid="Hiroshi Miura" creationdate="20241127T035216Z">
+        <seg>Se connecter à un serveur personnalisé au lieu d'apertium.org</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

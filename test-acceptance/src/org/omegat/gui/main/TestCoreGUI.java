@@ -34,7 +34,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -236,7 +235,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             });
             return mw;
         });
-        frame = Objects.requireNonNull(mainWindow).getApplicationFrame();
+        if (mainWindow == null) {
+            throw new IllegalStateException("Main window is null.");
+        }
+        frame = mainWindow.getApplicationFrame();
         window = new FrameFixture(robot(), frame);
         window.show();
     }

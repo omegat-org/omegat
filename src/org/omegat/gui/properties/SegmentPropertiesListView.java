@@ -27,8 +27,6 @@ package org.omegat.gui.properties;
 
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -47,9 +45,10 @@ import org.omegat.util.gui.UIThreadsUtil;
 /**
  * A list-based view of key=value properties of the current segment.
  * <p>
- * This is not a JList but instead a collection of distinct instances of {@link SegmentPropertiesListCell}.
- * This is because the initial JList-based implementation had rendering issues when trying to make the gear
- * menu icons appear interactive.
+ * This is not a JList but instead a collection of distinct instances of
+ * {@link SegmentPropertiesListCell}. This is because the initial JList-based
+ * implementation had rendering issues when trying to make the gear menu icons
+ * appear interactive.
  *
  * @author Aaron Madlon-Kay
  */
@@ -64,28 +63,22 @@ public class SegmentPropertiesListView implements ISegmentPropertiesView {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setFont(Core.getMainWindow().getApplicationFont());
         panel.setOpaque(true);
-        parent.scrollPane.setViewportView(panel);
+        parent.getScrollPane().setViewportView(panel);
     }
 
     @Override
     public void update() {
         UIThreadsUtil.mustBeSwingThread();
         panel.removeAll();
-        for (int i = 0; i < parent.properties.size(); i += 2) {
+        for (int i = 0; i < parent.getProperties().size(); i += 2) {
             final SegmentPropertiesListCell cell = new SegmentPropertiesListCell();
-            String key = parent.properties.get(i);
+            String key = parent.getProperties().get(i);
             cell.key = key;
             cell.label.setText(getDisplayKey(key));
-            cell.value.setText(parent.properties.get(i + 1));
+            cell.value.setText(parent.getProperties().get(i + 1));
             cell.value.setFont(panel.getFont());
-            cell.settingsButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    parent.showContextMenu(
-                            SwingUtilities.convertPoint(cell, cell.settingsButton.getLocation(),
-                                    parent.scrollPane));
-                }
-            });
+            cell.settingsButton.addActionListener(e -> parent.showContextMenu(SwingUtilities
+                    .convertPoint(cell, cell.settingsButton.getLocation(), parent.getScrollPane())));
             panel.add(cell);
         }
         panel.validate();

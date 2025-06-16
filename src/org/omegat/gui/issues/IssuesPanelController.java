@@ -38,6 +38,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +95,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StreamUtil;
-import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.ResourcesUtil;
@@ -124,6 +125,7 @@ public class IssuesPanelController implements IIssues {
     static final Icon SETTINGS_ICON_INVISIBLE = new Icon() {
         @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
+            // do nothing to hide an icon
         }
 
         @Override
@@ -156,6 +158,18 @@ public class IssuesPanelController implements IIssues {
         this.parent = parent;
     }
 
+    private static final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
+    }
+    private void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        pcs.firePropertyChange(propertyName, oldValue, newValue);
+    }
+
     @SuppressWarnings("serial")
     synchronized void init() {
         if (frame != null) {
@@ -171,6 +185,7 @@ public class IssuesPanelController implements IIssues {
             OSXIntegration.enableFullScreen(frame);
         }
         panel = new IssuesPanel();
+        panel.setName("issues_panel");
         frame.add(panel);
 
         frame.setJMenuBar(generateMenuBar());
@@ -321,6 +336,8 @@ public class IssuesPanelController implements IIssues {
             setFont(f);
             viewSelectedIssueDetail();
         });
+
+        firePropertyChange("panel", null, panel);
     }
 
     JMenuBar generateMenuBar() {
@@ -341,9 +358,7 @@ public class IssuesPanelController implements IIssues {
         Set<String> disabledProviders = IssueProviders.getDisabledProviderIds();
         IssueProviders.getIssueProviders().stream().sorted(Comparator.comparing(IIssueProvider::getId))
                 .forEach(provider -> {
-                    String label = StringUtil.format(
-                            OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER"),
-                            provider.getName());
+                    String label = OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER", provider.getName());
                     JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
                     item.addActionListener(e -> {
                         IssueProviders.setProviderEnabled(provider.getId(), item.isSelected());
@@ -651,6 +666,7 @@ public class IssuesPanelController implements IIssues {
                         .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
+            super.firePropertyChange("table", null, null);
         }
     }
 
@@ -680,21 +696,20 @@ public class IssuesPanelController implements IIssues {
 
     void updateTitle(int totalItems) {
         if (isShowingAllFiles()) {
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE"), totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE", totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE"),
-                    FilenameUtils.getName(filePath), totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE", FilenameUtils.getName(filePath),
+                    totalItems));
         }
     }
 
     void updateTitle(int shownItems, int totalItems) {
         if (isShowingAllFiles()) {
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE"), shownItems,
-                    totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE"),
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE",
                     FilenameUtils.getName(filePath), shownItems, totalItems));
         }
     }
@@ -747,7 +762,7 @@ public class IssuesPanelController implements IIssues {
     @SuppressWarnings("serial")
     class IssuesTableModel extends AbstractTableModel {
 
-        private final List<IIssue> issues;
+        private final transient List<IIssue> issues;
 
         IssuesTableModel(List<IIssue> issues) {
             this.issues = issues;
@@ -796,12 +811,12 @@ public class IssuesPanelController implements IIssues {
         }
     }
 
-    static final String ALL_TYPES = new String(OStrings.getString("ISSUES_TYPE_ALL"));
+    static final String ALL_TYPES = OStrings.getString("ISSUES_TYPE_ALL");
 
     @SuppressWarnings("serial")
     static class TypeListModel extends AbstractListModel<String> {
 
-        private final List<Map.Entry<String, Long>> types;
+        private final transient List<Map.Entry<String, Long>> types;
 
         TypeListModel(List<IIssue> issues) {
             this.types = calculateData(issues);
@@ -812,8 +827,7 @@ public class IssuesPanelController implements IIssues {
                     .map(IIssue::getTypeName)
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
             List<Map.Entry<String, Long>> result = new ArrayList<>();
-            result.add(new AbstractMap.SimpleImmutableEntry<String, Long>(ALL_TYPES,
-                    (long) issues.size()));
+            result.add(new AbstractMap.SimpleImmutableEntry<>(ALL_TYPES, (long) issues.size()));
             counts.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).forEach(result::add);
             return result;
         }
@@ -826,8 +840,7 @@ public class IssuesPanelController implements IIssues {
         @Override
         public String getElementAt(int index) {
             Map.Entry<String, Long> entry = types.get(index);
-            return StringUtil.format(OStrings.getString("ISSUES_TYPE_SUMMARY_TEMPLATE"), entry.getKey(),
-                    entry.getValue());
+            return OStrings.getString("ISSUES_TYPE_SUMMARY_TEMPLATE", entry.getKey(), entry.getValue());
         }
 
         List<String> getTypesAt(int[] indicies) {

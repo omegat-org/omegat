@@ -17,7 +17,7 @@
 * [Coding styles](30.CodingStyles.md)
 * [Source tree](36.SourceTree.md)
 * [Versioning](05.Versioning.md)
-* [Manner of the Pull Request](07.MannerOfThePullRequest.md)]
+* [Manner of the Pull Request](07.MannerOfThePullRequest.md)
 
 ## How to create plugin
 
@@ -75,4 +75,5 @@
 * [Release procedure](90.ReleaseProcedure.md)
 * [Code Signing How-to](92.CodeSigning.md)
 * [Building installer](93.BuildingInstallerPackage.md)
-* [Appendix](91.appendix.md)
+* [Git repository analysis](94.GitRepositoryAnalysis.md)
+* [Supplimentary files](91.appendix.md)

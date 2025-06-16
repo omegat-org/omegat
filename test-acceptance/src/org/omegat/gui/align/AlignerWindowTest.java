@@ -144,12 +144,12 @@ public class AlignerWindowTest extends TestCoreGUI {
         FileUtils.forceDeleteOnExit(tmpDir);
         // Start aligner
         JFrame frame = GuiActionRunner.execute(() -> {
-            AlignFilePickerController picker = new AlignFilePickerController();
-            picker.setSourceDefaultDir(tmpDir.toPath().resolve("source").toString());
-            picker.setDefaultSaveDir(tmpDir.toPath().resolve("tm").toString());
-            picker.setSourceLanguage(new Language("en"));
-            picker.setTargetLanguage(new Language("fr"));
-            return picker.initGUI(window.target());
+            AlignFilePickerController alignFilePickerController = new AlignFilePickerController();
+            alignFilePickerController.setSourceDefaultDir(tmpDir.toPath().resolve("source").toString());
+            alignFilePickerController.setDefaultSaveDir(tmpDir.toPath().resolve("tm").toString());
+            alignFilePickerController.setSourceLanguage(new Language("en"));
+            alignFilePickerController.setTargetLanguage(new Language("fr"));
+            return alignFilePickerController.initGUI(window.target());
         });
         picker = new FrameFixture(robot(), Objects.requireNonNull(frame));
         picker.show();

@@ -43,8 +43,15 @@ public interface IAutoSave {
     void enable();
 
     /**
-     * finish thread.
+     * Terminates the thread execution and releases associated resources.
+     * <p>
+     * This method signals the thread to stop by setting the running flag to false
+     * and ensures that all waiting threads are notified. A notification is sent
+     * on the lock object to release any threads waiting on it. Afterward, it
+     * attempts to join the thread, waiting a duration based on the wait interval
+     * to allow the thread completion. If the join is interrupted, the interrupt
+     * status is restored.
      */
-    default void fin() {
+    default void fin(){
     }
 }

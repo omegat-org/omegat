@@ -89,6 +89,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
                 case CREATE:
                     initialize();
                     break;
+                case SAVE:
+                    saveWordLists();
+                    break;
                 case CLOSE:
                     destroy();
                     break;
@@ -199,7 +202,6 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      */
     public void destroy() {
         if (checker != null) {
-            saveWordLists();
             checker.destroy();
             checker = null;
         }
@@ -217,26 +219,27 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      */
     public void saveWordLists() {
         // find out the internal project directory
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
         String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
+        if (!Paths.get(projectDir).toFile().exists() || !Paths.get(projectDir).toFile().isDirectory()) {
+            return;
+        }
 
         // Write the ignored and learned words to the disk
         Path ignoreFilePath = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME);
-        if (ignoreFilePath.toFile().exists() && ignoreFilePath.toFile().isFile()
-                && ignoreFilePath.toFile().canWrite()) {
-            try {
-                Files.write(ignoreFilePath, ignoreList);
-            } catch (IOException ex) {
-                Log.logWarningRB("SPELLCHECKER_IGNORE_FILE_WRITE_ERROR", ex.getLocalizedMessage());
-            }
+        try {
+            Files.write(ignoreFilePath, ignoreList);
+        } catch (IOException ex) {
+            Log.logWarningRB("SPELLCHECKER_IGNORE_FILE_WRITE_ERROR", ex.getLocalizedMessage());
         }
+
         Path learnedFilePath = Paths.get(projectDir, OConsts.LEARNED_WORD_LIST_FILE_NAME);
-        if (learnedFilePath.toFile().exists() && learnedFilePath.toFile().isFile()
-                && learnedFilePath.toFile().canWrite()) {
-            try {
-                Files.write(learnedFilePath, learnedList);
-            } catch (IOException ex) {
-                Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_WRITE_ERROR", ex.getLocalizedMessage());
-            }
+        try {
+            Files.write(learnedFilePath, learnedList);
+        } catch (IOException ex) {
+            Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_WRITE_ERROR", ex.getLocalizedMessage());
         }
     }
 

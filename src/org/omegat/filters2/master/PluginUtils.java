@@ -175,71 +175,160 @@ public final class PluginUtils {
     private PluginUtils() {
     }
 
+    private static final String OMEGAT_MAIN_CLASS = "org.omegat.Main";
+    private static final String BUILD_DIR = "build";
+    private static final String MODULES_DIR = "modules";
+    private static final String PLUGINS_DIR = "plugins";
+
     /**
-     * Loads all plugins from main classloader and from /plugins/ dir.
-     * <p>
-     * We should load all jars from /plugins/ dir first, because some plugin can
-     * use more than one jar. There are three different "plugins" directory, and
-     * one development treatment.
-     * <ul>
-     * <li>(installdir)/core-plugins/ OmegaT genuine sub-component</li>
-     * <li>(installdir/plugins/ System level 3rd party plugins</li>
-     * <li>(configdir)/plugins/ User level 3rd party plugins</li>
-     * </ul>
+     * Loads plugins for the application. This method initializes plugin
+     * locations, class loaders, and processes plugin manifests to load plugins
+     * based on the provided parameters.
+     *
+     * @param params
+     *            a map containing configuration parameters that may specify
+     *            additional settings for plugin loading, including development
+     *            mode manifests or other configurations.
      */
     public static void loadPlugins(final Map<String, String> params) {
-        final List<File> pluginsDirs = new ArrayList<>();
-        pluginsDirs.add(new File(StaticUtils.installDir(), "modules"));
-        pluginsDirs.add(new File(StaticUtils.installDir(), "plugins"));
-        pluginsDirs.add(new File(StaticUtils.getConfigDir(), "plugins"));
-        if (Paths.get(StaticUtils.installDir(), "build").toFile().exists()) {
-            // when developers run on source code tree, add system plugins
-            pluginsDirs.add(Paths.get(StaticUtils.installDir(), "build", "modules").toFile());
-        }
-
-        List<URL> urlList = populatePluginUrlList(pluginsDirs);
-
-        boolean foundMain = false;
-        MainClassLoader pluginsClassLoader = initializePluginClassLoaders(urlList);
-        // look on all manifests
+        List<URL> pluginUrls = initializePluginLocations();
+        initializePluginClassLoaders(pluginUrls);
         try {
-            Enumeration<URL> mlist = pluginsClassLoader.getResources(MANIFEST_MF);
-            while (mlist.hasMoreElements()) {
-                URL mu = mlist.nextElement();
-                try (InputStream in = mu.openStream()) {
-                    Manifest m = new Manifest(in);
-                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue(MAIN_CLASS))) {
-                        // found a main manifest - not in development mode
-                        foundMain = true;
-                    }
-                    if ("theme".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
-                        String target = mu.toString();
-                        for (URL url : urlList) {
-                            if (target.contains(url.toString())) {
-                                MAINCLASSLOADERS.get(PluginType.THEME).addJarToClasspath(url);
-                                loadFromManifest(m, MAINCLASSLOADERS.get(PluginType.THEME), mu);
-                            }
-                        }
-                    } else if ("language".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
-                        String target = mu.toString();
-                        for (URL url : urlList) {
-                            if (target.contains(url.toString())) {
-                                MAINCLASSLOADERS.get(PluginType.LANGUAGE).addJarToClasspath(url);
-                                loadFromManifest(m, MAINCLASSLOADERS.get(PluginType.LANGUAGE), mu);
-                            }
-                        }
-                    } else {
-                        loadFromManifest(m, pluginsClassLoader, mu);
-                    }
-                } catch (ClassNotFoundException e) {
-                    Log.log(e);
-                } catch (UnsupportedClassVersionError e) {
-                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
-                }
-            }
+            boolean isMainManifestFound = processPluginManifests(pluginUrls);
+            processManifest(params, isMainManifestFound);
+            loadBasePlugin();
         } catch (IOException ex) {
             Log.log(ex);
         }
+    }
+
+    /**
+     * Initializes the list of plugin locations by identifying and adding
+     * directories where plugins may be located, including standard installation
+     * directories and, if applicable, development build directories. The method
+     * returns a list of URLs pointing to these plugin locations.
+     *
+     * @return a list of URLs representing the locations of plugins.
+     */
+    private static List<URL> initializePluginLocations() {
+        List<File> pluginDirectories = new ArrayList<>();
+        pluginDirectories.add(new File(StaticUtils.installDir(), MODULES_DIR));
+        pluginDirectories.add(new File(StaticUtils.installDir(), PLUGINS_DIR));
+        pluginDirectories.add(new File(StaticUtils.getConfigDir(), PLUGINS_DIR));
+
+        // Add development plugins if running from source
+        File buildDir = Paths.get(StaticUtils.installDir(), BUILD_DIR).toFile();
+        if (buildDir.exists()) {
+            pluginDirectories.add(Paths.get(StaticUtils.installDir(), BUILD_DIR, MODULES_DIR).toFile());
+        }
+
+        return populatePluginUrlList(pluginDirectories);
+    }
+
+    /**
+     * Processes plugin manifest files found via the given class loader and a
+     * list of plugin URLs. Determines whether a main manifest specifying the
+     * main application class is found and processes each manifest file to load
+     * plugins or log relevant warnings.
+     *
+     * @param pluginUrls
+     *            a list of plugin URLs that may be updated during the
+     *            processing of manifests.
+     * @return true if a main manifest specifying the main application class is
+     *         found, false otherwise.
+     * @throws IOException
+     *             if an I/O error occurs during manifest processing.
+     */
+    private static boolean processPluginManifests(List<URL> pluginUrls) throws IOException {
+        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+        boolean isMainManifestFound = false;
+        Enumeration<URL> manifestUrls = pluginsClassLoader.getResources(MANIFEST_MF);
+
+        while (manifestUrls.hasMoreElements()) {
+            URL manifestUrl = manifestUrls.nextElement();
+            try {
+                isMainManifestFound |= processManifestUrl(manifestUrl, pluginUrls);
+            } catch (ClassNotFoundException e) {
+                Log.log(e);
+            } catch (UnsupportedClassVersionError e) {
+                Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(manifestUrl));
+            }
+        }
+        return isMainManifestFound;
+    }
+
+    /**
+     * Processes a plugin manifest URL to determine if it represents a main
+     * manifest or a plugin. Updates the plugin class loader and plugin URL list
+     * as necessary based on the manifest's attributes and plugin category.
+     *
+     * @param manifestUrl
+     *            the URL pointing to the plugin manifest to be processed
+     * @param pluginUrls
+     *            a list of plugin URLs that may be updated if the manifest
+     *            describes a valid plugin
+     * @return true if the manifest represents the main application manifest,
+     *         false otherwise
+     * @throws IOException
+     *             if an I/O error occurs while reading the manifest
+     * @throws ClassNotFoundException
+     *             if a plugin class specified in the manifest cannot be found
+     */
+    private static boolean processManifestUrl(URL manifestUrl, List<URL> pluginUrls)
+            throws IOException, ClassNotFoundException {
+        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+        try (InputStream manifestStream = manifestUrl.openStream()) {
+            Manifest manifest = new Manifest(manifestStream);
+            String pluginCategory = manifest.getMainAttributes().getValue(PLUGIN_CATEGORY);
+
+            // Check for main manifest
+            if (OMEGAT_MAIN_CLASS.equals(manifest.getMainAttributes().getValue(MAIN_CLASS))) {
+                return true;
+            }
+
+            // Process plugin based on category
+            if (pluginCategory == null) {
+                loadFromManifest(manifest, pluginsClassLoader, manifestUrl);
+            } else {
+                PluginType type = PluginType.getTypeByValue(pluginCategory);
+                if (type != PluginType.UNKNOWN && isUrlInList(manifestUrl, pluginUrls)) {
+                    MainClassLoader categoryLoader = MAINCLASSLOADERS.get(type);
+                    addUrlToClasspath(manifestUrl, pluginUrls, categoryLoader);
+                    loadFromManifest(manifest, categoryLoader, manifestUrl);
+                }
+            }
+        }
+        return false;
+    }
+
+    private static void loadBasePlugin() {
+        // run base plugins
+        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
+            try {
+                pl.getDeclaredConstructor().newInstance();
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
+    }
+
+    /**
+     * Processes the plugin manifest based on the provided configuration
+     * parameters and conditions. This method supports both development mode and
+     * production mode for plugin manifest loading.
+     *
+     * @param params
+     *            a map containing configuration parameters that specify
+     *            settings for plugin loading, including potential development
+     *            mode manifests.
+     * @param foundMain
+     *            a boolean flag indicating whether a main application manifest
+     *            has already been found. If false, the method attempts to load
+     *            manifests either from CLI arguments (in development mode) or
+     *            from a properties file.
+     */
+    private static void processManifest(Map<String, String> params, boolean foundMain) {
+        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
         try {
             if (!foundMain) {
                 // development mode - load from dev-manifests CLI arg
@@ -262,29 +351,32 @@ public final class PluginUtils {
         } catch (ClassNotFoundException | IOException ex) {
             Log.log(ex);
         }
-
-        // run base plugins
-        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
-            try {
-                pl.getDeclaredConstructor().newInstance();
-            } catch (Exception ex) {
-                Log.log(ex);
-            }
-        }
     }
 
-    private static MainClassLoader initializePluginClassLoaders(List<URL> urlList) {
+    private static boolean isUrlInList(URL target, List<URL> urlList) {
+        String targetString = target.toString();
+        return urlList.stream().anyMatch(url -> targetString.contains(url.toString()));
+    }
+
+    private static void addUrlToClasspath(URL manifestUrl, List<URL> urlList, MainClassLoader loader) {
+        String target = manifestUrl.toString();
+        urlList.stream().filter(url -> target.contains(url.toString())).forEach(loader::addJarToClasspath);
+    }
+
+    private static void initializePluginClassLoaders(List<URL> urlList) {
         ClassLoader cl = PluginUtils.class.getClassLoader();
-        MainClassLoader pluginsClassLoader = AccessController.doPrivileged((PrivilegedAction<MainClassLoader>) () ->
-                new MainClassLoader(urlList.toArray(new URL[0]), cl));
-        MainClassLoader themeClassLoader = AccessController.doPrivileged((PrivilegedAction<MainClassLoader>) () ->
-                new MainClassLoader(cl));
-        MainClassLoader languageClassLoader = AccessController.doPrivileged((PrivilegedAction<MainClassLoader>) () ->
-                new MainClassLoader(cl));
-        MAINCLASSLOADERS.put(PluginType.FILTER, pluginsClassLoader);
-        MAINCLASSLOADERS.put(PluginType.THEME, themeClassLoader);
-        MAINCLASSLOADERS.put(PluginType.LANGUAGE, languageClassLoader);
-        return pluginsClassLoader;
+        MainClassLoader pluginsClassLoader = AccessController.doPrivileged(
+                (PrivilegedAction<MainClassLoader>) () -> new MainClassLoader(urlList.toArray(new URL[0]),
+                        cl));
+        MAINCLASSLOADERS.put(PluginType.UNKNOWN, pluginsClassLoader);
+        for (PluginType type : PluginType.values()) {
+            if (type == PluginType.UNKNOWN) {
+                continue;
+            }
+            MainClassLoader klassLoader = AccessController
+                    .doPrivileged((PrivilegedAction<MainClassLoader>) () -> new MainClassLoader(cl));
+            MAINCLASSLOADERS.put(type, klassLoader);
+        }
     }
 
     /**
@@ -499,8 +591,21 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
-    public static ClassLoader getFilterClassLoader() {
-        return MAINCLASSLOADERS.get(PluginType.FILTER);
+    /**
+     * Retrieves the {@link ClassLoader} associated with the specified
+     * {@link PluginType}. If the provided plugin type is {@code UNKNOWN}, the
+     * method returns {@code null}.
+     *
+     * @param type
+     *            the {@link PluginType} for which the class loader is needed.
+     * @return the {@link ClassLoader} associated with the specified plugin
+     *         type, or {@code null} if the type is {@code UNKNOWN}.
+     */
+    public static ClassLoader getClassLoader(PluginType type) {
+        if (type == PluginType.UNKNOWN) {
+            return null;
+        }
+        return MAINCLASSLOADERS.get(type);
     }
 
     public static ClassLoader getThemeClassLoader() {

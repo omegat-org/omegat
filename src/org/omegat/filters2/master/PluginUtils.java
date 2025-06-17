@@ -37,9 +37,12 @@ import java.net.JarURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -166,14 +169,7 @@ public final class PluginUtils {
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
-    private static final MainClassLoader THEME_CLASSLOADER;
-    private static final MainClassLoader LANGUAGE_CLASSLOADER;
-
-    static {
-        ClassLoader cl = PluginUtils.class.getClassLoader();
-        THEME_CLASSLOADER = new MainClassLoader(cl);
-        LANGUAGE_CLASSLOADER = new MainClassLoader(cl);
-    }
+    private static final Map<PluginType, MainClassLoader> MAINCLASSLOADERS = new EnumMap<>(PluginType.class);
 
     /** Private constructor to disallow creation */
     private PluginUtils() {
@@ -204,9 +200,8 @@ public final class PluginUtils {
         List<URL> urlList = populatePluginUrlList(pluginsDirs);
 
         boolean foundMain = false;
+        MainClassLoader pluginsClassLoader = initializePluginClassLoaders(urlList);
         // look on all manifests
-        ClassLoader cl = PluginUtils.class.getClassLoader();
-        MainClassLoader pluginsClassLoader = new MainClassLoader(urlList.toArray(new URL[0]), cl);
         try {
             Enumeration<URL> mlist = pluginsClassLoader.getResources(MANIFEST_MF);
             while (mlist.hasMoreElements()) {
@@ -221,16 +216,16 @@ public final class PluginUtils {
                         String target = mu.toString();
                         for (URL url : urlList) {
                             if (target.contains(url.toString())) {
-                                THEME_CLASSLOADER.addJarToClasspath(url);
-                                loadFromManifest(m, THEME_CLASSLOADER, mu);
+                                MAINCLASSLOADERS.get(PluginType.THEME).addJarToClasspath(url);
+                                loadFromManifest(m, MAINCLASSLOADERS.get(PluginType.THEME), mu);
                             }
                         }
                     } else if ("language".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
                         String target = mu.toString();
                         for (URL url : urlList) {
                             if (target.contains(url.toString())) {
-                                LANGUAGE_CLASSLOADER.addJarToClasspath(url);
-                                loadFromManifest(m, LANGUAGE_CLASSLOADER, mu);
+                                MAINCLASSLOADERS.get(PluginType.LANGUAGE).addJarToClasspath(url);
+                                loadFromManifest(m, MAINCLASSLOADERS.get(PluginType.LANGUAGE), mu);
                             }
                         }
                     } else {
@@ -276,6 +271,20 @@ public final class PluginUtils {
                 Log.log(ex);
             }
         }
+    }
+
+    private static MainClassLoader initializePluginClassLoaders(List<URL> urlList) {
+        ClassLoader cl = PluginUtils.class.getClassLoader();
+        MainClassLoader pluginsClassLoader = AccessController.doPrivileged((PrivilegedAction<MainClassLoader>) () ->
+                new MainClassLoader(urlList.toArray(new URL[0]), cl));
+        MainClassLoader themeClassLoader = AccessController.doPrivileged((PrivilegedAction<MainClassLoader>) () ->
+                new MainClassLoader(cl));
+        MainClassLoader languageClassLoader = AccessController.doPrivileged((PrivilegedAction<MainClassLoader>) () ->
+                new MainClassLoader(cl));
+        MAINCLASSLOADERS.put(PluginType.FILTER, pluginsClassLoader);
+        MAINCLASSLOADERS.put(PluginType.THEME, themeClassLoader);
+        MAINCLASSLOADERS.put(PluginType.LANGUAGE, languageClassLoader);
+        return pluginsClassLoader;
     }
 
     /**
@@ -490,12 +499,16 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
+    public static ClassLoader getFilterClassLoader() {
+        return MAINCLASSLOADERS.get(PluginType.FILTER);
+    }
+
     public static ClassLoader getThemeClassLoader() {
-        return THEME_CLASSLOADER;
+        return MAINCLASSLOADERS.get(PluginType.THEME);
     }
 
     public static ClassLoader getLanguageClassLoader() {
-        return LANGUAGE_CLASSLOADER;
+        return MAINCLASSLOADERS.get(PluginType.LANGUAGE);
     }
 
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
@@ -524,7 +537,7 @@ public final class PluginUtils {
      */
     private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
             throws ClassNotFoundException {
-        String classes = m.getMainAttributes().getValue("OmegaT-Plugins");
+        String classes = m.getMainAttributes().getValue(OMEGAT_PLUGINS);
         if (classes != null) {
             for (String clazz : classes.split("\\s+")) {
                 if (clazz.trim().isEmpty()) {
@@ -582,7 +595,7 @@ public final class PluginUtils {
             LOADED_PLUGINS.add(c);
             Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
             return true;
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
             Core.pluginLoadingError(StringUtil.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz,
                     ex.getClass().getSimpleName(), ex.getMessage()));
@@ -595,7 +608,7 @@ public final class PluginUtils {
             try {
                 Method load = p.getMethod("unloadPlugins");
                 load.invoke(p);
-            } catch (Throwable ex) {
+            } catch (Exception ex) {
                 Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getSimpleName(), ex.getMessage());
             }
         }
@@ -606,7 +619,7 @@ public final class PluginUtils {
      */
     private static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
             throws ClassNotFoundException {
-        if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
+        if (m.getMainAttributes().getValue(OMEGAT_PLUGIN) == null) {
             return;
         }
 
@@ -614,7 +627,7 @@ public final class PluginUtils {
         for (Entry<String, Attributes> e : entries.entrySet()) {
             String key = e.getKey();
             Attributes attrs = e.getValue();
-            String sType = attrs.getValue("OmegaT-Plugin");
+            String sType = attrs.getValue(OMEGAT_PLUGIN);
             if (sType == null) {
                 // WebStart signing section, or other section
                 continue;

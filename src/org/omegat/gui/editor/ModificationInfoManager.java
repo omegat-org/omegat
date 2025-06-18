@@ -104,21 +104,25 @@ public final class ModificationInfoManager {
             "${creationId} - ${changedId}";
 
     // ------------------------------ variables --------------------
-    private static final ModificationInfoVarExpansion DEFAULT_TEMPLATE_VAR_EXPANSION;
-    private static final ModificationInfoVarExpansion DEFAULT_TEMPLATE_ND_VAR_EXPANSION;
+    private static ModificationInfoVarExpansion defaultTemplateVarExpansion;
+    private static ModificationInfoVarExpansion defaultTemplateNdVarExpansion;
 
     static {
-        DEFAULT_TEMPLATE_VAR_EXPANSION = new ModificationInfoVarExpansion(
+        reset();
+    }
+
+    public static void reset() {
+        defaultTemplateVarExpansion = new ModificationInfoVarExpansion(
                 Preferences.getPreferenceDefault(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE, DEFAULT_TEMPLATE));
-        DEFAULT_TEMPLATE_ND_VAR_EXPANSION = new ModificationInfoVarExpansion(Preferences.getPreferenceDefault(
+        defaultTemplateNdVarExpansion = new ModificationInfoVarExpansion(Preferences.getPreferenceDefault(
                 Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, DEFAULT_TEMPLATE_NO_DATE));
     }
 
     public static String apply(TMXEntry trans) {
         if (trans.changeDate == 0) {
-            return DEFAULT_TEMPLATE_ND_VAR_EXPANSION.apply(trans);
+            return defaultTemplateNdVarExpansion.apply(trans);
         } else {
-            return DEFAULT_TEMPLATE_VAR_EXPANSION.apply(trans);
+            return defaultTemplateVarExpansion.apply(trans);
         }
     }
 

@@ -53,6 +53,7 @@ import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
+import java.util.stream.Collectors;
 
 import org.omegat.CLIParameters;
 import org.omegat.MainClassLoader;
@@ -397,11 +398,11 @@ public final class PluginUtils {
      * @param pluginsDirs
      *            List of directories where plugins can be loaded
      */
-    protected static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
+    static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
         // list all jars in /plugins/
         FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
         List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                .toList();
+                .collect(Collectors.toList());
         List<URL> urlList = new ArrayList<>();
         for (File f : fs) {
             try {

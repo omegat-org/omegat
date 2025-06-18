@@ -653,7 +653,7 @@ public final class PluginUtils {
                 }
             }
         }
-        loadFromManifestOld(m, classLoader);
+        loadFromManifestOld(m);
     }
 
     private static void loadFromProperties(Properties props, ClassLoader classLoader)
@@ -673,7 +673,7 @@ public final class PluginUtils {
                 }
             } else {
                 for (String clazz : classes) {
-                    if (loadClassOld(key, clazz, classLoader)) {
+                    if (loadClassOld(key, clazz)) {
                         PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
                                 null, PluginInformation.Status.BUNDLED));
                     }
@@ -716,7 +716,7 @@ public final class PluginUtils {
     /**
      * Old-style plugin loading.
      */
-    private static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
+    private static void loadFromManifestOld(final Manifest m)
             throws ClassNotFoundException {
         if (m.getMainAttributes().getValue(OMEGAT_PLUGIN) == null) {
             return;
@@ -731,39 +731,39 @@ public final class PluginUtils {
                 // WebStart signing section, or other section
                 continue;
             }
-            if (loadClassOld(sType, key, classLoader)) {
+            if (loadClassOld(sType, key)) {
                 PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(key, m, null,
                         PluginInformation.Status.BUNDLED));
             }
         }
     }
 
-    private static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
+    private static boolean loadClassOld(String sType, String key)
             throws ClassNotFoundException {
         boolean loadOk = true;
         switch (PluginType.getTypeByValue(sType)) {
         case FILTER:
-            FILTER_CLASSES.add(classLoader.loadClass(key));
+            FILTER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.FILTER).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case TOKENIZER:
-            TOKENIZER_CLASSES.add(classLoader.loadClass(key));
+            TOKENIZER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.TOKENIZER).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case MARKER:
-            MARKER_CLASSES.add(classLoader.loadClass(key));
+            MARKER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MARKER).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case MACHINETRANSLATOR:
-            MACHINE_TRANSLATION_CLASSES.add(classLoader.loadClass(key));
+            MACHINE_TRANSLATION_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MACHINETRANSLATOR).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case BASE:
-            BASE_PLUGIN_CLASSES.add(classLoader.loadClass(key));
+            BASE_PLUGIN_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MISCELLANEOUS).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case GLOSSARY:
-            GLOSSARY_CLASSES.add(classLoader.loadClass(key));
+            GLOSSARY_CLASSES.add(MAINCLASSLOADERS.get(PluginType.GLOSSARY).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         default:

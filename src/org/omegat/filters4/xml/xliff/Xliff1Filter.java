@@ -145,7 +145,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
         case "group":
             if (startElement.getAttributeByName(new QName(ID_ATTRIBUTE)) != null) {
                 path += "/" + startElement.getAttributeByName(new QName(ID_ATTRIBUTE)).getValue();
-            } else if (startElement.getAttributeByName(new QName("resname")) != null){
+            } else if (startElement.getAttributeByName(new QName("resname")) != null) {
                 path += "/" + startElement.getAttributeByName(new QName("resname")).getValue();
             } else {
                 // generate an unique id:

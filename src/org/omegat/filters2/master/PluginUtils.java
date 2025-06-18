@@ -37,8 +37,6 @@ import java.net.JarURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -55,7 +53,6 @@ import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
-import java.util.stream.Collectors;
 
 import org.omegat.CLIParameters;
 import org.omegat.MainClassLoader;
@@ -365,17 +362,12 @@ public final class PluginUtils {
 
     private static void initializePluginClassLoaders(List<URL> urlList) {
         ClassLoader cl = PluginUtils.class.getClassLoader();
-        MainClassLoader pluginsClassLoader = AccessController.doPrivileged(
-                (PrivilegedAction<MainClassLoader>) () -> new MainClassLoader(urlList.toArray(new URL[0]),
-                        cl));
-        MAINCLASSLOADERS.put(PluginType.UNKNOWN, pluginsClassLoader);
+        MAINCLASSLOADERS.put(PluginType.UNKNOWN, new MainClassLoader(urlList.toArray(new URL[0]), cl));
         for (PluginType type : PluginType.values()) {
             if (type == PluginType.UNKNOWN) {
                 continue;
             }
-            MainClassLoader klassLoader = AccessController
-                    .doPrivileged((PrivilegedAction<MainClassLoader>) () -> new MainClassLoader(cl));
-            MAINCLASSLOADERS.put(type, klassLoader);
+            MAINCLASSLOADERS.put(type,  new MainClassLoader(cl));
         }
     }
 

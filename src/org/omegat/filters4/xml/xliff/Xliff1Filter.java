@@ -130,7 +130,6 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     @Override
-    @SuppressWarnings("fallthrough")
     protected boolean processStartElement(StartElement startElement, XMLStreamWriter writer)
             throws XMLStreamException {
         switch (startElement.getName().getLocalPart()) {
@@ -157,7 +156,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
             }
             updateIgnoreScope(startElement);
             break;
-            case TRANS_UNIT_ELEMENT:
+        case TRANS_UNIT_ELEMENT:
             unitId = getRequiredAttribute(startElement, ID_ATTRIBUTE, TRANS_UNIT_ELEMENT);
             flushedUnit = false;
             targetStartEvent = null;
@@ -182,30 +181,29 @@ public class Xliff1Filter extends AbstractXliffFilter {
             segSource.clear();
             break;
         case "mrk":
-            if (startElement.getAttributeByName(new QName("mtype")).getValue().equals("seg")) {
-                String mid = startElement.getAttributeByName(new QName("mid")).getValue();
-                currentBuffer.add(startElement);
-                currentBuffer = new LinkedList<XMLEvent>();
-                if (!inTarget) {
-                    subSegments.put(mid, currentBuffer);
-                }
-                inSubSeg++;
-                break;
-            } else if (inSubSeg > 0) {
-                inSubSeg++; // avoids to crash on <mrk> inside segment.
-            }
-            // Do not break because inside segment we want <m0>
+            handleMrkElement(startElement, writer);
+            break;
         default:
-            if (currentBuffer != null) {
-                currentBuffer.add(startElement);
-            } else if (((ignoreScope == null || ignoreScope.startsWith("!")) && (unitId != null))
-                    && (!startElement.getName().getNamespaceURI()
-                            .equals("urn:oasis:names:tc:xliff:document:1.2"))) {
-                flushTranslations(writer);
-                // <target> must be before any oter-namespace markup
-            }
+            handleDefaultElement(startElement, writer);
         }
         return !inTarget;
+    }
+
+    private void handleMrkElement(StartElement element, XMLStreamWriter writer) throws XMLStreamException {
+        if (element.getAttributeByName(new QName("mtype")).getValue().equals("seg")) {
+            String mid = element.getAttributeByName(new QName("mid")).getValue();
+            currentBuffer.add(element);
+            currentBuffer = new LinkedList<>();
+            if (!inTarget) {
+                subSegments.put(mid, currentBuffer);
+            }
+            inSubSeg++;
+            return;
+        }
+        if (inSubSeg > 0) {
+            inSubSeg++;
+        }
+        handleDefaultElement(element, writer);
     }
 
     private String getRequiredAttribute(StartElement element, String attributeName, String elementName)
@@ -218,8 +216,23 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return attribute.getValue();
     }
 
+    private void handleDefaultElement(StartElement element, XMLStreamWriter writer)
+            throws XMLStreamException {
+        if (currentBuffer != null) {
+            currentBuffer.add(element);
+        } else if (shouldFlushTranslations(element)) {
+            flushTranslations(writer);
+        }
+    }
+
+    private boolean shouldFlushTranslations(StartElement element) {
+        return (ignoreScope == null || ignoreScope.startsWith("!"))
+                && (unitId != null)
+                && (!element.getName().getNamespaceURI()
+                .equals("urn:oasis:names:tc:xliff:document:1.2"));
+    }
+
     @Override
-    @SuppressWarnings("fallthrough")
     protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
             throws XMLStreamException {
         switch (endElement.getName().getLocalPart()) {
@@ -236,68 +249,88 @@ public class Xliff1Filter extends AbstractXliffFilter {
             inTarget = false;
             return false;
         case TRANS_UNIT_ELEMENT:
-            if (ignoreScope == null || ignoreScope.startsWith("!")) {
-                flushTranslations(writer); // if there was no <target> at all
-            }
-            if (ignoreScope == null || ignoreScope.startsWith("!")) { // registerCurrentTransUnit(unitId);
-                if (subSegments.isEmpty()) {
-                    registerCurrentTransUnit(unitId, source, target, ".*");
-                } else {
-                    for (Map.Entry<String, List<XMLEvent>> me : subSegments.entrySet()) {
-                        registerCurrentTransUnit(unitId + "/" + me.getKey(), me.getValue(),
-                                findSubsegment(target, me.getKey()), "\\[(\\d+)\\](.*)\\[\\1\\]");
-                    }
-                }
-            }
-            unitId = null;
-            cleanBuffers();
-            if (endElement.getName().getLocalPart().equals(ignoreScope)) {
-                ignoreScope = null;
-            } else if (ignoreScope != null
-                    && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
-                ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
-            }
+            handleTransUnitEndElement(endElement, writer);
             break;
         case "file":
-            path = "/";
-            cleanBuffers();
-            if (endElement.getName().getLocalPart().equals(ignoreScope)) {
-                ignoreScope = null;
-            } else if (ignoreScope != null
-                    && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
-                ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
-            }
+            handleFileEndElement(endElement);
             break;
         case "group":
-            path = path.substring(0, path.lastIndexOf('/'));
-            cleanBuffers();
-            if (endElement.getName().getLocalPart().equals(ignoreScope)) {
-                ignoreScope = null;
-            } else if (ignoreScope != null
-                    && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
-                ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
-            }
+            handleGroupEndElement(endElement);
             break;
         case "mrk":
-            if (inSubSeg == 1) {
-                List<XMLEvent> save = inTarget ? target : segSource;
-                save.addAll(currentBuffer);
-                currentBuffer = save;
-                currentBuffer.add(endElement);
-                inSubSeg = 0;
-                break;
-            } else {
-                if (inSubSeg > 0) {
-                    inSubSeg--;
-                }
-            } // avoids to crash on <mrk> inside segment.
-              // Do not break because inside segment we want </m0>
+            handleMrkEndElement(endElement);
+            break;
         default:
-            if (currentBuffer != null) {
-                currentBuffer.add(endElement);
-            }
+            handleDefaultEndElement(endElement);
         }
         return !inTarget;
+    }
+
+    private void handleGroupEndElement(EndElement endElement) {
+        path = path.substring(0, path.lastIndexOf('/'));
+        cleanBuffers();
+        if (endElement.getName().getLocalPart().equals(ignoreScope)) {
+            ignoreScope = null;
+        } else if (ignoreScope != null
+                && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
+            ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
+        }
+    }
+
+    private void handleTransUnitEndElement(EndElement endElement, XMLStreamWriter writer) throws XMLStreamException {
+        if (ignoreScope == null || ignoreScope.startsWith("!")) {
+            flushTranslations(writer); // if there was no <target> at all
+        }
+        if (ignoreScope == null || ignoreScope.startsWith("!")) {
+            if (subSegments.isEmpty()) {
+                registerCurrentTransUnit(unitId, source, target, ".*");
+            } else {
+                for (Map.Entry<String, List<XMLEvent>> me : subSegments.entrySet()) {
+                    registerCurrentTransUnit(unitId + "/" + me.getKey(), me.getValue(),
+                            findSubsegment(target, me.getKey()), "\\[(\\d+)\\](.*)\\[\\1\\]");
+                }
+            }
+        }
+        unitId = null;
+        cleanBuffers();
+        if (endElement.getName().getLocalPart().equals(ignoreScope)) {
+            ignoreScope = null;
+        } else if (ignoreScope != null
+                && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
+            ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
+        }
+    }
+
+    private void handleFileEndElement(EndElement endElement) {
+        path = "/";
+        cleanBuffers();
+        if (endElement.getName().getLocalPart().equals(ignoreScope)) {
+            ignoreScope = null;
+        } else if (ignoreScope != null
+                && ignoreScope.startsWith("!" + endElement.getName().getLocalPart())) {
+            ignoreScope = ignoreScope.substring(endElement.getName().getLocalPart().length() + 2);
+        }
+    }
+
+    private void handleMrkEndElement(EndElement endElement) {
+        if (inSubSeg == 1) {
+            List<XMLEvent> save = inTarget ? target : segSource;
+            save.addAll(currentBuffer);
+            currentBuffer = save;
+            currentBuffer.add(endElement);
+            inSubSeg = 0;
+            return;
+        }
+        if (inSubSeg > 0) {
+            inSubSeg--;
+        }
+        handleDefaultEndElement(endElement);
+    }
+
+    private void handleDefaultEndElement(EndElement endElement) {
+        if (currentBuffer != null) {
+            currentBuffer.add(endElement);
+        }
     }
 
     // Used by formats where note is in another location
@@ -311,10 +344,6 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     protected boolean isCurrentSegmentTranslated(String mid) {
-        /*
-         * if (target == null) return false; if (subSegments.isEmpty()) return
-         * true; // target not null
-         */
         if ((entryTranslateCallback == null) || (mid == null)) {
             return false;
         }

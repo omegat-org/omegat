@@ -101,4 +101,8 @@
     <Match>
         <Bug pattern="SF_SWITCH_NO_DEFAULT"/>
     </Match>
+    <!-- OmegaT supports Java 11 but primary target is Java 17 -->
+    <Match>
+        <Bug pattern="DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED"/>
+    </Match>
 </FindBugsFilter>

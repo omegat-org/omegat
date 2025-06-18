@@ -276,20 +276,20 @@ public final class PluginUtils {
      */
     private static boolean processManifestUrl(URL manifestUrl, List<URL> pluginUrls)
             throws IOException, ClassNotFoundException {
-        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+        boolean isMainManifestFound = false;
         try (InputStream manifestStream = manifestUrl.openStream()) {
             Manifest manifest = new Manifest(manifestStream);
             String pluginCategory = manifest.getMainAttributes().getValue(PLUGIN_CATEGORY);
 
             // Check for main manifest
             if (OMEGAT_MAIN_CLASS.equals(manifest.getMainAttributes().getValue(MAIN_CLASS))) {
-                return true;
+                isMainManifestFound = true;
+                MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+                loadFromManifest(manifest, pluginsClassLoader, manifestUrl);
             }
 
             // Process plugin based on category
-            if (pluginCategory == null) {
-                loadFromManifest(manifest, pluginsClassLoader, manifestUrl);
-            } else {
+            if (pluginCategory != null) {
                 PluginType type = PluginType.getTypeByValue(pluginCategory);
                 if (type != PluginType.UNKNOWN && isUrlInList(manifestUrl, pluginUrls)) {
                     MainClassLoader categoryLoader = MAINCLASSLOADERS.get(type);
@@ -298,7 +298,7 @@ public final class PluginUtils {
                 }
             }
         }
-        return false;
+        return isMainManifestFound;
     }
 
     private static void loadBasePlugin() {
@@ -390,7 +390,7 @@ public final class PluginUtils {
      *             when specified plugin is not found.
      */
     public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
-        ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
+        ClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
         loadFromProperties(props, pluginsClassLoader);
     }
 
@@ -409,7 +409,7 @@ public final class PluginUtils {
         // list all jars in /plugins/
         FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
         List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                .collect(Collectors.toList());
+                .toList();
         List<URL> urlList = new ArrayList<>();
         for (File f : fs) {
             try {

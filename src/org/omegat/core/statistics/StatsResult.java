@@ -58,7 +58,7 @@ import org.omegat.util.gui.TextUtil;
  */
 @XmlRootElement(name = "omegat-stats")
 public class StatsResult {
-    public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
+    static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files"), };
 
@@ -68,7 +68,7 @@ public class StatsResult {
 
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
-    public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
+    static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
             OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),

@@ -409,24 +409,9 @@ public final class PluginUtils {
      */
     static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
         // list all jars in /plugins/
-        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-        List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                .collect(Collectors.toList());
-        List<URL> urlList = new ArrayList<>();
-        for (File f : fs) {
-            try {
-                URL url = f.toURI().toURL();
-                urlList.add(url);
-                Log.logInfoRB("PLUGIN_LOAD_JAR", url);
-            } catch (IOException ex) {
-                Log.log(ex);
-            }
-        }
-
-        List<URL> jarToRemove = new ArrayList<>();
-
+        List<URL> urlList = loadJarUrls(pluginsDirs);
         Map<String, PluginInformation> pluginVersions = new HashMap<>();
-
+        List<URL> jarToRemove = new ArrayList<>();
         // look on all manifests
         for (URL url : urlList) {
             try (JarInputStream jarStream = new JarInputStream(url.openStream())) {
@@ -435,62 +420,107 @@ public final class PluginUtils {
                     // mf can be null when a jar file does not have a manifest.
                     continue;
                 }
-                String pluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGINS);
-                String oldPluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGIN);
-
-                // if the jar doesn't look like an OmegaT plugin (it doesn't
-                // contain any "Omegat-Plugins?" attribute, we don't need to
-                // compare
-                // versions.
-                if ((oldPluginClass == null && pluginClass == null)
-                        || (pluginClass != null && pluginClass.indexOf('.') < 0)) {
-                    continue;
-                }
-
-                // Fetch all the information from the manifest
-                PluginInformation pluginInfo = PluginInformation.Builder.fromManifest(null, mf, url, null);
-
-                String pluginName = pluginInfo.getName();
-                if (pluginVersions.containsKey(pluginName)) {
-                    PluginInformation previousPlugin = pluginVersions.get(pluginName);
-                    // We get rid of versions qualifiers (x.y.z-beta) and we
-                    // assume dots are used to
-                    // separate version components
-                    String previousVersion = previousPlugin.getVersion().replaceAll("-.*", "");
-                    String pluginVersion = pluginInfo.getVersion().replaceAll("-.*", "");
-
-                    int isOlder = VersionChecker.compareVersions(previousVersion, "0", pluginVersion, "0");
-                    if (isOlder < 0) {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
-                                previousPlugin.getVersion(), pluginInfo.getVersion());
-                        jarToRemove.add(previousPlugin.getUrl());
-                        pluginVersions.put(pluginName, pluginInfo);
-                    } else if (isOlder == 0) {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
-                                previousPlugin.getVersion(), pluginInfo.getVersion());
-                        jarToRemove.add(previousPlugin.getUrl());
-                        pluginVersions.put(pluginName, pluginInfo);
-                    } else {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, pluginInfo.getVersion(),
-                                previousPlugin.getVersion());
-                        jarToRemove.add(pluginInfo.getUrl());
-                        pluginVersions.put(pluginName, previousPlugin);
-                    }
-                } else {
-                    pluginVersions.put(pluginName, pluginInfo);
-                }
-
+                processPluginManifest(url, mf, pluginVersions, jarToRemove);
             } catch (IOException | NumberFormatException ex) {
                 Log.log(ex);
             }
         }
 
+        removeOutdatedPlugins(urlList, jarToRemove);
+        return urlList;
+    }
+
+    private static void processPluginManifest(URL url, Manifest manifest,
+                                              Map<String, PluginInformation> pluginVersions, List<URL> jarToRemove) {
+        String pluginClass = manifest.getMainAttributes().getValue(OMEGAT_PLUGINS);
+        String oldPluginClass = manifest.getMainAttributes().getValue(OMEGAT_PLUGIN);
+
+        // if the jar doesn't look like an OmegaT plugin (it doesn't
+        // contain any "Omegat-Plugins?" attribute, we don't need to
+        // compare versions.
+        if (!isValidPlugin(pluginClass, oldPluginClass)) {
+            return;
+        }
+
+        PluginInformation pluginInfo = PluginInformation.Builder.fromManifest(null, manifest, url, null);
+        String pluginName = pluginInfo.getName();
+
+        if (pluginVersions.containsKey(pluginName)) {
+            handleVersionConflict(pluginVersions, jarToRemove, pluginInfo, pluginName);
+        } else {
+            pluginVersions.put(pluginName, pluginInfo);
+        }
+    }
+
+    private static final String VERSION_QUALIFIER_PATTERN = "-.*";
+
+    private static void handleVersionConflict(Map<String, PluginInformation> pluginVersions,
+                                              List<URL> jarToRemove, PluginInformation newPlugin, String pluginName) {
+        // Fetch all the information from the manifest
+        PluginInformation existingPlugin = pluginVersions.get(pluginName);
+
+        // We get rid of versions qualifiers (x.y.z-beta) and we
+        // assume dots are used to separate version components
+        String existingVersion = existingPlugin.getVersion().replaceAll(VERSION_QUALIFIER_PATTERN, "");
+        String newVersion = newPlugin.getVersion().replaceAll(VERSION_QUALIFIER_PATTERN, "");
+
+        int comparison = VersionChecker.compareVersions(existingVersion, "0",
+                newVersion, "0");
+
+        updatePluginVersions(pluginVersions, jarToRemove, newPlugin, pluginName,
+                existingPlugin, comparison);
+    }
+
+    private static void updatePluginVersions(Map<String, PluginInformation> pluginVersions,
+                                             List<URL> jarToRemove, PluginInformation newPlugin, String pluginName,
+                                             PluginInformation existingPlugin, int comparison) {
+        if (comparison < 0) {
+            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
+                    existingPlugin.getVersion(), newPlugin.getVersion());
+            jarToRemove.add(existingPlugin.getUrl());
+            pluginVersions.put(pluginName, newPlugin);
+        } else if (comparison == 0) {
+            Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
+                    existingPlugin.getVersion(), newPlugin.getVersion());
+            jarToRemove.add(existingPlugin.getUrl());
+            pluginVersions.put(pluginName, newPlugin);
+        } else {
+            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
+                    newPlugin.getVersion(), existingPlugin.getVersion());
+            jarToRemove.add(newPlugin.getUrl());
+            pluginVersions.put(pluginName, existingPlugin);
+        }
+    }
+
+    private static List<URL> loadJarUrls(List<File> pluginsDirs) {
+        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
+        List<File> jarFiles = pluginsDirs.stream()
+                .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+                .collect(Collectors.toList());
+
+        List<URL> urls = new ArrayList<>();
+        for (File file : jarFiles) {
+            try {
+                URL url = file.toURI().toURL();
+                urls.add(url);
+                Log.logInfoRB("PLUGIN_LOAD_JAR", url);
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
+        }
+        return urls;
+    }
+
+    private static boolean isValidPlugin(String pluginClass, String oldPluginClass) {
+        return (oldPluginClass != null || pluginClass != null)
+                && (pluginClass == null || pluginClass.indexOf('.') >= 0);
+    }
+
+    private static void removeOutdatedPlugins(List<URL> urlList, List<URL> jarToRemove) {
         if (!jarToRemove.isEmpty()) {
             Log.logWarningRB("PLUGIN_EXCLUSION_MESSAGE", jarToRemove);
             urlList.removeAll(jarToRemove);
         }
-
-        return urlList;
     }
 
     public static List<Class<?>> getFilterClasses() {

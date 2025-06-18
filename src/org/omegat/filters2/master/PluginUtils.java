@@ -610,14 +610,6 @@ public final class PluginUtils {
         return MAINCLASSLOADERS.get(type);
     }
 
-    public static ClassLoader getThemeClassLoader() {
-        return MAINCLASSLOADERS.get(PluginType.THEME);
-    }
-
-    public static ClassLoader getLanguageClassLoader() {
-        return MAINCLASSLOADERS.get(PluginType.LANGUAGE);
-    }
-
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
 
     private static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();

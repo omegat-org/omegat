@@ -583,32 +583,39 @@ public final class PluginUtils {
         // "default" tokenizer is found.
         Class<?> fallback = null;
 
-        for (Class<?> c : TOKENIZER_CLASSES) {
-            Tokenizer ann = c.getAnnotation(Tokenizer.class);
+        for (Class<?> tokenizerClass : TOKENIZER_CLASSES) {
+            Tokenizer ann = tokenizerClass.getAnnotation(Tokenizer.class);
             if (ann == null) {
                 continue;
             }
-            String[] languages = ann.languages();
-            if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
-                try {
-                    languages = ((ITokenizer) c.getDeclaredConstructor().newInstance())
-                            .getSupportedLanguages();
-                } catch (Exception ex) {
-                    Log.log(ex);
-                }
-            }
+
+            String[] languages = getSupportedLanguages(tokenizerClass, ann);
             for (String s : languages) {
                 if (lang.equals(s)) {
                     if (ann.isDefault()) {
-                        return c; // Return best possible match.
+                        return tokenizerClass; // Return best possible match.
                     } else if (fallback == null) {
-                        fallback = c;
+                        fallback = tokenizerClass;
                     }
                 }
             }
         }
 
         return fallback;
+    }
+
+    private static String[] getSupportedLanguages(Class<?> tokenizerClass, Tokenizer annotation) {
+        String[] languages = annotation.languages();
+        if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
+            try {
+                return ((ITokenizer) tokenizerClass.getDeclaredConstructor().newInstance())
+                        .getSupportedLanguages();
+            } catch (Exception ex) {
+                Log.log(ex);
+                return new String[0];
+            }
+        }
+        return languages;
     }
 
     public static List<Class<?>> getMarkerClasses() {
@@ -694,19 +701,14 @@ public final class PluginUtils {
             if (key.startsWith("plugin.desc")) {
                 continue;
             }
-            if (key.equals("plugin")) {
-                for (String clazz : classes) {
-                    if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
-                                null, PluginInformation.Status.BUNDLED));
-                    }
-                }
-            } else {
-                for (String clazz : classes) {
-                    if (loadClassOld(key, clazz)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
-                                null, PluginInformation.Status.BUNDLED));
-                    }
+            boolean isMainPlugin = key.equals("plugin.main");
+            for (String clazz : classes) {
+                boolean loaded = isMainPlugin
+                        ? loadClass(clazz, classLoader)
+                        : loadClassOld(key, clazz);
+                if (loaded) {
+                    PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                            null, PluginInformation.Status.BUNDLED));
                 }
             }
         }

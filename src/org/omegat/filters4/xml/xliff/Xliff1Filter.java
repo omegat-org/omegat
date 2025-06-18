@@ -78,6 +78,8 @@ public class Xliff1Filter extends AbstractXliffFilter {
     private static final String SOURCE_ELEMENT = "source";
     private static final String TARGET_ELEMENT = "target";
     private static final String NOTE_ELEMENT = "note";
+    private static final String TRANS_UNIT_ELEMENT = "trans-unit";
+    private static final String ID_ATTRIBUTE = "id";
     private static final String STATE_ATTRIBUTE = "state";
     private static final String TRANSLATED_STATE = "translated";
 
@@ -138,40 +140,25 @@ public class Xliff1Filter extends AbstractXliffFilter {
             }
             break;
         case "file":
-            try {
-                path += "/" + startElement.getAttributeByName(new QName("original")).getValue();
-            } catch (NullPointerException noid) {
-                // Note: in spec, original is REQUIRED
-                throw new XMLStreamException(
-                        OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", "original", "file"));
-            }
+            path += "/" + getRequiredAttribute(startElement, "original", "file");
             updateIgnoreScope(startElement);
             break;
         case "group":
-            try {
-                path += "/" + startElement.getAttributeByName(new QName("id")).getValue();
-            } catch (NullPointerException noid) {
-                // in XLIFF 1, this attribute is not REQUIRED
-                try {
-                    path += "/" + startElement.getAttributeByName(new QName("resname")).getValue();
-                } catch (NullPointerException noresname) {
-                    // generate an unique id:
-                    // must be unique at document scope but must be identical
-                    // when you re-parse the document
-                    path += "/x-auto-" + lastGroupId;
-                    lastGroupId++;
-                }
+            if (startElement.getAttributeByName(new QName(ID_ATTRIBUTE)) != null) {
+                path += "/" + startElement.getAttributeByName(new QName(ID_ATTRIBUTE)).getValue();
+            } else if (startElement.getAttributeByName(new QName("resname")) != null){
+                path += "/" + startElement.getAttributeByName(new QName("resname")).getValue();
+            } else {
+                // generate an unique id:
+                // must be unique at document scope but must be identical
+                // when you re-parse the document
+                path += "/x-auto-" + lastGroupId;
+                lastGroupId++;
             }
             updateIgnoreScope(startElement);
             break;
-        case "trans-unit":
-            try {
-                unitId = startElement.getAttributeByName(new QName("id")).getValue();
-            } catch (NullPointerException noid) { // Note: in spec, original is
-                                                  // REQUIRED
-                throw new XMLStreamException(
-                        OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", "id", "trans-unit"));
-            }
+            case TRANS_UNIT_ELEMENT:
+            unitId = getRequiredAttribute(startElement, ID_ATTRIBUTE, TRANS_UNIT_ELEMENT);
             flushedUnit = false;
             targetStartEvent = null;
             updateIgnoreScope(startElement);
@@ -181,7 +168,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
             source.clear();
             break;
         case TARGET_ELEMENT:
-            target = new LinkedList<XMLEvent>();
+            target = new LinkedList<>();
             currentBuffer = target;
             inTarget = true;
             targetStartEvent = startElement;
@@ -221,6 +208,16 @@ public class Xliff1Filter extends AbstractXliffFilter {
         return !inTarget;
     }
 
+    private String getRequiredAttribute(StartElement element, String attributeName, String elementName)
+            throws XMLStreamException {
+        Attribute attribute = element.getAttributeByName(new QName(attributeName));
+        if (attribute == null) {
+            throw new XMLStreamException(OStrings.getString("XLIFF_MANDATORY_ORIGINAL_MISSING", attributeName,
+                    elementName));
+        }
+        return attribute.getValue();
+    }
+
     @Override
     @SuppressWarnings("fallthrough")
     protected boolean processEndElement(EndElement endElement, XMLStreamWriter writer)
@@ -238,7 +235,7 @@ public class Xliff1Filter extends AbstractXliffFilter {
             }
             inTarget = false;
             return false;
-        case "trans-unit":
+        case TRANS_UNIT_ELEMENT:
             if (ignoreScope == null || ignoreScope.startsWith("!")) {
                 flushTranslations(writer); // if there was no <target> at all
             }

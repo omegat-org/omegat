@@ -205,6 +205,15 @@ public final class PluginUtils {
      * directories where plugins may be located, including standard installation
      * directories and, if applicable, development build directories. The method
      * returns a list of URLs pointing to these plugin locations.
+     * <p>
+     * We should load all jars from /plugins/ dir first, because some plugin can
+     * use more than one jar. There are three different "plugins" directory, and
+     * one development treatment.
+     * <ul>
+     * <li>(installdir)/core-plugins/ OmegaT genuine sub-component</li>
+     * <li>(installdir/plugins/ System level 3rd party plugins</li>
+     * <li>(configdir)/plugins/ User level 3rd party plugins</li>
+     * </ul>
      *
      * @return a list of URLs representing the locations of plugins.
      */

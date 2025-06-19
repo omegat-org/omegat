@@ -844,23 +844,22 @@ public final class ProjectUICommands {
         if (!Core.getProject().isProjectLoaded()) {
             return;
         }
+        var frame = Core.getMainWindow().getApplicationFrame();
 
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
         // displaying the dialog to change paths and other properties
         final ProjectProperties newProps =
-                ProjectPropertiesDialogController.showDialog(Core.getMainWindow().getApplicationFrame(),
-                Core.getProject().getProjectProperties(),
+                ProjectPropertiesDialogController.showDialog(frame, Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
                 ProjectPropertiesDialog.Mode.EDIT_PROJECT);
         if (newProps == null) {
             return;
         }
 
-        int res = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
-                OStrings.getString("MW_REOPEN_QUESTION"), OStrings.getString("MW_REOPEN_TITLE"),
-                JOptionPane.YES_NO_OPTION);
+        int res = JOptionPane.showConfirmDialog(frame, OStrings.getString("MW_REOPEN_QUESTION"),
+                OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
         if (res != JOptionPane.YES_OPTION) {
             return;
         }

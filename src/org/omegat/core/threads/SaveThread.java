@@ -38,7 +38,6 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
-import tokyo.northside.logging.ILogger;
 
 /**
  * An independent stream to save project, created in order not to freese UI
@@ -50,21 +49,23 @@ import tokyo.northside.logging.ILogger;
  * @author Aaron Madlon-Kay
  */
 public class SaveThread extends Thread implements IAutoSave {
-    private static final ILogger LOGGER = Log.getLogger(SaveThread.class);
+    private final Object lock = new Object();
 
     /** The length the thread should wait in milliseconds */
     private int waitDuration;
     private boolean needToSaveNow;
     private boolean enabled;
+    private boolean running;
 
     public SaveThread() {
         setName("Save thread");
         setWaitDuration(Preferences.getPreferenceDefault(Preferences.AUTO_SAVE_INTERVAL,
                 Preferences.AUTO_SAVE_DEFAULT));
+        running = true;
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
             setWaitDuration((Integer) evt.getNewValue());
-            synchronized (this) {
-                notify();
+            synchronized (lock) {
+                lock.notifyAll();
             }
         });
     }
@@ -74,22 +75,24 @@ public class SaveThread extends Thread implements IAutoSave {
     }
 
     public synchronized void disable() {
-        LOGGER.atDebug().log("Disable autosave");
+        Log.logDebug("Disable autosave");
         enabled = false;
     }
 
     public synchronized void enable() {
-        LOGGER.atDebug().log("Enable autosave");
+        Log.logDebug("Enable autosave");
         enabled = true;
         needToSaveNow = false;
-        notify();
+        synchronized (lock) {
+            lock.notifyAll();
+        }
     }
 
     @Override
     public void run() {
         try {
-            while (true) {
-                synchronized (this) {
+            while (running) {
+                synchronized (lock) {
                     // Set the flag for saving. Clear the flag if the timer is
                     // reset.
                     needToSaveNow = true;
@@ -99,37 +102,53 @@ public class SaveThread extends Thread implements IAutoSave {
                 if (needToSaveNow && enabled) {
                     // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
-                    LOGGER.atDebug().log("Start project save from SaveThread");
-                    try {
-                        Core.executeExclusively(false, () -> {
-                            dataEngine.saveProject(false);
-                            dataEngine.teamSyncPrepare();
-                        });
-                        Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
-                                DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
-                    } catch (TimeoutException ex) {
-                        LOGGER.atWarn()
-                                .logRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
-                    } catch (KnownException ex) {
-                        Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
-                    } catch (IRemoteRepository2.NetworkException ex) {
-                        LOGGER.atWarn().logRB("TEAM_NETWORK_ERROR", ex.getMessage());
-                    } catch (OutOfMemoryError oome) {
-                        // inform the user
-                        long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-                        LOGGER.atError().setMessageRB("OUT_OF_MEMORY")
-                                .addArgument(memory).setCause(oome).log();
-                        Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
-                        // Just quit, we can't help it anyway
-                        System.exit(1);
-                    } catch (Exception ex) {
-                        LOGGER.atWarn().logRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
-                    }
-                    LOGGER.atDebug().log("Finish project save from SaveThread");
+                    Log.logDebug("Start project save from SaveThread");
+                    executeSave(dataEngine);
+                    Log.logDebug("Finish project save from SaveThread");
                 }
             }
         } catch (InterruptedException ex) {
-            LOGGER.atDebug().log("Save thread interrupted:", ex);
+            Thread.currentThread().interrupt();
+            Log.logDebug("Save thread interrupted:", ex);
+        }
+    }
+
+    private static void executeSave(IProject dataEngine) {
+        try {
+            Core.executeExclusively(false, () -> {
+                dataEngine.saveProject(false);
+                dataEngine.teamSyncPrepare();
+            });
+            Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
+                    DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
+        } catch (TimeoutException ex) {
+            Log.logWarningRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
+        } catch (KnownException ex) {
+            Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
+        } catch (IRemoteRepository2.NetworkException ex) {
+            Log.logWarningRB("TEAM_NETWORK_ERROR", ex.getMessage());
+        } catch (OutOfMemoryError oome) {
+            // inform the user
+            long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
+            Log.logErrorRB(oome, "OUT_OF_MEMORY", memory);
+            Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
+            // Just quit, we can't help it anyway
+            System.exit(1);
+        } catch (Exception ex) {
+            Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
+        }
+    }
+
+    @Override
+    public void fin() {
+        running = false;
+        synchronized (lock) {
+            lock.notifyAll();
+       }
+       try {
+            join((long) waitDuration * 2);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
         }
     }
 }

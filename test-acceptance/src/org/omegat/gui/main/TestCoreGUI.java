@@ -34,7 +34,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -58,6 +57,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
+import org.omegat.gui.properties.SegmentPropertiesArea;
 import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -90,6 +90,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         assertFalse("Project should not be loaded.", Core.getProject().isProjectLoaded());
     }
 
+    protected void openSampleProjectWaitPropertyPane(Path projectPath) throws Exception {
+        SegmentPropertiesArea segmentPropertiesArea = Core.getSegmentPropertiesArea();
+        CountDownLatch latch = new CountDownLatch(1);
+        segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
+        openSampleProject(projectPath);
+        try {
+            boolean result = latch.await(5, TimeUnit.SECONDS);
+            if (!result) {
+                fail("Segment properties are not loaded.");
+            }
+        } catch (InterruptedException ignored) {
+            fail("Waiting for segment properties interrupted.");
+        }
+    }
+
     /**
      * Open project from the specified path and wait until the dictionary is loaded.
      * @param projectPath
@@ -98,9 +113,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     protected void openSampleProjectWaitDictionary(Path projectPath) throws Exception {
         DictionariesTextArea dictionariesTextArea = (DictionariesTextArea) Core.getDictionaries();
         CountDownLatch latch = new CountDownLatch(1);
-        dictionariesTextArea.addPropertyChangeListener("displayWords", evt -> {
-            latch.countDown();
-        });
+        dictionariesTextArea.addPropertyChangeListener("displayWords", evt -> latch.countDown());
         openSampleProject(projectPath);
         try {
             boolean result = latch.await(5, TimeUnit.SECONDS);
@@ -158,14 +171,16 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     /**
-     * Open project from the specified path.
-     * @param projectPath project root path.
-     * @throws Exception when error occurred.
+     * Opens a sample project from the specified path for testing purposes.
+     *
+     * @param projectPath the path to the sample project to be opened
+     * @throws Exception if an error occurs while opening the project
      */
     protected void openSampleProject(Path projectPath) throws Exception {
         // 0. Prepare project folder
         tmpDir = Files.createTempDirectory("omegat-sample-project-").toFile();
         FileUtils.copyDirectory(projectPath.toFile(), tmpDir);
+
         FileUtils.forceDeleteOnExit(tmpDir);
         // 1. Prepare preference for the test;
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
@@ -220,7 +235,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             });
             return mw;
         });
-        frame = Objects.requireNonNull(mainWindow).getApplicationFrame();
+        if (mainWindow == null) {
+            throw new IllegalStateException("Main window is null.");
+        }
+        frame = mainWindow.getApplicationFrame();
         window = new FrameFixture(robot(), frame);
         window.show();
     }

@@ -26,11 +26,15 @@
 package org.omegat.spellchecker.hunspell;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 
@@ -51,6 +55,7 @@ import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.util.Language;
+import org.omegat.util.OConsts;
 import org.omegat.util.TestPreferencesInitializer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -82,12 +87,7 @@ public class HunspellSpellcheckerTest {
     public void testReadHunspellDictionary() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("es_MX"));
-        Core.setProject(new NotLoadedProject() {
-            @Override
-            public ProjectProperties getProjectProperties() {
-                return props;
-            }
-        });
+        setupProject(props, false);
         ISpellChecker checker = new HunSpellChecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hola")).isTrue();
@@ -99,12 +99,7 @@ public class HunspellSpellcheckerTest {
     public void testReadHunspellLTDictionary() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("de_DE"));
-        Core.setProject(new NotLoadedProject() {
-            @Override
-            public ProjectProperties getProjectProperties() {
-                return props;
-            }
-        });
+        setupProject(props, false);
         ISpellChecker checker = new HunSpellChecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hallo")).as("Spell check for correct word").isTrue();
@@ -117,12 +112,7 @@ public class HunspellSpellcheckerTest {
     public void testBundledDictionaryFR() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("fr_FR"));
-        Core.setProject(new NotLoadedProject() {
-            @Override
-            public ProjectProperties getProjectProperties() {
-                return props;
-            }
-        });
+        setupProject(props, false);
         ISpellChecker checker = new HunSpellChecker();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Bonjour")).as("Spell check for correct word").isTrue();
@@ -134,12 +124,7 @@ public class HunspellSpellcheckerTest {
     public void testReinitializeWhenProjectChanged() throws Exception {
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         props.setTargetLanguage(new Language("fr_FR"));
-        Core.setProject(new NotLoadedProject() {
-            @Override
-            public ProjectProperties getProjectProperties() {
-                return props;
-            }
-        });
+        setupProject(props, false);
         HunSpellCheckerMock checker = new HunSpellCheckerMock();
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.getInitializeCounter()).as("Hunspell Checker initialized once").isEqualTo(1);
@@ -151,6 +136,58 @@ public class HunspellSpellcheckerTest {
         latch.await();
         //
         assertThat(checker.getInitializeCounter()).as("Hunspell Checker loaded 3rd times").isEqualTo(3);
+    }
+
+    @Test
+    public void testSaveWordListsWhenProjectStatusChanged() throws Exception {
+        ProjectProperties props = new ProjectProperties(tmpDir.toFile());
+        tmpDir.resolve("omegat").toFile().mkdir();
+        props.setTargetLanguage(new Language("fr_FR"));
+        verifyWordListsSave(props, false);
+        verifyWordListsSave(props, true);
+    }
+
+    private void setupProject(ProjectProperties props, boolean isProjectLoaded) {
+        Core.setProject(new NotLoadedProject() {
+            @Override
+            public ProjectProperties getProjectProperties() {
+                return props;
+            }
+
+            @Override
+            public boolean isProjectLoaded() {
+                return isProjectLoaded;
+            }
+        });
+    }
+
+    private void verifyWordListsSave(ProjectProperties props, boolean isProjectLoaded) throws Exception {
+        // Setup project state
+        setupProject(props, isProjectLoaded);
+
+        // Initialize spell checker
+        HunSpellCheckerMock checker = new HunSpellCheckerMock();
+        checker.initialize();
+
+        // Setup and trigger save event
+        CountDownLatch latch = new CountDownLatch(1);
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE) {
+                latch.countDown();
+            }
+        });
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
+        latch.await();
+
+        // Verify results
+        String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
+        File wordListFile = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME).toFile();
+
+        if (isProjectLoaded) {
+            assertTrue(wordListFile.exists());
+        } else {
+            assertFalse(wordListFile.exists());
+        }
     }
 
     private static void copyFile(String target) throws IOException {

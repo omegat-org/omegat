@@ -123,6 +123,7 @@ public final class Core {
     private static DictionariesTextArea dictionaries;
     private static INotes notes;
     private static IComments comments;
+    private static SegmentPropertiesArea segmentPropertiesArea;
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
@@ -205,6 +206,11 @@ public final class Core {
     /** Get notes instance. */
     public static INotes getNotes() {
         return notes;
+    }
+
+    /** Get segment properties area */
+    public static SegmentPropertiesArea getSegmentPropertiesArea() {
+        return segmentPropertiesArea;
     }
 
     /**
@@ -293,7 +299,7 @@ public final class Core {
         // Create an independent instance updated from SearchThead.
         new MultipleTransPane(me);
         // Create an independent instance updated by events.
-        new SegmentPropertiesArea(me);
+        segmentPropertiesArea = new SegmentPropertiesArea(me);
         projWin = new ProjectFilesListController();
     }
 

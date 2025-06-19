@@ -104,59 +104,59 @@ public final class ModificationInfoManager {
             "${creationId} - ${changedId}";
 
     // ------------------------------ variables --------------------
-    private static final DateFormat DATE_FORMAT;
-    private static final DateFormat DATE_FORMAT_COUNTRY;
-    private static final DateFormat DATE_FORMAT_SHORT;
-    private static final DateFormat DATE_FORMAT_SHORT_COUNTRY;
-    private static final DateFormat TIME_FORMAT;
-    private static final DateFormat TIME_FORMAT_COUNTRY;
-    private static final DateFormat TIME_FORMAT_SHORT;
-    private static final DateFormat TIME_FORMAT_SHORT_COUNTRY;
-    private static ModificationInfoVarExpansion defaultTemplate;
-    private static ModificationInfoVarExpansion defaultTemplateND;
+    private static ModificationInfoVarExpansion defaultTemplateVarExpansion;
+    private static ModificationInfoVarExpansion defaultTemplateNdVarExpansion;
 
-    /** Private constructor, because this file is singleton */
     static {
         reset();
-
-        Locale defaultLocale = Locale.getDefault();
-        DATE_FORMAT = DateFormat.getDateInstance(DateFormat.DEFAULT, defaultLocale);
-        DATE_FORMAT_SHORT = DateFormat.getDateInstance(DateFormat.SHORT, defaultLocale);
-        TIME_FORMAT = DateFormat.getTimeInstance(DateFormat.DEFAULT, defaultLocale);
-        TIME_FORMAT_SHORT = DateFormat.getTimeInstance(DateFormat.SHORT, defaultLocale);
-
-        Locale[] locales = Locale.getAvailableLocales();
-        for (Locale l : locales) {
-            if (l.getCountry().equals(defaultLocale.getCountry())) {
-                defaultLocale = l;
-                break;
-            }
-        }
-        DATE_FORMAT_COUNTRY = DateFormat.getDateInstance(DateFormat.DEFAULT, defaultLocale);
-        DATE_FORMAT_SHORT_COUNTRY = DateFormat.getDateInstance(DateFormat.SHORT, defaultLocale);
-        TIME_FORMAT_COUNTRY = DateFormat.getTimeInstance(DateFormat.DEFAULT, defaultLocale);
-        TIME_FORMAT_SHORT_COUNTRY = DateFormat.getTimeInstance(DateFormat.SHORT, defaultLocale);
     }
 
     public static void reset() {
-        defaultTemplate = new ModificationInfoVarExpansion(
+        defaultTemplateVarExpansion = new ModificationInfoVarExpansion(
                 Preferences.getPreferenceDefault(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE, DEFAULT_TEMPLATE));
-        defaultTemplateND = new ModificationInfoVarExpansion(Preferences.getPreferenceDefault(
+        defaultTemplateNdVarExpansion = new ModificationInfoVarExpansion(Preferences.getPreferenceDefault(
                 Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, DEFAULT_TEMPLATE_NO_DATE));
     }
 
     public static String apply(TMXEntry trans) {
         if (trans.changeDate == 0) {
-            return defaultTemplateND.apply(trans);
+            return defaultTemplateNdVarExpansion.apply(trans);
         } else {
-            return defaultTemplate.apply(trans);
+            return defaultTemplateVarExpansion.apply(trans);
         }
     }
 
     public static class ModificationInfoVarExpansion extends VarExpansion<TMXEntry> {
 
+        private final DateFormat dateFormat;
+        private final DateFormat dateFormatCountry;
+        private final DateFormat dateFormatShort;
+        private final DateFormat dateFormatShortCountry;
+        private final DateFormat timeFormat;
+        private final DateFormat timeFormatCountry;
+        private final DateFormat timeFormatShort;
+        private final DateFormat timeFormatShortCountry;
+
         public ModificationInfoVarExpansion(String template) {
             super(template);
+
+            Locale defaultLocale = Locale.getDefault();
+            dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, defaultLocale);
+            dateFormatShort = DateFormat.getDateInstance(DateFormat.SHORT, defaultLocale);
+            timeFormat = DateFormat.getTimeInstance(DateFormat.DEFAULT, defaultLocale);
+            timeFormatShort = DateFormat.getTimeInstance(DateFormat.SHORT, defaultLocale);
+
+            Locale[] locales = Locale.getAvailableLocales();
+            for (Locale l : locales) {
+                if (l.getCountry().equals(defaultLocale.getCountry())) {
+                    defaultLocale = l;
+                    break;
+                }
+            }
+            dateFormatCountry = DateFormat.getDateInstance(DateFormat.DEFAULT, defaultLocale);
+            dateFormatShortCountry = DateFormat.getDateInstance(DateFormat.SHORT, defaultLocale);
+            timeFormatCountry = DateFormat.getTimeInstance(DateFormat.DEFAULT, defaultLocale);
+            timeFormatShortCountry = DateFormat.getTimeInstance(DateFormat.SHORT, defaultLocale);
         }
 
         @Override
@@ -170,40 +170,40 @@ public final class ModificationInfoManager {
             localTemplate = localTemplate.replace(VAR_CREATION_ID, trans.creator == null
                     ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.creator);
             localTemplate = localTemplate.replace(VAR_CREATION_DATE,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT.format(creationDate));
+                    trans.creationDate == 0 ? "" : dateFormat.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE_COUNTRY,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT_COUNTRY.format(creationDate));
+                    trans.creationDate == 0 ? "" : dateFormatCountry.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE_SHORT,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT_SHORT.format(creationDate));
+                    trans.creationDate == 0 ? "" : dateFormatShort.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_DATE_SHORT_COUNTRY,
-                    trans.creationDate == 0 ? "" : DATE_FORMAT_SHORT_COUNTRY.format(creationDate));
+                    trans.creationDate == 0 ? "" : dateFormatShortCountry.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT.format(creationDate));
+                    trans.creationDate == 0 ? "" : timeFormat.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME_COUNTRY,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT_COUNTRY.format(creationDate));
+                    trans.creationDate == 0 ? "" : timeFormatCountry.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME_SHORT,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT_SHORT.format(creationDate));
+                    trans.creationDate == 0 ? "" : timeFormatShort.format(creationDate));
             localTemplate = localTemplate.replace(VAR_CREATION_TIME_SHORT_COUNTRY,
-                    trans.creationDate == 0 ? "" : TIME_FORMAT_SHORT_COUNTRY.format(creationDate));
+                    trans.creationDate == 0 ? "" : timeFormatShortCountry.format(creationDate));
 
             localTemplate = localTemplate.replace(VAR_CHANGED_ID, trans.changer == null
                     ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR") : trans.changer);
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT.format(changeDate));
+                    trans.changeDate == 0 ? "" : dateFormat.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE_COUNTRY,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT_COUNTRY.format(changeDate));
+                    trans.changeDate == 0 ? "" : dateFormatCountry.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE_SHORT,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT_SHORT.format(changeDate));
+                    trans.changeDate == 0 ? "" : dateFormatShort.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_DATE_SHORT_COUNTRY,
-                    trans.changeDate == 0 ? "" : DATE_FORMAT_SHORT_COUNTRY.format(changeDate));
+                    trans.changeDate == 0 ? "" : dateFormatShortCountry.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT.format(changeDate));
+                    trans.changeDate == 0 ? "" : timeFormat.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME_COUNTRY,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT_COUNTRY.format(changeDate));
+                    trans.changeDate == 0 ? "" : timeFormatCountry.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME_SHORT,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT_SHORT.format(changeDate));
+                    trans.changeDate == 0 ? "" : timeFormatShort.format(changeDate));
             localTemplate = localTemplate.replace(VAR_CHANGED_TIME_SHORT_COUNTRY,
-                    trans.changeDate == 0 ? "" : TIME_FORMAT_SHORT_COUNTRY.format(changeDate));
+                    trans.changeDate == 0 ? "" : timeFormatShortCountry.format(changeDate));
 
             return localTemplate;
         }

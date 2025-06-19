@@ -34,7 +34,6 @@ import java.util.concurrent.TimeoutException;
 
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
-import org.omegat.core.data.CoreState;
 import org.omegat.core.data.IProject;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.util.Log;

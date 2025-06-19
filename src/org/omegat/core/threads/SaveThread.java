@@ -53,13 +53,11 @@ public class SaveThread extends Thread implements IAutoSave {
     private final Object lock = new Object();
 
     private volatile boolean running;
-    private final Object lock = new Object();
 
     /** The length the thread should wait in milliseconds */
     private int waitDuration;
     private boolean needToSaveNow;
     private boolean enabled;
-    private boolean running;
 
     public SaveThread() {
         setName("Save thread");
@@ -72,7 +70,6 @@ public class SaveThread extends Thread implements IAutoSave {
                 lock.notifyAll();
             }
         });
-        running = true;
     }
 
     private void setWaitDuration(int seconds) {
@@ -141,47 +138,6 @@ public class SaveThread extends Thread implements IAutoSave {
             System.exit(1);
         } catch (Exception ex) {
             Log.logWarningRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
-        }
-    }
-
-    @Override
-    public void fin() {
-        running = false;
-        synchronized (lock) {
-            lock.notifyAll();
-       }
-       try {
-            join((long) waitDuration * 2);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
-
-    private static void executeSave(IProject dataEngine) {
-        try {
-            Core.executeExclusively(false, () -> {
-                dataEngine.saveProject(false);
-                dataEngine.teamSyncPrepare();
-            });
-            CoreState.getInstance().getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
-                    DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
-        } catch (TimeoutException ex) {
-            LOGGER.atWarn()
-                    .logRB("AUTOSAVE_LOCK_ACQUISITION_TIMEOUT");
-        } catch (KnownException ex) {
-            Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
-        } catch (IRemoteRepository2.NetworkException ex) {
-            LOGGER.atWarn().logRB("TEAM_NETWORK_ERROR", ex.getMessage());
-        } catch (OutOfMemoryError oome) {
-            // inform the user
-            long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
-            LOGGER.atError().setMessageRB("OUT_OF_MEMORY")
-                    .addArgument(memory).setCause(oome).log();
-            Core.getMainWindow().showErrorDialogRB("TF_ERROR", "OUT_OF_MEMORY", memory);
-            // Just quit, we can't help it anyway
-            System.exit(1);
-        } catch (Exception ex) {
-            LOGGER.atWarn().logRB("AUTOSAVE_GENERIC_ERROR", ex.getMessage());
         }
     }
 

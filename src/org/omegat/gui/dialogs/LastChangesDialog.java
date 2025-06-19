@@ -27,13 +27,20 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 
 import org.apache.commons.io.IOUtils;
 import org.omegat.help.Help;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
@@ -71,17 +78,12 @@ public class LastChangesDialog extends JDialog {
      * This method is called from within the constructor to initialize the form.
      */
     private void initComponents() {
-        buttonPanel = new javax.swing.JPanel();
-        okButton = new javax.swing.JButton();
-        scroll = new javax.swing.JScrollPane();
-        lastChangesTextPane = new javax.swing.JTextPane();
-
         setTitle(OStrings.getString("LASTCHANGESDIALOG_TITLE"));
         setResizable(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                closeDialog(evt);
+            public void windowClosing(WindowEvent evt) {
+                doClose(RET_CANCEL);
             }
         });
 
@@ -90,24 +92,13 @@ public class LastChangesDialog extends JDialog {
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-
+        okButton.addActionListener(this::okButtonActionPerformed);
         buttonPanel.add(okButton);
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
         lastChangesTextPane.setEditable(false);
-        try {
-            String text = IOUtils.toString(Help.getHelpFileURI(OConsts.LAST_CHANGES_FILE), StandardCharsets.UTF_8);
-            lastChangesTextPane.setText(text);
-        } catch (NullPointerException | IOException ex) {
-            lastChangesTextPane.setText(Help.errorHaiku());
-        }
+        lastChangesTextPane.setText(loadLastChangesText());
         scroll.setViewportView(lastChangesTextPane);
 
         getContentPane().add(scroll, java.awt.BorderLayout.CENTER);
@@ -116,13 +107,23 @@ public class LastChangesDialog extends JDialog {
         setBounds((screenSize.width - 600) / 2, (screenSize.height - 400) / 2, 600, 400);
     }
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        doClose(RET_OK);
+    private String loadLastChangesText() {
+        URI helpFileUri = Help.getHelpFileURI(OConsts.LAST_CHANGES_FILE);
+        if (helpFileUri == null) {
+            Log.logWarningRB("LASTCHANGESDIALOG_ERROR");
+            return Help.errorHaiku();
+        }
+
+        try {
+            return IOUtils.toString(helpFileUri, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            Log.logErrorRB(ex, "LASTCHANGESDIALOG_ERROR");
+            return Help.errorHaiku();
+        }
     }
 
-    /** Closes the dialog */
-    private void closeDialog(java.awt.event.WindowEvent evt) {
-        doClose(RET_CANCEL);
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        doClose(RET_OK);
     }
 
     private void doClose(int retStatus) {
@@ -131,10 +132,10 @@ public class LastChangesDialog extends JDialog {
         dispose();
     }
 
-    private javax.swing.JPanel buttonPanel;
-    private javax.swing.JScrollPane scroll;
-    private javax.swing.JTextPane lastChangesTextPane;
-    private javax.swing.JButton okButton;
+    private final JPanel buttonPanel = new JPanel();
+    private final JScrollPane scroll = new JScrollPane();
+    private final JTextPane lastChangesTextPane = new JTextPane();
+    private final JButton okButton = new JButton();
 
     private int returnStatus = RET_CANCEL;
 }

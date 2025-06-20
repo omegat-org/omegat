@@ -89,6 +89,14 @@
             <Bug code="IJU" />
         </Not>
     </Match>
+    <Match>
+        <Class name="org.omegat.core.TestCoreWireMock"/>
+        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD"/>
+    </Match>
+    <Match>
+        <Class name="~org\.omegat\.core\.data\.TestTeamIntegration.*"/>
+    </Match>
+
     <!-- All EI/EI2 are ignored for the first step -->
     <Match>
         <Bug pattern="CT_CONSTRUCTOR_THROW,EI_EXPOSE_REP,EI_EXPOSE_REP2,EI_EXPOSE_STATIC_REP2,RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" />

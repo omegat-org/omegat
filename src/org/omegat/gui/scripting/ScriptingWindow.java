@@ -54,8 +54,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.script.ScriptEngineFactory;
 import javax.swing.AbstractAction;
@@ -113,8 +111,6 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 public class ScriptingWindow {
-
-    private static final Logger LOGGER = Logger.getLogger(ScriptingWindow.class.getName());
 
     static ScriptingWindow window;
 
@@ -459,7 +455,7 @@ public class ScriptingWindow {
                 if (Preferences.existsPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey)) {
                     runQuickScript(index);
                 } else {
-                    logResult(StringUtil.format(OStrings.getString("SCW_NO_SCRIPT_BOUND"), scriptKey));
+                    logResultRB("SCW_NO_SCRIPT_BOUND", scriptKey);
                 }
             });
 
@@ -572,18 +568,17 @@ public class ScriptingWindow {
 
         @Override
         protected void done() {
+            long duration = System.currentTimeMillis() - start;
             try {
                 String result = get();
                 logResult(result);
-                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_DONE"),
-                        System.currentTimeMillis() - start));
+                logResultRB("SCW_SCRIPT_DONE", duration);
             } catch (CancellationException e) {
-                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_CANCELED"),
-                        System.currentTimeMillis() - start));
+                logResultRB("SCW_SCRIPT_CANCELED", duration);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             } catch (ExecutionException e) {
-                logResult(OStrings.getString("SCW_SCRIPT_ERROR"), e);
+                logResultRB(e, "SCW_SCRIPT_ERROR");
             }
         }
     }
@@ -627,8 +622,7 @@ public class ScriptingWindow {
                 // This method can be called in instances when the Scripting
                 // Window is not visible, so it might make more sense to let the
                 // caller handle the exception.
-                logResult(StringUtil.format(OStrings.getString("SCW_SCRIPT_LOAD_ERROR"),
-                        scriptItem.getFileName()), e);
+                logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", scriptItem.getFileName());
             }
         }
 
@@ -717,9 +711,19 @@ public class ScriptingWindow {
         queuedWorkers.clear();
     }
 
+    private void logResultRB(Throwable t, String key, Object... args) {
+        logResultToWindow(OStrings.getString(key, args) + "\n" + t.getMessage(), true);
+        Log.logErrorRB(t, key, args);
+    }
+
+    private void logResultRB(String key, Object... args) {
+        logResultToWindow(OStrings.getString(key, args), true);
+        Log.logErrorRB(key, args);
+    }
+
     private void logResult(String s, Throwable t) {
         logResultToWindow(s + "\n" + t.getMessage(), true);
-        LOGGER.log(Level.SEVERE, s, t);
+        Log.log(t, s);
     }
 
     private void logResult(String s) {
@@ -728,7 +732,7 @@ public class ScriptingWindow {
 
     private void logResult(String s, boolean newLine) {
         logResultToWindow(s, newLine);
-        LOGGER.log(Level.INFO, s);
+        Log.log(s);
     }
 
     /**
@@ -881,10 +885,9 @@ public class ScriptingWindow {
 
             try {
                 m_currentScriptItem.setText(m_txtScriptEditor.getTextArea().getText());
-                logResult(StringUtil.format(OStrings.getString("SCW_SAVE_OK"),
-                        m_currentScriptItem.getFile().getAbsolutePath()));
+                logResultRB("SCW_SAVE_OK", m_currentScriptItem.getFile().getAbsolutePath());
             } catch (IOException ex) {
-                logResult(OStrings.getString("SCW_SAVE_ERROR"), ex);
+                logResultRB(ex, "SCW_SAVE_ERROR");
             }
         }
 

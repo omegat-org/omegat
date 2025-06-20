@@ -30,7 +30,6 @@ import org.omegat.util.OStrings;
 import javax.swing.AbstractListModel;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
@@ -48,11 +47,11 @@ class IssuesTypeListModel extends AbstractListModel<String> {
     }
 
     List<Map.Entry<String, Long>> calculateData(List<IIssue> issues) {
-        Map<String, Long> counts = issues.stream()
-                .map(IIssue::getTypeName)
+        Map<String, Long> counts = issues.stream().map(IIssue::getTypeName)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         List<Map.Entry<String, Long>> result = new ArrayList<>();
-        result.add(new AbstractMap.SimpleImmutableEntry<>(IssuesPanelController.ALL_TYPES, (long) issues.size()));
+        result.add(new AbstractMap.SimpleImmutableEntry<>(IssuesPanelController.ALL_TYPES,
+                (long) issues.size()));
         counts.entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(result::add);
         return result;
     }
@@ -69,7 +68,8 @@ class IssuesTypeListModel extends AbstractListModel<String> {
     }
 
     List<String> getTypesAt(int[] indicies) {
-        return IntStream.of(indicies).mapToObj(types::get).map(Map.Entry::getKey).collect(Collectors.toList());
+        return IntStream.of(indicies).mapToObj(types::get).map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 
     long getCountAt(int[] indicies) {
@@ -77,8 +77,8 @@ class IssuesTypeListModel extends AbstractListModel<String> {
     }
 
     int[] indiciesOfTypes(List<String> queryTypes) {
-        return queryTypes
-                .stream().map(type -> IntStream.range(0, queryTypes.size())
+        return queryTypes.stream()
+                .map(type -> IntStream.range(0, queryTypes.size())
                         .filter(i -> types.get(i).getKey().equals(type)).findFirst())
                 .filter(OptionalInt::isPresent).mapToInt(OptionalInt::getAsInt).toArray();
     }

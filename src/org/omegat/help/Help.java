@@ -67,20 +67,15 @@ public final class Help {
     private Help() {
     }
 
+    private static final String MANUAL_SNAPSHOT = "https://omegat.sourceforge.io/manual-snapshot/";
+    private static final String MANUAL_STANDARD = "https://omegat.sourceforge.io/manual-standard/";
+    private static final String JAVADOC_URL = "https://omegat.sourceforge.io/javadoc-standard/";
+
     /**
      * URL for the online manual.
-     * TODO implement a "manual-dev" and "javadoc-dev"
-     * since the "latest" suffix is not used anymore
      */
-    public static final String ONLINE_HELP_URL = OStrings.IS_BETA
-            //? "https://omegat.sourceforge.io/manual-latest/"
-            ? "https://omegat.sourceforge.io/manual-snapshot/"
-            : "https://omegat.sourceforge.io/manual-standard/";
-
-    public static final String ONLINE_JAVADOC_URL = OStrings.IS_BETA
-            //? "https://omegat.sourceforge.io/javadoc-latest/"
-            ? "https://omegat.sourceforge.io/javadoc-standard/"
-            : "https://omegat.sourceforge.io/javadoc-standard/";
+    public static final String ONLINE_HELP_URL = OStrings.IS_BETA ? MANUAL_SNAPSHOT : MANUAL_STANDARD;
+    public static final String ONLINE_JAVADOC_URL = JAVADOC_URL;
 
     public static void showJavadoc() throws IOException {
         URI uri = URI.create(ONLINE_JAVADOC_URL);

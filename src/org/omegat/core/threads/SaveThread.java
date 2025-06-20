@@ -63,8 +63,8 @@ public class SaveThread extends Thread implements IAutoSave {
                 Preferences.AUTO_SAVE_DEFAULT));
         running = true;
         Preferences.addPropertyChangeListener(Preferences.AUTO_SAVE_INTERVAL, evt -> {
-            setWaitDuration((Integer) evt.getNewValue());
             synchronized (lock) {
+                setWaitDuration((Integer) evt.getNewValue());
                 lock.notifyAll();
             }
         });
@@ -74,16 +74,18 @@ public class SaveThread extends Thread implements IAutoSave {
         waitDuration = seconds * 1000;
     }
 
-    public synchronized void disable() {
+    public void disable() {
         Log.logDebug("Disable autosave");
-        enabled = false;
+        synchronized (lock) {
+            enabled = false;
+        }
     }
 
-    public synchronized void enable() {
+    public void enable() {
         Log.logDebug("Enable autosave");
-        enabled = true;
-        needToSaveNow = false;
         synchronized (lock) {
+            enabled = true;
+            needToSaveNow = false;
             lock.notifyAll();
         }
     }
@@ -97,13 +99,18 @@ public class SaveThread extends Thread implements IAutoSave {
                     // reset.
                     needToSaveNow = true;
                     // sleep
-                    wait(waitDuration);
+                    lock.wait(waitDuration);
                 }
-                if (needToSaveNow && enabled) {
+
+                boolean execute;
+                synchronized (lock) {
                     // Wait finished by time and autosaving enabled.
-                    IProject dataEngine = Core.getProject();
+                    execute = needToSaveNow && enabled;
+                }
+
+                if (execute) {
                     Log.logDebug("Start project save from SaveThread");
-                    executeSave(dataEngine);
+                    executeSave();
                     Log.logDebug("Finish project save from SaveThread");
                 }
             }
@@ -113,7 +120,8 @@ public class SaveThread extends Thread implements IAutoSave {
         }
     }
 
-    private static void executeSave(IProject dataEngine) {
+    private static void executeSave() {
+        IProject dataEngine = Core.getProject();
         try {
             Core.executeExclusively(false, () -> {
                 dataEngine.saveProject(false);
@@ -141,8 +149,8 @@ public class SaveThread extends Thread implements IAutoSave {
 
     @Override
     public void fin() {
-        running = false;
         synchronized (lock) {
+            running = false;
             lock.notifyAll();
        }
        try {

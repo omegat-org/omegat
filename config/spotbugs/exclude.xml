@@ -253,10 +253,10 @@
     </Match>
     <Match>
         <Or>
-            <Class name="org.omegat.core.machinetranslation.BaseTranslate"/>
+            <Class name="org.omegat.core.machinetranslators.BaseTranslate"/>
             <Class name="~org\.omegat\.core\.spellchecker\.DictionaryManager.*"/>
             <Class name="~org\.omegat\.util\.PreferencesXML.*"/>
         </Or>
-        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELDi,UWF_UNWRITTEN_PUBLIC_OR_PROTECTED_FIELD"/>
+        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD,UWF_UNWRITTEN_PUBLIC_OR_PROTECTED_FIELD"/>
     </Match>
 </FindBugsFilter>

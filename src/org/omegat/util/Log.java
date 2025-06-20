@@ -255,7 +255,11 @@ public final class Log {
      *            The exception or error to log
      */
     public static void log(Throwable throwable) {
-        LOGGER.atError().setMessage("").setCause(throwable).log();
+        Log.log(throwable, "");
+    }
+
+    public static void log(Throwable throwable, String message, Object... parameters) {
+        LOGGER.atError().setMessage(message).setCause(throwable).addArgument(parameters).log();
     }
 
     /**

@@ -106,6 +106,12 @@
         <Bug pattern="DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED"/>
     </Match>
 
+
+    <!-- Deprecated classes warnings -->
+    <Match>
+        <Class name="org.omegat.util.JsonParser"/>
+    </Match>
+
     <!-- GlossaryTextArea class has so many issues that should be fixed. -->
     <Match>
         <Class name="org.omegat.gui.glossary.GlossaryTextArea"/>
@@ -244,5 +250,13 @@
             <Class name="org.omegat.util.gui.UIDesignManager"/>
         </Or>
         <Bug pattern="MS_PKGPROTECT,MS_EXPOSE_REP"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.core.machinetranslation.BaseTranslate"/>
+            <Class name="~org\.omegat\.core\.spellchecker\.DictionaryManager.*"/>
+            <Class name="~org\.omegat\.util\.PreferencesXML.*"/>
+        </Or>
+        <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELDi,UWF_UNWRITTEN_PUBLIC_OR_PROTECTED_FIELD"/>
     </Match>
 </FindBugsFilter>

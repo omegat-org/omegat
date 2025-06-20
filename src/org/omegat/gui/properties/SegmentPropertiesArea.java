@@ -25,12 +25,10 @@
 
 package org.omegat.gui.properties;
 
-import java.awt.Component;
 import java.awt.IllegalComponentStateException;
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -58,6 +56,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.BiDiUtils;
@@ -92,9 +91,9 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ORIGIN = "origin";
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
-    final List<String> properties = new ArrayList<>();
-
-    final DockableScrollPane scrollPane;
+    private final List<String> properties = new ArrayList<>();
+    private final PropertyChangeSupport changes = new PropertyChangeSupport(this);
+    private final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
     private boolean isTargetRtl;
@@ -111,6 +110,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
         scrollPane.setMenuProvider(this);
 
         CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener(this));
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
+                setProperties(null);
+            }
+        });
         CoreEvents.registerFontChangedEventListener(newFont -> viewImpl.getViewComponent().setFont(newFont));
 
         scrollPane.setForeground(Styles.EditorColor.COLOR_FOREGROUND.getColor());
@@ -127,8 +131,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         installView(initModeClass);
+    }
 
-        scrollPane.addMouseListener(contextMenuListener);
+    public void addPropertyChangeListener(String key, PropertyChangeListener l) {
+        changes.addPropertyChangeListener(key, l);
     }
 
     private void installView(Class<?> viewClass) {
@@ -153,28 +159,6 @@ public class SegmentPropertiesArea implements IPaneMenu {
         viewImpl.update();
     }
 
-    final MouseListener contextMenuListener = new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        private void doPopup(MouseEvent e) {
-            Point p = SwingUtilities.convertPoint((Component) e.getSource(), e.getPoint(),
-                    scrollPane);
-            showContextMenu(p);
-        }
-    };
-
     void showContextMenu(Point p) {
         JPopupMenu menu = new JPopupMenu();
         populateLocalContextMenuOptions(menu, p);
@@ -185,6 +169,14 @@ public class SegmentPropertiesArea implements IPaneMenu {
         }
     }
 
+    List<String> getProperties() {
+        return properties;
+    }
+
+    DockableScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
     private void populateLocalContextMenuOptions(JPopupMenu contextMenu, Point p) {
         final String key = viewImpl.getKeyAtPoint(p);
         if (key == null) {
@@ -193,8 +185,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         String displayKey = key;
         if (!Preferences.isPreference(Preferences.SEGPROPS_SHOW_RAW_KEYS)) {
             try {
-                displayKey = OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
+                displayKey = OStrings.getString(
+                        ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
             } catch (MissingResourceException ignore) {
                 // If this is not a known key then we can't translate it,
                 // so use the "raw" key instead.
@@ -289,9 +281,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private String getBooleanValueVerb(String key, boolean value) {
         try {
             if (value) {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+                return OStrings
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
             } else {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+                return OStrings
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
             }
         } catch (MissingResourceException ex) {
             // fallback to default expression
@@ -304,6 +298,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
     }
 
     private void setProperties(SourceTextEntry ste) {
+        var oldProperties = new ArrayList<>(properties);
         properties.clear();
         if (ste == null) {
             viewImpl.update();
@@ -333,6 +328,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
             setTranslationProperties(trg);
         }
         viewImpl.update();
+        changes.firePropertyChange("properties", oldProperties, properties);
     }
 
     private void setKeyProperties(EntryKey key) {

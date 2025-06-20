@@ -58,8 +58,8 @@ public class DocumentFilter3 extends DocumentFilter {
         UIThreadsUtil.mustBeSwingThread();
 
         if (attr != null) {
-            ((Document3) fb.getDocument()).setTextBeingComposed(attr
-                    .isDefined(StyleConstants.ComposedTextAttribute));
+            ((Document3) fb.getDocument())
+                    .setTextBeingComposed(attr.isDefined(StyleConstants.ComposedTextAttribute));
         }
 
         if (isPossible(fb.getDocument(), offset, 0)) {
@@ -73,8 +73,8 @@ public class DocumentFilter3 extends DocumentFilter {
         UIThreadsUtil.mustBeSwingThread();
 
         if (attrs != null) {
-            ((Document3) fb.getDocument()).setTextBeingComposed(attrs
-                    .isDefined(StyleConstants.ComposedTextAttribute));
+            ((Document3) fb.getDocument())
+                    .setTextBeingComposed(attrs.isDefined(StyleConstants.ComposedTextAttribute));
         }
 
         if (isPossible(fb.getDocument(), offset, length)) {
@@ -82,55 +82,76 @@ public class DocumentFilter3 extends DocumentFilter {
         }
     }
 
+    private static final int BIDI_TAG_PADDING = 2;
+
     boolean isPossible(Document d, int offset, int length) throws BadLocationException {
+        // Ensures the method runs in the Swing thread
+        UIThreadsUtil.mustBeSwingThread();
         Document3 doc = (Document3) d;
+
         if (doc.getTrustedChangesInProgress()) {
-            // this call created by internal changes
-            return true;
+            return true; // Changes made by internal processes
         }
 
-        if (!doc.isEditMode()) {
-            // segment not active - change disabled
-            return false;
+        if (!doc.isEditMode() || isOffsetOutsideTranslationBounds(doc, offset, length)) {
+            return false; // Editing not allowed or offset out of bounds
         }
 
-        if (offset < doc.getTranslationStart() || offset + length > doc.getTranslationEnd()) {
-            // Is inside translation ?
-            return false;
-        }
-
-        // check protected parts
         if (!Preferences.isPreference(Preferences.ALLOW_TAG_EDITING)) {
-            SegmentBuilder sb = doc.getController().getCurrentSegmentBuilder();
-            if (sb == null) {
-                // there is no current active entry
-                return false;
-            }
-            // check if inside tag
-            String text = doc.getText(doc.getTranslationStart(), doc.getTranslationEnd() - doc.getTranslationStart());
-            int off = offset - doc.getTranslationStart();
-            for (ProtectedPart pp : sb.ste.getProtectedParts()) {
-                int pos = -1;
-                while ((pos = text.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
-                    int checkPos = pos;
-                    int checkLen = pp.getTextInSourceSegment().length();
-                    if (sb.hasRTL && doc.getController().targetLangIsRTL) {
-                        // should be bidi-chars around tags
-                        if (EditorUtils.hasBidiAroundTag(text, pp.getTextInSourceSegment(), pos)) {
-                            checkPos -= 2;
-                            checkLen += 4;
-                        }
-                    }
-                    if (off > checkPos && off < checkPos + checkLen) {
-                        return false;
-                    }
-                    if (off + length > checkPos && off + length < checkPos + checkLen) {
-                        return false;
-                    }
-                }
+            return isEditingAllowedInProtectedParts(doc, offset, length);
+        }
+
+        return true;
+    }
+
+    private boolean isOffsetOutsideTranslationBounds(Document3 doc, int offset, int length) {
+        return offset < doc.getTranslationStart() || offset + length > doc.getTranslationEnd();
+    }
+
+    private boolean isEditingAllowedInProtectedParts(Document3 doc, int offset, int length)
+            throws BadLocationException {
+        SegmentBuilder segmentBuilder = doc.getController().getCurrentSegmentBuilder();
+        if (segmentBuilder == null) {
+            return false; // No active entry in the document
+        }
+
+        String text = doc.getText(doc.getTranslationStart(),
+                doc.getTranslationEnd() - doc.getTranslationStart());
+        int relativeOffset = offset - doc.getTranslationStart();
+
+        for (ProtectedPart protectedPart : segmentBuilder.ste.getProtectedParts()) {
+            if (isOffsetWithinProtectedTag(text, protectedPart, relativeOffset, length, segmentBuilder,
+                    doc)) {
+                return false; // Editing inside a protected tag
             }
         }
 
         return true;
+    }
+
+    private boolean isOffsetWithinProtectedTag(String text, ProtectedPart protectedPart, int relativeOffset,
+            int length, SegmentBuilder segmentBuilder, Document3 doc) {
+        int position = -1;
+        while ((position = text.indexOf(protectedPart.getTextInSourceSegment(), position + 1)) >= 0) {
+            int checkPos = position;
+            int checkLen = protectedPart.getTextInSourceSegment().length();
+
+            if (segmentBuilder.hasRTL && doc.getController().targetLangIsRTL
+                    && EditorUtils.hasBidiAroundTag(text, protectedPart.getTextInSourceSegment(), position)) {
+                checkPos -= BIDI_TAG_PADDING;
+                checkLen += BIDI_TAG_PADDING * 2;
+            }
+
+            if (isOffsetWithinRange(relativeOffset, length, checkPos, checkLen)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isOffsetWithinRange(int offset, int length, int rangeStart, int rangeLength) {
+        int rangeEnd = rangeStart + rangeLength;
+        return (offset > rangeStart && offset < rangeEnd)
+                || (offset + length > rangeStart && offset + length < rangeEnd);
     }
 }

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
+ Copyright (C) 2016 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,36 +22,38 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+package org.omegat.gui.properties;
 
-package org.omegat.core.threads;
+import javax.swing.SwingUtilities;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-/**
- * Interface for support project autosaving.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public interface IAutoSave {
-    /**
-     * Disable autosaving. Required when project loading or saving time. When
-     * project closed, autosaving also disabled.
-     */
-    void disable();
+class SegmentPropertiesMouseAdapter extends MouseAdapter {
+    private final SegmentPropertiesArea segmentPropertiesArea;
 
-    /**
-     * Enable autosaving.
-     */
-    void enable();
+    SegmentPropertiesMouseAdapter(SegmentPropertiesArea segmentPropertiesArea) {
+        this.segmentPropertiesArea = segmentPropertiesArea;
+    }
 
-    /**
-     * Terminates the thread execution and releases associated resources.
-     * <p>
-     * This method signals the thread to stop by setting the running flag to false
-     * and ensures that all waiting threads are notified. A notification is sent
-     * on the lock object to release any threads waiting on it. Afterward, it
-     * attempts to join the thread, waiting a duration based on the wait interval
-     * to allow the thread completion. If the join is interrupted, the interrupt
-     * status is restored.
-     */
-    default void fin(){
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.isPopupTrigger()) {
+            doPopup(e);
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (e.isPopupTrigger()) {
+            doPopup(e);
+        }
+    }
+
+    private void doPopup(MouseEvent e) {
+        Point p = SwingUtilities.convertPoint((Component) e.getSource(), e.getPoint(),
+                segmentPropertiesArea.getScrollPane());
+        segmentPropertiesArea.showContextMenu(p);
     }
 }

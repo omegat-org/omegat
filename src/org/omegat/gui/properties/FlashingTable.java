@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
+ Copyright (C) 2016 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,36 +22,45 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+package org.omegat.gui.properties;
 
-package org.omegat.core.threads;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import java.awt.Graphics;
+import java.util.List;
 
-/**
- * Interface for support project autosaving.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public interface IAutoSave {
-    /**
-     * Disable autosaving. Required when project loading or saving time. When
-     * project closed, autosaving also disabled.
-     */
-    void disable();
+@SuppressWarnings("serial")
+class FlashingTable extends JTable {
+    private transient FlashColorInterpolator flasher;
+    private List<Integer> rows;
 
-    /**
-     * Enable autosaving.
-     */
-    void enable();
+    FlashingTable(TableModel model) {
+        super(model);
+    }
 
-    /**
-     * Terminates the thread execution and releases associated resources.
-     * <p>
-     * This method signals the thread to stop by setting the running flag to false
-     * and ensures that all waiting threads are notified. A notification is sent
-     * on the lock object to release any threads waiting on it. Afterward, it
-     * attempts to join the thread, waiting a duration based on the wait interval
-     * to allow the thread completion. If the join is interrupted, the interrupt
-     * status is restored.
-     */
-    default void fin(){
+    public void flash(List<Integer> rows) {
+        this.rows = rows;
+        flasher = new FlashColorInterpolator();
+        repaint();
+    }
+
+    public boolean isHighlightedRow(int index) {
+        return rows != null && rows.contains(index);
+    }
+
+    public void clearHighlight() {
+        flasher = null;
+    }
+
+    public FlashColorInterpolator getFlasher() {
+        return flasher;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (flasher != null && flasher.isFlashing()) {
+            repaint();
+        }
     }
 }

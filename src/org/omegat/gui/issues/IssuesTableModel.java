@@ -43,7 +43,8 @@ class IssuesTableModel extends AbstractTableModel {
     private int mouseoverRow = -1;
     private int mouseoverCol = -1;
 
-    private static final Icon SETTINGS_ICON = new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.active.png"));
+    private static final Icon SETTINGS_ICON = new ImageIcon(
+            ResourcesUtil.getBundledImage("appbar.settings.active.png"));
     private static final Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
             ResourcesUtil.getBundledImage("appbar.settings.inactive.png"));
     private static final Icon SETTINGS_ICON_PRESSED = new ImageIcon(
@@ -107,16 +108,16 @@ class IssuesTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         IIssue iss = issues.get(rowIndex);
         switch (IssueColumn.get(columnIndex)) {
-            case SEG_NUM:
-                return iss.getSegmentNumber();
-            case ICON:
-                return iss.getIcon();
-            case TYPE:
-                return iss.getTypeName();
-            case DESCRIPTION:
-                return iss.getDescription();
-            case ACTION_BUTTON:
-                return getActionMenuIcon(iss, rowIndex, columnIndex);
+        case SEG_NUM:
+            return iss.getSegmentNumber();
+        case ICON:
+            return iss.getIcon();
+        case TYPE:
+            return iss.getTypeName();
+        case DESCRIPTION:
+            return iss.getDescription();
+        case ACTION_BUTTON:
+            return getActionMenuIcon(iss, rowIndex, columnIndex);
         }
         throw new IllegalArgumentException("Unknown column requested: " + columnIndex);
     }

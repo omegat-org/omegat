@@ -142,9 +142,11 @@ public class IssuesPanelController implements IIssues {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
+
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
+
     private void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         pcs.firePropertyChange(propertyName, oldValue, newValue);
     }
@@ -175,9 +177,9 @@ public class IssuesPanelController implements IIssues {
         panel.innerSplitPane.setDividerLocation(INNER_SPLIT_INITIAL_RATIO);
         panel.outerSplitPane.setDividerLocation(OUTER_SPLIT_INITIAL_RATIO);
 
-        StaticUIUtils.persistGeometry(frame, Preferences.ISSUES_WINDOW_GEOMETRY_PREFIX, () ->
-                Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM,
-                panel.outerSplitPane.getDividerLocation()));
+        StaticUIUtils.persistGeometry(frame, Preferences.ISSUES_WINDOW_GEOMETRY_PREFIX,
+                () -> Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM,
+                        panel.outerSplitPane.getDividerLocation()));
 
         try {
             int bottomDL = Integer
@@ -224,7 +226,8 @@ public class IssuesPanelController implements IIssues {
     }
 
     private void setupShortCuts() {
-        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), ACTION_KEY_JUMP_TO_SELECTED_ISSUE);
+        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+                ACTION_KEY_JUMP_TO_SELECTED_ISSUE);
         panel.table.getActionMap().put(ACTION_KEY_JUMP_TO_SELECTED_ISSUE, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -237,7 +240,8 @@ public class IssuesPanelController implements IIssues {
         // better accomplished by adjusting the focus traversal policy?
         panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK),
                 ACTION_KEY_FOCUS_ON_TYPES_LIST);
-        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), ACTION_KEY_FOCUS_ON_TYPES_LIST);
+        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0),
+                ACTION_KEY_FOCUS_ON_TYPES_LIST);
         panel.table.getActionMap().put(ACTION_KEY_FOCUS_ON_TYPES_LIST, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -295,7 +299,8 @@ public class IssuesPanelController implements IIssues {
         Set<String> disabledProviders = IssueProviders.getDisabledProviderIds();
         IssueProviders.getIssueProviders().stream().sorted(Comparator.comparing(IIssueProvider::getId))
                 .forEach(provider -> {
-                    String label = OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER", provider.getName());
+                    String label = OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER",
+                            provider.getName());
                     JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
                     item.addActionListener(e -> {
                         IssueProviders.setProviderEnabled(provider.getId(), item.isSelected());
@@ -311,7 +316,8 @@ public class IssuesPanelController implements IIssues {
     }
 
     private static void setupTagsMenu(JMenu menu) {
-        // Tags item is hard-coded because it is not disableable and is implemented differently from all
+        // Tags item is hard-coded because it is not disableable and is
+        // implemented differently from all
         // others.
         JCheckBoxMenuItem tagsItem = new JCheckBoxMenuItem(
                 OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER",
@@ -322,11 +328,10 @@ public class IssuesPanelController implements IIssues {
     }
 
     private static void setupAskMenu(JMenu menu) {
-        JCheckBoxMenuItem askItem = new JCheckBoxMenuItem(
-                OStrings.getString("ISSUES_WINDOW_MENU_DONT_ASK"));
+        JCheckBoxMenuItem askItem = new JCheckBoxMenuItem(OStrings.getString("ISSUES_WINDOW_MENU_DONT_ASK"));
         askItem.setSelected(Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK));
-        askItem.addActionListener(e -> Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK,
-                askItem.isSelected()));
+        askItem.addActionListener(
+                e -> Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK, askItem.isSelected()));
         menu.add(askItem);
     }
 
@@ -363,7 +368,8 @@ public class IssuesPanelController implements IIssues {
         issue.map(IIssue::getDetailComponent).ifPresent(comp -> {
             if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
                 Font font = Core.getMainWindow().getApplicationFont();
-                StaticUIUtils.visitHierarchy(comp, IssuesPanelController::isJTextComponent, c -> c.setFont(font));
+                StaticUIUtils.visitHierarchy(comp, IssuesPanelController::isJTextComponent,
+                        c -> c.setFont(font));
             }
             panel.outerSplitPane.setBottomComponent(comp);
         });
@@ -517,21 +523,18 @@ public class IssuesPanelController implements IIssues {
             List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
             Stream<IIssue> providerIssues = getProviderIssues(providers, filePattern);
             List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
-            Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST,
-                    () -> String.format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
+            Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST, () -> String
+                    .format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
             return result;
         }
 
         private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String filePattern) {
-            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries().parallelStream()
-                    .filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
-                    .filter(this::progressFilter)
-                    .map(this::makeEntryPair)
-                    .filter(Objects::nonNull);
+            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries()
+                    .parallelStream().filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
+                    .filter(this::progressFilter).map(this::makeEntryPair).filter(Objects::nonNull);
 
-            return entriesStream.flatMap(entry ->
-                    providers.stream()
-                            .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
+            return entriesStream.flatMap(entry -> providers.stream()
+                    .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
         }
 
         Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
@@ -608,14 +611,16 @@ public class IssuesPanelController implements IIssues {
             colSizer.reset();
             colSizer.adjustTableColumns();
             if (!jumpToTypes.isEmpty()) {
-                int[] indicies = ((IssuesTypeListModel) panel.typeList.getModel()).indiciesOfTypes(jumpToTypes);
+                int[] indicies = ((IssuesTypeListModel) panel.typeList.getModel())
+                        .indiciesOfTypes(jumpToTypes);
                 if (indicies.length > 0) {
                     panel.typeList.setSelectedIndices(indicies);
                 }
             }
             if (jumpToEntry >= 0) {
                 IntStream.range(0, panel.table.getRowCount())
-                        .filter(row -> (int) panel.table.getValueAt(row, IssueColumn.SEG_NUM.getIndex()) >= jumpToEntry)
+                        .filter(row -> (int) panel.table.getValueAt(row,
+                                IssueColumn.SEG_NUM.getIndex()) >= jumpToEntry)
                         .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
@@ -631,11 +636,13 @@ public class IssuesPanelController implements IIssues {
         IssuesTypeListModel model = ((IssuesTypeListModel) panel.typeList.getModel());
         List<String> types = model.getTypesAt(selection);
         @SuppressWarnings("unchecked")
-        TableRowSorter<IssuesTableModel> sorter = (TableRowSorter<IssuesTableModel>) panel.table.getRowSorter();
+        TableRowSorter<IssuesTableModel> sorter = (TableRowSorter<IssuesTableModel>) panel.table
+                .getRowSorter();
         sorter.setRowFilter(new RowFilter<IssuesTableModel, Integer>() {
             @Override
             public boolean include(RowFilter.Entry<? extends IssuesTableModel, ? extends Integer> entry) {
-                return types.contains(ALL_TYPES) || types.contains(entry.getStringValue(IssueColumn.TYPE.getIndex()));
+                return types.contains(ALL_TYPES)
+                        || types.contains(entry.getStringValue(IssueColumn.TYPE.getIndex()));
             }
         });
         int totalItems = panel.table.getModel().getRowCount();
@@ -652,14 +659,15 @@ public class IssuesPanelController implements IIssues {
             frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE", totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE", FilenameUtils.getName(filePath),
-                    totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE",
+                    FilenameUtils.getName(filePath), totalItems));
         }
     }
 
     void updateTitle(int shownItems, int totalItems) {
         if (isShowingAllFiles()) {
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
+            frame.setTitle(
+                    OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
             frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE",
@@ -681,8 +689,8 @@ public class IssuesPanelController implements IIssues {
                 return;
             }
             TableModel model = panel.table.getModel();
-            if (model instanceof IssuesTableModel && e.getButton() == MouseEvent.BUTTON1 &&
-                        ((IssuesTableModel) model).getMouseoverCol() == IssueColumn.ACTION_BUTTON.getIndex()) {
+            if (model instanceof IssuesTableModel && e.getButton() == MouseEvent.BUTTON1
+                    && ((IssuesTableModel) model).getMouseoverCol() == IssueColumn.ACTION_BUTTON.getIndex()) {
                 doPopup(e);
             }
         }

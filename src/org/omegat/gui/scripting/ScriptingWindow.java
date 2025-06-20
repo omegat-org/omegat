@@ -556,7 +556,7 @@ public class ScriptingWindow {
         private final String scriptString;
         private final ScriptItem scriptItem;
         private final Map<String, Object> bindings;
-        private long start;
+        private volatile long start;
 
         ScriptWorker(String scriptString, ScriptItem scriptItem, Map<String, Object> bindings) {
             this.scriptString = scriptString;

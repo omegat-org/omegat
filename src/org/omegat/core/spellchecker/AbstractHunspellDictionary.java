@@ -82,8 +82,7 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
                     IOUtils.copy(affStream, fos);
                 }
                 return dictionaryPath;
-            } catch (Exception ignored) {
-
+            } catch (IOException ignored) {
             }
         }
         return null;

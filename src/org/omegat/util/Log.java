@@ -100,7 +100,7 @@ public final class Log {
                 try (InputStream in = new FileInputStream(customLogSettings)) {
                     init(in);
                     loaded = true;
-                } catch (Exception ignored) {
+                } catch (IOException ignored) {
                 }
             }
         }

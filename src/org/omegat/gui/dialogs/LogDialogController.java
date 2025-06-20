@@ -114,7 +114,7 @@ public class LogDialogController {
         final StringBuilder sb = new StringBuilder();
         try (Stream<String> lines = Files.lines(logLocation.toPath())) {
             lines.forEachOrdered(s -> sb.append(s).append("\n"));
-        } catch (Exception ignored) {
+        } catch (IOException ignored) {
         }
         return sb.toString();
     }

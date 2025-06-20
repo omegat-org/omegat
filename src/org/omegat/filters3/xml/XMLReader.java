@@ -38,6 +38,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 
+import org.jetbrains.annotations.NotNull;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 
@@ -58,7 +59,7 @@ import org.omegat.util.PatternConsts;
  */
 public class XMLReader extends Reader {
     /** Inner reader */
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
     /** Inner encoding. */
     private String encoding;
@@ -84,7 +85,7 @@ public class XMLReader extends Reader {
      *            the InputStream instance to read
      */
     public XMLReader(InputStream is) throws IOException {
-        reader = createReader(is, encoding);
+        reader = createReader(is, null);
     }
 
     /**
@@ -105,11 +106,11 @@ public class XMLReader extends Reader {
      *
      * @param file
      *            The file to read.
-     * @param encoding
+     * @param defaultEncoding
      *            The encoding to use if we can't autodetect.
      */
-    public XMLReader(File file, String encoding) throws IOException {
-        reader = createReader(new FileInputStream(file), encoding);
+    public XMLReader(File file, String defaultEncoding) throws IOException {
+        reader = createReader(new FileInputStream(file), defaultEncoding);
     }
 
     /**
@@ -148,7 +149,7 @@ public class XMLReader extends Reader {
         }
         is.reset();
         if (encoding != null) {
-            return createReaderAndDetectEOL(is, encoding);
+            return createReaderAndDetectEOL(is, Charset.forName(encoding));
         }
 
         is.mark(OConsts.READ_AHEAD_LIMIT);
@@ -166,51 +167,57 @@ public class XMLReader extends Reader {
 
         is.reset();
         if (encoding != null) {
-            return createReaderAndDetectEOL(is, encoding);
+            return createReaderAndDetectEOL(is, Charset.forName(encoding));
         }
 
         // UTF-8 if we couldn't detect it ourselves
         try {
-            return createReaderAndDetectEOL(is, StandardCharsets.UTF_8.name());
+            return createReaderAndDetectEOL(is, StandardCharsets.UTF_8);
         } catch (Exception e) {
-            return createReaderAndDetectEOL(is, null);
+            return createReaderAndDetectEOL(is, Charset.defaultCharset());
         }
     }
 
-    private BufferedReader createReaderAndDetectEOL(InputStream is, String encoding) throws IOException {
-        InputStreamReader isr = encoding == null ? new InputStreamReader(is, Charset.defaultCharset())
-                : new InputStreamReader(is, encoding);
-        BufferedReader rd = new BufferedReader(isr, OConsts.READ_AHEAD_LIMIT);
-        rd.mark(OConsts.READ_AHEAD_LIMIT);
+    private BufferedReader createReaderAndDetectEOL(@NotNull InputStream is, @NotNull Charset encoding)
+            throws IOException {
+        InputStreamReader isr = new InputStreamReader(is, encoding);
+        BufferedReader bufferedReader = new BufferedReader(isr, OConsts.READ_AHEAD_LIMIT);
+        bufferedReader.mark(OConsts.READ_AHEAD_LIMIT);
+        eol = detectEndOfLine(bufferedReader);
+        bufferedReader.reset();
+        return bufferedReader;
+    }
+
+    private static final char CARRIAGE_RETURN = '\r';
+    private static final char LINE_FEED = '\n';
+
+    private String detectEndOfLine(BufferedReader reader) throws IOException {
+        StringBuilder endOfLineBuilder = new StringBuilder();
 
         for (int i = 0; i < OConsts.READ_AHEAD_LIMIT; i++) {
-            char ch = (char) rd.read();
-            if (ch == '\r' || ch == '\n') {
-                if (eol == null) {
-                    eol = "";
-                } else if (eol.codePointAt(0) == ch) {
-                    // duplicate char - this is second line
-                    rd.reset();
-                    return rd;
+            char currentChar = (char) reader.read();
+
+            if (currentChar == CARRIAGE_RETURN || currentChar == LINE_FEED) {
+                if (endOfLineBuilder.length() == 0) {
+                    endOfLineBuilder.append(currentChar);
+                } else if (endOfLineBuilder.charAt(0) == currentChar) {
+                    // Detect duplicate character (second line)
+                    return endOfLineBuilder.toString();
+                } else {
+                    endOfLineBuilder.append(currentChar);
+                    if (endOfLineBuilder.length() == 2) {
+                        // Both characters (\r\n or \n\r) found
+                        return endOfLineBuilder.toString();
+                    }
                 }
-                eol += ch;
-                if (eol.codePointCount(0, eol.length()) == 2) {
-                    // second char - latest
-                    rd.reset();
-                    return rd;
-                }
-            } else {
-                if (eol != null) {
-                    rd.reset();
-                    return rd;
-                }
+            } else if (endOfLineBuilder.length() > 0) {
+                // Reset if a non-EOL character is found after starting EOL
+                return endOfLineBuilder.toString();
             }
         }
 
-        // no eols found - assume '\n'
-        eol = "\n";
-        rd.reset();
-        return rd;
+        // Default to '\n' if no EOL is detected
+        return String.valueOf(LINE_FEED);
     }
 
     public void close() throws IOException {

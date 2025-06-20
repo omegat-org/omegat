@@ -584,7 +584,7 @@ public class EditorTextArea3 extends JEditorPane {
             // Don't try to jump over tags.
             return false;
         }
-        SourceTextEntry ste = doc.controller.getCurrentEntry();
+        SourceTextEntry ste = doc.getController().getCurrentEntry();
         String text = doc.extractTranslation();
         int off = caret - start;
         // iterate by 'protected parts'
@@ -625,7 +625,7 @@ public class EditorTextArea3 extends JEditorPane {
      */
     boolean wholeTagDelete(boolean checkTagStart) throws BadLocationException {
         Document3 doc = getOmDocument();
-        SourceTextEntry ste = doc.controller.getCurrentEntry();
+        SourceTextEntry ste = doc.getController().getCurrentEntry();
         String text = doc.extractTranslation();
         int off = getCaretPosition() - doc.getTranslationStart();
         // iterate by 'protected parts'
@@ -666,7 +666,7 @@ public class EditorTextArea3 extends JEditorPane {
         if (pos < segment.getStartPosition() || pos >= segment.getEndPosition()) {
             return false;
         }
-        SourceTextEntry ste = getOmDocument().controller.getCurrentEntry();
+        SourceTextEntry ste = getOmDocument().getController().getCurrentEntry();
         if (ste != null) {
             try {
                 String text = getOmDocument().getText(segment.getStartPosition(),

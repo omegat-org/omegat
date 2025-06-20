@@ -120,10 +120,10 @@ public final class Core {
     private static INotes notes;
     private static IComments comments;
     private static Segmenter segmenter;
+    private static SegmentPropertiesArea segmentPropertiesArea;
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
-    private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections.synchronizedList(new ArrayList<>());
     private static final List<IMarker> MARKERS = new ArrayList<>();
 
@@ -161,9 +161,11 @@ public final class Core {
         return matcher;
     }
 
+    private static SpellCheckerManager spellCheckerManager;
+
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
-        return SpellCheckerManager.getCurrentSpellChecker();
+        return spellCheckerManager.getCurrentSpellChecker();
     }
 
     public static FilterMaster getFilterMaster() {
@@ -201,6 +203,11 @@ public final class Core {
         return notes;
     }
 
+    /** Get segment properties area */
+    public static SegmentPropertiesArea getSegmentPropertiesArea() {
+        return segmentPropertiesArea;
+    }
+
     /**
      * Get comments area
      *
@@ -230,7 +237,7 @@ public final class Core {
      * @param cl class loader.
      * @param params CLI parameters.
      * @throws Exception when error occurred.
-     * @deprecated
+     * @deprecated since 6.1.0
      */
     @Deprecated(since = "6.1.0")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
@@ -284,10 +291,11 @@ public final class Core {
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
+        spellCheckerManager = new SpellCheckerManager();
         // Create an independent instance updated from SearchThead.
         new MultipleTransPane(me);
         // Create an independent instance updated by events.
-        new SegmentPropertiesArea(me);
+        segmentPropertiesArea = new SegmentPropertiesArea(me);
         projWin = new ProjectFilesListController();
     }
 

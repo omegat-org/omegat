@@ -15,6 +15,7 @@
                2015 Aaron Madlon-Kay, Yu Tang
                2016 Didier Briel
                2019 Thomas Cordonnier, Briac Pilpre
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -128,15 +129,14 @@ import org.omegat.util.gui.UIDesignManager;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
 
 /**
  * Class for control all editor operations.
  * <p>
  * You can find good description of java text editor working at
- * <a href="https://www.comp.nus.edu.sg/~cs3283/ftp/Java/swingConnect/text/text/text.html">Using the Swing Text Package</a>
- * that was originally found at http://java.sun.com/products/jfc/tsc/articles/text/overview/
+ * <a href="https://www.comp.nus.edu.sg/~cs3283/ftp/Java/swingConnect/text/text/text.html">
+ *     Using the Swing Text Package</a> * that was originally found at
+ *     http://java.sun.com/products/jfc/tsc/articles/text/overview/
  *
  * @author Keith Godfrey
  * @author Benjamin Siband
@@ -154,9 +154,6 @@ import tokyo.northside.logging.LoggerFactory;
  * @author Yu Tang
  */
 public class EditorController implements IEditor {
-
-    /** Local logger. */
-    private static final ILogger LOGGER = LoggerFactory.getLogger(EditorController.class);
 
     private static final double PAGE_LOAD_THRESHOLD = 0.25;
 
@@ -218,7 +215,7 @@ public class EditorController implements IEditor {
     protected int displayedEntryIndex;
 
     /** Object which store history of moving by segments. */
-    private SegmentHistory history = new SegmentHistory();
+    private final SegmentHistory history = new SegmentHistory();
 
     protected final EditorSettings settings;
 
@@ -340,8 +337,8 @@ public class EditorController implements IEditor {
         });
 
         // register Swing error logger
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> LOGGER.atError().setCause(e)
-                .setMessage("Uncatched exception in thread [{0}]").addArgument(t.getName()).log());
+        Thread.setDefaultUncaughtExceptionHandler((t, e) ->
+               Log.logErrorRB(e, "LOG_ERROR_UNCAUGHT_EXCEPTION", t.getName()));
 
         EditorPopups.init(this);
 
@@ -481,9 +478,9 @@ public class EditorController implements IEditor {
     private void updateState(SHOW_TYPE showType) {
         UIThreadsUtil.mustBeSwingThread();
 
-        JComponent data = null;
+        JComponent data;
 
-        String updatedTitle = null;
+        String updatedTitle;
         switch (showType) {
         case INTRO:
             data = introPane;
@@ -510,6 +507,8 @@ public class EditorController implements IEditor {
             updatedTitle = OStrings.getString("GUI_SUBWINDOWTITLE_Editor", getCurrentFile());
             data = editor;
             break;
+        default:
+            return;
         }
 
         updateTitle(updatedTitle);
@@ -539,7 +538,7 @@ public class EditorController implements IEditor {
         public boolean handleDroppedObject(Object dropped) {
             final List<?> files = (List<?>) dropped;
 
-            // Only look at first file to determine intent to open project
+            // Only look at the first file to determine intent to open a project
             File firstFile = (File) files.get(0);
             if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
                 firstFile = firstFile.getParentFile();
@@ -595,8 +594,8 @@ public class EditorController implements IEditor {
         updateTitle(StringUtil.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile()));
     }
 
-    private void updateTitle(String title) {
-        this.title = title;
+    private void updateTitle(String newTitle) {
+        this.title = newTitle;
         updateTitle();
     }
 
@@ -648,7 +647,7 @@ public class EditorController implements IEditor {
             return null;
         }
         if (proj.getProjectFiles().isEmpty()) {
-            // there is no files yet
+            // there are no files yet
             return null;
         }
 
@@ -730,7 +729,7 @@ public class EditorController implements IEditor {
 
         doc.setDocumentFilter(new DocumentFilter3());
 
-        // add locales to editor
+        // add locales to the editor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         editor.setLocale(targetLocale);
         editor.setTargetLocale(targetLocale);
@@ -768,7 +767,7 @@ public class EditorController implements IEditor {
     private void insertStartParagraphMark(Document3 doc, SegmentBuilder sb, int startOffset) {
         if (Preferences.isPreferenceDefault(Preferences.MARK_PARA_DELIMITATIONS, false)) {
             if (sb.getSourceTextEntry().isParagraphStart()) {
-                doc.trustedChangesInProgress = true;
+                doc.setTrustedChangesInProgress(true);
                 StaticUIUtils.setCaretUpdateEnabled(editor, false);
                 try {
                     doc.insertString(startOffset, Preferences.getPreferenceDefault(
@@ -777,7 +776,7 @@ public class EditorController implements IEditor {
                 } catch (BadLocationException ex) {
                     throw new RuntimeException(ex);
                 } finally {
-                    doc.trustedChangesInProgress = false;
+                    doc.setTrustedChangesInProgress(false);
                     StaticUIUtils.setCaretUpdateEnabled(editor, true);
                 }
             }
@@ -795,7 +794,7 @@ public class EditorController implements IEditor {
      * Activates the current entry (if available) by displaying source text and embedding displayed text in
      * markers.
      * <p>
-     * Also moves document focus to current entry, and makes sure fuzzy info displayed if available.
+     * Also moves document focus to the current entry and makes sure fuzzy info displayed if available.
      */
     public void activateEntry(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
@@ -873,7 +872,7 @@ public class EditorController implements IEditor {
             }
         }
         scrollForDisplayNearestSegments(pos);
-        // check if file was changed
+        // check if a file was changed
         if (previousDisplayedFileIndex != displayedFileIndex) {
             previousDisplayedFileIndex = displayedFileIndex;
             CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
@@ -916,7 +915,7 @@ public class EditorController implements IEditor {
      */
     void onTextChanged() {
         Document3 doc = editor.getOmDocument();
-        if (doc.trustedChangesInProgress || doc.textBeingComposed) {
+        if (doc.getTrustedChangesInProgress() || doc.getTextBeingComposed()) {
             return;
         }
         if (doc.isEditMode()) {
@@ -1137,70 +1136,25 @@ public class EditorController implements IEditor {
             case EQUALS_TO_SOURCE:
                 newen.translation = newen.source;
                 break;
+            default:
+                throw new AssertionError();
             }
-        } else { // translation from editor
-            if (newTrans.isEmpty()) { // empty translation
-                if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
-                    // It's an empty translation which should remain empty
-                    newen.translation = "";
-                } else {
-                    newen.translation = null; // will be untranslated
-                }
-            } else if (newTrans.equals(newen.source)) { // equals to source
-                if (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                    // translation can be equals to source
-                    newen.translation = newTrans;
-                } else {
-                    // translation can't be equals to source
-                    if (oldTE.source.equals(oldTE.translation)) {
-                        // but it was equals to source before
-                        newen.translation = oldTE.translation;
-                    } else {
-                        // set untranslated
-                        newen.translation = null;
-                    }
-                }
-            } else {
-                // new translation is not empty and not equals to source - just change
-                newen.translation = newTrans;
-                if (currentEntryOrigin != null && newTrans.equals(translationFromOrigin)) {
-                    if (newen.otherProperties == null) {
-                        newen.otherProperties = new ArrayList<>();
-                    }
-                    newen.otherProperties.add(new TMXProp(ProjectTMX.PROP_ORIGIN, currentEntryOrigin));
-                }
-            }
+        } else {
+            getTranslationFromEditor(newTrans, oldTE, newen);
         }
 
         boolean defaultTranslation = sb.isDefaultTranslation();
         boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
-        boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        boolean noteChanged = !Objects.equals(StringUtil.nvl(oldTE.note, ""), StringUtil.nvl(newen.note, ""));
         resetOrigin();
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
-            // Only note was changed, and we are not making a new alt translation.
+            // Only the note was changed, and we are not making a new alt translation.
             Core.getProject().setNote(entry, oldTE, newen.note);
         } else if (isNewDefaultTrans || translationChanged || noteChanged) {
-            while (true) {
-                // iterate before optimistic locking will be resolved
-                try {
-                    Core.getProject().setTranslation(entry, newen, defaultTranslation, null,
-                            previousTranslations);
-                    break;
-                } catch (OptimisticLockingFail ex) {
-                    String result = new ConflictDialogController().show(ex.getOldTranslationText(),
-                            ex.getNewTranslationText(), newen.translation);
-                    if (result == newen.translation) {
-                        // next iteration
-                        previousTranslations = ex.getPrevious();
-                    } else {
-                        // use remote - don't save user's translation
-                        break;
-                    }
-                }
-            }
+            storeTranslation(entry, newen, defaultTranslation);
         }
 
         m_docSegList[displayedEntryIndex].createSegmentElement(false,
@@ -1215,7 +1169,7 @@ public class EditorController implements IEditor {
                 }
                 SegmentBuilder builder = m_docSegList[i];
                 if (!builder.hasBeenCreated()) {
-                    // Skip because segment has not been drawn yet
+                    // Skip because a segment has not been drawn yet
                     continue;
                 }
                 if (builder.ste.getSrcText().equals(entry.getSrcText())) {
@@ -1236,7 +1190,7 @@ public class EditorController implements IEditor {
         editor.undoManager.reset();
 
         // validate tags if required
-        if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
+        if (Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
             String file = getCurrentFile();
             new SwingWorker<Boolean, Void>() {
                 protected Boolean doInBackground() throws Exception {
@@ -1246,11 +1200,11 @@ public class EditorController implements IEditor {
                 @Override
                 protected void done() {
                     try {
-                        if (!get()) {
+                        if (Boolean.FALSE.equals(get())) {
                             Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
                         }
                     } catch (InterruptedException | ExecutionException e) {
-                        LOGGER.atError().setCause(e).setMessage("Exception when validating tags on leave").log();
+                        Log.logErrorRB(e, "LOG_ERROR_TAG_VALIDATION_FAILED");
                     }
                 }
             }.execute();
@@ -1261,8 +1215,67 @@ public class EditorController implements IEditor {
             try {
                 Core.executeExclusively(false, Core.getProject()::teamSync);
             } catch (InterruptedException | TimeoutException ignored) {
+                // Force ignore.
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                Log.log(ex);
+            }
+        }
+    }
+
+    private void getTranslationFromEditor(String newTrans, TMXEntry oldTE, PrepareTMXEntry newen) {
+        // translation from editor
+        if (newTrans.isEmpty()) { // empty translation
+            if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
+                // It's an empty translation that should remain empty
+                newen.translation = "";
+            } else {
+                newen.translation = null; // will be untranslated
+            }
+        } else if (newTrans.equals(newen.source)) { // equals to source
+            if (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
+                // translation can be equal to source
+                newen.translation = newTrans;
+            } else {
+                // translation can't be equals to source
+                if (oldTE.source.equals(oldTE.translation)) {
+                    // but it was equal to source before
+                    newen.translation = oldTE.translation;
+                } else {
+                    // set untranslated
+                    newen.translation = null;
+                }
+            }
+        } else {
+            // The new translation is not empty and not equals to source - just change
+            newen.translation = newTrans;
+            if (currentEntryOrigin != null && newTrans.equals(translationFromOrigin)) {
+                if (newen.otherProperties == null) {
+                    newen.otherProperties = new ArrayList<>();
+                }
+                newen.otherProperties.add(new TMXProp(ProjectTMX.PROP_ORIGIN, currentEntryOrigin));
+            }
+        }
+    }
+
+    private void storeTranslation(SourceTextEntry entry, PrepareTMXEntry newen, boolean defaultTranslation) {
+        while (true) {
+            // iterate until optimistic locking is resolved
+            try {
+                Core.getProject().setTranslation(entry, newen, defaultTranslation, null,
+                        previousTranslations);
+                break;
+            } catch (OptimisticLockingFail ex) {
+                final ConflictDialogController conflictDialog = new ConflictDialogController(mw.getApplicationFrame());
+                if (conflictDialog.show(ex.getOldTranslationText(), ex.getNewTranslationText(), newen.translation)) {
+                    String result = conflictDialog.getResult();
+                    if (result.equals(newen.translation)) {
+                        // next iteration
+                        previousTranslations = ex.getPrevious();
+                    } else {
+                        // use remote - don't save user's translation
+                        break;
+                    }
+                }
             }
         }
     }
@@ -1963,8 +1976,9 @@ public class EditorController implements IEditor {
         String country = Language.getUpperCaseCountryFromLocale();
 
         // Check if there's a translation for the full locale (lang + country)
-        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, language + "_" + country, OConsts.HELP_FIRST_STEPS) != null) {
-            return language + "_" + country;
+        String fullLocale = language + "_" + country;
+        if (Help.getHelpFileURI(OConsts.HELP_FIRST_STEPS_PREFIX, fullLocale, OConsts.HELP_FIRST_STEPS) != null) {
+            return fullLocale;
         }
 
         // Check if there's a translation for the language only

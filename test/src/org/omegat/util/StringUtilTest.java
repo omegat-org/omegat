@@ -367,6 +367,23 @@ public class StringUtilTest {
     private static final String ALPHA_WITH_NOBREAK_SPACE = "ABC\u00a0";
 
     @Test
+    public void testNormalizeWidthSpaces() {
+        List<String> texts = Arrays.asList(
+                " Normal Space",
+                "\u00A0Non-Breaking Space",
+                "\u2007Figure Space",
+                "\u2008Punctuation Space",
+                "\u2009Thin Space",
+                "\u202FNarrow No-Break Space",
+                "\u3000Ideographic Space"
+        );
+        for (String text : texts) {
+            String expectation = " " + text.substring(1);
+            assertEquals(expectation, StringUtil.normalizeWidth(text));
+        }
+    }
+
+    @Test
     public void testRstrip() {
         assertEquals("", StringUtil.rstrip(""));
         assertEquals("", StringUtil.rstrip(" "));
@@ -581,7 +598,7 @@ public class StringUtilTest {
     }
 
     @Test
-    public void testProcessHungle() {
+    public void testProcessHangul() {
         // Test valid Hangul compatibility characters
         assertEquals("\u3164", StringUtil.normalizeWidth("\uFFA0")); // Ensure it's replaced correctly
         // First valid Hangul char in the range

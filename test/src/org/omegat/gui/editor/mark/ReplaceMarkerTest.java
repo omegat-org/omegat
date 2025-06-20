@@ -38,7 +38,6 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.IEditor;
@@ -86,8 +85,6 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
 
         @Override
         public IEditorFilter getFilter() {
-            SearchExpression s = new SearchExpression();
-            s.searchExpressionType = SearchExpression.SearchExpressionType.KEYWORD;
             return new ReplaceFilter(Collections.emptyList(), new MockSearcher(sourceText, replaceText));
         }
     }

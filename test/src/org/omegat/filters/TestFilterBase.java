@@ -259,8 +259,6 @@ public abstract class TestFilterBase extends TestCore {
                 e.id = id;
                 e.source = source;
                 e.translation = translation;
-                e.isFuzzy = isFuzzy;
-                e.props = props;
                 e.path = path;
                 result.add(e);
             }
@@ -478,7 +476,7 @@ public abstract class TestFilterBase extends TestCore {
         DocumentBuilder builder = factory.newDocumentBuilder();
         var doc1 = builder.parse(f1.toExternalForm());
         var doc2 = builder.parse(f2.toExternalForm());
-        assertThat(doc1).and(doc2).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
+        assertThat(doc2).and(doc1).withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byName))
                 .areIdentical();
     }
 
@@ -486,8 +484,6 @@ public abstract class TestFilterBase extends TestCore {
         public String id;
         public String source;
         public String translation;
-        public boolean isFuzzy;
-        public String[] props;
         public String path;
     }
 

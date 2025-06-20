@@ -585,10 +585,10 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             if (head.isSymbolic()) {
                 return Repository.shortenRefName(head.getTarget().getName());
             }
-            for (String refname : gitMap.keySet()) {
-                if (refname.startsWith(Constants.R_HEADS)
-                        && head.getObjectId().equals(gitMap.get(refname).getObjectId())) {
-                    return Repository.shortenRefName(refname);
+            for (Map.Entry<String, Ref> entry : gitMap.entrySet()) {
+                if (entry.getKey().startsWith(Constants.R_HEADS)
+                        && head.getObjectId().equals(gitMap.get(entry.getKey()).getObjectId())) {
+                    return Repository.shortenRefName(entry.getKey());
                 }
             }
         } catch (GitAPIException | IOException ignore) {

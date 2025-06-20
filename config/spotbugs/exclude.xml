@@ -105,4 +105,144 @@
     <Match>
         <Bug pattern="DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED"/>
     </Match>
+
+    <!-- GlossaryTextArea class has so many issues that should be fixed. -->
+    <Match>
+        <Class name="org.omegat.gui.glossary.GlossaryTextArea"/>
+    </Match>
+
+    <!-- DateFormat multithreading issue -->
+    <Match>
+        <Class name="~org\.omegat\.gui\.editor\.ModificationInfoManager.*"/>
+        <Bug pattern="STCAL_INVOKE_ON_STATIC_DATE_FORMAT_INSTANCE"/>
+    </Match>
+
+    <!-- should be fixed in the individual topic branch -->
+    <Match>
+        <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE,DCN_NULLPOINTER_EXCEPTION"/>
+    </Match>
+    <Match>
+        <Bug pattern="NP_LOAD_OF_KNOWN_NULL_VALUE"/>
+        <Or>
+            <Class name="org.omegat.gui.dialogs.ConflictDialogController"/>
+            <Class name="org.omegat.gui.matches.MatchesTextArea"/>
+        </Or>
+    </Match>
+    <Match>
+        <Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE"/>
+        <Or>
+            <Package name="org.omegat.gui.glossary"/>
+        </Or>
+    </Match>
+
+    <!-- Multithreaded correctness warnings should be fixed -->
+    <Match>
+        <Bug pattern="AT_STALE_THREAD_WRITE_OF_PRIMITIVE,AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE"/>
+    </Match>
+    <Match>
+        <Or>
+            <Package name="org.omegat.core.threads"/>
+            <Class name="org.omegat.core.data.RealProject"/>
+            <Class name="org.omegat.gui.dialogs.NewTeamProjectController"/>
+            <Class name="org.omegat.languagetools.LanguageToolNetworkBridge"/>
+        </Or>
+        <Bug pattern="IS2_INCONSISTENT_SYNC"/>
+    </Match>
+
+    <!-- Switch fallthrough is not recommended -->
+    <Match>
+        <Bug pattern="SF_SWITCH_FALLTHROUGH"/>
+        <Class name="org.omegat.gui.issues.TagIssue"/>
+    </Match>
+
+    <!-- should be fixed the writing to static field from instance -->
+    <Match>
+        <Or>
+            <Class name="org.omegat.filters2.mozdtd.MozillaDTDFilter"/>
+            <Class name="org.omegat.gui.editor.ViewLabel"/>
+            <Class name="~org\.omegat\.gui\.scripting.*"/>
+            <Class name="org.omegat.util.gui.OSXIntegration"/>
+        </Or>
+        <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>
+    </Match>
+
+    <!-- Temporarily exclude to enable minimum chechks -->
+    <Match>
+        <Class name="org.omegat.util.Platform"/>
+        <Bug pattern="DE_MIGHT_IGNORE"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.core.data.RealProject"/>
+            <Class name="org.omegat.gui.editor.SegmentBuilder"/>
+            <Class name="org.omegat.core.threads.SaveThread"/>
+        </Or>
+        <Bug pattern="DM_EXIT"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.core.search.SearchMatch"/>
+            <Class name="org.omegat.core.dictionaries.DictionaryEntry"/>
+            <Class name="org.omegat.gui.scripting.ScriptItem"/>
+        </Or>
+        <Bug pattern="EQ_COMPARETO_USE_OBJECT_EQUALS"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.util.EncodingDetector"/>
+            <Class name="org.omegat.util.StaticUtils"/>
+        </Or>
+        <Bug pattern="RR_NOT_CHECKED"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.gui.dictionaries.DictionariesTextArea"/>
+            <Class name="org.omegat.gui.editor.EditorTextArea3"/>
+            <Class name="org.omegat.gui.matches.MatchesTextArea"/>
+            <Class name="org.omegat.gui.multtrans.MultipleTransPane"/>
+            <Class name="~org\.omegat\.core\.matching\.NearString.*"/>
+            <Class name="~org\.omegat\.gui\.glossary\.GlossaryAutoCompleterView.*"/>
+            <Class name="~org\.omegat\.util\.FileUtil.*"/>
+        </Or>
+        <Bug pattern="SE_BAD_FIELD,SE_COMPARATOR_SHOULD_BE_SERIALIZABLE"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.filters2.hhc.HHCFilter2"/>
+            <Class name="~org\.omegat\.filters2\.subtitles\..*Filter"/>
+            <Class name="org.omegat.filters4.xml.xliff.SdlXliff"/>
+        </Or>
+        <Bug pattern="HSM_HIDING_METHOD"/>
+    </Match>
+    <Match>
+        <Class name="org.omegat.filters4.xml.xliff.AbstractXliffFilter"/>
+        <Bug pattern="NP_NULL_ON_SOME_PATH"/>
+    </Match>
+    <Match>
+        <Class name="org.omegat.gui.editor.EditorController"/>
+        <Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.filters3.xml.XMLReader"/>
+            <Class name="org.omegat.filters4.xml.AbstractXmlFilter"/>
+            <Class name="org.omegat.gui.scripting.ScriptSet"/>
+            <Class name="org.omegat.tokenizer.HunspellTokenizer"/>
+        </Or>
+        <Bug pattern="OS_OPEN_STREAM,OBL_UNSATISFIED_OBLIGATION,OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE"/>
+    </Match>
+    <Match>
+        <Or>
+            <Class name="org.omegat.core.statistics.StatsResult"/>
+            <Class name="org.omegat.filters2.master.FilterMaster"/>
+            <Class name="org.omegat.filters2.mozdtd.MozillaDTDFilter"/>
+            <Class name="org.omegat.gui.dialogs.FilenamePatternsEditorController"/>
+            <Class name="org.omegat.gui.editor.ViewLabel"/>
+            <Class name="org.omegat.gui.scripting.ScriptRUnner"/>
+            <Class name="org.omegat.util.OStrings"/>
+            <Class name="org.omegat.util.Preferences"/>
+            <Class name="org.omegat.util.gui.UIDesignManager"/>
+        </Or>
+        <Bug pattern="MS_PKGPROTECT,MS_EXPOSE_REP"/>
+    </Match>
 </FindBugsFilter>

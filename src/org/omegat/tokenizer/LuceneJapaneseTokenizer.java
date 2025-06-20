@@ -29,6 +29,7 @@ import java.io.StringReader;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -143,6 +144,24 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
                 return true;
             }
             return finishToken();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            if (!super.equals(o)) {
+                return false;
+            }
+            TagJoiningFilter that = (TagJoiningFilter) o;
+            return startOffset == that.startOffset && buffering == that.buffering && Objects.equals(termAtt,
+                    that.termAtt) && Objects.equals(offsetAtt, that.offsetAtt) && Objects.equals(buffer, that.buffer);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(super.hashCode(), termAtt, offsetAtt, buffer, startOffset, buffering);
         }
 
         private boolean getNextInput() throws IOException {

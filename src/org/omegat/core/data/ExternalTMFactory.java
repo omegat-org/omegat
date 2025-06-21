@@ -63,12 +63,10 @@ public final class ExternalTMFactory {
     }
 
     public static ExternalTMX load(File file) throws Exception {
-        return load(file, Core.getProject().getProjectProperties(), Core.getSegmenter(),
-                Core.getFilterMaster());
+        return load(file, Core.getProject().getProjectProperties(), Core.getSegmenter());
     }
 
-    public static ExternalTMX load(File file, ProjectProperties props, Segmenter segmenter,
-                                   FilterMaster filterMaster) throws Exception {
+    public static ExternalTMX load(File file, ProjectProperties props, Segmenter segmenter) throws Exception {
         if (TMXLoader.isSupported(file)) {
             return new TMXLoader(file, segmenter)
                     .setExtTmxLevel2(Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2))
@@ -76,9 +74,9 @@ public final class ExternalTMFactory {
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
                     .setKeepForeignMatches(Preferences.isPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH))
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
-        } else if (BifileLoader.isSupported(file, filterMaster)) {
-            return new BifileLoader(file, segmenter, filterMaster).setRemoveTags(props.isRemoveTags())
-                    .setRemoveSpaces(filterMaster.getConfig().isRemoveSpacesNonseg())
+        } else if (BifileLoader.isSupported(file, Core.getFilterMaster())) {
+            return new BifileLoader(file, segmenter, Core.getFilterMaster()).setRemoveTags(props.isRemoveTags())
+                    .setRemoveSpaces(Core.getFilterMaster().getConfig().isRemoveSpacesNonseg())
                     .setDoSegmenting(props.isSentenceSegmentingEnabled())
                     .load(props.getSourceLanguage(), props.getTargetLanguage());
         } else {

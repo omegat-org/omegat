@@ -140,8 +140,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      *             If any I/O Error occurs upon reader creation.
      */
     @Override
-    public BufferedReader createReader(File inFile, String inEncoding)
-            throws UnsupportedEncodingException, IOException {
+    public BufferedReader createReader(File inFile, String inEncoding) throws IOException {
         XMLReader xmlreader = new XMLReader(inFile, inEncoding);
         this.encoding = xmlreader.getEncoding();
         this.eol = xmlreader.getEol();

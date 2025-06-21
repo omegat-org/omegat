@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -67,7 +68,17 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  */
 public abstract class TestCore {
     protected File configDir;
+    protected IMainWindow mainWindow;
 
+    /**
+     * Set-up OmegaT Core properties for unit and functional test.
+     * <p>
+     * Create a temporary directory for user configuration.
+     * This keeps developers' omegat configuration folder clean and
+     * provides stable test conditions.
+     * It also initializes a main window and editor with modular functions.
+     * @throws Exception if file I/O failed.
+     */
     @Before
     public final void setUpCore() throws Exception {
         TestCoreState.resetState();
@@ -90,12 +101,20 @@ public abstract class TestCore {
 
     }
 
+    /**
+     * Clean up a temporary directory for configuration.
+     * @throws Exception
+     */
     @After
     public final void tearDownCore() throws Exception {
         TestCoreState.resetState();
         FileUtils.forceDeleteOnExit(configDir);
     }
 
+    /**
+     * Create a mock of the main menu object.
+     * @return Main menu object which implement IMainMenu.
+     */
     private IMainMenu createTestMainMenu() {
         return new IMainMenu() {
             private final JMenu projectMenu = new JMenu("Project");
@@ -250,6 +269,10 @@ public abstract class TestCore {
         };
     }
 
+    /**
+     * Create a main Window object.
+     * @return Object which implements IMainWindow.
+     */
     private IMainWindow createTestMainWindow() {
         final IMainMenu mainMenu = createTestMainMenu();
         return new IMainWindow() {
@@ -323,6 +346,10 @@ public abstract class TestCore {
         };
     }
 
+    /**
+     * Create an implementation of IEditorSettings.
+     * @return object which implements IEditorSettings as empty methods.
+     */
     private IEditorSettings createTestEditorSettings() {
         return new IEditorSettings() {
 
@@ -489,6 +516,9 @@ public abstract class TestCore {
         };
     }
 
+    /**
+     * Initialize editor and store it with TestInitializer.initEditor function.
+     */
     private IEditor createTestEditor() {
         final IEditorSettings editorSettings = createTestEditorSettings();
         return new IEditor() {

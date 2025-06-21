@@ -26,10 +26,12 @@
 package org.omegat.core;
 
 import org.omegat.core.data.TestCoreState;
+import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.notes.INotes;
 import org.omegat.util.gui.StaticUIUtils;
 
 /**
@@ -46,6 +48,10 @@ public final class TestCoreInitializer {
         TestCoreState.getInstance().setEditor(editor);
     }
 
+    public static void initTagValidation(ITagValidation tagValidation) {
+        Core.setTagValidation(tagValidation);
+    }
+
     public static void initAutoSave(IAutoSave autoSave) {
         TestCoreState.initAutoSave(autoSave);
     }
@@ -59,6 +65,10 @@ public final class TestCoreInitializer {
     }
 
     public static void initGlossary(IGlossaries glossaries) {
-        Core.glossary = glossaries;
+        Core.setGlossary(glossaries);
+    }
+
+    public static void initNotes(INotes notes) {
+        Core.setNotes(notes);
     }
 }

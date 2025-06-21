@@ -226,7 +226,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                 String promptedFingerprint = extractFingerprint(promptText);
                 if (promptedFingerprint == null) {
                     throw new UnsupportedCredentialItem(uri, String.format(
-                            "Unknown pattern to ask acceptance of host key fingerprint \n%s", promptText));
+                            "Unknown pattern to ask acceptance of host key fingerprint %n%s", promptText));
                 }
                 if (predefinedFingerprint != null) {
                     ((CredentialItem.YesNoType) item)

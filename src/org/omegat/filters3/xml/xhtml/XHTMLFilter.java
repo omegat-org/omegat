@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.xhtml;
 
 import java.awt.Window;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -36,6 +37,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -132,7 +134,7 @@ public class XHTMLFilter extends XMLFilter {
                 XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
                 dialect.defineDialect(new XHTMLOptions(config));
                 super.processFile(inFile, null, context);
-            } catch (Exception e) {
+            } catch (IOException | TranslationException e) {
                 Log.log("XHTML file " + inFile.getName() + " is not valid.");
                 result = false;
             } finally {

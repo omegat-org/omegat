@@ -95,39 +95,64 @@ public class RoundedCornerBorder extends AbstractBorder {
         }
 
         Shape initialClip = g2.getClip();
-        Rectangle2D roundedHalfClip;
-        Shape line1;
-        Shape line2;
-        if (side == SIDE_TOP) {
-            roundedHalfClip = new Rectangle2D.Float(x, y, width, height / 2);
-            line1 = new Line2D.Float(x, y, x, y + height);
-            line2 = new Line2D.Float(x + width - 0.5f, y, x + width - 0.5f, y + height);
-        } else if (side == SIDE_LEFT) {
-            roundedHalfClip = new Rectangle2D.Float(x, y, width / 2 + stroke, height);
-            line1 = new Line2D.Float(x, y, x + width, y);
-            line2 = new Line2D.Float(x, y + height - stroke, x + width, y + height - stroke);
-        } else if (side == SIDE_BOTTOM) {
-            roundedHalfClip = new Rectangle2D.Float(x, y + height / 2, width, height / 2 + stroke);
-            line1 = new Line2D.Float(x, y, x, y + height);
-            line2 = new Line2D.Float(x + width - (stroke - 0.5f), y, x + width - (stroke - 0.5f), y + height);
-        } else if (side == SIDE_RIGHT) {
-            roundedHalfClip = new Rectangle2D.Float(x + width / 2, y, width / 2 + stroke, height);
-            line1 = new Line2D.Float(x, y, x + width, y);
-            line2 = new Line2D.Float(x, y + height - stroke, x + width, y + height - stroke);
-        } else {
-            throw new IllegalArgumentException();
-        }
-        g2.clip(roundedHalfClip);
+        SideShapeSpec spec = createSideShapeSpec(side, x, y, width, height, stroke);
+        g2.clip(spec.roundedHalfClip);
         drawCorners(g2, background, corners, roundRect);
 
         Area inverseClip = new Area(sharpRect);
-        inverseClip.subtract(new Area(roundedHalfClip));
+        inverseClip.subtract(new Area(spec.roundedHalfClip));
         g2.setClip(initialClip);
         g2.clip(inverseClip);
-        g2.draw(line1);
-        g2.draw(line2);
+        g2.draw(spec.line1);
+        g2.draw(spec.line2);
 
         g2.dispose();
+    }
+
+    // --- helper class and factory method ---
+
+    private static class SideShapeSpec {
+        final Rectangle2D roundedHalfClip;
+        final Shape line1;
+        final Shape line2;
+        SideShapeSpec(Rectangle2D clip, Shape l1, Shape l2) {
+            this.roundedHalfClip = clip;
+            this.line1 = l1;
+            this.line2 = l2;
+        }
+    }
+
+    private SideShapeSpec createSideShapeSpec(int side, float x, float y,
+                                              float width, float height, float stroke) {
+        switch (side) {
+        case SIDE_TOP:
+            return new SideShapeSpec(
+                    new Rectangle2D.Float(x, y, width, height / 2),
+                    new Line2D.Float(x, y, x, y + height),
+                    new Line2D.Float(x + width - .5f, y, x + width - .5f, y + height)
+            );
+        case SIDE_LEFT:
+            return new SideShapeSpec(
+                    new Rectangle2D.Float(x, y, width / 2 + stroke, height),
+                    new Line2D.Float(x, y, x + width, y),
+                    new Line2D.Float(x, y + height - stroke, x + width, y + height - stroke)
+            );
+        case SIDE_BOTTOM:
+            return new SideShapeSpec(
+                    new Rectangle2D.Float(x, y + height / 2, width, height / 2 + stroke),
+                    new Line2D.Float(x, y, x, y + height),
+                    new Line2D.Float(x + width - (stroke - .5f), y,
+                            x + width - (stroke - .5f), y + height)
+            );
+        case SIDE_RIGHT:
+            return new SideShapeSpec(
+                    new Rectangle2D.Float(x + width / 2, y, width / 2 + stroke, height),
+                    new Line2D.Float(x, y, x + width, y),
+                    new Line2D.Float(x, y + height - stroke, x + width, y + height - stroke)
+            );
+        default:
+            throw new IllegalArgumentException("Unknown side: " + side);
+        }
     }
 
     private void drawCorners(Graphics2D g2, Color background, Area corners, Shape shape) {

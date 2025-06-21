@@ -335,8 +335,7 @@ public class FilterMaster {
      *            The full path to the source file
      * @return The corresponding LookupInformation
      */
-    private LookupInformation lookupFilter(File inFile, FilterContext fc)
-            throws TranslationException, IOException {
+    private LookupInformation lookupFilter(File inFile, FilterContext fc) throws TranslationException {
         for (Filter f : config.getFilters()) {
             if (!f.isEnabled()) {
                 continue;
@@ -352,11 +351,11 @@ public class FilterMaster {
                 fc.setInEncoding(ff.getSourceEncoding());
                 fc.setOutEncoding(ff.getTargetEncoding());
                 // only for exist filters
-                Map<String, String> config = forFilter(f.getOption());
-                if (!filterObject.isFileSupported(inFile, config, fc)) {
+                Map<String, String> filterConfig = forFilter(f.getOption());
+                if (!filterObject.isFileSupported(inFile, filterConfig, fc)) {
                     break;
                 }
-                return new LookupInformation(filterObject, ff, config);
+                return new LookupInformation(filterObject, ff, filterConfig);
             }
         }
         return null;
@@ -385,8 +384,7 @@ public class FilterMaster {
                 boolean matchesMask = matchesMask(file.getName(), ff.getSourceFilenameMask());
                 if (!matchesMask) {
                     continue;
-                }
-                if (quick && matchesMask) {
+                } else if (quick) {
                     return true;
                 }
                 IFilter filterObject = getFilterInstance(f.getClassName());
@@ -396,8 +394,8 @@ public class FilterMaster {
                 fc.setInEncoding(ff.getSourceEncoding());
                 fc.setOutEncoding(ff.getTargetEncoding());
                 // only for exist filters
-                Map<String, String> config = forFilter(f.getOption());
-                if (!filterObject.isFileSupported(file, config, fc)) {
+                Map<String, String> filterOptions = forFilter(f.getOption());
+                if (!filterObject.isFileSupported(file, filterOptions, fc)) {
                     break;
                 }
                 return true;
@@ -423,7 +421,7 @@ public class FilterMaster {
      */
     public static List<String> getSupportedEncodings() {
         if (supportedEncodings == null) {
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<String> list = new ArrayList<>();
             list.add(AbstractFilter.ENCODING_AUTO_HUMAN);
             list.addAll(Charset.availableCharsets().keySet());
             supportedEncodings = list;
@@ -483,7 +481,7 @@ public class FilterMaster {
      */
     public static void saveConfig(Filters config, File configFile) throws IOException {
         if (config == null) {
-            boolean ignored = configFile.delete();
+            FileUtils.deleteQuietly(configFile);
             return;
         }
         try {
@@ -543,7 +541,7 @@ public class FilterMaster {
      * @throws TranslationException
      */
     public String getTargetForSource(String sourceDir, String srcRelPath, FilterContext fc)
-            throws IOException, TranslationException {
+            throws TranslationException {
         File srcFile = new File(sourceDir, srcRelPath);
         if (!srcFile.isFile()) {
             throw new IllegalArgumentException(

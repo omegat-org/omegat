@@ -30,6 +30,7 @@ package org.omegat.util.logging;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -65,11 +66,15 @@ import org.omegat.util.StaticUtils;
 public class OmegaTFileHandler extends StreamHandler {
     private String logFileName;
     private File logFile;
-    private File lockFile;
     private FileOutputStream lockStream;
+    private File lockFile;
     private final long maxSize;
     private final int count;
     private final long retention;
+
+    private static final int MAX_ATTEMPTS = 100;
+    private static final String LOG_EXTENSION = ".log";
+    private static final String LOCK_EXTENSION = ".lck";
 
     public OmegaTFileHandler() throws IOException {
         LogManager manager = LogManager.getLogManager();
@@ -120,33 +125,44 @@ public class OmegaTFileHandler extends StreamHandler {
      */
     @SuppressWarnings("resource")
     private void openFiles(final File dir) throws IOException {
-        boolean ignored = dir.mkdirs();
-        for (int instanceIndex = 0; instanceIndex < 100; instanceIndex++) {
-            String fileName = String.format("%s_%s_%s%s", OStrings.getApplicationName(),
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm").format(Log.getSessionStartDateTime()),
-                    Log.getSessionId(),
-                    // Instance index
-                    instanceIndex > 0 ? ("-" + instanceIndex) : "");
+        boolean dirCreated = dir.mkdirs();
+        if (!dirCreated && !dir.exists()) {
+            throw new IOException("Cannot create log directory: " + dir.getAbsolutePath());
+        }
+        for (int instanceIndex = 0; instanceIndex < MAX_ATTEMPTS; instanceIndex++) {
+            String baseName = formatLogFileBaseName(instanceIndex);
+            File candidateLog = new File(dir, baseName + LOG_EXTENSION);
+            File candidateLock = new File(dir, baseName + LOCK_EXTENSION);
 
-            logFile = new File(dir, fileName + ".log");
-            if (logFile.exists()) {
-                continue;
-            }
-
-            lockFile = new File(dir, fileName + ".log.lck");
-            logFileName = fileName;
-
-            // try to create lock file
-            lockStream = new FileOutputStream(lockFile);
-            if (lockStream.getChannel().tryLock() != null) {
+            if (!candidateLog.exists() && acquireFileLock(candidateLock)) {
+                logFile = candidateLog;
+                logFileName = baseName;
+                lockFile = candidateLock;
                 cleanOldLogFiles(dir);
                 setEncoding(StandardCharsets.UTF_8.name());
                 setOutputStream(new FileOutputStream(logFile, true));
                 break;
             }
         }
-
         setErrorManager(new ErrorManager());
+    }
+
+    private String formatLogFileBaseName(int index) {
+        String timestamp = DateTimeFormatter
+                .ofPattern("yyyy-MM-dd_HH-mm")
+                .format(Log.getSessionStartDateTime());
+        String suffix = index > 0 ? "-" + index : "";
+        return String.format("%s_%s_%s%s",
+                OStrings.getApplicationName(),
+                timestamp,
+                Log.getSessionId(),
+                suffix);
+    }
+
+    private boolean acquireFileLock(File lockFile) throws IOException {
+        lockStream = new FileOutputStream(lockFile);
+        FileLock fileLock = lockStream.getChannel().tryLock();
+        return fileLock != null;
     }
 
     @Override
@@ -154,8 +170,8 @@ public class OmegaTFileHandler extends StreamHandler {
         super.close();
         try {
             lockStream.close();
-            boolean ignored = lockFile.delete();
-        } catch (Exception ex) {
+            Files.deleteIfExists(Paths.get(lockFile.getAbsolutePath()));
+        } catch (IOException ex) {
             // shouldn't happen
             Log.log(ex);
         }

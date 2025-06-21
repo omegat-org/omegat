@@ -66,12 +66,14 @@ class MultilineCellRenderer extends JTextArea implements TableCellRenderer {
         } else {
             setBorder(new CompoundBorder(marginBorder, noFocusBorder));
         }
-        FlashingTable fTable = (FlashingTable) table;
-        FlashColorInterpolator flasher = fTable.getFlasher();
-        if (flasher != null) {
-            flasher.mark();
-            if (fTable.isHighlightedRow(row) && !isSelected) {
-                setBackground(flasher.getColor());
+        if (table instanceof FlashingTable) {
+            FlashingTable fTable = (FlashingTable) table;
+            FlashColorInterpolator flasher = fTable.getFlasher();
+            if (flasher != null) {
+                flasher.mark();
+                if (fTable.isHighlightedRow(row) && !isSelected) {
+                    setBackground(flasher.getColor());
+                }
             }
         }
         setFont(table.getFont());

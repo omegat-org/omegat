@@ -36,6 +36,7 @@ import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.util.OStrings;
 
 /**
@@ -73,7 +74,10 @@ public class TestLogFileHandler extends StreamHandler {
      */
     @SuppressWarnings("resource")
     private void openFiles(final File dir) throws IOException {
-        boolean ignored = dir.mkdirs();
+        boolean dirCreated = dir.mkdirs();
+        if (!dirCreated) {
+            throw new IOException("Cannot create directory: " + dir.getAbsolutePath());
+        }
         logFileName = OStrings.getApplicationName();
         lockFile = new File(dir, logFileName + ".log.lck");
         // try to create lock file
@@ -90,7 +94,7 @@ public class TestLogFileHandler extends StreamHandler {
         super.close();
         try {
             lockStream.close();
-            boolean ignored = lockFile.delete();
+            FileUtils.deleteQuietly(lockFile);
         } catch (Exception ex) {
             // shouldn't happen
             ex.printStackTrace();

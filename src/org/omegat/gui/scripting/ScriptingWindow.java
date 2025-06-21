@@ -873,17 +873,14 @@ public class ScriptingWindow {
                 chooser.setDialogTitle(OStrings.getString("SCW_SAVE_SCRIPT"));
                 int result = chooser.showSaveDialog(frame);
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    m_currentScriptItem = new ScriptItem(chooser.getSelectedFile());
-                } else {
-                    return;
+                    setCurrentScriptItem(chooser.getSelectedFile());
                 }
             }
+        }
 
-            if (m_currentScriptItem == null) {
-                return;
-            }
-
+        private void setCurrentScriptItem(File selectedFile) {
             try {
+                m_currentScriptItem = new ScriptItem(selectedFile);
                 m_currentScriptItem.setText(m_txtScriptEditor.getTextArea().getText());
                 logResultRB("SCW_SAVE_OK", m_currentScriptItem.getFile().getAbsolutePath());
             } catch (IOException ex) {

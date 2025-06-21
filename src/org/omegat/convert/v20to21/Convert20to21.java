@@ -37,7 +37,7 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 
 import gen.core.filters.Files;
 import gen.core.filters.Filter;
@@ -75,7 +75,7 @@ public final class Convert20to21 {
         Filters res = new Filters();
         for (org.omegat.convert.v20to21.data.OneFilter f : filters.getFilter()) {
             Filter fo = new Filter();
-            res.getFilters().add(fo);
+            res.getFilter().add(fo);
             fo.setClassName(f.getClassName());
             fo.setEnabled(f.isOn());
             for (org.omegat.convert.v20to21.data.Instance i : f.getInstance()) {
@@ -106,7 +106,7 @@ public final class Convert20to21 {
         convertHTMLFilter2(res);
 
         XmlMapper mapper = new XmlMapper();
-        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.registerModule(new JakartaXmlBindAnnotationModule());
         mapper.writeValue(toFile, res);
     }
 
@@ -151,7 +151,7 @@ public final class Convert20to21 {
      * @param res
      */
     private static void convertTextFilter(Filters res) {
-        for (Filter f : res.getFilters()) {
+        for (Filter f : res.getFilter()) {
             if (!f.getClassName().equals("org.omegat.filters2.text.TextFilter")) {
                 continue;
             }
@@ -182,7 +182,7 @@ public final class Convert20to21 {
      * @param res
      */
     private static void convertHTMLFilter2(Filters res) {
-        for (Filter f : res.getFilters()) {
+        for (Filter f : res.getFilter()) {
             if (!f.getClassName().equals("org.omegat.filters2.html2.HTMLFilter2")) {
                 continue;
             }

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -65,13 +66,32 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  */
 public abstract class TestCore {
     protected File configDir;
+    protected IMainWindow mainWindow;
 
+    /**
+     * Set-up OmegaT Core properties for unit and functional test.
+     * <p>
+     * Create a temporary directory for user configuration.
+     * This keeps developers' omegat configuration folder clean and
+     * provides stable test conditions.
+     * It also initializes a main window and editor with modular functions.
+     * @throws Exception if file I/O failed.
+     */
     @Before
     public final void setUpCore() throws Exception {
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
+        initMainWindow();
+        Core.setCurrentProject(new NotLoadedProject());
+        initEditor();
+    }
 
-        final IMainMenu mainMenu = new IMainMenu() {
+    /**
+     * Create a mock of the main menu object.
+     * @return Main menu object which implement IMainMenu.
+     */
+    protected IMainMenu getMainMenu() {
+        return new IMainMenu() {
             private final JMenu projectMenu = new JMenu("Project");
             private final JMenu toolsMenu = new JMenu("Tools");
             private final JMenu gotoMenu = new JMenu("Goto");
@@ -222,8 +242,15 @@ public abstract class TestCore {
             public void invokeAction(String action, int modifiers) {
             }
         };
+    }
 
-        Core.setMainWindow(new IMainWindow() {
+    /**
+     * Create a main Window object.
+     * @return Object which implements IMainWindow.
+     */
+    protected IMainWindow getMainWindow() {
+        final IMainMenu mainMenu = getMainMenu();
+        return new IMainWindow() {
             public void addDockable(Dockable pane) {
             }
 
@@ -291,10 +318,23 @@ public abstract class TestCore {
 
             public void showLockInsertMessage(String messageText, String toolTip) {
             }
-        });
-        Core.setCurrentProject(new NotLoadedProject());
+        };
+    }
 
-        final IEditorSettings editorSettings = new IEditorSettings() {
+    /**
+     * Initialize main window and store it in mainWindow field and Core.
+     */
+    protected void initMainWindow() {
+        mainWindow = getMainWindow();
+        Core.setMainWindow(getMainWindow());
+    }
+
+    /**
+     * Create an implementation of IEditorSettings.
+     * @return object which implements IEditorSettings as empty methods.
+     */
+    protected IEditorSettings getEditorSettings() {
+        return new IEditorSettings() {
 
             @Override
             public boolean isUseTabForAdvance() {
@@ -457,6 +497,13 @@ public abstract class TestCore {
                 return false;
             }
         };
+    }
+
+    /**
+     * Initialize editor and store it with TestInitializer.initEditor function.
+     */
+    protected void initEditor() {
+        final IEditorSettings editorSettings = getEditorSettings();
         TestCoreInitializer.initEditor(new IEditor() {
 
             @Override
@@ -693,6 +740,10 @@ public abstract class TestCore {
         });
     }
 
+    /**
+     * Clean up a temporary directory for configuration.
+     * @throws Exception
+     */
     @After
     public final void tearDownCore() throws Exception {
         FileUtils.forceDeleteOnExit(configDir);

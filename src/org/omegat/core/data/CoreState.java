@@ -26,12 +26,15 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.GlossaryManager;
+import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.notes.INotes;
 
 import java.util.Collections;
 import java.util.Map;
@@ -83,7 +86,10 @@ public class CoreState {
     private IProject project;
     private IMainWindow mainWindow;
     private IEditor editor;
+    private IGlossaries glossaries;
     private GlossaryManager glossaryManager;
+    private ITagValidation tagValidation;
+    private INotes notes;
 
     public boolean isProjectLoaded() {
         if (project == null) {
@@ -124,11 +130,35 @@ public class CoreState {
         this.editor = editor;
     }
 
+    public IGlossaries getGlossaries() {
+        return glossaries;
+    }
+
+    public void setGlossaries(IGlossaries glossaries) {
+        this.glossaries = glossaries;
+    }
+
     public GlossaryManager getGlossaryManager() {
         return glossaryManager;
     }
 
     public void setGlossaryManager(GlossaryManager glossaryManager) {
         this.glossaryManager = glossaryManager;
+    }
+
+    public ITagValidation getTagValidation() {
+        return tagValidation;
+    }
+
+    public void setTagValidation(ITagValidation tagValidation) {
+        this.tagValidation = tagValidation;
+    }
+
+    public INotes getNotes() {
+        return notes;
+    }
+
+    public void setNotes(INotes notes) {
+        this.notes = notes;
     }
 }

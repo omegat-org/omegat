@@ -34,7 +34,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -98,21 +97,16 @@ public final class Core {
     private Core() {
     }
 
-    private static ITagValidation tagValidation;
     private static IIssues issuesWindow;
     private static IMatcher matcher;
     private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
 
     // package-private for test fixture TestCoreInitializer
-    static IAutoSave saveThread;
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
 
-    // package-private for test fixture TestCoreInitializer
-    static IGlossaries glossary;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
-    private static INotes notes;
     private static IComments comments;
     private static Segmenter segmenter;
     private static SegmentPropertiesArea segmentPropertiesArea;
@@ -144,7 +138,7 @@ public final class Core {
 
     /** Get tag validation component instance. */
     public static ITagValidation getTagValidation() {
-        return tagValidation;
+        return CoreState.getInstance().getTagValidation();
     }
 
     public static IIssues getIssues() {
@@ -186,7 +180,7 @@ public final class Core {
 
     /** Get glossary instance. */
     public static IGlossaries getGlossary() {
-        return glossary;
+        return CoreState.getInstance().getGlossaries();
     }
 
     public static GlossaryManager getGlossaryManager() {
@@ -195,7 +189,7 @@ public final class Core {
 
     /** Get notes instance. */
     public static INotes getNotes() {
-        return notes;
+        return CoreState.getInstance().getNotes();
     }
 
     /** Get segment properties area */
@@ -275,14 +269,14 @@ public final class Core {
         // 4. Initialize other components. They add themselves to the main
         // window.
         CoreState.getInstance().setEditor(new EditorController(me));
-        tagValidation = new TagValidationTool();
+        CoreState.getInstance().setTagValidation(new TagValidationTool());
         issuesWindow = new IssuesPanelController(me.getApplicationFrame());
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
-        glossary = glossaryArea;
+        CoreState.getInstance().setGlossaries(glossaryArea);
         CoreState.getInstance()
                 .setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
-        notes = new NotesTextArea(me);
+        CoreState.getInstance().setNotes(new NotesTextArea(me));
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
@@ -299,7 +293,7 @@ public final class Core {
      */
     public static void initializeConsole(final Map<String, String> params) {
         CoreState.getInstance().setCmdLineParams(params);
-        tagValidation = new TagValidationTool();
+        CoreState.getInstance().setTagValidation(new TagValidationTool());
         CoreState.getInstance().setProject(new NotLoadedProject());
         CoreState.getInstance().setMainWindow(new ConsoleWindow());
     }
@@ -372,6 +366,7 @@ public final class Core {
      * @param run
      *            code for execute
      * @throws Exception
+     *            Throw exception from runnable if received.
      */
     public static void executeExclusively(boolean waitForUnlock, RunnableWithException run)
             throws Exception {
@@ -398,51 +393,4 @@ public final class Core {
     public interface RunnableWithException {
         void run() throws Exception;
     }
-
-    // -- methods for testing
-
-    /**
-     * Set main window instance for unit tests.
-     *
-     * @param mainWindow
-     */
-    protected static void setMainWindow(IMainWindow mainWindow) {
-        CoreState.getInstance().setMainWindow(mainWindow);
-    }
-
-    /**
-     * Set project instance for unit tests.
-     *
-     * @param currentProject project object to hold.
-     */
-    @VisibleForTesting
-    static void setCurrentProject(IProject currentProject) {
-        CoreState.getInstance().setProject(currentProject);
-    }
-
-    @VisibleForTesting
-    static void setEditor(IEditor newEditor) {
-        CoreState.getInstance().setEditor(newEditor);
-    }
-
-    @VisibleForTesting
-    static void setTagValidation(ITagValidation newTagValidation) {
-        tagValidation = newTagValidation;
-    }
-
-    @VisibleForTesting
-    static void setSaveThread(IAutoSave newSewAutoSave) {
-        saveThread = newSewAutoSave;
-    }
-
-    @VisibleForTesting
-    static void setGlossary(IGlossaries newGlossary) {
-        glossary = newGlossary;
-    }
-
-    @VisibleForTesting
-    static void setNotes(INotes newNotes) {
-        notes = newNotes;
-    }
-
 }

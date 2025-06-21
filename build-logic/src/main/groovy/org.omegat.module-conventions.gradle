@@ -38,9 +38,9 @@ ext.makeModuleTask = { moduleProp ->
                     description = moduleProp.Description
                     url = 'https://omegat.org'
                     scm {
-                        connection = "scm:git:https://git.code.sf.net/p/omegat/code"
-                        developerConnection = "scm:git:https://git.code.sf.net/p/omegat/code"
-                        url = "https://sourceforge.net/p/omegat/code/"
+                        connection = "scm:git:https://github.com/omegat-org/omegat"
+                        developerConnection = "scm:git:https://github.com/omegat-org/omegat"
+                        url = "https://sourceforge.net/p/omegat/"
                     }
                     licenses {
                         license {
@@ -55,15 +55,6 @@ ext.makeModuleTask = { moduleProp ->
                             email = 'info@omegat.org'
                         }
                     }
-                }
-            }
-        }
-        repositories {
-            maven {
-                url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-                credentials(PasswordCredentials) {
-                    username = findProperty('ossrhUsername')
-                    password = findProperty('ossrhPassword')
                 }
             }
         }

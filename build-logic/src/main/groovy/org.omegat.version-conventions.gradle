@@ -14,8 +14,7 @@ ext {
         }
         "_${update}"
     }
-
-    mavenStyleVersion = version.replace('_', '-')
+    mavenStyleVersion = omtVersion.version + getUpdateSuffix(omtVersion.update).replace('_', '-')
 }
 
 tasks.register('printVersion') {

@@ -25,7 +25,6 @@
 
 package org.omegat.core.statistics;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -36,7 +35,6 @@ import java.util.TreeMap;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.omegat.core.Core;
@@ -80,7 +78,7 @@ public class CalcMatchStatisticsTest {
     }
 
     @Test
-    public void testCalcMatchStatics() throws Exception {
+    public void testCalcMatchStatics() {
         TestProject project = new TestProject(new ProjectPropertiesTest(), filterMaster);
         IStatsConsumer callback = new TestStatsConsumer();
         Segmenter segmenter = new Segmenter(SRX.getDefault());

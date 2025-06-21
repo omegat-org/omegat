@@ -51,11 +51,12 @@ import org.omegat.util.Preferences;
 public class SaveThread extends Thread implements IAutoSave {
     private final Object lock = new Object();
 
+    private volatile boolean running;
+
     /** The length the thread should wait in milliseconds */
     private int waitDuration;
     private boolean needToSaveNow;
     private boolean enabled;
-    private boolean running;
 
     public SaveThread() {
         setName("Save thread");
@@ -152,8 +153,8 @@ public class SaveThread extends Thread implements IAutoSave {
         synchronized (lock) {
             running = false;
             lock.notifyAll();
-       }
-       try {
+        }
+        try {
             join((long) waitDuration * 2);
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();

@@ -68,7 +68,6 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  */
 public abstract class TestCore {
     protected File configDir;
-    protected IMainWindow mainWindow;
 
     /**
      * Set-up OmegaT Core properties for unit and functional test.
@@ -84,21 +83,10 @@ public abstract class TestCore {
         TestCoreState.resetState();
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
-
         TestCoreState.getInstance().setMainWindow(createTestMainWindow());
         TestCoreState.getInstance().setProject(new NotLoadedProject());
-
-        TestCoreInitializer.initEditor(createTestEditor());
-        TestCoreInitializer.initAutoSave(new IAutoSave() {
-            public void enable() {
-                // ignore all
-            }
-
-            public void disable() {
-                // ignore all
-            }
-        });
-
+        TestCoreState.getInstance().setEditor(createTestEditor());
+        TestCoreState.initAutoSave(createTestAutoSave());
     }
 
     /**
@@ -111,11 +99,23 @@ public abstract class TestCore {
         FileUtils.forceDeleteOnExit(configDir);
     }
 
+    protected IAutoSave createTestAutoSave() {
+        return new IAutoSave() {
+            public void enable() {
+                // ignore all
+            }
+
+            public void disable() {
+                // ignore all
+            }
+        };
+    }
+
     /**
      * Create a mock of the main menu object.
      * @return Main menu object which implement IMainMenu.
      */
-    private IMainMenu createTestMainMenu() {
+    protected IMainMenu createTestMainMenu() {
         return new IMainMenu() {
             private final JMenu projectMenu = new JMenu("Project");
             private final JMenu toolsMenu = new JMenu("Tools");
@@ -273,7 +273,7 @@ public abstract class TestCore {
      * Create a main Window object.
      * @return Object which implements IMainWindow.
      */
-    private IMainWindow createTestMainWindow() {
+    protected IMainWindow createTestMainWindow() {
         final IMainMenu mainMenu = createTestMainMenu();
         return new IMainWindow() {
             public void addDockable(Dockable pane) {
@@ -350,7 +350,7 @@ public abstract class TestCore {
      * Create an implementation of IEditorSettings.
      * @return object which implements IEditorSettings as empty methods.
      */
-    private IEditorSettings createTestEditorSettings() {
+    protected IEditorSettings createTestEditorSettings() {
         return new IEditorSettings() {
 
             @Override
@@ -519,7 +519,7 @@ public abstract class TestCore {
     /**
      * Initialize editor and store it with TestInitializer.initEditor function.
      */
-    private IEditor createTestEditor() {
+    protected IEditor createTestEditor() {
         final IEditorSettings editorSettings = createTestEditorSettings();
         return new IEditor() {
 

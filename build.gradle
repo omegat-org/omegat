@@ -15,6 +15,7 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'ru.vyarus.mkdocs' version '3.0.0'
     id 'edu.sc.seis.launch4j' version '3.0.5'
+    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
 }
 
 apply from: 'gradle/utils.gradle'
@@ -1130,9 +1131,9 @@ publishing {
                 description = 'The free translation memory tool'
                 url = 'https://omegat.org'
                 scm {
-                    connection = "scm:git:https://git.code.sf.net/p/omegat/code"
-                    developerConnection = "scm:git:https://git.code.sf.net/p/omegat/code"
-                    url = "https://sourceforge.net/p/omegat/code/"
+                    connection = "scm:git:https://github.com/omegat-org/omegat"
+                    developerConnection = "scm:git:https://github.com/omegat-org/omegat"
+                    url = "https://sourceforge.net/p/omegat/"
                 }
                 licenses {
                     license {
@@ -1150,21 +1151,21 @@ publishing {
             }
         }
     }
-    repositories {
-        maven {
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials(PasswordCredentials) {
-                username findProperty('ossrhUsername')
-                password findProperty('ossrhPassword')
-            }
-        }
-    }
 }
 
 signing {
     sign publishing.publications.mavenJava
     if (!findProperty("signing.keyId")) {
         useGpgCmd()
+    }
+}
+
+nexusPublishing.repositories {
+    sonatype {
+        nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+        snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+        username = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : System.getenv('SONATYPE_USER')
+        password = project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : System.getenv('SONATYPE_PASS')
     }
 }
 

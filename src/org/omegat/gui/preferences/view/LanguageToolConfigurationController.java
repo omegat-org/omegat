@@ -68,6 +68,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.languagetool.AnalyzedSentence;
 import org.languagetool.JLanguageTool;
+import org.languagetool.LtBuildInfo;
 import org.languagetool.rules.Category;
 import org.languagetool.rules.CategoryId;
 import org.languagetool.rules.Rule;
@@ -82,7 +83,6 @@ import org.omegat.languagetools.LanguageToolWrapper;
 import org.omegat.languagetools.LanguageToolWrapper.BridgeType;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 
 /**
  * @author Panagiotis Minos
@@ -93,7 +93,9 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
 
     private static final String NEW_RULE_PATTERN = "^[A-Za-z_.]+$";
     private BridgeType selectedBridgeType;
-    private Set<String> disabledCategories, disabledRuleIds, enabledRuleIds;
+    private Set<String> disabledCategories;
+    private Set<String> disabledRuleIds;
+    private Set<String> enabledRuleIds;
     private String targetLanguageCode;
 
     private LanguageToolConfigurationPanel panel;
@@ -114,8 +116,8 @@ public class LanguageToolConfigurationController extends BasePreferencesControll
 
     private void initGui() {
         panel = new LanguageToolConfigurationPanel();
-        org.openide.awt.Mnemonics.setLocalizedText(panel.bridgeNativeRadioButton,
-                StringUtil.format(OStrings.getString("GUI_LANGUAGETOOL_NATIVE_BRIDGE"), JLanguageTool.VERSION));
+        org.openide.awt.Mnemonics.setLocalizedText(panel.bridgeNativeRadioButton, OStrings.getString(
+                "GUI_LANGUAGETOOL_NATIVE_BRIDGE", LtBuildInfo.OS.getVersion()));
         panel.bridgeNativeRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.NATIVE));
         panel.bridgeLocalRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.LOCAL_INSTALLATION));
         panel.bridgeRemoteRadioButton.addActionListener(e -> handleBridgeTypeChange(BridgeType.REMOTE_URL));

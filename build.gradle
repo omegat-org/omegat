@@ -92,6 +92,7 @@ dependencies {
     } else {
         implementation(libs.commons.io)
         implementation(libs.commons.lang3)
+        implementation(libs.commons.text)
         implementation(libs.commons.validator)
         api(libs.slf4j.api)
         implementation(libs.slf4j.format.jdk14)
@@ -130,19 +131,11 @@ dependencies {
         implementation(libs.omegat.mnemonics)
 
         // LanguageTool
-        implementation(libs.languagetool.core) {
-            exclude module: 'guava'
-            exclude module: 'language-detector'
-            exclude group: 'com.google.android'
-            exclude module: 'hunspell'
-            exclude module: 'json'
-            exclude module: 'protobuf-java'
-        }
-        runtimeOnly(libs.language.detector)
-        runtimeOnly(libs.dumont.hunspell)
-        runtimeOnly(libs.json)
-        runtimeOnly(libs.protobuf)
+        implementation(libs.languagetool.core)
         implementation(libs.icu4j)
+
+        // spellchecker dictionary API
+        implementation(libs.morfologik.stemming)
 
         // Lucene for tokenizers
         implementation(libs.bundles.lucene)
@@ -219,12 +212,7 @@ dependencies {
     testImplementation(libs.bundles.xmlunit)
     testImplementation(libs.slf4j.api)
     testImplementation(libs.mockito.core)
-    testImplementation(libs.languagetool.server) {
-        exclude module: "logback-classic"
-        exclude module: "hunspell"
-        exclude module: "json"
-        exclude module: "protobuf"
-    }
+    testImplementation(libs.languagetool.server)
     testRuntimeOnly(libs.json)
     testRuntimeOnly(libs.protobuf)
     testRuntimeOnly(libs.bundles.groovy)

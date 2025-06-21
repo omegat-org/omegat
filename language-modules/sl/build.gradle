@@ -11,18 +11,7 @@ dependencies {
                 includes: ['**/language-nl-*.jar'])
     } else {
         compileOnly(libs.commons.io)
-        compileOnly(libs.languagetool.core) {
-            exclude module: 'guava'
-            exclude module: 'language-detector'
-            exclude group: 'com.google.android'
-            exclude module: 'jackson-databind'
-            exclude group: 'org.jetbrains'
-            exclude module: 'commons-lang3'
-            exclude module: 'commons-text'
-            exclude module: 'commons-logging'
-            exclude module: 'json'
-            exclude module: 'protobuf-java'
-        }
+        compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.sl) {
             exclude module: 'languagetool-core'
         }
@@ -32,10 +21,7 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
-    testImplementation(libs.languagetool.core) {
-        exclude module: 'json'
-        exclude module: 'protobuf-java'
-    }
+    testImplementation(libs.languagetool.core)
     testRuntimeOnly(libs.json)
     testRuntimeOnly(libs.protobuf)
     testImplementation project(":spellchecker:morfologik")

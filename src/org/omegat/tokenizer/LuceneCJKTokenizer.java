@@ -28,12 +28,12 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cjk.CJKAnalyzer;
 import org.apache.lucene.analysis.cjk.CJKBigramFilter;
 import org.apache.lucene.analysis.cjk.CJKWidthFilter;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)

@@ -13,7 +13,6 @@ plugins {
     id 'org.omegat.jpkg-conventions'
     id 'org.omegat.publish-conventions'
     id 'org.omegat.verification-conventions'
-    id 'net.ltgt.nullaway' version '2.2.0'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
     id 'com.google.osdetector' version '1.7.3'
@@ -258,12 +257,8 @@ dependencies {
         // for architectures other than x86_64 on linux
         launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
     }
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
-    errorprone("com.uber.nullaway:nullaway:0.12.7")
     subprojects.findAll { it.getSubprojects().isEmpty()}.collect {jacocoAggregation it}
 }
-
-
 
 jar {
     def pluginProperties = layout.settingsDirectory.file('Plugins.properties')

@@ -33,7 +33,6 @@ dependencies {
     testImplementation(libs.commons.io)
     testRuntimeOnly(libs.languagetool.en)
     testRuntimeOnly(libs.languagetool.de)
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

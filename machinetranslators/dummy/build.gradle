@@ -4,7 +4,6 @@ plugins {
 
 dependencies {
     compileOnly(project.rootProject)
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
 }
 
 jar {

@@ -32,7 +32,6 @@ dependencies {
     testImplementation(libs.languagetool.core)
     testImplementation project(":spellchecker:morfologik")
     testImplementation(libs.commons.io)
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

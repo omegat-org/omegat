@@ -32,7 +32,6 @@ dependencies {
     testImplementation(libs.commons.io)
     testImplementation(project(":language-modules:de"))
     testImplementation(project(":language-modules:fr"))
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

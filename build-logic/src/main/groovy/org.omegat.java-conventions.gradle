@@ -8,6 +8,7 @@ plugins {
     id 'com.github.spotbugs'
     id 'org.omegat.common-utilities'
     id 'net.ltgt.errorprone'
+    id 'net.ltgt.nullaway'
 }
 
 // Definition of OmegaT versioning
@@ -75,6 +76,15 @@ tasks {
     compileTestJava {
         options.errorprone.enabled = false
     }
+}
+
+dependencies {
+    errorprone("com.google.errorprone:error_prone_core:2.36.0")
+    errorprone("com.uber.nullaway:nullaway:0.12.7")
+}
+
+nullaway {
+    annotatedPackages.add("org.omegat")
 }
 
 spotbugs {

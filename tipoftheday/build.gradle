@@ -15,7 +15,6 @@ dependencies {
     } else {
         implementation(libs.tipoftheday)
         compileOnly(libs.jackson.yaml)
-        errorprone("com.google.errorprone:error_prone_core:2.36.0")
     }
 }
 

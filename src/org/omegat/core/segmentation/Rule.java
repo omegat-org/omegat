@@ -197,6 +197,7 @@ public class Rule implements Serializable {
     }
 
     /** Indicates whether some other Rule is "equal to" this one. */
+    @Override
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof Rule)) {
             return false;
@@ -207,12 +208,14 @@ public class Rule implements Serializable {
     }
 
     /** Returns a hash code value for the object. */
+    @Override
     public int hashCode() {
         return (this.isBreakRule() ? 1 : -1) + this.getBeforebreak().hashCode()
                 - this.getAfterbreak().hashCode();
     }
 
     /** Returns a string representation of the Rule for debugging purposes. */
+    @Override
     public String toString() {
         return (isBreakRule() ? "Break " : "Exception ") + "Before: " + getBeforebreak() + "After: "
                 + getAfterbreak();

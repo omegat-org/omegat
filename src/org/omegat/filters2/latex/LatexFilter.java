@@ -72,18 +72,22 @@ public class LatexFilter extends AbstractFilter {
     public static void unloadPlugins() {
     }
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("LATEXFILTER_FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.tex"), new Instance("*.latex"), };
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }

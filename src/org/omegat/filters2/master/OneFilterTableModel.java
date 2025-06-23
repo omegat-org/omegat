@@ -60,10 +60,12 @@ public class OneFilterTableModel extends AbstractTableModel {
     // TableModel implementation
     // ////////////////////////////////////////////////////////////////////////
 
+    @Override
     public int getColumnCount() {
         return 4;
     }
 
+    @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
         case 0:
@@ -78,14 +80,17 @@ public class OneFilterTableModel extends AbstractTableModel {
         return null;
     }
 
+    @Override
     public Class<?> getColumnClass(int columnIndex) {
         return String.class;
     }
 
+    @Override
     public int getRowCount() {
         return filter.getFiles().size();
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Files instance = filter.getFiles().get(rowIndex);
         switch (columnIndex) {
@@ -101,6 +106,7 @@ public class OneFilterTableModel extends AbstractTableModel {
         return null;
     }
 
+    @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Files instance = filter.getFiles().get(rowIndex);
         switch (columnIndex) {
@@ -119,6 +125,7 @@ public class OneFilterTableModel extends AbstractTableModel {
         }
     }
 
+    @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
         case 0:

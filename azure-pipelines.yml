@@ -69,17 +69,8 @@ stages:
       - template: ci/azure-pipelines/publish_manual_snapshot.yml
         parameters:
           condition: and(eq(variables.changeDoc, 'True'), in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  - job: TestOnJava11
-    displayName: on Java 11
-    pool:
-      vmImage: 'ubuntu-24.04'
-    steps:
-      - checkout: self
-        fetchDepth: 1
-        fetchTags: false
-      - template: ci/azure-pipelines/test_java11_steps.yml
   - job: TestOnJava17
-    displayName: on Java 17
+    displayName: on Linux
     pool:
       vmImage: 'ubuntu-24.04'
     steps:
@@ -88,7 +79,7 @@ stages:
         fetchTags: false
       - template: ci/azure-pipelines/test_java17_steps.yml
   - job: testOnWindows
-    displayName: on Java 17 on Windows
+    displayName: on Windows
     pool:
       vmImage: 'windows-latest'
     steps:
@@ -96,7 +87,7 @@ stages:
         fetchDepth: 2
       - template: ci/azure-pipelines/test_java17_steps.yml
   - job: testOnMac
-    displayName: on Java 17 on mac
+    displayName: on mac
     pool:
       vmImage: 'macOS-latest'
     steps:

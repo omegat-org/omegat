@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.diffplug.spotless:spotless-plugin-gradle:7.0.4'
     implementation 'edu.sc.seis.launch4j:launch4j:3.0.6'
     implementation 'org.hidetake.ssh:org.hidetake.ssh.gradle.plugin:2.11.2'
+    implementation 'net.ltgt.gradle:gradle-errorprone-plugin:4.2.0'
 
     // dependencies on Maven
     implementation 'xerces:xercesImpl:2.12.2'

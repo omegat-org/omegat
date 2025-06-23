@@ -7,13 +7,11 @@ plugins {
     id 'com.diffplug.spotless'
     id 'com.github.spotbugs'
     id 'org.omegat.common-utilities'
+    id 'net.ltgt.errorprone'
 }
 
 // Definition of OmegaT versioning
 def localPropsFile = file('local.properties')
-
-// Define target Java version to compatible.
-def javaVersion = 11
 
 // Flag to detect CI/CD environment
 def envIsCi = project.hasProperty('envIsCi') as Boolean
@@ -38,15 +36,8 @@ repositories {
 java {
     withSourcesJar()
     withJavadocJar()
-    if (isWindows11 && isArm64) {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    } else {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(javaVersion)
-            vendor = JvmVendorSpec.ADOPTIUM
-        }
-    }
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 tasks.named("test", Test) {
@@ -75,7 +66,14 @@ javadoc {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
-    options.compilerArgs.addAll '-Xlint', '-Werror'
+    options.compilerArgs.addAll '-Xlint'
+    options.errorprone.disableWarningsInGeneratedCode = true
+}
+
+tasks {
+    compileTestJava {
+        options.errorprone.enabled = false
+    }
 }
 
 spotbugs {

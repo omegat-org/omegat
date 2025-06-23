@@ -40,6 +40,7 @@ dependencies {
     testRuntimeOnly(libs.protobuf)
     testImplementation project(":spellchecker:morfologik")
     testImplementation project(":spellchecker:hunspell")
+    errorprone("com.google.errorprone:error_prone_core:2.36.0")
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

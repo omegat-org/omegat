@@ -20,6 +20,7 @@ dependencies {
         compileOnly(libs.jackson.databind)
     }
     testImplementation(testFixtures(project.rootProject))
+    errorprone("com.google.errorprone:error_prone_core:2.36.0")
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

@@ -23,6 +23,7 @@ dependencies {
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
+    errorprone("com.google.errorprone:error_prone_core:2.36.0")
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

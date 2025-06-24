@@ -130,7 +130,6 @@ public interface IFilter {
      *            processing context
      * @param callback
      *            callback for parsed data
-     * @throws Exception
      */
     void parseFile(File inFile, Map<String, String> config, FilterContext context, IParseCallback callback)
             throws Exception;
@@ -148,7 +147,6 @@ public interface IFilter {
      *            processing context
      * @param callback
      *            callback for get translation
-     * @throws Exception
      */
     void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext context,
             ITranslateCallback callback) throws Exception;

@@ -452,7 +452,11 @@ public class FilterMaster {
      * Loads information about the filters from an XML file. If there's an error
      * loading a file, it calls <code>setupDefaultFilters</code>.
      *
-     * @throws IOException
+     * @param configFile the file from which the filter configuration is to be loaded
+     * @return an instance of {@code Filters} containing the loaded configuration,
+     *         or a new {@code Filters} instance if an error occurs or a new configuration
+     *         is generated
+     * @throws IOException if an I/O error occurs while reading the configuration file
      */
     public static Filters loadConfig(File configFile) throws IOException {
         if (!configFile.exists()) {
@@ -475,9 +479,13 @@ public class FilterMaster {
     }
 
     /**
-     * Saves information about the filters to an XML file.
+     * Saves information about the filters to an XML file. If the configuration is null,
+     * the file will be deleted. The configuration is written in a pretty-printed format.
      *
-     * @throws IOException
+     * @param config The configuration object to be saved. If null, the file is deleted.
+     * @param configFile The file to save the configuration to.
+     * @throws IOException If an error occurs while saving the configuration or deleting
+     *         the file.
      */
     public static void saveConfig(Filters config, File configFile) throws IOException {
         if (config == null) {
@@ -527,18 +535,14 @@ public class FilterMaster {
     }
 
     /**
-     * Calculate the target path corresponding to the given source file.
+     * Determines the target file path for a given source file path.
      *
-     * @param sourceDir
-     *            Path to the project's <code>source</code> dir
-     * @param srcRelPath
-     *            Relative path under <code>sourceDir</code> of the source file
-     * @param fc
-     *            Filter context
-     * @return The relative path under <code>target</code> of the corresponding
-     *         target file
-     * @throws IOException
-     * @throws TranslationException
+     * @param sourceDir the root directory of the source file
+     * @param srcRelPath the relative path of the source file within the source directory
+     * @param fc the filter context containing relevant translation parameters
+     * @return the target file path corresponding to the source file
+     * @throws TranslationException if an error occurs during the translation processing
+     * @throws IllegalArgumentException if the specified sourceDir and srcRelPath do not point to an existing file
      */
     public String getTargetForSource(String sourceDir, String srcRelPath, FilterContext fc)
             throws TranslationException {

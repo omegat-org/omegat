@@ -18,7 +18,9 @@ dependencies {
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project.rootProject)) {
+        exclude module: 'wiremock'
+    }
     testImplementation(libs.languagetool.core)
     testImplementation(libs.commons.io)
     testImplementation(project(":language-modules:de"))

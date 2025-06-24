@@ -75,9 +75,9 @@ public class IssuesPanelTest extends TestCoreGUI {
         } catch (InterruptedException ignored) {
         }
 
-        assertTrue(issuesPanelController.panel.isVisible());
-        assertEquals(2, issuesPanelController.panel.table.getModel().getValueAt(1, 0));
-        assertEquals("Terminology", issuesPanelController.panel.table.getModel().getValueAt(1, 2));
+        assertTrue(issuesPanelController.getPanel().isVisible());
+        assertEquals(2, issuesPanelController.getPanel().table.getModel().getValueAt(1, 0));
+        assertEquals("Terminology", issuesPanelController.getPanel().table.getModel().getValueAt(1, 2));
     }
 
     public static class IssuesPanelControllerMock extends IssuesPanelController {

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2024 Hiroshi Miura
+ Copyright (C) 2016 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,30 +23,43 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.editor;
+package org.omegat.gui.issues;
 
-import java.util.Locale;
-
-import org.junit.Rule;
-import org.junit.Test;
-
-import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
-public class EditorTextAreaTest extends TestCoreGUI {
+import javax.swing.Icon;
 
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+enum IssueColumn {
+    SEG_NUM(0, OStrings.getString("ISSUES_TABLE_COLUMN_ENTRY_NUM"), Integer.class),
+    ICON(1, "", Icon.class),
+    TYPE(2, OStrings.getString("ISSUES_TABLE_COLUMN_TYPE"), String.class),
+    DESCRIPTION(3, OStrings.getString("ISSUES_TABLE_COLUMN_DESCRIPTION"), String.class),
+    ACTION_BUTTON(4, "", Icon.class);
 
-    @Test
-    public void testIntroPaneExist() {
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).requireEnabled();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane").requireEnabled();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
-                .verticalScrollBar().requireVisible();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
-                .horizontalScrollBar().requireNotVisible();
+    private final int index;
+    private final String label;
+    private final Class<?> clazz;
+
+    IssueColumn(int index, String label, Class<?> clazz) {
+        this.index = index;
+        this.label = label;
+        this.clazz = clazz;
+    }
+
+    int getIndex() {
+        return index;
+    }
+
+    String getLabel() {
+        return label;
+    }
+
+    Class<?> getClazz() {
+        return clazz;
+    }
+
+    static IssueColumn get(int index) {
+        return values()[index];
     }
 
 }

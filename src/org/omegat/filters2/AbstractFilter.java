@@ -220,21 +220,23 @@ public abstract class AbstractFilter implements IFilter {
     public abstract boolean isTargetEncodingVariable();
 
     /**
-     * Returns whether the file is supported by the filter, given the reader
-     * with file's contents. There exists a version of this method that takes
-     * file and encoding {@link #isFileSupported(File, Map, FilterContext))}.
-     * You should override only one of the two.
+     * Checks if the file is supported by the filter using its content.
      * <p>
-     * By default, returns true, because this method should be overridden only
-     * by filters that differentiate input files not by extensions, but by
-     * file's content.
+     * This method should be overridden by filters that inspect the file's
+     * content rather than its extension. * For instance, DocBook files have a
+     * `.xml` extension, which is shared by many XML files. Such filters should
+     * examine the document's DTD to differentiate DocBook files from others.
      * <p>
-     * For example, DocBook files have .xml extension, as possibly many other
-     * XML files, so the filter should check a DTD of the document.
+     * Note: There is a complementary version of this method that takes a file
+     * and encoding:
+     * {@link org.omegat.filters2.AbstractFilter#isFileSupported(File, Map, FilterContext)}.
+     * Typically, you should override only one of these methods.
      *
      * @param reader
-     *            The reader of the source file
-     * @return Does the filter support the file
+     *            A {@link BufferedReader} providing the content of the source
+     *            file.
+     * @return {@code true} if the filter supports the file; otherwise,
+     *         {@code false}.
      */
     protected boolean isFileSupported(BufferedReader reader) {
         return true;
@@ -300,9 +302,6 @@ public abstract class AbstractFilter implements IFilter {
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Deprecated
     @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
@@ -334,7 +333,7 @@ public abstract class AbstractFilter implements IFilter {
         if (bomLastParsedFile != null) {
             charset = bomLastParsedFile.getCharsetName();
         } else {
-            charset = Objects.requireNonNullElseGet(inEncoding, () -> StandardCharsets.UTF_8.name());
+            charset = Objects.requireNonNullElseGet(inEncoding, StandardCharsets.UTF_8::name);
         }
         return new BufferedReader(new InputStreamReader(bomInputStream, charset));
     }
@@ -459,10 +458,13 @@ public abstract class AbstractFilter implements IFilter {
      * ({@link #isSourceEncodingVariable()}), try to detect it. The result may
      * be null.
      * 
-     * @param fc FilterContext to use.
-     * @param inFile target file to determine encoding.
+     * @param fc
+     *            FilterContext to use.
+     * @param inFile
+     *            target file to determine encoding.
      * @return encoding name.
-     * @throws IOException when I/O error occurred.
+     * @throws IOException
+     *             when I/O error occurred.
      */
     protected String getInputEncoding(FilterContext fc, File inFile) throws IOException {
         String encoding = fc.getInEncoding();
@@ -482,7 +484,8 @@ public abstract class AbstractFilter implements IFilter {
      * </ul>
      * The result may be null.
      * 
-     * @param fc Filter Context to use.
+     * @param fc
+     *            Filter Context to use.
      * @return Encoding to write.
      */
     protected String getOutputEncoding(FilterContext fc) {
@@ -540,8 +543,8 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Align source file against translated file. If this function is not
-     * overridden, then alignment in console mode will not be available for
-     * this filter.
+     * overridden, then alignment in console mode will not be available for this
+     * filter.
      * <p>
      * Implementations should call entryAlignCallback.addTranslation with source
      * and target text, and with source file path.
@@ -660,18 +663,12 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Set both callbacks. Used for child XML filters only.
-     *
-     * @param parseCallback
-     * @param translateCallback
      */
     public void setCallbacks(IParseCallback parseCallback, ITranslateCallback translateCallback) {
         this.entryParseCallback = parseCallback;
         this.entryTranslateCallback = translateCallback;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getInEncodingLastParsedFile() {
         return inEncodingLastParsedFile;

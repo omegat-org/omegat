@@ -221,18 +221,22 @@ public class HTMLFilter2 extends AbstractFilter {
 
     // ////////////////////////////////////////////////////////////////////////
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("HTML__FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.htm", null, "UTF-8"), new Instance("*.html", null, "UTF-8"),
                 new Instance("*.xhtml", null, "UTF-8"), new Instance("*.xht", null, "UTF-8") };

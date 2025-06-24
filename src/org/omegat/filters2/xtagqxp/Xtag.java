@@ -87,6 +87,7 @@ public class Xtag implements Element {
         }
     }
 
+    @Override
     public String toSafeCalcShortcut() {
         return StaticUtils.TAG_REPLACEMENT_CHAR + getShortcut().replace('<', '_').replace('>', '_')
                 + StaticUtils.TAG_REPLACEMENT_CHAR;
@@ -104,6 +105,7 @@ public class Xtag implements Element {
      * &lt; or &gt;, return the character rather than a tag E.g. for
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
+    @Override
     public String toShortcut() {
         StringBuilder buf = new StringBuilder();
 
@@ -127,6 +129,7 @@ public class Xtag implements Element {
      * Returns the tag in its original form as it was in the original document.
      * E.g. for &lt;strong&gt; tag should return &lt;strong&gt;.
      */
+    @Override
     public String toOriginal() {
         return "<" + getTag() + ">";
     }
@@ -136,6 +139,7 @@ public class Xtag implements Element {
      *
      * @return an empty string
      */
+    @Override
     public String toTMX() {
         return "";
     }

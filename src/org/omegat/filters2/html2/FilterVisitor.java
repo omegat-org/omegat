@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -238,19 +239,13 @@ public class FilterVisitor extends NodeVisitor {
         }
     }
 
+    private static final Set<String> TRANSLATABLE_ATTRIBUTES = Set.of("submit", "button", "reset");
+
     private boolean isTranslateAttribute(Tag tag) {
         if (!options.getTranslateValue() && !options.getTranslateButtonValue()) {
             return false;
         }
-
-        // an input element
-        // and we translate all input elements
-        // or we translate submit/button/reset elements ...
-        // and it is a submit/button/reset element.
-        // then translate the value
-        return "submit".equalsIgnoreCase(tag.getAttribute("type"))
-                || "button".equalsIgnoreCase(tag.getAttribute("type"))
-                || "reset".equalsIgnoreCase(tag.getAttribute("type"));
+        return TRANSLATABLE_ATTRIBUTES.contains(tag.getAttribute("type").toLowerCase());
     }
 
     /**

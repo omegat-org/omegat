@@ -29,11 +29,17 @@ import picocli.CommandLine;
 
 import java.util.Objects;
 
-@CommandLine.Command(name = "align")
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Option;
+
+@Command(name = "align")
 public class AlignCommand implements Runnable {
     private final Parameters parameters;
-    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
+    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
     String project;
+
+    @Option(names = { "-G", "--gui" }, versionHelp = true)
+    boolean startGUI;
 
     public AlignCommand(Parameters parameters) {
         this.parameters = parameters;
@@ -43,8 +49,13 @@ public class AlignCommand implements Runnable {
     public void run() {
         parameters.setProjectLocation(Objects.requireNonNullElse(project, "."));
         StandardCommandLauncher command = new StandardCommandLauncher(parameters);
+        int status;
         try {
-            int status = command.runConsoleAlign();
+            if (startGUI) {
+                status = command.runGUIAligner();
+            } else {
+                status = command.runConsoleAlign();
+            }
             if (status != 0) {
                 System.exit(status);
             }

@@ -33,10 +33,13 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.StatOutputFormat;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.core.tagvalidation.ErrorReport;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
@@ -52,6 +55,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.OSXIntegration;
+import org.omegat.util.gui.UIDesignManager;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -63,6 +67,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -223,6 +229,29 @@ final class StandardCommandLauncher {
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
         return 0;
+    }
+
+    public int runGUIAligner() {
+        String dir = params.projectLocation;
+        try {
+            UIDesignManager.initialize();
+        } catch (IOException e) {
+            Log.log(e);
+            return 1;
+        }
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        try {
+            ClassLoader cl = PluginUtils.getBasePluginClassLoader();
+            Class<?> alignClass = cl.loadClass("org.omegat.gui.align.AlignerModule");
+            Method method = alignClass.getMethod("showAligner", String.class);
+            method.invoke(null, dir);
+            return 0;
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
+                 | InvocationTargetException e) {
+            Log.log(e);
+            return 1;
+        }
     }
 
     /**
@@ -497,4 +526,5 @@ final class StandardCommandLauncher {
         JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg,
                 OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
     }
+
 }

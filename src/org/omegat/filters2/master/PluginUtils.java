@@ -168,6 +168,7 @@ public final class PluginUtils {
 
     private static final MainClassLoader THEME_CLASSLOADER;
     private static final MainClassLoader LANGUAGE_CLASSLOADER;
+    private static MainClassLoader pluginsClassLoader;
 
     static {
         ClassLoader cl = PluginUtils.class.getClassLoader();
@@ -488,6 +489,10 @@ public final class PluginUtils {
 
     public static List<Class<?>> getGlossaryClasses() {
         return GLOSSARY_CLASSES;
+    }
+
+    public static ClassLoader getBasePluginClassLoader() {
+        return  pluginsClassLoader;
     }
 
     public static ClassLoader getThemeClassLoader() {

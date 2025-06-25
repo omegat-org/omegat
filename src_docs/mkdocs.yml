@@ -62,6 +62,7 @@ nav:
      External Finder: 81.ExternalFinder.md
      How OmegaT create Backup files: 82.BackupFiles.md
      Team project: 83.TeamProject.md
+  - Architecture Design: adr/index.md
   - Other information:
      Release procedure: 90.ReleaseProcedure.md
      Code Signing How-to: 92.CodeSigning.md

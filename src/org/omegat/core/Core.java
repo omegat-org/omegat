@@ -299,6 +299,11 @@ public final class Core {
         projWin = new ProjectFilesListController();
     }
 
+    @Deprecated(since = "6.1.0", forRemoval = true)
+    public static void initializeConsole(Map<String, String> params) {
+        initializeConsole();
+    }
+
     /**
      * Initialize application components.
      */

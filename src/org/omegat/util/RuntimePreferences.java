@@ -47,6 +47,36 @@ public final class RuntimePreferences {
     /** Last opened project location save control **/
     private static boolean locationSaveEnabled = true;
 
+    private static String tokenizerSource;
+
+    private static String tokenizerTarget;
+
+    private static boolean noTeam = false;
+
+    public static boolean isNoTeam() {
+        return noTeam;
+    }
+
+    public static void setNoTeam() {
+        noTeam = true;
+    }
+
+    public static void setTokenizerSource(String v) {
+        tokenizerSource = v;
+    }
+
+    public static String getTokenizerSource() {
+        return tokenizerSource;
+    }
+
+    public static void setTokenizerTarget(String v) {
+        tokenizerTarget = v;
+    }
+
+    public static String getTokenizerTarget() {
+        return tokenizerTarget;
+    }
+
     public static boolean isQuietMode() {
         return quietMode;
     }

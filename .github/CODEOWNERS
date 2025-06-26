@@ -1,3 +1,4 @@
 # Code owners for the OmegaT project
 
 /src/org/omegat/Bundle*.properties    @kazephil @brandelune @kosivantsov
+/src/org/omegat/cli/Parameters*.properties    @kazephil @brandelune @kosivantsov

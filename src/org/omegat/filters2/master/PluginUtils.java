@@ -54,7 +54,7 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
-import org.omegat.CLIParameters;
+import org.omegat.cli.Parameters;
 import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
 import org.omegat.core.data.PluginInformation;
@@ -168,6 +168,7 @@ public final class PluginUtils {
 
     private static final MainClassLoader THEME_CLASSLOADER;
     private static final MainClassLoader LANGUAGE_CLASSLOADER;
+    private static MainClassLoader pluginsClassLoader;
 
     static {
         ClassLoader cl = PluginUtils.class.getClassLoader();
@@ -248,7 +249,7 @@ public final class PluginUtils {
         try {
             if (!foundMain) {
                 // development mode - load from dev-manifests CLI arg
-                String manifests = params.get(CLIParameters.DEV_MANIFESTS);
+                String manifests = params.get(Parameters.DEV_MANIFESTS);
                 if (manifests != null) {
                     for (String mf : manifests.split(File.pathSeparator)) {
                         try (InputStream in = Files.newInputStream(Paths.get(mf))) {
@@ -488,6 +489,10 @@ public final class PluginUtils {
 
     public static List<Class<?>> getGlossaryClasses() {
         return GLOSSARY_CLASSES;
+    }
+
+    public static ClassLoader getBasePluginClassLoader() {
+        return  pluginsClassLoader;
     }
 
     public static ClassLoader getThemeClassLoader() {

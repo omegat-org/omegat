@@ -23,14 +23,13 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat;
+package org.omegat.cli;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -38,12 +37,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.omegat.Main;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
-public class MainTest {
+public class ConsoleTranslateTest {
 
     private static Path tmpDir;
     private static String configDir;
@@ -62,8 +62,31 @@ public class MainTest {
     }
 
     @Test
-    public void testConsoleTranslate() throws Exception {
+    public void testConsoleTranslateOld() throws Exception {
+        String fileName = "old.txt";
+        testConsoleTranslatePrep(fileName);
 
+        Main.main(new String[] {String.format("--config-dir=%s", configDir), "--mode=console-translate",
+                tmpDir.toString() });
+
+        Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
+        assertTrue(trgFile.toFile().isFile());
+        assertEquals(List.of("Foo"), Files.readAllLines(trgFile));
+    }
+
+    @Test
+    public void testConsoleTranslate() throws Exception {
+        String fileName = "foo.txt";
+        testConsoleTranslatePrep(fileName);
+
+        Main.main(new String[] {"--config-dir", configDir, "translate", tmpDir.toString() });
+
+        Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
+        assertTrue(trgFile.toFile().isFile());
+        assertEquals(List.of("Foo"), Files.readAllLines(trgFile));
+    }
+
+    private void testConsoleTranslatePrep(String fileName) throws Exception {
         // Create project properties
         ProjectProperties props = new ProjectProperties(tmpDir.toFile());
         // Create project internal directories
@@ -72,17 +95,10 @@ public class MainTest {
         props.getWritableGlossaryFile().getAsFile().createNewFile();
         ProjectFileStorage.writeProjectFile(props);
 
-        String fileName = "foo.txt";
-        List<String> fileContent = Arrays.asList("Foo");
+        List<String> fileContent = List.of("Foo");
 
         Path srcFile = tmpDir.resolve(OConsts.DEFAULT_SOURCE).resolve(fileName);
         Files.write(srcFile, fileContent);
 
-        Main.main(new String[] {String.format("--config-dir=%s", configDir), "--mode=console-translate",
-                tmpDir.toString() });
-
-        Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
-        assertTrue(trgFile.toFile().isFile());
-        assertEquals(fileContent, Files.readAllLines(trgFile));
     }
 }

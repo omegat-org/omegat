@@ -9,7 +9,7 @@
                2013 Kyle Katarn, Aaron Madlon-Kay
                2014 Alex Buloichik
                2018 Enrique Estevez Fernandez
-               2022 Hiroshi Miura
+               2022-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -31,84 +31,41 @@
 
 package org.omegat;
 
-import static java.nio.file.StandardOpenOption.CREATE;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
-import static java.nio.file.StandardOpenOption.WRITE;
-
-import java.awt.Toolkit;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
-import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.MessageFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.PropertyResourceBundle;
-import java.util.TreeMap;
-
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
+import org.omegat.cli.AlignCommand;
+import org.omegat.cli.Parameters;
+import org.omegat.cli.StartCommand;
+import org.omegat.cli.StatsCommand;
+import org.omegat.cli.TeamCommand;
+import org.omegat.cli.TranslateCommand;
+import picocli.CommandLine;
 import tokyo.northside.logging.ILogger;
 
-import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
-import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
-import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.RealProject;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.statistics.CalcStandardStatistics;
-import org.omegat.core.statistics.StatOutputFormat;
-import org.omegat.core.statistics.StatsResult;
-import org.omegat.core.tagvalidation.ErrorReport;
-import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.main.ProjectUICommands;
-import org.omegat.gui.scripting.ConsoleBindings;
-import org.omegat.gui.scripting.ScriptItem;
-import org.omegat.gui.scripting.ScriptRunner;
 import org.omegat.languagetools.LanguageClassBroker;
 import org.omegat.languagetools.LanguageDataBroker;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
-import org.omegat.util.ProjectFileStorage;
-import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.StringUtil;
-import org.omegat.util.TMXWriter2;
-import org.omegat.util.gui.OSXIntegration;
-
-import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * The main OmegaT class, used to launch the program.
@@ -126,67 +83,25 @@ public final class Main {
     private Main() {
     }
 
-    /** Project location for a load on startup. */
-    private static File projectLocation = null;
-
-    /** Remote project location. */
-    private static String remoteProject = null;
-
-    /** Execution command line parameters. */
-    private static final Map<String, String> PARAMS = new TreeMap<>();
-
-    /** Execution mode. */
-    private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static Parameters parameters;
 
     public static void main(String[] args) {
-        if (args.length > 0
-                && (CLIParameters.HELP_SHORT.equals(args[0]) || CLIParameters.HELP.equals(args[0]))) {
-            System.out.println(
-                    StringUtil.format(OStrings.getString("COMMAND_LINE_HELP"), OStrings.getNameAndVersion()));
-            System.exit(0);
-        }
-
-        if (args.length > 0 && CLIParameters.TEAM_TOOL.equals(args[0])) {
-            TeamTool.main(Arrays.copyOfRange(args, 1, args.length));
-        }
+        // construct parser and execute
+        parameters = new Parameters();
+        CommandLine commandLine = new CommandLine(parameters);
+        commandLine.addSubcommand("team", new TeamCommand());
+        commandLine.addSubcommand("align", new AlignCommand(parameters));
+        commandLine.addSubcommand("stats", new StatsCommand(parameters));
+        commandLine.addSubcommand("translate", new TranslateCommand(parameters));
+        commandLine.addSubcommand("start", new StartCommand(parameters));
+        commandLine.addSubcommand("help", new CommandLine.HelpCommand());
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("org.omegat.cli.Parameters");
+        commandLine.setResourceBundle(resourceBundle);
+        commandLine.setExecutionStrategy(new CommandLine.RunLast());
 
         // Workaround for Java 17 or later support of JAXB.
         // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
-
-        PARAMS.putAll(CLIParameters.parseArgs(args));
-
-        String projectDir = PARAMS.get(CLIParameters.PROJECT_DIR);
-        if (projectDir != null) {
-            projectLocation = new File(FileUtil.expandTildeHomeDir(projectDir));
-        }
-        remoteProject = PARAMS.get(CLIParameters.REMOTE_PROJECT);
-
-        applyConfigFile(PARAMS.get(CLIParameters.CONFIG_FILE));
-
-        runMode = CLIParameters.RUN_MODE.parse(PARAMS.get(CLIParameters.MODE));
-
-        String resourceBundle = PARAMS.get(CLIParameters.RESOURCE_BUNDLE);
-        if (resourceBundle != null) {
-            OStrings.loadBundle(FileUtil.expandTildeHomeDir(resourceBundle));
-        }
-
-        String configDir = PARAMS.get(CLIParameters.CONFIG_DIR);
-        if (configDir != null) {
-            RuntimePreferences.setConfigDir(FileUtil.expandTildeHomeDir(configDir));
-        }
-
-        if (PARAMS.containsKey(CLIParameters.QUIET)) {
-            RuntimePreferences.setQuietMode(true);
-        }
-
-        if (PARAMS.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING)) {
-            RuntimePreferences.setProjectLockingEnabled(false);
-        }
-
-        if (PARAMS.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
-            RuntimePreferences.setLocationSaveEnabled(false);
-        }
 
         // initialize logging backend and loading configuration.
         ILogger logger = Log.getLogger(Main.class);
@@ -203,50 +118,16 @@ public final class Main {
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
         // Do migration and load various settings. The order is important!
-        ConvertConfigs.convert();
         Preferences.init();
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        PluginUtils.loadPlugins(PARAMS);
+        // PluginUtils.loadPlugins(params);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
 
-        int result;
-        try {
-            switch (runMode) {
-            case GUI:
-                result = runGUI();
-                // GUI has own shutdown code
-                break;
-            case CONSOLE_TRANSLATE:
-                result = runConsoleTranslate();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_CREATEPSEUDOTRANSLATETMX:
-                result = runCreatePseudoTranslateTMX();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_ALIGN:
-                result = runConsoleAlign();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_STATS:
-                result = runConsoleStats();
-                PluginUtils.unloadPlugins();
-                break;
-            default:
-                result = 1;
-            }
-        } catch (Throwable ex) {
-            Log.log(ex);
-            showError(ex);
-            result = 1;
-        }
-        if (result != 0) {
-            System.exit(result);
-        }
+        commandLine.execute(args);
     }
 
     public static void restartGUI(String projectDir) {
@@ -261,21 +142,21 @@ public final class Main {
             command.add("-cp");
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
-            command.addAll(CLIParameters.unparseArgs(PARAMS));
+            command.addAll(parameters.constructGuiArgs());
         } else {
             // assumes jpackage
             var installDir = StaticUtils.installDir();
             if (installDir == null) {
                 return;
             } else {
-                javaBin = Paths.get(installDir).getParent().resolve("bin/OmegaT");
+                javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
                 if (!javaBin.toFile().exists()) {
                     // abort restart
                     Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
                     return;
                 }
                 command.add(javaBin.toString());
-                command.addAll(CLIParameters.unparseArgs(PARAMS));
+                command.addAll(parameters.constructGuiArgs());
             }
         }
         if (projectDir != null) {
@@ -293,421 +174,4 @@ public final class Main {
         }
     }
 
-    /**
-     * Load System properties from a specified .properties file. In order to
-     * allow this to reliably change the display language, it must called before
-     * any use of {@link Log#log}, thus it logs to {@link System#out}.
-     *
-     * @param path
-     *            to config file
-     */
-    private static void applyConfigFile(String path) {
-        if (path == null) {
-            return;
-        }
-        File configFile = new File(FileUtil.expandTildeHomeDir(path));
-        if (!configFile.exists()) {
-            return;
-        }
-        System.out.println("Reading config from " + path);
-        try (FileInputStream in = new FileInputStream(configFile)) {
-            PropertyResourceBundle config = new PropertyResourceBundle(in);
-            // Put config properties into System properties and into OmegaT
-            // params.
-            for (String key : config.keySet()) {
-                String value = config.getString(key);
-                System.setProperty(key, value);
-                PARAMS.put(key, value);
-                System.out.println("Read from config: " + key + "=" + value);
-            }
-            // Apply language preferences, if present.
-            // This must be done with Locale.setDefault(). Merely doing
-            // System.setProperty() will not work.
-            if (config.containsKey("user.language")) {
-                String userLanguage = config.getString("user.language");
-                Locale userLocale = config.containsKey("user.country")
-                        ? new Locale(userLanguage, config.getString("user.country"))
-                        : new Locale(userLanguage);
-                Locale.setDefault(userLocale);
-            }
-        } catch (FileNotFoundException exception) {
-            System.err.println("Config file not found: " + path);
-        } catch (IOException exception) {
-            System.err.println("Error while reading config file: " + path);
-        }
-    }
-
-    /**
-     * Execute standard GUI.
-     */
-    private static int runGUI() {
-        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
-
-        // macOS-specific - they must be set BEFORE any GUI calls
-        if (Platform.isMacOSX()) {
-            OSXIntegration.init();
-        }
-
-        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-        tweakX11AppName();
-        System.setProperty("swing.aatext", "true");
-        try {
-            Core.initializeGUI(PARAMS);
-        } catch (Throwable ex) {
-            Log.log(ex);
-            return 1;
-        }
-
-        if (!Core.getPluginsLoadingErrors().isEmpty()) {
-            String err = String.join("\n", Core.getPluginsLoadingErrors());
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), err,
-                    OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
-        }
-
-        CoreEvents.fireApplicationStartup();
-
-        SwingUtilities.invokeLater(() -> {
-            // setVisible can't be executed directly, because we need to
-            // call all application startup listeners for initialize UI
-            Core.getMainWindow().getApplicationFrame().setVisible(true);
-
-            if (remoteProject != null) {
-                ProjectUICommands.projectRemote(remoteProject);
-            } else if (projectLocation != null) {
-                ProjectUICommands.projectOpen(projectLocation);
-            }
-        });
-        return 0;
-    }
-
-    private static void tweakX11AppName() {
-        try {
-            // Set X11 application class name to make some desktop user interfaces
-            // (like Gnome Shell) recognize OmegaT
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Class<?> cls = toolkit.getClass();
-            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
-                Field field = cls.getDeclaredField("awtAppClassName");
-                if (field.trySetAccessible()) {
-                    field.set(toolkit, "OmegaT");
-                }
-            }
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {
-        }
-    }
-
-    /**
-     * Execute in console mode for translate.
-     */
-    private static int runConsoleTranslate() throws Exception {
-        Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
-
-        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
-        Core.initializeConsole(PARAMS);
-
-        RealProject p = selectProjectConsoleMode(true);
-
-        validateTagsConsoleMode();
-
-        System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
-
-        String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
-        if (sourceMask != null) {
-            p.compileProject(sourceMask, false);
-        } else {
-            p.compileProject(".*", false);
-        }
-
-        // Called *after* executing post processing command (unlike the
-        // regular PROJECT_CHANGE_TYPE.COMPILE)
-        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
-
-        p.closeProject();
-        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
-
-        return 0;
-    }
-
-    /**
-     * Displays or writes project statistics.
-     * <p>
-     * takes two optional arguments
-     * <code>[--output-file=(file path) [--stats-type=[XML|JSON|TEXT]]]</code>
-     * when omitted, display stats text(localized). When file I/O error
-     * occurred, especially when parent directory does not exist warns it and
-     * return 1.
-     */
-    private static int runConsoleStats() throws Exception {
-        Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
-
-        Core.initializeConsole(PARAMS);
-
-        RealProject p = selectProjectConsoleMode(true);
-        StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
-
-        if (!PARAMS.containsKey(CLIParameters.STATS_OUTPUT)) {
-            // no output file specified, print to console.
-            System.out.println(projectStats.getTextData());
-            p.closeProject();
-            return 0;
-        }
-
-        String outputFilename = PARAMS.get(CLIParameters.STATS_OUTPUT);
-        StatOutputFormat statsMode;
-        if (PARAMS.containsKey(CLIParameters.STATS_MODE)) {
-            statsMode = StatOutputFormat.parse(PARAMS.get(CLIParameters.STATS_MODE));
-        } else {
-            // when no stats type specified, try to detect from file extension,
-            // otherwise XML.
-            if (outputFilename.toLowerCase().endsWith(StatOutputFormat.JSON.getFileExtension())) {
-                statsMode = StatOutputFormat.JSON;
-            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.XML.getFileExtension())) {
-                statsMode = StatOutputFormat.XML;
-            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.TEXT.getFileExtension())) {
-                statsMode = StatOutputFormat.TEXT;
-            } else {
-                statsMode = StatOutputFormat.XML;
-            }
-        }
-        try (OutputStreamWriter writer = new OutputStreamWriter(
-                Files.newOutputStream(Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), CREATE,
-                        TRUNCATE_EXISTING, WRITE),
-                StandardCharsets.UTF_8)) {
-            switch (statsMode) {
-            case TEXT:
-                writer.write(projectStats.getTextData());
-                break;
-            case JSON:
-                writer.write(projectStats.getJsonData());
-                break;
-            case XML:
-                writer.write(projectStats.getXmlData());
-                break;
-            default:
-                Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
-                break;
-            }
-        } catch (NoSuchFileException nsfe) {
-            Log.logErrorRB("CONSOLE_STATS_FILE_OPEN_ERROR");
-            return 1;
-        } finally {
-            p.closeProject();
-        }
-        return 0;
-    }
-
-    /**
-     * Validates tags according to command line specs:
-     * <code>--tag-validation=[abort|warn]</code>
-     * <p>
-     * On abort, the program is aborted when tag validation finds errors. On
-     * warn the errors are printed but the program continues. In all other cases
-     * no tag validation is done.
-     */
-    private static void validateTagsConsoleMode() {
-        TAG_VALIDATION_MODE mode = TAG_VALIDATION_MODE.parse(PARAMS.get(CLIParameters.TAG_VALIDATION));
-
-        List<ErrorReport> stes;
-
-        switch (mode) {
-        case ABORT:
-            System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            stes = Core.getTagValidation().listInvalidTags();
-            if (!stes.isEmpty()) {
-                Core.getTagValidation().logTagValidationErrors(stes);
-                System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
-                System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_ABORT"));
-                System.exit(1);
-            }
-            break;
-        case WARN:
-            System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            stes = Core.getTagValidation().listInvalidTags();
-            if (!stes.isEmpty()) {
-                Core.getTagValidation().logTagValidationErrors(stes);
-                System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
-            }
-            break;
-        default:
-            // do not validate tags = default
-        }
-    }
-
-    /**
-     * Execute in console mode for translate.
-     */
-    private static int runCreatePseudoTranslateTMX() throws Exception {
-        Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
-
-        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
-        Core.initializeConsole(PARAMS);
-
-        RealProject p = selectProjectConsoleMode(true);
-
-        validateTagsConsoleMode();
-
-        System.out.println(OStrings.getString("CONSOLE_CREATE_PSEUDOTMX"));
-
-        ProjectProperties config = p.getProjectProperties();
-        List<SourceTextEntry> entries = p.getAllEntries();
-        String pseudoTranslateTMXFilename = PARAMS.get(CLIParameters.PSEUDOTRANSLATETMX);
-        PSEUDO_TRANSLATE_TYPE pseudoTranslateType = PSEUDO_TRANSLATE_TYPE
-                .parse(PARAMS.get(CLIParameters.PSEUDOTRANSLATETYPE));
-
-        String fname;
-        if (!StringUtil.isEmpty(pseudoTranslateTMXFilename)) {
-            if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
-                fname = pseudoTranslateTMXFilename + "." + OConsts.TMX_EXTENSION;
-            } else {
-                fname = pseudoTranslateTMXFilename;
-            }
-        } else {
-            fname = "";
-        }
-
-        // Write OmegaT-project-compatible TMX:
-        try (TMXWriter2 wr = new TMXWriter2(new File(fname), config.getSourceLanguage(),
-                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), false, false)) {
-            for (SourceTextEntry ste : entries) {
-                switch (pseudoTranslateType) {
-                case EQUAL:
-                    wr.writeEntry(ste.getSrcText(), ste.getSrcText(), null, null, 0, null, 0, null);
-                    break;
-                case EMPTY:
-                    wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
-                    break;
-                default:
-                    // should not come here
-                    throw new IllegalArgumentException();
-                }
-            }
-        } catch (IOException e) {
-            Log.logErrorRB("CT_ERROR_CREATING_TMX");
-            Log.log(e);
-            throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
-        }
-        p.closeProject();
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
-        return 0;
-    }
-
-    public static int runConsoleAlign() throws Exception {
-        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
-
-        if (projectLocation == null) {
-            System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
-            return 1;
-        }
-
-        String dir = PARAMS.get(CLIParameters.ALIGNDIR);
-        if (dir == null) {
-            System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
-            return 1;
-        }
-
-        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
-        Core.initializeConsole(PARAMS);
-        RealProject p = selectProjectConsoleMode(true);
-
-        validateTagsConsoleMode();
-
-        System.out.println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
-
-        String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
-        ProjectProperties config = p.getProjectProperties();
-        boolean alt = !config.isSupportDefaultTranslations();
-        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
-                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
-            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(dir))), alt);
-        }
-        p.closeProject();
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
-        return 0;
-    }
-
-    /**
-     * creates the project class and adds it to the Core. Loads the project if
-     * specified. An exit occurs on error loading the project. This method is
-     * for the different console modes, to prevent code duplication.
-     *
-     * @param loadProject
-     *            load the project or not
-     * @return the project.
-     */
-    private static RealProject selectProjectConsoleMode(boolean loadProject) {
-        System.out.println(OStrings.getString("CONSOLE_LOADING_PROJECT"));
-
-        // check if project okay
-        ProjectProperties projectProperties = null;
-        try {
-            projectProperties = ProjectFileStorage.loadProjectProperties(projectLocation);
-            projectProperties.verifyProject();
-        } catch (Exception ex) {
-            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-            System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
-            System.exit(1);
-        }
-
-        RealProject p = new RealProject(projectProperties);
-        Core.setProject(p);
-        if (loadProject) {
-            p.loadProject(true);
-            if (!p.isProjectLoaded()) {
-                Core.setProject(new NotLoadedProject());
-            } else {
-                executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
-            }
-
-        }
-        return p;
-    }
-
-    /**
-     * Execute a script as PROJECT_CHANGE events. We can't use the regular
-     * project listener because the SwingUtilities.invokeLater method used in
-     * CoreEvents doesn't stop the project processing in console mode.
-     */
-    private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        if (PARAMS.containsKey(CLIParameters.SCRIPT)) {
-            File script = new File(PARAMS.get("script"));
-            Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
-            if (script.isFile()) {
-                HashMap<String, Object> binding = new HashMap<>();
-                binding.put("eventType", eventType);
-
-                ConsoleBindings consoleBindigs = new ConsoleBindings();
-                binding.put(ScriptRunner.VAR_CONSOLE, consoleBindigs);
-                binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindigs);
-                binding.put(ScriptRunner.VAR_EDITOR, consoleBindigs);
-
-                try {
-                    String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
-                    Log.log(result);
-                } catch (Exception ex) {
-                    Log.log(ex);
-                }
-            } else {
-                Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
-            }
-        }
-    }
-
-    public static void showError(Throwable ex) {
-        String msg;
-        if (StringUtil.isEmpty(ex.getMessage())) {
-            msg = ex.getClass().getName();
-        } else {
-            msg = ex.getMessage();
-        }
-        switch (runMode) {
-        case GUI:
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg,
-                    OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
-            break;
-        default:
-            System.err.println(MessageFormat.format(OStrings.getString("CONSOLE_ERROR"), msg));
-            break;
-        }
-    }
 }

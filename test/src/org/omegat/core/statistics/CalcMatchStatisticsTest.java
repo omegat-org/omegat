@@ -72,7 +72,7 @@ public class CalcMatchStatisticsTest {
      */
     @Before
     public final void setUp() throws Exception {
-        Core.initializeConsole(Collections.emptyMap());
+        Core.initializeConsole();
         TestPreferencesInitializer.init();
         filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
     }

@@ -56,6 +56,9 @@ tasks.named("test", Test) {
     if (project.hasProperty('headless')) {
         systemProperty 'java.awt.headless', 'true'
     }
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PtestMaxHeapSize=2048M test`
+    maxHeapSize = findProperty('testMaxHeapSize')
     systemProperty 'java.util.logging.config.file', layout.settingsDirectory.file("config/test/logger.properties").asFile
 }
 

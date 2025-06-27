@@ -32,7 +32,7 @@ import org.omegat.core.spellchecker.AbstractHunspellDictionary;
 
 public class PortugueseHunspellDictionary extends AbstractHunspellDictionary {
 
-    private static final String DICTIONARY_BASE = "/org/languagetool/resource/pt/hunspell/";
+    private static final String DICTIONARY_BASE = "/org/omegat/languages/pt/hunspell/";
     private static final String[] HUNSPELL = { "pt_PT", "pt_BR", "pt_MZ", "pt_AO" };
 
     @Override

@@ -131,7 +131,7 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
 
     protected abstract String getPreferenceName();
 
-    protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
+    protected abstract @Nullable String translate(Language sLang, Language tLang, String text) throws Exception;
 
     private String getCache(Language sLang, Language tLang, String text) {
         return cache.get(sLang + "/" + tLang + "/" + text);

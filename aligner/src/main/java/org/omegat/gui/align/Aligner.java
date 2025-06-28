@@ -85,7 +85,6 @@ import gen.core.filters.Filters;
  */
 public class Aligner {
 
-    private static final ILogger LOGGER = LoggerFactory.getLogger(Aligner.class);
     final String srcFile;
     final Language srcLang;
     final String trgFile;
@@ -406,9 +405,13 @@ public class Aligner {
      * @return List of beads aligned heapwise
      */
     private Stream<Alignment> alignHeapwise(boolean doSegmenting) {
-        List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
-        List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
-        return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
+        if (srcRaw != null && trgRaw != null) {
+            List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
+            List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
+            return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
+        } else {
+            return Stream.empty();
+        }
     }
 
     /**
@@ -422,21 +425,11 @@ public class Aligner {
      *             when got I/O error.
      */
     public void writePairsToTMX(File outFile, List<Entry<String, String>> pairs) throws Exception {
-        TMXWriter2 writer = null;
         String creator = OStrings.getApplicationName() + " Aligner";
         long time = System.currentTimeMillis();
-        try {
-            writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, false);
+        try (TMXWriter2 writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, false)) {
             for (Entry<String, String> e : pairs) {
                 writer.writeEntry(e.getKey(), e.getValue(), null, creator, time, null, 0L, null);
-            }
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception ex) {
-                    LOGGER.atInfo().setCause(ex).log();
-                }
             }
         }
     }
@@ -453,6 +446,9 @@ public class Aligner {
     Stream<Alignment> alignImpl() throws Exception {
         if (srcRaw == null || trgRaw == null) {
             loadFiles();
+        }
+        if (comparisonMode == null) {
+            throw new IllegalStateException("Comparison mode not set");
         }
         switch (comparisonMode) {
         case PARSEWISE:

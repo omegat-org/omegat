@@ -155,8 +155,9 @@ public final class AlignerModule implements IApplicationEventListener {
      * @param defaultSaveDir
      *            The default directory used for saving aligned files.
      */
-    public void alignerShow(@Nullable Language sourceLanguage, @Nullable String sourceFile, @Nullable Language targetLanguage,
-            @Nullable String targetFile, @Nullable String defaultDir, @Nullable String defaultSaveDir) {
+    public void alignerShow(@Nullable Language sourceLanguage, @Nullable String sourceFile,
+                            @Nullable Language targetLanguage, @Nullable String targetFile, @Nullable String defaultDir,
+                            @Nullable String defaultSaveDir) {
         AlignFilePickerController picker = new AlignFilePickerController();
         if (sourceLanguage != null) {
             picker.setSourceLanguage(sourceLanguage);

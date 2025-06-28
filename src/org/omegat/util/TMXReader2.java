@@ -154,24 +154,7 @@ public class TMXReader2 {
         boolean allFound = true;
 
         try (InputStream in = getInputStream(file)) {
-            xml = factory.createXMLEventReader(in);
-            while (xml.hasNext()) {
-                XMLEvent e = xml.nextEvent();
-                switch (e.getEventType()) {
-                case XMLEvent.START_ELEMENT:
-                    StartElement eStart = (StartElement) e;
-                    if ("tu".equals(eStart.getName().getLocalPart())) {
-                        parseTu(eStart);
-                        ParsedTuv origTuv = getTuvByLang(sourceLanguage);
-                        ParsedTuv targetTuv = getTuvByLang(targetLanguage);
-                        allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype)
-                                && allFound;
-                    } else if ("header".equals(eStart.getName().getLocalPart())) {
-                        parseHeader(eStart, sourceLanguage);
-                    }
-                    break;
-                }
-            }
+            readTMX(in, sourceLanguage, targetLanguage, callback);
         } catch (XMLStreamException ex) {
             Log.logErrorRB(ex, "TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath());
             throw ex;
@@ -189,6 +172,33 @@ public class TMXReader2 {
         Log.logInfoRB("TMXR_INFO_READING_COMPLETE");
         if (errorsCount > 0 || warningsCount > 0) {
             LOGGER.atDebug().log("Errors: {}, Warnings: {}", errorsCount, warningsCount);
+        }
+    }
+
+    public void readTMX(InputStream in, final Language sourceLanguage, final Language targetLanguage,
+                final LoadCallback callback) throws Exception {
+        boolean allFound = true;
+        try {
+            xml = factory.createXMLEventReader(in);
+            while (xml.hasNext()) {
+                XMLEvent e = xml.nextEvent();
+                if (e.getEventType() == XMLEvent.START_ELEMENT) {
+                    StartElement eStart = (StartElement) e;
+                    if ("tu".equals(eStart.getName().getLocalPart())) {
+                        parseTu(eStart);
+                        ParsedTuv origTuv = getTuvByLang(sourceLanguage);
+                        ParsedTuv targetTuv = getTuvByLang(targetLanguage);
+                        allFound = callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype)
+                                && allFound;
+                    } else if ("header".equals(eStart.getName().getLocalPart())) {
+                        parseHeader(eStart, sourceLanguage);
+                    }
+                }
+            }
+        } finally {
+            if (xml != null) {
+                xml.close();
+            }
         }
     }
 

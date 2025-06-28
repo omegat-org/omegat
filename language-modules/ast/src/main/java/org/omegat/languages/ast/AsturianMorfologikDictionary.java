@@ -28,10 +28,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import morfologik.stemming.Dictionary;
+import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 import org.omegat.core.spellchecker.SpellCheckDictionaryType;
+
 
 public class AsturianMorfologikDictionary implements ISpellCheckerDictionary, AutoCloseable {
 
@@ -41,10 +43,13 @@ public class AsturianMorfologikDictionary implements ISpellCheckerDictionary, Au
     private InputStream dictInputStream;
 
     @Override
-    public Dictionary getMorfologikDictionary(String language) {
+    public @Nullable Dictionary getMorfologikDictionary(String language) {
         if ("ast_ES".startsWith(language)) {
             infoInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "ast_ES.info");
             dictInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "ast_ES.dict");
+            if (infoInputStream == null || dictInputStream == null) {
+                return null;
+            }
             try {
                 return Dictionary.read(dictInputStream, infoInputStream);
             } catch (IOException ignored) {
@@ -60,6 +65,15 @@ public class AsturianMorfologikDictionary implements ISpellCheckerDictionary, Au
 
     @Override
     public void close() {
+        if (infoInputStream != null) {
+            try {
+                infoInputStream.close();
+            } catch (IOException ignored) {
+            }
+        }
+        if (dictInputStream != null) {
+
+        }
         try {
             infoInputStream.close();
             dictInputStream.close();

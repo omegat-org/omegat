@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
+import org.jetbrains.annotations.Nullable;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -46,7 +47,7 @@ import org.omegat.util.gui.MenuExtender;
 public final class AlignerModule implements IApplicationEventListener {
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
-    private static IApplicationEventListener alignerListener;
+    private static @Nullable IApplicationEventListener alignerListener;
 
     private AlignerModule() {
     }
@@ -65,8 +66,8 @@ public final class AlignerModule implements IApplicationEventListener {
         }
     }
 
-    private JMenuItem alignerMenu;
-    private Component mainWindow = null;
+    private @Nullable JMenuItem alignerMenu;
+    private @Nullable Component mainWindow = null;
 
     @Override
     public void onApplicationStartup() {
@@ -124,8 +125,8 @@ public final class AlignerModule implements IApplicationEventListener {
      * @param targetFile
      *            The path to the target file to be aligned.
      */
-    public void alignerShow(String sourceLanguage, String sourceFile, String targetLanguage,
-            String targetFile) {
+    public void alignerShow(String sourceLanguage, @Nullable String sourceFile,
+                            String targetLanguage, @Nullable String targetFile) {
         Language srcLang = null;
         Language trgLang = null;
         if (sourceLanguage != null && !sourceLanguage.isEmpty()) {
@@ -154,8 +155,8 @@ public final class AlignerModule implements IApplicationEventListener {
      * @param defaultSaveDir
      *            The default directory used for saving aligned files.
      */
-    public void alignerShow(Language sourceLanguage, String sourceFile, Language targetLanguage,
-            String targetFile, String defaultDir, String defaultSaveDir) {
+    public void alignerShow(@Nullable Language sourceLanguage, @Nullable String sourceFile, @Nullable Language targetLanguage,
+            @Nullable String targetFile, @Nullable String defaultDir, @Nullable String defaultSaveDir) {
         AlignFilePickerController picker = new AlignFilePickerController();
         if (sourceLanguage != null) {
             picker.setSourceLanguage(sourceLanguage);

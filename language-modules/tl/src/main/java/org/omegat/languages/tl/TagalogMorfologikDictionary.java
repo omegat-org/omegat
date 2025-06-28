@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import morfologik.stemming.Dictionary;
+import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
@@ -41,11 +42,11 @@ public class TagalogMorfologikDictionary implements ISpellCheckerDictionary, Aut
     private static final String META_EXT = ".info";
     private static final String DICT = "tl_PH";
 
-    private InputStream infoInputStream;
-    private InputStream dictInputStream;
+    private @Nullable InputStream infoInputStream;
+    private @Nullable InputStream dictInputStream;
 
     @Override
-    public Dictionary getMorfologikDictionary(String language) {
+    public @Nullable Dictionary getMorfologikDictionary(String language) {
         if (DICT.startsWith(language)) {
             infoInputStream = JLanguageTool.getDataBroker()
                     .getAsStream(DICTIONARY_BASE + DICT + META_EXT);

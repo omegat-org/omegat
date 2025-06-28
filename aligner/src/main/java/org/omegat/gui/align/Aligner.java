@@ -55,8 +55,6 @@ import net.loomchild.maligna.filter.aligner.align.hmm.viterbi.ViterbiAlgorithm;
 import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
 import org.jetbrains.annotations.Nullable;
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
 
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;

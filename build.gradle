@@ -258,7 +258,6 @@ dependencies {
         // for architectures other than x86_64 on linux
         launch4jBin 'org.omegat:launch4j:3.55:workdir-linux'
     }
-
     subprojects.findAll { it.getSubprojects().isEmpty()}.collect {jacocoAggregation it}
 }
 
@@ -506,6 +505,16 @@ remotes {
 }
 publishAtomically(name: 'webManual', sourceTask: manualHtmls)
 publishAtomically(name: 'javadoc', sourceTask: javadoc)
+
+allprojects {
+    afterEvaluate {
+        tasks.findByName('compileJava')?.configure {
+            if (project == rootProject) {
+                options.errorprone.allErrorsAsWarnings = true
+            }
+        }
+    }
+}
 
 nexusPublishing.repositories {
     sonatype {

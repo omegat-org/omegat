@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -62,7 +63,7 @@ public class RcFilter extends AbstractFilter {
         DIALOG, MENU, MESSAGETABLE, STRINGTABLE, OTHER, UNKNOWN
     }
 
-    protected String blockId;
+    protected @Nullable String blockId;
     protected int b;
     protected int e;
 

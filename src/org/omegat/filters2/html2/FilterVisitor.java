@@ -48,6 +48,7 @@ import org.htmlparser.Tag;
 import org.htmlparser.Text;
 import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.util.HTMLUtils;
@@ -107,10 +108,10 @@ public class FilterVisitor extends NodeVisitor {
      * <li>Otherwise they are written out directly.
      * </ul>
      */
-    protected List<Node> precedingNodes;
+    protected @Nullable List<Node> precedingNodes;
 
     /** The list of nodes forming a chunk of text. */
-    protected List<Node> translatableNodes;
+    protected @Nullable List<Node> translatableNodes;
 
     /**
      * The list of non-paragraph tags following a chunk of text.
@@ -120,14 +121,14 @@ public class FilterVisitor extends NodeVisitor {
      * <li>Otherwise (eg if a paragraph tag follows), they are written out directly.
      * </ul>
      */
-    protected List<Node> followingNodes;
+    protected @Nullable List<Node> followingNodes;
 
     /** The tags behind the shortcuts */
-    protected List<Node> sTags;
+    protected @Nullable List<Node> sTags;
     /** The tag numbers of shorcutized tags */
-    protected List<Integer> sTagNumbers;
+    protected @Nullable List<Integer> sTagNumbers;
     /** The list of all the tag shortcuts */
-    protected List<String> sShortcuts;
+    protected @Nullable List<String> sShortcuts;
     /** The number of shortcuts stored */
     int sNumShortcuts;
 

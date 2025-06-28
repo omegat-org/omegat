@@ -25,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,29 +49,29 @@ public class ProtectedPart {
      *
      * Used for identify protected part.
      */
-    protected String textInSourceSegment;
+    protected @Nullable String textInSourceSegment;
 
     /**
      * Original full tag text or other information from source file.
      *
      * Used for display tooltips.
      */
-    protected String detailsFromSourceFile;
+    protected @Nullable String detailsFromSourceFile;
 
     /**
      * Replacement for word count calculation.
      */
-    protected String replacementWordsCountCalculation;
+    protected @Nullable String replacementWordsCountCalculation;
 
     /**
      * Replacement for unique and remaining calculation.
      */
-    protected String replacementUniquenessCalculation;
+    protected @Nullable String replacementUniquenessCalculation;
 
     /**
      * Replacement for match calculation.
      */
-    protected String replacementMatchCalculation;
+    protected @Nullable String replacementMatchCalculation;
 
     public String getTextInSourceSegment() {
         return textInSourceSegment;

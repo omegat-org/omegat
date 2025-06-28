@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
@@ -65,9 +66,11 @@ public class MozillaLangFilter extends AbstractFilter {
         WAIT_SOURCE, WAIT_TARGET
     };
 
-    private StringBuilder source, target, localizationNote;
+    private @Nullable StringBuilder source;
+    private @Nullable StringBuilder target;
+    private @Nullable StringBuilder localizationNote;
 
-    private BufferedWriter out;
+    private @Nullable BufferedWriter out;
 
     /**
      * Register plugin into OmegaT.
@@ -214,7 +217,7 @@ public class MozillaLangFilter extends AbstractFilter {
      *            An optional comment associated with the source and
      *            translation.
      */
-    protected void align(String source, String translation, String comments) {
+    protected void align(String source, @Nullable String translation, @Nullable String comments) {
         if (entryParseCallback != null) {
             List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source,
                     PatternConsts.PRINTF_VARS, null);

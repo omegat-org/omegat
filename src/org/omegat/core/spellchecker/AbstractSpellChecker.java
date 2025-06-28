@@ -42,6 +42,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.Log;
 
 import org.omegat.core.Core;
@@ -61,7 +62,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     /**
      * The spell checking provider.
      */
-    private ISpellCheckerProvider checker;
+    private @Nullable ISpellCheckerProvider checker;
 
     /**
      * the list of ignored words
@@ -85,18 +86,18 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     public AbstractSpellChecker() {
         CoreEvents.registerProjectChangeListener(eventType -> {
             switch (eventType) {
-                case LOAD:
-                case CREATE:
-                    initialize();
-                    break;
-                case SAVE:
-                    saveWordLists();
-                    break;
-                case CLOSE:
-                    destroy();
-                    break;
-                default:
-                    // Nothing
+            case LOAD:
+            case CREATE:
+                initialize();
+                break;
+            case SAVE:
+                saveWordLists();
+                break;
+            case CLOSE:
+                destroy();
+                break;
+            default:
+                // Nothing
             }
             resetCache();
         });

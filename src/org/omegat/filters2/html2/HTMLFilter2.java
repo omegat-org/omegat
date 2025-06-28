@@ -42,6 +42,7 @@ import java.util.regex.PatternSyntaxException;
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -76,28 +77,28 @@ public class HTMLFilter2 extends AbstractFilter {
     }
 
     /** Stores the source encoding of HTML file. */
-    private String sourceEncoding;
+    private @Nullable String sourceEncoding;
 
     /** Stores the target encoding of HTML file. */
-    private String targetEncoding;
+    private @Nullable String targetEncoding;
 
     /**
      * A regular Expression Pattern to be matched to the strings to be
      * translated. If there is a match, the string should not be translated
      */
-    private Pattern skipRegExpPattern;
+    private @Nullable Pattern skipRegExpPattern;
 
     /**
      * A map of attribute-name and attribute value pairs that, if it exist in a
      * meta-tag, indicates that the meta-tag should not be translated
      */
-    private HashMap<String, String> skipMetaAttributes;
+    private @Nullable HashMap<String, String> skipMetaAttributes;
 
     /**
      * A map of attribute-name and attribute value pairs that, if exist in a
      * tag, indicate that this tag should not be translated
      */
-    private HashMap<String, String> ignoreTagsAttributes;
+    private @Nullable HashMap<String, String> ignoreTagsAttributes;
 
     @Override
     protected boolean requirePrevNextFields() {
@@ -277,7 +278,7 @@ public class HTMLFilter2 extends AbstractFilter {
      *         options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             EditOptionsDialog dialog = new EditOptionsDialog(parent, config);
             dialog.setVisible(true);

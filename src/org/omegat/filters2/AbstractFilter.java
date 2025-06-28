@@ -49,6 +49,7 @@ import java.util.Objects;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.input.BOMInputStream;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
@@ -132,8 +133,8 @@ public abstract class AbstractFilter implements IFilter {
     /** Microsoft. */
     public static final String TFP_TARGET_LOCALE_LCID = "${targetLocaleLCID}";
 
-    protected String inEncodingLastParsedFile;
-    protected ByteOrderMark bomLastParsedFile;
+    protected @Nullable String inEncodingLastParsedFile;
+    protected @Nullable ByteOrderMark bomLastParsedFile;
 
     /** All target filename patterns. */
     private static final String[] TARGET_FILENAME_PATTERNS = new String[] { TFP_FILENAME, TFP_NAMEONLY,
@@ -151,16 +152,16 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /** Callback for parse. */
-    protected IParseCallback entryParseCallback;
+    protected @Nullable IParseCallback entryParseCallback;
 
     /** Callback for translate. */
-    protected ITranslateCallback entryTranslateCallback;
+    protected @Nullable ITranslateCallback entryTranslateCallback;
 
     /** Callback for align. */
-    protected IAlignCallback entryAlignCallback;
+    protected @Nullable IAlignCallback entryAlignCallback;
 
     /** Options for processing time. */
-    protected Map<String, String> processOptions;
+    protected @Nullable Map<String, String> processOptions;
 
     /**
      * The default output filename pattern.
@@ -304,7 +305,7 @@ public abstract class AbstractFilter implements IFilter {
 
     @Deprecated
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+    public @Nullable Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         return null;
     }
 
@@ -352,7 +353,7 @@ public abstract class AbstractFilter implements IFilter {
      * @throws IOException
      *             If any I/O Error occurs upon writer creation
      */
-    protected BufferedWriter createWriter(File outFile, String outEncoding)
+    protected @Nullable BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException {
         if (outFile == null) {
             return null;

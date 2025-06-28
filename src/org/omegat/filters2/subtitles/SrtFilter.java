@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -57,11 +58,11 @@ public class SrtFilter extends AbstractFilter {
         WAIT_TIME, WAIT_TEXT
     };
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
-    protected String key;
+    protected @Nullable String key;
     protected StringBuilder text = new StringBuilder();
-    protected BufferedWriter out;
+    protected @Nullable BufferedWriter out;
 
     /**
      * Register plugin into OmegaT.

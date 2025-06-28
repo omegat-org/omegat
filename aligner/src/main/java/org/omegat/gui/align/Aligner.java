@@ -54,6 +54,7 @@ import net.loomchild.maligna.filter.aligner.align.hmm.fb.ForwardBackwardAlgorith
 import net.loomchild.maligna.filter.aligner.align.hmm.viterbi.ViterbiAlgorithm;
 import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -155,14 +156,14 @@ public class Aligner {
         CHAR, WORD
     }
 
-    ComparisonMode comparisonMode;
+    @Nullable ComparisonMode comparisonMode;
     AlgorithmClass algorithmClass;
     CalculatorType calculatorType;
     CounterType counterType;
 
-    private List<String> srcRaw;
-    private List<String> trgRaw;
-    private List<Entry<String, String>> idPairs;
+    private @Nullable List<String> srcRaw;
+    private @Nullable List<String> trgRaw;
+    private @Nullable List<Entry<String, String>> idPairs;
     List<ComparisonMode> allowedModes;
     private Segmenter segmenter;
     private final FilterMaster fm;

@@ -47,6 +47,7 @@ import javax.swing.JPanel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -90,8 +91,8 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     private static final String IAM_TOKEN_URL = "https://iam.api.cloud.yandex.net/iam/v1/tokens";
     private static final String TRANSLATE_URL = "https://translate.api.cloud.yandex.net/translate/v2/translate";
 
-    private String IAMErrorMessage = null;
-    private String cachedIAMToken = null;
+    private @Nullable String IAMErrorMessage = null;
+    private @Nullable String cachedIAMToken = null;
     private long lastIAMTokenTime = 0L;
     private static final String BUNDLE_BASENAME = "org.omegat.machinetranslators.yandex.Bundle";
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(BUNDLE_BASENAME);
@@ -124,7 +125,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text)
+    protected @Nullable String translate(final Language sLang, final Language tLang, final String text)
             throws Exception {
         String oAuthToken = getCredential(PROPERTY_OAUTH_TOKEN);
         if (oAuthToken == null || oAuthToken.isEmpty()) {

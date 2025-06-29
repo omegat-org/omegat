@@ -232,6 +232,11 @@ public final class Preferences {
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
     /** Workflow Option: Export current segment */
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment";
+
+    /** Editor Option:  When activated, a single mouse click activates a segment
+     *  in addition to the usual double click)  */
+    public static final String SINGLE_CLICK_SEGMENT_ACTIVATION = "wf_singleClickSegmentActivation";
+
     /**
      * Workflow Option: Go To Next Untranslated Segment stops when there is at
      * least one alternative translation

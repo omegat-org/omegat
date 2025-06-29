@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
@@ -80,14 +81,14 @@ import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIDesignManager;
 
 /**
- * Class which contains all components instances.
- *
+ * Class which contains all components' instances.
+ * <p>
  * Note about threads synchronization: each component must have only local
  * synchronization. It mustn't synchronize around other components or some other
  * objects.
- *
- * Components which works in Swing UI thread can have other synchronization
- * idea: it can not be synchronized to access to some data which changed only in
+ * <p>
+ * Components that work in Swing UI thread can have another synchronization
+ * idea: it cannot be synchronized to access to some data that changed only in
  * UI thread.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -124,10 +125,8 @@ public final class Core {
 
     private static Map<String, String> cmdLineParams = Collections.emptyMap();
 
-    private static final List<String> PLUGINS_LOADING_ERRORS = Collections
-            .synchronizedList(new ArrayList<String>());
-
-    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
+    private static final List<String> PLUGINS_LOADING_ERRORS = Collections.synchronizedList(new ArrayList<>());
+    private static final List<IMarker> MARKERS = new ArrayList<>();
 
     /** Get project instance. */
     public static IProject getProject() {
@@ -241,7 +240,7 @@ public final class Core {
      * @throws Exception when error occurred.
      * @deprecated since 6.1.0
      */
-    @Deprecated(since = "6.1.0")
+    @Deprecated(since = "6.1.0", forRemoval = true)
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
         initializeGUI(params);
     }
@@ -272,7 +271,7 @@ public final class Core {
 
     /**
      * initialize GUI body.
-     * @throws Exception
+     * @throws Exception when an unexpected error happened.
      */
     static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
@@ -309,24 +308,6 @@ public final class Core {
         tagValidation = new TagValidationTool();
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
-    }
-
-    /**
-     * Set main window instance for unit tests.
-     *
-     * @param mainWindow
-     */
-    protected static void setMainWindow(IMainWindow mainWindow) {
-        Core.mainWindow = mainWindow;
-    }
-
-    /**
-     * Set project instance for unit tests.
-     *
-     * @param currentProject
-     */
-    protected static void setCurrentProject(IProject currentProject) {
-        Core.currentProject = currentProject;
     }
 
     /**
@@ -423,4 +404,52 @@ public final class Core {
     public interface RunnableWithException {
         void run() throws Exception;
     }
+
+    // -- methods for testing
+
+    /**
+     * Set main window instance for unit tests.
+     *
+     * @param mainWindow main window object to hold.
+     */
+    @VisibleForTesting
+    static void setMainWindow(IMainWindow mainWindow) {
+        Core.mainWindow = mainWindow;
+    }
+
+    /**
+     * Set project instance for unit tests.
+     *
+     * @param currentProject project object to hold.
+     */
+    @VisibleForTesting
+    static void setCurrentProject(IProject currentProject) {
+        Core.currentProject = currentProject;
+    }
+
+    @VisibleForTesting
+    static void setEditor(IEditor newEditor) {
+        editor = newEditor;
+    }
+
+    @VisibleForTesting
+    static void setTagValidation(ITagValidation newTagValidation) {
+        tagValidation = newTagValidation;
+    }
+
+    @VisibleForTesting
+    static void setSaveThread(IAutoSave newSewAutoSave) {
+        saveThread = newSewAutoSave;
+    }
+
+    @VisibleForTesting
+    static void setGlossary(IGlossaries newGlossary) {
+        glossary = newGlossary;
+    }
+
+    @VisibleForTesting
+    static void setNotes(INotes newNotes) {
+        notes = newNotes;
+    }
+
 }

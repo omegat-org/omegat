@@ -196,6 +196,7 @@ public class MapRule implements Serializable {
     /**
      * Indicates whether some other MapRule is "equal to" this one.
      */
+    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof MapRule)) {
             return false;
@@ -208,6 +209,7 @@ public class MapRule implements Serializable {
     /**
      * Returns a hash code value for the object.
      */
+    @Override
     public int hashCode() {
         return this.getPattern().hashCode() + this.getLanguage().hashCode() + this.getRules().hashCode();
     }
@@ -215,6 +217,7 @@ public class MapRule implements Serializable {
     /**
      * Returns a string representation of the MapRule for debugging purposes.
      */
+    @Override
     public String toString() {
         return getLanguage() + " (" + getPattern() + ") " + getRules().toString();
     }

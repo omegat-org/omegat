@@ -44,6 +44,7 @@ import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
+import org.apache.commons.io.FileUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -170,7 +171,7 @@ public class OmegaTFileHandler extends StreamHandler {
         super.close();
         try {
             lockStream.close();
-            Files.deleteIfExists(Paths.get(lockFile.getAbsolutePath()));
+            FileUtils.deleteQuietly(lockFile);
         } catch (IOException ex) {
             // shouldn't happen
             Log.log(ex);

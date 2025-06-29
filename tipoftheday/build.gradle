@@ -14,6 +14,7 @@ dependencies {
                                                                        '**/jstyleparser-*.jar'])
     } else {
         implementation(libs.tipoftheday)
+        implementation(libs.jetbrains.annotations)
         compileOnly(libs.jackson.yaml)
     }
 }

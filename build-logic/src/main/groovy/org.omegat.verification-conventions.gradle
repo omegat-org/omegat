@@ -95,10 +95,10 @@ tasks.register('runDebugger', JavaExec) {
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
-tasks.register('runOnJava17', JavaExec) {
-    description = 'Runs application on Java 17.'
+tasks.register('runOnJava11', JavaExec) {
+    description = 'Runs application on Java 11.'
     javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(11)
         vendor = JvmVendorSpec.ADOPTIUM
     }
     mainClass.set application.mainClass
@@ -153,19 +153,6 @@ tasks.register('testIntegration', JavaExec) {
     maxHeapSize = findProperty('runMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
-}
-
-tasks.register('testOnJava17', Test) {
-    description = 'Runs test cases on Java 17.'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    group = 'verification'
 }
 
 tasks.register('testOnJava21', Test) {

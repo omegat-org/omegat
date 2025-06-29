@@ -44,7 +44,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * Filter for support Windows resource files.
- *
+ * <p>
  * Format described on
  * http://msdn.microsoft.com/en-us/library/aa380599(VS.85).aspx
  *
@@ -60,7 +60,7 @@ public class RcFilter extends AbstractFilter {
 
     enum PART {
         DIALOG, MENU, MESSAGETABLE, STRINGTABLE, OTHER, UNKNOWN
-    };
+    }
 
     protected String blockId;
     protected int b;
@@ -78,18 +78,22 @@ public class RcFilter extends AbstractFilter {
     public static void unloadPlugins() {
     }
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("RCFILTER_FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.rc") };
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }

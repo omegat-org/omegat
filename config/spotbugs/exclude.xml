@@ -180,6 +180,15 @@
         <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>
     </Match>
 
+    <!-- Ignores positive-false detections -->
+    <Match>
+        <Or>
+            <Class name="org.omegat.filters3.xml.xliff.XLIFFFilter"/>
+            <Class name="org.omegat.filters2.po.PoFilter"/>
+        </Or>
+        <Bug pattern="NP_NULL_ON_SOME_PATH"/>
+    </Match>
+
     <!-- Temporarily exclude to enable minimum chechks -->
     <Match>
         <Class name="org.omegat.util.Platform"/>
@@ -228,10 +237,7 @@
         </Or>
         <Bug pattern="HSM_HIDING_METHOD"/>
     </Match>
-    <Match>
-        <Class name="org.omegat.filters4.xml.xliff.AbstractXliffFilter"/>
-        <Bug pattern="NP_NULL_ON_SOME_PATH"/>
-    </Match>
+
     <Match>
         <Class name="org.omegat.gui.editor.EditorController"/>
         <Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>

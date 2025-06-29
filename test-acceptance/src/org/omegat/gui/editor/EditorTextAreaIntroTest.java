@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2024-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,34 +22,30 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+package org.omegat.gui.editor;
 
-package org.omegat.convert.v20to21.data;
+import java.util.Locale;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.junit.Rule;
+import org.junit.Test;
 
-/**
- * Wrapper around all the file filter classes. Is a JavaBean, so that it's easy
- * to write/read it to/from XML file and provides a table model.
- *
- * @author Maxym Mykhalchuk
- */
-public class Filters {
-    /** Holds the list of available filters. */
-    private List<OneFilter> filters = new ArrayList<OneFilter>();
+import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.util.LocaleRule;
+import org.omegat.util.OStrings;
 
-    /**
-     * Returns all the filters as an array.
-     */
-    public OneFilter[] getFilter() {
-        return filters.toArray(new OneFilter[filters.size()]);
+public class EditorTextAreaIntroTest extends TestCoreGUI {
+
+    @Rule
+    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+
+    @Test
+    public void testIntroPaneExist() {
+        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).requireEnabled();
+        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane").requireEnabled();
+        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
+                .verticalScrollBar().requireVisible();
+        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
+                .horizontalScrollBar().requireNotVisible();
     }
 
-    /**
-     * Sets all filters from the array.
-     */
-    public void setFilter(OneFilter[] filter) {
-        filters = new ArrayList<OneFilter>(Arrays.asList(filter));
-    }
 }

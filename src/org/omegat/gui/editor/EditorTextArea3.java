@@ -52,6 +52,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
 import javax.swing.text.MutableAttributeSet;
@@ -73,6 +74,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
+import org.omegat.util.Preferences;
+
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
@@ -227,11 +230,11 @@ public class EditorTextArea3 extends JEditorPane {
      * implementation. In this case, we don't need it.
      */
     public @Nullable Document3 getOmDocument() {
-        try {
-            return (Document3) getDocument();
-        } catch (ClassCastException ex) {
-            return null;
+        Document doc = getDocument();
+        if (doc instanceof Document3) {
+            return (Document3) doc;
         }
+        return null;
     }
 
     /**
@@ -257,6 +260,23 @@ public class EditorTextArea3 extends JEditorPane {
         public void mouseClicked(MouseEvent e) {
             autoCompleter.setVisible(false);
 
+            boolean singleClickSegmentActivation =
+                    Preferences.isPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION);
+            System.out.println("Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION: " + (singleClickSegmentActivation ? "ENABLED" : "DISABLED"));
+
+            if (singleClickSegmentActivation
+                   && e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 1
+                   && lockCursorToInputArea) {
+               int location = getCaretPosition();
+               int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());
+               int segmentIndex = controller.getSegmentIndexAtLocation(location);
+               int startLocation = controller.getStartForSegmentWithIndex(segmentIndex);
+               int offset = mousepos - startLocation;
+               boolean changed = controller.goToSegmentAtLocationAndJumpToOffset(mousepos, offset);
+               if (changed) {
+                   return;
+               }
+           }
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());

@@ -38,12 +38,11 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -105,13 +104,13 @@ public class FilterMasterTest {
             throw new ExceptionInInitializerError(ex);
         }
         Filters filtersConfig = (Filters) unm.unmarshal(new StringReader(filters));
-        List<Option> option = filtersConfig.getFilters().get(0).getOption();
+        List<Option> option = filtersConfig.getFilter().get(0).getOption();
         assertFalse("Desierialized <option/> is empty", option.isEmpty());
         assertNull(option.get(0).getName());
 
         XmlMapper mapper = FilterMaster.getMapper();
         Filters filtersConfig2 = mapper.readValue(filters, Filters.class);
-        List<Option> option2 = filtersConfig2.getFilters().get(0).getOption();
+        List<Option> option2 = filtersConfig2.getFilter().get(0).getOption();
         assertFalse("Desierialized <option/> is empty", option2.isEmpty());
         assertNull(option2.get(0).getName());
     }
@@ -125,7 +124,7 @@ public class FilterMasterTest {
         defaultFilters.setRemoveTags(true);
         defaultFilters.setRemoveSpacesNonseg(true);
 
-        assertEquals("More than one filter found", 1, defaultFilters.getFilters().size());
+        assertEquals("More than one filter found", 1, defaultFilters.getFilter().size());
         FilterMaster fm = new FilterMaster(defaultFilters);
 
         // Note that if we use `loadFile(fm)` here, the default configuration
@@ -135,12 +134,11 @@ public class FilterMasterTest {
         assertTrue("Temp filters.xml file not created", tempFilter.exists());
 
         Filters loadedFilters = FilterMaster.loadConfig(tempFilter);
-        assertEquals("More than one filter found in serialized filters", 1,
-                loadedFilters.getFilters().size());
+        assertEquals("More than one filter found in serialized filters", 1, loadedFilters.getFilter().size());
         fm = new FilterMaster(loadedFilters);
         loadFile(fm);
 
-        List<Option> option = fm.getConfig().getFilters().get(0).getOption();
+        List<Option> option = fm.getConfig().getFilter().get(0).getOption();
         assertNotNull("Filter option is not null", option);
         assertTrue("Filter option is not empty", option.isEmpty());
     }

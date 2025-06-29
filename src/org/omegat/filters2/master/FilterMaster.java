@@ -53,7 +53,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
 import org.omegat.core.Core;
@@ -121,7 +121,7 @@ public class FilterMaster {
     static {
         mapper = XmlMapper.xmlBuilder().defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
-        mapper.registerModule(new JaxbAnnotationModule());
+        mapper.registerModule(new JakartaXmlBindAnnotationModule());
         mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -153,7 +153,7 @@ public class FilterMaster {
         boolean result = false;
         for (Class<?> fclass : filtersClasses) {
             boolean found = false;
-            for (Filter fc : conf.getFilters()) {
+            for (Filter fc : conf.getFilter()) {
                 if (fclass.getName().equals(fc.getClassName())) {
                     // filter already exists in config
                     found = true;
@@ -164,7 +164,7 @@ public class FilterMaster {
                 // filter not found in config
                 Filter f = getDefaultSettingsFromFilter(fclass.getName());
                 if (f != null) {
-                    conf.getFilters().add(f);
+                    conf.getFilter().add(f);
                     result = true;
                 }
             }
@@ -203,7 +203,7 @@ public class FilterMaster {
      */
     public IFilter loadFile(String filename, FilterContext fc, IParseCallback parseCallback)
             throws IOException, TranslationException {
-        IFilter filterObject = null;
+        IFilter filterObject;
         try {
             LookupInformation lookup = lookupFilter(new File(filename), fc);
             if (lookup == null) {
@@ -336,7 +336,7 @@ public class FilterMaster {
      * @return The corresponding LookupInformation
      */
     private LookupInformation lookupFilter(File inFile, FilterContext fc) throws TranslationException {
-        for (Filter f : config.getFilters()) {
+        for (Filter f : config.getFilter()) {
             if (!f.isEnabled()) {
                 continue;
             }
@@ -376,7 +376,7 @@ public class FilterMaster {
      */
     public boolean isFileSupported(File file, boolean quick) {
         FilterContext fc = new FilterContext(null, null, true);
-        for (Filter f : config.getFilters()) {
+        for (Filter f : config.getFilter()) {
             if (!f.isEnabled()) {
                 continue;
             }
@@ -742,8 +742,8 @@ public class FilterMaster {
         c.setRemoveSpacesNonseg(orig.isRemoveSpacesNonseg());
         c.setPreserveSpaces(orig.isPreserveSpaces());
         c.setIgnoreFileContext(orig.isIgnoreFileContext());
-        for (Filter f : orig.getFilters()) {
-            c.getFilters().add(cloneFilter(f));
+        for (Filter f : orig.getFilter()) {
+            c.getFilter().add(cloneFilter(f));
         }
         return c;
     }

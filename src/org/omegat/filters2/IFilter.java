@@ -25,6 +25,8 @@
 
 package org.omegat.filters2;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.Dialog;
 import java.awt.Window;
 import java.io.File;
@@ -183,7 +185,7 @@ public interface IFilter {
      * @return new options or null if options not changed
      */
     @Deprecated
-    Map<String, String> changeOptions(Dialog parent, Map<String, String> config);
+    Map<String, String> changeOptions(@Nullable Dialog parent, Map<String, String> config);
 
     /**
      * Show change options dialog for able to change options.

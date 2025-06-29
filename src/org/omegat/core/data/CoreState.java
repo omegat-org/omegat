@@ -26,10 +26,12 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.IGlossaries;
@@ -87,6 +89,8 @@ public class CoreState {
     private IMainWindow mainWindow;
     private IEditor editor;
     private IGlossaries glossaries;
+    private Segmenter segmenter;
+    private FilterMaster filterMaster;
     private GlossaryManager glossaryManager;
     private ITagValidation tagValidation;
     private INotes notes;
@@ -144,6 +148,22 @@ public class CoreState {
 
     public void setGlossaryManager(GlossaryManager glossaryManager) {
         this.glossaryManager = glossaryManager;
+    }
+
+    public Segmenter getSegmenter() {
+        return segmenter;
+    }
+
+    public void setSegmenter(Segmenter segmenter) {
+        this.segmenter = segmenter;
+    }
+
+    public FilterMaster getFilterMaster() {
+        return filterMaster;
+    }
+
+    public void setFilterMaster(FilterMaster filterMaster) {
+        this.filterMaster = filterMaster;
     }
 
     public ITagValidation getTagValidation() {

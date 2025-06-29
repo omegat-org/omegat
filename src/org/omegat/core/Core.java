@@ -99,7 +99,6 @@ public final class Core {
 
     private static IIssues issuesWindow;
     private static IMatcher matcher;
-    private static FilterMaster filterMaster;
     private static IProjectFilesList projWin;
 
     // package-private for test fixture TestCoreInitializer
@@ -108,7 +107,6 @@ public final class Core {
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
     private static IComments comments;
-    private static Segmenter segmenter;
     private static SegmentPropertiesArea segmentPropertiesArea;
 
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections
@@ -158,11 +156,11 @@ public final class Core {
     }
 
     public static FilterMaster getFilterMaster() {
-        return filterMaster;
+        return CoreState.getInstance().getFilterMaster();
     }
 
     public static void setFilterMaster(FilterMaster newFilterMaster) {
-        filterMaster = newFilterMaster;
+        CoreState.getInstance().setFilterMaster(newFilterMaster);
         EntryKey.setIgnoreFileContext(newFilterMaster.getConfig().isIgnoreFileContext());
     }
 
@@ -211,11 +209,11 @@ public final class Core {
     }
 
     public static Segmenter getSegmenter() {
-        return segmenter;
+        return CoreState.getInstance().getSegmenter();
     }
 
     public static void setSegmenter(Segmenter newSegmenter) {
-        segmenter = newSegmenter;
+        CoreState.getInstance().setSegmenter(newSegmenter);
     }
 
     /**
@@ -237,22 +235,23 @@ public final class Core {
      * Initialize application components.
      */
     public static void initializeGUI(final Map<String, String> params) throws Exception {
-        CoreState.getInstance().setCmdLineParams(params);
+        CoreState coreState = CoreState.getInstance();
+        coreState.setCmdLineParams(params);
 
         // 1. Initialize project
-        CoreState.getInstance().setProject(new NotLoadedProject());
+        coreState.setProject(new NotLoadedProject());
 
         // 2. Initialize theme
         UIDesignManager.initialize();
 
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
-        CoreState.getInstance().setMainWindow(me);
+        coreState.setMainWindow(me);
 
         initializeGUIimpl(me);
 
-        CoreState.getInstance().initializeSaveThread();
-        CoreState.getInstance().initializeVersionCheckThread();
+        coreState.initializeSaveThread();
+        coreState.initializeVersionCheckThread();
     }
 
     /**
@@ -263,20 +262,20 @@ public final class Core {
         MarkerController.init();
         LanguageToolWrapper.init();
 
-        segmenter = new Segmenter(Preferences.getSRX());
-        filterMaster = new FilterMaster(Preferences.getFilters());
+        CoreState coreState = CoreState.getInstance();
+        coreState.setSegmenter(new Segmenter(Preferences.getSRX()));
+        coreState.setFilterMaster(new FilterMaster(Preferences.getFilters()));
 
         // 4. Initialize other components. They add themselves to the main
         // window.
-        CoreState.getInstance().setEditor(new EditorController(me));
-        CoreState.getInstance().setTagValidation(new TagValidationTool());
+        coreState.setEditor(new EditorController(me));
+        coreState.setTagValidation(new TagValidationTool());
         issuesWindow = new IssuesPanelController(me.getApplicationFrame());
         matcher = new MatchesTextArea(me);
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
-        CoreState.getInstance().setGlossaries(glossaryArea);
-        CoreState.getInstance()
-                .setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
-        CoreState.getInstance().setNotes(new NotesTextArea(me));
+        coreState.setGlossaries(glossaryArea);
+        coreState.setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
+        coreState.setNotes(new NotesTextArea(me));
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea(me);
         dictionaries = new DictionariesTextArea(me);
@@ -292,10 +291,11 @@ public final class Core {
      * Initialize application components.
      */
     public static void initializeConsole(final Map<String, String> params) {
-        CoreState.getInstance().setCmdLineParams(params);
-        CoreState.getInstance().setTagValidation(new TagValidationTool());
-        CoreState.getInstance().setProject(new NotLoadedProject());
-        CoreState.getInstance().setMainWindow(new ConsoleWindow());
+        CoreState coreState = CoreState.getInstance();
+        coreState.setCmdLineParams(params);
+        coreState.setTagValidation(new TagValidationTool());
+        coreState.setProject(new NotLoadedProject());
+        coreState.setMainWindow(new ConsoleWindow());
     }
 
     /**

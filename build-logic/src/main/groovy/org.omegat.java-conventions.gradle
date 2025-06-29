@@ -7,16 +7,12 @@ plugins {
     id 'com.diffplug.spotless'
     id 'com.github.spotbugs'
     id 'org.omegat.common-utilities'
+    id 'net.ltgt.errorprone'
+    id 'net.ltgt.nullaway'
 }
 
 // Definition of OmegaT versioning
 def localPropsFile = file('local.properties')
-
-// Define target Java version to compatible.
-def javaVersion = 11
-
-// Flag to detect CI/CD environment
-def envIsCi = project.hasProperty('envIsCi') as Boolean
 
 ext {
     if (localPropsFile.file) {
@@ -38,15 +34,8 @@ repositories {
 java {
     withSourcesJar()
     withJavadocJar()
-    if (isWindows11 && isArm64) {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    } else {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(javaVersion)
-            vendor = JvmVendorSpec.ADOPTIUM
-        }
-    }
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 tasks.named("test", Test) {
@@ -75,61 +64,49 @@ javadoc {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
-    options.compilerArgs.addAll '-Xlint', '-Werror'
+    options.compilerArgs.addAll '-Xlint'
+    options.errorprone.disableWarningsInGeneratedCode = true
+    options.errorprone.disable 'InlineMeSuggester', 'EmptyCatch'
+}
+
+tasks {
+    compileTestJava {
+        options.errorprone.enabled = false
+    }
+}
+
+dependencies {
+    errorprone("com.google.errorprone:error_prone_core:2.36.0")
+    errorprone("com.uber.nullaway:nullaway:0.12.7")
+}
+
+nullaway {
+    annotatedPackages.add("org.omegat")
 }
 
 spotbugs {
     reportLevel = com.github.spotbugs.snom.Confidence.valueOf('HIGH')
-}
-
-tasks.register('spotbugsMainReport') {
-    def reportFile = layout.buildDirectory.file("reports/spotbugs/main.txt").get().asFile
-    doLast {
-        if (reportFile.exists()) {
-            println()
-            reportFile.readLines().forEach {
-                println(it)
-            }
-        }
-    }
-    group = 'verification'
-}
-
-tasks.register('spotbugsTestReport') {
-    def reportFile = layout.buildDirectory.file("reports/spotbugs/test.txt").get().asFile
-    doLast {
-        if (reportFile.exists()) {
-            println()
-            reportFile.readLines().forEach {
-                println(it)
-            }
-        }
-    }
-    group = 'verification'
+    extraArgs = ['-longBugCodes']
+    jvmArgs = ['-Duser.language=en']
+    // onlyAnalyze <classes/packages>  only analyze given classes and packages;
+    // end with .* to indicate classes in a package, .- to indicate a package prefix
+    toolVersion = '4.9.3'
+    onlyAnalyze = ['org.omegat.-']
+    excludeFilter = project.rootProject.layout.projectDirectory.file("config/spotbugs/exclude.xml")
 }
 
 spotbugsMain {
-    if (envIsCi) {
-        extraArgs = ['-longBugCodes']
-        jvmArgs = ['-Duser.language=en']
-    }
     reports {
-        text.required = envIsCi
-        html.required = !envIsCi
+        text.required = true
+        html.required = true
     }
-    finalizedBy(spotbugsMainReport)
 }
 
 spotbugsTest {
-    if (envIsCi) {
-        extraArgs = ['-longBugCodes']
-        jvmArgs = ['-Duser.language=en']
-    }
     reports {
-        text.required = envIsCi
-        html.required = !envIsCi
+        text.required = true
+        html.required = true
     }
-    finalizedBy(spotbugsTestReport)
 }
 
 checkstyle {

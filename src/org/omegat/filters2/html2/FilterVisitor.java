@@ -37,6 +37,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -67,24 +68,17 @@ import org.omegat.util.StringUtil;
  */
 public class FilterVisitor extends NodeVisitor {
     protected HTMLFilter2 filter;
-    private BufferedWriter writer;
-    private HTMLOptions options;
-    @SuppressWarnings("unused")
-    private FilterContext filterContext;
+    private final BufferedWriter writer;
+    private final HTMLOptions options;
 
     public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts,
             FilterContext fc) {
         this.filter = htmlfilter;
         // HHC filter has no options
-        if (opts != null) {
-            this.options = opts;
-        } else {
-            // To prevent a null pointer exception later, see
-            // https://sourceforge.net/p/omegat/bugs/651/
-            this.options = new HTMLOptions(new TreeMap<>());
-        }
+        // To prevent a null pointer exception later, see
+        // https://sourceforge.net/p/omegat/bugs/651/
+        this.options = Objects.requireNonNullElseGet(opts, () -> new HTMLOptions(new TreeMap<>()));
         this.writer = bufwriter;
-        filterContext = fc;
     }
 
     // ///////////////////////////////////////////////////////////////////////

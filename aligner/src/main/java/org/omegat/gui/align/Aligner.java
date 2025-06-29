@@ -28,7 +28,6 @@ package org.omegat.gui.align;
 import java.io.File;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -203,12 +202,12 @@ public class Aligner {
 
         List<ComparisonMode> allowed = new ArrayList<>();
         allowed.add(ComparisonMode.HEAPWISE);
-        if (srcRaw.size() == trgRaw.size()) {
+        if (srcRaw != null && trgRaw != null && srcRaw.size() == trgRaw.size()) {
             allowed.add(ComparisonMode.PARSEWISE);
         }
         List<String> srcIds = srcResult.getKey();
         List<String> trgIds = trgResult.getKey();
-        if (srcIds.size() == srcRaw.size() && trgIds.size() == trgRaw.size()) {
+        if (srcRaw != null && trgRaw != null && srcIds.size() == srcRaw.size() && trgIds.size() == trgRaw.size()) {
             allowed.add(ComparisonMode.ID);
             comparisonMode = ComparisonMode.ID;
 
@@ -471,9 +470,6 @@ public class Aligner {
      * </ol>
      *
      * Calls {@link #loadFiles()} if it has not yet been called.
-     *
-     * @return
-     * @throws Exception
      */
     public List<Entry<String, String>> align() throws Exception {
         return alignImpl().map(bead -> {
@@ -486,11 +482,6 @@ public class Aligner {
     /**
      * Obtain appropriate calculator according to the specified
      * {@link CalculatorType}.
-     *
-     * @param calculatorType
-     * @param counterType
-     * @param aligns
-     * @return
      */
     private static Calculator getCalculator(CalculatorType calculatorType, CounterType counterType,
             List<Alignment> aligns) {
@@ -550,13 +541,6 @@ public class Aligner {
     /**
      * Use mALIGNa to align the specified source and target texts, according to
      * the specified parameters.
-     *
-     * @param algorithmClass
-     * @param calculatorType
-     * @param counterType
-     * @param source
-     * @param target
-     * @return
      */
     private static List<Alignment> doAlign(AlgorithmClass algorithmClass, CalculatorType calculatorType,
             CounterType counterType, List<String> source, List<String> target) {

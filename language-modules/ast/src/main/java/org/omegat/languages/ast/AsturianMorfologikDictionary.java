@@ -72,12 +72,10 @@ public class AsturianMorfologikDictionary implements ISpellCheckerDictionary, Au
             }
         }
         if (dictInputStream != null) {
-
-        }
-        try {
-            infoInputStream.close();
-            dictInputStream.close();
-        } catch (IOException ignored) {
+            try {
+                dictInputStream.close();
+            } catch (IOException ignored) {
+            }
         }
     }
 }

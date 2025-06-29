@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
@@ -137,15 +138,15 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             throw new Exception(BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND"));
         }
 
-        String IAMToken = getIAMToken(oAuthToken);
-        if (IAMToken == null) {
+        String iamToken = getIAMToken(oAuthToken);
+        if (iamToken == null) {
             throw new Exception(IAMErrorMessage);
         }
 
         String request = createJsonRequest(sLang, tLang, text, folderId);
 
         Map<String, String> headers = new TreeMap<>();
-        headers.put("Authorization", "Bearer " + IAMToken);
+        headers.put("Authorization", "Bearer " + iamToken);
 
         String response;
         try {
@@ -156,7 +157,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
                 errorMessage = BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
                 throw new MachineTranslateError(errorMessage);
             }
-            throw new MachineTranslateError(e.getMessage());
+            throw new MachineTranslateError(Objects.requireNonNullElse(e.getMessage(), "HTTP error: " + e.code));
         }
         if (response == null) {
             return null;
@@ -228,7 +229,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             return rootNode.get("message").asText();
         } catch (Exception e) {
             LOGGER.atError().setCause(e).setMessageRB("MT_ENGINE_YANDEX_CLOUD_BAD_ERROR_REPORT").log();
-            return null;
+            return "Yandex.Cloud error message extraction failed: " + e.getLocalizedMessage();
         }
     }
 
@@ -266,7 +267,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @SuppressWarnings("unchecked")
-    private String getIAMToken(final String oAuthToken) {
+    private @Nullable String getIAMToken(final String oAuthToken) {
         if (System.currentTimeMillis() - lastIAMTokenTime > IAM_TOKEN_TTL_SECONDS * 1_000) {
 
             String request = "{\"yandexPassportOauthToken\":\"" + oAuthToken + "\"}";
@@ -275,7 +276,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             ObjectMapper mapper = new ObjectMapper();
 
             try {
-                response = HttpConnectionUtils.postJSON(IAM_TOKEN_URL, request, null);
+                response = HttpConnectionUtils.postJSON(IAM_TOKEN_URL, request, Collections.emptyMap());
             } catch (HttpConnectionUtils.ResponseError e) {
                 // Try to extract error message from the error body
                 IAMErrorMessage = extractErrorMessage(e.body);

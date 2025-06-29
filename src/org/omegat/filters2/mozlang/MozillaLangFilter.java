@@ -66,9 +66,9 @@ public class MozillaLangFilter extends AbstractFilter {
         WAIT_SOURCE, WAIT_TARGET
     };
 
-    private @Nullable StringBuilder source;
-    private @Nullable StringBuilder target;
-    private @Nullable StringBuilder localizationNote;
+    private final StringBuilder source = new StringBuilder();
+    private final StringBuilder target = new StringBuilder();
+    private final StringBuilder localizationNote = new StringBuilder();
 
     private @Nullable BufferedWriter out;
 
@@ -133,9 +133,9 @@ public class MozillaLangFilter extends AbstractFilter {
     @Override
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
             throws IOException, TranslationException {
-        source = new StringBuilder();
-        target = new StringBuilder();
-        localizationNote = new StringBuilder();
+        source.setLength(0);
+        target.setLength(0);
+        localizationNote.setLength(0);
 
         out = outFile;
 
@@ -192,8 +192,7 @@ public class MozillaLangFilter extends AbstractFilter {
             t = target.toString();
         }
         if (localizationNote.length() > 0) {
-            c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n"
-                    + localizationNote.toString();
+            c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n" + localizationNote;
         }
         if (c.isEmpty()) {
             c = null;

@@ -538,6 +538,9 @@ public class Xliff1Filter extends AbstractXliffFilter {
     }
 
     private boolean checkTranslationStatus() {
+        if (entryTranslateCallback == null) {
+            return false;
+        }
         if (subSegments.isEmpty()) {
             return entryTranslateCallback.getTranslation(unitId, buildTags(source, false), path) != null;
         } else {
@@ -580,7 +583,10 @@ public class Xliff1Filter extends AbstractXliffFilter {
 
         if (subSegments.isEmpty()) {
             String src = buildTags(source, false);
-            String tra = entryTranslateCallback.getTranslation(unitId, src, path);
+            String tra = null;
+            if (entryTranslateCallback != null) {
+                tra = entryTranslateCallback.getTranslation(unitId, src, path);
+            }
             if (tra != null) {
                 generateTargetStartElement(writer);
                 for (XMLEvent ev : restoreTags(tra)) {
@@ -609,7 +615,10 @@ public class Xliff1Filter extends AbstractXliffFilter {
                             String mid = el.getAttributeByName(new QName("mid")).getValue();
                             String src = buildTags(subSegments.get(mid), false);
                             // First, translation from project memory
-                            String tra = entryTranslateCallback.getTranslation(unitId + "/" + mid, src, path);
+                            String tra = null;
+                            if (entryTranslateCallback != null) {
+                                tra = entryTranslateCallback.getTranslation(unitId + "/" + mid, src, path);
+                            }
                             if (tra != null) {
                                 for (XMLEvent tev : restoreTags(unitId, path, src, tra)) {
                                     fromEventToWriter(tev, writer);

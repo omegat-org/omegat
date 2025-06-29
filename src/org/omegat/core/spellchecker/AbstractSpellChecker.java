@@ -189,7 +189,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
                 && learnedFilePath.toFile().canRead()) {
             try {
                 learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
-                learnedList.forEach(word -> checker.learnWord(word));
+                if (checker != null) {
+                    learnedList.forEach(word -> checker.learnWord(word));
+                }
             } catch (Exception ex) {
                 Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_READ_ERROR", ex.getLocalizedMessage());
                 return false;
@@ -271,8 +273,10 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
         // if it is valid (learned), it is ok
         if (learnedList.contains(word) || ignoreList.contains(word)) {
             isCorrect = true;
-        } else {
+        } else if (checker != null) {
             isCorrect = checker.isCorrect(word);
+        } else {
+            isCorrect = false;
         }
 
         // remember in cache
@@ -290,16 +294,15 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * return a list of strings as suggestions
      */
     public List<String> suggest(String word) {
-        // Check if a spellchecker is already initialized.
-        // If not, skip checking to prevent nullPointerErrors.
-        if (checker == null) {
-            return Collections.emptyList();
-        }
         if (isCorrect(word)) {
             return Collections.emptyList();
         }
-
-        return checker.suggest(normalize(word));
+        // Check if a spellchecker is already initialized.
+        // If not, skip checking to prevent nullPointerErrors.
+        if (checker != null) {
+            return checker.suggest(normalize(word));
+        }
+        return Collections.emptyList();
     }
 
     /**
@@ -323,7 +326,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
         word = normalize(word);
         if (!learnedList.contains(word)) {
             learnedList.add(word);
-            checker.learnWord(word);
+            if (checker != null) {
+                checker.learnWord(word);
+            }
             synchronized (this) {
                 incorrectWordsCache.remove(word);
                 correctWordsCache.add(word);

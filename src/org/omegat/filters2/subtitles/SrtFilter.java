@@ -154,8 +154,10 @@ public class SrtFilter extends AbstractFilter {
             if (tr == null) {
                 tr = text.toString();
             }
-            out.write(tr.replace("\n", EOL));
-            out.write(EOL);
+            if (out != null) {
+                out.write(tr.replace("\n", EOL));
+                out.write(EOL);
+            }
         }
 
         key = null;
@@ -164,8 +166,8 @@ public class SrtFilter extends AbstractFilter {
 
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
-        Map<String, String> source = new HashMap<String, String>();
-        Map<String, String> translated = new HashMap<String, String>();
+        Map<String, String> source = new HashMap<>();
+        Map<String, String> translated = new HashMap<>();
 
         align = source;
         processFile(sourceFile, new NullBufferedWriter(), fc);
@@ -173,7 +175,7 @@ public class SrtFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr)) {
+            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }

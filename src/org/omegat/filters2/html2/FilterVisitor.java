@@ -108,10 +108,10 @@ public class FilterVisitor extends NodeVisitor {
      * <li>Otherwise they are written out directly.
      * </ul>
      */
-    protected @Nullable List<Node> precedingNodes;
+    protected List<Node> precedingNodes = new ArrayList<>();
 
     /** The list of nodes forming a chunk of text. */
-    protected @Nullable List<Node> translatableNodes;
+    protected List<Node> translatableNodes = new ArrayList<>();
 
     /**
      * The list of non-paragraph tags following a chunk of text.
@@ -121,14 +121,14 @@ public class FilterVisitor extends NodeVisitor {
      * <li>Otherwise (eg if a paragraph tag follows), they are written out directly.
      * </ul>
      */
-    protected @Nullable List<Node> followingNodes;
+    protected List<Node> followingNodes = new ArrayList<>();
 
     /** The tags behind the shortcuts */
-    protected @Nullable List<Node> sTags;
+    protected List<Node> sTags = new ArrayList<>();
     /** The tag numbers of shorcutized tags */
-    protected @Nullable List<Integer> sTagNumbers;
+    protected List<Integer> sTagNumbers = new ArrayList<>();
     /** The list of all the tag shortcuts */
-    protected @Nullable List<String> sShortcuts;
+    protected List<String> sShortcuts = new ArrayList<>();
     /** The number of shortcuts stored */
     int sNumShortcuts;
 
@@ -678,12 +678,12 @@ public class FilterVisitor extends NodeVisitor {
         isTextUpForCollection = false;
         recurseSelf = true;
         recurseChildren = true;
-        precedingNodes = new ArrayList<>();
-        translatableNodes = new ArrayList<>();
-        followingNodes = new ArrayList<>();
-        sTags = new ArrayList<>();
-        sTagNumbers = new ArrayList<>();
-        sShortcuts = new ArrayList<>();
+        precedingNodes.clear();
+        translatableNodes.clear();
+        followingNodes.clear();
+        sTags.clear();
+        sTagNumbers.clear();
+        sShortcuts.clear();
         sNumShortcuts = 0;
     }
 

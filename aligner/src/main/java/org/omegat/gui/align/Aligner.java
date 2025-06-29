@@ -403,13 +403,15 @@ public class Aligner {
      * @return List of beads aligned heapwise
      */
     private Stream<Alignment> alignHeapwise(boolean doSegmenting) {
-        if (srcRaw != null && trgRaw != null) {
-            List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
-            List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
-            return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
-        } else {
+        if (srcRaw == null) {
             return Stream.empty();
         }
+        List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
+        if (trgRaw == null) {
+            return Stream.empty();
+        }
+        List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
+        return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
     }
 
     /**
@@ -558,7 +560,7 @@ public class Aligner {
      */
     private static List<Alignment> doAlign(AlgorithmClass algorithmClass, CalculatorType calculatorType,
             CounterType counterType, List<String> source, List<String> target) {
-        List<Alignment> aligns = Arrays.asList(new Alignment(source, target));
+        List<Alignment> aligns = List.of(new Alignment(source, target));
         Calculator calculator = getCalculator(calculatorType, counterType, aligns);
         AlignAlgorithm algorithm = getAlgorithm(algorithmClass, calculator);
         Filter filter = new net.loomchild.maligna.filter.aligner.Aligner(algorithm);

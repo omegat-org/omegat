@@ -308,7 +308,7 @@ public class PoFilter extends AbstractFilter {
             .compile("Plural-Forms: *nplurals= *([0-9]+) *; *plural", Pattern.CASE_INSENSITIVE);
     protected static final Pattern MSG_FUZZY = Pattern.compile("#\\|\\s\"(.*)\"");
 
-    enum MODE {
+    public enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
     }
 
@@ -842,8 +842,10 @@ public class PoFilter extends AbstractFilter {
         }
         if (isHeader && skipHeader) {
             translation = entry;
-        } else {
+        } else if (entryTranslateCallback != null) {
             translation = entryTranslateCallback.getTranslation(id, entry, path + pathSuffix);
+        } else {
+            translation = null;
         }
 
         if (translation == null && !allowNull) {

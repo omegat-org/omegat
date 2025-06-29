@@ -30,6 +30,7 @@ package org.omegat.util;
 
 import static com.ctc.wstx.api.WstxOutputProperties.P_OUTPUT_ESCAPE_CR;
 import static org.codehaus.stax2.XMLOutputFactory2.P_AUTOMATIC_EMPTY_ELEMENTS;
+import static org.codehaus.stax2.XMLOutputFactory2.P_TEXT_ESCAPER;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -109,6 +110,7 @@ public class TMXWriter2 implements AutoCloseable {
         factory = XMLOutputFactory.newInstance();
         factory.setProperty(P_OUTPUT_ESCAPE_CR, false);
         factory.setProperty(P_AUTOMATIC_EMPTY_ELEMENTS, true);
+        factory.setProperty(P_TEXT_ESCAPER, new TmxEscapingWriterFactory());
 
         out = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
         xml = factory.createXMLStreamWriter(out, StandardCharsets.UTF_8.name());

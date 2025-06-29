@@ -312,7 +312,8 @@ public class PoFilter extends AbstractFilter {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
     }
 
-    private StringBuilder[] sources, targets;
+    private StringBuilder[] sources;
+    private StringBuilder[] targets;
     private StringBuilder translatorComments;
     private StringBuilder extractedComments;
     private StringBuilder references;
@@ -869,8 +870,11 @@ public class PoFilter extends AbstractFilter {
      *         language.
      */
     private String autoFillInPluralStatement(String header, FilterContext fc) {
+        Language targetLang = fc.getTargetLang();
+        if (targetLang == null) {
+            return header;
+        }
         if (autoFillInPluralStatement) {
-            Language targetLang = fc.getTargetLang();
             String lang = targetLang.getLanguageCode().toLowerCase(Locale.ENGLISH);
             PluralInfo pluralInfo = PLURAL_INFOS.get(lang);
             if (pluralInfo != null) {

@@ -48,7 +48,6 @@ import org.htmlparser.Tag;
 import org.htmlparser.Text;
 import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
-import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.util.HTMLUtils;

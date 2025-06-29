@@ -65,10 +65,12 @@ public abstract class AbstractOptions {
     }
 
     /**
-     * Save boolean value to string option.
+     * Sets the value of a specific option to a boolean value.
      *
      * @param key
+     *            the key for the option to be updated
      * @param value
+     *            the boolean value to set for the specified option
      */
     protected void setBoolean(String key, boolean value) {
         options.put(key, Boolean.toString(value));
@@ -89,10 +91,12 @@ public abstract class AbstractOptions {
     }
 
     /**
-     * Save string value to string option.
+     * Sets the value of a specific option as a string.
      *
      * @param key
+     *            the key for the option to be updated
      * @param value
+     *            the string value to set for the specified option
      */
     protected void setString(String key, String value) {
         options.put(key, value);
@@ -117,10 +121,15 @@ public abstract class AbstractOptions {
     }
 
     /**
-     * Save string value to string option.
+     * Sets the value of a specific option as the name of an enum constant.
      *
+     * @param <T>
+     *            the type of the enum
      * @param key
+     *            the key for the option to be updated
      * @param value
+     *            the enum constant whose name will be set for the specified
+     *            option
      */
     protected <T extends Enum<T>> void setEnum(String key, T value) {
         options.put(key, value.name());

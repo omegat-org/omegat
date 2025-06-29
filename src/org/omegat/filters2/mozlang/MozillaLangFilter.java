@@ -199,10 +199,20 @@ public class MozillaLangFilter extends AbstractFilter {
     }
 
     /**
+     * Aligns a source text with its translation and associates optional
+     * comments.
+     * <p>
+     * This method handles the mapping of source text and translations,
+     * potentially with comments, using two callback mechanisms:
+     * entryParseCallback and entryAlignCallback.
      *
      * @param source
+     *            The source string to be aligned.
      * @param translation
+     *            The translated string corresponding to the source.
      * @param comments
+     *            An optional comment associated with the source and
+     *            translation.
      */
     protected void align(String source, String translation, String comments) {
         if (entryParseCallback != null) {

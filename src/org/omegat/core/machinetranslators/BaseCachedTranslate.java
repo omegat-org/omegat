@@ -38,6 +38,7 @@ import javax.cache.spi.CachingProvider;
 
 import com.github.benmanes.caffeine.jcache.configuration.CaffeineConfiguration;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.exttrans.IMachineTranslation;
@@ -109,11 +110,8 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
         return manager.createCache(name, config);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public final String getTranslation(Language sLang, Language tLang, String text) throws Exception {
+    public final @Nullable String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
             String trText = getTruncateText(text);
             return putCache(sLang, tLang, trText, translate(sLang, tLang, trText));
@@ -122,11 +120,8 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public final String getCachedTranslation(Language sLang, Language tLang, String text) {
+    public final @Nullable String getCachedTranslation(Language sLang, Language tLang, String text) {
         if (enabled) {
             return getCache(sLang, tLang, getTruncateText(text));
         } else {
@@ -136,40 +131,31 @@ public abstract class BaseCachedTranslate extends BaseTranslate implements IMach
 
     protected abstract String getPreferenceName();
 
-    protected abstract String translate(Language sLang, Language tLang, String text) throws Exception;
+    protected abstract @Nullable String translate(Language sLang, Language tLang, String text) throws Exception;
 
     private String getCache(Language sLang, Language tLang, String text) {
         return cache.get(sLang + "/" + tLang + "/" + text);
     }
 
-    private String putCache(Language sLang, Language tLang, String text, String result) {
+    private String putCache(Language sLang, Language tLang, String text, @Nullable String result) {
         if (result != null) {
             cache.put(sLang.toString() + "/" + tLang.toString() + "/" + text, result);
         }
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Deprecated
     protected String getFromCache(Language sLang, Language tLang, String text) {
         return getCache(sLang, tLang, text);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Deprecated
     protected String putToCache(Language sLang, Language tLang, String text, String result) {
         return putCache(sLang, tLang, text, result);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void clearCache() {
         cache.clear();

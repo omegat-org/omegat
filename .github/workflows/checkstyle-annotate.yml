@@ -15,7 +15,7 @@ jobs:
     - uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: '11'
+        java-version: '17'
     - name: create annotation
       run: echo "::add-matcher::${{ github.workspace }}/ci/github/problem-matcher.json"
     - name: setup gradle

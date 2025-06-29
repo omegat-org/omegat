@@ -31,6 +31,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Locale;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.Log;
 
 public final class TipOfTheDayUtils {
@@ -57,7 +58,7 @@ public final class TipOfTheDayUtils {
         return lang;
     }
 
-    private static URI getTipsURI(String filename, String lang) {
+    private static @Nullable URI getTipsURI(String filename, String lang) {
         URL url = TipOfTheDayUtils.class.getResource("/tips/" + lang + '/' + filename);
         if (url != null) {
             try {

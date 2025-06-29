@@ -72,6 +72,11 @@
 * [How OmegaT create Backup files](82.BackupFiles.md)
 * [Team project](83.TeamProject.md)
 
+
+## Architecture Designs 
+
+* [Architecture Decisional Records](adr/index.md)
+
 ## Other information
 
 * [Release procedure](90.ReleaseProcedure.md)

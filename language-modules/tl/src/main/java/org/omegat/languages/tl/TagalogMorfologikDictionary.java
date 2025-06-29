@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import morfologik.stemming.Dictionary;
+import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
@@ -41,19 +42,21 @@ public class TagalogMorfologikDictionary implements ISpellCheckerDictionary, Aut
     private static final String META_EXT = ".info";
     private static final String DICT = "tl_PH";
 
-    private InputStream infoInputStream;
-    private InputStream dictInputStream;
+    private @Nullable InputStream infoInputStream;
+    private @Nullable InputStream dictInputStream;
 
     @Override
-    public Dictionary getMorfologikDictionary(String language) {
+    public @Nullable Dictionary getMorfologikDictionary(String language) {
         if (DICT.startsWith(language)) {
             infoInputStream = JLanguageTool.getDataBroker()
                     .getAsStream(DICTIONARY_BASE + DICT + META_EXT);
             dictInputStream = JLanguageTool.getDataBroker()
                     .getAsStream(DICTIONARY_BASE + DICT + DICT_EXT);
-            try {
-                return Dictionary.read(dictInputStream, infoInputStream);
-            } catch (IOException ignored) {
+            if (infoInputStream != null && dictInputStream != null) {
+                try {
+                    return Dictionary.read(dictInputStream, infoInputStream);
+                } catch (IOException ignored) {
+                }
             }
 
         }
@@ -67,10 +70,17 @@ public class TagalogMorfologikDictionary implements ISpellCheckerDictionary, Aut
 
     @Override
     public void close() {
-        try {
-            infoInputStream.close();
-            dictInputStream.close();
-        } catch (IOException ignored) {
+        if (infoInputStream != null) {
+            try {
+                infoInputStream.close();
+            } catch (IOException ignored) {
+            }
+        }
+        if (dictInputStream != null) {
+            try {
+                dictInputStream.close();
+            } catch (IOException ignored) {
+            }
         }
     }
 }

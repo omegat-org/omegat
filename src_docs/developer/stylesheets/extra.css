@@ -1,0 +1,73 @@
+/* Mermaid diagram styling */
+.mermaid {
+    text-align: center;
+    margin: 20px 0;
+    background: transparent;
+}
+
+/* Ensure diagrams are responsive */
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style adjustments for light theme */
+[data-md-color-scheme="default"] .mermaid {
+    background: #fafafa;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/* Style adjustments for dark theme */
+[data-md-color-scheme="slate"] .mermaid {
+    background: #2d2d2d;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/* Custom node styling for static analysis diagram */
+.mermaid .node rect {
+    fill: #f9f9f9;
+    stroke: #333;
+    stroke-width: 2px;
+    border-radius: 4px;
+}
+
+.mermaid .edgePath path {
+    stroke: #333;
+    stroke-width: 2px;
+}
+
+.mermaid .edgeLabel {
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 2px 4px;
+}
+
+/* Dark theme overrides */
+[data-md-color-scheme="slate"] .mermaid .node rect {
+    fill: #424242;
+    stroke: #90caf9;
+}
+
+[data-md-color-scheme="slate"] .mermaid .edgePath path {
+    stroke: #90caf9;
+}
+
+[data-md-color-scheme="slate"] .mermaid .edgeLabel {
+    background-color: #2d2d2d;
+    color: #fff;
+}
+
+/* Improve readability of text in diagrams */
+.mermaid .nodeLabel {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Make sure code blocks with mermaid are properly styled */
+.highlight .mermaid {
+    background: transparent;
+    border: none;
+    padding: 0;
+}

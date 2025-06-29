@@ -37,6 +37,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -185,9 +186,9 @@ public class EditorControllerTest extends TestCore {
     }
 
     @Override
-    protected void initEditor() {
-        editorController = new EditorController(mainWindow);
-        TestCoreInitializer.initEditor(editorController);
+    protected IEditor createTestEditor() {
+        editorController = new EditorController(TestCoreState.getInstance().getMainWindow());
+        return editorController;
     }
 
     class TestProjectProperties extends ProjectProperties {

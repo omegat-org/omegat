@@ -52,9 +52,11 @@ public class TagalogMorfologikDictionary implements ISpellCheckerDictionary, Aut
                     .getAsStream(DICTIONARY_BASE + DICT + META_EXT);
             dictInputStream = JLanguageTool.getDataBroker()
                     .getAsStream(DICTIONARY_BASE + DICT + DICT_EXT);
-            try {
-                return Dictionary.read(dictInputStream, infoInputStream);
-            } catch (IOException ignored) {
+            if (infoInputStream != null && dictInputStream != null) {
+                try {
+                    return Dictionary.read(dictInputStream, infoInputStream);
+                } catch (IOException ignored) {
+                }
             }
 
         }
@@ -68,10 +70,17 @@ public class TagalogMorfologikDictionary implements ISpellCheckerDictionary, Aut
 
     @Override
     public void close() {
-        try {
-            infoInputStream.close();
-            dictInputStream.close();
-        } catch (IOException ignored) {
+        if (infoInputStream != null) {
+            try {
+                infoInputStream.close();
+            } catch (IOException ignored) {
+            }
+        }
+        if (dictInputStream != null) {
+            try {
+                dictInputStream.close();
+            } catch (IOException ignored) {
+            }
         }
     }
 }

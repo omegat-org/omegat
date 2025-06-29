@@ -8,6 +8,7 @@
                2011 Alex Buloichik, Didier Briel,
                2012 Guido Leenders
                2015 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -508,13 +509,15 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     @Override
-    public final void parseFile(File inFile, Map<String, String> config, FilterContext fc,
+    public final void parseFile(File inFile, @Nullable Map<String, String> config, FilterContext fc,
             @NotNull IParseCallback callback) throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
         entryAlignCallback = null;
         processOptions.clear();
-        processOptions.putAll(config);
+        if (config != null) {
+            processOptions.putAll(config);
+        }
 
         try {
             processFile(inFile, null, fc);
@@ -529,13 +532,15 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     @Override
-    public final void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
+    public final void alignFile(File inFile, File outFile, @Nullable Map<String, String> config, FilterContext fc,
             @NotNull IAlignCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = null;
         entryAlignCallback = callback;
         processOptions.clear();
-        processOptions.putAll(config);
+        if (config != null) {
+            processOptions.putAll(config);
+        }
         try (BufferedReader readerIn = createReader(inFile, fc.getInEncoding());
                 BufferedReader readerOut = createReader(outFile, fc.getOutEncoding())) {
             alignFile(readerIn, readerOut, fc, inFile.getName());
@@ -665,7 +670,7 @@ public abstract class AbstractFilter implements IFilter {
     /**
      * Set both callbacks. Used for child XML filters only.
      */
-    public void setCallbacks(IParseCallback parseCallback, ITranslateCallback translateCallback) {
+    public void setCallbacks(@Nullable IParseCallback parseCallback, @Nullable ITranslateCallback translateCallback) {
         this.entryParseCallback = parseCallback;
         this.entryTranslateCallback = translateCallback;
     }

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import morfologik.stemming.Dictionary;
+import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 
 import org.omegat.core.spellchecker.ISpellCheckerDictionary;
@@ -41,10 +42,13 @@ public class BretonMorfologikDictionary implements ISpellCheckerDictionary, Auto
     private InputStream dictInputStream;
 
     @Override
-    public Dictionary getMorfologikDictionary(String language) {
+    public @Nullable Dictionary getMorfologikDictionary(String language) {
         if ("br_FR".startsWith(language)) {
             infoInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "br_FR.info");
             dictInputStream = JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + "br_FR.dict");
+            if (infoInputStream == null || dictInputStream == null) {
+                return null;
+            }
             try {
                 return Dictionary.read(dictInputStream, infoInputStream);
             } catch (IOException ignored) {
@@ -60,6 +64,7 @@ public class BretonMorfologikDictionary implements ISpellCheckerDictionary, Auto
 
     @Override
     public void close() {
+
         try {
             infoInputStream.close();
             dictInputStream.close();

@@ -547,15 +547,23 @@ public class IssuesPanelController implements IIssues {
             Stream<IIssue> tagErrors = Core.getTagValidation().listInvalidTags(filePattern).stream()
                     .map(TagIssue::new);
             List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
-            Stream<IIssue> providerIssues = Core.getProject().getAllEntries().parallelStream()
-                    .filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
-                    .filter(this::progressFilter).map(this::makeEntryPair)
-                    .filter(Objects::nonNull).flatMap(e -> providers.stream()
-                            .flatMap(provider -> provider.getIssues(e.getKey(), e.getValue()).stream()));
+            Stream<IIssue> providerIssues = getProviderIssues(providers, filePattern);
             List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
             Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST,
                     () -> String.format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
             return result;
+        }
+
+        private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String filePattern) {
+            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries().parallelStream()
+                    .filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
+                    .filter(this::progressFilter)
+                    .map(this::makeEntryPair)
+                    .filter(Objects::nonNull);
+
+            return entriesStream.flatMap(entry ->
+                    providers.stream()
+                            .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
         }
 
         Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
@@ -593,7 +601,7 @@ public class IssuesPanelController implements IIssues {
             if (isCancelled()) {
                 return;
             }
-            List<IIssue> allIssues = Collections.emptyList();
+            List<IIssue> allIssues;
             try {
                 allIssues = get();
             } catch (InterruptedException | ExecutionException e) {

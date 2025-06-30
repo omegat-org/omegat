@@ -48,7 +48,8 @@ public class FindGlossaryThreadTest extends TestCore {
         entries.add(new GlossaryEntry("\u4E0A", "up", "", false, null));
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false);
-        GlossarySearcher.sortGlossaryEntries(entries);
+        //
+        entries = GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
         assertEquals("mikeneko", entries.get(1).getLocText());
@@ -57,7 +58,8 @@ public class FindGlossaryThreadTest extends TestCore {
         assertEquals("dog", entries.get(3).getSrcText());
         assertEquals("horse", entries.get(4).getSrcText());
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
-        GlossarySearcher.sortGlossaryEntries(entries);
+        //
+        entries = GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
         assertEquals("catty", entries.get(1).getLocText());
@@ -69,7 +71,8 @@ public class FindGlossaryThreadTest extends TestCore {
         assertEquals("direct", entries.get(6).getLocText());
         assertEquals("enhance", entries.get(7).getLocText());
         Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
-        GlossarySearcher.sortGlossaryEntries(entries);
+        //
+        entries = GlossarySearcher.sortGlossaryEntries(entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
         assertEquals("catty", entries.get(1).getLocText());

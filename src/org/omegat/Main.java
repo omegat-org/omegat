@@ -339,7 +339,7 @@ public final class Main {
      * Execute standard GUI.
      */
     private static int runGUI() {
-        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
+        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {

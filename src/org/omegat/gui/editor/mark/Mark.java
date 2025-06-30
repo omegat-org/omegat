@@ -25,6 +25,8 @@
 
 package org.omegat.gui.editor.mark;
 
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
 
@@ -39,24 +41,25 @@ public class Mark {
     };
 
     public final ENTRY_PART entryPart;
-    public final int startOffset, endOffset;
+    public final int startOffset;
+    public final int endOffset;
 
     /**
      * Painter for specific Mark. For better performance, Painter should be
      * instantiated once, then used always. It could be created in IMarker
      * constructor.
      */
-    public HighlightPainter painter;
+    public @Nullable HighlightPainter painter;
     /**
      * Tooltip text for specific Mark. Will be displayed when mouse will moving
      * over Mark.
      */
-    public String toolTipText;
+    public @Nullable String toolTipText;
     /**
      * Text attributes for specific Mark. Will be added to text by
      * Document.setCharacterAttributes() without replacement.
      */
-    public AttributeSet attributes;
+    public @Nullable AttributeSet attributes;
 
     public Mark(ENTRY_PART entryPart, int start, int end) {
         this.entryPart = entryPart;

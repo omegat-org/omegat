@@ -32,6 +32,7 @@
 package org.omegat.util;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -70,7 +71,7 @@ public final class StringUtil {
     /**
      * Check if string is empty, i.e. null or length==0
      */
-    public static boolean isEmpty(final String str) {
+    public static boolean isEmpty(final @Nullable String str) {
         return str == null || str.isEmpty();
     }
 

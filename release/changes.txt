@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
   2 Enhancement
-  6 Bug fixes
+  7 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 
@@ -19,6 +19,11 @@
 
   - Preferences/CustomColorSelector don't show notification immediately when modifying color
   https://sourceforge.net/p/omegat/bugs/1273/
+
+  - tm/penalty-nnn value is not respected
+  - FindMatcher always search separate segment match without penalty
+  https://sourceforge.net/p/omegat/bugs/1248/
+  https://sourceforge.net/p/omegat/bugs/1251/
 
   - [Revert regression] List of issues stays hidden in the background
   https://sourceforge.net/p/omegat/bugs/1225/

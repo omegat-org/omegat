@@ -56,6 +56,7 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import org.apache.commons.io.FileUtils;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -179,7 +180,7 @@ public class FilterMaster {
      *            filter's class name
      * @return filter instance
      */
-    public static IFilter getFilterInstance(final String classname) {
+    public static @Nullable IFilter getFilterInstance(final String classname) {
         for (Class<?> f : filtersClasses) {
             if (f.getName().equals(classname)) {
                 try {
@@ -201,7 +202,7 @@ public class FilterMaster {
      * @see #translateFile(String, String, String, FilterContext,
      *      ITranslateCallback)
      */
-    public IFilter loadFile(String filename, FilterContext fc, IParseCallback parseCallback)
+    public @Nullable IFilter loadFile(String filename, FilterContext fc, IParseCallback parseCallback)
             throws IOException, TranslationException {
         IFilter filterObject;
         try {
@@ -256,9 +257,12 @@ public class FilterMaster {
             return;
         }
 
+        Language targetLang = fc.getTargetLang();
+        if (targetLang == null) {
+            throw new IllegalStateException("Could not find a valid target langauge.");
+        }
         File inFile = new File(sourcedir, filename).getCanonicalFile();
-        File outFile = new File(targetdir, getTargetForSource(filename, lookup, fc.getTargetLang()))
-                .getCanonicalFile();
+        File outFile = new File(targetdir, getTargetForSource(filename, lookup, targetLang)).getCanonicalFile();
 
         if (inFile.equals(outFile)) {
             throw new TranslationException(StringUtil
@@ -335,7 +339,7 @@ public class FilterMaster {
      *            The full path to the source file
      * @return The corresponding LookupInformation
      */
-    private LookupInformation lookupFilter(File inFile, FilterContext fc) throws TranslationException {
+    private @Nullable LookupInformation lookupFilter(File inFile, FilterContext fc) throws TranslationException {
         for (Filter f : config.getFilter()) {
             if (!f.isEnabled()) {
                 continue;
@@ -407,10 +411,13 @@ public class FilterMaster {
     public boolean isBilingualFile(File file) throws Exception {
         FilterContext fc = new FilterContext(null, null, true);
         LookupInformation info = lookupFilter(file, fc);
+        if (info == null) {
+            return false;
+        }
         return info.filterObject.isBilingual();
     }
 
-    private static List<String> supportedEncodings = null;
+    private static @Nullable List<String> supportedEncodings = null;
 
     /**
      * Queries JRE for the list of supported encodings. Also adds the human name
@@ -552,7 +559,14 @@ public class FilterMaster {
                     "The sourceDir and srcRelPath arguments must together point to an existing file.");
         }
         LookupInformation lookup = lookupFilter(srcFile, fc);
-        return getTargetForSource(srcRelPath, lookup, fc.getTargetLang());
+        if (lookup == null) {
+            throw new IllegalStateException("Could not find a valid filter for the source file.");
+        }
+        Language targetLang = fc.getTargetLang();
+        if (targetLang == null) {
+            throw new IllegalStateException("Could not find a valid target langauge.");
+        }
+        return getTargetForSource(srcRelPath, lookup, targetLang);
     }
 
     private static String getTargetForSource(String srcRelPath, LookupInformation lookup,
@@ -681,7 +695,7 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_SYSTEM_OS_ARCH, System.getProperty("os.version"));
         res = res.replace(AbstractFilter.TFP_SYSTEM_USER_NAME, System.getProperty("user.name"));
         if (res.contains(AbstractFilter.TFP_SYSTEM_HOST_NAME)) {
-            String hostName = null;
+            String hostName;
             try {
                 // This is expensive! Only do it if necessary!
                 hostName = java.net.InetAddress.getLocalHost().getHostName();
@@ -794,7 +808,7 @@ public class FilterMaster {
      *            filter's classname
      * @return default filter's config
      */
-    public static Filter getDefaultSettingsFromFilter(final String filterClassname) {
+    public static @Nullable Filter getDefaultSettingsFromFilter(final String filterClassname) {
         IFilter f = getFilterInstance(filterClassname);
         if (f == null) {
             return null;

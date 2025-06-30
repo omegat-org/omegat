@@ -27,6 +27,7 @@ package org.omegat.gui.segmentation;
 
 import java.awt.Window;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.gui.dialogs.PreferencesDialog;
 
@@ -41,7 +42,7 @@ public class SegmentationCustomizer {
     private final SegmentationCustomizerController view;
     private final PreferencesDialog dialog;
 
-    public SegmentationCustomizer(boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
+    public SegmentationCustomizer(boolean projectSpecific, SRX defaultSRX, SRX userSRX, @Nullable SRX projectSRX) {
         this.view = new SegmentationCustomizerController(projectSpecific, defaultSRX, userSRX, projectSRX);
         this.dialog = new PreferencesDialog(view);
     }

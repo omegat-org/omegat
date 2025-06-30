@@ -27,6 +27,7 @@ package org.omegat.gui.filters2;
 
 import java.awt.Window;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.gui.dialogs.PreferencesDialog;
 
 import gen.core.filters.Filters;
@@ -43,7 +44,7 @@ public class FiltersCustomizer {
     private final PreferencesDialog dialog;
 
     public FiltersCustomizer(boolean projectSpecific, Filters defaultFilters,
-            Filters userFilters, Filters projectFilters) {
+            Filters userFilters, @Nullable Filters projectFilters) {
         this.view = new FiltersCustomizerController(projectSpecific, defaultFilters, userFilters, projectFilters);
         this.dialog = new PreferencesDialog(view);
     }

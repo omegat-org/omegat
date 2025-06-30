@@ -30,6 +30,7 @@ package org.omegat.util;
 
 import static com.ctc.wstx.api.WstxOutputProperties.P_OUTPUT_ESCAPE_CR;
 import static org.codehaus.stax2.XMLOutputFactory2.P_AUTOMATIC_EMPTY_ELEMENTS;
+import static org.codehaus.stax2.XMLOutputFactory2.P_TEXT_ESCAPER;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -51,6 +52,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ITMXEntry;
 
@@ -109,6 +111,7 @@ public class TMXWriter2 implements AutoCloseable {
         factory = XMLOutputFactory.newInstance();
         factory.setProperty(P_OUTPUT_ESCAPE_CR, false);
         factory.setProperty(P_AUTOMATIC_EMPTY_ELEMENTS, true);
+        factory.setProperty(P_TEXT_ESCAPER, new TmxEscapingWriterFactory());
 
         out = new BufferedOutputStream(Files.newOutputStream(file.toPath()));
         xml = factory.createXMLStreamWriter(out, StandardCharsets.UTF_8.name());
@@ -201,14 +204,15 @@ public class TMXWriter2 implements AutoCloseable {
      * @param propValues
      *            pairs with property name and values
      */
-    public void writeEntry(final String source, final String translation, final ITMXEntry entry,
-            final List<String> propValues) throws Exception {
+    public void writeEntry(final @Nullable String source, final @Nullable String translation, final ITMXEntry entry,
+            final @Nullable List<String> propValues) throws Exception {
         writeEntry(source, translation, entry.getNote(), entry.getCreator(), entry.getCreationDate(),
                 entry.getChanger(), entry.getChangeDate(), propValues);
     }
 
-    public void writeEntry(String source, String translation, String note, String creator, long creationDate,
-            String changer, long changeDate, List<String> propValues) throws Exception {
+    public void writeEntry(@Nullable String source, @Nullable String translation, @Nullable String note, String creator,
+                           long creationDate, String changer, long changeDate, @Nullable List<String> propValues)
+            throws Exception {
         if (source == null && translation == null) {
             throw new NullPointerException(
                     "The TMX spec requires at least one <tuv> per <tu>. Source and translation can't both be null.");

@@ -176,8 +176,8 @@ public abstract class ParseEntry implements IParseCallback {
         }
 
         if (config.isSentenceSegmentingEnabled()) {
-            List<StringBuilder> spaces = new ArrayList<StringBuilder>();
-            List<Rule> brules = new ArrayList<Rule>();
+            List<StringBuilder> spaces = new ArrayList<>();
+            List<Rule> brules = new ArrayList<>();
             Language sourceLang = config.getSourceLanguage();
             List<String> segments = Core.getSegmenter().segment(sourceLang, source, spaces, brules);
             if (segments.size() == 1) {

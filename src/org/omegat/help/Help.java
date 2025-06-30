@@ -45,6 +45,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -111,7 +112,7 @@ public final class Help {
         DesktopWrapper.browse(uri);
     }
 
-    private static URI getHelpZipFileURI(String lang) {
+    private static @Nullable URI getHelpZipFileURI(String lang) {
         if (lang == null) {
             return null;
         }
@@ -163,7 +164,7 @@ public final class Help {
         return getHelpFileURI(null, lang, filename);
     }
 
-    public static URI getHelpFileURI(String prefix, String lang, String filename) {
+    public static URI getHelpFileURI(@Nullable String prefix, @Nullable String lang, String filename) {
         // find in installation dir
         String path = lang == null ? filename : lang + File.separator + filename;
         File file;
@@ -232,7 +233,7 @@ public final class Help {
      * Returns the version of (a translation of) the user manual. If there is no
      * translation for the specified locale, null is returned.
      */
-    private static String getDocVersion(String locale) {
+    private static @Nullable String getDocVersion(String locale) {
         // Load the property file containing the doc version
         Properties prop = new Properties();
         URI u = getHelpFileURI(locale, "version_" + locale + ".properties");

@@ -10,7 +10,7 @@ steps:
   - task: Gradle@3
     inputs:
       tasks: 'test'
-      options: '--build-cache -PenvIsCi'
+      options: '--build-cache -PenvIsCi -PtestMaxHeapSize=2048M'
       jdkVersionOption: '1.17'
   - script: |
       # stop the Gradle daemon to ensure no files are left open (impacting the save cache operation later)

@@ -58,7 +58,7 @@ import org.omegat.util.OStrings;
  * @author Thomas Cordonnier
  */
 class OpenXmlFilter extends AbstractXmlFilter {
-    private boolean removeComments;
+    private final boolean removeComments;
 
     OpenXmlFilter(boolean withComments) {
         this.removeComments = !withComments;
@@ -267,11 +267,7 @@ class OpenXmlFilter extends AbstractXmlFilter {
             if (currentPara.size() == 1) {
                 return;
             }
-            String tra = entryTranslateCallback
-                    .getTranslation(null /* entryId */, src, null /* path */);
-            if (tra == null) {
-                tra = src;
-            }
+            String tra = getTranslate(src);
             for (XMLEvent ev : restoreTags(tra)) {
                 fromEventToWriter(ev, writer);
             }
@@ -284,6 +280,17 @@ class OpenXmlFilter extends AbstractXmlFilter {
                     null /* translation */, false, null /* note */,
                     null /* path */, this, buildProtectedParts(src));
         }
+    }
+
+    private String getTranslate(String src) {
+        String tra = null;
+        if (entryTranslateCallback != null) {
+            tra = entryTranslateCallback.getTranslation(null /* entryId */, src, null /* path */);
+        }
+        if (tra == null) {
+            tra = src;
+        }
+        return tra;
     }
 
     protected Map<Character, Integer> tagsCount = new TreeMap<>();

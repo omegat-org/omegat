@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,6 +28,7 @@ package org.omegat.filters2.master;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
@@ -43,7 +45,8 @@ import gen.core.filters.Filter;
 public class OneFilterTableModel extends AbstractTableModel {
 
     private final Filter filter;
-    private boolean sourceEncodingVariable, targetEncodingVariable;
+    private final boolean sourceEncodingVariable;
+    private final boolean targetEncodingVariable;
 
     private static final String ENC_AUTO_NAME = OStrings.getString("ENCODING_AUTO");
 
@@ -53,6 +56,9 @@ public class OneFilterTableModel extends AbstractTableModel {
         if (fi != null) {
             sourceEncodingVariable = fi.isSourceEncodingVariable();
             targetEncodingVariable = fi.isTargetEncodingVariable();
+        } else {
+            sourceEncodingVariable = false;
+            targetEncodingVariable = false;
         }
     }
 
@@ -76,8 +82,9 @@ public class OneFilterTableModel extends AbstractTableModel {
             return OStrings.getString("ONEFILTER_TARGET_FILE_ENCODING");
         case 3:
             return OStrings.getString("ONEFILTER_TARGET_FILENAME_ENCODING");
+        default:
+            throw new IllegalArgumentException("Invalid column index: " + columnIndex + " for table model: ");
         }
-        return null;
     }
 
     @Override
@@ -102,8 +109,9 @@ public class OneFilterTableModel extends AbstractTableModel {
             return getEncodingName(instance.getTargetEncoding());
         case 3:
             return instance.getTargetFilenamePattern();
+        default:
+            throw new IllegalArgumentException("Invalid column index: " + columnIndex + " for table model: ");
         }
-        return null;
     }
 
     @Override
@@ -122,6 +130,8 @@ public class OneFilterTableModel extends AbstractTableModel {
         case 3:
             instance.setTargetFilenamePattern(aValue.toString());
             break;
+        default:
+            throw new IllegalArgumentException("Invalid column index: " + columnIndex + " for table model: ");
         }
     }
 
@@ -129,17 +139,19 @@ public class OneFilterTableModel extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
         case 0:
-        case 3:
             return true;
         case 1:
             return sourceEncodingVariable;
         case 2:
             return targetEncodingVariable;
+        case 3:
+            return true;
+        default:
+            throw new IllegalArgumentException("Invalid column index: " + columnIndex + " for table model: ");
         }
-        return false;
     }
 
-    private String getEncodingName(final String enc) {
+    private String getEncodingName(final @Nullable String enc) {
         return enc != null ? enc : ENC_AUTO_NAME;
     }
 

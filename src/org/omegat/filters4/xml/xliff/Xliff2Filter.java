@@ -323,7 +323,10 @@ public class Xliff2Filter extends AbstractXliffFilter {
         }
 
         String src = buildTags(source, false);
-        String tra = entryTranslateCallback.getTranslation(segId, src, path);
+        String tra = null;
+        if (entryTranslateCallback != null) {
+            tra = entryTranslateCallback.getTranslation(segId, src, path);
+        }
         if (tra != null) {
             writer.writeStartElement(namespace, "target");
             // even if source did not contain target,

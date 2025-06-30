@@ -228,24 +228,24 @@ public class XLIFFFilter extends XMLFilter {
             // <trans-unit> <note>'s only
             addProperty("note", text.toString());
         } else if (path.endsWith("trans-unit")) {
+            StringBuilder buf = new StringBuilder();
+            for (int i = 0; i < groupLevel; i++) {
+                String temp = groupResname.get(i);
+                if (temp != null) {
+                    buf.append(temp);
+                    // group1/group2/..
+                    buf.append(i == (groupLevel - 1) ? "" : "/");
+                }
+            }
+            if (buf.length() > 0) {
+                addProperty("group", buf.toString());
+            }
+
+            if (resname != null) {
+                addProperty("resname", resname);
+            }
+
             if (entryParseCallback != null) {
-                StringBuilder buf = new StringBuilder();
-                for (int i = 0; i < groupLevel; i++) {
-                    String temp = groupResname.get(i);
-                    if (temp != null) {
-                        buf.append(temp);
-                        // group1/group2/..
-                        buf.append(i == (groupLevel - 1) ? "" : "/");
-                    }
-                }
-                if (buf.length() > 0) {
-                    addProperty("group", buf.toString());
-                }
-
-                if (resname != null) {
-                    addProperty("resname", resname);
-                }
-
                 for (int i = 0; i < entryText.size(); i++) {
                     entryParseCallback.addEntryWithProperties(getSegID(), entryText.get(i), null, false,
                             finalizeProperties(), null, this, protectedParts.get(i));

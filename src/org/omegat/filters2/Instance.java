@@ -25,6 +25,8 @@
 
 package org.omegat.filters2;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 
 /**
@@ -40,7 +42,7 @@ public class Instance implements Serializable {
 
     private static final long serialVersionUID = -8290853406593590600L;
 
-    private String sourceFilenameMask;
+    private @Nullable String sourceFilenameMask;
 
     public String getSourceFilenameMask() {
         return sourceFilenameMask;
@@ -50,7 +52,7 @@ public class Instance implements Serializable {
         this.sourceFilenameMask = sourceFilenameMask;
     }
 
-    private String sourceEncoding;
+    private @Nullable String sourceEncoding;
 
     public String getSourceEncodingHuman() {
         if (sourceEncoding == null) {
@@ -60,7 +62,7 @@ public class Instance implements Serializable {
         }
     }
 
-    public String getSourceEncoding() {
+    public @Nullable String getSourceEncoding() {
         return sourceEncoding;
     }
 
@@ -72,7 +74,7 @@ public class Instance implements Serializable {
         }
     }
 
-    private String targetEncoding;
+    private @Nullable String targetEncoding;
 
     public String getTargetEncodingHuman() {
         if (targetEncoding == null) {
@@ -82,7 +84,7 @@ public class Instance implements Serializable {
         }
     }
 
-    public String getTargetEncoding() {
+    public @Nullable String getTargetEncoding() {
         return targetEncoding;
     }
 
@@ -120,7 +122,7 @@ public class Instance implements Serializable {
      * <p>
      * Output (target) filename pattern cannot be null.
      */
-    public Instance(String sourceFilenameMask, String sourceEncoding, String targetEncoding,
+    public Instance(String sourceFilenameMask, @Nullable String sourceEncoding, @Nullable String targetEncoding,
             String targetFilenamePattern) {
         init(sourceFilenameMask, sourceEncoding, targetEncoding, targetFilenamePattern);
     }

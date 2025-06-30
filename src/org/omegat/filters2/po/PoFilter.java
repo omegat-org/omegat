@@ -308,11 +308,12 @@ public class PoFilter extends AbstractFilter {
             .compile("Plural-Forms: *nplurals= *([0-9]+) *; *plural", Pattern.CASE_INSENSITIVE);
     protected static final Pattern MSG_FUZZY = Pattern.compile("#\\|\\s\"(.*)\"");
 
-    enum MODE {
+    public enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
     }
 
-    private StringBuilder[] sources, targets;
+    private StringBuilder[] sources;
+    private StringBuilder[] targets;
     private StringBuilder translatorComments;
     private StringBuilder extractedComments;
     private StringBuilder references;
@@ -842,8 +843,10 @@ public class PoFilter extends AbstractFilter {
         }
         if (isHeader && skipHeader) {
             translation = entry;
-        } else {
+        } else if (entryTranslateCallback != null) {
             translation = entryTranslateCallback.getTranslation(id, entry, path + pathSuffix);
+        } else {
+            translation = null;
         }
 
         if (translation == null && !allowNull) {
@@ -867,8 +870,11 @@ public class PoFilter extends AbstractFilter {
      *         language.
      */
     private String autoFillInPluralStatement(String header, FilterContext fc) {
+        Language targetLang = fc.getTargetLang();
+        if (targetLang == null) {
+            return header;
+        }
         if (autoFillInPluralStatement) {
-            Language targetLang = fc.getTargetLang();
             String lang = targetLang.getLanguageCode().toLowerCase(Locale.ENGLISH);
             PluralInfo pluralInfo = PLURAL_INFOS.get(lang);
             if (pluralInfo != null) {

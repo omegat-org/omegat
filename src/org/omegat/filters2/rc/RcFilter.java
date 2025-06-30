@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -62,7 +63,7 @@ public class RcFilter extends AbstractFilter {
         DIALOG, MENU, MESSAGETABLE, STRINGTABLE, OTHER, UNKNOWN
     }
 
-    protected String blockId;
+    protected @Nullable String blockId;
     protected int b;
     protected int e;
 
@@ -181,7 +182,7 @@ public class RcFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr)) {
+            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }

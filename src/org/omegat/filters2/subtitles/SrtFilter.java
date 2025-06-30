@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -57,11 +58,11 @@ public class SrtFilter extends AbstractFilter {
         WAIT_TIME, WAIT_TEXT
     };
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
-    protected String key;
+    protected @Nullable String key;
     protected StringBuilder text = new StringBuilder();
-    protected BufferedWriter out;
+    protected @Nullable BufferedWriter out;
 
     /**
      * Register plugin into OmegaT.
@@ -153,8 +154,10 @@ public class SrtFilter extends AbstractFilter {
             if (tr == null) {
                 tr = text.toString();
             }
-            out.write(tr.replace("\n", EOL));
-            out.write(EOL);
+            if (out != null) {
+                out.write(tr.replace("\n", EOL));
+                out.write(EOL);
+            }
         }
 
         key = null;
@@ -163,8 +166,8 @@ public class SrtFilter extends AbstractFilter {
 
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
-        Map<String, String> source = new HashMap<String, String>();
-        Map<String, String> translated = new HashMap<String, String>();
+        Map<String, String> source = new HashMap<>();
+        Map<String, String> translated = new HashMap<>();
 
         align = source;
         processFile(sourceFile, new NullBufferedWriter(), fc);
@@ -172,7 +175,7 @@ public class SrtFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr)) {
+            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }

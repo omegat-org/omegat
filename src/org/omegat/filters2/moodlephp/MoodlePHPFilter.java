@@ -111,11 +111,10 @@ public class MoodlePHPFilter extends AbstractFilter {
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
             throws IOException, TranslationException {
 
-        String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
-        // If the value is null the default is false
-        if ((removeStringsUntranslatedStr != null)
-                && (removeStringsUntranslatedStr.equalsIgnoreCase("true"))) {
-            removeStringsUntranslated = true;
+        if (processOptions != null) {
+            String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
+            removeStringsUntranslated = (removeStringsUntranslatedStr != null)
+                    && (removeStringsUntranslatedStr.equalsIgnoreCase("true"));
         } else {
             removeStringsUntranslated = false;
         }
@@ -183,7 +182,7 @@ public class MoodlePHPFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr)) {
+            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, sourceFilePath,
                         this);
             }

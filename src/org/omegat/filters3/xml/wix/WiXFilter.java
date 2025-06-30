@@ -98,9 +98,11 @@ public class WiXFilter extends XMLFilter {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(id, entry, null, false, null, null, this, protectedParts);
             return entry;
-        } else {
+        } else if (entryTranslateCallback != null) {
             String trans = entryTranslateCallback.getTranslation(id, entry, null);
             return trans != null ? trans : entry;
+        } else {
+            return entry;
         }
     }
 }

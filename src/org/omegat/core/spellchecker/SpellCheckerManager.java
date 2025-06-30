@@ -158,7 +158,7 @@ public class SpellCheckerManager {
 
     private static ISpellCheckerDictionary getSpellCheckerDictionary(String className) {
         try {
-            Class<?> aClass = PluginUtils.getLanguageClassLoader().loadClass(className);
+            Class<?> aClass = PluginUtils.getClassLoader(PluginUtils.PluginType.LANGUAGE).loadClass(className);
             Constructor<?> constructor = aClass.getConstructor();
             return (ISpellCheckerDictionary) constructor.newInstance();
         } catch (ClassNotFoundException e) {

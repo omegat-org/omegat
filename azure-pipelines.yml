@@ -15,10 +15,6 @@ pr:
       - releases/*
     exclude:
       - standard
-  paths:
-    exclude:
-      - src_docs
-      - README.md
 
 schedules:
   - cron: '0 12 * * 6'
@@ -37,7 +33,7 @@ variables:
 
 stages:
 - stage: TestAndDocCI
-  condition: and(ne(variables['Build.Reason'], 'Schedule'), ne(variables['Build.Reason'], 'Manual'), ne(variables .isRelease, true))
+  condition: and(ne(variables['Build.Reason'], 'Schedule'), ne(variables['Build.Reason'], 'Manual'), ne(variables['isRelease'], true))
   jobs:
   - job: docCheckAndSnapshotRelease
     steps:

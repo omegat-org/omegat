@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
+<section id="how.to.admin.git.team.project">
+  <title id="how.to.admin.git.team.project.title">Administration tasks for a team project with Git</title>
+
+  <para>Managing a team project calls for some knowledge of either the
+  <emphasis>SVN</emphasis> or <emphasis>Git</emphasis> version control system
+  (<emphasis>VCS</emphasis> in the rest of this section).</para>
+
+  <para>This section share several tricks to manage an OmegaT team project with <emphasis>Git</emphasis>.</para>
+
+	<section id="how.to.admin.git.team.project.setup.workspace">
+		<title id="how.to.admin.git.team.project.setup.workspace.title">Prepare git workspace</title>
+
+		<para>Before working on the team project, you need to clone your project on your local using
+			the command line: <command>git clone [repository URL]</command>
+			Because OmegaT translation workspace has special folder structure and don't keep all the
+			required git information on it, you should make your administration workspace other than
+			OmegaT project.
+		</para>
+
+	</section>
+
+	<section id="how.to.admin.git.team.project.take.diff">
+		<title id="how.to.admin.git.team.project.take.diff.title">Check updates by the team member</title>
+
+		    <para>If you want to take updates by most recent member updates on the Git team repository, the command line:
+			  <command>git diff HEAD..HEAD~</command>
+			</para>
+
+			<para>When your members use various OmegaT versions, or working on various Operating Systems,
+				it may show big differences for line by line. It is because we use XML format as a data store
+				and there are several <emphasis>standard</emphasis> encodings to write translations.
+				OmegaT stores translations in the <filename>project_save.tmx</filename> file, and it can be
+				express the same strings as different expressions;
+				such as <programlisting>&amp;le;b0&amp;gt;escape sequence&amp;le;/b0&amp;gt;</programlisting>
+				or <programlisting>&amp;le;b0>escape sequence&amp;le;/b0></programlisting>
+				Both are compliant for the XML Standard.
+			</para>
+
+		<para>
+			When you want to see TMX changes in git tools, we can use a git difftool feature.
+        <orderedlist>
+			<listitem>
+				<para>Install XML aware diff tool which is supported by git, here I assume that you have already installed "Beyond Compare 4" for example.</para>
+			</listitem>
+			<listitem>
+				<para>you can configure to use the tool by <programlisting>git config --global difftool --difftool=bc</programlisting></para>
+			</listitem>
+			<listitem>
+				<para>then run "git difftool --tool=bc" to check last changes with bc</para>
+			</listitem>
+			<listitem>
+				<para>It will open beyond compare tool window on your desktop</para>
+			</listitem>
+			<listitem>
+				<para>Open "Tools" > "File Format", and select XML and add "*.tmx" to file type</para>
+			</listitem>
+			<listitem>
+				<para>Also select "convert" tab and select "XML Tidy".</para>
+			</listitem>
+			<listitem>
+				<para>Save it and reopen the file.</para>
+			</listitem>
+			<listitem>
+				<para>You will see only a change of contents and it will ignore a raw difference that considered
+					as same in XML, such as white space, a usage of single quote or double quote.</para>
+			</listitem>
+		</orderedlist>
+		You can see a list of diff tool that git supports, "git difftool --tool-help"
+		</para>
+
+		<para>There is a similar situation on Resource Bundle translations. When your customer uses old Java version 8,
+			it is still in support, use "ASCII" as an encoding character set, and OmegaT escapes Unicode characters
+			in escape sequence "\uXXXX" form. It can be a lower case and an upper case for escaping.
+			You may want to compare two versions of translations, but want to ignore a case of the escaping,
+			you can set a small script to process these.
+			<programlisting>
+				git config --global difftool.idiff.cmd 'diff --unified=3 --color=always --ignore-case $LOCAL $REMOTE | less --raw-control-chars'
+				git config --global difftool.prompt 0
+				git config --global alias.idiff 'difftool --tool idiff'
+			</programlisting>
+			This git configuration gives you to ignore the case to take a diff of the commits.
+			You can now use <command>git idiff HEAD..HEAD~</command> instead of <command>git diff</command>.
+			In this example, it assumes you use mac, Linux, WSL, or other operating systems which can execute "git", "diff" and "less" commands.
+		</para>
+
+	</section>
+</section>

@@ -58,9 +58,11 @@ nav:
      Plugin manifest: 19.PluginManifest.md
      How to make Machine Translation connector plugin: 12.HowToMakeMTConnector.md
   - Understanding OmegaT Internals:
-     OmegaT internals: 21.DevelopersGuide.md
+     OmegaT internals: 21.OmegaTInternals.md
      Core Events: 22.CoreEvents.md
      Core Methods: 23.CoreMethods.md
+     Plugin Security: 24.PluginSecurity.md
+     Code Generation: 25.CodeGeneration.md
      Caching: 26.Caching.md
      Utility functions: 27.UtilityClasses.md
   - Quality Assurance and tests:
@@ -87,5 +89,6 @@ nav:
      Release procedure: 90.ReleaseProcedure.md
      Code Signing How-to: 92.CodeSigning.md
      Building installer: 93.BuildingInstallerPackage.md
-     Git Repository analysis: 94.GitRepositoryAnalysis.md
+     Git repository analysis: 94.GitRepositoryAnalysis.md
+     License and Terms: 95.LicenseAndTerms.md
      Appendix: 91.appendix.md

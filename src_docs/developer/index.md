@@ -29,9 +29,11 @@
 
 ## Understanding OmegaT Internals
 
-* [OmegaT internals](21.DevelopersGuide.md)
+* [OmegaT internals](21.OmegaTInternals.md)
 * [Core Events](22.CoreEvents.md)
 * [Core Methods](23.CoreMethods.md)
+* [Plugin Security Subsystem](24.PluginSecurity.md)
+* [Code generation by JAXB](25.CodeGeneration.md)
 * [Caching](26.Caching.md)
 * [Utility functions](27.UtilityClasses.md)
 
@@ -81,4 +83,5 @@
 * [Code Signing How-to](92.CodeSigning.md)
 * [Building installer](93.BuildingInstallerPackage.md)
 * [Git repository analysis](94.GitRepositoryAnalysis.md)
+* [License and Terms](95.LicenseAndTerms.md)
 * [Supplimentary files](91.appendix.md)

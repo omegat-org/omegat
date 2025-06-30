@@ -156,15 +156,15 @@ public final class Help {
         return destinationDir.resolve(OConsts.HELP_HOME).toFile();
     }
 
-    public static URI getHelpFileURI(String filename) {
+    public static @Nullable URI getHelpFileURI(String filename) {
         return getHelpFileURI(null, filename);
     }
 
-    public static URI getHelpFileURI(String lang, String filename) {
+    public static @Nullable URI getHelpFileURI(@Nullable String lang, String filename) {
         return getHelpFileURI(null, lang, filename);
     }
 
-    public static URI getHelpFileURI(@Nullable String prefix, @Nullable String lang, String filename) {
+    public static @Nullable URI getHelpFileURI(@Nullable String prefix, @Nullable String lang, String filename) {
         // find in installation dir
         String path = lang == null ? filename : lang + File.separator + filename;
         File file;

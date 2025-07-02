@@ -55,6 +55,7 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.CLIParameters;
 import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
@@ -391,7 +392,9 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             when specified plugin is not found.
      */
+    @VisibleForTesting
     public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
+        initializePluginClassLoaders(new ArrayList<>());
         ClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
         loadFromProperties(props, pluginsClassLoader);
     }
@@ -701,7 +704,7 @@ public final class PluginUtils {
             if (key.startsWith("plugin.desc")) {
                 continue;
             }
-            boolean isMainPlugin = key.equals("plugin.main");
+            boolean isMainPlugin = key.equals("plugin");
             for (String clazz : classes) {
                 boolean loaded = isMainPlugin
                         ? loadClass(clazz, classLoader)

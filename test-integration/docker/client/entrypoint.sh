@@ -23,6 +23,12 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
+export GRADLE_USER_HOME=/gradle-cache
+
+# Create hash of all build configuration files including version catalogs
+BUILD_FILES_HASH=$(find /code/ -name "*.gradle*" -o -name "gradle.properties" -o -name "libs.versions.toml" \) \
+    -not -path "./build/*" -not -path "./.gradle/*" -not -path "./.git/*" | \
+    sort | xargs cat 2>/dev/null | sha256sum | cut -d' ' -f1)
 
 rsync -rlD --exclude='.git' --exclude='.gradle' --exclude='build' /code/ /workdir
 
@@ -52,15 +58,9 @@ chmod 600 /home/omegat/.ssh/id_rsa
 
 ssh-keyscan -H server > /home/omegat/.ssh/known_hosts
 
-export GRADLE_USER_HOME=/gradle-cache
 cd /workdir
 
-# Create hash of all build configuration files including version catalogs
-BUILD_FILES_HASH=$(find . \( -name "*.gradle*" -o -name "gradle.properties" -o -name "libs.versions.toml" \) \
-    -not -path "./build/*" -not -path "./.gradle/*" | \
-    sort | xargs cat 2>/dev/null | sha256sum | cut -d' ' -f1)
-
-CACHE_MARKER="/gradle-cache/.deps-${BUILD_FILES_HASH}"
+CACHE_MARKER="${GRADLE_USER_HOME}/.deps-${BUILD_FILES_HASH}"
 
 if [ ! -f "$CACHE_MARKER" ]; then
     echo "Build configuration changed or not cached. Downloading dependencies..."

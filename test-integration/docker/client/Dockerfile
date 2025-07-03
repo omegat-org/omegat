@@ -44,6 +44,7 @@ RUN echo TARGETARCH is ${TARGETARCH} && curl -LO https://packages.adoptium.net/a
     && rm -f adoptium-ca-certificates_${CAVER}_all.deb temurin-${JAVA}-${JDKVER}_${TARGETARCH}.deb
 RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-${GRADLE}-bin.zip \
     && unzip -q gradle-${GRADLE}-bin.zip && rm -f gradle-${GRADLE}-bin.zip) && mv /opt/gradle-${GRADLE} /opt/gradle
+RUN mkdir -p /gradle-cache && chown -R omegat:omegat /gradle-cache
 
 USER omegat
 

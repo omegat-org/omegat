@@ -58,7 +58,7 @@ public final class FiltersUtil {
                 && o1.isPreserveSpaces() == o2.isPreserveSpaces()
                 && o1.isRemoveSpacesNonseg() == o2.isRemoveSpacesNonseg()
                 && o1.isRemoveTags() == o2.isRemoveTags()
-                && filterListsEqual(o1.getFilters(), o2.getFilters());
+                && filterListsEqual(o1.getFilter(), o2.getFilter());
     }
 
     private static boolean filterListsEqual(List<Filter> filters, List<Filter> filters2) {

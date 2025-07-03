@@ -38,22 +38,21 @@ gnudiff = "1.15"
 desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
 pdfbox = "3.0.5"
-maligna = "4.0.0"
+maligna = "3.0.1"
 trie4j = "0.9.10_1"
 dsl4j = "1.1.2"
 stardict4j = "1.1.0"
 juniversalchardet = "2.5.0"
 mnemonics = "1.2"
 hunspell = "2.1.2"
-xjc = "4.0.5"
-jaxb4_api = "4.0.2"
-jaxb = "4.0.5"
+xjc = "2.3.9"
 jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.5.0"
 flatlaf="3.6"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
+jaxb = "2.3.0"
 swing_extra_locales = "0.3.3"
 mockito = "5.18.0"
 json_java = "20250517"
@@ -122,7 +121,7 @@ ivy = {group = "org.apache.ivy", name = "ivy", version.ref = "ivy"}
 jackson-core = {group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "jackson"}
 jackson-databind = {group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson"}
 jackson-xml = {group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-xml", version.ref = "jackson"}
-jackson-jaxb = {group = "com.fasterxml.jackson.module", name = "jackson-module-jakarta-xmlbind-annotations", version.ref = "jackson"}
+jackson-jaxb = {group = "com.fasterxml.jackson.module", name = "jackson-module-jaxb-annotations", version.ref = "jackson"}
 jackson-yaml = {group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson"}
 jgit = {group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit"}
 jgit-ssh = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache", version.ref = "jgit"}
@@ -155,17 +154,17 @@ omegat-gnudiff4j = {group = "org.omegat", name = "gnudiff4j", version.ref = "gnu
 madlonkay-desktopsupport = {group = "org.madlonkay", name = "desktopsupport", version.ref = "desktopsupport"}
 url-protocol-handler = {group = "tokyo.northside", name = "url-protocol-handler", version.ref = "protocolhandler"}
 apache-pdfbox = {group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox"}
-tokyo-northside-maligna = {group = "tokyo.northside", name = "maligna", version.ref = "maligna"}
+loomchild-maligna = {group = "net.loomchild", name = "maligna", version.ref = "maligna"}
 trie4j = {group = "tokyo.northside", name = "trie4j", version.ref = "trie4j"}
 dsl4j = {group = "tokyo.northside", name = "dsl4j", version.ref = "dsl4j"}
 stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "stardict4j"}
 juniversal-chardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
 omegat-mnemonics = {group = "org.omegat", name = "lib-mnemonics", version.ref = "mnemonics"}
 dumont-hunspell = {group = "com.gitlab.dumonts", name = "hunspell", version.ref = "hunspell"}
-jaxb4-api = {group = "jakarta.xml.bind", name = "jakarta.xml.bind-api", version = "jaxb4_api"}
-jaxb4-xjc = {group = "org.glassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
-jaxb4-core = {group = "org.glassfish.jaxb", name = "jaxb-core", version.ref = "jaxb"}
-jaxb4-runtime = {group = "org.glassfish.jaxb", name = "jaxb-runtime", version.ref = "jaxb"}
+jaxb-api = {group = "javax.xml.bind", name = "jaxb-api", version.ref = "jaxb"}
+jaxb-xjc = {group = "org.glassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
+jaxb-core = {group = "org.glassfish.jaxb", name = "jaxb-core", version.ref = "jaxb"}
+jaxb-runtime = {group = "org.glassfish.jaxb", name = "jaxb-runtime", version.ref = "jaxb"}
 tipoftheday = {group = "tokyo.northside", name = "tipoftheday", version.ref = "tipoftheday"}
 jna = {group = "net.java.dev.jna", name = "jna-platform", version.ref = "jna"}
 jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}

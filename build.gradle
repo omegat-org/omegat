@@ -99,9 +99,9 @@ dependencies {
         runtimeOnly(libs.slf4j.jdk14)
 
         // jaxb gen compilation
-        implementation(libs.jaxb4.api)
-        runtimeOnly(libs.jaxb4.core)
-        runtimeOnly(libs.jaxb4.runtime)
+        implementation(libs.jaxb.api)
+        runtimeOnly(libs.jaxb.core)
+        runtimeOnly(libs.jaxb.runtime)
 
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)

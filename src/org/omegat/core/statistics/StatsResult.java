@@ -48,7 +48,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
@@ -254,7 +254,7 @@ public class StatsResult {
         setDate();
         XmlMapper mapper = XmlMapper.xmlBuilder().enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
                 .build();
-        mapper.registerModule(new JakartaXmlBindAnnotationModule());
+        mapper.registerModule(new JaxbAnnotationModule());
         return mapper.writeValueAsString(this);
     }
 

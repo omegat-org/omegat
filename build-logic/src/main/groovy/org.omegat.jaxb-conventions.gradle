@@ -7,9 +7,7 @@ configurations {
 }
 
 dependencies {
-    jaxb(libs.jaxb4.xjc)
-    jaxb(libs.jaxb4.api)
-    jaxb(libs.jaxb4.runtime)
+    jaxb(libs.jaxb.xjc)
 }
 
 def genjaxb = tasks.register('genJAXB') {

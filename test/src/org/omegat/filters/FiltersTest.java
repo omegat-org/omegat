@@ -68,7 +68,7 @@ public class FiltersTest {
 
         // Deep change
         clone = FilterMaster.createDefaultFiltersConfig();
-        Files file = clone.getFilter().get(0).getFiles().get(0);
+        Files file = clone.getFilters().get(0).getFiles().get(0);
         file.setTargetEncoding(file.getTargetEncoding() + "foo");
         assertFalse(FiltersUtil.filtersEqual(orig, clone));
     }

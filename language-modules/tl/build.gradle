@@ -16,6 +16,7 @@ dependencies {
             exclude module: 'languagetool-core'
         }
         compileOnly(libs.morfologik.stemming)
+        implementation(libs.jetbrains.annotations)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

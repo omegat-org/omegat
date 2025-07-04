@@ -74,7 +74,6 @@ import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
-import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
@@ -203,7 +202,6 @@ public final class Main {
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
         // Do migration and load various settings. The order is important!
-        ConvertConfigs.convert();
         Preferences.init();
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
@@ -341,7 +339,7 @@ public final class Main {
      * Execute standard GUI.
      */
     private static int runGUI() {
-        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
+        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {

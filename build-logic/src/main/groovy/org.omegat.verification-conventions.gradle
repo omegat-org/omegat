@@ -95,10 +95,10 @@ tasks.register('runDebugger', JavaExec) {
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
-tasks.register('runOnJava17', JavaExec) {
-    description = 'Runs application on Java 17.'
+tasks.register('runOnJava11', JavaExec) {
+    description = 'Runs application on Java 11.'
     javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(11)
         vendor = JvmVendorSpec.ADOPTIUM
     }
     mainClass.set application.mainClass
@@ -153,22 +153,6 @@ tasks.register('testIntegration', JavaExec) {
     maxHeapSize = findProperty('testMaxHeapSize')
     // Ask modules to be up-to-date before run task executed
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
-}
-
-tasks.register('testOnJava17', Test) {
-    description = 'Runs test cases on Java 17.'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(17)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    // Allow setting the max heap size for the run task from the command line, e.g.
-    // `gradle -PtestMaxHeapSize=2048M testOnJava17`
-    maxHeapSize = findProperty('testMaxHeapSize')
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    group = 'verification'
 }
 
 tasks.register('testOnJava21', Test) {
@@ -259,5 +243,31 @@ tasks.register('jacocoIntegrationReport', JacocoReport) {
     reports {
         xml.required = true
         html.required = true
+    }
+}
+
+tasks.register('spotbugsReport') {
+    // Reusable function to check and print the report for a given project
+    def printReport = { project ->
+        ["main", "test"].each { target ->
+            def reportFile = project.file("build/reports/spotbugs/${target}.txt")
+            if (reportFile.exists()) {
+                def sep = "-".repeat(40)
+                def ppath = project.path
+                if (ppath.equals(":")) {
+                    ppath = "OmegaT root project"
+                }
+                println(sep + " Report from project: ${ppath} for ${target} code" + sep) // Use full project path
+                reportFile.eachLine { line ->
+                    println(line)
+                }
+            }
+        }
+    }
+    doLast {
+        printReport(rootProject)
+        subprojects.each { p ->
+            printReport(p)
+        }
     }
 }

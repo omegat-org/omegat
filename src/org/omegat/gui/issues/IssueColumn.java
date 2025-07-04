@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2016 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,33 +23,43 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.convert.v20to21.data;
+package org.omegat.gui.issues;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.omegat.util.OStrings;
 
-/**
- * Wrapper around all the file filter classes. Is a JavaBean, so that it's easy
- * to write/read it to/from XML file and provides a table model.
- *
- * @author Maxym Mykhalchuk
- */
-public class Filters {
-    /** Holds the list of available filters. */
-    private List<OneFilter> filters = new ArrayList<OneFilter>();
+import javax.swing.Icon;
 
-    /**
-     * Returns all the filters as an array.
-     */
-    public OneFilter[] getFilter() {
-        return filters.toArray(new OneFilter[filters.size()]);
+enum IssueColumn {
+    SEG_NUM(0, OStrings.getString("ISSUES_TABLE_COLUMN_ENTRY_NUM"), Integer.class),
+    ICON(1, "", Icon.class),
+    TYPE(2, OStrings.getString("ISSUES_TABLE_COLUMN_TYPE"), String.class),
+    DESCRIPTION(3, OStrings.getString("ISSUES_TABLE_COLUMN_DESCRIPTION"), String.class),
+    ACTION_BUTTON(4, "", Icon.class);
+
+    private final int index;
+    private final String label;
+    private final Class<?> clazz;
+
+    IssueColumn(int index, String label, Class<?> clazz) {
+        this.index = index;
+        this.label = label;
+        this.clazz = clazz;
     }
 
-    /**
-     * Sets all filters from the array.
-     */
-    public void setFilter(OneFilter[] filter) {
-        filters = new ArrayList<OneFilter>(Arrays.asList(filter));
+    int getIndex() {
+        return index;
     }
+
+    String getLabel() {
+        return label;
+    }
+
+    Class<?> getClazz() {
+        return clazz;
+    }
+
+    static IssueColumn get(int index) {
+        return values()[index];
+    }
+
 }

@@ -1,6 +1,3 @@
-parameters:
-  condition: false
-
 steps:
   - task: Cache@2
     displayName: 'Cache Gradle'

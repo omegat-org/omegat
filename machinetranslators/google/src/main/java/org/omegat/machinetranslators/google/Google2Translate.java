@@ -38,6 +38,7 @@ import javax.swing.JCheckBox;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -73,8 +74,8 @@ public class Google2Translate extends BaseCachedTranslate {
      */
     protected static final String GT_DEFAULT_URL = "https://translation.googleapis.com";
     protected static final String GT_PATH = "/language/translate/v2";
-    private String googleTranslateUrl;
-    private String temporaryKey;
+    private final String googleTranslateUrl;
+    private @Nullable String temporaryKey;
     private static final int MAX_TEXT_LENGTH = 5000;
     private static final int MAX_TEXT_LENGTH_PREMIUM = 30000;
     private static final String BUNDLE_BASENAME = "org.omegat.machinetranslators.google.Bundle";
@@ -149,7 +150,7 @@ public class Google2Translate extends BaseCachedTranslate {
      *             when error occurred.
      */
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
+    protected @Nullable String translate(Language sLang, Language tLang, String text) throws Exception {
         String targetLang = tLang.getLanguageCode();
         // Differentiate in target between simplified and traditional Chinese
         if (tLang.getLanguage().compareToIgnoreCase("zh-cn") == 0

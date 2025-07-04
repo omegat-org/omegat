@@ -112,8 +112,6 @@ public class XtagFilter extends AbstractFilter {
      *            Source document
      * @param outFile
      *            Target document
-     * @throws java.io.IOException
-     * @throws org.omegat.filters2.TranslationException
      */
     private void processXtagFile(BufferedReader inFile, Writer outFile) throws IOException,
             TranslationException {
@@ -178,7 +176,7 @@ public class XtagFilter extends AbstractFilter {
     /**
      * Receives a character, and convert it to the Xtag equivalent if necessary
      *
-     * @param c
+     * @param cp
      *            A character
      * @return either the original character, or an Xtag version of that
      *         character
@@ -219,7 +217,7 @@ public class XtagFilter extends AbstractFilter {
                 state = stateCollectTag;
                 // Possible end of a tag
                 // Exception for <\>>, which is how CopyFlow stores a >
-            } else if ((cp == '>') && (tag.lastIndexOf("\\") != tag.offsetByCodePoints(tag.length(), -1))) {
+            } else if (cp == '>' && tag.lastIndexOf("\\") != tag.offsetByCodePoints(tag.length(), -1)) {
                 num++;
                 Xtag oneTag = new Xtag(tag.toString(), num);
                 changedString.append(oneTag.toShortcut());

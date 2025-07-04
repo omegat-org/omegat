@@ -266,4 +266,139 @@
       </listitem>
     </varlistentry>
   </variablelist>
+
+  <section id="how.to.admin.git.team.project.setup.workspace">
+        <title id="how.to.admin.git.team.project.setup.workspace.title">Prepare git workspace</title>
+
+        <para>Before working on the team project, you need to clone your project on your local using
+            the command line: <command>git clone [repository URL]</command>
+            Because OmegaT translation workspace has special folder structure and don't keep all the
+            required git information on it, you should make your administration workspace other than
+            OmegaT project.
+        </para>
+
+    </section>
+
+    <section id="how.to.admin.git.team.project.take.diff">
+        <title id="how.to.admin.git.team.project.take.diff.title">Check TMX updates by the team member</title>
+
+        <para>If you want to take updates by most recent member updates on the Git team repository, the command line:
+            <command>git diff HEAD..HEAD~</command>
+        </para>
+
+        <para>When your members use various OmegaT versions, or working on various Operating Systems,
+            it may show big differences for line by line. It is because we use XML format as a data store
+            and there are several <emphasis>standard</emphasis> encodings to write translations.
+            OmegaT stores translations in the <filename>project_save.tmx</filename> file, and it can be
+            express the same strings as different expressions;
+            such as <programlisting>&amp;le;b0&amp;gt;escape sequence&amp;le;/b0&amp;gt;</programlisting>
+            or <programlisting>&amp;le;b0>escape sequence&amp;le;/b0></programlisting>
+            Both are compliant for the XML Standard.
+        </para>
+
+        <para>When you can use BASH on your platform with git command, and you have already have 'xmllint' command on your platform,
+            you can look a diff with unescaped values.
+            Please create small script like
+            <programlisting>
+                #!/bin/bash
+
+                # Create temporary files for the canonical XML content
+                LOCAL=$(mktemp)
+                REMOTE=$(mktemp)
+
+                # Perform the conversion to canonical XML format
+                xmllint --c14n11 "$1" > "$LOCAL"
+                xmllint --c14n11 "$2" > "$REMOTE"
+
+                # Run diff with canonical XML content
+                diff --unified=3 --ignore-case --color=always "$LOCAL" "$REMOTE" | less --raw-control-chars
+
+                # Clean up temporary files
+                rm -f "$LOCAL" "$REMOTE"
+            </programlisting>
+            and store it in the place your command PATH registered. And please configure your git command line such as
+            <programlisting>
+                git config --global difftool.xdiff.cmd 'xdiff.sh $LOCAL $REMOTE'
+                git config --global difftool.prompt 0
+                git config --global alias.xdiff 'difftool --tool xdiff'
+            </programlisting>
+            Then command <command>git xdiff HEAD..HEAD~</command> provide you to actual difference.
+        </para>
+
+        <para>
+            When you want to see TMX changes in git tools, we can use a git difftool feature.
+            <orderedlist>
+                <listitem>
+                    <para>Install XML aware diff tool supported by git, here I assume that you have already installed "Beyond Compare 4" for example.</para>
+                </listitem>
+                <listitem>
+                    <para>you can configure to use the tool by <programlisting>git config --global difftool --difftool=bc</programlisting></para>
+                </listitem>
+                <listitem>
+                    <para>then run "git difftool --tool=bc" to check last changes with bc</para>
+                </listitem>
+                <listitem>
+                    <para>It will open beyond compare tool window on your desktop</para>
+                </listitem>
+                <listitem>
+                    <para>Open "Tools" > "File Format", and select XML and add "*.tmx" to file type</para>
+                </listitem>
+                <listitem>
+                    <para>Also select "convert" tab and select "XML Tidy".</para>
+                </listitem>
+                <listitem>
+                    <para>Save it and reopen the file.</para>
+                </listitem>
+                <listitem>
+                    <para>You will see only a change of contents and it will ignore a raw difference that considered
+                        as same in XML, such as white space, a usage of single quote or double quote.</para>
+                </listitem>
+            </orderedlist>
+            You can see a list of diff tool that git supports, "git difftool --tool-help"
+        </para>
+    </section>
+
+    <section id="how.to.admin.git.team.project.take.target.diff">
+        <title id="how.to.admin.git.team.project.take.target.diff.title">Check target artifacts by the other member</title>
+
+        <para>There is a similar situation on Resource Bundle translations, and translator commit a target artifact file to repository.
+            When your customer uses old Java version 8, it is still in support, use "ASCII" as an encoding character set,
+            and OmegaT escapes Unicode characters in escape sequence "\uXXXX" form. It can be a lower case and an upper case for escaping.
+            You may want to compare two versions of translations, but want to ignore a case of the escaping, and check unescaped text.
+        </para>
+
+        <para>It is still a pain even when you can ignore a difference of the case of escape, you don't want to look '\uXXXX' form of the strings.
+            It is better to see unescaped string in your administration work, here is a small utility script "udiff.sh".
+            <programlisting>
+                #!/bin/bash
+
+                # Unescape Unicode sequences in a properties file
+                unescape() {
+                perl -CSD -Mopen=':std,:utf8' -pe 's/\\u([0-9a-fA-F]{4})/chr(hex($1))/eg' "$1"
+                }
+
+                # Create temporary files for the unescaped content
+                LOCAL=$(mktemp)
+                REMOTE=$(mktemp)
+
+                # Perform the unescaping
+                unescape "$1" > "$LOCAL"
+                unescape "$2" > "$REMOTE"
+
+                # Run diff with unescaped content
+                diff --unified=3 --ignore-case --color=always "$LOCAL" "$REMOTE" | less --raw-control-chars
+
+                # Clean up temporary files
+                rm -f "$LOCAL" "$REMOTE"
+            </programlisting>
+            After placing the script in your path, you can configure your git config such as
+            <programlisting>
+                git config --global difftool.idiff2.cmd 'udiff.sh $LOCAL $REMOTE'
+                git config --global difftool.prompt 0
+                git config --global alias.idiff2 'difftool --tool idiff2'
+            </programlisting>
+            Then you will run <command>git idiff2 HEAD..HEAD~</command> you got an unescaped difference in the most recent commit.
+        </para>
+
+    </section>
 </section>

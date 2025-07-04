@@ -1,5 +1,4 @@
-<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
- xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<jaxb:bindings version="3.0" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<jaxb:bindings schemaLocation="tmx14.xsd">
   
 		<jaxb:bindings node="//xs:element[@name='note']/xs:complexType/xs:attribute[@ref='xml:lang']">

@@ -1829,13 +1829,11 @@ public class RealProject implements IProject {
      */
     protected String patchFileNameForEntryKey(String filename) {
         String fn = filename.replace('\\', '/');
-        /* FIXME:
-        String f = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_FROM);
-        String t = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_TO);
+        String f = RuntimePreferences.getAlternateFilenameFrom();
+        String t = RuntimePreferences.getAlternateFilenameTo();
         if (f != null && t != null) {
             fn = fn.replaceAll(f, t);
         }
-        */
         return StringUtil.removeXMLInvalidChars(fn);
     }
 

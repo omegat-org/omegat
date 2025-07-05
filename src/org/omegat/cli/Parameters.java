@@ -138,6 +138,14 @@ public class Parameters implements Runnable {
             STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = true, descriptionKey = "STATS_TYPE")
     String statsType;
 
+    // Undocumented CLI options
+    public static final String ALTERNATE_FILENAME_FROM = "--alternate-filename-from";
+    @Option(names = { ALTERNATE_FILENAME_FROM }, paramLabel = "<alternate_filename_from>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_FROM")
+    String alternateFilenameFrom;
+    public static final String ALTERNATE_FILENAME_TO = "--alternate-filename-to";
+    @Option(names = { ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_TO")
+    String alternateFilenameTo;
+
     // Development
     public static final String DEV_MANIFESTS = "dev-manifests";
 

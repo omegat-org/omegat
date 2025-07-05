@@ -242,7 +242,7 @@ final class StandardCommandLauncher {
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         try {
-            ClassLoader cl = PluginUtils.getBasePluginClassLoader();
+            ClassLoader cl = PluginUtils.getClassLoader(PluginUtils.PluginType.BASE);
             Class<?> alignClass = cl.loadClass("org.omegat.gui.align.AlignerModule");
             Method method = alignClass.getMethod("showAligner", String.class);
             method.invoke(null, dir);
@@ -458,7 +458,7 @@ final class StandardCommandLauncher {
         if (params.noTeam) {
             RuntimePreferences.setNoTeam();
         }
-        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
+        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
@@ -494,6 +494,10 @@ final class StandardCommandLauncher {
             String err = String.join("\n", Core.getPluginsLoadingErrors());
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), err,
                     OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (params.alternateFilenameFrom != null) {
+            RuntimePreferences.setAlternateFilenames(params.alternateFilenameFrom, params.alternateFilenameTo);
         }
 
         CoreEvents.fireApplicationStartup();

@@ -204,7 +204,8 @@ dependencies {
         exclude module: 'jackson-databind'
         exclude module: 'jackson-dataformat-yaml'
     }
-    testFixturesImplementation(libs.bundles.jackson)
+    // there is a conflict for jackson
+    testFixturesApi(libs.bundles.jackson.test)
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation sourceSets.main.output
     testFixturesImplementation(libs.commons.io)

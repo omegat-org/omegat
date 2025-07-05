@@ -26,6 +26,7 @@
 package org.omegat.cli;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
+import org.apache.commons.lang3.StringUtils;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
@@ -74,9 +75,15 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.format.TextStyle;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.PropertyResourceBundle;
 
 final class StandardCommandLauncher {
@@ -243,6 +250,9 @@ final class StandardCommandLauncher {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
         try {
             ClassLoader cl = PluginUtils.getClassLoader(PluginUtils.PluginType.BASE);
+            if (cl == null) {
+                return 1;
+            }
             Class<?> alignClass = cl.loadClass("org.omegat.gui.align.AlignerModule");
             Method method = alignClass.getMethod("showAligner", String.class);
             method.invoke(null, dir);
@@ -356,11 +366,7 @@ final class StandardCommandLauncher {
 
         try {
             String sourceMask = params.sourcePattern;
-            if (sourceMask != null) {
-                p.compileProject(sourceMask, false);
-            } else {
-                p.compileProject(".*", false);
-            }
+            p.compileProject(Objects.requireNonNullElse(sourceMask, ".*"), false);
         } catch (Exception ex) {
             Log.logErrorRB(ex, "CT_ERROR_COMPILING_PROJECT");
             return 1;
@@ -465,6 +471,14 @@ final class StandardCommandLauncher {
             OSXIntegration.init();
         }
 
+        // initialize logging backend and loading configuration.
+        Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
+                ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+                Locale.getDefault().toLanguageTag());
+        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+                System.getProperty("java.version"), System.getProperty("java.home"));
+
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
 
         // Set X11 application class name to make some desktop user interfaces
@@ -506,10 +520,15 @@ final class StandardCommandLauncher {
             // setVisible can't be executed directly, because we need to
             // call all application startup listeners for initialize UI
             Core.getMainWindow().getApplicationFrame().setVisible(true);
+            //
             if (isProjectRemote(params.projectLocation)) {
                 ProjectUICommands.projectRemote(params.projectLocation);
             } else if (params.projectLocation != null) {
-                ProjectUICommands.projectOpen(Paths.get(params.projectLocation).toFile());
+                File targetDir = Paths.get(params.projectLocation).toFile();
+                File targetFile = Paths.get(params.projectLocation).resolve("omegat.project").toFile();
+                if (targetDir.isDirectory() && targetFile.exists()) {
+                    ProjectUICommands.projectOpen(targetDir);
+                }
             }
         });
         return 0;

@@ -36,17 +36,10 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
-import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
 import org.omegat.cli.AlignCommand;
 import org.omegat.cli.Parameters;
@@ -55,7 +48,6 @@ import org.omegat.cli.StatsCommand;
 import org.omegat.cli.TeamCommand;
 import org.omegat.cli.TranslateCommand;
 import picocli.CommandLine;
-import tokyo.northside.logging.ILogger;
 
 import org.omegat.core.Core;
 import org.omegat.filters2.master.FilterMaster;
@@ -102,18 +94,6 @@ public final class Main {
         // Workaround for Java 17 or later support of JAXB.
         // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
         System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
-
-        // initialize logging backend and loading configuration.
-        ILogger logger = Log.getLogger(Main.class);
-
-        logger.atInfo().setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
-                .addArgument(StringUtils.repeat('=', 120)).addArgument(OStrings.getNameAndVersion())
-                .addArgument(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now()))
-                .addArgument(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()))
-                .addArgument(Locale.getDefault().toLanguageTag()).log();
-        logger.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
-                System.getProperty("java.version"), System.getProperty("java.home"));
 
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 

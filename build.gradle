@@ -204,6 +204,7 @@ dependencies {
         exclude module: 'jackson-databind'
         exclude module: 'jackson-dataformat-yaml'
     }
+    testFixturesImplementation(libs.bundles.jackson)
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation sourceSets.main.output
     testFixturesImplementation(libs.commons.io)

@@ -120,6 +120,7 @@ groovy-templates = {group = "org.apache.groovy", name = "groovy-templates", vers
 ivy = {group = "org.apache.ivy", name = "ivy", version.ref = "ivy"}
 jackson-core = {group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "jackson"}
 jackson-databind = {group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson"}
+jackson-annotations = {group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jackson"}
 jackson-bom = {group = "com.fasterxml.jackson", name = "jackson-bom", version.ref = "jackson"}
 jackson-datatype-jsr310 = {group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version.ref = "jackson"}
 jackson-xml = {group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-xml", version.ref = "jackson"}
@@ -182,7 +183,7 @@ protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref =
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
-jackson = ["jackson-core", "jackson-databind", "jackson-bom", "jackson-datatype-jsr310", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
+jackson = ["jackson-core", "jackson-databind", "jackson-annotations", "jackson-bom", "jackson-datatype-jsr310", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
 ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "bc-util-jdk18on", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]

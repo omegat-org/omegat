@@ -144,7 +144,6 @@
     <!-- machinetranslators -->
     <suppress checks="(DesignForExtension|MagicNumber|MemberName|HideUtilityClassConstructor)"
               files="(Apertium|DeepL|YandexCloud|Google2|IBMWatson|MyMemory)Translate\.java"/>
-    <suppress files="YandexCloudTranslate\.java" checks="LocalVariableName" lines="139"/>
 
     <!-- spellchecker -->
     <suppress checks="(LineLength|OperatorWrap)" files="SpellcheckerConfigurationController\.java"/>

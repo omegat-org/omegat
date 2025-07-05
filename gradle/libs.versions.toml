@@ -18,10 +18,10 @@ lucene_gosen = "5.5.1"
 checkstyle = "8.45.1"
 guava = "33.4.8-jre"
 annotations = "23.0.0"
-jgit = "6.10.0.202406032230-r"
+jgit = "6.10.1.202505221210-r"
 svnkit = "1.10.11"
 ivy = "2.5.3"
-jackson = "2.16.1"
+jackson = "2.19.1"
 bc = "1.81"
 nashorn = "15.6"
 caffeine = "3.2.1"
@@ -137,7 +137,7 @@ svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
 fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.6.0"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.1"}
-fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
+fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.4.0"}
 fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.2"}
 caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.ref = "caffeine"}
 caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}

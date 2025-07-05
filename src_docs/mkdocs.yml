@@ -5,16 +5,36 @@ markdown_extensions:
   - def_list
   - footnotes
   - pymdownx.mark
-  - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - admonition
+  - pymdownx.details
 
 theme:
   name: material
   features:
   - navigation.tracking
   - navigation.top
+  - navigation.sections
+  - content.code.copy
+
+# Enable Mermaid diagrams
+extra_javascript:
+  - https://unpkg.com/mermaid@9.4.3/dist/mermaid.min.js
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search:
+      lang: en
+  - git-revision-date-localized:
+      enable_creation_date: true
 
 nav:
   - Home: index.md
@@ -38,9 +58,11 @@ nav:
      Plugin manifest: 19.PluginManifest.md
      How to make Machine Translation connector plugin: 12.HowToMakeMTConnector.md
   - Understanding OmegaT Internals:
-     OmegaT internals: 21.DevelopersGuide.md
+     OmegaT internals: 21.OmegaTInternals.md
      Core Events: 22.CoreEvents.md
      Core Methods: 23.CoreMethods.md
+     Plugin Security: 24.PluginSecurity.md
+     Code Generation: 25.CodeGeneration.md
      Caching: 26.Caching.md
      Utility functions: 27.UtilityClasses.md
   - Quality Assurance and tests:
@@ -62,8 +84,11 @@ nav:
      External Finder: 81.ExternalFinder.md
      How OmegaT create Backup files: 82.BackupFiles.md
      Team project: 83.TeamProject.md
+  - Architecture Design: adr/index.md
   - Other information:
      Release procedure: 90.ReleaseProcedure.md
      Code Signing How-to: 92.CodeSigning.md
      Building installer: 93.BuildingInstallerPackage.md
+     Git repository analysis: 94.GitRepositoryAnalysis.md
+     License and Terms: 95.LicenseAndTerms.md
      Appendix: 91.appendix.md

@@ -200,6 +200,9 @@ dependencies {
     // for http connection test
     testFixturesApi(libs.wiremock) {
         exclude module: 'guava'
+        exclude module: 'jackson-bom'
+        exclude module: 'jackson-databind'
+        exclude module: 'jackson-dataformat-yaml'
     }
     testFixturesApi(libs.slf4j.api)
     testFixturesImplementation sourceSets.main.output

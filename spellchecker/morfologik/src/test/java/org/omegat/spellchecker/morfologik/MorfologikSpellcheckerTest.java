@@ -102,7 +102,7 @@ public class MorfologikSpellcheckerTest {
         assertThat(checker.initialize()).as("Success initialize").isTrue();
         assertThat(checker.isCorrect("Hallo")).as("Spell check for correct word").isFalse();
         assertThat(checker.suggest("Hallo")).as("Get suggestion")
-                .hasSize(10).contains("hello");
+                .hasSize(11).contains("hello");
 
     }
 

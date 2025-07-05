@@ -35,6 +35,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,7 +45,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.WordlistLoader;
 import org.apache.lucene.analysis.ar.ArabicAnalyzer;
 import org.apache.lucene.analysis.bg.BulgarianAnalyzer;
 import org.apache.lucene.analysis.br.BrazilianAnalyzer;
@@ -80,9 +84,9 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.sv.SwedishAnalyzer;
 import org.apache.lucene.analysis.th.ThaiAnalyzer;
 import org.apache.lucene.analysis.tr.TurkishAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
-import org.apache.lucene.analysis.util.WordlistLoader;
 
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.NIOFSDirectory;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener.PROJECT_CHANGE_TYPE;
@@ -211,15 +215,17 @@ public class HunspellTokenizer extends BaseTokenizer {
             return null;
         }
         try {
-            return new Dictionary(new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
-        } catch (Throwable t) {
-            Log.log(t);
+            String prefix = "hunspell-tokenizer-" + language.getLanguageCode();
+            Directory tmpDir = new NIOFSDirectory(Files.createTempDirectory(prefix));
+            return new Dictionary(tmpDir, prefix, new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
+        } catch (IOException | ParseException ex) {
+            Log.log(ex);
             return null;
         }
     }
 
     private static String[] langsToStrings(Set<Language> langs) {
-        List<String> result = new ArrayList<String>(langs.size() * 2);
+        List<String> result = new ArrayList<>(langs.size() * 2);
         for (Language lang : langs) {
             result.add(lang.getLanguage().toLowerCase(Locale.ENGLISH));
             result.add(lang.getLanguageCode().toLowerCase(Locale.ENGLISH));

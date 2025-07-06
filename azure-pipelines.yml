@@ -55,9 +55,9 @@ stages:
           doc_changed=false
           non_doc_changed=false
           for file in $files; do
-            if [[ $file =~ ^src_docs ]]; then
+            if [[ $file =~ ^src_docs || $file =~ ^tipoftheday/.*\.(html|yaml)$ ]]; then
               doc_changed=true
-            elif [[ ! ($file =~ ^\.github/ || $file =~ ^ci/ || $file == ".azure-pipelines.yml") ]]; then
+            elif [[ ! ($file =~ ^\. || $file =~ ^ci/ || $file =~ \.ya?ml$ ) ]]; then
               non_doc_changed=true
             fi
           done

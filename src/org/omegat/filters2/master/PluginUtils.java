@@ -27,6 +27,7 @@
 
 package org.omegat.filters2.master;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -126,5 +127,20 @@ public final class PluginUtils {
     @Deprecated
     public static void loadPlugins(final Map<String, String> params) {
         PluginManager.loadPlugins(params.get("dev-manifests"));
+    }
+
+    @Deprecated
+    public List<Class<?>> getFilterClasses() {
+        return PluginManager.getFilterClasses();
+    }
+
+    @Deprecated
+    public List<Class<?>> getTokenizerClasses() {
+        return PluginManager.getTokenizerClasses();
+    }
+
+    @Deprecated
+    public List<Class<?>> getMarkerClasses() {
+        return PluginManager.getMarkerClasses();
     }
 }

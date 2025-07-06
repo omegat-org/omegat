@@ -102,7 +102,7 @@ public final class Main {
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        // PluginUtils.loadPlugins(params);
+        PluginUtils.loadPlugins(null);
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();

@@ -32,6 +32,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.omegat.plugin.PluginManager;
+import org.omegat.util.Language;
 import org.omegat.util.StringUtil;
 
 /**
@@ -46,20 +47,26 @@ public final class PluginUtils {
      * Plugin type definitions.
      */
     public enum PluginType {
-        /** File filters that provide IFilter API. */
+        /**
+         * File filters that provide IFilter API.
+         */
         FILTER("filter"),
         /**
          * Tokenizers, currently bundled and it is for backward compatibility.
          */
         TOKENIZER("tokenizer"),
-        /** Markers, that provide IMaker, mostly bundled. */
+        /**
+         * Markers, that provide IMaker, mostly bundled.
+         */
         MARKER("marker"),
         /**
          * Machine Translator service connectors, that provide
          * IMachineTranslation API.
          */
         MACHINETRANSLATOR("machinetranslator"),
-        /** A plugin that change base of OmegaT system, not recommended. */
+        /**
+         * A plugin that change base of OmegaT system, not recommended.
+         */
         BASE("base"),
         /**
          * Glosary, that provide IGlossary API.
@@ -120,13 +127,20 @@ public final class PluginUtils {
         }
     }
 
-    /** Private constructor to disallow creation */
+    /**
+     * Private constructor to disallow creation
+     */
     private PluginUtils() {
     }
 
     @Deprecated
     public static void loadPlugins(final Map<String, String> params) {
         PluginManager.loadPlugins(params.get("dev-manifests"));
+    }
+
+    @Deprecated
+    public static void loadPlugins() {
+        PluginManager.unloadPlugins();
     }
 
     @Deprecated
@@ -140,7 +154,27 @@ public final class PluginUtils {
     }
 
     @Deprecated
+    public List<Class<?>> getSpellCheckClasses() {
+        return PluginManager.getSpellCheckClasses();
+    }
+
+    @Deprecated
     public List<Class<?>> getMarkerClasses() {
         return PluginManager.getMarkerClasses();
+    }
+
+    @Deprecated
+    public static List<Class<?>> getMachineTranslationClasses() {
+        return PluginManager.getMachineTranslationClasses();
+    }
+
+    @Deprecated
+    public static List<Class<?>> getGlossaryClasses() {
+        return PluginManager.getGlossaryClasses();
+    }
+
+    @Deprecated
+    public static Class<?> getTokenizerClassForLanguage(Language lang) {
+        return PluginManager.getTokenizerClassForLanguage(lang);
     }
 }

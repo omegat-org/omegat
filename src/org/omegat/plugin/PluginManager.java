@@ -549,6 +549,10 @@ public final class PluginManager {
         return GLOSSARY_CLASSES;
     }
 
+    public static List<Class<?>> getSpellcheckClasses() {
+        return SPELLCHECK_CLASSES;
+    }
+
     /**
      * Retrieves the {@link ClassLoader} associated with the specified
      * {@link PluginType}. If the provided plugin type is {@code UNKNOWN}, the

@@ -84,6 +84,13 @@ public final class PluginManager {
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
     private static final Map<PluginType, MainClassLoader> MAINCLASSLOADERS = new EnumMap<>(PluginType.class);
+    private static final Map<PluginType, List<Class<?>>> TYPECLASSMAP = new EnumMap<>(PluginType.class);
+
+    static {
+        for (PluginType type : PluginType.values()) {
+            TYPECLASSMAP.put(type, new ArrayList<>());
+        }
+    }
 
     /** Private constructor to disallow creation */
     private PluginManager() {
@@ -233,7 +240,7 @@ public final class PluginManager {
 
     private static void loadBasePlugin() {
         // run base plugins
-        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
+        for (Class<?> pl : TYPECLASSMAP.get(PluginType.BASE)) {
             try {
                 pl.getDeclaredConstructor().newInstance();
             } catch (Exception ex) {
@@ -443,11 +450,11 @@ public final class PluginManager {
     }
 
     public static List<Class<?>> getFilterClasses() {
-        return FILTER_CLASSES;
+        return TYPECLASSMAP.get(PluginType.FILTER);
     }
 
     public static List<Class<?>> getTokenizerClasses() {
-        return TOKENIZER_CLASSES;
+        return TYPECLASSMAP.get(PluginType.TOKENIZER);
     }
 
     /**
@@ -456,7 +463,19 @@ public final class PluginManager {
      * @return list of classes.
      */
     public static List<Class<?>> getSpellCheckClasses() {
-        return SPELLCHECK_CLASSES;
+        return TYPECLASSMAP.get(PluginType.SPELLCHECK);
+    }
+
+    public static List<Class<?>> getMarkerClasses() {
+        return TYPECLASSMAP.get(PluginType.MARKER);
+    }
+
+    public static List<Class<?>> getMachineTranslationClasses() {
+        return TYPECLASSMAP.get(PluginType.MACHINETRANSLATOR);
+    }
+
+    public static List<Class<?>> getGlossaryClasses() {
+        return TYPECLASSMAP.get(PluginType.GLOSSARY);
     }
 
     public static Class<?> getTokenizerClassForLanguage(Language lang) {
@@ -502,7 +521,7 @@ public final class PluginManager {
         // "default" tokenizer is found.
         Class<?> fallback = null;
 
-        for (Class<?> tokenizerClass : TOKENIZER_CLASSES) {
+        for (Class<?> tokenizerClass : getTokenizerClasses()) {
             Tokenizer ann = tokenizerClass.getAnnotation(Tokenizer.class);
             if (ann == null) {
                 continue;
@@ -537,22 +556,6 @@ public final class PluginManager {
         return languages;
     }
 
-    public static List<Class<?>> getMarkerClasses() {
-        return MARKER_CLASSES;
-    }
-
-    public static List<Class<?>> getMachineTranslationClasses() {
-        return MACHINE_TRANSLATION_CLASSES;
-    }
-
-    public static List<Class<?>> getGlossaryClasses() {
-        return GLOSSARY_CLASSES;
-    }
-
-    public static List<Class<?>> getSpellcheckClasses() {
-        return SPELLCHECK_CLASSES;
-    }
-
     /**
      * Retrieves the {@link ClassLoader} associated with the specified
      * {@link PluginType}. If the provided plugin type is {@code UNKNOWN}, the
@@ -569,20 +572,6 @@ public final class PluginManager {
         }
         return MAINCLASSLOADERS.get(type);
     }
-
-    private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
-
-    private static final List<Class<?>> TOKENIZER_CLASSES = new ArrayList<>();
-
-    private static final List<Class<?>> MARKER_CLASSES = new ArrayList<>();
-
-    private static final List<Class<?>> SPELLCHECK_CLASSES = new ArrayList<>();
-
-    private static final List<Class<?>> MACHINE_TRANSLATION_CLASSES = new ArrayList<>();
-
-    private static final List<Class<?>> GLOSSARY_CLASSES = new ArrayList<>();
-
-    private static final List<Class<?>> BASE_PLUGIN_CLASSES = new ArrayList<>();
 
     /**
      * Parse one manifest file.
@@ -695,38 +684,14 @@ public final class PluginManager {
 
     private static boolean loadClassOld(String sType, String key)
             throws ClassNotFoundException {
-        boolean loadOk = true;
-        switch (PluginType.getTypeByValue(sType)) {
-            case FILTER:
-                FILTER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.FILTER).loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case TOKENIZER:
-                TOKENIZER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.TOKENIZER).loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case MARKER:
-                MARKER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MARKER).loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case MACHINETRANSLATOR:
-                MACHINE_TRANSLATION_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MACHINETRANSLATOR).loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case BASE:
-                BASE_PLUGIN_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MISCELLANEOUS).loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            case GLOSSARY:
-                GLOSSARY_CLASSES.add(MAINCLASSLOADERS.get(PluginType.GLOSSARY).loadClass(key));
-                Log.logInfoRB("PLUGIN_LOAD_OK", key);
-                break;
-            default:
-                Log.logErrorRB("PLUGIN_UNKNOWN", sType, key);
-                loadOk = false;
+        if (PluginType.getTypeByValue(sType) == PluginType.UNKNOWN) {
+            Log.logErrorRB("PLUGIN_UNKNOWN", sType, key);
+            return false;
         }
-
-        return loadOk;
+        TYPECLASSMAP.get(PluginType.getTypeByValue(sType)).add(MAINCLASSLOADERS.get(
+                PluginType.getTypeByValue(sType)).loadClass(key));
+        Log.logInfoRB("PLUGIN_LOAD_OK", key);
+        return true;
     }
 
     public static Collection<PluginInformation> getPluginInformations() {

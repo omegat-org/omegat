@@ -44,7 +44,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.glossaries.IGlossary;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugin.PluginManager;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.Language;
@@ -105,7 +105,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         this.pane = pane;
 
         List<IGlossary> gl = new ArrayList<>();
-        for (Class<?> glc : PluginUtils.getGlossaryClasses()) {
+        for (Class<?> glc : PluginManager.getGlossaryClasses()) {
             try {
                 gl.add((IGlossary) glc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {

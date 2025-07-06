@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.omegat.plugin.PluginManager;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -58,7 +59,7 @@ public class SpellCheckerManager {
             return spellChecker;
         }
         // Try to use a custom spell checker if one is available.
-        for (Class<?> customSpellChecker : PluginUtils.getSpellCheckClasses()) {
+        for (Class<?> customSpellChecker : PluginManager.getSpellCheckClasses()) {
             try {
                 spellChecker = (ISpellChecker) customSpellChecker.getDeclaredConstructor().newInstance();
                 if (spellChecker.initialize()) {
@@ -158,7 +159,7 @@ public class SpellCheckerManager {
 
     private static ISpellCheckerDictionary getSpellCheckerDictionary(String className) {
         try {
-            Class<?> aClass = PluginUtils.getClassLoader(PluginUtils.PluginType.LANGUAGE).loadClass(className);
+            Class<?> aClass = PluginManager.getClassLoader(PluginUtils.PluginType.LANGUAGE).loadClass(className);
             Constructor<?> constructor = aClass.getConstructor();
             return (ISpellCheckerDictionary) constructor.newInstance();
         } catch (ClassNotFoundException e) {

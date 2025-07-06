@@ -37,19 +37,18 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.junit.Test;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TestPreferencesInitializer;
 
 public class PluginsTest {
 
-    private static final Path PLUGINS_FILE = Paths.get(StaticUtils.installDir(), PluginUtils.PLUGINS_LIST_FILE);
+    private static final Path PLUGINS_FILE = Paths.get(StaticUtils.installDir(), PluginManager.PLUGINS_LIST_FILE);
 
     @Test
     public void testPluginsListWhitespace() throws Exception {
-        Files.lines(PLUGINS_FILE).filter(line -> line.endsWith("\\")).forEach((String line) -> {
-            assertTrue("Continuation lines must end with a space.", line.endsWith(" \\"));
-        });
+        Files.lines(PLUGINS_FILE).filter(line -> line.endsWith("\\")).forEach((String line) ->
+                assertTrue("Continuation lines must end with a space.", line.endsWith(" \\")));
     }
 
     @Test

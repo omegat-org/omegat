@@ -32,15 +32,14 @@ import org.omegat.core.Core;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.languagetools.LanguageDataBroker;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.Language;
 import org.omegat.util.TestPreferencesInitializer;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,7 +50,7 @@ public class LanguageModuleTestBase {
     @BeforeClass
     public static void setUpClass() throws IOException {
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        PluginUtils.loadPlugins(Collections.emptyMap());
+        PluginManager.loadPlugins();
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();
         Path configDir = Files.createDirectory(tmpDir.resolve(".omegat"));

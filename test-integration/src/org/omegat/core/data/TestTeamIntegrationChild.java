@@ -54,9 +54,9 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.plugin.PluginManager;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
@@ -131,7 +131,7 @@ public final class TestTeamIntegrationChild {
             Properties props = new Properties();
             try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
                 props.load(fis);
-                PluginUtils.loadPluginFromProperties(props);
+                PluginManager.loadPluginFromProperties(props);
             }
             TestPreferencesInitializer.init();
             Preferences.setPreference(Preferences.TEAM_AUTHOR, source);

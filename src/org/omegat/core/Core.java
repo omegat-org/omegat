@@ -48,7 +48,6 @@ import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.comments.CommentsTextArea;
 import org.omegat.gui.comments.IComments;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
@@ -76,6 +75,7 @@ import org.omegat.gui.notes.INotes;
 import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 import org.omegat.languagetools.LanguageToolWrapper;
+import org.omegat.plugin.PluginManager;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -329,19 +329,19 @@ public final class Core {
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {
-        PluginUtils.getFilterClasses().add(clazz);
+        PluginManager.getFilterClasses().add(clazz);
     }
 
     public static void registerMachineTranslationClass(Class<? extends IMachineTranslation> clazz) {
-        PluginUtils.getMachineTranslationClasses().add(clazz);
+        PluginManager.getMachineTranslationClasses().add(clazz);
     }
 
     public static void registerMarkerClass(Class<? extends IMarker> clazz) {
-        PluginUtils.getMarkerClasses().add(clazz);
+        PluginManager.getMarkerClasses().add(clazz);
     }
 
     public static void registerTokenizerClass(Class<? extends ITokenizer> clazz) {
-        PluginUtils.getTokenizerClasses().add(clazz);
+        PluginManager.getTokenizerClasses().add(clazz);
     }
 
     /**
@@ -349,7 +349,7 @@ public final class Core {
      * @param clazz spellchecker class.
      */
     public static void registerSpellCheckClass(Class<? extends ISpellChecker> clazz) {
-        PluginUtils.getSpellCheckClasses().add(clazz);
+        PluginManager.getSpellCheckClasses().add(clazz);
     }
 
     /**

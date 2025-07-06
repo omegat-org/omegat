@@ -39,6 +39,7 @@ import org.junit.Test;
 
 import org.mockito.MockedStatic;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.OConsts;
 import org.omegat.util.Token;
@@ -71,7 +72,7 @@ public class SpellCheckerManagerTest {
     @Test
     public void testGetCurrentSpellChecker_CustomSpellCheckerInitialized() {
         try (MockedStatic<PluginUtils> pluginUtilsMock = mockStatic(PluginUtils.class)) {
-            pluginUtilsMock.when(PluginUtils::getSpellCheckClasses).thenReturn(List.of(CustomSpellChecker.class));
+            pluginUtilsMock.when(PluginManager::getSpellCheckClasses).thenReturn(List.of(CustomSpellChecker.class));
             SpellCheckerManager spyManager = spy(new SpellCheckerManager());
 
             ISpellChecker checker = spyManager.getCurrentSpellChecker();
@@ -83,7 +84,7 @@ public class SpellCheckerManagerTest {
     @Test
     public void testGetCurrentSpellChecker_FallsBackToDummy() {
         try (MockedStatic<PluginUtils> pluginUtilsMock = mockStatic(PluginUtils.class)) {
-            pluginUtilsMock.when(PluginUtils::getSpellCheckClasses).thenReturn(Collections.emptyList());
+            pluginUtilsMock.when(PluginManager::getSpellCheckClasses).thenReturn(Collections.emptyList());
             SpellCheckerManager manager = new SpellCheckerManager();
 
             ISpellChecker checker = manager.getCurrentSpellChecker();

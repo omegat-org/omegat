@@ -49,9 +49,9 @@ import org.omegat.externalfinder.ExternalFinder;
 import org.omegat.externalfinder.gui.ExternalFinderCustomizer;
 import org.omegat.externalfinder.item.ExternalFinderConfiguration;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -150,7 +150,7 @@ public class ProjectPropertiesDialogController {
             if (newLang instanceof String) {
                 newLang = new Language((String) newLang);
             }
-            Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
+            Class<?> newTok = PluginManager.getTokenizerClassForLanguage((Language) newLang);
             dialog.sourceTokenizerField.setSelectedItem(newTok);
         };
         dialog.sourceLocaleField.addActionListener(sourceLocaleListener);
@@ -162,7 +162,7 @@ public class ProjectPropertiesDialogController {
             if (newLang instanceof String) {
                 newLang = new Language((String) newLang);
             }
-            Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language) newLang);
+            Class<?> newTok = PluginManager.getTokenizerClassForLanguage((Language) newLang);
             dialog.targetTokenizerField.setSelectedItem(newTok);
         };
         dialog.targetLocaleField.addActionListener(targetLocaleListener);

@@ -26,6 +26,7 @@
 package org.omegat.languagetools;
 
 import org.languagetool.broker.ClassBroker;
+import org.omegat.plugin.PluginManager;
 import org.omegat.filters2.master.PluginUtils;
 
 public class LanguageClassBroker implements ClassBroker {
@@ -33,9 +34,13 @@ public class LanguageClassBroker implements ClassBroker {
     @Override
     public Class<?> forName(String qualifiedName) throws ClassNotFoundException {
         Class<?> clazz;
-        ClassLoader classLoader = PluginUtils.getClassLoader(PluginUtils.PluginType.LANGUAGE);
+        ClassLoader classLoader = PluginManager.getClassLoader(PluginUtils.PluginType.LANGUAGE);
         try {
-            clazz = classLoader.loadClass(qualifiedName);
+            if (classLoader != null) {
+                clazz = classLoader.loadClass(qualifiedName);
+            } else {
+                return LanguageClassBroker.class.getClassLoader().loadClass(qualifiedName);
+            }
         } catch (ClassNotFoundException e) {
             clazz = LanguageClassBroker.class.getClassLoader().loadClass(qualifiedName);
         }

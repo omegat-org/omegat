@@ -24,7 +24,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.plugin;
 
 import java.net.URL;
 import java.util.Properties;

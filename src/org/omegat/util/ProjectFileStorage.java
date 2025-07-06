@@ -59,13 +59,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
-import org.omegat.filters2.master.PluginUtils;
 
 import gen.core.project.Masks;
 import gen.core.project.Omegat;
 import gen.core.project.Project;
 import gen.core.project.Project.Repositories;
 import gen.core.project.RepositoryDefinition;
+import org.omegat.plugin.PluginManager;
 
 /**
  * Class that reads and saves project definition file.
@@ -371,7 +371,7 @@ public final class ProjectFileStorage {
                 Log.log(e.toString());
             }
         }
-        return PluginUtils.getTokenizerClassForLanguage(fallback);
+        return PluginManager.getTokenizerClassForLanguage(fallback);
     }
 
     /**

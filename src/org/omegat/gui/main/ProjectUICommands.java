@@ -60,6 +60,7 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.plugin.PluginManager;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -67,7 +68,6 @@ import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.team2.IRemoteRepository2;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.FileCollisionDialog;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProjectController;
@@ -1215,7 +1215,7 @@ public final class ProjectUICommands {
 
                 CoreEvents.fireApplicationShutdown();
 
-                PluginUtils.unloadPlugins();
+                PluginManager.unloadPlugins();
 
                 return null;
             }

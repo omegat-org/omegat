@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.util;
+package org.omegat.plugin;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -60,8 +60,11 @@ import javax.swing.table.AbstractTableModel;
 import org.apache.commons.io.FileUtils;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.PluginInformation;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.Log;
+import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Plugin installer utility class.
@@ -263,7 +266,7 @@ public final class PluginInstaller {
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();
                 if (Files.isSameFile(pluginJarFile.toPath(),
-                        Paths.get(PluginUtils.getJarFileUrlFromResourceUrl(mu).getFile()))) {
+                        Paths.get(PluginManager.getJarFileUrlFromResourceUrl(mu).getFile()))) {
                     pluginInfo.addAll(parsePluginJarFileManifest(mu));
                 }
             }
@@ -316,7 +319,7 @@ public final class PluginInstaller {
      */
     private static Map<String, PluginInformation> getInstalledPlugins() {
         Map<String, PluginInformation> installedPlugins = new TreeMap<>();
-        PluginUtils.getPluginInformations().stream()
+        PluginManager.getPluginInformations().stream()
                 .sorted(Comparator.comparing(PluginInformation::getClassName))
                 .filter(info -> !installedPlugins.containsKey(info.getClassName()))
                 .forEach(info -> installedPlugins.put(info.getClassName(), info));

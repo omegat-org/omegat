@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -220,6 +221,21 @@ public final class Log {
             // when slf4j-jdk14
             java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
             rootLogger.setLevel(level);
+        }
+    }
+
+    public static void setConsoleLevel(Level level) {
+        org.slf4j.ILoggerFactory loggerFactory = org.slf4j.LoggerFactory.getILoggerFactory();
+        Class<? extends org.slf4j.ILoggerFactory> loggerFactoryClass = loggerFactory.getClass();
+        String loggerName = loggerFactoryClass.getName();
+        if (loggerName.equals("org.slf4j.jul.JDK14LoggerFactory")) {
+            // when slf4j-jdk14
+            java.util.logging.Logger rootLogger = LogManager.getLogManager().getLogger("");
+            for (Handler h : rootLogger.getHandlers()) {
+                if (h instanceof ConsoleHandler) {
+                    h.setLevel(level);
+                }
+            }
         }
     }
 

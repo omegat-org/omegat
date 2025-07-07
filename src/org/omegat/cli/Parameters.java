@@ -32,7 +32,7 @@ import java.util.List;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Option;
 
-@Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1")
+@Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1.0")
 public class Parameters implements Runnable {
 
     // Hide deprecated old command syntax in help message.
@@ -44,6 +44,9 @@ public class Parameters implements Runnable {
 
     @Option(names = { "-h", "--help" }, usageHelp = true)
     boolean usageHelpRequested;
+
+    @Option(names = { "--verbose" }, descriptionKey = "VERBOSE")
+    boolean verbose;
 
     // All modes
     public static final String MODE = "--mode";

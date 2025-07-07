@@ -92,6 +92,10 @@ final class StandardCommandLauncher {
 
     StandardCommandLauncher(Parameters params) {
         this.params = params;
+        if (params.verbose) {
+            Log.setConsoleLevel(java.util.logging.Level.INFO);
+        }
+        showStartUpLogInfo();
     }
 
     /**
@@ -457,6 +461,18 @@ final class StandardCommandLauncher {
         return 0;
     }
 
+    private void showStartUpLogInfo() {
+        // initialize logging backend and loading configuration.
+        Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
+                ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+                Locale.getDefault().toLanguageTag());
+        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+                System.getProperty("java.version"), System.getProperty("java.home"));
+
+        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
+    }
+
     /**
      * Execute standard GUI.
      */
@@ -470,16 +486,6 @@ final class StandardCommandLauncher {
         if (Platform.isMacOSX()) {
             OSXIntegration.init();
         }
-
-        // initialize logging backend and loading configuration.
-        Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
-                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
-                ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
-                Locale.getDefault().toLanguageTag());
-        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
-                System.getProperty("java.version"), System.getProperty("java.home"));
-
-        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
 
         // Set X11 application class name to make some desktop user interfaces
         // (like Gnome Shell) recognize OmegaT

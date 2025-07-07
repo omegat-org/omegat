@@ -162,7 +162,7 @@ stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "sta
 juniversal-chardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
 omegat-mnemonics = {group = "org.omegat", name = "lib-mnemonics", version.ref = "mnemonics"}
 dumont-hunspell = {group = "com.gitlab.dumonts", name = "hunspell", version.ref = "hunspell"}
-jaxb4-api = {group = "jakarta.xml.bind", name = "jakarta.xml.bind-api", version = "jaxb4_api"}
+jaxb4-api = {group = "jakarta.xml.bind", name = "jakarta.xml.bind-api", version = "4.0.2"}
 jaxb4-xjc = {group = "org.glassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
 jaxb4-core = {group = "org.glassfish.jaxb", name = "jaxb-core", version.ref = "jaxb"}
 jaxb4-runtime = {group = "org.glassfish.jaxb", name = "jaxb-runtime", version.ref = "jaxb"}

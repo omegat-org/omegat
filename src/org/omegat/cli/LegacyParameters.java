@@ -153,53 +153,56 @@ public class LegacyParameters implements Runnable {
             }
         } else {
             try {
+                Parameters params = new Parameters();
+                params.initialize();
+                params.setProjectLocation(project);
                 switch (consoleMode) {
-                    case ("console-translate"):
-                        TranslateCommand translateCommand = new TranslateCommand(project);
-                        result = translateCommand.runConsoleTranslate();
+                case ("console-translate"):
+                    TranslateCommand translateCommand = new TranslateCommand(project);
+                    result = translateCommand.runConsoleTranslate();
+                    if (result != 0) {
+                        System.exit(result);
+                    }
+                    break;
+                case ("console-align"):
+                    AlignCommand alignCommand = new AlignCommand(project);
+                    try {
+                        int status = alignCommand.runConsoleAlign();
+                        if (status != 0) {
+                            System.exit(status);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Failed to align.");
+                        System.exit(1);
+                    }
+                    break;
+                case ("console-stats"):
+                    StatsCommand statsCommand = new StatsCommand(params);
+                    try {
+                        result = statsCommand.runConsoleStats();
                         if (result != 0) {
                             System.exit(result);
                         }
-                        break;
-                    case ("console-align"):
-                        AlignCommand alignCommand = new AlignCommand(project);
-                        try {
-                            int status = alignCommand.runConsoleAlign();
-                            if (status != 0) {
-                                System.exit(status);
-                            }
-                        } catch (Exception e) {
-                            System.err.println("Failed to align.");
-                            System.exit(1);
-                        }
-                        break;
-                    case ("console-stats"):
-                        StatsCommand statsCommand = new StatsCommand();
-                        try {
-                            result = statsCommand.runConsoleStats();
-                            if (result != 0) {
-                                System.exit(result);
-                            }
-                        } catch (Exception e) {
-                            System.err.println("Failed to print stats.");
-                            System.exit(1);
-                        }
-                        break;
-                    case ("console-createpseudotranslatetmx"):
-                        PseudoTranslateCommand pseudoTranslateCommand = new PseudoTranslateCommand();
-                        try {
-                            int status = pseudoTranslateCommand.runCreatePseudoTranslateTMX();
-                            if (status != 0) {
-                                System.exit(status);
-                            }
-                        } catch (Exception e) {
-                            System.err.println("Failed to create pseudo-translate TMX.");
-                            System.exit(1);
-                        }
-                        break;
-                    default:
-                        System.err.println("Unknown console mode: " + consoleMode);
+                    } catch (Exception e) {
+                        System.err.println("Failed to print stats.");
                         System.exit(1);
+                    }
+                    break;
+                case ("console-createpseudotranslatetmx"):
+                    PseudoTranslateCommand pseudoTranslateCommand = new PseudoTranslateCommand();
+                    try {
+                        int status = pseudoTranslateCommand.runCreatePseudoTranslateTMX();
+                        if (status != 0) {
+                            System.exit(status);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Failed to create pseudo-translate TMX.");
+                        System.exit(1);
+                    }
+                    break;
+                default:
+                    System.err.println("Unknown console mode: " + consoleMode);
+                    System.exit(1);
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);

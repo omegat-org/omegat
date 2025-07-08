@@ -57,6 +57,16 @@ public class StatsCommand implements Runnable {
             descriptionKey = "OUTPUT_FILE")
     String output;
 
+    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
+    String project;
+
+    public StatsCommand() {
+    }
+
+    public StatsCommand(Parameters params) {
+        this.params = params;
+    }
+
     @Override
     public void run() {
         legacyParams.initialize();

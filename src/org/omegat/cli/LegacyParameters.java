@@ -129,6 +129,9 @@ public class LegacyParameters implements Runnable {
         this.statsType = statsType;
     }
 
+    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE, arity = "0..1")
+    String project;
+
     public void initialize() {
         applyConfigFile(configFile);
     }
@@ -142,6 +145,7 @@ public class LegacyParameters implements Runnable {
         if (consoleMode == null) {
             Parameters params = new Parameters();
             params.initialize();
+            params.setProjectLocation(project);
             StartCommand command = new StartCommand(params);
             result = command.runGUI();
             if (result != 0) {
@@ -151,14 +155,14 @@ public class LegacyParameters implements Runnable {
             try {
                 switch (consoleMode) {
                     case ("console-translate"):
-                        TranslateCommand translateCommand = new TranslateCommand();
+                        TranslateCommand translateCommand = new TranslateCommand(project);
                         result = translateCommand.runConsoleTranslate();
                         if (result != 0) {
                             System.exit(result);
                         }
                         break;
                     case ("console-align"):
-                        AlignCommand alignCommand = new AlignCommand();
+                        AlignCommand alignCommand = new AlignCommand(project);
                         try {
                             int status = alignCommand.runConsoleAlign();
                             if (status != 0) {

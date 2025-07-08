@@ -47,6 +47,14 @@ public class TranslateCommand implements Runnable {
     @CommandLine.Mixin
     private Parameters params;
 
+    public TranslateCommand() {
+    }
+
+    public TranslateCommand(String project) {
+        params = new Parameters();
+        this.project = project;
+    }
+
     @Override
     public void run() {
         legacyParams.initialize();

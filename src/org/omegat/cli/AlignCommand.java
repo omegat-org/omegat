@@ -64,6 +64,14 @@ public class AlignCommand implements Runnable {
     @Option(names = { "-G", "--gui" }, versionHelp = true)
     boolean startGUI;
 
+    public AlignCommand() {
+    }
+
+    public AlignCommand(String project) {
+        params = new Parameters();
+        this.project = project;
+    }
+
     @Override
     public void run() {
         legacyParams.initialize();

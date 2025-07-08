@@ -45,6 +45,8 @@ import java.util.List;
 
 final class Common {
 
+    private Common() {}
+
     /**
      * Execute a script as PROJECT_CHANGE events. We can't use the regular
      * project listener because the SwingUtilities.invokeLater method used in

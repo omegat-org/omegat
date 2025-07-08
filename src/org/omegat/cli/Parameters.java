@@ -24,60 +24,35 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import com.vlsolutions.swing.docking.DockingDesktop;
+import org.apache.commons.lang3.StringUtils;
+import org.languagetool.JLanguageTool;
+import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.languagetools.LanguageClassBroker;
+import org.omegat.languagetools.LanguageDataBroker;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import picocli.CommandLine;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Option;
 
-@Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1.0")
-public class Parameters implements Runnable {
-
-    // Hide deprecated old command syntax in help message.
-    // We can set false for test purpose.
-    private static final boolean HIDE_DEPRECATED_OPTIONS = true;
-
-    @Option(names = { "-V", "--version" }, versionHelp = true)
-    boolean versionInfoRequested;
-
-    @Option(names = { "-h", "--help" }, usageHelp = true)
-    boolean usageHelpRequested;
-
-    @Option(names = { "--verbose" }, descriptionKey = "VERBOSE")
-    boolean verbose;
-
-    // All modes
-    public static final String MODE = "--mode";
-    @Option(names = {
-            MODE }, paramLabel = "<console-mode-name>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "MODE")
-    String consoleMode;
-
-    public static final String CONFIG_FILE = "--config-file";
-    @Option(names = { CONFIG_FILE }, paramLabel = "<path>", descriptionKey = "CONFIG_FILE")
-    String configFile;
-
-    public static final String RESOURCE_BUNDLE = "--resource-bundle";
-    @Option(names = { RESOURCE_BUNDLE }, paramLabel = "<bundle>", descriptionKey = "RESOURCE_BUNDLE")
-    String resourceBundle;
-
-    public static final String CONFIG_DIR = "--config-dir";
-    @Option(names = { CONFIG_DIR }, paramLabel = "<path>", descriptionKey = "CONFIG_DIR")
-    String configDir;
-
-    public static final String DISABLE_PROJECT_LOCKING = "--disable-project-locking";
-    @Option(names = { DISABLE_PROJECT_LOCKING }, descriptionKey = "DISABLE_PROJECT_LOCKING")
-    boolean disableProjectLocking;
-
-    public static final String DISABLE_LOCATION_SAVE = "--disable-location-save";
-    @Option(names = { DISABLE_LOCATION_SAVE }, descriptionKey = "DISABLE_LOCATION_SAVE")
-    boolean disableLocationSave;
+public class Parameters {
 
     /**
      * CLI parameter to disable team functionality (treat as local project)
      */
-    public static final String NO_TEAM = "--no-team";
+    public static final String NO_TEAM = "--noteam";
     @Option(names = { NO_TEAM }, descriptionKey = "NO_TEAM")
     boolean noTeam;
 
@@ -107,30 +82,6 @@ public class Parameters implements Runnable {
     @Option(names = { TAG_VALIDATION }, descriptionKey = "TAG_VALIDATION")
     String tagValidation;
 
-    // CONSOLE_TRANSLATE mode
-    public static final String SOURCE_PATTERN = "--source-pattern";
-    @Option(names = { SOURCE_PATTERN }, hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "SOURCE_PATTERN")
-    String sourcePattern;
-
-    // CONSOLE_CREATEPSEUDOTRANSLATETMX mode
-    public static final String PSEUDOTRANSLATETMX = "--pseudotranslatetmx";
-    @Option(names = {
-            PSEUDOTRANSLATETMX }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS,
-            descriptionKey = "PSEUDO_TRANSLATE_TMX")
-    String pseudoTranslateTmxPath;
-
-    public static final String PSEUDOTRANSLATETYPE = "--pseudotranslatetype";
-    @Option(names = {
-            PSEUDOTRANSLATETYPE }, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS,
-            descriptionKey = "PSEUDO_TRANSLATE_TYPE")
-    String pseudoTranslateTypeName;
-
-    // CONSOLE_ALIGN mode
-    public static final String ALIGNDIR = "--alignDir";
-    @Option(names = {
-            ALIGNDIR }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "ALIGN_DIR")
-    String alignDirPath;
-
     // CONSOLE_STATS mode
     public static final String STATS_OUTPUT = "--output-file";
     public static final String STATS_MODE = "--stats-type";
@@ -152,7 +103,6 @@ public class Parameters implements Runnable {
     // Development
     public static final String DEV_MANIFESTS = "dev-manifests";
 
-    @CommandLine.Parameters(index = "0", paramLabel = "<project>", description = "Path to the project", defaultValue = "")
     String projectLocation;
 
     public void setProjectLocation(String projectLocation) {
@@ -167,82 +117,58 @@ public class Parameters implements Runnable {
         this.statsType = statsType;
     }
 
-    /**
-     * Default method when launch.
-     */
-    @Override
-    public void run() {
-        StandardCommandLauncher command;
-        int result;
-        if (consoleMode == null) {
-            command = new StandardCommandLauncher(this);
-            result = command.runGUI();
-            if (result != 0) {
-                System.exit(result);
-            }
-        } else {
-            try {
-                switch (consoleMode) {
-                case ("console-translate"):
-                    command = new StandardCommandLauncher(this);
-                    result = command.runConsoleTranslate();
-                    if (result != 0) {
-                        System.exit(result);
-                    }
-                    break;
-                case ("console-align"):
-                    command = new StandardCommandLauncher(this);
-                    try {
-                        int status = command.runConsoleAlign();
-                        if (status != 0) {
-                            System.exit(status);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Failed to align.");
-                        System.exit(1);
-                    }
-                    break;
-                case ("console-stats"):
-                    command = new StandardCommandLauncher(this);
-                    try {
-                        result = command.runConsoleStats();
-                        if (result != 0) {
-                            System.exit(result);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Failed to print stats.");
-                        System.exit(1);
-                    }
-                    break;
-                case ("console-createpseudotranslatetmx"):
-                    command = new StandardCommandLauncher(this);
-                    try {
-                        int status = command.runCreatePseudoTranslateTMX();
-                        if (status != 0) {
-                            System.exit(status);
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Failed to create pseudo-translate TMX.");
-                        System.exit(1);
-                    }
-                    break;
-                default:
-                    System.err.println("Unknown console mode: " + consoleMode);
-                    System.exit(1);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+    public static final String VERBOSE = "--verbose";
+    @CommandLine.Option(names = { VERBOSE }, descriptionKey = "VERBOSE")
+    boolean verbose;
+
+    public void initialize() {
+        if (verbose) {
+            Log.setConsoleLevel(java.util.logging.Level.INFO);
         }
+        if (isQuiet) {
+            Log.setConsoleLevel(java.util.logging.Level.SEVERE);
+        }
+        showStartUpLogInfo();
+        initializeApp();
+    }
+
+    private void showStartUpLogInfo() {
+        // initialize logging backend and loading configuration.
+        Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
+                ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+                Locale.getDefault().toLanguageTag());
+        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+                System.getProperty("java.version"), System.getProperty("java.home"));
+
+        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
+    }
+
+    private void initializeApp() {
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
+        System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
+
+        // Do migration and load various settings. The order is important!
+        Preferences.init();
+        // broker should be loaded before module loading
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
+        PluginUtils.loadPlugins(null);
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        Preferences.initFilters();
+        Preferences.initSegmentation();
     }
 
     public List<String> constructGuiArgs() {
         List<String> result = new ArrayList<>();
-        if (noTeam) {
-            result.add(NO_TEAM);
-        }
         if (isQuiet) {
             result.add(QUIET);
+        }
+        if (verbose) {
+            result.add(VERBOSE);
         }
         if (tokenizerSource != null) {
             result.add(TOKENIZER_SOURCE);
@@ -251,14 +177,6 @@ public class Parameters implements Runnable {
         if (tokenizerTarget != null) {
             result.add(TOKENIZER_TARGET);
             result.add(tokenizerTarget);
-        }
-        if (configDir != null) {
-            result.add(CONFIG_DIR);
-            result.add(configDir);
-        }
-        if (resourceBundle != null) {
-            result.add(RESOURCE_BUNDLE);
-            result.add(resourceBundle);
         }
         if (scriptName != null) {
             result.add(SCRIPT);

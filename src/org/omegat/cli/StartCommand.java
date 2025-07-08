@@ -25,8 +25,25 @@
 
 package org.omegat.cli;
 
+import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.Platform;
+import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StringUtil;
+import org.omegat.util.gui.OSXIntegration;
 import picocli.CommandLine;
 
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import java.awt.Toolkit;
+import java.io.File;
+import java.lang.reflect.Field;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 /**
@@ -34,21 +51,119 @@ import java.util.Objects;
  */
 @CommandLine.Command(name = "start")
 public class StartCommand implements Runnable {
-    private final Parameters parameters;
+
+    @CommandLine.ParentCommand
+    private LegacyParameters legacyParams;
+
+    @CommandLine.Mixin
+    private Parameters params;
+
+    @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
+    boolean usageHelpRequested;
+
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
 
-    public StartCommand(Parameters parameters) {
-        this.parameters = parameters;
+    public StartCommand() {}
+
+    public StartCommand(Parameters params) {
+        this.params = params;
     }
 
     @Override
     public void run() {
-        parameters.setProjectLocation(Objects.requireNonNullElse(project, "."));
-        StandardCommandLauncher command = new StandardCommandLauncher(parameters);
-        int result = command.runGUI();
+        legacyParams.initialize();
+        params.setProjectLocation(Objects.requireNonNullElse(project, "."));
+        params.initialize();
+        int result = runGUI();
         if (result != 0) {
             System.exit(result);
         }
     }
+
+    /**
+     * Execute standard GUI.
+     */
+    int runGUI() {
+        if (params != null && params.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
+        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
+
+        // macOS-specific - they must be set BEFORE any GUI calls
+        if (Platform.isMacOSX()) {
+            OSXIntegration.init();
+        }
+
+        // Set X11 application class name to make some desktop user interfaces
+        // (like Gnome Shell) recognize OmegaT
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Class<?> cls = toolkit.getClass();
+        try {
+            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
+                Field field = cls.getDeclaredField("awtAppClassName");
+                if (field.trySetAccessible()) {
+                    field.set(toolkit, "OmegaT");
+                }
+            }
+        } catch (Exception ignored) {
+        }
+
+        System.setProperty("swing.aatext", "true");
+        try {
+            Core.initializeGUI();
+        } catch (Throwable ex) {
+            Log.log(ex);
+            showError(ex);
+            return 1;
+        }
+
+        if (!Core.getPluginsLoadingErrors().isEmpty()) {
+            String err = String.join("\n", Core.getPluginsLoadingErrors());
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), err,
+                    OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (params != null && params.alternateFilenameFrom != null) {
+            RuntimePreferences.setAlternateFilenames(params.alternateFilenameFrom, params.alternateFilenameTo);
+        }
+
+        CoreEvents.fireApplicationStartup();
+
+        SwingUtilities.invokeLater(() -> {
+            // setVisible can't be executed directly, because we need to
+            // call all application startup listeners for initialize UI
+            Core.getMainWindow().getApplicationFrame().setVisible(true);
+            //
+            if (params != null) {
+                if (isProjectRemote(params.projectLocation)) {
+                    ProjectUICommands.projectRemote(params.projectLocation);
+                } else if (params.projectLocation != null) {
+                    File targetDir = Paths.get(params.projectLocation).toFile();
+                    File targetFile = Paths.get(params.projectLocation).resolve("omegat.project").toFile();
+                    if (targetDir.isDirectory() && targetFile.exists()) {
+                        ProjectUICommands.projectOpen(targetDir);
+                    }
+                }
+            }
+        });
+        return 0;
+    }
+
+    private boolean isProjectRemote(String project) {
+        return project != null && project.startsWith("http://")
+                || project != null && project.startsWith("https://");
+    }
+
+    private void showError(Throwable ex) {
+        String msg;
+        if (StringUtil.isEmpty(ex.getMessage())) {
+            msg = ex.getClass().getName();
+        } else {
+            msg = ex.getMessage();
+        }
+        JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg,
+                OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
+    }
+
 }

@@ -25,28 +25,74 @@
 
 package org.omegat.cli;
 
+import org.omegat.core.Core;
+import org.omegat.core.data.RealProject;
+import org.omegat.core.events.IProjectEventListener;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import java.util.Objects;
 
 @CommandLine.Command(name = "translate")
 public class TranslateCommand implements Runnable {
+
+    @CommandLine.ParentCommand
+    private LegacyParameters legacyParams;
+
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
 
-    private final Parameters params;
-
-    public TranslateCommand(Parameters parent) {
-        params = parent;
-    }
+    @CommandLine.Mixin
+    private Parameters params;
 
     @Override
     public void run() {
+        legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
-        StandardCommandLauncher command = new StandardCommandLauncher(params);
-        int status = command.runConsoleTranslate();
+        params.initialize();
+        int status = runConsoleTranslate();
         if (status != 0) {
             System.exit(status);
         }
+    }
+
+    /**
+     * Execute in console mode for translate.
+     */
+    int runConsoleTranslate() {
+        Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
+
+        if (params.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
+
+        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
+        Core.initializeConsole();
+
+        RealProject p = Common.selectProjectConsoleMode(true, params);
+
+        Common.validateTagsConsoleMode(params);
+
+        System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
+
+        try {
+            String sourceMask = legacyParams.sourcePattern;
+            p.compileProject(Objects.requireNonNullElse(sourceMask, ".*"), false);
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "CT_ERROR_COMPILING_PROJECT");
+            return 1;
+        }
+
+        // Called *after* executing post processing command (unlike the
+        // regular PROJECT_CHANGE_TYPE.COMPILE)
+        Common.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE, params);
+
+        p.closeProject();
+        Common.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE, params);
+        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
+
+        return 0;
     }
 }

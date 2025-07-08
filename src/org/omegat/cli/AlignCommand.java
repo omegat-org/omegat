@@ -25,8 +25,25 @@
 
 package org.omegat.cli;
 
+import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.RealProject;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
+import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.FileUtil;
+import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+import org.omegat.util.TMXWriter2;
+import org.omegat.util.gui.UIDesignManager;
 import picocli.CommandLine;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 import static picocli.CommandLine.Command;
@@ -34,27 +51,30 @@ import static picocli.CommandLine.Option;
 
 @Command(name = "align")
 public class AlignCommand implements Runnable {
-    private final Parameters parameters;
+
+    @CommandLine.ParentCommand
+    private LegacyParameters legacyParams;
+
+    @CommandLine.Mixin
+    private Parameters params;
+
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
     String project;
 
     @Option(names = { "-G", "--gui" }, versionHelp = true)
     boolean startGUI;
 
-    public AlignCommand(Parameters parameters) {
-        this.parameters = parameters;
-    }
-
     @Override
     public void run() {
-        parameters.setProjectLocation(Objects.requireNonNullElse(project, "."));
-        StandardCommandLauncher command = new StandardCommandLauncher(parameters);
+        legacyParams.initialize();
+        params.setProjectLocation(Objects.requireNonNullElse(project, "."));
+        params.initialize();
         int status;
         try {
             if (startGUI) {
-                status = command.runGUIAligner();
+                status = runGUIAligner();
             } else {
-                status = command.runConsoleAlign();
+                status = runConsoleAlign();
             }
             if (status != 0) {
                 System.exit(status);
@@ -64,5 +84,65 @@ public class AlignCommand implements Runnable {
             System.exit(1);
         }
 
+    }
+
+    int runConsoleAlign() throws Exception {
+        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
+
+        if (params.projectLocation == null) {
+            System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
+            return 1;
+        }
+
+        if (legacyParams.alignDirPath == null) {
+            System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
+            return 1;
+        }
+
+        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
+        Core.initializeConsole();
+        RealProject p = Common.selectProjectConsoleMode(true, params);
+
+        Common.validateTagsConsoleMode(params);
+
+        System.out
+                .println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), legacyParams.alignDirPath));
+
+        String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
+        ProjectProperties config = p.getProjectProperties();
+        boolean alt = !config.isSupportDefaultTranslations();
+        try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
+                config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
+            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(legacyParams.alignDirPath))), alt);
+        }
+        p.closeProject();
+        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
+        return 0;
+    }
+
+    int runGUIAligner() {
+        String dir = params.projectLocation;
+        try {
+            UIDesignManager.initialize();
+        } catch (IOException e) {
+            Log.log(e);
+            return 1;
+        }
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        try {
+            ClassLoader cl = PluginUtils.getClassLoader(PluginUtils.PluginType.BASE);
+            if (cl == null) {
+                return 1;
+            }
+            Class<?> alignClass = cl.loadClass("org.omegat.gui.align.AlignerModule");
+            Method method = alignClass.getMethod("showAligner", String.class);
+            method.invoke(null, dir);
+            return 0;
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
+                 | InvocationTargetException e) {
+            Log.log(e);
+            return 1;
+        }
     }
 }

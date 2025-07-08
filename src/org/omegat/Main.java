@@ -40,23 +40,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.languagetool.JLanguageTool;
-import org.omegat.cli.AlignCommand;
-import org.omegat.cli.Parameters;
-import org.omegat.cli.StartCommand;
-import org.omegat.cli.StatsCommand;
-import org.omegat.cli.TeamCommand;
-import org.omegat.cli.TranslateCommand;
+import org.omegat.cli.LegacyParameters;
 import picocli.CommandLine;
 
 import org.omegat.core.Core;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.languagetools.LanguageClassBroker;
-import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -70,43 +58,22 @@ import org.omegat.util.StaticUtils;
  * @author Kyle Katarn
  * @author Hiroshi Miura
  */
-public final class Main {
+
+public final class Main implements Runnable {
 
     private Main() {
     }
 
-    private static Parameters parameters;
+    @CommandLine.Parameters
+    private static LegacyParameters legacyParameters;
 
     public static void main(String[] args) {
-        // construct parser and execute
-        parameters = new Parameters();
-        CommandLine commandLine = new CommandLine(parameters);
-        commandLine.addSubcommand("team", new TeamCommand());
-        commandLine.addSubcommand("align", new AlignCommand(parameters));
-        commandLine.addSubcommand("stats", new StatsCommand(parameters));
-        commandLine.addSubcommand("translate", new TranslateCommand(parameters));
-        commandLine.addSubcommand("start", new StartCommand(parameters));
-        commandLine.addSubcommand("help", new CommandLine.HelpCommand());
         ResourceBundle resourceBundle = ResourceBundle.getBundle("org.omegat.cli.Parameters");
+        // construct parser and execute
+        legacyParameters = new LegacyParameters();
+        CommandLine commandLine = new CommandLine(legacyParameters);
         commandLine.setResourceBundle(resourceBundle);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
-
-        // Workaround for Java 17 or later support of JAXB.
-        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
-        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
-
-        System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
-
-        // Do migration and load various settings. The order is important!
-        Preferences.init();
-        // broker should be loaded before module loading
-        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
-        JLanguageTool.setDataBroker(new LanguageDataBroker());
-        PluginUtils.loadPlugins(null);
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-        Preferences.initFilters();
-        Preferences.initSegmentation();
-
         commandLine.execute(args);
     }
 
@@ -122,7 +89,6 @@ public final class Main {
             command.add("-cp");
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
-            command.addAll(parameters.constructGuiArgs());
         } else {
             // assumes jpackage
             var installDir = StaticUtils.installDir();
@@ -136,7 +102,6 @@ public final class Main {
                     return;
                 }
                 command.add(javaBin.toString());
-                command.addAll(parameters.constructGuiArgs());
             }
         }
         if (projectDir != null) {
@@ -154,4 +119,8 @@ public final class Main {
         }
     }
 
+    @Override
+    public void run() {
+
+    }
 }

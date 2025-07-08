@@ -31,7 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ConsoleStatsTest extends ConsoleTestsCommon{
+public class ConsoleStatsTest extends ConsoleTestsCommon {
 
     @Test
     public void testConsoleStatsLegacy() throws Exception {

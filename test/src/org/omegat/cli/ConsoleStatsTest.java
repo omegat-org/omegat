@@ -25,6 +25,7 @@
 package org.omegat.cli;
 
 import org.assertj.core.api.Assertions;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.omegat.Main;
 
@@ -34,37 +35,66 @@ import java.nio.file.Paths;
 
 import static org.junit.Assert.fail;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+@RunWith(Parameterized.class)
 public class ConsoleStatsTest extends ConsoleTestsCommon {
+
+    @Parameterized.Parameters(name = "{index}: statsType={0}")
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                { "text", "Project Statistics", AssertionType.CONTAINS },
+                { "json", "{\"total\":{\"segments\":0,", AssertionType.STARTS_WITH },
+                { "xml", "<omegat-stats>", AssertionType.STARTS_WITH }
+        });
+    }
+
+    private enum AssertionType { CONTAINS, STARTS_WITH }
+
+    private final String statsType;
+    private final String expectedContent;
+    private final AssertionType assertionType;
+
+    public ConsoleStatsTest(String statsType, String expectedContent, AssertionType assertionType) {
+        this.statsType = statsType;
+        this.expectedContent = expectedContent;
+        this.assertionType = assertionType;
+    }
 
     @Test
     public void testConsoleStatsLegacy() throws Exception {
-        testConsoleStatsPrep();
+        prepareTestConsoleStats();
 
-        String[] statsTypes = {"text", "json", "xml"};
-        for (String statsType : statsTypes) {
-            Path outputFile = getTargetDir().resolve("stats." + statsType);
-            Main.main(new String[] {String.format("--config-dir=%s", getConfigDir()), "--mode=console-stats",
-                    String.format("--stats-type=%s", statsType),
-                    String.format("--output-file=%s", outputFile),
-                    getProjectDir().toString() });
-            Assertions.assertThat(outputFile).exists();
-            switch (statsType) {
-            case "xml":
-                Assertions.assertThat(Files.readAllLines(outputFile)).startsWith("<omegat-stats>");
-                break;
-            case "text":
-                Assertions.assertThat(Files.readAllLines(outputFile)).contains("Project Statistics");
-                break;
-            case "json":
-                Assertions.assertThat(Files.readAllLines(outputFile)).startsWith("{\"total\":{\"segments\":0,");
-                break;
-            default:
-                fail("undefined type.");
-            }
+        Path outputFile = getTargetDir().resolve("stats." + statsType);
+        Main.main(new String[] {
+                String.format("--config-dir=%s", getConfigDir()),
+                "--mode=console-stats",
+                String.format("--stats-type=%s", statsType),
+                String.format("--output-file=%s", outputFile),
+                getProjectDir().toString()
+        });
+
+        Assertions.assertThat(outputFile).exists();
+        List<@NotNull String> lines = Files.readAllLines(outputFile);
+
+        switch (assertionType) {
+        case STARTS_WITH:
+            Assertions.assertThat(lines.get(0)).startsWith(expectedContent);
+            break;
+        case CONTAINS:
+            Assertions.assertThat(lines).contains(expectedContent);
+            break;
+        default:
+            fail("Unknown assertion type.");
         }
     }
 
-    private void testConsoleStatsPrep() throws Exception {
+    private void prepareTestConsoleStats() throws Exception {
         prep();
         Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
         Files.copy(testTmx, getProjectDir().resolve("omegat/project_save.tmx"));

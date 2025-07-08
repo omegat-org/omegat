@@ -177,6 +177,8 @@ public class LegacyParameters implements Runnable {
                     }
                     break;
                 case ("console-stats"):
+                    params.setStatsOutput(statsOutput);
+                    params.setStatsType(statsType);
                     StatsCommand statsCommand = new StatsCommand(params);
                     try {
                         result = statsCommand.runConsoleStats();

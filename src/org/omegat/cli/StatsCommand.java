@@ -123,11 +123,11 @@ public class StatsCommand implements Runnable {
             } else {
                 statsMode = StatOutputFormat.XML;
             }
-        } else if (StatOutputFormat.JSON.toString().equals(params.statsType)) {
+        } else if (StatOutputFormat.JSON.toString().equalsIgnoreCase(params.statsType)) {
             statsMode = StatOutputFormat.JSON;
-        } else if (StatOutputFormat.XML.toString().equals(params.statsType)) {
+        } else if (StatOutputFormat.XML.toString().equalsIgnoreCase(params.statsType)) {
             statsMode = StatOutputFormat.XML;
-        } else if (StatOutputFormat.TEXT.toString().equals(params.statsType)) {
+        } else if (StatOutputFormat.TEXT.toString().equalsIgnoreCase(params.statsType)) {
             statsMode = StatOutputFormat.TEXT;
         } else {
             statsMode = StatOutputFormat.XML;

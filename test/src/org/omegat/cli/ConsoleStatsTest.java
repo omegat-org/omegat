@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.omegat.Main;
 
@@ -31,16 +32,37 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.fail;
+
 public class ConsoleStatsTest extends ConsoleTestsCommon {
 
     @Test
     public void testConsoleStatsLegacy() throws Exception {
         testConsoleStatsPrep();
 
-        Main.main(new String[] {String.format("--config-dir=%s", getConfigDir()), "--mode=console-stats",
-                getProjectDir().toString() });
+        String[] statsTypes = {"text", "json", "xml"};
+        for (String statsType : statsTypes) {
+            Path outputFile = getTargetDir().resolve("stats." + statsType);
+            Main.main(new String[] {String.format("--config-dir=%s", getConfigDir()), "--mode=console-stats",
+                    String.format("--stats-type=%s", statsType),
+                    String.format("--output-file=%s", outputFile),
+                    getProjectDir().toString() });
+            Assertions.assertThat(outputFile).exists();
+            switch (statsType) {
+            case "xml":
+                Assertions.assertThat(Files.readAllLines(outputFile)).startsWith("<omegat-stats>");
+                break;
+            case "text":
+                Assertions.assertThat(Files.readAllLines(outputFile)).contains("Project Statistics");
+                break;
+            case "json":
+                Assertions.assertThat(Files.readAllLines(outputFile)).startsWith("{\"total\":{\"segments\":0,");
+                break;
+            default:
+                fail("undefined type.");
+            }
+        }
     }
-
 
     private void testConsoleStatsPrep() throws Exception {
         prep();

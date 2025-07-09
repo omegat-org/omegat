@@ -29,11 +29,13 @@ import org.omegat.core.Core;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.StatOutputFormat;
+import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import picocli.CommandLine;
 
+import java.io.File;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -132,30 +134,8 @@ public class StatsCommand implements Runnable {
         } else {
             statsMode = StatOutputFormat.XML;
         }
-
-        try (OutputStreamWriter writer = new OutputStreamWriter(Files.newOutputStream(
-                Paths.get(FileUtil.expandTildeHomeDir(outputFilename)), StandardOpenOption.CREATE,
-                StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE), StandardCharsets.UTF_8)) {
-            switch (statsMode) {
-                case TEXT:
-                    writer.write(projectStats.getTextData());
-                    break;
-                case JSON:
-                    writer.write(projectStats.getJsonData());
-                    break;
-                case XML:
-                    writer.write(projectStats.getXmlData());
-                    break;
-                default:
-                    Log.logWarningRB("CONSOLE_STATS_WARNING_TYPE");
-                    break;
-            }
-        } catch (NoSuchFileException nsfe) {
-            Log.logErrorRB("CONSOLE_STATS_FILE_OPEN_ERROR");
-            return 1;
-        } finally {
-            p.closeProject();
-        }
+        File statsFile = Paths.get(FileUtil.expandTildeHomeDir(outputFilename)).toFile();
+        Statistics.writeStat(statsFile, projectStats, statsMode);
         return 0;
     }
 

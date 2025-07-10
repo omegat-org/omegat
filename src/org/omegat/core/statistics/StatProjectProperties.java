@@ -59,7 +59,15 @@ public final class StatProjectProperties {
         this.sourceLanguage = props.getSourceLanguage().getLanguage();
         this.targetLanguage = props.getTargetLanguage().getLanguage();
         this.sourceRoot = props.getSourceRoot();
+    }
 
+    public StatProjectProperties(String projectName, String projectRoot, String sourceLanguage,
+            String targetLanguage, String sourceRoot) {
+        this.projectName = projectName;
+        this.projectRoot = projectRoot;
+        this.sourceLanguage = sourceLanguage;
+        this.targetLanguage = targetLanguage;
+        this.sourceRoot = sourceRoot;
     }
 
     @XmlAttribute(name = "name")

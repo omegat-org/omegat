@@ -36,12 +36,7 @@ import org.omegat.util.Log;
 import picocli.CommandLine;
 
 import java.io.File;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 @CommandLine.Command(name = "stats")
 public class StatsCommand implements Runnable {

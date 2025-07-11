@@ -270,8 +270,7 @@ dependencies {
 }
 
 jar {
-    def pluginProperties = layout.settingsDirectory.file('Plugins.properties')
-    def omtPlugins = loadProperties(pluginProperties.asFile)
+    def omtPlugins = loadProperties(file('Plugins.properties'))
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
@@ -323,12 +322,12 @@ distributions {
             // /docs
             // ...../greetings/<lang>/first_steps.html
             // ...../manuals/<lang>.zip
-            from(layout.settingsDirectory.dir('release')) {
+            from('release') {
                 into 'docs'
                 include 'doc-license.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            from(layout.settingsDirectory.dir('release')) {
+            from('release') {
                 // ** Caution!! **
                 // 'readme*.txt' and 'changes.txt' are expected
                 // in releases/win32-specific/OmegaT.iss
@@ -378,7 +377,7 @@ distributions {
             // system core plugins into modules
             into('modules') {
                 from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
-                from(layout.settingsDirectory.dir('releases/modules-specific'))
+                from('releases/modules-specific')
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -393,7 +392,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'build-logic/**', 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                include 'config/**', 'build-logic/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
                         'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
                         'docs_devel/**', 'scripts/**',
                         'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',

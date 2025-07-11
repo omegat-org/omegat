@@ -100,6 +100,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      *
      * @return engine name.
      */
+    @Override
     public String getName() {
         return BUNDLE.getString("MT_ENGINE_APERTIUM");
     }
@@ -274,10 +275,12 @@ public class ApertiumTranslate extends BaseCachedTranslate {
                 updateOk.run();
             }
 
+            @Override
             public void insertUpdate(DocumentEvent event) {
                 updateOk.run();
             }
 
+            @Override
             public void removeUpdate(DocumentEvent event) {
                 updateOk.run();
             }

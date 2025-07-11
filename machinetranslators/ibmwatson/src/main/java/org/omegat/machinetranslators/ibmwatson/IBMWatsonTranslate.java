@@ -34,6 +34,7 @@ import java.awt.Window;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -181,8 +182,8 @@ public class IBMWatsonTranslate extends BaseCachedTranslate {
         if (modelId != null && !modelId.isEmpty()) {
             params.put("model_id", modelId);
         }
-        params.put("source", sLang.getLanguageCode().toUpperCase());
-        params.put("target", tLang.getLanguageCode().toUpperCase());
+        params.put("source", sLang.getLanguageCode().toUpperCase(Locale.ENGLISH));
+        params.put("target", tLang.getLanguageCode().toUpperCase(Locale.ENGLISH));
         return new ObjectMapper().writeValueAsString(params);
     }
 

@@ -43,7 +43,7 @@ public class ConsoleTranslateTest extends ConsoleTestsCommon {
         String fileName = "old.txt";
         testConsoleTranslatePrep(fileName);
 
-        Main.main(new String[] {String.format("--config-dir=%s", getConfigDir()), "--mode=console-translate",
+        Main.main(new String[] { String.format("--config-dir=%s", getConfigDir()), "--mode=console-translate",
                 getProjectDir().toString() });
 
         Path trgFile = getTargetDir().resolve(fileName);
@@ -68,6 +68,5 @@ public class ConsoleTranslateTest extends ConsoleTestsCommon {
         List<String> fileContent = List.of("Foo");
         Path srcFile = getSourceDir().resolve(fileName);
         Files.write(srcFile, fileContent);
-
     }
 }

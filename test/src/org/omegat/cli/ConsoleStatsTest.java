@@ -47,14 +47,14 @@ public class ConsoleStatsTest extends ConsoleTestsCommon {
 
     @Parameterized.Parameters(name = "{index}: statsType={0}")
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]{
-                { "text", "Project Statistics", AssertionType.CONTAINS },
+        return Arrays.asList(new Object[][] { { "text", "Project Statistics", AssertionType.CONTAINS },
                 { "json", "{\"total\":{\"segments\":0,", AssertionType.STARTS_WITH },
-                { "xml", "<omegat-stats>", AssertionType.STARTS_WITH }
-        });
+                { "xml", "<omegat-stats>", AssertionType.LINE_2_STARTS_WITH } });
     }
 
-    private enum AssertionType { CONTAINS, STARTS_WITH }
+    private enum AssertionType {
+        CONTAINS, STARTS_WITH, LINE_2_STARTS_WITH;
+    }
 
     private final String statsType;
     private final String expectedContent;
@@ -71,13 +71,9 @@ public class ConsoleStatsTest extends ConsoleTestsCommon {
         prepareTestConsoleStats();
 
         Path outputFile = getTargetDir().resolve("stats." + statsType);
-        Main.main(new String[] {
-                String.format("--config-dir=%s", getConfigDir()),
-                "--mode=console-stats",
-                String.format("--stats-type=%s", statsType),
-                String.format("--output-file=%s", outputFile),
-                getProjectDir().toString()
-        });
+        Main.main(new String[] { String.format("--config-dir=%s", getConfigDir()), "--mode=console-stats",
+                String.format("--stats-type=%s", statsType), String.format("--output-file=%s", outputFile),
+                getProjectDir().toString() });
 
         Assertions.assertThat(outputFile).exists();
         List<@NotNull String> lines = Files.readAllLines(outputFile);
@@ -85,6 +81,9 @@ public class ConsoleStatsTest extends ConsoleTestsCommon {
         switch (assertionType) {
         case STARTS_WITH:
             Assertions.assertThat(lines.get(0)).startsWith(expectedContent);
+            break;
+        case LINE_2_STARTS_WITH:
+            Assertions.assertThat(lines.get(1)).startsWith(expectedContent);
             break;
         case CONTAINS:
             Assertions.assertThat(lines).contains(expectedContent);

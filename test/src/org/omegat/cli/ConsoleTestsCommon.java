@@ -27,6 +27,7 @@ package org.omegat.cli;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
@@ -34,6 +35,7 @@ import org.omegat.util.TestPreferencesInitializer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 
 import static org.junit.Assert.assertTrue;
 
@@ -48,6 +50,7 @@ public class ConsoleTestsCommon {
         assertTrue(tmpDir.toFile().isDirectory());
         configDir = Files.createDirectory(tmpDir.resolve(".omegat")).toString();
         TestPreferencesInitializer.init(configDir);
+        Core.initializeConsole(Collections.emptyMap());
     }
 
     @After

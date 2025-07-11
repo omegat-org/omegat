@@ -66,7 +66,6 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  */
 public abstract class TestCore {
     protected File configDir;
-    protected IMainWindow mainWindow;
 
     /**
      * Set-up OmegaT Core properties for unit and functional test.
@@ -81,9 +80,10 @@ public abstract class TestCore {
     public final void setUpCore() throws Exception {
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
-        initMainWindow();
+        IMainWindow mainWindow = getMainWindow();
+        Core.setMainWindow(mainWindow);
         Core.setCurrentProject(new NotLoadedProject());
-        initEditor();
+        initEditor(mainWindow);
     }
 
     /**
@@ -322,14 +322,6 @@ public abstract class TestCore {
     }
 
     /**
-     * Initialize main window and store it in mainWindow field and Core.
-     */
-    protected void initMainWindow() {
-        mainWindow = getMainWindow();
-        Core.setMainWindow(getMainWindow());
-    }
-
-    /**
      * Create an implementation of IEditorSettings.
      * @return object which implements IEditorSettings as empty methods.
      */
@@ -502,7 +494,7 @@ public abstract class TestCore {
     /**
      * Initialize editor and store it with TestInitializer.initEditor function.
      */
-    protected void initEditor() {
+    protected void initEditor(IMainWindow mainWindow) {
         final IEditorSettings editorSettings = getEditorSettings();
         TestCoreInitializer.initEditor(new IEditor() {
 

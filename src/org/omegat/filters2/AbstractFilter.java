@@ -436,7 +436,7 @@ public abstract class AbstractFilter implements IFilter {
      * @throws TranslationException
      *             Should be thrown when processed file has any format defects.
      */
-    protected void processFile(File inFile, File outFile, FilterContext fc)
+    protected void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
         String encoding = getInputEncoding(fc, inFile);
         try (BufferedReader reader = createReader(inFile, encoding)) {

@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
+import java.util.TimeZone;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
@@ -69,6 +70,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import tokyo.northside.logging.ILogger;
 
@@ -126,16 +128,16 @@ public final class Main {
     }
 
     /** Project location for a load on startup. */
-    private static File projectLocation = null;
+    private static @Nullable File projectLocation = null;
 
     /** Remote project location. */
-    private static String remoteProject = null;
+    private static @Nullable String remoteProject = null;
 
     /** Execution command line parameters. */
     private static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
-    private static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static @Nullable CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
         if (args.length > 0
@@ -193,8 +195,8 @@ public final class Main {
         logger.atInfo().setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
                 .addArgument(StringUtils.repeat('=', 120)).addArgument(OStrings.getNameAndVersion())
                 .addArgument(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now()))
-                .addArgument(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()))
+                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now(ZoneId.systemDefault())))
+                .addArgument(TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT, Locale.getDefault()))
                 .addArgument(Locale.getDefault().toLanguageTag()).log();
         logger.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
@@ -262,11 +264,15 @@ public final class Main {
             command.addAll(CLIParameters.unparseArgs(PARAMS));
         } else {
             // assumes jpackage
-            var installDir = StaticUtils.installDir();
+            String installDir = StaticUtils.installDir();
             if (installDir == null) {
                 return;
             } else {
-                javaBin = Paths.get(installDir).getParent().resolve("bin/OmegaT");
+                Path parent = Paths.get(installDir).getParent();
+                if (parent == null) {
+                    return;
+                }
+                javaBin = parent.resolve("bin/OmegaT");
                 if (!javaBin.toFile().exists()) {
                     // abort restart
                     Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
@@ -299,7 +305,7 @@ public final class Main {
      * @param path
      *            to config file
      */
-    private static void applyConfigFile(String path) {
+    private static void applyConfigFile(@Nullable String path) {
         if (path == null) {
             return;
         }

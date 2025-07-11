@@ -11,18 +11,7 @@ dependencies {
                 includes: ['**/language-pl-*.jar'])
     } else {
         compileOnly(libs.commons.io)
-        compileOnly(libs.languagetool.core) {
-            exclude module: 'guava'
-            exclude module: 'language-detector'
-            exclude group: 'com.google.android'
-            exclude module: 'jackson-databind'
-            exclude group: 'org.jetbrains'
-            exclude module: 'commons-lang3'
-            exclude module: 'commons-text'
-            exclude module: 'commons-logging'
-            exclude module: 'json'
-            exclude module: 'protobuf-java'
-        }
+        compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.pl) {
             exclude module: 'languagetool-core'
         }

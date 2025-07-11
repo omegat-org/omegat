@@ -107,6 +107,7 @@ class TestMainWindow implements IMainWindow {
         });
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
             public void onApplicationStartup() {
                 initializeScreenLayout();
                 // Ensure any "closed" Dockables are visible. These can be newly
@@ -116,7 +117,7 @@ class TestMainWindow implements IMainWindow {
                 UIDesignManager.ensureDockablesVisible(desktop);
                 UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
-
+            @Override
             public void onApplicationShutdown() {
             }
         });
@@ -264,9 +265,7 @@ class TestMainWindow implements IMainWindow {
     public void showMessageDialog(final String message) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void addDockable(Dockable pane) {
         desktop.addDockable(pane);
     }

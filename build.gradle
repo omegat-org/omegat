@@ -213,6 +213,7 @@ dependencies {
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
     testFixturesImplementation(libs.assertj.swing.junit)
+    testFixturesImplementation(libs.jetbrains.annotations)
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)

@@ -149,34 +149,36 @@ public final class Statistics {
                 StatOutputFormat.getDefaultFormats());
         for (StatOutputFormat format : StatOutputFormat.values()) {
             if (format.isSelected(outputFormats)) {
-                writeStat(dir, result, format);
+                File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+                writeStat(statFile, result, format);
             }
         }
     }
 
-    /**
-     * Write statistics to a file in specified format.
-     *
-     * @param filename
-     * @param result
-     * @param format
-     */
+    @Deprecated
     public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
         File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+        writeStat(statFile, result, format);
+    }
+
+    /**
+     * Write statistics to a file in specified format.
+     */
+    public static void writeStat(File statFile, StatsResult result, StatOutputFormat format) {
         try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile),
                 StandardCharsets.UTF_8)) {
             switch (format) {
-            case TEXT:
-                out.write(DateFormat.getInstance().format(new Date()) + "\n");
-                out.write(result.getTextData());
-                break;
-            case XML:
-                out.write(result.getXmlData());
-                break;
-            case JSON:
-            default:
-                out.write(result.getJsonData());
-                break;
+                case TEXT:
+                    out.write(DateFormat.getInstance().format(new Date()) + "\n");
+                    out.write(result.getTextData());
+                    break;
+                case XML:
+                    out.write(result.getXmlData());
+                    break;
+                case JSON:
+                default:
+                    out.write(result.getJsonData());
+                    break;
             }
         } catch (Exception ex) {
             Log.log(ex);

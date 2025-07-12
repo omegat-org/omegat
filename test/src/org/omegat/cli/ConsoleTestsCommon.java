@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Aaron Madlon-Kay
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,28 +22,24 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-
-package org.omegat;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
+package org.omegat.cli;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
 
-public class MainTest {
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collections;
+
+import static org.junit.Assert.assertTrue;
+
+public class ConsoleTestsCommon {
 
     private static Path tmpDir;
     private static String configDir;
@@ -54,6 +50,7 @@ public class MainTest {
         assertTrue(tmpDir.toFile().isDirectory());
         configDir = Files.createDirectory(tmpDir.resolve(".omegat")).toString();
         TestPreferencesInitializer.init(configDir);
+        Core.initializeConsole(Collections.emptyMap());
     }
 
     @After
@@ -61,28 +58,29 @@ public class MainTest {
         FileUtils.forceDeleteOnExit(tmpDir.toFile());
     }
 
-    @Test
-    public void testConsoleTranslate() throws Exception {
+    Path getProjectDir() {
+        return tmpDir;
+    }
 
+    String getConfigDir() {
+        return configDir;
+    }
+
+    Path getTargetDir() {
+        return tmpDir.resolve(OConsts.DEFAULT_TARGET);
+    }
+
+    Path getSourceDir() {
+        return tmpDir.resolve(OConsts.DEFAULT_SOURCE);
+    }
+
+    void prep() throws Exception {
         // Create project properties
-        ProjectProperties props = new ProjectProperties(tmpDir.toFile());
+        ProjectProperties props = new ProjectProperties(getProjectDir().toFile());
         // Create project internal directories
         props.autocreateDirectories();
-        // Create version-controlled glossary file
+        // Create a version-controlled glossary file
         props.getWritableGlossaryFile().getAsFile().createNewFile();
         ProjectFileStorage.writeProjectFile(props);
-
-        String fileName = "foo.txt";
-        List<String> fileContent = Arrays.asList("Foo");
-
-        Path srcFile = tmpDir.resolve(OConsts.DEFAULT_SOURCE).resolve(fileName);
-        Files.write(srcFile, fileContent);
-
-        Main.main(new String[] {String.format("--config-dir=%s", configDir), "--mode=console-translate",
-                tmpDir.toString() });
-
-        Path trgFile = tmpDir.resolve(OConsts.DEFAULT_TARGET).resolve(fileName);
-        assertTrue(trgFile.toFile().isFile());
-        assertEquals(fileContent, Files.readAllLines(trgFile));
     }
 }

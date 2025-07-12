@@ -97,17 +97,8 @@ public final class Core {
     private Core() {
     }
 
-    private static IIssues issuesWindow;
-    private static IMatcher matcher;
-    private static IProjectFilesList projWin;
-
     // package-private for test fixture TestCoreInitializer
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
-
-    private static MachineTranslateTextArea machineTranslatePane;
-    private static DictionariesTextArea dictionaries;
-    private static IComments comments;
-    private static SegmentPropertiesArea segmentPropertiesArea;
 
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections
             .synchronizedList(new ArrayList<>());
@@ -140,19 +131,17 @@ public final class Core {
     }
 
     public static IIssues getIssues() {
-        return issuesWindow;
+        return CoreState.getInstance().getIssuesWindow();
     }
 
     /** Get matcher component instance. */
     public static IMatcher getMatcher() {
-        return matcher;
+        return CoreState.getInstance().getMatcher();
     }
-
-    private static SpellCheckerManager spellCheckerManager;
 
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
-        return spellCheckerManager.getCurrentSpellChecker();
+        return CoreState.getInstance().getCurrentSpellChecker();
     }
 
     public static FilterMaster getFilterMaster() {
@@ -165,11 +154,11 @@ public final class Core {
     }
 
     public static IProjectFilesList getProjectFilesList() {
-        return projWin;
+        return CoreState.getInstance().getProjWin();
     }
 
     public static MachineTranslateTextArea getMachineTranslatePane() {
-        return machineTranslatePane;
+        return CoreState.getInstance().getMachineTranslatePane();
     }
 
     public static IAutoSave getAutoSave() {
@@ -192,7 +181,7 @@ public final class Core {
 
     /** Get segment properties area */
     public static SegmentPropertiesArea getSegmentPropertiesArea() {
-        return segmentPropertiesArea;
+        return CoreState.getInstance().getSegmentPropertiesArea();
     }
 
     /**
@@ -201,11 +190,11 @@ public final class Core {
      * @return the comment area
      */
     public static IComments getComments() {
-        return comments;
+        return CoreState.getInstance().getComments();
     }
 
     public static IDictionaries getDictionaries() {
-        return dictionaries;
+        return CoreState.getInstance().getDictionaries();
     }
 
     public static Segmenter getSegmenter() {
@@ -227,6 +216,7 @@ public final class Core {
      * @deprecated since 6.1.0
      */
     @Deprecated(since = "6.1.0", forRemoval = true)
+    @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
         initializeGUI(params);
     }
@@ -270,21 +260,21 @@ public final class Core {
         // window.
         coreState.setEditor(new EditorController(me));
         coreState.setTagValidation(new TagValidationTool());
-        issuesWindow = new IssuesPanelController(me.getApplicationFrame());
-        matcher = new MatchesTextArea(me);
+        coreState.setIssuesWindow(new IssuesPanelController(me.getApplicationFrame()));
+        coreState.setMatcher(new MatchesTextArea(me));
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         coreState.setGlossaries(glossaryArea);
         coreState.setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
         coreState.setNotes(new NotesTextArea(me));
-        comments = new CommentsTextArea(me);
-        machineTranslatePane = new MachineTranslateTextArea(me);
-        dictionaries = new DictionariesTextArea(me);
-        spellCheckerManager = new SpellCheckerManager();
+        coreState.setComments(new CommentsTextArea(me));
+        coreState.setMachineTranslatePane(new MachineTranslateTextArea(me));
+        coreState.setDictionaries(new DictionariesTextArea(me));
+        coreState.setSpellCheckerManager(new SpellCheckerManager());
         // Create an independent instance updated from SearchThead.
         new MultipleTransPane(me);
         // Create an independent instance updated by events.
-        segmentPropertiesArea = new SegmentPropertiesArea(me);
-        projWin = new ProjectFilesListController();
+        coreState.setSegmentPropertiesArea(new SegmentPropertiesArea(me));
+        coreState.setProjWin(new ProjectFilesListController());
     }
 
     /**

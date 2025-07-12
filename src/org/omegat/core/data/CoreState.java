@@ -27,16 +27,25 @@ package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.core.spellchecker.ISpellChecker;
+import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
 import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.gui.comments.IComments;
+import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.exttrans.MachineTranslateTextArea;
+import org.omegat.gui.filelist.IProjectFilesList;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.IGlossaries;
+import org.omegat.gui.issues.IIssues;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
+import org.omegat.gui.properties.SegmentPropertiesArea;
 
 import java.util.Collections;
 import java.util.Map;
@@ -86,14 +95,24 @@ public class CoreState {
 
     private Map<String, String> cmdLineParams = Collections.emptyMap();
     private IProject project;
-    private IMainWindow mainWindow;
-    private IEditor editor;
-    private IGlossaries glossaries;
     private Segmenter segmenter;
     private FilterMaster filterMaster;
     private GlossaryManager glossaryManager;
     private ITagValidation tagValidation;
+    private IIssues issuesWindow;
+
+    // GUI panes
+    private IMainWindow mainWindow;
+    private IEditor editor;
+    private IGlossaries glossaries;
     private INotes notes;
+    private IMatcher matcher;
+    private IProjectFilesList projWin;
+    private IComments comments;
+    private MachineTranslateTextArea machineTranslatePane;
+    private DictionariesTextArea dictionaries;
+    private SegmentPropertiesArea segmentPropertiesArea;
+    private SpellCheckerManager spellCheckerManager;
 
     public boolean isProjectLoaded() {
         if (project == null) {
@@ -180,5 +199,75 @@ public class CoreState {
 
     public void setNotes(INotes notes) {
         this.notes = notes;
+    }
+
+    public IIssues getIssuesWindow() {
+        return issuesWindow;
+    }
+
+    public void setIssuesWindow(IIssues issuesWindow) {
+        this.issuesWindow = issuesWindow;
+    }
+
+    public IMatcher getMatcher() {
+        return matcher;
+    }
+
+    public void setMatcher(IMatcher matcher) {
+        this.matcher = matcher;
+    }
+
+    public IProjectFilesList getProjWin() {
+        return projWin;
+    }
+
+    public void setProjWin(IProjectFilesList projWin) {
+        this.projWin = projWin;
+    }
+
+    public IComments getComments() {
+        return comments;
+    }
+
+    public void setComments(IComments comments) {
+        this.comments = comments;
+    }
+
+    public MachineTranslateTextArea getMachineTranslatePane() {
+        return machineTranslatePane;
+    }
+
+    public void setMachineTranslatePane(MachineTranslateTextArea machineTranslatePane) {
+        this.machineTranslatePane = machineTranslatePane;
+    }
+
+    public DictionariesTextArea getDictionaries() {
+        return dictionaries;
+    }
+
+    public void setDictionaries(DictionariesTextArea dictionaries) {
+        this.dictionaries = dictionaries;
+    }
+
+    public SegmentPropertiesArea getSegmentPropertiesArea() {
+        return segmentPropertiesArea;
+    }
+
+    public void setSegmentPropertiesArea(SegmentPropertiesArea segmentPropertiesArea) {
+        this.segmentPropertiesArea = segmentPropertiesArea;
+    }
+
+    @SuppressWarnings("unused")
+    public SpellCheckerManager getSpellCheckerManager() {
+        return spellCheckerManager;
+    }
+
+    public void setSpellCheckerManager(SpellCheckerManager spellCheckerManager) {
+        this.spellCheckerManager = spellCheckerManager;
+    }
+
+    /** Get spell checker instance. */
+    public ISpellChecker getCurrentSpellChecker() {
+        return spellCheckerManager.getCurrentSpellChecker();
     }
 }

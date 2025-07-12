@@ -180,6 +180,7 @@ public final class Core {
     }
 
     /** Get segment properties area */
+    @SuppressWarnings("unused")
     public static SegmentPropertiesArea getSegmentPropertiesArea() {
         return CoreState.getInstance().getSegmentPropertiesArea();
     }

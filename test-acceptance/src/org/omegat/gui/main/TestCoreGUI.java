@@ -93,7 +93,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     protected void openSampleProjectWaitPropertyPane(Path projectPath) throws Exception {
-        SegmentPropertiesArea segmentPropertiesArea = Core.getSegmentPropertiesArea();
+        SegmentPropertiesArea segmentPropertiesArea = CoreState.getInstance().getSegmentPropertiesArea();
         CountDownLatch latch = new CountDownLatch(1);
         segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
         openSampleProject(projectPath);

@@ -138,7 +138,7 @@ public class Instance implements Serializable {
      * the name of the translated file should be the same as the name of the
      * input file.
      */
-    public Instance(String sourceFilenameMask, String sourceEncoding, String targetEncoding) {
+    public Instance(String sourceFilenameMask, @Nullable String sourceEncoding, String targetEncoding) {
         init(sourceFilenameMask, sourceEncoding, targetEncoding, AbstractFilter.TARGET_DEFAULT);
     }
 

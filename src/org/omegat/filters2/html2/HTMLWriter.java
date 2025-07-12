@@ -37,6 +37,7 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -57,23 +58,21 @@ import org.omegat.util.PatternConsts;
  */
 public class HTMLWriter extends Writer {
     /** Internal Buffer to collect the output */
-    private StringWriter writer;
+    private final StringWriter writer;
 
     /** real writer to a file */
-    private BufferedWriter realWriter;
+    private final BufferedWriter realWriter;
 
     /** Replacement string for HTML content-type META */
-    private String htmlMeta;
-    /** Replacement string for XML (XHTML) header */
-    private String xmlHeader;
+    private @Nullable String htmlMeta;
 
     /**
      * Encoding to write this file in. null value means no encoding declaration.
      */
-    private String encoding;
+    private final String encoding;
 
     /** HTML filter options. */
-    private HTMLOptions options;
+    private final HTMLOptions options;
 
     /**
      * Creates new HTMLWriter.
@@ -164,7 +163,8 @@ public class HTMLWriter extends Writer {
                 Matcher matcherHeader = PatternConsts.XML_HEADER.matcher(contents);
                 boolean xhtml = false;
                 if (matcherHeader.find()) {
-                    xmlHeader = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
+                    /** Replacement string for XML (XHTML) header */
+                    String xmlHeader = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>";
                     contents = matcherHeader.replaceFirst(xmlHeader);
                     xhtml = true;
                 }

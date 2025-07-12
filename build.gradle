@@ -221,6 +221,7 @@ dependencies {
         exclude module: 'json'
         exclude module: 'protobuf-java'
     }
+    testFixturesImplementation(libs.jetbrains.annotations)
 
     testImplementation(libs.junit4)
     testImplementation(libs.commons.io)

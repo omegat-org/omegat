@@ -35,6 +35,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -366,7 +367,7 @@ public final class RemoteRepositoryProviderTest {
         }
 
         @Override
-        protected void copyFile(File from, File to, String eolConversionCharset) {
+        protected void copyFile(File from, File to, @Nullable String eolConversionCharset) {
             copyFrom.add(from.getAbsolutePath());
             copyTo.add(to.getAbsolutePath());
         }

@@ -25,6 +25,8 @@
 
 package org.omegat.filters2;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Callback for translate files.
  *
@@ -57,7 +59,7 @@ public interface ITranslateCallback {
      *            path of segment
      * @return translation or null if translation not exist
      */
-    String getTranslation(String id, String source, String path);
+    @Nullable String getTranslation(@Nullable String id, String source, String path);
 
     /**
      * Old call without path, for compatibility
@@ -67,6 +69,6 @@ public interface ITranslateCallback {
      *              source entry text
      * @return translation or null if translation not exist
      */
-    String getTranslation(String id, String source);
+    @Nullable String getTranslation(@Nullable String id, String source);
 
 }

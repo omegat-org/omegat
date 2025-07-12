@@ -519,9 +519,9 @@ public abstract class TestCore {
     /**
      * Initialize editor and store it with TestInitializer.initEditor function.
      */
-    protected IEditor createTestEditor() {
-        final IEditorSettings editorSettings = createTestEditorSettings();
-        return new IEditor() {
+    protected void initEditor(IMainWindow mainWindow) {
+        final IEditorSettings editorSettings = getEditorSettings();
+        TestCoreInitializer.initEditor(new IEditor() {
 
             @Override
             public void windowDeactivated() {

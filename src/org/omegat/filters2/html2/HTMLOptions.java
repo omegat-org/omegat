@@ -254,46 +254,69 @@ public class HTMLOptions extends AbstractOptions {
         setString(OPTION_SKIP_META, skipMeta);
     }
 
-   /**
-     * @return the attribute key-value pairs for which tags should not be translated
+    /**
+     * Retrieves the tags to be ignored during the processing of HTML content.
+     *
+     * @return the attribute key-value pairs for which tags should not be
+     *         translated
      */
     public String getIgnoreTags() {
         return getString(OPTION_IGNORE_TAGS, "");
     }
 
     /**
-     * Sets the attribute key-value pairs for which tags should not be translated
-     * @param ignoreTags The strings containing the key-value pairs
+     * Sets the attribute key-value pairs for which tags should not be
+     * translated
+     * 
+     * @param ignoreTags
+     *            The strings containing the key-value pairs
      */
     public void setIgnoreTags(String ignoreTags) {
         setString(OPTION_IGNORE_TAGS, ignoreTags);
     }
 
     /**
-     * @return Returns whether comments should be removed from the HTML document on generating target documents.
+     * Retrieves the configuration setting that indicates whether comments
+     * should be removed from the HTML document when generating target
+     * documents.
+     *
+     * @return Returns whether comments should be removed from the HTML document
+     *         on generating target documents.
      */
     public boolean getRemoveComments() {
         return getBoolean(OPTION_REMOVE_COMMENTS, false);
     }
 
     /**
-     * Sets whether the comments should be removed from the HTML document on generating target documents.
+     * Sets whether comments should be removed from the HTML document when
+     * generating target documents.
+     *
      * @param removeComments
+     *            a boolean indicating whether comments should be removed from
+     *            the HTML content
      */
     public void setRemoveComments(boolean removeComments) {
         setBoolean(OPTION_REMOVE_COMMENTS, removeComments);
     }
 
     /**
-     * @return Returns whether whitespace should be compressed in the HTML document on generating target documents.
+     * Retrieves the configuration setting that indicates whether whitespace
+     * should be compressed in the HTML document during processing.
+     *
+     * @return Returns whether whitespace should be compressed in the HTML
+     *         document on generating target documents.
      */
     public boolean getCompressWhitespace() {
         return getBoolean(OPTION_COMPRESS_WHITESPACE, false);
     }
 
     /**
-     * Sets whether whitespace should be compressed in the HTML document on generating target documents.
+     * Sets whether whitespace in the HTML document should be compressed during
+     * processing. This affects how the output HTML is formatted by removing
+     * redundant whitespace.
+     *
      * @param compressWhitespace
+     *            a boolean indicating whether whitespace should be compressed
      */
     public void setCompressWhitespace(boolean compressWhitespace) {
         setBoolean(OPTION_COMPRESS_WHITESPACE, compressWhitespace);

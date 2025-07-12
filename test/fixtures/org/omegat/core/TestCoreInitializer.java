@@ -25,6 +25,7 @@
 
 package org.omegat.core;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.TestCoreState;
 import org.omegat.core.tagvalidation.ITagValidation;
@@ -57,7 +58,7 @@ public final class TestCoreInitializer {
         TestCoreState.initAutoSave(autoSave);
     }
 
-    public static void initMainWindow(IMainWindow mainWindow) throws Exception {
+    public static void initMainWindow(@Nullable IMainWindow mainWindow) throws Exception {
         TestCoreState.getInstance().setMainWindow(mainWindow);
 
         if (StaticUIUtils.isGUI()) {

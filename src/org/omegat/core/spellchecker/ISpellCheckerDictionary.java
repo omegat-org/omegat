@@ -25,6 +25,8 @@
 
 package org.omegat.core.spellchecker;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Closeable;
 import java.nio.file.Path;
 
@@ -34,7 +36,7 @@ public interface ISpellCheckerDictionary extends Closeable {
      * 
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    default org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
+    default @Nullable org.apache.lucene.analysis.hunspell.Dictionary getHunspellDictionary(String language) {
         return null;
     }
 
@@ -43,11 +45,11 @@ public interface ISpellCheckerDictionary extends Closeable {
      * 
      * @return Dictionary object when the language module has. Otherwise, null.
      */
-    default morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
+    default @Nullable morfologik.stemming.Dictionary getMorfologikDictionary(String language) {
         return null;
     }
 
-    default Path installHunspellDictionary(Path dictionaryDir, String language) {
+    default @Nullable Path installHunspellDictionary(Path dictionaryDir, String language) {
         return null;
     }
 

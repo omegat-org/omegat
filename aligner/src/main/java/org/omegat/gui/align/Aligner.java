@@ -28,7 +28,6 @@ package org.omegat.gui.align;
 import java.io.File;
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -54,8 +53,7 @@ import net.loomchild.maligna.filter.aligner.align.hmm.fb.ForwardBackwardAlgorith
 import net.loomchild.maligna.filter.aligner.align.hmm.viterbi.ViterbiAlgorithm;
 import net.loomchild.maligna.matrix.FullMatrixFactory;
 import net.loomchild.maligna.matrix.MatrixFactory;
-import tokyo.northside.logging.ILogger;
-import tokyo.northside.logging.LoggerFactory;
+import org.jetbrains.annotations.Nullable;
 
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ParseEntry.ParseEntryResult;
@@ -84,7 +82,6 @@ import gen.core.filters.Filters;
  */
 public class Aligner {
 
-    private static final ILogger LOGGER = LoggerFactory.getLogger(Aligner.class);
     final String srcFile;
     final Language srcLang;
     final String trgFile;
@@ -155,14 +152,14 @@ public class Aligner {
         CHAR, WORD
     }
 
-    ComparisonMode comparisonMode;
+    @Nullable ComparisonMode comparisonMode;
     AlgorithmClass algorithmClass;
     CalculatorType calculatorType;
     CounterType counterType;
 
-    private List<String> srcRaw;
-    private List<String> trgRaw;
-    private List<Entry<String, String>> idPairs;
+    private @Nullable List<String> srcRaw;
+    private @Nullable List<String> trgRaw;
+    private @Nullable List<Entry<String, String>> idPairs;
     List<ComparisonMode> allowedModes;
     private Segmenter segmenter;
     private final FilterMaster fm;
@@ -205,12 +202,12 @@ public class Aligner {
 
         List<ComparisonMode> allowed = new ArrayList<>();
         allowed.add(ComparisonMode.HEAPWISE);
-        if (srcRaw.size() == trgRaw.size()) {
+        if (srcRaw != null && trgRaw != null && srcRaw.size() == trgRaw.size()) {
             allowed.add(ComparisonMode.PARSEWISE);
         }
         List<String> srcIds = srcResult.getKey();
         List<String> trgIds = trgResult.getKey();
-        if (srcIds.size() == srcRaw.size() && trgIds.size() == trgRaw.size()) {
+        if (srcRaw != null && trgRaw != null && srcIds.size() == srcRaw.size() && trgIds.size() == trgRaw.size()) {
             allowed.add(ComparisonMode.ID);
             comparisonMode = ComparisonMode.ID;
 
@@ -405,7 +402,13 @@ public class Aligner {
      * @return List of beads aligned heapwise
      */
     private Stream<Alignment> alignHeapwise(boolean doSegmenting) {
+        if (srcRaw == null) {
+            return Stream.empty();
+        }
         List<String> srcSegs = doSegmenting ? segmentAll(srcLang, srcRaw) : srcRaw;
+        if (trgRaw == null) {
+            return Stream.empty();
+        }
         List<String> trgSegs = doSegmenting ? segmentAll(trgLang, trgRaw) : trgRaw;
         return doAlign(algorithmClass, calculatorType, counterType, srcSegs, trgSegs).stream();
     }
@@ -421,21 +424,11 @@ public class Aligner {
      *             when got I/O error.
      */
     public void writePairsToTMX(File outFile, List<Entry<String, String>> pairs) throws Exception {
-        TMXWriter2 writer = null;
         String creator = OStrings.getApplicationName() + " Aligner";
         long time = System.currentTimeMillis();
-        try {
-            writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, false);
+        try (TMXWriter2 writer = new TMXWriter2(outFile, srcLang, trgLang, true, true, false)) {
             for (Entry<String, String> e : pairs) {
                 writer.writeEntry(e.getKey(), e.getValue(), null, creator, time, null, 0L, null);
-            }
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception ex) {
-                    LOGGER.atInfo().setCause(ex).log();
-                }
             }
         }
     }
@@ -452,6 +445,9 @@ public class Aligner {
     Stream<Alignment> alignImpl() throws Exception {
         if (srcRaw == null || trgRaw == null) {
             loadFiles();
+        }
+        if (comparisonMode == null) {
+            throw new IllegalStateException("Comparison mode not set");
         }
         switch (comparisonMode) {
         case PARSEWISE:
@@ -474,9 +470,6 @@ public class Aligner {
      * </ol>
      *
      * Calls {@link #loadFiles()} if it has not yet been called.
-     *
-     * @return
-     * @throws Exception
      */
     public List<Entry<String, String>> align() throws Exception {
         return alignImpl().map(bead -> {
@@ -489,11 +482,6 @@ public class Aligner {
     /**
      * Obtain appropriate calculator according to the specified
      * {@link CalculatorType}.
-     *
-     * @param calculatorType
-     * @param counterType
-     * @param aligns
-     * @return
      */
     private static Calculator getCalculator(CalculatorType calculatorType, CounterType counterType,
             List<Alignment> aligns) {
@@ -553,17 +541,10 @@ public class Aligner {
     /**
      * Use mALIGNa to align the specified source and target texts, according to
      * the specified parameters.
-     *
-     * @param algorithmClass
-     * @param calculatorType
-     * @param counterType
-     * @param source
-     * @param target
-     * @return
      */
     private static List<Alignment> doAlign(AlgorithmClass algorithmClass, CalculatorType calculatorType,
             CounterType counterType, List<String> source, List<String> target) {
-        List<Alignment> aligns = Arrays.asList(new Alignment(source, target));
+        List<Alignment> aligns = List.of(new Alignment(source, target));
         Calculator calculator = getCalculator(calculatorType, counterType, aligns);
         AlignAlgorithm algorithm = getAlgorithm(algorithmClass, calculator);
         Filter filter = new net.loomchild.maligna.filter.aligner.Aligner(algorithm);

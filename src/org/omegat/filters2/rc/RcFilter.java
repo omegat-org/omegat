@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -44,7 +45,7 @@ import org.omegat.util.StringUtil;
 
 /**
  * Filter for support Windows resource files.
- *
+ * <p>
  * Format described on
  * http://msdn.microsoft.com/en-us/library/aa380599(VS.85).aspx
  *
@@ -60,9 +61,9 @@ public class RcFilter extends AbstractFilter {
 
     enum PART {
         DIALOG, MENU, MESSAGETABLE, STRINGTABLE, OTHER, UNKNOWN
-    };
+    }
 
-    protected String blockId;
+    protected @Nullable String blockId;
     protected int b;
     protected int e;
 
@@ -78,18 +79,22 @@ public class RcFilter extends AbstractFilter {
     public static void unloadPlugins() {
     }
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("RCFILTER_FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.rc") };
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
@@ -177,7 +182,7 @@ public class RcFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr)) {
+            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }

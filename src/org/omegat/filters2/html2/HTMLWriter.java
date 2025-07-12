@@ -126,6 +126,7 @@ public class HTMLWriter extends Writer {
      * Flushes the writer (which does the real write-out of data) and closes the
      * real writer.
      */
+    @Override
     public void close() throws IOException {
         signalClosing = true;
         flush();
@@ -136,6 +137,7 @@ public class HTMLWriter extends Writer {
      * Does the real write-out of the data, first adding/replacing encoding
      * statement.
      */
+    @Override
     public void flush() throws IOException {
         StringBuffer buffer = writer.getBuffer();
         if (signalAlreadyFlushed || encoding == null) {
@@ -216,6 +218,7 @@ public class HTMLWriter extends Writer {
      * @throws IOException
      *             - If an I/O error occurs
      */
+    @Override
     public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {

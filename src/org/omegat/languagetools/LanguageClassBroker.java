@@ -33,7 +33,7 @@ public class LanguageClassBroker implements ClassBroker {
     @Override
     public Class<?> forName(String qualifiedName) throws ClassNotFoundException {
         Class<?> clazz;
-        ClassLoader classLoader = PluginUtils.getLanguageClassLoader();
+        ClassLoader classLoader = PluginUtils.getClassLoader(PluginUtils.PluginType.LANGUAGE);
         try {
             clazz = classLoader.loadClass(qualifiedName);
         } catch (ClassNotFoundException e) {

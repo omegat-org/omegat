@@ -182,7 +182,7 @@ public class HTMLFilter2 extends AbstractFilter {
         String skipMetaString = options.getSkipMeta();
         skipMetaAttributes.clear();
         if (skipMetaString != null && !skipMetaString.trim().isEmpty()) {
-            String[] skipMetaAttributesStringarray = skipMetaString.split(",");
+            String[] skipMetaAttributesStringarray = skipMetaString.split(",", -1);
             for (String s : skipMetaAttributesStringarray) {
                 String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
                 if (!keyvalue.isEmpty()) {

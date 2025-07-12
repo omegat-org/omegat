@@ -18,6 +18,7 @@ dependencies {
         // JSON parser
         compileOnly(libs.jackson.core)
         compileOnly(libs.jackson.databind)
+        implementation(libs.jetbrains.annotations)
     }
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.jackson.core)

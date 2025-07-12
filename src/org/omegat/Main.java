@@ -54,13 +54,13 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PropertyResourceBundle;
 import java.util.TimeZone;
 import java.util.TreeMap;
@@ -215,28 +215,32 @@ public final class Main {
 
         int result;
         try {
-            switch (runMode) {
-            case GUI:
-                result = runGUI();
-                // GUI has own shutdown code
-                break;
-            case CONSOLE_TRANSLATE:
-                result = runConsoleTranslate();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_CREATEPSEUDOTRANSLATETMX:
-                result = runCreatePseudoTranslateTMX();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_ALIGN:
-                result = runConsoleAlign();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_STATS:
-                result = runConsoleStats();
-                PluginUtils.unloadPlugins();
-                break;
-            default:
+            if (runMode != null) {
+                switch (runMode) {
+                    case GUI:
+                        result = runGUI();
+                        // GUI has own shutdown code
+                        break;
+                    case CONSOLE_TRANSLATE:
+                        result = runConsoleTranslate();
+                        PluginUtils.unloadPlugins();
+                        break;
+                    case CONSOLE_CREATEPSEUDOTRANSLATETMX:
+                        result = runCreatePseudoTranslateTMX();
+                        PluginUtils.unloadPlugins();
+                        break;
+                    case CONSOLE_ALIGN:
+                        result = runConsoleAlign();
+                        PluginUtils.unloadPlugins();
+                        break;
+                    case CONSOLE_STATS:
+                        result = runConsoleStats();
+                        PluginUtils.unloadPlugins();
+                        break;
+                    default:
+                        result = 1;
+                }
+            } else {
                 result = 1;
             }
         } catch (Throwable ex) {
@@ -416,11 +420,7 @@ public final class Main {
         System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
 
         String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
-        if (sourceMask != null) {
-            p.compileProject(sourceMask, false);
-        } else {
-            p.compileProject(".*", false);
-        }
+        p.compileProject(Objects.requireNonNullElse(sourceMask, ".*"), false);
 
         // Called *after* executing post processing command (unlike the
         // regular PROJECT_CHANGE_TYPE.COMPILE)
@@ -704,14 +704,11 @@ public final class Main {
         } else {
             msg = ex.getMessage();
         }
-        switch (runMode) {
-        case GUI:
+        if (CLIParameters.RUN_MODE.GUI == runMode) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg,
                     OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
-            break;
-        default:
+        } else {
             System.err.println(MessageFormat.format(OStrings.getString("CONSOLE_ERROR"), msg));
-            break;
         }
     }
 }

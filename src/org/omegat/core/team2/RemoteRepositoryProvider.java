@@ -41,6 +41,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.IRemoteRepository2.NetworkException;
 import org.omegat.util.FileUtil;
@@ -313,7 +314,7 @@ public class RemoteRepositoryProvider {
         return oneMapping(file).getVersion();
     }
 
-    protected void copyFile(File from, File to, String eolConversionCharset) throws IOException {
+    protected void copyFile(File from, File to, @Nullable String eolConversionCharset) throws IOException {
         if (eolConversionCharset != null) {
             // charset defined - text file for EOL conversion
             FileUtil.copyFileWithEolConversion(from, to, Charset.forName(eolConversionCharset));
@@ -498,7 +499,7 @@ public class RemoteRepositoryProvider {
             }
         }
 
-        public void copyFromProjectToRepo(String eolConversionCharset) throws Exception {
+        public void copyFromProjectToRepo(@Nullable String eolConversionCharset) throws Exception {
             if (!matches()) {
                 throw new IllegalArgumentException("Path doesn't match with mapping");
             }

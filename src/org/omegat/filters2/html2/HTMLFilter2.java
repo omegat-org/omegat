@@ -39,6 +39,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import com.google.common.base.Splitter;
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
 
@@ -180,10 +181,14 @@ public class HTMLFilter2 extends AbstractFilter {
         // prepare set of attributes that indicate not to translate a meta-tag
         String skipMetaString = options.getSkipMeta();
         skipMetaAttributes.clear();
-        String[] skipMetaAttributesStringarray = skipMetaString.split(",");
-        for (String s : skipMetaAttributesStringarray) {
-            String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
-            skipMetaAttributes.put(keyvalue, "");
+        if (skipMetaString != null && !skipMetaString.trim().isEmpty()) {
+            String[] skipMetaAttributesStringarray = skipMetaString.split(",");
+            for (String s : skipMetaAttributesStringarray) {
+                String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
+                if (!keyvalue.isEmpty()) {
+                    skipMetaAttributes.put(keyvalue, "");
+                }
+            }
         }
 
         // Prepare set of attributes that indicate not to translate a tag
@@ -314,7 +319,7 @@ public class HTMLFilter2 extends AbstractFilter {
     }
 
     @Override
-    public String getInEncodingLastParsedFile() {
+    public @Nullable String getInEncodingLastParsedFile() {
         return sourceEncoding;
     }
 

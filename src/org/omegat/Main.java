@@ -217,28 +217,28 @@ public final class Main {
         try {
             if (runMode != null) {
                 switch (runMode) {
-                    case GUI:
-                        result = runGUI();
-                        // GUI has own shutdown code
-                        break;
-                    case CONSOLE_TRANSLATE:
-                        result = runConsoleTranslate();
-                        PluginUtils.unloadPlugins();
-                        break;
-                    case CONSOLE_CREATEPSEUDOTRANSLATETMX:
-                        result = runCreatePseudoTranslateTMX();
-                        PluginUtils.unloadPlugins();
-                        break;
-                    case CONSOLE_ALIGN:
-                        result = runConsoleAlign();
-                        PluginUtils.unloadPlugins();
-                        break;
-                    case CONSOLE_STATS:
-                        result = runConsoleStats();
-                        PluginUtils.unloadPlugins();
-                        break;
-                    default:
-                        result = 1;
+                case GUI:
+                    result = runGUI();
+                    // GUI has own shutdown code
+                    break;
+                case CONSOLE_TRANSLATE:
+                    result = runConsoleTranslate();
+                    PluginUtils.unloadPlugins();
+                    break;
+                case CONSOLE_CREATEPSEUDOTRANSLATETMX:
+                    result = runCreatePseudoTranslateTMX();
+                    PluginUtils.unloadPlugins();
+                    break;
+                case CONSOLE_ALIGN:
+                    result = runConsoleAlign();
+                    PluginUtils.unloadPlugins();
+                    break;
+                case CONSOLE_STATS:
+                    result = runConsoleStats();
+                    PluginUtils.unloadPlugins();
+                    break;
+                default:
+                    result = 1;
                 }
             } else {
                 result = 1;

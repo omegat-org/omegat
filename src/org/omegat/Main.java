@@ -61,6 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PropertyResourceBundle;
 import java.util.TreeMap;
 
@@ -70,6 +71,7 @@ import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.languagetool.JLanguageTool;
+import org.omegat.plugin.PluginManager;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -206,8 +208,8 @@ public final class Main {
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
-        PluginUtils.loadPlugins(PARAMS);
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        PluginManager.loadPlugins(PARAMS.get(CLIParameters.DEV_MANIFESTS));
+        FilterMaster.setFilterClasses(PluginManager.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
 
@@ -220,19 +222,19 @@ public final class Main {
                 break;
             case CONSOLE_TRANSLATE:
                 result = runConsoleTranslate();
-                PluginUtils.unloadPlugins();
+                PluginManager.unloadPlugins();
                 break;
             case CONSOLE_CREATEPSEUDOTRANSLATETMX:
                 result = runCreatePseudoTranslateTMX();
-                PluginUtils.unloadPlugins();
+                PluginManager.unloadPlugins();
                 break;
             case CONSOLE_ALIGN:
                 result = runConsoleAlign();
-                PluginUtils.unloadPlugins();
+                PluginManager.unloadPlugins();
                 break;
             case CONSOLE_STATS:
                 result = runConsoleStats();
-                PluginUtils.unloadPlugins();
+                PluginManager.unloadPlugins();
                 break;
             default:
                 result = 1;
@@ -339,7 +341,7 @@ public final class Main {
      * Execute standard GUI.
      */
     private static int runGUI() {
-        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
+        UIManager.put("ClassLoader", PluginManager.getClassLoader(PluginUtils.PluginType.THEME));
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
@@ -410,11 +412,7 @@ public final class Main {
         System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
 
         String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
-        if (sourceMask != null) {
-            p.compileProject(sourceMask, false);
-        } else {
-            p.compileProject(".*", false);
-        }
+        p.compileProject(Objects.requireNonNullElse(sourceMask, ".*"), false);
 
         // Called *after* executing post processing command (unlike the
         // regular PROJECT_CHANGE_TYPE.COMPILE)

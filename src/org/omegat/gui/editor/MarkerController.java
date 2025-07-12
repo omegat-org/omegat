@@ -39,7 +39,6 @@ import javax.swing.text.Position;
 
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.mark.AltTranslationsMarker;
 import org.omegat.gui.editor.mark.BidiMarkers;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
@@ -54,6 +53,7 @@ import org.omegat.gui.editor.mark.ProtectedPartsMarker;
 import org.omegat.gui.editor.mark.RemoveTagMarker;
 import org.omegat.gui.editor.mark.ReplaceMarker;
 import org.omegat.gui.glossary.TransTipsMarker;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.Log;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -97,7 +97,7 @@ public class MarkerController {
 
         List<IMarker> ms = new ArrayList<>();
         // start all markers threads
-        for (Class<?> mc : PluginUtils.getMarkerClasses()) {
+        for (Class<?> mc : PluginManager.getMarkerClasses()) {
             try {
                 ms.add((IMarker) mc.getDeclaredConstructor().newInstance());
             } catch (Exception ex) {

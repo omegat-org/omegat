@@ -27,7 +27,8 @@ package org.omegat;
 
 import javax.swing.UIManager;
 
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugin.PluginManager;
+import org.omegat.filters2.master.PluginUtils.PluginType;
 
 public final class TestMainInitializer {
 
@@ -35,7 +36,7 @@ public final class TestMainInitializer {
     }
 
     public static void initClassloader() {
-        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
+        UIManager.put("ClassLoader", PluginManager.getClassLoader(PluginType.THEME));
     }
 
 }

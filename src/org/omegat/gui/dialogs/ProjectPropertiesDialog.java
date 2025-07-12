@@ -62,13 +62,13 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import org.omegat.plugin.PluginManager;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -271,7 +271,7 @@ public class ProjectPropertiesDialog extends JDialog {
         // Tokenizers box
         Box bT = Box.createVerticalBox();
         localesBox.add(bT);
-        Class<?>[] tokenizers = PluginUtils.getTokenizerClasses().stream()
+        Class<?>[] tokenizers = PluginManager.getTokenizerClasses().stream()
                 .sorted(Comparator.comparing(Class::getName)).toArray(Class[]::new);
 
         // Source tokenizer label

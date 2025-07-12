@@ -42,7 +42,7 @@ import java.util.List;
 
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -112,8 +112,8 @@ public class ProjectProperties {
         loadProjectSRX();
         loadProjectFiltersOrDefaults();
 
-        setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
-        setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
+        setSourceTokenizer(PluginManager.getTokenizerClassForLanguage(getSourceLanguage()));
+        setTargetTokenizer(PluginManager.getTokenizerClassForLanguage(getTargetLanguage()));
     }
 
     /** Returns The Target (Compiled) Files Directory */
@@ -378,7 +378,7 @@ public class ProjectProperties {
      */
     public Class<?> getSourceTokenizer() {
         if (sourceTokenizer == null) {
-            Class<?> cls = PluginUtils.getTokenizerClassForLanguage(getSourceLanguage());
+            Class<?> cls = PluginManager.getTokenizerClassForLanguage(getSourceLanguage());
             setSourceTokenizer(cls);
         }
         return sourceTokenizer;

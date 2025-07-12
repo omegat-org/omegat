@@ -52,7 +52,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.core.machinetranslators.MachineTranslators;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.glossary.GlossaryEntry;
@@ -60,6 +59,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -109,7 +109,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         scrollPane = new DockableScrollPane("MACHINE_TRANSLATE", title, this, true);
         mw.addDockable(scrollPane);
 
-        for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
+        for (Class<?> mtc : PluginManager.getMachineTranslationClasses()) {
             try {
                 IMachineTranslation mt = (IMachineTranslation) mtc.getDeclaredConstructor().newInstance();
                 mt.setGlossarySupplier(this::getGlossaryMap);

@@ -23,7 +23,7 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.filters2.master;
+package org.omegat.plugin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -39,18 +39,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.JAXBException;
-
 import org.junit.Test;
 import org.omegat.util.FileUtil;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-public class PluginUtilsTest {
+public class PluginManagerTest {
 
     @Test
-    public void testLoadLatestPluginVersionOnly()
-            throws JsonProcessingException, JAXBException, MalformedURLException, URISyntaxException {
+    public void testLoadLatestPluginVersionOnly() throws MalformedURLException, URISyntaxException {
         final List<File> pluginsDirs = new ArrayList<>();
         File testDataDir = new File("test/data/plugin/jar");
         URL testDataDirURL = testDataDir.toURI().toURL();
@@ -62,7 +57,7 @@ public class PluginUtilsTest {
                 .collect(Collectors.toList());
 
         assertEquals(5, fileList.size());
-        List<URL> urlList = PluginUtils.populatePluginUrlList(pluginsDirs);
+        List<URL> urlList = PluginManager.populatePluginUrlList(pluginsDirs);
         assertEquals(2, urlList.size());
 
         final Set<URI> expected = new HashSet<>();

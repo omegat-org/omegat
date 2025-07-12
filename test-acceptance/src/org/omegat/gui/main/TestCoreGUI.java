@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -53,11 +52,11 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -255,8 +254,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             TestMainInitializer.initClassloader();
             // same order as Main.main
             Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
-            FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+            PluginManager.loadPlugins();
+            FilterMaster.setFilterClasses(PluginManager.getFilterClasses());
             Preferences.initFilters();
             Preferences.initSegmentation();
             TestCoreInitializer.initAutoSave(autoSave);

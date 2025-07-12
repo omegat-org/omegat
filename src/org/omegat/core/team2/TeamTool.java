@@ -30,11 +30,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.logging.Level;
 
 import org.eclipse.jgit.api.Git;
 import org.omegat.core.Core;
+import org.omegat.plugin.PluginManager;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNPropertyValue;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
@@ -42,7 +42,6 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.omegat.CLIParameters;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -93,8 +92,8 @@ public final class TeamTool {
         props.setTargetLanguage(trgLang);
 
         // Set default tokenizers
-        props.setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(new Language(srcLang)));
-        props.setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(new Language(trgLang)));
+        props.setSourceTokenizer(PluginManager.getTokenizerClassForLanguage(new Language(srcLang)));
+        props.setTargetTokenizer(PluginManager.getTokenizerClassForLanguage(new Language(trgLang)));
 
         // Create project internal directories
         props.autocreateDirectories();
@@ -149,7 +148,7 @@ public final class TeamTool {
 
         try {
             Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
+            PluginManager.loadPlugins();
             if (COMMAND_INIT.equals(args[0]) && args.length == 3) {
                 initTeamProject(new File("").getAbsoluteFile(), args[1], args[2]);
                 System.exit(0);

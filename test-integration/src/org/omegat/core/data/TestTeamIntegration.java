@@ -52,6 +52,7 @@ import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jetbrains.annotations.NotNull;
+import org.omegat.plugin.PluginManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
@@ -71,7 +72,6 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.impl.GITRemoteRepository2;
 import org.omegat.core.team2.impl.SVNAuthenticationManager;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.util.Language;
 import org.omegat.util.ProjectFileStorage;
@@ -160,7 +160,7 @@ public final class TestTeamIntegration {
         Properties props = new Properties();
         try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
             props.load(fis);
-            PluginUtils.loadPluginFromProperties(props);
+            PluginManager.loadPluginFromProperties(props);
         }
         final List<String> repositoryUrls = new ArrayList<>();
         repositoryUrls.add(repositoryProperty);

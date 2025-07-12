@@ -35,7 +35,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.io.FileUtils;
@@ -52,8 +51,8 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ConsoleWindow;
+import org.omegat.plugin.PluginManager;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.TestPreferencesInitializer;
@@ -67,7 +66,7 @@ public class HunspellSpellcheckerTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        PluginUtils.loadPlugins(Collections.emptyMap());
+        PluginManager.loadPlugins();
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();
         configDir = Files.createDirectory(tmpDir.resolve(".omegat"));

@@ -51,7 +51,9 @@ import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -92,7 +94,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     protected void openSampleProjectWaitPropertyPane(Path projectPath) throws Exception {
-        SegmentPropertiesArea segmentPropertiesArea = Core.getSegmentPropertiesArea();
+        SegmentPropertiesArea segmentPropertiesArea = CoreState.getInstance().getSegmentPropertiesArea();
         CountDownLatch latch = new CountDownLatch(1);
         segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
         openSampleProject(projectPath);
@@ -175,10 +177,11 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
         assertFalse(Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true));
         // 2. Open a sample project.
+        final CoreState coreState = TestCoreState.getInstance();
         SwingUtilities.invokeAndWait(() -> {
             CountDownLatch latch = new CountDownLatch(1);
             CoreEvents.registerProjectChangeListener(event -> {
-                if (Core.getProject().isProjectLoaded()) {
+                if (coreState.getProject().isProjectLoaded()) {
                     latch.countDown();
                 }
             });
@@ -197,7 +200,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      */
     @Override
     protected void onTearDown() throws Exception {
-        Core.setProject(new NotLoadedProject());
+        TestCoreState.resetState();
         TestCoreInitializer.initMainWindow(null);
         if (mainWindow != null) {
             mainWindow.getApplicationFrame().setVisible(false);
@@ -207,13 +210,12 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         }
     }
 
-    private static boolean initialized = false;
-
     /**
      * set up OmegaT main window.
      */
     @Override
     protected void onSetUp() throws Exception {
+        TestCoreState.resetState();
         initialize();
         mainWindow = GuiActionRunner.execute(() -> {
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
@@ -236,10 +238,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     /**
      * Initialize OmegaT Core startup only once.
-     * @throws Exception when error occurred.
+     * @throws Exception when the error occurred.
      */
-    protected void initialize() throws Exception {
-        if (!initialized) {
+    protected void initialize() throws Exception { 
+      if (!initialized) {
             Path tmp = Files.createTempDirectory("omegat");
             FileUtils.forceDeleteOnExit(tmp.toFile());
             RuntimePreferences.setConfigDir(tmp.toString());
@@ -252,7 +254,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             Preferences.initSegmentation();
             TestCoreInitializer.initAutoSave(autoSave);
             UIDesignManager.initialize();
-            Core.setProject(new NotLoadedProject());
+            TestCoreState.getInstance().setProject(new NotLoadedProject());
             initialized = true;
         }
     }

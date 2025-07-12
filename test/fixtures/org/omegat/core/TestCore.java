@@ -44,6 +44,8 @@ import org.junit.Before;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TestCoreState;
+import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
 import org.omegat.gui.editor.IEditorSettings;
@@ -78,19 +80,42 @@ public abstract class TestCore {
      */
     @Before
     public final void setUpCore() throws Exception {
+        TestCoreState.resetState();
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
-        IMainWindow mainWindow = getMainWindow();
-        Core.setMainWindow(mainWindow);
-        Core.setCurrentProject(new NotLoadedProject());
-        initEditor(mainWindow);
+        TestCoreState.getInstance().setMainWindow(createTestMainWindow());
+        TestCoreState.getInstance().setProject(new NotLoadedProject());
+        TestCoreState.getInstance().setEditor(createTestEditor());
+        TestCoreState.initAutoSave(createTestAutoSave());
+    }
+
+    /**
+     * Clean up a temporary directory for configuration.
+     * @throws Exception
+     */
+    @After
+    public final void tearDownCore() throws Exception {
+        TestCoreState.resetState();
+        FileUtils.forceDeleteOnExit(configDir);
+    }
+
+    protected IAutoSave createTestAutoSave() {
+        return new IAutoSave() {
+            public void enable() {
+                // ignore all
+            }
+
+            public void disable() {
+                // ignore all
+            }
+        };
     }
 
     /**
      * Create a mock of the main menu object.
      * @return Main menu object which implement IMainMenu.
      */
-    protected IMainMenu getMainMenu() {
+    protected IMainMenu createTestMainMenu() {
         return new IMainMenu() {
             private final JMenu projectMenu = new JMenu("Project");
             private final JMenu toolsMenu = new JMenu("Tools");
@@ -248,8 +273,8 @@ public abstract class TestCore {
      * Create a main Window object.
      * @return Object which implements IMainWindow.
      */
-    protected IMainWindow getMainWindow() {
-        final IMainMenu mainMenu = getMainMenu();
+    protected IMainWindow createTestMainWindow() {
+        final IMainMenu mainMenu = createTestMainMenu();
         return new IMainWindow() {
             public void addDockable(Dockable pane) {
             }
@@ -325,7 +350,7 @@ public abstract class TestCore {
      * Create an implementation of IEditorSettings.
      * @return object which implements IEditorSettings as empty methods.
      */
-    protected IEditorSettings getEditorSettings() {
+    protected IEditorSettings createTestEditorSettings() {
         return new IEditorSettings() {
 
             @Override
@@ -612,7 +637,7 @@ public abstract class TestCore {
 
             @Override
             public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-                    String markerClassName) {
+                                              String markerClassName) {
             }
 
             @Override
@@ -729,15 +754,6 @@ public abstract class TestCore {
             public boolean isOrientationAllLtr() {
                 return true;
             }
-        });
-    }
-
-    /**
-     * Clean up a temporary directory for configuration.
-     * @throws Exception
-     */
-    @After
-    public final void tearDownCore() throws Exception {
-        FileUtils.forceDeleteOnExit(configDir);
+        };
     }
 }

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2024 Hiroshi Miura
+ Copyright (C) 2024-2025 Hiroshi Miura
           Home page: https://www.omegat.org/
           Support center: https://omegat.org/support
 
@@ -47,6 +47,13 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
+/**
+ * The LuceneHunSpellChecker class is a concrete implementation of the AbstractSpellChecker
+ * class and the ISpellChecker interface. It provides spell checking capabilities
+ * using Hunspell dictionaries together with the Lucene library.
+ *
+ * @author Hiroshi Miura
+ */
 public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpellChecker {
 
     /**

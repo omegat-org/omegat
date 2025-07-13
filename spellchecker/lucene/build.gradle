@@ -1,18 +1,14 @@
 plugins {
-    id 'java-library'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
-    compileOnly(project.rootProject) {
-        exclude group: 'org.apache.lucene'
-        exclude group: 'org.languagetool'
-    }
-    if (providedLibsDir.directory) {
-        compileOnly fileTree(dir: providedLibsDir, includes: ['**/commons-io-*.jar'])
-        implementation fileTree(dir: providedLibsDir, includes: ['**/lucene-analyzers-common-8*.jar'])
+    compileOnly(project.rootProject)
+    if (providedCoreLibsDir.directory) {
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-io-*.jar', '**/lucene-analyzers-common-8*.jar'])
     } else {
         compileOnly(libs.commons.io)
-        implementation 'org.apache.lucene:lucene-analyzers-common:8.11.3'
+        compileOnly(libs.bundles.lucene)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

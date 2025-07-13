@@ -40,6 +40,7 @@ import org.apache.lucene.analysis.ru.RussianAnalyzer;
  * It extends the BaseTokenizer class and overrides the base tokenization behavior to accommodate
  * language-specific rules and features for Russian text.
  *
+ * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "ru" }, isDefault = true)

@@ -42,6 +42,7 @@ import org.apache.lucene.analysis.fr.FrenchAnalyzer;
  * stemming are enabled, it utilizes the FrenchAnalyzer from the Lucene
  * library. If stemming is disabled, standard tokenization is applied.
  *
+ * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "fr" }, isDefault = true)

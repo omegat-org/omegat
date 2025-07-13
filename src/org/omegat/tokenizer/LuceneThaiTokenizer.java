@@ -40,6 +40,7 @@ import org.apache.lucene.analysis.th.ThaiAnalyzer;
  * This tokenizer allows optional stemming and the inclusion of stop words
  * during the tokenization process.
  *
+ * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "th" })

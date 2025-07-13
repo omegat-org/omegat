@@ -27,9 +27,12 @@ package org.omegat.tokenizer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 
 import org.apache.lucene.analysis.hunspell.Dictionary;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.NIOFSDirectory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -118,8 +121,9 @@ public class HunspellTokenizerTest extends TokenizerTestBase {
                 return null;
             }
             try {
-                return new Dictionary(new FileInputStream(affixFile),
-                        new FileInputStream(dictionaryFile));
+                String prefix = "hunspell-tokenizer-" + language.getLanguageCode();
+                Directory tmpDir = new NIOFSDirectory(Files.createTempDirectory(prefix));
+                return new Dictionary(tmpDir, prefix, new FileInputStream(affixFile), new FileInputStream(dictionaryFile));
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }

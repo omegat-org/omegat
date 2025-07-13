@@ -116,7 +116,11 @@ final class Common {
      * @return the project.
      */
     static RealProject selectProjectConsoleMode(boolean loadProject, Parameters params) {
-        System.out.println(OStrings.getString("CONSOLE_LOADING_PROJECT"));
+
+        if (params.projectLocation == null) {
+            Log.logErrorRB("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            System.exit(1);
+        }
 
         // check if project okay
         ProjectProperties projectProperties = null;
@@ -126,13 +130,13 @@ final class Common {
             projectProperties.verifyProject();
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-            System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
             System.exit(1);
         }
 
         RealProject p = new RealProject(projectProperties);
         Core.setProject(p);
         if (loadProject) {
+            Log.logInfoRB("CONSOLE_LOADING_PROJECT");
             p.loadProject(true);
             if (!p.isProjectLoaded()) {
                 Core.setProject(new NotLoadedProject());

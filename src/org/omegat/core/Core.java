@@ -124,9 +124,7 @@ public final class Core {
     private static SegmentPropertiesArea segmentPropertiesArea;
 
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections.synchronizedList(new ArrayList<>());
-
-    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
-
+    private static final List<IMarker> MARKERS = new ArrayList<>();
 
     /** Get project instance. */
     public static IProject getProject() {

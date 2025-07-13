@@ -118,12 +118,14 @@ public class TMXWriter2 implements AutoCloseable {
         xml.writeCharacters(lineSeparator);
 
         if (levelTwo) {
-            xml.writeDTD("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");
+            xml.writeDTD("<!DOCTYPE tmx SYSTEM \"https://www.gala-global.org/sites/default/files/migrated-pages/docs/tmx14%20%281%29.dtd\">");
             xml.writeCharacters(lineSeparator);
             xml.writeStartElement("tmx");
             xml.writeAttribute("version", "1.4");
         } else {
-            xml.writeDTD("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");
+            if (forceValidTMX) {
+                xml.writeDTD("<!DOCTYPE tmx SYSTEM \"https://www.gala-global.org/sites/default/files/migrated-pages/docs/tmx11.dtd\">");
+            }
             xml.writeCharacters(lineSeparator);
             xml.writeStartElement("tmx");
             xml.writeAttribute("version", "1.1");

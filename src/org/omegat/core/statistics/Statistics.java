@@ -139,10 +139,13 @@ public final class Statistics {
     }
 
     /**
-     * Write statistics to a file with the format set in the preferences.
+     * Writes statistical results to files in various specified formats within
+     * the given directory.
      *
-     * @param filename
+     * @param dir
+     *            the directory where the statistics files will be written
      * @param result
+     *            the statistical results to be written to the files
      */
     public static void writeStat(String dir, StatsResult result) {
         int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
@@ -168,17 +171,17 @@ public final class Statistics {
         try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile),
                 StandardCharsets.UTF_8)) {
             switch (format) {
-                case TEXT:
-                    out.write(DateFormat.getInstance().format(new Date()) + "\n");
-                    out.write(result.getTextData());
-                    break;
-                case XML:
-                    out.write(result.getXmlData());
-                    break;
-                case JSON:
-                default:
-                    out.write(result.getJsonData());
-                    break;
+            case TEXT:
+                out.write(DateFormat.getInstance().format(new Date()) + "\n");
+                out.write(result.getTextData());
+                break;
+            case XML:
+                out.write(result.getXmlData());
+                break;
+            case JSON:
+            default:
+                out.write(result.getJsonData());
+                break;
             }
         } catch (Exception ex) {
             Log.log(ex);

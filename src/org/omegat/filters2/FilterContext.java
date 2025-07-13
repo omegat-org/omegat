@@ -39,9 +39,9 @@ public class FilterContext {
 
     private final @Nullable Language targetLang;
 
-    private String inEncoding;
+    private @Nullable String inEncoding;
 
-    private String outEncoding;
+    private @Nullable String outEncoding;
 
     private final boolean sentenceSegmentingEnabled;
 
@@ -78,11 +78,11 @@ public class FilterContext {
     }
 
     /** Source file encoding, but can be 'null'. */
-    public String getInEncoding() {
+    public @Nullable String getInEncoding() {
         return inEncoding;
     }
 
-    public FilterContext setInEncoding(String inEncoding) {
+    public FilterContext setInEncoding(@Nullable String inEncoding) {
         this.inEncoding = inEncoding;
         return this;
     }

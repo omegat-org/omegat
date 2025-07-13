@@ -46,14 +46,14 @@ import java.util.List;
 public class ProtectedPart {
     /**
      * Text which exist in source segment in editor.
-     *
+     * <p>
      * Used for identify protected part.
      */
     protected @Nullable String textInSourceSegment;
 
     /**
      * Original full tag text or other information from source file.
-     *
+     * <p>
      * Used for display tooltips.
      */
     protected @Nullable String detailsFromSourceFile;
@@ -73,43 +73,43 @@ public class ProtectedPart {
      */
     protected @Nullable String replacementMatchCalculation;
 
-    public String getTextInSourceSegment() {
+    public @Nullable String getTextInSourceSegment() {
         return textInSourceSegment;
     }
 
-    public void setTextInSourceSegment(String textInSourceSegment) {
+    public void setTextInSourceSegment(@Nullable String textInSourceSegment) {
         this.textInSourceSegment = textInSourceSegment;
     }
 
-    public String getDetailsFromSourceFile() {
+    public @Nullable String getDetailsFromSourceFile() {
         return detailsFromSourceFile;
     }
 
-    public void setDetailsFromSourceFile(String detailsFromSourceFile) {
+    public void setDetailsFromSourceFile(@Nullable String detailsFromSourceFile) {
         this.detailsFromSourceFile = detailsFromSourceFile;
     }
 
-    public String getReplacementWordsCountCalculation() {
+    public @Nullable String getReplacementWordsCountCalculation() {
         return replacementWordsCountCalculation;
     }
 
-    public void setReplacementWordsCountCalculation(String replacementWordsCountCalculation) {
+    public void setReplacementWordsCountCalculation(@Nullable String replacementWordsCountCalculation) {
         this.replacementWordsCountCalculation = replacementWordsCountCalculation;
     }
 
-    public String getReplacementUniquenessCalculation() {
+    public @Nullable String getReplacementUniquenessCalculation() {
         return replacementUniquenessCalculation;
     }
 
-    public void setReplacementUniquenessCalculation(String replacementUniquenessCalculation) {
+    public void setReplacementUniquenessCalculation(@Nullable String replacementUniquenessCalculation) {
         this.replacementUniquenessCalculation = replacementUniquenessCalculation;
     }
 
-    public String getReplacementMatchCalculation() {
+    public @Nullable String getReplacementMatchCalculation() {
         return replacementMatchCalculation;
     }
 
-    public void setReplacementMatchCalculation(String replacementMatchCalculation) {
+    public void setReplacementMatchCalculation(@Nullable String replacementMatchCalculation) {
         this.replacementMatchCalculation = replacementMatchCalculation;
     }
 

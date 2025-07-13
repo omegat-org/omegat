@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.util.Log;
@@ -49,7 +50,7 @@ public class MapRule implements Serializable {
     private static final ILogger LOGGER = Log.getLogger(MapRule.class);
 
     /** Language Name */
-    private String languageCode;
+    private @Nullable String languageCode;
 
     /**
      * Creates a new empty MapRule.
@@ -130,12 +131,12 @@ public class MapRule implements Serializable {
      * Pattern for the language/country ISO code (of a form LL-CC). It is like
      * "EN.*".
      */
-    private Pattern pattern;
+    private @Nullable Pattern pattern;
 
     /**
      * Returns Pattern for the language/country ISO code (of a form LL-CC).
      */
-    public String getPattern() {
+    public @Nullable String getPattern() {
         if (pattern != null) {
             return pattern.pattern();
         } else {
@@ -173,7 +174,7 @@ public class MapRule implements Serializable {
         MapRule result = new MapRule();
         result.languageCode = languageCode;
         result.pattern = pattern;
-        result.rules = new ArrayList<Rule>(rules.size());
+        result.rules = new ArrayList<>(rules.size());
         for (Rule rule : rules) {
             result.rules.add(rule.copy());
         }
@@ -181,15 +182,15 @@ public class MapRule implements Serializable {
     }
 
     /** List of rules (of class {@link Rule}) for the language */
-    private List<Rule> rules;
+    private @Nullable List<Rule> rules;
 
     /** Returns List of rules (of class {@link Rule}) for the language */
-    public List<Rule> getRules() {
+    public @Nullable List<Rule> getRules() {
         return rules;
     }
 
     /** Sets List of rules (of class {@link Rule}) for the language */
-    public void setRules(List<Rule> rules) {
+    public void setRules(@Nullable List<Rule> rules) {
         this.rules = rules;
     }
 

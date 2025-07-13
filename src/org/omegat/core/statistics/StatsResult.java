@@ -260,7 +260,6 @@ public class StatsResult {
         xmlMapper.registerModule(new JakartaXmlBindAnnotationModule());
         xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
         xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        xmlMapper.setDefaultUseWrapper(false);
 
         return xmlMapper.writeValueAsString(this);
 

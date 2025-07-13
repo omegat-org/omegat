@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -236,8 +237,8 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     protected String createJsonRequest(final Language sLang, final Language tLang, final String trText,
             final String folderId) throws JsonProcessingException {
         Map<String, Object> params = new TreeMap<>();
-        params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase());
-        params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase());
+        params.put("sourceLanguageCode", sLang.getLanguageCode().toLowerCase(Locale.ENGLISH));
+        params.put("targetLanguageCode", tLang.getLanguageCode().toLowerCase(Locale.ENGLISH));
         params.put("folderId", folderId);
         if (Preferences.isPreference(PROPERTY_KEEP_TAGS)) {
             params.put("format", "HTML");

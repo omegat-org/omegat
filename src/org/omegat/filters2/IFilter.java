@@ -200,7 +200,7 @@ public interface IFilter {
         if (parent instanceof Dialog) {
             return changeOptions((Dialog) parent, config);
         } else {
-            return changeOptions((Dialog) null, config);
+            return changeOptions(null, config);
         }
     }
 
@@ -210,7 +210,7 @@ public interface IFilter {
      * @return the encoding of the last parsed source file, or null when no file
      *         has been parsed yet.
      */
-    String getInEncodingLastParsedFile();
+    @Nullable String getInEncodingLastParsedFile();
 
     /**
      * Indicates whether the filter is bilingual, and thus can be used as

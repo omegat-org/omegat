@@ -25,6 +25,8 @@
 
 package org.omegat.filters2;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Callback for align files in filter.
  *
@@ -47,6 +49,6 @@ public interface IAlignCallback {
      * @param filter
      *            filter which produces entry
      */
-    void addTranslation(String id, String source, String translation, boolean isFuzzy, String sourcePath,
-            IFilter filter);
+    void addTranslation(String id, String source, @Nullable String translation, boolean isFuzzy, @Nullable String sourcePath,
+                        @Nullable IFilter filter);
 }

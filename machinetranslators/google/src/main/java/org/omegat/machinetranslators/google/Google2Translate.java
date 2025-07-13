@@ -70,7 +70,7 @@ public class Google2Translate extends BaseCachedTranslate {
     protected static final String PROPERTY_PREMIUM_KEY = "google.api.premium";
     protected static final String PROPERTY_API_KEY = "google.api.key";
     /**
-     * {@see https://cloud.google.com/translate/quotas}
+     * see @link <a href="https://cloud.google.com/translate/quotas">Google Cloud Translation API Quotas</a>
      */
     protected static final String GT_DEFAULT_URL = "https://translation.googleapis.com";
     protected static final String GT_PATH = "/language/translate/v2";

@@ -58,6 +58,14 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
 /**
+ * This class provides integration with the Apertium machine translation service
+ * for use within the OmegaT translation tool. Apertium is a rule-based machine
+ * translation platform that supports a variety of language pairs.
+ * <p>
+ * The class extends the functionality of {@code BaseCachedTranslate} and
+ * enables translation using the Apertium API with customization options,
+ * such as specifying a custom server URL and API key.
+ *
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  */
@@ -286,16 +294,13 @@ public class ApertiumTranslate extends BaseCachedTranslate {
             }
         };
 
-        ItemListener toggleInterface = new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent event) {
-                dialog.panel.valueLabel1.setEnabled(apiCheckBox.isSelected());
-                dialog.panel.valueLabel2.setEnabled(apiCheckBox.isSelected());
-                dialog.panel.valueField1.setEnabled(apiCheckBox.isSelected());
-                dialog.panel.valueField2.setEnabled(apiCheckBox.isSelected());
-                dialog.panel.temporaryCheckBox.setEnabled(apiCheckBox.isSelected());
-                updateOk.run();
-            }
+        ItemListener toggleInterface = event -> {
+            dialog.panel.valueLabel1.setEnabled(apiCheckBox.isSelected());
+            dialog.panel.valueLabel2.setEnabled(apiCheckBox.isSelected());
+            dialog.panel.valueField1.setEnabled(apiCheckBox.isSelected());
+            dialog.panel.valueField2.setEnabled(apiCheckBox.isSelected());
+            dialog.panel.temporaryCheckBox.setEnabled(apiCheckBox.isSelected());
+            updateOk.run();
         };
 
         apiCheckBox.addItemListener(toggleInterface);

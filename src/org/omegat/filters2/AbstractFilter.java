@@ -308,7 +308,7 @@ public abstract class AbstractFilter implements IFilter {
 
     @Deprecated
     @Override
-    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+    public Map<String, String> changeOptions(@Nullable Dialog parent, Map<String, String> config) {
         return Collections.emptyMap();
     }
 
@@ -441,19 +441,10 @@ public abstract class AbstractFilter implements IFilter {
         String encoding = getInputEncoding(fc, inFile);
         try (BufferedReader reader = createReader(inFile, encoding)) {
             inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
-            BufferedWriter writer = null;
-            try {
-                if (outFile != null) {
-                    String outEncoding = getOutputEncoding(fc);
-                    writer = createWriter(outFile, outEncoding);
-                } else {
-                    writer = new NullBufferedWriter();
-                }
+            try (BufferedWriter writer = (outFile != null)
+                    ? createWriter(outFile, getOutputEncoding(fc))
+                    : new NullBufferedWriter()) {
                 processFile(reader, writer, fc);
-            } finally {
-                if (writer != null) {
-                    writer.close();
-                }
             }
         }
     }
@@ -590,7 +581,7 @@ public abstract class AbstractFilter implements IFilter {
      * next segment to be included in the search for a translation, when
      * alternative translations are provided by the user. (normally, only the
      * filename is used)
-     *
+     * <p>
      * Technically it means that parsing happens in two passes and prev/next
      * segments will be linked, so it comes with a cost
      **/
@@ -655,7 +646,7 @@ public abstract class AbstractFilter implements IFilter {
      * @return Translation of the source string. If there's no translation,
      *         returns the source string itself.
      */
-    protected final String processEntry(String entry, String comment) {
+    protected final String processEntry(String entry, @Nullable String comment) {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, comment, null, this, null);
             return entry;

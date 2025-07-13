@@ -183,7 +183,10 @@
     <!-- Ignores positive-false detections -->
     <Match>
         <Or>
+            <Class name="org.omegat.gui.align.Aligner"/>
+            <Class name="org.omegat.filters4.xml.xliff.AbstractXliffFilter"/>
             <Class name="org.omegat.filters3.xml.xliff.XLIFFFilter"/>
+            <Class name="org.omegat.filters2.AbstractFilter"/>
             <Class name="org.omegat.filters2.po.PoFilter"/>
         </Or>
         <Bug pattern="NP_NULL_ON_SOME_PATH"/>

@@ -55,7 +55,6 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProjectTest;
 import org.omegat.filters.TestFilterBase;
 
@@ -94,7 +93,7 @@ public class TMXWriterTest extends TestFilterBase {
         wr.writeEntry(in, "test", RealProjectTest.createEmptyTMXEntry(), null);
         wr.close();
 
-        load(new ArrayList<String>(), null, false, false);
+        load(new ArrayList<>(), null, false, false);
     }
 
     @Test
@@ -114,7 +113,7 @@ public class TMXWriterTest extends TestFilterBase {
 
     @Test
     public void testLevel2reads() throws Exception {
-        final List<String> sources = new ArrayList<String>();
+        final List<String> sources = new ArrayList<>();
 
         // patch for 'OmegaT' tmx
         setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "OmegaT", outFile);
@@ -215,27 +214,14 @@ public class TMXWriterTest extends TestFilterBase {
             translations.clear();
         }
         new TMXReader2().readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, false,
-                extLevel2, useSlash, new TMXReader2.LoadCallback() {
-                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-                        if (sources != null) {
-                            sources.add(tuvSource.text);
-                        }
-                        if (translations != null) {
-                            translations.add(tuvTarget.text);
-                        }
-                        return true;
+                extLevel2, useSlash, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                    if (sources != null) {
+                        sources.add(tuvSource.text);
                     }
+                    if (translations != null) {
+                        translations.add(tuvTarget.text);
+                    }
+                    return true;
                 });
-    }
-
-    static int tagNumber = 0;
-    static boolean closeTag, standAloneTag;
-
-    /**
-     * ProjectProperties successor for create project without directory.
-     */
-    protected static class ProjectPropertiesTest extends ProjectProperties {
-
     }
 }

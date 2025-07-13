@@ -52,7 +52,7 @@ import org.xml.sax.SAXParseException;
 
 /**
  * Class for store data from project_save.tmx.
- *
+ * <p>
  * Orphaned or non-orphaned translation calculated by RealProject.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -74,14 +74,14 @@ public class ProjectTMX {
 
     /**
      * Storage for default translations for current project.
-     *
+     * <p>
      * It must be used with synchronization around ProjectTMX.
      */
     protected Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
-     *
+     * <p>
      * It must be used with synchronization around ProjectTMX.
      */
     protected Map<EntryKey, TMXEntry> alternatives;
@@ -176,9 +176,8 @@ public class ProjectTMX {
 
     public void exportTMX(ProjectProperties props, File outFile, final boolean forceValidTMX,
             final boolean levelTwo, final boolean useOrphaned) throws Exception {
-        TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
-        try {
+        try (TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX)) {
             Map<String, TMXEntry> tempDefaults = new TreeMap<>();
             Map<EntryKey, TMXEntry> tempAlternatives = new TreeMap<>();
 
@@ -246,8 +245,6 @@ public class ProjectTMX {
                 }
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
             }
-        } finally {
-            wr.close();
         }
     }
 
@@ -332,8 +329,8 @@ public class ProjectTMX {
                 translation = tuvTarget.text;
             }
 
-            List<String> sources = new ArrayList<String>();
-            List<String> targets = new ArrayList<String>();
+            List<String> sources = new ArrayList<>();
+            List<String> targets = new ArrayList<>();
             segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
                     tuvSource.text, targetLang, translation, sources, targets);
 
@@ -381,7 +378,7 @@ public class ProjectTMX {
             }
             return true;
         }
-    };
+    }
 
     private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
         String id = te.getPropValue(PROP_ID);
@@ -389,7 +386,7 @@ public class ProjectTMX {
             id = te.getPropValue(ATTR_TUID);
         }
         TMXEntry.ExternalLinked externalLinked = null;
-        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
+        if (te.hasPropValue(PROP_XICE, id)) {
             externalLinked = TMXEntry.ExternalLinked.xICE;
         }
         if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
@@ -411,8 +408,6 @@ public class ProjectTMX {
     /**
      * Returns the collection of TMX entries that have an alternative
      * translation
-     * 
-     * @return
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
@@ -434,7 +429,7 @@ public class ProjectTMX {
     @Override
     public String toString() {
         return "[" + Stream.concat(
-                defaults.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey))
+                defaults.entrySet().stream().sorted(Map.Entry.comparingByKey())
                         .map(e -> e.getKey() + ": " + e.getValue().translation),
                 alternatives.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey().sourceText))
                         .map(e -> e.getKey().sourceText + ": " + e.getValue().translation))

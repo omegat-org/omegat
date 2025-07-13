@@ -58,7 +58,7 @@ import org.omegat.core.data.ITMXEntry;
 
 /**
  * Helper for write TMX files, using StAX.
- *
+ * <p>
  * We can't use JAXB for writing because it changes spaces on formatted output.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -71,8 +71,6 @@ public class TMXWriter2 implements AutoCloseable {
 
     public static final String PROP_ID = "id";
 
-    private final XMLOutputFactory factory;
-
     private final OutputStream out;
     private final XMLStreamWriter xml;
 
@@ -83,7 +81,7 @@ public class TMXWriter2 implements AutoCloseable {
     /**
      * DateFormat with format YYYYMMDDThhmmssZ able to display a date in UTC
      * time.
-     *
+     * <p>
      * SimpleDateFormat IS NOT THREAD SAFE !!!
      */
     private final SimpleDateFormat tmxDateFormat;
@@ -108,7 +106,7 @@ public class TMXWriter2 implements AutoCloseable {
             boolean sentenceSegmentingEnabled, boolean levelTwo, boolean forceValidTMX) throws Exception {
         this.levelTwo = levelTwo;
         this.forceValidTMX = forceValidTMX;
-        factory = XMLOutputFactory.newInstance();
+        XMLOutputFactory factory = XMLOutputFactory.newInstance();
         factory.setProperty(P_OUTPUT_ESCAPE_CR, false);
         factory.setProperty(P_AUTOMATIC_EMPTY_ELEMENTS, true);
         factory.setProperty(P_TEXT_ESCAPER, new TmxEscapingWriterFactory());
@@ -132,7 +130,7 @@ public class TMXWriter2 implements AutoCloseable {
         }
         xml.writeCharacters(lineSeparator);
 
-        writeHeader(sourceLanguage, targetLanguage, sentenceSegmentingEnabled);
+        writeHeader(sourceLanguage, sentenceSegmentingEnabled);
 
         xml.writeCharacters("  ");
         xml.writeStartElement("body");
@@ -337,8 +335,7 @@ public class TMXWriter2 implements AutoCloseable {
         xml.writeCharacters(lineSeparator);
     }
 
-    private void writeHeader(final Language sourceLanguage, final Language targetLanguage,
-            boolean sentenceSegmentingEnabled) throws Exception {
+    private void writeHeader(final Language sourceLanguage, boolean sentenceSegmentingEnabled) throws Exception {
         xml.writeCharacters("  ");
         xml.writeEmptyElement("header");
 
@@ -370,7 +367,7 @@ public class TMXWriter2 implements AutoCloseable {
 
     enum TAG_TYPE {
         SINGLE, START, END
-    };
+    }
 
     private void writeLevelTwo(String segment) throws Exception {
         xml.writeCharacters("        ");
@@ -379,10 +376,7 @@ public class TMXWriter2 implements AutoCloseable {
         TAG_TYPE tagType;
         int pos = 0;
         Matcher m = TAGS_ANY.matcher(segment);
-        while (true) {
-            if (!m.find(pos)) {
-                break;
-            }
+        while (m.find(pos)) {
             xml.writeCharacters(segment.substring(pos, m.start()));
             pos = m.end();
 
@@ -441,7 +435,6 @@ public class TMXWriter2 implements AutoCloseable {
         }
 
         xml.writeCharacters(segment.substring(pos));
-
         xml.writeEndElement();
     }
 

@@ -88,7 +88,7 @@ nullaway {
 }
 
 spotbugs {
-    reportLevel = com.github.spotbugs.snom.Confidence.valueOf('HIGH')
+    reportLevel = com.github.spotbugs.snom.Confidence.valueOf('DEFAULT')
     extraArgs = ['-longBugCodes']
     jvmArgs = ['-Duser.language=en']
     // onlyAnalyze <classes/packages>  only analyze given classes and packages;

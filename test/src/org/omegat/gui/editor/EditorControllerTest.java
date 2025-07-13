@@ -37,7 +37,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TestCoreState;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -175,9 +174,7 @@ public class EditorControllerTest extends TestCore {
 
     private void fireCaretEvent(JTextComponent component, int position) {
         CountDownLatch latch = new CountDownLatch(1);
-        component.addCaretListener(e -> {
-            latch.countDown();
-        });
+        component.addCaretListener(e -> latch.countDown());
         component.setCaretPosition(position);
         try {
             latch.await(5, TimeUnit.SECONDS);
@@ -187,8 +184,8 @@ public class EditorControllerTest extends TestCore {
     }
 
     @Override
-    protected IEditor createTestEditor() {
-        editorController = new EditorController(TestCoreState.getInstance().getMainWindow());
+    protected IEditor createTestEditor(IMainWindow mainWindow) {
+        editorController = new EditorController(mainWindow);
         TestCoreInitializer.initEditor(editorController);
         return editorController;
     }

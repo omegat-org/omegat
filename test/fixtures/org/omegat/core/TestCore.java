@@ -30,6 +30,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -83,28 +84,29 @@ public abstract class TestCore {
         TestCoreState.resetState();
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
-        TestCoreState.getInstance().setMainWindow(createTestMainWindow());
+        IMainWindow mainWindow = createTestMainWindow();
+        TestCoreState.getInstance().setMainWindow(mainWindow);
         TestCoreState.getInstance().setProject(new NotLoadedProject());
-        TestCoreState.getInstance().setEditor(createTestEditor());
+        TestCoreState.getInstance().setEditor(createTestEditor(mainWindow));
         TestCoreState.initAutoSave(createTestAutoSave());
     }
 
     /**
      * Clean up a temporary directory for configuration.
-     * @throws Exception
      */
     @After
-    public final void tearDownCore() throws Exception {
+    public final void tearDownCore() throws IOException {
         TestCoreState.resetState();
         FileUtils.forceDeleteOnExit(configDir);
     }
 
     protected IAutoSave createTestAutoSave() {
         return new IAutoSave() {
+            @Override
             public void enable() {
                 // ignore all
             }
-
+            @Override
             public void disable() {
                 // ignore all
             }
@@ -126,6 +128,7 @@ public abstract class TestCore {
             private final JMenu glossaryMenu = new JMenu("Glossary");
             private final JMenu autoCompleteMenu = new JMenu("AutoComplete");
 
+            @Override
             public JMenu getToolsMenu() {
                 if (toolsMenu.getItemCount() == 0) {
                     toolsMenu.add(new JMenuItem("toolsCheckIssuesMenuItem"));
@@ -139,6 +142,7 @@ public abstract class TestCore {
                 return toolsMenu;
             }
 
+            @Override
             public JMenu getProjectMenu() {
                 if (projectMenu.getItemCount() == 0) {
                     projectMenu.add(new JMenuItem("New"));
@@ -175,6 +179,7 @@ public abstract class TestCore {
                 return projectMenu;
             }
 
+            @Override
             public JMenu getOptionsMenu() {
                 if (optionsMenu.getItemCount() == 0) {
                     if (!Platform.isMacOSX()) {
@@ -196,14 +201,15 @@ public abstract class TestCore {
                 return optionsMenu;
             }
 
+            @Override
             public JMenu getMachineTranslationMenu() {
                 return machineTranslationMenu;
             }
-
+            @Override
             public JMenu getGlossaryMenu() {
                 return glossaryMenu;
             }
-
+            @Override
             public JMenu getAutoCompletionMenu() {
                 return autoCompleteMenu;
             }
@@ -263,7 +269,7 @@ public abstract class TestCore {
                 }
                 return gotoMenu;
             }
-
+            @Override
             public void invokeAction(String action, int modifiers) {
             }
         };
@@ -276,47 +282,48 @@ public abstract class TestCore {
     protected IMainWindow createTestMainWindow() {
         final IMainMenu mainMenu = createTestMainMenu();
         return new IMainWindow() {
+            @Override
             public void addDockable(Dockable pane) {
             }
-
+            @Override
             public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
             }
-
+            @Override
             public Font getApplicationFont() {
                 return new Font("Dialog", Font.PLAIN, 12);
             }
-
+            @Override
             public JFrame getApplicationFrame() {
                 return new JFrame();
             }
-
+            @Override
             public void lockUI() {
             }
-
+            @Override
             public void showLengthMessage(String messageText) {
             }
-
+            @Override
             public void showProgressMessage(String messageText) {
             }
-
+            @Override
             public void showStatusMessageRB(String messageKey, Object... params) {
             }
-
+            @Override
             public void showTimedStatusMessageRB(String messageKey, Object... params) {
             }
-
+            @Override
             public void displayWarningRB(String warningKey, Object... params) {
             }
-
+            @Override
             public void displayWarningRB(String warningKey, String supercedesKey, Object... params) {
             }
-
+            @Override
             public void showErrorDialogRB(String title, String message, Object... args) {
             }
-
+            @Override
             public void unlockUI() {
             }
-
+            @Override
             public IMainMenu getMainMenu() {
                 return mainMenu;
             }
@@ -325,22 +332,22 @@ public abstract class TestCore {
             public DockingDesktop getDesktop() {
                 return null;
             }
-
+            @Override
             public Cursor getCursor() {
                 return null;
             }
-
+            @Override
             public void setCursor(Cursor cursor) {
             }
-
+            @Override
             public int showConfirmDialog(Object message, String title, int optionType, int messageType)
                     throws HeadlessException {
                 return 0;
             }
-
+            @Override
             public void showMessageDialog(String message) {
             }
-
+            @Override
             public void showLockInsertMessage(String messageText, String toolTip) {
             }
         };
@@ -519,9 +526,9 @@ public abstract class TestCore {
     /**
      * Initialize editor and store it with TestInitializer.initEditor function.
      */
-    protected void initEditor(IMainWindow mainWindow) {
-        final IEditorSettings editorSettings = getEditorSettings();
-        TestCoreInitializer.initEditor(new IEditor() {
+    protected IEditor createTestEditor(IMainWindow mainWindow) {
+        final IEditorSettings editorSettings = createTestEditorSettings();
+        return new IEditor() {
 
             @Override
             public void windowDeactivated() {
@@ -748,11 +755,6 @@ public abstract class TestCore {
 
             @Override
             public void activateEntry() {
-            }
-
-            @Override
-            public boolean isOrientationAllLtr() {
-                return true;
             }
         };
     }

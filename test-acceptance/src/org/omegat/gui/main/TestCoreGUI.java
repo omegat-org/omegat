@@ -70,7 +70,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     protected @Nullable FrameFixture window;
     protected @Nullable JFrame frame;
     private @Nullable TestMainWindow mainWindow;
-
     protected @Nullable File tmpDir;
 
     /**
@@ -136,7 +135,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         } catch (InterruptedException ignored) {
             // Ignore and check in assertion.
         }
-        assertTrue("Glossary should be loaded.", !glossaryTextArea.getDisplayedEntries().isEmpty());
+        assertFalse("Glossary should be loaded.", glossaryTextArea.getDisplayedEntries().isEmpty());
     }
 
     /**
@@ -209,6 +208,8 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             window.cleanUp();
         }
     }
+
+    private static boolean initialized = false;
 
     /**
      * set up OmegaT main window.

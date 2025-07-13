@@ -99,9 +99,9 @@ dependencies {
         runtimeOnly(libs.slf4j.jdk14)
 
         // jaxb gen compilation
-        implementation(libs.jaxb.api)
-        runtimeOnly(libs.jaxb.core)
-        runtimeOnly(libs.jaxb.runtime)
+        implementation(libs.jaxb4.api)
+        runtimeOnly(libs.jaxb4.core)
+        runtimeOnly(libs.jaxb4.runtime)
 
         // macOS integration
         implementation(libs.madlonkay.desktopsupport)
@@ -213,6 +213,14 @@ dependencies {
     testFixturesImplementation(libs.commons.io)
     testFixturesImplementation(libs.omegat.vldocking)
     testFixturesImplementation(libs.assertj.swing.junit)
+    testFixturesImplementation(libs.languagetool.core) {
+        exclude module: 'guava'
+        exclude module: 'language-detector'
+        exclude group: 'com.google.android'
+        exclude module: 'hunspell'
+        exclude module: 'json'
+        exclude module: 'protobuf-java'
+    }
     testFixturesImplementation(libs.jetbrains.annotations)
 
     testImplementation(libs.junit4)
@@ -263,7 +271,8 @@ dependencies {
 }
 
 jar {
-    def omtPlugins = loadProperties(file('Plugins.properties'))
+    def pluginProperties = layout.settingsDirectory.file('Plugins.properties')
+    def omtPlugins = loadProperties(pluginProperties.asFile)
     manifest {
         attributes('License': 'GNU Public License version 3 or later',
                    'Implementation-Version': project.version,
@@ -315,12 +324,12 @@ distributions {
             // /docs
             // ...../greetings/<lang>/first_steps.html
             // ...../manuals/<lang>.zip
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 into 'docs'
                 include 'doc-license.txt'
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            from('release') {
+            from(layout.settingsDirectory.dir('release')) {
                 // ** Caution!! **
                 // 'readme*.txt' and 'changes.txt' are expected
                 // in releases/win32-specific/OmegaT.iss
@@ -370,7 +379,7 @@ distributions {
             // system core plugins into modules
             into('modules') {
                 from(subprojects.findAll{!it.name.equals('dummy')}.collect {it.tasks.withType(Jar)})
-                from('releases/modules-specific')
+                from(layout.settingsDirectory.dir('releases/modules-specific'))
             }
             eachFile {
                 // Move main JAR up one level from lib.
@@ -385,7 +394,7 @@ distributions {
     source {
         contents {
             from(rootDir) {
-                include 'config/**', 'build-logic/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
+                include 'build-logic/**', 'config/**', 'ci/iscc', 'ci/osslsigncode', 'images/**', 'lib/**', 'release/**',
                         'src/**/*.java', 'test/**','test-acceptance/**', 'test-integration/**', 'doc_src/**',
                         'docs_devel/**', 'scripts/**',
                         'gradle/**', 'gradle*', 'build.gradle', 'settings.gradle', 'README.md', '*.properties',

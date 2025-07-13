@@ -11,7 +11,7 @@ steps:
     displayName: Check
     inputs:
       tasks: check
-      options: '-PenvIsCi --no-daemon --scan'
+      options: '-PenvIsCi --no-daemon --scan -PtestMaxHeapSize=2048M'
       jdkVersionOption: '1.17'
   - task: PublishTestResults@2
     displayName: 'Publish Test Results build/reports/**/*.xml'

@@ -5,7 +5,15 @@ on:
     branches:
       - master
       - releases/*
+    paths-ignore:
+      - 'ci/**'
+      - 'src_docs/**'
+      - '*.md'
   pull_request:
+    paths-ignore:
+      - 'ci/**'
+      - 'src_docs/**'
+      - '*.md'
 
 jobs:
   checkstyle:

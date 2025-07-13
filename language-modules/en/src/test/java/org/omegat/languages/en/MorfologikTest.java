@@ -24,60 +24,19 @@
  ******************************************************************************/
 package org.omegat.languages.en;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collections;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.languagetool.JLanguageTool;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.spellchecker.ISpellChecker;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.languagetools.LanguageDataBroker;
+import org.omegat.languages.LanguageModuleTestBase;
 import org.omegat.spellchecker.morfologik.MorfologikSpellchecker;
-import org.omegat.util.Language;
-import org.omegat.util.TestPreferencesInitializer;
 
 
-public class MorfologikTest {
+public class MorfologikTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "en_GB";
     private static final String GOOD = "Hello";
-    private static Path tmpDir;
-
-    @BeforeClass
-    public static void setUpClass() throws IOException {
-        JLanguageTool.setDataBroker(new LanguageDataBroker());
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        tmpDir = Files.createTempDirectory("omegat");
-        assertThat(tmpDir.toFile()).isDirectory();
-        Path configDir = Files.createDirectory(tmpDir.resolve(".omegat"));
-        TestPreferencesInitializer.init(configDir.toString());
-        Files.createDirectory(configDir.resolve("spelling"));
-        FileUtils.forceDeleteOnExit(tmpDir.toFile());
-    }
 
     @Test
     public void testDictionary() throws Exception {
-        ProjectProperties props = new ProjectProperties(tmpDir.toFile());
-        props.setTargetLanguage(new Language(LANGUAGE));
-        Core.setProject(new NotLoadedProject() {
-            @Override
-            public ProjectProperties getProjectProperties() {
-                return props;
-            }
-        });
-        ISpellChecker checker = new MorfologikSpellchecker();
-        assertThat(checker.initialize()).as("Success initialize").isTrue();
-        assertThat(checker.isCorrect(GOOD)).as("Spell check for correct word").isTrue();
+        testDictionaryHelper(new MorfologikSpellchecker(), LANGUAGE, GOOD, null);
     }
-
 }

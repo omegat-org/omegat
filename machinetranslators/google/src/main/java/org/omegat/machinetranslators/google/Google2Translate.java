@@ -129,6 +129,7 @@ public class Google2Translate extends BaseCachedTranslate {
         return BUNDLE.getString("MT_ENGINE_GOOGLE2");
     }
 
+    @Override
     protected int getMaxTextLength() {
         if (isPremium()) {
             return MAX_TEXT_LENGTH_PREMIUM;

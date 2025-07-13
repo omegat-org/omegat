@@ -28,6 +28,8 @@
 
 package org.omegat.core.data;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,13 +78,13 @@ public class SourceTextEntry {
      * A list of duplicates of this STE. Will be non-null for the FIRST duplicate,
      * null for NONE and NEXT STEs. See {@link #getDuplicate()} for full logic.
      */
-    List<SourceTextEntry> duplicates;
+    @Nullable List<SourceTextEntry> duplicates;
 
     /**
      * The first duplicate of this STE. Will be null for NONE and FIRST STEs,
      * non-null for NEXT STEs. See {@link #getDuplicate()} for full logic.
      */
-    SourceTextEntry firstInstance;
+    @Nullable SourceTextEntry firstInstance;
 
     /** Holds the number of this entry in a project. */
     private final int m_entryNum;
@@ -121,7 +123,7 @@ public class SourceTextEntry {
                     i--;
                 }
             }
-            this.protectedParts = protectedParts.toArray(new ProtectedPart[protectedParts.size()]);
+            this.protectedParts = protectedParts.toArray(new ProtectedPart[0]);
         }
         this.duplicates = null;
         this.firstInstance = null;

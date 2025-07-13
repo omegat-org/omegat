@@ -27,6 +27,9 @@ services:
       - type: volume
         source: keygen
         target: /keys
+      - type: volume
+        source: gradle-cache
+        target: /gradle-cache
     tmpfs:
       - /tmp
       - /workdir
@@ -35,3 +38,4 @@ services:
       TYPE: ${TYPE:-GIT}
 volumes:
   keygen:
+  gradle-cache:

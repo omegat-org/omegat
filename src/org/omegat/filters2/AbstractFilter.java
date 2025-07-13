@@ -8,6 +8,7 @@
                2011 Alex Buloichik, Didier Briel,
                2012 Guido Leenders
                2015 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -41,6 +42,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -162,7 +164,7 @@ public abstract class AbstractFilter implements IFilter {
     protected @Nullable IAlignCallback entryAlignCallback;
 
     /** Options for processing time. */
-    protected @Nullable Map<String, String> processOptions;
+    protected Map<String, String> processOptions = new HashMap<>();
 
     /**
      * The default output filename pattern.
@@ -306,8 +308,8 @@ public abstract class AbstractFilter implements IFilter {
 
     @Deprecated
     @Override
-    public @Nullable Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
-        return null;
+    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+        return Collections.emptyMap();
     }
 
     /**
@@ -439,17 +441,19 @@ public abstract class AbstractFilter implements IFilter {
         String encoding = getInputEncoding(fc, inFile);
         try (BufferedReader reader = createReader(inFile, encoding)) {
             inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
-            BufferedWriter writer;
-            if (outFile != null) {
-                String outEncoding = getOutputEncoding(fc);
-                writer = createWriter(outFile, outEncoding);
-            } else {
-                writer = new NullBufferedWriter();
-            }
+            BufferedWriter writer = null;
             try {
+                if (outFile != null) {
+                    String outEncoding = getOutputEncoding(fc);
+                    writer = createWriter(outFile, outEncoding);
+                } else {
+                    writer = new NullBufferedWriter();
+                }
                 processFile(reader, writer, fc);
             } finally {
-                writer.close();
+                if (writer != null) {
+                    writer.close();
+                }
             }
         }
     }
@@ -504,16 +508,16 @@ public abstract class AbstractFilter implements IFilter {
         return encoding;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public final void parseFile(File inFile, Map<String, String> config, FilterContext fc,
+    public final void parseFile(File inFile, @Nullable Map<String, String> config, FilterContext fc,
             @NotNull IParseCallback callback) throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
         entryAlignCallback = null;
-        processOptions = config;
+        processOptions.clear();
+        if (config != null) {
+            processOptions.putAll(config);
+        }
 
         try {
             processFile(inFile, null, fc);
@@ -523,17 +527,20 @@ public abstract class AbstractFilter implements IFilter {
             }
         } finally {
             entryParseCallback = null;
-            processOptions = null;
+            processOptions.clear();
         }
     }
 
     @Override
-    public final void alignFile(File inFile, @NotNull File outFile, Map<String, String> config, FilterContext fc,
+    public final void alignFile(File inFile, File outFile, @Nullable Map<String, String> config, FilterContext fc,
             @NotNull IAlignCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = null;
         entryAlignCallback = callback;
-        processOptions = config;
+        processOptions.clear();
+        if (config != null) {
+            processOptions.putAll(config);
+        }
         try (BufferedReader readerIn = createReader(inFile, fc.getInEncoding());
                 BufferedReader readerOut = createReader(outFile, fc.getOutEncoding())) {
             alignFile(readerIn, readerOut, fc, inFile.getName());
@@ -597,7 +604,8 @@ public abstract class AbstractFilter implements IFilter {
         entryParseCallback = null;
         entryTranslateCallback = callback;
         entryAlignCallback = null;
-        processOptions = config;
+        processOptions.clear();
+        processOptions.putAll(config);
 
         try {
             entryTranslateCallback.setPass(1);
@@ -609,7 +617,7 @@ public abstract class AbstractFilter implements IFilter {
             }
         } finally {
             entryTranslateCallback = null;
-            processOptions = null;
+            processOptions.clear();
         }
     }
 
@@ -651,22 +659,24 @@ public abstract class AbstractFilter implements IFilter {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, comment, null, this, null);
             return entry;
-        } else {
+        } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);
             return translation != null ? translation : entry;
+        } else {
+            return entry;
         }
     }
 
     /**
      * Set both callbacks. Used for child XML filters only.
      */
-    public void setCallbacks(IParseCallback parseCallback, ITranslateCallback translateCallback) {
+    public void setCallbacks(@Nullable IParseCallback parseCallback, @Nullable ITranslateCallback translateCallback) {
         this.entryParseCallback = parseCallback;
         this.entryTranslateCallback = translateCallback;
     }
 
     @Override
-    public String getInEncodingLastParsedFile() {
+    public @Nullable String getInEncodingLastParsedFile() {
         return inEncodingLastParsedFile;
     }
 

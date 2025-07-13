@@ -40,6 +40,7 @@ import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.timing.Timeout;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,9 +49,11 @@ import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.Language;
 import org.omegat.util.LocaleRule;
 
+import static org.junit.Assert.assertNotNull;
+
 public class AlignerWindowTest extends TestCoreGUI {
 
-    private FrameFixture picker;
+    private @Nullable FrameFixture picker;
 
     private static final String PROJECT_PATH = "test-acceptance/data/project/";
     private static final String SOURCE_PATH = "source/parseSource.txt";
@@ -63,6 +66,7 @@ public class AlignerWindowTest extends TestCoreGUI {
     @Test
     @Ignore
     public void testAligner() {
+        assertNotNull(picker);
         picker.requireTitle("Align Files");
         picker.panel("align_picker_panel").requireEnabled();
         List<Language> languages = Language.getLanguages();

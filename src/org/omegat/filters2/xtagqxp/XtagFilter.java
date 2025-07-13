@@ -212,7 +212,7 @@ public class XtagFilter extends AbstractFilter {
         for (int cp, i = 0; i < s.length(); i += Character.charCount(cp)) {
             cp = s.codePointAt(i);
             // Start of a tag
-            if ((cp == '<') && (!(state == stateCollectTag))) {
+            if ((cp == '<') && !(state == stateCollectTag)) {
                 tag.setLength(0);
                 state = stateCollectTag;
                 // Possible end of a tag

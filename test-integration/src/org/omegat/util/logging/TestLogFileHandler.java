@@ -37,6 +37,7 @@ import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 /**
@@ -97,7 +98,7 @@ public class TestLogFileHandler extends StreamHandler {
             FileUtils.deleteQuietly(lockFile);
         } catch (Exception ex) {
             // shouldn't happen
-            ex.printStackTrace();
+            Log.log(ex);
         }
     }
 

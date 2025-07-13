@@ -59,7 +59,7 @@ import org.omegat.util.StaticUtils;
  * @author Hiroshi Miura
  */
 
-public final class Main implements Runnable {
+public final class Main {
 
     private Main() {
     }
@@ -91,11 +91,15 @@ public final class Main implements Runnable {
             command.add(Main.class.getName());
         } else {
             // assumes jpackage
-            var installDir = StaticUtils.installDir();
+            String installDir = StaticUtils.installDir();
             if (installDir == null) {
                 return;
             } else {
-                javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
+                Path parent = Paths.get(installDir).getParent();
+                if (parent == null) {
+                    return;
+                }
+                javaBin = parent.resolve("bin/OmegaT");
                 if (!javaBin.toFile().exists()) {
                     // abort restart
                     Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
@@ -117,10 +121,5 @@ public final class Main implements Runnable {
             Log.log(e);
             System.exit(1);
         }
-    }
-
-    @Override
-    public void run() {
-
     }
 }

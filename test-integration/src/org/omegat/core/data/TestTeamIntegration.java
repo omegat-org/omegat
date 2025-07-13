@@ -52,6 +52,7 @@ import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
@@ -135,9 +136,9 @@ public final class TestTeamIntegration {
     static final int MAX_DELAY_SECONDS = 15;
     static final int SEG_COUNT = 4;
 
-    static String mapRepo;
-    static String mapRepoType;
-    static String mapFile;
+    static @Nullable String mapRepo;
+    static @Nullable String mapRepoType;
+    static @Nullable String mapFile;
     static int processSeconds;
 
     // referenced from TestTeamIntegrationChild class
@@ -251,7 +252,7 @@ public final class TestTeamIntegration {
 
         int tmxCount = processRevisions(teamRepository, startVersion, data);
 
-        logSegmentValues(segments, data);
+        logSegmentValues(segments);
         logRevisionData(tmxCount, segments, data);
         checkCommitOrder(data);
     }
@@ -297,7 +298,7 @@ public final class TestTeamIntegration {
         return projectTMX;
     }
 
-    private static void logSegmentValues(List<String> segments, Map<String, List<Long>> data) {
+    private static void logSegmentValues(List<String> segments) {
         LOGGER.atInfo().log(() -> {
             StringBuilder logBuilder = new StringBuilder();
             logBuilder.append("Values :");

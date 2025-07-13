@@ -44,6 +44,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.mozlang.MozillaLangFilter;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.filters4.xml.xliff.Xliff1Filter;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.notes.INotes;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
@@ -185,7 +186,7 @@ public class EditorControllerTest extends TestCore {
     }
 
     @Override
-    protected void initEditor() {
+    protected void initEditor(IMainWindow mainWindow) {
         editorController = new EditorController(mainWindow);
         TestCoreInitializer.initEditor(editorController);
     }

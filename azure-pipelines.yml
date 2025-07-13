@@ -55,9 +55,9 @@ stages:
           doc_changed=false
           non_doc_changed=false
           for file in $files; do
-            if [[ $file =~ ^src_docs ]]; then
+            if [[ $file =~ ^src_docs || $file =~ ^tipoftheday/.*\.(html|yaml)$ ]]; then
               doc_changed=true
-            elif [[ ! ($file =~ ^\.github/ || $file =~ ^ci/ || $file == ".azure-pipelines.yml") ]]; then
+            elif [[ ! ($file =~ ^\. || $file =~ ^ci/ || $file =~ \.ya?ml$ ) ]]; then
               non_doc_changed=true
             fi
           done
@@ -66,6 +66,7 @@ stages:
         name: checkChanges
   - job: BuildDocument
     displayName: Build Document and Publish
+    dependsOn: CheckChanges
     condition: eq(dependencies.CheckChanges.outputs['checkChanges.changeDoc'], 'true')
     pool:
       vmImage: 'ubuntu-24.04'
@@ -81,6 +82,7 @@ stages:
           condition: and(in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   - job: TestOnJava17
     displayName: on Linux
+    dependsOn: CheckChanges
     condition: eq(dependencies.CheckChanges.outputs['checkChanges.changeNonDoc'], 'true')
     pool:
       vmImage: 'ubuntu-24.04'
@@ -91,6 +93,7 @@ stages:
       - template: ci/azure-pipelines/test_java17_steps.yml
   - job: testOnWindows
     displayName: on Windows
+    dependsOn: CheckChanges
     condition: eq(dependencies.CheckChanges.outputs['checkChanges.changeNonDoc'], 'true')
     pool:
       vmImage: 'windows-latest'
@@ -100,6 +103,7 @@ stages:
       - template: ci/azure-pipelines/test_java17_steps.yml
   - job: testOnMac
     displayName: on mac
+    dependsOn: CheckChanges
     condition: eq(dependencies.CheckChanges.outputs['checkChanges.changeNonDoc'], 'true')
     pool:
       vmImage: 'macOS-latest'
@@ -174,6 +178,7 @@ stages:
         fetchDepth: 2
       - template: ci/azure-pipelines/check_steps.yml
   - job: ReleaseBuild
+    dependsOn: CheckForRelease
     pool:
       vmImage: 'ubuntu-24.04'
     steps:

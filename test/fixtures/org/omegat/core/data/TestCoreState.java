@@ -41,5 +41,4 @@ public class TestCoreState extends CoreState {
     public static void initAutoSave(IAutoSave autoSave) {
         CoreState.getInstance().setSaveThread(autoSave);
     }
-
 }

@@ -209,8 +209,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         }
     }
 
-    private static boolean initialized = false;
-
     /**
      * set up OmegaT main window.
      */
@@ -232,6 +230,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         if (mainWindow == null) {
             throw new IllegalStateException("Main window is null.");
         }
+        TestCoreState.getInstance().setMainWindow(mainWindow);
         frame = mainWindow.getApplicationFrame();
         window = new FrameFixture(robot(), frame);
         window.show();
@@ -242,22 +241,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      * @throws Exception when the error occurred.
      */
     protected void initialize() throws Exception { 
-      if (!initialized) {
-            Path tmp = Files.createTempDirectory("omegat");
-            FileUtils.forceDeleteOnExit(tmp.toFile());
-            RuntimePreferences.setConfigDir(tmp.toString());
-            TestMainInitializer.initClassloader();
-            // same order as Main.main
-            Preferences.init();
-            PluginUtils.loadPlugins(Collections.emptyMap());
-            FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-            Preferences.initFilters();
-            Preferences.initSegmentation();
-            TestCoreInitializer.initAutoSave(autoSave);
-            UIDesignManager.initialize();
-            TestCoreState.getInstance().setProject(new NotLoadedProject());
-            initialized = true;
-        }
+        Path tmp = Files.createTempDirectory("omegat");
+        FileUtils.forceDeleteOnExit(tmp.toFile());
+        RuntimePreferences.setConfigDir(tmp.toString());
+        //
+        TestMainInitializer.initClassloader();
+        PluginUtils.loadPlugins(Collections.emptyMap());
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        // should be called after RuntimePrefereces.setConfigDir
+        Preferences.init();
+        Preferences.initFilters();
+        Preferences.initSegmentation();
+        // should be called after Preferences.init
+        UIDesignManager.initialize();
+        TestCoreState.getInstance().setProject(new NotLoadedProject());
+        TestCoreState.initAutoSave(autoSave);
     }
 
     static IAutoSave autoSave = new IAutoSave() {

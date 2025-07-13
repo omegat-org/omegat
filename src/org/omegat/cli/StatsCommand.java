@@ -47,18 +47,15 @@ public class StatsCommand implements Runnable {
     @CommandLine.Mixin
     private Parameters params;
 
-    @CommandLine.Option(names = {"type"}, paramLabel = "<xml_or_text_or_json>", defaultValue = "xml",
-            descriptionKey = "STATS_TYPE")
+    @CommandLine.Option(names = {
+            "type" }, paramLabel = "<xml_or_text_or_json>", defaultValue = "xml", descriptionKey = "STATS_TYPE")
     String format;
-    @CommandLine.Option(names = {"output"}, paramLabel = "<stats-output-file>",
-            descriptionKey = "OUTPUT_FILE")
+    @CommandLine.Option(names = {
+            "output" }, paramLabel = "<stats-output-file>", descriptionKey = "OUTPUT_FILE")
     String output;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
-
-    public StatsCommand() {
-    }
 
     public StatsCommand(Parameters params) {
         this.params = params;
@@ -91,7 +88,7 @@ public class StatsCommand implements Runnable {
      * occurred, especially when parent directory does not exist warns it and
      * return 1.
      */
-    int runConsoleStats() throws Exception {
+    int runConsoleStats() {
         Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
 
         Core.initializeConsole();

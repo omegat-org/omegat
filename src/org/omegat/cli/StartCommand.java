@@ -64,7 +64,8 @@ public class StartCommand implements Runnable {
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
 
-    public StartCommand() {}
+    public StartCommand() {
+    }
 
     public StartCommand(Parameters params) {
         this.params = params;
@@ -125,7 +126,8 @@ public class StartCommand implements Runnable {
         }
 
         if (params != null && params.alternateFilenameFrom != null) {
-            RuntimePreferences.setAlternateFilenames(params.alternateFilenameFrom, params.alternateFilenameTo);
+            RuntimePreferences.setAlternateFilenames(params.alternateFilenameFrom,
+                    params.alternateFilenameTo);
         }
 
         CoreEvents.fireApplicationStartup();

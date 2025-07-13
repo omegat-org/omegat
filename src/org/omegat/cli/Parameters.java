@@ -94,10 +94,12 @@ public class Parameters {
 
     // Undocumented CLI options
     public static final String ALTERNATE_FILENAME_FROM = "--alternate-filename-from";
-    @Option(names = { ALTERNATE_FILENAME_FROM }, paramLabel = "<alternate_filename_from>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_FROM")
+    @Option(names = {
+            ALTERNATE_FILENAME_FROM }, paramLabel = "<alternate_filename_from>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_FROM")
     String alternateFilenameFrom;
     public static final String ALTERNATE_FILENAME_TO = "--alternate-filename-to";
-    @Option(names = { ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_TO")
+    @Option(names = {
+            ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_TO")
     String alternateFilenameTo;
 
     // Development
@@ -135,7 +137,8 @@ public class Parameters {
     private void showStartUpLogInfo() {
         // initialize logging backend and loading configuration.
         Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
-                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault()).format(ZonedDateTime.now()),
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault())
+                        .format(ZonedDateTime.now()),
                 ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
                 Locale.getDefault().toLanguageTag());
         Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),

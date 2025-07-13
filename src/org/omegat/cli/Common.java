@@ -45,7 +45,8 @@ import java.util.List;
 
 final class Common {
 
-    private Common() {}
+    private Common() {
+    }
 
     /**
      * Execute a script as PROJECT_CHANGE events. We can't use the regular

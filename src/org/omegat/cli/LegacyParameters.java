@@ -39,9 +39,9 @@ import java.util.PropertyResourceBundle;
 
 import static picocli.CommandLine.Option;
 
-@CommandLine.Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1.0",
-        subcommands = {StartCommand.class, AlignCommand.class, TranslateCommand.class, StatsCommand.class,
-                TeamCommand.class, CommandLine.HelpCommand.class})
+@CommandLine.Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1.0", subcommands = {
+        StartCommand.class, AlignCommand.class, TranslateCommand.class, StatsCommand.class, TeamCommand.class,
+        CommandLine.HelpCommand.class })
 public class LegacyParameters implements Runnable {
 
     @CommandLine.Option(names = { "-V", "--version" }, versionHelp = true)
@@ -51,7 +51,7 @@ public class LegacyParameters implements Runnable {
     boolean usageHelpRequested;
 
     // Hide deprecated old command syntax in help message.
-    // We can set false for test purpose.
+    // We can set false for test purpose or backward compatibility.
     private static final boolean HIDE_DEPRECATED_OPTIONS = false;
 
     public static final String CONFIG_FILE = "--config-file";
@@ -95,14 +95,12 @@ public class LegacyParameters implements Runnable {
     // CONSOLE_CREATEPSEUDOTRANSLATETMX mode
     public static final String PSEUDOTRANSLATETMX = "--pseudotranslatetmx";
     @Option(names = {
-            PSEUDOTRANSLATETMX }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS,
-            descriptionKey = "PSEUDO_TRANSLATE_TMX")
+            PSEUDOTRANSLATETMX }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "PSEUDO_TRANSLATE_TMX")
     String pseudoTranslateTmxPath;
 
     public static final String PSEUDOTRANSLATETYPE = "--pseudotranslatetype";
     @Option(names = {
-            PSEUDOTRANSLATETYPE }, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS,
-            descriptionKey = "PSEUDO_TRANSLATE_TYPE")
+            PSEUDOTRANSLATETYPE }, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "PSEUDO_TRANSLATE_TYPE")
     String pseudoTranslateTypeName;
 
     // CONSOLE_ALIGN mode

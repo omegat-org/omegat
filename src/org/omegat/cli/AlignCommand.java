@@ -64,9 +64,6 @@ public class AlignCommand implements Runnable {
     @Option(names = { "-G", "--gui" }, versionHelp = true)
     boolean startGUI;
 
-    public AlignCommand() {
-    }
-
     public AlignCommand(String project) {
         params = new Parameters();
         this.project = project;
@@ -113,15 +110,16 @@ public class AlignCommand implements Runnable {
 
         Common.validateTagsConsoleMode(params);
 
-        System.out
-                .println(StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), legacyParams.alignDirPath));
+        System.out.println(
+                StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), legacyParams.alignDirPath));
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
         boolean alt = !config.isSupportDefaultTranslations();
         try (TMXWriter2 wr = new TMXWriter2(new File(tmxFile), config.getSourceLanguage(),
                 config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), alt, alt)) {
-            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(legacyParams.alignDirPath))), alt);
+            wr.writeEntries(p.align(config, new File(FileUtil.expandTildeHomeDir(legacyParams.alignDirPath))),
+                    alt);
         }
         p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
@@ -148,7 +146,7 @@ public class AlignCommand implements Runnable {
             method.invoke(null, dir);
             return 0;
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
-                 | InvocationTargetException e) {
+                | InvocationTargetException e) {
             Log.log(e);
             return 1;
         }

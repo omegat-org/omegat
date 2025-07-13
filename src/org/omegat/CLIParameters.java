@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -119,7 +120,10 @@ public final class CLIParameters {
     enum RUN_MODE {
         GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN, CONSOLE_STATS;
 
-        public static RUN_MODE parse(String s) {
+        public static RUN_MODE parse(@Nullable String s) {
+            if (s == null) {
+                return GUI;
+            }
             try {
                 return valueOf(normalize(s));
             } catch (Exception ex) {

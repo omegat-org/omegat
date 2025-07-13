@@ -106,7 +106,7 @@ public class EditorTextLoadedTest extends TestCoreGUI {
         Preferences.setPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION, true);
     }
 
-    private class EditorEntryListener implements IEntryEventListener {
+    private static class EditorEntryListener implements IEntryEventListener {
         private final List<SourceTextEntry> selectedEntries;
         private final CountDownLatch initialLoadLatch;
         private final CountDownLatch selectionChangeLatch;

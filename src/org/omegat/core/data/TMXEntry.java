@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.TMXProp;
 
 /**
@@ -64,7 +65,7 @@ public class TMXEntry implements ITMXEntry {
     public final ExternalLinked linked;
     public final String origin;
 
-    TMXEntry(ITMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
+    TMXEntry(ITMXEntry from, boolean defaultTranslation, @Nullable ExternalLinked linked) {
         this.source = from.getSourceText();
         this.translation = from.getTranslationText();
         this.changer = from.getChanger();

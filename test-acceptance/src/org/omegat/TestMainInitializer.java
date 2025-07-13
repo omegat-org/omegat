@@ -35,7 +35,7 @@ public final class TestMainInitializer {
     }
 
     public static void initClassloader() {
-        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
+        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
     }
 
 }

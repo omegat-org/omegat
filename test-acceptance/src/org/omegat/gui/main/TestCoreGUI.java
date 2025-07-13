@@ -46,6 +46,7 @@ import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.image.ScreenshotTaker;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -64,11 +65,11 @@ import org.omegat.util.gui.UIDesignManager;
 
 public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
-    protected FrameFixture window;
-    protected JFrame frame;
-    private TestMainWindow mainWindow;
+    protected @Nullable FrameFixture window;
+    protected @Nullable JFrame frame;
+    private @Nullable TestMainWindow mainWindow;
 
-    protected File tmpDir;
+    protected @Nullable File tmpDir;
 
     /**
      * Close the project.
@@ -95,33 +96,23 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         CountDownLatch latch = new CountDownLatch(1);
         segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
         openSampleProject(projectPath);
-        try {
-            boolean result = latch.await(5, TimeUnit.SECONDS);
-            if (!result) {
-                fail("Segment properties are not loaded.");
-            }
-        } catch (InterruptedException ignored) {
-            fail("Waiting for segment properties interrupted.");
+        boolean result = latch.await(5, TimeUnit.SECONDS);
+        if (!result) {
+            fail("Segment properties are not loaded.");
         }
     }
 
     /**
      * Open project from the specified path and wait until the dictionary is loaded.
-     * @param projectPath
-     * @throws Exception
      */
     protected void openSampleProjectWaitDictionary(Path projectPath) throws Exception {
         DictionariesTextArea dictionariesTextArea = (DictionariesTextArea) Core.getDictionaries();
         CountDownLatch latch = new CountDownLatch(1);
         dictionariesTextArea.addPropertyChangeListener("displayWords", evt -> latch.countDown());
         openSampleProject(projectPath);
-        try {
-            boolean result = latch.await(5, TimeUnit.SECONDS);
-            if (!result) {
-                fail("Dictionary is not loaded.");
-            }
-        } catch (InterruptedException ignored) {
-            fail("Interrupted for dictionary entry loading.");
+        boolean result = latch.await(5, TimeUnit.SECONDS);
+        if (!result) {
+            fail("Dictionary is not loaded.");
         }
     }
 
@@ -148,8 +139,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     /**
      * Open project from the specified path and wait until the active match is set.
-     * @param projectPath
-     * @throws Exception
      */
     protected void openSampleProjectWaitMatches(Path projectPath) throws Exception {
         MatchesTextArea matchesTextArea = (MatchesTextArea) Core.getMatcher();
@@ -205,21 +194,23 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
     /**
      * Clean up OmegaT main window.
-     * @throws Exception
      */
     @Override
     protected void onTearDown() throws Exception {
         Core.setProject(new NotLoadedProject());
         TestCoreInitializer.initMainWindow(null);
-        mainWindow.getApplicationFrame().setVisible(false);
-        window.cleanUp();
+        if (mainWindow != null) {
+            mainWindow.getApplicationFrame().setVisible(false);
+        }
+        if (window != null) {
+            window.cleanUp();
+        }
     }
 
     private static boolean initialized = false;
 
     /**
      * set up OmegaT main window.
-     * @throws Exception
      */
     @Override
     protected void onSetUp() throws Exception {
@@ -267,9 +258,10 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     }
 
     static IAutoSave autoSave = new IAutoSave() {
+        @Override
         public void enable() {
         }
-
+        @Override
         public void disable() {
         }
     };

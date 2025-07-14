@@ -35,6 +35,7 @@ import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import java.time.ZoneId;
@@ -131,6 +132,7 @@ public class Parameters {
         }
         if (isQuiet) {
             Log.setConsoleLevel(java.util.logging.Level.SEVERE);
+            RuntimePreferences.setQuietMode(true);
         }
         showStartUpLogInfo();
         initializeApp();
@@ -166,28 +168,4 @@ public class Parameters {
         Preferences.initFilters();
         Preferences.initSegmentation();
     }
-
-    public List<String> constructGuiArgs() {
-        List<String> result = new ArrayList<>();
-        if (isQuiet) {
-            result.add(QUIET);
-        }
-        if (verbose) {
-            result.add(VERBOSE);
-        }
-        if (tokenizerSource != null) {
-            result.add(TOKENIZER_SOURCE);
-            result.add(tokenizerSource);
-        }
-        if (tokenizerTarget != null) {
-            result.add(TOKENIZER_TARGET);
-            result.add(tokenizerTarget);
-        }
-        if (scriptName != null) {
-            result.add(SCRIPT);
-            result.add(scriptName);
-        }
-        return result;
-    }
-
 }

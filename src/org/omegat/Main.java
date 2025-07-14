@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import org.omegat.cli.LegacyParameters;
+import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import org.omegat.core.Core;
@@ -63,16 +64,15 @@ public final class Main {
     private Main() {
     }
 
-    private static final LegacyParameters legacyParameters = new LegacyParameters();
-
     public static void main(String[] args) {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("org.omegat.cli.Parameters");
         // construct parser and execute
-        CommandLine commandLine = new CommandLine(legacyParameters);
+        CommandLine commandLine = new CommandLine(new LegacyParameters());
         commandLine.setResourceBundle(resourceBundle);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
         int status = commandLine.execute(args);
         if (status != 0) {
+            // Should not call exit when starting GUI.
             System.exit(status);
         }
     }
@@ -89,7 +89,7 @@ public final class Main {
             command.add("-cp");
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
-            command.addAll(legacyParameters.constructGuiArgs());
+            constructCommandParams(command);
         } else {
             // assumes jpackage
             String installDir = StaticUtils.installDir();
@@ -107,7 +107,7 @@ public final class Main {
                     return;
                 }
                 command.add(javaBin.toString());
-                command.addAll(legacyParameters.constructGuiArgs());
+                constructCommandParams(command);
             }
         }
         if (projectDir != null) {
@@ -122,6 +122,22 @@ public final class Main {
         } catch (IOException e) {
             Log.log(e);
             System.exit(1);
+        }
+    }
+
+    private static void constructCommandParams(List<String> command) {
+        command.add("start");
+        if (RuntimePreferences.isNoTeam()) {
+            command.add("--no-team");
+        }
+        if (RuntimePreferences.isQuietMode()) {
+            command.add("--quiet");
+        }
+        if (RuntimePreferences.getAlternateFilenameFrom() != null && RuntimePreferences.getAlternateFilenameTo() != null) {
+            command.add("--alternate-filename-from");
+            command.add(RuntimePreferences.getAlternateFilenameFrom());
+            command.add("--alternate-filenames-to");
+            command.add(RuntimePreferences.getAlternateFilenameTo());
         }
     }
 }

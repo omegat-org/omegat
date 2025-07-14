@@ -104,7 +104,7 @@ public class CommonVerifications {
      * such tests will rarely get run), or a substantial testing harness, or
      * requires people to manually add tests (which they just won't do).
      *
-     * @throws Exception
+     * @throws Exception if there is missing key in Bundle.
      */
     protected void assertBundleHasAllKeys(String[] targets, ResourceBundle bundle) throws Exception {
         Locale.setDefault(Locale.ENGLISH);
@@ -163,7 +163,7 @@ public class CommonVerifications {
                     throw new Exception("File contains Right-to-Left-Override (RLTO) character: " + p);
                 }
                 if (c == 0x0009 || c == 0x00a0 || c == 0x00ad || c == 0x034f || c == 0x061c
-                        || c >= 0x2000 && c < 0x200b || c == 0x2028 || c >= 0x205f && c <= 0x206f
+                        || (c >= 0x2000 && c < 0x200b) || c == 0x2028 || (c >= 0x205f && c <= 0x206f)
                         || c == 0x2800 || c == 0x3000 || c == 0x3164) {
                     throw new Exception("File contains invisible character: " + p);
                 }

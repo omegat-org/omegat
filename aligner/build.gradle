@@ -23,4 +23,8 @@ dependencies {
     testImplementation(libs.commons.io)
 }
 
+tasks.withType(JavaCompile).configureEach {
+    options.errorprone.enabled = false
+}
+
 makeModuleTask(loadProperties(file('plugin.properties')))

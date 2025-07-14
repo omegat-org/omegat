@@ -51,13 +51,11 @@ public class TranslateCommand implements Callable<Integer> {
     public TranslateCommand() {
     }
 
-    public TranslateCommand(String project) {
-        params = new Parameters();
-        this.project = project;
-    }
-
     @Override
     public Integer call() {
+        if (params == null || legacyParams == null) {
+            return 1;
+        }
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         params.initialize();

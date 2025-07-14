@@ -58,20 +58,15 @@ import org.omegat.util.StaticUtils;
  * @author Kyle Katarn
  * @author Hiroshi Miura
  */
-
 public final class Main {
 
     private Main() {
     }
 
-    @CommandLine.Parameters
-    private static LegacyParameters legacyParameters;
-
     public static void main(String[] args) {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("org.omegat.cli.Parameters");
         // construct parser and execute
-        legacyParameters = new LegacyParameters();
-        CommandLine commandLine = new CommandLine(legacyParameters);
+        CommandLine commandLine = new CommandLine(new LegacyParameters());
         commandLine.setResourceBundle(resourceBundle);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
         commandLine.execute(args);

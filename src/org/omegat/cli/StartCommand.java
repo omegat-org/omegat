@@ -68,12 +68,11 @@ public class StartCommand implements Callable<Integer> {
     public StartCommand() {
     }
 
-    public StartCommand(Parameters params) {
-        this.params = params;
-    }
-
     @Override
     public Integer call() {
+        if (legacyParams == null || params == null) {
+            return 1;
+        }
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         params.initialize();

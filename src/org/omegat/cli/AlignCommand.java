@@ -68,11 +68,6 @@ public class AlignCommand implements Callable<Integer> {
     public AlignCommand() {
     }
 
-    public AlignCommand(String project) {
-        params = new Parameters();
-        this.project = project;
-    }
-
     @Override
     public Integer call() throws Exception {
         legacyParams.initialize();
@@ -85,10 +80,10 @@ public class AlignCommand implements Callable<Integer> {
             } else {
                 status = runConsoleAlign();
             }
-            return(status);
+            return status;
         } catch (Exception e) {
             System.err.println("Failed to align.");
-            return(1);
+            return 1;
         }
     }
 

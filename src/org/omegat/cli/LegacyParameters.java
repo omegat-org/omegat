@@ -143,27 +143,27 @@ public class LegacyParameters implements Callable<Integer> {
      */
     @Override
     public Integer call() {
-        int result;
+        Parameters params = new Parameters();
+        params.initialize();
+        params.setProjectLocation(project);
         if (consoleMode == null) {
-            Parameters params = new Parameters();
-            params.initialize();
-            params.setProjectLocation(project);
-            StartCommand command = new StartCommand(params);
-            result = command.runGUI();
-            if (result != 0) {
-                return result;
-            }
+            StartCommand command = new StartCommand();
+            command.params = params;
+            return command.runGUI();
         } else {
             try {
-                Parameters params = new Parameters();
-                params.initialize();
-                params.setProjectLocation(project);
                 switch (consoleMode) {
                 case ("console-translate"):
-                    TranslateCommand translateCommand = new TranslateCommand(project);
+                    TranslateCommand translateCommand = new TranslateCommand();
+                    translateCommand.params = params;
+                    translateCommand.legacyParams = this;
+                    translateCommand.project = project;
                     return translateCommand.runConsoleTranslate();
                 case ("console-align"):
-                    AlignCommand alignCommand = new AlignCommand(project);
+                    AlignCommand alignCommand = new AlignCommand();
+                    alignCommand.params = params;
+                    alignCommand.legacyParams = this;
+                    alignCommand.project = project;
                     try {
                         return alignCommand.runConsoleAlign();
                     } catch (Exception e) {
@@ -173,7 +173,9 @@ public class LegacyParameters implements Callable<Integer> {
                 case ("console-stats"):
                     params.setStatsOutput(statsOutput);
                     params.setStatsType(statsType);
-                    StatsCommand statsCommand = new StatsCommand(params);
+                    StatsCommand statsCommand = new StatsCommand();
+                    statsCommand.legacyParams = this;
+                    statsCommand.params = params;
                     try {
                         return statsCommand.runConsoleStats();
                     } catch (Exception e) {
@@ -182,6 +184,8 @@ public class LegacyParameters implements Callable<Integer> {
                     return 1;
                 case ("console-createpseudotranslatetmx"):
                     PseudoTranslateCommand pseudoTranslateCommand = new PseudoTranslateCommand();
+                    pseudoTranslateCommand.legacyParameters = this;
+                    pseudoTranslateCommand.params = params;
                     try {
                         return pseudoTranslateCommand.runCreatePseudoTranslateTMX();
                     } catch (Exception e) {
@@ -193,10 +197,9 @@ public class LegacyParameters implements Callable<Integer> {
                     return 1;
                 }
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                return 1;
             }
         }
-        return 1;
     }
 
     public List<String> constructGuiArgs() {

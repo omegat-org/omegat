@@ -66,11 +66,11 @@ public class TeamCommand implements Callable<Integer> {
             Preferences.init();
             PluginUtils.loadPlugins(Collections.emptyMap());
             TeamTool.initTeamProject(new File("").getAbsoluteFile(), sLang, tLang);
-            return(0);
+            return 0;
         } catch (Exception ex) {
             Log.log(ex);
         }
-        return(1);
+        return 1;
     }
 
     @Override

@@ -61,12 +61,11 @@ public class StatsCommand implements Callable<Integer> {
     public StatsCommand() {
     }
 
-    public StatsCommand(Parameters params) {
-        this.params = params;
-    }
-
     @Override
     public Integer call() {
+        if (params == null || legacyParams == null) {
+            return 1;
+        }
         legacyParams.initialize();
         params.initialize();
         params.setStatsOutput(output);
@@ -75,7 +74,7 @@ public class StatsCommand implements Callable<Integer> {
             return runConsoleStats();
         } catch (Exception e) {
             System.err.println("Failed to print stats.");
-            return(1);
+            return 1;
         }
     }
 

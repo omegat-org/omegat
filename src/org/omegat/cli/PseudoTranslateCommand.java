@@ -38,9 +38,10 @@ import picocli.CommandLine;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "pseudo")
-public class PseudoTranslateCommand implements Runnable {
+public class PseudoTranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
     private LegacyParameters legacyParameters;
@@ -49,18 +50,14 @@ public class PseudoTranslateCommand implements Runnable {
     private Parameters params;
 
     @Override
-    public void run() {
+    public Integer call() {
         legacyParameters.initialize();
         params.initialize();
-        int status;
         try {
-            status = runCreatePseudoTranslateTMX();
-            if (status != 0) {
-                System.exit(status);
-            }
+            return runCreatePseudoTranslateTMX();
         } catch (Exception ignored) {
             System.err.println("Failed to create pseudo-translate TMX.");
-            System.exit(1);
+            return 1;
         }
     }
 

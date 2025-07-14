@@ -34,9 +34,10 @@ import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "translate")
-public class TranslateCommand implements Runnable {
+public class TranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
     private LegacyParameters legacyParams;
@@ -56,14 +57,11 @@ public class TranslateCommand implements Runnable {
     }
 
     @Override
-    public void run() {
+    public Integer call() {
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         params.initialize();
-        int status = runConsoleTranslate();
-        if (status != 0) {
-            System.exit(status);
-        }
+        return runConsoleTranslate();
     }
 
     /**

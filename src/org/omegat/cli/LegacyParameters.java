@@ -36,13 +36,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
+import java.util.concurrent.Callable;
 
 import static picocli.CommandLine.Option;
 
 @CommandLine.Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1.0", subcommands = {
         StartCommand.class, AlignCommand.class, TranslateCommand.class, StatsCommand.class, TeamCommand.class,
         CommandLine.HelpCommand.class })
-public class LegacyParameters implements Runnable {
+public class LegacyParameters implements Callable<Integer> {
 
     @CommandLine.Option(names = { "-V", "--version" }, versionHelp = true)
     boolean versionInfoRequested;
@@ -138,7 +139,7 @@ public class LegacyParameters implements Runnable {
      * Default method when launch.
      */
     @Override
-    public void run() {
+    public Integer call() {
         int result;
         if (consoleMode == null) {
             Parameters params = new Parameters();
@@ -147,7 +148,7 @@ public class LegacyParameters implements Runnable {
             StartCommand command = new StartCommand(params);
             result = command.runGUI();
             if (result != 0) {
-                System.exit(result);
+                return result;
             }
         } else {
             try {
@@ -157,57 +158,42 @@ public class LegacyParameters implements Runnable {
                 switch (consoleMode) {
                 case ("console-translate"):
                     TranslateCommand translateCommand = new TranslateCommand(project);
-                    result = translateCommand.runConsoleTranslate();
-                    if (result != 0) {
-                        System.exit(result);
-                    }
-                    break;
+                    return translateCommand.runConsoleTranslate();
                 case ("console-align"):
                     AlignCommand alignCommand = new AlignCommand(project);
                     try {
-                        int status = alignCommand.runConsoleAlign();
-                        if (status != 0) {
-                            System.exit(status);
-                        }
+                        return alignCommand.runConsoleAlign();
                     } catch (Exception e) {
                         System.err.println("Failed to align.");
-                        System.exit(1);
                     }
-                    break;
+                    return 1;
                 case ("console-stats"):
                     params.setStatsOutput(statsOutput);
                     params.setStatsType(statsType);
                     StatsCommand statsCommand = new StatsCommand(params);
                     try {
-                        result = statsCommand.runConsoleStats();
-                        if (result != 0) {
-                            System.exit(result);
-                        }
+                        return statsCommand.runConsoleStats();
                     } catch (Exception e) {
                         System.err.println("Failed to print stats.");
-                        System.exit(1);
                     }
-                    break;
+                    return 1;
                 case ("console-createpseudotranslatetmx"):
                     PseudoTranslateCommand pseudoTranslateCommand = new PseudoTranslateCommand();
                     try {
-                        int status = pseudoTranslateCommand.runCreatePseudoTranslateTMX();
-                        if (status != 0) {
-                            System.exit(status);
-                        }
+                        return pseudoTranslateCommand.runCreatePseudoTranslateTMX();
                     } catch (Exception e) {
                         System.err.println("Failed to create pseudo-translate TMX.");
-                        System.exit(1);
                     }
-                    break;
+                    return 1;
                 default:
                     System.err.println("Unknown console mode: " + consoleMode);
-                    System.exit(1);
+                    return 1;
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
+        return 1;
     }
 
     public List<String> constructGuiArgs() {

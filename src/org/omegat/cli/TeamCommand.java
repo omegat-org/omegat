@@ -32,22 +32,23 @@ import picocli.CommandLine;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 
 /**
  * @author Hiroshi Miura
  */
 @CommandLine.Command(name = "team", description = "Usage: team init <source language> <target language>\\n\\\\tSee --help.")
-public class TeamCommand implements Runnable {
+public class TeamCommand implements Callable<Integer> {
 
     /**
      * define team init sub-subcommand.
      */
     @CommandLine.Command(name = "init")
     @SuppressWarnings("unused")
-    void init(@CommandLine.Parameters(index = "0", paramLabel = "<source>") String sLang,
+    int init(@CommandLine.Parameters(index = "0", paramLabel = "<source>") String sLang,
             @CommandLine.Parameters(index = "1", paramLabel = "<target>") String tLang) {
-        executeInit(sLang, tLang);
+        return executeInit(sLang, tLang);
     }
 
     /**
@@ -58,22 +59,23 @@ public class TeamCommand implements Runnable {
      * @param tLang
      *            target language.
      */
-    private void executeInit(String sLang, String tLang) {
+    private int executeInit(String sLang, String tLang) {
         Log.setLevel(Level.WARNING);
 
         try {
             Preferences.init();
             PluginUtils.loadPlugins(Collections.emptyMap());
             TeamTool.initTeamProject(new File("").getAbsoluteFile(), sLang, tLang);
-            System.exit(0);
+            return(0);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.log(ex);
         }
-        System.exit(1);
+        return(1);
     }
 
     @Override
-    public void run() {
+    public Integer call() {
         CommandLine.usage(this, System.out);
+        return 0;
     }
 }

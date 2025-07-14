@@ -37,9 +37,10 @@ import picocli.CommandLine;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "stats")
-public class StatsCommand implements Runnable {
+public class StatsCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
     private LegacyParameters legacyParams;
@@ -62,21 +63,17 @@ public class StatsCommand implements Runnable {
     }
 
     @Override
-    public void run() {
+    public Integer call() {
         legacyParams.initialize();
         params.initialize();
         params.setStatsOutput(output);
         params.setStatsType(format);
         try {
-            int status = runConsoleStats();
-            if (status != 0) {
-                System.exit(status);
-            }
+            return runConsoleStats();
         } catch (Exception e) {
             System.err.println("Failed to print stats.");
-            System.exit(1);
+            return(1);
         }
-
     }
 
     /**

@@ -35,14 +35,13 @@ import org.omegat.util.TestPreferencesInitializer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 
 import static org.junit.Assert.assertTrue;
 
 public class ConsoleTestsCommon {
 
-    private static Path tmpDir;
-    private static String configDir;
+    private Path tmpDir;
+    private String configDir;
 
     @Before
     public final void setUp() throws Exception {
@@ -50,7 +49,7 @@ public class ConsoleTestsCommon {
         assertTrue(tmpDir.toFile().isDirectory());
         configDir = Files.createDirectory(tmpDir.resolve(".omegat")).toString();
         TestPreferencesInitializer.init(configDir);
-        Core.initializeConsole(Collections.emptyMap());
+        Core.initializeConsole();
     }
 
     @After

@@ -45,12 +45,13 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 /**
  * Start sub-command entry.
  */
 @CommandLine.Command(name = "start")
-public class StartCommand implements Runnable {
+public class StartCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
     private LegacyParameters legacyParams;
@@ -64,22 +65,16 @@ public class StartCommand implements Runnable {
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
 
-    public StartCommand() {
-    }
-
     public StartCommand(Parameters params) {
         this.params = params;
     }
 
     @Override
-    public void run() {
+    public Integer call() {
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         params.initialize();
-        int result = runGUI();
-        if (result != 0) {
-            System.exit(result);
-        }
+        return runGUI();
     }
 
     /**
@@ -100,15 +95,16 @@ public class StartCommand implements Runnable {
         // (like Gnome Shell) recognize OmegaT
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Class<?> cls = toolkit.getClass();
-        try {
             if (cls.getName().equals("sun.awt.X11.XToolkit")) {
-                Field field = cls.getDeclaredField("awtAppClassName");
-                if (field.trySetAccessible()) {
-                    field.set(toolkit, "OmegaT");
+                try {
+                    Field field = cls.getDeclaredField("awtAppClassName");
+                    if (field.trySetAccessible()) {
+                        field.set(toolkit, "OmegaT");
+                    }
+                } catch (NoSuchFieldException | IllegalAccessException ex) {
+                    Log.log(ex);
                 }
             }
-        } catch (Exception ignored) {
-        }
 
         System.setProperty("swing.aatext", "true");
         try {

@@ -45,18 +45,19 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Option;
 
 @Command(name = "align")
-public class AlignCommand implements Runnable {
+public class AlignCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
     private LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    private Parameters params;
+    private final Parameters params;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
     String project;
@@ -70,7 +71,7 @@ public class AlignCommand implements Runnable {
     }
 
     @Override
-    public void run() {
+    public Integer call() throws Exception {
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         params.initialize();
@@ -81,14 +82,11 @@ public class AlignCommand implements Runnable {
             } else {
                 status = runConsoleAlign();
             }
-            if (status != 0) {
-                System.exit(status);
-            }
+            return(status);
         } catch (Exception e) {
             System.err.println("Failed to align.");
-            System.exit(1);
+            return(1);
         }
-
     }
 
     int runConsoleAlign() throws Exception {
@@ -151,4 +149,5 @@ public class AlignCommand implements Runnable {
             return 1;
         }
     }
+
 }

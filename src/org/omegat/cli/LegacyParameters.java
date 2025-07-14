@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import picocli.CommandLine;
@@ -45,11 +46,13 @@ import static picocli.CommandLine.Option;
         CommandLine.HelpCommand.class })
 public class LegacyParameters implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @CommandLine.Option(names = { "-V", "--version" }, versionHelp = true)
-    boolean versionInfoRequested;
+    boolean versionInfoRequested = false;
 
+    @SuppressWarnings("unused")
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
-    boolean usageHelpRequested;
+    boolean usageHelpRequested = false;
 
     // Hide deprecated old command syntax in help message.
     // We can set false for test purpose or backward compatibility.
@@ -57,82 +60,76 @@ public class LegacyParameters implements Callable<Integer> {
 
     public static final String CONFIG_FILE = "--config-file";
     @Option(names = { CONFIG_FILE }, paramLabel = "<path>", descriptionKey = "CONFIG_FILE")
-    String configFile;
+    @Nullable String configFile;
 
     public static final String RESOURCE_BUNDLE = "--resource-bundle";
     @Option(names = { RESOURCE_BUNDLE }, paramLabel = "<bundle>", descriptionKey = "RESOURCE_BUNDLE")
-    String resourceBundle;
+    @Nullable String resourceBundle;
 
     public static final String CONFIG_DIR = "--config-dir";
     @Option(names = { CONFIG_DIR }, paramLabel = "<path>", descriptionKey = "CONFIG_DIR")
-    String configDir;
+    @Nullable String configDir;
 
     public static final String DISABLE_PROJECT_LOCKING = "--disable-project-locking";
     @Option(names = { DISABLE_PROJECT_LOCKING }, descriptionKey = "DISABLE_PROJECT_LOCKING")
-    boolean disableProjectLocking;
+    boolean disableProjectLocking = false;
 
     public static final String DISABLE_LOCATION_SAVE = "--disable-location-save";
     @Option(names = { DISABLE_LOCATION_SAVE }, descriptionKey = "DISABLE_LOCATION_SAVE")
-    boolean disableLocationSave;
+    boolean disableLocationSave = false;
 
     /**
      * CLI parameter to disable team functionality (treat as local project)
      */
     public static final String NO_TEAM = "--no-team";
     @Option(names = { NO_TEAM }, descriptionKey = "NO_TEAM")
-    boolean noTeam;
+    boolean noTeam = false;
 
     // All modes
     public static final String MODE = "--mode";
     @Option(names = {
             MODE }, paramLabel = "<console-mode-name>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "MODE")
-    String consoleMode;
+    @Nullable String consoleMode;
 
     // CONSOLE_TRANSLATE mode
     public static final String SOURCE_PATTERN = "--source-pattern";
     @Option(names = { SOURCE_PATTERN }, hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "SOURCE_PATTERN")
-    String sourcePattern;
+    @Nullable String sourcePattern;
 
     // CONSOLE_CREATEPSEUDOTRANSLATETMX mode
     public static final String PSEUDOTRANSLATETMX = "--pseudotranslatetmx";
     @Option(names = {
             PSEUDOTRANSLATETMX }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "PSEUDO_TRANSLATE_TMX")
-    String pseudoTranslateTmxPath;
+    @Nullable String pseudoTranslateTmxPath;
 
     public static final String PSEUDOTRANSLATETYPE = "--pseudotranslatetype";
     @Option(names = {
             PSEUDOTRANSLATETYPE }, paramLabel = "<equal_or_empty>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "PSEUDO_TRANSLATE_TYPE")
-    String pseudoTranslateTypeName;
+    @Nullable String pseudoTranslateTypeName;
 
     // CONSOLE_ALIGN mode
     public static final String ALIGNDIR = "--alignDir";
     @Option(names = {
             ALIGNDIR }, paramLabel = "<path>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "ALIGN_DIR")
-    String alignDirPath;
+    @Nullable String alignDirPath;
 
     // CONSOLE_STATS mode
     public static final String STATS_OUTPUT = "--output-file";
     public static final String STATS_MODE = "--stats-type";
     @Option(names = {
             STATS_OUTPUT }, paramLabel = "<stats-output-file>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "OUTPUT_FILE")
-    String statsOutput;
+    @Nullable String statsOutput;
     @Option(names = {
             STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = HIDE_DEPRECATED_OPTIONS, descriptionKey = "STATS_TYPE")
-    String statsType;
-
-    public void setStatsOutput(String statsOutput) {
-        this.statsOutput = statsOutput;
-    }
-
-    public void setStatsType(String statsType) {
-        this.statsType = statsType;
-    }
+    @Nullable String statsType;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE, arity = "0..1")
-    String project;
+    @Nullable String project;
 
     public void initialize() {
-        applyConfigFile(configFile);
+        if (configFile != null) {
+            applyConfigFile(configFile);
+        }
     }
 
     /**
@@ -142,7 +139,9 @@ public class LegacyParameters implements Callable<Integer> {
     public Integer call() {
         Parameters params = new Parameters();
         params.initialize();
-        params.setProjectLocation(project);
+        if (project != null) {
+            params.setProjectLocation(project);
+        }
         if (consoleMode == null) {
             StartCommand command = new StartCommand();
             command.params = params;
@@ -150,47 +149,56 @@ public class LegacyParameters implements Callable<Integer> {
         } else {
             try {
                 switch (consoleMode) {
-                case ("console-translate"):
+                case "console-translate":
                     TranslateCommand translateCommand = new TranslateCommand();
                     translateCommand.params = params;
                     translateCommand.legacyParams = this;
-                    translateCommand.project = project;
+                    if (project != null) {
+                        translateCommand.project = project;
+                    }
                     return translateCommand.runConsoleTranslate();
-                case ("console-align"):
+                case "console-align":
                     AlignCommand alignCommand = new AlignCommand();
                     alignCommand.params = params;
                     alignCommand.legacyParams = this;
-                    alignCommand.project = project;
+                    if (project != null) {
+                        alignCommand.project = project;
+                    }
                     try {
                         return alignCommand.runConsoleAlign();
                     } catch (Exception e) {
-                        System.err.println("Failed to align.");
+                        Log.logErrorRB(e, "CT_ERROR_ALIGNING_PROJECT", alignDirPath == null ? "" : alignDirPath);
                     }
                     return 1;
-                case ("console-stats"):
-                    params.setStatsOutput(statsOutput);
-                    params.setStatsType(statsType);
+                case "console-stats":
                     StatsCommand statsCommand = new StatsCommand();
                     statsCommand.legacyParams = this;
+                    if (statsOutput != null) {
+                        params.setStatsOutput(statsOutput);
+                    }
+                    if (statsType != null) {
+                        params.setStatsType(statsType);
+                    }
                     statsCommand.params = params;
                     try {
                         return statsCommand.runConsoleStats();
-                    } catch (Exception e) {
-                        System.err.println("Failed to print stats.");
+                    } catch (Exception ex) {
+                        Log.logErrorRB(ex, "CT_ERROR_PRINTING_STATS");
                     }
                     return 1;
-                case ("console-createpseudotranslatetmx"):
+                case "console-createpseudotranslatetmx":
                     PseudoTranslateCommand pseudoTranslateCommand = new PseudoTranslateCommand();
                     pseudoTranslateCommand.legacyParameters = this;
                     pseudoTranslateCommand.params = params;
                     try {
                         return pseudoTranslateCommand.runCreatePseudoTranslateTMX();
-                    } catch (Exception e) {
-                        System.err.println("Failed to create pseudo-translate TMX.");
+                    } catch (Exception ex) {
+                        Log.logErrorRB(ex, "CT_ERROR_CREATING_PSEUDO_TRANSLATE_TMX",
+                                pseudoTranslateTmxPath == null ? "" : pseudoTranslateTmxPath);
                     }
                     return 1;
                 default:
-                    System.err.println("Unknown console mode: " + consoleMode);
+                    Log.logErrorRB("CT_ERROR_UNKNOWN_CONSOLE_MODE", consoleMode);
                     return 1;
                 }
             } catch (Exception e) {
@@ -231,7 +239,7 @@ public class LegacyParameters implements Callable<Integer> {
         if (!configFile.exists()) {
             return;
         }
-        System.out.println("Reading config from " + path);
+        Log.logInfoRB("CONSOLE_LOADING_CONFIG_FILE", path);
         try (FileInputStream in = new FileInputStream(configFile)) {
             PropertyResourceBundle config = new PropertyResourceBundle(in);
             // Put config properties into System properties and into OmegaT
@@ -239,7 +247,7 @@ public class LegacyParameters implements Callable<Integer> {
             for (String key : config.keySet()) {
                 String value = config.getString(key);
                 System.setProperty(key, value);
-                System.out.println("Read from config: " + key + "=" + value);
+                Log.logInfoRB("CONSOLE_CONFIG_PROPERTY", key, value);
             }
             // Apply language preferences, if present.
             // This must be done with Locale.setDefault(). Merely doing
@@ -252,9 +260,9 @@ public class LegacyParameters implements Callable<Integer> {
                 Locale.setDefault(userLocale);
             }
         } catch (FileNotFoundException exception) {
-            System.err.println("Config file not found: " + path);
+            Log.logErrorRB("CT_ERROR_CONFIG_FILE_NOT_FOUND", path);
         } catch (IOException exception) {
-            System.err.println("Error while reading config file: " + path);
+            Log.logErrorRB("CT_ERROR_READING_CONFIG_FILE", path);
         }
     }
 }

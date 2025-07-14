@@ -69,7 +69,8 @@ public final class Main {
         CommandLine commandLine = new CommandLine(new LegacyParameters());
         commandLine.setResourceBundle(resourceBundle);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
-        commandLine.execute(args);
+        int status = commandLine.execute(args);
+        System.exit(status);
     }
 
     public static void restartGUI(String projectDir) {

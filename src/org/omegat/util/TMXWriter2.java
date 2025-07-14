@@ -58,7 +58,7 @@ import org.omegat.core.data.ITMXEntry;
 
 /**
  * Helper for write TMX files, using StAX.
- *
+ * <p>
  * We can't use JAXB for writing because it changes spaces on formatted output.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -210,8 +210,9 @@ public class TMXWriter2 implements AutoCloseable {
                 entry.getChanger(), entry.getChangeDate(), propValues);
     }
 
-    public void writeEntry(@Nullable String source, @Nullable String translation, @Nullable String note, String creator,
-                           long creationDate, String changer, long changeDate, @Nullable List<String> propValues)
+    public void writeEntry(@Nullable String source, @Nullable String translation, @Nullable String note,
+                           @Nullable String creator, long creationDate, @Nullable String changer, long changeDate,
+                           @Nullable List<String> propValues)
             throws Exception {
         if (source == null && translation == null) {
             throw new NullPointerException(
@@ -370,7 +371,7 @@ public class TMXWriter2 implements AutoCloseable {
 
     enum TAG_TYPE {
         SINGLE, START, END
-    };
+    }
 
     private void writeLevelTwo(String segment) throws Exception {
         xml.writeCharacters("        ");
@@ -379,10 +380,7 @@ public class TMXWriter2 implements AutoCloseable {
         TAG_TYPE tagType;
         int pos = 0;
         Matcher m = TAGS_ANY.matcher(segment);
-        while (true) {
-            if (!m.find(pos)) {
-                break;
-            }
+        while (m.find(pos)) {
             xml.writeCharacters(segment.substring(pos, m.start()));
             pos = m.end();
 

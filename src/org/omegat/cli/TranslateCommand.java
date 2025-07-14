@@ -25,11 +25,11 @@
 
 package org.omegat.cli;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
@@ -40,13 +40,13 @@ import java.util.concurrent.Callable;
 public class TranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    LegacyParameters legacyParams;
+    @Nullable LegacyParameters legacyParams;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
-    String project;
+    @Nullable String project;
 
     @CommandLine.Mixin
-    Parameters params;
+    @Nullable Parameters params;
 
     @Override
     public Integer call() {
@@ -63,20 +63,23 @@ public class TranslateCommand implements Callable<Integer> {
      * Execute in console mode for translate.
      */
     int runConsoleTranslate() {
+        if (params == null || legacyParams == null) {
+            return 1;
+        }
         Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         if (params.noTeam) {
             RuntimePreferences.setNoTeam();
         }
 
-        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
+        Log.logInfoRB("CONSOLE_INITIALIZING");
         Core.initializeConsole();
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
 
         Common.validateTagsConsoleMode(params);
 
-        System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
+        Log.logInfoRB("CONSOLE_TRANSLATING");
 
         try {
             String sourceMask = legacyParams.sourcePattern;
@@ -92,7 +95,7 @@ public class TranslateCommand implements Callable<Integer> {
 
         p.closeProject();
         Common.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE, params);
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
+        Log.logInfoRB("CONSOLE_FINISHED");
 
         return 0;
     }

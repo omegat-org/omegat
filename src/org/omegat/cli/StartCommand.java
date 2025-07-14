@@ -25,6 +25,8 @@
 
 package org.omegat.cli;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.filters2.master.PluginUtils;
@@ -54,16 +56,16 @@ import java.util.concurrent.Callable;
 public class StartCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    LegacyParameters legacyParams;
+    @Nullable LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    Parameters params;
+    @Nullable Parameters params;
 
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
-    boolean usageHelpRequested;
+    boolean usageHelpRequested = false;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
-    String project;
+    @Nullable String project;
 
     @Override
     public Integer call() {
@@ -120,9 +122,8 @@ public class StartCommand implements Callable<Integer> {
                     OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
 
-        if (params != null && params.alternateFilenameFrom != null) {
-            RuntimePreferences.setAlternateFilenames(params.alternateFilenameFrom,
-                    params.alternateFilenameTo);
+        if (params != null && params.alternateFilenameFrom != null && params.alternateFilenameTo != null) {
+            RuntimePreferences.setAlternateFilenames(params.alternateFilenameFrom, params.alternateFilenameTo);
         }
 
         CoreEvents.fireApplicationStartup();
@@ -132,7 +133,7 @@ public class StartCommand implements Callable<Integer> {
             // call all application startup listeners for initialize UI
             Core.getMainWindow().getApplicationFrame().setVisible(true);
             //
-            if (params != null) {
+            if (params != null && params.projectLocation != null) {
                 if (isProjectRemote(params.projectLocation)) {
                     ProjectUICommands.projectRemote(params.projectLocation);
                 } else if (params.projectLocation != null) {
@@ -147,9 +148,8 @@ public class StartCommand implements Callable<Integer> {
         return 0;
     }
 
-    private boolean isProjectRemote(String project) {
-        return project != null && project.startsWith("http://")
-                || project != null && project.startsWith("https://");
+    private boolean isProjectRemote(@NotNull String project) {
+        return project.startsWith("http://") || project.startsWith("https://");
     }
 
     private void showError(Throwable ex) {

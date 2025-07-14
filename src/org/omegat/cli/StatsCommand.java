@@ -25,6 +25,7 @@
 
 package org.omegat.cli;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.statistics.CalcStandardStatistics;
@@ -37,26 +38,27 @@ import picocli.CommandLine;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.Locale;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "stats")
 public class StatsCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    LegacyParameters legacyParams;
+    @Nullable LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    Parameters params;
+    @Nullable Parameters params;
 
     @CommandLine.Option(names = {
             "type" }, paramLabel = "<xml_or_text_or_json>", defaultValue = "xml", descriptionKey = "STATS_TYPE")
-    String format;
+    @Nullable String format;
     @CommandLine.Option(names = {
             "output" }, paramLabel = "<stats-output-file>", descriptionKey = "OUTPUT_FILE")
-    String output;
+    @Nullable String output;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
-    String project;
+    @Nullable String project;
 
     @Override
     public Integer call() {
@@ -65,12 +67,16 @@ public class StatsCommand implements Callable<Integer> {
         }
         legacyParams.initialize();
         params.initialize();
-        params.setStatsOutput(output);
-        params.setStatsType(format);
+        if (output != null) {
+            params.setStatsOutput(output);
+        }
+        if (format != null) {
+            params.setStatsType(format);
+        }
         try {
             return runConsoleStats();
         } catch (Exception e) {
-            System.err.println("Failed to print stats.");
+            Log.logErrorRB(e, "CT_ERROR_PRINTING_STATS");
             return 1;
         }
     }
@@ -85,30 +91,31 @@ public class StatsCommand implements Callable<Integer> {
      * return 1.
      */
     int runConsoleStats() {
+        if (params == null || legacyParams == null) {
+            return 1;
+        }
         Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
 
         Core.initializeConsole();
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
+        StatOutputFormat statsMode;
+        String outputFilename = params.statsOutput;
 
-        if (params.statsOutput == null) {
+        if (outputFilename == null) {
             // no output file specified, print to console.
             System.out.println(projectStats.getTextData());
             p.closeProject();
             return 0;
-        }
-
-        String outputFilename = params.statsOutput;
-        StatOutputFormat statsMode;
-        if (params.statsType == null) {
+        } else if (params.statsType == null) {
             // when no stats type specified, try to detect from file extension,
             // otherwise XML.
-            if (outputFilename.toLowerCase().endsWith(StatOutputFormat.JSON.getFileExtension())) {
+            if (outputFilename.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.JSON.getFileExtension())) {
                 statsMode = StatOutputFormat.JSON;
-            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.XML.getFileExtension())) {
+            } else if (outputFilename.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.XML.getFileExtension())) {
                 statsMode = StatOutputFormat.XML;
-            } else if (outputFilename.toLowerCase().endsWith(StatOutputFormat.TEXT.getFileExtension())) {
+            } else if (outputFilename.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.TEXT.getFileExtension())) {
                 statsMode = StatOutputFormat.TEXT;
             } else {
                 statsMode = StatOutputFormat.XML;

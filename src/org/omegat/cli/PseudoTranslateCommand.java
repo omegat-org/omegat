@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
@@ -44,19 +45,23 @@ import java.util.concurrent.Callable;
 public class PseudoTranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    LegacyParameters legacyParameters;
+    @Nullable LegacyParameters legacyParameters;
 
     @CommandLine.Mixin
-    Parameters params;
+    @Nullable Parameters params;
 
     @Override
     public Integer call() {
+        if (params == null || legacyParameters == null) {
+            return 1;
+        }
         legacyParameters.initialize();
         params.initialize();
         try {
             return runCreatePseudoTranslateTMX();
-        } catch (Exception ignored) {
-            System.err.println("Failed to create pseudo-translate TMX.");
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "CT_ERROR_CREATING_PSEUDO_TRANSLATE_TMX",
+                    params.projectLocation == null ? "" : params.projectLocation);
             return 1;
         }
     }
@@ -65,16 +70,19 @@ public class PseudoTranslateCommand implements Callable<Integer> {
      * Execute in console mode for translate.
      */
     int runCreatePseudoTranslateTMX() throws Exception {
+        if (params == null || legacyParameters == null) {
+            return 1;
+        }
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
-        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
+        Log.logInfoRB("CONSOLE_INITIALIZING");
         Core.initializeConsole();
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
 
         Common.validateTagsConsoleMode(params);
 
-        System.out.println(OStrings.getString("CONSOLE_CREATE_PSEUDOTMX"));
+        Log.logInfoRB("CONSOLE_CREATE_PSEUDOTMX");
 
         ProjectProperties config = p.getProjectProperties();
         List<SourceTextEntry> entries = p.getAllEntries();
@@ -82,7 +90,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
         String pseudoTranslateType = legacyParameters.pseudoTranslateTypeName;
 
         String fname;
-        if (!StringUtil.isEmpty(pseudoTranslateTMXFilename)) {
+        if (pseudoTranslateTMXFilename != null && !StringUtil.isEmpty(pseudoTranslateTMXFilename)) {
             if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
                 fname = pseudoTranslateTMXFilename + "." + OConsts.TMX_EXTENSION;
             } else {
@@ -97,18 +105,17 @@ public class PseudoTranslateCommand implements Callable<Integer> {
                 config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), false, false)) {
             for (SourceTextEntry ste : entries) {
                 if ("equal".equalsIgnoreCase(pseudoTranslateType)) {
-                    wr.writeEntry(ste.getSrcText(), ste.getSrcText(), null, null, 0, null, 0, null);
+                    wr.writeEntry(ste.getSrcText(), ste.getSrcText(), "", "", 0, "", 0, null);
                 } else if ("empty".equalsIgnoreCase(pseudoTranslateType)) {
-                    wr.writeEntry(ste.getSrcText(), "", null, null, 0, null, 0, null);
+                    wr.writeEntry(ste.getSrcText(), "", "", "", 0, "", 0, null);
                 }
             }
         } catch (IOException e) {
-            Log.logErrorRB("CT_ERROR_CREATING_TMX");
-            Log.log(e);
+            Log.logErrorRB(e, "CT_ERROR_CREATING_TMX");
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
         }
         p.closeProject();
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
+        Log.logInfoRB("CONSOLE_FINISHED");
         return 0;
     }
 

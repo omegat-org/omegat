@@ -25,6 +25,7 @@
 
 package org.omegat.cli;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
@@ -34,8 +35,6 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.UIDesignManager;
 import picocli.CommandLine;
@@ -54,19 +53,22 @@ import static picocli.CommandLine.Option;
 public class AlignCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    LegacyParameters legacyParams;
+    @Nullable LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    Parameters params;
+    @Nullable Parameters params;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
-    String project;
+    @Nullable String project;
 
     @Option(names = { "-G", "--gui" }, versionHelp = true)
-    boolean startGUI;
+    boolean startGUI = false;
 
     @Override
     public Integer call() throws Exception {
+        if (params == null || legacyParams == null) {
+            return 1;
+        }
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         params.initialize();
@@ -86,25 +88,27 @@ public class AlignCommand implements Callable<Integer> {
 
     int runConsoleAlign() throws Exception {
         Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
+        if (params == null || legacyParams == null) {
+            return 1;
+        }
 
         if (params.projectLocation == null) {
-            System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
+            Log.logErrorRB("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
             return 1;
         }
 
         if (legacyParams.alignDirPath == null) {
-            System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
+            Log.logErrorRB("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED");
             return 1;
         }
 
-        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
+        Log.logInfoRB("CONSOLE_INITIALIZING");
         Core.initializeConsole();
         RealProject p = Common.selectProjectConsoleMode(true, params);
 
         Common.validateTagsConsoleMode(params);
 
-        System.out.println(
-                StringUtil.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), legacyParams.alignDirPath));
+        Log.logInfoRB("CONSOLE_ALIGN_AGAINST", legacyParams.alignDirPath);
 
         String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
         ProjectProperties config = p.getProjectProperties();
@@ -115,11 +119,14 @@ public class AlignCommand implements Callable<Integer> {
                     alt);
         }
         p.closeProject();
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
+        Log.logInfoRB("CONSOLE_FINISHED");
         return 0;
     }
 
     int runGUIAligner() {
+        if (params == null) {
+            return 1;
+        }
         String dir = params.projectLocation;
         try {
             UIDesignManager.initialize();

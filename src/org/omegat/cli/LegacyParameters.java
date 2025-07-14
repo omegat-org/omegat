@@ -131,9 +131,6 @@ public class LegacyParameters implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE, arity = "0..1")
     String project;
 
-    public LegacyParameters() {
-    }
-
     public void initialize() {
         applyConfigFile(configFile);
     }

@@ -58,9 +58,6 @@ public class StatsCommand implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
 
-    public StatsCommand() {
-    }
-
     @Override
     public Integer call() {
         if (params == null || legacyParams == null) {

@@ -49,9 +49,6 @@ public class PseudoTranslateCommand implements Callable<Integer> {
     @CommandLine.Mixin
     Parameters params;
 
-    public PseudoTranslateCommand() {
-    }
-
     @Override
     public Integer call() {
         legacyParameters.initialize();

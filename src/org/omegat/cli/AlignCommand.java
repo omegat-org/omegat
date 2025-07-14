@@ -65,9 +65,6 @@ public class AlignCommand implements Callable<Integer> {
     @Option(names = { "-G", "--gui" }, versionHelp = true)
     boolean startGUI;
 
-    public AlignCommand() {
-    }
-
     @Override
     public Integer call() throws Exception {
         legacyParams.initialize();

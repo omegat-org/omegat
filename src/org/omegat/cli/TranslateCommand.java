@@ -48,9 +48,6 @@ public class TranslateCommand implements Callable<Integer> {
     @CommandLine.Mixin
     Parameters params;
 
-    public TranslateCommand() {
-    }
-
     @Override
     public Integer call() {
         if (params == null || legacyParams == null) {

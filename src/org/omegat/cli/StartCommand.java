@@ -65,9 +65,6 @@ public class StartCommand implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
 
-    public StartCommand() {
-    }
-
     @Override
     public Integer call() {
         if (legacyParams == null || params == null) {

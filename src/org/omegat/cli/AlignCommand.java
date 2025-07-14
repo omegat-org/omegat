@@ -54,16 +54,19 @@ import static picocli.CommandLine.Option;
 public class AlignCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    private LegacyParameters legacyParams;
+    LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    private final Parameters params;
+    Parameters params;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = Option.NULL_VALUE)
     String project;
 
     @Option(names = { "-G", "--gui" }, versionHelp = true)
     boolean startGUI;
+
+    public AlignCommand() {
+    }
 
     public AlignCommand(String project) {
         params = new Parameters();

@@ -54,16 +54,19 @@ import java.util.concurrent.Callable;
 public class StartCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    private LegacyParameters legacyParams;
+    LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    private Parameters params;
+    Parameters params;
 
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
     boolean usageHelpRequested;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
+
+    public StartCommand() {
+    }
 
     public StartCommand(Parameters params) {
         this.params = params;

@@ -44,10 +44,13 @@ import java.util.concurrent.Callable;
 public class PseudoTranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    private LegacyParameters legacyParameters;
+    LegacyParameters legacyParameters;
 
     @CommandLine.Mixin
-    private Parameters params;
+    Parameters params;
+
+    public PseudoTranslateCommand() {
+    }
 
     @Override
     public Integer call() {

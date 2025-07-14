@@ -43,10 +43,10 @@ import java.util.concurrent.Callable;
 public class StatsCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    private LegacyParameters legacyParams;
+    LegacyParameters legacyParams;
 
     @CommandLine.Mixin
-    private Parameters params;
+    Parameters params;
 
     @CommandLine.Option(names = {
             "type" }, paramLabel = "<xml_or_text_or_json>", defaultValue = "xml", descriptionKey = "STATS_TYPE")
@@ -57,6 +57,9 @@ public class StatsCommand implements Callable<Integer> {
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
+
+    public StatsCommand() {
+    }
 
     public StatsCommand(Parameters params) {
         this.params = params;

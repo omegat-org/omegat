@@ -40,13 +40,13 @@ import java.util.concurrent.Callable;
 public class TranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
-    private LegacyParameters legacyParams;
+    LegacyParameters legacyParams;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
     String project;
 
     @CommandLine.Mixin
-    private Parameters params;
+    Parameters params;
 
     public TranslateCommand() {
     }

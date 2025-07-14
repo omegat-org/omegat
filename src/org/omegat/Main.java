@@ -63,14 +63,18 @@ public final class Main {
     private Main() {
     }
 
+    private static final LegacyParameters legacyParameters = new LegacyParameters();
+
     public static void main(String[] args) {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("org.omegat.cli.Parameters");
         // construct parser and execute
-        CommandLine commandLine = new CommandLine(new LegacyParameters());
+        CommandLine commandLine = new CommandLine(legacyParameters);
         commandLine.setResourceBundle(resourceBundle);
         commandLine.setExecutionStrategy(new CommandLine.RunLast());
         int status = commandLine.execute(args);
-        System.exit(status);
+        if (status != 0) {
+            System.exit(status);
+        }
     }
 
     public static void restartGUI(String projectDir) {
@@ -85,6 +89,7 @@ public final class Main {
             command.add("-cp");
             command.add(runtimeMxBean.getClassPath());
             command.add(Main.class.getName());
+            command.addAll(legacyParameters.constructGuiArgs());
         } else {
             // assumes jpackage
             String installDir = StaticUtils.installDir();
@@ -102,6 +107,7 @@ public final class Main {
                     return;
                 }
                 command.add(javaBin.toString());
+                command.addAll(legacyParameters.constructGuiArgs());
             }
         }
         if (projectDir != null) {

@@ -36,6 +36,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
@@ -44,6 +45,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
@@ -55,11 +58,17 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProjectTest;
 import org.omegat.filters.TestFilterBase;
 
 /**
+ * This class contains unit tests for the TMXWriter functionality. It verifies the proper behavior
+ * of TMXWriter2 in handling various scenarios such as writing entries, handling invalid characters,
+ * preserving end-of-line markers, and managing level 2 TMX entries.
+ * <p>
+ * The tests ensure compliance with TMX standards and correct handling of different configurations.
+ * The class uses XMLUnit for XML comparisons and manipulates TMX data files for testing purposes.
+ *
  * @author Alex Buloichik
  */
 public class TMXWriterTest extends TestFilterBase {
@@ -94,7 +103,7 @@ public class TMXWriterTest extends TestFilterBase {
         wr.writeEntry(in, "test", RealProjectTest.createEmptyTMXEntry(), null);
         wr.close();
 
-        load(new ArrayList<String>(), null, false, false);
+        load(new ArrayList<>(), null, false, false);
     }
 
     @Test
@@ -114,7 +123,7 @@ public class TMXWriterTest extends TestFilterBase {
 
     @Test
     public void testLevel2reads() throws Exception {
-        final List<String> sources = new ArrayList<String>();
+        final List<String> sources = new ArrayList<>();
 
         // patch for 'OmegaT' tmx
         setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "OmegaT", outFile);
@@ -189,8 +198,14 @@ public class TMXWriterTest extends TestFilterBase {
     private void setCreationTool(File in, String tool, File out) throws Exception {
         XPathExpression exprTool = XPathFactory.newInstance().newXPath().compile("/tmx/header/@creationtool");
 
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(getClass().getResource("/schemas/tmx14.xsd"));
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
+        factory.setSchema(schema);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
         DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
 
@@ -215,27 +230,14 @@ public class TMXWriterTest extends TestFilterBase {
             translations.clear();
         }
         new TMXReader2().readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, false,
-                extLevel2, useSlash, new TMXReader2.LoadCallback() {
-                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
-                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-                        if (sources != null) {
-                            sources.add(tuvSource.text);
-                        }
-                        if (translations != null) {
-                            translations.add(tuvTarget.text);
-                        }
-                        return true;
+                extLevel2, useSlash, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                    if (sources != null) {
+                        sources.add(tuvSource.text);
                     }
+                    if (translations != null) {
+                        translations.add(tuvTarget.text);
+                    }
+                    return true;
                 });
-    }
-
-    static int tagNumber = 0;
-    static boolean closeTag, standAloneTag;
-
-    /**
-     * ProjectProperties successor for create project without directory.
-     */
-    protected static class ProjectPropertiesTest extends ProjectProperties {
-
     }
 }

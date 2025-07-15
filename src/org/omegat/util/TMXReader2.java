@@ -28,11 +28,34 @@
  **************************************************************************/
 package org.omegat.util;
 
+import org.apache.commons.io.input.XmlStreamReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import javax.xml.XMLConstants;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLResolver;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -45,36 +68,24 @@ import java.util.TimeZone;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
-import javax.xml.namespace.QName;
-import javax.xml.stream.Location;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLReporter;
-import javax.xml.stream.XMLResolver;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.Characters;
-import javax.xml.stream.events.EndElement;
-import javax.xml.stream.events.StartElement;
-import javax.xml.stream.events.XMLEvent;
-
-import org.apache.commons.io.input.XmlStreamReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.InputSource;
+import static javax.xml.stream.XMLInputFactory.IS_NAMESPACE_AWARE;
+import static javax.xml.stream.XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES;
+import static javax.xml.stream.XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES;
+import static javax.xml.stream.XMLInputFactory.IS_VALIDATING;
+import static javax.xml.stream.XMLInputFactory.SUPPORT_DTD;
 
 /**
  * Helper for read TMX files, using StAX.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
- * @see <a href="http://www.ttt.org/oscarStandards/tmx/tmx14b.html">TMX 1.4b
- *      specification</a>
+ * @see <a href="https://www.gala-global.org/tmx-14b">TMX1.4b specification</a>
  */
 public class TMXReader2 {
 
-    private final XMLInputFactory factory;
-    private final SimpleDateFormat dateFormat1, dateFormat2, dateFormatOut;
+    private final XMLInputFactory inputFactory;
+    private final SchemaFactory schemaFactory;
+    private final SimpleDateFormat dateFormat1;
+    private final SimpleDateFormat dateFormat2;
 
     /** Segment Type attribute value: "paragraph" */
     public static final String SEG_PARAGRAPH = "paragraph";
@@ -114,23 +125,25 @@ public class TMXReader2 {
     }
 
     public TMXReader2() {
-        factory = XMLInputFactory.newInstance();
-        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
-        factory.setXMLReporter(new XMLReporter() {
-            public void report(String message, String errorType, Object info, Location location)
-                    throws XMLStreamException {
-                Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(),
-                        location.getColumnNumber());
-                Log.log(StringUtil.format("{0}: {1}", message, info));
-                warningsCount++;
-            }
+        // initialize input factory.
+        inputFactory = XMLInputFactory.newFactory();
+        inputFactory.setProperty(IS_NAMESPACE_AWARE, false);
+        inputFactory.setProperty(IS_VALIDATING, false);
+        inputFactory.setProperty(SUPPORT_DTD, false);
+        inputFactory.setProperty(IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+        inputFactory.setProperty(IS_REPLACING_ENTITY_REFERENCES, false);
+
+        inputFactory.setXMLReporter((message, errorType, info, location) -> {
+            Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(), location.getColumnNumber());
+            Log.log(StringUtil.format("{0}: {1}", message, info));
+            warningsCount++;
         });
-        factory.setXMLResolver(TMX_DTD_RESOLVER_2);
+        schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         dateFormat1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
         dateFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
         dateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
         dateFormat2.setTimeZone(TimeZone.getTimeZone("UTC"));
-        dateFormatOut = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
+        SimpleDateFormat dateFormatOut = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
         dateFormatOut.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
@@ -148,17 +161,24 @@ public class TMXReader2 {
         this.useSlash = useSlash;
         this.isSegmentingEnabled = isSegmentingEnabled;
 
+        if (forceOmegaTMX) {
+            Validator validator = getValidator(forceOmegaTMX);
+            validator.validate(new StreamSource(getInputStream(file)));
+        } else {
+            inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
+            inputFactory.setProperty(IS_VALIDATING, true);
+        }
+
         // log the parsing attempt
         Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
 
         boolean allFound = true;
 
         try (InputStream in = getInputStream(file)) {
-            xml = factory.createXMLEventReader(in);
+            xml = inputFactory.createXMLEventReader(in);
             while (xml.hasNext()) {
                 XMLEvent e = xml.nextEvent();
-                switch (e.getEventType()) {
-                case XMLEvent.START_ELEMENT:
+                if (e.getEventType() == XMLEvent.START_ELEMENT) {
                     StartElement eStart = (StartElement) e;
                     if ("tu".equals(eStart.getName().getLocalPart())) {
                         parseTu(eStart);
@@ -169,7 +189,6 @@ public class TMXReader2 {
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
                         parseHeader(eStart, sourceLanguage);
                     }
-                    break;
                 }
             }
         } catch (XMLStreamException ex) {
@@ -189,6 +208,25 @@ public class TMXReader2 {
         Log.logInfoRB("TMXR_INFO_READING_COMPLETE");
         if (errorsCount > 0 || warningsCount > 0) {
             LOGGER.atDebug().log("Errors: {}, Warnings: {}", errorsCount, warningsCount);
+        }
+    }
+
+    private Validator getValidator(boolean forceOmegaTMX) throws SAXException {
+
+        String schemaPath = forceOmegaTMX ? "/schemas/tmx11.xsd" : "/schemas/tmx14.xsd";
+
+        // Check if a resource exists
+        URL schemaUrl = getClass().getResource(schemaPath);
+        if (schemaUrl == null) {
+            throw new SAXException("Schema resource not found: " + schemaPath);
+        }
+        try {
+            Validator validator;
+            Schema schema = schemaFactory.newSchema(schemaUrl);
+            validator = schema.newValidator();
+            return validator;
+        } catch (SAXException ex) {
+            throw new SAXException("Failed to create validator: " + ex.getMessage(), ex);
         }
     }
 
@@ -662,17 +700,17 @@ public class TMXReader2 {
         public String creationid;
         public long creationdate;
         public String note;
-        public List<TMXProp> props = new ArrayList<TMXProp>();
-        public List<ParsedTuv> tuvs = new ArrayList<ParsedTuv>();
+        public List<TMXProp> props = new ArrayList<>();
+        public List<ParsedTuv> tuvs = new ArrayList<>();
 
         void clear() {
             changeid = null;
             changedate = 0;
             creationid = null;
             creationdate = 0;
-            props = new ArrayList<TMXProp>(); // do not CLEAR, because it may be
-                                              // shared
-            tuvs = new ArrayList<ParsedTuv>();
+            props = new ArrayList<>(); // do not CLEAR, because it may be
+                                       // shared
+            tuvs = new ArrayList<>();
             note = null;
         }
     }

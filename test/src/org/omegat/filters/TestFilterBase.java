@@ -42,8 +42,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -443,8 +446,11 @@ public abstract class TestFilterBase extends TestCore {
      * Remove a version and tool name, then compare.
      */
     protected void compareTMX(File f1, File f2) throws Exception {
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = sf.newSchema(getClass().getResource("/schemas/tmx14.xsd"));
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
+        factory.setSchema(schema);
         factory.setValidating(false);
         factory.setFeature("http://xml.org/sax/features/namespaces", true);
         factory.setFeature("http://xml.org/sax/features/validation", false);

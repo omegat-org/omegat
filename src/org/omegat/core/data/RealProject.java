@@ -641,9 +641,38 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
+        exportTMXs();
         Pattern filePattern = Pattern.compile(sourcePattern);
-        String fname;
+        int numberOfCompiled = compileMatchingFiles(filePattern);
 
+        // COMPILE event is fired before committing translated files to remote
+        // repository to be able to modify the resulting files before sending
+        // them to the repository (BUGS#1176)
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+        if (shouldCommitToRepository(commitTargetFiles)) {
+            commitToRepository();
+        }
+        displayCompilationResult(numberOfCompiled);
+        if (doPostProcessing) {
+            // Kill any processes still not complete
+            flushProcessCache();
+
+            if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+                doExternalCommand(config.getExternalCommand());
+            }
+            doExternalCommand(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
+        }
+
+        Log.logInfoRB("LOG_DATAENGINE_COMPILE_END");
+    }
+
+    private boolean shouldCommitToRepository(boolean commitTargetFiles) {
+        return remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot()
+                && commitTargetFiles && isOnlineMode;
+    }
+
+    private void exportTMXs() throws IOException {
+        String fname;
         // Build TMX files specified as output TMXs in the config file
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
@@ -670,31 +699,25 @@ public class RealProject implements IProject {
                 projectTMX.exportTMX(config, new File(fname), false, true, false);
             }
         } catch (Exception e) {
-            Log.logErrorRB("CT_ERROR_CREATING_TMX");
-            Log.log(e);
+            Log.logErrorRB(e, "CT_ERROR_CREATING_TMX");
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
         }
+    }
 
+    private int compileMatchingFiles(Pattern filePattern) throws Exception {
         String srcRoot = config.getSourceRoot();
         String locRoot = config.getTargetRoot();
-
-        // build translated files
         FilterMaster fm = Core.getFilterMaster();
-
         List<String> pathList = FileUtil.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
                 config.getSourceRootExcludes());
-
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
-
-        int numberOfCompiled = 0;
+        int compiledFilesCount = 0;
 
         for (String midName : pathList) {
-            // shorten filename to that which is relative to src root
             Matcher fileMatch = filePattern.matcher(midName);
             if (fileMatch.matches()) {
                 File fn = new File(locRoot, midName);
                 if (!fn.getParentFile().exists()) {
-                    // target directory doesn't exist - create it
                     if (!fn.getParentFile().mkdirs()) {
                         throw new IOException(
                                 OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + fn.getParentFile());
@@ -705,68 +728,51 @@ public class RealProject implements IProject {
                 fm.translateFile(srcRoot, midName, locRoot, new FilterContext(config),
                         translateFilesCallback);
                 translateFilesCallback.fileFinished();
-                numberOfCompiled++;
+                compiledFilesCount++;
             }
         }
+        return compiledFilesCount;
+    }
 
-        // COMPILE event is fired before committing translated files to remote
-        // repository to be able to modify the resulting files before sending
-        // them to
-        // the repository (BUGS#1176)
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+    private void commitToRepository() throws Exception {
+        tmxPrepared = null;
+        glossaryPrepared = null;
 
-        if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles
-                && isOnlineMode) {
-            tmxPrepared = null;
-            glossaryPrepared = null;
-            // Ticket 1690 - build project statistics files
-            // so that contents of these files is up to date with target files
-            // sent at same moment
-            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
-            stat.updateStatisticsInfo(hotStat);
-            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData());
-            Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
-            // commit translations and statistics
-            try {
-                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
-                remoteRepositoryProvider.switchAllToLatest();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(),
-                        null);
-                remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(),
-                        "Project translation");
-                // Convert stats file name to relative
-                ProjectProperties.ProjectPath path = config.new ProjectPath(true);
-                path.setRelativeOrAbsolute(fn);
-                fn = path.getUnderRoot();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
-                remoteRepositoryProvider.commitFiles(fn, "Statistics");
-                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
-            } catch (Exception e) {
-                Log.logErrorRB("TF_COMMIT_TARGET_ERROR");
-                Log.log(e);
-                throw new IOException(OStrings.getString("TF_COMMIT_TARGET_ERROR") + "\n" + e.getMessage());
-            }
+        // Ticket 1690 - build project statistics files
+        // so that contents of these files is up to date with target files
+        // sent at same moment
+        StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+        stat.updateStatisticsInfo(hotStat);
+        String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
+        Statistics.writeStat(fn, stat.getTextData());
+        Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
+
+        // Convert stats file name to relative
+        ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+        path.setRelativeOrAbsolute(fn);
+        fn = path.getUnderRoot();
+        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
+        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
+        remoteRepositoryProvider.commitFiles(fn, "Statistics");
+
+        try {
+            Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
+            remoteRepositoryProvider.switchAllToLatest();
+            remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
+            remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+            Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
+        } catch (Exception e) {
+            Log.logErrorRB(e, "TF_COMMIT_TARGET_ERROR");
+            throw new IOException(OStrings.getString("TF_COMMIT_TARGET_ERROR") + "\n" + e.getMessage());
         }
+    }
 
-        if (numberOfCompiled == 1) {
+    private void displayCompilationResult(int compiledFilesCount) {
+        if (compiledFilesCount == 1) {
             Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX_SINGULAR");
         } else {
             Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
         }
-
-        if (doPostProcessing) {
-            // Kill any processes still not complete
-            flushProcessCache();
-
-            if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-                doExternalCommand(config.getExternalCommand());
-            }
-            doExternalCommand(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
-        }
-
-        Log.logInfoRB("LOG_DATAENGINE_COMPILE_END");
     }
 
     /**

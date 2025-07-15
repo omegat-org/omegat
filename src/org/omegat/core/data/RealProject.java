@@ -194,6 +194,7 @@ public class RealProject implements IProject {
     private Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<>();
 
     protected ProjectTMX projectTMX;
+    private final Object projectTMXLock = new Object();
 
     /**
      * True if project loaded successfully.
@@ -935,7 +936,7 @@ public class RealProject implements IProject {
         logger.atDebug().log("Rebase team sync");
         try {
             preparedStatus = PreparedStatus.PREPARED2;
-            synchronized (RealProject.this) {
+            synchronized (projectTMXLock) {
                 projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
                         isProjectModified());
             }
@@ -1483,7 +1484,7 @@ public class RealProject implements IProject {
      * Append new translation from auto TMX.
      */
     void appendFromAutoTMX(ExternalTMX autoTmx, boolean isEnforcedTMX) {
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             importHandler.process(autoTmx, isEnforcedTMX);
         }
     }
@@ -1511,7 +1512,7 @@ public class RealProject implements IProject {
 
     public AllTranslations getAllTranslations(SourceTextEntry ste) {
         AllTranslations r = new AllTranslations();
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             r.defaultTranslation = projectTMX.getDefaultTranslation(ste.getSrcText());
             r.alternativeTranslation = projectTMX.getMultipleTranslation(ste.getKey());
             if (r.alternativeTranslation != null) {
@@ -1560,7 +1561,7 @@ public class RealProject implements IProject {
             throw new IllegalArgumentException("RealProject.setTranslation(tr) can't be null");
         }
 
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             AllTranslations current = getAllTranslations(entry);
             boolean wasAlternative = current.alternativeTranslation.isTranslated();
             if (defaultTranslation) {
@@ -1676,7 +1677,7 @@ public class RealProject implements IProject {
             return;
         }
         Map.Entry<String, TMXEntry>[] entries;
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());
         }
         for (Map.Entry<String, TMXEntry> en : entries) {
@@ -1689,7 +1690,7 @@ public class RealProject implements IProject {
             return;
         }
         Map.Entry<EntryKey, TMXEntry>[] entries;
-        synchronized (projectTMX) {
+        synchronized (projectTMXLock) {
             entries = entrySetToArray(projectTMX.alternatives.entrySet());
         }
         for (Map.Entry<EntryKey, TMXEntry> en : entries) {

@@ -649,7 +649,7 @@ public class RealProject implements IProject {
         // repository to be able to modify the resulting files before sending
         // them to the repository (BUGS#1176)
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
-        if (shouldCommitToRepository(commitTargetFiles)) {
+        if (remoteRepositoryProvider != null && shouldCommitToRepository(commitTargetFiles)) {
             commitToRepository();
         }
         displayCompilationResult(numberOfCompiled);
@@ -667,8 +667,7 @@ public class RealProject implements IProject {
     }
 
     private boolean shouldCommitToRepository(boolean commitTargetFiles) {
-        return remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot()
-                && commitTargetFiles && isOnlineMode;
+        return config.getTargetDir().isUnderRoot() && commitTargetFiles && isOnlineMode;
     }
 
     private void exportTMXs() throws IOException {

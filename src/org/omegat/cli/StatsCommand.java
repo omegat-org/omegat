@@ -34,6 +34,7 @@ import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatsResult;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -97,6 +98,13 @@ public class StatsCommand implements Callable<Integer> {
         Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
 
         Core.initializeConsole();
+
+        if (legacyParams.disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (legacyParams.disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);

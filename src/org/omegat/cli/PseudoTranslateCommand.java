@@ -32,6 +32,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import picocli.CommandLine;
@@ -77,6 +78,13 @@ public class PseudoTranslateCommand implements Callable<Integer> {
 
         Log.logInfoRB("CONSOLE_INITIALIZING");
         Core.initializeConsole();
+
+        if (legacyParameters.disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (legacyParameters.disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
 

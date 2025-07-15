@@ -35,6 +35,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.TMXWriter2;
 import org.omegat.util.gui.UIDesignManager;
 import picocli.CommandLine;
@@ -104,6 +105,14 @@ public class AlignCommand implements Callable<Integer> {
 
         Log.logInfoRB("CONSOLE_INITIALIZING");
         Core.initializeConsole();
+
+        if (legacyParams.disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (legacyParams.disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
+
         RealProject p = Common.selectProjectConsoleMode(true, params);
 
         Common.validateTagsConsoleMode(params);

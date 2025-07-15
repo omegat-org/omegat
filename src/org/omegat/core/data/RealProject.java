@@ -633,7 +633,6 @@ public class RealProject implements IProject {
      *            Whether or not we should perform external post-processing.
      * @param commitTargetFiles
      *            Whether or not we should commit target files
-     * @throws Exception
      */
     @Override
     public void compileProjectAndCommit(String sourcePattern, boolean doPostProcessing,
@@ -649,7 +648,7 @@ public class RealProject implements IProject {
         // repository to be able to modify the resulting files before sending
         // them to the repository (BUGS#1176)
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
-        if (remoteRepositoryProvider != null && shouldCommitToRepository(commitTargetFiles)) {
+        if (shouldCommitToRepository(commitTargetFiles)) {
             commitToRepository();
         }
         displayCompilationResult(numberOfCompiled);
@@ -667,7 +666,8 @@ public class RealProject implements IProject {
     }
 
     private boolean shouldCommitToRepository(boolean commitTargetFiles) {
-        return config.getTargetDir().isUnderRoot() && commitTargetFiles && isOnlineMode;
+        return remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles
+                && isOnlineMode;
     }
 
     private void exportTMXs() throws IOException {
@@ -703,7 +703,7 @@ public class RealProject implements IProject {
         }
     }
 
-    private int compileMatchingFiles(Pattern filePattern) throws Exception {
+    private int compileMatchingFiles(Pattern filePattern) throws IOException, TranslationException {
         String srcRoot = config.getSourceRoot();
         String locRoot = config.getTargetRoot();
         FilterMaster fm = Core.getFilterMaster();
@@ -734,6 +734,9 @@ public class RealProject implements IProject {
     }
 
     private void commitToRepository() throws Exception {
+        if (remoteRepositoryProvider == null) {
+            return;
+        }
         tmxPrepared = null;
         glossaryPrepared = null;
 

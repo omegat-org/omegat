@@ -156,7 +156,6 @@
     <Match>
         <Or>
             <Package name="org.omegat.core.threads"/>
-            <Class name="org.omegat.core.data.RealProject"/>
             <Class name="org.omegat.gui.dialogs.NewTeamProjectController"/>
             <Class name="org.omegat.languagetools.LanguageToolNetworkBridge"/>
         </Or>

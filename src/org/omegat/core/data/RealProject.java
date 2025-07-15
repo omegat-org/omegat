@@ -151,7 +151,7 @@ public class RealProject implements IProject {
     private volatile RebaseAndCommit.Prepared tmxPrepared;
     private volatile RebaseAndCommit.Prepared glossaryPrepared;
 
-    private boolean isOnlineMode;
+    private volatile boolean isOnlineMode;
 
     private RandomAccessFile raFile;
     private FileChannel lockChannel;
@@ -162,7 +162,7 @@ public class RealProject implements IProject {
     /** List of all segments in project. */
     protected List<SourceTextEntry> allProjectEntries = new ArrayList<>(4096);
 
-    protected ImportFromAutoTMX importHandler;
+    protected volatile ImportFromAutoTMX importHandler;
 
     private final StatisticsInfo hotStat = new StatisticsInfo();
 

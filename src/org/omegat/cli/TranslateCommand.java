@@ -89,6 +89,13 @@ public class TranslateCommand implements Callable<Integer> {
             return 1;
         }
 
+        if (legacyParams.disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (legacyParams.disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
+
         // Called *after* executing post processing command (unlike the
         // regular PROJECT_CHANGE_TYPE.COMPILE)
         Common.executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE, params);

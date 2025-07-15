@@ -1021,7 +1021,7 @@ public class RealProject implements IProject {
                 System.getProperty("user.name"));
         final StringBuilder commitDetails = new StringBuilder("Translated by " + author);
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
-        if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
+        if (remoteRepositoryProvider != null && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
                     tmxPath, new RebaseAndCommit.IRebase() {
                         ProjectTMX baseTMX, headTMX;
@@ -2046,7 +2046,7 @@ public class RealProject implements IProject {
 
     @Override
     public void commitSourceFiles() throws Exception {
-        if (isRemoteProject() && config.getSourceDir().isUnderRoot()) {
+        if (remoteRepositoryProvider != null && config.getSourceDir().isUnderRoot()) {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
                 remoteRepositoryProvider.switchAllToLatest();
@@ -2056,8 +2056,7 @@ public class RealProject implements IProject {
                         "Commit source files");
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_DONE");
             } catch (Exception e) {
-                Log.logErrorRB("TF_COMMIT_ERROR");
-                Log.log(e);
+                Log.logErrorRB(e, "TF_COMMIT_ERROR");
                 throw new IOException(OStrings.getString("TF_COMMIT_ERROR") + "\n" + e.getMessage(), e);
             }
         }

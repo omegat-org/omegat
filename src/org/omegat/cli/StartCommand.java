@@ -82,7 +82,7 @@ public class StartCommand implements Callable<Integer> {
      * Execute standard GUI.
      */
     int runGUI() {
-        if (params != null && !params.team) {
+        if ((params != null && !params.team) || (legacyParams != null && legacyParams.noTeam)) {
             RuntimePreferences.setNoTeam();
         }
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
@@ -135,7 +135,7 @@ public class StartCommand implements Callable<Integer> {
             if (params != null && params.projectLocation != null) {
                 if (isProjectRemote(params.projectLocation)) {
                     ProjectUICommands.projectRemote(params.projectLocation);
-                } else if (params.projectLocation != null) {
+                } else {
                     File targetDir = Paths.get(params.projectLocation).toFile();
                     File targetFile = Paths.get(params.projectLocation).resolve("omegat.project").toFile();
                     if (targetDir.isDirectory() && targetFile.exists()) {

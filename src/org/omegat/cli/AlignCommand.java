@@ -93,6 +93,10 @@ public class AlignCommand implements Callable<Integer> {
             return 1;
         }
 
+        if (!params.team || legacyParams.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
+
         if (params.projectLocation == null) {
             Log.logErrorRB("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
             return 1;

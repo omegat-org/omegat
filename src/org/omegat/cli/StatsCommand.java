@@ -96,6 +96,9 @@ public class StatsCommand implements Callable<Integer> {
             return 1;
         }
         Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
+        if (!params.team || legacyParams.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
 
         Core.initializeConsole();
 

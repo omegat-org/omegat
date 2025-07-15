@@ -45,15 +45,12 @@ import static picocli.CommandLine.Option;
         CommandLine.HelpCommand.class })
 public class LegacyParameters implements Callable<Integer> {
 
-    @SuppressWarnings("unused")
     @CommandLine.Option(names = { "-V", "--version" }, versionHelp = true)
     boolean versionInfoRequested = false;
 
-    @SuppressWarnings("unused")
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
     boolean usageHelpRequested = false;
 
-    @SuppressWarnings("unused")
     @Option(names = "-D", mapFallbackValue = "")
     void setProperty(Map<String, String> props) {
         props.forEach(System::setProperty);

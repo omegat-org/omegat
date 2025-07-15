@@ -62,7 +62,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
             return runCreatePseudoTranslateTMX();
         } catch (Exception ex) {
             Log.logErrorRB(ex, "CT_ERROR_CREATING_PSEUDO_TRANSLATE_TMX",
-                    params.projectLocation == null ? "" : params.projectLocation);
+                    params == null || params.projectLocation == null ? "" : params.projectLocation);
             return 1;
         }
     }
@@ -75,6 +75,10 @@ public class PseudoTranslateCommand implements Callable<Integer> {
             return 1;
         }
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
+
+        if (!params.team || legacyParameters.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
 
         Log.logInfoRB("CONSOLE_INITIALIZING");
         Core.initializeConsole();

@@ -68,7 +68,7 @@ public class TranslateCommand implements Callable<Integer> {
         }
         Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
-        if (!params.team) {
+        if (!params.team || legacyParams.noTeam) {
             RuntimePreferences.setNoTeam();
         }
 

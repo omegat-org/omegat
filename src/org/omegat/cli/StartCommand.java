@@ -45,7 +45,6 @@ import javax.swing.UIManager;
 import java.awt.Toolkit;
 import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.concurrent.Callable;

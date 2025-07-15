@@ -133,9 +133,7 @@ public class AutoTmxTest {
 
         Core.initializeConsole(new HashMap<>());
 
-        p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(
-                new ProjectTMX.CheckOrphanedCallback() {
+        p = new RealProject(props, new ProjectTMX.CheckOrphanedCallback() {
                     @Override
                     public boolean existSourceInProject(String src) {
                         return true;

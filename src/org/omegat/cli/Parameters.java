@@ -55,54 +55,54 @@ public class Parameters {
     /**
      * CLI parameter to disable team functionality (treat as local project)
      */
-    public static final String NO_TEAM = "--noteam";
-    @Option(names = { NO_TEAM }, descriptionKey = "NO_TEAM")
-    boolean noTeam = false;
+    public static final String TEAM = "--team";
+    @Option(names = { TEAM }, negatable = true, descriptionKey = "params.TEAM")
+    boolean team = true;
 
     /**
      * CLI parameter to specify source tokenizer
      */
     public static final String TOKENIZER_SOURCE = "--ITokenizer";
-    @Option(names = { TOKENIZER_SOURCE }, descriptionKey = "TOKENIZER_SOURCE")
+    @Option(names = { TOKENIZER_SOURCE }, descriptionKey = "params.TOKENIZER_SOURCE")
     @Nullable String tokenizerSource;
     /**
      * CLI parameter to specify target tokenizer
      */
     public static final String TOKENIZER_TARGET = "--ITokenizerTarget";
-    @Option(names = { TOKENIZER_TARGET }, descriptionKey = "TOKENIZER_TARGET")
+    @Option(names = { TOKENIZER_TARGET }, descriptionKey = "params.TOKENIZER_TARGET")
     @Nullable String tokenizerTarget;
 
     // Non-GUI modes only
     public static final String QUIET = "--quiet";
-    @Option(names = { QUIET }, descriptionKey = "QUIET")
+    @Option(names = { QUIET }, descriptionKey = "params.QUIET")
     boolean isQuiet = false;
 
     public static final String SCRIPT = "--script";
-    @Option(names = { SCRIPT }, paramLabel = "<path>", descriptionKey = "SCRIPT")
+    @Option(names = { SCRIPT }, paramLabel = "<path>", descriptionKey = "params.SCRIPT")
     @Nullable String scriptName;
 
     public static final String TAG_VALIDATION = "--tag-validation";
-    @Option(names = { TAG_VALIDATION }, descriptionKey = "TAG_VALIDATION")
+    @Option(names = { TAG_VALIDATION }, descriptionKey = "params.TAG_VALIDATION")
     @Nullable String tagValidation;
 
     // CONSOLE_STATS mode
     public static final String STATS_OUTPUT = "--output-file";
     public static final String STATS_MODE = "--stats-type";
     @Option(names = {
-            STATS_OUTPUT }, paramLabel = "<stats-output-file>", hidden = true, descriptionKey = "OUTPUT_FILE")
+            STATS_OUTPUT }, paramLabel = "<stats-output-file>", hidden = true, descriptionKey = "params.OUTPUT_FILE")
     @Nullable String statsOutput;
     @Option(names = {
-            STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = true, descriptionKey = "STATS_TYPE")
+            STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = true, descriptionKey = "params.STATS_TYPE")
     @Nullable String statsType;
 
     // Undocumented CLI options
     public static final String ALTERNATE_FILENAME_FROM = "--alternate-filename-from";
     @Option(names = {
-            ALTERNATE_FILENAME_FROM }, paramLabel = "<alternate_filename_from>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_FROM")
+            ALTERNATE_FILENAME_FROM }, paramLabel = "<alternate_filename_from>", hidden = true, descriptionKey = "params.ALTERNATE_FILENAME_FROM")
     @Nullable String alternateFilenameFrom;
     public static final String ALTERNATE_FILENAME_TO = "--alternate-filename-to";
     @Option(names = {
-            ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true, descriptionKey = "ALTERNATE_FILENAME_TO")
+            ALTERNATE_FILENAME_TO }, paramLabel = "<alternate_filename_to>", hidden = true, descriptionKey = "params.ALTERNATE_FILENAME_TO")
     @Nullable String alternateFilenameTo;
 
     // Development
@@ -123,7 +123,7 @@ public class Parameters {
     }
 
     public static final String VERBOSE = "--verbose";
-    @CommandLine.Option(names = { VERBOSE }, descriptionKey = "VERBOSE")
+    @CommandLine.Option(names = { VERBOSE }, descriptionKey = "params.VERBOSE")
     boolean verbose = false;
 
     public void initialize() {

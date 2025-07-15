@@ -53,7 +53,7 @@ import java.util.concurrent.Callable;
 /**
  * Start sub-command entry.
  */
-@CommandLine.Command(name = "start")
+@CommandLine.Command(name = "start", resourceBundle = "org.omegat.cli.Parameters")
 public class StartCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
@@ -83,7 +83,7 @@ public class StartCommand implements Callable<Integer> {
      * Execute standard GUI.
      */
     int runGUI() {
-        if (params != null && params.noTeam) {
+        if (params != null && !params.team) {
             RuntimePreferences.setNoTeam();
         }
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));

@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.concurrent.Callable;
 
@@ -53,6 +54,12 @@ public class LegacyParameters implements Callable<Integer> {
     @SuppressWarnings("unused")
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
     boolean usageHelpRequested = false;
+
+    @SuppressWarnings("unused")
+    @Option(names = "-D", mapFallbackValue = "")
+    void setProperty(Map<String, String> props) {
+        props.forEach(System::setProperty);
+    }
 
     // Hide deprecated old command syntax in help message.
     // We can set false for test purpose or backward compatibility.
@@ -205,22 +212,6 @@ public class LegacyParameters implements Callable<Integer> {
                 return 1;
             }
         }
-    }
-
-    public List<String> constructGuiArgs() {
-        List<String> result = new ArrayList<>();
-        if (noTeam) {
-            result.add(NO_TEAM);
-        }
-        if (configDir != null) {
-            result.add(CONFIG_DIR);
-            result.add(configDir);
-        }
-        if (resourceBundle != null) {
-            result.add(RESOURCE_BUNDLE);
-            result.add(resourceBundle);
-        }
-        return result;
     }
 
     /**

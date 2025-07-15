@@ -36,7 +36,7 @@ import picocli.CommandLine;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 
-@CommandLine.Command(name = "translate")
+@CommandLine.Command(name = "translate", resourceBundle = "org.omegat.cli.Parameters")
 public class TranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand
@@ -68,7 +68,7 @@ public class TranslateCommand implements Callable<Integer> {
         }
         Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
-        if (params.noTeam) {
+        if (!params.team) {
             RuntimePreferences.setNoTeam();
         }
 

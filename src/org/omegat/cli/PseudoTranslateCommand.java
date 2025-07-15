@@ -41,7 +41,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-@CommandLine.Command(name = "pseudo")
+@CommandLine.Command(name = "pseudo", resourceBundle = "org.omegat.cli.Parameters")
 public class PseudoTranslateCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand

@@ -41,7 +41,7 @@ import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
-@CommandLine.Command(name = "stats")
+@CommandLine.Command(name = "stats", resourceBundle = "org.omegat.cli.Parameters")
 public class StatsCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand

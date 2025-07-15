@@ -49,7 +49,7 @@ import java.util.concurrent.Callable;
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Option;
 
-@Command(name = "align")
+@Command(name = "align", resourceBundle = "org.omegat.cli.Parameters")
 public class AlignCommand implements Callable<Integer> {
 
     @CommandLine.ParentCommand

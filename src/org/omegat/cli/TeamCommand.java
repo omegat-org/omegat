@@ -38,8 +38,11 @@ import java.util.logging.Level;
 /**
  * @author Hiroshi Miura
  */
-@CommandLine.Command(name = "team", description = "Usage: team init <source language> <target language>\\n\\\\tSee --help.")
+@CommandLine.Command(name = "team", resourceBundle = "org.omegat.cli.Parameters")
 public class TeamCommand implements Callable<Integer> {
+
+    @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
+    boolean usageHelpRequested = false;
 
     /**
      * define team init sub-subcommand.

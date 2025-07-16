@@ -29,6 +29,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -45,8 +46,10 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
@@ -103,6 +106,10 @@ public class TMXWriterTest extends TestFilterBase {
         wr.writeEntry(in, "test", RealProjectTest.createEmptyTMXEntry(), null);
         wr.close();
 
+        Validator validator = getTmxValidator();
+        var is = new StreamSource(new FileInputStream(outFile));
+        validator.validate(is);
+
         load(new ArrayList<>(), null, false, false);
     }
 
@@ -118,7 +125,20 @@ public class TMXWriterTest extends TestFilterBase {
 
         wr.close();
 
+        Validator validator = getTmxValidator();
+        var is = new StreamSource(new FileInputStream(outFile));
+        validator.validate(is);
+
         compareTMX(outFile, new File("test/data/tmx/test-save-tmx14.tmx"));
+    }
+
+    private Validator getTmxValidator() throws Exception {
+        var schemaUrl = getClass().getResource("/schemas/tmx14.xsd");
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = schemaFactory.newSchema(schemaUrl);
+        Validator validator = schema.newValidator();
+        validator.setResourceResolver(new TMXLSResourceResolver());
+        return validator;
     }
 
     @Test
@@ -189,6 +209,10 @@ public class TMXWriterTest extends TestFilterBase {
             }
         }
         assertThat(text.toString()).as("Preserve EOL mark in text.").contains("tar" + eol + "get");
+
+        Validator validator = getTmxValidator();
+        var is = new StreamSource(new FileInputStream(outFile));
+        validator.validate(is);
 
         final List<String> trs = new ArrayList<>();
         load(null, trs, true, false);

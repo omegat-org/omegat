@@ -32,6 +32,15 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hu.HungarianAnalyzer;
 
 /**
+ * A tokenizer class for processing Hungarian text using the Lucene library.
+ * This class extends the {@code BaseTokenizer} and provides functionality
+ * for tokenizing Hungarian text, with optional stemming and stop-word
+ * filtering based on the provided configurations.
+ * <p>
+ * This tokenizer uses the {@code HungarianAnalyzer} from Lucene to perform
+ * text analysis when stemming is enabled. If stemming is disabled, a standard
+ * token stream is returned.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "hu" }, isDefault = true)

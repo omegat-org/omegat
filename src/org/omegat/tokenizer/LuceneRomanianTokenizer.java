@@ -32,6 +32,14 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ro.RomanianAnalyzer;
 
 /**
+ * LuceneRomanianTokenizer is a tokenizer specifically designed for the Romanian language.
+ * It extends the BaseTokenizer class and provides tokenization capabilities for Romanian text.
+ * This class supports optional stemming and stop word filtering based on its configuration.
+ * <p>
+ * The tokenizer utilizes the RomanianAnalyzer class from Apache Lucene to process text
+ * when stemming and/or stop words are enabled. In cases where stemming is disabled,
+ * a standard token stream is provided instead.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "ro" }, isDefault = true)

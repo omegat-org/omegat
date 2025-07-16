@@ -32,6 +32,14 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.da.DanishAnalyzer;
 
 /**
+ * The LuceneDanishTokenizer class extends the BaseTokenizer and provides
+ * tokenization functionality for Danish language text processing. It uses
+ * the Lucene DanishAnalyzer to handle language-specific tokenization,
+ * including stemming and stop words, when enabled.
+ * <p>
+ * This tokenizer is marked as the default tokenizer for Danish ("da") language
+ * support and works with customizable options for stemming and stop word removal.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "da" }, isDefault = true)

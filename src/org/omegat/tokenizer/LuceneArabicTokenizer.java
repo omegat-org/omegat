@@ -34,6 +34,12 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ar.ArabicAnalyzer;
 
 /**
+ * A tokenizer implementation for tokenizing Arabic text based on Lucene's ArabicAnalyzer.
+ * This tokenizer extends BaseTokenizer and can generate tokens with optional stemming
+ * and/or stop word removal based on the provided parameters.
+ * <p>
+ * The class is annotated with @Tokenizer and explicitly supports the Arabic language ("ar").
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

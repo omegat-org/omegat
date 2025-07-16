@@ -34,6 +34,16 @@ import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.omegat.util.Token;
 
 /**
+ * LuceneSmartChineseTokenizer is a tokenizer class for handling Chinese text processing
+ * using the SmartChineseAnalyzer or HMMChineseTokenizer from the Lucene library.
+ * This class is specifically designed for scenarios requiring tokenization of Chinese
+ * text, either with or without stemming and stop word filtering.
+ * <p>
+ * This tokenizer is intended to tokenize input strings either by code points or by utilizing
+ * Lucene's token stream processing. It overrides methods to cater to verbatim tokenization needs,
+ * addressing issues with punctuation replacement in the SmartChineseAnalyzer when dealing
+ * with verbatim scenarios.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

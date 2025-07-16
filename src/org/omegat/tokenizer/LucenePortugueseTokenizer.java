@@ -32,6 +32,16 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.pt.PortugueseAnalyzer;
 
 /**
+ * LucenePortugueseTokenizer provides a tokenization mechanism for processing Portuguese text.
+ * It integrates with Lucene's PortugueseAnalyzer to support tokenization with optional stemming
+ * and stop words filtering based on the provided configuration.
+ * <p>
+ * This tokenizer can handle text processing for Portuguese language effectively and is set
+ * as the default tokenizer for Portuguese when integrated.
+ * <p>
+ * An optional stemmed tokenization mode and stop words removal can be enabled by passing the
+ * corresponding parameters during execution.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "pt" }, isDefault = true)

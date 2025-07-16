@@ -32,6 +32,14 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.it.ItalianAnalyzer;
 
 /**
+ * Tokenizer implementation for processing Italian language text using Apache Lucene.
+ * This class provides functionality for creating token streams tailored for the
+ * Italian language, supporting options for stemming and stop word filtering.
+ * <p>
+ * The tokenizer applies Italian-specific text processing based on the Apache Lucene
+ * library, utilizing the {@link ItalianAnalyzer} when stemming is enabled.
+ * When stemming is disabled, a standard token stream is used.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "it" }, isDefault = true)

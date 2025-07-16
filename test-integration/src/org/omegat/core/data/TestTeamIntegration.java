@@ -384,7 +384,9 @@ public final class TestTeamIntegration {
 
         remote.copyFilesFromProjectToRepos("omegat.project", null);
         remote.commitFiles("omegat.project", "Prepare for team test");
-        GlossaryManager.createNewWritableGlossaryFile(config.getWritableGlossaryFile().getAsFile());
+        if (!GlossaryManager.createNewWritableGlossaryFile(config.getWritableGlossaryFile().getAsFile())) {
+            throw new IOException("Failed to create new writable glossary file.");
+        }
         remote.copyFilesFromProjectToRepos("glossary/glossary.txt", null);
         remote.commitFiles("glossary/glossary.txt", "Prepare for team test");
         remote.copyFilesFromProjectToRepos("omegat/project_save.tmx", null);

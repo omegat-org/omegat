@@ -56,7 +56,7 @@ import org.omegat.util.Token;
 /**
  * Class that loads glossary files and adds glossary entries to strings of the
  * source files.
- *
+ * <p>
  * This class don't need any threads synchronization code, since it only set and
  * clear 'glossaryEntries' var.
  *
@@ -97,7 +97,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
 
     private final IGlossaries pane;
     private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<String, List<GlossaryEntry>>();
-    private final CoreState coreState;
 
     protected File priorityGlossary;
     protected IGlossary[] externalGlossaries;
@@ -108,7 +107,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
 
     public GlossaryManager(final IGlossaries pane, final CoreState coreState) {
         this.pane = pane;
-        this.coreState = coreState;
 
         List<IGlossary> gl = new ArrayList<>();
         for (Class<?> glc : PluginUtils.getGlossaryClasses()) {
@@ -120,7 +118,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         }
         externalGlossaries = gl.toArray(new IGlossary[gl.size()]);
         Preferences.addPropertyChangeListener(e -> {
-            if (coreState.isProjectLoaded()) {
+            if (CoreState.getInstance().isProjectLoaded()) {
                 switch (e.getPropertyName()) {
                 case Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT:
                     forceReloadTBX();
@@ -141,6 +139,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     public void start() {
+        CoreState coreState = CoreState.getInstance();
         File dir = new File(coreState.getProject().getProjectProperties().getGlossaryRoot());
         priorityGlossary = new File(coreState.getProject().getProjectProperties().getWriteableGlossary());
         monitor = new DirectoryMonitor(dir, this);
@@ -217,7 +216,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * Get glossary entries.
      *
      * @return all entries
-     * @param src
+     * @param src keyword of the glossary to seek.
      */
     public List<GlossaryEntry> getGlossaryEntries(String src) {
         List<GlossaryEntry> result = new ArrayList<>();
@@ -252,7 +251,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     private void addExternalGlossaryEntries(List<GlossaryEntry> result, String src) {
-
+        CoreState coreState = CoreState.getInstance();
         Language source = coreState.getProject().getProjectProperties().getSourceLanguage();
         Language target = coreState.getProject().getProjectProperties().getTargetLanguage();
 
@@ -271,6 +270,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return A list of matching glossary entries
      */
     public List<GlossaryEntry> searchSourceMatches(SourceTextEntry ste) {
+        CoreState coreState = CoreState.getInstance();
         ITokenizer tok = coreState.getProject().getSourceTokenizer();
         if (tok == null) {
             return Collections.emptyList();
@@ -295,6 +295,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return A list of tokens matching the supplied glossary entry
      */
     public List<Token[]> searchSourceMatchTokens(SourceTextEntry ste, GlossaryEntry entry) {
+        CoreState coreState = CoreState.getInstance();
         ITokenizer tok = coreState.getProject().getSourceTokenizer();
         if (tok == null) {
             return Collections.emptyList();
@@ -319,6 +320,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * @return A list of matching target terms
      */
     public List<String> searchTargetMatches(String trg, ProtectedPart[] protectedParts, GlossaryEntry entry) {
+        CoreState coreState = CoreState.getInstance();
         ITokenizer tok = coreState.getProject().getTargetTokenizer();
         if (tok == null) {
             return Collections.emptyList();

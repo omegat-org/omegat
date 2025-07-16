@@ -102,10 +102,6 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     protected IGlossary[] externalGlossaries;
 
     public GlossaryManager(final IGlossaries pane) {
-        this(pane, CoreState.getInstance());
-    }
-
-    public GlossaryManager(final IGlossaries pane, final CoreState coreState) {
         this.pane = pane;
 
         List<IGlossary> gl = new ArrayList<>();

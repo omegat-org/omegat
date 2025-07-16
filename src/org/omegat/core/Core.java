@@ -265,7 +265,7 @@ public final class Core {
         coreState.setMatcher(new MatchesTextArea(me));
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
         coreState.setGlossaries(glossaryArea);
-        coreState.setGlossaryManager(new GlossaryManager(glossaryArea, CoreState.getInstance()));
+        coreState.setGlossaryManager(new GlossaryManager(glossaryArea));
         coreState.setNotes(new NotesTextArea(me));
         coreState.setComments(new CommentsTextArea(me));
         coreState.setMachineTranslatePane(new MachineTranslateTextArea(me));

@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
@@ -47,6 +48,7 @@ import javax.swing.JPanel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -90,8 +92,8 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     private static final String IAM_TOKEN_URL = "https://iam.api.cloud.yandex.net/iam/v1/tokens";
     private static final String TRANSLATE_URL = "https://translate.api.cloud.yandex.net/translate/v2/translate";
 
-    private String IAMErrorMessage = null;
-    private String cachedIAMToken = null;
+    private @Nullable String IAMErrorMessage = null;
+    private @Nullable String cachedIAMToken = null;
     private long lastIAMTokenTime = 0L;
     private static final String BUNDLE_BASENAME = "org.omegat.machinetranslators.yandex.Bundle";
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(BUNDLE_BASENAME);
@@ -124,7 +126,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text)
+    protected @Nullable String translate(final Language sLang, final Language tLang, final String text)
             throws Exception {
         String oAuthToken = getCredential(PROPERTY_OAUTH_TOKEN);
         if (oAuthToken == null || oAuthToken.isEmpty()) {
@@ -136,15 +138,15 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             throw new Exception(BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_FOLDER_ID_NOT_FOUND"));
         }
 
-        String IAMToken = getIAMToken(oAuthToken);
-        if (IAMToken == null) {
+        String iamToken = getIAMToken(oAuthToken);
+        if (iamToken == null) {
             throw new Exception(IAMErrorMessage);
         }
 
         String request = createJsonRequest(sLang, tLang, text, folderId);
 
         Map<String, String> headers = new TreeMap<>();
-        headers.put("Authorization", "Bearer " + IAMToken);
+        headers.put("Authorization", "Bearer " + iamToken);
 
         String response;
         try {
@@ -155,7 +157,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
                 errorMessage = BUNDLE.getString("MT_ENGINE_YANDEX_CLOUD_BAD_TRANSLATE_RESPONSE");
                 throw new MachineTranslateError(errorMessage);
             }
-            throw new MachineTranslateError(e.getMessage());
+            throw new MachineTranslateError(Objects.requireNonNullElse(e.getMessage(), "HTTP error: " + e.code));
         }
         if (response == null) {
             return null;
@@ -227,7 +229,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             return rootNode.get("message").asText();
         } catch (Exception e) {
             LOGGER.atError().setCause(e).setMessageRB("MT_ENGINE_YANDEX_CLOUD_BAD_ERROR_REPORT").log();
-            return null;
+            return "Yandex.Cloud error message extraction failed: " + e.getLocalizedMessage();
         }
     }
 
@@ -265,7 +267,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
     }
 
     @SuppressWarnings("unchecked")
-    private String getIAMToken(final String oAuthToken) {
+    private @Nullable String getIAMToken(final String oAuthToken) {
         if (System.currentTimeMillis() - lastIAMTokenTime > IAM_TOKEN_TTL_SECONDS * 1_000) {
 
             String request = "{\"yandexPassportOauthToken\":\"" + oAuthToken + "\"}";
@@ -274,7 +276,7 @@ public class YandexCloudTranslate extends BaseCachedTranslate {
             ObjectMapper mapper = new ObjectMapper();
 
             try {
-                response = HttpConnectionUtils.postJSON(IAM_TOKEN_URL, request, null);
+                response = HttpConnectionUtils.postJSON(IAM_TOKEN_URL, request, Collections.emptyMap());
             } catch (HttpConnectionUtils.ResponseError e) {
                 // Try to extract error message from the error body
                 IAMErrorMessage = extractErrorMessage(e.body);

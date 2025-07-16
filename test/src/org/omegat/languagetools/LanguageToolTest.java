@@ -90,7 +90,7 @@ public class LanguageToolTest {
 
     @Test
     public void testFrench() throws Exception {
-        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForShortCode("fr"));
+        JLanguageTool lt = new JLanguageTool(Languages.getLanguageForLocale(new Locale("fr")));
 
         // example from
         // https://github.com/languagetool-org/languagetool/issues/2852

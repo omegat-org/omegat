@@ -41,6 +41,7 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.IRemoteRepository2.NetworkException;
 import org.omegat.util.FileUtil;
@@ -50,7 +51,6 @@ import org.omegat.util.StringUtil;
 
 import gen.core.project.RepositoryDefinition;
 import gen.core.project.RepositoryMapping;
-import tokyo.northside.logging.ILogger;
 
 /**
  * Class for process some repository commands.
@@ -62,7 +62,6 @@ import tokyo.northside.logging.ILogger;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class RemoteRepositoryProvider {
-    private static final ILogger LOGGER = Log.getLogger(RemoteRepositoryProvider.class);
 
     public static final String REPO_SUBDIR = ".repositories/";
     public static final String REPO_PREPARE_SUBDIR = ".repositories/prep/";
@@ -110,21 +109,20 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Check repository definitions in the project. TODO: define messages for
-     * user
+     * Check repository definitions in the project.
      */
     protected void checkDefinitions() {
         Set<String> dirs = new TreeSet<>();
         for (RepositoryDefinition r : repositoriesDefinitions) {
             if (StringUtil.isEmpty(r.getUrl())) {
-                throw new RuntimeException("There is no repository url");
+                throw new IllegalArgumentException("There is no repository url");
             }
             if (!dirs.add(getRepositoryDir(r).getAbsolutePath())) {
-                throw new RuntimeException("Duplicate repository URL");
+                throw new IllegalArgumentException("Duplicate repository URL");
             }
             for (RepositoryMapping m : r.getMapping()) {
                 if (m.getLocal() == null || m.getRepository() == null) {
-                    throw new RuntimeException("Invalid mapping: local and/or remote is not set.");
+                    throw new IllegalArgumentException("Invalid mapping: local and/or remote is not set.");
                 }
             }
         }
@@ -164,9 +162,9 @@ public class RemoteRepositoryProvider {
     protected Mapping oneMapping(String path) {
         List<Mapping> mappings = getMappings(path);
         if (mappings.size() > 1) {
-            throw new RuntimeException("Multiple mappings for file '" + path + "'");
+            throw new IllegalArgumentException("Multiple mappings for file '" + path + "'");
         } else if (mappings.isEmpty()) {
-            throw new RuntimeException("There is no mapping for file '" + path + "'");
+            throw new IllegalArgumentException("There is no mapping for file '" + path + "'");
         }
 
         return mappings.get(0);
@@ -188,7 +186,11 @@ public class RemoteRepositoryProvider {
      */
     public File toPrepared(File inFile) throws IOException {
         File dir = new File(projectRoot, REPO_PREPARE_SUBDIR);
-        boolean ignored = dir.mkdirs();
+        boolean dirCreated = dir.mkdirs();
+        if (!dirCreated) {
+            Log.logErrorRB("TEAM_PREPARE_DIR_ERROR", dir.getAbsolutePath());
+            throw new IOException("Can't create directory " + dir.getAbsolutePath());
+        }
         File out = File.createTempFile("prepared", "", dir);
         FileUtils.copyFile(inFile, out);
         return out;
@@ -211,8 +213,7 @@ public class RemoteRepositoryProvider {
                 throw e;
             } catch (Exception e) {
                 errors.add(e);
-                LOGGER.atError().setMessageRB("TEAM_UPDATE_REPO_ERROR")
-                        .addArgument(e.getMessage()).log();
+                Log.logErrorRB(e, "TEAM_UPDATE_REPO_ERROR");
             }
         }
 
@@ -300,7 +301,7 @@ public class RemoteRepositoryProvider {
      *            repository-specific for existing files, and to
      *            platform-specific for new files
      */
-    public void copyFilesFromProjectToRepos(String localPath, String eolConversionCharset) throws Exception {
+    public void copyFilesFromProjectToRepos(String localPath, @Nullable String eolConversionCharset) throws Exception {
         for (Mapping m : getMappings(localPath)) {
             m.copyFromProjectToRepo(eolConversionCharset);
         }
@@ -313,7 +314,7 @@ public class RemoteRepositoryProvider {
         return oneMapping(file).getVersion();
     }
 
-    protected void copyFile(File from, File to, String eolConversionCharset) throws IOException {
+    protected void copyFile(File from, File to, @Nullable String eolConversionCharset) throws IOException {
         if (eolConversionCharset != null) {
             // charset defined - text file for EOL conversion
             FileUtil.copyFileWithEolConversion(from, to, Charset.forName(eolConversionCharset));
@@ -409,31 +410,35 @@ public class RemoteRepositoryProvider {
              * and local=source/ - also okay, but path=source/one/ and
              * local=source/two - wrong.
              */
-            path = withSlashes(path);
-            String local = withSlashes(repoMapping.getLocal());
-            if (path.equals("/")) {
-                // root(full project path) mapping
+            String projectPath = withSlashes(path);
+            String localPath = withSlashes(repoMapping.getLocal());
+
+            // root(full project path) mapping
+            boolean isRootPath = projectPath.equals("/");
+            // path equals mapping (path="source/" for "source/"=>"...")
+            // or
+            // path shorter than local and is directory (path="source/" for
+            // "source/first/..."=>"...")
+            boolean isSubPath = localPath.startsWith(projectPath);
+            // local is shorter than path and is directory
+            // (path="omegat/project_save" for
+            // "omegat/"=>"...")
+            boolean isSuperPath = projectPath.startsWith(localPath);
+            // root(full project path) mapping (""=>"...")
+            boolean isLocalRoot = localPath.equals("/");
+
+            if (isRootPath) {
                 filterPrefix = "/";
-                this.forceExcludes.addAll(Arrays.asList(forceExcludes));
-            } else if (local.equals(path)) {
-                // path equals mapping (path="source/" for "source/"=>"...")
+                addRawExcludes(forceExcludes);
+            } else if (isSubPath) {
                 filterPrefix = "/";
-                this.forceExcludes.addAll(getTruncatedExclusions(local, forceExcludes));
-            } else if (local.startsWith(path)) {
-                // path shorter than local and is directory (path="source/" for
-                // "source/first/..."=>"...")
-                filterPrefix = "/";
-                this.forceExcludes.addAll(getTruncatedExclusions(local, forceExcludes));
-            } else if (path.startsWith(local)) {
-                // local is shorter than path and is directory
-                // (path="omegat/project_save" for
-                // "omegat/"=>"...")
-                filterPrefix = withSlashes(path.substring(local.length()));
-                this.forceExcludes.addAll(Arrays.asList(forceExcludes));
-            } else if (local.equals("/")) {
-                // root(full project path) mapping (""=>"...")
-                filterPrefix = path;
-                this.forceExcludes.addAll(Arrays.asList(forceExcludes));
+                addTruncatedExcludes(localPath, forceExcludes);
+            } else if (isSuperPath) {
+                filterPrefix = withSlashes(projectPath.substring(localPath.length()));
+                addRawExcludes(forceExcludes);
+            } else if (isLocalRoot) {
+                filterPrefix = projectPath;
+                addRawExcludes(forceExcludes);
             } else {
                 // otherwise path doesn't correspond with repoMapping
                 filterPrefix = null;
@@ -448,6 +453,14 @@ public class RemoteRepositoryProvider {
                     .collect(Collectors.toList());
         }
 
+        private void addRawExcludes(String... excludes) {
+            this.forceExcludes.addAll(Arrays.asList(excludes));
+        }
+
+        private void addTruncatedExcludes(String prefix, String... excludes) {
+            this.forceExcludes.addAll(getTruncatedExclusions(prefix, excludes));
+        }
+
         /**
          * Is path matched with mapping ?
          */
@@ -457,7 +470,7 @@ public class RemoteRepositoryProvider {
 
         public void copyFromRepoToProject(final String postfix) throws IOException {
             if (!matches()) {
-                throw new RuntimeException("Path doesn't match with mapping");
+                throw new IllegalArgumentException("Path doesn't match with mapping");
             }
             // Remove leading slashes on child args to avoid doing `new
             // File("foo", "/")` which treats the "/" as an actual child element
@@ -474,21 +487,21 @@ public class RemoteRepositoryProvider {
                 // e.g. you opened an omegat.properties to download a team
                 // project, but it refers to a remote repo location that doesn't
                 // exist.
-                throw new RuntimeException("Location '" + withoutLeadingSlash(repoMapping.getRepository())
+                throw new IllegalArgumentException("Location '" + withoutLeadingSlash(repoMapping.getRepository())
                         + "' does not exist in repository " + repoDefinition.getUrl());
             } else {
                 // file mapping
                 if (!filterPrefix.equals("/")) {
-                    throw new RuntimeException(
+                    throw new IllegalArgumentException(
                             "Filter prefix should have been / for file mapping, but was " + filterPrefix);
                 }
                 copyFile(from, to, null);
             }
         }
 
-        public void copyFromProjectToRepo(String eolConversionCharset) throws Exception {
+        public void copyFromProjectToRepo(@Nullable String eolConversionCharset) throws Exception {
             if (!matches()) {
-                throw new RuntimeException("Path doesn't match with mapping");
+                throw new IllegalArgumentException("Path doesn't match with mapping");
             }
             // Remove leading slashes on child args to avoid doing `new
             // File("foo", "/")` which treats the "/" as an actual child element
@@ -510,7 +523,7 @@ public class RemoteRepositoryProvider {
             } else {
                 // file mapping
                 if (!filterPrefix.equals("/")) {
-                    throw new RuntimeException(
+                    throw new IllegalArgumentException(
                             "Filter prefix should have been '/' for file mapping, but was '" + filterPrefix
                                     + "'");
                 }
@@ -582,7 +595,7 @@ public class RemoteRepositoryProvider {
                     }
                 }
             } catch (Exception e) {
-                LOGGER.atWarn().setMessage("").setCause(e).log();
+                Log.log(e);
             }
         }
 
@@ -592,12 +605,12 @@ public class RemoteRepositoryProvider {
             }
             try {
                 if (f.isFile()) {
-                    boolean ignored = f.delete();
+                    FileUtils.deleteQuietly(f);
                 } else {
                     FileUtils.deleteDirectory(f);
                 }
-            } catch (Exception e) {
-                LOGGER.atWarn().setMessageRB("LOG_ERROR_DELETE_FILE").addArgument(f).log();
+            } catch (IOException e) {
+                Log.logWarningRB("LOG_ERROR_DELETE_FILE", f.getAbsolutePath(), e.getMessage());
             }
         }
     }

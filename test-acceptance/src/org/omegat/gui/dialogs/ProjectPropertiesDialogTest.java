@@ -73,11 +73,17 @@ public class ProjectPropertiesDialogTest extends TestCoreGUI {
                 .requireSelection(LuceneEnglishTokenizer.class.getSimpleName());
         window.dialog(ProjectPropertiesDialog.DIALOG_NAME).comboBox(ProjectPropertiesDialog.TARGET_TOKENIZER_FIELD_NAME)
                 .requireSelection(LuceneFrenchTokenizer.class.getSimpleName());
-        // Check sentence setmenting
+        // Check sentence segmenting
         window.dialog(ProjectPropertiesDialog.DIALOG_NAME).checkBox(ProjectPropertiesDialog.SENTENCE_SEGMENTING_CB_NAME)
                 .requireText(Mnemonics.removeMnemonics(OStrings.getString("PP_SENTENCE_SEGMENTING")));
         window.dialog(ProjectPropertiesDialog.DIALOG_NAME).checkBox(ProjectPropertiesDialog.SENTENCE_SEGMENTING_CB_NAME)
                 .requireNotSelected();
+        //
+        robot().waitForIdle();
+        Thread.sleep(100);
+        // Check OK button enabled
+        window.dialog(ProjectPropertiesDialog.DIALOG_NAME).button(ProjectPropertiesDialog.OK_BUTTON_NAME)
+                .requireVisible().requireEnabled();
         // click Ok
         window.dialog(ProjectPropertiesDialog.DIALOG_NAME).button(ProjectPropertiesDialog.OK_BUTTON_NAME).click();
         // Click No for restart dialog

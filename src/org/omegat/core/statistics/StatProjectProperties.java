@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 
@@ -41,12 +42,16 @@ import org.omegat.core.data.ProjectProperties;
 public final class StatProjectProperties {
 
     @JsonProperty("name")
+    @JacksonXmlProperty(isAttribute = true)
     private final String projectName;
     @JsonProperty("root")
+    @JacksonXmlProperty(isAttribute = true)
     private final String projectRoot;
-    @JsonProperty("source-langauge")
+    @JsonProperty("source-language")
+    @JacksonXmlProperty(isAttribute = true)
     private final String sourceLanguage;
     @JsonProperty("target-language")
+    @JacksonXmlProperty(isAttribute = true)
     private final String targetLanguage;
 
     @JsonIgnore
@@ -59,7 +64,15 @@ public final class StatProjectProperties {
         this.sourceLanguage = props.getSourceLanguage().getLanguage();
         this.targetLanguage = props.getTargetLanguage().getLanguage();
         this.sourceRoot = props.getSourceRoot();
+    }
 
+    public StatProjectProperties(String projectName, String projectRoot, String sourceLanguage,
+            String targetLanguage, String sourceRoot) {
+        this.projectName = projectName;
+        this.projectRoot = projectRoot;
+        this.sourceLanguage = sourceLanguage;
+        this.targetLanguage = targetLanguage;
+        this.sourceRoot = sourceRoot;
     }
 
     @XmlAttribute(name = "name")

@@ -35,6 +35,7 @@ import java.net.URLEncoder;
 import java.util.ResourceBundle;
 
 import org.apache.commons.io.IOUtils;
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -94,7 +95,7 @@ public class BelazarTranslate extends BaseCachedTranslate {
      *             when communication error.
      */
     @Override
-    protected String translate(Language sLang, Language tLang, String text) throws Exception {
+    protected @Nullable String translate(Language sLang, Language tLang, String text) throws Exception {
         String mode;
         if ("be".equalsIgnoreCase(sLang.getLanguageCode())
                 && "ru".equalsIgnoreCase(tLang.getLanguageCode())) {

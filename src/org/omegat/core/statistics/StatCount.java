@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 
@@ -52,18 +53,23 @@ import org.omegat.core.data.SourceTextEntry;
 public class StatCount {
 
     @JsonProperty("segments")
+    @JacksonXmlProperty(isAttribute = true)
     @XmlAttribute(name = "segments")
     public int segments;
     @JsonProperty("words")
+    @JacksonXmlProperty(isAttribute = true)
     @XmlAttribute(name = "words")
     public int words;
     @JsonProperty("characters-without-spaces")
+    @JacksonXmlProperty(isAttribute = true)
     @XmlAttribute(name = "characters-without-spaces")
     public int charsWithoutSpaces;
     @JsonProperty("characters")
+    @JacksonXmlProperty(isAttribute = true)
     @XmlAttribute(name = "characters")
     public int charsWithSpaces;
     @JsonProperty("files")
+    @JacksonXmlProperty(isAttribute = true)
     @XmlAttribute(name = "files")
     public int files;
 

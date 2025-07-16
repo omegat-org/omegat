@@ -31,6 +31,7 @@ import java.io.File;
 import javax.swing.JDialog;
 import javax.swing.text.JTextComponent;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -62,10 +63,12 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
     /**
      * Create a new project.
      */
+    @Override
     public void projectNewMenuItemActionPerformed() {
         ProjectUICommands.projectCreate();
     }
 
+    @Override
     public void projectExitMenuItemActionPerformed() {
         mainWindow.getApplicationFrame().setVisible(false);
         mainWindow.getApplicationFrame().setEnabled(false);
@@ -187,17 +190,17 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
         Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
-
+    @Override
     public void editFindInProjectMenuItemActionPerformed() {
     }
-
+    @Override
     void findInProjectReuseLastWindow() {
     }
 
     public void editReplaceInProjectMenuItemActionPerformed() {
     }
 
-    private String getTrimmedSelectedTextInMainWindow() {
+    private @Nullable String getTrimmedSelectedTextInMainWindow() {
         String selection = null;
         Component component = mainWindow.getApplicationFrame().getMostRecentFocusOwner();
         if (component instanceof JTextComponent) {
@@ -387,7 +390,7 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
     public void helpLogMenuItemActionPerformed() {
         LogDialogController.show(Core.getMainWindow().getApplicationFrame());
     }
-
+    @Override
     public void helpAboutMenuItemActionPerformed() {
         JDialog aboutDialog = new AboutDialog(mainWindow.getApplicationFrame());
         aboutDialog.setVisible(true);

@@ -32,8 +32,10 @@ import org.apache.commons.io.input.XmlStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
@@ -163,7 +165,15 @@ public class TMXReader2 {
 
         if (forceOmegaTMX) {
             Validator validator = getValidator(forceOmegaTMX);
+            XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
+            validator.setErrorHandler(xsdErrorHandler);
             validator.validate(new StreamSource(getInputStream(file)));
+            if (!xsdErrorHandler.getExceptions().isEmpty()) {
+                for (Exception e : xsdErrorHandler.getExceptions()) {
+                    Log.log(e.getLocalizedMessage());
+                }
+                throw new SAXException("OmegaT TMX validation failed.");
+            }
         } else {
             inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
             inputFactory.setProperty(IS_VALIDATING, true);
@@ -227,6 +237,34 @@ public class TMXReader2 {
             return validator;
         } catch (SAXException ex) {
             throw new SAXException("Failed to create validator: " + ex.getMessage(), ex);
+        }
+    }
+
+    public static class XmlErrorHandler implements ErrorHandler {
+
+        private final List<SAXParseException> exceptions;
+
+        public XmlErrorHandler() {
+            this.exceptions = new ArrayList<>();
+        }
+
+        public List<SAXParseException> getExceptions() {
+            return exceptions;
+        }
+
+        @Override
+        public void warning(SAXParseException exception) {
+            exceptions.add(exception);
+        }
+
+        @Override
+        public void error(SAXParseException exception) {
+            exceptions.add(exception);
+        }
+
+        @Override
+        public void fatalError(SAXParseException exception) {
+            exceptions.add(exception);
         }
     }
 

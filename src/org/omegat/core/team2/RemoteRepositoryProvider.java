@@ -301,7 +301,7 @@ public class RemoteRepositoryProvider {
      *            repository-specific for existing files, and to
      *            platform-specific for new files
      */
-    public void copyFilesFromProjectToRepos(String localPath, String eolConversionCharset) throws Exception {
+    public void copyFilesFromProjectToRepos(String localPath, @Nullable String eolConversionCharset) throws Exception {
         for (Mapping m : getMappings(localPath)) {
             m.copyFromProjectToRepo(eolConversionCharset);
         }

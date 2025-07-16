@@ -26,9 +26,7 @@
 package org.omegat.core;
 
 import org.jetbrains.annotations.Nullable;
-import org.omegat.core.data.CoreState;
 import org.omegat.core.data.TestCoreState;
-import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.glossary.IGlossaries;
@@ -50,10 +48,6 @@ public final class TestCoreInitializer {
         TestCoreState.getInstance().setEditor(editor);
     }
 
-    public static void initTagValidation(ITagValidation tagValidation) {
-        CoreState.getInstance().setTagValidation(tagValidation);
-    }
-
     public static void initAutoSave(IAutoSave autoSave) {
         TestCoreState.initAutoSave(autoSave);
     }
@@ -61,16 +55,16 @@ public final class TestCoreInitializer {
     public static void initMainWindow(@Nullable IMainWindow mainWindow) throws Exception {
         TestCoreState.getInstance().setMainWindow(mainWindow);
 
-        if (StaticUIUtils.isGUI()) {
+        if (StaticUIUtils.isGUI() && mainWindow != null) {
             Core.initializeGUIimpl(mainWindow);
         }
     }
 
     public static void initGlossary(IGlossaries glossaries) {
-        CoreState.getInstance().setGlossaries(glossaries);
+        TestCoreState.getInstance().setGlossaries(glossaries);
     }
 
     public static void initNotes(INotes notes) {
-        CoreState.getInstance().setNotes(notes);
+        TestCoreState.getInstance().setNotes(notes);
     }
 }

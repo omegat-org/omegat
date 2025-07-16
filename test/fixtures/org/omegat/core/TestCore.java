@@ -26,9 +26,7 @@
 
 package org.omegat.core;
 
-import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,6 +36,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import com.vlsolutions.swing.docking.Dockable;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -53,14 +52,12 @@ import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Platform;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.MenuExtender;
-
-import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * Core setup for unit tests.
@@ -281,7 +278,7 @@ public abstract class TestCore {
      */
     protected IMainWindow createTestMainWindow() {
         final IMainMenu mainMenu = createTestMainMenu();
-        return new IMainWindow() {
+        return new ConsoleWindow() {
             @Override
             public void addDockable(Dockable pane) {
             }
@@ -297,58 +294,16 @@ public abstract class TestCore {
                 return new JFrame();
             }
             @Override
-            public void lockUI() {
-            }
-            @Override
             public void showLengthMessage(String messageText) {
+                // do nothing
             }
             @Override
             public void showProgressMessage(String messageText) {
-            }
-            @Override
-            public void showStatusMessageRB(String messageKey, Object... params) {
-            }
-            @Override
-            public void showTimedStatusMessageRB(String messageKey, Object... params) {
-            }
-            @Override
-            public void displayWarningRB(String warningKey, Object... params) {
-            }
-            @Override
-            public void displayWarningRB(String warningKey, String supercedesKey, Object... params) {
-            }
-            @Override
-            public void showErrorDialogRB(String title, String message, Object... args) {
-            }
-            @Override
-            public void unlockUI() {
+                // do nothing
             }
             @Override
             public IMainMenu getMainMenu() {
                 return mainMenu;
-            }
-
-            @Override
-            public DockingDesktop getDesktop() {
-                return null;
-            }
-            @Override
-            public Cursor getCursor() {
-                return null;
-            }
-            @Override
-            public void setCursor(Cursor cursor) {
-            }
-            @Override
-            public int showConfirmDialog(Object message, String title, int optionType, int messageType)
-                    throws HeadlessException {
-                return 0;
-            }
-            @Override
-            public void showMessageDialog(String message) {
-            }
-            @Override
-            public void showLockInsertMessage(String messageText, String toolTip) {
             }
         };
     }
@@ -479,7 +434,7 @@ public abstract class TestCore {
 
             @Override
             public String getDisplayModificationInfo() {
-                return null;
+                return "";
             }
 
             @Override
@@ -694,7 +649,7 @@ public abstract class TestCore {
 
             @Override
             public String getSelectedText() {
-                return null;
+                return "";
             }
 
             @Override
@@ -708,17 +663,17 @@ public abstract class TestCore {
 
             @Override
             public String getCurrentTranslation() {
-                return null;
+                return "";
             }
 
             @Override
             public String getCurrentTargetFile() {
-                return null;
+                return "";
             }
 
             @Override
             public String getCurrentFile() {
-                return null;
+                return "";
             }
 
             @Override

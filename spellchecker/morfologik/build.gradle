@@ -14,18 +14,7 @@ dependencies {
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.slf4j.format.jdk14)
-        compileOnly(libs.languagetool.core) {
-            exclude module: 'guava'
-            exclude module: 'jackson-databind'
-            exclude module: 'language-detector'
-            exclude module: 'hunspell'
-            exclude group: 'com.google.android'
-            exclude group: 'org.jetbrains'
-            exclude module: 'morfologik-fsa'
-            exclude module: 'commons-lang3'
-            exclude module: 'commons-text'
-            exclude module: 'commons-logging'
-        }
+        compileOnly(libs.languagetool.core)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)

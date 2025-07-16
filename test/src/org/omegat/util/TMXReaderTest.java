@@ -37,6 +37,7 @@ import java.util.TreeMap;
 import org.apache.commons.io.ByteOrderMark;
 import org.junit.Test;
 import org.omegat.core.TestCore;
+import org.xml.sax.SAXException;
 
 /**
  * @author Alex Buloichik
@@ -44,6 +45,23 @@ import org.omegat.core.TestCore;
 public class TMXReaderTest extends TestCore {
     protected File outFile = new File(System.getProperty("java.io.tmpdir"), "OmegaT test - "
             + getClass().getSimpleName());
+
+    @Test
+    public void testOmegaT() throws Exception {
+        final Map<String, String> tr = new TreeMap<>();
+        new TMXReader2().readTMX(new File("test/data/tmx/test-omegat.tmx"), new Language("en-US"),
+                new Language("be"), false, true, false, false, new TMXReader2.LoadCallback() {
+                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                                           TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                        tr.put(tuvSource.text, tuvTarget.text);
+                        return true;
+                    }
+                });
+        assertEquals("betuv", tr.get("entuv"));
+        assertEquals("tr1", tr.get("lang1"));
+        assertEquals("tr2", tr.get("lang2"));
+        assertEquals("tr3", tr.get("lang3"));
+    }
 
     @Test
     public void testLeveL1() throws Exception {
@@ -106,6 +124,17 @@ public class TMXReaderTest extends TestCore {
         assertEquals("betuv", tr.get("entuv"));
         assertEquals("tr", tr.get("2 <a0> zz <t1>xx</t1>"));
         assertEquals("tr", tr.get("3 <n0>xx</n0>"));
+    }
+
+    @Test(expected = SAXException.class)
+    public void testOmegatInvalidTMX() throws Exception {
+        final Map<String, String> tr = new TreeMap<>();
+        new TMXReader2().readTMX(new File("test/data/tmx/test-omegat-invalid.tmx"), new Language("en"),
+                new Language("be"), false, true, true, false,
+                (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                    tr.put(tuvSource.text, tuvTarget.text);
+                    return true;
+                });
     }
 
     @Test

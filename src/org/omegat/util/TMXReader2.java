@@ -233,7 +233,7 @@ public class TMXReader2 {
         private String systemId;
         private String baseURI;
 
-        public DumbLSResourceResolver() {
+        DumbLSResourceResolver() {
             encoding = StandardCharsets.UTF_8.name();
         }
 

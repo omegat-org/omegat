@@ -29,8 +29,11 @@
 package org.omegat.util;
 
 import org.apache.commons.io.input.XmlStreamReader;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.ls.LSInput;
+import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -57,7 +60,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -134,6 +141,7 @@ public class TMXReader2 {
         inputFactory.setProperty(SUPPORT_DTD, false);
         inputFactory.setProperty(IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         inputFactory.setProperty(IS_REPLACING_ENTITY_REFERENCES, false);
+        inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
 
         inputFactory.setXMLReporter((message, errorType, info, location) -> {
             Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(), location.getColumnNumber());
@@ -174,9 +182,6 @@ public class TMXReader2 {
                 }
                 throw new SAXException("OmegaT TMX validation failed.");
             }
-        } else {
-            inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
-            inputFactory.setProperty(IS_VALIDATING, true);
         }
 
         // log the parsing attempt
@@ -221,6 +226,124 @@ public class TMXReader2 {
         }
     }
 
+    static class DumbLSResourceResolver implements LSResourceResolver {
+
+        private String encoding;
+        private String publicId;
+        private String systemId;
+        private String baseURI;
+
+        public DumbLSResourceResolver() {
+            encoding = StandardCharsets.UTF_8.name();
+        }
+
+        @Override
+        public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId,
+                                       String baseURI) {
+            this.publicId = publicId;
+            this.systemId = systemId;
+            this.baseURI = baseURI;
+            if (systemId.endsWith("tmx11.dtd")) {
+                return getLsInput("/schemas/tmx11.dtd");
+            } else if (systemId.endsWith("tmx14.dtd")) {
+                return getLsInput("/schemas/tmx14.dtd");
+            } else {
+                return null;
+            }
+        }
+
+        private @NotNull LSInput getLsInput(String dtd) {
+            return new LSInput() {
+                @Override
+                public Reader getCharacterStream() {
+                    InputStream is = TMXReader2.class.getResourceAsStream(dtd);
+                    if (is == null) {
+                        return new StringReader("");
+                    }
+                    return new InputStreamReader(is, StandardCharsets.UTF_8);
+                }
+
+                @Override
+                public void setCharacterStream(Reader characterStream) {
+                }
+
+                @Override
+                public InputStream getByteStream() {
+                    return TMXReader2.class.getResourceAsStream(dtd);
+                }
+
+                @Override
+                public void setByteStream(InputStream byteStream) {
+                }
+
+                @Override
+                public String getStringData() {
+                    try (InputStream is = TMXReader2.class.getResourceAsStream(dtd)) {
+                        if (is == null) {
+                            return "";
+                        }
+                        return new String(is.readAllBytes(), StandardCharsets.UTF_8);
+                    } catch (IOException e) {
+                        return "";
+                    }
+                }
+
+                @Override
+                public void setStringData(String stringData) {
+                }
+
+                @Override
+                public String getSystemId() {
+                    return systemId;
+                }
+
+                @Override
+                public void setSystemId(String newsystemId) {
+                    systemId = newsystemId;
+                }
+
+                @Override
+                public String getPublicId() {
+                    return publicId;
+                }
+
+                @Override
+                public void setPublicId(String newPublicId) {
+                    publicId = newPublicId;
+                }
+
+                @Override
+                public String getBaseURI() {
+                    return baseURI;
+                }
+
+                @Override
+                public void setBaseURI(String newBaseURI) {
+                    baseURI = newBaseURI;
+                }
+
+                @Override
+                public String getEncoding() {
+                    return encoding;
+                }
+
+                @Override
+                public void setEncoding(String newEncoding) {
+                    encoding = newEncoding;
+                }
+
+                @Override
+                public boolean getCertifiedText() {
+                    return false;
+                }
+
+                @Override
+                public void setCertifiedText(boolean certifiedText) {
+                }
+            };
+        }
+    }
+
     private Validator getValidator(boolean forceOmegaTMX) throws SAXException {
 
         String schemaPath = forceOmegaTMX ? "/schemas/tmx11.xsd" : "/schemas/tmx14.xsd";
@@ -234,6 +357,7 @@ public class TMXReader2 {
             Validator validator;
             Schema schema = schemaFactory.newSchema(schemaUrl);
             validator = schema.newValidator();
+            validator.setResourceResolver(new DumbLSResourceResolver());
             return validator;
         } catch (SAXException ex) {
             throw new SAXException("Failed to create validator: " + ex.getMessage(), ex);
@@ -639,7 +763,7 @@ public class TMXReader2 {
                     segContent.append('/');
                 }
                 segContent.appendCodePoint(tagName);
-                segContent.append(Integer.toString(tagN));
+                segContent.append(tagN);
                 if (slashAfter) {
                     segContent.append('/');
                 }
@@ -659,7 +783,7 @@ public class TMXReader2 {
 
     /**
      * Get ParsedTuv from list of Tuv for specific language.
-     *
+     * <p>
      * Language chosen by:<br>
      * - with the same language+country<br>
      * - if not exist, then with the same language but without country<br>
@@ -707,11 +831,11 @@ public class TMXReader2 {
         }
         try {
             return dateFormat1.parse(str).getTime();
-        } catch (ParseException ex) {
+        } catch (ParseException ignored) {
         }
         try {
             return dateFormat2.parse(str).getTime();
-        } catch (ParseException ex) {
+        } catch (ParseException ignored) {
         }
 
         return 0;

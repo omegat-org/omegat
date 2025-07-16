@@ -64,6 +64,23 @@ public class TMXReaderTest extends TestCore {
     }
 
     @Test
+    public void testOmegaTLevel1() throws Exception {
+        final Map<String, String> tr = new TreeMap<>();
+        new TMXReader2().readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"),
+                new Language("be"), false, true, false, false, new TMXReader2.LoadCallback() {
+                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                                           TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                        tr.put(tuvSource.text, tuvTarget.text);
+                        return true;
+                    }
+                });
+        assertEquals("betuv", tr.get("entuv"));
+        assertEquals("tr1", tr.get("lang1"));
+        assertEquals("tr2", tr.get("lang2"));
+        assertEquals("tr3", tr.get("lang3"));
+    }
+
+    @Test
     public void testLeveL1() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"),

@@ -160,17 +160,15 @@ public class TMXReader2 {
         this.useSlash = useSlash;
         this.isSegmentingEnabled = isSegmentingEnabled;
 
-        if (forceOmegaTMX) {
-            Validator validator = getValidator(forceOmegaTMX);
-            XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
-            validator.setErrorHandler(xsdErrorHandler);
-            validator.validate(new StreamSource(getInputStream(file)));
-            if (!xsdErrorHandler.getExceptions().isEmpty()) {
-                for (Exception e : xsdErrorHandler.getExceptions()) {
-                    Log.log(e.getLocalizedMessage());
-                }
-                throw new SAXException("OmegaT TMX validation failed.");
+        Validator validator = getValidator(forceOmegaTMX, extTmxLevel2);
+        XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
+        validator.setErrorHandler(xsdErrorHandler);
+        validator.validate(new StreamSource(getInputStream(file)));
+        if (!xsdErrorHandler.getExceptions().isEmpty()) {
+            for (Exception e : xsdErrorHandler.getExceptions()) {
+                Log.log(e.getLocalizedMessage());
             }
+            throw new SAXException("OmegaT TMX validation failed.");
         }
 
         // log the parsing attempt
@@ -215,9 +213,16 @@ public class TMXReader2 {
         }
     }
 
-    private Validator getValidator(boolean forceOmegaTMX) throws SAXException {
+    private Validator getValidator(boolean forceOmegaTMX, boolean extTmxLevel2) throws SAXException {
 
-        String schemaPath = forceOmegaTMX ? "/schemas/tmx11.xsd" : "/schemas/tmx14.xsd";
+        String schemaPath;
+        if (forceOmegaTMX) {
+            schemaPath = "/schemas/tmx11.xsd";
+        } else if (extTmxLevel2) {
+            schemaPath = "/schemas/tmx14.xsd";
+        } else {
+            schemaPath = "/schemas/tmx11.xsd";
+        }
 
         // Check if a resource exists
         URL schemaUrl = getClass().getResource(schemaPath);

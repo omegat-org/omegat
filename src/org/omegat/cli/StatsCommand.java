@@ -68,12 +68,7 @@ public class StatsCommand implements Callable<Integer> {
         }
         legacyParams.initialize();
         params.initialize();
-        if (output == null) {
-            output = legacyParams.statsOutput;
-        }
-        if (format == null) {
-            format = legacyParams.statsType;
-        }
+        params.setProjectLocation(project);
         try {
             return runConsoleStats();
         } catch (Exception e) {
@@ -99,7 +94,12 @@ public class StatsCommand implements Callable<Integer> {
         if (!params.team || legacyParams.noTeam) {
             RuntimePreferences.setNoTeam();
         }
-
+        if (output == null) {
+            output = legacyParams.statsOutput;
+        }
+        if (format == null) {
+            format = legacyParams.statsType;
+        }
         Core.initializeConsole();
 
         if (legacyParams.disableProjectLocking) {

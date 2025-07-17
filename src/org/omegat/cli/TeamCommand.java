@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
@@ -41,6 +42,7 @@ import java.util.logging.Level;
 @CommandLine.Command(name = "team", resourceBundle = "org.omegat.cli.Parameters")
 public class TeamCommand implements Callable<Integer> {
 
+    @SuppressWarnings("unused")
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true)
     boolean usageHelpRequested = false;
 
@@ -50,8 +52,11 @@ public class TeamCommand implements Callable<Integer> {
     @CommandLine.Command(name = "init")
     @SuppressWarnings("unused")
     int init(@CommandLine.Parameters(index = "0", paramLabel = "<source>") String sLang,
-            @CommandLine.Parameters(index = "1", paramLabel = "<target>") String tLang) {
-        return executeInit(sLang, tLang);
+             @CommandLine.Parameters(index = "1", paramLabel = "<target>") String tLang,
+             @CommandLine.Parameters(index = "2", paramLabel = "<dir>", arity = "0..1",
+                     defaultValue = CommandLine.Option.NULL_VALUE)
+             @Nullable String dir) {
+        return executeInit(dir, sLang, tLang);
     }
 
     /**
@@ -62,13 +67,19 @@ public class TeamCommand implements Callable<Integer> {
      * @param tLang
      *            target language.
      */
-    private int executeInit(String sLang, String tLang) {
+    private int executeInit(String dir, String sLang, String tLang) {
         Log.setLevel(Level.WARNING);
 
         try {
             Preferences.init();
             PluginUtils.loadPlugins(Collections.emptyMap());
-            TeamTool.initTeamProject(new File("").getAbsoluteFile(), sLang, tLang);
+            File targetDir;
+            if (dir == null) {
+                targetDir = new File("").getAbsoluteFile();
+            } else {
+                targetDir = new File(dir);
+            }
+            TeamTool.initTeamProject(targetDir, sLang, tLang);
             return 0;
         } catch (Exception ex) {
             Log.log(ex);

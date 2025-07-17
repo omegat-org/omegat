@@ -85,7 +85,6 @@ import static javax.xml.stream.XMLInputFactory.SUPPORT_DTD;
 public class TMXReader2 {
 
     private final XMLInputFactory inputFactory;
-    private final SchemaFactory schemaFactory;
     private final SimpleDateFormat dateFormat1;
     private final SimpleDateFormat dateFormat2;
 
@@ -104,7 +103,8 @@ public class TMXReader2 {
     private boolean useSlash;
     private boolean isSegmentingEnabled;
 
-    private int errorsCount, warningsCount;
+    private int errorsCount;
+    private int warningsCount;
 
     ParsedTu currentTu = new ParsedTu();
 
@@ -134,20 +134,16 @@ public class TMXReader2 {
         inputFactory.setProperty(SUPPORT_DTD, false);
         inputFactory.setProperty(IS_SUPPORTING_EXTERNAL_ENTITIES, false);
         inputFactory.setProperty(IS_REPLACING_ENTITY_REFERENCES, false);
-        inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
-
         inputFactory.setXMLReporter((message, errorType, info, location) -> {
             Log.logWarningRB("TMXR_WARNING_WHILE_PARSING", location.getLineNumber(), location.getColumnNumber());
             Log.log(StringUtil.format("{0}: {1}", message, info));
             warningsCount++;
         });
-        schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        inputFactory.setXMLResolver(TMX_DTD_RESOLVER_2);
         dateFormat1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
         dateFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
         dateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
         dateFormat2.setTimeZone(TimeZone.getTimeZone("UTC"));
-        SimpleDateFormat dateFormatOut = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        dateFormatOut.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
     public boolean isParagraphSegtype() {
@@ -230,6 +226,7 @@ public class TMXReader2 {
         }
         try {
             Validator validator;
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = schemaFactory.newSchema(schemaUrl);
             validator = schema.newValidator();
             validator.setResourceResolver(new TMXLSResourceResolver());

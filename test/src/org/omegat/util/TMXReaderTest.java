@@ -40,6 +40,11 @@ import org.omegat.core.TestCore;
 import org.xml.sax.SAXException;
 
 /**
+ * Unit tests for the TMXReader2 class to validate the parsing and handling of TMX translation memory files.
+ * This test suite ensures proper translation mapping, handles various TMX formats,
+ * and verifies the behavior with different input configurations and encoding levels.
+ * It also tests the handling of invalid TMX files and verifies language-specific behavior.
+ *
  * @author Alex Buloichik
  */
 public class TMXReaderTest extends TestCore {
@@ -145,11 +150,9 @@ public class TMXReaderTest extends TestCore {
 
     @Test(expected = SAXException.class)
     public void testOmegatInvalidTMX() throws Exception {
-        final Map<String, String> tr = new TreeMap<>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-omegat-invalid.tmx"), new Language("en"),
                 new Language("be"), false, true, true, false,
                 (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
-                    tr.put(tuvSource.text, tuvTarget.text);
                     return true;
                 });
     }

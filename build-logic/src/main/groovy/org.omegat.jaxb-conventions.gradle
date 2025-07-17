@@ -46,8 +46,9 @@ makeJaxbTask(name: 'tbx', outdir: generatedSourcePath + 'gen/core/tbx',
 makeJaxbTask(name: 'project', outdir: generatedSourcePath + 'gen/core/project',
         args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.project',
                schemaSourcePath + 'project_properties.xsd'])
-makeJaxbTask(name: 'tmx14', outdir: generatedSourcePath + 'gen/core/tmx14',
-        args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.tmx14', '-b', schemaSourcePath + 'tmx14.xjb',
-               schemaSourcePath + 'tmx14.xsd'])
-makeJaxbTask(name: 'tmx11', outdir: generatedSourcePath + 'gen/core/tmx11',
-        args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.tmx11', schemaSourcePath + 'tmx11.xsd'])
+// We dont use generated tmx data class source in the OmegaT core
+// makeJaxbTask(name: 'tmx14', outdir: generatedSourcePath + 'gen/core/tmx14',
+//         args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.tmx14', '-b', schemaSourcePath + 'tmx14.xjb',
+//                schemaSourcePath + 'tmx14.xsd'])
+// makeJaxbTask(name: 'tmx11', outdir: generatedSourcePath + 'gen/core/tmx11',
+//         args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.tmx11', schemaSourcePath + 'tmx11.xsd'])

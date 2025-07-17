@@ -164,5 +164,4 @@ public class AlignCommand implements Callable<Integer> {
             return 1;
         }
     }
-
 }

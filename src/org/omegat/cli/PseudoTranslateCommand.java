@@ -51,6 +51,16 @@ public class PseudoTranslateCommand implements Callable<Integer> {
     @CommandLine.Mixin
     @Nullable Parameters params;
 
+    @CommandLine.Option(names = { "--type" }, paramLabel = "<type>", defaultValue = "empty",
+            descriptionKey = "PSEUDO_TRANSLATE_TYPE")
+    @Nullable String type;
+
+    @CommandLine.Option(names = { "--output-file" }, paramLabel = "<filename>", descriptionKey = "PSEUDO_TRANSLATE_TMX" )
+    @Nullable String filename;
+
+    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
+    @Nullable String project;
+
     @Override
     public Integer call() {
         if (params == null || legacyParameters == null) {
@@ -58,6 +68,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
         }
         legacyParameters.initialize();
         params.initialize();
+        params.setProjectLocation(project);
         try {
             return runCreatePseudoTranslateTMX();
         } catch (Exception ex) {
@@ -70,7 +81,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
     /**
      * Execute in console mode for translate.
      */
-    int runCreatePseudoTranslateTMX() throws Exception {
+    int runCreatePseudoTranslateTMX() {
         if (params == null || legacyParameters == null) {
             return 1;
         }
@@ -90,6 +101,13 @@ public class PseudoTranslateCommand implements Callable<Integer> {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
 
+        if (filename == null && legacyParameters.pseudoTranslateTmxPath != null) {
+            filename = legacyParameters.pseudoTranslateTmxPath;
+        }
+        if (type == null && legacyParameters.pseudoTranslateTypeName != null) {
+            type = legacyParameters.pseudoTranslateTypeName;
+        }
+
         RealProject p = Common.selectProjectConsoleMode(true, params);
 
         Common.validateTagsConsoleMode(params);
@@ -98,37 +116,35 @@ public class PseudoTranslateCommand implements Callable<Integer> {
 
         ProjectProperties config = p.getProjectProperties();
         List<SourceTextEntry> entries = p.getAllEntries();
-        String pseudoTranslateTMXFilename = legacyParameters.pseudoTranslateTmxPath;
-        String pseudoTranslateType = legacyParameters.pseudoTranslateTypeName;
 
         String fname;
-        if (pseudoTranslateTMXFilename != null && !StringUtil.isEmpty(pseudoTranslateTMXFilename)) {
-            if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
-                fname = pseudoTranslateTMXFilename + "." + OConsts.TMX_EXTENSION;
+        if (filename != null && !StringUtil.isEmpty(filename)) {
+            if (!filename.endsWith(OConsts.TMX_EXTENSION)) {
+                fname = filename + "." + OConsts.TMX_EXTENSION;
             } else {
-                fname = pseudoTranslateTMXFilename;
+                fname = filename;
             }
         } else {
-            fname = "";
+            fname = "pseudotranslate" + OConsts.TMX_EXTENSION;
         }
 
         // Write OmegaT-project-compatible TMX:
         try (TMXWriter2 wr = new TMXWriter2(new File(fname), config.getSourceLanguage(),
                 config.getTargetLanguage(), config.isSentenceSegmentingEnabled(), false, false)) {
             for (SourceTextEntry ste : entries) {
-                if ("equal".equalsIgnoreCase(pseudoTranslateType)) {
+                if ("equal".equalsIgnoreCase(type)) {
                     wr.writeEntry(ste.getSrcText(), ste.getSrcText(), "", "", 0, "", 0, null);
-                } else if ("empty".equalsIgnoreCase(pseudoTranslateType)) {
+                } else if ("empty".equalsIgnoreCase(type)) {
                     wr.writeEntry(ste.getSrcText(), "", "", "", 0, "", 0, null);
                 }
             }
-        } catch (IOException e) {
-            Log.logErrorRB(e, "CT_ERROR_CREATING_TMX");
-            throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
+        } catch (Exception e) {
+            Log.logErrorRB(e, "CT_ERROR_CREATING_PSEUDO_TRANSLATE_TMX", filename == null ? "" : filename);
+            return 1;
+        } finally {
+            p.closeProject();
         }
-        p.closeProject();
         Log.logInfoRB("CONSOLE_FINISHED");
         return 0;
     }
-
 }

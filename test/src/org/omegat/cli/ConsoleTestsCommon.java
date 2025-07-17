@@ -29,6 +29,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.LuceneEnglishTokenizer;
+import org.omegat.tokenizer.LuceneFrenchTokenizer;
+import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
@@ -76,6 +80,11 @@ public class ConsoleTestsCommon {
     void prep() throws Exception {
         // Create project properties
         ProjectProperties props = new ProjectProperties(getProjectDir().toFile());
+        props.setSourceLanguage(new Language("en"));
+        props.setSourceTokenizer(LuceneEnglishTokenizer.class);
+        props.setTargetLanguage(new Language("fr"));
+        props.setTargetTokenizer(LuceneFrenchTokenizer.class);
+        props.setSentenceSegmentingEnabled(true);
         // Create project internal directories
         props.autocreateDirectories();
         // Create a version-controlled glossary file

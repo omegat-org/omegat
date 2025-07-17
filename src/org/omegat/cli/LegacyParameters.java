@@ -42,7 +42,7 @@ import static picocli.CommandLine.Option;
 
 @CommandLine.Command(name = "omegat", mixinStandardHelpOptions = true, version = "6.1.0", subcommands = {
         StartCommand.class, AlignCommand.class, TranslateCommand.class, StatsCommand.class, TeamCommand.class,
-        CommandLine.HelpCommand.class })
+        PseudoTranslateCommand.class, CommandLine.HelpCommand.class })
 public class LegacyParameters implements Callable<Integer> {
 
     @CommandLine.Option(names = { "-V", "--version" }, versionHelp = true)
@@ -175,12 +175,6 @@ public class LegacyParameters implements Callable<Integer> {
                 case "console-stats":
                     StatsCommand statsCommand = new StatsCommand();
                     statsCommand.legacyParams = this;
-                    if (statsOutput != null) {
-                        params.setStatsOutput(statsOutput);
-                    }
-                    if (statsType != null) {
-                        params.setStatsType(statsType);
-                    }
                     statsCommand.params = params;
                     try {
                         return statsCommand.runConsoleStats();
@@ -192,13 +186,7 @@ public class LegacyParameters implements Callable<Integer> {
                     PseudoTranslateCommand pseudoTranslateCommand = new PseudoTranslateCommand();
                     pseudoTranslateCommand.legacyParameters = this;
                     pseudoTranslateCommand.params = params;
-                    try {
-                        return pseudoTranslateCommand.runCreatePseudoTranslateTMX();
-                    } catch (Exception ex) {
-                        Log.logErrorRB(ex, "CT_ERROR_CREATING_PSEUDO_TRANSLATE_TMX",
-                                pseudoTranslateTmxPath == null ? "" : pseudoTranslateTmxPath);
-                    }
-                    return 1;
+                    return pseudoTranslateCommand.runCreatePseudoTranslateTMX();
                 default:
                     Log.logErrorRB("CT_ERROR_UNKNOWN_CONSOLE_MODE", consoleMode);
                     return 1;

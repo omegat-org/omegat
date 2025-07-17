@@ -25,45 +25,45 @@
 
 package org.omegat.cli;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.omegat.Main;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
-import org.omegat.Main;
-
-public class ConsoleTranslateTest extends ConsoleTestsCommon {
+public class ConsolePseudoTranslateTest extends ConsoleTestsCommon {
 
     private static final String SOURCEFILE = "foo.txt";
     private static final String SOURCE = "Connect to custom server {0} instead of apertium.org";
-    private static final String TARGET = "Connectez-vous à un serveur personnalisé au lieu de apertium.org";
 
     @Test
-    public void testConsoleTranslateLegacy() throws Exception {
+    public void testPseudoTranslateLegacy() throws Exception {
         testConsoleTranslatePrep(SOURCEFILE);
 
-        Main.main(new String[] { String.format("--config-dir=%s", getConfigDir()), "--mode=console-translate",
-                getProjectDir().toString() });
+        String pseudoTranslateFile = getTargetDir().resolve("pseudo.tmx").toString();
 
-        Path trgFile = getTargetDir().resolve(SOURCEFILE);
+        Main.main(new String[] { String.format("--config-dir=%s", getConfigDir()), "--mode=console-createpseudotranslatetmx",
+                "--pseudotranslatetmx=" + pseudoTranslateFile,  "--pseudotranslatetype=equal", getProjectDir().toString() });
+
+        Path trgFile = Paths.get(pseudoTranslateFile);
         assertTrue(trgFile.toFile().isFile());
-        assertEquals(List.of(TARGET), Files.readAllLines(trgFile));
     }
 
     @Test
-    public void testConsoleTranslate() throws Exception {
+    public void testPseudoTranslate() throws Exception {
         testConsoleTranslatePrep(SOURCEFILE);
 
-        Main.main(new String[] {"--config-dir", getConfigDir(), "translate", getProjectDir().toString() });
+        String pseudoTranslateFile = getTargetDir().resolve("pseudo.tmx").toString();
 
-        Path trgFile = getTargetDir().resolve(SOURCEFILE);
+        Main.main(new String[] {"--config-dir", getConfigDir(), "pseudo", "--type=equal",
+                "--output-file=" + pseudoTranslateFile, getProjectDir().toString() });
+
+        Path trgFile = Paths.get(pseudoTranslateFile);
         assertTrue(trgFile.toFile().isFile());
-        assertEquals(List.of(TARGET), Files.readAllLines(trgFile));
     }
 
     private void testConsoleTranslatePrep(String fileName) throws Exception {

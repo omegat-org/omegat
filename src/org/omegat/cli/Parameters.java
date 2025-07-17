@@ -83,16 +83,6 @@ public class Parameters {
     @Option(names = { TAG_VALIDATION }, descriptionKey = "params.TAG_VALIDATION")
     @Nullable String tagValidation;
 
-    // CONSOLE_STATS mode
-    public static final String STATS_OUTPUT = "--output-file";
-    public static final String STATS_MODE = "--stats-type";
-    @Option(names = {
-            STATS_OUTPUT }, paramLabel = "<stats-output-file>", hidden = true, descriptionKey = "params.OUTPUT_FILE")
-    @Nullable String statsOutput;
-    @Option(names = {
-            STATS_MODE }, paramLabel = "<xml_or_text_or_json>", hidden = true, descriptionKey = "params.STATS_TYPE")
-    @Nullable String statsType;
-
     // Undocumented CLI options
     public static final String ALTERNATE_FILENAME_FROM = "--alternate-filename-from";
     @Option(names = {
@@ -110,14 +100,6 @@ public class Parameters {
 
     public void setProjectLocation(@Nullable String projectLocation) {
         this.projectLocation = projectLocation;
-    }
-
-    public void setStatsOutput(@Nullable String statsOutput) {
-        this.statsOutput = statsOutput;
-    }
-
-    public void setStatsType(@Nullable String statsType) {
-        this.statsType = statsType;
     }
 
     public static final String VERBOSE = "--verbose";

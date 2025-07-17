@@ -68,11 +68,11 @@ public class StatsCommand implements Callable<Integer> {
         }
         legacyParams.initialize();
         params.initialize();
-        if (output != null) {
-            params.setStatsOutput(output);
+        if (output == null) {
+            output = legacyParams.statsOutput;
         }
-        if (format != null) {
-            params.setStatsType(format);
+        if (format == null) {
+            format = legacyParams.statsType;
         }
         try {
             return runConsoleStats();
@@ -112,35 +112,34 @@ public class StatsCommand implements Callable<Integer> {
         RealProject p = Common.selectProjectConsoleMode(true, params);
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);
         StatOutputFormat statsMode;
-        String outputFilename = params.statsOutput;
 
-        if (outputFilename == null) {
+        if (output == null) {
             // no output file specified, print to console.
             System.out.println(projectStats.getTextData());
             p.closeProject();
             return 0;
-        } else if (params.statsType == null) {
+        } else if (format == null) {
             // when no stats type specified, try to detect from file extension,
             // otherwise XML.
-            if (outputFilename.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.JSON.getFileExtension())) {
+            if (output.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.JSON.getFileExtension())) {
                 statsMode = StatOutputFormat.JSON;
-            } else if (outputFilename.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.XML.getFileExtension())) {
+            } else if (output.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.XML.getFileExtension())) {
                 statsMode = StatOutputFormat.XML;
-            } else if (outputFilename.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.TEXT.getFileExtension())) {
+            } else if (output.toLowerCase(Locale.ENGLISH).endsWith(StatOutputFormat.TEXT.getFileExtension())) {
                 statsMode = StatOutputFormat.TEXT;
             } else {
                 statsMode = StatOutputFormat.XML;
             }
-        } else if (StatOutputFormat.JSON.toString().equalsIgnoreCase(params.statsType)) {
+        } else if (StatOutputFormat.JSON.toString().equalsIgnoreCase(format)) {
             statsMode = StatOutputFormat.JSON;
-        } else if (StatOutputFormat.XML.toString().equalsIgnoreCase(params.statsType)) {
+        } else if (StatOutputFormat.XML.toString().equalsIgnoreCase(format)) {
             statsMode = StatOutputFormat.XML;
-        } else if (StatOutputFormat.TEXT.toString().equalsIgnoreCase(params.statsType)) {
+        } else if (StatOutputFormat.TEXT.toString().equalsIgnoreCase(format)) {
             statsMode = StatOutputFormat.TEXT;
         } else {
             statsMode = StatOutputFormat.XML;
         }
-        File statsFile = Paths.get(FileUtil.expandTildeHomeDir(outputFilename)).toFile();
+        File statsFile = Paths.get(FileUtil.expandTildeHomeDir(output)).toFile();
         Statistics.writeStat(statsFile, projectStats, statsMode);
         return 0;
     }

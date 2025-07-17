@@ -174,7 +174,7 @@ public class TMXReaderTest extends TestCore {
     public void testSMP() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-SMP.tmx"), new Language("en"),
-                new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
+                new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
@@ -256,7 +256,7 @@ public class TMXReaderTest extends TestCore {
     public void testMissingSource() throws Exception {
         Map<String, String> tr = new TreeMap<>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-missingSource.tmx"), new Language("en"),
-                new Language("be"), false, false, true, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
+                new Language("be"), false, false, false, false, (tu, tuvSource, tuvTarget, isParagraphSegtype) -> {
                     if (tuvSource != null && tuvTarget != null) {
                         tr.put(tuvSource.text, tuvTarget.text);
                         return true;

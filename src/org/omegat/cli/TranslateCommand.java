@@ -42,7 +42,8 @@ public class TranslateCommand implements Callable<Integer> {
     @CommandLine.ParentCommand
     @Nullable LegacyParameters legacyParams;
 
-    @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)
+    @CommandLine.Parameters(index = "0", arity = "0..1", paramLabel = "<project>",
+            defaultValue = CommandLine.Option.NULL_VALUE)
     @Nullable String project;
 
     @CommandLine.Mixin
@@ -54,8 +55,8 @@ public class TranslateCommand implements Callable<Integer> {
             return 1;
         }
         legacyParams.initialize();
-        params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         params.initialize();
+        params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         return runConsoleTranslate();
     }
 
@@ -70,6 +71,17 @@ public class TranslateCommand implements Callable<Integer> {
 
         if (!params.team || legacyParams.noTeam) {
             RuntimePreferences.setNoTeam();
+        }
+
+        if (params.projectLocation == null) {
+            params.setProjectLocation(legacyParams.project);
+        }
+
+        if (legacyParams.disableProjectLocking) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
+        if (legacyParams.disableLocationSave) {
+            RuntimePreferences.setLocationSaveEnabled(false);
         }
 
         Log.logInfoRB("CONSOLE_INITIALIZING");
@@ -87,13 +99,6 @@ public class TranslateCommand implements Callable<Integer> {
         } catch (Exception ex) {
             Log.logErrorRB(ex, "CT_ERROR_COMPILING_PROJECT");
             return 1;
-        }
-
-        if (legacyParams.disableProjectLocking) {
-            RuntimePreferences.setProjectLockingEnabled(false);
-        }
-        if (legacyParams.disableLocationSave) {
-            RuntimePreferences.setLocationSaveEnabled(false);
         }
 
         // Called *after* executing post processing command (unlike the

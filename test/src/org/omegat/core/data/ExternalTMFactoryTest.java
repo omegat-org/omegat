@@ -164,10 +164,10 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testFuzzyMultipleTuv() throws Exception {
         TestPreferencesInitializer.init();
-        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, true);
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, false);
 
-        File tmxFile = new File("test/data/tmx/test-multiple-tuv.tmx");
+        File tmxFile = new File("test/data/tmx/test-multiple-tuv14.tmx");
         sourceLang = new Language("en");
         targetLang = new Language("fr");
 

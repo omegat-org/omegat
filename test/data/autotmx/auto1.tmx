@@ -4,16 +4,16 @@
   <header srclang="en" creationtool="test" creationtoolversion="1.0" segtype="sentence" o-tmf="Other" adminlang="en" datatype="plaintext"/>
   <body>
 	<tu>
+		<prop type="x-ice">11</prop>
 		<tuv lang="en"><seg>Edit</seg></tuv>
 		<tuv lang="fr"><seg>Edition</seg></tuv>
-		<prop type="x-ice">11</prop>
 	</tu>
 	
 	<tu>
-		<tuv lang="en"><seg>Edit</seg></tuv>
-		<tuv lang="fr"><seg>Modifier</seg></tuv>
 		<prop type="x-100pc">10</prop>
 		<prop type="x-ice">12</prop>
+		<tuv lang="en"><seg>Edit</seg></tuv>
+		<tuv lang="fr"><seg>Modifier</seg></tuv>
 	</tu>
   </body>
 </tmx>

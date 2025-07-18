@@ -343,7 +343,7 @@ public class FindMatchesTest {
         Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
         // initialize Preferences and segmentation
         TestPreferencesInitializer.init();
-        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, true);
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
     }
 

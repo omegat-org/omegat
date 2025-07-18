@@ -37,6 +37,7 @@ import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
+import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
@@ -50,6 +51,7 @@ public class AutoTmxTest {
     @Before
     public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
     }
 

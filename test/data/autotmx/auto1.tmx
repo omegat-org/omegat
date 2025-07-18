@@ -4,14 +4,14 @@
   <header srclang="en" />
   <body>
 	<tu>
-		<tuv xml:lang="en"><seg>Edit</seg></tuv>
-		<tuv xml:lang="fr"><seg>Edition</seg></tuv>
+		<tuv lang="en"><seg>Edit</seg></tuv>
+		<tuv lang="fr"><seg>Edition</seg></tuv>
 		<prop type="x-ice">11</prop>
 	</tu>
 	
 	<tu>
-		<tuv xml:lang="en"><seg>Edit</seg></tuv>
-		<tuv xml:lang="fr"><seg>Modifier</seg></tuv>
+		<tuv lang="en"><seg>Edit</seg></tuv>
+		<tuv lang="fr"><seg>Modifier</seg></tuv>
 		<prop type="x-100pc">10</prop>
 		<prop type="x-ice">12</prop>
 	</tu>

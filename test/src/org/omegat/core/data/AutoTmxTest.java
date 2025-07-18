@@ -51,14 +51,13 @@ public class AutoTmxTest {
     @Before
     public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
-        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
     }
 
     @Test
     public void autoFromIceAnd100PC() throws Exception {
         ExternalTMX autoTMX = prepareExternalTMX(new File("test/data/autotmx/project1.tmx"),
-                new File("test/data/autotmx/auto1.tmx"));
+                new File("test/data/autotmx/auto14.tmx"));
 
         ITMXEntry e1 = autoTMX.getEntries().get(0);
         checkListValues(e1, ProjectTMX.PROP_XICE, "11");
@@ -83,7 +82,7 @@ public class AutoTmxTest {
     @Test
     public void enforcedMatchesOverrideDefault() throws Exception {
         ExternalTMX enforceTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
-                new File("test/data/enforcetmx/enforce1.tmx"));
+                new File("test/data/enforcetmx/enforce14.tmx"));
 
         SourceTextEntry ste;
         p.allProjectEntries.add(ste = createSTE(null, "Edit"));
@@ -100,7 +99,7 @@ public class AutoTmxTest {
     @Test
     public void enforcedAlternativeMatches() throws Exception {
         ExternalTMX enforceTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
-                new File("test/data/enforcetmx/alternative.tmx"));
+                new File("test/data/enforcetmx/alternative14.tmx"));
 
         SourceTextEntry ste = createSTE("1_0", "Edit");
         p.allProjectEntries.add(ste);
@@ -117,7 +116,7 @@ public class AutoTmxTest {
     @Test
     public void autoAlternativeMatches() throws Exception {
         ExternalTMX autoTMX = prepareExternalTMX(new File("test/data/enforcetmx/project1.tmx"),
-                new File("test/data/enforcetmx/alternative.tmx"));
+                new File("test/data/enforcetmx/alternative14.tmx"));
 
         SourceTextEntry ste = createSTE("1_0", "Edit");
         p.allProjectEntries.add(ste);
@@ -152,6 +151,7 @@ public class AutoTmxTest {
                 Core.getSegmenter());
 
         return new ExternalTMFactory.TMXLoader(tmxFile).setDoSegmenting(props.isSentenceSegmentingEnabled())
+                .setExtTmxLevel2(true)
                 .load(props.getSourceLanguage(), props.getTargetLanguage());
     }
 

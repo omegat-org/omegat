@@ -160,6 +160,9 @@ public class TMXReader2 {
         this.useSlash = useSlash;
         this.isSegmentingEnabled = isSegmentingEnabled;
 
+        // log the parsing attempt
+        Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
+
         Validator validator = getValidator(forceOmegaTMX, extTmxLevel2);
         XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
         validator.setErrorHandler(xsdErrorHandler);
@@ -171,8 +174,6 @@ public class TMXReader2 {
             throw new SAXException("OmegaT TMX validation failed.");
         }
 
-        // log the parsing attempt
-        Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
 
         boolean allFound = true;
 

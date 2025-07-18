@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tmx SYSTEM "tmx11.dtd">
-<tmx version="1.1">
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
     <header srclang="en" creationtool="test" creationtoolversion="1.0" segtype="sentence" o-tmf="Other" adminlang="en" datatype="plaintext"/>
     <body>
         <tu>
-            <tuv lang="en">
+            <tuv xml:lang="en">
                 <seg>Edit</seg>
             </tuv>
-            <tuv lang="fr">
+            <tuv xml:lang="fr">
                 <seg>default</seg>
             </tuv>
         </tu>
         <tu>
             <prop type="file">file</prop>
             <prop type="id">1_0</prop>
-            <tuv lang="en">
+            <tuv xml:lang="en">
                 <seg>Edit</seg>
             </tuv>
-            <tuv lang="fr">
+            <tuv xml:lang="fr">
                 <seg>alternative</seg>
             </tuv>
         </tu>

@@ -4,8 +4,8 @@
   <header srclang="en" />
   <body>
     <tu>
-      <tuv xml:lang="en"><seg>Edit</seg></tuv>
-      <tuv xml:lang="fr"><seg>bizbaz</seg></tuv>
+      <tuv lang="en"><seg>Edit</seg></tuv>
+      <tuv lang="fr"><seg>bizbaz</seg></tuv>
     </tu>
   </body>
 </tmx>

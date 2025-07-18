@@ -81,6 +81,7 @@ public class ExternalTMFactoryTest extends TestCore {
 
     @Test
     public void testLoadTMX() throws Exception {
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, true);
         File tmxFile = new File("test/data/tmx/resegmenting.tmx");
         sourceLang = new Language("en");
         targetLang = new Language("fr");
@@ -163,6 +164,7 @@ public class ExternalTMFactoryTest extends TestCore {
     @Test
     public void testFuzzyMultipleTuv() throws Exception {
         TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, false);
 
         File tmxFile = new File("test/data/tmx/test-multiple-tuv.tmx");

@@ -706,6 +706,8 @@ public class RealProject implements IProject {
     private int compileMatchingFiles(Pattern filePattern) throws IOException, TranslationException {
         String srcRoot = config.getSourceRoot();
         String locRoot = config.getTargetRoot();
+
+        // build translated files
         FilterMaster fm = Core.getFilterMaster();
         List<String> pathList = FileUtil.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
                 config.getSourceRootExcludes());
@@ -713,6 +715,7 @@ public class RealProject implements IProject {
         int compiledFilesCount = 0;
 
         for (String midName : pathList) {
+            // shorten filename to that which is relative to src root
             Matcher fileMatch = filePattern.matcher(midName);
             if (fileMatch.matches()) {
                 File fn = new File(locRoot, midName);
@@ -748,20 +751,19 @@ public class RealProject implements IProject {
         String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat.getTextData());
         Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
-
-        // Convert stats file name to relative
-        ProjectProperties.ProjectPath path = config.new ProjectPath(true);
-        path.setRelativeOrAbsolute(fn);
-        fn = path.getUnderRoot();
-        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
-        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
-        remoteRepositoryProvider.commitFiles(fn, "Statistics");
-
+        // commit translations and statistics
         try {
             Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
             remoteRepositoryProvider.switchAllToLatest();
             remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
             remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+            // Convert stats file name to relative
+            ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+            path.setRelativeOrAbsolute(fn);
+            fn = path.getUnderRoot();
+            remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
+            remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
+            remoteRepositoryProvider.commitFiles(fn, "Statistics");
             Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
         } catch (Exception e) {
             Log.logErrorRB(e, "TF_COMMIT_TARGET_ERROR");

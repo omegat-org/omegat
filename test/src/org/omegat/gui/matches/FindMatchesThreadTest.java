@@ -81,7 +81,7 @@ public class FindMatchesThreadTest {
     public void setUp() throws Exception {
         Core.initializeConsole(new TreeMap<>());
         TestPreferencesInitializer.init();
-        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, true);
         Preferences.setPreference(Preferences.EXT_TMX_USE_SLASH, false);
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, true);
         Core.registerTokenizerClass(DefaultTokenizer.class);

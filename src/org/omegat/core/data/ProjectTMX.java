@@ -52,7 +52,7 @@ import org.xml.sax.SAXParseException;
 
 /**
  * Class for store data from project_save.tmx.
- *
+ * <p>
  * Orphaned or non-orphaned translation calculated by RealProject.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -77,14 +77,14 @@ public class ProjectTMX {
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    protected Map<String, TMXEntry> defaults;
+    protected final Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    protected Map<EntryKey, TMXEntry> alternatives;
+    protected final Map<EntryKey, TMXEntry> alternatives;
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
@@ -176,9 +176,8 @@ public class ProjectTMX {
 
     public void exportTMX(ProjectProperties props, File outFile, final boolean forceValidTMX,
             final boolean levelTwo, final boolean useOrphaned) throws Exception {
-        TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
-        try {
+        try (TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX)) {
             Map<String, TMXEntry> tempDefaults = new TreeMap<>();
             Map<EntryKey, TMXEntry> tempAlternatives = new TreeMap<>();
 
@@ -246,8 +245,6 @@ public class ProjectTMX {
                 }
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
             }
-        } finally {
-            wr.close();
         }
     }
 
@@ -394,7 +391,7 @@ public class ProjectTMX {
             id = te.getPropValue(ATTR_TUID);
         }
         TMXEntry.ExternalLinked externalLinked = null;
-        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
+        if (te.hasPropValue(PROP_XICE, id)) {
             externalLinked = TMXEntry.ExternalLinked.xICE;
         }
         if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
@@ -414,25 +411,44 @@ public class ProjectTMX {
     }
 
     /**
-     * Returns the collection of TMX entries that have an alternative
-     * translation
-     * 
-     * @return
+     * Retrieves a collection of alternative TMX entries.
+     * <p>
+     * This method provides access to TMX entries considered as alternatives,
+     * offering flexibility to fetch translations other than the default ones.
+     *
+     * @return a collection of {@link TMXEntry} objects representing the alternative translations.
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
     }
 
+    /**
+     * This interface is used as a callback mechanism to check if specific entries or source texts
+     * exist in a project. It is typically utilized to manage data consistency or handle orphaned entries.
+     */
     public interface CheckOrphanedCallback {
         boolean existEntryInProject(EntryKey key);
 
         boolean existSourceInProject(String src);
     }
 
+    /**
+     * Replaces the content of the current {@code ProjectTMX} instance with
+     * the content of the provided {@code ProjectTMX} instance.
+     * <p>
+     * This includes replacing the defaults and alternatives mappings with
+     * those from the given instance.
+     *
+     * @param tmx
+     *         the {@code ProjectTMX} instance whose content will replace the
+     *         current content
+     */
     public void replaceContent(ProjectTMX tmx) {
         synchronized (this) {
-            defaults = tmx.defaults;
-            alternatives = tmx.alternatives;
+            defaults.clear();
+            defaults.putAll(tmx.defaults);
+            alternatives.clear();
+            alternatives.putAll(tmx.alternatives);
         }
     }
 

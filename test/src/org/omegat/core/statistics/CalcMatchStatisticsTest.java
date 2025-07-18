@@ -74,6 +74,7 @@ public class CalcMatchStatisticsTest {
     public final void setUp() throws Exception {
         Core.initializeConsole(Collections.emptyMap());
         TestPreferencesInitializer.init();
+        Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, true);
         filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
     }
 

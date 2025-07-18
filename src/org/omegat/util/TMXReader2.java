@@ -154,7 +154,7 @@ public class TMXReader2 {
      * Read TMX file.
      */
     public void readTMX(File file, final Language sourceLanguage, final Language targetLanguage,
-            boolean isSegmentingEnabled, final boolean forceOmegaTMX, final boolean extTmxLevel2,
+            boolean isSegmentingEnabled, final boolean omegaTMX, final boolean extTmxLevel2,
             final boolean useSlash, final LoadCallback callback) throws Exception {
         this.extTmxLevel2 = extTmxLevel2;
         this.useSlash = useSlash;
@@ -163,7 +163,7 @@ public class TMXReader2 {
         // log the parsing attempt
         Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
 
-        Validator validator = getValidator(forceOmegaTMX, extTmxLevel2);
+        Validator validator = getValidator(omegaTMX);
         XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
         validator.setErrorHandler(xsdErrorHandler);
         validator.validate(new StreamSource(getInputStream(file)));
@@ -214,15 +214,13 @@ public class TMXReader2 {
         }
     }
 
-    private Validator getValidator(boolean forceOmegaTMX, boolean extTmxLevel2) throws SAXException {
+    private Validator getValidator(boolean tmx11) throws SAXException {
 
         String schemaPath;
-        if (forceOmegaTMX) {
+        if (tmx11) {
             schemaPath = "/schemas/tmx11.xsd";
-        } else if (extTmxLevel2) {
-            schemaPath = "/schemas/tmx14.xsd";
         } else {
-            schemaPath = "/schemas/tmx11.xsd";
+            schemaPath = "/schemas/tmx14.xsd";
         }
 
         // Check if a resource exists

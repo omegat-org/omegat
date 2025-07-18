@@ -110,7 +110,7 @@ public class TMXWriterTest extends TestFilterBase {
         var is = new StreamSource(new FileInputStream(outFile));
         validator.validate(is);
 
-        load(new ArrayList<>(), null, false, false);
+        load(new ArrayList<>(), null, true, false);
     }
 
     @Test

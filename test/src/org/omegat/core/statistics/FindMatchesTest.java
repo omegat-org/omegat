@@ -74,11 +74,12 @@ import org.omegat.util.TestPreferencesInitializer;
 public class FindMatchesTest {
 
     private static final File TMX_MATCH_EN_CA = new File("test/data/tmx/test-match-stat-en-ca.tmx");
+    private static final File TMX_MATCH_EN_CA11 = new File("test/data/tmx/test-match-stat-en-ca11.tmx");
     private static final File TMX_EN_US_SR = new File("test/data/tmx/en-US_sr.tmx");
     private static final File TMX_EN_US_GB_SR = new File("test/data/tmx/en-US_en-GB_fr_sr.tmx");
     private static final File TMX_SEGMENT = new File("test/data/tmx/penalty-010/segment_1.tmx");
     private static final File TMX_SEGMENT_2 = new File("test/data/tmx/segment_2.tmx");
-    private static final File TMX_MULTI = new File("test/data/tmx/test-multiple-entries.tmx");
+    private static final File TMX_MULTI11 = new File("test/data/tmx/test-multiple-entries11.tmx");
     private static Path tmpDir;
 
 
@@ -98,7 +99,7 @@ public class FindMatchesTest {
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(false);
         Segmenter segmenter = new Segmenter(Preferences.getSRX());
-        IProject project = new TestProject(prop, TMX_MATCH_EN_CA, null, new LuceneEnglishTokenizer(),
+        IProject project = new TestProject(prop, TMX_MATCH_EN_CA11, null, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         String srcText = "This badge is granted when you’ve invited 5 people who subsequently spent enough "
@@ -314,7 +315,7 @@ public class FindMatchesTest {
         prop.setSupportDefaultTranslations(true);
         prop.setSentenceSegmentingEnabled(true);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        IProject project = new TestProject(prop, TMX_MULTI, null, new LuceneEnglishTokenizer(),
+        IProject project = new TestProject(prop, TMX_MULTI11, null, new LuceneEnglishTokenizer(),
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, 85);

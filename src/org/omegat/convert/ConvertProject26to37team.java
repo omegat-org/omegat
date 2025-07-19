@@ -26,7 +26,6 @@
 package org.omegat.convert;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -38,7 +37,6 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -47,6 +45,7 @@ import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.wc.SVNRevision;
@@ -72,12 +71,9 @@ public final class ConvertProject26to37team {
     public static void checkTeam(File projectRootFolder) throws Exception {
         if (isSVNDirectory(projectRootFolder) || isGITDirectory(projectRootFolder)) {
             // project is 2.6-style team project
-
-            // When --no-team option is given, we skip conversion silently.
-            if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+            if (RuntimePreferences.isNoTeam()) {
                 return;
             }
-
             if (isConsoleMode()) {
                 Core.getMainWindow().displayWarningRB("TEAM_26_TO_37_CONSOLE");
                 return;
@@ -135,7 +131,7 @@ public final class ConvertProject26to37team {
         map.setLocal("");
         map.setRepository("");
         def.getMapping().add(map);
-        props.setRepositories(new ArrayList<RepositoryDefinition>());
+        props.setRepositories(new ArrayList<>());
         props.getRepositories().add(def);
 
         ProjectFileStorage.writeProjectFile(props);
@@ -150,7 +146,7 @@ public final class ConvertProject26to37team {
     /**
      * Save version of project_save.tmx to .repositories/versions.properties.
      */
-    private static void saveVersion(File projectRootFolder, String file, String version) throws IOException {
+    private static void saveVersion(File projectRootFolder, String file, String version) {
         ProjectTeamSettings teamSettings = new ProjectTeamSettings(new File(projectRootFolder,
                 RemoteRepositoryProvider.REPO_SUBDIR));
         teamSettings.set(RebaseAndCommit.VERSION_PREFIX + file, version);

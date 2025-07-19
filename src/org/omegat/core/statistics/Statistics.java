@@ -139,30 +139,35 @@ public final class Statistics {
     }
 
     /**
-     * Write statistics to a file with the format set in the preferences.
+     * Writes statistical results to files in various specified formats within
+     * the given directory.
      *
-     * @param filename
+     * @param dir
+     *            the directory where the statistics files will be written
      * @param result
+     *            the statistical results to be written to the files
      */
     public static void writeStat(String dir, StatsResult result) {
         int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
                 StatOutputFormat.getDefaultFormats());
         for (StatOutputFormat format : StatOutputFormat.values()) {
             if (format.isSelected(outputFormats)) {
-                writeStat(dir, result, format);
+                File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+                writeStat(statFile, result, format);
             }
         }
     }
 
-    /**
-     * Write statistics to a file in specified format.
-     *
-     * @param filename
-     * @param result
-     * @param format
-     */
+    @Deprecated
     public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
         File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());
+        writeStat(statFile, result, format);
+    }
+
+    /**
+     * Write statistics to a file in specified format.
+     */
+    public static void writeStat(File statFile, StatsResult result, StatOutputFormat format) {
         try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(statFile),
                 StandardCharsets.UTF_8)) {
             switch (format) {

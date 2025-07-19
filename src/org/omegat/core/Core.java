@@ -124,8 +124,6 @@ public final class Core {
     private static Segmenter segmenter;
     private static SegmentPropertiesArea segmentPropertiesArea;
 
-    private static Map<String, String> cmdLineParams = Collections.emptyMap();
-
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections.synchronizedList(new ArrayList<>());
     private static final List<IMarker> MARKERS = new ArrayList<>();
 
@@ -243,14 +241,13 @@ public final class Core {
      */
     @Deprecated(since = "6.1.0", forRemoval = true)
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
-        initializeGUI(params);
+        initializeGUI();
     }
 
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params) throws Exception {
-        cmdLineParams = params;
+    public static void initializeGUI() throws Exception {
 
         // 1. Initialize project
         currentProject = new NotLoadedProject();
@@ -301,11 +298,15 @@ public final class Core {
         projWin = new ProjectFilesListController();
     }
 
+    @Deprecated(since = "6.1.0", forRemoval = true)
+    public static void initializeConsole(Map<String, String> params) {
+        initializeConsole();
+    }
+
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) {
-        cmdLineParams = params;
+    public static void initializeConsole() {
         tagValidation = new TagValidationTool();
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
@@ -323,10 +324,6 @@ public final class Core {
 
     public static List<IMarker> getMarkers() {
         return MARKERS;
-    }
-
-    public static Map<String, String> getParams() {
-        return cmdLineParams;
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {

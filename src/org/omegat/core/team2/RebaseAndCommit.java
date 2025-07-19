@@ -29,6 +29,7 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -236,7 +237,7 @@ public final class RebaseAndCommit {
      * Commit later.
      */
     public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider,
-            String possibleHeadVersion) throws Exception {
+            @Nullable String possibleHeadVersion) throws Exception {
         if (!prep.needToCommit) {
             // there was no changes
             return null;

@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
@@ -410,7 +411,7 @@ public final class Core {
      * @param mainWindow main window object to hold.
      */
     @VisibleForTesting
-    static void setMainWindow(IMainWindow mainWindow) {
+    static void setMainWindow(@Nullable IMainWindow mainWindow) {
         Core.mainWindow = mainWindow;
     }
 
@@ -427,11 +428,6 @@ public final class Core {
     @VisibleForTesting
     static void setEditor(IEditor newEditor) {
         editor = newEditor;
-    }
-
-    @VisibleForTesting
-    static void setTagValidation(ITagValidation newTagValidation) {
-        tagValidation = newTagValidation;
     }
 
     @VisibleForTesting

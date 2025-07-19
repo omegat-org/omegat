@@ -26,10 +26,9 @@
 
 package org.omegat.core;
 
-import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -37,6 +36,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import com.vlsolutions.swing.docking.Dockable;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -50,14 +50,12 @@ import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.autocompleter.IAutoCompleter;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.Platform;
 import org.omegat.util.TestPreferencesInitializer;
 import org.omegat.util.gui.MenuExtender;
-
-import com.vlsolutions.swing.docking.Dockable;
-import com.vlsolutions.swing.docking.DockingDesktop;
 
 /**
  * Core setup for unit tests.
@@ -100,7 +98,7 @@ public abstract class TestCore {
             private final JMenu machineTranslationMenu = new JMenu("MachineTranslate");
             private final JMenu glossaryMenu = new JMenu("Glossary");
             private final JMenu autoCompleteMenu = new JMenu("AutoComplete");
-
+            @Override
             public JMenu getToolsMenu() {
                 if (toolsMenu.getItemCount() == 0) {
                     toolsMenu.add(new JMenuItem("toolsCheckIssuesMenuItem"));
@@ -113,7 +111,7 @@ public abstract class TestCore {
                 }
                 return toolsMenu;
             }
-
+            @Override
             public JMenu getProjectMenu() {
                 if (projectMenu.getItemCount() == 0) {
                     projectMenu.add(new JMenuItem("New"));
@@ -149,7 +147,7 @@ public abstract class TestCore {
                 }
                 return projectMenu;
             }
-
+            @Override
             public JMenu getOptionsMenu() {
                 if (optionsMenu.getItemCount() == 0) {
                     if (!Platform.isMacOSX()) {
@@ -170,15 +168,15 @@ public abstract class TestCore {
                 }
                 return optionsMenu;
             }
-
+            @Override
             public JMenu getMachineTranslationMenu() {
                 return machineTranslationMenu;
             }
-
+            @Override
             public JMenu getGlossaryMenu() {
                 return glossaryMenu;
             }
-
+            @Override
             public JMenu getAutoCompletionMenu() {
                 return autoCompleteMenu;
             }
@@ -238,7 +236,7 @@ public abstract class TestCore {
                 }
                 return gotoMenu;
             }
-
+            @Override
             public void invokeAction(String action, int modifiers) {
             }
         };
@@ -250,73 +248,32 @@ public abstract class TestCore {
      */
     protected IMainWindow getMainWindow() {
         final IMainMenu mainMenu = getMainMenu();
-        return new IMainWindow() {
+        return new ConsoleWindow() {
+            @Override
             public void addDockable(Dockable pane) {
             }
-
+            @Override
             public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
             }
-
+            @Override
             public Font getApplicationFont() {
                 return new Font("Dialog", Font.PLAIN, 12);
             }
-
+            @Override
             public JFrame getApplicationFrame() {
                 return new JFrame();
             }
-
-            public void lockUI() {
-            }
-
+            @Override
             public void showLengthMessage(String messageText) {
+                // do nothing
             }
-
+            @Override
             public void showProgressMessage(String messageText) {
+                // do nothing
             }
-
-            public void showStatusMessageRB(String messageKey, Object... params) {
-            }
-
-            public void showTimedStatusMessageRB(String messageKey, Object... params) {
-            }
-
-            public void displayWarningRB(String warningKey, Object... params) {
-            }
-
-            public void displayWarningRB(String warningKey, String supercedesKey, Object... params) {
-            }
-
-            public void showErrorDialogRB(String title, String message, Object... args) {
-            }
-
-            public void unlockUI() {
-            }
-
+            @Override
             public IMainMenu getMainMenu() {
                 return mainMenu;
-            }
-
-            @Override
-            public DockingDesktop getDesktop() {
-                return null;
-            }
-
-            public Cursor getCursor() {
-                return null;
-            }
-
-            public void setCursor(Cursor cursor) {
-            }
-
-            public int showConfirmDialog(Object message, String title, int optionType, int messageType)
-                    throws HeadlessException {
-                return 0;
-            }
-
-            public void showMessageDialog(String message) {
-            }
-
-            public void showLockInsertMessage(String messageText, String toolTip) {
             }
         };
     }
@@ -447,7 +404,7 @@ public abstract class TestCore {
 
             @Override
             public String getDisplayModificationInfo() {
-                return null;
+                return "";
             }
 
             @Override
@@ -662,7 +619,7 @@ public abstract class TestCore {
 
             @Override
             public String getSelectedText() {
-                return null;
+                return "";
             }
 
             @Override
@@ -676,17 +633,17 @@ public abstract class TestCore {
 
             @Override
             public String getCurrentTranslation() {
-                return null;
+                return "";
             }
 
             @Override
             public String getCurrentTargetFile() {
-                return null;
+                return "";
             }
 
             @Override
             public String getCurrentFile() {
-                return null;
+                return "";
             }
 
             @Override
@@ -724,20 +681,15 @@ public abstract class TestCore {
             @Override
             public void activateEntry() {
             }
-
-            @Override
-            public boolean isOrientationAllLtr() {
-                return true;
-            }
         });
     }
 
     /**
      * Clean up a temporary directory for configuration.
-     * @throws Exception
+     * @throws IOException if file access failed.
      */
     @After
-    public final void tearDownCore() throws Exception {
+    public final void tearDownCore() throws IOException {
         FileUtils.forceDeleteOnExit(configDir);
     }
 }

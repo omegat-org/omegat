@@ -54,11 +54,7 @@ public class ImportFromAutoTMX {
     public ImportFromAutoTMX(RealProject project, List<SourceTextEntry> allProjectEntries) {
         this.project = project;
         for (SourceTextEntry ste : allProjectEntries) {
-            List<SourceTextEntry> list = existEntries.get(ste.getSrcText());
-            if (list == null) {
-                list = new ArrayList<SourceTextEntry>();
-                existEntries.put(ste.getSrcText(), list);
-            }
+            List<SourceTextEntry> list = existEntries.computeIfAbsent(ste.getSrcText(), k -> new ArrayList<>());
             list.add(ste);
         }
     }

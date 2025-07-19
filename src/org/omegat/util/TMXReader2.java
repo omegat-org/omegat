@@ -160,11 +160,14 @@ public class TMXReader2 {
         this.useSlash = useSlash;
         this.isSegmentingEnabled = isSegmentingEnabled;
 
+        // log the validating attempt
+        Log.logInfoRB("TMXR_INFO_VALIDATING_FILE", file.getAbsolutePath());
+        boolean tmx11 = isTmx11(file);
+        validateTMX(file, tmx11);
+
         // log the parsing attempt
         Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
         boolean allFound = true;
-
-        validateTMX(file);
         try (InputStream in = getInputStream(file)) {
             xml = inputFactory.createXMLEventReader(in);
             while (xml.hasNext()) {
@@ -202,9 +205,9 @@ public class TMXReader2 {
         }
     }
 
-    private void validateTMX(File file) throws SAXException, XMLStreamException {
+    private void validateTMX(File file, boolean isTmx11) throws SAXException {
         try {
-            Validator validator = getValidator(isIsTmx11(file));
+            Validator validator = getValidator(isTmx11);
             XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
             validator.setErrorHandler(xsdErrorHandler);
             validator.validate(new StreamSource(getInputStream(file)));
@@ -214,14 +217,11 @@ public class TMXReader2 {
                 }
                 throw new SAXException("OmegaT TMX validation failed.");
             }
-        } catch (XMLStreamException ex) {
-            Log.logErrorRB(ex, "TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath());
-            throw ex;
         } catch (IOException ignored) {
         }
     }
 
-    private boolean isIsTmx11(File file) throws IOException, XMLStreamException {
+    private boolean isTmx11(File file) throws IOException, XMLStreamException {
         XMLEventReader reader = null;
         try (InputStream in = getInputStream(file)) {
             reader = inputFactory.createXMLEventReader(in);

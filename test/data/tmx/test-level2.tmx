@@ -32,7 +32,7 @@
     
     <tu>
       <tuv xml:lang="en">
-        <seg>2 <it>&lt;a></it> zz <bpt i="5">&lt;t></bpt>xx<ept i="5">&lt;/c></ept></seg>
+        <seg>2 <it pos="begin">&lt;a></it> zz <bpt i="5">&lt;t></bpt>xx<ept i="5">&lt;/c></ept></seg>
       </tuv>
       <tuv xml:lang="be">
         <seg>tr</seg>

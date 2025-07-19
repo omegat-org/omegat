@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE tmx SYSTEM "tmx14.dtd">
-<tmx version="1.4">
+<!DOCTYPE tmx SYSTEM "tmx11.dtd">
+<tmx version="1.1">
 <header datatype="plaintext" srclang="en-US" adminlang="EN-US" o-tmf="OmegaT TMX" segtype="sentence"
 creationtoolversion="test" creationtool="test"/>
   <body>
 <!-- Default translations -->
     <tu>
-      <tuv xml:lang="en-US">
+      <tuv lang="en-US">
         <seg>Other</seg>
       </tuv>
-      <tuv xml:lang="co" changeid="id" changedate="20200523T143256Z">
+      <tuv lang="co" changeid="id" changedate="20200523T143256Z">
         <seg>Altre</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en-US">
+      <tuv lang="en-US">
         <seg>For installation on Linux.</seg>
       </tuv>
-      <tuv xml:lang="co" changeid="id" changedate="20200526T131725Z" creationid="id" creationdate="20200526T131725Z">
+      <tuv lang="co" changeid="id" changedate="20200526T131725Z" creationid="id" creationdate="20200526T131725Z">
         <seg>Per l’installazioni nant’à i sistemi Linux.</seg>
       </tuv>
     </tu>
     <tu>
-      <tuv xml:lang="en-US">
+      <tuv lang="en-US">
         <seg>For installation on other operating systems (such as FreeBSD and Solaris).</seg>
       </tuv>
-      <tuv xml:lang="co" changeid="id" changedate="20200526T131840Z" creationid="id"
+      <tuv lang="co" changeid="id" changedate="20200526T131840Z" creationid="id"
       creationdate="20200526T131840Z">
         <seg>Per l’installazioni nant’à d’altri sistemi (cum’è FreeBSD è Solaris).</seg>
       </tuv>
@@ -35,10 +35,10 @@ creationtoolversion="test" creationtool="test"/>
       <prop type="file">website/download.html</prop>
       <prop type="prev">For installation on Linux.</prop>
       <prop type="next">For installation on other operating systems (such as FreeBSD and Solaris).&lt;br0/></prop>
-      <tuv xml:lang="en-US">
+      <tuv lang="en-US">
         <seg>Other</seg>
       </tuv>
-      <tuv xml:lang="co" changeid="id" changedate="20200526T131742Z" creationid="id" creationdate="20200526T131742Z">
+      <tuv lang="co" changeid="id" changedate="20200526T131742Z" creationid="id" creationdate="20200526T131742Z">
         <seg>Altri</seg>
       </tuv>
     </tu>

@@ -162,21 +162,9 @@ public class TMXReader2 {
 
         // log the parsing attempt
         Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
-
-        Validator validator = getValidator(omegaTMX);
-        XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
-        validator.setErrorHandler(xsdErrorHandler);
-        validator.validate(new StreamSource(getInputStream(file)));
-        if (!xsdErrorHandler.getExceptions().isEmpty()) {
-            for (Exception e : xsdErrorHandler.getExceptions()) {
-                Log.log(e.getLocalizedMessage());
-            }
-            throw new SAXException("OmegaT TMX validation failed.");
-        }
-
-
         boolean allFound = true;
 
+        validateTMX(file);
         try (InputStream in = getInputStream(file)) {
             xml = inputFactory.createXMLEventReader(in);
             while (xml.hasNext()) {
@@ -214,19 +202,66 @@ public class TMXReader2 {
         }
     }
 
-    private Validator getValidator(boolean tmx11) throws SAXException {
-
-        String schemaPath;
-        if (tmx11) {
-            schemaPath = "/schemas/tmx11.xsd";
-        } else {
-            schemaPath = "/schemas/tmx14.xsd";
+    private void validateTMX(File file) throws SAXException, IOException, XMLStreamException {
+        try {
+            Validator validator = getValidator(isIsTmx11(file));
+            XmlErrorHandler xsdErrorHandler = new XmlErrorHandler();
+            validator.setErrorHandler(xsdErrorHandler);
+            validator.validate(new StreamSource(getInputStream(file)));
+            if (!xsdErrorHandler.getExceptions().isEmpty()) {
+                for (Exception e : xsdErrorHandler.getExceptions()) {
+                    Log.log(e.getLocalizedMessage());
+                }
+                throw new SAXException("OmegaT TMX validation failed.");
+            }
+        } catch (XMLStreamException ex) {
+            Log.logErrorRB(ex, "TMXR_ERROR_XML_STREAM_ERROR", file.getAbsolutePath());
+            throw ex;
+        } catch (IOException ignored) {
         }
+    }
 
-        // Check if a resource exists
+    private boolean isIsTmx11(File file) throws IOException, XMLStreamException {
+        XMLEventReader reader = null;
+        try (InputStream in = getInputStream(file)) {
+            reader = inputFactory.createXMLEventReader(in);
+            return detectTmx11Version(reader);
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+    }
+
+    private boolean detectTmx11Version(XMLEventReader xmlEventReader) throws IOException, XMLStreamException {
+        while (xmlEventReader.hasNext()) {
+            XMLEvent e = xmlEventReader.nextEvent();
+            if (e.getEventType() == XMLEvent.START_ELEMENT) {
+                StartElement eStart = (StartElement) e;
+                if ("tmx".equals(eStart.getName().getLocalPart())) {
+                    String version = getAttributeValue(eStart, "version");
+                    if (version != null && version.startsWith("1.1")) {
+                        return true;
+                    } else if (version != null && version.startsWith("1.4")) {
+                        return false;
+                    }
+                }
+                break;
+            }
+        }
+        return false;
+    }
+
+    /** Schema path for TMX version 1.1 */
+    private static final String TMX11_SCHEMA_PATH = "/schemas/tmx11.xsd";
+    /** Schema path for TMX version 1.4 */
+    private static final String TMX14_SCHEMA_PATH = "/schemas/tmx14.xsd";
+
+    private Validator getValidator(boolean tmx11) throws SAXException, IOException {
+        String schemaPath = tmx11 ? TMX11_SCHEMA_PATH : TMX14_SCHEMA_PATH;
         URL schemaUrl = getClass().getResource(schemaPath);
         if (schemaUrl == null) {
-            throw new SAXException("Schema resource not found: " + schemaPath);
+            throw new IOException("Schema resource not found: " + schemaPath);
         }
         try {
             Validator validator;

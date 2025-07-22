@@ -153,7 +153,7 @@ public class ProjectTMX {
         File newFile = new File(translationFile + OConsts.NEWFILE_EXTENSION);
 
         // Save data into '*.new' file
-        exportTMX(props, newFile, false, false, true);
+        exportTMX(props, newFile, true, true, true);
 
         File backup = new File(translationFile + OConsts.BACKUP_EXTENSION);
         File orig = new File(translationFile);

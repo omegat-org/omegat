@@ -33,8 +33,6 @@ import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
-import org.omegat.util.RuntimePreferences;
-import org.omegat.util.TestPreferencesInitializer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

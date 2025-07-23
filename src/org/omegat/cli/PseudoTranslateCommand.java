@@ -31,14 +31,12 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
 import picocli.CommandLine;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -55,7 +53,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
             descriptionKey = "PSEUDO_TRANSLATE_TYPE")
     @Nullable String type;
 
-    @CommandLine.Option(names = { "--output-file" }, paramLabel = "<filename>", descriptionKey = "PSEUDO_TRANSLATE_TMX" )
+    @CommandLine.Option(names = { "--output-file" }, paramLabel = "<filename>", descriptionKey = "PSEUDO_TRANSLATE_TMX")
     @Nullable String filename;
 
     @CommandLine.Parameters(index = "0", paramLabel = "<project>", defaultValue = CommandLine.Option.NULL_VALUE)

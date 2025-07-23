@@ -24,27 +24,10 @@
  **************************************************************************/
 package org.omegat.cli;
 
-import com.vlsolutions.swing.docking.DockingDesktop;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
-import org.languagetool.JLanguageTool;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.languagetools.LanguageClassBroker;
-import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
-
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.time.format.TextStyle;
-import java.util.Collections;
-import java.util.Locale;
 
 import static picocli.CommandLine.Option;
 

@@ -28,12 +28,8 @@ package org.omegat.cli;
 import org.junit.Test;
 import org.omegat.Main;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ConsoleTeamInitTest extends ConsoleTestsCommon {

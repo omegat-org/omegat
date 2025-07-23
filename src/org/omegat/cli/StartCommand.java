@@ -74,7 +74,6 @@ public class StartCommand implements Callable<Integer> {
         }
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
-        params.initialize();
         return runGUI();
     }
 
@@ -83,10 +82,22 @@ public class StartCommand implements Callable<Integer> {
      */
     int runGUI() {
         Common.showStartUpLogInfo();
+        if (params != null) {
+            Common.logLevelInitialize(params);
+            if (params.tokenizerSource != null) {
+                RuntimePreferences.setTokenizerSource(params.tokenizerSource);
+            }
+            if (params.tokenizerTarget != null) {
+                RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
+            }
+        }
+
+        Common.initializeApp();
+
         if ((params != null && !params.team) || (legacyParams != null && legacyParams.noTeam)) {
             RuntimePreferences.setNoTeam();
         }
-        Common.initializeApp();
+
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
         // macOS-specific - they must be set BEFORE any GUI calls

@@ -45,6 +45,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -193,5 +194,15 @@ final class Common {
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
         Preferences.initFilters();
         Preferences.initSegmentation();
+    }
+
+    static void logLevelInitialize(Parameters params) {
+        if (params.verbose) {
+            Log.setConsoleLevel(java.util.logging.Level.INFO);
+        }
+        if (params.isQuiet) {
+            Log.setConsoleLevel(java.util.logging.Level.SEVERE);
+            RuntimePreferences.setQuietMode(true);
+        }
     }
 }

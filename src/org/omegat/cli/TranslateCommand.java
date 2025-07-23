@@ -55,7 +55,6 @@ public class TranslateCommand implements Callable<Integer> {
             return 1;
         }
         legacyParams.initialize();
-        params.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
         return runConsoleTranslate();
     }
@@ -67,27 +66,33 @@ public class TranslateCommand implements Callable<Integer> {
         if (params == null || legacyParams == null) {
             return 1;
         }
-        Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
-        if (!params.team || legacyParams.noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
+        Common.showStartUpLogInfo();
+        Common.logLevelInitialize(params);
+        Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         if (params.projectLocation == null) {
             params.setProjectLocation(legacyParams.project);
         }
 
+        Common.initializeApp();
+        Core.initializeConsole();
+
+        if (!params.team || legacyParams.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
         if (legacyParams.disableProjectLocking) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
         if (legacyParams.disableLocationSave) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
-
-        Common.showStartUpLogInfo();
-        Log.logInfoRB("CONSOLE_INITIALIZING");
-        Common.initializeApp();
-        Core.initializeConsole();
+        if (params.tokenizerSource != null) {
+            RuntimePreferences.setTokenizerSource(params.tokenizerSource);
+        }
+        if (params.tokenizerTarget != null) {
+            RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
+        }
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
 

@@ -140,7 +140,7 @@ public class LegacyParameters implements Callable<Integer> {
     @Override
     public Integer call() {
         Parameters params = new Parameters();
-        params.initialize();
+        Common.logLevelInitialize(params);
         if (project != null) {
             params.setProjectLocation(project);
         }

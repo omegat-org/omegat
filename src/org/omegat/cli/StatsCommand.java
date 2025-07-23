@@ -67,7 +67,6 @@ public class StatsCommand implements Callable<Integer> {
             return 1;
         }
         legacyParams.initialize();
-        params.initialize();
         params.setProjectLocation(project);
         try {
             return runConsoleStats();
@@ -87,14 +86,13 @@ public class StatsCommand implements Callable<Integer> {
      * return 1.
      */
     int runConsoleStats() {
-        Common.showStartUpLogInfo();
         if (params == null || legacyParams == null) {
             return 1;
         }
+        Common.showStartUpLogInfo();
+        Common.logLevelInitialize(params);
         Log.logInfoRB("STARTUP_CONSOLE_STATS_MODE");
-        if (!params.team || legacyParams.noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
+
         if (output == null) {
             output = legacyParams.statsOutput;
         }
@@ -102,15 +100,24 @@ public class StatsCommand implements Callable<Integer> {
             format = legacyParams.statsType;
         }
 
+        Common.initializeApp();
+        Core.initializeConsole();
+
+        if (!params.team || legacyParams.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
         if (legacyParams.disableProjectLocking) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
         if (legacyParams.disableLocationSave) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
-
-        Common.initializeApp();
-        Core.initializeConsole();
+        if (params.tokenizerSource != null) {
+            RuntimePreferences.setTokenizerSource(params.tokenizerSource);
+        }
+        if (params.tokenizerTarget != null) {
+            RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
+        }
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);

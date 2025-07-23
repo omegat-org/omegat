@@ -72,7 +72,6 @@ public class AlignCommand implements Callable<Integer> {
         }
         legacyParams.initialize();
         params.setProjectLocation(Objects.requireNonNullElse(project, "."));
-        params.initialize();
         int status;
         try {
             if (startGUI) {
@@ -88,14 +87,12 @@ public class AlignCommand implements Callable<Integer> {
     }
 
     int runConsoleAlign() throws Exception {
-        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
         if (params == null || legacyParams == null) {
             return 1;
         }
-
-        if (!params.team || legacyParams.noTeam) {
-            RuntimePreferences.setNoTeam();
-        }
+        Common.showStartUpLogInfo();
+        Common.logLevelInitialize(params);
+        Log.logInfoRB("CONSOLE_ALIGNMENT_MODE");
 
         if (params.projectLocation == null) {
             Log.logErrorRB("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -107,14 +104,23 @@ public class AlignCommand implements Callable<Integer> {
             return 1;
         }
 
-        Log.logInfoRB("CONSOLE_INITIALIZING");
+        Common.initializeApp();
         Core.initializeConsole();
 
+        if (!params.team || legacyParams.noTeam) {
+            RuntimePreferences.setNoTeam();
+        }
         if (legacyParams.disableProjectLocking) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
         if (legacyParams.disableLocationSave) {
             RuntimePreferences.setLocationSaveEnabled(false);
+        }
+        if (params.tokenizerSource != null) {
+            RuntimePreferences.setTokenizerSource(params.tokenizerSource);
+        }
+        if (params.tokenizerTarget != null) {
+            RuntimePreferences.setTokenizerTarget(params.tokenizerTarget);
         }
 
         RealProject p = Common.selectProjectConsoleMode(true, params);

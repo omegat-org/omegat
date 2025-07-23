@@ -25,8 +25,6 @@
 package org.omegat.cli;
 
 import org.jetbrains.annotations.Nullable;
-import org.omegat.util.Log;
-import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
 import static picocli.CommandLine.Option;
@@ -89,13 +87,4 @@ public class Parameters {
     @CommandLine.Option(names = { VERBOSE }, descriptionKey = "params.VERBOSE")
     boolean verbose = false;
 
-    public void initialize() {
-        if (verbose) {
-            Log.setConsoleLevel(java.util.logging.Level.INFO);
-        }
-        if (isQuiet) {
-            Log.setConsoleLevel(java.util.logging.Level.SEVERE);
-            RuntimePreferences.setQuietMode(true);
-        }
-    }
 }

@@ -65,7 +65,6 @@ public class PseudoTranslateCommand implements Callable<Integer> {
             return 1;
         }
         legacyParameters.initialize();
-        params.initialize();
         params.setProjectLocation(project);
         try {
             return runCreatePseudoTranslateTMX();
@@ -84,13 +83,13 @@ public class PseudoTranslateCommand implements Callable<Integer> {
             return 1;
         }
         Common.showStartUpLogInfo();
+        Common.logLevelInitialize(params);
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         if (!params.team || legacyParameters.noTeam) {
             RuntimePreferences.setNoTeam();
         }
 
-        Log.logInfoRB("CONSOLE_INITIALIZING");
         Common.initializeApp();
         Core.initializeConsole();
 

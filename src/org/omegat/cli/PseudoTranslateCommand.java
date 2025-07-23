@@ -83,6 +83,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
         if (params == null || legacyParameters == null) {
             return 1;
         }
+        Common.showStartUpLogInfo();
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         if (!params.team || legacyParameters.noTeam) {
@@ -90,6 +91,7 @@ public class PseudoTranslateCommand implements Callable<Integer> {
         }
 
         Log.logInfoRB("CONSOLE_INITIALIZING");
+        Common.initializeApp();
         Core.initializeConsole();
 
         if (legacyParameters.disableProjectLocking) {

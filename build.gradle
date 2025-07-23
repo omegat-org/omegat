@@ -336,10 +336,10 @@ distributions {
                 ])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            from('build/docs/greetings') {
+            from(layout.buildDirectory.dir('docs/greetings')) {
                 into 'docs/greetings'
             }
-            from('build/docs/manuals') {
+            from(layout.buildDirectory.dir('docs/manuals')) {
                 into 'docs/manuals'
             }
             from(layout.settingsDirectory.dir('scripts')) {

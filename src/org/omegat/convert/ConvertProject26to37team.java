@@ -119,7 +119,8 @@ public final class ConvertProject26to37team {
             def.setType("git");
         }
         if (url == null) {
-            Log.logWarningRB("TEAM_26_to_36_CONVERT_URL_NOT_DEFINED", def.getType(), projectRootFolder.getAbsolutePath());
+            Log.logWarningRB("TEAM_26_to_36_CONVERT_URL_NOT_DEFINED", def.getType(),
+                    projectRootFolder.getAbsolutePath());
             return false;
         }
         def.setUrl(url);

@@ -6,13 +6,13 @@
 
   <para>Team projects use synchronization mechanisms between project members.</para>
 
-  <para>Once a OmegaT team project is installed on a server, the project manager
-  sends members the information they need to access it: a URL indicating the
-  location of the project, or an <filename>omegat.project</filename>
+  <para>Once an OmegaT team project has been set up on a server, the project
+  manager sends members the information they need to access it. This can be a URL
+  giving the location of the project, or an <filename>omegat.project</filename>
   file.</para>
 
-  <para>After the project is downloaded, it is installed locally and only needs
-  to be opened locally to synchronize with the server.</para>
+  <para>Downloading the project creates a copy on the translator's computer
+  that only needs to be opened locally to synchronize with the server.</para>
 
   <para>Repository credentials are stored in the <link
   linkend="configuration.folder.extra.contents.repositories"
@@ -22,15 +22,16 @@
   endterm="dialog.preferences.team.title.repository.credentials.title"/>
   preferences.</para>
 
-  <para>Since synchronization takes place by default every three minutes, 
-  project members will sometime translate or modify a segment that has already
-  been translated by another member but not synchronized yet. When that happens,
+  <para>Since synchronization takes place every three minutes by default, 
+  one project member may translate or modify a segment that has already
+  been translated by another member, but not yet synchronized. When that happens,
   members have to select the appropriate translation.</para>
 
   <para>Members can take turns translating and reviewing the files. The Search
-  function allows them to filter the Editor pane on contents translated by a
-  given person, or on contents translated after or before a given time,
-  for example.</para>
+  function offers a number of useful options to filter the content of the files.
+  For example, members can have the Editor pane show translations made by a
+  given person, or contents translated before or after a given time, or combinations
+  thereof.</para>
   
   <variablelist>
     <varlistentry>
@@ -77,14 +78,19 @@
 		  linkend="dialog.preferences.team.title.repository.credentials"
 		  endterm="dialog.preferences.team.title.repository.credentials.title"/>
 		  preferences for details.</para>
-
+      
 		  <para>If the server uses SSH authentication, make sure you update your
 		  SSH configuration to include that server before attempting to download
 		  the project, otherwise you will get an authentication error and the
 		  project will fail to load.</para>
-
-		  <para>If you use multiple projects on the same server, credentials
-		  will only be asked once for that server.</para>
+            
+      <para>Some hosting services require you to generate a passphrase
+      or other form of access token in addition to your password.
+      In such cases, enter that passphrase or token when OmegaT asks for
+      your password.</para>
+      
+		  <para>If you use multiple projects on the same server, you will only be
+      asked to enter your credentials once for that server.</para>
 		</note>
 	  </listitem>
 	</varlistentry>
@@ -99,7 +105,7 @@
 
 		<itemizedlist>
           <listitem>
-			<para><filename>project.save</filename></para>
+			<para><filename>project_save.tmx</filename></para>
           </listitem>
 
           <listitem>
@@ -108,7 +114,7 @@
         </itemizedlist>
 
         <para>During synchronization, all other local files are overwritten
-        with the versions on the remote server, exept for
+        with the versions on the remote server, except for
         <filename>omegat.project</filename> (see below).</para>
 
         <para>OmegaT synchronizes a team project when it is opened, reloaded,
@@ -196,9 +202,9 @@
 		</itemizedlist>
 
         <warning>
-          <para>Remember that any modifications to the local project
-          configuration files will be overwritten by the versions on the server
-          when the project is synchronized.</para>
+          <para>Remember that any modifications to local project configuration
+          files will be overwritten by the versions on the server when the
+          project is synchronized.</para>
         </warning>
       </listitem>
     </varlistentry>
@@ -208,10 +214,10 @@
 
       <listitem>
         <warning>
-		  <para>Only the project manager should use <link
+		  <para>Only the project manager should use the <link
 		  endterm="menus.project.title" linkend="menus.project"/><link
 		  endterm="menus.project.commit.source.files.title"
-		  linkend="menus.project.commit.source.files"/>.</para>
+		  linkend="menus.project.commit.source.files"/> command.</para>
 		</warning>
       </listitem>
     </varlistentry>
@@ -220,11 +226,11 @@
       <term>Target files</term>
 
       <listitem>
-        <para>After you generate the target files use
+        <para>After you generate the target files use the 
         <link endterm="menus.project.title"
         linkend="menus.project"/><link
         endterm="menus.project.commit.target.files.title"
-        linkend="menus.project.commit.target.files"/> to add them to the
+        linkend="menus.project.commit.target.files"/> command to add them to the
         server, if the project manager has requested you to do so.
         Committing the target files also uploads the statistics files to the server.</para>
       </listitem>
@@ -234,10 +240,10 @@
       <term>Deleting files</term>
 
       <listitem>
-        <para>Files in a team project cannot be deleted from OmegaT or the local
-        file system. They will be restored the next time the project is
-        synchronized. This task is normally performed by the project
-        manager.</para>
+        <para>This task normally has to be performed by the project manager, since
+        files in a team project are restored the next time the project is synchronized.
+        This means users cannot delete from OmegaT or the local file system unless
+        the project manager removes them from the server.</para>
       </listitem>
     </varlistentry>
 
@@ -247,6 +253,8 @@
       <listitem>
         <para>You can open a team project and work on it offline. All changes
         will be synchronized the next time a connection is available.</para>
+        <para>If there are any conflicts at that time, OmegaT will present a
+        dialog to let you choose the correct version.</para>
 
         <para>There are two ways to work offline:</para>
 

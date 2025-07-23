@@ -145,7 +145,7 @@ public class ProjectTMX {
     /**
      * It saves current translation into file.
      */
-    public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
+    public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser, boolean isTeamProject)
             throws Exception {
         if (!translationUpdatedByUser) {
             if (new File(translationFile).exists()) {
@@ -158,8 +158,8 @@ public class ProjectTMX {
         File newFile = new File(translationFile + OConsts.NEWFILE_EXTENSION);
 
         // Save data into '*.new' file
-        // Keep same format as last saved file
-        if (isOldOmegaTFormat) {
+        // If in team project, keep same format as last saved file
+        if (isTeamProject && isOldOmegaTFormat) {
             exportTMX(props, newFile, false, false, true);
         } else {
             exportTMX(props, newFile, false, true, true);        

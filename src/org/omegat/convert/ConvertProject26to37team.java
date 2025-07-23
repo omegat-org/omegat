@@ -38,7 +38,6 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.ProjectTeamSettings;
@@ -47,6 +46,7 @@ import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.wc.SVNRevision;
@@ -74,7 +74,7 @@ public final class ConvertProject26to37team {
             // project is 2.6-style team project
 
             // When --no-team option is given, we skip conversion silently.
-            if (Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+            if (RuntimePreferences.isNoTeam()) {
                 return;
             }
 

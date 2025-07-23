@@ -189,6 +189,26 @@ public final class Main {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
 
+        if (PARAMS.containsKey(CLIParameters.NO_TEAM)) {
+            RuntimePreferences.setNoTeam();
+        }
+        String alternateFrom = PARAMS.get(CLIParameters.ALTERNATE_FILENAME_FROM);
+        if (alternateFrom != null) {
+            RuntimePreferences.setAlternateFilenameFrom(alternateFrom);
+        }
+        String alternateTo = PARAMS.get(CLIParameters.ALTERNATE_FILENAME_TO);
+        if (alternateTo != null) {
+            RuntimePreferences.setAlternateFilenameTo(alternateTo);
+        }
+        String tokenizerSource = PARAMS.get(CLIParameters.TOKENIZER_SOURCE);
+        if (tokenizerSource != null) {
+            RuntimePreferences.setTokenizerSource(tokenizerSource);
+        }
+        String tokenizerTarget = PARAMS.get(CLIParameters.TOKENIZER_TARGET);
+        if (tokenizerTarget != null) {
+            RuntimePreferences.setTokenizerTarget(tokenizerTarget);
+        }
+
         // initialize logging backend and loading configuration.
         ILogger logger = Log.getLogger(Main.class);
 

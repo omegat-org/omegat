@@ -82,9 +82,11 @@ public class StartCommand implements Callable<Integer> {
      * Execute standard GUI.
      */
     int runGUI() {
+        Common.showStartUpLogInfo();
         if ((params != null && !params.team) || (legacyParams != null && legacyParams.noTeam)) {
             RuntimePreferences.setNoTeam();
         }
+        Common.initializeApp();
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
         // macOS-specific - they must be set BEFORE any GUI calls

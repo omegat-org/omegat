@@ -114,38 +114,5 @@ public class Parameters {
             Log.setConsoleLevel(java.util.logging.Level.SEVERE);
             RuntimePreferences.setQuietMode(true);
         }
-        showStartUpLogInfo();
-        initializeApp();
-    }
-
-    private void showStartUpLogInfo() {
-        // initialize logging backend and loading configuration.
-        Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
-                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault())
-                        .format(ZonedDateTime.now()),
-                ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
-                Locale.getDefault().toLanguageTag());
-        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
-                System.getProperty("java.version"), System.getProperty("java.home"));
-
-        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-    }
-
-    private void initializeApp() {
-        // Workaround for Java 17 or later support of JAXB.
-        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
-        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
-
-        System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
-
-        // Do migration and load various settings. The order is important!
-        Preferences.init();
-        // broker should be loaded before module loading
-        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
-        JLanguageTool.setDataBroker(new LanguageDataBroker());
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-        Preferences.initFilters();
-        Preferences.initSegmentation();
     }
 }

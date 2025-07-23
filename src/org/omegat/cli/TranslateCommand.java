@@ -84,7 +84,9 @@ public class TranslateCommand implements Callable<Integer> {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
 
+        Common.showStartUpLogInfo();
         Log.logInfoRB("CONSOLE_INITIALIZING");
+        Common.initializeApp();
         Core.initializeConsole();
 
         RealProject p = Common.selectProjectConsoleMode(true, params);

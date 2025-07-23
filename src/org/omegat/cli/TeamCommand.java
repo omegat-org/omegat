@@ -68,6 +68,7 @@ public class TeamCommand implements Callable<Integer> {
      *            target language.
      */
     private int executeInit(String dir, String sLang, String tLang) {
+        Common.showStartUpLogInfo();
         Log.setLevel(Level.WARNING);
 
         try {

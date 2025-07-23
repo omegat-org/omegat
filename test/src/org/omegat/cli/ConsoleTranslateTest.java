@@ -67,7 +67,7 @@ public class ConsoleTranslateTest extends ConsoleTestsCommon {
     }
 
     private void testConsoleTranslatePrep(String fileName) throws Exception {
-        prep();
+        prepOmegaTProjectAndDirectries();
         Path testTmx = Paths.get("test/data/tmx/project_save.tmx");
         Files.copy(testTmx, getProjectDir().resolve("omegat/project_save.tmx"));
         List<String> fileContent = List.of(SOURCE);

@@ -27,14 +27,13 @@ package org.omegat.cli;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 import java.nio.file.Files;
@@ -52,8 +51,7 @@ public class ConsoleTestsCommon {
         tmpDir = Files.createTempDirectory("omegat");
         assertTrue(tmpDir.toFile().isDirectory());
         configDir = Files.createDirectory(tmpDir.resolve(".omegat")).toString();
-        TestPreferencesInitializer.init(configDir);
-        Core.initializeConsole();
+        Files.copy(Path.of("test/data/preferences/filters.xml"), tmpDir.resolve(".omegat/filters.xml"));
     }
 
     @After
@@ -77,7 +75,7 @@ public class ConsoleTestsCommon {
         return tmpDir.resolve(OConsts.DEFAULT_SOURCE);
     }
 
-    void prep() throws Exception {
+    void prepOmegaTProjectAndDirectries() throws Exception {
         // Create project properties
         ProjectProperties props = new ProjectProperties(getProjectDir().toFile());
         props.setSourceLanguage(new Language("en"));

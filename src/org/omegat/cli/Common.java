@@ -25,23 +25,38 @@
  **************************************************************************/
 package org.omegat.cli;
 
+import com.vlsolutions.swing.docking.DockingDesktop;
+import org.apache.commons.lang3.StringUtils;
+import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.tagvalidation.ErrorReport;
+import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.languagetools.LanguageClassBroker;
+import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.format.TextStyle;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 final class Common {
 
@@ -149,4 +164,34 @@ final class Common {
         return p;
     }
 
+    static void showStartUpLogInfo() {
+        // initialize logging backend and loading configuration.
+        Log.logInfoRB("STARTUP_LOGGING_INFO", StringUtils.repeat('=', 120), OStrings.getNameAndVersion(),
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault())
+                        .format(ZonedDateTime.now()),
+                ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+                Locale.getDefault().toLanguageTag());
+        Log.logInfoRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
+                System.getProperty("java.version"), System.getProperty("java.home"));
+
+        Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
+    }
+
+    static void initializeApp() {
+        // Workaround for Java 17 or later support of JAXB.
+        // See https://sourceforge.net/p/omegat/feature-requests/1682/#12c5
+        System.setProperty("com.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize", "true");
+
+        System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
+
+        // Do migration and load various settings. The order is important!
+        Preferences.init();
+        // broker should be loaded before module loading
+        JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
+        JLanguageTool.setDataBroker(new LanguageDataBroker());
+        PluginUtils.loadPlugins(Collections.emptyMap());
+        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
+        Preferences.initFilters();
+        Preferences.initSegmentation();
+    }
 }

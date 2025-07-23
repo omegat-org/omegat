@@ -87,6 +87,7 @@ public class StatsCommand implements Callable<Integer> {
      * return 1.
      */
     int runConsoleStats() {
+        Common.showStartUpLogInfo();
         if (params == null || legacyParams == null) {
             return 1;
         }
@@ -100,7 +101,6 @@ public class StatsCommand implements Callable<Integer> {
         if (format == null) {
             format = legacyParams.statsType;
         }
-        Core.initializeConsole();
 
         if (legacyParams.disableProjectLocking) {
             RuntimePreferences.setProjectLockingEnabled(false);
@@ -108,6 +108,9 @@ public class StatsCommand implements Callable<Integer> {
         if (legacyParams.disableLocationSave) {
             RuntimePreferences.setLocationSaveEnabled(false);
         }
+
+        Common.initializeApp();
+        Core.initializeConsole();
 
         RealProject p = Common.selectProjectConsoleMode(true, params);
         StatsResult projectStats = CalcStandardStatistics.buildProjectStats(p);

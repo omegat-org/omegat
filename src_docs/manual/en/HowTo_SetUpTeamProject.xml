@@ -150,8 +150,8 @@
         <para>Put the registered files on the hosting server</para>
 
         <para>Finally, publish your project to the remote server
-        (<command>commit</command> in SVN, <command>commit</command> and
-        <command>push</command> in Git).</para>
+        (<command>commit</command> <command>push</command> in Git, and 
+        <command>commit</command> in SVN).</para>
       </listitem>
 
       <listitem>
@@ -305,7 +305,7 @@
         <term>repository type</term>
         <listitem>
           <para>This can be either <emphasis>http</emphasis> (which includes
-          https), <emphasis>svn</emphasis>, <emphasis>git</emphasis>, or
+          https), <emphasis>git</emphasis>, <emphasis>svn</emphasis>, or
           <emphasis>file</emphasis>.</para>
         </listitem>
       </varlistentry>
@@ -374,7 +374,7 @@
     local OmegaT project</para>
 
     <para>Mapping for projects in a subfolder of the repository:
-    <programlisting>&lt;repository type="svn" url="https://repo_for_All_OmegaT_team_projects"&gt;
+    <programlisting>&lt;repository type="git" url="https://repo_for_All_OmegaT_team_projects"&gt;
     &lt;mapping local="" repository="En-US_DE_project"/&gt;
 &lt;/repository&gt;</programlisting></para>
 
@@ -384,7 +384,7 @@
 
     <para>Mapping for additional sources from a remote repository, with
     filters:
-    <programlisting>&lt;repository type="svn" url="https://repo_for_All_OmegaT_team_project_sources"&gt;
+    <programlisting>&lt;repository type="git" url="https://repo_for_All_OmegaT_team_project_sources"&gt;
     &lt;mapping local="source/subdir" repository=""&gt;
         &lt;excludes&gt;**/*.bak&lt;/excludes&gt;
         &lt;includes&gt;readme.bak&lt;/includes&gt;

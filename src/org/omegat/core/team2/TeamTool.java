@@ -106,7 +106,7 @@ public final class TeamTool {
         // Create empty project TM
         ProjectTMX projectTMX = new ProjectTMX();
         projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null, Core.getSegmenter());
-        projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false);
+        projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false, true);
 
         // If the supplied dir is under version control, add everything we made
         // and set EOL handling correctly for cross-platform work

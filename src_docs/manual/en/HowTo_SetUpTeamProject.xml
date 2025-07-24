@@ -118,23 +118,20 @@
           repository and the remote repository (the default), <emphasis
           role="bold">and only in such projects</emphasis>, the source and
           target files can be modified locally and uploaded to the server directly
-          from OmegaT using <link linkend="menus.project" endterm="menus.project.title"/>
+          from OmegaT using the <link linkend="menus.project" endterm="menus.project.title"/>
           <link
           endterm="menus.project.commit.source.files.title"
           linkend="menus.project.commit.source.files"/> and <link
           linkend="menus.project" endterm="menus.project.title"/><link
           linkend="menus.project.commit.target.files"
-          endterm="menus.project.commit.target.files.title"/>.</para>
+          endterm="menus.project.commit.target.files.title"/> commands.</para>
 
-          <para>However, they can only be deleted by the project manager from
-          the local VCS client.</para>
+          <para>However, they can only be deleted by the project manager via
+          the VCS.</para>
           <para>In projects that use more complex mapping,
           <emphasis role="bold">adding</emphasis>, <emphasis role="bold">modifying</emphasis>,
           or <emphasis role="bold">deleting</emphasis> files must
-          <emphasis role="italic">all</emphasis> be performed through the VCS client.
-          Some plugins can make this task easier. See the
-          <link linkend="dialogs.preferences.plugins"
-          endterm="dialogs.preferences.plugins.title"/> preference for details.</para>
+          <emphasis role="italic">all</emphasis> be performed through the VCS.</para>          
         </note>
       </listitem>
 

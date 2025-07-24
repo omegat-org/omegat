@@ -213,11 +213,20 @@
       <term>Source files</term>
 
       <listitem>
+        <para>Unless special mappings or <link
+        endterm="how.to.setup.team.project.selective.sharing.title"
+        linkend="how.to.setup.team.project.selective.sharing"></link>,
+        have been set up all source files are shared by all team members,
+        and any changes made to the local source files are overwritten the
+        next time the project is synchronized, unless they are committed
+        to the server using the <link endterm="menus.project.title"
+		    linkend="menus.project"/><link
+		    endterm="menus.project.commit.source.files.title"
+		    linkend="menus.project.commit.source.files"/> command.</para>
         <warning>
-		  <para>Only the project manager should use the <link
-		  endterm="menus.project.title" linkend="menus.project"/><link
-		  endterm="menus.project.commit.source.files.title"
-		  linkend="menus.project.commit.source.files"/> command.</para>
+		  <para>Since changes to the source files affect <emphasis role="italic">all</emphasis>
+      members, use that command with caution and only in accordance with the guidelines and
+      workflow established for the project by the project manager.</para>
 		</warning>
       </listitem>
     </varlistentry>
@@ -226,12 +235,12 @@
       <term>Target files</term>
 
       <listitem>
-        <para>After you generate the target files use the 
+        <para>After you generate the target, files use the 
         <link endterm="menus.project.title"
         linkend="menus.project"/><link
         endterm="menus.project.commit.target.files.title"
         linkend="menus.project.commit.target.files"/> command to add them to the
-        server, if the project manager has requested you to do so.
+        server if the project manager has requested you to do so.
         Committing the target files also uploads the statistics files to the server.</para>
       </listitem>
     </varlistentry>

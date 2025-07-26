@@ -296,6 +296,11 @@ public class ProjectTMX {
         }
     }
 
+    public void clear() {
+        defaults.clear();
+        alternatives.clear();
+    }
+
     private class Loader implements TMXReader2.LoadCallback {
         private final Language sourceLang;
         private final Language targetLang;

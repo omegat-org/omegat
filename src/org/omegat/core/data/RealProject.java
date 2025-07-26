@@ -715,6 +715,12 @@ public class RealProject implements IProject {
         // them to
         // the repository (BUGS#1176)
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+        while (CoreEvents.isInProjectEventLoop) {
+            Thread.yield();
+        }
+        while (org.omegat.gui.scripting.ScriptingWindow.window.inEventsLoop > 0) {
+            Thread.yield();
+        }
 
         if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles
                 && isOnlineMode) {

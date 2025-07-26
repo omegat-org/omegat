@@ -129,7 +129,8 @@ public class SourceTextEntry {
         this.firstInstance = null;
     }
 
-    public SourceTextEntry(EntryKey key, int entryNum, String[] props, String sourceTranslation, List<ProtectedPart> protectedParts) {
+    public SourceTextEntry(EntryKey key, int entryNum, @Nullable String[] props, @Nullable String sourceTranslation,
+                           List<ProtectedPart> protectedParts) {
         this(key,  entryNum, props, sourceTranslation, protectedParts, true);
     }
 

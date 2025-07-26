@@ -22,49 +22,23 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+package org.omegat.core.data;
 
-package org.omegat.core;
-
-import org.jetbrains.annotations.Nullable;
-import org.omegat.core.data.TestCoreState;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.glossary.IGlossaries;
-import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.notes.INotes;
-import org.omegat.util.gui.StaticUIUtils;
 
-/**
- * Core initializer for unit tests.
- *
- * @author Alex Buloichik (alex73mail@gmail.com)
- */
-public final class TestCoreInitializer {
+public class TestCoreState extends CoreState {
 
-    private TestCoreInitializer() {
+    public static void resetState() {
+        CoreState.getInstance().setMainWindow(null);
+        CoreState.getInstance().setSaveThread(null);
+        setTestInstance(new TestCoreState());
     }
 
-    public static void initEditor(IEditor editor) {
-        TestCoreState.getInstance().setEditor(editor);
+    private static void setTestInstance(TestCoreState instance) {
+        CoreState.setInstance(instance);
     }
 
     public static void initAutoSave(IAutoSave autoSave) {
-        TestCoreState.initAutoSave(autoSave);
-    }
-
-    public static void initMainWindow(@Nullable IMainWindow mainWindow) throws Exception {
-        TestCoreState.getInstance().setMainWindow(mainWindow);
-
-        if (StaticUIUtils.isGUI() && mainWindow != null) {
-            Core.initializeGUIimpl(mainWindow);
-        }
-    }
-
-    public static void initGlossary(IGlossaries glossaries) {
-        TestCoreState.getInstance().setGlossaries(glossaries);
-    }
-
-    public static void initNotes(INotes notes) {
-        TestCoreState.getInstance().setNotes(notes);
+        CoreState.getInstance().setSaveThread(autoSave);
     }
 }

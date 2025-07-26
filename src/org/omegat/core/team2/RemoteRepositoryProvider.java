@@ -227,7 +227,7 @@ public class RemoteRepositoryProvider {
      * null, need to switch to latest version. Returns the path in the remote
      * repository ( /path/to/omegatproject/.repositories/url/filepath
      */
-    public File switchToVersion(String filePath, String version) throws Exception {
+    public File switchToVersion(String filePath, @Nullable String version) throws Exception {
         return oneMapping(filePath).switchToVersion(version);
     }
 

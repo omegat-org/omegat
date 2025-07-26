@@ -32,6 +32,10 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hy.ArmenianAnalyzer;
 
 /**
+ * Tokenizer implementation for processing Armenian text.
+ * This class is specifically designed for tokenizing and optionally applying stemming or
+ * stop word filtering to Armenian language content.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "hy" })

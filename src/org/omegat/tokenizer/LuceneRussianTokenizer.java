@@ -33,6 +33,13 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ru.RussianAnalyzer;
 
 /**
+ * The LuceneRussianTokenizer class provides text tokenization specifically for the Russian language.
+ * This tokenizer utilizes the Lucene library and supports stemming and stop word filtering functionality
+ * based on the provided configuration.
+ * <p>
+ * It extends the BaseTokenizer class and overrides the base tokenization behavior to accommodate
+ * language-specific rules and features for Russian text.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

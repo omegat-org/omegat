@@ -33,6 +33,13 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.br.BrazilianAnalyzer;
 
 /**
+ * A tokenizer implementation for processing Brazilian Portuguese text with optional stemming
+ * and stop word removal capabilities. This class leverages Lucene's BrazilianAnalyzer and
+ * CharArraySet for tokenization tasks.
+ * <p>
+ * The behavior of the tokenizer is controlled via the method parameters and ensures
+ * that it is adaptable to a variety of text processing needs specific to Brazilian Portuguese.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

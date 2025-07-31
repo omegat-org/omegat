@@ -336,11 +336,13 @@ distributions {
                 ])
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            project.tasks.matching {it.name.startsWith('firstSteps') || it.name.startsWith('instantStart')}.forEach {
-                from(it.outputs) { into 'docs/greetings' }
+            into('docs/greetings') {
+                from(tasks.firstSteps)
+                from(layout.buildDirectory.dir('docs/greetings'))
             }
-            project.tasks.matching {it.name.startsWith('manualZip')}.forEach {
-                from(it.outputs) { into 'docs/manuals' }
+            into('docs/manuals') {
+                from(tasks.manualZips)
+                from(layout.buildDirectory.dir('docs/manuals'))
             }
             from(layout.settingsDirectory.dir('scripts')) {
                 into 'scripts'

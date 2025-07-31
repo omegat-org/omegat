@@ -139,7 +139,8 @@ public class RealProject implements IProject {
     private final ILogger logger = LoggerFactory.getLogger(RealProject.class, OStrings.getResourceBundle());
 
     protected final ProjectProperties config;
-    protected RemoteRepositoryProvider remoteRepositoryProvider;
+    protected @Nullable RemoteRepositoryProvider remoteRepositoryProvider;
+
 
     enum PreparedStatus {
         NONE, PREPARED, PREPARED2, REBASED
@@ -373,7 +374,7 @@ public class RealProject implements IProject {
                     glossaryPrepared = null;
                     remoteRepositoryProvider.switchAllToLatest();
                 } catch (IRemoteRepository2.NetworkException e) {
-                    Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
+                    Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause() == null ? e.getMessage() : e.getCause());
                     setOfflineMode();
                 }
                 remoteRepositoryProvider.copyFilesFromReposToProject("");
@@ -879,7 +880,8 @@ public class RealProject implements IProject {
                     throw ex;
                 } catch (IRemoteRepository2.NetworkException e) {
                     if (isOnlineMode) {
-                        Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause());
+                        Log.logErrorRB("TEAM_NETWORK_ERROR", e.getCause() == null ? e.getLocalizedMessage()
+                                : e.getCause());
                         setOfflineMode();
                     }
                 } catch (Exception e) {

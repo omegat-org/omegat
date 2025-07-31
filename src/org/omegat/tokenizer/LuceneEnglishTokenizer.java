@@ -33,6 +33,15 @@ import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.omegat.core.Core;
 
 /**
+ * The LuceneEnglishTokenizer class provides a tokenization implementation for
+ * the English language using Lucene's EnglishAnalyzer. It is integrated as the
+ * default tokenizer for the "en" (English) language in OmegaT.
+ * <p>
+ * This tokenizer can handle stop words and word stemming based on the provided
+ * configuration flags. It supports tokenization of text using either Lucene's
+ * standard tokenization or with additional analysis features such as stemming
+ * and stop word removal.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "en" }, isDefault = true)

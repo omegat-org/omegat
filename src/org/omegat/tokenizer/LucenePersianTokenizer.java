@@ -33,7 +33,15 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fa.PersianAnalyzer;
 
 /**
- * @author Alex Buloichik (alex73mail@gmail.com)
+ * A tokenizer for processing Persian text using Apache Lucene's {@link PersianAnalyzer}.
+ * <p>
+ * This tokenizer provides token streams specifically tailored for the Persian language
+ * with options to enable or disable stemming and stop word processing. It leverages
+ * the default stop word set provided in the {@link PersianAnalyzer}.
+ * <p>
+ * The class is designed to handle text tokenization requirements for Persian, considering
+ * the unique linguistic characteristics of the language.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "fa" })

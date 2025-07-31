@@ -32,6 +32,18 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.no.NorwegianAnalyzer;
 
 /**
+ * A tokenizer implementation for the Norwegian language, tailored for use
+ * with text processing tasks. This class extends the BaseTokenizer and
+ * provides functionality to tokenize Norwegian text using Lucene's
+ * NorwegianAnalyzer.
+ * <p>
+ * This tokenizer supports processing with and without stemming, as well as
+ * with or without stop word filtering. The underlying tokenization engine
+ * uses Lucene's NorwegianAnalyzer for producing tokens when stemming is
+ * enabled.
+ * <p>
+ * This class is marked as the default tokenizer for the Norwegian language.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "nb" }, isDefault = true)

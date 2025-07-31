@@ -33,6 +33,13 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.th.ThaiAnalyzer;
 
 /**
+ * LuceneThaiTokenizer is a tokenizer implementation for processing Thai language text.
+ * It extends the BaseTokenizer and provides tokenization support for Thai text,
+ * utilizing the ThaiAnalyzer from Apache Lucene.
+ * <p>
+ * This tokenizer allows optional stemming and the inclusion of stop words
+ * during the tokenization process.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

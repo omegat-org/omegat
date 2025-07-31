@@ -117,10 +117,10 @@ import gen.core.filters.Filters;
 /**
  * Loaded project implementation. Only translation could be changed after
  * project will be loaded and set by Core.setProject.
- *
+ * <p>
  * All components can read all data directly without synchronization. All
  * synchronization implemented inside RealProject.
- *
+ * <p>
  * Since team sync is long operation, auto-saving was split into 3 phrases: get
  * remote data in background, then rebase during segment deactivation, then
  * commit in background.
@@ -136,10 +136,11 @@ import gen.core.filters.Filters;
  * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
-    private final ILogger logger;
+    private final ILogger logger = LoggerFactory.getLogger(RealProject.class, OStrings.getResourceBundle());
 
     protected final ProjectProperties config;
     protected @Nullable RemoteRepositoryProvider remoteRepositoryProvider;
+
 
     enum PreparedStatus {
         NONE, PREPARED, PREPARED2, REBASED
@@ -150,7 +151,7 @@ public class RealProject implements IProject {
      */
     private volatile PreparedStatus preparedStatus = PreparedStatus.NONE;
     private volatile @Nullable RebaseAndCommit.Prepared tmxPrepared;
-    private volatile RebaseAndCommit.Prepared glossaryPrepared;
+    private volatile @Nullable RebaseAndCommit.Prepared glossaryPrepared;
 
     private boolean isOnlineMode;
 
@@ -189,22 +190,19 @@ public class RealProject implements IProject {
      * without thinking about synchronization.
      */
     private Map<String, ExternalTMX> transMemories = new TreeMap<>();
+    private final LoadFilesCallback loadFilesCallback = new LoadFilesCallback(this);
 
     /**
      * Storage for all translation memories of translations to other languages.
      */
     private Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<>();
 
-    protected ProjectTMX projectTMX;
+    protected final ProjectTMX projectTMX;
 
     /**
      * True if project loaded successfully.
      */
     private boolean loaded = false;
-
-    // Sets of exist entries for check orphaned
-    private Set<String> existSource = new HashSet<>();
-    private Set<EntryKey> existKeys = new HashSet<>();
 
     /** Segments count in project files. */
     protected List<FileInfo> projectFilesList = new ArrayList<>();
@@ -237,6 +235,19 @@ public class RealProject implements IProject {
      */
     public RealProject(final ProjectProperties props) {
         config = props;
+        projectTMX = new ProjectTMX(loadFilesCallback);
+        initializeRemoteProject();
+        initializeTokenizer();
+    }
+
+    public RealProject(final ProjectProperties props, ProjectTMX.CheckOrphanedCallback callback) {
+        config = props;
+        projectTMX = new ProjectTMX(callback);
+        initializeRemoteProject();
+        initializeTokenizer();
+    }
+
+    private void initializeRemoteProject() {
         if (config.getRepositories() != null && !Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
             try {
                 remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
@@ -248,14 +259,15 @@ public class RealProject implements IProject {
         } else {
             remoteRepositoryProvider = null;
         }
+    }
 
+    private void initializeTokenizer() {
         sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE),
-                props.getSourceTokenizer());
+                config.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
         targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET),
-                props.getTargetTokenizer());
+                config.getTargetTokenizer());
         Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
-        logger = LoggerFactory.getLogger(RealProject.class, OStrings.getResourceBundle());
     }
 
     public void saveProjectProperties() throws Exception {
@@ -432,8 +444,7 @@ public class RealProject implements IProject {
             allProjectEntries.clear();
             projectFilesList.clear();
             transMemories.clear();
-            projectTMX = null;
-
+            projectTMX.clear();
             // There, that should do it, now inform the user
             long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
             Log.logErrorRB("OUT_OF_MEMORY", memory);
@@ -642,9 +653,38 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
+        exportTMXs();
         Pattern filePattern = Pattern.compile(sourcePattern);
-        String fname;
+        int numberOfCompiled = compileMatchingFiles(filePattern);
 
+        // COMPILE event is fired before committing translated files to remote
+        // repository to be able to modify the resulting files before sending
+        // them to the repository (BUGS#1176)
+        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+        if (shouldCommitToRepository(commitTargetFiles)) {
+            commitToRepository();
+        }
+        displayCompilationResult(numberOfCompiled);
+        if (doPostProcessing) {
+            // Kill any processes still not complete
+            flushProcessCache();
+
+            if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+                doExternalCommand(config.getExternalCommand());
+            }
+            doExternalCommand(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
+        }
+
+        Log.logInfoRB("LOG_DATAENGINE_COMPILE_END");
+    }
+
+    private boolean shouldCommitToRepository(boolean commitTargetFiles) {
+        return remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot()
+                && commitTargetFiles && isOnlineMode;
+    }
+
+    private void exportTMXs() throws IOException {
+        String fname;
         // Build TMX files specified as output TMXs in the config file
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
@@ -671,11 +711,12 @@ public class RealProject implements IProject {
                 projectTMX.exportTMX(config, new File(fname), false, true, false);
             }
         } catch (Exception e) {
-            Log.logErrorRB("CT_ERROR_CREATING_TMX");
-            Log.log(e);
+            Log.logErrorRB(e, "CT_ERROR_CREATING_TMX");
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
         }
+    }
 
+    private int compileMatchingFiles(Pattern filePattern) throws Exception {
         String srcRoot = config.getSourceRoot();
         String locRoot = config.getTargetRoot();
 
@@ -686,8 +727,7 @@ public class RealProject implements IProject {
                 config.getSourceRootExcludes());
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
-
-        int numberOfCompiled = 0;
+        int compiledFilesCount = 0;
 
         for (String midName : pathList) {
             // shorten filename to that which is relative to src root
@@ -706,68 +746,51 @@ public class RealProject implements IProject {
                 fm.translateFile(srcRoot, midName, locRoot, new FilterContext(config),
                         translateFilesCallback);
                 translateFilesCallback.fileFinished();
-                numberOfCompiled++;
+                compiledFilesCount++;
             }
         }
+        return compiledFilesCount;
+    }
 
-        // COMPILE event is fired before committing translated files to remote
-        // repository to be able to modify the resulting files before sending
-        // them to
-        // the repository (BUGS#1176)
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+    private void commitToRepository() throws Exception {
+        tmxPrepared = null;
+        glossaryPrepared = null;
 
-        if (remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles
-                && isOnlineMode) {
-            tmxPrepared = null;
-            glossaryPrepared = null;
-            // Ticket 1690 - build project statistics files
-            // so that contents of these files is up to date with target files
-            // sent at same moment
-            StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
-            stat.updateStatisticsInfo(hotStat);
-            String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat.getTextData());
-            Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
-            // commit translations and statistics
-            try {
-                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
-                remoteRepositoryProvider.switchAllToLatest();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(),
-                        null);
-                remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(),
-                        "Project translation");
-                // Convert stats file name to relative
-                ProjectProperties.ProjectPath path = config.new ProjectPath(true);
-                path.setRelativeOrAbsolute(fn);
-                fn = path.getUnderRoot();
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
-                remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
-                remoteRepositoryProvider.commitFiles(fn, "Statistics");
-                Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
-            } catch (Exception e) {
-                Log.logErrorRB("TF_COMMIT_TARGET_ERROR");
-                Log.log(e);
-                throw new IOException(OStrings.getString("TF_COMMIT_TARGET_ERROR") + "\n" + e.getMessage());
-            }
+        // Ticket 1690 - build project statistics files
+        // so that contents of these files is up to date with target files
+        // sent at same moment
+        StatsResult stat = CalcStandardStatistics.buildProjectStats(this);
+        stat.updateStatisticsInfo(hotStat);
+        String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
+        Statistics.writeStat(fn, stat.getTextData());
+        Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
+
+        // Convert stats file name to relative
+        ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+        path.setRelativeOrAbsolute(fn);
+        fn = path.getUnderRoot();
+        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
+        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
+        remoteRepositoryProvider.commitFiles(fn, "Statistics");
+
+        try {
+            Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
+            remoteRepositoryProvider.switchAllToLatest();
+            remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
+            remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+            Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
+        } catch (Exception e) {
+            Log.logErrorRB(e, "TF_COMMIT_TARGET_ERROR");
+            throw new IOException(OStrings.getString("TF_COMMIT_TARGET_ERROR") + "\n" + e.getMessage());
         }
+    }
 
-        if (numberOfCompiled == 1) {
+    private void displayCompilationResult(int compiledFilesCount) {
+        if (compiledFilesCount == 1) {
             Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX_SINGULAR");
         } else {
             Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
         }
-
-        if (doPostProcessing) {
-            // Kill any processes still not complete
-            flushProcessCache();
-
-            if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
-                doExternalCommand(config.getExternalCommand());
-            }
-            doExternalCommand(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
-        }
-
-        Log.logInfoRB("LOG_DATAENGINE_COMPILE_END");
     }
 
     /**
@@ -887,7 +910,7 @@ public class RealProject implements IProject {
 
     /**
      * Prepare for future team sync.
-     *
+     * <p>
      * This method must be executed in the Core.executeExclusively.
      */
     @Override
@@ -921,7 +944,7 @@ public class RealProject implements IProject {
 
     /**
      * Fast team sync for execute from SaveThread.
-     *
+     * <p>
      * This method must be executed in the Core.executeExclusively.
      */
     @Override
@@ -932,7 +955,7 @@ public class RealProject implements IProject {
         logger.atDebug().log("Rebase team sync");
         try {
             preparedStatus = PreparedStatus.PREPARED2;
-            synchronized (RealProject.this) {
+            synchronized (projectTMX) {
                 projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
                         isProjectModified());
             }
@@ -1213,9 +1236,10 @@ public class RealProject implements IProject {
         File file = new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            projectTMX = new ProjectTMX(checkOrphanedCallback);
-            projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
-                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
+            synchronized (projectTMX) {
+                projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                        config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
+            }
         } catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
@@ -1251,8 +1275,6 @@ public class RealProject implements IProject {
         for (String filepath : srcPathList) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
-                    transMemories);
 
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
@@ -1283,7 +1305,7 @@ public class RealProject implements IProject {
 
         findNonUniqueSegments();
 
-        if (errorSrcList.size() > 0) {
+        if (!errorSrcList.isEmpty()) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_SKIP_FILES");
         } else {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
@@ -1317,11 +1339,11 @@ public class RealProject implements IProject {
 
     /**
      * This method imports translation from source files into ProjectTMX.
-     *
+     * <p>
      * If there are multiple segments with equals source, then first
      * translations will be loaded as default, all other translations will be
      * loaded as alternative.
-     *
+     * <p>
      * We shouldn't load translation from source file(even as alternative) when
      * default translation already exists in project_save.tmx. So, only first
      * load will be possible.
@@ -1459,7 +1481,7 @@ public class RealProject implements IProject {
             if (file.exists()) {
                 try {
                     ProjectTMX newTMX = new ProjectTMX(config.getSourceLanguage(), targetLanguage,
-                            config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
+                            config.isSentenceSegmentingEnabled(), file, loadFilesCallback);
                     newOtherTargetLangTMs.put(targetLanguage, newTMX);
                 } catch (Exception e) {
                     String filename = file.getPath();
@@ -1492,9 +1514,6 @@ public class RealProject implements IProject {
     }
 
     public TMXEntry getTranslationInfo(SourceTextEntry ste) {
-        if (projectTMX == null) {
-            return EMPTY_TRANSLATION;
-        }
         TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
         if (r == null) {
             r = projectTMX.getDefaultTranslation(ste.getSrcText());
@@ -1668,9 +1687,6 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
-        if (projectTMX == null) {
-            return;
-        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());
@@ -1681,9 +1697,6 @@ public class RealProject implements IProject {
     }
 
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
-        if (projectTMX == null) {
-            return;
-        }
         Map.Entry<EntryKey, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.alternatives.entrySet());
@@ -1700,32 +1713,36 @@ public class RealProject implements IProject {
         return set.toArray(a);
     }
 
+    @Override
     public boolean isOrphaned(String source) {
-        return !checkOrphanedCallback.existSourceInProject(source);
+        return !loadFilesCallback.existSourceInProject(source);
     }
 
+    @Override
     public boolean isOrphaned(EntryKey entry) {
-        return !checkOrphanedCallback.existEntryInProject(entry);
+        return !loadFilesCallback.existEntryInProject(entry);
     }
 
+    @Override
     public Map<String, ExternalTMX> getTransMemories() {
         return Collections.unmodifiableMap(transMemories);
     }
 
+    @Override
     public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
         return Collections.unmodifiableMap(otherTargetLangTMs);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    void putExternalTMEntry(String key, ExternalTMX entry) {
+        transMemories.put(key, entry);
+    }
+
+    @Override
     public ITokenizer getSourceTokenizer() {
         return sourceTokenizer;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public ITokenizer getTargetTokenizer() {
         return targetTokenizer;
     }
@@ -1841,22 +1858,20 @@ public class RealProject implements IProject {
         }
     }
 
-    protected class LoadFilesCallback extends ParseEntry {
+    protected class LoadFilesCallback extends ParseEntry implements ProjectTMX.CheckOrphanedCallback {
         private FileInfo fileInfo;
         private String entryKeyFilename;
+        private final RealProject project;
 
-        private final Set<String> existSource;
-        private final Set<EntryKey> existKeys;
-        private final Map<String, ExternalTMX> externalTms;
+        // Sets of exist entries for check orphaned
+        private final Set<String> existSource = new HashSet<>();
+        private final Set<EntryKey> existKeys = new HashSet<>();
 
         private ExternalTMFactory.Builder tmBuilder;
 
-        public LoadFilesCallback(Set<String> existSource, Set<EntryKey> existKeys,
-                Map<String, ExternalTMX> externalTms) {
+        public LoadFilesCallback(RealProject project) {
             super(config);
-            this.existSource = existSource;
-            this.existKeys = existKeys;
-            this.externalTms = externalTms;
+            this.project = project;
         }
 
         public void setCurrentFile(FileInfo fi) {
@@ -1868,8 +1883,8 @@ public class RealProject implements IProject {
         public void fileFinished() {
             super.fileFinished();
 
-            if (tmBuilder != null && externalTms != null) {
-                externalTms.put(entryKeyFilename, tmBuilder.done());
+            if (tmBuilder != null) {
+                project.putExternalTMEntry(entryKeyFilename, tmBuilder.done());
             }
 
             fileInfo = null;
@@ -1906,12 +1921,22 @@ public class RealProject implements IProject {
                 }
                 tmBuilder.addEntry(segmentSource, segmentTranslation, id, path, props);
             } else {
-                allProjectEntries.add(srcTextEntry);
+                project.getAllEntries().add(srcTextEntry);
                 fileInfo.entries.add(srcTextEntry);
 
                 existSource.add(segmentSource);
                 existKeys.add(srcTextEntry.getKey());
             }
+        }
+
+        @Override
+        public boolean existEntryInProject(EntryKey key) {
+            return existKeys.contains(key);
+        }
+
+        @Override
+        public boolean existSourceInProject(String src) {
+            return existSource.contains(src);
         }
     }
 
@@ -2010,16 +2035,6 @@ public class RealProject implements IProject {
             }
         }
     }
-
-    ProjectTMX.CheckOrphanedCallback checkOrphanedCallback = new ProjectTMX.CheckOrphanedCallback() {
-        public boolean existSourceInProject(String src) {
-            return existSource.contains(src);
-        }
-
-        public boolean existEntryInProject(EntryKey key) {
-            return existKeys.contains(key);
-        }
-    };
 
     void setOnlineMode() {
         if (!isOnlineMode) {

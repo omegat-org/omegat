@@ -303,7 +303,6 @@ public class RealProjectTest {
     protected static class RealProjectWithTMXAccess extends RealProject {
         public RealProjectWithTMXAccess(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
         }
 
         public ProjectTMX getTMX() {

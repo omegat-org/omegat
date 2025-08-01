@@ -41,7 +41,7 @@ public final class TipOfTheDayUtils {
 
     static final String INDEX_YAML = "tips.yaml";
 
-    static URI getTipsFileURI(String filename) {
+    static @Nullable URI getTipsFileURI(String filename) {
         return getTipsURI(filename, getLocale());
     }
 

@@ -190,12 +190,6 @@ public class TestMainWindowMenuHandler extends BaseMainWindowMenuHandler {
         }
         Core.getGlossary().showCreateGlossaryEntryDialog(Core.getMainWindow().getApplicationFrame());
     }
-    @Override
-    public void editFindInProjectMenuItemActionPerformed() {
-    }
-    @Override
-    void findInProjectReuseLastWindow() {
-    }
 
     public void editReplaceInProjectMenuItemActionPerformed() {
     }

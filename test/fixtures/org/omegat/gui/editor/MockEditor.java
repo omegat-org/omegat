@@ -247,7 +247,7 @@ public class MockEditor implements IEditor {
 
     @Override
     public String getSelectedText() {
-        return null;
+        return "";
     }
 
     @Override
@@ -262,17 +262,17 @@ public class MockEditor implements IEditor {
 
     @Override
     public String getCurrentTranslation() {
-        return null;
+        return "";
     }
 
     @Override
     public String getCurrentTargetFile() {
-        return null;
+        return "";
     }
 
     @Override
     public String getCurrentFile() {
-        return null;
+        return "";
     }
 
     @Override

@@ -62,6 +62,13 @@
         </Or>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
+
+    <!-- CoreState.getInstance returns the instance object in design. -->
+    <Match>
+        <Class name="org.omegat.core.data.CoreState"/>
+        <Bug pattern="MS_EXPOSE_REP"/>
+    </Match>
+
     <!-- Plugin manager exposes lists of classes in design. suppress until design reconstruction -->
     <Match>
         <Class name="org.omegat.filters2.master.PluginUtils" />

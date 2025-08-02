@@ -36,11 +36,11 @@ import java.util.List;
  * a minimal implementation where methods do not perform any specific
  * functionality but are present to fulfill the interface contract.
  */
-public class MockEditor implements IEditor {
+public class EditorStub implements IEditor {
 
     private final IEditorSettings editorSettings;
 
-    public MockEditor(IEditorSettings settings) {
+    public EditorStub(IEditorSettings settings) {
         this.editorSettings = settings;
     }
 
@@ -247,7 +247,7 @@ public class MockEditor implements IEditor {
 
     @Override
     public String getSelectedText() {
-        return null;
+        return "";
     }
 
     @Override
@@ -262,17 +262,17 @@ public class MockEditor implements IEditor {
 
     @Override
     public String getCurrentTranslation() {
-        return null;
+        return "";
     }
 
     @Override
     public String getCurrentTargetFile() {
-        return null;
+        return "";
     }
 
     @Override
     public String getCurrentFile() {
-        return null;
+        return "";
     }
 
     @Override

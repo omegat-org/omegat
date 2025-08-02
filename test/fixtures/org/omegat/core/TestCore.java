@@ -39,12 +39,14 @@ import org.junit.After;
 import org.junit.Before;
 
 import org.omegat.core.data.NotLoadedProject;
-import org.omegat.gui.editor.MockEditor;
-import org.omegat.gui.editor.MockEditorSettings;
+import org.omegat.gui.editor.EditorStub;
+import org.omegat.gui.editor.EditorSettingsStub;
+import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.main.MockMainMenu;
+import org.omegat.gui.main.MainMenuStub;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
@@ -54,6 +56,8 @@ import org.omegat.util.TestPreferencesInitializer;
  */
 public abstract class TestCore {
     protected File configDir;
+    protected IEditorSettings editorSettings;
+    protected IEditor editor;
 
     /**
      * Set-up OmegaT Core properties for unit and functional test.
@@ -79,7 +83,7 @@ public abstract class TestCore {
      * @return Main menu object which implement IMainMenu.
      */
     protected IMainMenu getMainMenu() {
-        return new MockMainMenu();
+        return new MainMenuStub();
     }
 
     /**
@@ -122,7 +126,9 @@ public abstract class TestCore {
      * Initialize editor and store it with TestInitializer.initEditor function.
      */
     protected void initEditor(IMainWindow mainWindow) {
-        TestCoreInitializer.initEditor(new MockEditor(new MockEditorSettings()));
+        editorSettings = new EditorSettingsStub();
+        editor = new EditorStub(editorSettings);
+        TestCoreInitializer.initEditor(editor);
     }
 
     /**

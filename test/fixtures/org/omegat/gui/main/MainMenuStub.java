@@ -31,7 +31,7 @@ import org.omegat.util.gui.MenuExtender;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-public class MockMainMenu implements IMainMenu {
+public class MainMenuStub implements IMainMenu {
 
     private final JMenu projectMenu = new JMenu("Project");
     private final JMenu toolsMenu = new JMenu("Tools");

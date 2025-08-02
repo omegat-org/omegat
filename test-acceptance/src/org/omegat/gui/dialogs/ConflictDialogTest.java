@@ -39,6 +39,8 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class ConflictDialogTest extends TestCoreGUI {
 
@@ -73,8 +75,9 @@ public class ConflictDialogTest extends TestCoreGUI {
             }
         });
         try {
-            latch.await(5, TimeUnit.SECONDS);
+            assertTrue(latch.await(10, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
+            fail("Test is interrupted. (timeout 10 sec.)");
         }
         assertEquals("Selection should be local.", localText, controller.getResult());
     }
@@ -104,8 +107,9 @@ public class ConflictDialogTest extends TestCoreGUI {
             }
         });
         try {
-            latch.await(5, TimeUnit.SECONDS);
+            assertTrue(latch.await(10, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
+            fail("Test is interrupted. (timeout 10 sec.)");
         }
         assertEquals("Selection should be remote", remoteText, controller.getResult());
     }

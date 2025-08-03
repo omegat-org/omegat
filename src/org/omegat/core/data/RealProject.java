@@ -141,7 +141,6 @@ public class RealProject implements IProject {
     protected final ProjectProperties config;
     protected @Nullable RemoteRepositoryProvider remoteRepositoryProvider;
 
-
     enum PreparedStatus {
         NONE, PREPARED, PREPARED2, REBASED
     }
@@ -679,8 +678,8 @@ public class RealProject implements IProject {
     }
 
     private boolean shouldCommitToRepository(boolean commitTargetFiles) {
-        return remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot()
-                && commitTargetFiles && isOnlineMode;
+        return remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles
+                && isOnlineMode;
     }
 
     private void exportTMXs() throws IOException {
@@ -716,16 +715,14 @@ public class RealProject implements IProject {
         }
     }
 
-    private int compileMatchingFiles(Pattern filePattern) throws Exception {
+    private int compileMatchingFiles(Pattern filePattern) throws IOException, TranslationException {
         String srcRoot = config.getSourceRoot();
         String locRoot = config.getTargetRoot();
 
         // build translated files
         FilterMaster fm = Core.getFilterMaster();
-
         List<String> pathList = FileUtil.buildRelativeFilesList(new File(srcRoot), Collections.emptyList(),
                 config.getSourceRootExcludes());
-
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
         int compiledFilesCount = 0;
 
@@ -753,6 +750,9 @@ public class RealProject implements IProject {
     }
 
     private void commitToRepository() throws Exception {
+        if (remoteRepositoryProvider == null) {
+            return;
+        }
         tmxPrepared = null;
         glossaryPrepared = null;
 
@@ -764,20 +764,19 @@ public class RealProject implements IProject {
         String fn = config.getProjectInternal() + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat.getTextData());
         Statistics.writeStat(fn.replace(".txt", ".json"), stat.getJsonData());
-
-        // Convert stats file name to relative
-        ProjectProperties.ProjectPath path = config.new ProjectPath(true);
-        path.setRelativeOrAbsolute(fn);
-        fn = path.getUnderRoot();
-        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
-        remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
-        remoteRepositoryProvider.commitFiles(fn, "Statistics");
-
+        // commit translations and statistics
         try {
             Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_START");
             remoteRepositoryProvider.switchAllToLatest();
             remoteRepositoryProvider.copyFilesFromProjectToRepos(config.getTargetDir().getUnderRoot(), null);
             remoteRepositoryProvider.commitFiles(config.getTargetDir().getUnderRoot(), "Project translation");
+            // Convert stats file name to relative
+            ProjectProperties.ProjectPath path = config.new ProjectPath(true);
+            path.setRelativeOrAbsolute(fn);
+            fn = path.getUnderRoot();
+            remoteRepositoryProvider.copyFilesFromProjectToRepos(fn, null);
+            remoteRepositoryProvider.copyFilesFromProjectToRepos(fn.replace(".txt", ".json"), null);
+            remoteRepositoryProvider.commitFiles(fn, "Statistics");
             Core.getMainWindow().showStatusMessageRB("TF_COMMIT_TARGET_DONE");
         } catch (Exception e) {
             Log.logErrorRB(e, "TF_COMMIT_TARGET_ERROR");
@@ -1176,12 +1175,11 @@ public class RealProject implements IProject {
 
     /**
      * Do 3-way merge of:
-     *
-     * Base: baseTMX
-     *
-     * File 1: projectTMX (mine)
-     *
-     * File 2: headTMX (theirs)
+     * <dl>
+     * <dt>Base:</dt><dd>baseTMX</dd>
+     * <dt>File 1:</dt><dd>projectTMX (mine)</dd>
+     * <dt>File 2:</dt><dd>headTMX (theirs)</dd>
+     * </dl>
      */
     protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
         ProjectTMX mergedTMX;
@@ -1237,6 +1235,7 @@ public class RealProject implements IProject {
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
             synchronized (projectTMX) {
+                projectTMX.clear();
                 projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
                         config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
             }
@@ -1687,6 +1686,9 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
+        if (projectTMX == null) {
+            return;
+        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.defaults.entrySet());

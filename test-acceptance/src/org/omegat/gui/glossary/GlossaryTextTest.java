@@ -34,6 +34,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
 
+import static org.junit.Assert.assertNotNull;
+
 public class GlossaryTextTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
@@ -46,6 +48,7 @@ public class GlossaryTextTest extends TestCoreGUI {
         // load project
         openSampleProjectWaitGlossary(PROJECT_PATH);
         robot().waitForIdle();
+        assertNotNull(window);
         window.textBox("glossary_text_area").requireVisible();
         window.textBox("glossary_text_area").requireNotEditable();
         window.textBox("glossary_text_area").requireText("Error = エラー\n\n");

@@ -32,6 +32,15 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hi.HindiAnalyzer;
 
 /**
+ * LuceneHindiTokenizer is a tokenizer implementation for the Hindi language,
+ * extending the base functionality of the BaseTokenizer. It processes input
+ * text to generate tokens while optionally applying stemming and stopword
+ * filtering based on the provided configuration.
+ * <p>
+ * This class utilizes the Lucene HindiAnalyzer for tokenization and supports
+ * the inclusion or exclusion of stop words and stemming during the tokenization
+ * process.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "hi" })

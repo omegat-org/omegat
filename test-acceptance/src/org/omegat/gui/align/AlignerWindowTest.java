@@ -147,6 +147,7 @@ public class AlignerWindowTest extends TestCoreGUI {
         FileUtils.copyDirectory(projSrc, tmpDir);
         FileUtils.forceDeleteOnExit(tmpDir);
         // Start aligner
+        assertNotNull(window);
         JFrame frame = GuiActionRunner.execute(() -> {
             AlignFilePickerController alignFilePickerController = new AlignFilePickerController();
             alignFilePickerController.setSourceDefaultDir(tmpDir.toPath().resolve("source").toString());

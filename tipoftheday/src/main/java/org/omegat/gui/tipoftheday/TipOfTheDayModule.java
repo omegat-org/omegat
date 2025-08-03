@@ -53,14 +53,16 @@ public final class TipOfTheDayModule {
 
     @SuppressWarnings("unused")
     public static void unloadPlugins() {
-        CoreEvents.unregisterApplicationEventListener(listener);
-        listener = null;
+        if (listener != null) {
+            CoreEvents.unregisterApplicationEventListener(listener);
+            listener = null;
+        }
     }
 
     public static class TipOfTheDayModuleListener implements IApplicationEventListener {
 
         private final TipOfTheDayController controller = new TipOfTheDayController();
-        private JMenuItem totdMenu;
+        private @Nullable JMenuItem totdMenu;
 
         @Override
         public void onApplicationStartup() {

@@ -33,6 +33,13 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.el.GreekAnalyzer;
 
 /**
+ * A tokenizer specifically designed for tokenizing Greek text. This class leverages
+ * the capabilities of the Lucene library to provide tokenization based on the GreekAnalyzer.
+ * It supports the inclusion or exclusion of stemming and stop words depending on the specified configuration.
+ * <p>
+ * The class extends the BaseTokenizer, overriding functionality for token stream generation
+ * to address Greek language processing requirements.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

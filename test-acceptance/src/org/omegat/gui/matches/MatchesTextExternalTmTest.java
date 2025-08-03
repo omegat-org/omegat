@@ -38,6 +38,8 @@ import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import static org.junit.Assert.assertNotNull;
+
 public class MatchesTextExternalTmTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project_external_tm/");
@@ -51,6 +53,7 @@ public class MatchesTextExternalTmTest extends TestCoreGUI {
         openSampleProjectWaitMatches(PROJECT_PATH);
         robot().waitForIdle();
         // check a fuzzy match pane
+        assertNotNull(window);
         window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
         final String matchesPane = "matches_pane";
         window.textBox(matchesPane).requireVisible();

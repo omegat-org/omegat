@@ -573,7 +573,7 @@ public abstract class TestFilterBase extends TestCore {
                 throws Exception {
             Core.setProject(this);
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(this);
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(this, config);
 
             TestFileInfo fi = new TestFileInfo();
             fi.filePath = file;

@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class IssuesPanelTest extends TestCoreGUI {
 
@@ -70,14 +71,16 @@ public class IssuesPanelTest extends TestCoreGUI {
             }
         });
 
-        SwingUtilities.invokeLater(issuesPanelController::showAll);
+        SwingUtilities.invokeAndWait(issuesPanelController::showAll);
 
         try {
-            latch.await(10, TimeUnit.SECONDS);
+            assertTrue(latch.await(10, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
+            fail("Table is not ready");
         }
 
         assertTrue(issuesPanelController.getPanel().isVisible());
+        assertEquals(2, issuesPanelController.getPanel().table.getModel().getRowCount());
         assertEquals(2, issuesPanelController.getPanel().table.getModel().getValueAt(1, 0));
         assertEquals("Terminology", issuesPanelController.getPanel().table.getModel().getValueAt(1, 2));
     }

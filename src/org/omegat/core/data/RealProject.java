@@ -63,6 +63,7 @@ import java.util.stream.Collectors;
 import javax.xml.stream.XMLStreamException;
 
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
@@ -184,7 +185,7 @@ public class RealProject implements IProject {
      * without thinking about synchronization.
      */
     private Map<String, ExternalTMX> transMemories = new TreeMap<>();
-    private final LoadFilesCallback loadFilesCallback = new LoadFilesCallback(this);
+    private final LoadFilesCallback loadFilesCallback;
 
     /**
      * Storage for all translation memories of translations to other languages.
@@ -229,13 +230,16 @@ public class RealProject implements IProject {
      */
     public RealProject(final ProjectProperties props) {
         config = props;
+        loadFilesCallback = new LoadFilesCallback(this, config);
         projectTMX = new ProjectTMX(loadFilesCallback);
         initializeRemoteProject();
         initializeTokenizer();
     }
 
+    @VisibleForTesting
     public RealProject(final ProjectProperties props, ProjectTMX.CheckOrphanedCallback callback) {
         config = props;
+        loadFilesCallback = new LoadFilesCallback(this, config);
         projectTMX = new ProjectTMX(callback);
         initializeRemoteProject();
         initializeTokenizer();
@@ -1265,7 +1269,6 @@ public class RealProject implements IProject {
         for (String filepath : srcPathList) {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
-
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
 
@@ -1862,7 +1865,7 @@ public class RealProject implements IProject {
 
         private ExternalTMFactory.Builder tmBuilder;
 
-        public LoadFilesCallback(RealProject project) {
+        public LoadFilesCallback(RealProject project, ProjectProperties config) {
             super(config);
             this.project = project;
         }

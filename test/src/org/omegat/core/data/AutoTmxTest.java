@@ -29,7 +29,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,7 +64,7 @@ public class AutoTmxTest {
         checkListValues(e2, ProjectTMX.PROP_XICE, "12");
         checkListValues(e2, ProjectTMX.PROP_X100PC, "10");
 
-        Core.initializeConsole(new HashMap<String, String>());
+        Core.initializeConsole();
 
         SourceTextEntry ste10, ste11, ste12;
         p.allProjectEntries.add(ste10 = createSTE("10", "Edit"));
@@ -131,7 +130,7 @@ public class AutoTmxTest {
         props.setTargetLanguage("fr");
         props.setTargetTokenizer(LuceneFrenchTokenizer.class);
 
-        Core.initializeConsole(new HashMap<>());
+        Core.initializeConsole();
 
         p = new RealProject(props);
         p.projectTMX = new ProjectTMX(

@@ -217,7 +217,6 @@ public class EditorControllerTest extends TestCore {
     protected static class RealProjectWithTMX extends RealProject {
         public RealProjectWithTMX(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
             files = new ArrayList<>();
             FileInfo file1 = new FileInfo();
             file1.filePath = "source.txt";

@@ -40,6 +40,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 public class SegmentPropertiesAreaTest extends TestCoreGUI {
 
@@ -54,6 +55,7 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         openSampleProjectWaitPropertyPane(PROJECT_PATH);
         robot().waitForIdle();
         // check a segment properties pane
+        assertNotNull(window);
         window.scrollPane("Segment Properties").requireEnabled();
         window.scrollPane("Segment Properties").requireVisible();
         // Check a table content

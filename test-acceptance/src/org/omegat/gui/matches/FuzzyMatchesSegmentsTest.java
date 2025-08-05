@@ -57,6 +57,7 @@ public class FuzzyMatchesSegmentsTest extends TestCoreGUI {
         robot().waitForIdle();
 
         // check a fuzzy match panel
+        assertNotNull(window);
         window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
         window.textBox("matches_pane").requireVisible();
         window.textBox("matches_pane").requireNotEditable();
@@ -81,6 +82,7 @@ public class FuzzyMatchesSegmentsTest extends TestCoreGUI {
         robot().waitForIdle();
 
         // check a fuzzy match panel
+        assertNotNull(window);
         window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
         window.textBox("matches_pane").requireVisible();
         window.textBox("matches_pane").requireNotEditable();

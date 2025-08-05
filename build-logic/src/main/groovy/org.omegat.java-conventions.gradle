@@ -79,7 +79,7 @@ tasks {
 }
 
 dependencies {
-    errorprone("com.google.errorprone:error_prone_core:2.36.0")
+    errorprone("com.google.errorprone:error_prone_core:2.40.0")
     errorprone("com.uber.nullaway:nullaway:0.12.7")
 }
 

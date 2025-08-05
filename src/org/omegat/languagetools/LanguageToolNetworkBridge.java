@@ -49,6 +49,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -74,12 +75,14 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
 
     /* Instance scope fields */
     private Process server;
-    private int localPort;
     private String serverUrl;
 
     /* Project scope fields */
-    private Language sourceLang, targetLang;
-    private String disabledCategories, disabledRules, enabledRules;
+    private Language sourceLang;
+    private Language targetLang;
+    private String disabledCategories;
+    private String disabledRules;
+    private String enabledRules;
 
     /**
      * Get instance talking to remote server
@@ -105,14 +108,9 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
      *            local LanguageTool directory
      * @param port
      *            local port for spawned server to listen
-     * @return new LanguageToolNetworkBridge instance
-     * @throws java.lang.Exception
      */
     public LanguageToolNetworkBridge(Language sourceLang, Language targetLang, String path, int port,
                                      String languageModel) throws Exception {
-        // Remember port
-        localPort = port;
-
         File serverJar = new File(path);
 
         // Check if ClassPath points to a real file
@@ -236,20 +234,20 @@ public class LanguageToolNetworkBridge extends BaseLanguageToolBridge {
     }
 
     @Override
-    public synchronized void stop() {
-        if (server != null) {
+    public void stop() {
+        if (server != null && server.isAlive()) {
             try {
                 server.destroy();
-                // Wait for server to release socket
-                while (true) {
-                    try {
-                        new Socket("localhost", localPort).close();
-                    } catch (Exception e) {
-                        break;
+                try {
+                    if (!server.waitFor(1, TimeUnit.SECONDS)) {
+                        server.destroyForcibly();
+                        server.waitFor(100, TimeUnit.MILLISECONDS);
                     }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    server.destroyForcibly();
                 }
                 Log.logInfoRB("LT_SERVER_TERMINATED");
-                server = null;
             } catch (Exception ex) {
                 Log.log(ex);
             }

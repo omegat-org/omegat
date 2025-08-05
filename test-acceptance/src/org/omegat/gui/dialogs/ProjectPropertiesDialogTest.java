@@ -41,6 +41,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
 
+import static org.junit.Assert.assertNotNull;
+
 public class ProjectPropertiesDialogTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
@@ -53,6 +55,7 @@ public class ProjectPropertiesDialogTest extends TestCoreGUI {
         openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
         //
+        assertNotNull(window);
         window.menuItem(BaseMainWindowMenu.PROJECT_MENU).click();
         window.menuItem(BaseMainWindowMenu.PROJECT_EDIT_MENUITEM).click();
         robot().waitForIdle();
@@ -102,6 +105,7 @@ public class ProjectPropertiesDialogTest extends TestCoreGUI {
         openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
         //
+        assertNotNull(window);
         window.menuItem(BaseMainWindowMenu.PROJECT_MENU).click();
         window.menuItem(BaseMainWindowMenu.PROJECT_EDIT_MENUITEM).click();
         robot().waitForIdle();

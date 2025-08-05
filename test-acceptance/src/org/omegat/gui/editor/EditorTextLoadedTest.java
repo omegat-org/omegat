@@ -46,6 +46,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class EditorTextLoadedTest extends TestCoreGUI {
 
@@ -71,6 +72,7 @@ public class EditorTextLoadedTest extends TestCoreGUI {
         awaitLatch(initialLoadLatch);
         verifyInitialTextSelection();
         Point clickPoint = calculateTargetPoint();
+        assertNotNull(window);
         JTextComponent editPane = window.panel(EDITOR_TITLE).textBox().target();
         robot().click(editPane, clickPoint);
         awaitLatch(selectionChangeLatch);
@@ -92,6 +94,7 @@ public class EditorTextLoadedTest extends TestCoreGUI {
     }
 
     private Point calculateTargetPoint() throws BadLocationException {
+        assertNotNull(window);
         String fullText = window.panel(EDITOR_TITLE).textBox().text();
         int newCaretPos = fullText.indexOf(TARGET_TEXT);
         JTextComponent editPane = window.panel(EDITOR_TITLE).textBox().target();

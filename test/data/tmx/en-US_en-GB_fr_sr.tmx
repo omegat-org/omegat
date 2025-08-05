@@ -4,16 +4,16 @@
   <header creationtool="Translate Toolkit" creationtoolversion="2.5.0" segtype="sentence" o-tmf="UTF-8" adminlang="en" srclang="en-US" datatype="PlainText"/>
   <body>
     <tu>
-      <tuv lang="en-US">
+      <tuv xml:lang="en-US">
         <seg>XXx</seg>
       </tuv>
-      <tuv lang="en-GB">
+      <tuv xml:lang="en-GB">
         <seg>XXX</seg>
       </tuv>
-      <tuv lang="fr">
+      <tuv xml:lang="fr">
         <seg>YYY</seg>
       </tuv>
-      <tuv lang="sr">
+      <tuv xml:lang="sr">
         <seg>ZZZ</seg>
       </tuv>
     </tu>

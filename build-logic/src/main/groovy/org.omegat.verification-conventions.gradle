@@ -220,6 +220,9 @@ tasks.register('testAcceptance', Test) {
     classpath = sourceSets.testAcceptance.runtimeClasspath
     testClassesDirs = sourceSets.testAcceptance.output.classesDirs
     systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
+    // Allow setting the max heap size for the run task from the command line, e.g.
+    // `gradle -PtestMaxHeapSize=1024M testOnJava21`
+    maxHeapSize = findProperty('testMaxHeapSize')
     dependsOn firstSteps
     dependsOn ':aligner:jar'
 }

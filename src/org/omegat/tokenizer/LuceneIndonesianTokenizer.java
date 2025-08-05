@@ -32,6 +32,13 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.id.IndonesianAnalyzer;
 
 /**
+ * A tokenizer implementation designed for the Indonesian language, utilizing Lucene's
+ * IndonesianAnalyzer to provide specific tokenization and processing of text data.
+ * This tokenizer supports stemming and stop-word removal based on configuration.
+ * <p>
+ * This class extends the {@link BaseTokenizer} and overrides the {@code getTokenStream}
+ * method to produce a token stream for Indonesian text based on the provided parameters.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "id" })

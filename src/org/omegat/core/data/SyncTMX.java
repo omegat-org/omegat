@@ -32,12 +32,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.jetbrains.annotations.NotNull;
 import org.madlonkay.supertmxmerge.data.ITmx;
 import org.madlonkay.supertmxmerge.data.ITu;
 import org.madlonkay.supertmxmerge.data.ITuv;
 import org.madlonkay.supertmxmerge.data.Key;
 import org.madlonkay.supertmxmerge.data.ResolutionSet;
-import org.madlonkay.supertmxmerge.data.WriteFailedException;
 import org.madlonkay.supertmxmerge.util.ReflectionUtil;
 
 /**
@@ -64,8 +64,8 @@ public final class SyncTMX implements ITmx {
     }
 
     private void generateMaps() {
-        tuvMap = new HashMap<Key, ITuv>();
-        tuMap = new HashMap<Key, ITu>();
+        tuvMap = new HashMap<>();
+        tuMap = new HashMap<>();
         for (Entry<String, TMXEntry> e : tmx.defaults.entrySet()) {
             ITu tu = new SyncTu(e.getValue(), targetLanguage);
             Key key = makeKey(e.getKey(), e.getValue());
@@ -161,17 +161,13 @@ public final class SyncTMX implements ITmx {
 
     private static ProjectTMX clone(ProjectTMX tmx) {
         ProjectTMX newTmx = new ProjectTMX();
-        for (Entry<EntryKey, TMXEntry> e : tmx.alternatives.entrySet()) {
-            newTmx.alternatives.put(e.getKey(), e.getValue());
-        }
-        for (Entry<String, TMXEntry> e : tmx.defaults.entrySet()) {
-            newTmx.defaults.put(e.getKey(), e.getValue());
-        }
+        newTmx.alternatives.putAll(tmx.alternatives);
+        newTmx.defaults.putAll(tmx.defaults);
         return newTmx;
     }
 
     @Override
-    public void writeTo(File outputFile) throws WriteFailedException {
+    public void writeTo(File outputFile) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -231,17 +227,17 @@ public final class SyncTMX implements ITmx {
     }
 
     @Override
-    public Set<Key> keySet() {
+    public @NotNull Set<Key> keySet() {
         return tuvMap.keySet();
     }
 
     @Override
-    public Collection<ITuv> values() {
+    public @NotNull Collection<ITuv> values() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Set<Entry<Key, ITuv>> entrySet() {
+    public @NotNull Set<Entry<Key, ITuv>> entrySet() {
         return tuvMap.entrySet();
     }
 

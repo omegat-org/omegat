@@ -85,21 +85,14 @@ public class OpenXMLFilter extends AbstractFilter {
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
-         Complete string when all options are enabled
-         Word
-         "(document\\d?\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)
-         |(footer\\d+\\.xml)|(core\\.xml)"
-         Excel
-         "|(sharedStrings\\.xml)|(comments\\d+\\.xml)"
-         PowerPoint
-         "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"
-         Global
-         "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         Excel
-         "|(workbook\\.xml)"
-         Visio
-         "|(page\\d+\\.xml)
-        */
+         * Complete string when all options are enabled Word
+         * "(document\\d?\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.
+         * xml)|(header\\d+\\.xml) |(footer\\d+\\.xml)|(core\\.xml)" Excel
+         * "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" PowerPoint
+         * "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"
+         * Global "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
+         * Excel "|(workbook\\.xml)" Visio "|(page\\d+\\.xml)
+         */
 
         StringBuilder sb = new StringBuilder("(document\\d?\\.xml)");
 
@@ -196,26 +189,31 @@ public class OpenXMLFilter extends AbstractFilter {
         return xmlfilter;
     }
 
-    /** Returns a temporary file for Open XML. A nasty hack, to say polite way. */
+    /**
+     * Returns a temporary file for Open XML. A nasty hack, to say polite way.
+     */
     private static File tmp() throws IOException {
         return File.createTempFile("o-xml-temp", ".xml");
     }
 
     /**
-     * @param fileName A filename with a path
+     * @param fileName
+     *            A filename with a path
      * @return A string without the path
      */
     private static String removePath(String fileName) {
         if (fileName.lastIndexOf('/') >= 0) {
             fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
-        }  else if (fileName.lastIndexOf('\\') >= 0) { // Some weird files may use a backslash
+        } else if (fileName.lastIndexOf('\\') >= 0) { // Some weird files may
+                                                      // use a backslash
             fileName = fileName.substring(fileName.lastIndexOf('\\') + 1);
         }
         return fileName;
     }
 
     /**
-     * @param fileName A filename
+     * @param fileName
+     *            A filename
      * @return The filename without an .xml extension if found in it
      */
     private static String removeXML(String fileName) {
@@ -226,12 +224,12 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /**
-     * Processes a single OpenXML file, which is actually a ZIP file consisting of many XML files, some of
-     * which should be translated.
+     * Processes a single OpenXML file, which is actually a ZIP file consisting
+     * of many XML files, some of which should be translated.
      */
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    public void processFile(File inFile, File outFile, FilterContext fc)
+            throws IOException, TranslationException {
         defineDOCUMENTSOptions(processOptions); // Define the documents to read
 
         ZipOutputStream zipout = null;
@@ -302,8 +300,8 @@ public class OpenXMLFilter extends AbstractFilter {
         String[] words1 = s1.split("\\d+\\.");
         String[] words2 = s2.split("\\d+\\.");
         // Digits at the end and same text
-        if ((words1.length > 1 && words2.length > 1) && // Digits
-                (words1[0].equals(words2[0]))) { // Same text
+        if ((words1.length > 1 && words2.length > 1) // Digits
+                && (words1[0].equals(words2[0]))) { // Same text
             int number1 = 0;
             int number2 = 0;
             Matcher getDigits = DIGITS.matcher(s1);
@@ -344,7 +342,8 @@ public class OpenXMLFilter extends AbstractFilter {
                 return 1;
             } else if (index1 < index2) {
                 return -1;
-            } else { // Documents were not in DOCUMENTS, we keep the normal order
+            } else { // Documents were not in DOCUMENTS, we keep the normal
+                     // order
                 return s1.compareTo(s2);
             }
         }
@@ -359,13 +358,8 @@ public class OpenXMLFilter extends AbstractFilter {
     /** Extensions... */
     @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] {
-            new Instance("*.doc?"),
-            new Instance("*.dotx"),
-            new Instance("*.xls?"),
-            new Instance("*.ppt?"),
-            new Instance("*.vsdx")
-        };
+        return new Instance[] { new Instance("*.doc?"), new Instance("*.dotx"), new Instance("*.xls?"),
+                new Instance("*.ppt?"), new Instance("*.vsdx") };
     }
 
     /** Source encoding cannot be varied by the user. */
@@ -382,8 +376,8 @@ public class OpenXMLFilter extends AbstractFilter {
 
     /** Not implemented. */
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         throw new IOException("Not Implemented!");
     }
 
@@ -402,7 +396,8 @@ public class OpenXMLFilter extends AbstractFilter {
      *
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     * @return Updated filter options if user confirmed the changes, and current
+     *         options otherwise.
      */
     @Override
     public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {

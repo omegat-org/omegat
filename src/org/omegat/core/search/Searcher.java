@@ -773,7 +773,7 @@ public class Searcher {
      * matches to the found matches list.
      *
      * @param searchExpression The search expression containing the search criteria and replacement text.
-     * @param foundMatches A list to which all found matches, including their start, end positions, and replacements, are added.
+     * @param foundMatchesList A list to which all found matches, including their start, end positions, and replacements, are added.
      * @param matcher The matcher object used for searching and extracting matches based on the search expression.
      * @param end The end position of the match in the text being searched.
      * @param start The start position of the match in the text being searched.
@@ -782,7 +782,7 @@ public class Searcher {
      * @throws IndexOutOfBoundsException Throws this exception if a replacement group in the search expression
      *         refers to a matcher group that does not exist.
      */
-    boolean searchReplaceImpl(SearchExpression searchExpression, List<SearchMatch> foundMatches, Matcher matcher,
+    boolean searchReplaceImpl(SearchExpression searchExpression, List<SearchMatch> foundMatchesList, Matcher matcher,
                               int end, int start, Locale targetLocale) {
         if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
             if ((end == start) && (start > 0)) {
@@ -803,14 +803,15 @@ public class Searcher {
                     // replace with empty string.
                     substitution = "";
                 }
-                substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
+                // avoid re-eval inside replaceCase;
+                substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");
                 repl = repl.substring(0, replaceMatcher.start()) + substitution + repl.substring(replaceMatcher.end());
                 replaceMatcher.reset(repl);
             }
-            foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl, targetLocale)));
+            foundMatchesList.add(new SearchMatch(start, end, StringUtil.replaceCase(repl, targetLocale)));
 
         } else {
-            foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
+            foundMatchesList.add(new SearchMatch(start, end, searchExpression.replacement));
         }
         return false;
     }
@@ -838,7 +839,7 @@ public class Searcher {
             return false;
         }
 
-        if (author.pattern().pattern().equals("")) {
+        if (author.pattern().pattern().isEmpty()) {
             // Handle search for null author.
             return te.changer == null && te.creator == null;
         }

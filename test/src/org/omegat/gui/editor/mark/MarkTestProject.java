@@ -38,6 +38,12 @@ import java.io.File;
 public class MarkTestProject extends NotLoadedProject implements IProject {
 
     private final ProjectTMX projectTMX = new ProjectTMX();
+    private String tmRoot;
+
+    public MarkTestProject(File testFil, Segmenter segmenter, String tmRoot) throws Exception {
+        this(testFil, segmenter);
+        this.tmRoot = tmRoot;
+    }
 
     public MarkTestProject(File testFile, Segmenter segmenter) throws Exception {
         projectTMX.load(new Language("en"), new Language("fr"), true, testFile, segmenter);
@@ -59,6 +65,11 @@ public class MarkTestProject extends NotLoadedProject implements IProject {
             @Override
             public Language getTargetLanguage() {
                 return new Language("fr");
+            }
+
+            @Override
+            public String getTMRoot() {
+                return tmRoot;
             }
         };
     }

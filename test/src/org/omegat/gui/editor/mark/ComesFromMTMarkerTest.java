@@ -57,7 +57,7 @@ public class ComesFromMTMarkerTest extends MarkerTestBase {
         TestCoreInitializer.initEditor(editor);
         Segmenter segmenter =  new Segmenter(SRX.getDefault());
         Core.setSegmenter(segmenter);
-        Core.setProject(new MarkTestProject(project.toFile(), segmenter));
+        Core.setProject(new MarkTestProject(project.toFile(), segmenter, tmroot.toString()));
     }
 
     @Test

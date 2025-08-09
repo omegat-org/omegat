@@ -67,7 +67,7 @@ public class XMLText extends Text {
     /**
      * Creates a new instance of XMLText class.
      */
-    public Text createInstance(String text) {
-        return new XMLText(text, inCDATA);
+    public Text createInstance(String newText) {
+        return new XMLText(newText, inCDATA);
     }
 }

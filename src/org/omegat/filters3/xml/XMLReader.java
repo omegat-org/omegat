@@ -178,9 +178,9 @@ public class XMLReader extends Reader {
         }
     }
 
-    private BufferedReader createReaderAndDetectEOL(@NotNull InputStream is, @NotNull Charset encoding)
+    private BufferedReader createReaderAndDetectEOL(@NotNull InputStream is, @NotNull Charset charset)
             throws IOException {
-        InputStreamReader isr = new InputStreamReader(is, encoding);
+        InputStreamReader isr = new InputStreamReader(is, charset);
         BufferedReader bufferedReader = new BufferedReader(isr, OConsts.READ_AHEAD_LIMIT);
         bufferedReader.mark(OConsts.READ_AHEAD_LIMIT);
         eol = detectEndOfLine(bufferedReader);
@@ -191,11 +191,11 @@ public class XMLReader extends Reader {
     private static final char CARRIAGE_RETURN = '\r';
     private static final char LINE_FEED = '\n';
 
-    private String detectEndOfLine(BufferedReader reader) throws IOException {
+    private String detectEndOfLine(BufferedReader bufferedReader) throws IOException {
         StringBuilder endOfLineBuilder = new StringBuilder();
 
         for (int i = 0; i < OConsts.READ_AHEAD_LIMIT; i++) {
-            char currentChar = (char) reader.read();
+            char currentChar = (char) bufferedReader.read();
 
             if (currentChar == CARRIAGE_RETURN || currentChar == LINE_FEED) {
                 if (endOfLineBuilder.length() == 0) {

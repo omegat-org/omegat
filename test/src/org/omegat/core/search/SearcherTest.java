@@ -371,7 +371,6 @@ public class SearcherTest {
     protected static class RealProjectWithTMX extends RealProject {
         public RealProjectWithTMX(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
         }
 
         public ProjectTMX getTMX() {

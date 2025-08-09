@@ -82,18 +82,26 @@ public class OpenXMLFilter extends AbstractFilter {
 
     /**
      * Defines the documents to read according to options
+     * <p>
+     * Complete string when all options are enabled.
+     * <dl>
+     * <dt>Word</dt>
+     * <dd>"(document\\d?\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)
+     * |(footer\\d+\\.xml)|(core\\.xml)"</dd>
+     * <dt>Excel</dt>
+     * <dd>"|(sharedStrings\\.xml)|(comments\\d+\\.xml)"</dd>
+     * <dt>PowerPoint</dt>
+     * <dd>"|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)|
+     * (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"</dd>
+     * <dt>Global</dt>
+     * <dd>"|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"</dd>
+     * <dt>Excel</dt>
+     * <dd>"|(workbook\\.xml)"</dd>
+     * <dt>Visio</dt>
+     * <dd>"|(page\\d+\\.xml)</dd>
+     * </dl>
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
-        /*
-         * Complete string when all options are enabled Word
-         * "(document\\d?\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.
-         * xml)|(header\\d+\\.xml) |(footer\\d+\\.xml)|(core\\.xml)" Excel
-         * "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" PowerPoint
-         * "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"
-         * Global "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         * Excel "|(workbook\\.xml)" Visio "|(page\\d+\\.xml)
-         */
-
         StringBuilder sb = new StringBuilder("(document\\d?\\.xml)");
 
         OpenXMLOptions options = new OpenXMLOptions(config);

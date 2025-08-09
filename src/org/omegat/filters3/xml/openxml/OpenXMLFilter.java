@@ -212,8 +212,8 @@ public class OpenXMLFilter extends AbstractFilter {
     private static String removePath(String fileName) {
         if (fileName.lastIndexOf('/') >= 0) {
             fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
-        } else if (fileName.lastIndexOf('\\') >= 0) { // Some weird files may
-                                                      // use a backslash
+        } else if (fileName.lastIndexOf('\\') >= 0) {
+            // Some weird files may use a backslash
             fileName = fileName.substring(fileName.lastIndexOf('\\') + 1);
         }
         return fileName;
@@ -249,11 +249,10 @@ public class OpenXMLFilter extends AbstractFilter {
             List<? extends ZipEntry> filelist = Collections.list(unsortedZipcontents);
             // Sort filenames, because zipfile.entries give a random order
             // We use a simplified natural sort, to have slide1, slide2 ...
-            // slide10
-            // instead of slide1, slide10, slide 2
-            // We also order files arbitrarily, to have, for instance
+            // slide10 instead of slide1, slide10, slide 2
+            // We also order files arbitrarily, to have, for instance,
             // documents.xml before comments.xml
-            Collections.sort(filelist, this::compareZipEntries);
+            filelist.sort(this::compareZipEntries);
 
             for (ZipEntry zipentry : filelist) {
                 String shortname = removePath(zipentry.getName());
@@ -307,7 +306,7 @@ public class OpenXMLFilter extends AbstractFilter {
         String s2 = z2.getName();
         String[] words1 = s1.split("\\d+\\.");
         String[] words2 = s2.split("\\d+\\.");
-        // Digits at the end and same text
+        // Digits at the end and the same text
         if ((words1.length > 1 && words2.length > 1) // Digits
                 && (words1[0].equals(words2[0]))) { // Same text
             int number1 = 0;
@@ -320,13 +319,7 @@ public class OpenXMLFilter extends AbstractFilter {
             if (getDigits.find()) {
                 number2 = Integer.parseInt(getDigits.group(1));
             }
-            if (number1 > number2) {
-                return 1;
-            } else if (number1 < number2) {
-                return -1;
-            } else {
-                return 0;
-            }
+            return Integer.compare(number1, number2);
         } else {
             String shortname1 = removePath(words1[0]);
             shortname1 = removeXML(shortname1);
@@ -335,8 +328,8 @@ public class OpenXMLFilter extends AbstractFilter {
 
             // Specific case for Excel
             // because "comments" is present twice in DOCUMENTS
-            if (shortname1.indexOf("sharedStrings") >= 0 || shortname2.indexOf("sharedStrings") >= 0) {
-                if (shortname2.indexOf("sharedStrings") >= 0) {
+            if (shortname1.contains("sharedStrings") || shortname2.contains("sharedStrings")) {
+                if (shortname2.contains("sharedStrings")) {
                     return 1; // sharedStrings must be first
                 } else {
                     return -1;
@@ -350,8 +343,8 @@ public class OpenXMLFilter extends AbstractFilter {
                 return 1;
             } else if (index1 < index2) {
                 return -1;
-            } else { // Documents were not in DOCUMENTS, we keep the normal
-                     // order
+            } else {
+                // Documents were not in DOCUMENTS, we keep the normal order
                 return s1.compareTo(s2);
             }
         }
@@ -370,13 +363,13 @@ public class OpenXMLFilter extends AbstractFilter {
                 new Instance("*.ppt?"), new Instance("*.vsdx") };
     }
 
-    /** Source encoding cannot be varied by the user. */
+    /** The user cannot vary source encoding. */
     @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
 
-    /** Target encoding cannot be varied by the user. */
+    /** The user cannot vary Target encoding. */
     @Override
     public boolean isTargetEncodingVariable() {
         return false;
@@ -404,8 +397,8 @@ public class OpenXMLFilter extends AbstractFilter {
      *
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current
-     *         options otherwise.
+     * @return Updated filter options if the user confirmed the changes, and
+     *         current options otherwise.
      */
     @Override
     public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
@@ -427,7 +420,7 @@ public class OpenXMLFilter extends AbstractFilter {
     @Override
     public String getInEncodingLastParsedFile() {
         // Encoding is 'binary', it is zipped. Inside there may be many files.
-        // It makes no sense to display the encoding of some xml file inside.
+        // It makes no sense to display the encoding of some XML file inside.
         return "OpenXML";
     }
 }

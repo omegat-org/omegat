@@ -106,4 +106,17 @@ public class DocBookFilterTest extends TestFilterBase {
             assertFalse(filter.isFileSupported(reader));
         }
     }
+
+    @Test
+    public void testLoadDB5() throws Exception {
+        DocBookFilter filter = new DocBookFilter();
+        String f = "test/data/filters/docBook/文件/file-DocBookFilter-db5.xml";
+        Path source = Paths.get(f);
+        try (BufferedReader reader = Files.newBufferedReader(source)) {
+            assertTrue(filter.isFileSupported(reader));
+        }
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+        checkMultiStart(fi, f);
+        checkMulti("My First Book", null, null, "", "Jane", null);
+    }
 }

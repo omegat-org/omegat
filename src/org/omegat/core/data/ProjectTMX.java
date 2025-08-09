@@ -113,7 +113,7 @@ public class ProjectTMX {
     }
 
     /**
-     * Constructor for TMX delta.
+     * Constructor for TMX delta, clone and tests.
      */
     public ProjectTMX() {
         this(null);
@@ -389,7 +389,7 @@ public class ProjectTMX {
             id = te.getPropValue(ATTR_TUID);
         }
         TMXEntry.ExternalLinked externalLinked = null;
-        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
+        if (te.hasPropValue(PROP_XICE, id)) {
             externalLinked = TMXEntry.ExternalLinked.xICE;
         }
         if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {

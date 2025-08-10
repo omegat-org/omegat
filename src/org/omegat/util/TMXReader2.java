@@ -29,8 +29,6 @@
 package org.omegat.util;
 
 import org.apache.commons.io.input.XmlStreamReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -115,8 +113,6 @@ public class TMXReader2 {
     StringBuilder segInlineTag = new StringBuilder();
     InlineTagHandler inlineTagHandler = new InlineTagHandler();
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TMXReader2.class);
-
     /**
      * Detects charset of XML file.
      */
@@ -160,10 +156,12 @@ public class TMXReader2 {
         this.useSlash = useSlash;
         this.isSegmentingEnabled = isSegmentingEnabled;
 
-        // log the validating attempt
-        Log.logInfoRB("TMXR_INFO_VALIDATING_FILE", file.getAbsolutePath());
-        boolean tmx11 = isTmx11(file);
-        validateTMX(file, tmx11);
+        if (!omegaTMX) {
+            // log the validating attempt
+            Log.logInfoRB("TMXR_INFO_VALIDATING_FILE", file.getAbsolutePath());
+            boolean tmx11 = isTmx11(file);
+            validateTMX(file, tmx11);
+        }
 
         // log the parsing attempt
         Log.logInfoRB("TMXR_INFO_READING_FILE", file.getAbsolutePath());
@@ -201,7 +199,7 @@ public class TMXReader2 {
         }
         Log.logInfoRB("TMXR_INFO_READING_COMPLETE");
         if (errorsCount > 0 || warningsCount > 0) {
-            LOGGER.atDebug().log("Errors: {}, Warnings: {}", errorsCount, warningsCount);
+            Log.logDebug("Errors: {0}, Warnings: {1}", errorsCount, warningsCount);
         }
     }
 

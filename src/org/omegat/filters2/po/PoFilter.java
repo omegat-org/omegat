@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -320,21 +321,18 @@ public class PoFilter extends AbstractFilter {
      *            The source file.
      * @param inEncoding
      *            Encoding of the input file, if the filter supports it. Otherwise, null.
-     * @return
-     * @throws IOException
      */
     @Override
-    protected BufferedReader createReader(File inFile, String inEncoding) throws IOException {
-        BOMInputStream bomInputStream = new BOMInputStream(Files.newInputStream(inFile.toPath()),
-                ByteOrderMark.UTF_8, ByteOrderMark.UTF_16LE);
-        ByteOrderMark bom = bomInputStream.getBOM();
+    protected BufferedReader createReader(File inFile, String inEncoding)
+            throws IOException, TranslationException {
+        BOMInputStream bomInputStream = BOMInputStream.builder().setFile(inFile)
+                .setByteOrderMarks(ByteOrderMark.UTF_8, ByteOrderMark.UTF_16BE, ByteOrderMark.UTF_16LE).get();
+        ByteOrderMark bomLastParsedFile = bomInputStream.getBOM();
         String charset;
-        if (bom != null) {
-            charset = bom.getCharsetName();
-        } else if (inEncoding == null) {
-            charset = StandardCharsets.UTF_8.name();
+        if (bomLastParsedFile != null) {
+            charset = bomLastParsedFile.getCharsetName();
         } else {
-            charset = inEncoding;
+            charset = Objects.requireNonNullElseGet(inEncoding, StandardCharsets.UTF_8::name);
         }
         return new BufferedReader(new InputStreamReader(bomInputStream, charset));
     }

@@ -10,7 +10,7 @@
   Implemented requests:
 
   - Support Windows 11 and Linux on ARM64 for development environment
-    https://sourceforge.net/p/omegat/feature-requests/1773/
+  https://sourceforge.net/p/omegat/feature-requests/1773/
 
   - Word selection according to the language of Source/Target by clicking in the editor pane
   https://sourceforge.net/p/omegat/feature-requests/1770/
@@ -155,7 +155,9 @@
   - Remove "Restore defaults" button where it has no function
   https://sourceforge.net/p/omegat/feature-requests/1364/
 
+  - Upgrade to LanguageTool 6.5
   - Upgrade to LanguageTool 3.6
+  https://sourceforge.net/p/omegat/feature-requests/1783/
   https://sourceforge.net/p/omegat/feature-requests/1299/
 
   - Improve TBX parsing

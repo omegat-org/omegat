@@ -25,18 +25,10 @@
 package org.omegat.gui.editor.mark;
 
 import org.omegat.core.TestCore;
-import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.IEditorSettings;
-import org.omegat.gui.editor.MockEditor;
-import org.omegat.gui.editor.MockEditorSettings;
 
 public class MarkerTestBase extends TestCore {
 
-    final IEditorSettings editorSettings;
-    final IEditor editor;
-
     public MarkerTestBase() {
-        editorSettings = new MockEditorSettings();
-        editor = new MockEditor(editorSettings);
+        initEditor(null);
     }
 }

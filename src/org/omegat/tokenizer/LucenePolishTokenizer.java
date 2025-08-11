@@ -34,6 +34,10 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.pl.PolishAnalyzer;
 
 /**
+ * A tokenizer implementation for the Polish language using the Lucene analysis library.
+ * This tokenizer utilizes the PolishAnalyzer provided by Apache Lucene
+ * to support tokenization with options for stemming and stop words.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik

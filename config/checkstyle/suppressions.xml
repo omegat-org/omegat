@@ -65,6 +65,7 @@
     <suppress checks="WhitespaceAround"
             files="(AlignFilePicker|InstanceEditor|CreateGlossaryEntry|NewTeamProject|FilenamePatternsEditor|FilterEditor|SegmentPropertiesListCell|FilterBarReplace|ProjectFilesList)\.java"/>
     <suppress checks="ParameterNumber" files="EntryListPane\.java" lines="304"/>
+    <suppress checks="LineLength" files="(CreateGlossaryEntry|FilterBarReplace|FilterEditor|InstanceEditor|NewTeamProject|ProjectFilesList)\.java"/>
 
     <!-- Suppress for readability -->
     <suppress files="PluginInformation\.java" checks="NeedBraces" lines="167-192"/>

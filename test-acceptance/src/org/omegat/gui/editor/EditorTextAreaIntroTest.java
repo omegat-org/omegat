@@ -33,6 +33,8 @@ import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
+import static org.junit.Assert.assertNotNull;
+
 public class EditorTextAreaIntroTest extends TestCoreGUI {
 
     @Rule
@@ -40,6 +42,7 @@ public class EditorTextAreaIntroTest extends TestCoreGUI {
 
     @Test
     public void testIntroPaneExist() {
+        assertNotNull(window);
         window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).requireEnabled();
         window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane").requireEnabled();
         window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")

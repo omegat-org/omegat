@@ -38,6 +38,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class IssuesPanelTest extends TestCoreGUI {
@@ -53,6 +54,7 @@ public class IssuesPanelTest extends TestCoreGUI {
         openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
         //
+        assertNotNull(window);
         IssuesPanelControllerMock issuesPanelController = new IssuesPanelControllerMock(window.target());
         CountDownLatch latch = new CountDownLatch(2);
         // watch for panel visible

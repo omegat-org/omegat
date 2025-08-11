@@ -92,8 +92,8 @@ class TestMainWindow implements IMainWindow {
             }
         });
         applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
-        MainWindowStatusBar mainWindowStatusBar = new MainWindowStatusBar();
-        applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
+        MainWindowStatusBarController mainWindowStatusBarController = new MainWindowStatusBarController();
+        applicationFrame.getContentPane().add(mainWindowStatusBarController.getUI(), BorderLayout.SOUTH);
 
         StaticUIUtils.setWindowIcon(applicationFrame);
 

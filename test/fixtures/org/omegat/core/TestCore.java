@@ -70,12 +70,36 @@ public abstract class TestCore {
      */
     @Before
     public final void setUpCore() throws Exception {
+        TestCoreState.resetState();
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
-        IMainWindow mainWindow = getMainWindow();
-        Core.setMainWindow(mainWindow);
-        Core.setCurrentProject(new NotLoadedProject());
-        initEditor(mainWindow);
+        IMainWindow mainWindow = createTestMainWindow();
+        TestCoreState.getInstance().setMainWindow(mainWindow);
+        TestCoreState.getInstance().setProject(new NotLoadedProject());
+        TestCoreState.getInstance().setEditor(createTestEditor(mainWindow));
+        TestCoreState.initAutoSave(createTestAutoSave());
+    }
+
+    /**
+     * Clean up a temporary directory for configuration.
+     */
+    @After
+    public final void tearDownCore() throws IOException {
+        TestCoreState.resetState();
+        FileUtils.forceDeleteOnExit(configDir);
+    }
+
+    protected IAutoSave createTestAutoSave() {
+        return new IAutoSave() {
+            @Override
+            public void enable() {
+                // ignore all
+            }
+            @Override
+            public void disable() {
+                // ignore all
+            }
+        };
     }
 
     /**
@@ -90,8 +114,8 @@ public abstract class TestCore {
      * Create a main Window object.
      * @return Object which implements IMainWindow.
      */
-    protected IMainWindow getMainWindow() {
-        final IMainMenu mainMenu = getMainMenu();
+    protected IMainWindow createTestMainWindow() {
+        final IMainMenu mainMenu = createTestMainMenu();
         return new ConsoleWindow() {
             @Override
             public void addDockable(Dockable pane) {

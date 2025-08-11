@@ -125,7 +125,7 @@ public class ProjectTMX {
             // file not exist - new project
             return;
         }
-        new TMXReader2().readTMX(file, sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, false,
+        new TMXReader2().readTMX(file, sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, true,
                 true, Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
                 new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled));
     }

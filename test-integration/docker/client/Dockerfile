@@ -25,20 +25,27 @@
 #
 
 FROM debian:bullseye-slim
-RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl subversion
+ARG TARGETARCH
+ARG CAVER=1.0.3-1
+ARG JAVA=11
+ARG JDKVER=jdk_11.0.28.0.0+6-0
+ARG GRADLE=7.6.3
+RUN apt-get -y update && apt-get upgrade -y && apt-get install -y openssh-client git openjdk-11-jdk inotify-tools curl subversion unzip rsync \
+java-common libasound2 libfontconfig1 libfreetype6 libxi6 libxrender1 libxtst6 p11-kit
 RUN adduser --disabled-password --gecos "" --home /home/omegat --shell /bin/bash omegat && mkdir -p /home/omegat/.ssh \
     && touch /home/omegat/.ssh/known_hosts && chmod 600 /home/omegat/.ssh/known_hosts
 COPY ssh_config /home/omegat/.ssh/config
 RUN chown -R omegat /home/omegat
-
+COPY --chown=omegat gitconfig /home/omegat/.gitconfig
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/entrypoint.sh && chmod 700 /home/omegat/.ssh && chmod 600 /home/omegat/.ssh/config
+RUN echo TARGETARCH is ${TARGETARCH} && curl -LO https://packages.adoptium.net/artifactory/deb/pool/main/a/adoptium-ca-certificates/adoptium-ca-certificates_${CAVER}_all.deb \
+    && curl -LO https://packages.adoptium.net/artifactory/deb/pool/main/t/temurin-${JAVA}/temurin-${JAVA}-${JDKVER}_${TARGETARCH}.deb \
+    && dpkg -i adoptium-ca-certificates_${CAVER}_all.deb temurin-${JAVA}-${JDKVER}_${TARGETARCH}.deb \
+    && rm -f adoptium-ca-certificates_${CAVER}_all.deb temurin-${JAVA}-${JDKVER}_${TARGETARCH}.deb
+RUN (cd /opt && curl -LO https://services.gradle.org/distributions/gradle-${GRADLE}-bin.zip \
+    && unzip -q gradle-${GRADLE}-bin.zip && rm -f gradle-${GRADLE}-bin.zip) && mv /opt/gradle-${GRADLE} /opt/gradle
+RUN mkdir -p /gradle-cache && chown -R omegat:omegat /gradle-cache
 USER omegat
 
-CMD ([ -f /keys/id_rsa ] || inotifywait -e attrib /keys ) \
-  && cp /keys/id_rsa /home/omegat/.ssh/id_rsa && chown omegat.omegat /home/omegat/.ssh/id_rsa && chmod 600 /home/omegat/.ssh/id_rsa \
-  && git config --global user.name example && git config --global user.email git@example.com && git config --global http.sslVerify false \
-  && [ "${TYPE}" = "SVN" ] && export REPO=http://server/svn/omegat-test.svn REPO2=http://server/svn/omegat-test.svn \
-     || [ "${TYPE}" = "SSH" ] && export REPO=svn+ssh://git@server/home/git/omegat-test.svn REPO2=svn+ssh://git@server/home/git/omegat-test.svn \
-     || [ "${TYPE}" = "GIT" ] && export REPO=git@server:omegat-test.git REPO2=https://git:gitpass@server/omegat-test.git \
-     || export REPO=git@server:omegat-test.git REPO2=https://git:gitpass@server/omegat-test.git \
-  && cd /code && ./gradlew testIntegration -Dsvnkit.ssh.client=apache -Domegat.test.duration=${DURATION} -Domegat.test.repo=${REPO} \
-       -Domegat.test.repo.alt=${REPO2} -Domegat.test.map.repo=http://server/ -Domegat.test.map.file=README
+ENTRYPOINT /usr/local/bin/entrypoint.sh

@@ -33,6 +33,8 @@
 package org.omegat.gui.main;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -59,6 +61,16 @@ public final class MainWindowStatusBarController {
                 updateProgressText(progressMode);
             }
         });
+        CoreEvents.registerProjectChangeListener(eventType -> {
+            if (eventType.equals(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE)) {
+                updateProgressText(getProgressMode());
+                resetLengthLabel();
+            }
+        });
+    }
+
+    private void resetLengthLabel() {
+        Mnemonics.setLocalizedText(mainWindowStatusBar.lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
     }
 
     private MainWindowStatusBar.StatusBarMode getProgressMode() {

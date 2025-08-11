@@ -117,7 +117,29 @@ public final class ProjectFileStorage {
     }
 
     public static Omegat parseProjectFile(byte[] projectFile) throws Exception {
-        return mapper.readValue(projectFile, Omegat.class);
+        Omegat om = mapper.readValue(projectFile, Omegat.class);
+        if (om.getProject() == null) {
+            throw new TranslationException(OStrings.getString("PFR_ERROR_MISSING_PROJECT_TAG"));
+        }
+        if (om.getProject().getVersion() == null) {
+            throw new TranslationException(OStrings.getString("PFR_ERROR_MISSING_PROJECT_VERSION_TAG"));
+        }
+        if (om.getProject().getVersion().isEmpty()) {
+            throw new TranslationException(OStrings.getString("PFR_ERROR_EMPTY_PROJECT_VERSION_TAG"));
+        }
+        if (om.getProject().getSourceLang() == null) {
+            throw new TranslationException(OStrings.getString("PFR_ERROR_MISSING_PROJECT_SOURCE_LANG_TAG"));
+        }
+        if (om.getProject().getSourceLang().isEmpty()) {
+            throw new TranslationException(OStrings.getString("PFR_ERROR_EMPTY_PROJECT_SOURCE_LANG_TAG"));
+        }
+        if (om.getProject().getTargetLang() == null) {
+            throw new TranslationException(OStrings.getString("PFR_ERROR_MISSING_PROJECT_TARGET_LANG_TAG"));
+        }
+        if (om.getProject().getTargetLang().isEmpty()) {
+            throw new TranslationException(OStrings.getString("PFR_ERROR_EMPTY_PROJECT_TARGET_LANG_TAG"));
+        }
+        return om;
     }
 
     /**
@@ -132,7 +154,6 @@ public final class ProjectFileStorage {
      * @param projectDir
      *            The directory of the project
      * @return The loaded project properties
-     * @throws Exception
      */
     public static ProjectProperties loadProjectProperties(File projectDir) throws Exception {
         return loadPropertiesFile(projectDir, new File(projectDir, OConsts.FILE_PROJECT));
@@ -150,7 +171,6 @@ public final class ProjectFileStorage {
      * @param projectFile
      *            The project properties file to load
      * @return The loaded project properties
-     * @throws Exception
      */
     public static ProjectProperties loadPropertiesFile(File projectDir, File projectFile) throws Exception {
         if (!projectFile.isFile()) {
@@ -350,7 +370,7 @@ public final class ProjectFileStorage {
                 //
                 result = absPath.toString();
             }
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ignored) {
         }
         return normalizeSlashes(result);
     }

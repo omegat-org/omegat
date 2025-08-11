@@ -40,6 +40,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -80,6 +81,7 @@ public class ProjectProperties {
     /**
      * Constructor for tests only.
      */
+    @VisibleForTesting
     protected ProjectProperties() {
     }
 

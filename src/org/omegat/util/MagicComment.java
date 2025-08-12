@@ -26,7 +26,6 @@ package org.omegat.util;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -64,15 +63,11 @@ public class MagicComment {
 
     /**
      * Extract the first line of the file and parse with {@code #parse(String)}
-     *
-     * @param file
-     * @return
-     * @throws IOException
      */
     public static Map<String, String> parse(File file) throws IOException  {
         String line;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                new BOMInputStream(new FileInputStream(file)), StandardCharsets.US_ASCII))) {
+                BOMInputStream.builder().setFile(file).get(), StandardCharsets.US_ASCII))) {
             line = reader.readLine();
         }
         if (line != null && line.startsWith("#")) {

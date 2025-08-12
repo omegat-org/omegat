@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 
   2 Enhancement
-  8 Bug fixes
+  9 Bug fixes
   0 Localisation updates
 ----------------------------------------------------------------------
 
@@ -17,8 +17,11 @@
 
   Bug fixes:
 
-  - Unable to import a team project to a path containing Chinese characters
+- Unable to import a team project to a path containing Chinese characters
   https://sourceforge.net/p/omegat/bugs/1302/
+
+  - [6.0] [Security] vulnerability on dependencies
+  https://sourceforge.net/p/omegat/bugs/1293/
 
   - Preferences/CustomColorSelector don't show notification immediately when modifying color
   https://sourceforge.net/p/omegat/bugs/1273/

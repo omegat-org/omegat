@@ -50,17 +50,18 @@ public class DocBookDialect extends DefaultXMLDialect {
         // Some paragraph and preformat tags added because content was missing
         // See https://sourceforge.net/p/omegat/bugs/844/
         defineParagraphTags(new String[] { "book", "bookinfo", "title", "subtitle", "authorgroup", "author",
-                       "firstname", "surname", "affiliation", "orgname", "address", "email", "edition", "pubdate",
-                       "copyright", "year", "holder", "isbn", "keywordset", "keyword", "preface", "title", "simpara", "para",
-                       "chapter", "table", "tgroup", "thead", "tbody", "row", "entry", "revhistory", "revision",
-                       "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member",
-                       "releaseinfo", "bibliomixed", "bibliomset", "bridgehead", "glossseealso",
-                       "primaryie", "refentrytitle", "secondaryie", "seealsoie", "seeie", "subtitle",
-                       "synopfragmentref", "term", "tertiaryie", "tocentry", "glosssee", "section"});
+                "firstname", "surname", "affiliation", "orgname", "address", "email", "edition", "pubdate",
+                "copyright", "year", "holder", "isbn", "keywordset", "keyword", "preface", "title", "simpara",
+                "para", "chapter", "table", "tgroup", "thead", "tbody", "row", "entry", "revhistory",
+                "revision", "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem",
+                "member", "releaseinfo", "bibliomixed", "bibliomset", "bridgehead", "glossseealso",
+                "primaryie", "refentrytitle", "secondaryie", "seealsoie", "seeie", "subtitle",
+                "synopfragmentref", "term", "tertiaryie", "tocentry", "glosssee", "section" });
 
         defineOutOfTurnTags(new String[] { "indexterm", });
 
-        definePreformatTags(new String[] { "screen", "programlisting", "synopsis", "literallayout", "address" });
+        definePreformatTags(
+                new String[] { "screen", "programlisting", "synopsis", "literallayout", "address" });
 
         defineTranslatableAttributes(new String[] { "url", "lang", "xml:lang" });
 

@@ -124,8 +124,8 @@ public abstract class Tag implements Element {
      * will return &lt;s3&gt; and {@link #toTMX()} will return &lt;bpt
      * i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
-    public void setIndex(int shortcut) {
-        this.index = shortcut;
+    public void setIndex(int newIndex) {
+        this.index = newIndex;
     }
 
     /** Creates a new instance of Tag */

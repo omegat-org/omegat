@@ -60,8 +60,8 @@ public abstract class Text implements Element {
         this.text = new StringBuilder(text);
     }
 
-    public void append(String text) {
-        this.text.append(text);
+    public void append(String newText) {
+        this.text.append(newText);
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class Text implements Element {
      * <code>createInstance("pyatnitzu")</code>, and
      * <code>createInstance(" ya vlyublyon.")</code>.
      */
-    public abstract Text createInstance(String text);
+    public abstract Text createInstance(String newText);
 
     /**
      * Returns shortcut string representation of the element. Basically, the
@@ -97,8 +97,8 @@ public abstract class Text implements Element {
 
     /**
      * Returns long XML-encoded representation of the element. Basically, the
-     * XML-encoded text (&lt; -&gt; &amp;lt; etc). E.g. for <code>Rock&amp;Roll</code>
-     * should return <code>Rock&amp;Roll</code>.
+     * XML-encoded text (&lt; -&gt; &amp;lt; etc). E.g. for
+     * <code>Rock&amp;Roll</code> should return <code>Rock&amp;Roll</code>.
      */
     public String toTMX() {
         return StringUtil.makeValidXML(text.toString());
@@ -106,8 +106,9 @@ public abstract class Text implements Element {
 
     /**
      * Returns the text in its original form as it was in original document.
-     * E.g. for <code>Rock&amp;Roll</code> should return <code>Rock&amp;Roll</code>
-     * for XML and <code>Rock&amp;Roll</code> for text files.
+     * E.g. for <code>Rock&amp;Roll</code> should return
+     * <code>Rock&amp;Roll</code> for XML and <code>Rock&amp;Roll</code> for
+     * text files.
      */
     public abstract String toOriginal();
 }

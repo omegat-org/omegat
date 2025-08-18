@@ -36,7 +36,26 @@ import org.omegat.util.Token;
  */
 public interface ITokenizer {
     enum StemmingMode {
-        NONE, MATCHING, GLOSSARY
+        /**
+         * No stemming.
+         */
+        NONE,
+        /**
+         * Stemming for fuzzy matching.
+         */
+        MATCHING,
+        /**
+         * Stemming for glossary entries.
+         */
+        GLOSSARY,
+        /**
+         * Stemming for fuzzy matching with full snowball support.
+         */
+        MATCHING_FULL,
+        /**
+         * Stemming for glossary with full snowball support.
+         */
+        GLOSSARY_FULL
     }
 
     /**
@@ -68,30 +87,32 @@ public interface ITokenizer {
      * Breaks a string into tokens. Numbers, tags, and other non-word tokens are
      * included in the result. Stemming is NOT used.
      * <p>
-     * This method is used to mark string differences in the UI and to tune similarity.
+     * This method is used to mark string differences in the UI and to tune
+     * similarity.
      * <p>
      * Results are not cached.
      */
     Token[] tokenizeVerbatim(String str);
 
     /**
-     * Breaks a string into strings. Numbers, tags, and other non-word tokens are
-     * included in the result. Stemming is NOT used.
+     * Breaks a string into strings. Numbers, tags, and other non-word tokens
+     * are included in the result. Stemming is NOT used.
      * <p>
-     * This method is used to mark string differences in the UI and for debugging
-     * purposes.
+     * This method is used to mark string differences in the UI and for
+     * debugging purposes.
      * <p>
      * Results are not cached.
      */
     String[] tokenizeVerbatimToStrings(String str);
 
     /**
-     * Return an array of language strings (<code>xx-yy</code>) indicating the tokenizer's
-     * supported languages. Meant for tokenizers for which the supported languages
-     * can only be determined at runtime, like the {@link HunspellTokenizer}.
+     * Return an array of language strings (<code>xx-yy</code>) indicating the
+     * tokenizer's supported languages. Meant for tokenizers for which the
+     * supported languages can only be determined at runtime, like the
+     * {@link HunspellTokenizer}.
      * <p>
-     * Indicate that this should be used by setting the {@link Tokenizer} annotation
-     * to contain only {@link Tokenizer#DISCOVER_AT_RUNTIME}.
+     * Indicate that this should be used by setting the {@link Tokenizer}
+     * annotation to contain only {@link Tokenizer#DISCOVER_AT_RUNTIME}.
      */
     String[] getSupportedLanguages();
 }

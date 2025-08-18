@@ -39,9 +39,9 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.comments.ICommentProvider;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -74,9 +74,6 @@ public abstract class BaseTokenizer implements ITokenizer {
      */
     protected boolean shouldDelegateTokenizeExactly = true;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Token[] tokenizeWords(final String strOrig, final StemmingMode stemmingMode) {
         Map<String, Token[]> cache;
@@ -85,9 +82,11 @@ public abstract class BaseTokenizer implements ITokenizer {
             cache = tokenCacheNone;
             break;
         case GLOSSARY:
+        case GLOSSARY_FULL:
             cache = tokenCacheGlossary;
             break;
         case MATCHING:
+        case MATCHING_FULL:
             cache = tokenCacheMatching;
             break;
         default:
@@ -97,11 +96,9 @@ public abstract class BaseTokenizer implements ITokenizer {
         if (result != null) {
             return result;
         }
-        result = tokenize(strOrig,
-                stemmingMode == StemmingMode.GLOSSARY || stemmingMode == StemmingMode.MATCHING,
-                stemmingMode == StemmingMode.MATCHING,
-                stemmingMode != StemmingMode.GLOSSARY,
-                true);
+        result = tokenize(strOrig, stemmingMode,
+                stemmingMode == StemmingMode.MATCHING || stemmingMode == StemmingMode.MATCHING_FULL,
+                stemmingMode != StemmingMode.GLOSSARY && stemmingMode != StemmingMode.GLOSSARY_FULL, true);
 
         // put result in the cache
         cache.put(strOrig, result);
@@ -110,16 +107,11 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     @Override
     public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
-        return tokenizeToStrings(str,
-                stemmingMode == StemmingMode.GLOSSARY || stemmingMode == StemmingMode.MATCHING,
-                stemmingMode == StemmingMode.MATCHING,
-                stemmingMode != StemmingMode.GLOSSARY,
-                true);
+        return tokenizeToStrings(str, stemmingMode != StemmingMode.NONE,
+                stemmingMode == StemmingMode.MATCHING || stemmingMode == StemmingMode.MATCHING_FULL,
+                stemmingMode != StemmingMode.GLOSSARY, true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Token[] tokenizeVerbatim(final String strOrig) {
         if (StringUtil.isEmpty(strOrig)) {
@@ -130,19 +122,18 @@ public abstract class BaseTokenizer implements ITokenizer {
             return tokenize(strOrig, false, false, false, false);
         }
 
-        List<Token> result = new ArrayList<Token>(DEFAULT_TOKENS_COUNT);
+        List<Token> result = new ArrayList<>(DEFAULT_TOKENS_COUNT);
 
         WordIterator iterator = new WordIterator();
         iterator.setText(strOrig);
 
         int start = iterator.first();
-        for (int end = iterator.next(); end != BreakIterator.DONE; start = end,
-                end = iterator.next()) {
+        for (int end = iterator.next(); end != BreakIterator.DONE; start = end, end = iterator.next()) {
             String tokenStr = strOrig.substring(start, end);
             result.add(new Token(tokenStr, start));
         }
 
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     @Override
@@ -155,24 +146,24 @@ public abstract class BaseTokenizer implements ITokenizer {
             return tokenizeToStrings(str, false, false, false, false);
         }
 
-        List<String> result = new ArrayList<String>(DEFAULT_TOKENS_COUNT);
+        List<String> result = new ArrayList<>(DEFAULT_TOKENS_COUNT);
 
         WordIterator iterator = new WordIterator();
         iterator.setText(str);
 
         int start = iterator.first();
-        for (int end = iterator.next(); end != BreakIterator.DONE; start = end,
-                end = iterator.next()) {
+        for (int end = iterator.next(); end != BreakIterator.DONE; start = end, end = iterator.next()) {
             String tokenStr = str.substring(start, end);
             result.add(tokenStr);
         }
 
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     protected Token[] tokenizeByCodePoint(String strOrig) {
         // See http://www.ibm.com/developerworks/library/j-unicode/#1-5
-        // Example 1-5 appears to be faster than 1-6 for us (because our strings are short?)
+        // Example 1-5 appears to be faster than 1-6 for us (because our strings
+        // are short?)
         Token[] tokens = new Token[strOrig.codePointCount(0, strOrig.length())];
         for (int cp, i = 0, j = 0; i < strOrig.length(); i += Character.charCount(cp)) {
             cp = strOrig.codePointAt(i);
@@ -183,7 +174,8 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     protected String[] tokenizeByCodePointToStrings(String strOrig) {
         // See http://www.ibm.com/developerworks/library/j-unicode/#1-5
-        // Example 1-5 appears to be faster than 1-6 for us (because our strings are short?)
+        // Example 1-5 appears to be faster than 1-6 for us (because our strings
+        // are short?)
         String[] tokens = new String[strOrig.codePointCount(0, strOrig.length())];
         for (int cp, i = 0, j = 0; i < strOrig.length(); i += Character.charCount(cp)) {
             cp = strOrig.codePointAt(i);
@@ -192,15 +184,22 @@ public abstract class BaseTokenizer implements ITokenizer {
         return tokens;
     }
 
-    protected Token[] tokenize(final String strOrig, final boolean stemsAllowed, final boolean stopWordsAllowed,
-            final boolean filterDigits, final boolean filterWhitespace) {
+    @Deprecated
+    protected Token[] tokenize(final String strOrig, final boolean stemsAllowed,
+            final boolean stopWordsAllowed, final boolean filterDigits, final boolean filterWhitespace) {
+        return tokenize(strOrig, stemsAllowed ? StemmingMode.GLOSSARY : StemmingMode.NONE, stopWordsAllowed,
+                filterDigits, filterWhitespace);
+    }
+
+    protected Token[] tokenize(final String strOrig, final StemmingMode stemmingMode,
+            final boolean stopWordsAllowed, final boolean filterDigits, final boolean filterWhitespace) {
         if (StringUtil.isEmpty(strOrig)) {
             return EMPTY_TOKENS_LIST;
         }
 
-        List<Token> result = new ArrayList<Token>(64);
+        List<Token> result = new ArrayList<>(64);
 
-        try (TokenStream in = getTokenStream(strOrig, stemsAllowed, stopWordsAllowed)) {
+        try (TokenStream in = getTokenStream(strOrig, stemmingMode, stopWordsAllowed)) {
             in.addAttribute(CharTermAttribute.class);
             in.addAttribute(OffsetAttribute.class);
 
@@ -218,7 +217,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         } catch (IOException ex) {
             Log.log(ex);
         }
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     protected String[] tokenizeToStrings(String str, boolean stemsAllowed, boolean stopWordsAllowed,
@@ -227,8 +226,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             return EMPTY_STRING_LIST;
         }
 
-        List<String> result = new ArrayList<String>(64);
-
+        List<String> result = new ArrayList<>(64);
         try (TokenStream in = getTokenStream(str, stemsAllowed, stopWordsAllowed)) {
             in.addAttribute(CharTermAttribute.class);
             in.addAttribute(OffsetAttribute.class);
@@ -255,7 +253,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         } catch (IOException ex) {
             Log.log(ex);
         }
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     private boolean acceptToken(String token, boolean filterDigits, boolean filterWhitespace) {
@@ -278,8 +276,13 @@ public abstract class BaseTokenizer implements ITokenizer {
         return !(filterWhitespace && isWhitespaceOnly);
     }
 
-    protected abstract TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed)
-            throws IOException;
+    protected abstract TokenStream getTokenStream(String strOrig, boolean stemsAllowed,
+            boolean stopWordsAllowed) throws IOException;
+
+    protected TokenStream getTokenStream(String strOrig, StemmingMode stemmingMode, boolean stopWordsAllowed)
+            throws IOException {
+        return getTokenStream(strOrig, stemmingMode != StemmingMode.NONE, stopWordsAllowed);
+    }
 
     /**
      * Minimal implementation that returns the default implementation
@@ -300,13 +303,13 @@ public abstract class BaseTokenizer implements ITokenizer {
     private String[] getAnnotationLanguages() {
         Tokenizer ann = getClass().getAnnotation(Tokenizer.class);
         if (ann == null) {
-            throw new RuntimeException(getClass().getName() + " must have a "
-                    + Tokenizer.class.getName() + " annotation available at runtime.");
+            throw new RuntimeException(getClass().getName() + " must have a " + Tokenizer.class.getName()
+                    + " annotation available at runtime.");
         }
         String[] languages = ann.languages();
         if (languages.length == 0) {
-            throw new RuntimeException(getClass().getName() + " must have a non-empty " + Tokenizer.class.getName()
-                    + " annotation available at runtime.");
+            throw new RuntimeException(getClass().getName() + " must have a non-empty "
+                    + Tokenizer.class.getName() + " annotation available at runtime.");
         }
         return languages;
     }
@@ -364,16 +367,12 @@ public abstract class BaseTokenizer implements ITokenizer {
     }
 
     protected String printTest(String[] strings, String input) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(StringUtils.join(strings, ", ")).append('\n');
-        sb.append("Is verbatim: ").append(StringUtils.join(strings, "").equals(input)).append('\n');
-        return sb.toString();
+        return StringUtils.join(strings, ", ") + '\n' + "Is verbatim: "
+                + StringUtils.join(strings, "").equals(input) + '\n';
     }
 
-    public static final ICommentProvider TOKENIZER_DEBUG_PROVIDER = new ICommentProvider() {
-        @Override
-        public String getComment(SourceTextEntry newEntry) {
-            return ((BaseTokenizer) Core.getProject().getSourceTokenizer()).test(newEntry.getSrcText());
-        }
-    };
+    @SuppressWarnings("unused")
+    @VisibleForTesting
+    public static final ICommentProvider TOKENIZER_DEBUG_PROVIDER = newEntry -> ((BaseTokenizer) Core
+            .getProject().getSourceTokenizer()).test(newEntry.getSrcText());
 }

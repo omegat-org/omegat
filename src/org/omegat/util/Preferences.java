@@ -114,6 +114,14 @@ public final class Preferences {
     public static final String DICTIONARY_USE_FONT = "dictionary_use_font";
     public static final String TF_DICTIONARY_FONT_SIZE = "dictionary_font_size";
 
+    /**
+     * A constant string identifier for the tokenizer configuration that enables
+     * full stemming functionality. This configuration applies to enable
+     * snawball stemmer in OmegaT tokenizers when supported. In default, light
+     * stemmer mode will be used.
+     */
+    public static final String TOKENIZER_STEMMING_FULL = "tokenizer_stemming_full";
+
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
 
     // Project files window size and position
@@ -233,8 +241,10 @@ public final class Preferences {
     /** Workflow Option: Export current segment */
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment";
 
-    /** Editor Option:  When activated, a single mouse click activates a segment
-     *  in addition to the usual double click)  */
+    /**
+     * Editor Option: When activated, a single mouse click activates a segment
+     * in addition to the usual double click)
+     */
     public static final String SINGLE_CLICK_SEGMENT_ACTIVATION = "wf_singleClickSegmentActivation";
 
     /**

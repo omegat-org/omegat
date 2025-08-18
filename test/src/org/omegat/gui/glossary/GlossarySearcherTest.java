@@ -47,6 +47,7 @@ import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneCJKTokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
+import org.omegat.tokenizer.LuceneItalianTokenizer;
 import org.omegat.tokenizer.LuceneJapaneseTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
@@ -68,6 +69,25 @@ public class GlossarySearcherTest extends TestCore {
         List<GlossaryEntry> entries = List
                 .of(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon(sourceText, tok, srcLang, trLang, entries);
+        assertEquals(1, result.size());
+        assertEquals(sourceText, result.get(0).getSrcText());
+        assertEquals(commentText, result.get(0).getCommentText());
+        assertEquals(translationText, result.get(0).getLocText());
+    }
+
+    @Test
+    public void testGlossarySearcherItalian() {
+        String sourceText = "paese";
+        String translationText = "village/town";
+        String commentText = "paese is singular and paesi is plural.";
+        ITokenizer tok = new LuceneItalianTokenizer();
+        Language srcLang = new Language("it");
+        Language trLang = new Language("en");
+        setupProject(srcLang);
+        Preferences.setPreference(Preferences.TOKENIZER_STEMMING_FULL, true);
+        List<GlossaryEntry> entries = List
+                .of(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
+        List<GlossaryEntry> result = glossarySearcherCommon("paesi", tok, srcLang, trLang, entries);
         assertEquals(1, result.size());
         assertEquals(sourceText, result.get(0).getSrcText());
         assertEquals(commentText, result.get(0).getCommentText());

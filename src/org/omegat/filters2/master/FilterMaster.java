@@ -57,6 +57,7 @@ import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModu
 import org.apache.commons.io.FileUtils;
 
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -94,7 +95,7 @@ public class FilterMaster {
     /** name of the filter configuration file */
     public static final String FILE_FILTERS = "filters.xml";
 
-    private static final XmlMapper mapper;
+    private static final XmlMapper MAPPER;
 
     /**
      * There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0
@@ -120,20 +121,21 @@ public class FilterMaster {
     }
 
     static {
-        mapper = XmlMapper.xmlBuilder().defaultUseWrapper(false)
+        MAPPER = XmlMapper.xmlBuilder().defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
-        mapper.registerModule(new JakartaXmlBindAnnotationModule());
-        mapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        MAPPER.registerModule(new JakartaXmlBindAnnotationModule());
+        MAPPER.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     /**
      * Method for test.
      * @return xmlMapper object.
      */
-    protected static XmlMapper getMapper() {
-        return mapper;
+    @VisibleForTesting
+    static XmlMapper getMapper() {
+        return MAPPER;
     }
 
     /**
@@ -471,7 +473,7 @@ public class FilterMaster {
         }
         Filters result;
         try {
-            result = mapper.readValue(configFile, Filters.class);
+            result = MAPPER.readValue(configFile, Filters.class);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
             Log.log(e);
@@ -500,7 +502,7 @@ public class FilterMaster {
             return;
         }
         try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
             Log.log(e);
@@ -846,7 +848,7 @@ public class FilterMaster {
     }
 
     /**
-     * Convert options to xml from map.
+     * Convert options to XML from a map.
      *
      * @param f
      *            filter

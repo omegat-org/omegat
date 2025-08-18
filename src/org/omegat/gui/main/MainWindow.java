@@ -109,6 +109,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     public final MainWindowMenu menu;
 
     protected ProjectFilesListController projWin;
+    private final MainWindowStatusBarController mainWindowStatusBarController;
 
     /**
      * The font for main window (source and target text) and for match and
@@ -118,11 +119,6 @@ public class MainWindow extends JFrame implements IMainWindow {
 
     /** Set of all open search windows. */
     private final List<SearchWindowController> searches = new ArrayList<>();
-
-    protected JLabel lengthLabel;
-    protected JLabel progressLabel;
-    protected JLabel statusLabel;
-    protected JLabel lockInsertLabel;
 
     protected DockingDesktop desktop;
 
@@ -157,7 +153,8 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
         pack();
-        getContentPane().add(MainWindowUI.createStatusBar(this), BorderLayout.SOUTH);
+        mainWindowStatusBarController = new MainWindowStatusBarController();
+        getContentPane().add(mainWindowStatusBarController.getUI(), BorderLayout.SOUTH);
 
         StaticUIUtils.setWindowIcon(this);
 
@@ -337,17 +334,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         return Collections.unmodifiableList(searches);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void showStatusMessageRB(final String messageKey, final Object... params) {
-        final String msg = getLocalizedString(messageKey, params);
-        UIThreadsUtil.executeInSwingThread(new Runnable() {
-            @Override
-            public void run() {
-                statusLabel.setText(msg);
-            }
-        });
+        mainWindowStatusBarController.showStatusMessageRB(messageKey, params);
     }
 
     private String getLocalizedString(String messageKey, Object... params) {
@@ -360,27 +349,9 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void showTimedStatusMessageRB(String messageKey, Object... params) {
-        showStatusMessageRB(messageKey, params);
-
-        if (messageKey == null) {
-            return;
-        }
-
-        // clear the message after 10 seconds
-        String localizedString = getLocalizedString(messageKey, params);
-        Timer timer = new Timer(10_000, evt -> {
-            String text = statusLabel.getText();
-            if (localizedString.equals(text)) {
-                statusLabel.setText(null);
-            }
-        });
-        timer.setRepeats(false); // one-time only
-        timer.start();
+        mainWindowStatusBarController.showStatusMessageRB(messageKey, params);
     }
 
     /**
@@ -389,8 +360,9 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @param messageText
      *            message text
      */
+    @Override
     public void showProgressMessage(String messageText) {
-        progressLabel.setText(messageText);
+        mainWindowStatusBarController.showProgressMessage(messageText);
     }
 
     /*
@@ -399,7 +371,7 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @param tooltipText tooltip text
      */
     public void setProgressToolTipText(String toolTipText) {
-        progressLabel.setToolTipText(toolTipText);
+        mainWindowStatusBarController.showProgressMessage(toolTipText);
     }
 
     /**
@@ -408,13 +380,14 @@ public class MainWindow extends JFrame implements IMainWindow {
      * @param messageText
      *            message text
      */
+    @Override
     public void showLengthMessage(String messageText) {
-        lengthLabel.setText(messageText);
+        mainWindowStatusBarController.showLengthMessage(messageText);
     }
 
+    @Override
     public void showLockInsertMessage(String messageText, String toolTip) {
-        lockInsertLabel.setText(messageText);
-        lockInsertLabel.setToolTipText(toolTip);
+        mainWindowStatusBarController.showLockInsertMessage(messageText, toolTip);
     }
 
     // /////////////////////////////////////////////////////////////
@@ -424,16 +397,12 @@ public class MainWindow extends JFrame implements IMainWindow {
     private JPanel lastDialogText;
     private String lastDialogKey;
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void displayWarningRB(String warningKey, Object... params) {
         displayWarningRB(warningKey, null, params);
     };
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void displayWarningRB(final String warningKey, final String supercedesKey,
             final Object... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
@@ -459,16 +428,14 @@ public class MainWindow extends JFrame implements IMainWindow {
             });
             lastDialogKey = warningKey;
 
-            statusLabel.setText(msg);
+            mainWindowStatusBarController.showStatusMessage(msg);
 
             JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                     JOptionPane.WARNING_MESSAGE);
         });
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
         UIThreadsUtil.executeInSwingThread(() -> {
             String msg;
@@ -478,7 +445,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 msg = OStrings.getString(errorKey);
             }
 
-            statusLabel.setText(msg);
+            mainWindowStatusBarController.showStatusMessage(msg);
 
             JPanel pane = new JPanel();
             pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
@@ -522,9 +489,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         });
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void lockUI() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -548,9 +513,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void unlockUI() {
         UIThreadsUtil.mustBeSwingThread();
 

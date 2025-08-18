@@ -47,6 +47,39 @@ public final class RuntimePreferences {
     /** Last opened project location save control **/
     private static boolean locationSaveEnabled = true;
 
+    private static String alternateFilenameFrom;
+    private static String alternateFilenameTo;
+
+    private static String tokenizerSource;
+
+    private static String tokenizerTarget;
+
+    private static boolean noTeam = false;
+
+    public static boolean isNoTeam() {
+        return noTeam;
+    }
+
+    public static void setNoTeam() {
+        noTeam = true;
+    }
+
+    public static void setTokenizerSource(String v) {
+        tokenizerSource = v;
+    }
+
+    public static String getTokenizerSource() {
+        return tokenizerSource;
+    }
+
+    public static void setTokenizerTarget(String v) {
+        tokenizerTarget = v;
+    }
+
+    public static String getTokenizerTarget() {
+        return tokenizerTarget;
+    }
+
     public static boolean isQuietMode() {
         return quietMode;
     }
@@ -77,5 +110,21 @@ public final class RuntimePreferences {
 
     public static void setLocationSaveEnabled(boolean v) {
         locationSaveEnabled = v;
+    }
+
+    public static void setAlternateFilenames(String anAlternateFilenameFrom, String anAlternateFilenameTo) {
+        if (anAlternateFilenameFrom == null || anAlternateFilenameTo == null) {
+            throw new IllegalArgumentException("Both alternateFilenameFrom and alternateFilenameTo are required.");
+        }
+        alternateFilenameFrom = anAlternateFilenameFrom;
+        alternateFilenameTo = anAlternateFilenameTo;
+    }
+
+    public static String getAlternateFilenameFrom() {
+        return alternateFilenameFrom;
+    }
+
+    public static String getAlternateFilenameTo() {
+        return alternateFilenameTo;
     }
 }

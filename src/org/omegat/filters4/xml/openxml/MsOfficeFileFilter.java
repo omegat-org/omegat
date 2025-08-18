@@ -26,6 +26,7 @@
 package org.omegat.filters4.xml.openxml;
 
 import java.awt.Window;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -120,15 +121,22 @@ public class MsOfficeFileFilter extends AbstractZipFilter {
 
     public MsOfficeFileFilter() {
         super();
-        defineDOCUMENTSOptions(new HashMap<String, String>()); // Define the
-                                                               // documents to
-                                                               // read
+        defineDOCUMENTSOptions(new HashMap<>());
     }
 
     @Override
     public boolean isFileSupported(java.io.File inFile, Map<String, String> config, FilterContext context) {
-        defineDOCUMENTSOptions(config); // Define the documents to read
+        defineDOCUMENTSOptions(config);
         return super.isFileSupported(inFile, config, context);
+    }
+
+    /**
+     * Disabled by default, because of the known bug.
+     * @return false
+     */
+    @Override
+    public boolean isEnabledInDefault() {
+        return false;
     }
 
     @Override

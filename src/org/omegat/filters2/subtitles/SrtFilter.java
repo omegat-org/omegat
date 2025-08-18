@@ -99,8 +99,8 @@ public class SrtFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         out = outFile;
         READ_STATE state = READ_STATE.WAIT_TIME;
         key = null;

@@ -50,18 +50,22 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 @SuppressWarnings("serial")
 public class EditOptionsDialog extends javax.swing.JDialog {
-    /** A return status code - returned if Cancel button has been pressed */
+    /** A return status code - returned if the Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
-    /** A return status code - returned if OK button has been pressed */
+    /** A return status code - returned if the OK button has been pressed */
     public static final int RET_OK = 1;
 
-    /** Creates new form EditOptionsDialog */
+    /**
+     * Creates a new form EditOptionsDialog
+     * @param parent parent window where dialog opened on.
+     * @param config default configuration to restore.
+     */
     public EditOptionsDialog(java.awt.Window parent, Map<String, String> config) {
         super(parent);
         setModal(true);
         initComponents();
 
-        options = new HTMLOptions(new TreeMap<String, String>(config));
+        options = new HTMLOptions(new TreeMap<>(config));
 
         switch (options.getRewriteEncoding()) {
         case ALWAYS:
@@ -99,10 +103,10 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         setLocationRelativeTo(parent);
     }
 
-    private HTMLOptions options;
+    private final HTMLOptions options;
 
-    public HTMLOptions getOptions() {
-        return options;
+    public Map<String, String> getConfiguration() {
+        return options.getOptionsMap();
     }
 
     private int returnStatus = RET_CANCEL;
@@ -120,34 +124,6 @@ public class EditOptionsDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed"
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonPanel = new javax.swing.JPanel();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        alwaysRB = new javax.swing.JRadioButton();
-        ifHasHeaderRB = new javax.swing.JRadioButton();
-        ifHasMetaRB = new javax.swing.JRadioButton();
-        neverRB = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-        translateHrefCB = new javax.swing.JCheckBox();
-        translateSrcCB = new javax.swing.JCheckBox();
-        translateLangCB = new javax.swing.JCheckBox();
-        translateHreflangCB = new javax.swing.JCheckBox();
-        translateValueCB = new javax.swing.JCheckBox();
-        translateButtonValueCB = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
-        paragraphOnBrCB = new javax.swing.JCheckBox();
-        jLabel4 = new javax.swing.JLabel();
-        skipRegExpTF = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        skipMetaTF = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        ignoreTagsTF = new javax.swing.JTextField();
-        compressWhitespaceCB = new javax.swing.JCheckBox();
-        removeCommentsCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("HTML_Filter_Options")); // NOI18N
         setResizable(false);
@@ -283,13 +259,13 @@ public class EditOptionsDialog extends javax.swing.JDialog {
             return;
         }
         if (alwaysRB.isSelected()) {
-            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.ALWAYS);
+            options.setRewriteEncoding(HTMLOptions.RewriteMode.ALWAYS);
         } else if (ifHasHeaderRB.isSelected()) {
-            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.IFHEADER);
+            options.setRewriteEncoding(HTMLOptions.RewriteMode.IFHEADER);
         } else if (ifHasMetaRB.isSelected()) {
-            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.IFMETA);
+            options.setRewriteEncoding(HTMLOptions.RewriteMode.IFMETA);
         } else if (neverRB.isSelected()) {
-            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.NEVER);
+            options.setRewriteEncoding(HTMLOptions.RewriteMode.NEVER);
         }
 
         options.setTranslateHref(translateHrefCB.isSelected());
@@ -324,32 +300,32 @@ public class EditOptionsDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton alwaysRB;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JPanel buttonPanel;
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JCheckBox compressWhitespaceCB;
-    private javax.swing.JRadioButton ifHasHeaderRB;
-    private javax.swing.JRadioButton ifHasMetaRB;
-    private javax.swing.JTextField ignoreTagsTF;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton neverRB;
-    private javax.swing.JButton okButton;
-    private javax.swing.JCheckBox paragraphOnBrCB;
-    private javax.swing.JCheckBox removeCommentsCB;
-    private javax.swing.JTextField skipMetaTF;
-    private javax.swing.JTextField skipRegExpTF;
-    private javax.swing.JCheckBox translateButtonValueCB;
-    private javax.swing.JCheckBox translateHrefCB;
-    private javax.swing.JCheckBox translateHreflangCB;
-    private javax.swing.JCheckBox translateLangCB;
-    private javax.swing.JCheckBox translateSrcCB;
-    private javax.swing.JCheckBox translateValueCB;
+    private final javax.swing.JRadioButton alwaysRB = new javax.swing.JRadioButton();
+    private final javax.swing.ButtonGroup buttonGroup1 = new javax.swing.ButtonGroup();
+    private final javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
+    private final javax.swing.JButton cancelButton = new javax.swing.JButton();
+    private final javax.swing.JCheckBox compressWhitespaceCB = new javax.swing.JCheckBox();
+    private final javax.swing.JRadioButton ifHasHeaderRB = new javax.swing.JRadioButton();
+    private final javax.swing.JRadioButton ifHasMetaRB = new javax.swing.JRadioButton();
+    private final javax.swing.JTextField ignoreTagsTF = new javax.swing.JTextField();
+    private final javax.swing.JLabel jLabel1 = new javax.swing.JLabel();
+    private final javax.swing.JLabel jLabel2 = new javax.swing.JLabel();
+    private final javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+    private final javax.swing.JLabel jLabel4 = new javax.swing.JLabel();
+    private final javax.swing.JLabel jLabel5 = new javax.swing.JLabel();
+    private final javax.swing.JLabel jLabel6 = new javax.swing.JLabel();
+    private final javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+    private final javax.swing.JRadioButton neverRB = new javax.swing.JRadioButton();
+    private final javax.swing.JButton okButton = new javax.swing.JButton();
+    private final javax.swing.JCheckBox paragraphOnBrCB = new javax.swing.JCheckBox();
+    private final javax.swing.JCheckBox removeCommentsCB = new javax.swing.JCheckBox();
+    private final javax.swing.JTextField skipMetaTF = new javax.swing.JTextField();
+    private final javax.swing.JTextField skipRegExpTF = new javax.swing.JTextField();
+    private final javax.swing.JCheckBox translateButtonValueCB = new javax.swing.JCheckBox();
+    private final javax.swing.JCheckBox translateHrefCB = new javax.swing.JCheckBox();
+    private final javax.swing.JCheckBox translateHreflangCB = new javax.swing.JCheckBox();
+    private final javax.swing.JCheckBox translateLangCB = new javax.swing.JCheckBox();
+    private final javax.swing.JCheckBox translateSrcCB = new javax.swing.JCheckBox();
+    private final javax.swing.JCheckBox translateValueCB = new javax.swing.JCheckBox();
     // End of variables declaration//GEN-END:variables
 }

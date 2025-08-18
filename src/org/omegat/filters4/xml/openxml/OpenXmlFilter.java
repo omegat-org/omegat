@@ -89,8 +89,16 @@ class OpenXmlFilter extends AbstractXmlFilter {
         return inFile.getName().toLowerCase().endsWith(".xml");
     }
 
-    // ----------------------------- AbstractXmlFilter part
-    // ----------------------
+    /**
+     * Disabled by default, because of the known bug.
+     * @return false
+     */
+    @Override
+    public boolean isEnabledInDefault() {
+        return false;
+    }
+
+    // ------------- AbstractXmlFilter part -------------------
 
     private QName OOXML_MAIN_PARA_ELEMENT = null;
 

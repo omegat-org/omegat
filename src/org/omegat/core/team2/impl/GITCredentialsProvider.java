@@ -131,7 +131,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
                     JSch.setConfig("PreferredAuthentications", "publickey");
                     jsch.setIdentityRepository(irepo);
                 } catch (AgentProxyException e) {
-                    Log.log(e);
+                    Core.getMainWindow().displayWarningRB("TEAM_GIT_SSH_AGENT_CONNECT", e.getLocalizedMessage());
                 }
             }
         };
@@ -163,7 +163,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
         credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
         credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
         if (credentials.username == null) {
-            url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+            url = String.format("%s://%s:%d", uri.getScheme(), uri.getHost(), uri.getPort());
             credentials.username = TeamSettings.get(url + "!" + KEY_USERNAME_SUFFIX);
             credentials.password = TeamUtils.decodePassword(TeamSettings.get(url + "!" + KEY_PASSWORD_SUFFIX));
         }
@@ -171,7 +171,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     }
 
     private void saveCredentials(URIish uri, Credentials credentials) {
-        String url = "" + uri.getScheme() + "://" + uri.getHost() + ":" + uri.getPort();
+        String url = String.format("%s://%s:%d", uri.getScheme(), uri.getHost(), uri.getPort());
         try {
             TeamSettings.set(url + "!" + KEY_USERNAME_SUFFIX, credentials.username);
             TeamSettings.set(url + "!" + KEY_PASSWORD_SUFFIX, TeamUtils.encodePassword(credentials.password));
@@ -336,7 +336,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
     /**
      * shows dialog to ask for credentials, and stores credentials.
      *
-     * @return true when entered, false on cancel.
+     * @return credential when entered, null on cancel.
      */
     private Credentials askCredentials(URIish uri, Credentials credentials) {
         if (Core.getMainWindow() == null) {

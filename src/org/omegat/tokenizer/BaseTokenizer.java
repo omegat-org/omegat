@@ -107,9 +107,9 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     @Override
     public String[] tokenizeWordsToStrings(String str, StemmingMode stemmingMode) {
-        return tokenizeToStrings(str, stemmingMode != StemmingMode.NONE,
+        return tokenizeToStrings(str, stemmingMode, stemmingMode != StemmingMode.NONE,
                 stemmingMode == StemmingMode.MATCHING || stemmingMode == StemmingMode.MATCHING_FULL,
-                stemmingMode != StemmingMode.GLOSSARY, true);
+                stemmingMode != StemmingMode.GLOSSARY && stemmingMode != StemmingMode.GLOSSARY_FULL, true);
     }
 
     @Override
@@ -222,12 +222,18 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     protected String[] tokenizeToStrings(String str, boolean stemsAllowed, boolean stopWordsAllowed,
             boolean filterDigits, boolean filterWhitespace) {
+        return tokenizeToStrings(str, stemsAllowed ? StemmingMode.GLOSSARY : StemmingMode.NONE, stemsAllowed,
+                stopWordsAllowed, filterDigits, filterWhitespace);
+    }
+
+    protected String[] tokenizeToStrings(String str, StemmingMode stemmingMode, boolean stemsAllowed,
+                                         boolean stopWordsAllowed, boolean filterDigits, boolean filterWhitespace) {
         if (StringUtil.isEmpty(str)) {
             return EMPTY_STRING_LIST;
         }
 
         List<String> result = new ArrayList<>(64);
-        try (TokenStream in = getTokenStream(str, stemsAllowed, stopWordsAllowed)) {
+        try (TokenStream in = getTokenStream(str, stemmingMode, stopWordsAllowed)) {
             in.addAttribute(CharTermAttribute.class);
             in.addAttribute(OffsetAttribute.class);
 

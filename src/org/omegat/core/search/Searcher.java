@@ -749,7 +749,7 @@ public class Searcher {
         // We should not collapse results when doing a search/replace
         // see https://sourceforge.net/p/omegat/bugs/675/
         if (collapseResults) {
-            ollapseFoundMatches();
+            collapseFoundMatches();
         }
         return true;
     }
@@ -781,7 +781,7 @@ public class Searcher {
         return searchExpression.widthInsensitive ? StringUtil.normalizeWidth(text) : text;
     }
 
-    private void ollapseFoundMatches() {
+    private void collapseFoundMatches() {
         for (int i = 1; i < foundMatches.size();) {
             SearchMatch pr = foundMatches.get(i - 1);
             SearchMatch cu = foundMatches.get(i);

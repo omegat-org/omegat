@@ -77,6 +77,18 @@ import org.omegat.util.StringUtil;
 /**
  * This class implements search functionality. It is non-reentrant: each searcher instance must be used by a
  * single thread.
+ * <p>
+ * THREAD SAFETY: This class is NOT thread-safe for concurrent access. However, it supports the following
+ * safe usage pattern:
+ * <ol>
+ * <li>Thread A creates Searcher instance and calls search()</li>
+ * <li>Thread A completes search() execution completely</li>
+ * <li>Thread B can safely call getSearchResults() and other getter methods after Thread A completes</li>
+ * </ol>
+ * The key requirement is that getSearchResults() and other result access methods are only called AFTER
+ * search() completes, and no concurrent access occurs during search() execution.
+ * <p>
+ * VISIBILITY: The searchCompleted flag ensures proper visibility of search results between threads.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -113,6 +125,12 @@ public class Searcher {
     private LongProcessThread checkStop;
     private final List<SearchMatch> foundMatches = new ArrayList<>();
 
+    /**
+     * Volatile flag to ensure proper visibility of search completion between threads.
+     * This provides happens-before relationship for safe result access.
+     */
+    private volatile boolean searchCompleted = false;
+
     // PM entries 0+
     // Only PM and TM are counted (separately) for '+X more' statistics
     private static final int ENTRY_ORIGIN_PROJECT_MEMORY = 0;
@@ -145,9 +163,13 @@ public class Searcher {
     }
 
     /**
-     * Returns list of search results
+     * Returns list of search results.
      */
     public List<SearchResultEntry> getSearchResults() {
+        if (!searchCompleted) {
+            throw new IllegalStateException("Search not completed yet");
+        }
+
         if (!preprocessResults) {
             return searchResults;
         }
@@ -194,6 +216,7 @@ public class Searcher {
         numFinds = 0;
         // ensures that results will be preprocessed only one time
         preprocessResults = true;
+        searchCompleted = false;
 
         searchResults.clear();
         tmxMap.clear();
@@ -245,13 +268,28 @@ public class Searcher {
             throw new IllegalStateException("Unknown search expression type");
         }
 
-        if (searchExpression.rootDir == null) {
-            // if no search directory specified, then we are
-            // searching current project only
-            searchProject();
-        } else {
-            searchFiles();
+        try {
+            if (searchExpression.rootDir == null) {
+                // if no search directory specified, then we are
+                // searching current project only
+                searchProject();
+            } else {
+                searchFiles();
+            }
+        } finally {
+            // Mark search as completed - provides happens-before edge for safe result access
+            // This ensures all search results are visible to other threads
+            searchCompleted = true;
         }
+    }
+
+    /**
+     * Indicates whether the search operation has been completed.
+     *
+     * @return true if the search has been completed; false otherwise.
+     */
+    public boolean isSearchCompleted() {
+        return searchCompleted;
     }
 
     /** create a matcher for the author search string. */
@@ -840,6 +878,9 @@ public class Searcher {
      *         about the match's start and end positions, and any associated replacement text.
      */
     public List<SearchMatch> getFoundMatches() {
+        if (!searchCompleted) {
+            throw new IllegalStateException("Search not completed yet.");
+        }
         return foundMatches;
     }
 

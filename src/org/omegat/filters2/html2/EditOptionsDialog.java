@@ -105,7 +105,12 @@ public class EditOptionsDialog extends javax.swing.JDialog {
 
     private final HTMLOptions options;
 
-    public Map<String, String> getConfiguration() {
+    @Deprecated(since = "6.1.0", forRemoval = true)
+    public HTMLOptions getOptions() {
+        return options;
+    }
+  
+    Map<String, String> getConfiguration() {
         return options.getOptionsMap();
     }
 

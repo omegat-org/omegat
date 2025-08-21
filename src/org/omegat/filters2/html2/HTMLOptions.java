@@ -109,7 +109,7 @@ public class HTMLOptions extends AbstractOptions {
      * @return One of {@link RewriteMode#ALWAYS}, {@link RewriteMode#IFHEADER} ,
      *         {@link RewriteMode#IFMETA}, {@link RewriteMode#NEVER}.
      */
-    public RewriteMode getRewriteEncoding() {
+    RewriteMode getRewriteEncoding() {
         return getEnum(RewriteMode.class, OPTION_REWRITE_ENCODING, RewriteMode.IFHEADER);
     }
 
@@ -121,7 +121,7 @@ public class HTMLOptions extends AbstractOptions {
      *            {@link RewriteMode#IFHEADER}, {@link RewriteMode#IFMETA},
      *            {@link RewriteMode#NEVER}.
      */
-    public void setRewriteEncoding(RewriteMode rewriteEncoding) {
+    void setRewriteEncoding(RewriteMode rewriteEncoding) {
         setEnum(OPTION_REWRITE_ENCODING, rewriteEncoding);
     }
 

@@ -76,7 +76,7 @@
     <suppress checks="(ParameterNumber|FileLength)" files="RealProject\.java"/>
 
     <!-- util/Platform -->
-    <suppress files="Platform\.java" checks="ConstantName" lines="61-80"/>
+    <suppress files="Platform\.java" checks="ConstantName" lines="61-85"/>
     <!-- util/Preferences -->
     <suppress files="Preferences\.java" checks="LineLength" lines="197"/>
     <!-- util/xml -->
@@ -120,6 +120,7 @@
     <suppress checks="(MemberName|MissingSwitchDefault|ParameterNumber)" files="SearchResultEntry\.java"/>
 
     <suppress files="StaticUtils\.java" checks="EmptyStatement" lines="158,162,549"/>
+    <suppress files="StaticUtils\.java" checks="LineLength" lines="715"/>
     <suppress files="PatternConsts\.java" checks="LineLength" lines="50,259,294"/>
 
     <!-- repository -->

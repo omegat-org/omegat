@@ -109,7 +109,8 @@ public class HTMLFilter2 extends AbstractFilter {
     protected String getInputEncoding(FilterContext filterContext, File infile) throws IOException {
         String encoding = filterContext.getInEncoding();
         if (encoding == null && isSourceEncodingVariable()) {
-            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), StandardCharsets.UTF_8.name())) {
+            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(),
+                    StandardCharsets.UTF_8.name())) {
                 encoding = hreader.getEncoding();
             }
         }
@@ -287,7 +288,7 @@ public class HTMLFilter2 extends AbstractFilter {
             EditOptionsDialog dialog = new EditOptionsDialog(parent, config);
             dialog.setVisible(true);
             if (EditOptionsDialog.RET_OK == dialog.getReturnStatus()) {
-                return dialog.getOptions().getOptionsMap();
+                return dialog.getConfiguration();
             } else {
                 return null;
             }

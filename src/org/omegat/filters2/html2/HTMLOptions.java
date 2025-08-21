@@ -56,10 +56,10 @@ import org.omegat.filters2.AbstractOptions;
  * Start a new paragraph on breaks (&lt;br&gt;) []<br>
  * Skip text matching regExp []<br>
  * Skip content of meta-tag when any of the given attibutename-value pairs is
- * present in the tag
- * Ignore tags matching regexp [] Consider the tag as untranslatable when any of the given
- * attibutename-value pairs is present in the tag
-
+ * present in the tag Ignore tags matching regexp [] Consider the tag as
+ * untranslatable when any of the given attibutename-value pairs is present in
+ * the tag
+ * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
@@ -67,7 +67,7 @@ import org.omegat.filters2.AbstractOptions;
  */
 public class HTMLOptions extends AbstractOptions {
 
-    enum REWRITE_MODE {
+    enum RewriteMode {
         /** (X)HTML filter should always add/rewrite encoding declaration. */
         ALWAYS,
         /**
@@ -106,22 +106,22 @@ public class HTMLOptions extends AbstractOptions {
      * Returns whether and when (X)HTML filter adds/rewrites encoding
      * declaration.
      *
-     * @return One of {@link REWRITE_MODE#ALWAYS}, {@link REWRITE_MODE#IFHEADER}
-     *         , {@link REWRITE_MODE#IFMETA}, {@link REWRITE_MODE#NEVER}.
+     * @return One of {@link RewriteMode#ALWAYS}, {@link RewriteMode#IFHEADER} ,
+     *         {@link RewriteMode#IFMETA}, {@link RewriteMode#NEVER}.
      */
-    public REWRITE_MODE getRewriteEncoding() {
-        return getEnum(REWRITE_MODE.class, OPTION_REWRITE_ENCODING, REWRITE_MODE.IFHEADER);
+    RewriteMode getRewriteEncoding() {
+        return getEnum(RewriteMode.class, OPTION_REWRITE_ENCODING, RewriteMode.IFHEADER);
     }
 
     /**
      * Sets when (X)HTML filter should add/rewrite encoding declaration.
      *
      * @param rewriteEncoding
-     *            One of {@link REWRITE_MODE#ALWAYS},
-     *            {@link REWRITE_MODE#IFHEADER}, {@link REWRITE_MODE#IFMETA},
-     *            {@link REWRITE_MODE#NEVER}.
+     *            One of {@link RewriteMode#ALWAYS},
+     *            {@link RewriteMode#IFHEADER}, {@link RewriteMode#IFMETA},
+     *            {@link RewriteMode#NEVER}.
      */
-    public void setRewriteEncoding(REWRITE_MODE rewriteEncoding) {
+    void setRewriteEncoding(RewriteMode rewriteEncoding) {
         setEnum(OPTION_REWRITE_ENCODING, rewriteEncoding);
     }
 
@@ -242,8 +242,9 @@ public class HTMLOptions extends AbstractOptions {
      * not be translated
      */
     public String getSkipMeta() {
-        return getString(OPTION_SKIP_META, "http-equiv=refresh," + "name=robots," + "name=revisit-after,"
-                + "http-equiv=expires," + "http-equiv=content-style-type," + "http-equiv=content-script-type");
+        return getString(OPTION_SKIP_META,
+                "http-equiv=refresh," + "name=robots," + "name=revisit-after," + "http-equiv=expires,"
+                        + "http-equiv=content-style-type," + "http-equiv=content-script-type");
     }
 
     /**

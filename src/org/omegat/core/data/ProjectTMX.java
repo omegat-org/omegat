@@ -88,6 +88,10 @@ public class ProjectTMX {
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
+    // Variable to be set during loading
+    boolean isOldOmegaTFormat = false;
+    
+    
     public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
             File file, CheckOrphanedCallback callback) {
         this(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback,
@@ -125,9 +129,10 @@ public class ProjectTMX {
             // file not exist - new project
             return;
         }
+        Loader loader = new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled);
         new TMXReader2().readTMX(file, sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, false,
                 true, Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
-                new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled));
+                loader);
     }
 
     /**
@@ -140,7 +145,7 @@ public class ProjectTMX {
     /**
      * It saves current translation into file.
      */
-    public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
+    public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser, boolean isTeamProject)
             throws Exception {
         if (!translationUpdatedByUser) {
             if (new File(translationFile).exists()) {
@@ -153,7 +158,12 @@ public class ProjectTMX {
         File newFile = new File(translationFile + OConsts.NEWFILE_EXTENSION);
 
         // Save data into '*.new' file
-        exportTMX(props, newFile, false, false, true);
+        // If in team project, keep same format as last saved file
+        if (isTeamProject && isOldOmegaTFormat) {
+            exportTMX(props, newFile, false, false, true);
+        } else {
+            exportTMX(props, newFile, false, true, true);        
+        }
 
         File backup = new File(translationFile + OConsts.BACKUP_EXTENSION);
         File orig = new File(translationFile);
@@ -301,13 +311,17 @@ public class ProjectTMX {
         private final Language targetLang;
         private final Segmenter segmenter;
         private final boolean sentenceSegmentingEnabled;
-
+        
         Loader(Language sourceLang, Language targetLang, Segmenter segmenter,
                 boolean sentenceSegmentingEnabled) {
             this.sourceLang = sourceLang;
             this.targetLang = targetLang;
             this.segmenter = segmenter;
             this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
+        }
+        
+        public void setOldOmegaTFormat(boolean isOmegaTFormat) {
+            ProjectTMX.this.isOldOmegaTFormat = isOmegaTFormat;
         }
 
         public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,

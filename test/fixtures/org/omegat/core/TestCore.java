@@ -39,6 +39,8 @@ import org.junit.After;
 import org.junit.Before;
 
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.TestCoreState;
+import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.EditorStub;
 import org.omegat.gui.editor.EditorSettingsStub;
 import org.omegat.gui.editor.IEditor;
@@ -73,20 +75,11 @@ public abstract class TestCore {
         TestCoreState.resetState();
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
-        IMainWindow mainWindow = createTestMainWindow();
+        IMainWindow mainWindow = getMainWindow();
         TestCoreState.getInstance().setMainWindow(mainWindow);
         TestCoreState.getInstance().setProject(new NotLoadedProject());
-        TestCoreState.getInstance().setEditor(createTestEditor(mainWindow));
         TestCoreState.initAutoSave(createTestAutoSave());
-    }
-
-    /**
-     * Clean up a temporary directory for configuration.
-     */
-    @After
-    public final void tearDownCore() throws IOException {
-        TestCoreState.resetState();
-        FileUtils.forceDeleteOnExit(configDir);
+        initEditor(mainWindow);
     }
 
     protected IAutoSave createTestAutoSave() {
@@ -104,6 +97,7 @@ public abstract class TestCore {
 
     /**
      * Create a mock of the main menu object.
+     *
      * @return Main menu object which implement IMainMenu.
      */
     protected IMainMenu getMainMenu() {
@@ -112,10 +106,11 @@ public abstract class TestCore {
 
     /**
      * Create a main Window object.
+     *
      * @return Object which implements IMainWindow.
      */
-    protected IMainWindow createTestMainWindow() {
-        final IMainMenu mainMenu = createTestMainMenu();
+    protected IMainWindow getMainWindow() {
+        final IMainMenu mainMenu = getMainMenu();
         return new ConsoleWindow() {
             @Override
             public void addDockable(Dockable pane) {
@@ -161,6 +156,7 @@ public abstract class TestCore {
      */
     @After
     public final void tearDownCore() throws IOException {
+        TestCoreState.resetState();
         FileUtils.forceDeleteOnExit(configDir);
     }
 }

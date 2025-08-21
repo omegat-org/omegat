@@ -184,10 +184,9 @@ public class EditorControllerTest extends TestCore {
     }
 
     @Override
-    protected IEditor createTestEditor(IMainWindow mainWindow) {
+    protected void initEditor(IMainWindow mainWindow) {
         editorController = new EditorController(mainWindow);
         TestCoreInitializer.initEditor(editorController);
-        return editorController;
     }
 
     class TestProjectProperties extends ProjectProperties {

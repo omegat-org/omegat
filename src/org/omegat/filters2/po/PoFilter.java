@@ -696,7 +696,7 @@ public class PoFilter extends AbstractFilter {
         }
         if (references.length() > 0) {
             sb.append(OStrings.getString("POFILTER_REFERENCES")).append("\n").append(unescape(references
-                            .toString()));
+                            .toString())).append("\n");
         }
         String comments = sb.toString();
         if (comments.isEmpty()) {

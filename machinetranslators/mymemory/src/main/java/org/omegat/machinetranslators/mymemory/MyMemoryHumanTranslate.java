@@ -38,6 +38,8 @@ import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.util.Language;
 
 /**
+ * MyMemory machine translation engine connector.
+ *
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  * @author Martin Wunderlich

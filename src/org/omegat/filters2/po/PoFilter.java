@@ -325,6 +325,9 @@ public class PoFilter extends AbstractFilter {
 
     private BufferedWriter out;
 
+    private MODE currentMode;
+    private int currentPlural;
+
     @Override
     public String getFileFormatName() {
         return OStrings.getString("POFILTER_FILTER_NAME");
@@ -392,13 +395,64 @@ public class PoFilter extends AbstractFilter {
         processPoFile(in, fc);
     }
 
-    // CHECKSTYLE.OFF: MethodLength
     private void processPoFile(BufferedReader in, FilterContext fc) throws IOException {
+        initializeProcessingState();
+
+        String s;
+        while ((s = in.readLine()) != null) {
+
+            // We trim trailing spaces, otherwise the regexps could fail,
+            // thus making some segments invisible to OmegaT
+            s = s.trim();
+
+            if (processFuzzy(s)) {
+                continue;
+            }
+            if (processFuzzyMarkers(s, fc)) {
+                continue;
+            }
+
+            if (COMMENT_FUZZY_OTHER.matcher(s).matches()) {
+                currentPlural = 0;
+                fuzzy = true;
+                flushTranslation(currentMode, fc);
+                s = s.replaceAll("(.*), fuzzy(.*)", "$1$2");
+            }
+
+            if (processNoWrapComment(s, fc)) {
+                continue;
+            }
+            if (processMessageId(s, fc)) {
+                continue;
+            }
+            if (processMessageString(s)) {
+                continue;
+            }
+            if (processMessageContext(s)) {
+                continue;
+            }
+            if (processComments(s)) {
+                continue;
+            }
+            if (processFuzzyMessage(s)) {
+                continue;
+            }
+            if (processOtherMessage(s)) {
+                continue;
+            }
+
+            flushTranslation(currentMode, fc);
+            eol(s);
+        }
+        flushTranslation(currentMode, fc);
+    }
+
+    private void initializeProcessingState() {
         fuzzy = false;
         fuzzyTrue = false;
         nowrap = false;
-        MODE currentMode = null;
-        int currentPlural = 0;
+        currentMode = null;
+        currentPlural = 0;
         headerProcessed = false;
 
         sources = new StringBuilder[2];
@@ -415,195 +469,196 @@ public class PoFilter extends AbstractFilter {
         references = new StringBuilder();
         sourceFuzzyTrue = new StringBuilder();
         path = "";
-
-        String s;
-        while ((s = in.readLine()) != null) {
-
-            // We trim trailing spaces, otherwise the regexps could fail,
-            // thus making some segments invisible to OmegaT
-            s = s.trim();
-
-            // We have a real fuzzy
-            Matcher mTrueFuzzy = COMMENT_FUZZY_MSGID.matcher(s);
-            if (mTrueFuzzy.matches()) {
-                fuzzyTrue = true;
-                sourceFuzzyTrue.append(mTrueFuzzy.group(1));
-                continue;
-            }
-
-            // ignore a fuzzy context
-            Matcher mFuzzyCtx = COMMENT_FUZZY_MSGCTX.matcher(s);
-            if (mFuzzyCtx.matches()) {
-                continue;
-            }
-
-            /*
-             * Removing the fuzzy markers, as it has no meanings after being
-             * processed by omegat
-             */
-            if (COMMENT_FUZZY.matcher(s).matches()) {
-                currentPlural = 0;
-                fuzzy = true;
-                flushTranslation(currentMode, fc);
-                continue;
-            } else if (COMMENT_FUZZY_OTHER.matcher(s).matches()) {
-                currentPlural = 0;
-                fuzzy = true;
-                flushTranslation(currentMode, fc);
-                s = s.replaceAll("(.*), fuzzy(.*)", "$1$2");
-            }
-
-            // FSM for po files
-            if (COMMENT_NOWRAP.matcher(s).matches()) {
-                currentPlural = 0;
-                flushTranslation(currentMode, fc);
-                /*
-                 * Read the no-wrap comment, indicating that the creator of the
-                 * po-file did not want long messages to be wrapped on multiple
-                 * lines. See 5.6.2 no-wrap of
-                 * http://docs.oasis-open.org/xliff/v1.2/xliff-profile-po/xliff-profile-po-1.2-cd02.html
-                 * for an example.
-                 */
-                nowrap = true;
-                eol(s);
-                continue;
-            }
-
-            Matcher mId = MSG_ID.matcher(s);
-            if (mId.matches()) { // msg_id(_plural)
-                currentPlural = 0;
-                String text = mId.group(2);
-                if (mId.group(1) == null) {
-                    // non-plural ID ('msg_id')
-                    // we can start a new translation. Flush current
-                    // translation. This has not happened when no empty
-                    // lines are in between 'segments'.
-                    if (sources[0].length() > 0) {
-                        flushTranslation(currentMode, fc);
-                    }
-                    currentMode = MODE.MSGID;
-                    sources[0].append(text);
-                } else {
-                    // plural ID ('msg_id_plural')
-                    currentMode = MODE.MSGID_PLURAL;
-                    sources[1].append(text);
-                }
-                eol(s);
-
-                continue;
-            }
-
-            Matcher mStr = MSG_STR.matcher(s);
-            if (mStr.matches()) {
-
-                // Hack to be able to translate empty segments
-                // If the source segment is empty and there is a reference then
-                // it copies the reference of the segment and the localization
-                // note into the source segment
-                if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0
-                        && headerProcessed) {
-                    String aux = references + extractedComments.toString();
-                    sources[0].append(aux);
-                }
-
-                String text = mStr.group(3);
-                if (mStr.group(1) == null) {
-                    // non-plural lines
-                    currentMode = MODE.MSGSTR;
-                    targets[0].append(text);
-                    currentPlural = 0;
-                } else {
-                    currentMode = MODE.MSGSTR_PLURAL;
-                    // plurals, i.e. msgstr[N] lines
-                    currentPlural = Integer.parseInt(mStr.group(2));
-                    if (currentPlural < plurals) {
-                        targets[currentPlural].append(text);
-                    }
-                }
-                continue;
-            }
-
-            Matcher mCtx = MSG_CTX.matcher(s);
-            if (mCtx.matches()) {
-                currentMode = MODE.MSGCTX;
-                currentPlural = 0;
-                path = mCtx.group(1);
-                eol(s);
-
-                continue;
-            }
-
-            Matcher mReference = COMMENT_REFERENCE.matcher(s);
-            if (mReference.matches()) {
-                currentPlural = 0;
-                references.append(mReference.group(1));
-                references.append("\n");
-                eol(s);
-
-                continue;
-            }
-            Matcher mExtracted = COMMENT_EXTRACTED.matcher(s);
-            if (mExtracted.matches()) {
-                currentPlural = 0;
-                extractedComments.append(mExtracted.group(1));
-                extractedComments.append("\n");
-                eol(s);
-
-                continue;
-            }
-            Matcher mTranslator = COMMENT_TRANSLATOR.matcher(s);
-            if (mTranslator.matches()) {
-                currentPlural = 0;
-                translatorComments.append(mTranslator.group(1));
-                translatorComments.append("\n");
-                eol(s);
-
-                continue;
-            }
-
-            // True fuzzy
-            Matcher mMsgFuzzy = MSG_FUZZY.matcher(s);
-            if (mMsgFuzzy.matches()) {
-                sourceFuzzyTrue.append(mMsgFuzzy.group(1));
-                continue;
-            }
-
-            Matcher mOther = MSG_OTHER.matcher(s);
-            if (mOther.matches()) {
-                String text = mOther.group(1);
-                if (currentMode == null) {
-                    throw new IOException(OStrings.getString("POFILTER_INVALID_FORMAT"));
-                }
-                switch (currentMode) {
-                case MSGID:
-                    sources[0].append(text);
-                    eol(s);
-                    break;
-                case MSGID_PLURAL:
-                    sources[1].append(text);
-                    eol(s);
-                    break;
-                case MSGSTR:
-                    targets[0].append(text);
-                    break;
-                case MSGSTR_PLURAL:
-                    targets[currentPlural].append(text);
-                    break;
-                case MSGCTX:
-                    eol(s);
-                    break;
-                default:
-                    throw new IllegalArgumentException();
-                }
-                continue;
-            }
-
-            flushTranslation(currentMode, fc);
-            eol(s);
-        }
-        flushTranslation(currentMode, fc);
     }
-    // CHECKSTYLE.ON: MethodLength
+
+    private boolean processFuzzy(String line) throws IOException {
+        // We have a real fuzzy
+        Matcher mTrueFuzzy = COMMENT_FUZZY_MSGID.matcher(line);
+        if (mTrueFuzzy.matches()) {
+            fuzzyTrue = true;
+            sourceFuzzyTrue.append(mTrueFuzzy.group(1));
+            return true;
+        }
+        // ignore a fuzzy context
+        Matcher mFuzzyCtx = COMMENT_FUZZY_MSGCTX.matcher(line);
+        return mFuzzyCtx.matches();
+    }
+
+    private boolean processFuzzyMarkers(String line, FilterContext fc) throws IOException {
+        /*
+         * Removing the fuzzy markers, as it has no meanings after being
+         * processed by omegat
+         */
+        if (COMMENT_FUZZY.matcher(line).matches()) {
+            currentPlural = 0;
+            fuzzy = true;
+            flushTranslation(currentMode, fc);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean processNoWrapComment(String line, FilterContext fc) throws IOException {
+        if (COMMENT_NOWRAP.matcher(line).matches()) {
+            currentPlural = 0;
+            flushTranslation(currentMode, fc);
+            /*
+             * Read the no-wrap comment, indicating that the creator of the
+             * po-file did not want long messages to be wrapped on multiple
+             * lines. See 5.6.2 no-wrap of
+             * http://docs.oasis-open.org/xliff/v1.2/xliff-profile-po/xliff-profile-po-1.2-cd02.html
+             * for an example.
+             */
+            nowrap = true;
+            eol(line);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean processMessageId(String line, FilterContext fc) throws IOException {
+        Matcher mId = MSG_ID.matcher(line);
+        if (mId.matches()) { // msg_id(_plural)
+            currentPlural = 0;
+            String text = mId.group(2);
+            if (mId.group(1) == null) {
+                // non-plural ID ('msg_id')
+                // we can start a new translation. Flush current
+                // translation. This has not happened when no empty
+                // lines are in between 'segments'.
+                if (sources[0].length() > 0) {
+                    flushTranslation(currentMode, fc);
+                }
+                currentMode = MODE.MSGID;
+                sources[0].append(text);
+            } else {
+                // plural ID ('msg_id_plural')
+                currentMode = MODE.MSGID_PLURAL;
+                sources[1].append(text);
+            }
+            eol(line);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean processMessageString(String line) {
+        Matcher mStr = MSG_STR.matcher(line);
+        if (mStr.matches()) {
+            // Hack to be able to translate empty segments
+            // If the source segment is empty and there is a reference then
+            // it copies the reference of the segment and the localization
+            // note into the source segment
+            if (allowEditingBlankSegment && sources[0].length() == 0 && references.length() > 0
+                    && headerProcessed) {
+                String aux = references + extractedComments.toString();
+                sources[0].append(aux);
+            }
+
+            String text = mStr.group(3);
+            if (mStr.group(1) == null) {
+                // non-plural lines
+                currentMode = MODE.MSGSTR;
+                targets[0].append(text);
+                currentPlural = 0;
+            } else {
+                currentMode = MODE.MSGSTR_PLURAL;
+                // plurals, i.e. msgstr[N] lines
+                currentPlural = Integer.parseInt(mStr.group(2));
+                if (currentPlural < plurals) {
+                    targets[currentPlural].append(text);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean processMessageContext(String line) throws IOException {
+        Matcher mCtx = MSG_CTX.matcher(line);
+        if (mCtx.matches()) {
+            currentMode = MODE.MSGCTX;
+            currentPlural = 0;
+            path = mCtx.group(1);
+            eol(line);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean processComments(String line) throws IOException {
+        Matcher mReference = COMMENT_REFERENCE.matcher(line);
+        if (mReference.matches()) {
+            currentPlural = 0;
+            references.append(mReference.group(1));
+            references.append("\n");
+            eol(line);
+            return true;
+        }
+
+        Matcher mExtracted = COMMENT_EXTRACTED.matcher(line);
+        if (mExtracted.matches()) {
+            currentPlural = 0;
+            extractedComments.append(mExtracted.group(1));
+            extractedComments.append("\n");
+            eol(line);
+            return true;
+        }
+
+        Matcher mTranslator = COMMENT_TRANSLATOR.matcher(line);
+        if (mTranslator.matches()) {
+            currentPlural = 0;
+            translatorComments.append(mTranslator.group(1));
+            translatorComments.append("\n");
+            eol(line);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean processFuzzyMessage(String line) {
+        // True fuzzy
+        Matcher mMsgFuzzy = MSG_FUZZY.matcher(line);
+        if (mMsgFuzzy.matches()) {
+            sourceFuzzyTrue.append(mMsgFuzzy.group(1));
+            return true;
+        }
+        return false;
+    }
+
+    private boolean processOtherMessage(String s) throws IOException {
+        Matcher mOther = MSG_OTHER.matcher(s);
+        if (mOther.matches()) {
+            String text = mOther.group(1);
+            if (currentMode == null) {
+                throw new IOException(OStrings.getString("POFILTER_INVALID_FORMAT"));
+            }
+            switch (currentMode) {
+            case MSGID:
+                sources[0].append(text);
+                eol(s);
+                break;
+            case MSGID_PLURAL:
+                sources[1].append(text);
+                eol(s);
+                break;
+            case MSGSTR:
+                targets[0].append(text);
+                break;
+            case MSGSTR_PLURAL:
+                targets[currentPlural].append(text);
+                break;
+            case MSGCTX:
+                eol(s);
+                break;
+            default:
+                throw new IllegalArgumentException();
+            }
+            return true;
+        }
+        return false;
+    }
 
     protected void eol(String s) throws IOException {
         if (out != null) {

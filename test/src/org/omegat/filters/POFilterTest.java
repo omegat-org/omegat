@@ -68,7 +68,7 @@ public class POFilterTest extends TestFilterBase {
         String comment = OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n"
                 + "A valid comment\nAnother valid comment\n\n" + OStrings.getString("POFILTER_EXTRACTED_COMMENTS")
                 + "\n" + "Some extracted comments\nMore extracted comments\n\n"
-                + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n\n";
+                + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n";
 
         checkMultiStart(fi, f);
         checkMulti("source1", null, "some context", null, null, comment);
@@ -148,7 +148,7 @@ public class POFilterTest extends TestFilterBase {
         checkMulti("Changed %d keys", null, "[3]", null, null,
                 OStrings.getString("POFILTER_PLURAL_FORM_COMMENT", 3) + "\n");
         checkMulti("../foo/boo.c, 123", null, "", null, null,
-                OStrings.getString("POFILTER_REFERENCES") + "\n" + "../foo/boo.c, 123\n" + "\n");
+                OStrings.getString("POFILTER_REFERENCES") + "\n" + "../foo/boo.c, 123" + "\n");
         checkMultiEnd();
     }
 

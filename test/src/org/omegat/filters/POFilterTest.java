@@ -204,8 +204,8 @@ public class POFilterTest extends TestFilterBase {
                         "Excepteur sint occaecat cupidatat non proident",
                 null, null, "References:\none_line_only_with_ctx\n");
         checkMulti("Long context in several lines.", null,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n" +
-                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n" +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\\n" +
+                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\\n" +
                         "Excepteur sint occaecat cupidatat non proident",
                 null, null, "References:\nmultiple_lines_with_ctx\n");
         checkMultiEnd();

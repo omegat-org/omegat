@@ -62,12 +62,12 @@ import org.omegat.util.TagUtil;
 
 /**
  * Filter to support po files (in various encodings).
- *
+ * <p>
  * Format described on
- * https://www.gnu.org/software/hello/manual/gettext/PO-Files.html
- *
+ * <a href="https://www.gnu.org/software/hello/manual/gettext/PO-Files.html">PO
+ * File format</a>
+ * <p>
  * Filter is not thread-safe !
- *
  * Filter uses msgctx field as path, and plural index as suffix of path.
  *
  * @author Keith Godfrey
@@ -301,7 +301,7 @@ public class PoFilter extends AbstractFilter {
     protected static final Pattern COMMENT_EXTRACTED = Pattern.compile("#\\. (.*)");
     protected static final Pattern COMMENT_REFERENCE = Pattern.compile("#: (.*)");
     protected static final Pattern MSG_ID = Pattern.compile("msgid(_plural)?\\s+\"(.*)\"");
-    protected static final Pattern MSG_STR = Pattern.compile("msgstr(\\[([0-9]+)\\])?\\s+\"(.*)\"");
+    protected static final Pattern MSG_STR = Pattern.compile("msgstr(\\[([0-9]+)])?\\s+\"(.*)\"");
     protected static final Pattern MSG_CTX = Pattern.compile("msgctxt\\s+\"(.*)\"");
     protected static final Pattern MSG_OTHER = Pattern.compile("\"(.*)\"");
     protected static final Pattern PLURAL_FORMS = Pattern
@@ -471,7 +471,7 @@ public class PoFilter extends AbstractFilter {
         path = "";
     }
 
-    private boolean processFuzzy(String line) throws IOException {
+    private boolean processFuzzy(String line) {
         // We have a real fuzzy
         Matcher mTrueFuzzy = COMMENT_FUZZY_MSGID.matcher(line);
         if (mTrueFuzzy.matches()) {
@@ -650,6 +650,7 @@ public class PoFilter extends AbstractFilter {
                 targets[currentPlural].append(text);
                 break;
             case MSGCTX:
+                path += text;
                 eol(s);
                 break;
             default:
@@ -695,7 +696,7 @@ public class PoFilter extends AbstractFilter {
         }
         if (references.length() > 0) {
             sb.append(OStrings.getString("POFILTER_REFERENCES")).append("\n").append(unescape(references
-                            .toString())).append("\n");
+                            .toString()));
         }
         String comments = sb.toString();
         if (comments.isEmpty()) {
@@ -717,11 +718,12 @@ public class PoFilter extends AbstractFilter {
         if (translation.isEmpty()) {
             translation = null;
         }
+        String omtPath = path + pathSuffix;
         if (entryParseCallback != null) {
             if (formatMonolingual) {
                 List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(translation,
                         PatternConsts.PRINTF_VARS, null);
-                entryParseCallback.addEntry(source, translation, null, fuzzy, comments, path + pathSuffix,
+                entryParseCallback.addEntry(source, translation, null, fuzzy, comments, omtPath,
                         this, protectedParts);
             } else {
                 List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source,
@@ -730,17 +732,17 @@ public class PoFilter extends AbstractFilter {
                     String[] props = { SegmentProperties.COMMENT, comments, SegmentProperties.REFERENCE,
                             "true" };
                     entryParseCallback.addEntryWithProperties(null, sourceFuzzyTrue.toString(), translation,
-                            false, props, path + pathSuffix, this, null);
+                            false, props, omtPath, this, null);
                     fuzzyTrue = false;
                     // Do not load false fuzzy when there is a real one
                     fuzzy = false;
                     translation = null;
                 }
-                entryParseCallback.addEntry(null, source, translation, fuzzy, comments, path + pathSuffix,
+                entryParseCallback.addEntry(null, source, translation, fuzzy, comments, omtPath,
                         this, protectedParts);
             }
         } else if (entryAlignCallback != null) {
-            entryAlignCallback.addTranslation(null, source, translation, fuzzy, path + pathSuffix, this);
+            entryAlignCallback.addTranslation(null, source, translation, fuzzy, omtPath, this);
         }
     }
 

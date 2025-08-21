@@ -31,8 +31,8 @@ import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
+import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.util.OStrings;
-import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StringUtil;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -70,7 +70,7 @@ public class ConsoleWindow implements IMainWindow {
      * {@inheritDoc} Nothing is shown in quiet mode.
      */
     public void showStatusMessageRB(String messageKey, Object... params) {
-        if (RuntimePreferences.isQuietMode()) {
+        if (RuntimePreferenceStore.getInstance().isQuietMode()) {
             return;
         }
         final String msg;

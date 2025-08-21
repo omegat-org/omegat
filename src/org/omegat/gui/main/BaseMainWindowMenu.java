@@ -61,7 +61,7 @@ import javax.swing.UIManager;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
-import org.omegat.util.RuntimePreferences;
+import org.omegat.core.data.RuntimePreferenceStore;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -845,7 +845,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         for (JMenuItem item : itemsToSwitchOn) {
             item.setEnabled(isProjectOpened);
         }
-        if (RuntimePreferences.isNoTeam()) {
+        if (RuntimePreferenceStore.getInstance().isNoTeam()) {
             projectTeamNewMenuItem.setEnabled(false);
         }
         projectCommitSourceFiles.setEnabled(isProjectOpened && Core.getProject().isRemoteProject()

@@ -72,6 +72,7 @@ import javax.swing.UIManager;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
+import org.omegat.core.data.RuntimePreferenceStore;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
@@ -103,7 +104,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
-import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter2;
@@ -174,39 +174,39 @@ public final class Main {
 
         String configDir = PARAMS.get(CLIParameters.CONFIG_DIR);
         if (configDir != null) {
-            RuntimePreferences.setConfigDir(FileUtil.expandTildeHomeDir(configDir));
+            RuntimePreferenceStore.getInstance().setConfigDir(FileUtil.expandTildeHomeDir(configDir));
         }
 
         if (PARAMS.containsKey(CLIParameters.QUIET)) {
-            RuntimePreferences.setQuietMode(true);
+            RuntimePreferenceStore.getInstance().setQuietMode(true);
         }
 
         if (PARAMS.containsKey(CLIParameters.DISABLE_PROJECT_LOCKING)) {
-            RuntimePreferences.setProjectLockingEnabled(false);
+            RuntimePreferenceStore.getInstance().setProjectLockingDisabled();
         }
 
         if (PARAMS.containsKey(CLIParameters.DISABLE_LOCATION_SAVE)) {
-            RuntimePreferences.setLocationSaveEnabled(false);
+            RuntimePreferenceStore.getInstance().setLocationSaveDisable();
         }
 
         if (PARAMS.containsKey(CLIParameters.NO_TEAM)) {
-            RuntimePreferences.setNoTeam();
+            RuntimePreferenceStore.getInstance().setNoTeam();
         }
         String alternateFrom = PARAMS.get(CLIParameters.ALTERNATE_FILENAME_FROM);
         if (alternateFrom != null) {
-            RuntimePreferences.setAlternateFilenameFrom(alternateFrom);
+            RuntimePreferenceStore.getInstance().setAlternateFilenameFrom(alternateFrom);
         }
         String alternateTo = PARAMS.get(CLIParameters.ALTERNATE_FILENAME_TO);
         if (alternateTo != null) {
-            RuntimePreferences.setAlternateFilenameTo(alternateTo);
+            RuntimePreferenceStore.getInstance().setAlternateFilenameTo(alternateTo);
         }
         String tokenizerSource = PARAMS.get(CLIParameters.TOKENIZER_SOURCE);
         if (tokenizerSource != null) {
-            RuntimePreferences.setTokenizerSource(tokenizerSource);
+            RuntimePreferenceStore.getInstance().setTokenizerSource(tokenizerSource);
         }
         String tokenizerTarget = PARAMS.get(CLIParameters.TOKENIZER_TARGET);
         if (tokenizerTarget != null) {
-            RuntimePreferences.setTokenizerTarget(tokenizerTarget);
+            RuntimePreferenceStore.getInstance().setTokenizerTarget(tokenizerTarget);
         }
 
         // initialize logging backend and loading configuration.

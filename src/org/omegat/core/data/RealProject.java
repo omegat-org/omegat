@@ -236,7 +236,7 @@ public class RealProject implements IProject {
      */
     public RealProject(final ProjectProperties props) {
         config = props;
-        if (config.getRepositories() != null && !RuntimePreferences.isNoTeam()) {
+        if (config.getRepositories() != null && !RuntimePreferenceStore.getInstance().isNoTeam()) {
             try {
                 remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
                         config.getRepositories(), config);
@@ -248,9 +248,11 @@ public class RealProject implements IProject {
             remoteRepositoryProvider = null;
         }
 
-        sourceTokenizer = createTokenizer(RuntimePreferences.getTokenizerSource(), props.getSourceTokenizer());
+        sourceTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerSource(),
+                props.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
-        targetTokenizer = createTokenizer(RuntimePreferences.getTokenizerTarget(), props.getTargetTokenizer());
+        targetTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerTarget(),
+                props.getTargetTokenizer());
         Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
         logger = LoggerFactory.getLogger(RealProject.class, OStrings.getResourceBundle());
     }
@@ -345,7 +347,7 @@ public class RealProject implements IProject {
             }
             isOnlineMode = onlineMode;
 
-            if (RuntimePreferences.isLocationSaveEnabled()) {
+            if (RuntimePreferenceStore.getInstance().isLocationSaveEnabled()) {
                 Preferences.setPreference(Preferences.CURRENT_FOLDER,
                         new File(config.getProjectRoot()).getAbsoluteFile().getParent());
                 Preferences.save();
@@ -1833,8 +1835,8 @@ public class RealProject implements IProject {
      * @return normalized filename
      */
     protected String patchFileNameForEntryKey(String filename) {
-        String f = RuntimePreferences.getAlternateFilenameFrom();
-        String t = RuntimePreferences.getAlternateFilenameTo();
+        String f = RuntimePreferenceStore.getInstance().getAlternateFilenameFrom();
+        String t = RuntimePreferenceStore.getInstance().getAlternateFilenameTo();
         String fn = filename.replace('\\', '/');
         if (f != null && t != null) {
             fn = fn.replaceAll(f, t);

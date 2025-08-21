@@ -25,6 +25,8 @@
 
 package org.omegat.util;
 
+import org.omegat.core.data.RuntimePreferenceStore;
+
 /**
  * Class for store runtime-only preferences, which shouldn't be saved to config
  * dir.
@@ -36,147 +38,39 @@ public final class RuntimePreferences {
     private RuntimePreferences() {
     }
 
-    /** Quiet mode. */
-    private static boolean quietMode;
-
-    /** Force use specified config dir. */
-    private static String configDir;
-
-    private static boolean projectLockingEnabled = true;
-
-    /** Last opened project location save control **/
-    private static boolean locationSaveEnabled = true;
-
-    private static String alternateFilenameFrom;
-
-    private static String alternateFilenameTo;
-
-    private static String tokenizerSource;
-
-    private static String tokenizerTarget;
-
-    private static boolean noTeam = false;
-
-    /**
-     * Checks if the application is running in quiet mode.
-     *
-     * @return {@code true} if quiet mode is enabled, {@code false} otherwise.
-     */
     public static boolean isQuietMode() {
-        return quietMode;
+        return RuntimePreferenceStore.getInstance().isQuietMode();
     }
 
     public static void setQuietMode(boolean v) {
-        quietMode = v;
+        RuntimePreferenceStore.getInstance().setQuietMode(v);
     }
 
-    /**
-     * Returns the directory path where the configuration is stored.
-     *
-     * @return the configuration directory as a string
-     */
     public static String getConfigDir() {
-        return configDir;
+        return RuntimePreferenceStore.getInstance().getConfigDir();
     }
 
-    /**
-     * Override the configuration directory to the specified value.
-     *
-     * @param v the configuration directory path to set
-     */
     public static void setConfigDir(String v) {
-        configDir = v;
+        RuntimePreferenceStore.getInstance().setConfigDir(v);
     }
 
     public static boolean isProjectLockingEnabled() {
-        return projectLockingEnabled;
+        return !RuntimePreferenceStore.getInstance().isProjectLockingDisabled();
     }
 
     public static void setProjectLockingEnabled(boolean v) {
-        projectLockingEnabled = v;
+        if (!v) {
+            RuntimePreferenceStore.getInstance().setProjectLockingDisabled();
+        }
     }
 
     public static boolean isLocationSaveEnabled() {
-        return locationSaveEnabled;
+        return RuntimePreferenceStore.getInstance().isLocationSaveEnabled();
     }
 
     public static void setLocationSaveEnabled(boolean v) {
-        locationSaveEnabled = v;
-    }
-
-    /**
-     * Checks if the noTeam flag is enabled.
-     *
-     * @return {@code true} if noTeam mode is active, {@code false} otherwise
-     */
-    public static boolean isNoTeam() {
-        return noTeam;
-    }
-
-    /**
-     * Enables the noTeam mode by setting the internal {@code noTeam} flag to
-     * {@code true}.
-     * This flag may be used to indicate that the application is operating
-     * without team-related features or configurations.
-     */
-    public static void setNoTeam() {
-        noTeam = true;
-    }
-
-    /**
-     * Sets the tokenizer source override for runtime.
-     *
-     * @param v the tokenizer source to set
-     */
-    public static void setTokenizerSource(String v) {
-        tokenizerSource = v;
-    }
-
-    /**
-     * Returns the tokenizer source override for runtime.
-     *
-     * @return the current tokenizer source as a string
-     */
-    public static String getTokenizerSource() {
-        return tokenizerSource;
-    }
-
-    /**
-     * Sets the tokenizer target override for runtime.
-     *
-     * @param v the tokenizer target to set
-     */
-    public static void setTokenizerTarget(String v) {
-        tokenizerTarget = v;
-    }
-
-    /**
-     * Returns the tokenizer target override for runtime.
-     *
-     * @return the current tokenizer target as a string
-     */
-    public static String getTokenizerTarget() {
-        return tokenizerTarget;
-    }
-
-    public static String getAlternateFilenameFrom() {
-        return alternateFilenameFrom;
-    }
-
-    public static void setAlternateFilenameFrom(String v) {
-        alternateFilenameFrom = v;
-    }
-
-    public static String getAlternateFilenameTo() {
-        return alternateFilenameTo;
-    }
-
-    /**
-     * Sets the value of the alternate filename to be used for runtime preferences.
-     *
-     * @param v the alternate filename to set
-     */
-    public static void setAlternateFilenameTo(String v) {
-        alternateFilenameTo = v;
+        if (!v) {
+            RuntimePreferenceStore.getInstance().setLocationSaveDisable();
+        }
     }
 }

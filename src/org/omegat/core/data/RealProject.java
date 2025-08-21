@@ -534,7 +534,7 @@ public class RealProject implements IProject {
      * Lock omegat.project file against rename or move project.
      */
     protected boolean lockProject() {
-        if (!RuntimePreferences.isProjectLockingEnabled()) {
+        if (RuntimePreferenceStore.getInstance().isProjectLockingDisabled()) {
             return true;
         }
         try {
@@ -566,7 +566,7 @@ public class RealProject implements IProject {
      * Unlock omegat.project file against rename or move project.
      */
     protected void unlockProject() {
-        if (!RuntimePreferences.isProjectLockingEnabled()) {
+        if (RuntimePreferenceStore.getInstance().isProjectLockingDisabled()) {
             return;
         }
         try {

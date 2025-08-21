@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.core.data.TestRuntimePreferenceStore;
 
 /**
  * An initializer for ensuring that tests can't pollute (or be polluted by)
@@ -67,5 +68,6 @@ public final class TestPreferencesInitializer {
         Preferences.init();
         Preferences.initFilters();
         Preferences.initSegmentation();
+        TestRuntimePreferenceStore.reset();
     }
 }

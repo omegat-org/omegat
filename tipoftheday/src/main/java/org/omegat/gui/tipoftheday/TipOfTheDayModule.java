@@ -24,6 +24,7 @@
  */
 package org.omegat.gui.tipoftheday;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.util.gui.MenuExtender;
@@ -40,7 +41,7 @@ public final class TipOfTheDayModule {
     // FIXME: disabled for 6.1 release
     static final boolean ENABLED = false;
 
-    private static TipOfTheDayModuleListener listener;
+    private static @Nullable TipOfTheDayModuleListener listener;
 
     private TipOfTheDayModule() {}
 
@@ -52,14 +53,16 @@ public final class TipOfTheDayModule {
 
     @SuppressWarnings("unused")
     public static void unloadPlugins() {
-        CoreEvents.unregisterApplicationEventListener(listener);
-        listener = null;
+        if (listener != null) {
+            CoreEvents.unregisterApplicationEventListener(listener);
+            listener = null;
+        }
     }
 
     public static class TipOfTheDayModuleListener implements IApplicationEventListener {
 
         private final TipOfTheDayController controller = new TipOfTheDayController();
-        private JMenuItem totdMenu;
+        private @Nullable JMenuItem totdMenu;
 
         @Override
         public void onApplicationStartup() {

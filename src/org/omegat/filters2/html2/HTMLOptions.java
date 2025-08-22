@@ -56,10 +56,10 @@ import org.omegat.filters2.AbstractOptions;
  * Start a new paragraph on breaks (&lt;br&gt;) []<br>
  * Skip text matching regExp []<br>
  * Skip content of meta-tag when any of the given attibutename-value pairs is
- * present in the tag
- * Ignore tags matching regexp [] Consider the tag as untranslatable when any of the given
- * attibutename-value pairs is present in the tag
-
+ * present in the tag Ignore tags matching regexp [] Consider the tag as
+ * untranslatable when any of the given attibutename-value pairs is present in
+ * the tag
+ * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
@@ -67,7 +67,7 @@ import org.omegat.filters2.AbstractOptions;
  */
 public class HTMLOptions extends AbstractOptions {
 
-    enum REWRITE_MODE {
+    enum RewriteMode {
         /** (X)HTML filter should always add/rewrite encoding declaration. */
         ALWAYS,
         /**
@@ -106,22 +106,22 @@ public class HTMLOptions extends AbstractOptions {
      * Returns whether and when (X)HTML filter adds/rewrites encoding
      * declaration.
      *
-     * @return One of {@link REWRITE_MODE#ALWAYS}, {@link REWRITE_MODE#IFHEADER}
-     *         , {@link REWRITE_MODE#IFMETA}, {@link REWRITE_MODE#NEVER}.
+     * @return One of {@link RewriteMode#ALWAYS}, {@link RewriteMode#IFHEADER} ,
+     *         {@link RewriteMode#IFMETA}, {@link RewriteMode#NEVER}.
      */
-    public REWRITE_MODE getRewriteEncoding() {
-        return getEnum(REWRITE_MODE.class, OPTION_REWRITE_ENCODING, REWRITE_MODE.IFHEADER);
+    RewriteMode getRewriteEncoding() {
+        return getEnum(RewriteMode.class, OPTION_REWRITE_ENCODING, RewriteMode.IFHEADER);
     }
 
     /**
      * Sets when (X)HTML filter should add/rewrite encoding declaration.
      *
      * @param rewriteEncoding
-     *            One of {@link REWRITE_MODE#ALWAYS},
-     *            {@link REWRITE_MODE#IFHEADER}, {@link REWRITE_MODE#IFMETA},
-     *            {@link REWRITE_MODE#NEVER}.
+     *            One of {@link RewriteMode#ALWAYS},
+     *            {@link RewriteMode#IFHEADER}, {@link RewriteMode#IFMETA},
+     *            {@link RewriteMode#NEVER}.
      */
-    public void setRewriteEncoding(REWRITE_MODE rewriteEncoding) {
+    void setRewriteEncoding(RewriteMode rewriteEncoding) {
         setEnum(OPTION_REWRITE_ENCODING, rewriteEncoding);
     }
 
@@ -242,8 +242,9 @@ public class HTMLOptions extends AbstractOptions {
      * not be translated
      */
     public String getSkipMeta() {
-        return getString(OPTION_SKIP_META, "http-equiv=refresh," + "name=robots," + "name=revisit-after,"
-                + "http-equiv=expires," + "http-equiv=content-style-type," + "http-equiv=content-script-type");
+        return getString(OPTION_SKIP_META,
+                "http-equiv=refresh," + "name=robots," + "name=revisit-after," + "http-equiv=expires,"
+                        + "http-equiv=content-style-type," + "http-equiv=content-script-type");
     }
 
     /**
@@ -254,46 +255,69 @@ public class HTMLOptions extends AbstractOptions {
         setString(OPTION_SKIP_META, skipMeta);
     }
 
-   /**
-     * @return the attribute key-value pairs for which tags should not be translated
+    /**
+     * Retrieves the tags to be ignored during the processing of HTML content.
+     *
+     * @return the attribute key-value pairs for which tags should not be
+     *         translated
      */
     public String getIgnoreTags() {
         return getString(OPTION_IGNORE_TAGS, "");
     }
 
     /**
-     * Sets the attribute key-value pairs for which tags should not be translated
-     * @param ignoreTags The strings containing the key-value pairs
+     * Sets the attribute key-value pairs for which tags should not be
+     * translated
+     * 
+     * @param ignoreTags
+     *            The strings containing the key-value pairs
      */
     public void setIgnoreTags(String ignoreTags) {
         setString(OPTION_IGNORE_TAGS, ignoreTags);
     }
 
     /**
-     * @return Returns whether comments should be removed from the HTML document on generating target documents.
+     * Retrieves the configuration setting that indicates whether comments
+     * should be removed from the HTML document when generating target
+     * documents.
+     *
+     * @return Returns whether comments should be removed from the HTML document
+     *         on generating target documents.
      */
     public boolean getRemoveComments() {
         return getBoolean(OPTION_REMOVE_COMMENTS, false);
     }
 
     /**
-     * Sets whether the comments should be removed from the HTML document on generating target documents.
+     * Sets whether comments should be removed from the HTML document when
+     * generating target documents.
+     *
      * @param removeComments
+     *            a boolean indicating whether comments should be removed from
+     *            the HTML content
      */
     public void setRemoveComments(boolean removeComments) {
         setBoolean(OPTION_REMOVE_COMMENTS, removeComments);
     }
 
     /**
-     * @return Returns whether whitespace should be compressed in the HTML document on generating target documents.
+     * Retrieves the configuration setting that indicates whether whitespace
+     * should be compressed in the HTML document during processing.
+     *
+     * @return Returns whether whitespace should be compressed in the HTML
+     *         document on generating target documents.
      */
     public boolean getCompressWhitespace() {
         return getBoolean(OPTION_COMPRESS_WHITESPACE, false);
     }
 
     /**
-     * Sets whether whitespace should be compressed in the HTML document on generating target documents.
+     * Sets whether whitespace in the HTML document should be compressed during
+     * processing. This affects how the output HTML is formatted by removing
+     * redundant whitespace.
+     *
      * @param compressWhitespace
+     *            a boolean indicating whether whitespace should be compressed
      */
     public void setCompressWhitespace(boolean compressWhitespace) {
         setBoolean(OPTION_COMPRESS_WHITESPACE, compressWhitespace);

@@ -28,11 +28,18 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cz.CzechAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * A tokenizer implementation for the Czech language, extending the functionality of the BaseTokenizer.
+ * This class provides support for tokenizing Czech text with options for handling stop words and stemming.
+ * It leverages the CzechAnalyzer from Apache Lucene to perform language-specific tokenization.
+ * <p>
+ * This tokenizer can be customized by enabling or disabling stemming and stop word filtering based
+ * on the specified parameters.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */

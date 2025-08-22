@@ -29,11 +29,15 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.pl.PolishAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * A tokenizer implementation for the Polish language using the Lucene analysis library.
+ * This tokenizer utilizes the PolishAnalyzer provided by Apache Lucene
+ * to support tokenization with options for stemming and stop words.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik

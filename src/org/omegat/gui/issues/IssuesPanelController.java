@@ -28,29 +28,29 @@ package org.omegat.gui.issues;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.OptionalInt;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -58,10 +58,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import javax.swing.AbstractAction;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -75,13 +72,13 @@ import javax.swing.ListModel;
 import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.DataUtils;
@@ -93,10 +90,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
 import org.omegat.util.StreamUtil;
-import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.OSXIntegration;
-import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TableColumnSizer;
 
@@ -108,52 +103,52 @@ import org.omegat.util.gui.TableColumnSizer;
  */
 public class IssuesPanelController implements IIssues {
 
-    static final String ACTION_KEY_JUMP_TO_SELECTED_ISSUE = "jumpToSelectedIssue";
-    static final String ACTION_KEY_FOCUS_ON_TYPES_LIST = "focusOnTypesList";
-    static final String ALL_FILES_PATTERN = ".*";
-    static final String NO_INSTRUCTIONS = "";
+    private static final String ACTION_KEY_JUMP_TO_SELECTED_ISSUE = "jumpToSelectedIssue";
+    private static final String ACTION_KEY_FOCUS_ON_TYPES_LIST = "focusOnTypesList";
+    private static final String ALL_FILES_PATTERN = ".*";
+    private static final String NO_INSTRUCTIONS = "";
 
-    static final double INNER_SPLIT_INITIAL_RATIO = 0.25d;
-    static final double OUTER_SPLIT_INITIAL_RATIO = 0.5d;
+    private static final double INNER_SPLIT_INITIAL_RATIO = 0.25d;
+    private static final double OUTER_SPLIT_INITIAL_RATIO = 0.5d;
 
-    static final Icon SETTINGS_ICON = new ImageIcon(ResourcesUtil.getBundledImage("appbar.settings.active.png"));
-    static final Icon SETTINGS_ICON_INACTIVE = new ImageIcon(
-            ResourcesUtil.getBundledImage("appbar.settings.inactive.png"));
-    static final Icon SETTINGS_ICON_PRESSED = new ImageIcon(
-            ResourcesUtil.getBundledImage("appbar.settings.pressed.png"));
-    static final Icon SETTINGS_ICON_INVISIBLE = new Icon() {
-        @Override
-        public void paintIcon(Component c, Graphics g, int x, int y) {
-        }
+    private final Window parent;
+    private JFrame frame;
+    private IssuesPanel panel;
+    private TableColumnSizer colSizer;
 
-        @Override
-        public int getIconWidth() {
-            return SETTINGS_ICON.getIconWidth();
-        }
+    private String filePattern;
+    private String instructions;
 
-        @Override
-        public int getIconHeight() {
-            return SETTINGS_ICON.getIconHeight();
-        }
-    };
+    private int selectedEntry = -1;
+    private List<String> selectedTypes = Collections.emptyList();
 
-    final Window parent;
-    JFrame frame;
-    IssuesPanel panel;
-    TableColumnSizer colSizer;
-
-    String filePattern;
-    String instructions;
-
-    int mouseoverCol = -1;
-    int mouseoverRow = -1;
-    int selectedEntry = -1;
-    List<String> selectedTypes = Collections.emptyList();
-
-    IssueLoader loader;
+    private IssueLoader loader;
 
     public IssuesPanelController(Window parent) {
         this.parent = parent;
+    }
+
+    private static final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
+
+    private static boolean isJTextComponent(Component c) {
+        return c instanceof JTextComponent;
+    }
+
+    @VisibleForTesting
+    public IssuesPanel getPanel() {
+        return panel;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
+    }
+
+    private void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+        pcs.firePropertyChange(propertyName, oldValue, newValue);
     }
 
     @SuppressWarnings("serial")
@@ -171,6 +166,7 @@ public class IssuesPanelController implements IIssues {
             OSXIntegration.enableFullScreen(frame);
         }
         panel = new IssuesPanel();
+        panel.setName("issues_panel");
         frame.add(panel);
 
         frame.setJMenuBar(generateMenuBar());
@@ -181,10 +177,9 @@ public class IssuesPanelController implements IIssues {
         panel.innerSplitPane.setDividerLocation(INNER_SPLIT_INITIAL_RATIO);
         panel.outerSplitPane.setDividerLocation(OUTER_SPLIT_INITIAL_RATIO);
 
-        StaticUIUtils.persistGeometry(frame, Preferences.ISSUES_WINDOW_GEOMETRY_PREFIX, () -> {
-            Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM,
-                    panel.outerSplitPane.getDividerLocation());
-        });
+        StaticUIUtils.persistGeometry(frame, Preferences.ISSUES_WINDOW_GEOMETRY_PREFIX,
+                () -> Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM,
+                        panel.outerSplitPane.getDividerLocation()));
 
         try {
             int bottomDL = Integer
@@ -200,83 +195,15 @@ public class IssuesPanelController implements IIssues {
                 reset();
             }
         });
-
-        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
-            String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
-            int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
-            setFont(new Font(fontName, Font.PLAIN, fontSize));
-        }
-
+        setDefaultFont();
         panel.table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 viewSelectedIssueDetail();
                 selectedEntry = getSelectedIssue().map(IIssue::getSegmentNumber).orElse(-1);
             }
         });
-
-        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), ACTION_KEY_JUMP_TO_SELECTED_ISSUE);
-        panel.table.getActionMap().put(ACTION_KEY_JUMP_TO_SELECTED_ISSUE, new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jumpToSelectedIssue();
-            }
-        });
-
-        // Swap focus between the Types list and Issues table; don't allow
-        // tabbing within the table because it's pointless. Maybe this would be
-        // better accomplished by adjusting the focus traversal policy?
-        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, KeyEvent.SHIFT_DOWN_MASK),
-                ACTION_KEY_FOCUS_ON_TYPES_LIST);
-        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), ACTION_KEY_FOCUS_ON_TYPES_LIST);
-        panel.table.getActionMap().put(ACTION_KEY_FOCUS_ON_TYPES_LIST, new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (panel.typeList.isVisible()) {
-                    panel.typeList.requestFocusInWindow();
-                }
-            }
-        });
-
-        panel.closeButton.addActionListener(e -> StaticUIUtils.closeWindowByEvent(frame));
-
-        MouseAdapter adapter = new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                    jumpToSelectedIssue();
-                } else if (e.getButton() == MouseEvent.BUTTON1 && mouseoverCol == IssueColumn.ACTION_BUTTON.index) {
-                    doPopup(e);
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (e.isPopupTrigger()) {
-                    doPopup(e);
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                if (e.isPopupTrigger()) {
-                    doPopup(e);
-                }
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                updateRollover();
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                updateRollover();
-            }
-
-            private void doPopup(MouseEvent e) {
-                getIssueAt(e.getPoint()).ifPresent(issue -> showPopupMenu(e.getComponent(), e.getPoint(), issue));
-            }
-        };
+        setupShortCuts();
+        MouseAdapter adapter = new IssuesPanelMouseAdapter();
         panel.table.addMouseListener(adapter);
         panel.table.addMouseMotionListener(adapter);
 
@@ -287,14 +214,55 @@ public class IssuesPanelController implements IIssues {
             }
         });
 
+        panel.closeButton.addActionListener(e -> StaticUIUtils.closeWindowByEvent(frame));
         panel.jumpButton.addActionListener(e -> jumpToSelectedIssue());
-
         panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedTypes));
-
         panel.showAllButton.addActionListener(e -> showAll());
 
-        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.index, true);
+        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
+        setupProjectChangeListener();
+        setupFontChangeListener();
+        firePropertyChange("panel", null, panel);
+    }
 
+    private void setupShortCuts() {
+        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+                ACTION_KEY_JUMP_TO_SELECTED_ISSUE);
+        panel.table.getActionMap().put(ACTION_KEY_JUMP_TO_SELECTED_ISSUE, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jumpToSelectedIssue();
+            }
+        });
+
+        // Swap focus between the Types list and Issues table; don't allow
+        // tabbing within the table because it's pointless. Maybe this would be
+        // better accomplished by adjusting the focus traversal policy?
+        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, InputEvent.SHIFT_DOWN_MASK),
+                ACTION_KEY_FOCUS_ON_TYPES_LIST);
+        panel.table.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0),
+                ACTION_KEY_FOCUS_ON_TYPES_LIST);
+        panel.table.getActionMap().put(ACTION_KEY_FOCUS_ON_TYPES_LIST, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (panel.typeList.isVisible()) {
+                    panel.typeList.requestFocusInWindow();
+                }
+            }
+        });
+    }
+
+    private void setupFontChangeListener() {
+        CoreEvents.registerFontChangedEventListener(f -> {
+            if (!Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+                f = new JTable().getFont();
+            }
+            setFont(f);
+            viewSelectedIssueDetail();
+        });
+    }
+
+    private void setupProjectChangeListener() {
         CoreEvents.registerProjectChangeListener(e -> {
             switch (e) {
             case CLOSE:
@@ -313,36 +281,25 @@ public class IssuesPanelController implements IIssues {
             default:
             }
         });
+    }
 
-        CoreEvents.registerFontChangedEventListener(f -> {
-            if (!Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
-                f = new JTable().getFont();
-            }
-            setFont(f);
-            viewSelectedIssueDetail();
-        });
+    private void setDefaultFont() {
+        if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
+            String fontName = Preferences.getPreference(Preferences.TF_SRC_FONT_NAME);
+            int fontSize = Integer.parseInt(Preferences.getPreference(Preferences.TF_SRC_FONT_SIZE));
+            setFont(new Font(fontName, Font.PLAIN, fontSize));
+        }
     }
 
     JMenuBar generateMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = menuBar.add(new JMenu(OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS")));
-
-        {
-            // Tags item is hard-coded because it is not disableable and is implemented differently from all
-            // others.
-            JCheckBoxMenuItem tagsItem = new JCheckBoxMenuItem(
-                    OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER",
-                            OStrings.getString("ISSUES_TAGS_PROVIDER_NAME")));
-            tagsItem.setSelected(true);
-            tagsItem.setEnabled(false);
-            menu.add(tagsItem);
-        }
+        setupTagsMenu(menu);
 
         Set<String> disabledProviders = IssueProviders.getDisabledProviderIds();
         IssueProviders.getIssueProviders().stream().sorted(Comparator.comparing(IIssueProvider::getId))
                 .forEach(provider -> {
-                    String label = StringUtil.format(
-                            OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER"),
+                    String label = OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER",
                             provider.getName());
                     JCheckBoxMenuItem item = new JCheckBoxMenuItem(label);
                     item.addActionListener(e -> {
@@ -354,33 +311,49 @@ public class IssuesPanelController implements IIssues {
                 });
 
         menu.addSeparator();
-
-        {
-            JCheckBoxMenuItem askItem = new JCheckBoxMenuItem(
-                    OStrings.getString("ISSUES_WINDOW_MENU_DONT_ASK"));
-            askItem.setSelected(Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK));
-            askItem.addActionListener(e -> Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK,
-                    askItem.isSelected()));
-            menu.add(askItem);
-        }
+        setupAskMenu(menu);
         return menuBar;
+    }
+
+    private static void setupTagsMenu(JMenu menu) {
+        // Tags item is hard-coded because it is not disableable and is
+        // implemented differently from all
+        // others.
+        JCheckBoxMenuItem tagsItem = new JCheckBoxMenuItem(
+                OStrings.getString("ISSUES_WINDOW_MENU_OPTIONS_TOGGLE_PROVIDER",
+                        OStrings.getString("ISSUES_TAGS_PROVIDER_NAME")));
+        tagsItem.setSelected(true);
+        tagsItem.setEnabled(false);
+        menu.add(tagsItem);
+    }
+
+    private static void setupAskMenu(JMenu menu) {
+        JCheckBoxMenuItem askItem = new JCheckBoxMenuItem(OStrings.getString("ISSUES_WINDOW_MENU_DONT_ASK"));
+        askItem.setSelected(Preferences.isPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK));
+        askItem.addActionListener(
+                e -> Preferences.setPreference(Preferences.ISSUE_PROVIDERS_DONT_ASK, askItem.isSelected()));
+        menu.add(askItem);
     }
 
     void updateRollover() {
         // Rows here are all in terms of the view, not the model.
-        Point point = panel.table.getMousePosition();
-        int oldRow = mouseoverRow;
-        int oldCol = mouseoverCol;
-        int newRow = point == null ? -1 : panel.table.rowAtPoint(point);
-        int newCol = point == null ? -1 : panel.table.columnAtPoint(point);
-        boolean doRepaint = newRow != oldRow || newCol != oldCol;
-        mouseoverRow = newRow;
-        mouseoverCol = newCol;
-        if (doRepaint) {
-            Rectangle rect = panel.table.getCellRect(oldRow, IssueColumn.ACTION_BUTTON.index, true);
-            panel.table.repaint(rect);
-            rect = panel.table.getCellRect(newRow, IssueColumn.ACTION_BUTTON.index, true);
-            panel.table.repaint(rect);
+        TableModel model = panel.table.getModel();
+        if (model instanceof IssuesTableModel) {
+            IssuesTableModel imodel = (IssuesTableModel) model;
+            int oldRow = imodel.getMouseoverRow();
+            int oldCol = imodel.getMouseoverCol();
+            Point point = panel.table.getMousePosition();
+            int newRow = point == null ? -1 : panel.table.rowAtPoint(point);
+            int newCol = point == null ? -1 : panel.table.columnAtPoint(point);
+            boolean doRepaint = newRow != oldRow || newCol != oldCol;
+            imodel.setMouseoverRow(newRow);
+            imodel.setMouseoverCol(newCol);
+            if (doRepaint) {
+                Rectangle rect = panel.table.getCellRect(oldRow, IssueColumn.ACTION_BUTTON.getIndex(), true);
+                panel.table.repaint(rect);
+                rect = panel.table.getCellRect(newRow, IssueColumn.ACTION_BUTTON.getIndex(), true);
+                panel.table.repaint(rect);
+            }
         }
     }
 
@@ -395,7 +368,8 @@ public class IssuesPanelController implements IIssues {
         issue.map(IIssue::getDetailComponent).ifPresent(comp -> {
             if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
                 Font font = Core.getMainWindow().getApplicationFont();
-                StaticUIUtils.visitHierarchy(comp, c -> c instanceof JTextComponent, c -> c.setFont(font));
+                StaticUIUtils.visitHierarchy(comp, IssuesPanelController::isJTextComponent,
+                        c -> c.setFont(font));
             }
             panel.outerSplitPane.setBottomComponent(comp);
         });
@@ -406,7 +380,7 @@ public class IssuesPanelController implements IIssues {
         getSelectedIssue().map(IIssue::getSegmentNumber).ifPresent(i -> {
             Core.getEditor().gotoEntry(i);
             JFrame mwf = Core.getMainWindow().getApplicationFrame();
-            mwf.setState(JFrame.NORMAL);
+            mwf.setState(Frame.NORMAL);
             mwf.toFront();
         });
     }
@@ -445,10 +419,10 @@ public class IssuesPanelController implements IIssues {
             return Collections.emptyList();
         }
         ListModel<String> model = panel.typeList.getModel();
-        if (!(model instanceof TypeListModel)) {
+        if (!(model instanceof IssuesTypeListModel)) {
             return Collections.emptyList();
         }
-        TypeListModel tModel = (TypeListModel) model;
+        IssuesTypeListModel tModel = (IssuesTypeListModel) model;
         return tModel.getTypesAt(rows);
     }
 
@@ -520,7 +494,7 @@ public class IssuesPanelController implements IIssues {
             // steal focus
             frame.setVisible(true);
         }
-        frame.setState(JFrame.NORMAL);
+        frame.setState(Frame.NORMAL);
         panel.progressBar.setValue(0);
         panel.progressBar.setMaximum(Core.getProject().getAllEntries().size());
         panel.progressBar.setVisible(true);
@@ -549,21 +523,18 @@ public class IssuesPanelController implements IIssues {
             List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
             Stream<IIssue> providerIssues = getProviderIssues(providers, filePattern);
             List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
-            Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST,
-                    () -> String.format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
+            Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST, () -> String
+                    .format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
             return result;
         }
 
         private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String filePattern) {
-            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries().parallelStream()
-                    .filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
-                    .filter(this::progressFilter)
-                    .map(this::makeEntryPair)
-                    .filter(Objects::nonNull);
+            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries()
+                    .parallelStream().filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
+                    .filter(this::progressFilter).map(this::makeEntryPair).filter(Objects::nonNull);
 
-            return entriesStream.flatMap(entry ->
-                    providers.stream()
-                            .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
+            return entriesStream.flatMap(entry -> providers.stream()
+                    .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
         }
 
         Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
@@ -578,7 +549,7 @@ public class IssuesPanelController implements IIssues {
             if (isShowingAllFiles() && DataUtils.isDuplicate(ste, tmxEntry)) {
                 return null;
             }
-            return new AbstractMap.SimpleImmutableEntry<SourceTextEntry, TMXEntry>(ste, tmxEntry);
+            return new AbstractMap.SimpleImmutableEntry<>(ste, tmxEntry);
         }
 
         boolean progressFilter(SourceTextEntry ste) {
@@ -621,11 +592,11 @@ public class IssuesPanelController implements IIssues {
 
             panel.progressBar.setVisible(false);
             StaticUIUtils.setHierarchyEnabled(panel, true);
-            panel.typeList.setModel(new TypeListModel(allIssues));
-            panel.table.setModel(new IssuesTableModel(allIssues));
+            panel.typeList.setModel(new IssuesTypeListModel(allIssues));
             TableRowSorter<?> sorter = (TableRowSorter<?>) panel.table.getRowSorter();
-            sorter.setSortable(IssueColumn.ICON.index, false);
-            sorter.toggleSortOrder(IssueColumn.SEG_NUM.index);
+            panel.table.setModel(new IssuesTableModel(panel.table, sorter, allIssues));
+            sorter.setSortable(IssueColumn.ICON.getIndex(), false);
+            sorter.toggleSortOrder(IssueColumn.SEG_NUM.getIndex());
             panel.typeList.setSelectedIndex(0);
             // Hide Types list if we have fewer than 3 items ("All" and at least
             // two others)
@@ -640,33 +611,38 @@ public class IssuesPanelController implements IIssues {
             colSizer.reset();
             colSizer.adjustTableColumns();
             if (!jumpToTypes.isEmpty()) {
-                int[] indicies = ((TypeListModel) panel.typeList.getModel()).indiciesOfTypes(jumpToTypes);
+                int[] indicies = ((IssuesTypeListModel) panel.typeList.getModel())
+                        .indiciesOfTypes(jumpToTypes);
                 if (indicies.length > 0) {
                     panel.typeList.setSelectedIndices(indicies);
                 }
             }
             if (jumpToEntry >= 0) {
                 IntStream.range(0, panel.table.getRowCount())
-                        .filter(row -> (int) panel.table.getValueAt(row, IssueColumn.SEG_NUM.index) >= jumpToEntry)
+                        .filter(row -> (int) panel.table.getValueAt(row,
+                                IssueColumn.SEG_NUM.getIndex()) >= jumpToEntry)
                         .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
+            super.firePropertyChange("table", null, null);
         }
     }
 
-    void updateFilter() {
+    private void updateFilter() {
         int[] selection = panel.typeList.getSelectedIndices();
         if (selection.length == 0) {
             return;
         }
-        TypeListModel model = ((TypeListModel) panel.typeList.getModel());
+        IssuesTypeListModel model = ((IssuesTypeListModel) panel.typeList.getModel());
         List<String> types = model.getTypesAt(selection);
         @SuppressWarnings("unchecked")
-        TableRowSorter<IssuesTableModel> sorter = (TableRowSorter<IssuesTableModel>) panel.table.getRowSorter();
+        TableRowSorter<IssuesTableModel> sorter = (TableRowSorter<IssuesTableModel>) panel.table
+                .getRowSorter();
         sorter.setRowFilter(new RowFilter<IssuesTableModel, Integer>() {
             @Override
             public boolean include(RowFilter.Entry<? extends IssuesTableModel, ? extends Integer> entry) {
-                return types.contains(ALL_TYPES) || types.contains(entry.getStringValue(IssueColumn.TYPE.index));
+                return types.contains(ALL_TYPES)
+                        || types.contains(entry.getStringValue(IssueColumn.TYPE.getIndex()));
             }
         });
         int totalItems = panel.table.getModel().getRowCount();
@@ -678,171 +654,73 @@ public class IssuesPanelController implements IIssues {
         panel.table.changeSelection(0, 0, false, false);
     }
 
-    void updateTitle(int totalItems) {
+    private void updateTitle(int totalItems) {
         if (isShowingAllFiles()) {
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE"), totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE", totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE"),
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE",
                     FilenameUtils.getName(filePath), totalItems));
         }
     }
 
     void updateTitle(int shownItems, int totalItems) {
         if (isShowingAllFiles()) {
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE"), shownItems,
-                    totalItems));
+            frame.setTitle(
+                    OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
             String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(StringUtil.format(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE"),
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE",
                     FilenameUtils.getName(filePath), shownItems, totalItems));
         }
     }
 
-    boolean isShowingAllFiles() {
+    private boolean isShowingAllFiles() {
         return ALL_FILES_PATTERN.equals(filePattern);
     }
 
-    enum IssueColumn {
-        SEG_NUM(0, OStrings.getString("ISSUES_TABLE_COLUMN_ENTRY_NUM"), Integer.class),
-        ICON(1, "", Icon.class),
-        TYPE(2, OStrings.getString("ISSUES_TABLE_COLUMN_TYPE"), String.class),
-        DESCRIPTION(3, OStrings.getString("ISSUES_TABLE_COLUMN_DESCRIPTION"), String.class),
-        ACTION_BUTTON(4, "", Icon.class);
+    static final String ALL_TYPES = OStrings.getString("ISSUES_TYPE_ALL");
 
-        private final int index;
-        private final String label;
-        private final Class<?> clazz;
-
-        IssueColumn(int index, String label, Class<?> clazz) {
-            this.index = index;
-            this.label = label;
-            this.clazz = clazz;
-        }
-
-        static IssueColumn get(int index) {
-            return values()[index];
-        }
-    }
-
-    Icon getActionMenuIcon(IIssue issue, int modelRow, int col) {
-        // The row argument is in terms of the model while mouseoverRow is in
-        // terms of the view, so convert first.
-        int viewRow = panel.table.getRowSorter().convertRowIndexToView(modelRow);
-        if (!issue.hasMenuComponents()) {
-            return SETTINGS_ICON_INVISIBLE;
-        } else if (panel.table.getSelectedRow() == viewRow) {
-            // Show "pressed" version here for better contrast against the table
-            // selection highlight.
-            return SETTINGS_ICON_PRESSED;
-        } else if (viewRow == mouseoverRow && col == mouseoverCol) {
-            return SETTINGS_ICON;
-        } else if (viewRow == mouseoverRow) {
-            return SETTINGS_ICON_INACTIVE;
-        } else {
-            return SETTINGS_ICON_INVISIBLE;
-        }
-    }
-
-    @SuppressWarnings("serial")
-    class IssuesTableModel extends AbstractTableModel {
-
-        private final List<IIssue> issues;
-
-        IssuesTableModel(List<IIssue> issues) {
-            this.issues = issues;
-        }
-
+    private class IssuesPanelMouseAdapter extends MouseAdapter {
         @Override
-        public int getRowCount() {
-            return issues.size();
-        }
-
-        @Override
-        public int getColumnCount() {
-            return IssueColumn.values().length;
-        }
-
-        @Override
-        public String getColumnName(int column) {
-            return IssueColumn.get(column).label;
-        }
-
-        @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            IIssue iss = issues.get(rowIndex);
-            switch (IssueColumn.get(columnIndex)) {
-            case SEG_NUM:
-                return iss.getSegmentNumber();
-            case ICON:
-                return iss.getIcon();
-            case TYPE:
-                return iss.getTypeName();
-            case DESCRIPTION:
-                return iss.getDescription();
-            case ACTION_BUTTON:
-                return getActionMenuIcon(iss, rowIndex, columnIndex);
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                jumpToSelectedIssue();
+                return;
             }
-            throw new IllegalArgumentException("Unknown column requested: " + columnIndex);
-        }
-
-        public IIssue getIssueAt(int rowIndex) {
-            return issues.get(rowIndex);
-        }
-
-        @Override
-        public Class<?> getColumnClass(int columnIndex) {
-            return IssueColumn.get(columnIndex).clazz;
-        }
-    }
-
-    static final String ALL_TYPES = new String(OStrings.getString("ISSUES_TYPE_ALL"));
-
-    @SuppressWarnings("serial")
-    static class TypeListModel extends AbstractListModel<String> {
-
-        private final List<Map.Entry<String, Long>> types;
-
-        TypeListModel(List<IIssue> issues) {
-            this.types = calculateData(issues);
-        }
-
-        List<Map.Entry<String, Long>> calculateData(List<IIssue> issues) {
-            Map<String, Long> counts = issues.stream()
-                    .map(IIssue::getTypeName)
-                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-            List<Map.Entry<String, Long>> result = new ArrayList<>();
-            result.add(new AbstractMap.SimpleImmutableEntry<String, Long>(ALL_TYPES,
-                    (long) issues.size()));
-            counts.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey)).forEach(result::add);
-            return result;
+            TableModel model = panel.table.getModel();
+            if (model instanceof IssuesTableModel && e.getButton() == MouseEvent.BUTTON1
+                    && ((IssuesTableModel) model).getMouseoverCol() == IssueColumn.ACTION_BUTTON.getIndex()) {
+                doPopup(e);
+            }
         }
 
         @Override
-        public int getSize() {
-            return types.size();
+        public void mousePressed(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e);
+            }
         }
 
         @Override
-        public String getElementAt(int index) {
-            Map.Entry<String, Long> entry = types.get(index);
-            return StringUtil.format(OStrings.getString("ISSUES_TYPE_SUMMARY_TEMPLATE"), entry.getKey(),
-                    entry.getValue());
+        public void mouseReleased(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                doPopup(e);
+            }
         }
 
-        List<String> getTypesAt(int[] indicies) {
-            return IntStream.of(indicies).mapToObj(types::get).map(Map.Entry::getKey).collect(Collectors.toList());
+        @Override
+        public void mouseExited(MouseEvent e) {
+            updateRollover();
         }
 
-        long getCountAt(int[] indicies) {
-            return IntStream.of(indicies).mapToObj(types::get).mapToLong(Map.Entry::getValue).sum();
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            updateRollover();
         }
 
-        int[] indiciesOfTypes(List<String> queryTypes) {
-            return queryTypes
-                    .stream().map(type -> IntStream.range(0, queryTypes.size())
-                            .filter(i -> types.get(i).getKey().equals(type)).findFirst())
-                    .filter(OptionalInt::isPresent).mapToInt(OptionalInt::getAsInt).toArray();
+        private void doPopup(MouseEvent e) {
+            getIssueAt(e.getPoint()).ifPresent(issue -> showPopupMenu(e.getComponent(), e.getPoint(), issue));
         }
     }
 }

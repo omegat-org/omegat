@@ -27,11 +27,18 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.bg.BulgarianAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * The LuceneBulgarianTokenizer class is a tokenizer implementation designed for processing
+ * Bulgarian text. It extends the BaseTokenizer class and provides customized behavior for
+ * tokenization based on the specified properties such as stemming and stop words filtering.
+ * <p>
+ * This class utilizes the Lucene BulgarianAnalyzer to perform tokenization and optionally applies
+ * stemming and stop word removal based on the configuration.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "bg" })

@@ -251,6 +251,10 @@ public abstract class TmxComplianceBase {
         public boolean existEntryInProject(EntryKey key) {
             return true;
         }
+
+        public void clear() {
+            // do nothing
+        }
     };
 
     protected static class TestProjectProperties extends ProjectProperties {

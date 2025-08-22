@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omegat-stats>
+    <project name="testProject" root="" source-language="English" target-language="French"/>
+    <total segments="0" words="0" characters-without-spaces="0" characters="0" files="0"/>
+    <remaining segments="0" words="0" characters-without-spaces="0" characters="0" files="0"/>
+    <unique segments="0" words="0" characters-without-spaces="0" characters="0" files="0"/>
+    <unique-remaining segments="0" words="0" characters-without-spaces="0" characters="0" files="0"/>
+    <files>
+        <filename>file1.txt</filename>
+        <total segments="1" words="5" characters-without-spaces="18" characters="22" files="0"/>
+        <unique segments="0" words="0" characters-without-spaces="0" characters="0" files="0"/>
+        <remaining segments="0" words="0" characters-without-spaces="0" characters="0" files="0"/>
+        <unique-remaining segments="0" words="0" characters-without-spaces="0" characters="0" files="0"/>
+    </files>
+    <date>20250710T084935Z</date>
+</omegat-stats>

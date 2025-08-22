@@ -25,6 +25,8 @@
 
 package org.omegat.filters2;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.Dialog;
 import java.awt.Window;
 import java.io.File;
@@ -130,7 +132,6 @@ public interface IFilter {
      *            processing context
      * @param callback
      *            callback for parsed data
-     * @throws Exception
      */
     void parseFile(File inFile, Map<String, String> config, FilterContext context, IParseCallback callback)
             throws Exception;
@@ -148,7 +149,6 @@ public interface IFilter {
      *            processing context
      * @param callback
      *            callback for get translation
-     * @throws Exception
      */
     void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext context,
             ITranslateCallback callback) throws Exception;
@@ -185,7 +185,7 @@ public interface IFilter {
      * @return new options or null if options not changed
      */
     @Deprecated
-    Map<String, String> changeOptions(Dialog parent, Map<String, String> config);
+    Map<String, String> changeOptions(@Nullable Dialog parent, Map<String, String> config);
 
     /**
      * Show change options dialog for able to change options.

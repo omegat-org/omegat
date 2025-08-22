@@ -8,6 +8,7 @@
                2011 Alex Buloichik, Didier Briel,
                2012 Guido Leenders
                2015 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -41,6 +42,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -49,6 +51,8 @@ import java.util.Objects;
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.input.BOMInputStream;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.EncodingDetector;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
@@ -132,8 +136,8 @@ public abstract class AbstractFilter implements IFilter {
     /** Microsoft. */
     public static final String TFP_TARGET_LOCALE_LCID = "${targetLocaleLCID}";
 
-    protected String inEncodingLastParsedFile;
-    protected ByteOrderMark bomLastParsedFile;
+    protected @Nullable String inEncodingLastParsedFile;
+    protected @Nullable ByteOrderMark bomLastParsedFile;
 
     /** All target filename patterns. */
     private static final String[] TARGET_FILENAME_PATTERNS = new String[] { TFP_FILENAME, TFP_NAMEONLY,
@@ -151,16 +155,16 @@ public abstract class AbstractFilter implements IFilter {
     }
 
     /** Callback for parse. */
-    protected IParseCallback entryParseCallback;
+    protected @Nullable IParseCallback entryParseCallback;
 
     /** Callback for translate. */
-    protected ITranslateCallback entryTranslateCallback;
+    protected @Nullable ITranslateCallback entryTranslateCallback;
 
     /** Callback for align. */
-    protected IAlignCallback entryAlignCallback;
+    protected @Nullable IAlignCallback entryAlignCallback;
 
     /** Options for processing time. */
-    protected Map<String, String> processOptions;
+    protected Map<String, String> processOptions = new HashMap<>();
 
     /**
      * The default output filename pattern.
@@ -220,21 +224,23 @@ public abstract class AbstractFilter implements IFilter {
     public abstract boolean isTargetEncodingVariable();
 
     /**
-     * Returns whether the file is supported by the filter, given the reader
-     * with file's contents. There exists a version of this method that takes
-     * file and encoding {@link #isFileSupported(File, Map, FilterContext))}.
-     * You should override only one of the two.
+     * Checks if the file is supported by the filter using its content.
      * <p>
-     * By default, returns true, because this method should be overridden only
-     * by filters that differentiate input files not by extensions, but by
-     * file's content.
+     * This method should be overridden by filters that inspect the file's
+     * content rather than its extension. * For instance, DocBook files have a
+     * `.xml` extension, which is shared by many XML files. Such filters should
+     * examine the document's DTD to differentiate DocBook files from others.
      * <p>
-     * For example, DocBook files have .xml extension, as possibly many other
-     * XML files, so the filter should check a DTD of the document.
+     * Note: There is a complementary version of this method that takes a file
+     * and encoding:
+     * {@link org.omegat.filters2.AbstractFilter#isFileSupported(File, Map, FilterContext)}.
+     * Typically, you should override only one of these methods.
      *
      * @param reader
-     *            The reader of the source file
-     * @return Does the filter support the file
+     *            A {@link BufferedReader} providing the content of the source
+     *            file.
+     * @return {@code true} if the filter supports the file; otherwise,
+     *         {@code false}.
      */
     protected boolean isFileSupported(BufferedReader reader) {
         return true;
@@ -300,13 +306,10 @@ public abstract class AbstractFilter implements IFilter {
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Deprecated
     @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
-        return null;
+        return Collections.emptyMap();
     }
 
     /**
@@ -334,7 +337,7 @@ public abstract class AbstractFilter implements IFilter {
         if (bomLastParsedFile != null) {
             charset = bomLastParsedFile.getCharsetName();
         } else {
-            charset = Objects.requireNonNullElseGet(inEncoding, () -> StandardCharsets.UTF_8.name());
+            charset = Objects.requireNonNullElseGet(inEncoding, StandardCharsets.UTF_8::name);
         }
         return new BufferedReader(new InputStreamReader(bomInputStream, charset));
     }
@@ -353,7 +356,7 @@ public abstract class AbstractFilter implements IFilter {
      * @throws IOException
      *             If any I/O Error occurs upon writer creation
      */
-    protected BufferedWriter createWriter(File outFile, String outEncoding)
+    protected @Nullable BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException {
         if (outFile == null) {
             return null;
@@ -433,22 +436,24 @@ public abstract class AbstractFilter implements IFilter {
      * @throws TranslationException
      *             Should be thrown when processed file has any format defects.
      */
-    protected void processFile(File inFile, File outFile, FilterContext fc)
+    protected void processFile(File inFile, @Nullable File outFile, FilterContext fc)
             throws IOException, TranslationException {
         String encoding = getInputEncoding(fc, inFile);
         try (BufferedReader reader = createReader(inFile, encoding)) {
             inEncodingLastParsedFile = encoding == null ? Charset.defaultCharset().name() : encoding;
-            BufferedWriter writer;
-            if (outFile != null) {
-                String outEncoding = getOutputEncoding(fc);
-                writer = createWriter(outFile, outEncoding);
-            } else {
-                writer = new NullBufferedWriter();
-            }
+            BufferedWriter writer = null;
             try {
+                if (outFile != null) {
+                    String outEncoding = getOutputEncoding(fc);
+                    writer = createWriter(outFile, outEncoding);
+                } else {
+                    writer = new NullBufferedWriter();
+                }
                 processFile(reader, writer, fc);
             } finally {
-                writer.close();
+                if (writer != null) {
+                    writer.close();
+                }
             }
         }
     }
@@ -459,10 +464,13 @@ public abstract class AbstractFilter implements IFilter {
      * ({@link #isSourceEncodingVariable()}), try to detect it. The result may
      * be null.
      * 
-     * @param fc FilterContext to use.
-     * @param inFile target file to determine encoding.
+     * @param fc
+     *            FilterContext to use.
+     * @param inFile
+     *            target file to determine encoding.
      * @return encoding name.
-     * @throws IOException when I/O error occurred.
+     * @throws IOException
+     *             when I/O error occurred.
      */
     protected String getInputEncoding(FilterContext fc, File inFile) throws IOException {
         String encoding = fc.getInEncoding();
@@ -482,7 +490,8 @@ public abstract class AbstractFilter implements IFilter {
      * </ul>
      * The result may be null.
      * 
-     * @param fc Filter Context to use.
+     * @param fc
+     *            Filter Context to use.
      * @return Encoding to write.
      */
     protected String getOutputEncoding(FilterContext fc) {
@@ -499,16 +508,16 @@ public abstract class AbstractFilter implements IFilter {
         return encoding;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public final void parseFile(File inFile, Map<String, String> config, FilterContext fc,
-            IParseCallback callback) throws Exception {
+    public final void parseFile(File inFile, @Nullable Map<String, String> config, FilterContext fc,
+            @NotNull IParseCallback callback) throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
         entryAlignCallback = null;
-        processOptions = config;
+        processOptions.clear();
+        if (config != null) {
+            processOptions.putAll(config);
+        }
 
         try {
             processFile(inFile, null, fc);
@@ -518,20 +527,20 @@ public abstract class AbstractFilter implements IFilter {
             }
         } finally {
             entryParseCallback = null;
-            processOptions = null;
+            processOptions.clear();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public final void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
-            IAlignCallback callback) throws Exception {
+    public final void alignFile(File inFile, File outFile, @Nullable Map<String, String> config, FilterContext fc,
+            @NotNull IAlignCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = null;
         entryAlignCallback = callback;
-        processOptions = config;
+        processOptions.clear();
+        if (config != null) {
+            processOptions.putAll(config);
+        }
         try (BufferedReader readerIn = createReader(inFile, fc.getInEncoding());
                 BufferedReader readerOut = createReader(outFile, fc.getOutEncoding())) {
             alignFile(readerIn, readerOut, fc, inFile.getName());
@@ -540,8 +549,8 @@ public abstract class AbstractFilter implements IFilter {
 
     /**
      * Align source file against translated file. If this function is not
-     * overridden, then alignment in console mode will not be available for
-     * this filter.
+     * overridden, then alignment in console mode will not be available for this
+     * filter.
      * <p>
      * Implementations should call entryAlignCallback.addTranslation with source
      * and target text, and with source file path.
@@ -589,16 +598,14 @@ public abstract class AbstractFilter implements IFilter {
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public final void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
-            ITranslateCallback callback) throws Exception {
+            @NotNull ITranslateCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = callback;
         entryAlignCallback = null;
-        processOptions = config;
+        processOptions.clear();
+        processOptions.putAll(config);
 
         try {
             entryTranslateCallback.setPass(1);
@@ -610,7 +617,7 @@ public abstract class AbstractFilter implements IFilter {
             }
         } finally {
             entryTranslateCallback = null;
-            processOptions = null;
+            processOptions.clear();
         }
     }
 
@@ -652,28 +659,24 @@ public abstract class AbstractFilter implements IFilter {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, comment, null, this, null);
             return entry;
-        } else {
+        } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);
             return translation != null ? translation : entry;
+        } else {
+            return entry;
         }
     }
 
     /**
      * Set both callbacks. Used for child XML filters only.
-     *
-     * @param parseCallback
-     * @param translateCallback
      */
-    public void setCallbacks(IParseCallback parseCallback, ITranslateCallback translateCallback) {
+    public void setCallbacks(@Nullable IParseCallback parseCallback, @Nullable ITranslateCallback translateCallback) {
         this.entryParseCallback = parseCallback;
         this.entryTranslateCallback = translateCallback;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public String getInEncodingLastParsedFile() {
+    public @Nullable String getInEncodingLastParsedFile() {
         return inEncodingLastParsedFile;
     }
 

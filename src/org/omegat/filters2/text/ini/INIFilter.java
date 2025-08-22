@@ -78,8 +78,7 @@ public class INIFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.ini"),
-                                new Instance("*.lng"),
+        return new Instance[] { new Instance("*.ini"), new Instance("*.lng"),
                 new Instance("*.strings", StandardCharsets.UTF_8.name(), StandardCharsets.UTF_8.name()) };
     }
 
@@ -123,8 +122,12 @@ public class INIFilter extends AbstractFilter {
      * Doing the processing of the file...
      */
     @Override
-    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc)
+            throws IOException {
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
+                                                                                // for
+                                                                                // bug
+                                                                                // 1462566
         String str;
         String group = null;
         String key = null;
@@ -170,9 +173,6 @@ public class INIFilter extends AbstractFilter {
             // We extract each continuation line as a separate value only
             // because the current implementation of the filter doesn't allow us
             // to build a complete value.
-            //
-            // TODO: Parse values with continuation lines as a single, multiline
-            // value
             if (equalsPos == -1) {
                 if (key == null) {
                     // In a malformed file there might not be a key, in which
@@ -205,7 +205,8 @@ public class INIFilter extends AbstractFilter {
                 afterEqualsPos = str.offsetByCodePoints(equalsPos, 1);
                 contlines = 0;
             }
-            // writing out everything before = (and = itself), or spaces before text in continuous line.
+            // writing out everything before = (and = itself), or spaces before
+            // text in continuous line.
             outfile.write(str.substring(0, afterEqualsPos));
             value = str.substring(afterEqualsPos);
             value = leftTrim(value);
@@ -240,8 +241,8 @@ public class INIFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc, String sourcePath)
-            throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc,
+            String sourcePath) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
@@ -251,7 +252,7 @@ public class INIFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr)) {
+            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, sourcePath, this);
             }
         }

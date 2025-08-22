@@ -90,6 +90,7 @@ import javax.swing.text.StyledDocument;
 
 import org.apache.commons.io.FilenameUtils;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
@@ -1253,7 +1254,7 @@ public class AlignPanelController {
         }
 
         @Override
-        public Object getValueAt(int row, int column) {
+        public @Nullable Object getValueAt(int row, int column) {
             MutableBead bead;
             switch (column) {
             case COL_CHECKBOX - 3:

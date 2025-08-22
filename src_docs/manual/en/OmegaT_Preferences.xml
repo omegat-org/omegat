@@ -886,8 +886,17 @@
 
 		  <para>Use this option to force OmegaT to register such entries and
 		  count them as translated.</para>
+
 		</listitem>
 	  </varlistentry>
+
+		<varlistentry id="dialogs.preferences.editor.activate.segment.with.single.click">
+			<term id="dialogs.preferences.editor.activate.segment.with.single.click.title"><link linkend="dialogs.preferences.editor.activate.segment.with.single.click"> </link><option>Activate segment with single click</option></term>
+			<listitem>
+				<para>By default, OmegaT requires a double-click to enter the segment under the cursor. Use this option if you prefer to enter segments with a single-click.</para>
+				<note><para>If the cursor is unlocked, neither single-clicking nor double-clicking can be used to enter the segment. See the <link linkend="panes.editor.cursor.lock" endterm="panes.editor.cursor.lock.title"/> setting.</para></note>
+			</listitem>
+		</varlistentry>
 
 	  <varlistentry id="dialogs.preferences.editor.export.the.segment.to.text.files">
         <term id="dialogs.preferences.editor.export.the.segment.to.text.files.title"><link linkend="dialogs.preferences.editor.export.the.segment.to.text.files"> </link><option>Export the segment to a text file</option></term>

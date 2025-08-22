@@ -5,13 +5,21 @@ on:
     branches:
       - master
       - releases/*
+    paths-ignore:
+      - 'ci/**'
+      - 'src_docs/**'
+      - '*.md'
   pull_request:
+    paths-ignore:
+      - 'ci/**'
+      - 'src_docs/**'
+      - '*.md'
 
 jobs:
   gradle:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: actions/setup-java@v4
       with:
         java-version: 17
@@ -20,7 +28,7 @@ jobs:
       name: Setup Gradle
       id: setup-gradle
     - name: Run gradle build
-      run: ./gradlew -PenvIsCi=true -Pheadless=true --scan check
+      run: ./gradlew -PenvIsCi=true -Pheadless=true -PtestMaxHeapSize=2048M --scan check
       id: gradle
     - name: Check git repository clean
       run: |

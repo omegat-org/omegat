@@ -12,22 +12,15 @@ dependencies {
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.slf4j.format.jdk14)
-        compileOnly(libs.languagetool.core) {
-            exclude module: 'guava'
-            exclude module: 'language-detector'
-            exclude group: 'com.google.android'
-            exclude module: 'jackson-databind'
-            exclude group: 'org.jetbrains'
-            exclude module: 'commons-text'
-            exclude module: 'commons-lang3'
-            exclude module: 'commons-logging'
-        }
+        compileOnly(libs.languagetool.core)
         compileOnly(libs.lucene.analyzers.common)
         compileOnly(libs.dumont.hunspell)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
-    testImplementation(testFixtures(project.rootProject))
+    testImplementation(testFixtures(project.rootProject)) {
+        exclude module: 'wiremock'
+    }
     testImplementation(libs.languagetool.core)
     testImplementation(libs.commons.io)
     testImplementation(project(":language-modules:de"))

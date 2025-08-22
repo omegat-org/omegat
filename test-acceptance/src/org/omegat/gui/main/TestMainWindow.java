@@ -32,6 +32,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.FontUIResource;
 
+import org.omegat.core.data.IProject;
+import org.omegat.core.data.TestCoreState;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -73,17 +76,14 @@ class TestMainWindow implements IMainWindow {
      */
     private final List<SearchWindowController> searches = new ArrayList<>();
 
-    TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException {
+    TestMainWindow(Class<? extends BaseMainWindowMenuHandler> mainWindowMenuHandler) throws IOException,
+            NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         applicationFrame = new JFrame();
         applicationFrame.setPreferredSize(new Dimension(1920, 1040));
         font = FontUtil.getScaledFont();
-        try {
-            BaseMainWindowMenuHandler handler = mainWindowMenuHandler
-                    .getDeclaredConstructor(IMainWindow.class).newInstance(this);
-            menu = new TestCoreGUI.TestMainWindowMenu(this, handler);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
+        BaseMainWindowMenuHandler handler = mainWindowMenuHandler
+                .getDeclaredConstructor(IMainWindow.class).newInstance(this);
+        menu = new TestCoreGUI.TestMainWindowMenu(this, handler);
         applicationFrame.setJMenuBar(menu.mainMenu);
         applicationFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -94,8 +94,8 @@ class TestMainWindow implements IMainWindow {
             }
         });
         applicationFrame.getContentPane().add(desktop, BorderLayout.CENTER);
-        MainWindowStatusBar mainWindowStatusBar = new MainWindowStatusBar();
-        applicationFrame.getContentPane().add(mainWindowStatusBar, BorderLayout.SOUTH);
+        MainWindowStatusBarController mainWindowStatusBarController = new MainWindowStatusBarController();
+        applicationFrame.getContentPane().add(mainWindowStatusBarController.getUI(), BorderLayout.SOUTH);
 
         StaticUIUtils.setWindowIcon(applicationFrame);
 
@@ -109,6 +109,7 @@ class TestMainWindow implements IMainWindow {
         });
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
             public void onApplicationStartup() {
                 initializeScreenLayout();
                 // Ensure any "closed" Dockables are visible. These can be newly
@@ -118,7 +119,7 @@ class TestMainWindow implements IMainWindow {
                 UIDesignManager.ensureDockablesVisible(desktop);
                 UIDesignManager.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
-
+            @Override
             public void onApplicationShutdown() {
             }
         });
@@ -130,7 +131,8 @@ class TestMainWindow implements IMainWindow {
 
         // Set up prompt to reload if segmentation or filters settings change
         Preferences.addPropertyChangeListener(evt -> {
-            if (Core.getProject().isProjectLoaded()) {
+            IProject project = TestCoreState.getInstance().getProject();
+            if (project != null && project.isProjectLoaded()) {
                 String prop = evt.getPropertyName();
                 if (prop.equals(Preferences.PROPERTY_SRX)
                         && Core.getProject().getProjectProperties().getProjectSRX() == null) {
@@ -266,9 +268,7 @@ class TestMainWindow implements IMainWindow {
     public void showMessageDialog(final String message) {
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void addDockable(Dockable pane) {
         desktop.addDockable(pane);
     }

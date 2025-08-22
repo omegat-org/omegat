@@ -29,17 +29,26 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 import org.apache.lucene.analysis.core.StopFilter;
 import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.de.GermanStemFilter;
 import org.apache.lucene.analysis.miscellaneous.SetKeywordMarkerFilter;
-import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * LuceneGermanTokenizer class provides tokenization functionality specifically
+ * designed for German language text. It extends the BaseTokenizer class and
+ * implements a customizable token stream that supports stemming and includes
+ * options for enabling or disabling stop words during the tokenization
+ * process. This tokenizer uses a German-specific analyzer to produce the
+ * appropriate tokens.
+ * <p>
+ * The tokenizer is set as the default for German language ("de") based on the
+ * language annotation.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
  */
@@ -80,7 +89,7 @@ public class LuceneGermanTokenizer extends BaseTokenizer {
         @Override
         protected TokenStreamComponents createComponents(String arg0) {
             final org.apache.lucene.analysis.Tokenizer source = new StandardTokenizer();
-            TokenStream result = new StandardFilter(source);
+            TokenStream result = new LowerCaseFilter(source);
             result = new LowerCaseFilter(result);
             result = new StopFilter(result, stopWords);
             result = new SetKeywordMarkerFilter(result, CharArraySet.EMPTY_SET);

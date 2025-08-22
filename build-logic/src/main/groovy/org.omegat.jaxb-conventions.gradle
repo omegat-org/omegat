@@ -7,7 +7,9 @@ configurations {
 }
 
 dependencies {
-    jaxb(libs.jaxb.xjc)
+    jaxb(libs.jaxb4.xjc)
+    jaxb(libs.jaxb4.api)
+    jaxb(libs.jaxb4.runtime)
 }
 
 def genjaxb = tasks.register('genJAXB') {
@@ -44,6 +46,3 @@ makeJaxbTask(name: 'tbx', outdir: generatedSourcePath + 'gen/core/tbx',
 makeJaxbTask(name: 'project', outdir: generatedSourcePath + 'gen/core/project',
         args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.project',
                schemaSourcePath + 'project_properties.xsd'])
-makeJaxbTask(name: 'tmx14', outdir: generatedSourcePath + 'gen/core/tmx14',
-        args: ['-no-header', '-d', generatedSourcePath, '-p', 'gen.core.tmx14', '-b', schemaSourcePath + 'tmx14.xjb',
-               schemaSourcePath + 'tmx14.xsd'])

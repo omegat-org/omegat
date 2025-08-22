@@ -17,7 +17,7 @@
 * [Coding styles](30.CodingStyles.md)
 * [Source tree](36.SourceTree.md)
 * [Versioning](05.Versioning.md)
-* [Manner of the Pull Request](07.MannerOfThePullRequest.md)]
+* [Manner of the Pull Request](07.MannerOfThePullRequest.md)
 
 ## How to create plugin
 
@@ -29,9 +29,11 @@
 
 ## Understanding OmegaT Internals
 
-* [OmegaT internals](21.DevelopersGuide.md)
+* [OmegaT internals](21.OmegaTInternals.md)
 * [Core Events](22.CoreEvents.md)
 * [Core Methods](23.CoreMethods.md)
+* [Plugin Security Subsystem](24.PluginSecurity.md)
+* [Code generation by JAXB](25.CodeGeneration.md)
 * [Caching](26.Caching.md)
 * [Utility functions](27.UtilityClasses.md)
 
@@ -70,9 +72,16 @@
 * [How OmegaT create Backup files](82.BackupFiles.md)
 * [Team project](83.TeamProject.md)
 
+
+## Architecture Designs 
+
+* [Architecture Decisional Records](adr/index.md)
+
 ## Other information
 
 * [Release procedure](90.ReleaseProcedure.md)
 * [Code Signing How-to](92.CodeSigning.md)
 * [Building installer](93.BuildingInstallerPackage.md)
-* [Appendix](91.appendix.md)
+* [Git repository analysis](94.GitRepositoryAnalysis.md)
+* [License and Terms](95.LicenseAndTerms.md)
+* [Supplimentary files](91.appendix.md)

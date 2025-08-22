@@ -121,6 +121,7 @@ public class Token {
         return offset;
     }
 
+    @Override
     public final String toString() {
         return hash + "@" + offset;
     }

@@ -110,7 +110,6 @@ public final class TestTeamIntegrationChild {
     static Map<String, Long> values = new HashMap<>();
     static Set<String> glossaries = new HashSet<>();
     static long glossaryIndex = 0;
-    static GlossaryManager glossaryManager;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 6) {
@@ -158,7 +157,7 @@ public final class TestTeamIntegrationChild {
             }
             projectProperties.autocreateDirectories();
             Core.setProject(new NotLoadedProject());
-            glossaryManager = new GlossaryManager(new TestGlossaryTextArea());
+            TestCoreState.getInstance().setGlossaryManager(new GlossaryManager(new TestGlossaryTextArea()));
             loadProject(projectProperties);
 
             key = new EntryKey[segCount];
@@ -314,7 +313,7 @@ public final class TestTeamIntegrationChild {
     }
 
     static void checkGlossaryEntries() {
-        List<GlossaryEntry> entries = glossaryManager.getLocalEntries();
+        List<GlossaryEntry> entries = TestCoreState.getInstance().getGlossaryManager().getLocalEntries();
         for (String s : glossaries) {
             boolean found = false;
             for (GlossaryEntry entry : entries) {
@@ -416,125 +415,165 @@ public final class TestTeamIntegrationChild {
 
     static IEditor editor = new IEditor() {
 
+        @Override
         public void windowDeactivated() {
         }
 
+        @Override
         public void undo() {
         }
 
+        @Override
         public void setFilter(IEditorFilter filter) {
         }
 
+        @Override
         public void setAlternateTranslationForCurrentEntry(boolean alternate) {
         }
 
+        @Override
         public void requestFocus() {
         }
 
+        @Override
         public void replaceEditTextAndMark(String text) {
         }
 
+        @Override
         public void replaceEditText(String text) {
         }
 
+        @Override
         public void replaceEditTextAndMark(final String text, final String origin) {
         }
 
+        @Override
         public void removeFilter() {
         }
 
+        @Override
         public void remarkOneMarker(String markerClassName) {
         }
 
+        @Override
         public void registerUntranslated() {
         }
 
+        @Override
         public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         }
 
+        @Override
         public void registerIdenticalTranslation() {
         }
 
+        @Override
         public void registerEmptyTranslation() {
         }
 
+        @Override
         public void refreshViewAfterFix(List<Integer> fixedEntries) {
         }
 
+        @Override
         public void refreshView(boolean doCommit) {
         }
 
+        @Override
         public void redo() {
         }
 
+        @Override
         public void prevEntryWithNote() {
         }
 
+        @Override
         public void prevEntry() {
         }
 
+        @Override
         public void nextXAutoEntry() {
         }
 
+        @Override
         public void prevXAutoEntry() {
         }
 
+        @Override
         public void nextXEnforcedEntry() {
         }
 
+        @Override
         public void prevXEnforcedEntry() {
         }
 
+        @Override
         public void nextUntranslatedEntry() {
         }
 
+        @Override
         public void nextUniqueEntry() {
         }
 
+        @Override
         public void nextTranslatedEntry() {
         }
 
+        @Override
         public void nextEntryWithNote() {
         }
 
+        @Override
         public void nextEntry() {
         }
 
+        @Override
         public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
                 String markerClassName) {
         }
 
+        @Override
         public void insertText(String text) {
         }
 
+        @Override
         public void insertTag(String tag) {
         }
 
+        @Override
         public void gotoHistoryForward() {
         }
 
+        @Override
         public void gotoHistoryBack() {
         }
 
+        @Override
         public void gotoFile(int fileIndex) {
         }
 
+        @Override
         public void gotoEntryAfterFix(int fixedEntry, String fixedSource) {
         }
 
+        @Override
         public void gotoEntry(String srcString, EntryKey key) {
         }
 
+        @Override
         public void gotoEntry(int entryNum) {
         }
 
+        @Override
         public void gotoEntry(int entryNum, CaretPosition pos) {
         }
 
+        @Override
         public EditorSettings getSettings() {
             return null;
         }
 
+        @Override
         public String getSelectedText() {
             return null;
         }
@@ -543,40 +582,48 @@ public final class TestTeamIntegrationChild {
         public void selectSourceText() {
         }
 
+        @Override
         public IEditorFilter getFilter() {
             return null;
         }
 
+        @Override
         public String getCurrentTranslation() {
             return null;
         }
 
+        @Override
         public String getCurrentFile() {
             return null;
         }
 
+        @Override
         public int getCurrentEntryNumber() {
             return 0;
         }
 
+        @Override
         public SourceTextEntry getCurrentEntry() {
             return null;
         }
 
+        @Override
         public void commitAndLeave() {
         }
 
+        @Override
         public void commitAndDeactivate() {
         }
 
+        @Override
         public void changeCase(CHANGE_CASE_TO newCase) {
         }
 
         @Override
         public void replaceEditText(final String text, final String origin) {
-
         }
 
+        @Override
         public void activateEntry() {
         }
 
@@ -592,11 +639,6 @@ public final class TestTeamIntegrationChild {
 
         @Override
         public void insertTextAndMark(String text) {
-        }
-
-        @Override
-        public boolean isOrientationAllLtr() {
-            return true;
         }
     };
 
@@ -803,7 +845,7 @@ public final class TestTeamIntegrationChild {
 
         @Override
         protected void notifyGlossaryManagerFileChanged(File file) {
-            glossaryManager.fileChanged(file);
+            TestCoreState.getInstance().getGlossaryManager().fileChanged(file);
         }
     }
 

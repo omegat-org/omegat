@@ -39,6 +39,8 @@ import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
+import static org.junit.Assert.assertNotNull;
+
 public class MatchesTextTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
@@ -52,6 +54,7 @@ public class MatchesTextTest extends TestCoreGUI {
         openSampleProjectWaitMatches(PROJECT_PATH);
         robot().waitForIdle();
         // check a fuzzy match pane
+        assertNotNull(window);
         window.scrollPane(OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches")).requireVisible();
         window.textBox("matches_pane").requireVisible();
         window.textBox("matches_pane").requireNotEditable();

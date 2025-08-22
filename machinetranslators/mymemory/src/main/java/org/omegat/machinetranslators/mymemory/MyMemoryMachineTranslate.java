@@ -34,10 +34,13 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.text.StringEscapeUtils;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.util.Language;
 
 /**
+ * MyMemory machine translation engine connector.
+ *
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  * @author Martin Wunderlich
@@ -71,7 +74,7 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     }
 
     @Override
-    protected String translate(final Language sLang, final Language tLang, final String text)
+    protected @Nullable String translate(final Language sLang, final Language tLang, final String text)
             throws Exception {
         try {
             // Get MyMemory response in JSON format
@@ -96,7 +99,9 @@ public final class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
             if (mtEntry != null) {
                 bestEntry = mtEntry;
             }
-            assert bestEntry != null;
+            if (bestEntry == null) {
+                return null;
+            }
             return StringEscapeUtils.unescapeHtml4(bestEntry.get("translation").asText());
         } catch (IOException e) {
             throw new MachineTranslateError(BUNDLE.getString("MT_ENGINE_MYMEMORY_ERROR"), e);

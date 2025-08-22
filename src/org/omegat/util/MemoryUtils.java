@@ -136,35 +136,35 @@ public final class MemoryUtils {
 
         long result;
 
-        try {
-            if (oc.isArray()) {
-                result = getSimpleTypeSize(oc.getComponentType()) * Array.getLength(obj);
-                if (!oc.getComponentType().isPrimitive()) {
-                    for (int i = 0; i < Array.getLength(obj); i++) {
-                        Object v = Array.get(obj, i);
-                        result += calcObjectSize(v);
-                    }
+        if (oc.isArray()) {
+            result = getSimpleTypeSize(oc.getComponentType()) * Array.getLength(obj);
+            if (!oc.getComponentType().isPrimitive()) {
+                for (int i = 0; i < Array.getLength(obj); i++) {
+                    Object v = Array.get(obj, i);
+                    result += calcObjectSize(v);
                 }
-            } else {
-                result = SZ_OBJFOOT;
-                Field[] fields = oc.getDeclaredFields();
-                for (Field f : fields) {
-                    if (Modifier.isStatic(f.getModifiers())) {
-                        continue; // static fields doesn't use memory
-                    }
+            }
+        } else {
+            result = SZ_OBJFOOT;
+            Field[] fields = oc.getDeclaredFields();
+            for (Field f : fields) {
+                if (Modifier.isStatic(f.getModifiers())) {
+                    continue; // static fields doesn't use memory
+                }
 
-                    Class<?> fc = f.getType();
-                    result += getSimpleTypeSize(fc);
-                    if (!fc.isPrimitive()) {
-                        boolean canAccesible = f.trySetAccessible();
-                        if (canAccesible) {
+                Class<?> fc = f.getType();
+                result += getSimpleTypeSize(fc);
+                if (!fc.isPrimitive()) {
+                    boolean canAccesible = f.trySetAccessible();
+                    if (canAccesible) {
+                        try {
                             result += calcObjectSize(f.get(obj));
+                        } catch (IllegalAccessException ex) {
+                            result = -1;
                         }
                     }
                 }
             }
-        } catch (Exception ex) {
-            result = -1;
         }
 
         return result;

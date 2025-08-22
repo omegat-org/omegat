@@ -42,6 +42,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.Log;
 
 import org.omegat.core.Core;
@@ -61,7 +62,7 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     /**
      * The spell checking provider.
      */
-    private ISpellCheckerProvider checker;
+    private @Nullable ISpellCheckerProvider checker;
 
     /**
      * the list of ignored words
@@ -85,15 +86,18 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
     public AbstractSpellChecker() {
         CoreEvents.registerProjectChangeListener(eventType -> {
             switch (eventType) {
-                case LOAD:
-                case CREATE:
-                    initialize();
-                    break;
-                case CLOSE:
-                    destroy();
-                    break;
-                default:
-                    // Nothing
+            case LOAD:
+            case CREATE:
+                initialize();
+                break;
+            case SAVE:
+                saveWordLists();
+                break;
+            case CLOSE:
+                destroy();
+                break;
+            default:
+                // Nothing
             }
             resetCache();
         });
@@ -185,7 +189,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
                 && learnedFilePath.toFile().canRead()) {
             try {
                 learnedList.addAll(Files.readAllLines(learnedFilePath, StandardCharsets.UTF_8));
-                learnedList.forEach(word -> checker.learnWord(word));
+                if (checker != null) {
+                    learnedList.forEach(word -> checker.learnWord(word));
+                }
             } catch (Exception ex) {
                 Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_READ_ERROR", ex.getLocalizedMessage());
                 return false;
@@ -199,7 +205,6 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      */
     public void destroy() {
         if (checker != null) {
-            saveWordLists();
             checker.destroy();
             checker = null;
         }
@@ -217,26 +222,27 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      */
     public void saveWordLists() {
         // find out the internal project directory
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
         String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
+        if (!Paths.get(projectDir).toFile().exists() || !Paths.get(projectDir).toFile().isDirectory()) {
+            return;
+        }
 
         // Write the ignored and learned words to the disk
         Path ignoreFilePath = Paths.get(projectDir, OConsts.IGNORED_WORD_LIST_FILE_NAME);
-        if (ignoreFilePath.toFile().exists() && ignoreFilePath.toFile().isFile()
-                && ignoreFilePath.toFile().canWrite()) {
-            try {
-                Files.write(ignoreFilePath, ignoreList);
-            } catch (IOException ex) {
-                Log.logWarningRB("SPELLCHECKER_IGNORE_FILE_WRITE_ERROR", ex.getLocalizedMessage());
-            }
+        try {
+            Files.write(ignoreFilePath, ignoreList);
+        } catch (IOException ex) {
+            Log.logWarningRB("SPELLCHECKER_IGNORE_FILE_WRITE_ERROR", ex.getLocalizedMessage());
         }
+
         Path learnedFilePath = Paths.get(projectDir, OConsts.LEARNED_WORD_LIST_FILE_NAME);
-        if (learnedFilePath.toFile().exists() && learnedFilePath.toFile().isFile()
-                && learnedFilePath.toFile().canWrite()) {
-            try {
-                Files.write(learnedFilePath, learnedList);
-            } catch (IOException ex) {
-                Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_WRITE_ERROR", ex.getLocalizedMessage());
-            }
+        try {
+            Files.write(learnedFilePath, learnedList);
+        } catch (IOException ex) {
+            Log.logWarningRB("SPELLCHECKER_LEARNED_FILE_WRITE_ERROR", ex.getLocalizedMessage());
         }
     }
 
@@ -267,8 +273,10 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
         // if it is valid (learned), it is ok
         if (learnedList.contains(word) || ignoreList.contains(word)) {
             isCorrect = true;
-        } else {
+        } else if (checker != null) {
             isCorrect = checker.isCorrect(word);
+        } else {
+            isCorrect = false;
         }
 
         // remember in cache
@@ -286,16 +294,15 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
      * return a list of strings as suggestions
      */
     public List<String> suggest(String word) {
-        // Check if a spellchecker is already initialized.
-        // If not, skip checking to prevent nullPointerErrors.
-        if (checker == null) {
-            return Collections.emptyList();
-        }
         if (isCorrect(word)) {
             return Collections.emptyList();
         }
-
-        return checker.suggest(normalize(word));
+        // Check if a spellchecker is already initialized.
+        // If not, skip checking to prevent nullPointerErrors.
+        if (checker != null) {
+            return checker.suggest(normalize(word));
+        }
+        return Collections.emptyList();
     }
 
     /**
@@ -319,7 +326,9 @@ public abstract class AbstractSpellChecker implements ISpellChecker {
         word = normalize(word);
         if (!learnedList.contains(word)) {
             learnedList.add(word);
-            checker.learnWord(word);
+            if (checker != null) {
+                checker.learnWord(word);
+            }
             synchronized (this) {
                 incorrectWordsCache.remove(word);
                 correctWordsCache.add(word);

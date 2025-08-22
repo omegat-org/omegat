@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.Arrays;
@@ -35,6 +36,9 @@ import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.lucene.analysis.hunspell.Dictionary;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.NIOFSDirectory;
+import org.omegat.util.Log;
 
 public abstract class AbstractHunspellDictionary implements ISpellCheckerDictionary, AutoCloseable {
 
@@ -58,9 +62,11 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
             affixInputStream = getResourceAsStream(target + AFFIX_EXT);
             dicInputStream = getResourceAsStream(target + DICT_EXT);
             try {
-                return new Dictionary(affixInputStream,
-                        Collections.singletonList(dicInputStream), true);
-            } catch (IOException | ParseException ignored) {
+                String prefix = "hunspell-dictionary";
+                Directory tmpDir = new NIOFSDirectory(Files.createTempDirectory(prefix));
+                return new Dictionary(tmpDir, prefix, affixInputStream, Collections.singletonList(dicInputStream), true);
+            } catch (IOException | ParseException ex) {
+                Log.log(ex);
             }
         }
         return null;
@@ -82,8 +88,7 @@ public abstract class AbstractHunspellDictionary implements ISpellCheckerDiction
                     IOUtils.copy(affStream, fos);
                 }
                 return dictionaryPath;
-            } catch (Exception ignored) {
-
+            } catch (IOException ignored) {
             }
         }
         return null;

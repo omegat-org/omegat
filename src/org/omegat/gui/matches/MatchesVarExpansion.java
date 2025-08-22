@@ -104,7 +104,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
     public static final String DEFAULT_TEMPLATE = VAR_ID + ". " + VAR_FUZZY_FLAG + VAR_SOURCE_TEXT + "\n"
             + VAR_TARGET_TEXT + "\n" + "<" + VAR_SCORE_BASE + "/" + VAR_SCORE_NOSTEM + "/"
-            + VAR_SCORE_ADJUSTED + "%" + VAR_MATCH_SOURCE + VAR_FILE_PATH + ">";
+            + VAR_SCORE_ADJUSTED + "%" + " " + VAR_MATCH_SOURCE + " " + VAR_FILE_PATH + ">";
 
     public static final Pattern PATTERN_SINGLE_PROPERTY = Pattern.compile("@\\{(.+?)\\}");
     public static final Pattern PATTERN_PROPERTY_GROUP = Pattern
@@ -227,16 +227,20 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     private String expandMatchSource(String localTemplate, NearString.MATCH_SOURCE comesFrom) {
         switch (comesFrom) {
         case TM:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM") + " ");
+            return localTemplate.replace(VAR_MATCH_SOURCE,
+                    OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_TM"));
         case FILES:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_FILES"));
+            return localTemplate.replace(VAR_MATCH_SOURCE,
+                    OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_FILES"));
         case MEMORY:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY"));
+            return localTemplate.replace(VAR_MATCH_SOURCE,
+                    OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_MEMORY"));
         case SUBSEGMENTS:
-            return localTemplate.replace(VAR_MATCH_SOURCE, OStrings.getString(
-                    "MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_SUBSEGMENTS") + " ");
+            return localTemplate.replace(VAR_MATCH_SOURCE,
+                    OStrings.getString("MATCHES_VAR_EXPANSION_MATCH_COMES_FROM_SUBSEGMENTS"));
         default:
-            return localTemplate.replace(VAR_MATCH_SOURCE, "");
+            return localTemplate.replace(VAR_MATCH_SOURCE,
+                    "");
         }
     }
 
@@ -296,12 +300,14 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 
         if (BiDiUtils.isMixedOrientationProject()) {
             if (BiDiUtils.isTargetLangRtl()) {
-                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, BiDiUtils.addRtlBidiAround(match.translation));
+                localTemplate = localTemplate.replace(VAR_TARGET_TEXT,
+                        BiDiUtils.addRtlBidiAround(match.translation));
             } else {
-                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, BiDiUtils.addLtrBidiAround(match.translation));
+                localTemplate = localTemplate.replace(VAR_TARGET_TEXT,
+                        BiDiUtils.addLtrBidiAround(match.translation));
             }
         } else {
-                localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
+            localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
         }
 
         localTemplate = expandMatchSource(localTemplate, match.comesFrom);
@@ -310,8 +316,8 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     }
 
     /**
-     * A sorted map that ensures styled replacements are performed in the
-     * order of appearance.
+     * A sorted map that ensures styled replacements are performed in the order
+     * of appearance.
      */
     private final Map<Integer, Replacer> styledComponents = new TreeMap<>();
 
@@ -338,7 +344,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
                 styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), LTR_SOURCE_TEXT_REPLACER);
             }
         } else {
-                styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
+            styledComponents.put(result.text.indexOf(VAR_SOURCE_TEXT), SOURCE_TEXT_REPLACER);
         }
         styledComponents.put(result.text.indexOf(VAR_DIFF), DIFF_REPLACER);
         styledComponents.put(result.text.indexOf(VAR_DIFF_REVERSED), DIFF_REVERSED_REPLACER);

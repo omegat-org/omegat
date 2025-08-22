@@ -538,7 +538,7 @@ public class EditorController implements IEditor {
         public boolean handleDroppedObject(Object dropped) {
             final List<?> files = (List<?>) dropped;
 
-            // Only look at first file to determine intent to open project
+            // Only look at the first file to determine intent to open a project
             File firstFile = (File) files.get(0);
             if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
                 firstFile = firstFile.getParentFile();
@@ -647,7 +647,7 @@ public class EditorController implements IEditor {
             return null;
         }
         if (proj.getProjectFiles().isEmpty()) {
-            // there is no files yet
+            // there are no files yet
             return null;
         }
 
@@ -729,7 +729,7 @@ public class EditorController implements IEditor {
 
         doc.setDocumentFilter(new DocumentFilter3());
 
-        // add locales to editor
+        // add locales to the editor
         Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         editor.setLocale(targetLocale);
         editor.setTargetLocale(targetLocale);
@@ -788,13 +788,18 @@ public class EditorController implements IEditor {
      */
     public void activateEntry() {
         activateEntry(CaretPosition.startOfEntry());
+
+    }
+
+    public void activateEntryAndGotoOffset(int offset) {
+        activateEntry(CaretPosition.goToCharacterAtIndex(offset));
     }
 
     /**
      * Activates the current entry (if available) by displaying source text and embedding displayed text in
      * markers.
      * <p>
-     * Also moves document focus to current entry, and makes sure fuzzy info displayed if available.
+     * Also moves document focus to the current entry and makes sure fuzzy info displayed if available.
      */
     public void activateEntry(CaretPosition pos) {
         UIThreadsUtil.mustBeSwingThread();
@@ -872,7 +877,7 @@ public class EditorController implements IEditor {
             }
         }
         scrollForDisplayNearestSegments(pos);
-        // check if file was changed
+        // check if a file was changed
         if (previousDisplayedFileIndex != displayedFileIndex) {
             previousDisplayedFileIndex = displayedFileIndex;
             CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
@@ -1030,7 +1035,7 @@ public class EditorController implements IEditor {
      * Go to segment at specified location.
      *
      * @param location
-     *            location
+     *            location relative to the whole document
      * @return true if segment changed, false if location inside current segment
      */
     protected boolean goToSegmentAtLocation(int location) {
@@ -1048,6 +1053,31 @@ public class EditorController implements IEditor {
         } else {
             return false;
         }
+    }
+
+    protected boolean goToSegmentAtLocationAndJumpToOffset(int location, int offset) {
+        // clicked segment
+
+        int segmentAtLocation = getSegmentIndexAtLocation(location);
+        if (segmentAtLocation < 0) {
+            return false;
+        }
+        if (displayedEntryIndex != segmentAtLocation) {
+            commitAndDeactivate();
+            displayedEntryIndex = segmentAtLocation;
+            activateEntryAndGotoOffset(offset);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected int getStartForSegmentWithIndex(int segmentIndex) {
+        if (m_docSegList == null) {
+            return -1;
+        }
+        SegmentBuilder builder = m_docSegList[segmentIndex];
+        return builder.getStartPosition();
     }
 
     protected int getSegmentIndexAtLocation(int location) {
@@ -1147,11 +1177,11 @@ public class EditorController implements IEditor {
         boolean isNewDefaultTrans = defaultTranslation && !oldTE.defaultTranslation;
         boolean isNewAltTrans = !defaultTranslation && oldTE.defaultTranslation;
         boolean translationChanged = !Objects.equals(oldTE.translation, newen.translation);
-        boolean noteChanged = !StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""));
+        boolean noteChanged = !Objects.equals(StringUtil.nvl(oldTE.note, ""), StringUtil.nvl(newen.note, ""));
         resetOrigin();
 
         if (!isNewAltTrans && !translationChanged && noteChanged) {
-            // Only note was changed, and we are not making a new alt translation.
+            // Only the note was changed, and we are not making a new alt translation.
             Core.getProject().setNote(entry, oldTE, newen.note);
         } else if (isNewDefaultTrans || translationChanged || noteChanged) {
             storeTranslation(entry, newen, defaultTranslation);
@@ -1169,7 +1199,7 @@ public class EditorController implements IEditor {
                 }
                 SegmentBuilder builder = m_docSegList[i];
                 if (!builder.hasBeenCreated()) {
-                    // Skip because segment has not been drawn yet
+                    // Skip because a segment has not been drawn yet
                     continue;
                 }
                 if (builder.ste.getSrcText().equals(entry.getSrcText())) {
@@ -1190,7 +1220,7 @@ public class EditorController implements IEditor {
         editor.undoManager.reset();
 
         // validate tags if required
-        if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
+        if (Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
             String file = getCurrentFile();
             new SwingWorker<Boolean, Void>() {
                 protected Boolean doInBackground() throws Exception {
@@ -1200,7 +1230,7 @@ public class EditorController implements IEditor {
                 @Override
                 protected void done() {
                     try {
-                        if (!get()) {
+                        if (Boolean.FALSE.equals(get())) {
                             Core.getIssues().showForFiles(Pattern.quote(file), entry.entryNum());
                         }
                     } catch (InterruptedException | ExecutionException e) {
@@ -1215,8 +1245,9 @@ public class EditorController implements IEditor {
             try {
                 Core.executeExclusively(false, Core.getProject()::teamSync);
             } catch (InterruptedException | TimeoutException ignored) {
+                // Force ignore.
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                Log.log(ex);
             }
         }
     }
@@ -1225,19 +1256,19 @@ public class EditorController implements IEditor {
         // translation from editor
         if (newTrans.isEmpty()) { // empty translation
             if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
-                // It's an empty translation which should remain empty
+                // It's an empty translation that should remain empty
                 newen.translation = "";
             } else {
                 newen.translation = null; // will be untranslated
             }
         } else if (newTrans.equals(newen.source)) { // equals to source
             if (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                // translation can be equals to source
+                // translation can be equal to source
                 newen.translation = newTrans;
             } else {
                 // translation can't be equals to source
                 if (oldTE.source.equals(oldTE.translation)) {
-                    // but it was equals to source before
+                    // but it was equal to source before
                     newen.translation = oldTE.translation;
                 } else {
                     // set untranslated
@@ -1245,7 +1276,7 @@ public class EditorController implements IEditor {
                 }
             }
         } else {
-            // new translation is not empty and not equals to source - just change
+            // The new translation is not empty and not equals to source - just change
             newen.translation = newTrans;
             if (currentEntryOrigin != null && newTrans.equals(translationFromOrigin)) {
                 if (newen.otherProperties == null) {

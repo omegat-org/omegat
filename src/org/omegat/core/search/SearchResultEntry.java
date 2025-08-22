@@ -151,58 +151,58 @@ public class SearchResultEntry {
         private SearchMatch[] noteMatch;
         private SearchMatch[] propertiesMatch;
 
-        public Builder entryNum(int entryNum) {
-            this.entryNum = entryNum;
+        public Builder entryNum(int newEntryNum) {
+            this.entryNum = newEntryNum;
             return this;
         }
 
-        public Builder preambleText(String preambleText) {
-            this.preambleText = preambleText;
+        public Builder preambleText(String newPreambleText) {
+            this.preambleText = newPreambleText;
             return this;
         }
 
-        public Builder srcPrefix(String srcPrefix) {
-            this.srcPrefix = srcPrefix;
+        public Builder srcPrefix(String newSrcPrefix) {
+            this.srcPrefix = newSrcPrefix;
             return this;
         }
 
-        public Builder sourceText(String sourceText) {
-            this.sourceText = sourceText;
+        public Builder sourceText(String newSourceText) {
+            this.sourceText = newSourceText;
             return this;
         }
 
-        public Builder targetText(String targetText) {
-            this.targetText = targetText;
+        public Builder targetText(String newTargetText) {
+            this.targetText = newTargetText;
             return this;
         }
 
-        public Builder note(String note) {
-            this.note = note;
+        public Builder note(String newNote) {
+            this.note = newNote;
             return this;
         }
 
-        public Builder propertiesString(String propertiesString) {
-            this.propertiesString = propertiesString;
+        public Builder propertiesString(String properties) {
+            this.propertiesString = properties;
             return this;
         }
 
-        public Builder srcMatch(SearchMatch[] srcMatch) {
-            this.srcMatch = srcMatch;
+        public Builder srcMatch(SearchMatch[] match) {
+            this.srcMatch = match;
             return this;
         }
 
-        public Builder targetMatch(SearchMatch[] targetMatch) {
-            this.targetMatch = targetMatch;
+        public Builder targetMatch(SearchMatch[] match) {
+            this.targetMatch = match;
             return this;
         }
 
-        public Builder noteMatch(SearchMatch[] noteMatch) {
-            this.noteMatch = noteMatch;
+        public Builder noteMatch(SearchMatch[] match) {
+            this.noteMatch = match;
             return this;
         }
 
-        public Builder propertiesMatch(SearchMatch[] propertiesMatch) {
-            this.propertiesMatch = propertiesMatch;
+        public Builder propertiesMatch(SearchMatch[] newPropertiesMatch) {
+            this.propertiesMatch = newPropertiesMatch;
             return this;
         }
 

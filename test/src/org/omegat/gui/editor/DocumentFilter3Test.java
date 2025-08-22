@@ -59,12 +59,14 @@ public class DocumentFilter3Test {
     /**
      * Tests for the replace method in the DocumentFilter3 class.
      * <p>
-     * The replace method allows replacing text in a document at a given offset and length.
-     * It first ensures the action is being performed in the Swing thread and validates the
-     * operation via the isPossible method. If valid, it replaces the text in the document.
+     * The replace method allows replacing text in a document at a given offset
+     * and length. It first ensures the action is being performed in the Swing
+     * thread and validates the operation via the isPossible method. If valid,
+     * it replaces the text in the document.
      */
     @Test
-    public void testReplace_AllowsValidReplacement() throws BadLocationException, InterruptedException, InvocationTargetException {
+    public void testReplace_AllowsValidReplacement()
+            throws BadLocationException, InterruptedException, InvocationTargetException {
         // Arrange
         DocumentFilter3 filter = spy(new DocumentFilter3());
         DocumentFilter.FilterBypass bypassMock = mock(DocumentFilter.FilterBypass.class);
@@ -86,20 +88,20 @@ public class DocumentFilter3Test {
 
         // Act
         SwingUtilities.invokeAndWait(() -> {
-                    try {
-                        filter.replace(bypassMock, 2, 3, "new text", attrsMock);
-                    } catch (BadLocationException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+            try {
+                filter.replace(bypassMock, 2, 3, "new text", attrsMock);
+            } catch (BadLocationException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         // Assert
         verify(bypassMock, times(1)).replace(2, 3, "new text", attrsMock);
     }
 
     @Test
-    public void testReplace_DoesNotAllowReplacement_OutOfBounds() throws BadLocationException, InterruptedException, InvocationTargetException {
+    public void testReplace_DoesNotAllowReplacement_OutOfBounds()
+            throws BadLocationException, InterruptedException, InvocationTargetException {
         // Arrange
         DocumentFilter3 filter = new DocumentFilter3();
         DocumentFilter.FilterBypass bypassMock = mock(DocumentFilter.FilterBypass.class);
@@ -114,19 +116,20 @@ public class DocumentFilter3Test {
 
         // Act
         SwingUtilities.invokeAndWait(() -> {
-                    try {
-                        filter.replace(bypassMock, 3, 5, "new text", null);
-                    } catch (BadLocationException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+            try {
+                filter.replace(bypassMock, 3, 5, "new text", null);
+            } catch (BadLocationException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         // Assert
         verify(bypassMock, times(0)).replace(anyInt(), anyInt(), anyString(), any());
     }
 
     @Test
-    public void testReplace_TriggeredInTrustedMode() throws BadLocationException, InterruptedException, InvocationTargetException {
+    public void testReplace_TriggeredInTrustedMode()
+            throws BadLocationException, InterruptedException, InvocationTargetException {
         // Arrange
         DocumentFilter3 filter = new DocumentFilter3();
         DocumentFilter.FilterBypass bypassMock = mock(DocumentFilter.FilterBypass.class);
@@ -151,7 +154,8 @@ public class DocumentFilter3Test {
     }
 
     @Test
-    public void testReplace_RejectsWhenNotInEditMode() throws BadLocationException, InterruptedException, InvocationTargetException {
+    public void testReplace_RejectsWhenNotInEditMode()
+            throws BadLocationException, InterruptedException, InvocationTargetException {
         // Arrange
         DocumentFilter3 filter = new DocumentFilter3();
         DocumentFilter.FilterBypass bypassMock = mock(DocumentFilter.FilterBypass.class);

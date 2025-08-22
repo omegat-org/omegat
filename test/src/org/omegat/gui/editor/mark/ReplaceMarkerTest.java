@@ -38,12 +38,11 @@ import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.Searcher;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.IEditorFilter;
-import org.omegat.gui.editor.MockEditor;
+import org.omegat.gui.editor.EditorStub;
 import org.omegat.gui.editor.filter.ReplaceFilter;
 
 /**
@@ -58,7 +57,7 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
     public void preUp() {
         EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
         ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
-        IEditor editor = new ReplaceMarkerMockEditor();
+        IEditor editor = new ReplaceMarkerEditorStub();
         TestCoreInitializer.initEditor(editor);
         Core.setProject(new NotLoadedProject() {
             @Override
@@ -79,15 +78,13 @@ public class ReplaceMarkerTest extends MarkerTestBase  {
         assertEquals("TRANSLATION", result.get(0).entryPart.toString());
     }
 
-    class ReplaceMarkerMockEditor extends MockEditor {
-        ReplaceMarkerMockEditor() {
+    class ReplaceMarkerEditorStub extends EditorStub {
+        ReplaceMarkerEditorStub() {
             super(editorSettings);
         }
 
         @Override
         public IEditorFilter getFilter() {
-            SearchExpression s = new SearchExpression();
-            s.searchExpressionType = SearchExpression.SearchExpressionType.KEYWORD;
             return new ReplaceFilter(Collections.emptyList(), new MockSearcher(sourceText, replaceText));
         }
     }

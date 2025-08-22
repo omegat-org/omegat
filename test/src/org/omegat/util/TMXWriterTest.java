@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -178,7 +179,7 @@ public class TMXWriterTest extends TestFilterBase {
                 text.append(buffer, 0, len);
             }
         }
-        assertTrue(text.toString().contains("tar" + eol + "get"));
+        assertThat(text.toString()).as("Preserve EOL mark in text.").contains("tar" + eol + "get");
 
         final List<String> trs = new ArrayList<>();
         load(null, trs, true, false);

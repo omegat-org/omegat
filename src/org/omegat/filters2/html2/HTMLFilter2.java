@@ -42,6 +42,7 @@ import java.util.regex.PatternSyntaxException;
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -76,28 +77,28 @@ public class HTMLFilter2 extends AbstractFilter {
     }
 
     /** Stores the source encoding of HTML file. */
-    private String sourceEncoding;
+    private @Nullable String sourceEncoding;
 
     /** Stores the target encoding of HTML file. */
-    private String targetEncoding;
+    private @Nullable String targetEncoding;
 
     /**
      * A regular Expression Pattern to be matched to the strings to be
      * translated. If there is a match, the string should not be translated
      */
-    private Pattern skipRegExpPattern;
+    private @Nullable Pattern skipRegExpPattern;
 
     /**
      * A map of attribute-name and attribute value pairs that, if it exist in a
      * meta-tag, indicates that the meta-tag should not be translated
      */
-    private HashMap<String, String> skipMetaAttributes;
+    private final Map<String, String> skipMetaAttributes = new HashMap<>();
 
     /**
      * A map of attribute-name and attribute value pairs that, if exist in a
      * tag, indicate that this tag should not be translated
      */
-    private HashMap<String, String> ignoreTagsAttributes;
+    private final Map<String, String> ignoreTagsAttributes = new HashMap<>();
 
     @Override
     protected boolean requirePrevNextFields() {
@@ -108,7 +109,8 @@ public class HTMLFilter2 extends AbstractFilter {
     protected String getInputEncoding(FilterContext filterContext, File infile) throws IOException {
         String encoding = filterContext.getInEncoding();
         if (encoding == null && isSourceEncodingVariable()) {
-            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), StandardCharsets.UTF_8.name())) {
+            try (HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(),
+                    StandardCharsets.UTF_8.name())) {
                 encoding = hreader.getEncoding();
             }
         }
@@ -150,7 +152,7 @@ public class HTMLFilter2 extends AbstractFilter {
     @Override
     public void processFile(BufferedReader infile, BufferedWriter outfile,
             org.omegat.filters2.FilterContext fc) throws IOException, TranslationException {
-        StringBuilder all = null;
+        StringBuilder all;
         try {
             all = new StringBuilder();
             char[] cbuf = new char[1000];
@@ -178,19 +180,23 @@ public class HTMLFilter2 extends AbstractFilter {
 
         // prepare set of attributes that indicate not to translate a meta-tag
         String skipMetaString = options.getSkipMeta();
-        skipMetaAttributes = new HashMap<String, String>();
-        String[] skipMetaAttributesStringarray = skipMetaString.split(",");
-        for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
-            String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
-            skipMetaAttributes.put(keyvalue, "");
+        skipMetaAttributes.clear();
+        if (skipMetaString != null && !skipMetaString.trim().isEmpty()) {
+            String[] skipMetaAttributesStringarray = skipMetaString.split(",", -1);
+            for (String s : skipMetaAttributesStringarray) {
+                String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
+                if (!keyvalue.isEmpty()) {
+                    skipMetaAttributes.put(keyvalue, "");
+                }
+            }
         }
 
         // Prepare set of attributes that indicate not to translate a tag
         String ignoreTagString = options.getIgnoreTags();
-        ignoreTagsAttributes = new HashMap<String, String>();
+        ignoreTagsAttributes.clear();
         String[] ignoreTagsAttributesStringarray = ignoreTagString.split(",");
-        for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
-            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase(Locale.ENGLISH);
+        for (String s : ignoreTagsAttributesStringarray) {
+            String keyvalue = s.trim().toUpperCase(Locale.ENGLISH);
             ignoreTagsAttributes.put(keyvalue, "");
         }
 
@@ -221,18 +227,22 @@ public class HTMLFilter2 extends AbstractFilter {
 
     // ////////////////////////////////////////////////////////////////////////
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("HTML__FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.htm", null, "UTF-8"), new Instance("*.html", null, "UTF-8"),
                 new Instance("*.xhtml", null, "UTF-8"), new Instance("*.xht", null, "UTF-8") };
@@ -273,12 +283,12 @@ public class HTMLFilter2 extends AbstractFilter {
      *         options otherwise.
      */
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             EditOptionsDialog dialog = new EditOptionsDialog(parent, config);
             dialog.setVisible(true);
             if (EditOptionsDialog.RET_OK == dialog.getReturnStatus()) {
-                return dialog.getOptions().getOptionsMap();
+                return dialog.getConfiguration();
             } else {
                 return null;
             }
@@ -294,7 +304,7 @@ public class HTMLFilter2 extends AbstractFilter {
      *
      * @return the target encoding
      */
-    public String getTargetEncoding() {
+    public @Nullable String getTargetEncoding() {
         return this.targetEncoding;
     }
 
@@ -309,7 +319,7 @@ public class HTMLFilter2 extends AbstractFilter {
     }
 
     @Override
-    public String getInEncodingLastParsedFile() {
+    public @Nullable String getInEncodingLastParsedFile() {
         return sourceEncoding;
     }
 

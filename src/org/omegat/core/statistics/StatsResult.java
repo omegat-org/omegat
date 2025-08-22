@@ -32,23 +32,25 @@ package org.omegat.core.statistics;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.TimeZone;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SequenceWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.TextUtil;
@@ -58,7 +60,7 @@ import org.omegat.util.gui.TextUtil;
  */
 @XmlRootElement(name = "omegat-stats")
 public class StatsResult {
-    public static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
+    static final String[] HT_HEADERS = { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files"), };
 
@@ -68,7 +70,7 @@ public class StatsResult {
 
     private static final boolean[] HT_ALIGN = new boolean[] { false, true, true, true, true, true };
 
-    public static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
+    static final String[] FT_HEADERS = { OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
             OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
@@ -106,22 +108,35 @@ public class StatsResult {
     private String date;
 
     public StatsResult() {
-        props = new StatProjectProperties();
+    }
+
+    public StatsResult(String projectName, String projectRoot, String sourceLanguage, String targetLanguage,
+            String sourceRoot) {
+        props = new StatProjectProperties(projectName, projectRoot, sourceLanguage, targetLanguage,
+                sourceRoot);
         total = new StatCount();
         remaining = new StatCount();
         unique = new StatCount();
         remainingUnique = new StatCount();
+        translated = new HashSet<>();
+        counts = new ArrayList<>();
     }
 
     /**
      * Constructor.
      * 
      * @param total
+     *            total number of statistics.
      * @param remaining
+     *            remaining translations.
      * @param unique
+     *            unique translations.
      * @param remainingUnique
+     *            remaining and unique translations.
      * @param translated
+     *            translated segments.
      * @param counts
+     *            file counts.
      */
     public StatsResult(StatCount total, StatCount remaining, StatCount unique, StatCount remainingUnique,
             Set<String> translated, List<FileData> counts) {
@@ -163,8 +178,6 @@ public class StatsResult {
 
     /**
      * Return total number of segments.
-     * 
-     * @return
      */
     @XmlElement(name = "total")
     public StatCount getTotal() {
@@ -173,8 +186,6 @@ public class StatsResult {
 
     /**
      * Return remaining number of segments that needs translation.
-     * 
-     * @return
      */
     @XmlElement(name = "remaining")
     public StatCount getRemaining() {
@@ -183,8 +194,6 @@ public class StatsResult {
 
     /**
      * Return a number of unique segments.
-     * 
-     * @return
      */
     @XmlElement(name = "unique")
     public StatCount getUnique() {
@@ -193,8 +202,6 @@ public class StatsResult {
 
     /**
      * Return a number of remaining unique segments.
-     * 
-     * @return
      */
     @XmlElement(name = "unique-remaining")
     public StatCount getRemainingUnique() {
@@ -203,10 +210,7 @@ public class StatsResult {
 
     /**
      * return a statistics of each source/target files.
-     * 
-     * @return
      */
-    @XmlElement(name = "files")
     public List<FileData> getCounts() {
         return counts;
     }
@@ -252,10 +256,14 @@ public class StatsResult {
     @JsonIgnore
     public String getXmlData() throws JsonProcessingException {
         setDate();
-        XmlMapper mapper = XmlMapper.xmlBuilder().enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME)
-                .build();
-        mapper.registerModule(new JaxbAnnotationModule());
-        return mapper.writeValueAsString(this);
+        XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.registerModule(new JakartaXmlBindAnnotationModule());
+        xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        xmlMapper.setDefaultUseWrapper(false);
+
+        return xmlMapper.writeValueAsString(this);
+
     }
 
     private void setDate() {

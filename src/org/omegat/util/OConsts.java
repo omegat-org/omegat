@@ -98,8 +98,8 @@ public final class OConsts {
     /** Project subfolder for exported translation memories. */
     public static final String DEFAULT_EXPORT_TM = "";
     /**
-     * Translation memory levels, space-separated string, to include zero or more of the following values: "omegat",
-     * "level1" and/or "level2").
+     * Translation memory levels, space-separated lowercase string, to include zero or more of the following values:
+     * "omegat", "level1" and/or "level2".
      */
     public static final String DEFAULT_EXPORT_TM_LEVELS = "omegat level1 level2";
     /** Project subfolder for automatically applied translation memories within the tm folder. */

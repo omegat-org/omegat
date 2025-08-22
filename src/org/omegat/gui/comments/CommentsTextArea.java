@@ -47,6 +47,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.JTextPaneLinkifier;
 import org.omegat.util.gui.StaticUIUtils;
@@ -124,7 +125,7 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
             if (newEntry.getKey().path != null) {
                 text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
                 text.append(' ');
-                text.append(newEntry.getKey().path);
+                text.append(StringUtil.unescapeLinefeed(newEntry.getKey().path));
                 text.append('\n');
             }
             if (newEntry.getSourceTranslation() != null) {

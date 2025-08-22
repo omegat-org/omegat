@@ -189,6 +189,28 @@ public class POFilterTest extends TestFilterBase {
         compareBinary(new File("test/data/filters/po/file-POFilter-fuzzyCtx-plural.po"), outFile);
     }
 
+    @Test
+    public void testMultiLines() throws Exception {
+        String f = "test/data/filters/po/file-POFilter-multilines.po";
+        Map<String, String> options = new HashMap<>();
+        TestFileInfo fi = loadSourceFiles(new PoFilter(), f, options);
+
+        checkMultiStart(fi, f);
+        checkMulti("Multiline\nmessage ID with linefeed character.", null, "", null, null,
+                "References:\nmultiple_lines\n" + "\n");
+        checkMulti("Long context in only one line.", null,
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
+                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " +
+                        "Excepteur sint occaecat cupidatat non proident",
+                null, null, "References:\none_line_only_with_ctx\n" + "\n");
+        checkMulti("Long context in several lines.", null,
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\\n" +
+                        "Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\\n" +
+                        "Excepteur sint occaecat cupidatat non proident",
+                null, null, "References:\nmultiple_lines_with_ctx\n" + "\n");
+        checkMultiEnd();
+    }
+
     @Override
     protected void translate(AbstractFilter filter, String filename, Map<String, String> config) throws Exception {
         translate(filter, filename, config, Collections.emptyMap(),

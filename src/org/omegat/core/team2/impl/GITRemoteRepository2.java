@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javax.xml.namespace.QName;
@@ -55,7 +54,6 @@ import org.eclipse.jgit.dircache.DirCacheIterator;
 import org.eclipse.jgit.lib.ConfigConstants;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.CoreConfig.AutoCRLF;
-import org.eclipse.jgit.lib.GpgSigner;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.ObjectReader;
 import org.eclipse.jgit.lib.Ref;
@@ -79,6 +77,8 @@ import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
 import org.eclipse.jgit.util.FS;
+import org.omegat.util.FileUtil;
+import tokyo.northside.jgit.signing.GpgSetup;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -177,8 +177,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
         ((GITCredentialsProvider) CredentialsProvider.getDefault()).setPredefinedCredentials(repositoryURL,
                 predefinedUser, predefinedPass, predefinedFingerprint);
 
-        SshClient client = SshClient.setUpDefaultClient();
-        try {
+        try (SshClient client = SshClient.setUpDefaultClient()) {
             client.start();
             File gitDir = new File(localDirectory, ".git");
             if (gitDir.exists() && gitDir.isDirectory()) {
@@ -199,9 +198,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                 try {
                     c.call();
                 } catch (InvalidRemoteException e) {
-                    if (localDirectory.exists()) {
-                        deleteDirectory(localDirectory);
-                    }
+                    FileUtil.deleteDirectory(localDirectory.toPath());
                     Throwable cause = e.getCause();
                     if (cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
                         BadRepositoryException bre = new BadRepositoryException(cause.getLocalizedMessage());
@@ -226,13 +223,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             }
             configRepo();
             logger.atInfo().setMessageRB("GIT_FINISH").addArgument("clone").log();
-        } finally {
-            client.stop();
         }
 
         String signingkey = repository.getConfig().getString("user", null, "signingkey");
         if (!StringUtil.isEmpty(signingkey)) {
-            GpgSigner.setDefault(new GITExternalGpgSigner());
+            GpgSetup.update("gpg");
         }
 
         // cleanup repository
@@ -490,7 +485,7 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
                     .add(getDefaultBranchName(repository)).call();
             List<Status> statuses = StreamSupport.stream(results.spliterator(), false)
                     .flatMap(r -> r.getRemoteUpdates().stream()).map(RemoteRefUpdate::getStatus)
-                    .collect(Collectors.toList());
+                    .toList();
             String result;
             if (statuses.isEmpty() || statuses.stream().anyMatch(s -> s != RemoteRefUpdate.Status.OK)) {
                 logger.atWarn().setMessageRB("GIT_CONFLICT").log();
@@ -541,19 +536,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      * @param path
      *            to be deleted.
      * @return true when succeeded, otherwise false.
+     * @deprecated
      */
+    @Deprecated(forRemoval = true, since = "6.1.0")
     public static boolean deleteDirectory(File path) {
-        if (path.exists()) {
-            File[] files = path.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    deleteDirectory(files[i]);
-                } else {
-                    files[i].delete();
-                }
-            }
-        }
-        return (path.delete());
+        return FileUtil.deleteDirectory(path.toPath());
     }
 
     /**
@@ -608,12 +595,11 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
      */
     public static boolean isGitRepository(String url) {
         // Heuristics to save some waiting time
-        SshClient client = SshClient.setUpDefaultClient();
-        try {
+        try (SshClient client = SshClient.setUpDefaultClient()) {
             client.start();
             Collection<Ref> result = new LsRemoteCommand(null).setRemote(url).setTimeout(TIMEOUT).call();
             return !result.isEmpty();
-        } catch (TransportException ex) {
+        } catch (IOException | TransportException ex) {
             String message = ex.getMessage();
             return message.endsWith("not authorized") || message.endsWith("Auth fail")
                     || message.contains("Too many authentication failures")
@@ -622,8 +608,6 @@ public class GITRemoteRepository2 implements IRemoteRepository2 {
             // JGitInternalException happens if the URL is a Subversion URL like
             // svn://...
             return false;
-        } finally {
-            client.stop();
         }
     }
 }

@@ -18,7 +18,7 @@ lucene_gosen = "8.11.1"
 checkstyle = "8.45.1"
 guava = "33.4.8-jre"
 annotations = "23.0.0"
-jgit = "6.10.1.202505221210-r"
+jgit = "7.3.0.202506031305-r"
 svnkit = "1.10.11"
 ivy = "2.5.3"
 jackson = "2.19.2"
@@ -58,6 +58,7 @@ swing_extra_locales = "0.3.3"
 mockito = "5.19.0"
 json_java = "20250517"
 protobuf_java = "4.32.0"
+jgit_gpg_signer = "0.2.3"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -132,6 +133,7 @@ jgit-ssh = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache", ve
 jgit-agent = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache.agent", version.ref = "jgit"}
 jgit-http = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.http.apache", version.ref = "jgit"}
 jgit-bc = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.gpg.bc", version.ref = "jgit"}
+jgit-gpg-signer = {group = "tokyo.northside", name = "jgit-gpg-signer", version.ref = "jgit_gpg_signer"}
 bc-prov = {group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bc"}
 bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
@@ -190,6 +192,6 @@ ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "bc-util-jdk18on", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
-jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
+jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh", "jgit-gpg-signer"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]

@@ -2018,6 +2018,11 @@ public class RealProject implements IProject {
         public boolean existEntryInProject(EntryKey key) {
             return existKeys.contains(key);
         }
+
+        public void clear() {
+            existSource.clear();
+            existKeys.clear();
+        }
     };
 
     void setOnlineMode() {

@@ -296,9 +296,10 @@ public class ProjectTMX {
         }
     }
 
-    public void clear() {
+    public synchronized void clear() {
         defaults.clear();
         alternatives.clear();
+        checkOrphanedCallback.clear();
     }
 
     private class Loader implements TMXReader2.LoadCallback {
@@ -415,9 +416,9 @@ public class ProjectTMX {
 
     /**
      * Returns the collection of TMX entries that have an alternative
-     * translation
+     * translation.
      * 
-     * @return
+     * @return alternative entries
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
@@ -427,6 +428,8 @@ public class ProjectTMX {
         boolean existEntryInProject(EntryKey key);
 
         boolean existSourceInProject(String src);
+        
+        void clear();
     }
 
     public void replaceContent(ProjectTMX tmx) {

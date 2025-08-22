@@ -27,6 +27,9 @@ package org.omegat.machinetranslators.mymemory;
 
 import org.omegat.core.Core;
 
+/**
+ * MyMemory machine translation engine connector registrations.
+ */
 public class MyMemoryTranslate {
 
     /**

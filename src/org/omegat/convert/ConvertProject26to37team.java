@@ -26,7 +26,6 @@
 package org.omegat.convert;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -136,7 +135,7 @@ public final class ConvertProject26to37team {
         map.setLocal("");
         map.setRepository("");
         def.getMapping().add(map);
-        props.setRepositories(new ArrayList<RepositoryDefinition>());
+        props.setRepositories(new ArrayList<>());
         props.getRepositories().add(def);
 
         ProjectFileStorage.writeProjectFile(props);
@@ -149,16 +148,16 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Save version of project_save.tmx to .repositories/versions.properties.
+     * Save the version of project_save.tmx to .repositories/versions.properties.
      */
-    private static void saveVersion(File projectRootFolder, String file, String version) throws IOException {
+    private static void saveVersion(File projectRootFolder, String file, String version) {
         ProjectTeamSettings teamSettings = new ProjectTeamSettings(new File(projectRootFolder,
                 RemoteRepositoryProvider.REPO_SUBDIR));
         teamSettings.set(RebaseAndCommit.VERSION_PREFIX + file, version);
     }
 
     /**
-     * Check if project contains 2.6-style SVN directory.
+     * Check if a project contains 2.6-style SVN directory.
      */
     private static boolean isSVNDirectory(File projectRootFolder) {
         File svnDir = new File(projectRootFolder, ".svn");
@@ -166,7 +165,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Check if project contains 2.6-style GIT directory.
+     * Check if a project contains 2.6-style GIT directory.
      */
     private static boolean isGITDirectory(File projectRootFolder) {
         File gitDir = new File(projectRootFolder, ".git");
@@ -199,7 +198,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Get version of "omegat/project_save.tmx" in SVN.
+     * Get a version of "omegat/project_save.tmx" in SVN.
      */
     private static String getSVNTmxVersion(File wc) throws Exception {
         final SvnOperationFactory of = new SvnOperationFactory();
@@ -212,7 +211,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Get version of "omegat/project_save.tmx" in GIT.
+     * Get a version of "omegat/project_save.tmx" in GIT.
      */
     private static String getGITTmxVersion(File wc) throws Exception {
         try (Git git = Git.open(wc)) {

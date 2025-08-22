@@ -106,12 +106,12 @@ public class Instance implements Serializable {
         this.targetFilenamePattern = targetFilenamePattern;
     }
 
-    private void init(String sourceFilenameMask, String sourceEncoding, String targetEncoding,
-            String targetFilenamePattern) {
-        setSourceFilenameMask(sourceFilenameMask);
-        setSourceEncoding(sourceEncoding);
-        setTargetEncoding(targetEncoding);
-        setTargetFilenamePattern(targetFilenamePattern);
+    private void init(String newSourceFilenameMask, String newSourceEncoding, String newTargetEncoding,
+            String newTargetFilenamePattern) {
+        setSourceFilenameMask(newSourceFilenameMask);
+        setSourceEncoding(newSourceEncoding);
+        setTargetEncoding(newTargetEncoding);
+        setTargetFilenamePattern(newTargetFilenamePattern);
     }
 
     /**
@@ -122,8 +122,8 @@ public class Instance implements Serializable {
      * <p>
      * Output (target) filename pattern cannot be null.
      */
-    public Instance(String sourceFilenameMask, @Nullable String sourceEncoding, @Nullable String targetEncoding,
-            String targetFilenamePattern) {
+    public Instance(String sourceFilenameMask, @Nullable String sourceEncoding,
+            @Nullable String targetEncoding, String targetFilenamePattern) {
         init(sourceFilenameMask, sourceEncoding, targetEncoding, targetFilenamePattern);
     }
 

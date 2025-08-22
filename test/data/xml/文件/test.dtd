@@ -1,0 +1,2 @@
+<!ELEMENT root (body)>
+<!ELEMENT body EMPTY>

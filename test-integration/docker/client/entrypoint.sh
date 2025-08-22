@@ -25,6 +25,11 @@
 #
 export GRADLE_USER_HOME=/gradle-cache
 
+# Ensure UTF-8 encoding for all operations
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US:en
+
 # Create hash of all build configuration files including version catalogs
 BUILD_FILES_HASH=$(find /code/ -name "*.gradle*" -o -name "gradle.properties" -o -name "libs.versions.toml" \) \
     -not -path "./build/*" -not -path "./.gradle/*" -not -path "./.git/*" | \

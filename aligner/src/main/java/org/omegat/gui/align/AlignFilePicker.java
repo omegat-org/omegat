@@ -152,8 +152,8 @@ public class AlignFilePicker extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel bottomPanel;
-    public javax.swing.JButton cancelButton;
+    javax.swing.JPanel bottomPanel;
+    javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -162,14 +162,14 @@ public class AlignFilePicker extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    public javax.swing.JTextArea messageTextArea;
-    public javax.swing.JButton okButton;
-    public javax.swing.JProgressBar progressBar;
-    public javax.swing.JButton sourceChooseFileButton;
-    public javax.swing.JTextField sourceLanguageFileField;
-    public javax.swing.JComboBox<Language> sourceLanguagePicker;
-    public javax.swing.JButton targetChooseFileButton;
-    public javax.swing.JTextField targetLanguageFileField;
-    public javax.swing.JComboBox<Language> targetLanguagePicker;
+    javax.swing.JTextArea messageTextArea;
+    javax.swing.JButton okButton;
+    javax.swing.JProgressBar progressBar;
+    javax.swing.JButton sourceChooseFileButton;
+    javax.swing.JTextField sourceLanguageFileField;
+    javax.swing.JComboBox<Language> sourceLanguagePicker;
+    javax.swing.JButton targetChooseFileButton;
+    javax.swing.JTextField targetLanguageFileField;
+    javax.swing.JComboBox<Language> targetLanguagePicker;
     // End of variables declaration//GEN-END:variables
 }

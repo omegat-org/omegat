@@ -27,11 +27,18 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.sv.SwedishAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * The LuceneSwedishTokenizer class provides functionality to tokenize Swedish text strings
+ * while optionally applying stemming and stop word filtering. This tokenizer is specifically
+ * designed to work with the Swedish language.
+ * <p>
+ * This class is annotated with @Tokenizer to indicate that it processes Swedish ("sv") language
+ * content, and it serves as the default tokenizer for this language.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "sv" }, isDefault = true)

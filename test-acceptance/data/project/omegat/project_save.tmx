@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE tmx SYSTEM "tmx11.dtd">
 <tmx version="1.1">
-  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="6.1.0_0_8a8099715" segtype="paragraph" srclang="en"/>
+  <header creationtool="OmegaT" o-tmf="OmegaT TMX" adminlang="EN-US" datatype="plaintext" creationtoolversion="6.1.0_0_b4ffd7296" segtype="paragraph" srclang="en"/>
   <body>
 <!-- Default translations -->
     <tu>
@@ -18,6 +18,14 @@
       </tuv>
       <tuv lang="fr" changeid="Hiroshi Miura" changedate="20240302T051308Z" creationid="Hiroshi Miura" creationdate="20240302T051308Z">
         <seg>Birds in Oregon</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en">
+        <seg>Connect to custom server {0} instead of apertium.org</seg>
+      </tuv>
+      <tuv lang="fr" changeid="miurahr" changedate="20250613T064842Z" creationid="miurahr" creationdate="20250613T064842Z">
+        <seg>Connectez-vous à un serveur personnalisé au lieu de apertium.org</seg>
       </tuv>
     </tu>
     <tu>

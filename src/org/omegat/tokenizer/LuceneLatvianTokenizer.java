@@ -27,11 +27,25 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.lv.LatvianAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * A tokenizer for processing Latvian language text using Lucene's analysis capabilities.
+ * This class extends the BaseTokenizer and provides tokenization for Latvian text with
+ * options for stemming and the inclusion/exclusion of stop words.
+ * <p>
+ * This tokenizer utilizes the {@link LatvianAnalyzer} from Lucene for tokenization
+ * when stemming is enabled. If stemming is disabled, a standard token stream is used.
+ * <p>
+ * The tokenizer can be configured to include or exclude stop words and stems in the
+ * tokenization process:
+ * - When stemming is allowed, the {@link LatvianAnalyzer} is used, and the inclusion of
+ *   stop words depends on the specified configuration.
+ * - When stemming is not allowed, the tokenizer falls back to the standard token stream
+ *   implementation.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "lv" })

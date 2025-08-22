@@ -1,34 +1,34 @@
 [versions]
-slf4j = { strictly = "[2.0.7, 2.1[", prefer = "2.0.7" }
+slf4j = "2.0.17"
 slf4j-format = "0.5.1"
-groovy = "4.0.23"
+groovy = "4.0.28"
 junit = "4.13.2"
-commons_lang3 = "3.14.0"
-commons_io = "2.16.1"
-commons_text = "1.11.0"
-commons_validator = "1.9.0"
-jsoup = "1.18.3"
-icu4j = { require = "[71.1,76.1[", prefer = "74.2" }
+commons_lang3 = "3.18.0"
+commons_io = "2.19.0"
+commons_text = "1.14.0"
+commons_validator = "1.10.0"
+jsoup = "1.21.1"
+icu4j = "77.1"
 stax2api = "4.2.2"
 woodstox = "6.5.0"
-languagetool = "6.1"
-languagedetector = "0.6-2"
-lucene = "5.5.5"
-lucene_gosen = "5.5.1"
+languagetool = "6.5-omt2.3"
+languagedetector = "0.6-3"
+lucene = "8.11.3"
+lucene_gosen = "8.11.1"
 checkstyle = "8.45.1"
-guava = "32.1.2-jre"
+guava = "33.4.8-jre"
 annotations = "23.0.0"
-jgit = "6.10.0.202406032230-r"
+jgit = "6.10.1.202505221210-r"
 svnkit = "1.10.11"
-ivy = "2.5.2"
-jackson = "2.16.1"
-bc = "1.78.1"
+ivy = "2.5.3"
+jackson = "2.19.2"
+bc = "1.81"
 nashorn = "15.6"
-caffeine = "3.1.8"
-wiremock = "3.10.0"
+caffeine = "3.2.2"
+wiremock = "3.13.1"
 vldocking = "3.1.1"
-xmlunit = "2.10.0"
-assertj = "3.26.0"
+xmlunit = "2.10.3"
+assertj = "3.27.4"
 appbundler = "1.2.1"
 supertmxmerge = "2.0.3"
 jasypt = "1.9.3"
@@ -37,23 +37,27 @@ htmlparser = "1.6-20230203"
 gnudiff = "1.15"
 desktopsupport = "0.6.0"
 protocolhandler = "0.1.4"
-pdfbox = "3.0.3"
-maligna = "3.0.1"
+pdfbox = "3.0.5"
+maligna = "4.0.0"
 trie4j = "0.9.10_1"
-dsl4j = "1.0.0"
+dsl4j = "1.1.2"
 stardict4j = "1.1.0"
 juniversalchardet = "2.5.0"
 mnemonics = "1.2"
 hunspell = "2.1.2"
-xjc = "2.3.9"
+xjc = "4.0.5"
+jaxb4_api = "4.0.2"
+jaxb = "4.0.5"
 jna = "5.13.0"
 jfa = "1.2.0"
-tipoftheday = "0.4.4"
-flatlaf="3.5.4"
+tipoftheday = "0.5.0"
+flatlaf="3.6.1"
 assertj_swing_junit = "4.0.0-beta-2"
 morfologik = "2.1.9"
-jaxb = "2.3.0"
-swing_extra_locales = "0.3.2"
+swing_extra_locales = "0.3.3"
+mockito = "5.19.0"
+json_java = "20250517"
+protobuf_java = "4.32.0"
 
 [libraries]
 slf4j-api = {group = "org.slf4j", name = "slf4j-api",  version.ref = "slf4j"}
@@ -68,39 +72,38 @@ jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
 icu4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}
 woodstox-core = {group = "com.fasterxml.woodstox", name = "woodstox-core", version.ref = "woodstox"}
-languagetool-all = {group = "org.languagetool", name = "language-all", version.ref = "languagetool"}
-languagetool-core = {group = "org.languagetool", name = "languagetool-core", version.ref = "languagetool"}
-languagetool-server = {group = "org.languagetool", name = "languagetool-server", version.ref = "languagetool"}
-languagetool-ar = {group = "org.languagetool", name = "language-ar", version.ref = "languagetool"}
-languagetool-ast = {group = "org.languagetool", name = "language-ast", version.ref = "languagetool"}
-languagetool-be = {group = "org.languagetool", name = "language-be", version.ref = "languagetool"}
-languagetool-br = {group = "org.languagetool", name = "language-br", version.ref = "languagetool"}
-languagetool-ca = {group = "org.languagetool", name = "language-ca", version.ref = "languagetool"}
-languagetool-da = {group = "org.languagetool", name = "language-da", version.ref = "languagetool"}
-languagetool-de = {group = "org.languagetool", name = "language-de", version.ref = "languagetool"}
-languagetool-el = {group = "org.languagetool", name = "language-el", version.ref = "languagetool"}
-languagetool-en = {group = "org.languagetool", name = "language-en", version.ref = "languagetool"}
-languagetool-eo = {group = "org.languagetool", name = "language-eo", version.ref = "languagetool"}
-languagetool-es = {group = "org.languagetool", name = "language-es", version.ref = "languagetool"}
-languagetool-fa = {group = "org.languagetool", name = "language-fa", version.ref = "languagetool"}
-languagetool-fr = {group = "org.languagetool", name = "language-fr", version.ref = "languagetool"}
-languagetool-ga = {group = "org.languagetool", name = "language-ga", version.ref = "languagetool"}
-languagetool-gl = {group = "org.languagetool", name = "language-gl", version.ref = "languagetool"}
-languagetool-it = {group = "org.languagetool", name = "language-it", version.ref = "languagetool"}
-languagetool-ja = {group = "org.languagetool", name = "language-ja", version.ref = "languagetool"}
-languagetool-km = {group = "org.languagetool", name = "language-km", version.ref = "languagetool"}
-languagetool-nl = {group = "org.languagetool", name = "language-nl", version.ref = "languagetool"}
-languagetool-pl = {group = "org.languagetool", name = "language-pl", version.ref = "languagetool"}
-languagetool-pt = {group = "org.languagetool", name = "language-pt", version.ref = "languagetool"}
-languagetool-ro = {group = "org.languagetool", name = "language-ro", version.ref = "languagetool"}
-languagetool-ru = {group = "org.languagetool", name = "language-ru", version.ref = "languagetool"}
-languagetool-sk = {group = "org.languagetool", name = "language-sk", version.ref = "languagetool"}
-languagetool-sl = {group = "org.languagetool", name = "language-sl", version.ref = "languagetool"}
-languagetool-sv = {group = "org.languagetool", name = "language-sv", version.ref = "languagetool"}
-languagetool-ta = {group = "org.languagetool", name = "language-ta", version.ref = "languagetool"}
-languagetool-tl = {group = "org.languagetool", name = "language-tl", version.ref = "languagetool"}
-languagetool-uk = {group = "org.languagetool", name = "language-uk", version.ref = "languagetool"}
-languagetool-zh = {group = "org.languagetool", name = "language-zh", version.ref = "languagetool"}
+languagetool-core = {group = "org.omegat.lucene", name = "languagetool-core", version.ref = "languagetool"}
+languagetool-server = {group = "org.omegat.lucene", name = "languagetool-server", version.ref = "languagetool"}
+languagetool-ar = {group = "org.omegat.lucene", name = "language-ar", version.ref = "languagetool"}
+languagetool-ast = {group = "org.omegat.lucene", name = "language-ast", version.ref = "languagetool"}
+languagetool-be = {group = "org.omegat.lucene", name = "language-be", version.ref = "languagetool"}
+languagetool-br = {group = "org.omegat.lucene", name = "language-br", version.ref = "languagetool"}
+languagetool-ca = {group = "org.omegat.lucene", name = "language-ca", version.ref = "languagetool"}
+languagetool-da = {group = "org.omegat.lucene", name = "language-da", version.ref = "languagetool"}
+languagetool-de = {group = "org.omegat.lucene", name = "language-de", version.ref = "languagetool"}
+languagetool-el = {group = "org.omegat.lucene", name = "language-el", version.ref = "languagetool"}
+languagetool-en = {group = "org.omegat.lucene", name = "language-en", version.ref = "languagetool"}
+languagetool-eo = {group = "org.omegat.lucene", name = "language-eo", version.ref = "languagetool"}
+languagetool-es = {group = "org.omegat.lucene", name = "language-es", version.ref = "languagetool"}
+languagetool-fa = {group = "org.omegat.lucene", name = "language-fa", version.ref = "languagetool"}
+languagetool-fr = {group = "org.omegat.lucene", name = "language-fr", version.ref = "languagetool"}
+languagetool-ga = {group = "org.omegat.lucene", name = "language-ga", version.ref = "languagetool"}
+languagetool-gl = {group = "org.omegat.lucene", name = "language-gl", version.ref = "languagetool"}
+languagetool-it = {group = "org.omegat.lucene", name = "language-it", version.ref = "languagetool"}
+languagetool-ja = {group = "org.omegat.lucene", name = "language-ja", version.ref = "languagetool"}
+languagetool-km = {group = "org.omegat.lucene", name = "language-km", version.ref = "languagetool"}
+languagetool-nl = {group = "org.omegat.lucene", name = "language-nl", version.ref = "languagetool"}
+languagetool-pl = {group = "org.omegat.lucene", name = "language-pl", version.ref = "languagetool"}
+languagetool-pt = {group = "org.omegat.lucene", name = "language-pt", version.ref = "languagetool"}
+languagetool-ro = {group = "org.omegat.lucene", name = "language-ro", version.ref = "languagetool"}
+languagetool-ru = {group = "org.omegat.lucene", name = "language-ru", version.ref = "languagetool"}
+languagetool-sk = {group = "org.omegat.lucene", name = "language-sk", version.ref = "languagetool"}
+languagetool-sl = {group = "org.omegat.lucene", name = "language-sl", version.ref = "languagetool"}
+languagetool-sv = {group = "org.omegat.lucene", name = "language-sv", version.ref = "languagetool"}
+languagetool-ta = {group = "org.omegat.lucene", name = "language-ta", version.ref = "languagetool"}
+languagetool-tl = {group = "org.omegat.lucene", name = "language-tl", version.ref = "languagetool"}
+languagetool-uk = {group = "org.omegat.lucene", name = "language-uk", version.ref = "languagetool"}
+languagetool-zh = {group = "org.omegat.lucene", name = "language-zh", version.ref = "languagetool"}
 lucene-core = {group = "org.apache.lucene", name = "lucene-core", version.ref = "lucene"}
 lucene-analyzers-common = {group = "org.apache.lucene", name = "lucene-analyzers-common", version.ref = "lucene"}
 lucene-analyzers-kuromoji = {group = "org.apache.lucene", name = "lucene-analyzers-kuromoji", version.ref = "lucene"}
@@ -118,8 +121,11 @@ groovy-templates = {group = "org.apache.groovy", name = "groovy-templates", vers
 ivy = {group = "org.apache.ivy", name = "ivy", version.ref = "ivy"}
 jackson-core = {group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "jackson"}
 jackson-databind = {group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson"}
+jackson-annotations = {group = "com.fasterxml.jackson.core", name = "jackson-annotations", version.ref = "jackson"}
+jackson-bom = {group = "com.fasterxml.jackson", name = "jackson-bom", version.ref = "jackson"}
+jackson-datatype-jsr310 = {group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version.ref = "jackson"}
 jackson-xml = {group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-xml", version.ref = "jackson"}
-jackson-jaxb = {group = "com.fasterxml.jackson.module", name = "jackson-module-jaxb-annotations", version.ref = "jackson"}
+jackson-jaxb = {group = "com.fasterxml.jackson.module", name = "jackson-module-jakarta-xmlbind-annotations", version.ref = "jackson"}
 jackson-yaml = {group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson"}
 jgit = {group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit"}
 jgit-ssh = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache", version.ref = "jgit"}
@@ -129,12 +135,13 @@ jgit-bc = {group = "org.eclipse.jgit", name = "org.eclipse.jgit.gpg.bc", version
 bc-prov = {group = "org.bouncycastle", name = "bcprov-jdk18on", version.ref = "bc"}
 bc-pg = {group = "org.bouncycastle", name = "bcpg-jdk18on", version.ref = "bc"}
 bc-pkix = {group = "org.bouncycastle", name = "bcpkix-jdk18on", version.ref = "bc"}
+bc-util-jdk18on = {group = "org.bouncycastle", name = "bcutil-jdk18on", version.ref = "bc" }
 svnkit = {group = "org.tmatesoft.svnkit", name = "svnkit", version.ref = "svnkit"}
 nashorn-core = {group = "org.openjdk.nashorn", name = "nashorn-core", version.ref = "nashorn"}
-fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.5.3"}
+fifesoft-rsyntaxtextarea =  {group = "com.fifesoft", name = "rsyntaxtextarea", version = "3.6.0"}
 fifesoft-rstaui = {group = "com.fifesoft", name = "rstaui", version = "3.3.1"}
-fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.3.0"}
-fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.1"}
+fifesoft-languagesupport = {group = "com.fifesoft", name = "languagesupport", version = "3.4.0"}
+fifesoft-autocomplete = {group = "com.fifesoft", name = "autocomplete", version = "3.3.2"}
 caffeine = {group = "com.github.ben-manes.caffeine", name ="caffeine", version.ref = "caffeine"}
 caffeine-jcache =  {group = "com.github.ben-manes.caffeine", name = "jcache", version.ref = "caffeine"}
 wiremock = {group = "org.wiremock", name = "wiremock", version.ref = "wiremock"}
@@ -151,17 +158,17 @@ omegat-gnudiff4j = {group = "org.omegat", name = "gnudiff4j", version.ref = "gnu
 madlonkay-desktopsupport = {group = "org.madlonkay", name = "desktopsupport", version.ref = "desktopsupport"}
 url-protocol-handler = {group = "tokyo.northside", name = "url-protocol-handler", version.ref = "protocolhandler"}
 apache-pdfbox = {group = "org.apache.pdfbox", name = "pdfbox", version.ref = "pdfbox"}
-loomchild-maligna = {group = "net.loomchild", name = "maligna", version.ref = "maligna"}
+tokyo-northside-maligna = {group = "tokyo.northside", name = "maligna", version.ref = "maligna"}
 trie4j = {group = "tokyo.northside", name = "trie4j", version.ref = "trie4j"}
 dsl4j = {group = "tokyo.northside", name = "dsl4j", version.ref = "dsl4j"}
 stardict4j = {group = "tokyo.northside", name = "stardict4j", version.ref = "stardict4j"}
 juniversal-chardet = {group = "com.github.albfernandez", name = "juniversalchardet", version.ref = "juniversalchardet"}
 omegat-mnemonics = {group = "org.omegat", name = "lib-mnemonics", version.ref = "mnemonics"}
 dumont-hunspell = {group = "com.gitlab.dumonts", name = "hunspell", version.ref = "hunspell"}
-jaxb-api = {group = "javax.xml.bind", name = "jaxb-api", version.ref = "jaxb"}
-jaxb-xjc = {group = "org.glassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
-jaxb-core = {group = "org.glassfish.jaxb", name = "jaxb-core", version.ref = "jaxb"}
-jaxb-runtime = {group = "org.glassfish.jaxb", name = "jaxb-runtime", version.ref = "jaxb"}
+jaxb4-api = {group = "jakarta.xml.bind", name = "jakarta.xml.bind-api", version.ref = "jaxb4_api"}
+jaxb4-xjc = {group = "org.glassfish.jaxb", name = "jaxb-xjc", version.ref = "xjc"}
+jaxb4-core = {group = "org.glassfish.jaxb", name = "jaxb-core", version.ref = "jaxb"}
+jaxb4-runtime = {group = "org.glassfish.jaxb", name = "jaxb-runtime", version.ref = "jaxb"}
 tipoftheday = {group = "tokyo.northside", name = "tipoftheday", version.ref = "tipoftheday"}
 jna = {group = "net.java.dev.jna", name = "jna-platform", version.ref = "jna"}
 jfa = {group = "de.jangassen", name = "jfa", version.ref = "jfa"}
@@ -171,23 +178,18 @@ assertj_swing_junit = {group = "tokyo.northside", name = "assertj-swing-junit", 
 morfologik-stemming = { group = "org.carrot2", name = "morfologik-stemming", version.ref = "morfologik" }
 morfologik-speller = { group = "org.carrot2", name = "morfologik-speller", version.ref = "morfologik" }
 swing-extra-locales = { group = "org.omegat", name = "swing-extra-locales", version.ref = "swing_extra_locales"}
+json = {group = "org.json", name = "json", version.ref = "json_java"}
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+protobuf = {group = "com.google.protobuf", name = "protobuf-java", version.ref = "protobuf_java"}
 
 [bundles]
 groovy = ["groovy-jsr223", "groovy-dateutil", "groovy-json", "groovy-xml", "groovy-swing", "groovy-templates", "ivy"]
 jackson = ["jackson-core", "jackson-databind", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
-ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "eddsa"]
+jackson-test = ["jackson-core", "jackson-databind", "jackson-annotations", "jackson-bom", "jackson-datatype-jsr310", "jackson-jaxb", "jackson-xml", "jackson-yaml"]
+ecdsa = ["bc-prov", "bc-pg", "bc-pkix", "bc-util-jdk18on", "eddsa"]
 fifesoft = ["fifesoft-rsyntaxtextarea", "fifesoft-autocomplete", "fifesoft-languagesupport", "fifesoft-rstaui"]
 caffeine = ["caffeine", "caffeine-jcache"]
-languagetool-tests = ["languagetool-server", "languagetool-be", "languagetool-fr", "languagetool-en",
-    "languagetool-ja", "languagetool-pl"]
 lucene = ["lucene-core", "lucene-analyzers-common", "lucene-analyzers-kuromoji", "lucene-analyzers-smartcn", "lucene-analyzers-stempel"]
 jgit = ["jgit", "jgit-agent", "jgit-http", "jgit-ssh"]
 dictionary = ["trie4j", "dsl4j", "stardict4j", "jsoup"]
 xmlunit = ["xmlunit-core", "xmlunit-assertj", "assertj"]
-
-[plugins]
-spotbugs = {id = "com.github.spotbugs", version = "6.0.26"}
-spotless = {id = "com.diffplug.spotless", version = "7.0.0.BETA4"}
-launch4j = {id = "edu.sc.seis.launch4j", version = "3.0.6"}
-versions = {id = "com.github.ben-manes.versions", version = "0.51.0"}
-ssh = {id = "org.hidetake.ssh", version = "2.11.2"}

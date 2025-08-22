@@ -3,7 +3,7 @@
  *           with fuzzy matching, translation memory, keyword search,
  *           glossaries, and translation leveraging into updated projects.
  *
- *  Copyright (C) 2023 Hiroshi Miura.
+ *  Copyright (C) 2023-2025 Hiroshi Miura.
  *                Home page: https://www.omegat.org/
  *                Support center: https://omegat.org/support
  *
@@ -25,26 +25,24 @@
 
 package org.omegat.gui.tipoftheday;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Locale;
 
-import org.omegat.util.StaticUtils;
+import org.jetbrains.annotations.Nullable;
+import org.omegat.util.Log;
 
 public final class TipOfTheDayUtils {
 
     private TipOfTheDayUtils() {
     }
 
-    static URI getTipsFileURI(String filename) {
-        return getTipsFileURI(filename, getLocale());
+    static final String INDEX_YAML = "tips.yaml";
+
+    static @Nullable URI getTipsFileURI(String filename) {
+        return getTipsURI(filename, getLocale());
     }
 
     static String getLocale() {
@@ -60,42 +58,27 @@ public final class TipOfTheDayUtils {
         return lang;
     }
 
-    private static URI getTipsFileURI(String filename, String lang) {
-        String installDir = StaticUtils.installDir();
-        File file = Paths.get(installDir, "docs", "tips", lang, filename).toFile();
-        if (file.isFile()) {
-            return file.toURI();
-        }
-        // find in classpath
-        URL url = OmegaTTipOfTheDayModel.class.getResource("/tips/" + lang + '/' + filename);
+    private static @Nullable URI getTipsURI(String filename, String lang) {
+        URL url = TipOfTheDayUtils.class.getResource("/tips/" + lang + '/' + filename);
         if (url != null) {
             try {
                 return url.toURI();
             } catch (URISyntaxException ignored) {
+                Log.log("Wrong tips configuration:" + url);
             }
         }
         return null;
     }
 
-    static InputStream getIndexStream(String filename) throws IOException {
-        String lang = getLocale();
-        String installDir = StaticUtils.installDir();
-        Path path = Paths.get(installDir, "docs", "tips", lang, filename);
-        if (path.toFile().isFile()) {
-            return Files.newInputStream(path);
-        }
-        return OmegaTTipOfTheDayModel.class.getResourceAsStream("/tips/" + lang + '/' + filename);
+    static InputStream getIndexStream() {
+        return TipOfTheDayUtils.class
+                .getResourceAsStream("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
     }
 
     static boolean hasIndex() {
-        String lang = getLocale();
-        String installDir = StaticUtils.installDir();
-        Path path = Paths.get(installDir, "docs", "tips", lang, TipOfTheDayController.INDEX_YAML);
-        if (path.toFile().isFile()) {
-            return true;
-        }
-        URL url =
-                TipOfTheDayUtils.class.getResource("/tips/" + lang + '/' + TipOfTheDayController.INDEX_YAML);
+        URL url = TipOfTheDayUtils.class
+                .getResource("/tips/" + TipOfTheDayUtils.getLocale() + '/' + INDEX_YAML);
         return url != null;
     }
+
 }

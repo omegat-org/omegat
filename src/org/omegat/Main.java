@@ -54,14 +54,15 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PropertyResourceBundle;
+import java.util.TimeZone;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
@@ -69,12 +70,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
-import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
@@ -127,16 +128,16 @@ public final class Main {
     }
 
     /** Project location for a load on startup. */
-    protected static File projectLocation = null;
+    private static @Nullable File projectLocation = null;
 
     /** Remote project location. */
-    protected static String remoteProject = null;
+    private static @Nullable String remoteProject = null;
 
     /** Execution command line parameters. */
-    protected static final Map<String, String> PARAMS = new TreeMap<>();
+    private static final Map<String, String> PARAMS = new TreeMap<>();
 
     /** Execution mode. */
-    protected static CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
+    private static @Nullable CLIParameters.RUN_MODE runMode = CLIParameters.RUN_MODE.GUI;
 
     public static void main(String[] args) {
         if (args.length > 0
@@ -194,8 +195,8 @@ public final class Main {
         logger.atInfo().setMessage("\n{0}\n{1} (started on {2} {3}) Locale {4}")
                 .addArgument(StringUtils.repeat('=', 120)).addArgument(OStrings.getNameAndVersion())
                 .addArgument(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
-                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now()))
-                .addArgument(ZoneId.systemDefault().getDisplayName(TextStyle.SHORT, Locale.getDefault()))
+                        .withLocale(Locale.getDefault()).format(ZonedDateTime.now(ZoneId.systemDefault())))
+                .addArgument(TimeZone.getDefault().getDisplayName(false, TimeZone.SHORT, Locale.getDefault()))
                 .addArgument(Locale.getDefault().toLanguageTag()).log();
         logger.atInfo().logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"),
                 System.getProperty("java.version"), System.getProperty("java.home"));
@@ -203,7 +204,6 @@ public final class Main {
         System.setProperty("http.agent", OStrings.getDisplayNameAndVersion());
 
         // Do migration and load various settings. The order is important!
-        ConvertConfigs.convert();
         Preferences.init();
         // broker should be loaded before module loading
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
@@ -215,28 +215,32 @@ public final class Main {
 
         int result;
         try {
-            switch (runMode) {
-            case GUI:
-                result = runGUI();
-                // GUI has own shutdown code
-                break;
-            case CONSOLE_TRANSLATE:
-                result = runConsoleTranslate();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_CREATEPSEUDOTRANSLATETMX:
-                result = runCreatePseudoTranslateTMX();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_ALIGN:
-                result = runConsoleAlign();
-                PluginUtils.unloadPlugins();
-                break;
-            case CONSOLE_STATS:
-                result = runConsoleStats();
-                PluginUtils.unloadPlugins();
-                break;
-            default:
+            if (runMode != null) {
+                switch (runMode) {
+                case GUI:
+                    result = runGUI();
+                    // GUI has own shutdown code
+                    break;
+                case CONSOLE_TRANSLATE:
+                    result = runConsoleTranslate();
+                    PluginUtils.unloadPlugins();
+                    break;
+                case CONSOLE_CREATEPSEUDOTRANSLATETMX:
+                    result = runCreatePseudoTranslateTMX();
+                    PluginUtils.unloadPlugins();
+                    break;
+                case CONSOLE_ALIGN:
+                    result = runConsoleAlign();
+                    PluginUtils.unloadPlugins();
+                    break;
+                case CONSOLE_STATS:
+                    result = runConsoleStats();
+                    PluginUtils.unloadPlugins();
+                    break;
+                default:
+                    result = 1;
+                }
+            } else {
                 result = 1;
             }
         } catch (Throwable ex) {
@@ -264,14 +268,23 @@ public final class Main {
             command.addAll(CLIParameters.unparseArgs(PARAMS));
         } else {
             // assumes jpackage
-            javaBin = Paths.get(StaticUtils.installDir()).getParent().resolve("bin/OmegaT");
-            if (!javaBin.toFile().exists()) {
-                // abort restart
-                Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+            String installDir = StaticUtils.installDir();
+            if (installDir == null) {
                 return;
+            } else {
+                Path parent = Paths.get(installDir).getParent();
+                if (parent == null) {
+                    return;
+                }
+                javaBin = parent.resolve("bin/OmegaT");
+                if (!javaBin.toFile().exists()) {
+                    // abort restart
+                    Core.getMainWindow().displayWarningRB("LOG_RESTART_FAILED_NOT_FOUND");
+                    return;
+                }
+                command.add(javaBin.toString());
+                command.addAll(CLIParameters.unparseArgs(PARAMS));
             }
-            command.add(javaBin.toString());
-            command.addAll(CLIParameters.unparseArgs(PARAMS));
         }
         if (projectDir != null) {
             command.add(projectDir);
@@ -283,7 +296,8 @@ public final class Main {
             builder.start();
             System.exit(0);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.log(e);
+            System.exit(1);
         }
     }
 
@@ -295,7 +309,7 @@ public final class Main {
      * @param path
      *            to config file
      */
-    private static void applyConfigFile(String path) {
+    private static void applyConfigFile(@Nullable String path) {
         if (path == null) {
             return;
         }
@@ -334,8 +348,8 @@ public final class Main {
     /**
      * Execute standard GUI.
      */
-    protected static int runGUI() {
-        UIManager.put("ClassLoader", PluginUtils.getThemeClassLoader());
+    private static int runGUI() {
+        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
 
         // macOS-specific - they must be set BEFORE any GUI calls
         if (Platform.isMacOSX()) {
@@ -343,27 +357,12 @@ public final class Main {
         }
 
         Log.logInfoRB("STARTUP_GUI_DOCKING_FRAMEWORK", DockingDesktop.getDockingFrameworkVersion());
-
-        // Set X11 application class name to make some desktop user interfaces
-        // (like Gnome Shell) recognize OmegaT
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Class<?> cls = toolkit.getClass();
-        try {
-            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
-                Field field = cls.getDeclaredField("awtAppClassName");
-                if (field.trySetAccessible()) {
-                    field.set(toolkit, "OmegaT");
-                }
-            }
-        } catch (Exception ignored) {
-        }
-
+        tweakX11AppName();
         System.setProperty("swing.aatext", "true");
         try {
             Core.initializeGUI(PARAMS);
         } catch (Throwable ex) {
             Log.log(ex);
-            showError(ex);
             return 1;
         }
 
@@ -389,10 +388,26 @@ public final class Main {
         return 0;
     }
 
+    private static void tweakX11AppName() {
+        try {
+            // Set X11 application class name to make some desktop user interfaces
+            // (like Gnome Shell) recognize OmegaT
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Class<?> cls = toolkit.getClass();
+            if (cls.getName().equals("sun.awt.X11.XToolkit")) {
+                Field field = cls.getDeclaredField("awtAppClassName");
+                if (field.trySetAccessible()) {
+                    field.set(toolkit, "OmegaT");
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        }
+    }
+
     /**
      * Execute in console mode for translate.
      */
-    protected static int runConsoleTranslate() throws Exception {
+    private static int runConsoleTranslate() throws Exception {
         Log.logInfoRB("STARTUP_CONSOLE_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
@@ -405,11 +420,7 @@ public final class Main {
         System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
 
         String sourceMask = PARAMS.get(CLIParameters.SOURCE_PATTERN);
-        if (sourceMask != null) {
-            p.compileProject(sourceMask, false);
-        } else {
-            p.compileProject(".*", false);
-        }
+        p.compileProject(Objects.requireNonNullElse(sourceMask, ".*"), false);
 
         // Called *after* executing post processing command (unlike the
         // regular PROJECT_CHANGE_TYPE.COMPILE)
@@ -530,7 +541,7 @@ public final class Main {
     /**
      * Execute in console mode for translate.
      */
-    protected static int runCreatePseudoTranslateTMX() throws Exception {
+    private static int runCreatePseudoTranslateTMX() throws Exception {
         Log.logInfoRB("CONSOLE_PSEUDO_TRANSLATION_MODE");
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
@@ -693,14 +704,11 @@ public final class Main {
         } else {
             msg = ex.getMessage();
         }
-        switch (runMode) {
-        case GUI:
+        if (CLIParameters.RUN_MODE.GUI == runMode) {
             JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg,
                     OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
-            break;
-        default:
+        } else {
             System.err.println(MessageFormat.format(OStrings.getString("CONSOLE_ERROR"), msg));
-            break;
         }
     }
 }

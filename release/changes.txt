@@ -1,22 +1,40 @@
 ----------------------------------------------------------------------
  OmegaT 6.1.0
 ----------------------------------------------------------------------
-  53 Enhancement
-  84 Bug fixes
+  60 Enhancement
+  93 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 6.1.0 vs 6.0.0
 
   Implemented requests:
 
+  - Support Windows 11 and Linux on ARM64 for development environment
+  https://sourceforge.net/p/omegat/feature-requests/1773/
+
+  - Word selection according to the language of Source/Target by clicking in the editor pane
+  https://sourceforge.net/p/omegat/feature-requests/1770/
+
+  - Spell checker dictionary as a language module
+  https://sourceforge.net/p/omegat/feature-requests/1769/
+
   - HunspellTokenizer to support stopwords
   https://sourceforge.net/p/omegat/feature-requests/1767/
+
+  - Po: put prural source term in comment when nplural=1 langguages
+  https://sourceforge.net/p/omegat/feature-requests/1765/
+
+  - Support ngrams for local LT server jar launcher
+  https://sourceforge.net/p/omegat/feature-requests/1764/
 
   - Localize UI for genuine dialogs in various languages
   https://sourceforge.net/p/omegat/feature-requests/1763/
 
   - Log filename to be date-time based
   https://sourceforge.net/p/omegat/feature-requests/1753/
+
+  - TMX writer output in 6.1 should be the same as in 6.0
+  https://sourceforge.net/p/omegat/feature-requests/1749/
 
   - Support Morfologik spell checker and use LT bundled dictionary
   https://sourceforge.net/p/omegat/feature-requests/1748/
@@ -146,7 +164,9 @@
   - Remove "Restore defaults" button where it has no function
   https://sourceforge.net/p/omegat/feature-requests/1364/
 
+  - Upgrade to LanguageTool 6.5
   - Upgrade to LanguageTool 3.6
+  https://sourceforge.net/p/omegat/feature-requests/1783/
   https://sourceforge.net/p/omegat/feature-requests/1299/
 
   - Improve TBX parsing
@@ -161,6 +181,30 @@
 
 
   Bug fixes:
+
+  - Unable to import a team project to a path containing Chinese characters
+  https://sourceforge.net/p/omegat/bugs/1302/
+
+  - Wrong root element name for stats.xml
+  https://sourceforge.net/p/omegat/bugs/1301/
+
+  - NPE at program exit
+  https://sourceforge.net/p/omegat/bugs/1294/
+
+  - Sometimes called SegmentProperties.onEntryActivated after closed a project
+  https://sourceforge.net/p/omegat/bugs/1291/
+
+  - Mismatch in method name causes exception when selecting "Open Writable Glossary File"
+  https://sourceforge.net/p/omegat/bugs/1290/
+
+  - Spellchecker raised NPE when writing word list file
+  https://sourceforge.net/p/omegat/bugs/1288/
+
+  - Uncaught exception in weekly build (2025-01-18)
+  https://sourceforge.net/p/omegat/bugs/1280/
+
+  - Fix the IllegalArgumentError on sort with filter(Objects::nonNull)
+  https://sourceforge.net/p/omegat/bugs/1279/
 
   - aligner average distance can be {0} which expected a numeric value
   https://sourceforge.net/p/omegat/bugs/1275/
@@ -412,6 +456,9 @@
 
   - Incorrect display of RTL segments in the Fuzzy Matches pane
   https://sourceforge.net/p/omegat/bugs/558/
+
+  - Quick stats don't reset if there are no more source files
+  https://sourceforge.net/p/omegat/bugs/491/
 
   - Print Exception with Invalid URL in "Import From MediaWiki..
   https://sourceforge.net/p/omegat/bugs/459/

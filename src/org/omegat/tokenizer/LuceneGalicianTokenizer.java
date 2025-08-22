@@ -27,11 +27,20 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.gl.GalicianAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * Tokenizer implementation for the Galician language based on Lucene.
+ * This class is designed to tokenize Galician text, with optional stemming
+ * and stop-word filtering.
+ * <p>
+ * This tokenizer provides flexibility for enabling or disabling the use
+ * of stems and stop-words during text processing. It integrates with
+ * Lucene's {@link GalicianAnalyzer} for text analysis when stemming and
+ * stop-words are required.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "gl" })

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article lang="zh_CN" id="first.steps">
+  <title>OmegaT</title>
+  <section>
+	<title id="first-steps">第一步</title>
+	<para>按 <keycap>F1</keycap> 或访问 <guimenu>&gt; 帮助</guimenu>菜单来打开用户手册。它附带了对 OmegaT 的详细介绍。想用最少设置步骤就开始使用 OmegaT，如此进行：<orderedlist id="first-step-list">
+	  <listitem>
+		<para>用 <guimenu>&gt; 项目</guimenu> <guimenuitem>&gt; 新建...</guimenuitem> 来创建一个新项目。</para>
+	  </listitem>
+	  <listitem>
+		<para>更改语言代码以反映您的原文语言与译文语言。单击<guibutton>确定</guibutton>。</para>
+
+		<para>→ OmegaT 会创建一组文件夹，其中包含您的文件。它还会创建一个空的翻译记忆库，当你输入译文时，会在背景填充此文件，每次一个片段。该记忆项的匹配项最终会出现在<guilabel>模糊匹配</guilabel>窗格中。</para>
+	  </listitem>
+	  <listitem>
+		<para>单击<guibutton>添加文件...</guibutton>并添加要翻译的文件。关闭窗口。</para>
+
+		<para>→ OmegaT 会将选定的文件复制到上一步创建的项目中。现在它将逐段显示它们以供翻译。</para>
+	  </listitem>
+	  <listitem>
+		<para>输入第一个片段的翻译。按下<keycap>回车</keycap>。</para>
+
+		<para>→ OmegaT 会将此片段注册到项目的翻译记忆库中，并将光标移动到下一个片段。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>随时都可以用 <guimenu>&gt; 项目</guimenu><guimenuitem>&gt; 创建译文文件</guimenuitem>来创建译文文档。</para>
+
+		<para>→ OmegaT 会将译文文件存储到第一步中创建的项目内的 <guilabel>target</guilabel> 文件夹中。使用 <guimenu>&gt; 项目</guimenu> <guisubmenu>&gt; 访问项目内容</guisubmenu>来访问这些文件。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>如果想了解更多信息，请阅读用户手册。</para>
+	  </listitem>
+	</orderedlist>
+	</para>
+  </section>
+
+  <section>
+	<title id="freedoms">自由</title>
+	<para>OmegaT 是针对专业译者的自由计算机辅助翻译（CAT）解决方案。它是根据 <emphasis>GNU 通用公共许可证 3.0 版</emphasis>的条款分发的。参见 <guimenu>&gt; 帮助</guimenu> <guimenu>&gt; 关于</guimenu>。此许可证给予你以下自由：<itemizedlist id="freedoms.list">
+	  <listitem>
+		<para>出于任何目的，随心所欲地运行 OmegaT 的自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>研究 OmegaT 如何工作、以及对其进行更改使其按照您的意愿进行计算的自由。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>重新分发副本的自由，这样您就可以帮助其他人。</para>
+	  </listitem>
+
+	  <listitem>
+		<para>将修改后的版本的副本分发给其他人的自由。</para>
+	  </listitem>
+	</itemizedlist>
+	</para>
+  </section>
+</article>

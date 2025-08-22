@@ -228,24 +228,24 @@ public class XLIFFFilter extends XMLFilter {
             // <trans-unit> <note>'s only
             addProperty("note", text.toString());
         } else if (path.endsWith("trans-unit")) {
+            StringBuilder buf = new StringBuilder();
+            for (int i = 0; i < groupLevel; i++) {
+                String temp = groupResname.get(i);
+                if (temp != null) {
+                    buf.append(temp);
+                    // group1/group2/..
+                    buf.append(i == (groupLevel - 1) ? "" : "/");
+                }
+            }
+            if (buf.length() > 0) {
+                addProperty("group", buf.toString());
+            }
+
+            if (resname != null) {
+                addProperty("resname", resname);
+            }
+
             if (entryParseCallback != null) {
-                StringBuilder buf = new StringBuilder();
-                for (int i = 0; i < groupLevel; i++) {
-                    String temp = groupResname.get(i);
-                    if (temp != null) {
-                        buf.append(temp);
-                        // group1/group2/..
-                        buf.append(i == (groupLevel - 1) ? "" : "/");
-                    }
-                }
-                if (buf.length() > 0) {
-                    addProperty("group", buf.toString());
-                }
-
-                if (resname != null) {
-                    addProperty("resname", resname);
-                }
-
                 for (int i = 0; i < entryText.size(); i++) {
                     entryParseCallback.addEntryWithProperties(getSegID(), entryText.get(i), null, false,
                             finalizeProperties(), null, this, protectedParts.get(i));
@@ -297,11 +297,11 @@ public class XLIFFFilter extends XMLFilter {
         return segID;
     }
 
-    String ensureUniqueID(String id) {
+    String ensureUniqueID(String uid) {
         int i = 0;
         String tryID;
         while (true) {
-            tryID = id + (i == 0 ? "" : "_" + i);
+            tryID = uid + (i == 0 ? "" : "_" + i);
             if (!altIDCache.contains(tryID)) {
                 altIDCache.add(tryID);
                 return tryID;
@@ -310,31 +310,22 @@ public class XLIFFFilter extends XMLFilter {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isInIgnored() {
         return ignored;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void text(String text) {
-        this.text.append(text);
+    public void text(String newText) {
+        this.text.append(newText);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public String translate(String entry, List<ProtectedPart> protectedParts) {
+    public String translate(String entry, List<ProtectedPart> givenProtectedParts) {
         if (entryParseCallback != null) {
             if (!StringUtil.isEmpty(entry)) {
                 entryText.add(entry);
-                this.protectedParts.add(protectedParts);
+                this.protectedParts.add(givenProtectedParts);
             }
             return entry;
         } else if (entryTranslateCallback != null) {
@@ -346,9 +337,6 @@ public class XLIFFFilter extends XMLFilter {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isEnabledInDefault() {
         return false;

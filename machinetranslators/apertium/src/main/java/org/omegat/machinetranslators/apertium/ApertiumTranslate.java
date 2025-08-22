@@ -58,6 +58,8 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
 /**
+ * Apertium machine translation connector.
+ *
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  */
@@ -87,10 +89,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
     }
 
     public static void unloadPlugins() {
-    }
-
-    public ApertiumTranslate() {
-        super();
+        // there is no way to remove
     }
 
     @Override
@@ -103,6 +102,7 @@ public class ApertiumTranslate extends BaseCachedTranslate {
      *
      * @return engine name.
      */
+    @Override
     public String getName() {
         return BUNDLE.getString("MT_ENGINE_APERTIUM");
     }
@@ -277,10 +277,12 @@ public class ApertiumTranslate extends BaseCachedTranslate {
                 updateOk.run();
             }
 
+            @Override
             public void insertUpdate(DocumentEvent event) {
                 updateOk.run();
             }
 
+            @Override
             public void removeUpdate(DocumentEvent event) {
                 updateOk.run();
             }

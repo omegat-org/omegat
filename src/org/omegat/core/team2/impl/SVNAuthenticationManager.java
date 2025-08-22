@@ -29,6 +29,7 @@ import java.io.Console;
 
 import javax.net.ssl.TrustManager;
 
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tmatesoft.svn.core.SVNErrorCode;
@@ -53,15 +54,13 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.StaticUIUtils;
 
-import gen.core.project.RepositoryDefinition;
-
 /**
  * Authentication manager for SVN. See details about authentication at the
- * http://wiki.svnkit.com/Authentication. Authentication manager created for
- * each repository instance.
- *
+ * <a href="https://wiki.svnkit.com/Authentication">SVNKit document</a>.
+ * Authentication manager will be created for each repository instance.
+ * <p>
  * Only username+password authentication supported. Proxy isn't supported for
- * https:// repositories.
+ * "https://" repositories.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -71,33 +70,23 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SVNAuthenticationManager.class);
 
-    private final RepositoryDefinition repoDef;
-    private final String predefinedUser;
-    private final String predefinedPass;
-    private final ProjectTeamSettings teamSettings;
+    private final @Nullable String predefinedUser;
+    private final @Nullable String predefinedPass;
 
+    @SuppressWarnings("unused")
     public SVNAuthenticationManager(String repoUrl, String predefinedUser, String predefinedPass,
             ProjectTeamSettings teamSettings) {
-        this(getDef(repoUrl), predefinedUser, predefinedPass, teamSettings);
+        this(predefinedUser, predefinedPass);
     }
 
-    public SVNAuthenticationManager(RepositoryDefinition repoDef, String predefinedUser,
-            String predefinedPass, ProjectTeamSettings teamSettings) {
-        this.repoDef = repoDef;
+    public SVNAuthenticationManager(@Nullable String predefinedUser, @Nullable String predefinedPass) {
         this.predefinedUser = predefinedUser;
         this.predefinedPass = predefinedPass;
-        this.teamSettings = teamSettings;
-    }
-
-    private static RepositoryDefinition getDef(String repoUrl) {
-        RepositoryDefinition def = new RepositoryDefinition();
-        def.setUrl(repoUrl);
-        return def;
     }
 
     @Override
     public void acknowledgeAuthentication(boolean accepted, String kind, String realm,
-            SVNErrorMessage errorMessage, SVNAuthentication authentication) throws SVNException {
+            SVNErrorMessage errorMessage, SVNAuthentication authentication) {
         if (!accepted) {
             LOGGER.atDebug().log("SVN authentication error: {}", errorMessage);
         }
@@ -181,9 +170,12 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
             }
             break;
         case SSL:
-            // raise exception because of unsupported.
-            // when support SSL authentication, we will return
-            // SVNSSLAuthentication.newInstance(kind, null, false, url, false);
+            // Attempting to use SSL authentication will intentionally raise an exception.
+            // because it is currently unsupported in this implementation.
+            //
+            // In the future, when SSL authentication is supported, the following method
+            // could be used to create an appropriate instance like as:
+            // "SVNSSLAuthentication.newInstance(kind, null, false, url, false);"
             throw new SVNException(SVNErrorMessage.create(SVNErrorCode.RA_UNKNOWN_AUTH));
         default:
             throw new SVNException(SVNErrorMessage.create(SVNErrorCode.AUTHN_NO_PROVIDER));
@@ -215,13 +207,19 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         }
     }
 
+    // Updated field with extracted class
+    private ISVNProxyManager noProxyManager;
+
     @Override
-    public ISVNProxyManager getProxyManager(SVNURL url) throws SVNException {
-        return NO_PROXY;
+    public ISVNProxyManager getProxyManager(SVNURL url) {
+        if (noProxyManager == null) {
+            noProxyManager = new NoProxyManager();
+        }
+        return noProxyManager;
     }
 
     @Override
-    public TrustManager getTrustManager(SVNURL url) throws SVNException {
+    public TrustManager getTrustManager(SVNURL url) {
         return null;
     }
 
@@ -235,26 +233,33 @@ public class SVNAuthenticationManager implements ISVNAuthenticationManager {
         throw new UnsupportedOperationException();
     }
 
-    ISVNProxyManager NO_PROXY = new ISVNProxyManager() {
+    static class NoProxyManager implements ISVNProxyManager {
+
+        @Override
         public String getProxyHost() {
             return null;
         }
 
+        @Override
         public String getProxyPassword() {
             return null;
         }
 
+        @Override
         public int getProxyPort() {
             return -1;
         }
 
+        @Override
         public String getProxyUserName() {
             return null;
         }
 
+        @Override
         public void acknowledgeProxyContext(boolean accepted, SVNErrorMessage errorMessage) {
+            // do nothing
         }
-    };
+    }
 
     private SVNAuthentication getAuthenticatorInstance(String kind, SVNURL url, Credentials credentials)
             throws SVNException {

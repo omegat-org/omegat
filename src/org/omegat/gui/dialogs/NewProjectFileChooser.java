@@ -29,11 +29,14 @@ package org.omegat.gui.dialogs;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 import javax.swing.JOptionPane;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OmegaTFileChooser;
 
 /**
@@ -53,13 +56,20 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
         setDialogTitle(OStrings.getString("PP_SAVE_PROJECT_FILE"));
         setName(DIALOG_NAME);
 
+        // Always set the default directory for a new project
+        File dir = null;
         String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
         if (curDir != null) {
-            File dir = new File(curDir);
-            if (dir.isDirectory()) {
-                setCurrentDirectory(dir);
+            dir = new File(curDir);
+            if (!dir.isDirectory()) {
+                dir = null;
             }
         }
+        if (dir == null) {
+            String homeDir = StaticUtils.getHomeDir();
+            dir = Paths.get(Objects.requireNonNullElse(homeDir, ".")).toAbsolutePath().normalize().toFile();
+        }
+        setCurrentDirectory(dir);
     }
 
     public void approveSelection() {
@@ -68,7 +78,7 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
         File dir = getSelectedFile();
         if (dir.isDirectory()) {
             File[] files = dir.listFiles();
-            if (files.length > 1 || (files.length == 1 && !files[0].isHidden())) {
+            if (files != null && (files.length > 1 || (files.length == 1 && !files[0].isHidden()))) {
                 // must select non-existing name or empty dir for project, or an empty repository folder
                 // (that contains e.g. '.git' or '.svn' directory) so this can be used to initialize a new team project.
                 JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_NEW_OR_EMPTY"),
@@ -79,7 +89,7 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
         if (!dir.exists()) {
             Path parent = dir.getParentFile().toPath();
             // Use NIO methods because File.canRead/canWrite give incorrect responses on Windows
-            if (parent != null && (!Files.isReadable(parent) || !Files.isWritable(parent))) {
+            if (!Files.isReadable(parent) || !Files.isWritable(parent)) {
                 // Must select readable + writable dir
                 JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_PERMISSIONS"),
                         OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), JOptionPane.ERROR_MESSAGE);

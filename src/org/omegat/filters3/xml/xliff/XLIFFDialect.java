@@ -68,9 +68,6 @@ public class XLIFFDialect extends DefaultXMLDialect {
      */
     protected ID_TYPE altTransIDType;
 
-    public XLIFFDialect() {
-    }
-
     /**
      * Actually defines the dialect. It cannot be done during creation, because
      * options are not known at that step.
@@ -147,9 +144,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
             return true;
         }
 
-        if (!tag.equalsIgnoreCase("group") && // Translate can only appear in
-                                              // these tags
-                !tag.equalsIgnoreCase("trans-unit") && !tag.equalsIgnoreCase("bin-unit")) {
+        // Translate can only appear in these tags
+        if (!tag.equalsIgnoreCase("group") && !tag.equalsIgnoreCase("trans-unit")
+                && !tag.equalsIgnoreCase("bin-unit")) {
             return false;
         }
 

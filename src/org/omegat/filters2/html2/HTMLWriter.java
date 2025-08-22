@@ -126,6 +126,7 @@ public class HTMLWriter extends Writer {
      * Flushes the writer (which does the real write-out of data) and closes the
      * real writer.
      */
+    @Override
     public void close() throws IOException {
         signalClosing = true;
         flush();
@@ -136,6 +137,7 @@ public class HTMLWriter extends Writer {
      * Does the real write-out of the data, first adding/replacing encoding
      * statement.
      */
+    @Override
     public void flush() throws IOException {
         StringBuffer buffer = writer.getBuffer();
         if (signalAlreadyFlushed || encoding == null) {
@@ -152,7 +154,7 @@ public class HTMLWriter extends Writer {
 
             String contents = buffer.toString();
 
-            if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.NEVER) {
+            if (options.getRewriteEncoding() != HTMLOptions.RewriteMode.NEVER) {
                 String eol = "";
                 Matcher matcherLineending = PatternConsts.LINE_ENDING.matcher(contents);
                 if (matcherLineending.find()) {
@@ -180,11 +182,11 @@ public class HTMLWriter extends Writer {
                     contents = matcherEnc.replaceFirst(htmlMeta);
                 } else if (matcherEncHtml5.find()) {
                     contents = matcherEncHtml5.replaceFirst("<meta charset=\"" + encoding + "\">");
-                } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFMETA) {
+                } else if (options.getRewriteEncoding() != HTMLOptions.RewriteMode.IFMETA) {
                     Matcher matcherHead = PatternConsts.HTML_HEAD.matcher(contents);
                     if (matcherHead.find()) {
                         contents = matcherHead.replaceFirst("$0" + eol + "    " + htmlMeta);
-                    } else if (options.getRewriteEncoding() != HTMLOptions.REWRITE_MODE.IFHEADER) {
+                    } else if (options.getRewriteEncoding() != HTMLOptions.RewriteMode.IFHEADER) {
                         Matcher matcherHtml = PatternConsts.HTML_HTML.matcher(contents);
                         if (matcherHtml.find()) {
                             contents = matcherHtml.replaceFirst(
@@ -216,6 +218,7 @@ public class HTMLWriter extends Writer {
      * @throws IOException
      *             - If an I/O error occurs
      */
+    @Override
     public void write(@NotNull char[] cbuf, int off, int len) throws IOException {
         writer.write(cbuf, off, len);
         if (writer.getBuffer().length() >= MAX_BUFFER_SIZE) {

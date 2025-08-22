@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -53,15 +54,15 @@ public class SrtFilter extends AbstractFilter {
             .compile("([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})\\s+-->\\s+([0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3})");
     protected static final String EOL = "\r\n";
 
-    enum READ_STATE {
+    enum ReadState {
         WAIT_TIME, WAIT_TEXT
     };
 
-    protected Map<String, String> align;
+    protected @Nullable Map<String, String> align;
 
-    protected String key;
+    protected @Nullable String key;
     protected StringBuilder text = new StringBuilder();
-    protected BufferedWriter out;
+    protected @Nullable BufferedWriter out;
 
     /**
      * Register plugin into OmegaT.
@@ -98,10 +99,10 @@ public class SrtFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         out = outFile;
-        READ_STATE state = READ_STATE.WAIT_TIME;
+        ReadState state = ReadState.WAIT_TIME;
         key = null;
         text.setLength(0);
         Pattern pattern = getPattern();
@@ -113,7 +114,7 @@ public class SrtFilter extends AbstractFilter {
                 switch (state) {
                 case WAIT_TIME:
                     if (pattern.matcher(trimmed).matches()) {
-                        state = READ_STATE.WAIT_TEXT;
+                        state = ReadState.WAIT_TEXT;
                     }
                     key = trimmed;
                     text.setLength(0);
@@ -124,13 +125,15 @@ public class SrtFilter extends AbstractFilter {
                     if (trimmed.isEmpty()) {
                         flush();
                         outFile.write(EOL);
-                        state = READ_STATE.WAIT_TIME;
+                        state = ReadState.WAIT_TIME;
                     }
                     if (text.length() > 0) {
                         text.append('\n');
                     }
                     text.append(s);
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected state: " + state);
                 }
             }
         }
@@ -153,8 +156,10 @@ public class SrtFilter extends AbstractFilter {
             if (tr == null) {
                 tr = text.toString();
             }
-            out.write(tr.replace("\n", EOL));
-            out.write(EOL);
+            if (out != null) {
+                out.write(tr.replace("\n", EOL));
+                out.write(EOL);
+            }
         }
 
         key = null;
@@ -162,9 +167,10 @@ public class SrtFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
-        Map<String, String> source = new HashMap<String, String>();
-        Map<String, String> translated = new HashMap<String, String>();
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
+            throws Exception {
+        Map<String, String> source = new HashMap<>();
+        Map<String, String> translated = new HashMap<>();
 
         align = source;
         processFile(sourceFile, new NullBufferedWriter(), fc);
@@ -172,7 +178,7 @@ public class SrtFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (!StringUtil.isEmpty(tr)) {
+            if (!StringUtil.isEmpty(tr) && entryAlignCallback != null) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }

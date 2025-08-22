@@ -72,19 +72,36 @@ public final class StaticUtils {
     }
 
     /**
-     * Configuration directory on Windows platforms
+     * Configuration directory on Windows platforms.
      */
+    private static final String WINDOWS_ROAMING_DATA_DIR = "AppData\\Roaming";
     private static final String WINDOWS_CONFIG_DIR = "\\OmegaT\\";
 
     /**
-     * Configuration directory on UNIX platforms
+     * Configuration directory on UNIX platforms.
      */
     private static final String UNIX_CONFIG_DIR = "/.omegat/";
 
     /**
-     * Configuration directory on Mac OS X
+     * Configuration directory on macOS.
      */
     private static final String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";
+
+    /**
+     * Application data directory on Windows platforms.
+     */
+    private static final String WINDOWS_LOCAL_DATA_DIR = "AppData\\Local";
+    private static final String WINDOWS_DATA_DIR = "\\OmegaT\\";
+
+    /**
+     * Application data directory on UNIX platforms.
+     */
+    private static final String UNIX_DATA_DIR = "/.local/share/OmegaT/";
+
+    /**
+     * Application data directory on macOS.
+     */
+    private static final  String OSX_DATA_DIR = "/Library/Application Support/OmegaT/";
 
     /**
      * Script directory
@@ -258,7 +275,7 @@ public final class StaticUtils {
             // Trying first Vista/7, because "Application Data" exists also as
             // virtual folder,
             // so we would not be able to differentiate with 2000/XP otherwise
-            File appDataFile = new File(home, "AppData\\Roaming");
+            File appDataFile = new File(home, WINDOWS_ROAMING_DATA_DIR);
             if (appDataFile.exists()) {
                 appData = appDataFile.getAbsolutePath();
             } else {
@@ -327,6 +344,56 @@ public final class StaticUtils {
         // we should have a correct, existing config dir now
         RuntimePreferences.setConfigDir(configDir);
         return configDir;
+    }
+
+    /**
+     * Get application data directory.
+     * @return directory path to store application data.
+     */
+    public static String getApplicationDataDir() {
+        String dataDir = null;
+        String home = getHomeDir();
+        // if os or user home is null or empty, we cannot reliably determine
+        // the data dir, so we use the current working dir (= empty string)
+        if (StringUtil.isEmpty(home)) {
+            dataDir = new File(".").getAbsolutePath() + File.separator;
+            return dataDir;
+        }
+
+        if (Platform.isWindows) {
+            File appDataFile = new File(home, WINDOWS_LOCAL_DATA_DIR);
+            if (appDataFile.exists()) {
+                dataDir = appDataFile.getAbsolutePath() + WINDOWS_DATA_DIR;
+            }
+        } else if (Platform.isUnixLike()) {
+            dataDir = home + UNIX_DATA_DIR;
+        } else if (Platform.isMacOSX()) {
+            // "~/Library/Application Suppport/OmegaT/"
+            dataDir = home + OSX_DATA_DIR;
+        } else {
+            // use the user's home directory by default
+            dataDir = home + File.separator;
+        }
+        if (dataDir == null || dataDir.isEmpty()) {
+            return new File(".").getAbsolutePath() + File.separator;
+        }
+        try {
+            // check if the dir exists
+            File dir = new File(dataDir);
+            if (!dir.exists()) {
+                // create the dir
+                boolean created = dir.mkdirs();
+                if (!created) {
+                    Log.logErrorRB("SU_DATA_DIR_CREATE_ERROR");
+                    dataDir = new File(".").getAbsolutePath() + File.separator;
+                }
+            }
+        } catch (SecurityException e) {
+            // the system doesn't want us to write where we want to write
+            dataDir = new File(".").getAbsolutePath() + File.separator;
+            Log.log(e.toString());
+        }
+        return dataDir;
     }
 
     public static String getHomeDir() {

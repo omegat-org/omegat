@@ -25,12 +25,10 @@
 
 package org.omegat.gui.properties;
 
-import java.awt.Component;
 import java.awt.IllegalComponentStateException;
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -40,8 +38,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
@@ -95,12 +91,16 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private static final String KEY_ORIGIN = "origin";
     private static final String PROP_ORIGIN = ProjectTMX.PROP_ORIGIN;
 
-    final List<String> properties = new ArrayList<>();
-
-    final DockableScrollPane scrollPane;
+    private final List<String> properties = new ArrayList<>();
+    private final PropertyChangeSupport changes = new PropertyChangeSupport(this);
+    private final DockableScrollPane scrollPane;
 
     private ISegmentPropertiesView viewImpl;
     private boolean isTargetRtl;
+
+    void setTargetRtl(boolean targetRtl) {
+        isTargetRtl = targetRtl;
+    }
 
     public SegmentPropertiesArea(IMainWindow mw) {
         scrollPane = new DockableScrollPane("SEGMENTPROPERTIES", OStrings.getString("SEGPROP_PANE_TITLE"),
@@ -109,19 +109,7 @@ public class SegmentPropertiesArea implements IPaneMenu {
 
         scrollPane.setMenuProvider(this);
 
-        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
-            @Override
-            public void onNewFile(String activeFileName) {
-            }
-
-            @Override
-            public void onEntryActivated(SourceTextEntry newEntry) {
-                scrollPane.stopNotifying();
-                isTargetRtl = BiDiUtils.isTargetLangRtl();
-                setProperties(newEntry);
-                doNotify(getKeysToNotify());
-            }
-        });
+        CoreEvents.registerEntryEventListener(new SegmentPropertiesEntryEventListener(this));
         CoreEvents.registerProjectChangeListener(eventType -> {
             if (eventType == IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE) {
                 setProperties(null);
@@ -143,8 +131,10 @@ public class SegmentPropertiesArea implements IPaneMenu {
             }
         }
         installView(initModeClass);
+    }
 
-        scrollPane.addMouseListener(contextMenuListener);
+    public void addPropertyChangeListener(String key, PropertyChangeListener l) {
+        changes.addPropertyChangeListener(key, l);
     }
 
     private void installView(Class<?> viewClass) {
@@ -155,8 +145,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         try {
             Constructor<?> constructor = viewClass.getConstructor();
             newImpl = (ISegmentPropertiesView) constructor.newInstance();
-        } catch (Throwable e) {
-            Logger.getLogger(getClass().getName()).log(Level.FINE, e.getMessage());
+        } catch (Exception e) {
+            Log.log(e);
             return;
         }
         viewImpl = newImpl;
@@ -169,36 +159,22 @@ public class SegmentPropertiesArea implements IPaneMenu {
         viewImpl.update();
     }
 
-    final MouseListener contextMenuListener = new MouseAdapter() {
-        @Override
-        public void mousePressed(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                doPopup(e);
-            }
-        }
-
-        private void doPopup(MouseEvent e) {
-            Point p = SwingUtilities.convertPoint((Component) e.getSource(), e.getPoint(),
-                    scrollPane);
-            showContextMenu(p);
-        }
-    };
-
     void showContextMenu(Point p) {
         JPopupMenu menu = new JPopupMenu();
         populateLocalContextMenuOptions(menu, p);
         try {
             menu.show(scrollPane, p.x, p.y);
         } catch (IllegalComponentStateException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
+    }
+
+    List<String> getProperties() {
+        return properties;
+    }
+
+    DockableScrollPane getScrollPane() {
+        return scrollPane;
     }
 
     private void populateLocalContextMenuOptions(JPopupMenu contextMenu, Point p) {
@@ -209,8 +185,8 @@ public class SegmentPropertiesArea implements IPaneMenu {
         String displayKey = key;
         if (!Preferences.isPreference(Preferences.SEGPROPS_SHOW_RAW_KEYS)) {
             try {
-                displayKey = OStrings
-                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
+                displayKey = OStrings.getString(
+                        ISegmentPropertiesView.PROPERTY_TRANSLATION_KEY + key.toUpperCase(Locale.ENGLISH));
             } catch (MissingResourceException ignore) {
                 // If this is not a known key then we can't translate it,
                 // so use the "raw" key instead.
@@ -305,9 +281,11 @@ public class SegmentPropertiesArea implements IPaneMenu {
     private String getBooleanValueVerb(String key, boolean value) {
         try {
             if (value) {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
+                return OStrings
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_VERB + key.toUpperCase());
             } else {
-                return OStrings.getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
+                return OStrings
+                        .getString(ISegmentPropertiesView.PROPERTY_TRANSLATION_NVERB + key.toUpperCase());
             }
         } catch (MissingResourceException ex) {
             // fallback to default expression
@@ -320,32 +298,37 @@ public class SegmentPropertiesArea implements IPaneMenu {
     }
 
     private void setProperties(SourceTextEntry ste) {
+        var oldProperties = new ArrayList<>(properties);
         properties.clear();
-        if (ste != null) {
-            if (ste.getComment() != null) {
-                setProperty(KEY_HASCOMMENT, true);
+        if (ste == null) {
+            viewImpl.update();
+            return;
+        }
+
+        if (ste.getComment() != null) {
+            setProperty(KEY_HASCOMMENT, true);
+        }
+        if (ste.getDuplicate() != DUPLICATE.NONE) {
+            setProperty(KEY_ISDUP, ste.getDuplicate());
+        }
+        if (ste.getSourceTranslation() != null) {
+            if (isTargetRtl) {
+                setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
+            } else {
+                setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
             }
-            if (ste.getDuplicate() != DUPLICATE.NONE) {
-                setProperty(KEY_ISDUP, ste.getDuplicate());
-            }
-            if (ste.getSourceTranslation() != null) {
-                if (isTargetRtl) {
-                    setProperty(KEY_TRANSLATION, BiDiUtils.addRtlBidiAround(ste.getSourceTranslation()));
-                } else {
-                    setProperty(KEY_TRANSLATION, ste.getSourceTranslation());
-                }
-                if (ste.isSourceTranslationFuzzy()) {
-                    setProperty(KEY_TRANSLATIONISFUZZY, true);
-                }
-            }
-            setKeyProperties(ste.getKey());
-            IProject project = Core.getProject();
-            if (project.isProjectLoaded()) {
-                TMXEntry trg = project.getTranslationInfo(ste);
-                setTranslationProperties(trg);
+            if (ste.isSourceTranslationFuzzy()) {
+                setProperty(KEY_TRANSLATIONISFUZZY, true);
             }
         }
+        setKeyProperties(ste.getKey());
+        IProject project = Core.getProject();
+        if (project.isProjectLoaded()) {
+            TMXEntry trg = project.getTranslationInfo(ste);
+            setTranslationProperties(trg);
+        }
         viewImpl.update();
+        changes.firePropertyChange("properties", oldProperties, properties);
     }
 
     private void setKeyProperties(EntryKey key) {
@@ -383,5 +366,31 @@ public class SegmentPropertiesArea implements IPaneMenu {
         } else {
             setProperty(KEY_ORIGIN, OStrings.getString("SEGPROP_ORIGIN_UNKNOWN"));
         }
+    }
+
+    private class SegmentPropertiesEntryEventListener implements IEntryEventListener {
+
+        private final SegmentPropertiesArea segmentPropertiesArea;
+
+        SegmentPropertiesEntryEventListener(SegmentPropertiesArea segmentPropertiesArea) {
+            this.segmentPropertiesArea = segmentPropertiesArea;
+        }
+
+        @Override
+        public void onNewFile(String activeFileName) {
+            // nothing to do
+        }
+
+        @Override
+        public void onEntryActivated(SourceTextEntry newEntry) {
+            if (!Core.getProject().isProjectLoaded()) {
+                return;
+            }
+            segmentPropertiesArea.scrollPane.stopNotifying();
+            segmentPropertiesArea.setTargetRtl(BiDiUtils.isTargetLangRtl());
+            segmentPropertiesArea.setProperties(newEntry);
+            segmentPropertiesArea.doNotify(getKeysToNotify());
+        }
+
     }
 }

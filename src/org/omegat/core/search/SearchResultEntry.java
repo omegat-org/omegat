@@ -50,17 +50,17 @@ public class SearchResultEntry {
     public SearchResultEntry(int num, String preamble, String srcPrefix, String src, String target,
             String note, String properties, SearchMatch[] srcMatch, SearchMatch[] targetMatch,
             SearchMatch[] noteMatch, SearchMatch[] propertiesMatch) {
-        m_num = num;
-        m_preamble = preamble;
-        m_srcPrefix = srcPrefix;
-        m_src = src;
-        m_target = target;
-        m_note = note;
-        m_properties = properties;
-        m_srcMatch = srcMatch;
-        m_targetMatch = targetMatch;
-        m_noteMatch = noteMatch;
-        m_propertiesMatch = propertiesMatch;
+        entryNum = num;
+        preambleText = preamble;
+        this.srcPrefix = srcPrefix;
+        sourceText = src;
+        targetText = target;
+        this.note = note;
+        propertiesString = properties;
+        this.srcMatch = srcMatch;
+        this.targetMatch = targetMatch;
+        this.noteMatch = noteMatch;
+        this.propertiesMatch = propertiesMatch;
     }
 
     /**
@@ -71,66 +71,144 @@ public class SearchResultEntry {
      * directory)
      */
     public int getEntryNum() {
-        return (m_num);
+        return (entryNum);
     }
 
     /** Returns information about where this entry comes from. */
     public String getPreamble() {
-        return (m_preamble);
+        return (preambleText);
     }
 
     public void setPreamble(String preamble) {
-        m_preamble = preamble;
+        preambleText = preamble;
     }
 
     /** Returns the source text of the corresponding entry within a project. */
     public String getSrcText() {
-        return (m_src);
+        return (sourceText);
     }
 
     /** Returns the target text of the corresponding entry within a project. */
     public String getTranslation() {
-        return (m_target);
+        return (targetText);
     }
 
     /** Returns the note text of the corresponding entry within a project. */
     public String getNote() {
-        return (m_note);
+        return (note);
     }
 
     public String getProperties() {
-        return m_properties;
+        return propertiesString;
     }
 
     public String getSrcPrefix() {
-        return m_srcPrefix;
+        return srcPrefix;
     }
 
     public SearchMatch[] getSrcMatch() {
-        return m_srcMatch;
+        return srcMatch;
     }
 
     public SearchMatch[] getTargetMatch() {
-        return m_targetMatch;
+        return targetMatch;
     }
 
     public SearchMatch[] getNoteMatch() {
-        return m_noteMatch;
+        return noteMatch;
     }
 
     public SearchMatch[] getPropertiesMatch() {
-        return m_propertiesMatch;
+        return propertiesMatch;
     }
 
-    private int m_num;
-    private String m_preamble;
-    private String m_srcPrefix;
-    private String m_src;
-    private String m_target;
-    private String m_note;
-    private String m_properties;
-    private SearchMatch[] m_srcMatch;
-    private SearchMatch[] m_targetMatch;
-    private SearchMatch[] m_noteMatch;
-    private SearchMatch[] m_propertiesMatch;
+    private final int entryNum;
+    private String preambleText;
+    private final String srcPrefix;
+    private final String sourceText;
+    private final String targetText;
+    private final String note;
+    private final String propertiesString;
+    private final SearchMatch[] srcMatch;
+    private final SearchMatch[] targetMatch;
+    private final SearchMatch[] noteMatch;
+    private final SearchMatch[] propertiesMatch;
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private int entryNum;
+        private String preambleText;
+        private String srcPrefix;
+        private String sourceText;
+        private String targetText;
+        private String note;
+        private String propertiesString;
+        private SearchMatch[] srcMatch;
+        private SearchMatch[] targetMatch;
+        private SearchMatch[] noteMatch;
+        private SearchMatch[] propertiesMatch;
+
+        public Builder entryNum(int newEntryNum) {
+            this.entryNum = newEntryNum;
+            return this;
+        }
+
+        public Builder preambleText(String newPreambleText) {
+            this.preambleText = newPreambleText;
+            return this;
+        }
+
+        public Builder srcPrefix(String newSrcPrefix) {
+            this.srcPrefix = newSrcPrefix;
+            return this;
+        }
+
+        public Builder sourceText(String newSourceText) {
+            this.sourceText = newSourceText;
+            return this;
+        }
+
+        public Builder targetText(String newTargetText) {
+            this.targetText = newTargetText;
+            return this;
+        }
+
+        public Builder note(String newNote) {
+            this.note = newNote;
+            return this;
+        }
+
+        public Builder propertiesString(String properties) {
+            this.propertiesString = properties;
+            return this;
+        }
+
+        public Builder srcMatch(SearchMatch[] match) {
+            this.srcMatch = match;
+            return this;
+        }
+
+        public Builder targetMatch(SearchMatch[] match) {
+            this.targetMatch = match;
+            return this;
+        }
+
+        public Builder noteMatch(SearchMatch[] match) {
+            this.noteMatch = match;
+            return this;
+        }
+
+        public Builder propertiesMatch(SearchMatch[] newPropertiesMatch) {
+            this.propertiesMatch = newPropertiesMatch;
+            return this;
+        }
+
+        public SearchResultEntry build() {
+            return new SearchResultEntry(entryNum, preambleText, srcPrefix, sourceText, targetText,
+                    note, propertiesString, srcMatch, targetMatch, noteMatch, propertiesMatch);
+        }
+    }
 }

@@ -27,11 +27,15 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.hy.ArmenianAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * Tokenizer implementation for processing Armenian text.
+ * This class is specifically designed for tokenizing and optionally applying stemming or
+ * stop word filtering to Armenian language content.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "hy" })

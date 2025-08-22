@@ -59,7 +59,6 @@ public final class OSXIntegration {
 
     public static final Image APP_ICON_MAC = ResourcesUtil.getBundledImage("OmegaT_mac.png");
 
-    private static boolean guiLoaded = false;
     private static final List<Runnable> DO_AFTER_LOAD = new ArrayList<>();
 
     public static void init() {
@@ -74,10 +73,11 @@ public final class OSXIntegration {
             DesktopSupport.getSupport().disableSuddenTermination();
 
             // Register to find out when app finishes loading so we can
+            OSXEventListener appListener = new OSXEventListener();
             // 1. Set up full-screen support, and...
-            CoreEvents.registerApplicationEventListener(APP_LISTENER);
+            CoreEvents.registerApplicationEventListener(appListener);
             // 2. The open file handler can defer opening a project until the GUI is ready.
-            setOpenFilesHandler(OPEN_FILES_HANDLER);
+            setOpenFilesHandler(appListener);
 
             // Register listener to update the main window's proxy icon and modified indicators.
             CoreEvents.registerProjectChangeListener(PROJECT_LISTENER);
@@ -86,54 +86,6 @@ public final class OSXIntegration {
         }
     }
 
-    private static final IApplicationEventListener APP_LISTENER = new IApplicationEventListener() {
-        @Override
-        public void onApplicationStartup() {
-            guiLoaded = true;
-            synchronized (DO_AFTER_LOAD) {
-                for (Runnable r : DO_AFTER_LOAD) {
-                    r.run();
-                }
-                DO_AFTER_LOAD.clear();
-            }
-            Window window = Core.getMainWindow().getApplicationFrame();
-            enableFullScreen(window);
-        }
-        @Override
-        public void onApplicationShutdown() {
-            guiLoaded = false;
-        }
-    };
-
-    private static final IOpenFilesHandler OPEN_FILES_HANDLER = new IOpenFilesHandler() {
-        @Override
-        public void openFiles(List<?> files) {
-            if (files.isEmpty()) {
-                return;
-            }
-            File firstFile = (File) files.get(0); // Ignore others
-            if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
-                firstFile = firstFile.getParentFile();
-            }
-            if (!StaticUtils.isProjectDir(firstFile)) {
-                return;
-            }
-            final File projDir = firstFile;
-            Runnable openProject = new Runnable() {
-                @Override
-                public void run() {
-                    ProjectUICommands.projectOpen(projDir, true);
-                }
-            };
-            if (guiLoaded) {
-                SwingUtilities.invokeLater(openProject);
-            } else {
-                synchronized (DO_AFTER_LOAD) {
-                    DO_AFTER_LOAD.add(openProject);
-                }
-            }
-        }
-    };
 
     private static final IProjectEventListener PROJECT_LISTENER = eventType -> {
         JRootPane rootPane = Core.getMainWindow().getApplicationFrame().getRootPane();
@@ -212,5 +164,51 @@ public final class OSXIntegration {
 
     public interface IOpenFilesHandler {
         void openFiles(List<?> files);
+    }
+
+    private static class OSXEventListener implements IApplicationEventListener, IOpenFilesHandler {
+
+        private boolean guiLoaded = false;
+
+        @Override
+        public void onApplicationStartup() {
+            guiLoaded = true;
+            synchronized (DO_AFTER_LOAD) {
+                for (Runnable r : DO_AFTER_LOAD) {
+                    r.run();
+                }
+                DO_AFTER_LOAD.clear();
+            }
+            Window window = Core.getMainWindow().getApplicationFrame();
+            enableFullScreen(window);
+        }
+
+        @Override
+        public void onApplicationShutdown() {
+            guiLoaded = false;
+        }
+
+        @Override
+        public void openFiles(List<?> files) {
+            if (files.isEmpty()) {
+                return;
+            }
+            File firstFile = (File) files.get(0); // Ignore others
+            if (firstFile.getName().equals(OConsts.FILE_PROJECT)) {
+                firstFile = firstFile.getParentFile();
+            }
+            if (!StaticUtils.isProjectDir(firstFile)) {
+                return;
+            }
+            final File projDir = firstFile;
+            Runnable openProject = () -> ProjectUICommands.projectOpen(projDir, true);
+            if (guiLoaded) {
+                SwingUtilities.invokeLater(openProject);
+            } else {
+                synchronized (DO_AFTER_LOAD) {
+                    DO_AFTER_LOAD.add(openProject);
+                }
+            }
+        }
     }
 }

@@ -29,9 +29,11 @@ import java.io.StringReader;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
@@ -39,20 +41,42 @@ import org.apache.lucene.analysis.ja.JapaneseTokenizer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer.Mode;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.analysis.util.CharArraySet;
 import org.omegat.util.PatternConsts;
 
 /**
+ * A tokenizer implementation that specializes in processing Japanese text using Apache Lucene.
+ * This tokenizer is designed to handle text analysis for the Japanese language, with support
+ * for stemming, stop word filtering, and OmegaT-style tag handling. It extends the {@link BaseTokenizer}
+ * and integrates with Lucene's Japanese language processing tools.
+ * <p>
+ * <b>Features:</b>
+ * 1. Provides tokenization for Japanese text using Lucene's {@link JapaneseAnalyzer} and {@link JapaneseTokenizer}.
+ * 2. Supports optional stemming and stop word filtering during tokenization.
+ * 3. Handles OmegaT-style tags by either blanking out or reassembling them as needed.
+ * 4. Includes a custom {@link TagJoiningFilter} to reassemble fragmented tags during tokenization.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "ja" }, isDefault = true)
 public class LuceneJapaneseTokenizer extends BaseTokenizer {
 
+    /**
+     *   Initializes the tokenizer and sets up default configurations.
+     *   Tags are not delegated for exact tokenization by default.
+     */
     public LuceneJapaneseTokenizer() {
         super();
         shouldDelegateTokenizeExactly = false;
     }
 
+    /**
+     * Returns a {@link TokenStream} for processing the input text. Depending on the flags provided:
+     *  - If stemming is allowed, it utilizes {@link JapaneseAnalyzer} with optional stop word filtering.
+     *  - Otherwise, it uses {@link JapaneseTokenizer} for tokenization in normal mode, incorporating
+     *    the {@link TagJoiningFilter} to address OmegaT-style tags.
+     *  This method also manages OmegaT-style tags by blanking them out when stemming is enabled,
+     *  ensuring proper alignment with the original text.
+     */
     @SuppressWarnings("resource")
     @Override
     protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed)
@@ -109,9 +133,9 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
 
         private boolean buffering = false;
 
-        private final ArrayDeque<CachedToken> inputStack = new ArrayDeque<CachedToken>();
-        private final ArrayDeque<CachedToken> outputStack = new ArrayDeque<CachedToken>();
-        private final ArrayDeque<CachedToken> recoveryStack = new ArrayDeque<CachedToken>();
+        private final ArrayDeque<CachedToken> inputStack = new ArrayDeque<>();
+        private final ArrayDeque<CachedToken> outputStack = new ArrayDeque<>();
+        private final ArrayDeque<CachedToken> recoveryStack = new ArrayDeque<>();
 
         protected TagJoiningFilter(TokenStream input) {
             super(input);
@@ -143,6 +167,25 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
                 return true;
             }
             return finishToken();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            if (!super.equals(o)) {
+                return false;
+            }
+            TagJoiningFilter that = (TagJoiningFilter) o;
+            return startOffset == that.startOffset && buffering == that.buffering && Objects.equals(termAtt,
+                    that.termAtt) && Objects.equals(offsetAtt, that.offsetAtt)
+                    && Objects.equals(buffer.toString(), that.buffer.toString());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(super.hashCode(), termAtt, offsetAtt, buffer.toString(), startOffset, buffering);
         }
 
         private boolean getNextInput() throws IOException {
@@ -188,7 +231,10 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
                     cacheRecoveryToken(chars, len);
                     outputStack.addAll(recoveryStack);
                     recoveryStack.clear();
-                    replayToken(outputStack.poll());
+                    var out = outputStack.poll();
+                    if (out != null) {
+                        replayToken(out);
+                    }
                     clearBuffer();
                     return true;
                 }

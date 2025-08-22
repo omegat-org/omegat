@@ -2,9 +2,36 @@
   "problemMatcher": [
     {
       "owner": "spotbugs",
+      "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*((?:H|M|L)\\s+(?:[A-Z])\\s+(?:[A-Z0-9_]+\\s+)?(?:[A-Za-z0-9]+)):\\s+(.*)\\s+(?:a|A)t\\s+([A-Za-z0-9_]+\\.java):\\[line(s)? (\\d+(?:-\\d+))\\]$",
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\s(?:Redundant null check at|Dereferenced at|At)\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "file": 3,
+          "line": 4,
+          "message": 2,
+          "code": 1
+        }
+      ]
+    },
+    {
+      "owner": "spotbugs-npe",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "^.*(?:H|M)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\sMethod invoked at\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "file": 3,
+          "line": 4,
+          "message": 2,
+          "code": 1
+        }
+      ]
+    },
+    {
+      "owner": "spotbugs-resource-cleanup",
+      "severity": "warning",
+      "pattern": [
+        {
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*\\s\\sObligation to clean up resource created)\\sat\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
           "file": 3,
           "line": 4,
           "message": 2,
@@ -16,7 +43,7 @@
       "owner": "spotbugs-OBL",
       "pattern": [
         {
-          "regexp": "^.*(M X (?:[A-Z0-9_]+\\s+)?(?:[A-Za-z0-9]+)):\\s+((?:.*)\\s+(?:a|A)t\\s+([A-Za-z0-9_]+\\.java):\\[line (\\d+)\\] is not discharged)$",
+          "regexp": "^.*M X ([A-Z0-9_]+)\\s[A-Z0-9]+:\\s+((?:.*)\\s\\sAt\\s+([A-Za-z0-9_]+\\.java):\\[line (\\d+)\\] is not discharged)",
           "file": 3,
           "line": 4,
           "message": 2,
@@ -25,11 +52,25 @@
       ]
     },
     {
-      "owner": "spotbugs-no-line-number",
+      "owner": "spotbugs-uuf",
+      "severity": "warning",
       "pattern": [
         {
-          "regexp": "^.*((?:H|M|L)\\s+(?:[A-Z])\\s+(?:[A-Z0-9_]+\\s+)?(?:[A-Za-z0-9]+)):\\s+(.*)\\s+In\\s+([A-Za-z0-9_]+\\.java)$",
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Za-z0-9_]+)\\s+[A-Za-z0-9]+:\\s+(.*)\\s\\sIn\\s([A-Za-z0-9_]+\\.java)",
           "file": 3,
+          "message": 2,
+          "code": 1
+        }
+      ]
+    },
+    {
+      "owner": "spotbugs-unsynchronized-access",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "^.*(?:H|M|L)\\s+(?:[A-Z])\\s+([A-Z0-9_]+)\\s[A-Za-z0-9]+:\\s+(.*)\\s\\sUnsynchronized access at\\s([A-Za-z0-9_]+\\.java):\\[lines? (\\d+(?:-\\d+)?)\\]",
+          "file": 3,
+          "line": 4,
           "message": 2,
           "code": 1
         }
@@ -47,6 +88,19 @@
           "column": 4,
           "message": 5,
           "code": 6
+        }
+      ]
+    },
+    {
+      "owner": "pmd",
+      "severity": "warning",
+      "pattern": [
+        {
+          "regexp": "^.*([A-Za-z0-9_]+\\\\.java):(\\\\d+):\\s+(\\w+):\\s+(.+)$",
+          "file": 1,
+          "line": 2,
+          "code": 3,
+          "message": 4
         }
       ]
     }

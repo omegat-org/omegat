@@ -65,13 +65,24 @@ import org.omegat.util.TestPreferencesInitializer;
 
 public class CalcMatchStatisticsTest {
 
+    private FilterMaster filterMaster;
+
+    /*
+     * Setup test project.
+     */
+    @Before
+    public final void setUp() throws Exception {
+        Core.initializeConsole(Collections.emptyMap());
+        TestPreferencesInitializer.init();
+        filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
+    }
+
     @Test
-    public void testCalcMatchStatics() throws Exception {
-        TestProject project = new TestProject(new ProjectPropertiesTest());
+    public void testCalcMatchStatics() {
+        TestProject project = new TestProject(new ProjectPropertiesTest(), filterMaster);
         IStatsConsumer callback = new TestStatsConsumer();
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter,
-                callback, 30);
+        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -124,7 +135,7 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
 
         // change threshold
-        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback, -1);
+        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
         calcMatchStatistics.start();
         try {
             calcMatchStatistics.join();
@@ -177,17 +188,6 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
     }
 
-    /*
-     * Setup test project.
-     */
-
-    @Before
-    public final void setUp() throws Exception {
-        Core.initializeConsole(Collections.emptyMap());
-        TestPreferencesInitializer.init();
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
-    }
-
     protected static class ProjectPropertiesTest extends ProjectProperties {
         ProjectPropertiesTest() {
             super();
@@ -205,10 +205,12 @@ public class CalcMatchStatisticsTest {
         private final ProjectTMX projectTMX;
         private Map<String, ExternalTMX> transMemories;
         private final Segmenter segmenter;
+        private final FilterMaster filterMaster;
 
-        TestProject(ProjectProperties prop) throws Exception {
+        TestProject(ProjectProperties prop, FilterMaster filterMaster) {
             super();
             this.prop = prop;
+            this.filterMaster = filterMaster;
             segmenter = new Segmenter(Preferences.getSRX());
             projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
                     Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
@@ -252,7 +254,7 @@ public class CalcMatchStatisticsTest {
         @Override
         public ITokenizer getSourceTokenizer() {
             return new LuceneEnglishTokenizer();
-        };
+        }
 
         @Override
         public ITokenizer getTargetTokenizer() {
@@ -295,7 +297,7 @@ public class CalcMatchStatisticsTest {
                     try {
                         ExternalTMX newTMX;
                         Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
-                        newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter, null);
+                        newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter, filterMaster);
                         transMemories.put(testTmx.toString(), newTMX);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -351,6 +353,7 @@ public class CalcMatchStatisticsTest {
 
         @Override
         public void linkPrevNextSegments() {
+            // do nothing
         }
     }
 
@@ -363,9 +366,8 @@ public class CalcMatchStatisticsTest {
         private MatchStatCounts result;
         private final IStatsConsumer callback;
 
-        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback,
-                                int threshold) {
-            super(project, segmenter, callback, false, threshold);
+        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback) {
+            super(project, segmenter, callback, false);
             this.project = project;
             this.callback = callback;
         }
@@ -389,30 +391,37 @@ public class CalcMatchStatisticsTest {
 
         @Override
         public void appendTextData(final String result) {
+            // do nothing
         }
 
         @Override
         public void appendTable(final String title, final String[] headers, final String[][] data) {
+            // do nothing
         }
 
         @Override
         public void setTextData(final String data) {
+            // do nothing
         }
 
         @Override
         public void setTable(final String[] headers, final String[][] data) {
+            // do nothing
         }
 
         @Override
         public void setDataFile(final String path) {
+            // do nothing
         }
 
         @Override
         public void finishData() {
+            // do nothing
         }
 
         @Override
         public void showProgress(final int percent) {
+            // do nothing
         }
     }
 }

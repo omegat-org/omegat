@@ -135,9 +135,9 @@ public abstract class TmxComplianceBase {
     protected void translateUsingTmx(IFilter filter, Map<String, String> config, final String fileTextIn,
             String inCharset, String fileTMX, String outCharset, ProjectProperties props,
             Map<String, TMXEntry> tmxPatch) throws Exception {
-        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
-                orphanedCallback);
+        final ProjectTMX tmx = new ProjectTMX(orphanedCallback);
+               tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(),
+                       new File("test/data/tmx/TMXComplianceKit/" + fileTMX), Core.getSegmenter());
         if (tmxPatch != null) {
             tmx.defaults.putAll(tmxPatch);
         }
@@ -201,8 +201,9 @@ public abstract class TmxComplianceBase {
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 
-        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(orphanedCallback);
+        tmx.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile,
+                Core.getSegmenter());
 
         for (Map.Entry<EntryKey, ITMXEntry> en : callback.data.entrySet()) {
             if (en.getValue() instanceof TMXEntry) {
@@ -249,6 +250,10 @@ public abstract class TmxComplianceBase {
 
         public boolean existEntryInProject(EntryKey key) {
             return true;
+        }
+
+        public void clear() {
+            // do nothing
         }
     };
 

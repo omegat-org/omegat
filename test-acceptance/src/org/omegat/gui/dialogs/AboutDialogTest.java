@@ -25,6 +25,7 @@
 
 package org.omegat.gui.dialogs;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
@@ -44,7 +45,8 @@ public class AboutDialogTest extends TestCoreGUI {
     public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
-    public void testAboutDialog() throws InterruptedException {
+    public void testAboutDialog() {
+        assertNotNull(window);
         window.menuItem(BaseMainWindowMenu.HELP_MENU).click();
         window.menuItem(BaseMainWindowMenu.HELP_ABOUT_MENUITEM).click();
         // Check about dialog

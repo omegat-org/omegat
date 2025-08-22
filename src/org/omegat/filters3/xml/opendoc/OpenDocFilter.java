@@ -31,6 +31,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -57,8 +58,8 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  */
 public class OpenDocFilter extends AbstractFilter {
-    private static final Set<String> TRANSLATABLE = new HashSet<String>(Arrays.asList("content.xml",
-            "styles.xml", "meta.xml"));
+    private static final Set<String> TRANSLATABLE = new HashSet<>(
+            Arrays.asList("content.xml", "styles.xml", "meta.xml"));
 
     /**
      * Register plugin into OmegaT.
@@ -68,34 +69,34 @@ public class OpenDocFilter extends AbstractFilter {
     }
 
     public static void unloadPlugins() {
+        // there is no way to unload filter.
     }
 
+    @Override
     protected boolean requirePrevNextFields() {
         return true;
     }
 
     /** Returns true if it's OpenDocument file. */
+    @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
-        try {
-            ZipFile file = new ZipFile(inFile);
+        try (ZipFile file = new ZipFile(inFile)) {
             Enumeration<? extends ZipEntry> entries = file.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
                 if (TRANSLATABLE.contains(entry.getName())) {
-                    file.close();
                     return true;
                 }
             }
-            file.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
+            // ignore exception and return false
+            // to indicate not supported
         }
         return false;
     }
 
-    OpenDocXMLFilter xmlfilter = null;
-
     private OpenDocXMLFilter createXMLFilter(Map<String, String> options) {
-        xmlfilter = new OpenDocXMLFilter();
+        OpenDocXMLFilter xmlfilter = new OpenDocXMLFilter();
         xmlfilter.setCallbacks(entryParseCallback, entryTranslateCallback);
         // Defining the actual dialect, because at this step
         // we have the options
@@ -106,74 +107,94 @@ public class OpenDocFilter extends AbstractFilter {
     }
 
     /**
-     * Returns a temporary file for OpenOffice XML. A nasty hack, to say polite way.
+     * Returns a temporary file for OpenOffice XML. A nasty hack, to say polite
+     * way.
      */
     private File tmp() throws IOException {
         return File.createTempFile("ot-oo-", ".xml");
     }
 
     /**
-     * Processes a single OpenDocument file, which is actually a ZIP file consisting of many XML files, some
-     * of which should be translated.
+     * Processes a single OpenDocument file, which is actually a ZIP file
+     * consisting of many XML files, some of which should be translated.
      */
     @Override
-    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
-            TranslationException {
-        ZipFile zipfile = new ZipFile(inFile);
-        ZipOutputStream zipout = null;
-        if (outFile != null) {
-            zipout = new ZipOutputStream(new FileOutputStream(outFile));
-        }
-        Enumeration<? extends ZipEntry> zipcontents = zipfile.entries();
-        while (zipcontents.hasMoreElements()) {
-            ZipEntry zipentry = zipcontents.nextElement();
-            String shortname = zipentry.getName();
-            if (shortname.lastIndexOf('/') >= 0) {
-                shortname = shortname.substring(shortname.lastIndexOf('/') + 1);
-            }
-            if (TRANSLATABLE.contains(shortname)) {
-                File tmpin = tmp();
-                FileUtils.copyInputStreamToFile(zipfile.getInputStream(zipentry), tmpin);
-                File tmpout = null;
-                if (zipout != null) {
-                    tmpout = tmp();
-                }
-                try {
-                    createXMLFilter(processOptions).processFile(tmpin, tmpout, fc);
-                } catch (Exception e) {
-                    zipfile.close();
-                    throw new TranslationException(e.getLocalizedMessage() + "\n"
-                            + OStrings.getString("OpenDoc_ERROR_IN_FILE") + inFile);
-                }
+    public void processFile(File inFile, File outFile, FilterContext fc)
+            throws IOException, TranslationException {
+        try (ZipFile zipFile = new ZipFile(inFile);
+                ZipOutputStream zipOut = outFile != null ? new ZipOutputStream(new FileOutputStream(outFile))
+                        : null) {
 
-                if (zipout != null) {
-                    ZipEntry outentry = new ZipEntry(zipentry.getName());
-                    outentry.setMethod(ZipEntry.DEFLATED);
-                    zipout.putNextEntry(outentry);
-                    FileUtils.copyFile(tmpout, zipout);
-                    zipout.closeEntry();
-                }
-                if (!tmpin.delete()) {
-                    tmpin.deleteOnExit();
-                }
-                if (tmpout != null) {
-                    if (!tmpout.delete()) {
-                        tmpout.deleteOnExit();
-                    }
-                }
-            } else {
-                if (zipout != null) {
-                    ZipEntry outentry = new ZipEntry(zipentry.getName());
-                    zipout.putNextEntry(outentry);
-                    IOUtils.copy(zipfile.getInputStream(zipentry), zipout);
-                    zipout.closeEntry();
-                }
+            Enumeration<? extends ZipEntry> entries = zipFile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = entries.nextElement();
+                processZipEntry(zipFile, entry, zipOut, fc, inFile);
             }
         }
-        if (zipout != null) {
-            zipout.close();
+    }
+
+    private void processZipEntry(ZipFile zipFile, ZipEntry entry, ZipOutputStream zipOut, FilterContext fc,
+            File inFile) throws IOException, TranslationException {
+        String shortName = extractShortName(entry.getName());
+
+        if (TRANSLATABLE.contains(shortName)) {
+            handleTranslatableEntry(zipFile, entry, zipOut, fc, inFile);
+        } else if (zipOut != null) {
+            copyUntranslatableEntry(zipFile, entry, zipOut);
         }
-        zipfile.close();
+    }
+
+    private String extractShortName(String name) {
+        int lastIndex = name.lastIndexOf('/');
+        return lastIndex >= 0 ? name.substring(lastIndex + 1) : name;
+    }
+
+    private void handleTranslatableEntry(ZipFile zipFile, ZipEntry entry, ZipOutputStream zipOut,
+            FilterContext fc, File inFile) throws IOException, TranslationException {
+        File tmpIn = tmp();
+        File tmpOut = zipOut != null ? tmp() : null;
+
+        try {
+            FileUtils.copyInputStreamToFile(zipFile.getInputStream(entry), tmpIn);
+            createXMLFilter(processOptions).processFile(tmpIn, tmpOut, fc);
+
+            if (zipOut != null) {
+                writeTranslatableToZip(zipOut, entry, tmpOut);
+            }
+        } catch (Exception e) {
+            throw new TranslationException(
+                    e.getLocalizedMessage() + "\n" + OStrings.getString("OpenDoc_ERROR_IN_FILE") + inFile);
+        } finally {
+            cleanUpTempFile(tmpIn);
+            cleanUpTempFile(tmpOut);
+        }
+    }
+
+    private void writeTranslatableToZip(ZipOutputStream zipOut, ZipEntry entry, File tmpOut)
+            throws IOException {
+        ZipEntry outEntry = new ZipEntry(entry.getName());
+        outEntry.setMethod(ZipEntry.DEFLATED);
+        zipOut.putNextEntry(outEntry);
+        FileUtils.copyFile(tmpOut, zipOut);
+        zipOut.closeEntry();
+    }
+
+    private void copyUntranslatableEntry(ZipFile zipFile, ZipEntry entry, ZipOutputStream zipOut)
+            throws IOException {
+        zipOut.putNextEntry(new ZipEntry(entry.getName()));
+        IOUtils.copy(zipFile.getInputStream(entry), zipOut);
+        zipOut.closeEntry();
+    }
+
+    private void cleanUpTempFile(File file) {
+        if (file == null) {
+            return;
+        }
+        try {
+            Files.delete(file.toPath());
+        } catch (IOException e) {
+            file.deleteOnExit();
+        }
     }
 
     /** Human-readable OpenDocument filter name. */
@@ -198,8 +219,8 @@ public class OpenDocFilter extends AbstractFilter {
     }
 
     /** Not implemented. */
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
-            TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
+            throws IOException, TranslationException {
         throw new IOException("Not Implemented!");
     }
 
@@ -208,6 +229,7 @@ public class OpenDocFilter extends AbstractFilter {
      *
      * @return True, because the OpenDoc filter has options.
      */
+    @Override
     public boolean hasOptions() {
         return true;
     }
@@ -217,27 +239,27 @@ public class OpenDocFilter extends AbstractFilter {
      *
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     * @return Updated filter options if user confirmed the changes, and current
+     *         options otherwise.
      */
+    @Override
     public Map<String, String> changeOptions(Window parent, Map<String, String> currentOptions) {
         try {
             EditOpenDocOptionsDialog dialog = new EditOpenDocOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
             if (EditOpenDocOptionsDialog.RET_OK == dialog.getReturnStatus()) {
                 return dialog.getOptions().getOptionsMap();
-            } else {
-                return null;
             }
         } catch (Exception e) {
-            Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
-            Log.log(e);
-            return null;
+            Log.logErrorRB(e, "HTML_EXC_EDIT_OPTIONS");
         }
+        return null;
     }
 
     @Override
     public String getInEncodingLastParsedFile() {
-        // Encoding is 'binary', it is zipped. Inside there may be many files. It makes no sense to display
+        // Encoding is 'binary', it is zipped. Inside there may be many files.
+        // It makes no sense to display
         // the encoding of some xml file inside.
         return "OpenDoc";
     }

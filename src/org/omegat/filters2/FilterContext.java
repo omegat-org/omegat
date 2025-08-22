@@ -25,6 +25,7 @@
 
 package org.omegat.filters2;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -34,15 +35,15 @@ import org.omegat.util.Language;
  */
 public class FilterContext {
 
-    private final Language sourceLang;
+    private final @Nullable Language sourceLang;
 
-    private final Language targetLang;
+    private final @Nullable Language targetLang;
 
     private String inEncoding;
 
     private String outEncoding;
 
-    private boolean sentenceSegmentingEnabled;
+    private final boolean sentenceSegmentingEnabled;
 
     private boolean isRemoveAllTags;
 
@@ -59,7 +60,8 @@ public class FilterContext {
         this.targetTokenizerClass = props.getTargetTokenizer();
     }
 
-    public FilterContext(Language sourceLang, Language targetLang, boolean sentenceSegmentingEnabled) {
+    public FilterContext(@Nullable Language sourceLang, @Nullable Language targetLang,
+            boolean sentenceSegmentingEnabled) {
         this.sourceLang = sourceLang;
         this.targetLang = targetLang;
         this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
@@ -67,12 +69,12 @@ public class FilterContext {
     }
 
     /** Source language of project. */
-    public Language getSourceLang() {
+    public @Nullable Language getSourceLang() {
         return sourceLang;
     }
 
     /** Target language of project. */
-    public Language getTargetLang() {
+    public @Nullable Language getTargetLang() {
         return targetLang;
     }
 
@@ -106,8 +108,8 @@ public class FilterContext {
         return isRemoveAllTags;
     }
 
-    public FilterContext setRemoveAllTags(boolean isRemoveAllTags) {
-        this.isRemoveAllTags = isRemoveAllTags;
+    public FilterContext setRemoveAllTags(boolean beRemoveAllTags) {
+        isRemoveAllTags = beRemoveAllTags;
         return this;
     }
 
@@ -116,7 +118,7 @@ public class FilterContext {
         return this;
     }
 
-    public ITokenizer getSourceTokenizer() {
+    public @Nullable ITokenizer getSourceTokenizer() {
         try {
             return (ITokenizer) sourceTokenizerClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
@@ -129,7 +131,7 @@ public class FilterContext {
         return this;
     }
 
-    public ITokenizer getTargetTokenizer() {
+    public @Nullable ITokenizer getTargetTokenizer() {
         try {
             return (ITokenizer) targetTokenizerClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
@@ -61,13 +62,15 @@ public class MozillaLangFilter extends AbstractFilter {
     protected static final Pattern LOCALIZATION_NOTE = Pattern.compile("# (.*)");
     protected static final Pattern PATTERN_SOURCE = Pattern.compile("^;(.*)");
 
-    enum READ_STATE {
+    enum ReadState {
         WAIT_SOURCE, WAIT_TARGET
     };
 
-    private StringBuilder source, target, localizationNote;
+    private final StringBuilder source = new StringBuilder();
+    private final StringBuilder target = new StringBuilder();
+    private final StringBuilder localizationNote = new StringBuilder();
 
-    private BufferedWriter out;
+    private @Nullable BufferedWriter out;
 
     /**
      * Register plugin into OmegaT.
@@ -130,13 +133,13 @@ public class MozillaLangFilter extends AbstractFilter {
     @Override
     protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc)
             throws IOException, TranslationException {
-        source = new StringBuilder();
-        target = new StringBuilder();
-        localizationNote = new StringBuilder();
+        source.setLength(0);
+        target.setLength(0);
+        localizationNote.setLength(0);
 
         out = outFile;
 
-        READ_STATE state = READ_STATE.WAIT_SOURCE;
+        ReadState state = ReadState.WAIT_SOURCE;
 
         String s;
         while ((s = inFile.readLine()) != null) {
@@ -152,7 +155,7 @@ public class MozillaLangFilter extends AbstractFilter {
                 m = PATTERN_SOURCE.matcher(s);
                 if (m.matches()) {
                     source.append(m.group(1));
-                    state = READ_STATE.WAIT_TARGET;
+                    state = ReadState.WAIT_TARGET;
                 }
                 if (LOCALIZATION_NOTE.matcher(s).matches()) {
                     localizationNote.append(s);
@@ -163,7 +166,7 @@ public class MozillaLangFilter extends AbstractFilter {
             case WAIT_TARGET:
                 target.append(s);
                 flushTranslation(fc);
-                state = READ_STATE.WAIT_SOURCE;
+                state = ReadState.WAIT_SOURCE;
                 break;
             default:
                 eol(s);
@@ -189,8 +192,7 @@ public class MozillaLangFilter extends AbstractFilter {
             t = target.toString();
         }
         if (localizationNote.length() > 0) {
-            c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n"
-                    + localizationNote.toString();
+            c += "\n" + OStrings.getString("LANGFILTER_LOCALIZATION_NOTE") + "\n" + localizationNote;
         }
         if (c.isEmpty()) {
             c = null;
@@ -199,19 +201,29 @@ public class MozillaLangFilter extends AbstractFilter {
     }
 
     /**
+     * Aligns a source text with its translation and associates optional
+     * comments.
+     * <p>
+     * This method handles the mapping of source text and translations,
+     * potentially with comments, using two callback mechanisms:
+     * entryParseCallback and entryAlignCallback.
      *
-     * @param source
+     * @param alignSource
+     *            The source string to be aligned.
      * @param translation
+     *            The translated string corresponding to the source.
      * @param comments
+     *            An optional comment associated with the source and
+     *            translation.
      */
-    protected void align(String source, String translation, String comments) {
+    protected void align(String alignSource, @Nullable String translation, @Nullable String comments) {
         if (entryParseCallback != null) {
-            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(source,
+            List<ProtectedPart> protectedParts = TagUtil.applyCustomProtectedParts(alignSource,
                     PatternConsts.PRINTF_VARS, null);
-            entryParseCallback.addEntry(null, source, translation, false, comments, null, this,
+            entryParseCallback.addEntry(null, alignSource, translation, false, comments, null, this,
                     protectedParts);
         } else if (entryAlignCallback != null) {
-            entryAlignCallback.addTranslation(null, source, translation, false, null, this);
+            entryAlignCallback.addTranslation(null, alignSource, translation, false, null, this);
         }
     }
 

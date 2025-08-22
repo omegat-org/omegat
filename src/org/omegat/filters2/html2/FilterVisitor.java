@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -48,6 +50,7 @@ import org.htmlparser.Text;
 import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
 import org.omegat.core.Core;
+import org.omegat.filters2.FilterContext;
 import org.omegat.util.HTMLUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -65,19 +68,16 @@ import org.omegat.util.StringUtil;
  */
 public class FilterVisitor extends NodeVisitor {
     protected HTMLFilter2 filter;
-    private BufferedWriter writer;
-    private HTMLOptions options;
+    private final BufferedWriter writer;
+    private final HTMLOptions options;
 
-    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts) {
+    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions opts,
+            FilterContext fc) {
         this.filter = htmlfilter;
         // HHC filter has no options
-        if (opts != null) {
-            this.options = opts;
-        } else {
-            // To prevent a null pointer exception later, see
-            // https://sourceforge.net/p/omegat/bugs/651/
-            this.options = new HTMLOptions(new TreeMap<>());
-        }
+        // To prevent a null pointer exception later, see
+        // https://sourceforge.net/p/omegat/bugs/651/
+        this.options = Objects.requireNonNullElseGet(opts, () -> new HTMLOptions(new TreeMap<>()));
         this.writer = bufwriter;
     }
 
@@ -108,27 +108,28 @@ public class FilterVisitor extends NodeVisitor {
      * <li>Otherwise they are written out directly.
      * </ul>
      */
-    protected List<Node> precedingNodes;
+    protected List<Node> precedingNodes = new ArrayList<>();
 
     /** The list of nodes forming a chunk of text. */
-    protected List<Node> translatableNodes;
+    protected List<Node> translatableNodes = new ArrayList<>();
 
     /**
      * The list of non-paragraph tags following a chunk of text.
      * <ul>
      * <li>If another chunk of text follows, they get appended to the
      * translatable paragraph,
-     * <li>Otherwise (eg if a paragraph tag follows), they are written out directly.
+     * <li>Otherwise (eg if a paragraph tag follows), they are written out
+     * directly.
      * </ul>
      */
-    protected List<Node> followingNodes;
+    protected List<Node> followingNodes = new ArrayList<>();
 
     /** The tags behind the shortcuts */
-    protected List<Node> sTags;
+    protected List<Node> sTags = new ArrayList<>();
     /** The tag numbers of shorcutized tags */
-    protected List<Integer> sTagNumbers;
+    protected List<Integer> sTagNumbers = new ArrayList<>();
     /** The list of all the tag shortcuts */
-    protected List<String> sShortcuts;
+    protected List<String> sShortcuts = new ArrayList<>();
     /** The number of shortcuts stored */
     int sNumShortcuts;
 
@@ -161,7 +162,6 @@ public class FilterVisitor extends NodeVisitor {
      */
     @Override
     public void visitTag(Tag tag) {
-
 
         if (isProtectedTag(tag)) {
             if (isTextUpForCollection) {
@@ -201,15 +201,8 @@ public class FilterVisitor extends NodeVisitor {
             }
             maybeTranslateAttribute(tag, "summary");
             maybeTranslateAttribute(tag, "title");
-            if ("INPUT".equals(tag.getTagName())) { //an input element
-                if (options.getTranslateValue() //and we translate all input elements
-                        || options.getTranslateButtonValue() // or we translate submit/button/reset elements ...
-                                && ("submit".equalsIgnoreCase(tag.getAttribute("type"))
-                                        || "button".equalsIgnoreCase(tag.getAttribute("type"))
-                                        || "reset".equalsIgnoreCase(tag.getAttribute("type"))
-                           ) //and it is a submit/button/reset element.
-                   ) {
-                    //then translate the value
+            if ("INPUT".equals(tag.getTagName())) {
+                if (isTranslateAttribute(tag)) {
                     maybeTranslateAttribute(tag, "value");
                 }
                 maybeTranslateAttribute(tag, "placeholder");
@@ -238,6 +231,15 @@ public class FilterVisitor extends NodeVisitor {
 
             queuePrefix(tag);
         }
+    }
+
+    private static final Set<String> TRANSLATABLE_ATTRIBUTES = Set.of("submit", "button", "reset");
+
+    private boolean isTranslateAttribute(Tag tag) {
+        if (!options.getTranslateValue() && !options.getTranslateButtonValue()) {
+            return false;
+        }
+        return TRANSLATABLE_ATTRIBUTES.contains(tag.getAttribute("type").toLowerCase());
     }
 
     /**
@@ -619,9 +621,13 @@ public class FilterVisitor extends NodeVisitor {
         // as documented in
         // https://sourceforge.net/p/omegat/bugs/108/
         // The spaces that are around the segment are not removed, unless
-        // compressWhitespace option is enabled. Then the spaces are compressed to max 1.
-        // (This changes the layout, therefore it is an option. NB: an alternative implementation is to compress by
-        // default, and use Core.getFilterMaster().getConfig().isPreserveSpaces() option instead to compress if
+        // compressWhitespace option is enabled. Then the spaces are compressed
+        // to max 1.
+        // (This changes the layout, therefore it is an option. NB: an
+        // alternative implementation is to compress by
+        // default, and use
+        // Core.getFilterMaster().getConfig().isPreserveSpaces() option instead
+        // to compress if
         // not checked.)
         if (!betweenPreformattingTags) {
 
@@ -641,7 +647,8 @@ public class FilterVisitor extends NodeVisitor {
         // writing out uncompressed
         if (compressed.equals(translation) && !options.getCompressWhitespace()) {
             translation = uncompressed;
-            //uncompressed contains pre/postfix whitespace, so do not add that extra!
+            // uncompressed contains pre/postfix whitespace, so do not add that
+            // extra!
             spacePrefix = "";
             spacePostfix = "";
         }
@@ -678,12 +685,12 @@ public class FilterVisitor extends NodeVisitor {
         isTextUpForCollection = false;
         recurseSelf = true;
         recurseChildren = true;
-        precedingNodes = new ArrayList<>();
-        translatableNodes = new ArrayList<>();
-        followingNodes = new ArrayList<>();
-        sTags = new ArrayList<>();
-        sTagNumbers = new ArrayList<>();
-        sShortcuts = new ArrayList<>();
+        precedingNodes.clear();
+        translatableNodes.clear();
+        followingNodes.clear();
+        sTags.clear();
+        sTagNumbers.clear();
+        sShortcuts.clear();
         sNumShortcuts = 0;
     }
 
@@ -790,16 +797,16 @@ public class FilterVisitor extends NodeVisitor {
                         break;
                     }
                 } else if (sTags.get(i) instanceof Remark) {
-                     Remark comment = (Remark) sTags.get(i);
-                     try {
-                         str = str.substring(0, pos) + comment.toHtml()
-                                 + str.substring(pos + shortcut.length());
-                     } catch (StringIndexOutOfBoundsException sioobe) {
-                         // nothing, string doesn't change
-                         // but prevent endless loop
-                         break;
-                     }
-                 }
+                    Remark comment = (Remark) sTags.get(i);
+                    try {
+                        str = str.substring(0, pos) + comment.toHtml()
+                                + str.substring(pos + shortcut.length());
+                    } catch (StringIndexOutOfBoundsException sioobe) {
+                        // nothing, string doesn't change
+                        // but prevent endless loop
+                        break;
+                    }
+                }
             }
         }
         return str;
@@ -865,16 +872,16 @@ public class FilterVisitor extends NodeVisitor {
     }
 
     /**
-     * Queues up some Text node, possibly before more meaningful text.
-     * The Text node is added to the precedingNodes list.
+     * Queues up some Text node, possibly before more meaningful text. The Text
+     * node is added to the precedingNodes list.
      */
     private void queuePrefix(Text txt) {
         precedingNodes.add(txt);
     }
 
     /**
-     * Queues up some Remark node (HTML comment), possibly before more meaningful
-     * text. The Remark node is added to the precedingNodes list.
+     * Queues up some Remark node (HTML comment), possibly before more
+     * meaningful text. The Remark node is added to the precedingNodes list.
      */
     private void queuePrefix(Remark remark) {
         precedingNodes.add(remark);
@@ -910,7 +917,8 @@ public class FilterVisitor extends NodeVisitor {
     private String compressWhitespace(String input) {
         if (options.getCompressWhitespace()) {
             Matcher whitespaceMatch = PatternConsts.SPACE_TAB.matcher(input);
-            // keep at least 1 space, as not to change the meaning of the document.
+            // keep at least 1 space, as not to change the meaning of the
+            // document.
             return whitespaceMatch.replaceAll(" ");
         } else {
             return input;

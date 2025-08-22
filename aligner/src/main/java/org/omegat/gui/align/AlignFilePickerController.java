@@ -49,6 +49,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.text.JTextComponent;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -67,18 +68,23 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 public class AlignFilePickerController {
-    String sourceFile;
-    String targetFile;
+    private @Nullable String sourceFile;
+    private @Nullable String targetFile;
 
-    String sourceDefaultDir;
-    String targetDefaultDir;
-    String defaultSaveDir;
+    private @Nullable String sourceDefaultDir;
+    private @Nullable String targetDefaultDir;
+    private @Nullable String defaultSaveDir;
 
-    List<Language> allLangs = Language.getLanguages();
-    Language sourceLanguage = allLangs.get(0);
-    Language targetLanguage = allLangs.get(allLangs.size() - 1);
+    private Language sourceLanguage;
+    private Language targetLanguage;
 
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
+
+    public AlignFilePickerController() {
+        List<Language> allLangs = Language.getLanguages();
+        sourceLanguage = allLangs.get(0);
+        targetLanguage = allLangs.get(allLangs.size() - 1);
+    }
 
     /**
      * Set the source file for alignment.
@@ -190,7 +196,7 @@ public class AlignFilePickerController {
                 protected void done() {
                     try {
                         Aligner aligner = get();
-                        new AlignPanelController(aligner, defaultSaveDir).show(parent);
+                        new AlignPanelController(defaultSaveDir).show(parent, aligner);
                     } catch (CancellationException e) {
                         // Ignore
                     } catch (Exception e) {

@@ -73,12 +73,18 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
             }
         });
         panel.sortMatchesList.addActionListener(e -> {
-            boolean changed = valueIsDifferent(Preferences.EXT_TMX_SORT_KEY, panel.sortMatchesList.getSelectedItem());
-            setReloadRequired(changed);
+            Object item = panel.sortMatchesList.getSelectedItem();
+            if (item != null) {
+                boolean changed = valueIsDifferent(Preferences.EXT_TMX_SORT_KEY, item);
+                setReloadRequired(changed);
+            }
         });
-        panel.insertButton
-                .addActionListener(
-                        e -> panel.matchesTemplate.replaceSelection(panel.variablesList.getSelectedItem().toString()));
+        panel.insertButton.addActionListener(e -> {
+            Object item = panel.variablesList.getSelectedItem();
+            if (item != null) {
+                panel.matchesTemplate.replaceSelection(item.toString());
+            }
+        });
         panel.variablesList
                 .setModel(new DefaultComboBoxModel<>(new Vector<>(MatchesVarExpansion.getMatchesVariables())));
         panel.keepForeignMatches.addActionListener(e ->
@@ -101,6 +107,8 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.matchesTemplate.setCaretPosition(0);
         panel.fuzzyMatchThreshold.setValue(Preferences.getPreferenceDefault(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD,
                 OConsts.FUZZY_MATCH_THRESHOLD));
+        panel.paragraphMatchesFromSegmentedTmxCB.setSelected(Preferences.isPreferenceDefault(
+                Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX, true));
     }
 
     @Override
@@ -114,11 +122,12 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         panel.matchesTemplate.setText(MatchesVarExpansion.DEFAULT_TEMPLATE);
         panel.matchesTemplate.setCaretPosition(0);
         panel.fuzzyMatchThreshold.setValue(OConsts.FUZZY_MATCH_THRESHOLD);
+        panel.paragraphMatchesFromSegmentedTmxCB.setSelected(true);
     }
 
     @Override
     public void persist() {
-        Preferences.setPreference(Preferences.EXT_TMX_SORT_KEY, (SORT_KEY) panel.sortMatchesList.getSelectedItem());
+        Preferences.setPreference(Preferences.EXT_TMX_SORT_KEY, panel.sortMatchesList.getSelectedItem());
         Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, panel.displayLevel2Tags.isSelected());
         Preferences.setPreference(Preferences.EXT_TMX_USE_SLASH, panel.useSlash.isSelected());
         Preferences.setPreference(Preferences.EXT_TMX_MATCH_TEMPLATE, panel.matchesTemplate.getText());
@@ -129,5 +138,7 @@ public class TMMatchesPreferencesController extends BasePreferencesController {
         Preferences.setPreference(Preferences.EXT_TMX_KEEP_FOREIGN_MATCH, panel.keepForeignMatches.isSelected());
         Preferences.setPreference(Preferences.PENALTY_FOR_FOREIGN_MATCHES, panel.foreignPenaltySpinner.getValue());
         Preferences.setPreference(Preferences.EXT_TMX_FUZZY_MATCH_THRESHOLD, panel.fuzzyMatchThreshold.getValue());
+        Preferences.setPreference(Preferences.PARAGRAPH_MATCH_FROM_SEGMENT_TMX,
+                panel.paragraphMatchesFromSegmentedTmxCB.isSelected());
     }
 }

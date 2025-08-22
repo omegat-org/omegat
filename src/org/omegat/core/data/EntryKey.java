@@ -27,6 +27,7 @@ package org.omegat.core.data;
 
 import java.util.Objects;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.StringUtil;
 
 /**
@@ -48,8 +49,8 @@ public class EntryKey implements Comparable<EntryKey> {
      */
     private static boolean ignoreFileContext = false;
 
-    public EntryKey(final String file, final String sourceText, final String id, final String prev,
-            final String next, final String path) {
+    public EntryKey(final String file, final String sourceText, final @Nullable String id, final @Nullable String prev,
+            final @Nullable String next, final @Nullable String path) {
         this.file = file;
         this.sourceText = sourceText;
         this.id = id;
@@ -95,21 +96,21 @@ public class EntryKey implements Comparable<EntryKey> {
 
     @Override
     public int compareTo(EntryKey o) {
-        int c = ignoreFileContext ? 0 : StringUtil.compareToWithNulls(file, o.file);
+        int c = ignoreFileContext ? 0 : StringUtil.compareToNullable(file, o.file);
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(id, o.id);
+            c = StringUtil.compareToNullable(id, o.id);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(sourceText, o.sourceText);
+            c = StringUtil.compareToNullable(sourceText, o.sourceText);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(prev, o.prev);
+            c = StringUtil.compareToNullable(prev, o.prev);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(next, o.next);
+            c = StringUtil.compareToNullable(next, o.next);
         }
         if (c == 0) {
-            c = StringUtil.compareToWithNulls(path, o.path);
+            c = StringUtil.compareToNullable(path, o.path);
         }
         return c;
     }

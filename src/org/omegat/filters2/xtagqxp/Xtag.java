@@ -29,6 +29,8 @@ package org.omegat.filters2.xtagqxp;
 import org.omegat.filters3.Element;
 import org.omegat.util.StaticUtils;
 
+import java.util.Objects;
+
 /**
  * A Xtag in a CopyFlow Gold for QuarkXPress source text.
  *
@@ -46,15 +48,15 @@ public class Xtag implements Element {
      * Makes a shortcut from an Xtag. If the tag contains no letter, uses 'x'
      * for the shortcut.
      *
-     * @param tag
+     * @param newTag
      *            The full Xtag
      * @return The shortcut
      */
-    private String makeShortcut(String tag) {
+    private String makeShortcut(String newTag) {
         int cp = 0;
 
-        for (int i = 0; i < tag.length(); i += Character.charCount(cp)) {
-            cp = tag.codePointAt(i);
+        for (int i = 0; i < newTag.length(); i += Character.charCount(cp)) {
+            cp = newTag.codePointAt(i);
             if (Character.isLetter(cp)) {
                 cp = Character.toLowerCase(cp);
                 return String.valueOf(Character.toChars(cp));
@@ -69,30 +71,28 @@ public class Xtag implements Element {
         }
     }
 
-    private String tag;
+    private final String tag;
 
     /** Returns this tag. */
     public String getTag() {
         return tag;
     }
 
-    private String shortcut;
+    private final String shortcut;
 
     /** Returns the short form of this tag, most often -- the first letter. */
     public String getShortcut() {
-        if (shortcut != null) {
-            return shortcut;
-        } else {
-            return String.valueOf(Character.toChars(getTag().codePointAt(0)));
-        }
+        return Objects.requireNonNullElseGet(shortcut,
+                () -> String.valueOf(Character.toChars(getTag().codePointAt(0))));
     }
 
+    @Override
     public String toSafeCalcShortcut() {
         return StaticUtils.TAG_REPLACEMENT_CHAR + getShortcut().replace('<', '_').replace('>', '_')
                 + StaticUtils.TAG_REPLACEMENT_CHAR;
     }
 
-    private int index;
+    private final int index;
 
     /** Returns the index of this tag in the entry. */
     public int getIndex() {
@@ -104,6 +104,7 @@ public class Xtag implements Element {
      * &lt; or &gt;, return the character rather than a tag E.g. for
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
+    @Override
     public String toShortcut() {
         StringBuilder buf = new StringBuilder();
 
@@ -127,6 +128,7 @@ public class Xtag implements Element {
      * Returns the tag in its original form as it was in the original document.
      * E.g. for &lt;strong&gt; tag should return &lt;strong&gt;.
      */
+    @Override
     public String toOriginal() {
         return "<" + getTag() + ">";
     }
@@ -136,6 +138,7 @@ public class Xtag implements Element {
      *
      * @return an empty string
      */
+    @Override
     public String toTMX() {
         return "";
     }

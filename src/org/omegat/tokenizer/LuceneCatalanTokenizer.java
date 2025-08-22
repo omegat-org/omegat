@@ -27,11 +27,18 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ca.CatalanAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * Tokenizer implementation for processing Catalan language text. This tokenizer
+ * utilizes Lucene's CatalanAnalyzer to provide language-specific tokenization and
+ * optional stemming and stop word filtering.
+ * <p>
+ * The tokenizer can process text while either including or excluding stems and
+ * stop words based on the specified configuration.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "ca" })

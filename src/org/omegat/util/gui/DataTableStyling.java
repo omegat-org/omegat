@@ -53,6 +53,7 @@ import javax.swing.text.StyledDocument;
 import org.omegat.util.Platform;
 
 /**
+ * A collection of styling constants and helper methods for use with JTables.
  *
  * @author Aaron Madlon-Kay
  */
@@ -99,6 +100,10 @@ public final class DataTableStyling {
     public static void applyFont(JTable table, Font font) {
         table.setFont(font);
         table.setRowHeight(font.getSize() + DataTableStyling.LINE_SPACING);
+    }
+
+    public static PatternHighlightRenderer getPatternHighlightRenderer(boolean lineWrapEnabled) {
+        return new PatternHighlightRenderer(lineWrapEnabled);
     }
 
     public static TableCellRenderer getNumberCellRenderer() {

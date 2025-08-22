@@ -1,17 +1,23 @@
-name: Chec greetings build
+name: Check greetings build
 
 on:
   push:
     branches:
       - master
       - releases/*
+    paths:
+      - 'build-logic/src/main/groovy/org.omegat.document-conventions.gradle'
+      - 'src_docs/greeting/**'
   pull_request:
+    paths:
+      - 'build-logic/src/main/groovy/org.omegat.document-conventions.gradle'
+      - 'src_docs/greeting/**'
 
 jobs:
   gradle:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - uses: actions/setup-java@v4
       with:
         java-version: 17

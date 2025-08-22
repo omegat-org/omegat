@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
@@ -43,8 +44,6 @@ import org.omegat.core.spellchecker.SpellCheckerManager;
 import org.omegat.core.tagvalidation.ITagValidation;
 import org.omegat.core.tagvalidation.TagValidationTool;
 import org.omegat.core.threads.IAutoSave;
-import org.omegat.core.threads.SaveThread;
-import org.omegat.core.threads.VersionCheckThread;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -80,14 +79,14 @@ import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIDesignManager;
 
 /**
- * Class which contains all components instances.
- *
+ * Class which contains all components' instances.
+ * <p>
  * Note about threads synchronization: each component must have only local
  * synchronization. It mustn't synchronize around other components or some other
  * objects.
- *
- * Components which works in Swing UI thread can have other synchronization
- * idea: it can not be synchronized to access to some data which changed only in
+ * <p>
+ * Components that work in Swing UI thread can have another synchronization
+ * idea: it cannot be synchronized to access to some data that changed only in
  * UI thread.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -98,107 +97,92 @@ public final class Core {
     private Core() {
     }
 
-    private static IProject currentProject;
-    private static IMainWindow mainWindow;
-    protected static IEditor editor;
-    private static ITagValidation tagValidation;
-    private static IIssues issuesWindow;
-    private static IMatcher matcher;
-    private static FilterMaster filterMaster;
-    private static IProjectFilesList projWin;
-
-    protected static IAutoSave saveThread;
+    // package-private for test fixture TestCoreInitializer
     private static final ReentrantLock EXCLUSIVE_RUN_LOCK = new ReentrantLock();
 
-    protected static IGlossaries glossary;
-    private static GlossaryManager glossaryManager;
-    private static MachineTranslateTextArea machineTranslatePane;
-    private static DictionariesTextArea dictionaries;
-    @SuppressWarnings("unused")
-    private static MultipleTransPane multiple;
-    private static INotes notes;
-    private static IComments comments;
-    private static Segmenter segmenter;
-
-    private static Map<String, String> cmdLineParams = Collections.emptyMap();
-
     private static final List<String> PLUGINS_LOADING_ERRORS = Collections
-            .synchronizedList(new ArrayList<String>());
+            .synchronizedList(new ArrayList<>());
 
-    private static final List<IMarker> MARKERS = new ArrayList<IMarker>();
+    private static final List<IMarker> MARKERS = new ArrayList<>();
 
     /** Get project instance. */
     public static IProject getProject() {
-        return currentProject;
+        return CoreState.getInstance().getProject();
     }
 
     /** Set new current project. */
     public static void setProject(final IProject newCurrentProject) {
-        currentProject = newCurrentProject;
+        CoreState.getInstance().setProject(newCurrentProject);
     }
 
     /** Get main window instance. */
     public static IMainWindow getMainWindow() {
-        return mainWindow;
+        return CoreState.getInstance().getMainWindow();
     }
 
     /** Get editor instance. */
     public static IEditor getEditor() {
-        return editor;
+        return CoreState.getInstance().getEditor();
     }
 
     /** Get tag validation component instance. */
     public static ITagValidation getTagValidation() {
-        return tagValidation;
+        return CoreState.getInstance().getTagValidation();
     }
 
     public static IIssues getIssues() {
-        return issuesWindow;
+        return CoreState.getInstance().getIssuesWindow();
     }
 
     /** Get matcher component instance. */
     public static IMatcher getMatcher() {
-        return matcher;
+        return CoreState.getInstance().getMatcher();
     }
 
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
-        return SpellCheckerManager.getCurrentSpellChecker();
+        return CoreState.getInstance().getCurrentSpellChecker();
     }
 
     public static FilterMaster getFilterMaster() {
-        return filterMaster;
+        return CoreState.getInstance().getFilterMaster();
     }
 
     public static void setFilterMaster(FilterMaster newFilterMaster) {
-        filterMaster = newFilterMaster;
+        CoreState.getInstance().setFilterMaster(newFilterMaster);
         EntryKey.setIgnoreFileContext(newFilterMaster.getConfig().isIgnoreFileContext());
     }
 
     public static IProjectFilesList getProjectFilesList() {
-        return projWin;
+        return CoreState.getInstance().getProjWin();
     }
 
     public static MachineTranslateTextArea getMachineTranslatePane() {
-        return machineTranslatePane;
+        return CoreState.getInstance().getMachineTranslatePane();
     }
 
     public static IAutoSave getAutoSave() {
-        return saveThread;
+        return CoreState.getInstance().getAutoSave();
     }
 
     /** Get glossary instance. */
     public static IGlossaries getGlossary() {
-        return glossary;
+        return CoreState.getInstance().getGlossaries();
     }
 
     public static GlossaryManager getGlossaryManager() {
-        return glossaryManager;
+        return CoreState.getInstance().getGlossaryManager();
     }
 
     /** Get notes instance. */
     public static INotes getNotes() {
-        return notes;
+        return CoreState.getInstance().getNotes();
+    }
+
+    /** Get segment properties area */
+    @SuppressWarnings("unused")
+    public static SegmentPropertiesArea getSegmentPropertiesArea() {
+        return CoreState.getInstance().getSegmentPropertiesArea();
     }
 
     /**
@@ -207,19 +191,19 @@ public final class Core {
      * @return the comment area
      */
     public static IComments getComments() {
-        return comments;
+        return CoreState.getInstance().getComments();
     }
 
     public static IDictionaries getDictionaries() {
-        return dictionaries;
+        return CoreState.getInstance().getDictionaries();
     }
 
     public static Segmenter getSegmenter() {
-        return segmenter;
+        return CoreState.getInstance().getSegmenter();
     }
 
     public static void setSegmenter(Segmenter newSegmenter) {
-        segmenter = newSegmenter;
+        CoreState.getInstance().setSegmenter(newSegmenter);
     }
 
     /**
@@ -230,8 +214,10 @@ public final class Core {
      * @param cl class loader.
      * @param params CLI parameters.
      * @throws Exception when error occurred.
+     * @deprecated since 6.1.0
      */
-    @Deprecated(since = "6.1.0")
+    @Deprecated(since = "6.1.0", forRemoval = true)
+    @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
         initializeGUI(params);
     }
@@ -240,80 +226,67 @@ public final class Core {
      * Initialize application components.
      */
     public static void initializeGUI(final Map<String, String> params) throws Exception {
-        cmdLineParams = params;
+        CoreState coreState = CoreState.getInstance();
+        coreState.setCmdLineParams(params);
 
         // 1. Initialize project
-        currentProject = new NotLoadedProject();
+        coreState.setProject(new NotLoadedProject());
 
         // 2. Initialize theme
         UIDesignManager.initialize();
 
         // 3. Initialize application frame
         MainWindow me = new MainWindow();
-        mainWindow = me;
+        coreState.setMainWindow(me);
 
         initializeGUIimpl(me);
 
-        SaveThread th = new SaveThread();
-        saveThread = th;
-        th.start();
-        new VersionCheckThread(10).start();
+        coreState.initializeSaveThread();
+        coreState.initializeVersionCheckThread();
     }
 
     /**
      * initialize GUI body.
-     * @throws Exception
+     * @throws Exception when an unexpected error happened.
      */
     static void initializeGUIimpl(IMainWindow me) throws Exception {
         MarkerController.init();
         LanguageToolWrapper.init();
 
-        segmenter = new Segmenter(Preferences.getSRX());
-        filterMaster = new FilterMaster(Preferences.getFilters());
+        CoreState coreState = CoreState.getInstance();
+        coreState.setSegmenter(new Segmenter(Preferences.getSRX()));
+        coreState.setFilterMaster(new FilterMaster(Preferences.getFilters()));
 
-        // 4. Initialize other components. They add themselves to the main window.
-        editor = new EditorController(me);
-        tagValidation = new TagValidationTool();
-        issuesWindow = new IssuesPanelController(me.getApplicationFrame());
-        matcher = new MatchesTextArea(me);
+        // 4. Initialize other components. They add themselves to the main
+        // window.
+        coreState.setEditor(new EditorController(me));
+        coreState.setTagValidation(new TagValidationTool());
+        coreState.setIssuesWindow(new IssuesPanelController(me.getApplicationFrame()));
+        coreState.setMatcher(new MatchesTextArea(me));
         GlossaryTextArea glossaryArea = new GlossaryTextArea(me);
-        glossary = glossaryArea;
-        glossaryManager = new GlossaryManager(glossaryArea);
-        notes = new NotesTextArea(me);
-        comments = new CommentsTextArea(me);
-        machineTranslatePane = new MachineTranslateTextArea(me);
-        dictionaries = new DictionariesTextArea(me);
-        multiple = new MultipleTransPane(me);
-        new SegmentPropertiesArea(me);
-        projWin = new ProjectFilesListController();
+        coreState.setGlossaries(glossaryArea);
+        coreState.setGlossaryManager(new GlossaryManager(glossaryArea));
+        coreState.setNotes(new NotesTextArea(me));
+        coreState.setComments(new CommentsTextArea(me));
+        coreState.setMachineTranslatePane(new MachineTranslateTextArea(me));
+        coreState.setDictionaries(new DictionariesTextArea(me));
+        coreState.setSpellCheckerManager(new SpellCheckerManager());
+        // Create an independent instance updated from SearchThead.
+        new MultipleTransPane(me);
+        // Create an independent instance updated by events.
+        coreState.setSegmentPropertiesArea(new SegmentPropertiesArea(me));
+        coreState.setProjWin(new ProjectFilesListController());
     }
 
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) throws Exception {
-        cmdLineParams = params;
-        tagValidation = new TagValidationTool();
-        currentProject = new NotLoadedProject();
-        mainWindow = new ConsoleWindow();
-    }
-
-    /**
-     * Set main window instance for unit tests.
-     *
-     * @param mainWindow
-     */
-    protected static void setMainWindow(IMainWindow mainWindow) {
-        Core.mainWindow = mainWindow;
-    }
-
-    /**
-     * Set project instance for unit tests.
-     *
-     * @param currentProject
-     */
-    protected static void setCurrentProject(IProject currentProject) {
-        Core.currentProject = currentProject;
+    public static void initializeConsole(final Map<String, String> params) {
+        CoreState coreState = CoreState.getInstance();
+        coreState.setCmdLineParams(params);
+        coreState.setTagValidation(new TagValidationTool());
+        coreState.setProject(new NotLoadedProject());
+        coreState.setMainWindow(new ConsoleWindow());
     }
 
     /**
@@ -331,7 +304,7 @@ public final class Core {
     }
 
     public static Map<String, String> getParams() {
-        return cmdLineParams;
+        return CoreState.getInstance().getCmdLineParams();
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {
@@ -384,6 +357,7 @@ public final class Core {
      * @param run
      *            code for execute
      * @throws Exception
+     *            Throw exception from runnable if received.
      */
     public static void executeExclusively(boolean waitForUnlock, RunnableWithException run)
             throws Exception {

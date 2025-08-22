@@ -32,9 +32,6 @@
 
     <!-- Permanently suppress errors/warnings -->
     
-    <!-- ignore -->
-    <suppress files="gen.core.*+" checks="RegexpHeader"/>
-
     <!-- tests -->
     <suppress files="TestCore\.java" checks="MethodLength"/>
     <suppress checks="(MethodName|MemberName|OperatorWrap)" files=".*Test\.java"/>
@@ -68,6 +65,7 @@
     <suppress checks="WhitespaceAround"
             files="(AlignFilePicker|InstanceEditor|CreateGlossaryEntry|NewTeamProject|FilenamePatternsEditor|FilterEditor|SegmentPropertiesListCell|FilterBarReplace|ProjectFilesList)\.java"/>
     <suppress checks="ParameterNumber" files="EntryListPane\.java" lines="304"/>
+    <suppress checks="LineLength" files="(CreateGlossaryEntry|FilterBarReplace|FilterEditor|InstanceEditor|NewTeamProject|ProjectFilesList)\.java"/>
 
     <!-- Suppress for readability -->
     <suppress files="PluginInformation\.java" checks="NeedBraces" lines="167-192"/>
@@ -77,13 +75,12 @@
     <suppress checks="(ParameterNumber|FileLength)" files="RealProject\.java"/>
 
     <!-- util/Platform -->
-    <suppress files="Platform\.java" checks="ConstantName" lines="61-80"/>
+    <suppress files="Platform\.java" checks="ConstantName" lines="61-85"/>
     <!-- util/Preferences -->
     <suppress files="Preferences\.java" checks="LineLength" lines="197"/>
     <!-- util/xml -->
     <suppress checks="(EmptyBlock|MethodLength)" files="XMLStreamReader\.java"/>
     <!-- util -->
-    <suppress files="StringUtil\.java" checks="EmptyBlock" lines="500,501,502"/>
     <suppress checks="InnerAssignment" files="TagUtil\.java"/>
     <suppress checks="InnerAssignment" files="VarExpansion\.java" lines="108"/>
     <suppress checks="ConstantName" files="UIDesignManager\.java" lines="83,85,336,338"/>
@@ -108,7 +105,7 @@
     <suppress files="AutoCompleter\.java" checks="EmptyStatement"/>
     <suppress files="RepositoriesMappingController\.java" checks="MethodLength"/>
     <suppress files="InstanceEditor\.java" checks="ParameterNumber"/>
-    <suppress files="EditorController\.java" checks="(File|Method)Length"/>
+    <suppress files="EditorController\.java" checks="FileLength"/>
     <suppress files="ProjectUICommands\.java" checks="MethodLength"/>
     <suppress files="ProjectFilesListController\.java" checks="MethodLength"/>
     <suppress files="BaseMainWindowMenu\.java" checks="MethodLength"/>
@@ -122,6 +119,7 @@
     <suppress checks="(MemberName|MissingSwitchDefault|ParameterNumber)" files="SearchResultEntry\.java"/>
 
     <suppress files="StaticUtils\.java" checks="EmptyStatement" lines="158,162,549"/>
+    <suppress files="StaticUtils\.java" checks="LineLength" lines="715"/>
     <suppress files="PatternConsts\.java" checks="LineLength" lines="50,259,294"/>
 
     <!-- repository -->
@@ -133,13 +131,11 @@
     <suppress files="GITExternalGpgSigner\.java" checks="ConstantName" lines="74-84"/>
 
     <!-- Searcher -->
-    <suppress files="Searcher\.java"
-              checks="(LineLength|MemberName|ParameterNumber|MissingSwitchDefault|InnerAssignment)"
-         lines="90,91,92,96,100,104,105,107,264,275,276,284,286,293,294,308,309,359,361,449,495,605,674,710"/>
+    <suppress files="Searcher\.java" checks="ParameterNumber"/>
 
     <!-- matching -->
-    <suppress files="NearString\.java" checks="TypeName" lines="51-55"/>
-    <suppress files="NearString\.java" checks="ParameterNumber" lines="85-150"/>
+    <suppress files="NearString\.java" checks="TypeName" lines="50-70"/>
+    <suppress files="NearString\.java" checks="ParameterNumber"/>
     <suppress files="LevenshteinDistance\.java" checks="LocalVariableName" lines="147,159"/>
 
     <!-- Aligner, AlignFilePickerController, AlignPanelController -->
@@ -149,7 +145,6 @@
     <!-- machinetranslators -->
     <suppress checks="(DesignForExtension|MagicNumber|MemberName|HideUtilityClassConstructor)"
               files="(Apertium|DeepL|YandexCloud|Google2|IBMWatson|MyMemory)Translate\.java"/>
-    <suppress files="YandexCloudTranslate\.java" checks="LocalVariableName" lines="139"/>
 
     <!-- spellchecker -->
     <suppress checks="(LineLength|OperatorWrap)" files="SpellcheckerConfigurationController\.java"/>

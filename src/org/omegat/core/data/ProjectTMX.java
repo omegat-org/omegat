@@ -48,6 +48,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
+import org.xml.sax.SAXParseException;
 
 /**
  * Class for store data from project_save.tmx.
@@ -88,40 +89,45 @@ public class ProjectTMX {
     final CheckOrphanedCallback checkOrphanedCallback;
 
     public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
-            File file, CheckOrphanedCallback callback) throws Exception {
+            File file, CheckOrphanedCallback callback) {
         this(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback,
                 Core.getSegmenter());
     }
 
     public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
-                      File file, CheckOrphanedCallback callback, Segmenter segmenter) throws Exception {
+            File file, CheckOrphanedCallback callback, Segmenter segmenter) {
+        this(callback);
+        try {
+            load(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, segmenter);
+        } catch (SAXParseException ex) {
+            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
+        } catch (Exception e) {
+            Log.logErrorRB(e, "LOG_DATAENGINE_LOAD_ERROR", file.getAbsolutePath());
+        }
+    }
+
+    public ProjectTMX(CheckOrphanedCallback callback) {
         this.checkOrphanedCallback = callback;
         alternatives = new HashMap<>();
         defaults = new HashMap<>();
+    }
 
+    /**
+     * Constructor for TMX delta, clone and tests.
+     */
+    public ProjectTMX() {
+        this(null);
+    }
+
+    public void load(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled,
+            File file, Segmenter segmenter) throws Exception {
         if (file == null || !file.exists()) {
             // file not exist - new project
             return;
         }
-
-        new TMXReader2().readTMX(
-                file,
-                sourceLanguage,
-                targetLanguage,
-                isSentenceSegmentingEnabled,
-                false,
-                true,
-                Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
+        new TMXReader2().readTMX(file, sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, true,
+                true, Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
                 new Loader(sourceLanguage, targetLanguage, segmenter, isSentenceSegmentingEnabled));
-    }
-
-    /**
-     * Constructor for TMX delta.
-     */
-    public ProjectTMX() {
-        alternatives = new HashMap<EntryKey, TMXEntry>();
-        defaults = new HashMap<String, TMXEntry>();
-        checkOrphanedCallback = null;
     }
 
     /**
@@ -168,14 +174,44 @@ public class ProjectTMX {
         FileUtil.rename(newFile, orig);
     }
 
+    /**
+     * Exports the TMX (Translation Memory Exchange) data from the project
+     * to a specified file.
+     *
+     * @param props
+     *              The project properties containing source and target language
+     *              information and other project-level settings.
+     * @param outFile
+     *              The output file to which the TMX data will be exported.
+     * @param forceValidTMX
+     *              A boolean indicating whether to enforce the generation of a
+     *              valid TMX file.
+     * @param levelTwo
+     *              A boolean indicating whether to enable creation of TMX Level-2
+     *              format.
+     * @param useOrphaned
+     *              A boolean indicating whether orphaned entries (entries not
+     *              currently in use) should be included in the export.
+     * @throws Exception
+     *              If any error occurs during the export process.
+     */
     public void exportTMX(ProjectProperties props, File outFile, final boolean forceValidTMX,
             final boolean levelTwo, final boolean useOrphaned) throws Exception {
-        TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
-        try {
+        try (TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX)) {
             Map<String, TMXEntry> tempDefaults = new TreeMap<>();
             Map<EntryKey, TMXEntry> tempAlternatives = new TreeMap<>();
 
+            // copy non-orphaned entries to temp map
+            // useOrphaned - true - copy all entries
+            // useOrphaned - false - copy only entries that exist in project
+            // (useOrphaned == false is used for delta export)
+            //
+            // It is important to use synchronization around ProjectTMX.
+            //
+            // It is also important to use synchronization around
+            // CheckOrphanedCallback.existSourceInProject() and
+            // CheckOrphanedCallback.existEntryInProject().
             synchronized (this) {
                 if (useOrphaned) {
                     // fast call - just copy
@@ -240,54 +276,64 @@ public class ProjectTMX {
                 }
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
             }
-        } finally {
-            wr.close();
         }
     }
 
     /**
      * Get default translation or null if not exist.
      */
-    public TMXEntry getDefaultTranslation(String source) {
-        synchronized (this) {
-            return defaults.get(source);
-        }
+    public synchronized TMXEntry getDefaultTranslation(String source) {
+        return defaults.get(source);
     }
 
     /**
      * Get multiple translation or null if not exist.
      */
-    public TMXEntry getMultipleTranslation(EntryKey ek) {
-        synchronized (this) {
-            return alternatives.get(ek);
-        }
+    public synchronized TMXEntry getMultipleTranslation(EntryKey ek) {
+        return alternatives.get(ek);
     }
 
     /**
-     * Set new translation.
+     * Set a new translation.
      */
     public void setTranslation(SourceTextEntry ste, TMXEntry te, boolean isDefault) {
-        synchronized (this) {
-            if (te == null) {
-                if (isDefault) {
-                    defaults.remove(ste.getKey().sourceText);
-                } else {
-                    alternatives.remove(ste.getKey());
-                }
-            } else {
-                if (!ste.getSrcText().equals(te.source)) {
-                    throw new IllegalArgumentException("Source must be the same as in SourceTextEntry");
-                }
-                if (isDefault != te.defaultTranslation) {
-                    throw new IllegalArgumentException("Default/alternative must be the same");
-                }
-                if (isDefault) {
-                    defaults.put(ste.getKey().sourceText, te);
-                } else {
-                    alternatives.put(ste.getKey(), te);
-                }
-            }
+        if (te == null) {
+            removeTranslation(ste, isDefault);
+        } else {
+            validateTranslationEntry(ste, te, isDefault);
+            storeTranslation(ste, te, isDefault);
         }
+    }
+
+    private synchronized void removeTranslation(SourceTextEntry ste, boolean isDefault) {
+        if (isDefault) {
+            defaults.remove(ste.getKey().sourceText);
+        } else {
+            alternatives.remove(ste.getKey());
+        }
+    }
+
+    private void validateTranslationEntry(SourceTextEntry ste, TMXEntry te, boolean isDefault) {
+        if (!ste.getSrcText().equals(te.source)) {
+            throw new IllegalArgumentException("Source must be the same as in SourceTextEntry");
+        }
+        if (isDefault != te.defaultTranslation) {
+            throw new IllegalArgumentException("Default/alternative must be the same");
+        }
+    }
+
+    private synchronized void storeTranslation(SourceTextEntry ste, TMXEntry te, boolean isDefault) {
+        if (isDefault) {
+            defaults.put(ste.getKey().sourceText, te);
+        } else {
+            alternatives.put(ste.getKey(), te);
+        }
+    }
+
+    public synchronized void clear() {
+        defaults.clear();
+        alternatives.clear();
+        checkOrphanedCallback.clear();
     }
 
     private class Loader implements TMXReader2.LoadCallback {
@@ -296,8 +342,8 @@ public class ProjectTMX {
         private final Segmenter segmenter;
         private final boolean sentenceSegmentingEnabled;
 
-        Loader(Language sourceLang, Language targetLang,
-               Segmenter segmenter, boolean sentenceSegmentingEnabled) {
+        Loader(Language sourceLang, Language targetLang, Segmenter segmenter,
+                boolean sentenceSegmentingEnabled) {
             this.sourceLang = sourceLang;
             this.targetLang = targetLang;
             this.segmenter = segmenter;
@@ -322,7 +368,7 @@ public class ProjectTMX {
                 changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                         tu.creationid);
                 changed = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
-                    tu.creationdate);
+                        tu.creationdate);
                 translation = tuvTarget.text;
             }
 
@@ -353,8 +399,8 @@ public class ProjectTMX {
                         id = te.getPropValue(ATTR_TUID);
                     }
 
-                    EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
-                            id, te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
+                    EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source, id,
+                            te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
                             te.getPropValue(PROP_PATH));
 
                     TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
@@ -383,7 +429,7 @@ public class ProjectTMX {
             id = te.getPropValue(ATTR_TUID);
         }
         TMXEntry.ExternalLinked externalLinked = null;
-        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
+        if (te.hasPropValue(PROP_XICE, id)) {
             externalLinked = TMXEntry.ExternalLinked.xICE;
         }
         if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
@@ -401,9 +447,12 @@ public class ProjectTMX {
     public Collection<TMXEntry> getDefaults() {
         return defaults.values();
     }
+
     /**
-     * Returns the collection of TMX entries that have an alternative translation
-     * @return
+     * Returns the collection of TMX entries that have an alternative
+     * translation.
+     * 
+     * @return alternative entries
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
@@ -413,13 +462,13 @@ public class ProjectTMX {
         boolean existEntryInProject(EntryKey key);
 
         boolean existSourceInProject(String src);
+        
+        void clear();
     }
 
-    public void replaceContent(ProjectTMX tmx) {
-        synchronized (this) {
-            defaults = tmx.defaults;
-            alternatives = tmx.alternatives;
-        }
+    public synchronized void replaceContent(ProjectTMX tmx) {
+        defaults = tmx.defaults;
+        alternatives = tmx.alternatives;
     }
 
     @Override

@@ -132,7 +132,7 @@ public class FindMatchesTest {
         finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         result = finder.search(srcText, false, iStopped);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
-        assertEquals("Hit with segmented tmx record", 100, result.get(0).scores[0].score);
+        assertEquals("Hit segmented tmx records", 100, result.get(0).scores[0].score);
         assertEquals(100, result.get(0).scores[0].scoreNoStem);
         assertEquals(100, result.get(0).scores[0].adjustedScore);
         assertEquals(expectWhole, result.get(0).translation);
@@ -248,7 +248,7 @@ public class FindMatchesTest {
         assertEquals("weird behavior", result.get(0).translation);
         assertTrue(result.get(0).projs[0].contains("penalty-010"));
         // match segmented, with penalty
-        assertEquals("TM", result.get(1).comesFrom.name());
+        assertEquals("SUBSEGMENTS", result.get(1).comesFrom.name());
         assertEquals(90, result.get(1).scores[0].score);
         assertEquals(10, result.get(1).scores[0].penalty);
         // FIXME
@@ -361,6 +361,9 @@ public class FindMatchesTest {
             }
             public boolean existEntryInProject(EntryKey key) {
                 return false;
+            }
+            public void clear() {
+                // do nothing
             }
         };
 
@@ -475,6 +478,7 @@ public class FindMatchesTest {
                 ExternalTMX newTMX = ExternalTMFactory.load(externalTmx, prop, segmenter, null);
                 transMemories.put(externalTmx.getPath(), newTMX);
             } catch (Exception ignored) {
+                return Collections.emptyMap();
             }
             return Collections.unmodifiableMap(transMemories);
         }
@@ -485,7 +489,8 @@ public class FindMatchesTest {
         public ProjectTMXMock(Language sourceLanguage, Language targetLanguage,
                            boolean isSentenceSegmentingEnabled,
                           File file, CheckOrphanedCallback callback, Segmenter segmenter) throws Exception {
-            super(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, callback, segmenter);
+            super(callback);
+            load(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled, file, segmenter);
         }
 
         public Map<String, TMXEntry> getDefaultsMap() {

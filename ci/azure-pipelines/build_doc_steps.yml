@@ -1,6 +1,3 @@
-parameters:
-  condition: false
-
 steps:
   - task: Cache@2
     displayName: 'Cache Gradle'
@@ -8,15 +5,10 @@ steps:
     inputs:
       key: 'gradle | $(Agent.OS) | $(Build.SourcesDirectory)/build.gradle'
       path: '$(GRADLE_USER_HOME)'
-  - script: |
-      umask a+w
-      chmod -R a+w doc_src
-    condition: ${{ parameters.condition }}
-    displayName: 'Prepare'
   - task: Gradle@3
     condition: ${{ parameters.condition }}
     inputs:
-      tasks: 'clean webManual'
+      tasks: 'manualHtmls'
       options: '-PenvIsCi --no-daemon'
       jdkVersionOption: '1.17'
     displayName: 'Run Gradle clean&webManual'

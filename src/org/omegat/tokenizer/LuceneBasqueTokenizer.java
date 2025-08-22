@@ -27,11 +27,20 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.eu.BasqueAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * Tokenizer class specifically designed for processing Basque text.
+ * It extends the {@link BaseTokenizer} and provides functionality to tokenize Basque input text.
+ * <p>
+ * This tokenizer uses the {@link BasqueAnalyzer} to perform tokenization, optionally applying
+ * stemming and stop word removal based on the parameter configurations. If stemming is not
+ * allowed, it defaults to standard tokenization.
+ * <p>
+ * This class is annotated with {@link Tokenizer} to associate it with the Basque language using the language code "eu".
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "eu" })

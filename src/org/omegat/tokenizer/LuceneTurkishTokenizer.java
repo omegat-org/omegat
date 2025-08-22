@@ -27,11 +27,19 @@ package org.omegat.tokenizer;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tr.TurkishAnalyzer;
-import org.apache.lucene.analysis.util.CharArraySet;
 
 /**
+ * The LuceneTurkishTokenizer provides tokenization for Turkish text.
+ * This tokenizer utilizes Lucene's TurkishAnalyzer to process text into tokens,
+ * supporting optional stemming and stop words removal based on the provided configuration.
+ * It is designed to integrate with the Lucene framework for text analysis.
+ * <p>
+ * This class extends the functionality of the BaseTokenizer and overrides
+ * the required method for obtaining the token stream for Turkish language processing.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "tr" }, isDefault = true)

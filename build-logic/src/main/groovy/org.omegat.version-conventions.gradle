@@ -1,0 +1,22 @@
+plugins {
+    id 'org.omegat.common-utilities'
+}
+
+ext {
+    omtVersion = loadProperties(file('src/org/omegat/Version.properties'))
+
+    getUpdateSuffix = { update ->
+        if (!update || update == '0') {
+            return ''
+        }
+        if (update.length() == 1) {
+            return "_0${update}"
+        }
+        "_${update}"
+    }
+    mavenStyleVersion = omtVersion.version + getUpdateSuffix(omtVersion.update).replace('_', '-')
+}
+
+tasks.register('printVersion') {
+    println project.version
+}

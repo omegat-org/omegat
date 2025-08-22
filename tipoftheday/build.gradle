@@ -3,59 +3,20 @@
  */
 
 plugins {
-    id 'java-library'
-}
-
-sourceSets {
-    java {
-        main {
-            resources {
-                srcDirs=['docs', 'src/main/resources']
-            }
-        }
-    }
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
     compileOnly(project.rootProject)
     if (providedCoreLibsDir.directory) {
-        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-lang3-*.jar', '**/jackson*.jar',
-                                                                  '**/icu4j-*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar'])
+        compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/jackson-*.jar'])
+        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/tipoftheday-*.jar','**/cssbox-*.jar',
+                                                                       '**/jstyleparser-*.jar'])
     } else {
-        // runtime dependencies should be in main project
-        implementation(libs.tipoftheday) {
-            exclude module: 'commons-lang3'
-            exclude module: 'commons-io'
-        }
-        compileOnly(libs.commons.lang3)
-        runtimeOnly(libs.icu4j)
-
-        // jackson-databind-yaml is dependency of languagetool-core
+        implementation(libs.tipoftheday)
+        implementation(libs.jetbrains.annotations)
         compileOnly(libs.jackson.yaml)
     }
-    testImplementation(testFixtures(project.rootProject))
-    testImplementation(libs.commons.io)
-    testRuntimeOnly(libs.icu4j)
 }
 
-jar {
-    archiveAppendix.set("omegat")
-    destinationDirectory.set(new File(rootProject.buildDir, "modules"))
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Link': 'https://omegat.org',
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-}
+makeModuleTask(loadProperties(file('plugin.properties')))

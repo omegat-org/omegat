@@ -90,6 +90,7 @@ import javax.swing.text.StyledDocument;
 
 import org.apache.commons.io.FilenameUtils;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.segmentation.SRX;
@@ -120,7 +121,6 @@ import gen.core.filters.Filters;
  */
 public class AlignPanelController {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.align.Bundle");
-    private final Aligner aligner;
     private final String defaultSaveDir;
     private boolean modified = false;
     private SRX customizedSRX;
@@ -158,8 +158,7 @@ public class AlignPanelController {
 
     private Phase phase = Phase.ALIGN;
 
-    public AlignPanelController(Aligner aligner, String defaultSaveDir) {
-        this.aligner = aligner;
+    public AlignPanelController(String defaultSaveDir) {
         this.defaultSaveDir = defaultSaveDir;
     }
 
@@ -170,7 +169,7 @@ public class AlignPanelController {
      * @param parent
      *            Parent window of the align tool
      */
-    public void show(Component parent) {
+    public void show(Component parent, Aligner aligner) {
         alignMenuFrame = new AlignMenuFrame();
         alignMenuFrame.setTitle(BUNDLE.getString("ALIGNER_PANEL"));
         alignMenuFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -212,7 +211,7 @@ public class AlignPanelController {
             ComparisonMode newValue = (ComparisonMode) ((JComboBox<?>) e.getSource()).getSelectedItem();
             if (newValue != aligner.comparisonMode && confirmReset(alignMenuFrame)) {
                 aligner.comparisonMode = newValue;
-                reloadBeads();
+                reloadBeads(aligner);
             } else {
                 alignPanel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
             }
@@ -224,7 +223,7 @@ public class AlignPanelController {
             AlgorithmClass newValue = (AlgorithmClass) ((JComboBox<?>) e.getSource()).getSelectedItem();
             if (newValue != aligner.algorithmClass && confirmReset(alignMenuFrame)) {
                 aligner.algorithmClass = newValue;
-                reloadBeads();
+                reloadBeads(aligner);
             } else {
                 alignPanel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
             }
@@ -236,7 +235,7 @@ public class AlignPanelController {
             CalculatorType newValue = (CalculatorType) ((JComboBox<?>) e.getSource()).getSelectedItem();
             if (newValue != aligner.calculatorType && confirmReset(alignMenuFrame)) {
                 aligner.calculatorType = newValue;
-                reloadBeads();
+                reloadBeads(aligner);
             } else {
                 alignPanel.calculatorComboBox.setSelectedItem(aligner.calculatorType);
             }
@@ -248,7 +247,7 @@ public class AlignPanelController {
             CounterType newValue = (CounterType) ((JComboBox<?>) e.getSource()).getSelectedItem();
             if (newValue != aligner.counterType && confirmReset(alignMenuFrame)) {
                 aligner.counterType = newValue;
-                reloadBeads();
+                reloadBeads(aligner);
             } else {
                 alignPanel.counterComboBox.setSelectedItem(aligner.counterType);
             }
@@ -260,7 +259,7 @@ public class AlignPanelController {
             boolean newValue = ((AbstractButton) e.getSource()).isSelected();
             if (newValue != aligner.segment && confirmReset(alignMenuFrame)) {
                 aligner.segment = newValue;
-                reloadBeads();
+                reloadBeads(aligner);
             } else {
                 alignPanel.segmentingCheckBox.setSelected(aligner.segment);
                 alignMenuFrame.segmentingItem.setSelected(aligner.segment);
@@ -276,7 +275,7 @@ public class AlignPanelController {
                 if (customizer.show(alignMenuFrame)) {
                     customizedSRX = customizer.getResult();
                     aligner.updateSegmenter(customizedSRX);
-                    reloadBeads();
+                    reloadBeads(aligner);
                 }
             }
         };
@@ -291,7 +290,7 @@ public class AlignPanelController {
                     customizedFilters = customizer.getResult();
                     Core.setFilterMaster(new FilterMaster(customizedFilters));
                     aligner.clearLoaded();
-                    reloadBeads();
+                    reloadBeads(aligner);
                 }
             }
         };
@@ -338,7 +337,7 @@ public class AlignPanelController {
             int beads = model.beadsInRowSpan(rows);
             if (beads >= 1) {
                 if (beads == 1) {
-                    mergeRows(rows, col);
+                    mergeRows(aligner, rows, col);
                 } else {
                     moveRows(rows, col, rows[0]);
                 }
@@ -381,7 +380,7 @@ public class AlignPanelController {
             }
             while (true) {
                 JFileChooser chooser = new JFileChooser();
-                chooser.setSelectedFile(new File(defaultSaveDir, getOutFileName()));
+                chooser.setSelectedFile(new File(defaultSaveDir, getOutFileName(aligner)));
                 chooser.setDialogTitle(BUNDLE.getString("ALIGNER_PANEL_DIALOG_SAVE"));
                 if (JFileChooser.APPROVE_OPTION == chooser.showSaveDialog(alignMenuFrame)) {
                     File file = chooser.getSelectedFile();
@@ -417,7 +416,7 @@ public class AlignPanelController {
                 if (phase == Phase.ALIGN) {
                     aligner.restoreDefaults();
                 }
-                reloadBeads();
+                reloadBeads(aligner);
             }
         };
         alignPanel.resetButton.addActionListener(resetListener);
@@ -426,7 +425,7 @@ public class AlignPanelController {
         ActionListener reloadListener = e -> {
             if (confirmReset(alignMenuFrame)) {
                 aligner.clearLoaded();
-                reloadBeads();
+                reloadBeads(aligner);
             }
         };
         alignMenuFrame.reloadItem.addActionListener(reloadListener);
@@ -436,7 +435,7 @@ public class AlignPanelController {
             if (newValue != aligner.removeTags && confirmReset(alignMenuFrame)) {
                 aligner.removeTags = newValue;
                 aligner.clearLoaded();
-                reloadBeads();
+                reloadBeads(aligner);
             } else {
                 alignPanel.removeTagsCheckBox.setSelected(aligner.removeTags);
                 alignMenuFrame.removeTagsItem.setSelected(aligner.removeTags);
@@ -447,7 +446,7 @@ public class AlignPanelController {
 
         alignPanel.continueButton.addActionListener(e -> {
             phase = Phase.EDIT;
-            updatePanel();
+            updatePanel(aligner);
         });
 
         ActionListener highlightListener = e -> {
@@ -485,7 +484,7 @@ public class AlignPanelController {
         alignMenuFrame.keepNoneItem.addActionListener(e -> toggleAllEnabled(false));
 
         alignMenuFrame.realignPendingItem.addActionListener(e -> {
-            realignPending();
+            realignPending(aligner);
         });
 
         alignMenuFrame.pinpointAlignStartItem.addActionListener(e -> {
@@ -493,11 +492,11 @@ public class AlignPanelController {
             ppRow = alignPanel.table.getSelectedRow();
             ppCol = alignPanel.table.getSelectedColumn();
             alignPanel.table.clearSelection();
-            updatePanel();
+            updatePanel(aligner);
         });
 
         alignMenuFrame.pinpointAlignEndItem.addActionListener(e -> {
-            pinpointAlign(alignPanel.table.getSelectedRow(), alignPanel.table.getSelectedColumn());
+            pinpointAlign(aligner, alignPanel.table.getSelectedRow(), alignPanel.table.getSelectedColumn());
         });
 
         alignMenuFrame.pinpointAlignCancelItem.addActionListener(e -> {
@@ -505,7 +504,7 @@ public class AlignPanelController {
             ppRow = -1;
             ppCol = -1;
             alignPanel.table.repaint();
-            updatePanel();
+            updatePanel(aligner);
         });
 
         alignPanel.table.addMouseListener(new MouseAdapter() {
@@ -515,7 +514,7 @@ public class AlignPanelController {
                     JTable table = (JTable) e.getSource();
                     int row = table.rowAtPoint(e.getPoint());
                     int col = table.columnAtPoint(e.getPoint());
-                    pinpointAlign(row, col);
+                    pinpointAlign(aligner, row, col);
                 }
             }
         });
@@ -547,8 +546,8 @@ public class AlignPanelController {
 
         // Set initial state
         updateHighlight();
-        updatePanel();
-        reloadBeads();
+        updatePanel(aligner);
+        reloadBeads(aligner);
 
         alignMenuFrame.add(alignPanel);
         alignMenuFrame.pack();
@@ -612,13 +611,13 @@ public class AlignPanelController {
         ensureSelectionVisible(initialRect);
     }
 
-    private void mergeRows(int[] rows, int col) {
+    private void mergeRows(Aligner aligner, int[] rows, int col) {
         modified = true;
         Rectangle initialRect = alignPanel.table.getVisibleRect();
         alignPanel.table.clearSelection();
         BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         List<Integer> realRows = model.realCellsInRowSpan(col, rows);
-        int resultRow = model.mergeRows(realRows, col);
+        int resultRow = model.mergeRows(aligner, realRows, col);
         alignPanel.table.changeSelection(resultRow, col, false, false);
         ensureSelectionVisible(initialRect);
     }
@@ -672,7 +671,7 @@ public class AlignPanelController {
         ensureSelectionVisible(initialRect);
     }
 
-    private void realignPending() {
+    private void realignPending(Aligner aligner) {
         BeadTableModel model = (BeadTableModel) alignPanel.table.getModel();
         List<MutableBead> data = model.getData();
         List<MutableBead> toAlign = new ArrayList<>();
@@ -697,7 +696,7 @@ public class AlignPanelController {
         resizeRows(alignPanel.table);
     }
 
-    private void pinpointAlign(int row, int col) {
+    private void pinpointAlign(Aligner aligner, int row, int col) {
         if (row == ppRow || col == ppCol) {
             return;
         }
@@ -726,7 +725,7 @@ public class AlignPanelController {
         ppCol = -1;
         phase = Phase.EDIT;
         ensureSelectionVisible(initialRect);
-        updatePanel();
+        updatePanel(aligner);
     }
 
     private void toggleEnabled(int... rows) {
@@ -788,7 +787,7 @@ public class AlignPanelController {
      * Reloads the beads with the current settings. The loading itself takes
      * place on a background thread.
      */
-    private void reloadBeads() {
+    private void reloadBeads(Aligner aligner) {
         if (loader != null) {
             loader.cancel(true);
         }
@@ -836,7 +835,7 @@ public class AlignPanelController {
                 }
                 alignPanel.averageDistanceLabel.setText(distanceValue);
 
-                updatePanel();
+                updatePanel(aligner);
             }
         };
         loader.execute();
@@ -846,7 +845,7 @@ public class AlignPanelController {
      * Ensure that the panel controls and available menu items are synced with
      * the settings of the underlying aligner.
      */
-    private void updatePanel() {
+    private void updatePanel(Aligner aligner) {
         alignPanel.comparisonComboBox.setSelectedItem(aligner.comparisonMode);
         alignPanel.algorithmComboBox.setSelectedItem(aligner.algorithmClass);
         alignPanel.calculatorComboBox.setSelectedItem(aligner.calculatorType);
@@ -942,7 +941,7 @@ public class AlignPanelController {
                         && realRows.get(0) != ppRow && col != ppCol && model.isEditableColumn(col));
     }
 
-    private String getOutFileName() {
+    private String getOutFileName(Aligner aligner) {
         String src = FilenameUtils.getBaseName(aligner.srcFile);
         String trg = FilenameUtils.getBaseName(aligner.trgFile);
         if (src.equals(trg)) {
@@ -1255,7 +1254,7 @@ public class AlignPanelController {
         }
 
         @Override
-        public Object getValueAt(int row, int column) {
+        public @Nullable Object getValueAt(int row, int column) {
             MutableBead bead;
             switch (column) {
             case COL_CHECKBOX - 3:
@@ -1574,7 +1573,7 @@ public class AlignPanelController {
          *            Column of
          * @return The resulting row
          */
-        int mergeRows(List<Integer> rows, int col) {
+        int mergeRows(Aligner aligner, List<Integer> rows, int col) {
             if (!isEditableColumn(col)) {
                 throw new IllegalArgumentException();
             }

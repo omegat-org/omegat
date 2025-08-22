@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -7,7 +7,6 @@ dependencies {
     if (providedModuleLibsDir.directory) {
         compileOnly fileTree(dir: providedCoreLibsDir, includes: ['**/commons-*.jar', '**/languagetool-core-*.jar',
                                        '**/lib-mnemonics-*.jar', '**/slf4j-format-jdk14-*.jar', '**/morfologik-*.jar'])
-        implementation fileTree(dir: providedModuleLibsDir, includes: ['**/morfologik-*.jar'])
     } else {
         // morfologik stemming and speller are dependency of languagetool-core
         compileOnly(libs.morfologik.stemming)
@@ -15,15 +14,7 @@ dependencies {
         compileOnly(libs.commons.io)
         compileOnly(libs.omegat.mnemonics)
         compileOnly(libs.slf4j.format.jdk14)
-        compileOnly(libs.languagetool.core) {
-            exclude module: 'guava'
-            exclude module: 'jackson-databind'
-            exclude module: 'language-detector'
-            exclude module: 'hunspell'
-            exclude group: 'com.google.android'
-            exclude group: 'org.jetbrains'
-            exclude module: 'morfologik-fsa'
-        }
+        compileOnly(libs.languagetool.core)
     }
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
@@ -33,22 +24,9 @@ dependencies {
     testRuntimeOnly(libs.languagetool.de)
 }
 
-jar {
-    archiveAppendix.set("spellchecker")
-    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Link': 'https://omegat.org',
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+makeModuleTask(loadProperties(file('plugin.properties')))
+
+test {
+    dependsOn project(':language-modules:en').tasks.withType(Jar)
+    dependsOn project(':language-modules:de').tasks.withType(Jar)
 }

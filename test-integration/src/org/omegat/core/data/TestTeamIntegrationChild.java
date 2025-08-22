@@ -25,7 +25,6 @@
 
 package org.omegat.core.data;
 
-
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Frame;
@@ -111,7 +110,6 @@ public final class TestTeamIntegrationChild {
     static Map<String, Long> values = new HashMap<>();
     static Set<String> glossaries = new HashSet<>();
     static long glossaryIndex = 0;
-    static GlossaryManager glossaryManager;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 6) {
@@ -159,7 +157,7 @@ public final class TestTeamIntegrationChild {
             }
             projectProperties.autocreateDirectories();
             Core.setProject(new NotLoadedProject());
-            glossaryManager = new GlossaryManager(new TestGlossaryTextArea());
+            TestCoreState.getInstance().setGlossaryManager(new GlossaryManager(new TestGlossaryTextArea()));
             loadProject(projectProperties);
 
             key = new EntryKey[segCount];
@@ -216,6 +214,7 @@ public final class TestTeamIntegrationChild {
 
     /**
      * replacement of ProjectFactory.loadProject for test.
+     * 
      * @param projectProperties
      * @throws Exception
      */
@@ -239,14 +238,16 @@ public final class TestTeamIntegrationChild {
                 return;
             }
         }
-        throw new RuntimeException("Wrong url in repository. expected: " + repo
-                + ": actual: " + prop.getRepositories().get(0).getUrl());
+        throw new RuntimeException("Wrong url in repository. expected: " + repo + ": actual: "
+                + prop.getRepositories().get(0).getUrl());
     }
 
     private static String getRootGitRepositoryMapping(List<RepositoryDefinition> repos) {
         String repoUrl = null;
         for (RepositoryDefinition definition : repos) {
-            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
+            if (definition.getMapping().get(0).getLocal().equals("/")
+                    && definition.getMapping().get(0).getRepository().equals("/")
+                    && definition.getType().equals("git")) {
                 repoUrl = definition.getUrl();
                 break;
             }
@@ -256,14 +257,15 @@ public final class TestTeamIntegrationChild {
 
     private static void setRootGitRepositoryMapping(List<RepositoryDefinition> repos, String repoUrl) {
         for (RepositoryDefinition definition : repos) {
-            if (definition.getMapping().get(0).getLocal().equals("/") && definition.getMapping().get(0).getRepository().equals("/") && definition.getType().equals("git")) {
+            if (definition.getMapping().get(0).getLocal().equals("/")
+                    && definition.getMapping().get(0).getRepository().equals("/")
+                    && definition.getType().equals("git")) {
                 definition.setUrl(repoUrl);
                 repos.set(0, definition);
                 break;
             }
         }
     }
-
 
     static void changeConcurrent() throws Exception {
         checkAll();
@@ -287,8 +289,9 @@ public final class TestTeamIntegrationChild {
      * Check in memory and in file.
      */
     static void checkAll() throws Exception {
-        ProjectTMX tmx = new ProjectTMX(TestTeamIntegration.SRC_LANG, TestTeamIntegration.TRG_LANG, false,
-                new File(dir + "/omegat/project_save.tmx"), TestTeamIntegration.checkOrphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(TestTeamIntegration.checkOrphanedCallback);
+        tmx.load(TestTeamIntegration.SRC_LANG, TestTeamIntegration.TRG_LANG, false,
+                new File(dir + "/omegat/project_save.tmx"), Core.getSegmenter());
         for (int c = 0; c < segCount; c++) {
             checkTranslation(c);
             checkTranslationFromFile(tmx, c);
@@ -310,15 +313,15 @@ public final class TestTeamIntegrationChild {
     }
 
     static void checkGlossaryEntries() {
-        List<GlossaryEntry> entries = glossaryManager.getLocalEntries();
-        for (String s: glossaries) {
+        List<GlossaryEntry> entries = TestCoreState.getInstance().getGlossaryManager().getLocalEntries();
+        for (String s : glossaries) {
             boolean found = false;
-            for (GlossaryEntry entry: entries) {
+            for (GlossaryEntry entry : entries) {
                 if (entry.getSrcText().equals(s)) {
                     final long index = getGlossaryIndex(s);
                     final String loc = getGlossaryLoc(index);
                     final String com = getGlossaryCom(index);
-                    if (!loc.equals(entry.getLocText()))  {
+                    if (!loc.equals(entry.getLocText())) {
                         throw new RuntimeException("Glossary error : " + entry.getSrcText()
                                 + " should have loc: " + loc + " but it is " + entry.getLocText());
                     }
@@ -378,12 +381,15 @@ public final class TestTeamIntegrationChild {
     static long getGlossaryIndex(String term) {
         return Long.parseLong(term.substring(term.lastIndexOf('/') + 1));
     }
+
     static String getGlossaryTerm(long index) {
         return "term/" + source + "/" + index;
     }
+
     static String getGlossaryLoc(long index) {
         return "loc/" + source + "/" + index;
     }
+
     static String getGlossaryCom(long index) {
         return "com/" + source + "/" + index;
     }
@@ -409,125 +415,165 @@ public final class TestTeamIntegrationChild {
 
     static IEditor editor = new IEditor() {
 
+        @Override
         public void windowDeactivated() {
         }
 
+        @Override
         public void undo() {
         }
 
+        @Override
         public void setFilter(IEditorFilter filter) {
         }
 
+        @Override
         public void setAlternateTranslationForCurrentEntry(boolean alternate) {
         }
 
+        @Override
         public void requestFocus() {
         }
 
+        @Override
         public void replaceEditTextAndMark(String text) {
         }
 
+        @Override
         public void replaceEditText(String text) {
         }
 
+        @Override
         public void replaceEditTextAndMark(final String text, final String origin) {
         }
 
+        @Override
         public void removeFilter() {
         }
 
+        @Override
         public void remarkOneMarker(String markerClassName) {
         }
 
+        @Override
         public void registerUntranslated() {
         }
 
+        @Override
         public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         }
 
+        @Override
         public void registerIdenticalTranslation() {
         }
 
+        @Override
         public void registerEmptyTranslation() {
         }
 
+        @Override
         public void refreshViewAfterFix(List<Integer> fixedEntries) {
         }
 
+        @Override
         public void refreshView(boolean doCommit) {
         }
 
+        @Override
         public void redo() {
         }
 
+        @Override
         public void prevEntryWithNote() {
         }
 
+        @Override
         public void prevEntry() {
         }
 
+        @Override
         public void nextXAutoEntry() {
         }
 
+        @Override
         public void prevXAutoEntry() {
         }
 
+        @Override
         public void nextXEnforcedEntry() {
         }
 
+        @Override
         public void prevXEnforcedEntry() {
         }
 
+        @Override
         public void nextUntranslatedEntry() {
         }
 
+        @Override
         public void nextUniqueEntry() {
         }
 
+        @Override
         public void nextTranslatedEntry() {
         }
 
+        @Override
         public void nextEntryWithNote() {
         }
 
+        @Override
         public void nextEntry() {
         }
 
+        @Override
         public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
                 String markerClassName) {
         }
 
+        @Override
         public void insertText(String text) {
         }
 
+        @Override
         public void insertTag(String tag) {
         }
 
+        @Override
         public void gotoHistoryForward() {
         }
 
+        @Override
         public void gotoHistoryBack() {
         }
 
+        @Override
         public void gotoFile(int fileIndex) {
         }
 
+        @Override
         public void gotoEntryAfterFix(int fixedEntry, String fixedSource) {
         }
 
+        @Override
         public void gotoEntry(String srcString, EntryKey key) {
         }
 
+        @Override
         public void gotoEntry(int entryNum) {
         }
 
+        @Override
         public void gotoEntry(int entryNum, CaretPosition pos) {
         }
 
+        @Override
         public EditorSettings getSettings() {
             return null;
         }
 
+        @Override
         public String getSelectedText() {
             return null;
         }
@@ -536,40 +582,48 @@ public final class TestTeamIntegrationChild {
         public void selectSourceText() {
         }
 
+        @Override
         public IEditorFilter getFilter() {
             return null;
         }
 
+        @Override
         public String getCurrentTranslation() {
             return null;
         }
 
+        @Override
         public String getCurrentFile() {
             return null;
         }
 
+        @Override
         public int getCurrentEntryNumber() {
             return 0;
         }
 
+        @Override
         public SourceTextEntry getCurrentEntry() {
             return null;
         }
 
+        @Override
         public void commitAndLeave() {
         }
 
+        @Override
         public void commitAndDeactivate() {
         }
 
+        @Override
         public void changeCase(CHANGE_CASE_TO newCase) {
         }
 
         @Override
         public void replaceEditText(final String text, final String origin) {
-
         }
 
+        @Override
         public void activateEntry() {
         }
 
@@ -585,11 +639,6 @@ public final class TestTeamIntegrationChild {
 
         @Override
         public void insertTextAndMark(String text) {
-        }
-
-        @Override
-        public boolean isOrientationAllLtr() {
-            return true;
         }
     };
 
@@ -703,17 +752,19 @@ public final class TestTeamIntegrationChild {
                 Log.log("'Theirs' TM is not a valid derivative of 'Base' TM");
                 System.exit(1);
             }
-            StmProperties props = new StmProperties()
-                    .setLanguageResource(OStrings.getResourceBundle())
+            StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                     .setResolutionStrategy(new ResolutionStrategy() {
                         @Override
                         public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
-                            TMXEntry enBase = baseTuv != null ? (TMXEntry) baseTuv
-                                    .getUnderlyingRepresentation() : null;
-                            TMXEntry enProject = projectTuv != null ? (TMXEntry) projectTuv
-                                    .getUnderlyingRepresentation() : null;
-                            TMXEntry enHead = headTuv != null ? (TMXEntry) headTuv
-                                    .getUnderlyingRepresentation() : null;
+                            TMXEntry enBase = baseTuv != null
+                                    ? (TMXEntry) baseTuv.getUnderlyingRepresentation()
+                                    : null;
+                            TMXEntry enProject = projectTuv != null
+                                    ? (TMXEntry) projectTuv.getUnderlyingRepresentation()
+                                    : null;
+                            TMXEntry enHead = headTuv != null
+                                    ? (TMXEntry) headTuv.getUnderlyingRepresentation()
+                                    : null;
                             String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
                                     + tr(enHead) + " project=" + tr(enProject);
                             if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {
@@ -794,7 +845,7 @@ public final class TestTeamIntegrationChild {
 
         @Override
         protected void notifyGlossaryManagerFileChanged(File file) {
-            glossaryManager.fileChanged(file);
+            TestCoreState.getInstance().getGlossaryManager().fileChanged(file);
         }
     }
 

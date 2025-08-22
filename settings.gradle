@@ -1,6 +1,28 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        // 'repository' for getting docbook xsd
+        ivy {
+            url = 'https://docbook.org/xml'
+            patternLayout {
+                artifact '[revision]/[module]-[revision].[ext]'
+            }
+            content {
+                includeGroup 'docbook'
+            }
+            metadataSources {
+                artifact()
+            }
+        }
+    }
+    // Include 'plugins build' to define convention plugins.
+    includeBuild("build-logic")
+}
+
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.9.0'
-    id 'com.gradle.develocity' version '3.19'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+    id 'com.gradle.develocity' version '4.1.1'
 }
 develocity {
     buildScan {
@@ -12,7 +34,6 @@ develocity {
 rootProject.name = 'OmegaT'
 include("machinetranslators:apertium",
         "machinetranslators:belazar",
-        "machinetranslators:deepl",
         "machinetranslators:google",
         "machinetranslators:ibmwatson",
         "machinetranslators:mymemory",

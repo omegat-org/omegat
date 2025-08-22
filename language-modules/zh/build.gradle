@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'org.omegat.module-conventions'
 }
 
 dependencies {
@@ -11,13 +11,7 @@ dependencies {
         runtimeOnly fileTree(dir: providedModuleLibsDir, include: '**/hanlp-portable-*.jar')
     } else {
         compileOnly(libs.commons.io)
-        compileOnly(libs.languagetool.core) {
-            exclude module: 'guava'
-            exclude module: 'language-detector'
-            exclude group: 'com.google.android'
-            exclude module: 'jackson-databind'
-            exclude group: 'org.jetbrains'
-        }
+        compileOnly(libs.languagetool.core)
         implementation(libs.languagetool.zh) {
             exclude module: 'languagetool-core'
         }
@@ -25,25 +19,9 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.assertj)
     testImplementation(testFixtures(project.rootProject))
+    testImplementation(libs.languagetool.core)
+    testRuntimeOnly(libs.json)
+    testRuntimeOnly(libs.protobuf)
     testImplementation(libs.commons.io)
 }
-
-jar {
-    archiveFileName.set("omegat-language-zh.${archiveExtension.get()}")
-    destinationDirectory.set(rootProject.layout.buildDirectory.dir("modules").get())
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    def pluginProp = loadProperties(file('plugin.properties'))
-    manifest {
-        attributes('License': 'GNU Public License version 3 or later',
-                'Implementation-Version': pluginProp.Version,
-                'OmegaT-Plugins': pluginProp.Class,
-                'Plugin-Author': pluginProp.Author,
-                'Plugin-Version': pluginProp.Version,
-                'Plugin-Name': pluginProp.Name,
-                'Plugin-Category': pluginProp.Category,
-                'Plugin-Description': pluginProp.Description
-        )
-    }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-}
+makeModuleTask(loadProperties(file('plugin.properties')))

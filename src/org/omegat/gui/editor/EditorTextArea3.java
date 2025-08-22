@@ -52,6 +52,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
 import javax.swing.text.MutableAttributeSet;
@@ -61,16 +62,20 @@ import javax.swing.text.Utilities;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIDesignManager;
+import org.omegat.util.Preferences;
+
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
@@ -138,7 +143,8 @@ public class EditorTextArea3 extends JEditorPane {
     protected boolean lockCursorToInputArea = true;
 
     /**
-     * Flag indicating if the editor is in Insert (false) or Overwrite (true) mode.
+     * Flag indicating if the editor is in Insert (false) or Overwrite (true)
+     * mode.
      */
     protected boolean overtypeMode = false;
 
@@ -189,7 +195,7 @@ public class EditorTextArea3 extends JEditorPane {
                     CoreEvents.fireEditorNewWord(newWord);
                 }
             } catch (BadLocationException ex) {
-                ex.printStackTrace();
+                Log.logErrorRB(ex, "ETA_ERROR_BAD_LOCATION");
             }
         });
         setToolTipText("");
@@ -219,26 +225,34 @@ public class EditorTextArea3 extends JEditorPane {
     }
 
     /**
-     * Return OmDocument instead just a Document. If editor was not initialized
-     * with OmDocument, it will contains other Document implementation. In this
-     * case we don't need it.
+     * Return OmDocument instead just a Document. If the editor was not
+     * initialized with OmDocument, it will contain another Document
+     * implementation. In this case, we don't need it.
      */
-    public Document3 getOmDocument() {
-        try {
-            return (Document3) getDocument();
-        } catch (ClassCastException ex) {
-            return null;
+    public @Nullable Document3 getOmDocument() {
+        Document doc = getDocument();
+        if (doc instanceof Document3) {
+            return (Document3) doc;
         }
+        return null;
     }
 
     /**
-     * Return true if the specified position is within the active translation
+     * Check the specified position is within the active translation.
+     * 
      * @param position
-     * @return
+     *            caret position
+     * @return true, when caret is in active translation, otherwise return false
      */
     public boolean isInActiveTranslation(int position) {
-        return (position >= getOmDocument().getTranslationStart()
-                && position <= getOmDocument().getTranslationEnd());
+        Document3 doc = getOmDocument();
+        if (doc == null) {
+            return false;
+        }
+        if (!doc.isEditMode()) {
+            return false;
+        }
+        return (position >= doc.getTranslationStart() && position <= doc.getTranslationEnd());
     }
 
     protected final transient MouseListener mouseListener = new MouseAdapter() {
@@ -246,6 +260,23 @@ public class EditorTextArea3 extends JEditorPane {
         public void mouseClicked(MouseEvent e) {
             autoCompleter.setVisible(false);
 
+            boolean singleClickSegmentActivation =
+                    Preferences.isPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION);
+            System.out.println("Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION: " + (singleClickSegmentActivation ? "ENABLED" : "DISABLED"));
+
+            if (singleClickSegmentActivation
+                   && e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 1
+                   && lockCursorToInputArea) {
+               int location = getCaretPosition();
+               int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());
+               int segmentIndex = controller.getSegmentIndexAtLocation(location);
+               int startLocation = controller.getStartForSegmentWithIndex(segmentIndex);
+               int offset = mousepos - startLocation;
+               boolean changed = controller.goToSegmentAtLocationAndJumpToOffset(mousepos, offset);
+               if (changed) {
+                   return;
+               }
+           }
             // Handle double-click
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 int mousepos = EditorTextArea3.this.viewToModel2D(e.getPoint());
@@ -286,8 +317,7 @@ public class EditorTextArea3 extends JEditorPane {
         PopupMenuConstructorInfo[] cons;
         synchronized (popupConstructors) {
             /**
-             * Copy constructors - for disable blocking in the procesing
-             * time.
+             * Copy constructors - for disable blocking in the procesing time.
              */
             cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
         }
@@ -335,7 +365,7 @@ public class EditorTextArea3 extends JEditorPane {
             super.processKeyEvent(e);
             return;
         } else if (keyEvent == KeyEvent.KEY_TYPED) {
-            //key typed
+            // key typed
             super.processKeyEvent(e);
             return;
         }
@@ -351,11 +381,11 @@ public class EditorTextArea3 extends JEditorPane {
             // The AutoCompleter needs special treatment.
             processed = true;
         } else if (s.equals(KEYSTROKE_CONTEXT_MENU)) {
-            // Context Menu key for contextual (right-click) menu (Shift+Esc on Mac)
+            // Context Menu key for contextual (right-click) menu (Shift+Esc on
+            // Mac)
             JPopupMenu popup = makePopupMenu(getCaretPosition());
             if (popup.getComponentCount() > 0) {
-                popup.show(EditorTextArea3.this,
-                        (int) getCaret().getMagicCaretPosition().getX(),
+                popup.show(EditorTextArea3.this, (int) getCaret().getMagicCaretPosition().getX(),
                         (int) getCaret().getMagicCaretPosition().getY());
                 processed = true;
             }
@@ -476,14 +506,16 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
             super.processKeyEvent(e);
-            // note that the translation start/end position are not updated yet. This has been updated when
-            // then keyreleased event occurs.
+            // Note that the translation start/end position are not updated yet.
+            // This has been updated when key-released event occurs.
         }
 
         // some after-processing catches
         if (!processed && e.getKeyChar() != 0 && isNavigationKey(e.getKeyCode())) {
-            // if caret is moved over existing chars, check and fix caret position
-            // works only in after-processing if translation length (start and end position) has not changed,
+            // if caret is moved over existing chars, check and fix caret
+            // position
+            // works only in after-processing if translation length (start and
+            // end position) has not changed,
             // because start and end position are not updated yet.
             checkAndFixCaret(false);
             autoCompleter.updatePopup(true);
@@ -491,11 +523,14 @@ public class EditorTextArea3 extends JEditorPane {
     }
 
     private void updateLockInsertMessage() {
-        String lock = OStrings.getString("MW_STATUS_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
-        String ins = OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
-
-        String lockTip = OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_" + (lockCursorToInputArea ? "ON" : "OFF"));
-        String insTip = OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_" + (overtypeMode ? "ON" : "OFF"));
+        String lock = lockCursorToInputArea ? OStrings.getString("MW_STATUS_CURSOR_LOCK_ON") :
+                OStrings.getString("MW_STATUS_CURSOR_LOCK_OFF");
+        String ins = overtypeMode ? OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_ON") :
+                OStrings.getString("MW_STATUS_CURSOR_OVERTYPE_OFF");
+        String lockTip = lockCursorToInputArea ? OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_ON") :
+                OStrings.getString("MW_STATUS_TIP_CURSOR_LOCK_OFF");
+        String insTip = overtypeMode ? OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_ON") :
+                OStrings.getString("MW_STATUS_TIP_CURSOR_OVERTYPE_OFF");
         Core.getMainWindow().showLockInsertMessage(lock + " | " + ins, lockTip + " | " + insTip);
     }
 
@@ -508,8 +543,8 @@ public class EditorTextArea3 extends JEditorPane {
             setCaretColor(Styles.EditorColor.COLOR_BACKGROUND.getColor());
             putClientProperty("caretWidth", getCaretWidth());
 
-            // We need to force the caret damage to have the rectangle to correctly show up,
-            // otherwise half of the caret is shown.
+            // We need to force the caret damage to have the rectangle to
+            // correctly show up, otherwise half of the caret is shown.
             try {
                 OvertypeCaret caret = (OvertypeCaret) getCaret();
                 Rectangle r = modelToView2D(caret.getDot()).getBounds();
@@ -563,11 +598,12 @@ public class EditorTextArea3 extends JEditorPane {
             return false;
         }
         if ((caret == start && !checkTagStart) || (caret == end && checkTagStart)) {
-            // We are at the edge of the translation but moving toward the outside.
+            // We are at the edge of the translation but moving toward the
+            // outside.
             // Don't try to jump over tags.
             return false;
         }
-        SourceTextEntry ste = doc.controller.getCurrentEntry();
+        SourceTextEntry ste = doc.getController().getCurrentEntry();
         String text = doc.extractTranslation();
         int off = caret - start;
         // iterate by 'protected parts'
@@ -608,7 +644,7 @@ public class EditorTextArea3 extends JEditorPane {
      */
     boolean wholeTagDelete(boolean checkTagStart) throws BadLocationException {
         Document3 doc = getOmDocument();
-        SourceTextEntry ste = doc.controller.getCurrentEntry();
+        SourceTextEntry ste = doc.getController().getCurrentEntry();
         String text = doc.extractTranslation();
         int off = getCaretPosition() - doc.getTranslationStart();
         // iterate by 'protected parts'
@@ -649,7 +685,7 @@ public class EditorTextArea3 extends JEditorPane {
         if (pos < segment.getStartPosition() || pos >= segment.getEndPosition()) {
             return false;
         }
-        SourceTextEntry ste = getOmDocument().controller.getCurrentEntry();
+        SourceTextEntry ste = getOmDocument().getController().getCurrentEntry();
         if (ste != null) {
             try {
                 String text = getOmDocument().getText(segment.getStartPosition(),

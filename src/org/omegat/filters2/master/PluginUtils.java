@@ -40,6 +40,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -55,6 +56,7 @@ import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.CLIParameters;
 import org.omegat.MainClassLoader;
 import org.omegat.core.Core;
@@ -200,21 +202,44 @@ public final class PluginUtils {
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
     private static final Set<PluginInformation> PLUGIN_INFORMATIONS = new HashSet<>();
 
-    private static final MainClassLoader THEME_CLASSLOADER;
-    private static final MainClassLoader LANGUAGE_CLASSLOADER;
-
-    static {
-        ClassLoader cl = PluginUtils.class.getClassLoader();
-        THEME_CLASSLOADER = new MainClassLoader(cl);
-        LANGUAGE_CLASSLOADER = new MainClassLoader(cl);
-    }
+    private static final Map<PluginType, MainClassLoader> MAINCLASSLOADERS = new EnumMap<>(PluginType.class);
 
     /** Private constructor to disallow creation */
     private PluginUtils() {
     }
 
+    private static final String OMEGAT_MAIN_CLASS = "org.omegat.Main";
+    private static final String BUILD_DIR = "build";
+    private static final String MODULES_DIR = "modules";
+    private static final String PLUGINS_DIR = "plugins";
+
     /**
-     * Loads all plugins from main classloader and from /plugins/ dir.
+     * Loads plugins for the application. This method initializes plugin
+     * locations, class loaders, and processes plugin manifests to load plugins
+     * based on the provided parameters.
+     *
+     * @param params
+     *            a map containing configuration parameters that may specify
+     *            additional settings for plugin loading, including development
+     *            mode manifests or other configurations.
+     */
+    public static void loadPlugins(final Map<String, String> params) {
+        List<URL> pluginUrls = initializePluginLocations();
+        initializePluginClassLoaders(pluginUrls);
+        try {
+            boolean isMainManifestFound = processPluginManifests(pluginUrls);
+            processManifest(params, isMainManifestFound);
+            loadBasePlugin();
+        } catch (IOException ex) {
+            Log.log(ex);
+        }
+    }
+
+    /**
+     * Initializes the list of plugin locations by identifying and adding
+     * directories where plugins may be located, including standard installation
+     * directories and, if applicable, development build directories. The method
+     * returns a list of URLs pointing to these plugin locations.
      * <p>
      * We should load all jars from /plugins/ dir first, because some plugin can
      * use more than one jar. There are three different "plugins" directory, and
@@ -224,61 +249,128 @@ public final class PluginUtils {
      * <li>(installdir/plugins/ System level 3rd party plugins</li>
      * <li>(configdir)/plugins/ User level 3rd party plugins</li>
      * </ul>
+     *
+     * @return a list of URLs representing the locations of plugins.
      */
-    public static void loadPlugins(final Map<String, String> params) {
-        final List<File> pluginsDirs = new ArrayList<>();
-        pluginsDirs.add(new File(StaticUtils.installDir(), "modules"));
-        pluginsDirs.add(new File(StaticUtils.installDir(), "plugins"));
-        pluginsDirs.add(new File(StaticUtils.getConfigDir(), "plugins"));
-        if (Paths.get(StaticUtils.installDir(), "build").toFile().exists()) {
-            // when developers run on source code tree, add system plugins
-            pluginsDirs.add(Paths.get(StaticUtils.installDir(), "build", "modules").toFile());
+    private static List<URL> initializePluginLocations() {
+        List<File> pluginDirectories = new ArrayList<>();
+        pluginDirectories.add(new File(StaticUtils.installDir(), MODULES_DIR));
+        pluginDirectories.add(new File(StaticUtils.installDir(), PLUGINS_DIR));
+        pluginDirectories.add(new File(StaticUtils.getConfigDir(), PLUGINS_DIR));
+
+        // Add development plugins if running from source
+        File buildDir = Paths.get(StaticUtils.installDir(), BUILD_DIR).toFile();
+        if (buildDir.exists()) {
+            pluginDirectories.add(Paths.get(StaticUtils.installDir(), BUILD_DIR, MODULES_DIR).toFile());
         }
 
-        List<URL> urlList = populatePluginUrlList(pluginsDirs);
+        return populatePluginUrlList(pluginDirectories);
+    }
 
-        boolean foundMain = false;
-        // look on all manifests
-        ClassLoader cl = PluginUtils.class.getClassLoader();
-        MainClassLoader pluginsClassLoader = new MainClassLoader(urlList.toArray(new URL[0]), cl);
-        try {
-            Enumeration<URL> mlist = pluginsClassLoader.getResources(MANIFEST_MF);
-            while (mlist.hasMoreElements()) {
-                URL mu = mlist.nextElement();
-                try (InputStream in = mu.openStream()) {
-                    Manifest m = new Manifest(in);
-                    if ("org.omegat.Main".equals(m.getMainAttributes().getValue(MAIN_CLASS))) {
-                        // found a main manifest - not in development mode
-                        foundMain = true;
-                    }
-                    if ("theme".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
-                        String target = mu.toString();
-                        for (URL url : urlList) {
-                            if (target.contains(url.toString())) {
-                                THEME_CLASSLOADER.addJarToClasspath(url);
-                                loadFromManifest(m, THEME_CLASSLOADER, mu);
-                            }
-                        }
-                    } else if ("language".equals(m.getMainAttributes().getValue(PLUGIN_CATEGORY))) {
-                        String target = mu.toString();
-                        for (URL url : urlList) {
-                            if (target.contains(url.toString())) {
-                                LANGUAGE_CLASSLOADER.addJarToClasspath(url);
-                                loadFromManifest(m, LANGUAGE_CLASSLOADER, mu);
-                            }
-                        }
-                    } else {
-                        loadFromManifest(m, pluginsClassLoader, mu);
-                    }
-                } catch (ClassNotFoundException e) {
-                    Log.log(e);
-                } catch (UnsupportedClassVersionError e) {
-                    Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(mu));
+    /**
+     * Processes plugin manifest files found via the given class loader and a
+     * list of plugin URLs. Determines whether a main manifest specifying the
+     * main application class is found and processes each manifest file to load
+     * plugins or log relevant warnings.
+     *
+     * @param pluginUrls
+     *            a list of plugin URLs that may be updated during the
+     *            processing of manifests.
+     * @return true if a main manifest specifying the main application class is
+     *         found, false otherwise.
+     * @throws IOException
+     *             if an I/O error occurs during manifest processing.
+     */
+    private static boolean processPluginManifests(List<URL> pluginUrls) throws IOException {
+        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+        boolean isMainManifestFound = false;
+        Enumeration<URL> manifestUrls = pluginsClassLoader.getResources(MANIFEST_MF);
+
+        while (manifestUrls.hasMoreElements()) {
+            URL manifestUrl = manifestUrls.nextElement();
+            try {
+                isMainManifestFound |= processManifestUrl(manifestUrl, pluginUrls);
+            } catch (ClassNotFoundException e) {
+                Log.log(e);
+            } catch (UnsupportedClassVersionError e) {
+                Log.logWarningRB("PLUGIN_JAVA_VERSION_ERROR", getJarFileUrlFromResourceUrl(manifestUrl));
+            }
+        }
+        return isMainManifestFound;
+    }
+
+    /**
+     * Processes a plugin manifest URL to determine if it represents a main
+     * manifest or a plugin. Updates the plugin class loader and plugin URL list
+     * as necessary based on the manifest's attributes and plugin category.
+     *
+     * @param manifestUrl
+     *            the URL pointing to the plugin manifest to be processed
+     * @param pluginUrls
+     *            a list of plugin URLs that may be updated if the manifest
+     *            describes a valid plugin
+     * @return true if the manifest represents the main application manifest,
+     *         false otherwise
+     * @throws IOException
+     *             if an I/O error occurs while reading the manifest
+     * @throws ClassNotFoundException
+     *             if a plugin class specified in the manifest cannot be found
+     */
+    private static boolean processManifestUrl(URL manifestUrl, List<URL> pluginUrls)
+            throws IOException, ClassNotFoundException {
+        boolean isMainManifestFound = false;
+        try (InputStream manifestStream = manifestUrl.openStream()) {
+            Manifest manifest = new Manifest(manifestStream);
+            String pluginCategory = manifest.getMainAttributes().getValue(PLUGIN_CATEGORY);
+
+            // Check for main manifest
+            if (OMEGAT_MAIN_CLASS.equals(manifest.getMainAttributes().getValue(MAIN_CLASS))) {
+                isMainManifestFound = true;
+                MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
+                loadFromManifest(manifest, pluginsClassLoader, manifestUrl);
+            }
+
+            // Process plugin based on category
+            if (pluginCategory != null) {
+                PluginType type = PluginType.getTypeByValue(pluginCategory);
+                if (type != PluginType.UNKNOWN && isUrlInList(manifestUrl, pluginUrls)) {
+                    MainClassLoader categoryLoader = MAINCLASSLOADERS.get(type);
+                    addUrlToClasspath(manifestUrl, pluginUrls, categoryLoader);
+                    loadFromManifest(manifest, categoryLoader, manifestUrl);
                 }
             }
-        } catch (IOException ex) {
-            Log.log(ex);
         }
+        return isMainManifestFound;
+    }
+
+    private static void loadBasePlugin() {
+        // run base plugins
+        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
+            try {
+                pl.getDeclaredConstructor().newInstance();
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
+    }
+
+    /**
+     * Processes the plugin manifest based on the provided configuration
+     * parameters and conditions. This method supports both development mode and
+     * production mode for plugin manifest loading.
+     *
+     * @param params
+     *            a map containing configuration parameters that specify
+     *            settings for plugin loading, including potential development
+     *            mode manifests.
+     * @param foundMain
+     *            a boolean flag indicating whether a main application manifest
+     *            has already been found. If false, the method attempts to load
+     *            manifests either from CLI arguments (in development mode) or
+     *            from a properties file.
+     */
+    private static void processManifest(Map<String, String> params, boolean foundMain) {
+        MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
         try {
             if (!foundMain) {
                 // development mode - load from dev-manifests CLI arg
@@ -301,14 +393,26 @@ public final class PluginUtils {
         } catch (ClassNotFoundException | IOException ex) {
             Log.log(ex);
         }
+    }
 
-        // run base plugins
-        for (Class<?> pl : BASE_PLUGIN_CLASSES) {
-            try {
-                pl.getDeclaredConstructor().newInstance();
-            } catch (Exception ex) {
-                Log.log(ex);
+    private static boolean isUrlInList(URL target, List<URL> urlList) {
+        String targetString = target.toString();
+        return urlList.stream().anyMatch(url -> targetString.contains(url.toString()));
+    }
+
+    private static void addUrlToClasspath(URL manifestUrl, List<URL> urlList, MainClassLoader loader) {
+        String target = manifestUrl.toString();
+        urlList.stream().filter(url -> target.contains(url.toString())).forEach(loader::addJarToClasspath);
+    }
+
+    private static void initializePluginClassLoaders(List<URL> urlList) {
+        ClassLoader cl = PluginUtils.class.getClassLoader();
+        MAINCLASSLOADERS.put(PluginType.UNKNOWN, new MainClassLoader(urlList.toArray(new URL[0]), cl));
+        for (PluginType type : PluginType.values()) {
+            if (type == PluginType.UNKNOWN) {
+                continue;
             }
+            MAINCLASSLOADERS.put(type,  new MainClassLoader(cl));
         }
     }
 
@@ -322,8 +426,10 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             when specified plugin is not found.
      */
+    @VisibleForTesting
     public static void loadPluginFromProperties(Properties props) throws ClassNotFoundException {
-        ClassLoader pluginsClassLoader = PluginUtils.class.getClassLoader();
+        initializePluginClassLoaders(new ArrayList<>());
+        ClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
         loadFromProperties(props, pluginsClassLoader);
     }
 
@@ -338,26 +444,11 @@ public final class PluginUtils {
      * @param pluginsDirs
      *            List of directories where plugins can be loaded
      */
-    protected static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
+    static List<URL> populatePluginUrlList(List<File> pluginsDirs) {
         // list all jars in /plugins/
-        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
-        List<File> fs = pluginsDirs.stream().flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
-                .collect(Collectors.toList());
-        List<URL> urlList = new ArrayList<>();
-        for (File f : fs) {
-            try {
-                URL url = f.toURI().toURL();
-                urlList.add(url);
-                Log.logInfoRB("PLUGIN_LOAD_JAR", url);
-            } catch (IOException ex) {
-                Log.log(ex);
-            }
-        }
-
-        List<URL> jarToRemove = new ArrayList<>();
-
+        List<URL> urlList = loadJarUrls(pluginsDirs);
         Map<String, PluginInformation> pluginVersions = new HashMap<>();
-
+        List<URL> jarToRemove = new ArrayList<>();
         // look on all manifests
         for (URL url : urlList) {
             try (JarInputStream jarStream = new JarInputStream(url.openStream())) {
@@ -366,62 +457,107 @@ public final class PluginUtils {
                     // mf can be null when a jar file does not have a manifest.
                     continue;
                 }
-                String pluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGINS);
-                String oldPluginClass = mf.getMainAttributes().getValue(OMEGAT_PLUGIN);
-
-                // if the jar doesn't look like an OmegaT plugin (it doesn't
-                // contain any "Omegat-Plugins?" attribute, we don't need to
-                // compare
-                // versions.
-                if ((oldPluginClass == null && pluginClass == null)
-                        || (pluginClass != null && pluginClass.indexOf('.') < 0)) {
-                    continue;
-                }
-
-                // Fetch all the information from the manifest
-                PluginInformation pluginInfo = PluginInformation.Builder.fromManifest(null, mf, url, null);
-
-                String pluginName = pluginInfo.getName();
-                if (pluginVersions.containsKey(pluginName)) {
-                    PluginInformation previousPlugin = pluginVersions.get(pluginName);
-                    // We get rid of versions qualifiers (x.y.z-beta) and we
-                    // assume dots are used to
-                    // separate version components
-                    String previousVersion = previousPlugin.getVersion().replaceAll("-.*", "");
-                    String pluginVersion = pluginInfo.getVersion().replaceAll("-.*", "");
-
-                    int isOlder = VersionChecker.compareVersions(previousVersion, "0", pluginVersion, "0");
-                    if (isOlder < 0) {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
-                                previousPlugin.getVersion(), pluginInfo.getVersion());
-                        jarToRemove.add(previousPlugin.getUrl());
-                        pluginVersions.put(pluginName, pluginInfo);
-                    } else if (isOlder == 0) {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
-                                previousPlugin.getVersion(), pluginInfo.getVersion());
-                        jarToRemove.add(previousPlugin.getUrl());
-                        pluginVersions.put(pluginName, pluginInfo);
-                    } else {
-                        Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName, pluginInfo.getVersion(),
-                                previousPlugin.getVersion());
-                        jarToRemove.add(pluginInfo.getUrl());
-                        pluginVersions.put(pluginName, previousPlugin);
-                    }
-                } else {
-                    pluginVersions.put(pluginName, pluginInfo);
-                }
-
+                processPluginManifest(url, mf, pluginVersions, jarToRemove);
             } catch (IOException | NumberFormatException ex) {
                 Log.log(ex);
             }
         }
 
+        removeOutdatedPlugins(urlList, jarToRemove);
+        return urlList;
+    }
+
+    private static void processPluginManifest(URL url, Manifest manifest,
+                                              Map<String, PluginInformation> pluginVersions, List<URL> jarToRemove) {
+        String pluginClass = manifest.getMainAttributes().getValue(OMEGAT_PLUGINS);
+        String oldPluginClass = manifest.getMainAttributes().getValue(OMEGAT_PLUGIN);
+
+        // if the jar doesn't look like an OmegaT plugin (it doesn't
+        // contain any "Omegat-Plugins?" attribute, we don't need to
+        // compare versions.
+        if (!isValidPlugin(pluginClass, oldPluginClass)) {
+            return;
+        }
+
+        PluginInformation pluginInfo = PluginInformation.Builder.fromManifest(null, manifest, url, null);
+        String pluginName = pluginInfo.getName();
+
+        if (pluginVersions.containsKey(pluginName)) {
+            handleVersionConflict(pluginVersions, jarToRemove, pluginInfo, pluginName);
+        } else {
+            pluginVersions.put(pluginName, pluginInfo);
+        }
+    }
+
+    private static final String VERSION_QUALIFIER_PATTERN = "-.*";
+
+    private static void handleVersionConflict(Map<String, PluginInformation> pluginVersions,
+                                              List<URL> jarToRemove, PluginInformation newPlugin, String pluginName) {
+        // Fetch all the information from the manifest
+        PluginInformation existingPlugin = pluginVersions.get(pluginName);
+
+        // We get rid of versions qualifiers (x.y.z-beta) and we
+        // assume dots are used to separate version components
+        String existingVersion = existingPlugin.getVersion().replaceAll(VERSION_QUALIFIER_PATTERN, "");
+        String newVersion = newPlugin.getVersion().replaceAll(VERSION_QUALIFIER_PATTERN, "");
+
+        int comparison = VersionChecker.compareVersions(existingVersion, "0",
+                newVersion, "0");
+
+        updatePluginVersions(pluginVersions, jarToRemove, newPlugin, pluginName,
+                existingPlugin, comparison);
+    }
+
+    private static void updatePluginVersions(Map<String, PluginInformation> pluginVersions,
+                                             List<URL> jarToRemove, PluginInformation newPlugin, String pluginName,
+                                             PluginInformation existingPlugin, int comparison) {
+        if (comparison < 0) {
+            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
+                    existingPlugin.getVersion(), newPlugin.getVersion());
+            jarToRemove.add(existingPlugin.getUrl());
+            pluginVersions.put(pluginName, newPlugin);
+        } else if (comparison == 0) {
+            Log.logWarningRB("PLUGIN_EXCLUDE_SIMILAR_VERSION", pluginName,
+                    existingPlugin.getVersion(), newPlugin.getVersion());
+            jarToRemove.add(existingPlugin.getUrl());
+            pluginVersions.put(pluginName, newPlugin);
+        } else {
+            Log.logWarningRB("PLUGIN_EXCLUDE_OLD_VERSION", pluginName,
+                    newPlugin.getVersion(), existingPlugin.getVersion());
+            jarToRemove.add(newPlugin.getUrl());
+            pluginVersions.put(pluginName, existingPlugin);
+        }
+    }
+
+    private static List<URL> loadJarUrls(List<File> pluginsDirs) {
+        FileFilter jarFilter = pathname -> pathname.getName().endsWith(".jar");
+        List<File> jarFiles = pluginsDirs.stream()
+                .flatMap(dir -> FileUtil.findFiles(dir, jarFilter).stream())
+                .collect(Collectors.toList());
+
+        List<URL> urls = new ArrayList<>();
+        for (File file : jarFiles) {
+            try {
+                URL url = file.toURI().toURL();
+                urls.add(url);
+                Log.logInfoRB("PLUGIN_LOAD_JAR", url);
+            } catch (IOException ex) {
+                Log.log(ex);
+            }
+        }
+        return urls;
+    }
+
+    private static boolean isValidPlugin(String pluginClass, String oldPluginClass) {
+        return (oldPluginClass != null || pluginClass != null)
+                && (pluginClass == null || pluginClass.indexOf('.') >= 0);
+    }
+
+    private static void removeOutdatedPlugins(List<URL> urlList, List<URL> jarToRemove) {
         if (!jarToRemove.isEmpty()) {
             Log.logWarningRB("PLUGIN_EXCLUSION_MESSAGE", jarToRemove);
             urlList.removeAll(jarToRemove);
         }
-
-        return urlList;
     }
 
     public static List<Class<?>> getFilterClasses() {
@@ -484,32 +620,39 @@ public final class PluginUtils {
         // "default" tokenizer is found.
         Class<?> fallback = null;
 
-        for (Class<?> c : TOKENIZER_CLASSES) {
-            Tokenizer ann = c.getAnnotation(Tokenizer.class);
+        for (Class<?> tokenizerClass : TOKENIZER_CLASSES) {
+            Tokenizer ann = tokenizerClass.getAnnotation(Tokenizer.class);
             if (ann == null) {
                 continue;
             }
-            String[] languages = ann.languages();
-            if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
-                try {
-                    languages = ((ITokenizer) c.getDeclaredConstructor().newInstance())
-                            .getSupportedLanguages();
-                } catch (Exception ex) {
-                    Log.log(ex);
-                }
-            }
+
+            String[] languages = getSupportedLanguages(tokenizerClass, ann);
             for (String s : languages) {
                 if (lang.equals(s)) {
                     if (ann.isDefault()) {
-                        return c; // Return best possible match.
+                        return tokenizerClass; // Return best possible match.
                     } else if (fallback == null) {
-                        fallback = c;
+                        fallback = tokenizerClass;
                     }
                 }
             }
         }
 
         return fallback;
+    }
+
+    private static String[] getSupportedLanguages(Class<?> tokenizerClass, Tokenizer annotation) {
+        String[] languages = annotation.languages();
+        if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
+            try {
+                return ((ITokenizer) tokenizerClass.getDeclaredConstructor().newInstance())
+                        .getSupportedLanguages();
+            } catch (Exception ex) {
+                Log.log(ex);
+                return new String[0];
+            }
+        }
+        return languages;
     }
 
     public static List<Class<?>> getMarkerClasses() {
@@ -524,12 +667,21 @@ public final class PluginUtils {
         return GLOSSARY_CLASSES;
     }
 
-    public static ClassLoader getThemeClassLoader() {
-        return THEME_CLASSLOADER;
-    }
-
-    public static ClassLoader getLanguageClassLoader() {
-        return LANGUAGE_CLASSLOADER;
+    /**
+     * Retrieves the {@link ClassLoader} associated with the specified
+     * {@link PluginType}. If the provided plugin type is {@code UNKNOWN}, the
+     * method returns {@code null}.
+     *
+     * @param type
+     *            the {@link PluginType} for which the class loader is needed.
+     * @return the {@link ClassLoader} associated with the specified plugin
+     *         type, or {@code null} if the type is {@code UNKNOWN}.
+     */
+    public static ClassLoader getClassLoader(PluginType type) {
+        if (type == PluginType.UNKNOWN) {
+            return null;
+        }
+        return MAINCLASSLOADERS.get(type);
     }
 
     private static final List<Class<?>> FILTER_CLASSES = new ArrayList<>();
@@ -558,7 +710,7 @@ public final class PluginUtils {
      */
     private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
             throws ClassNotFoundException {
-        String classes = m.getMainAttributes().getValue("OmegaT-Plugins");
+        String classes = m.getMainAttributes().getValue(OMEGAT_PLUGINS);
         if (classes != null) {
             for (String clazz : classes.split("\\s+")) {
                 if (clazz.trim().isEmpty()) {
@@ -575,7 +727,7 @@ public final class PluginUtils {
                 }
             }
         }
-        loadFromManifestOld(m, classLoader);
+        loadFromManifestOld(m);
     }
 
     private static void loadFromProperties(Properties props, ClassLoader classLoader)
@@ -586,19 +738,14 @@ public final class PluginUtils {
             if (key.startsWith("plugin.desc")) {
                 continue;
             }
-            if (key.equals("plugin")) {
-                for (String clazz : classes) {
-                    if (loadClass(clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
-                                null, PluginInformation.Status.BUNDLED));
-                    }
-                }
-            } else {
-                for (String clazz : classes) {
-                    if (loadClassOld(key, clazz, classLoader)) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
-                                null, PluginInformation.Status.BUNDLED));
-                    }
+            boolean isMainPlugin = key.equals("plugin");
+            for (String clazz : classes) {
+                boolean loaded = isMainPlugin
+                        ? loadClass(clazz, classLoader)
+                        : loadClassOld(key, clazz);
+                if (loaded) {
+                    PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromProperties(clazz, props, key,
+                            null, PluginInformation.Status.BUNDLED));
                 }
             }
         }
@@ -616,7 +763,7 @@ public final class PluginUtils {
             LOADED_PLUGINS.add(c);
             Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
             return true;
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
             Core.pluginLoadingError(StringUtil.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz,
                     ex.getClass().getSimpleName(), ex.getMessage()));
@@ -629,7 +776,7 @@ public final class PluginUtils {
             try {
                 Method load = p.getMethod("unloadPlugins");
                 load.invoke(p);
-            } catch (Throwable ex) {
+            } catch (Exception ex) {
                 Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getSimpleName(), ex.getMessage());
             }
         }
@@ -638,9 +785,9 @@ public final class PluginUtils {
     /**
      * Old-style plugin loading.
      */
-    private static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
+    private static void loadFromManifestOld(final Manifest m)
             throws ClassNotFoundException {
-        if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
+        if (m.getMainAttributes().getValue(OMEGAT_PLUGIN) == null) {
             return;
         }
 
@@ -648,44 +795,44 @@ public final class PluginUtils {
         for (Entry<String, Attributes> e : entries.entrySet()) {
             String key = e.getKey();
             Attributes attrs = e.getValue();
-            String sType = attrs.getValue("OmegaT-Plugin");
+            String sType = attrs.getValue(OMEGAT_PLUGIN);
             if (sType == null) {
                 // WebStart signing section, or other section
                 continue;
             }
-            if (loadClassOld(sType, key, classLoader)) {
+            if (loadClassOld(sType, key)) {
                 PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(key, m, null,
                         PluginInformation.Status.BUNDLED));
             }
         }
     }
 
-    private static boolean loadClassOld(String sType, String key, ClassLoader classLoader)
+    private static boolean loadClassOld(String sType, String key)
             throws ClassNotFoundException {
         boolean loadOk = true;
         switch (PluginType.getTypeByValue(sType)) {
         case FILTER:
-            FILTER_CLASSES.add(classLoader.loadClass(key));
+            FILTER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.FILTER).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case TOKENIZER:
-            TOKENIZER_CLASSES.add(classLoader.loadClass(key));
+            TOKENIZER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.TOKENIZER).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case MARKER:
-            MARKER_CLASSES.add(classLoader.loadClass(key));
+            MARKER_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MARKER).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case MACHINETRANSLATOR:
-            MACHINE_TRANSLATION_CLASSES.add(classLoader.loadClass(key));
+            MACHINE_TRANSLATION_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MACHINETRANSLATOR).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case BASE:
-            BASE_PLUGIN_CLASSES.add(classLoader.loadClass(key));
+            BASE_PLUGIN_CLASSES.add(MAINCLASSLOADERS.get(PluginType.MISCELLANEOUS).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         case GLOSSARY:
-            GLOSSARY_CLASSES.add(classLoader.loadClass(key));
+            GLOSSARY_CLASSES.add(MAINCLASSLOADERS.get(PluginType.GLOSSARY).loadClass(key));
             Log.logInfoRB("PLUGIN_LOAD_OK", key);
             break;
         default:

@@ -8,7 +8,7 @@
                2007 Didier Briel
                2009 Alex Buloichik
                2015 Aaron Madlon-Kay
-               2023 Hiroshi Miura
+               2023-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -40,13 +40,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Comparator;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -69,16 +68,15 @@ public final class Help {
     private Help() {
     }
 
+    private static final String MANUAL_SNAPSHOT = "https://omegat.sourceforge.io/manual-snapshot/";
+    private static final String MANUAL_STANDARD = "https://omegat.sourceforge.io/manual-standard/";
+    private static final String JAVADOC_URL = "https://omegat.sourceforge.io/javadoc-standard/";
+
     /**
      * URL for the online manual.
      */
-    public static final String ONLINE_HELP_URL = OStrings.IS_BETA
-            ? "https://omegat.sourceforge.io/manual-latest/"
-            : "https://omegat.sourceforge.io/manual-standard/";
-
-    public static final String ONLINE_JAVADOC_URL = OStrings.IS_BETA
-            ? "https://omegat.sourceforge.io/javadoc-latest/"
-            : "https://omegat.sourceforge.io/javadoc-standard/";
+    public static final String ONLINE_HELP_URL = OStrings.IS_BETA ? MANUAL_SNAPSHOT : MANUAL_STANDARD;
+    public static final String ONLINE_JAVADOC_URL = JAVADOC_URL;
 
     public static void showJavadoc() throws IOException {
         URI uri = URI.create(ONLINE_JAVADOC_URL);
@@ -89,6 +87,7 @@ public final class Help {
      * Shows help in the system browser.
      *
      * @throws IOException
+     *             when URI creation failed.
      */
     public static void showHelp() throws IOException {
         String lang = detectHelpLanguage();
@@ -108,7 +107,7 @@ public final class Help {
         DesktopWrapper.browse(uri);
     }
 
-    private static URI getHelpZipFileURI(String lang) {
+    private static @Nullable URI getHelpZipFileURI(String lang) {
         if (lang == null) {
             return null;
         }
@@ -125,7 +124,12 @@ public final class Help {
             return null;
         }
         try {
-            Path destinationDir = Files.createTempDirectory("omegat-" + OStrings.VERSION + "-help-" + lang);
+            Path destinationDir = Paths.get(StaticUtils.getApplicationDataDir(), "manual", OStrings.VERSION, lang);
+            Path indexPath = destinationDir.resolve("index.html");
+            if (indexPath.toFile().exists()) {
+                // already have manual
+                return indexPath.toUri();
+            }
             return extractZip(zipFile, destinationDir).toURI();
         } catch (IOException ignored) {
         }
@@ -144,38 +148,18 @@ public final class Help {
                 zipInputStream.closeEntry();
             }
         }
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                cleanUp(destinationDir);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }));
         return destinationDir.resolve(OConsts.HELP_HOME).toFile();
     }
 
-    private static void cleanUp(Path destinationDir) throws IOException {
-        if (Files.exists(destinationDir)) {
-            try (Stream<Path> walk = Files.walk(destinationDir)) {
-                walk.sorted(Comparator.reverseOrder()).forEachOrdered(file -> {
-                    try {
-                        Files.delete(file);
-                    } catch (IOException ignored) {
-                    }
-                });
-            }
-        }
-    }
-
-    public static URI getHelpFileURI(String filename) {
+    public static @Nullable URI getHelpFileURI(String filename) {
         return getHelpFileURI(null, filename);
     }
 
-    public static URI getHelpFileURI(String lang, String filename) {
+    public static @Nullable URI getHelpFileURI(@Nullable String lang, String filename) {
         return getHelpFileURI(null, lang, filename);
     }
 
-    public static URI getHelpFileURI(String prefix, String lang, String filename) {
+    public static @Nullable URI getHelpFileURI(@Nullable String prefix, @Nullable String lang, String filename) {
         // find in installation dir
         String path = lang == null ? filename : lang + File.separator + filename;
         File file;
@@ -223,7 +207,7 @@ public final class Help {
 
     /**
      * Detects the documentation language to use.
-     *
+     * <p>
      * If the latest manual is not available in the system locale language, it
      * returns null, i.e. show a language selection screen.
      */
@@ -244,7 +228,7 @@ public final class Help {
      * Returns the version of (a translation of) the user manual. If there is no
      * translation for the specified locale, null is returned.
      */
-    private static String getDocVersion(String locale) {
+    private static @Nullable String getDocVersion(String locale) {
         // Load the property file containing the doc version
         Properties prop = new Properties();
         URI u = getHelpFileURI(locale, "version_" + locale + ".properties");

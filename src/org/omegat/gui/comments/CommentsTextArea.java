@@ -112,35 +112,30 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
         }
     }
 
-    static final ICommentProvider ENTRY_COMMENT_PROVIDER = new ICommentProvider() {
-        public String getComment(SourceTextEntry newEntry) {
-            StringBuilder text = new StringBuilder(1024);
-            if (newEntry.getKey().id != null) {
-                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_ID"));
-                text.append(' ');
-                text.append(newEntry.getKey().id);
-                text.append('\n');
-            }
-            if (newEntry.getKey().path != null) {
-                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
-                text.append(' ');
-                text.append(newEntry.getKey().path);
-                text.append('\n');
-            }
-            if (newEntry.getSourceTranslation() != null) {
-                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Translation"));
-                text.append(' ');
-                text.append(newEntry.getSourceTranslation());
-                text.append('\n');
-            }
-            if (newEntry.getComment() != null) {
-                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Comment"));
-                text.append('\n');
-                text.append(newEntry.getComment());
-                text.append('\n');
-            }
-            return text.toString();
+    static final ICommentProvider ENTRY_COMMENT_PROVIDER = newEntry -> {
+        StringBuilder text = new StringBuilder(1024);
+        if (newEntry.getKey().id != null) {
+            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_ID"));
+            text.append(' ');
+            text.append(newEntry.getKey().id);
+            text.append('\n');
         }
+        if (newEntry.getKey().path != null) {
+            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
+            text.append(' ');
+            text.append(newEntry.getKey().path);
+            text.append('\n');
+        }
+        if (newEntry.getSourceTranslation() != null) {
+            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Translation"));
+            text.append(' ');
+            text.append(newEntry.getSourceTranslation());
+            text.append('\n');
+        }
+        text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Comment"));
+        text.append('\n');
+        text.append(newEntry.getComment() == null ? "" : newEntry.getComment());
+        return text.toString();
     };
 
     public void onNewFile(String activeFileName) {

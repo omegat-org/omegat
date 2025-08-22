@@ -70,7 +70,7 @@ public class IssuesPanelTest extends TestCoreGUI {
             }
         });
 
-        SwingUtilities.invokeLater(issuesPanelController::showAll);
+        SwingUtilities.invokeAndWait(issuesPanelController::showAll);
 
         try {
             assertTrue(latch.await(20, TimeUnit.SECONDS));

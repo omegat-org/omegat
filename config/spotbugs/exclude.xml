@@ -62,7 +62,11 @@
         </Or>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
-
+    <!-- RuntimePreferenceStore.getInstance returns the instance object in design. -->
+    <Match>
+        <Class name="org.omegat.core.data.RuntimePreferenceStore"/>
+        <Bug pattern="MS_EXPOSE_REP"/>
+    </Match>
     <!-- CoreState.getInstance returns the instance object in design. -->
     <Match>
         <Class name="org.omegat.core.data.CoreState"/>

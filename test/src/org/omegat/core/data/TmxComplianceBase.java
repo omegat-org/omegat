@@ -73,9 +73,9 @@ public abstract class TmxComplianceBase {
 
     @Before
     public final void setUp() throws Exception {
+        TestPreferencesInitializer.init();
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
-        TestPreferencesInitializer.init();
 
         outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + name.getMethodName() + ".out");
         outFile.getParentFile().mkdirs();

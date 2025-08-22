@@ -55,11 +55,11 @@ public class MorfologikSpellcheckerTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        PluginUtils.loadPlugins(Collections.emptyMap());
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();
         configDir = Files.createDirectory(tmpDir.resolve(".omegat"));
         TestPreferencesInitializer.init(configDir.toString());
+        PluginUtils.loadPlugins(Collections.emptyMap());
         Files.createDirectory(configDir.resolve("spelling"));
         copyFile("de_DE.dict");
         copyFile("de_DE.info");

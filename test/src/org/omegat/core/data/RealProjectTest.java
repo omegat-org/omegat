@@ -61,8 +61,8 @@ public class RealProjectTest {
     @Before
     public final void setUp() throws Exception {
         tempDir = Files.createTempDirectory("omegat-core-ut");
-        Core.initializeConsole(new TreeMap<>());
         TestPreferencesInitializer.init();
+        Core.initializeConsole(new TreeMap<>());
     }
 
     @After

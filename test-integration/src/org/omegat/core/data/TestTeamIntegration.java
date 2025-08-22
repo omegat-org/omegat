@@ -550,6 +550,10 @@ public final class TestTeamIntegration {
         public boolean existEntryInProject(EntryKey key) {
             return true;
         }
+
+        public void clear() {
+            // do nothing
+        }
     };
 
     interface Team {

@@ -188,14 +188,14 @@ public class RealProject implements IProject {
      * This map recreated each time when files changed. So, you can free use it
      * without thinking about synchronization.
      */
-    private Map<String, ExternalTMX> transMemories = new TreeMap<>();
+    private final Map<String, ExternalTMX> transMemories = new TreeMap<>();
 
     /**
      * Storage for all translation memories of translations to other languages.
      */
-    private Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<>();
+    private final Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<>();
 
-    protected ProjectTMX projectTMX;
+    protected final ProjectTMX projectTMX;
 
     /**
      * True if project loaded successfully.
@@ -203,8 +203,8 @@ public class RealProject implements IProject {
     private boolean loaded = false;
 
     // Sets of exist entries for check orphaned
-    private Set<String> existSource = new HashSet<>();
-    private Set<EntryKey> existKeys = new HashSet<>();
+    private final Set<String> existSource = new HashSet<>();
+    private final Set<EntryKey> existKeys = new HashSet<>();
 
     /** Segments count in project files. */
     protected List<FileInfo> projectFilesList = new ArrayList<>();
@@ -249,6 +249,9 @@ public class RealProject implements IProject {
             remoteRepositoryProvider = null;
         }
 
+        projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
+                config.isSentenceSegmentingEnabled(), config.getProjectRootDir(), checkOrphanedCallback,
+                Core.getSegmenter());
         sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE),
                 props.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
@@ -432,8 +435,7 @@ public class RealProject implements IProject {
             allProjectEntries.clear();
             projectFilesList.clear();
             transMemories.clear();
-            projectTMX = null;
-
+            projectTMX.clear();
             // There, that should do it, now inform the user
             long memory = Runtime.getRuntime().maxMemory() / 1024 / 1024;
             Log.logErrorRB("OUT_OF_MEMORY", memory);
@@ -850,10 +852,10 @@ public class RealProject implements IProject {
 
                 try {
                     saveProjectProperties();
-
-                    projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
-                            isProjectModified());
-
+                    synchronized (projectTMX) {
+                        projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
+                                isProjectModified());
+                    }
                     if (remoteRepositoryProvider != null && doTeamSync) {
                         tmxPrepared = null;
                         glossaryPrepared = null;
@@ -1224,9 +1226,10 @@ public class RealProject implements IProject {
         File file = new File(config.getProjectInternalDir(), OConsts.STATUS_EXTENSION);
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            projectTMX = new ProjectTMX(checkOrphanedCallback);
-            projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
-                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
+            synchronized (projectTMX) {
+                projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
+                        config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
+            }
         } catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
             throw ex;
@@ -1442,7 +1445,8 @@ public class RealProject implements IProject {
             } else {
                 newTransMemories.remove(file.getPath());
             }
-            transMemories = newTransMemories;
+            transMemories.clear();
+            transMemories.putAll(newTransMemories);
         });
         tmMonitor.checkChanges();
         tmMonitor.start();
@@ -1480,7 +1484,8 @@ public class RealProject implements IProject {
             } else {
                 newOtherTargetLangTMs.remove(targetLanguage);
             }
-            otherTargetLangTMs = newOtherTargetLangTMs;
+            otherTargetLangTMs.clear();
+            otherTargetLangTMs.putAll(newOtherTargetLangTMs);
         });
         tmOtherLanguagesMonitor.checkChanges();
         tmOtherLanguagesMonitor.start();
@@ -1503,9 +1508,6 @@ public class RealProject implements IProject {
     }
 
     public TMXEntry getTranslationInfo(SourceTextEntry ste) {
-        if (projectTMX == null) {
-            return EMPTY_TRANSLATION;
-        }
         TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
         if (r == null) {
             r = projectTMX.getDefaultTranslation(ste.getSrcText());
@@ -1692,9 +1694,6 @@ public class RealProject implements IProject {
     }
 
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
-        if (projectTMX == null) {
-            return;
-        }
         Map.Entry<EntryKey, TMXEntry>[] entries;
         synchronized (projectTMX) {
             entries = entrySetToArray(projectTMX.alternatives.entrySet());
@@ -2029,6 +2028,11 @@ public class RealProject implements IProject {
 
         public boolean existEntryInProject(EntryKey key) {
             return existKeys.contains(key);
+        }
+
+        public void clear() {
+            existSource.clear();
+            existKeys.clear();
         }
     };
 

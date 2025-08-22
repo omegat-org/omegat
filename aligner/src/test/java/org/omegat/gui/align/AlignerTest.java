@@ -38,6 +38,7 @@ import java.util.Map.Entry;
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.master.FilterMaster;
@@ -50,9 +51,10 @@ public class AlignerTest {
 
     @Before
     public final void setUp() {
+        TestCoreState.resetState();
         FilterMaster.setFilterClasses(Arrays.asList(TextFilter.class, ResourceBundleFilter.class));
-        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
-        Core.setSegmenter(new Segmenter(SRX.getDefault()));
+        TestCoreState.getInstance().setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        TestCoreState.getInstance().setSegmenter(new Segmenter(SRX.getDefault()));
         assertTrue(Core.getFilterMaster().isFileSupported(new File("blah.txt"), true));
         assertTrue(Core.getFilterMaster().isFileSupported(new File("blah.properties"), true));
     }

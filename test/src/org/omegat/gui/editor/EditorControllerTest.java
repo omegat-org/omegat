@@ -174,9 +174,7 @@ public class EditorControllerTest extends TestCore {
 
     private void fireCaretEvent(JTextComponent component, int position) {
         CountDownLatch latch = new CountDownLatch(1);
-        component.addCaretListener(e -> {
-            latch.countDown();
-        });
+        component.addCaretListener(e -> latch.countDown());
         component.setCaretPosition(position);
         try {
             latch.await(5, TimeUnit.SECONDS);

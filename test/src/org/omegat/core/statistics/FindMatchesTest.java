@@ -362,6 +362,9 @@ public class FindMatchesTest {
             public boolean existEntryInProject(EntryKey key) {
                 return false;
             }
+            public void clear() {
+                // do nothing
+            }
         };
 
         TestProject(final ProjectProperties prop, File testTmx, File externalTmx,

@@ -42,7 +42,8 @@ public class ViewFactoryHelper implements ViewFactory {
     private final Map<String, Function<Element, View>> viewCreators;
     private final Function<Element, View> defaultViewCreator;
 
-    public ViewFactoryHelper(Map<String, Function<Element, View>> customMappings, Function<Element, View> defaultViewCreator) {
+    public ViewFactoryHelper(Map<String, Function<Element, View>> customMappings,
+                             Function<Element, View> defaultViewCreator) {
         this.viewCreators = customMappings;
         this.defaultViewCreator = defaultViewCreator;
     }
@@ -54,11 +55,26 @@ public class ViewFactoryHelper implements ViewFactory {
         return viewCreators.getOrDefault(elementName, defaultViewCreator).apply(elem);
     }
 
-    public static Map<String, Function<Element, View>> getDefaultMappings(Function<Element, View> contentViewCreator,
-                                                                          Function<Element, View> paragraphViewCreator) {
+    /**
+     * Generates a default mapping between element names and their
+     * corresponding view creation functions.
+     * <p>
+     * These mappings are used to render the document elements with
+     * appropriate view types.
+     *
+     * @param contentCreator
+     *          a function that creates a view for content elements
+     * @param paragraphCreator
+     *          a function that creates a view for paragraph elements
+     * @return
+     *          a map associating element names with their corresponding
+     *          view creation functions
+     */
+    public static Map<String, Function<Element, View>> getDefaultMappings(Function<Element, View> contentCreator,
+                                                                          Function<Element, View> paragraphCreator) {
         return Map.of(
-                AbstractDocument.ContentElementName, contentViewCreator,
-                AbstractDocument.ParagraphElementName, paragraphViewCreator,
+                AbstractDocument.ContentElementName, contentCreator,
+                AbstractDocument.ParagraphElementName, paragraphCreator,
                 AbstractDocument.SectionElementName, elem -> new BoxView(elem, View.Y_AXIS),
                 StyleConstants.ComponentElementName, ComponentView::new,
                 StyleConstants.IconElementName, IconView::new

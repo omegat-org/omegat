@@ -184,13 +184,13 @@ public class RealProject implements IProject {
      * This map recreated each time when files changed. So, you can free use it
      * without thinking about synchronization.
      */
-    private Map<String, ExternalTMX> transMemories = new TreeMap<>();
+    private final Map<String, ExternalTMX> transMemories = new TreeMap<>();
     private final LoadFilesCallback loadFilesCallback;
 
     /**
      * Storage for all translation memories of translations to other languages.
      */
-    private Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<>();
+    private final Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<>();
 
     protected final ProjectTMX projectTMX;
 
@@ -860,10 +860,10 @@ public class RealProject implements IProject {
 
                 try {
                     saveProjectProperties();
-
-                    projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
-                            isProjectModified());
-
+                    synchronized (projectTMX) {
+                        projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
+                                isProjectModified());
+                    }
                     if (remoteRepositoryProvider != null && doTeamSync) {
                         tmxPrepared = null;
                         glossaryPrepared = null;
@@ -1446,7 +1446,8 @@ public class RealProject implements IProject {
             } else {
                 newTransMemories.remove(file.getPath());
             }
-            transMemories = newTransMemories;
+            transMemories.clear();
+            transMemories.putAll(newTransMemories);
         });
         tmMonitor.checkChanges();
         tmMonitor.start();
@@ -1484,7 +1485,8 @@ public class RealProject implements IProject {
             } else {
                 newOtherTargetLangTMs.remove(targetLanguage);
             }
-            otherTargetLangTMs = newOtherTargetLangTMs;
+            otherTargetLangTMs.clear();
+            otherTargetLangTMs.putAll(newOtherTargetLangTMs);
         });
         tmOtherLanguagesMonitor.checkChanges();
         tmOtherLanguagesMonitor.start();
@@ -1933,6 +1935,12 @@ public class RealProject implements IProject {
         @Override
         public boolean existSourceInProject(String src) {
             return existSource.contains(src);
+        }
+
+        @Override
+        public synchronized void clear() {
+            existKeys.clear();
+            existSource.clear();
         }
     }
 

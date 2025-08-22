@@ -99,7 +99,9 @@ public final class TeamTool {
         // Create project internal directories
         props.autocreateDirectories();
         // Create version-controlled glossary file
-        GlossaryManager.createNewWritableGlossaryFile(props.getWritableGlossaryFile().getAsFile());
+        if (!GlossaryManager.createNewWritableGlossaryFile(props.getWritableGlossaryFile().getAsFile())) {
+            Log.log("Failed to create new writable glossary file.");
+        }
 
         ProjectFileStorage.writeProjectFile(props);
 

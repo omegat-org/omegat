@@ -40,7 +40,7 @@ import org.omegat.util.Log;
  */
 public final class RemoteRepositoryFactory {
 
-    private static final Map<String, Class<? extends IRemoteRepository2>> repositoryConnectors =
+    private static final Map<String, Class<? extends IRemoteRepository2>> REPOSITORY_CONNECTORS =
             new HashMap<>();
 
     /**
@@ -49,18 +49,18 @@ public final class RemoteRepositoryFactory {
      * @param clazz connector class.
      */
     public static void addRepositoryConnector(String type, Class<? extends IRemoteRepository2> clazz) {
-        repositoryConnectors.put(type, clazz);
+        REPOSITORY_CONNECTORS.put(type, clazz);
     }
 
     private RemoteRepositoryFactory() {
     }
 
     public static IRemoteRepository2 create(String type) {
-        if (!repositoryConnectors.containsKey(type)) {
+        if (!REPOSITORY_CONNECTORS.containsKey(type)) {
             throw new RuntimeException("Unknown repository type: " + type);
         }
         try {
-            return repositoryConnectors.get(type).getDeclaredConstructor().newInstance();
+            return REPOSITORY_CONNECTORS.get(type).getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             Log.log(e);
             throw new RuntimeException("Failed to instantiate repository connector: " + type);

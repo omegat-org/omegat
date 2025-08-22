@@ -128,8 +128,8 @@
     <suppress checks="MemberName" files="SVNAuthenticationManager\.java" lines="236"/>
     <suppress files="FileRepository\.java" checks="StaticVariableName" lines="49"/>
 
-    <!-- GITExternalGpgSigner -->
-    <suppress files="GITExternalGpgSigner\.java" checks="ConstantName" lines="74-84"/>
+    <!-- GITExternalGpgSigner: ignore because the class will be deprecated in OmegaT 6.2.0 -->
+    <suppress files="GITExternalGpgSigner\.java" checks="ConstantName"/>
 
     <!-- Searcher -->
     <suppress files="Searcher\.java" checks="ParameterNumber"/>

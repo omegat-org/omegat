@@ -50,6 +50,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.TestRuntimePreferenceStore;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.PluginUtils;
@@ -67,6 +68,7 @@ public class HunspellSpellcheckerTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        TestRuntimePreferenceStore.reset();
         PluginUtils.loadPlugins(Collections.emptyMap());
         tmpDir = Files.createTempDirectory("omegat");
         assertThat(tmpDir.toFile()).isDirectory();

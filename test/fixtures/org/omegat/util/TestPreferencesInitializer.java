@@ -64,10 +64,10 @@ public final class TestPreferencesInitializer {
      * @param configDir OmegaT user configuration directory for test.
      */
     public static synchronized void init(String configDir) {
-        RuntimePreferences.setConfigDir(configDir);
+        TestRuntimePreferenceStore.reset();
+        TestRuntimePreferenceStore.getInstance().setConfigDir(configDir);
         Preferences.init();
         Preferences.initFilters();
         Preferences.initSegmentation();
-        TestRuntimePreferenceStore.reset();
     }
 }

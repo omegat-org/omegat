@@ -31,7 +31,6 @@ import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.core.data.TestRuntimePreferenceStore;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.PluginUtils;

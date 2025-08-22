@@ -11,6 +11,7 @@ jar {
         attributes('License': 'GNU Public License version 3 or later',
                 'Implementation-Version': '1.0',
                 'OmegaT-Plugins': 'org.omegat.machinetranslators.dummy.Dummy',
+                'Plugin-Link': 'https://omegat.org',
                 'Plugin-Category': 'machinetranslator',
                 'Automatic-Module-Name': 'org.omegat.machinetranslators.dummy'
         )

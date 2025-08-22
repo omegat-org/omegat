@@ -140,14 +140,14 @@ public class RemoteRepositoryProvider {
     }
 
     /**
-     * Find mappings for specified path.
+     * Find mappings for a specified path.
      */
-    protected List<Mapping> getMappings(String path, String... forceExcludes) {
+    protected List<Mapping> getMappings(String path, String... forceExcludePaths) {
         List<Mapping> result = new ArrayList<>();
         for (int i = 0; i < repositoriesDefinitions.size(); i++) {
             RepositoryDefinition rd = repositoriesDefinitions.get(i);
             for (RepositoryMapping repoMapping : rd.getMapping()) {
-                Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping, forceExcludes);
+                Mapping m = new Mapping(path, repositories.get(i), rd, repoMapping, forceExcludePaths);
                 if (m.matches()) {
                     result.add(m);
                 }

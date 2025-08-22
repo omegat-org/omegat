@@ -343,7 +343,7 @@ public class SVNRemoteRepository2 implements IRemoteRepository2 {
             ourClientManager.getWCClient().doInfo(SVNURL.parseURIEncoded(SVNEncodingUtil.autoURIEncode(url)),
                     SVNRevision.HEAD, SVNRevision.HEAD);
         } catch (SVNAuthenticationException ex) {
-            // TODO: Non-SVN URLs such as below give a false positive with this
+            // Note: Non-SVN URLs such as below give a false positive with this
             // heuristic:
             // https://twitter.com/amadlonkay/status/699716236372889600
             return true;

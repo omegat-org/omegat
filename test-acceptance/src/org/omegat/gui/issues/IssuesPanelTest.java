@@ -70,10 +70,10 @@ public class IssuesPanelTest extends TestCoreGUI {
             }
         });
 
-        SwingUtilities.invokeLater(issuesPanelController::showAll);
+        SwingUtilities.invokeAndWait(issuesPanelController::showAll);
 
         try {
-            latch.await(10, TimeUnit.SECONDS);
+            assertTrue(latch.await(20, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
         }
 

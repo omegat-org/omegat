@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2020 Briac Pilpre
-               2021-2022 Hiroshi Miura
+               2021-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,6 +27,8 @@
 package org.omegat.core.data;
 
 import java.net.URL;
+import java.util.Comparator;
+import java.util.Map;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -43,30 +45,61 @@ import org.omegat.util.OStrings;
 public final class PluginInformation {
 
     public enum Status {
-        INSTALLED, BUNDLED, NEW,
+        INSTALLED("installed"),
+        BUNDLED("bundled"),
+        NEW("new"),
+        UPDATABLE("updatable"),
+        UNINSTALLED("uninstalled");
+
+        private final String value;
+
+        Status(String value) {
+            this.value = value;
+        }
+
+        public String getLocalizedValue() {
+            switch (this) {
+            case UNINSTALLED:
+                return OStrings.getString("PLUGIN_STATUS_UNINSTALLED");
+            case UPDATABLE:
+                return OStrings.getString("PLUGIN_STATUS_UPDATABLE");
+            case BUNDLED:
+                return OStrings.getString("PLUGIN_STATUS_BUNDLED");
+            case NEW:
+                return OStrings.getString("PLUGIN_STATUS_NEW");
+            case INSTALLED:
+                return OStrings.getString("PLUGIN_STATUS_INSTALLED");
+            default:
+                return "Unknown";
+            }
+
+        }
     }
 
-    private final String className;
-    private final String name;
-    private final String version;
-    private final String author;
-    private final String description;
-    private final PluginUtils.PluginType category;
-    private final String link;
-    private final URL url;
-    private final Status status;
+    private String className;
+    private String name;
+    private String version;
+    private String author;
+    private String description;
+    private PluginUtils.PluginType category;
+    private String link;
+    private URL url;
+    private Status status;
 
-    /* The class is recommend to build from builder. */
-    private PluginInformation(String className, String name, String version, String author,
-            String description, PluginUtils.PluginType category, String link, URL url, Status status) {
-        this.className = className;
-        this.name = name;
-        this.version = version;
-        this.author = author;
-        this.description = description;
-        this.category = category;
-        this.link = link;
-        this.url = url;
+
+    /* The class is recommended to build from builder. */
+    private PluginInformation() {
+    }
+
+    private PluginInformation(PluginInformation info, Status status) {
+        this.className = info.getClassName();
+        this.name = info.getName();
+        this.version = info.getVersion();
+        this.author = info.getAuthor();
+        this.description = info.getDescription();
+        this.category = info.getCategory();
+        this.link = info.getLink();
+        this.url = info.getUrl();
         this.status = status;
     }
 
@@ -134,16 +167,18 @@ public final class PluginInformation {
         return status == Status.BUNDLED;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     /**
      * @return string expression of PluginInformation class.
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("PluginInformation [className=").append(className).append(", name=").append(name)
-                .append(", version=").append(version).append(", author=").append(author)
-                .append(", description=").append(description).append("]");
-        return builder.toString();
+        return "PluginInformation [className=" + className + ", name=" + name +
+                ", version=" + version + ", author=" + author +
+                ", description=" + description + "]";
     }
 
     /**
@@ -218,6 +253,10 @@ public final class PluginInformation {
         private Builder() {
         }
 
+        public static PluginInformation copy(final PluginInformation info, final Status status) {
+            return new PluginInformation(info, status);
+       }
+
         /**
          * Build PluginInformation from Manifest attributes.
          * 
@@ -250,10 +289,17 @@ public final class PluginInformation {
             if (attrs != null) {
                 targetAttrs.putAll(attrs);
             }
-            return new PluginInformation(className, findName(className, targetAttrs),
-                    findVersion(targetAttrs), findAuthor(targetAttrs),
-                    lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION), findCategory(targetAttrs),
-                    lookupAttribute(targetAttrs, PLUGIN_LINK), mu, status);
+            PluginInformation result = new PluginInformation();
+            result.className = className;
+            result.name = findName(className, targetAttrs);
+            result.version = findVersion(targetAttrs);
+            result.author = findAuthor(targetAttrs);
+            result.description = lookupAttribute(targetAttrs, PLUGIN_DESCRIPTION);
+            result.category = findCategory(targetAttrs);
+            result.link = lookupAttribute(targetAttrs, PLUGIN_LINK);
+            result.url = mu;
+            result.status = status;
+            return result;
         }
 
         private static final String AUTHOR = "OmegaT team";
@@ -279,9 +325,17 @@ public final class PluginInformation {
          */
         public static PluginInformation fromProperties(String className, Properties props, final String key,
                 final URL mu, final Status status) {
-            return new PluginInformation(className, key, OStrings.getSimpleVersion(), AUTHOR,
-                    props.getProperty(String.format("plugin.desc.%s", key)),
-                    PluginUtils.PluginType.getTypeByValue(key), LINK, mu, status);
+            PluginInformation result = new PluginInformation();
+            result.className = className;
+            result.name = key;
+            result.version = OStrings.getSimpleVersion();
+            result.author = AUTHOR;
+            result.description = props.getProperty(String.format("plugin.desc.%s", key));
+            result.category = PluginUtils.PluginType.getTypeByValue(key);
+            result.link = LINK;
+            result.url = mu;
+            result.status = status;
+            return result;
         }
 
         private static PluginUtils.PluginType findCategory(Attributes attrs) {
@@ -298,7 +352,10 @@ public final class PluginInformation {
             if (name != null) {
                 return name;
             }
+            return findName(className);
+        }
 
+        private static String findName(String className) {
             return className == null ? "" : className.substring(className.lastIndexOf(".") + 1);
         }
 
@@ -328,6 +385,21 @@ public final class PluginInformation {
                 }
             }
             return null;
+        }
+
+        public static PluginInformation fromMap(Map<String, String> attr) {
+            PluginUtils.PluginType cate = PluginUtils.PluginType.getTypeByValue(attr.get("Category"));
+            PluginInformation result = new PluginInformation();
+            result.className = attr.get("Class-Name");
+            result.name = attr.get("Name");
+            result.version = attr.get("Version");
+            result.author = attr.get("Author");
+            result.description = attr.getOrDefault("Description", "");
+            result.category = cate;
+            result.link = attr.getOrDefault("Link", "");
+            result.url = null;
+            result.status = Status.UNINSTALLED;
+            return result;
         }
     }
 }

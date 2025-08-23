@@ -27,7 +27,6 @@
 package org.omegat.core.data;
 
 import java.net.URL;
-import java.util.Map;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -84,7 +83,6 @@ public final class PluginInformation {
     private String link;
     private URL url;
     private Status status;
-
 
     /* The class is recommended to build from builder. */
     private PluginInformation() {
@@ -245,6 +243,7 @@ public final class PluginInformation {
         private static final String BUNDLE_VERSION = "Bundle-Version";
         private static final String BUNDLE_NAME = "Bundle-Name";
         private static final String BUILT_BY = "Built-By";
+        private static final String PLUGIN_BUNDLED = "Plugin-Bundled";
 
         /**
          * Disable default constructor.
@@ -265,12 +264,12 @@ public final class PluginInformation {
          *            metadata of plugin.
          * @param mu
          *            URL of manifest
-         * @param status
+         * @param defaultStatus
          *            Plugin status, bundled or installed
          * @return PluginInformation object.
          */
         public static PluginInformation fromManifest(final String className, final Manifest manifest,
-                final URL mu, final Status status) {
+                final URL mu, final Status defaultStatus) {
             Attributes targetAttrs = new Attributes(manifest.getMainAttributes());
             String packageName = className == null ? ""
                     : className.substring(0, className.lastIndexOf(".") + 1).replace(".", "/");
@@ -288,6 +287,14 @@ public final class PluginInformation {
             if (attrs != null) {
                 targetAttrs.putAll(attrs);
             }
+            // bundled modules detection
+            Status status;
+            if ("true".equalsIgnoreCase(lookupAttribute(targetAttrs, PLUGIN_BUNDLED))) {
+                status = Status.BUNDLED;
+            } else {
+                status = defaultStatus;
+            }
+            // create the object.
             PluginInformation result = new PluginInformation();
             result.className = className;
             result.name = findName(className, targetAttrs);
@@ -384,21 +391,6 @@ public final class PluginInformation {
                 }
             }
             return null;
-        }
-
-        public static PluginInformation fromMap(Map<String, String> attr) {
-            PluginUtils.PluginType cate = PluginUtils.PluginType.getTypeByValue(attr.get("Category"));
-            PluginInformation result = new PluginInformation();
-            result.className = attr.get("Class-Name");
-            result.name = attr.get("Name");
-            result.version = attr.get("Version");
-            result.author = attr.get("Author");
-            result.description = attr.getOrDefault("Description", "");
-            result.category = cate;
-            result.link = attr.getOrDefault("Link", "");
-            result.url = null;
-            result.status = Status.UNINSTALLED;
-            return result;
         }
     }
 }

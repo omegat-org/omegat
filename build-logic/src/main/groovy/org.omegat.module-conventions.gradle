@@ -19,7 +19,8 @@ ext.makeModuleTask = { moduleProp ->
                     'Plugin-Version': moduleProp.Version,
                     'Plugin-Name': moduleProp.Name,
                     'Plugin-Category': moduleProp.Category,
-                    'Plugin-Link': 'https://www.omegat.org/',
+                    'Plugin-Link': 'https://sourceforge.net/p/omegat/wiki/Bundled%20Plugins/',
+                    'Plugin-Bundled': 'true',
                     'Plugin-Description': moduleProp.Description
             )
         }

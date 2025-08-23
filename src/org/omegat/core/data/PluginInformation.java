@@ -27,7 +27,6 @@
 package org.omegat.core.data;
 
 import java.net.URL;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Properties;
 import java.util.jar.Attributes;

@@ -163,6 +163,40 @@ public final class PluginUtils {
             }
             return UNKNOWN;
         }
+
+        @Override
+        public String toString() {
+            return getTypeValue();
+        }
+
+        public String getLocalizedValue() {
+            switch (this) {
+            case BASE:
+                return OStrings.getString("PLUGIN_TYPE_BASE");
+            case THEME:
+                return OStrings.getString("PLUGIN_TYPE_THEME");
+            case FILTER:
+                return OStrings.getString("PLUGIN_TYPE_FILTER");
+            case MISCELLANEOUS:
+                return OStrings.getString("PLUGIN_TYPE_MISC");
+            case MARKER:
+                return OStrings.getString("PLUGIN_TYPE_MARKER");
+            case GLOSSARY:
+                return OStrings.getString("PLUGIN_TYPE_GLOSSARY");
+            case TOKENIZER:
+                return OStrings.getString("PLUGIN_TYPE_TOKENIZER");
+            case DICTIONARY:
+                return OStrings.getString("PLUGIN_TYPE_DICTIONARY");
+            case MACHINETRANSLATOR:
+                return OStrings.getString("PLUGIN_TYPE_MACHINETRANSLATOR");
+            case LANGUAGE:
+                return OStrings.getString("PLUGIN_TYPE_LANGUAGE");
+            case UNKNOWN:
+                return OStrings.getString("PLUGIN_TYPE_UNKNOWN");
+            default:
+                return getTypeValue();
+            }
+        }
     }
 
     private static final List<Class<?>> LOADED_PLUGINS = new ArrayList<>();
@@ -293,7 +327,7 @@ public final class PluginUtils {
             if (OMEGAT_MAIN_CLASS.equals(manifest.getMainAttributes().getValue(MAIN_CLASS))) {
                 isMainManifestFound = true;
                 MainClassLoader pluginsClassLoader = MAINCLASSLOADERS.get(PluginType.UNKNOWN);
-                loadFromManifest(manifest, pluginsClassLoader, manifestUrl);
+                loadFromManifest(manifest, pluginsClassLoader, manifestUrl, true);
             }
 
             // Process plugin based on category
@@ -302,7 +336,7 @@ public final class PluginUtils {
                 if (type != PluginType.UNKNOWN && isUrlInList(manifestUrl, pluginUrls)) {
                     MainClassLoader categoryLoader = MAINCLASSLOADERS.get(type);
                     addUrlToClasspath(manifestUrl, pluginUrls, categoryLoader);
-                    loadFromManifest(manifest, categoryLoader, manifestUrl);
+                    loadFromManifest(manifest, categoryLoader, manifestUrl, false);
                 }
             }
         }
@@ -344,7 +378,7 @@ public final class PluginUtils {
                 if (manifests != null) {
                     for (String mf : manifests.split(File.pathSeparator)) {
                         try (InputStream in = Files.newInputStream(Paths.get(mf))) {
-                            loadFromManifest(new Manifest(in), pluginsClassLoader, null);
+                            loadFromManifest(new Manifest(in), pluginsClassLoader, null, true);
                         }
                     }
                 } else {
@@ -674,7 +708,7 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      *             when plugin class is not found.
      */
-    private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu)
+    private static void loadFromManifest(Manifest m, ClassLoader classLoader, URL mu, boolean bundled)
             throws ClassNotFoundException {
         String classes = m.getMainAttributes().getValue(OMEGAT_PLUGINS);
         if (classes != null) {
@@ -683,8 +717,8 @@ public final class PluginUtils {
                     continue;
                 }
                 if (loadClass(clazz, classLoader)) {
-                    if (mu == null) {
-                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, null,
+                    if (bundled) {
+                        PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, mu,
                                 PluginInformation.Status.BUNDLED));
                     } else {
                         PLUGIN_INFORMATIONS.add(PluginInformation.Builder.fromManifest(clazz, m, mu,

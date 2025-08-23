@@ -25,34 +25,32 @@
 
 package org.omegat.gui.preferences.view;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.table.DefaultTableModel;
 
 import org.omegat.core.data.PluginInformation;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.OStrings;
+import org.omegat.util.PluginInstaller;
 
 public class PluginInfoTableModel extends DefaultTableModel {
-    private static final long serialVersionUID = 5345248154613009632L;
+    private static final long serialVersionUID = 5345248154613009633L;
 
-    protected static final int COLUMN_NAME = 0;
-    protected static final int COLUMN_CLASS = 1;
-    protected static final int COLUMN_VERSION = 2;
-    protected static final int COLUMN_AUTHOR = 3;
-    protected static final int COLUMN_DESCRIPTION = 4;
+    public static final int COLUMN_STAT = 0;
+    public static final int COLUMN_CATEGORY = 1;
+    public static final int COLUMN_NAME = 2;
+    public static final int COLUMN_AUTHOR = 3;
+    public static final int COLUMN_VERSION = 4;
 
-    private static final String[] COLUMN_NAMES = { "PREFS_PLUGINS_COL_NAME", "PREFS_PLUGINS_COL_CLASS",
-            "PREFS_PLUGINS_COL_VERSION", "PREFS_PLUGINS_COL_AUTHOR", "PREFS_PLUGINS_COL_DESCRIPTION" };
+    private static final String[] COLUMN_NAMES = { "PREFS_PLUGINS_COL_STAT", "PREFS_PLUGINS_COL_CATEGORY",
+            "PREFS_PLUGINS_COL_NAME", "PREFS_PLUGINS_COL_AUTHOR", "PREFS_PLUGINS_COL_VERSION"};
 
-    private final List<PluginInformation> listPlugins = new ArrayList<>();
+    private final List<PluginInformation> listPlugins;
 
     public PluginInfoTableModel() {
-        PluginUtils.getPluginInformations().stream()
-                .sorted(Comparator.comparing(PluginInformation::getClassName))
-                .forEach(listPlugins::add);
+        listPlugins = PluginInstaller.getInstance().getPluginList().stream().filter(p -> !p.isBundled())
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -81,14 +79,14 @@ public class PluginInfoTableModel extends DefaultTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        PluginInformation plugin = listPlugins.get(rowIndex);
-        Object returnValue = null;
+    public Object getValueAt(int row, int column) {
+        if (row > listPlugins.size() - 1) {
+            return null;
+        }
+        PluginInformation plugin = listPlugins.get(row);
+        Object returnValue;
 
-        switch (columnIndex) {
-        case COLUMN_CLASS:
-            returnValue = plugin.getClassName();
-            break;
+        switch (column) {
         case COLUMN_NAME:
             returnValue = plugin.getName();
             break;
@@ -98,13 +96,30 @@ public class PluginInfoTableModel extends DefaultTableModel {
         case COLUMN_AUTHOR:
             returnValue = plugin.getAuthor();
             break;
-        case COLUMN_DESCRIPTION:
-            returnValue = plugin.getDescription();
+        case COLUMN_CATEGORY:
+            returnValue = plugin.getCategory().getLocalizedValue();
+            break;
+        case COLUMN_STAT:
+            returnValue = plugin.getStatus().getLocalizedValue();
             break;
         default:
             throw new IllegalArgumentException("Invalid column index");
         }
 
         return returnValue;
+    }
+
+    public PluginInformation getItemAt(int rowIndex) {
+        return listPlugins.get(rowIndex);
+    }
+
+    public void updateModel(boolean showBundledPlugins) {
+        List<PluginInformation> newListOfPlugins = PluginInstaller.getInstance().getPluginList().stream()
+                .filter(p -> showBundledPlugins || !p.isBundled()).collect(Collectors.toList());
+        synchronized (this) {
+            listPlugins.clear();
+            listPlugins.addAll(newListOfPlugins);
+        }
+        fireTableDataChanged();
     }
 }

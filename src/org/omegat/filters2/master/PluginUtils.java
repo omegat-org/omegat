@@ -190,9 +190,12 @@ public final class PluginUtils {
                 return OStrings.getString("PLUGIN_TYPE_DICTIONARY");
             case MACHINETRANSLATOR:
                 return OStrings.getString("PLUGIN_TYPE_MACHINETRANSLATOR");
+            case LANGUAGE:
+                return OStrings.getString("PLUGIN_TYPE_LANGUAGE");
             case UNKNOWN:
-            default:
                 return OStrings.getString("PLUGIN_TYPE_UNKNOWN");
+            default:
+                return getTypeValue();
             }
         }
     }

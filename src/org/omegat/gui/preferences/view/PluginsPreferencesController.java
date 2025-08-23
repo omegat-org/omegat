@@ -57,6 +57,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane pluginDetailsPane;
+    private PluginInfoTableModel model;
 
     /**
      * Format plugin information for details pane of UI.
@@ -113,7 +114,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
-        PluginInfoTableModel model = new PluginInfoTableModel();
+        model = new PluginInfoTableModel();
         panel.tablePluginsInfo.setModel(model);
         TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
         panel.tablePluginsInfo.setRowSorter(sorter);
@@ -148,6 +149,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
                     setRestartRequired(true);
                 }
             }
+        });
+
+        panel.showBundledPluginsCB.addActionListener(e -> {
+            boolean showBundledPlugins = panel.showBundledPluginsCB.isSelected();
+            model.updateModel(showBundledPlugins);
+            panel.tablePluginsInfo.setRowSorter(new TableRowSorter<>(model));
         });
     }
 

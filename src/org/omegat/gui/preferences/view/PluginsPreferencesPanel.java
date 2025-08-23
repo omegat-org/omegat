@@ -59,6 +59,7 @@ public class PluginsPreferencesPanel extends JPanel {
         jPanel2 = new javax.swing.JPanel();
         browsePluginsButton = new javax.swing.JButton();
         installFromDiskButton = new javax.swing.JButton();
+        showBundledPluginsCB = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -80,6 +81,7 @@ public class PluginsPreferencesPanel extends JPanel {
 
         jPanel1.add(panelPluginsInfo);
 
+        panelPluginDetails.setPreferredSize(new java.awt.Dimension(400, 0));
         panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
         jPanel1.add(panelPluginDetails);
 
@@ -93,6 +95,10 @@ public class PluginsPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
         jPanel2.add(installFromDiskButton);
 
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(showBundledPluginsCB, bundle.getString("PREFS_PLUGINS_SHOW_BUNDLED")); // NOI18N
+        jPanel2.add(showBundledPluginsCB);
+
         add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -104,6 +110,7 @@ public class PluginsPreferencesPanel extends JPanel {
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
     javax.swing.JScrollPane scrollTable;
+    javax.swing.JCheckBox showBundledPluginsCB;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

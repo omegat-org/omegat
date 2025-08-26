@@ -21,7 +21,6 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
     testRuntimeOnly(libs.languagetool.en)
-    testRuntimeOnly(libs.languagetool.de)
 }
 
 makeModuleTask(loadProperties(file('plugin.properties')))

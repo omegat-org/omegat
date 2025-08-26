@@ -25,4 +25,5 @@ dependencies {
     testImplementation(libs.jackson.databind)
 }
 
+makeModuleTask(loadProperties(file('plugin.properties')))
 

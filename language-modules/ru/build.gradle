@@ -28,7 +28,6 @@ dependencies {
     testImplementation project(":spellchecker:morfologik")
 }
 
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn tasks.withType(Jar)

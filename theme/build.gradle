@@ -13,3 +13,5 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
 }
+
+makeModuleTask(loadProperties(file('plugin.properties')))

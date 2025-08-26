@@ -4,60 +4,55 @@ plugins {
     id 'maven-publish'
 }
 
-afterEvaluate {
-    def pluginPropsFile = file('plugin.properties')
-    if (pluginPropsFile.exists()) {
-        def moduleProp = new Properties()
-        pluginPropsFile.withInputStream { moduleProp.load(it) }
-        jar {
-            archiveFileName = moduleProp.packageName + '.jar'
-            destinationDirectory = rootProject.layout.buildDirectory.dir("modules")
-            outputs.file(destinationDirectory.get().file(archiveFileName.get()))
-            from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-            from sourceSets.main.output
-            manifest {
-                attributes('License': 'GNU Public License version 3 or later',
-                        'Implementation-Version': moduleProp.Version,
-                        'OmegaT-Plugins': moduleProp.Class,
-                        'Plugin-Author': moduleProp.Author,
-                        'Plugin-Version': moduleProp.Version,
-                        'Plugin-Name': moduleProp.Name,
-                        'Plugin-Category': moduleProp.Category,
-                        'Plugin-Description': moduleProp.Description
-                )
-            }
-            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+ext.makeModuleTask = { moduleProp ->
+    jar {
+        archiveFileName = moduleProp.packageName + '.jar'
+        destinationDirectory = rootProject.layout.buildDirectory.dir("modules")
+        outputs.file(destinationDirectory.get().file(archiveFileName.get()))
+        from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        from sourceSets.main.output
+        manifest {
+            attributes('License': 'GNU Public License version 3 or later',
+                    'Implementation-Version': moduleProp.Version,
+                    'OmegaT-Plugins': moduleProp.Class,
+                    'Plugin-Author': moduleProp.Author,
+                    'Plugin-Version': moduleProp.Version,
+                    'Plugin-Name': moduleProp.Name,
+                    'Plugin-Category': moduleProp.Category,
+                    'Plugin-Description': moduleProp.Description
+            )
         }
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
 
-        publishing {
-            publications {
-                mavenJava(MavenPublication) { publication ->
-                    groupId = 'org.omegat'
-                    artifactId = moduleProp.packageName
-                    version = moduleProp.Version
-                    from components.java
+    publishing {
+        publications {
+            mavenJava(MavenPublication) { publication ->
+                groupId = 'org.omegat'
+                artifactId = moduleProp.packageName
+                version = moduleProp.Version
+                from components.java
 
-                    pom {
-                        name = moduleProp.Name
-                        description = moduleProp.Description
-                        url = 'https://omegat.org'
-                        scm {
-                            connection = "scm:git:https://github.com/omegat-org/omegat"
-                            developerConnection = "scm:git:https://github.com/omegat-org/omegat"
-                            url = "https://sourceforge.net/p/omegat/"
+                pom {
+                    name = moduleProp.Name
+                    description = moduleProp.Description
+                    url = 'https://omegat.org'
+                    scm {
+                        connection = "scm:git:https://github.com/omegat-org/omegat"
+                        developerConnection = "scm:git:https://github.com/omegat-org/omegat"
+                        url = "https://sourceforge.net/p/omegat/"
+                    }
+                    licenses {
+                        license {
+                            name = 'The GNU General Public License, Version 3.0'
+                            url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
                         }
-                        licenses {
-                            license {
-                                name = 'The GNU General Public License, Version 3.0'
-                                url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
-                            }
-                        }
-                        developers {
-                            developer {
-                                id = 'omegat'
-                                name = 'OmegaT Developers'
-                                email = 'info@omegat.org'
-                            }
+                    }
+                    developers {
+                        developer {
+                            id = 'omegat'
+                            name = 'OmegaT Developers'
+                            email = 'info@omegat.org'
                         }
                     }
                 }

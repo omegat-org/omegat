@@ -1,5 +1,9 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -22,9 +26,3 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
     testImplementation(libs.commons.io)
 }
-
-tasks.withType(JavaCompile).configureEach {
-    options.errorprone.enabled = false
-}
-
-makeModuleTask(loadProperties(file('plugin.properties')))

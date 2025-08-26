@@ -23,4 +23,3 @@ dependencies {
     testImplementation(testFixtures(project.rootProject))
 }
 
-makeModuleTask(loadProperties(file('plugin.properties')))

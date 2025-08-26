@@ -23,11 +23,9 @@ dependencies {
     }
     testImplementation(libs.languagetool.core)
     testImplementation(libs.commons.io)
-    testImplementation(project(":language-modules:de"))
-    testImplementation(project(":language-modules:fr"))
+    testImplementation(libs.languagetool.de)
 }
 
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn project(':language-modules:de').tasks.withType(Jar)

@@ -30,7 +30,6 @@ dependencies {
     testImplementation(libs.commons.io)
 }
 
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn tasks.withType(Jar)

@@ -2,10 +2,6 @@ plugins {
     id 'org.omegat.module'
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     compileOnly(project.rootProject)
     if (providedModuleLibsDir.directory) {

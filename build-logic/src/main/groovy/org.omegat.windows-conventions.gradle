@@ -97,7 +97,7 @@ ext.makeWinTask = { args ->
         commandArgs.addAll(
                 '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl').toString() :
                 'http://time.certum.pl/',
-                '-n', application.applicationName, '-i', getProperty('org.omegat.url'), '-h', 'sha256',
+                '-n', getProperty('org.omegat.appName').toString(), '-i', getProperty('org.omegat.url').toString(), '-h', 'sha256',
                 '-in', installerWinExe.get().toString(),
                 '-out', signedWinExe.get().toString()
         )

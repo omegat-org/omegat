@@ -32,8 +32,8 @@ publishing {
                 developers {
                     developer {
                         id = 'omegat'
-                        name = 'OmegaT Developers'
-                        email = 'info@omegat.org'
+                        name = getProperty('org.omegat.developer.name')
+                        email = getProperty('org.omegat.developer.email')
                     }
                 }
             }

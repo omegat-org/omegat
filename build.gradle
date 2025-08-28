@@ -486,12 +486,12 @@ processResources {
     }
 }
 
-def manualLangs = project.property("manualLangs").split(',')
+def manualLangs = project.property("org.omegat.manualLangs").split(',')
 manualLangs.each { lang ->
     makeDocumentationTasks(lang)
 }
 
-def firstStepLangs = project.property("firstStepLangs").split(',')
+def firstStepLangs = project.property("org.omegat.firstStepLangs").split(',')
 firstStepLangs.each { lang ->
     makeFirstStepTask(lang)
 }

@@ -58,8 +58,8 @@ launch4j {
     copyright = "The GNU General Public License, Version 3.0"
     version = omtVersion.version
     textVersion = omtVersion.version
-    companyName = getProperty('org.omegat.vendor')
-    fileDescription = getProperty('org.omegat.shortDescription')
+    companyName = project.property('org.omegat.vendor')
+    fileDescription = project.property('org.omegat.shortDescription')
     restartOnCrash = false
     stayAlive = false
     priority = 'normal'
@@ -97,7 +97,7 @@ ext.makeWinTask = { args ->
         commandArgs.addAll(
                 '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl').toString() :
                 'http://time.certum.pl/',
-                '-n', getProperty('org.omegat.appName').toString(), '-i', getProperty('org.omegat.url').toString(), '-h', 'sha256',
+                '-n', project.property('org.omegat.appName').toString(), '-i', project.property('org.omegat.url').toString(), '-h', 'sha256',
                 '-in', installerWinExe.get().toString(),
                 '-out', signedWinExe.get().toString()
         )

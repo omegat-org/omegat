@@ -9,15 +9,15 @@ plugins {
 publishing {
     publications {
         mavenJava(MavenPublication) { publication ->
-            groupId = getProperty('org.omegat.groupId')
-            artifactId = getProperty('org.omegat.artifactId')
+            groupId = project.property('org.omegat.groupId')
+            artifactId = project.property('org.omegat.artifactId')
             version = mavenStyleVersion
             from components.java
 
             pom {
-                name = getProperty('org.omegat.appName')
-                description = getProperty('org.omegat.distDescription')
-                url = getProperty('org.omegat.url')
+                name = project.property('org.omegat.appName')
+                description = project.property('org.omegat.distDescription')
+                url = project.property('org.omegat.url')
                 scm {
                     connection = "scm:git:https://github.com/omegat-org/omegat"
                     developerConnection = "scm:git:https://github.com/omegat-org/omegat"
@@ -32,8 +32,8 @@ publishing {
                 developers {
                     developer {
                         id = 'omegat'
-                        name = getProperty('org.omegat.developer.name')
-                        email = getProperty('org.omegat.developer.email')
+                        name = project.property('org.omegat.developer.name')
+                        email = project.property('org.omegat.developer.email')
                     }
                 }
             }

@@ -4,8 +4,6 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
-import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.testing.Test
 
@@ -14,7 +12,6 @@ class OmegatModulePlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.plugins.apply('java-library')
-        project.plugins.apply('maven-publish')
 
         project.repositories {
             mavenCentral()
@@ -59,9 +56,6 @@ class OmegatModulePlugin implements Plugin<Project> {
         }
 
         configureTestEnvironment(project)
-
-        // Configure Maven publishing
-        configureMavenPublishing(project)
     }
 
     private Map<String, String> buildManifestAttributes(Project project) {
@@ -110,63 +104,6 @@ class OmegatModulePlugin implements Plugin<Project> {
             useJUnit()
             workingDir project.rootProject.projectDir
             systemProperty 'java.util.logging.config.file', project.rootProject.layout.settingsDirectory.file("config/test/logger.properties").asFile
-        }
-    }
-
-    private void configureMavenPublishing(Project project) {
-        project.extensions.configure(PublishingExtension) { publishing ->
-            publishing.publications {
-                maven(MavenPublication) { publication ->
-                    from project.components.java
-                    groupId = 'org.omegat'
-                    artifactId = getPropertyOrDefault(project, 'org.omegat.module.packageName', project.name)
-                    version = getPropertyOrDefault(project, 'org.omegat.module.version', null)
-
-                    // Use the custom jar from modules directory
-                    artifact project.tasks.jar
-
-                    pom {
-                        name = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
-                        description = getPropertyOrDefault(project, 'org.omegat.module.description', 'OmegaT Module')
-                        url = 'https://omegat.org'
-                        scm {
-                            connection = "scm:git:https://github.com/omegat-org/omegat"
-                            developerConnection = "scm:git:https://github.com/omegat-org/omegat"
-                            url = "https://sourceforge.net/p/omegat/"
-                        }
-                        licenses {
-                            license {
-                                name = 'The GNU General Public License, Version 3.0'
-                                url = 'https://www.gnu.org/licenses/licenses/gpl-3.0.html'
-                            }
-                        }
-                        developers {
-                            developer {
-                                id = 'omegat'
-                                name = 'OmegaT Developers'
-                                email = 'info@omegat.org'
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // Add a task to print publication info
-        project.tasks.register('printPublicationInfo') {
-            group = 'publishing'
-            description = 'Prints information about the Maven publication'
-
-            doLast {
-                project.publishing.publications.maven { publication ->
-                    println "Publication Info:"
-                    println "  Group ID: ${publication.groupId}"
-                    println "  Artifact ID: ${publication.artifactId}"
-                    println "  Version: ${publication.version}"
-                    println "  POM Name: ${publication.pom.name.get()}"
-                    println "  POM Description: ${publication.pom.description.get()}"
-                }
-            }
         }
     }
 

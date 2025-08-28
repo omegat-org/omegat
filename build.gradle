@@ -20,8 +20,8 @@ plugins {
 }
 
 application {
-    applicationName = appName
-    mainClass = mainClassName
+    applicationName = getProperty('org.omegat.appName')
+    mainClass = getProperty('org.omegat.mainClassName')
 }
 
 def os = osdetector.os
@@ -302,7 +302,7 @@ jar {
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
         pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
-    archiveFileName.set(omegatJarFilename)
+    archiveFileName.set(getProperty('org.omegat.omegatJarFilename'))
 }
 
 test {
@@ -356,7 +356,7 @@ distributions {
             from(layout.settingsDirectory.dir('release/linux-specific')) {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : omegatJarFilename
+                        JAR_SUBST           : getProperty('org.omegat.omegatJarFilename')
                 ]
                 filePermissions {
                     unix(0755)
@@ -365,7 +365,7 @@ distributions {
             from(layout.settingsDirectory.dir('release/win32-specific')) {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : omegatJarFilename
+                        JAR_SUBST           : getProperty('org.omegat.omegatJarFilename')
                 ])
             }
             from(layout.settingsDirectory.dir('lib/licenses')) {

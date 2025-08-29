@@ -20,8 +20,8 @@ plugins {
 }
 
 application {
-    applicationName = getProperty('org.omegat.appName')
-    mainClass = getProperty('org.omegat.mainClassName')
+    applicationName = project.property('org.omegat.appName')
+    mainClass = project.property('org.omegat.mainClassName')
 }
 
 def os = osdetector.os

@@ -32,7 +32,7 @@ import org.omegat.core.spellchecker.AbstractHunspellDictionary;
 
 public class ArabicHunspellDictionary extends AbstractHunspellDictionary {
 
-    private static final String DICTIONARY_BASE = "/org/omegat/languages/ar/";
+    private static final String DICTIONARY_BASE = "/org/languagetool/resource/ar/hunspell/";
     private static final String[] LANG = {"ar"};
 
     @Override

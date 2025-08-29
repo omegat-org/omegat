@@ -33,8 +33,8 @@ import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
 public class HunspellTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "ar";
-    private static final String GOOD = "كتاب جميل"; // Beautiful book
-    private static final String BAD = "كتاپ جمیل"; // Same with Persian characters (spelling errors)
+    private static final String GOOD = "من"; // From/who (most common Arabic word)
+    private static final String BAD = "مں"; // Same with incorrect character
 
     @Test
     public void testDictionary() throws Exception {

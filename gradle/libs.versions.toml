@@ -5,6 +5,7 @@ groovy = "4.0.28"
 junit = "4.13.2"
 commons_lang3 = "3.18.0"
 commons_io = "2.19.0"
+commons_codec = "1.17.1"
 commons_text = "1.14.0"
 commons_validator = "1.10.0"
 jsoup = "1.21.2"
@@ -52,7 +53,7 @@ jna = "5.13.0"
 jfa = "1.2.0"
 tipoftheday = "0.5.0"
 flatlaf="3.6.1"
-assertj_swing_junit = "4.0.0-beta-2"
+assertj_swing_junit = "4.0.0-beta-3"
 morfologik = "2.1.9"
 swing_extra_locales = "0.3.3"
 mockito = "5.19.0"
@@ -68,6 +69,7 @@ commons-io = {group = "commons-io", name = "commons-io", version.ref = "commons_
 commons-lang3 = {group = "org.apache.commons", name = "commons-lang3", version.ref = "commons_lang3"}
 commons-text = {group = "org.apache.commons", name = "commons-text", version.ref = "commons_text"}
 commons-validator = {group = "commons-validator", name = "commons-validator", version.ref = "commons_validator"}
+commons-codec = {group = "commons-codec", name = "commons-codec",  version.ref = "commons_codec"}
 jsoup = {group = "org.jsoup", name = "jsoup", version.ref = "jsoup"}
 icu4j = {group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j"}
 stax2-api = {group = "org.codehaus.woodstox", name = "stax2-api", version.ref = "stax2api"}

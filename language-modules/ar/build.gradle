@@ -24,10 +24,12 @@ dependencies {
     testRuntimeOnly(libs.json)
     testRuntimeOnly(libs.protobuf)
     testImplementation(project(":spellchecker:lucene"))
+    testImplementation(project(":spellchecker:morfologik"))
     testRuntimeOnly(libs.commons.io)
 }
 
 test {
     dependsOn tasks.withType(Jar)
     dependsOn project(":spellchecker:lucene").tasks.withType(Jar)
+    dependsOn project(":spellchecker:morfologik").tasks.withType(Jar)
 }

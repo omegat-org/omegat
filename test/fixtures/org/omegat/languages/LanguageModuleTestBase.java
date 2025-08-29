@@ -31,6 +31,7 @@ import org.languagetool.JLanguageTool;
 import org.omegat.core.Core;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.languagetools.LanguageDataBroker;
@@ -50,6 +51,7 @@ public class LanguageModuleTestBase {
 
     @BeforeClass
     public static void setUpClass() throws IOException {
+        TestCoreState.resetState();
         JLanguageTool.setDataBroker(new LanguageDataBroker());
         PluginUtils.loadPlugins(Collections.emptyMap());
         tmpDir = Files.createTempDirectory("omegat");
@@ -69,12 +71,10 @@ public class LanguageModuleTestBase {
             }
         });
         assertThat(checker.initialize()).as("Success initialize").isTrue();
-        if (good != null) {
-            assertThat(checker.isCorrect(good)).as("Spell check for correct word").isTrue();
-        }
-        if (bad != null) {
-            assertThat(checker.isCorrect(bad)).as("Spell check for bad word").isFalse();
-        }
+        boolean goodResult = good == null || checker.isCorrect(good);
+        boolean badResult = bad == null || !checker.isCorrect(bad);
+        assertThat(goodResult && badResult).as("Speller detects correctly for good (%s) and bad (%s)",
+                goodResult ? "PASS" : "FAIL", badResult ? "PASS" : "FAIL").isTrue();
     }
 
     @AfterClass

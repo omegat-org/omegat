@@ -25,12 +25,13 @@
 package org.omegat.languages.ar;
 
 import org.junit.Test;
-
+import org.languagetool.rules.spelling.morfologik.MorfologikSpeller;
 import org.omegat.languages.LanguageModuleTestBase;
 import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
+import org.omegat.spellchecker.morfologik.MorfologikSpellchecker;
 
 
-public class HunspellTest extends LanguageModuleTestBase {
+public class MorfologikTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "ar";
     private static final String GOOD = "كتاب جميل"; // Beautiful book
@@ -38,6 +39,6 @@ public class HunspellTest extends LanguageModuleTestBase {
 
     @Test
     public void testDictionary() throws Exception {
-        testDictionaryHelper(new LuceneHunSpellChecker(), LANGUAGE, GOOD, BAD);
+        testDictionaryHelper(new MorfologikSpellchecker(), LANGUAGE, GOOD, BAD);
     }
 }

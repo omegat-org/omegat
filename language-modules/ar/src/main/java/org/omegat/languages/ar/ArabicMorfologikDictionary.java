@@ -22,31 +22,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
 package org.omegat.languages.ar;
 
-import org.omegat.core.spellchecker.SpellCheckDictionaryType;
-import org.omegat.core.spellchecker.SpellCheckerManager;
-import org.omegat.languagetools.LanguageManager;
+import org.languagetool.JLanguageTool;
+import org.omegat.core.spellchecker.AbstractMorfologikDictionary;
+import org.omegat.core.spellchecker.ISpellCheckerDictionary;
 
-public final class ArabicPlugin {
+import java.io.InputStream;
 
-    private static final String ARABIC_LT = "org.languagetool.language.Arabic";
-    private static final String ARABIC_SCD = "org.omegat.languages.ar.ArabicHunspellDictionary";
-    private static final String ARABIC_MD = "org.omegat.languages.ar.ArabicMorfologikDictionary";
+public class ArabicMorfologikDictionary extends AbstractMorfologikDictionary implements ISpellCheckerDictionary,
+        AutoCloseable {
 
-    private ArabicPlugin() {
+    private static final String DICTIONARY_PATH = "/org/languagetool/resource/ar/";
+    private static final String[] DICTIONARY = {"arabic"};
+
+    @Override
+    protected String[] getDictionaries() {
+        return DICTIONARY;
     }
 
-    public static void loadPlugins() {
-        LanguageManager.registerLTLanguage("ar-AR", ARABIC_LT);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ar", SpellCheckDictionaryType.HUNSPELL,
-                ARABIC_SCD);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ar", SpellCheckDictionaryType.MORFOLOGIK,
-                ARABIC_MD);
+    @Override
+    protected InputStream getResourceAsStream(final String resource) {
+        return JLanguageTool.getDataBroker().getAsStream(DICTIONARY_PATH + resource);
     }
-
-    public static void unloadPlugins() {
-    }
-
 }

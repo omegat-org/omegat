@@ -56,15 +56,27 @@ import org.omegat.util.Preferences;
  */
 public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpellChecker {
 
+    // support two directory structures:
+    //  <lang>/index.aff
+    //   <lang>/index.dic
+    // or
+    //   <lang>.aff
+    //   <lang>.dic
+
     /**
      * affix file extension
      */
-    public static final String SC_AFFIX_FILENAME = "index.aff";
+    public static final String SC_AFFIX_EXT = ".aff";
 
     /**
      * dictionary file extension
      */
-    public static final String SC_DICTIONARY_FILENAME = "index.dic";
+    public static final String SC_DICTIONARY_EXT = ".dic";
+
+    /**
+     * default file name
+     */
+    public static final String SC_FILEBASE = "index";
 
     /**
      * Register plugins into OmegaT.
@@ -81,19 +93,30 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
 
     @Override
     protected Optional<ISpellCheckerProvider> initializeWithLanguage(final String language) {
-        // check that the dict exists
+        // check that the user dict exists
         String dictionaryDir = Preferences.getPreferenceDefault(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY,
                 SpellCheckerManager.getDefaultDictionaryDir().getPath());
-
-        File affixName = Path.of(dictionaryDir).resolve(Path.of(language)).resolve(SC_AFFIX_FILENAME).toFile();
-        File dictionaryName = Path.of(dictionaryDir).resolve(language).resolve(SC_DICTIONARY_FILENAME).toFile();
-
+        ISpellCheckerProvider result;
+        File affixName = Path.of(dictionaryDir).resolve(language + SC_AFFIX_EXT).toFile();
+        File dictionaryName = Path.of(dictionaryDir).resolve(language + SC_DICTIONARY_EXT).toFile();
+        // try <lang>.aff and <lang>.dic
         if (isInvalidFile(affixName) || isInvalidFile(dictionaryName)) {
-            return Optional.empty();
+            // try <lang>/index.aff and <lang>/index.dic
+            affixName = Path.of(dictionaryDir).resolve(language).resolve(SC_FILEBASE + SC_AFFIX_EXT).toFile();
+            dictionaryName = Path.of(dictionaryDir).resolve(language).resolve(SC_FILEBASE + SC_DICTIONARY_EXT).toFile();
         }
-
+        if (!isInvalidFile(affixName) && !isInvalidFile(dictionaryName)) {
+            try {
+                result = new LuceneProvider(dictionaryName, affixName);
+                return Optional.of(result);
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
+        // try bundled resources
+        Dictionary dictionary = SpellCheckerManager.getHunspellDictionary(language);
         try {
-            ISpellCheckerProvider result = new LuceneProvider(dictionaryName, affixName);
+            result = new LuceneProvider(dictionary);
             return Optional.of(result);
         } catch (Exception ex) {
             Log.log(ex);
@@ -105,6 +128,12 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         private final InputStream dictInputStream;
         private final InputStream affixInputStream;
         private final Hunspell hunspell;
+
+        private LuceneProvider(Dictionary dictionary) throws IOException, ParseException {
+            dictInputStream = null;
+            affixInputStream = null;
+            hunspell = new Hunspell(dictionary);
+        }
 
         private LuceneProvider(File dictName, File affixName) throws IOException, ParseException {
             Path tempDir = Path.of(FileUtils.getTempDirectoryPath());
@@ -132,8 +161,10 @@ public class LuceneHunSpellChecker extends AbstractSpellChecker implements ISpel
         @Override
         public void destroy() {
             try {
-                dictInputStream.close();
-                affixInputStream.close();
+                if (dictInputStream != null && affixInputStream != null) {
+                    dictInputStream.close();
+                    affixInputStream.close();
+                }
             } catch (Exception ignored) {
             }
         }

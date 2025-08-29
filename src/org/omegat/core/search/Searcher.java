@@ -510,7 +510,7 @@ public class Searcher {
     }
 
     /**
-     * Check if a specified entry should be found.
+     * Check if the specified entry should be found.
      *
      * @param srcText
      *            source text

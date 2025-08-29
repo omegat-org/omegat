@@ -27,7 +27,7 @@ package org.omegat.languages.ar;
 import org.junit.Test;
 
 import org.omegat.languages.LanguageModuleTestBase;
-import org.omegat.spellchecker.hunspell.HunSpellChecker;
+import org.omegat.spellchecker.lucene.LuceneHunSpellChecker;
 
 
 public class HunspellTest extends LanguageModuleTestBase {
@@ -37,6 +37,6 @@ public class HunspellTest extends LanguageModuleTestBase {
 
     @Test
     public void testDictionary() throws Exception {
-        testDictionaryHelper(new HunSpellChecker(), LANGUAGE, GOOD, null);
+        testDictionaryHelper(new LuceneHunSpellChecker(), LANGUAGE, GOOD, null);
     }
 }

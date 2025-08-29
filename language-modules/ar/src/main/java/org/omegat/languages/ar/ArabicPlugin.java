@@ -33,7 +33,6 @@ public final class ArabicPlugin {
 
     private static final String ARABIC_LT = "org.languagetool.language.Arabic";
     private static final String ARABIC_SCD = "org.omegat.languages.ar.ArabicHunspellDictionary";
-    private static final String ARABIC_MD = "org.omegat.languages.ar.ArabicMorfologikDictionary";
 
     private ArabicPlugin() {
     }
@@ -42,8 +41,6 @@ public final class ArabicPlugin {
         LanguageManager.registerLTLanguage("ar-AR", ARABIC_LT);
         SpellCheckerManager.registerSpellCheckerDictionaryProvider("ar", SpellCheckDictionaryType.HUNSPELL,
                 ARABIC_SCD);
-        SpellCheckerManager.registerSpellCheckerDictionaryProvider("ar", SpellCheckDictionaryType.MORFOLOGIK,
-                ARABIC_MD);
     }
 
     public static void unloadPlugins() {

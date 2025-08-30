@@ -5,6 +5,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
 
 class OmegatModulePlugin implements Plugin<Project> {
@@ -55,11 +56,16 @@ class OmegatModulePlugin implements Plugin<Project> {
             withJavadocJar()
         }
 
+        project.tasks.withType(JavaCompile).configureEach {
+            it.options.encoding = "UTF-8"
+            it.options.compilerArgs.addAll '-Xlint'
+        }
+
         configureTestEnvironment(project)
     }
 
-    private Map<String, String> buildManifestAttributes(Project project) {
-        def attributes = [:]
+    private static Map<String, String> buildManifestAttributes(Project project) {
+        def attributes = new HashMap<String, String>()
 
         // Standard OmegaT module attributes
         attributes['Implementation-Title'] = getPropertyOrDefault(project, 'org.omegat.module.name', project.name)
@@ -72,7 +78,7 @@ class OmegatModulePlugin implements Plugin<Project> {
         attributes['Built-By'] = System.getProperty('user.name')
         attributes['Built-Date'] = new Date().toString()
         attributes['Built-JDK'] = System.getProperty('java.version')
-        attributes['Created-By'] = "Gradle ${project.gradle.gradleVersion}"
+        attributes['Created-By'] = "Gradle ${project.gradle.gradleVersion}".toString()
 
         attributes['OmegaT-Plugins'] = project.property('org.omegat.module.class').toString()
         attributes['Plugin-Version'] =  project.version.toString()
@@ -95,7 +101,6 @@ class OmegatModulePlugin implements Plugin<Project> {
                 attributes[manifestKey] = value.toString()
             }
         }
-
         return attributes
     }
 

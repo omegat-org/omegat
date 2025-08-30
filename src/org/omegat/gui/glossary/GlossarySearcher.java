@@ -227,7 +227,11 @@ public class GlossarySearcher {
         String strLower = str.toLowerCase(srcLang.getLocale());
         if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
                 Preferences.GLOSSARY_STEMMING_DEFAULT)) {
-            return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
+            if (Preferences.isPreference(Preferences.TOKENIZER_STEMMING_FULL)) {
+                return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY_FULL);
+            } else {
+                return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
+            }
         } else {
             return tok.tokenizeVerbatim(strLower);
         }

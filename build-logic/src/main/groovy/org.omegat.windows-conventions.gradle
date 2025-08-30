@@ -72,6 +72,14 @@ launch4j {
     priority = 'normal'
 }
 
+def assetDir = findProperty('assetDir') ?: '../'
+def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
+def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
+def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
+tasks.register('win') {
+    description = 'Builds the Windows distributions.'
+    group = 'omegat distribution'
+}
 ext.makeWinTask = { args ->
     def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
@@ -79,8 +87,6 @@ ext.makeWinTask = { args ->
     def prepDistsTaskName = "${args.name}Prep"
     def genDistsTaskName = "${args.name}Gen"
     def distsTaskName = "${args.name}"
-    boolean execWinTasks = execWinDistTask && args.jrePath != null && !args.jrePath.empty
-    def parentTask = tasks.byName "${args.parentTask}"
 
     tasks.register(prepDistsTaskName, Sync) {
         doFirst {
@@ -151,5 +157,9 @@ ext.makeWinTask = { args ->
         dependsOn genDistsTaskName
     }
     assemble.dependsOn distsTaskName
-    parentTask.dependsOn distsTaskNam
+    tasks.win.dependsOn distsTaskName
 }
+makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
+makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
+makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE)

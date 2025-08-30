@@ -27,9 +27,9 @@ macCodesignIdentity=
 ## Mac notarization
 macNotarizationUsername=
 
-## Sonatype OSSRH publishing (synced to Maven Central)
-ossrhUser=
-ossrhKey=
+## Sonatype Central publishing (synced to Maven Central)
+ossrhUsername=
+ossrhPassword=
 
 ## Signing for Maven Central
 #
@@ -51,15 +51,3 @@ signing.secretKeyRingFile=
 sourceforgeWebUser=
 # Not required when using SSH auth
 sourceforgeWebPassword=
-
-## Uncomment when force skipping build of documentation
-## equivalent with command line option -PforceSkipDocumentBuild=1 or
-## an environment variable ORG_GRADLE_PROJECT_forceSkipDocumentBuild=1
-# forceSkipDocumentBuild=1
-
-## Speed-up build process
-## Caution: parallel execution may lead test failures
-org.gradle.configuration-cache=false
-org.gradle.caching=true
-org.gradle.configureondemand=true
-org.gradle.parallel=true

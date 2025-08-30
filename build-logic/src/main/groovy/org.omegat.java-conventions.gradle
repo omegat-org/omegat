@@ -1,10 +1,8 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
     id 'checkstyle'
     id 'jacoco'
     id 'pmd'
-    id 'com.diffplug.spotless'
     id 'com.github.spotbugs'
     id 'org.omegat.common-utilities'
     id 'net.ltgt.errorprone'
@@ -116,14 +114,6 @@ checkstyle {
     toolVersion = libs.versions.checkstyle.get()
 }
 checkstyleMain.exclude '**/gen/**'
-
-spotless {
-    enforceCheck = false
-    java {
-        eclipse().configFile layout.settingsDirectory.file("config/spotless/eclipse-formatting.xml")
-        removeUnusedImports()
-    }
-}
 
 tasks.withType(Copy).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE

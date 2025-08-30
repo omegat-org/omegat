@@ -36,11 +36,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -576,12 +573,7 @@ public abstract class TestFilterBase extends TestCore {
                 throws Exception {
             Core.setProject(this);
 
-            Set<String> existSource = new HashSet<String>();
-            Set<EntryKey> existKeys = new HashSet<EntryKey>();
-            Map<String, ExternalTMX> transMemories = new HashMap<>();
-
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
-                    transMemories);
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(this, config);
 
             TestFileInfo fi = new TestFileInfo();
             fi.filePath = file;
@@ -592,8 +584,8 @@ public abstract class TestFilterBase extends TestCore {
 
             loadFilesCallback.fileFinished();
 
-            if (!transMemories.isEmpty()) {
-                fi.referenceEntries = transMemories.values().iterator().next();
+            if (!getTransMemories().isEmpty()) {
+                fi.referenceEntries = getTransMemories().values().iterator().next();
             }
 
             return fi;

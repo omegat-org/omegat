@@ -52,7 +52,7 @@ import org.xml.sax.SAXParseException;
 
 /**
  * Class for store data from project_save.tmx.
- *
+ * <p>
  * Orphaned or non-orphaned translation calculated by RealProject.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -77,14 +77,14 @@ public class ProjectTMX {
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    protected Map<String, TMXEntry> defaults;
+    protected final Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
      *
      * It must be used with synchronization around ProjectTMX.
      */
-    protected Map<EntryKey, TMXEntry> alternatives;
+    protected final Map<EntryKey, TMXEntry> alternatives;
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
@@ -451,24 +451,41 @@ public class ProjectTMX {
     /**
      * Returns the collection of TMX entries that have an alternative
      * translation.
-     * 
+     *
      * @return alternative entries
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
     }
 
+    /**
+     * This interface is used as a callback mechanism to check if specific entries or source texts
+     * exist in a project. It is typically utilized to manage data consistency or handle orphaned entries.
+     */
     public interface CheckOrphanedCallback {
         boolean existEntryInProject(EntryKey key);
 
         boolean existSourceInProject(String src);
-        
+
         void clear();
     }
 
+    /**
+     * Replaces the content of the current {@code ProjectTMX} instance with
+     * the content of the provided {@code ProjectTMX} instance.
+     * <p>
+     * This includes replacing the defaults and alternatives mappings with
+     * those from the given instance.
+     *
+     * @param tmx
+     *         the {@code ProjectTMX} instance whose content will replace the
+     *         current content
+     */
     public synchronized void replaceContent(ProjectTMX tmx) {
-        defaults = tmx.defaults;
-        alternatives = tmx.alternatives;
+        defaults.clear();
+        defaults.putAll(tmx.defaults);
+        alternatives.clear();
+        alternatives.putAll(tmx.alternatives);
     }
 
     @Override

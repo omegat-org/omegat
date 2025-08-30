@@ -109,6 +109,7 @@ import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DelegatingComboBoxRenderer;
+import org.omegat.util.gui.FontUtil;
 import org.omegat.util.gui.RoundedCornerBorder;
 import org.omegat.util.gui.Styles;
 
@@ -541,7 +542,7 @@ public class AlignPanelController {
 
         alignPanel.table.setTransferHandler(new AlignTransferHandler());
         alignPanel.table.addPropertyChangeListener("dropLocation", new DropLocationListener());
-        alignPanel.table.setFont(Core.getMainWindow().getApplicationFont());
+        alignPanel.table.setFont(FontUtil.getScaledFont());
         CoreEvents.registerFontChangedEventListener(alignPanel.table::setFont);
 
         // Set initial state

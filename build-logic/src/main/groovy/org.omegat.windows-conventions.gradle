@@ -5,7 +5,8 @@ plugins {
     id 'edu.sc.seis.launch4j'
     id 'org.omegat.version-conventions'
 }
-def execWinDistTask = (exePresent('iscc') || exePresent('docker') || exePresent('nerdctl'))
+def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
+def execWinDistTask = (exePresent('iscc') || execContainerTasks)
 // Starting from Nov 2022, certification provider force to use HSM to
 // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
 // standards will require private keys for standard code signing

@@ -5,6 +5,7 @@ plugins {
     id 'org.omegat.common-utilities'
     id 'maven-publish'
     id 'signing'
+    id 'org.hidetake.ssh'
 }
 
 def documentRootDir = file('src_docs')
@@ -210,4 +211,35 @@ ext.makeFirstStepTask = { lang ->
     }
     firstSteps.dependsOn(firstStepsHtml)
     firstSteps.dependsOn(firstStepsHtmlFinally)
+}
+
+ext.htdocs = '/home/project-web/omegat/htdocs'
+
+ext.publishAtomically = { args ->
+    tasks.register("publish${args.name.capitalize()}", Exec) {
+        description = "Copies ${args.name} to SourceForge web."
+        dependsOn args.sourceTask
+        group = 'omegat release'
+        doLast {
+            ssh.run {
+                session(remotes.sourceforgeWeb) {
+                    def timestamp = new Date().format('yyyyMMddHHmmss')
+                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
+                    def tempDir = "${targetDir}-temp-${timestamp}"
+                    sftp {
+                        cd htdocs
+                        mkdir tempDir
+                    }
+                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
+                    sftp {
+                        cd htdocs
+                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
+                        catch (ignored) {}
+                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
+                        rmdir tempDir
+                    }
+                }
+            }
+        }
+    }
 }

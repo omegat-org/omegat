@@ -6,49 +6,18 @@ plugins {
     id 'org.hidetake.ssh'
 }
 
-ext.htdocs = '/home/project-web/omegat/htdocs'
-
-ext.publishAtomically = { args ->
-    tasks.register("publish${args.name.capitalize()}", Exec) {
-        description = "Copies ${args.name} to SourceForge web."
-        dependsOn args.sourceTask
-        group = 'omegat release'
-        doLast {
-            ssh.run {
-                session(remotes.sourceforgeWeb) {
-                    def timestamp = new Date().format('yyyyMMddHHmmss')
-                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
-                    def tempDir = "${targetDir}-temp-${timestamp}"
-                    sftp {
-                        cd htdocs
-                        mkdir tempDir
-                    }
-                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
-                    sftp {
-                        cd htdocs
-                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
-                        catch (ignored) {}
-                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
-                        rmdir tempDir
-                    }
-                }
-            }
-        }
-    }
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) { publication ->
-            groupId = 'org.omegat'
-            artifactId = 'omegat'
+            groupId = project.property('org.omegat.groupId')
+            artifactId = project.property('org.omegat.artifactId')
             version = mavenStyleVersion
             from components.java
 
             pom {
-                name = 'OmegaT'
-                description = distDescription
-                url = 'https://omegat.org'
+                name = project.property('org.omegat.appName')
+                description = project.property('org.omegat.distDescription')
+                url = project.property('org.omegat.url')
                 scm {
                     connection = "scm:git:https://github.com/omegat-org/omegat"
                     developerConnection = "scm:git:https://github.com/omegat-org/omegat"
@@ -63,8 +32,8 @@ publishing {
                 developers {
                     developer {
                         id = 'omegat'
-                        name = 'OmegaT Developers'
-                        email = 'info@omegat.org'
+                        name = project.property('org.omegat.developer.name')
+                        email = project.property('org.omegat.developer.email')
                     }
                 }
             }

@@ -19,6 +19,7 @@ ext.makeModuleTask = { moduleProp ->
                     'Plugin-Version': moduleProp.Version,
                     'Plugin-Name': moduleProp.Name,
                     'Plugin-Category': moduleProp.Category,
+                    'Plugin-Link': 'https://www.omegat.org/',
                     'Plugin-Description': moduleProp.Description
             )
         }

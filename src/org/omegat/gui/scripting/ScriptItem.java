@@ -47,6 +47,8 @@ import java.util.regex.MatchResult;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.util.LinebreakPreservingReader;
 
 /**
@@ -62,7 +64,7 @@ public class ScriptItem implements Comparable<ScriptItem> {
     protected static final String EDITOR_SCRIPT = "<editor script>";
     private static final String PROPERTIES = "properties/";
 
-    public ScriptItem(String scriptSource) {
+    public ScriptItem(@NotNull String scriptSource) {
         mSource = Optional.of(scriptSource);
         mFile = Optional.empty();
     }
@@ -75,6 +77,12 @@ public class ScriptItem implements Comparable<ScriptItem> {
             return;
         }
 
+        initResourceBundle(scriptFile);
+
+    }
+
+    @VisibleForTesting
+    void initResourceBundle(File scriptFile) {
         try {
             ClassLoader loader = new URLClassLoader(new URL[]{scriptFile.getParentFile().toURI().toURL()});
             String shortName = FilenameUtils.removeExtension(scriptFile.getName());
@@ -92,17 +100,26 @@ public class ScriptItem implements Comparable<ScriptItem> {
         }
     }
 
-    private void scanFileForDescription(File file) {
-        try (Scanner scan = new Scanner(file, StandardCharsets.UTF_8.name())) {
-            scan.findInLine(":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)");
+    @VisibleForTesting
+    static final String SCAN_PATTERN = ":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)";
+
+    @VisibleForTesting
+    void scanFileForDescription(File file) {
+        try (Scanner scan = getScanner(file)) {
+            scan.findInLine(SCAN_PATTERN);
             MatchResult results = scan.match();
             mScriptName = results.group(1).trim();
             mDescription = results.group(2).trim();
         } catch (IllegalStateException e) {
             /* bad luck */
-        } catch (FileNotFoundException e) {
+        } catch (IOException ignored) {
             /* ignore - it should not happen here */
         }
+    }
+
+    @VisibleForTesting
+    Scanner getScanner(File file) throws IOException {
+        return new Scanner(file, StandardCharsets.UTF_8);
     }
 
     public ResourceBundle getResourceBundle() {
@@ -203,8 +220,11 @@ public class ScriptItem implements Comparable<ScriptItem> {
         return sb.toString();
     }
 
-    private LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file)
-            throws FileNotFoundException, UnsupportedEncodingException {
+    @VisibleForTesting
+    LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) throws IOException {
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found: " + file.getAbsolutePath());
+        }
         InputStream is = new FileInputStream(file);
         InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
         BufferedReader in = new BufferedReader(isr);

@@ -37,12 +37,13 @@ import org.omegat.util.PluginInstaller;
 public class PluginInfoTableModel extends DefaultTableModel {
     private static final long serialVersionUID = 5345248154613009633L;
 
-    public static final int COLUMN_STAT = 0;
+    public static final int COLUMN_NAME = 0;
     public static final int COLUMN_CATEGORY = 1;
-    public static final int COLUMN_NAME = 2;
 
-    private static final String[] COLUMN_NAMES = { "PREFS_PLUGINS_COL_STAT", "PREFS_PLUGINS_COL_CATEGORY",
-            "PREFS_PLUGINS_COL_NAME"};
+    private static final String[] COLUMN_NAMES = {
+            "PREFS_PLUGINS_COL_NAME",
+            "PREFS_PLUGINS_COL_CATEGORY"
+    };
 
     private final List<PluginInformation> listPlugins;
 
@@ -90,9 +91,6 @@ public class PluginInfoTableModel extends DefaultTableModel {
             break;
         case COLUMN_CATEGORY:
             returnValue = plugin.getCategory().getLocalizedValue();
-            break;
-        case COLUMN_STAT:
-            returnValue = plugin.getStatus().getLocalizedValue();
             break;
         default:
             throw new IllegalArgumentException("Invalid column index");

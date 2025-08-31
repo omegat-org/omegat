@@ -54,8 +54,6 @@ import org.omegat.util.gui.TableColumnSizer;
  */
 public class PluginsPreferencesController extends BasePreferencesController {
 
-    private static final int STATUS_COLUMN_WIDTH = 50;
-    private static final int NAME_COLUMN_WIDTH = 350;
     private static final int TABLE_WIDTH = 450;
     private static final int TABLE_HEIGHT = 300;
 
@@ -133,10 +131,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tablePluginsInfo.setModel(model);
         TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
         panel.tablePluginsInfo.setRowSorter(sorter);
-        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_STAT)
-                        .setPreferredWidth(STATUS_COLUMN_WIDTH);
-        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_NAME)
-                        .setPreferredWidth(NAME_COLUMN_WIDTH);
 
         panel.scrollTable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         panel.scrollTable.getViewport().setViewSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));

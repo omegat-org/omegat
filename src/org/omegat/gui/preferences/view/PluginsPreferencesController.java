@@ -54,6 +54,17 @@ import org.omegat.util.gui.TableColumnSizer;
  */
 public class PluginsPreferencesController extends BasePreferencesController {
 
+    private static final int STATUS_COLUMN_WIDTH = 50;
+    private static final int NAME_COLUMN_WIDTH = 350;
+    private static final int TABLE_WIDTH = 450;
+    private static final int TABLE_HEIGHT = 300;
+
+    private static final String LABEL_AUTHOR = "PREFS_PLUGINS_LABEL_AUTHOR";
+    private static final String LABEL_AUTHOR_UNKNOWN = "PREFS_PLUGINS_LABEL_AUTHOR_UNKNOWN";
+    private static final String LABEL_CATEGORY = "PREFS_PLUGINS_LABEL_CATEGORY";
+    private static final String LABEL_VERSION = "PREFS_PLUGINS_LABEL_VERSION";
+    private static final String LABEL_HOMEPAGE = "PREFS_PLUGINS_LABEL_HOMEPAGE";
+
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane pluginDetailsPane;
@@ -67,22 +78,26 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private static String formatDetailText(PluginInformation info) {
         StringBuilder sb = new StringBuilder();
         sb.append("<h1>").append(info.getName()).append("</h1>");
-        sb.append("<h4>Author: ");
+        sb.append("<h4>").append(OStrings.getString(LABEL_AUTHOR)).append(": ");
         if (info.getAuthor() != null) {
             sb.append(info.getAuthor()).append("<br/>");
         } else {
-            sb.append("Unknown<br/>");
+            sb.append(OStrings.getString(LABEL_AUTHOR_UNKNOWN)).append("<br/>");
         }
         if (info.getVersion() != null) {
-            sb.append("Version: ").append(info.getVersion()).append("<br/>");
+            sb.append(OStrings.getString(LABEL_VERSION)).append(": ");
+            sb.append(info.getVersion()).append("<br/>");
         }
-        sb.append(info.getCategory());
+        sb.append(OStrings.getString(LABEL_CATEGORY)).append(": ");
+        sb.append(info.getCategory().getLocalizedValue());
         sb.append("</h4>");
         if (info.getDescription() != null) {
             sb.append("<p>").append(info.getDescription()).append("</p>");
         }
         if (info.getLink() != null) {
-            sb.append("<br/><div><a href=\"").append(info.getLink()).append("\">Plugin homepage</a></div>");
+            sb.append("<br/><div>");
+            sb.append("<a href=\"").append(info.getLink()).append("\">");
+            sb.append(OStrings.getString(LABEL_HOMEPAGE)).append("</a></div>");
         }
         return sb.toString();
     }
@@ -118,11 +133,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tablePluginsInfo.setModel(model);
         TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
         panel.tablePluginsInfo.setRowSorter(sorter);
-        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_NAME).setPreferredWidth(100);
-        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_VERSION).setPreferredWidth(50);
+        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_STAT)
+                        .setPreferredWidth(STATUS_COLUMN_WIDTH);
+        panel.tablePluginsInfo.getColumnModel().getColumn(PluginInfoTableModel.COLUMN_NAME)
+                        .setPreferredWidth(NAME_COLUMN_WIDTH);
 
         panel.scrollTable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        panel.scrollTable.getViewport().setViewSize(new Dimension(250, 350));
+        panel.scrollTable.getViewport().setViewSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
 
         panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
         panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());

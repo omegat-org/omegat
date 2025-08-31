@@ -52,6 +52,7 @@ public class PluginsPreferencesPanel extends JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jSplitPane1 = new javax.swing.JSplitPane();
         panelPluginsInfo = new javax.swing.JPanel();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
@@ -67,8 +68,14 @@ public class PluginsPreferencesPanel extends JPanel {
 
         jPanel1.setMaximumSize(new java.awt.Dimension(65534, 600));
         jPanel1.setMinimumSize(new java.awt.Dimension(200, 23));
+        jPanel1.setPreferredSize(new java.awt.Dimension(605, 300));
         jPanel1.setLayout(new java.awt.GridLayout(1, 2));
 
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(605, 200));
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(605, 300));
+
+        panelPluginsInfo.setMinimumSize(new java.awt.Dimension(400, 200));
+        panelPluginsInfo.setPreferredSize(new java.awt.Dimension(455, 200));
         panelPluginsInfo.setLayout(new java.awt.GridLayout(1, 0));
 
         scrollTable.setPreferredSize(new java.awt.Dimension(452, 452));
@@ -79,14 +86,18 @@ public class PluginsPreferencesPanel extends JPanel {
 
         panelPluginsInfo.add(scrollTable);
 
-        jPanel1.add(panelPluginsInfo);
+        jSplitPane1.setLeftComponent(panelPluginsInfo);
 
-        panelPluginDetails.setPreferredSize(new java.awt.Dimension(400, 0));
+        panelPluginDetails.setMinimumSize(new java.awt.Dimension(180, 200));
+        panelPluginDetails.setPreferredSize(new java.awt.Dimension(180, 300));
         panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
-        jPanel1.add(panelPluginDetails);
+        jSplitPane1.setRightComponent(panelPluginDetails);
+
+        jPanel1.add(jSplitPane1);
 
         add(jPanel1);
 
+        jPanel2.setMaximumSize(new java.awt.Dimension(32767, 64));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
@@ -107,6 +118,7 @@ public class PluginsPreferencesPanel extends JPanel {
     javax.swing.JButton installFromDiskButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane1;
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
     javax.swing.JScrollPane scrollTable;

@@ -40,11 +40,9 @@ public class PluginInfoTableModel extends DefaultTableModel {
     public static final int COLUMN_STAT = 0;
     public static final int COLUMN_CATEGORY = 1;
     public static final int COLUMN_NAME = 2;
-    public static final int COLUMN_AUTHOR = 3;
-    public static final int COLUMN_VERSION = 4;
 
     private static final String[] COLUMN_NAMES = { "PREFS_PLUGINS_COL_STAT", "PREFS_PLUGINS_COL_CATEGORY",
-            "PREFS_PLUGINS_COL_NAME", "PREFS_PLUGINS_COL_AUTHOR", "PREFS_PLUGINS_COL_VERSION"};
+            "PREFS_PLUGINS_COL_NAME"};
 
     private final List<PluginInformation> listPlugins;
 
@@ -89,12 +87,6 @@ public class PluginInfoTableModel extends DefaultTableModel {
         switch (column) {
         case COLUMN_NAME:
             returnValue = plugin.getName();
-            break;
-        case COLUMN_VERSION:
-            returnValue = plugin.getVersion();
-            break;
-        case COLUMN_AUTHOR:
-            returnValue = plugin.getAuthor();
             break;
         case COLUMN_CATEGORY:
             returnValue = plugin.getCategory().getLocalizedValue();

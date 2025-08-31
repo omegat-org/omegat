@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.commons.io.FileUtils;
+import org.omegat.core.data.TestRuntimePreferenceStore;
 
 /**
  * An initializer for ensuring that tests can't pollute (or be polluted by)
@@ -63,7 +64,8 @@ public final class TestPreferencesInitializer {
      * @param configDir OmegaT user configuration directory for test.
      */
     public static synchronized void init(String configDir) {
-        RuntimePreferences.setConfigDir(configDir);
+        TestRuntimePreferenceStore.reset();
+        TestRuntimePreferenceStore.getInstance().setConfigDir(configDir);
         Preferences.init();
         Preferences.initFilters();
         Preferences.initSegmentation();

@@ -51,8 +51,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -78,6 +76,7 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -199,7 +198,10 @@ public class IssuesPanelController implements IIssues {
         panel.table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 viewSelectedIssueDetail();
+                int old = selectedEntry;
                 selectedEntry = getSelectedIssue().map(IIssue::getSegmentNumber).orElse(-1);
+                // for test; notify a completion of the check
+                firePropertyChange("selectedEntry", old, selectedEntry);
             }
         });
         setupShortCuts();
@@ -222,7 +224,6 @@ public class IssuesPanelController implements IIssues {
         colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
         setupProjectChangeListener();
         setupFontChangeListener();
-        firePropertyChange("panel", null, panel);
     }
 
     private void setupShortCuts() {
@@ -510,9 +511,9 @@ public class IssuesPanelController implements IIssues {
 
         private int progress = 0;
 
-        IssueLoader(int jumpToEntry, List<String> jumpToTypes) {
+        IssueLoader(int jumpToEntry, @NotNull List<String> jumpToTypes) {
             this.jumpToEntry = jumpToEntry;
-            this.jumpToTypes = Objects.requireNonNull(jumpToTypes);
+            this.jumpToTypes = jumpToTypes;
         }
 
         @Override
@@ -523,8 +524,10 @@ public class IssuesPanelController implements IIssues {
             List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
             Stream<IIssue> providerIssues = getProviderIssues(providers, filePattern);
             List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
-            Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST, () -> String
-                    .format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
+            if (Log.isDebugEnabled()) {
+                Log.logDebug(String.format("Issue detection took %.3f s",
+                        (System.currentTimeMillis() - start) / 1000f));
+            }
             return result;
         }
 
@@ -593,8 +596,8 @@ public class IssuesPanelController implements IIssues {
             panel.progressBar.setVisible(false);
             StaticUIUtils.setHierarchyEnabled(panel, true);
             panel.typeList.setModel(new IssuesTypeListModel(allIssues));
+            panel.table.setModel(new IssuesTableModel(panel.table, allIssues));
             TableRowSorter<?> sorter = (TableRowSorter<?>) panel.table.getRowSorter();
-            panel.table.setModel(new IssuesTableModel(panel.table, sorter, allIssues));
             sorter.setSortable(IssueColumn.ICON.getIndex(), false);
             sorter.toggleSortOrder(IssueColumn.SEG_NUM.getIndex());
             panel.typeList.setSelectedIndex(0);
@@ -624,7 +627,6 @@ public class IssuesPanelController implements IIssues {
                         .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
-            super.firePropertyChange("table", null, null);
         }
     }
 

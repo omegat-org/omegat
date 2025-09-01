@@ -62,7 +62,7 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         JTableFixture segmentPropertiesTable = window.table("SegmentPropertiesTable").requireVisible();
 
         // Define expectations
-        int expectedRowCount = 7;
+        int expectedRowCount = 8;
         int expectedColumnCount = 3;
         final Map<String, String> expectation = getExpectedMap();
 
@@ -93,6 +93,7 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         expectation.put("Created by", translator);
         expectation.put("Origin", "Unknown/Manual");
         expectation.put("File", "Bundle.properties");
+        expectation.put("Repeated", "FIRST");
         return expectation;
     }
 

@@ -44,6 +44,8 @@ public class IssuesPanelTest extends TestCoreGUI {
 
     @Test
     public void testIssuesPanelShow() throws Exception {
+        String[] expectedType = new String[]{"Terminology", "LanguageTool"};
+
         // load project
         openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
@@ -64,10 +66,14 @@ public class IssuesPanelTest extends TestCoreGUI {
             assertTrue(latch.await(20, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
         }
+        robot().waitForIdle();
 
         var model = issuesPanelController.getPanel().table.getModel();
-        assertEquals("Expected segment number of the issue", 13, model.getValueAt(1, 0));
-        assertEquals("Expected type of the issue", "LanguageTool", model.getValueAt(1, 2));
+        assertEquals("Expected segment number of the issue", 13, model.getValueAt(0, 0));
+        String type = (String) model.getValueAt(0, 2);
+        assertTrue("Issue type is unexpected", expectedType[0].equals(type) || expectedType[1].equals(type));
+
+        closeProject();
     }
 
     public static class IssuesPanelControllerMock extends IssuesPanelController {

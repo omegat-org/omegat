@@ -71,9 +71,12 @@ public class IssuesPanelTest extends TestCoreGUI {
         } catch (InterruptedException ignored) {
         }
 
-        assertTrue(issuesPanelController.getPanel().isVisible());
-        assertEquals(13, issuesPanelController.getPanel().table.getModel().getValueAt(1, 0));
-        assertEquals("LanguageTool", issuesPanelController.getPanel().table.getModel().getValueAt(1, 2));
+        var panel = issuesPanelController.getPanel();
+        assertNotNull(panel);
+        assertTrue(panel.isVisible());
+        var model = panel.table.getModel();
+        assertEquals("Expected segment number of the issue", 13, model.getValueAt(1, 0));
+        assertEquals("Expected type of the issue", "LanguageTool", model.getValueAt(1, 2));
     }
 
     public static class IssuesPanelControllerMock extends IssuesPanelController {

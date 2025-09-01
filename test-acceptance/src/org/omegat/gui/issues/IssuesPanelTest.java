@@ -24,16 +24,13 @@
  **************************************************************************/
 package org.omegat.gui.issues;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 import javax.swing.SwingUtilities;
 import java.awt.Window;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -44,9 +41,6 @@ import static org.junit.Assert.assertTrue;
 public class IssuesPanelTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testIssuesPanelShow() throws Exception {

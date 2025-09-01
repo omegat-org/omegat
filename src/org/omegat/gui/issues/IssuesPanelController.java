@@ -76,6 +76,7 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -508,9 +509,9 @@ public class IssuesPanelController implements IIssues {
 
         private int progress = 0;
 
-        IssueLoader(int jumpToEntry, List<String> jumpToTypes) {
+        IssueLoader(int jumpToEntry, @NotNull List<String> jumpToTypes) {
             this.jumpToEntry = jumpToEntry;
-            this.jumpToTypes = Objects.requireNonNull(jumpToTypes);
+            this.jumpToTypes = jumpToTypes;
         }
 
         @Override

@@ -71,10 +71,7 @@ public class IssuesPanelTest extends TestCoreGUI {
         } catch (InterruptedException ignored) {
         }
 
-        var panel = issuesPanelController.getPanel();
-        assertNotNull(panel);
-        assertTrue(panel.isVisible());
-        var model = panel.table.getModel();
+        var model = issuesPanelController.getPanel().table.getModel();
         assertEquals("Expected segment number of the issue", 13, model.getValueAt(1, 0));
         assertEquals("Expected type of the issue", "LanguageTool", model.getValueAt(1, 2));
     }

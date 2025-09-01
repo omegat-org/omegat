@@ -31,7 +31,6 @@ import org.omegat.util.LocaleRule;
 
 import javax.swing.SwingUtilities;
 import java.awt.Window;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
@@ -65,7 +64,7 @@ public class IssuesPanelTest extends TestCoreGUI {
             }
         });
 
-        SwingUtilities.invokeAndWait(issuesPanelController::showAll);
+        SwingUtilities.invokeAndWait(() -> issuesPanelController.showForFiles(".*txt", 1));
 
         try {
             assertTrue(latch.await(20, TimeUnit.SECONDS));
@@ -73,8 +72,8 @@ public class IssuesPanelTest extends TestCoreGUI {
         }
 
         assertTrue(issuesPanelController.getPanel().isVisible());
-        assertEquals(2, issuesPanelController.getPanel().table.getModel().getValueAt(1, 0));
-        assertEquals("Terminology", issuesPanelController.getPanel().table.getModel().getValueAt(1, 2));
+        assertEquals(13, issuesPanelController.getPanel().table.getModel().getValueAt(1, 0));
+        assertEquals("LanguageTool", issuesPanelController.getPanel().table.getModel().getValueAt(1, 2));
     }
 
     public static class IssuesPanelControllerMock extends IssuesPanelController {

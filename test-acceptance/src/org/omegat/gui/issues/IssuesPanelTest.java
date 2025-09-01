@@ -31,6 +31,7 @@ import org.omegat.util.LocaleRule;
 
 import javax.swing.SwingUtilities;
 import java.awt.Window;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
@@ -56,16 +57,10 @@ public class IssuesPanelTest extends TestCoreGUI {
         //
         assertNotNull(window);
         IssuesPanelControllerMock issuesPanelController = new IssuesPanelControllerMock(window.target());
-        CountDownLatch latch = new CountDownLatch(2);
-        // watch for panel visible
-        issuesPanelController.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals("panel")) {
-                latch.countDown();
-            }
-        });
+        CountDownLatch latch = new CountDownLatch(1);
         // watch for table update
         issuesPanelController.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals("table")) {
+            if (evt.getPropertyName().equals("selectedEntry")) {
                 latch.countDown();
             }
         });

@@ -198,7 +198,10 @@ public class IssuesPanelController implements IIssues {
         panel.table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 viewSelectedIssueDetail();
+                int old = selectedEntry;
                 selectedEntry = getSelectedIssue().map(IIssue::getSegmentNumber).orElse(-1);
+                // for test; notify a completion of the check
+                firePropertyChange("selectedEntry", old, selectedEntry);
             }
         });
         setupShortCuts();
@@ -221,7 +224,6 @@ public class IssuesPanelController implements IIssues {
         colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
         setupProjectChangeListener();
         setupFontChangeListener();
-        firePropertyChange("panel", null, panel);
     }
 
     private void setupShortCuts() {
@@ -625,7 +627,6 @@ public class IssuesPanelController implements IIssues {
                         .findFirst().ifPresent(jump -> panel.table.changeSelection(jump, 0, false, false));
             }
             panel.table.requestFocusInWindow();
-            super.firePropertyChange("table", null, null);
         }
     }
 

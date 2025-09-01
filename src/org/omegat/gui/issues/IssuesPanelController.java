@@ -51,8 +51,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -523,8 +521,10 @@ public class IssuesPanelController implements IIssues {
             List<IIssueProvider> providers = IssueProviders.getEnabledProviders();
             Stream<IIssue> providerIssues = getProviderIssues(providers, filePattern);
             List<IIssue> result = Stream.concat(tagErrors, providerIssues).collect(Collectors.toList());
-            Logger.getLogger(IssuesPanelController.class.getName()).log(Level.FINEST, () -> String
-                    .format("Issue detection took %.3f s", (System.currentTimeMillis() - start) / 1000f));
+            if (Log.isDebugEnabled()) {
+                Log.logDebug(String.format("Issue detection took %.3f s",
+                        (System.currentTimeMillis() - start) / 1000f));
+            }
             return result;
         }
 

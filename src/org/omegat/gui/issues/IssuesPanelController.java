@@ -593,8 +593,8 @@ public class IssuesPanelController implements IIssues {
             panel.progressBar.setVisible(false);
             StaticUIUtils.setHierarchyEnabled(panel, true);
             panel.typeList.setModel(new IssuesTypeListModel(allIssues));
+            panel.table.setModel(new IssuesTableModel(panel.table, allIssues));
             TableRowSorter<?> sorter = (TableRowSorter<?>) panel.table.getRowSorter();
-            panel.table.setModel(new IssuesTableModel(panel.table, sorter, allIssues));
             sorter.setSortable(IssueColumn.ICON.getIndex(), false);
             sorter.toggleSortOrder(IssueColumn.SEG_NUM.getIndex());
             panel.typeList.setSelectedIndex(0);

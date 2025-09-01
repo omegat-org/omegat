@@ -68,7 +68,7 @@ class IssuesTableModel extends AbstractTableModel {
 
     private final transient List<IIssue> issues;
 
-    IssuesTableModel(JTable table, TableRowSorter<?> rowSorter, List<IIssue> issues) {
+    IssuesTableModel(JTable table, List<IIssue> issues) {
         this.table = table;
         this.issues = issues;
     }

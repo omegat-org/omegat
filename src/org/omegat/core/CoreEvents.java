@@ -25,194 +25,115 @@
 
 package org.omegat.core;
 
-import java.awt.Component;
 import java.awt.Font;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 
 /**
  * Class for distribute main application events.
- *
+ * <p>
  * All events can be fired in any threads, but will be delivered to listeners
  * only in the UI thread. It's required for better threads synchronization.
+ * <p>
+ * Implemented the event action body in CoreState class.
+ * It is a singleton class to synchronize and support test harness.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public final class CoreEvents {
-    private static final List<IProjectEventListener> PROJECT_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IApplicationEventListener> APPLICATION_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IEntryEventListener> ENTRY_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IFontChangedEventListener> FONT_CHANGED_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
-    private static final List<IEditorEventListener> EDITOR_EVENT_LISTENERS = new CopyOnWriteArrayList<>();
 
     private CoreEvents() {
     }
 
     /** Register listener. */
     public static void registerProjectChangeListener(final IProjectEventListener listener) {
-        PROJECT_EVENT_LISTENERS.add(listener);
+        CoreState.getInstance().registerProjectChangeListener(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterProjectChangeListener(final IProjectEventListener listener) {
-        PROJECT_EVENT_LISTENERS.remove(listener);
+        CoreState.getInstance().unregisterProjectChangeListener(listener);
     }
 
     /** Register listener. */
     public static void registerApplicationEventListener(final IApplicationEventListener listener) {
-        APPLICATION_EVENT_LISTENERS.add(listener);
+        CoreState.getInstance().registerApplicationEventListener(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterApplicationEventListener(final IApplicationEventListener listener) {
-        APPLICATION_EVENT_LISTENERS.remove(listener);
+        CoreState.getInstance().unregisterApplicationEventListener(listener);
     }
 
     /** Register listener. */
     public static void registerEntryEventListener(final IEntryEventListener listener) {
-        ENTRY_EVENT_LISTENERS.add(listener);
+        CoreState.getInstance().registerEntryEventListener(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterEntryEventListener(final IEntryEventListener listener) {
-        ENTRY_EVENT_LISTENERS.remove(listener);
+        CoreState.getInstance().unregisterEntryEventListener(listener);
     }
 
     /** Register listener. */
     public static void registerFontChangedEventListener(final IFontChangedEventListener listener) {
-        FONT_CHANGED_EVENT_LISTENERS.add(listener);
+        CoreState.getInstance().registerFontChangedEventListener(listener);
     }
 
     /** Unregister listener. */
+    @SuppressWarnings("unused")
     public static void unregisterFontChangedEventListener(final IFontChangedEventListener listener) {
-        FONT_CHANGED_EVENT_LISTENERS.remove(listener);
+        CoreState.getInstance().unregisterFontChangedEventListener(listener);
     }
 
     /** Register listener. */
     public static void registerEditorEventListener(final IEditorEventListener listener) {
-        EDITOR_EVENT_LISTENERS.add(listener);
+        CoreState.getInstance().registerEditorEventListener(listener);
     }
 
     /** Unregister listener. */
     public static void unregisterEditorEventListener(final IEditorEventListener listener) {
-        EDITOR_EVENT_LISTENERS.remove(listener);
+        CoreState.getInstance().unregisterEditorEventListener(listener);
     }
 
     /** Fire event. */
     public static void fireProjectChange(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
-        SwingUtilities.invokeLater(() -> {
-            Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
-            for (IProjectEventListener listener : PROJECT_EVENT_LISTENERS) {
-                try {
-                    listener.onProjectChanged(eventType);
-                } catch (Throwable t) {
-                    log("ERROR_EVENT_PROJECT_CHANGE", t);
-                }
-            }
-        });
+        CoreState.getInstance().fireProjectChange(eventType);
     }
 
     /** Fire event. */
     public static void fireApplicationStartup() {
-        SwingUtilities.invokeLater(() -> {
-            Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
-            for (IApplicationEventListener listener : APPLICATION_EVENT_LISTENERS) {
-                try {
-                    listener.onApplicationStartup();
-                } catch (Throwable t) {
-                    log("ERROR_EVENT_APPLICATION_STARTUP", t);
-                }
-            }
-        });
+        CoreState.getInstance().fireApplicationStartup();
     }
 
     /** Fire event. */
     public static void fireApplicationShutdown() {
-        // We shouldn't invoke it later, because need to shutdown immediately.
-        Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
-        for (IApplicationEventListener listener : APPLICATION_EVENT_LISTENERS) {
-            try {
-                listener.onApplicationShutdown();
-            } catch (Throwable t) {
-                log("ERROR_EVENT_APPLICATION_SHUTDOWN", t);
-            }
-        }
+        CoreState.getInstance().fireApplicationShutdown();
     }
 
     /** Fire event. */
     public static void fireEntryNewFile(final String activeFileName) {
-        SwingUtilities.invokeLater(() -> {
-            Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
-            for (IEntryEventListener listener : ENTRY_EVENT_LISTENERS) {
-                try {
-                    listener.onNewFile(activeFileName);
-                } catch (Throwable t) {
-                    log("ERROR_EVENT_ENTRY_NEWFILE", t);
-                }
-            }
-        });
+        CoreState.getInstance().fireEntryNewFile(activeFileName);
     }
 
     /** Fire event. */
     public static void fireEntryActivated(final SourceTextEntry newEntry) {
-        SwingUtilities.invokeLater(() -> {
-            Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
-            for (IEntryEventListener listener : ENTRY_EVENT_LISTENERS) {
-                try {
-                    listener.onEntryActivated(newEntry);
-                } catch (Throwable t) {
-                    log("ERROR_EVENT_ENTRY_ACTIVATED", t);
-                }
-            }
-        });
+        CoreState.getInstance().fireEntryActivated(newEntry);
     }
 
     /** Fire event. */
     public static void fireFontChanged(final Font newFont) {
-        SwingUtilities.invokeLater(() -> {
-            Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
-            for (IFontChangedEventListener listener : FONT_CHANGED_EVENT_LISTENERS) {
-                try {
-                    listener.onFontChanged(newFont);
-                } catch (Throwable t) {
-                    log("ERROR_EVENT_FONT_CHANGED", t);
-                }
-            }
-        });
+        CoreState.getInstance().fireFontChanged(newFont);
     }
 
     /** Fire event. */
     public static void fireEditorNewWord(final String newWord) {
-        SwingUtilities.invokeLater(() -> {
-            for (IEditorEventListener listener : EDITOR_EVENT_LISTENERS) {
-                try {
-                    listener.onNewWord(newWord);
-                } catch (Throwable t) {
-                    log("ERROR_EVENT_EDITOR_NEW_WORD", t);
-                }
-            }
-        });
-    }
-
-    private static void log(String msgKey, Throwable t) {
-        Log.log(t);
-        // Main window might not yet be available
-        Component parent = Optional.ofNullable(Core.getMainWindow()).map(IMainWindow::getApplicationFrame).orElse(null);
-        JOptionPane.showMessageDialog(parent, OStrings.getString(msgKey, t), OStrings.getString("ERROR_TITLE"),
-                JOptionPane.ERROR_MESSAGE);
+        CoreState.getInstance().fireEditorNewWord(newWord);
     }
 }

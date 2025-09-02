@@ -26,6 +26,11 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.core.events.IEditorEventListener;
+import org.omegat.core.events.IEntryEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
@@ -46,9 +51,14 @@ import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.properties.SegmentPropertiesArea;
+import org.omegat.util.Log;
 
+import javax.swing.SwingUtilities;
+import java.awt.Font;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CoreState {
 
@@ -269,5 +279,165 @@ public class CoreState {
     /** Get spell checker instance. */
     public ISpellChecker getCurrentSpellChecker() {
         return spellCheckerManager.getCurrentSpellChecker();
+    }
+
+    private final List<IProjectEventListener> projectEventListeners = new CopyOnWriteArrayList<>();
+    private final List<IApplicationEventListener> applicationEventListeners = new CopyOnWriteArrayList<>();
+    private final List<IEntryEventListener> entryEventListeners = new CopyOnWriteArrayList<>();
+    private final List<IFontChangedEventListener> fontChangedEventListeners = new CopyOnWriteArrayList<>();
+    private final List<IEditorEventListener> editorEventListeners = new CopyOnWriteArrayList<>();
+
+
+    /** Register listener. */
+    public void registerProjectChangeListener(final IProjectEventListener listener) {
+        projectEventListeners.add(listener);
+    }
+
+    /** Unregister listener. */
+    public void unregisterProjectChangeListener(final IProjectEventListener listener) {
+        projectEventListeners.remove(listener);
+    }
+
+    /** Register listener. */
+    public void registerApplicationEventListener(final IApplicationEventListener listener) {
+        applicationEventListeners.add(listener);
+    }
+
+    /** Unregister listener. */
+    public void unregisterApplicationEventListener(final IApplicationEventListener listener) {
+        applicationEventListeners.remove(listener);
+    }
+
+    /** Register listener. */
+    public void registerEntryEventListener(final IEntryEventListener listener) {
+        entryEventListeners.add(listener);
+    }
+
+    /** Unregister listener. */
+    public void unregisterEntryEventListener(final IEntryEventListener listener) {
+        entryEventListeners.remove(listener);
+    }
+
+    /** Register listener. */
+    public void registerFontChangedEventListener(final IFontChangedEventListener listener) {
+        fontChangedEventListeners.add(listener);
+    }
+
+    /** Unregister listener. */
+    public void unregisterFontChangedEventListener(final IFontChangedEventListener listener) {
+        fontChangedEventListeners.remove(listener);
+    }
+
+    /** Register listener. */
+    public void registerEditorEventListener(final IEditorEventListener listener) {
+        editorEventListeners.add(listener);
+    }
+
+    /** Unregister listener. */
+    public void unregisterEditorEventListener(final IEditorEventListener listener) {
+        editorEventListeners.remove(listener);
+    }
+
+    /** Fire event. */
+    public void fireProjectChange(final IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_PROJECT_CHANGE", eventType);
+            for (IProjectEventListener listener : projectEventListeners) {
+                try {
+                    listener.onProjectChanged(eventType);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_PROJECT_CHANGE", t);
+                }
+            }
+        });
+    }
+
+    /** Fire event. */
+    public void fireApplicationStartup() {
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_STARTUP");
+            for (IApplicationEventListener listener : applicationEventListeners) {
+                try {
+                    listener.onApplicationStartup();
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_APPLICATION_STARTUP", t);
+                }
+            }
+        });
+    }
+
+    /** Fire event. */
+    public void fireApplicationShutdown() {
+        // We shouldn't invoke it later, because need to shutdown immediately.
+        Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
+        for (IApplicationEventListener listener : applicationEventListeners) {
+            try {
+                listener.onApplicationShutdown();
+            } catch (Throwable t) {
+                log("ERROR_EVENT_APPLICATION_SHUTDOWN", t);
+            }
+        }
+    }
+
+    /** Fire event. */
+    public void fireEntryNewFile(final String activeFileName) {
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_ENTRY_NEWFILE", activeFileName);
+            for (IEntryEventListener listener : entryEventListeners) {
+                try {
+                    listener.onNewFile(activeFileName);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_ENTRY_NEWFILE", t);
+                }
+            }
+        });
+    }
+
+    /** Fire event. */
+    public void fireEntryActivated(final SourceTextEntry newEntry) {
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");
+            for (IEntryEventListener listener : entryEventListeners) {
+                try {
+                    listener.onEntryActivated(newEntry);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_ENTRY_ACTIVATED", t);
+                }
+            }
+        });
+    }
+
+    /** Fire event. */
+    public void fireFontChanged(final Font newFont) {
+        SwingUtilities.invokeLater(() -> {
+            Log.logInfoRB("LOG_INFO_EVENT_FONT_CHANGED");
+            for (IFontChangedEventListener listener : fontChangedEventListeners) {
+                try {
+                    listener.onFontChanged(newFont);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_FONT_CHANGED", t);
+                }
+            }
+        });
+    }
+
+    /** Fire event. */
+    public void fireEditorNewWord(final String newWord) {
+        SwingUtilities.invokeLater(() -> {
+            for (IEditorEventListener listener : editorEventListeners) {
+                try {
+                    listener.onNewWord(newWord);
+                } catch (Throwable t) {
+                    log("ERROR_EVENT_EDITOR_NEW_WORD", t);
+                }
+            }
+        });
+    }
+
+    private void log(String msgKey, Throwable t) {
+        Log.logErrorRB(t, msgKey);
+        if (getMainWindow() != null) {
+            getMainWindow().displayErrorRB(t, msgKey);
+        }
     }
 }

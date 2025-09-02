@@ -25,7 +25,6 @@
 package org.omegat.gui.dialogs;
 
 import org.assertj.swing.core.GenericTypeMatcher;
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.TestCoreGUI;
@@ -39,16 +38,12 @@ import org.openide.awt.Mnemonics;
 import javax.swing.JButton;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Locale;
 
 import static org.junit.Assert.assertNotNull;
 
 public class ProjectPropertiesDialogTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testProjectPropertiesDialogShowAndOk() throws Exception {

@@ -82,6 +82,11 @@ import org.omegat.util.gui.Styles;
 
 /**
  * Base class for create main menu and handle main menu events.
+ * <p>
+ * Add newly created MenuItem items to
+ * /src/org/omegat/gui/main/MainMenuShortcuts.properties and
+ * /src/org/omegat/gui/main/MainMenuShortcuts.mac.properties with the proper
+ * shortcuts if set.
  *
  * @author Keith Godfrey
  * @author Benjamin Siband
@@ -96,13 +101,6 @@ import org.omegat.util.gui.Styles;
  * @author Martin Fleurke
  * @author Yu Tang
  * @author Aaron Madlon-Kay
- */
-
-/**
- * Add newly created MenuItem items to
- * /src/org/omegat/gui/main/MainMenuShortcuts.properties and
- * /src/org/omegat/gui/main/MainMenuShortcuts.mac.properties with the proper
- * shortcuts if set.
  */
 public abstract class BaseMainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
@@ -129,8 +127,45 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
         String action = evt.getActionCommand();
 
         Log.logInfoRB("LOG_MENU_CLICK", action);
+        // Find method by item name.
+        String methodName = action + "ActionPerformed";
+        Method method;
+        try {
+            method = mainWindowMenuHandler.getClass().getMethod(methodName);
+        } catch (NoSuchMethodException ignore) {
+            try {
+                method = mainWindowMenuHandler.getClass().getMethod(methodName, Integer.TYPE);
+            } catch (NoSuchMethodException ignore2) {
+                try {
+                    method = mainWindowMenuHandler.getClass().getMethod(methodName, ActionEvent.class);
+                } catch (NoSuchMethodException ex) {
+                    throw new IncompatibleClassChangeError(
+                            "Error invoke method handler for main menu: there is no method " + methodName);
+                }
+            }
+        }
 
-        invokeAction(action, evt.getModifiers());
+        // Call ...MenuItemActionPerformed method.
+        Object[] args = prepareMethodArguments(method, evt);
+        try {
+            method.invoke(mainWindowMenuHandler, args);
+        } catch (IllegalAccessException ex) {
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        } catch (InvocationTargetException ex) {
+            LOGGER.log(Level.SEVERE, "Error execute method", ex);
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        }
+    }
+
+    private Object[] prepareMethodArguments(Method method, ActionEvent evt) {
+        Class<?>[] types = method.getParameterTypes();
+        if (types.length == 0) {
+            return null;
+        }
+        if (types[0] == Integer.TYPE) {
+            return new Object[] { evt.getModifiers() };
+        }
+        return new Object[] { evt };
     }
 
     /**
@@ -151,7 +186,7 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
 
         // Find method by item name.
         String methodName = action + "MenuSelected";
-        Method method = null;
+        Method method;
         try {
             method = mainWindowMenuHandler.getClass().getMethod(methodName, JMenu.class);
         } catch (NoSuchMethodException ex) {
@@ -699,34 +734,8 @@ public abstract class BaseMainWindowMenu implements ActionListener, MenuListener
      */
     @Override
     public void invokeAction(String action, int modifiers) {
-        // Find method by item name.
-        String methodName = action + "ActionPerformed";
-        Method method = null;
-        try {
-            method = mainWindowMenuHandler.getClass().getMethod(methodName);
-        } catch (NoSuchMethodException ignore) {
-            try {
-                method = mainWindowMenuHandler.getClass().getMethod(methodName, Integer.TYPE);
-            } catch (NoSuchMethodException ex) {
-                throw new IncompatibleClassChangeError(
-                        "Error invoke method handler for main menu: there is no method " + methodName);
-            }
-        }
-
-        // Call ...MenuItemActionPerformed method.
-        Object[] args = method.getParameterTypes().length == 0 ? null : new Object[] { modifiers };
-        try {
-            method.invoke(mainWindowMenuHandler, args);
-        } catch (IllegalAccessException ex) {
-            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
-        } catch (InvocationTargetException ex) {
-            LOGGER.log(Level.SEVERE, "Error execute method", ex);
-            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
-        }
-    }
-
-    protected JMenu createMenu(String titleKey) {
-        return createMenu(titleKey, null);
+        // keep backward compatibility.
+        actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, action, modifiers));
     }
 
     /**

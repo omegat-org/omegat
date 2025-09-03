@@ -142,7 +142,6 @@ public class IssuesPanelController implements IIssues {
         pcs.addPropertyChangeListener(listener);
     }
 
-    @SuppressWarnings("unused")
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }

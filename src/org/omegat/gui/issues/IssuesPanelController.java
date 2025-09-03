@@ -77,6 +77,7 @@ import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -127,7 +128,7 @@ public class IssuesPanelController implements IIssues {
         this.parent = parent;
     }
 
-    private static final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
 
     private static boolean isJTextComponent(Component c) {
         return c instanceof JTextComponent;
@@ -150,7 +151,6 @@ public class IssuesPanelController implements IIssues {
         pcs.firePropertyChange(propertyName, oldValue, newValue);
     }
 
-    @SuppressWarnings("serial")
     synchronized void init() {
         if (frame != null) {
             // Regenerate menu bar to reflect current prefs
@@ -469,22 +469,22 @@ public class IssuesPanelController implements IIssues {
     }
 
     @Override
-    public void showForFiles(String filePattern) {
-        show(filePattern, NO_INSTRUCTIONS, -1);
+    public void showForFiles(String pattern) {
+        show(pattern, NO_INSTRUCTIONS, -1);
     }
 
     @Override
-    public void showForFiles(String filePattern, String instructions) {
-        show(filePattern, instructions, -1);
+    public void showForFiles(String pattern, String instructions) {
+        show(pattern, instructions, -1);
     }
 
     @Override
-    public void showForFiles(String filePattern, int jumpToEntry) {
-        show(filePattern, NO_INSTRUCTIONS, jumpToEntry);
+    public void showForFiles(String pattern, int jumpToEntry) {
+        show(pattern, NO_INSTRUCTIONS, jumpToEntry);
     }
 
-    private void show(String filePattern, String instructions, int jumpToEntry) {
-        this.filePattern = filePattern;
+    private void show(String pattern, String instructions, int jumpToEntry) {
+        this.filePattern = pattern;
         this.instructions = instructions;
         init();
         SwingUtilities.invokeLater(() -> refreshData(jumpToEntry, Collections.emptyList()));
@@ -679,9 +679,8 @@ public class IssuesPanelController implements IIssues {
         if (isShowingAllFiles()) {
             frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE", totalItems));
         } else {
-            String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE",
-                    FilenameUtils.getName(filePath), totalItems));
+            String fileName = extractFilePathFromPattern();
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE", fileName, totalItems));
         }
     }
 
@@ -690,10 +689,15 @@ public class IssuesPanelController implements IIssues {
             frame.setTitle(
                     OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
-            String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE",
-                    FilenameUtils.getName(filePath), shownItems, totalItems));
+            String fileName = extractFilePathFromPattern();
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE", fileName, shownItems,
+                    totalItems));
         }
+    }
+
+    private String extractFilePathFromPattern() {
+        String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
+        return FilenameUtils.getName(filePath);
     }
 
     private boolean isShowingAllFiles() {

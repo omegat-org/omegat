@@ -21,8 +21,8 @@ plugins {
 }
 
 application {
-    applicationName = appName
-    mainClass = mainClassName
+    applicationName = project.property('org.omegat.appName')
+    mainClass = project.property('org.omegat.mainClassName')
 }
 
 def os = osdetector.os
@@ -306,7 +306,7 @@ jar {
         pluginAttr('Local external search', 'org/omegat/externalfinder/', 'miscellaneous', desc.externalfinder)
         pluginAttr('Repository connector', 'org/omegat/core/team2/impl/', 'repository', desc.repository)
     }
-    archiveFileName.set(omegatJarFilename)
+    archiveFileName.set(project.property('org.omegat.omegatJarFilename'))
 }
 
 test {
@@ -360,7 +360,7 @@ distributions {
             from(layout.settingsDirectory.dir('release/linux-specific')) {
                 filter ReplaceTokens, tokens: [
                         VERSION_NUMBER_SUBST: project.version,
-                        JAR_SUBST           : omegatJarFilename
+                        JAR_SUBST           : project.property('org.omegat.omegatJarFilename')
                 ]
                 filePermissions {
                     unix(0755)
@@ -369,7 +369,7 @@ distributions {
             from(layout.settingsDirectory.dir('release/win32-specific')) {
                 include 'OmegaT.bat'
                 filter(ReplaceTokens, tokens: [
-                        JAR_SUBST           : omegatJarFilename
+                        JAR_SUBST           : project.property('org.omegat.omegatJarFilename')
                 ])
             }
             from(layout.settingsDirectory.dir('lib/licenses')) {
@@ -490,12 +490,12 @@ processResources {
     }
 }
 
-def manualLangs = project.property("manualLangs").split(',')
+def manualLangs = project.property("org.omegat.manualLangs").split(',')
 manualLangs.each { lang ->
     makeDocumentationTasks(lang)
 }
 
-def firstStepLangs = project.property("firstStepLangs").split(',')
+def firstStepLangs = project.property("org.omegat.firstStepLangs").split(',')
 firstStepLangs.each { lang ->
     makeFirstStepTask(lang)
 }

@@ -80,7 +80,7 @@ stages:
       - template: ci/azure-pipelines/publish_manual_snapshot.yml
         parameters:
           condition: and(in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  - job: TestOnJava17
+  - job: testOnLinux
     displayName: on Linux
     dependsOn: CheckChanges
     condition: eq(dependencies.CheckChanges.outputs['checkChanges.changeNonDoc'], 'true')

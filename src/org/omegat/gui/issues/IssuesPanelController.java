@@ -159,11 +159,13 @@ public class IssuesPanelController implements IIssues {
             return;
         }
         initializeFrame();
+        setupGeometryPersistence();
         setDefaultFont();
         setupShortCuts();
         setupEventListeners();
         setupProjectChangeListener();
         setupFontChangeListener();
+        setupColSizer();
     }
 
     private void initializeFrame() {
@@ -182,12 +184,12 @@ public class IssuesPanelController implements IIssues {
         frame.setPreferredSize(new Dimension(600, 400));
         frame.pack();
         frame.setLocationRelativeTo(parent);
-        setupGeometryPersistence();
     }
 
     private void setupGeometryPersistence() {
         panel.innerSplitPane.setDividerLocation(INNER_SPLIT_INITIAL_RATIO);
         panel.outerSplitPane.setDividerLocation(OUTER_SPLIT_INITIAL_RATIO);
+
         StaticUIUtils.persistGeometry(frame, Preferences.ISSUES_WINDOW_GEOMETRY_PREFIX,
                 () -> Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM,
                         panel.outerSplitPane.getDividerLocation()));
@@ -199,7 +201,6 @@ public class IssuesPanelController implements IIssues {
         } catch (NumberFormatException e) {
             // Ignore
         }
-        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
     }
 
     private void setupEventListeners() {
@@ -239,6 +240,10 @@ public class IssuesPanelController implements IIssues {
         panel.jumpButton.addActionListener(e -> jumpToSelectedIssue());
         panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedTypes));
         panel.showAllButton.addActionListener(e -> showAll());
+    }
+
+    private void setupColSizer() {
+        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
     }
 
     private void setupShortCuts() {

@@ -142,6 +142,7 @@ public class IssuesPanelController implements IIssues {
         pcs.addPropertyChangeListener(listener);
     }
 
+    @SuppressWarnings("unused")
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
@@ -157,7 +158,15 @@ public class IssuesPanelController implements IIssues {
             frame.setJMenuBar(generateMenuBar());
             return;
         }
+        initializeFrame();
+        setDefaultFont();
+        setupShortCuts();
+        setupEventListeners();
+        setupProjectChangeListener();
+        setupFontChangeListener();
+    }
 
+    private void initializeFrame() {
         frame = new JFrame(OStrings.getString("ISSUES_WINDOW_TITLE"));
         StaticUIUtils.setEscapeClosable(frame);
         StaticUIUtils.setWindowIcon(frame);
@@ -173,9 +182,12 @@ public class IssuesPanelController implements IIssues {
         frame.setPreferredSize(new Dimension(600, 400));
         frame.pack();
         frame.setLocationRelativeTo(parent);
+        setupGeometryPersistence();
+    }
+
+    private void setupGeometryPersistence() {
         panel.innerSplitPane.setDividerLocation(INNER_SPLIT_INITIAL_RATIO);
         panel.outerSplitPane.setDividerLocation(OUTER_SPLIT_INITIAL_RATIO);
-
         StaticUIUtils.persistGeometry(frame, Preferences.ISSUES_WINDOW_GEOMETRY_PREFIX,
                 () -> Preferences.setPreference(Preferences.ISSUES_WINDOW_DIVIDER_LOCATION_BOTTOM,
                         panel.outerSplitPane.getDividerLocation()));
@@ -187,14 +199,17 @@ public class IssuesPanelController implements IIssues {
         } catch (NumberFormatException e) {
             // Ignore
         }
+        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
+    }
 
+    private void setupEventListeners() {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 reset();
             }
         });
-        setDefaultFont();
+
         panel.table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 viewSelectedIssueDetail();
@@ -204,7 +219,7 @@ public class IssuesPanelController implements IIssues {
                 firePropertyChange("selectedEntry", old, selectedEntry);
             }
         });
-        setupShortCuts();
+
         MouseAdapter adapter = new IssuesPanelMouseAdapter();
         panel.table.addMouseListener(adapter);
         panel.table.addMouseMotionListener(adapter);
@@ -216,14 +231,14 @@ public class IssuesPanelController implements IIssues {
             }
         });
 
+        setupButtonListeners();
+    }
+
+    private void setupButtonListeners() {
         panel.closeButton.addActionListener(e -> StaticUIUtils.closeWindowByEvent(frame));
         panel.jumpButton.addActionListener(e -> jumpToSelectedIssue());
         panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedTypes));
         panel.showAllButton.addActionListener(e -> showAll());
-
-        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
-        setupProjectChangeListener();
-        setupFontChangeListener();
     }
 
     private void setupShortCuts() {
@@ -640,7 +655,7 @@ public class IssuesPanelController implements IIssues {
         @SuppressWarnings("unchecked")
         TableRowSorter<IssuesTableModel> sorter = (TableRowSorter<IssuesTableModel>) panel.table
                 .getRowSorter();
-        sorter.setRowFilter(new RowFilter<IssuesTableModel, Integer>() {
+        sorter.setRowFilter(new RowFilter<>() {
             @Override
             public boolean include(RowFilter.Entry<? extends IssuesTableModel, ? extends Integer> entry) {
                 return types.contains(ALL_TYPES)

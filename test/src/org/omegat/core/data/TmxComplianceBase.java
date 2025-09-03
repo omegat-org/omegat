@@ -33,6 +33,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -78,11 +80,12 @@ public abstract class TmxComplianceBase {
         Core.setSegmenter(new Segmenter(SRX.getDefault()));
 
         outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + name.getMethodName() + ".out");
-        outFile.getParentFile().mkdirs();
         if (outFile.exists()) {
             if (!outFile.delete()) {
                 throw new IOException("Can't remove " + outFile.getAbsolutePath());
             }
+        } else {
+            Files.createDirectories(outFile.getParentFile().toPath());
         }
     }
 
@@ -108,7 +111,7 @@ public abstract class TmxComplianceBase {
             rd.reset();
         }
 
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         String s;
         while ((s = rd.readLine()) != null) {
             result.add(s);
@@ -123,7 +126,7 @@ public abstract class TmxComplianceBase {
             String fileTextOut, String outCharset, String sourceLang, String targetLang,
             Map<String, TMXEntry> tmxPatch) throws Exception {
         TextFilter f = new TextFilter();
-        Map<String, String> c = new TreeMap<String, String>();
+        Map<String, String> c = new TreeMap<>();
         c.put(TextFilter.OPTION_SEGMENT_ON, TextFilter.SEGMENT_BREAKS);
 
         ProjectProperties props = new TestProjectProperties(sourceLang, targetLang);
@@ -166,7 +169,7 @@ public abstract class TmxComplianceBase {
     protected List<String> loadTexts(final IFilter filter, final File sourceFile, final String inCharset,
             final FilterContext context, final Map<String, String> config) throws Exception {
 
-        final List<String> result = new ArrayList<String>();
+        final List<String> result = new ArrayList<>();
 
         IParseCallback callback = new IParseCallback() {
             @Override
@@ -217,16 +220,17 @@ public abstract class TmxComplianceBase {
     }
 
     protected Set<String> readTmxSegments(File tmx) throws Exception {
-        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(tmx), "UTF-8"));
-        String s;
-        Set<String> entries = new TreeSet<String>();
-        while ((s = rd.readLine()) != null) {
-            Matcher m = RE_SEG.matcher(s);
-            if (m.find()) {
-                entries.add(m.group(1));
+        Set<String> entries;
+        try (BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(tmx), StandardCharsets.UTF_8))) {
+            String s;
+            entries = new TreeSet<>();
+            while ((s = rd.readLine()) != null) {
+                Matcher m = RE_SEG.matcher(s);
+                if (m.find()) {
+                    entries.add(m.group(1));
+                }
             }
         }
-        rd.close();
         return entries;
     }
 
@@ -236,8 +240,8 @@ public abstract class TmxComplianceBase {
         assertEquals(segmentsCount, tmxCreated.size());
         assertEquals(tmxOrig.size(), tmxCreated.size());
 
-        List<String> listOrig = new ArrayList<String>(tmxOrig);
-        List<String> listCreated = new ArrayList<String>(tmxCreated);
+        List<String> listOrig = new ArrayList<>(tmxOrig);
+        List<String> listCreated = new ArrayList<>(tmxCreated);
         for (int i = 0; i < listOrig.size(); i++) {
             XMLUnit.compareXML(listOrig.get(i), listCreated.get(i));
         }

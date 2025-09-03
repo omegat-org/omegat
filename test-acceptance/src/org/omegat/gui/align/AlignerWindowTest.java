@@ -45,7 +45,6 @@ import org.junit.Test;
 
 import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.util.Language;
-import org.omegat.util.LocaleRule;
 
 import static org.junit.Assert.assertNotNull;
 

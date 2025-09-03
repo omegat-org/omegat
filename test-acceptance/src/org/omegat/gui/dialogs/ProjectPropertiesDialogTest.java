@@ -31,7 +31,6 @@ import org.omegat.gui.main.TestCoreGUI;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.tokenizer.LuceneFrenchTokenizer;
 import org.omegat.util.Language;
-import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 

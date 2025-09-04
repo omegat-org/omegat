@@ -25,15 +25,12 @@
 
 package org.omegat.gui.dialogs;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -43,9 +40,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class ConflictDialogTest extends TestCoreGUI {
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testConflictDialogLocal() throws IOException {

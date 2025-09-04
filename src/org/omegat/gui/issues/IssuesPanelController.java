@@ -112,20 +112,24 @@ public class IssuesPanelController implements IIssues {
     private static final double OUTER_SPLIT_INITIAL_RATIO = 0.5d;
 
     private final Window parent;
-    private JFrame frame;
-    private IssuesPanel panel;
-    private TableColumnSizer colSizer;
+    private final JFrame frame;
+    private final IssuesPanel panel;
+    private final TableColumnSizer colSizer;
+    private boolean initialized = false;
 
-    private String filePattern;
-    private String instructions;
+    private String filePattern = ALL_FILES_PATTERN;
+    private String instructions = NO_INSTRUCTIONS;
 
     private int selectedEntry = -1;
     private List<String> selectedTypes = Collections.emptyList();
 
-    private IssueLoader loader;
+    private @Nullable IssueLoader loader;
 
     public IssuesPanelController(Window parent) {
         this.parent = parent;
+        frame = new JFrame(OStrings.getString("ISSUES_WINDOW_TITLE"));
+        panel = new IssuesPanel();
+        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
     }
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
@@ -152,7 +156,7 @@ public class IssuesPanelController implements IIssues {
     }
 
     synchronized void init() {
-        if (frame != null) {
+        if (initialized) {
             // Regenerate menu bar to reflect current prefs
             frame.setJMenuBar(generateMenuBar());
             return;
@@ -164,17 +168,15 @@ public class IssuesPanelController implements IIssues {
         setupEventListeners();
         setupProjectChangeListener();
         setupFontChangeListener();
-        setupColSizer();
+        initialized = true;
     }
 
     private void initializeFrame() {
-        frame = new JFrame(OStrings.getString("ISSUES_WINDOW_TITLE"));
         StaticUIUtils.setEscapeClosable(frame);
         StaticUIUtils.setWindowIcon(frame);
         if (Platform.isMacOSX()) {
             OSXIntegration.enableFullScreen(frame);
         }
-        panel = new IssuesPanel();
         panel.setName("issues_panel");
         frame.add(panel);
 
@@ -239,10 +241,6 @@ public class IssuesPanelController implements IIssues {
         panel.jumpButton.addActionListener(e -> jumpToSelectedIssue());
         panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedTypes));
         panel.showAllButton.addActionListener(e -> showAll());
-    }
-
-    private void setupColSizer() {
-        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
     }
 
     private void setupShortCuts() {
@@ -503,7 +501,7 @@ public class IssuesPanelController implements IIssues {
         StaticUIUtils.setHierarchyEnabled(panel, false);
         panel.closeButton.setEnabled(true);
         panel.showAllButtonPanel.setVisible(!isShowingAllFiles());
-        panel.instructionsPanel.setVisible(!instructions.equals(NO_INSTRUCTIONS));
+        panel.instructionsPanel.setVisible(!NO_INSTRUCTIONS.equals(instructions));
         panel.instructionsTextArea.setText(instructions);
     }
 
@@ -550,16 +548,16 @@ public class IssuesPanelController implements IIssues {
             return result;
         }
 
-        private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String filePattern) {
+        private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String pattern) {
             Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries()
-                    .parallelStream().filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
+                    .parallelStream().filter(StreamUtil.patternFilter(pattern, ste -> ste.getKey().file))
                     .filter(this::progressFilter).map(this::makeEntryPair).filter(Objects::nonNull);
 
             return entriesStream.flatMap(entry -> providers.stream()
                     .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
         }
 
-        Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
+        @Nullable Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
             IProject project = Core.getProject();
             if (!project.isProjectLoaded()) {
                 return null;

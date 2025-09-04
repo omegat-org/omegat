@@ -77,6 +77,7 @@ import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -111,23 +112,27 @@ public class IssuesPanelController implements IIssues {
     private static final double OUTER_SPLIT_INITIAL_RATIO = 0.5d;
 
     private final Window parent;
-    private JFrame frame;
-    private IssuesPanel panel;
-    private TableColumnSizer colSizer;
+    private final JFrame frame;
+    private final IssuesPanel panel;
+    private final TableColumnSizer colSizer;
+    private boolean initialized = false;
 
-    private String filePattern;
-    private String instructions;
+    private String filePattern = ALL_FILES_PATTERN;
+    private String instructions = NO_INSTRUCTIONS;
 
     private int selectedEntry = -1;
     private List<String> selectedTypes = Collections.emptyList();
 
-    private IssueLoader loader;
+    private @Nullable IssueLoader loader;
 
     public IssuesPanelController(Window parent) {
         this.parent = parent;
+        frame = new JFrame(OStrings.getString("ISSUES_WINDOW_TITLE"));
+        panel = new IssuesPanel();
+        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
     }
 
-    private static final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(IssuesPanelController.class);
 
     private static boolean isJTextComponent(Component c) {
         return c instanceof JTextComponent;
@@ -150,21 +155,28 @@ public class IssuesPanelController implements IIssues {
         pcs.firePropertyChange(propertyName, oldValue, newValue);
     }
 
-    @SuppressWarnings("serial")
     synchronized void init() {
-        if (frame != null) {
+        if (initialized) {
             // Regenerate menu bar to reflect current prefs
             frame.setJMenuBar(generateMenuBar());
             return;
         }
+        initializeFrame();
+        setupGeometryPersistence();
+        setDefaultFont();
+        setupShortCuts();
+        setupEventListeners();
+        setupProjectChangeListener();
+        setupFontChangeListener();
+        initialized = true;
+    }
 
-        frame = new JFrame(OStrings.getString("ISSUES_WINDOW_TITLE"));
+    private void initializeFrame() {
         StaticUIUtils.setEscapeClosable(frame);
         StaticUIUtils.setWindowIcon(frame);
         if (Platform.isMacOSX()) {
             OSXIntegration.enableFullScreen(frame);
         }
-        panel = new IssuesPanel();
         panel.setName("issues_panel");
         frame.add(panel);
 
@@ -173,6 +185,9 @@ public class IssuesPanelController implements IIssues {
         frame.setPreferredSize(new Dimension(600, 400));
         frame.pack();
         frame.setLocationRelativeTo(parent);
+    }
+
+    private void setupGeometryPersistence() {
         panel.innerSplitPane.setDividerLocation(INNER_SPLIT_INITIAL_RATIO);
         panel.outerSplitPane.setDividerLocation(OUTER_SPLIT_INITIAL_RATIO);
 
@@ -187,14 +202,16 @@ public class IssuesPanelController implements IIssues {
         } catch (NumberFormatException e) {
             // Ignore
         }
+    }
 
+    private void setupEventListeners() {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 reset();
             }
         });
-        setDefaultFont();
+
         panel.table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 viewSelectedIssueDetail();
@@ -204,7 +221,7 @@ public class IssuesPanelController implements IIssues {
                 firePropertyChange("selectedEntry", old, selectedEntry);
             }
         });
-        setupShortCuts();
+
         MouseAdapter adapter = new IssuesPanelMouseAdapter();
         panel.table.addMouseListener(adapter);
         panel.table.addMouseMotionListener(adapter);
@@ -216,14 +233,14 @@ public class IssuesPanelController implements IIssues {
             }
         });
 
+        setupButtonListeners();
+    }
+
+    private void setupButtonListeners() {
         panel.closeButton.addActionListener(e -> StaticUIUtils.closeWindowByEvent(frame));
         panel.jumpButton.addActionListener(e -> jumpToSelectedIssue());
         panel.reloadButton.addActionListener(e -> refreshData(selectedEntry, selectedTypes));
         panel.showAllButton.addActionListener(e -> showAll());
-
-        colSizer = TableColumnSizer.autoSize(panel.table, IssueColumn.DESCRIPTION.getIndex(), true);
-        setupProjectChangeListener();
-        setupFontChangeListener();
     }
 
     private void setupShortCuts() {
@@ -450,22 +467,22 @@ public class IssuesPanelController implements IIssues {
     }
 
     @Override
-    public void showForFiles(String filePattern) {
-        show(filePattern, NO_INSTRUCTIONS, -1);
+    public void showForFiles(String pattern) {
+        show(pattern, NO_INSTRUCTIONS, -1);
     }
 
     @Override
-    public void showForFiles(String filePattern, String instructions) {
-        show(filePattern, instructions, -1);
+    public void showForFiles(String pattern, String instructions) {
+        show(pattern, instructions, -1);
     }
 
     @Override
-    public void showForFiles(String filePattern, int jumpToEntry) {
-        show(filePattern, NO_INSTRUCTIONS, jumpToEntry);
+    public void showForFiles(String pattern, int jumpToEntry) {
+        show(pattern, NO_INSTRUCTIONS, jumpToEntry);
     }
 
-    private void show(String filePattern, String instructions, int jumpToEntry) {
-        this.filePattern = filePattern;
+    private void show(String pattern, String instructions, int jumpToEntry) {
+        this.filePattern = pattern;
         this.instructions = instructions;
         init();
         SwingUtilities.invokeLater(() -> refreshData(jumpToEntry, Collections.emptyList()));
@@ -484,7 +501,7 @@ public class IssuesPanelController implements IIssues {
         StaticUIUtils.setHierarchyEnabled(panel, false);
         panel.closeButton.setEnabled(true);
         panel.showAllButtonPanel.setVisible(!isShowingAllFiles());
-        panel.instructionsPanel.setVisible(!instructions.equals(NO_INSTRUCTIONS));
+        panel.instructionsPanel.setVisible(!NO_INSTRUCTIONS.equals(instructions));
         panel.instructionsTextArea.setText(instructions);
     }
 
@@ -531,16 +548,16 @@ public class IssuesPanelController implements IIssues {
             return result;
         }
 
-        private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String filePattern) {
+        private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String pattern) {
             Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries()
-                    .parallelStream().filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
+                    .parallelStream().filter(StreamUtil.patternFilter(pattern, ste -> ste.getKey().file))
                     .filter(this::progressFilter).map(this::makeEntryPair).filter(Objects::nonNull);
 
             return entriesStream.flatMap(entry -> providers.stream()
                     .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
         }
 
-        Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
+        @Nullable Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
             IProject project = Core.getProject();
             if (!project.isProjectLoaded()) {
                 return null;
@@ -640,7 +657,7 @@ public class IssuesPanelController implements IIssues {
         @SuppressWarnings("unchecked")
         TableRowSorter<IssuesTableModel> sorter = (TableRowSorter<IssuesTableModel>) panel.table
                 .getRowSorter();
-        sorter.setRowFilter(new RowFilter<IssuesTableModel, Integer>() {
+        sorter.setRowFilter(new RowFilter<>() {
             @Override
             public boolean include(RowFilter.Entry<? extends IssuesTableModel, ? extends Integer> entry) {
                 return types.contains(ALL_TYPES)
@@ -660,9 +677,8 @@ public class IssuesPanelController implements IIssues {
         if (isShowingAllFiles()) {
             frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_TEMPLATE", totalItems));
         } else {
-            String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE",
-                    FilenameUtils.getName(filePath), totalItems));
+            String fileName = extractFilePathFromPattern();
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_TEMPLATE", fileName, totalItems));
         }
     }
 
@@ -671,10 +687,15 @@ public class IssuesPanelController implements IIssues {
             frame.setTitle(
                     OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
-            String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE",
-                    FilenameUtils.getName(filePath), shownItems, totalItems));
+            String fileName = extractFilePathFromPattern();
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE", fileName, shownItems,
+                    totalItems));
         }
+    }
+
+    private String extractFilePathFromPattern() {
+        String filePath = filePattern.replace("\\Q", "").replace("\\E", "");
+        return FilenameUtils.getName(filePath);
     }
 
     private boolean isShowingAllFiles() {

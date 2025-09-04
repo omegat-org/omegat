@@ -45,6 +45,7 @@ import org.omegat.util.PluginInstaller;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
+import org.openide.awt.Mnemonics;
 
 /**
  * Controller for the Plugins preferences panel.
@@ -144,6 +145,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.panelPluginDetails.add(pluginDetailsPane);
 
         panel.showBundledPluginTB.setSelected(false);
+        panel.showBundledPluginTB.setToolTipText(OStrings.getString("PREFS_PLUGINS_SHOW_BUNDLED_TOOLTIP"));
+        Mnemonics.setLocalizedText(panel.showBundledPluginTB, OStrings.getString("PREFS_PLUGINS_SHOW_BUNDLED_OFF"));
+        model.updateModel(false);
 
         panel.browsePluginsButton.addActionListener(e -> {
             try {
@@ -166,7 +170,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         panel.showBundledPluginTB.addActionListener(e -> {
             boolean showBundledPlugins = panel.showBundledPluginTB.isSelected();
-            model.updateModel(showBundledPlugins);
+            if (showBundledPlugins) {
+                Mnemonics.setLocalizedText(panel.showBundledPluginTB, OStrings.getString("PREFS_PLUGINS_SHOW_BUNDLED_ON"));
+                model.updateModel(true);
+            } else {
+                Mnemonics.setLocalizedText(panel.showBundledPluginTB, OStrings.getString("PREFS_PLUGINS_SHOW_BUNDLED_OFF"));
+                model.updateModel(false);
+            }
             panel.tablePluginsInfo.setRowSorter(new TableRowSorter<>(model));
         });
     }

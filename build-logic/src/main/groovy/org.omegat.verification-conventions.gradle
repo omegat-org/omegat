@@ -155,22 +155,6 @@ tasks.register('testIntegration', JavaExec) {
     dependsOn subprojects.collect {it.tasks.withType(Jar)}
 }
 
-tasks.register('testOnJava21', Test) {
-    description = 'Runs test cases on Java 21.'
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(21)
-        vendor = JvmVendorSpec.ADOPTIUM
-    }
-    if (project.hasProperty('headless')) {
-        systemProperty 'java.awt.headless', 'true'
-    }
-    // Allow setting the max heap size for the run task from the command line, e.g.
-    // `gradle -PtestMaxHeapSize=1024M testOnJava21`
-    maxHeapSize = findProperty('testMaxHeapSize')
-    systemProperty 'java.util.logging.config.file', "${rootDir}/config/test/logger.properties"
-    group = 'verification'
-}
-
 project.ext.xvfbPid = ""
 
 def testAcceptanceFinally = tasks.register('testAcceptanceFinally') {

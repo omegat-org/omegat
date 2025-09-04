@@ -68,7 +68,6 @@ import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.xml.sax.SAXParseException;
 
-import org.omegat.CLIParameters;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
@@ -103,7 +102,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
-import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
@@ -246,7 +244,7 @@ public class RealProject implements IProject {
     }
 
     private void initializeRemoteProject() {
-        if (config.getRepositories() != null && !Core.getParams().containsKey(CLIParameters.NO_TEAM)) {
+        if (config.getRepositories() != null && !RuntimePreferenceStore.getInstance().isNoTeam()) {
             try {
                 remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
                         config.getRepositories(), config);
@@ -260,10 +258,10 @@ public class RealProject implements IProject {
     }
 
     private void initializeTokenizer() {
-        sourceTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_SOURCE),
+        sourceTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerSource(),
                 config.getSourceTokenizer());
         Log.logInfoRB("SOURCE_TOKENIZER", sourceTokenizer.getClass().getName());
-        targetTokenizer = createTokenizer(Core.getParams().get(CLIParameters.TOKENIZER_TARGET),
+        targetTokenizer = createTokenizer(RuntimePreferenceStore.getInstance().getTokenizerTarget(),
                 config.getTargetTokenizer());
         Log.logInfoRB("TARGET_TOKENIZER", targetTokenizer.getClass().getName());
     }
@@ -311,7 +309,7 @@ public class RealProject implements IProject {
 
             saveProjectProperties();
 
-            // Set project specific segmentation rules if they exist, or
+            // Set project-specific segmentation rules if they exist, or
             // defaults otherwise.
             SRX srx = config.getProjectSRX();
             Core.setSegmenter(new Segmenter(srx == null ? Preferences.getSRX() : srx));
@@ -358,7 +356,7 @@ public class RealProject implements IProject {
             }
             isOnlineMode = onlineMode;
 
-            if (RuntimePreferences.isLocationSaveEnabled()) {
+            if (RuntimePreferenceStore.getInstance().isLocationSaveEnabled()) {
                 Preferences.setPreference(Preferences.CURRENT_FOLDER,
                         new File(config.getProjectRoot()).getAbsoluteFile().getParent());
                 Preferences.save();
@@ -544,7 +542,7 @@ public class RealProject implements IProject {
      * Lock omegat.project file against rename or move project.
      */
     protected boolean lockProject() {
-        if (!RuntimePreferences.isProjectLockingEnabled()) {
+        if (RuntimePreferenceStore.getInstance().isProjectLockingDisabled()) {
             return true;
         }
         try {
@@ -552,18 +550,18 @@ public class RealProject implements IProject {
             raFile = new RandomAccessFile(lockFile, "rw");
             lockChannel = raFile.getChannel();
             lock = lockChannel.tryLock();
-        } catch (Throwable ex) {
+        } catch (Exception ex) {
             Log.log(ex);
         }
         if (lock == null) {
             try {
                 lockChannel.close();
-            } catch (Throwable ignored) {
+            } catch (Exception ignored) {
             }
             lockChannel = null;
             try {
                 raFile.close();
-            } catch (Throwable ignored) {
+            } catch (Exception ignored) {
             }
             raFile = null;
             return false;
@@ -576,7 +574,7 @@ public class RealProject implements IProject {
      * Unlock omegat.project file against rename or move project.
      */
     protected void unlockProject() {
-        if (!RuntimePreferences.isProjectLockingEnabled()) {
+        if (RuntimePreferenceStore.getInstance().isProjectLockingDisabled()) {
             return;
         }
         try {
@@ -1765,13 +1763,13 @@ public class RealProject implements IProject {
                         .getDeclaredConstructor().newInstance();
             } catch (ClassNotFoundException e) {
                 Log.log(e.toString());
-            } catch (Throwable e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
         try {
             return (ITokenizer) projectPref.getDeclaredConstructor().newInstance();
-        } catch (Throwable e) {
+        } catch (Exception e) {
             Log.log(e);
         }
 
@@ -1840,8 +1838,8 @@ public class RealProject implements IProject {
      * @return normalized filename
      */
     protected String patchFileNameForEntryKey(String filename) {
-        String f = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_FROM);
-        String t = Core.getParams().get(CLIParameters.ALTERNATE_FILENAME_TO);
+        String f = RuntimePreferenceStore.getInstance().getAlternateFilenameFrom();
+        String t = RuntimePreferenceStore.getInstance().getAlternateFilenameTo();
         String fn = filename.replace('\\', '/');
         if (f != null && t != null) {
             fn = fn.replaceAll(f, t);
@@ -1872,12 +1870,14 @@ public class RealProject implements IProject {
             this.project = project;
         }
 
+        @Override
         public void setCurrentFile(FileInfo fi) {
             fileInfo = fi;
             super.setCurrentFile(fi);
             entryKeyFilename = patchFileNameForEntryKey(fileInfo.filePath);
         }
 
+        @Override
         public void fileFinished() {
             super.fileFinished();
 

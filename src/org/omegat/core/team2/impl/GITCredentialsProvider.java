@@ -82,14 +82,14 @@ import org.omegat.util.gui.StaticUIUtils;
 
 public class GITCredentialsProvider extends CredentialsProvider {
 
-    private static final Pattern[] fingerPrintRegex = new Pattern[] {
-            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
-            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
-            /* key fprint */ "(?<fingerprint>([0-9a-f]{2}:){15}[0-9a-f]{2})" + "\\.\\n"
+    private static final Pattern[] FINGER_PRINT_REGEX = new Pattern[] {
+            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n"
+                    + /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is "
+                    + /* key fprint */ "(?<fingerprint>([0-9a-f]{2}:){15}[0-9a-f]{2})" + "\\.\\n"
                     + "Are you sure you want to continue connecting\\?"),
-            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n" +
-            /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is " +
-            /* key fprint */"SHA256:(?<fingerprint>[0-9a-zA-Z/+]+)" + "\\.\\n"
+            Pattern.compile("The authenticity of host '" + /* host */ ".*" + "' can't be established\\.\\n"
+                    + /* key_type */ "(RSA|DSA|ECDSA|EDDSA)" + " key fingerprint is "
+                    + /* key fprint */"SHA256:(?<fingerprint>[0-9a-zA-Z/+]+)" + "\\.\\n"
                     + "Are you sure you want to continue connecting\\?"),
             Pattern.compile("The authenticity of host '.*' cannot be established\\.\\n"
                     + "The EC key's fingerprints are:\\n"
@@ -445,7 +445,7 @@ public class GITCredentialsProvider extends CredentialsProvider {
      */
     protected static String extractFingerprint(String text) {
         Matcher fingerprintMatcher;
-        for (Pattern p : fingerPrintRegex) {
+        for (Pattern p : FINGER_PRINT_REGEX) {
             fingerprintMatcher = p.matcher(text);
             if (fingerprintMatcher.find()) {
                 int start = fingerprintMatcher.start("fingerprint");

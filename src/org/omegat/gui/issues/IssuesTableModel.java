@@ -31,7 +31,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.util.List;
@@ -68,7 +67,7 @@ class IssuesTableModel extends AbstractTableModel {
 
     private final transient List<IIssue> issues;
 
-    IssuesTableModel(JTable table, TableRowSorter<?> rowSorter, List<IIssue> issues) {
+    IssuesTableModel(JTable table, List<IIssue> issues) {
         this.table = table;
         this.issues = issues;
     }

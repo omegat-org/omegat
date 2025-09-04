@@ -31,6 +31,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -79,8 +80,8 @@ public class MainWindowMenuTest extends TestCore {
                 if (params.length == 0) {
                     existsMethods.put(m.getName(), m);
                 }
-                // Include menu items that take a modifier key.
-                if (params.length == 1 && params[0] == Integer.TYPE) {
+                // Include menu items that take a modifier key or ActionEvent as a parameter.
+                if (params.length == 1 && (params[0] == Integer.TYPE || params[0] == ActionEvent.class)) {
                     existsMethods.put(m.getName(), m);
                 }
             }
@@ -94,11 +95,16 @@ public class MainWindowMenuTest extends TestCore {
                 try {
                     m = MainWindowMenuHandler.class.getMethod(actionMethodName);
                 } catch (NoSuchMethodException ignore) {
-                    // See if the method accepts a modifier key argument.
-                    m = MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
+                    try {
+                        // See if the method accepts a modifier key argument.
+                        m = MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
+                    } catch (NoSuchMethodException ignore2) {
+                        // See if the method accepts ActionEvent as an argument.
+                        m = MainWindowMenuHandler.class.getMethod(actionMethodName, ActionEvent.class);
+                    }
                 }
                 assertNotNull("Action method not defined for " + f.getName(), m);
-                assertNotNull(existsMethods.remove(actionMethodName));
+                assertNotNull("Action method not defined for " + actionMethodName, existsMethods.remove(actionMethodName));
             }
         }
         assertTrue("menu items not found", count > 30);
@@ -121,9 +127,14 @@ public class MainWindowMenuTest extends TestCore {
                     // See if the method accepts a modifier key argument.
                     try {
                         method = MainWindowMenuHandler.class.getMethod(actionMethodName, Integer.TYPE);
-                    } catch (NoSuchMethodException ex) {
-                        assertNotNull("Action method \"" + actionMethodName + "\" not defined for invoked from " + path,
-                                method);
+                    } catch (NoSuchMethodException ignore2) {
+                        // See if the method accepts ActionEvent as an argument.
+                        try {
+                            method = MainWindowMenuHandler.class.getMethod(actionMethodName, ActionEvent.class);
+                        } catch (NoSuchMethodException ex) {
+                            assertNotNull("Action method \"" + actionMethodName + "\" not defined for invoked from "
+                                            + path, method);
+                        }
                     }
                 }
             }

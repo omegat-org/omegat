@@ -24,13 +24,11 @@
  **************************************************************************/
 package org.omegat.gui.editor;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 import org.omegat.util.Preferences;
 
 import javax.swing.text.BadLocationException;
@@ -41,7 +39,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -60,9 +57,6 @@ public class EditorTextLoadedTest extends TestCoreGUI {
     private final List<SourceTextEntry> selectedEntries = new ArrayList<>();
     private final CountDownLatch initialLoadLatch = new CountDownLatch(1);
     private final CountDownLatch selectionChangeLatch = new CountDownLatch(2);
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testEditorTextLoaded() throws Exception {

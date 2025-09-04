@@ -65,8 +65,8 @@ launch4j {
     copyright = "The GNU General Public License, Version 3.0"
     version = omtVersion.version
     textVersion = omtVersion.version
-    companyName = distAppVendor
-    fileDescription = shortDescription
+    companyName = project.property('org.omegat.vendor')
+    fileDescription = project.property('org.omegat.shortDescription')
     restartOnCrash = false
     stayAlive = false
     priority = 'normal'

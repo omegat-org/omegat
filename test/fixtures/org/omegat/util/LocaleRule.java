@@ -65,4 +65,26 @@ public class LocaleRule implements TestRule {
             }
         };
     }
+
+    /**
+     * Apply locale rule for class initialization.
+     * This method should be called in @BeforeClass methods.
+     *
+     * @param locale the locale to set
+     */
+    public static void applyLocaleForClass(@NotNull Locale locale) {
+        Locale.setDefault(locale);
+        OStrings.loadBundle(locale);
+    }
+
+    /**
+     * Restore original locale for class teardown.
+     * This method should be called in @AfterClass methods.
+     *
+     * @param originalLocale the original locale to restore
+     */
+    public static void restoreLocaleForClass(@NotNull Locale originalLocale) {
+        Locale.setDefault(originalLocale);
+        OStrings.loadBundle(originalLocale);
+    }
 }

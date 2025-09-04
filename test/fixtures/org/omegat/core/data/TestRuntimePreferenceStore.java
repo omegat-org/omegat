@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2024-2025 Hiroshi Miura
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,26 +22,14 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.editor;
 
-import org.junit.Test;
+package org.omegat.core.data;
 
-import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.OStrings;
+public class TestRuntimePreferenceStore extends RuntimePreferenceStore {
 
-import static org.junit.Assert.assertNotNull;
-
-public class EditorTextAreaIntroTest extends TestCoreGUI {
-
-    @Test
-    public void testIntroPaneExist() {
-        assertNotNull(window);
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).requireEnabled();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane").requireEnabled();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
-                .verticalScrollBar().requireVisible();
-        window.panel(OStrings.getString("DOCKING_FIRST_STEPS_TITLE")).scrollPane("EditorScrollPane")
-                .horizontalScrollBar().requireNotVisible();
+    public static void reset() {
+        setInstance(new TestRuntimePreferenceStore());
+        getInstance().setLocationSaveDisable();
+        getInstance().setProjectLockingDisabled();
     }
-
 }

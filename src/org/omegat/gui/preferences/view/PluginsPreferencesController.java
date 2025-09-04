@@ -113,7 +113,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         int rowIndex = panel.tablePluginsInfo.getSelectedRow();
         if (rowIndex == -1) {
             pluginDetailsPane.setText("");
-        } else {
+        } else if (rowIndex < model.getRowCount()) {
             int index = panel.tablePluginsInfo.convertRowIndexToModel(rowIndex);
             PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
             pluginDetailsPane.setText(formatDetailText(model.getItemAt(index)));
@@ -143,6 +143,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
         pluginDetailsPane = new PluginDetailsPane();
         panel.panelPluginDetails.add(pluginDetailsPane);
 
+        panel.showBundledPluginTB.setSelected(false);
+
         panel.browsePluginsButton.addActionListener(e -> {
             try {
                 DesktopWrapper.browse(URI.create(PLUGINS_WIKI_URL));
@@ -162,8 +164,8 @@ public class PluginsPreferencesController extends BasePreferencesController {
             }
         });
 
-        panel.showBundledPluginsCB.addActionListener(e -> {
-            boolean showBundledPlugins = panel.showBundledPluginsCB.isSelected();
+        panel.showBundledPluginTB.addActionListener(e -> {
+            boolean showBundledPlugins = panel.showBundledPluginTB.isSelected();
             model.updateModel(showBundledPlugins);
             panel.tablePluginsInfo.setRowSorter(new TableRowSorter<>(model));
         });

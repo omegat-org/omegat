@@ -60,7 +60,8 @@ public class PluginsPreferencesPanel extends JPanel {
         jPanel2 = new javax.swing.JPanel();
         browsePluginsButton = new javax.swing.JButton();
         installFromDiskButton = new javax.swing.JButton();
-        showBundledPluginsCB = new javax.swing.JCheckBox();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        showBundledPluginTB = new javax.swing.JToggleButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
@@ -105,16 +106,19 @@ public class PluginsPreferencesPanel extends JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
         jPanel2.add(installFromDiskButton);
+        jPanel2.add(filler1);
 
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(showBundledPluginsCB, bundle.getString("PREFS_PLUGINS_SHOW_BUNDLED")); // NOI18N
-        jPanel2.add(showBundledPluginsCB);
+        org.openide.awt.Mnemonics.setLocalizedText(showBundledPluginTB, bundle.getString("PREFS_PLUGINS_SHOW_BUNDLED")); // NOI18N
+        showBundledPluginTB.setToolTipText("");
+        jPanel2.add(showBundledPluginTB);
 
         add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton browsePluginsButton;
+    private javax.swing.Box.Filler filler1;
     javax.swing.JButton installFromDiskButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -122,7 +126,7 @@ public class PluginsPreferencesPanel extends JPanel {
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
     javax.swing.JScrollPane scrollTable;
-    javax.swing.JCheckBox showBundledPluginsCB;
+    javax.swing.JToggleButton showBundledPluginTB;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

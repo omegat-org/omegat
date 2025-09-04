@@ -46,7 +46,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CancellationException;
@@ -531,28 +530,32 @@ public class IssuesPanelController implements IIssues {
             return result;
         }
 
-        private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String filePattern) {
-            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = Core.getProject().getAllEntries()
-                    .parallelStream().filter(StreamUtil.patternFilter(filePattern, ste -> ste.getKey().file))
-                    .filter(this::progressFilter).map(this::makeEntryPair).filter(Objects::nonNull);
-
-            return entriesStream.flatMap(entry -> providers.stream()
-                    .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream()));
+        private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String pattern) {
+            Stream<SourceTextEntry> allEntries = Core.getProject().getAllEntries().parallelStream();
+            Stream<SourceTextEntry> filteredByPattern = allEntries.filter(StreamUtil.patternFilter(pattern, ste -> ste.getKey().file));
+            Stream<SourceTextEntry> filteredByProgress = filteredByPattern.filter(this::progressFilter);
+            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = filteredByProgress.flatMap(ste -> makeEntryPair(ste).stream());
+            return entriesStream.flatMap(entry -> getIssuesForEntry(entry, providers));
         }
 
-        Map.Entry<SourceTextEntry, TMXEntry> makeEntryPair(SourceTextEntry ste) {
+        private Stream<IIssue> getIssuesForEntry(Map.Entry<SourceTextEntry, TMXEntry> entry, List<IIssueProvider> providers) {
+            return providers.stream()
+                    .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream());
+        }
+
+        Optional<Map.Entry<SourceTextEntry, TMXEntry>> makeEntryPair(SourceTextEntry ste) {
             IProject project = Core.getProject();
             if (!project.isProjectLoaded()) {
-                return null;
+                return Optional.empty();
             }
             TMXEntry tmxEntry = project.getTranslationInfo(ste);
             if (!tmxEntry.isTranslated()) {
-                return null;
+                return Optional.empty();
             }
             if (isShowingAllFiles() && DataUtils.isDuplicate(ste, tmxEntry)) {
-                return null;
+                return Optional.empty();
             }
-            return new AbstractMap.SimpleImmutableEntry<>(ste, tmxEntry);
+            return Optional.of(new AbstractMap.SimpleImmutableEntry<>(ste, tmxEntry));
         }
 
         boolean progressFilter(SourceTextEntry ste) {

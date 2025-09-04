@@ -42,6 +42,7 @@ import static org.junit.Assert.assertTrue;
 public class IssuesPanelTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
+    private IssuesPanelControllerMock issuesPanelController;
 
     @Test
     public void testIssuesPanelShow() throws Exception {
@@ -52,7 +53,6 @@ public class IssuesPanelTest extends TestCoreGUI {
         robot().waitForIdle();
         //
         assertNotNull(window);
-        IssuesPanelControllerMock issuesPanelController = new IssuesPanelControllerMock(window.target());
         CountDownLatch latch = new CountDownLatch(1);
         // watch for table update
         PropertyChangeListener propertyListener = evt -> {
@@ -60,8 +60,11 @@ public class IssuesPanelTest extends TestCoreGUI {
                 latch.countDown();
             }
         };
-        issuesPanelController.addPropertyChangeListener(propertyListener);
-        SwingUtilities.invokeAndWait(() -> issuesPanelController.showForFiles(".*txt", 1));
+        SwingUtilities.invokeAndWait(() -> {
+            issuesPanelController = new IssuesPanelControllerMock(window.target());
+            issuesPanelController.addPropertyChangeListener(propertyListener);
+            issuesPanelController.showForFiles(".*txt", 1);
+        });
 
         try {
             assertTrue(latch.await(20, TimeUnit.SECONDS));

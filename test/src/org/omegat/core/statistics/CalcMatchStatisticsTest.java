@@ -27,12 +27,6 @@ package org.omegat.core.statistics;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -41,28 +35,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import org.omegat.core.data.EntryKey;
-import org.omegat.core.data.ExternalTMFactory;
-import org.omegat.core.data.ExternalTMX;
-import org.omegat.core.data.IProject;
-import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.data.ProtectedPart;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.IFilter;
-import org.omegat.filters2.IParseCallback;
-import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.po.PoFilter;
-import org.omegat.tokenizer.DefaultTokenizer;
-import org.omegat.tokenizer.ITokenizer;
-import org.omegat.tokenizer.LuceneEnglishTokenizer;
-import org.omegat.util.Language;
-import org.omegat.util.Log;
 import org.omegat.util.TestPreferencesInitializer;
 
 import static org.junit.Assert.assertTrue;
@@ -87,7 +61,7 @@ public class CalcMatchStatisticsTest {
 
     @Test
     public void testCalcMatchStatics() {
-        TestingProject project = new TestingProject();
+        TestingProject project = new TestingProject(tmpDir);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         CountDownLatch latch = new CountDownLatch(1);
         TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(latch);
@@ -147,221 +121,4 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
     }
 
-    protected static class TestingProjectProperties extends ProjectProperties {
-        TestingProjectProperties() {
-            super();
-            setSourceLanguage(new Language("en"));
-            setSourceTokenizer(LuceneEnglishTokenizer.class);
-            setSentenceSegmentingEnabled(false);
-            setTargetLanguage(new Language("ca"));
-            setTargetTokenizer(DefaultTokenizer.class);
-            setProjectRoot(tmpDir.toAbsolutePath().toString());
-        }
-    }
-
-    static class TestingProject extends NotLoadedProject implements IProject {
-        private final ProjectProperties prop;
-
-        private final ProjectTMX projectTMX;
-        private Map<String, ExternalTMX> transMemories;
-        private final Segmenter segmenter;
-        private final FilterMaster filterMaster;
-
-        TestingProject() {
-            super();
-            prop = new TestingProjectProperties();
-            filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
-            segmenter = new Segmenter(SRX.getDefault());
-            projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
-                    Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
-        }
-
-        @Override
-        public ProjectProperties getProjectProperties() {
-            return prop;
-        }
-
-        @Override
-        public TMXEntry getTranslationInfo(SourceTextEntry ste) {
-            if (projectTMX == null) {
-                return EMPTY_TRANSLATION;
-            }
-            TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
-            if (r == null) {
-                r = projectTMX.getDefaultTranslation(ste.getSrcText());
-            }
-            if (r == null) {
-                r = EMPTY_TRANSLATION;
-            }
-            return r;
-        }
-
-        @Override
-        public List<SourceTextEntry> getAllEntries() {
-            List<SourceTextEntry> ste = new ArrayList<>();
-            IFilter filter = new PoFilter();
-            Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
-            IParseCallback testCallback = new TestingCallback(ste);
-            FilterContext context = new FilterContext(new Language("en"), new Language("ca"), true);
-            try {
-                filter.parseFile(testSource.toFile(), Collections.emptyMap(), context, testCallback);
-            } catch (Exception e) {
-                Log.log(e);
-            }
-            return ste;
-        }
-
-        @Override
-        public ITokenizer getSourceTokenizer() {
-            return new LuceneEnglishTokenizer();
-        }
-
-        @Override
-        public ITokenizer getTargetTokenizer() {
-            return new DefaultTokenizer();
-        }
-
-        @Override
-        public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
-            return Collections.emptyMap();
-        }
-
-        @Override
-        public AllTranslations getAllTranslations(SourceTextEntry ste) {
-            TestingAllTranslations r = new TestingAllTranslations();
-            synchronized (projectTMX) {
-                r.setDefaultTranslation(projectTMX.getDefaultTranslation(ste.getSrcText()));
-                r.setAlternativeTranslation(projectTMX.getMultipleTranslation(ste.getKey()));
-                if (r.getAlternativeTranslation() != null) {
-                    r.setCurrentTranslation(r.getAlternativeTranslation());
-                } else if (r.getDefaultTranslation() != null) {
-                    r.setCurrentTranslation(r.getDefaultTranslation());
-                } else {
-                    r.setCurrentTranslation(EMPTY_TRANSLATION);
-                }
-                if (r.getDefaultTranslation() == null) {
-                    r.setDefaultTranslation(EMPTY_TRANSLATION);
-                }
-                if (r.getAlternativeTranslation() == null) {
-                    r.setAlternativeTranslation(EMPTY_TRANSLATION);
-                }
-            }
-            return r;
-        }
-
-        @Override
-        public Map<String, ExternalTMX> getTransMemories() {
-            synchronized (projectTMX) {
-                if (transMemories == null) {
-                    transMemories = new TreeMap<>();
-                    try {
-                        ExternalTMX newTMX;
-                        Path testTmx = Paths.get("test/data/tmx/test-match-stat-en-ca.tmx");
-                        newTMX = ExternalTMFactory.load(testTmx.toFile(), prop, segmenter, filterMaster);
-                        transMemories.put(testTmx.toString(), newTMX);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-            return Collections.unmodifiableMap(transMemories);
-        }
-    }
-
-    static class TestingAllTranslations extends IProject.AllTranslations {
-        public void setAlternativeTranslation(TMXEntry entry) {
-            alternativeTranslation = entry;
-        }
-
-        public void setDefaultTranslation(TMXEntry entry) {
-            defaultTranslation = entry;
-        }
-
-        public void setCurrentTranslation(TMXEntry entry) {
-            currentTranslation = entry;
-        }
-    }
-
-    static class TestingCallback implements IParseCallback {
-
-        private final List<SourceTextEntry> steList;
-
-        TestingCallback(final List<SourceTextEntry> ste) {
-            this.steList = ste;
-        }
-
-        @Override
-        public void addEntryWithProperties(String id, String source, String translation, boolean isFuzzy,
-                String[] props, String path, IFilter filter, List<ProtectedPart> protectedParts) {
-            SourceTextEntry ste = new SourceTextEntry(new EntryKey("source.po", source, id, "", "", path), 1,
-                    props, translation, protectedParts);
-            ste.setSourceTranslationFuzzy(isFuzzy);
-            steList.add(ste);
-        }
-
-        @Override
-        public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                String path, IFilter filter, List<ProtectedPart> protectedParts) {
-            List<String> propList = new ArrayList<>(2);
-            if (comment != null) {
-                propList.add("comment");
-                propList.add(comment);
-            }
-            String[] props = propList.toArray(new String[0]);
-            addEntryWithProperties(id, source, translation, isFuzzy, props, path, filter, protectedParts);
-        }
-
-        @Override
-        public void linkPrevNextSegments() {
-            // do nothing
-        }
-    }
-
-    static class TestingStatsConsumer implements IStatsConsumer {
-        private String[][] result;
-        private final CountDownLatch latch;
-
-        public TestingStatsConsumer(CountDownLatch latch) {
-            this.latch = latch;
-        }
-
-        public String[][] getTable() {
-            return result;
-        }
-
-        @Override
-        public void appendTextData(final String result) {
-            // do nothing
-        }
-
-        @Override
-        public void appendTable(final String title, final String[] headers, final String[][] data) {
-            // do nothing
-        }
-
-        @Override
-        public void setTextData(final String data) {
-            // do nothing
-        }
-
-        @Override
-        public void setTable(final String[] headers, final String[][] data) {
-            result = data;
-        }
-
-        @Override
-        public void setDataFile(final String path) {
-            // do nothing
-        }
-
-        @Override
-        public void finishData() {
-            latch.countDown();
-        }
-
-        @Override
-        public void showProgress(final int percent) {
-            // do nothing
-        }
-    }
 }

@@ -32,12 +32,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMFactory;
 import org.omegat.core.data.ExternalTMX;
@@ -63,6 +64,8 @@ import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
+import static org.junit.Assert.assertTrue;
+
 public class CalcMatchStatisticsTest {
 
     private FilterMaster filterMaster;
@@ -72,22 +75,25 @@ public class CalcMatchStatisticsTest {
      */
     @Before
     public final void setUp() throws Exception {
-        Core.initializeConsole(Collections.emptyMap());
         TestPreferencesInitializer.init();
         filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
     }
 
     @Test
     public void testCalcMatchStatics() {
-        TestProject project = new TestProject(new ProjectPropertiesTest(), filterMaster);
-        IStatsConsumer callback = new TestStatsConsumer();
+        TestingProject project = new TestingProject(new TestingProjectProperties(), filterMaster);
+        CountDownLatch latch = new CountDownLatch(1);
+        IStatsConsumer callback = new TestingStatsConsumer(latch);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
         CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
         calcMatchStatistics.start();
         try {
+            assertTrue(latch.await(1, TimeUnit.SECONDS));
+        } catch (InterruptedException ignored) {
+        }
+        try {
             calcMatchStatistics.join();
-        } catch (InterruptedException e) {
-            calcMatchStatistics.checkInterrupted();
+        } catch (InterruptedException ignored) {
         }
         String[][] result = calcMatchStatistics.getTable();
         Assert.assertNotNull(result);
@@ -135,12 +141,17 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
 
         // change threshold
+        latch = new CountDownLatch(1);
+        callback = new TestingStatsConsumer(latch);
         calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
         calcMatchStatistics.start();
         try {
+            assertTrue(latch.await(1, TimeUnit.SECONDS));
+        } catch (InterruptedException ignored) {
+        }
+        try {
             calcMatchStatistics.join();
-        } catch (InterruptedException e) {
-            calcMatchStatistics.checkInterrupted();
+        } catch (InterruptedException ignored) {
         }
         result = calcMatchStatistics.getTable();
         Assert.assertNotNull(result);
@@ -188,8 +199,8 @@ public class CalcMatchStatisticsTest {
         Assert.assertEquals("5699", result[7][4]);
     }
 
-    protected static class ProjectPropertiesTest extends ProjectProperties {
-        ProjectPropertiesTest() {
+    protected static class TestingProjectProperties extends ProjectProperties {
+        TestingProjectProperties() {
             super();
             setSourceLanguage(new Language("en"));
             setSourceTokenizer(LuceneEnglishTokenizer.class);
@@ -199,7 +210,7 @@ public class CalcMatchStatisticsTest {
         }
     }
 
-    static class TestProject extends NotLoadedProject implements IProject {
+    static class TestingProject extends NotLoadedProject implements IProject {
         private final ProjectProperties prop;
 
         private final ProjectTMX projectTMX;
@@ -207,7 +218,7 @@ public class CalcMatchStatisticsTest {
         private final Segmenter segmenter;
         private final FilterMaster filterMaster;
 
-        TestProject(ProjectProperties prop, FilterMaster filterMaster) {
+        TestingProject(ProjectProperties prop, FilterMaster filterMaster) {
             super();
             this.prop = prop;
             this.filterMaster = filterMaster;
@@ -241,7 +252,7 @@ public class CalcMatchStatisticsTest {
             List<SourceTextEntry> ste = new ArrayList<>();
             IFilter filter = new PoFilter();
             Path testSource = Paths.get("test/data/filters/po/file-POFilter-match-stat-en-ca.po");
-            IParseCallback testCallback = new TestCallback(ste);
+            IParseCallback testCallback = new TestingCallback(ste);
             FilterContext context = new FilterContext(new Language("en"), new Language("ca"), true);
             try {
                 filter.parseFile(testSource.toFile(), Collections.emptyMap(), context, testCallback);
@@ -268,7 +279,7 @@ public class CalcMatchStatisticsTest {
 
         @Override
         public AllTranslations getAllTranslations(SourceTextEntry ste) {
-            TestAllTranslations r = new TestAllTranslations();
+            TestingAllTranslations r = new TestingAllTranslations();
             synchronized (projectTMX) {
                 r.setDefaultTranslation(projectTMX.getDefaultTranslation(ste.getSrcText()));
                 r.setAlternativeTranslation(projectTMX.getMultipleTranslation(ste.getKey()));
@@ -308,7 +319,7 @@ public class CalcMatchStatisticsTest {
         }
     }
 
-    static class TestAllTranslations extends IProject.AllTranslations {
+    static class TestingAllTranslations extends IProject.AllTranslations {
         public void setAlternativeTranslation(TMXEntry entry) {
             alternativeTranslation = entry;
         }
@@ -322,11 +333,11 @@ public class CalcMatchStatisticsTest {
         }
     }
 
-    static class TestCallback implements IParseCallback {
+    static class TestingCallback implements IParseCallback {
 
         private final List<SourceTextEntry> steList;
 
-        TestCallback(final List<SourceTextEntry> ste) {
+        TestingCallback(final List<SourceTextEntry> ste) {
             this.steList = ste;
         }
 
@@ -387,7 +398,11 @@ public class CalcMatchStatisticsTest {
         }
     }
 
-    static class TestStatsConsumer implements IStatsConsumer {
+    static class TestingStatsConsumer implements IStatsConsumer {
+        CountDownLatch latch;
+        public TestingStatsConsumer(CountDownLatch latch) {
+            this.latch = latch;
+        }
 
         @Override
         public void appendTextData(final String result) {
@@ -416,7 +431,7 @@ public class CalcMatchStatisticsTest {
 
         @Override
         public void finishData() {
-            // do nothing
+            latch.countDown();
         }
 
         @Override

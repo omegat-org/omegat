@@ -70,7 +70,7 @@ include("machinetranslators:apertium",
         "language-modules:uk",
         "language-modules:zh",
         "aligner",
-        "theme",
         "spellchecker:hunspell",
         "spellchecker:morfologik",
+        "theme",
         "tipoftheday")

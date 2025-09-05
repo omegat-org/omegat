@@ -43,12 +43,12 @@ import java.util.TimeZone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
-import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import org.omegat.util.OStrings;
@@ -106,9 +106,6 @@ public class StatsResult {
 
     @JsonProperty("date")
     private String date;
-
-    public StatsResult() {
-    }
 
     public StatsResult(String projectName, String projectRoot, String sourceLanguage, String targetLanguage,
             String sourceRoot) {
@@ -256,12 +253,11 @@ public class StatsResult {
     @JsonIgnore
     public String getXmlData() throws JsonProcessingException {
         setDate();
-        XmlMapper xmlMapper = new XmlMapper();
-        xmlMapper.registerModule(new JakartaXmlBindAnnotationModule());
-        xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        xmlMapper.setDefaultUseWrapper(false);
-
+        XmlMapper xmlMapper = XmlMapper.builder()
+                .configure(MapperFeature.USE_ANNOTATIONS, true)
+                .configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true)
+                .configure(SerializationFeature.INDENT_OUTPUT, true)
+                .defaultUseWrapper(false).build();
         return xmlMapper.writeValueAsString(this);
 
     }

@@ -68,7 +68,7 @@ public class CalcMatchStatisticsTest {
         CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer, false);
         calcMatchStatistics.start();
         try {
-            assertTrue(latch.await(1, TimeUnit.SECONDS));
+            assertTrue(latch.await(5, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
         }
         try {

@@ -25,6 +25,7 @@
 
 package org.omegat.core.statistics;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.omegat.core.data.EntryKey;
@@ -61,14 +63,13 @@ import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.LuceneEnglishTokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
-import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 import static org.junit.Assert.assertTrue;
 
 public class CalcMatchStatisticsTest {
 
-    private FilterMaster filterMaster;
+    private static Path tmpDir;
 
     /*
      * Setup test project.
@@ -76,16 +77,21 @@ public class CalcMatchStatisticsTest {
     @Before
     public final void setUp() throws Exception {
         TestPreferencesInitializer.init();
-        filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
+    }
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        tmpDir = Files.createTempDirectory("omegat");
+        assertTrue(tmpDir.toFile().isDirectory());
     }
 
     @Test
     public void testCalcMatchStatics() {
-        TestingProject project = new TestingProject(new TestingProjectProperties(), filterMaster);
-        CountDownLatch latch = new CountDownLatch(1);
-        IStatsConsumer callback = new TestingStatsConsumer(latch);
+        TestingProject project = new TestingProject();
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CalcMatchStatisticsMock calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
+        CountDownLatch latch = new CountDownLatch(1);
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(latch);
+        CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer, false);
         calcMatchStatistics.start();
         try {
             assertTrue(latch.await(1, TimeUnit.SECONDS));
@@ -95,65 +101,7 @@ public class CalcMatchStatisticsTest {
             calcMatchStatistics.join();
         } catch (InterruptedException ignored) {
         }
-        String[][] result = calcMatchStatistics.getTable();
-        Assert.assertNotNull(result);
-
-        // assertions
-        // RowRepetitions 11 90 509 583
-        Assert.assertEquals("11", result[0][1]);
-        Assert.assertEquals("90", result[0][2]);
-        Assert.assertEquals("509", result[0][3]);
-        Assert.assertEquals("583", result[0][4]);
-        // RowExactMatch 0 0 0 0
-        Assert.assertEquals("0", result[1][1]);
-        Assert.assertEquals("0", result[1][2]);
-        Assert.assertEquals("0", result[1][3]);
-        Assert.assertEquals("0", result[1][4]);
-        // RowMatch95 84 712 3606 4225
-        Assert.assertEquals("84", result[2][1]);
-        Assert.assertEquals("712", result[2][2]);
-        Assert.assertEquals("3606", result[2][3]);
-        Assert.assertEquals("4225", result[2][4]);
-        // RowMatch85 0 0 0 0
-        Assert.assertEquals("0", result[3][1]);
-        Assert.assertEquals("0", result[3][2]);
-        Assert.assertEquals("0", result[3][3]);
-        Assert.assertEquals("0", result[3][4]);
-        // RowMatch75 3 32 234 256
-        Assert.assertEquals("3", result[4][1]);
-        Assert.assertEquals("32", result[4][2]);
-        Assert.assertEquals("234", result[4][3]);
-        Assert.assertEquals("256", result[4][4]);
-        // RowMatch50 4 61 304 361
-        Assert.assertEquals("4", result[5][1]);
-        Assert.assertEquals("61", result[5][2]);
-        Assert.assertEquals("304", result[5][3]);
-        Assert.assertEquals("361", result[5][4]);
-        // RowNoMatch 6 43 241 274
-        Assert.assertEquals("6", result[6][1]);
-        Assert.assertEquals("43", result[6][2]);
-        Assert.assertEquals("241", result[6][3]);
-        Assert.assertEquals("274", result[6][4]);
-        // Total 108 938 4894 5699
-        Assert.assertEquals("108", result[7][1]);
-        Assert.assertEquals("938", result[7][2]);
-        Assert.assertEquals("4894", result[7][3]);
-        Assert.assertEquals("5699", result[7][4]);
-
-        // change threshold
-        latch = new CountDownLatch(1);
-        callback = new TestingStatsConsumer(latch);
-        calcMatchStatistics = new CalcMatchStatisticsMock(project, segmenter, callback);
-        calcMatchStatistics.start();
-        try {
-            assertTrue(latch.await(1, TimeUnit.SECONDS));
-        } catch (InterruptedException ignored) {
-        }
-        try {
-            calcMatchStatistics.join();
-        } catch (InterruptedException ignored) {
-        }
-        result = calcMatchStatistics.getTable();
+        String[][] result = testingStatsConsumer.getTable();
         Assert.assertNotNull(result);
 
         // assertions
@@ -207,6 +155,7 @@ public class CalcMatchStatisticsTest {
             setSentenceSegmentingEnabled(false);
             setTargetLanguage(new Language("ca"));
             setTargetTokenizer(DefaultTokenizer.class);
+            setProjectRoot(tmpDir.toAbsolutePath().toString());
         }
     }
 
@@ -218,11 +167,11 @@ public class CalcMatchStatisticsTest {
         private final Segmenter segmenter;
         private final FilterMaster filterMaster;
 
-        TestingProject(ProjectProperties prop, FilterMaster filterMaster) {
+        TestingProject() {
             super();
-            this.prop = prop;
-            this.filterMaster = filterMaster;
-            segmenter = new Segmenter(Preferences.getSRX());
+            prop = new TestingProjectProperties();
+            filterMaster = new FilterMaster(FilterMaster.createDefaultFiltersConfig());
+            segmenter = new Segmenter(SRX.getDefault());
             projectTMX = new ProjectTMX(new Language("en"), new Language("ca"), true,
                     Paths.get("test/data/tmx/empty.tmx").toFile(), null, segmenter);
         }
@@ -368,40 +317,16 @@ public class CalcMatchStatisticsTest {
         }
     }
 
-    static class CalcMatchStatisticsMock extends CalcMatchStatistics {
+    static class TestingStatsConsumer implements IStatsConsumer {
+        private String[][] result;
+        private final CountDownLatch latch;
 
-        private final String[] rowsTotal = new String[] { "RowRepetitions", "RowExactMatch", "RowMatch95",
-                "RowMatch85", "RowMatch75", "RowMatch50", "RowNoMatch", "Total" };
-
-        private final IProject project;
-        private MatchStatCounts result;
-        private final IStatsConsumer callback;
-
-        CalcMatchStatisticsMock(IProject project, Segmenter segmenter, IStatsConsumer callback) {
-            super(project, segmenter, callback, false);
-            this.project = project;
-            this.callback = callback;
-        }
-
-        @Override
-        public void run() {
-            entriesToProcess = project.getAllEntries().size();
-            result = calcTotal(false);
-            callback.finishData();
+        public TestingStatsConsumer(CountDownLatch latch) {
+            this.latch = latch;
         }
 
         public String[][] getTable() {
-            if (result == null) {
-                return null;
-            }
-            return result.calcTable(rowsTotal, i -> i != 1);
-        }
-    }
-
-    static class TestingStatsConsumer implements IStatsConsumer {
-        CountDownLatch latch;
-        public TestingStatsConsumer(CountDownLatch latch) {
-            this.latch = latch;
+            return result;
         }
 
         @Override
@@ -421,7 +346,7 @@ public class CalcMatchStatisticsTest {
 
         @Override
         public void setTable(final String[] headers, final String[][] data) {
-            // do nothing
+            result = data;
         }
 
         @Override

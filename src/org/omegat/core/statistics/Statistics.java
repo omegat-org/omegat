@@ -28,10 +28,16 @@
 
 package org.omegat.core.statistics;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.BreakIterator;
 import java.text.DateFormat;
 import java.util.Date;
@@ -123,26 +129,39 @@ public final class Statistics {
     }
 
     /**
-     * Write text to file.
+     * Writes the specified text to a file, along with the current date and time.
+     * If the target file's parent directories do not exist, they will be created.
+     * Any existing content in the file will be overwritten.
      *
-     * @param filename
-     * @param text
+     * @param filename the name and path of the file to which the text will be written
+     * @param text the text content to write to the file
      */
     public static void writeStat(String filename, String text) {
-        try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename),
-                StandardCharsets.UTF_8)) {
-            out.write(DateFormat.getInstance().format(new Date()) + "\n");
-            out.write(text);
+        Path path = Paths.get(filename);
+        // Create parent directories if they don't exist
+        if (path.getParent() != null) {
+            try {
+                Files.createDirectories(path.getParent());
+            } catch (IOException e) {
+                Log.log(e);
+                return;
+            }
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            writer.write(DateFormat.getInstance().format(new Date()) + "\n");
+            writer.write(text);
         } catch (Exception ex) {
             Log.log(ex);
         }
     }
 
     /**
-     * Write statistics to a file with the format set in the preferences.
+     * Writes the statistics result to the specified directory in all selected output formats.
      *
-     * @param filename
-     * @param result
+     * @param dir the directory where the statistics should be written
+     * @param result the statistics result object containing the data to be written
      */
     public static void writeStat(String dir, StatsResult result) {
         int outputFormats = Preferences.getPreferenceDefault(Preferences.STATS_OUTPUT_FORMAT,
@@ -155,11 +174,13 @@ public final class Statistics {
     }
 
     /**
-     * Write statistics to a file in specified format.
+     * Writes the statistics result to the specified directory in the given output format.
+     * Depending on the format, the data is written as text, XML, or JSON. The file is encoded
+     * in UTF-8. If any errors occur during file writing, they are logged.
      *
-     * @param filename
-     * @param result
-     * @param format
+     * @param dir the directory where the statistics file should be written
+     * @param result the statistics result object containing the data to be written
+     * @param format the format in which the statistics should be written (TEXT, XML, or JSON)
      */
     public static void writeStat(String dir, StatsResult result, StatOutputFormat format) {
         File statFile = new File(dir, OConsts.STATS_FILENAME + format.getFileExtension());

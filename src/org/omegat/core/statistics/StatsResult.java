@@ -49,6 +49,7 @@ import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationModule;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import org.omegat.util.OStrings;
@@ -254,9 +255,9 @@ public class StatsResult {
     public String getXmlData() throws JsonProcessingException {
         setDate();
         XmlMapper xmlMapper = XmlMapper.builder()
-                .configure(MapperFeature.USE_ANNOTATIONS, true)
+                .addModule(new JakartaXmlBindAnnotationModule())
                 .configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true)
-                .configure(SerializationFeature.INDENT_OUTPUT, true)
+                .enable(SerializationFeature.INDENT_OUTPUT)
                 .defaultUseWrapper(false).build();
         return xmlMapper.writeValueAsString(this);
 

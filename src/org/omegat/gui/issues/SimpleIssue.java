@@ -30,6 +30,7 @@ import java.awt.Dimension;
 
 import javax.swing.Icon;
 
+import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 
@@ -41,10 +42,10 @@ import org.omegat.core.data.TMXEntry;
 public abstract class SimpleIssue implements IIssue {
 
     private final SourceTextEntry sourceEntry;
-    private final TMXEntry targetEntry;
+    private final ITMXEntry targetEntry;
     private final Icon icon;
 
-    public SimpleIssue(SourceTextEntry sourceEntry, TMXEntry targetEntry) {
+    public SimpleIssue(SourceTextEntry sourceEntry, ITMXEntry targetEntry) {
         this.sourceEntry = sourceEntry;
         this.targetEntry = targetEntry;
         this.icon = new SimpleColorIcon(getColor());
@@ -66,7 +67,7 @@ public abstract class SimpleIssue implements IIssue {
     public Component getDetailComponent() {
         IssueDetailSplitPanel panel = new IssueDetailSplitPanel();
         panel.firstTextPane.setText(sourceEntry.getSrcText());
-        panel.lastTextPane.setText(targetEntry.translation);
+        panel.lastTextPane.setText(targetEntry.getTranslationText());
         panel.setMinimumSize(new Dimension(0, panel.firstTextPane.getFont().getSize() * 6));
         return panel;
     }

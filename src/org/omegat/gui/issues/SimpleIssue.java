@@ -32,7 +32,6 @@ import javax.swing.Icon;
 
 import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 
 /**
  * A simple issue implementation intended for extensions or scripts.

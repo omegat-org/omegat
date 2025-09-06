@@ -25,8 +25,8 @@
 
 package org.omegat.gui.issues;
 
-import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 
 import java.awt.Color;
 
@@ -34,7 +34,7 @@ public class TestingIssue extends SimpleIssue {
 
     public static final Color ICON_COLOR = Color.RED;
 
-    public TestingIssue(SourceTextEntry sourceEntry, ITMXEntry targetEntry) {
+    public TestingIssue(SourceTextEntry sourceEntry, TMXEntry targetEntry) {
         super(sourceEntry, targetEntry);
     }
 

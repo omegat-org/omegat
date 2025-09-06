@@ -27,37 +27,39 @@ package org.omegat.gui.issues;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.omegat.core.data.EntryKey;
-import org.omegat.core.data.ITMXEntry;
-import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.TMXEntryFactoryForTest;
 
 import javax.swing.Icon;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.Collections;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class SimpleIssueTest {
 
+    // Test data
     private static final String SOURCE_TEXT = "Hello world!";
     private static final String TRANSLATION_TEXT = "Hallo Welt!";
     private static final String ENTRY_FILE = "source.txt";
     private static final String ENTRY_ID = "ID";
     private static final int ENTRY_NUMBER = 1;
+    // 2025-10-01 09:00 GMT
+    private static final Date CREATION_DATE = new Date(1748908800000L);
+
     private static SourceTextEntry sourceEntry;
-    private static ITMXEntry targetEntry;
+    private static TMXEntry targetEntry;
 
     @BeforeClass
     public static void setUpClass() {
         sourceEntry = new SourceTextEntry(new EntryKey(ENTRY_FILE, SOURCE_TEXT, ENTRY_ID, "", "", null),
                 ENTRY_NUMBER, null, null, Collections.emptyList());
-        PrepareTMXEntry prep = new PrepareTMXEntry();
-        prep.source = SOURCE_TEXT;
-        prep.translation = TRANSLATION_TEXT;
-        prep.creator = "Test";
-        targetEntry = prep;
+        targetEntry = new TMXEntryFactoryForTest().setSource(SOURCE_TEXT).setTranslation(TRANSLATION_TEXT)
+                .setCreator("creator").setCreationDate(CREATION_DATE.getTime()).build();
     }
 
     @Test

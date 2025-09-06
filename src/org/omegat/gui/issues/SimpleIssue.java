@@ -30,8 +30,8 @@ import java.awt.Dimension;
 
 import javax.swing.Icon;
 
-import org.omegat.core.data.ITMXEntry;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 
 /**
  * A simple issue implementation intended for extensions or scripts.
@@ -41,10 +41,10 @@ import org.omegat.core.data.SourceTextEntry;
 public abstract class SimpleIssue implements IIssue {
 
     private final SourceTextEntry sourceEntry;
-    private final ITMXEntry targetEntry;
+    private final TMXEntry targetEntry;
     private final Icon icon;
 
-    public SimpleIssue(SourceTextEntry sourceEntry, ITMXEntry targetEntry) {
+    public SimpleIssue(SourceTextEntry sourceEntry, TMXEntry targetEntry) {
         this.sourceEntry = sourceEntry;
         this.targetEntry = targetEntry;
         this.icon = new SimpleColorIcon(getColor());

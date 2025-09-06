@@ -28,7 +28,6 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 
 import javax.swing.SwingUtilities;
-import java.awt.Window;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.CountDownLatch;
@@ -51,7 +50,7 @@ public class IssuesPanelTest extends TestCoreGUI {
         robot().waitForIdle();
         //
         assertNotNull(window);
-        IssuesPanelControllerMock issuesPanelController = new IssuesPanelControllerMock(window.target());
+        IssuesPanelController issuesPanelController = new IssuesPanelController(window.target());
         CountDownLatch latch = new CountDownLatch(1);
         // watch for table update
         issuesPanelController.addPropertyChangeListener(evt -> {
@@ -74,12 +73,5 @@ public class IssuesPanelTest extends TestCoreGUI {
         assertTrue("Issue type is unexpected", expectedType[0].equals(type) || expectedType[1].equals(type));
 
         closeProject();
-    }
-
-    public static class IssuesPanelControllerMock extends IssuesPanelController {
-
-        public IssuesPanelControllerMock(Window parent) {
-            super(parent);
-        }
     }
 }

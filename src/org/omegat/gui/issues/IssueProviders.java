@@ -64,6 +64,13 @@ public final class IssueProviders {
         ISSUE_PROVIDERS.add(provider);
     }
 
+    /**
+     * Retrieves the set of IDs corresponding to issue providers that are
+     * marked as disabled.
+     *
+     * @return A set of strings representing the IDs of the disabled issue
+     *      providers.
+     */
     static Set<String> getDisabledProviderIds() {
         String disabled = Preferences.getPreference(Preferences.ISSUE_PROVIDERS_DISABLED);
         return Stream.of(disabled.split(ISSUE_IDS_DELIMITER)).collect(Collectors.toSet());

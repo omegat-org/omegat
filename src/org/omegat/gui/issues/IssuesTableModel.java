@@ -35,6 +35,14 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.util.List;
 
+/**
+ * A table model for managing and displaying issues in a JTable.
+ * This model maps issue data to the columns of the table, supporting
+ * functionality such as retrieving values for specific table cells,
+ * providing column metadata, and managing mouseover effects for table cells.
+ *
+ * @author Aaron Madlon-Kay
+ */
 @SuppressWarnings("serial")
 class IssuesTableModel extends AbstractTableModel {
 

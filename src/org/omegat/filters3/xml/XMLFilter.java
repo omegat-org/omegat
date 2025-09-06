@@ -43,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.jspecify.annotations.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -122,10 +123,10 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /** Detected encoding of the input XML file. */
-    private String encoding;
+    private @Nullable String encoding;
 
     /** Detected EOL chars. */
-    private String eol;
+    private @Nullable String eol;
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.
@@ -179,26 +180,26 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * Target language of the project
      */
-    private Language targetLanguage;
+    private @Nullable Language targetLanguage;
 
     /**
      * @return The target language of the project
      */
     @Override
-    public Language getTargetLanguage() {
+    public @Nullable Language getTargetLanguage() {
         return targetLanguage;
     }
 
     /**
      * Source language of the project
      */
-    private Language sourceLanguage;
+    private @Nullable Language sourceLanguage;
 
     /**
      * @return The source language of the project
      */
     @Override
-    public Language getSourceLanguage() {
+    public @Nullable Language getSourceLanguage() {
         return sourceLanguage;
     }
 

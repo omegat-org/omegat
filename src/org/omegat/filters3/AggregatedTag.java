@@ -53,6 +53,7 @@ public class AggregatedTag extends Tag {
     /**
      * Returns the tags belonging to this aggregated tag in their original form.
      */
+    @Override
     public String toOriginal() {
         StringBuilder buf = new StringBuilder();
 
@@ -64,5 +65,5 @@ public class AggregatedTag extends Tag {
     }
 
     /** List of aggregated tags. */
-    private List<Tag> tags = new ArrayList<Tag>();
+    private final List<Tag> tags = new ArrayList<>();
 }

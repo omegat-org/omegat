@@ -25,7 +25,10 @@
 
 package org.omegat.filters3;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.StaticUtils;
+
+import java.util.Objects;
 
 /**
  * A tag in a source text.
@@ -40,24 +43,21 @@ public abstract class Tag implements Element {
         END,
         /** Standalone tag. */
         ALONE
-    };
+    }
 
-    private String tag;
+    private final String tag;
 
     /** Returns this tag. */
     public String getTag() {
         return tag;
     }
 
-    private String shortcut;
+    private final String shortcut;
 
     /** Returns the short form of this tag, most often -- the first letter. */
     public String getShortcut() {
-        if (shortcut != null) {
-            return shortcut;
-        } else {
-            return String.valueOf(Character.toChars(getTag().codePointAt(0)));
-        }
+        return Objects.requireNonNullElseGet(shortcut, () ->
+                String.valueOf(Character.toChars(getTag().codePointAt(0))));
     }
 
     private Type type;
@@ -72,10 +72,10 @@ public abstract class Tag implements Element {
         this.type = type;
     }
 
-    private Attributes attributes;
+    private final @Nullable Attributes attributes;
 
     /** Returns tag's attributes. */
-    public Attributes getAttributes() {
+    public @Nullable Attributes getAttributes() {
         return attributes;
     }
 
@@ -91,6 +91,9 @@ public abstract class Tag implements Element {
      * Returns attribute object by name.
      */
     public Attribute getAttributeObject(String name) {
+        if (attributes == null) {
+            return null;
+        }
         for (Attribute a : attributes.list) {
             if (name.equals(a.getName())) {
                 return a;
@@ -129,7 +132,7 @@ public abstract class Tag implements Element {
     }
 
     /** Creates a new instance of Tag */
-    public Tag(String tag, String shortcut, Type type, Attributes attributes) {
+    public Tag(String tag, String shortcut, Type type, @Nullable Attributes attributes) {
         this.tag = tag;
         this.shortcut = shortcut;
         this.type = type;
@@ -160,21 +163,15 @@ public abstract class Tag implements Element {
             throw new RuntimeException("Shouldn't hapen!");
         }
 
-        StringBuilder buf = new StringBuilder();
-
-        buf.append("<");
-        buf.append(tmxtag);
-        buf.append(" i=\"");
-        buf.append(getIndex());
-        buf.append("\">");
-
-        buf.append(toPartialTMX());
-
-        buf.append("</");
-        buf.append(tmxtag);
-        buf.append(">");
-
-        return buf.toString();
+        return "<" +
+                tmxtag +
+                " i=\"" +
+                getIndex() +
+                "\">" +
+                toPartialTMX() +
+                "</" +
+                tmxtag +
+                ">";
     }
 
     /**
@@ -191,7 +188,7 @@ public abstract class Tag implements Element {
             buf.append("/");
         }
         buf.append(getTag());
-        buf.append(getAttributes().toString());
+        buf.append(getAttributes());
         if (Type.ALONE == getType()) {
             buf.append("/");
         }
@@ -227,8 +224,8 @@ public abstract class Tag implements Element {
     }
 
     /**
-     * Returns the tag in its original form as it was in original document. Must
-     * be overriden by ancestors. E.g. for &lt;strong&gt; tag should return
+     * Returns the tag in its original form as it was in the original document.
+     * Must be overriden by ancestors. E.g. for &lt;strong&gt; tag should return
      * &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
     public abstract String toOriginal();

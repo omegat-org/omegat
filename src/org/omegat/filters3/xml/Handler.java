@@ -848,8 +848,13 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     private void translatorTagEnd(String tag) {
         translator.tagEnd(constructCurrentPath());
-        while (!currentTagPath.pop().equals(tag)) {
-        }
+        String poppedTag;
+        do {
+            if (currentTagPath.isEmpty()) {
+                return;
+            }
+            poppedTag = currentTagPath.pop();
+        } while (!poppedTag.equals(tag));
     }
 
     private String constructCurrentPath() {

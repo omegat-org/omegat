@@ -73,7 +73,19 @@ public final class IssueProviders {
      */
     static Set<String> getDisabledProviderIds() {
         String disabled = Preferences.getPreference(Preferences.ISSUE_PROVIDERS_DISABLED);
-        return Stream.of(disabled.split(ISSUE_IDS_DELIMITER)).collect(Collectors.toSet());
+        return getSetOfTerms(disabled);
+    }
+
+    /**
+     * Returns a set of terms from a comma-separated string.
+     * @param terms comma-separated string of terms
+     * @return Set of terms
+     */
+    static Set<String> getSetOfTerms(String terms) {
+        if (terms == null || terms.isEmpty()) {
+            return Collections.emptySet();
+        }
+        return Stream.of(terms.split(ISSUE_IDS_DELIMITER)).collect(Collectors.toSet());
     }
 
     static List<IIssueProvider> getEnabledProviders() {

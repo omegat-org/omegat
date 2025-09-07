@@ -438,16 +438,7 @@ makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE,
 startScripts.enabled = false
 // installDist insists on destination executable directory even when disable start script.
 application.executableDir = ""
-/*
-def winTask = tasks.register('win') {
-    description = 'Builds the Windows distributions.'
-    group = 'omegat distribution'
-}
-makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE', parentTask: win)
-makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64', parentTask: win)
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32, parentTask: win)
-makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE, parentTask: win)
-*/
+
 // Disable .tar distributions for everyone but Linux
 tasks.withType(Tar).configureEach {
     if (!name.contains('linux')) {

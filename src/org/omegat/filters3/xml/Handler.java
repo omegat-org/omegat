@@ -370,51 +370,94 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /**
-     * Resolves external entity and creates a new writer if it's an included
-     * file.
+     * Resolves an external entity and provides an InputSource for the entity.
+     * The method handles resolving based on the public ID and system ID
+     * provided, and checks for specific URI schemas to determine the type
+     * of resolution required. Additionally, it performs translation and
+     * writing if necessary and resolves external entities from the project's
+     * source folder.
+     *
+     * @param publicId The public identifier of the entity being resolved.
+     * @param systemId The system identifier of the entity being resolved.
+     * @return An InputSource object representing the resolved entity.
+     *         If the entity cannot be resolved, it returns an empty
+     *         InputSource.
+     * @throws SAXException If there is an error during XML parsing.
      */
-    public InputSource doResolve(String publicId, String systemId)
-            throws SAXException, TranslationException, IOException, URISyntaxException {
-        if (dtd != null && StringUtil.equal(publicId, dtd.getPublicId())
-                && (StringUtil.equal(systemId, dtd.getSystemId())
-                        || StringUtil.equal(localizeSystemId(systemId), dtd.getSystemId()))) {
-            inDTD = true;
-        }
-
-        if (systemId != null
-                && (systemId.startsWith(START_JARSCHEMA) || systemId.startsWith(START_FILESCHEMA))) {
-            InputSource entity = new InputSource(systemId);
-            // checking if f
-            if (systemId.startsWith(START_FILESCHEMA)) {
-                if (!new File(new URI(systemId)).exists()) {
-                    entity = null;
-                }
-            }
-
-            if (entity != null) {
-                if (!inDTD && outFile != null && extEntity == null) {
-                    extEntity = findExternalEntity(publicId, localizeSystemId(systemId));
-                    if (extEntity != null && isInSource(systemId)) {
-                        // if we resolved a new entity, and:
-                        // 1. it's not a DTD
-                        // 2. it's in project's source folder
-                        // 3. it's not during project load
-                        // then it's an external file, and we need to
-                        // write it as an external file
-                        translateAndFlush();
-                        File extFile = new File(outFile.getParentFile(), localizeSystemId(systemId));
-                        processedFiles.add(new File(inFile.getParent(), localizeSystemId(systemId)));
-                        extWriter = translator.createWriter(extFile, context.getOutEncoding());
-                        extWriter.write("<?xml version=\"1.0\"?>\n");
-                    }
-                }
-                return entity;
-            } else {
-                return new InputSource(new java.io.StringReader(""));
-            }
+    public InputSource doResolve(String publicId, String systemId) throws SAXException {
+        inDTD = isDTDMatch(publicId, systemId);
+        if (systemId != null && (systemId.startsWith(START_JARSCHEMA) || systemId.startsWith(START_FILESCHEMA))) {
+            return resolveLocalEntity(publicId, systemId);
         } else {
-            InputSource source = dialect.resolveEntity(publicId, systemId);
-            return Objects.requireNonNullElseGet(source, () -> new InputSource(new StringReader("")));
+            return resolveDialectEntity(publicId, systemId);
+        }
+    }
+
+    /**
+     * Determines if the provided public ID and system ID match the current DTD.
+     * Returns false if no DTD is set, true if both public and system IDs match
+     * (including localized system ID matching).
+     *
+     * @param publicId The public identifier to match against the DTD
+     * @param systemId The system identifier to match against the DTD
+     * @return true if the IDs match the current DTD, false otherwise
+     */
+    private boolean isDTDMatch(String publicId, String systemId) throws SAXException {
+        if (dtd == null) {
+            return false;
+        }
+        try {
+            boolean publicIdMatches = StringUtil.equal(publicId, dtd.getPublicId());
+            boolean systemIdMatches = StringUtil.equal(systemId, dtd.getSystemId())
+                    || StringUtil.equal(localizeSystemId(systemId), dtd.getSystemId());
+
+            return publicIdMatches && systemIdMatches;
+        } catch (MalformedURLException | URISyntaxException ex) {
+            throw new SAXException(ex);
+        }
+    }
+
+    private InputSource resolveDialectEntity(String publicId, String systemId) {
+        InputSource source = dialect.resolveEntity(publicId, systemId);
+        return Objects.requireNonNullElseGet(source, () -> new InputSource(new StringReader("")));
+    }
+
+    private InputSource resolveLocalEntity(String publicId, String systemId) throws SAXException {
+        try {
+            if (!isValidLocalEntty(systemId)) {
+                return new InputSource(new StringReader(""));
+            }
+
+            InputSource entity = new InputSource(systemId);
+            if (!inDTD && outFile != null && extEntity == null) {
+                extEntity = findExternalEntity(publicId, localizeSystemId(systemId));
+                if (extEntity != null && isInSource(systemId)) {
+                    // if we resolved a new entity, and:
+                    // 1. it's not a DTD
+                    // 2. it's in project's source folder
+                    // 3. it's not during project load
+                    // then it's an external file, and we need to
+                    // write it as an external file
+                    translateAndFlush();
+                    File extFile = new File(outFile.getParentFile(), localizeSystemId(systemId));
+                    processedFiles.add(new File(inFile.getParent(), localizeSystemId(systemId)));
+                    extWriter = translator.createWriter(extFile, context.getOutEncoding());
+                    extWriter.write("<?xml version=\"1.0\"?>\n");
+                }
+            }
+            return entity;
+        } catch (IOException | URISyntaxException | TranslationException ex) {
+            throw new SAXException(ex);
+        }
+    }
+
+    private boolean isValidLocalEntty(String systemId) throws URISyntaxException {
+        // checking if the systemID is a file schema, and if so, we need to
+        // resolve it from the source folder
+        if (systemId.startsWith(START_FILESCHEMA)) {
+            return new File(new URI(systemId)).exists();
+        } else {
+            return systemId.startsWith(START_JARSCHEMA);
         }
     }
 
@@ -477,18 +520,34 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             intacttagEntry = intacttag.getIntactContents();
         }
 
-        if (!collectingIntactText() && xmltag.getAttributes() != null) {
-            for (int i = 0; i < xmltag.getAttributes().size(); i++) {
-                Attribute attr = xmltag.getAttributes().get(i);
-                if ((dialect.getTranslatableAttributes().contains(attr.getName())
-                        || dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName()))
-                        && dialect.validateTranslatableTagAttribute(tag, attr.getName(),
-                                xmltag.getAttributes())) {
-                    attr.setValue(StringUtil.makeValidXML(
-                            translator.translate(StringUtil.unescapeXMLEntities(attr.getValue()), null)));
+        if (!collectingIntactText()) {
+            processTranslatableAttributes(xmltag, tag);
+        }
+    }
+
+    private void processTranslatableAttributes(Tag xmltag, String tag) {
+        if (xmltag.getAttributes() != null) { // always expect notNull
+            org.omegat.filters3.Attributes attributes = xmltag.getAttributes();
+            for (int i = 0; i < attributes.size(); i++) {
+                Attribute attr = attributes.get(i);
+                if (isTranslatableAttribute(tag, attr.getName())
+                        && dialect.validateTranslatableTagAttribute(tag, attr.getName(), attributes)) {
+                    String translatedAttributeValue = translateAttributeValue(attr.getValue());
+                    attr.setValue(translatedAttributeValue);
                 }
             }
         }
+    }
+
+    private boolean isTranslatableAttribute(String tag, String attributeName) {
+        return dialect.getTranslatableAttributes().contains(attributeName)
+                || dialect.getTranslatableTagAttributes().containsPair(tag, attributeName);
+    }
+
+    private String translateAttributeValue(String value) {
+        String unescapedValue = StringUtil.unescapeXMLEntities(value);
+        String translatedValue = translator.translate(unescapedValue, null);
+        return StringUtil.makeValidXML(translatedValue);
     }
 
     /**
@@ -938,11 +997,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      */
     @Override
     public InputSource resolveEntity(String publicId, String systemId) throws SAXException {
-        try {
-            return doResolve(publicId, systemId);
-        } catch (URISyntaxException | IOException | TranslationException e) {
-            throw new SAXException(e);
-        }
+        return doResolve(publicId, systemId);
     }
 
     /** Receive notification of the start of an element. */

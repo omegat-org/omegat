@@ -120,7 +120,8 @@ public final class Preferences {
      * snawball stemmer in OmegaT tokenizers when supported. In default, light
      * stemmer mode will be used.
      */
-    public static final String TOKENIZER_STEMMING_FULL = "tokenizer_stemming_full";
+    public static final String MATCHES_STEMMING_FULL = "matches_stemming_full";
+    public static final String GLOSSARY_STEMMING_FULL = "glossary_stemming_full";
 
     public static final String MAINWINDOW_LAYOUT = "docking_layout";
 

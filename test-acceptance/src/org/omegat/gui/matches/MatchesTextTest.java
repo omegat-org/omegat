@@ -28,15 +28,12 @@ package org.omegat.gui.matches;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
 import static org.junit.Assert.assertNotNull;
@@ -44,9 +41,6 @@ import static org.junit.Assert.assertNotNull;
 public class MatchesTextTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testFuzzyMatches() throws Exception {

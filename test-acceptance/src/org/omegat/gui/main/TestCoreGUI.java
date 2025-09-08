@@ -34,6 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -47,6 +48,8 @@ import org.assertj.swing.image.ScreenshotTaker;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 
 import org.jetbrains.annotations.Nullable;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -61,6 +64,7 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
+import org.omegat.util.LocaleRule;
 import org.omegat.util.Preferences;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.gui.UIDesignManager;
@@ -217,6 +221,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         TestCoreState.resetState();
         initialize();
         mainWindow = GuiActionRunner.execute(() -> {
+            UIDesignManager.initialize();
             TestMainWindow mw = new TestMainWindow(TestMainWindowMenuHandler.class);
             TestCoreInitializer.initMainWindow(mw);
             CoreEvents.fireApplicationStartup();
@@ -253,7 +258,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         Preferences.initFilters();
         Preferences.initSegmentation();
         // should be called after Preferences.init
-        UIDesignManager.initialize();
         TestCoreState.getInstance().setProject(new NotLoadedProject());
         TestCoreState.initAutoSave(autoSave);
     }
@@ -308,4 +312,15 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         Files.deleteIfExists(image);
         screenShotTaker.saveDesktopAsPng(image.toString());
     }
+
+    @BeforeClass
+    public static void beforeClass() {
+        LocaleRule.applyLocaleForClass(new Locale("en"));
+    }
+
+    @AfterClass
+    public static void tearDownAfterClass() {
+        LocaleRule.restoreLocaleForClass(Locale.getDefault());
+    }
+
 }

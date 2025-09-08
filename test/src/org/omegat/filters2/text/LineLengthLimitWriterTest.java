@@ -48,51 +48,6 @@ import static org.junit.Assert.assertTrue;
 
 public class LineLengthLimitWriterTest {
 
-    @Test
-    public void testIsSpaces() {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bw, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
-
-            // Insert a test string into the writer's internal buffer
-            writer.str.append("  abc   def\n");
-
-            // Define test tokens
-            Token spacesToken = new Token("  ", 0, 2);
-            Token mixedToken = new Token("abc ", 2, 4);
-            Token nonSpacesToken = new Token("def", 8, 3);
-
-            // Assert behavior of isSpaces
-            assertTrue(writer.isSpaces(spacesToken)); // All spaces
-            assertFalse(writer.isSpaces(mixedToken)); // Contains both spaces
-                                                      // and non-spaces
-            assertFalse(writer.isSpaces(nonSpacesToken)); // Non-spaces only
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testIsPossibleBreakBefore() {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bufferedWriter, LINE_LENGTH,
-                        MAX_LENGTH, tokenizer)) {
-
-            // Insert a test string into the writer's internal buffer
-            writer.str.append("Example:Test,Special«A");
-
-            // Test cases for breaking position
-            assertTrue(writer.isPossibleBreakBefore(3)); // normal alphabet
-            assertFalse(writer.isPossibleBreakBefore(7)); // Colon ":"
-            assertFalse(writer.isPossibleBreakBefore(12)); // Comma ","
-            assertFalse(writer.isPossibleBreakBefore(21)); // Double arrow
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private File outFile;
     private ITokenizer tokenizer;
     private static final int MAX_LENGTH = 100;
@@ -106,20 +61,51 @@ public class LineLengthLimitWriterTest {
     }
 
     @Test
-    public void testWrite() {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                Writer output = new LineLengthLimitWriter(bufferedWriter, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
+    public void testIsSpaces() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
+            // Insert a test string into the writer's internal buffer
+            writer.str.append("  abc   def\n");
+
+            // Define test tokens
+            Token spacesToken = new Token("  ", 0, 2);
+            Token mixedToken = new Token("abc ", 2, 4);
+            Token nonSpacesToken = new Token("def", 8, 3);
+
+            // Assert behavior of isSpaces
+            assertTrue(writer.isSpaces(spacesToken)); // All spaces
+            assertFalse(writer.isSpaces(mixedToken)); // Contains both spaces
+                                                      // and non-spaces
+            assertFalse(writer.isSpaces(nonSpacesToken)); // Non-spaces only
+        }
+    }
+
+    @Test
+    public void testIsPossibleBreakBefore() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
+
+            // Insert a test string into the writer's internal buffer
+            writer.str.append("Example:Test,Special«A");
+
+            // Test cases for breaking position
+            assertTrue(writer.isPossibleBreakBefore(3)); // normal alphabet
+            assertFalse(writer.isPossibleBreakBefore(7)); // Colon ":"
+            assertFalse(writer.isPossibleBreakBefore(12)); // Comma ","
+            assertFalse(writer.isPossibleBreakBefore(21)); // Double arrow
+        }
+    }
+
+    @Test
+    public void testWrite() throws IOException {
+        try (BufferedWriter bufferedWriter = createBufferedWriter();
+             Writer output = createLineLengthLimitWriter(bufferedWriter)) {
             for (int i = 0; i < 1000; i++) {
                 output.write("The «quick brown» fox jumps over the lazy dog");
             }
             output.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-        try (BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(outFile), StandardCharsets.UTF_8))) {
+        try (BufferedReader bufferedReader = createBufferedReader()) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if (bufferedReader.ready()) { // Not the last line
@@ -129,18 +115,13 @@ public class LineLengthLimitWriterTest {
                     assertTrue(line.length() <= MAX_LENGTH);
                 }
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testOutLine() {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bufferedWriter, LINE_LENGTH,
-                        MAX_LENGTH, tokenizer)) {
-
+    public void testOutLine() throws IOException {
+        try (BufferedWriter bufferedWriter = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bufferedWriter)) {
             // Add test string to the buffer
             writer.str.append("This is a test line of text");
 
@@ -149,28 +130,19 @@ public class LineLengthLimitWriterTest {
 
             // Assert that the buffer is now empty
             assertEquals(0, writer.str.length());
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         // Check the written file contents
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(outFile), StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = createBufferedReader()) {
             String line = reader.readLine();
             assertEquals("This is a test line of text", line);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testOutLineWithEmptyBuffer() {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bw, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
-
+    public void testOutLineWithEmptyBuffer() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
             // Ensure the buffer is empty
             writer.str.setLength(0);
 
@@ -179,18 +151,13 @@ public class LineLengthLimitWriterTest {
 
             // Assert no content was added to the output file
             assertEquals(0, outFile.length());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testOutLineWithEOLCharacters() {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bw, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
-
+    public void testOutLineWithEOLCharacters() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
             // Add a string containing EOL characters
             writer.str.append("Line with EOL\n");
 
@@ -199,26 +166,19 @@ public class LineLengthLimitWriterTest {
 
             // Assert that the buffer is cleared
             assertEquals(0, writer.str.length());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         // Check the file contents for proper line break
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(outFile), StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = createBufferedReader()) {
             String line = reader.readLine();
             assertEquals("Line with EOL", line);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testGetBreakPosSimpleCase() {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bw, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
+    public void testGetBreakPosSimpleCase() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
 
             // Set buffer to a simple string needing a break point
             writer.str.append(
@@ -230,17 +190,13 @@ public class LineLengthLimitWriterTest {
             // Assert that break occurs at or near line length
             int breakPos = writer.getBreakPos(tokens);
             assertTrue(breakPos >= LINE_LENGTH - 10 && breakPos <= LINE_LENGTH + 10);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testGetBreakPosHandlesSpaces() {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bw, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
+    public void testGetBreakPosHandlesSpaces() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
 
             // Set buffer to a string with spaces near the line length
             writer.str.append(
@@ -253,17 +209,13 @@ public class LineLengthLimitWriterTest {
             int breakPos = writer.getBreakPos(tokens);
             int c = writer.str.charAt(breakPos - 1);
             assertTrue(Character.isWhitespace(c));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testGetBreakPosNoBreakPossible() {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bw, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
+    public void testGetBreakPosNoBreakPossible() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
 
             // Set buffer to a single long word exceeding line limits
             writer.str.append("Supercalifragilisticexpialidocious");
@@ -274,17 +226,13 @@ public class LineLengthLimitWriterTest {
             // Assert that no break is possible and the full word is returned
             int breakPos = writer.getBreakPos(tokens);
             assertEquals(writer.str.length(), breakPos);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void testGetBreakPosBeyondMaxLength() {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
-                LineLengthLimitWriter writer = new LineLengthLimitWriter(bw, LINE_LENGTH, MAX_LENGTH,
-                        tokenizer)) {
+    public void testGetBreakPosBeyondMaxLength() throws IOException {
+        try (BufferedWriter bw = createBufferedWriter();
+             LineLengthLimitWriter writer = createLineLengthLimitWriter(bw)) {
 
             // Set buffer to a very long string
             writer.str.append("This line contains more characters than allowed by max length restrictions");
@@ -295,8 +243,20 @@ public class LineLengthLimitWriterTest {
             // Assert that a break occurs before or at max line length
             int breakPos = writer.getBreakPos(tokens);
             assertTrue(breakPos <= MAX_LENGTH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+    }
+
+    private BufferedWriter createBufferedWriter() throws IOException {
+        return new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(outFile), StandardCharsets.UTF_8));
+    }
+
+    private LineLengthLimitWriter createLineLengthLimitWriter(BufferedWriter bufferedWriter) {
+        return new LineLengthLimitWriter(bufferedWriter, LINE_LENGTH, MAX_LENGTH, tokenizer);
+    }
+
+    private BufferedReader createBufferedReader() throws IOException {
+        return new BufferedReader(
+                new InputStreamReader(new FileInputStream(outFile), StandardCharsets.UTF_8));
     }
 }

@@ -52,7 +52,7 @@ import org.xml.sax.SAXParseException;
 
 /**
  * Class for store data from project_save.tmx.
- *
+ * <p>
  * Orphaned or non-orphaned translation calculated by RealProject.
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -74,17 +74,17 @@ public class ProjectTMX {
 
     /**
      * Storage for default translations for current project.
-     *
+     * <p>
      * It must be used with synchronization around ProjectTMX.
      */
-    protected Map<String, TMXEntry> defaults;
+    protected final Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
-     *
+     * <p>
      * It must be used with synchronization around ProjectTMX.
      */
-    protected Map<EntryKey, TMXEntry> alternatives;
+    protected final Map<EntryKey, TMXEntry> alternatives;
 
     final CheckOrphanedCallback checkOrphanedCallback;
 
@@ -372,8 +372,8 @@ public class ProjectTMX {
                 translation = tuvTarget.text;
             }
 
-            List<String> sources = new ArrayList<String>();
-            List<String> targets = new ArrayList<String>();
+            List<String> sources = new ArrayList<>();
+            List<String> targets = new ArrayList<>();
             segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
                     tuvSource.text, targetLang, translation, sources, targets);
 
@@ -421,7 +421,7 @@ public class ProjectTMX {
             }
             return true;
         }
-    };
+    }
 
     private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
         String id = te.getPropValue(PROP_ID);
@@ -451,30 +451,47 @@ public class ProjectTMX {
     /**
      * Returns the collection of TMX entries that have an alternative
      * translation.
-     * 
+     *
      * @return alternative entries
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
     }
 
+    /**
+     * This interface is used as a callback mechanism to check if specific entries or source texts
+     * exist in a project. It is typically utilized to manage data consistency or handle orphaned entries.
+     */
     public interface CheckOrphanedCallback {
         boolean existEntryInProject(EntryKey key);
 
         boolean existSourceInProject(String src);
-        
+
         void clear();
     }
 
+    /**
+     * Replaces the content of the current {@code ProjectTMX} instance with
+     * the content of the provided {@code ProjectTMX} instance.
+     * <p>
+     * This includes replacing the defaults and alternatives mappings with
+     * those from the given instance.
+     *
+     * @param tmx
+     *         the {@code ProjectTMX} instance whose content will replace the
+     *         current content
+     */
     public synchronized void replaceContent(ProjectTMX tmx) {
-        defaults = tmx.defaults;
-        alternatives = tmx.alternatives;
+        defaults.clear();
+        defaults.putAll(tmx.defaults);
+        alternatives.clear();
+        alternatives.putAll(tmx.alternatives);
     }
 
     @Override
     public String toString() {
         return "[" + Stream.concat(
-                defaults.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getKey))
+                defaults.entrySet().stream().sorted(Map.Entry.comparingByKey())
                         .map(e -> e.getKey() + ": " + e.getValue().translation),
                 alternatives.entrySet().stream().sorted(Comparator.comparing(e -> e.getKey().sourceText))
                         .map(e -> e.getKey().sourceText + ": " + e.getValue().translation))

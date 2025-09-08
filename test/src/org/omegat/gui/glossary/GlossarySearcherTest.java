@@ -84,7 +84,7 @@ public class GlossarySearcherTest extends TestCore {
         Language srcLang = new Language("it");
         Language trLang = new Language("en");
         setupProject(srcLang);
-        Preferences.setPreference(Preferences.TOKENIZER_STEMMING_FULL, true);
+        Preferences.setPreference(Preferences.GLOSSARY_STEMMING_FULL, true);
         List<GlossaryEntry> entries = List
                 .of(new GlossaryEntry(sourceText, translationText, commentText, true, "origin"));
         List<GlossaryEntry> result = glossarySearcherCommon("paesi", tok, srcLang, trLang, entries);

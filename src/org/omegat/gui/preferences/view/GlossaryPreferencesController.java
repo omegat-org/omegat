@@ -68,7 +68,7 @@ public class GlossaryPreferencesController extends BasePreferencesController {
                 return value.getName();
             }
         });
-        Mnemonics.setLocalizedText(panel.useFullStemmingCheckBox, OStrings.getString( "PREFS_GLOSSARY_STEMMING_FULL"));
+        Mnemonics.setLocalizedText(panel.useFullStemmingCheckBox, OStrings.getString("PREFS_GLOSSARY_STEMMING_FULL"));
     }
 
     @Override

@@ -33,7 +33,7 @@ jobs:
       run: ./gradlew -PenvIsCi=true -PtestDisplay=99 -PtestMaxHeapSize=2048M --scan testAcceptance
       id: gradle
     - name: "Add Build Scan URL as PR comment"
-      uses: actions/github-script@v7
+      uses: actions/github-script@v8
       if: github.event_name == 'pull_request' && failure()
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}

@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
@@ -177,11 +178,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tabbedPanePlugins.removeAll();
         panel.tabbedPanePlugins.addTab(
                 OStrings.getString("PREFS_PLUGINS_TAB_INSTALLED"),
-                null  // No content component
+                new JLabel(OStrings.getString("PREFS_PLUGINS_DESC_INSTALLED"))
         );
         panel.tabbedPanePlugins.addTab(
                 OStrings.getString("PREFS_PLUGINS_TAB_BUNDLED"),
-                null  // No content component
+                new JLabel(OStrings.getString("PREFS_PLUGINS_DESC_BUNDLED"))
         );
         panel.tabbedPanePlugins.setSelectedIndex(0);
         panel.tabbedPanePlugins.addChangeListener(e -> onTabChanged());

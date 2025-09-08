@@ -71,13 +71,11 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private PluginDetailsPane pluginDetailsPane;
     private PluginInfoTableModel installedPluginsModel;
     private PluginInfoTableModel bundledPluginsModel;
-    private PluginInfoTableModel availablePluginsModel;
     private PluginInfoTableModel currentModel;
     // Tab index mapping to PluginInformation.Status
     private static final PluginInformation.Status[] TAB_STATUS_MAPPING = {
             PluginInformation.Status.INSTALLED,  // Tab 0
             PluginInformation.Status.BUNDLED     // Tab 1
-         /*   ,PluginInformation.Status.NEW   */  // Tab 2 (available for installation)
     };
 
     /**
@@ -139,20 +137,14 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
-        // Initialize different models for different plugin categories
         installedPluginsModel = new PluginInfoTableModel();
         bundledPluginsModel = new PluginInfoTableModel();
-        /* Off: for future implementation // availablePluginsModel = new PluginInfoTableModel(); */
-        // Load data for each category
         loadPluginsByStatus(PluginInformation.Status.INSTALLED);
         loadPluginsByStatus(PluginInformation.Status.BUNDLED);
-        /* Off: for future implementation // loadPluginsByStatus(PluginInformation.Status.NEW); */
-        // Set initial model (installed plugins)
         currentModel = installedPluginsModel;
         panel.tablePluginsInfo.setModel(currentModel);
 
         setupTable();
-        // Set up details pane
         pluginDetailsPane = new PluginDetailsPane();
         panel.panelPluginDetails.add(pluginDetailsPane);
 
@@ -179,6 +171,9 @@ public class PluginsPreferencesController extends BasePreferencesController {
     }
 
     private void setupTabs() {
+        if (panel.tabbedPanePlugins == null) {
+            return;
+        }
         panel.tabbedPanePlugins.removeAll();
         panel.tabbedPanePlugins.addTab(
                 OStrings.getString("PREFS_PLUGINS_TAB_INSTALLED"),
@@ -209,10 +204,13 @@ public class PluginsPreferencesController extends BasePreferencesController {
      * Handle tab change events
      */
     public void onTabChanged() {
-        if (panel.tabbedPanePlugins == null) return;
-
+        if (panel.tabbedPanePlugins == null) {
+            return;
+        }
         int selectedIndex = panel.tabbedPanePlugins.getSelectedIndex();
-        if (selectedIndex < 0 || selectedIndex >= TAB_STATUS_MAPPING.length) return;
+        if (selectedIndex < 0 || selectedIndex >= TAB_STATUS_MAPPING.length) {
+            return;
+        }
 
         PluginInformation.Status status = TAB_STATUS_MAPPING[selectedIndex];
 
@@ -224,11 +222,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
         case BUNDLED:
             currentModel = bundledPluginsModel;
             break;
-    /*
-        case NEW:
-            currentModel = availablePluginsModel;
-            break;
-     */
         default:
             currentModel = installedPluginsModel;
             break;
@@ -263,22 +256,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
                     .filter(p -> !p.isBundled() && p.getStatus() == PluginInformation.Status.INSTALLED)
                     .collect(Collectors.toList());
             break;
-
         case BUNDLED:
             // Load bundled plugins that come with OmegaT
             filteredPlugins = allPlugins.stream()
                     .filter(PluginInformation::isBundled)
                     .collect(Collectors.toList());
             break;
-    /*
-        case NEW:
-            // Load available plugins for installation
-            filteredPlugins = allPlugins.stream()
-                    .filter(p -> p.getStatus() == PluginInformation.Status.NEW ||
-                            p.getStatus() == PluginInformation.Status.UPDATABLE)
-                    .collect(Collectors.toList());
-            break;
-     */
         default:
             filteredPlugins = new ArrayList<>();
             break;
@@ -298,11 +281,6 @@ public class PluginsPreferencesController extends BasePreferencesController {
         case BUNDLED:
             targetModel = bundledPluginsModel;
             break;
-    /*
-        case NEW:
-            targetModel = availablePluginsModel;
-            break;
-     */
         default:
             return;
         }

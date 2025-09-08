@@ -27,13 +27,11 @@ package org.omegat.gui.preferences.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.table.DefaultTableModel;
 
 import org.omegat.core.data.PluginInformation;
 import org.omegat.util.OStrings;
-import org.omegat.util.PluginInstaller;
 
 public class PluginInfoTableModel extends DefaultTableModel {
     private static final long serialVersionUID = 5345248154613009633L;

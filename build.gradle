@@ -381,6 +381,7 @@ distributions {
             }
             eachFile {
                 // Move main JAR up one level from lib.
+                def omegatJarFilename = project.property('org.omegat.omegatJarFilename')
                 if (it.name == omegatJarFilename) {
                     it.relativePath = it.relativePath.parent.parent.append(true, omegatJarFilename)
                 }

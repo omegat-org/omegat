@@ -25,6 +25,7 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +49,7 @@ public class PluginInfoTableModel extends DefaultTableModel {
     private final List<PluginInformation> listPlugins;
 
     public PluginInfoTableModel() {
-        listPlugins = PluginInstaller.getInstance().getPluginList().stream().filter(p -> !p.isBundled())
-                .collect(Collectors.toList());
+        listPlugins = new ArrayList<>();
     }
 
     @Override
@@ -103,13 +103,36 @@ public class PluginInfoTableModel extends DefaultTableModel {
         return listPlugins.get(rowIndex);
     }
 
-    public void updateModel(boolean showBundledPlugins) {
-        List<PluginInformation> newListOfPlugins = PluginInstaller.getInstance().getPluginList().stream()
-                .filter(p -> showBundledPlugins || !p.isBundled()).collect(Collectors.toList());
+    /**
+     * Update the model with new plugin data
+     * @param plugins List of plugins to display
+     */
+    public void setPlugins(List<PluginInformation> plugins) {
         synchronized (this) {
             listPlugins.clear();
-            listPlugins.addAll(newListOfPlugins);
+            if (plugins != null) {
+                listPlugins.addAll(plugins);
+            }
         }
         fireTableDataChanged();
     }
+
+    /**
+     * Clear all plugin data
+     */
+    public void clear() {
+        synchronized (this) {
+            listPlugins.clear();
+        }
+        fireTableDataChanged();
+    }
+
+    /**
+     * Get all plugins currently in the model
+     * @return List of plugins
+     */
+    public List<PluginInformation> getPlugins() {
+        return new ArrayList<>(listPlugins);
+    }
+
 }

@@ -28,6 +28,9 @@ package org.omegat.gui.preferences.view;
 
 import java.awt.Dimension;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -45,7 +48,6 @@ import org.omegat.util.PluginInstaller;
 import org.omegat.util.gui.DataTableStyling;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.TableColumnSizer;
-import org.openide.awt.Mnemonics;
 
 /**
  * Controller for the Plugins preferences panel.
@@ -63,11 +65,20 @@ public class PluginsPreferencesController extends BasePreferencesController {
     private static final String LABEL_CATEGORY = "PREFS_PLUGINS_LABEL_CATEGORY";
     private static final String LABEL_VERSION = "PREFS_PLUGINS_LABEL_VERSION";
     private static final String LABEL_HOMEPAGE = "PREFS_PLUGINS_LABEL_HOMEPAGE";
-
     public static final String PLUGINS_WIKI_URL = "https://sourceforge.net/p/omegat/wiki/Plugins/";
+
     private PluginsPreferencesPanel panel;
     private PluginDetailsPane pluginDetailsPane;
-    private PluginInfoTableModel model;
+    private PluginInfoTableModel installedPluginsModel;
+    private PluginInfoTableModel bundledPluginsModel;
+    private PluginInfoTableModel availablePluginsModel;
+    private PluginInfoTableModel currentModel;
+    // Tab index mapping to PluginInformation.Status
+    private static final PluginInformation.Status[] TAB_STATUS_MAPPING = {
+            PluginInformation.Status.INSTALLED,  // Tab 0
+            PluginInformation.Status.BUNDLED     // Tab 1
+         /*   ,PluginInformation.Status.NEW   */  // Tab 2 (available for installation)
+    };
 
     /**
      * Format plugin information for details pane of UI.
@@ -114,7 +125,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
         int rowIndex = panel.tablePluginsInfo.getSelectedRow();
         if (rowIndex == -1) {
             pluginDetailsPane.setText("");
-        } else if (rowIndex < model.getRowCount()) {
+        } else if (rowIndex < currentModel.getRowCount()) {
             int index = panel.tablePluginsInfo.convertRowIndexToModel(rowIndex);
             PluginInfoTableModel model = (PluginInfoTableModel) panel.tablePluginsInfo.getModel();
             pluginDetailsPane.setText(formatDetailText(model.getItemAt(index)));
@@ -128,21 +139,24 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
     private void initGui() {
         panel = new PluginsPreferencesPanel();
-        model = new PluginInfoTableModel();
-        panel.tablePluginsInfo.setModel(model);
-        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(model);
-        panel.tablePluginsInfo.setRowSorter(sorter);
+        // Initialize different models for different plugin categories
+        installedPluginsModel = new PluginInfoTableModel();
+        bundledPluginsModel = new PluginInfoTableModel();
+        /* Off: for future implementation // availablePluginsModel = new PluginInfoTableModel(); */
+        // Load data for each category
+        loadPluginsByStatus(PluginInformation.Status.INSTALLED);
+        loadPluginsByStatus(PluginInformation.Status.BUNDLED);
+        /* Off: for future implementation // loadPluginsByStatus(PluginInformation.Status.NEW); */
+        // Set initial model (installed plugins)
+        currentModel = installedPluginsModel;
+        panel.tablePluginsInfo.setModel(currentModel);
 
-        panel.scrollTable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        panel.scrollTable.getViewport().setViewSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
-
-        panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
-        panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
-        DataTableStyling.applyFont(panel.tablePluginsInfo, Core.getMainWindow().getApplicationFont());
-        TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
-
+        setupTable();
+        // Set up details pane
         pluginDetailsPane = new PluginDetailsPane();
         panel.panelPluginDetails.add(pluginDetailsPane);
+
+        setupTabs();
 
         panel.browsePluginsButton.addActionListener(e -> {
             try {
@@ -162,6 +176,142 @@ public class PluginsPreferencesController extends BasePreferencesController {
                 }
             }
         });
+    }
+
+    private void setupTabs() {
+        panel.tabbedPanePlugins.removeAll();
+        panel.tabbedPanePlugins.addTab(
+                OStrings.getString("PREFS_PLUGINS_TAB_INSTALLED"),
+                null  // No content component
+        );
+        panel.tabbedPanePlugins.addTab(
+                OStrings.getString("PREFS_PLUGINS_TAB_BUNDLED"),
+                null  // No content component
+        );
+        panel.tabbedPanePlugins.setSelectedIndex(0);
+        panel.tabbedPanePlugins.addChangeListener(e -> onTabChanged());
+    }
+
+    private void setupTable() {
+        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(currentModel);
+        panel.tablePluginsInfo.setRowSorter(sorter);
+
+        panel.scrollTable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        panel.scrollTable.getViewport().setViewSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+
+        panel.tablePluginsInfo.getSelectionModel().addListSelectionListener(this::selectRowAction);
+        panel.tablePluginsInfo.setPreferredScrollableViewportSize(panel.tablePluginsInfo.getPreferredSize());
+        DataTableStyling.applyFont(panel.tablePluginsInfo, Core.getMainWindow().getApplicationFont());
+        TableColumnSizer.autoSize(panel.tablePluginsInfo, 0, true);
+    }
+
+    /**
+     * Handle tab change events
+     */
+    public void onTabChanged() {
+        if (panel.tabbedPanePlugins == null) return;
+
+        int selectedIndex = panel.tabbedPanePlugins.getSelectedIndex();
+        if (selectedIndex < 0 || selectedIndex >= TAB_STATUS_MAPPING.length) return;
+
+        PluginInformation.Status status = TAB_STATUS_MAPPING[selectedIndex];
+
+        // Switch table model based on selected tab
+        switch (status) {
+        case INSTALLED:
+            currentModel = installedPluginsModel;
+            break;
+        case BUNDLED:
+            currentModel = bundledPluginsModel;
+            break;
+    /*
+        case NEW:
+            currentModel = availablePluginsModel;
+            break;
+     */
+        default:
+            currentModel = installedPluginsModel;
+            break;
+        }
+
+        // Update table with new model
+        panel.tablePluginsInfo.setModel(currentModel);
+        TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(currentModel);
+        panel.tablePluginsInfo.setRowSorter(sorter);
+
+        // Clear selection and details
+        panel.tablePluginsInfo.clearSelection();
+        pluginDetailsPane.setText("");
+
+        // Refresh data if needed
+        refreshCurrentCategoryData(status);
+    }
+
+    private void refreshCurrentCategoryData(PluginInformation.Status status) {
+        // Reload data for the current category if needed
+        loadPluginsByStatus(status);
+    }
+
+    private void loadPluginsForModel(PluginInfoTableModel model, PluginInformation.Status status) {
+        List<PluginInformation> allPlugins = PluginInstaller.getInstance().getPluginList();
+        List<PluginInformation> filteredPlugins;
+
+        switch (status) {
+        case INSTALLED:
+            // Load non-bundled installed plugins
+            filteredPlugins = allPlugins.stream()
+                    .filter(p -> !p.isBundled() && p.getStatus() == PluginInformation.Status.INSTALLED)
+                    .collect(Collectors.toList());
+            break;
+
+        case BUNDLED:
+            // Load bundled plugins that come with OmegaT
+            filteredPlugins = allPlugins.stream()
+                    .filter(PluginInformation::isBundled)
+                    .collect(Collectors.toList());
+            break;
+    /*
+        case NEW:
+            // Load available plugins for installation
+            filteredPlugins = allPlugins.stream()
+                    .filter(p -> p.getStatus() == PluginInformation.Status.NEW ||
+                            p.getStatus() == PluginInformation.Status.UPDATABLE)
+                    .collect(Collectors.toList());
+            break;
+     */
+        default:
+            filteredPlugins = new ArrayList<>();
+            break;
+        }
+
+        // Update the model with filtered plugins
+        model.setPlugins(filteredPlugins);
+    }
+
+    private void loadPluginsByStatus(PluginInformation.Status status) {
+        PluginInfoTableModel targetModel;
+
+        switch (status) {
+        case INSTALLED:
+            targetModel = installedPluginsModel;
+            break;
+        case BUNDLED:
+            targetModel = bundledPluginsModel;
+            break;
+    /*
+        case NEW:
+            targetModel = availablePluginsModel;
+            break;
+     */
+        default:
+            return;
+        }
+
+        // Clear existing data
+        targetModel.clear();
+
+        // Load plugins for the target model
+        loadPluginsForModel(targetModel, status);
     }
 
     @Override

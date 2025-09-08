@@ -51,19 +51,20 @@ public class PluginsPreferencesPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tabbedPanePlugins = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         panelPluginsInfo = new javax.swing.JPanel();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
         panelPluginDetails = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         browsePluginsButton = new javax.swing.JButton();
         installFromDiskButton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setMinimumSize(new java.awt.Dimension(250, 200));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
+        add(tabbedPanePlugins);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(65534, 600));
         jPanel1.setMinimumSize(new java.awt.Dimension(200, 23));
@@ -96,27 +97,28 @@ public class PluginsPreferencesPanel extends JPanel {
 
         add(jPanel1);
 
-        jPanel2.setMaximumSize(new java.awt.Dimension(32767, 64));
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        buttonsPanel.setMaximumSize(new java.awt.Dimension(32767, 64));
+        buttonsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         org.openide.awt.Mnemonics.setLocalizedText(browsePluginsButton, OStrings.getString("PREFS_PLUGINS_BROWSE_ONLINE")); // NOI18N
-        jPanel2.add(browsePluginsButton);
+        buttonsPanel.add(browsePluginsButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(installFromDiskButton, OStrings.getString("PREFS_PLUGINS_INSTALL_FROM_DISK")); // NOI18N
-        jPanel2.add(installFromDiskButton);
+        buttonsPanel.add(installFromDiskButton);
 
-        add(jPanel2);
+        add(buttonsPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JButton browsePluginsButton;
+    private final javax.swing.JPanel buttonsPanel = new javax.swing.JPanel();
     javax.swing.JButton installFromDiskButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
     javax.swing.JScrollPane scrollTable;
+    javax.swing.JTabbedPane tabbedPanePlugins;
     javax.swing.JTable tablePluginsInfo;
     // End of variables declaration//GEN-END:variables
 }

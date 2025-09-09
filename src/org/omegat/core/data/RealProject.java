@@ -1225,6 +1225,7 @@ public class RealProject implements IProject {
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
             synchronized (projectTMX) {
+                projectTMX.clear();
                 projectTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
                         config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
             }

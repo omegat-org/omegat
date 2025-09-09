@@ -42,6 +42,7 @@ import org.omegat.util.OStrings;
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
  */
+@Deprecated(since = "6.1.0")
 public final class RebaseAndCommit {
 
     private RebaseAndCommit() {
@@ -248,6 +249,7 @@ public final class RebaseAndCommit {
         return newVersion;
     }
 
+    @Deprecated(since = "6.1.0")
     public interface IRebase {
         /**
          * Rebaser should read and parse BASE version of file. It can't just
@@ -301,6 +303,7 @@ public final class RebaseAndCommit {
     /**
      * Info about prepared file.
      */
+    @Deprecated(since = "6.1.0")
     public static class Prepared {
         public String path;
         public File fileBase, fileHead;

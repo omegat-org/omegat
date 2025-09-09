@@ -53,6 +53,7 @@ public class IssuesPanelTest extends TestCoreGUI {
         robot().waitForIdle();
         //
         assertNotNull(window);
+        IssuesPanelController issuesPanelController = new IssuesPanelController(window.target());
         CountDownLatch latch = new CountDownLatch(1);
         // watch for table update
         PropertyChangeListener propertyListener = evt -> {
@@ -79,12 +80,5 @@ public class IssuesPanelTest extends TestCoreGUI {
 
         issuesPanelController.removePropertyChangeListener(propertyListener);
         closeProject();
-    }
-
-    public static class IssuesPanelControllerMock extends IssuesPanelController {
-
-        public IssuesPanelControllerMock(Window parent) {
-            super(parent);
-        }
     }
 }

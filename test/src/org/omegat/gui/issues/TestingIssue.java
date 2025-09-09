@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2016 Aaron Madlon-Kay
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,48 +25,31 @@
 
 package org.omegat.gui.issues;
 
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
+
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 
-import javax.swing.Icon;
+public class TestingIssue extends SimpleIssue {
 
-/**
- * A simple, square icon of a single, solid color.
- *
- * @author Aaron Madlon-Kay
- *
- */
-public class SimpleColorIcon implements Icon {
+    public static final Color ICON_COLOR = Color.RED;
 
-    private final Color color;
-    static final int ICON_DIMENSION = 16;
-
-    public SimpleColorIcon(Color color) {
-        this.color = color;
-    }
-
-    public SimpleColorIcon(String color) {
-        this.color = Color.decode(color);
+    public TestingIssue(SourceTextEntry sourceEntry, TMXEntry targetEntry) {
+        super(sourceEntry, targetEntry);
     }
 
     @Override
-    public void paintIcon(Component c, Graphics g, int x, int y) {
-        g.setColor(color);
-        g.fillRect(x, y, ICON_DIMENSION, ICON_DIMENSION);
+    protected String getColor() {
+        return "#FF0000";
     }
 
     @Override
-    public int getIconWidth() {
-        return ICON_DIMENSION;
+    public String getTypeName() {
+        return "TestingIssue";
     }
 
     @Override
-    public int getIconHeight() {
-        return ICON_DIMENSION;
-    }
-
-    public Color getColor() {
-        return color;
+    public String getDescription() {
+        return "TestingIssue";
     }
 }

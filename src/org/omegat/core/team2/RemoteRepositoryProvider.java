@@ -42,6 +42,7 @@ import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.IRemoteRepository2.NetworkException;
 import org.omegat.util.FileUtil;
@@ -71,7 +72,8 @@ public class RemoteRepositoryProvider {
     private final File projectRoot;
     private final ProjectTeamSettings teamSettings;
     private final List<RepositoryDefinition> repositoriesDefinitions;
-    private final List<IRemoteRepository2> repositories = new ArrayList<>();
+    @VisibleForTesting
+    final List<IRemoteRepository2> repositories = new ArrayList<>();
     /**
      * exclude some path like .git, .svn, project_save.tmx and glossary.txt when
      * copying files from repo to project.

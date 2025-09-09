@@ -28,7 +28,6 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 
 import javax.swing.SwingUtilities;
-import java.awt.Window;
 import java.beans.PropertyChangeListener;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,7 +41,7 @@ import static org.junit.Assert.assertTrue;
 public class IssuesPanelTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
-    private IssuesPanelControllerMock issuesPanelController;
+    private IssuesPanelController issuesPanelController;
 
     @Test
     public void testIssuesPanelShow() throws Exception {
@@ -53,7 +52,6 @@ public class IssuesPanelTest extends TestCoreGUI {
         robot().waitForIdle();
         //
         assertNotNull(window);
-        IssuesPanelController issuesPanelController = new IssuesPanelController(window.target());
         CountDownLatch latch = new CountDownLatch(1);
         // watch for table update
         PropertyChangeListener propertyListener = evt -> {
@@ -62,7 +60,7 @@ public class IssuesPanelTest extends TestCoreGUI {
             }
         };
         SwingUtilities.invokeAndWait(() -> {
-            issuesPanelController = new IssuesPanelControllerMock(window.target());
+            issuesPanelController = new IssuesPanelController(window.target());
             issuesPanelController.addPropertyChangeListener(propertyListener);
             issuesPanelController.showForFiles(".*txt", 1);
         });

@@ -133,6 +133,7 @@ public class RealProject implements IProject {
     protected final ProjectProperties config;
     protected @Nullable RemoteRepositoryProvider remoteRepositoryProvider;
 
+    @Deprecated(since = "6.1.0")
     enum PreparedStatus {
         NONE, PREPARED, PREPARED2, REBASED
     }

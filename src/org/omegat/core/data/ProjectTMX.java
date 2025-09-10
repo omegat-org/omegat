@@ -38,6 +38,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.FileUtil;
@@ -448,6 +449,11 @@ public class ProjectTMX {
         return defaults.values();
     }
 
+    @VisibleForTesting
+    public Collection<String> getDefaultKeys() {
+        return defaults.keySet();
+    }
+
     /**
      * Returns the collection of TMX entries that have an alternative
      * translation.
@@ -456,6 +462,11 @@ public class ProjectTMX {
      */
     public Collection<TMXEntry> getAlternatives() {
         return alternatives.values();
+    }
+
+    @VisibleForTesting
+    public Collection<EntryKey> getAlternativeKeys() {
+        return alternatives.keySet();
     }
 
     /**

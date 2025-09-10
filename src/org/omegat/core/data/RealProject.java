@@ -63,6 +63,7 @@ import java.util.stream.Collectors;
 import javax.xml.stream.XMLStreamException;
 
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.core.team2.operation.GlossaryRebaseOperation;
@@ -1044,6 +1045,11 @@ public class RealProject implements IProject {
             }
         }
         Log.logInfoRB("TEAM_REBASE_END");
+    }
+
+    @VisibleForTesting
+    TMXRebaseOperation getTMXRebaseOperation() {
+        return new TMXRebaseOperation(projectTMX, config);
     }
 
     /**

@@ -190,16 +190,17 @@
         <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>
     </Match>
 
-    <!-- Ignores positive-false detections -->
+    <!-- Ignores false-positive detections -->
     <Match>
         <Or>
             <Class name="org.omegat.gui.align.Aligner"/>
+            <Class name="org.omegat.filters3.xml.Handler" />
             <Class name="org.omegat.filters4.xml.xliff.AbstractXliffFilter"/>
             <Class name="org.omegat.filters3.xml.xliff.XLIFFFilter"/>
             <Class name="org.omegat.filters2.AbstractFilter"/>
             <Class name="org.omegat.filters2.po.PoFilter"/>
         </Or>
-        <Bug pattern="NP_NULL_ON_SOME_PATH"/>
+        <Bug pattern="NP_NULL_ON_SOME_PATH,NP_NULL_PARAM_DEREF"/>
     </Match>
 
     <!-- Temporarily exclude to enable minimum chechks -->

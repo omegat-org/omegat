@@ -39,7 +39,6 @@ package org.omegat.core.team2.fsm.context;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.fsm.PreparedFileInfo;
 import org.omegat.core.team2.fsm.operation.IRebaseOperation;
@@ -51,6 +50,8 @@ import java.io.File;
  * Context for rebase operations that encapsulates the complex logic from RebaseAndCommit.rebaseAndCommit
  */
 public class RebaseContext {
+
+    public static final String VERSION_PREFIX = "version-based-on.";
 
     private final PreparedFileInfo prepared;
     private final RemoteRepositoryProvider provider;
@@ -75,7 +76,7 @@ public class RebaseContext {
 
     private void initializeVersions() throws Exception {
         // Get current base version
-        String savedVersion = provider.getTeamSettings().get(RebaseAndCommit.VERSION_PREFIX + path);
+        String savedVersion = provider.getTeamSettings().get(VERSION_PREFIX + path);
         if (savedVersion != null) {
             currentBaseVersion = savedVersion;
         } else {
@@ -167,7 +168,7 @@ public class RebaseContext {
             boolean ignored = bakTemp.delete();
             FileUtils.moveFile(localFile, bakTemp);
         }
-        provider.getTeamSettings().set(RebaseAndCommit.VERSION_PREFIX + path, headVersion);
+        provider.getTeamSettings().set(VERSION_PREFIX + path, headVersion);
         if (tempOut.exists()) {
             boolean ignored = localFile.delete();
             FileUtils.moveFile(tempOut, localFile);

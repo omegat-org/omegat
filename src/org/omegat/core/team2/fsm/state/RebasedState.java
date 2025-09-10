@@ -38,9 +38,9 @@
 package org.omegat.core.team2.fsm.state;
 
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.fsm.PreparedFileInfo;
+import org.omegat.core.team2.fsm.context.RebaseContext;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,14 +104,14 @@ public final class RebasedState extends TeamSyncState {
         );
 
         if (newVersion != null) {
-            provider.getTeamSettings().set(RebaseAndCommit.VERSION_PREFIX + fileInfo.getPath(), newVersion);
+            provider.getTeamSettings().set(RebaseContext.VERSION_PREFIX + fileInfo.getPath(), newVersion);
         }
 
         return newVersion;
     }
 
     private void updateVersionSettings(String path, String newVersion) {
-        provider.getTeamSettings().set(RebaseAndCommit.VERSION_PREFIX + path, newVersion);
+        provider.getTeamSettings().set(RebaseContext.VERSION_PREFIX + path, newVersion);
     }
 
     @Override

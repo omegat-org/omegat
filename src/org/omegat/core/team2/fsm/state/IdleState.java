@@ -38,9 +38,9 @@
 package org.omegat.core.team2.fsm.state;
 
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
 import org.omegat.core.team2.fsm.PreparedFileInfo;
+import org.omegat.core.team2.fsm.context.RebaseContext;
 
 import java.io.File;
 import java.util.Collections;
@@ -84,7 +84,7 @@ public final class IdleState extends TeamSyncState {
     }
 
     private PreparedFileInfo prepareFile(File projectDir, String path) throws Exception {
-        String savedVersion = provider.getTeamSettings().get(RebaseAndCommit.VERSION_PREFIX + path);
+        String savedVersion = provider.getTeamSettings().get(RebaseContext.VERSION_PREFIX + path);
         if (savedVersion == null) {
             return null;
         }

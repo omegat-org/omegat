@@ -3,18 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2007 Zoltan Bartko
-               2008-2016 Alex Buloichik
-               2009-2010 Didier Briel
-               2012 Guido Leenders, Didier Briel, Martin Fleurke
-               2013 Aaron Madlon-Kay, Didier Briel
-               2014 Aaron Madlon-Kay, Didier Briel
-               2015 Aaron Madlon-Kay
-               2017-2018 Didier Briel
-               2018 Enrique Estevez Fernandez
-               2019 Thomas Cordonnier
-               2020 Briac Pilpre
+ Copyright (C) 2008-2016 Alex Buloichik
                2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support

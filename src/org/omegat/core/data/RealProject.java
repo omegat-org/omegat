@@ -66,6 +66,9 @@ import javax.xml.stream.XMLStreamException;
 import org.jetbrains.annotations.Nullable;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
+import org.omegat.core.team2.operation.GlossaryRebaseOperation;
+import org.omegat.core.team2.PreparedFileInfo;
+import org.omegat.core.team2.operation.TMXRebaseOperation;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -88,9 +91,6 @@ import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.gui.glossary.GlossaryManager;
-import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.DirectoryMonitor;
@@ -105,7 +105,6 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StreamUtil;
 import org.omegat.util.StringUtil;
-import org.omegat.util.TMXReader2;
 import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -144,8 +143,8 @@ public class RealProject implements IProject {
      * Status required for execute prepare/rebase/commit in the correct order.
      */
     private volatile PreparedStatus preparedStatus = PreparedStatus.NONE;
-    private volatile @Nullable RebaseAndCommit.Prepared tmxPrepared;
-    private volatile RebaseAndCommit.Prepared glossaryPrepared;
+    private volatile PreparedFileInfo tmxPrepared;
+    private volatile PreparedFileInfo glossaryPrepared;
 
     private boolean isOnlineMode;
 
@@ -905,7 +904,7 @@ public class RealProject implements IProject {
      */
     @Override
     public void teamSyncPrepare() throws Exception {
-        if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
+        if (!canPrepare()) {
             return;
         }
         Log.logDebug("Prepare team sync");
@@ -925,6 +924,10 @@ public class RealProject implements IProject {
                     glossaryPath);
         }
         preparedStatus = PreparedStatus.PREPARED;
+    }
+
+    private boolean canPrepare() {
+        return remoteRepositoryProvider != null && preparedStatus == PreparedStatus.NONE && !isOnlineMode;
     }
 
     @Override
@@ -1029,161 +1032,25 @@ public class RealProject implements IProject {
      */
     private void rebaseAndCommitProject(boolean processGlossary) throws Exception {
         Log.logInfoRB("TEAM_REBASE_START");
-
-        final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                System.getProperty("user.name"));
-        final StringBuilder commitDetails = new StringBuilder("Translated by " + author);
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider != null && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
-            RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
-                    tmxPath, new RebaseAndCommit.IRebase() {
-                        ProjectTMX baseTMX, headTMX;
-
-                        @Override
-                        public void parseBaseFile(File file) throws Exception {
-                            baseTMX = new ProjectTMX();
-                            baseTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
-                        }
-
-                        @Override
-                        public void parseHeadFile(File file) throws Exception {
-                            headTMX = new ProjectTMX();
-                            headTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
-                        }
-
-                        @Override
-                        public void rebaseAndSave(File tempOut) throws Exception {
-                            // Rebase-merge and immediately save mergedTMX
-                            // to tempOut.
-                            // It shall not save it as the projectTMX here.
-                            ProjectTMX mergedTMX = mergeTMX(baseTMX, headTMX, commitDetails);
-                            mergedTMX.exportTMX(config, tempOut, false, false, true);
-                        }
-
-                        @Override
-                        public void reload(File file) throws Exception {
-                            ProjectTMX newTMX = new ProjectTMX();
-                            newTMX.load(config.getSourceLanguage(), config.getTargetLanguage(),
-                                    config.isSentenceSegmentingEnabled(), file, Core.getSegmenter());
-                            projectTMX.replaceContent(newTMX);
-                        }
-
-                        @Override
-                        public String getCommentForCommit() {
-                            return commitDetails.toString();
-                        }
-
-                        @Override
-                        public String getFileCharset(File file) throws Exception {
-                            return TMXReader2.detectCharset(file);
-                        }
-                    });
+            synchronized (projectTMX) {
+                tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
+                        tmxPath, new TMXRebaseOperation(projectTMX, config));
+            }
         }
 
         if (processGlossary) {
             final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
-            final File glossaryFile = config.getWritableGlossaryFile().getAsFile();
-            if (glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
-                final List<GlossaryEntry> glossaryEntries;
-                if (glossaryFile.exists()) {
-                    glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-                    Log.logDebug("Read {0} glossaries from {1}", glossaryEntries.size(), glossaryFile);
-                } else {
-                    glossaryEntries = Collections.emptyList();
+            if (glossaryPath != null && remoteRepositoryProvider != null &&
+                    remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+                synchronized (projectTMX) {
+                    glossaryPrepared = RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
+                            config.getProjectRootDir(), glossaryPath, new GlossaryRebaseOperation(config));
                 }
-                RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
-                        config.getProjectRootDir(), glossaryPath, new RebaseAndCommit.IRebase() {
-                            List<GlossaryEntry> baseGlossaryEntries, headGlossaryEntries;
-
-                            @Override
-                            public void parseBaseFile(File file) throws Exception {
-                                if (file.exists()) {
-                                    baseGlossaryEntries = GlossaryReaderTSV.read(file, true);
-                                    Log.logDebug("read {0} entries from local glossary.txt", baseGlossaryEntries.size());
-                                } else {
-                                    baseGlossaryEntries = new ArrayList<>();
-                                }
-                            }
-
-                            @Override
-                            public void parseHeadFile(File file) throws Exception {
-                                if (file.exists()) {
-                                    headGlossaryEntries = GlossaryReaderTSV.read(file, true);
-                                    Log.logDebug("read {0} entries from remote glossaries", headGlossaryEntries.size());
-                                } else {
-                                    headGlossaryEntries = new ArrayList<>();
-                                }
-                            }
-
-                            @Override
-                            public void rebaseAndSave(File out) throws Exception {
-                                List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<>(
-                                        glossaryEntries);
-                                deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
-                                List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<>(
-                                        baseGlossaryEntries);
-                                deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
-                                headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
-                                headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
-
-                                Log.logDebug("Update and write glossary.txt with {0} entries.", headGlossaryEntries.size());
-                                for (GlossaryEntry ge : headGlossaryEntries) {
-                                    GlossaryReaderTSV.append(out, ge);
-                                }
-                            }
-
-                            @Override
-                            public void reload(final File file) {
-                                Log.logDebug("Reloading glossary file {0}", file);
-                                notifyGlossaryManagerFileChanged(file);
-                            }
-
-                            @Override
-                            public String getCommentForCommit() {
-                                final String author = Preferences.getPreferenceDefault(
-                                        Preferences.TEAM_AUTHOR, System.getProperty("user.name"));
-                                return "Glossary changes by " + author;
-                            }
-
-                            @Override
-                            public String getFileCharset(File file) throws Exception {
-                                return GlossaryReaderTSV.getFileEncoding(file);
-                            }
-                        });
             }
         }
         Log.logInfoRB("TEAM_REBASE_END");
-    }
-
-    /**
-     * Do 3-way merge of:
-     * <dl>
-     * <dt>Base:</dt><dd>baseTMX</dd>
-     * <dt>File 1:</dt><dd>projectTMX (mine)</dd>
-     * <dt>File 2:</dt><dd>headTMX (theirs)</dd>
-     * </dl>
-     */
-    protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
-        ProjectTMX mergedTMX;
-        StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
-                .setParentWindow(Core.getMainWindow().getApplicationFrame())
-                // More than this number of conflicts will trigger List View by
-                // default.
-                .setListViewThreshold(5);
-        String srcLang = config.getSourceLanguage().getLanguage();
-        String trgLang = config.getTargetLanguage().getLanguage();
-        mergedTMX = SuperTmxMerge.merge(
-                new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-        if (Log.isDebugEnabled()) {
-            Log.logDebug("Merge report: {0}", props.getReport());
-        }
-        commitDetails.append('\n');
-        commitDetails.append(props.getReport().toString());
-        return mergedTMX;
     }
 
     /**
@@ -1839,13 +1706,6 @@ public class RealProject implements IProject {
         return StringUtil.removeXMLInvalidChars(fn);
     }
 
-    protected void notifyGlossaryManagerFileChanged(File file) {
-        GlossaryManager gm = Core.getGlossaryManager();
-        if (gm != null) {
-            gm.fileChanged(file);
-        }
-    }
-
     protected class LoadFilesCallback extends ParseEntry {
         private FileInfo fileInfo;
         private String entryKeyFilename;
@@ -2073,4 +1933,5 @@ public class RealProject implements IProject {
             }
         }
     }
+
 }

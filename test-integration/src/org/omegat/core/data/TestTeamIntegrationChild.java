@@ -577,11 +577,6 @@ public final class TestTeamIntegrationChild {
                 return e.translation;
             }
         }
-
-        @Override
-        protected void notifyGlossaryManagerFileChanged(File file) {
-            TestCoreState.getInstance().getGlossaryManager().fileChanged(file);
-        }
     }
 
     private static class GlossaryTextAreaStub implements IGlossaries {

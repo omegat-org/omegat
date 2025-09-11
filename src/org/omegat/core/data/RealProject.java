@@ -65,8 +65,6 @@ import javax.xml.stream.XMLStreamException;
 
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
-import org.madlonkay.supertmxmerge.StmProperties;
-import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.core.team2.operation.GlossaryRebaseOperation;
 import org.omegat.core.team2.PreparedFileInfo;
 import org.omegat.core.team2.operation.TMXRebaseOperation;
@@ -913,6 +911,7 @@ public class RealProject implements IProject {
         glossaryPrepared = null;
         remoteRepositoryProvider.cleanPrepared();
 
+
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             tmxPrepared = RebaseAndCommit.prepare(remoteRepositoryProvider, config.getProjectRootDir(),
@@ -1032,23 +1031,23 @@ public class RealProject implements IProject {
      * </ol>
      */
     private void rebaseAndCommitProject(boolean processGlossary) throws Exception {
+        if (!canRebaseAndCommit()) {
+            return;
+        }
         Log.logInfoRB("TEAM_REBASE_START");
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
-        if (remoteRepositoryProvider != null && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
+        if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             synchronized (projectTMX) {
                 tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
                         tmxPath, new TMXRebaseOperation(projectTMX, config));
             }
         }
 
-        if (processGlossary) {
-            final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
-            if (glossaryPath != null && remoteRepositoryProvider != null &&
-                    remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
-                synchronized (projectTMX) {
-                    glossaryPrepared = RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
-                            config.getProjectRootDir(), glossaryPath, new GlossaryRebaseOperation(config));
-                }
+        final String glossaryPath = config.getWritableGlossaryFile().getUnderRoot();
+        if (processGlossary && glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
+            synchronized (projectTMX) {
+                glossaryPrepared = RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
+                        config.getProjectRootDir(), glossaryPath, new GlossaryRebaseOperation(config));
             }
         }
         Log.logInfoRB("TEAM_REBASE_END");
@@ -1057,6 +1056,10 @@ public class RealProject implements IProject {
     @VisibleForTesting
     TMXRebaseOperation getTMXRebaseOperation() {
         return new TMXRebaseOperation(projectTMX, config);
+    }
+
+    private boolean canRebaseAndCommit() {
+        return remoteRepositoryProvider != null && preparedStatus == PreparedStatus.PREPARED && isOnlineMode;
     }
 
     /**

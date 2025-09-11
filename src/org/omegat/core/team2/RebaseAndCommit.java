@@ -283,17 +283,4 @@ public final class RebaseAndCommit {
          */
         String getFileCharset(File file) throws Exception;
     }
-
-    /**
-     * Info about prepared file.
-     */
-    @Deprecated
-    public static class Prepared {
-        public String path;
-        public File fileBase, fileHead;
-        public String versionBase, versionHead;
-        public boolean needToCommit;
-        public String commitComment;
-        public String charset;
-    }
 }

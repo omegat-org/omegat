@@ -3,7 +3,8 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2025 Hiroshi Miura
+ Copyright (C) 2014 Alex Buloichik
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -29,6 +30,7 @@ import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.madlonkay.supertmxmerge.data.ITuv;
 import org.madlonkay.supertmxmerge.data.Key;
 import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
+import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SyncTMX;
@@ -76,16 +78,13 @@ public class TestingTMXRebaseOperation extends TMXRebaseOperation implements IRe
         Log.log("Base:   " + baseTMX);
         Log.log("Mine:   " + projectTMX);
         Log.log("Theirs: " + headTMX);
-        if (!checkMergeInput(baseTMX, projectTMX)) {
+        if (isInvalidMergeInput(baseTMX, projectTMX)) {
             Log.log("'Mine' TM is not a valid derivative of 'Base' TM");
-            // Exceptions thrown here are suppressed in
-            // RealProject.saveProject(boolean) so this is the easiest way
-            // to early-exit
-            System.exit(1);
+            throw new KnownException("TMXMerge: 'Mine' TM is not a valid derivative of 'Base' TM");
         }
-        if (!checkMergeInput(baseTMX, headTMX)) {
+        if (isInvalidMergeInput(baseTMX, headTMX)) {
             Log.log("'Theirs' TM is not a valid derivative of 'Base' TM");
-            System.exit(1);
+            throw new KnownException("TMXMerge: 'Theirs' TM is not a valid derivative of 'Base' TM");
         }
         StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                 .setResolutionStrategy(new ResolutionStrategy() {
@@ -128,9 +127,9 @@ public class TestingTMXRebaseOperation extends TMXRebaseOperation implements IRe
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
         Log.log("Merged: " + mergedTMX);
-        if (!checkMergeInput(baseTMX, mergedTMX)) {
+        if (isInvalidMergeInput(baseTMX, mergedTMX)) {
             Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
-            System.exit(1);
+            throw new KnownException("TMXMerge: 'Merged' TM is not a valid derivative of 'Base' TM");
         }
         commitDetails.append('\n');
         commitDetails.append(props.getReport().toString());
@@ -147,11 +146,11 @@ public class TestingTMXRebaseOperation extends TMXRebaseOperation implements IRe
      *            Base TM from which the other TM is derived
      * @param other
      *            Other TM
-     * @return Valid or not
+     * @return true when invalid. false when valid
      */
-    private boolean checkMergeInput(ProjectTMX base, ProjectTMX other) {
-        return other.getDefaultKeys().containsAll(base.getDefaultKeys())
-                && other.getAlternativeKeys().containsAll(base.getAlternativeKeys());
+    private boolean isInvalidMergeInput(ProjectTMX base, ProjectTMX other) {
+        return !other.getDefaultKeys().containsAll(base.getDefaultKeys())
+                || !other.getAlternativeKeys().containsAll(base.getAlternativeKeys());
     }
 
 }

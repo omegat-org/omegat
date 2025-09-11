@@ -877,7 +877,7 @@ public class RealProject implements IProject {
                 stat.updateStatisticsInfo(hotStat);
                 Statistics.writeStat(config.getProjectInternal(), stat);
             } finally {
-                setProjectModified(true);
+                setProjectMenuEnabled(true);
             }
 
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);

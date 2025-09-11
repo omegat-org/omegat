@@ -135,9 +135,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         for (int end = iterator.next(); end != BreakIterator.DONE; start = end,
                 end = iterator.next()) {
             String tokenStr = strOrig.substring(start, end);
-            if (!StringUtil.isWhiteSpace(tokenStr)) {
-                result.add(new Token(tokenStr, start));
-            }
+            result.add(new Token(tokenStr, start));
         }
 
         return result.toArray(new Token[0]);
@@ -162,9 +160,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         for (int end = iterator.next(); end != BreakIterator.DONE; start = end,
                 end = iterator.next()) {
             String tokenStr = str.substring(start, end);
-            if (!StringUtil.isWhiteSpace(tokenStr)) {
-                result.add(tokenStr);
-            }
+            result.add(tokenStr);
         }
 
         return result.toArray(new String[0]);

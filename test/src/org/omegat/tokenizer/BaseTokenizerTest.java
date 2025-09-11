@@ -26,7 +26,6 @@ package org.omegat.tokenizer;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.omegat.util.Token;
 
 import static org.junit.Assert.assertEquals;
@@ -36,7 +35,7 @@ public class BaseTokenizerTest {
     /**
      * A mock implementation of BaseTokenizer to test the tokenizeVerbatim method.
      */
-    private class MockTokenizer extends BaseTokenizer {
+    private static class MockTokenizer extends BaseTokenizer {
         @Override
         protected TokenStream getTokenStream(String strOrig, boolean stemsAllowed, boolean stopWordsAllowed) {
             return null; // Unused in tokenizeVerbatim tests
@@ -52,16 +51,21 @@ public class BaseTokenizerTest {
         String input = "Hello, world! This is a test.";
         Token[] result = tokenizer.tokenizeVerbatim(input);
 
-        assertEquals(9, result.length);
+        assertEquals(14, result.length);
         assertEquals("Hello", result[0].getTextFromString(input));
         assertEquals(",", result[1].getTextFromString(input));
-        assertEquals("world", result[2].getTextFromString(input));
-        assertEquals("!", result[3].getTextFromString(input));
-        assertEquals("This", result[4].getTextFromString(input));
-        assertEquals("is", result[5].getTextFromString(input));
-        assertEquals("a", result[6].getTextFromString(input));
-        assertEquals("test", result[7].getTextFromString(input));
-        assertEquals(".", result[8].getTextFromString(input));
+        assertEquals(" ", result[2].getTextFromString(input));
+        assertEquals("world", result[3].getTextFromString(input));
+        assertEquals("!", result[4].getTextFromString(input));
+        assertEquals(" ", result[5].getTextFromString(input));
+        assertEquals("This", result[6].getTextFromString(input));
+        assertEquals(" ", result[7].getTextFromString(input));
+        assertEquals("is", result[8].getTextFromString(input));
+        assertEquals(" ", result[9].getTextFromString(input));
+        assertEquals("a", result[10].getTextFromString(input));
+        assertEquals(" ", result[11].getTextFromString(input));
+        assertEquals("test", result[12].getTextFromString(input));
+        assertEquals(".", result[13].getTextFromString(input));
     }
 
     /**
@@ -85,7 +89,7 @@ public class BaseTokenizerTest {
         String input = "     ";
         Token[] result = tokenizer.tokenizeVerbatim(input);
 
-        assertEquals(0, result.length);
+        assertEquals(1, result.length);
     }
 
     /**
@@ -112,10 +116,12 @@ public class BaseTokenizerTest {
         String input = "abc123 def456 ghi789";
         Token[] result = tokenizer.tokenizeVerbatim(input);
 
-        assertEquals(3, result.length);
+        assertEquals(5, result.length);
         assertEquals("abc123", result[0].getTextFromString(input));
-        assertEquals("def456", result[1].getTextFromString(input));
-        assertEquals("ghi789", result[2].getTextFromString(input));
+        assertEquals(" ", result[1].getTextFromString(input));
+        assertEquals("def456", result[2].getTextFromString(input));
+        assertEquals(" ", result[3].getTextFromString(input));
+        assertEquals("ghi789", result[4].getTextFromString(input));
     }
 
     /**
@@ -127,10 +133,12 @@ public class BaseTokenizerTest {
         String input = "こんにちは 世界 🌏";
         Token[] result = tokenizer.tokenizeVerbatim(input);
 
-        assertEquals(3, result.length);
+        assertEquals(5, result.length);
         assertEquals("こんにちは", result[0].getTextFromString(input));
-        assertEquals("世界", result[1].getTextFromString(input));
-        assertEquals("🌏", result[2].getTextFromString(input));
+        assertEquals(" ", result[1].getTextFromString(input));
+        assertEquals("世界", result[2].getTextFromString(input));
+        assertEquals(" ", result[3].getTextFromString(input));
+        assertEquals("🌏", result[4].getTextFromString(input));
     }
 
 

@@ -29,6 +29,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
 import javax.swing.text.BadLocationException;
@@ -44,12 +45,13 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class EditorTextLoadedTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
 
-    private static final int TIMEOUT_SECONDS = 10;
+    private static final int TIMEOUT_SECONDS = 15;
     private static final String INITIAL_TEXT = "Error {0}: {1}";
     private static final String TARGET_TEXT = "API key (optional)";
     private static final String EDITOR_TITLE = "Editor - Bundle.properties";
@@ -63,22 +65,22 @@ public class EditorTextLoadedTest extends TestCoreGUI {
         CoreEvents.registerEntryEventListener(new EditorEntryListener(selectedEntries, initialLoadLatch,
                 selectionChangeLatch));
         openSampleProject(PROJECT_PATH);
-        awaitLatch(initialLoadLatch);
+        awaitLatch("Wait inital loading", initialLoadLatch);
         verifyInitialTextSelection();
         Point clickPoint = calculateTargetPoint();
         assertNotNull(window);
         JTextComponent editPane = window.panel(EDITOR_TITLE).textBox().target();
         robot().click(editPane, clickPoint);
-        awaitLatch(selectionChangeLatch);
+        awaitLatch("Wait entry selection", selectionChangeLatch);
         SourceTextEntry newEntry = selectedEntries.get(selectedEntries.size() - 1);
         assertEquals(TARGET_TEXT, newEntry.getSrcText());
     }
 
-    private void awaitLatch(CountDownLatch latch) {
+    private void awaitLatch(String message, CountDownLatch latch) {
         try {
-            latch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS);
-        } catch (InterruptedException ignored) {
-            // ignore timeout
+            assertTrue(message, latch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS));
+        } catch (InterruptedException ex) {
+            Log.log(ex, message);
         }
     }
 

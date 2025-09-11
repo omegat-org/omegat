@@ -1039,7 +1039,7 @@ public class RealProject implements IProject {
         if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             synchronized (projectTMX) {
                 tmxPrepared = RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
-                        tmxPath, new TMXRebaseOperation(projectTMX, config));
+                        tmxPath, getTMXRebaseOperation());
             }
         }
 

@@ -49,7 +49,7 @@ import javax.swing.event.MenuListener;
 public final class MainWindowMenu extends BaseMainWindowMenu
         implements ActionListener, MenuListener, IMainMenu {
 
-    public MainWindowMenu(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
+    public MainWindowMenu(final IMainWindow mainWindow, final BaseMainWindowMenuHandler mainWindowMenuHandler) {
         super(mainWindow, mainWindowMenuHandler);
         initComponents();
     }

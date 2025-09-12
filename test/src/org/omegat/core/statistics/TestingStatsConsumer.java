@@ -24,14 +24,35 @@
  ******************************************************************************/
 package org.omegat.core.statistics;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CompletableFuture;
 
+/**
+ * A consumer class implementing the {@code IStatsConsumer} interface for testing purposes.
+ * This class is designed primarily to assist in unit tests by recording table data and notifying
+ * the completion of data processing.
+ *
+ * It does not perform any actual data manipulation or display tasks, and most
+ * interface methods are effectively no-ops except for a few methods as described below.
+ *
+ * Responsibilities:
+ * - Captures and stores table data provided via the {@code setTable} method.
+ * - Signals the completion of data processing using a {@code CompletableFuture}.
+ *
+ * Thread Safety:
+ * - This class is not explicitly thread-safe. Concurrent access to its methods
+ *   may lead to undefined behavior.
+ *
+ * Methods Overview:
+ * - {@code setTable(String[] headers, String[][] data)}: Stores the provided table data.
+ * - {@code finishData()}: Completes the provided {@code CompletableFuture}, notifying listeners of completion.
+ * - Other methods from {@code IStatsConsumer} do not perform any actions.
+ */
 public class TestingStatsConsumer implements IStatsConsumer {
     private String[][] result;
-    private final CountDownLatch latch;
+    private final CompletableFuture<Void> future;
 
-    public TestingStatsConsumer(CountDownLatch latch) {
-        this.latch = latch;
+    public TestingStatsConsumer(CompletableFuture<Void> future) {
+        this.future = future;
     }
 
     public String[][] getTable() {
@@ -65,7 +86,7 @@ public class TestingStatsConsumer implements IStatsConsumer {
 
     @Override
     public void finishData() {
-        latch.countDown();
+        future.complete(null);
     }
 
     @Override

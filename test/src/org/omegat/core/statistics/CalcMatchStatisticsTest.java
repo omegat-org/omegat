@@ -25,22 +25,50 @@
 
 package org.omegat.core.statistics;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.TestPreferencesInitializer;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Unit tests for the {@code CalcMatchStatistics} class.
+ * This class validates the functionality of calculating match statistics for
+ * translation memory segments. The tests assert correctness of match categories
+ * such as repetitions, exact matches, fuzzy matches, and no matches across
+ * multiple similarity thresholds.
+ *
+ * The following annotations and methods are notable:
+ *
+ * - {@code @Before}: Used for test-specific setup, ensuring the testing environment
+ *   is initialized and isolated.
+ * - {@code @BeforeClass}: Utilized for one-time setup before all tests are executed,
+ *   including temporary directory creation for testing purposes.
+ * - {@code @Test}: Defines a method as a test case, validating different
+ *   statistical metrics with assertions.
+ *
+ * Key functionality tested:
+ *
+ * - Ensures that statistics calculations such as repetitions, exact matches, and
+ *   fuzzy matches (e.g., 95%, 85%, 75%, and 50% similarity thresholds) produce
+ *   expected and valid results.
+ * - Asserts total metrics for match statistics to verify data aggregation is
+ *   correct and comprehensive.
+ * - Confirms integration of dependent components like segmenters and testing
+ *   consumers used for capturing results.
+ */
 public class CalcMatchStatisticsTest {
 
     private static Path tmpDir;
@@ -60,65 +88,58 @@ public class CalcMatchStatisticsTest {
     }
 
     @Test
-    public void testCalcMatchStatics() {
+    public void testCalcMatchStatics() throws ExecutionException, InterruptedException, TimeoutException {
         TestingProject project = new TestingProject(tmpDir);
         Segmenter segmenter = new Segmenter(SRX.getDefault());
-        CountDownLatch latch = new CountDownLatch(1);
-        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(latch);
+        CompletableFuture<Void> future = new CompletableFuture<>();
+        TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
         CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer, false);
         calcMatchStatistics.start();
-        try {
-            assertTrue(latch.await(5, TimeUnit.SECONDS));
-        } catch (InterruptedException ignored) {
-        }
-        try {
-            calcMatchStatistics.join();
-        } catch (InterruptedException ignored) {
-        }
+        future.get(5, TimeUnit.SECONDS);
         String[][] result = testingStatsConsumer.getTable();
-        Assert.assertNotNull(result);
+        assertNotNull(result);
 
         // assertions
         // RowRepetitions 11 90 509 583
-        Assert.assertEquals("11", result[0][1]);
-        Assert.assertEquals("90", result[0][2]);
-        Assert.assertEquals("509", result[0][3]);
-        Assert.assertEquals("583", result[0][4]);
+        assertEquals("11", result[0][1]);
+        assertEquals("90", result[0][2]);
+        assertEquals("509", result[0][3]);
+        assertEquals("583", result[0][4]);
         // RowExactMatch 0 0 0 0
-        Assert.assertEquals("0", result[1][1]);
-        Assert.assertEquals("0", result[1][2]);
-        Assert.assertEquals("0", result[1][3]);
-        Assert.assertEquals("0", result[1][4]);
+        assertEquals("0", result[1][1]);
+        assertEquals("0", result[1][2]);
+        assertEquals("0", result[1][3]);
+        assertEquals("0", result[1][4]);
         // RowMatch95 84 712 3606 4225
-        Assert.assertEquals("84", result[2][1]);
-        Assert.assertEquals("712", result[2][2]);
-        Assert.assertEquals("3606", result[2][3]);
-        Assert.assertEquals("4225", result[2][4]);
+        assertEquals("84", result[2][1]);
+        assertEquals("712", result[2][2]);
+        assertEquals("3606", result[2][3]);
+        assertEquals("4225", result[2][4]);
         // RowMatch85 0 0 0 0
-        Assert.assertEquals("0", result[3][1]);
-        Assert.assertEquals("0", result[3][2]);
-        Assert.assertEquals("0", result[3][3]);
-        Assert.assertEquals("0", result[3][4]);
+        assertEquals("0", result[3][1]);
+        assertEquals("0", result[3][2]);
+        assertEquals("0", result[3][3]);
+        assertEquals("0", result[3][4]);
         // RowMatch75 3 32 234 256
-        Assert.assertEquals("3", result[4][1]);
-        Assert.assertEquals("32", result[4][2]);
-        Assert.assertEquals("234", result[4][3]);
-        Assert.assertEquals("256", result[4][4]);
+        assertEquals("3", result[4][1]);
+        assertEquals("32", result[4][2]);
+        assertEquals("234", result[4][3]);
+        assertEquals("256", result[4][4]);
         // RowMatch50 4 61 304 361
-        Assert.assertEquals("4", result[5][1]);
-        Assert.assertEquals("61", result[5][2]);
-        Assert.assertEquals("304", result[5][3]);
-        Assert.assertEquals("361", result[5][4]);
+        assertEquals("4", result[5][1]);
+        assertEquals("61", result[5][2]);
+        assertEquals("304", result[5][3]);
+        assertEquals("361", result[5][4]);
         // RowNoMatch 6 43 241 274
-        Assert.assertEquals("6", result[6][1]);
-        Assert.assertEquals("43", result[6][2]);
-        Assert.assertEquals("241", result[6][3]);
-        Assert.assertEquals("274", result[6][4]);
+        assertEquals("6", result[6][1]);
+        assertEquals("43", result[6][2]);
+        assertEquals("241", result[6][3]);
+        assertEquals("274", result[6][4]);
         // Total 108 938 4894 5699
-        Assert.assertEquals("108", result[7][1]);
-        Assert.assertEquals("938", result[7][2]);
-        Assert.assertEquals("4894", result[7][3]);
-        Assert.assertEquals("5699", result[7][4]);
+        assertEquals("108", result[7][1]);
+        assertEquals("938", result[7][2]);
+        assertEquals("4894", result[7][3]);
+        assertEquals("5699", result[7][4]);
     }
 
 }

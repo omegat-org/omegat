@@ -55,6 +55,8 @@ import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
+ * Test for LanguageTool class.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LanguageToolTest {

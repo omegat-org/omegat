@@ -31,7 +31,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -48,6 +47,8 @@ import org.omegat.languagetools.LanguageToolWrapper.LanguageToolMarker;
 import org.omegat.util.Language;
 
 /**
+ * Test for FalseFriends class.
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class FalseFriendsTest extends TestCore {

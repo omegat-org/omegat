@@ -26,7 +26,6 @@ package org.omegat.core.data;
 
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.Log;
 
 import javax.swing.SwingUtilities;
 import java.awt.Window;

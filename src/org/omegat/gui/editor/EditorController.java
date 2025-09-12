@@ -491,9 +491,7 @@ public class EditorController implements IEditor {
             updatedTitle = emptyProjectPaneTitle;
             break;
         case FIRST_ENTRY:
-            displayedFileIndex = 0;
-            displayedEntryIndex = 0;
-            updatedTitle = OStrings.getString("GUI_SUBWINDOWTITLE_Editor", getCurrentFile());
+            updatedTitle = OStrings.getString("GUI_SUBWINDOWTITLE_Editor_Loading");
             data = editor;
             SwingUtilities.invokeLater(() -> {
                 // need to run later because some other event listeners

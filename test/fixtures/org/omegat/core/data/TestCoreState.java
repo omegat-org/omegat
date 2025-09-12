@@ -115,7 +115,7 @@ public class TestCoreState extends CoreState {
 
         // 3. Clear GUI component references (but keep mainWindow for last)
         IMainWindow mainWindow = state.getMainWindow(); // Preserve reference temporarily
-        if (mainWindow.getApplicationFrame() != null) {
+        if (mainWindow != null && mainWindow.getApplicationFrame() != null) {
             mainWindow.lockUI();
         }
         state.setEditor(null);
@@ -141,9 +141,6 @@ public class TestCoreState extends CoreState {
 
         // 6. Clear main window last to ensure event listeners still have access during cleanup
         state.setMainWindow(null);
-        if (mainWindow.getApplicationFrame() != null) {
-            mainWindow.unlockUI();
-        }
     }
 
     /**
@@ -151,6 +148,7 @@ public class TestCoreState extends CoreState {
      * Use this only when you need complete isolation and are willing to
      * handle the consequences of changing the singleton reference.
      */
+    @SuppressWarnings("unused")
     public static void forceCompleteReset() {
         CoreState.getInstance().setMainWindow(null);
         CoreState.getInstance().setSaveThread(null);
@@ -161,6 +159,7 @@ public class TestCoreState extends CoreState {
      * Reset for GUI tests - ensures internal state is cleared but keeps same instance.
      * This is an explicit method for GUI test classes to use.
      */
+    @SuppressWarnings("unused")
     public static void resetStateForGUI() {
         resetInternalStateForGUI(CoreState.getInstance());
     }

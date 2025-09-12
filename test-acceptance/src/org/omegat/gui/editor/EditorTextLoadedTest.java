@@ -117,9 +117,9 @@ public class EditorTextLoadedTest extends TestCoreGUI {
             if (newEntry == null) {
                 return;
             }
+            selectedEntries.add(newEntry);
             initialLoadLatch.countDown();
             selectionChangeLatch.countDown();
-            selectedEntries.add(newEntry);
         }
     }
 }

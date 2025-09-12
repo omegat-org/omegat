@@ -26,6 +26,7 @@ package org.omegat.core.data;
 
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.Log;
 
 import javax.swing.SwingUtilities;
 import java.awt.Window;
@@ -115,6 +116,7 @@ public class TestCoreState extends CoreState {
 
         // 3. Clear GUI component references (but keep mainWindow for last)
         IMainWindow mainWindow = state.getMainWindow(); // Preserve reference temporarily
+        mainWindow.lockUI();
         state.setEditor(null);
         state.setGlossaries(null);
         state.setNotes(null);
@@ -138,6 +140,7 @@ public class TestCoreState extends CoreState {
 
         // 6. Clear main window last to ensure event listeners still have access during cleanup
         state.setMainWindow(null);
+        mainWindow.unlockUI();
     }
 
     /**

@@ -55,6 +55,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.TestCoreState;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
@@ -83,18 +84,22 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      * <p>
      *     block until the close action finished.
      */
-    protected void closeProject() {
+    protected void closeProject() throws Exception {
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
         CountDownLatch latch = new CountDownLatch(1);
-        Core.getProject().closeProject();
         CoreEvents.registerProjectChangeListener(event -> {
             if (!Core.getProject().isProjectLoaded()) {
                 latch.countDown();
             }
         });
-        try {
-            assertTrue(latch.await(timeout, TimeUnit.SECONDS));
-        } catch (InterruptedException ignored) {
+        if (SwingUtilities.isEventDispatchThread()) {
+            ProjectFactory.closeProject();
+        } else {
+            SwingUtilities.invokeLater(ProjectFactory::closeProject);
         }
+        assertTrue("Project should unload within timeout.", latch.await(timeout, TimeUnit.SECONDS));
         assertFalse("Project should not be loaded.", Core.getProject().isProjectLoaded());
     }
 
@@ -169,21 +174,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         // 1. Prepare preference for the test;
         Preferences.setPreference(Preferences.PROJECT_FILES_SHOW_ON_LOAD, false);
         assertFalse(Preferences.isPreferenceDefault(Preferences.PROJECT_FILES_SHOW_ON_LOAD, true));
-        // 2. Open a sample project.
-        SwingUtilities.invokeAndWait(() -> {
-            CountDownLatch latch = new CountDownLatch(1);
-            CoreEvents.registerProjectChangeListener(event -> {
-                if (TestCoreState.getInstance().getProject().isProjectLoaded()) {
-                    latch.countDown();
-                }
-            });
-            ProjectUICommands.projectOpen(tmpDir);
-            try {
-                assertTrue(latch.await(timeout, TimeUnit.SECONDS));
-            } catch (InterruptedException ignored) {
+        // 2. ject.
+        CountDownLatch latch = new CountDownLatch(1);
+        CoreEvents.registerProjectChangeListener(event -> {
+            if (TestCoreState.getInstance().getProject().isProjectLoaded()) {
+                latch.countDown();
             }
         });
-        // 3. check Project loaded
+        // 3. Open project directly (if we're already on EDT) or via invokeLater
+        if (SwingUtilities.isEventDispatchThread()) {
+            ProjectUICommands.projectOpen(tmpDir);
+        } else {
+            SwingUtilities.invokeLater(() -> ProjectUICommands.projectOpen(tmpDir));
+        }
+        // 4. Wait for project to load
+        assertTrue("Project should load within timeout", latch.await(timeout, TimeUnit.SECONDS));
         assertTrue("Sample project should be loaded.", Core.getProject().isProjectLoaded());
     }
 
@@ -371,6 +376,9 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         // Initialize core system components that should persist across tests
         initializeOmegaTCore();
+
+        // Initialize project
+        initializeProject();
     }
 
     /**
@@ -392,6 +400,14 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         Preferences.init();
         Preferences.initFilters();
         Preferences.initSegmentation();
+    }
+
+    private static void initializeProject() {
+        // Initialize project
+        NotLoadedProject nlp = new NotLoadedProject();
+        TestCoreState.getInstance().setProject(nlp);
+        Core.setProject(nlp);
+        TestCoreState.initAutoSave(autoSave);
     }
 
     /**

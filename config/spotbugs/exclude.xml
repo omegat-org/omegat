@@ -201,6 +201,10 @@
         </Or>
         <Bug pattern="NP_NULL_ON_SOME_PATH,NP_NULL_PARAM_DEREF"/>
     </Match>
+    <Match>
+        <Class name="org.omegat.core.data.TestCoreState"/>
+        <Bug pattern="DLS_DEAD_LOCAL_STORE"/>
+    </Match>
 
     <!-- Temporarily exclude to enable minimum chechks -->
     <Match>

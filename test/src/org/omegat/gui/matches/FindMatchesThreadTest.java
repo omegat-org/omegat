@@ -54,6 +54,7 @@ import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.core.matching.NearString;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -79,6 +80,7 @@ public class FindMatchesThreadTest {
 
     @Before
     public void setUp() throws Exception {
+        TestCoreState.resetState();
         Core.initializeConsole();
         TestPreferencesInitializer.init();
         Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
@@ -89,7 +91,7 @@ public class FindMatchesThreadTest {
     }
 
     @Test
-    public void testSearchBUGS1248() throws Exception {
+    public void testSearchBUGS1248() {
         ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
         prop.setSourceLanguage("ja");
         prop.setTargetLanguage("fr");
@@ -97,9 +99,9 @@ public class FindMatchesThreadTest {
         prop.setSentenceSegmentingEnabled(false);
         IProject project = new TestProject(prop, TMX_SEGMENT, new LuceneCJKTokenizer(),
                 new LuceneFrenchTokenizer());
-        Core.setProject(project);
-        Segmenter segmenter = new Segmenter(SRX.getDefault());
-        List<NearString> result = FindMatchesThread.finderSearch(project, segmenter, SOURCE_TEXT, () -> false,
+        TestCoreState.getInstance().setProject(project);
+        TestCoreState.getInstance().setSegmenter(new Segmenter(SRX.getDefault()));
+        List<NearString> result = FindMatchesThread.finderSearch(project, SOURCE_TEXT, () -> false,
                 30);
         assertEquals(2, result.size());
         //
@@ -118,10 +120,6 @@ public class FindMatchesThreadTest {
         private final File testTmx;
         private final ITokenizer sourceTokenizer;
         private final ITokenizer targetTokenizer;
-
-        TestProject(ProjectProperties prop, File testTmx) {
-            this(prop, testTmx, new LuceneEnglishTokenizer(), new DefaultTokenizer());
-        }
 
         TestProject(ProjectProperties prop, File testTmx, ITokenizer source, ITokenizer target) {
             this.prop = prop;
@@ -146,7 +144,7 @@ public class FindMatchesThreadTest {
         @Override
         public ITokenizer getSourceTokenizer() {
             return sourceTokenizer;
-        };
+        }
 
         @Override
         public ITokenizer getTargetTokenizer() {

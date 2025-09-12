@@ -25,30 +25,28 @@
 
 package org.omegat.gui.dialogs;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class ConflictDialogTest extends TestCoreGUI {
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testConflictDialogLocal() throws IOException {
         final String baseText = "base text";
         final String remoteText = "remote text";
         final String localText = "local text";
+        assertNotNull(window);
         JFrame parent = (JFrame) window.target();
         ConflictDialogController controller = new ConflictDialogController(parent);
         SwingUtilities.invokeLater(() -> controller.show(baseText, remoteText, localText));
@@ -71,8 +69,9 @@ public class ConflictDialogTest extends TestCoreGUI {
             }
         });
         try {
-            latch.await(5, TimeUnit.SECONDS);
+            assertTrue(latch.await(10, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
+            fail("Test is interrupted. (timeout 10 sec.)");
         }
         assertEquals("Selection should be local.", localText, controller.getResult());
     }
@@ -83,6 +82,7 @@ public class ConflictDialogTest extends TestCoreGUI {
         final String baseText = "base text";
         final String remoteText = "remote text";
         final String localText = "local text";
+        assertNotNull(window);
         JFrame parent = (JFrame) window.target();
         ConflictDialogController controller = new ConflictDialogController(parent);
         SwingUtilities.invokeLater(() -> controller.show(baseText, remoteText, localText));
@@ -101,8 +101,9 @@ public class ConflictDialogTest extends TestCoreGUI {
             }
         });
         try {
-            latch.await(5, TimeUnit.SECONDS);
+            assertTrue(latch.await(10, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
+            fail("Test is interrupted. (timeout 10 sec.)");
         }
         assertEquals("Selection should be remote", remoteText, controller.getResult());
     }

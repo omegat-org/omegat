@@ -62,7 +62,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import org.omegat.util.RuntimePreferences;
+import org.omegat.core.data.RuntimePreferenceStore;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.data.CommandVarExpansion;
@@ -292,7 +292,7 @@ public class ProjectPropertiesDialog extends JDialog {
         sourceTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
         bT.add(sourceTokenizerField);
 
-        String cliTokSrc = RuntimePreferences.getTokenizerSource();
+        String cliTokSrc = RuntimePreferenceStore.getInstance().getTokenizerSource();
         if (cliTokSrc != null) {
             try {
                 Class<?> srcTokClass = Class.forName(cliTokSrc);
@@ -323,7 +323,7 @@ public class ProjectPropertiesDialog extends JDialog {
         targetTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
         bT.add(targetTokenizerField);
 
-        String cliTokTrg = RuntimePreferences.getTokenizerTarget();
+        String cliTokTrg = RuntimePreferenceStore.getInstance().getTokenizerTarget();
         if (cliTokTrg != null) {
             try {
                 Class<?> trgTokClass = Class.forName(cliTokTrg);

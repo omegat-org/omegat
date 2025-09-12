@@ -45,7 +45,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
@@ -74,6 +77,18 @@ import org.omegat.util.StringUtil;
 /**
  * This class implements search functionality. It is non-reentrant: each searcher instance must be used by a
  * single thread.
+ * <p>
+ * THREAD SAFETY: This class is NOT thread-safe for concurrent access. However, it supports the following
+ * safe usage pattern:
+ * <ol>
+ * <li>Thread A creates Searcher instance and calls search()</li>
+ * <li>Thread A completes search() execution completely</li>
+ * <li>Thread B can safely call getSearchResults() and other getter methods after Thread A completes</li>
+ * </ol>
+ * The key requirement is that getSearchResults() and other result access methods are only called AFTER
+ * search() completes, and no concurrent access occurs during search() execution.
+ * <p>
+ * VISIBILITY: The searchCompleted flag ensures proper visibility of search results between threads.
  *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -88,28 +103,33 @@ import org.omegat.util.StringUtil;
  */
 public class Searcher {
 
-    private volatile List<SearchResultEntry> searchResults;
+    private final List<SearchResultEntry> searchResults = new ArrayList<>();
     private boolean preprocessResults;
     private final IProject project;
     /**
      * keeps track of previous results not from project memory
      */
-    private Map<String, Integer> tmxMap;
+    private final Map<String, Integer> tmxMap = new HashMap<>();
     /**
      * HP: keeps track of previous results, to avoid duplicate entries
      */
-    private Map<String, Integer> entryMap;
+    private final Map<String, Integer> entryMap = new HashMap<>();
     /**
      * HP: contains a matcher for each search string (multiple if keyword search)
      */
-    private List<Matcher> matchers;
-    private Matcher author;
+    private final List<Matcher> matchers = new ArrayList<>();
 
     private int numFinds;
 
     private final SearchExpression searchExpression;
     private LongProcessThread checkStop;
     private final List<SearchMatch> foundMatches = new ArrayList<>();
+
+    /**
+     * Volatile flag to ensure proper visibility of search completion between threads.
+     * This provides happens-before relationship for safe result access.
+     */
+    private volatile boolean searchCompleted = false;
 
     // PM entries 0+
     // Only PM and TM are counted (separately) for '+X more' statistics
@@ -143,9 +163,13 @@ public class Searcher {
     }
 
     /**
-     * Returns list of search results
+     * Returns list of search results.
      */
     public List<SearchResultEntry> getSearchResults() {
+        if (!searchCompleted) {
+            throw new IllegalStateException("Search not completed yet");
+        }
+
         if (!preprocessResults) {
             return searchResults;
         }
@@ -156,7 +180,6 @@ public class Searcher {
         if (searchExpression.allResults) {
             return searchResults;
         }
-
 
         for (SearchResultEntry entry : searchResults) {
             String key = entry.getSrcText() + entry.getTranslation();
@@ -171,6 +194,7 @@ public class Searcher {
                 }
             }
         }
+
         return searchResults;
     }
 
@@ -184,22 +208,20 @@ public class Searcher {
     /**
      * Search for this.expression and return a list of results.
      *
-     * @throws Exception when searching files goes wrong
+     * @throws IOException when searching files goes wrong
      */
     public void search() throws IOException {
         String textSearchExpression = searchExpression.text;
-        String authorSearchExpression = searchExpression.author;
 
-        searchResults = new ArrayList<>();
         numFinds = 0;
         // ensures that results will be preprocessed only one time
         preprocessResults = true;
-        entryMap = new HashMap<>();
+        searchCompleted = false;
 
-        tmxMap = new HashMap<>();
-
-        // create a list of matchers
-        matchers = new ArrayList<>();
+        searchResults.clear();
+        tmxMap.clear();
+        entryMap.clear();
+        matchers.clear();
 
         // determine pattern matching flags
         int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
@@ -245,20 +267,39 @@ public class Searcher {
         default:
             throw new IllegalStateException("Unknown search expression type");
         }
-        // create a matcher for the author search string
+
+        try {
+            if (searchExpression.rootDir == null) {
+                // if no search directory specified, then we are
+                // searching current project only
+                searchProject();
+            } else {
+                searchFiles();
+            }
+        } finally {
+            // Mark search as completed - provides happens-before edge for safe result access
+            // This ensures all search results are visible to other threads
+            searchCompleted = true;
+        }
+    }
+
+    /**
+     * Indicates whether the search operation has been completed.
+     *
+     * @return true if the search has been completed; false otherwise.
+     */
+    public boolean isSearchCompleted() {
+        return searchCompleted;
+    }
+
+    /** create a matcher for the author search string. */
+    private Matcher createAuthorSearchExpression() {
+        String authorSearchExpression = searchExpression.author;
+        int flags = searchExpression.caseSensitive ? 0 : Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
         if (searchExpression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP) {
             authorSearchExpression = StaticUtils.globToRegex(authorSearchExpression, searchExpression.spaceMatchNbsp);
         }
-
-        this.author = Pattern.compile(authorSearchExpression, flags).matcher("");
-
-        if (searchExpression.rootDir == null) {
-            // if no search directory specified, then we are
-            // searching current project only
-            searchProject();
-        } else {
-            searchFiles();
-        }
+        return Pattern.compile(authorSearchExpression, flags).matcher("");
     }
 
     // ////////////////////////////////////////////////////////////
@@ -469,7 +510,7 @@ public class Searcher {
     }
 
     /**
-     * Check if specified entry should be found.
+     * Check if the specified entry should be found.
      *
      * @param srcText
      *            source text
@@ -487,8 +528,8 @@ public class Searcher {
      * @param intro
      *            file
      */
-    protected void checkEntry(String srcText, String locText, String note,
-            String[] properties, TMXEntry entry, int entryNum, String intro) {
+    void checkEntry(String srcText, String locText, String note,
+            String[] properties, ITMXEntry entry, int entryNum, String intro) {
         SearchMatch[] srcMatches = null;
         SearchMatch[] targetMatches = null;
         SearchMatch[] srcOrTargetMatches = null;
@@ -552,9 +593,9 @@ public class Searcher {
                 || propertyMatches != null)
                 && (!searchExpression.searchAuthor || searchAuthor(entry))
                 && (!searchExpression.searchDateBefore
-                        || entry != null && entry.changeDate != 0 && entry.changeDate < searchExpression.dateBefore)
+                        || entry != null && entry.getChangeDate() != 0 && entry.getChangeDate() < searchExpression.dateBefore)
                 && (!searchExpression.searchDateAfter
-                        || entry != null && entry.changeDate != 0 && entry.changeDate > searchExpression.dateAfter)) {
+                        || entry != null && entry.getChangeDate() != 0 && entry.getChangeDate() > searchExpression.dateAfter)) {
             // found
             foundString(entryNum, intro, srcText, locText, note, firstMatchedProperty,
                     srcMatches, targetMatches, noteMatches, propertyMatches);
@@ -569,22 +610,38 @@ public class Searcher {
         final SearchCallback searchCallback = new SearchCallback(project.getProjectProperties());
 
         int depth = searchExpression.recursive ? Integer.MAX_VALUE : 0;
-        Files.walk(root, depth, FileVisitOption.FOLLOW_LINKS).forEach(path -> {
-            String filename = path.toString();
-            FileInfo fi = new FileInfo();
-            // determine actual file name w/ no root path info
-            fi.filePath = root.relativize(path).toString();
+        try (Stream<@NotNull Path> walker = Files.walk(root, depth, FileVisitOption.FOLLOW_LINKS)) {
+            walker.filter(Files::isRegularFile).forEach(path -> {
+                String filename = path.toString();
+                FileInfo fi = new FileInfo();
+                // determine actual file name w/ no root path info
+                fi.filePath = root.relativize(path).toString();
 
-            searchCallback.setCurrentFile(fi);
-            try {
-                fm.loadFile(filename, new FilterContext(project.getProjectProperties()), searchCallback);
-            } catch (TranslationException | IOException ex) {
-                Log.log(ex);
-            }
-            searchCallback.fileFinished();
+                searchCallback.setCurrentFile(fi);
+                try {
+                    // Check for interruption before processing each file.
+                    checkStop.checkInterrupted();
+                    fm.loadFile(filename, new FilterContext(project.getProjectProperties()), searchCallback);
+                } catch (IOException | TranslationException ex) {
+                    Log.log("Search error in file" + fi.filePath + ": " + ex.getMessage());
+                } catch (RuntimeException ex) {
+                    Log.log(ex);
+                    throw ex; // Re-throw to stop processing
+                }
+                searchCallback.fileFinished();
+            });
+        }
+    }
 
-            checkStop.checkInterrupted();
-        });
+    @VisibleForTesting
+    void addToMatcher(String text) {
+        String textSearchExpression = StaticUtils.globToRegex(text, true);
+        matchers.add(Pattern.compile(textSearchExpression, 0).matcher(""));
+    }
+
+    @VisibleForTesting
+    List<SearchResultEntry> getRawSearchResults() {
+        return Collections.unmodifiableList(searchResults);
     }
 
     protected class SearchCallback extends ParseEntry implements IParseCallback {
@@ -629,7 +686,7 @@ public class Searcher {
     }
 
     public boolean searchString(String origText, boolean collapseResults) {
-        if (origText == null || matchers == null || matchers.isEmpty()) {
+        if (origText == null || matchers.isEmpty()) {
             return false;
         }
 
@@ -692,7 +749,7 @@ public class Searcher {
         // We should not collapse results when doing a search/replace
         // see https://sourceforge.net/p/omegat/bugs/675/
         if (collapseResults) {
-            ollapseFoundMatches();
+            collapseFoundMatches();
         }
         return true;
     }
@@ -724,7 +781,7 @@ public class Searcher {
         return searchExpression.widthInsensitive ? StringUtil.normalizeWidth(text) : text;
     }
 
-    private void ollapseFoundMatches() {
+    private void collapseFoundMatches() {
         for (int i = 1; i < foundMatches.size();) {
             SearchMatch pr = foundMatches.get(i - 1);
             SearchMatch cu = foundMatches.get(i);
@@ -755,10 +812,8 @@ public class Searcher {
      */
     private boolean processMatch(Matcher matcher, int end, int start) {
         if (searchExpression.mode == SearchMode.REPLACE) {
-            if (searchReplaceImpl(searchExpression, foundMatches, matcher, end, start,
-                    project.getProjectProperties().getTargetLanguage().getLocale())) {
-                return true;
-            }
+            return searchReplaceImpl(searchExpression, foundMatches, matcher, end, start,
+                    project.getProjectProperties().getTargetLanguage().getLocale());
         } else if (end > start) {
             // Add a match only if the matched region is not empty.
             // We still return true so the hit will still be recorded.
@@ -773,7 +828,7 @@ public class Searcher {
      * matches to the found matches list.
      *
      * @param searchExpression The search expression containing the search criteria and replacement text.
-     * @param foundMatches A list to which all found matches, including their start, end positions, and replacements, are added.
+     * @param foundMatchesList A list to which all found matches, including their start, end positions, and replacements, are added.
      * @param matcher The matcher object used for searching and extracting matches based on the search expression.
      * @param end The end position of the match in the text being searched.
      * @param start The start position of the match in the text being searched.
@@ -782,7 +837,7 @@ public class Searcher {
      * @throws IndexOutOfBoundsException Throws this exception if a replacement group in the search expression
      *         refers to a matcher group that does not exist.
      */
-    boolean searchReplaceImpl(SearchExpression searchExpression, List<SearchMatch> foundMatches, Matcher matcher,
+    boolean searchReplaceImpl(SearchExpression searchExpression, List<SearchMatch> foundMatchesList, Matcher matcher,
                               int end, int start, Locale targetLocale) {
         if (searchExpression.searchExpressionType == SearchExpression.SearchExpressionType.REGEXP) {
             if ((end == start) && (start > 0)) {
@@ -803,14 +858,15 @@ public class Searcher {
                     // replace with empty string.
                     substitution = "";
                 }
-                substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");    // avoid re-eval inside replaceCase;
+                // avoid re-eval inside replaceCase;
+                substitution = substitution.replace("\\", "\\\\").replace("$", "\\$");
                 repl = repl.substring(0, replaceMatcher.start()) + substitution + repl.substring(replaceMatcher.end());
                 replaceMatcher.reset(repl);
             }
-            foundMatches.add(new SearchMatch(start, end, StringUtil.replaceCase(repl, targetLocale)));
+            foundMatchesList.add(new SearchMatch(start, end, StringUtil.replaceCase(repl, targetLocale)));
 
         } else {
-            foundMatches.add(new SearchMatch(start, end, searchExpression.replacement));
+            foundMatchesList.add(new SearchMatch(start, end, searchExpression.replacement));
         }
         return false;
     }
@@ -822,6 +878,9 @@ public class Searcher {
      *         about the match's start and end positions, and any associated replacement text.
      */
     public List<SearchMatch> getFoundMatches() {
+        if (!searchCompleted) {
+            throw new IllegalStateException("Search not completed yet.");
+        }
         return foundMatches;
     }
 
@@ -833,28 +892,27 @@ public class Searcher {
      *
      * @return True if the text string contains the search string
      */
-    private boolean searchAuthor(TMXEntry te) {
-        if (te == null || author == null) {
+    private boolean searchAuthor(ITMXEntry te) {
+        Matcher author = createAuthorSearchExpression();
+        if (te == null) {
             return false;
         }
 
-        if (author.pattern().pattern().equals("")) {
+        if (author.pattern().pattern().isEmpty()) {
             // Handle search for null author.
-            return te.changer == null && te.creator == null;
+            return te.getChanger() == null && te.getCreator() == null;
         }
 
-        if (te.changer != null) {
-            author.reset(te.changer);
+        if (te.getChanger() != null) {
+            author.reset(te.getChanger());
             if (author.find()) {
                 return true;
             }
         }
 
-        if (te.creator != null) {
-            author.reset(te.creator);
-            if (author.find()) {
-                return true;
-            }
+        if (te.getCreator() != null) {
+            author.reset(te.getCreator());
+            return author.find();
         }
 
         return false;

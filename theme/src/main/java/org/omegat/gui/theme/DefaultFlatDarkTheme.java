@@ -39,6 +39,8 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.util.SystemInfo;
 
 /**
+ * A default dark theme customized from FlatDarkLaf.
+ *
  * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
@@ -48,6 +50,9 @@ public class DefaultFlatDarkTheme extends FlatLaf {
     private static final String DESCRIPTION = "A theme from FlatDarkLaf";
     private final LookAndFeel parent;
 
+    /**
+     * Registers the default Flat Dark Theme with the system UIManager.
+     */
     public static void loadPlugins() {
         UIManager.installLookAndFeel(NAME, DefaultFlatDarkTheme.class.getName());
     }
@@ -55,9 +60,6 @@ public class DefaultFlatDarkTheme extends FlatLaf {
     public static void unloadPlugins() {
     }
 
-    /**
-     * Constructor.
-     */
     public DefaultFlatDarkTheme() {
         parent = new FlatDarkLaf();
     }
@@ -67,29 +69,16 @@ public class DefaultFlatDarkTheme extends FlatLaf {
         return true;
     }
 
-    /**
-     * Return human-readable name of theme.
-     *
-     * @return name.
-     */
     @Override
     public String getName() {
         return NAME;
     }
 
-    /**
-     * Return description of theme.
-     *
-     * @return description.
-     */
     @Override
     public String getDescription() {
         return DESCRIPTION;
     }
 
-    /**
-     * Return default theme configurations.
-     */
     @Override
     public UIDefaults getDefaults() {
         UIDefaults original = parent.getDefaults();

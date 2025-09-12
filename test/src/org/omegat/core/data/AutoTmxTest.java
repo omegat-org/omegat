@@ -133,18 +133,6 @@ public class AutoTmxTest {
         Core.initializeConsole();
 
         p = new RealProject(props);
-        p.projectTMX = new ProjectTMX(
-                new ProjectTMX.CheckOrphanedCallback() {
-                    @Override
-                    public boolean existSourceInProject(String src) {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean existEntryInProject(EntryKey key) {
-                        return true;
-                    }
-                });
         p.projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), false, projectFile,
                 Core.getSegmenter());
 

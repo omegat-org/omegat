@@ -44,6 +44,14 @@ import org.omegat.cli.LegacyParameters;
 import org.omegat.util.RuntimePreferences;
 import picocli.CommandLine;
 
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
+import org.languagetool.JLanguageTool;
+import org.omegat.core.data.RuntimePreferenceStore;
+import tokyo.northside.logging.ILogger;
+
+import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;
+import org.omegat.CLIParameters.TAG_VALIDATION_MODE;
 import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;

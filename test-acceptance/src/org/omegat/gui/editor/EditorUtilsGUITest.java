@@ -26,6 +26,7 @@
 package org.omegat.gui.editor;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Paths;
@@ -41,7 +42,6 @@ import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 /**
  * @author Hiroshi Miura
@@ -54,12 +54,10 @@ public final class EditorUtilsGUITest {
 
     public static class EditorUtilsFirstStepsTest extends TestCoreGUI {
 
-        @Rule
-        public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
-
         @Test
         public void testEditorUtilsGetWordFirstSteps() throws BadLocationException {
             int offs = 518;
+            assertNotNull(window);
             JTextComponent editPane = window.panel("First Steps").textBox("IntroPane").target();
             int posStart = EditorUtils.getWordStart(editPane, offs, Locale.ENGLISH);
             int posEnd = EditorUtils.getWordEnd(editPane, offs, Locale.ENGLISH);
@@ -73,14 +71,12 @@ public final class EditorUtilsGUITest {
     public static class EditorUtilsLoadedProjectTest extends TestCoreGUI {
 
         @Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
-
-        @Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();
 
         @Test
         public void testEditorUtilsGetWordLoadedProject() throws Exception {
             openSampleProject(Paths.get("test-acceptance/data/project_CN_JP/"));
+            assertNotNull(window);
             final JTextComponent editPane = window.panel("Editor - source.txt").textBox().target();
             int length = editPane.getDocument().getLength();
             assertTrue(length > 0);

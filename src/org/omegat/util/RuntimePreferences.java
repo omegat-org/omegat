@@ -25,6 +25,8 @@
 
 package org.omegat.util;
 
+import org.omegat.core.data.RuntimePreferenceStore;
+
 /**
  * Class for store runtime-only preferences, which shouldn't be saved to config
  * dir.
@@ -36,80 +38,40 @@ public final class RuntimePreferences {
     private RuntimePreferences() {
     }
 
-    /** Quiet mode. */
-    private static boolean quietMode;
-
-    /** Force use specified config dir. */
-    private static String configDir;
-
-    private static boolean projectLockingEnabled = true;
-
-    /** Last opened project location save control **/
-    private static boolean locationSaveEnabled = true;
-
-    private static String alternateFilenameFrom;
-    private static String alternateFilenameTo;
-
-    private static String tokenizerSource;
-
-    private static String tokenizerTarget;
-
-    private static boolean noTeam = false;
-
-    public static boolean isNoTeam() {
-        return noTeam;
-    }
-
-    public static void setNoTeam() {
-        noTeam = true;
-    }
-
-    public static void setTokenizerSource(String v) {
-        tokenizerSource = v;
-    }
-
-    public static String getTokenizerSource() {
-        return tokenizerSource;
-    }
-
-    public static void setTokenizerTarget(String v) {
-        tokenizerTarget = v;
-    }
-
-    public static String getTokenizerTarget() {
-        return tokenizerTarget;
-    }
-
     public static boolean isQuietMode() {
-        return quietMode;
+        return RuntimePreferenceStore.getInstance().isQuietMode();
     }
 
     public static void setQuietMode(boolean v) {
-        quietMode = v;
+        RuntimePreferenceStore.getInstance().setQuietMode(v);
     }
 
     public static String getConfigDir() {
-        return configDir;
+        return RuntimePreferenceStore.getInstance().getConfigDir();
     }
 
     public static void setConfigDir(String v) {
-        configDir = v;
+        RuntimePreferenceStore.getInstance().setConfigDir(v);
     }
 
     public static boolean isProjectLockingEnabled() {
-        return projectLockingEnabled;
+        return !RuntimePreferenceStore.getInstance().isProjectLockingDisabled();
     }
 
     public static void setProjectLockingEnabled(boolean v) {
-        projectLockingEnabled = v;
+        if (!v) {
+            RuntimePreferenceStore.getInstance().setProjectLockingDisabled();
+        }
     }
 
     public static boolean isLocationSaveEnabled() {
-        return locationSaveEnabled;
+        return RuntimePreferenceStore.getInstance().isLocationSaveEnabled();
     }
 
     public static void setLocationSaveEnabled(boolean v) {
-        locationSaveEnabled = v;
+        if (!v) {
+            RuntimePreferenceStore.getInstance().setLocationSaveDisable();
+        }
     }
 
     public static void setAlternateFilenames(String anAlternateFilenameFrom, String anAlternateFilenameTo) {

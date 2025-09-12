@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
@@ -150,7 +151,7 @@ public interface IProject {
      *            translation. It can't be null
      */
     void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
-            TMXEntry.ExternalLinked externalLinked);
+            @Nullable TMXEntry.ExternalLinked externalLinked);
 
     /**
      * Set translation for entry with optimistic lock checking: if previous translation is not the same like

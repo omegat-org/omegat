@@ -109,30 +109,28 @@ public final class RebaseAndCommit {
         }
         final File localFile = new File(projectDir, path);
         final boolean fileChangedLocally;
-        {
-            File baseRepoFile = null;
-            if (prep != null && prep.versionBase.equals(currentBaseVersion)) {
-                baseRepoFile = prep.fileBase;
-            }
-            if (baseRepoFile == null) {
-                baseRepoFile = provider.switchToVersion(path, currentBaseVersion);
-            }
-            if (!localFile.exists()) {
-                // there is no local file - just use remote
-                LOGGER.atDebug().setMessage("local file '{0}' doesn't exist").addArgument(path).log();
-                fileChangedLocally = false;
-            } else if (FileUtils.contentEquals(baseRepoFile, localFile)) {
-                // versioned file was not changed - no need to commit
-                LOGGER.atDebug().setMessage("local file '{0}' wasn't changed").addArgument(path).log();
-                fileChangedLocally = false;
-            } else {
-                LOGGER.atDebug().setMessage("local file '{0}' was changed").addArgument(path).log();
-                fileChangedLocally = true;
-                rebaser.parseBaseFile(baseRepoFile);
-            }
-            // baseRepoFile is not valid anymore because we will switch to other
-            // version
+        File baseRepoFile = null;
+        if (prep != null && prep.versionBase.equals(currentBaseVersion)) {
+            baseRepoFile = prep.fileBase;
         }
+        if (baseRepoFile == null) {
+            baseRepoFile = provider.switchToVersion(path, currentBaseVersion);
+        }
+        if (!localFile.exists()) {
+            // there is no local file - just use remote
+            LOGGER.atDebug().setMessage("local file '{0}' doesn't exist").addArgument(path).log();
+            fileChangedLocally = false;
+        } else if (FileUtils.contentEquals(baseRepoFile, localFile)) {
+            // versioned file was not changed - no need to commit
+            LOGGER.atDebug().setMessage("local file '{0}' wasn't changed").addArgument(path).log();
+            fileChangedLocally = false;
+        } else {
+            LOGGER.atDebug().setMessage("local file '{0}' was changed").addArgument(path).log();
+            fileChangedLocally = true;
+            rebaser.parseBaseFile(baseRepoFile);
+        }
+        // baseRepoFile is not valid anymore because we will switch to other
+        // version
 
         File headRepoFile = null;
         String headVersion = null;
@@ -145,26 +143,24 @@ public final class RebaseAndCommit {
             headVersion = provider.getVersion(path);
         }
         final boolean fileChangedRemotely;
-        {
-            if (!localFile.exists()) {
-                // there is no local file - just use remote
-                if (headRepoFile.exists()) {
-                    fileChangedRemotely = true;
-                    rebaser.parseHeadFile(headRepoFile);
-                } else {
-                    // there is no remote file also
-                    fileChangedRemotely = false;
-                }
-            } else if (StringUtils.equals(currentBaseVersion, headVersion)) {
-                LOGGER.atDebug().setMessage("remote file '{0}' wasn't changed").addArgument(path).log();
-                fileChangedRemotely = false;
-            } else {
-                // base and head versions are differ - somebody else committed
-                // changes
-                LOGGER.atDebug().setMessage("remote file '{0}' was changed").addArgument(path).log();
+        if (!localFile.exists()) {
+            // there is no local file - just use remote
+            if (headRepoFile.exists()) {
                 fileChangedRemotely = true;
                 rebaser.parseHeadFile(headRepoFile);
+            } else {
+                // there is no remote file also
+                fileChangedRemotely = false;
             }
+        } else if (StringUtils.equals(currentBaseVersion, headVersion)) {
+            LOGGER.atDebug().setMessage("remote file '{0}' wasn't changed").addArgument(path).log();
+            fileChangedRemotely = false;
+        } else {
+            // base and head versions are differ - somebody else committed
+            // changes
+            LOGGER.atDebug().setMessage("remote file '{0}' was changed").addArgument(path).log();
+            fileChangedRemotely = true;
+            rebaser.parseHeadFile(headRepoFile);
         }
 
         final File tempOut = new File(projectDir, path + "#based_on_" + headVersion);

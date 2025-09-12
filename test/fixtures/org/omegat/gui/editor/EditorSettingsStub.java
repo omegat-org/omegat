@@ -40,7 +40,7 @@ package org.omegat.gui.editor;
  * setting and provides getter and setter methods for interaction with these properties.
  * Non-applicable methods in the interface are implemented with no operations.
  */
-public class MockEditorSettings implements IEditorSettings {
+public class EditorSettingsStub implements IEditorSettings {
 
     private boolean useTabForAdvance;
     private boolean markTranslated;

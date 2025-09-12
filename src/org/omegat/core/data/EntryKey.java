@@ -27,6 +27,7 @@ package org.omegat.core.data;
 
 import java.util.Objects;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.StringUtil;
 
 /**
@@ -48,8 +49,8 @@ public class EntryKey implements Comparable<EntryKey> {
      */
     private static boolean ignoreFileContext = false;
 
-    public EntryKey(final String file, final String sourceText, final String id, final String prev,
-            final String next, final String path) {
+    public EntryKey(final String file, final String sourceText, final @Nullable String id, final @Nullable String prev,
+            final @Nullable String next, final @Nullable String path) {
         this.file = file;
         this.sourceText = sourceText;
         this.id = id;

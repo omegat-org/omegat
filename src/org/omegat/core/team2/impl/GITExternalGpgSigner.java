@@ -59,7 +59,10 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Platform;
 
 /**
- * This is ported from EGit (Apache-2.0)
+ * This is ported from EGit (Apache-2.0).
+ * The class will be deprecated in the future. JGit 7.x and later
+ * supports GPG signing natively.
+ *
  * @author Hiroshi Miura
  */
 public class GITExternalGpgSigner extends GpgSigner {
@@ -81,7 +84,7 @@ public class GITExternalGpgSigner extends GpgSigner {
     private static final String ExternalGpgSigner_bufferError = "GPG_EXTERNAL_SIGNER_BUFFER_ERROR";
     private static final String ExternalGpgSigner_environmentError = "GPG_EXTERNAL_SIGNER_ENVIRONMENT_ERROR";
     private static final String ExternalGpgSigner_noKeyFound = "GPG_EXTERNAL_SIGNER_NO_KEY_FOUND";
-    private static final String ExternalGpgSigner_skipNotAccessiblePath = "GPG_EXTERNAL_SIGNER_SKIP_NOT_ACCESSIBLE_PATH";
+    private static final String ExternalGpgSigner_skipUnaccessiblePath = "GPG_EXTERNAL_SIGNER_SKIP_NOT_ACCESSIBLE_PATH";
     private static final String ExternalGpgSigner_cannotSearch = "GPG_EXTERNAL_SIGNER_CANNOT_SEARCH";
     private static final String ExternalGpgSigner_signingCanceled = "GPG_EXTERNAL_SIGNER_SIGNING_CANCELED";
     private static final String ExternalGpgSigner_noSignature = "GPG_EXTERNAL_SIGNER_NO_SIGNATURE";
@@ -458,7 +461,7 @@ public class GITExternalGpgSigner extends GpgSigner {
                         return exe.getAbsolutePath();
                     }
                 } catch (SecurityException e) {
-                    LOGGER.atError().setCause(e).setMessageRB(ExternalGpgSigner_skipNotAccessiblePath)
+                    LOGGER.atError().setCause(e).setMessageRB(ExternalGpgSigner_skipUnaccessiblePath)
                             .addArgument(exe.getPath()).log();
                 }
             }

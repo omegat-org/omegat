@@ -27,6 +27,7 @@
 
 package org.omegat.filters3.xml;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Tag;
 import org.omegat.util.BiDiUtils;
@@ -40,11 +41,12 @@ import org.omegat.util.Language;
  * @author Briac Pilpre
  */
 public class XMLTag extends Tag {
-    private Language sourceLanguage;
-    private Language targetLanguage;
+    private final Language sourceLanguage;
+    private final Language targetLanguage;
 
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes, Translator translator) {
+    public XMLTag(String tag, String shortcut, Type type, @Nullable org.xml.sax.Attributes attributes,
+                  Translator translator) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
         this.sourceLanguage = translator.getSourceLanguage();
         this.targetLanguage = translator.getTargetLanguage();
@@ -55,6 +57,7 @@ public class XMLTag extends Tag {
      * for &lt;strong&gt; tag should return &lt;strong&gt;.
      * Do specific processing for Open XML documents
      */
+    @Override
     public String toOriginal() {
         StringBuilder buf = new StringBuilder();
 
@@ -79,7 +82,7 @@ public class XMLTag extends Tag {
         if (differentDir && isRtl && isSpecialDocxTagLTR) {
             // For LTR -> RTL, convert the i/b/sz to iCs/bCs/szCs if source and target
             // languages directionality are different.
-            buf.append(getTag() + "Cs");
+            buf.append(getTag()).append("Cs");
         } else if (differentDir && !isRtl && isSpecialDocxTagRTL) {
             // For RTL -> LTR, convert the iCs/bCs/szCs to i/b/sz
             buf.append(getTag().replaceFirst("Cs", ""));
@@ -87,16 +90,18 @@ public class XMLTag extends Tag {
             buf.append(getTag());
         }
 
-        buf.append(getAttributes().toString());
+        buf.append(getAttributes());
 
         // If that's an Open XML document, we preserve spaces for all <w:t> tags
         if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
-            Boolean preserve = false;
-            for (int i = 0; i < getAttributes().size(); i++) {
-                Attribute oneAttribute = getAttributes().get(i);
-                if (oneAttribute.getName().equalsIgnoreCase("xml:space")) { // If XML:space is already there
-                    preserve = true; // We do nothing
-                    break;
+            boolean preserve = false;
+            if (getAttributes() != null) {
+                for (int i = 0; i < getAttributes().size(); i++) {
+                    Attribute oneAttribute = getAttributes().get(i);
+                    if (oneAttribute.getName().equalsIgnoreCase("xml:space")) { // If XML:space is already there
+                        preserve = true; // We do nothing
+                        break;
+                    }
                 }
             }
             if (!preserve) {

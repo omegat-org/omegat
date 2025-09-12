@@ -26,10 +26,8 @@ package org.omegat.gui.properties;
 
 import org.assertj.swing.data.TableCell;
 import org.assertj.swing.fixture.JTableFixture;
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,13 +38,11 @@ import java.util.Locale;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 public class SegmentPropertiesAreaTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testSegmentPropertiesPaneExist() throws Exception {
@@ -54,13 +50,14 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         openSampleProjectWaitPropertyPane(PROJECT_PATH);
         robot().waitForIdle();
         // check a segment properties pane
+        assertNotNull(window);
         window.scrollPane("Segment Properties").requireEnabled();
         window.scrollPane("Segment Properties").requireVisible();
         // Check a table content
         JTableFixture segmentPropertiesTable = window.table("SegmentPropertiesTable").requireVisible();
 
         // Define expectations
-        int expectedRowCount = 7;
+        int expectedRowCount = 8;
         int expectedColumnCount = 3;
         final Map<String, String> expectation = getExpectedMap();
 
@@ -91,6 +88,7 @@ public class SegmentPropertiesAreaTest extends TestCoreGUI {
         expectation.put("Created by", translator);
         expectation.put("Origin", "Unknown/Manual");
         expectation.put("File", "Bundle.properties");
+        expectation.put("Repeated", "FIRST");
         return expectation;
     }
 

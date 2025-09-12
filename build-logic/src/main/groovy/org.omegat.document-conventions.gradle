@@ -5,6 +5,7 @@ plugins {
     id 'org.omegat.common-utilities'
     id 'maven-publish'
     id 'signing'
+    id 'org.hidetake.ssh'
 }
 
 def documentRootDir = file('src_docs')
@@ -53,17 +54,30 @@ tasks.register('manualHtmls') {
 ext.makeDocumentationTasks = { lang ->
     def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/passthrough.xsl"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.xml"))
         inputFile.set(layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
     }
 
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
+        description = 'Copies images and CSS files to tmp.'
+        into layout.buildDirectory.dir("tmp/manual/${lang}")
+        from new File(documentRootDir, 'style/omegat.css')
+    }
+
+    def copyImages = tasks.register("copyImages${lang.capitalize()}", Copy) {
+        description 'Copies images and CSS files to tmp.'
+        into layout.buildDirectory.dir("tmp/manual/${lang}/images/")
+        from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
+        from layout.projectDirectory.file("images/OmegaT.svg")
+    }
+
+    def copyCssTarget = tasks.register("copyCssTarget${lang.capitalize()}", Copy) {
         description = 'Copies images and CSS files to target.'
         into layout.buildDirectory.dir("docs/manual/${lang}")
         from new File(documentRootDir, 'style/omegat.css')
     }
 
-    def copyImages = tasks.register("copyImages${lang.capitalize()}", Copy) {
+    def copyImagesTarget = tasks.register("copyImagesTarget${lang.capitalize()}", Copy) {
         description 'Copies images and CSS files to target.'
         into layout.buildDirectory.dir("docs/manual/${lang}/images/")
         from fileTree(dir: layout.projectDirectory.dir("src_docs/manual/${lang}/images/"), include: "*.png")
@@ -74,38 +88,39 @@ ext.makeDocumentationTasks = { lang ->
         description = 'Generates a chunked HTML documentation.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/xhtml.xsl"))
         inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
         dependsOn(docbookInclude, copyImages, copyCss)
     }
 
     def whcToc = tasks.register("whcToc${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-toc.xsl"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/toc.xml"))
         dependsOn(docbookHtml)
     }
 
     def whcIndex = tasks.register("whcIndex${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-index.xsl"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.html"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.html"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/index.html"))
         dependsOn(docbookHtml, whcToc)
     }
 
     def whcHeader = tasks.register("whcHeader${lang.capitalize()}", TransformationTask) {
         description = 'Generates a whc header and index.'
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/whc-header.xsl"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_index.xml"))
-        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.xml"))
+        outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_header.xhtml"))
         dependsOn(copyCss, docbookInclude)
     }
+
     def buildDocumentTask = tasks.register("manual${lang.capitalize()}", WhcTask) {
         description = 'Builds the whc contents.'
-        tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/toc.xml"))
-        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/index.html"))
-        headerFile.set(layout.buildDirectory.file("tmp/manual/${lang}/xhtml5/_header.xhtml"))
+        tocFile.set(layout.buildDirectory.file("tmp/manual/${lang}/toc.xml"))
+        inputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/index.html"))
+        headerFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_header.xhtml"))
         documentLayout.set('simple')
         localJQuery.set(true)
         parameterList.set([
@@ -113,9 +128,9 @@ ext.makeDocumentationTasks = { lang ->
                 '--field-background-color', '#FDFDFD',
                 '--panel-background-color', '#FDFDFD',
         ])
-        contentFiles.set(fileTree(dir: layout.buildDirectory.dir("tmp/manual/${lang}/xhtml5"), include: '*.html', exclude: '_*'))
+        contentFiles.set(fileTree(dir: layout.buildDirectory.dir("tmp/manual/${lang}"), include: '*.html', exclude: '_*'))
         outputDirectory.set(layout.buildDirectory.dir("docs/manual/${lang}"))
-        dependsOn(whcHeader, whcToc, whcIndex)
+        dependsOn(whcHeader, whcToc, whcIndex, copyImagesTarget, copyCssTarget)
         group = 'documentation'
     }
     assemble.dependsOn buildDocumentTask
@@ -196,4 +211,35 @@ ext.makeFirstStepTask = { lang ->
     }
     firstSteps.dependsOn(firstStepsHtml)
     firstSteps.dependsOn(firstStepsHtmlFinally)
+}
+
+ext.htdocs = '/home/project-web/omegat/htdocs'
+
+ext.publishAtomically = { args ->
+    tasks.register("publish${args.name.capitalize()}", Exec) {
+        description = "Copies ${args.name} to SourceForge web."
+        dependsOn args.sourceTask
+        group = 'omegat release'
+        doLast {
+            ssh.run {
+                session(remotes.sourceforgeWeb) {
+                    def timestamp = new Date().format('yyyyMMddHHmmss')
+                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
+                    def tempDir = "${targetDir}-temp-${timestamp}"
+                    sftp {
+                        cd htdocs
+                        mkdir tempDir
+                    }
+                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
+                    sftp {
+                        cd htdocs
+                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
+                        catch (ignored) {}
+                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
+                        rmdir tempDir
+                    }
+                }
+            }
+        }
+    }
 }

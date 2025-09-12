@@ -39,6 +39,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.core.team2.ProjectTeamSettings;
 import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
@@ -71,9 +72,12 @@ public final class ConvertProject26to37team {
     public static void checkTeam(File projectRootFolder) throws Exception {
         if (isSVNDirectory(projectRootFolder) || isGITDirectory(projectRootFolder)) {
             // project is 2.6-style team project
-            if (RuntimePreferences.isNoTeam()) {
+
+            // When --no-team option is given, we skip conversion silently.
+            if (RuntimePreferenceStore.getInstance().isNoTeam()) {
                 return;
             }
+
             if (isConsoleMode()) {
                 Core.getMainWindow().displayWarningRB("TEAM_26_TO_37_CONSOLE");
                 return;
@@ -115,7 +119,8 @@ public final class ConvertProject26to37team {
             def.setType("git");
         }
         if (url == null) {
-            Log.logWarningRB("TEAM_26_to_36_CONVERT_URL_NOT_DEFINED", def.getType(), projectRootFolder.getAbsolutePath());
+            Log.logWarningRB("TEAM_26_to_36_CONVERT_URL_NOT_DEFINED", def.getType(),
+                    projectRootFolder.getAbsolutePath());
             return false;
         }
         def.setUrl(url);
@@ -144,7 +149,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Save version of project_save.tmx to .repositories/versions.properties.
+     * Save the version of project_save.tmx to .repositories/versions.properties.
      */
     private static void saveVersion(File projectRootFolder, String file, String version) {
         ProjectTeamSettings teamSettings = new ProjectTeamSettings(new File(projectRootFolder,
@@ -153,7 +158,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Check if project contains 2.6-style SVN directory.
+     * Check if a project contains 2.6-style SVN directory.
      */
     private static boolean isSVNDirectory(File projectRootFolder) {
         File svnDir = new File(projectRootFolder, ".svn");
@@ -161,7 +166,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Check if project contains 2.6-style GIT directory.
+     * Check if a project contains 2.6-style GIT directory.
      */
     private static boolean isGITDirectory(File projectRootFolder) {
         File gitDir = new File(projectRootFolder, ".git");
@@ -194,7 +199,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Get version of "omegat/project_save.tmx" in SVN.
+     * Get a version of "omegat/project_save.tmx" in SVN.
      */
     private static String getSVNTmxVersion(File wc) throws Exception {
         final SvnOperationFactory of = new SvnOperationFactory();
@@ -207,7 +212,7 @@ public final class ConvertProject26to37team {
     }
 
     /**
-     * Get version of "omegat/project_save.tmx" in GIT.
+     * Get a version of "omegat/project_save.tmx" in GIT.
      */
     private static String getGITTmxVersion(File wc) throws Exception {
         try (Git git = Git.open(wc)) {

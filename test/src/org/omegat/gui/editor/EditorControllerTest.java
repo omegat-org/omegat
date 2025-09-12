@@ -174,9 +174,7 @@ public class EditorControllerTest extends TestCore {
 
     private void fireCaretEvent(JTextComponent component, int position) {
         CountDownLatch latch = new CountDownLatch(1);
-        component.addCaretListener(e -> {
-            latch.countDown();
-        });
+        component.addCaretListener(e -> latch.countDown());
         component.setCaretPosition(position);
         try {
             latch.await(5, TimeUnit.SECONDS);
@@ -217,7 +215,6 @@ public class EditorControllerTest extends TestCore {
     protected static class RealProjectWithTMX extends RealProject {
         public RealProjectWithTMX(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
             files = new ArrayList<>();
             FileInfo file1 = new FileInfo();
             file1.filePath = "source.txt";

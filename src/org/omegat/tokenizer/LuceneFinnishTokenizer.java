@@ -32,6 +32,14 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fi.FinnishAnalyzer;
 
 /**
+ * Tokenizer class for the Finnish language that extends the base tokenizer functionality.
+ * It provides tokenization capabilities tailored to the Finnish language, with support
+ * for stemming and stop-word filtering based on configuration.
+ * <p>
+ * The class utilizes Lucene's FinnishAnalyzer for processing the text input.
+ * It determines whether stemming and stop-word filtering are applied,
+ * depending on the parameters provided.
+ *
  * @author Aaron Madlon-Kay
  */
 @Tokenizer(languages = { "fi" }, isDefault = true)

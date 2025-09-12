@@ -58,6 +58,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -434,7 +435,7 @@ public final class ProjectUICommands {
                  * this does not seem to be the intention of the current mapping
                  * usage.
                  */
-                if (!RuntimePreferences.isNoTeam()) {
+                if (!RuntimePreferenceStore.getInstance().isNoTeam()) {
                     ProjectProperties localProps = props;
                     List<RepositoryDefinition> localRepos = props.getRepositories();
                     mainWindow.showStatusMessageRB("TEAM_OPEN");

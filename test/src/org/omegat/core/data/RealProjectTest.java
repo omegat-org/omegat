@@ -62,6 +62,7 @@ public class RealProjectTest {
         tempDir = Files.createTempDirectory("omegat-core-ut");
         Core.initializeConsole();
         TestPreferencesInitializer.init();
+        Core.initializeConsole(new TreeMap<>());
     }
 
     @After
@@ -302,7 +303,6 @@ public class RealProjectTest {
     protected static class RealProjectWithTMXAccess extends RealProject {
         public RealProjectWithTMXAccess(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
         }
 
         public ProjectTMX getTMX() {

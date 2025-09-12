@@ -182,7 +182,6 @@
     <!-- should be fixed the writing to static field from instance -->
     <Match>
         <Or>
-            <Class name="org.omegat.filters2.mozdtd.MozillaDTDFilter"/>
             <Class name="org.omegat.gui.editor.ViewLabel"/>
             <Class name="~org\.omegat\.gui\.scripting.*"/>
             <Class name="org.omegat.util.gui.OSXIntegration"/>

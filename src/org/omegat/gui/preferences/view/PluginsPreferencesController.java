@@ -178,10 +178,12 @@ public class PluginsPreferencesController extends BasePreferencesController {
         panel.tabbedPanePlugins.removeAll();
         panel.tabbedPanePlugins.addTab(
                 OStrings.getString("PREFS_PLUGINS_TAB_INSTALLED"),
+                // Explanation of the tab "installed"
                 new JLabel(OStrings.getString("PREFS_PLUGINS_DESC_INSTALLED"))
         );
         panel.tabbedPanePlugins.addTab(
                 OStrings.getString("PREFS_PLUGINS_TAB_BUNDLED"),
+                // Explanation of the tab "bundled"
                 new JLabel(OStrings.getString("PREFS_PLUGINS_DESC_BUNDLED"))
         );
         panel.tabbedPanePlugins.setSelectedIndex(0);
@@ -215,7 +217,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
 
         PluginInformation.Status status = TAB_STATUS_MAPPING[selectedIndex];
 
-        // Switch table model based on selected tab
+        // Switch table model based on the selected tab
         switch (status) {
         case INSTALLED:
             currentModel = installedPluginsModel;
@@ -228,7 +230,7 @@ public class PluginsPreferencesController extends BasePreferencesController {
             break;
         }
 
-        // Update table with new model
+        // Update table with a new model
         panel.tablePluginsInfo.setModel(currentModel);
         TableRowSorter<PluginInfoTableModel> sorter = new TableRowSorter<>(currentModel);
         panel.tablePluginsInfo.setRowSorter(sorter);

@@ -52,11 +52,12 @@ public class PluginsPreferencesPanel extends JPanel {
     private void initComponents() {
 
         tabbedPanePlugins = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        pluginContentPanel = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         panelPluginsInfo = new javax.swing.JPanel();
         scrollTable = new javax.swing.JScrollPane();
         tablePluginsInfo = new javax.swing.JTable();
+        scrollPluginDetails = new javax.swing.JScrollPane();
         panelPluginDetails = new javax.swing.JPanel();
         browsePluginsButton = new javax.swing.JButton();
         installFromDiskButton = new javax.swing.JButton();
@@ -66,10 +67,10 @@ public class PluginsPreferencesPanel extends JPanel {
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
         add(tabbedPanePlugins);
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(65534, 600));
-        jPanel1.setMinimumSize(new java.awt.Dimension(200, 23));
-        jPanel1.setPreferredSize(new java.awt.Dimension(605, 300));
-        jPanel1.setLayout(new java.awt.GridLayout(1, 2));
+        pluginContentPanel.setMaximumSize(new java.awt.Dimension(65534, 600));
+        pluginContentPanel.setMinimumSize(new java.awt.Dimension(200, 23));
+        pluginContentPanel.setPreferredSize(new java.awt.Dimension(605, 300));
+        pluginContentPanel.setLayout(new java.awt.GridLayout(1, 2));
 
         jSplitPane1.setMinimumSize(new java.awt.Dimension(605, 200));
         jSplitPane1.setPreferredSize(new java.awt.Dimension(605, 300));
@@ -91,11 +92,13 @@ public class PluginsPreferencesPanel extends JPanel {
         panelPluginDetails.setMinimumSize(new java.awt.Dimension(180, 200));
         panelPluginDetails.setPreferredSize(new java.awt.Dimension(180, 300));
         panelPluginDetails.setLayout(new javax.swing.BoxLayout(panelPluginDetails, javax.swing.BoxLayout.PAGE_AXIS));
-        jSplitPane1.setRightComponent(panelPluginDetails);
+        scrollPluginDetails.setViewportView(panelPluginDetails);
 
-        jPanel1.add(jSplitPane1);
+        jSplitPane1.setRightComponent(scrollPluginDetails);
 
-        add(jPanel1);
+        pluginContentPanel.add(jSplitPane1);
+
+        add(pluginContentPanel);
 
         buttonsPanel.setMaximumSize(new java.awt.Dimension(32767, 64));
         buttonsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
@@ -113,10 +116,11 @@ public class PluginsPreferencesPanel extends JPanel {
     javax.swing.JButton browsePluginsButton;
     private final javax.swing.JPanel buttonsPanel = new javax.swing.JPanel();
     javax.swing.JButton installFromDiskButton;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     javax.swing.JPanel panelPluginDetails;
     private javax.swing.JPanel panelPluginsInfo;
+    private javax.swing.JPanel pluginContentPanel;
+    javax.swing.JScrollPane scrollPluginDetails;
     javax.swing.JScrollPane scrollTable;
     javax.swing.JTabbedPane tabbedPanePlugins;
     javax.swing.JTable tablePluginsInfo;

@@ -116,7 +116,9 @@ public class TestCoreState extends CoreState {
 
         // 3. Clear GUI component references (but keep mainWindow for last)
         IMainWindow mainWindow = state.getMainWindow(); // Preserve reference temporarily
-        mainWindow.lockUI();
+        if (mainWindow.getApplicationFrame() != null) {
+            mainWindow.lockUI();
+        }
         state.setEditor(null);
         state.setGlossaries(null);
         state.setNotes(null);
@@ -140,7 +142,9 @@ public class TestCoreState extends CoreState {
 
         // 6. Clear main window last to ensure event listeners still have access during cleanup
         state.setMainWindow(null);
-        mainWindow.unlockUI();
+        if (mainWindow.getApplicationFrame() != null) {
+            mainWindow.unlockUI();
+        }
     }
 
     /**

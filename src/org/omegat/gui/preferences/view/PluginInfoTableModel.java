@@ -25,32 +25,29 @@
 
 package org.omegat.gui.preferences.view;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.table.DefaultTableModel;
 
 import org.omegat.core.data.PluginInformation;
 import org.omegat.util.OStrings;
-import org.omegat.util.PluginInstaller;
 
 public class PluginInfoTableModel extends DefaultTableModel {
     private static final long serialVersionUID = 5345248154613009633L;
 
-    public static final int COLUMN_STAT = 0;
+    public static final int COLUMN_NAME = 0;
     public static final int COLUMN_CATEGORY = 1;
-    public static final int COLUMN_NAME = 2;
-    public static final int COLUMN_AUTHOR = 3;
-    public static final int COLUMN_VERSION = 4;
 
-    private static final String[] COLUMN_NAMES = { "PREFS_PLUGINS_COL_STAT", "PREFS_PLUGINS_COL_CATEGORY",
-            "PREFS_PLUGINS_COL_NAME", "PREFS_PLUGINS_COL_AUTHOR", "PREFS_PLUGINS_COL_VERSION"};
+    private static final String[] COLUMN_NAMES = {
+            "PREFS_PLUGINS_COL_NAME",
+            "PREFS_PLUGINS_COL_CATEGORY"
+    };
 
     private final List<PluginInformation> listPlugins;
 
     public PluginInfoTableModel() {
-        listPlugins = PluginInstaller.getInstance().getPluginList().stream().filter(p -> !p.isBundled())
-                .collect(Collectors.toList());
+        listPlugins = new ArrayList<>();
     }
 
     @Override
@@ -90,17 +87,8 @@ public class PluginInfoTableModel extends DefaultTableModel {
         case COLUMN_NAME:
             returnValue = plugin.getName();
             break;
-        case COLUMN_VERSION:
-            returnValue = plugin.getVersion();
-            break;
-        case COLUMN_AUTHOR:
-            returnValue = plugin.getAuthor();
-            break;
         case COLUMN_CATEGORY:
             returnValue = plugin.getCategory().getLocalizedValue();
-            break;
-        case COLUMN_STAT:
-            returnValue = plugin.getStatus().getLocalizedValue();
             break;
         default:
             throw new IllegalArgumentException("Invalid column index");
@@ -113,13 +101,36 @@ public class PluginInfoTableModel extends DefaultTableModel {
         return listPlugins.get(rowIndex);
     }
 
-    public void updateModel(boolean showBundledPlugins) {
-        List<PluginInformation> newListOfPlugins = PluginInstaller.getInstance().getPluginList().stream()
-                .filter(p -> showBundledPlugins || !p.isBundled()).collect(Collectors.toList());
+    /**
+     * Update the model with new plugin data
+     * @param plugins List of plugins to display
+     */
+    public void setPlugins(List<PluginInformation> plugins) {
         synchronized (this) {
             listPlugins.clear();
-            listPlugins.addAll(newListOfPlugins);
+            if (plugins != null) {
+                listPlugins.addAll(plugins);
+            }
         }
         fireTableDataChanged();
     }
+
+    /**
+     * Clear all plugin data
+     */
+    public void clear() {
+        synchronized (this) {
+            listPlugins.clear();
+        }
+        fireTableDataChanged();
+    }
+
+    /**
+     * Get all plugins currently in the model
+     * @return List of plugins
+     */
+    public List<PluginInformation> getPlugins() {
+        return new ArrayList<>(listPlugins);
+    }
+
 }

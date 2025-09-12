@@ -193,6 +193,14 @@ public class TokenizerTest extends TokenizerTestBase {
                 tok.tokenizeWordsToStrings("pr\u00e4sentieren", StemmingMode.GLOSSARY));
     }
 
+    @Test
+    public void testItalian() {
+        ITokenizer tok = new LuceneItalianTokenizer();
+        assertResult(new String[] { "paesi" }, tok.tokenizeWordsToStrings("paesi", StemmingMode.GLOSSARY));
+        assertResult(new String[] { "paes", "paesi" },
+                tok.tokenizeWordsToStrings("paesi", StemmingMode.GLOSSARY_FULL));
+    }
+
     /**
      * The DefaultTokenizer has a completely different implementation from the
      * Lucene-base tokenizers (the latter were originally an external plugin,

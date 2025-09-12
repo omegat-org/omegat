@@ -51,7 +51,9 @@ public class GlossaryPreferencesPanel extends JPanel {
 
         displayContextCheckBox = new javax.swing.JCheckBox();
         useSeparateTermsCheckBox = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
         useStemmingCheckBox = new javax.swing.JCheckBox();
+        useFullStemmingCheckBox = new javax.swing.JCheckBox();
         replaceHitsCheckBox = new javax.swing.JCheckBox();
         requireSimilarCaseCheckBox = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
@@ -73,8 +75,16 @@ public class GlossaryPreferencesPanel extends JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(useSeparateTermsCheckBox, OStrings.getString("PREFS_GLOSSARY_EXACT_MATCH")); // NOI18N
         add(useSeparateTermsCheckBox);
 
+        jPanel2.setAlignmentX(0.0F);
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
         org.openide.awt.Mnemonics.setLocalizedText(useStemmingCheckBox, OStrings.getString("PREFS_GLOSSARY_STEMMING")); // NOI18N
-        add(useStemmingCheckBox);
+        jPanel2.add(useStemmingCheckBox);
+
+        org.openide.awt.Mnemonics.setLocalizedText(useFullStemmingCheckBox, "Use full stemming if possible");
+        jPanel2.add(useFullStemmingCheckBox);
+
+        add(jPanel2);
 
         org.openide.awt.Mnemonics.setLocalizedText(replaceHitsCheckBox, OStrings.getString("PREFS_GLOSSARY_REPLACE_ON_INSERT")); // NOI18N
         add(replaceHitsCheckBox);
@@ -111,11 +121,13 @@ public class GlossaryPreferencesPanel extends JPanel {
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     javax.swing.JCheckBox mergeAlternateDefinitionsCheckBox;
     javax.swing.JCheckBox replaceHitsCheckBox;
     javax.swing.JCheckBox requireSimilarCaseCheckBox;
     javax.swing.JCheckBox sortBySrcTextLengthCheckBox;
     javax.swing.JCheckBox sortByTextLengthCheckBox;
+    javax.swing.JCheckBox useFullStemmingCheckBox;
     javax.swing.JCheckBox useSeparateTermsCheckBox;
     javax.swing.JCheckBox useStemmingCheckBox;
     // End of variables declaration//GEN-END:variables

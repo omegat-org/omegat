@@ -83,6 +83,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
@@ -1279,7 +1280,7 @@ public final class ProjectUICommands {
         chooser.setDialogTitle(OStrings.getString("TF_FILE_IMPORT_TITLE"));
 
         int result = chooser.showOpenDialog(Core.getMainWindow().getApplicationFrame());
-        if (result == OmegaTFileChooser.APPROVE_OPTION) {
+        if (result == JFileChooser.APPROVE_OPTION) {
             File[] selFiles = chooser.getSelectedFiles();
             projectImportFiles(Core.getProject().getProjectProperties().getSourceRoot(), selFiles);
         }

@@ -73,4 +73,20 @@ public final class RuntimePreferences {
             RuntimePreferenceStore.getInstance().setLocationSaveDisable();
         }
     }
+
+    public static void setAlternateFilenames(String anAlternateFilenameFrom, String anAlternateFilenameTo) {
+        if (anAlternateFilenameFrom == null || anAlternateFilenameTo == null) {
+            throw new IllegalArgumentException("Both alternateFilenameFrom and alternateFilenameTo are required.");
+        }
+        alternateFilenameFrom = anAlternateFilenameFrom;
+        alternateFilenameTo = anAlternateFilenameTo;
+    }
+
+    public static String getAlternateFilenameFrom() {
+        return alternateFilenameFrom;
+    }
+
+    public static String getAlternateFilenameTo() {
+        return alternateFilenameTo;
+    }
 }

@@ -61,27 +61,22 @@ public class EditorTextLoadedTest extends TestCoreGUI {
     private final CountDownLatch selectionChangeLatch = new CountDownLatch(2);
 
     @Test
-    public void testEditorTextLoaded() throws Exception {
+    public void testEditorTextLoadedAndClickSingle() throws Exception {
         CoreEvents.registerEntryEventListener(new EditorEntryListener(selectedEntries, initialLoadLatch,
                 selectionChangeLatch));
         openSampleProject(PROJECT_PATH);
-        awaitLatch("Wait inital loading", initialLoadLatch);
+        assertTrue("Editor show first entry.", initialLoadLatch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS));
         verifyInitialTextSelection();
         Point clickPoint = calculateTargetPoint();
         assertNotNull(window);
         JTextComponent editPane = window.panel(EDITOR_TITLE).textBox().target();
+        //
+        Preferences.setPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION, true);
         robot().click(editPane, clickPoint);
-        awaitLatch("Wait entry selection", selectionChangeLatch);
+        //
+        assertTrue("Editor select clicked entry", selectionChangeLatch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS));
         SourceTextEntry newEntry = selectedEntries.get(selectedEntries.size() - 1);
         assertEquals(TARGET_TEXT, newEntry.getSrcText());
-    }
-
-    private void awaitLatch(String message, CountDownLatch latch) {
-        try {
-            assertTrue(message, latch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS));
-        } catch (InterruptedException ex) {
-            Log.log(ex, message);
-        }
     }
 
     private void verifyInitialTextSelection() {
@@ -92,17 +87,14 @@ public class EditorTextLoadedTest extends TestCoreGUI {
     private Point calculateTargetPoint() throws BadLocationException {
         assertNotNull(window);
         String fullText = window.panel(EDITOR_TITLE).textBox().text();
+        if (fullText == null || !fullText.contains(TARGET_TEXT)) {
+            throw new IllegalStateException("Target text not found.");
+        }
         int newCaretPos = fullText.indexOf(TARGET_TEXT);
         JTextComponent editPane = window.panel(EDITOR_TITLE).textBox().target();
         Rectangle rect = editPane.modelToView2D(newCaretPos).getBounds();
         // Center of rectangle
         return new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
-    }
-
-    @Override
-    protected void initialize() throws Exception {
-        super.initialize();
-        Preferences.setPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION, true);
     }
 
     private static class EditorEntryListener implements IEntryEventListener {
@@ -126,9 +118,9 @@ public class EditorTextLoadedTest extends TestCoreGUI {
             if (newEntry == null) {
                 return;
             }
+            selectedEntries.add(newEntry);
             initialLoadLatch.countDown();
             selectionChangeLatch.countDown();
-            selectedEntries.add(newEntry);
         }
     }
 }

@@ -92,7 +92,9 @@ public class SRX implements Serializable {
         // Modifying a global object leads breakage of SuperTMXMerge
         // library.
         // https://sourceforge.net/p/omegat/bugs/1170/
-        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.TRUE);
+        xmlInputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
+        xmlInputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+        xmlInputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.FALSE);
         XmlFactory xmlFactory = new XmlFactory(xmlInputFactory);
         mapper = XmlMapper.builder(xmlFactory).defaultUseWrapper(false)
                 .enable(MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME).build();
@@ -227,6 +229,9 @@ public class SRX implements Serializable {
     static SRX loadConfFile(File configFile, File configDir) throws Exception {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            transformerFactory.setFeature(javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalDTD", "");
+            transformerFactory.setAttribute("http://javax.xml.XMLConstants/property/accessExternalStylesheet", "");
             // add XSLT in Transformer
             Transformer transformer = transformerFactory.newTransformer(new StreamSource(
                 SRX.class.getClassLoader().getResourceAsStream("org/omegat/core/segmentation/java2srx.xsl")));

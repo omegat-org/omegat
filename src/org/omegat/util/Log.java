@@ -43,6 +43,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 
+import org.jetbrains.annotations.Nullable;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerDecorator;
 import tokyo.northside.logging.LoggerFactory;
@@ -60,7 +61,7 @@ public final class Log {
 
     private static final ILogger LOGGER;
 
-    // Line mark is day-of-the-year and five-character random number
+    // Line mark is a day-of-the-year and five-character random number
     private static final String SESSION_ID;
     private static final ZonedDateTime SESSION_START_DATETIME;
 
@@ -243,7 +244,7 @@ public final class Log {
      *            Parameters for the message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logRB(String key, Object... parameters) {
+    public static void logRB(String key, @Nullable Object... parameters) {
         LOGGER.atInfo().logRB(key, parameters);
     }
 
@@ -258,7 +259,7 @@ public final class Log {
         Log.log(throwable, "");
     }
 
-    public static void log(Throwable throwable, String message, Object... parameters) {
+    public static void log(Throwable throwable, String message, @Nullable Object... parameters) {
         LOGGER.atError().setMessage(message).setCause(throwable).addArgument(parameters).log();
     }
 
@@ -276,7 +277,7 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logWarningRB(String key, Object... parameters) {
+    public static void logWarningRB(String key, @Nullable Object... parameters) {
         LOGGER.atWarn().logRB(key, parameters);
     }
 
@@ -294,7 +295,7 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logInfoRB(String key, Object... parameters) {
+    public static void logInfoRB(String key, @Nullable Object... parameters) {
         LOGGER.atInfo().logRB(key, parameters);
     }
 
@@ -312,7 +313,7 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logErrorRB(String key, Object... parameters) {
+    public static void logErrorRB(String key, @Nullable Object... parameters) {
         LOGGER.atError().logRB(key, parameters);
     }
 
@@ -332,7 +333,7 @@ public final class Log {
      *            Parameters for the error message. These are inserted by using
      *            StaticUtils.format.
      */
-    public static void logErrorRB(Throwable ex, String key, Object... parameters) {
+    public static void logErrorRB(Throwable ex, String key, @Nullable Object... parameters) {
         LOGGER.atError().setCause(ex).logRB(key, parameters);
     }
 
@@ -347,7 +348,7 @@ public final class Log {
      * @deprecated
      */
     @Deprecated(since = "6.1.0", forRemoval = true)
-    public static void logDebug(java.util.logging.Logger logger, String message, Object... parameters) {
+    public static void logDebug(java.util.logging.Logger logger, String message, @Nullable Object... parameters) {
         if (logger.isLoggable(Level.FINE)) {
             LogRecord rec = new LogRecord(Level.FINE, message);
             rec.setParameters(parameters);
@@ -374,7 +375,7 @@ public final class Log {
      * @param parameters Optional arguments to be inserted into the placeholders of
      *                   the message template.
      */
-    public static void logDebug(String message, Object... parameters) {
+    public static void logDebug(String message, @Nullable Object... parameters) {
         LOGGER.atDebug().setMessage(message).addArgument(parameters).log();
     }
 
@@ -387,7 +388,7 @@ public final class Log {
      * @param parameter
      *            Parameter for the error message.
      */
-    public static void logInfoRB(String key, Object parameter) {
+    public static void logInfoRB(String key, @Nullable Object parameter) {
         LOGGER.atInfo().setMessageRB(key).addArgument(parameter).log();
     }
 
@@ -411,7 +412,7 @@ public final class Log {
      * @param parameter
      *            Parameter for the error message.
      */
-    public static void logWarningRB(String key, Object parameter) {
+    public static void logWarningRB(String key, @Nullable Object parameter) {
         LOGGER.atWarn().setMessageRB(key).addArgument(parameter).log();
     }
 
@@ -419,7 +420,7 @@ public final class Log {
      * Writes an error message to the log (to be retrieved from the resource
      * bundle).
      */
-    public static void logErrorRB(String key, Object parameter) {
+    public static void logErrorRB(String key, @Nullable Object parameter) {
         LOGGER.atError().setMessageRB(key).addArgument(parameter).log();
     }
 }

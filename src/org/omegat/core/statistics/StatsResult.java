@@ -107,9 +107,6 @@ public class StatsResult {
     @JsonProperty("date")
     private String date;
 
-    public StatsResult() {
-    }
-
     public StatsResult(String projectName, String projectRoot, String sourceLanguage, String targetLanguage,
             String sourceRoot) {
         props = new StatProjectProperties(projectName, projectRoot, sourceLanguage, targetLanguage,
@@ -256,12 +253,11 @@ public class StatsResult {
     @JsonIgnore
     public String getXmlData() throws JsonProcessingException {
         setDate();
-        XmlMapper xmlMapper = new XmlMapper();
-        xmlMapper.registerModule(new JakartaXmlBindAnnotationModule());
-        xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
-        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        xmlMapper.setDefaultUseWrapper(false);
-
+        XmlMapper xmlMapper = XmlMapper.builder()
+                .addModule(new JakartaXmlBindAnnotationModule())
+                .configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true)
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                .defaultUseWrapper(false).build();
         return xmlMapper.writeValueAsString(this);
 
     }

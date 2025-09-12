@@ -28,6 +28,7 @@ import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.main.IMainWindow;
 
 import javax.swing.SwingUtilities;
+import java.awt.HeadlessException;
 import java.awt.Window;
 import java.util.Collections;
 
@@ -77,8 +78,14 @@ public class TestCoreState extends CoreState {
 
         // Check if main window exists and has a frame
         IMainWindow mainWindow = CoreState.getInstance().getMainWindow();
-        if (mainWindow != null && mainWindow.getApplicationFrame() != null) {
-            return true;
+        if (mainWindow != null) {
+            try {
+                if (mainWindow.getApplicationFrame() != null) {
+                    return true;
+                }
+            } catch (HeadlessException ignored) {
+                return false;
+            }
         }
 
         // Check if any GUI components are registered in CoreState
@@ -114,10 +121,10 @@ public class TestCoreState extends CoreState {
         state.setSaveThread(null);
 
         // 3. Clear GUI component references (but keep mainWindow for last)
-        IMainWindow mainWindow = state.getMainWindow(); // Preserve reference temporarily
-        if (mainWindow != null && mainWindow.getApplicationFrame() != null) {
-            mainWindow.lockUI();
-        }
+        // Preserve reference temporarily
+        @SuppressWarnings("unused")
+        IMainWindow mainWindow = state.getMainWindow();
+
         state.setEditor(null);
         state.setGlossaries(null);
         state.setNotes(null);

@@ -13,6 +13,7 @@ plugins {
     id 'org.omegat.jpkg-conventions'
     id 'org.omegat.publish-conventions'
     id 'org.omegat.verification-conventions'
+    id 'org.omegat.spotless-conventions'
     id 'jvm-test-suite'
     id 'java-test-fixtures'
     id 'com.google.osdetector' version '1.7.3'

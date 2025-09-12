@@ -33,10 +33,11 @@ import org.omegat.spellchecker.hunspell.HunSpellChecker;
 public class HunspellTest extends LanguageModuleTestBase {
 
     private static final String LANGUAGE = "ar";
-    private static final String GOOD = "مرحبا.";
+    private static final String GOOD = "من"; // From/who (most common Arabic word)
+    private static final String BAD = "مں"; // Same with incorrect character
 
     @Test
     public void testDictionary() throws Exception {
-        testDictionaryHelper(new HunSpellChecker(), LANGUAGE, GOOD, null);
+        testDictionaryHelper(new HunSpellChecker(), LANGUAGE, GOOD, BAD);
     }
 }

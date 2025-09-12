@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -30,8 +30,6 @@ dependencies {
     testImplementation project(":spellchecker:morfologik")
     testImplementation project(":spellchecker:hunspell")
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn tasks.withType(Jar)

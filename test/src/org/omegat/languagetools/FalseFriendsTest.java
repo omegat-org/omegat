@@ -29,7 +29,9 @@ package org.omegat.languagetools;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -40,6 +42,7 @@ import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.languagetools.LanguageToolWrapper.LanguageToolMarker;
 import org.omegat.util.Language;
@@ -51,6 +54,7 @@ public class FalseFriendsTest extends TestCore {
 
     @BeforeClass
     public static void setUpClass() {
+        PluginUtils.loadPlugins(Collections.emptyMap());
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
         LanguageManager.registerLTLanguage("en", "org.languagetool.language.English");

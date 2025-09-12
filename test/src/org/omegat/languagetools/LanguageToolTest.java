@@ -49,6 +49,7 @@ import org.languagetool.rules.patterns.PatternRule;
 import org.languagetool.server.HTTPServer;
 import org.languagetool.server.HTTPServerConfig;
 
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
 import org.omegat.util.TestPreferencesInitializer;
@@ -62,6 +63,7 @@ public class LanguageToolTest {
 
     @BeforeClass
     public static void setUpClass() {
+        PluginUtils.loadPlugins(Collections.emptyMap());
         JLanguageTool.setClassBrokerBroker(new LanguageClassBroker());
         JLanguageTool.setDataBroker(new LanguageDataBroker());
         LanguageManager.registerLTLanguage("en", "org.languagetool.language.English");

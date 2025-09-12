@@ -48,7 +48,7 @@ import org.omegat.gui.editor.IEditorSettings;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.gui.main.MainMenuStub;
+import org.omegat.gui.main.TestingMainMenu;
 import org.omegat.util.TestPreferencesInitializer;
 
 /**
@@ -101,7 +101,7 @@ public abstract class TestCore {
      * @return Main menu object which implement IMainMenu.
      */
     protected IMainMenu getMainMenu() {
-        return new MainMenuStub();
+        return new TestingMainMenu();
     }
 
     /**

@@ -192,6 +192,7 @@
     <!-- Ignores false-positive detections -->
     <Match>
         <Or>
+            <Class name="org.omegat.core.data.RealProject"/>
             <Class name="org.omegat.gui.align.Aligner"/>
             <Class name="org.omegat.filters3.xml.Handler" />
             <Class name="org.omegat.filters4.xml.xliff.AbstractXliffFilter"/>

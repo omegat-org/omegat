@@ -41,7 +41,6 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.comments.ICommentProvider;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -117,9 +116,6 @@ public abstract class BaseTokenizer implements ITokenizer {
                 true);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Token[] tokenizeVerbatim(final String strOrig) {
         if (StringUtil.isEmpty(strOrig)) {
@@ -130,7 +126,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             return tokenize(strOrig, false, false, false, false);
         }
 
-        List<Token> result = new ArrayList<Token>(DEFAULT_TOKENS_COUNT);
+        List<Token> result = new ArrayList<>(DEFAULT_TOKENS_COUNT);
 
         WordIterator iterator = new WordIterator();
         iterator.setText(strOrig);
@@ -142,7 +138,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             result.add(new Token(tokenStr, start));
         }
 
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     @Override
@@ -155,7 +151,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             return tokenizeToStrings(str, false, false, false, false);
         }
 
-        List<String> result = new ArrayList<String>(DEFAULT_TOKENS_COUNT);
+        List<String> result = new ArrayList<>(DEFAULT_TOKENS_COUNT);
 
         WordIterator iterator = new WordIterator();
         iterator.setText(str);
@@ -167,7 +163,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             result.add(tokenStr);
         }
 
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     protected Token[] tokenizeByCodePoint(String strOrig) {
@@ -198,7 +194,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             return EMPTY_TOKENS_LIST;
         }
 
-        List<Token> result = new ArrayList<Token>(64);
+        List<Token> result = new ArrayList<>(64);
 
         try (TokenStream in = getTokenStream(strOrig, stemsAllowed, stopWordsAllowed)) {
             in.addAttribute(CharTermAttribute.class);
@@ -218,7 +214,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         } catch (IOException ex) {
             Log.log(ex);
         }
-        return result.toArray(new Token[result.size()]);
+        return result.toArray(new Token[0]);
     }
 
     protected String[] tokenizeToStrings(String str, boolean stemsAllowed, boolean stopWordsAllowed,
@@ -227,7 +223,7 @@ public abstract class BaseTokenizer implements ITokenizer {
             return EMPTY_STRING_LIST;
         }
 
-        List<String> result = new ArrayList<String>(64);
+        List<String> result = new ArrayList<>(64);
 
         try (TokenStream in = getTokenStream(str, stemsAllowed, stopWordsAllowed)) {
             in.addAttribute(CharTermAttribute.class);
@@ -255,7 +251,7 @@ public abstract class BaseTokenizer implements ITokenizer {
         } catch (IOException ex) {
             Log.log(ex);
         }
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
 
     private boolean acceptToken(String token, boolean filterDigits, boolean filterWhitespace) {
@@ -364,16 +360,11 @@ public abstract class BaseTokenizer implements ITokenizer {
     }
 
     protected String printTest(String[] strings, String input) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(StringUtils.join(strings, ", ")).append('\n');
-        sb.append("Is verbatim: ").append(StringUtils.join(strings, "").equals(input)).append('\n');
-        return sb.toString();
+        return StringUtils.join(strings, ", ") + '\n' +
+                "Is verbatim: " + StringUtils.join(strings, "").equals(input) + '\n';
     }
 
-    public static final ICommentProvider TOKENIZER_DEBUG_PROVIDER = new ICommentProvider() {
-        @Override
-        public String getComment(SourceTextEntry newEntry) {
-            return ((BaseTokenizer) Core.getProject().getSourceTokenizer()).test(newEntry.getSrcText());
-        }
-    };
+    @SuppressWarnings("unused")
+    public static final ICommentProvider TOKENIZER_DEBUG_PROVIDER = newEntry ->
+            ((BaseTokenizer) Core.getProject().getSourceTokenizer()).test(newEntry.getSrcText());
 }

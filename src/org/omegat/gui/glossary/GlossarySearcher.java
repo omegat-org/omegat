@@ -28,6 +28,7 @@ package org.omegat.gui.glossary;
 
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -35,6 +36,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProtectedPart;
@@ -143,14 +145,19 @@ public class GlossarySearcher {
         return !getMatchingTokens(fullTextTokens, fullText, term).isEmpty();
     }
 
+    @VisibleForTesting
+    boolean isGlossaryNotExactMatch() {
+        return Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH,
+                Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
+    }
+
     private List<Token[]> getMatchingTokens(Token[] fullTextTokens, String fullText, String term) {
         // Compute glossary entry tokens
         Token[] glosTokens = tokenize(term);
         if (glosTokens.length == 0) {
             return Collections.emptyList();
         }
-        boolean notExact = Preferences.isPreferenceDefault(Preferences.GLOSSARY_NOT_EXACT_MATCH,
-                Preferences.GLOSSARY_NOT_EXACT_MATCH_DEFAULT);
+        boolean notExact = isGlossaryNotExactMatch();
         List<Token[]> foundTokens = DefaultTokenizer.searchAll(fullTextTokens, glosTokens, notExact);
         foundTokens.removeIf(toks -> !keepMatch(toks, fullText, term));
         if (StringUtil.isCJK(term)) {
@@ -175,11 +182,16 @@ public class GlossarySearcher {
         return false;
     }
 
-    private static boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {
+    @VisibleForTesting
+    boolean isRequireSimilarCase() {
+        return Preferences.isPreferenceDefault(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
+                Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT);
+    }
+
+    private boolean keepMatch(Token[] tokens, String srcTxt, String locTxt) {
         // Filter out matches where the glossary entry is all caps but the
         // source-text match is not.
-        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE,
-                Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT) && StringUtil.isUpperCase(locTxt)) {
+        if (isRequireSimilarCase() && StringUtil.isUpperCase(locTxt)) {
             for (Token tok : tokens) {
                 String matched = tok.getTextFromString(srcTxt);
                 if (!StringUtil.isUpperCase(matched)) {
@@ -222,14 +234,21 @@ public class GlossarySearcher {
         return result;
     }
 
-    private Token[] tokenize(String str) {
+    @VisibleForTesting
+    boolean isGlossaryStemming() {
+        return Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING, Preferences.GLOSSARY_STEMMING_DEFAULT);
+    }
+
+    @VisibleForTesting
+    Token[] tokenize(String str) {
         // Make comparison case-insensitive
         String strLower = str.toLowerCase(srcLang.getLocale());
-        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_STEMMING,
-                Preferences.GLOSSARY_STEMMING_DEFAULT)) {
+        if (isGlossaryStemming()) {
             return tok.tokenizeWords(strLower, StemmingMode.GLOSSARY);
         } else {
-            return tok.tokenizeVerbatim(strLower);
+            // skip whitespace tokens
+            return Arrays.stream(tok.tokenizeVerbatim(strLower)).filter(tok -> !StringUtil.isWhiteSpace(
+                    strLower.charAt(tok.getOffset()))).toArray(Token[]::new);
         }
     }
 
@@ -282,13 +301,22 @@ public class GlossarySearcher {
                         srcLangCollator, targetLangCollator)).collect(Collectors.toList());
     }
 
+    @VisibleForTesting
+    boolean isGlossarySortBySrcLength() {
+        return Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
+    }
+
+    @VisibleForTesting
+    boolean isGlossarySortByLength() {
+        return Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+    }
+
     private int compareGlossaryEntries(GlossaryEntry o1, GlossaryEntry o2, Collator srcLangCollator,
             Collator targetLangCollator) {
         int p1 = o1.getPriority() ? 1 : 2;
         int p2 = o2.getPriority() ? 1 : 2;
-        boolean sortBySrcLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH,
-                true);
-        boolean sortByLength = Preferences.isPreferenceDefault(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+        boolean sortBySrcLength = isGlossarySortBySrcLength();
+        boolean sortByLength = isGlossarySortByLength();
         int c = p1 - p2;
         if (c == 0 && sortBySrcLength && (o2.getSrcText().startsWith(o1.getSrcText())
                 || o1.getSrcText().startsWith(o2.getSrcText()))) {

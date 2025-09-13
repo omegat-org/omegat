@@ -12,13 +12,15 @@ dependencies {
     jaxb(libs.jaxb4.runtime)
 }
 
+def prepGenjaxb = tasks.register('prepGenJAXB') {
+    mkdir layout.buildDirectory.dir('generated/sources/jaxb/main/java').get().asFile
+}
+
 def genjaxb = tasks.register('genJAXB') {
     description = 'Generate classes for loading and manipulating XML formats'
     outputs.dir layout.buildDirectory.dir('generated/sources/jaxb/main/java')
     group = 'jaxb'
-    doFirst {
-        mkdir layout.buildDirectory.dir('generated/sources/jaxb/main/java').get().asFile
-    }
+    dependsOn prepGenjaxb
 }
 compileJava.dependsOn(genjaxb)
 

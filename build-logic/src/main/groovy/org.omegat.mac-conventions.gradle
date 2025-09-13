@@ -173,6 +173,7 @@ ext.makeMacTask = { args ->
     def signedInstallTask = tasks.register(signedInstallTaskName, Exec) {
         dependsOn hunspellSignedJar
         dependsOn prepSignedInstallTask
+        onlyIf { macCodesignIdentity.isPresent() }
         commandLine 'codesign', '--deep', '--force',
                 '--sign', macCodesignIdentity,
                 '--timestamp',
@@ -192,6 +193,7 @@ ext.makeMacTask = { args ->
 
     tasks.register(notarizeTaskName, Exec) {
         inputs.files signedZipTask.get().archiveFile
+        onlyIf { macNotarizationUsername.isPresent() }
         // Assuming setup per instructions at
         // https://developer.apple.com/documentation/security/notarizing_your_app_before_distribution/customizing_the_notarization_workflow#3087734
         commandLine 'xcrun', 'altool', '--notarize-app',

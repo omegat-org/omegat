@@ -31,7 +31,9 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    // When change the version, please run "wrapper"
+    // and "updateDaemonJvm" task to take effect it.
+    gradleVersion = "9.0.0"
 }
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)

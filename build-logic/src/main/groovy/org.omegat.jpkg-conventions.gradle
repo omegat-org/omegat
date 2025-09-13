@@ -122,7 +122,7 @@ tasks.register("linuxDebDist", Exec) {
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
             .file("distributions/${application.applicationName}_${version}-${debVersion}_amd64.deb"))
-    onlyIf { gradleOnJava17OrLater && exePresent('dpkg-deb') }
+    onlyIf { gradleOnJava17OrLater }
 
     commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
             '--type', 'deb',
@@ -155,7 +155,7 @@ tasks.register("linuxRpmDist", Exec) {
     inputs.files file(layout.buildDirectory.file("jpackage/app-image/${application.applicationName}"))
     outputs.files file(layout.buildDirectory
             .file("distributions/${application.applicationName}-${version}-${rpmVersion}.x86_64.rpm"))
-    onlyIf { gradleOnJava17OrLater && exePresent('rpm') }
+    onlyIf { gradleOnJava17OrLater }
 
     commandLine(file(Paths.get(System.getProperty('java.home')).resolve("bin/jpackage")),
             '--type', 'rpm',

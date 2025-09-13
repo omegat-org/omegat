@@ -31,7 +31,9 @@ def osArch = osdetector.classifier
 // Explicitly specify Gradle wrapper version
 tasks.withType(Wrapper.class).configureEach {
     distributionType = Wrapper.DistributionType.BIN
-    gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
+    // When change the version, please run "wrapper"
+    // and "updateDaemonJvm" task to take effect it.
+    gradleVersion = "9.0.0"
 }
 
 version = omtVersion.version + getUpdateSuffix(omtVersion.update)
@@ -422,9 +424,40 @@ tasks.register('mac') {
     description = 'Builds the Mac distributions.'
     group = 'omegat distribution'
 }
-makeHunspellSignTask()
-makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE, parentTaskName: 'mac')
-makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskName: 'mac')
+
+def macCodesignIdentity = providers.gradleProperty('macCodesignIdentity')
+def hunspellJar = configurations.runtimeClasspath.files.find {
+    it.name.startsWith('hunspell')
+}
+
+def extractHunspell = tasks.register('extractHunspellJarSignedContents', Sync) {
+    from zipTree(hunspellJar)
+    destinationDir = file(layout.buildDirectory.file("hunspell"))
+}
+
+tasks.register('hunspellJarSignedContents', Exec) {
+    file(layout.buildDirectory.file("hunspell"))
+    def dylibs = fileTree(dir: file(layout.buildDirectory.file("hunspell")), include: '**/*.dylib').files
+    commandLine('codesign', '--deep', '--force',
+            '--sign', macCodesignIdentity,
+            '--timestamp',
+            '--options', 'runtime',
+            '--entitlements', file('release/mac-specific/java.entitlements'),
+            *dylibs.toList())
+    dependsOn extractHunspell
+}
+
+tasks.register('hunspellSignedJar', Jar) {
+    from file(layout.buildDirectory.file("hunspell"))
+    archiveFileName.set(hunspellJar.name)
+}
+
+if (macJRE != null && !macJRE.isEmpty()) {
+    makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE)
+}
+if (armMacJRE != null && !armMacJRE.isEmpty()) {
+    makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE)
+}
 
 tasks.register('linux') {
     description = 'Builds the Linux distributions.'
@@ -432,8 +465,12 @@ tasks.register('linux') {
     dependsOn linuxDebDist
     dependsOn linuxRpmDist
 }
-makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
-makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')
+if (linux64JRE != null && !linux64JRE.isEmpty()) {
+    makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
+}
+if (linuxArm64JRE != null && !linuxArm64JRE.isEmpty()) {
+    makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')
+}
 
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false
@@ -478,29 +515,8 @@ processResources {
     }
 }
 
-def manualLangs = project.property("org.omegat.manualLangs").split(',')
-manualLangs.each { lang ->
-    makeDocumentationTasks(lang)
-}
-
-def firstStepLangs = project.property("org.omegat.firstStepLangs").split(',')
-firstStepLangs.each { lang ->
-    makeFirstStepTask(lang)
-}
-
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
-
-remotes {
-    sourceforgeWeb {
-        host = 'web.sourceforge.net'
-        user = hasProperty('sourceforgeWebUser') ? getProperty('sourceforgeWebUser') : ''
-        password = hasProperty('sourceforgeWebPassword') ? getProperty('sourceforgeWebPassword') : ''
-        agent = true
-    }
-}
-publishAtomically(name: 'webManual', sourceTask: manualHtmls)
-publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
 allprojects {
     afterEvaluate {

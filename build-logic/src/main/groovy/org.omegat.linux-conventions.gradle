@@ -3,14 +3,12 @@ ext.makeLinuxTask = { args ->
     def distTaskName = "install" + args.name.capitalize() + "Dist"
     def tarTaskName = args.name + "DistTarBz"
     def parentTask = tasks.getByName(args.parentTaskName)
+
     tasks.register(distTaskName, Sync) {
         group = 'distribution'
         description = "Creates a linux installDist for ${args.name}."
         with distributions.main.contents
         destinationDir = file(layout.buildDirectory.file("install/${application.applicationName}-${args.suffix}"))
-        onlyIf {
-            condition(!args.jrePath.empty, 'JRE not found')
-        }
         doFirst {
             delete "$destinationDir/jre"
         }
@@ -26,9 +24,6 @@ ext.makeLinuxTask = { args ->
     tasks.register(tarTaskName, Tar) {
         description = "Creates a Linux distribution for ${args.name}."
         with distributions.main.contents
-        onlyIf {
-            condition(!args.jrePath.empty, 'JRE not found')
-        }
         if (args.jrePath && !args.jrePath.empty) {
             from(tarTree(args.jrePath.singleFile)) {
                 includeEmptyDirs = false

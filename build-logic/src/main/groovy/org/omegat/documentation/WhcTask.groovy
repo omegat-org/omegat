@@ -15,33 +15,57 @@ import org.gradle.api.tasks.options.Option
 @CompileStatic
 class WhcTask extends AbstractDocumentTask {
 
+    private final Provider<RegularFile> inputFile = project.objects.fileProperty()
+    private final Provider<FileTree> contentFiles = project.objects.property(FileTree)
+    private final Provider<RegularFile> tocFile = project.objects.fileProperty()
+    private final Provider<RegularFile> headerFile = project.objects.fileProperty()
+    private final Provider<Directory> outputDirectory = project.objects.directoryProperty()
+    private final ListProperty<String> parameterList = project.objects.listProperty(String)
+    private final Property<String> documentLayout = project.objects.property(String)
+    private final Property<Boolean> localJQuery = project.objects.property(Boolean)
+
     @InputFile
-    final Provider<RegularFile> inputFile = project.objects.fileProperty()
+    Provider<RegularFile> getInputFile() {
+        return inputFile
+    }
 
     @InputFiles
-    final Provider<FileTree> contentFiles = project.objects.property(FileTree)
+    Provider<FileTree> getContentFiles() {
+        return contentFiles
+    }
 
     @InputFile
-    final Provider<RegularFile> tocFile = project.objects.fileProperty()
+    Provider<RegularFile> getTocFile() {
+        return tocFile
+    }
 
     @InputFile
-    final Provider<RegularFile> headerFile = project.objects.fileProperty()
+    Provider<RegularFile> getHeaderFile() {
+        return headerFile
+    }
 
     @OutputDirectory
-    final Provider<Directory> outputDirectory = project.objects.directoryProperty()
+    Provider<Directory> getOutputDirectory() {
+        return outputDirectory
+    }
 
     @Input
     @Option
-    final ListProperty<String> parameterList = project.objects.listProperty(String)
+    ListProperty<String> getParameterList() {
+        return parameterList
+    }
 
     @Input
     @Option
-    final Property<String> documentLayout = project.objects.property(String)
+    Property<String> getDocumentLayout() {
+        return documentLayout
+    }
 
     @Input
     @Option
-    final Property<Boolean> localJQuery = project.objects.property(Boolean)
-
+    Property<Boolean> getLocalJQuery() {
+        return localJQuery
+    }
 
     @TaskAction
     void transform() {

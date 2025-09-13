@@ -22,36 +22,3 @@ ext {
     isArm64 = System.getProperty('os.arch').toLowerCase().contains('aarch64')
 }
 
-ext {
-    exePresent = { exe ->
-        ["where $exe", "which $exe"].any {
-            try {
-                def findExe = it.execute()
-                findExe.waitForProcessOutput()
-                return findExe.exitValue() == 0
-            } catch (any) {
-                return false
-            }
-        }
-    }
-
-    conditions = { List... items ->
-        items.each { val, str ->
-            if (!val) {
-                logger.warn(str)
-            }
-        }
-        items.every { it[0] }
-    }
-
-    condition = { val, str ->
-        conditions([val, str])
-    }
-
-    replaceRelativePathSegment = { FileCopyDetails deets, pattern, replacement ->
-        def segs = deets.relativePath.segments.collect {
-            it =~ pattern ? replacement : it
-        }
-        deets.relativePath = new RelativePath(!deets.directory, segs as String[])
-    }
-}

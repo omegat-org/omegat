@@ -5,6 +5,7 @@ import org.apache.xml.resolver.tools.CatalogResolver
 import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
@@ -18,14 +19,24 @@ import javax.xml.transform.stream.StreamResult
 @CompileStatic
 class TransformationTask extends AbstractTransformationTask {
 
+    private final Provider<RegularFile> styleSheetFile = project.objects.fileProperty()
+    private final Provider<RegularFile> outputFile = project.objects.fileProperty()
+    private final Property<RegularFile> inputFile = project.objects.fileProperty()
+
     @InputFile
-    Provider<RegularFile> styleSheetFile = project.objects.fileProperty()
+    Provider<RegularFile> getStyleSheetFile() {
+        return styleSheetFile
+    }
 
     @OutputFile
-    Provider<RegularFile> outputFile = project.objects.fileProperty()
+    Provider<RegularFile> getOutputFile() {
+        return outputFile
+    }
 
     @InputFile
-    final Property<RegularFile> inputFile = project.objects.fileProperty()
+    Property<RegularFile> getInputFile() {
+        return inputFile
+    }
 
     TransformationTask() {
     }

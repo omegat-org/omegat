@@ -1,26 +1,3 @@
-## Windows code signing
-# ex.
-# pkcs11engine=/usr/lib/x86_64-linux-gnu/engines-3/pkcs11.so
-#
-## when using Certum
-# pkcs11module=/usr/lib/libcrypto3PKCS.so
-## when using Safenet e-token/Digicert
-## see https://www.digicert.com/StaticFiles/SAC_10_7_Linux_GA.zip
-# pkcs11module=/usr/lib64/libeToken.so
-#
-# winCodesignTimestampUrl=http://time.certum.pl/
-# winCodesignTimestampUrl=http://timestamp.digicert.com
-# pkcs11cert='pkcs11:type=cert'
-# winCodesignCert=/home/user/a-provided-certification.pem
-#
-# mandatory
-pkcs11module=
-winCodesignPassword=
-# optional
-pkcs11cert=
-winCodesignCert=
-winCodesignTimestampUrl=
-
 ## Mac code signing
 macCodesignIdentity=
 
@@ -28,8 +5,8 @@ macCodesignIdentity=
 macNotarizationUsername=
 
 ## Sonatype OSSRH publishing (synced to Maven Central)
-ossrhUser=
-ossrhKey=
+ossrhUsername=
+ossrhPassword=
 
 ## Signing for Maven Central
 #
@@ -56,10 +33,3 @@ sourceforgeWebPassword=
 ## equivalent with command line option -PforceSkipDocumentBuild=1 or
 ## an environment variable ORG_GRADLE_PROJECT_forceSkipDocumentBuild=1
 # forceSkipDocumentBuild=1
-
-## Speed-up build process
-## Caution: parallel execution may lead test failures
-org.gradle.configuration-cache=false
-org.gradle.caching=true
-org.gradle.configureondemand=true
-org.gradle.parallel=true

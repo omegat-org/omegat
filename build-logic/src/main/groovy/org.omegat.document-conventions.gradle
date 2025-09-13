@@ -55,7 +55,7 @@ ext.makeDocumentationTasks = { lang ->
     def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/passthrough.xsl"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.xml"))
-        inputFile.set(layout.projectDirectory.file("src_docs/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
+        inputFile.set(layout.projectDirectory.file("${documentRootDir}/manual/${lang}/OmegaTUsersManual_xinclude_full.xml"))
     }
 
     def copyCss = tasks.register("copyCss${lang.capitalize()}", Copy) {
@@ -197,10 +197,18 @@ tasks.register('firstSteps') {
 }
 assemble.dependsOn(firstSteps)
 
-ext.makeFirstStepTask = { lang ->
+ext.htdocs = '/home/project-web/omegat/htdocs'
+
+def manualLangs = project.property("org.omegat.manualLangs").split(',')
+manualLangs.each { lang ->
+    makeDocumentationTasks(lang)
+}
+
+def firstStepLangs = project.property("org.omegat.firstStepLangs").split(',')
+firstStepLangs.each { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
-        from layout.projectDirectory.file("src_docs/style/omegat.css")
-        into layout.buildDirectory.dir("docs/greetings/${lang}/")
+        from "src_docs/style/omegat.css"
+        into "build/docs/greetings/${lang}"
     }
     def firstStepsHtml = tasks.register("firstSteps${lang.capitalize()}", DocbookHtmlTask) {
         description = 'Generates a chunked HTML documentation.'
@@ -213,33 +221,48 @@ ext.makeFirstStepTask = { lang ->
     firstSteps.dependsOn(firstStepsHtmlFinally)
 }
 
-ext.htdocs = '/home/project-web/omegat/htdocs'
+remotes {
+    sourceforgeWeb {
+        host = 'web.sourceforge.net'
+        user = hasProperty('sourceforgeWebUser') ? getProperty('sourceforgeWebUser') : ''
+        password = hasProperty('sourceforgeWebPassword') ? getProperty('sourceforgeWebPassword') : ''
+        agent = true
+    }
+}
 
-ext.publishAtomically = { args ->
-    tasks.register("publish${args.name.capitalize()}", Exec) {
-        description = "Copies ${args.name} to SourceForge web."
-        dependsOn args.sourceTask
-        group = 'omegat release'
-        doLast {
-            ssh.run {
-                session(remotes.sourceforgeWeb) {
-                    def timestamp = new Date().format('yyyyMMddHHmmss')
-                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
-                    def tempDir = "${targetDir}-temp-${timestamp}"
-                    sftp {
-                        cd htdocs
-                        mkdir tempDir
-                    }
-                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
-                    sftp {
-                        cd htdocs
-                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
-                        catch (ignored) {}
-                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
-                        rmdir tempDir
-                    }
-                }
-            }
+tasks.register("publishWebManual", Exec) {
+    description = "Copies web manuals to SourceForge web."
+    dependsOn manualHtmls
+    group = 'omegat release'
+    ssh.run {
+        session(remotes.sourceforgeWeb) {
+            def timestamp = new Date().format('yyyyMMddHHmmss')
+            def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
+            def tempDir = "${targetDir}-temp-${timestamp}"
+            def htdocsPath = htdocs
+            def tempDirPath = "${htdocsPath}/${tempDir}"
+            def sourceDirName = args.sourceTask.destinationDir.name
+            createTempDirectory(tempDir)
+            put from: args.sourceTask.outputs.files, into: tempDirPath
+            deployWithBackup(targetDir, tempDir, sourceDirName, timestamp)
         }
+    }
+}
+
+private void createTempDirectory(String tempDir) {
+    sftp {
+        cd htdocs
+        mkdir tempDir
+    }
+}
+
+private void deployWithBackup(String targetDir, String tempDir, String sourceDirName, String timestamp) {
+    sftp {
+        cd htdocs
+        try {
+            rename targetDir, "${targetDir}-old-${timestamp}"
+        } catch (ignored) {}
+        rename "${tempDir}/${sourceDirName}", targetDir
+        rmdir tempDir
     }
 }

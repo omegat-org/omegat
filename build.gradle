@@ -465,8 +465,12 @@ tasks.register('linux') {
     dependsOn linuxDebDist
     dependsOn linuxRpmDist
 }
-makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
-makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')
+if (linux64JRE != null && !linux64JRE.isEmpty()) {
+    makeLinuxTask(name: "linux64", suffix: "Linux_64", jrePath: linux64JRE, parentTaskName: 'linux')
+}
+if (linuxArm64JRE != null && !linuxArm64JRE.isEmpty()) {
+    makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE, parentTaskName: 'linux')
+}
 
 // We bundle our startup scripts separately, so disable startScripts.
 startScripts.enabled = false

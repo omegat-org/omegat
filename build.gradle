@@ -424,9 +424,40 @@ tasks.register('mac') {
     description = 'Builds the Mac distributions.'
     group = 'omegat distribution'
 }
-makeHunspellSignTask()
-makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE, parentTaskName: 'mac')
-makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE, parentTaskName: 'mac')
+
+def macCodesignIdentity = providers.gradleProperty('macCodesignIdentity')
+def hunspellJar = configurations.runtimeClasspath.files.find {
+    it.name.startsWith('hunspell')
+}
+
+def extractHunspell = tasks.register('extractHunspellJarSignedContents', Sync) {
+    from zipTree(hunspellJar)
+    destinationDir = file(layout.buildDirectory.file("hunspell"))
+}
+
+tasks.register('hunspellJarSignedContents', Exec) {
+    file(layout.buildDirectory.file("hunspell"))
+    def dylibs = fileTree(dir: file(layout.buildDirectory.file("hunspell")), include: '**/*.dylib').files
+    commandLine('codesign', '--deep', '--force',
+            '--sign', macCodesignIdentity,
+            '--timestamp',
+            '--options', 'runtime',
+            '--entitlements', file('release/mac-specific/java.entitlements'),
+            *dylibs.toList())
+    dependsOn extractHunspell
+}
+
+tasks.register('hunspellSignedJar', Jar) {
+    from file(layout.buildDirectory.file("hunspell"))
+    archiveFileName.set(hunspellJar.name)
+}
+
+if (macJRE != null && !macJRE.isEmpty()) {
+    makeMacTask(name: 'macX64', suffix: 'Mac_x64', jrePath: macJRE)
+}
+if (armMacJRE != null && !armMacJRE.isEmpty()) {
+    makeMacTask(name: 'macArm', suffix: 'Mac_arm', jrePath: armMacJRE)
+}
 
 tasks.register('linux') {
     description = 'Builds the Linux distributions.'

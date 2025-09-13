@@ -71,7 +71,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class CalcMatchStatisticsTest {
 
-    private static final int TIMEOUT=15;
+    private static final int TIMEOUT = 15;
     private static Path tmpDir;
 
     /*

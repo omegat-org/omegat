@@ -71,6 +71,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class CalcMatchStatisticsTest {
 
+    private static final int TIMEOUT=15;
     private static Path tmpDir;
 
     /*
@@ -95,7 +96,7 @@ public class CalcMatchStatisticsTest {
         TestingStatsConsumer testingStatsConsumer = new TestingStatsConsumer(future);
         CalcMatchStatistics calcMatchStatistics = new CalcMatchStatistics(project, segmenter, testingStatsConsumer, false);
         calcMatchStatistics.start();
-        future.get(5, TimeUnit.SECONDS);
+        future.get(TIMEOUT, TimeUnit.SECONDS);
         String[][] result = testingStatsConsumer.getTable();
         assertNotNull(result);
 

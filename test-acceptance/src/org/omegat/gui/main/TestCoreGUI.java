@@ -61,6 +61,7 @@ import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
+import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
@@ -109,6 +110,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
         openSampleProject(projectPath);
         assertTrue("Segment properties are not loaded.", latch.await(timeout, TimeUnit.SECONDS));
+    }
+
+    /**
+     * Open project from the specified path and wait until the machineTranslation is loaded.
+     */
+    protected void openSampleProjectWaitMachineTranslation(Path projectPath) throws Exception {
+        MachineTranslateTextArea machineTranslateTextArea = (MachineTranslateTextArea) Core.getMachineTranslatePane();
+        CountDownLatch latch = new CountDownLatch(1);
+        machineTranslateTextArea.addPropertyChangeListener("displayed", evt -> {
+            if (evt.getNewValue() != null && !evt.getNewValue().equals(Collections.emptyList())) {
+                latch.countDown();
+            }
+        });
+        openSampleProject(projectPath);
+        assertTrue("MachineTranslation is not loaded.", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**

@@ -292,27 +292,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         window.show();
     }
 
-    /**
-     * Initialize OmegaT Core startup only once.
-     * @throws Exception when the error occurred.
-     */
-    protected void initialize() throws Exception { 
-        Path tmp = Files.createTempDirectory("omegat");
-        FileUtils.forceDeleteOnExit(tmp.toFile());
-        RuntimePreferences.setConfigDir(tmp.toString());
-        //
-        TestMainInitializer.initClassloader();
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-        // should be called after RuntimePrefereces.setConfigDir
-        Preferences.init();
-        Preferences.initFilters();
-        Preferences.initSegmentation();
-        // should be called after Preferences.init
-        TestCoreState.getInstance().setProject(new NotLoadedProject());
-        TestCoreState.initAutoSave(autoSave);
-    }
-
     static IAutoSave autoSave = new IAutoSave() {
         @Override
         public void enable() {
@@ -393,7 +372,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         // Initialize classloader and plugins
         TestMainInitializer.initClassloader();
-        PluginUtils.loadPlugins(Collections.emptyMap());
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
 
         // Initialize preferences (must be after RuntimePreferences.setConfigDir)

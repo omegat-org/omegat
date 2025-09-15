@@ -28,6 +28,9 @@ package org.omegat;
 import javax.swing.UIManager;
 
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.machinetranslators.dummy.Dummy;
+
+import java.util.Collections;
 
 public final class TestMainInitializer {
 
@@ -35,6 +38,8 @@ public final class TestMainInitializer {
     }
 
     public static void initClassloader() {
+        PluginUtils.loadPlugins(Collections.emptyMap());
+        Dummy.loadPlugins();
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
     }
 

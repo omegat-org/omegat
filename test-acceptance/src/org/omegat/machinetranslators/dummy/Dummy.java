@@ -60,9 +60,4 @@ public class Dummy extends BaseCachedTranslate {
     protected String translate(Language sLang, Language tLang, String text) {
         return TRANSLATION;
     }
-
-    @Override
-    public boolean isConfigurable() {
-        return false;
-    }
 }

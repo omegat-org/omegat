@@ -280,6 +280,13 @@
 		  <para>If a glossary item has multiple definitions, sort by a length of definition text.</para>
 		</listitem>
 	  </varlistentry>
+        
+       <varlistentry>
+           <term><option>Use full stemming</option></term>
+           <listitem>
+               <para>When enable the full stemming, OmegaT may use an aggressive stemming to smaller part if possible. Very limited number of languages support it such as Italian.</para>
+           </listitem>
+       </varlistentry> 
 	</variablelist>
   </section>
 

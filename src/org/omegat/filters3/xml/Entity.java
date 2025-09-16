@@ -26,6 +26,8 @@
 
 package org.omegat.filters3.xml;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Entity declaration in XML file's Document type declaration. For example,
  * <code>&lt;!ENTITY gloss SYSTEM "gloss.xml"&gt;</code> is external entity and
@@ -35,13 +37,13 @@ package org.omegat.filters3.xml;
  * @author Alex Buloichik
  */
 public class Entity {
-    enum Type {
+    public enum Type {
         INTERNAL,
         EXTERNAL,
         REFERENCE
     }
 
-    private Type entityType;
+    private final Type entityType;
 
     /** Whether entity is internal. If false, it's an external entity. */
     public Type getType() {
@@ -67,24 +69,24 @@ public class Entity {
         return originalName;
     }
 
-    private String value;
+    private @Nullable String value;
 
     /** Returns entity's value. */
-    public String getValue() {
+    public @Nullable String getValue() {
         return value;
     }
 
-    private String publicId;
+    private @Nullable String publicId;
 
     /** Returns entity's publicId. */
-    public String getPublicId() {
+    public @Nullable String getPublicId() {
         return publicId;
     }
 
-    private String systemId;
+    private @Nullable String systemId;
 
     /** Returns entity's systemId. */
-    public String getSystemId() {
+    public @Nullable String getSystemId() {
         return systemId;
     }
 
@@ -100,14 +102,14 @@ public class Entity {
     }
 
     /** Creates internal entity. */
-    public Entity(String name, String value) {
+    public Entity(String name, @Nullable String value) {
         entityType = Type.INTERNAL;
         setName(name);
         this.value = value;
     }
 
     /** Creates external entity. */
-    public Entity(String name, String publicId, String systemId) {
+    public Entity(String name, @Nullable String publicId, @Nullable String systemId) {
         entityType = Type.EXTERNAL;
         setName(name);
         this.publicId = publicId;

@@ -51,7 +51,7 @@
 
     <!-- interfaces -->
     <!-- Keep names for compatibility -->
-    <suppress files="(IParseCallback|CalcMatchStatisticsTest)\.java" checks="ParameterNumber"/>
+    <suppress files="(IParseCallback|TestingParseCallback)\.java" checks="ParameterNumber"/>
     <suppress checks="TypeName" files="IProjectEventListener\.java" lines="35"/>
 
     <!-- ignore Auto generated source files -->
@@ -100,7 +100,7 @@
     <suppress files="JTextPaneLinkifier\.java" checks="EmptyBlock"/>
     <suppress files="RepositoriesMappingController\.java:" checks="MethodLength"/>
     <suppress files="EditorSettings\.java" checks="ParameterNumber" lines="525"/>
-    <suppress files="(IssuesPanel|PreferencesWindow)Controller\.java" checks="MethodLength"/>
+    <suppress files="PreferencesWindowController\.java" checks="MethodLength"/>
     <suppress files="MatchesVarExpansion\.java" checks="InnerAssignment"/>
     <suppress files="EditorTextArea3\.java" checks="MethodLength"/>
     <suppress files="AutoCompleter\.java" checks="EmptyStatement"/>
@@ -161,7 +161,6 @@
     <suppress files="XHTMLDialect\.java" checks="InnerAssignment" lines="131,132"/>
     <suppress files="CamtasiaWindowsDialect\.java" checks="MethodLength" lines="44"/>
     <suppress files="Entry\.java" checks="MethodLength"/>
-    <suppress files="Handler\.java" checks="EmptyBlock" lines="857"/>
 
     <!-- filters4 -->
     <!-- There are tons of errors in filters4 that are contributed from stax-filter -->

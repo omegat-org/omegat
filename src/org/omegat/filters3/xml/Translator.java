@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
 import org.xml.sax.Attributes;
 
 import org.omegat.core.data.ProtectedPart;
@@ -50,7 +51,7 @@ public interface Translator {
      * The method the Handler would call to pass translatable content to OmegaT
      * core and receive translation.
      */
-    String translate(String s, List<ProtectedPart> protectedParts);
+    String translate(String s, @Nullable List<ProtectedPart> protectedParts);
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.

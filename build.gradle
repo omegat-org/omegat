@@ -42,9 +42,6 @@ def macJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_mac_*.tar.gz')
 def armMacJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_mac_*.tar.gz')
 def linux64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_linux_*.tar.gz')
 def linuxArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_aarch64_linux_*.tar.gz')
-def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
-def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
-def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
 
 sourcesJar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -442,15 +439,6 @@ makeLinuxTask(name: "linuxArm64", suffix: "Linux_ARM64", jrePath: linuxArm64JRE,
 startScripts.enabled = false
 // installDist insists on destination executable directory even when disable start script.
 application.executableDir = ""
-
-tasks.register('win') {
-    description = 'Builds the Windows distributions.'
-    group = 'omegat distribution'
-}
-makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE', parentTask: 'win')
-makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64', parentTask: 'win')
-makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32, parentTask: 'win')
-makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE, parentTask: 'win')
 
 // Disable .tar distributions for everyone but Linux
 tasks.withType(Tar).configureEach {

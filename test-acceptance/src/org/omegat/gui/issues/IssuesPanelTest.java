@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
 
 import javax.swing.SwingUtilities;
+import java.beans.PropertyChangeListener;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.CountDownLatch;
@@ -40,6 +41,7 @@ import static org.junit.Assert.assertTrue;
 public class IssuesPanelTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
+    private IssuesPanelController issuesPanelController;
 
     @Test
     public void testIssuesPanelShow() throws Exception {
@@ -50,16 +52,18 @@ public class IssuesPanelTest extends TestCoreGUI {
         robot().waitForIdle();
         //
         assertNotNull(window);
-        IssuesPanelController issuesPanelController = new IssuesPanelController(window.target());
         CountDownLatch latch = new CountDownLatch(1);
         // watch for table update
-        issuesPanelController.addPropertyChangeListener(evt -> {
+        PropertyChangeListener propertyListener = evt -> {
             if (evt.getPropertyName().equals("selectedEntry")) {
                 latch.countDown();
             }
+        };
+        SwingUtilities.invokeAndWait(() -> {
+            issuesPanelController = new IssuesPanelController(window.target());
+            issuesPanelController.addPropertyChangeListener(propertyListener);
+            issuesPanelController.showForFiles(".*txt", 1);
         });
-
-        SwingUtilities.invokeAndWait(() -> issuesPanelController.showForFiles(".*txt", 1));
 
         try {
             assertTrue(latch.await(20, TimeUnit.SECONDS));
@@ -72,6 +76,7 @@ public class IssuesPanelTest extends TestCoreGUI {
         String type = (String) model.getValueAt(0, 2);
         assertTrue("Issue type is unexpected", expectedType[0].equals(type) || expectedType[1].equals(type));
 
+        issuesPanelController.removePropertyChangeListener(propertyListener);
         closeProject();
     }
 }

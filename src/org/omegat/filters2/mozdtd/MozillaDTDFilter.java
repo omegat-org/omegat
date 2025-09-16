@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
@@ -65,7 +66,7 @@ public class MozillaDTDFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
 
-    protected static final Pattern RE_ENTITY = Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+([\"'])(.+)\\2\\s*>",
+    protected static final Pattern RE_ENTITY = Pattern.compile("<!ENTITY\\s+(\\S+)\\s+([\"'])(.+)\\2\\s*>",
             Pattern.DOTALL);
 
     protected Map<String, String> align;
@@ -73,7 +74,7 @@ public class MozillaDTDFilter extends AbstractFilter {
     /**
      * If true, will remove non-translated segments in the target files
      */
-    public static boolean removeStringsUntranslated = false;
+    public boolean removeStringsUntranslated = false;
 
     /**
      * Register plugin into OmegaT.
@@ -189,8 +190,8 @@ public class MozillaDTDFilter extends AbstractFilter {
     @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc)
             throws Exception {
-        Map<String, String> source = new HashMap<String, String>();
-        Map<String, String> translated = new HashMap<String, String>();
+        Map<String, String> source = new HashMap<>();
+        Map<String, String> translated = new HashMap<>();
 
         align = source;
         processFile(sourceFile, new NullBufferedWriter(), fc);
@@ -210,7 +211,7 @@ public class MozillaDTDFilter extends AbstractFilter {
     }
 
     @Override
-    public Map<String, String> changeOptions(Window parent, Map<String, String> config) {
+    public @Nullable Map<String, String> changeOptions(Window parent, Map<String, String> config) {
         try {
             MozillaDTDOptionsDialog dialog = new MozillaDTDOptionsDialog(parent, config);
             dialog.setVisible(true);
@@ -220,8 +221,7 @@ public class MozillaDTDFilter extends AbstractFilter {
                 return null;
             }
         } catch (Exception e) {
-            Log.log(OStrings.getString("MOZDTD_FILTER_EXCEPTION"));
-            Log.log(e);
+            Log.logErrorRB(e, "MOZDTD_FILTER_EXCEPTION");
             return null;
         }
     }

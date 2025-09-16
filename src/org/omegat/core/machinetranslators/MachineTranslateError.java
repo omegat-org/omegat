@@ -26,6 +26,8 @@
 package org.omegat.core.machinetranslators;
 
 /**
+ * An exception class for machine translation errors.
+ *
  * @author Hiroshi Miura
  */
 @SuppressWarnings("serial")
@@ -41,6 +43,14 @@ public class MachineTranslateError extends Exception {
         super(message);
     }
 
+    /**
+     * Constructor an instance of <code>MachineTranslateError</code>
+     * with the specified message and cause.
+     * @param message
+     *          the detail message.
+     * @param cause
+     *          the cause.
+     */
     public MachineTranslateError(final String message, final Throwable cause) {
         super(message, cause);
     }

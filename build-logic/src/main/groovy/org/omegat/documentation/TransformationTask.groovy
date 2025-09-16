@@ -18,14 +18,24 @@ import javax.xml.transform.stream.StreamResult
 @CompileStatic
 class TransformationTask extends AbstractTransformationTask {
 
+    private final Provider<RegularFile> styleSheetFile = project.objects.fileProperty()
+    private final Provider<RegularFile> outputFile = project.objects.fileProperty()
+    private final Property<RegularFile> inputFile = project.objects.fileProperty()
+
     @InputFile
-    Provider<RegularFile> styleSheetFile = project.objects.fileProperty()
+    Provider<RegularFile> getStyleSheetFile() {
+        return styleSheetFile
+    }
 
     @OutputFile
-    Provider<RegularFile> outputFile = project.objects.fileProperty()
+    Provider<RegularFile> getOutputFile() {
+        return outputFile
+    }
 
     @InputFile
-    final Property<RegularFile> inputFile = project.objects.fileProperty()
+    Property<RegularFile> getInputFile() {
+        return inputFile
+    }
 
     TransformationTask() {
     }

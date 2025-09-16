@@ -28,21 +28,15 @@ package org.omegat.gui.dialogs;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Locale;
 import java.util.regex.Pattern;
 
-import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.gui.main.BaseMainWindowMenu;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
 public class AboutDialogTest extends TestCoreGUI {
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testAboutDialog() {

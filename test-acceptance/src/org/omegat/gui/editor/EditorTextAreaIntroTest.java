@@ -24,21 +24,14 @@
  **************************************************************************/
 package org.omegat.gui.editor;
 
-import java.util.Locale;
-
-import org.junit.Rule;
 import org.junit.Test;
 
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 import org.omegat.util.OStrings;
 
 import static org.junit.Assert.assertNotNull;
 
 public class EditorTextAreaIntroTest extends TestCoreGUI {
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
     @Test
     public void testIntroPaneExist() {

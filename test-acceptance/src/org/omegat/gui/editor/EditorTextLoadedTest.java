@@ -24,13 +24,11 @@
  **************************************************************************/
 package org.omegat.gui.editor;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 import org.omegat.util.Preferences;
 
 import javax.swing.text.BadLocationException;
@@ -41,12 +39,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class EditorTextLoadedTest extends TestCoreGUI {
 
@@ -61,31 +59,23 @@ public class EditorTextLoadedTest extends TestCoreGUI {
     private final CountDownLatch initialLoadLatch = new CountDownLatch(1);
     private final CountDownLatch selectionChangeLatch = new CountDownLatch(2);
 
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
-
     @Test
-    public void testEditorTextLoaded() throws Exception {
+    public void testEditorTextLoadedAndClickSingle() throws Exception {
         CoreEvents.registerEntryEventListener(new EditorEntryListener(selectedEntries, initialLoadLatch,
                 selectionChangeLatch));
         openSampleProject(PROJECT_PATH);
-        awaitLatch(initialLoadLatch);
+        assertTrue("Editor show first entry.", initialLoadLatch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS));
         verifyInitialTextSelection();
         Point clickPoint = calculateTargetPoint();
         assertNotNull(window);
         JTextComponent editPane = window.panel(EDITOR_TITLE).textBox().target();
+        //
+        Preferences.setPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION, true);
         robot().click(editPane, clickPoint);
-        awaitLatch(selectionChangeLatch);
+        //
+        assertTrue("Editor select clicked entry", selectionChangeLatch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS));
         SourceTextEntry newEntry = selectedEntries.get(selectedEntries.size() - 1);
         assertEquals(TARGET_TEXT, newEntry.getSrcText());
-    }
-
-    private void awaitLatch(CountDownLatch latch) {
-        try {
-            latch.await(TIMEOUT_SECONDS, TimeUnit.SECONDS);
-        } catch (InterruptedException ignored) {
-            // ignore timeout
-        }
     }
 
     private void verifyInitialTextSelection() {
@@ -96,17 +86,14 @@ public class EditorTextLoadedTest extends TestCoreGUI {
     private Point calculateTargetPoint() throws BadLocationException {
         assertNotNull(window);
         String fullText = window.panel(EDITOR_TITLE).textBox().text();
+        if (fullText == null || !fullText.contains(TARGET_TEXT)) {
+            throw new IllegalStateException("Target text not found.");
+        }
         int newCaretPos = fullText.indexOf(TARGET_TEXT);
         JTextComponent editPane = window.panel(EDITOR_TITLE).textBox().target();
         Rectangle rect = editPane.modelToView2D(newCaretPos).getBounds();
         // Center of rectangle
         return new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
-    }
-
-    @Override
-    protected void initialize() throws Exception {
-        super.initialize();
-        Preferences.setPreference(Preferences.SINGLE_CLICK_SEGMENT_ACTIVATION, true);
     }
 
     private static class EditorEntryListener implements IEntryEventListener {
@@ -130,9 +117,9 @@ public class EditorTextLoadedTest extends TestCoreGUI {
             if (newEntry == null) {
                 return;
             }
+            selectedEntries.add(newEntry);
             initialLoadLatch.countDown();
             selectionChangeLatch.countDown();
-            selectedEntries.add(newEntry);
         }
     }
 }

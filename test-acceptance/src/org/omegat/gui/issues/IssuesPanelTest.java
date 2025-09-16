@@ -24,16 +24,13 @@
  **************************************************************************/
 package org.omegat.gui.issues;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 import javax.swing.SwingUtilities;
-import java.awt.Window;
+import java.beans.PropertyChangeListener;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -44,48 +41,42 @@ import static org.junit.Assert.assertTrue;
 public class IssuesPanelTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
-
-    @Rule
-    public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
+    private IssuesPanelController issuesPanelController;
 
     @Test
     public void testIssuesPanelShow() throws Exception {
+        String[] expectedType = new String[]{"Terminology", "LanguageTool"};
+
         // load project
         openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
         //
         assertNotNull(window);
-        IssuesPanelControllerMock issuesPanelController = new IssuesPanelControllerMock(window.target());
-        CountDownLatch latch = new CountDownLatch(2);
-        // watch for panel visible
-        issuesPanelController.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals("panel")) {
-                latch.countDown();
-            }
-        });
+        CountDownLatch latch = new CountDownLatch(1);
         // watch for table update
-        issuesPanelController.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals("table")) {
+        PropertyChangeListener propertyListener = evt -> {
+            if (evt.getPropertyName().equals("selectedEntry")) {
                 latch.countDown();
             }
+        };
+        SwingUtilities.invokeAndWait(() -> {
+            issuesPanelController = new IssuesPanelController(window.target());
+            issuesPanelController.addPropertyChangeListener(propertyListener);
+            issuesPanelController.showForFiles(".*txt", 1);
         });
-
-        SwingUtilities.invokeLater(issuesPanelController::showAll);
 
         try {
-            latch.await(10, TimeUnit.SECONDS);
+            assertTrue(latch.await(20, TimeUnit.SECONDS));
         } catch (InterruptedException ignored) {
         }
+        robot().waitForIdle();
 
-        assertTrue(issuesPanelController.getPanel().isVisible());
-        assertEquals(2, issuesPanelController.getPanel().table.getModel().getValueAt(1, 0));
-        assertEquals("Terminology", issuesPanelController.getPanel().table.getModel().getValueAt(1, 2));
-    }
+        var model = issuesPanelController.getPanel().table.getModel();
+        assertEquals("Expected segment number of the issue", 13, model.getValueAt(0, 0));
+        String type = (String) model.getValueAt(0, 2);
+        assertTrue("Issue type is unexpected", expectedType[0].equals(type) || expectedType[1].equals(type));
 
-    public static class IssuesPanelControllerMock extends IssuesPanelController {
-
-        public IssuesPanelControllerMock(Window parent) {
-            super(parent);
-        }
+        issuesPanelController.removePropertyChangeListener(propertyListener);
+        closeProject();
     }
 }

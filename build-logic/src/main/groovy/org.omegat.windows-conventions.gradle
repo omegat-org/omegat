@@ -31,17 +31,20 @@ ext.getInnoSetupCustomMessages = {
     // Sort files to ensure English comes first, to set fallback
     fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini')
             .sort()
-            .collect { file ->
+            .collectMany { file ->
                 def match = file.name =~ /CustomMessages_?([^\.]*).ini/
                 if (match) {
                     def capture = match.group(1)
                     def lang = capture.empty ? 'en' : capture
                     if (!blacklist.contains(lang)) {
-                        file.text.replaceAll(/(?m)^([^=]+)/) { "$lang.${it[0]}" }
+                        // This more specific regex avoids modifying comments and section headers.
+                        // It finds keys that are followed by an '=' sign and ignores lines starting with ';', '#', or '['.
+                        def newContent = file.text.replaceAll(/(?m)^(?!\s*[;\[#])([^=]+?)\s*(?==)/) { m -> "$lang.${m[1].trim()}" }
+                        return [newContent]
                     }
                 }
-            }.findAll()
-            .join(System.lineSeparator())
+                return []
+            }.join(System.lineSeparator())
 }
 
 /*

@@ -9,6 +9,11 @@ gradlePlugin {
             id = 'org.omegat.documentation'
             implementationClass = 'org.omegat.documentation.DocumentationPlugin'
         }
+
+        versionPlugin {
+            id = 'org.omegat.version'
+            implementationClass = 'org.omegat.VersionPropertiesPlugin'
+        }
     }
 }
 

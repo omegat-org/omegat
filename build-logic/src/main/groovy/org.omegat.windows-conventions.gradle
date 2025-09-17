@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'edu.sc.seis.launch4j'
-    id 'org.omegat.version-conventions'
+    id 'org.omegat.version'
 }
 
 /*

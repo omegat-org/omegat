@@ -2,7 +2,7 @@ import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'org.omegat.version-conventions'
+    id 'org.omegat.version'
     id 'org.omegat.document-conventions'
     id 'org.omegat.main-utilities'
     id 'org.omegat.java-conventions'
@@ -34,7 +34,7 @@ tasks.withType(Wrapper.class).configureEach {
     gradleVersion = "8.13" // set the same version as in gradle/wrapper/gradle-wrapper.properties
 }
 
-version = omtVersion.version + getUpdateSuffix(omtVersion.update)
+version = omtVersion.version
 
 // Definition of bundled JRE file names
 def assetDir = findProperty('assetDir') ?: '../'

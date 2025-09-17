@@ -11,7 +11,7 @@ publishing {
         mavenJava(MavenPublication) { publication ->
             groupId = project.property('org.omegat.groupId')
             artifactId = project.property('org.omegat.artifactId')
-            version = project.ext.mavenStyleVersion
+            version = project.ext.omtVersion.mavenStyleVersion
             from components.java
 
             pom {

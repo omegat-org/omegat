@@ -8,6 +8,12 @@ gradlePlugin {
         documentationPlugin {
             id = 'org.omegat.documentation'
             implementationClass = 'org.omegat.documentation.DocumentationPlugin'
+            description = 'Plugin for building OmegaT greeting note and manuals'
+        }
+        omegatModule {
+            id = 'org.omegat.module'
+            implementationClass = 'org.omegat.module.OmegatModulePlugin'
+            description = 'Plugin for building OmegaT module'
         }
     }
 }

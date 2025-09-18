@@ -44,6 +44,9 @@ ext.getInnoSetupCustomMessages = {
             .join(System.lineSeparator())
 }
 
+def shortVersion = project.ext.omtVersion.version
+def fullVersion = project.ext.omtVersion.version + project.ext.omtVersion.beta
+
 /*
  * Configuration of launch4j java launcher.
  * OmegaT uses it as launcher for windows.
@@ -57,14 +60,14 @@ launch4j {
     errTitle = 'OmegaT'
     headerType = 'gui'
     jreMinVersion = '11.0'
-    jreMaxVersion = '21.1'
+    jreMaxVersion = '24.0'
     copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
     // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
     bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
     requires64Bit = false  // support 32bit distribution
     copyright = "The GNU General Public License, Version 3.0"
-    version = omtVersion.version
-    textVersion = omtVersion.version
+    version = shortVersion
+    textVersion = fullVersion
     companyName = project.property('org.omegat.vendor')
     fileDescription = project.property('org.omegat.shortDescription')
     restartOnCrash = false
@@ -81,7 +84,6 @@ tasks.register('win') {
     group = 'omegat distribution'
 }
 ext.makeWinTask = { args ->
-    def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
     def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
     def prepDistsTaskName = "${args.name}Prep"

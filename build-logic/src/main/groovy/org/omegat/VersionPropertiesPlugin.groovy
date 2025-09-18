@@ -19,11 +19,24 @@ class VersionPropertiesPlugin implements Plugin<Project> {
         def version = versionPropProvider.getProperty('version')
         def beta = versionPropProvider.getProperty('beta')
         def revision = versionPropProvider.getProperty('revision')
+
+        def getUpdateSuffix = { update, mavenStyle ->
+            if (!update || update == '0') return ''
+            if (update.length() == 1) {
+                if (mavenStyle) return "-0${update}"
+                return "_0${update}"
+            }
+            if (mavenStyle) return "-${update}"
+            "_${update}"
+        }
+
+        def update = getUpdateSuffix(versionPropProvider.getProperty('update'), false)
+        def mavenUpdate = getUpdateSuffix(versionPropProvider.getProperty('update'), true)
         project.ext.omtVersion =  [
-                version: version,
+                version: version + update,
                 beta: beta,
                 revision: revision,
-                mavenStyleVersion: version
+                mavenStyleVersion: version + mavenUpdate
         ]
     }
 }

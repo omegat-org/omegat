@@ -284,7 +284,7 @@
        <varlistentry id="dialogs.preferences.glossary.use.full.stemming">
            <term id="dialogs.preferences.glossary.use.full.stemming.title"><option>Use full stemming</option></term>
            <listitem>
-               <para>When enable the full stemming, OmegaT may use an aggressive stemming to smaller part if possible. Very limited number of languages support it such as Italian.</para>
+               <para>Some tokenizers offer finer word stemming for a limited number of languages. Currently, only Italian is supported.</para>
            </listitem>
        </varlistentry> 
 	</variablelist>

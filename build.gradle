@@ -482,17 +482,6 @@ processResources {
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 
-remotes {
-    sourceforgeWeb {
-        host = 'web.sourceforge.net'
-        user = hasProperty('sourceforgeWebUser') ? getProperty('sourceforgeWebUser') : ''
-        password = hasProperty('sourceforgeWebPassword') ? getProperty('sourceforgeWebPassword') : ''
-        agent = true
-    }
-}
-publishAtomically(name: 'webManual', sourceTask: manualHtmls)
-publishAtomically(name: 'javadoc', sourceTask: javadoc)
-
 allprojects {
     afterEvaluate {
         tasks.findByName('compileJava')?.configure {

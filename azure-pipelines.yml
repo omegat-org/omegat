@@ -203,3 +203,9 @@ stages:
         parameters:
           omegatVersion: $(version)
           condition: eq(variables['Agent.JobStatus'], 'Succeeded')
+      - template: ci/azure-pipelines/publish_manual.yml
+        parameters:
+          omegatVersion: $(version)
+      - template: ci/azure-pipelines/publish_javadoc.yml
+        parameters:
+          omegatVersion: $(version)

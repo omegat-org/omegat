@@ -1,0 +1,17 @@
+parameters:
+  condition: false
+  omegatVersion: "6.1.0"
+
+steps:
+  - task: Bash@3
+    displayName: 📂 SCP upload to sourceforge file management
+    condition: ${{ parameters.condition }}
+    inputs:
+      targetType: 'inline'
+      script: |
+        echo "Push javadoc to sourceforge project web"
+        dest=$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
+        destdir=/home/project-web/omegat/htdocs/javadoc/${{ parameters.omegatVersion }}/
+        echo "mkdir -p $destdir" | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
+        cd $(system.defaultworkingdirectory)/build/docs/javadoc
+        tar -czf - . | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e ssh -oStrictHostKeyChecking=no $dest "cd $destdir && tar -xzf -"

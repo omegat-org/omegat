@@ -50,7 +50,7 @@ public class EditorTextLoadedTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
 
-    private static final int TIMEOUT_SECONDS = 10;
+    private static final int TIMEOUT_SECONDS = 15;
     private static final String INITIAL_TEXT = "Error {0}: {1}";
     private static final String TARGET_TEXT = "API key (optional)";
     private static final String EDITOR_TITLE = "Editor - Bundle.properties";

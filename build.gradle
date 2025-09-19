@@ -479,16 +479,6 @@ processResources {
     }
 }
 
-def manualLangs = project.property("org.omegat.manualLangs").split(',')
-manualLangs.each { lang ->
-    makeDocumentationTasks(lang)
-}
-
-def firstStepLangs = project.property("org.omegat.firstStepLangs").split(',')
-firstStepLangs.each { lang ->
-    makeFirstStepTask(lang)
-}
-
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
 

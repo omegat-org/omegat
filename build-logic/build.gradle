@@ -15,6 +15,11 @@ gradlePlugin {
             implementationClass = 'org.omegat.module.OmegatModulePlugin'
             description = 'Plugin for building OmegaT module'
         }
+
+        versionPlugin {
+            id = 'org.omegat.version'
+            implementationClass = 'org.omegat.VersionPropertiesPlugin'
+        }
     }
 }
 

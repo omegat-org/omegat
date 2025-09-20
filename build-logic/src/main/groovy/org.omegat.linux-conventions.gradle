@@ -1,8 +1,10 @@
 
 ext.makeLinuxTask = { args ->
-    def distTaskName = "install" + args.name.capitalize() + "Dist"
-    def tarTaskName = args.name + "DistTarBz"
+    def distTaskName = "install${args.name.capitalize()}Dist"
+    def tarTaskName = "${args.name}DistTarBz"
     def parentTask = tasks.getByName(args.parentTaskName)
+    def fullVersion = project.ext.omtVersion.version + project.ext.omtVersion.beta
+
     tasks.register(distTaskName, Sync) {
         group = 'distribution'
         description = "Creates a linux installDist for ${args.name}."
@@ -38,7 +40,7 @@ ext.makeLinuxTask = { args ->
             }
         }
         application {
-            archiveFileName.set("${applicationName}_${project.version}${omtVersion.beta}_${args.suffix}.tar.bz2")
+            archiveFileName.set("${applicationName}_${fullVersion}_${args.suffix}.tar.bz2")
         }
         compression = Compression.BZIP2
         archiveExtension = 'tar.bz2'

@@ -112,27 +112,6 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class ScriptingWindow {
 
-    static ScriptingWindow window;
-
-    public static void loadPlugins() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-                window = new ScriptingWindow();
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
-    }
-
-    public static void unloadPlugins() {
-        if (window != null) {
-            window.frame.dispose();
-        }
-    }
-
     final JFrame frame;
 
     public ScriptingWindow() {
@@ -1083,11 +1062,8 @@ public class ScriptingWindow {
         }
 
         mb.add(m_setsMenu);
-        // m_scriptList.setListData(items.toArray(new
-        // ScriptItem[items.size()]));
     }
 
-    // CHECKSTYLE:OFF
     public static final String DEFAULT_SCRIPTS_DIR = "scripts";
 
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;

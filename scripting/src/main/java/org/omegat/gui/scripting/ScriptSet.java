@@ -24,6 +24,8 @@
  **************************************************************************/
 package org.omegat.gui.scripting;
 
+import org.omegat.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,21 +34,19 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ScriptSet {
-    private Properties m_props;
-    private File m_setFile;
+    private final Properties props;
+    private final File setFile;
 
     public ScriptSet(File setFile) {
-        m_setFile = setFile;
-        m_props = new Properties();
+        this.setFile = setFile;
+        props = new Properties();
 
         try {
             FileInputStream is = new FileInputStream(setFile);
-            m_props.load(is);
+            props.load(is);
             is.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.log(e);
         }
     }
 
@@ -65,10 +65,10 @@ public class ScriptSet {
     }
 
     public String getTitle() {
-        if (m_props.containsKey("title")) {
-            return m_props.getProperty("title");
+        if (props.containsKey("title")) {
+            return props.getProperty("title");
         } else {
-            return m_setFile.getName();
+            return setFile.getName();
         }
     }
 
@@ -78,8 +78,8 @@ public class ScriptSet {
         }
 
         String idx = Integer.toString(key);
-        if (m_props.containsKey(idx)) {
-            return new ScriptItem(new File(m_setFile.getParentFile(), m_props.getProperty(idx)));
+        if (props.containsKey(idx)) {
+            return new ScriptItem(new File(setFile.getParentFile(), props.getProperty(idx)));
         }
 
         return null;

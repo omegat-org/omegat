@@ -44,7 +44,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -78,14 +77,13 @@ import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
@@ -129,7 +127,7 @@ public class ScriptingWindow {
         });
 
         setScriptsDirectory(
-                Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
+                Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, StaticUtils.getScriptDir()));
 
         initWindowLayout();
 
@@ -205,7 +203,7 @@ public class ScriptingWindow {
         quickScripts[index] = null;
         removeAllQuickScriptActionListenersFrom(quickMenus[index]);
 
-        if (quickMenus.length < index || quickMenus[index] == null) {
+        if (quickMenus[index] == null) {
             return;
         }
 
@@ -300,12 +298,9 @@ public class ScriptingWindow {
         scriptList = new JList<>();
         JScrollPane scrollPaneList = new JScrollPane(scriptList);
 
-        scriptList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent evt) {
-                if (!evt.getValueIsAdjusting()) {
-                    onListSelectionChanged();
-                }
+        scriptList.addListSelectionListener(evt -> {
+            if (!evt.getValueIsAdjusting()) {
+                onListSelectionChanged();
             }
         });
 
@@ -569,6 +564,7 @@ public class ScriptingWindow {
         executeScriptWorkers();
     }
 
+    @Deprecated
     public void executeScripts(final List<ScriptItem> scriptItems) {
         executeScripts(scriptItems, Collections.emptyMap());
     }
@@ -609,7 +605,7 @@ public class ScriptingWindow {
             scriptString += "\n";
         }
 
-        Map<String, Object> bindings = new HashMap<String, Object>(additionalBindings);
+        Map<String, Object> bindings = new HashMap<>(additionalBindings);
         bindings.put(ScriptRunner.VAR_CONSOLE, new IScriptLogger() {
             @Override
             public void print(Object o) {
@@ -1030,8 +1026,6 @@ public class ScriptingWindow {
 
         mb.add(setsMenu);
     }
-
-    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
 
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
 

@@ -34,8 +34,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -51,6 +51,8 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 public class ScriptingTest extends TestCore {
+
+    private static final String DEFAULT_SCRIPTS_DIR = "scripts";
 
     /**
      * Test for bug #775: Unresolvable scripting folder setting can cause an
@@ -80,9 +82,9 @@ public class ScriptingTest extends TestCore {
 
     @Test
     public void testCompileScripts() throws Exception {
-        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
+        File scriptDir = new File(StaticUtils.installDir(), DEFAULT_SCRIPTS_DIR);
         assertTrue("scriptDir is " + scriptDir.toPath(), scriptDir.isDirectory());
-        for (File f : scriptDir.listFiles()) {
+        for (File f : Objects.requireNonNull(scriptDir.listFiles())) {
             if (!f.isFile()) {
                 continue;
             }
@@ -99,12 +101,12 @@ public class ScriptingTest extends TestCore {
 
     @Test
     public void testScriptProperties() throws Exception {
-        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
+        File scriptDir = new File(StaticUtils.installDir(), DEFAULT_SCRIPTS_DIR);
         assertTrue("scriptDir is " + scriptDir.toPath(), scriptDir.isDirectory());
         File propsDir = new File(scriptDir, "properties");
         assertTrue("propsDir is " + propsDir.toPath(), propsDir.isDirectory());
 
-        List<String> scripts = Collections.emptyList();
+        List<String> scripts;
         try (Stream<Path> stream = Files.list(scriptDir.toPath())) {
             scripts = stream.map(Path::toFile).filter(File::isFile).map(File::getName)
                     .map(FilenameUtils::removeExtension).filter(n -> !n.isEmpty())
@@ -112,7 +114,7 @@ public class ScriptingTest extends TestCore {
         }
         assertFalse("Not found any scripts in the folder", scripts.isEmpty());
 
-        for (File f : propsDir.listFiles()) {
+        for (File f : Objects.requireNonNull(propsDir.listFiles())) {
             if (!f.isFile() || f.getName().equals(".DS_Store")) {
                 continue;
             }

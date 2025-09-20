@@ -41,27 +41,19 @@ import java.util.HashMap;
  *
  * @author Hiroshi Miura
  */
+@SuppressWarnings("unused")
 public class ScriptingModule {
 
-    static ScriptingWindow window;
+    private static ScriptingStartupEventListener listener;
 
     public static void loadPlugins() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-                window = new ScriptingWindow();
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
+        listener = new ScriptingStartupEventListener();
+        CoreEvents.registerApplicationEventListener(listener);
     }
 
     public static void unloadPlugins() {
-        if (window != null) {
-            window.frame.dispose();
-        }
+        listener.stop();
+        CoreEvents.unregisterApplicationEventListener(listener);
     }
 
     /**
@@ -89,5 +81,21 @@ public class ScriptingModule {
             Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
         }
     }
-}
 
+    private static class ScriptingStartupEventListener implements IApplicationEventListener {
+        private ScriptingWindow window;
+
+        @Override
+        public void onApplicationStartup() {
+            window = new ScriptingWindow();
+        }
+
+        @Override
+        public void onApplicationShutdown() {
+        }
+
+        public void stop() {
+            window.frame.dispose();
+        }
+    }
+}

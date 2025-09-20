@@ -52,7 +52,7 @@ import org.omegat.util.DirectoryMonitor;
  */
 public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, DirectoryMonitor.Callback {
     private static final boolean SCRIPTING_EVENTS = true;
-    private static boolean applicationStartupEventScriptsExecuted = false;
+    private boolean applicationStartupEventScriptsExecuted = false;
 
     private static final FilenameFilter FILTER;
 

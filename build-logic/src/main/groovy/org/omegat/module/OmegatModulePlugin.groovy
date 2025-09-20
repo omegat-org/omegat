@@ -1,9 +1,12 @@
 package org.omegat.module
 
+import com.github.spotbugs.snom.SpotBugsExtension
+import net.ltgt.gradle.nullaway.NullAwayExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.plugins.quality.PmdExtension
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
@@ -13,10 +16,15 @@ class OmegatModulePlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.plugins.apply('java-library')
+        project.plugins.apply('jacoco')
+        project.plugins.apply('checkstyle')
+        project.plugins.apply('pmd')
+        project.plugins.apply('com.github.spotbugs')
+        project.plugins.apply('net.ltgt.errorprone')
+        project.plugins.apply('net.ltgt.nullaway')
 
         project.repositories {
             mavenCentral()
-            mavenLocal()
         }
 
         project.configurations.configureEach { conf ->
@@ -52,13 +60,40 @@ class OmegatModulePlugin implements Plugin<Project> {
         project.java {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
-            withSourcesJar()
-            withJavadocJar()
         }
 
-        project.tasks.withType(JavaCompile).configureEach {
-            it.options.encoding = "UTF-8"
-            it.options.compilerArgs.addAll '-Xlint'
+        project.tasks.withType(JavaCompile).configureEach { javaCompile ->
+            javaCompile.options.encoding = "UTF-8"
+            javaCompile.options.compilerArgs.addAll '-Xlint'
+        }
+
+        project.dependencies {
+            // Error Prone dependencies
+            errorprone("com.google.errorprone:error_prone_core:2.40.0")
+            errorprone("com.uber.nullaway:nullaway:0.12.7")
+        }
+
+        project.extensions.configure(SpotBugsExtension) { spotbugs ->
+            spotbugs.extraArgs = ['-longBugCodes']
+            spotbugs.jvmArgs = ['-Duser.language=en']
+            spotbugs.toolVersion = '4.9.3'
+            def excludeFile = project.rootProject.file('config/spotbugs/exclude.xml')
+            if (excludeFile.exists()) {
+                spotbugs.excludeFilter = excludeFile
+            }
+        }
+
+        project.extensions.configure(PmdExtension) { pmd ->
+            pmd.toolVersion = '6.38.0'
+            def ruleset = project.rootProject.file('config/pmd/ruleset.xml')
+            if (ruleset.exists()) {
+                pmd.ruleSetFiles = project.files(ruleset)
+            }
+            pmd.consoleOutput = true
+        }
+
+        project.extensions.configure(NullAwayExtension) { nullaway ->
+            nullaway.annotatedPackages.add("org.omegat")
         }
 
         configureTestEnvironment(project)

@@ -1,5 +1,4 @@
 plugins {
-    id 'org.omegat.java-conventions'
     id 'org.omegat.module'
 }
 

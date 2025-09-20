@@ -43,12 +43,12 @@ public class StandardScriptEditor extends AbstractScriptEditor {
 
     @Override
     public void setHighlighting(String extension) {
-
+        // No highlighting for now.
     }
 
     @Override
     public void enhanceMenu(JMenuBar menubar) {
-
+        // No menu enhancement for now.
     }
 
     @Override

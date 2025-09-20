@@ -3,8 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2015 Aaron Madlon-Kay
-               2025 Hiroshi Miura
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,42 +22,25 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-
 package org.omegat.gui.scripting;
 
-import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IApplicationEventListener;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
-/**
- * Script module entry point.
- */
-@SuppressWarnings("unused")
-public final class ScriptingModule {
+import java.util.ResourceBundle;
 
-    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
-    static ScriptingWindow window;
+public final class ScriptingUtils {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.scripting.Bundle");
+    private static final ILogger LOGGER = LoggerFactory.getLogger(ScriptingWindow.class, BUNDLE);
 
-    private ScriptingModule() {
+    private ScriptingUtils() {
     }
-
-    public static void loadPlugins() {
-        System.setProperty("omegat.debug.scripts", "true");
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-                window = new ScriptingWindow();
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
+    
+    public static String getBundleString(String key) {
+        return BUNDLE.getString(key);
     }
-
-    public static void unloadPlugins() {
-        System.setProperty("omegat.debug.scripts", "false");
-        if (window != null) {
-            window.dispose();
-        }
+    
+    public static ILogger getLogger() {
+        return LOGGER;
     }
 }

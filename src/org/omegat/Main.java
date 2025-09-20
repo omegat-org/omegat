@@ -44,6 +44,8 @@ import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -56,7 +58,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -92,9 +93,6 @@ import org.omegat.core.team2.TeamTool;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
-import org.omegat.gui.scripting.ConsoleBindings;
-import org.omegat.gui.scripting.ScriptItem;
-import org.omegat.gui.scripting.ScriptRunner;
 import org.omegat.languagetools.LanguageClassBroker;
 import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.FileUtil;
@@ -697,19 +695,19 @@ public final class Main {
             File script = new File(PARAMS.get("script"));
             Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
             if (script.isFile()) {
-                HashMap<String, Object> binding = new HashMap<>();
-                binding.put("eventType", eventType);
-
-                ConsoleBindings consoleBindigs = new ConsoleBindings();
-                binding.put(ScriptRunner.VAR_CONSOLE, consoleBindigs);
-                binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindigs);
-                binding.put(ScriptRunner.VAR_EDITOR, consoleBindigs);
-
                 try {
-                    String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
-                    Log.log(result);
-                } catch (Exception ex) {
-                    Log.log(ex);
+                    ClassLoader cl = PluginUtils.getClassLoader(PluginUtils.PluginType.MISCELLANEOUS);
+                    if (cl == null) {
+                        Log.logErrorRB("SCW_SCRIPT_LOAD_ERROR", "the plugin classloader is null");
+                        return;
+                    }
+                    Class<?> scriptingClass = cl.loadClass("org.omegat.gui.scripting.ScriptingModule");
+                    Method method = scriptingClass.getMethod("executeConsoleScript",
+                            IProjectEventListener.PROJECT_CHANGE_TYPE.class, File.class);
+                    method.invoke(null, eventType, script);
+                } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
+                         | InvocationTargetException e) {
+                    Log.log(e);
                 }
             } else {
                 Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");

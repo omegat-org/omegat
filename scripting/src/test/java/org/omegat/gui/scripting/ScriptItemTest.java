@@ -25,7 +25,6 @@
 package org.omegat.gui.scripting;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.omegat.util.LinebreakPreservingReader;
 
 import java.io.File;
@@ -37,8 +36,11 @@ import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.omegat.gui.scripting.ScriptItem.SCAN_PATTERN;
 
 public class ScriptItemTest {
@@ -63,20 +65,20 @@ public class ScriptItemTest {
      * Test for scanFileForDescription method with valid content.
      */
     @Test
-    public void testScanFileForDescriptionWithValidContent() throws IOException {
+    public void testScanFileForDescriptionWithValidContent() {
         // Arrange
-        File mockFile = Mockito.mock(File.class);
-        Mockito.when(mockFile.exists()).thenReturn(true);
-        Mockito.when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
+        File mockFile = mock(File.class);
+        when(mockFile.exists()).thenReturn(true);
+        when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
 
-        Scanner mockedScanner = Mockito.mock(Scanner.class);
+        Scanner mockedScanner = mock(Scanner.class);
         String fileContent = ":name = Test Script :description = This is a test script";
         Pattern pattern = Pattern.compile(SCAN_PATTERN);
         Matcher m = pattern.matcher(fileContent);
         assertTrue(m.find());
 
-        Mockito.when(mockedScanner.findInLine(SCAN_PATTERN)).thenReturn("");
-        Mockito.when(mockedScanner.match()).thenReturn(m);
+        when(mockedScanner.findInLine(SCAN_PATTERN)).thenReturn("");
+        when(mockedScanner.match()).thenReturn(m);
 
         ScriptItem scriptItem = new ScriptItem(mockFile) {
             @Override
@@ -103,18 +105,18 @@ public class ScriptItemTest {
     @Test
     public void testScanFileForDescriptionWithInvalidContent() throws IOException {
         // Arrange
-        File mockFile = Mockito.mock(File.class);
-        Mockito.when(mockFile.exists()).thenReturn(true);
-        Mockito.when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
+        File mockFile = mock(File.class);
+        when(mockFile.exists()).thenReturn(true);
+        when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
 
-        Scanner mockedScanner = Mockito.mock(Scanner.class);
+        Scanner mockedScanner = mock(Scanner.class);
         String fileContent = "some random content without metadata";
         Pattern pattern = Pattern.compile(SCAN_PATTERN);
         Matcher m = pattern.matcher(fileContent);
         assertFalse(m.find());
 
-        Mockito.when(mockedScanner.findInLine(SCAN_PATTERN)).thenReturn("");
-        Mockito.when(mockedScanner.match()).thenReturn(m);
+        when(mockedScanner.findInLine(SCAN_PATTERN)).thenReturn("");
+        when(mockedScanner.match()).thenReturn(m);
 
         ScriptItem scriptItem = new ScriptItem(mockFile) {
             @Override
@@ -131,7 +133,7 @@ public class ScriptItemTest {
         scriptItem.scanFileForDescription(mockFile);
 
         // Assert
-        assertEquals(null, scriptItem.getScriptName());
+        assertNull(scriptItem.getScriptName());
         assertEquals("", scriptItem.getDescription());
     }
 
@@ -141,32 +143,33 @@ public class ScriptItemTest {
     @Test
     public void testGetTextWithValidFile() throws IOException {
         // Arrange
-        File mockFile = Mockito.mock(File.class);
+        File mockFile = mock(File.class);
         String expectedContent = "print('Hello from file!')";
 
-        Mockito.when(mockFile.getName()).thenReturn("testScript.txt");
-        Mockito.when(mockFile.exists()).thenReturn(true);
-        Mockito.when(mockFile.getPath()).thenReturn("testScript.txt");
-        Mockito.when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
+        when(mockFile.getName()).thenReturn("testScript.txt");
+        when(mockFile.exists()).thenReturn(true);
+        when(mockFile.getPath()).thenReturn("testScript.txt");
+        when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
 
-        LinebreakPreservingReader mockedReader = Mockito.mock(LinebreakPreservingReader.class);
-        Mockito.when(mockedReader.readLine())
-                .thenReturn(expectedContent)
-                .thenReturn(null);
-        Mockito.when(mockedReader.getLinebreak()).thenReturn("");
+        try (LinebreakPreservingReader mockedReader = mock(LinebreakPreservingReader.class)) {
+            when(mockedReader.readLine())
+                    .thenReturn(expectedContent)
+                    .thenReturn(null);
+            when(mockedReader.getLinebreak()).thenReturn("");
 
-        ScriptItem scriptItem = new ScriptItem(mockFile) {
-            @Override
-            LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) {
-                return mockedReader;
-            }
-        };
+            ScriptItem scriptItem = new ScriptItem(mockFile) {
+                @Override
+                LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) {
+                    return mockedReader;
+                }
+            };
 
-        // Act
-        String result = scriptItem.getText();
+            // Act
+            String result = scriptItem.getText();
 
-        // Assert
-        assertEquals(expectedContent, result);
+            // Assert
+            assertEquals(expectedContent, result);
+        }
     }
 
     /**
@@ -175,9 +178,9 @@ public class ScriptItemTest {
     @Test
     public void testGetTextWithNonexistentFile() {
         // Arrange
-        File mockFile = Mockito.mock(File.class);
-        Mockito.when(mockFile.exists()).thenReturn(false);
-        Mockito.when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
+        File mockFile = mock(File.class);
+        when(mockFile.exists()).thenReturn(false);
+        when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
 
         ScriptItem scriptItem = new ScriptItem(mockFile) {
             @Override
@@ -195,8 +198,8 @@ public class ScriptItemTest {
     @Test
     public void testGetTextWithIOException() {
         // Arrange
-        File mockFile = Mockito.mock(File.class);
-        Mockito.when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
+        File mockFile = mock(File.class);
+        when(mockFile.getParentFile()).thenReturn(new File("/foo/"));
 
         ScriptItem scriptItem = new ScriptItem(mockFile) {
             @Override

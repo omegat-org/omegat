@@ -29,6 +29,7 @@ package org.omegat.gui.scripting.ui;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -61,59 +62,60 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
+
+import org.omegat.gui.scripting.ScriptingUtils;
 import org.omegat.gui.scripting.ScriptingWindow;
-import org.omegat.util.Java8Compat;
-import org.omegat.util.OStrings;
+
 import org.openide.awt.Mnemonics;
 
 @SuppressWarnings("serial")
 public class RichScriptEditor extends AbstractScriptEditor implements SearchListener {
 
-    private RSyntaxTextArea m_scriptEditor;
-    private CollapsibleSectionPanel m_csp;
-    private FindDialog m_findDialog;
-    private ReplaceDialog m_replaceDialog;
-    private FindToolBar m_findToolBar;
-    private ReplaceToolBar m_replaceToolBar;
-    private ScriptingWindow m_scriptingWindow;
+    private RSyntaxTextArea scriptEditor;
+    private CollapsibleSectionPanel csp;
+    private FindDialog findDialog;
+    private ReplaceDialog replaceDialog;
+    private FindToolBar findToolBar;
+    private ReplaceToolBar replaceToolBar;
+    private ScriptingWindow scriptingWindow;
 
     @Override
     public JTextArea getTextArea() {
-        return m_scriptEditor;
+        return scriptEditor;
     }
 
     @Override
     public void setHighlighting(String extension) {
         switch (extension) {
         case "groovy":
-            m_scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
+            scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
             break;
         case "js":
-            m_scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+            scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
             break;
         case "py":
-            m_scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
+            scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
             break;
         default:
-            m_scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
+            scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
         }
 
     }
 
     public void initSearchDialogs() {
 
-        m_findDialog = new FindDialog(m_scriptingWindow.getParent(), this);
-        m_replaceDialog = new ReplaceDialog(m_scriptingWindow.getParent(), this);
+        findDialog = new FindDialog(scriptingWindow.frame, this);
+        replaceDialog = new ReplaceDialog(scriptingWindow.frame, this);
 
         // This ties the properties of the two dialogs together (match case, regex, etc.).
-        SearchContext context = m_findDialog.getSearchContext();
-        m_replaceDialog.setSearchContext(context);
+        SearchContext context = findDialog.getSearchContext();
+        replaceDialog.setSearchContext(context);
 
         // Create tool bars and tie their search contexts together also.
-        m_findToolBar = new FindToolBar(this);
-        m_findToolBar.setSearchContext(context);
-        m_replaceToolBar = new ReplaceToolBar(this);
-        m_replaceToolBar.setSearchContext(context);
+        findToolBar = new FindToolBar(this);
+        findToolBar.setSearchContext(context);
+        replaceToolBar = new ReplaceToolBar(this);
+        replaceToolBar.setSearchContext(context);
     }
 
     @Override
@@ -124,55 +126,55 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
         switch (type) {
         case MARK_ALL:
-            SearchEngine.markAll(m_scriptEditor, context);
+            result = SearchEngine.markAll(scriptEditor, context);
             break;
         case FIND:
-            result = SearchEngine.find(m_scriptEditor, context);
+            result = SearchEngine.find(scriptEditor, context);
             if (!result.wasFound()) {
-                UIManager.getLookAndFeel().provideErrorFeedback(m_scriptEditor);
+                UIManager.getLookAndFeel().provideErrorFeedback(scriptEditor);
             }
             break;
         case REPLACE:
-            result = SearchEngine.replace(m_scriptEditor, context);
+            result = SearchEngine.replace(scriptEditor, context);
             if (!result.wasFound()) {
-                UIManager.getLookAndFeel().provideErrorFeedback(m_scriptEditor);
+                UIManager.getLookAndFeel().provideErrorFeedback(scriptEditor);
             }
             break;
         case REPLACE_ALL:
-            result = SearchEngine.replaceAll(m_scriptEditor, context);
+            result = SearchEngine.replaceAll(scriptEditor, context);
             JOptionPane.showMessageDialog(null, result.getCount() + " occurrences replaced.");
             break;
         default:
-            throw new IllegalArgumentException("Unexpected SearchEvent value.");
+            throw new IllegalStateException("Unknown search event type: " + type);
         }
     }
 
     private class ShowReplaceDialogAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (m_findDialog.isVisible()) {
-                m_findDialog.setVisible(false);
+            if (findDialog.isVisible()) {
+                findDialog.setVisible(false);
             }
-            m_replaceDialog.setVisible(true);
+            replaceDialog.setVisible(true);
         }
     }
 
     private class GoToLineAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (m_findDialog.isVisible()) {
-                m_findDialog.setVisible(false);
+            if (findDialog.isVisible()) {
+                findDialog.setVisible(false);
             }
-            if (m_replaceDialog.isVisible()) {
-                m_replaceDialog.setVisible(false);
+            if (replaceDialog.isVisible()) {
+                replaceDialog.setVisible(false);
             }
-            GoToDialog dialog = new GoToDialog(m_scriptingWindow.getParent());
-            dialog.setMaxLineNumberAllowed(m_scriptEditor.getLineCount());
+            GoToDialog dialog = new GoToDialog(scriptingWindow.frame);
+            dialog.setMaxLineNumberAllowed(scriptEditor.getLineCount());
             dialog.setVisible(true);
             int line = dialog.getLineNumber();
             if (line > 0) {
                 try {
-                    m_scriptEditor.setCaretPosition(m_scriptEditor.getLineStartOffset(line - 1));
+                    scriptEditor.setCaretPosition(scriptEditor.getLineStartOffset(line - 1));
                 } catch (BadLocationException ble) { // Never happens
-                    UIManager.getLookAndFeel().provideErrorFeedback(m_scriptEditor);
+                    UIManager.getLookAndFeel().provideErrorFeedback(scriptEditor);
                     ble.printStackTrace();
                 }
             }
@@ -182,10 +184,10 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
     private class ShowFindDialogAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (m_replaceDialog.isVisible()) {
-                m_replaceDialog.setVisible(false);
+            if (replaceDialog.isVisible()) {
+                replaceDialog.setVisible(false);
             }
-            m_findDialog.setVisible(true);
+            findDialog.setVisible(true);
         }
     }
 
@@ -193,36 +195,39 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
     public void enhanceMenu(JMenuBar mb) {
         JMenu menu = new JMenu();
 
-        Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_EDIT"));
+        Mnemonics.setLocalizedText(menu, ScriptingUtils.getBundleString("SCW_MENU_EDIT"));
 
         JMenuItem item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_FIND"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, Java8Compat.getMenuShortcutKeyMaskEx()));
+        Mnemonics.setLocalizedText(item, ScriptingUtils.getBundleString("SCW_MENU_FIND"));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowFindDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_REPLACE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, Java8Compat.getMenuShortcutKeyMaskEx()));
+        Mnemonics.setLocalizedText(item, ScriptingUtils.getBundleString("SCW_MENU_REPLACE"));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowReplaceDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_GOTO_LINE"));
-        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Java8Compat.getMenuShortcutKeyMaskEx()));
+        Mnemonics.setLocalizedText(item, ScriptingUtils.getBundleString("SCW_MENU_GOTO_LINE"));
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         item.addActionListener(new GoToLineAction());
         menu.add(item);
 
         menu.addSeparator();
 
-        int metaShiftMask = Java8Compat.getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK;
+        int metaShiftMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK;
         KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F, metaShiftMask);
-        Action a = m_csp.addBottomComponent(ks, m_findToolBar);
-        a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_FIND_BAR"));
+        Action a = csp.addBottomComponent(ks, findToolBar);
+        a.putValue(Action.NAME, ScriptingUtils.getBundleString("SCW_MENU_SHOW_FIND_BAR"));
         menu.add(new JMenuItem(a));
         ks = KeyStroke.getKeyStroke(KeyEvent.VK_G, metaShiftMask);
-        a = m_csp.addBottomComponent(ks, m_replaceToolBar);
-        a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_REPLACE_BAR"));
+        a = csp.addBottomComponent(ks, replaceToolBar);
+        a.putValue(Action.NAME, ScriptingUtils.getBundleString("SCW_MENU_SHOW_REPLACE_BAR"));
         menu.add(new JMenuItem(a));
 
         mb.add(menu);
@@ -230,21 +235,20 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
     @Override
     public void initLayout(ScriptingWindow scriptingWindow) {
-        m_scriptingWindow = scriptingWindow;
-        m_scriptEditor = new RSyntaxTextArea();
-        m_scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, m_scriptEditor.getFont().getSize()));
+        this.scriptingWindow = scriptingWindow;
+        scriptEditor = new RSyntaxTextArea();
+        scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, scriptEditor.getFont().getSize()));
 
         CompletionProvider provider = new DefaultCompletionProvider();
         AutoCompletion ac = new AutoCompletion(provider);
-        ac.install(m_scriptEditor);
+        ac.install(scriptEditor);
 
-        m_scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
-        m_scriptEditor.setCodeFoldingEnabled(true);
-        RTextScrollPane scrollPaneEditor = new RTextScrollPane(m_scriptEditor);
-        // scrollPaneEditor.setMinimumSize(minimumSize1);
-        m_csp = new CollapsibleSectionPanel();
-        m_scriptingWindow.addContent(m_csp);
-        m_csp.add(scrollPaneEditor);
+        scriptEditor.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_GROOVY);
+        scriptEditor.setCodeFoldingEnabled(true);
+        RTextScrollPane scrollPaneEditor = new RTextScrollPane(scriptEditor);
+        csp = new CollapsibleSectionPanel();
+        this.scriptingWindow.frame.getContentPane().add(csp);
+        csp.add(scrollPaneEditor);
 
         initSearchDialogs();
 
@@ -252,7 +256,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
     @Override
     public Component getPanel() {
-        return m_csp;
+        return csp;
     }
 
 }

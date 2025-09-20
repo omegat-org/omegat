@@ -9,14 +9,12 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
+        sudo apt-get update
+        sudo apt-get install -q -y lftp
         echo "Push manuals to sourceforge project web"
         srcdir=$(system.defaultworkingdirectory)/build/docs/manual/
-        dest=$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
-        destdir=/home/project-web/omegat/htdocs/manual-snapshot/
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
-        SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e scp -r -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir
+        dest=sftp://$(SOURCEFORGE_CI_USER)@frs.sourceforge.net
+        destdir=/home/project-web/omegat/htdocs/manual/${{ parameters.omegatVersion }}-snapshot/
         target=/home/project-web/omegat/htdocs/manual-snapshot
-        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
-        cd $(system.defaultworkingdirectory)/build/docs/manual/
-        tar -czf - . | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e ssh -oStrictHostKeyChecking=no $dest "cd $destdir; tar -xzf -"
-        SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e ssh -oStrictHostKeyChecking=no $dest "rm $target && ln -s $destdir $target"
+        cmd="mkdir -p $destdir ; lcd $(system.defaultworkingdirectory)/build/docs/manual/ ; cd $destdir ; mirror --parallel=4 -Rev ; rm $target ; ln -s $destdir $target ; bye"
+        env LFTP_PASSWORD=$(SOURCEFORGE_CI_PASS) lftp -oStrictHostKeyChecking=no --env-password -e "$cmd" $dest

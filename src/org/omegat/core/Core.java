@@ -219,7 +219,7 @@ public final class Core {
     @Deprecated(since = "6.1.0", forRemoval = true)
     @SuppressWarnings("unused")
     public static void initializeGUI(ClassLoader cl, Map<String, String> params) throws Exception {
-        initializeGUI(params);
+        initializeGUI();
     }
 
     /**

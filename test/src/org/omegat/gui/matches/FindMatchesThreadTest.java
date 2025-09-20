@@ -81,7 +81,7 @@ public class FindMatchesThreadTest {
     @Before
     public void setUp() throws Exception {
         TestCoreState.resetState();
-        Core.initializeConsole(new TreeMap<>());
+        Core.initializeConsole();
         TestPreferencesInitializer.init();
         Preferences.setPreference(Preferences.EXT_TMX_SHOW_LEVEL2, false);
         Preferences.setPreference(Preferences.EXT_TMX_USE_SLASH, false);

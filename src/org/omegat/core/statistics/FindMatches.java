@@ -573,7 +573,11 @@ public class FindMatches {
     Token[] tokenizeStem(String str) {
         Token[] tokens = tokenizeStemCache.get(str);
         if (tokens == null) {
-            tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING);
+            if (Preferences.isPreference(Preferences.MATCHES_STEMMING_FULL)) {
+                tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING_FULL);
+            } else {
+                tokens = tok.tokenizeWords(str, ITokenizer.StemmingMode.MATCHING);
+            }
             tokenizeStemCache.put(str, tokens);
         }
         return tokens;

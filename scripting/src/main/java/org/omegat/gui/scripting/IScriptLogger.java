@@ -3,10 +3,9 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik
-               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
-               2015 Yu Tang, Aaron Madlon-Kay
+ Copyright (C) 2011 Briac Pilpre
+               2013 Alex Buloichik, Yu Tang
+               2015 Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,17 +26,20 @@
  **************************************************************************/
 package org.omegat.gui.scripting;
 
-import java.awt.Component;
+/**
+ * Used to display results in the scripting window
+ *
+ * @author Briac Pilpre (briacp@gmail.com)
+ * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Yu Tang
+ * @author Aaron Madlon-Kay
+ */
+@SuppressWarnings("unused")
+public interface IScriptLogger {
 
-import javax.swing.JMenuBar;
-import javax.swing.JTextArea;
+    void print(Object o);
 
-@SuppressWarnings("serial")
-public abstract class AbstractScriptEditor extends JTextArea {
-    public abstract void setHighlighting(String extension);
-    public abstract void enhanceMenu(JMenuBar mb);
-    public abstract void initLayout(ScriptingWindow scriptingWindow);
-    public abstract Component getPanel();
-    // XXX setText(String s) does not seem to work directly on the subclasses ?
-    public abstract JTextArea getTextArea();
+    void println(Object o);
+
+    void clear();
 }

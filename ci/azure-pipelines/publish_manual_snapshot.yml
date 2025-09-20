@@ -1,5 +1,6 @@
 parameters:
   condition: false
+  omegatVersion: "6.1.0"
 
 steps:
   - task: Bash@3
@@ -14,3 +15,8 @@ steps:
         destdir=/home/project-web/omegat/htdocs/manual-snapshot/
         echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
         SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e scp -r -s -oStrictHostKeyChecking=no $srcdir/* $dest:$destdir
+        target=/home/project-web/omegat/htdocs/manual-snapshot
+        echo "mkdir $destdir" | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e sftp -oStrictHostKeyChecking=no $dest || true
+        cd $(system.defaultworkingdirectory)/build/docs/manual/
+        tar -czf - . | SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e ssh -oStrictHostKeyChecking=no $dest "cd $destdir; tar -xzf -"
+        SSHPASS=$(SOURCEFORGE_CI_PASS) sshpass -e ssh -oStrictHostKeyChecking=no $dest "rm $target && ln -s $destdir $target"

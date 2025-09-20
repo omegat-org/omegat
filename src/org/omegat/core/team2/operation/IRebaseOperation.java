@@ -3,7 +3,8 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2025 Hiroshi Miura
+ Copyright (C) 2016 Alex Buloichik
+               2023-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -22,56 +23,43 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.main;
 
-import org.omegat.util.gui.MenuExtender;
+package org.omegat.core.team2.operation;
 
-import javax.swing.JMenu;
+import java.io.File;
 
-public class MainMenuStub implements IMainMenu {
+/**
+ * Interface for rebase operations that replaces RebaseAndCommit.IRebase
+ * with better encapsulation and state management.
+ */
+public interface IRebaseOperation {
+    /**
+     * Parse BASE version of file for rebase operation.
+     */
+    void parseBaseFile(File file) throws Exception;
 
-    @Override
-    public JMenu getToolsMenu() {
-        return null;
-    }
+    /**
+     * Parse HEAD version of file for rebase operation.
+     */
+    void parseHeadFile(File file) throws Exception;
 
-    @Override
-    public JMenu getProjectMenu() {
-        return null;
-    }
+    /**
+     * Perform rebase and save result to output file.
+     */
+    void rebaseAndSave(File out) throws Exception;
 
-    @Override
-    public JMenu getOptionsMenu() {
-        return null;
-    }
+    /**
+     * Reload project data from the resulted file.
+     */
+    void reload(File file) throws Exception;
 
-    @Override
-    public JMenu getMachineTranslationMenu() {
-        return null;
-    }
-    @Override
-    public JMenu getGlossaryMenu() {
-        return null;
-    }
-    @Override
-    public JMenu getAutoCompletionMenu() {
-        return null;
-    }
+    /**
+     * Generate commit comment for this operation.
+     */
+    String getCommentForCommit();
 
-    @Override
-    public JMenu getHelpMenu() {
-        return null;
-    }
-
-    @Override
-    public JMenu getMenu(final MenuExtender.MenuKey marker) {
-        return null;
-    }
-
-    private JMenu getGotoMenu() {
-        return null;
-    }
-    @Override
-    public void invokeAction(String action, int modifiers) {
-    }
+    /**
+     * Get charset for file encoding conversion.
+     */
+    String getFileCharset(File file) throws Exception;
 }

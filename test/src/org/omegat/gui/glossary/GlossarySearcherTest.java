@@ -53,9 +53,78 @@ import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 
 /**
+ * Tests GlossarySearcher.
+ *
  * @author Hiroshi Miura
  */
 public class GlossarySearcherTest extends TestCore {
+
+    List<GlossaryEntry> glossarySearcherCommon(String sourceText, ITokenizer tok, Language srcLang,
+                                                       Language trLang, List<GlossaryEntry> entries) {
+        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
+        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
+        GlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, trLang, false);
+        return searcher.searchSourceMatches(ste, entries);
+    }
+
+    static class MockGlossarySearcher extends GlossarySearcher {
+        MockGlossarySearcher(ITokenizer tok, Language srcLang, Language trLang, boolean merge) {
+            super(tok, srcLang, trLang, merge);
+        }
+
+        // mocking methods to change behavior without Preferences values.
+
+        private boolean doGlossaryStemming = true;
+        void enableGlossaryStemming(boolean enable) {
+            doGlossaryStemming = enable;
+        }
+
+        @Override
+        boolean isGlossaryStemming() {
+            return doGlossaryStemming;
+        }
+
+        private boolean requireSimilarCase = Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE_DEFAULT;
+        void setRequireSimilarCase(boolean requireSimilarCase) {
+            this.requireSimilarCase = requireSimilarCase;
+        }
+
+        @Override
+        boolean isRequireSimilarCase() {
+            return requireSimilarCase;
+        }
+
+        private boolean notExactMatch = false;
+        public void setGlossaryNotExactMatch(boolean b) {
+            this.notExactMatch = b;
+        }
+
+        @Override
+        boolean isGlossaryNotExactMatch() {
+            return notExactMatch;
+        }
+
+        private boolean doGlossarySortBySrcLength = false;
+        void enableGlossarySortSrcLength(boolean enable) {
+            doGlossarySortBySrcLength = enable;
+        }
+
+        @Override
+        boolean isGlossarySortBySrcLength() {
+            return doGlossarySortBySrcLength;
+        }
+
+        private boolean doGlossarySortByLength = false;
+        void enableGlossarySortLength(boolean enable) {
+            doGlossarySortByLength = enable;
+        }
+
+        @Override
+        boolean isGlossarySortByLength() {
+            return doGlossarySortByLength;
+        }
+    }
+
     @Test
     public void testGlossarySearcherEnglish() {
         String sourceText = "source";
@@ -278,15 +347,15 @@ public class GlossarySearcherTest extends TestCore {
         final Collator srcLangCollator = Collator.getInstance(srcLang.getLocale());
         final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
         ITokenizer tok = new DefaultTokenizer();
-        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, targetLang, false);
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, targetLang, false);
         List<GlossaryEntry> entries = new ArrayList<>();
         entries.add(new GlossaryEntry("dog", "doggy", "cdog", false, null));
         entries.add(new GlossaryEntry("cat", "catty", "ccat", false, null));
         entries.add(new GlossaryEntry("cat", "mikeneko", "ccat", false, null));
         entries.add(new GlossaryEntry("zzz", "zzz", "czzz", true, null));
         entries.add(new GlossaryEntry("horse", "catty", "chorse", false, null));
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false);
+        searcher.enableGlossarySortLength(true);
+        searcher.enableGlossarySortSrcLength(false);
         entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
@@ -295,7 +364,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("catty", entries.get(2).getLocText());
         assertEquals("dog", entries.get(3).getSrcText());
         assertEquals("horse", entries.get(4).getSrcText());
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+        searcher.enableGlossarySortLength(false);
         entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
@@ -304,7 +373,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("mikeneko", entries.get(2).getLocText());
         assertEquals("dog", entries.get(3).getSrcText());
         assertEquals("horse", entries.get(4).getSrcText());
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
+        searcher.enableGlossarySortSrcLength(true);
         entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("zzz", entries.get(0).getSrcText());
         assertEquals("cat", entries.get(1).getSrcText());
@@ -322,7 +391,7 @@ public class GlossarySearcherTest extends TestCore {
         final Collator srcLangCollator = Collator.getInstance(lang.getLocale());
         final Collator targetLangCollator = Collator.getInstance(targetLang.getLocale());
         ITokenizer tok = new DefaultTokenizer();
-        GlossarySearcher searcher = new GlossarySearcher(tok, lang, targetLang, false);
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tok, lang, targetLang, false);
         List<GlossaryEntry> entries = new ArrayList<>();
         entries.add(new GlossaryEntry("向上", "enhance", "", false, null));
         entries.add(new GlossaryEntry("向", "direct", "", false, null));
@@ -331,8 +400,8 @@ public class GlossarySearcherTest extends TestCore {
         entries.add(new GlossaryEntry("トヨタ自動車", "toyota motors", "", false, null));
         entries.add(new GlossaryEntry("トヨタ", "toyota", "", false, null));
         entries.add(new GlossaryEntry("さくら", "cherry blossom", "", false, null));
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, true);
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, false);
+        searcher.enableGlossarySortLength(true);
+        searcher.enableGlossarySortSrcLength(false);
         entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("さくら", entries.get(0).getSrcText());
         assertEquals("トヨタ", entries.get(1).getSrcText());
@@ -341,7 +410,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("向上", entries.get(4).getSrcText());
         assertEquals("up to", entries.get(5).getLocText());
         assertEquals("on", entries.get(6).getLocText());
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_LENGTH, false);
+        searcher.enableGlossarySortLength(false);
         entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("cherry blossom", entries.get(0).getLocText());
         assertEquals("toyota", entries.get(1).getLocText());
@@ -350,7 +419,7 @@ public class GlossarySearcherTest extends TestCore {
         assertEquals("enhance", entries.get(4).getLocText());
         assertEquals("on", entries.get(5).getLocText());
         assertEquals("up to", entries.get(6).getLocText());
-        Preferences.setPreference(Preferences.GLOSSARY_SORT_BY_SRC_LENGTH, true);
+        searcher.enableGlossarySortSrcLength(true);
         entries = searcher.sortGlossaryEntries(srcLangCollator, targetLangCollator, entries);
         assertEquals("toyota motors", entries.get(1).getLocText());
         assertEquals("toyota", entries.get(2).getLocText());
@@ -389,14 +458,6 @@ public class GlossarySearcherTest extends TestCore {
         });
     }
 
-    private List<GlossaryEntry> glossarySearcherCommon(String sourceText, ITokenizer tok, Language srcLang,
-            Language trLang, List<GlossaryEntry> entries) {
-        EntryKey key = new EntryKey("file", sourceText, "id", "prev", "next", "path");
-        SourceTextEntry ste = new SourceTextEntry(key, 1, new String[0], sourceText, Collections.emptyList());
-        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
-        return searcher.searchSourceMatches(ste, entries);
-    }
-
     @Test
     public void testSearchSourceExactMatch() {
         String sourceText = "exact match";
@@ -432,20 +493,18 @@ public class GlossarySearcherTest extends TestCore {
         ITokenizer tok = new DefaultTokenizer();
         setupProject(srcLang);
 
-        Preferences.setPreference(Preferences.GLOSSARY_NOT_EXACT_MATCH, true);
-
         List<GlossaryEntry> entries = Collections
                 .singletonList(new GlossaryEntry(sourceText, translation, comment, true, null));
 
         SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", segmentText, "id", null, null, null),
                 1, null, segmentText, Collections.emptyList());
 
-        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, trLang, false);
+        searcher.setGlossaryNotExactMatch(true);
         List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
 
         assertEquals(1, result.size());
         assertEquals(sourceText, result.get(0).getSrcText());
-        Preferences.setPreference(Preferences.GLOSSARY_NOT_EXACT_MATCH, false);
     }
 
     @Test
@@ -459,19 +518,17 @@ public class GlossarySearcherTest extends TestCore {
         ITokenizer tok = new DefaultTokenizer();
         setupProject(srcLang);
 
-        Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, true);
-
         List<GlossaryEntry> entries = Collections
                 .singletonList(new GlossaryEntry(sourceText, translation, comment, true, null));
 
         SourceTextEntry ste = new SourceTextEntry(new EntryKey("file", segmentText, "id", null, null, null),
                 1, null, segmentText, Collections.emptyList());
 
-        GlossarySearcher searcher = new GlossarySearcher(tok, srcLang, trLang, false);
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tok, srcLang, trLang, false);
+        searcher.setRequireSimilarCase(true);
         List<GlossaryEntry> result = searcher.searchSourceMatches(ste, entries);
 
         assertTrue(result.isEmpty());
-        Preferences.setPreference(Preferences.GLOSSARY_REQUIRE_SIMILAR_CASE, false);
     }
 
     @Test
@@ -703,4 +760,69 @@ public class GlossarySearcherTest extends TestCore {
         assertFalse(matchingTokens.isEmpty());
         assertEquals("存在", matchingTokens.get(0)[0].getTextFromString(sourceText));
     }
+
+    @Test
+    public void testTokenizeWithMultipleWordsNoStemming() {
+        String input = "Hello, world! This is a test.";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("pl");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
+        searcher.enableGlossaryStemming(false);
+        Token[] result = searcher.tokenize(input);
+
+        assertEquals(9, result.length);
+        assertEquals("Hello", result[0].getTextFromString(input));
+        assertEquals(",", result[1].getTextFromString(input));
+        assertEquals("world", result[2].getTextFromString(input));
+        assertEquals("!", result[3].getTextFromString(input));
+        assertEquals("This", result[4].getTextFromString(input));
+        assertEquals("is", result[5].getTextFromString(input));
+        assertEquals("a", result[6].getTextFromString(input));
+        assertEquals("test", result[7].getTextFromString(input));
+        assertEquals(".", result[8].getTextFromString(input));
+    }
+
+    @Test
+    public void testTokenizeWithEmptyStringNoStemming() {
+        String input = "";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("pl");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
+        searcher.enableGlossaryStemming(false);
+        Token[] result = searcher.tokenize(input);
+
+        assertEquals(0, result.length);
+    }
+
+    @Test
+    public void testTokenizeWithWhitespaceNoStemming() {
+        String input = "     ";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("pl");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
+        searcher.enableGlossaryStemming(false);
+        Token[] result = searcher.tokenize(input);
+
+        assertEquals(0, result.length);
+    }
+
+    @Test
+    public void testTokenizeWithSpecialCharactersNoStemming() {
+        String input = "!@#$%^&*()-_=+[]{}|;:',.<>?";
+        Language srcLang = new Language("en");
+        Language trgLang = new Language("pl");
+        ITokenizer tokenizer = new DefaultTokenizer();
+        MockGlossarySearcher searcher = new MockGlossarySearcher(tokenizer, srcLang, trgLang, false);
+        searcher.enableGlossaryStemming(false);
+        Token[] result = searcher.tokenize(input);
+
+        assertEquals(27, result.length);
+        for (int i = 0; i < 27; i++) {
+            assertEquals(String.valueOf(input.charAt(i)), result[i].getTextFromString(input));
+        }
+    }
+
 }

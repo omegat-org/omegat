@@ -479,29 +479,8 @@ processResources {
     }
 }
 
-def manualLangs = project.property("org.omegat.manualLangs").split(',')
-manualLangs.each { lang ->
-    makeDocumentationTasks(lang)
-}
-
-def firstStepLangs = project.property("org.omegat.firstStepLangs").split(',')
-firstStepLangs.each { lang ->
-    makeFirstStepTask(lang)
-}
-
 // E.g. when doing `build`, run checks before making distfiles
 assemble.mustRunAfter check
-
-remotes {
-    sourceforgeWeb {
-        host = 'web.sourceforge.net'
-        user = hasProperty('sourceforgeWebUser') ? getProperty('sourceforgeWebUser') : ''
-        password = hasProperty('sourceforgeWebPassword') ? getProperty('sourceforgeWebPassword') : ''
-        agent = true
-    }
-}
-publishAtomically(name: 'webManual', sourceTask: manualHtmls)
-publishAtomically(name: 'javadoc', sourceTask: javadoc)
 
 allprojects {
     afterEvaluate {

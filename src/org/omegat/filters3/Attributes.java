@@ -25,6 +25,8 @@
 
 package org.omegat.filters3;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +36,7 @@ import java.util.List;
  * @author Maxym Mykhalchuk
  */
 public class Attributes {
-    List<Attribute> list = new ArrayList<Attribute>();
+    List<Attribute> list = new ArrayList<>();
 
     /** Number of attributes. */
     public int size() {
@@ -58,9 +60,8 @@ public class Attributes {
      *            attribute name, case insensitive
      * @return attribute value, or null if not found
      */
-    public String getValueByName(String attrName) {
-        for (int i = 0; i < list.size(); i++) {
-            Attribute oneAttribute = list.get(i);
+    public @Nullable String getValueByName(String attrName) {
+        for (Attribute oneAttribute : list) {
             if (attrName.equalsIgnoreCase(oneAttribute.getName())) {
                 return oneAttribute.getValue();
             }
@@ -72,6 +73,7 @@ public class Attributes {
      * Returns a string representation of the list of attributes. '
      * name1="value1" name2="value2" ...'
      */
+    @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();
         for (Attribute attr : list) {

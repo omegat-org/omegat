@@ -61,6 +61,7 @@ import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
+import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
@@ -109,6 +110,21 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
         openSampleProject(projectPath);
         assertTrue("Segment properties are not loaded.", latch.await(timeout, TimeUnit.SECONDS));
+    }
+
+    /**
+     * Open project from the specified path and wait until the machineTranslation is loaded.
+     */
+    protected void openSampleProjectWaitMachineTranslation(Path projectPath) throws Exception {
+        MachineTranslateTextArea machineTranslateTextArea = (MachineTranslateTextArea) Core.getMachineTranslatePane();
+        CountDownLatch latch = new CountDownLatch(1);
+        machineTranslateTextArea.addPropertyChangeListener("displayed", evt -> {
+            if (evt.getNewValue() != null && !evt.getNewValue().equals(Collections.emptyList())) {
+                latch.countDown();
+            }
+        });
+        openSampleProject(projectPath);
+        assertTrue("MachineTranslation is not loaded.", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**
@@ -292,27 +308,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         window.show();
     }
 
-    /**
-     * Initialize OmegaT Core startup only once.
-     * @throws Exception when the error occurred.
-     */
-    protected void initialize() throws Exception { 
-        Path tmp = Files.createTempDirectory("omegat");
-        FileUtils.forceDeleteOnExit(tmp.toFile());
-        RuntimePreferences.setConfigDir(tmp.toString());
-        //
-        TestMainInitializer.initClassloader();
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
-        // should be called after RuntimePrefereces.setConfigDir
-        Preferences.init();
-        Preferences.initFilters();
-        Preferences.initSegmentation();
-        // should be called after Preferences.init
-        TestCoreState.getInstance().setProject(new NotLoadedProject());
-        TestCoreState.initAutoSave(autoSave);
-    }
-
     static IAutoSave autoSave = new IAutoSave() {
         @Override
         public void enable() {
@@ -393,7 +388,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
 
         // Initialize classloader and plugins
         TestMainInitializer.initClassloader();
-        PluginUtils.loadPlugins(Collections.emptyMap());
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
 
         // Initialize preferences (must be after RuntimePreferences.setConfigDir)

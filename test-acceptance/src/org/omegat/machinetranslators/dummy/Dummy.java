@@ -62,7 +62,7 @@ public class Dummy extends BaseCachedTranslate {
     }
 
     @Override
-    public boolean isConfigurable() {
-        return false;
+    public boolean isEnabled() {
+        return true;
     }
 }

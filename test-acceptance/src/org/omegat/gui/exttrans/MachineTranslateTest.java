@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2024 Hiroshi Miura
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,24 +23,25 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat;
+package org.omegat.gui.exttrans;
 
-import javax.swing.UIManager;
+import org.junit.Test;
+import org.omegat.gui.main.TestCoreGUI;
 
-import org.omegat.filters2.master.PluginUtils;
-import org.omegat.machinetranslators.dummy.Dummy;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import java.util.Collections;
+import static org.junit.Assert.assertNotNull;
 
-public final class TestMainInitializer {
+public class MachineTranslateTest extends TestCoreGUI {
 
-    private TestMainInitializer() {
+    private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
+
+    @Test
+    public void testGlossarySearch() throws Exception {
+        // load project
+        openSampleProjectWaitMachineTranslation(PROJECT_PATH);
+        robot().waitForIdle();
+        assertNotNull(window);
     }
-
-    public static void initClassloader() {
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        Dummy.loadPlugins();
-        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
-    }
-
 }

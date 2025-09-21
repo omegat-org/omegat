@@ -795,23 +795,26 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     /**
-     * Returns whether the tag is content based.
+     * Determines whether a tag should be treated as content-based.
      *
-     * @param tag
-     *            A tag
-     * @return <code>true</code> or <code>false</false>
+     * @param tag The XML tag name to evaluate
+     * @param atts The tag's attributes, or null if not available
+     * @return {@code true} if the tag should be treated as content-based, {@code false} otherwise
      */
     private boolean isContentBasedTag(String tag, org.omegat.filters3.Attributes atts) {
+        // Check if tag is directly defined as content-based in the dialect
         if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().containsKey(tag)) {
             return true;
-        } else {
-            if (atts == null) {
-                if (tag.equals(intacttagName)) {
-                    atts = intacttagAttributes; // Restore attributes
-                }
-            }
-            return dialect.validateContentBasedTag(tag, atts);
         }
+
+        // Handle special case for intact tag with null attributes
+        if (atts == null && tag.equals(intacttagName)) {
+            // Restore attributes for validation
+            return dialect.validateContentBasedTag(tag, intacttagAttributes);
+        }
+
+        // For normal case, validate with the provided attributes
+        return atts != null && dialect.validateContentBasedTag(tag, atts);
     }
 
     /**

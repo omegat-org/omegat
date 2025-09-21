@@ -32,6 +32,7 @@ package org.omegat.filters3;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.TranslationException;
@@ -99,7 +100,7 @@ public class Entry {
         return lastGood;
     }
 
-    private Text textInstance = null;
+    private @Nullable Text textInstance = null;
 
     /**
      * Returns an instance of {@link Text} class used to populate this entry.
@@ -138,7 +139,7 @@ public class Entry {
      * filter.
      */
     private void aggregateTags() {
-        List<Element> newElements = new ArrayList<Element>();
+        List<Element> newElements = new ArrayList<>();
         AggregatedTag aggregated = null;
 
         for (Element elem : elements) {
@@ -163,14 +164,11 @@ public class Entry {
         // Check if there is remaining aggregated tag
         if (aggregated != null) {
             newElements.add(aggregated);
-            aggregated = null;
         }
 
         // Copy everything to elements
         elements.clear();
-        for (Element elem : newElements) {
-            elements.add(elem);
-        }
+        elements.addAll(newElements);
         newElements.clear();
     }
 
@@ -513,7 +511,7 @@ public class Entry {
     // Dealing with translation
     // //////////////////////////////////////////////////////////////////////////
 
-    Entry translatedEntry = null;
+    @Nullable Entry translatedEntry = null;
 
     /**
      * Sets the translation of the shortcut string returned by
@@ -553,14 +551,13 @@ public class Entry {
      * the same tags in weakly correct order. See
      * {@link #setTranslation(String, XMLDialect, List)} for details.
      */
-    private void checkAndRecoverTags(String translation, List<ProtectedPart> protectedParts)
-            throws TranslationException {
+    private void checkAndRecoverTags(String translation, List<ProtectedPart> protectedParts) {
         translatedEntry = new Entry(xmlDialect, handler);
 
         // /////////////////////////////////////////////////////////////////////
         // recovering tags
         List<TagUtil.Tag> shortTags = TagUtil.buildTagList(translation,
-                protectedParts.toArray(new ProtectedPart[protectedParts.size()]));
+                protectedParts.toArray(new ProtectedPart[0]));
         int pos = 0;
         for (TagUtil.Tag shortTag : shortTags) {
             if (pos < shortTag.pos) {
@@ -603,6 +600,7 @@ public class Entry {
      * Returns long XML-encoded representation of the entry translation for
      * storing in TMX.
      */
+    @SuppressWarnings("unused")
     public String translationToTMX() {
         if (translatedEntry == null) {
             return sourceToTMX();
@@ -652,7 +650,7 @@ public class Entry {
     // /////////////////////////////////////////////////////////////////////////
 
     /** Elements (tags and text) of this entry. */
-    private List<Element> elements = new ArrayList<Element>();
+    private final List<Element> elements = new ArrayList<>();
 
     /**
      * Adds an element to this entry. Can be either a {@link Text} or a

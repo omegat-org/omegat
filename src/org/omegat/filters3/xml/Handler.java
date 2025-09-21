@@ -38,12 +38,12 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Stack;
 
 import org.jetbrains.annotations.Nullable;
 import org.xml.sax.Attributes;
@@ -92,7 +92,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private @Nullable BufferedWriter extWriter = null;
 
     /** Current path in XML. */
-    private final Stack<String> currentTagPath = new Stack<>();
+    private final ArrayDeque<String> currentTagPath = new ArrayDeque<>();
 
     /**
      * Returns current writer we should write into. If we're in main file,
@@ -111,36 +111,36 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private @Nullable Entity extEntity = null;
 
     /** Current entry that collects normal text. */
-    Entry entry;
+    @Nullable Entry entry;
     /** Stack of entries that collect out-of-turn text. */
-    Stack<Entry> outofturnEntries = new Stack<>();
+    private final ArrayDeque<Entry> outofturnEntries = new ArrayDeque<>();
     /** Current entry that collects the text surrounded by intact tag. */
-    Entry intacttagEntry = null;
+    @Nullable Entry intacttagEntry = null;
     /** Keep the attributes of an intact tag. */
-    org.omegat.filters3.Attributes intacttagAttributes = null;
+    @Nullable org.omegat.filters3.Attributes intacttagAttributes = null;
     /** Keep the attributes of paragraph tags. */
-    Stack<org.omegat.filters3.Attributes> paragraphTagAttributes = new Stack<>();
+    private final ArrayDeque<org.omegat.filters3.Attributes> paragraphTagAttributes = new ArrayDeque<>();
     /** Keep the attributes of preformat tags. */
-    Stack<org.omegat.filters3.Attributes> preformatTagAttributes = new Stack<>();
+    private final ArrayDeque<org.omegat.filters3.Attributes> preformatTagAttributes = new ArrayDeque<>();
     /** Keep the attributes of xml tags. */
-    Stack<org.omegat.filters3.Attributes> xmlTagAttributes = new Stack<>();
+    private final ArrayDeque<org.omegat.filters3.Attributes> xmlTagAttributes = new ArrayDeque<>();
 
     /** Current entry that collects the text surrounded by intact tag. */
-    String intacttagName = null;
+    @Nullable String intacttagName = null;
     /** Names of possible paragraph tags. */
-    Stack<String> paragraphTagName = new Stack<>();
+    private final ArrayDeque<String> paragraphTagName = new ArrayDeque<>();
     /** Names of possible preformat tags. */
-    Stack<String> preformatTagName = new Stack<>();
+    private final ArrayDeque<String> preformatTagName = new ArrayDeque<>();
     /** Name of the current variable-translatable tag */
-    Stack<String> translatableTagName = new Stack<>();
+    private final ArrayDeque<String> translatableTagName = new ArrayDeque<>();
     /** Names of xml tags. */
-    Stack<String> xmlTagName = new Stack<>();
+    private final ArrayDeque<String> xmlTagName = new ArrayDeque<>();
     /** Status of the xml:space="preserve" flag */
     private boolean spacePreserve = false;
 
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText() {
-        return !outofturnEntries.empty();
+        return !outofturnEntries.isEmpty();
     }
 
     /** Now we collect intact text. */
@@ -149,7 +149,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     }
 
     private boolean isTranslatableTag() {
-        return !translatableTagName.empty();
+        return !translatableTagName.isEmpty();
     }
 
     private boolean isSpacePreservingTag() {
@@ -218,6 +218,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Returns external files this handler has processed, because they were
      * included into main file. Each entry is {@link File}.
      */
+    @SuppressWarnings("unused")
     public @Nullable List<File> getProcessedFiles() {
         return processedFiles.isEmpty() ? null : processedFiles;
     }
@@ -569,14 +570,14 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                 && (((XMLTag) currEntry().get(len - 1)).getTag().equals(tag)
                         && ((XMLTag) currEntry().get(len - 1)).getType() == Tag.Type.BEGIN)
                 && !isClosingTagRequired()) {
-            if (((XMLTag) currEntry().get(len - 1)).getTag().equals(xmlTagName.lastElement())) {
+            if (((XMLTag) currEntry().get(len - 1)).getTag().equals(xmlTagName.peekLast())) {
                 xmlTagName.pop();
                 xmlTagAttributes.pop();
             }
             ((XMLTag) currEntry().get(len - 1)).setType(Tag.Type.ALONE);
         } else {
             XMLTag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator);
-            if (xmltag.getTag().equals(xmlTagName.lastElement())) {
+            if (xmltag.getTag().equals(xmlTagName.peekLast())) {
                 xmlTagName.pop();
                 xmltag.setStartAttributes(xmlTagAttributes.pop()); // Restore
                                                                    // attributes
@@ -770,7 +771,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             return true;
         } else {
             org.omegat.filters3.Attributes atts = null;
-            if (tag.equals(paragraphTagName.lastElement())) {
+            if (tag.equals(paragraphTagName.peekLast())) {
                 paragraphTagName.pop();
                 atts = paragraphTagAttributes.pop(); // Restore attributes
             }
@@ -842,7 +843,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
             return true;
         } else {
             org.omegat.filters3.Attributes atts = null;
-            if (tag.equals(preformatTagName.lastElement())) {
+            if (tag.equals(preformatTagName.peekLast())) {
                 preformatTagName.pop();
                 atts = preformatTagAttributes.pop(); // Restore attributes
             }
@@ -854,7 +855,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      * Returns whether the tag surrounds intact block of text which we shouldn't
      * translate.
      */
-    private boolean isIntactTag(String tag, org.omegat.filters3.Attributes atts) {
+    private boolean isIntactTag(String tag, @Nullable org.omegat.filters3.Attributes atts) {
         if (dialect.getIntactTags() != null && dialect.getIntactTags().contains(tag)) {
             return true;
         } else {

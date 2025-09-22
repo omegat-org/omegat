@@ -51,4 +51,3 @@ public class ScriptExecutionException extends IOException {
         return Collections.unmodifiableList(errors);
     }
 }
-

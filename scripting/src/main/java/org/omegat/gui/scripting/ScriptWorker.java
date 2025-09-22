@@ -41,7 +41,8 @@ public class ScriptWorker extends SwingWorker<String, Void> {
     private final Map<String, Object> bindings;
     private volatile long start;
 
-    ScriptWorker(ScriptingWindow scriptingWindow, String scriptString, ScriptItem scriptItem, Map<String, Object> bindings) {
+    ScriptWorker(ScriptingWindow scriptingWindow, String scriptString, ScriptItem scriptItem,
+            Map<String, Object> bindings) {
         this.scriptingWindow = scriptingWindow;
         this.scriptString = scriptString;
         this.scriptItem = scriptItem;

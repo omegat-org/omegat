@@ -36,8 +36,9 @@ import java.io.File;
 import java.util.HashMap;
 
 /**
- * The ScriptingModule class is responsible for managing scripting functionality,
- * including loading and unloading scripting-related plugins and executing scripts.
+ * The ScriptingModule class is responsible for managing scripting
+ * functionality, including loading and unloading scripting-related plugins and
+ * executing scripts.
  *
  * @author Hiroshi Miura
  */
@@ -65,7 +66,8 @@ public final class ScriptingModule {
      * Execute a script as PROJECT_CHANGE events.
      */
     @SuppressWarnings("unused")
-    public static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType, File script) {
+    public static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType,
+            File script) {
         Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
         if (script.isFile()) {
             HashMap<String, Object> binding = new HashMap<>();

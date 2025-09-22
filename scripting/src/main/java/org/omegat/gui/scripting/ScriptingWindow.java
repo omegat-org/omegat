@@ -549,7 +549,8 @@ public class ScriptingWindow {
         executeScript(scriptItem, bindings, true);
     }
 
-    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings, boolean cancelQueue) throws ScriptExecutionException {
+    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings, boolean cancelQueue)
+            throws ScriptExecutionException {
         executeScripts(Collections.singletonList(scriptItem), bindings, cancelQueue);
     }
 
@@ -600,7 +601,8 @@ public class ScriptingWindow {
         executeScripts(scriptItems, Collections.emptyMap());
     }
 
-    public void executeScripts(final List<ScriptItem> scriptItems, final Map<String, Object> bindings) throws ScriptExecutionException {
+    public void executeScripts(final List<ScriptItem> scriptItems, final Map<String, Object> bindings)
+            throws ScriptExecutionException {
         executeScripts(scriptItems, bindings, false);
     }
 
@@ -895,7 +897,7 @@ public class ScriptingWindow {
 
     private JMenuBar createMenuBar() {
 
-        mb = new JMenuBar();
+        menuBar = new JMenuBar();
         JMenu menu = new JMenu();
         Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_TITLE"));
 
@@ -956,12 +958,12 @@ public class ScriptingWindow {
 
         PropertiesShortcuts.getMainMenuShortcuts().bindKeyStrokes(menu);
 
-        mb.add(menu);
+        menuBar.add(menu);
 
         // Edit Menu
-        txtScriptEditor.enhanceMenu(mb);
+        txtScriptEditor.enhanceMenu(menuBar);
 
-        buildSetsMenu(mb);
+        buildSetsMenu(menuBar);
 
         menu = new JMenu();
         Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_HELP"));
@@ -977,9 +979,9 @@ public class ScriptingWindow {
             }
         });
         menu.add(item);
-        mb.add(menu);
+        menuBar.add(menu);
 
-        return mb;
+        return menuBar;
     }
 
     private class SaveSetAction implements ActionListener {
@@ -994,7 +996,7 @@ public class ScriptingWindow {
 
             try {
                 ScriptSet.saveSet(new File(scriptsDirectory, setName + ".set"), setName, quickScripts);
-                buildSetsMenu(mb);
+                buildSetsMenu(menuBar);
             } catch (IOException e1) {
                 LOGGER.atError().setCause(e1).setMessage("Failed to save script set").log();
             }
@@ -1066,7 +1068,7 @@ public class ScriptingWindow {
     private JList<ScriptItem> scriptList;
     private JEditorPane txtResult;
     private AbstractScriptEditor txtScriptEditor;
-    private JMenuBar mb;
+    private JMenuBar menuBar;
 
     private ScriptWorker currentScriptWorker;
     private final Queue<ScriptWorker> queuedWorkers = new LinkedList<>();

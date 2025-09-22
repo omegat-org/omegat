@@ -42,7 +42,7 @@ import java.util.HashMap;
  * @author Hiroshi Miura
  */
 @SuppressWarnings("unused")
-public class ScriptingModule {
+public final class ScriptingModule {
 
     private static ScriptingStartupEventListener listener;
 
@@ -53,6 +53,12 @@ public class ScriptingModule {
 
     public static void unloadPlugins() {
         CoreEvents.unregisterApplicationEventListener(listener);
+    }
+
+    /**
+     * Private constructor for the class that contains only static methods.
+     */
+    private ScriptingModule() {
     }
 
     /**

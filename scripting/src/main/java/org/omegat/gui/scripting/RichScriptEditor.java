@@ -62,7 +62,6 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
-import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 

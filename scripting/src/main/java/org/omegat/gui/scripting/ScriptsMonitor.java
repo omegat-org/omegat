@@ -44,6 +44,7 @@ import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.DirectoryMonitor;
+import org.omegat.util.Log;
 
 /**
  * Monitor to check changes in the script directory.
@@ -83,7 +84,11 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             applicationStartupEventScriptsExecuted = true;
             addEventScripts(EventType.APPLICATION_STARTUP);
             ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.APPLICATION_STARTUP);
-            m_scriptingWindow.executeScripts(scripts, Collections.emptyMap());
+            try {
+                m_scriptingWindow.executeScripts(scripts, Collections.emptyMap());
+            } catch (ScriptExecutionException e) {
+                Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
+            }
             scripts.clear();
         }
     }
@@ -122,9 +127,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         }
 
         Collections.sort(scriptsList);
-        SwingUtilities.invokeLater(() -> {
-            m_scriptingWindow.setScriptItems(scriptsList);
-        });
+        SwingUtilities.invokeLater(() -> m_scriptingWindow.setScriptItems(scriptsList));
 
         if (SCRIPTING_EVENTS) {
             hookApplicationEvent();
@@ -145,18 +148,24 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         m_entryEventListener = new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
+                HashMap<String, Object> binding = new HashMap<>();
                 binding.put("activeFileName", activeFileName);
-
-                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_FILE), binding);
+                try {
+                    m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_FILE), binding);
+                } catch (ScriptExecutionException e) {
+                    Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
+                }
             }
 
             @Override
             public void onEntryActivated(SourceTextEntry newEntry) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
+                HashMap<String, Object> binding = new HashMap<>();
                 binding.put("newEntry", newEntry);
-
-                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
+                try {
+                    m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
+                } catch (ScriptExecutionException e) {
+                    Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
+                }
             }
         };
 
@@ -170,16 +179,16 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
         addEventScripts(EventType.PROJECT_CHANGED);
 
-        m_projectEventListener = new IProjectEventListener() {
-
-            @Override
-            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
-                binding.put("eventType", eventType);
-                ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.PROJECT_CHANGED);
+        m_projectEventListener = eventType -> {
+            HashMap<String, Object> binding = new HashMap<>();
+            binding.put("eventType", eventType);
+            ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.PROJECT_CHANGED);
+            try {
                 m_scriptingWindow.executeScripts(scripts, binding);
-           }
-        };
+            } catch (ScriptExecutionException e) {
+                Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
+            }
+       };
         CoreEvents.registerProjectChangeListener(m_projectEventListener);
     }
 
@@ -204,8 +213,12 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 // executed, as the application may exit before they are
                 // finished executing.
                 ArrayList<ScriptItem> scriptItems = m_eventsScript.get(EventType.APPLICATION_SHUTDOWN);
-                m_scriptingWindow.executeScripts(scriptItems,
-                        new HashMap<String, Object>());
+                try {
+                    m_scriptingWindow.executeScripts(scriptItems,
+                            new HashMap<>());
+                } catch (ScriptExecutionException e) {
+                    Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
+                }
             }
         };
 
@@ -219,13 +232,14 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
         addEventScripts(EventType.NEW_WORD);
 
-        m_editorEventListener = new IEditorEventListener() {
-            @Override
-            public void onNewWord(String newWord) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
-                binding.put("newWord", newWord);
+        m_editorEventListener = newWord -> {
+            HashMap<String, Object> binding = new HashMap<>();
+            binding.put("newWord", newWord);
 
+            try {
                 m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_WORD), binding);
+            } catch (ScriptExecutionException e) {
+                Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
             }
         };
 
@@ -284,5 +298,5 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     private IEditorEventListener m_editorEventListener;
 
     // Map holding the script fired for the different event listeners.
-    private HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<EventType, ArrayList<ScriptItem>>();
+    private HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<>();
 }

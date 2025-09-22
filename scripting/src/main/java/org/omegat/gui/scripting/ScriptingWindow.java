@@ -44,6 +44,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -53,6 +54,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
+import java.util.ResourceBundle;
 
 import javax.script.ScriptEngineFactory;
 import javax.swing.AbstractAction;
@@ -77,8 +79,6 @@ import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.text.BadLocationException;
@@ -90,13 +90,14 @@ import org.openide.awt.Mnemonics;
 import org.omegat.core.Core;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
-import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DesktopWrapper;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.StaticUIUtils;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
 /**
  * Scripting window
@@ -109,6 +110,8 @@ import org.omegat.util.gui.StaticUIUtils;
 public class ScriptingWindow {
 
     final JFrame frame;
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.scripting.Bundle");
+    private static final ILogger LOGGER = LoggerFactory.getLogger(ScriptingWindow.class, BUNDLE);
 
     public ScriptingWindow() {
 
@@ -274,7 +277,11 @@ public class ScriptingWindow {
         logResult(StringUtil.format(OStrings.getString("SCW_QUICK_RUN"), (index + 1)));
         ScriptItem scriptFile = new ScriptItem(new File(scriptsDirectory, quickScripts[index]));
 
-        executeScript(scriptFile);
+        try {
+            executeScript(scriptFile);
+        } catch (ScriptExecutionException e) {
+            logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", quickScripts[index]);
+        }
     }
 
     private void addRunShortcutToOmegaT() {
@@ -512,34 +519,47 @@ public class ScriptingWindow {
                     scriptString = currentScriptItem.getText();
                     txtScriptEditor.getTextArea().setText(scriptString);
                 } catch (IOException e) {
-                    Log.logErrorRB(e, "SCW_SCRIPT_LOAD_ERROR", currentScriptItem.getFileName());
+                    LOGGER.atError().setCause(e).setMessageRB("SCW_SCRIPT_LOAD_ERROR").addArgument(
+                            currentScriptItem.getFileName()).log();
                 }
             }
 
-            executeScript(currentScriptItem);
+            try {
+                executeScript(currentScriptItem);
+            } catch (ScriptExecutionException e) {
+                logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", currentScriptItem.getFileName());
+            }
         } else {
             // No file is found for this script, it is executed as standalone.
             logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
-            executeScript(new ScriptItem(txtScriptEditor.getTextArea().getText()));
+            try {
+                executeScript(new ScriptItem(txtScriptEditor.getTextArea().getText()));
+            } catch (ScriptExecutionException e) {
+                logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", ScriptItem.EDITOR_SCRIPT);
+            }
         }
 
     }
 
-    public void executeScript(ScriptItem scriptItem) {
+    public void executeScript(ScriptItem scriptItem) throws ScriptExecutionException {
         executeScript(scriptItem, Collections.emptyMap());
     }
 
-    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings) {
+    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings) throws ScriptExecutionException {
         executeScript(scriptItem, bindings, true);
     }
 
-    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings, boolean cancelQueue) {
+    public void executeScript(ScriptItem scriptItem, Map<String, Object> bindings, boolean cancelQueue) throws ScriptExecutionException {
         executeScripts(Collections.singletonList(scriptItem), bindings, cancelQueue);
     }
 
     /**
      * Execute scripts sequentially to make sure they don't interrupt each
      * other.
+     * <p>
+     * Note: This method can be called in instances when the
+     * Scripting Window is not visible, so it might make more
+     * sense to let the caller handle the exception.
      *
      * @param scriptItems
      *            List of script to execute.
@@ -549,34 +569,38 @@ public class ScriptingWindow {
      *            If true, the run queue is cleared before running the scripts.
      */
     public void executeScripts(final List<ScriptItem> scriptItems, final Map<String, Object> bindings,
-            boolean cancelQueue) {
+                               boolean cancelQueue) throws ScriptExecutionException {
         if (cancelQueue) {
             cancelScriptQueue();
         }
+
+        List<ScriptExecutionException.ScriptError> errors = new ArrayList<>();
 
         for (ScriptItem scriptItem : scriptItems) {
             try {
                 String scriptString = scriptItem.getText();
                 queuedWorkers.add(createScriptWorker(scriptString, scriptItem, bindings));
             } catch (IOException e) {
-                // TODO: Do we really want to handle the exception here, like
-                // this?
-                // This method can be called in instances when the Scripting
-                // Window is not visible, so it might make more sense to let the
-                // caller handle the exception.
+                errors.add(new ScriptExecutionException.ScriptError(scriptItem, e));
                 logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", scriptItem.getFileName());
             }
         }
 
         executeScriptWorkers();
+
+        if (!errors.isEmpty()) {
+            throw new ScriptExecutionException("Failed to execute one or more scripts", errors);
+        }
     }
 
+
+
     @SuppressWarnings("unused")
-    public void executeScripts(final List<ScriptItem> scriptItems) {
+    public void executeScripts(final List<ScriptItem> scriptItems) throws ScriptExecutionException {
         executeScripts(scriptItems, Collections.emptyMap());
     }
 
-    public void executeScripts(final List<ScriptItem> scriptItems, final Map<String, Object> bindings) {
+    public void executeScripts(final List<ScriptItem> scriptItems, final Map<String, Object> bindings) throws ScriptExecutionException {
         executeScripts(scriptItems, bindings, false);
     }
 
@@ -656,17 +680,17 @@ public class ScriptingWindow {
 
     void logResultRB(Throwable t, String key, Object... args) {
         logResultToWindow(OStrings.getString(key, args) + "\n" + t.getMessage(), true);
-        Log.logErrorRB(t, key, args);
+        LOGGER.atError().setCause(t).setMessageRB(key).addArgument(args).log();
     }
 
     void logResultRB(String key, Object... args) {
         logResultToWindow(OStrings.getString(key, args), true);
-        Log.logErrorRB(key, args);
+        LOGGER.atError().setMessageRB(key).addArgument(args).log();
     }
 
     void logResult(String s, Throwable t) {
         logResultToWindow(s + "\n" + t.getMessage(), true);
-        Log.log(t, s);
+        LOGGER.atInfo().setCause(t).setMessage(s).log();
     }
 
     void logResult(String s) {
@@ -675,7 +699,7 @@ public class ScriptingWindow {
 
     void logResult(String s, boolean newLine) {
         logResultToWindow(s, newLine);
-        Log.log(s);
+        LOGGER.atInfo().setMessage(s).log();
     }
 
     /**
@@ -863,7 +887,7 @@ public class ScriptingWindow {
             try {
                 DesktopWrapper.open(scriptsDirectory);
             } catch (Exception ex) {
-                Log.logErrorRB(ex, "RPF_ERROR");
+                LOGGER.atError().setCause(ex).setMessageRB("RPF_ERROR").log();
                 Core.getMainWindow().displayErrorRB(ex, "RPF_ERROR");
             }
         }
@@ -949,7 +973,7 @@ public class ScriptingWindow {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, ex.getLocalizedMessage(),
                         OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-                Log.log(ex);
+                LOGGER.atInfo().setCause(ex).setMessage("Failed to open Javadoc").log();
             }
         });
         menu.add(item);
@@ -972,7 +996,7 @@ public class ScriptingWindow {
                 ScriptSet.saveSet(new File(scriptsDirectory, setName + ".set"), setName, quickScripts);
                 buildSetsMenu(mb);
             } catch (IOException e1) {
-                Log.log(e1);
+                LOGGER.atError().setCause(e1).setMessage("Failed to save script set").log();
             }
         }
     }

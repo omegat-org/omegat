@@ -40,7 +40,9 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -92,7 +94,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     private @Nullable BufferedWriter extWriter = null;
 
     /** Current path in XML. */
-    private final ArrayDeque<String> currentTagPath = new ArrayDeque<>();
+    private final Deque<String> currentTagPath = new ArrayDeque<>();
 
     /**
      * Returns current writer we should write into. If we're in main file,
@@ -113,28 +115,28 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     /** Current entry that collects normal text. */
     @Nullable Entry entry;
     /** Stack of entries that collect out-of-turn text. */
-    private final ArrayDeque<Entry> outofturnEntries = new ArrayDeque<>();
+    private final Deque<Entry> outofturnEntries = new ArrayDeque<>();
     /** Current entry that collects the text surrounded by intact tag. */
     @Nullable Entry intacttagEntry = null;
     /** Keep the attributes of an intact tag. */
     @Nullable org.omegat.filters3.Attributes intacttagAttributes = null;
     /** Keep the attributes of paragraph tags. */
-    private final ArrayDeque<org.omegat.filters3.Attributes> paragraphTagAttributes = new ArrayDeque<>();
+    private final Deque<org.omegat.filters3.Attributes> paragraphTagAttributes = new ArrayDeque<>();
     /** Keep the attributes of preformat tags. */
-    private final ArrayDeque<org.omegat.filters3.Attributes> preformatTagAttributes = new ArrayDeque<>();
+    private final Deque<org.omegat.filters3.Attributes> preformatTagAttributes = new ArrayDeque<>();
     /** Keep the attributes of xml tags. */
-    private final ArrayDeque<org.omegat.filters3.Attributes> xmlTagAttributes = new ArrayDeque<>();
+    private final Deque<org.omegat.filters3.Attributes> xmlTagAttributes = new ArrayDeque<>();
 
     /** Current entry that collects the text surrounded by intact tag. */
     @Nullable String intacttagName = null;
     /** Names of possible paragraph tags. */
-    private final ArrayDeque<String> paragraphTagName = new ArrayDeque<>();
+    private final Deque<String> paragraphTagName = new ArrayDeque<>();
     /** Names of possible preformat tags. */
-    private final ArrayDeque<String> preformatTagName = new ArrayDeque<>();
+    private final Deque<String> preformatTagName = new ArrayDeque<>();
     /** Name of the current variable-translatable tag */
-    private final ArrayDeque<String> translatableTagName = new ArrayDeque<>();
+    private final Deque<String> translatableTagName = new ArrayDeque<>();
     /** Names of xml tags. */
-    private final ArrayDeque<String> xmlTagName = new ArrayDeque<>();
+    private final Deque<String> xmlTagName = new ArrayDeque<>();
     /** Status of the xml:space="preserve" flag */
     private boolean spacePreserve = false;
 
@@ -806,7 +808,6 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().containsKey(tag)) {
             return true;
         }
-
         // Handle special case for intact tag with null attributes
         if (atts == null && tag.equals(intacttagName)) {
             // Restore attributes for validation
@@ -922,8 +923,10 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
 
     private String constructCurrentPath() {
         StringBuilder path = new StringBuilder(256);
-        for (String t : currentTagPath) {
-            path.append('/').append(t);
+        // When using Deque, we need to iterate in reverse order.
+        Iterator<String> it = currentTagPath.descendingIterator();
+        while (it.hasNext()) {
+            path.append('/').append(it.next());
         }
         return path.toString();
     }

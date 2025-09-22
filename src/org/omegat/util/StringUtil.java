@@ -399,7 +399,7 @@ public final class StringUtil {
      * Returns first not null object from list, or null if all values is null.
      */
     @SafeVarargs
-    public static <T> T nvl(T... values) {
+    public static <T> T nvl(@Nullable T... values) {
         for (T val : values) {
             if (val != null) {
                 return val;

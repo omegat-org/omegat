@@ -36,7 +36,7 @@ import org.omegat.util.StringUtil;
  */
 public abstract class Text implements Element {
     /** The text itself. */
-    private StringBuilder text;
+    private final StringBuilder text;
 
     /** Returns the piece of text stored. */
     public String getText() {
@@ -87,10 +87,12 @@ public abstract class Text implements Element {
      * Returns shortcut string representation of the element. Basically, the
      * text itself.
      */
+    @Override
     public String toShortcut() {
         return text.toString();
     }
 
+    @Override
     public String toSafeCalcShortcut() {
         return toShortcut();
     }
@@ -100,6 +102,7 @@ public abstract class Text implements Element {
      * XML-encoded text (&lt; -&gt; &amp;lt; etc). E.g. for
      * <code>Rock&amp;Roll</code> should return <code>Rock&amp;Roll</code>.
      */
+    @Override
     public String toTMX() {
         return StringUtil.makeValidXML(text.toString());
     }
@@ -110,5 +113,6 @@ public abstract class Text implements Element {
      * <code>Rock&amp;Roll</code> for XML and <code>Rock&amp;Roll</code> for
      * text files.
      */
+    @Override
     public abstract String toOriginal();
 }

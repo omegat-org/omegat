@@ -52,7 +52,6 @@ public class ScriptingModule {
     }
 
     public static void unloadPlugins() {
-        listener.stop();
         CoreEvents.unregisterApplicationEventListener(listener);
     }
 
@@ -60,7 +59,7 @@ public class ScriptingModule {
      * Execute a script as PROJECT_CHANGE events.
      */
     @SuppressWarnings("unused")
-    public void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType, File script) {
+    public static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType, File script) {
         Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
         if (script.isFile()) {
             HashMap<String, Object> binding = new HashMap<>();
@@ -92,10 +91,7 @@ public class ScriptingModule {
 
         @Override
         public void onApplicationShutdown() {
-        }
-
-        public void stop() {
-            window.frame.dispose();
+            window.stop();
         }
     }
 }

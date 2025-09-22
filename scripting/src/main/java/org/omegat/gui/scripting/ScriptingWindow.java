@@ -245,6 +245,12 @@ public class ScriptingWindow {
         }
     }
 
+    public void stop() {
+        if (frame != null) {
+            frame.dispose();
+        }
+    }
+
     private class QuickScriptActionListener implements ActionListener {
 
         private final int index;

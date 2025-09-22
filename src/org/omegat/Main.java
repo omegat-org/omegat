@@ -704,7 +704,7 @@ public final class Main {
                     Class<?> scriptingClass = cl.loadClass("org.omegat.gui.scripting.ScriptingModule");
                     Method method = scriptingClass.getMethod("executeConsoleScript",
                             IProjectEventListener.PROJECT_CHANGE_TYPE.class, File.class);
-                    method.invoke(scriptingClass, eventType, script);
+                    method.invoke(null, eventType, script);
                 } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
                          | InvocationTargetException e) {
                     Log.log(e);

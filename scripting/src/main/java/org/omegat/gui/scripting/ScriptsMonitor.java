@@ -44,6 +44,7 @@ import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.DirectoryMonitor;
+import org.omegat.util.Log;
 
 /**
  * Monitor to check changes in the script directory.
@@ -145,7 +146,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         m_entryEventListener = new IEntryEventListener() {
             @Override
             public void onNewFile(String activeFileName) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
+                HashMap<String, Object> binding = new HashMap<>();
                 binding.put("activeFileName", activeFileName);
 
                 m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_FILE), binding);
@@ -153,7 +154,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
             @Override
             public void onEntryActivated(SourceTextEntry newEntry) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
+                HashMap<String, Object> binding = new HashMap<>();
                 binding.put("newEntry", newEntry);
 
                 m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
@@ -174,11 +175,11 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
             @Override
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
+                HashMap<String, Object> binding = new HashMap<>();
                 binding.put("eventType", eventType);
                 ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.PROJECT_CHANGED);
                 m_scriptingWindow.executeScripts(scripts, binding);
-           }
+            }
         };
         CoreEvents.registerProjectChangeListener(m_projectEventListener);
     }
@@ -204,8 +205,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 // executed, as the application may exit before they are
                 // finished executing.
                 ArrayList<ScriptItem> scriptItems = m_eventsScript.get(EventType.APPLICATION_SHUTDOWN);
-                m_scriptingWindow.executeScripts(scriptItems,
-                        new HashMap<String, Object>());
+                m_scriptingWindow.executeScripts(scriptItems, new HashMap<>());
             }
         };
 
@@ -222,7 +222,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         m_editorEventListener = new IEditorEventListener() {
             @Override
             public void onNewWord(String newWord) {
-                HashMap<String, Object> binding = new HashMap<String, Object>();
+                HashMap<String, Object> binding = new HashMap<>();
                 binding.put("newWord", newWord);
 
                 m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_WORD), binding);
@@ -284,5 +284,5 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     private IEditorEventListener m_editorEventListener;
 
     // Map holding the script fired for the different event listeners.
-    private HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<EventType, ArrayList<ScriptItem>>();
+    private HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<>();
 }

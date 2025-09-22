@@ -44,6 +44,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -90,7 +91,6 @@ import org.openide.awt.Mnemonics;
 import org.omegat.core.Core;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DesktopWrapper;
@@ -115,7 +115,7 @@ public class ScriptingWindow {
 
     public ScriptingWindow() {
 
-        frame = new JFrame(OStrings.getString("SCW_TITLE"));
+        frame = new JFrame(BUNDLE.getString("SCW_TITLE"));
 
         StaticUIUtils.setWindowIcon(frame);
 
@@ -150,7 +150,7 @@ public class ScriptingWindow {
     }
 
     private String listScriptEngines() {
-        StringBuilder sb = new StringBuilder(OStrings.getString("SCW_LIST_ENGINES") + "\n");
+        StringBuilder sb = new StringBuilder(BUNDLE.getString("SCW_LIST_ENGINES") + "\n");
         for (ScriptEngineFactory engine : ScriptRunner.getManager().getEngineFactories()) {
             sb.append(" - ");
             sb.append(engine.getEngineName());
@@ -158,7 +158,7 @@ public class ScriptingWindow {
             sb.append(engine.getLanguageName());
             sb.append(" v.");
             sb.append(engine.getLanguageVersion());
-            sb.append(" (").append(OStrings.getString("SCW_EXTENSIONS")).append(" ");
+            sb.append(" (").append(BUNDLE.getString("SCW_EXTENSIONS")).append(" ");
             boolean hasMore = false;
             for (String ext : engine.getExtensions()) {
                 if (hasMore) {
@@ -179,7 +179,7 @@ public class ScriptingWindow {
         toolsMenu.add(new JSeparator());
 
         JMenuItem scriptMenu = new JMenuItem();
-        Mnemonics.setLocalizedText(scriptMenu, OStrings.getString("TF_MENU_TOOLS_SCRIPTING"));
+        Mnemonics.setLocalizedText(scriptMenu, BUNDLE.getString("TF_MENU_TOOLS_SCRIPTING"));
         scriptMenu.addActionListener(e -> frame.setVisible(true));
 
         toolsMenu.add(scriptMenu);
@@ -213,7 +213,7 @@ public class ScriptingWindow {
 
         quickMenus[index].setEnabled(false);
         Mnemonics.setLocalizedText(quickMenus[index],
-                "&" + scriptKey(index) + " - " + OStrings.getString("SCW_SCRIPTS_NONE"));
+                "&" + scriptKey(index) + " - " + BUNDLE.getString("SCW_SCRIPTS_NONE"));
     }
 
     private void setQuickScriptMenu(ScriptItem scriptItem, int index) {
@@ -270,11 +270,11 @@ public class ScriptingWindow {
     private void runQuickScript(int index) {
 
         if (quickScripts[index] == null) {
-            logResult(OStrings.getString("SCW_NO_SCRIPT_SELECTED"));
+            logResult(BUNDLE.getString("SCW_NO_SCRIPT_SELECTED"));
             return;
         }
 
-        logResult(StringUtil.format(OStrings.getString("SCW_QUICK_RUN"), (index + 1)));
+        logResult(StringUtil.format(BUNDLE.getString("SCW_QUICK_RUN"), (index + 1)));
         ScriptItem scriptFile = new ScriptItem(new File(scriptsDirectory, quickScripts[index]));
 
         try {
@@ -400,7 +400,7 @@ public class ScriptingWindow {
 
             setQuickScriptMenu(scriptItem, index);
 
-            logResult(StringUtil.format(OStrings.getString("SCW_SAVE_QUICK_SCRIPT"), scriptItem, scriptKey));
+            logResult(StringUtil.format(BUNDLE.getString("SCW_SAVE_QUICK_SCRIPT"), scriptItem, scriptKey));
         }
 
         public void updateQuickScript() {
@@ -416,15 +416,15 @@ public class ScriptingWindow {
 
     private void setupRunButtons(JPanel panel) {
         JButton btnRunScript = new JButton();
-        Mnemonics.setLocalizedText(btnRunScript, OStrings.getString("SCW_RUN_SCRIPT"));
+        Mnemonics.setLocalizedText(btnRunScript, BUNDLE.getString("SCW_RUN_SCRIPT"));
         btnRunScript.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnRunScript.setHorizontalAlignment(SwingConstants.LEFT);
         btnRunScript.addActionListener(a -> runScript());
         panel.add(btnRunScript);
 
         JButton btnCancelScript = new JButton();
-        Mnemonics.setLocalizedText(btnCancelScript, OStrings.getString("SCW_CANCEL_SCRIPT"));
-        btnCancelScript.setToolTipText(OStrings.getString("SCW_CANCEL_BUTTON_TOOLTIP"));
+        Mnemonics.setLocalizedText(btnCancelScript, BUNDLE.getString("SCW_CANCEL_SCRIPT"));
+        btnCancelScript.setToolTipText(BUNDLE.getString("SCW_CANCEL_BUTTON_TOOLTIP"));
         btnCancelScript.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnCancelScript.setHorizontalAlignment(SwingConstants.LEFT);
         btnCancelScript.addActionListener(e -> cancelCurrentScript());
@@ -447,20 +447,20 @@ public class ScriptingWindow {
             JPopupMenu quickScriptPopup = new JPopupMenu();
 
             // Add a script to the quick script button bar
-            final JMenuItem addQuickScriptMenuItem = new JMenuItem(OStrings.getString("SCW_ADD_SCRIPT"));
+            final JMenuItem addQuickScriptMenuItem = new JMenuItem(BUNDLE.getString("SCW_ADD_SCRIPT"));
             addQuickScriptMenuItem.addActionListener(new QuickScriptUpdater(index));
             quickScriptPopup.add(addQuickScriptMenuItem);
 
             // Remove a script from the button bar
             final JMenuItem removeQuickScriptMenuItem = new JMenuItem(
-                    OStrings.getString("SCW_REMOVE_SCRIPT"));
+                    BUNDLE.getString("SCW_REMOVE_SCRIPT"));
             removeQuickScriptMenuItem.addActionListener(evt -> {
                 String scriptName = Preferences
                         .getPreferenceDefault(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "(unknown)");
-                logResult(StringUtil.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName,
+                logResult(StringUtil.format(BUNDLE.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName,
                         scriptKey));
                 Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "");
-                quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
+                quickScriptButtons[index].setToolTipText(BUNDLE.getString("SCW_NO_SCRIPT_SET"));
                 quickScriptButtons[index].setText(" " + scriptKey + " ");
 
                 unsetQuickScriptMenu(index);
@@ -506,11 +506,11 @@ public class ScriptingWindow {
         // fetch the localized resources).
         if (currentScriptItem != null && currentScriptItem.getFile() != null) {
             if (!currentScriptItem.getFile().canRead()) {
-                logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
+                logResult(BUNDLE.getString("SCW_CANNOT_READ_SCRIPT"));
                 return;
             }
 
-            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"),
+            logResult(StringUtil.format(BUNDLE.getString("SCW_RUNNING_SCRIPT"),
                     currentScriptItem.getFile().getAbsolutePath()));
 
             String scriptString = txtScriptEditor.getTextArea().getText();
@@ -531,7 +531,7 @@ public class ScriptingWindow {
             }
         } else {
             // No file is found for this script, it is executed as standalone.
-            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
+            logResult(StringUtil.format(BUNDLE.getString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
             try {
                 executeScript(new ScriptItem(txtScriptEditor.getTextArea().getText()));
             } catch (ScriptExecutionException e) {
@@ -681,12 +681,12 @@ public class ScriptingWindow {
     }
 
     void logResultRB(Throwable t, String key, Object... args) {
-        logResultToWindow(OStrings.getString(key, args) + "\n" + t.getMessage(), true);
+        logResultToWindow(MessageFormat.format(BUNDLE.getString(key), args) + "\n" + t.getMessage(), true);
         LOGGER.atError().setCause(t).setMessageRB(key).addArgument(args).log();
     }
 
     void logResultRB(String key, Object... args) {
-        logResultToWindow(OStrings.getString(key, args), true);
+        logResultToWindow(MessageFormat.format(BUNDLE.getString(key), args), true);
         LOGGER.atError().setMessageRB(key).addArgument(args).log();
     }
 
@@ -756,7 +756,7 @@ public class ScriptingWindow {
                     return;
                 }
 
-                quickScriptButtons[i].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
+                quickScriptButtons[i].setToolTipText(BUNDLE.getString("SCW_NO_SCRIPT_SET"));
                 quickScriptButtons[i].setText(String.valueOf(key));
             }
         }
@@ -782,7 +782,7 @@ public class ScriptingWindow {
             txtScriptEditor.getTextArea().setText(currentScriptItem.getText());
             txtScriptEditor.getTextArea().setCaretPosition(0);
         } catch (IOException ex) {
-            logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
+            logResult(BUNDLE.getString("SCW_CANNOT_READ_SCRIPT"));
         }
     }
 
@@ -802,7 +802,7 @@ public class ScriptingWindow {
                     : scriptsDirectory;
 
             JFileChooser chooser = new JFileChooser(openFileDir);
-            chooser.setDialogTitle(OStrings.getString("SCW_SCRIPTS_OPEN_SCRIPT_TITLE"));
+            chooser.setDialogTitle(BUNDLE.getString("SCW_SCRIPTS_OPEN_SCRIPT_TITLE"));
             chooser.setDialogTitle("Select a Script File");
             chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int result = chooser.showOpenDialog(frame);
@@ -840,7 +840,7 @@ public class ScriptingWindow {
 
             if (currentScriptItem == null || currentScriptItem.getFile() == null) {
                 JFileChooser chooser = new JFileChooser(scriptsDirectory);
-                chooser.setDialogTitle(OStrings.getString("SCW_SAVE_SCRIPT"));
+                chooser.setDialogTitle(BUNDLE.getString("SCW_SAVE_SCRIPT"));
                 int result = chooser.showSaveDialog(frame);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     setCurrentScriptItem(chooser.getSelectedFile());
@@ -863,7 +863,7 @@ public class ScriptingWindow {
     private class SelectScriptFolderAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JFileChooser chooser = new JFileChooser(scriptsDirectory);
-            chooser.setDialogTitle(OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE_TITLE"));
+            chooser.setDialogTitle(BUNDLE.getString("SCW_SCRIPTS_FOLDER_CHOOSE_TITLE"));
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int result = chooser.showOpenDialog(frame);
             if (result == JFileChooser.APPROVE_OPTION) {
@@ -899,34 +899,34 @@ public class ScriptingWindow {
 
         menuBar = new JMenuBar();
         JMenu menu = new JMenu();
-        Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_TITLE"));
+        Mnemonics.setLocalizedText(menu, BUNDLE.getString("SCW_MENU_TITLE"));
 
         JMenuItem item;
 
         // https://sourceforge.net/p/omegat/feature-requests/1314/
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_LOAD_FILE"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_LOAD_FILE"));
         item.addActionListener(new OpenScriptAction());
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_NEW_SCRIPT"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_NEW_SCRIPT"));
         item.addActionListener(new NewScriptAction());
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_SAVE_SCRIPT"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_SAVE_SCRIPT"));
         item.addActionListener(new SaveScriptAction());
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_RUN_SCRIPT"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_RUN_SCRIPT"));
         item.addActionListener(new RunScriptAction());
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
@@ -935,19 +935,19 @@ public class ScriptingWindow {
         menu.addSeparator();
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_SET_SCRIPTS_FOLDER"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_MENU_SET_SCRIPTS_FOLDER"));
         item.addActionListener(new SelectScriptFolderAction());
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_ACCESS_FOLDER"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_MENU_ACCESS_FOLDER"));
         item.addActionListener(new ExploreScriptFolderAction());
         menu.add(item);
 
         menu.addSeparator();
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_CLOSE"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_MENU_CLOSE"));
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         item.addActionListener(e -> {
@@ -966,15 +966,15 @@ public class ScriptingWindow {
         buildSetsMenu(menuBar);
 
         menu = new JMenu();
-        Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_HELP"));
+        Mnemonics.setLocalizedText(menu, BUNDLE.getString("SCW_MENU_HELP"));
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_JAVADOC"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_MENU_JAVADOC"));
         item.addActionListener(e -> {
             try {
                 Help.showJavadoc();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(frame, ex.getLocalizedMessage(),
-                        OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+                        BUNDLE.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
                 LOGGER.atInfo().setCause(ex).setMessage("Failed to open Javadoc").log();
             }
         });
@@ -987,8 +987,8 @@ public class ScriptingWindow {
     private class SaveSetAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-            String setName = JOptionPane.showInputDialog(frame, OStrings.getString("SCW_SAVE_SET_MSG"),
-                    OStrings.getString("SCW_MENU_SAVE_SET"), JOptionPane.QUESTION_MESSAGE);
+            String setName = JOptionPane.showInputDialog(frame, BUNDLE.getString("SCW_SAVE_SET_MSG"),
+                    BUNDLE.getString("SCW_MENU_SAVE_SET"), JOptionPane.QUESTION_MESSAGE);
 
             if (setName == null) {
                 return;
@@ -1033,10 +1033,10 @@ public class ScriptingWindow {
 
         setsMenu.removeAll();
 
-        Mnemonics.setLocalizedText(setsMenu, OStrings.getString("SCW_MENU_SETS"));
+        Mnemonics.setLocalizedText(setsMenu, BUNDLE.getString("SCW_MENU_SETS"));
 
         JMenuItem item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_SAVE_SET"));
+        Mnemonics.setLocalizedText(item, BUNDLE.getString("SCW_MENU_SAVE_SET"));
         item.addActionListener(new SaveSetAction());
         setsMenu.add(item);
         setsMenu.addSeparator();

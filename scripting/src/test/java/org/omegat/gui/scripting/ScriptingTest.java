@@ -72,7 +72,7 @@ public class ScriptingTest extends TestCore {
         File tmp = File.createTempFile("omegat", "tmp");
         try {
             Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, tmp.getAbsolutePath());
-            new ScriptingWindow();
+            new ScriptingWindowController();
         } finally {
             assertTrue(tmp.delete());
         }
@@ -80,7 +80,7 @@ public class ScriptingTest extends TestCore {
 
     @Test
     public void testCompileScripts() throws Exception {
-        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
+        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindowController.DEFAULT_SCRIPTS_DIR);
         assertTrue("scriptDir is " + scriptDir.toPath(), scriptDir.isDirectory());
         for (File f : scriptDir.listFiles()) {
             if (!f.isFile()) {
@@ -99,7 +99,7 @@ public class ScriptingTest extends TestCore {
 
     @Test
     public void testScriptProperties() throws Exception {
-        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindow.DEFAULT_SCRIPTS_DIR);
+        File scriptDir = new File(StaticUtils.installDir(), ScriptingWindowController.DEFAULT_SCRIPTS_DIR);
         assertTrue("scriptDir is " + scriptDir.toPath(), scriptDir.isDirectory());
         File propsDir = new File(scriptDir, "properties");
         assertTrue("propsDir is " + propsDir.toPath(), propsDir.isDirectory());

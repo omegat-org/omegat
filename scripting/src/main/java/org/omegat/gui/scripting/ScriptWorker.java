@@ -35,15 +35,15 @@ import java.util.concurrent.ExecutionException;
 
 public class ScriptWorker extends SwingWorker<String, Void> {
 
-    private final ScriptingWindow scriptingWindow;
+    private final ScriptingWindowController controller;
     private final String scriptString;
     private final ScriptItem scriptItem;
     private final Map<String, Object> bindings;
     private volatile long start;
 
-    ScriptWorker(ScriptingWindow scriptingWindow, String scriptString, ScriptItem scriptItem,
+    ScriptWorker(ScriptingWindowController scriptingWindowController, String scriptString, ScriptItem scriptItem,
             Map<String, Object> bindings) {
-        this.scriptingWindow = scriptingWindow;
+        this.controller = scriptingWindowController;
         this.scriptString = scriptString;
         this.scriptItem = scriptItem;
         this.bindings = bindings;
@@ -60,14 +60,14 @@ public class ScriptWorker extends SwingWorker<String, Void> {
         long duration = System.currentTimeMillis() - start;
         try {
             String result = get();
-            scriptingWindow.logResult(result);
-            scriptingWindow.logResultRB("SCW_SCRIPT_DONE", duration);
+            controller.logResult(result);
+            controller.logResultRB("SCW_SCRIPT_DONE", duration);
         } catch (CancellationException e) {
-            scriptingWindow.logResultRB("SCW_SCRIPT_CANCELED", duration);
+            controller.logResultRB("SCW_SCRIPT_CANCELED", duration);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (ExecutionException e) {
-            scriptingWindow.logResultRB(e, "SCW_SCRIPT_ERROR");
+            controller.logResultRB(e, "SCW_SCRIPT_ERROR");
         }
     }
 }

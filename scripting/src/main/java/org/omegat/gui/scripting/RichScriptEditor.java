@@ -62,7 +62,6 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
-import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
 @SuppressWarnings("serial")
@@ -193,24 +192,24 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
     public void enhanceMenu(JMenuBar mb) {
         JMenu menu = new JMenu();
 
-        Mnemonics.setLocalizedText(menu, OStrings.getString("SCW_MENU_EDIT"));
+        Mnemonics.setLocalizedText(menu, ScriptingWindowController.getString("SCW_MENU_EDIT"));
 
         JMenuItem item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_FIND"));
+        Mnemonics.setLocalizedText(item, ScriptingWindowController.getString("SCW_MENU_FIND"));
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowFindDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_REPLACE"));
+        Mnemonics.setLocalizedText(item, ScriptingWindowController.getString("SCW_MENU_REPLACE"));
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         item.addActionListener(new ShowReplaceDialogAction());
         menu.add(item);
 
         item = new JMenuItem();
-        Mnemonics.setLocalizedText(item, OStrings.getString("SCW_MENU_GOTO_LINE"));
+        Mnemonics.setLocalizedText(item, ScriptingWindowController.getString("SCW_MENU_GOTO_LINE"));
         item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,
                 Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         item.addActionListener(new GoToLineAction());
@@ -221,11 +220,11 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         int metaShiftMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK;
         KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F, metaShiftMask);
         Action a = csp.addBottomComponent(ks, findToolBar);
-        a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_FIND_BAR"));
+        a.putValue(Action.NAME, ScriptingWindowController.getString("SCW_MENU_SHOW_FIND_BAR"));
         menu.add(new JMenuItem(a));
         ks = KeyStroke.getKeyStroke(KeyEvent.VK_G, metaShiftMask);
         a = csp.addBottomComponent(ks, replaceToolBar);
-        a.putValue(Action.NAME, OStrings.getString("SCW_MENU_SHOW_REPLACE_BAR"));
+        a.putValue(Action.NAME, ScriptingWindowController.getString("SCW_MENU_SHOW_REPLACE_BAR"));
         menu.add(new JMenuItem(a));
 
         mb.add(menu);

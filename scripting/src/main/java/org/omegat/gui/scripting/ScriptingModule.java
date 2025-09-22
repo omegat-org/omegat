@@ -90,11 +90,11 @@ public final class ScriptingModule {
     }
 
     private static class ScriptingStartupEventListener implements IApplicationEventListener {
-        private ScriptingWindow window;
+        private ScriptingWindowController window;
 
         @Override
         public void onApplicationStartup() {
-            window = new ScriptingWindow();
+            window = new ScriptingWindowController();
         }
 
         @Override
@@ -102,4 +102,5 @@ public final class ScriptingModule {
             window.stop();
         }
     }
+
 }

@@ -62,8 +62,8 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 .toLowerCase(Locale.ENGLISH));
     }
 
-    public ScriptsMonitor(final ScriptingWindow scriptingWindow) {
-        this.m_scriptingWindow = scriptingWindow;
+    public ScriptsMonitor(final ScriptingWindowController scriptingWindowController) {
+        controller = scriptingWindowController;
 
         if (SCRIPTING_EVENTS) {
             // Initialize the events script list for all the events
@@ -85,7 +85,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             addEventScripts(EventType.APPLICATION_STARTUP);
             ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.APPLICATION_STARTUP);
             try {
-                m_scriptingWindow.executeScripts(scripts, Collections.emptyMap());
+                controller.executeScripts(scripts, Collections.emptyMap());
             } catch (ScriptExecutionException e) {
                 Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
             }
@@ -127,7 +127,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         }
 
         Collections.sort(scriptsList);
-        SwingUtilities.invokeLater(() -> m_scriptingWindow.setScriptItems(scriptsList));
+        SwingUtilities.invokeLater(() -> controller.setScriptItems(scriptsList));
 
         if (SCRIPTING_EVENTS) {
             hookApplicationEvent();
@@ -151,7 +151,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("activeFileName", activeFileName);
                 try {
-                    m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_FILE), binding);
+                    controller.executeScripts(m_eventsScript.get(EventType.NEW_FILE), binding);
                 } catch (ScriptExecutionException e) {
                     Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
                 }
@@ -162,7 +162,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 HashMap<String, Object> binding = new HashMap<>();
                 binding.put("newEntry", newEntry);
                 try {
-                    m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
+                    controller.executeScripts(m_eventsScript.get(EventType.ENTRY_ACTIVATED), binding);
                 } catch (ScriptExecutionException e) {
                     Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
                 }
@@ -184,7 +184,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             binding.put("eventType", eventType);
             ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.PROJECT_CHANGED);
             try {
-                m_scriptingWindow.executeScripts(scripts, binding);
+                controller.executeScripts(scripts, binding);
             } catch (ScriptExecutionException e) {
                 Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
             }
@@ -214,7 +214,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
                 // finished executing.
                 ArrayList<ScriptItem> scriptItems = m_eventsScript.get(EventType.APPLICATION_SHUTDOWN);
                 try {
-                    m_scriptingWindow.executeScripts(scriptItems,
+                    controller.executeScripts(scriptItems,
                             new HashMap<>());
                 } catch (ScriptExecutionException e) {
                     Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
@@ -237,7 +237,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
             binding.put("newWord", newWord);
 
             try {
-                m_scriptingWindow.executeScripts(m_eventsScript.get(EventType.NEW_WORD), binding);
+                controller.executeScripts(m_eventsScript.get(EventType.NEW_WORD), binding);
             } catch (ScriptExecutionException e) {
                 Log.logErrorRB(e, "SCW_SCRIPT_EXEC_ERROR");
             }
@@ -289,7 +289,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 
     private File m_scriptDir;
     protected DirectoryMonitor m_monitor;
-    private ScriptingWindow m_scriptingWindow;
+    private final ScriptingWindowController controller;
 
     // Event listeners.
     private IEntryEventListener m_entryEventListener;
@@ -298,5 +298,5 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     private IEditorEventListener m_editorEventListener;
 
     // Map holding the script fired for the different event listeners.
-    private HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<>();
+    private final HashMap<EventType, ArrayList<ScriptItem>> m_eventsScript = new HashMap<>();
 }

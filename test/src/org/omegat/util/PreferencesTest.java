@@ -28,11 +28,13 @@ package org.omegat.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
@@ -44,6 +46,8 @@ import org.omegat.filters.TestFilterBase;
 import org.omegat.util.Preferences.IPreferences;
 
 /**
+ * Test the Preferences class.
+ *
  * @author Aaron Madlon-Kay
  */
 public class PreferencesTest {
@@ -70,12 +74,12 @@ public class PreferencesTest {
         File prefsFile = new File(tmpDir, Preferences.FILE_PREFERENCES);
 
         // Write anything that is malformed XML, to force a parsing error.
-        PrintWriter out = new PrintWriter(prefsFile, "UTF-8");
-        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-        out.println("<omegat>");
-        out.println("<preference version=\"1.0\">");
-        out.close();
-        assertFalse(out.checkError());
+        try (PrintWriter out = new PrintWriter(prefsFile, StandardCharsets.UTF_8)) {
+            out.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+            out.println("<omegat>");
+            out.println("<preference version=\"1.0\">");
+            assertFalse(out.checkError());
+        }
 
         // Load bad prefs file.
         Log.log("---------It will show a parser error. This is intended----------------");
@@ -85,11 +89,14 @@ public class PreferencesTest {
         // The actual backup file will have a timestamp in the filename,
         // so we have to loop through looking for it.
         File backup = null;
-        for (File f : tmpDir.listFiles()) {
-            String name = f.getName();
-            if (name.startsWith(prefsFile.getName()) && name.endsWith(".bak")) {
-                backup = f;
-                break;
+        var fileList = tmpDir.listFiles();
+        if (fileList != null) {
+            for (File f : fileList) {
+                String name = f.getName();
+                if (name.startsWith(prefsFile.getName()) && name.endsWith(".bak")) {
+                    backup = f;
+                    break;
+                }
             }
         }
 
@@ -108,25 +115,25 @@ public class PreferencesTest {
             } else {
                 return super.toString();
             }
-        };
+        }
     }
 
     @Test
-    public void testPreferencesLoadStore() throws Exception {
+    public void testPreferencesLoadStore() {
         File prefsFile = new File(tmpDir, Preferences.FILE_PREFERENCES);
 
         IPreferences prefs = new PreferencesImpl(new PreferencesXML(null, prefsFile));
 
         // Set values normally
-        assertEquals(null, prefs.setPreference("MyString", "foo"));
-        assertEquals(null, prefs.setPreference("MyBoolean", true));
-        assertEquals(null, prefs.setPreference("MyInt", 5));
-        assertEquals(null, prefs.setPreference("MyEnum", TestEnum.BAR));
-        assertEquals(null, prefs.setPreference("MyEmptyString", ""));
+        assertNull(prefs.setPreference("MyString", "foo"));
+        assertNull(prefs.setPreference("MyBoolean", true));
+        assertNull(prefs.setPreference("MyInt", 5));
+        assertNull(prefs.setPreference("MyEnum", TestEnum.BAR));
+        assertNull(prefs.setPreference("MyEmptyString", ""));
 
         // Check values normally
         assertEquals("foo", prefs.getPreference("MyString"));
-        assertEquals(true, prefs.isPreference("MyBoolean"));
+        assertTrue(prefs.isPreference("MyBoolean"));
         assertEquals(TestEnum.BAR, TestEnum.valueOf(prefs.getPreference("MyEnum")));
         assertEquals(5, Integer.parseInt(prefs.getPreference("MyInt")));
         // Check empty string behavior
@@ -136,7 +143,7 @@ public class PreferencesTest {
         assertFalse(prefs.existsPreference("MyNonexistentString"));
         // Check that defaults are not used for already-set values
         assertEquals("foo", prefs.getPreferenceDefault("MyString", "bar"));
-        assertEquals(true, prefs.isPreferenceDefault("MyBoolean", false));
+        assertTrue(prefs.isPreferenceDefault("MyBoolean", false));
         assertEquals(5, prefs.getPreferenceDefault("MyInt", 0));
         assertEquals(TestEnum.BAR, prefs.getPreferenceEnumDefault("MyEnum", TestEnum.BAZ));
 
@@ -148,7 +155,7 @@ public class PreferencesTest {
 
         // Check values
         assertEquals("foo", prefs.getPreference("MyString"));
-        assertEquals(true, prefs.isPreference("MyBoolean"));
+        assertTrue(prefs.isPreference("MyBoolean"));
         assertEquals(5, Integer.parseInt(prefs.getPreference("MyInt")));
         assertEquals(TestEnum.BAR, TestEnum.valueOf(prefs.getPreference("MyEnum")));
         assertEquals("", prefs.getPreference("MyEmptyString"));
@@ -156,15 +163,15 @@ public class PreferencesTest {
         assertEquals("", prefs.getPreference("MyNonexistentString"));
         assertFalse(prefs.existsPreference("MyNonexistentString"));
         assertEquals("foo", prefs.getPreferenceDefault("MyString", "bar"));
-        assertEquals(true, prefs.isPreferenceDefault("MyBoolean", false));
+        assertTrue(prefs.isPreferenceDefault("MyBoolean", false));
         assertEquals(5, prefs.getPreferenceDefault("MyInt", 0));
         assertEquals(TestEnum.BAR, prefs.getPreferenceEnumDefault("MyEnum", TestEnum.BAZ));
 
         // Check setting values via *Default methods
         assertEquals("bar", prefs.getPreferenceDefault("MyStringDefault", "bar"));
         assertEquals("bar", prefs.getPreference("MyStringDefault"));
-        assertEquals(false, prefs.isPreferenceDefault("MyBoolDefault", false));
-        assertEquals(false, prefs.isPreference("MyBoolDefault"));
+        assertFalse(prefs.isPreferenceDefault("MyBoolDefault", false));
+        assertFalse(prefs.isPreference("MyBoolDefault"));
         assertEquals(77, prefs.getPreferenceDefault("MyIntDefault", 77));
         assertEquals(77, Integer.parseInt(prefs.getPreference("MyIntDefault")));
         assertEquals(TestEnum.BAZ, prefs.getPreferenceEnumDefault("MyEnumDefault", TestEnum.BAZ));
@@ -183,9 +190,9 @@ public class PreferencesTest {
         }
 
         // Check null behvaior
-        assertEquals(null, prefs.setPreference(null, null));
-        assertEquals(null, prefs.setPreference("", null));
-        assertEquals(null, prefs.setPreference("blah", null));
+        assertNull(prefs.setPreference(null, null));
+        assertNull(prefs.setPreference("", null));
+        assertNull(prefs.setPreference("blah", null));
         assertEquals("", prefs.getPreference(null));
         assertEquals("", prefs.getPreference(""));
     }

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -24,4 +24,3 @@ dependencies {
     testRuntimeOnly(libs.protobuf)
     testImplementation(libs.commons.io)
 }
-makeModuleTask(loadProperties(file('plugin.properties')))

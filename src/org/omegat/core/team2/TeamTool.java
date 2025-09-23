@@ -99,13 +99,16 @@ public final class TeamTool {
         // Create project internal directories
         props.autocreateDirectories();
         // Create version-controlled glossary file
-        GlossaryManager.createNewWritableGlossaryFile(props.getWritableGlossaryFile().getAsFile());
+        if (!GlossaryManager.createNewWritableGlossaryFile(props.getWritableGlossaryFile().getAsFile())) {
+            Log.log("Failed to create new writable glossary file.");
+        }
 
         ProjectFileStorage.writeProjectFile(props);
 
         // Create empty project TM
         ProjectTMX projectTMX = new ProjectTMX();
-        projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null, Core.getSegmenter());
+        projectTMX.load(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), null,
+                Core.getSegmenter());
         projectTMX.save(props, new File(props.getProjectInternal(), OConsts.TMX_EXTENSION).getPath(), false);
 
         // If the supplied dir is under version control, add everything we made

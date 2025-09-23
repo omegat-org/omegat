@@ -37,6 +37,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * A model implementation that extends {@link AbstractListModel} to manage and
+ * represent a list of issue types and their counts. This class is used to
+ * calculate and provide a summary view of issue types based on a list of
+ * {@link IIssue} objects.
+ *
+ * @author Aaron Madlon-Kay
+ */
 @SuppressWarnings("serial")
 class IssuesTypeListModel extends AbstractListModel<String> {
 

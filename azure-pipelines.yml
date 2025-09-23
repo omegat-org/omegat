@@ -77,10 +77,7 @@ stages:
         fetchTags: true
         lfs: false
       - template: ci/azure-pipelines/build_doc_steps.yml
-      - template: ci/azure-pipelines/publish_manual_snapshot.yml
-        parameters:
-          condition: and(in(variables['Agent.JobStatus'], 'Succeeded', 'SucceededWithIssues'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  - job: TestOnJava17
+  - job: testOnLinux
     displayName: on Linux
     dependsOn: CheckChanges
     condition: eq(dependencies.CheckChanges.outputs['checkChanges.changeNonDoc'], 'true')
@@ -164,6 +161,10 @@ stages:
         parameters:
           omegatVersion: $(version)
           condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Agent.JobStatus'], 'Succeeded'))
+      - template: ci/azure-pipelines/publish_manual_snapshot.yml
+        parameters:
+          omegatVersion: $(version)
+          condition: and(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Agent.JobStatus'], 'Succeeded'))
 
   # Release steps will run on the main and/or release branch with tags.
 - stage: Release
@@ -200,6 +201,14 @@ stages:
         condition: always()
         displayName: Stop Gradle daemon
       - template: ci/azure-pipelines/publish_release.yml
+        parameters:
+          omegatVersion: $(version)
+          condition: eq(variables['Agent.JobStatus'], 'Succeeded')
+      - template: ci/azure-pipelines/publish_manual.yml
+        parameters:
+          omegatVersion: $(version)
+          condition: eq(variables['Agent.JobStatus'], 'Succeeded')
+      - template: ci/azure-pipelines/publish_javadoc.yml
         parameters:
           omegatVersion: $(version)
           condition: eq(variables['Agent.JobStatus'], 'Succeeded')

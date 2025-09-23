@@ -39,6 +39,8 @@ import org.junit.After;
 import org.junit.Before;
 
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.TestCoreState;
+import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.EditorStub;
 import org.omegat.gui.editor.EditorSettingsStub;
 import org.omegat.gui.editor.IEditor;
@@ -70,16 +72,32 @@ public abstract class TestCore {
      */
     @Before
     public final void setUpCore() throws Exception {
+        TestCoreState.resetState();
         configDir = Files.createTempDirectory("omegat").toFile();
         TestPreferencesInitializer.init(configDir.getAbsolutePath());
         IMainWindow mainWindow = getMainWindow();
-        Core.setMainWindow(mainWindow);
-        Core.setCurrentProject(new NotLoadedProject());
+        TestCoreState.getInstance().setMainWindow(mainWindow);
+        TestCoreState.getInstance().setProject(new NotLoadedProject());
+        TestCoreState.initAutoSave(createTestAutoSave());
         initEditor(mainWindow);
+    }
+
+    protected IAutoSave createTestAutoSave() {
+        return new IAutoSave() {
+            @Override
+            public void enable() {
+                // ignore all
+            }
+            @Override
+            public void disable() {
+                // ignore all
+            }
+        };
     }
 
     /**
      * Create a mock of the main menu object.
+     *
      * @return Main menu object which implement IMainMenu.
      */
     protected IMainMenu getMainMenu() {
@@ -88,6 +106,7 @@ public abstract class TestCore {
 
     /**
      * Create a main Window object.
+     *
      * @return Object which implements IMainWindow.
      */
     protected IMainWindow getMainWindow() {
@@ -137,6 +156,7 @@ public abstract class TestCore {
      */
     @After
     public final void tearDownCore() throws IOException {
+        TestCoreState.resetState();
         FileUtils.forceDeleteOnExit(configDir);
     }
 }

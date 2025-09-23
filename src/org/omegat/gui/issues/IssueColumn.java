@@ -29,6 +29,13 @@ import org.omegat.util.OStrings;
 
 import javax.swing.Icon;
 
+/**
+ * Enum representing columns in an issues table.
+ * Each enum constant corresponds to a specific column in the table,
+ * with an associated index, label, and class type for its values.
+ *
+ * @author Aaron Madlon-Kay
+ */
 enum IssueColumn {
     SEG_NUM(0, OStrings.getString("ISSUES_TABLE_COLUMN_ENTRY_NUM"), Integer.class),
     ICON(1, "", Icon.class),

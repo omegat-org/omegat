@@ -5,6 +5,7 @@ plugins {
     id 'org.omegat.common-utilities'
     id 'maven-publish'
     id 'signing'
+    id 'org.hidetake.ssh'
 }
 
 def documentRootDir = file('src_docs')
@@ -30,14 +31,16 @@ tasks.register('genDocIndex', Copy) {
     from inputTemplate
     into layout.buildDirectory.dir("tmp/manual/")
     expand('languages': langInformation)
-    doLast {
-        copy {
-            from layout.buildDirectory.file("tmp/manual/index.html")
-            into layout.buildDirectory.dir("docs/manual")
-        }
-    }
     filteringCharset = 'UTF-8'
 }
+
+tasks.register('copyDocIndex', Copy) {
+    description = 'Copies the generated index.html to the final docs directory.'
+    from layout.buildDirectory.file("tmp/manual/index.html")
+    into layout.buildDirectory.dir("docs/manual")
+    dependsOn genDocIndex
+}
+genDocIndex.finalizedBy(copyDocIndex)
 
 tasks.register('manualZips') {
     description = 'Builds the zipped manuals to bundle into the application.'
@@ -50,7 +53,9 @@ tasks.register('manualHtmls') {
     group = 'documentation'
 }
 
-ext.makeDocumentationTasks = { lang ->
+def manualLangsProvider = providers.gradleProperty("org.omegat.manualLangs")
+        .map { it.split(',') }
+manualLangsProvider.get().each { lang ->
     def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/passthrough.xsl"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.xml"))
@@ -196,7 +201,9 @@ tasks.register('firstSteps') {
 }
 assemble.dependsOn(firstSteps)
 
-ext.makeFirstStepTask = { lang ->
+def firstStepLangsProvider = providers.gradleProperty("org.omegat.firstStepLangs")
+        .map { it.split(',') }
+firstStepLangsProvider.get().each { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
         from layout.projectDirectory.file("src_docs/style/omegat.css")
         into layout.buildDirectory.dir("docs/greetings/${lang}/")

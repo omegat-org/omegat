@@ -3,19 +3,26 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
     id 'edu.sc.seis.launch4j'
-    id 'org.omegat.version-conventions'
+    id 'org.omegat.version'
 }
-def execContainerTasks = !project.hasProperty('forceSkipDocumentBuild') && exePresent('docker') || exePresent('nerdctl')
-def execWinDistTask = (exePresent('iscc') || execContainerTasks)
-// Starting from Nov 2022, certification provider force to use HSM to
-// store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
-// standards will require private keys for standard code signing
-// certificates to be stored on hardware certified as FIPS 140 Level 2,
-// Common Criteria EAL 4+, or equivalent.
-// #1179 build/release: Windows binary signature with PKCS#11 HSM
-// https://sourceforge.net/p/omegat/bugs/1179/
-// requires osslsigncode version 2.5 or later.
-def execWinSignTask = ['pkcs11module', 'winCodesignPassword'].every { project.hasProperty(it) } && exePresent('osslsigncode')
+
+/*
+ Starting from Nov 2022, certification provider force to use HSM to
+ store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
+ standards will require private keys for standard code signing
+ certificates to be stored on hardware certified as FIPS 140 Level 2,
+ Common Criteria EAL 4+, or equivalent.
+
+ #1179 build/release: Windows binary signature with PKCS#11 HSM
+ https://sourceforge.net/p/omegat/bugs/1179/
+ requires osslsigncode version 2.5 or later.
+
+ Due to the HSM requirements and the need for physical access to the
+ hardware security module, automatic signing configurations have been
+ removed from the build system. Developers must manually sign the
+ Windows executables using appropriate HSM tools after the build
+ process completes.
+ */
 
 // Read in all our custom messages and massage them for inclusion in the .iss
 ext.getInnoSetupCustomMessages = {
@@ -24,18 +31,24 @@ ext.getInnoSetupCustomMessages = {
     // Sort files to ensure English comes first, to set fallback
     fileTree(dir: 'release/win32-specific', include: 'CustomMessages*.ini')
             .sort()
-            .collect { file ->
+            .collectMany { file ->
                 def match = file.name =~ /CustomMessages_?([^\.]*).ini/
                 if (match) {
                     def capture = match.group(1)
                     def lang = capture.empty ? 'en' : capture
                     if (!blacklist.contains(lang)) {
-                        file.text.replaceAll(/(?m)^([^=]+)/) { "$lang.${it[0]}" }
+                        // This more specific regex avoids modifying comments and section headers.
+                        // It finds keys that are followed by an '=' sign and ignores lines starting with ';', '#', or '['.
+                        def newContent = file.text.replaceAll(/(?m)^(?!\s*[;\[#])([^=]+?)\s*(?==)/) { m -> "$lang.${m[1].trim()}" }
+                        return [newContent]
                     }
                 }
-            }.findAll()
-            .join(System.lineSeparator())
+                return []
+            }.join(System.lineSeparator())
 }
+
+def shortVersion = project.ext.omtVersion.version
+def fullVersion = project.ext.omtVersion.version + project.ext.omtVersion.beta
 
 /*
  * Configuration of launch4j java launcher.
@@ -50,72 +63,53 @@ launch4j {
     errTitle = 'OmegaT'
     headerType = 'gui'
     jreMinVersion = '11.0'
-    jreMaxVersion = '21.1'
+    jreMaxVersion = '24.0'
     copyConfigurable = [] // hack: don't copy dependencies to $libraryDir
     // assume bundled JRE in jre/, fallback to JAVA_HOME env then PATH
     bundledJrePath = 'jre;%JAVA_HOME%;%PATH%'
     requires64Bit = false  // support 32bit distribution
     copyright = "The GNU General Public License, Version 3.0"
-    version = omtVersion.version
-    textVersion = omtVersion.version
-    companyName = distAppVendor
-    fileDescription = shortDescription
+    version = shortVersion
+    textVersion = fullVersion
+    companyName = project.property('org.omegat.vendor')
+    fileDescription = project.property('org.omegat.shortDescription')
     restartOnCrash = false
     stayAlive = false
     priority = 'normal'
 }
 
+def assetDir = findProperty('assetDir') ?: '../'
+def windowsJRE32 = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x86-32_windows_*.zip')
+def windowsJRE = fileTree(dir: assetDir, include: 'OpenJDK17U-jre_x64_windows_*.zip')
+def windowsArm64JRE = fileTree(dir: assetDir, include: 'OpenJDK21U-jre_aarch64_windows_*.zip')
+tasks.register('win') {
+    description = 'Builds the Windows distributions.'
+    group = 'omegat distribution'
+}
 ext.makeWinTask = { args ->
-    def fullVersion = project.version + omtVersion.beta
     def installerBasename = "OmegaT_${fullVersion}_${args.suffix}"
     def installerWinExe = base.distsDirectory.file("${installerBasename}.exe")
-    def signedWinExe = base.distsDirectory.file("${installerBasename}_Signed.exe")
+    def cleanDistsTaskName = "${args.name}Clean"
     def prepDistsTaskName = "${args.name}Prep"
     def genDistsTaskName = "${args.name}Gen"
     def distsTaskName = "${args.name}"
-    def signedTaskName = "${args.name}Signed"
-    boolean execWinTasks = execWinDistTask && args.jrePath != null && !args.jrePath.empty
-    def parentTask = tasks.getByName("${args.parentTask}")
-    def signedTaskCommandArgs = { arg2 ->
-        def exe = exePresent('osslsigncode') ? 'osslsigncode' : file('ci/osslsigncode').toString()
-        def commandArgs = [exe, 'sign']
-        if (project.hasProperty('pkcs11module')) {
-            commandArgs.addAll('-pkcs11module', project.property('pkcs11module').toString())
-        }
-        if (project.hasProperty('winCodesignCert')) {
-            commandArgs.addAll('-certs', project.property('winCodesignCert').toString())
-        }
-        if (project.hasProperty('pkcs11cert')) {
-            commandArgs.addAll('-pkcs11cert', project.property('pkcs11cert').toString())
-        }
-        if (project.hasProperty('winCodesignPassword')) {
-            commandArgs.addAll('-pass', project.property('winCodesignPassword').toString())
-        }
-        if (project.hasProperty('winCodesignDevice')) {
-            envVars['USBDEV'] = project.property('winCodesignDevice')
-        }
-        commandArgs.addAll(
-                '-t', project.hasProperty('winCodesignTimestampUrl') ? project.property('winCodesignTimestampUrl').toString() :
-                'http://time.certum.pl/',
-                '-n', application.applicationName, '-i', omtWebsite, '-h', 'sha256',
-                '-in', installerWinExe.get().toString(),
-                '-out', signedWinExe.get().toString()
-        )
-        return commandArgs
+
+    def targetJar = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar")
+    def originJar = layout.buildDirectory.file('libs/OmegaT.jar')
+
+    def cleanDistsTask = tasks.register(cleanDistsTaskName, Delete) {
+        delete layout.buildDirectory.file("innosetup/${args.name}/jre")
+        delete installerWinExe
     }
 
     tasks.register(prepDistsTaskName, Sync) {
-        onlyIf { execWinTasks }
-        doFirst {
-            delete "$destinationDir/jre"
-            delete installerWinExe
-        }
         with distributions.main.contents
+        dependsOn cleanDistsTask
         destinationDir = file(layout.buildDirectory.file("innosetup/${args.name}"))
         outputs.upToDateWhen {
+            def f1 = targetJar.get().asFile
+            def f2 = originJar.get().asFile
             // detect up-to-date when OmegaT.jar exists and newer than libs/OmegaT.jar
-            def f1 = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar").get().asFile
-            def f2 = base.libsDirectory.file('OmegaT.jar').get().asFile
             f1.exists() && f2.exists() && f1.lastModified() > f2.lastModified()
         }
         from('release/win32-specific') {
@@ -144,8 +138,10 @@ ext.makeWinTask = { args ->
         dependsOn createAllExecutables
     }
 
+    def exe = layout.projectDirectory.file('ci/iscc')
+    def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
+
     tasks.register(genDistsTaskName, Exec) {
-        onlyIf { execWinTasks }
         dependsOn prepDistsTaskName
         inputs.files(
                 layout.buildDirectory.file("innosetup/${args.name}/OmegaT.jar"),
@@ -154,49 +150,24 @@ ext.makeWinTask = { args ->
         )
         // You'd think we could just set the PATH, but there be dragons here
         // https://github.com/palantir/gradle-docker/issues/162
-        def exe = exePresent('iscc') ? 'iscc' : file('ci/iscc')
-        def iss = layout.buildDirectory.file("innosetup/${args.name}/OmegaT.iss").get().asFile
         logging.captureStandardOutput LogLevel.INFO
         commandLine exe, '/Qp', iss
         outputs.file layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
-        doLast {
-            println ""
-            def f3 = layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe").get().asFile
-            logger.info('Built ' + f3.toString() + "(" + f3.length() + ")")
-        }
     }
 
     tasks.register(distsTaskName, Copy) {
         description = "Creates a Windows installer for ${args.name} distro. " +
                 'Requires Inno Setup (http://www.jrsoftware.org/isinfo.php).'
-        onlyIf { execWinTasks }
         from layout.buildDirectory.file("innosetup/${args.name}/${installerBasename}.exe")
         into base.distsDirectory
         outputs.file installerWinExe
         dependsOn genDistsTaskName
+        group 'omegat distribution'
     }
-
-    tasks.register(signedTaskName, Exec) {
-        group = 'omegat distribution'
-        inputs.file installerWinExe skipWhenEmpty()
-        outputs.file signedWinExe
-        // Starting from Nov 2022, certification provider force to use HSM to
-        // store private keys. Starting on June 1, 2023, at 00:00 UTC, industry
-        // standards will require private keys for standard code signing
-        // certificates to be stored on hardware certified as FIPS 140 Level 2,
-        // Common Criteria EAL 4+, or equivalent.
-        // #1179 build/release: Windows binary signature with PKCS#11 HSM
-        // https://sourceforge.net/p/omegat/bugs/1179/
-        // requires osslsigncode version 2.5 or later.
-        onlyIf { execWinSignTask }
-        doFirst {
-            delete signedWinExe
-        }
-        def envVars = [:]
-        commandLine(signedTaskCommandArgs())
-        environment(envVars)
-        dependsOn distsTaskName
-    }
-    assemble.dependsOn args.name, signedTaskName
-    parentTask.dependsOn args.name, signedTaskName
+    assemble.dependsOn distsTaskName
+    tasks.win.dependsOn distsTaskName
 }
+makeWinTask(name: 'winNoJRE', suffix: 'Windows_without_JRE')
+makeWinTask(name: 'winJRE64', suffix: 'Windows_64', jrePath: windowsJRE, arch: 'x64')
+makeWinTask(name: 'winJRE', suffix: 'Windows', jrePath: windowsJRE32)
+makeWinTask(name: 'winArm64JRE', suffix: 'Windows_aarch64', jrePath: windowsArm64JRE)

@@ -91,7 +91,7 @@ public class FindMatchesTest {
      * There are three tmx entries for each sentence.
      */
     @Test
-    public void testSegmented() throws Exception {
+    public void testSegmented() {
         ProjectProperties prop = new ProjectProperties(tmpDir.toFile());
         prop.setSourceLanguage("en");
         prop.setTargetLanguage("ca");
@@ -130,7 +130,7 @@ public class FindMatchesTest {
         List<String> segments = segmenter.segment(prop.getSourceLanguage(), srcText, spaces, brules);
         assertEquals(3, segments.size());
         finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
-        result = finder.search(srcText, false, iStopped);
+        result = finder.search(srcText, false, iStopped, true);
         assertEquals(OConsts.MAX_NEAR_STRINGS, result.size());
         assertEquals("Hit segmented tmx records", 100, result.get(0).scores[0].score);
         assertEquals(100, result.get(0).scores[0].scoreNoStem);
@@ -172,7 +172,7 @@ public class FindMatchesTest {
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
-        List<NearString> result = finder.search("XXX", false, iStopped);
+        List<NearString> result = finder.search("XXX", false, iStopped, true);
         // Without the fix, the result has two entries, but it should one.
         assertEquals(1, result.size());
         assertEquals("XXX", result.get(0).source);
@@ -211,7 +211,7 @@ public class FindMatchesTest {
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
         // Search source "XXx" in en-US
-        List<NearString> result = finder.search("XXX", false, iStopped);
+        List<NearString> result = finder.search("XXX", false, iStopped, true);
         // There should be three entries.
         assertEquals(3, result.size());
         assertEquals("XXx", result.get(0).source); // should be en-US.
@@ -239,7 +239,7 @@ public class FindMatchesTest {
         assertEquals(2, segments.size());
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
-        List<NearString> result = finder.search(srcText, false, iStopped);
+        List<NearString> result = finder.search(srcText, false, iStopped, true);
         assertEquals(srcText, result.get(0).source);
         assertEquals(2, result.size());
         // match normal
@@ -270,7 +270,7 @@ public class FindMatchesTest {
         String srcText = ste.getSrcText();
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
-        List<NearString> result = finder.search(srcText, false, iStopped);
+        List<NearString> result = finder.search(srcText, false, iStopped, true);
         assertEquals(1, result.size());
         assertEquals(srcText, result.get(0).source);
         int foreignPenalty = Preferences.PENALTY_FOR_FOREIGN_MATCHES_DEFAULT;
@@ -293,7 +293,7 @@ public class FindMatchesTest {
                 + "Wow! "
                 + "Thanks for expanding the diversity of our community with new members!";
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, false, 30);
-        List<NearString> result = finder.search(srcText, false, iStopped);
+        List<NearString> result = finder.search(srcText, false, iStopped, true);
         assertEquals(2, result.size());
         assertEquals("Hit with segmented tmx record", 35, result.get(0).scores[0].score);
         assertEquals(35, result.get(0).scores[0].score);
@@ -318,7 +318,7 @@ public class FindMatchesTest {
                 new DefaultTokenizer(), segmenter);
         IStopped iStopped = () -> false;
         FindMatches finder = new FindMatches(project, segmenter, OConsts.MAX_NEAR_STRINGS, true, 85);
-        List<NearString> result = finder.search("Other", false, iStopped);
+        List<NearString> result = finder.search("Other", false, iStopped, false);
         assertEquals(3, result.size());
         assertEquals("Other", result.get(0).source);
         assertEquals("Altre", result.get(0).translation); // default
@@ -361,6 +361,9 @@ public class FindMatchesTest {
             }
             public boolean existEntryInProject(EntryKey key) {
                 return false;
+            }
+            public void clear() {
+                // do nothing
             }
         };
 

@@ -53,6 +53,7 @@ import javax.swing.text.StyledDocument;
 import org.omegat.util.Platform;
 
 /**
+ * A collection of styling constants and helper methods for use with JTables.
  *
  * @author Aaron Madlon-Kay
  */

@@ -223,6 +223,7 @@ public final class JTextPaneLinkifier {
                 // URL detection
                 URLCodec codec = new URLCodec("UTF-8");
                 UrlValidator urlValidator = new UrlValidator();
+                doc.setCharacterAttributes(0, doc.getLength(), new SimpleAttributeSet(), true);
                 for (Pattern pattern : urlPatterns) {
                     int shift = 0;
                     final String text = doc.getText(0, doc.getLength());

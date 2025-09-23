@@ -86,6 +86,84 @@ public class SearcherTest {
         FileUtils.deleteDirectory(tempDir);
     }
 
+    // ----- Unit tests -----
+
+    @Test
+    public void testSearchCheckEntrySrcText() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(null, s);
+        searcher.addToMatcher("OmegaT is great");
+        searcher.checkEntry("OmegaT is great", null, null, null, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryLocalizedText() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(null, s);
+        searcher.addToMatcher("OmegaT is great");
+        searcher.checkEntry(null, "OmegaT is great", null, null, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryNote() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(null, s);
+        searcher.addToMatcher("OmegaT is great");
+        searcher.checkEntry(null, null, "OmegaT is great", null, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryComments() {
+        String[] comments = new String[] { "Comment 1", "Comment 2" };
+        addSTE(fi, "id1", "OmegaT is great", null, comments);
+        String searchKeyword = "Comment 2";
+        SearchExpression s = createSearchExpression(searchKeyword, SearchExpressionType.EXACT, true, false);
+        Searcher searcher = new Searcher(null, s);
+        searcher.addToMatcher(searchKeyword);
+        searcher.checkEntry(null, null, null, comments, null, 0, "");
+        assertFalse(searcher.getRawSearchResults().isEmpty());
+    }
+
+    @Test
+    public void testSearchCheckEntryAuthor() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        s.author = "author 1";
+        s.searchAuthor = true;
+        Searcher searcher = new Searcher(null, s);
+        searcher.addToMatcher("OmegaT is great");
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = "OmegaT is great";
+        entry.creator = "author 1";
+        searcher.checkEntry("OmegaT is great", null, null, null, entry, 0, "");
+        List<SearchResultEntry> result = searcher.getRawSearchResults();
+        assertFalse(result.isEmpty());
+        assertEquals("OmegaT is great", result.get(0).getSrcText());
+    }
+
+    @Test
+    public void testSearchCheckEntryNotAuthor() {
+        addSTE(fi, "id1", "OmegaT is great", null);
+        SearchExpression s = createSearchExpression("OmegaT is great", SearchExpressionType.EXACT, true, false);
+        s.author = "author 1";
+        s.searchAuthor = true;
+        Searcher searcher = new Searcher(null, s);
+        searcher.addToMatcher("OmegaT is great");
+        PrepareTMXEntry entry = new PrepareTMXEntry();
+        entry.source = "OmegaT is great";
+        entry.creator = "author 2";
+        searcher.checkEntry("OmegaT is great", null, null, null, entry, 0, "");
+        List<SearchResultEntry> result = searcher.getRawSearchResults();
+        assertTrue(result.isEmpty());
+    }
+
+    // ----- Functional tests -----
     @Test
     public void testSearchStringExactMatch() throws Exception {
         addSTE(fi, "id1", "OmegaT is great", null);
@@ -341,6 +419,8 @@ public class SearcherTest {
         s.widthInsensitive = widthInsensitive;
         s.excludeOrphans = false;
         s.replacement = null;
+        s.searchNotes = true;
+        s.searchAuthor = false;
         return s;
     }
 
@@ -352,8 +432,13 @@ public class SearcherTest {
     }
 
     private SourceTextEntry addSTE(IProject.FileInfo fi, String id, String source, String translation) {
+        return addSTE(fi, id, source, translation, null);
+    }
+
+    private SourceTextEntry addSTE(IProject.FileInfo fi, String id, String source, String translation,
+                                   String[] properties) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
+        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, properties, translation,
                 new ArrayList<>());
         ste.setSourceTranslationFuzzy(false);
         fi.entries.add(ste);
@@ -371,7 +456,6 @@ public class SearcherTest {
     protected static class RealProjectWithTMX extends RealProject {
         public RealProjectWithTMX(ProjectProperties props) {
             super(props);
-            projectTMX = new ProjectTMX();
         }
 
         public ProjectTMX getTMX() {

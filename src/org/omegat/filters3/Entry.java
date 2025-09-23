@@ -31,7 +31,9 @@ package org.omegat.filters3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.TranslationException;
@@ -99,7 +101,7 @@ public class Entry {
         return lastGood;
     }
 
-    private Text textInstance = null;
+    private @Nullable Text textInstance = null;
 
     /**
      * Returns an instance of {@link Text} class used to populate this entry.
@@ -138,7 +140,7 @@ public class Entry {
      * filter.
      */
     private void aggregateTags() {
-        List<Element> newElements = new ArrayList<Element>();
+        List<Element> newElements = new ArrayList<>();
         AggregatedTag aggregated = null;
 
         for (Element elem : elements) {
@@ -163,14 +165,11 @@ public class Entry {
         // Check if there is remaining aggregated tag
         if (aggregated != null) {
             newElements.add(aggregated);
-            aggregated = null;
         }
 
         // Copy everything to elements
         elements.clear();
-        for (Element elem : newElements) {
-            elements.add(elem);
-        }
+        elements.addAll(newElements);
         newElements.clear();
     }
 
@@ -513,7 +512,7 @@ public class Entry {
     // Dealing with translation
     // //////////////////////////////////////////////////////////////////////////
 
-    Entry translatedEntry = null;
+    @Nullable Entry translatedEntry = null;
 
     /**
      * Sets the translation of the shortcut string returned by
@@ -553,18 +552,17 @@ public class Entry {
      * the same tags in weakly correct order. See
      * {@link #setTranslation(String, XMLDialect, List)} for details.
      */
-    private void checkAndRecoverTags(String translation, List<ProtectedPart> protectedParts)
-            throws TranslationException {
-        translatedEntry = new Entry(xmlDialect, handler);
+    private void checkAndRecoverTags(String translation, List<ProtectedPart> protectedParts) {
+        Entry newTranslatedEntry = new Entry(xmlDialect, handler);
 
         // /////////////////////////////////////////////////////////////////////
         // recovering tags
         List<TagUtil.Tag> shortTags = TagUtil.buildTagList(translation,
-                protectedParts.toArray(new ProtectedPart[protectedParts.size()]));
+                protectedParts.toArray(new ProtectedPart[0]));
         int pos = 0;
         for (TagUtil.Tag shortTag : shortTags) {
             if (pos < shortTag.pos) {
-                translatedEntry.add(createTextInstance(translation.substring(pos, shortTag.pos)));
+                newTranslatedEntry.add(createTextInstance(translation.substring(pos, shortTag.pos)));
                 pos = shortTag.pos;
             }
             for (int j = getFirstGood(); j <= getLastGood(); j++) {
@@ -572,7 +570,7 @@ public class Entry {
                 if (longElem instanceof Tag) {
                     Tag longTag = (Tag) longElem;
                     if (longTag.toShortcut().equals(shortTag.tag)) {
-                        translatedEntry.add(longTag);
+                        newTranslatedEntry.add(longTag);
                         pos += shortTag.tag.length();
                         break;
                     }
@@ -582,8 +580,9 @@ public class Entry {
             // warning.
         }
         if (pos < translation.length()) {
-            translatedEntry.add(createTextInstance(translation.substring(pos)));
+            newTranslatedEntry.add(createTextInstance(translation.substring(pos)));
         }
+        translatedEntry = newTranslatedEntry;
 
         // /////////////////////////////////////////////////////////////////////
         // checking tags
@@ -603,24 +602,13 @@ public class Entry {
      * Returns long XML-encoded representation of the entry translation for
      * storing in TMX.
      */
+    @SuppressWarnings("unused")
     public String translationToTMX() {
-        if (translatedEntry == null) {
+        if (translatedEntry != null) {
+            return buildTranslation(translatedEntry.sourceToTMX(), Element::toTMX);
+        } else {
             return sourceToTMX();
         }
-
-        StringBuilder buf = new StringBuilder();
-
-        for (int i = 0; i < getFirstGood(); i++) {
-            buf.append(get(i).toTMX());
-        }
-
-        buf.append(translatedEntry.sourceToTMX());
-
-        for (int i = getLastGood() + 1; i < size(); i++) {
-            buf.append(get(i).toTMX());
-        }
-
-        return buf.toString();
     }
 
     /**
@@ -628,22 +616,29 @@ public class Entry {
      * document.
      */
     public String translationToOriginal() {
-        if (translatedEntry == null) {
+        if (translatedEntry != null) {
+            return buildTranslation(translatedEntry.sourceToOriginal(), Element::toOriginal);
+        } else {
             return sourceToOriginal();
         }
+    }
 
+    /**
+     * Helper method to build translation strings with the appropriate format.
+     *
+     * @param translatedContent The translated content to include in the result
+     * @param elementConverter The conversion function to apply to elements (toTMX or toOriginal)
+     * @return The formatted translation string
+     */
+    private String buildTranslation(String translatedContent, Function<Element, String> elementConverter) {
         StringBuilder buf = new StringBuilder();
-
         for (int i = 0; i < getFirstGood(); i++) {
-            buf.append(get(i).toOriginal());
+            buf.append(elementConverter.apply(get(i)));
         }
-
-        buf.append(translatedEntry.sourceToOriginal());
-
+        buf.append(translatedContent);
         for (int i = getLastGood() + 1; i < size(); i++) {
-            buf.append(get(i).toOriginal());
+            buf.append(elementConverter.apply(get(i)));
         }
-
         return buf.toString();
     }
 
@@ -652,7 +647,7 @@ public class Entry {
     // /////////////////////////////////////////////////////////////////////////
 
     /** Elements (tags and text) of this entry. */
-    private List<Element> elements = new ArrayList<Element>();
+    private final List<Element> elements = new ArrayList<>();
 
     /**
      * Adds an element to this entry. Can be either a {@link Text} or a

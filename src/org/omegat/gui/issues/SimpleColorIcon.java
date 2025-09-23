@@ -65,4 +65,8 @@ public class SimpleColorIcon implements Icon {
     public int getIconHeight() {
         return ICON_DIMENSION;
     }
+
+    public Color getColor() {
+        return color;
+    }
 }

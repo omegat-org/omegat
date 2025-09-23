@@ -62,6 +62,17 @@
         </Or>
         <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2"/>
     </Match>
+    <!-- RuntimePreferenceStore.getInstance returns the instance object in design. -->
+    <Match>
+        <Class name="org.omegat.core.data.RuntimePreferenceStore"/>
+        <Bug pattern="MS_EXPOSE_REP"/>
+    </Match>
+    <!-- CoreState.getInstance returns the instance object in design. -->
+    <Match>
+        <Class name="org.omegat.core.data.CoreState"/>
+        <Bug pattern="MS_EXPOSE_REP"/>
+    </Match>
+
     <!-- Plugin manager exposes lists of classes in design. suppress until design reconstruction -->
     <Match>
         <Class name="org.omegat.filters2.master.PluginUtils" />
@@ -171,7 +182,6 @@
     <!-- should be fixed the writing to static field from instance -->
     <Match>
         <Or>
-            <Class name="org.omegat.filters2.mozdtd.MozillaDTDFilter"/>
             <Class name="org.omegat.gui.editor.ViewLabel"/>
             <Class name="~org\.omegat\.gui\.scripting.*"/>
             <Class name="org.omegat.util.gui.OSXIntegration"/>
@@ -179,16 +189,21 @@
         <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>
     </Match>
 
-    <!-- Ignores positive-false detections -->
+    <!-- Ignores false-positive detections -->
     <Match>
         <Or>
             <Class name="org.omegat.gui.align.Aligner"/>
+            <Class name="org.omegat.filters3.xml.Handler" />
             <Class name="org.omegat.filters4.xml.xliff.AbstractXliffFilter"/>
             <Class name="org.omegat.filters3.xml.xliff.XLIFFFilter"/>
             <Class name="org.omegat.filters2.AbstractFilter"/>
             <Class name="org.omegat.filters2.po.PoFilter"/>
         </Or>
-        <Bug pattern="NP_NULL_ON_SOME_PATH"/>
+        <Bug pattern="NP_NULL_ON_SOME_PATH,NP_NULL_PARAM_DEREF"/>
+    </Match>
+    <Match>
+        <Class name="org.omegat.core.data.TestCoreState"/>
+        <Bug pattern="DLS_DEAD_LOCAL_STORE"/>
     </Match>
 
     <!-- Temporarily exclude to enable minimum chechks -->

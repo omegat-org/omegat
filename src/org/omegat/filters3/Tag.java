@@ -25,7 +25,10 @@
 
 package org.omegat.filters3;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.util.StaticUtils;
+
+import java.util.Objects;
 
 /**
  * A tag in a source text.
@@ -40,24 +43,21 @@ public abstract class Tag implements Element {
         END,
         /** Standalone tag. */
         ALONE
-    };
+    }
 
-    private String tag;
+    private final String tag;
 
     /** Returns this tag. */
     public String getTag() {
         return tag;
     }
 
-    private String shortcut;
+    private final String shortcut;
 
     /** Returns the short form of this tag, most often -- the first letter. */
     public String getShortcut() {
-        if (shortcut != null) {
-            return shortcut;
-        } else {
-            return String.valueOf(Character.toChars(getTag().codePointAt(0)));
-        }
+        return Objects.requireNonNullElseGet(shortcut, () ->
+                String.valueOf(Character.toChars(getTag().codePointAt(0))));
     }
 
     private Type type;
@@ -72,17 +72,17 @@ public abstract class Tag implements Element {
         this.type = type;
     }
 
-    private Attributes attributes;
+    private final @Nullable Attributes attributes;
 
     /** Returns tag's attributes. */
-    public Attributes getAttributes() {
+    public @Nullable Attributes getAttributes() {
         return attributes;
     }
 
     /**
      * Returns attribute value by name.
      */
-    public String getAttribute(String name) {
+    public @Nullable String getAttribute(String name) {
         Attribute attr = getAttributeObject(name);
         return attr == null ? null : attr.getValue();
     }
@@ -90,7 +90,10 @@ public abstract class Tag implements Element {
     /**
      * Returns attribute object by name.
      */
-    public Attribute getAttributeObject(String name) {
+    public @Nullable Attribute getAttributeObject(String name) {
+        if (attributes == null) {
+            return null;
+        }
         for (Attribute a : attributes.list) {
             if (name.equals(a.getName())) {
                 return a;
@@ -100,14 +103,14 @@ public abstract class Tag implements Element {
     }
 
     /** Attributes of correspondent start tag. */
-    private Attributes startAttributes;
+    private @Nullable Attributes startAttributes;
 
     /** Returns tag's attributes. */
-    public Attributes getStartAttributes() {
+    public @Nullable Attributes getStartAttributes() {
         return startAttributes;
     }
 
-    public void setStartAttributes(Attributes startAttributes) {
+    public void setStartAttributes(@Nullable Attributes startAttributes) {
         this.startAttributes = startAttributes;
     }
 
@@ -124,12 +127,12 @@ public abstract class Tag implements Element {
      * will return &lt;s3&gt; and {@link #toTMX()} will return &lt;bpt
      * i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
-    public void setIndex(int shortcut) {
-        this.index = shortcut;
+    public void setIndex(int newIndex) {
+        this.index = newIndex;
     }
 
     /** Creates a new instance of Tag */
-    public Tag(String tag, String shortcut, Type type, Attributes attributes) {
+    public Tag(String tag, String shortcut, Type type, @Nullable Attributes attributes) {
         this.tag = tag;
         this.shortcut = shortcut;
         this.type = type;
@@ -144,6 +147,7 @@ public abstract class Tag implements Element {
      * {@link #toPartialTMX()} instead. E.g. for &lt;strong&gt; tag should
      * return &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
+    @Override
     public String toTMX() {
         String tmxtag;
         switch (getType()) {
@@ -159,22 +163,7 @@ public abstract class Tag implements Element {
         default:
             throw new RuntimeException("Shouldn't hapen!");
         }
-
-        StringBuilder buf = new StringBuilder();
-
-        buf.append("<");
-        buf.append(tmxtag);
-        buf.append(" i=\"");
-        buf.append(getIndex());
-        buf.append("\">");
-
-        buf.append(toPartialTMX());
-
-        buf.append("</");
-        buf.append(tmxtag);
-        buf.append(">");
-
-        return buf.toString();
+        return "<" + tmxtag + " i=\"" + getIndex() + "\">" + toPartialTMX() + "</" + tmxtag + ">";
     }
 
     /**
@@ -191,7 +180,7 @@ public abstract class Tag implements Element {
             buf.append("/");
         }
         buf.append(getTag());
-        buf.append(getAttributes().toString());
+        buf.append(getAttributes());
         if (Type.ALONE == getType()) {
             buf.append("/");
         }
@@ -204,6 +193,7 @@ public abstract class Tag implements Element {
      * Returns shortcut string representation of the element. E.g. for
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
+    @Override
     public String toShortcut() {
         StringBuilder buf = new StringBuilder();
 
@@ -221,15 +211,17 @@ public abstract class Tag implements Element {
         return buf.toString();
     }
 
+    @Override
     public String toSafeCalcShortcut() {
         return StaticUtils.TAG_REPLACEMENT_CHAR + getShortcut().replace('<', '_').replace('>', '_')
                 + StaticUtils.TAG_REPLACEMENT_CHAR;
     }
 
     /**
-     * Returns the tag in its original form as it was in original document. Must
-     * be overriden by ancestors. E.g. for &lt;strong&gt; tag should return
+     * Returns the tag in its original form as it was in the original document.
+     * Must be overriden by ancestors. E.g. for &lt;strong&gt; tag should return
      * &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
+    @Override
     public abstract String toOriginal();
 }

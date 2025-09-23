@@ -48,8 +48,8 @@ public class AndroidFilter extends XMLFilter {
     static final String DO_NOT_TRANSLATE = "do not translate";
     static final String DONT_TRANSLATE = "don't translate";
 
-    static final Set<String> NAMED_TAGS = new HashSet<>(Arrays.asList("/resources/string",
-            "/resources/color", "/resources/array", "/resources/string-array", "/resources/integer-array"));
+    static final Set<String> NAMED_TAGS = new HashSet<>(Arrays.asList("/resources/string", "/resources/color",
+            "/resources/array", "/resources/string-array", "/resources/integer-array"));
 
     private String id;
     private String idPlurals = "";
@@ -113,11 +113,11 @@ public class AndroidFilter extends XMLFilter {
         }
     }
 
-    public void comment(String comment) {
+    public void comment(String newComment) {
         if (this.comment == null) {
-            this.comment = comment;
+            this.comment = newComment;
         } else {
-            this.comment += "\n" + comment;
+            this.comment += "\n" + newComment;
         }
     }
 
@@ -126,8 +126,8 @@ public class AndroidFilter extends XMLFilter {
      */
     public String translate(String entry, List<ProtectedPart> protectedParts) {
         /**
-         * Android sources has some entries without translatable="false" but with this comment. Yes, it's
-         * dirty hack, but there is no other way.
+         * Android sources has some entries without translatable="false" but
+         * with this comment. Yes, it's dirty hack, but there is no other way.
          */
         if (idComment != null) {
             String c = idComment.toLowerCase(Locale.ENGLISH);

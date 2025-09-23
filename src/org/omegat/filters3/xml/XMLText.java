@@ -34,7 +34,7 @@ import org.omegat.util.StringUtil;
  * @author Maxym Mykhalchuk
  */
 public class XMLText extends Text {
-    private boolean inCDATA;
+    private final boolean inCDATA;
 
     /** Whether this text is inside XDATA section. */
     public boolean isInCDATA() {
@@ -52,13 +52,10 @@ public class XMLText extends Text {
      * E.g. for <code>Rock&amp;Roll</code> should return
      * <code>Rock&amp;Roll</code>.
      */
+    @Override
     public String toOriginal() {
         if (inCDATA) {
-            StringBuilder res = new StringBuilder();
-            res.append("<![CDATA[");
-            res.append(getText());
-            res.append("]]>");
-            return res.toString();
+            return "<![CDATA[" + getText() + "]]>";
         } else {
             return StringUtil.makeValidXML(getText());
         }
@@ -67,7 +64,8 @@ public class XMLText extends Text {
     /**
      * Creates a new instance of XMLText class.
      */
-    public Text createInstance(String text) {
-        return new XMLText(text, inCDATA);
+    @Override
+    public Text createInstance(String newText) {
+        return new XMLText(newText, inCDATA);
     }
 }

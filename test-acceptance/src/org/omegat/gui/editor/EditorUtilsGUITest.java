@@ -42,7 +42,6 @@ import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
 import org.omegat.gui.main.TestCoreGUI;
-import org.omegat.util.LocaleRule;
 
 /**
  * @author Hiroshi Miura
@@ -54,9 +53,6 @@ public final class EditorUtilsGUITest {
     }
 
     public static class EditorUtilsFirstStepsTest extends TestCoreGUI {
-
-        @Rule
-        public final LocaleRule localeRule = new LocaleRule(Locale.ENGLISH);
 
         @Test
         public void testEditorUtilsGetWordFirstSteps() throws BadLocationException {
@@ -73,9 +69,6 @@ public final class EditorUtilsGUITest {
     }
 
     public static class EditorUtilsLoadedProjectTest extends TestCoreGUI {
-
-        @Rule
-        public final LocaleRule localeRule = new LocaleRule(new Locale("en"));
 
         @Rule
         public final TemporaryFolder folder = TemporaryFolder.builder().assureDeletion().build();

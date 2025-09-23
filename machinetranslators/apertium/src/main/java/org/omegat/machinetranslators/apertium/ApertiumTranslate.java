@@ -58,6 +58,8 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 
 /**
+ * Apertium machine translation connector.
+ *
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  */

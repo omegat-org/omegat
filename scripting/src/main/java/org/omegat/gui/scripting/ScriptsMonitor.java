@@ -44,7 +44,6 @@ import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.DirectoryMonitor;
-import org.omegat.util.Log;
 
 /**
  * Monitor to check changes in the script directory.

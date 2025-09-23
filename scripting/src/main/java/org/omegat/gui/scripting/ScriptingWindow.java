@@ -118,14 +118,7 @@ public class ScriptingWindow {
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
             JMenuItem menuItem = new JMenuItem();
             quickMenus[i] = menuItem;
-
-            unsetQuickScriptMenu(i);
-
-            // Since the script is run while editing a segment, the shortcut
-            // should not interfere
-            // with the segment content, so we set it to a Function key.
             quickMenus[i].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (i + 1)));
-
             toolsMenu.add(menuItem);
         }
     }
@@ -140,55 +133,6 @@ public class ScriptingWindow {
 
         if (quickMenus[index] == null) {
             return;
-        }
-
-        quickMenus[index].setEnabled(false);
-        Mnemonics.setLocalizedText(quickMenus[index],
-                "&" + scriptKey(index) + " - " + ScriptingWindowController.getString("SCW_SCRIPTS_NONE"));
-    }
-
-    private void setQuickScriptMenu(ScriptItem scriptItem, int index) {
-        controller.quickScripts[index] = scriptItem.getFileName();
-
-        removeAllQuickScriptActionListenersFrom(quickMenus[index]);
-        quickMenus[index].addActionListener(new QuickScriptActionListener(index));
-
-        // Since the script is run while editing a segment, the shortcut should
-        // not interfere
-        // with the segment content, so we set it to a Function key.
-        quickMenus[index].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (index + 1)));
-        quickMenus[index].setEnabled(true);
-        if ("".equals(scriptItem.getDescription())) {
-            quickMenus[index].setToolTipText(scriptItem.getDescription());
-        }
-
-        Mnemonics.setLocalizedText(quickMenus[index],
-                "&" + scriptKey(index) + " - " + scriptItem.getScriptName());
-    }
-
-    private void removeAllQuickScriptActionListenersFrom(JMenuItem menu) {
-        if (menu == null) {
-            return;
-        }
-
-        for (ActionListener l : menu.getActionListeners()) {
-            if (l instanceof QuickScriptActionListener) {
-                menu.removeActionListener(l);
-            }
-        }
-    }
-
-    public class QuickScriptActionListener implements ActionListener {
-
-        private final int index;
-
-        QuickScriptActionListener(int index) {
-            this.index = index;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            controller.runQuickScript(index);
         }
     }
 

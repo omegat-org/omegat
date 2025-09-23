@@ -49,12 +49,20 @@ public class ScriptSet {
         }
     }
 
+    /**
+     * Saves a script set to a file.
+     *
+     * @param setFile The file to save the set to
+     * @param title The title of the set
+     * @param quickScripts Array of quick script filenames
+     * @throws IOException If an error occurs during saving
+     */
     public static void saveSet(final File setFile, final String title, final String[] quickScripts) throws IOException {
         Properties p = new Properties();
 
         p.setProperty("title", title);
 
-        for (int i = 0; i < ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS; i++) {
+        for (int i = 0; i < QuickScriptManager.NUMBERS_OF_QUICK_SCRIPTS; i++) {
             if (quickScripts[i] != null) {
                 p.setProperty(Integer.toString(i + 1), quickScripts[i]);
             }
@@ -72,8 +80,8 @@ public class ScriptSet {
     }
 
     public ScriptItem getScriptItem(int key) {
-        if (key > ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS) {
-            key = ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS;
+        if (key > QuickScriptManager.NUMBERS_OF_QUICK_SCRIPTS) {
+            key = QuickScriptManager.NUMBERS_OF_QUICK_SCRIPTS;
         }
 
         String idx = Integer.toString(key);

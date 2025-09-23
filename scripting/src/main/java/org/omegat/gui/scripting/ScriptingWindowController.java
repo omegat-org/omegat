@@ -36,9 +36,8 @@ import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
 import javax.script.ScriptEngineFactory;
+import javax.swing.JMenuItem;
 import javax.swing.SwingWorker;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
@@ -54,8 +53,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.ResourceBundle;
-
-import static org.omegat.gui.scripting.ScriptingWindow.NUMBERS_OF_QUICK_SCRIPTS;
 
 public class ScriptingWindowController {
 
@@ -77,9 +74,7 @@ public class ScriptingWindowController {
         window.frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if (monitor != null) {
-                    monitor.stop();
-                }
+                monitor.stop();
             }
         });
         logResult(listScriptEngines());
@@ -120,7 +115,7 @@ public class ScriptingWindowController {
      * Execute the currently selected script.
      */
     void runScript() {
-        window.txtResult.setText("");
+        window.setText("");
 
         // Execute a script with a corresponding source file. If the source has
         // changed, we use the text area as source code, but still consider the
@@ -134,11 +129,11 @@ public class ScriptingWindowController {
 
             logResultRB("SCW_RUNNING_SCRIPT", window.currentScriptItem.getFile().getAbsolutePath());
 
-            String scriptString = window.txtScriptEditor.getTextArea().getText();
+            String scriptString = window.getText();
             if (scriptString.trim().isEmpty()) {
                 try {
                     scriptString = window.currentScriptItem.getText();
-                    window.txtScriptEditor.getTextArea().setText(scriptString);
+                    window.setText(scriptString);
                 } catch (IOException e) {
                     logErrorRB("SCW_CANNOT_READ_SCRIPT_FILE", window.currentScriptItem.getFileName());
                 }
@@ -153,7 +148,7 @@ public class ScriptingWindowController {
             // No file is found for this script, it is executed as standalone.
             logResult(StringUtil.format(ScriptingWindowController.getString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
             try {
-                executeScript(new ScriptItem(window.txtScriptEditor.getTextArea().getText()));
+                executeScript(new ScriptItem(window.getText()));
             } catch (ScriptExecutionException e) {
                 logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", ScriptItem.EDITOR_SCRIPT);
             }
@@ -243,20 +238,22 @@ public class ScriptingWindowController {
         scriptWorker.execute();
     }
 
-    void runQuickScript(int index) {
+    public void runQuickScript(int index) {
 
-        if (quickScripts[index] == null) {
+        String quickScript = quickScriptManager.getQuickScriptFilename(index);
+
+        if (quickScript == null) {
             logResultRB("SCW_NO_SCRIPT_SELECTED");
             return;
         }
 
         logResultRB("SCW_QUICK_RUN", index + 1);
-        ScriptItem scriptFile = new ScriptItem(new File(scriptsDirectory, quickScripts[index]));
+        ScriptItem scriptFile = new ScriptItem(new File(scriptsDirectory, quickScript));
 
         try {
             executeScript(scriptFile);
         } catch (ScriptExecutionException e) {
-            logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", quickScripts[index]);
+            logResultRB(e, "SCW_SCRIPT_LOAD_ERROR", quickScript);
         }
     }
 
@@ -302,7 +299,7 @@ public class ScriptingWindowController {
 
             @Override
             public void clear() {
-                window.txtResult.setText("");
+                window.setText("");
             }
         });
 
@@ -313,56 +310,43 @@ public class ScriptingWindowController {
         return BUNDLE.getString(key);
     }
 
-    void logResultRB(Throwable t, String key, Object... args) {
-        logResultToWindow(MessageFormat.format(getString(key), args) + "\n" + t.getMessage(), true);
+    public void logResultRB(Throwable t, String key, Object... args) {
+        window.logResultToWindow(MessageFormat.format(getString(key), args) + "\n" + t.getMessage(), true);
         LOGGER.atError().setCause(t).setMessageRB(key).addArgument(args).log();
     }
 
-    void logResultRB(String key, Object... args) {
-        logResultToWindow(MessageFormat.format(getString(key), args), true);
+    public void logResultRB(String key, Object... args) {
+        window.logResultToWindow(MessageFormat.format(getString(key), args), true);
         LOGGER.atError().setMessageRB(key).addArgument(args).log();
     }
 
-    void logResult(String s, Throwable t) {
-        logResultToWindow(s + "\n" + t.getMessage(), true);
+    public void logResult(String s, Throwable t) {
+        window.logResultToWindow(s + "\n" + t.getMessage(), true);
         LOGGER.atInfo().setCause(t).setMessage(s).log();
     }
 
-    void logResult(String s) {
+    public void logResult(String s) {
         logResult(s, true);
     }
 
-    void logResult(String s, boolean newLine) {
-        logResultToWindow(s, newLine);
+    public void logResult(String s, boolean newLine) {
+        window.logResultToWindow(s, newLine);
         LOGGER.atInfo().setMessage(s).log();
     }
 
-    /**
-     * Print log text to the Scripting Window's console area. A trailing line
-     * break will be added if the parameter newLine is true.
-     */
-    void logResultToWindow(String s, boolean newLine) {
-        Document doc = window.txtResult.getDocument();
-        try {
-            doc.insertString(doc.getLength(), s + (newLine ? "\n" : ""), null);
-        } catch (BadLocationException e1) {
-            /* empty */
-        }
-    }
-
-    void logInfoRB(String key, Object... args) {
+    public void logInfoRB(String key, Object... args) {
         LOGGER.atInfo().setMessageRB(key).addArgument(args).log();
     }
 
-    void logErrorRB(String key, Object... args) {
+    public void logErrorRB(String key, Object... args) {
         LOGGER.atError().setMessageRB(key).addArgument(args).log();
     }
 
-    void logErrorRB(Throwable t, String key, Object... args) {
+    public void logErrorRB(Throwable t, String key, Object... args) {
         LOGGER.atError().setCause(t).setMessageRB(key).addArgument(args).log();
     }
 
-    void setScriptsDirectory(String scriptsDir) {
+    public void setScriptsDirectory(String scriptsDir) {
         File dir;
         try {
             dir = new File(scriptsDir).getCanonicalFile();
@@ -371,7 +355,7 @@ public class ScriptingWindowController {
         }
 
         if (!dir.isDirectory()) {
-            window.updateQuickScripts();
+            // updateQuickScripts();
             return;
         }
         scriptsDirectory = dir;
@@ -384,13 +368,89 @@ public class ScriptingWindowController {
         }
     }
 
-    ScriptsMonitor monitor;
-    File scriptsDirectory;
-    ScriptWorker currentScriptWorker;
-    final Queue<ScriptWorker> queuedWorkers = new LinkedList<>();
-    final String[] quickScripts = new String[NUMBERS_OF_QUICK_SCRIPTS];
+    private final ScriptsMonitor monitor;
+    private File scriptsDirectory;
+    private ScriptWorker currentScriptWorker;
+    private final Queue<ScriptWorker> queuedWorkers = new LinkedList<>();
+    private QuickScriptManager quickScriptManager;
 
     public void setScriptItems(ArrayList<ScriptItem> scriptsList) {
         window.setScriptItems(scriptsList);
     }
+
+    public void initQuickScriptManager(JMenuItem[] quickMenuItems) {
+        quickScriptManager = new QuickScriptManager(this, quickMenuItems);
+        quickScriptManager.loadQuickScriptsFromPreferences();
+    }
+
+    /**
+     * Loads a script set and applies it to the quick script buttons.
+     * This method clears existing quick script associations and sets new ones
+     * from the provided ScriptSet.
+     *
+     * @param set The script set to load
+     */
+    public void loadScriptSet(ScriptSet set) {
+        if (set == null) {
+            return;
+        }
+
+        // Unset all previous scripts
+        for (int i = 0; i < QuickScriptManager.NUMBERS_OF_QUICK_SCRIPTS; i++) {
+            int scriptKey = i + 1;
+            Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey, "");
+            unsetQuickScript(i);
+        }
+
+        // Set scripts from the loaded set
+        for (int i = 0; i < QuickScriptManager.NUMBERS_OF_QUICK_SCRIPTS; i++) {
+            int scriptKey = i + 1;
+            ScriptItem scriptItem = set.getScriptItem(scriptKey);
+
+            if (scriptItem != null) {
+                // Update preference
+                Preferences.setPreference(Preferences.SCRIPTS_QUICK_PREFIX + scriptKey,
+                        scriptItem.getFileName());
+
+                // Update quick script in model
+                quickScriptManager.setQuickScript(scriptItem, i);
+
+                // Update UI
+                setQuickScript(scriptItem, i);
+
+                // Log the action
+                logInfoRB("SCW_QUICK_SCRIPT_LOADED", scriptItem.getFileName(), scriptKey);
+            }
+        }
+
+        // Update UI components to reflect the new set
+        // updateQuickScripts();
+
+        // Log success message
+        logResultRB("SCW_SET_LOADED", set.getTitle());
+    }
+
+    public File getScriptsDirectory() {
+        return scriptsDirectory;
+    }
+
+    /**
+     * Gets the array of quick script filenames.
+     *
+     * @return Array of quick script filenames
+     */
+    public String[] getQuickScriptFilenames() {
+        return quickScriptManager.getAllQuickScriptFilenames();
+    }
+
+    public void setQuickScript(ScriptItem scriptItem, int index) {
+        quickScriptManager.setQuickScript(scriptItem, index);
+        quickScriptManager.saveQuickScriptToPreferences(index, scriptItem.getFileName());
+    }
+
+    public void unsetQuickScript(int index) {
+        quickScriptManager.unsetQuickScript(index);
+        quickScriptManager.saveQuickScriptToPreferences(index, "");
+    }
+
 }

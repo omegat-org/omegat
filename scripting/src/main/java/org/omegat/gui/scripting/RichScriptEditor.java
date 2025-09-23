@@ -64,8 +64,7 @@ import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
 import org.openide.awt.Mnemonics;
 
-@SuppressWarnings("serial")
-public class RichScriptEditor extends AbstractScriptEditor implements SearchListener {
+public class RichScriptEditor implements IScriptEditor, SearchListener {
 
     private RSyntaxTextArea scriptEditor;
     private CollapsibleSectionPanel csp;
@@ -78,6 +77,11 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
     @Override
     public JTextArea getTextArea() {
         return scriptEditor;
+    }
+
+    @Override
+    public String getSelectedText() {
+        return scriptEditor.getSelectedText();
     }
 
     @Override

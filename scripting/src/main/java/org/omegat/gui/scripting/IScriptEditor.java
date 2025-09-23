@@ -7,6 +7,7 @@
                2013 Alex Buloichik
                2014 Briac Pilpre (briacp@gmail.com), Yu Tang
                2015 Yu Tang, Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,11 +33,42 @@ import java.awt.Component;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
 
-@SuppressWarnings("serial")
-public abstract class AbstractScriptEditor extends JTextArea {
-    public abstract void setHighlighting(String extension);
-    public abstract void enhanceMenu(JMenuBar mb);
-    public abstract void initLayout(ScriptingWindow scriptingWindow);
-    public abstract Component getPanel();
-    public abstract JTextArea getTextArea();
+/**
+ * Interface for script editors in OmegaT.
+ */
+public interface IScriptEditor {
+    /**
+     * Sets the syntax highlighting based on file extension.
+     *
+     * @param extension The file extension determining the syntax style
+     */
+    void setHighlighting(String extension);
+
+    /**
+     * Enhances the menu bar with editor-specific menu items.
+     *
+     * @param mb The menu bar to enhance
+     */
+    void enhanceMenu(JMenuBar mb);
+
+    /**
+     * Initializes the editor layout.
+     *
+     * @param scriptingWindow The scripting window this editor belongs to
+     */
+    void initLayout(ScriptingWindow scriptingWindow);
+
+    /**
+     * Gets the main component panel of this editor.
+     *
+     * @return The editor's main component
+     */
+    Component getPanel();
+
+    /**
+     * Gets the text area component for editing scripts.
+     *
+     * @return The text area component
+     */
+    JTextArea getTextArea();
 }

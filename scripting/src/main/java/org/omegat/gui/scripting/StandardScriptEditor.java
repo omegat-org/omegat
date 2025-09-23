@@ -34,39 +34,36 @@ import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-@SuppressWarnings("serial")
-public class StandardScriptEditor extends AbstractScriptEditor {
-    private JTextArea m_scriptEditor;
-    private JScrollPane m_scrollPaneEditor;
+public class StandardScriptEditor implements IScriptEditor {
+    private JTextArea scriptEditor;
+    private JScrollPane scrollPaneEditor;
 
     @Override
     public void setHighlighting(String extension) {
-
+        // Standard editor does not support highlighting
     }
 
     @Override
     public void enhanceMenu(JMenuBar menubar) {
-
+        // Standard editor does not support menu enhancement
     }
 
     @Override
     public void initLayout(ScriptingWindow scriptingWindow) {
-        m_scriptEditor = new JTextArea();
+        scriptEditor = new JTextArea();
 
-        m_scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
-                m_scriptEditor.getFont().getSize()));
-        m_scrollPaneEditor = new JScrollPane(m_scriptEditor);
-
+        scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
+                scriptEditor.getFont().getSize()));
+        scrollPaneEditor = new JScrollPane(scriptEditor);
     }
 
     @Override
     public Component getPanel() {
-        return m_scrollPaneEditor;
+        return scrollPaneEditor;
     }
 
     @Override
     public JTextArea getTextArea() {
-        return m_scriptEditor;
+        return scriptEditor;
     }
-
 }

@@ -68,9 +68,10 @@ public class AutoCompleter implements IAutoCompleter {
 
     private static final int MIN_VIEWPORT_HEIGHT = 50;
     private static final int MAX_POPUP_WIDTH = 500;
+    private static final int POPUP_DELAY = 100;
 
-    JPopupMenu popup = new JPopupMenu();
-    private EditorTextArea3 editor;
+    private final JPopupMenu popup = new JPopupMenu();
+    private final EditorTextArea3 editor;
     private AutoCompleterKeys keys;
 
     public static final int PAGE_ROW_COUNT = 10;
@@ -94,7 +95,7 @@ public class AutoCompleter implements IAutoCompleter {
     public AutoCompleter(EditorTextArea3 editor) {
         this.editor = editor;
 
-        popupTimer = new Timer(100, e -> {
+        popupTimer = new Timer(POPUP_DELAY, e -> {
             Point p = getDisplayPoint();
             popup.show(editor, p.x, p.y);
             editor.requestFocus();

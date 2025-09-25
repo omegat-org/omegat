@@ -42,27 +42,18 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.JMenu;
-
-import org.madlonkay.supertmxmerge.StmProperties;
-import org.madlonkay.supertmxmerge.SuperTmxMerge;
-import org.madlonkay.supertmxmerge.data.ITuv;
-import org.madlonkay.supertmxmerge.data.Key;
-import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.operation.TMXRebaseOperation;
+import org.omegat.core.team2.operation.TestingTMXRebaseOperation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.editor.EditorSettings;
+import org.omegat.gui.editor.EditorSettingsStub;
+import org.omegat.gui.editor.EditorStub;
 import org.omegat.gui.editor.IEditor;
-import org.omegat.gui.editor.IEditorFilter;
-import org.omegat.gui.editor.IPopupMenuConstructor;
-import org.omegat.gui.editor.autocompleter.IAutoCompleter;
-import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
@@ -70,13 +61,12 @@ import org.omegat.gui.glossary.IGlossaries;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.gui.main.MainMenuStub;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.TestPreferencesInitializer;
-import org.omegat.util.gui.MenuExtender.MenuKey;
 
 import com.vlsolutions.swing.docking.Dockable;
 import gen.core.project.RepositoryDefinition;
@@ -93,7 +83,7 @@ public final class TestTeamIntegrationChild {
 
     public static final String PLUGINS_LIST_FILE = "test-integration/plugins.properties";
 
-    static final String CONCURRENT_NAME = "concurrent";
+    public static final String CONCURRENT_NAME = "concurrent";
 
     static long finishTime;
     static String source;
@@ -157,7 +147,7 @@ public final class TestTeamIntegrationChild {
             }
             projectProperties.autocreateDirectories();
             Core.setProject(new NotLoadedProject());
-            TestCoreState.getInstance().setGlossaryManager(new GlossaryManager(new TestGlossaryTextArea()));
+            TestCoreState.getInstance().setGlossaryManager(new GlossaryManager(new GlossaryTextAreaStub()));
             loadProject(projectProperties);
 
             key = new EntryKey[segCount];
@@ -413,234 +403,7 @@ public final class TestTeamIntegrationChild {
         }
     };
 
-    static IEditor editor = new IEditor() {
-
-        @Override
-        public void windowDeactivated() {
-        }
-
-        @Override
-        public void undo() {
-        }
-
-        @Override
-        public void setFilter(IEditorFilter filter) {
-        }
-
-        @Override
-        public void setAlternateTranslationForCurrentEntry(boolean alternate) {
-        }
-
-        @Override
-        public void requestFocus() {
-        }
-
-        @Override
-        public void replaceEditTextAndMark(String text) {
-        }
-
-        @Override
-        public void replaceEditText(String text) {
-        }
-
-        @Override
-        public void replaceEditTextAndMark(final String text, final String origin) {
-        }
-
-        @Override
-        public void removeFilter() {
-        }
-
-        @Override
-        public void remarkOneMarker(String markerClassName) {
-        }
-
-        @Override
-        public void registerUntranslated() {
-        }
-
-        @Override
-        public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
-        }
-
-        @Override
-        public void registerIdenticalTranslation() {
-        }
-
-        @Override
-        public void registerEmptyTranslation() {
-        }
-
-        @Override
-        public void refreshViewAfterFix(List<Integer> fixedEntries) {
-        }
-
-        @Override
-        public void refreshView(boolean doCommit) {
-        }
-
-        @Override
-        public void redo() {
-        }
-
-        @Override
-        public void prevEntryWithNote() {
-        }
-
-        @Override
-        public void prevEntry() {
-        }
-
-        @Override
-        public void nextXAutoEntry() {
-        }
-
-        @Override
-        public void prevXAutoEntry() {
-        }
-
-        @Override
-        public void nextXEnforcedEntry() {
-        }
-
-        @Override
-        public void prevXEnforcedEntry() {
-        }
-
-        @Override
-        public void nextUntranslatedEntry() {
-        }
-
-        @Override
-        public void nextUniqueEntry() {
-        }
-
-        @Override
-        public void nextTranslatedEntry() {
-        }
-
-        @Override
-        public void nextEntryWithNote() {
-        }
-
-        @Override
-        public void nextEntry() {
-        }
-
-        @Override
-        public void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-                String markerClassName) {
-        }
-
-        @Override
-        public void insertText(String text) {
-        }
-
-        @Override
-        public void insertTag(String tag) {
-        }
-
-        @Override
-        public void gotoHistoryForward() {
-        }
-
-        @Override
-        public void gotoHistoryBack() {
-        }
-
-        @Override
-        public void gotoFile(int fileIndex) {
-        }
-
-        @Override
-        public void gotoEntryAfterFix(int fixedEntry, String fixedSource) {
-        }
-
-        @Override
-        public void gotoEntry(String srcString, EntryKey key) {
-        }
-
-        @Override
-        public void gotoEntry(int entryNum) {
-        }
-
-        @Override
-        public void gotoEntry(int entryNum, CaretPosition pos) {
-        }
-
-        @Override
-        public EditorSettings getSettings() {
-            return null;
-        }
-
-        @Override
-        public String getSelectedText() {
-            return null;
-        }
-
-        @Override
-        public void selectSourceText() {
-        }
-
-        @Override
-        public IEditorFilter getFilter() {
-            return null;
-        }
-
-        @Override
-        public String getCurrentTranslation() {
-            return null;
-        }
-
-        @Override
-        public String getCurrentFile() {
-            return null;
-        }
-
-        @Override
-        public int getCurrentEntryNumber() {
-            return 0;
-        }
-
-        @Override
-        public SourceTextEntry getCurrentEntry() {
-            return null;
-        }
-
-        @Override
-        public void commitAndLeave() {
-        }
-
-        @Override
-        public void commitAndDeactivate() {
-        }
-
-        @Override
-        public void changeCase(CHANGE_CASE_TO newCase) {
-        }
-
-        @Override
-        public void replaceEditText(final String text, final String origin) {
-        }
-
-        @Override
-        public void activateEntry() {
-        }
-
-        @Override
-        public IAutoCompleter getAutoCompleter() {
-            return null;
-        }
-
-        @Override
-        public String getCurrentTargetFile() {
-            return null;
-        }
-
-        @Override
-        public void insertTextAndMark(String text) {
-        }
-    };
+    static IEditor editor = new EditorStub(new EditorSettingsStub());
 
     static IMainWindow mainWindow = new ConsoleWindow() {
         @Override
@@ -659,45 +422,7 @@ public final class TestTeamIntegrationChild {
         public void lockUI() {
         }
 
-        final IMainMenu menu = new IMainMenu() {
-
-            public JMenu getToolsMenu() {
-                return null;
-            }
-
-            public JMenu getProjectMenu() {
-                return new JMenu();
-            }
-
-            public JMenu getOptionsMenu() {
-                return null;
-            }
-
-            public JMenu getMachineTranslationMenu() {
-                return null;
-            }
-
-            public JMenu getGlossaryMenu() {
-                return null;
-            }
-
-            public JMenu getAutoCompletionMenu() {
-                return null;
-            }
-
-            @Override
-            public JMenu getHelpMenu() {
-                return null;
-            }
-
-            @Override
-            public JMenu getMenu(MenuKey marker) {
-                return null;
-            }
-
-            public void invokeAction(String action, int modifiers) {
-            }
-        };
+        final IMainMenu menu = new MainMenuStub();
 
         public IMainMenu getMainMenu() {
             return menu;
@@ -737,119 +462,12 @@ public final class TestTeamIntegrationChild {
         }
 
         @Override
-        protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
-            Log.log("Base:   " + baseTMX);
-            Log.log("Mine:   " + projectTMX);
-            Log.log("Theirs: " + headTMX);
-            if (!checkMergeInput(baseTMX, projectTMX)) {
-                Log.log("'Mine' TM is not a valid derivative of 'Base' TM");
-                // Exceptions thrown here are suppressed in
-                // RealProject.saveProject(boolean) so this is the easiest way
-                // to early-exit
-                System.exit(1);
-            }
-            if (!checkMergeInput(baseTMX, headTMX)) {
-                Log.log("'Theirs' TM is not a valid derivative of 'Base' TM");
-                System.exit(1);
-            }
-            StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
-                    .setResolutionStrategy(new ResolutionStrategy() {
-                        @Override
-                        public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
-                            TMXEntry enBase = baseTuv != null
-                                    ? (TMXEntry) baseTuv.getUnderlyingRepresentation()
-                                    : null;
-                            TMXEntry enProject = projectTuv != null
-                                    ? (TMXEntry) projectTuv.getUnderlyingRepresentation()
-                                    : null;
-                            TMXEntry enHead = headTuv != null
-                                    ? (TMXEntry) headTuv.getUnderlyingRepresentation()
-                                    : null;
-                            String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
-                                    + tr(enHead) + " project=" + tr(enProject);
-                            if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {
-                                if (v(enHead) < v(enBase)) {
-                                    throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
-                                }
-                                if (v(enProject) < v(enBase)) {
-                                    throw new RuntimeException("Rebase project: wrong concurrent: " + s);
-                                }
-                                if (v(enHead) > v(enProject)) {
-                                    System.err.println(s + ": result=head");
-                                    return headTuv;
-                                } else {
-                                    System.err.println(s + ": result=project");
-                                    return projectTuv;
-                                }
-                            } else {
-                                throw new RuntimeException("Rebase error: non-concurrent entry: " + s);
-                            }
-                        }
-                    });
-            String srcLang = config.getSourceLanguage().getLanguage();
-            String trgLang = config.getTargetLanguage().getLanguage();
-            ProjectTMX mergedTMX = SuperTmxMerge.merge(
-                    new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                    new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                    new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-            Log.log("Merged: " + mergedTMX);
-            if (!checkMergeInput(baseTMX, mergedTMX)) {
-                Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
-                System.exit(1);
-            }
-            commitDetails.append('\n');
-            commitDetails.append(props.getReport().toString());
-            return mergedTMX;
-        }
-
-        /**
-         * Check a TM against the base TM to ensure it's a valid modification of
-         * the base. This integration test never deletes entries, only adds or
-         * modifies them, so modified versions must be supersets of their base
-         * versions.
-         *
-         * @param base
-         *            Base TM from which the other TM is derived
-         * @param other
-         *            Other TM
-         * @return Valid or not
-         */
-        boolean checkMergeInput(ProjectTMX base, ProjectTMX other) {
-            return base.defaults.keySet().stream().allMatch(other.defaults::containsKey)
-                    && base.alternatives.keySet().stream().allMatch(other.alternatives::containsKey);
-        }
-
-        long v(TMXEntry e) {
-            if (e == null) {
-                return 0;
-            } else {
-                return Long.parseLong(e.translation);
-            }
-        }
-
-        String src(TMXEntry e) {
-            if (e == null) {
-                return "null";
-            } else {
-                return e.source;
-            }
-        }
-
-        String tr(TMXEntry e) {
-            if (e == null) {
-                return "null";
-            } else {
-                return e.translation;
-            }
-        }
-
-        @Override
-        protected void notifyGlossaryManagerFileChanged(File file) {
-            TestCoreState.getInstance().getGlossaryManager().fileChanged(file);
+        TMXRebaseOperation getTMXRebaseOperation() {
+            return new TestingTMXRebaseOperation(projectTMX, config);
         }
     }
 
-    private static class TestGlossaryTextArea implements IGlossaries {
+    private static class GlossaryTextAreaStub implements IGlossaries {
         @Override
         public List<GlossaryEntry> getDisplayedEntries() {
             return null;

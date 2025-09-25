@@ -3,7 +3,7 @@
  */
 
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -18,5 +18,3 @@ dependencies {
         compileOnly(libs.jackson.yaml)
     }
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))

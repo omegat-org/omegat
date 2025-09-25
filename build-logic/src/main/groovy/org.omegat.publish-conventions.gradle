@@ -1,6 +1,6 @@
 
 plugins {
-    id 'org.omegat.version-conventions'
+    id 'org.omegat.version'
     id 'maven-publish'
     id 'signing'
     id 'org.hidetake.ssh'
@@ -11,7 +11,7 @@ publishing {
         mavenJava(MavenPublication) { publication ->
             groupId = project.property('org.omegat.groupId')
             artifactId = project.property('org.omegat.artifactId')
-            version = mavenStyleVersion
+            version = project.ext.omtVersion.mavenStyleVersion
             from components.java
 
             pom {

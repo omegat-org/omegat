@@ -1,5 +1,5 @@
 plugins {
-    id 'org.omegat.module-conventions'
+    id 'org.omegat.module'
 }
 
 dependencies {
@@ -22,8 +22,6 @@ dependencies {
     testImplementation(libs.commons.io)
     testRuntimeOnly(libs.languagetool.en)
 }
-
-makeModuleTask(loadProperties(file('plugin.properties')))
 
 test {
     dependsOn project(':language-modules:en').tasks.withType(Jar)

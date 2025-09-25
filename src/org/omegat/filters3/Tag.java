@@ -82,7 +82,7 @@ public abstract class Tag implements Element {
     /**
      * Returns attribute value by name.
      */
-    public String getAttribute(String name) {
+    public @Nullable String getAttribute(String name) {
         Attribute attr = getAttributeObject(name);
         return attr == null ? null : attr.getValue();
     }
@@ -90,7 +90,7 @@ public abstract class Tag implements Element {
     /**
      * Returns attribute object by name.
      */
-    public Attribute getAttributeObject(String name) {
+    public @Nullable Attribute getAttributeObject(String name) {
         if (attributes == null) {
             return null;
         }
@@ -103,14 +103,14 @@ public abstract class Tag implements Element {
     }
 
     /** Attributes of correspondent start tag. */
-    private Attributes startAttributes;
+    private @Nullable Attributes startAttributes;
 
     /** Returns tag's attributes. */
-    public Attributes getStartAttributes() {
+    public @Nullable Attributes getStartAttributes() {
         return startAttributes;
     }
 
-    public void setStartAttributes(Attributes startAttributes) {
+    public void setStartAttributes(@Nullable Attributes startAttributes) {
         this.startAttributes = startAttributes;
     }
 
@@ -147,6 +147,7 @@ public abstract class Tag implements Element {
      * {@link #toPartialTMX()} instead. E.g. for &lt;strong&gt; tag should
      * return &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
+    @Override
     public String toTMX() {
         String tmxtag;
         switch (getType()) {
@@ -162,16 +163,7 @@ public abstract class Tag implements Element {
         default:
             throw new RuntimeException("Shouldn't hapen!");
         }
-
-        return "<" +
-                tmxtag +
-                " i=\"" +
-                getIndex() +
-                "\">" +
-                toPartialTMX() +
-                "</" +
-                tmxtag +
-                ">";
+        return "<" + tmxtag + " i=\"" + getIndex() + "\">" + toPartialTMX() + "</" + tmxtag + ">";
     }
 
     /**
@@ -201,6 +193,7 @@ public abstract class Tag implements Element {
      * Returns shortcut string representation of the element. E.g. for
      * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
+    @Override
     public String toShortcut() {
         StringBuilder buf = new StringBuilder();
 
@@ -218,6 +211,7 @@ public abstract class Tag implements Element {
         return buf.toString();
     }
 
+    @Override
     public String toSafeCalcShortcut() {
         return StaticUtils.TAG_REPLACEMENT_CHAR + getShortcut().replace('<', '_').replace('>', '_')
                 + StaticUtils.TAG_REPLACEMENT_CHAR;
@@ -228,5 +222,6 @@ public abstract class Tag implements Element {
      * Must be overriden by ancestors. E.g. for &lt;strong&gt; tag should return
      * &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
+    @Override
     public abstract String toOriginal();
 }

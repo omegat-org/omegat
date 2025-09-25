@@ -31,14 +31,16 @@ tasks.register('genDocIndex', Copy) {
     from inputTemplate
     into layout.buildDirectory.dir("tmp/manual/")
     expand('languages': langInformation)
-    doLast {
-        copy {
-            from layout.buildDirectory.file("tmp/manual/index.html")
-            into layout.buildDirectory.dir("docs/manual")
-        }
-    }
     filteringCharset = 'UTF-8'
 }
+
+tasks.register('copyDocIndex', Copy) {
+    description = 'Copies the generated index.html to the final docs directory.'
+    from layout.buildDirectory.file("tmp/manual/index.html")
+    into layout.buildDirectory.dir("docs/manual")
+    dependsOn genDocIndex
+}
+genDocIndex.finalizedBy(copyDocIndex)
 
 tasks.register('manualZips') {
     description = 'Builds the zipped manuals to bundle into the application.'
@@ -51,7 +53,9 @@ tasks.register('manualHtmls') {
     group = 'documentation'
 }
 
-ext.makeDocumentationTasks = { lang ->
+def manualLangsProvider = providers.gradleProperty("org.omegat.manualLangs")
+        .map { it.split(',') }
+manualLangsProvider.get().each { lang ->
     def docbookInclude = tasks.register("docbookInclude${lang.capitalize()}", TransformationTask) {
         styleSheetFile.set(layout.projectDirectory.file("${documentRootDir}/xsl/passthrough.xsl"))
         outputFile.set(layout.buildDirectory.file("tmp/manual/${lang}/_index.xml"))
@@ -197,7 +201,9 @@ tasks.register('firstSteps') {
 }
 assemble.dependsOn(firstSteps)
 
-ext.makeFirstStepTask = { lang ->
+def firstStepLangsProvider = providers.gradleProperty("org.omegat.firstStepLangs")
+        .map { it.split(',') }
+firstStepLangsProvider.get().each { lang ->
     def firstStepsHtmlFinally = tasks.register("firstSteps${lang.capitalize()}Finally", Copy) {
         from layout.projectDirectory.file("src_docs/style/omegat.css")
         into layout.buildDirectory.dir("docs/greetings/${lang}/")
@@ -211,35 +217,4 @@ ext.makeFirstStepTask = { lang ->
     }
     firstSteps.dependsOn(firstStepsHtml)
     firstSteps.dependsOn(firstStepsHtmlFinally)
-}
-
-ext.htdocs = '/home/project-web/omegat/htdocs'
-
-ext.publishAtomically = { args ->
-    tasks.register("publish${args.name.capitalize()}", Exec) {
-        description = "Copies ${args.name} to SourceForge web."
-        dependsOn args.sourceTask
-        group = 'omegat release'
-        doLast {
-            ssh.run {
-                session(remotes.sourceforgeWeb) {
-                    def timestamp = new Date().format('yyyyMMddHHmmss')
-                    def targetDir = args.targetDir ?: "${args.name}-${omtFlavor}"
-                    def tempDir = "${targetDir}-temp-${timestamp}"
-                    sftp {
-                        cd htdocs
-                        mkdir tempDir
-                    }
-                    put from: args.sourceTask.outputs.files, into: "${htdocs}/${tempDir}"
-                    sftp {
-                        cd htdocs
-                        try { rename targetDir, "${targetDir}-old-${timestamp}" }
-                        catch (ignored) {}
-                        rename "${tempDir}/${args.sourceTask.destinationDir.name}", targetDir
-                        rmdir tempDir
-                    }
-                }
-            }
-        }
-    }
 }

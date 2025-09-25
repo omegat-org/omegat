@@ -25,6 +25,7 @@
 
 package org.omegat.util;
 
+import org.jetbrains.annotations.Nullable;
 import org.omegat.core.data.RuntimePreferenceStore;
 
 /**
@@ -78,15 +79,27 @@ public final class RuntimePreferences {
         if (anAlternateFilenameFrom == null || anAlternateFilenameTo == null) {
             throw new IllegalArgumentException("Both alternateFilenameFrom and alternateFilenameTo are required.");
         }
-        alternateFilenameFrom = anAlternateFilenameFrom;
-        alternateFilenameTo = anAlternateFilenameTo;
+        RuntimePreferenceStore.getInstance().setAlternateFilenameFrom(anAlternateFilenameFrom);
+        RuntimePreferenceStore.getInstance().setAlternateFilenameTo(anAlternateFilenameTo);
     }
 
     public static String getAlternateFilenameFrom() {
-        return alternateFilenameFrom;
+        return RuntimePreferenceStore.getInstance().getAlternateFilenameFrom();
     }
 
     public static String getAlternateFilenameTo() {
-        return alternateFilenameTo;
+        return RuntimePreferenceStore.getInstance().getAlternateFilenameTo();
+    }
+
+    public static void setTokenizerSource(@Nullable String tokenizerSource) {
+        RuntimePreferenceStore.getInstance().setTokenizerSource(tokenizerSource);
+    }
+
+    public static void setTokenizerTarget(@Nullable String tokenizerTarget) {
+        RuntimePreferenceStore.getInstance().setTokenizerTarget(tokenizerTarget);
+    }
+
+    public static void setNoTeam() {
+        RuntimePreferenceStore.getInstance().setNoTeam();
     }
 }

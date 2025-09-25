@@ -48,6 +48,8 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Paths;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -74,19 +76,19 @@ final class Common {
             File script = new File(params.scriptName);
             Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
             if (script.isFile()) {
-                HashMap<String, Object> binding = new HashMap<>();
-                binding.put("eventType", eventType);
-
-                ConsoleBindings consoleBindigs = new ConsoleBindings();
-                binding.put(ScriptRunner.VAR_CONSOLE, consoleBindigs);
-                binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindigs);
-                binding.put(ScriptRunner.VAR_EDITOR, consoleBindigs);
-
                 try {
-                    String result = ScriptRunner.executeScript(new ScriptItem(script), binding);
-                    Log.log(result);
-                } catch (Exception ex) {
-                    Log.log(ex);
+                    ClassLoader cl = PluginUtils.getClassLoader(PluginUtils.PluginType.MISCELLANEOUS);
+                    if (cl == null) {
+                        Log.logErrorRB("SCW_SCRIPT_LOAD_ERROR", "the plugin classloader is null");
+                        return;
+                    }
+                    Class<?> scriptingClass = cl.loadClass("org.omegat.gui.scripting.ScriptingModule");
+                    Method method = scriptingClass.getMethod("executeConsoleScript",
+                            IProjectEventListener.PROJECT_CHANGE_TYPE.class, File.class);
+                    method.invoke(null, eventType, script);
+                } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
+                         | InvocationTargetException e) {
+                    Log.log(e);
                 }
             } else {
                 Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");

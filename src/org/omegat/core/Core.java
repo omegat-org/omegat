@@ -225,9 +225,8 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params) throws Exception {
+    public static void initializeGUI() throws Exception {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
 
         // 1. Initialize project
         coreState.setProject(new NotLoadedProject());
@@ -281,9 +280,8 @@ public final class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params) {
+    public static void initializeConsole() {
         CoreState coreState = CoreState.getInstance();
-        coreState.setCmdLineParams(params);
         coreState.setTagValidation(new TagValidationTool());
         coreState.setProject(new NotLoadedProject());
         coreState.setMainWindow(new ConsoleWindow());
@@ -304,7 +302,8 @@ public final class Core {
     }
 
     public static Map<String, String> getParams() {
-        return CoreState.getInstance().getCmdLineParams();
+        // FIXME
+        return null;
     }
 
     public static void registerFilterClass(Class<? extends IFilter> clazz) {

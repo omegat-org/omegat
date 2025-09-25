@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.util.Log;
@@ -45,6 +46,8 @@ import javax.swing.UIManager;
 import java.awt.Toolkit;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -173,6 +176,38 @@ public class StartCommand implements Callable<Integer> {
         }
         JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg,
                 OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Execute a script as PROJECT_CHANGE events. We can't use the regular
+     * project listener because the SwingUtilities.invokeLater method used in
+     * CoreEvents doesn't stop the project processing in console mode.
+     */
+    private void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
+        if (params.scriptName == null) {
+            return;
+        }
+        File script = new File(params.scriptName);
+        Log.logInfoRB("CONSOLE_EXECUTE_SCRIPT", script, eventType);
+        if (script.isFile()) {
+            try {
+                ClassLoader cl = PluginUtils.getClassLoader(PluginUtils.PluginType.MISCELLANEOUS);
+                if (cl == null) {
+                    Log.logErrorRB("SCW_SCRIPT_LOAD_ERROR", "the plugin classloader is null");
+                    return;
+                }
+                Class<?> scriptingClass = cl.loadClass("org.omegat.gui.scripting.ScriptingModule");
+                Method method = scriptingClass.getMethod("executeConsoleScript",
+                        IProjectEventListener.PROJECT_CHANGE_TYPE.class, File.class);
+                method.invoke(null, eventType, script);
+            } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException
+                     | InvocationTargetException e) {
+                Log.log(e);
+            }
+        } else {
+            Log.logInfoRB("SCW_SCRIPT_LOAD_ERROR", "the script is not a file");
+        }
+
     }
 
 }

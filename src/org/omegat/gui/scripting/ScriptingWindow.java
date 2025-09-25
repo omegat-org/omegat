@@ -112,27 +112,6 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class ScriptingWindow {
 
-    static ScriptingWindow window;
-
-    public static void loadPlugins() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-                window = new ScriptingWindow();
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
-    }
-
-    public static void unloadPlugins() {
-        if (window != null) {
-            window.frame.dispose();
-        }
-    }
-
     final JFrame frame;
 
     public ScriptingWindow() {

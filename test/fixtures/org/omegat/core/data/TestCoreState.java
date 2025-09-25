@@ -144,7 +144,7 @@ public class TestCoreState extends CoreState {
         state.setIssuesWindow(null);
 
         // 5. Reset other state
-        state.setCmdLineParams(Collections.emptyMap());
+        // state.setCmdLineParams(Collections.emptyMap());
 
         // 6. Clear main window last to ensure event listeners still have access during cleanup
         state.setMainWindow(null);

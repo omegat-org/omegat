@@ -28,16 +28,45 @@
 package org.omegat.gui.scripting;
 
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.JMenuBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
-public abstract class AbstractScriptEditor extends JTextArea {
-    public abstract void setHighlighting(String extension);
-    public abstract void enhanceMenu(JMenuBar mb);
-    public abstract void initLayout(ScriptingWindow scriptingWindow);
-    public abstract Component getPanel();
-    // XXX setText(String s) does not seem to work directly on the subclasses ?
-    public abstract JTextArea getTextArea();
+public class StandardScriptEditor extends AbstractScriptEditor {
+    private JTextArea m_scriptEditor;
+    private JScrollPane m_scrollPaneEditor;
+
+    @Override
+    public void setHighlighting(String extension) {
+        // No highlighting for now.
+    }
+
+    @Override
+    public void enhanceMenu(JMenuBar menubar) {
+        // No menu enhancement for now.
+    }
+
+    @Override
+    public void initLayout(ScriptingWindow scriptingWindow) {
+        m_scriptEditor = new JTextArea();
+
+        m_scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
+                m_scriptEditor.getFont().getSize()));
+        m_scrollPaneEditor = new JScrollPane(m_scriptEditor);
+
+    }
+
+    @Override
+    public Component getPanel() {
+        return m_scrollPaneEditor;
+    }
+
+    @Override
+    public JTextArea getTextArea() {
+        return m_scriptEditor;
+    }
+
 }

@@ -89,8 +89,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
 import org.omegat.util.Java8Compat;

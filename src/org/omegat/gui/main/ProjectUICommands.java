@@ -83,7 +83,6 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RecentProjects;
-import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;

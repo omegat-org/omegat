@@ -32,6 +32,7 @@ import java.nio.file.Files;
 
 import org.eclipse.jgit.api.Git;
 import org.omegat.core.Core;
+import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNPropertyValue;
 import org.tmatesoft.svn.core.wc.SVNClientManager;

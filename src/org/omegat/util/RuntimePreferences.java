@@ -102,4 +102,8 @@ public final class RuntimePreferences {
     public static void setNoTeam() {
         RuntimePreferenceStore.getInstance().setNoTeam();
     }
+
+    public static boolean isNoTeam() {
+        return RuntimePreferenceStore.getInstance().isNoTeam();
+    }
 }

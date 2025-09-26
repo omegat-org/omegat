@@ -36,9 +36,6 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.scripting.ConsoleBindings;
-import org.omegat.gui.scripting.ScriptItem;
-import org.omegat.gui.scripting.ScriptRunner;
 import org.omegat.languagetools.LanguageClassBroker;
 import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.Log;
@@ -57,7 +54,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.format.TextStyle;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 

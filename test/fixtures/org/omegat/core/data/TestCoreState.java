@@ -30,7 +30,6 @@ import org.omegat.gui.main.IMainWindow;
 import javax.swing.SwingUtilities;
 import java.awt.HeadlessException;
 import java.awt.Window;
-import java.util.Collections;
 
 public class TestCoreState extends CoreState {
 
@@ -144,7 +143,6 @@ public class TestCoreState extends CoreState {
         state.setIssuesWindow(null);
 
         // 5. Reset other state
-        // state.setCmdLineParams(Collections.emptyMap());
 
         // 6. Clear main window last to ensure event listeners still have access during cleanup
         state.setMainWindow(null);

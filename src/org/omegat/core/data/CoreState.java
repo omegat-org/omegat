@@ -47,9 +47,6 @@ import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.notes.INotes;
 import org.omegat.gui.properties.SegmentPropertiesArea;
 
-import java.util.Collections;
-import java.util.Map;
-
 public class CoreState {
 
     protected static volatile CoreState instance = new CoreState();

@@ -22,3 +22,9 @@ build.gradle @miurahr
 /src_docs/xsl/     @kazephil @brandelune @kosivantsov
 /src_docs/style/     @kazephil @brandelune @kosivantsov
 /src_docs/template/     @kazephil @brandelune @kosivantsov
+
+# CLI
+/src/org/omegat/cli/Parameters*.properties    @kazephil @brandelune @kosivantsov
+
+# Packages owners
+/src/org/omegat/cli/*.java @miurahr

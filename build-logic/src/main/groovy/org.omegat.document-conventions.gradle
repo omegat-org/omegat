@@ -142,7 +142,6 @@ manualLangsProvider.get().each { lang ->
 
     def zipTask= tasks.register("manualZip${lang.capitalize()}", Zip) {
         from fileTree(dir: layout.buildDirectory.file("docs/manual/${lang}"))
-        exclude 'docs/manual/index.html'
         from fileTree(dir: "src_docs/${lang}", include: '**/version*.properties')
         archiveFileName = "${lang}.zip"
         destinationDirectory = file(layout.buildDirectory.dir("docs/manuals/"))

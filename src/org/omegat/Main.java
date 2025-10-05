@@ -73,7 +73,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import org.languagetool.JLanguageTool;
 import org.omegat.core.data.RuntimePreferenceStore;
-import org.omegat.gui.scripting.runner.AbstractScriptRunner;
 import tokyo.northside.logging.ILogger;
 
 import org.omegat.CLIParameters.PSEUDO_TRANSLATE_TYPE;

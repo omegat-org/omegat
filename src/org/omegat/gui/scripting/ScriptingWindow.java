@@ -31,6 +31,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -86,11 +87,11 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.gui.scripting.ui.AbstractScriptEditor;
+import org.omegat.gui.scripting.ui.StandardScriptEditor;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
 import org.omegat.util.Java8Compat;
@@ -112,28 +113,19 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class ScriptingWindow {
 
-    static ScriptingWindow window;
+    private final JFrame frame;
 
-    public static void loadPlugins() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-                window = new ScriptingWindow();
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
+    public Frame getParent() {
+        return frame;
     }
 
-    public static void unloadPlugins() {
-        if (window != null) {
-            window.frame.dispose();
-        }
+    public void addContent(Component content) {
+        frame.getContentPane().add(content);
     }
 
-    final JFrame frame;
+    public void dispose() {
+        frame.dispose();
+    }
 
     public ScriptingWindow() {
 
@@ -387,7 +379,7 @@ public class ScriptingWindow {
     private AbstractScriptEditor getScriptEditor() {
 
         try {
-            Class<?> richScriptEditorClass = Class.forName("org.omegat.gui.scripting.RichScriptEditor");
+            Class<?> richScriptEditorClass = Class.forName("org.omegat.gui.scripting.ui.RichScriptEditor");
             return (AbstractScriptEditor) richScriptEditorClass.getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
             // RichScriptEditor not present, fallback to the standard editor

@@ -3,10 +3,8 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik
-               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
-               2015 Yu Tang, Aaron Madlon-Kay
+ Copyright (C) 2015 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,19 +23,32 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.scripting;
 
-import java.awt.Component;
 
-import javax.swing.JMenuBar;
-import javax.swing.JTextArea;
+package org.omegat.gui.scripting.runner;
 
-@SuppressWarnings("serial")
-public abstract class AbstractScriptEditor extends JTextArea {
-    public abstract void setHighlighting(String extension);
-    public abstract void enhanceMenu(JMenuBar mb);
-    public abstract void initLayout(ScriptingWindow scriptingWindow);
-    public abstract Component getPanel();
-    // XXX setText(String s) does not seem to work directly on the subclasses ?
-    public abstract JTextArea getTextArea();
+import javax.script.Bindings;
+import javax.script.Invocable;
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptException;
+import java.util.Map;
+
+public class StandardScriptRunner extends AbstractScriptRunner {
+
+    @Override
+    protected Object doExecuteScript(String script, ScriptEngine engine,
+                                     Map<String, Object> additionalBindings) throws ScriptException {
+
+        Bindings bindings = setupBindings(engine, additionalBindings);
+        engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
+
+        Object result = engine.eval(script);
+
+        if (engine instanceof Invocable) {
+            invokeGuiScript((Invocable) engine);
+        }
+
+        return result;
+    }
 }

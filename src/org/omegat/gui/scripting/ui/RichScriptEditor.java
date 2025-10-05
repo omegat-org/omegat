@@ -25,7 +25,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.scripting;
+package org.omegat.gui.scripting.ui;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -61,6 +61,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 import org.fife.ui.rtextarea.SearchResult;
+import org.omegat.gui.scripting.ScriptingWindow;
 import org.omegat.util.Java8Compat;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
@@ -101,8 +102,8 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
 
     public void initSearchDialogs() {
 
-        m_findDialog = new FindDialog(m_scriptingWindow.frame, this);
-        m_replaceDialog = new ReplaceDialog(m_scriptingWindow.frame, this);
+        m_findDialog = new FindDialog(m_scriptingWindow.getParent(), this);
+        m_replaceDialog = new ReplaceDialog(m_scriptingWindow.getParent(), this);
 
         // This ties the properties of the two dialogs together (match case, regex, etc.).
         SearchContext context = m_findDialog.getSearchContext();
@@ -163,7 +164,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
             if (m_replaceDialog.isVisible()) {
                 m_replaceDialog.setVisible(false);
             }
-            GoToDialog dialog = new GoToDialog(m_scriptingWindow.frame);
+            GoToDialog dialog = new GoToDialog(m_scriptingWindow.getParent());
             dialog.setMaxLineNumberAllowed(m_scriptEditor.getLineCount());
             dialog.setVisible(true);
             int line = dialog.getLineNumber();
@@ -242,7 +243,7 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
         RTextScrollPane scrollPaneEditor = new RTextScrollPane(m_scriptEditor);
         // scrollPaneEditor.setMinimumSize(minimumSize1);
         m_csp = new CollapsibleSectionPanel();
-        m_scriptingWindow.frame.getContentPane().add(m_csp);
+        m_scriptingWindow.addContent(m_csp);
         m_csp.add(scrollPaneEditor);
 
         initSearchDialogs();

@@ -87,6 +87,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
+import org.omegat.gui.scripting.runner.AbstractScriptRunner;
 import org.omegat.gui.scripting.ui.AbstractScriptEditor;
 import org.omegat.gui.scripting.ui.StandardScriptEditor;
 import org.openide.awt.Mnemonics;
@@ -165,7 +166,7 @@ public class ScriptingWindow {
 
     private String listScriptEngines() {
         StringBuilder sb = new StringBuilder(OStrings.getString("SCW_LIST_ENGINES") + "\n");
-        for (ScriptEngineFactory engine : ScriptRunner.getManager().getEngineFactories()) {
+        for (ScriptEngineFactory engine : ScriptRunner.getEngineFactories()) {
             sb.append(" - ");
             sb.append(engine.getEngineName());
             sb.append(" ");
@@ -555,7 +556,7 @@ public class ScriptingWindow {
         @Override
         protected String doInBackground() throws Exception {
             start = System.currentTimeMillis();
-            return ScriptRunner.executeScript(scriptString, scriptItem, bindings);
+            return AbstractScriptRunner.getActiveRunner().executeScript(scriptString, scriptItem, bindings);
         }
 
         @Override

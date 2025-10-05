@@ -47,6 +47,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.junit.Assume;
 import org.junit.Test;
 import org.omegat.core.TestCore;
+import org.omegat.gui.scripting.runner.AbstractScriptRunner;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 

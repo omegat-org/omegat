@@ -128,7 +128,7 @@ public abstract class AbstractScriptRunner {
         return engine;
     }
 
-    ScriptEngineManager getManager() {
+    public ScriptEngineManager getManager() {
         if (manager == null) {
             manager = new ScriptEngineManager(AbstractScriptRunner.class.getClassLoader());
         }
@@ -218,14 +218,14 @@ public abstract class AbstractScriptRunner {
      * @return a list of supported script file extensions as strings. The list may be empty
      *         if no engines are available or no extensions are defined.
      */
-    List<String> getAvailableScriptExtensions() {
+    public List<String> getAvailableScriptExtensions() {
         return getManager().getEngineFactories().stream()
                 .flatMap(factory -> factory.getExtensions().stream())
                 .collect(Collectors.toList());
     }
 
     // Runner selection logic
-    private volatile AbstractScriptRunner activeRunner;
+    private static volatile AbstractScriptRunner activeRunner;
 
     /**
      * Retrieves the active instance of {@link AbstractScriptRunner}. If no active
@@ -236,7 +236,7 @@ public abstract class AbstractScriptRunner {
      *         instance exists, a new {@link StandardScriptRunner} is created
      *         and returned.
      */
-    AbstractScriptRunner getActiveRunner() {
+    public static AbstractScriptRunner getActiveRunner() {
         if (activeRunner == null) {
             synchronized (AbstractScriptRunner.class) {
                 if (activeRunner == null) {

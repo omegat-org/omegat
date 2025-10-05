@@ -120,12 +120,11 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
     public void searchEvent(SearchEvent e) {
         SearchEvent.Type type = e.getType();
         SearchContext context = e.getSearchContext();
-        SearchResult result = null;
+        SearchResult result;
 
         switch (type) {
-        default: // Prevent FindBugs warning later
         case MARK_ALL:
-            result = SearchEngine.markAll(m_scriptEditor, context);
+            SearchEngine.markAll(m_scriptEditor, context);
             break;
         case FIND:
             result = SearchEngine.find(m_scriptEditor, context);
@@ -143,8 +142,9 @@ public class RichScriptEditor extends AbstractScriptEditor implements SearchList
             result = SearchEngine.replaceAll(m_scriptEditor, context);
             JOptionPane.showMessageDialog(null, result.getCount() + " occurrences replaced.");
             break;
+        default:
+            throw new IllegalArgumentException("Unexpected SearchEvent value.");
         }
-
     }
 
     private class ShowReplaceDialogAction implements ActionListener {

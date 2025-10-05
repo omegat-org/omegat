@@ -54,7 +54,7 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractScriptRunner {
 
-    protected static ScriptEngineManager manager;
+    private ScriptEngineManager manager;
 
     /**
      * Execute a script either in string form or, if <code>script</code> is
@@ -81,7 +81,7 @@ public abstract class AbstractScriptRunner {
      * @throws IOException when I/O error occurred.
      * @throws ScriptException when script engine raises error.
      */
-    public static String executeScript(String script, ScriptItem item,
+    public String executeScript(String script, ScriptItem item,
                                        Map<String, Object> additionalBindings) throws IOException, ScriptException {
 
         Map<String, Object> bindings = new HashMap<>();
@@ -115,7 +115,7 @@ public abstract class AbstractScriptRunner {
      *         default to the engine configured by {@code ScriptRunner.DEFAULT_SCRIPT} if
      *         no specific engine is found.
      */
-    protected static ScriptEngine getEngine(ScriptItem item) {
+     ScriptEngine getEngine(ScriptItem item) {
         String extension = ScriptRunner.DEFAULT_SCRIPT;
         if (item.getFile() != null) {
             extension = FilenameUtils.getExtension(item.getFileName());
@@ -128,7 +128,7 @@ public abstract class AbstractScriptRunner {
         return engine;
     }
 
-    public static ScriptEngineManager getManager() {
+    ScriptEngineManager getManager() {
         if (manager == null) {
             manager = new ScriptEngineManager(AbstractScriptRunner.class.getClassLoader());
         }
@@ -146,9 +146,9 @@ public abstract class AbstractScriptRunner {
      *            A map of bindings that will be included along with other
      *            bindings
      * @return The evaluation result
-     * @throws ScriptException
+     * @throws ScriptException when script engine raises error.
      */
-    public static Object executeScript(String script, ScriptEngine engine,
+    public Object executeScript(String script, ScriptEngine engine,
                                        Map<String, Object> additionalBindings) throws ScriptException {
         AbstractScriptRunner runner = getActiveRunner();
         return runner.doExecuteScript(script, engine, additionalBindings);
@@ -218,14 +218,14 @@ public abstract class AbstractScriptRunner {
      * @return a list of supported script file extensions as strings. The list may be empty
      *         if no engines are available or no extensions are defined.
      */
-    public static List<String> getAvailableScriptExtensions() {
+    List<String> getAvailableScriptExtensions() {
         return getManager().getEngineFactories().stream()
                 .flatMap(factory -> factory.getExtensions().stream())
                 .collect(Collectors.toList());
     }
 
     // Runner selection logic
-    private static volatile AbstractScriptRunner activeRunner;
+    private volatile AbstractScriptRunner activeRunner;
 
     /**
      * Retrieves the active instance of {@link AbstractScriptRunner}. If no active
@@ -236,7 +236,7 @@ public abstract class AbstractScriptRunner {
      *         instance exists, a new {@link StandardScriptRunner} is created
      *         and returned.
      */
-    public static AbstractScriptRunner getActiveRunner() {
+    AbstractScriptRunner getActiveRunner() {
         if (activeRunner == null) {
             synchronized (AbstractScriptRunner.class) {
                 if (activeRunner == null) {

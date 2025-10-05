@@ -33,9 +33,12 @@ import org.omegat.core.events.IApplicationEventListener;
  * Script module entry point.
  */
 @SuppressWarnings("unused")
-public class ScriptingModule {
+public final class ScriptingModule {
 
     static ScriptingWindow window;
+
+    private ScriptingModule() {
+    }
 
     public static void loadPlugins() {
         System.setProperty("omegat.debug.scripts", "true");

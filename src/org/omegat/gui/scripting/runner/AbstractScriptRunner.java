@@ -47,6 +47,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Abstract base class for script runners.
+ *
+ * @author Hiroshi Miura
+ */
 public abstract class AbstractScriptRunner {
 
     protected static ScriptEngineManager manager;
@@ -98,6 +103,18 @@ public abstract class AbstractScriptRunner {
         return result.toString();
     }
 
+    /**
+     * Retrieves a {@link ScriptEngine} to execute scripts based on the file extension
+     * associated with the provided {@link ScriptItem}. If the file is not specified
+     * or the appropriate engine is not available, it falls back to a default scripting
+     * engine.
+     *
+     * @param item the {@link ScriptItem} containing the script or script file information.
+     *             Must not be null.
+     * @return the {@link ScriptEngine} instance suitable for executing the script. Will
+     *         default to the engine configured by {@code ScriptRunner.DEFAULT_SCRIPT} if
+     *         no specific engine is found.
+     */
     protected static ScriptEngine getEngine(ScriptItem item) {
         String extension = ScriptRunner.DEFAULT_SCRIPT;
         if (item.getFile() != null) {
@@ -107,9 +124,7 @@ public abstract class AbstractScriptRunner {
         if (engine == null) {
             engine = getManager().getEngineByName(ScriptRunner.DEFAULT_SCRIPT);
         }
-        if (Boolean.getBoolean("omegat.debug.scripts")) {
-            // placeholder a logic to return instrumented scripting engine.
-        }
+        // implement me: placeholder a logic to return instrumented scripting engine if omegat.debug.scripts is set.
         return engine;
     }
 
@@ -140,14 +155,14 @@ public abstract class AbstractScriptRunner {
     }
 
     /**
-     * Template method for actual script execution
+     * Template method for actual script execution.
      * Subclasses override this for custom behavior
      */
     protected abstract Object doExecuteScript(String script, ScriptEngine engine,
                                               Map<String, Object> additionalBindings) throws ScriptException;
 
     /**
-     * Common binding setup - used by both normal and debug runners
+     * Common binding setup - used by both normal and debug runners.
      */
     protected Bindings setupBindings(ScriptEngine engine, Map<String, Object> additionalBindings) {
         Bindings bindings = engine.createBindings();
@@ -195,6 +210,14 @@ public abstract class AbstractScriptRunner {
         }
     }
 
+    /**
+     * Retrieves a list of file extensions that are supported by the available script engines.
+     * This method collects all extensions from the script engine factories
+     * managed by the {@link ScriptEngineManager}.
+     *
+     * @return a list of supported script file extensions as strings. The list may be empty
+     *         if no engines are available or no extensions are defined.
+     */
     public static List<String> getAvailableScriptExtensions() {
         return getManager().getEngineFactories().stream()
                 .flatMap(factory -> factory.getExtensions().stream())
@@ -204,15 +227,21 @@ public abstract class AbstractScriptRunner {
     // Runner selection logic
     private static volatile AbstractScriptRunner activeRunner;
 
+    /**
+     * Retrieves the active instance of {@link AbstractScriptRunner}. If no active
+     * runner has been set, this method will initialize a new instance of
+     * {@link StandardScriptRunner} as the default active runner.
+     *
+     * @return the current active {@link AbstractScriptRunner} instance. If no
+     *         instance exists, a new {@link StandardScriptRunner} is created
+     *         and returned.
+     */
     public static AbstractScriptRunner getActiveRunner() {
         if (activeRunner == null) {
             synchronized (AbstractScriptRunner.class) {
                 if (activeRunner == null) {
-                    if (Boolean.getBoolean("omegat.debug.scripts")) {
-                        // implement me: set Debug Runner here.
-                    } else {
-                        activeRunner = new StandardScriptRunner();
-                    }
+                    // implement me: set Debug Runner if omegat.debug.scripts is set.
+                    activeRunner = new StandardScriptRunner();
                 }
             }
         }

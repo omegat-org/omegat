@@ -88,6 +88,7 @@ import javax.swing.text.Document;
 
 import org.apache.commons.io.FilenameUtils;
 import org.omegat.gui.scripting.runner.AbstractScriptRunner;
+import org.omegat.gui.scripting.runner.ScriptRunner;
 import org.omegat.gui.scripting.ui.AbstractScriptEditor;
 import org.omegat.gui.scripting.ui.StandardScriptEditor;
 import org.openide.awt.Mnemonics;

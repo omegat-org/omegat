@@ -23,9 +23,9 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.scripting;
+package org.omegat.gui.scripting.runner;
 
-import org.omegat.gui.scripting.runner.AbstractScriptRunner;
+import org.omegat.gui.scripting.ScriptItem;
 
 import java.io.IOException;
 import java.util.List;

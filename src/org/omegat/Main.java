@@ -94,7 +94,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.scripting.ConsoleBindings;
 import org.omegat.gui.scripting.ScriptItem;
-import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.gui.scripting.runner.ScriptRunner;
 import org.omegat.languagetools.LanguageClassBroker;
 import org.omegat.languagetools.LanguageDataBroker;
 import org.omegat.util.FileUtil;

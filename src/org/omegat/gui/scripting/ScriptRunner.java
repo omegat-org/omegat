@@ -37,7 +37,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 /**
- * Scripting window entry point for backward compatibility.
+ * Scripting window entry point.
  * @author Hiroshi Miura
  */
 public final class ScriptRunner {
@@ -86,6 +86,31 @@ public final class ScriptRunner {
         return executeScript(null, item, additionalBindings);
     }
 
+    /**
+     * Execute a script either in string form or, if <code>script</code> is
+     * null, as read from the file associated with the supplied
+     * {@link ScriptItem}. The engine is resolved via the filename extension
+     * associated with <code>item</code> (defaults to {@link #DEFAULT_SCRIPT}).
+     * <p>
+     * This is a convenience method for
+     * {@link #executeScript(String, ScriptEngine, Map)}.
+     *
+     * @param script
+     *            The script in string form. Can be null.
+     * @param item
+     *            The associated {@link ScriptItem}. Must not be null. If
+     *            <code>script</code> is null, the script content will be read
+     *            from the associated file. The script engine will be resolved
+     *            from the filename. The resource bundle associated with the
+     *            <code>item</code> will be included in the bindings as
+     *            {@link #VAR_RESOURCES}.
+     * @param additionalBindings
+     *            A map of bindings that will be included along with other
+     *            bindings
+     * @return result string.
+     * @throws IOException when I/O error occurred.
+     * @throws ScriptException when script engine raises error.
+     */
     public static String executeScript(String script, ScriptItem item,
                                        Map<String, Object> additionalBindings) throws IOException, ScriptException {
         return AbstractScriptRunner.getActiveRunner().executeScript(script, item, additionalBindings);
@@ -99,6 +124,19 @@ public final class ScriptRunner {
         return AbstractScriptRunner.getActiveRunner().getManager().getEngineFactories();
     }
 
+    /**
+     * Execute a script with a given engine and bindings.
+     *
+     * @param script
+     *            The script in string form
+     * @param engine
+     *            The engine
+     * @param additionalBindings
+     *            A map of bindings that will be included along with other
+     *            bindings
+     * @return The evaluation result
+     * @throws ScriptException when script engine raises error.
+     */
     @SuppressWarnings("unused")
     public static Object executeScript(String script, ScriptEngine engine,
                                        Map<String, Object> additionalBindings) throws ScriptException {

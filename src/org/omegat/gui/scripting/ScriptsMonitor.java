@@ -43,7 +43,6 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.gui.scripting.runner.ScriptRunner;
 import org.omegat.util.DirectoryMonitor;
 
 /**

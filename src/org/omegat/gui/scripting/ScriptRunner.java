@@ -23,9 +23,9 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.scripting.runner;
+package org.omegat.gui.scripting;
 
-import org.omegat.gui.scripting.ScriptItem;
+import org.omegat.gui.scripting.runner.AbstractScriptRunner;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +37,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 /**
- * Scripting window entry point.
+ * Scripting window entry point for backward compatibility.
  * @author Hiroshi Miura
  */
 public final class ScriptRunner {
@@ -52,6 +52,8 @@ public final class ScriptRunner {
     public static final String SCRIPT_GUI_FUNCTION_NAME = "gui";
 
     public static final String DEFAULT_SCRIPT = "groovy";
+
+    // definition of global variables available to scripts.
     public static final String VAR_CONSOLE = "console";
     public static final String VAR_MAINWINDOW = "mainWindow";
     public static final String VAR_GLOSSARY = "glossary";

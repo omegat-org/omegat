@@ -22,11 +22,10 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.scripting.runner;
+package org.omegat.gui.scripting;
 
 import org.apache.commons.io.FilenameUtils;
 import org.junit.Test;
-import org.omegat.gui.scripting.ScriptingModule;
 import org.omegat.util.StaticUtils;
 
 import javax.script.Compilable;

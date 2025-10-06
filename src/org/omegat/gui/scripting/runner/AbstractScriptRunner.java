@@ -30,6 +30,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.gui.scripting.ScriptItem;
+import org.omegat.gui.scripting.ScriptRunner;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;

@@ -147,7 +147,7 @@ public class ScriptingWindow {
         });
 
         setScriptsDirectory(
-                Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, DEFAULT_SCRIPTS_DIR));
+                Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, ScriptingModule.DEFAULT_SCRIPTS_DIR));
 
         initWindowLayout();
 
@@ -379,18 +379,12 @@ public class ScriptingWindow {
     // CHECKSTYLE:ON
 
     private AbstractScriptEditor getScriptEditor() {
-
         try {
-            Class<?> richScriptEditorClass = Class.forName("org.omegat.gui.scripting.ui.RichScriptEditor");
-            return (AbstractScriptEditor) richScriptEditorClass.getDeclaredConstructor().newInstance();
-        } catch (ClassNotFoundException e) {
-            // RichScriptEditor not present, fallback to the standard editor
-            logResult("RichScriptEditor not present, fallback to the standard editor");
+            return new org.omegat.gui.scripting.ui.RichScriptEditor();
         } catch (Exception e) {
-            logResult("Error loading RichScriptEditor: ", e);
+            logResult("Error loading RichScriptEditor, fallback to the standard editor: ", e);
+            return new StandardScriptEditor();
         }
-
-        return new StandardScriptEditor();
     }
 
     private class QuickScriptUpdater implements ActionListener {
@@ -1082,8 +1076,6 @@ public class ScriptingWindow {
     }
 
     // CHECKSTYLE:OFF
-    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
-
     protected static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
 
     private JList<ScriptItem> m_scriptList;

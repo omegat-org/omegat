@@ -35,6 +35,7 @@ import org.omegat.core.events.IApplicationEventListener;
 @SuppressWarnings("unused")
 public final class ScriptingModule {
 
+    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
     static ScriptingWindow window;
 
     private ScriptingModule() {

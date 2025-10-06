@@ -534,7 +534,7 @@ public class ScriptingWindow {
             executeScript(m_currentScriptItem);
         } else {
             // No file is found for this script, it is executed as standalone.
-            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
+            logResult(StringUtil.format(OStrings.getString("SCW_RUNNING_EDITOR_SCRIPT")));
             executeScript(new ScriptItem(m_txtScriptEditor.getTextArea().getText()));
         }
 

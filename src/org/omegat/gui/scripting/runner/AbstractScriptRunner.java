@@ -27,6 +27,7 @@
 package org.omegat.gui.scripting.runner;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
@@ -231,21 +232,53 @@ public abstract class AbstractScriptRunner {
      * Retrieves the active instance of {@link AbstractScriptRunner}. If no active
      * runner has been set, this method will initialize a new instance of
      * {@link StandardScriptRunner} as the default active runner.
+     * <p>
+     * Note: This method returns a shared singleton instance. The returned runner
+     * should not be modified or stored beyond its immediate use for script execution.
      *
      * @return the current active {@link AbstractScriptRunner} instance. If no
      *         instance exists, a new {@link StandardScriptRunner} is created
-     *         and returned.
+     *         and returned. Never returns null.
      */
     public static AbstractScriptRunner getActiveRunner() {
-        if (activeRunner == null) {
+        AbstractScriptRunner result = activeRunner;
+        if (result == null) {
             synchronized (AbstractScriptRunner.class) {
-                if (activeRunner == null) {
+                result = activeRunner;
+                if (result == null) {
                     // implement me: set Debug Runner if omegat.debug.scripts is set.
-                    activeRunner = new StandardScriptRunner();
+                    activeRunner = result = new StandardScriptRunner();
                 }
             }
         }
-        return activeRunner;
+        return result;
+    }
+
+    /**
+     * Sets the active runner instance. This method is intended for testing purposes
+     * and for switching between standard and debug runners.
+     * <p>
+     * Package-private to limit external modification.
+     *
+     * @param runner the runner instance to set as active. Must not be null.
+     */
+    @VisibleForTesting
+    static synchronized void setActiveRunner(AbstractScriptRunner runner) {
+        if (runner == null) {
+            throw new IllegalArgumentException("Runner cannot be null");
+        }
+        activeRunner = runner;
+    }
+
+    /**
+     * Resets the active runner to null, forcing reinitialization on next access.
+     * This method is intended for testing purposes.
+     * <p>
+     * Package-private to limit external modification.
+     */
+    @VisibleForTesting
+    static synchronized void resetActiveRunner() {
+        activeRunner = null;
     }
 }
 

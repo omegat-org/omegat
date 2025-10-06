@@ -246,7 +246,8 @@ public abstract class AbstractScriptRunner {
                 result = activeRunner;
                 if (result == null) {
                     // implement me: set Debug Runner if omegat.debug.scripts is set.
-                    activeRunner = result = new StandardScriptRunner();
+                    result = new StandardScriptRunner();
+                    activeRunner = result;
                 }
             }
         }

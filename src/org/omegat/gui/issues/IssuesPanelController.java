@@ -549,13 +549,16 @@ public class IssuesPanelController implements IIssues {
 
         private Stream<IIssue> getProviderIssues(List<IIssueProvider> providers, String pattern) {
             Stream<SourceTextEntry> allEntries = Core.getProject().getAllEntries().parallelStream();
-            Stream<SourceTextEntry> filteredByPattern = allEntries.filter(StreamUtil.patternFilter(pattern, ste -> ste.getKey().file));
+            Stream<SourceTextEntry> filteredByPattern = allEntries
+                    .filter(StreamUtil.patternFilter(pattern, ste -> ste.getKey().file));
             Stream<SourceTextEntry> filteredByProgress = filteredByPattern.filter(this::progressFilter);
-            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = filteredByProgress.flatMap(ste -> makeEntryPair(ste).stream());
+            Stream<Map.Entry<SourceTextEntry, TMXEntry>> entriesStream = filteredByProgress
+                    .flatMap(ste -> makeEntryPair(ste).stream());
             return entriesStream.flatMap(entry -> getIssuesForEntry(entry, providers));
         }
 
-        private Stream<IIssue> getIssuesForEntry(Map.Entry<SourceTextEntry, TMXEntry> entry, List<IIssueProvider> providers) {
+        private Stream<IIssue> getIssuesForEntry(Map.Entry<SourceTextEntry, TMXEntry> entry,
+                List<IIssueProvider> providers) {
             return providers.stream()
                     .flatMap(provider -> provider.getIssues(entry.getKey(), entry.getValue()).stream());
         }
@@ -691,8 +694,8 @@ public class IssuesPanelController implements IIssues {
                     OStrings.getString("ISSUES_WINDOW_TITLE_FILTERED_TEMPLATE", shownItems, totalItems));
         } else {
             String fileName = extractFilePathFromPattern();
-            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE", fileName, shownItems,
-                    totalItems));
+            frame.setTitle(OStrings.getString("ISSUES_WINDOW_TITLE_FILE_FILTERED_TEMPLATE", fileName,
+                    shownItems, totalItems));
         }
     }
 

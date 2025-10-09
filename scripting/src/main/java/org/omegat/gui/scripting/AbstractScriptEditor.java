@@ -3,9 +3,10 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre
-               2013 Alex Buloichik, Yu Tang
-               2015 Aaron Madlon-Kay
+ Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
+               2013 Alex Buloichik
+               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
+               2015 Yu Tang, Aaron Madlon-Kay
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -26,19 +27,16 @@
  **************************************************************************/
 package org.omegat.gui.scripting;
 
-/**
- * Used to display results in the scripting window
- *
- * @author Briac Pilpre (briacp@gmail.com)
- * @author Alex Buloichik (alex73mail@gmail.com)
- * @author Yu Tang
- * @author Aaron Madlon-Kay
- */
-public interface IScriptLogger {
+import java.awt.Component;
 
-    void print(Object o);
+import javax.swing.JMenuBar;
+import javax.swing.JTextArea;
 
-    void println(Object o);
-
-    void clear();
+@SuppressWarnings("serial")
+public abstract class AbstractScriptEditor extends JTextArea {
+    public abstract void setHighlighting(String extension);
+    public abstract void enhanceMenu(JMenuBar mb);
+    public abstract void initLayout(ScriptingWindow scriptingWindow);
+    public abstract Component getPanel();
+    public abstract JTextArea getTextArea();
 }

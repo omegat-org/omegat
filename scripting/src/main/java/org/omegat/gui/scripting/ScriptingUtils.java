@@ -3,10 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik
-               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
-               2015 Yu Tang, Aaron Madlon-Kay
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -27,46 +24,23 @@
  **************************************************************************/
 package org.omegat.gui.scripting;
 
-import java.awt.Component;
-import java.awt.Font;
+import tokyo.northside.logging.ILogger;
+import tokyo.northside.logging.LoggerFactory;
 
-import javax.swing.JMenuBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import java.util.ResourceBundle;
 
-@SuppressWarnings("serial")
-public class StandardScriptEditor extends AbstractScriptEditor {
-    private JTextArea m_scriptEditor;
-    private JScrollPane m_scrollPaneEditor;
+public final class ScriptingUtils {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("org.omegat.gui.scripting.Bundle");
+    private static final ILogger LOGGER = LoggerFactory.getLogger(ScriptingWindow.class, BUNDLE);
 
-    @Override
-    public void setHighlighting(String extension) {
-
+    private ScriptingUtils() {
     }
-
-    @Override
-    public void enhanceMenu(JMenuBar menubar) {
-
+    
+    public static String getBundleString(String key) {
+        return BUNDLE.getString(key);
     }
-
-    @Override
-    public void initLayout(ScriptingWindow scriptingWindow) {
-        m_scriptEditor = new JTextArea();
-
-        m_scriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN,
-                m_scriptEditor.getFont().getSize()));
-        m_scrollPaneEditor = new JScrollPane(m_scriptEditor);
-
+    
+    public static ILogger getLogger() {
+        return LOGGER;
     }
-
-    @Override
-    public Component getPanel() {
-        return m_scrollPaneEditor;
-    }
-
-    @Override
-    public JTextArea getTextArea() {
-        return m_scriptEditor;
-    }
-
 }

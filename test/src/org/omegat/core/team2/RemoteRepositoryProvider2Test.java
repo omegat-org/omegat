@@ -31,7 +31,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-public class RemoteRepositoryProviderTest2 {
+public class RemoteRepositoryProvider2Test {
 
     @Test
     public void testRelativeRemoteToAbsoluteLocal() {

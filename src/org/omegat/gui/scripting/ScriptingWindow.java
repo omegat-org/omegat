@@ -89,8 +89,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.openide.awt.Mnemonics;
 
 import org.omegat.core.Core;
-import org.omegat.core.CoreEvents;
-import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.shortcuts.PropertiesShortcuts;
 import org.omegat.help.Help;
 import org.omegat.util.Java8Compat;
@@ -111,27 +109,6 @@ import org.omegat.util.gui.StaticUIUtils;
  * @author Aaron Madlon-Kay
  */
 public class ScriptingWindow {
-
-    static ScriptingWindow window;
-
-    public static void loadPlugins() {
-        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
-            @Override
-            public void onApplicationStartup() {
-                window = new ScriptingWindow();
-            }
-
-            @Override
-            public void onApplicationShutdown() {
-            }
-        });
-    }
-
-    public static void unloadPlugins() {
-        if (window != null) {
-            window.frame.dispose();
-        }
-    }
 
     final JFrame frame;
 

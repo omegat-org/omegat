@@ -30,6 +30,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
+import org.omegat.core.team2.fsm.context.RebaseContext;
 import tokyo.northside.logging.ILogger;
 import tokyo.northside.logging.LoggerFactory;
 
@@ -42,6 +43,7 @@ import org.omegat.util.OStrings;
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
  */
+@Deprecated(since = "6.1.0")
 public final class RebaseAndCommit {
 
     private RebaseAndCommit() {
@@ -248,6 +250,7 @@ public final class RebaseAndCommit {
         return newVersion;
     }
 
+    @Deprecated(since = "6.1.0")
     public interface IRebase {
         /**
          * Rebaser should read and parse BASE version of file. It can't just
@@ -301,6 +304,7 @@ public final class RebaseAndCommit {
     /**
      * Info about prepared file.
      */
+    @Deprecated(since = "6.1.0")
     public static class Prepared {
         public String path;
         public File fileBase, fileHead;

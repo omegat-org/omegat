@@ -36,10 +36,10 @@ import java.awt.Graphics;
 import java.util.List;
 
 /**
- * A table model for managing and displaying issues in a JTable.
- * This model maps issue data to the columns of the table, supporting
- * functionality such as retrieving values for specific table cells,
- * providing column metadata, and managing mouseover effects for table cells.
+ * A table model for managing and displaying issues in a JTable. This model maps
+ * issue data to the columns of the table, supporting functionality such as
+ * retrieving values for specific table cells, providing column metadata, and
+ * managing mouseover effects for table cells.
  *
  * @author Aaron Madlon-Kay
  */
@@ -125,8 +125,9 @@ class IssuesTableModel extends AbstractTableModel {
             return iss.getDescription();
         case ACTION_BUTTON:
             return getActionMenuIcon(iss, rowIndex, columnIndex);
+        default:
+            throw new IllegalArgumentException("Unknown column requested: " + columnIndex);
         }
-        throw new IllegalArgumentException("Unknown column requested: " + columnIndex);
     }
 
     Icon getActionMenuIcon(IIssue issue, int modelRow, int col) {

@@ -25,7 +25,9 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
-package org.omegat.gui.scripting;
+package org.omegat.gui.scripting.ui;
+
+import org.omegat.gui.scripting.ScriptingWindow;
 
 import java.awt.Component;
 import java.awt.Font;

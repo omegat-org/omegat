@@ -57,8 +57,8 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     private static final FilenameFilter FILTER;
 
     static {
-        FILTER = (dir, name) -> ScriptRunner.getAvailableScriptExtensions().contains(FilenameUtils.getExtension(name)
-                .toLowerCase(Locale.ENGLISH));
+        FILTER = (dir, name) -> ScriptRunner.getAvailableScriptExtensions().contains(FilenameUtils
+                .getExtension(name).toLowerCase(Locale.ENGLISH));
     }
 
     public ScriptsMonitor(final ScriptingWindow scriptingWindow) {

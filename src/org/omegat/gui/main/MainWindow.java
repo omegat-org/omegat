@@ -193,8 +193,8 @@ public class MainWindow implements IMainWindow {
                 menu1 = ((Class<? extends BaseMainWindowMenu>) menuClass)
                         .getDeclaredConstructor(MainWindow.class, MainWindowMenuHandler.class)
                         .newInstance(this, mainWindowMenuHandler);
-            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                     InvocationTargetException e) {
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException
+                    | InvocationTargetException e) {
                 // fall back to default when loading failed.
                 menu1 = new MainWindowMenu(this, mainWindowMenuHandler);
             }

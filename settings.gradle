@@ -71,6 +71,7 @@ include("machinetranslators:apertium",
         "language-modules:zh",
         "aligner",
         "spellchecker:hunspell",
+        "spellchecker:lucene",
         "spellchecker:morfologik",
         "theme",
         "tipoftheday")

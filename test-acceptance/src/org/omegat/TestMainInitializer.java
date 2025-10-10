@@ -28,18 +28,32 @@ package org.omegat;
 import javax.swing.UIManager;
 
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.machinetranslators.dummy.Dummy;
+import org.omegat.languagetools.LanguageManager;
+import org.omegat.util.Log;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Properties;
 
 public final class TestMainInitializer {
+
+    private static final String FRENCH = "org.languagetool.language.French";
+    public static final String PLUGINS_LIST_FILE = "test-acceptance/plugins.properties";
 
     private TestMainInitializer() {
     }
 
     public static void initClassloader() {
-        PluginUtils.loadPlugins(Collections.emptyMap());
-        Dummy.loadPlugins();
+        Properties props = new Properties();
+        try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+            props.load(fis);
+            PluginUtils.loadPluginFromProperties(props);
+        } catch (ClassNotFoundException | IOException ex) {
+            Log.log(ex);
+        }
+        LanguageManager.registerLTLanguage("fr", FRENCH);
         UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
     }
 

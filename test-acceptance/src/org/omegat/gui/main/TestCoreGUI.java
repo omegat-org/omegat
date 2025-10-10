@@ -26,7 +26,6 @@ package org.omegat.gui.main;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -116,7 +115,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
      * Open project from the specified path and wait until the machineTranslation is loaded.
      */
     protected void openSampleProjectWaitMachineTranslation(Path projectPath) throws Exception {
-        MachineTranslateTextArea machineTranslateTextArea = (MachineTranslateTextArea) Core.getMachineTranslatePane();
+        MachineTranslateTextArea machineTranslateTextArea = Core.getMachineTranslatePane();
         CountDownLatch latch = new CountDownLatch(1);
         machineTranslateTextArea.addPropertyChangeListener("displayed", evt -> {
             if (evt.getNewValue() != null && !evt.getNewValue().equals(Collections.emptyList())) {
@@ -168,11 +167,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             }
         }));
         openSampleProject(projectPath);
-        try {
-            assertTrue("Active match not set", latch.await(timeout, TimeUnit.SECONDS));
-        } catch (InterruptedException ignored) {
-            fail("Waiting for active match interrupted.");
-        }
+        assertTrue("Active match not set", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**

@@ -32,7 +32,6 @@ package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -208,7 +207,6 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     protected void setFoundResult(final SourceTextEntry se, final MachineTranslationInfo data) {
         UIThreadsUtil.mustBeSwingThread();
         if (data != null && data.result != null) {
-            List<MachineTranslationInfo> before = Collections.unmodifiableList(displayed);
             displayed.add(data);
             displayed.sort(Comparator.comparing(info -> info.translatorName));
             StringBuilder sb = new StringBuilder("<html>");
@@ -222,17 +220,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
             }
             sb.append("</html>");
             setText(sb.toString());
-            firePropertyChange("displayed", before, displayed);
         }
     }
 
     @Override
     public void clear() {
         super.clear();
-        List<MachineTranslationInfo> before = Collections.unmodifiableList(displayed);
         getHighlighter().removeAllHighlights();
         displayed.clear();
-        firePropertyChange("displayed", before, displayed);
         selectedIndex = -1;
     }
 

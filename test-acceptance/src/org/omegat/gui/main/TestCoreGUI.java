@@ -29,15 +29,18 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import org.apache.commons.io.FileUtils;
 import org.assertj.swing.fixture.FrameFixture;
@@ -47,7 +50,6 @@ import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.jetbrains.annotations.Nullable;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.omegat.TestMainInitializer;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
@@ -59,10 +61,10 @@ import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
-import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
+import org.omegat.languagetools.LanguageManager;
 import org.omegat.util.Log;
 import org.omegat.util.LocaleRule;
 import org.omegat.util.Preferences;
@@ -77,6 +79,9 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     protected @Nullable File tmpDir;
 
     protected int timeout = 10;
+
+    private static final String FRENCH = "org.languagetool.language.French";
+    private static final String PLUGINS_LIST_FILE = "test-acceptance/plugins.properties";
 
     /**
      * Close the project.
@@ -108,21 +113,6 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         segmentPropertiesArea.addPropertyChangeListener("properties", evt -> latch.countDown());
         openSampleProject(projectPath);
         assertTrue("Segment properties are not loaded.", latch.await(timeout, TimeUnit.SECONDS));
-    }
-
-    /**
-     * Open project from the specified path and wait until the machineTranslation is loaded.
-     */
-    protected void openSampleProjectWaitMachineTranslation(Path projectPath) throws Exception {
-        MachineTranslateTextArea machineTranslateTextArea = Core.getMachineTranslatePane();
-        CountDownLatch latch = new CountDownLatch(1);
-        machineTranslateTextArea.addPropertyChangeListener("displayed", evt -> {
-            if (evt.getNewValue() != null) {
-                latch.countDown();
-            }
-        });
-        openSampleProject(projectPath);
-        assertTrue("MachineTranslation is not loaded.", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**
@@ -381,14 +371,29 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         FileUtils.copyDirectory(new File("test-acceptance/data/config"), configTmp.toFile());
         RuntimePreferences.setConfigDir(configTmp.toString());
 
-        // Initialize classloader and plugins
-        TestMainInitializer.initClassloader();
+        // Initialize plugins
+        initPlugins();
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
 
         // Initialize preferences (must be after RuntimePreferences.setConfigDir)
         Preferences.init();
         Preferences.initFilters();
         Preferences.initSegmentation();
+    }
+
+    public static void initPlugins() {
+        if (PluginUtils.getMachineTranslationClasses().isEmpty()) {
+            Log.log("Loading plugins from " + PLUGINS_LIST_FILE);
+            Properties props = new Properties();
+            try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+                props.load(fis);
+                PluginUtils.loadPluginFromProperties(props);
+            } catch (ClassNotFoundException | IOException ex) {
+                Log.log(ex);
+            }
+            LanguageManager.registerLTLanguage("fr", FRENCH);
+            UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
+        }
     }
 
     private static void initializeProject() {

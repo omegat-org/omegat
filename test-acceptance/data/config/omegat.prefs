@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<omegat>
+  <preference version="1.0">
+    <ac_autotext_enabled>false</ac_autotext_enabled>
+    <ac_chartable_enabled>true</ac_chartable_enabled>
+    <ac_glossary_enabled>true</ac_glossary_enabled>
+    <ac_glossary_show_source>false</ac_glossary_show_source>
+    <ac_glossary_sort_alphabetically>false</ac_glossary_sort_alphabetically>
+    <ac_glossary_sort_by_length>false</ac_glossary_sort_by_length>
+    <ac_show_suggestions_automatically>false</ac_show_suggestions_automatically>
+    <ac_switch_views_with_lr>false</ac_switch_views_with_lr>
+    <allowTagEditing>false</allowTagEditing>
+    <always_confirm_quit>false</always_confirm_quit>
+    <auto_save_interval>180</auto_save_interval>
+    <automatically_check_version>true</automatically_check_version>
+    <create_glossary_dialog_height>270</create_glossary_dialog_height>
+    <create_glossary_dialog_width>373</create_glossary_dialog_width>
+    <create_glossary_dialog_x>53</create_glossary_dialog_x>
+    <create_glossary_dialog_y>29</create_glossary_dialog_y>
+    <dictionary_auto_search>true</dictionary_auto_search>
+    <dictionary_condensed_view>false</dictionary_condensed_view>
+    <dictionary_font_size>10</dictionary_font_size>
+    <dictionary_fuzzy_matching>false</dictionary_fuzzy_matching>
+    <dictionary_use_font>true</dictionary_use_font>
+    <display_modification_info>selected</display_modification_info>
+    <editor_initial_segment_load_count>2000</editor_initial_segment_load_count>
+    <ext_tmx_fuzzy_match_threshold>30</ext_tmx_fuzzy_match_threshold>
+    <ext_tmx_match_template>${id}. ${fuzzyFlag}${sourceText}
+${targetText}
+&lt;${score}/${noStemScore}/${adjustedScore}% ${filePath}></ext_tmx_match_template>
+    <ext_tmx_show_level2>false</ext_tmx_show_level2>
+    <ext_tmx_sort_key>SCORE</ext_tmx_sort_key>
+    <ext_tmx_use_slash>false</ext_tmx_use_slash>
+    <external_command></external_command>
+    <external_finder_allow_project_commands>false</external_finder_allow_project_commands>
+    <glossary_layout>org.omegat.gui.glossary.DefaultGlossaryRenderer</glossary_layout>
+    <glossary_merge_alternate_definitions>true</glossary_merge_alternate_definitions>
+    <glossary_not_exact_match>true</glossary_not_exact_match>
+    <glossary_replace_on_insert>false</glossary_replace_on_insert>
+    <glossary_require_similar_case>true</glossary_require_similar_case>
+    <glossary_sort_by_length>false</glossary_sort_by_length>
+    <glossary_sort_by_src_length>false</glossary_sort_by_src_length>
+    <glossary_stemming>false</glossary_stemming>
+    <glossary_tbx_display_context>false</glossary_tbx_display_context>
+    <history_completer_prediction_enabled>true</history_completer_prediction_enabled>
+    <issue_providers_disabled></issue_providers_disabled>
+    <issue_providers_dont_ask>false</issue_providers_dont_ask>
+    <issues_window_divider_location_bottom>396</issues_window_divider_location_bottom>
+    <issues_window_height>586</issues_window_height>
+    <issues_window_width>956</issues_window_width>
+    <issues_window_x>327</issues_window_x>
+    <issues_window_y>204</issues_window_y>
+    <keep_foreign_matches>false</keep_foreign_matches>
+    <loose_tag_ordering>false</loose_tag_ordering>
+    <mark_autopopulated>true</mark_autopopulated>
+    <mark_non_unique_segments>true</mark_non_unique_segments>
+    <mark_para_delimitation>true</mark_para_delimitation>
+    <mark_para_delimitation_text>— ¶ —————————————————————</mark_para_delimitation_text>
+    <mt_auto_fetch>true</mt_auto_fetch>
+    <mt_only_untranslated>false</mt_only_untranslated>
+    <notify_glossary_hits>true</notify_glossary_hits>
+    <paragraph_match_from_segment_tmx>true</paragraph_match_from_segment_tmx>
+    <penalty_foreign_matches>30</penalty_foreign_matches>
+    <project_files_show_on_load>true</project_files_show_on_load>
+    <project_files_use_font>true</project_files_use_font>
+    <project_files_window_height>429</project_files_window_height>
+    <project_files_window_width>509</project_files_window_width>
+    <project_files_window_x>32</project_files_window_x>
+    <project_files_window_y>16</project_files_window_y>
+    <save_auto_status>false</save_auto_status>
+    <save_origin>false</save_origin>
+    <sb_progress_mode>DEFAULT</sb_progress_mode>
+    <screen_height>479</screen_height>
+    <screen_width>872</screen_width>
+    <screen_x>0</screen_x>
+    <screen_y>1</screen_y>
+    <script_window_height>450</script_window_height>
+    <script_window_width>850</script_window_width>
+    <script_window_x>97</script_window_x>
+    <script_window_y>23</script_window_y>
+    <search_window_width>800</search_window_width>
+    <search_window_x>17</search_window_x>
+    <search_window_y>23</search_window_y>
+    <segment_properties_initial_mode>org.omegat.gui.properties.SegmentPropertiesTableView</segment_properties_initial_mode>
+    <segment_properties_notify_props>hasComment, hasNote</segment_properties_notify_props>
+    <segment_properties_show_raw_keys>false</segment_properties_show_raw_keys>
+    <source_lang>en</source_lang>
+    <target_lang>fr</target_lang>
+    <tagValidateOnLeave>true</tagValidateOnLeave>
+    <tagValidation_customPattern>(\d+|\{:target=\"_blank\"\})</tagValidation_customPattern>
+    <tagValidation_elaborateCheck>false</tagValidation_elaborateCheck>
+    <tagValidation_javaMessageFormatSimplePatternCheck>false</tagValidation_javaMessageFormatSimplePatternCheck>
+    <tagValidation_noCheck>true</tagValidation_noCheck>
+    <tagValidation_removePattern></tagValidation_removePattern>
+    <tagValidation_simpleCheck>false</tagValidation_simpleCheck>
+    <tags_valid_required>false</tags_valid_required>
+    <view_option_mod_info_template>${creationId} - ${changedId} ${changedDate} ${changedTime}</view_option_mod_info_template>
+    <view_option_mod_info_template_wo_date>${creationId} - ${changedId}</view_option_mod_info_template_wo_date>
+    <view_option_ppt_simplify>true</view_option_ppt_simplify>
+    <view_option_source_active_bold>true</view_option_source_active_bold>
+    <view_option_source_all_bold>true</view_option_source_all_bold>
+    <view_option_template_active>false</view_option_template_active>
+    <view_option_unique_first>false</view_option_unique_first>
+    <wf_allowTransEqualToSrc>true</wf_allowTransEqualToSrc>
+    <wf_convertNumbers>true</wf_convertNumbers>
+    <wf_explanatoryText>[fuzzy]</wf_explanatoryText>
+    <wf_exportCurrentSegment>false</wf_exportCurrentSegment>
+    <wf_insertBestMatch>true</wf_insertBestMatch>
+    <wf_minimalSimilarity>100</wf_minimalSimilarity>
+    <wf_noSourceText>true</wf_noSourceText>
+    <wf_singleClickSegmentActivation>false</wf_singleClickSegmentActivation>
+    <wf_stopOnAlternativeTranslation>false</wf_stopOnAlternativeTranslation>
+  </preference>
+</omegat>

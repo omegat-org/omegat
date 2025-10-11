@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2024 Hiroshi Miura
+ Copyright (C) 2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -23,19 +23,30 @@
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat;
+package org.omegat.gui.exttrans;
 
-import javax.swing.UIManager;
+import org.junit.Test;
+import org.omegat.core.data.TestCoreState;
+import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.machinetranslators.dummy.DummyMachineTranslator;
 
-import org.omegat.filters2.master.PluginUtils;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public final class TestMainInitializer {
+import static org.junit.Assert.assertEquals;
 
-    private TestMainInitializer() {
+public class MachineTranslateTest extends TestCoreGUI {
+
+    private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
+
+    @Test
+    public void testMachineTranslation() throws Exception {
+        // load project
+        openSampleProject(PROJECT_PATH);
+        robot().waitForIdle();
+        //
+        MachineTranslateTextArea machineTranslateTextArea = TestCoreState.getInstance().getMachineTranslatePane();
+        assertEquals(DummyMachineTranslator.ENGINE_NAME, machineTranslateTextArea.getDisplayedTranslation().translatorName);
+        assertEquals(DummyMachineTranslator.TRANSLATION, machineTranslateTextArea.getDisplayedTranslation().result);
     }
-
-    public static void initClassloader() {
-        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
-    }
-
 }

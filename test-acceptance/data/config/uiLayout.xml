@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<VLDocking version="2.1">
+<DockingDesktop name="">
+<DockingPanel x="0" y="0" width="1440" height="789">
+<Split orientation="1" location="0.24929775280898878">
+<Split orientation="0" location="0.16398243045387995">
+<Dockable>
+<Key dockName="NOTES"/>
+</Dockable>
+<Split orientation="0" location="0.5343915343915344">
+<Split orientation="0" location="0.3277591973244147">
+<Dockable>
+<Key dockName="COMMENTS"/>
+</Dockable>
+<Dockable>
+<Key dockName="GLOSSARY"/>
+</Dockable>
+</Split>
+<Dockable>
+<Key dockName="MACHINE_TRANSLATE"/>
+</Dockable>
+</Split>
+</Split>
+<Split orientation="1" location="0.6995305164319249">
+<Split orientation="0" location="0.7540263543191801">
+<Dockable>
+<Key dockName="EDITOR"/>
+</Dockable>
+<Dockable>
+<Key dockName="SEGMENTPROPERTIES"/>
+</Dockable>
+</Split>
+<Split orientation="0" location="0.6969253294289898">
+<Dockable>
+<Key dockName="MATCHES"/>
+</Dockable>
+<Dockable>
+<Key dockName="DICTIONARY"/>
+</Dockable>
+</Split>
+</Split>
+</Split>
+</DockingPanel>
+<Border zone="2">
+<Dockable>
+<Key dockName="MULTIPLE_TRANS"/>
+<RelativePosition x="0.7061611413955688" y="0.7747989296913147" w="0.29146918654441833" h="0.22073279321193695" />
+</Dockable>
+</Border>
+<TabGroups>
+</TabGroups>
+</DockingDesktop>
+</VLDocking>

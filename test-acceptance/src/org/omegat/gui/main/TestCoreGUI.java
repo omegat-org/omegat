@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -118,7 +117,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         MachineTranslateTextArea machineTranslateTextArea = Core.getMachineTranslatePane();
         CountDownLatch latch = new CountDownLatch(1);
         machineTranslateTextArea.addPropertyChangeListener("displayed", evt -> {
-            if (evt.getNewValue() != null && !evt.getNewValue().equals(Collections.emptyList())) {
+            if (evt.getNewValue() != null) {
                 latch.countDown();
             }
         });
@@ -379,6 +378,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         // Set up temporary config directory for the test class
         Path configTmp = Files.createTempDirectory("omegat-config");
         FileUtils.forceDeleteOnExit(configTmp.toFile());
+        FileUtils.copyDirectory(new File("test-acceptance/data/config"), configTmp.toFile());
         RuntimePreferences.setConfigDir(configTmp.toString());
 
         // Initialize classloader and plugins

@@ -147,7 +147,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     private int selectedIndex;
 
     public MachineTranslationInfo getDisplayedTranslation() {
-        if (displayed.size() == 0) {
+        if (displayed.isEmpty()) {
             return null;
         }
         selectedIndex = (selectedIndex + 1) % displayed.size();

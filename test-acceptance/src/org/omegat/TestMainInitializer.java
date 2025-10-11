@@ -46,15 +46,18 @@ public final class TestMainInitializer {
     }
 
     public static void initClassloader() {
-        Properties props = new Properties();
-        try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
-            props.load(fis);
-            PluginUtils.loadPluginFromProperties(props);
-        } catch (ClassNotFoundException | IOException ex) {
-            Log.log(ex);
+        if (PluginUtils.getMachineTranslationClasses().isEmpty()) {
+            Log.log("Loading plugins from " + PLUGINS_LIST_FILE);
+            Properties props = new Properties();
+            try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+                props.load(fis);
+                PluginUtils.loadPluginFromProperties(props);
+            } catch (ClassNotFoundException | IOException ex) {
+                Log.log(ex);
+            }
+            LanguageManager.registerLTLanguage("fr", FRENCH);
+            UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
         }
-        LanguageManager.registerLTLanguage("fr", FRENCH);
-        UIManager.put("ClassLoader", PluginUtils.getClassLoader(PluginUtils.PluginType.THEME));
     }
 
 }

@@ -26,22 +26,27 @@
 package org.omegat.gui.exttrans;
 
 import org.junit.Test;
+import org.omegat.core.data.TestCoreState;
 import org.omegat.gui.main.TestCoreGUI;
+import org.omegat.machinetranslators.dummy.DummyMachineTranslator;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 public class MachineTranslateTest extends TestCoreGUI {
 
     private static final Path PROJECT_PATH = Paths.get("test-acceptance/data/project/");
 
     @Test
-    public void testGlossarySearch() throws Exception {
+    public void testMachineTranslation() throws Exception {
         // load project
-        openSampleProjectWaitMachineTranslation(PROJECT_PATH);
+        openSampleProject(PROJECT_PATH);
         robot().waitForIdle();
-        assertNotNull(window);
+        //
+        MachineTranslateTextArea machineTranslateTextArea = TestCoreState.getInstance().getMachineTranslatePane();
+        assertEquals(DummyMachineTranslator.ENGINE_NAME, machineTranslateTextArea.getDisplayedTranslation().translatorName);
+        assertEquals(DummyMachineTranslator.TRANSLATION, machineTranslateTextArea.getDisplayedTranslation().result);
     }
 }

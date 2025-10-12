@@ -48,22 +48,17 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.machinetranslators.MachineTranslateError;
 import org.omegat.core.machinetranslators.MachineTranslators;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.preferences.PreferencesWindowController;
 import org.omegat.gui.preferences.view.MachineTranslationPreferencesController;
-import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.gui.IPaneMenu;
 import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.Styles;
@@ -198,7 +193,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         clear();
         for (IMachineTranslation mt : MachineTranslators.getMachineTranslators()) {
             if (mt.isEnabled()) {
-                new FindThread(mt, newEntry, force).start();
+                new MachineTranslateFindThread(this, mt, newEntry, force).start();
             }
         }
     }
@@ -229,60 +224,6 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         getHighlighter().removeAllHighlights();
         displayed.clear();
         selectedIndex = -1;
-    }
-
-    protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
-        private final IMachineTranslation translator;
-        private final String src;
-        private final boolean force;
-
-        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry,
-                boolean force) {
-            super(MachineTranslateTextArea.this, newEntry);
-            this.translator = translator;
-            src = newEntry.getSrcText();
-            this.force = force;
-        }
-
-        @Override
-        protected MachineTranslationInfo search() throws Exception {
-            Language source = null;
-            Language target = null;
-            ProjectProperties pp = Core.getProject().getProjectProperties();
-            if (pp != null) {
-                source = pp.getSourceLanguage();
-                target = pp.getTargetLanguage();
-            }
-            if (source == null || target == null) {
-                return null;
-            }
-
-            String result = getTranslation(source, target);
-            return result == null ? null : new MachineTranslationInfo(translator.getName(), result);
-        }
-
-        private String getTranslation(Language source, Language target) {
-            if (!force) {
-                String cached = translator.getCachedTranslation(source, target, src);
-                if (cached != null || !Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, false)
-                        || Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)
-                        && Core.getProject().getTranslationInfo(currentlyProcessedEntry).isTranslated()) {
-                    return cached;
-                }
-            }
-            // Ask MT engine when forced, or visiting an untranslated entry.
-            try {
-                return translator.getTranslation(source, target, src);
-            } catch (MachineTranslateError e) {
-                Log.log(e);
-                Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
-                        e.getLocalizedMessage());
-                return null;
-            } catch (Exception e) {
-                Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");
-                return null;
-            }
-        }
     }
 
     @Override

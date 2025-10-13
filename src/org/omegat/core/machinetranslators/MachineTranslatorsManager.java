@@ -25,34 +25,50 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.exttrans.IMTGlossarySupplier;
 import org.omegat.gui.exttrans.IMachineTranslation;
+import org.omegat.util.Log;
 
 /**
- * A class for aggregating machine translation connectors. Old-style plugins
- * ("OmegaT-Plugin: machinetranslator") are added here by the
- * MachineTranslateTextArea and so should not add themselves manually. New-style
- * plugins ("OmegaT-Plugins: &lt;classname&gt;") should add themselves with
- * {@link #add(IMachineTranslation)} in the loadPlugins() method.
+ * A class for aggregating machine translation connectors.
  *
  * @author Aaron Madlon-Kay
  *
  */
-public final class MachineTranslators {
+public class MachineTranslatorsManager {
 
-    private static final List<IMachineTranslation> TRANSLATORS = new CopyOnWriteArrayList<>();
+    private final List<IMachineTranslation> machineTranslations = new ArrayList<>();
 
-    private MachineTranslators() {
+    public MachineTranslatorsManager() {
+        for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
+            try {
+                machineTranslations.add((IMachineTranslation) mtc.getDeclaredConstructor().newInstance());
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
     }
 
-    public static void add(IMachineTranslation machineTranslator) {
-        TRANSLATORS.add(machineTranslator);
+    /**
+     * Set the glossary map for all machine translation connectors.
+     * @param supplier The glossary map supplier to set.
+     */
+    public void setGlossaryMap(IMTGlossarySupplier supplier) {
+        for (IMachineTranslation mt : getMachineTranslators()) {
+            mt.setGlossarySupplier(supplier);
+        }
     }
 
-    public static List<IMachineTranslation> getMachineTranslators() {
-        return Collections.unmodifiableList(TRANSLATORS);
+    /**
+     * Get all machine translation connectors.
+     * @return An immutable list of machine translation connectors.
+     */
+    public List<IMachineTranslation> getMachineTranslators() {
+        return Collections.unmodifiableList(machineTranslations);
     }
 }

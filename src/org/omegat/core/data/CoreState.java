@@ -26,6 +26,7 @@
 package org.omegat.core.data;
 
 import org.jetbrains.annotations.VisibleForTesting;
+import org.omegat.core.machinetranslators.MachineTranslatorsManager;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellCheckerManager;
@@ -100,6 +101,7 @@ public class CoreState {
     private GlossaryManager glossaryManager;
     private ITagValidation tagValidation;
     private IIssues issuesWindow;
+    private MachineTranslatorsManager machineTranslatorsManager;
 
     // GUI panes
     private IMainWindow mainWindow;
@@ -270,4 +272,13 @@ public class CoreState {
     public ISpellChecker getCurrentSpellChecker() {
         return spellCheckerManager.getCurrentSpellChecker();
     }
+
+    public MachineTranslatorsManager getMachineTranslatorsManager() {
+        return machineTranslatorsManager;
+    }
+
+    public void setMachineTranslatorsManager(MachineTranslatorsManager machineTranslatorsManager) {
+        this.machineTranslatorsManager = machineTranslatorsManager;
+    }
+
 }

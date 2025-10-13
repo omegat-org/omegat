@@ -48,9 +48,8 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.machinetranslators.MachineTranslators;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.main.DockableScrollPane;
@@ -80,6 +79,8 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
+    private final List<MachineTranslateFindThread> searchThreads = new CopyOnWriteArrayList<>();
+
     /**
      * List displayed hold entries. An index shall be as same as ID attribute
      * value of HTML. Actual displayed entries are sorted, and the order is
@@ -103,16 +104,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
         scrollPane = new DockableScrollPane("MACHINE_TRANSLATE", title, this, true);
         mw.addDockable(scrollPane);
-
-        for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
-            try {
-                IMachineTranslation mt = (IMachineTranslation) mtc.getDeclaredConstructor().newInstance();
-                mt.setGlossarySupplier(this::getGlossaryMap);
-                MachineTranslators.add(mt);
-            } catch (Exception ex) {
-                Log.log(ex);
-            }
-        }
+        CoreState.getInstance().getMachineTranslatorsManager().setGlossaryMap(this::getGlossaryMap);
     }
 
     Map<String, String> getGlossaryMap() {
@@ -141,7 +133,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     private int selectedIndex;
 
     public MachineTranslationInfo getDisplayedTranslation() {
-        if (displayed.size() == 0) {
+        if (displayed.isEmpty()) {
             return null;
         }
         selectedIndex = (selectedIndex + 1) % displayed.size();
@@ -191,11 +183,34 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         UIThreadsUtil.mustBeSwingThread();
 
         clear();
-        for (IMachineTranslation mt : MachineTranslators.getMachineTranslators()) {
+        stopSearchThreads();
+        for (IMachineTranslation mt: getMachineTranslators()) {
             if (mt.isEnabled()) {
-                new MachineTranslateFindThread(this, mt, newEntry, force).start();
+                MachineTranslateFindThread mtSearchThread = new MachineTranslateFindThread(this, mt, newEntry, force);
+                searchThreads.add(mtSearchThread);
+                mtSearchThread.start();
             }
         }
+    }
+
+    /**
+     * Get all machine translation providers.
+     * @return List of machine translation providers.
+     */
+    private List<IMachineTranslation> getMachineTranslators() {
+        return CoreState.getInstance().getMachineTranslatorsManager().getMachineTranslators();
+    }
+
+    /**
+     * Stop all search threads.
+     */
+    private void stopSearchThreads() {
+        for (MachineTranslateFindThread thread : searchThreads) {
+            if (thread.isAlive()) {
+                thread.interrupt();
+            }
+        }
+        searchThreads.clear();
     }
 
     @Override

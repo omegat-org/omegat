@@ -103,18 +103,16 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
                 throw new StoppedException();
             }
 
-            if (shouldFetch(entry)) {
-                try {
-                    tr = translator.getTranslation(source, target, src);
-                } catch (MachineTranslateError e) {
-                    Log.log(e);
-                    Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
-                            e.getLocalizedMessage());
-                    return null;
-                } catch (Exception e) {
-                    Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");
-                    return null;
-                }
+            try {
+                tr = translator.getTranslation(source, target, src);
+            } catch (MachineTranslateError e) {
+                Log.log(e);
+                Core.getMainWindow().showTimedStatusMessageRB("MT_ENGINE_ERROR", translator.getName(),
+                        e.getLocalizedMessage());
+                return null;
+            } catch (Exception e) {
+                Log.logErrorRB(e, "MT_ENGINE_EXCEPTION");
+                return null;
             }
 
             if (isStopped.isStopped()) {
@@ -125,10 +123,6 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
         }
 
         return tr == null ? null : new MachineTranslationInfo(translator.getName(), tr);
-    }
-
-    private static boolean shouldFetch(SourceTextEntry entry) {
-        return true;
     }
 
     /**

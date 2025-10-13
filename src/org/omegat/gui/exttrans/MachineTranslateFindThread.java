@@ -45,8 +45,8 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
     private final String src;
     private final boolean force;
 
-    MachineTranslateFindThread(MachineTranslateTextArea machineTranslateTextArea, final IMachineTranslation translator, final SourceTextEntry newEntry,
-                                      boolean force) {
+    MachineTranslateFindThread(MachineTranslateTextArea machineTranslateTextArea,
+            final IMachineTranslation translator, final SourceTextEntry newEntry, boolean force) {
         super(machineTranslateTextArea, newEntry);
         this.translator = translator;
         src = newEntry.getSrcText();
@@ -66,17 +66,23 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
     /**
      * Fetch machine translation (static for testing and clarity).
      *
-     * @param translator MT engine to use
-     * @param src        source text
-     * @param entry      current entry (for context)
-     * @param forceLoad  true to skip cache
-     * @param isStopped  callback to check if processing should stop
+     * @param translator
+     *            MT engine to use
+     * @param src
+     *            source text
+     * @param entry
+     *            current entry (for context)
+     * @param forceLoad
+     *            true to skip cache
+     * @param isStopped
+     *            callback to check if processing should stop
      * @return translation info, or null if unavailable
-     * @throws StoppedException if isStopped returns true
+     * @throws StoppedException
+     *             if isStopped returns true
      */
     @VisibleForTesting
     static MachineTranslationInfo fetchTranslation(IMachineTranslation translator, String src,
-                                                   SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
+            SourceTextEntry entry, boolean forceLoad, IStopped isStopped) throws StoppedException {
 
         if (isStopped.isStopped()) {
             throw new StoppedException();
@@ -93,7 +99,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
                 tr = translator.getCachedTranslation(source, target, src);
                 if (tr != null || !Preferences.isPreferenceDefault(Preferences.MT_AUTO_FETCH, false)
                         || Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED)
-                        && Core.getProject().getTranslationInfo(entry).isTranslated()) {
+                                && Core.getProject().getTranslationInfo(entry).isTranslated()) {
                     return new MachineTranslationInfo(translator.getName(), tr);
                 }
             }

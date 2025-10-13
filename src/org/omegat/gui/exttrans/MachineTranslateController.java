@@ -29,24 +29,26 @@
  **************************************************************************/
 package org.omegat.gui.exttrans;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.core.data.CoreState;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.glossary.GlossaryEntry;
 
 /**
- * Controller for MachineTranslateTextArea following MVC.
- * Responsible for orchestrating MT searches and managing search threads.
+ * Controller for MachineTranslateTextArea following MVC. Responsible for
+ * orchestrating MT searches and managing search threads.
  */
 public class MachineTranslateController {
     private final MachineTranslateTextArea view;
-    private final List<MachineTranslateFindThread> searchThreads = new CopyOnWriteArrayList<>();
+    private final List<MachineTranslateFindThread> searchThreads = new ArrayList<>();
 
     /**
      * List displayed hold entries. An index shall be as same as ID attribute
@@ -58,9 +60,34 @@ public class MachineTranslateController {
     public MachineTranslateController(MachineTranslateTextArea view) {
         this.view = view;
         selectedIndex = -1;
+        setGlossaryMap();
+    }
+
+    /**
+     * Configures the glossary map for machine translation connectors. This
+     * method sets the glossary map supplier for all machine translation
+     * services by utilizing the `getGlossaryMap` method as the supplier.
+     * <p>
+     * The glossary map provides the source-to-target text mappings that can be
+     * used by machine translation services to improve translation output
+     * quality or consistency.
+     * <p>
+     * This will override for testing purposes.
+     */
+    @VisibleForTesting
+    void setGlossaryMap() {
         CoreState.getInstance().getMachineTranslatorsManager().setGlossaryMap(this::getGlossaryMap);
     }
 
+    /**
+     * Retrieves a glossary map containing source-to-target text mappings. This
+     * map is constructed using the glossary entries found from the source text
+     * currently being processed.
+     *
+     * @return a map where keys are source text strings, and values are their
+     *         corresponding localized text strings, as per the glossary
+     *         entries.
+     */
     Map<String, String> getGlossaryMap() {
         return Core.getGlossaryManager().searchSourceMatches(view.getCurrentlyProcessedEntry()).stream()
                 .collect(Collectors.toMap(GlossaryEntry::getSrcText, GlossaryEntry::getLocText));
@@ -114,12 +141,14 @@ public class MachineTranslateController {
         // clear view and stop any running threads first
         view.clear();
         stopSearchThreads();
-
-        for (IMachineTranslation mt : getMachineTranslators()) {
-            if (mt.isEnabled()) {
-                MachineTranslateFindThread mtSearchThread = new MachineTranslateFindThread(view, mt, newEntry, force);
-                searchThreads.add(mtSearchThread);
-                mtSearchThread.start();
+        synchronized (searchThreads) {
+            for (IMachineTranslation mt : getMachineTranslators()) {
+                if (mt.isEnabled()) {
+                    MachineTranslateFindThread mtSearchThread = new MachineTranslateFindThread(view, mt,
+                            newEntry, force);
+                    searchThreads.add(mtSearchThread);
+                    mtSearchThread.start();
+                }
             }
         }
     }
@@ -130,6 +159,14 @@ public class MachineTranslateController {
     public void forceLoad() {
         SourceTextEntry current = view.getCurrentlyProcessedEntry();
         if (current != null) {
+            // check if any thread is running
+            synchronized (searchThreads) {
+                for (MachineTranslateFindThread thread : searchThreads) {
+                    if (thread.isAlive()) {
+                        return;
+                    }
+                }
+            }
             startSearchThread(current, true);
         }
     }
@@ -138,12 +175,14 @@ public class MachineTranslateController {
      * Stop all running search threads.
      */
     public void stopSearchThreads() {
-        for (MachineTranslateFindThread thread : searchThreads) {
-            if (thread.isAlive()) {
-                thread.interrupt();
+        synchronized (searchThreads) {
+            for (MachineTranslateFindThread thread : searchThreads) {
+                if (thread.isAlive()) {
+                    thread.interrupt();
+                }
             }
+            searchThreads.clear();
         }
-        searchThreads.clear();
     }
 
     /**

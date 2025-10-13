@@ -119,6 +119,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
     /**
      * Expose the currently displayed translation for the shortcut.
+     * 
      * @return currently displayed translation or null if none is displayed
      */
     public MachineTranslationInfo getDisplayedTranslation() {

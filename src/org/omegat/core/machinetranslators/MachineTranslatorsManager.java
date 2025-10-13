@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2016 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -38,7 +39,7 @@ import org.omegat.util.Log;
  * A class for aggregating machine translation connectors.
  *
  * @author Aaron Madlon-Kay
- *
+ * @author Hiroshi Miura
  */
 public class MachineTranslatorsManager {
 

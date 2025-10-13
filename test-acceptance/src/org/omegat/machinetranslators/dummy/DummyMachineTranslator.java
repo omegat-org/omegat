@@ -25,25 +25,19 @@
 
 package org.omegat.machinetranslators.dummy;
 
-import org.omegat.core.Core;
-import org.omegat.core.machinetranslators.BaseCachedTranslate;
+import org.omegat.gui.exttrans.IMTGlossarySupplier;
+import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.util.Language;
 
-public class Dummy extends BaseCachedTranslate {
+public class DummyMachineTranslator implements IMachineTranslation {
 
-    private static final String ENGINE_NAME = "dummy";
-    private static final String ALLOW_TRANSLATE = "allow_dummy_translate";
-    private static final String TRANSLATION = "Translated result from dummy engine.";
+    public static final String ENGINE_NAME = "dummy";
+    public static final String TRANSLATION = "Translated result from dummy engine.";
 
-    /**
-     * Register plugins into OmegaT.
-     */
-    public static void loadPlugins() {
-        Core.registerMachineTranslationClass(Dummy.class);
-    }
+    private boolean enabled;
 
-    public static void unloadPlugins() {
-        // there is no way to remove plugin
+    public DummyMachineTranslator() {
+        enabled = true;
     }
 
     @Override
@@ -52,17 +46,26 @@ public class Dummy extends BaseCachedTranslate {
     }
 
     @Override
-    public String getPreferenceName() {
-        return ALLOW_TRANSLATE;
-    }
-
-    @Override
-    protected String translate(Language sLang, Language tLang, String text) {
+    public String getCachedTranslation(Language sLang, Language tLang, String text) {
         return TRANSLATION;
     }
 
     @Override
-    public boolean isConfigurable() {
-        return false;
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean value) {
+        enabled = value;
+    }
+
+    @Override
+    public void setGlossarySupplier(IMTGlossarySupplier glossarySupplier) {
+    }
+
+    @Override
+    public String getTranslation(Language sLang, Language tLang, String text) {
+        return TRANSLATION;
     }
 }

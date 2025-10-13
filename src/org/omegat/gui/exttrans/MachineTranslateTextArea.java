@@ -8,7 +8,7 @@
                2012 Jean-Christophe Helary
                2015 Aaron Madlon-Kay
                2018 Thomas Cordonnier
-               2022 Hiroshi Miura
+               2022-2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -32,11 +32,6 @@ package org.omegat.gui.exttrans;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -48,10 +43,8 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.CoreState;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
-import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.preferences.PreferencesWindowController;
@@ -79,19 +72,14 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
     private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
 
-    private final List<MachineTranslateFindThread> searchThreads = new CopyOnWriteArrayList<>();
-
-    /**
-     * List displayed hold entries. An index shall be as same as ID attribute
-     * value of HTML. Actual displayed entries are sorted, and the order is
-     * different from the List.
-     */
-    protected List<MachineTranslationInfo> displayed = new CopyOnWriteArrayList<>();
+    private final MachineTranslateController controller;
 
     protected final DockableScrollPane scrollPane;
 
     public MachineTranslateTextArea(IMainWindow mw) {
         super(true);
+
+        controller = new MachineTranslateController(this);
 
         setEditable(false);
         StaticUIUtils.makeCaretAlwaysVisible(this);
@@ -99,17 +87,10 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
 
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
-        selectedIndex = -1;
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
         scrollPane = new DockableScrollPane("MACHINE_TRANSLATE", title, this, true);
         mw.addDockable(scrollPane);
-        CoreState.getInstance().getMachineTranslatorsManager().setGlossaryMap(this::getGlossaryMap);
-    }
-
-    Map<String, String> getGlossaryMap() {
-        return Core.getGlossaryManager().searchSourceMatches(currentlyProcessedEntry).stream()
-                .collect(Collectors.toMap(GlossaryEntry::getSrcText, GlossaryEntry::getLocText));
     }
 
     private void initDocument() {
@@ -129,20 +110,22 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         setEditorKit(htmlEditorKit);
     }
 
-    /** Cycle getDisplayedTranslation **/
-    private int selectedIndex;
-
-    public MachineTranslationInfo getDisplayedTranslation() {
-        if (displayed.isEmpty()) {
-            return null;
-        }
-        selectedIndex = (selectedIndex + 1) % displayed.size();
-        MachineTranslationInfo info = displayed.get(selectedIndex);
-        highlightSelected(selectedIndex, info);
-        return info;
+    /**
+     * Expose the currently processed entry for the controller.
+     */
+    SourceTextEntry getCurrentlyProcessedEntry() {
+        return currentlyProcessedEntry;
     }
 
-    private void highlightSelected(final int selectedIndex, final MachineTranslationInfo info) {
+    /**
+     * Expose the currently displayed translation for the shortcut.
+     * @return currently displayed translation or null if none is displayed
+     */
+    public MachineTranslationInfo getDisplayedTranslation() {
+        return controller.getDisplayedResult();
+    }
+
+    void highlightSelected(final int selectedIndex, final MachineTranslationInfo info) {
         UIThreadsUtil.mustBeSwingThread();
         HTMLDocument doc = (HTMLDocument) getDocument();
         Element rootElement = doc.getDefaultRootElement();
@@ -171,65 +154,19 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     }
 
     public void forceLoad() {
-        startSearchThread(currentlyProcessedEntry, true);
+        controller.forceLoad();
     }
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
-        startSearchThread(newEntry, false);
-    }
-
-    private void startSearchThread(SourceTextEntry newEntry, boolean force) {
-        UIThreadsUtil.mustBeSwingThread();
-
-        clear();
-        stopSearchThreads();
-        for (IMachineTranslation mt: getMachineTranslators()) {
-            if (mt.isEnabled()) {
-                MachineTranslateFindThread mtSearchThread = new MachineTranslateFindThread(this, mt, newEntry, force);
-                searchThreads.add(mtSearchThread);
-                mtSearchThread.start();
-            }
-        }
-    }
-
-    /**
-     * Get all machine translation providers.
-     * @return List of machine translation providers.
-     */
-    private List<IMachineTranslation> getMachineTranslators() {
-        return CoreState.getInstance().getMachineTranslatorsManager().getMachineTranslators();
-    }
-
-    /**
-     * Stop all search threads.
-     */
-    private void stopSearchThreads() {
-        for (MachineTranslateFindThread thread : searchThreads) {
-            if (thread.isAlive()) {
-                thread.interrupt();
-            }
-        }
-        searchThreads.clear();
+        controller.startSearchThread(newEntry);
     }
 
     @Override
     protected void setFoundResult(final SourceTextEntry se, final MachineTranslationInfo data) {
         UIThreadsUtil.mustBeSwingThread();
         if (data != null && data.result != null) {
-            displayed.add(data);
-            displayed.sort(Comparator.comparing(info -> info.translatorName));
-            StringBuilder sb = new StringBuilder("<html>");
-            for (int i = 0; i < displayed.size(); i++) {
-                MachineTranslationInfo info = displayed.get(i);
-                sb.append("<div id=\"").append(i).append("\">");
-                sb.append(info.result);
-                sb.append("<div class=\"engine\">&lt;");
-                sb.append(info.translatorName);
-                sb.append("&gt;</div></div>");
-            }
-            sb.append("</html>");
-            setText(sb.toString());
+            controller.setFoundResult(data);
         }
     }
 
@@ -237,8 +174,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     public void clear() {
         super.clear();
         getHighlighter().removeAllHighlights();
-        displayed.clear();
-        selectedIndex = -1;
+        controller.clearFoundResult();
     }
 
     @Override

@@ -32,7 +32,6 @@ package org.omegat.gui.exttrans;
 
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.machinetranslators.MachineTranslateError;
@@ -46,7 +45,7 @@ class MachineTranslateFindThread extends EntryInfoSearchThread<MachineTranslatio
     private final String src;
     private final boolean force;
 
-    public MachineTranslateFindThread(MachineTranslateTextArea machineTranslateTextArea, final IMachineTranslation translator, final SourceTextEntry newEntry,
+    MachineTranslateFindThread(MachineTranslateTextArea machineTranslateTextArea, final IMachineTranslation translator, final SourceTextEntry newEntry,
                                       boolean force) {
         super(machineTranslateTextArea, newEntry);
         this.translator = translator;

@@ -3,10 +3,8 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik
-               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
-               2015 Yu Tang, Aaron Madlon-Kay
+ Copyright (C) 2015 Aaron Madlon-Kay
+               2025 Hiroshi Miura
                Home page: https://www.omegat.org/
                Support center: https://omegat.org/support
 
@@ -25,19 +23,42 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+
 package org.omegat.gui.scripting;
 
-import java.awt.Component;
+import org.omegat.core.CoreEvents;
+import org.omegat.core.events.IApplicationEventListener;
 
-import javax.swing.JMenuBar;
-import javax.swing.JTextArea;
+/**
+ * Script module entry point.
+ */
+@SuppressWarnings("unused")
+public final class ScriptingModule {
 
-@SuppressWarnings("serial")
-public abstract class AbstractScriptEditor extends JTextArea {
-    public abstract void setHighlighting(String extension);
-    public abstract void enhanceMenu(JMenuBar mb);
-    public abstract void initLayout(ScriptingWindow scriptingWindow);
-    public abstract Component getPanel();
-    // XXX setText(String s) does not seem to work directly on the subclasses ?
-    public abstract JTextArea getTextArea();
+    public static final String DEFAULT_SCRIPTS_DIR = "scripts";
+    static ScriptingWindow window;
+
+    private ScriptingModule() {
+    }
+
+    public static void loadPlugins() {
+        System.setProperty("omegat.debug.scripts", "true");
+        CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
+            public void onApplicationStartup() {
+                window = new ScriptingWindow();
+            }
+
+            @Override
+            public void onApplicationShutdown() {
+            }
+        });
+    }
+
+    public static void unloadPlugins() {
+        System.setProperty("omegat.debug.scripts", "false");
+        if (window != null) {
+            window.dispose();
+        }
+    }
 }

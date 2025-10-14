@@ -72,4 +72,16 @@ public class MachineTranslatorsManager {
     public List<IMachineTranslation> getMachineTranslators() {
         return Collections.unmodifiableList(machineTranslations);
     }
+
+    /**
+     * Add a machine translation connector.
+     * <p>
+     * This method is solely for backward compatibility with the deprecated MachineTranslators class.
+     * It is a reason why it is package-private.
+     *
+     * @param machineTranslator very old-style machine translation connector.
+     */
+    void add(IMachineTranslation machineTranslator) {
+        machineTranslations.add(machineTranslator);
+    }
 }

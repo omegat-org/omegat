@@ -65,9 +65,12 @@ import javax.xml.stream.XMLStreamException;
 
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
+import org.madlonkay.supertmxmerge.StmProperties;
+import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.core.team2.operation.GlossaryRebaseOperation;
 import org.omegat.core.team2.PreparedFileInfo;
 import org.omegat.core.team2.operation.TMXRebaseOperation;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.xml.sax.SAXParseException;
 
 import org.omegat.core.Core;
@@ -1062,6 +1065,37 @@ public class RealProject implements IProject {
         return remoteRepositoryProvider != null && preparedStatus == PreparedStatus.PREPARED && isOnlineMode;
     }
 
+
+    /**
+     * Do 3-way merge of:
+     * <dl>
+     * <dt>Base:</dt><dd>baseTMX</dd>
+     * <dt>File 1:</dt><dd>projectTMX (mine)</dd>
+     * <dt>File 2:</dt><dd>headTMX (theirs)</dd>
+     * </dl>
+     */
+    @Deprecated(since = "6.1.0", forRemoval = true)
+    protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+        ProjectTMX mergedTMX;
+        StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
+                .setParentWindow(Core.getMainWindow().getApplicationFrame())
+                // More than this number of conflicts will trigger List View by
+                // default.
+                .setListViewThreshold(5);
+        String srcLang = config.getSourceLanguage().getLanguage();
+        String trgLang = config.getTargetLanguage().getLanguage();
+        mergedTMX = SuperTmxMerge.merge(
+                new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
+                new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
+                new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
+        if (Log.isDebugEnabled()) {
+            Log.logDebug("Merge report: {0}", props.getReport());
+        }
+        commitDetails.append('\n');
+        commitDetails.append(props.getReport().toString());
+        return mergedTMX;
+    }
+
     /**
      * Create the given directory if it does not exist yet.
      *
@@ -1713,6 +1747,14 @@ public class RealProject implements IProject {
             fn = fn.replaceAll(f, t);
         }
         return StringUtil.removeXMLInvalidChars(fn);
+    }
+
+    @Deprecated(since = "6.1.0", forRemoval = true)
+    protected void notifyGlossaryManagerFileChanged(File file) {
+        GlossaryManager gm = CoreState.getInstance().getGlossaryManager();
+        if (gm != null) {
+            gm.fileChanged(file);
+        }
     }
 
     protected class LoadFilesCallback extends ParseEntry {

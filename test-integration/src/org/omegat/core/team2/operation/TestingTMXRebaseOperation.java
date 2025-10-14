@@ -73,6 +73,7 @@ public class TestingTMXRebaseOperation extends TMXRebaseOperation implements IRe
             return e.translation;
         }
     }
+
     @Override
     protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
         Log.log("Base:   " + baseTMX);

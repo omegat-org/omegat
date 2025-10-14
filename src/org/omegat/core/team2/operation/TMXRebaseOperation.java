@@ -29,14 +29,9 @@
 
 package org.omegat.core.team2.operation;
 
-import org.madlonkay.supertmxmerge.StmProperties;
-import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.data.SyncTMX;
-import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.TMXReader2;
 
@@ -97,32 +92,7 @@ public class TMXRebaseOperation implements IRebaseOperation {
         return TMXReader2.detectCharset(file);
     }
 
-    /**
-     * Do 3-way merge of:
-     * <dl>
-     * <dt>Base:</dt><dd>baseTMX</dd>
-     * <dt>File 1:</dt><dd>projectTMX (mine)</dd>
-     * <dt>File 2:</dt><dd>headTMX (theirs)</dd>
-     * </dl>
-     */
     protected ProjectTMX mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
-        ProjectTMX mergedTMX;
-        StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
-                .setParentWindow(Core.getMainWindow().getApplicationFrame())
-                // More than this number of conflicts will trigger List View by
-                // default.
-                .setListViewThreshold(5);
-        String srcLang = config.getSourceLanguage().getLanguage();
-        String trgLang = config.getTargetLanguage().getLanguage();
-        mergedTMX = SuperTmxMerge.merge(
-                new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-        if (Log.isDebugEnabled()) {
-            Log.logDebug("Merge report: {0}", props.getReport());
-        }
-        commitDetails.append('\n');
-        commitDetails.append(props.getReport().toString());
-        return mergedTMX;
+        return RebaseUtils.mergeTMX(projectTMX, baseTMX, headTMX, config, commitDetails);
     }
 }

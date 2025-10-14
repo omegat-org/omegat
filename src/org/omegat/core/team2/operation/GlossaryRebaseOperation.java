@@ -29,10 +29,8 @@
 
 package org.omegat.core.team2.operation;
 
-import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.util.Log;
 import org.omegat.util.Preferences;
@@ -99,7 +97,7 @@ public class GlossaryRebaseOperation implements IRebaseOperation {
     @Override
     public void reload(final File file) {
         Log.logDebug("Reloading glossary file {0}", file);
-        notifyGlossaryManagerFileChanged(file);
+        RebaseUtils.notifyGlossaryManagerFileChanged(file);
     }
 
     @Override
@@ -114,10 +112,4 @@ public class GlossaryRebaseOperation implements IRebaseOperation {
         return GlossaryReaderTSV.getFileEncoding(file);
     }
 
-    protected void notifyGlossaryManagerFileChanged(File file) {
-        GlossaryManager gm = Core.getGlossaryManager();
-        if (gm != null) {
-            gm.fileChanged(file);
-        }
-    }
 }

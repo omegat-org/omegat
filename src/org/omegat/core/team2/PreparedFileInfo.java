@@ -54,6 +54,17 @@ public final class PreparedFileInfo {
         this.charset = builder.charset;
     }
 
+    public PreparedFileInfo(RebaseAndCommit.Prepared r) {
+        this.path = r.path;
+        this.fileBase = r.fileBase;
+        this.fileHead = r.fileHead;
+        this.versionBase = r.versionBase;
+        this.versionHead = r.versionHead;
+        this.needToCommit = r.needToCommit;
+        this.commitComment = r.commitComment;
+        this.charset = r.charset;
+    }
+
     // Getters
     public String getPath() {
         return path;

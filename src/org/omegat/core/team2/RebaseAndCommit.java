@@ -56,7 +56,7 @@ public final class RebaseAndCommit {
      * Load BASE and HEAD from remote repository into temp storage for future
      * rebase.
      */
-    public static Prepared prepare(RemoteRepositoryProvider provider, File projectDir, String path)
+    public static PreparedFileInfo prepare(RemoteRepositoryProvider provider, File projectDir, String path)
             throws Exception {
         if (!provider.isUnderMapping(path)) {
             throw new RuntimeException("Path is not under mapping: " + path);
@@ -82,10 +82,10 @@ public final class RebaseAndCommit {
         r.versionHead = provider.getVersion(path);
         r.fileHead = provider.toPrepared(headFile);
 
-        return r;
+        return new PreparedFileInfo(r);
     }
 
-    public static Prepared rebaseAndCommit(Prepared prep, RemoteRepositoryProvider provider,
+    public static PreparedFileInfo rebaseAndCommit(PreparedFileInfo prep, RemoteRepositoryProvider provider,
                                                    File projectDir, String path, IRebaseOperation rebaser)
             throws Exception {
         if (!provider.isUnderMapping(path)) {
@@ -103,8 +103,8 @@ public final class RebaseAndCommit {
         final File localFile = new File(projectDir, path);
         final boolean fileChangedLocally;
         File baseRepoFile = null;
-        if (prep != null && prep.versionBase.equals(currentBaseVersion)) {
-            baseRepoFile = prep.fileBase;
+        if (prep != null && prep.getVersionBase().equals(currentBaseVersion)) {
+            baseRepoFile = prep.getFileBase();
         }
         if (baseRepoFile == null) {
             baseRepoFile = provider.switchToVersion(path, currentBaseVersion);
@@ -128,8 +128,8 @@ public final class RebaseAndCommit {
         File headRepoFile = null;
         String headVersion = null;
         if (prep != null) {
-            headVersion = prep.versionHead;
-            headRepoFile = prep.fileHead;
+            headVersion = prep.getVersionHead();
+            headRepoFile = prep.getFileHead();
         }
         if (headVersion == null) {
             headRepoFile = provider.switchToVersion(path, null);
@@ -199,13 +199,14 @@ public final class RebaseAndCommit {
         }
 
         if (prep != null) {
-            prep.needToCommit = fileChangedLocally;
-            prep.commitComment = rebaser.getCommentForCommit();
+            Prepared prepared = new Prepared();
+            prepared.needToCommit = fileChangedLocally;
+            prepared.commitComment = rebaser.getCommentForCommit();
             if (fileChangedLocally) {
-                prep.charset = rebaser.getFileCharset(localFile);
+                prepared.charset = rebaser.getFileCharset(localFile);
             }
             // no need to commit yet - it will make other thread after
-            return prep;
+            return new PreparedFileInfo(prepared);
         }
 
         if (fileChangedLocally) {
@@ -228,18 +229,18 @@ public final class RebaseAndCommit {
     /**
      * Commit later.
      */
-    public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider,
+    public static String commitPrepared(PreparedFileInfo prep, RemoteRepositoryProvider provider,
             @Nullable String possibleHeadVersion) throws Exception {
-        if (!prep.needToCommit) {
+        if (!prep.needToCommit()) {
             // there was no changes
             return null;
         }
-        provider.copyFilesFromProjectToRepos(prep.path, prep.charset);
-        String newVersion = provider.commitFileAfterVersion(prep.path, prep.commitComment,
-                prep.versionHead, possibleHeadVersion);
+        provider.copyFilesFromProjectToRepos(prep.getPath(), prep.getCharset());
+        String newVersion = provider.commitFileAfterVersion(prep.getPath(), prep.getCommitComment(),
+                prep.getVersionHead(), possibleHeadVersion);
         if (newVersion != null) {
             // file was committed good
-            provider.getTeamSettings().set(VERSION_PREFIX + prep.path, newVersion);
+            provider.getTeamSettings().set(VERSION_PREFIX + prep.getPath(), newVersion);
         }
         return newVersion;
     }

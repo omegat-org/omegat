@@ -26,14 +26,12 @@
 package org.omegat.core.team2.operation;
 
 import org.madlonkay.supertmxmerge.StmProperties;
-import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.madlonkay.supertmxmerge.data.ITuv;
 import org.madlonkay.supertmxmerge.data.Key;
 import org.madlonkay.supertmxmerge.data.ResolutionStrategy;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.data.SyncTMX;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -88,53 +86,8 @@ public class TestingTMXRebaseOperation extends TMXRebaseOperation implements IRe
             throw new KnownException("TMXMerge: 'Theirs' TM is not a valid derivative of 'Base' TM");
         }
         StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
-                .setResolutionStrategy(new ResolutionStrategy() {
-                    @Override
-                    public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
-                        TMXEntry enBase = baseTuv != null
-                                ? (TMXEntry) baseTuv.getUnderlyingRepresentation()
-                                : null;
-                        TMXEntry enProject = projectTuv != null
-                                ? (TMXEntry) projectTuv.getUnderlyingRepresentation()
-                                : null;
-                        TMXEntry enHead = headTuv != null
-                                ? (TMXEntry) headTuv.getUnderlyingRepresentation()
-                                : null;
-                        String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
-                                + tr(enHead) + " project=" + tr(enProject);
-                        if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {
-                            if (v(enHead) < v(enBase)) {
-                                throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
-                            }
-                            if (v(enProject) < v(enBase)) {
-                                throw new RuntimeException("Rebase project: wrong concurrent: " + s);
-                            }
-                            if (v(enHead) > v(enProject)) {
-                                System.err.println(s + ": result=head");
-                                return headTuv;
-                            } else {
-                                System.err.println(s + ": result=project");
-                                return projectTuv;
-                            }
-                        } else {
-                            throw new RuntimeException("Rebase error: non-concurrent entry: " + s);
-                        }
-                    }
-                });
-        String srcLang = config.getSourceLanguage().getLanguage();
-        String trgLang = config.getTargetLanguage().getLanguage();
-        ProjectTMX mergedTMX = SuperTmxMerge.merge(
-                new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
-                new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
-                new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);
-        Log.log("Merged: " + mergedTMX);
-        if (isInvalidMergeInput(baseTMX, mergedTMX)) {
-            Log.log("'Merged' TM is not a valid derivative of 'Base' TM");
-            throw new KnownException("TMXMerge: 'Merged' TM is not a valid derivative of 'Base' TM");
-        }
-        commitDetails.append('\n');
-        commitDetails.append(props.getReport().toString());
-        return mergedTMX;
+                .setResolutionStrategy(new TestingResolutionStrategy());
+        return RebaseUtils.mergeTMX(projectTMX, baseTMX, headTMX, config, props, commitDetails);
     }
 
     /**
@@ -154,4 +107,37 @@ public class TestingTMXRebaseOperation extends TMXRebaseOperation implements IRe
                 || !other.getAlternativeKeys().containsAll(base.getAlternativeKeys());
     }
 
+    private class TestingResolutionStrategy extends ResolutionStrategy {
+        @Override
+        public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
+            TMXEntry enBase = baseTuv != null
+                    ? (TMXEntry) baseTuv.getUnderlyingRepresentation()
+                    : null;
+            TMXEntry enProject = projectTuv != null
+                    ? (TMXEntry) projectTuv.getUnderlyingRepresentation()
+                    : null;
+            TMXEntry enHead = headTuv != null
+                    ? (TMXEntry) headTuv.getUnderlyingRepresentation()
+                    : null;
+            String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
+                    + tr(enHead) + " project=" + tr(enProject);
+            if (enProject != null && CONCURRENT_NAME.equals(enProject.source)) {
+                if (v(enHead) < v(enBase)) {
+                    throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
+                }
+                if (v(enProject) < v(enBase)) {
+                    throw new RuntimeException("Rebase project: wrong concurrent: " + s);
+                }
+                if (v(enHead) > v(enProject)) {
+                    System.err.println(s + ": result=head");
+                    return headTuv;
+                } else {
+                    System.err.println(s + ": result=project");
+                    return projectTuv;
+                }
+            } else {
+                throw new RuntimeException("Rebase error: non-concurrent entry: " + s);
+            }
+        }
+    }
 }

@@ -66,7 +66,6 @@ import javax.xml.stream.XMLStreamException;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.team2.operation.GlossaryRebaseOperation;
-import org.omegat.core.team2.PreparedFileInfo;
 import org.omegat.core.team2.operation.RebaseUtils;
 import org.omegat.core.team2.operation.TMXRebaseOperation;
 import org.xml.sax.SAXParseException;
@@ -143,8 +142,8 @@ public class RealProject implements IProject {
      * Status required for execute prepare/rebase/commit in the correct order.
      */
     private volatile PreparedStatus preparedStatus = PreparedStatus.NONE;
-    private volatile PreparedFileInfo tmxPrepared;
-    private volatile PreparedFileInfo glossaryPrepared;
+    private volatile RebaseAndCommit.Prepared tmxPrepared;
+    private volatile RebaseAndCommit.Prepared glossaryPrepared;
 
     private boolean isOnlineMode;
 
@@ -1048,7 +1047,7 @@ public class RealProject implements IProject {
         if (processGlossary && glossaryPath != null && remoteRepositoryProvider.isUnderMapping(glossaryPath)) {
             synchronized (projectTMX) {
                 glossaryPrepared = RebaseAndCommit.rebaseAndCommit(glossaryPrepared, remoteRepositoryProvider,
-                        config.getProjectRootDir(), glossaryPath, new GlossaryRebaseOperation(config));
+                        config.getProjectRootDir(), glossaryPath, getGlossaryRebaseOperation());
             }
         }
         Log.logInfoRB("TEAM_REBASE_END");
@@ -1057,6 +1056,11 @@ public class RealProject implements IProject {
     @VisibleForTesting
     TMXRebaseOperation getTMXRebaseOperation() {
         return new TMXRebaseOperation(projectTMX, config);
+    }
+
+    @VisibleForTesting
+    GlossaryRebaseOperation getGlossaryRebaseOperation() {
+        return new GlossaryRebaseOperation(config);
     }
 
     private boolean canRebaseAndCommit() {

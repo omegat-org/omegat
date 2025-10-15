@@ -47,7 +47,9 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.TestCoreInitializer;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.operation.GlossaryRebaseOperation;
 import org.omegat.core.team2.operation.TMXRebaseOperation;
+import org.omegat.core.team2.operation.TestingGlossaryRebaseOperation;
 import org.omegat.core.team2.operation.TestingTMXRebaseOperation;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.filters2.master.PluginUtils;
@@ -469,6 +471,11 @@ public final class TestTeamIntegrationChild {
         @Override
         TMXRebaseOperation getTMXRebaseOperation() {
             return new TestingTMXRebaseOperation(projectTMX, config);
+        }
+
+        @Override
+        GlossaryRebaseOperation getGlossaryRebaseOperation() {
+            return new TestingGlossaryRebaseOperation(config);
         }
     }
 

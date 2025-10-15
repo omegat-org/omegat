@@ -56,7 +56,7 @@ public final class RebaseAndCommit {
      * Load BASE and HEAD from remote repository into temp storage for future
      * rebase.
      */
-    public static PreparedFileInfo prepare(RemoteRepositoryProvider provider, File projectDir, String path)
+    public static Prepared prepare(RemoteRepositoryProvider provider, File projectDir, String path)
             throws Exception {
         if (!provider.isUnderMapping(path)) {
             throw new RuntimeException("Path is not under mapping: " + path);
@@ -67,17 +67,25 @@ public final class RebaseAndCommit {
             return null;
         }
 
-        File baseFile = provider.switchToVersion(path, savedVersion);
-        File headFile = provider.switchToVersion(path, null);
-        String headVersion = provider.getVersion(path);
+        Prepared r = new Prepared();
+        r.path = path;
+        final String currentBaseVersion = savedVersion;
+        // retrieve BASE version
+        File baseFile = provider.switchToVersion(path, currentBaseVersion);
+        // save it to prepared dir
+        r.versionBase = currentBaseVersion;
+        r.fileBase = provider.toPrepared(baseFile);
 
-        return new PreparedFileInfo.Builder(path)
-                .withVersions(savedVersion, headVersion)
-                .withFiles(provider.toPrepared(baseFile), provider.toPrepared(headFile))
-                .build();
+        // retrieve HEAD version
+        File headFile = provider.switchToVersion(path, null);
+        // get version id
+        r.versionHead = provider.getVersion(path);
+        r.fileHead = provider.toPrepared(headFile);
+
+        return r;
     }
 
-    public static PreparedFileInfo rebaseAndCommit(PreparedFileInfo prep, RemoteRepositoryProvider provider,
+    public static Prepared rebaseAndCommit(Prepared prep, RemoteRepositoryProvider provider,
                                                    File projectDir, String path, IRebaseOperation rebaser)
             throws Exception {
         if (!provider.isUnderMapping(path)) {
@@ -95,8 +103,8 @@ public final class RebaseAndCommit {
         final File localFile = new File(projectDir, path);
         final boolean fileChangedLocally;
         File baseRepoFile = null;
-        if (prep != null && prep.getVersionBase().equals(currentBaseVersion)) {
-            baseRepoFile = prep.getFileBase();
+        if (prep != null && prep.versionBase.equals(currentBaseVersion)) {
+            baseRepoFile = prep.fileBase;
         }
         if (baseRepoFile == null) {
             baseRepoFile = provider.switchToVersion(path, currentBaseVersion);
@@ -120,8 +128,8 @@ public final class RebaseAndCommit {
         File headRepoFile = null;
         String headVersion = null;
         if (prep != null) {
-            headVersion = prep.getVersionHead();
-            headRepoFile = prep.getFileHead();
+            headVersion = prep.versionHead;
+            headRepoFile = prep.fileHead;
         }
         if (headVersion == null) {
             headRepoFile = provider.switchToVersion(path, null);
@@ -191,10 +199,13 @@ public final class RebaseAndCommit {
         }
 
         if (prep != null) {
+            prep.needToCommit = fileChangedLocally;
+            prep.commitComment = rebaser.getCommentForCommit();
             if (fileChangedLocally) {
-                return prep.withCommitInfo(fileChangedLocally, rebaser.getCommentForCommit(), rebaser.getFileCharset(localFile));
+                prep.charset = rebaser.getFileCharset(localFile);
             }
-            return prep.withCommitInfo(fileChangedLocally, rebaser.getCommentForCommit(), prep.getCharset());
+            // no need to commit yet - it will make other thread after
+            return prep;
         }
 
         if (fileChangedLocally) {
@@ -217,18 +228,18 @@ public final class RebaseAndCommit {
     /**
      * Commit later.
      */
-    public static String commitPrepared(PreparedFileInfo prep, RemoteRepositoryProvider provider,
+    public static String commitPrepared(Prepared prep, RemoteRepositoryProvider provider,
             @Nullable String possibleHeadVersion) throws Exception {
-        if (!prep.needToCommit()) {
+        if (!prep.needToCommit) {
             // there was no changes
             return null;
         }
-        provider.copyFilesFromProjectToRepos(prep.getPath(), prep.getCharset());
-        String newVersion = provider.commitFileAfterVersion(prep.getPath(), prep.getCommitComment(),
-                prep.getVersionHead(), possibleHeadVersion);
+        provider.copyFilesFromProjectToRepos(prep.path, prep.charset);
+        String newVersion = provider.commitFileAfterVersion(prep.path, prep.commitComment,
+                prep.versionHead, possibleHeadVersion);
         if (newVersion != null) {
             // file was committed good
-            provider.getTeamSettings().set(VERSION_PREFIX + prep.getPath(), newVersion);
+            provider.getTeamSettings().set(VERSION_PREFIX + prep.path, newVersion);
         }
         return newVersion;
     }
@@ -282,5 +293,17 @@ public final class RebaseAndCommit {
          * return null if conversion not required.
          */
         String getFileCharset(File file) throws Exception;
+    }
+
+    /**
+     * Info about prepared file.
+     */
+    public static class Prepared {
+        public String path;
+        public File fileBase, fileHead;
+        public String versionBase, versionHead;
+        public boolean needToCommit;
+        public String commitComment;
+        public String charset;
     }
 }

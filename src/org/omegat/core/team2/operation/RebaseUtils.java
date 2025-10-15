@@ -28,9 +28,12 @@
  **************************************************************************/
 package org.omegat.core.team2.operation;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.core.Core;
+import org.omegat.core.data.CoreState;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SyncTMX;
@@ -41,11 +44,12 @@ import org.omegat.util.OStrings;
 import java.io.File;
 
 public final class RebaseUtils {
+
     private RebaseUtils() {
     }
 
     public static void notifyGlossaryManagerFileChanged(File file) {
-        GlossaryManager gm = Core.getGlossaryManager();
+        GlossaryManager gm = CoreState.getInstance().getGlossaryManager();
         if (gm != null) {
             gm.fileChanged(file);
         }
@@ -61,15 +65,21 @@ public final class RebaseUtils {
      */
     public static ProjectTMX mergeTMX(ProjectTMX projectTMX, ProjectTMX baseTMX, ProjectTMX headTMX, ProjectProperties config,
                                StringBuilder commitDetails) {
-        ProjectTMX mergedTMX;
         StmProperties props = new StmProperties().setLanguageResource(OStrings.getResourceBundle())
                 .setParentWindow(Core.getMainWindow().getApplicationFrame())
                 // More than this number of conflicts will trigger List View by
                 // default.
                 .setListViewThreshold(5);
+        return mergeTMX(projectTMX, baseTMX, headTMX, config, props, commitDetails);
+    }
+
+    @VisibleForTesting
+    public static ProjectTMX mergeTMX(ProjectTMX projectTMX, ProjectTMX baseTMX, ProjectTMX headTMX,
+                                      @NotNull ProjectProperties config, StmProperties props,
+                                      @NotNull StringBuilder commitDetails) {
         String srcLang = config.getSourceLanguage().getLanguage();
         String trgLang = config.getTargetLanguage().getLanguage();
-        mergedTMX = SuperTmxMerge.merge(
+        ProjectTMX mergedTMX = SuperTmxMerge.merge(
                 new SyncTMX(baseTMX, OStrings.getString("TMX_MERGE_BASE"), srcLang, trgLang),
                 new SyncTMX(projectTMX, OStrings.getString("TMX_MERGE_MINE"), srcLang, trgLang),
                 new SyncTMX(headTMX, OStrings.getString("TMX_MERGE_THEIRS"), srcLang, trgLang), props);

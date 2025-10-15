@@ -41,8 +41,8 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RuntimePreferenceStore;
 import org.omegat.core.team2.ProjectTeamSettings;
-import org.omegat.core.team2.RebaseAndCommit;
 import org.omegat.core.team2.RemoteRepositoryProvider;
+import org.omegat.core.team2.fsm.context.RebaseContext;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
@@ -153,7 +153,7 @@ public final class ConvertProject26to37team {
     private static void saveVersion(File projectRootFolder, String file, String version) {
         ProjectTeamSettings teamSettings = new ProjectTeamSettings(new File(projectRootFolder,
                 RemoteRepositoryProvider.REPO_SUBDIR));
-        teamSettings.set(RebaseAndCommit.VERSION_PREFIX + file, version);
+        teamSettings.set(RebaseContext.VERSION_PREFIX + file, version);
     }
 
     /**

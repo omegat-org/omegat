@@ -42,6 +42,7 @@ import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team2.IRemoteRepository2.NetworkException;
 import org.omegat.util.FileUtil;
@@ -68,9 +69,10 @@ public class RemoteRepositoryProvider {
     public static final String REPO_GIT_SUBDIR = ".git/";
     public static final String REPO_SVN_SUBDIR = ".svn/";
 
-    final File projectRoot;
-    final ProjectTeamSettings teamSettings;
-    final List<RepositoryDefinition> repositoriesDefinitions;
+    private final File projectRoot;
+    private final ProjectTeamSettings teamSettings;
+    private final List<RepositoryDefinition> repositoriesDefinitions;
+    @VisibleForTesting
     final List<IRemoteRepository2> repositories = new ArrayList<>();
     /**
      * exclude some path like .git, .svn, project_save.tmx and glossary.txt when
@@ -93,6 +95,10 @@ public class RemoteRepositoryProvider {
 
         checkDefinitions();
         initializeRepositories();
+    }
+
+    public File getProjectRoot() {
+        return projectRoot;
     }
 
     public void setForceExcludesFromProjectProperties(ProjectProperties props) {
@@ -142,7 +148,7 @@ public class RemoteRepositoryProvider {
     /**
      * Find mappings for a specified path.
      */
-    protected List<Mapping> getMappings(String path, String... forceExcludePaths) {
+    private List<Mapping> getMappings(String path, String... forceExcludePaths) {
         List<Mapping> result = new ArrayList<>();
         for (int i = 0; i < repositoriesDefinitions.size(); i++) {
             RepositoryDefinition rd = repositoriesDefinitions.get(i);
@@ -159,7 +165,7 @@ public class RemoteRepositoryProvider {
     /**
      * Found mapping must be one.
      */
-    protected Mapping oneMapping(String path) {
+    private Mapping oneMapping(String path) {
         List<Mapping> mappings = getMappings(path);
         if (mappings.size() > 1) {
             throw new IllegalArgumentException("Multiple mappings for file '" + path + "'");

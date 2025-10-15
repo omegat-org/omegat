@@ -37,7 +37,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.core.machinetranslators.MachineTranslators;
+import org.omegat.core.data.CoreState;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.preferences.BasePreferencesController;
 import org.omegat.util.OStrings;
@@ -45,6 +45,11 @@ import org.omegat.util.Preferences;
 import org.omegat.util.gui.TableColumnSizer;
 
 /**
+ * MachineTranslationPreferencesController is responsible for managing
+ * user interface and preferences related to configuring machine translation providers.
+ * It extends the BasePreferencesController and specifically provides a GUI
+ * component for machine translation settings.
+ *
  * @author Aaron Madlon-Kay
  */
 public class MachineTranslationPreferencesController extends BasePreferencesController {
@@ -89,9 +94,8 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
 
     private void initGui() {
         panel = new MachineTranslationPreferencesPanel();
-        panel.autoFetchCheckBox.addActionListener(e -> {
-            panel.untranslatedOnlyCheckBox.setEnabled(panel.autoFetchCheckBox.isSelected());
-        });
+        panel.autoFetchCheckBox.addActionListener(e -> panel.untranslatedOnlyCheckBox.setEnabled(
+                panel.autoFetchCheckBox.isSelected()));
         Dimension tableSize = panel.mtProviderTable.getPreferredSize();
         panel.mtProviderTable.setPreferredScrollableViewportSize(
                 new Dimension(tableSize.width, panel.mtProviderTable.getRowHeight() * MAX_ROW_COUNT));
@@ -110,9 +114,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
                 }
             }
         });
-        panel.configureButton.addActionListener(e -> {
-            getSelectedProvider().ifPresent(this::showProviderConfigUI);
-        });
+        panel.configureButton.addActionListener(e -> getSelectedProvider().ifPresent(this::showProviderConfigUI));
         panel.autoFetchCheckBox.addActionListener(
                 e -> panel.untranslatedOnlyCheckBox.setSelected(panel.autoFetchCheckBox.isSelected()));
     }
@@ -146,8 +148,8 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         panel.autoFetchCheckBox.setSelected(mtAutoFetch);
         panel.untranslatedOnlyCheckBox.setSelected(Preferences.isPreference(Preferences.MT_ONLY_UNTRANSLATED));
         panel.untranslatedOnlyCheckBox.setEnabled(mtAutoFetch);
-        List<IMachineTranslation> mtProviders = MachineTranslators.getMachineTranslators();
-        mtProviders.stream().forEach(p -> providerStatus.put(p.getName(), p.isEnabled()));
+        List<IMachineTranslation> mtProviders = getProviders();
+        mtProviders.forEach(p -> providerStatus.put(p.getName(), p.isEnabled()));
         panel.mtProviderTable.setModel(new ProvidersTableModel(mtProviders));
         updateEnabledness();
     }
@@ -157,8 +159,8 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         panel.autoFetchCheckBox.setSelected(false);
         panel.untranslatedOnlyCheckBox.setSelected(false);
         panel.untranslatedOnlyCheckBox.setEnabled(false);
-        List<IMachineTranslation> mtProviders = MachineTranslators.getMachineTranslators();
-        mtProviders.stream().forEach(p -> providerStatus.put(p.getName(), false));
+        List<IMachineTranslation> mtProviders = getProviders();
+        mtProviders.forEach(p -> providerStatus.put(p.getName(), false));
         panel.mtProviderTable.setModel(new ProvidersTableModel(mtProviders));
         updateEnabledness();
     }
@@ -167,7 +169,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
     public void persist() {
         Preferences.setPreference(Preferences.MT_AUTO_FETCH, panel.autoFetchCheckBox.isSelected());
         Preferences.setPreference(Preferences.MT_ONLY_UNTRANSLATED, panel.untranslatedOnlyCheckBox.isSelected());
-        MachineTranslators.getMachineTranslators().stream().forEach(p -> {
+        getProviders().forEach(p -> {
             Boolean status = providerStatus.get(p.getName());
             if (status != null) {
                 p.setEnabled(status);
@@ -175,6 +177,17 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         });
     }
 
+    /**
+     * Get all machine translation providers.
+     * @return List of machine translation providers.
+     */
+    private List<IMachineTranslation> getProviders() {
+        return CoreState.getInstance().getMachineTranslatorsManager().getMachineTranslators();
+    }
+
+    /**
+     * Table model for the machine translation providers table.
+     */
     @SuppressWarnings("serial")
     class ProvidersTableModel extends AbstractTableModel {
 
@@ -226,7 +239,7 @@ public class MachineTranslationPreferencesController extends BasePreferencesCont
         @Override
         public java.lang.Class<?> getColumnClass(int columnIndex) {
             return ProviderColumn.get(columnIndex).clazz;
-        };
+        }
 
         public IMachineTranslation getProviderAt(int row) {
             return mtProviders.get(row);

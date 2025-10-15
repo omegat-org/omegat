@@ -911,7 +911,6 @@ public class RealProject implements IProject {
         glossaryPrepared = null;
         remoteRepositoryProvider.cleanPrepared();
 
-
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
         if (remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             tmxPrepared = RebaseAndCommit.prepare(remoteRepositoryProvider, config.getProjectRootDir(),

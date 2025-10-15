@@ -477,7 +477,6 @@ public final class TestTeamIntegrationChild {
         GlossaryRebaseOperation getGlossaryRebaseOperation() {
             return new TestingGlossaryRebaseOperation(config);
         }
-    }
 
         /**
          * Check a TM against the base TM to ensure it's a valid modification of

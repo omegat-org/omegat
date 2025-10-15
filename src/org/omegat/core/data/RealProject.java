@@ -134,7 +134,7 @@ import gen.core.filters.Filters;
  */
 public class RealProject implements IProject {
     protected final ProjectProperties config;
-    protected @Nullable RemoteRepositoryProvider remoteRepositoryProvider;
+    protected RemoteRepositoryProvider remoteRepositoryProvider;
 
     enum PreparedStatus {
         NONE, PREPARED, PREPARED2, REBASED
@@ -232,16 +232,11 @@ public class RealProject implements IProject {
      */
     public RealProject(final ProjectProperties props) {
         config = props;
-        if (config.getRepositories() != null && !RuntimePreferenceStore.getInstance().isNoTeam()) {
-            try {
-                remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
-                        config.getRepositories(), config);
-            } catch (Exception ex) {
-                // TODO
-                throw new RuntimeException(ex);
-            }
+        if (!RuntimePreferenceStore.getInstance().isNoTeam()) {
+            remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(),
+                    config.getRepositories(), config);
         } else {
-            remoteRepositoryProvider = null;
+            remoteRepositoryProvider = new RemoteRepositoryProvider(config.getProjectRootDir(), null, config);
         }
 
         projectTMX = new ProjectTMX(config.getSourceLanguage(), config.getTargetLanguage(),
@@ -353,7 +348,7 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
-            if (remoteRepositoryProvider != null) {
+            if (remoteRepositoryProvider.isManaged()) {
                 try {
                     tmxPrepared = null;
                     glossaryPrepared = null;
@@ -377,7 +372,7 @@ public class RealProject implements IProject {
                 loadSourceFiles();
 
                 // This MUST happen after calling loadTranslations()
-                if (remoteRepositoryProvider != null && isOnlineMode) {
+                if (remoteRepositoryProvider.isManaged() && isOnlineMode) {
                     Core.getMainWindow().showStatusMessageRB("TEAM_REBASE_AND_COMMIT");
                     rebaseAndCommitProject(true);
                 }
@@ -664,7 +659,7 @@ public class RealProject implements IProject {
     }
 
     private boolean shouldCommitToRepository(boolean commitTargetFiles) {
-        return remoteRepositoryProvider != null && config.getTargetDir().isUnderRoot() && commitTargetFiles
+        return remoteRepositoryProvider.isManaged() && config.getTargetDir().isUnderRoot() && commitTargetFiles
                 && isOnlineMode;
     }
 
@@ -735,7 +730,7 @@ public class RealProject implements IProject {
     }
 
     private void commitToRepository() throws Exception {
-        if (remoteRepositoryProvider == null) {
+        if (!remoteRepositoryProvider.isManaged()) {
             return;
         }
         tmxPrepared = null;
@@ -849,7 +844,7 @@ public class RealProject implements IProject {
                         projectTMX.save(config, config.getProjectInternal() + OConsts.STATUS_EXTENSION,
                                 isProjectModified());
                     }
-                    if (remoteRepositoryProvider != null && doTeamSync) {
+                    if (remoteRepositoryProvider.isManaged() && doTeamSync) {
                         tmxPrepared = null;
                         glossaryPrepared = null;
                         remoteRepositoryProvider.cleanPrepared();
@@ -905,7 +900,7 @@ public class RealProject implements IProject {
      */
     @Override
     public void teamSyncPrepare() throws Exception {
-        if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
+        if (!remoteRepositoryProvider.isManaged() || preparedStatus != PreparedStatus.NONE || !isOnlineMode) {
             return;
         }
         Log.logDebug("Prepare team sync");
@@ -939,7 +934,7 @@ public class RealProject implements IProject {
      */
     @Override
     public void teamSync() {
-        if (remoteRepositoryProvider == null || preparedStatus != PreparedStatus.PREPARED) {
+        if (!remoteRepositoryProvider.isManaged() || preparedStatus != PreparedStatus.PREPARED) {
             return;
         }
         Log.logDebug("Rebase team sync");
@@ -1034,7 +1029,7 @@ public class RealProject implements IProject {
                 System.getProperty("user.name"));
         final StringBuilder commitDetails = new StringBuilder("Translated by " + author);
         String tmxPath = config.getProjectInternalRelative() + OConsts.STATUS_EXTENSION;
-        if (remoteRepositoryProvider != null && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
+        if (remoteRepositoryProvider.isManaged() && remoteRepositoryProvider.isUnderMapping(tmxPath)) {
             RebaseAndCommit.rebaseAndCommit(tmxPrepared, remoteRepositoryProvider, config.getProjectRootDir(),
                     tmxPath, new RebaseAndCommit.IRebase() {
                         ProjectTMX baseTMX, headTMX;
@@ -2053,12 +2048,12 @@ public class RealProject implements IProject {
 
     @Override
     public boolean isRemoteProject() {
-        return remoteRepositoryProvider != null;
+        return remoteRepositoryProvider.isManaged();
     }
 
     @Override
     public void commitSourceFiles() throws Exception {
-        if (remoteRepositoryProvider != null && config.getSourceDir().isUnderRoot()) {
+        if (remoteRepositoryProvider.isManaged() && config.getSourceDir().isUnderRoot()) {
             try {
                 Core.getMainWindow().showStatusMessageRB("TF_COMMIT_START");
                 remoteRepositoryProvider.switchAllToLatest();

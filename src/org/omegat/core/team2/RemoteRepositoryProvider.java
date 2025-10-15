@@ -54,7 +54,7 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * Class for process some repository commands.
- *
+ * <p>
  * Path, local path, repository path can be directory or one file only.
  * Directory should be declared like 'source/', file should be declared like
  * 'source/text.po'.
@@ -79,20 +79,25 @@ public class RemoteRepositoryProvider {
     private String[] forceExcludes = {};
 
     public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions,
-            ProjectProperties props) throws Exception {
+            ProjectProperties props) {
         this(projectRoot, repositoriesDefinitions);
         setForceExcludesFromProjectProperties(props);
-
     }
 
-    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions)
-            throws Exception {
+    public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions) {
         this.projectRoot = projectRoot;
-        teamSettings = new ProjectTeamSettings(new File(projectRoot, REPO_SUBDIR));
         this.repositoriesDefinitions = repositoriesDefinitions;
+        if (repositoriesDefinitions != null) {
+            teamSettings = new ProjectTeamSettings(new File(projectRoot, REPO_SUBDIR));
+            checkDefinitions();
+            initializeRepositories();
+        } else {
+            teamSettings = null;
+        }
+    }
 
-        checkDefinitions();
-        initializeRepositories();
+    public boolean isManaged() {
+        return repositoriesDefinitions != null;
     }
 
     public void setForceExcludesFromProjectProperties(ProjectProperties props) {
@@ -131,11 +136,16 @@ public class RemoteRepositoryProvider {
     /**
      * Initialize repositories instances.
      */
-    protected void initializeRepositories() throws Exception {
+    protected void initializeRepositories() {
         for (RepositoryDefinition r : repositoriesDefinitions) {
             IRemoteRepository2 repo = RemoteRepositoryFactory.create(r.getType());
-            repo.init(r, getRepositoryDir(r), teamSettings);
-            repositories.add(repo);
+            try {
+                repo.init(r, getRepositoryDir(r), teamSettings);
+                repositories.add(repo);
+            } catch (Exception e) {
+                Log.log(e);
+                break;
+            }
         }
     }
 
@@ -390,7 +400,7 @@ public class RemoteRepositoryProvider {
     /**
      * Class for mapping by specified local path.
      */
-    class Mapping {
+    protected class Mapping {
         final String filterPrefix;
         final IRemoteRepository2 repo;
         final RepositoryDefinition repoDefinition;

@@ -23,6 +23,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  **************************************************************************/
+
 package org.omegat.gui.scripting;
 
 import org.omegat.core.CoreEvents;
@@ -37,13 +38,14 @@ import java.util.HashMap;
  * The ScriptingModule class is responsible for managing scripting
  * functionality, including loading and unloading scripting-related plugins and
  * executing scripts.
- *
- * @author Hiroshi Miura
  */
 @SuppressWarnings("unused")
 public final class ScriptingModule {
 
     public static final String DEFAULT_SCRIPTS_DIR = "scripts";
+
+    private ScriptingModule() {
+    }
 
     private static ScriptingStartupEventListener listener;
 
@@ -57,12 +59,6 @@ public final class ScriptingModule {
     }
 
     /**
-     * Private constructor for the class that contains only static methods.
-     */
-    private ScriptingModule() {
-    }
-
-    /**
      * Execute a script as PROJECT_CHANGE events.
      */
     @SuppressWarnings("unused")
@@ -73,10 +69,10 @@ public final class ScriptingModule {
             HashMap<String, Object> binding = new HashMap<>();
             binding.put("eventType", eventType);
 
-            ConsoleBindings consoleBindigs = new ConsoleBindings();
-            binding.put(ScriptRunner.VAR_CONSOLE, consoleBindigs);
-            binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindigs);
-            binding.put(ScriptRunner.VAR_EDITOR, consoleBindigs);
+            ConsoleBindings consoleBindings = new ConsoleBindings();
+            binding.put(ScriptRunner.VAR_CONSOLE, consoleBindings);
+            binding.put(ScriptRunner.VAR_GLOSSARY, consoleBindings);
+            binding.put(ScriptRunner.VAR_EDITOR, consoleBindings);
 
             try {
                 String result = ScriptRunner.executeScript(new ScriptItem(script), binding);

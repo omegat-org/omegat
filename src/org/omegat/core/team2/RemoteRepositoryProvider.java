@@ -54,7 +54,7 @@ import gen.core.project.RepositoryMapping;
 
 /**
  * Class for process some repository commands.
- *
+ * <p>
  * Path, local path, repository path can be directory or one file only.
  * Directory should be declared like 'source/', file should be declared like
  * 'source/text.po'.
@@ -82,17 +82,23 @@ public class RemoteRepositoryProvider {
             ProjectProperties props) throws Exception {
         this(projectRoot, repositoriesDefinitions);
         setForceExcludesFromProjectProperties(props);
-
     }
 
     public RemoteRepositoryProvider(File projectRoot, List<RepositoryDefinition> repositoriesDefinitions)
             throws Exception {
         this.projectRoot = projectRoot;
-        teamSettings = new ProjectTeamSettings(new File(projectRoot, REPO_SUBDIR));
         this.repositoriesDefinitions = repositoriesDefinitions;
+        if (repositoriesDefinitions != null) {
+            teamSettings = new ProjectTeamSettings(new File(projectRoot, REPO_SUBDIR));
+            checkDefinitions();
+            initializeRepositories();
+        } else {
+            teamSettings = null;
+        }
+    }
 
-        checkDefinitions();
-        initializeRepositories();
+    public boolean isManaged() {
+        return teamSettings != null;
     }
 
     public void setForceExcludesFromProjectProperties(ProjectProperties props) {
@@ -390,7 +396,7 @@ public class RemoteRepositoryProvider {
     /**
      * Class for mapping by specified local path.
      */
-    class Mapping {
+    protected class Mapping {
         final String filterPrefix;
         final IRemoteRepository2 repo;
         final RepositoryDefinition repoDefinition;

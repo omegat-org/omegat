@@ -99,7 +99,7 @@ public final class ScriptingModule {
 
         @Override
         public void onApplicationShutdown() {
-            window.stop();
+            window.dispose();
         }
     }
 }

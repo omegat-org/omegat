@@ -31,6 +31,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -109,7 +110,21 @@ import org.omegat.util.gui.StaticUIUtils;
  */
 public class ScriptingWindow {
 
-    public final JFrame frame;
+    private final JFrame frame;
+
+    public Frame getParent() {
+        return frame;
+    }
+
+    public void addContent(Component content) {
+        frame.getContentPane().add(content);
+    }
+
+    public void dispose() {
+        if (frame != null) {
+            frame.dispose();
+        }
+    }
 
     public ScriptingWindow() {
 
@@ -242,12 +257,6 @@ public class ScriptingWindow {
             if (l instanceof QuickScriptActionListener) {
                 menu.removeActionListener(l);
             }
-        }
-    }
-
-    public void stop() {
-        if (frame != null) {
-            frame.dispose();
         }
     }
 

@@ -26,15 +26,15 @@ package org.omegat.gui.main;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -64,6 +64,7 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.properties.SegmentPropertiesArea;
+import org.omegat.languagetools.LanguageManager;
 import org.omegat.util.Log;
 import org.omegat.util.LocaleRule;
 import org.omegat.util.Preferences;
@@ -78,6 +79,9 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
     protected @Nullable File tmpDir;
 
     protected int timeout = 10;
+
+    private static final String FRENCH = "org.languagetool.language.French";
+    private static final String PLUGINS_LIST_FILE = "test-acceptance/plugins.properties";
 
     /**
      * Close the project.
@@ -152,11 +156,7 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
             }
         }));
         openSampleProject(projectPath);
-        try {
-            assertTrue("Active match not set", latch.await(timeout, TimeUnit.SECONDS));
-        } catch (InterruptedException ignored) {
-            fail("Waiting for active match interrupted.");
-        }
+        assertTrue("Active match not set", latch.await(timeout, TimeUnit.SECONDS));
     }
 
     /**
@@ -371,15 +371,29 @@ public abstract class TestCoreGUI extends AssertJSwingJUnitTestCase {
         FileUtils.copyDirectory(new File("test-acceptance/data/config"), configTmp.toFile());
         RuntimePreferences.setConfigDir(configTmp.toString());
 
-        // Initialize classloader and plugins
+        // Initialize plugins
+        initPlugins();
         TestMainInitializer.initClassloader();
-        PluginUtils.loadPlugins(Collections.emptyMap());
         FilterMaster.setFilterClasses(PluginUtils.getFilterClasses());
 
         // Initialize preferences (must be after RuntimePreferences.setConfigDir)
         Preferences.init();
         Preferences.initFilters();
         Preferences.initSegmentation();
+    }
+
+    public static void initPlugins() {
+        if (PluginUtils.getMachineTranslationClasses().isEmpty()) {
+            Log.log("Loading plugins from " + PLUGINS_LIST_FILE);
+            Properties props = new Properties();
+            try (InputStream fis = Files.newInputStream(Paths.get(PLUGINS_LIST_FILE))) {
+                props.load(fis);
+                PluginUtils.loadPluginFromProperties(props);
+            } catch (ClassNotFoundException | IOException ex) {
+                Log.log(ex);
+            }
+            LanguageManager.registerLTLanguage("fr", FRENCH);
+        }
     }
 
     private static void initializeProject() {

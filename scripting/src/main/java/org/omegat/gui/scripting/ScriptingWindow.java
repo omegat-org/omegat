@@ -205,7 +205,7 @@ public class ScriptingWindow {
         quickScripts[index] = null;
         removeAllQuickScriptActionListenersFrom(quickMenus[index]);
 
-        if (quickMenus.length < index || quickMenus[index] == null) {
+        if (quickMenus[index] == null) {
             return;
         }
 
@@ -518,7 +518,7 @@ public class ScriptingWindow {
             executeScript(currentScriptItem);
         } else {
             // No file is found for this script, it is executed as standalone.
-            logResult(StringUtil.format(ScriptingUtils.getBundleString("SCW_RUNNING_SCRIPT"), ScriptItem.EDITOR_SCRIPT));
+            logResult(StringUtil.format(ScriptingUtils.getBundleString("SCW_RUNNING_EDITOR_SCRIPT")));
             executeScript(new ScriptItem(txtScriptEditor.getTextArea().getText()));
         }
 
@@ -610,7 +610,7 @@ public class ScriptingWindow {
             scriptString += "\n";
         }
 
-        Map<String, Object> bindings = new HashMap<String, Object>(additionalBindings);
+        Map<String, Object> bindings = new HashMap<>(additionalBindings);
         bindings.put(ScriptRunner.VAR_CONSOLE, new IScriptLogger() {
             @Override
             public void print(Object o) {

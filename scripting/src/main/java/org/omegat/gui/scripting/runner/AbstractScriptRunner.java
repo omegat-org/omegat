@@ -31,8 +31,8 @@ import org.jetbrains.annotations.VisibleForTesting;
 import org.omegat.core.Core;
 import org.omegat.gui.scripting.ScriptItem;
 import org.omegat.gui.scripting.ScriptRunner;
+import org.omegat.gui.scripting.ScriptingUtils;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
 import javax.script.Bindings;
@@ -98,7 +98,7 @@ public abstract class AbstractScriptRunner {
         StringBuilder result = new StringBuilder();
         Object eval = executeScript(script, engine, bindings);
         if (eval != null) {
-            result.append(OStrings.getString("SCW_SCRIPT_RESULT")).append('\n');
+            result.append(ScriptingUtils.getBundleString("SCW_SCRIPT_RESULT")).append('\n');
             result.append(eval).append('\n');
         }
         return result.toString();
